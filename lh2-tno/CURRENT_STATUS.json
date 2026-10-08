@@ -87,7 +87,7 @@
   "github_repository": "https://github.com/lyullee/prism",
   "github_repository_private": true,
   "github_main_baseline": "v0.6.0",
-  "github_development_branch": "main",
+  "github_development_branch": "codex/prism-development",
   "module_structure": "PRISM common launcher with standard default and optional LH2 mode; internal providers remain separate",
   "equipment_resolved_atmospheric_gas_source_supported": true,
   "equipment_PH_to_gas_exit_checked": true,
