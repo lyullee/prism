@@ -30,3 +30,18 @@ def test_reference_pid_evidence_does_not_promote_center_netlist():
     assert pid["source_hash_matches"] is True
     assert pid["internal_consistency_passed"] is True
     assert pid["center_port_netlist_promotion_allowed"] is False
+
+
+def test_process_extension_catalog_is_screening_only():
+    root = Path(__file__).parents[1]
+    evidence = json.loads(
+        (root / "examples" / "external_lh2dt_screening_evidence.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    catalog = evidence["process_extension_catalog_evidence"]
+    assert catalog["failure_mode_count"] == 444
+    assert catalog["emergency_scenario_count"] == 31
+    assert catalog["live_connection"] is False
+    assert catalog["resolved_accident_release_packet_count"] == 0
+    assert catalog["promotion_allowed"] is False
