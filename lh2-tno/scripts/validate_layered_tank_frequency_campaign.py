@@ -42,7 +42,7 @@ def save(path: Path, data: dict) -> None:
 
 
 def build_frequency_plan(facility: Facility) -> FrequencyPlan:
-    """Use one reviewed vessel exposure and exclude every other component."""
+    """Use reviewed LH2 profiles for storage, isolation and transfer equipment."""
 
     excluded = {
         component.id: (
@@ -50,7 +50,7 @@ def build_frequency_plan(facility: Facility) -> FrequencyPlan:
             "no provider-resolved accident history was supplied for this component"
         )
         for component in facility.components
-        if component.id != "storage"
+        if component.id == "terminal"
     }
     return FrequencyPlan.model_validate_json(
         json.dumps({
@@ -66,7 +66,24 @@ def build_frequency_plan(facility: Facility) -> FrequencyPlan:
                         "reference flow diameter for the selected literature bin"
                     ),
                     "nominal_diameter_m": 0.1,
-                }
+                },
+                {
+                    "id": "isolation-valve",
+                    "model_component_id": "isolation",
+                    "profile": "LH2_VALVE",
+                    "physical_scope_ids": ["isolation-valve-1"],
+                    "classification_basis": "synthetic isolation valve; provider history not supplied in this campaign",
+                    "nominal_diameter_m": 0.0254,
+                },
+                {
+                    "id": "transfer-pipe",
+                    "model_component_id": "transfer",
+                    "profile": "LH2_PIPE",
+                    "physical_scope_ids": ["transfer-pipe-1"],
+                    "classification_basis": "synthetic transfer pipe; provider history not supplied in this campaign",
+                    "nominal_diameter_m": 0.0254,
+                    "length_per_item_m": 5.0,
+                },
             ],
             "excluded_model_components": excluded,
         })
@@ -111,7 +128,7 @@ def build_event_routes(
     routes = []
     matching = []
     for event in events:
-        if math.isclose(
+        if event.model_component_id == "storage" and math.isclose(
             event.release.hole_diameter_m,
             provider_diameter,
             rel_tol=1e-10,
@@ -140,9 +157,16 @@ def build_event_routes(
                 "probability_given_event": 1.0,
                 "provenance": "explicitly uncomputed; no frequency interpolation or size substitution",
                 "uncomputed_reason": (
-                    f"provider opening {provider_diameter:.12g} m does not match "
-                    f"catalogue opening {event.release.hole_diameter_m:.12g} m for {event.loc}; "
-                    "a separate provider history is required"
+                    (
+                        f"provider history belongs to storage, not component {event.model_component_id}; "
+                        "a separate provider history is required"
+                    )
+                    if event.model_component_id != "storage"
+                    else (
+                        f"provider opening {provider_diameter:.12g} m does not match "
+                        f"catalogue opening {event.release.hole_diameter_m:.12g} m for {event.loc}; "
+                        "a separate provider history is required"
+                    )
                 ),
             }
         routes.append({"event_id": event.id, "branches": [branch]})
@@ -217,17 +241,17 @@ def main() -> None:
         (
             LiteratureFrequencyScenario(
                 id="within-asset-p05",
-                asset_quantiles={"storage-vessel": "p05"},
+                asset_quantiles={"storage-vessel": "p05", "isolation-valve": "p05", "transfer-pipe": "p05"},
                 provenance="published LH2_VESSEL p05 marginal bounds; shared within-asset direction",
             ),
             LiteratureFrequencyScenario(
                 id="within-asset-published",
-                asset_quantiles={"storage-vessel": "published"},
+                asset_quantiles={"storage-vessel": "published", "isolation-valve": "published", "transfer-pipe": "published"},
                 provenance="published LH2_VESSEL median frequency",
             ),
             LiteratureFrequencyScenario(
                 id="within-asset-p95",
-                asset_quantiles={"storage-vessel": "p95"},
+                asset_quantiles={"storage-vessel": "p95", "isolation-valve": "p95", "transfer-pipe": "p95"},
                 provenance="published LH2_VESSEL p95 marginal bounds; shared within-asset direction",
             ),
         ),
