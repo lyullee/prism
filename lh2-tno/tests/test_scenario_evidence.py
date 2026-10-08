@@ -1,4 +1,7 @@
 import csv
+from datetime import datetime, timedelta
+
+import pytest
 
 from lh2_tno.scenario_evidence import audit_scenario_root
 
@@ -42,3 +45,26 @@ def test_missing_scenario_root_is_fail_closed(tmp_path):
     assert report["status"] == "MISSING_SOURCE_ROOT"
     assert report["blocking_reasons"]
 
+
+def test_time_series_metadata_is_observed_but_not_promoted(tmp_path):
+    openpyxl = pytest.importorskip("openpyxl")
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.title = "sensor_trace"
+    worksheet.append(["timestamp", "PT1206 (bar)", "TT1206 (K)"])
+    start = datetime(2026, 1, 1, 0, 0, 0)
+    worksheet.append([start, 3.2, 21.0])
+    worksheet.append([start + timedelta(seconds=2), 3.1, 21.1])
+    workbook.save(tmp_path / "trace.xlsx")
+
+    report = audit_scenario_root(tmp_path)
+
+    assert report["files"]["telemetry_candidate_sheet_count"] == 1
+    assert report["files"]["telemetry_metadata_incomplete_sheet_count"] == 1
+    telemetry = report["workbook_reports"][0]["sheets"][0]["telemetry"]
+    assert telemetry["sample_count"] == 2
+    assert telemetry["sample_interval_s"]["median"] == 2.0
+    assert telemetry["sensor_columns"][0]["explicit_unit"] == "bar"
+    assert telemetry["promotion_status"] == "TELEMETRY_CANDIDATE_METADATA_INCOMPLETE"
+    assert report["provider_promotion"]["qualified_packet_count"] == 0
+    assert any("sensor traces" in reason for reason in report["blocking_reasons"])

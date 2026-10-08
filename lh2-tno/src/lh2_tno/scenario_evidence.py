@@ -11,8 +11,11 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import re
 from collections import Counter
+from datetime import date, datetime, time
 from pathlib import Path
+from statistics import median
 from typing import Any
 
 
@@ -134,6 +137,143 @@ def _classify_header(header: list[str]) -> str:
     return "metadata_or_unknown"
 
 
+def _time_axis_index(header: list[str]) -> int | None:
+    """Return an explicit time column index without assigning units to numbers."""
+    for index, value in enumerate(header):
+        lowered = value.strip().lower()
+        if any(token in lowered for token in ("timestamp", "date_time", "datetime", "일시", "시간")):
+            return index
+    return None
+
+
+def _explicit_unit(header: str) -> str | None:
+    match = re.search(r"\(([^()]*)\)", header)
+    if not match:
+        return None
+    value = match.group(1).strip()
+    return value or None
+
+
+def _sensor_column_evidence(header: list[str], time_index: int | None) -> list[dict[str, Any]]:
+    evidence = []
+    for index, value in enumerate(header):
+        if index == time_index or not value.strip():
+            continue
+        lowered = value.strip().lower()
+        upper = value.strip().upper()
+        sensor_token = any(token in lowered for token in (
+            "sensor", "pressure", "temperature", "flow", "level", "압력", "온도", "유량", "레벨", "차압",
+        ))
+        short_tag = re.search(r"(?:^|[^A-Z])(?:DPT|PT|TT|FT|LT)\s*[-_ ]?\d", upper) is not None
+        if sensor_token or short_tag:
+            evidence.append({
+                "column_index": index,
+                "header": value,
+                "explicit_unit": _explicit_unit(value),
+            })
+    return evidence
+
+
+def _parse_time_value(value: Any) -> datetime | None:
+    """Parse typed/ISO time values only; numeric samples stay untyped."""
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, date):
+        return datetime.combine(value, time.min)
+    if isinstance(value, time):
+        return datetime.combine(date(2000, 1, 1), value)
+    if not isinstance(value, str):
+        return None
+    text = value.strip()
+    if not text:
+        return None
+    for candidate in (text, text.replace("/", "-"), text.rstrip("Z")):
+        try:
+            return datetime.fromisoformat(candidate)
+        except ValueError:
+            continue
+    for pattern in ("%H:%M:%S", "%H:%M"):
+        try:
+            return datetime.strptime(text, pattern).replace(year=2000, month=1, day=1)
+        except ValueError:
+            continue
+    time_fragment = re.search(r"(?<!\d)(\d{1,2}:\d{2}(?::\d{2})?)(?!\d)", text)
+    if time_fragment:
+        for pattern in ("%H:%M:%S", "%H:%M"):
+            try:
+                return datetime.strptime(time_fragment.group(1), pattern).replace(
+                    year=2000, month=1, day=1
+                )
+            except ValueError:
+                continue
+    return None
+
+
+def _telemetry_evidence(header: list[str], data_rows: list[tuple[Any, ...]], kind: str) -> dict[str, Any]:
+    time_index = _time_axis_index(header)
+    sensor_columns = _sensor_column_evidence(header, time_index)
+    parsed_times = []
+    if time_index is not None:
+        for row in data_rows:
+            if time_index < len(row):
+                parsed = _parse_time_value(row[time_index])
+                if parsed is not None:
+                    parsed_times.append(parsed)
+    intervals = [
+        (later - earlier).total_seconds()
+        for earlier, later in zip(parsed_times, parsed_times[1:])
+        if (later - earlier).total_seconds() >= 0
+    ]
+    metadata_presence = {
+        "component_mapping": any(
+            any(token in value.strip().lower() for token in ("component_id", "asset_id", "equipment", "설비", "탱크"))
+            for value in header
+        ),
+        "sensor_location": any(
+            any(token in value.strip().lower() for token in ("sensor_location", "location", "위치", "노즐"))
+            for value in header
+        ),
+        "pressure_basis": any(
+            any(token in value.strip().lower() for token in ("pressure_basis", "gauge", "absolute", "압력기준", "게이지", "절대"))
+            for value in header
+        ),
+        "provider_release_ownership": any(
+            any(token in value.strip().lower() for token in ("provider", "release_owner", "방출공급자"))
+            for value in header
+        ),
+    }
+    missing_metadata = [name for name, present in metadata_presence.items() if not present]
+    candidate = time_index is not None and bool(sensor_columns)
+    return {
+        "kind": kind,
+        "time_axis_header": header[time_index] if time_index is not None else None,
+        "time_axis_present": time_index is not None,
+        "sample_count": len(data_rows),
+        "parseable_time_count": len(parsed_times),
+        "first_time": parsed_times[0].isoformat() if parsed_times else None,
+        "last_time": parsed_times[-1].isoformat() if parsed_times else None,
+        "sample_interval_s": {
+            "count": len(intervals),
+            "min": min(intervals) if intervals else None,
+            "median": median(intervals) if intervals else None,
+            "max": max(intervals) if intervals else None,
+            "numeric_time_values_withheld": time_index is not None and any(
+                time_index < len(row) and isinstance(row[time_index], (int, float)) and not isinstance(row[time_index], bool)
+                for row in data_rows
+            ),
+        },
+        "sensor_columns": sensor_columns,
+        "metadata_presence": metadata_presence,
+        "missing_metadata": missing_metadata,
+        "telemetry_candidate": candidate,
+        "promotion_status": (
+            "TELEMETRY_CANDIDATE_METADATA_INCOMPLETE" if candidate and missing_metadata
+            else "TELEMETRY_CANDIDATE_READY_FOR_PROVIDER_MAPPING" if candidate
+            else "NO_TELEMETRY_CANDIDATE"
+        ),
+    }
+
+
 def _audit_workbook(path: Path, root: Path) -> dict[str, Any]:
     try:
         from openpyxl import load_workbook
@@ -151,9 +291,9 @@ def _audit_workbook(path: Path, root: Path) -> dict[str, Any]:
         iterator = worksheet.iter_rows(values_only=True)
         first = next(iterator, ())
         header = [str(value) if value is not None else "" for value in first]
-        row_count = 1
-        for _ in iterator:
-            row_count += 1
+        data_rows = list(iterator)
+        row_count = 1 + len(data_rows)
+        telemetry = _telemetry_evidence(header, data_rows, _classify_header(header))
         sheets.append({
             "sheet": worksheet.title,
             "row_count": row_count,
@@ -161,12 +301,23 @@ def _audit_workbook(path: Path, root: Path) -> dict[str, Any]:
             "header": header[:32],
             "kind": _classify_header(header),
             "promotion_status": "TIME_SERIES_OR_SEQUENCE_ONLY_PROVIDER_PACKET_MISSING",
+            "telemetry": telemetry,
         })
+    telemetry_candidate_sheet_count = sum(
+        1 for sheet in sheets if sheet["telemetry"]["telemetry_candidate"]
+    )
+    telemetry_metadata_incomplete_sheet_count = sum(
+        1
+        for sheet in sheets
+        if sheet["telemetry"]["promotion_status"] == "TELEMETRY_CANDIDATE_METADATA_INCOMPLETE"
+    )
     return {
         "file": str(path.relative_to(root)),
         "sha256": _sha256(path),
         "status": "READ_ONLY_WORKBOOK_AUDITED",
         "sheet_count": len(sheets),
+        "telemetry_candidate_sheet_count": telemetry_candidate_sheet_count,
+        "telemetry_metadata_incomplete_sheet_count": telemetry_metadata_incomplete_sheet_count,
         "sheets": sheets,
     }
 
@@ -213,11 +364,32 @@ def audit_scenario_root(root: str | Path) -> dict[str, Any]:
         for sheet in report.get("sheets", [])
         if sheet.get("kind") == "timeseries"
     )
+    telemetry_candidate_sheet_count = sum(
+        report.get("telemetry_candidate_sheet_count", 0) for report in workbook_reports
+    )
+    telemetry_metadata_incomplete_sheet_count = sum(
+        report.get("telemetry_metadata_incomplete_sheet_count", 0) for report in workbook_reports
+    )
+    telemetry_parseable_time_sheet_count = sum(
+        1
+        for report in workbook_reports
+        for sheet in report.get("sheets", [])
+        if sheet.get("telemetry", {}).get("parseable_time_count", 0) > 1
+    )
+    interval_profiles = Counter()
+    for report in workbook_reports:
+        for sheet in report.get("sheets", []):
+            telemetry = sheet.get("telemetry", {})
+            median_interval = telemetry.get("sample_interval_s", {}).get("median")
+            if median_interval is not None and telemetry.get("telemetry_candidate"):
+                interval_profiles[str(median_interval)] += 1
     blockers = []
     if records:
         blockers.append("scenario registers describe candidate hazards but contain no resolved provider release packet")
     if sequence_sheet_count or timeseries_sheet_count:
         blockers.append("workbook sequence/time-series exports lack release mass-flow, termination, geometry, and provider ownership fields")
+    if telemetry_candidate_sheet_count:
+        blockers.append("workbook sensor traces have a time axis but lack component mapping, sensor location, pressure basis, and provider release ownership")
     if errors:
         blockers.append("one or more scenario evidence files could not be read")
     return {
@@ -231,6 +403,10 @@ def audit_scenario_root(root: str | Path) -> dict[str, Any]:
             "scenario_rows": len(records),
             "sequence_sheet_count": sequence_sheet_count,
             "timeseries_sheet_count": timeseries_sheet_count,
+            "telemetry_candidate_sheet_count": telemetry_candidate_sheet_count,
+            "telemetry_metadata_incomplete_sheet_count": telemetry_metadata_incomplete_sheet_count,
+            "telemetry_parseable_time_sheet_count": telemetry_parseable_time_sheet_count,
+            "telemetry_median_interval_s_profiles": dict(sorted(interval_profiles.items(), key=lambda item: float(item[0]))),
         },
         "candidate_accident_family_counts": dict(sorted(family_counts.items())),
         "scenario_records": records,
@@ -245,4 +421,3 @@ def audit_scenario_root(root: str | Path) -> dict[str, Any]:
         "errors": errors,
         "blocking_reasons": list(dict.fromkeys(blockers)),
     }
-
