@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Mapping, TypeAlias
 
 from .consequences import ConsequenceRequest
+from .contracts import Contract, Fraction, Name
 from .equipment_boundary import ResolvedGasRelease, ResolvedLiquidRelease
 
 
@@ -23,6 +24,21 @@ ProviderRelease: TypeAlias = ResolvedGasRelease | ResolvedLiquidRelease
 
 class ProviderReleaseContractError(ValueError):
     """Raised when provider output cannot be promoted to a release boundary."""
+
+
+class ProviderReleaseBranch(Contract):
+    """One provider-resolved conditional branch for an initiating event.
+
+    The release packet remains the provider-owned ``v1`` boundary.  The
+    wrapper carries only the conditional barrier/isolation partition so PRISM
+    can apply the initiating frequency once and preserve any missing branch
+    probability as an explicit uncomputed route.
+    """
+
+    id: Name
+    probability_given_event: Fraction
+    provenance: Name
+    release: ProviderRelease
 
 
 def _read_packet(packet: Mapping[str, Any] | str | Path) -> dict[str, Any]:
@@ -123,6 +139,56 @@ def load_provider_release_catalog(path: str | Path) -> tuple[ProviderRelease, ..
             "provider release catalog must contain a non-empty JSON array"
         )
     return tuple(load_provider_release(row) for row in rows)
+
+
+def load_provider_release_branch_catalog(path: str | Path) -> tuple[ProviderReleaseBranch, ...]:
+    """Load explicit provider packets with conditional barrier branches.
+
+    The accepted shape is ``[{id, probability_given_event, provenance,
+    release: <prism.resolved_release.v1 packet>}, ...]`` or an object with a
+    ``branches`` array.  Only accidental-leak packets are accepted here;
+    emergency-relief packets remain on their dedicated catalog path.
+    """
+    try:
+        value = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ProviderReleaseContractError(
+            f"cannot read provider release branch catalog: {error}"
+        ) from error
+    rows = value.get("branches") if isinstance(value, dict) else value
+    if not isinstance(rows, list) or not rows:
+        raise ProviderReleaseContractError(
+            "provider release branch catalog must contain a non-empty JSON array"
+        )
+    branches: list[ProviderReleaseBranch] = []
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise ProviderReleaseContractError(
+                f"provider release branch {index} must be a JSON object"
+            )
+        packet = row.get("release")
+        if not isinstance(packet, dict):
+            raise ProviderReleaseContractError(
+                f"provider release branch {index} must contain a release object"
+            )
+        try:
+            release = load_provider_release(packet)
+            branch = ProviderReleaseBranch(
+                id=row.get("id"),
+                probability_given_event=row.get("probability_given_event"),
+                provenance=row.get("provenance"),
+                release=release,
+            )
+        except (ProviderReleaseContractError, ValueError, TypeError) as error:
+            raise ProviderReleaseContractError(
+                f"provider release branch {index} failed strict validation: {error}"
+            ) from error
+        branches.append(branch)
+    if len({branch.id for branch in branches}) != len(branches):
+        raise ProviderReleaseContractError(
+            "provider release branch ids must be unique"
+        )
+    return tuple(branches)
 
 
 def load_provider_emergency_relief_catalog(path: str | Path) -> tuple[ResolvedGasRelease, ...]:

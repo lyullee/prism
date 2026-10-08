@@ -8,12 +8,14 @@ from lh2_tno.campaign_template import (
     build_equipment_campaign,
     build_equipment_campaign_from_branch_catalog,
     build_equipment_campaign_from_catalog,
+    build_equipment_campaign_from_provider_branch_catalog,
     build_equipment_campaign_from_provider_catalog,
 )
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease, ResolvedLiquidStep
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
+from lh2_tno.provider_release import ProviderReleaseBranch
 from test_provider_release import _defaults, _release
 
 
@@ -186,6 +188,49 @@ def test_provider_catalog_rejects_duplicate_provider_event_ids():
             conditions,
             scope_provenance="synthetic duplicate provider campaign",
         )
+
+
+def test_provider_branch_catalog_compiles_success_and_failure_packets_once_per_event():
+    manifest, plan, _, conditions = _campaign_inputs()
+    packet = _release().model_copy(
+        update={
+            "upstream_service": "LH2",
+            "failure_opening_diameter_m": 0.0127,
+        }
+    )
+    branches = (
+        ProviderReleaseBranch(
+            id="isolation-success",
+            probability_given_event=0.7,
+            provenance="synthetic provider success",
+            release=packet,
+        ),
+        ProviderReleaseBranch(
+            id="isolation-failure",
+            probability_given_event=0.3,
+            provenance="synthetic provider failure",
+            release=packet,
+        ),
+    )
+
+    campaign = build_equipment_campaign_from_provider_branch_catalog(
+        manifest,
+        plan,
+        branches,
+        _defaults(),
+        conditions,
+        scope_provenance="synthetic provider branch campaign",
+    )
+
+    matched_route = next(
+        route for route in campaign.event_routes
+        if route.event_id.endswith("storage-shell/AREA_0.01%")
+    )
+    assert [branch.id for branch in matched_route.branches] == [
+        "isolation-success", "isolation-failure"
+    ]
+    assert sum(branch.probability_given_event for branch in matched_route.branches) == pytest.approx(1.0)
+    assert all(branch.request is not None for branch in matched_route.branches)
 
 
 def test_branch_catalog_preserves_isolation_partition_and_matches_exact_event():

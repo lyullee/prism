@@ -15,6 +15,7 @@ from lh2_tno.provider_release import (
     load_provider_emergency_relief,
     load_provider_emergency_relief_catalog,
     load_provider_release,
+    load_provider_release_branch_catalog,
     load_provider_release_catalog,
 )
 
@@ -170,6 +171,50 @@ def test_provider_release_catalog_and_request_adapter_preserve_context(tmp_path)
     assert request.resolved_release.duration_s == 0.2
     assert request.source_input is None
     assert request.annual_frequency_per_year is None
+
+
+def test_provider_release_branch_catalog_preserves_conditional_partition(tmp_path):
+    packet = _release().model_dump(mode="json")
+    path = tmp_path / "branch_catalog.json"
+    path.write_text(json.dumps({
+        "branches": [
+            {
+                "id": "isolation-success",
+                "probability_given_event": 0.7,
+                "provenance": "synthetic provider success",
+                "release": packet,
+            },
+            {
+                "id": "isolation-failure",
+                "probability_given_event": 0.3,
+                "provenance": "synthetic provider failure",
+                "release": packet,
+            },
+        ]
+    }), encoding="utf-8")
+
+    branches = load_provider_release_branch_catalog(path)
+
+    assert [branch.id for branch in branches] == [
+        "isolation-success", "isolation-failure"
+    ]
+    assert sum(branch.probability_given_event for branch in branches) == pytest.approx(1.0)
+    assert all(branch.release.event_id == "provider-accident-01" for branch in branches)
+
+
+def test_provider_release_branch_catalog_rejects_duplicate_branch_ids(tmp_path):
+    packet = _release().model_dump(mode="json")
+    row = {
+        "id": "duplicate",
+        "probability_given_event": 0.5,
+        "provenance": "synthetic duplicate",
+        "release": packet,
+    }
+    path = tmp_path / "duplicate_branch_catalog.json"
+    path.write_text(json.dumps([row, row]), encoding="utf-8")
+
+    with pytest.raises(ProviderReleaseContractError, match="branch ids must be unique"):
+        load_provider_release_branch_catalog(path)
 
 
 def test_provider_liquid_packet_uses_liquid_operator_and_inventory_termination():

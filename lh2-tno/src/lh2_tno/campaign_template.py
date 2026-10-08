@@ -18,6 +18,7 @@ from .consequences import ConsequenceRequest
 from .equipment_manifest import EquipmentManifest, audit_manifest
 from .frequency import FrequencyPlan, bind_event, generate_events
 from .provider_release import (
+    ProviderReleaseBranch,
     ProviderRelease,
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
@@ -308,6 +309,54 @@ def build_equipment_campaign_from_provider_catalog(
                 f"provider release {release.event_id} cannot be attached to a campaign: {error}"
             ) from error
     return build_equipment_campaign_from_catalog(
+        manifest,
+        frequency_plan,
+        tuple(templates),
+        annual_conditions,
+        scope_provenance=scope_provenance,
+        maximum_physics_cases=maximum_physics_cases,
+    )
+
+
+def build_equipment_campaign_from_provider_branch_catalog(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+    provider_branches: Sequence[ProviderReleaseBranch],
+    request_defaults: Mapping[str, object],
+    annual_conditions: tuple[AnnualCondition, ...],
+    *,
+    scope_provenance: str,
+    maximum_physics_cases: int = 200,
+) -> RiskCampaign:
+    """Compile provider-resolved accident packets with barrier branches.
+
+    Each wrapper contains one strict provider packet and a probability
+    conditional on the initiating event.  The packet is converted to a
+    consequence request without adding frequency, then the common branch
+    compiler exact-matches component/opening and retains an uncovered
+    probability remainder as ``UNCOMPUTED``.
+    """
+    if not provider_branches:
+        raise ValueError("provider release branch catalog must contain at least one branch")
+    templates: list[RequestBranchTemplate] = []
+    for branch in provider_branches:
+        try:
+            request = build_consequence_request_from_provider_release(
+                branch.release, request_defaults
+            )
+        except ProviderReleaseContractError as error:
+            raise ValueError(
+                f"provider release branch {branch.id} cannot be attached to a campaign: {error}"
+            ) from error
+        templates.append(
+            RequestBranchTemplate(
+                id=branch.id,
+                probability_given_event=branch.probability_given_event,
+                provenance=branch.provenance,
+                request=request,
+            )
+        )
+    return build_equipment_campaign_from_branch_catalog(
         manifest,
         frequency_plan,
         tuple(templates),

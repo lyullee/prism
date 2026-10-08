@@ -19,6 +19,7 @@ from lh2_tno.campaign_template import (
     build_equipment_campaign,
     build_equipment_campaign_from_branch_catalog,
     build_equipment_campaign_from_catalog,
+    build_equipment_campaign_from_provider_branch_catalog,
     build_equipment_campaign_from_provider_catalog,
 )
 from lh2_tno.consequences import ConsequenceRequest
@@ -27,6 +28,7 @@ from lh2_tno.frequency import FrequencyPlan
 from lh2_tno.provider_release import (
     ProviderReleaseContractError,
     load_provider_emergency_relief_catalog,
+    load_provider_release_branch_catalog,
     load_provider_release_catalog,
 )
 
@@ -47,6 +49,10 @@ def main() -> int:
         "--provider-release-catalog", type=Path,
         help="explicit prism.resolved_release.v1 packet catalog from the equipment model",
     )
+    requests.add_argument(
+        "--provider-release-branch-catalog", type=Path,
+        help="explicit provider packets wrapped with conditional isolation/barrier branches",
+    )
     parser.add_argument(
         "--release-kind", choices=("accidental_leak", "emergency_relief"),
         default="accidental_leak",
@@ -62,10 +68,10 @@ def main() -> int:
     args = parser.parse_args()
     manifest = EquipmentManifest.from_json(args.manifest)
     plan = FrequencyPlan.model_validate_json(args.frequency_plan.read_text(encoding="utf-8"))
-    if args.provider_release_catalog and not args.request_defaults:
-        parser.error("--provider-release-catalog requires --request-defaults")
-    if args.request_defaults and not args.provider_release_catalog:
-        parser.error("--request-defaults is valid only with --provider-release-catalog")
+    if (args.provider_release_catalog or args.provider_release_branch_catalog) and not args.request_defaults:
+        parser.error("provider release catalogs require --request-defaults")
+    if args.request_defaults and not (args.provider_release_catalog or args.provider_release_branch_catalog):
+        parser.error("--request-defaults is valid only with a provider release catalog")
 
     if args.request_template:
         request_templates = (ConsequenceRequest.model_validate_json(
@@ -91,6 +97,16 @@ def main() -> int:
             RequestBranchTemplate.model_validate_json(json.dumps(item, allow_nan=False))
             for item in catalog
         )
+    elif args.provider_release_branch_catalog:
+        try:
+            provider_release_branches = load_provider_release_branch_catalog(
+                args.provider_release_branch_catalog
+            )
+            defaults = json.loads(args.request_defaults.read_text(encoding="utf-8"))
+            if not isinstance(defaults, dict):
+                raise ProviderReleaseContractError("request defaults must be a JSON object")
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, ProviderReleaseContractError) as error:
+            raise SystemExit(f"provider branch campaign input error: {error}") from error
     else:
         try:
             loader = (
@@ -122,6 +138,15 @@ def main() -> int:
     elif args.request_branch_catalog:
         campaign = build_equipment_campaign_from_branch_catalog(
             manifest, plan, request_branches, conditions,
+            scope_provenance=args.scope_provenance,
+        )
+    elif args.provider_release_branch_catalog:
+        campaign = build_equipment_campaign_from_provider_branch_catalog(
+            manifest,
+            plan,
+            provider_release_branches,
+            defaults,
+            conditions,
             scope_provenance=args.scope_provenance,
         )
     else:
@@ -159,6 +184,7 @@ def main() -> int:
             "request_template" if args.request_template else
             "request_catalog" if args.request_catalog else
             "request_branch_catalog" if args.request_branch_catalog else
+            "provider_release_branch_catalog" if args.provider_release_branch_catalog else
             "provider_release_catalog"
         ),
         "provider_release_kind": args.release_kind if args.provider_release_catalog else None,

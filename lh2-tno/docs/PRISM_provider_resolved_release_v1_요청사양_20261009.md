@@ -30,6 +30,29 @@
 
 공급자는 차단 성공·실패를 별도 방출 history와 검토된 branch 확률로 제공해야 한다. 한 packet을 복사해 다른 설비나 다른 개구에 재사용하지 않는다. 사고 빈도는 packet에 넣지 않고 PRISM 문헌 빈도 계층에서 한 번만 부여한다.
 
+직접 branch catalog를 사용할 때의 wrapper 형식은 다음과 같다.
+
+```json
+{
+  "branches": [
+    {
+      "id": "isolation-success",
+      "probability_given_event": 0.7,
+      "provenance": "reviewed isolation test",
+      "release": { "provider_export_schema": "prism.resolved_release.v1", "...": "one complete packet" }
+    },
+    {
+      "id": "isolation-failure",
+      "probability_given_event": 0.3,
+      "provenance": "reviewed isolation test",
+      "release": { "provider_export_schema": "prism.resolved_release.v1", "...": "one complete packet" }
+    }
+  ]
+}
+```
+
+`release`를 생략하거나 packet 검증에 실패하면 입력 전체를 거부한다. branch 확률은 initiating event에 조건부이며 연간 사고빈도와 곱하지 않는다. 미제공 branch 확률은 자동으로 성공 또는 실패로 해석되지 않고 `UNCOMPUTED`로 보존된다.
+
 ## 현재 외부 자료의 판정
 
 검사센터 provider 폴더 556개 JSON을 읽기 전용으로 감사한 결과, 정상·스크리닝 유량 파일 24개는 확인됐지만 적격 사고 packet과 비상 릴리프 packet은 각각 0건이었다. 따라서 현재 자료로는 실제 시설 위험을 계산하지 않는다. 감사기는 필요한 필드와 소유권·시계 규칙을 `release_evidence.provider_export_request`로 함께 출력한다.
