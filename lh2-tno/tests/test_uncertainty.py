@@ -4,7 +4,10 @@ import pytest
 
 from lh2_tno.contracts import Facility
 from lh2_tno.frequency import FrequencyPlan, generate_events
-from lh2_tno.uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty
+from lh2_tno.uncertainty import (LiteratureFrequencyDistributionScenario,
+                                  LiteratureFrequencyScenario,
+                                  literature_frequency_uncertainty,
+                                  sample_literature_frequency_distributions)
 
 
 def _valve_events():
@@ -38,6 +41,14 @@ def _result(events):
         'total_facility_annual_ir_low_high': [.1, .2],
         'campaign_digest': 'campaign',
     }
+
+
+def _lh2_events():
+    facility = json.loads(open('examples/lh2_frequency_facility.json', encoding='utf-8').read())
+    plan = json.loads(open('examples/lh2_frequency_plan.json', encoding='utf-8').read())
+    events = generate_events(Facility.model_validate_json(json.dumps(facility)),
+                             FrequencyPlan.model_validate_json(json.dumps(plan)))
+    return tuple(event for event in events if event.profile == 'LH2_VALVE')
 
 
 def test_published_literature_quantiles_reweight_atoms_without_physics():
@@ -91,4 +102,55 @@ def test_frequency_scenario_rejects_mixed_correlation_inputs():
             asset_quantiles={'valves': 'p05'},
             event_quantiles={'event': 'p95'},
             provenance='test',
+        )
+
+
+def test_published_frequency_distribution_sampling_returns_known_interval_without_physics():
+    events = _lh2_events()
+    result = sample_literature_frequency_distributions(
+        _result(events),
+        (
+            LiteratureFrequencyDistributionScenario(
+                id='shared', provenance='published test mu/sigma',
+                correlation_assumption='within_asset_shared_normal',
+            ),
+            LiteratureFrequencyDistributionScenario(
+                id='independent', provenance='published test mu/sigma',
+                correlation_assumption='independent_event_normal',
+            ),
+        ),
+        draws=100,
+        seed=7,
+    )
+    assert result['fresh_physics_executed'] is False
+    assert result['frequency_distribution_credible_interval'] is True
+    assert len(result['scenarios'][0]['known_expected_death_quantiles'][0]) == 3
+    assert result['scenarios'][0]['event_frequency_quantiles_per_year'][events[0].id][1] > 0
+
+
+def test_distribution_sampling_rejects_events_without_published_mu_sigma():
+    events = generate_events(
+        Facility.model_validate_json(open('examples/consequence_facility.json', encoding='utf-8').read()),
+        FrequencyPlan.model_validate_json(json.dumps({
+            'id': 'no-distribution',
+            'assets': [{
+                'id': 'storage', 'model_component_id': 'storage', 'profile': 'TNO_PRESSURE_VESSEL',
+                'physical_scope_ids': ['storage-1'], 'classification_basis': 'test-only reviewed category',
+                'vessel_external_impact_or_operating_error': False,
+            }],
+            'excluded_model_components': {
+                x['id']: 'test scope excludes other components'
+                for x in json.loads(open('examples/consequence_facility.json', encoding='utf-8').read())['components']
+                if x['id'] != 'storage'
+            },
+        }))
+    )
+    with pytest.raises(ValueError, match='no published lognormal'):
+        sample_literature_frequency_distributions(
+            _result(events),
+            (LiteratureFrequencyDistributionScenario(
+                id='shared', provenance='test',
+                correlation_assumption='within_asset_shared_normal',
+            ),),
+            draws=100,
         )

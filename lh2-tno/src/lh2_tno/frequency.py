@@ -37,6 +37,9 @@ class FrequencyEvent(Contract):
     statistic: Literal['published_default', 'published_median']
     marginal_p05_per_year: Nonnegative | None = None
     marginal_p95_per_year: Nonnegative | None = None
+    frequency_distribution: Literal['none', 'published_lognormal'] = 'none'
+    log_rate_mu: float | None = None
+    log_rate_sigma: Positive | None = None
     source: Name
     source_sha256: Name
     catalogue_digest: Name
@@ -51,6 +54,13 @@ class FrequencyEvent(Contract):
             raise ValueError('initiating frequency does not match rate times exposure')
         if self.release.mode in ('hole', 'two_sided_rupture') and self.release.hole_diameter_m is None:
             raise ValueError('effective release diameter required')
+        if self.frequency_distribution == 'published_lognormal':
+            if self.log_rate_mu is None or self.log_rate_sigma is None:
+                raise ValueError('published lognormal distribution requires mu and sigma')
+            if not math.isfinite(self.log_rate_mu) or self.log_rate_sigma <= 0:
+                raise ValueError('published lognormal distribution requires finite mu and positive sigma')
+        elif self.log_rate_mu is not None or self.log_rate_sigma is not None:
+            raise ValueError('distribution parameters require published_lognormal provenance')
         return self
 
 
@@ -177,6 +187,8 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
                 basis=profile['basis'], base_rate=rate, rate_unit=profile['unit'],
                 exposure_multiplier=multiplier, annual_frequency_per_year=rate*multiplier,
                 statistic=profile['statistic'], marginal_p05_per_year=p05, marginal_p95_per_year=p95,
+                frequency_distribution='published_lognormal' if 'mu' in row else 'none',
+                log_rate_mu=row.get('mu'), log_rate_sigma=row.get('sigma'),
                 source=profile['source'], source_sha256=profile['source_sha256'], catalogue_digest=canonical_digest(data),
                 release=ReleaseDefinition(**release), classification_basis=asset.classification_basis,
                 limitations=tuple(dict.fromkeys(limitations))))

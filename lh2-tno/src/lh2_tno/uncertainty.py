@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import math
+import random
 from typing import Literal
 
 from pydantic import Field, model_validator
@@ -39,6 +40,19 @@ class LiteratureFrequencyScenario(Contract):
             if any(not k.strip() for k in self.event_quantiles):
                 raise ValueError("explicit event quantiles required")
         return self
+
+
+class LiteratureFrequencyDistributionScenario(Contract):
+    """A published-rate distribution sampling assumption.
+
+    Sampling is allowed only when every event carries the catalogue's
+    published log-rate ``mu`` and ``sigma``.  The correlation choice is
+    explicit: one normal draw per asset, or one draw per event.
+    """
+
+    id: Name
+    provenance: Name
+    correlation_assumption: Literal["within_asset_shared_normal", "independent_event_normal"]
 
 
 def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
@@ -144,5 +158,129 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
         'correlation_comparison_present': any(
             s.correlation_assumption == 'independent_event_bounds' for s in scenarios
         ) and any(s.correlation_assumption == 'within_asset_shared_quantile' for s in scenarios),
+        'physical_validation_claim': False,
+    }
+
+
+def _empirical_quantile(values: list[float], probability: float) -> float:
+    if not values:
+        raise ValueError('at least one sampled value required')
+    ordered = sorted(values)
+    position = (len(ordered) - 1) * probability
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    weight = position - lower
+    return ordered[lower] * (1 - weight) + ordered[upper] * weight
+
+
+def _quantile_triplet(values: list[float]) -> list[float]:
+    return [_empirical_quantile(values, p) for p in (0.05, 0.5, 0.95)]
+
+
+def sample_literature_frequency_distributions(
+    result: dict,
+    scenarios: tuple[LiteratureFrequencyDistributionScenario, ...],
+    *,
+    draws: int = 1000,
+    seed: int = 20261009,
+) -> dict:
+    """Sample only the published initiating-frequency distributions.
+
+    Physical harm, weather, population, barrier and ignition terms are held
+    fixed from ``result['risk_atoms']``.  This is a frequency-model credible
+    interval for the known contribution; it is not a physical or statistical
+    confidence interval.  Incomplete facility scopes remain incomplete.
+    """
+    if not scenarios or len({s.id for s in scenarios}) != len(scenarios):
+        raise ValueError('nonempty unique distribution scenarios required')
+    if not isinstance(draws, int) or draws < 100 or draws > 100_000:
+        raise ValueError('draw count must be an integer from 100 to 100000')
+    events = {e['id']: FrequencyEvent.model_validate_json(json.dumps(e, allow_nan=False))
+              for e in result['events']}
+    if not events:
+        raise ValueError('distribution sampling requires generated events')
+    atoms = result['risk_atoms']
+    ids = set(result['known_contribution_annual_ir_low_high'])
+    event_ids = set(events)
+    assets = {e.asset_id for e in events.values()}
+    for event in events.values():
+        if event.frequency_distribution != 'published_lognormal':
+            raise ValueError(f'event {event.id} has no published lognormal distribution')
+    for atom in atoms:
+        event = events.get(atom['event_id'])
+        if event is None or atom['asset_id'] != event.asset_id:
+            raise ValueError('risk atom does not match its originating event')
+        if set(atom['receptor_harm_low_high']) != ids or len(atom['expected_deaths_low_high']) != 2:
+            raise ValueError('risk atom receptor/death endpoints do not match the campaign')
+        if atom['initiating_frequency_per_year'] != event.annual_frequency_per_year:
+            raise ValueError('risk atom does not retain the generated event frequency')
+
+    outputs = []
+    for scenario in scenarios:
+        rng = random.Random(seed)
+        ir_samples = {rid: [[], []] for rid in sorted(ids)}
+        asset_samples = {asset: [[], []] for asset in sorted(assets)}
+        total_samples = [[], []]
+        event_samples = {event_id: [] for event_id in sorted(event_ids)}
+        for _ in range(draws):
+            if scenario.correlation_assumption == 'within_asset_shared_normal':
+                z_by_asset = {asset: rng.gauss(0.0, 1.0) for asset in sorted(assets)}
+                frequencies = {
+                    event.id: event.exposure_multiplier * math.exp(event.log_rate_mu + event.log_rate_sigma * z_by_asset[event.asset_id])
+                    for event in events.values()
+                }
+            else:
+                frequencies = {
+                    event.id: event.exposure_multiplier * math.exp(event.log_rate_mu + event.log_rate_sigma * rng.gauss(0.0, 1.0))
+                    for event in events.values()
+                }
+            for event_id, value in frequencies.items():
+                event_samples[event_id].append(value)
+            receptor_totals = {rid: [0.0, 0.0] for rid in sorted(ids)}
+            asset_totals = {asset: [0.0, 0.0] for asset in sorted(assets)}
+            total = [0.0, 0.0]
+            for atom in atoms:
+                weight = frequencies[atom['event_id']] * atom['conditional_weight']
+                for endpoint in range(2):
+                    deaths = atom['expected_deaths_low_high'][endpoint]
+                    total[endpoint] += weight * deaths
+                    asset_totals[atom['asset_id']][endpoint] += weight * deaths
+                    for rid in receptor_totals:
+                        receptor_totals[rid][endpoint] += weight * atom['receptor_harm_low_high'][rid][endpoint]
+            for rid in receptor_totals:
+                for endpoint in range(2):
+                    ir_samples[rid][endpoint].append(receptor_totals[rid][endpoint])
+            for asset in asset_totals:
+                for endpoint in range(2):
+                    asset_samples[asset][endpoint].append(asset_totals[asset][endpoint])
+            for endpoint in range(2):
+                total_samples[endpoint].append(total[endpoint])
+
+        outputs.append({
+            'scenario': scenario.model_dump(mode='json'),
+            'draws': draws,
+            'seed': seed,
+            'quantiles': [0.05, 0.5, 0.95],
+            'event_frequency_quantiles_per_year': {event_id: _quantile_triplet(values) for event_id, values in event_samples.items()},
+            'known_annual_ir_quantiles': {rid: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
+                                          for rid, endpoint_values in ir_samples.items()},
+            'known_expected_death_quantiles': [_quantile_triplet(endpoints) for endpoints in total_samples],
+            'asset_known_expected_death_quantiles': {asset: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
+                                                     for asset, endpoint_values in asset_samples.items()},
+            'uncomputed_cases': result['uncomputed_cases'],
+            'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
+            'physical_validation_claim': False,
+        })
+    return {
+        'campaign_digest': result['campaign_digest'],
+        'physical_risk_atoms_digest': canonical_digest(atoms),
+        'scenarios': outputs,
+        'fresh_physics_executed': False,
+        'statistical_confidence_interval': False,
+        'frequency_distribution_credible_interval': True,
+        'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
+        'semantics': 'published lognormal initiating-frequency distributions with explicit shared-asset or independent-event normal draws; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
         'physical_validation_claim': False,
     }
