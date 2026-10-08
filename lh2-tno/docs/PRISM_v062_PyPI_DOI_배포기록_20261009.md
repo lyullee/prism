@@ -44,6 +44,7 @@ PyPI 파일은 GitHub Actions가 태그를 checkout하여 다시 빌드한 산�
 - `twine check --strict` 통과
 - GitHub Actions build와 trusted PyPI publish job 성공
 - PyPI 공개 인덱스에서 `0.6.2`와 wheel/sdist 두 파일 확인
+- `https://pypi.org/simple`를 지정한 새 Windows 가상환경에서 설치하고 `prism --describe-modes` 실행 성공
 - Zenodo record에서 공개 상태, 버전 `0.6.2`, MIT 라이선스, 세 파일, DOI resolver 확인
 
 ## 사용
