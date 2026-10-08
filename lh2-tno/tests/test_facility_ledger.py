@@ -1,5 +1,6 @@
 import pytest
 
+from lh2_tno.facility_assessment import build_facility_assessment
 from lh2_tno.facility_ledger import (
     FacilityLedgerError,
     merge_facility_campaign_results,
@@ -200,3 +201,29 @@ def test_facility_ledger_can_feed_frequency_uncertainty_without_physics_rerun():
         for row in uncertainty["scenarios"]
     )
     assert uncertainty["facility_credible_interval"] is False
+
+
+def test_facility_assessment_combines_ledger_and_frequency_scenarios():
+    result = _result(
+        event_id="event-assessment", asset_id="asset-assessment", component_id="tank-01",
+        frequency=1e-3,
+    )
+    assessment = build_facility_assessment(
+        [result],
+        expected_component_ids=("tank-01",),
+        frequency_scenarios=(
+            LiteratureFrequencyScenario(
+                id="published",
+                asset_quantiles={"asset-assessment": "published"},
+                provenance="test published rate",
+            ),
+        ),
+    )
+
+    assert assessment["schema_version"] == "prism.facility_assessment.v1"
+    assert assessment["status"] == "FACILITY_SCOPE_EXECUTED"
+    assert assessment["facility_total_risk_available"] is True
+    assert assessment["fresh_physics_executed"] is False
+    assert assessment["frequency_uncertainty"]["fresh_physics_executed"] is False
+    assert assessment["facility_risk_ledger"]["component_contributions"]["tank-01"]
+    assert assessment["assessment_digest"]
