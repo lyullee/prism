@@ -1,0 +1,142 @@
+"""Human-reviewed functionality matrix, anchored to the actual legacy code."""
+from pathlib import Path
+import json,csv
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'results/20261008/tno_function_inventory'
+DOC=ROOT/'docs/TNO_위험성평가_구축기능_상세목록_20261008.md'
+inventory=json.loads((OUT/'code_inventory.json').read_text(encoding='utf-8'))
+byfile={x['file']:x for x in inventory['modules']}
+items=[]
+def add(category,feature,legacy,new,basis,file,function,note):
+    module=byfile[file]
+    definition=next((x for x in module['definitions'] if x['name']==function),None)
+    if definition is None:raise ValueError(f'unknown code anchor: {file}:{function}')
+    items.append({'id':f'F{len(items)+1:02d}','category':category,'feature':feature,
+        'legacy_status':legacy,'new_lh2_path':new,'basis':basis,'file':file,'function':function,
+        'path':module['path'],'line':definition['line'] if definition else 1,'limitation':note})
+
+add('시설과 시나리오','시설·격리구간·부품 입력','구현','별도 범용 스키마','TNO QRA 절차 + 자체 입력 계약','taxonomy.py','Site','재고·압력·온도·위치·격리구간을 입력. 실측 설치값 자동 확정 기능은 아님.')
+add('시설과 시나리오','기체/차가운 기체/액화수소 서비스 분류','구현','상태/물성 일부 연결','수소 보완 모델','taxonomy.py','Service','cold GH2의 모든 온도·밀도 영역을 검증한 것은 아님.')
+add('시설과 시나리오','14개 기본 부품 분류','구현','기존 분류 미연결','Sandia component set + 자체 추가','taxonomy.py','Primitive','용기·압축기·필터·플랜지·호스·이음·배관·밸브·계기·열교환기·기화기·암·펌프씰·벤트. 분류 존재와 정량화 가능은 다름.')
+add('시설과 시나리오','6개 조립설비를 기본 부품으로 분해','구현','미연결','명시 부품 조립 가정','taxonomy.py','AssemblySpec','기화기·펌프·로딩암·디스펜서·진공배관·벤트 시스템. generic 부품 카운트이지 해당 설비 전체 고장모드의 검증은 아님.')
+add('시설과 시나리오','다섯 누출 면적 등급 생성','구현','미연결','HyRAM 방식 누출 크기','taxonomy.py','LeakBin','0.01/0.1/1/10/100% 면적. Purple Book G.1/G.2/G.3와 같은 분류가 아님.')
+add('시설과 시나리오','누출구 크기·연속/순간 방출 선택','구현','제한된 source 입력','Purple Book 사고 구분 + 수소 bin','taxonomy.py','enumerate_scenarios','용기 등 100% bin을 순간 방출로 분류. TNO의 10분 전량 유출·10 mm 누출 전체 카탈로그는 없음.')
+add('시설과 시나리오','높이·방향·방출 경로·Cd·유한 공급관','구현','일부 연결','장비 근거와 유체 모델','taxonomy.py','ComponentSpec','Cd 근거 표시. 새 경로는 수직 전용 노즐을 거절.')
+
+add('빈도','기준문헌 빈도 라이브러리','구현','미연결; 수동 입력','Sandia GH2 + Brooks LH2 + oil/gas proxy','taxonomy.py','FrequencyEntry','16개 component/fuel 조합. 이 중 LH2 6개. TNO Ch3 전체 표 라이브러리는 아님.')
+add('빈도','서비스별 빈도 선택과 대체자료 경로','구현','미연결','명시 proxy chain','taxonomy.py','resolve_frequency','LH2 자료 우선, oil/gas·GH2 대체는 근거 등급을 낮춤.')
+add('빈도','부품 수량·2차 파손확률로 시나리오 빈도 산출','구현','미연결','기존 scenario 계산식','taxonomy.py','enumerate_scenarios','빈도 = 표값 × count × secondary_breach_probability. 배관의 길이/노출시간 계약을 TNO 방식으로 일반화한 상태는 아님.')
+add('빈도','빈도 출처·등급·미정량 항목 표시','구현','입력 출처·None 처리','근거 관리','taxonomy.py','Resolved','NO_DATA는 현 라이브러리 미수록을 뜻함. TNO 열교환기 표까지 존재하지 않는다는 뜻으로 해석하면 안 됨.')
+add('빈도','빈도 불확실성·백분위','구현','미연결','문헌 lognormal 분포','taxonomy.py','FrequencyEntry','mu/sigma가 있는 항목만 계산. 논문의 LH2 추정치를 실측 검증값으로 승격하지 않음.')
+add('빈도','빈도 표본추출과 위험 불확실성 전파','구현','미연결','Monte Carlo + bin 공유 draw','uncertainty.py','propagate','빈도 불확실성과 화염 모델형식 차이는 따로 다룸.')
+add('빈도','TNO Ch3 기본 LOC 빈도·형태 전부','미구축','미연결','Purple Book 3.2','taxonomy.py','enumerate_scenarios','표 3.3/3.5/3.7/3.9/3.11/3.13 등의 기본선 선택·완전한 LOC 생성이 필요.')
+
+add('방출원','실제 기체 EOS·임계/비임계 방출','구현','SLABx-LH2 source 사용','CoolProp + isentropic mass-flux search','source_term.py','discharge','TNO 절차의 source 단계에 수소 물성 모델 보완. field source 인증 완료와 구분.')
+add('방출원','포화 액체·2상 HEM 방출','구현','별도 최신 integrated source','HEM + CoolProp','source_term.py','discharge','포화 품질 입력 가능. 별도 설비 모델의 P,h 경계와 최신 source P,T 인터페이스 결합은 아직 필요.')
+add('방출원','유한 길이 상류 기체 공급관 저항','구현','다른 LH2 pipe 모델 사용','Darcy-Weisbach/Haaland','source_term.py','line_discharge','정상·등온·저마하 기체. 관내 재고·Fanno choking·2상/과도 검증은 범위 밖.')
+add('방출원','재고·격리시간을 반영한 방출 질량','구현','질량 장부 연결','Purple Book release treatment','source_term.py','released_mass','질량은 단순 무한 공급으로 계산하지 않음.')
+add('방출원','기체 용기 압력저하·블로다운','구현','설비 모델 경계 미연결','질량·에너지 적분','transient.py','gas_blowdown','profile를 기존 steady 피해 모델로 전달할 때 대표율 정책을 선택.')
+add('방출원','진공 상실·비등·relief 과도','조건부 구현','미연결','열유입·포화 EOS·relief capacity','transient.py','loss_of_vacuum','relief 용량 부족 시 설정압 초과를 표현. 방출상의 전달과 근거 한계 존재.')
+add('방출원','시간별 방출 프로파일의 peak/질량등가 전달','구현','다른 유한 packet 경로','명시 transient coupling policy','pipeline.py','TransientCouplingPolicy','기존 모델 전체가 시간해상 CFD라는 뜻은 아님. 대표율 축약을 감사 기록으로 보존.')
+
+add('차단과 점화','차단 성공/실패 분기','구현','별도 자동 결합 미구축','Purple Book 4.4.1','blocking.py','branches','automatic/semi/manual/none 정책. 성공·실패별 방출을 계산하며 차단 효과 중복을 방지.')
+add('차단과 점화','직접 점화 확률표','구현','수동 확률 입력','Purple Book Table 4.5','ignition.py','ignition_probabilities','기존 pipeline은 분출량·반응성·continuous/instantaneous에 따라 자동 선택 가능.')
+add('차단과 점화','HyRAM 수소 점화 비교 정책','구현','자동 정책 미연결','HyRAM default values','ignition.py','ignition_probabilities','Purple와 별도 선택. 일부 전사 근거가 소프트웨어 확인 수준이라는 제한을 기록.')
+add('차단과 점화','실제 점화원 목록 기반 지연점화','구현','미연결','Purple Book 4.7.2 A / App.4.A','ignition_sources.py','IgnitionSourceSet','설비·차량·인구·점화원 위치/존재 확률 등이 필요. 빈 목록을 무점화 0으로 간주하지 않음.')
+add('차단과 점화','자유장 최대 구름 점화 정책','구현/민감도','명시 점화시각 입력','Purple Book 4.7.2 B','ignition_sources.py','free_field_delayed_probability','legacy PURPLE는 escape clause를 생략한 보수적 민감도 해석이라는 제한이 있음.')
+add('차단과 점화','제트화재·flash·폭발·BLEVE·무점화 사건트리','구현','일부 분기 연결','Purple Book 4.7–4.8','ignition.py','build_ignition_tree','확률 합=1 검사. 새 LH2 경로는 BLEVE 자동 사건트리를 포함하지 않음.')
+add('차단과 점화','Red Book 10.4 수치 예제 재현','예제/시험 구현','미연결','Red Book 10.4','ignition.py','build_ignition_tree','worked-example 검사는 있음. 범용 fault-tree 자동 작성·최소 cut-set·공통원인 고장 엔진은 아님.')
+
+add('분산','고압 GH2 중심선/반경 농도·LFL','구현','별도 LH2 경로','Schefer/Gaussian 수소 보완 모델','gh2_jet.py','dispersion','GH2 모델. 모든 cryogenic source에 자동 동일 적용하지 않음.')
+add('분산','방향성 가연성 면적·질량 적분','구현','다른 3-D 질량 보존 재구성','GH2 primary-source concentration','gh2_jet.py','flammable_geometry','수소/공기 혼합밀도·방향성 footprint. 기존 LH2 _footprint는 별도 질량 proxy 한계.')
+add('분산','SLABx-LH2 외부 분산 호출','구현','최신 native SLAB 연결','SLAB + LH2 확장','slabx_adapter.py','dispersion','legacy LFL x1.25·질량 proxy·상승 한계와 최신 경로를 구분.')
+add('분산','분산 계산 캐시·적용범위 거절','구현','별도 exact request cache','source/weather-aware caching','dispersion_cache.py','get','캐시 조회 속도와 신규 물리 계산의 실시간성은 다름.')
+add('분산','모델 선택·critical wind·구름 상승 진단','구현','추가 보완 필요','모델 적용범위 진단','gating.py','critical_wind_speed','적용범위 밖을 강제 계산한 수치를 승인값으로 쓰지 않음.')
+
+add('화재','제트화염 길이·Froude·형상','구현','일부 연결','Molkov/Delichatsios 수소 모델','fire.py','flame_length','독립 실험 검증과 상관식 구현 일치는 구분. nozzle 에너지 폐합 한계가 있음.')
+add('화재','복사율·다중 방사원·대기 투과율','구현/근거 한계','명시 복사율 범위로 연결','Molina/Hankinson/Wayne','fire.py','heat_flux','legacy radiant_fraction에는 설명되지 않은 22.7 계수가 남음. 새 경로는 사용하지 않음.')
+add('화재','벡터화 방향별 격자 열유속','구현','일부 다른 geometry','같은 radiation model의 벡터 구현','field.py','directional_flux_field','방향별 비선형 피해를 계산한 뒤 합산. 단순 평균 열유속으로 피해를 대체하지 않음.')
+add('화재','액화수소 spill·burn-back 복사 범위','조건부 구현','연결','HSL/BAM LH2 자료','spill_fire.py','spill_fire','탄화수소 정상 pool fire와 구분. ground condensed-air secondary explosion 빈도는 없음.')
+add('화재','화염구·지속시간·복사','조건부 구현','미연결','수소 화염구 + 문헌 상관식','fireball.py','lh2_spill_fireball','일반 화염구 모델 또는 LH2 문헌 경로. 모든 탱크 파열의 검증된 기본값이 아님.')
+add('화재','일반 BLEVE/탄화수소 pool-fire 모델','조건부/비교용','미연결','Yellow Book/Thomas 등','bleve.py','pool_fire','LH2 정상 pool fire의 검증 모델로 표시하면 안 됨. 별도 수소 spill 경로를 사용.')
+add('화재','화염 타원 표면(DPE) 복사 대안','단품 구현','미연결','타원/DPE geometry','dpe.py','dpe_heat_flux','legacy 주 pipeline의 기본 radiation 경로가 아님.')
+
+add('폭발과 파편','가연성 구름 에너지→0.3/0.1 barg 반경','구현','연결','Purple Book multi-energy 4.5/4.6','ignition.py','multi_energy_radii','strength-10 두 기준 구역. 연속 과압·충격량 곡선이나 DDT 예측은 아님.')
+add('폭발과 파편','용기 파열 기계·화학 에너지와 거리별 충격','조건부 구현','미연결','Abel-Noble/수소 blast 보완','blast.py','tank_rupture_blast','일반 LH2 2상 용기 파열 전체 검증은 아님.')
+add('폭발과 파편','압력·충격량 임계치·직접 인체 영향','조건부 구현','현재 anchor zone만','수소 blast/P-I 자료','blast.py','worst_human_effect','현재 피크압+임계치 피해 변환이며 DDT 반응 유동을 풀지 않음.')
+add('폭발과 파편','파편 초기속도·항력 궤적·도달','조건부 구현','미연결','에너지/탄도 상관식','fragments.py','fragment_throw','발생 파편 질량·방향·확률 입력이 필요. 진공외피 취성파괴 생성·빈도 모델은 없음.')
+add('폭발과 파편','실내 축적·환기·밀폐 폭발','단품/조건부 구현','새 경로는 옥외만','실내 well-mixed/stratified screening','indoor.py','accumulate','generic 별도 부품. TNO/LH2 전체 경로의 실내 검증 완료와 구분.')
+
+add('인명 피해','열 노출→probit→사망 확률','구현','연결','Green/Purple thermal probit','risk.py','ThermalProbit','20초 shelter cap·복사율·관측 조건에 영향. 새 경로는 시간 적분 flux 사용.')
+add('인명 피해','flash fire 구름 내부 피해','구현','연결','Purple Book 5.2.3','damage.py','flash_fire','LFL 외피 가정. 실제 사람의 이동·대피 경로 모델은 아님.')
+add('인명 피해','폭압 구역/P-I 피해','구현/조건부','과압 구역 연결','Purple Book 5.2.4 + P-I','damage.py','overpressure_pi','deflagration 구역과 detonation 조건을 혼용하지 않음. 구역 값·실내 중간 사망율 근거 한계.')
+add('인명 피해','개인/사회 위험 피해 구분·의복·실내 보호','구현','미연결','Purple Book PE vs FE','damage.py','RiskRoute','개인 IR은 비보호 개인, 사회위험은 실내·실외 인구 분율을 별도 사용.')
+add('인명 피해','독성 probit·책 CO 예제','예제/기반 구현','수소 피해에 미사용','Green/Purple App.6.B','risk.py','ToxicProbit','수소 자체 독성 기능을 뜻하지 않음. 질식·냉화상·산소결핍 모듈은 별도 미완성.')
+add('인명 피해','격자 부분 피복률·주야간 인구','구현','receptor + occupancy 입력','Purple Book population/grid','damage.py','cell_coverage_fraction','격자 단위의 일반 보호 가정. 개별 건물·복장·대피 실증 모델은 아님.')
+
+add('위험도','날씨·풍향·주야간 확률 적분','구현','전체 자동 생성 미연결','Purple Book Ch6','risk.py','WeatherSector','legacy weather partition의 합=1 검사. 새 full_chain 연간 값은 현재 기상 기여.')
+add('위험도','시나리오별 IR 기여·전체 합산','구현','한 initiating event의 기여 연결','Purple Book 6.1/6.2','risk.py','RiskContribution','deltaIR=f×기상확률×점화확률×사망확률. 관측된 누출 피해에 개시빈도를 다시 곱하지 않음.')
+add('위험도','부지 IR 격자·최대 IR·등고선','구현','수용점별 피해; full IR 격자 미연결','Purple Book Ch6','risk.py','IRGrid','legacy는 부지 risk grid. 새 3-D 농도 격자와 같은 출력이 아님.')
+add('위험도','사회적 위험 F-N 곡선','구현','미연결','Purple Book 6.3','risk.py','fn_curve','N명 이상 피해 사건의 누적 빈도. 별도 인구·점화원 입력 필요.')
+add('위험도','허용기준 비교·불확정 판정','구현','미연결','Purple Book의 Dutch 예시 기준','decision.py','check_individual_risk','네덜란드 예시 기준. 대한민국 법정 적합 판정 기능으로 간주하지 않음.')
+add('위험도','설비·시나리오·피해기전 기여도 순위','구현','미연결','위험 기여 집계','decision.py','importance_by','지원된 범위의 risk contributions를 기준으로 계산.')
+add('위험도','방호수단 저하 영향·개선대책 우선순위','구현/입력 의존','미연결','risk achievement worth / cost ranking','decision.py','rank_measures','개선 후 위험·비용의 근거가 필요. 최적 ESD 자동 제어는 아님.')
+
+add('설비 영향','열·폭압·화염·구름의 설비 노출','구현/조건부','미연결','설비 임계값/공학적 screening','equipment_damage.py','assess','극저온 진공용기 지배 고장모드는 NOT_EVALUATED 가능. fragility 확률 아님.')
+add('설비 영향','설비 간 1단계 escalation graph','구현','미연결','위험원→대상 도달 판단','equipment_damage.py','build_graph','도달 가능성을 연결. 완전한 연쇄 도미노 빈도·동적 전파 모델은 아님.')
+
+add('근거·검증·출력','부족한 근거·적용범위 밖 거절/보류/범위','구현','부분 연결','provenance/coverage gate','gating.py','Coverage','미정량 시나리오를 누락해 coverage 완료로 만들지 않음.')
+add('근거·검증·출력','source 증거·물리 assurance·근거 registry','구현; runtime 완전 결합 보류','source gate 일부 연결','버전·해시·관측량·검증 근거','evidence_registry.py','assess_registered_outputs','legacy claim_boundary의 dual_evidence_gate=NOT_INTEGRATED는 남아 있음.')
+add('근거·검증·출력','센서 품질·단위·지연·역순·상태전이','합성 replay 구현','별도 TelemetryNormalizer/Service','디지털트윈 검증 계약','digital_twin_validation.py','DigitalTwinMonitor','legacy의 승인 프레임은 GH2 source 실행. 현장 SCADA/자동 frequency posterior 아님.')
+add('근거·검증·출력','문헌 benchmark·예제·오차 지표','구현','독립 LH2 검증은 보류','문헌/검증 프로토콜','validation_metrics.py','evaluate','모델식 일치·source 조건·문헌 비교·현장 검증을 따로 기록.')
+add('근거·검증·출력','CLI·CSV 입력 검사·JSON/GeoJSON/F-N 출력','구현','별도 JSON CLI','자체 재현 도구','siteio.py','load_site','코드를 직접 쓰지 않아도 legacy site QRA 실행 가능. 신규 경로와 CLI가 별도임.')
+add('근거·검증·출력','모델형식 외피·Sobol·우선순위 집합 분석','연구 분석 구현','미연결','statistical pilot/transfer','statistical_pilot.py','run_study','일부 연구 점수·influence 출력은 risk/failure probability가 아님. 자동 안전 승인에 사용하지 않음.')
+
+assert len(items)==66,len(items)
+(OUT/'function_matrix.json').write_text(json.dumps({'items':items},ensure_ascii=False,indent=2),encoding='utf-8')
+with (OUT/'function_matrix.csv').open('w',encoding='utf-8-sig',newline='') as f:
+    writer=csv.DictWriter(f,fieldnames=list(items[0]));writer.writeheader();writer.writerows(items)
+
+lines=['# TNO 위험성평가 구축 기능 상세 목록','',
+ '2026-10-08. 기존 TNO 코드와 신규 `lh2-tno` 경로를 각각 확인한 기능 목록이다. 총 66개 검토 항목이며, 모두 완성/검증됐다는 뜻은 아니다. 원문 미통합 항목도 별도 포함했다.','',
+ '## 먼저 바로잡을 설명','',
+ '**기존 TNO에는 빈도 라이브러리 자동 조회, 부품 수량 반영, 사고 생성, 기상 적분 IR, 사회적 위험 F-N이 이미 구현돼 있다.** “우리 모듈은 외부 빈도 입력만 받는다”는 설명은 새 LH2 wrapper에만 해당했고, 기존 TNO 전체의 상태로 설명한 것은 잘못이었다.','',
+ '새 `consequence_chain`은 기존 `resolve_frequency`/`enumerate_scenarios`를 아직 호출하지 않는다. 그래서 `annual_frequency_per_year`를 입력받는다. 이는 TNO 북이 외부 빈도 입력만 요구해서 생긴 구조가 아니라 기존 기능의 통합 누락이다.','',
+ '**또한 기존 빈도 라이브러리는 TNO Chapter 3 전체를 옮긴 것이 아니다.** 실제 실행값은 Sandia GH2 9종, Brooks LH2 6종, 근거 미확인 oil/gas pump proxy 1종이다. TNO의 QRA·점화·차단·피해·IR/F-N 절차와 수소 보완 문헌을 조합한 구조다.','',
+ '## 코드에서 실제로 재현한 빈도 산출','',
+ '25 mm LH2 밸브 10개를 넣어 기존 `enumerate_scenarios`를 실제 실행했다. 5개 누출 크기 모두 표 조회와 수량 반영이 작동했다. 예를 들어 1% 면적 bin의 1개 기준 2.2×10⁻⁵/년은 10개일 때 2.2×10⁻⁴/년이었다. source는 탱크일 수 있어도 빈도를 붙일 고장 부품이 밸브인지 배관인지 구분해야 한다.','',
+ '이 결과는 빈도 선택/곱셈의 실행 검증이다. 실제 센터 고장 통계나 LH2 빈도의 현장 정확도를 검증한 결과는 아니다.','',
+ '## 목록 읽는 법','',
+ '- **구현:** 실제 계산/입력/분기 코드가 존재한다.','- **조건부:** 계산은 있으나 입력·적용범위·근거 한계가 있다.','- **단품/예제:** 독립 함수나 시험이며 전체 위험평가의 기본 경로와 다를 수 있다.','- **미연결:** 기존 기능을 새 LH2 full-chain이 호출하지 않는다.','- **미구축:** 필요한 기능이 현재 코드에서 완전하게 구현돼 있지 않다.','',
+ '## 상세 기능표','']
+category=None
+for item in items:
+    if item['category']!=category:
+        category=item['category'];lines += [f'### {category}','','| 번호 | 기능 | 기존 TNO | 신규 LH2 경로 | 실제 코드·근거·한계 |','|---|---|---|---|---|']
+    target=Path(item['path']).as_posix()+':'+str(item['line'])
+    ref=f"[{item['file']} / {item['function']}](<{target}>)"
+    lines.append(f"| {item['id']} | {item['feature']} | {item['legacy_status']} | {item['new_lh2_path']} | {ref}<br>근거: {item['basis']}<br>{item['limitation']} |")
+    if item is items[-1] or items[items.index(item)+1]['category']!=category:lines.append('')
+lines += ['## TNO 북 원문이 있는데 아직 기본선으로 통합하지 않은 부분','',
+ '| Purple Book 원문 | 원문 위치 | 현재 코드와의 차이 |','|---|---|---|',
+ '| 용기 LOC·빈도: 표 3.2/3.3 | PDF 42–43쪽, 인쇄 3.2–3.3 | 순간 전량·10분 전량·10 mm 누출 각각의 기본 빈도 대신 수소 문헌의 5개 면적 bin을 사용 |',
+ '| 대기압 탱크: 표 3.4/3.5 | PDF 44–47쪽 | 단일/이중 containment 등 탱크 종류별 사고·빈도의 완전한 기본선 없음 |',
+ '| 배관: 표 3.6/3.7 | PDF 47–48쪽, 인쇄 3.7–3.8 | 직경 구간·m⁻¹년⁻¹·길이 반영·양쪽 분출·최소 길이/플랜지 포함 규칙을 완전히 구현하지 않음 |',
+ '| 펌프: 표 3.8/3.9 | PDF 48–49쪽 | 무추가 보호·steel containment·canned pump별 catastrophic/leak 기본선 미통합. 현 pump-seal proxy를 이 표의 검증값이라고 부르면 안 됨 |',
+ '| 열교환기: 표 3.10/3.11 | PDF 49–50쪽 | 내관/외부 유체·shell 설계압·다중관/단일관 파손 사고와 빈도 미통합. 현 NO_DATA는 수소 library의 미수록 상태 |',
+ '| 압력방출장치: 표 3.12/3.13 | PDF 50–51쪽 | 최대 방출 사건 빈도와 설계 PSV 계통의 통합 부족. 정상 운전 벤트·누출 5bin·PFD와 구분 필요 |','',
+ 'PDF 43/46/47/48/49/50/51쪽은 텍스트와 원문 이미지로 대조했다. 표 값의 존재 확인을 뜻하며, 해당 default를 특정 LH2 시설에 무조건 적용해도 된다는 판정이 아니다. 표의 설비 정의·배제 조건·기존 부품 포함 범위를 보존해야 한다.','',
+ '## 새 액화수소 경로에서 추가로 실행한 것','',
+ '- 최신 integrated LH2 source의 HEM/HNEM 선택, nozzle/액적 terminal 분배.','- 등급별 액적 비행시간을 반영한 바닥 도착과 DynamicLH2PoolX 잔류 증발.','- 가스 분기의 수평 벡터·극저온 공기상 전이와 보존된 SLAB handoff.','- 시간별 유한 수소 재고와 3-D 격자 질량 장부, 4–75 mol% 내 질량.','- 복사율 민감도에 따른 실제 화재 열유속·시간 적분·TNO 인명 피해.','- 점화 분기·현재 기상 연간 기여·미발생 첫 사건 위험, 센서 P/T 갱신·exact cache.','',
+ '이 경로의 상태는 END_TO_END_DIAGNOSTIC_EXECUTED다. 빈도·점화원 정책·차단 성공/실패·전시설 기상 적분 IR·F-N·설비 escalation의 기존 모듈 전체를 연결한 상태는 아니다. 별도 설비 디지털트윈 전체도 아직 결합하지 않았다.','',
+ '## 확인한 시험과 근거','',
+ '- source 정적 조사: 운영/분석 Python 58개 파일의 함수/클래스·해시 기록.','- 기존 library: 16개 component/fuel 조합, LH2 전용 추정 자료 6종 확인.','- 실제 자동 빈도 생성: 합성 LH2 밸브 10개, 5개 bin 통과.','- 회귀 묶음 A: Purple 6.B·Red 10.4·점화/점화원·입력 검사 등 44 passed.','- 회귀 묶음 B: 빈도·허용 판정·피해·감사 regression 등 101 passed, 1 deselected.','- 회귀 묶음 C: 빈도·판정·피해·assurance/registry 70 passed. B와 C는 중복 항목이 있으므로 합쳐 고유 시험 수로 보고하지 않음.','- 기존 전체 공식 수집시험의 이번 full rerun은 하지 않았다. 예전 검증 수를 이번 통과 수로 승격하지 않음.','- 오래된 수동 `test_ignition.py`를 직접 수집하면 현재 PURPLE_SOURCES 필수 입력과 불일치한다. 정상 pytest.ini 수집 목록에서는 제외돼 있으며, 현 공식 `TestIgnition` 경로는 통과했다.','',
+ '## 아직 구축됐다고 말할 수 없는 것','',
+ '1. TNO Chapter 3 기본 LOC/빈도 전 항목을 보존한 기본선과 수소 문헌 대안의 명시적 선택.','2. 새 LH2 경로로 기존 빈도/사건 생성/점화/차단/기상 적분/F-N 전체를 전달하는 연결.','3. 범용 Red Book fault-tree, common-cause/베이지안 센서 failure posterior와 고장 빈도 자동 학습.','4. 모든 실내·차가운 기체·수직 벤트·2상 jet의 현장 검증된 full-chain.','5. 연속 과압/P-I와 수소 DDT·벤트 내부 혼합·반응 유동·내압 적합성.','6. 진공외피 취성파괴·파편 생성/사건 빈도, 화재→재고/풀 열피드백, 완전한 도미노 확률.','7. LH2 냉화상·산소결핍/질식·응축 산소 반응과 사람의 실제 대피/이동.','8. 설비 DigitalTwin P,h·상/셀·재고·event clock과 leak-edge 질량/에너지 피드백의 완전한 결합.','9. 모든 근거 검증 gate의 runtime 통합, 실제 시설 절대 IR 인증, 1 Hz 신규 계산 실증.','',
+ '## 바로잡아야 할 개발 순서','',
+ '먼저 **TNO_PURPLE_LOC 기본선**을 원문 조건과 함께 구현하고, **HYDROGEN_LITERATURE 대안**을 별도 선택하도록 해야 한다. 서로 다른 LOC 분류/빈도를 5개 bin에 억지 배분하거나 평균내면 안 된다. 이어 빈도 대상 부품·구간·누출 위치를 새 source 경계와 연결하고 기존 점화·차단·기상·인구·IR/F-N을 재사용한다. 설비 상태 계산은 별도 lh2dt 프로젝트가 담당한다.','',
+ 'taxonomy 상단의 오래된 설명 및 MODEL_REGISTRY 일부 표시는 실제 실행 코드/자료와 어긋나는 부분이 있어 정본 정리가 필요하다. 이 감사에서는 원 TNO 코드를 변경하지 않았고 파일 해시와 실제 실행 결과를 기록했다.','',
+ '수치가 계산되고 시험이 통과한 사실, 원문 조건과 동일한 구현이라는 사실, 실제 LH2 시설에서 검증됐다는 사실을 따로 표시한다.'
+]
+DOC.write_text('\n'.join(lines)+'\n',encoding='utf-8')
+print(json.dumps({'items':len(items),'report':str(DOC)},ensure_ascii=False))

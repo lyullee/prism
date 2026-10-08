@@ -1,0 +1,17 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+*.pem
+*.key
+
+# Raw local outputs and third-party reference material remain local.
+lh2-tno/results/
+!lh2-tno/results/20261008/
+!lh2-tno/results/20261008/full_chain/
+!lh2-tno/results/20261008/full_chain/facility.json
+!lh2-tno/results/20261008/full_chain/gas_release_request.json

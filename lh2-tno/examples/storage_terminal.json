@@ -1,0 +1,156 @@
+{
+  "id": "storage_terminal",
+  "configuration_origin": "synthetic",
+  "environment": "outdoor",
+  "components": [
+    {
+      "id": "storage",
+      "kind": "storage_tank",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "volume_m3": 50.0
+      }
+    },
+    {
+      "id": "isolation",
+      "kind": "valve",
+      "position_enu_m": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {}
+    },
+    {
+      "id": "transfer",
+      "kind": "pipe",
+      "position_enu_m": [
+        2.0,
+        0.0,
+        0.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 5.0,
+        "diameter_m": 0.0254
+      }
+    },
+    {
+      "id": "terminal",
+      "kind": "vent_stack",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        5.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 6.0,
+        "diameter_m": 0.0254
+      }
+    }
+  ],
+  "ports": [
+    {
+      "id": "storage.out",
+      "component_id": "storage",
+      "phase": "any",
+      "direction": "out"
+    },
+    {
+      "id": "isolation.in",
+      "component_id": "isolation",
+      "phase": "any",
+      "direction": "in"
+    },
+    {
+      "id": "isolation.out",
+      "component_id": "isolation",
+      "phase": "any",
+      "direction": "out"
+    },
+    {
+      "id": "transfer.in",
+      "component_id": "transfer",
+      "phase": "any",
+      "direction": "in"
+    },
+    {
+      "id": "transfer.out",
+      "component_id": "transfer",
+      "phase": "any",
+      "direction": "out"
+    },
+    {
+      "id": "terminal.in",
+      "component_id": "terminal",
+      "phase": "any",
+      "direction": "in"
+    }
+  ],
+  "edges": [
+    {
+      "id": "link1",
+      "source_port": "storage.out",
+      "target_port": "isolation.in"
+    },
+    {
+      "id": "link2",
+      "source_port": "isolation.out",
+      "target_port": "transfer.in"
+    },
+    {
+      "id": "link3",
+      "source_port": "transfer.out",
+      "target_port": "terminal.in"
+    }
+  ],
+  "receptors": [
+    {
+      "id": "R1",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.8
+      ]
+    },
+    {
+      "id": "R2",
+      "position_enu_m": [
+        20.0,
+        0.0,
+        1.8
+      ]
+    },
+    {
+      "id": "R3",
+      "position_enu_m": [
+        30.0,
+        0.0,
+        1.8
+      ]
+    }
+  ]
+}

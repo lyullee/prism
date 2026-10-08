@@ -1,0 +1,117 @@
+{
+  "id": "generic-lh2-frequency-example",
+  "configuration_origin": "synthetic",
+  "environment": "outdoor",
+  "components": [
+    {
+      "id": "tank",
+      "kind": "storage_tank",
+      "parameters_si": {
+        "volume_m3": 10.0
+      },
+      "position_enu_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      }
+    },
+    {
+      "id": "transfer",
+      "kind": "pipe",
+      "parameters_si": {
+        "length_m": 30.0,
+        "diameter_m": 0.025
+      },
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      }
+    },
+    {
+      "id": "valves",
+      "kind": "valve",
+      "parameters_si": {},
+      "position_enu_m": [
+        12.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      }
+    },
+    {
+      "id": "pump",
+      "kind": "pump",
+      "parameters_si": {},
+      "position_enu_m": [
+        3.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      }
+    },
+    {
+      "id": "vaporizer",
+      "kind": "vaporizer",
+      "parameters_si": {},
+      "position_enu_m": [
+        20.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      }
+    },
+    {
+      "id": "vent",
+      "kind": "vent_stack",
+      "parameters_si": {
+        "length_m": 5.0,
+        "diameter_m": 0.04
+      },
+      "position_enu_m": [
+        25.0,
+        0.0,
+        0.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      }
+    }
+  ],
+  "ports": [],
+  "edges": [],
+  "receptors": [
+    {
+      "id": "worker",
+      "position_enu_m": [
+        10.0,
+        5.0,
+        1.8
+      ]
+    }
+  ]
+}

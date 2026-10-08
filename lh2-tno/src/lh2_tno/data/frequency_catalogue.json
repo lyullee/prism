@@ -1,0 +1,819 @@
+{
+  "schema_version": "1.0",
+  "reviewed_date_kst": "2026-10-08",
+  "profiles": {
+    "TNO_PRESSURE_VESSEL": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.2/3.3, printed pp.3.2-3.4; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Includes vessel and associated instrumentation pipework; connected process pipes are separate.",
+        "External impact/operating error, when not excluded, adds 5e-6/year separately to G1 and G2.",
+        "Near-atmospheric cryogenic tanks must not automatically use the pressure-vessel profile.",
+        "No lower-frequency special-provision reduction implemented.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 5e-07,
+          "release": {
+            "mode": "instantaneous_inventory"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 5e-07,
+          "release": {
+            "mode": "inventory_over_600s"
+          }
+        },
+        {
+          "loc": "G3",
+          "rate": 1e-05,
+          "release": {
+            "mode": "hole",
+            "hole_diameter_m": 0.01
+          }
+        }
+      ]
+    },
+    "TNO_PROCESS_VESSEL": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.2/3.3, printed pp.3.2-3.4; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Includes vessel and associated instrumentation pipework; connected process pipes are separate.",
+        "External impact/operating error, when not excluded, adds 5e-6/year separately to G1 and G2.",
+        "Near-atmospheric cryogenic tanks must not automatically use the pressure-vessel profile.",
+        "No lower-frequency special-provision reduction implemented.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 5e-06,
+          "release": {
+            "mode": "instantaneous_inventory"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 5e-06,
+          "release": {
+            "mode": "inventory_over_600s"
+          }
+        },
+        {
+          "loc": "G3",
+          "rate": 0.0001,
+          "release": {
+            "mode": "hole",
+            "hole_diameter_m": 0.01
+          }
+        }
+      ]
+    },
+    "TNO_REACTOR_VESSEL": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.2/3.3, printed pp.3.2-3.4; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Includes vessel and associated instrumentation pipework; connected process pipes are separate.",
+        "External impact/operating error, when not excluded, adds 5e-6/year separately to G1 and G2.",
+        "Near-atmospheric cryogenic tanks must not automatically use the pressure-vessel profile.",
+        "No lower-frequency special-provision reduction implemented.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 5e-06,
+          "release": {
+            "mode": "instantaneous_inventory"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 5e-06,
+          "release": {
+            "mode": "inventory_over_600s"
+          }
+        },
+        {
+          "loc": "G3",
+          "rate": 0.0001,
+          "release": {
+            "mode": "hole",
+            "hole_diameter_m": 0.01
+          }
+        }
+      ]
+    },
+    "TNO_PIPE": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "m^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.6/3.7 and notes, printed pp.3.7-3.8; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Above-ground process/inter-unit pipes; not buried transport pipelines.",
+        "Diameter bins: <75 mm, 75-150 mm inclusive, >150 mm.",
+        "Full-bore rupture releases from both ends; one source nozzle is insufficient.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rates_by_diameter": [
+            1e-06,
+            3e-07,
+            1e-07
+          ],
+          "release": {
+            "mode": "two_sided_rupture",
+            "diameter_rule": "full_bore"
+          }
+        },
+        {
+          "loc": "G2",
+          "rates_by_diameter": [
+            5e-06,
+            2e-06,
+            5e-07
+          ],
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "ten_percent_max_50mm"
+          }
+        }
+      ]
+    },
+    "TNO_PUMP_STANDARD": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Reference diameter is the largest connecting pipeline, not the pump body.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 0.0001,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "full_bore"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 0.0005,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "ten_percent_max_50mm"
+          }
+        }
+      ]
+    },
+    "TNO_PUMP_STEEL_CONTAINMENT": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Reference diameter is the largest connecting pipeline, not the pump body.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 5e-05,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "full_bore"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 0.00025,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "ten_percent_max_50mm"
+          }
+        }
+      ]
+    },
+    "TNO_PUMP_CANNED": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Reference diameter is the largest connecting pipeline, not the pump body.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 1e-05,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "full_bore"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 5e-05,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "ten_percent_max_50mm"
+          }
+        }
+      ]
+    },
+    "TNO_HX_OUTSIDE_TUBES": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Dangerous fluid outside tubes; connecting pipeline outflow also requires modelling.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 5e-05,
+          "release": {
+            "mode": "instantaneous_inventory"
+          }
+        },
+        {
+          "loc": "G2",
+          "rate": 5e-05,
+          "release": {
+            "mode": "inventory_over_600s"
+          }
+        },
+        {
+          "loc": "G3",
+          "rate": 0.001,
+          "release": {
+            "mode": "hole",
+            "hole_diameter_m": 0.01
+          }
+        }
+      ]
+    },
+    "TNO_HX_INSIDE_WEAK_SHELL": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Shell design pressure below maximum hazardous-fluid pressure; nominal diameter is tube diameter.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G4",
+          "rate": 1e-05,
+          "release": {
+            "mode": "two_sided_rupture",
+            "diameter_rule": "full_bore",
+            "ruptured_tubes": 10
+          }
+        },
+        {
+          "loc": "G5",
+          "rate": 0.001,
+          "release": {
+            "mode": "two_sided_rupture",
+            "diameter_rule": "full_bore"
+          }
+        },
+        {
+          "loc": "G6",
+          "rate": 0.01,
+          "release": {
+            "mode": "hole",
+            "diameter_rule": "ten_percent_max_50mm"
+          }
+        }
+      ]
+    },
+    "TNO_HX_INSIDE_STRONG_SHELL": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Shell design pressure at least maximum hazardous-fluid pressure; nominal diameter is tube diameter.",
+        "Blank G5/G6 table cells mean not specified here; they are not measured zero failure rates.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G4",
+          "rate": 1e-06,
+          "release": {
+            "mode": "two_sided_rupture",
+            "diameter_rule": "full_bore",
+            "ruptured_tubes": 10
+          }
+        }
+      ]
+    },
+    "TNO_RELIEF_DEVICE": {
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.12/3.13, printed pp.3.10-3.11; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "limitations": [
+        "Maximum atmospheric discharge LOC; not failure-to-open probability or a normal operating vent frequency.",
+        "Shared initiating causes/normal vent/control demand must be de-duplicated before facility aggregation.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ],
+      "events": [
+        {
+          "loc": "G1",
+          "rate": 2e-05,
+          "release": {
+            "mode": "maximum_relief_discharge"
+          }
+        }
+      ]
+    },
+    "LH2_FLANGE": {
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ],
+      "events": [
+        {
+          "loc": "AREA_0.01%",
+          "rate": 5e-05,
+          "mu": -9.9035,
+          "sigma": 0.6593,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.0001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_0.1%",
+          "rate": 2.2e-05,
+          "mu": -10.7245,
+          "sigma": 1.2346,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_1%",
+          "rate": 1.1e-05,
+          "mu": -11.4176,
+          "sigma": 2.5121,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.01,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_10%",
+          "rate": 5e-06,
+          "mu": -12.2061,
+          "sigma": 3.024,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.1,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_100%",
+          "rate": 2.4e-06,
+          "mu": -12.94,
+          "sigma": 2.9341,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 1.0,
+            "diameter_rule": "area_fraction"
+          }
+        }
+      ]
+    },
+    "LH2_HOSE": {
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ],
+      "events": [
+        {
+          "loc": "AREA_0.01%",
+          "rate": 0.00011,
+          "mu": -9.115,
+          "sigma": 1.2245,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.0001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_0.1%",
+          "rate": 9e-05,
+          "mu": -9.3157,
+          "sigma": 2.0141,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_1%",
+          "rate": 0.00012,
+          "mu": -9.028,
+          "sigma": 4.5895,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.01,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_10%",
+          "rate": 0.00012,
+          "mu": -9.028,
+          "sigma": 0.8391,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.1,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_100%",
+          "rate": 0.00013,
+          "mu": -8.948,
+          "sigma": 3.6997,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 1.0,
+            "diameter_rule": "area_fraction"
+          }
+        }
+      ]
+    },
+    "LH2_JOINT": {
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ],
+      "events": [
+        {
+          "loc": "AREA_0.01%",
+          "rate": 9e-05,
+          "mu": -9.3157,
+          "sigma": 0.9482,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.0001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_0.1%",
+          "rate": 0.00012,
+          "mu": -9.028,
+          "sigma": 1.3266,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_1%",
+          "rate": 0.00017,
+          "mu": -8.6797,
+          "sigma": 1.24,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.01,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_10%",
+          "rate": 0.00024,
+          "mu": -8.3349,
+          "sigma": 2.8133,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.1,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_100%",
+          "rate": 0.00033,
+          "mu": -8.0164,
+          "sigma": 1.4723,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 1.0,
+            "diameter_rule": "area_fraction"
+          }
+        }
+      ]
+    },
+    "LH2_PIPE": {
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "m^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ],
+      "events": [
+        {
+          "loc": "AREA_0.01%",
+          "rate": 3.4e-06,
+          "mu": -12.5917,
+          "sigma": 1.4263,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.0001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_0.1%",
+          "rate": 1.6e-06,
+          "mu": -13.3455,
+          "sigma": 1.5083,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_1%",
+          "rate": 8e-07,
+          "mu": -14.0387,
+          "sigma": 1.442,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.01,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_10%",
+          "rate": 3.9e-07,
+          "mu": -14.7571,
+          "sigma": 1.4553,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.1,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_100%",
+          "rate": 1.9e-07,
+          "mu": -15.4762,
+          "sigma": 2.053,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 1.0,
+            "diameter_rule": "area_fraction"
+          }
+        }
+      ]
+    },
+    "LH2_VALVE": {
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ],
+      "events": [
+        {
+          "loc": "AREA_0.01%",
+          "rate": 0.00012,
+          "mu": -9.028,
+          "sigma": 0.608,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.0001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_0.1%",
+          "rate": 5.2e-05,
+          "mu": -9.8643,
+          "sigma": 1.0924,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_1%",
+          "rate": 2.2e-05,
+          "mu": -10.7245,
+          "sigma": 1.4405,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.01,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_10%",
+          "rate": 9.3e-06,
+          "mu": -11.5855,
+          "sigma": 2.0154,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.1,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_100%",
+          "rate": 3.9e-06,
+          "mu": -12.4545,
+          "sigma": 1.9641,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 1.0,
+            "diameter_rule": "area_fraction"
+          }
+        }
+      ]
+    },
+    "LH2_VESSEL": {
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ],
+      "events": [
+        {
+          "loc": "AREA_0.01%",
+          "rate": 0.00065,
+          "mu": -7.3385,
+          "sigma": 1.7362,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.0001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_0.1%",
+          "rate": 0.00014,
+          "mu": -8.8739,
+          "sigma": 2.5388,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.001,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_1%",
+          "rate": 2.8e-05,
+          "mu": -10.4833,
+          "sigma": 2.0482,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.01,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_10%",
+          "rate": 5.7e-06,
+          "mu": -12.075,
+          "sigma": 2.7186,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 0.1,
+            "diameter_rule": "area_fraction"
+          }
+        },
+        {
+          "loc": "AREA_100%",
+          "rate": 1.2e-06,
+          "mu": -13.6332,
+          "sigma": 3.1277,
+          "release": {
+            "mode": "hole",
+            "area_fraction": 1.0,
+            "diameter_rule": "area_fraction"
+          }
+        }
+      ]
+    }
+  },
+  "unresolved_profiles": [
+    "atmospheric/membrane/multiple-containment storage",
+    "vacuum-loss initiation",
+    "reliquefier special failure modes",
+    "normal control vent demands",
+    "transfer/loading operational failures",
+    "cold-service sensor leaks"
+  ],
+  "source_files": [
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\TNO_위험분석모듈\\TNO_SYSTEM\\eBook___The_coloured_books\\TheColouredBooks\\PurpleBook.pdf",
+      "sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796"
+    },
+    {
+      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261008\\tno_function_inventory\\frequency_library.json",
+      "sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b"
+    }
+  ],
+  "interpretation": "Source table snapshot, not universal facility certification or complete Purple Chapter 3."
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lh2-tno"
+version = "0.3.0"
+description = "Generic LH2 facility contracts and auditable research model orchestration"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.10,<3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "numpy>=1.26,<3"]
+
+[project.scripts]
+lh2-tno = "lh2_tno.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lh2_tno = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

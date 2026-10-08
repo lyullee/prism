@@ -1,0 +1,73 @@
+{
+  "id": "generic-lh2-v030",
+  "assets": [
+    {
+      "id": "tank-shell",
+      "model_component_id": "tank",
+      "profile": "TNO_PRESSURE_VESSEL",
+      "physical_scope_ids": [
+        "tank-shell"
+      ],
+      "classification_basis": "synthetic declared design example; requires actual equipment review",
+      "vessel_external_impact_or_operating_error": false
+    },
+    {
+      "id": "transfer-pipe",
+      "model_component_id": "transfer",
+      "profile": "TNO_PIPE",
+      "physical_scope_ids": [
+        "transfer-segment"
+      ],
+      "classification_basis": "synthetic declared design example; requires actual equipment review",
+      "nominal_diameter_m": 0.025,
+      "length_per_item_m": 30.0,
+      "pipe_conditions": "default_conditions",
+      "pipe_correction_factor": 1.0
+    },
+    {
+      "id": "valve-seals",
+      "model_component_id": "valves",
+      "profile": "LH2_VALVE",
+      "physical_scope_ids": [
+        "valve-1",
+        "valve-2",
+        "valve-3",
+        "valve-4"
+      ],
+      "classification_basis": "synthetic declared design example; requires actual equipment review",
+      "count": 4,
+      "nominal_diameter_m": 0.025
+    },
+    {
+      "id": "pump-body",
+      "model_component_id": "pump",
+      "profile": "TNO_PUMP_CANNED",
+      "physical_scope_ids": [
+        "pump-body"
+      ],
+      "classification_basis": "synthetic declared design example; requires actual equipment review",
+      "nominal_diameter_m": 0.025
+    },
+    {
+      "id": "vaporizer-tubes",
+      "model_component_id": "vaporizer",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "physical_scope_ids": [
+        "vaporizer-core"
+      ],
+      "classification_basis": "synthetic declared design example; requires actual equipment review",
+      "nominal_diameter_m": 0.01
+    },
+    {
+      "id": "relief-discharge",
+      "model_component_id": "vent",
+      "profile": "TNO_RELIEF_DEVICE",
+      "physical_scope_ids": [
+        "relief-valve"
+      ],
+      "classification_basis": "synthetic declared design example; requires actual equipment review",
+      "relief_direct_substance_contact_and_atmospheric_discharge": true
+    }
+  ],
+  "excluded_model_components": {}
+}
