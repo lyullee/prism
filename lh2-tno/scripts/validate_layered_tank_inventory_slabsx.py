@@ -291,6 +291,16 @@ def main() -> None:
     parser.add_argument("--max-intervals", type=int, default=64)
     parser.add_argument("--full-open-area-m2", type=float, default=1.0e-8,
                         help="declared provider outlet area; keep explicit when matching a reviewed frequency bin")
+    parser.add_argument("--facility-component-id", default="storage",
+                        help="facility component receiving the bridged diagnostic release")
+    parser.add_argument("--facility-port-id", default=None,
+                        help="outward liquid/two-phase facility port; defaults to '<component>.out'")
+    parser.add_argument("--chain-component-id", default=None,
+                        help="optional synthetic facility component id for the end-to-end fixture")
+    parser.add_argument("--chain-port-id", default=None,
+                        help="optional synthetic facility port id for the end-to-end fixture")
+    parser.add_argument("--event-id", default=None,
+                        help="optional exact frequency-worklist event id for the bridged packet")
     parser.add_argument("--output-dir", type=Path, default=None,
                         help="diagnostic output directory")
     args = parser.parse_args()
@@ -314,7 +324,17 @@ def main() -> None:
         "--execute-chain",
         "--output-dir",
         str(output),
+        "--facility-component-id",
+        args.facility_component_id,
     ]
+    if args.facility_port_id is not None:
+        command.extend(["--facility-port-id", args.facility_port_id])
+    if args.chain_component_id is not None:
+        command.extend(["--chain-component-id", args.chain_component_id])
+    if args.chain_port_id is not None:
+        command.extend(["--chain-port-id", args.chain_port_id])
+    if args.event_id is not None:
+        command.extend(["--event-id", args.event_id])
     completed = subprocess.run(command, check=False, capture_output=True, text=True)
     if completed.returncode != 0:
         if completed.stderr:

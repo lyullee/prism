@@ -244,6 +244,10 @@ def main() -> None:
                         help="facility component receiving this diagnostic release")
     parser.add_argument("--facility-port-id", default=None,
                         help="outward liquid/two-phase facility port; defaults to '<component>.out'")
+    parser.add_argument("--chain-component-id", default=None,
+                        help="optional synthetic facility component id for --execute-chain; keeps packet identity separate")
+    parser.add_argument("--chain-port-id", default=None,
+                        help="optional synthetic facility port id for --execute-chain; keeps packet identity separate")
     parser.add_argument("--event-id", default=None,
                         help="optional exact frequency-worklist event id; omitted for the diagnostic id")
     parser.add_argument("--output-dir", type=Path, default=None,
@@ -305,6 +309,22 @@ def main() -> None:
         for port in facility_data["ports"]:
             if port["id"] == "storage.out": port["phase"] = "two_phase"
         facility = Facility.model_validate_json(json.dumps(facility_data, allow_nan=False))
+        chain_component_id = args.chain_component_id or args.facility_component_id
+        chain_release = release
+        chain_port_id = args.chain_port_id or (
+            f"{chain_component_id}.out"
+            if chain_component_id != release.component_id
+            else release.port_id
+        )
+        if chain_component_id != release.component_id or chain_port_id != release.port_id:
+            # Keep the exact worklist packet immutable while rebinding only
+            # the synthetic facility fixture used by this diagnostic chain.
+            chain_payload = release.model_dump(mode="json")
+            chain_payload["component_id"] = chain_component_id
+            chain_payload["port_id"] = chain_port_id
+            chain_release = ResolvedLiquidRelease.model_validate_json(
+                json.dumps(chain_payload, allow_nan=False)
+            )
         config_raw = json.loads((ROOT / "results" / "20261009" / "backend_config_current.json").read_text(encoding="utf-8"))
         for pin in config_raw["packages"]:
             pin["sha256"] = tree_digest(Path(pin["root"]))
@@ -312,20 +332,20 @@ def main() -> None:
         request = copy.deepcopy(base)
         request.update(
             source_input=None, resolved_release=None, resolved_release_set=None,
-            resolved_liquid_release=release.model_dump(mode="json"),
+            resolved_liquid_release=chain_release.model_dump(mode="json"),
             # A positive-mass threshold is a provider-owned depletion event;
             # the fixed diagnostic horizon remains a generic transient case.
             # This prevents a short horizon from being mislabeled as depletion
             # while allowing an explicitly crossed threshold to bind to the
             # liquid inventory operator.
-            component_id=args.facility_component_id,
+            component_id=chain_component_id,
             source_operator=(
                 "equipment_liquid_release"
                 if source.get("termination_basis") == "inventory_depletion"
                 else "integrated_transient"
             ),
-            source_duration_mode="declared", available_mass_kg=release.available_mass_kg,
-            source_position_enu_m=list(release.position_enu_m),
+            source_duration_mode="declared", available_mass_kg=chain_release.available_mass_kg,
+            source_position_enu_m=list(chain_release.position_enu_m),
             evaluation_times_s=sorted(set(
                 base["evaluation_times_s"]
                 + [duration]
@@ -357,6 +377,13 @@ def main() -> None:
             "stage_elapsed_ms": data.get("stage_elapsed_ms"),
             "facility_property_basis_rebound": True,
             "facility_property_basis_fluid": provider_fluid,
+            "packet_component_id": release.component_id,
+            "chain_component_id": chain_component_id,
+            "packet_port_id": release.port_id,
+            "chain_port_id": chain_port_id,
+            "facility_component_rebound": (
+                chain_component_id != release.component_id or chain_port_id != release.port_id
+            ),
         })
     _save(output / "verification.json", verification)
     print(json.dumps(verification, ensure_ascii=False, indent=2))

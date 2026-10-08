@@ -22,6 +22,8 @@
 
 **외부 `lh2dt` 방출 이력과 SLABx 경계 진단:** `scripts/export_lh2dt_accident_history.py`는 외부 모델의 탱크 질량 장부와 엔탈피·엔트로피 상태를 보존한 채 SLABx 브리지 입력을 만듭니다. 포화 2상 상태를 압력·온도만으로 재해석하지 않도록 `slabx_provider_boundary.py`가 provider 상태의 등엔트로피 HEM 경계를 사용하고, `scripts/audit_lh2dt_slabsx_rate_boundary.py`가 총 유량을 5% gate로 비교합니다. 2026-10-09 합성 진단에서는 provider 질량 잔차가 약 `1.76e-15 kg`, 최대 상대 유량 오차가 `0.015324%`로 gate를 통과했고, `storage` 예제 설비에서 SLABx→PRISM 최종 피해 체인까지 실행했습니다. 이 결과는 합성 진단이며 실제 provider packet·빈도·독립 물리검증·시설 전체 IR/F-N으로 승격하지 않았습니다. [외부 lh2dt 사고방출 연결 진단](docs/PRISM_lh2dt_사고방출_연결진단_20261009.md)에 실행 명령과 남은 보완 항목을 기록했습니다.
 
+추가로 `scripts/validate_layered_tank_inventory_slabsx.py`는 외부 `lh2dt.LayeredTankNetworkSimulator`의 액체 셀 상태를 구간마다 feedback하고, 문헌 `LH2_VESSEL AREA_0.01%`의 `0.0127 m` 개구와 exact-match한 packet을 만들 수 있습니다. 이 진단은 provider 질량 잔차 `2.71e-19 kg`, SLABx 유량 오차 `0.119%`, 최종 chain 잔차 `0 kg`을 확인했으며, 실제 설비 packet·현장 종료시간·빈도·시설 QRA로 승격하지 않습니다. 최종 피해를 예제 `storage/storage.out`에 실행할 때는 packet의 실제 식별자와 synthetic facility 식별자 rebinding을 별도로 기록합니다.
+
 **일반 LH2 설비 범위 진단:** 탱크·이송배관만 있는 기본 예제와 별도로, [일반 LH2 설비 범위 진단 기록](docs/PRISM_일반LH2_설비범위_진단_20261009.md)의 합성 매니페스트에는 탱크·배관·밸브·벤트·펌프·기화기·재액화기·경계를 포함했습니다. 현재 검토된 문헌 프로파일과 명시적인 열교환기 측면 분류로 24개 initiating event를 만들고, 경계 컴포넌트는 사고 빈도에서 제외합니다. 이 진단은 빈도 범위 연결만 확인하며 provider 방출 장부나 시설 IR/F-N을 생성하지 않습니다. 실제 설비에서 열교환기 측면 분류가 확인되지 않으면 기화기·재액화기는 자동 대체하지 않고 다시 미계산으로 둡니다.
 
 **빈도→방출 요청 작업목록:** [방출 요청 작업목록 기록](docs/PRISM_방출요청_작업목록_20261009.md)과 `scripts/build_provider_release_worklist.py`는 위 24개 사건을 설비별 provider packet 요청으로 펼칩니다. 현재 packet은 0건이므로 24건 모두 `UNCOMPUTED_PROVIDER_PACKET`이며, 정상 유량·센서 시계열을 사고 방출로 승격하지 않습니다. packet이 들어오면 개구·설비·포트·종료 basis를 exact-match한 뒤에만 피해영향 campaign으로 보냅니다.
