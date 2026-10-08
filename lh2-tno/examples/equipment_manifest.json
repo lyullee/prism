@@ -47,6 +47,7 @@
     {"id": "tank-out", "component_id": "storage-tank-01", "phase": "liquid", "direction": "out"},
     {"id": "line-in", "component_id": "liquid-transfer-line-01", "phase": "liquid", "direction": "in"},
     {"id": "line-out", "component_id": "liquid-transfer-line-01", "phase": "liquid", "direction": "out"},
+    {"id": "line-accident-out", "component_id": "liquid-transfer-line-01", "phase": "vapour", "direction": "out", "position_enu_m": [5.0, 0.0, 1.0]},
     {"id": "demand-in", "component_id": "liquid-demand-boundary", "phase": "liquid", "direction": "in"}
   ],
   "edges": [
@@ -60,7 +61,7 @@
     {
       "id": "liquid-supply",
       "status": "declared",
-      "required_ports": ["tank-out", "line-in", "line-out", "demand-in"],
+      "required_ports": ["tank-out", "line-in", "line-out", "line-accident-out", "demand-in"],
       "required_controls": ["supply_valve_position"],
       "observed_controls": ["supply_valve_position"],
       "provenance": "synthetic example"

@@ -430,5 +430,26 @@
   "equipment_campaign_compiler_catalog_module": "src/lh2_tno/campaign_template.py",
   "equipment_campaign_compiler_catalog_script": "scripts/build_equipment_campaign.py --request-catalog",
   "equipment_campaign_compiler_catalog_policy": "Each event selects only an explicit component/opening-matched request; ambiguous matches error and missing matches remain UNCOMPUTED; no size or state substitution.",
-  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 241 passed"
+  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 241 passed",
+  "equipment_campaign_catalog_diagnostic_executed": true,
+  "equipment_campaign_catalog_diagnostic_record": "results/20261009/equipment_manifest_audit/equipment_campaign_two_result.json",
+  "equipment_campaign_catalog_diagnostic_generated_events": 10,
+  "equipment_campaign_catalog_diagnostic_matched_request_branches": 2,
+  "equipment_campaign_catalog_diagnostic_compiler_uncomputed_branches": 8,
+  "equipment_campaign_catalog_diagnostic_executed_cases": 2,
+  "equipment_campaign_catalog_diagnostic_operator_limited_cases": 1,
+  "equipment_campaign_catalog_diagnostic_uncomputed_cases": 9,
+  "equipment_campaign_catalog_diagnostic_case_elapsed_ms_range": [
+    1658.9206999633461,
+    3762.4178000260144
+  ],
+  "equipment_campaign_catalog_diagnostic_elapsed_ms": 5728.44850004185,
+  "equipment_campaign_catalog_diagnostic_total_facility_risk_withheld": true,
+  "equipment_campaign_catalog_diagnostic_known_contribution_ir_low_high": {
+    "receptor-01": [
+      6.5e-05,
+      6.5e-05
+    ]
+  },
+  "equipment_campaign_catalog_diagnostic_scope": "synthetic storage and provider-resolved liquid/two-phase pipe boundary; operator-limited; not actual facility QRA"
 }

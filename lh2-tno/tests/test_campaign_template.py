@@ -5,7 +5,7 @@ import pytest
 from lh2_tno.campaign import AnnualCondition
 from lh2_tno.campaign_template import build_equipment_campaign, build_equipment_campaign_from_catalog
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasStep
+from lh2_tno.equipment_boundary import ResolvedLiquidRelease, ResolvedLiquidStep
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
 
@@ -71,14 +71,16 @@ def test_campaign_catalog_matches_each_explicit_component_opening_without_substi
     payload = storage_request.model_dump(mode="json")
     payload["component_id"] = "liquid-transfer-line-01"
     payload["source_input"] = None
-    payload["resolved_release"] = ResolvedGasRelease(
+    payload["resolved_release"] = None
+    payload["resolved_liquid_release"] = ResolvedLiquidRelease(
         component_id="liquid-transfer-line-01",
         port_id="line-out",
         event_id="synthetic-pipe-leak",
         event_kind="accidental_leak",
         upstream_service="LH2",
         upstream_service_provenance="synthetic test",
-        enthalpy_convention="static_exit_enthalpy",
+        phase_basis="two_phase",
+        enthalpy_convention="provider_total_outlet_enthalpy",
         property_basis={"fluid": "Hydrogen", "energy_reference": "CoolProp-HEOS:Hydrogen:native"},
         provider_source_digest="0" * 64,
         provider_result_digest="1" * 64,
@@ -91,24 +93,35 @@ def test_campaign_catalog_matches_each_explicit_component_opening_without_substi
         duration_s=0.2,
         available_mass_kg=1.0,
         cumulative_mass_out_kg=0.0002,
-        cumulative_static_enthalpy_out_j=20.0,
-        steps=(ResolvedGasStep(
+        cumulative_specific_enthalpy_out_j=20.0,
+        reference_area_m2=0.001,
+        reference_area_provenance="synthetic test",
+        steps=(ResolvedLiquidStep(
             time_s=0.0,
-            mass_flow_kg_s=0.001,
-            pressure_pa_abs=101325.0,
+            total_mass_flow_kg_s=0.001,
+            gas_mass_flow_kg_s=0.001,
+            ground_liquid_mass_flow_kg_s=0.0,
+            airborne_liquid_mass_flow_kg_s=0.0,
             specific_enthalpy_j_kg=100000.0,
-            temperature_k=288.15,
-            density_kg_m3=1.0,
-            effective_area_m2=0.001,
-            velocity_m_s=1.0,
-            area_provenance="synthetic test",
-            velocity_origin="provider_resolved",
+            gas_pressure_pa_abs=101325.0,
+            gas_temperature_k=288.15,
+            gas_density_kg_m3=1.0,
+            gas_effective_area_m2=0.001,
+            gas_velocity_m_s=1.0,
+            gas_velocity_origin="provider_resolved",
         ),),
         termination_provenance="synthetic test",
+        droplet_partition_provenance="synthetic test; no airborne liquid",
         failure_opening_diameter_m=0.025,
     ).model_dump(mode="json")
     payload["source_position_enu_m"] = [5.0, 0.0, 1.0]
     payload["available_mass_kg"] = 1.0
+    payload["source_operator"] = "equipment_liquid_release"
+    payload["release_termination"] = {
+        "basis": "inventory_depletion",
+        "time_s": 0.2,
+        "provenance": "synthetic test",
+    }
     pipe_request = ConsequenceRequest.model_validate_json(json.dumps(payload))
 
     campaign = build_equipment_campaign_from_catalog(
