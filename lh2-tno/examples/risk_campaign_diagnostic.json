@@ -262,7 +262,7 @@
           "probability_given_event": 1.0,
           "provenance": "explicitly uncomputed LOC",
           "request": null,
-          "uncomputed_reason": "600 s inventory release exceeds current consequence horizon and needs a dedicated inventory/long-horizon path"
+          "uncomputed_reason": "provider did not supply a complete 600 s inventory history in this campaign; inventory_over_600s long-horizon contract is available but this case remains uncomputed"
         }
       ]
     },
