@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 213,
+  "unit_contract_conservation_tests_passed": 214,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -246,7 +246,7 @@
   "vertical_handoff_contract_scope": "provider-resolved vertical exit plus explicit horizontal handoff position, direction, mixture section and provenance; no implicit nozzle rotation",
   "vertical_vent_diagnostic_executed": true,
   "vertical_vent_diagnostic_cases": 2,
-  "vertical_vent_diagnostic_elapsed_ms": 6325.462799984962,
+  "vertical_vent_diagnostic_elapsed_ms": 6825.896300026216,
   "vertical_vent_diagnostic_mass_residual_kg": 0.0,
   "vertical_vent_diagnostic_record": "results/20261009/vertical_vent",
   "statistical_frequency_uncertainty_complete": false,
@@ -255,5 +255,10 @@
   "identified_crosswind_case_deadline_s": 180.0,
   "transient_source_natural_termination_wrapper_verified": true,
   "transient_source_physical_validation_claim": false,
-  "identified_transient_source_early_stop_remains_unqualified": false
+  "identified_transient_source_early_stop_remains_unqualified": false,
+  "vertical_handoff_variable_state_contract_implemented": true,
+  "vertical_handoff_variable_state_scope": "one provider handoff state per resolved release step; state clock and carrier mass-flow closure are required; no vertical plume physics inferred",
+  "vertical_vent_diagnostic_case_min_ms": 3213.0888999672607,
+  "vertical_vent_diagnostic_case_median_ms": 3287.8467499976978,
+  "vertical_vent_diagnostic_case_max_ms": 3362.604600028135
 }

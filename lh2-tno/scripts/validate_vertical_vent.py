@@ -51,9 +51,10 @@ def make_vertical_release(backend: IsolatedBackend, provider_digest: str) -> Res
         position_enu_m=[0.0, 0.0, 1.0],
         direction_enu=[0.0, 0.0, 1.0],
     )
-    # Hold the provider diagnostic state constant so one declared handoff
-    # section closes each interval.  This is deliberately recorded as a
-    # synthetic adapter input, not as a measured vertical transient.
+    # Keep the provider release history intact and declare one handoff state
+    # per release interval.  The changing carrier velocity/section exercises
+    # the variable-state contract; it remains a synthetic adapter input, not a
+    # measured vertical transient.
     first = copy.deepcopy(raw["steps"][0])
     second = copy.deepcopy(first)
     second["time_s"] = 0.2
@@ -64,22 +65,36 @@ def make_vertical_release(backend: IsolatedBackend, provider_digest: str) -> Res
     energy = sum(step["mass_flow_kg_s"] * step["specific_enthalpy_j_kg"] * (end - step["time_s"])
                  for step, end in zip(raw["steps"], ends))
     h2_fraction = 0.9
-    velocity = 5.0
     width = 0.02
-    depth = (first["mass_flow_kg_s"] / h2_fraction) / (first["density_kg_m3"] * velocity * 2.0 * width)
+    velocities = [5.0, 6.0]
+    states = []
+    for step, velocity in zip(raw["steps"], velocities):
+        depth = (step["mass_flow_kg_s"] / h2_fraction) / (step["density_kg_m3"] * velocity * 2.0 * width)
+        states.append({
+            "time_s": step["time_s"],
+            "direction_enu": [1.0, 0.0, 0.0],
+            "velocity_m_s": velocity,
+            "density_kg_m3": step["density_kg_m3"],
+            "temperature_k": step["temperature_k"],
+            "h2_mass_fraction": h2_fraction,
+            "half_width_m": width,
+            "depth_m": depth,
+            "provenance": "synthetic provider variable vertical-to-horizontal handoff; not independently validated",
+        })
     raw.update(
         cumulative_mass_out_kg=mass,
         cumulative_static_enthalpy_out_j=energy,
         vertical_handoff={
             "position_enu_m": [0.0, 0.0, 2.0],
             "direction_enu": [1.0, 0.0, 0.0],
-            "velocity_m_s": velocity,
+            "velocity_m_s": velocities[0],
             "density_kg_m3": first["density_kg_m3"],
             "temperature_k": first["temperature_k"],
             "h2_mass_fraction": h2_fraction,
             "half_width_m": width,
-            "depth_m": depth,
+            "depth_m": states[0]["depth_m"],
             "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated",
+            "states": states,
         },
     )
     return ResolvedGasRelease.model_validate_json(json.dumps(raw))
@@ -194,7 +209,7 @@ def main() -> None:
         "physical_validation_claim": False,
         "timing": result["timing"],
         "limitations": [
-            "synthetic vertical release history and horizontal handoff",
+            "synthetic variable-state vertical release history and horizontal handoff",
             "vertical free-jet and handoff state are not independently validated",
             "only AREA_100% route is executed; other area bins remain explicit UNCOMPUTED cases",
         ],

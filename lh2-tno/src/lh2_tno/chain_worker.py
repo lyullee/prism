@@ -6,6 +6,7 @@ route, a CFD solver, or a newly validated transient dispersion model.
 """
 from __future__ import annotations
 from dataclasses import asdict
+import json
 import math
 import time
 import numpy as np
@@ -232,26 +233,40 @@ def run_chain(p,roots,module):
     direction=np.asarray(source['nozzle']['direction_enu'],float);direction/=np.linalg.norm(direction)
     release_bearing=math.degrees(math.atan2(direction[0],direction[1]))%360
     packets=[]; traj_cache={}; traces=[]
+    def vertical_handoff_state(row):
+        if vertical_handoff is None:
+            return None
+        states = vertical_handoff.get('states') or ()
+        if not states:
+            return vertical_handoff
+        selected = states[0]
+        for state in states:
+            if state['time_s'] > row['time_s']:
+                break
+            selected = state
+        return selected
     def trajectory(kind,rate,area,span,row=None):
         velocity=0. if row is None else max(1e-5,float(np.linalg.norm(row['velocity_vector_m_s'])))
         gas_temperature=tsat if row is None else row.get('gas_boundary_temperature_k',tsat)
         gas_density=rho_g if row is None else row.get('gas_boundary_density_kg_m3',rho_g)
         gas_area=None if row is None else row.get('gas_boundary_area_m2')
-        key=(kind,rate,area,span,velocity,gas_temperature,gas_density,gas_area)
+        handoff = vertical_handoff_state(row) if kind == 'jet' and row is not None else None
+        handoff_key = None if handoff is None else json.dumps(handoff, sort_keys=True, separators=(',', ':'))
+        key=(kind,rate,area,span,velocity,gas_temperature,gas_density,gas_area,handoff_key)
         if key in traj_cache:return traj_cache[key]
         near=[]; tt=0.; cross_offset=0.; base_origin=origin if kind=='jet' else pool_origin
-        if kind=='jet' and vertical_handoff is not None:
-            handoff_direction=np.asarray(vertical_handoff['direction_enu'],float)
-            downvelocity=float(vertical_handoff['velocity_m_s']*np.dot(handoff_direction,down))
+        if kind=='jet' and handoff is not None:
+            handoff_direction=np.asarray(handoff['direction_enu'],float)
+            downvelocity=float(handoff['velocity_m_s']*np.dot(handoff_direction,down))
             if downvelocity<=0:
                 raise ValueError('vertical handoff has no positive downwind velocity for this weather condition')
-            total=rate/vertical_handoff['h2_mass_fraction']
+            total=rate/handoff['h2_mass_fraction']
             hs=handmod.FreeJetHandoffState(handoff_distance_m=0.01,duration_s=span,
-                total_rate_kg_s=total,h2_mass_fraction=vertical_handoff['h2_mass_fraction'],
-                temperature_K=vertical_handoff['temperature_k'],density_kg_m3=vertical_handoff['density_kg_m3'],
+                total_rate_kg_s=total,h2_mass_fraction=handoff['h2_mass_fraction'],
+                temperature_K=handoff['temperature_k'],density_kg_m3=handoff['density_kg_m3'],
                 velocity_m_s=downvelocity,centre_height_m=vertical_handoff['position_enu_m'][2],
-                half_width_m=vertical_handoff['half_width_m'],depth_m=vertical_handoff['depth_m'],
-                mixture_cp_J_kgK=vertical_handoff['h2_mass_fraction']*14300.+(1-vertical_handoff['h2_mass_fraction'])*1006.,
+                half_width_m=handoff['half_width_m'],depth_m=handoff['depth_m'],
+                mixture_cp_J_kgK=handoff['h2_mass_fraction']*14300.+(1-handoff['h2_mass_fraction'])*1006.,
                 source_model='equipment-resolved-vertical-gas + provider-horizontal-handoff',
                 geometry_closure='provider-resolved horizontal handoff section')
             source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)

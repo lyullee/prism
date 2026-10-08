@@ -33,15 +33,10 @@ class ResolvedGasStep(Contract):
         return self
 
 
-class VerticalGasHandoff(Contract):
-    """Provider-resolved state after a vertical gas exit is redirected.
+class VerticalGasHandoffState(Contract):
+    """One provider-resolved horizontal carrier state at a handoff time."""
 
-    The adapter is a boundary contract, not a PRISM rotation of a vertical
-    jet.  It must provide the handoff position and a horizontal carrier
-    section that the downstream SLABx route can consume.
-    """
-
-    position_enu_m: Vector
+    time_s: Nonnegative
     direction_enu: Vector
     velocity_m_s: Positive
     density_kg_m3: Positive
@@ -53,8 +48,6 @@ class VerticalGasHandoff(Contract):
 
     @model_validator(mode='after')
     def valid(self):
-        if self.position_enu_m[2] <= 0:
-            raise ValueError('vertical handoff must be above flat ground')
         if not math.isclose(sum(x*x for x in self.direction_enu), 1., abs_tol=1e-10, rel_tol=0):
             raise ValueError('vertical handoff requires a unit horizontal direction')
         if abs(self.direction_enu[2]) > 1e-10:
@@ -62,6 +55,59 @@ class VerticalGasHandoff(Contract):
         if self.h2_mass_fraction <= 0:
             raise ValueError('vertical handoff requires a positive hydrogen mass fraction')
         return self
+
+
+class VerticalGasHandoff(Contract):
+    """Provider-resolved state(s) after a vertical gas exit is redirected.
+
+    The adapter is a boundary contract, not a PRISM rotation of a vertical
+    jet.  It must provide the handoff position and a horizontal carrier
+    section that the downstream SLABx route can consume.  ``states`` may be
+    supplied when the provider handoff changes with the release clock; an
+    empty tuple means that the scalar state is held for every release step.
+    """
+
+    position_enu_m: Vector
+    direction_enu: Vector
+    velocity_m_s: Positive
+    density_kg_m3: Positive
+    temperature_k: Positive
+    h2_mass_fraction: Fraction
+    half_width_m: Positive
+    depth_m: Positive
+    provenance: Name
+    states: tuple[VerticalGasHandoffState, ...] = ()
+
+    @model_validator(mode='after')
+    def valid(self):
+        if self.position_enu_m[2] <= 0:
+            raise ValueError('vertical handoff must be above flat ground')
+        base = VerticalGasHandoffState(
+            time_s=0., direction_enu=self.direction_enu, velocity_m_s=self.velocity_m_s,
+            density_kg_m3=self.density_kg_m3, temperature_k=self.temperature_k,
+            h2_mass_fraction=self.h2_mass_fraction, half_width_m=self.half_width_m,
+            depth_m=self.depth_m, provenance=self.provenance)
+        if self.states:
+            if self.states[0].time_s != 0. or len(self.states) > 100:
+                raise ValueError('vertical handoff states must start at zero and be bounded')
+            if any(b.time_s <= a.time_s for a, b in zip(self.states, self.states[1:])):
+                raise ValueError('vertical handoff states require an ordered provider clock')
+        return self
+
+    def state_at(self, time_s: float) -> VerticalGasHandoffState:
+        """Return the left-held state for one resolved release interval."""
+        if not self.states:
+            return VerticalGasHandoffState(
+                time_s=time_s, direction_enu=self.direction_enu, velocity_m_s=self.velocity_m_s,
+                density_kg_m3=self.density_kg_m3, temperature_k=self.temperature_k,
+                h2_mass_fraction=self.h2_mass_fraction, half_width_m=self.half_width_m,
+                depth_m=self.depth_m, provenance=self.provenance)
+        selected = self.states[0]
+        for state in self.states:
+            if state.time_s > time_s:
+                break
+            selected = state
+        return selected
 
 
 class ResolvedGasRelease(Contract):
@@ -106,6 +152,19 @@ class ResolvedGasRelease(Contract):
                 raise ValueError('vertical exit requires a provider-resolved horizontal handoff adapter')
         elif self.vertical_handoff is not None:
             raise ValueError('vertical handoff metadata requires a vertical exit direction')
+        if self.vertical_handoff is not None:
+            handoff = self.vertical_handoff
+            if handoff.states:
+                if len(handoff.states) != len(self.steps):
+                    raise ValueError('vertical handoff state count must match release steps')
+                for step, state in zip(self.steps, handoff.states):
+                    if not math.isclose(step.time_s, state.time_s, rel_tol=0, abs_tol=1e-12):
+                        raise ValueError('vertical handoff clock must match resolved release clock')
+                    total = (state.density_kg_m3 * state.velocity_m_s *
+                             (2. * state.half_width_m) * state.depth_m)
+                    expected_h2 = total * state.h2_mass_fraction
+                    if not math.isclose(step.mass_flow_kg_s, expected_h2, rel_tol=1e-8, abs_tol=1e-12):
+                        raise ValueError('vertical handoff carrier section does not close provider mass flow')
         if self.position_enu_m[2]<=0:
             raise ValueError('resolved gas exit must be above flat ground')
         if not self.steps or self.steps[0].time_s!=0 or self.steps[-1].time_s>=self.duration_s:

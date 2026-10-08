@@ -149,6 +149,35 @@ def test_vertical_provider_handoff_is_accepted_by_consequence_contract():
     assert request.resolved_release.vertical_handoff.position_enu_m == (1.,0.,2.)
 
 
+def test_variable_vertical_handoff_states_close_provider_clock_and_mass():
+    d = packet()
+    h2_fraction = .5
+    width = .05
+    states = []
+    for step, velocity in zip(d['steps'], (30., 40.)):
+        depth = step['mass_flow_kg_s'] / (h2_fraction * step['density_kg_m3'] * velocity * 2. * width)
+        states.append({
+            'time_s': step['time_s'], 'direction_enu': [1., 0., 0.],
+            'velocity_m_s': velocity, 'density_kg_m3': step['density_kg_m3'],
+            'temperature_k': step['temperature_k'], 'h2_mass_fraction': h2_fraction,
+            'half_width_m': width, 'depth_m': depth,
+            'provenance': 'synthetic variable provider handoff state',
+        })
+    d.update(direction_enu=[0., 0., 1.], vertical_handoff={
+        'position_enu_m': [1., 0., 2.], 'direction_enu': [1., 0., 0.],
+        'velocity_m_s': 30., 'density_kg_m3': .2, 'temperature_k': 150.,
+        'h2_mass_fraction': h2_fraction, 'half_width_m': width,
+        'depth_m': states[0]['depth_m'], 'provenance': 'synthetic variable handoff',
+        'states': states,
+    })
+    release = ResolvedGasRelease.model_validate_json(json.dumps(d))
+    assert [state.time_s for state in release.vertical_handoff.states] == [0., .2]
+    bad = copy.deepcopy(d)
+    bad['vertical_handoff']['states'][1]['depth_m'] *= 1.1
+    with pytest.raises(ValueError, match='does not close provider mass flow'):
+        ResolvedGasRelease.model_validate_json(json.dumps(bad))
+
+
 @pytest.mark.parametrize('fault',['both','neither','inventory','position','clock','normal_frequency'])
 def test_request_ownership_and_normal_vent_frequency_are_explicit(fault):
     d=request_data()
