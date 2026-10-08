@@ -150,7 +150,7 @@ def test_resolved_port_path_is_not_tank_only_and_does_not_invoke_discharge_solve
     assert backend.calls==1 and result['facility_digest']
 
 
-@pytest.mark.parametrize('fault',['unknown_port','inward','liquid_port','fluid','indoor'])
+@pytest.mark.parametrize('fault',['unknown_port','inward','liquid_port','port_position','fluid','indoor'])
 def test_wrong_facility_boundary_is_rejected_before_physics(fault):
     class NeverCalled:
         def run(self,*args):raise AssertionError('invalid provider/facility must not run physics')
@@ -158,6 +158,7 @@ def test_wrong_facility_boundary_is_rejected_before_physics(fault):
     if fault=='unknown_port':f['ports'][0]['id']='different.out'
     if fault=='inward':f['ports'][0]['direction']='in'
     if fault=='liquid_port':f['ports'][0]['phase']='liquid'
+    if fault=='port_position':f['ports'][0]['position_enu_m']=[0.,0.,2.]
     if fault=='fluid':f['components'][0]['property_basis']={'fluid':'Hydrogen','backend':'CoolProp-HEOS','energy_reference':'CoolProp-HEOS:Hydrogen:native'}
     if fault=='indoor':f['environment']='indoor'
     with pytest.raises(ValueError):ResearchPipeline(Facility.model_validate_json(json.dumps(f)),NeverCalled()).consequences(

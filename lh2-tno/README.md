@@ -11,7 +11,7 @@
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.0은 이름·명령·사용 설명 정비이며 물리 적용범위를 확대한 버전은 아닙니다.
 
-**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 203개 검사와 30개 fresh transient/inventory 물리 사례를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
+**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 204개 검사와 30개 fresh transient/inventory 물리 사례를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
 
 ## 목차
 
@@ -332,7 +332,7 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 이미 계산된 기화기·벤트 출구 유량을 받으면 탱크 누출식을 다시 풀지 않습니다.
 등록한 모든 부품의 임의 누출을 즉시 지원하는 것은 아닙니다.
 
-`ResolvedGasRelease`에는 PH·엔탈피 기준·단면적·밀도·속도·유량·시계·누적 질량/정적 엔탈피와 provider 해시가 필요합니다.
+`ResolvedGasRelease`에는 PH·엔탈피 기준·단면적·밀도·속도·유량·시계·누적 질량/정적 엔탈피와 provider 해시가 필요합니다. 포트에 `position_enu_m`을 선언하면 provider 방출 좌표도 같은 위치여야 합니다.
 현재 수평·대기압·Mach≤0.3 기체만 허용합니다. 액체/2상·수직·고압 팽창 출구와 재고 피드백은 추가 adapter가 필요합니다.
 정상 벤트에 사고누출 빈도를 붙이지 않습니다. emergency relief도 기인 사건/요구 의미를 별도 검토합니다.
 상세: [경계 계약](https://github.com/lyullee/prism/blob/main/lh2-tno/src/lh2_tno/equipment_boundary.py), [설비 연결 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md).
@@ -440,7 +440,7 @@ F-N에는 인구 분포와 같은 사건의 피해자수 정의도 필요합니�
 
 현재 외부 snapshot의 `dynamic_validation_protocol.json` 선언 해시가 evidence JSON과 달라 상태를 `DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT`로 기록했습니다. 엄격 검증은 중단하고, 감사 모드만 지표와 불일치 파일을 보존합니다. 이 구성요소 증거는 설비 방출·대기 확산·점화·IR/F-N 전체 체인의 물리 검증이나 현장 절대위험 검증을 의미하지 않습니다.
 
-공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 미배포 개발 소스는 자연 종료·문헌 불확실성·inventory liquid-jet·equipment inventory-depletion·물리 검증 증거 계약 검사를 포함해 **203개**를 통과합니다. 별도 실행 진단은 steady 설비 경계와 5개 transient LH2 pipe LOC의 성공·실패 분기 20건, 다섯 area-bin 양수 재고 종료 경로의 두 기상 조건 10건을 시설 campaign까지 통과시켰습니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
+공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 미배포 개발 소스는 자연 종료·문헌 불확실성·inventory liquid-jet·equipment inventory-depletion·물리 검증 증거 계약 검사를 포함해 **204개**를 통과합니다. 별도 실행 진단은 steady 설비 경계와 5개 transient LH2 pipe LOC의 성공·실패 분기 20건, 다섯 area-bin 양수 재고 종료 경로의 두 기상 조건 10건을 시설 campaign까지 통과시켰습니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
 GitHub Actions에서 portable 검사와 wheel catalogue/명령 포함을 확인합니다.
 새 안내의 도움말·시설·빈도 예제도 깨끗한 소스 export에서 확인합니다.
 `validate_*.py`는 개발 PC 경로와 이전 결과를 참조할 수 있어 클론 직후의 일반 사용 명령이 아닙니다.

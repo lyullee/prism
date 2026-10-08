@@ -56,6 +56,9 @@ class Port(Contract):
     component_id: Name
     phase: Literal["liquid", "vapour", "two_phase", "any"]
     direction: Literal["in", "out", "bidirectional"]
+    # Optional outlet coordinate.  When a provider resolves a release at a
+    # port, the consequence boundary can require this coordinate to match.
+    position_enu_m: Vector | None = None
 
 
 class Edge(Contract):

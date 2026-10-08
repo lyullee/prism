@@ -253,6 +253,8 @@ def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
         port=next((x for x in pipeline.facility.ports if x.id==release.port_id),None)
         if port is None or port.component_id!=component.id or port.direction=='in' or port.phase not in ('vapour','any'):
             raise ValueError('resolved exit requires a matching outward gas facility port')
+        if port.position_enu_m is not None and release.position_enu_m != port.position_enu_m:
+            raise ValueError('provider release position does not match the declared facility port position')
     if not pipeline.facility.receptors:raise ValueError('at least one receptor required')
     payload=request.model_dump(mode='json')
     if request.resolved_release is not None:
