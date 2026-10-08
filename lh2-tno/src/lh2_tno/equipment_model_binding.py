@@ -196,6 +196,12 @@ def audit_equipment_model_binding(
             "model_class_name_is_not_a_provider_packet": True,
             "provider_schema_requires_actual_packet": True,
             "frequency_is_bound_outside_model_catalog": True,
+            "accident_export_interface": {
+                "schema_version": "prism.equipment_accident_export_request.v1",
+                "provider_method": "export_accident_history(request)",
+                "contract_module": "lh2_tno.equipment_accident_export",
+                "evaluate_simulate_fallback": False,
+            },
         },
     }
 

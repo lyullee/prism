@@ -72,3 +72,9 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 ```
 
 현재 실제 합성 provider 경로의 판정은 `INCOMPLETE_EVIDENCE`다. 설비 모델은 `STATE_ONLY_BOUND`이고 사고 release export 0개이며, 실제 provider 사고 packet 부재, 사고 가족 미완결, 시설 IR/F-N 보류, 독립 전체 체인 물리검증 부재, 완전 시설 빈도 credible interval 부재가 차단 이유로 남는다. 이 감사기가 `READY_FOR_IJHE_SCOPE`를 내기 전에는 논문에서 전체 시설 QRA 완성으로 표현하지 않는다.
+
+## 2026-10-11 연결 경계 보완
+
+외부 설비 모델이 정상 상태만 계산하고 사고 이력을 내보내지 않는 문제를 명확히 분리하기 위해 `src/lh2_tno/equipment_accident_export.py`를 추가했다. `AccidentReleaseExportRequest`는 사고 포트·개구·관찰시계·provider 종료 소유권·원본 digest를 필수화하고, provider는 `export_accident_history(request)`와 `prism.external_accident_history.v1`를 제공해야 한다. `evaluate()`·`simulate()`·`advance()`만 있는 모델은 사고 packet으로 사용하지 않는다. 합성·스크리닝 결과는 strict packet 검증 뒤에도 `DIAGNOSTIC_PACKET_NOT_PROMOTED`로 남긴다.
+
+현재 실제 `lh2dt_models` 클래스에는 이 전용 메서드가 없으므로 설비 매핑은 여전히 `STATE_ONLY_BOUND`, 실제 적격 packet은 0건이다. 새 계약은 외부 모델이 구현될 때 사용할 PRISM 측 경계이며, 시설 IR/F-N·빈도·물리 검증 완료를 대신하지 않는다. 예시 요청은 `examples/equipment_accident_export_request.json`, 상세 규칙은 [외부 설비 사고방출 export 계약](PRISM_외부설비_사고방출_export_계약_20261011.md)에 기록했다. 새 계약 테스트를 포함한 portable suite는 361개이며, IJHE 자동 감사는 11개 검사 중 7개 차단 상태를 유지한다.

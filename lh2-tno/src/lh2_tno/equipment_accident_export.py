@@ -1,0 +1,360 @@
+"""Explicit accident-history export boundary for external LH2 equipment models.
+
+The external ``lh2dt`` package currently exposes normal-state and transient
+calculation methods such as ``evaluate`` and ``simulate``.  Those methods are
+not an accident history.  This module defines the separate method that a
+qualified equipment provider must implement before PRISM can promote a result
+to the strict gas or liquid release boundary.
+
+The boundary is intentionally small and fail-closed:
+
+* a request must name the component, accident port, opening, horizon and
+  provider-owned termination policy;
+* the provider must expose ``export_accident_history``; an ``evaluate`` or
+  ``simulate`` method is never used as a fallback;
+* the response must explicitly declare the accident event and the external
+  provider export schema; and
+* the existing release adapters perform the final mass, energy, time and
+  geometry validation.
+
+This module does not infer a leak size, duration, inventory, frequency or
+termination outcome from a process-state snapshot.
+"""
+from __future__ import annotations
+
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
+import math
+from typing import Any, Protocol, runtime_checkable
+
+from .equipment_release_adapter import (
+    EquipmentReleaseExportError,
+    build_resolved_gas_release_from_provider_response,
+    build_resolved_liquid_release_from_provider_response,
+)
+
+
+ACCIDENT_EXPORT_REQUEST_SCHEMA = "prism.equipment_accident_export_request.v1"
+EXTERNAL_ACCIDENT_EXPORT_SCHEMA = "prism.external_accident_history.v1"
+_EVIDENCE_STATUSES = {"qualified_actual", "synthetic_diagnostic", "screening_only"}
+
+
+class EquipmentAccidentExportError(ValueError):
+    """Raised when an external model cannot satisfy the accident export contract."""
+
+
+def _text(value: Any, field: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise EquipmentAccidentExportError(f"{field} must be a non-empty string")
+    return value.strip()
+
+
+def _finite(value: Any, field: str) -> float:
+    if isinstance(value, bool):
+        raise EquipmentAccidentExportError(f"{field} must be numeric")
+    try:
+        number = float(value)
+    except (TypeError, ValueError) as error:
+        raise EquipmentAccidentExportError(f"{field} must be numeric") from error
+    if not math.isfinite(number):
+        raise EquipmentAccidentExportError(f"{field} must be finite")
+    return number
+
+
+def _positive(value: Any, field: str) -> float:
+    number = _finite(value, field)
+    if number <= 0.0:
+        raise EquipmentAccidentExportError(f"{field} must be positive")
+    return number
+
+
+def _digest(value: Any, field: str) -> str:
+    text = _text(value, field)
+    if len(text) != 64:
+        raise EquipmentAccidentExportError(f"{field} must be a 64-character SHA-256 digest")
+    try:
+        int(text, 16)
+    except ValueError as error:
+        raise EquipmentAccidentExportError(f"{field} must be a hexadecimal SHA-256 digest") from error
+    return text
+
+
+def _vector(value: Any, field: str, *, nonzero: bool = False) -> tuple[float, float, float]:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or len(value) != 3:
+        raise EquipmentAccidentExportError(f"{field} must contain three coordinates")
+    vector = tuple(_finite(item, f"{field}[{index}]") for index, item in enumerate(value))
+    if nonzero and math.isclose(math.sqrt(sum(item * item for item in vector)), 0.0):
+        raise EquipmentAccidentExportError(f"{field} must not be the zero vector")
+    return vector
+
+
+@dataclass(frozen=True)
+class AccidentReleaseExportRequest:
+    """Explicit scenario sent to an external equipment accident exporter."""
+
+    component_id: str
+    port_id: str
+    event_id: str
+    failure_mode: str
+    failure_opening_diameter_m: float
+    horizon_s: float
+    position_enu_m: tuple[float, float, float]
+    direction_enu: tuple[float, float, float]
+    ambient_pressure_pa_abs: float
+    ambient_temperature_k: float
+    provider_source_digest: str
+    provider_boundary_reference: str
+    input_origin: str
+    model_package: str
+    model_class: str
+    model_revision: str
+    state_snapshot_digest: str
+    evidence_status: str
+    scenario_provenance: str
+    start_time_s: float = 0.0
+    provider_termination_required: bool = True
+
+    def __post_init__(self) -> None:
+        for field in (
+            "component_id", "port_id", "event_id", "failure_mode",
+            "provider_boundary_reference", "input_origin",
+            "model_package", "model_class", "model_revision", "state_snapshot_digest",
+            "scenario_provenance",
+        ):
+            _text(getattr(self, field), field)
+        _digest(self.provider_source_digest, "provider_source_digest")
+        _digest(self.state_snapshot_digest, "state_snapshot_digest")
+        _positive(self.failure_opening_diameter_m, "failure_opening_diameter_m")
+        start = _finite(self.start_time_s, "start_time_s")
+        horizon = _positive(self.horizon_s, "horizon_s")
+        if start < 0.0:
+            raise EquipmentAccidentExportError("start_time_s must be non-negative")
+        if horizon <= start:
+            raise EquipmentAccidentExportError("horizon_s must be greater than start_time_s")
+        _vector(self.position_enu_m, "position_enu_m")
+        _vector(self.direction_enu, "direction_enu", nonzero=True)
+        _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
+        _positive(self.ambient_temperature_k, "ambient_temperature_k")
+        if self.evidence_status not in _EVIDENCE_STATUSES:
+            raise EquipmentAccidentExportError(
+                f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
+            )
+        if self.provider_termination_required is not True:
+            raise EquipmentAccidentExportError(
+                "provider_termination_required must remain true; PRISM never guesses termination"
+            )
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, Any]) -> "AccidentReleaseExportRequest":
+        if not isinstance(value, Mapping):
+            raise EquipmentAccidentExportError("accident export request must be an object")
+        payload = dict(value)
+        if payload.get("schema_version") != ACCIDENT_EXPORT_REQUEST_SCHEMA:
+            raise EquipmentAccidentExportError(
+                f"schema_version must be {ACCIDENT_EXPORT_REQUEST_SCHEMA}"
+            )
+        if payload.get("event_kind") != "accidental_leak":
+            raise EquipmentAccidentExportError(
+                "accident export request requires event_kind=accidental_leak"
+            )
+        if "provider_termination_required" not in payload:
+            raise EquipmentAccidentExportError(
+                "accident export request must explicitly set provider_termination_required=true"
+            )
+        payload.pop("schema_version", None)
+        payload.pop("event_kind", None)
+        try:
+            return cls(**payload)
+        except TypeError as error:
+            raise EquipmentAccidentExportError(
+                f"accident export request has missing or unknown fields: {error}"
+            ) from error
+
+    def to_mapping(self) -> dict[str, Any]:
+        payload = {
+            "schema_version": ACCIDENT_EXPORT_REQUEST_SCHEMA,
+            "event_kind": "accidental_leak",
+            "component_id": self.component_id,
+            "port_id": self.port_id,
+            "event_id": self.event_id,
+            "failure_mode": self.failure_mode,
+            "failure_opening_diameter_m": self.failure_opening_diameter_m,
+            "start_time_s": self.start_time_s,
+            "horizon_s": self.horizon_s,
+            "position_enu_m": list(self.position_enu_m),
+            "direction_enu": list(self.direction_enu),
+            "ambient_pressure_pa_abs": self.ambient_pressure_pa_abs,
+            "ambient_temperature_k": self.ambient_temperature_k,
+            "provider_source_digest": self.provider_source_digest,
+            "provider_boundary_reference": self.provider_boundary_reference,
+            "input_origin": self.input_origin,
+            "model_package": self.model_package,
+            "model_class": self.model_class,
+            "model_revision": self.model_revision,
+            "state_snapshot_digest": self.state_snapshot_digest,
+            "evidence_status": self.evidence_status,
+            "scenario_provenance": self.scenario_provenance,
+            "provider_termination_required": self.provider_termination_required,
+        }
+        return payload
+
+
+@runtime_checkable
+class AccidentHistoryProvider(Protocol):
+    """Protocol implemented by a qualified external equipment model."""
+
+    def export_accident_history(
+        self, request: Mapping[str, Any]
+    ) -> Mapping[str, Any]: ...
+
+
+@dataclass(frozen=True)
+class AccidentReleaseExportResult:
+    """Strict release plus promotion metadata for one provider export."""
+
+    release: Any
+    request: AccidentReleaseExportRequest
+    provider_result_digest: str
+    provider_class: str
+    provider_method: str
+    provider_export_schema: str
+    promotion_status: str
+
+    @property
+    def provider_packet_promoted(self) -> bool:
+        return self.promotion_status == "QUALIFIED_PROVIDER_PACKET"
+
+
+def _normalise_request(
+    request: AccidentReleaseExportRequest | Mapping[str, Any],
+) -> AccidentReleaseExportRequest:
+    if isinstance(request, AccidentReleaseExportRequest):
+        return request
+    return AccidentReleaseExportRequest.from_mapping(request)
+
+
+def _call_provider(
+    provider: AccidentHistoryProvider,
+    request: AccidentReleaseExportRequest,
+) -> tuple[Mapping[str, Any], str]:
+    exporter = getattr(provider, "export_accident_history", None)
+    if not callable(exporter):
+        raise EquipmentAccidentExportError(
+            "provider model has no export_accident_history(request); evaluate/simulate/advance "
+            "cannot be used as an accident packet"
+        )
+    try:
+        response = exporter(request.to_mapping())
+    except EquipmentAccidentExportError:
+        raise
+    except Exception as error:  # provider errors are reported without promotion
+        raise EquipmentAccidentExportError(
+            f"provider accident export failed: {type(error).__name__}: {error}"
+        ) from error
+    if not isinstance(response, Mapping):
+        raise EquipmentAccidentExportError("provider accident export must return an object")
+    if response.get("provider_export_schema") != EXTERNAL_ACCIDENT_EXPORT_SCHEMA:
+        raise EquipmentAccidentExportError(
+            f"provider accident export must declare {EXTERNAL_ACCIDENT_EXPORT_SCHEMA}"
+        )
+    data = response.get("data")
+    if not isinstance(data, Mapping):
+        raise EquipmentAccidentExportError("provider accident export must contain a data object")
+    if data.get("event_kind") != "accidental_leak":
+        raise EquipmentAccidentExportError(
+            "provider accident export data must explicitly declare event_kind=accidental_leak"
+        )
+    for key in ("event_id", "component_id", "port_id"):
+        declared = data.get(key, response.get(key))
+        expected = getattr(request, key)
+        if declared is not None and declared != expected:
+            raise EquipmentAccidentExportError(
+                f"provider accident export {key} disagrees with request"
+            )
+    if data.get("normal_state_snapshot") is True or response.get("normal_state_snapshot") is True:
+        raise EquipmentAccidentExportError(
+            "normal-state snapshot cannot be promoted as an accident history"
+        )
+    return response, type(provider).__module__ + "." + type(provider).__qualname__
+
+
+def _export(
+    provider: AccidentHistoryProvider,
+    request: AccidentReleaseExportRequest | Mapping[str, Any],
+    *,
+    release_kind: str,
+) -> AccidentReleaseExportResult:
+    scenario = _normalise_request(request)
+    response, provider_class = _call_provider(provider, scenario)
+    common = {
+        "provider_response": response,
+        "component_id": scenario.component_id,
+        "port_id": scenario.port_id,
+        "event_id": scenario.event_id,
+        "provider_source_digest": scenario.provider_source_digest,
+        "upstream_service_provenance": scenario.scenario_provenance,
+        "provider_boundary_reference": scenario.provider_boundary_reference,
+        "input_origin": scenario.input_origin,
+        "position_enu_m": scenario.position_enu_m,
+        "direction_enu": scenario.direction_enu,
+        "ambient_pressure_pa_abs": scenario.ambient_pressure_pa_abs,
+        "ambient_temperature_k": scenario.ambient_temperature_k,
+        "failure_opening_diameter_m": scenario.failure_opening_diameter_m,
+        "provider_result": response,
+    }
+    try:
+        if release_kind == "gas":
+            release = build_resolved_gas_release_from_provider_response(**common)
+        elif release_kind == "liquid":
+            release = build_resolved_liquid_release_from_provider_response(**common)
+        else:
+            raise EquipmentAccidentExportError("release_kind must be gas or liquid")
+    except EquipmentReleaseExportError as error:
+        raise EquipmentAccidentExportError(str(error)) from error
+    from .contracts import canonical_digest
+
+    result_digest = canonical_digest(response)
+    promotion_status = (
+        "QUALIFIED_PROVIDER_PACKET"
+        if scenario.evidence_status == "qualified_actual"
+        else "DIAGNOSTIC_PACKET_NOT_PROMOTED"
+    )
+    return AccidentReleaseExportResult(
+        release=release,
+        request=scenario,
+        provider_result_digest=result_digest,
+        provider_class=provider_class,
+        provider_method="export_accident_history",
+        provider_export_schema=EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+        promotion_status=promotion_status,
+    )
+
+
+def export_equipment_gas_accident_history(
+    provider: AccidentHistoryProvider,
+    request: AccidentReleaseExportRequest | Mapping[str, Any],
+) -> AccidentReleaseExportResult:
+    """Run an explicit provider gas accident export and validate its packet."""
+
+    return _export(provider, request, release_kind="gas")
+
+
+def export_equipment_liquid_accident_history(
+    provider: AccidentHistoryProvider,
+    request: AccidentReleaseExportRequest | Mapping[str, Any],
+) -> AccidentReleaseExportResult:
+    """Run an explicit provider liquid/two-phase accident export and validate it."""
+
+    return _export(provider, request, release_kind="liquid")
+
+
+__all__ = [
+    "ACCIDENT_EXPORT_REQUEST_SCHEMA",
+    "EXTERNAL_ACCIDENT_EXPORT_SCHEMA",
+    "AccidentHistoryProvider",
+    "EquipmentAccidentExportError",
+    "AccidentReleaseExportRequest",
+    "AccidentReleaseExportResult",
+    "export_equipment_gas_accident_history",
+    "export_equipment_liquid_accident_history",
+]
