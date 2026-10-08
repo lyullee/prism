@@ -13,7 +13,11 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .contracts import canonical_digest
-from .equipment_boundary import ResolvedGasRelease, ResolvedLiquidRelease
+from .equipment_boundary import (
+    ProviderTerminationBasis,
+    ResolvedGasRelease,
+    ResolvedLiquidRelease,
+)
 
 
 class EquipmentReleaseExportError(ValueError):
@@ -73,6 +77,35 @@ def _vector(value: Any, field: str) -> list[float]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or len(value) != 3:
         raise EquipmentReleaseExportError(f"{field} must contain three coordinates")
     return [_finite(item, f"{field}[{index}]") for index, item in enumerate(value)]
+
+
+def _termination_basis(value: Any, field: str) -> ProviderTerminationBasis | None:
+    """Validate an optional provider-owned termination classification."""
+
+    if value is None:
+        return None
+    # The external LayeredTank diagnostic used descriptive branch names before
+    # the strict packet field was introduced.  Normalize those two names at
+    # the adapter boundary while keeping the original prose provenance.
+    aliases = {
+        "isolation_success": "reviewed_isolation_success",
+        "isolation_failure_diagnostic_horizon": "synthetic_diagnostic_horizon",
+    }
+    normalized = aliases.get(value, value)
+    allowed = {
+        "synthetic_diagnostic_horizon",
+        "reviewed_isolation_success",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "model_pressure_equalization",
+        "two_sided_rupture",
+        "emergency_relief_discharge",
+    }
+    if normalized not in allowed:
+        raise EquipmentReleaseExportError(
+            f"{field} must be a supported provider termination basis"
+        )
+    return normalized  # type: ignore[return-value]
 
 
 def build_resolved_gas_release_from_provider_response(
@@ -150,6 +183,9 @@ def build_resolved_gas_release_from_provider_response(
     termination = _text(
         data.get("termination_provenance"), "provider data.termination_provenance"
     )
+    termination_basis = _termination_basis(
+        data.get("termination_basis"), "provider data.termination_basis"
+    )
     result_payload = provider_response if provider_result is None else provider_result
     result_digest = provider_result_digest or canonical_digest(result_payload)
     if not isinstance(result_digest, str) or len(result_digest) != 64:
@@ -190,6 +226,7 @@ def build_resolved_gas_release_from_provider_response(
         "cumulative_static_enthalpy_out_j": cumulative_enthalpy,
         "steps": steps,
         "termination_provenance": termination,
+        "termination_basis": termination_basis,
         "failure_opening_diameter_m": _positive(
             failure_opening_diameter_m, "failure_opening_diameter_m"
         ),
@@ -292,6 +329,9 @@ def build_resolved_liquid_release_from_provider_response(
     termination = _text(
         data.get("termination_provenance"), "provider data.termination_provenance"
     )
+    termination_basis = _termination_basis(
+        data.get("termination_basis"), "provider data.termination_basis"
+    )
     droplet_provenance = _text(
         data.get("droplet_partition_provenance"),
         "provider data.droplet_partition_provenance",
@@ -341,6 +381,7 @@ def build_resolved_liquid_release_from_provider_response(
         "steps": steps,
         "termination_provenance": termination,
         "droplet_partition_provenance": droplet_provenance,
+        "termination_basis": termination_basis,
         "failure_opening_diameter_m": _positive(
             failure_opening_diameter_m, "failure_opening_diameter_m"
         ),

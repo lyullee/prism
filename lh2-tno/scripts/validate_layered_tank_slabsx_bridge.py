@@ -208,6 +208,12 @@ def _packet_from_bridge(source: dict, provider_rows: list[dict], rows: list[dict
                 "termination_provenance",
                 "LayeredTank declared endpoint clock",
             ),
+            # Preserve the provider-owned classification so a branch catalog
+            # can bind each packet's own duration without replacing it with a
+            # fixed request-default horizon.
+            "termination_basis": source.get(
+                "termination_basis", "synthetic_diagnostic_horizon"
+            ),
             "droplet_partition_provenance": "SLABx-LH2 integrated flash/droplet partition",
             "steps": contract_steps,
         }

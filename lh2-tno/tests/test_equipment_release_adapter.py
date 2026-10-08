@@ -74,6 +74,13 @@ def test_adapter_promotes_history_without_extending_it():
     assert release.termination_provenance == "provider positive-mass threshold"
 
 
+def test_adapter_preserves_and_normalizes_provider_termination_basis():
+    response = _response()
+    response["data"]["termination_basis"] = "isolation_success"
+    release = _build(response)
+    assert release.termination_basis == "reviewed_isolation_success"
+
+
 def test_adapter_rejects_missing_provider_step_fields():
     response = _response()
     del response["data"]["steps"][0]["velocity_m_s"]

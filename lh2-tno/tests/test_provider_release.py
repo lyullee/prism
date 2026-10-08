@@ -198,6 +198,44 @@ def test_provider_release_catalog_and_request_adapter_preserve_context(tmp_path)
     assert request.annual_frequency_per_year is None
 
 
+def test_provider_duration_template_uses_packet_basis_and_each_branch_clock():
+    release = _release().model_copy(
+        update={
+            "termination_basis": "reviewed_isolation_success",
+            "duration_s": 0.35,
+            "cumulative_mass_out_kg": 0.35,
+            "cumulative_static_enthalpy_out_j": 350.0,
+        }
+    )
+    # The provider packet owns the branch clock.  The defaults only opt in to
+    # consuming that explicit duration and termination classification.
+    defaults = _defaults()
+    defaults["evaluation_times_s"] = [0.0, 0.1, 0.2, 0.35, 0.5, 1.0, 2.0, 3.0, 5.0]
+    defaults["release_termination"] = {
+        "basis": "provider_declared",
+        "time_s": "provider_duration",
+        "provenance": "reviewed provider branch context",
+    }
+    request = build_consequence_request_from_provider_release(release, defaults)
+
+    assert request.release_termination is not None
+    assert request.release_termination.basis == "reviewed_isolation_success"
+    assert request.release_termination.time_s == pytest.approx(0.35)
+    assert request.resolved_release is not None
+    assert request.resolved_release.termination_basis == "reviewed_isolation_success"
+
+
+def test_provider_duration_template_rejects_legacy_packet_without_basis():
+    defaults = _defaults()
+    defaults["release_termination"] = {
+        "basis": "provider_declared",
+        "time_s": "provider_duration",
+        "provenance": "reviewed provider branch context",
+    }
+    with pytest.raises(ProviderReleaseContractError, match="termination_basis"):
+        build_consequence_request_from_provider_release(_release(), defaults)
+
+
 def test_provider_two_sided_set_has_dedicated_schema_and_adapter(tmp_path):
     release_set = _release_set()
     packet = {

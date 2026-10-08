@@ -281,7 +281,10 @@ def _provider_history(
             "full_open_area_m2": area,
             "discharge_coefficient": 0.8,
             "nozzle_height_m": 1.0,
-            "direction_enu": [0.0, 0.0, -1.0],
+            # A horizontal ground-release direction keeps this diagnostic
+            # packet executable without inventing a vertical handoff model.
+            # Downward outlets require an explicit provider-resolved handoff.
+            "direction_enu": [1.0, 0.0, 0.0],
             "synthetic_geometry": True,
         },
         "provider_model": {

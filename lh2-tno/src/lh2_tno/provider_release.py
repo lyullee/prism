@@ -11,7 +11,7 @@ import copy
 import json
 import math
 from pathlib import Path
-from typing import Any, Mapping, TypeAlias
+from typing import Any, Mapping, Sequence, TypeAlias
 
 from .consequences import ConsequenceRequest
 from .contracts import Contract, Fraction, Name
@@ -277,6 +277,74 @@ def _same_position(left: Any, right: tuple[float, float, float]) -> bool:
         return False
 
 
+def _resolve_provider_termination(
+    termination: Mapping[str, Any],
+    *,
+    duration_s: float,
+    provider_basis: str | None,
+    label: str,
+) -> dict[str, Any]:
+    """Resolve an explicit provider-duration termination template.
+
+    A catalog may contain branches with different provider durations.  The
+    defaults file can therefore use ``time_s=provider_duration`` and
+    ``basis=provider_declared`` only when the strict packet carries both an
+    explicit termination basis and duration.  No duration or basis is guessed
+    when a legacy packet omits that metadata.
+    """
+
+    resolved = dict(termination)
+    basis = resolved.get("basis")
+    if basis == "provider_declared":
+        if provider_basis is None:
+            raise ProviderReleaseContractError(
+                f"{label} requires provider termination_basis for provider_declared context"
+            )
+        resolved["basis"] = provider_basis
+    time_value = resolved.get("time_s")
+    if time_value == "provider_duration":
+        resolved["time_s"] = duration_s
+    try:
+        termination_time = float(resolved.get("time_s"))
+    except (TypeError, ValueError) as error:
+        raise ProviderReleaseContractError(
+            f"{label}.time_s must be a finite provider duration"
+        ) from error
+    if not math.isfinite(termination_time) or not math.isclose(
+        termination_time, duration_s, rel_tol=0, abs_tol=1e-12
+    ):
+        raise ProviderReleaseContractError(
+            f"{label}.time_s must equal the provider duration"
+        )
+    if resolved.get("basis") is None or resolved.get("provenance") is None:
+        raise ProviderReleaseContractError(
+            f"{label} requires an explicit basis and provenance"
+        )
+    return resolved
+
+
+def _merge_provider_clock(
+    payload: dict[str, Any],
+    releases: Sequence[ResolvedGasRelease | ResolvedLiquidRelease],
+) -> None:
+    """Add provider breakpoints to the declared consequence clock.
+
+    A provider packet owns its interval clock.  The adapter may add those
+    already-computed breakpoints and the provider duration to the consequence
+    evaluation grid, but it never creates additional release intervals or
+    extends the provider history.
+    """
+
+    existing = payload.get("evaluation_times_s")
+    if not isinstance(existing, Sequence) or isinstance(existing, (str, bytes)):
+        return
+    times = [float(value) for value in existing]
+    for release in releases:
+        times.append(float(release.duration_s))
+        times.extend(float(step.time_s) for step in release.steps)
+    payload["evaluation_times_s"] = sorted(set(times))
+
+
 def build_consequence_request_from_provider_release(
     release: ProviderRelease,
     request_defaults: Mapping[str, Any],
@@ -325,22 +393,12 @@ def build_consequence_request_from_provider_release(
         raise ProviderReleaseContractError(
             "request defaults must declare release_termination basis and provenance"
         )
-    if termination.get("basis") is None or termination.get("provenance") is None:
-        raise ProviderReleaseContractError(
-            "release_termination requires an explicit basis and provenance"
-        )
-    try:
-        termination_time = float(termination.get("time_s"))
-    except (TypeError, ValueError) as error:
-        raise ProviderReleaseContractError(
-            "release_termination.time_s must be a finite provider duration"
-        ) from error
-    if not math.isfinite(termination_time) or not math.isclose(
-        termination_time, release.duration_s, rel_tol=0, abs_tol=1e-12
-    ):
-        raise ProviderReleaseContractError(
-            "release_termination.time_s must equal the provider duration"
-        )
+    termination = _resolve_provider_termination(
+        termination,
+        duration_s=release.duration_s,
+        provider_basis=release.termination_basis,
+        label="release_termination",
+    )
     if payload.get("source_operator") is None:
         raise ProviderReleaseContractError(
             "request defaults must explicitly select the source_operator"
@@ -360,6 +418,7 @@ def build_consequence_request_from_provider_release(
         initiation_intensity_per_s=None,
         release_termination=termination,
     )
+    _merge_provider_clock(payload, (release,))
     if isinstance(release, ResolvedLiquidRelease):
         payload["resolved_liquid_release"] = release.model_dump(mode="json")
     else:
@@ -404,22 +463,21 @@ def build_consequence_request_from_provider_release_set(
     ):
         raise ProviderReleaseContractError("request inventory disagrees with provider release set")
     termination = payload.get("release_termination")
-    if not isinstance(termination, dict) or termination.get("basis") is None or termination.get("provenance") is None:
+    if not isinstance(termination, dict):
         raise ProviderReleaseContractError(
             "two-sided request defaults must declare release_termination basis and provenance"
         )
-    try:
-        termination_time = float(termination.get("time_s"))
-    except (TypeError, ValueError) as error:
+    provider_bases = {release.termination_basis for release in release_set.releases}
+    if len(provider_bases) != 1:
         raise ProviderReleaseContractError(
-            "two-sided release_termination.time_s must be a finite provider duration"
-        ) from error
-    if not math.isfinite(termination_time) or not math.isclose(
-        termination_time, release_set.duration_s, rel_tol=0, abs_tol=1e-12
-    ):
-        raise ProviderReleaseContractError(
-            "two-sided release_termination.time_s must equal the provider duration"
+            "two-sided provider endpoints must share one termination basis"
         )
+    termination = _resolve_provider_termination(
+        termination,
+        duration_s=release_set.duration_s,
+        provider_basis=next(iter(provider_bases)),
+        label="two-sided release_termination",
+    )
     if termination.get("basis") != "two_sided_rupture":
         raise ProviderReleaseContractError(
             "two-sided request requires two_sided_rupture termination basis"
@@ -443,6 +501,7 @@ def build_consequence_request_from_provider_release_set(
         initiation_intensity_per_s=None,
         release_termination=termination,
     )
+    _merge_provider_clock(payload, release_set.releases)
     try:
         return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
     except (ValueError, TypeError) as error:

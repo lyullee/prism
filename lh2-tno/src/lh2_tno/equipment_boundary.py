@@ -11,6 +11,20 @@ from pydantic import Field, model_validator
 from .contracts import Contract, Name, Positive, Nonnegative, Fraction, Vector, PropertyBasis
 
 
+# This is a provider-declared termination classification, not an initiating
+# frequency.  ``None`` remains valid for legacy packets that predate the
+# explicit termination-basis field; adapters then require a reviewed context.
+ProviderTerminationBasis = Literal[
+    'synthetic_diagnostic_horizon',
+    'reviewed_isolation_success',
+    'inventory_depletion',
+    'inventory_over_600s',
+    'model_pressure_equalization',
+    'two_sided_rupture',
+    'emergency_relief_discharge',
+]
+
+
 class ResolvedGasStep(Contract):
     time_s: Nonnegative
     mass_flow_kg_s: Nonnegative
@@ -140,6 +154,7 @@ class ResolvedGasRelease(Contract):
     cumulative_static_enthalpy_out_j: float
     steps: tuple[ResolvedGasStep, ...]
     termination_provenance: Name
+    termination_basis: ProviderTerminationBasis | None = None
     vertical_handoff: VerticalGasHandoff | None = None
     # A failure opening can differ from an expanded exit area. Explicitly
     # retain it if attaching an accident-frequency definition.
@@ -352,6 +367,7 @@ class ResolvedLiquidRelease(Contract):
     steps: tuple[ResolvedLiquidStep, ...]
     termination_provenance: Name
     droplet_partition_provenance: Name
+    termination_basis: ProviderTerminationBasis | None = None
     failure_opening_diameter_m: Positive | None = None
 
     @model_validator(mode='after')

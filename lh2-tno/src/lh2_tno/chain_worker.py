@@ -462,7 +462,12 @@ def run_chain(p,roots,module):
             # Declared geometric deflection after flat-ground intersection.
             if direction[2]<0:
                 hit=origin[2]/(-direction[2]);after=s>hit
-                hdir=direction.copy();hdir[2]=0.;hdir/=np.linalg.norm(hdir)
+                horizontal_norm=float(np.linalg.norm(direction[:2]))
+                if horizontal_norm <= 1.0e-12:
+                    raise ValueError(
+                        'downward outlet requires a provider-resolved horizontal handoff'
+                    )
+                hdir=direction.copy();hdir[2]=0.;hdir/=horizontal_norm
                 points[after]=origin+hit*direction+(s[after]-hit)[:,None]*hdir
             distances=np.linalg.norm(points-pos,axis=1)
             contact=bool(np.any(distances<float(fire.FLAME_RADIUS_RATIO)*length))

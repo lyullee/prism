@@ -42,6 +42,10 @@ python scripts/audit_provider_catalog_coverage.py `
 실제 일반 LH2 설비에 대해 적격으로 승인된 provider packet은 0건이므로 실제 시설 coverage는 계속 `NO_EXACT_MATCH`다. 별도 합성 진단에서는 `lh2dt.LayeredTankNetworkSimulator→SLABx-LH2` 결과를 저장탱크 다섯 area-bin의 설비·포트·개구에 맞춰 `PARTIAL_EXACT_MATCH`(5/24)로 반복 재현했다. 다섯 case 모두 provider 질량 잔차와 5% 유량 gate를 통과했지만, 합성 threshold·종료시계·재고·기상 때문에 실제 방출 이력이나 시설 위험으로 승격하지 않는다. 배관·밸브·벤트·펌프 등 나머지 19개 사건은 packet 없이 남아 있다. 상세 결과는 `results/20261010/layered_tank_worklist_packets/provider_catalog_coverage.json`과 `campaign_verification.json`이다. 기존 단일 사건 재현 결과도 `results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_layered_exact.json`에 보존한다.
 
 
+### provider 종료근거와 실제 지속시간 바인딩
+
+branch packet의 `termination_basis`와 `duration_s`는 이제 피해 계산 요청에 직접 연결된다. `examples/provider_request_defaults_liquid_provider_duration.json`의 `provider_declared/provider_duration` 문맥을 사용할 때만 이 연결이 활성화된다. basis가 없거나 고정 시간과 provider 시간이 충돌하면 요청을 거절한다. provider의 시계 breakpoint는 `evaluation_times_s`에 합치지만 source history를 연장하지 않는다. 이 규칙으로 `reviewed_isolation_success` branch는 0.15 s, `synthetic_diagnostic_horizon` branch는 0.50 s를 보존한다. 한 저장탱크의 두 branch는 `EXECUTED_OPERATOR_LIMITED`로 실제 chain까지 실행되었지만, 합성 확률은 현장 차단 신뢰도가 아니다. 전체 catalog는 24개 initiating event 중 7개 branch만 request에 exact-match되고 21개 branch가 미계산이다.
+
 ## 차단 성공·실패 branch catalog 진단
 
 `build_layered_tank_isolation_branches.py`는 하나의 initiating event 아래에 조건부 `isolation-success`와 `isolation-failure` provider packet을 함께 만드는 구조를 시험한다. branch 확률은 catalog에서 별도로 기록하며, 합이 1이 되지 않으면 누락분을 자동으로 물리 계산하지 않고 coverage gate에서 보류해야 한다. 이번 합성 실행은 저장탱크 5개 event에 성공·실패 10개 branch를 요청했다. 7개 branch가 생성되었고 3개는 외부 solver의 양수 셀 질량 오류로 `UNCOMPUTED`에 남았다. event 기준으로는 24개 중 4개가 적어도 한 branch와 exact-match되었다.

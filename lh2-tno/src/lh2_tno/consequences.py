@@ -192,8 +192,13 @@ class ConsequenceRequest(Contract):
                 raise ValueError('equipment_liquid_release requires one resolved liquid release')
             if self.source_duration_mode != 'declared':
                 raise ValueError('equipment_liquid_release uses the provider-declared horizon')
-            if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
-                raise ValueError('equipment_liquid_release requires inventory-depletion termination provenance')
+            if self.release_termination is None or self.release_termination.basis not in {
+                'inventory_depletion', 'reviewed_isolation_success', 'synthetic_diagnostic_horizon'
+            }:
+                raise ValueError(
+                    'equipment_liquid_release requires provider inventory, reviewed isolation, '
+                    'or explicit diagnostic-horizon termination provenance'
+                )
             if self.available_mass_kg != liquid_release.available_mass_kg:
                 raise ValueError('liquid request and provider inventories disagree')
         elif self.source_operator == 'equipment_liquid_over_600s':
