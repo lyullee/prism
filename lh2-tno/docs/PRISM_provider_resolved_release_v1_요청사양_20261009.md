@@ -30,6 +30,12 @@
 
 공급자는 차단 성공·실패를 별도 방출 history와 검토된 branch 확률로 제공해야 한다. 한 packet을 복사해 다른 설비나 다른 개구에 재사용하지 않는다. 사고 빈도는 packet에 넣지 않고 PRISM 문헌 빈도 계층에서 한 번만 부여한다.
 
+## 재고 소진·600초 방출의 provider 결합
+
+설비 모델이 탱크 재고 소진을 직접 계산한 기체 방출 history를 반환하면 일반 hole 누출로 바꾸지 않고 `source_operator: equipment_inventory_depletion`과 `release_termination.basis: inventory_depletion`을 사용한다. 액체·2상 provider history는 `source_operator: equipment_liquid_release`로 연결한다. 두 경로 모두 provider가 계산한 `duration_s`, 질량·엔탈피 또는 상분율 장부와 종료근거를 그대로 유지하며, `FrequencyPlan`의 `instantaneous_inventory` 사건에만 결합된다. 600초 전량/장시간 방출은 기체의 `source_operator: equipment_inventory_over_600s` 또는 액체·2상의 `source_operator: equipment_liquid_over_600s`, `release_termination.basis: inventory_over_600s`, 정확히 600초의 provider history를 요구한다. 짧은 시계열을 600초로 늘리거나, 센서 압력만으로 재고 소진·빈도를 추정하지 않는다.
+
+이 operator들은 provider packet의 사고 종류·설비·포트·물성 경계를 먼저 검사한 뒤 작동한다. 따라서 packet이 없으면 해당 사건은 `UNCOMPUTED`이고, 정상 유량·정상 벤트·센서 경보는 재고 방출 packet으로 승격되지 않는다.
+
 직접 branch catalog를 사용할 때의 wrapper 형식은 다음과 같다.
 
 ```json

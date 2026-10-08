@@ -242,6 +242,8 @@ def test_request_ownership_and_normal_vent_frequency_are_explicit(fault):
 
 def test_equipment_inventory_depletion_operator_requires_resolved_release_and_stop_basis():
     d = request_data()
+    d['resolved_release']['event_kind'] = 'accidental_leak'
+    d['resolved_release']['failure_opening_diameter_m'] = .01
     d['source_operator'] = 'equipment_inventory_depletion'
     d['release_termination'] = {
         'basis': 'inventory_depletion',
@@ -428,6 +430,34 @@ def test_accidental_liquid_frequency_binds_using_provider_failure_diameter():
     assert bound.source_operator == 'equipment_liquid_release'
     assert bound.annual_frequency_per_year == pytest.approx(.00065)
     assert bound.frequency_event.release.hole_diameter_m == pytest.approx(.0025)
+
+
+def test_provider_liquid_inventory_depletion_binds_without_hole_substitution():
+    data = request_data()
+    data.update(
+        source_input=None,
+        resolved_release=None,
+        resolved_liquid_release=liquid_packet(),
+        source_operator='equipment_liquid_release',
+        available_mass_kg=5.,
+        release_termination={'basis':'inventory_depletion', 'time_s':.37,
+                             'provenance':'synthetic provider liquid inventory depletion'},
+    )
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    facility_value = facility_data('storage_tank')
+    facility_value['components'][0]['property_basis']['fluid'] = 'Hydrogen'
+    facility = Facility.model_validate_json(json.dumps(facility_value))
+    asset = FrequencyAsset(
+        id='storage-vessel', model_component_id='vent', profile='TNO_PRESSURE_VESSEL',
+        physical_scope_ids=('storage-shell',), nominal_diameter_m=.25,
+        vessel_external_impact_or_operating_error=False,
+        classification_basis='synthetic liquid provider inventory binding',
+    )
+    event = generate_events(facility, FrequencyPlan(id='liquid-inventory', assets=(asset,)))[0]
+    bound = bind_event(request, event)
+    assert bound.source_operator == 'equipment_liquid_release'
+    assert bound.frequency_event.release.mode == 'instantaneous_inventory'
+    assert bound.resolved_liquid_release.failure_opening_diameter_m == pytest.approx(.0025)
 
 
 def test_zero_flow_after_closure_does_not_erase_preceding_release():

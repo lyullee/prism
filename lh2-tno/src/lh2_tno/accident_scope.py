@@ -74,7 +74,7 @@ def _request_families(request: ConsequenceRequest | None) -> set[str]:
         families.add("vent_hole")
     if request.source_operator in {"inventory_liquid_jet", "equipment_inventory_depletion", "equipment_liquid_release"}:
         families.add("inventory_depletion")
-    if request.source_operator == "inventory_over_600s":
+    if request.source_operator in {"inventory_over_600s", "equipment_inventory_over_600s", "equipment_liquid_over_600s"}:
         families.add("inventory_over_600s")
     return families
 

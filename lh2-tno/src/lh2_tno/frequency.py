@@ -212,8 +212,9 @@ def bind_event(request, event: FrequencyEvent):
 
     A full-bore two-sided rupture requires two provider exits and one shared
     event frequency. Never approximate it with one short tank/nozzle history.
-    Instantaneous inventory is accepted only when the explicit inventory
-    liquid-jet operator is selected.
+    Inventory events are accepted only with an explicit inventory operator;
+    provider-resolved gas histories use the equipment inventory operators and
+    retain their provider-owned duration and mass ledger.
     """
     from .consequences import ConsequenceRequest
     if request.component_id != event.model_component_id:
@@ -245,11 +246,21 @@ def bind_event(request, event: FrequencyEvent):
         payload['frequency_event'] = event.model_dump(mode='json')
         return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
     if event.release.mode != 'hole':
-        if not (event.release.mode == 'instantaneous_inventory' and
-                request.source_operator == 'inventory_liquid_jet'):
-            if not (event.release.mode == 'inventory_over_600s' and
-                    request.source_operator == 'inventory_over_600s'):
-                raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
+        accepted_inventory_operator = (
+            event.release.mode == 'instantaneous_inventory'
+            and request.source_operator in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'}
+        ) or (
+            event.release.mode == 'inventory_over_600s'
+            and request.source_operator in {'inventory_over_600s', 'equipment_inventory_over_600s', 'equipment_liquid_over_600s'}
+        )
+        if not accepted_inventory_operator:
+            raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
+        if request.source_operator in {'equipment_inventory_depletion', 'equipment_inventory_over_600s'}:
+            if request.resolved_release is None or request.resolved_release.event_kind != 'accidental_leak':
+                raise ValueError('provider inventory binding requires an accidental-leak resolved release history')
+        if request.source_operator in {'equipment_liquid_release', 'equipment_liquid_over_600s'}:
+            if request.resolved_liquid_release is None or request.resolved_liquid_release.event_kind != 'accidental_leak':
+                raise ValueError('provider liquid inventory binding requires an accidental-leak resolved release history')
         if request.release_termination is None:
             raise ValueError('non-hole inventory binding requires explicit termination provenance')
         if event.release.mode == 'instantaneous_inventory' and request.release_termination.basis != 'inventory_depletion':
@@ -273,9 +284,9 @@ def bind_event(request, event: FrequencyEvent):
         diameter=request.resolved_liquid_release.failure_opening_diameter_m
     else:
         diameter = request.source_input['nozzle']['diameter_m']
-    if not math.isclose(diameter, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
+    if event.release.mode == 'hole' and not math.isclose(diameter, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
         raise ValueError('frequency leak size must equal the physical source opening')
-    if event.exposure_multiplier != 1:
+    if event.release.mode == 'hole' and event.exposure_multiplier != 1:
         raise ValueError('aggregated items/length need explicit location weights; cannot assign all frequency to one source point')
     payload = request.model_dump(mode='json')
     if request.annual_frequency_per_year is not None:

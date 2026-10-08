@@ -108,7 +108,7 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
-    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release', 'inventory_over_600s', 'equipment_two_sided_rupture', 'equipment_two_sided_rupture_endpoint', 'equipment_emergency_relief'] = 'integrated_transient'
+    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release', 'inventory_over_600s', 'equipment_inventory_over_600s', 'equipment_liquid_over_600s', 'equipment_two_sided_rupture', 'equipment_two_sided_rupture_endpoint', 'equipment_emergency_relief'] = 'integrated_transient'
     # ``declared`` requires the source model to cover the requested horizon.
     # ``model_natural`` uses the model's actual pressure-equalisation stop and
     # never extrapolates the final flow interval.
@@ -166,19 +166,47 @@ class ConsequenceRequest(Contract):
         elif self.source_operator == 'equipment_inventory_depletion':
             if release is None:
                 raise ValueError('equipment_inventory_depletion requires a resolved equipment release')
+            if release.event_kind != 'accidental_leak':
+                raise ValueError('equipment_inventory_depletion requires an accidental-leak resolved release')
             if self.source_duration_mode != 'declared':
                 raise ValueError('equipment_inventory_depletion uses its declared provider horizon')
             if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
                 raise ValueError('equipment_inventory_depletion requires inventory-depletion termination provenance')
+        elif self.source_operator == 'equipment_inventory_over_600s':
+            if release is None:
+                raise ValueError('equipment_inventory_over_600s requires a resolved equipment release')
+            if release.event_kind != 'accidental_leak':
+                raise ValueError('equipment_inventory_over_600s requires an accidental-leak resolved release')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('equipment_inventory_over_600s uses its declared provider horizon')
+            if self.release_termination is None or self.release_termination.basis != 'inventory_over_600s':
+                raise ValueError('equipment_inventory_over_600s requires inventory-over-600s termination provenance')
+            if not math.isclose(duration, 600.0, rel_tol=0, abs_tol=1e-9):
+                raise ValueError('equipment_inventory_over_600s requires exactly 600 s of provider history')
         elif self.source_operator == 'equipment_liquid_release':
             if liquid_release is None:
                 raise ValueError('equipment_liquid_release requires a provider-resolved liquid/two-phase release')
+            if liquid_release.event_kind != 'accidental_leak':
+                raise ValueError('equipment_liquid_release requires an accidental-leak resolved release')
             if release is not None or release_set is not None or self.source_input is not None:
                 raise ValueError('equipment_liquid_release requires one resolved liquid release')
             if self.source_duration_mode != 'declared':
                 raise ValueError('equipment_liquid_release uses the provider-declared horizon')
             if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
                 raise ValueError('equipment_liquid_release requires inventory-depletion termination provenance')
+            if self.available_mass_kg != liquid_release.available_mass_kg:
+                raise ValueError('liquid request and provider inventories disagree')
+        elif self.source_operator == 'equipment_liquid_over_600s':
+            if liquid_release is None:
+                raise ValueError('equipment_liquid_over_600s requires a resolved liquid/two-phase release')
+            if liquid_release.event_kind != 'accidental_leak':
+                raise ValueError('equipment_liquid_over_600s requires an accidental-leak resolved release')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('equipment_liquid_over_600s uses its declared provider horizon')
+            if self.release_termination is None or self.release_termination.basis != 'inventory_over_600s':
+                raise ValueError('equipment_liquid_over_600s requires inventory-over-600s termination provenance')
+            if not math.isclose(duration, 600.0, rel_tol=0, abs_tol=1e-9):
+                raise ValueError('equipment_liquid_over_600s requires exactly 600 s of provider history')
             if self.available_mass_kg != liquid_release.available_mass_kg:
                 raise ValueError('liquid request and provider inventories disagree')
         elif self.source_operator == 'equipment_emergency_relief':
@@ -291,11 +319,11 @@ class ConsequenceRequest(Contract):
             if event.model_component_id != self.component_id or event.exposure_multiplier != 1:
                 raise ValueError('frequency event requires a matching single-item release')
             if event.release.mode == 'instantaneous_inventory':
-                if self.source_operator != 'inventory_liquid_jet' or self.release_termination.basis != 'inventory_depletion':
-                    raise ValueError('instantaneous inventory event requires the inventory liquid-jet operator')
+                if self.source_operator not in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'} or self.release_termination.basis != 'inventory_depletion':
+                    raise ValueError('instantaneous inventory event requires an inventory-depletion operator')
             elif event.release.mode == 'inventory_over_600s':
-                if self.source_operator != 'inventory_over_600s' or self.release_termination.basis != 'inventory_over_600s':
-                    raise ValueError('600 s inventory event requires the inventory_over_600s operator')
+                if self.source_operator not in {'inventory_over_600s', 'equipment_inventory_over_600s', 'equipment_liquid_over_600s'} or self.release_termination.basis != 'inventory_over_600s':
+                    raise ValueError('600 s inventory event requires an inventory-over-600s operator')
             elif event.release.mode == 'two_sided_rupture':
                 if self.source_operator != 'equipment_two_sided_rupture' or release_set is None or self.release_termination.basis != 'two_sided_rupture':
                     raise ValueError('two-sided rupture event requires the equipment_two_sided_rupture operator')

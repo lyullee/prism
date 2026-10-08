@@ -45,6 +45,32 @@ def template():
     return ConsequenceRequest.model_validate_json(json.dumps(data))
 
 
+def equipment_inventory_release(duration_s=0.2, mass_flow_kg_s=1.0):
+    cumulative_mass = duration_s * mass_flow_kg_s
+    return ResolvedGasRelease(
+        component_id='storage', port_id='storage.out', event_id=f'provider-inventory-{duration_s}',
+        event_kind='accidental_leak', upstream_service='LH2',
+        upstream_service_provenance='synthetic provider inventory history',
+        enthalpy_convention='static_exit_enthalpy',
+        property_basis={'fluid':'Hydrogen', 'energy_reference':'CoolProp-HEOS:Hydrogen:native'},
+        provider_source_digest='a'*64, provider_result_digest='b'*64,
+        provider_boundary_reference='synthetic provider inventory boundary', input_origin='synthetic',
+        position_enu_m=(0.0, 0.0, 1.0), direction_enu=(1.0, 0.0, 0.0),
+        ambient_pressure_pa_abs=101325.0, ambient_temperature_k=288.15,
+        duration_s=duration_s, available_mass_kg=1.0,
+        cumulative_mass_out_kg=cumulative_mass,
+        cumulative_static_enthalpy_out_j=cumulative_mass*1000.0,
+        steps=(ResolvedGasStep(
+            time_s=0.0, mass_flow_kg_s=mass_flow_kg_s, pressure_pa_abs=101325.0,
+            specific_enthalpy_j_kg=1000.0, temperature_k=288.15, density_kg_m3=1.0,
+            effective_area_m2=1.0, velocity_m_s=mass_flow_kg_s,
+            area_provenance='synthetic provider inventory area', velocity_origin='provider_resolved',
+        ),),
+        termination_provenance='synthetic provider inventory depletion',
+        failure_opening_diameter_m=0.01,
+    )
+
+
 def test_pressure_vessel_preserves_loc_partition_and_book_dimensions():
     rows=events()
     assert [x.annual_frequency_per_year for x in rows]==[5e-7,5e-7,1e-5]
@@ -225,6 +251,46 @@ def test_600s_inventory_event_rejects_a_short_declared_history():
         'provenance':'short diagnostic horizon; not a complete 600 s history'}
     with pytest.raises(ValueError,match='exactly 600 s'):
         ConsequenceRequest.model_validate_json(json.dumps(data))
+
+
+def test_provider_inventory_depletion_binds_without_replacing_it_with_a_hole():
+    data = template().model_dump(mode='json')
+    release = equipment_inventory_release()
+    data.update(
+        source_input=None, resolved_release=release.model_dump(mode='json'),
+        resolved_release_set=None, resolved_liquid_release=None,
+        source_operator='equipment_inventory_depletion', available_mass_kg=1.0,
+        source_position_enu_m=[0.0, 0.0, 1.0],
+        release_termination={'basis':'inventory_depletion','time_s':0.2,
+                             'provenance':'synthetic provider inventory depletion'},
+        annual_frequency_per_year=None, annual_frequency_provenance=None,
+        frequency_event=None, initiation_intensity_per_s=None,
+    )
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    bound = bind_event(request, events()[0])
+    assert bound.source_operator == 'equipment_inventory_depletion'
+    assert bound.frequency_event.release.mode == 'instantaneous_inventory'
+    assert bound.resolved_release.failure_opening_diameter_m == 0.01
+
+
+def test_provider_600s_inventory_history_binds_with_explicit_long_horizon():
+    data = template().model_dump(mode='json')
+    release = equipment_inventory_release(duration_s=600.0, mass_flow_kg_s=0.001)
+    data.update(
+        source_input=None, resolved_release=release.model_dump(mode='json'),
+        resolved_release_set=None, resolved_liquid_release=None,
+        source_operator='equipment_inventory_over_600s', available_mass_kg=1.0,
+        source_position_enu_m=[0.0, 0.0, 1.0], evaluation_times_s=[0.0, 1.0, 2.0, 3.0, 600.0],
+        release_termination={'basis':'inventory_over_600s','time_s':600.0,
+                             'provenance':'synthetic provider complete 600 s history'},
+        annual_frequency_per_year=None, annual_frequency_provenance=None,
+        frequency_event=None, initiation_intensity_per_s=None,
+    )
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    bound = bind_event(request, events()[1])
+    assert bound.source_operator == 'equipment_inventory_over_600s'
+    assert bound.frequency_event.release.mode == 'inventory_over_600s'
+    assert bound.release_termination.time_s == 600.0
 
 
 def test_binding_cannot_overwrite_an_existing_rate_or_ignore_wrong_hole():
