@@ -62,5 +62,8 @@
   "layered_tank_boundary_audit_status": "AUDITED_NOT_PROMOTED_NON_ATMOSPHERIC_PROVIDER_BOUNDARY",
   "layered_tank_boundary_audit_record": "results/20261009/layered_tank_boundary/layered_tank_boundary_audit.json",
   "layered_tank_boundary_audit_provider_export": "results/20261009/layered_tank_boundary/provider_export.json",
-  "layered_tank_boundary_audit_ready_for_resolved_liquid_release": false
+  "layered_tank_boundary_audit_ready_for_resolved_liquid_release": false,
+  "development_archive_step": "PRISM-IJHE-step22-source.zip",
+  "development_archive_git_commit": "6460a5c53598bd3bb7378a3a815ff842ab7cad2e",
+  "development_archive_hash_errors": 0
 }
