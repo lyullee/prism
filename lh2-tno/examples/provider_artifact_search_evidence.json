@@ -2,6 +2,11 @@
   "schema": "prism.provider_artifact_search_evidence.v1",
   "snapshot_date": "2026-10-09",
   "purpose": "Search workspace LH2 outputs for provider-owned accident release packets before leaving events uncomputed.",
+  "reproducible_audit": {
+    "module": "src/lh2_tno/legacy_artifact_audit.py",
+    "script": "scripts/audit_legacy_provider_artifacts.py",
+    "policy": "The audit never adds provider_export_schema or edits a legacy artifact."
+  },
   "searches": [
     {
       "label": "current external digital-twin provider",
