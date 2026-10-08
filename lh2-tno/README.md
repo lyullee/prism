@@ -377,6 +377,18 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 
 이 경로는 탱크 상태에서 피해까지 연결되는 종료 계약을 검증한 것입니다. 초기 상태·탱크 크기·밸브·기체 offset은 합성값이며, 액체/2상 flash, high-Mach jet, actuator 신뢰도, 실제 설비 calibration과 독립 물리검증은 포함하지 않습니다. 자세한 경계와 산출물은 [재고 소진 연결 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md)을 봅니다.
 
+### 수직 벤트 handoff 진단
+
+수직 포트 자체를 downstream 모델이 자동으로 수평으로 바꾸지 않습니다. 설비 provider가 수직 출구와 함께 수평 handoff 위치·방향·속도·밀도·온도·수소 질량분율·단면 크기를 `VerticalGasHandoff`로 제공할 때만 PRISM이 그 단면부터 SLABx-LH2/SLABx 경로를 시작합니다. handoff가 없는 수직 출구, 수직·수평이 섞인 방향, 음의 downwind 성분은 오류 또는 `UNCOMPUTED`로 남습니다.
+
+현재 synthetic handoff 진단은 다음과 같이 실행합니다.
+
+```powershell
+.venv\Scripts\python.exe lh2-tno/scripts/validate_vertical_vent.py
+```
+
+`AREA_100%` 경로와 두 기상 조건의 2건을 실행하고, 나머지 네 area-bin은 provider handoff가 없다는 이유로 명시적 `UNCOMPUTED`로 남깁니다. 결과는 `results/20261009/vertical_vent/`의 `campaign_result.json`, `resolved_release.json`, `verification.json`에 저장합니다. 이 경로는 고정 유량 synthetic adapter이므로 실제 수직 제트 부력·장애물·교차 plume와 variable-state handoff를 검증한 것이 아닙니다.
+
 ### 센서 갱신
 
 ```text
@@ -464,7 +476,7 @@ v0.5 모드 검증의 설비 경계는 v0.4 기록 재생이며 최신 live prov
 
 1. 전체 시설 LH2 사건/source/종료·위치 배분, 점화·차단·기상과 IR/F-N 결합.
 2. PH nozzle/flash, 액체·2상, provider handoff 없는 수직·팽창/high-Mach 출구 확장과 handoff 물리검증.
-3. 양수 재고 종료 경계를 실제 탱크·배관·밸브·펌프 조건과 액체/2상 flash, actuator 지연·실패 분기로 확장하고 전량/양단 파열·수직 vent를 별도 사건으로 연결.
+3. 양수 재고 종료 경계를 실제 탱크·배관·밸브·펌프 조건과 액체/2상 flash, actuator 지연·실패 분기로 확장하고 전량 방출·양단 교차상호작용·실제 수직 jet을 별도 사건으로 검증.
 4. 방출·풀·확산·화재/폭발 독립 검증과 관측 연산자.
 5. 프로파일 적용 민감도·상관을 반영한 전체 위험 불확실성.
 6. 신규 계산 가속, 검증된 surrogate/사전 계산, 비동기 요청·유효시간 정책.
