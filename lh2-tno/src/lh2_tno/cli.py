@@ -18,11 +18,12 @@ def main(argv=None):
     p.add_argument('--event-id',help='Bind exactly one generated event to the matching consequence request')
     p.add_argument('--risk-campaign',type=Path,help='Declared LOC/weather/barrier/population campaign JSON')
     p.add_argument('--frequency-sensitivity',type=Path,help='Explicit asset multiplier scenarios for a risk campaign')
+    p.add_argument('--frequency-uncertainty',type=Path,help='Published literature-frequency quantile scenarios for a risk campaign')
     p.add_argument('--output',type=Path,help='Save complete result JSON')
     args=p.parse_args(argv)
     facility=Facility.model_validate_json(args.facility.read_text(encoding="utf-8"))
-    if args.frequency_sensitivity and not args.risk_campaign:
-        p.error('--frequency-sensitivity requires --risk-campaign')
+    if (args.frequency_sensitivity or args.frequency_uncertainty) and not args.risk_campaign:
+        p.error('--frequency-sensitivity/--frequency-uncertainty requires --risk-campaign')
     if args.risk_campaign:
         if args.consequences or args.frequency_plan or args.event_id:
             p.error('--risk-campaign owns frequency plan and cases; cannot mix single-event options')
@@ -31,16 +32,26 @@ def main(argv=None):
         from .campaign import RiskCampaign
         campaign=RiskCampaign.model_validate_json(args.risk_campaign.read_text(encoding='utf-8'))
         sensitivities=None
+        uncertainties=None
         if args.frequency_sensitivity:
             from .sensitivity import FrequencySensitivity, frequency_sensitivity
             rows=json.loads(args.frequency_sensitivity.read_text(encoding='utf-8'))
             if not isinstance(rows,list):
                 p.error('--frequency-sensitivity must contain an array of explicit scenarios')
             sensitivities=tuple(FrequencySensitivity.model_validate_json(json.dumps(r,allow_nan=False)) for r in rows)
+        if args.frequency_uncertainty:
+            from .uncertainty import LiteratureFrequencyScenario
+            rows=json.loads(args.frequency_uncertainty.read_text(encoding='utf-8'))
+            if not isinstance(rows,list):
+                p.error('--frequency-uncertainty must contain an array of explicit scenarios')
+            uncertainties=tuple(LiteratureFrequencyScenario.model_validate_json(json.dumps(r,allow_nan=False)) for r in rows)
         backend=IsolatedBackend(BackendConfig.model_validate_json(args.backend.read_text(encoding='utf-8')))
         result=ResearchPipeline(facility,backend).facility_risk(campaign)
         if sensitivities is not None:
             result['frequency_sensitivity']=frequency_sensitivity(result,sensitivities)
+        if uncertainties is not None:
+            from .uncertainty import literature_frequency_uncertainty
+            result['literature_frequency_uncertainty']=literature_frequency_uncertainty(result,uncertainties)
         result['execution_mode']='lh2'
         encoded=json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)
         if args.output:

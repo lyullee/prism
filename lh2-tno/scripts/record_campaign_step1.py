@@ -20,11 +20,13 @@ stress=json.loads((OUT/'stress_probe_result.json').read_text(encoding='utf-8'))
 failed=[x for x in stress['cases'] if x['status']=='FAILED']
 assert len(failed)==3
 record={'date_kst':'2026-10-09','goal_status':'active','baseline_public_release':'0.6.0',
-    'development_stage':'post-0.6.0 campaign/sensitivity step1; not published',
-    'portable_tests_passed':189,'fresh_cli_physics_cases_passed':4,
+    'development_stage':'post-0.6.0 campaign/sensitivity/natural-termination/literature-uncertainty development; not published',
+    'portable_tests_passed':191,'fresh_cli_physics_cases_passed':4,
     'g1_g2_uncomputed_weather_cases':4,'native_tno_ir_expected_death_fn_connected':True,
     'steady_upstream_synthetic_durations_s':[.2,.4],'real_isolation_or_inventory_feedback_qualified':False,
     'frequency_sensitivity_baseline_and_linear_scaling_verified':True,
+    'literature_frequency_quantile_uncertainty_implemented':True,
+    'literature_frequency_uncertainty_statistical_interval':False,
     'statistical_frequency_uncertainty_complete':False,'total_facility_risk_withheld':True,
     'cli_campaign_digest':r['campaign_digest'],'cli_timing':r['timing'],
     'native_aggregation_provenance':r['aggregation_provenance'],
@@ -36,8 +38,8 @@ record={'date_kst':'2026-10-09','goal_status':'active','baseline_public_release'
 (OUT/'frequency_sensitivity.json').write_text(json.dumps(sens,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 p=ROOT/'CURRENT_STATUS.json'
 status=json.loads(p.read_text(encoding='utf-8'))
-status.update({'development_date_kst':'2026-10-09','development_since_public_release':'post-0.6.0 campaign/sensitivity step1; unpublished',
-    'unit_contract_conservation_tests_passed':189,'ijhe_completion_goal_status':'active',
+status.update({'development_date_kst':'2026-10-09','development_since_public_release':'post-0.6.0 campaign/sensitivity/natural-termination/literature-uncertainty development; unpublished',
+    'unit_contract_conservation_tests_passed':191,'ijhe_completion_goal_status':'active',
     'ijhe_completion_goal_record':'docs/PRISM_IJHE_완성목표_20261009.md',
     'multi_event_weather_barrier_campaign_implemented':True,'legacy_tno_ir_fn_aggregator_connected_to_lh2_campaign':True,
     'campaign_actual_fresh_physics_cases_passed':4,'campaign_actual_scope':'one tank-hole; two aligned wind speeds; two steady upstream synthetic durations',

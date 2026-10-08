@@ -1,0 +1,10 @@
+[
+  {
+    "id": "published-baseline",
+    "asset_quantiles": {
+      "shell": "published"
+    },
+    "provenance": "diagnostic baseline: use generated event published frequencies; no p05/p95 requested",
+    "correlation_assumption": "within_asset_shared_quantile"
+  }
+]
