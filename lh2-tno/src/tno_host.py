@@ -1,4 +1,4 @@
-"""Unified, optional-mode TNO launcher. Standard mode is stdlib-only.
+"""PRISM optional-mode launcher. Standard mode is stdlib-only.
 
 The legacy engine stays external and hash-pinned. The LH2 package is imported
 only when mode=lh2 is explicitly selected; neither mode falls back to the other.
@@ -78,7 +78,7 @@ def run_standard(config_path,arguments):
         data=json.loads(options.out.read_text(encoding='utf-8'))
         if not isinstance(data,dict):raise ModeError('legacy QRA result must be a JSON object')
         data['execution_mode']='standard'
-        data['mode_dispatch']={'entrypoint':'tno','engine':'legacy_tno','engine_source_sha256':digest,
+        data['mode_dispatch']={'entrypoint':'prism','engine':'legacy_tno','engine_source_sha256':digest,
                                'lh2_extension_selected':False,'automatic_fallback':False}
         options.out.write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8')
     return result.returncode
@@ -86,7 +86,7 @@ def run_standard(config_path,arguments):
 
 def main(argv=None):
     argv=list(sys.argv[1:] if argv is None else argv)
-    parser=argparse.ArgumentParser(prog='tno',add_help=False)
+    parser=argparse.ArgumentParser(prog='prism',add_help=False)
     parser.add_argument('--mode',choices=('standard','lh2'),default=None)
     parser.add_argument('--config',type=Path)
     parser.add_argument('--backend',type=Path)
@@ -103,11 +103,11 @@ def main(argv=None):
                 'automatic_fallback':False,'complete_facility_qra_claim':False},ensure_ascii=False,indent=2))
             return 0
         if not argv or (mode=='standard' and backend is None and remaining in (['--help'],['-h'],[])):
-            print('TNO optional-mode launcher\n\n'
-                  '  tno --mode standard --backend backend.json <original qra arguments>\n'
-                  '  tno --mode lh2 <facility.json> [--backend backend.json] [LH2 arguments]\n'
-                  '  tno --config mode.json <mode-specific arguments>\n'
-                  '  tno --describe-modes\n\n'
+            print('PRISM: Process Risk Integration and Scenario Modeling\n\n'
+                  '  prism --mode standard --backend backend.json <original qra arguments>\n'
+                  '  prism --mode lh2 <facility.json> [--backend backend.json] [LH2 arguments]\n'
+                  '  prism --config mode.json <mode-specific arguments>\n'
+                  '  prism --describe-modes\n\n'
                   'Default: standard. LH2 is opt-in; there is no automatic fallback.\n'
                   'Modes use their own validated inputs and retain their current model limitations.')
             return 0
@@ -115,12 +115,12 @@ def main(argv=None):
         try:
             extension=importlib.import_module('lh2_tno.cli')
         except ImportError as error:
-            raise ModeError('LH2 mode requires the optional lh2-tno package and its dependencies; install it in this interpreter') from error
+            raise ModeError('LH2 mode requires the prism-risk distribution (lh2_tno import) and its dependencies; install it in this interpreter') from error
         if backend is not None:remaining.extend(['--backend',str(backend)])
         value=extension.main(remaining)
         return 0 if value is None else value
     except (ModeError,OSError,ValueError,KeyError,TypeError,RuntimeError) as error:
-        print(f'tno: {error}',file=sys.stderr)
+        print(f'prism: {error}',file=sys.stderr)
         return 2
 
 

@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lh2-tno"
-version = "0.5.0"
-description = "Generic LH2 facility contracts and auditable research model orchestration"
+name = "prism-risk"
+version = "0.6.0"
+description = "PRISM: Process Risk Integration and Scenario Modeling with optional LH2 analysis"
 requires-python = ">=3.12"
 dependencies = ["pydantic>=2.10,<3"]
 
@@ -13,6 +13,7 @@ dependencies = ["pydantic>=2.10,<3"]
 test = ["pytest>=8", "numpy>=1.26,<3"]
 
 [project.scripts]
+prism = "tno_host:main"
 lh2-tno = "lh2_tno.cli:main"
 tno = "tno_host:main"
 

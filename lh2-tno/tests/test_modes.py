@@ -52,7 +52,7 @@ def test_missing_lh2_extension_does_not_run_standard(monkeypatch,capsys):
     monkeypatch.setattr(tno_host.importlib,'import_module',absent)
     monkeypatch.setattr(tno_host.subprocess,'run',lambda *a,**k:pytest.fail('no silent fallback'))
     assert tno_host.main(['--mode','lh2','site.json'])==2
-    assert 'optional lh2-tno package' in capsys.readouterr().err
+    assert 'prism-risk distribution' in capsys.readouterr().err
 
 
 def test_invalid_mode_is_not_inferred_from_filename():

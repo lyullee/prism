@@ -10,7 +10,7 @@ from .frequency import FrequencyPlan, generate_events, bind_event
 
 
 def main(argv=None):
-    p=argparse.ArgumentParser(description="LH2-TNO generic facility validation")
+    p=argparse.ArgumentParser(description="PRISM LH2 mode: generic facility validation and risk-model orchestration")
     p.add_argument("facility",type=Path)
     p.add_argument('--backend',type=Path,help='Pinned research-model backend configuration')
     p.add_argument('--consequences',type=Path,help='Source-to-harm request JSON')

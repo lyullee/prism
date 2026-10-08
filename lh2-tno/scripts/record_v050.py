@@ -5,6 +5,8 @@ import hashlib
 import shutil
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
+if json.loads((ROOT/'CURRENT_STATUS.json').read_text(encoding='utf-8'))['package_version'] != '0.5.0':
+    raise SystemExit('Historical v0.5.0 recorder cannot overwrite a newer release.')
 OUT=ROOT/'results/20261008/mode_v050'
 verification=json.loads((OUT/'verification.json').read_text(encoding='utf-8'))
 suites=ET.parse(OUT/'unit_tests.xml').getroot().findall('.//testsuite')

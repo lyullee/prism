@@ -1,75 +1,22 @@
-# LH2-TNO
+# PRISM — Python 패키지
 
-## v0.5.0 옵셔널 TNO LH2 모드
+**Process Risk Integration and Scenario Modeling / v0.6.0**
 
-공통 실행기 `tno`/`python tno.py`에서 기본 `standard` 또는 명시한 `--mode lh2`를 선택한다. standard는 원래 TNO의 QRA를 실행하고 LH2는 새 연동 경로를 선택한다. 내부 코드는 분리하며 자동 fallback은 없다. 154개 검사와 두 모드의 실제 실행을 확인했다. [모드 사용·검증 기록](docs/TNO_LH2_v050_옵셔널모드_개발기록_20261008.md). 모드 선택이 전체 LH2 시설 QRA 완료를 뜻하지 않는다.
-
-## v0.4.0 설비 경계 연결
-
-설비 모델이 이미 계산한 유량과 PH 기체 출구를 받아 다시 source를 풀지 않고 최종 피해까지 연결한다. 실제 native VentStack/SteadyNetwork 사례를 실행했고 **136개 검사 통과**. 현재는 수평·대기압·Mach≤0.3 기체와 명시 시계로 제한하며 전체 시설 동적 피드백은 미완료다. [개발 기록과 적용 범위](docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md).
-
-## v0.3.0 빈도 모듈
-
-현장 사고빈도 자료가 없다는 사용자 확인에 따라, 현재 기본 경로는 문헌 빈도와 불확실성·민감도 평가다. 자료 수집은 개발/첫 논문의 필수 조건이 아니며 현장 빈도 업데이트는 선택적 후속 확장이다.
-
-17 설비 프로파일·55 LOC/누출구간 행, 배관 m 단위/부품 개수, 물리 범위 중복 검사, LH2 문헌의 구간별 불확실성, 요구시 실패와 별도 확인 사건·관찰노출 업데이트 계약을 추가했다. TNO 10 mm 탱크 구멍의 자동 빈도→실제 피해 경로를 실행했으며 **100개 검사 통과**. 0.2초 합성 연결 시험이고 모든 LOC/시설 위험/현장 검증 완료를 뜻하지 않는다. [개발 기록·사용 방법·한계](docs/TNO_LH2_v030_빈도모듈_개발기록_20261008.md)를 먼저 확인한다.
-
-기존 TNO 엔진에는 문헌 빈도 자동 조회·부품 수량 반영·사건 생성·기상 적분 IR·사회적 위험 F-N이 이미 있다. v0.3.0의 새 빈도 생성기는 TNO LOC와 검토된 LH2 문헌 snapshot에서 사건/빈도를 만들고 단일 탱크 구멍 사건을 `consequence_chain`에 연결한다. 기존 엔진의 전체 사건생성기·점화/차단·기상 적분을 그대로 호출하는 결합은 아직 미완료다. TNO Chapter 3 전체 LOC/빈도 기본선의 미통합 문제와 함께 [현재 구축 기능 66개 상세 목록](docs/TNO_위험성평가_구축기능_상세목록_20261008.md)에 명시했다.
-
-별도 **액화수소검사지원센터 모델링** 프로젝트의 설비 모델과 결합하는 구조·현재 차이는 [설비 모델 결합 검토](docs/별도설비모델과_액화수소유닛_결합검토_20261008.md)를 참고한다. 현재 전체 설비 디지털트윈의 동적 누출 피드백을 결합한 상태는 아니다. v0.4.0은 실제 네트워크의 resolved atmospheric gas 출구를 최종 피해에 연결했다. 전단 LH2 P,h source·액체/2상·수직 벤트·전체 feedback은 추가 구현이 필요하다.
-
-일반 액화수소시설의 입력과 기존 연구 모델을 연결하는 Python 연구 패키지다. v0.2.0에서는 **방출 → 액적/지면 도달 → 풀 증발 → 극저온 제트 전이 → SLABx 분산 → 점화 → 화재/폭발 → 사람의 피해 → 조건부 위험**을 한 요청으로 실행한다. 옥외시설의 진단 계산 경로이며, 현장 검증과 매초 새로운 물리 계산의 완료 판정은 아니다. 상세 구현 범위와 실제 결과는 [전체 연결 완료 기록](docs/방출부터_최종피해_연결완료_20261008.md)에 정리했다.
-
-## 구현한 기능
-
-- 시설·부품·포트·연결·수용점 JSON. 중복 연결, 상/방향 불일치, 물성·엔탈피 기준 혼용을 거절한다.
-- 가스·부유액적·지면 도달 액체의 방출 장부. 시간별 분배, 누적 방출질량과 재고 상한을 검사한다.
-- 외부에서 명시한 상류 압력·온도·건도 이력을 구간별 source 계산에 전달한다. 상류 상태를 생성하는 탱크 동역학의 검증과 분리한다.
-- 압력 기준·센서 위치·단위·품질·자료 출처·시간순서를 명시하는 트랜잭션형 텔레메트리 정규화.
-- 최신 SLABx-LH2의 `integrated_lh2_source`, lh2dt의 `VentStack`, DynamicLH2PoolX 및 기존 TNO 근거 gate/피해 변환을 별도 Python 프로세스로 실행한다.
-- 모델 소스 SHA-256과 의존성 버전을 고정하고 실제 import 경로, 실패·timeout, 계산 중 소스 변경을 검사한다.
-- 연간 IR율, 미발생 사건의 조건부 단기 피해확률, 이미 관측된 누출의 조건부 피해를 구분한다. 빈도 결측이면 전체 연간 위험을 반환하지 않는다.
-- 실제 화재 방사열을 계산하고 시간 적분한 뒤 TNO 열피해 변환까지 연결한다. 복사율 범위는 명시 입력이며, 레거시의 설명되지 않은 22.7 보정계수는 사용하지 않는다.
-- 방출 계산의 지면 도달률과 액적 비행시간을 DynamicLH2PoolX에 전달한다. 풀 유입 종료 후에도 잔류 증발을 분산·피해 계산에 전달한다. 유입 footprint는 별도 설계/실측/민감도 입력이다.
-- 시간별 수소 구름 질량을 3차원 격자에 보존하고, 4–75 mol% 영역의 수소 질량으로 TNO 폭발 피해 구역을 계산한다. 기존 면적×고정 높이의 질량 대용값을 사용하지 않는다.
-- `ConsequenceService`가 정규화한 탱크 압력·온도를 전체 계산으로 전달하고 같은 요청의 결과를 조회한다. 압력 변화는 새 계산을 요구하며, 누출 크기·빈도를 센서로 역추정하는 기능은 포함하지 않는다.
-
-## 검증 실행
+상세 시스템 설명·설치·실행·입력·빈도·설비/센서 연결·결과 해석은 [저장소 README](../README.md)에 있습니다.
 
 ```powershell
-# 이 패키지 폴더에서 실행
-python -m pytest -q
-python -B -X utf8 scripts/validate_local.py
-python -B -X utf8 scripts/validate_transient_source.py
-python -B -X utf8 scripts/validate_chain.py
-python -B -X utf8 scripts/validate_chain_edgecases.py
+# 저장소 루트에서 실행
+python -m pip install -e "./lh2-tno[test]"
+python prism.py --describe-modes
+python prism.py --mode lh2 lh2-tno/examples/lh2_frequency_facility.json --frequency-plan lh2-tno/examples/lh2_frequency_plan.json --output events.json
 ```
 
-`validate_local.py`는 현재 작업 PC의 외부 연구 폴더와 해시를 설정하고 `results/20261008`에 요청·결과·출처를 기록한다. 다른 PC에서는 이 스크립트의 명시 경로와 interpreter를 변경한다. 라이브러리 자체에는 사용자 홈·센터 태그가 하드코딩돼 있지 않다. 외부 모델의 코드는 복사하거나 수정하지 않는다.
+배포 이름은 `prism-risk`, 명령은 `prism`입니다. 폴더 `lh2-tno`, import `lh2_tno`, host `tno_host`와 과거 명령은 호환성을 위해 유지합니다.
+기본 `standard`는 외부 기존 QRA, 선택형 `lh2`는 상세 액화수소 연동입니다. 실패 시 자동 모드 전환은 없습니다.
 
-`examples`에는 저장기지·충전시설·이송시설의 합성 구성 3개가 있다. 시설 스키마의 재사용과 저장/재열기 검증용이며 3개 시설의 물리 계산·현장 검증을 뜻하지 않는다. 동적 방출은 별도의 0.2 m³ 부품 예제에서 실행한다.
+방출부터 최종 피해까지 진단 실행과 문헌 빈도 생성은 구현했습니다. 전체 LH2 시설 IR/F-N, 모든 LOC 자동 결합, 전체 설비 동적 피드백과 신규 계산 1 Hz는 미완료/미검증입니다.
+154개 portable 검사와 과거 실제 모델 연결 기록은 독립 물리/현장 검증을 뜻하지 않습니다.
+현장 사고빈도 자료 없이 문헌 기본선과 불확실성·민감도로 개발합니다.
 
-## 결과 해석
-
-현재 방출 adapter는 최신 연구의 상류 source 모델을 호출한다. PSEP에 동결된 7개 시험의 최종 농도장 경로를 재현하는 adapter가 아니다. 해당 방출 모델의 에너지 잔차는 증발잠열 요구량의 장부 검사이며 전체 탱크–노즐–구름의 에너지 폐합 증명이 아니다.
-
-0.2 m³ 합성 부품의 1초 내부 과도 요청에서 HEM/HNEM 모두 1개 시간 노드만 반환했다. 모델 종료 상태와 이후 무방출 경계가 완전하게 전달되지 않아 adapter는 시계열을 외삽하지 않고 보류했다. 이는 종료 원인을 확정한 판정이 아니다. `prescribed_source_history()`는 별도 명시 상류 상태를 사용하며 이를 탱크 동역학 해결로 표시하지 않는다.
-
-초기 `validate_local.py`의 풀 예제는 명시된 합성 유입을 사용한다. 새 `validate_chain.py`에서는 실제 source의 지면 도달량과 비행시간을 풀에 자동 연결한다. footprint 반경까지 자동 추정하는 것은 아니며, 명시한 경계로 받는다. 기체 사례에서 지면 도달량이 0이면 풀을 생성하지 않는다.
-
-`ResearchPipeline.source()`는 시설의 물성·체적을 대조하고 실제 source 결과를 TNO evidence registry에 전달한다. 현재 경로는 물리 적용범위 승인이 없어 diagnostic 상태를 유지한다. 계산 숫자는 진단 장부에 남지만 승인된 관리 결과 interval은 `None`, 상태는 `WITHHOLD_OR_ESCALATE`다. 레거시 TNO의 기존 `claim_boundary`를 완료 상태로 변경하지 않았다.
-
-새 전체 경로는 조건부 인명 피해를 실제 물리 모델 출력에서 계산한다. 점화 확률은 출처를 명시한 입력으로 받는다. 빈도는 v0.3.0의 검토된 catalogue 사건을 연결하거나 별도 명시 입력으로 받는다. 센서 경보에서 자동 학습한 값이 아니다. 빈도 결측을 0으로 바꾸지 않는다. 연간 값은 한 initiating event의 현재 기상 조건 기여이며 전체 기상 적분 연간 IR과 구분한다. 독립 검증은 [IJHE 연구 프로토콜](docs/IJHE_연구프로토콜.md)에 정의했다.
-
-## 전체 계산 실행
-
-```powershell
-$env:PYTHONPATH = "src"
-python -m lh2_tno.cli results/20261008/full_chain/facility.json --backend results/20261008/full_chain/backend_config.json --consequences results/20261008/full_chain/rainout_pool_request.json --output results/20261008/full_chain/user_run.json
-```
-
-Python API는 `ResearchPipeline.consequences(ConsequenceRequest)`이며, 디지털트윈용 진입점은 `ConsequenceService.update_from_telemetry(...)`다. 실제 입력/결과·센서 갱신 예제는 `results/20261008/full_chain`에 있다.
-
-## 후속 물리 고도화
-
-현재 가스/풀 분기, 근거리 전이, SLAB 분산, 복사/폭발, 인명 피해와 조건부 위험의 실행 연결은 구현됐다. 후속 항목은 액적 증발 위치·시간 및 수직 운동량 보존, 검증된 공간 관측 연산자, 복사율·점화 확률 근거, 실험/현장 검증, 기상 적분 연간 위험과 신규 계산 가속이다. 실내·수직 전용 노즐·DDT/폭굉은 현재 전체 경로에서 지원하지 않는다. 각 단계의 근거가 확보될 때 진단 상태를 승격한다.
+[현재 상태](CURRENT_STATUS.json) / [v0.6.0 기록](docs/PRISM_v060_명칭과사용안내_20261008.md) / [IJHE 프로토콜](docs/IJHE_연구프로토콜.md).
+이전 TNO-LH2 명칭의 v0.3/0.4/0.5 문서는 당시 검증 이력을 보존한 것입니다.
