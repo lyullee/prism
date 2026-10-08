@@ -124,6 +124,125 @@ def run(request):
                 'state_owner':'equipment_twin','discharge_owner':'equipment_twin',
                 'static_enthalpy_transport_only':True},
                 'limitation':'Native steady VentStack/SteadyNetwork PH export. Terminal area is declared stack bore; velocity derived by continuity. Total kinetic-energy closure and transient feedback are not qualified.'}
+    if operation=="equipment_dynamic_isolation":
+        # The provider owns the transient tank, valve command, network flow,
+        # and mass/energy ledger.  PRISM receives interval-start gas-boundary
+        # rows; it does not re-solve the tank or infer a valve response.
+        props=module('lh2dt.properties',roots['lh2dt'])
+        geometrymod=module('lh2dt.geometry',roots['lh2dt'])
+        tankmod=module('lh2dt.layered_tank',roots['lh2dt'])
+        networkmod=module('lh2dt.network',roots['lh2dt'])
+        valvemod=module('lh2dt.valve',roots['lh2dt'])
+        layered_network=module('lh2dt.layered_network',roots['lh2dt'])
+        fluid=props.HydrogenProperties(p.get('fluid','ParaHydrogen'))
+        duration=float(p['duration_s']); dt=float(p['time_step_s'])
+        if not math.isfinite(duration) or not math.isfinite(dt) or not 0.0<dt<=duration<=10.0:
+            raise ValueError('dynamic isolation duration/time step outside bounded scope')
+        if math.ceil(duration/dt)>100:
+            raise ValueError('dynamic isolation history exceeds 100 provider intervals')
+        geometry=geometrymod.HorizontalVesselGeometry(**p['geometry'])
+        parameters=tankmod.LayeredTankParameters(**p['tank_parameters'])
+        if parameters.vapor_cell_count<2:
+            raise ValueError('dynamic isolation requires a mapped second vapor cell')
+        tank=tankmod.LayeredTank(geometry,parameters,fluid)
+        initial_cfg=p['initial']
+        saturated=tank.initialize_saturated(float(initial_cfg['pressure_pa']),float(initial_cfg['liquid_fraction']))
+        vapor_offset=float(initial_cfg.get('vapor_enthalpy_offset_j_kg',0.0))
+        initial=tank.project_pressure(tankmod.LayeredTankState(
+            saturated.pressure_Pa,
+            saturated.liquid_masses_kg,
+            saturated.liquid_specific_enthalpies_J_kg,
+            saturated.vapor_masses_kg,
+            tuple(value+vapor_offset for value in saturated.vapor_specific_enthalpies_J_kg),
+            saturated.wall_temperatures_K,
+        ))
+        thermo=tank.thermo(initial)
+        ambient=p['ambient']
+        sink=fluid.from_pT(float(ambient['pressure_pa']),float(ambient['temperature_k']))
+        network=networkmod.SteadyNetwork(fluid)
+        network.add_boundary('vapor_port',thermo.vapor[1])
+        network.add_boundary('ambient_sink',sink)
+        valve_cfg=p['valve']
+        valve=valvemod.CommandedValve(valvemod.Valve(
+            float(valve_cfg['full_open_area_m2']),
+            float(valve_cfg['discharge_coefficient']),
+            fluid,
+            pressure_samples=int(valve_cfg.get('pressure_samples',16)),
+            allow_reverse=bool(valve_cfg.get('allow_reverse',False)),
+            closed_leakage_CdA_m2=float(valve_cfg.get('closed_leakage_CdA_m2',0.0)),
+        ))
+        network.add_link('isolation_valve','vapor_port','ambient_sink',valve,
+            source_port_id='TANK:V1',target_port_id='ATMOSPHERE:IN')
+        close_time=float(p['isolation']['close_time_s'])
+        if not math.isfinite(close_time) or not 0.0<close_time<duration:
+            raise ValueError('close_time_s must lie strictly inside the simulation horizon')
+        def command(time_s, _network):
+            valve.set_opening(1.0 if time_s<close_time else 0.0)
+        simulator=layered_network.LayeredTankNetworkSimulator(
+            tank,network,
+            ports=(layered_network.LayeredTankPort('vapor_port','vapor',1),),
+            ambient_temperature_K=float(ambient.get('wall_ambient_temperature_k',20.0)),
+            command_callback=command,
+        )
+        results=simulator.simulate(initial,duration_s=duration,time_step_s=dt)
+        if not results:
+            raise ValueError('dynamic isolation provider returned no intervals')
+        valve_area=float(valve_cfg['full_open_area_m2'])
+        area=valve_area
+        rows=[]; cumulative_mass=0.0; cumulative_h=0.0
+        mass_residual=[]; energy_residual=[]
+        for result in results:
+            flow=result.network_solution.link_flows['isolation_valve']
+            if flow.mass_flow_kg_s < -1.0e-12:
+                raise ValueError('dynamic isolation export requires outward nonnegative flow')
+            flow_rate=max(0.0,float(flow.mass_flow_kg_s))
+            outlet=fluid.from_ph(sink.pressure_Pa,float(flow.transmitted_specific_enthalpy_J_kg))
+            velocity=0.0 if flow_rate==0.0 else flow_rate/(outlet.density_kg_m3*area)
+            interval_start=max(0.0,float(result.tank.time_s)-dt)
+            rows.append({
+                'time_s':interval_start,
+                'mass_flow_kg_s':flow_rate,
+                'pressure_pa_abs':outlet.pressure_Pa,
+                'specific_enthalpy_j_kg':outlet.specific_enthalpy_J_kg,
+                'temperature_k':outlet.temperature_K,
+                'density_kg_m3':outlet.density_kg_m3,
+                'effective_area_m2':area,
+                'velocity_m_s':velocity,
+                'upstream_pressure_pa_abs':result.tank.thermo.vapor[1].pressure_Pa,
+                'upstream_temperature_k':result.tank.thermo.vapor[1].temperature_K,
+                'valve_opening':1.0 if interval_start<close_time else 0.0,
+            })
+            cumulative_mass += flow_rate*dt
+            cumulative_h += flow_rate*outlet.specific_enthalpy_J_kg*dt
+            mass_residual.append(abs(float(result.tank.total_mass_residual_kg)))
+            energy_residual.append(abs(float(result.tank.total_energy_residual_J)))
+        if rows[0]['time_s']!=0.0 or rows[-1]['time_s']>=duration:
+            raise ValueError('dynamic isolation provider clock does not cover left-held intervals')
+        pre=[row['mass_flow_kg_s'] for row in rows if row['time_s']<close_time]
+        post=[row['mass_flow_kg_s'] for row in rows if row['time_s']>=close_time]
+        post_max=max(post,default=0.0)
+        closure_confirmed=post_max<=1.0e-14 and float(valve_cfg.get('closed_leakage_CdA_m2',0.0))==0.0
+        return {'data':{
+            'fluid':fluid.fluid,
+            'steps':rows,
+            'duration_s':duration,
+            'time_step_s':dt,
+            'available_mass_kg':sum(initial.liquid_masses_kg)+sum(initial.vapor_masses_kg),
+            'cumulative_mass_out_kg':cumulative_mass,
+            'cumulative_static_enthalpy_out_j':cumulative_h,
+            'close_time_s':close_time,
+            'pre_close_max_flow_kg_s':max(pre,default=0.0),
+            'post_close_max_flow_kg_s':post_max,
+            'isolation_flow_zero_confirmed':closure_confirmed,
+            'max_total_mass_residual_kg':max(mass_residual,default=0.0),
+            'max_total_energy_residual_j':max(energy_residual,default=0.0),
+            'provider_terminal_area_m2':area,
+            'provider_valve_area_m2':valve_area,
+            'provider_link_id':'isolation_valve',
+            'state_owner':'equipment_twin',
+            'discharge_owner':'equipment_twin',
+            'termination_basis':'reviewed_isolation_success' if closure_confirmed else 'synthetic_diagnostic_horizon',
+        },'limitation':'Transient layered-tank/commanded-valve provider path with synthetic geometry and an explicit isolation command. Closure is qualified only for the supplied command and zero closed-seat leakage; no plant actuator delay, failure-on-demand probability, or two-phase liquid release is inferred.'}
     if operation=="declared_pool":
         m=module("dynamiclh2poolx",roots["dynamiclh2poolx"])
         if p["inflow_origin"] not in {"synthetic_declared_ground", "reviewed_ground_measurement"}:
