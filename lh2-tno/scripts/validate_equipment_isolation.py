@@ -1,10 +1,10 @@
 """Validate transient tank-to-isolation-to-facility coupling.
 
 The external ``lh2dt`` provider owns the layered tank, commanded valve and
-network flow. PRISM converts the provider's interval history into its
-resolved atmospheric-gas contract, then runs the selected pipe LOC through
-the normal SLABx-LH2/SLABx/TNO facility chain. The geometry is synthetic and
-the other pipe LOCs remain explicitly uncomputed.
+network flow. PRISM converts each provider interval history into its
+resolved atmospheric-gas contract, then runs all reviewed LH2 pipe LOCs
+through the normal SLABx-LH2/SLABx/TNO facility chain. The geometry, barrier
+probability and weather partition are synthetic.
 """
 from __future__ import annotations
 
@@ -30,6 +30,13 @@ import validate_equipment_campaign as steady
 OUT = ROOT / "results" / "20261009" / "equipment_isolation_campaign"
 OUT.mkdir(parents=True, exist_ok=True)
 
+# The synthetic facility keeps one declared nominal pipe bore.  Each
+# literature LH2_PIPE area bin is then represented by a provider-owned valve
+# area on that same component, so the frequency hole diameter and the
+# transient equipment boundary remain tied to one physical source.
+FULL_OPEN_AREA_M2 = 1.0e-6
+NOMINAL_PIPE_DIAMETER_M = math.sqrt(4.0 * FULL_OPEN_AREA_M2 / math.pi)
+
 
 def save(name: str, value: object) -> None:
     (OUT / name).write_text(
@@ -38,7 +45,7 @@ def save(name: str, value: object) -> None:
     )
 
 
-def dynamic_input(outcome: str = "success") -> dict:
+def dynamic_input(outcome: str = "success", valve_area_m2: float = FULL_OPEN_AREA_M2) -> dict:
     close_time = 0.25 if outcome == "success" else 0.5
     return {
         "fluid": "ParaHydrogen",
@@ -61,7 +68,7 @@ def dynamic_input(outcome: str = "success") -> dict:
         },
         "ambient": {"pressure_pa": 100000.0, "temperature_k": 288.15, "wall_ambient_temperature_k": 20.0},
         "valve": {
-            "full_open_area_m2": 1.0e-6,
+            "full_open_area_m2": valve_area_m2,
             "discharge_coefficient": 0.8,
             "pressure_samples": 16,
             "allow_reverse": False,
@@ -73,8 +80,15 @@ def dynamic_input(outcome: str = "success") -> dict:
     }
 
 
-def make_release(backend: IsolatedBackend, provider_digest: str, outcome: str) -> tuple[ResolvedGasRelease, dict, dict]:
-    request = dynamic_input(outcome)
+def make_release(
+    backend: IsolatedBackend,
+    provider_digest: str,
+    outcome: str,
+    loc: str,
+    area_fraction: float,
+) -> tuple[ResolvedGasRelease, dict, dict]:
+    valve_area_m2 = FULL_OPEN_AREA_M2 * area_fraction
+    request = dynamic_input(outcome, valve_area_m2)
     response = backend.run("equipment_dynamic_isolation", request)
     data = response["data"]
     steps = []
@@ -101,7 +115,7 @@ def make_release(backend: IsolatedBackend, provider_digest: str, outcome: str) -
     packet = {
         "component_id": "terminal_pipe",
         "port_id": "terminal_pipe.out",
-        "event_id": f"equipment-isolation-campaign/terminal_pipe/AREA_100%/{outcome}",
+        "event_id": f"equipment-isolation-campaign/terminal_pipe/{loc}/{outcome}",
         "event_kind": "accidental_leak",
         "enthalpy_convention": "static_exit_enthalpy",
         "property_basis": {
@@ -129,7 +143,7 @@ def make_release(backend: IsolatedBackend, provider_digest: str, outcome: str) -
             if outcome == "success"
             else "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ),
-        "failure_opening_diameter_m": 0.0011283791670955126,
+        "failure_opening_diameter_m": math.sqrt(4.0 * valve_area_m2 / math.pi),
     }
     return ResolvedGasRelease.model_validate_json(json.dumps(packet)), request, response
 
@@ -137,9 +151,8 @@ def make_release(backend: IsolatedBackend, provider_digest: str, outcome: str) -
 def make_dynamic_facility() -> Facility:
     """Keep the synthetic facility bore consistent with the valve area."""
     raw = steady.make_facility().model_dump(mode="json")
-    diameter = math.sqrt(4.0 * dynamic_input()["valve"]["full_open_area_m2"] / math.pi)
     raw["id"] = "equipment-isolation-campaign"
-    raw["components"][0]["parameters_si"]["diameter_m"] = diameter
+    raw["components"][0]["parameters_si"]["diameter_m"] = NOMINAL_PIPE_DIAMETER_M
     return Facility.model_validate_json(json.dumps(raw))
 
 
@@ -147,18 +160,10 @@ def main() -> None:
     config, provider = steady.load_backend()
     backend = IsolatedBackend(config)
     facility: Facility = make_dynamic_facility()
-    success_release, success_request, success_response = make_release(backend, tree_digest(provider), "success")
-    failure_release, failure_request, failure_response = make_release(backend, tree_digest(provider), "failure")
-    provider_request = {"success": success_request, "failure": failure_request}
-    provider_response = {"success": success_response, "failure": failure_response}
-    save("provider_input.json", provider_request)
-    save("provider_response.json", provider_response)
-    save("facility.json", facility.model_dump(mode="json"))
-    save("resolved_release.json", {
-        "success": success_release.model_dump(mode="json"),
-        "failure": failure_release.model_dump(mode="json"),
-    })
-
+    provider_digest = tree_digest(provider)
+    # Generate the reviewed catalogue events first.  The provider is then run
+    # independently for every area bin; no result is scaled or reused across
+    # hole sizes.
     plan_raw = {
         "id": "equipment-isolation-campaign",
         "assets": [{
@@ -167,14 +172,43 @@ def main() -> None:
             "profile": "LH2_PIPE",
             "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
             "physical_scope_ids": ["terminal-pipe-1m"],
-            "nominal_diameter_m": math.sqrt(4.0 * dynamic_input()["valve"]["full_open_area_m2"] / math.pi),
+            "nominal_diameter_m": NOMINAL_PIPE_DIAMETER_M,
             "length_per_item_m": 1.0,
             "vessel_external_impact_or_operating_error": None,
         }],
     }
     frequency_plan = FrequencyPlan.model_validate_json(json.dumps(plan_raw))
     events = generate_events(facility, frequency_plan)
-    selected = next(event for event in events if event.loc == "AREA_100%")
+    provider_request = {}
+    provider_response = {}
+    releases = {}
+    for event in events:
+        area_fraction = float(event.release.area_fraction)
+        success_release, success_request, success_response = make_release(
+            backend, provider_digest, "success", event.loc, area_fraction
+        )
+        failure_release, failure_request, failure_response = make_release(
+            backend, provider_digest, "failure", event.loc, area_fraction
+        )
+        provider_request[event.loc] = {"success": success_request, "failure": failure_request}
+        provider_response[event.loc] = {"success": success_response, "failure": failure_response}
+        releases[event.loc] = {
+            "success": success_release,
+            "failure": failure_release,
+            "success_response": success_response,
+            "failure_response": failure_response,
+        }
+    save("provider_input.json", provider_request)
+    save("provider_response.json", provider_response)
+    save("facility.json", facility.model_dump(mode="json"))
+    save("resolved_release.json", {
+        loc: {
+            "success": source["success"].model_dump(mode="json"),
+            "failure": source["failure"].model_dump(mode="json"),
+        }
+        for loc, source in releases.items()
+    })
+
     base_template = json.loads(
         (ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json")
         .read_text(encoding="utf-8")
@@ -203,39 +237,27 @@ def main() -> None:
             }),
         )
         return template
-    success_template = consequence_template(success_release, success_response)
-    failure_template = consequence_template(failure_release, failure_response)
     barrier_success_probability = 0.99
     routes = []
     for event in events:
-        if event.id == selected.id:
-            routes.append({
-                "event_id": event.id,
-                "branches": [
-                    {
-                        "id": "provider-isolation-success",
-                        "probability_given_event": barrier_success_probability,
-                        "provenance": "synthetic barrier branch; native commanded-valve provider export; PRISM does not re-solve provider flow",
-                        "request": copy.deepcopy(success_template),
-                    },
-                    {
-                        "id": "provider-isolation-failure",
-                        "probability_given_event": 1.0 - barrier_success_probability,
-                        "provenance": "synthetic barrier branch; valve remains open through declared diagnostic horizon",
-                        "request": copy.deepcopy(failure_template),
-                    },
-                ],
-            })
-        else:
-            routes.append({
-                "event_id": event.id,
-                "branches": [{
-                    "id": "pending-equipment-route",
-                    "probability_given_event": 1.0,
-                    "provenance": "explicitly outside this coupling diagnostic",
-                    "uncomputed_reason": "equipment transient route was only qualified for the selected AREA_100% gas exit",
-                }],
-            })
+        source = releases[event.loc]
+        routes.append({
+            "event_id": event.id,
+            "branches": [
+                {
+                    "id": "provider-isolation-success",
+                    "probability_given_event": barrier_success_probability,
+                    "provenance": "synthetic barrier branch; native commanded-valve provider export; PRISM does not re-solve provider flow",
+                    "request": copy.deepcopy(consequence_template(source["success"], source["success_response"])),
+                },
+                {
+                    "id": "provider-isolation-failure",
+                    "probability_given_event": 1.0 - barrier_success_probability,
+                    "provenance": "synthetic barrier branch; valve remains open through declared diagnostic horizon",
+                    "request": copy.deepcopy(consequence_template(source["failure"], source["failure_response"])),
+                },
+            ],
+        })
     population = [
         {
             "receptor_id": receptor.id,
@@ -266,7 +288,7 @@ def main() -> None:
         "frequency_plan": frequency_plan.model_dump(mode="json"),
         "annual_conditions": conditions,
         "event_routes": routes,
-        "scope_provenance": "one native transient equipment-twin LH2 pipe gas exit with explicit isolation-success and isolation-failure branches through PH validation, SLABx-LH2/SLABx consequence chain and native TNO IR/F-N; barrier probability is synthetic and other LOCs are explicitly withheld",
+        "scope_provenance": "all five reviewed LH2_PIPE area bins use independent native transient equipment-twin runs with explicit isolation-success and isolation-failure branches through PH validation, SLABx-LH2/SLABx consequence chain and native TNO IR/F-N; barrier probability and geometry are synthetic",
     }))
     save("campaign.json", campaign.model_dump(mode="json"))
     save("backend_config.json", config.model_dump(mode="json"))
@@ -274,31 +296,49 @@ def main() -> None:
     save("campaign_result.json", result)
     executed = [case for case in result["cases"] if case["status"] == "EXECUTED"]
     uncomputed = [case for case in result["uncomputed_cases"] if case["status"] == "UNCOMPUTED"]
-    success_data = success_response["data"]
-    failure_data = failure_response["data"]
-    assert len(executed) == 4, result["cases"]
-    assert len(uncomputed) == 8, result["cases"]
+    provider_checks = {
+        loc: {
+            "success": source["success_response"]["data"],
+            "failure": source["failure_response"]["data"],
+        }
+        for loc, source in releases.items()
+    }
+    assert len(executed) == 20, result["cases"]
+    assert len(uncomputed) == 0, result["cases"]
     assert result["total_facility_annual_ir_low_high"] is None
-    assert success_data["isolation_flow_zero_confirmed"] is True
-    assert success_data["post_close_max_flow_kg_s"] == 0.0
-    assert failure_data["isolation_flow_zero_confirmed"] is False
-    assert failure_data["post_close_observation_available"] is False
-    assert failure_data["pre_close_max_flow_kg_s"] > 0.0
+    assert all(data["success"]["isolation_flow_zero_confirmed"] is True for data in provider_checks.values())
+    assert all(data["success"]["post_close_max_flow_kg_s"] == 0.0 for data in provider_checks.values())
+    assert all(data["failure"]["isolation_flow_zero_confirmed"] is False for data in provider_checks.values())
+    assert all(data["failure"]["post_close_observation_available"] is False for data in provider_checks.values())
+    assert all(data["failure"]["pre_close_max_flow_kg_s"] > 0.0 for data in provider_checks.values())
     assert all(abs(case["mass_ledger"]["end_to_end_residual_kg"]) < 1e-8 for case in executed)
     save("verification.json", {
-        "equipment_provider_cases": 2,
-        "facility_executed_cases": 4,
-        "uncomputed_other_pipe_locs": 8,
+        "equipment_provider_cases": len(events) * 2,
+        "facility_executed_cases": len(executed),
+        "uncomputed_other_pipe_locs": 0,
+        "executed_pipe_locs": [event.loc for event in events],
         "provider_flow_owned_by_equipment_twin": True,
         "provider_transient_tank_valve_network_executed": True,
         "provider_isolation_success_command_confirmed": True,
         "provider_isolation_failure_horizon_executed": True,
-        "provider_success_post_close_max_flow_kg_s": success_data["post_close_max_flow_kg_s"],
-        "provider_failure_pre_close_max_flow_kg_s": failure_data["pre_close_max_flow_kg_s"],
-        "provider_success_mass_residual_max_kg": success_data["max_total_mass_residual_kg"],
-        "provider_failure_mass_residual_max_kg": failure_data["max_total_mass_residual_kg"],
-        "provider_success_energy_residual_max_j": success_data["max_total_energy_residual_j"],
-        "provider_failure_energy_residual_max_j": failure_data["max_total_energy_residual_j"],
+        "provider_success_post_close_max_flow_kg_s": {
+            loc: data["success"]["post_close_max_flow_kg_s"] for loc, data in provider_checks.items()
+        },
+        "provider_failure_pre_close_max_flow_kg_s": {
+            loc: data["failure"]["pre_close_max_flow_kg_s"] for loc, data in provider_checks.items()
+        },
+        "provider_success_mass_residual_max_kg": {
+            loc: data["success"]["max_total_mass_residual_kg"] for loc, data in provider_checks.items()
+        },
+        "provider_failure_mass_residual_max_kg": {
+            loc: data["failure"]["max_total_mass_residual_kg"] for loc, data in provider_checks.items()
+        },
+        "provider_success_energy_residual_max_j": {
+            loc: data["success"]["max_total_energy_residual_j"] for loc, data in provider_checks.items()
+        },
+        "provider_failure_energy_residual_max_j": {
+            loc: data["failure"]["max_total_energy_residual_j"] for loc, data in provider_checks.items()
+        },
         "synthetic_barrier_success_probability": barrier_success_probability,
         "resolved_gas_to_final_harm_executed": True,
         "native_tno_ir_fn_aggregation_executed": True,
@@ -314,7 +354,7 @@ def main() -> None:
             "isolation success is qualified only for the supplied command and zero closed-seat leakage",
             "isolation failure is held only to the 0.5 s diagnostic horizon; inventory depletion is not claimed",
             "no actuator delay, failure-on-demand probability, liquid two-phase release or site data calibration",
-            "only AREA_100% selected route executed; other pipe LOCs remain uncomputed",
+            "all five pipe LOCs are executed, but the route remains a synthetic one-component diagnostic rather than a site equipment inventory",
         ],
     })
     print(json.dumps({
@@ -322,10 +362,14 @@ def main() -> None:
         "executed": len(executed),
         "uncomputed": len(uncomputed),
         "total_facility_risk_available": result["total_facility_annual_ir_low_high"] is not None,
-        "provider_isolation_success_flow_zero_confirmed": success_data["isolation_flow_zero_confirmed"],
-        "provider_isolation_failure_flow_nonzero_before_horizon": failure_data["pre_close_max_flow_kg_s"] > 0.0,
-        "provider_success_mass_out_kg": success_data["cumulative_mass_out_kg"],
-        "provider_failure_mass_out_kg": failure_data["cumulative_mass_out_kg"],
+        "provider_isolation_success_flow_zero_confirmed": all(data["success"]["isolation_flow_zero_confirmed"] for data in provider_checks.values()),
+        "provider_isolation_failure_flow_nonzero_before_horizon": all(data["failure"]["pre_close_max_flow_kg_s"] > 0.0 for data in provider_checks.values()),
+        "provider_success_mass_out_kg": {
+            loc: data["success"]["cumulative_mass_out_kg"] for loc, data in provider_checks.items()
+        },
+        "provider_failure_mass_out_kg": {
+            loc: data["failure"]["cumulative_mass_out_kg"] for loc, data in provider_checks.items()
+        },
         "timing": result["timing"],
     }, ensure_ascii=False, indent=2))
 

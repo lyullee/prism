@@ -14,18 +14,18 @@
 
 - 시설/포트/물성·시간·질량 계약, 문헌 빈도 17개 프로파일·55행, 단일 구멍 사건 결합.
 - 제한된 옥외 방출→지면 도달/풀→극저온 전이→확산→점화→화재/폭발→인명 피해의 실제 진단 실행.
-- native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구를 `ResolvedGasRelease`로 수용하고 한 LH2-service pipe LOC를 시설 campaign에서 실제 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 두 건을 같은 경계 계약과 시설 campaign에 연결했다. 소비자가 유량을 다시 계산하지 않는다.
+- native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 194개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 4건, 문헌 빈도 분위수 재가중 검사, 과거 실제 외부 모델 실행 기록. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 194개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 문헌 빈도 분위수 재가중 검사, 과거 실제 외부 모델 실행 기록. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 
 ## 단계별 작업과 통과 기준
 
 | 단계 | 개발할 내용 | 완료 판정에 필요한 근거 |
 |---|---|---|
 | A. 설비 상태 | 탱크·배관·밸브·펌프·기화기·벤트의 실제 지원 모델/포트/상/에너지 기준 확인, 사고 위치와 연결, 유량 소유권 유지 | 지원표, 동일 물성·시계, 설비별 실제 계산 전달, 질량·정적/전체 에너지 장부의 구분, 미지원 설비 표시 |
-| B. 방출 경로 | 단일 구멍의 실제 종료, 차단 성공/실패, 재고 소진, 전량/600초·양단 파열·수직 벤트 전용 경로 | 통합 source의 압력 평형 자연 종료와 무연장 질량 장부, G1 SLABx-LH2 liquid-jet finite-inventory 질량 폐합, 합성 layered-tank/commanded-valve의 0.25초 isolation-success 및 0.5초 isolation-failure 진단 이력을 구현했다. barrier 확률은 합성값이고 재고 소진을 뜻하지 않는다. G1은 일정 upstream·open spray-energy 때문에 operator-limited이며 실증 차단 신뢰도·액체/2상 feedback의 물리 검증, 전량/600초·양단 파열·수직 벤트는 남아 있음 |
-| C. 시설 위험 | 모든 LOC의 경로 배정, 위치 배분, 연간 기상/인구와 점화·차단 분기, 기존 TNO IR/F-N 함수 연결 | 사건 목록 100% 회계, 조건부 확률 폐합, 빈도 1회 적용, 수용점별 IR, 개별 사건별 인구 피해/F-N, operator-limited·누락·실패 있으면 total 보류 |
+| B. 방출 경로 | 단일 구멍의 실제 종료, 차단 성공/실패, 재고 소진, 전량/600초·양단 파열·수직 벤트 전용 경로 | 통합 source의 압력 평형 자연 종료와 무연장 질량 장부, G1 SLABx-LH2 liquid-jet finite-inventory 질량 폐합, 5개 LH2 pipe area-bin 각각에 대한 합성 layered-tank/commanded-valve의 0.25초 isolation-success 및 0.5초 isolation-failure 진단 이력을 구현했다. barrier 확률은 합성값이고 재고 소진을 뜻하지 않는다. G1은 일정 upstream·open spray-energy 때문에 operator-limited이며 실증 차단 신뢰도·액체/2상 feedback의 물리 검증, 전량/600초·양단 파열·수직 벤트는 남아 있음 |
+| C. 시설 위험 | 모든 LOC의 경로 배정, 위치 배분, 연간 기상/인구와 점화·차단 분기, 기존 TNO IR/F-N 함수 연결 | 5개 LH2 pipe LOC의 사건 목록과 20개 물리 사례를 모두 실행하고, 조건부 확률 폐합, 빈도 1회 적용, 수용점별 IR, 개별 사건별 인구 피해/F-N을 확인했다. 합성 종료·장벽과 실제 설비 목록/위치가 없으므로 total은 보류 |
 | D. 빈도 불확실성 | LH2 문헌 분포, 상관 가정별 비교, TNO 기본값의 명시적 민감도, 위험 기여/설비 순위 안정성 | 근거 없는 사전분포 금지, TNO/LH2 대안 중복 금지, 상관 가정과 미계산 범위 공개, 분포·민감도·복사율 구간 구분 |
 | E. 검증·속도 | 보유 공정 자료·외부 실험 출처/분할, 관측 연산자와 독립 검증, 보존/수렴, 처리시간 | 학습/검증 누수 없음, 실측/복원/합성 구분, 적용범위별 오차, 하드웨어·신규/캐시 구분, 반복 p50/p95/p99와 실패 기록 |
 
@@ -45,7 +45,7 @@
 - 0.2/0.4초 같은 합성 종료는 전체 시설 위험 완료의 근거가 되지 않는다.
 - `source_duration_mode=model_natural`은 통합 source가 반환한 실제 구간만 사용한다. 요청 시간이 5초여도 모델이 0.2초에서 압력 평형으로 끝내면 유효 방출시간을 0.2초로 기록하며, 마지막 유량을 5초까지 채우지 않는다. 이 연결은 검증했지만 모델의 압력 평형 예측 정확도는 별도 검증 대상이다.
 - G1의 `source_operator=inventory_liquid_jet`은 instantaneous inventory LOC를 구멍 누출로 바꾸지 않고 SLABx-LH2 liquid-jet source를 호출한다. 명시한 분무·액적·증발 가정과 2초 재고 폐합을 사용하며, 일정 upstream 상태와 열린 spray-energy closure 때문에 `EXECUTED_OPERATOR_LIMITED`로 기록한다.
-- 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 합성 초기 압력 103 kPa·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률은 현장 근거가 아니고 재고 소진·실제 actuator 지연·실패확률·액체/2상 방출은 아직 지원하지 않는다.
+- 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, 5개 `LH2_PIPE` area-bin의 isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 합성 초기 압력 103 kPa·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률은 현장 근거가 아니고 재고 소진·실제 actuator 지연·실패확률·액체/2상 방출은 아직 지원하지 않는다.
 
 이 단계의 예제·명령·측정 결과는 별도 실행 기록에 정리한다. 이번 구현은 공개 0.6.0을 덮어쓰지 않은 개발 변경이며 새 PyPI/DOI 릴리스는 만들지 않았다.
 
