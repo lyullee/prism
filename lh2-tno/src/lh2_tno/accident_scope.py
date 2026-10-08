@@ -135,12 +135,16 @@ def build_accident_scope_matrix(
 
     event_families: dict[str, set[str]] = {}
     event_request_count: dict[str, int] = {}
+    event_uncomputed_branch_count: dict[str, int] = {}
     barrier_branches: set[str] = set()
     for event_id, event in events.items():
         route = routes.get(event_id)
         branches = tuple(route.branches) if route is not None else ()
         requests = tuple(branch.request for branch in branches if branch.request is not None)
         event_request_count[event_id] = len(requests)
+        event_uncomputed_branch_count[event_id] = sum(
+            branch.request is None for branch in branches
+        )
         event_families[event_id] = _event_families(event, requests, component_kinds)
         barrier_branches.update(str(branch.id) for branch in branches)
 
@@ -148,16 +152,32 @@ def build_accident_scope_matrix(
     for family in required_families:
         event_ids = sorted(event_id for event_id, families in event_families.items() if family in families)
         family_cases = [case for event_id in event_ids for case in cases_by_event.get(event_id, ())]
+        events_without_cases = [
+            event_id for event_id in event_ids if not cases_by_event.get(event_id)
+        ]
         request_count = sum(event_request_count.get(event_id, 0) for event_id in event_ids)
+        uncomputed_branch_count = sum(
+            event_uncomputed_branch_count.get(event_id, 0) for event_id in event_ids
+        )
         event_frequency = sum(float(events[event_id].get("annual_frequency_per_year", 0.0)) for event_id in event_ids)
-        status = "NO_EVENT_GENERATED" if not event_ids else _status(family_cases, request_count)
+        if not event_ids:
+            status = "NO_EVENT_GENERATED"
+        elif events_without_cases:
+            status = "NO_CASE_EXECUTED" if not family_cases else "PARTIAL"
+        elif uncomputed_branch_count:
+            status = "UNCOMPUTED" if not family_cases else "PARTIAL"
+        else:
+            status = _status(family_cases, request_count)
         rows.append({
             "family": family,
             "status": status,
             "event_ids": event_ids,
             "generated_event_count": len(event_ids),
+            "event_without_case_count": len(events_without_cases),
+            "event_ids_without_cases": events_without_cases,
             "generated_initiation_frequency_per_year": event_frequency,
             "request_branch_count": request_count,
+            "uncomputed_branch_count": uncomputed_branch_count,
             "case_count": len(family_cases),
             "executed_case_count": sum(str(case.get("status", "")).startswith("EXECUTED") for case in family_cases),
             "fully_validated_case_count": sum(case.get("status") == "EXECUTED" for case in family_cases),
