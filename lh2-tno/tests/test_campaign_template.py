@@ -3,11 +3,16 @@ from pathlib import Path
 
 import pytest
 from lh2_tno.campaign import AnnualCondition
-from lh2_tno.campaign_template import build_equipment_campaign, build_equipment_campaign_from_catalog
+from lh2_tno.campaign_template import (
+    build_equipment_campaign,
+    build_equipment_campaign_from_catalog,
+    build_equipment_campaign_from_provider_catalog,
+)
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease, ResolvedLiquidStep
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
+from test_provider_release import _defaults, _release
 
 
 def _campaign_inputs():
@@ -141,4 +146,41 @@ def test_campaign_catalog_rejects_ambiguous_exact_matches():
         build_equipment_campaign_from_catalog(
             manifest, plan, (request, request), conditions,
             scope_provenance="synthetic ambiguous catalog test",
+        )
+
+
+def test_provider_catalog_compiles_packet_to_exact_frequency_route():
+    manifest, plan, _, conditions = _campaign_inputs()
+    packet = _release().model_copy(
+        update={
+            "upstream_service": "LH2",
+            "failure_opening_diameter_m": 0.0127,
+        }
+    )
+    campaign = build_equipment_campaign_from_provider_catalog(
+        manifest,
+        plan,
+        (packet,),
+        _defaults(),
+        conditions,
+        scope_provenance="synthetic direct provider campaign",
+    )
+    branches = [branch for route in campaign.event_routes for branch in route.branches]
+    assert sum(branch.request is not None for branch in branches) == 1
+    request = next(branch.request for branch in branches if branch.request is not None)
+    assert request.resolved_release is not None
+    assert request.resolved_release.event_id == packet.event_id
+
+
+def test_provider_catalog_rejects_duplicate_provider_event_ids():
+    manifest, plan, _, conditions = _campaign_inputs()
+    packet = _release()
+    with pytest.raises(ValueError, match="event_id values must be unique"):
+        build_equipment_campaign_from_provider_catalog(
+            manifest,
+            plan,
+            (packet, packet),
+            _defaults(),
+            conditions,
+            scope_provenance="synthetic duplicate provider campaign",
         )

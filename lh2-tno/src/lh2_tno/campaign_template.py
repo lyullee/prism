@@ -9,12 +9,17 @@ validated by :func:`bind_event`, or an explicit ``UNCOMPUTED`` branch.
 from __future__ import annotations
 
 import json
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 
 from .campaign import AnnualCondition, EventRoute, ReleaseBranch, RiskCampaign
 from .consequences import ConsequenceRequest
 from .equipment_manifest import EquipmentManifest, audit_manifest
 from .frequency import FrequencyPlan, bind_event, generate_events
+from .provider_release import (
+    ProviderRelease,
+    ProviderReleaseContractError,
+    build_consequence_request_from_provider_release,
+)
 
 
 def build_equipment_campaign(
@@ -135,6 +140,52 @@ def build_equipment_campaign_from_catalog(
         frequency_plan=frequency_plan,
         annual_conditions=annual_conditions,
         event_routes=tuple(routes),
+        scope_provenance=scope_provenance,
+        maximum_physics_cases=maximum_physics_cases,
+    )
+
+
+def build_equipment_campaign_from_provider_catalog(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+    provider_releases: Sequence[ProviderRelease],
+    request_defaults: Mapping[str, object],
+    annual_conditions: tuple[AnnualCondition, ...],
+    *,
+    scope_provenance: str,
+    maximum_physics_cases: int = 200,
+) -> RiskCampaign:
+    """Compile strict provider release packets directly into a campaign.
+
+    This is a convenience boundary for a digital-twin adapter.  The provider
+    still owns the resolved outlet history; this function only attaches the
+    reviewed consequence context and delegates component/opening matching to
+    :func:`build_equipment_campaign_from_catalog`.  A malformed packet or a
+    context with a missing termination basis is a configuration error, rather
+    than an implicit ``UNCOMPUTED`` event.  Callers that need a partial catalog
+    report can continue to use ``build_provider_request_catalog.py`` first.
+    """
+    if not provider_releases:
+        raise ValueError("provider release catalog must contain at least one release")
+    if len({release.event_id for release in provider_releases}) != len(provider_releases):
+        raise ValueError("provider release event_id values must be unique")
+    templates = []
+    for release in provider_releases:
+        try:
+            templates.append(
+                build_consequence_request_from_provider_release(
+                    release, request_defaults
+                )
+            )
+        except ProviderReleaseContractError as error:
+            raise ValueError(
+                f"provider release {release.event_id} cannot be attached to a campaign: {error}"
+            ) from error
+    return build_equipment_campaign_from_catalog(
+        manifest,
+        frequency_plan,
+        tuple(templates),
+        annual_conditions,
         scope_provenance=scope_provenance,
         maximum_physics_cases=maximum_physics_cases,
     )

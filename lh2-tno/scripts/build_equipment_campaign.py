@@ -14,10 +14,19 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from lh2_tno.campaign import AnnualCondition
-from lh2_tno.campaign_template import build_equipment_campaign, build_equipment_campaign_from_catalog
+from lh2_tno.campaign_template import (
+    build_equipment_campaign,
+    build_equipment_campaign_from_catalog,
+    build_equipment_campaign_from_provider_catalog,
+)
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
+from lh2_tno.provider_release import (
+    ProviderReleaseContractError,
+    load_provider_emergency_relief_catalog,
+    load_provider_release_catalog,
+)
 
 
 def main() -> int:
@@ -28,17 +37,35 @@ def main() -> int:
     requests.add_argument("--request-template", type=Path)
     requests.add_argument("--request-catalog", type=Path,
                           help="JSON array or {'templates': [...]} of consequence request templates")
+    requests.add_argument(
+        "--provider-release-catalog", type=Path,
+        help="explicit prism.resolved_release.v1 packet catalog from the equipment model",
+    )
+    parser.add_argument(
+        "--release-kind", choices=("accidental_leak", "emergency_relief"),
+        default="accidental_leak",
+        help="provider packet family; used only with --provider-release-catalog",
+    )
+    parser.add_argument(
+        "--request-defaults", type=Path,
+        help="reviewed consequence context JSON; required with --provider-release-catalog",
+    )
     parser.add_argument("--annual-conditions", type=Path, required=True)
     parser.add_argument("--scope-provenance", required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     manifest = EquipmentManifest.from_json(args.manifest)
     plan = FrequencyPlan.model_validate_json(args.frequency_plan.read_text(encoding="utf-8"))
+    if args.provider_release_catalog and not args.request_defaults:
+        parser.error("--provider-release-catalog requires --request-defaults")
+    if args.request_defaults and not args.provider_release_catalog:
+        parser.error("--request-defaults is valid only with --provider-release-catalog")
+
     if args.request_template:
         request_templates = (ConsequenceRequest.model_validate_json(
             args.request_template.read_text(encoding="utf-8")
         ),)
-    else:
+    elif args.request_catalog:
         catalog = json.loads(args.request_catalog.read_text(encoding="utf-8"))
         if isinstance(catalog, dict):
             catalog = catalog.get("templates")
@@ -48,6 +75,19 @@ def main() -> int:
             ConsequenceRequest.model_validate_json(json.dumps(item, allow_nan=False))
             for item in catalog
         )
+    else:
+        try:
+            loader = (
+                load_provider_emergency_relief_catalog
+                if args.release_kind == "emergency_relief"
+                else load_provider_release_catalog
+            )
+            provider_releases = loader(args.provider_release_catalog)
+            defaults = json.loads(args.request_defaults.read_text(encoding="utf-8"))
+            if not isinstance(defaults, dict):
+                raise ProviderReleaseContractError("request defaults must be a JSON object")
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, ProviderReleaseContractError) as error:
+            raise SystemExit(f"provider campaign input error: {error}") from error
     rows = json.loads(args.annual_conditions.read_text(encoding="utf-8"))
     conditions = tuple(
         AnnualCondition.model_validate_json(json.dumps(row, allow_nan=False))
@@ -58,9 +98,18 @@ def main() -> int:
             manifest, plan, request_templates[0], conditions,
             scope_provenance=args.scope_provenance,
         )
-    else:
+    elif args.request_catalog:
         campaign = build_equipment_campaign_from_catalog(
             manifest, plan, request_templates, conditions,
+            scope_provenance=args.scope_provenance,
+        )
+    else:
+        campaign = build_equipment_campaign_from_provider_catalog(
+            manifest,
+            plan,
+            provider_releases,
+            defaults,
+            conditions,
             scope_provenance=args.scope_provenance,
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -80,6 +129,12 @@ def main() -> int:
         "matched_request_branch_count": matched,
         "uncomputed_branch_count": len(campaign.event_routes) - matched,
         "physics_executed": False,
+        "input_mode": (
+            "request_template" if args.request_template else
+            "request_catalog" if args.request_catalog else
+            "provider_release_catalog"
+        ),
+        "provider_release_kind": args.release_kind if args.provider_release_catalog else None,
     }, ensure_ascii=False))
     return 0
 
