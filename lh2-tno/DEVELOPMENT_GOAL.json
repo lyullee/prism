@@ -219,5 +219,12 @@
   "equipment_campaign_compiler_direct_provider_catalog_diagnostic_generated_events": 10,
   "equipment_campaign_compiler_direct_provider_catalog_diagnostic_matched_request_branches": 1,
   "equipment_campaign_compiler_direct_provider_catalog_diagnostic_uncomputed_branches": 9,
-  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_physics_executed": false
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_physics_executed": true,
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_result_record": "results/20261009/direct_provider_liquid_campaign_result.json",
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_status": "PARTIAL_DECLARED_SCOPE",
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_executed_cases": 1,
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_operator_limited_cases": 1,
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_total_facility_risk_withheld": true,
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_case_elapsed_ms": 1659.24619999714,
+  "equipment_campaign_compiler_direct_provider_catalog_diagnostic_campaign_elapsed_ms": 1853.67019998375
 }
