@@ -82,6 +82,65 @@ def build_equipment_campaign(
     )
 
 
+def build_equipment_campaign_from_provider_worklist(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+    annual_conditions: tuple[AnnualCondition, ...],
+    *,
+    scope_provenance: str,
+    maximum_physics_cases: int = 200,
+) -> RiskCampaign:
+    """Compile every declared event as an explicit missing-packet branch.
+
+    This mode is intentionally useful before the equipment model has exported
+    accident histories. It produces a complete event/case accounting frame,
+    but no consequence request and no physical result. It must never be
+    interpreted as zero risk or as a substitute for provider output.
+    """
+    from .provider_worklist import build_provider_release_worklist
+
+    report = build_provider_release_worklist(manifest, frequency_plan)
+    if report.get("status") == "BLOCKED_MANIFEST":
+        raise ValueError(
+            "equipment manifest is not executable: "
+            + "; ".join(report.get("blocking_reasons", ()))
+        )
+    items = {row["event_id"]: row for row in report["work_items"]}
+    events = generate_events(manifest.to_facility(), frequency_plan)
+    routes: list[EventRoute] = []
+    for event in events:
+        item = items.get(event.id)
+        if item is None:
+            raise ValueError(f"provider worklist is missing frequency event {event.id}")
+        reason = (
+            "provider accident packet required before consequence execution; "
+            f"status={item['status']}"
+        )
+        if item.get("blocking_reasons"):
+            reason += "; " + "; ".join(item["blocking_reasons"])
+        routes.append(
+            EventRoute(
+                event_id=event.id,
+                branches=(
+                    ReleaseBranch(
+                        id="uncomputed-provider-packet",
+                        probability_given_event=1.0,
+                        provenance="provider release worklist; no packet was supplied",
+                        uncomputed_reason=reason,
+                    ),
+                ),
+            )
+        )
+    return RiskCampaign(
+        id="equipment-provider-worklist-campaign",
+        frequency_plan=frequency_plan,
+        annual_conditions=annual_conditions,
+        event_routes=tuple(routes),
+        scope_provenance=scope_provenance,
+        maximum_physics_cases=maximum_physics_cases,
+    )
+
+
 def build_equipment_campaign_from_catalog(
     manifest: EquipmentManifest,
     frequency_plan: FrequencyPlan,

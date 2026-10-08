@@ -10,6 +10,7 @@ from lh2_tno.campaign_template import (
     build_equipment_campaign_from_catalog,
     build_equipment_campaign_from_provider_branch_catalog,
     build_equipment_campaign_from_provider_catalog,
+    build_equipment_campaign_from_provider_worklist,
 )
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease, ResolvedLiquidStep
@@ -380,3 +381,36 @@ def test_branch_catalog_rejects_probability_above_one():
             manifest, plan, branches, conditions,
             scope_provenance="synthetic over-partition test",
         )
+
+
+def test_provider_worklist_campaign_keeps_all_generic_events_uncomputed_without_packets():
+    root = Path(__file__).parents[1]
+    manifest = EquipmentManifest.from_json(
+        root / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples" / "generic_lh2_full_scope_frequency_plan.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    conditions = tuple(
+        AnnualCondition.model_validate_json(json.dumps(row, allow_nan=False))
+        for row in json.loads(
+            (root / "examples" / "equipment_annual_conditions.json").read_text(
+                encoding="utf-8"
+            )
+        )
+    )
+    campaign = build_equipment_campaign_from_provider_worklist(
+        manifest,
+        plan,
+        conditions,
+        scope_provenance="synthetic provider worklist test",
+    )
+
+    assert len(campaign.event_routes) == 24
+    branches = [branch for route in campaign.event_routes for branch in route.branches]
+    assert len(branches) == 24
+    assert all(branch.id == "uncomputed-provider-packet" for branch in branches)
+    assert all(branch.request is None for branch in branches)
+    assert all("provider accident packet required" in branch.uncomputed_reason for branch in branches)

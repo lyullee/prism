@@ -21,6 +21,7 @@ from lh2_tno.campaign_template import (
     build_equipment_campaign_from_catalog,
     build_equipment_campaign_from_provider_branch_catalog,
     build_equipment_campaign_from_provider_catalog,
+    build_equipment_campaign_from_provider_worklist,
 )
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_manifest import EquipmentManifest
@@ -54,6 +55,10 @@ def main() -> int:
     requests.add_argument(
         "--provider-release-branch-catalog", type=Path,
         help="explicit provider packets wrapped with conditional isolation/barrier branches",
+    )
+    requests.add_argument(
+        "--provider-worklist-only", action="store_true",
+        help="compile every frequency event as an explicit missing-provider-packet branch",
     )
     parser.add_argument(
         "--release-kind", choices=("accidental_leak", "emergency_relief", "two_sided_rupture"),
@@ -111,7 +116,7 @@ def main() -> int:
                 raise ProviderReleaseContractError("request defaults must be a JSON object")
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, ProviderReleaseContractError) as error:
             raise SystemExit(f"provider branch campaign input error: {error}") from error
-    else:
+    elif not args.provider_worklist_only:
         try:
             loader = {
                 "accidental_leak": load_provider_release_catalog,
@@ -153,12 +158,19 @@ def main() -> int:
             conditions,
             scope_provenance=args.scope_provenance,
         )
-    else:
+    elif args.provider_release_catalog or args.provider_release_branch_catalog:
         campaign = build_equipment_campaign_from_provider_catalog(
             manifest,
             plan,
             provider_releases,
             defaults,
+            conditions,
+            scope_provenance=args.scope_provenance,
+        )
+    else:
+        campaign = build_equipment_campaign_from_provider_worklist(
+            manifest,
+            plan,
             conditions,
             scope_provenance=args.scope_provenance,
         )
@@ -188,6 +200,7 @@ def main() -> int:
             "request_template" if args.request_template else
             "request_catalog" if args.request_catalog else
             "request_branch_catalog" if args.request_branch_catalog else
+            "provider_worklist_only" if args.provider_worklist_only else
             "provider_release_branch_catalog" if args.provider_release_branch_catalog else
             "provider_release_catalog"
         ),
