@@ -18,6 +18,8 @@ LayeredTank 상태·밸브
   → PRISM 풀·확산·점화·피해
 ```
 
+브리지의 최종 `ResolvedLiquidRelease`는 `equipment_release_adapter.py`의 공통 액체 어댑터가 생성합니다. 따라서 LayeredTank 진단도 일반 설비 결합과 같은 사고 사건 선언, 누적 질량·엔탈피 폐합, 정상 벤트 거부, airborne liquid 거부 규칙을 공유합니다.
+
 ## 책임을 나눈 이유
 
 두 모델이 같은 유량을 각각 계산해 합치면 질량이 두 번 계산되거나 서로 다른 사건이 될 수 있습니다. 그래서 다음 규칙을 코드로 고정했습니다.

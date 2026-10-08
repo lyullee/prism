@@ -24,6 +24,9 @@ from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest
 from lh2_tno.contracts import Facility, canonical_digest
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease
+from lh2_tno.equipment_release_adapter import (
+    build_resolved_liquid_release_from_provider_response,
+)
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.provider_liquid_partition import combine_provider_liquid_partition
 
@@ -176,33 +179,47 @@ def _packet_from_bridge(source: dict, provider_rows: list[dict], rows: list[dict
             "gas_velocity_origin": None if nozzle is None else "provider_resolved",
             "droplet_class_outcomes": row["droplet_class_outcomes"],
         })
-    return {
-        "component_id": component_id or source["component_id"],
-        "port_id": port_id or f"{component_id or source['component_id']}.out",
-        "event_id": "layered-tank-slabsx-liquid-bridge-diagnostic",
-        "event_kind": "accidental_leak", "upstream_service": "LH2",
-        "upstream_service_provenance": "LayeredTank provider state plus SLABx-LH2 partition",
-        "boundary_kind": "resolved_atmospheric_liquid_exit", "phase_basis": "two_phase",
-        "enthalpy_convention": "provider_total_outlet_enthalpy",
-        "property_basis": {"fluid": source.get("fluid", "Hydrogen"), "backend": "CoolProp-HEOS",
-                            "energy_reference": f"CoolProp-HEOS:{source.get('fluid', 'Hydrogen')}:native"},
-        "provider_source_digest": canonical_digest(source),
-        "provider_result_digest": canonical_digest({"provider": provider_rows, "partition_audit": audit}),
-        "provider_boundary_reference": "LayeredTank liquid endpoint with explicit end-state interval semantics",
-        "input_origin": "model_prediction", "position_enu_m": [0.0, 0.0, geometry["nozzle_height_m"]],
-        "direction_enu": direction, "ambient_pressure_pa_abs": source["ambient_pressure_pa"],
-        "ambient_temperature_k": source.get("ambient_temperature_k", 288.15),
-        "duration_s": duration_s, "available_mass_kg": mass,
-        "cumulative_mass_out_kg": mass, "cumulative_specific_enthalpy_out_j": enthalpy,
-        "reference_area_m2": gas_area, "reference_area_provenance": "SLABx-LH2 scaled atmospheric gas area",
-        "steps": contract_steps,
-        "termination_provenance": source.get(
-            "termination_provenance",
-            "LayeredTank declared endpoint clock",
-        ),
-        "droplet_partition_provenance": "SLABx-LH2 integrated flash/droplet partition",
-        "failure_opening_diameter_m": (4.0 * geometry["full_open_area_m2"] / 3.141592653589793) ** 0.5,
+    provider_response = {
+        "data": {
+            "event_kind": "accidental_leak",
+            "upstream_service": "LH2",
+            "fluid": source.get("fluid", "Hydrogen"),
+            "phase_basis": "two_phase",
+            "duration_s": duration_s,
+            "available_mass_kg": mass,
+            "cumulative_mass_out_kg": mass,
+            "cumulative_specific_enthalpy_out_j": enthalpy,
+            "reference_area_m2": gas_area,
+            "reference_area_provenance": "SLABx-LH2 scaled atmospheric gas area",
+            "termination_provenance": source.get(
+                "termination_provenance",
+                "LayeredTank declared endpoint clock",
+            ),
+            "droplet_partition_provenance": "SLABx-LH2 integrated flash/droplet partition",
+            "steps": contract_steps,
+        }
     }
+    release = build_resolved_liquid_release_from_provider_response(
+        provider_response,
+        component_id=component_id or source["component_id"],
+        port_id=port_id or f"{component_id or source['component_id']}.out",
+        event_id="layered-tank-slabsx-liquid-bridge-diagnostic",
+        provider_source_digest=canonical_digest(source),
+        upstream_service_provenance="LayeredTank provider state plus SLABx-LH2 partition",
+        provider_boundary_reference=(
+            "LayeredTank liquid endpoint with explicit end-state interval semantics"
+        ),
+        input_origin="model_prediction",
+        position_enu_m=[0.0, 0.0, geometry["nozzle_height_m"]],
+        direction_enu=direction,
+        ambient_pressure_pa_abs=source["ambient_pressure_pa"],
+        ambient_temperature_k=source.get("ambient_temperature_k", 288.15),
+        failure_opening_diameter_m=(
+            4.0 * geometry["full_open_area_m2"] / 3.141592653589793
+        ) ** 0.5,
+        provider_result={"provider": provider_rows, "partition_audit": audit},
+    )
+    return release.model_dump(mode="json")
 
 
 def main() -> None:

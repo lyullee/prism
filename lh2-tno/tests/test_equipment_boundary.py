@@ -16,7 +16,7 @@ from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
 import sys
 sys.path.insert(0, str(Path(__file__).parents[1] / 'scripts'))
-from validate_layered_tank_slabsx_bridge import _provider_rows
+from validate_layered_tank_slabsx_bridge import _packet_from_bridge, _provider_rows
 
 
 def packet():
@@ -685,3 +685,44 @@ def test_layered_provider_endpoint_clock_uses_interval_enthalpy_and_shifts_to_st
         'source_temperature_k': 23.0,
         'source_density_kg_m3': 67.0,
     }]
+
+
+def test_layered_slabsx_bridge_uses_strict_liquid_release_adapter():
+    source = {
+        'component_id': 'storage',
+        'fluid': 'ParaHydrogen',
+        'ambient_pressure_pa': 101325.0,
+        'ambient_temperature_k': 288.15,
+        'source_geometry': {
+            'full_open_area_m2': 1.0e-4,
+            'nozzle_height_m': 1.0,
+            'direction_enu': [1.0, 0.0, 0.0],
+        },
+    }
+    provider_rows = [{
+        'time_s': 0.0,
+        'total_mass_flow_kg_s': 1.0,
+        'specific_enthalpy_j_kg': 1000.0,
+    }]
+    rows = [{
+        'time_s': 0.0,
+        'total_mass_flow_kg_s': 1.0,
+        'gas_mass_flow_kg_s': 1.0,
+        'ground_liquid_mass_flow_kg_s': 0.0,
+        'airborne_liquid_mass_flow_kg_s': 0.0,
+        'gas_boundary_area_m2': 0.05,
+        'droplet_class_outcomes': [],
+        'real_nozzle': {
+            'pressure_pa': 101325.0,
+            'temperature_k': 20.0,
+            'density_kg_m3': 2.0,
+            'velocity_m_s': 10.0,
+            'effective_area_m2': 0.05,
+        },
+    }]
+    audit = {'provider_rate_owner': 'equipment_twin', 'partition_owner': 'SLABx-LH2'}
+    packet = _packet_from_bridge(source, provider_rows, rows, audit, 0.1)
+    release = ResolvedLiquidRelease.model_validate_json(json.dumps(packet, allow_nan=False))
+    assert release.event_kind == 'accidental_leak'
+    assert release.integrated_mass_kg == pytest.approx(0.1)
+    assert release.reference_area_provenance == 'SLABx-LH2 scaled atmospheric gas area'
