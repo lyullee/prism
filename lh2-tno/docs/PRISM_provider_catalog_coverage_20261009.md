@@ -40,3 +40,10 @@ python scripts/audit_provider_catalog_coverage.py `
 작업목록에 없는 packet도 `extra_packets`로 기록한다. 이는 설비나 문헌 빈도 범위가 먼저 검토되어야 한다는 뜻이며 자동으로 시설에 추가하지 않는다. 이 도구는 빈도를 부여하지 않고, request defaults를 붙이지 않으며, 정상 유량·센서 시계열을 사고 packet으로 승격하지 않는다. `FULLY_MATCHED` 뒤에도 `build_equipment_campaign.py --provider-release-catalog`의 strict context 검증과 별도 facility IR/F-N·물리 검증 gate가 필요하다.
 
 실제 일반 LH2 설비에 대해 적격으로 승인된 provider packet은 0건이므로 실제 시설 coverage는 계속 `NO_EXACT_MATCH`다. 별도 합성 진단에서는 `lh2dt.LayeredTankNetworkSimulator→SLABx-LH2` 결과를 저장탱크 다섯 area-bin의 설비·포트·개구에 맞춰 `PARTIAL_EXACT_MATCH`(5/24)로 반복 재현했다. 다섯 case 모두 provider 질량 잔차와 5% 유량 gate를 통과했지만, 합성 threshold·종료시계·재고·기상 때문에 실제 방출 이력이나 시설 위험으로 승격하지 않는다. 배관·밸브·벤트·펌프 등 나머지 19개 사건은 packet 없이 남아 있다. 상세 결과는 `results/20261010/layered_tank_worklist_packets/provider_catalog_coverage.json`과 `campaign_verification.json`이다. 기존 단일 사건 재현 결과도 `results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_layered_exact.json`에 보존한다.
+
+
+## 차단 성공·실패 branch catalog 진단
+
+`build_layered_tank_isolation_branches.py`는 하나의 initiating event 아래에 조건부 `isolation-success`와 `isolation-failure` provider packet을 함께 만드는 구조를 시험한다. branch 확률은 catalog에서 별도로 기록하며, 합이 1이 되지 않으면 누락분을 자동으로 물리 계산하지 않고 coverage gate에서 보류해야 한다. 이번 합성 실행은 저장탱크 5개 event에 성공·실패 10개 branch를 요청했다. 7개 branch가 생성되었고 3개는 외부 solver의 양수 셀 질량 오류로 `UNCOMPUTED`에 남았다. event 기준으로는 24개 중 4개가 적어도 한 branch와 exact-match되었다.
+
+성공 branch는 provider의 `isolation_success` 종료근거와 닫힘 뒤 0 유량 확인을 요구하고, 실패 branch는 `isolation_failure_diagnostic_horizon`을 사용한다. 성공확률 0.99·실패확률 0.01은 branch 합계 계약을 시험하기 위한 합성 입력이다. 이 catalog는 문헌 initiating-event 빈도를 새로 만들지 않으며, provider packet 승격·현장 차단 신뢰도·시설 IR/F-N 계산을 허용하지 않는다. 결과는 `results/20261011/layered_tank_isolation_branches_all/provider_branch_catalog_coverage.json` 및 `campaign_verification.json`에서 확인한다.
