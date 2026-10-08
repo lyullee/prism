@@ -238,3 +238,6 @@ def test_scope_matrix_tracks_maximum_relief_discharge_as_vent_family():
     assert row["family"] == "vent_hole"
     assert row["status"] == "NO_CASE_EXECUTED"
     assert row["generated_event_count"] == 1
+    assert row["manifest_component_ids"] == ["relief-device"]
+    assert row["components_without_generated_event"] == []
+    assert matrix["manifest_family_component_ids"]["vent_hole"] == ["relief-device"]

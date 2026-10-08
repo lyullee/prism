@@ -127,6 +127,15 @@ def build_accident_scope_matrix(
         raise ValueError(f"unknown accident families: {', '.join(unknown)}")
     audit = audit_manifest(manifest)
     component_kinds = _component_kind(manifest)
+    manifest_family_components: dict[str, list[str]] = defaultdict(list)
+    for component in manifest.components:
+        family = _base_hole_family(component.kind, None)
+        if family is not None:
+            manifest_family_components[family].append(component.id)
+    selected_frequency_components = sorted(
+        asset.model_component_id for asset in campaign.frequency_plan.assets
+    )
+    excluded_frequency_components = sorted(campaign.frequency_plan.excluded_model_components)
     events = {str(row["id"]): row for row in result.get("events", []) if isinstance(row, dict) and row.get("id")}
     routes = {route.event_id: route for route in campaign.event_routes}
     cases = [row for row in result.get("cases", []) if isinstance(row, dict)]
@@ -162,6 +171,12 @@ def build_accident_scope_matrix(
             event_uncomputed_branch_count.get(event_id, 0) for event_id in event_ids
         )
         event_frequency = sum(float(events[event_id].get("annual_frequency_per_year", 0.0)) for event_id in event_ids)
+        declared_component_ids = sorted(manifest_family_components.get(family, ()))
+        generated_component_ids = sorted({
+            str(events[event_id].get("model_component_id"))
+            for event_id in event_ids
+            if events[event_id].get("model_component_id") is not None
+        })
         if not event_ids:
             status = "NO_EVENT_GENERATED"
         elif events_without_cases:
@@ -178,6 +193,12 @@ def build_accident_scope_matrix(
             "event_without_case_count": len(events_without_cases),
             "event_ids_without_cases": events_without_cases,
             "generated_initiation_frequency_per_year": event_frequency,
+            "manifest_component_ids": declared_component_ids,
+            "manifest_component_count": len(declared_component_ids),
+            "generated_component_ids": generated_component_ids,
+            "components_without_generated_event": sorted(
+                set(declared_component_ids) - set(generated_component_ids)
+            ),
             "request_branch_count": request_count,
             "uncomputed_branch_count": uncomputed_branch_count,
             "case_count": len(family_cases),
@@ -206,6 +227,11 @@ def build_accident_scope_matrix(
         "required_families": list(required_families),
         "rows": rows,
         "barrier_branch_ids": sorted(barrier_branches),
+        "manifest_family_component_ids": {
+            family: sorted(ids) for family, ids in sorted(manifest_family_components.items())
+        },
+        "frequency_scope_selected_component_ids": selected_frequency_components,
+        "frequency_scope_excluded_component_ids": excluded_frequency_components,
         "manifest_audit_status": audit["status"],
         "campaign_status": result.get("status"),
         "declared_scope_numerically_complete": all(row["status"] == "EXECUTED" for row in rows),
