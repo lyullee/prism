@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 221,
+  "unit_contract_conservation_tests_passed": 223,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -41,7 +41,7 @@
   "physical_validation_hse_test6_max_mass_residual_kg": 8.244516180866412e-13,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
-  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits, provider-resolved vertical-to-horizontal handoff exits, and one provider-resolved atmospheric liquid/two-phase exit; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, five transient LH2_PIPE area-bin routes with explicit success/failure branches, five HomogeneousTank positive-mass inventory-depletion routes, one two-ended rupture route and one vertical handoff route are connected without flow extrapolation; liquid provider gas/ground partition reaches DynamicLH2PoolX and final damage but remains operator-limited; LayeredTank liquid/two-phase inventory feedback, airborne liquid, and site-calibrated facility QRA remain incomplete. LayeredTankNetworkSimulator boundary audit now extracts provider inventory/port/link states and fail-closed promotion reasons; the inspected provider route is a non-atmospheric demand boundary and is not promoted.",
+  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits, provider-resolved vertical-to-horizontal handoff exits, and provider-resolved atmospheric liquid/two-phase exits; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, five transient LH2_PIPE area-bin routes with explicit success/failure branches, five HomogeneousTank positive-mass inventory-depletion routes, one two-ended rupture route, one vertical handoff route, and one LayeredTank-to-SLABx liquid bridge are connected without flow extrapolation; the bridge retains equipment total mass flow, uses SLABx for flash/droplet partition, and reaches DynamicLH2PoolX and final damage with zero diagnostic mass residual; all new liquid paths remain operator-limited; LayeredTank liquid/two-phase inventory feedback, airborne liquid, and site-calibrated facility QRA remain incomplete. The general LayeredTankNetworkSimulator fill/vent audit remains fail-closed for its non-atmospheric demand boundary, while the separate atmospheric liquid probe has a validated SLABx partition bridge.",
   "unsupported": [
     "indoor",
     "vertical_only_nozzle_without_provider_handoff",
@@ -315,5 +315,20 @@
     "provider result has no flash-gas/ground-liquid/airborne-liquid partition",
     "provider result has no atmospheric exit geometry and direction",
     "provider result does not declare an atmospheric release termination contract"
-  ]
+  ],
+  "layered_tank_slabsx_bridge_contract_implemented": true,
+  "layered_tank_slabsx_bridge_diagnostic_executed": true,
+  "layered_tank_slabsx_bridge_diagnostic_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "layered_tank_slabsx_bridge_rate_relative_error": 0.024529061614847476,
+  "layered_tank_slabsx_bridge_rate_tolerance": 0.05,
+  "layered_tank_slabsx_bridge_provider_rate_owner": "equipment_twin",
+  "layered_tank_slabsx_bridge_partition_owner": "SLABx-LH2",
+  "layered_tank_slabsx_bridge_full_chain_executed": true,
+  "layered_tank_slabsx_bridge_elapsed_ms": 2238.2683999603614,
+  "layered_tank_slabsx_bridge_provider_mass_kg": 0.00013395423880893466,
+  "layered_tank_slabsx_bridge_mass_residual_kg": 0.0,
+  "layered_tank_slabsx_bridge_operator_limited": true,
+  "layered_tank_slabsx_bridge_physical_validation_claim": false,
+  "layered_tank_slabsx_bridge_record": "results/20261009/equipment_layered_tank_slabsx",
+  "layered_tank_slabsx_bridge_record_doc": "docs/PRISM_LayeredTank_SLABx_브리지_개발기록_20261009.md"
 }

@@ -10,6 +10,7 @@ from lh2_tno.equipment_boundary import (ResolvedGasRelease, ResolvedGasReleaseSe
     ResolvedLiquidRelease, VerticalGasHandoff, thermodynamic_rows)
 from lh2_tno.resolved_liquid_worker import resolve_liquid_rows
 from lh2_tno.layered_network_boundary import audit_layered_liquid_boundary
+from lh2_tno.provider_liquid_partition import combine_provider_liquid_partition
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
@@ -553,3 +554,41 @@ def test_layered_tank_atmospheric_pressure_still_requires_provider_partition():
     assert not audit.phase_partition_available
     assert not audit.exit_geometry_available
     assert not audit.termination_available
+
+
+def test_provider_rate_is_retained_when_slabx_partition_is_within_gate():
+    provider = [{
+        'time_s': 0.0, 'total_mass_flow_kg_s': 1.0,
+        'specific_enthalpy_j_kg': 100.0,
+    }]
+    slabsx = [{
+        'time_s': 0.0, 'total_mass_flow_kg_s': 1.02,
+        'gas_mass_flow_kg_s': 1.02, 'airborne_liquid_mass_flow_kg_s': 0.0,
+        'ground_liquid_mass_flow_kg_s': 0.0,
+        'gas_pressure_pa_abs': 101325.0, 'gas_temperature_k': 20.0,
+        'gas_density_kg_m3': 2.0, 'gas_velocity_m_s': 10.0,
+        'velocity_vector_m_s': [10.0, 0.0, 0.0],
+        'droplet_class_outcomes': [],
+    }]
+    rows, audit = combine_provider_liquid_partition(
+        provider, slabsx, ambient_pressure_pa=101325.0, rate_relative_tolerance=0.05,
+    )
+    assert rows[0]['total_mass_flow_kg_s'] == pytest.approx(1.0)
+    assert rows[0]['gas_mass_flow_kg_s'] == pytest.approx(1.0)
+    assert rows[0]['gas_boundary_area_m2'] == pytest.approx(0.05)
+    assert audit['provider_rate_owner'] == 'equipment_twin'
+    assert audit['partition_owner'] == 'SLABx-LH2'
+
+
+def test_provider_rate_gate_rejects_large_slabx_mismatch():
+    provider = [{'time_s': 0.0, 'total_mass_flow_kg_s': 1.0, 'specific_enthalpy_j_kg': 100.0}]
+    slabsx = [{
+        'time_s': 0.0, 'total_mass_flow_kg_s': 1.2,
+        'gas_mass_flow_kg_s': 1.2, 'airborne_liquid_mass_flow_kg_s': 0.0,
+        'ground_liquid_mass_flow_kg_s': 0.0,
+        'gas_pressure_pa_abs': 101325.0, 'gas_temperature_k': 20.0,
+        'gas_density_kg_m3': 2.0, 'gas_velocity_m_s': 10.0,
+        'droplet_class_outcomes': [],
+    }]
+    with pytest.raises(ValueError, match='rate mismatch'):
+        combine_provider_liquid_partition(provider, slabsx, ambient_pressure_pa=101325.0)
