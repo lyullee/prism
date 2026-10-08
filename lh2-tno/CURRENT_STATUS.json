@@ -33,7 +33,7 @@
   "physical_validation_claim": false,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
-  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, and one transient layered-tank/commanded-isolation route with explicit success/failure branches are connected without flow extrapolation; G1 remains operator-limited, inventory depletion/G2/other LOCs and full facility annual QRA remain incomplete.",
+  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, and five transient LH2_PIPE area-bin routes with explicit success/failure branches are connected without flow extrapolation; G1 remains operator-limited, inventory depletion/G2/non-pipe equipment LOCs and full facility annual QRA remain incomplete.",
   "unsupported": [
     "indoor",
     "vertical_only_nozzle",
