@@ -98,6 +98,13 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["timing"]["campaign_count"] == 2
     assert result["timing"]["campaign_elapsed_ms_p95"] == pytest.approx(10.0)
     assert result["risk_atoms_digest"]
+    assert result["component_contributions"]["tank-01"]["annual_ir_low_high"]["receptor-a"] == pytest.approx(
+        [0.0007, 0.0008]
+    )
+    assert result["component_contributions"]["pipe-01"]["annual_ir_low_high"]["receptor-a"] == pytest.approx(
+        [0.0007, 0.0008]
+    )
+    assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
 
 
 def test_facility_ledger_rejects_duplicate_event_or_atom():

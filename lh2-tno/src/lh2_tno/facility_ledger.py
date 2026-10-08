@@ -373,13 +373,41 @@ def merge_facility_campaign_results(
             blocking_reasons.append(f"accident family {family}: PARTIAL")
 
     endpoint_ir = {receptor_id: [0.0, 0.0] for receptor_id in sorted(receptor_ids)}
+    event_component = {
+        str(event["id"]): str(event["model_component_id"])
+        for event in merged_events
+    }
+    component_atoms: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for atom in merged_atoms:
         weight = float(atom["initiating_frequency_per_year"]) * float(atom["conditional_weight"])
         harm = atom["receptor_harm_low_high"]
+        component_atoms[event_component[str(atom["event_id"])]].append(atom)
         for endpoint in range(2):
             for receptor_id in endpoint_ir:
                 endpoint_ir[receptor_id][endpoint] += weight * float(harm[receptor_id][endpoint])
     fn = [_fn_curve(merged_atoms, endpoint) for endpoint in range(2)]
+    component_contributions: dict[str, dict[str, Any]] = {}
+    for component_id in sorted(observed_components):
+        atoms = component_atoms.get(component_id, [])
+        component_ir = {receptor_id: [0.0, 0.0] for receptor_id in sorted(receptor_ids)}
+        for atom in atoms:
+            weight = float(atom["initiating_frequency_per_year"]) * float(atom["conditional_weight"])
+            harm = atom["receptor_harm_low_high"]
+            for endpoint in range(2):
+                for receptor_id in component_ir:
+                    component_ir[receptor_id][endpoint] += weight * float(harm[receptor_id][endpoint])
+        component_contributions[component_id] = {
+            "event_count": sum(
+                1 for event in merged_events
+                if str(event["model_component_id"]) == component_id
+            ),
+            "risk_atom_count": len(atoms),
+            "annual_ir_low_high": component_ir,
+            "expected_death_fn_low_high": [
+                _fn_curve(atoms, endpoint) for endpoint in range(2)
+            ],
+            "frequency_is_not_reallocated": True,
+        }
     total_available = source_complete and not source_synthetic and not merged_exclusions
     unique_blocking = list(dict.fromkeys(blocking_reasons))
     timing = {
@@ -409,6 +437,7 @@ def merge_facility_campaign_results(
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,
         "risk_atoms_digest": canonical_digest(merged_atoms),
+        "component_contributions": component_contributions,
         "observed_asset_ids": sorted(seen_assets),
         "observed_component_ids": sorted(observed_components),
         "expected_component_ids": sorted(expected_components),

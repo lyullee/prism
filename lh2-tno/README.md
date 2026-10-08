@@ -192,7 +192,7 @@ python -m venv .venv
   --output equipment_provider_branch_campaign.json
 ```
 
-설비별 campaign을 따로 실행한 뒤 시설 장부로 합칠 때는 `merge_facility_campaigns.py`를 사용합니다. 이 단계는 물리 계산을 다시 하지 않고 각 campaign의 검증된 risk atom만 한 번씩 합칩니다. 전체 시설 component 목록을 `--expected-component-id`로 명시해야 하며, event ID·asset 소유권·수용점 집합이 겹치거나 기대한 설비·사고 가족이 빠지면 known contribution만 남기고 `total_facility_*`를 `null`로 유지합니다.
+설비별 campaign을 따로 실행한 뒤 시설 장부로 합칠 때는 `merge_facility_campaigns.py`를 사용합니다. 이 단계는 물리 계산을 다시 하지 않고 각 campaign의 검증된 risk atom만 한 번씩 합칩니다. 전체 시설 component 목록을 `--expected-component-id`로 명시해야 하며, event ID·asset 소유권·수용점 집합이 겹치거나 기대한 설비·사고 가족이 빠지면 known contribution만 남기고 `total_facility_*`를 `null`로 유지합니다. 출력의 `component_contributions`에서는 event의 `model_component_id`별 IR/F-N 기여도를 확인할 수 있으며, 미계산 설비에 빈도 0을 배정하지 않습니다.
 
 ```powershell
 .venv\Scripts\python.exe lh2-tno/scripts/merge_facility_campaigns.py `
