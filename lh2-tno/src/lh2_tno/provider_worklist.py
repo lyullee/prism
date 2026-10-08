@@ -8,10 +8,12 @@ export into an accident.  Missing packets remain ``UNCOMPUTED``.
 from __future__ import annotations
 
 from collections import Counter
-from typing import Literal
+from pathlib import Path
+from typing import Any, Literal, Mapping
 
 from .contracts import Contract, Name, Positive
 from .equipment_manifest import EquipmentManifest, audit_manifest
+from .equipment_model_binding import audit_equipment_model_binding
 from .frequency import FrequencyPlan, generate_events
 from .scenario_evidence import PROVIDER_RELEASE_REQUIRED_FIELDS
 
@@ -53,6 +55,8 @@ class ProviderReleaseWorkItem(Contract):
     required_opening_diameter_m: Positive | None = None
     required_packet_fields: tuple[Name, ...]
     status: Literal["UNCOMPUTED_PROVIDER_PACKET", "UNCOMPUTED_NO_ACCIDENT_PORT"]
+    model_binding_status: str | None = None
+    model_accident_release_export_status: str | None = None
     blocking_reasons: tuple[str, ...] = ()
 
 
@@ -138,8 +142,15 @@ def _requirements(event) -> dict:
 def build_provider_release_worklist(
     manifest: EquipmentManifest,
     frequency_plan: FrequencyPlan,
+    *,
+    model_binding: Mapping[str, Any] | str | Path | None = None,
 ) -> dict:
-    """Return a fail-closed packet request list for every frequency event."""
+    """Return a fail-closed packet request list for every frequency event.
+
+    ``model_binding`` is optional so existing worklists remain reproducible.
+    When supplied, it annotates each item with the component model's state and
+    accident-export status; it never turns a normal-state model into a packet.
+    """
     manifest_audit = audit_manifest(manifest)
     if manifest_audit["status"] != "EXECUTABLE":
         return {
@@ -153,6 +164,15 @@ def build_provider_release_worklist(
         }
 
     events = generate_events(manifest.to_facility(), frequency_plan)
+    model_binding_report = None
+    model_binding_by_kind: dict[str, dict[str, Any]] = {}
+    if model_binding is not None:
+        model_binding_report = audit_equipment_model_binding(manifest, model_binding)
+        model_binding_by_kind = {
+            str(row["component_kind"]): row
+            for row in model_binding_report["component_rows"]
+            if row.get("component_kind")
+        }
     ports_by_component: dict[str, tuple] = {}
     for component_id in {component.id for component in manifest.components}:
         ports_by_component[component_id] = tuple(
@@ -166,15 +186,23 @@ def build_provider_release_worklist(
     for event in events:
         requirements = _requirements(event)
         ports = ports_by_component.get(event.model_component_id, ())
+        component_kind = next(
+            (component.kind for component in manifest.components if component.id == event.model_component_id),
+            None,
+        )
+        binding_row = model_binding_by_kind.get(component_kind or "")
         reasons: list[str] = []
-        if len(ports) < requirements["provider_endpoint_count"]:
+        port_missing = len(ports) < requirements["provider_endpoint_count"]
+        if port_missing:
             reasons.append(
                 f"requires {requirements['provider_endpoint_count']} explicit accident port(s); "
                 f"found {len(ports)}"
             )
+        if binding_row is not None and binding_row.get("accident_release_export_status") != "supported":
+            reasons.append("bound equipment model has no accident-release provider export")
         status = (
             "UNCOMPUTED_NO_ACCIDENT_PORT"
-            if reasons
+            if port_missing
             else "UNCOMPUTED_PROVIDER_PACKET"
         )
         items.append(
@@ -189,6 +217,10 @@ def build_provider_release_worklist(
                 release_mode=event.release.mode,
                 **requirements,
                 accident_port_ids=tuple(port.id for port in ports),
+                model_binding_status=(binding_row or {}).get("status"),
+                model_accident_release_export_status=(binding_row or {}).get(
+                    "accident_release_export_status"
+                ),
                 status=status,
                 blocking_reasons=tuple(reasons),
             )
@@ -205,6 +237,22 @@ def build_provider_release_worklist(
         "status": overall,
         "manifest_status": manifest_audit["status"],
         "frequency_plan_id": frequency_plan.id,
+        "model_binding_status": (
+            model_binding_report.get("status") if model_binding_report is not None else None
+        ),
+        "model_binding_accident_release_supported_component_count": (
+            sum(
+                row.get("accident_release_export_status") == "supported"
+                for row in model_binding_report.get("component_rows", ())
+            )
+            if model_binding_report is not None
+            else None
+        ),
+        "model_binding_blocking_reasons": (
+            list(model_binding_report.get("blocking_reasons", ()))
+            if model_binding_report is not None
+            else []
+        ),
         "generated_event_count": len(events),
         "provider_packet_count": 0,
         "status_counts": dict(status_counts),

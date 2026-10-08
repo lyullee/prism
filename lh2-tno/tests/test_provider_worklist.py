@@ -64,3 +64,24 @@ def test_provider_worklist_does_not_replace_a_missing_accident_port_with_normal_
     assert missing
     assert all(row["status"] == "UNCOMPUTED_NO_ACCIDENT_PORT" for row in missing)
     assert all(not row["accident_port_ids"] for row in missing)
+
+
+def test_provider_worklist_surfaces_state_only_model_binding_without_promoting_packets():
+    manifest, plan = _full_scope_inputs()
+    result = build_provider_release_worklist(
+        manifest,
+        plan,
+        model_binding=Path(__file__).parents[1] / "examples" / "generic_lh2_model_binding.json",
+    )
+
+    assert result["model_binding_status"] == "STATE_ONLY_BOUND"
+    assert result["model_binding_accident_release_supported_component_count"] == 0
+    assert result["provider_packet_count"] == 0
+    assert all(row["status"] == "UNCOMPUTED_PROVIDER_PACKET" for row in result["work_items"])
+    assert all(row["model_binding_status"] == "STATE_ONLY_BOUND" for row in result["work_items"])
+    assert all(row["model_accident_release_export_status"] == "missing" for row in result["work_items"])
+    assert all(
+        "no accident-release provider export" in reason
+        for row in result["work_items"]
+        for reason in row["blocking_reasons"]
+    )

@@ -18,6 +18,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--frequency-plan", required=True, type=Path)
+    parser.add_argument(
+        "--model-binding",
+        type=Path,
+        help="optional prism.equipment_model_binding.v1 catalog for per-item readiness",
+    )
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
 
@@ -25,7 +30,9 @@ def main() -> int:
     plan = FrequencyPlan.model_validate_json(
         args.frequency_plan.read_text(encoding="utf-8")
     )
-    result = build_provider_release_worklist(manifest, plan)
+    result = build_provider_release_worklist(
+        manifest, plan, model_binding=args.model_binding
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n",
@@ -35,6 +42,10 @@ def main() -> int:
         "status": result["status"],
         "generated_event_count": result["generated_event_count"],
         "provider_packet_count": result["provider_packet_count"],
+        "model_binding_status": result.get("model_binding_status"),
+        "model_binding_accident_release_supported_component_count": result.get(
+            "model_binding_accident_release_supported_component_count"
+        ),
         "status_counts": result.get("status_counts", {}),
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))
