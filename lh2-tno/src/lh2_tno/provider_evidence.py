@@ -30,6 +30,176 @@ CONFIG_FILES = (
     "scenarios.json",
 )
 
+# A normal-process result may contain a mass-flow field while still being
+# unsuitable as an accident source.  Keep the inventory deliberately narrow:
+# it looks for an explicit resolved-release packet, rather than guessing one
+# from P/T, a screening flow, or a command sequence.
+_FLOW_KEYS = {
+    "mass_flow_kg_s",
+    "total_mass_flow_kg_s",
+    "gas_mass_flow_kg_s",
+    "ground_liquid_mass_flow_kg_s",
+}
+_GENERIC_RELEASE_KEYS = {
+    "event_kind",
+    "failure_opening_diameter_m",
+    "steps",
+    "duration_s",
+    "available_mass_kg",
+    "cumulative_mass_out_kg",
+    "component_id",
+    "port_id",
+    "event_id",
+    "provider_source_digest",
+    "provider_result_digest",
+    "provider_boundary_reference",
+    "position_enu_m",
+    "direction_enu",
+    "termination_provenance",
+    "property_basis",
+    "upstream_service",
+    "upstream_service_provenance",
+    "input_origin",
+    "ambient_pressure_pa_abs",
+    "ambient_temperature_k",
+}
+_GAS_RELEASE_KEYS = {
+    "cumulative_static_enthalpy_out_j",
+    "boundary_kind",
+    "enthalpy_convention",
+}
+_LIQUID_RELEASE_KEYS = {
+    "cumulative_specific_enthalpy_out_j",
+    "boundary_kind",
+    "enthalpy_convention",
+    "phase_basis",
+    "reference_area_m2",
+    "reference_area_provenance",
+    "droplet_partition_provenance",
+}
+
+
+def _iter_json_objects(value: Any):
+    """Yield every nested JSON object without interpreting provider values."""
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _iter_json_objects(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _iter_json_objects(child)
+
+
+def _json_inventory_paths(root: Path) -> list[Path]:
+    """Return provider JSON files, excluding virtual environments and caches."""
+    excluded = {"__pycache__", "build", "dist", "node_modules", ".git"}
+    paths: list[Path] = []
+    for path in root.rglob("*.json"):
+        if any(part == name or part.startswith(".venv") for part in path.parts for name in excluded):
+            continue
+        paths.append(path)
+    return sorted(paths)
+
+
+def _release_packet_inventory(root: Path) -> dict[str, Any]:
+    """Inventory explicit accident-release packets in a provider export.
+
+    This is an evidence check only.  It never turns a JSON object into a
+    ``ResolvedGasRelease``/``ResolvedLiquidRelease`` and therefore cannot
+    accidentally promote a normal-flow or screening result.
+    """
+    files_scanned = 0
+    invalid_json = 0
+    flow_only_files = 0
+    candidate_files: list[dict[str, Any]] = []
+    qualified_files: list[dict[str, Any]] = []
+    missing_reasons: dict[str, int] = {}
+
+    for path in _json_inventory_paths(root):
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            invalid_json += 1
+            continue
+        files_scanned += 1
+        objects = list(_iter_json_objects(value))
+        flow_present = any(any(key in obj for key in _FLOW_KEYS) for obj in objects)
+        accident_objects = [obj for obj in objects if obj.get("event_kind") == "accidental_leak"]
+        if not accident_objects and flow_present:
+            flow_only_files += 1
+        for obj in accident_objects:
+            # A candidate needs a declared random opening and a time history.
+            candidate = all(key in obj for key in ("failure_opening_diameter_m", "steps", "duration_s"))
+            if not candidate:
+                for key in ("failure_opening_diameter_m", "steps", "duration_s"):
+                    if key not in obj:
+                        missing_reasons[f"missing:{key}"] = missing_reasons.get(f"missing:{key}", 0) + 1
+                continue
+            relative = str(path.relative_to(root))
+            entry = {
+                "file": relative,
+                "event_id": obj.get("event_id"),
+                "component_id": obj.get("component_id"),
+                "port_id": obj.get("port_id"),
+                "event_kind": obj.get("event_kind"),
+                "schema": obj.get("provider_export_schema") or obj.get("schema_version"),
+            }
+            candidate_files.append(entry)
+            required = set(_GENERIC_RELEASE_KEYS)
+            if "phase_basis" in obj or "cumulative_specific_enthalpy_out_j" in obj:
+                required.update(_LIQUID_RELEASE_KEYS)
+            else:
+                required.update(_GAS_RELEASE_KEYS)
+            # An explicit contract marker prevents a coincidentally similar
+            # provider result from being treated as a PRISM export.
+            required.add("provider_export_schema")
+            missing = sorted(key for key in required if key not in obj)
+            if not isinstance(obj.get("steps"), list) or not obj.get("steps"):
+                missing.append("steps_nonempty")
+            else:
+                for index, step in enumerate(obj["steps"]):
+                    if not isinstance(step, dict):
+                        missing.append(f"steps[{index}]_object")
+                        continue
+                    if "time_s" not in step:
+                        missing.append(f"steps[{index}].time_s")
+                    if "mass_flow_kg_s" not in step and "total_mass_flow_kg_s" not in step:
+                        missing.append(f"steps[{index}].mass_flow")
+                    if "phase_basis" in obj:
+                        for key in ("gas_mass_flow_kg_s", "ground_liquid_mass_flow_kg_s", "airborne_liquid_mass_flow_kg_s"):
+                            if key not in step:
+                                missing.append(f"steps[{index}].{key}")
+            if missing:
+                for key in missing:
+                    missing_reasons[f"missing:{key}"] = missing_reasons.get(f"missing:{key}", 0) + 1
+                continue
+            qualified_files.append(entry)
+
+    blockers: list[str] = []
+    if not candidate_files:
+        blockers.append("provider export contains no explicit accidental resolved-release packet")
+    if candidate_files and not qualified_files:
+        blockers.append("accident release candidates are missing the complete PRISM export contract")
+    if flow_only_files:
+        blockers.append("normal or screening flow JSON was found without an accident-release contract")
+    return {
+        "promotion_status": "QUALIFIED_ACCIDENT_RELEASE_EXPORT" if qualified_files else "NO_ACCIDENT_RELEASE_EXPORT",
+        "files_scanned": files_scanned,
+        "invalid_json_files": invalid_json,
+        "normal_or_screening_flow_file_count": flow_only_files,
+        "accident_release_candidate_file_count": len(candidate_files),
+        "accident_release_qualified_file_count": len(qualified_files),
+        "candidate_files": candidate_files[:50],
+        "qualified_files": qualified_files[:50],
+        "blocking_reasons": list(dict.fromkeys(blockers)),
+        "missing_field_counts": dict(sorted(missing_reasons.items())),
+        "contract": {
+            "required_event_kind": "accidental_leak",
+            "required_provider_export_schema": "provider_export_schema",
+            "screening_and_normal_flow_is_not_promotable": True,
+        },
+    }
+
 
 def _count_status(rows: Any, field: str = "status") -> dict[str, int]:
     counts: dict[str, int] = {}
@@ -127,6 +297,7 @@ def audit_provider_root(root: str | Path) -> dict[str, Any]:
     procedure_tag_map = commands.get("procedure_to_pid_tag_map", {})
     center_binding_ready = closure.get("parameter_policy", {}).get("bind_center_asset")
     forward_comparison_allowed = closure.get("promotion_rule", {}).get("forward_comparison_allowed")
+    release_evidence = _release_packet_inventory(root_path)
 
     blockers: list[str] = []
     if center_binding_ready is not True:
@@ -145,6 +316,7 @@ def audit_provider_root(root: str | Path) -> dict[str, Any]:
         blockers.append("no procedure-to-P&ID/PLC command map")
     if physical_time_missing:
         blockers.append("physical command times are missing from operation sequences")
+    blockers.extend(release_evidence["blocking_reasons"])
 
     selected_paths = [
         configs / name for name in CONFIG_FILES if (configs / name).exists()
@@ -166,7 +338,9 @@ def audit_provider_root(root: str | Path) -> dict[str, Any]:
             "forward_comparison_allowed": forward_comparison_allowed,
             "screening_status": closure.get("status"),
             "plant_data_optimization": commands.get("plant_data_optimization"),
+            "accident_release_export": release_evidence["promotion_status"],
         },
+        "release_evidence": release_evidence,
         "coverage": {
             "assets": {"total": len(assets), "validation_status": _count_status(assets, "validation_status")},
             "component_nodes": {"total": len(node_bindings), "binding_status": _count_status(node_bindings, "binding_status")},
@@ -202,4 +376,3 @@ def audit_provider_root(root: str | Path) -> dict[str, Any]:
         },
     }
     return report
-

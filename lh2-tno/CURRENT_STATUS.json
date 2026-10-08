@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 241,
+  "unit_contract_conservation_tests_passed": 244,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -416,7 +416,7 @@
   "external_provider_evidence_audit_module": "src/lh2_tno/provider_evidence.py",
   "external_provider_evidence_audit_script": "scripts/audit_external_provider.py",
   "external_provider_evidence_audit_status": "PARTIAL_PROVIDER_EVIDENCE",
-  "external_provider_evidence_audit_record": "results/20261009/provider_evidence/center_provider_audit.json",
+  "external_provider_evidence_audit_record": "results/20261009/provider_evidence/center_provider_audit_with_release_inventory.json",
   "external_provider_evidence_provider_regression_tests": 822,
   "external_provider_evidence_center_binding_ready": false,
   "external_provider_evidence_forward_comparison_allowed": false,
@@ -430,7 +430,7 @@
   "equipment_campaign_compiler_catalog_module": "src/lh2_tno/campaign_template.py",
   "equipment_campaign_compiler_catalog_script": "scripts/build_equipment_campaign.py --request-catalog",
   "equipment_campaign_compiler_catalog_policy": "Each event selects only an explicit component/opening-matched request; ambiguous matches error and missing matches remain UNCOMPUTED; no size or state substitution.",
-  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 241 passed",
+  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 244 passed",
   "equipment_campaign_catalog_diagnostic_executed": true,
   "equipment_campaign_catalog_diagnostic_record": "results/20261009/equipment_manifest_audit/equipment_campaign_two_result.json",
   "equipment_campaign_catalog_diagnostic_generated_events": 10,
@@ -451,5 +451,14 @@
       6.5e-05
     ]
   },
-  "equipment_campaign_catalog_diagnostic_scope": "synthetic storage and provider-resolved liquid/two-phase pipe boundary; operator-limited; not actual facility QRA"
+  "equipment_campaign_catalog_diagnostic_scope": "synthetic storage and provider-resolved liquid/two-phase pipe boundary; operator-limited; not actual facility QRA",
+  "external_provider_evidence_audit_release_inventory_implemented": true,
+  "external_provider_evidence_audit_release_inventory_module": "src/lh2_tno/provider_evidence.py",
+  "external_provider_evidence_audit_release_inventory_record": "results/20261009/provider_evidence/center_provider_audit_with_release_inventory.json",
+  "external_provider_evidence_accident_release_promotion_status": "NO_ACCIDENT_RELEASE_EXPORT",
+  "external_provider_evidence_accident_release_candidate_files": 0,
+  "external_provider_evidence_accident_release_qualified_files": 0,
+  "external_provider_evidence_normal_or_screening_flow_files": 24,
+  "external_provider_evidence_release_files_scanned": 555,
+  "external_provider_evidence_release_inventory_blocker": "No machine-readable accidental resolved-release packet with explicit provider_export_schema; normal/screening flow JSON is withheld."
 }
