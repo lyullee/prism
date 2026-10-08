@@ -122,3 +122,23 @@ def test_completion_audit_blocks_provider_worklist_with_uncomputed_events():
     check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
     assert check["status"] == "BLOCKED"
     assert check["evidence"]["provider_packet_count"] == 0
+
+
+def test_completion_audit_prefers_provider_worklist_file_over_stale_status():
+    status = _status(True)
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        {
+            "status": "READY_FOR_PROVIDER_PACKETS",
+            "generated_event_count": 2,
+            "provider_packet_count": 0,
+            "status_counts": {"UNCOMPUTED_PROVIDER_PACKET": 2},
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["source"] == "provider_worklist"
+    assert check["evidence"]["frequency_event_count"] == 2

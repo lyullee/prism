@@ -50,6 +50,7 @@ def build_ijhe_completion_audit(
     scope_matrix: Mapping[str, Any],
     campaign_result: Mapping[str, Any],
     uncertainty_result: Mapping[str, Any] | None = None,
+    provider_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -73,10 +74,20 @@ def build_ijhe_completion_audit(
     events = campaign_result.get("events", [])
     timing = campaign_result.get("timing", {})
     fresh_physics_cases = timing.get("fresh_physics_cases")
-    worklist_event_count = current_status.get("equipment_provider_release_worklist_event_count")
-    worklist_packet_count = current_status.get("equipment_provider_release_worklist_provider_packet_count")
-    worklist_uncomputed_count = current_status.get("equipment_provider_release_worklist_uncomputed_count")
-    worklist_status = current_status.get("equipment_provider_release_worklist_status")
+    if provider_worklist is not None:
+        worklist_event_count = provider_worklist.get("generated_event_count")
+        worklist_packet_count = provider_worklist.get("provider_packet_count")
+        status_counts = provider_worklist.get("status_counts", {})
+        worklist_uncomputed_count = (
+            status_counts.get("UNCOMPUTED_PROVIDER_PACKET", 0)
+            + status_counts.get("UNCOMPUTED_NO_ACCIDENT_PORT", 0)
+        ) if isinstance(status_counts, Mapping) else None
+        worklist_status = provider_worklist.get("status")
+    else:
+        worklist_event_count = current_status.get("equipment_provider_release_worklist_event_count")
+        worklist_packet_count = current_status.get("equipment_provider_release_worklist_provider_packet_count")
+        worklist_uncomputed_count = current_status.get("equipment_provider_release_worklist_uncomputed_count")
+        worklist_status = current_status.get("equipment_provider_release_worklist_status")
     worklist_complete = (
         isinstance(worklist_event_count, int)
         and worklist_event_count > 0
@@ -126,6 +137,7 @@ def build_ijhe_completion_audit(
             "provider_worklist_coverage",
             worklist_complete,
             {
+                "source": "provider_worklist" if provider_worklist is not None else "current_status",
                 "status": worklist_status,
                 "frequency_event_count": worklist_event_count,
                 "provider_packet_count": worklist_packet_count,

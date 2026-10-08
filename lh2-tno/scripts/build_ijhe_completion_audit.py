@@ -24,6 +24,7 @@ def main() -> int:
     parser.add_argument("--scope-matrix", type=Path, required=True)
     parser.add_argument("--campaign-result", type=Path, required=True)
     parser.add_argument("--uncertainty-result", type=Path)
+    parser.add_argument("--provider-worklist", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -31,7 +32,8 @@ def main() -> int:
         matrix = _object(args.scope_matrix)
         campaign = _object(args.campaign_result)
         uncertainty = _object(args.uncertainty_result) if args.uncertainty_result else None
-        report = build_ijhe_completion_audit(status, matrix, campaign, uncertainty)
+        worklist = _object(args.provider_worklist) if args.provider_worklist else None
+        report = build_ijhe_completion_audit(status, matrix, campaign, uncertainty, worklist)
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
     args.output.parent.mkdir(parents=True, exist_ok=True)

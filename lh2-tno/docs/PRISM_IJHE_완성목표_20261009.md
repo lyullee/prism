@@ -67,6 +67,7 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
   --scope-matrix results/20261009/provider_release_full_chain_diagnostic/accident_scope_matrix.json `
   --campaign-result results/20261009/provider_release_full_chain_diagnostic/campaign_result.json `
   --uncertainty-result results/20261009/provider_release_full_chain_diagnostic/campaign_result_with_uncertainty.json `
+  --provider-worklist results/20261009/provider_evidence/generic_lh2_provider_release_worklist.json `
   --output results/20261009/provider_release_full_chain_diagnostic/ijhe_completion_audit.json
 ```
 
