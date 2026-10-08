@@ -9,6 +9,10 @@ from dataclasses import asdict
 import math
 import time
 import numpy as np
+try:
+    from .source_termination import effective_source_duration
+except ImportError:  # isolated worker imports this module as a top-level file
+    from source_termination import effective_source_duration
 
 MW_H2=.002016
 MW_AIR=.028965
@@ -75,7 +79,9 @@ def run_chain(p,roots,module):
     def mark(name,started):timings[name]=(time.perf_counter()-started)*1000
     start=time.perf_counter()
     cp=__import__('CoolProp.CoolProp',fromlist=['PropsSI'])
-    source=p['source_input']; duration=source['duration_s']
+    source=p['source_input']; requested_duration=source['duration_s']
+    duration=requested_duration
+    duration_mode=p.get('source_duration_mode','declared')
     resolved=p.get('resolved_release')
     if resolved is not None:
         from resolved_gas_worker import resolve_gas_rows
@@ -85,12 +91,22 @@ def run_chain(p,roots,module):
         inp=srcmod.IntegratedSourceInput(srcmod.TankState(**source['tank']),
             tuple(srcmod.PipeSection(**x) for x in source['pipe_sections']),
             srcmod.NozzleGeometry(**source['nozzle']),srcmod.AmbientState(**source['ambient']),
-            srcmod.ModelChoices(**source['choices']),duration,source['time_step_s'])
+            srcmod.ModelChoices(**source['choices']),requested_duration,source['time_step_s'])
         history=srcmod.evaluate_integrated_lh2_source(inp)
         source_history=asdict(history)
         rows=source_history['steps']
-        if not rows or len(rows)!=math.ceil(duration/source['time_step_s']-1e-10):
-            raise ValueError('source ended early; incomplete release horizon cannot be extrapolated')
+        duration=effective_source_duration(requested_duration,source['time_step_s'],
+            [r['time_s'] for r in rows],duration_mode)
+        source_history.update(requested_duration_s=requested_duration,
+            effective_duration_s=duration,source_duration_mode=duration_mode,
+            natural_termination_detected=duration < requested_duration - 1e-12,
+            termination_basis=p.get('release_termination',{}).get('basis'))
+        clock_duration=next((t for t in p['evaluation_times_s']
+            if math.isclose(t,duration,rel_tol=0,abs_tol=1e-10)),None)
+        if clock_duration is None:
+            raise ValueError('effective source termination must be an explicit evaluation timestamp')
+        duration=clock_duration
+        source_history['effective_duration_s']=duration
     mass=branch_mass(rows,duration,'total_mass_flow_kg_s')
     if mass>p['available_mass_kg']+1e-9:raise ValueError('release exceeds available inventory')
     if max(abs(r['mass_residual_kg_s']) for r in rows)>1e-8:

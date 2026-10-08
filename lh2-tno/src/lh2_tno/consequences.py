@@ -80,7 +80,7 @@ class SpatialDomain(Contract):
 
 
 class ReleaseTermination(Contract):
-    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion']
+    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'model_pressure_equalization']
     time_s: Positive
     provenance: Name
 
@@ -103,6 +103,10 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
+    # ``declared`` requires the source model to cover the requested horizon.
+    # ``model_natural`` uses the model's actual pressure-equalisation stop and
+    # never extrapolates the final flow interval.
+    source_duration_mode: Literal['declared', 'model_natural'] = 'declared'
     occupancy_probability: Fraction = 1.0
     initiation_intensity_per_s: Nonnegative | None = None
     frequency_scope: Literal['single_initiating_event_current_weather'] = 'single_initiating_event_current_weather'
@@ -127,6 +131,15 @@ class ConsequenceRequest(Contract):
             raise ValueError('source horizon must lie inside consequence horizon; max 100 source intervals')
         if duration not in times or self.ignition.delayed_time_s not in times:
             raise ValueError('release end and delayed ignition must be explicit evaluation timestamps')
+        if self.source_duration_mode == 'model_natural':
+            if release is not None:
+                raise ValueError('model_natural duration requires an integrated transient source')
+            if self.release_termination is None or self.release_termination.basis != 'model_pressure_equalization':
+                raise ValueError('model_natural duration requires pressure-equalization termination provenance')
+            if self.release_termination.time_s != duration:
+                raise ValueError('pressure-equalization termination must declare the requested source horizon')
+        elif self.release_termination is not None and self.release_termination.basis == 'model_pressure_equalization':
+            raise ValueError('pressure-equalization termination requires source_duration_mode=model_natural')
         if self.ignition.delayed_time_s+self.ignition.burn_back_duration_s>times[-1]:
             raise ValueError('horizon must cover the entire delayed burn-back')
         lo,hi=self.radiative_fraction_range

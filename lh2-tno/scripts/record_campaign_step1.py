@@ -21,7 +21,7 @@ failed=[x for x in stress['cases'] if x['status']=='FAILED']
 assert len(failed)==3
 record={'date_kst':'2026-10-09','goal_status':'active','baseline_public_release':'0.6.0',
     'development_stage':'post-0.6.0 campaign/sensitivity step1; not published',
-    'portable_tests_passed':181,'fresh_cli_physics_cases_passed':4,
+    'portable_tests_passed':189,'fresh_cli_physics_cases_passed':4,
     'g1_g2_uncomputed_weather_cases':4,'native_tno_ir_expected_death_fn_connected':True,
     'steady_upstream_synthetic_durations_s':[.2,.4],'real_isolation_or_inventory_feedback_qualified':False,
     'frequency_sensitivity_baseline_and_linear_scaling_verified':True,
@@ -37,7 +37,7 @@ record={'date_kst':'2026-10-09','goal_status':'active','baseline_public_release'
 p=ROOT/'CURRENT_STATUS.json'
 status=json.loads(p.read_text(encoding='utf-8'))
 status.update({'development_date_kst':'2026-10-09','development_since_public_release':'post-0.6.0 campaign/sensitivity step1; unpublished',
-    'unit_contract_conservation_tests_passed':181,'ijhe_completion_goal_status':'active',
+    'unit_contract_conservation_tests_passed':189,'ijhe_completion_goal_status':'active',
     'ijhe_completion_goal_record':'docs/PRISM_IJHE_완성목표_20261009.md',
     'multi_event_weather_barrier_campaign_implemented':True,'legacy_tno_ir_fn_aggregator_connected_to_lh2_campaign':True,
     'campaign_actual_fresh_physics_cases_passed':4,'campaign_actual_scope':'one tank-hole; two aligned wind speeds; two steady upstream synthetic durations',
@@ -45,6 +45,7 @@ status.update({'development_date_kst':'2026-10-09','development_since_public_rel
     'campaign_failure_ledger_implemented':True,'deterministic_frequency_sensitivity_implemented':True,
     'statistical_frequency_uncertainty_complete':False,'campaign_record':'docs/PRISM_시설위험_실행기_개발기록_20261009.md',
     'campaign_results':'results/20261009/campaign_step1',
-    'identified_crosswind_case_deadline_s':180.,'identified_transient_source_early_stop_remains_unqualified':True})
+    'identified_crosswind_case_deadline_s':180.,'transient_source_natural_termination_wrapper_verified':True,
+    'transient_source_physical_validation_claim':False,'identified_transient_source_early_stop_remains_unqualified':False})
 p.write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'goal':'active','cli_checks':'passed','timing':r['timing'],'stress_failures_preserved':len(failed)},indent=2))

@@ -56,6 +56,8 @@ def run(request):
         inp=m.IntegratedSourceInput(m.TankState(**p["tank"]),tuple(m.PipeSection(**x) for x in p["pipe_sections"]),
               m.NozzleGeometry(**p["nozzle"]),m.AmbientState(**p["ambient"]),m.ModelChoices(**p["choices"]),duration,dt)
         data=asdict(m.evaluate_integrated_lh2_source(inp))
+        data['requested_duration_s']=duration
+        data['returned_history_duration_s']=(len(data['steps'])*dt if data['steps'] else 0.0)
         # These residuals are latent-evaporation accounting, not total-energy closure.
         return {"data":data,"energy_balance_scope":"latent_evaporation_accounting_only",
                 "limitation":"upstream transient/source model assumptions retained; downstream dispersion not computed"}

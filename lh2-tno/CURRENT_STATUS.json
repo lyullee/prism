@@ -1,5 +1,5 @@
 {
-  "date_kst": "2026-10-08",
+  "date_kst": "2026-10-09",
   "package_version": "0.6.0",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 181,
+  "unit_contract_conservation_tests_passed": 189,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -33,7 +33,7 @@
   "physical_validation_claim": false,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
-  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits; frequency catalogue and single matched accident binding; full facility annual QRA and twin feedback remain incomplete.",
+  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits; integrated source pressure-equalization natural termination is supported without flow extrapolation; frequency catalogue and single matched accident binding; full facility annual QRA and twin feedback remain incomplete.",
   "unsupported": [
     "indoor",
     "vertical_only_nozzle",
@@ -141,5 +141,7 @@
   "campaign_record": "docs/PRISM_시설위험_실행기_개발기록_20261009.md",
   "campaign_results": "results/20261009/campaign_step1",
   "identified_crosswind_case_deadline_s": 180.0,
-  "identified_transient_source_early_stop_remains_unqualified": true
+  "transient_source_natural_termination_wrapper_verified": true,
+  "transient_source_physical_validation_claim": false,
+  "identified_transient_source_early_stop_remains_unqualified": false
 }

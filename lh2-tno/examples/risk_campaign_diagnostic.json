@@ -248,6 +248,7 @@
               "time_s": 0.2,
               "provenance": "synthetic steady upstream hold and branch horizon; tank feedback is not solved, not a validated isolation success/failure duration"
             },
+            "source_duration_mode": "declared",
             "occupancy_probability": 1.0,
             "initiation_intensity_per_s": null,
             "frequency_scope": "single_initiating_event_current_weather",
@@ -372,6 +373,7 @@
               "time_s": 0.4,
               "provenance": "synthetic steady upstream hold and branch horizon; tank feedback is not solved, not a validated isolation success/failure duration"
             },
+            "source_duration_mode": "declared",
             "occupancy_probability": 1.0,
             "initiation_intensity_per_s": null,
             "frequency_scope": "single_initiating_event_current_weather",

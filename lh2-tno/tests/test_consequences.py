@@ -85,3 +85,15 @@ def test_event_branches_partition_probability_without_repeated_leaks():
     probabilities=request.ignition.probabilities()
     assert sum(probabilities.values())==pytest.approx(1.)
     assert probabilities['delayed_explosion']==pytest.approx(.9*.2*.4)
+
+
+def test_model_natural_duration_requires_explicit_pressure_equalization_basis():
+    d=json.loads(EXAMPLE.read_text(encoding='utf-8'))
+    d['source_duration_mode']='model_natural'
+    d['release_termination']={'basis':'model_pressure_equalization','time_s':.2,
+                              'provenance':'pinned source model natural-stop contract'}
+    request=ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.source_duration_mode=='model_natural'
+    d['release_termination']['basis']='synthetic_diagnostic_horizon'
+    with pytest.raises(ValueError,match='pressure-equalization'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))

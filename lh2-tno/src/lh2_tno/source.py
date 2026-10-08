@@ -3,6 +3,7 @@ import math
 import copy
 from .backend import BackendError, IsolatedBackend
 from .contracts import Contract, PartitionStep, Positive, Fraction, Nonnegative, PropertyBasis, SourceLedger, canonical_digest
+from .source_termination import effective_source_duration
 
 
 def integrated_source(backend: IsolatedBackend, payload: dict, *, available_mass_kg: float,
@@ -20,22 +21,25 @@ def integrated_source(backend: IsolatedBackend, payload: dict, *, available_mass
 def ledger_from_response(payload: dict, response: dict, *, available_mass_kg: float,
                          position_enu_m: tuple[float,float,float]) -> SourceLedger:
     rows=response["data"]["steps"]
-    if not rows: raise BackendError("source terminated before producing a usable interval")
-    expected=math.ceil(payload["duration_s"]/payload["time_step_s"]-1e-10)
-    if len(rows)!=expected:
-        raise BackendError("source ended early; horizon cannot be silently extrapolated")
+    mode=payload.get("source_duration_mode", "declared")
+    try:
+        duration=effective_source_duration(payload["duration_s"],payload["time_step_s"],
+            [x["time_s"] for x in rows],mode)
+    except (KeyError, TypeError, ValueError) as error:
+        raise BackendError(str(error)) from error
     direction=payload["nozzle"]["direction_enu"]
     norm=math.sqrt(sum(x*x for x in direction))
     fluid=payload["tank"]["fluid"]
     ledger=SourceLedger(source_stage="nozzle_to_ground_partition",
         property_basis=PropertyBasis(fluid=fluid,energy_reference=f"CoolProp-HEOS:{fluid}:native"),
         position_enu_m=position_enu_m,direction_enu=tuple(x/norm for x in direction),
-        duration_s=payload["duration_s"],integration_rule="left_constant",initial_available_mass_kg=available_mass_kg,
+        duration_s=duration,integration_rule="left_constant",initial_available_mass_kg=available_mass_kg,
         steps=tuple(PartitionStep(time_s=x["time_s"],total_kg_s=x["total_mass_flow_kg_s"],gas_kg_s=x["gas_mass_flow_kg_s"],
                                  airborne_liquid_kg_s=x["airborne_liquid_mass_flow_kg_s"],ground_liquid_kg_s=x["ground_liquid_mass_flow_kg_s"]) for x in rows),
         model_revision=response["backend_config_digest"],request_digest=response["request_digest"],
         energy_balance_scope=response["energy_balance_scope"],
-        limitations=(response["limitation"],"not the frozen seven-test FFI concentration calculation route"))
+        limitations=(response["limitation"],"not the frozen seven-test FFI concentration calculation route",
+                     *(('natural pressure-equalization termination; no flow extrapolation',) if mode=='model_natural' else ())))
     return ledger
 
 

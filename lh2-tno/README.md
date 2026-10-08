@@ -11,7 +11,7 @@
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.0은 이름·명령·사용 설명 정비이며 물리 적용범위를 확대한 버전은 아닙니다.
 
-**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도를 추가했습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 181개 검사와 4개 실제 물리 사례/CLI 확인. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md). 전체 시설 위험은 계속 보류합니다.
+**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 통합 LH2 source의 압력 평형 자연 종료를 추가했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 189개 검사, 자연 종료 체인 1건, 4개 실제 물리 사례/CLI를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md). 전체 시설 위험은 계속 보류합니다.
 
 ## 목차
 
@@ -394,7 +394,7 @@ F-N에는 인구 분포와 같은 사건의 피해자수 정의도 필요합니�
 .venv\Scripts\python.exe -m pip wheel --no-deps --no-build-isolation ./lh2-tno -w wheelhouse
 ```
 
-단위·계약·보존·모드 검사 **154개**를 기준으로 관리하며 독립 실험 검증을 대신하지 않습니다.
+공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 미배포 개발 소스는 자연 종료 검사를 포함해 **189개**를 통과합니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
 GitHub Actions에서 portable 검사와 wheel catalogue/명령 포함을 확인합니다.
 새 안내의 도움말·시설·빈도 예제도 깨끗한 소스 export에서 확인합니다.
 `validate_*.py`는 개발 PC 경로와 이전 결과를 참조할 수 있어 클론 직후의 일반 사용 명령이 아닙니다.

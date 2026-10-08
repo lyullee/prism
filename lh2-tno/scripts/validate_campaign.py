@@ -75,7 +75,7 @@ assert result['total_facility_annual_ir_low_high'] is None
 assert result['declared_scope_numerically_complete'] is False
 assert len([c for c in result['uncomputed_cases'] if c['status']=='UNCOMPUTED'])==4
 save(OUT/'backend_config.json',config.model_dump(mode='json'))
-save(OUT/'verification.json',{'fresh_physics_cases':4,'unit_tests_passed':181,
+save(OUT/'verification.json',{'fresh_physics_cases':4,'unit_tests_passed':189,
     'native_tno_risk_aggregation_executed':True,'g1_g2_withheld':True,'total_facility_risk_withheld':True,
     'case_mass_closure_passed':True,'independent_physical_validation':False,
     'synthetic_release_horizons_s':[.2,.4], 'timing':result['timing'],
