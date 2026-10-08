@@ -198,6 +198,10 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     row['status'] = 'EXECUTED_DOMAIN_INCOMPLETE'
                     row['reason'] = 'outside-domain flammable mass unresolved or domain-completeness flag absent'
                     missing.append(row.copy())
+                if data.get('operator_limited') is True:
+                    row['status'] = 'EXECUTED_OPERATOR_LIMITED'
+                    row['reason'] = 'source operator has declared constant-state or open physical closure limitations'
+                    missing.append(row.copy())
                 cases.append(row)
                 population = {p.receptor_id: p.persons*p.presence_probability for p in c.population}
                 for key in sorted(IGNITION_KEYS):

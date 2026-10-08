@@ -193,7 +193,18 @@ def bind_event(request, event: FrequencyEvent):
     if request.component_id != event.model_component_id:
         raise ValueError('failure component and current source component must match; an upstream-port adapter is required otherwise')
     if event.release.mode != 'hole':
-        raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
+        if not (event.release.mode == 'instantaneous_inventory' and
+                request.source_operator == 'inventory_liquid_jet'):
+            raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
+        if request.release_termination is None or request.release_termination.basis != 'inventory_depletion':
+            raise ValueError('instantaneous inventory binding requires an inventory-depletion termination basis')
+        payload = request.model_dump(mode='json')
+        if request.annual_frequency_per_year is not None:
+            raise ValueError('remove external frequency before binding a catalogue event')
+        payload['annual_frequency_per_year'] = event.annual_frequency_per_year
+        payload['annual_frequency_provenance'] = f'{event.id}; {event.source}; {event.source_sha256}'
+        payload['frequency_event'] = event.model_dump(mode='json')
+        return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
     if request.resolved_release is not None:
         if request.resolved_release.event_kind!='accidental_leak' or request.resolved_release.failure_opening_diameter_m is None:
             raise ValueError('resolved source frequency requires an accidental leak with a declared failure opening')

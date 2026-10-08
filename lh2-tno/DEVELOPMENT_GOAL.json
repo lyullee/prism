@@ -6,10 +6,10 @@
   "completion_record": "docs/PRISM_IJHE_완성목표_20261009.md",
   "stages": [
     {"id":"A","name":"설비별 공정 상태·방출 경계 결합","status":"partial","remaining":"탱크/배관/밸브/펌프 등 지원표와 PH·상·재고·에너지/사건 시계 연결; 현재 수평 대기압 low-Mach 기체 출구만 실제 확인"},
-    {"id":"B","name":"주요 사고 방출·차단·재고 소진","status":"partial","implemented":"통합 LH2 source의 압력 평형 자연 종료 모드와 실제 반환 이력 기반 질량 장부를 연결; 조기 종료 시 유량을 요청 시간까지 연장하지 않음","remaining":"실제 차단 성공·실패와 재고 feedback, 전량/600초·양단 파열·수직 벤트; crosswind handoff 비용 문제 해결"},
-    {"id":"C","name":"시설 전체 위험 연결","status":"partial","implemented":"모든 생성 LOC의 계산/미계산 회계, 기상·인구·방호 분기 실행, 점화별 native TNO IR/F-N 합산, 실패/공간 잘림 시 total 보류","remaining":"모든 선언 주요 LOC 경로·위치 배분과 점화/차단 정책 공급; 현재 일부 탱크 구멍 진단만 계산"},
+    {"id":"B","name":"주요 사고 방출·차단·재고 소진","status":"partial","implemented":"통합 LH2 source의 압력 평형 자연 종료와 명시적 SLABx-LH2 finite-inventory liquid-jet operator를 실제 질량 장부에 연결; G1은 constant upstream·open spray-energy 한계를 표시하고 유량을 요청 시간까지 묵시적으로 연장하지 않음","remaining":"실제 차단 성공·실패와 tank feedback, G1 operator 물리 검증, 전량/600초·양단 파열·수직 벤트; crosswind handoff 비용 문제 해결"},
+    {"id":"C","name":"시설 전체 위험 연결","status":"partial","implemented":"모든 생성 LOC의 계산/미계산 회계, 기상·인구·방호 분기 실행, 점화별 native TNO IR/F-N 합산, 실패/공간 잘림/operator-limited 상태에서 total 보류","remaining":"모든 선언 주요 LOC 경로·위치 배분과 점화/차단 정책 공급; 현재 G1 operator-limited와 G3 탱크 구멍만 계산하고 G2/설비는 미계산"},
     {"id":"D","name":"문헌 빈도 불확실성","status":"partial","implemented":"고정 물리 결과의 자산별 명시적 배수 민감도 및 문헌 p05/중앙/p95 구간의 자산별 공유 분위수 재가중; 계산된 범위의 기대 사망자 순위","remaining":"문헌 분포 샘플링·자산 간 상관 가정 비교, 다양한 설비/방호 판단의 순위 안정성; 임의 분포 금지"},
-    {"id":"E","name":"독립 물리 검증과 신규 계산 처리시간","status":"partial","implemented":"191개 portable 검사, 자연 종료 실제 체인 1건, 4개 캠페인 사례/CLI, 단계별 시간·질량 장부, 실패 시험 보존","remaining":"실측/복원/합성 출처와 분할, 외부 독립 실험·관측연산자·수렴 및 반복 p50/p95/p99; 1 Hz 미검증"}
+    {"id":"E","name":"독립 물리 검증과 신규 계산 처리시간","status":"partial","implemented":"194개 portable 검사, 자연 종료 실제 체인 1건, 6개 캠페인 사례(그중 G1 operator-limited 2건)/CLI, 단계별 시간·질량 장부, 실패 시험 보존","remaining":"실측/복원/합성 출처와 분할, 외부 독립 실험·관측연산자·수렴 및 반복 p50/p95/p99; 1 Hz 미검증"}
   ],
   "excluded_from_required_scope": ["현장 사고빈도 수집", "센서 기반 빈도 학습", "실내", "폭굉", "전체 도미노"],
   "next_priority": "설비 PH/재고 소유권을 보존한 누출·밸브 종료 경계와 전량/양단 파열·수직 방출의 적용범위 정의 및 실제 연결",

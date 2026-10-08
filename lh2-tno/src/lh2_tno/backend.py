@@ -40,7 +40,7 @@ class IsolatedBackend:
             raise ValueError("nonempty unique backend packages required")
         self.config = config
 
-    def run(self, operation: Literal["integrated_source", "vent_stack", "equipment_network_exit", "declared_pool", "assurance", "thermal_damage", "consequence_chain", "facility_risk_aggregate"], payload: dict) -> dict:
+    def run(self, operation: Literal["integrated_source", "liquid_jet_source", "vent_stack", "equipment_network_exit", "declared_pool", "assurance", "thermal_damage", "consequence_chain", "facility_risk_aggregate"], payload: dict) -> dict:
         started=time.perf_counter()
         for pin in self.config.packages:
             if tree_digest(Path(pin.root)) != pin.sha256:

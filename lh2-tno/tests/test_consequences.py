@@ -97,3 +97,18 @@ def test_model_natural_duration_requires_explicit_pressure_equalization_basis():
     d['release_termination']['basis']='synthetic_diagnostic_horizon'
     with pytest.raises(ValueError,match='pressure-equalization'):
         ConsequenceRequest.model_validate_json(json.dumps(d))
+
+
+def test_inventory_liquid_jet_requires_explicit_depletion_operator_contract():
+    d=json.loads(EXAMPLE.read_text(encoding='utf-8'))
+    d['source_operator']='inventory_liquid_jet'
+    d['source_input']['liquid_jet']={'discharge_coefficient':.62,
+        'droplet_diameter_m':5e-4,'d2_evaporation_constant_m2_s':1e-7,
+        'spray_half_angle_deg':12.,'liquid_velocity_fraction':1.}
+    d['release_termination']={'basis':'inventory_depletion','time_s':.2,
+                              'provenance':'explicit finite-inventory operator test'}
+    request=ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.source_operator=='inventory_liquid_jet'
+    d['source_input'].pop('liquid_jet')
+    with pytest.raises(ValueError,match='liquid_jet assumptions'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))

@@ -11,8 +11,10 @@ import time
 import numpy as np
 try:
     from .source_termination import effective_source_duration
+    from .inventory_source import liquid_jet_rows
 except ImportError:  # isolated worker imports this module as a top-level file
     from source_termination import effective_source_duration
+    from inventory_source import liquid_jet_rows
 
 MW_H2=.002016
 MW_AIR=.028965
@@ -82,10 +84,44 @@ def run_chain(p,roots,module):
     source=p['source_input']; requested_duration=source['duration_s']
     duration=requested_duration
     duration_mode=p.get('source_duration_mode','declared')
+    source_operator=p.get('source_operator','integrated_transient')
     resolved=p.get('resolved_release')
     if resolved is not None:
         from resolved_gas_worker import resolve_gas_rows
         rows,source_history=resolve_gas_rows(resolved,source['ambient']['pressure_pa'],cp)
+    elif source_operator == 'inventory_liquid_jet':
+        jetmod=module('slabx_lh2.lh2_jet_source',roots['slabx_lh2'])
+        spray=source['liquid_jet']
+        history=jetmod.evaluate_liquid_jet(
+            jetmod.StorageState(pressure_pa=source['tank']['pressure_pa'],
+                temperature_k=source['tank']['temperature_k'],
+                discharge_coefficient=spray['discharge_coefficient'],
+                fluid=source['tank']['fluid']),
+            jetmod.Nozzle(diameter_m=source['nozzle']['diameter_m'],
+                height_m=source['nozzle']['height_m'],
+                direction=tuple(source['nozzle']['direction_enu'])),
+            jetmod.Environment(pressure_pa=source['ambient']['pressure_pa'],
+                temperature_k=source['ambient']['temperature_k'],
+                wind_speed_m_s=source['ambient']['wind_speed_m_s'],
+                wind_from_bearing_deg=source['ambient']['wind_from_bearing_deg']),
+            requested_duration, time_step_s=source['time_step_s'],
+            spray=jetmod.SprayAssumptions(
+                droplet_diameter_m=spray['droplet_diameter_m'],
+                d2_evaporation_constant_m2_s=spray['d2_evaporation_constant_m2_s'],
+                spray_half_angle_deg=spray['spray_half_angle_deg'],
+                liquid_velocity_fraction=spray['liquid_velocity_fraction']))
+        rows,raw_history=liquid_jet_rows(history,requested_duration)
+        source_history=raw_history
+        source_history.update(source_operator=source_operator,
+            requested_duration_s=requested_duration,
+            effective_duration_s=requested_duration,
+            termination_basis=p.get('release_termination',{}).get('basis'),
+            operator_limited=True,
+            limitations=['constant upstream liquid-jet state; tank pressure/inventory feedback is not solved',
+                         'declared d2 droplet evaporation and spray geometry; source energy closure remains open'])
+        if not math.isclose(branch_mass(rows,requested_duration,'total_mass_flow_kg_s'),
+                            p['available_mass_kg'],rel_tol=1e-6,abs_tol=1e-8):
+            raise ValueError('inventory liquid-jet duration does not close the declared inventory')
     else:
         srcmod=module('slabx_lh2.integrated_lh2_source',roots['slabx_lh2'])
         inp=srcmod.IntegratedSourceInput(srcmod.TankState(**source['tank']),
@@ -107,6 +143,8 @@ def run_chain(p,roots,module):
             raise ValueError('effective source termination must be an explicit evaluation timestamp')
         duration=clock_duration
         source_history['effective_duration_s']=duration
+    if source_operator == 'inventory_liquid_jet' and duration not in p['evaluation_times_s']:
+        raise ValueError('inventory depletion duration must be an explicit evaluation timestamp')
     mass=branch_mass(rows,duration,'total_mass_flow_kg_s')
     if mass>p['available_mass_kg']+1e-9:raise ValueError('release exceeds available inventory')
     if max(abs(r['mass_residual_kg_s']) for r in rows)>1e-8:
@@ -462,6 +500,8 @@ def run_chain(p,roots,module):
                   'rainout_and_dynamic_pool','vector_cryogenic_near_field','SLABx_dispersion',
                   'finite_inventory_cloud','ignition_branches','fire_radiation','multi_energy_blast_zones','TNO_human_damage','conditional_risk'],
         'source':source_history,'pool':pool,'ground_arrival_pulses':ground_pulses,
+        'source_operator':source_operator,
+        'operator_limited':bool(source_history.get('operator_limited',False)),
         'source_ownership':{'state_owner':'equipment_twin' if resolved is not None else 'integrated_source',
             'discharge_owner':'equipment_twin' if resolved is not None else 'integrated_source',
             'discharge_recalculated':resolved is None},

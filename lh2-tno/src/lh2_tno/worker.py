@@ -61,6 +61,30 @@ def run(request):
         # These residuals are latent-evaporation accounting, not total-energy closure.
         return {"data":data,"energy_balance_scope":"latent_evaporation_accounting_only",
                 "limitation":"upstream transient/source model assumptions retained; downstream dispersion not computed"}
+    if operation=="liquid_jet_source":
+        m=module("slabx_lh2.lh2_jet_source",roots["slabx_lh2"])
+        from inventory_source import _json_safe
+        spray=p["liquid_jet"]
+        history=m.evaluate_liquid_jet(
+            m.StorageState(pressure_pa=p["tank"]["pressure_pa"],
+                temperature_k=p["tank"]["temperature_k"],
+                discharge_coefficient=spray["discharge_coefficient"],
+                fluid=p["tank"]["fluid"]),
+            m.Nozzle(diameter_m=p["nozzle"]["diameter_m"],
+                height_m=p["nozzle"]["height_m"],
+                direction=tuple(p["nozzle"]["direction_enu"])),
+            m.Environment(pressure_pa=p["ambient"]["pressure_pa"],
+                temperature_k=p["ambient"]["temperature_k"],
+                wind_speed_m_s=p["ambient"]["wind_speed_m_s"],
+                wind_from_bearing_deg=p["ambient"]["wind_from_bearing_deg"]),
+            p["duration_s"], time_step_s=p["time_step_s"],
+            spray=m.SprayAssumptions(
+                droplet_diameter_m=spray["droplet_diameter_m"],
+                d2_evaporation_constant_m2_s=spray["d2_evaporation_constant_m2_s"],
+                spray_half_angle_deg=spray["spray_half_angle_deg"],
+                liquid_velocity_fraction=spray["liquid_velocity_fraction"]))
+        return {"data":_json_safe(asdict(history)),
+                "limitation":"constant upstream liquid-jet source; no tank inventory feedback; declared spray evaporation energy is open"}
     if operation=="vent_stack":
         props=module("lh2dt.properties",roots["lh2dt"])
         m=module("lh2dt.vent_stack",roots["lh2dt"])

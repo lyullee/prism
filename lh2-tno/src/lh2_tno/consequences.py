@@ -103,6 +103,7 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
+    source_operator: Literal['integrated_transient', 'inventory_liquid_jet'] = 'integrated_transient'
     # ``declared`` requires the source model to cover the requested horizon.
     # ``model_natural`` uses the model's actual pressure-equalisation stop and
     # never extrapolates the final flow interval.
@@ -131,6 +132,26 @@ class ConsequenceRequest(Contract):
             raise ValueError('source horizon must lie inside consequence horizon; max 100 source intervals')
         if duration not in times or self.ignition.delayed_time_s not in times:
             raise ValueError('release end and delayed ignition must be explicit evaluation timestamps')
+        if self.source_operator == 'inventory_liquid_jet':
+            if release is not None:
+                raise ValueError('inventory_liquid_jet requires an integrated source_input')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('inventory_liquid_jet uses its declared depletion horizon')
+            if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
+                raise ValueError('inventory_liquid_jet requires inventory-depletion termination provenance')
+            if source['tank'].get('vapour_quality') != 0:
+                raise ValueError('inventory_liquid_jet requires a declared liquid inlet state')
+            if source.get('pipe_sections'):
+                raise ValueError('inventory_liquid_jet does not silently include unresolved pipe sections')
+            spray = source.get('liquid_jet')
+            if not isinstance(spray, dict):
+                raise ValueError('inventory_liquid_jet requires explicit liquid_jet assumptions')
+            required = ('discharge_coefficient', 'droplet_diameter_m', 'd2_evaporation_constant_m2_s',
+                        'spray_half_angle_deg', 'liquid_velocity_fraction')
+            if any(k not in spray for k in required):
+                raise ValueError('liquid_jet assumptions must declare discharge, droplet, evaporation, spray and velocity inputs')
+        elif self.release_termination is not None and self.release_termination.basis == 'inventory_depletion':
+            raise ValueError('inventory-depletion termination requires source_operator=inventory_liquid_jet')
         if self.source_duration_mode == 'model_natural':
             if release is not None:
                 raise ValueError('model_natural duration requires an integrated transient source')
@@ -169,8 +190,13 @@ class ConsequenceRequest(Contract):
         if event is not None:
             if self.release_termination is None or self.release_termination.time_s != duration:
                 raise ValueError('bound event requires explicit release-duration/termination basis; frequency does not justify cutting a release short')
-            if event.model_component_id != self.component_id or event.release.mode != 'hole' or event.exposure_multiplier != 1:
-                raise ValueError('frequency event requires a matching single-item hole release')
+            if event.model_component_id != self.component_id or event.exposure_multiplier != 1:
+                raise ValueError('frequency event requires a matching single-item release')
+            if event.release.mode == 'instantaneous_inventory':
+                if self.source_operator != 'inventory_liquid_jet' or self.release_termination.basis != 'inventory_depletion':
+                    raise ValueError('instantaneous inventory event requires the inventory liquid-jet operator')
+            elif event.release.mode != 'hole':
+                raise ValueError('frequency event requires a supported release operator')
             if release is None and event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):
                 raise ValueError('current source binding supports reviewed tank/vessel hole events only')
             if release is not None and (release.event_kind!='accidental_leak' or release.failure_opening_diameter_m is None):
@@ -182,9 +208,10 @@ class ConsequenceRequest(Contract):
             if self.initiation_intensity_per_s is not None and not math.isclose(
                     self.initiation_intensity_per_s, event.annual_frequency_per_year/(365.25*86400), rel_tol=1e-10, abs_tol=0):
                 raise ValueError('bound event cannot carry a conflicting initiation intensity; explicit stationary calendar-year conversion required')
-            opening=source['nozzle']['diameter_m'] if release is None else release.failure_opening_diameter_m
-            if not math.isclose(opening, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
-                raise ValueError('request/event leak diameter mismatch')
+            if event.release.mode == 'hole':
+                opening=source['nozzle']['diameter_m'] if release is None else release.failure_opening_diameter_m
+                if not math.isclose(opening, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
+                    raise ValueError('request/event leak diameter mismatch')
         if self.transition_x_max_m/self.transition_dx_m>10000:
             raise ValueError('near-field integration budget exceeded')
         return self
