@@ -4,6 +4,7 @@ from lh2_tno.facility_ledger import (
     FacilityLedgerError,
     merge_facility_campaign_results,
 )
+from lh2_tno.uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty
 
 
 def _result(
@@ -36,6 +37,23 @@ def _result(
             "id": event_id,
             "asset_id": asset_id,
             "model_component_id": component_id,
+            "profile": "LH2_PIPE",
+            "loc": "AREA_0.01%",
+            "basis": "LH2_LITERATURE",
+            "base_rate": frequency,
+            "rate_unit": "item^-1 year^-1",
+            "exposure_multiplier": 1.0,
+            "annual_frequency_per_year": frequency,
+            "statistic": "published_median",
+            "marginal_p05_per_year": frequency * 0.1,
+            "marginal_p95_per_year": frequency * 10.0,
+            "source": "facility-ledger test source",
+            "source_sha256": "a" * 64,
+            "catalogue_digest": "b" * 64,
+            "release": {"mode": "hole", "hole_diameter_m": 0.01},
+            "classification_basis": "facility-ledger test boundary",
+            "limitations": ["test only"],
+            "physical_validation_claim": False,
         }],
         "cases": [{"event_id": event_id, "status": "EXECUTED"}],
         "uncomputed_cases": ([{"event_id": event_id, "status": "UNCOMPUTED"}] if incomplete else []),
@@ -122,3 +140,37 @@ def test_facility_ledger_withholds_total_for_missing_component_and_family():
     assert "missing expected components: pipe-01" in result["blocking_reasons"]
     assert "accident family pipe_hole: missing scope matrix" in result["blocking_reasons"]
     assert result["component_statuses"]["tank-01"] == "PARTIAL"
+
+
+def test_facility_ledger_can_feed_frequency_uncertainty_without_physics_rerun():
+    result = merge_facility_campaign_results(
+        [_result(
+            event_id="event-tank", asset_id="tank-asset", component_id="tank-01",
+            frequency=1e-3,
+        )],
+        expected_component_ids=("tank-01",),
+    )
+    asset = result["events"][0]["asset_id"]
+    uncertainty = literature_frequency_uncertainty(
+        result,
+        (
+            LiteratureFrequencyScenario(
+                id="shared-low",
+                asset_quantiles={asset: "p05"},
+                provenance="published test bounds",
+            ),
+            LiteratureFrequencyScenario(
+                id="independent-low",
+                event_quantiles={result["events"][0]["id"]: "p05"},
+                provenance="published test bounds",
+                correlation_assumption="independent_event_bounds",
+            ),
+        ),
+    )
+    assert uncertainty["fresh_physics_executed"] is False
+    assert uncertainty["correlation_comparison_present"] is True
+    assert all(
+        row["total_facility_annual_ir_low_high"] is not None
+        for row in uncertainty["scenarios"]
+    )
+    assert uncertainty["facility_credible_interval"] is False

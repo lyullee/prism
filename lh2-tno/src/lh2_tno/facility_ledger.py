@@ -373,6 +373,7 @@ def merge_facility_campaign_results(
         "facility_id": facility_id,
         "campaign_ids": campaign_ids,
         "campaign_digests": source_digests,
+        "campaign_digest": canonical_digest({"campaign_ids": campaign_ids, "campaign_digests": source_digests}),
         "event_count": len(merged_events),
         "case_count": len(merged_cases),
         "uncomputed_case_count": len(merged_missing),
