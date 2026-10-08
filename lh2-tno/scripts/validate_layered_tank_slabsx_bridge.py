@@ -11,7 +11,6 @@ partition.  The example is synthetic and remains operator-limited.
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
 import copy
 import json
 from pathlib import Path
@@ -29,6 +28,7 @@ from lh2_tno.equipment_release_adapter import (
 )
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.provider_liquid_partition import combine_provider_liquid_partition
+from lh2_tno.slabx_provider_boundary import evaluate_provider_state_partition
 
 
 def _save(path: Path, value: object) -> None:
@@ -60,23 +60,15 @@ def _provider_rows(packet: dict) -> tuple[list[dict], float]:
             "source_temperature_k": float(source["temperature_K"]),
             "source_density_kg_m3": float(source["density_kg_m3"]),
         })
+        if "specific_entropy_J_kgK" in source:
+            rows[-1]["source_specific_enthalpy_j_kg"] = float(source["specific_enthalpy_J_kg"])
+            rows[-1]["source_specific_entropy_j_kg_k"] = float(source["specific_entropy_J_kgK"])
+        if "vapour_quality" in source:
+            rows[-1]["source_vapour_quality"] = float(source["vapour_quality"])
     return rows, dt
 
 
 def _slabx_partition_rows(provider_rows: list[dict], packet: dict, dt: float) -> list[dict]:
-    from slabx_lh2.integrated_lh2_source import (
-        AmbientState,
-        IntegratedSourceInput,
-        ModelChoices,
-        NozzleGeometry,
-        TankState,
-        evaluate_integrated_lh2_source,
-    )
-
-    geometry = packet["source_geometry"]
-    diameter = (4.0 * float(geometry["full_open_area_m2"]) / 3.141592653589793) ** 0.5
-    direction = tuple(float(value) for value in geometry["direction_enu"])
-    ambient_pressure = float(packet["ambient_pressure_pa"])
     partition_rows = []
     for provider in provider_rows:
         total = provider["total_mass_flow_kg_s"]
@@ -88,67 +80,87 @@ def _slabx_partition_rows(provider_rows: list[dict], packet: dict, dt: float) ->
                 "velocity_vector_m_s": [0.0, 0.0, 0.0],
             })
             continue
-        inp = IntegratedSourceInput(
-            tank=TankState(
-                pressure_pa=provider["source_pressure_pa"],
-                temperature_k=provider["source_temperature_k"],
-                volume_m3=float(packet.get("tank_volume_m3", 1.0)),
-                vapour_quality=0.0,
-                fluid=packet.get("fluid", "Hydrogen"),
-            ),
-            pipe_sections=(),
-            nozzle=NozzleGeometry(
-                diameter_m=diameter,
-                length_m=float(geometry.get("length_m", 0.01)),
-                height_m=float(geometry["nozzle_height_m"]),
-                direction_enu=direction,
-                discharge_coefficient=float(geometry["discharge_coefficient"]),
-            ),
-            ambient=AmbientState(
-                pressure_pa=ambient_pressure,
-                temperature_k=float(packet.get("ambient_temperature_k", 288.15)),
-                wind_speed_m_s=float(packet.get("wind_speed_m_s", 0.0)),
-                wind_from_bearing_deg=packet.get("wind_from_bearing_deg"),
-            ),
-            choices=ModelChoices(
-                phase_model="HEM",
-                fictitious_nozzle="momentum_adiabatic",
-                droplet_correlation="rescigno_yellow_book",
-                distribution="single_smd",
-            ),
-            duration_s=dt,
-            time_step_s=dt,
-        )
-        history = evaluate_integrated_lh2_source(inp)
-        if not history.steps:
-            raise ValueError("SLABx returned no partition interval")
-        step = history.steps[0]
-        nozzle = step.fictitious_nozzle
-        if step.gas_mass_flow_kg_s > 1.0e-12 and nozzle is None:
-            raise ValueError("SLABx positive gas flow has no atmospheric handoff state")
-        outcomes = []
-        for outcome in step.droplet_class_outcomes:
-            outcomes.append({
-                "ground_liquid_mass_flow_kg_s": outcome.ground_liquid_mass_flow_kg_s,
-                "airborne_liquid_mass_flow_kg_s": outcome.airborne_evaporated_mass_flow_kg_s * 0.0,
-                "flight_time_s": outcome.flight_time_s,
-                "impact_position_m": None if outcome.impact_position_m is None else list(outcome.impact_position_m),
-                "droplet_diameter_m": outcome.diameter_m,
+        if "source_specific_entropy_j_kg_k" not in provider:
+            # Historical LayeredTank exports predate the explicit provider
+            # entropy field.  Preserve their P,T screening path, while new
+            # lh2dt exports use the provider-state-aware boundary below.
+            from dataclasses import asdict
+            from slabx_lh2.integrated_lh2_source import (
+                AmbientState,
+                IntegratedSourceInput,
+                ModelChoices,
+                NozzleGeometry,
+                TankState,
+                evaluate_integrated_lh2_source,
+            )
+            geometry = packet["source_geometry"]
+            diameter = (4.0 * float(geometry["full_open_area_m2"]) / 3.141592653589793) ** 0.5
+            direction = tuple(float(value) for value in geometry["direction_enu"])
+            inp = IntegratedSourceInput(
+                tank=TankState(
+                    pressure_pa=provider["source_pressure_pa"],
+                    temperature_k=provider["source_temperature_k"],
+                    volume_m3=float(packet.get("tank_volume_m3", 1.0)),
+                    vapour_quality=0.0,
+                    fluid=packet.get("fluid", "Hydrogen"),
+                ),
+                pipe_sections=(),
+                nozzle=NozzleGeometry(
+                    diameter_m=diameter,
+                    length_m=float(geometry.get("length_m", 0.01)),
+                    height_m=float(geometry["nozzle_height_m"]),
+                    direction_enu=direction,
+                    discharge_coefficient=float(geometry["discharge_coefficient"]),
+                ),
+                ambient=AmbientState(
+                    pressure_pa=float(packet["ambient_pressure_pa"]),
+                    temperature_k=float(packet.get("ambient_temperature_k", 288.15)),
+                    wind_speed_m_s=float(packet.get("wind_speed_m_s", 0.0)),
+                    wind_from_bearing_deg=packet.get("wind_from_bearing_deg"),
+                ),
+                choices=ModelChoices(
+                    phase_model="HEM",
+                    fictitious_nozzle="momentum_adiabatic",
+                    droplet_correlation="rescigno_yellow_book",
+                    distribution="single_smd",
+                ),
+                duration_s=dt,
+                time_step_s=dt,
+            )
+            history = evaluate_integrated_lh2_source(inp)
+            if not history.steps:
+                raise ValueError("SLABx returned no partition interval")
+            step = history.steps[0]
+            nozzle = step.fictitious_nozzle
+            if step.gas_mass_flow_kg_s > 1.0e-12 and nozzle is None:
+                raise ValueError("SLABx positive gas flow has no atmospheric handoff state")
+            outcomes = [
+                {
+                    "ground_liquid_mass_flow_kg_s": outcome.ground_liquid_mass_flow_kg_s,
+                    "airborne_liquid_mass_flow_kg_s": outcome.airborne_evaporated_mass_flow_kg_s * 0.0,
+                    "flight_time_s": outcome.flight_time_s,
+                    "impact_position_m": None if outcome.impact_position_m is None else list(outcome.impact_position_m),
+                    "droplet_diameter_m": outcome.diameter_m,
+                }
+                for outcome in step.droplet_class_outcomes
+            ]
+            partition_rows.append({
+                "time_s": provider["time_s"],
+                "total_mass_flow_kg_s": step.total_mass_flow_kg_s,
+                "gas_mass_flow_kg_s": step.gas_mass_flow_kg_s,
+                "airborne_liquid_mass_flow_kg_s": step.airborne_liquid_mass_flow_kg_s,
+                "ground_liquid_mass_flow_kg_s": step.ground_liquid_mass_flow_kg_s,
+                "gas_pressure_pa_abs": None if nozzle is None else nozzle.pressure_pa,
+                "gas_temperature_k": None if nozzle is None else nozzle.temperature_k,
+                "gas_density_kg_m3": None if nozzle is None else nozzle.density_kg_m3,
+                "gas_velocity_m_s": None if nozzle is None else nozzle.velocity_m_s,
+                "droplet_class_outcomes": outcomes,
+                "velocity_vector_m_s": list(step.velocity_vector_m_s),
+                "slabx_step": asdict(step),
             })
-        partition_rows.append({
-            "time_s": provider["time_s"],
-            "total_mass_flow_kg_s": step.total_mass_flow_kg_s,
-            "gas_mass_flow_kg_s": step.gas_mass_flow_kg_s,
-            "airborne_liquid_mass_flow_kg_s": step.airborne_liquid_mass_flow_kg_s,
-            "ground_liquid_mass_flow_kg_s": step.ground_liquid_mass_flow_kg_s,
-            "gas_pressure_pa_abs": None if nozzle is None else nozzle.pressure_pa,
-            "gas_temperature_k": None if nozzle is None else nozzle.temperature_k,
-            "gas_density_kg_m3": None if nozzle is None else nozzle.density_kg_m3,
-            "gas_velocity_m_s": None if nozzle is None else nozzle.velocity_m_s,
-            "droplet_class_outcomes": outcomes,
-            "velocity_vector_m_s": list(step.velocity_vector_m_s),
-            "slabx_step": asdict(step),
-        })
+            continue
+        partition_row, _boundary_audit = evaluate_provider_state_partition(provider, packet)
+        partition_rows.append(partition_row)
     return partition_rows
 
 
@@ -264,10 +276,28 @@ def main() -> None:
         "rate_intervals": audit["intervals"],
         "operator_limited": True,
         "physical_validation_claim": False,
+        "facility_property_basis_rebound": False,
+        "source_operator": (
+            "equipment_liquid_release"
+            if source.get("termination_basis") == "inventory_depletion"
+            else "integrated_transient"
+        ),
+        "termination_basis": source.get("termination_basis", "synthetic_diagnostic_horizon"),
     }
     if args.execute_chain:
         base = json.loads((ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json").read_text(encoding="utf-8"))
         facility_data = json.loads((ROOT / "examples" / "consequence_facility.json").read_text(encoding="utf-8"))
+        # This is a synthetic chain diagnostic, so the example facility is
+        # rebased to the provider's explicit CoolProp fluid before validation.
+        # A real facility must declare the same property basis in its own
+        # manifest; PRISM never performs this rebase for a production catalog.
+        provider_fluid = source.get("fluid", "Hydrogen")
+        for component in facility_data["components"]:
+            basis = component.get("property_basis")
+            if isinstance(basis, dict):
+                basis["fluid"] = provider_fluid
+                basis["energy_reference"] = f"CoolProp-HEOS:{provider_fluid}:native"
+        facility_data["configuration_origin"] = "synthetic"
         for port in facility_data["ports"]:
             if port["id"] == "storage.out": port["phase"] = "two_phase"
         facility = Facility.model_validate_json(json.dumps(facility_data, allow_nan=False))
@@ -279,7 +309,17 @@ def main() -> None:
         request.update(
             source_input=None, resolved_release=None, resolved_release_set=None,
             resolved_liquid_release=release.model_dump(mode="json"),
-            component_id=args.facility_component_id, source_operator="equipment_liquid_release",
+            # A positive-mass threshold is a provider-owned depletion event;
+            # the fixed diagnostic horizon remains a generic transient case.
+            # This prevents a short horizon from being mislabeled as depletion
+            # while allowing an explicitly crossed threshold to bind to the
+            # liquid inventory operator.
+            component_id=args.facility_component_id,
+            source_operator=(
+                "equipment_liquid_release"
+                if source.get("termination_basis") == "inventory_depletion"
+                else "integrated_transient"
+            ),
             source_duration_mode="declared", available_mass_kg=release.available_mass_kg,
             source_position_enu_m=list(release.position_enu_m),
             evaluation_times_s=sorted(set(
@@ -311,6 +351,8 @@ def main() -> None:
             "mass_ledger": data.get("mass_ledger"),
             "elapsed_ms": result.get("elapsed_ms"),
             "stage_elapsed_ms": data.get("stage_elapsed_ms"),
+            "facility_property_basis_rebound": True,
+            "facility_property_basis_fluid": provider_fluid,
         })
     _save(output / "verification.json", verification)
     print(json.dumps(verification, ensure_ascii=False, indent=2))
