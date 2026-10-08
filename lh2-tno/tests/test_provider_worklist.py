@@ -42,9 +42,20 @@ def test_full_scope_provider_worklist_maps_every_frequency_event_without_fabrica
     relief = [row for row in rows if row["release_mode"] == "maximum_relief_discharge"]
     assert relief and relief[0]["provider_event_kind"] == "emergency_relief"
     assert "failure_opening_diameter_m" not in relief[0]["required_packet_fields"]
+    assert relief[0]["provider_boundary_variants"] == ["resolved_atmospheric_gas_exit"]
+    assert relief[0]["liquid_packet_fields"] == []
 
     inventory = [row for row in rows if row["release_mode"] == "inventory_over_600s"]
     assert inventory and inventory[0]["required_duration_s"] == 600.0
+    assert set(inventory[0]["provider_boundary_variants"]) == {
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit",
+    }
+    assert {
+        "phase_basis",
+        "reference_area_m2",
+        "droplet_partition_provenance",
+    } <= set(inventory[0]["liquid_packet_fields"])
 
 
 def test_provider_worklist_does_not_replace_a_missing_accident_port_with_normal_port():

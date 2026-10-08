@@ -15,6 +15,7 @@ from .contracts import Contract, Name, Positive
 from .equipment_manifest import EquipmentManifest, audit_manifest
 from .equipment_model_binding import audit_equipment_model_binding
 from .frequency import FrequencyPlan, generate_events
+from .provider_evidence import ACCIDENT_RELEASE_EXPORT_REQUEST
 from .scenario_evidence import PROVIDER_RELEASE_REQUIRED_FIELDS
 
 
@@ -23,6 +24,9 @@ WORKLIST_SCHEMA = "prism.provider_release_worklist.v1"
 _EMERGENCY_RELIEF_FIELDS = tuple(
     field for field in PROVIDER_RELEASE_REQUIRED_FIELDS
     if field != "failure_opening_diameter_m"
+)
+_LIQUID_PACKET_FIELDS = tuple(
+    sorted(ACCIDENT_RELEASE_EXPORT_REQUEST["liquid_required_fields"])
 )
 
 
@@ -54,6 +58,10 @@ class ProviderReleaseWorkItem(Contract):
     required_duration_s: Positive | None = None
     required_opening_diameter_m: Positive | None = None
     required_packet_fields: tuple[Name, ...]
+    provider_boundary_variants: tuple[
+        Literal["resolved_atmospheric_gas_exit", "resolved_atmospheric_liquid_exit"], ...
+    ] = ("resolved_atmospheric_gas_exit",)
+    liquid_packet_fields: tuple[Name, ...] = ()
     status: Literal["UNCOMPUTED_PROVIDER_PACKET", "UNCOMPUTED_NO_ACCIDENT_PORT"]
     model_binding_status: str | None = None
     model_accident_release_export_status: str | None = None
@@ -75,6 +83,11 @@ def _requirements(event) -> dict:
             "required_duration_s": None,
             "required_opening_diameter_m": event.release.hole_diameter_m,
             "required_packet_fields": PROVIDER_RELEASE_REQUIRED_FIELDS,
+            "provider_boundary_variants": (
+                "resolved_atmospheric_gas_exit",
+                "resolved_atmospheric_liquid_exit",
+            ),
+            "liquid_packet_fields": _LIQUID_PACKET_FIELDS,
         }
     if mode == "instantaneous_inventory":
         return {
@@ -89,6 +102,11 @@ def _requirements(event) -> dict:
             "required_duration_s": None,
             "required_opening_diameter_m": None,
             "required_packet_fields": PROVIDER_RELEASE_REQUIRED_FIELDS,
+            "provider_boundary_variants": (
+                "resolved_atmospheric_gas_exit",
+                "resolved_atmospheric_liquid_exit",
+            ),
+            "liquid_packet_fields": _LIQUID_PACKET_FIELDS,
         }
     if mode == "inventory_over_600s":
         return {
@@ -103,6 +121,11 @@ def _requirements(event) -> dict:
             "required_duration_s": 600.0,
             "required_opening_diameter_m": None,
             "required_packet_fields": PROVIDER_RELEASE_REQUIRED_FIELDS,
+            "provider_boundary_variants": (
+                "resolved_atmospheric_gas_exit",
+                "resolved_atmospheric_liquid_exit",
+            ),
+            "liquid_packet_fields": _LIQUID_PACKET_FIELDS,
         }
     if mode == "two_sided_rupture":
         return {
@@ -124,6 +147,8 @@ def _requirements(event) -> dict:
                 "provider_source_digest",
                 "provider_result_digest",
             ),
+            "provider_boundary_variants": ("resolved_atmospheric_gas_exit",),
+            "liquid_packet_fields": (),
         }
     if mode == "maximum_relief_discharge":
         return {
@@ -135,6 +160,8 @@ def _requirements(event) -> dict:
             "required_duration_s": None,
             "required_opening_diameter_m": None,
             "required_packet_fields": _EMERGENCY_RELIEF_FIELDS,
+            "provider_boundary_variants": ("resolved_atmospheric_gas_exit",),
+            "liquid_packet_fields": (),
         }
     raise ValueError(f"unsupported release mode: {mode}")
 

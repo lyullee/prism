@@ -185,6 +185,8 @@
   "equipment_provider_release_worklist_event_count": 24,
   "equipment_provider_release_worklist_provider_packet_count": 0,
   "equipment_provider_release_worklist_uncomputed_count": 24,
+  "equipment_provider_release_worklist_liquid_boundary_variants": true,
+  "equipment_provider_release_worklist_liquid_packet_fields": ["boundary_kind", "cumulative_specific_enthalpy_out_j", "droplet_partition_provenance", "enthalpy_convention", "phase_basis", "reference_area_m2", "reference_area_provenance"],
   "equipment_provider_release_worklist_model_binding_supported": true,
   "equipment_provider_release_worklist_model_binding_status": "STATE_ONLY_BOUND",
   "equipment_provider_release_worklist_model_binding_accident_release_supported_component_count": 0,
