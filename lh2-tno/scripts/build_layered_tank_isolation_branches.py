@@ -17,6 +17,7 @@ import json
 import math
 import subprocess
 import sys
+from types import SimpleNamespace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -160,6 +161,43 @@ def _provider_history(
         command_callback=command_callback,
     )
 
+    def simulate_interval(current_state, duration_s: float, step_s: float):
+        """Run one provider interval, retrying only on RK positivity failure.
+
+        The external network wrapper fixes ``minimum_step_s`` to the requested
+        step.  A large outlet can therefore fail in an intermediate RK stage
+        even when a smaller internal step would be admissible.  Retry through
+        the wrapped tank's public ``simulate`` method with an explicit minimum
+        step, while retaining the provider-owned network callback and ledger.
+        If the retry also fails, the caller records the branch as UNCOMPUTED.
+        """
+        try:
+            return simulator.simulate(
+                current_state, duration_s=duration_s, time_step_s=step_s
+            )[0]
+        except (ValueError, RuntimeError, OverflowError):
+            minimum_step_s = max(1.0e-6, step_s / 128.0)
+
+            def flow_callback(time_s, thermo):
+                _solution, flows = simulator._solve(thermo, time_s)
+                return flows
+
+            tank_results = simulator.tank.simulate(
+                initial=current_state,
+                duration_s=duration_s,
+                time_step_s=step_s,
+                ambient_temperature_K=ambient_temperature_k,
+                flow_callback=flow_callback,
+                minimum_step_s=minimum_step_s,
+            )
+            if not tank_results:
+                raise RuntimeError("LayeredTank adaptive retry returned no step")
+            final_tank = tank_results[-1]
+            final_solution, _flows = simulator._solve(
+                final_tank.thermo, final_tank.time_s
+            )
+            return SimpleNamespace(tank=final_tank, network_solution=final_solution)
+
     state = initial
     elapsed_s = 0.0
     cumulative_mass_kg = 0.0
@@ -173,7 +211,7 @@ def _provider_history(
 
     while elapsed_s + 1.0e-12 < horizon:
         interval = min(dt, horizon - elapsed_s)
-        result = simulator.simulate(state, duration_s=interval, time_step_s=interval)[0]
+        result = simulate_interval(state, duration_s=interval, step_s=interval)
         flow = result.network_solution.link_flows["liquid_out"]
         boundary_mass_delta = float(result.tank.cumulative_boundary_mass_kg)
         boundary_energy_delta = float(result.tank.cumulative_boundary_energy_J)

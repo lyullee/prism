@@ -989,8 +989,8 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_actual_qualified_packet_count": 0,
   "external_lh2dt_layered_tank_isolation_branch_campaign_uncomputed_reason": "three large synthetic branches raised external solver ValueError: All cell masses must be finite and positive; cases remain explicitly UNCOMPUTED",
   "external_lh2dt_layered_tank_isolation_branch_campaign_test_status": "diagnostic smoke plus helper tests; full portable suite 355 passed",
-  "ijhe_completion_audit_reaudit_20261011_status": "INCOMPLETE_EVIDENCE; 11 checks, 7 blocking reasons after full synthetic isolation-branch execution",
-  "ijhe_completion_audit_reaudit_20261011_record": "results/20261011/layered_tank_isolation_branches_all/ijhe_completion_audit_full_20261011.json",
+  "ijhe_completion_audit_reaudit_20261011_status": "INCOMPLETE_EVIDENCE; 11 checks, 7 blocking reasons after adaptive numerical retry and full synthetic branch execution",
+  "ijhe_completion_audit_reaudit_20261011_record": "results/20261011/layered_tank_isolation_branches_all/ijhe_completion_audit_full_adaptive_20261011.json",
   "ijhe_completion_audit_reaudit_20261011_provider_packet_count": 0,
   "ijhe_completion_audit_reaudit_20261011_facility_qra_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_geometry_direction": "synthetic diagnostic horizontal atmospheric outlet; downward outlet requires explicit provider-resolved horizontal handoff",
@@ -1013,7 +1013,7 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_physical_validation_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_downward_guard": "implemented fail-closed in src/lh2_tno/chain_worker.py; no zero-horizontal-direction normalization",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_status": "PARTIAL_DECLARED_SCOPE; 7 synthetic storage branch cases executed through the full consequence chain, 21 cases explicitly UNCOMPUTED; all executed cases remain operator-limited",
-  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full.json",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full_adaptive.json",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_case_count": 7,
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_uncomputed_case_count": 21,
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_generated_frequency_per_year": 0.0138259,
@@ -1023,5 +1023,10 @@
     "case_max": 19519.011199939996,
     "campaign_elapsed": 25335.644599981606
   },
-  "external_lh2dt_layered_tank_isolation_branch_campaign_full_scope_matrix_record": "results/20261011/layered_tank_isolation_branches_all/accident_scope_matrix_full.json"
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_scope_matrix_record": "results/20261011/layered_tank_isolation_branches_all/accident_scope_matrix_full_adaptive.json",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_adaptive_retry_implemented": true,
+  "external_lh2dt_layered_tank_isolation_branch_campaign_adaptive_retry_policy": "retry only after external LayeredTankNetworkSimulator RK positivity failure via provider-owned tank.simulate(minimum_step_s=step/128); no duration or mass extrapolation",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_adaptive_retry_status": "10% success branch recovered; 10% failure and 100% success/failure remained UNCOMPUTED with finite-positive-cell failure",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_adaptive_retry_record": "results/20261011/layered_tank_isolation_branches_adaptive5/campaign_verification.json",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_time_step_sensitivity": "fixed 0.05 s and fixed 0.005 s both produced 7/10 built; adaptive retry at 0.05 s also produced 7/10 built"
 }
