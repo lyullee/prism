@@ -2,7 +2,7 @@
 
 기준일: 2026-10-09  
 상태: `END_TO_END_DIAGNOSTIC_EXECUTED`  
-범위: 합성 LayeredTank 액체 포트 probe 1건, 옥외 피해 체인 1건
+범위: 합성 LayeredTank 액체 포트 probe 1건과 양수 재고 임계값 feedback 1건, 옥외 피해 체인
 
 ## 이번 개발의 목적
 
@@ -59,6 +59,23 @@ LayeredTank provider 결과는 한 계산 간격을 진행한 뒤의 끝 상태�
 
 최종 장부에서는 이번 조건의 기체가 전량 직접 기체로 들어갔고, 지면 풀 유입은 0이었습니다. 이것은 해당 probe의 SLABx 결과이며 모든 액화수소 설비의 일반적인 결과를 뜻하지 않습니다.
 
+## LayeredTank 재고 feedback 진단
+
+단일 짧은 probe에서 끝내지 않고, 외부 `lh2dt.LayeredTankNetworkSimulator`를 `0.5 s` 간격으로 반복 호출했습니다. 매 간격의 탱크 상태를 다음 간격의 초기 상태로 다시 넣고, provider가 계산한 누적 경계 질량으로 구간 평균 유량을 만들었습니다. 마지막 상태의 총 재고가 선언한 양수 임계값 이하가 되면 멈추며, 0 kg 상태를 만들거나 마지막 유량을 연장하지 않습니다.
+
+- 초기 총 재고: `0.028492061900 kg`
+- 양수 임계값: `0.028392061900 kg`
+- 종료 시 총 재고: `0.028386210823 kg`
+- 실제 provider 방출 질량: `0.000105851077 kg`
+- 시간 이력: `16`개 구간, 총 `8.0 s`
+- 최대 provider 질량 잔차: `5.65e-18 kg`
+- 최대 provider 에너지 잔차: `1.34e-8 J`
+- provider/SLABx 최대 상대 유량 오차: 약 `1.26e-4` (5% gate 안)
+- PRISM 최종 질량 잔차: `0 kg`
+- 전체 피해 체인 처리시간: 약 `21.39 s`
+
+이 진단은 **탱크 상태 feedback과 양수 임계값 종료가 실제 시간 이력에 반영되는지**를 확인합니다. 임계값은 합성값이고, 실제 설비의 완전 재고 소진·밸브 신뢰도·실측 flash/분무 검증을 대신하지 않습니다.
+
 ## 재현 명령
 
 저장소 루트에서 외부 SLABx 소스 경로를 지정해 실행합니다.
@@ -80,6 +97,17 @@ LayeredTank provider 결과는 한 계산 간격을 진행한 뒤의 끝 상태�
 - `facility.json`, `request.json`, `result.json`: 전체 피해 체인 입력과 결과
 - `verification.json`: 상태, 오차, 질량 장부, 단계별 처리시간
 
+재고 feedback 경로는 다음처럼 실행합니다.
+
+```powershell
+.\output\prism-release-v060-v69n9vf6\venv\Scripts\python.exe `
+  lh2-tno\scripts\validate_layered_tank_inventory_slabsx.py `
+  --lh2dt-root C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델 `
+  --slabx-root C:\Users\lyul\Desktop\DocuData\SLABx_LH2\slabx-lh2
+```
+
+산출물은 `results/20261009/layered_tank_inventory_slabsx/`에 저장합니다. `layered_tank_provider_export.json`은 endpoint clock, 구간 평균 질량유량, endpoint 상태, 탱크 재고·잔차를 함께 보존합니다.
+
 ## 현재 의미와 한계
 
 이번 결과는 LayeredTank 출력이 PRISM 계약으로 변환되고 최종 피해 계산까지 이어진다는 **연결 검증**입니다. 실제 탱크 설계값, 실제 밸브 계수, 실제 대기 출구, 현장 재고 소진, flash/분무 에너지 검증, airborne droplet adapter, 현장 차단 신뢰도, 사고 빈도와는 별개입니다.
@@ -89,8 +117,7 @@ LayeredTank provider 결과는 한 계산 간격을 진행한 뒤의 끝 상태�
 ## 다음 개발 항목
 
 1. 실제 설비 포트별 full-open area, Cd, 높이·방향, 대기 경계를 export에 포함합니다.
-2. LayeredTank 액체/2상 재고를 매 간격 feedback하여 방출 종료를 실제 tank depletion과 연결합니다.
+2. 이번 양수 임계값 경로를 실제 설비의 재고·차단·2상 상태 feedback으로 대체하고 종료 근거를 검증합니다.
 3. SLABx flash·분무 에너지와 액적 비산/증발을 실증 데이터로 검증합니다.
 4. 동일 브리지를 탱크·배관·밸브·펌프·PSV/벤트의 설비 ID별로 반복하고, 각 사건의 문헌 빈도와 연결합니다.
 5. 새 설비 입력에서 처리시간과 수렴을 반복 측정한 뒤 IJHE용 검증표를 작성합니다.
-

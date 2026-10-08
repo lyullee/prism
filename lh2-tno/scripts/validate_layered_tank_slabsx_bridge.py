@@ -46,10 +46,13 @@ def _provider_rows(packet: dict) -> tuple[list[dict], float]:
         if start_time < -1.0e-12:
             raise ValueError("LayeredTank endpoint clock precedes its declared interval")
         source = raw["source_state"]
+        flow = raw["flow"]
         rows.append({
             "time_s": max(0.0, start_time),
-            "total_mass_flow_kg_s": float(raw["flow"]["mass_flow_kg_s"]),
-            "specific_enthalpy_j_kg": float(source["specific_enthalpy_J_kg"]),
+            "total_mass_flow_kg_s": float(flow["mass_flow_kg_s"]),
+            "specific_enthalpy_j_kg": float(
+                flow.get("transmitted_specific_enthalpy_J_kg", source["specific_enthalpy_J_kg"])
+            ),
             "source_pressure_pa": float(source["pressure_Pa"]),
             "source_temperature_k": float(source["temperature_K"]),
             "source_density_kg_m3": float(source["density_kg_m3"]),
@@ -193,7 +196,10 @@ def _packet_from_bridge(source: dict, provider_rows: list[dict], rows: list[dict
         "cumulative_mass_out_kg": mass, "cumulative_specific_enthalpy_out_j": enthalpy,
         "reference_area_m2": gas_area, "reference_area_provenance": "SLABx-LH2 scaled atmospheric gas area",
         "steps": contract_steps,
-        "termination_provenance": "LayeredTank declared valve-closure endpoint clock",
+        "termination_provenance": source.get(
+            "termination_provenance",
+            "LayeredTank declared endpoint clock",
+        ),
         "droplet_partition_provenance": "SLABx-LH2 integrated flash/droplet partition",
         "failure_opening_diameter_m": (4.0 * geometry["full_open_area_m2"] / 3.141592653589793) ** 0.5,
     }
@@ -208,6 +214,8 @@ def main() -> None:
                         help="facility component receiving this diagnostic release")
     parser.add_argument("--facility-port-id", default=None,
                         help="outward liquid/two-phase facility port; defaults to '<component>.out'")
+    parser.add_argument("--output-dir", type=Path, default=None,
+                        help="diagnostic output directory")
     parser.add_argument("--execute-chain", action="store_true")
     args = parser.parse_args()
     sys.path.insert(0, str(args.slabx_root / "source" / "slabx-lh2"))
@@ -222,7 +230,7 @@ def main() -> None:
                                  component_id=args.facility_component_id,
                                  port_id=args.facility_port_id)
     release = ResolvedLiquidRelease.model_validate_json(json.dumps(packet, allow_nan=False))
-    output = ROOT / "results" / "20261009" / "equipment_layered_tank_slabsx"
+    output = args.output_dir or (ROOT / "results" / "20261009" / "equipment_layered_tank_slabsx")
     _save(output / "provider_export.json", source)
     _save(output / "slabx_partition.json", partition)
     _save(output / "combined_liquid_rows.json", {"rows": rows, "audit": audit})
@@ -257,9 +265,19 @@ def main() -> None:
             component_id=args.facility_component_id, source_operator="equipment_liquid_release",
             source_duration_mode="declared", available_mass_kg=release.available_mass_kg,
             source_position_enu_m=list(release.position_enu_m),
-            evaluation_times_s=sorted(set(base["evaluation_times_s"] + [duration])),
-            release_termination={"basis": "inventory_depletion", "time_s": duration,
-                                 "provenance": "LayeredTank valve-closure provider endpoint"},
+            evaluation_times_s=sorted(set(
+                base["evaluation_times_s"]
+                + [duration]
+                + [step["time_s"] for step in packet["steps"]]
+            )),
+            release_termination={
+                "basis": source.get("termination_basis", "inventory_depletion"),
+                "time_s": duration,
+                "provenance": source.get(
+                    "termination_provenance",
+                    "LayeredTank declared provider endpoint",
+                ),
+            },
             annual_frequency_per_year=None, annual_frequency_provenance=None,
             initiation_intensity_per_s=None,
         )

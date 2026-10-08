@@ -14,6 +14,9 @@ from lh2_tno.provider_liquid_partition import combine_provider_liquid_partition
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
+import sys
+sys.path.insert(0, str(Path(__file__).parents[1] / 'scripts'))
+from validate_layered_tank_slabsx_bridge import _provider_rows
 
 
 def packet():
@@ -592,3 +595,33 @@ def test_provider_rate_gate_rejects_large_slabx_mismatch():
     }]
     with pytest.raises(ValueError, match='rate mismatch'):
         combine_provider_liquid_partition(provider, slabsx, ambient_pressure_pa=101325.0)
+
+
+def test_layered_provider_endpoint_clock_uses_interval_enthalpy_and_shifts_to_start():
+    packet = {
+        'interval_semantics': 'provider_result_end_state_representative_for_preceding_fixed_step',
+        'time_step_s': 0.5,
+        'steps': [{
+            'time_s': 0.5,
+            'flow': {
+                'mass_flow_kg_s': 2.0,
+                'transmitted_specific_enthalpy_J_kg': 123.0,
+            },
+            'source_state': {
+                'pressure_Pa': 200000.0,
+                'temperature_K': 23.0,
+                'density_kg_m3': 67.0,
+                'specific_enthalpy_J_kg': 999.0,
+            },
+        }],
+    }
+    rows, dt = _provider_rows(packet)
+    assert dt == pytest.approx(0.5)
+    assert rows == [{
+        'time_s': 0.0,
+        'total_mass_flow_kg_s': 2.0,
+        'specific_enthalpy_j_kg': 123.0,
+        'source_pressure_pa': 200000.0,
+        'source_temperature_k': 23.0,
+        'source_density_kg_m3': 67.0,
+    }]
