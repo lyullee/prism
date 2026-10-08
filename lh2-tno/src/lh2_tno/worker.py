@@ -187,12 +187,21 @@ def run(request):
         results=simulator.simulate(initial,duration_s=duration,time_step_s=dt)
         if not results:
             raise ValueError('dynamic isolation provider returned no intervals')
+        # ``simulate`` returns the state at the end of each interval.  Resolve
+        # one explicit t=0 network state so the exported history is left-held
+        # and the commanded closure is represented at the correct boundary.
+        network.set_boundary_state('vapor_port',tank.thermo(initial).vapor[1])
+        command(0.0,network)
+        previous_solution=network.solve()
+        if not previous_solution.pressure_solver_success:
+            raise ValueError('dynamic isolation initial network solve failed')
         valve_area=float(valve_cfg['full_open_area_m2'])
         area=valve_area
         rows=[]; cumulative_mass=0.0; cumulative_h=0.0
         mass_residual=[]; energy_residual=[]
         for result in results:
-            flow=result.network_solution.link_flows['isolation_valve']
+            flow=previous_solution.link_flows['isolation_valve']
+            previous_solution=result.network_solution
             if flow.mass_flow_kg_s < -1.0e-12:
                 raise ValueError('dynamic isolation export requires outward nonnegative flow')
             flow_rate=max(0.0,float(flow.mass_flow_kg_s))
