@@ -2,7 +2,9 @@ import json
 from pathlib import Path
 from lh2_tno.backend import BackendConfig,PackagePin,tree_digest
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.service import ConsequenceService,RealtimeConsequenceMonitor,request_from_equipment_resolver,request_from_telemetry
+from lh2_tno.service import (ConsequenceService, RealtimeConsequenceMonitor,
+    request_from_equipment_resolver, request_from_telemetry,
+    validate_equipment_process_state)
 from lh2_tno.telemetry import Frame,TagMapping,TelemetryNormalizer,Value
 from test_consequences import EXAMPLE
 from test_provider_release import _defaults, _release
@@ -71,6 +73,52 @@ def test_equipment_resolver_supplies_provider_boundary_without_frequency_or_sour
     assert resolved.source_input is None
     assert resolved.resolved_release is not None
     assert resolved.annual_frequency_per_year is None
+
+
+def test_process_state_contract_accepts_state_values_and_returns_isolated_copy():
+    original = {
+        'values': {
+            'PT': {'quantity': 'pressure', 'component_id': 'storage',
+                   'value_si': 500000.0, 'sensor_location': 'vapour'},
+            'LVL': {'quantity': 'level_fraction', 'component_id': 'storage',
+                    'value_si': 0.4, 'sensor_location': 'tank'},
+        },
+        'origin': 'model_prediction',
+        'phase': {'vapour_fraction': 0.2},
+    }
+    snapshot = validate_equipment_process_state(original)
+    snapshot['values']['PT']['value_si'] = 1.0
+    assert original['values']['PT']['value_si'] == 500000.0
+    assert snapshot['values']['LVL']['value_si'] == 0.4
+
+
+@pytest.mark.parametrize('field', [
+    'annual_frequency_per_year', 'failure_opening_diameter_m',
+    'resolved_release', 'duration_s', 'steps', 'event_kind',
+])
+def test_process_state_contract_rejects_accident_owned_fields(field):
+    state = {'values': {'PT': {'quantity': 'pressure', 'component_id': 'storage',
+                               'value_si': 500000.0}}, field: 1}
+    with pytest.raises(ValueError, match='accident-owned field'):
+        validate_equipment_process_state(state)
+
+
+def test_equipment_resolver_receives_state_only_snapshot():
+    seen = {}
+    normalized = {'values': {'PT': {'quantity': 'pressure', 'component_id': 'storage',
+                                    'value_si': 500000.0}}}
+    provider_request = __import__('lh2_tno.provider_release', fromlist=['build_consequence_request_from_provider_release']).build_consequence_request_from_provider_release(
+        _release(), _defaults()
+    )
+
+    def resolver(_template, state):
+        seen['state'] = state
+        state['values']['PT']['value_si'] = -1.0
+        return provider_request
+
+    request_from_equipment_resolver(request().model_copy(update={'component_id': 'storage-tank-01'}), normalized, resolver)
+    assert 'annual_frequency_per_year' not in seen['state']
+    assert normalized['values']['PT']['value_si'] == 500000.0
 
 
 def test_service_marks_provider_resolved_telemetry_update(tmp_path):

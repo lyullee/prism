@@ -2,7 +2,7 @@
 from __future__ import annotations
 from collections import OrderedDict
 import copy
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 import math
 from pathlib import Path
 import time
@@ -11,8 +11,84 @@ from .consequences import ConsequenceRequest
 from .contracts import canonical_digest
 
 
+# A process-state snapshot is deliberately smaller than a consequence request.
+# The external equipment model owns the accident interpretation (hole, event
+# frequency, duration, inventory ledger, and termination).  Rejecting these
+# fields here prevents a normal operating snapshot from being promoted to an
+# accident packet by an adapter that happens to carry extra metadata.
+_FORBIDDEN_PROCESS_STATE_KEYS = frozenset({
+    "annual_frequency_per_year",
+    "frequency_event",
+    "initiation_intensity_per_s",
+    "failure_opening_diameter_m",
+    "failure_area_m2",
+    "hole_diameter_m",
+    "leak_diameter_m",
+    "resolved_release",
+    "resolved_release_set",
+    "resolved_liquid_release",
+    "provider_release",
+    "provider_release_packet",
+    "release_termination",
+    "termination_provenance",
+    "event_id",
+    "event_kind",
+    "duration_s",
+    "steps",
+    "cumulative_mass_out_kg",
+    "provider_export_schema",
+})
+
+
+def _scan_forbidden_process_state_keys(value, *, path: str = "state"):
+    """Raise if a nested state payload contains an accident-owned field."""
+    if isinstance(value, Mapping):
+        for key, child in value.items():
+            key_text = str(key)
+            if key_text.lower() in _FORBIDDEN_PROCESS_STATE_KEYS:
+                raise ValueError(
+                    f"process state contains accident-owned field: {path}.{key_text}"
+                )
+            _scan_forbidden_process_state_keys(child, path=f"{path}.{key_text}")
+    elif isinstance(value, (list, tuple)):
+        for index, child in enumerate(value):
+            _scan_forbidden_process_state_keys(child, path=f"{path}[{index}]")
+
+
+def validate_equipment_process_state(normalized: Mapping) -> dict:
+    """Validate and copy a state-only digital-twin snapshot.
+
+    ``normalized`` may contain pressure, temperature, level, flow, phase, and
+    control measurements.  It must contain a ``values`` mapping whose rows
+    provide finite ``value_si`` values.  It may not contain a release packet,
+    leak geometry, duration, frequency, or accident termination field.  This
+    function does not infer any missing accident information; the resolver
+    must return a provider-owned :class:`ConsequenceRequest` separately.
+    """
+    if not isinstance(normalized, Mapping):
+        raise TypeError("equipment process state must be a mapping")
+    _scan_forbidden_process_state_keys(normalized)
+    values = normalized.get("values")
+    if not isinstance(values, Mapping):
+        raise ValueError("equipment process state requires a values mapping")
+    for tag, row in values.items():
+        if not isinstance(tag, str) or not tag:
+            raise ValueError("equipment process state tags must be nonempty strings")
+        if not isinstance(row, Mapping):
+            raise ValueError(f"equipment process state row is not a mapping: {tag}")
+        if "value_si" not in row:
+            raise ValueError(f"equipment process state row lacks value_si: {tag}")
+        value_si = row["value_si"]
+        if isinstance(value_si, bool) or not isinstance(value_si, (int, float)):
+            raise ValueError(f"equipment process state value_si is not numeric: {tag}")
+        if not math.isfinite(float(value_si)):
+            raise ValueError(f"equipment process state value_si is not finite: {tag}")
+    return copy.deepcopy(dict(normalized))
+
+
 def request_from_telemetry(template, normalized, *, pressure_tag, temperature_tag):
     """Use confirmed SI tank state. This is not inverse leak identification."""
+    normalized = validate_equipment_process_state(normalized)
     if template.resolved_release is not None or template.resolved_release_set is not None or template.resolved_liquid_release is not None:
         raise ValueError('resolved provider flow must be updated by the equipment model; cannot overwrite its PH boundary from raw P/T tags')
     if pressure_tag==temperature_tag:raise ValueError('distinct pressure and temperature tags required')
@@ -37,6 +113,7 @@ def request_from_equipment_resolver(template, normalized, resolver: Callable):
     """
     if not callable(resolver):
         raise TypeError("release_resolver must be callable")
+    normalized = validate_equipment_process_state(normalized)
     request = resolver(template, normalized)
     if not isinstance(request, ConsequenceRequest):
         raise ValueError("release_resolver must return a ConsequenceRequest")
