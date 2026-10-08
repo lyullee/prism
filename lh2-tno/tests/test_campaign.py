@@ -105,6 +105,14 @@ def test_societal_outcomes_remain_separate_before_fn_accumulation():
     assert all(a>=b for a,b in zip(lo['cumulative_frequency_per_year'],lo['cumulative_frequency_per_year'][1:]))
 
 
+def test_campaign_timing_records_case_percentiles_without_claiming_repeated_run_latency():
+    r, _ = run()
+    timing = r['timing']
+    assert timing['fresh_physics_cases'] == 4
+    assert timing['case_min_ms'] <= timing['case_median_ms'] <= timing['case_p95_ms'] <= timing['case_p99_ms'] <= timing['case_max_ms']
+    assert 'not repeated-run latency' in timing['distribution']
+
+
 @pytest.mark.parametrize('fault',['backend','missing_receptor','ignition','nan'])
 def test_failed_physics_or_invalid_result_never_becomes_zero_complete_risk(fault):
     r,_=run(fault=fault)

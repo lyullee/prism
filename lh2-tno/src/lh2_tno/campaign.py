@@ -17,6 +17,26 @@ from .backend import BackendError
 IGNITION_KEYS = {'direct_fire', 'delayed_flash_fire', 'delayed_explosion', 'no_ignition'}
 
 
+def _linear_percentile(values: list[float], probability: float) -> float | None:
+    """Return a deterministic linear-interpolated percentile for case times.
+
+    This describes the distribution of cases in one campaign execution.  It
+    is deliberately not a repeated-run latency or service-level guarantee.
+    """
+    if not values:
+        return None
+    ordered = sorted(float(value) for value in values)
+    if len(ordered) == 1:
+        return ordered[0]
+    position = (len(ordered) - 1) * probability
+    lower = int(math.floor(position))
+    upper = int(math.ceil(position))
+    if lower == upper:
+        return ordered[lower]
+    weight = position - lower
+    return ordered[lower] + weight * (ordered[upper] - ordered[lower])
+
+
 class PopulationCell(Contract):
     receptor_id: Name
     persons: Nonnegative
@@ -278,7 +298,10 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
         'risk_atoms': atoms, 'aggregation_provenance': {k:v for k,v in aggregated.items() if k!='data'},
         'timing': {'fresh_physics_cases':len(times), 'case_min_ms':min(times) if times else None,
             'case_median_ms':median(times) if times else None, 'case_max_ms':max(times) if times else None,
-            'campaign_elapsed_ms':(time.perf_counter()-started)*1000, 'distribution':'across cases; not repeated-run latency qualification'},
+            'case_p95_ms':_linear_percentile(times, 0.95),
+            'case_p99_ms':_linear_percentile(times, 0.99),
+            'campaign_elapsed_ms':(time.perf_counter()-started)*1000,
+            'distribution':'across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification'},
         'semantics': {'individual_risk':'fixed person at each receptor; no population occupancy multiplier',
             'societal_risk':'native legacy F-N of expected deaths per event/weather/barrier/ignition outcome; not a joint casualty distribution',
             'weighting':'initiating frequency times annual joint condition times release/barrier branch times ignition; each once',

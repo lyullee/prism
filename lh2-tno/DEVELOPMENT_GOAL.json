@@ -142,7 +142,7 @@
   "external_provider_evidence_operation_sequence_rows": 52,
   "external_provider_evidence_total_facility_risk_withheld": true,
   "equipment_campaign_compiler_catalog_implemented": true,
-  "equipment_campaign_compiler_catalog_test_status": "258 portable tests passed",
+  "equipment_campaign_compiler_catalog_test_status": "259 portable tests passed",
   "equipment_campaign_catalog_diagnostic_executed": true,
   "equipment_campaign_catalog_diagnostic_executed_cases": 2,
   "equipment_campaign_catalog_diagnostic_uncomputed_cases": 9,
@@ -163,7 +163,7 @@
   "provider_release_contract_adapter_module": "src/lh2_tno/provider_release.py",
   "provider_release_contract_adapter_cli": "scripts/build_provider_request_catalog.py",
   "provider_release_contract_schema": "prism.resolved_release.v1",
-  "provider_release_contract_test_status": "258 portable tests passed",
+  "provider_release_contract_test_status": "259 portable tests passed",
   "provider_release_contract_actual_facility_packet_available": false,
   "provider_release_contract_actual_facility_risk_withheld": true,
   "provider_release_contract_synthetic_example": "examples/provider_release_catalog_synthetic.json",
@@ -175,6 +175,8 @@
   "provider_release_full_chain_diagnostic_operator_limited_cases": 1,
   "provider_release_full_chain_diagnostic_total_facility_risk_withheld": true,
   "provider_release_full_chain_diagnostic_physical_validation_claim": false,
+  "campaign_case_timing_percentiles_implemented": true,
+  "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "provider_release_full_chain_frequency_uncertainty_executed": true,
   "provider_release_full_chain_frequency_uncertainty_status": "KNOWN_CONTRIBUTION_REWEIGHTED_INCOMPLETE_SCOPE",
   "provider_release_full_chain_frequency_uncertainty_record": "results/20261009/provider_release_full_chain_diagnostic/campaign_result_with_uncertainty.json",
@@ -187,7 +189,7 @@
   "major_accident_scope_matrix_blocking_reasons": 13,
   "major_accident_scope_matrix_facility_total_risk_available": false,
   "major_accident_scope_matrix_frequency_rows_additive": false,
-  "major_accident_scope_matrix_test_status": "5 matrix tests; full portable suite 258 passed",
+  "major_accident_scope_matrix_test_status": "5 matrix tests; full portable suite 259 passed",
   "major_accident_scope_matrix_subset_diagnostic_executed": true,
   "major_accident_scope_matrix_subset_diagnostic_record": "results/20261009/equipment_inventory_campaign/accident_scope_matrix.json",
   "major_accident_scope_matrix_subset_status": "COMPLETE",
@@ -198,5 +200,5 @@
   "ijhe_completion_audit_check_count": 8,
   "ijhe_completion_audit_blocking_reason_count": 5,
   "ijhe_completion_audit_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 258 passed"
+  "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 259 passed"
 }

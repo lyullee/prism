@@ -136,6 +136,9 @@ def build_ijhe_completion_audit(
             {
                 "fresh_physics_cases": fresh_physics_cases,
                 "campaign_elapsed_ms": timing.get("campaign_elapsed_ms"),
+                "case_p95_ms": timing.get("case_p95_ms"),
+                "case_p99_ms": timing.get("case_p99_ms"),
+                "timing_distribution": timing.get("distribution"),
                 "one_hz_fresh_physics_demonstrated": current_status.get("one_hz_fresh_physics_demonstrated"),
             },
             "fresh-case timing evidence is missing",

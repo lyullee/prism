@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 258,
+  "unit_contract_conservation_tests_passed": 259,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -41,6 +41,8 @@
   "physical_validation_hse_test6_max_mass_residual_kg": 8.244516180866412e-13,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
+  "campaign_case_timing_percentiles_implemented": true,
+  "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits, provider-resolved vertical-to-horizontal handoff exits, and provider-resolved atmospheric liquid/two-phase exits; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, five transient LH2_PIPE area-bin routes with explicit success/failure branches, five HomogeneousTank positive-mass inventory-depletion routes, one two-ended rupture route, one vertical handoff route, one LayeredTank-to-SLABx liquid probe, and one LayeredTank positive-threshold inventory-feedback route are connected without flow extrapolation; the LayeredTank feedback route advances external tank state in 16 provider intervals and reaches DynamicLH2PoolX and final damage with zero diagnostic mass residual; a facility literature campaign generates 15 storage/valve/pipe LOCs, binds one exact-size LayeredTank LH2_VESSEL event to two weather cases, and leaves 14 LOCs uncomputed; all new liquid paths remain operator-limited; actual facility LayeredTank liquid/two-phase depletion, airborne liquid, and site-calibrated facility QRA remain incomplete. The general LayeredTankNetworkSimulator fill/vent audit remains fail-closed for its non-atmospheric demand boundary.",
   "unsupported": [
     "indoor",
@@ -430,7 +432,7 @@
   "equipment_campaign_compiler_catalog_module": "src/lh2_tno/campaign_template.py",
   "equipment_campaign_compiler_catalog_script": "scripts/build_equipment_campaign.py --request-catalog",
   "equipment_campaign_compiler_catalog_policy": "Each event selects only an explicit component/opening-matched request; ambiguous matches error and missing matches remain UNCOMPUTED; no size or state substitution.",
-  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 257 passed",
+  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 259 passed",
   "equipment_campaign_catalog_diagnostic_executed": true,
   "equipment_campaign_catalog_diagnostic_record": "results/20261009/equipment_manifest_audit/equipment_campaign_two_result.json",
   "equipment_campaign_catalog_diagnostic_generated_events": 10,
@@ -473,7 +475,7 @@
   "provider_release_contract_synthetic_cli_templates": 1,
   "provider_release_contract_synthetic_cli_uncomputed": 0,
   "provider_release_contract_synthetic_cli_frequency_assigned": false,
-  "provider_release_contract_test_status": "6 adapter tests (gas/liquid/context fail-closed); full portable suite 258 passed",
+  "provider_release_contract_test_status": "6 adapter tests (gas/liquid/context fail-closed); full portable suite 259 passed",
   "provider_release_contract_synthetic_example": "examples/provider_release_catalog_synthetic.json",
   "provider_release_full_chain_diagnostic_executed": true,
   "provider_release_full_chain_diagnostic_record": "results/20261009/provider_release_full_chain_diagnostic/campaign_result.json",
@@ -513,7 +515,7 @@
   "major_accident_scope_matrix_blocking_reasons": 13,
   "major_accident_scope_matrix_facility_total_risk_available": false,
   "major_accident_scope_matrix_frequency_rows_additive": false,
-  "major_accident_scope_matrix_test_status": "5 matrix tests; full portable suite 258 passed",
+  "major_accident_scope_matrix_test_status": "5 matrix tests; full portable suite 259 passed",
   "major_accident_scope_matrix_subset_diagnostic_executed": true,
   "major_accident_scope_matrix_subset_diagnostic_record": "results/20261009/equipment_inventory_campaign/accident_scope_matrix.json",
   "major_accident_scope_matrix_subset_families": ["pipe_hole", "inventory_depletion"],
@@ -528,5 +530,5 @@
   "ijhe_completion_audit_check_count": 8,
   "ijhe_completion_audit_blocking_reason_count": 5,
   "ijhe_completion_audit_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 258 passed"
+  "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 259 passed"
 }
