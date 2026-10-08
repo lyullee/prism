@@ -124,6 +124,14 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 `scripts/export_lh2dt_vent_stack_prism_packet.py`는 외부 `VentStack.evaluate()`의 정상 two-port 함수를 사고 packet으로 재사용하지 않고, 명시적인 사고 포트·개구·0.5 s diagnostic horizon에서 별도 provider adapter로 호출한다. 저 Mach atmospheric gas plane을 만들기 위해 기본 upstream은 `102000 Pa`, `40 K`, stack bore는 `0.01 m`이며 provider의 유량·출구 상태를 10개 왼쪽 유지 구간과 `ResolvedGasRelease` 장부로 보존한다. 기본 packet 질량 잔차는 `0 kg`, 정적 엔탈피 잔차는 `0 J`다.
 
+## PRISM 측 DynamicVaporizer·DynamicReliquefier 진단 adapter (2026-10-12)
+
+`scripts/export_lh2dt_dynamic_vaporizer_prism_packet.py`는 외부 `DynamicVaporizer` 또는 `DynamicReliquefier`의 유한체적 상태를 직접 초기화하고, 각 provider 구간에서 `thermo(state)`와 대기 밸브 `Valve.evaluate()`를 호출한 뒤 `step()`으로 다음 질량·내부에너지·벽 온도를 계산한다. 즉 기화기·재액화기의 상태와 에너지 경계가 packet의 시간 이력에 들어가며, PRISM은 유량·엔탈피를 다시 계산하거나 정상 snapshot을 사고로 바꾸지 않는다.
+
+기본 smoke는 두 모드 모두 0.5 s를 0.05 s 간격 10개 구간으로 실행했다. `DynamicVaporizer`와 `DynamicReliquefier`의 strict gas packet은 각각 질량 잔차 `0 kg`, 정적 엔탈피 잔차 약 `1.78e-15 J`를 보존했고, `validate_lh2dt_prism_packet_chain.py`가 두 packet을 기체 벡터 전이→SLABx 분산→구름→점화→화재/폭발→TNO 피해까지 실행했다. 결과는 `results/20261012/dynamic_vaporizer_prism_packet_default_smoke3/`, `results/20261012/dynamic_reliquefier_prism_packet_default_smoke3/`와 각 chain 기록에 저장했다. 대기 밸브는 `StrokeLimitedCommandedValve`로 구간마다 실제 개방도를 전진시켜, 즉시 완전 개방으로 가정하지 않는다.
+
+이 adapter의 사고 경계는 명시한 대기 밸브 개구와 합성 진단시계다. 실제 열교환기 내부 고장 위치, 수소측 재고, PSV/차단 동작, 현장 개구와 빈도, 독립 실험 검증은 공급하지 않으므로 상태는 `EXECUTED_OPERATOR_LIMITED`이고 `provider_packet_promoted=false`다. 따라서 이 결과는 일반 LH2 설비 결합의 구조·장부·처리시간을 확인하는 진단이며 시설 연간 IR/F-N 산출로 승격되지 않는다.
+
 steady 결과를 horizon 동안 반복한 것은 탱크 재고·PSV setpoint·현장 vent duty를 의미하지 않는다. `validate_lh2dt_prism_packet_chain.py`는 이 기체 packet을 gas vector transition, SLABx dispersion, cloud, ignition, fire/explosion 및 TNO damage까지 실행하지만 실제 빈도·facility IR/F-N·독립 검증은 계속 보류한다. upstream 압력을 크게 올려 underexpanded/high-Mach plane이 되면 PRISM low-Mach gate가 fail-closed로 거절한다.
 
 ## provider 구현 예
