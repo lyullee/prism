@@ -92,6 +92,8 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 이 smoke는 `HomogeneousTank+Valve` 합성 진단 packet을 DynamicLH2PoolX, SLABx-LH2, SLABx 분산, cloud, 점화, 화재/폭발 및 TNO 인명피해까지 통과시킨다. 결과는 `END_TO_END_DIAGNOSTIC_EXECUTED`이지만 packet 승격, 빈도 추론, 독립 물리검증, 시설 IR/F-N은 계속 거짓이다.
 
+같은 합성 입력에 `--release-kind gas`를 주면 대기 출구 품질이 실제 증기인지 먼저 확인한다. 현재 입력은 포화 2상 상태이므로 기체 packet을 만들지 않고 즉시 실패하며, 이를 액체/2상 packet으로 계산하려면 `--release-kind liquid`를 사용한다.
+
 ## provider 구현 예
 
 외부 모델이 다음 형태를 구현하면 PRISM 연결 함수를 호출할 수 있다.
