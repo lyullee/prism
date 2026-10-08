@@ -80,7 +80,7 @@ class SpatialDomain(Contract):
 
 
 class ReleaseTermination(Contract):
-    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'model_pressure_equalization']
+    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_over_600s', 'model_pressure_equalization']
     time_s: Positive
     provenance: Name
 
@@ -103,7 +103,7 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
-    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion'] = 'integrated_transient'
+    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'inventory_over_600s'] = 'integrated_transient'
     # ``declared`` requires the source model to cover the requested horizon.
     # ``model_natural`` uses the model's actual pressure-equalisation stop and
     # never extrapolates the final flow interval.
@@ -121,7 +121,7 @@ class ConsequenceRequest(Contract):
         times=self.evaluation_times_s
         if len(times)<2 or times[0]!=0 or any(b<=a for a,b in zip(times,times[1:])):
             raise ValueError('evaluation clock must start at zero and increase')
-        if times[-1]>120 or len(times)>500:
+        if times[-1]>600 or len(times)>500:
             raise ValueError('consequence horizon budget exceeded')
         if (self.source_input is None)==(self.resolved_release is None):
             raise ValueError('choose exactly one source owner: integrated source or equipment-resolved gas exit')
@@ -157,8 +157,19 @@ class ConsequenceRequest(Contract):
                 raise ValueError('equipment_inventory_depletion uses its declared provider horizon')
             if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
                 raise ValueError('equipment_inventory_depletion requires inventory-depletion termination provenance')
+        elif self.source_operator == 'inventory_over_600s':
+            if release is not None:
+                raise ValueError('inventory_over_600s requires an integrated finite-inventory source')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('inventory_over_600s requires a complete declared horizon')
+            if self.release_termination is None or self.release_termination.basis != 'inventory_over_600s':
+                raise ValueError('inventory_over_600s requires an inventory-over-600s termination provenance')
+            if not math.isclose(duration, 600.0, rel_tol=0, abs_tol=1e-9):
+                raise ValueError('inventory_over_600s requires exactly 600 s of source history')
         elif self.release_termination is not None and self.release_termination.basis == 'inventory_depletion':
             raise ValueError('inventory-depletion termination requires an explicit inventory source operator')
+        elif self.release_termination is not None and self.release_termination.basis == 'inventory_over_600s':
+            raise ValueError('inventory-over-600s termination requires the inventory_over_600s source operator')
         if self.source_duration_mode == 'model_natural':
             if release is not None:
                 raise ValueError('model_natural duration requires an integrated transient source')
@@ -202,6 +213,9 @@ class ConsequenceRequest(Contract):
             if event.release.mode == 'instantaneous_inventory':
                 if self.source_operator != 'inventory_liquid_jet' or self.release_termination.basis != 'inventory_depletion':
                     raise ValueError('instantaneous inventory event requires the inventory liquid-jet operator')
+            elif event.release.mode == 'inventory_over_600s':
+                if self.source_operator != 'inventory_over_600s' or self.release_termination.basis != 'inventory_over_600s':
+                    raise ValueError('600 s inventory event requires the inventory_over_600s operator')
             elif event.release.mode != 'hole':
                 raise ValueError('frequency event requires a supported release operator')
             if release is None and event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):

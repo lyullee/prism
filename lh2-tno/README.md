@@ -11,7 +11,9 @@
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.0은 이름·명령·사용 설명 정비이며 물리 적용범위를 확대한 버전은 아닙니다.
 
-**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 204개 검사와 30개 fresh transient/inventory 물리 사례를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
+**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 206개 검사와 30개 fresh transient/inventory 물리 사례를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
+
+`inventory_over_600s`는 600초 전체 provider 이력과 전용 종료 근거가 모두 있을 때만 사건 빈도와 피해를 결합합니다. 짧은 진단 이력은 이 사고의 대체 계산으로 인정하지 않습니다.
 
 ## 목차
 
@@ -296,10 +298,12 @@ Purple 배관에는 최소 적용 길이 10 m와 flange 포함 범위가 있습�
 .venv\Scripts\python.exe prism.py --mode lh2 facility.json --frequency-plan frequency_plan.json --event-id 검토한_사건_ID --backend backend.json --consequences matching_request.json --output matched_result.json
 ```
 
-빈도 계획과 피해 요청을 함께 주면 `--event-id`가 필수입니다. 현재 binding은 일치하는 **단일 부품 구멍 사건**이며,
+빈도 계획과 피해 요청을 함께 주면 `--event-id`가 필수입니다. 현재 기본 binding은 일치하는 **단일 부품 구멍 사건**이며,
 누출 구경·부품·노출 범위·방출 종료·service를 대조합니다. source는 탱크/용기 구멍 사건,
 설비 경계는 명시된 accidental leak이어야 합니다. GH2/cold-GH2에 LH2 빈도를 붙이지 않습니다.
-순간 전량, 600초 전량, 양단 파단, 최대 relief는 사건을 생성해도 새 피해 경로에 자동 결합하지 않습니다.
+순간 전량, 양단 파단, 최대 relief는 사건을 생성해도 새 피해 경로에 자동 결합하지 않습니다. 600초 전량은
+`inventory_over_600s` operator와 `inventory_over_600s` 종료 근거를 선언하고 provider가 600초 전체 이력을
+반환해야 binding할 수 있습니다. 현재 합성 campaign은 이 완전 이력을 제공하지 않아 G2를 미계산으로 유지합니다.
 빈도만으로 임의의 짧은 누출 시간은 정당화되지 않습니다.
 
 ### 문헌 빈도 불확실성과 상관 가정

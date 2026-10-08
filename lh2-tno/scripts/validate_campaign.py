@@ -81,7 +81,7 @@ routes=[{'event_id':'campaign-diagnostic/shell/G1','branches':[{'id':'inventory-
     'request':g1_request}]},
     {'event_id':'campaign-diagnostic/shell/G2','branches':[{'id':'pending-operator',
     'probability_given_event':1.0,'provenance':'explicitly uncomputed LOC',
-    'uncomputed_reason':'600 s inventory release exceeds current consequence horizon and needs a dedicated inventory/long-horizon path'}]}]
+    'uncomputed_reason':'provider did not supply a complete 600 s inventory history in this campaign; inventory_over_600s long-horizon contract is available but this case remains uncomputed'}]}]
 routes.append({'event_id':'campaign-diagnostic/shell/G3','branches':branches})
 campaign=RiskCampaign.model_validate_json(json.dumps({'id':'outdoor-campaign-step1','frequency_plan':plan,
     'annual_conditions':conditions,'event_routes':routes,'scope_provenance':'synthetic fresh-physics campaign of one tank: G1 finite-inventory liquid-jet operator plus G3 hole under two aligned wind speeds; G1 is operator-limited and G2/other coverage withheld'}))

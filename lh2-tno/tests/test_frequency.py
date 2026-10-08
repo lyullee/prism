@@ -139,6 +139,30 @@ def test_instantaneous_and_600s_locs_cannot_be_faked_with_short_nozzle_model():
         with pytest.raises(ValueError):bind_event(template(),e)
 
 
+def test_600s_inventory_event_requires_and_preserves_a_complete_long_horizon():
+    data=template().model_dump(mode='json')
+    data['source_operator']='inventory_over_600s'
+    data['source_input']['duration_s']=600.0
+    data['source_input']['time_step_s']=60.0
+    data['evaluation_times_s']=[0.0,1.0,2.0,20.0,600.0]
+    data['release_termination']={'basis':'inventory_over_600s','time_s':600.0,
+        'provenance':'provider returned the complete declared 600 s inventory horizon'}
+    data.update(annual_frequency_per_year=None,annual_frequency_provenance=None,initiation_intensity_per_s=None)
+    bound=bind_event(ConsequenceRequest.model_validate_json(json.dumps(data)),events()[1])
+    assert bound.source_operator=='inventory_over_600s'
+    assert bound.release_termination.basis=='inventory_over_600s'
+    assert bound.frequency_event.release.mode=='inventory_over_600s'
+
+
+def test_600s_inventory_event_rejects_a_short_declared_history():
+    data=template().model_dump(mode='json')
+    data['source_operator']='inventory_over_600s'
+    data['release_termination']={'basis':'inventory_over_600s','time_s':.2,
+        'provenance':'short diagnostic horizon; not a complete 600 s history'}
+    with pytest.raises(ValueError,match='exactly 600 s'):
+        ConsequenceRequest.model_validate_json(json.dumps(data))
+
+
 def test_binding_cannot_overwrite_an_existing_rate_or_ignore_wrong_hole():
     t=template().model_dump(mode='json');t['source_input']['nozzle']['diameter_m']=.02
     with pytest.raises(ValueError):bind_event(ConsequenceRequest.model_validate_json(json.dumps(t)),events()[2])

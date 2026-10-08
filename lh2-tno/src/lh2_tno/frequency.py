@@ -208,9 +208,15 @@ def bind_event(request, event: FrequencyEvent):
     if event.release.mode != 'hole':
         if not (event.release.mode == 'instantaneous_inventory' and
                 request.source_operator == 'inventory_liquid_jet'):
-            raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
-        if request.release_termination is None or request.release_termination.basis != 'inventory_depletion':
+            if not (event.release.mode == 'inventory_over_600s' and
+                    request.source_operator == 'inventory_over_600s'):
+                raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
+        if request.release_termination is None:
+            raise ValueError('non-hole inventory binding requires explicit termination provenance')
+        if event.release.mode == 'instantaneous_inventory' and request.release_termination.basis != 'inventory_depletion':
             raise ValueError('instantaneous inventory binding requires an inventory-depletion termination basis')
+        if event.release.mode == 'inventory_over_600s' and request.release_termination.basis != 'inventory_over_600s':
+            raise ValueError('600 s inventory binding requires an inventory-over-600s termination basis')
         payload = request.model_dump(mode='json')
         if request.annual_frequency_per_year is not None:
             raise ValueError('remove external frequency before binding a catalogue event')
