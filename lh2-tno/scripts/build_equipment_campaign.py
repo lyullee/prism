@@ -143,12 +143,17 @@ def main() -> int:
         for route in campaign.event_routes
         for branch in route.branches
     )
+    uncomputed = sum(
+        branch.request is None
+        for route in campaign.event_routes
+        for branch in route.branches
+    )
     print(json.dumps({
         "status": "COMPILED",
         "output": str(args.output),
         "event_count": len(campaign.event_routes),
         "matched_request_branch_count": matched,
-        "uncomputed_branch_count": len(campaign.event_routes) - matched,
+        "uncomputed_branch_count": uncomputed,
         "physics_executed": False,
         "input_mode": (
             "request_template" if args.request_template else
