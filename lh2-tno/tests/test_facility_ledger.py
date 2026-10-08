@@ -142,6 +142,25 @@ def test_facility_ledger_withholds_total_for_missing_component_and_family():
     assert result["component_statuses"]["tank-01"] == "PARTIAL"
 
 
+def test_facility_ledger_withholds_total_when_event_case_accounting_is_missing():
+    result = _result(
+        event_id="event-without-case", asset_id="asset-1", component_id="tank-01",
+        frequency=1e-3,
+    )
+    result["cases"] = []
+    result["declared_scope_numerically_complete"] = True
+    merged = merge_facility_campaign_results(
+        [result],
+        expected_component_ids=("tank-01",),
+    )
+
+    assert merged["status"] == "PARTIAL_FACILITY_SCOPE"
+    assert merged["facility_total_risk_available"] is False
+    accounting = next(iter(merged["event_accounting"].values()))
+    assert accounting["unaccounted_event_count"] == 1
+    assert any("events lack case or uncomputed-case accounting" in reason for reason in merged["blocking_reasons"])
+
+
 def test_facility_ledger_can_feed_frequency_uncertainty_without_physics_rerun():
     result = merge_facility_campaign_results(
         [_result(

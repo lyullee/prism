@@ -207,6 +207,7 @@ def merge_facility_campaign_results(
     timing_values: list[float] = []
     component_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
     source_digests: list[str] = []
+    event_accounting: dict[str, dict[str, int]] = {}
 
     for campaign_id, result in campaign_rows:
         events = result.get("events")
@@ -255,6 +256,31 @@ def merge_facility_campaign_results(
                 raise FacilityLedgerError(f"campaign {campaign_id} has an invalid {key} list")
             target = merged_cases if key == "cases" else merged_missing
             target.extend(dict(row) for row in rows if isinstance(row, Mapping))
+        accounted_case_event_ids = {
+            str(row.get("event_id"))
+            for row in result.get("cases", [])
+            if isinstance(row, Mapping) and row.get("event_id")
+        }
+        accounted_uncomputed_event_ids = {
+            str(row.get("event_id"))
+            for row in result.get("uncomputed_cases", [])
+            if isinstance(row, Mapping) and row.get("event_id")
+        }
+        missing_event_ids = sorted(
+            local_event_ids - accounted_case_event_ids - accounted_uncomputed_event_ids
+        )
+        event_accounting[campaign_id] = {
+            "generated_event_count": len(local_event_ids),
+            "case_event_count": len(accounted_case_event_ids & local_event_ids),
+            "uncomputed_event_count": len(accounted_uncomputed_event_ids & local_event_ids),
+            "unaccounted_event_count": len(missing_event_ids),
+        }
+        if missing_event_ids:
+            source_complete = False
+            blocking_reasons.append(
+                f"campaign {campaign_id}: events lack case or uncomputed-case accounting: "
+                + ", ".join(missing_event_ids)
+            )
         for component_id, reason in dict(result.get("excluded_model_components", {})).items():
             previous = merged_exclusions.get(str(component_id))
             if previous is not None and previous != str(reason):
@@ -374,6 +400,7 @@ def merge_facility_campaign_results(
         "campaign_ids": campaign_ids,
         "campaign_digests": source_digests,
         "campaign_digest": canonical_digest({"campaign_ids": campaign_ids, "campaign_digests": source_digests}),
+        "event_accounting": event_accounting,
         "event_count": len(merged_events),
         "case_count": len(merged_cases),
         "uncomputed_case_count": len(merged_missing),
