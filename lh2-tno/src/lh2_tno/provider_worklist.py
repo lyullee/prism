@@ -1,0 +1,217 @@
+"""Build an explicit provider-release worklist from frequency events.
+
+The worklist is a bridge between an initiating-event frequency plan and an
+equipment digital twin.  It describes the packet that must be supplied for
+each event, but never fabricates a release history or promotes a normal-flow
+export into an accident.  Missing packets remain ``UNCOMPUTED``.
+"""
+from __future__ import annotations
+
+from collections import Counter
+from typing import Literal
+
+from .contracts import Contract, Name, Positive
+from .equipment_manifest import EquipmentManifest, audit_manifest
+from .frequency import FrequencyPlan, generate_events
+from .scenario_evidence import PROVIDER_RELEASE_REQUIRED_FIELDS
+
+
+WORKLIST_SCHEMA = "prism.provider_release_worklist.v1"
+
+_EMERGENCY_RELIEF_FIELDS = tuple(
+    field for field in PROVIDER_RELEASE_REQUIRED_FIELDS
+    if field != "failure_opening_diameter_m"
+)
+
+
+class ProviderReleaseWorkItem(Contract):
+    """One exact frequency event awaiting an equipment release packet."""
+
+    id: Name
+    event_id: Name
+    asset_id: Name
+    component_id: Name
+    profile: Name
+    loc: Name
+    annual_frequency_per_year: float
+    release_mode: Literal[
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "maximum_relief_discharge",
+    ]
+    provider_event_kind: Literal["accidental_leak", "emergency_relief"]
+    provider_release_schema: Literal[
+        "prism.resolved_release.v1", "prism.resolved_release_set.v1"
+    ]
+    provider_endpoint_count: int
+    accident_port_ids: tuple[Name, ...]
+    acceptable_source_operators: tuple[Name, ...]
+    required_termination_basis: Name
+    required_duration_s: Positive | None = None
+    required_opening_diameter_m: Positive | None = None
+    required_packet_fields: tuple[Name, ...]
+    status: Literal["UNCOMPUTED_PROVIDER_PACKET", "UNCOMPUTED_NO_ACCIDENT_PORT"]
+    blocking_reasons: tuple[str, ...] = ()
+
+
+def _requirements(event) -> dict:
+    mode = event.release.mode
+    if mode == "hole":
+        return {
+            "provider_event_kind": "accidental_leak",
+            "provider_release_schema": "prism.resolved_release.v1",
+            "provider_endpoint_count": 1,
+            "acceptable_source_operators": (
+                "integrated_transient",
+                "equipment_liquid_release",
+            ),
+            "required_termination_basis": "explicit_provider_termination",
+            "required_duration_s": None,
+            "required_opening_diameter_m": event.release.hole_diameter_m,
+            "required_packet_fields": PROVIDER_RELEASE_REQUIRED_FIELDS,
+        }
+    if mode == "instantaneous_inventory":
+        return {
+            "provider_event_kind": "accidental_leak",
+            "provider_release_schema": "prism.resolved_release.v1",
+            "provider_endpoint_count": 1,
+            "acceptable_source_operators": (
+                "equipment_inventory_depletion",
+                "equipment_liquid_release",
+            ),
+            "required_termination_basis": "inventory_depletion",
+            "required_duration_s": None,
+            "required_opening_diameter_m": None,
+            "required_packet_fields": PROVIDER_RELEASE_REQUIRED_FIELDS,
+        }
+    if mode == "inventory_over_600s":
+        return {
+            "provider_event_kind": "accidental_leak",
+            "provider_release_schema": "prism.resolved_release.v1",
+            "provider_endpoint_count": 1,
+            "acceptable_source_operators": (
+                "equipment_inventory_over_600s",
+                "equipment_liquid_over_600s",
+            ),
+            "required_termination_basis": "inventory_over_600s",
+            "required_duration_s": 600.0,
+            "required_opening_diameter_m": None,
+            "required_packet_fields": PROVIDER_RELEASE_REQUIRED_FIELDS,
+        }
+    if mode == "two_sided_rupture":
+        return {
+            "provider_event_kind": "accidental_leak",
+            "provider_release_schema": "prism.resolved_release_set.v1",
+            "provider_endpoint_count": 2,
+            "acceptable_source_operators": ("equipment_two_sided_rupture",),
+            "required_termination_basis": "two_sided_rupture",
+            "required_duration_s": None,
+            "required_opening_diameter_m": event.release.hole_diameter_m,
+            "required_packet_fields": (
+                "provider_export_schema",
+                "releases[0]",
+                "releases[1]",
+                "component_id",
+                "available_mass_kg",
+                "duration_s",
+                "termination_provenance",
+                "provider_source_digest",
+                "provider_result_digest",
+            ),
+        }
+    if mode == "maximum_relief_discharge":
+        return {
+            "provider_event_kind": "emergency_relief",
+            "provider_release_schema": "prism.resolved_release.v1",
+            "provider_endpoint_count": 1,
+            "acceptable_source_operators": ("equipment_emergency_relief",),
+            "required_termination_basis": "emergency_relief_discharge",
+            "required_duration_s": None,
+            "required_opening_diameter_m": None,
+            "required_packet_fields": _EMERGENCY_RELIEF_FIELDS,
+        }
+    raise ValueError(f"unsupported release mode: {mode}")
+
+
+def build_provider_release_worklist(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+) -> dict:
+    """Return a fail-closed packet request list for every frequency event."""
+    manifest_audit = audit_manifest(manifest)
+    if manifest_audit["status"] != "EXECUTABLE":
+        return {
+            "schema": WORKLIST_SCHEMA,
+            "status": "BLOCKED_MANIFEST",
+            "manifest_status": manifest_audit["status"],
+            "blocking_reasons": list(manifest_audit["blocking_reasons"]),
+            "generated_event_count": 0,
+            "provider_packet_count": 0,
+            "work_items": [],
+        }
+
+    events = generate_events(manifest.to_facility(), frequency_plan)
+    ports_by_component: dict[str, tuple] = {}
+    for component_id in {component.id for component in manifest.components}:
+        ports_by_component[component_id] = tuple(
+            port for port in manifest.ports
+            if port.component_id == component_id
+            and port.direction in {"out", "bidirectional"}
+            and "accident" in port.id
+        )
+
+    items: list[ProviderReleaseWorkItem] = []
+    for event in events:
+        requirements = _requirements(event)
+        ports = ports_by_component.get(event.model_component_id, ())
+        reasons: list[str] = []
+        if len(ports) < requirements["provider_endpoint_count"]:
+            reasons.append(
+                f"requires {requirements['provider_endpoint_count']} explicit accident port(s); "
+                f"found {len(ports)}"
+            )
+        status = (
+            "UNCOMPUTED_NO_ACCIDENT_PORT"
+            if reasons
+            else "UNCOMPUTED_PROVIDER_PACKET"
+        )
+        items.append(
+            ProviderReleaseWorkItem(
+                id=f"{event.id}/provider-release",
+                event_id=event.id,
+                asset_id=event.asset_id,
+                component_id=event.model_component_id,
+                profile=event.profile,
+                loc=event.loc,
+                annual_frequency_per_year=event.annual_frequency_per_year,
+                release_mode=event.release.mode,
+                **requirements,
+                accident_port_ids=tuple(port.id for port in ports),
+                status=status,
+                blocking_reasons=tuple(reasons),
+            )
+        )
+
+    status_counts = Counter(item.status for item in items)
+    overall = (
+        "READY_FOR_PROVIDER_PACKETS"
+        if items and not status_counts["UNCOMPUTED_NO_ACCIDENT_PORT"]
+        else "PARTIAL_MISSING_ACCIDENT_PORT"
+    )
+    return {
+        "schema": WORKLIST_SCHEMA,
+        "status": overall,
+        "manifest_status": manifest_audit["status"],
+        "frequency_plan_id": frequency_plan.id,
+        "generated_event_count": len(events),
+        "provider_packet_count": 0,
+        "status_counts": dict(status_counts),
+        "promotion_policy": (
+            "The worklist requests provider-owned release histories. It does not "
+            "infer mass flow, duration, isolation, inventory, frequency, or a "
+            "consequence request from normal-flow telemetry."
+        ),
+        "work_items": [item.model_dump(mode="json") for item in items],
+    }
