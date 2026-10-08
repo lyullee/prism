@@ -389,6 +389,14 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 
 `AREA_100%` 경로와 두 기상 조건의 2건을 실행하고, 나머지 네 area-bin은 provider handoff가 없다는 이유로 명시적 `UNCOMPUTED`로 남깁니다. 결과는 `results/20261009/vertical_vent/`의 `campaign_result.json`, `resolved_release.json`, `verification.json`에 저장합니다. 이 경로는 variable-state synthetic adapter이므로 실제 수직 제트 부력·장애물·교차 plume와 현장 handoff를 검증한 것이 아닙니다.
 
+새 프로세스로 처리시간을 반복 측정하려면 다음을 실행합니다.
+
+```powershell
+.venv\Scripts\python.exe lh2-tno/scripts/benchmark_vertical_vent_timing.py --repeats 3
+```
+
+이번 3회 탐색 측정에서 campaign 내부 신규 물리시간은 p50 `7.170 s`, p95 `7.352 s`, p99 `7.368 s`였고, 프로세스 시작·외부 provider 로딩을 포함한 wall time은 p50 `12.005 s`, p95 `12.245 s`, p99 `12.266 s`였습니다. 이는 1 Hz 실시간 처리나 운영 SLA를 입증하지 않으며 `results/20261009/vertical_vent_timing/benchmark.json`에 저장합니다.
+
 ### 센서 갱신
 
 ```text

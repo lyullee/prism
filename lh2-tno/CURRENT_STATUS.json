@@ -260,5 +260,14 @@
   "vertical_handoff_variable_state_scope": "one provider handoff state per resolved release step; state clock and carrier mass-flow closure are required; no vertical plume physics inferred",
   "vertical_vent_diagnostic_case_min_ms": 3213.0888999672607,
   "vertical_vent_diagnostic_case_median_ms": 3287.8467499976978,
-  "vertical_vent_diagnostic_case_max_ms": 3362.604600028135
+  "vertical_vent_diagnostic_case_max_ms": 3362.604600028135,
+  "vertical_vent_timing_benchmark_repeats": 3,
+  "vertical_vent_timing_campaign_p50_ms": 7169.692500028759,
+  "vertical_vent_timing_campaign_p95_ms": 7352.198730001692,
+  "vertical_vent_timing_campaign_p99_ms": 7368.421505999286,
+  "vertical_vent_timing_wall_p50_ms": 12005.463600042276,
+  "vertical_vent_timing_wall_p95_ms": 12245.134139957372,
+  "vertical_vent_timing_wall_p99_ms": 12266.438187949825,
+  "vertical_vent_timing_benchmark_record": "results/20261009/vertical_vent_timing/benchmark.json",
+  "vertical_vent_timing_one_hz_demonstrated": false
 }
