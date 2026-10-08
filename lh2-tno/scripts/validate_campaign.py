@@ -6,12 +6,13 @@ energy closure are not qualified. G2 and excluded equipment remain explicitly
 uncomputed. All annual/barrier/population values are synthetic diagnostics.
 """
 import copy
+import argparse
 import json
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
-from lh2_tno.backend import BackendConfig, IsolatedBackend
+from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest
 from lh2_tno.campaign import RiskCampaign
 from lh2_tno.contracts import Facility
 from lh2_tno.pipeline import ResearchPipeline
@@ -28,7 +29,19 @@ q.update(frequency_event=None,annual_frequency_per_year=None,annual_frequency_pr
 config_path=ROOT/'results/20261009/backend_config_current.json'
 if not config_path.exists():
     config_path=ROOT/'results/20261008/frequency_v030/backend_config.json'
-config=BackendConfig.model_validate_json(config_path.read_text(encoding='utf-8'))
+parser=argparse.ArgumentParser(description='Run the synthetic LH2 campaign diagnostic with pinned external models')
+parser.add_argument('--allow-pin-refresh',action='store_true',
+    help='explicitly replace stale package pins with current source-tree digests and record the change')
+args=parser.parse_args()
+config_raw=json.loads(config_path.read_text(encoding='utf-8'))
+pin_refresh=[]
+if args.allow_pin_refresh:
+    for pin in config_raw['packages']:
+        observed=tree_digest(Path(pin['root']))
+        if observed!=pin['sha256']:
+            pin_refresh.append({'name':pin['name'],'declared':pin['sha256'],'observed':observed})
+        pin['sha256']=observed
+config=BackendConfig.model_validate_json(json.dumps(config_raw))
 # G1 uses a downward liquid jet so every liquid class has a resolved ground
 # arrival. The mass inventory is obtained from the pinned SLABx-LH2 operator,
 # rather than copied from a hole-release case.
@@ -118,6 +131,10 @@ save(OUT/'verification.json',{'fresh_physics_cases':6,'unit_tests_passed':194,
     'g1_operator_mass_rate_kg_s':g1_rate,'g1_operator_available_mass_kg':g1_available_mass,
     'g1_inventory_mass_closure':True,
     'campaign_digest':campaign.digest(),'backend_config_digest':config.digest(),
-    'aggregation_provenance':result['aggregation_provenance']})
+    'aggregation_provenance':result['aggregation_provenance'],
+    'pin_refresh':pin_refresh})
+if pin_refresh:
+    save(OUT/'pin_refresh.json',{'allow_pin_refresh':True,'changes':pin_refresh,
+        'provenance':'operator explicitly allowed this diagnostic run to refresh stale source-tree pins'})
 print(json.dumps({'status':result['status'],'executed':len(executed),'operator_limited':len([c for c in result['cases'] if c['status']=='EXECUTED_OPERATOR_LIMITED']),'uncomputed_cases':len(result['uncomputed_cases']),
     'timing':result['timing'],'known_annual_ir_low_high':result['known_contribution_annual_ir_low_high']},indent=2))
