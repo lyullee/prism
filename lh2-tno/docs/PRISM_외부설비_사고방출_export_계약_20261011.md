@@ -66,6 +66,32 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 2026-10-11에 확인한 `lh2dt_models`의 `LayeredTank`, `DynamicHEMPipe`, `StrokeLimitedCommandedValve`, `VentStack`, `MappedPump`, `DynamicVaporizer`, `DynamicReliquefier`에는 정상/동적 계산 메서드는 있으나 이 사고 export 메서드는 없다. 따라서 일반 설비 매핑은 여전히 `STATE_ONLY_BOUND`, 사고 provider packet은 0건이다. 기존 합성 `scripts/export_lh2dt_accident_history.py` 결과는 구조 연결 진단으로 보존되며 이 계약의 `qualified_actual`로 승격하지 않는다.
 
+이번 단계에서는 `scripts/export_lh2dt_prism_accident_packet.py`에 첫 실행형 provider adapter를 추가했다. 이 adapter는 외부 `HomogeneousTank`와 `Valve`를 명시적인 failed-opening 시나리오로 실행하고, 외부 모델이 반환한 시간·상태·질량 장부를 새 계약으로 변환한다.
+
+```powershell
+.venv\Scripts\python.exe scripts/export_lh2dt_prism_accident_packet.py `
+  --lh2dt-root "C:\path\to\lh2dt_models" `
+  --output-dir results/20261011/lh2dt_prism_packet_smoke3
+```
+
+2026-10-11 smoke 결과는 0.2초·0.01 m 개구의 `prism.resolved_release.v1` packet을 생성했고 strict 질량 잔차는 0 kg이었다. 그러나 탱크·개구·대기·상태가 합성이고 site-calibrated 사고 이력이 아니므로 `DIAGNOSTIC_PACKET_NOT_PROMOTED`, 실제 적격 packet 0건으로 기록했다. 이 adapter는 연결 경계를 실행한 것이며 실제 시설 QRA 완료를 뜻하지 않는다.
+
+액체 packet을 최종 피해까지 보낼 때는 provider 물성 기준과 풀 모델 기준도 확인한다. 외부 `lh2dt` packet은 현재 `ParaHydrogen` 기준을 사용하고, native `DynamicLH2PoolX`는 `Hydrogen` 기준만 제공하므로 `PoolBoundary`에 `fluid="Hydrogen"`, `fluid_translation="para_hydrogen_to_hydrogen"`, `translation_provenance`를 명시해야 한다. 이 변환은 질량을 바꾸지 않는 계산 경계이지만 교차 물성 검증이 끝난 것은 아니므로 결과에 `thermodynamic_adapters.pool`과 operator-limited 제한을 남긴다. 번역 필드가 없거나 provenance가 없으면 PRISM은 풀 계산을 시작하지 않는다.
+
+첫 외부 packet의 전체 연결은 다음 명령으로 재현할 수 있다.
+
+```powershell
+.venv\Scripts\python.exe scripts/export_lh2dt_prism_accident_packet.py `
+  --lh2dt-root "C:\path\to\lh2dt_models" `
+  --output-dir results/20261011/lh2dt_prism_packet_liquid7 `
+  --release-kind liquid
+.venv\Scripts\python.exe scripts/validate_lh2dt_prism_packet_chain.py `
+  --packet results/20261011/lh2dt_prism_packet_liquid7/resolved_release.json `
+  --output-dir results/20261011/lh2dt_prism_chain_liquid8
+```
+
+이 smoke는 `HomogeneousTank+Valve` 합성 진단 packet을 DynamicLH2PoolX, SLABx-LH2, SLABx 분산, cloud, 점화, 화재/폭발 및 TNO 인명피해까지 통과시킨다. 결과는 `END_TO_END_DIAGNOSTIC_EXECUTED`이지만 packet 승격, 빈도 추론, 독립 물리검증, 시설 IR/F-N은 계속 거짓이다.
+
 ## provider 구현 예
 
 외부 모델이 다음 형태를 구현하면 PRISM 연결 함수를 호출할 수 있다.
@@ -96,4 +122,4 @@ provider는 실제 차단 명령, 검출 지연, 재고/에너지 장부, 종료
   --output results/20261011/equipment_accident_export_interface_audit.json
 ```
 
-현재 portable test suite는 새 계약 테스트를 포함해 361개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
+현재 portable test suite는 새 계약 테스트를 포함해 362개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.

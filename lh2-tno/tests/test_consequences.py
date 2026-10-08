@@ -112,3 +112,17 @@ def test_inventory_liquid_jet_requires_explicit_depletion_operator_contract():
     d['source_input'].pop('liquid_jet')
     with pytest.raises(ValueError,match='liquid_jet assumptions'):
         ConsequenceRequest.model_validate_json(json.dumps(d))
+
+
+def test_para_hydrogen_pool_requires_explicit_native_hydrogen_translation():
+    d=json.loads(EXAMPLE.read_text(encoding='utf-8'))
+    d['source_input']['tank']['fluid']='ParaHydrogen'
+    d['pool']={'footprint_origin':'declared_sensitivity','radius_m':.1,
+        'conductivity_w_mk':.88,'diffusivity_m2_s':1e-7,'initial_temperature_k':288.,
+        'domain_radius_m':1.,'radial_step_m':.05}
+    with pytest.raises(ValueError,match='property bases differ'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))
+    d['pool'].update(fluid='Hydrogen', fluid_translation='para_hydrogen_to_hydrogen',
+                     translation_provenance='explicit compatibility-boundary test')
+    request=ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.pool.fluid_translation=='para_hydrogen_to_hydrogen'

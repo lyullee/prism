@@ -214,6 +214,7 @@ class AccidentReleaseExportResult:
 
     release: Any
     request: AccidentReleaseExportRequest
+    provider_response: Mapping[str, Any]
     provider_result_digest: str
     provider_class: str
     provider_method: str
@@ -322,6 +323,7 @@ def _export(
     return AccidentReleaseExportResult(
         release=release,
         request=scenario,
+        provider_response=response,
         provider_result_digest=result_digest,
         provider_class=provider_class,
         provider_method="export_accident_history",

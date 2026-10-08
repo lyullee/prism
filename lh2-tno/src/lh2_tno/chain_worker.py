@@ -185,9 +185,33 @@ def run_chain(p,roots,module):
     def to_enu(pos):return (down*pos[0]+cross*pos[1]+np.array([0.,0.,pos[2]])).tolist()
     # Ground transfer rate is solely the upstream source-model result.
     start=time.perf_counter(); pool=None; pool_origin=None; pool_packets=[];ground_pulses=[]
+    pool_adapter = None
     if branch_mass(rows,duration,'ground_liquid_mass_flow_kg_s')>0:
         if p['pool'] is None:raise ValueError('positive rainout requires an explicit resolved pool footprint')
-        if fluid!='Hydrogen':raise ValueError('native DynamicLH2PoolX uses Hydrogen; ParaHydrogen pool basis unsupported')
+        pool_boundary = p['pool']
+        pool_fluid = pool_boundary.get('fluid', 'Hydrogen')
+        if pool_fluid != 'Hydrogen':
+            raise ValueError('native DynamicLH2PoolX currently requires pool fluid=Hydrogen')
+        if fluid != pool_fluid:
+            if not (fluid == 'ParaHydrogen'
+                    and pool_boundary.get('fluid_translation') == 'para_hydrogen_to_hydrogen'
+                    and pool_boundary.get('translation_provenance')):
+                raise ValueError('source and DynamicLH2PoolX property bases differ without an explicit pool translation')
+            pool_adapter = {
+                'source_fluid': fluid,
+                'pool_model_fluid': pool_fluid,
+                'translation': 'para_hydrogen_to_hydrogen',
+                'provenance': pool_boundary['translation_provenance'],
+                'operator_limited': True,
+            }
+        else:
+            pool_adapter = {
+                'source_fluid': fluid,
+                'pool_model_fluid': pool_fluid,
+                'translation': 'none',
+                'provenance': 'source and DynamicLH2PoolX fluid basis match',
+                'operator_limited': False,
+            }
         m=module('dynamiclh2poolx',roots['dynamiclh2poolx'])
         boundary=p['pool']
         surface=m.SolidSemiInfiniteSurface(name=boundary['footprint_origin'],
@@ -569,6 +593,7 @@ def run_chain(p,roots,module):
         'source_ownership':{'state_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
             'discharge_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
             'discharge_recalculated':not equipment_resolved},
+        'thermodynamic_adapters':{'pool':pool_adapter},
         'handoffs':traces,'cloud_history_unignited_counterfactual':cloud,
         'ignition_branch_probabilities':branch_probs,
         'explosion':{'ignition_time_s':td,'flammable_mass_in_domain_kg':fm,'cloud_centroid_enu_m':cloud_centre.tolist(),
@@ -591,6 +616,7 @@ def run_chain(p,roots,module):
             'Outdoor flat ground, non-calm wind, horizontal nozzle or provider-resolved vertical handoff, known leak geometry only.',
             'A vertical provider exit is accepted only with a declared horizontal handoff section; the handoff is operator-limited and is not a PRISM rotation or independent vertical-jet validation.',
             'Ground deposition uses resolved per-class flight delays; distributed in-flight vapour generation is still collapsed to the terminal gas boundary at release time.',
+            'When a provider packet uses ParaHydrogen, the native DynamicLH2PoolX Hydrogen backend is reached only through the explicit declared pool fluid translation; the translation is operator-limited and does not claim cross-basis validation.',
             'The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.',
             'Rainout footprint is explicitly declared; it is not inferred from a single impact point or fitted to LFL/sensors.',
             'Finite-volume top-hat reconstruction of native section averages; not the frozen seven-test FFI observation operator or independent transient validation.',

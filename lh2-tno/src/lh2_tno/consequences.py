@@ -28,6 +28,12 @@ class Weather(Contract):
 class PoolBoundary(Contract):
     # A resolved/declared footprint is a physical boundary, not a fitted rate.
     footprint_origin: Literal['reviewed_design', 'measured', 'declared_sensitivity']
+    # DynamicLH2PoolX currently implements the Hydrogen CoolProp basis.  Keep
+    # that backend choice explicit so a ParaHydrogen provider packet cannot be
+    # silently passed to a different property basis.
+    fluid: Literal['Hydrogen', 'ParaHydrogen'] = 'Hydrogen'
+    fluid_translation: Literal['none', 'para_hydrogen_to_hydrogen'] = 'none'
+    translation_provenance: Name | None = None
     radius_m: Positive
     conductivity_w_mk: Positive
     diffusivity_m2_s: Positive
@@ -38,6 +44,11 @@ class PoolBoundary(Contract):
 
     @model_validator(mode='after')
     def resolved(self):
+        if self.fluid_translation == 'para_hydrogen_to_hydrogen':
+            if self.fluid != 'Hydrogen' or not self.translation_provenance:
+                raise ValueError('ParaHydrogen-to-Hydrogen pool translation requires Hydrogen and provenance')
+        elif self.translation_provenance is not None:
+            raise ValueError('pool translation provenance requires an explicit translation')
         if not self.radial_step_m <= self.radius_m < self.domain_radius_m:
             raise ValueError('pool footprint must be resolved and inside its domain')
         if self.domain_radius_m / self.radial_step_m > 1000:
@@ -273,6 +284,11 @@ class ConsequenceRequest(Contract):
         lo,hi=self.radiative_fraction_range
         if not 0<lo<=hi<1:raise ValueError('ordered positive radiative fraction range required')
         ambient=source['ambient']
+        source_fluid = source['tank']['fluid']
+        if self.pool is not None and source_fluid != self.pool.fluid:
+            if not (source_fluid == 'ParaHydrogen' and self.pool.fluid == 'Hydrogen'
+                    and self.pool.fluid_translation == 'para_hydrogen_to_hydrogen'):
+                raise ValueError('source and pool property bases differ without an explicit pool translation')
         if ambient['wind_speed_m_s']!=self.weather.wind_speed_m_s or ambient['wind_from_bearing_deg']!=self.weather.wind_from_bearing_deg:
             raise ValueError('source and dispersion wind must agree')
         if release_set is None and abs(self.source_position_enu_m[2]-source['nozzle']['height_m'])>1e-9:
