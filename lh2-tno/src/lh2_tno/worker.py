@@ -262,6 +262,156 @@ def run(request):
             'isolation_outcome':outcome,
             'termination_basis':'reviewed_isolation_success' if closure_confirmed else 'synthetic_diagnostic_horizon',
         },'limitation':'Transient layered-tank/commanded-valve provider path with synthetic geometry and an explicit isolation command. Closure is qualified only for the supplied command and zero closed-seat leakage; no plant actuator delay, failure-on-demand probability, or two-phase liquid release is inferred.'}
+    if operation=="equipment_dynamic_inventory":
+        # A provider-owned homogeneous finite-storage path.  The adapter runs
+        # one bounded provider interval at a time and stops at an explicit
+        # positive-mass threshold; it never writes a zero-mass state into the
+        # external model or extrapolates the final flow.
+        props=module('lh2dt.properties',roots['lh2dt'])
+        tankmod=module('lh2dt.tank',roots['lh2dt'])
+        networkmod=module('lh2dt.network',roots['lh2dt'])
+        valvemod=module('lh2dt.valve',roots['lh2dt'])
+        dynamicmod=module('lh2dt.dynamic_network',roots['lh2dt'])
+        fluid=props.HydrogenProperties(p.get('fluid','ParaHydrogen'))
+        duration=float(p['duration_s']); dt=float(p['time_step_s'])
+        if not math.isfinite(duration) or not math.isfinite(dt) or not 0.0<dt<=duration<=120.0:
+            raise ValueError('dynamic inventory duration/time step outside bounded scope')
+        if math.ceil(duration/dt)>100:
+            raise ValueError('dynamic inventory history exceeds 100 provider intervals')
+        geometry=tankmod.TankGeometry(**p['tank_geometry'])
+        tank=tankmod.HomogeneousTank(geometry,fluid)
+        initial_cfg=p['initial']
+        saturated=tank.initialize_saturated(float(initial_cfg['pressure_pa']),float(initial_cfg['liquid_fraction']))
+        energy_offset=float(initial_cfg.get('hydrogen_internal_energy_offset_j_kg',0.0))
+        if not math.isfinite(energy_offset):
+            raise ValueError('hydrogen_internal_energy_offset_j_kg must be finite')
+        initial=tankmod.TankState(
+            saturated.hydrogen_mass_kg,
+            saturated.hydrogen_internal_energy_J+saturated.hydrogen_mass_kg*energy_offset,
+            saturated.wall_temperature_K,
+        )
+        initial_mass=float(initial.hydrogen_mass_kg)
+        threshold=float(p['depletion']['threshold_mass_kg'])
+        if not math.isfinite(threshold) or threshold<=0.0 or threshold>=initial_mass:
+            raise ValueError('depletion threshold must be positive and below the initial inventory')
+        ambient=p['ambient']
+        sink=fluid.from_pT(float(ambient['pressure_pa']),float(ambient['temperature_k']))
+        valve_cfg=p['valve']
+        valve_area=float(valve_cfg['full_open_area_m2'])
+        if not math.isfinite(valve_area) or valve_area<=0.0:
+            raise ValueError('inventory valve area must be finite and positive')
+        elapsed=0.0; state=initial; rows=[]; cumulative_mass=0.0; cumulative_h=0.0
+        mass_residual=[]; energy_residual=[]; provider_intervals=0
+        initial_total_energy=state.hydrogen_internal_energy_J+geometry.wall_heat_capacity_J_K*state.wall_temperature_K
+        while elapsed < duration-1e-12 and state.hydrogen_mass_kg>threshold:
+            remaining=duration-elapsed
+            step=min(dt,remaining)
+            if len(rows)>=100:
+                raise ValueError('inventory provider row budget exceeded before depletion')
+            last_error=None
+            for _attempt in range(8):
+                network=networkmod.SteadyNetwork(fluid)
+                network.add_boundary('tank',tank.thermo(state))
+                network.add_boundary('ambient_sink',sink)
+                valve=valvemod.CommandedValve(valvemod.Valve(
+                    valve_area,float(valve_cfg['discharge_coefficient']),fluid,
+                    pressure_samples=int(valve_cfg.get('pressure_samples',16)),
+                    allow_reverse=False,
+                    closed_leakage_CdA_m2=0.0,
+                ))
+                network.add_link('inventory_valve','tank','ambient_sink',valve,
+                    source_port_id='TANK:OUT',target_port_id='ATMOSPHERE:IN')
+                def command(_time_s,_network):
+                    valve.set_opening(1.0)
+                network.set_boundary_state('tank',tank.thermo(state))
+                command(elapsed,network)
+                initial_solution=network.solve()
+                if not initial_solution.pressure_solver_success:
+                    raise ValueError('dynamic inventory initial network solve failed')
+                simulator=dynamicmod.DynamicNetworkSimulator(
+                    network,{'tank':dynamicmod.homogeneous_tank_node('tank',tank,state,20.0)},
+                    command_callback=command,
+                )
+                try:
+                    result=simulator.simulate(step,step)[-1]
+                    break
+                except (ValueError,RuntimeError,OverflowError) as error:
+                    last_error=error
+                    step*=0.5
+                    if step<=dt/256.0:
+                        raise
+            else:
+                raise ValueError(f'dynamic inventory interval failed: {last_error}')
+            provider_intervals+=1
+            end_state=result.states['tank']
+            signed_mass=float(result.cumulative_boundary_mass_kg['tank'])
+            signed_transport=float(result.cumulative_boundary_transport_energy_J['tank'])
+            mass_out=-signed_mass
+            energy_out=-signed_transport
+            if not math.isfinite(mass_out) or mass_out< -1e-12:
+                raise ValueError('dynamic inventory provider returned non-outward mass')
+            mass_out=max(0.0,mass_out)
+            if mass_out>1e-15:
+                mean_h=energy_out/mass_out
+            else:
+                mean_h=float(initial_solution.link_flows['inventory_valve'].transmitted_specific_enthalpy_J_kg)
+            outlet=fluid.from_ph(sink.pressure_Pa,mean_h)
+            mean_rate=mass_out/step
+            velocity=0.0 if mean_rate==0.0 else mean_rate/(outlet.density_kg_m3*valve_area)
+            rows.append({
+                'time_s':elapsed,
+                'mass_flow_kg_s':mean_rate,
+                'pressure_pa_abs':outlet.pressure_Pa,
+                'specific_enthalpy_j_kg':outlet.specific_enthalpy_J_kg,
+                'temperature_k':outlet.temperature_K,
+                'density_kg_m3':outlet.density_kg_m3,
+                'effective_area_m2':valve_area,
+                'velocity_m_s':velocity,
+                'upstream_pressure_pa_abs':tank.thermo(state).pressure_Pa,
+                'upstream_temperature_k':tank.thermo(state).temperature_K,
+                'interval_value_origin':'provider_interval_average_from_dynamic_network',
+                'valve_opening':1.0,
+            })
+            previous_energy=state.hydrogen_internal_energy_J+geometry.wall_heat_capacity_J_K*state.wall_temperature_K
+            current_energy=end_state.hydrogen_internal_energy_J+geometry.wall_heat_capacity_J_K*end_state.wall_temperature_K
+            mass_residual.append(abs(float(end_state.hydrogen_mass_kg-state.hydrogen_mass_kg+mass_out)))
+            energy_residual.append(abs(float(current_energy-previous_energy-result.cumulative_boundary_energy_J['tank'])))
+            cumulative_mass+=mass_out
+            cumulative_h+=energy_out
+            state=end_state
+            elapsed+=step
+        if not rows:
+            raise ValueError('dynamic inventory provider returned no intervals')
+        depleted=state.hydrogen_mass_kg<=threshold
+        termination='inventory_depletion' if depleted else 'synthetic_diagnostic_horizon'
+        basis_provenance=(
+            f'provider positive-mass depletion threshold reached; remaining inventory {state.hydrogen_mass_kg:.17g} kg'
+            if depleted else
+            'provider horizon ended above the declared positive-mass depletion threshold; no extrapolation'
+        )
+        return {'data':{
+            'fluid':fluid.fluid,
+            'steps':rows,
+            'duration_s':elapsed,
+            'requested_duration_s':duration,
+            'time_step_s':dt,
+            'available_mass_kg':initial_mass,
+            'remaining_inventory_kg':float(state.hydrogen_mass_kg),
+            'depletion_threshold_kg':threshold,
+            'inventory_depletion_detected':depleted,
+            'cumulative_mass_out_kg':cumulative_mass,
+            'cumulative_static_enthalpy_out_j':cumulative_h,
+            'max_total_mass_residual_kg':max(mass_residual,default=0.0),
+            'max_total_energy_residual_j':max(energy_residual,default=0.0),
+            'provider_intervals':provider_intervals,
+            'provider_terminal_area_m2':valve_area,
+            'provider_valve_area_m2':valve_area,
+            'provider_link_id':'inventory_valve',
+            'state_owner':'equipment_twin',
+            'discharge_owner':'equipment_twin',
+            'termination_basis':termination,
+            'termination_provenance':basis_provenance,
+        },'limitation':'Provider-owned homogeneous finite-storage tank and commanded full-open valve. Depletion is an explicit positive-mass numerical threshold, not a claim that the external EOS admits a zero-mass state; no liquid two-phase tank feedback or plant calibration is inferred.'}
     if operation=="declared_pool":
         m=module("dynamiclh2poolx",roots["dynamiclh2poolx"])
         if p["inflow_origin"] not in {"synthetic_declared_ground", "reviewed_ground_measurement"}:

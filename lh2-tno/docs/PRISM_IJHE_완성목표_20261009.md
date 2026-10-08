@@ -45,7 +45,7 @@
 - 0.2/0.4초 같은 합성 종료는 전체 시설 위험 완료의 근거가 되지 않는다.
 - `source_duration_mode=model_natural`은 통합 source가 반환한 실제 구간만 사용한다. 요청 시간이 5초여도 모델이 0.2초에서 압력 평형으로 끝내면 유효 방출시간을 0.2초로 기록하며, 마지막 유량을 5초까지 채우지 않는다. 이 연결은 검증했지만 모델의 압력 평형 예측 정확도는 별도 검증 대상이다.
 - G1의 `source_operator=inventory_liquid_jet`은 instantaneous inventory LOC를 구멍 누출로 바꾸지 않고 SLABx-LH2 liquid-jet source를 호출한다. 명시한 분무·액적·증발 가정과 2초 재고 폐합을 사용하며, 일정 upstream 상태와 열린 spray-energy closure 때문에 `EXECUTED_OPERATOR_LIMITED`로 기록한다.
-- 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, 5개 `LH2_PIPE` area-bin의 isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 합성 초기 압력 103 kPa·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률은 현장 근거가 아니고 재고 소진·실제 actuator 지연·실패확률·액체/2상 방출은 아직 지원하지 않는다.
+- 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, 5개 `LH2_PIPE` area-bin의 isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 별도 `HomogeneousTank`/`DynamicNetworkSimulator` adapter는 양수 재고 threshold에 도달한 실제 provider 구간을 `AREA_100%` 한 사건의 두 기상 조건에 전달한다. 합성 초기 압력·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률과 재고 입력은 현장 근거가 아니고 실제 actuator 지연·실패확률·LayeredTank 액체/2상 방출은 아직 지원하지 않는다.
 
 이 단계의 예제·명령·측정 결과는 별도 실행 기록에 정리한다. 이번 구현은 공개 0.6.0을 덮어쓰지 않은 개발 변경이며 새 PyPI/DOI 릴리스는 만들지 않았다.
 

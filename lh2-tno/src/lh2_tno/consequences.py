@@ -103,7 +103,7 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
-    source_operator: Literal['integrated_transient', 'inventory_liquid_jet'] = 'integrated_transient'
+    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion'] = 'integrated_transient'
     # ``declared`` requires the source model to cover the requested horizon.
     # ``model_natural`` uses the model's actual pressure-equalisation stop and
     # never extrapolates the final flow interval.
@@ -150,8 +150,15 @@ class ConsequenceRequest(Contract):
                         'spray_half_angle_deg', 'liquid_velocity_fraction')
             if any(k not in spray for k in required):
                 raise ValueError('liquid_jet assumptions must declare discharge, droplet, evaporation, spray and velocity inputs')
+        elif self.source_operator == 'equipment_inventory_depletion':
+            if release is None:
+                raise ValueError('equipment_inventory_depletion requires a resolved equipment release')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('equipment_inventory_depletion uses its declared provider horizon')
+            if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
+                raise ValueError('equipment_inventory_depletion requires inventory-depletion termination provenance')
         elif self.release_termination is not None and self.release_termination.basis == 'inventory_depletion':
-            raise ValueError('inventory-depletion termination requires source_operator=inventory_liquid_jet')
+            raise ValueError('inventory-depletion termination requires an explicit inventory source operator')
         if self.source_duration_mode == 'model_natural':
             if release is not None:
                 raise ValueError('model_natural duration requires an integrated transient source')

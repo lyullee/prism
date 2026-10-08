@@ -98,6 +98,30 @@ def test_request_ownership_and_normal_vent_frequency_are_explicit(fault):
     with pytest.raises(ValueError):ConsequenceRequest.model_validate_json(json.dumps(d))
 
 
+def test_equipment_inventory_depletion_operator_requires_resolved_release_and_stop_basis():
+    d = request_data()
+    d['source_operator'] = 'equipment_inventory_depletion'
+    d['release_termination'] = {
+        'basis': 'inventory_depletion',
+        'time_s': .2,
+        'provenance': 'provider positive-mass threshold reached',
+    }
+    request = ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.source_operator == 'equipment_inventory_depletion'
+    d['release_termination']['basis'] = 'synthetic_diagnostic_horizon'
+    with pytest.raises(ValueError, match='inventory-depletion termination'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))
+    d = json.loads((Path(__file__).parents[1] / 'examples' / 'consequence_request.json').read_text(encoding='utf-8'))
+    d['source_operator'] = 'equipment_inventory_depletion'
+    d['release_termination'] = {
+        'basis': 'inventory_depletion',
+        'time_s': .2,
+        'provenance': 'provider positive-mass threshold reached',
+    }
+    with pytest.raises(ValueError, match='resolved equipment release'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))
+
+
 @pytest.mark.parametrize('fault',['temperature','density','liquid','mach','pressure'])
 def test_eos_phase_and_compressible_plane_gate(fault):
     d=packet();cp=FakeCP()

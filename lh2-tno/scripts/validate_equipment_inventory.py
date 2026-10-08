@@ -1,0 +1,343 @@
+"""Connect one provider-owned inventory-depletion release to the facility chain.
+
+The external ``lh2dt`` homogeneous finite-storage model owns the tank state,
+valve flow and positive-mass depletion threshold.  PRISM only converts the
+provider interval-average boundary history into ``ResolvedGasRelease`` and
+runs the selected literature LH2 pipe LOC through the ordinary consequence
+and native TNO IR/F-N path.  The other literature LOCs remain explicit
+uncomputed cases.
+"""
+from __future__ import annotations
+
+import copy
+import json
+import math
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from lh2_tno.backend import IsolatedBackend, tree_digest
+from lh2_tno.campaign import RiskCampaign
+from lh2_tno.contracts import Facility, canonical_digest
+from lh2_tno.equipment_boundary import ResolvedGasRelease
+from lh2_tno.frequency import FrequencyPlan, generate_events
+from lh2_tno.pipeline import ResearchPipeline
+
+import validate_equipment_campaign as steady
+
+
+OUT = ROOT / "results" / "20261009" / "equipment_inventory_campaign"
+OUT.mkdir(parents=True, exist_ok=True)
+FULL_OPEN_AREA_M2 = 1.0e-5
+NOMINAL_PIPE_DIAMETER_M = math.sqrt(4.0 * FULL_OPEN_AREA_M2 / math.pi)
+
+
+def save(name: str, value: object) -> None:
+    (OUT / name).write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def provider_input() -> dict:
+    return {
+        "fluid": "ParaHydrogen",
+        "tank_geometry": {
+            "volume_m3": 1.0e-4,
+            "wall_heat_capacity_J_K": 100.0,
+            "ambient_UA_W_K": 0.1,
+            "fluid_wall_UA_W_K": 0.1,
+        },
+        "initial": {
+            "pressure_pa": 101000.0,
+            "liquid_fraction": 0.0001,
+            "hydrogen_internal_energy_offset_j_kg": 5000.0,
+        },
+        "ambient": {"pressure_pa": 100000.0, "temperature_k": 288.15},
+        "valve": {
+            "full_open_area_m2": FULL_OPEN_AREA_M2,
+            "discharge_coefficient": 0.8,
+            "pressure_samples": 16,
+        },
+        "depletion": {"threshold_mass_kg": 1.1e-4},
+        "duration_s": 40.0,
+        "time_step_s": 0.5,
+    }
+
+
+def make_facility() -> Facility:
+    raw = steady.make_facility().model_dump(mode="json")
+    raw["id"] = "equipment-inventory-campaign"
+    raw["components"][0]["parameters_si"]["diameter_m"] = NOMINAL_PIPE_DIAMETER_M
+    return Facility.model_validate_json(json.dumps(raw))
+
+
+def make_release(backend: IsolatedBackend, provider_digest: str) -> tuple[ResolvedGasRelease, dict, dict]:
+    request = provider_input()
+    response = backend.run("equipment_dynamic_inventory", request)
+    data = response["data"]
+    rows = []
+    for row in data["steps"]:
+        rows.append(
+            {
+                key: row[key]
+                for key in (
+                    "time_s",
+                    "mass_flow_kg_s",
+                    "pressure_pa_abs",
+                    "specific_enthalpy_j_kg",
+                    "temperature_k",
+                    "density_kg_m3",
+                    "effective_area_m2",
+                    "velocity_m_s",
+                )
+            }
+            | {
+                "area_provenance": "provider interval-average commanded-valve area",
+                "velocity_origin": "mass_continuity_from_declared_area",
+            }
+        )
+    packet = {
+        "component_id": "terminal_pipe",
+        "port_id": "terminal_pipe.out",
+        "event_id": "equipment-inventory-campaign/terminal_pipe/AREA_100%",
+        "event_kind": "accidental_leak",
+        "enthalpy_convention": "static_exit_enthalpy",
+        "property_basis": {
+            "fluid": "ParaHydrogen",
+            "backend": "CoolProp-HEOS",
+            "energy_reference": "CoolProp-HEOS:ParaHydrogen:native",
+        },
+        "upstream_service": "LH2",
+        "upstream_service_provenance": "provider-owned homogeneous finite-storage tank and inventory valve",
+        "provider_source_digest": provider_digest,
+        "provider_result_digest": canonical_digest(response),
+        "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to ambient inventory valve",
+        "input_origin": "synthetic",
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "ambient_pressure_pa_abs": 100000.0,
+        "ambient_temperature_k": 288.15,
+        "duration_s": data["duration_s"],
+        "available_mass_kg": data["available_mass_kg"],
+        "cumulative_mass_out_kg": data["cumulative_mass_out_kg"],
+        "cumulative_static_enthalpy_out_j": data["cumulative_static_enthalpy_out_j"],
+        "steps": rows,
+        "termination_provenance": data["termination_provenance"],
+        "failure_opening_diameter_m": NOMINAL_PIPE_DIAMETER_M,
+    }
+    return ResolvedGasRelease.model_validate_json(json.dumps(packet)), request, response
+
+
+def main() -> None:
+    config, provider = steady.load_backend()
+    backend = IsolatedBackend(config)
+    facility = make_facility()
+    provider_digest = tree_digest(provider)
+    release, provider_request, provider_response = make_release(backend, provider_digest)
+    data = provider_response["data"]
+    save("provider_input.json", provider_request)
+    save("provider_response.json", provider_response)
+    save("facility.json", facility.model_dump(mode="json"))
+    save("resolved_release.json", release.model_dump(mode="json"))
+
+    plan_raw = {
+        "id": "equipment-inventory-campaign",
+        "assets": [
+            {
+                "id": "terminal_pipe_asset",
+                "model_component_id": "terminal_pipe",
+                "profile": "LH2_PIPE",
+                "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+                "physical_scope_ids": ["terminal-pipe-1m"],
+                "nominal_diameter_m": NOMINAL_PIPE_DIAMETER_M,
+                "length_per_item_m": 1.0,
+                "vessel_external_impact_or_operating_error": None,
+            }
+        ],
+    }
+    frequency_plan = FrequencyPlan.model_validate_json(json.dumps(plan_raw))
+    events = generate_events(facility, frequency_plan)
+    selected = next(event for event in events if event.loc == "AREA_100%")
+
+    base_template = json.loads(
+        (ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json")
+        .read_text(encoding="utf-8")
+    )
+    evaluation_times = sorted(
+        {
+            0.0,
+            data["duration_s"],
+            1.0,
+            2.0,
+            3.0,
+            5.0,
+            10.0,
+            20.0,
+            40.0,
+            60.0,
+        }
+        | {row["time_s"] for row in data["steps"]}
+    )
+    template = copy.deepcopy(base_template)
+    template.update(
+        component_id="terminal_pipe",
+        source_input=None,
+        resolved_release=release.model_dump(mode="json"),
+        available_mass_kg=release.available_mass_kg,
+        source_position_enu_m=[0.0, 0.0, 1.0],
+        annual_frequency_per_year=None,
+        annual_frequency_provenance=None,
+        frequency_event=None,
+        initiation_intensity_per_s=None,
+        source_operator="equipment_inventory_depletion",
+        release_termination={
+            "basis": data["termination_basis"],
+            "time_s": release.duration_s,
+            "provenance": release.termination_provenance,
+        },
+        evaluation_times_s=evaluation_times,
+    )
+
+    population = [
+        {
+            "receptor_id": receptor.id,
+            "persons": 20.0 if i == 0 else 10.0,
+            "presence_probability": 0.5,
+            "provenance": "synthetic disjoint outdoor groups; not field population",
+        }
+        for i, receptor in enumerate(facility.receptors)
+    ]
+    conditions = []
+    for condition_id, probability, speed in [
+        ("D-3ms-west", 0.4, 3.0),
+        ("D-4ms-west", 0.6, 4.0),
+    ]:
+        conditions.append(
+            {
+                "id": condition_id,
+                "annual_probability": probability,
+                "weather": {
+                    "wind_speed_m_s": speed,
+                    "wind_from_bearing_deg": 270.0,
+                    "measurement_height_m": 10.0,
+                    "roughness_m": 0.03,
+                    "stability": "D",
+                    "relative_humidity": 0.5,
+                },
+                "population": population,
+                "provenance": "synthetic annual condition partition; no site weather qualification",
+            }
+        )
+
+    routes = []
+    for event in events:
+        if event.id == selected.id:
+            routes.append(
+                {
+                    "event_id": event.id,
+                    "branches": [
+                        {
+                            "id": "provider-inventory-depletion",
+                            "probability_given_event": 1.0,
+                            "provenance": "provider-owned positive-mass inventory threshold; no frequency or flow extrapolation",
+                            "request": copy.deepcopy(template),
+                        }
+                    ],
+                }
+            )
+        else:
+            routes.append(
+                {
+                    "event_id": event.id,
+                    "branches": [
+                        {
+                            "id": "pending-inventory-route",
+                            "probability_given_event": 1.0,
+                            "provenance": "explicitly outside this inventory depletion diagnostic",
+                            "uncomputed_reason": "provider inventory-depletion path was qualified only for AREA_100% in this diagnostic",
+                        }
+                    ],
+                }
+            )
+    campaign = RiskCampaign.model_validate_json(
+        json.dumps(
+            {
+                "id": "equipment-inventory-campaign",
+                "frequency_plan": frequency_plan.model_dump(mode="json"),
+                "annual_conditions": conditions,
+                "event_routes": routes,
+                "scope_provenance": "one LH2_PIPE AREA_100% event uses an independent provider-owned homogeneous finite-storage inventory-depletion threshold and resolved gas history through SLABx-LH2/SLABx and native TNO IR/F-N; other LH2_PIPE LOCs remain explicit uncomputed cases",
+            }
+        )
+    )
+    save("campaign.json", campaign.model_dump(mode="json"))
+    save("backend_config.json", config.model_dump(mode="json"))
+    result = ResearchPipeline(facility, backend).facility_risk(campaign)
+    save("campaign_result.json", result)
+    executed = [case for case in result["cases"] if case["status"] == "EXECUTED"]
+    uncomputed = [case for case in result["uncomputed_cases"] if case["status"] == "UNCOMPUTED"]
+    assert len(executed) == 2, result["cases"]
+    assert len(uncomputed) == 8, result["cases"]
+    assert result["total_facility_annual_ir_low_high"] is None
+    assert result["synthetic_release_horizon_present"] is False
+    assert data["inventory_depletion_detected"] is True
+    assert data["remaining_inventory_kg"] <= data["depletion_threshold_kg"]
+    assert data["max_total_mass_residual_kg"] < 1e-10
+    assert data["max_total_energy_residual_j"] < 1e-8
+    assert all(abs(case["mass_ledger"]["end_to_end_residual_kg"]) < 1e-8 for case in executed)
+    save(
+        "verification.json",
+        {
+            "equipment_provider_cases": 1,
+            "facility_executed_cases": len(executed),
+            "uncomputed_other_pipe_locs": len(uncomputed),
+            "provider_inventory_depletion_detected": data["inventory_depletion_detected"],
+            "provider_available_mass_kg": data["available_mass_kg"],
+            "provider_remaining_inventory_kg": data["remaining_inventory_kg"],
+            "provider_depletion_threshold_kg": data["depletion_threshold_kg"],
+            "provider_cumulative_mass_out_kg": data["cumulative_mass_out_kg"],
+            "provider_mass_residual_max_kg": data["max_total_mass_residual_kg"],
+            "provider_energy_residual_max_j": data["max_total_energy_residual_j"],
+            "resolved_gas_to_final_harm_executed": True,
+            "native_tno_ir_fn_aggregation_executed": True,
+            "facility_total_risk_withheld": True,
+            "physical_validation_claim": False,
+            "campaign_timing": result["timing"],
+            "provider_source_digest": provider_digest,
+            "backend_config_digest": config.digest(),
+            "campaign_digest": campaign.digest(),
+            "limitations": [
+                "synthetic homogeneous tank geometry, initial state, valve area and weather/population",
+                "positive-mass threshold is an event-safe provider stopping rule; it does not claim a zero-mass EOS state",
+                "provider model is not independently validated against a depletion experiment",
+                "other LH2_PIPE LOCs remain uncomputed and facility total risk is withheld",
+                "no plant actuator reliability, liquid two-phase outlet, or site calibration",
+            ],
+        },
+    )
+    print(
+        json.dumps(
+            {
+                "status": result["status"],
+                "executed": len(executed),
+                "uncomputed": len(uncomputed),
+                "inventory_depletion_detected": data["inventory_depletion_detected"],
+                "duration_s": data["duration_s"],
+                "available_mass_kg": data["available_mass_kg"],
+                "remaining_inventory_kg": data["remaining_inventory_kg"],
+                "threshold_mass_kg": data["depletion_threshold_kg"],
+                "provider_mass_residual_max_kg": data["max_total_mass_residual_kg"],
+                "provider_energy_residual_max_j": data["max_total_energy_residual_j"],
+                "timing": result["timing"],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
