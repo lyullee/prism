@@ -143,6 +143,8 @@ python -m venv .venv
   --output equipment_campaign.json
 ```
 
+합성 저장탱크·이송배관 catalog를 현재 backend로 실행한 진단은 2개 요청 연결, 2개 물리 실행(1개 `EXECUTED`, 1개 `EXECUTED_OPERATOR_LIMITED`), 8개 미계산으로 기록되며 전체 시설 IR/F-N은 보류됩니다. 상세 수치와 해석 한계는 [일반 설비 방출경로 캠페인 기록](docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md)을 봅니다.
+
 현재 액화수소검사지원센터 모델의 진단은 외부 자료를 변경하지 않고 다음처럼 실행할 수 있습니다.
 
 ```powershell
