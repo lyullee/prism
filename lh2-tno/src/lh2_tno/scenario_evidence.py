@@ -24,6 +24,7 @@ SCENARIO_EVIDENCE_SCHEMA = "prism.scenario_evidence_audit.v1"
 PROVIDER_PACKET_REQUEST_CATALOG_SCHEMA = "prism.provider_packet_request_catalog.v1"
 PROVIDER_RELEASE_REQUIRED_FIELDS = (
     "provider_export_schema",
+    "boundary_kind",
     "event_kind",
     "event_id",
     "component_id",
@@ -38,6 +39,9 @@ PROVIDER_RELEASE_REQUIRED_FIELDS = (
     "property_basis",
     "provider_source_digest",
     "provider_result_digest",
+    # Required for accidental-leak frequency exact matching.  A dedicated
+    # emergency-relief packet intentionally omits this random-opening field.
+    "failure_opening_diameter_m",
 )
 
 _FIELD_ALIASES = {

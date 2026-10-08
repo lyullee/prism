@@ -66,6 +66,8 @@ def test_provider_packet_request_catalog_keeps_scenario_rows_unpromoted(tmp_path
     assert request["frequency_assigned"] is False
     assert request["release_values_present"] is False
     assert request["provider_export_schema"] == "prism.resolved_release.v1"
+    assert "boundary_kind" in request["required_provider_fields"]
+    assert "failure_opening_diameter_m" in request["required_provider_fields"]
     assert catalog["provider_promotion"]["qualified_packet_count"] == 0
 
 
