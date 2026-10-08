@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 214,
+  "unit_contract_conservation_tests_passed": 218,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -41,7 +41,7 @@
   "physical_validation_hse_test6_max_mass_residual_kg": 8.244516180866412e-13,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
-  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits and provider-resolved vertical-to-horizontal handoff exits; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, five transient LH2_PIPE area-bin routes with explicit success/failure branches, five HomogeneousTank positive-mass inventory-depletion routes, one two-ended rupture route and one vertical handoff route are connected without flow extrapolation; G1, two-ended interaction and vertical handoff remain operator-limited, layered liquid/two-phase/non-pipe equipment LOCs and site-calibrated facility QRA remain incomplete.",
+  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits, provider-resolved vertical-to-horizontal handoff exits, and one provider-resolved atmospheric liquid/two-phase exit; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, five transient LH2_PIPE area-bin routes with explicit success/failure branches, five HomogeneousTank positive-mass inventory-depletion routes, one two-ended rupture route and one vertical handoff route are connected without flow extrapolation; liquid provider gas/ground partition reaches DynamicLH2PoolX and final damage but remains operator-limited; LayeredTank liquid/two-phase inventory feedback, airborne liquid, and site-calibrated facility QRA remain incomplete.",
   "unsupported": [
     "indoor",
     "vertical_only_nozzle_without_provider_handoff",
@@ -57,10 +57,11 @@
     "atmospheric_storage_frequency_profile",
     "vacuum_loss_initiation_frequency",
     "normal_vent_demand_frequency",
-    "resolved_liquid_or_two_phase_exit",
     "underexpanded_or_high_Mach_resolved_exit",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
-    "bidirectional_dynamic_leak_inventory_energy_feedback"
+    "bidirectional_dynamic_leak_inventory_energy_feedback",
+    "layered_tank_liquid_two_phase_inventory_depletion",
+    "provider_liquid_flash_spray_energy_validation"
   ],
   "record": "docs/방출부터_최종피해_연결완료_20261008.md",
   "results": "results/20261008/full_chain",
@@ -95,7 +96,7 @@
   "equipment_provider_clock_and_mass_static_enthalpy_ledger_checked": true,
   "equipment_normal_vent_excluded_from_random_leak_frequency": true,
   "equipment_upstream_service_frequency_compatibility_checked": true,
-  "actual_equipment_coupling_scope": "Native VentStack/SteadyNetwork two-state export plus native LayeredTankNetworkSimulator/CommandedValve transient export and HomogeneousTank positive-mass inventory-depletion adapter: five synthetic LH2-service pipe area bins with explicit 0.25 s isolation-success and 0.5 s diagnostic-horizon isolation-failure branches, five independent inventory-depletion routes in two weather cases, one two-ended rupture route and one provider-resolved vertical-to-horizontal handoff route, horizontal/vertical-handoff atmospheric low-Mach boundaries, twenty transient plus ten inventory plus two two-sided plus two vertical facility-campaign cases; barrier probability, inventory inputs, handoff state and facility geometry are synthetic, with no liquid/two-phase path, actuator reliability or field calibration.",
+  "actual_equipment_coupling_scope": "Native VentStack/SteadyNetwork two-state export plus native LayeredTankNetworkSimulator/CommandedValve transient export and HomogeneousTank positive-mass inventory-depletion adapter, plus one SLABx-LH2 provider-resolved liquid/two-phase atmospheric exit: five synthetic LH2-service pipe area bins with explicit 0.25 s isolation-success and 0.5 s diagnostic-horizon isolation-failure branches, five independent inventory-depletion routes in two weather cases, one two-ended rupture route, one provider-resolved vertical-to-horizontal handoff route and one provider-resolved liquid/two-phase gas/ground partition route; horizontal/vertical-handoff atmospheric low-Mach boundaries and DynamicLH2PoolX pool route are connected, while barrier probability, inventory inputs, handoff state, liquid flash/spray closure and facility geometry remain synthetic or operator-limited with no LayeredTank liquid/two-phase feedback or field calibration.",
   "equipment_coupling_record": "docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md",
   "equipment_coupling_results": "results/20261008/equipment_coupling_v040",
   "equipment_campaign_connected_to_facility_risk": true,
@@ -269,5 +270,17 @@
   "vertical_vent_timing_wall_p95_ms": 12245.134139957372,
   "vertical_vent_timing_wall_p99_ms": 12266.438187949825,
   "vertical_vent_timing_benchmark_record": "results/20261009/vertical_vent_timing/benchmark.json",
-  "vertical_vent_timing_one_hz_demonstrated": false
+  "vertical_vent_timing_one_hz_demonstrated": false,
+  "equipment_liquid_release_contract_implemented": true,
+  "equipment_liquid_release_contract_scope": "ResolvedLiquidRelease requires provider-owned flash gas, ground-liquid and droplet-arrival partition, mass/enthalpy closure, atmospheric gas boundary and explicit facility liquid/two-phase outward port; unresolved airborne liquid is rejected.",
+  "equipment_liquid_release_diagnostic_executed": true,
+  "equipment_liquid_release_diagnostic_cases": 1,
+  "equipment_liquid_release_diagnostic_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "equipment_liquid_release_diagnostic_operator_limited": true,
+  "equipment_liquid_release_diagnostic_elapsed_ms": 14242.213599965908,
+  "equipment_liquid_release_diagnostic_mass_residual_kg": 7.549516567451064e-15,
+  "equipment_liquid_release_diagnostic_provider_mass_kg": 1.321033711231646,
+  "equipment_liquid_release_diagnostic_record": "results/20261009/equipment_liquid_release",
+  "equipment_liquid_release_physical_validation_claim": false,
+  "equipment_liquid_release_airborne_policy": "reject until validated droplet adapter is supplied"
 }

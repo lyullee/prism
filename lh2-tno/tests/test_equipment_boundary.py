@@ -6,7 +6,9 @@ from pathlib import Path
 import pytest
 from lh2_tno.contracts import Facility
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, VerticalGasHandoff, thermodynamic_rows
+from lh2_tno.equipment_boundary import (ResolvedGasRelease, ResolvedGasReleaseSet,
+    ResolvedLiquidRelease, VerticalGasHandoff, thermodynamic_rows)
+from lh2_tno.resolved_liquid_worker import resolve_liquid_rows
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
@@ -63,6 +65,49 @@ def two_sided_request_data():
              release_termination={'basis':'two_sided_rupture','time_s':.37,
                                   'provenance':'synthetic two-endpoint provider closure'})
     return d, release_set
+
+
+def liquid_packet():
+    base = packet()
+    steps = []
+    for source_step, ground_fraction in zip(base['steps'], (.6, .625)):
+        total = source_step['mass_flow_kg_s']
+        gas = total * (1. - ground_fraction)
+        ground = total * ground_fraction
+        velocity = source_step['velocity_m_s']
+        density = source_step['density_kg_m3']
+        steps.append({
+            'time_s': source_step['time_s'], 'total_mass_flow_kg_s': total,
+            'gas_mass_flow_kg_s': gas, 'ground_liquid_mass_flow_kg_s': ground,
+            'airborne_liquid_mass_flow_kg_s': 0., 'specific_enthalpy_j_kg': 3e6,
+            'gas_pressure_pa_abs': 101325., 'gas_temperature_k': 150.,
+            'gas_density_kg_m3': density, 'gas_effective_area_m2': gas / (density * velocity),
+            'gas_velocity_m_s': velocity, 'gas_velocity_origin': 'provider_resolved',
+            'droplet_class_outcomes': [{
+                'ground_liquid_mass_flow_kg_s': ground,
+                'airborne_liquid_mass_flow_kg_s': 0., 'flight_time_s': .1,
+                'impact_position_m': [.2, 0., 0.], 'droplet_diameter_m': 5e-4,
+            }],
+        })
+    mass = sum(s['total_mass_flow_kg_s'] * (end - s['time_s'])
+               for s, end in zip(steps, [.2, .37]))
+    return {
+        'component_id': 'vent', 'port_id': 'vent.out', 'event_id': 'liquid-test',
+        'event_kind': 'accidental_leak', 'upstream_service': 'LH2',
+        'upstream_service_provenance': 'synthetic LH2 liquid provider',
+        'boundary_kind': 'resolved_atmospheric_liquid_exit', 'phase_basis': 'two_phase',
+        'enthalpy_convention': 'provider_total_outlet_enthalpy',
+        'property_basis': base['property_basis'], 'provider_source_digest': 'a' * 64,
+        'provider_result_digest': 'b' * 64, 'provider_boundary_reference': 'synthetic flash boundary',
+        'input_origin': 'synthetic', 'position_enu_m': [0., 0., 1.],
+        'direction_enu': [1., 0., 0.], 'ambient_pressure_pa_abs': 101325.,
+        'ambient_temperature_k': 288.15, 'duration_s': .37, 'available_mass_kg': 5.,
+        'cumulative_mass_out_kg': mass, 'cumulative_specific_enthalpy_out_j': mass * 3e6,
+        'reference_area_m2': .001, 'reference_area_provenance': 'synthetic provider liquid outlet',
+        'steps': steps, 'termination_provenance': 'synthetic positive inventory threshold',
+        'droplet_partition_provenance': 'synthetic provider flash and rainout partition',
+        'failure_opening_diameter_m': .0025,
+    }
 
 
 def facility_data(kind='vent_stack'):
@@ -355,3 +400,63 @@ def test_zero_flow_after_closure_does_not_erase_preceding_release():
     p['cumulative_mass_out_kg']=.003*.2;p['cumulative_static_enthalpy_out_j']=.003*.2*3e6
     p=ResolvedGasRelease.model_validate_json(json.dumps(p))
     assert p.integrated_mass_kg==pytest.approx(.0006)
+
+
+def test_resolved_liquid_provider_closes_partition_and_worker_rows():
+    release = ResolvedLiquidRelease.model_validate_json(json.dumps(liquid_packet()))
+    assert release.integrated_mass_kg == pytest.approx(.003 * .2 + .004 * .17)
+    rows, history = resolve_liquid_rows(release.model_dump(mode='json'), 101325.)
+    assert [row['time_s'] for row in rows] == [0., .2]
+    assert sum(row['gas_mass_flow_kg_s'] for row in rows) == pytest.approx(.0012 + .0015)
+    assert sum(row['ground_liquid_mass_flow_kg_s'] for row in rows) == pytest.approx(.0018 + .0025)
+    assert all(row['discharge_recalculated'] is False for row in rows)
+    assert history['discharge_recalculated'] is False
+    assert history['equipment_dynamics_recalculated'] is False
+
+
+def test_resolved_liquid_provider_rejects_airborne_liquid_without_adapter():
+    d = liquid_packet()
+    d['steps'][0]['airborne_liquid_mass_flow_kg_s'] = .001
+    d['steps'][0]['ground_liquid_mass_flow_kg_s'] = .0018 - .001
+    d['steps'][0]['droplet_class_outcomes'][0]['airborne_liquid_mass_flow_kg_s'] = .001
+    d['steps'][0]['droplet_class_outcomes'][0]['ground_liquid_mass_flow_kg_s'] = .0018 - .001
+    with pytest.raises(ValueError, match='airborne liquid'):
+        ResolvedLiquidRelease.model_validate_json(json.dumps(d))
+
+
+def test_liquid_provider_binds_to_consequence_contract():
+    d = request_data()
+    d.update(source_input=None, resolved_release=None,
+             resolved_liquid_release=liquid_packet(),
+             source_operator='equipment_liquid_release',
+             release_termination={'basis':'inventory_depletion', 'time_s':.37,
+                                  'provenance':'synthetic provider liquid inventory threshold'})
+    request = ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.source_operator == 'equipment_liquid_release'
+    assert request.resolved_liquid_release.phase_basis == 'two_phase'
+
+
+def test_liquid_provider_requires_a_liquid_or_two_phase_facility_port():
+    d = request_data()
+    d.update(source_input=None, resolved_release=None,
+             resolved_liquid_release=liquid_packet(),
+             source_operator='equipment_liquid_release',
+             release_termination={'basis':'inventory_depletion', 'time_s':.37,
+                                  'provenance':'synthetic provider liquid inventory threshold'})
+    class NeverCalled:
+        def run(self, *args):
+            raise AssertionError('invalid facility phase must not run physics')
+    gas_facility = Facility.model_validate_json(json.dumps(facility_data()))
+    with pytest.raises(ValueError, match='declared phase'):
+        ResearchPipeline(gas_facility, NeverCalled()).consequences(
+            ConsequenceRequest.model_validate_json(json.dumps(d)))
+    liquid_facility = facility_data()
+    liquid_facility['ports'][0]['phase'] = 'two_phase'
+    class Backend:
+        def run(self, operation, payload):
+            assert operation == 'consequence_chain'
+            assert payload['source_input']['resolved_liquid_release']['phase_basis'] == 'two_phase'
+            return {'data': {'status':'END_TO_END_DIAGNOSTIC_EXECUTED'}}
+    result = ResearchPipeline(Facility.model_validate_json(json.dumps(liquid_facility)), Backend()).consequences(
+        ConsequenceRequest.model_validate_json(json.dumps(d)))
+    assert result['data']['status'] == 'END_TO_END_DIAGNOSTIC_EXECUTED'

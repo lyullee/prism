@@ -252,6 +252,139 @@ class ResolvedGasReleaseSet(Contract):
         return sum(release.integrated_mass_kg for release in self.releases)
 
 
+class LiquidDropletOutcome(Contract):
+    """Provider-owned fate of one liquid parcel class."""
+
+    ground_liquid_mass_flow_kg_s: Nonnegative = 0.0
+    airborne_liquid_mass_flow_kg_s: Nonnegative = 0.0
+    flight_time_s: Nonnegative | None = None
+    impact_position_m: Vector | None = None
+    droplet_diameter_m: Positive | None = None
+
+    @model_validator(mode='after')
+    def resolved_ground_fate(self):
+        if self.ground_liquid_mass_flow_kg_s > 1e-12:
+            if self.flight_time_s is None or self.impact_position_m is None:
+                raise ValueError('ground liquid outcome requires flight time and impact position')
+        return self
+
+
+class ResolvedLiquidStep(Contract):
+    """Left-held provider state after liquid/two-phase flash partition."""
+
+    time_s: Nonnegative
+    total_mass_flow_kg_s: Nonnegative
+    gas_mass_flow_kg_s: Nonnegative
+    ground_liquid_mass_flow_kg_s: Nonnegative
+    airborne_liquid_mass_flow_kg_s: Nonnegative
+    specific_enthalpy_j_kg: float
+    gas_pressure_pa_abs: Positive | None = None
+    gas_temperature_k: Positive | None = None
+    gas_density_kg_m3: Positive | None = None
+    gas_effective_area_m2: Positive | None = None
+    gas_velocity_m_s: Nonnegative | None = None
+    gas_velocity_origin: Literal['provider_resolved', 'mass_continuity_from_declared_area'] | None = None
+    droplet_class_outcomes: tuple[LiquidDropletOutcome, ...] = ()
+
+    @model_validator(mode='after')
+    def partition_and_gas_closure(self):
+        expected = self.gas_mass_flow_kg_s + self.ground_liquid_mass_flow_kg_s + self.airborne_liquid_mass_flow_kg_s
+        if not math.isclose(self.total_mass_flow_kg_s, expected, rel_tol=1e-8, abs_tol=1e-12):
+            raise ValueError('liquid/two-phase provider mass partition does not close')
+        ground = sum(x.ground_liquid_mass_flow_kg_s for x in self.droplet_class_outcomes)
+        airborne = sum(x.airborne_liquid_mass_flow_kg_s for x in self.droplet_class_outcomes)
+        if not math.isclose(ground, self.ground_liquid_mass_flow_kg_s, rel_tol=1e-8, abs_tol=1e-12):
+            raise ValueError('liquid provider ground droplet classes do not close')
+        if not math.isclose(airborne, self.airborne_liquid_mass_flow_kg_s, rel_tol=1e-8, abs_tol=1e-12):
+            raise ValueError('liquid provider airborne droplet classes do not close')
+        if self.gas_mass_flow_kg_s > 1e-12:
+            fields = (self.gas_pressure_pa_abs, self.gas_temperature_k, self.gas_density_kg_m3,
+                      self.gas_effective_area_m2, self.gas_velocity_m_s, self.gas_velocity_origin)
+            if any(value is None for value in fields):
+                raise ValueError('positive flashed gas flow requires a complete gas boundary state')
+            expected_gas = self.gas_density_kg_m3 * self.gas_velocity_m_s * self.gas_effective_area_m2
+            if not math.isclose(self.gas_mass_flow_kg_s, expected_gas, rel_tol=1e-8, abs_tol=1e-12):
+                raise ValueError('flashed gas mass/area/density/velocity do not close')
+        return self
+
+
+class ResolvedLiquidRelease(Contract):
+    """Provider-resolved atmospheric liquid/two-phase release.
+
+    The equipment model owns pressure relief, flash and droplet partition.  A
+    downstream PRISM route may consume flashed gas and ground liquid, but it
+    refuses airborne liquid unless a separate validated droplet adapter exists.
+    """
+
+    component_id: Name
+    port_id: Name
+    event_id: Name
+    event_kind: Literal['accidental_leak', 'normal_vent', 'emergency_relief']
+    upstream_service: Literal['LH2', 'GH2', 'COLD_GH2']
+    upstream_service_provenance: Name
+    state_owner: Literal['equipment_twin'] = 'equipment_twin'
+    discharge_owner: Literal['equipment_twin'] = 'equipment_twin'
+    boundary_kind: Literal['resolved_atmospheric_liquid_exit'] = 'resolved_atmospheric_liquid_exit'
+    phase_basis: Literal['liquid', 'two_phase']
+    enthalpy_convention: Literal['provider_total_outlet_enthalpy']
+    property_basis: PropertyBasis
+    provider_source_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
+    provider_result_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
+    provider_boundary_reference: Name
+    input_origin: Literal['synthetic', 'model_prediction', 'reviewed_measurement']
+    position_enu_m: Vector
+    direction_enu: Vector
+    ambient_pressure_pa_abs: Positive
+    ambient_temperature_k: Positive
+    duration_s: Positive
+    available_mass_kg: Positive
+    cumulative_mass_out_kg: Nonnegative
+    cumulative_specific_enthalpy_out_j: float
+    reference_area_m2: Positive
+    reference_area_provenance: Name
+    steps: tuple[ResolvedLiquidStep, ...]
+    termination_provenance: Name
+    droplet_partition_provenance: Name
+    failure_opening_diameter_m: Positive | None = None
+
+    @model_validator(mode='after')
+    def ledger(self):
+        if self.property_basis.energy_reference != f'CoolProp-HEOS:{self.property_basis.fluid}:native':
+            raise ValueError('resolved liquid boundary requires the declared native enthalpy reference')
+        if not math.isclose(sum(x*x for x in self.direction_enu), 1., abs_tol=1e-10, rel_tol=0):
+            raise ValueError('unit ENU outlet direction required')
+        if self.position_enu_m[2] <= 0:
+            raise ValueError('resolved liquid exit must be above flat ground')
+        if not self.steps or self.steps[0].time_s != 0 or self.steps[-1].time_s >= self.duration_s:
+            raise ValueError('left-held liquid provider history starts at zero before its end')
+        if len(self.steps) > 100 or any(b.time_s <= a.time_s for a, b in zip(self.steps, self.steps[1:])):
+            raise ValueError('ordered bounded liquid provider clock required')
+        if any(step.airborne_liquid_mass_flow_kg_s > 1e-12 for step in self.steps):
+            raise ValueError('airborne liquid requires a validated droplet/flash adapter; it cannot be implicit gas')
+        mass = self.integrated_mass_kg
+        energy = self.integrated_specific_enthalpy_out_j
+        if not math.isclose(mass, self.cumulative_mass_out_kg, rel_tol=1e-8, abs_tol=1e-10):
+            raise ValueError('provider cumulative liquid mass and history do not close')
+        if not math.isclose(energy, self.cumulative_specific_enthalpy_out_j, rel_tol=1e-8, abs_tol=1e-6):
+            raise ValueError('provider liquid enthalpy ledger does not close')
+        if mass > self.available_mass_kg + 1e-9:
+            raise ValueError('resolved liquid release exceeds available inventory')
+        if self.event_kind != 'accidental_leak' and self.failure_opening_diameter_m is not None:
+            raise ValueError('normal vent/relief is not a declared random-leak opening')
+        return self
+
+    def intervals(self):
+        return zip(self.steps, [x.time_s for x in self.steps[1:]] + [self.duration_s])
+
+    @property
+    def integrated_mass_kg(self):
+        return sum(x.total_mass_flow_kg_s * (end - x.time_s) for x, end in self.intervals())
+
+    @property
+    def integrated_specific_enthalpy_out_j(self):
+        return sum(x.total_mass_flow_kg_s * x.specific_enthalpy_j_kg * (end - x.time_s) for x, end in self.intervals())
+
+
 def thermodynamic_rows(packet: dict, ambient_pressure: float, cp) -> tuple[list[dict],dict]:
     """Validate the contract, then resolve its PH state without solving flow."""
     from .resolved_gas_worker import resolve_gas_rows

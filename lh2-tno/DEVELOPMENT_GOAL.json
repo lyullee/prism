@@ -9,22 +9,22 @@
       "id": "A",
       "name": "설비별 공정 상태·방출 경계 결합",
       "status": "partial",
-      "implemented": "설비 provider의 PH·continuity·경계 면적·질량/엔탈피 장부를 ResolvedGasRelease로 검증하고 문헌 LH2_PIPE 5개 누출 크기를 시설 campaign에 연결; LayeredTankNetworkSimulator와 CommandedValve의 탱크·밸브 과도 출구 10건, HomogeneousTank의 다섯 양수 재고 threshold 종료 경로를 각 시설 경계에 연결; 선택적 시설 포트 좌표와 provider 방출 좌표 일치 검사 추가; provider-resolved vertical-to-horizontal handoff 경계와 포트/혼합상태 provenance 검사 추가",
-      "remaining": "탱크/배관/밸브/펌프 등 전 설비 지원표, 액체·2상 출구와 위치별 사고 경로; 현재 실제 피해 실행은 합성 수평 대기압 low-Mach 기체 출구와 합성 vertical handoff 경계만 확인"
+      "implemented": "설비 provider의 PH·continuity·경계 면적·질량/엔탈피 장부를 ResolvedGasRelease로 검증하고 문헌 LH2_PIPE 5개 누출 크기를 시설 campaign에 연결; LayeredTankNetworkSimulator와 CommandedValve의 탱크·밸브 과도 출구 10건, HomogeneousTank의 다섯 양수 재고 threshold 종료 경로를 각 시설 경계에 연결; 선택적 시설 포트 좌표와 provider 방출 좌표 일치 검사 추가; provider-resolved vertical-to-horizontal handoff 경계와 포트/혼합상태 provenance 검사 추가; provider-resolved liquid/two-phase flash gas, ground-liquid and droplet-arrival contract ResolvedLiquidRelease with outward facility phase check",
+      "remaining": "탱크/배관/밸브/펌프 등 전 설비 지원표, LayeredTank 액체·2상 상태와 위치별 사고 경로; provider liquid 경계 1건은 실제 피해까지 실행했지만 실제 설비 feedback·현장 검증은 남음"
     },
     {
       "id": "B",
       "name": "주요 사고 방출·차단·재고 소진",
       "status": "partial",
-      "implemented": "통합 LH2 source의 압력 평형 자연 종료, 명시적 SLABx-LH2 finite-inventory liquid-jet operator, 0.25초 명령 차단 후 유량 0을 확인한 isolation-success 경계, 0.5초 동안 열린 상태를 유지하는 isolation-failure 진단 경계, HomogeneousTank/DynamicNetworkSimulator의 양수 재고 threshold 종료를 실제 질량·에너지 장부에 연결; G1은 constant upstream·open spray-energy 한계를 표시하고 provider 이력을 요청 시간까지 묵묵히 연장하지 않음; 600초 전량방출은 전용 operator·종료근거·완전 이력 계약을 추가해 짧은 누출로의 암묵 대체를 차단했고 합성 10 m³ provider 입력으로 600초 end-to-end 진단 1건을 실행; TNO_PIPE full-bore 양단을 `ResolvedGasReleaseSet`과 `equipment_two_sided_rupture`로 두 provider 출구에 연결하고 한 사건의 Frechet 상한으로 결합; 수직 출구는 provider 수평 handoff 단면이 있을 때만 `VerticalGasHandoff`로 연결",
-      "remaining": "실제 차단 신뢰도·LayeredTank 액체/2상 tank feedback, G1/양단/수직 handoff provider 상호작용과 물리 검증, 실제 설비 입력에서의 600초 실행; crosswind handoff 비용 문제 해결"
+      "implemented": "통합 LH2 source의 압력 평형 자연 종료, 명시적 SLABx-LH2 finite-inventory liquid-jet operator, 0.25초 명령 차단 후 유량 0을 확인한 isolation-success 경계, 0.5초 동안 열린 상태를 유지하는 isolation-failure 진단 경계, HomogeneousTank/DynamicNetworkSimulator의 양수 재고 threshold 종료를 실제 질량·에너지 장부에 연결; G1은 constant upstream·open spray-energy 한계를 표시하고 provider 이력을 요청 시간까지 묵묵히 연장하지 않음; 600초 전량방출은 전용 operator·종료근거·완전 이력 계약을 추가해 짧은 누출로의 암묵 대체를 차단했고 합성 10 m³ provider 입력으로 600초 end-to-end 진단 1건을 실행; TNO_PIPE full-bore 양단을 `ResolvedGasReleaseSet`과 `equipment_two_sided_rupture`로 두 provider 출구에 연결하고 한 사건의 Frechet 상한으로 결합; 수직 출구는 provider 수평 handoff 단면이 있을 때만 `VerticalGasHandoff`로 연결; provider-resolved liquid/two-phase release 1건의 gas/ground partition, DynamicLH2PoolX rainout and final-damage path; airborne liquid is explicitly rejected",
+      "remaining": "실제 차단 신뢰도·LayeredTank 액체/2상 tank feedback, G1/양단/수직 handoff provider 상호작용과 물리 검증, 실제 설비 입력에서의 600초 실행; crosswind handoff 비용 문제 해결; provider liquid flash/spray energy validation and LayeredTank liquid/two-phase depletion remain incomplete"
     },
     {
       "id": "C",
       "name": "시설 전체 위험 연결",
       "status": "partial",
-      "implemented": "모든 생성 LH2_PIPE LOC의 계산/미계산 회계, 기상·인구·방호 분기 실행, integrated/G1 source와 steady·transient equipment-resolved pipe route의 success/failure branch별 점화별 native TNO IR/F-N 합산, 다섯 inventory-depletion LOC의 10개 weather case까지 연결; 실패/공간 잘림/operator-limited 상태에서 total 보류 또는 synthetic declared-scope로 구분; 결과에 설비별 생성 사건·실행/미계산·제외를 함께 기록",
-      "remaining": "실제 설비 목록·위치 배분과 실증된 점화/차단 정책·장벽 확률 공급; G1 operator-limited·G3 tank hole·LayeredTank 액체/2상 재고 소진은 미완료"
+      "implemented": "모든 생성 LH2_PIPE LOC의 계산/미계산 회계, 기상·인구·방호 분기 실행, integrated/G1 source와 steady·transient equipment-resolved pipe route의 success/failure branch별 점화별 native TNO IR/F-N 합산, 다섯 inventory-depletion LOC의 10개 weather case까지 연결; 실패/공간 잘림/operator-limited 상태에서 total 보류 또는 synthetic declared-scope로 구분; 결과에 설비별 생성 사건·실행/미계산·제외를 함께 기록; one provider-resolved liquid/two-phase exit is passed through pool, dispersion, ignition and damage chain while retaining operator-limited status",
+      "remaining": "실제 설비 목록·위치 배분과 실증된 점화/차단 정책·장벽 확률 공급; G1 operator-limited·G3 tank hole·LayeredTank 액체/2상 재고 소진은 미완료; this case has no initiating frequency and does not complete facility-wide IR/F-N"
     },
     {
       "id": "D",
@@ -37,7 +37,7 @@
       "id": "E",
       "name": "독립 물리 검증과 신규 계산 처리시간",
       "status": "partial",
-      "implemented": "214개 portable 검사, 자연 종료 실제 체인 1건, LH2 campaign 6건, steady equipment campaign 2건, transient isolation success/failure campaign 20건, 다섯 positive-mass inventory-depletion LOC의 10개 weather case, 합성 600초 inventory-over-horizon end-to-end 진단 1건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, DynamicLH2PoolX 풀/확산 구성요소의 hold-out 지표·질량잔차·원자료 해시 장부, 단계별 시간·질량 장부와 실패 시험 보존; transient 20건 fresh 물리 처리시간 7.8–49.5초/건, inventory 10건 1.59–2.31초/건, 양단 2건 8.41–8.75초/건, variable-state vertical handoff 2건 3.213–3.363초/건, 600초 진단 30.95초 기록, variable-state vertical handoff 3회 신규 프로세스 benchmark의 campaign p50/p95/p99 7.170/7.352/7.368초와 wall p50/p95/p99 12.005/12.245/12.266초 보존",
+      "implemented": "218개 portable 검사, 자연 종료 실제 체인 1건, LH2 campaign 6건, steady equipment campaign 2건, transient isolation success/failure campaign 20건, 다섯 positive-mass inventory-depletion LOC의 10개 weather case, 합성 600초 inventory-over-horizon end-to-end 진단 1건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit 1건, DynamicLH2PoolX 풀/확산 구성요소의 hold-out 지표·질량잔차·원자료 해시 장부, 단계별 시간·질량 장부와 실패 시험 보존; liquid provider case fresh elapsed 약 14.24초, transient 20건 7.8–49.5초/건, inventory 10건 1.59–2.31초/건, 양단 2건 8.41–8.75초/건, variable-state vertical handoff 2건 3.213–3.363초/건, 600초 진단 30.95초 기록, variable-state vertical handoff 3회 신규 프로세스 benchmark의 campaign p50/p95/p99 7.170/7.352/7.368초와 wall p50/p95/p99 12.005/12.245/12.266초 보존",
       "remaining": "source protocol 해시 drift 해소, 실제 설비 방출원·대기확산·점화·IR/F-N 독립 실험 검증, 실측/복원/합성 출처와 분할, 관측연산자·수렴 및 반복 p50/p95/p99; 1 Hz 미검증"
     }
   ],
@@ -48,10 +48,13 @@
     "폭굉",
     "전체 도미노"
   ],
-  "next_priority": "실제 설비 목록에 양수 재고·수직 handoff 종료 계약을 확장하고 LayeredTank 액체·2상 flash, 차단 신뢰도, 양단 교차상호작용과 실제 물리 검증을 연결",
+  "next_priority": "실제 설비 목록에 양수 재고·수직 handoff·ResolvedLiquidRelease 종료 계약을 확장하고 LayeredTank 액체·2상 flash/재고 feedback, airborne droplet adapter, 차단 신뢰도, 양단 교차상호작용과 실제 물리 검증을 연결",
   "physical_validation_claim": false,
   "total_facility_annual_risk_complete": false,
   "new_release_published": false,
   "step1_record": "docs/PRISM_시설위험_실행기_개발기록_20261009.md",
-  "step1_results": "results/20261009/campaign_step1"
+  "step1_results": "results/20261009/campaign_step1",
+  "liquid_provider_diagnostic_record": "results/20261009/equipment_liquid_release",
+  "liquid_provider_diagnostic_status": "END_TO_END_DIAGNOSTIC_EXECUTED_OPERATOR_LIMITED",
+  "liquid_provider_diagnostic_physical_validation_claim": false
 }

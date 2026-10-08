@@ -13,9 +13,11 @@ import numpy as np
 try:
     from .source_termination import effective_source_duration
     from .inventory_source import liquid_jet_rows
+    from .resolved_liquid_worker import resolve_liquid_rows
 except ImportError:  # isolated worker imports this module as a top-level file
     from source_termination import effective_source_duration
     from inventory_source import liquid_jet_rows
+    from resolved_liquid_worker import resolve_liquid_rows
 
 MW_H2=.002016
 MW_AIR=.028965
@@ -87,9 +89,21 @@ def run_chain(p,roots,module):
     duration_mode=p.get('source_duration_mode','declared')
     source_operator=p.get('source_operator','integrated_transient')
     resolved=p.get('resolved_release')
+    resolved_liquid=p.get('resolved_liquid_release')
+    equipment_resolved = resolved is not None or resolved_liquid is not None
+    if resolved is not None and resolved_liquid is not None:
+        raise ValueError('gas and liquid provider releases cannot be supplied together')
     if resolved is not None:
         from resolved_gas_worker import resolve_gas_rows
         rows,source_history=resolve_gas_rows(resolved,source['ambient']['pressure_pa'],cp)
+    elif resolved_liquid is not None:
+        rows,source_history=resolve_liquid_rows(resolved_liquid,source['ambient']['pressure_pa'])
+        duration=source['duration_s']
+        source_history.update(source_operator=source_operator,
+            requested_duration_s=duration,effective_duration_s=duration,
+            source_duration_mode='declared',
+            termination_basis=p.get('release_termination',{}).get('basis'),
+            operator_limited=True)
     elif source_operator == 'inventory_liquid_jet':
         jetmod=module('slabx_lh2.lh2_jet_source',roots['slabx_lh2'])
         spray=source['liquid_jet']
@@ -146,6 +160,8 @@ def run_chain(p,roots,module):
         source_history['effective_duration_s']=duration
     if source_operator == 'inventory_liquid_jet' and duration not in p['evaluation_times_s']:
         raise ValueError('inventory depletion duration must be an explicit evaluation timestamp')
+    if source_operator == 'equipment_liquid_release' and duration not in p['evaluation_times_s']:
+        raise ValueError('equipment liquid release duration must be an explicit evaluation timestamp')
     mass=branch_mass(rows,duration,'total_mass_flow_kg_s')
     if mass>p['available_mass_kg']+1e-9:raise ValueError('release exceeds available inventory')
     if max(abs(r['mass_residual_kg_s']) for r in rows)>1e-8:
@@ -318,7 +334,7 @@ def run_chain(p,roots,module):
                 total_rate_kg_s=total,h2_mass_fraction=hand.h2_mass_fraction,temperature_K=hand.temperature_K,
                 density_kg_m3=hand.density_kg_m3,velocity_m_s=downvelocity,centre_height_m=hand.height_m,
                 half_width_m=width,depth_m=depth,mixture_cp_J_kgK=hand.h2_mass_fraction*14300.+(1-hand.h2_mass_fraction)*1006.,
-                source_model='equipment-resolved-gas + vector-transition' if resolved is not None else 'integrated-source-terminal-gas + vector-cryogenic-transition',
+                source_model='equipment-resolved-gas + vector-transition' if equipment_resolved else 'integrated-source-terminal-gas + vector-cryogenic-transition',
                 geometry_closure='mass and downwind momentum preserving section')
             source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)
             traces.append({'branch':kind,'handoff':asdict(hs),'handoff_age_s':tt,
@@ -538,15 +554,16 @@ def run_chain(p,roots,module):
     return {'data':{
         'status':'END_TO_END_DIAGNOSTIC_EXECUTED','full_chain_executed':True,
         'physical_validation_claim':False,'facility_validation':'WITHHELD','realtime_requirement_demonstrated':False,
-        'stages':['equipment_resolved_gas_exit' if resolved is not None else 'integrated_release',
+            'stages':['equipment_resolved_liquid_two_phase_exit' if resolved_liquid is not None else
+                      'equipment_resolved_gas_exit' if resolved is not None else 'integrated_release',
                   'rainout_and_dynamic_pool','vector_cryogenic_near_field','SLABx_dispersion',
                   'finite_inventory_cloud','ignition_branches','fire_radiation','multi_energy_blast_zones','TNO_human_damage','conditional_risk'],
         'source':source_history,'pool':pool,'ground_arrival_pulses':ground_pulses,
         'source_operator':source_operator,
         'operator_limited':bool(source_history.get('operator_limited',False) or vertical_handoff is not None),
-        'source_ownership':{'state_owner':'equipment_twin' if resolved is not None else 'integrated_source',
-            'discharge_owner':'equipment_twin' if resolved is not None else 'integrated_source',
-            'discharge_recalculated':resolved is None},
+        'source_ownership':{'state_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
+            'discharge_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
+            'discharge_recalculated':not equipment_resolved},
         'handoffs':traces,'cloud_history_unignited_counterfactual':cloud,
         'ignition_branch_probabilities':branch_probs,
         'explosion':{'ignition_time_s':td,'flammable_mass_in_domain_kg':fm,'cloud_centroid_enu_m':cloud_centre.tolist(),
@@ -564,7 +581,8 @@ def run_chain(p,roots,module):
             'initiation':'constant supplied hazard; disjoint first-event intervals; remaining consequence horizon; interval-left consequence approximation',
             'effect_combination':'Frechet union upper bound min(1,sum(harm)) within one event branch; no independence assumed'},
         'limitations':[
-            'If resolved equipment input is selected: horizontal atmospheric gas plane at Mach <=0.3; PH/continuity/static enthalpy checked, provider kinetic-energy closure is not certified.',
+            'If resolved gas equipment input is selected: horizontal atmospheric gas plane at Mach <=0.3; PH/continuity/static enthalpy checked, provider kinetic-energy closure is not certified.',
+            'If resolved liquid/two-phase equipment input is selected: provider flash, gas/ground partition and total enthalpy are consumed; airborne liquid and provider flash/droplet physics remain outside this route.',
             'Outdoor flat ground, non-calm wind, horizontal nozzle or provider-resolved vertical handoff, known leak geometry only.',
             'A vertical provider exit is accepted only with a declared horizontal handoff section; the handoff is operator-limited and is not a PRISM rotation or independent vertical-jet validation.',
             'Ground deposition uses resolved per-class flight delays; distributed in-flight vapour generation is still collapsed to the terminal gas boundary at release time.',
