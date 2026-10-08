@@ -555,8 +555,8 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_facility_qra_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_actual_qualified_packet_count": 0,
   "external_lh2dt_layered_tank_isolation_branch_campaign_test_status": "diagnostic smoke plus helper tests; full portable suite 355 passed",
-  "ijhe_completion_audit_reaudit_20261011_status": "INCOMPLETE_EVIDENCE; 11 checks, 7 blocking reasons after isolation branch diagnostic",
-  "ijhe_completion_audit_reaudit_20261011_record": "results/20261011/layered_tank_isolation_branches_all/ijhe_completion_audit_reaudit_20261011.json",
+  "ijhe_completion_audit_reaudit_20261011_status": "INCOMPLETE_EVIDENCE; 11 checks, 7 blocking reasons after full synthetic isolation-branch execution",
+  "ijhe_completion_audit_reaudit_20261011_record": "results/20261011/layered_tank_isolation_branches_all/ijhe_completion_audit_full_20261011.json",
   "ijhe_completion_audit_reaudit_20261011_facility_qra_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_geometry_direction": "synthetic diagnostic horizontal atmospheric outlet; downward outlet requires explicit provider-resolved horizontal handoff",
   "external_lh2dt_layered_tank_isolation_branch_campaign_duration_binding": "provider_declared basis/time is accepted only when strict packet carries termination_basis and duration; evaluation clock includes provider breakpoints; defaults template examples/provider_request_defaults_liquid_provider_duration.json",
@@ -577,5 +577,17 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_total_facility_risk_available": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_physical_validation_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_downward_guard": "implemented fail-closed in src/lh2_tno/chain_worker.py; no zero-horizontal-direction normalization",
-  "unit_contract_conservation_tests_passed": 355
+  "unit_contract_conservation_tests_passed": 355,
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_status": "PARTIAL_DECLARED_SCOPE; 7 synthetic storage branch cases executed through the full consequence chain, 21 cases explicitly UNCOMPUTED; all executed cases remain operator-limited",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full.json",
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_case_count": 7,
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_uncomputed_case_count": 21,
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_generated_frequency_per_year": 0.0138259,
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_timing_ms": {
+    "case_min": 5589.786799973808,
+    "case_median": 12554.398999956902,
+    "case_max": 19519.011199939996,
+    "campaign_elapsed": 25335.644599981606
+  },
+  "external_lh2dt_layered_tank_isolation_branch_campaign_full_scope_matrix_record": "results/20261011/layered_tank_isolation_branches_all/accident_scope_matrix_full.json"
 }
