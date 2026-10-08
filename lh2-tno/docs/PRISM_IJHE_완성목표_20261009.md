@@ -17,7 +17,7 @@
 - native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 194개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 문헌 빈도 분위수 재가중 검사, 과거 실제 외부 모델 실행 기록. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 195개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 문헌 빈도 분위수 재가중 검사, 과거 실제 외부 모델 실행 기록. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 
 ## 단계별 작업과 통과 기준
 
@@ -45,7 +45,7 @@
 - 0.2/0.4초 같은 합성 종료는 전체 시설 위험 완료의 근거가 되지 않는다.
 - `source_duration_mode=model_natural`은 통합 source가 반환한 실제 구간만 사용한다. 요청 시간이 5초여도 모델이 0.2초에서 압력 평형으로 끝내면 유효 방출시간을 0.2초로 기록하며, 마지막 유량을 5초까지 채우지 않는다. 이 연결은 검증했지만 모델의 압력 평형 예측 정확도는 별도 검증 대상이다.
 - G1의 `source_operator=inventory_liquid_jet`은 instantaneous inventory LOC를 구멍 누출로 바꾸지 않고 SLABx-LH2 liquid-jet source를 호출한다. 명시한 분무·액적·증발 가정과 2초 재고 폐합을 사용하며, 일정 upstream 상태와 열린 spray-energy closure 때문에 `EXECUTED_OPERATOR_LIMITED`로 기록한다.
-- 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, 5개 `LH2_PIPE` area-bin의 isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 별도 `HomogeneousTank`/`DynamicNetworkSimulator` adapter는 양수 재고 threshold에 도달한 실제 provider 구간을 `AREA_100%` 한 사건의 두 기상 조건에 전달한다. 합성 초기 압력·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률과 재고 입력은 현장 근거가 아니고 실제 actuator 지연·실패확률·LayeredTank 액체/2상 방출은 아직 지원하지 않는다.
+- 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, 5개 `LH2_PIPE` area-bin의 isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 별도 `HomogeneousTank`/`DynamicNetworkSimulator` adapter는 다섯 area-bin에서 양수 재고 threshold에 도달한 실제 provider 구간을 두 기상 조건에 전달하여 10건을 실행했다. 합성 초기 압력·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률과 재고 입력은 현장 근거가 아니고 실제 actuator 지연·실패확률·LayeredTank 액체/2상 방출은 아직 지원하지 않는다.
 
 이 단계의 예제·명령·측정 결과는 별도 실행 기록에 정리한다. 이번 구현은 공개 0.6.0을 덮어쓰지 않은 개발 변경이며 새 PyPI/DOI 릴리스는 만들지 않았다.
 

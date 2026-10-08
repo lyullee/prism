@@ -3,9 +3,10 @@
 The external ``lh2dt`` homogeneous finite-storage model owns the tank state,
 valve flow and positive-mass depletion threshold.  PRISM only converts the
 provider interval-average boundary history into ``ResolvedGasRelease`` and
-runs the selected literature LH2 pipe LOC through the ordinary consequence
-and native TNO IR/F-N path.  The other literature LOCs remain explicit
-uncomputed cases.
+runs every generated literature LH2 pipe LOC through the ordinary consequence
+and native TNO IR/F-N path.  The facility and provider inputs remain synthetic
+diagnostic values, so this is declared-scope coverage rather than site QRA
+validation.
 """
 from __future__ import annotations
 
@@ -41,7 +42,7 @@ def save(name: str, value: object) -> None:
     )
 
 
-def provider_input() -> dict:
+def provider_input(area_m2: float) -> dict:
     return {
         "fluid": "ParaHydrogen",
         "tank_geometry": {
@@ -57,11 +58,11 @@ def provider_input() -> dict:
         },
         "ambient": {"pressure_pa": 100000.0, "temperature_k": 288.15},
         "valve": {
-            "full_open_area_m2": FULL_OPEN_AREA_M2,
+            "full_open_area_m2": area_m2,
             "discharge_coefficient": 0.8,
             "pressure_samples": 16,
         },
-        "depletion": {"threshold_mass_kg": 1.1e-4},
+        "depletion": {"threshold_mass_kg": 1.3405e-4},
         "duration_s": 40.0,
         "time_step_s": 0.5,
     }
@@ -74,8 +75,13 @@ def make_facility() -> Facility:
     return Facility.model_validate_json(json.dumps(raw))
 
 
-def make_release(backend: IsolatedBackend, provider_digest: str) -> tuple[ResolvedGasRelease, dict, dict]:
-    request = provider_input()
+def make_release(
+    backend: IsolatedBackend,
+    provider_digest: str,
+    event_id: str,
+    area_m2: float,
+) -> tuple[ResolvedGasRelease, dict, dict]:
+    request = provider_input(area_m2)
     response = backend.run("equipment_dynamic_inventory", request)
     data = response["data"]
     rows = []
@@ -102,7 +108,7 @@ def make_release(backend: IsolatedBackend, provider_digest: str) -> tuple[Resolv
     packet = {
         "component_id": "terminal_pipe",
         "port_id": "terminal_pipe.out",
-        "event_id": "equipment-inventory-campaign/terminal_pipe/AREA_100%",
+        "event_id": event_id,
         "event_kind": "accidental_leak",
         "enthalpy_convention": "static_exit_enthalpy",
         "property_basis": {
@@ -126,7 +132,7 @@ def make_release(backend: IsolatedBackend, provider_digest: str) -> tuple[Resolv
         "cumulative_static_enthalpy_out_j": data["cumulative_static_enthalpy_out_j"],
         "steps": rows,
         "termination_provenance": data["termination_provenance"],
-        "failure_opening_diameter_m": NOMINAL_PIPE_DIAMETER_M,
+        "failure_opening_diameter_m": math.sqrt(4.0 * area_m2 / math.pi),
     }
     return ResolvedGasRelease.model_validate_json(json.dumps(packet)), request, response
 
@@ -136,13 +142,6 @@ def main() -> None:
     backend = IsolatedBackend(config)
     facility = make_facility()
     provider_digest = tree_digest(provider)
-    release, provider_request, provider_response = make_release(backend, provider_digest)
-    data = provider_response["data"]
-    save("provider_input.json", provider_request)
-    save("provider_response.json", provider_response)
-    save("facility.json", facility.model_dump(mode="json"))
-    save("resolved_release.json", release.model_dump(mode="json"))
-
     plan_raw = {
         "id": "equipment-inventory-campaign",
         "assets": [
@@ -160,46 +159,68 @@ def main() -> None:
     }
     frequency_plan = FrequencyPlan.model_validate_json(json.dumps(plan_raw))
     events = generate_events(facility, frequency_plan)
-    selected = next(event for event in events if event.loc == "AREA_100%")
+    releases = {}
+    provider_requests = {}
+    provider_responses = {}
+    for event in events:
+        area_m2 = FULL_OPEN_AREA_M2 * event.release.area_fraction
+        release, provider_request, provider_response = make_release(
+            backend, provider_digest, event.id, area_m2
+        )
+        data = provider_response["data"]
+        if not data["inventory_depletion_detected"]:
+            raise AssertionError(f"inventory threshold not reached for {event.loc}")
+        releases[event.id] = release
+        provider_requests[event.id] = provider_request
+        provider_responses[event.id] = provider_response
+    save("provider_inputs.json", provider_requests)
+    save("provider_responses.json", provider_responses)
+    save("facility.json", facility.model_dump(mode="json"))
+    save("resolved_releases.json", {event_id: release.model_dump(mode="json") for event_id, release in releases.items()})
 
     base_template = json.loads(
         (ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json")
         .read_text(encoding="utf-8")
     )
-    evaluation_times = sorted(
-        {
-            0.0,
-            data["duration_s"],
-            1.0,
-            2.0,
-            3.0,
-            5.0,
-            10.0,
-            20.0,
-            40.0,
-            60.0,
-        }
-        | {row["time_s"] for row in data["steps"]}
-    )
-    template = copy.deepcopy(base_template)
-    template.update(
-        component_id="terminal_pipe",
-        source_input=None,
-        resolved_release=release.model_dump(mode="json"),
-        available_mass_kg=release.available_mass_kg,
-        source_position_enu_m=[0.0, 0.0, 1.0],
-        annual_frequency_per_year=None,
-        annual_frequency_provenance=None,
-        frequency_event=None,
-        initiation_intensity_per_s=None,
-        source_operator="equipment_inventory_depletion",
-        release_termination={
-            "basis": data["termination_basis"],
-            "time_s": release.duration_s,
-            "provenance": release.termination_provenance,
-        },
-        evaluation_times_s=evaluation_times,
-    )
+    templates = {}
+    for event in events:
+        release = releases[event.id]
+        data = provider_responses[event.id]["data"]
+        evaluation_times = sorted(
+            {
+                0.0,
+                data["duration_s"],
+                1.0,
+                2.0,
+                3.0,
+                5.0,
+                10.0,
+                20.0,
+                40.0,
+                60.0,
+            }
+            | {row["time_s"] for row in data["steps"]}
+        )
+        template = copy.deepcopy(base_template)
+        template.update(
+            component_id="terminal_pipe",
+            source_input=None,
+            resolved_release=release.model_dump(mode="json"),
+            available_mass_kg=release.available_mass_kg,
+            source_position_enu_m=[0.0, 0.0, 1.0],
+            annual_frequency_per_year=None,
+            annual_frequency_provenance=None,
+            frequency_event=None,
+            initiation_intensity_per_s=None,
+            source_operator="equipment_inventory_depletion",
+            release_termination={
+                "basis": data["termination_basis"],
+                "time_s": release.duration_s,
+                "provenance": release.termination_provenance,
+            },
+            evaluation_times_s=evaluation_times,
+        )
+        templates[event.id] = template
 
     population = [
         {
@@ -234,34 +255,19 @@ def main() -> None:
 
     routes = []
     for event in events:
-        if event.id == selected.id:
-            routes.append(
-                {
-                    "event_id": event.id,
-                    "branches": [
-                        {
-                            "id": "provider-inventory-depletion",
-                            "probability_given_event": 1.0,
-                            "provenance": "provider-owned positive-mass inventory threshold; no frequency or flow extrapolation",
-                            "request": copy.deepcopy(template),
-                        }
-                    ],
-                }
-            )
-        else:
-            routes.append(
-                {
-                    "event_id": event.id,
-                    "branches": [
-                        {
-                            "id": "pending-inventory-route",
-                            "probability_given_event": 1.0,
-                            "provenance": "explicitly outside this inventory depletion diagnostic",
-                            "uncomputed_reason": "provider inventory-depletion path was qualified only for AREA_100% in this diagnostic",
-                        }
-                    ],
-                }
-            )
+        routes.append(
+            {
+                "event_id": event.id,
+                "branches": [
+                    {
+                        "id": "provider-inventory-depletion",
+                        "probability_given_event": 1.0,
+                        "provenance": "provider-owned positive-mass inventory threshold; no frequency or flow extrapolation",
+                        "request": copy.deepcopy(templates[event.id]),
+                    }
+                ],
+            }
+        )
     campaign = RiskCampaign.model_validate_json(
         json.dumps(
             {
@@ -269,7 +275,7 @@ def main() -> None:
                 "frequency_plan": frequency_plan.model_dump(mode="json"),
                 "annual_conditions": conditions,
                 "event_routes": routes,
-                "scope_provenance": "one LH2_PIPE AREA_100% event uses an independent provider-owned homogeneous finite-storage inventory-depletion threshold and resolved gas history through SLABx-LH2/SLABx and native TNO IR/F-N; other LH2_PIPE LOCs remain explicit uncomputed cases",
+                "scope_provenance": "all five LH2_PIPE area-bin events use independent provider-owned homogeneous finite-storage inventory-depletion thresholds and resolved gas histories through SLABx-LH2/SLABx and native TNO IR/F-N; facility geometry, weather and population remain synthetic diagnostics",
             }
         )
     )
@@ -279,58 +285,67 @@ def main() -> None:
     save("campaign_result.json", result)
     executed = [case for case in result["cases"] if case["status"] == "EXECUTED"]
     uncomputed = [case for case in result["uncomputed_cases"] if case["status"] == "UNCOMPUTED"]
-    assert len(executed) == 2, result["cases"]
-    assert len(uncomputed) == 8, result["cases"]
-    assert result["total_facility_annual_ir_low_high"] is None
+    provider_data = {event_id: response["data"] for event_id, response in provider_responses.items()}
+    assert len(executed) == len(events) * len(conditions), result["cases"]
+    assert len(uncomputed) == 0, result["cases"]
+    assert result["total_facility_annual_ir_low_high"] is not None
     assert result["synthetic_release_horizon_present"] is False
-    assert data["inventory_depletion_detected"] is True
-    assert data["remaining_inventory_kg"] <= data["depletion_threshold_kg"]
-    assert data["max_total_mass_residual_kg"] < 1e-10
-    assert data["max_total_energy_residual_j"] < 1e-8
+    assert all(data["inventory_depletion_detected"] is True for data in provider_data.values())
+    assert all(data["remaining_inventory_kg"] <= data["depletion_threshold_kg"] for data in provider_data.values())
+    assert max(data["max_total_mass_residual_kg"] for data in provider_data.values()) < 1e-10
+    assert max(data["max_total_energy_residual_j"] for data in provider_data.values()) < 1e-8
     assert all(abs(case["mass_ledger"]["end_to_end_residual_kg"]) < 1e-8 for case in executed)
     save(
         "verification.json",
         {
-            "equipment_provider_cases": 1,
+            "equipment_provider_cases": len(events),
             "facility_executed_cases": len(executed),
-            "uncomputed_other_pipe_locs": len(uncomputed),
-            "provider_inventory_depletion_detected": data["inventory_depletion_detected"],
-            "provider_available_mass_kg": data["available_mass_kg"],
-            "provider_remaining_inventory_kg": data["remaining_inventory_kg"],
-            "provider_depletion_threshold_kg": data["depletion_threshold_kg"],
-            "provider_cumulative_mass_out_kg": data["cumulative_mass_out_kg"],
-            "provider_mass_residual_max_kg": data["max_total_mass_residual_kg"],
-            "provider_energy_residual_max_j": data["max_total_energy_residual_j"],
+            "uncomputed_cases": len(uncomputed),
+            "provider_inventory_depletion_detected": all(data["inventory_depletion_detected"] for data in provider_data.values()),
+            "provider_available_mass_kg": {event_id: data["available_mass_kg"] for event_id, data in provider_data.items()},
+            "provider_remaining_inventory_kg": {event_id: data["remaining_inventory_kg"] for event_id, data in provider_data.items()},
+            "provider_depletion_threshold_kg": {event_id: data["depletion_threshold_kg"] for event_id, data in provider_data.items()},
+            "provider_cumulative_mass_out_kg": {event_id: data["cumulative_mass_out_kg"] for event_id, data in provider_data.items()},
+            "provider_mass_residual_max_kg": max(data["max_total_mass_residual_kg"] for data in provider_data.values()),
+            "provider_energy_residual_max_j": max(data["max_total_energy_residual_j"] for data in provider_data.values()),
             "resolved_gas_to_final_harm_executed": True,
             "native_tno_ir_fn_aggregation_executed": True,
-            "facility_total_risk_withheld": True,
+            "declared_scope_total_risk_computed": True,
+            "facility_total_risk_withheld": False,
             "physical_validation_claim": False,
             "campaign_timing": result["timing"],
             "provider_source_digest": provider_digest,
             "backend_config_digest": config.digest(),
             "campaign_digest": campaign.digest(),
             "limitations": [
-                "synthetic homogeneous tank geometry, initial state, valve area and weather/population",
+                "synthetic homogeneous tank geometry, initial state, all valve areas and weather/population",
                 "positive-mass threshold is an event-safe provider stopping rule; it does not claim a zero-mass EOS state",
                 "provider model is not independently validated against a depletion experiment",
-                "other LH2_PIPE LOCs remain uncomputed and facility total risk is withheld",
+                "declared-scope total risk is for this synthetic five-bin diagnostic, not a site facility QRA",
                 "no plant actuator reliability, liquid two-phase outlet, or site calibration",
             ],
         },
     )
+    provider_summary = {
+        event_id: {
+            "duration_s": data["duration_s"],
+            "available_mass_kg": data["available_mass_kg"],
+            "remaining_inventory_kg": data["remaining_inventory_kg"],
+            "threshold_mass_kg": data["depletion_threshold_kg"],
+            "cumulative_mass_out_kg": data["cumulative_mass_out_kg"],
+            "mass_residual_max_kg": data["max_total_mass_residual_kg"],
+            "energy_residual_max_j": data["max_total_energy_residual_j"],
+        }
+        for event_id, data in provider_data.items()
+    }
     print(
         json.dumps(
             {
                 "status": result["status"],
                 "executed": len(executed),
                 "uncomputed": len(uncomputed),
-                "inventory_depletion_detected": data["inventory_depletion_detected"],
-                "duration_s": data["duration_s"],
-                "available_mass_kg": data["available_mass_kg"],
-                "remaining_inventory_kg": data["remaining_inventory_kg"],
-                "threshold_mass_kg": data["depletion_threshold_kg"],
-                "provider_mass_residual_max_kg": data["max_total_mass_residual_kg"],
-                "provider_energy_residual_max_j": data["max_total_energy_residual_j"],
+                "inventory_depletion_detected": all(data["inventory_depletion_detected"] for data in provider_data.values()),
+                "provider_summary": provider_summary,
                 "timing": result["timing"],
             },
             ensure_ascii=False,
