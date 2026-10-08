@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       release_ref:
-        description: Reviewed immutable release tag (for example v0.6.0)
+        description: Reviewed immutable release tag (for example v0.6.1)
         required: true
         type: string
 

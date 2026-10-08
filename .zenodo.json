@@ -1,9 +1,8 @@
 {
   "title": "PRISM: Process Risk Integration and Scenario Modeling",
   "upload_type": "software",
-  "version": "0.6.0",
-  "publication_date": "2026-10-08",
-  "doi": "10.5281/zenodo.23241359",
+  "version": "0.6.1",
+  "publication_date": "2026-10-09",
   "creators": [
     {
       "name": "Lee, Ugwiyeon",
