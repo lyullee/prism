@@ -24,6 +24,8 @@ python lh2-tno/scripts/audit_external_provider.py `
 
 이 최신 재귀 인벤토리는 provider 루트의 JSON **559개**를 검사했다. 그중 정상·스크리닝 유량 파일은 24개였고, 사고 방출 packet 후보와 strict 검증 적격 packet은 각각 0개였다.
 
+작업공간의 이전 `PRISM_IJHE_step1` 개발 출력도 별도로 검색했다. JSON 84개 중 방출처럼 보이는 후보는 42개였지만, 모두 `provider_export_schema`가 없어서 현재 계약 적격 packet은 0개였다. 이 파일들은 과거 합성 진단 결과이지 검사센터의 실제 provider export가 아니므로, schema 문자열을 사후에 붙여 시설 packet으로 승격하지 않는다. 두 검색 결과와 inventory digest는 [provider artifact 검색 증거](../examples/provider_artifact_search_evidence.json)에 고정했다.
+
 외부 원자료는 저장소에 복사하지 않고 다음 모델 루트에서 읽었다.
 
 `C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델`

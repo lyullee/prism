@@ -1,0 +1,37 @@
+{
+  "schema": "prism.provider_artifact_search_evidence.v1",
+  "snapshot_date": "2026-10-09",
+  "purpose": "Search workspace LH2 outputs for provider-owned accident release packets before leaving events uncomputed.",
+  "searches": [
+    {
+      "label": "current external digital-twin provider",
+      "root": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델",
+      "source_digest": "4564f6d7941f68b4abe8eab1af645e4d08074f9fec62158a1e0aa67c78983f70",
+      "json_files_scanned": 559,
+      "normal_or_screening_flow_files": 24,
+      "accident_release_candidate_files": 0,
+      "qualified_accident_release_files": 0,
+      "qualified_emergency_relief_files": 0,
+      "promotion_status": "NO_ACCIDENT_RELEASE_EXPORT"
+    },
+    {
+      "label": "legacy PRISM IJHE step-1 outputs",
+      "root": "C:/Users/lyul/Desktop/DocuData/TNO_위험분석모듈/TNO_SYSTEM/코드/개발기록_20261009/PRISM_IJHE_step1",
+      "inventory_digest": "2fc8fa9745ee87796b2ad2820e309a0f0a52ad537e580481f62313f41a238973",
+      "json_files_scanned": 84,
+      "accident_release_candidate_files": 42,
+      "qualified_accident_release_files": 0,
+      "missing_field_counts": {
+        "provider_export_schema": 42
+      },
+      "promotion_status": "LEGACY_OUTPUT_REQUIRES_EXPLICIT_SCHEMA_MIGRATION",
+      "interpretation": "These are prior synthetic development outputs, not confirmed facility provider packets. Their release-like fields are retained as diagnostic history and are not promoted by adding a schema marker after the fact."
+    }
+  ],
+  "promotion_policy": {
+    "qualified_packet_count": 0,
+    "normal_flow_is_not_accident": true,
+    "legacy_packet_is_not_current_provider_contract": true,
+    "facility_ir_fn_allowed": false
+  }
+}
