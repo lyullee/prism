@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 199,
+  "unit_contract_conservation_tests_passed": 201,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -208,7 +208,7 @@
   "campaign_failure_ledger_implemented": true,
   "deterministic_frequency_sensitivity_implemented": true,
   "literature_frequency_quantile_uncertainty_implemented": true,
-  "literature_frequency_quantile_uncertainty_scope": "published event p05/published/p95 with explicit within-asset shared-quantile correlation; no facility credible interval or new physics",
+  "literature_frequency_quantile_uncertainty_scope": "published event p05/published/p95 with explicit within-asset shared-quantile and independent-event-bound correlation comparison; no facility credible interval or new physics",
   "inventory_liquid_jet_operator_implemented": true,
   "inventory_liquid_jet_operator_scope": "SLABx-LH2 constant upstream state with explicit spray/droplet assumptions; finite-inventory mass closure; operator-limited, no tank feedback or open spray energy closure",
   "statistical_frequency_uncertainty_complete": false,

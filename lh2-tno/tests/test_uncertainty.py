@@ -60,3 +60,35 @@ def test_p05_requires_a_published_event_bound():
         literature_frequency_uncertainty(_result((event,)), (
             LiteratureFrequencyScenario(id='low', asset_quantiles={'valves': 'p05'}, provenance='test'),
         ))
+
+
+def test_independent_event_bounds_can_be_compared_with_shared_asset_bounds():
+    events = _valve_events()
+    independent = LiteratureFrequencyScenario(
+        id='independent-low',
+        event_quantiles={event.id: 'p05' for event in events},
+        provenance='published test bounds; independent event sensitivity',
+        correlation_assumption='independent_event_bounds',
+    )
+    shared = LiteratureFrequencyScenario(
+        id='shared-low',
+        asset_quantiles={'valves': 'p05'},
+        provenance='published test bounds; within-asset shared sensitivity',
+    )
+    result = literature_frequency_uncertainty(_result(events), (shared, independent))
+    assert result['correlation_comparison_present'] is True
+    assert all(
+        scenario['event_frequency_per_year'][event.id] == event.marginal_p05_per_year
+        for scenario in result['scenarios']
+        for event in events
+    )
+
+
+def test_frequency_scenario_rejects_mixed_correlation_inputs():
+    with pytest.raises(ValueError, match='asset quantiles only'):
+        LiteratureFrequencyScenario(
+            id='mixed',
+            asset_quantiles={'valves': 'p05'},
+            event_quantiles={'event': 'p95'},
+            provenance='test',
+        )

@@ -13,7 +13,7 @@ import json
 import math
 from typing import Literal
 
-from pydantic import model_validator
+from pydantic import Field, model_validator
 
 from .contracts import Contract, Name, canonical_digest
 from .frequency import FrequencyEvent
@@ -21,14 +21,23 @@ from .frequency import FrequencyEvent
 
 class LiteratureFrequencyScenario(Contract):
     id: Name
-    asset_quantiles: dict[str, Literal["p05", "published", "p95"]]
+    asset_quantiles: dict[str, Literal["p05", "published", "p95"]] = Field(default_factory=dict)
+    event_quantiles: dict[str, Literal["p05", "published", "p95"]] = Field(default_factory=dict)
     provenance: Name
-    correlation_assumption: Literal["within_asset_shared_quantile"] = "within_asset_shared_quantile"
+    correlation_assumption: Literal["within_asset_shared_quantile", "independent_event_bounds"] = "within_asset_shared_quantile"
 
     @model_validator(mode="after")
     def nonempty(self):
-        if not self.asset_quantiles or any(not k.strip() for k in self.asset_quantiles):
-            raise ValueError("explicit asset quantiles required")
+        if self.correlation_assumption == "within_asset_shared_quantile":
+            if not self.asset_quantiles or self.event_quantiles:
+                raise ValueError("within-asset scenarios require asset quantiles only")
+            if any(not k.strip() for k in self.asset_quantiles):
+                raise ValueError("explicit asset quantiles required")
+        else:
+            if not self.event_quantiles or self.asset_quantiles:
+                raise ValueError("independent-event scenarios require event quantiles only")
+            if any(not k.strip() for k in self.event_quantiles):
+                raise ValueError("explicit event quantiles required")
         return self
 
 
@@ -57,9 +66,13 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
     assets = {e.asset_id for e in events.values()}
     ids = set(result["known_contribution_annual_ir_low_high"])
     atoms = result["risk_atoms"]
+    event_ids = set(events)
     for scenario in scenarios:
-        if set(scenario.asset_quantiles) != assets:
-            raise ValueError("each literature-frequency scenario must address every generated asset")
+        if scenario.correlation_assumption == "within_asset_shared_quantile":
+            if set(scenario.asset_quantiles) != assets:
+                raise ValueError("each within-asset scenario must address every generated asset")
+        elif set(scenario.event_quantiles) != event_ids:
+            raise ValueError("each independent-event scenario must address every generated event")
 
     for atom in atoms:
         event = events.get(atom["event_id"])
@@ -82,8 +95,12 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
     computed_assets = {a["asset_id"] for a in atoms}
     outputs = []
     for scenario in scenarios:
-        event_frequency = {event.id: _event_frequency(event, scenario.asset_quantiles[event.asset_id])
-                           for event in events.values()}
+        if scenario.correlation_assumption == "within_asset_shared_quantile":
+            event_frequency = {event.id: _event_frequency(event, scenario.asset_quantiles[event.asset_id])
+                               for event in events.values()}
+        else:
+            event_frequency = {event.id: _event_frequency(event, scenario.event_quantiles[event.id])
+                               for event in events.values()}
         ir = {rid: [0.0, 0.0] for rid in sorted(ids)}
         contribution = {asset: [0.0, 0.0] for asset in sorted(assets)}
         outcomes = [[], []]
@@ -123,6 +140,9 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
         'fresh_physics_executed': False,
         'statistical_confidence_interval': False,
         'facility_credible_interval': False,
-        'semantics': 'published marginal event-frequency quantiles with within-asset shared-quantile correlation; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
+        'semantics': 'published marginal event-frequency quantiles with an explicit within-asset shared or independent-event bound comparison; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
+        'correlation_comparison_present': any(
+            s.correlation_assumption == 'independent_event_bounds' for s in scenarios
+        ) and any(s.correlation_assumption == 'within_asset_shared_quantile' for s in scenarios),
         'physical_validation_claim': False,
     }
