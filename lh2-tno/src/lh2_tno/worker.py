@@ -173,9 +173,15 @@ def run(request):
         ))
         network.add_link('isolation_valve','vapor_port','ambient_sink',valve,
             source_port_id='TANK:V1',target_port_id='ATMOSPHERE:IN')
-        close_time=float(p['isolation']['close_time_s'])
-        if not math.isfinite(close_time) or not 0.0<close_time<duration:
-            raise ValueError('close_time_s must lie strictly inside the simulation horizon')
+        isolation_cfg=p['isolation']
+        outcome=isolation_cfg.get('outcome','success')
+        if outcome not in {'success','failure'}:
+            raise ValueError('isolation outcome must be success or failure')
+        close_time=float(isolation_cfg['close_time_s'])
+        if outcome=='success' and (not math.isfinite(close_time) or not 0.0<close_time<duration):
+            raise ValueError('successful close_time_s must lie strictly inside the simulation horizon')
+        if outcome=='failure' and (not math.isfinite(close_time) or close_time<duration):
+            raise ValueError('failed isolation close_time_s must be at or beyond the simulation horizon')
         def command(time_s, _network):
             valve.set_opening(1.0 if time_s<close_time else 0.0)
         simulator=layered_network.LayeredTankNetworkSimulator(
@@ -229,8 +235,10 @@ def run(request):
             raise ValueError('dynamic isolation provider clock does not cover left-held intervals')
         pre=[row['mass_flow_kg_s'] for row in rows if row['time_s']<close_time]
         post=[row['mass_flow_kg_s'] for row in rows if row['time_s']>=close_time]
-        post_max=max(post,default=0.0)
-        closure_confirmed=post_max<=1.0e-14 and float(valve_cfg.get('closed_leakage_CdA_m2',0.0))==0.0
+        post_max=max(post) if post else None
+        closure_confirmed=(outcome=='success' and post_max is not None and
+                           post_max<=1.0e-14 and
+                           float(valve_cfg.get('closed_leakage_CdA_m2',0.0))==0.0)
         return {'data':{
             'fluid':fluid.fluid,
             'steps':rows,
@@ -242,6 +250,7 @@ def run(request):
             'close_time_s':close_time,
             'pre_close_max_flow_kg_s':max(pre,default=0.0),
             'post_close_max_flow_kg_s':post_max,
+            'post_close_observation_available':bool(post),
             'isolation_flow_zero_confirmed':closure_confirmed,
             'max_total_mass_residual_kg':max(mass_residual,default=0.0),
             'max_total_energy_residual_j':max(energy_residual,default=0.0),
@@ -250,6 +259,7 @@ def run(request):
             'provider_link_id':'isolation_valve',
             'state_owner':'equipment_twin',
             'discharge_owner':'equipment_twin',
+            'isolation_outcome':outcome,
             'termination_basis':'reviewed_isolation_success' if closure_confirmed else 'synthetic_diagnostic_horizon',
         },'limitation':'Transient layered-tank/commanded-valve provider path with synthetic geometry and an explicit isolation command. Closure is qualified only for the supplied command and zero closed-seat leakage; no plant actuator delay, failure-on-demand probability, or two-phase liquid release is inferred.'}
     if operation=="declared_pool":

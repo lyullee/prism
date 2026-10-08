@@ -11,7 +11,7 @@
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.0은 이름·명령·사용 설명 정비이며 물리 적용범위를 확대한 버전은 아닙니다.
 
-**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단→기체 출구 종료를 한 설비 LOC에 연결했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. steady 설비 경로와 transient 차단 경로는 각각 한 `LH2_PIPE AREA_100%` LOC를 두 기상 조건에서 실행했고, 각 진단의 다른 8개 LOC는 미계산으로 남겼습니다. transient 합성 사례에서는 0.25초 차단 뒤 provider 유량이 0이 되었고 질량잔차는 약 `3.4e-14 kg`이었습니다. 빈도 구간은 자산별 공유 분위수라는 상관 가정을 명시하며 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 194개 검사, 자연 종료 체인 1건, G1 2건·G3 4건·steady 설비 2건·transient 설비 2건의 실제 물리 사례/CLI를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md). 전체 시설 위험은 계속 보류합니다.
+**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 한 설비 LOC에 연결했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 4건을 실행했고, 다른 8개 LOC는 미계산으로 남겼습니다. 성공 사례는 0.25초 차단 뒤 유량이 0이 되었고, 실패 사례는 0.5초 진단시계 동안 유량이 남았습니다. 장벽 성공확률 `0.99`는 합성 진단값이며 현장 신뢰도 추정이 아닙니다. 빈도 구간은 자산별 공유 분위수라는 상관 가정을 명시하며 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 194개 검사, 자연 종료 체인 1건, G1 2건·G3 4건·steady 설비 2건·transient 성공·실패 설비 4건의 실제 물리 사례/CLI를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md). 전체 시설 위험은 계속 보류합니다.
 
 ## 목차
 
@@ -325,9 +325,9 @@ Purple 배관에는 최소 적용 길이 10 m와 flange 포함 범위가 있습�
 
 ### 탱크·밸브 차단 과도 경로
 
-개발 진단에서는 `scripts/validate_equipment_isolation.py`가 외부 `lh2dt`의 `LayeredTankNetworkSimulator`와 `CommandedValve`를 호출합니다. 합성 LH2 탱크를 초기화하고, 밸브를 0.25초까지 열어 둔 뒤 닫습니다. provider가 반환한 각 시간구간의 유량·출구 PH·밀도·면적·속도를 `ResolvedGasRelease`로 변환하고, 같은 이력을 시설 campaign의 `AREA_100%` LOC에 연결합니다.
+개발 진단에서는 `scripts/validate_equipment_isolation.py`가 외부 `lh2dt`의 `LayeredTankNetworkSimulator`와 `CommandedValve`를 호출합니다. 합성 LH2 탱크를 초기화하고, 하나의 provider 실행은 밸브를 0.25초까지 열어 둔 뒤 닫고, 다른 실행은 차단 실패로 0.5초 진단시계까지 열어 둡니다. provider가 반환한 각 시간구간의 유량·출구 PH·밀도·면적·속도를 `ResolvedGasRelease`로 변환하고, 두 분기를 시설 campaign의 `AREA_100%` LOC에 연결합니다.
 
-이 경로에서 확인한 것은 **명령된 차단이 주어진 조건에서 방출을 멈추는지**입니다. 0.25초 뒤 유량이 0이 되고 질량·에너지 잔차도 기록됩니다. 밸브 고장확률, 실제 actuator 지연, 액체·2상 방출, 현장 압력·재고 보정은 아직 계산하지 않습니다. 결과는 `results/20261009/equipment_isolation_campaign/`에 저장하며, 다른 LOC는 `UNCOMPUTED`, 시설 전체 위험도는 `null`로 남깁니다.
+이 경로에서 확인한 것은 **명령된 차단 성공과 명시적 차단 실패가 서로 다른 방출 이력으로 피해계산에 전달되는지**입니다. 성공 분기는 0.25초 뒤 유량이 0이 되고, 실패 분기는 0.5초 진단시계 동안 유량이 남습니다. 질량·에너지 잔차도 각 분기에 기록됩니다. 차단 성공확률 `0.99`는 합성 분기값이며, 실제 actuator 지연·고장확률·재고 소진을 추정하지 않습니다. 액체·2상 방출·현장 압력·재고 보정도 아직 계산하지 않습니다. 결과는 `results/20261009/equipment_isolation_campaign/`에 저장하며, 다른 LOC는 `UNCOMPUTED`, 시설 전체 위험도는 `null`로 남깁니다.
 
 개발 환경에서 이 진단을 다시 실행하려면 외부 provider 경로가 현재 스크립트와 같아야 합니다.
 
@@ -335,7 +335,7 @@ Purple 배관에는 최소 적용 길이 10 m와 flange 포함 범위가 있습�
 .venv\Scripts\python.exe lh2-tno/scripts/validate_equipment_isolation.py
 ```
 
-이 명령은 provider transient 이력을 한 번 계산한 뒤 두 기상 조건의 시설 사례에 전달합니다. 실행시간은 PC·격자·시계에 따라 달라지며, 결과의 `verification.json`과 `campaign_result.json`을 함께 확인합니다.
+이 명령은 provider transient 성공·실패 이력을 각각 계산한 뒤 두 기상 조건의 시설 사례에 전달합니다. 실행시간은 PC·격자·시계에 따라 달라지며, 결과의 `verification.json`과 `campaign_result.json`을 함께 확인합니다.
 
 ### 센서 갱신
 
