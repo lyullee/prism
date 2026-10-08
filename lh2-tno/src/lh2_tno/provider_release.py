@@ -152,7 +152,15 @@ def build_consequence_request_from_provider_release(
         raise ProviderReleaseContractError(
             "release_termination requires an explicit basis and provenance"
         )
-    if not math.isclose(float(termination.get("time_s", -1)), release.duration_s, rel_tol=0, abs_tol=1e-12):
+    try:
+        termination_time = float(termination.get("time_s"))
+    except (TypeError, ValueError) as error:
+        raise ProviderReleaseContractError(
+            "release_termination.time_s must be a finite provider duration"
+        ) from error
+    if not math.isfinite(termination_time) or not math.isclose(
+        termination_time, release.duration_s, rel_tol=0, abs_tol=1e-12
+    ):
         raise ProviderReleaseContractError(
             "release_termination.time_s must equal the provider duration"
         )

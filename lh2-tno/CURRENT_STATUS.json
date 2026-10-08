@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 249,
+  "unit_contract_conservation_tests_passed": 250,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -430,7 +430,7 @@
   "equipment_campaign_compiler_catalog_module": "src/lh2_tno/campaign_template.py",
   "equipment_campaign_compiler_catalog_script": "scripts/build_equipment_campaign.py --request-catalog",
   "equipment_campaign_compiler_catalog_policy": "Each event selects only an explicit component/opening-matched request; ambiguous matches error and missing matches remain UNCOMPUTED; no size or state substitution.",
-  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 249 passed",
+  "equipment_campaign_compiler_catalog_test_status": "2 catalog tests passed; full portable suite 250 passed",
   "equipment_campaign_catalog_diagnostic_executed": true,
   "equipment_campaign_catalog_diagnostic_record": "results/20261009/equipment_manifest_audit/equipment_campaign_two_result.json",
   "equipment_campaign_catalog_diagnostic_generated_events": 10,
@@ -470,7 +470,7 @@
   "provider_release_contract_synthetic_cli_templates": 1,
   "provider_release_contract_synthetic_cli_uncomputed": 0,
   "provider_release_contract_synthetic_cli_frequency_assigned": false,
-  "provider_release_contract_test_status": "5 adapter tests (gas and liquid); full portable suite 249 passed",
+  "provider_release_contract_test_status": "6 adapter tests (gas/liquid/context fail-closed); full portable suite 250 passed",
   "provider_release_contract_synthetic_example": "examples/provider_release_catalog_synthetic.json",
   "provider_release_full_chain_diagnostic_executed": true,
   "provider_release_full_chain_diagnostic_record": "results/20261009/provider_release_full_chain_diagnostic/campaign_result.json",
@@ -491,5 +491,13 @@
   },
   "provider_release_full_chain_diagnostic_total_facility_risk_withheld": true,
   "provider_release_full_chain_diagnostic_physical_validation_claim": false,
-  "provider_release_full_chain_diagnostic_scope": "synthetic provider-resolved liquid packet; exact LH2_VESSEL AREA_0.01% storage match; end-to-end chain executed; not actual facility QRA"
+  "provider_release_full_chain_diagnostic_scope": "synthetic provider-resolved liquid packet; exact LH2_VESSEL AREA_0.01% storage match; end-to-end chain executed; not actual facility QRA",
+  "provider_release_full_chain_frequency_uncertainty_executed": true,
+  "provider_release_full_chain_frequency_uncertainty_record": "results/20261009/provider_release_full_chain_diagnostic/campaign_result_with_uncertainty.json",
+  "provider_release_full_chain_frequency_uncertainty_scenarios": 4,
+  "provider_release_full_chain_frequency_uncertainty_correlation_comparison": true,
+  "provider_release_full_chain_frequency_uncertainty_fresh_physics_executed": false,
+  "provider_release_full_chain_frequency_uncertainty_facility_credible_interval": false,
+  "provider_release_full_chain_frequency_uncertainty_known_contribution_ir_p05": 3.738298636351725e-06,
+  "provider_release_full_chain_frequency_uncertainty_known_contribution_ir_p95": 0.001130279619616365
 }

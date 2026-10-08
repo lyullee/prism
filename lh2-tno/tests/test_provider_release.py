@@ -194,3 +194,10 @@ def test_provider_request_adapter_rejects_integrated_source_defaults():
     defaults["source_input"] = {"tank": {"fluid": "Hydrogen"}}
     with pytest.raises(ProviderReleaseContractError, match="source_input"):
         build_consequence_request_from_provider_release(_release(), defaults)
+
+
+def test_provider_request_adapter_rejects_missing_termination_time():
+    defaults = _defaults()
+    defaults["release_termination"].pop("time_s")
+    with pytest.raises(ProviderReleaseContractError, match="finite provider duration"):
+        build_consequence_request_from_provider_release(_release(), defaults)

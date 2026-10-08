@@ -1,0 +1,54 @@
+[
+  {
+    "id": "within-asset-p05",
+    "asset_quantiles": {
+      "storage-shell": "p05",
+      "transfer-line": "p05"
+    },
+    "provenance": "published LH2_VESSEL marginal p05; shared within-asset bound; synthetic provider chain",
+    "correlation_assumption": "within_asset_shared_quantile"
+  },
+  {
+    "id": "within-asset-p95",
+    "asset_quantiles": {
+      "storage-shell": "p95",
+      "transfer-line": "p95"
+    },
+    "provenance": "published LH2_VESSEL marginal p95; shared within-asset bound; synthetic provider chain",
+    "correlation_assumption": "within_asset_shared_quantile"
+  },
+  {
+    "id": "independent-event-p05",
+    "event_quantiles": {
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_0.01%": "p05",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_0.1%": "p05",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_1%": "p05",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_10%": "p05",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_100%": "p05",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_0.01%": "p05",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_0.1%": "p05",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_1%": "p05",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_10%": "p05",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_100%": "p05"
+    },
+    "provenance": "published event-wise p05 comparison; synthetic provider chain",
+    "correlation_assumption": "independent_event_bounds"
+  },
+  {
+    "id": "independent-event-p95",
+    "event_quantiles": {
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_0.01%": "p95",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_0.1%": "p95",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_1%": "p95",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_10%": "p95",
+      "generic-lh2-manifest-frequency-example/storage-shell/AREA_100%": "p95",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_0.01%": "p95",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_0.1%": "p95",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_1%": "p95",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_10%": "p95",
+      "generic-lh2-manifest-frequency-example/transfer-line/AREA_100%": "p95"
+    },
+    "provenance": "published event-wise p95 comparison; synthetic provider chain",
+    "correlation_assumption": "independent_event_bounds"
+  }
+]
