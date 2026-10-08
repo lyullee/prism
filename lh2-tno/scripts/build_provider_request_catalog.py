@@ -16,10 +16,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from lh2_tno.provider_release import (
     PROVIDER_RELEASE_SCHEMA,
+    PROVIDER_RELEASE_SET_SCHEMA,
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
+    build_consequence_request_from_provider_release_set,
     load_provider_emergency_relief_catalog,
     load_provider_release_catalog,
+    load_provider_release_set_catalog,
 )
 
 
@@ -27,9 +30,9 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--provider-release-catalog", type=Path, required=True)
     parser.add_argument(
-        "--release-kind", choices=("accidental_leak", "emergency_relief"),
+        "--release-kind", choices=("accidental_leak", "emergency_relief", "two_sided_rupture"),
         default="accidental_leak",
-        help="strict packet family; emergency_relief is for TNO_RELIEF_DEVICE maximum discharge",
+        help="strict packet family; emergency_relief is for maximum discharge and two_sided_rupture uses the dedicated release-set adapter",
     )
     parser.add_argument(
         "--request-defaults",
@@ -41,11 +44,11 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        loader = (
-            load_provider_emergency_relief_catalog
-            if args.release_kind == "emergency_relief"
-            else load_provider_release_catalog
-        )
+        loader = {
+            "accidental_leak": load_provider_release_catalog,
+            "emergency_relief": load_provider_emergency_relief_catalog,
+            "two_sided_rupture": load_provider_release_set_catalog,
+        }[args.release_kind]
         releases = loader(args.provider_release_catalog)
         defaults = json.loads(args.request_defaults.read_text(encoding="utf-8"))
         if not isinstance(defaults, dict):
@@ -57,7 +60,11 @@ def main() -> int:
     uncomputed = []
     for index, release in enumerate(releases):
         try:
-            request = build_consequence_request_from_provider_release(release, defaults)
+            request = (
+                build_consequence_request_from_provider_release_set(release, defaults)
+                if args.release_kind == "two_sided_rupture"
+                else build_consequence_request_from_provider_release(release, defaults)
+            )
         except ProviderReleaseContractError as error:
             uncomputed.append({
                 "index": index,
@@ -70,7 +77,11 @@ def main() -> int:
 
     report = {
         "schema_version": "prism.provider_request_catalog.v1",
-        "provider_release_schema": PROVIDER_RELEASE_SCHEMA,
+        "provider_release_schema": (
+            PROVIDER_RELEASE_SET_SCHEMA
+            if args.release_kind == "two_sided_rupture"
+            else PROVIDER_RELEASE_SCHEMA
+        ),
         "provider_release_kind": args.release_kind,
         "templates": templates,
         "uncomputed": uncomputed,
@@ -78,6 +89,7 @@ def main() -> int:
             "frequency_is_not_assigned": True,
             "missing_context_is_uncomputed": True,
             "two_sided_release_sets_require_dedicated_adapter": True,
+            "two_sided_release_set_adapter_implemented": True,
         },
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

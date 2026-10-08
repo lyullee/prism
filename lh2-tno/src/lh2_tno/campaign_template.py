@@ -18,10 +18,12 @@ from .consequences import ConsequenceRequest
 from .equipment_manifest import EquipmentManifest, audit_manifest
 from .frequency import FrequencyPlan, bind_event, generate_events
 from .provider_release import (
+    ProviderReleaseSet,
     ProviderReleaseBranch,
     ProviderRelease,
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
+    build_consequence_request_from_provider_release_set,
 )
 
 
@@ -275,7 +277,7 @@ def build_equipment_campaign_from_branch_catalog(
 def build_equipment_campaign_from_provider_catalog(
     manifest: EquipmentManifest,
     frequency_plan: FrequencyPlan,
-    provider_releases: Sequence[ProviderRelease],
+    provider_releases: Sequence[ProviderRelease | ProviderReleaseSet],
     request_defaults: Mapping[str, object],
     annual_conditions: tuple[AnnualCondition, ...],
     *,
@@ -299,11 +301,18 @@ def build_equipment_campaign_from_provider_catalog(
     templates = []
     for release in provider_releases:
         try:
-            templates.append(
-                build_consequence_request_from_provider_release(
-                    release, request_defaults
+            if isinstance(release, ProviderReleaseSet):
+                templates.append(
+                    build_consequence_request_from_provider_release_set(
+                        release, request_defaults
+                    )
                 )
-            )
+            else:
+                templates.append(
+                    build_consequence_request_from_provider_release(
+                        release, request_defaults
+                    )
+                )
         except ProviderReleaseContractError as error:
             raise ValueError(
                 f"provider release {release.event_id} cannot be attached to a campaign: {error}"

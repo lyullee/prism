@@ -30,6 +30,7 @@ from lh2_tno.provider_release import (
     load_provider_emergency_relief_catalog,
     load_provider_release_branch_catalog,
     load_provider_release_catalog,
+    load_provider_release_set_catalog,
 )
 
 
@@ -54,9 +55,9 @@ def main() -> int:
         help="explicit provider packets wrapped with conditional isolation/barrier branches",
     )
     parser.add_argument(
-        "--release-kind", choices=("accidental_leak", "emergency_relief"),
+        "--release-kind", choices=("accidental_leak", "emergency_relief", "two_sided_rupture"),
         default="accidental_leak",
-        help="provider packet family; used only with --provider-release-catalog",
+        help="provider packet family; two_sided_rupture uses a dedicated release-set catalog",
     )
     parser.add_argument(
         "--request-defaults", type=Path,
@@ -109,11 +110,11 @@ def main() -> int:
             raise SystemExit(f"provider branch campaign input error: {error}") from error
     else:
         try:
-            loader = (
-                load_provider_emergency_relief_catalog
-                if args.release_kind == "emergency_relief"
-                else load_provider_release_catalog
-            )
+            loader = {
+                "accidental_leak": load_provider_release_catalog,
+                "emergency_relief": load_provider_emergency_relief_catalog,
+                "two_sided_rupture": load_provider_release_set_catalog,
+            }[args.release_kind]
             provider_releases = loader(args.provider_release_catalog)
             defaults = json.loads(args.request_defaults.read_text(encoding="utf-8"))
             if not isinstance(defaults, dict):

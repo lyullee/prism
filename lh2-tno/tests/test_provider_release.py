@@ -5,18 +5,23 @@ import pytest
 
 from lh2_tno.equipment_boundary import (
     ResolvedGasRelease,
+    ResolvedGasReleaseSet,
     ResolvedGasStep,
     ResolvedLiquidRelease,
     ResolvedLiquidStep,
 )
 from lh2_tno.provider_release import (
+    PROVIDER_RELEASE_SET_SCHEMA,
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
+    build_consequence_request_from_provider_release_set,
     load_provider_emergency_relief,
     load_provider_emergency_relief_catalog,
     load_provider_release,
     load_provider_release_branch_catalog,
     load_provider_release_catalog,
+    load_provider_release_set,
+    load_provider_release_set_catalog,
 )
 
 
@@ -110,6 +115,25 @@ def _liquid_release() -> ResolvedLiquidRelease:
     )
 
 
+def _release_set() -> ResolvedGasReleaseSet:
+    left = _release()
+    right = left.model_copy(update={
+        "port_id": "tank-return",
+        "event_id": "provider-two-sided-01",
+        "position_enu_m": (2.0, 0.0, 1.0),
+        "direction_enu": (-1.0, 0.0, 0.0),
+    })
+    left = left.model_copy(update={"event_id": "provider-two-sided-01"})
+    return ResolvedGasReleaseSet(
+        event_id="provider-two-sided-01",
+        component_id="storage-tank-01",
+        releases=(left, right),
+        available_mass_kg=1.0,
+        cumulative_mass_out_kg=0.4,
+        inventory_provenance="provider shared inventory ledger",
+    )
+
+
 def _defaults() -> dict:
     root = Path(__file__).parents[1]
     value = json.loads(
@@ -171,6 +195,44 @@ def test_provider_release_catalog_and_request_adapter_preserve_context(tmp_path)
     assert request.resolved_release.duration_s == 0.2
     assert request.source_input is None
     assert request.annual_frequency_per_year is None
+
+
+def test_provider_two_sided_set_has_dedicated_schema_and_adapter(tmp_path):
+    release_set = _release_set()
+    packet = {
+        "provider_export_schema": PROVIDER_RELEASE_SET_SCHEMA,
+        **release_set.model_dump(mode="json"),
+    }
+    path = tmp_path / "two_sided.json"
+    path.write_text(json.dumps({"release_sets": [packet]}), encoding="utf-8")
+
+    loaded = load_provider_release_set(packet)
+    catalog = load_provider_release_set_catalog(path)
+    defaults = _defaults()
+    defaults.update(
+        source_operator="equipment_two_sided_rupture",
+        release_termination={
+            "basis": "two_sided_rupture",
+            "time_s": 0.2,
+            "provenance": "provider shared rupture clock",
+        },
+    )
+    request = build_consequence_request_from_provider_release_set(loaded, defaults)
+
+    assert len(catalog) == 1
+    assert request.source_operator == "equipment_two_sided_rupture"
+    assert request.resolved_release_set is not None
+    assert request.source_positions_enu_m == ((0.0, 0.0, 1.0), (2.0, 0.0, 1.0))
+    assert request.release_termination.basis == "two_sided_rupture"
+    assert request.annual_frequency_per_year is None
+
+
+def test_provider_two_sided_adapter_rejects_single_exit_defaults():
+    defaults = _defaults()
+    defaults["source_operator"] = "integrated_transient"
+    defaults["release_termination"]["basis"] = "synthetic_diagnostic_horizon"
+    with pytest.raises(ProviderReleaseContractError, match="two-sided request requires"):
+        build_consequence_request_from_provider_release_set(_release_set(), defaults)
 
 
 def test_provider_release_branch_catalog_preserves_conditional_partition(tmp_path):

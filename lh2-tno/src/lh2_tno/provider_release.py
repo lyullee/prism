@@ -15,11 +15,13 @@ from typing import Any, Mapping, TypeAlias
 
 from .consequences import ConsequenceRequest
 from .contracts import Contract, Fraction, Name
-from .equipment_boundary import ResolvedGasRelease, ResolvedLiquidRelease
+from .equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, ResolvedLiquidRelease
 
 
 PROVIDER_RELEASE_SCHEMA = "prism.resolved_release.v1"
+PROVIDER_RELEASE_SET_SCHEMA = "prism.resolved_release_set.v1"
 ProviderRelease: TypeAlias = ResolvedGasRelease | ResolvedLiquidRelease
+ProviderReleaseSet: TypeAlias = ResolvedGasReleaseSet
 
 
 class ProviderReleaseContractError(ValueError):
@@ -139,6 +141,52 @@ def load_provider_release_catalog(path: str | Path) -> tuple[ProviderRelease, ..
             "provider release catalog must contain a non-empty JSON array"
         )
     return tuple(load_provider_release(row) for row in rows)
+
+
+def load_provider_release_set(packet: Mapping[str, Any] | str | Path) -> ResolvedGasReleaseSet:
+    """Validate one explicit two-ended full-bore provider packet.
+
+    The set has its own schema marker and contains two complete
+    ``prism.resolved_release.v1`` endpoint packets.  It is deliberately kept
+    separate from the single-exit loader so one endpoint cannot be silently
+    reused as a two-sided rupture.
+    """
+    value = _read_packet(packet)
+    if value.get("provider_export_schema") != PROVIDER_RELEASE_SET_SCHEMA:
+        raise ProviderReleaseContractError(
+            "provider_export_schema must be prism.resolved_release_set.v1 for a two-sided packet"
+        )
+    payload = dict(value)
+    payload.pop("provider_export_schema", None)
+    try:
+        release_set = ResolvedGasReleaseSet.model_validate_json(
+            json.dumps(payload, allow_nan=False)
+        )
+    except (ValueError, TypeError) as error:
+        raise ProviderReleaseContractError(
+            f"provider two-sided release set failed strict PRISM validation: {error}"
+        ) from error
+    if any(release.provider_export_schema != PROVIDER_RELEASE_SCHEMA for release in release_set.releases):
+        raise ProviderReleaseContractError(
+            "two-sided packet endpoints must use prism.resolved_release.v1"
+        )
+    return release_set
+
+
+def load_provider_release_set_catalog(path: str | Path) -> tuple[ResolvedGasReleaseSet, ...]:
+    """Load a JSON array or ``{"release_sets": [...]}`` two-sided catalog."""
+    try:
+        value = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ProviderReleaseContractError(
+            f"cannot read provider two-sided release-set catalog: {error}"
+        ) from error
+    rows = value.get("release_sets") if isinstance(value, dict) else value
+    if not isinstance(rows, list) or not rows:
+        raise ProviderReleaseContractError(
+            "provider two-sided release-set catalog must contain a non-empty JSON array"
+        )
+    return tuple(load_provider_release_set(row) for row in rows)
 
 
 def load_provider_release_branch_catalog(path: str | Path) -> tuple[ProviderReleaseBranch, ...]:
@@ -306,4 +354,81 @@ def build_consequence_request_from_provider_release(
     except (ValueError, TypeError) as error:
         raise ProviderReleaseContractError(
             f"provider release plus consequence context failed validation: {error}"
+        ) from error
+
+
+def build_consequence_request_from_provider_release_set(
+    release_set: ResolvedGasReleaseSet,
+    request_defaults: Mapping[str, Any],
+) -> ConsequenceRequest:
+    """Attach a validated two-sided provider set to an explicit context."""
+    if not isinstance(release_set, ResolvedGasReleaseSet):
+        raise ProviderReleaseContractError("release_set is not a supported PRISM two-sided boundary")
+    payload = copy.deepcopy(dict(request_defaults))
+    forbidden = (
+        "source_input", "resolved_release", "resolved_release_set", "resolved_liquid_release",
+        "annual_frequency_per_year", "annual_frequency_provenance", "frequency_event",
+        "initiation_intensity_per_s",
+    )
+    if any(payload.get(key) is not None for key in forbidden):
+        raise ProviderReleaseContractError(
+            "two-sided request defaults must not contain a source, second provider boundary, or initiating frequency"
+        )
+    existing_component = payload.get("component_id")
+    if existing_component is not None and existing_component != release_set.component_id:
+        raise ProviderReleaseContractError("request component_id disagrees with provider release set")
+    existing_positions = payload.get("source_positions_enu_m")
+    positions = [list(position) for position in release_set.positions_enu_m]
+    if existing_positions is not None and [list(position) for position in existing_positions] != positions:
+        raise ProviderReleaseContractError("request endpoint positions disagree with provider release set")
+    existing_mass = payload.get("available_mass_kg")
+    if existing_mass is not None and not math.isclose(
+        float(existing_mass), release_set.available_mass_kg, rel_tol=0, abs_tol=1e-12
+    ):
+        raise ProviderReleaseContractError("request inventory disagrees with provider release set")
+    termination = payload.get("release_termination")
+    if not isinstance(termination, dict) or termination.get("basis") is None or termination.get("provenance") is None:
+        raise ProviderReleaseContractError(
+            "two-sided request defaults must declare release_termination basis and provenance"
+        )
+    try:
+        termination_time = float(termination.get("time_s"))
+    except (TypeError, ValueError) as error:
+        raise ProviderReleaseContractError(
+            "two-sided release_termination.time_s must be a finite provider duration"
+        ) from error
+    if not math.isfinite(termination_time) or not math.isclose(
+        termination_time, release_set.duration_s, rel_tol=0, abs_tol=1e-12
+    ):
+        raise ProviderReleaseContractError(
+            "two-sided release_termination.time_s must equal the provider duration"
+        )
+    if termination.get("basis") != "two_sided_rupture":
+        raise ProviderReleaseContractError(
+            "two-sided request requires two_sided_rupture termination basis"
+        )
+    if payload.get("source_operator") != "equipment_two_sided_rupture":
+        raise ProviderReleaseContractError(
+            "two-sided request requires source_operator=equipment_two_sided_rupture"
+        )
+    payload.update(
+        component_id=release_set.component_id,
+        available_mass_kg=release_set.available_mass_kg,
+        source_position_enu_m=positions[0],
+        source_positions_enu_m=positions,
+        source_input=None,
+        resolved_release=None,
+        resolved_release_set=release_set.model_dump(mode="json"),
+        resolved_liquid_release=None,
+        annual_frequency_per_year=None,
+        annual_frequency_provenance=None,
+        frequency_event=None,
+        initiation_intensity_per_s=None,
+        release_termination=termination,
+    )
+    try:
+        return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
+    except (ValueError, TypeError) as error:
+        raise ProviderReleaseContractError(
+            f"two-sided provider release set plus consequence context failed validation: {error}"
         ) from error

@@ -53,6 +53,28 @@
 
 `release`를 생략하거나 packet 검증에 실패하면 입력 전체를 거부한다. branch 확률은 initiating event에 조건부이며 연간 사고빈도와 곱하지 않는다. 미제공 branch 확률은 자동으로 성공 또는 실패로 해석되지 않고 `UNCOMPUTED`로 보존된다.
 
+## 양단 파열 방출 세트
+
+양단 파열은 단일 출구 packet을 두 번 복사하는 방식으로 입력하지 않는다. 두 출구가 하나의 물리적 사건과 공유 재고를 나타내므로 전용 계약을 사용한다.
+
+- 최상위 `provider_export_schema`: `prism.resolved_release_set.v1`
+- `event_id`, `component_id`, `rupture_mode: two_sided_rupture`와 `available_inventory_kg`, `cumulative_released_mass_kg`, `inventory_provenance`를 한 번 선언한다.
+- `releases`에는 정확히 두 개의 outward provider 경계를 넣고, 각 원소는 기존 `prism.resolved_release.v1` packet이어야 한다.
+- 두 endpoint의 시간·재고 장부는 각 출구 방출을 보존하되, 사건 빈도는 한 번만 `FrequencyPlan`에서 부여한다.
+- 요청 adapter는 `source_operator: equipment_two_sided_rupture`와 `release_termination.basis: two_sided_rupture`를 요구한다. 일반 단일 출구 기본값이나 임의의 second boundary가 있으면 거부한다.
+
+컴파일 명령은 다음과 같다.
+
+```powershell
+python scripts/build_provider_request_catalog.py `
+  --provider-release-catalog release_sets.json `
+  --release-kind two_sided_rupture `
+  --request-defaults request_defaults.json `
+  --output request_catalog.json
+```
+
+설비 campaign도 같은 `--release-kind two_sided_rupture`를 사용한다. 현재 adapter는 두 endpoint를 각각 consequence 계산한 뒤 한 사건의 Frechet receptor-harm union으로 결합한다. endpoint 사이의 plume·압력·공유 재고 상호작용은 operator-limited로 남기며, 외부 실증 packet이 없으면 실제 시설 위험으로 승격하지 않는다.
+
 ## 현재 외부 자료의 판정
 
 검사센터 provider 폴더 556개 JSON을 읽기 전용으로 감사한 결과, 정상·스크리닝 유량 파일 24개는 확인됐지만 적격 사고 packet과 비상 릴리프 packet은 각각 0건이었다. 따라서 현재 자료로는 실제 시설 위험을 계산하지 않는다. 감사기는 필요한 필드와 소유권·시계 규칙을 `release_evidence.provider_export_request`로 함께 출력한다.
