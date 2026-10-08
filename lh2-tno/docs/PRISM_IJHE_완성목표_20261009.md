@@ -56,3 +56,18 @@
 ## 연구 완료와 구분할 것
 
 코드 검사 통과는 독립 물리 검증이 아니다. 선언한 일부 경로의 수치 합산이 끝나도 미계산 사고가 있으면 전체 시설 위험값으로 보고하지 않는다. 코드가 빠르다는 측정 없이 real-time/1 Hz를 주장하지 않는다. 제시한 목표는 계속 진행 중이며 이 문서를 추가했다는 이유로 완료 표시하지 않는다.
+
+## 자동 완료 감사
+
+수동으로 상태를 판단하지 않도록 다음 명령이 방출→피해 실행, 주요 사고 범위, 시설 IR/F-N, 물리 검증, 빈도 불확실성, 처리시간을 각각 검사한다.
+
+```powershell
+python lh2-tno/scripts/build_ijhe_completion_audit.py `
+  --current-status lh2-tno/CURRENT_STATUS.json `
+  --scope-matrix results/20261009/provider_release_full_chain_diagnostic/accident_scope_matrix.json `
+  --campaign-result results/20261009/provider_release_full_chain_diagnostic/campaign_result.json `
+  --uncertainty-result results/20261009/provider_release_full_chain_diagnostic/campaign_result_with_uncertainty.json `
+  --output results/20261009/provider_release_full_chain_diagnostic/ijhe_completion_audit.json
+```
+
+현재 실제 합성 provider 경로의 판정은 `INCOMPLETE_EVIDENCE`다. 사고 가족 미완결, 시설 IR/F-N 보류, 독립 전체 체인 물리검증 부재, 완전 시설 빈도 credible interval 부재가 차단 이유로 남는다. 이 감사기가 `READY_FOR_IJHE_SCOPE`를 내기 전에는 논문에서 전체 시설 QRA 완성으로 표현하지 않는다.
