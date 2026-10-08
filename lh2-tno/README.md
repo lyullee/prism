@@ -34,6 +34,8 @@
 
 작업목록만 있는 기간에도 `scripts/build_equipment_campaign.py --provider-worklist-only`로 24개 사건과 24개 미계산 branch를 `RiskCampaign`에 넣을 수 있습니다. 이 모드는 물리 요청이나 위험 0을 만들지 않고, 시설 실행 회계에서 누락 사건을 보이게 합니다.
 
+일반 LH2 전체 범위 예제는 이 작업목록 캠페인을 실제 실행 회계로도 보존합니다. `results/20261009/generic_full_scope_worklist/campaign_result.json`에는 24개 사건과 24개 `UNCOMPUTED` case가 있고, `accident_scope_matrix.json`에는 12개 사고 가족별 생성 여부를 기록합니다. 이는 provider packet이 없다는 사실을 명확히 보여주는 범위 감사이며 시설 IR/F-N 결과가 아닙니다.
+
 **비상 릴리프 방출 경로:** `TNO_RELIEF_DEVICE`의 `maximum_relief_discharge`는 일반 벤트나 임의 누출로 대체하지 않고, `event_kind=emergency_relief`인 provider 기체 방출 이력과 `equipment_emergency_relief`·`emergency_relief_discharge` 근거가 모두 있을 때만 빈도와 결합합니다. 실제 provider 패킷이 없으면 해당 벤트 사고는 `NO_CASE_EXECUTED`/`UNCOMPUTED`로 남습니다.
 
 실제 릴리프 packet catalog를 request template로 바꿀 때는 `build_provider_request_catalog.py`에 `--release-kind emergency_relief`를 지정합니다. 기본값 `accidental_leak`와 catalog를 섞지 않으며, 출력에 `provider_release_kind`를 남깁니다.
