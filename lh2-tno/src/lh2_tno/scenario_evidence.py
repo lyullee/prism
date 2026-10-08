@@ -13,6 +13,7 @@ import hashlib
 import json
 import re
 from collections import Counter
+from collections.abc import Mapping
 from datetime import date, datetime, time
 from pathlib import Path
 from statistics import median
@@ -20,6 +21,7 @@ from typing import Any
 
 
 SCENARIO_EVIDENCE_SCHEMA = "prism.scenario_evidence_audit.v1"
+PROVIDER_PACKET_REQUEST_CATALOG_SCHEMA = "prism.provider_packet_request_catalog.v1"
 PROVIDER_RELEASE_REQUIRED_FIELDS = (
     "provider_export_schema",
     "event_kind",
@@ -59,6 +61,18 @@ _FAMILY_BY_HAZARD_CLASS = {
     "supply_start": ("pipe_hole", "valve_hole"),
     "vaporizer_pass": ("vaporizer_hole",),
     "pressure_rise_monitor": ("vent_hole", "inventory_over_600s"),
+}
+
+_FAMILY_PROVIDER_REQUIREMENTS = {
+    "inventory_over_600s": {
+        "acceptable_operators": ("equipment_inventory_over_600s", "equipment_liquid_over_600s"),
+        "termination_basis": "inventory_over_600s",
+        "required_duration_s": 600.0,
+    },
+    "inventory_depletion": {
+        "acceptable_operators": ("equipment_inventory_depletion", "equipment_liquid_release"),
+        "termination_basis": "inventory_depletion",
+    },
 }
 
 
@@ -420,4 +434,81 @@ def audit_scenario_root(root: str | Path) -> dict[str, Any]:
         },
         "errors": errors,
         "blocking_reasons": list(dict.fromkeys(blockers)),
+    }
+
+
+def build_provider_packet_request_catalog(audit: Mapping[str, Any]) -> dict[str, Any]:
+    """Turn scenario-only hazards into an explicit provider data request list.
+
+    The result is a work queue, not a release catalog. It preserves candidate
+    family and source-row provenance while withholding frequency and all
+    release values until a validated ``prism.resolved_release.v1`` packet
+    arrives. This keeps scenario registers actionable without promoting them to
+    accident histories.
+    """
+    records = audit.get("scenario_records", [])
+    if not isinstance(records, list):
+        raise ValueError("scenario audit must contain a scenario_records list")
+    requests = []
+    family_counts: Counter[str] = Counter()
+    for record in records:
+        if not isinstance(record, Mapping):
+            raise ValueError("scenario records must be objects")
+        families = tuple(str(value) for value in record.get("candidate_accident_families", ()))
+        if not families:
+            continue
+        identity = {
+            "file": record.get("file"),
+            "row_number": record.get("row_number"),
+            "scenario": record.get("scenario"),
+            "asset": record.get("asset"),
+            "step": record.get("step"),
+            "operation": record.get("operation"),
+        }
+        request_id = "scenario-" + hashlib.sha256(
+            json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()[:16]
+        for family in families:
+            family_counts[family] += 1
+        family_requirements = [
+            {"family": family, **_FAMILY_PROVIDER_REQUIREMENTS[family]}
+            for family in families
+            if family in _FAMILY_PROVIDER_REQUIREMENTS
+        ]
+        requests.append({
+            "request_id": request_id,
+            "source": identity,
+            "candidate_accident_families": list(families),
+            "hazard_class": record.get("hazard_class"),
+            "provider_export_schema": "prism.resolved_release.v1",
+            "required_provider_fields": list(
+                record.get("missing_provider_fields") or PROVIDER_RELEASE_REQUIRED_FIELDS
+            ),
+            "family_provider_requirements": family_requirements,
+            "promotion_status": "REQUESTED_PROVIDER_PACKET",
+            "frequency_binding_status": "WAITING_FOR_REVIEWED_FREQUENCY_AND_EXACT_MATCH",
+            "frequency_assigned": False,
+            "release_values_present": False,
+        })
+    return {
+        "schema": PROVIDER_PACKET_REQUEST_CATALOG_SCHEMA,
+        "status": "PROVIDER_PACKET_REQUESTS_ONLY",
+        "source_audit_schema": audit.get("schema"),
+        "source_root": audit.get("source_root"),
+        "source_audit_digest": hashlib.sha256(
+            json.dumps(audit, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest(),
+        "request_count": len(requests),
+        "candidate_family_request_counts": dict(sorted(family_counts.items())),
+        "requests": requests,
+        "provider_promotion": {
+            "qualified_packet_count": 0,
+            "frequency_assigned": False,
+            "scenario_rows_are_not_release_packets": True,
+            "next_input_schema": "prism.resolved_release.v1",
+        },
+        "blocking_reasons": [
+            "scenario records are candidate hazards, not resolved release histories",
+            "provider packet values and ownership remain missing until the external equipment model exports them",
+        ],
     }

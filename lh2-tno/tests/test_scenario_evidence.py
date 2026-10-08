@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from lh2_tno.scenario_evidence import audit_scenario_root
+from lh2_tno.scenario_evidence import audit_scenario_root, build_provider_packet_request_catalog
 
 
 def test_scenario_register_is_preserved_without_provider_promotion(tmp_path):
@@ -44,6 +44,29 @@ def test_missing_scenario_root_is_fail_closed(tmp_path):
     report = audit_scenario_root(tmp_path / "missing")
     assert report["status"] == "MISSING_SOURCE_ROOT"
     assert report["blocking_reasons"]
+
+
+def test_provider_packet_request_catalog_keeps_scenario_rows_unpromoted(tmp_path):
+    path = tmp_path / "scenario.csv"
+    path.write_text(
+        "scenario,asset,step,operation,hazard_class\n"
+        "storage,TANK1,1,XV OPEN,pressure_rise_monitor\n",
+        encoding="utf-8",
+    )
+    audit = audit_scenario_root(tmp_path)
+    catalog = build_provider_packet_request_catalog(audit)
+    assert catalog["status"] == "PROVIDER_PACKET_REQUESTS_ONLY"
+    assert catalog["request_count"] == 1
+    assert catalog["candidate_family_request_counts"] == {
+        "inventory_over_600s": 1,
+        "vent_hole": 1,
+    }
+    request = catalog["requests"][0]
+    assert request["promotion_status"] == "REQUESTED_PROVIDER_PACKET"
+    assert request["frequency_assigned"] is False
+    assert request["release_values_present"] is False
+    assert request["provider_export_schema"] == "prism.resolved_release.v1"
+    assert catalog["provider_promotion"]["qualified_packet_count"] == 0
 
 
 def test_time_series_metadata_is_observed_but_not_promoted(tmp_path):
