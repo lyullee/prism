@@ -30,6 +30,7 @@ from lh2_tno.provider_release import (
     load_provider_emergency_relief_catalog,
     load_provider_release_branch_catalog,
     load_provider_release_catalog,
+    load_provider_release_set_branch_catalog,
     load_provider_release_set_catalog,
 )
 
@@ -100,8 +101,10 @@ def main() -> int:
         )
     elif args.provider_release_branch_catalog:
         try:
-            provider_release_branches = load_provider_release_branch_catalog(
-                args.provider_release_branch_catalog
+            provider_release_branches = (
+                load_provider_release_set_branch_catalog(args.provider_release_branch_catalog)
+                if args.release_kind == "two_sided_rupture"
+                else load_provider_release_branch_catalog(args.provider_release_branch_catalog)
             )
             defaults = json.loads(args.request_defaults.read_text(encoding="utf-8"))
             if not isinstance(defaults, dict):
@@ -188,7 +191,11 @@ def main() -> int:
             "provider_release_branch_catalog" if args.provider_release_branch_catalog else
             "provider_release_catalog"
         ),
-        "provider_release_kind": args.release_kind if args.provider_release_catalog else None,
+        "provider_release_kind": (
+            args.release_kind
+            if args.provider_release_catalog or args.provider_release_branch_catalog
+            else None
+        ),
     }, ensure_ascii=False))
     return 0
 

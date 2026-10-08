@@ -350,8 +350,14 @@ def build_equipment_campaign_from_provider_branch_catalog(
     templates: list[RequestBranchTemplate] = []
     for branch in provider_branches:
         try:
-            request = build_consequence_request_from_provider_release(
-                branch.release, request_defaults
+            request = (
+                build_consequence_request_from_provider_release_set(
+                    branch.release, request_defaults
+                )
+                if isinstance(branch.release, ProviderReleaseSet)
+                else build_consequence_request_from_provider_release(
+                    branch.release, request_defaults
+                )
             )
         except ProviderReleaseContractError as error:
             raise ValueError(

@@ -15,8 +15,9 @@ from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease, ResolvedLiquidStep
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
+from lh2_tno.frequency import FrequencyAsset
 from lh2_tno.provider_release import ProviderReleaseBranch
-from test_provider_release import _defaults, _release
+from test_provider_release import _defaults, _release, _release_set
 
 
 def _campaign_inputs():
@@ -231,6 +232,84 @@ def test_provider_branch_catalog_compiles_success_and_failure_packets_once_per_e
     ]
     assert sum(branch.probability_given_event for branch in matched_route.branches) == pytest.approx(1.0)
     assert all(branch.request is not None for branch in matched_route.branches)
+
+
+def test_provider_two_sided_branch_catalog_uses_set_adapter_once_per_event():
+    manifest, _, _, conditions = _campaign_inputs()
+    pipe_asset = FrequencyAsset(
+        id="transfer-line",
+        model_component_id="liquid-transfer-line-01",
+        profile="TNO_PIPE",
+        physical_scope_ids=("liquid-transfer-line-01-segment",),
+        classification_basis="synthetic two-sided branch test",
+        nominal_diameter_m=0.025,
+        length_per_item_m=10.0,
+        pipe_conditions="default_conditions",
+        pipe_correction_factor=1.0,
+        location_weight=0.1,
+        location_weight_provenance="synthetic reviewed rupture location allocation",
+    )
+    plan = FrequencyPlan(
+        id="synthetic-two-sided-branch-plan",
+        assets=(pipe_asset,),
+        excluded_model_components={
+            "storage-tank-01": "not selected in this branch test",
+            "liquid-demand-boundary": "not selected in this branch test",
+        },
+    )
+    release_set = _release_set()
+    endpoints = tuple(
+        release.model_copy(update={
+            "component_id": "liquid-transfer-line-01",
+            "failure_opening_diameter_m": 0.025,
+        })
+        for release in release_set.releases
+    )
+    release_set = release_set.model_copy(
+        update={"component_id": "liquid-transfer-line-01", "releases": endpoints}
+    )
+    defaults = _defaults()
+    defaults.update(
+        component_id="liquid-transfer-line-01",
+        source_position_enu_m=None,
+        source_positions_enu_m=None,
+        available_mass_kg=1.0,
+        source_operator="equipment_two_sided_rupture",
+        release_termination={
+            "basis": "two_sided_rupture",
+            "time_s": 0.2,
+            "provenance": "synthetic two-sided branch clock",
+        },
+    )
+    branches = (
+        ProviderReleaseBranch(
+            id="isolation-success",
+            probability_given_event=0.7,
+            provenance="synthetic two-sided success",
+            release=release_set,
+        ),
+        ProviderReleaseBranch(
+            id="isolation-failure",
+            probability_given_event=0.3,
+            provenance="synthetic two-sided failure",
+            release=release_set,
+        ),
+    )
+
+    campaign = build_equipment_campaign_from_provider_branch_catalog(
+        manifest, plan, branches, defaults, conditions,
+        scope_provenance="synthetic two-sided provider branch campaign",
+    )
+
+    matched_route = next(
+        route for route in campaign.event_routes if route.event_id.endswith("transfer-line/G1")
+    )
+    assert [branch.id for branch in matched_route.branches] == [
+        "isolation-success", "isolation-failure"
+    ]
+    assert all(branch.request is not None for branch in matched_route.branches)
+    assert all(branch.request.resolved_release_set is not None for branch in matched_route.branches)
+    assert sum(branch.probability_given_event for branch in matched_route.branches) == pytest.approx(1.0)
 
 
 def test_branch_catalog_preserves_isolation_partition_and_matches_exact_event():

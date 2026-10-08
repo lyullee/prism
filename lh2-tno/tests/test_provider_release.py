@@ -22,6 +22,7 @@ from lh2_tno.provider_release import (
     load_provider_release_catalog,
     load_provider_release_set,
     load_provider_release_set_catalog,
+    load_provider_release_set_branch_catalog,
 )
 
 
@@ -233,6 +234,39 @@ def test_provider_two_sided_adapter_rejects_single_exit_defaults():
     defaults["release_termination"]["basis"] = "synthetic_diagnostic_horizon"
     with pytest.raises(ProviderReleaseContractError, match="two-sided request requires"):
         build_consequence_request_from_provider_release_set(_release_set(), defaults)
+
+
+def test_provider_two_sided_branch_catalog_keeps_set_boundary(tmp_path):
+    release_set = _release_set()
+    packet = {
+        "provider_export_schema": PROVIDER_RELEASE_SET_SCHEMA,
+        **release_set.model_dump(mode="json"),
+    }
+    path = tmp_path / "two_sided_branches.json"
+    path.write_text(json.dumps({
+        "branches": [
+            {
+                "id": "isolation-success",
+                "probability_given_event": 0.7,
+                "provenance": "synthetic two-sided isolation success",
+                "release": packet,
+            },
+            {
+                "id": "isolation-failure",
+                "probability_given_event": 0.3,
+                "provenance": "synthetic two-sided isolation failure",
+                "release": packet,
+            },
+        ]
+    }), encoding="utf-8")
+
+    branches = load_provider_release_set_branch_catalog(path)
+
+    assert [branch.id for branch in branches] == [
+        "isolation-success", "isolation-failure"
+    ]
+    assert all(isinstance(branch.release, ResolvedGasReleaseSet) for branch in branches)
+    assert sum(branch.probability_given_event for branch in branches) == pytest.approx(1.0)
 
 
 def test_provider_release_branch_catalog_preserves_conditional_partition(tmp_path):
