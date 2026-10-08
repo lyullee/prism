@@ -112,6 +112,7 @@
   "equipment_dynamic_isolation_campaign_case_median_ms": 19999.83590003103,
   "equipment_dynamic_isolation_campaign_case_max_ms": 49543.07030001655,
   "equipment_dynamic_isolation_campaign_elapsed_ms": 469351.71029996127,
+  "equipment_dynamic_inventory_depletion_review": "WITHHELD: external LayeredTankState requires every liquid/vapor cell mass to remain strictly positive and LayeredTankNetworkSimulator has no event-safe depletion stop callback; no zero-inventory or 600 s extrapolation is claimed.",
   "equipment_dynamic_isolation_campaign_total_facility_risk_withheld": true,
   "equipment_dynamic_isolation_record": "scripts/validate_equipment_isolation.py",
   "equipment_dynamic_isolation_results": "results/20261009/equipment_isolation_campaign",
