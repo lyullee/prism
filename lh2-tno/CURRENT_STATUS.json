@@ -1159,5 +1159,21 @@
   "external_lh2dt_dynamic_reliquefier_prism_packet_export_test_status": "external smoke and full consequence chain executed; full portable suite 364 passed",
   "external_lh2dt_dynamic_vaporizer_prism_packet_export_valve_model": "lh2dt.StrokeLimitedCommandedValve over lh2dt.Valve",
   "external_lh2dt_dynamic_reliquefier_prism_packet_export_valve_model": "lh2dt.StrokeLimitedCommandedValve over lh2dt.Valve",
-  "external_lh2dt_dynamic_gas_unit_prism_packet_export_stroke_limited_valve": true
+  "external_lh2dt_dynamic_gas_unit_prism_packet_export_stroke_limited_valve": true,
+  "external_lh2dt_mapped_pump_prism_packet_export_implemented": true,
+  "external_lh2dt_mapped_pump_prism_packet_export_script": "scripts/export_lh2dt_mapped_pump_prism_packet.py",
+  "external_lh2dt_mapped_pump_prism_packet_export_status": "EXECUTED_OPERATOR_LIMITED; MappedPump H-Q-N plus matched atmospheric valve liquid packet and full consequence chain; synthetic feed-through only",
+  "external_lh2dt_mapped_pump_prism_packet_export_record": "results/20261012/mapped_pump_prism_packet_default_smoke",
+  "external_lh2dt_mapped_pump_prism_packet_export_chain_record": "results/20261012/mapped_pump_prism_chain_default_smoke",
+  "external_lh2dt_mapped_pump_prism_packet_export_duration_s": 0.2,
+  "external_lh2dt_mapped_pump_prism_packet_export_interval_count": 10,
+  "external_lh2dt_mapped_pump_prism_packet_export_mass_residual_kg": 0.0,
+  "external_lh2dt_mapped_pump_prism_packet_export_energy_residual_j": -1.3877787807814457e-17,
+  "external_lh2dt_mapped_pump_prism_packet_export_result_digest": "e7393aa3a7b760eeea89a8c94294e9b941bfa458c0c4eeff73e377e5ff414834",
+  "external_lh2dt_mapped_pump_prism_packet_export_flow_match_tolerance": 0.02,
+  "external_lh2dt_mapped_pump_prism_packet_export_provider_packet_promoted": false,
+  "external_lh2dt_mapped_pump_prism_packet_export_physical_validation_claim": false,
+  "external_lh2dt_mapped_pump_prism_packet_export_frequency_inference": false,
+  "external_lh2dt_mapped_pump_prism_packet_export_facility_qra_claim": false,
+  "next_priority": "Replace synthetic PRISM-side diagnostics with provider-owned accident export for LayeredTank, DynamicHEMPipe, StrokeLimitedCommandedValve, VentStack, MappedPump, DynamicVaporizer and DynamicReliquefier; exact-match qualified packets to the 24-event worklist; retain missing branches as UNCOMPUTED; validate flash, airborne-liquid, isolation and facility geometry with independent evidence before any facility IR/F-N promotion."
 }

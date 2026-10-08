@@ -132,6 +132,12 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 이 adapter의 사고 경계는 명시한 대기 밸브 개구와 합성 진단시계다. 실제 열교환기 내부 고장 위치, 수소측 재고, PSV/차단 동작, 현장 개구와 빈도, 독립 실험 검증은 공급하지 않으므로 상태는 `EXECUTED_OPERATOR_LIMITED`이고 `provider_packet_promoted=false`다. 따라서 이 결과는 일반 LH2 설비 결합의 구조·장부·처리시간을 확인하는 진단이며 시설 연간 IR/F-N 산출로 승격되지 않는다.
 
+## PRISM 측 MappedPump 진단 adapter (2026-10-12)
+
+`scripts/export_lh2dt_mapped_pump_prism_packet.py`는 `lh2dt.MappedPump`를 명시한 액체 inlet, downstream pressure, H-Q-N map으로 평가하고, 펌프 출구의 `P-h` 상태를 별도 atmospheric `Valve`에 전달한다. 펌프가 계산한 질량유량과 밸브가 계산한 대기 방출유량의 상대오차가 2%를 넘으면 strict packet을 만들지 않는다. 따라서 펌프의 압력 상승과 출구 엔탈피를 다시 추정하지 않고, 두 hydraulic boundary가 실제로 맞는 경우만 `ResolvedLiquidRelease`에 기록한다.
+
+기본 smoke는 0.2 s를 0.02 s 간격 10개 구간으로 실행했다. packet 질량 잔차는 `0 kg`, 정적 엔탈피 잔차는 약 `-1.39e-17 J`였고, 액체 출구는 DynamicLH2PoolX→SLABx→점화→피해 chain을 통과했다. `MappedPump`는 재고를 소유하지 않으므로 종료는 `synthetic_diagnostic_horizon`이고 `available_mass_kg`는 선언된 feed-through reserve다. 실제 pump-seal/shaft failure, 탱크 재고, 차단 정책, 현장 빈도와 물리 검증이 없으므로 이 adapter도 `EXECUTED_OPERATOR_LIMITED`이며 `provider_packet_promoted=false`다.
+
 steady 결과를 horizon 동안 반복한 것은 탱크 재고·PSV setpoint·현장 vent duty를 의미하지 않는다. `validate_lh2dt_prism_packet_chain.py`는 이 기체 packet을 gas vector transition, SLABx dispersion, cloud, ignition, fire/explosion 및 TNO damage까지 실행하지만 실제 빈도·facility IR/F-N·독립 검증은 계속 보류한다. upstream 압력을 크게 올려 underexpanded/high-Mach plane이 되면 PRISM low-Mach gate가 fail-closed로 거절한다.
 
 ## provider 구현 예
