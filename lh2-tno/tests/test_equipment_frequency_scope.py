@@ -14,6 +14,19 @@ def _inputs():
     return root, manifest, plan
 
 
+def _full_scope_inputs():
+    root = Path(__file__).parents[1]
+    manifest = EquipmentManifest.from_json(
+        root / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples" / "generic_lh2_full_scope_frequency_plan.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    return manifest, plan
+
+
 def test_generic_manifest_frequency_scope_generates_events():
     from lh2_tno.frequency_scope import audit_frequency_scope
 
@@ -49,3 +62,36 @@ def test_partial_manifest_blocks_frequency_event_generation():
     assert result["status"] == "PARTIAL"
     assert result["generated_event_count"] == 0
     assert "EXECUTABLE" in result["blocking_reasons"][0]
+
+
+def test_full_scope_example_covers_reviewed_equipment_profiles_and_excludes_gaps():
+    from lh2_tno.frequency_scope import audit_frequency_scope
+
+    manifest, plan = _full_scope_inputs()
+    result = audit_frequency_scope(manifest, plan)
+
+    assert result["status"] == "EXECUTABLE"
+    assert result["generated_event_count"] == 18
+    rows = {row["component_id"]: row for row in result["component_coverage"]}
+    assert {row["status"] for row in rows.values()} == {"SELECTED", "EXCLUDED"}
+    assert rows["transfer-valve-01"]["profiles"] == ["LH2_VALVE"]
+    assert rows["pressure-relief-vent-01"]["profiles"] == ["TNO_RELIEF_DEVICE"]
+    assert rows["liquid-transfer-pump-01"]["profiles"] == ["TNO_PUMP_STANDARD"]
+    assert "vaporizer-specific" in rows["ambient-vaporizer-01"]["reason"]
+    assert "reliquefier-specific" in rows["reliquefier-01"]["reason"]
+
+    profiles = {event["profile"] for event in result["events"]}
+    assert profiles == {
+        "LH2_VESSEL",
+        "LH2_PIPE",
+        "LH2_VALVE",
+        "TNO_RELIEF_DEVICE",
+        "TNO_PUMP_STANDARD",
+    }
+    assert {event["release"]["mode"] for event in result["events"]} == {
+        "hole",
+        "maximum_relief_discharge",
+    }
+    # Scope auditing creates initiating events only.  It does not manufacture
+    # provider release ledgers or consequence requests for these events.
+    assert result["promotion_policy"]["consequence_requests_are_not_created_by_this_audit"] is True

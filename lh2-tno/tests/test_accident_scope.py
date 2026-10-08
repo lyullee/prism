@@ -241,3 +241,50 @@ def test_scope_matrix_tracks_maximum_relief_discharge_as_vent_family():
     assert row["manifest_component_ids"] == ["relief-device"]
     assert row["components_without_generated_event"] == []
     assert matrix["manifest_family_component_ids"]["vent_hole"] == ["relief-device"]
+
+
+def test_full_scope_example_exposes_equipment_families_without_inventing_provider_cases():
+    root = Path(__file__).parents[1]
+    manifest = EquipmentManifest.from_json(
+        root / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples" / "generic_lh2_full_scope_frequency_plan.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    request = ConsequenceRequest.model_validate_json(
+        (root / "examples" / "equipment_consequence_template.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    conditions = tuple(
+        AnnualCondition.model_validate_json(json.dumps(row, allow_nan=False))
+        for row in json.loads(
+            (root / "examples" / "equipment_annual_conditions.json").read_text(
+                encoding="utf-8"
+            )
+        )
+    )
+    campaign = build_equipment_campaign(
+        manifest, plan, request, conditions, scope_provenance="synthetic full scope"
+    )
+    events = [
+        event.model_dump(mode="json")
+        for event in generate_events(manifest.to_facility(), plan)
+    ]
+    matrix = build_accident_scope_matrix(
+        campaign,
+        {"events": events, "cases": [], "total_facility_annual_ir_low_high": None},
+        manifest,
+    )
+    rows = {row["family"]: row for row in matrix["rows"]}
+    assert rows["vessel_hole"]["generated_event_count"] == 5
+    assert rows["pipe_hole"]["generated_event_count"] == 5
+    assert rows["valve_hole"]["generated_event_count"] == 5
+    assert rows["vent_hole"]["generated_event_count"] == 1
+    assert rows["pump_hole"]["generated_event_count"] == 2
+    for family in ("vaporizer_hole", "reliquefier_hole", "liquid_two_phase", "two_sided_rupture", "vertical_handoff"):
+        assert rows[family]["status"] == "NO_EVENT_GENERATED"
+    assert matrix["facility_total_risk_available"] is False
+    assert matrix["physical_validation_claim"] is False
