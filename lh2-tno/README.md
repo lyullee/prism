@@ -26,6 +26,8 @@
 
 **빈도→방출 요청 작업목록:** [방출 요청 작업목록 기록](docs/PRISM_방출요청_작업목록_20261009.md)과 `scripts/build_provider_release_worklist.py`는 위 24개 사건을 설비별 provider packet 요청으로 펼칩니다. 현재 packet은 0건이므로 24건 모두 `UNCOMPUTED_PROVIDER_PACKET`이며, 정상 유량·센서 시계열을 사고 방출로 승격하지 않습니다. packet이 들어오면 개구·설비·포트·종료 basis를 exact-match한 뒤에만 피해영향 campaign으로 보냅니다.
 
+합성 `lh2dt→SLABx-LH2` 진단은 이 작업목록의 저장탱크 `AREA_0.01%` 사건에 대해 `storage-tank-01/tank-accident-out/0.0127 m` 경계를 구조적으로 exact-match했습니다. coverage 결과는 24개 중 1개 match·23개 packet 부재인 `PARTIAL_EXACT_MATCH`이며, 종료시계·기상·재고가 합성이므로 실제 provider packet·빈도·시설 QRA로 승격하지 않습니다. 결과는 `results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_storage_exact.json`에 남습니다.
+
 provider packet이 들어오면 먼저 `scripts/audit_provider_catalog_coverage.py`로 작업목록과 대조합니다. 이 단계는 event/component/포트/개구/기체·액체 경계를 exact-match하고, 빠진 사건과 작업목록 밖 packet을 별도로 기록합니다. `FULLY_MATCHED`도 빈도 부여나 물리 검증 완료를 뜻하지 않으며, 이후 strict request context와 facility IR/F-N gate가 필요합니다. 자세한 사용법은 [provider packet coverage gate 기록](docs/PRISM_provider_catalog_coverage_20261009.md)을 참고합니다.
 
 외부 [LH2 디지털 트윈 스크리닝 연결 감사](docs/PRISM_외부LH2DT_스크리닝_연결감사_20261009.md)는 12개 자산·8개 시나리오·21개 노드/27개 간선과 별도 공정 진단 후보 목록(고장 후보 444개·point 546개·센서 후보 62개·비상 시나리오 31개)을 근거로 보존하지만, live I/O·확정 센터 자산·전방비교 준비·사고 방출 packet이 없으므로 PRISM provider packet으로 승격하지 않습니다.

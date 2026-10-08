@@ -726,3 +726,16 @@ def test_layered_slabsx_bridge_uses_strict_liquid_release_adapter():
     assert release.event_kind == 'accidental_leak'
     assert release.integrated_mass_kg == pytest.approx(0.1)
     assert release.reference_area_provenance == 'SLABx-LH2 scaled atmospheric gas area'
+
+    exact_packet = _packet_from_bridge(
+        source, provider_rows, rows, audit, 0.1,
+        component_id='storage-tank-01',
+        port_id='tank-accident-out',
+        event_id='frequency-plan/storage-shell/AREA_0.01%',
+    )
+    exact_release = ResolvedLiquidRelease.model_validate_json(
+        json.dumps(exact_packet, allow_nan=False)
+    )
+    assert exact_release.component_id == 'storage-tank-01'
+    assert exact_release.port_id == 'tank-accident-out'
+    assert exact_release.event_id == 'frequency-plan/storage-shell/AREA_0.01%'

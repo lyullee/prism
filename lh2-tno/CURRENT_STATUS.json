@@ -896,5 +896,25 @@
     "near_field_and_dispersion": 16389.494900009595,
     "cloud_observation": 188.75780003145337,
     "fire_explosion_damage_risk": 135.96679992042482
-  }
+  },
+  "equipment_provider_release_worklist_synthetic_exact_packet_record": "results/20261009/provider_evidence/generic_lh2_provider_release_catalog_storage_exact.json",
+  "equipment_provider_release_worklist_synthetic_exact_coverage_record": "results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_storage_exact.json",
+  "equipment_provider_release_worklist_synthetic_exact_coverage_status": "PARTIAL_EXACT_MATCH; 1 synthetic storage-tank-01 AREA_0.01% packet matched structurally, 23 events remain without packets",
+  "equipment_provider_release_worklist_synthetic_exact_match_count": 1,
+  "equipment_provider_release_worklist_synthetic_exact_unmatched_count": 23,
+  "equipment_provider_release_worklist_synthetic_exact_packet_promoted": false,
+  "equipment_provider_release_worklist_synthetic_exact_physical_validation_claim": false,
+  "equipment_provider_release_worklist_synthetic_exact_frequency_inference": false,
+  "equipment_provider_release_worklist_synthetic_exact_identity": {
+    "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "component_id": "storage-tank-01",
+    "port_id": "tank-accident-out",
+    "opening_diameter_m": 0.0127,
+    "boundary_kind": "resolved_atmospheric_liquid_exit",
+    "duration_s": 0.2,
+    "termination_basis": "synthetic_diagnostic_horizon"
+  },
+  "equipment_provider_release_worklist_actual_qualified_packet_count": 0,
+  "equipment_provider_release_worklist_actual_qualified_packet_status": "NO_QUALIFIED_ACTUAL_PACKET; synthetic exact packet is retained as a structural bridge diagnostic only",
+  "external_lh2dt_exact_worklist_binding_status": "STRUCTURAL_ONLY; synthetic packet exact-matched to one generic worklist event, campaign promotion withheld because termination and facility context are synthetic"
 }

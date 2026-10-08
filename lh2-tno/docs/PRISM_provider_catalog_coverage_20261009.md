@@ -39,4 +39,4 @@ python scripts/audit_provider_catalog_coverage.py `
 
 작업목록에 없는 packet도 `extra_packets`로 기록한다. 이는 설비나 문헌 빈도 범위가 먼저 검토되어야 한다는 뜻이며 자동으로 시설에 추가하지 않는다. 이 도구는 빈도를 부여하지 않고, request defaults를 붙이지 않으며, 정상 유량·센서 시계열을 사고 packet으로 승격하지 않는다. `FULLY_MATCHED` 뒤에도 `build_equipment_campaign.py --provider-release-catalog`의 strict context 검증과 별도 facility IR/F-N·물리 검증 gate가 필요하다.
 
-현재 일반 LH2 예제는 provider packet 0건이므로 coverage 상태는 `NO_EXACT_MATCH`로 기록된다. 이 상태는 오류가 아니라 실제 방출 이력이 공급되지 않았다는 사실을 보존하는 결과다.
+실제 일반 LH2 설비에 대해 적격으로 승인된 provider packet은 0건이므로 실제 시설 coverage는 계속 `NO_EXACT_MATCH`다. 별도 합성 진단에서는 `lh2dt→SLABx-LH2` 결과를 저장탱크 `AREA_0.01%` 사건의 설비·포트·개구에 맞춰 `PARTIAL_EXACT_MATCH`(1/24)를 재현했다. 이 결과는 구조 연결을 확인하는 개발 증거이며, 합성 종료시계·재고·기상 때문에 실제 방출 이력이나 시설 위험으로 승격하지 않는다. 상세 결과는 `results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_storage_exact.json`이다.

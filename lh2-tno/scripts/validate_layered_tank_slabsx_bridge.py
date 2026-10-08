@@ -165,7 +165,8 @@ def _slabx_partition_rows(provider_rows: list[dict], packet: dict, dt: float) ->
 
 
 def _packet_from_bridge(source: dict, provider_rows: list[dict], rows: list[dict], audit: dict, duration_s: float,
-                        component_id: str | None = None, port_id: str | None = None) -> dict:
+                        component_id: str | None = None, port_id: str | None = None,
+                        event_id: str | None = None) -> dict:
     mass = sum(row["total_mass_flow_kg_s"] * duration_s / len(provider_rows) for row in provider_rows)
     enthalpy = sum(row["total_mass_flow_kg_s"] * row["specific_enthalpy_j_kg"] * duration_s / len(provider_rows) for row in provider_rows)
     geometry = source["source_geometry"]
@@ -215,7 +216,7 @@ def _packet_from_bridge(source: dict, provider_rows: list[dict], rows: list[dict
         provider_response,
         component_id=component_id or source["component_id"],
         port_id=port_id or f"{component_id or source['component_id']}.out",
-        event_id="layered-tank-slabsx-liquid-bridge-diagnostic",
+        event_id=event_id or "layered-tank-slabsx-liquid-bridge-diagnostic",
         provider_source_digest=canonical_digest(source),
         upstream_service_provenance="LayeredTank provider state plus SLABx-LH2 partition",
         provider_boundary_reference=(
@@ -243,6 +244,8 @@ def main() -> None:
                         help="facility component receiving this diagnostic release")
     parser.add_argument("--facility-port-id", default=None,
                         help="outward liquid/two-phase facility port; defaults to '<component>.out'")
+    parser.add_argument("--event-id", default=None,
+                        help="optional exact frequency-worklist event id; omitted for the diagnostic id")
     parser.add_argument("--output-dir", type=Path, default=None,
                         help="diagnostic output directory")
     parser.add_argument("--execute-chain", action="store_true")
@@ -257,7 +260,8 @@ def main() -> None:
     duration = dt * len(provider_rows)
     packet = _packet_from_bridge(source, provider_rows, rows, audit, duration,
                                  component_id=args.facility_component_id,
-                                 port_id=args.facility_port_id)
+                                 port_id=args.facility_port_id,
+                                 event_id=args.event_id)
     release = ResolvedLiquidRelease.model_validate_json(json.dumps(packet, allow_nan=False))
     output = args.output_dir or (ROOT / "results" / "20261009" / "equipment_layered_tank_slabsx")
     _save(output / "provider_export.json", source)
