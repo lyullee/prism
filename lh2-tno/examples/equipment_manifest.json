@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "facility_id": "generic-lh2-manifest-example",
+  "environment": "outdoor",
+  "configuration_origin": "synthetic",
+  "components": [
+    {
+      "id": "storage-tank-01",
+      "kind": "storage_tank",
+      "position_enu_m": [0.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {"volume_m3": 10.0},
+      "source_status": "declared",
+      "source_provenance": "synthetic example"
+    },
+    {
+      "id": "liquid-transfer-line-01",
+      "kind": "pipe",
+      "position_enu_m": [5.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {"length_m": 10.0, "diameter_m": 0.025},
+      "source_status": "declared",
+      "source_provenance": "synthetic example"
+    },
+    {
+      "id": "liquid-demand-boundary",
+      "kind": "boundary",
+      "position_enu_m": [12.0, 0.0, 1.0],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "source_status": "declared",
+      "source_provenance": "synthetic example"
+    }
+  ],
+  "ports": [
+    {"id": "tank-out", "component_id": "storage-tank-01", "phase": "liquid", "direction": "out"},
+    {"id": "line-in", "component_id": "liquid-transfer-line-01", "phase": "liquid", "direction": "in"},
+    {"id": "line-out", "component_id": "liquid-transfer-line-01", "phase": "liquid", "direction": "out"},
+    {"id": "demand-in", "component_id": "liquid-demand-boundary", "phase": "liquid", "direction": "in"}
+  ],
+  "edges": [
+    {"id": "tank-to-line", "source_port": "tank-out", "target_port": "line-in", "source_status": "declared"},
+    {"id": "line-to-demand", "source_port": "line-out", "target_port": "demand-in", "source_status": "declared"}
+  ],
+  "receptors": [
+    {"id": "receptor-01", "position_enu_m": [20.0, 0.0, 1.0]}
+  ],
+  "scenarios": [
+    {
+      "id": "liquid-supply",
+      "status": "declared",
+      "required_ports": ["tank-out", "line-in", "line-out", "demand-in"],
+      "required_controls": ["supply_valve_position"],
+      "observed_controls": ["supply_valve_position"],
+      "provenance": "synthetic example"
+    }
+  ]
+}

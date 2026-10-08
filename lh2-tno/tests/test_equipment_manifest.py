@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from lh2_tno.equipment_manifest import EquipmentManifest, audit_manifest
 from lh2_tno.contracts import Receptor
@@ -66,3 +67,11 @@ def test_indoor_manifest_is_excluded_from_outdoor_scope():
     result = audit_manifest(manifest)
     assert result["status"] == "EXCLUDED"
     assert "declared scope is outdoor only" in result["blocking_reasons"]
+
+
+def test_shipped_manifest_example_is_executable():
+    path = Path(__file__).parents[1] / "examples" / "equipment_manifest.json"
+    manifest = EquipmentManifest.from_json(path)
+    result = audit_manifest(manifest)
+    assert result["status"] == "EXECUTABLE"
+    assert manifest.to_facility().id == "generic-lh2-manifest-example"

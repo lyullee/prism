@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 from .contracts import Facility
+from .equipment_manifest import EquipmentManifest, audit_manifest
 from .backend import BackendConfig, IsolatedBackend
 from .consequences import ConsequenceRequest
 from .pipeline import ResearchPipeline
@@ -11,7 +12,8 @@ from .frequency import FrequencyPlan, generate_events, bind_event
 
 def main(argv=None):
     p=argparse.ArgumentParser(description="PRISM LH2 mode: generic facility validation and risk-model orchestration")
-    p.add_argument("facility",type=Path)
+    p.add_argument("facility",type=Path,nargs='?',help='Strict Facility JSON (use --equipment-manifest for a provider export)')
+    p.add_argument('--equipment-manifest',type=Path,help='Facility-neutral digital-twin manifest; promoted only when its audit is EXECUTABLE')
     p.add_argument('--backend',type=Path,help='Pinned research-model backend configuration')
     p.add_argument('--consequences',type=Path,help='Source-to-harm request JSON')
     p.add_argument('--frequency-plan',type=Path,help='Reviewed physical inventory/frequency profiles JSON')
@@ -24,7 +26,16 @@ def main(argv=None):
     p.add_argument('--frequency-distribution-seed',type=int,default=20261009,help='Deterministic seed for frequency-only draws')
     p.add_argument('--output',type=Path,help='Save complete result JSON')
     args=p.parse_args(argv)
-    facility=Facility.model_validate_json(args.facility.read_text(encoding="utf-8"))
+    if (args.facility is None) == (args.equipment_manifest is None):
+        p.error('provide exactly one positional facility JSON or --equipment-manifest')
+    if args.equipment_manifest is not None:
+        manifest=EquipmentManifest.from_json(args.equipment_manifest)
+        audit=audit_manifest(manifest)
+        if audit['status'] != 'EXECUTABLE':
+            p.error('equipment manifest is not executable: ' + '; '.join(audit['blocking_reasons']))
+        facility=manifest.to_facility()
+    else:
+        facility=Facility.model_validate_json(args.facility.read_text(encoding="utf-8"))
     if (args.frequency_sensitivity or args.frequency_uncertainty or args.frequency_distribution) and not args.risk_campaign:
         p.error('--frequency-sensitivity/--frequency-uncertainty/--frequency-distribution requires --risk-campaign')
     if args.risk_campaign:

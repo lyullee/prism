@@ -128,3 +128,22 @@ def test_lh2_frequency_cli_uses_same_existing_event_generator(tmp_path):
     report=json.loads(out.read_text(encoding='utf-8'))
     assert report['execution_mode']=='lh2' and len(report['events'])==16
     assert report['total_facility_annual_risk'] is None
+
+
+def test_equipment_manifest_cli_promotes_only_executable_export(capsys):
+    root=Path(__file__).parents[1]
+    from lh2_tno.cli import main as lh2_main
+    lh2_main(['--equipment-manifest',str(root/'examples/equipment_manifest.json')])
+    report=json.loads(capsys.readouterr().out)
+    assert report['facility']=='generic-lh2-manifest-example'
+
+
+def test_equipment_manifest_cli_rejects_partial_provider_export(tmp_path):
+    root=Path(__file__).parents[1]
+    data=json.loads((root/'examples/equipment_manifest.json').read_text(encoding='utf-8'))
+    data['components'][0].pop('property_basis')
+    path=tmp_path/'partial.json'; path.write_text(json.dumps(data),encoding='utf-8')
+    from lh2_tno.cli import main as lh2_main
+    with pytest.raises(SystemExit) as error:
+        lh2_main(['--equipment-manifest',str(path)])
+    assert error.value.code==2
