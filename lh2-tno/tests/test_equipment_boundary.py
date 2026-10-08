@@ -400,6 +400,36 @@ def test_accidental_valve_frequency_can_bind_without_using_expanded_exit_diamete
     with pytest.raises(ValueError):bind_event(ConsequenceRequest.model_validate_json(json.dumps(request_data(p))),event)
 
 
+def test_accidental_liquid_frequency_binds_using_provider_failure_diameter():
+    liquid = liquid_packet()
+    liquid['property_basis']['fluid'] = 'Hydrogen'
+    liquid['property_basis']['energy_reference'] = 'CoolProp-HEOS:Hydrogen:native'
+    data = request_data()
+    data.update(
+        source_input=None,
+        resolved_release=None,
+        resolved_liquid_release=liquid,
+        source_operator='equipment_liquid_release',
+        available_mass_kg=5.,
+        release_termination={'basis':'inventory_depletion','time_s':.37,
+                             'provenance':'synthetic positive inventory threshold'},
+    )
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    facility_data_value = facility_data('storage_tank')
+    facility_data_value['components'][0]['property_basis']['fluid'] = 'Hydrogen'
+    facility = Facility.model_validate_json(json.dumps(facility_data_value))
+    asset = FrequencyAsset(
+        id='storage-vessel', model_component_id='vent', profile='LH2_VESSEL',
+        physical_scope_ids=('storage-shell',), nominal_diameter_m=.25,
+        classification_basis='synthetic liquid provider frequency binding',
+    )
+    event = generate_events(facility, FrequencyPlan(id='liquid-case', assets=(asset,)))[0]
+    bound = bind_event(request, event)
+    assert bound.source_operator == 'equipment_liquid_release'
+    assert bound.annual_frequency_per_year == pytest.approx(.00065)
+    assert bound.frequency_event.release.hole_diameter_m == pytest.approx(.0025)
+
+
 def test_zero_flow_after_closure_does_not_erase_preceding_release():
     p=packet();p['steps'][1].update(mass_flow_kg_s=0.,velocity_m_s=0.)
     p['cumulative_mass_out_kg']=.003*.2;p['cumulative_static_enthalpy_out_j']=.003*.2*3e6

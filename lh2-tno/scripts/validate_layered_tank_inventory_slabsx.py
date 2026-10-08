@@ -33,6 +33,7 @@ def _run_provider(
     time_step_s: float,
     target_release_kg: float,
     max_intervals: int,
+    full_open_area_m2: float,
 ) -> tuple[dict, dict]:
     sys.path.insert(0, str(lh2dt_root / "src"))
     from lh2dt import (
@@ -54,6 +55,8 @@ def _run_provider(
         raise ValueError("target_release_kg must be finite and positive")
     if max_intervals < 1:
         raise ValueError("max_intervals must be positive")
+    if full_open_area_m2 <= 0.0 or not math.isfinite(full_open_area_m2):
+        raise ValueError("full_open_area_m2 must be finite and positive")
 
     fluid = "Hydrogen"
     properties = HydrogenProperties(fluid)
@@ -93,7 +96,6 @@ def _run_provider(
         raise ValueError("target_release_kg must be smaller than the initial inventory")
 
     time_step = float(time_step_s)
-    full_open_area_m2 = 1.0e-8
     discharge_coefficient = 0.8
     ambient_pressure_pa = 101_325.0
     ambient_temperature_k = 288.15
@@ -287,13 +289,18 @@ def main() -> None:
     parser.add_argument("--time-step-s", type=float, default=0.5)
     parser.add_argument("--target-release-kg", type=float, default=1.0e-4)
     parser.add_argument("--max-intervals", type=int, default=64)
+    parser.add_argument("--full-open-area-m2", type=float, default=1.0e-8,
+                        help="declared provider outlet area; keep explicit when matching a reviewed frequency bin")
+    parser.add_argument("--output-dir", type=Path, default=None,
+                        help="diagnostic output directory")
     args = parser.parse_args()
-    output = ROOT / "results" / "20261009" / "layered_tank_inventory_slabsx"
+    output = args.output_dir or (ROOT / "results" / "20261009" / "layered_tank_inventory_slabsx")
     provider_export, provider_meta = _run_provider(
         args.lh2dt_root,
         time_step_s=args.time_step_s,
         target_release_kg=args.target_release_kg,
         max_intervals=args.max_intervals,
+        full_open_area_m2=args.full_open_area_m2,
     )
     _save(output / "layered_tank_provider_export.json", provider_export)
     _save(output / "layered_tank_provider_verification.json", provider_meta)

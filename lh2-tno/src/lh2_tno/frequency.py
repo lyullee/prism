@@ -253,6 +253,10 @@ def bind_event(request, event: FrequencyEvent):
         if request.resolved_release.event_kind!='accidental_leak' or request.resolved_release.failure_opening_diameter_m is None:
             raise ValueError('resolved source frequency requires an accidental leak with a declared failure opening')
         diameter=request.resolved_release.failure_opening_diameter_m
+    elif request.resolved_liquid_release is not None:
+        if request.resolved_liquid_release.event_kind!='accidental_leak' or request.resolved_liquid_release.failure_opening_diameter_m is None:
+            raise ValueError('resolved liquid frequency requires an accidental leak with a declared failure opening')
+        diameter=request.resolved_liquid_release.failure_opening_diameter_m
     else:
         diameter = request.source_input['nozzle']['diameter_m']
     if not math.isclose(diameter, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
