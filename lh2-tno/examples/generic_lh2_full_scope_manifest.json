@@ -84,6 +84,7 @@
     {"id": "valve-out", "component_id": "transfer-valve-01", "phase": "liquid", "direction": "out"},
     {"id": "valve-accident-out", "component_id": "transfer-valve-01", "phase": "any", "direction": "out", "position_enu_m": [7.0, 0.0, 1.0]},
     {"id": "vent-out", "component_id": "pressure-relief-vent-01", "phase": "vapour", "direction": "out", "position_enu_m": [0.0, 3.0, 5.0]},
+    {"id": "vent-accident-out", "component_id": "pressure-relief-vent-01", "phase": "vapour", "direction": "out", "position_enu_m": [0.0, 3.0, 5.0]},
     {"id": "pump-out", "component_id": "liquid-transfer-pump-01", "phase": "liquid", "direction": "out"},
     {"id": "pump-accident-out", "component_id": "liquid-transfer-pump-01", "phase": "any", "direction": "out", "position_enu_m": [6.0, 0.0, 1.0]},
     {"id": "vaporizer-out", "component_id": "ambient-vaporizer-01", "phase": "two_phase", "direction": "out"},
