@@ -6,20 +6,22 @@ from .frequency import FrequencyPlan, generate_events
 
 
 def _component_rows(manifest: EquipmentManifest, plan: FrequencyPlan) -> list[dict]:
-    selected = {asset.model_component_id: asset for asset in plan.assets}
+    selected: dict[str, list] = {}
+    for asset in plan.assets:
+        selected.setdefault(asset.model_component_id, []).append(asset)
     excluded = plan.excluded_model_components
     rows = []
     for component in manifest.components:
         if component.id in selected:
-            asset = selected[component.id]
+            assets = selected[component.id]
             rows.append({
                 "component_id": component.id,
                 "status": "SELECTED",
-                "frequency_asset_id": asset.id,
-                "profile": asset.profile,
-                "physical_scope_ids": list(asset.physical_scope_ids),
-                "count": asset.count,
-                "provenance": asset.classification_basis,
+                "frequency_asset_ids": [asset.id for asset in assets],
+                "profiles": [asset.profile for asset in assets],
+                "physical_scope_ids": [scope for asset in assets for scope in asset.physical_scope_ids],
+                "count": sum(asset.count for asset in assets),
+                "provenance": [asset.classification_basis for asset in assets],
             })
         elif component.id in excluded:
             rows.append({
