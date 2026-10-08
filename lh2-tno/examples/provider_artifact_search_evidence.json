@@ -5,6 +5,8 @@
   "reproducible_audit": {
     "module": "src/lh2_tno/legacy_artifact_audit.py",
     "script": "scripts/audit_legacy_provider_artifacts.py",
+    "combined_module": "src/lh2_tno/provider_artifact_search.py",
+    "combined_script": "scripts/audit_provider_artifact_roots.py",
     "policy": "The audit never adds provider_export_schema or edits a legacy artifact."
   },
   "searches": [

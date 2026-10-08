@@ -36,6 +36,15 @@ python lh2-tno/scripts/audit_legacy_provider_artifacts.py `
 
 감사기는 schema를 추가하거나 packet을 수정하지 않는다. 현재 schema가 있는 후보는 strict 검증하고, schema가 없는 후보는 `LEGACY_OUTPUT_REQUIRES_EXPLICIT_SCHEMA_MIGRATION`으로 남긴다.
 
+현재 provider와 legacy 출력 폴더를 함께 감사하려면 `scripts/audit_provider_artifact_roots.py`를 사용한다. 두 결과는 서로 합치지 않으며, 현재 적격 packet 수와 legacy schema 누락 수를 한 summary에 기록한다.
+
+```powershell
+python lh2-tno/scripts/audit_provider_artifact_roots.py `
+  --current-root "<current provider root>" `
+  --legacy-root "<legacy output root>" `
+  --output provider_artifact_search.json
+```
+
 외부 원자료는 저장소에 복사하지 않고 다음 모델 루트에서 읽었다.
 
 `C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델`
