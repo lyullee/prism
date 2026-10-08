@@ -1,0 +1,9 @@
+include README.md CURRENT_STATUS.json LICENSE CITATION.cff
+recursive-include src *.py *.json *.md
+recursive-include examples *.json
+recursive-include tests *.py
+recursive-include docs *.md
+prune results
+prune build
+prune dist
+global-exclude __pycache__ *.pyc *.pyo

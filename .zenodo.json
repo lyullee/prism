@@ -1,0 +1,34 @@
+{
+  "title": "PRISM: Process Risk Integration and Scenario Modeling",
+  "upload_type": "software",
+  "version": "0.6.0",
+  "publication_date": "2026-10-08",
+  "doi": "10.5281/zenodo.23241359",
+  "creators": [
+    {
+      "name": "Lee, Ugwiyeon",
+      "affiliation": "Korea Gas Safety Corporation"
+    }
+  ],
+  "access_right": "open",
+  "license": "mit",
+  "description": "Research-grade generic LH2 risk integration with standard/LH2 mode selection, auditable contracts, literature frequencies, equipment boundary and telemetry interfaces, and diagnostic source-to-harm orchestration. Complete facility QRA, independent facility validation and 1 Hz fresh-physics performance remain incomplete or unverified. External physics providers are not included.",
+  "keywords": [
+    "liquid hydrogen",
+    "risk assessment",
+    "digital twin",
+    "consequence modeling"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/lyullee/prism",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://pypi.org/project/prism-risk/",
+      "relation": "isIdenticalTo",
+      "scheme": "url"
+    }
+  ]
+}

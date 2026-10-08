@@ -7,7 +7,7 @@ import pytest
 from lh2_tno.chain_worker import box_fractions, branch_mass, dose_harm, mole_fraction, pulse_mass, weighted_union_harm
 from lh2_tno.consequences import ConsequenceRequest
 
-EXAMPLE=Path(__file__).parents[1]/'results/20261008/full_chain/gas_release_request.json'
+EXAMPLE=Path(__file__).parents[1]/'examples/consequence_request.json'
 
 
 @pytest.mark.parametrize('shift',[0.,.1,.83,2.4])

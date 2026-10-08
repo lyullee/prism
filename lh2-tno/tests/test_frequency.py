@@ -15,7 +15,7 @@ ROOT = Path(__file__).parents[1]
 
 
 def facility():
-    return Facility.model_validate_json((ROOT/'results/20261008/full_chain/facility.json').read_text(encoding='utf-8'))
+    return Facility.model_validate_json((ROOT/'examples/consequence_facility.json').read_text(encoding='utf-8'))
 
 
 def asset(**kw):
@@ -36,7 +36,7 @@ def events(a=None):return generate_events(facility(), plan(a))
 
 
 def template():
-    data=json.loads((ROOT/'results/20261008/full_chain/gas_release_request.json').read_text(encoding='utf-8'))
+    data=json.loads((ROOT/'examples/consequence_request.json').read_text(encoding='utf-8'))
     data.update(annual_frequency_per_year=None, annual_frequency_provenance=None, initiation_intensity_per_s=None)
     data['source_input']['nozzle']['diameter_m']=.01
     data['release_termination']={'basis':'synthetic_diagnostic_horizon','time_s':.2,

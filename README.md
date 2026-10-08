@@ -100,7 +100,9 @@ python -m venv .venv
 .venv\Scripts\python.exe -m pip install -e "./lh2-tno[test]" setuptools wheel
 ```
 
-배포 이름은 `prism-risk`, 실행 명령은 `prism`입니다. PyPI에 게시하지 않았으므로 저장소에서 설치합니다.
+배포 이름은 `prism-risk`, 실행 명령은 `prism`입니다. PyPI 설치 명령은 `python -m pip install prism-risk==0.6.0`입니다.
+공개 배포 파일에는 외부 물리 모델이 포함되지 않습니다. GitHub는 비공개이며 접근 권한이 필요합니다.
+공개 소스/예제/문서는 [Zenodo 소프트웨어 기록](https://doi.org/10.5281/zenodo.23241359)의 배포 파일을 사용합니다.
 내부 폴더 `lh2-tno`, import `lh2_tno`, host 모듈 `tno_host`는 기존 연동 호환성을 위해 유지합니다.
 과거 `lh2-tno` 배포본을 설치한 환경과 혼용하지 않도록 새 가상환경 사용을 권장합니다.
 
@@ -447,3 +449,19 @@ IJHE 연구는 설비 경계·질량/시간 일관성·문헌 빈도·조건부 
 
 이전 문서의 TNO-LH2 명칭·로컬 경로는 당시 기록입니다. 제품과 새 저장소 이름은 PRISM이고 이전 Git 이력은 보존합니다.
 외부 소스·책·원계측 자료·로컬 원고는 이 저장소에 포함하지 않습니다.
+
+## 배포와 인용
+
+- Python 배포명: **prism-risk**, 버전 **0.6.0**, 라이선스 **MIT**.
+- [PyPI 프로젝트](https://pypi.org/project/prism-risk/) / [Zenodo DOI](https://doi.org/10.5281/zenodo.23241359).
+- [CITATION.cff](CITATION.cff)에 소프트웨어 인용 정보를 보관합니다.
+- DOI는 소프트웨어 버전 기록이며 IJHE 논문 DOI나 물리 검증 인증이 아닙니다.
+- 등록 진행 상태는 [CURRENT_STATUS.json](lh2-tno/CURRENT_STATUS.json)을 확인합니다.
+
+```powershell
+python -m pip install prism-risk==0.6.0
+prism --describe-modes
+```
+
+외부 모델 없이 시설 검증과 문헌 빈도 생성이 가능합니다. source/확산/피해 물리 계산은 별도 검토된 provider가 필요합니다.
+MIT는 PRISM 자체 배포 파일에 적용하며 외부 모델과 원자료의 라이선스·재배포 권한을 변경하지 않습니다.

@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use PRISM, please cite this software release."
+type: software
+title: "PRISM: Process Risk Integration and Scenario Modeling"
+authors:
+  - family-names: "Lee"
+    given-names: "Ugwiyeon"
+    affiliation: "Korea Gas Safety Corporation"
+version: "0.6.0"
+date-released: 2026-10-08
+doi: "10.5281/zenodo.23241359"
+repository-code: "https://github.com/lyullee/prism"
+url: "https://pypi.org/project/prism-risk/"
+license: MIT
+keywords:
+  - liquid hydrogen
+  - quantitative risk assessment
+  - digital twin
+  - consequence modeling
+abstract: >-
+  Research framework connecting generic LH2 facility contracts, literature-based
+  initiating frequencies, isolated source-pinned physical models, known leak
+  telemetry and conditional human-harm evaluation. Numerical diagnostic chain
+  implementation is distinguished from complete facility QRA, independent physical
+  validation and fresh-physics real-time performance, which remain incomplete or
+  unverified. External physics providers are required and distributed separately.

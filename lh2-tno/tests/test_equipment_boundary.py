@@ -31,7 +31,7 @@ def packet():
 
 def request_data(p=None):
     root=Path(__file__).parents[1]
-    d=json.loads((root/'results/20261008/full_chain/gas_release_request.json').read_text(encoding='utf-8'))
+    d=json.loads((root/'examples/consequence_request.json').read_text(encoding='utf-8'))
     d.update(source_input=None,resolved_release=packet() if p is None else p,component_id='vent',
         available_mass_kg=5.,source_position_enu_m=[0.,0.,1.],annual_frequency_per_year=None,
         annual_frequency_provenance=None,initiation_intensity_per_s=None,

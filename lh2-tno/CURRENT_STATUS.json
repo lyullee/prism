@@ -111,5 +111,13 @@
   "numerical_physics_changed_in_v060": false,
   "previous_repository_deleted": true,
   "previous_repository_deletion_verified_kst": "2026-10-08",
-  "local_development_branch": "codex/prism-development"
+  "local_development_branch": "codex/prism-development",
+  "software_license": "MIT",
+  "pypi_project_name": "prism-risk",
+  "pypi_release_version": "0.6.0",
+  "pypi_publication_status": "release_prepared_not_yet_published",
+  "zenodo_version_doi": "10.5281/zenodo.23241359",
+  "zenodo_record_id": "23241359",
+  "zenodo_publication_status": "reserved_draft_not_registered",
+  "public_artifacts_scope": "PRISM own source, examples, tests, documentation and wheel; external providers and raw field data excluded"
 }
