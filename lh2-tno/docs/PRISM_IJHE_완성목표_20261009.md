@@ -14,10 +14,10 @@
 
 - 시설/포트/물성·시간·질량 계약, 문헌 빈도 17개 프로파일·55행, 단일 구멍 사건 결합.
 - 제한된 옥외 방출→지면 도달/풀→극저온 전이→확산→점화→화재/폭발→인명 피해의 실제 진단 실행.
-- native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구 수용. 소비자가 유량을 다시 계산하지 않는다.
+- native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구를 `ResolvedGasRelease`로 수용하고 한 LH2-service pipe LOC를 시설 campaign에서 실제 실행했다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 194개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, 문헌 빈도 분위수 재가중 검사, 과거 실제 외부 모델 실행 기록. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 194개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, equipment-resolved pipe campaign 2건, 문헌 빈도 분위수 재가중 검사, 과거 실제 외부 모델 실행 기록. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 
 ## 단계별 작업과 통과 기준
 
