@@ -30,11 +30,16 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def _facility(component_id: str, position: tuple[float, float, float], phase: str) -> Facility:
+def _facility(
+    component_id: str,
+    position: tuple[float, float, float],
+    phase: str,
+    fluid: str,
+) -> Facility:
     basis = {
-        "fluid": "ParaHydrogen",
+        "fluid": fluid,
         "backend": "CoolProp-HEOS",
-        "energy_reference": "CoolProp-HEOS:ParaHydrogen:native",
+        "energy_reference": f"CoolProp-HEOS:{fluid}:native",
     }
     raw = {
         "id": "lh2dt-prism-packet-chain-diagnostic",
@@ -83,17 +88,30 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
     defaults["frequency_event"] = None
     defaults["initiation_intensity_per_s"] = None
     if isinstance(release, ResolvedLiquidRelease):
+        # Small provider diagnostic packets can evaporate below the native
+        # pool dry-depth threshold before a finite wet cell is formed.  Use a
+        # declared sensitivity footprint for that diagnostic only; the
+        # footprint is never inferred for a facility assessment.
+        pool_radius = 0.005 if release.integrated_mass_kg < 0.1 else 0.05
+        if release.property_basis.fluid == "ParaHydrogen":
+            pool_fluid = "Hydrogen"
+            pool_translation = "para_hydrogen_to_hydrogen"
+            pool_provenance = "explicit provider ParaHydrogen to native DynamicLH2PoolX Hydrogen compatibility boundary; synthetic diagnostic"
+        else:
+            pool_fluid = release.property_basis.fluid
+            pool_translation = "none"
+            pool_provenance = None
         defaults["pool"] = {
             "footprint_origin": "declared_sensitivity",
-            "fluid": "Hydrogen",
-            "fluid_translation": "para_hydrogen_to_hydrogen",
-            "translation_provenance": "explicit provider ParaHydrogen to native DynamicLH2PoolX Hydrogen compatibility boundary; synthetic diagnostic",
-            "radius_m": 0.05,
+            "fluid": pool_fluid,
+            "fluid_translation": pool_translation,
+            "translation_provenance": pool_provenance,
+            "radius_m": pool_radius,
             "conductivity_w_mk": 0.6,
             "diffusivity_m2_s": 1.5e-7,
             "initial_temperature_k": release.ambient_temperature_k,
-            "domain_radius_m": 0.25,
-            "radial_step_m": 0.0025,
+            "domain_radius_m": max(0.25, 5.0 * pool_radius),
+            "radial_step_m": pool_radius / 20.0,
             "maximum_time_step_s": 0.01,
         }
     defaults["release_termination"] = {
@@ -123,6 +141,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
         release.component_id,
         tuple(release.position_enu_m),
         "two_phase" if isinstance(release, ResolvedLiquidRelease) else "vapour",
+        release.property_basis.fluid,
     )
     pipeline = ResearchPipeline(facility, IsolatedBackend(config))
     result = pipeline.consequences(request)
@@ -131,6 +150,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
         "status": result_data.get("status"),
         "source_operator": request.source_operator,
         "provider_packet_schema": release.provider_export_schema,
+        "provider_model_provenance": release.upstream_service_provenance,
         "boundary_kind": release.boundary_kind,
         "provider_duration_s": release.duration_s,
         "provider_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,
@@ -142,7 +162,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
         "limitations": [
             "synthetic facility, receptors, weather and ignition context",
             "no initiating frequency was applied",
-            "single HomogeneousTank+Valve diagnostic packet only",
+            "single external-provider diagnostic packet only; provider model is not site-calibrated",
         ],
     }
     _save(output_dir / "request.json", request.model_dump(mode="json"))

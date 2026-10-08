@@ -74,6 +74,19 @@ def test_adapter_promotes_history_without_extending_it():
     assert release.termination_provenance == "provider positive-mass threshold"
 
 
+def test_gas_adapter_preserves_explicit_hydrogen_property_basis():
+    response = _response()
+    response["data"]["fluid"] = "Hydrogen"
+    response["data"]["property_basis"] = {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native",
+    }
+    release = _build(response)
+    assert release.property_basis.fluid == "Hydrogen"
+    assert release.property_basis.energy_reference == "CoolProp-HEOS:Hydrogen:native"
+
+
 def test_adapter_preserves_and_normalizes_provider_termination_basis():
     response = _response()
     response["data"]["termination_basis"] = "isolation_success"
@@ -177,6 +190,19 @@ def test_liquid_adapter_promotes_partition_and_mass_ledger():
     assert release.phase_basis == "two_phase"
     assert release.integrated_mass_kg == pytest.approx(0.04)
     assert release.integrated_specific_enthalpy_out_j == pytest.approx(40000.0)
+
+
+def test_liquid_adapter_preserves_explicit_hydrogen_property_basis():
+    response = _liquid_response()
+    response["data"]["fluid"] = "Hydrogen"
+    response["data"]["property_basis"] = {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native",
+    }
+    release = _build_liquid(response)
+    assert release.property_basis.fluid == "Hydrogen"
+    assert release.property_basis.energy_reference == "CoolProp-HEOS:Hydrogen:native"
 
 
 def test_liquid_adapter_rejects_airborne_liquid_without_adapter():

@@ -108,6 +108,37 @@ def _termination_basis(value: Any, field: str) -> ProviderTerminationBasis | Non
     return normalized  # type: ignore[return-value]
 
 
+def _property_basis(data: Mapping[str, Any]) -> dict[str, str]:
+    """Resolve and validate the provider's native CoolProp basis."""
+
+    fluid = data.get("fluid", "ParaHydrogen")
+    if not isinstance(fluid, str) or fluid not in {"Hydrogen", "ParaHydrogen"}:
+        raise EquipmentReleaseExportError(
+            "provider data.fluid must be Hydrogen or ParaHydrogen"
+        )
+    declared = data.get("property_basis")
+    if declared is not None:
+        if not isinstance(declared, Mapping):
+            raise EquipmentReleaseExportError("provider data.property_basis must be an object")
+        if declared.get("fluid") != fluid:
+            raise EquipmentReleaseExportError(
+                "provider data.property_basis.fluid disagrees with provider data.fluid"
+            )
+        if declared.get("backend", "CoolProp-HEOS") != "CoolProp-HEOS":
+            raise EquipmentReleaseExportError(
+                "provider data.property_basis.backend must be CoolProp-HEOS"
+            )
+        if declared.get("energy_reference") != f"CoolProp-HEOS:{fluid}:native":
+            raise EquipmentReleaseExportError(
+                "provider data.property_basis.energy_reference must use the native fluid basis"
+            )
+    return {
+        "fluid": fluid,
+        "backend": "CoolProp-HEOS",
+        "energy_reference": f"CoolProp-HEOS:{fluid}:native",
+    }
+
+
 def build_resolved_gas_release_from_provider_response(
     provider_response: Mapping[str, Any],
     *,
@@ -186,6 +217,7 @@ def build_resolved_gas_release_from_provider_response(
     termination_basis = _termination_basis(
         data.get("termination_basis"), "provider data.termination_basis"
     )
+    property_basis = _property_basis(data)
     result_payload = provider_response if provider_result is None else provider_result
     result_digest = provider_result_digest or canonical_digest(result_payload)
     if not isinstance(result_digest, str) or len(result_digest) != 64:
@@ -197,11 +229,7 @@ def build_resolved_gas_release_from_provider_response(
         "event_id": _text(event_id, "event_id"),
         "event_kind": "accidental_leak",
         "enthalpy_convention": "static_exit_enthalpy",
-        "property_basis": {
-            "fluid": "ParaHydrogen",
-            "backend": "CoolProp-HEOS",
-            "energy_reference": "CoolProp-HEOS:ParaHydrogen:native",
-        },
+        "property_basis": property_basis,
         "upstream_service": "LH2",
         "upstream_service_provenance": _text(
             upstream_service_provenance, "upstream_service_provenance"
@@ -319,6 +347,7 @@ def build_resolved_liquid_release_from_provider_response(
     phase_basis = _text(data.get("phase_basis"), "provider data.phase_basis")
     upstream_service = _text(data.get("upstream_service"), "provider data.upstream_service")
     fluid = _text(data.get("fluid"), "provider data.fluid")
+    property_basis = _property_basis(data)
     reference_area = _positive(
         data.get("reference_area_m2"), "provider data.reference_area_m2"
     )
@@ -353,11 +382,7 @@ def build_resolved_liquid_release_from_provider_response(
         "boundary_kind": "resolved_atmospheric_liquid_exit",
         "phase_basis": phase_basis,
         "enthalpy_convention": "provider_total_outlet_enthalpy",
-        "property_basis": {
-            "fluid": fluid,
-            "backend": "CoolProp-HEOS",
-            "energy_reference": f"CoolProp-HEOS:{fluid}:native",
-        },
+        "property_basis": property_basis,
         "provider_source_digest": _text(provider_source_digest, "provider_source_digest"),
         "provider_result_digest": result_digest,
         "provider_boundary_reference": _text(

@@ -94,6 +94,26 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 같은 합성 입력에 `--release-kind gas`를 주면 대기 출구 품질이 실제 증기인지 먼저 확인한다. 현재 입력은 포화 2상 상태이므로 기체 packet을 만들지 않고 즉시 실패하며, 이를 액체/2상 packet으로 계산하려면 `--release-kind liquid`를 사용한다.
 
+## PRISM 측 LayeredTank 진단 adapter (2026-10-12)
+
+외부 `lh2dt_models` 클래스 자체에 `export_accident_history()`가 추가된 것은 아니다. 대신 PRISM 저장소의 `scripts/export_lh2dt_layered_tank_prism_packet.py`가 `LayeredTankNetworkSimulator+CommandedValve`를 명시적인 합성 failed-opening 요청으로 호출하고, provider가 계산한 양수 재고 threshold 이력을 strict 계약으로 감싼다. 이 경계는 외부 클래스의 정상 snapshot이나 `simulate()` 결과를 사고 packet으로 자동 승격하는 일반 fallback이 아니다. 스크립트 안의 adapter가 사고 포트·개구·관찰시계·종료 소유권을 고정한 뒤 `_run_provider()`의 상태·유량·누적 질량·누적 엔탈피 장부를 검사한다.
+
+이번 진단 명령은 다음과 같다.
+
+```powershell
+.venv\Scripts\python.exe scripts/export_lh2dt_layered_tank_prism_packet.py `
+  --lh2dt-root "C:\path\to\lh2dt_models" `
+  --output-dir results/20261012/layered_tank_prism_packet5 `
+  --time-step-s 0.5 --target-release-kg 0.01 --full-open-area-m2 1e-6
+.venv\Scripts\python.exe scripts/validate_lh2dt_prism_packet_chain.py `
+  --packet results/20261012/layered_tank_prism_packet5/resolved_release.json `
+  --output-dir results/20261012/layered_tank_prism_chain5
+```
+
+실행 결과는 8.0 s, 16개 provider interval, 질량 잔차 `1.73e-18 kg`, 누적 에너지 잔차 `0 J`였다. packet은 `fluid=Hydrogen`, `phase_basis=liquid`, `termination_basis=inventory_depletion`을 명시하고 `provider_packet_promoted=false`를 유지한다. 이어지는 chain은 `DynamicLH2PoolX → SLABx-LH2/SLABx → cloud → ignition → fire/explosion → TNO damage`까지 `END_TO_END_DIAGNOSTIC_EXECUTED`로 실행되었다. 작은 합성 packet이 native pool의 wet-cell 조건을 갖도록 `radius_m=0.005`의 **선언된 sensitivity footprint**를 사용했으며, 실제 설비 바닥 면적을 추정하거나 누출 면적을 보정한 값이 아니다.
+
+이 adapter가 제공하지 않는 flash gas, airborne liquid, 현장 개구·차단 신뢰도·실제 재고 입력은 미계산으로 남는다. 따라서 이 결과는 provider 구조와 PRISM chain의 연결 증거이지 `qualified_actual`, 빈도 추론, 시설 IR/F-N 또는 독립 물리검증 결과가 아니다.
+
 ## provider 구현 예
 
 외부 모델이 다음 형태를 구현하면 PRISM 연결 함수를 호출할 수 있다.
@@ -124,4 +144,4 @@ provider는 실제 차단 명령, 검출 지연, 재고/에너지 장부, 종료
   --output results/20261011/equipment_accident_export_interface_audit.json
 ```
 
-현재 portable test suite는 새 계약 테스트를 포함해 362개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
+현재 portable test suite는 새 계약·물성 기준 테스트를 포함해 364개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
