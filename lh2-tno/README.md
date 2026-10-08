@@ -355,6 +355,14 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 
 이 명령은 provider transient 성공·실패 이력을 각각 계산한 뒤 두 기상 조건의 시설 사례에 전달합니다. 실행시간은 PC·격자·시계에 따라 달라지며, 결과의 `verification.json`과 `campaign_result.json`을 함께 확인합니다.
 
+600초 전량방출의 연결 진단은 다음 명령으로 재현합니다.
+
+```powershell
+.venv\Scripts\python.exe lh2-tno/scripts/validate_long_horizon_inventory.py --allow-pin-refresh
+```
+
+이 진단은 합성 10 m³ 탱크와 100000 W 벽면열을 사용해 600초 provider 이력을 만들고 전체 피해 체인을 실행합니다. 결과는 `EXECUTED_DIAGNOSTIC_ONLY`와 `facility_validation=WITHHELD`로 기록되며 실제 설비 QRA로 해석하지 않습니다.
+
 ### 양수 재고 기준으로 방출을 끝내는 경로
 
 `scripts/validate_equipment_inventory.py`는 외부 `lh2dt`의 `HomogeneousTank`와 `DynamicNetworkSimulator`를 한 provider 구간씩 실행합니다. 탱크 질량이 선언한 양수 `threshold_mass_kg` 이하가 되면 그 구간의 실제 유량·엔탈피를 저장하고 종료합니다. 0 kg 상태를 강제로 만들거나 마지막 유량을 40초까지 늘리지 않습니다.
