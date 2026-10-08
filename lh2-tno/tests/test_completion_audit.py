@@ -75,3 +75,26 @@ def test_completion_audit_reads_legacy_provider_inventory_alias_fail_closed():
         "release_inventory_status": "NO_ACCIDENT_RELEASE_EXPORT",
         "qualified_packet_count": 0,
     }
+
+
+def test_completion_audit_unwraps_campaign_uncertainty_ledger():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        {
+            "literature_frequency_uncertainty": {
+                "scenarios": [{"id": "known"}],
+                "facility_credible_interval": False,
+            }
+        },
+    )
+    uncertainty_check = next(
+        item for item in report["checks"] if item["name"] == "frequency_uncertainty_reported"
+    )
+    assert uncertainty_check["status"] == "BLOCKED"
+    assert uncertainty_check["evidence"] == {
+        "uncertainty_result_present": True,
+        "scenario_count": 1,
+        "facility_credible_interval": False,
+    }

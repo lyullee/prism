@@ -24,6 +24,27 @@ def _check(name: str, passed: bool, evidence: Any, blocking_reason: str) -> dict
     }
 
 
+def _normalise_uncertainty_result(
+    uncertainty_result: Mapping[str, Any] | None,
+) -> Mapping[str, Any] | None:
+    """Accept either the standalone uncertainty ledger or a campaign wrapper.
+
+    The CLI may receive the complete campaign JSON, where the uncertainty
+    ledger lives under ``literature_frequency_uncertainty``.  Treating that
+    wrapper as an empty uncertainty report would hide existing scenarios in
+    the IJHE audit.  This helper only unwraps an explicit mapping; it never
+    creates a scenario or promotes an incomplete facility interval.
+    """
+    if uncertainty_result is None:
+        return None
+    if isinstance(uncertainty_result.get("scenarios"), list):
+        return uncertainty_result
+    nested = uncertainty_result.get("literature_frequency_uncertainty")
+    if isinstance(nested, Mapping):
+        return nested
+    return uncertainty_result
+
+
 def build_ijhe_completion_audit(
     current_status: Mapping[str, Any],
     scope_matrix: Mapping[str, Any],
@@ -31,6 +52,7 @@ def build_ijhe_completion_audit(
     uncertainty_result: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
+    uncertainty = _normalise_uncertainty_result(uncertainty_result)
     # The status ledger historically used
     # ``external_provider_evidence_accident_release_promotion_status`` while
     # the newer release-inventory record uses
@@ -133,13 +155,13 @@ def build_ijhe_completion_audit(
         ),
         _check(
             "frequency_uncertainty_reported",
-            uncertainty_result is not None
-            and bool(uncertainty_result.get("scenarios"))
-            and uncertainty_result.get("facility_credible_interval") is True,
+            uncertainty is not None
+            and bool(uncertainty.get("scenarios"))
+            and uncertainty.get("facility_credible_interval") is True,
             {
-                "uncertainty_result_present": uncertainty_result is not None,
-                "scenario_count": len(uncertainty_result.get("scenarios", [])) if uncertainty_result else 0,
-                "facility_credible_interval": uncertainty_result.get("facility_credible_interval") if uncertainty_result else None,
+                "uncertainty_result_present": uncertainty is not None,
+                "scenario_count": len(uncertainty.get("scenarios", [])) if uncertainty else 0,
+                "facility_credible_interval": uncertainty.get("facility_credible_interval") if uncertainty else None,
             },
             "frequency uncertainty is available only for a known contribution, not the complete facility",
         ),
