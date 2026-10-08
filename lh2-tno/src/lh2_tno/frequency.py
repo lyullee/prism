@@ -186,8 +186,9 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
 def bind_event(request, event: FrequencyEvent):
     """Bind frequency to a matching tank-hole or resolved accident gas exit.
 
-    Never approximate instantaneous inventory/600 s/full-bore two-sided rupture
-    by the current short tank-nozzle diagnostic worker.
+    Never approximate 600 s/full-bore two-sided rupture by the current short
+    tank-nozzle diagnostic worker. Instantaneous inventory is accepted only
+    when the explicit inventory liquid-jet operator is selected.
     """
     from .consequences import ConsequenceRequest
     if request.component_id != event.model_component_id:
