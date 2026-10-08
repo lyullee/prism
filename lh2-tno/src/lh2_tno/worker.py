@@ -31,6 +31,23 @@ def run(request):
     if operation=="consequence_chain":
         from chain_worker import run_chain
         return run_chain(p,roots,module)
+    if operation=='facility_risk_aggregate':
+        m=module('risk',roots['tno'])
+        ids=p['receptor_ids']; atoms=p['atoms']
+        ir={rid:[] for rid in ids}; curves=[]
+        for index in range(2):
+            for rid in ids:
+                contributions=[m.RiskContribution(loc_id=a['event_id'],weather_class=a['annual_condition_id'],
+                    sector_deg=(0.,360.),ignition_event=a['ignition_branch'],pm_pphi=a['conditional_weight'],
+                    p_ignition=1.,p_death=a['receptor_harm_low_high'][rid][index],
+                    frequency_per_year=a['initiating_frequency_per_year'],route=m.PdRoute.FLAMMABLE) for a in atoms]
+                ir[rid].append(m.total_individual_risk(contributions))
+            outcomes=[m.SocietalOutcome(frequency_per_year=a['initiating_frequency_per_year']*a['conditional_weight'],
+                n_deaths=a['expected_deaths_low_high'][index]) for a in atoms]
+            ns,fs=m.fn_curve(outcomes)
+            curves.append({'expected_deaths':ns.tolist(),'cumulative_frequency_per_year':fs.tolist()})
+        return {'data':{'ir_low_high':ir,'fn_low_high':curves},
+            'limitation':'Native legacy risk.total_individual_risk and risk.fn_curve; expected-death convention; external physics/coverage must be checked separately.'}
     if operation=="integrated_source":
         m=module("slabx_lh2.integrated_lh2_source",roots["slabx_lh2"])
         duration=p["duration_s"]; dt=p["time_step_s"]

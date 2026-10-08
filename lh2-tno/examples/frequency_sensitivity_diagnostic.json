@@ -1,0 +1,5 @@
+[
+  {"id":"diagnostic-factor-0.1","asset_multipliers":{"shell":0.1},"provenance":"synthetic deterministic factor, not literature confidence bounds or calibrated prior"},
+  {"id":"baseline","asset_multipliers":{"shell":1.0},"provenance":"unchanged literature baseline, no field-frequency calibration"},
+  {"id":"diagnostic-factor-10","asset_multipliers":{"shell":10.0},"provenance":"synthetic deterministic factor, not literature confidence bounds or calibrated prior"}
+]

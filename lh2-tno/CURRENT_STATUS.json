@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 154,
+  "unit_contract_conservation_tests_passed": 181,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -124,5 +124,22 @@
   "github_release_url": "https://github.com/lyullee/prism/releases/tag/v0.6.0",
   "release_git_commit": "49abcd36b5314a45a3013f559a68bc53a6f6c090",
   "publication_workflow_run": "https://github.com/lyullee/prism/actions/runs/37795878407",
-  "publication_record": "docs/PRISM_v060_PyPI_DOI_배포완료_20261008.md"
+  "publication_record": "docs/PRISM_v060_PyPI_DOI_배포완료_20261008.md",
+  "development_date_kst": "2026-10-09",
+  "development_since_public_release": "post-0.6.0 campaign/sensitivity step1; unpublished",
+  "ijhe_completion_goal_status": "active",
+  "ijhe_completion_goal_record": "docs/PRISM_IJHE_완성목표_20261009.md",
+  "multi_event_weather_barrier_campaign_implemented": true,
+  "legacy_tno_ir_fn_aggregator_connected_to_lh2_campaign": true,
+  "campaign_actual_fresh_physics_cases_passed": 4,
+  "campaign_actual_scope": "one tank-hole; two aligned wind speeds; two steady upstream synthetic durations",
+  "campaign_uncomputed_g1_g2_cases": 4,
+  "campaign_total_facility_risk_withheld": true,
+  "campaign_failure_ledger_implemented": true,
+  "deterministic_frequency_sensitivity_implemented": true,
+  "statistical_frequency_uncertainty_complete": false,
+  "campaign_record": "docs/PRISM_시설위험_실행기_개발기록_20261009.md",
+  "campaign_results": "results/20261009/campaign_step1",
+  "identified_crosswind_case_deadline_s": 180.0,
+  "identified_transient_source_early_stop_remains_unqualified": true
 }

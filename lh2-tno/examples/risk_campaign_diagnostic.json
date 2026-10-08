@@ -1,0 +1,390 @@
+{
+  "id": "outdoor-campaign-step1",
+  "frequency_plan": {
+    "id": "campaign-diagnostic",
+    "assets": [
+      {
+        "id": "shell",
+        "model_component_id": "storage",
+        "profile": "TNO_PRESSURE_VESSEL",
+        "classification_basis": "synthetic pressurised 0.2 m3 tank; not a universal LH2 storage classification",
+        "physical_scope_ids": [
+          "synthetic-tank-shell"
+        ],
+        "count": 1,
+        "nominal_diameter_m": null,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": false,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      }
+    ],
+    "excluded_model_components": {
+      "isolation": "process model and accident release route not yet qualified in this diagnostic",
+      "transfer": "process model and accident release route not yet qualified in this diagnostic",
+      "terminal": "process model and accident release route not yet qualified in this diagnostic"
+    }
+  },
+  "annual_conditions": [
+    {
+      "id": "D-3ms-west",
+      "annual_probability": 0.4,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        }
+      ],
+      "provenance": "synthetic joint annual wind/population partition; no site weather qualification"
+    },
+    {
+      "id": "D-4ms-west",
+      "annual_probability": 0.6,
+      "weather": {
+        "wind_speed_m_s": 4.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups at representative receptors; not field population"
+        }
+      ],
+      "provenance": "synthetic joint annual wind/population partition; no site weather qualification"
+    }
+  ],
+  "event_routes": [
+    {
+      "event_id": "campaign-diagnostic/shell/G1",
+      "branches": [
+        {
+          "id": "pending-operator",
+          "probability_given_event": 1.0,
+          "provenance": "explicitly uncomputed LOC",
+          "request": null,
+          "uncomputed_reason": "instantaneous inventory release requires a reviewed inventory-to-cloud operator"
+        }
+      ]
+    },
+    {
+      "event_id": "campaign-diagnostic/shell/G2",
+      "branches": [
+        {
+          "id": "pending-operator",
+          "probability_given_event": 1.0,
+          "provenance": "explicitly uncomputed LOC",
+          "request": null,
+          "uncomputed_reason": "600 s inventory release exceeds current consequence horizon and needs a dedicated inventory/long-horizon path"
+        }
+      ]
+    },
+    {
+      "event_id": "campaign-diagnostic/shell/G3",
+      "branches": [
+        {
+          "id": "short-pulse",
+          "probability_given_event": 0.8,
+          "provenance": "synthetic barrier-branch partition only; not a recommended protection reliability",
+          "request": {
+            "component_id": "storage",
+            "source_input": {
+              "tank": {
+                "pressure_pa": 600000.0,
+                "temperature_k": 20.893,
+                "volume_m3": 0.2,
+                "vapour_quality": 0.0,
+                "wall_heat_input_w": 0.0,
+                "fluid": "Hydrogen"
+              },
+              "pipe_sections": [],
+              "nozzle": {
+                "diameter_m": 0.01,
+                "length_m": 0.01,
+                "height_m": 0.05,
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "discharge_coefficient": 1.0,
+                "resistance_k": 0.0
+              },
+              "ambient": {
+                "pressure_pa": 101325.0,
+                "temperature_k": 288.15,
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0
+              },
+              "choices": {
+                "phase_model": "HEM",
+                "hnem_eta": null,
+                "fictitious_nozzle": "momentum_adiabatic",
+                "droplet_correlation": "rescigno_yellow_book",
+                "rescigno_quality_path": "printed_equation",
+                "distribution": "single_smd"
+              },
+              "duration_s": 0.2,
+              "time_step_s": 0.2
+            },
+            "resolved_release": null,
+            "available_mass_kg": 10.0,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              0.05
+            ],
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.3,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "synthetic_diagnostic_horizon",
+              "time_s": 0.2,
+              "provenance": "synthetic steady upstream hold and branch horizon; tank feedback is not solved, not a validated isolation success/failure duration"
+            },
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        },
+        {
+          "id": "longer-pulse",
+          "probability_given_event": 0.2,
+          "provenance": "synthetic barrier-branch partition only; not a recommended protection reliability",
+          "request": {
+            "component_id": "storage",
+            "source_input": {
+              "tank": {
+                "pressure_pa": 600000.0,
+                "temperature_k": 20.893,
+                "volume_m3": 0.2,
+                "vapour_quality": 0.0,
+                "wall_heat_input_w": 0.0,
+                "fluid": "Hydrogen"
+              },
+              "pipe_sections": [],
+              "nozzle": {
+                "diameter_m": 0.01,
+                "length_m": 0.01,
+                "height_m": 0.05,
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "discharge_coefficient": 1.0,
+                "resistance_k": 0.0
+              },
+              "ambient": {
+                "pressure_pa": 101325.0,
+                "temperature_k": 288.15,
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0
+              },
+              "choices": {
+                "phase_model": "HEM",
+                "hnem_eta": null,
+                "fictitious_nozzle": "momentum_adiabatic",
+                "droplet_correlation": "rescigno_yellow_book",
+                "rescigno_quality_path": "printed_equation",
+                "distribution": "single_smd"
+              },
+              "duration_s": 0.4,
+              "time_step_s": 0.4
+            },
+            "resolved_release": null,
+            "available_mass_kg": 10.0,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              0.05
+            ],
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.3,
+              0.4,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "synthetic_diagnostic_horizon",
+              "time_s": 0.4,
+              "provenance": "synthetic steady upstream hold and branch horizon; tank feedback is not solved, not a validated isolation success/failure duration"
+            },
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    }
+  ],
+  "scope_provenance": "synthetic fresh-physics campaign of one tank hole under two aligned wind speeds and two steady upstream-held durations; all other coverage withheld",
+  "maximum_physics_cases": 200
+}

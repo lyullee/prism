@@ -16,9 +16,41 @@ def main(argv=None):
     p.add_argument('--consequences',type=Path,help='Source-to-harm request JSON')
     p.add_argument('--frequency-plan',type=Path,help='Reviewed physical inventory/frequency profiles JSON')
     p.add_argument('--event-id',help='Bind exactly one generated event to the matching consequence request')
+    p.add_argument('--risk-campaign',type=Path,help='Declared LOC/weather/barrier/population campaign JSON')
+    p.add_argument('--frequency-sensitivity',type=Path,help='Explicit asset multiplier scenarios for a risk campaign')
     p.add_argument('--output',type=Path,help='Save complete result JSON')
     args=p.parse_args(argv)
     facility=Facility.model_validate_json(args.facility.read_text(encoding="utf-8"))
+    if args.frequency_sensitivity and not args.risk_campaign:
+        p.error('--frequency-sensitivity requires --risk-campaign')
+    if args.risk_campaign:
+        if args.consequences or args.frequency_plan or args.event_id:
+            p.error('--risk-campaign owns frequency plan and cases; cannot mix single-event options')
+        if not args.backend:
+            p.error('--backend is required with --risk-campaign')
+        from .campaign import RiskCampaign
+        campaign=RiskCampaign.model_validate_json(args.risk_campaign.read_text(encoding='utf-8'))
+        sensitivities=None
+        if args.frequency_sensitivity:
+            from .sensitivity import FrequencySensitivity, frequency_sensitivity
+            rows=json.loads(args.frequency_sensitivity.read_text(encoding='utf-8'))
+            if not isinstance(rows,list):
+                p.error('--frequency-sensitivity must contain an array of explicit scenarios')
+            sensitivities=tuple(FrequencySensitivity.model_validate_json(json.dumps(r,allow_nan=False)) for r in rows)
+        backend=IsolatedBackend(BackendConfig.model_validate_json(args.backend.read_text(encoding='utf-8')))
+        result=ResearchPipeline(facility,backend).facility_risk(campaign)
+        if sensitivities is not None:
+            result['frequency_sensitivity']=frequency_sensitivity(result,sensitivities)
+        result['execution_mode']='lh2'
+        encoded=json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)
+        if args.output:
+            args.output.parent.mkdir(parents=True,exist_ok=True)
+            args.output.write_text(encoded,encoding='utf-8')
+            print(json.dumps({'status':result['status'],'output':str(args.output.resolve()),
+                'uncomputed_cases':len(result['uncomputed_cases']), 'total_facility_annual_risk_available':result['total_facility_annual_ir_low_high'] is not None},ensure_ascii=False))
+        else:
+            print(encoded)
+        return
     events = None
     if args.frequency_plan:
         plan = FrequencyPlan.model_validate_json(args.frequency_plan.read_text(encoding='utf-8'))

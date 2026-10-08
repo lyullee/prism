@@ -30,6 +30,10 @@ class ResearchPipeline:
         from .frequency import generate_events
         return generate_events(self.facility, plan)
 
+    def facility_risk(self, campaign):
+        from .campaign import evaluate_campaign
+        return evaluate_campaign(self, campaign)
+
     def consequences_for_event(self, plan, event_id, template):
         from .frequency import bind_event
         events = {x.id: x for x in self.frequency_events(plan)}
