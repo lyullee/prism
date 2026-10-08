@@ -120,6 +120,12 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 이 packet은 `synthetic_diagnostic_horizon`으로 끝나며 pipe 재고를 전량 소진했다고 주장하지 않는다. `validate_lh2dt_prism_packet_chain.py`는 declared sensitivity pool radius `0.0001 m`를 사용해 같은 packet을 DynamicLH2PoolX, SLABx-LH2/SLABx, cloud, 점화, 화재·폭발, TNO 피해까지 실행했다. 작은 packet에서 이 footprint는 wet-cell 수치 조건을 위한 명시값이며 실제 배수면적·누출면적 추정이 아니다. 결과는 여전히 `provider_packet_promoted=false`, 빈도·시설 IR/F-N·독립 물리검증 보류다.
 
+## PRISM 측 VentStack 진단 adapter (2026-10-12)
+
+`scripts/export_lh2dt_vent_stack_prism_packet.py`는 외부 `VentStack.evaluate()`의 정상 two-port 함수를 사고 packet으로 재사용하지 않고, 명시적인 사고 포트·개구·0.5 s diagnostic horizon에서 별도 provider adapter로 호출한다. 저 Mach atmospheric gas plane을 만들기 위해 기본 upstream은 `102000 Pa`, `40 K`, stack bore는 `0.01 m`이며 provider의 유량·출구 상태를 10개 왼쪽 유지 구간과 `ResolvedGasRelease` 장부로 보존한다. 기본 packet 질량 잔차는 `0 kg`, 정적 엔탈피 잔차는 `0 J`다.
+
+steady 결과를 horizon 동안 반복한 것은 탱크 재고·PSV setpoint·현장 vent duty를 의미하지 않는다. `validate_lh2dt_prism_packet_chain.py`는 이 기체 packet을 gas vector transition, SLABx dispersion, cloud, ignition, fire/explosion 및 TNO damage까지 실행하지만 실제 빈도·facility IR/F-N·독립 검증은 계속 보류한다. upstream 압력을 크게 올려 underexpanded/high-Mach plane이 되면 PRISM low-Mach gate가 fail-closed로 거절한다.
+
 ## provider 구현 예
 
 외부 모델이 다음 형태를 구현하면 PRISM 연결 함수를 호출할 수 있다.

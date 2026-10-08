@@ -633,5 +633,19 @@
   "external_lh2dt_dynamic_pipe_prism_packet_export_frequency_inference": false,
   "external_lh2dt_dynamic_pipe_prism_packet_export_facility_qra_claim": false,
   "external_lh2dt_dynamic_pipe_prism_packet_export_pool_footprint_policy": "declared sensitivity radius 0.0001 m only for tiny synthetic packet; never inferred as facility geometry",
-  "external_lh2dt_dynamic_pipe_prism_packet_export_test_status": "external smoke and full consequence chain executed; full portable suite 364 passed"
+  "external_lh2dt_dynamic_pipe_prism_packet_export_test_status": "external smoke and full consequence chain executed; full portable suite 364 passed",
+  "external_lh2dt_vent_stack_prism_packet_export_implemented": true,
+  "external_lh2dt_vent_stack_prism_packet_export_status": "EXECUTED_OPERATOR_LIMITED; synthetic VentStack steady gas packet and full PRISM consequence chain",
+  "external_lh2dt_vent_stack_prism_packet_export_script": "scripts/export_lh2dt_vent_stack_prism_packet.py",
+  "external_lh2dt_vent_stack_prism_packet_export_record": "results/20261012/vent_stack_prism_packet_default_smoke",
+  "external_lh2dt_vent_stack_prism_packet_export_chain_record": "results/20261012/vent_stack_prism_chain_default_smoke",
+  "external_lh2dt_vent_stack_prism_packet_export_duration_s": 0.5,
+  "external_lh2dt_vent_stack_prism_packet_export_interval_count": 10,
+  "external_lh2dt_vent_stack_prism_packet_export_mass_residual_kg": 0.0,
+  "external_lh2dt_vent_stack_prism_packet_export_energy_residual_j": 0.0,
+  "external_lh2dt_vent_stack_prism_packet_export_provider_packet_promoted": false,
+  "external_lh2dt_vent_stack_prism_packet_export_physical_validation_claim": false,
+  "external_lh2dt_vent_stack_prism_packet_export_frequency_inference": false,
+  "external_lh2dt_vent_stack_prism_packet_export_facility_qra_claim": false,
+  "external_lh2dt_vent_stack_prism_packet_export_test_status": "external smoke and full consequence chain executed; full portable suite 364 passed"
 }

@@ -73,6 +73,12 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 
 현재 실제 합성 provider 경로의 판정은 `INCOMPLETE_EVIDENCE`다. 설비 모델은 `STATE_ONLY_BOUND`이고 사고 release export 0개이며, 실제 provider 사고 packet 부재, 사고 가족 미완결, 시설 IR/F-N 보류, 독립 전체 체인 물리검증 부재, 완전 시설 빈도 credible interval 부재가 차단 이유로 남는다. 이 감사기가 `READY_FOR_IJHE_SCOPE`를 내기 전에는 논문에서 전체 시설 QRA 완성으로 표현하지 않는다.
 
+## 2026-10-12 VentStack 방출 경계 추가
+
+외부 `VentStack.evaluate()`를 별도 사고 adapter로 호출하고, steady two-port 결과를 0.5 s·10 interval의 synthetic diagnostic gas history로 변환했다. 기본 102 kPa upstream·0.01 m bore에서 strict `ResolvedGasRelease` 질량 잔차 `0 kg`, 엔탈피 잔차 `0 J`를 얻었고, low-Mach gas packet을 최종 피해 chain까지 실행했다.
+
+이 경계는 tank/PSV inventory, relief setpoint, field vent frequency를 제공하지 않는다. upstream 압력·bore가 커지면 compressible/underexpanded plane이 되어 현재 low-Mach scope gate에서 차단되며, 별도 compressible adapter 없이는 승격하지 않는다.
+
 ## 2026-10-12 DynamicHEMPipe 방출 경계 추가
 
 외부 `DynamicHEMPipe`를 명시적 full-bore atmospheric outlet로 실행하는 PRISM 측 adapter를 추가했다. 유한체적 pipe 상태가 반환한 유량·엔탈피를 10개 왼쪽 유지 interval로 보존하고, `prism.resolved_release.v1` 액체/2상 packet의 질량·에너지 장부를 다시 적분했다. `0.001 s` 진단에서 질량 잔차는 `0 kg`, 에너지 잔차는 약 `-5.42e-20 J`였다.
