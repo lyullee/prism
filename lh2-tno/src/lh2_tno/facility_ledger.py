@@ -255,7 +255,17 @@ def merge_facility_campaign_results(
             if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
                 raise FacilityLedgerError(f"campaign {campaign_id} has an invalid {key} list")
             target = merged_cases if key == "cases" else merged_missing
-            target.extend(dict(row) for row in rows if isinstance(row, Mapping))
+            for row_index, row in enumerate(rows):
+                if not isinstance(row, Mapping):
+                    raise FacilityLedgerError(
+                        f"campaign {campaign_id} {key}[{row_index}] must be an object"
+                    )
+                row_event_id = row.get("event_id")
+                if not row_event_id or str(row_event_id) not in local_event_ids:
+                    raise FacilityLedgerError(
+                        f"campaign {campaign_id} {key}[{row_index}] references an unknown event"
+                    )
+                target.append(dict(row))
         accounted_case_event_ids = {
             str(row.get("event_id"))
             for row in result.get("cases", [])

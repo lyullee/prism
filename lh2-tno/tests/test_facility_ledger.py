@@ -169,6 +169,24 @@ def test_facility_ledger_withholds_total_when_event_case_accounting_is_missing()
     assert any("events lack case or uncomputed-case accounting" in reason for reason in merged["blocking_reasons"])
 
 
+def test_facility_ledger_rejects_malformed_case_accounting_rows():
+    result = _result(
+        event_id="event-case", asset_id="asset-case", component_id="tank-01",
+        frequency=1e-3,
+    )
+    result["cases"] = [None]
+    with pytest.raises(FacilityLedgerError, match=r"cases\[0\] must be an object"):
+        merge_facility_campaign_results([result], expected_component_ids=("tank-01",))
+
+    result = _result(
+        event_id="event-case", asset_id="asset-case", component_id="tank-01",
+        frequency=1e-3,
+    )
+    result["uncomputed_cases"] = [{"event_id": "event-not-generated", "status": "UNCOMPUTED"}]
+    with pytest.raises(FacilityLedgerError, match=r"uncomputed_cases\[0\] references an unknown event"):
+        merge_facility_campaign_results([result], expected_component_ids=("tank-01",))
+
+
 def test_facility_ledger_can_feed_frequency_uncertainty_without_physics_rerun():
     result = merge_facility_campaign_results(
         [_result(
