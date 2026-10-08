@@ -523,3 +523,33 @@ def test_layered_tank_network_boundary_reversed_link_keeps_outward_sign():
     )
     assert audit.observations[0].signed_mass_flow_kg_s == pytest.approx(0.2)
     assert audit.observations[0].outward_mass_flow_kg_s == pytest.approx(0.2)
+
+
+def test_layered_tank_atmospheric_pressure_still_requires_provider_partition():
+    from types import SimpleNamespace
+
+    flow = SimpleNamespace(
+        left='liquid_port', right='atmospheric_sink', mass_flow_kg_s=0.0013,
+        transmitted_specific_enthalpy_J_kg=27562.7,
+        source_port_id='TANK:L0', target_port_id='ATMOSPHERE:IN',
+    )
+    states = {
+        'liquid_port': SimpleNamespace(pressure_Pa=204994.0, phase='liquid'),
+        'atmospheric_sink': SimpleNamespace(pressure_Pa=101325.0, phase='liquid'),
+    }
+    result = SimpleNamespace(
+        time_s=0.1, tank=None,
+        network_solution=SimpleNamespace(
+            link_flows={'liquid_out': flow}, node_states=states,
+        ),
+    )
+    audit = audit_layered_liquid_boundary(
+        [result], component_id='tank', source_node='liquid_port',
+        target_node='atmospheric_sink', source_phase='liquid',
+        ambient_pressure_pa=101325.0, link_name='liquid_out',
+    )
+    assert audit.atmospheric_boundary
+    assert not audit.ready_for_resolved_liquid_release
+    assert not audit.phase_partition_available
+    assert not audit.exit_geometry_available
+    assert not audit.termination_available

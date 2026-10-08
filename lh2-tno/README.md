@@ -487,7 +487,7 @@ F-N에는 인구 분포와 같은 사건의 피해자수 정의도 필요합니�
 
 현재 외부 snapshot의 `dynamic_validation_protocol.json` 선언 해시가 evidence JSON과 달라 상태를 `DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT`로 기록했습니다. 엄격 검증은 중단하고, 감사 모드만 지표와 불일치 파일을 보존합니다. 이 구성요소 증거는 설비 방출·대기 확산·점화·IR/F-N 전체 체인의 물리 검증이나 현장 절대위험 검증을 의미하지 않습니다.
 
-공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 미배포 개발 소스는 LayeredTank 경계 감사 계약 검사를 포함해 **220개**를 통과합니다. 별도 실행 진단은 steady 설비 경계와 5개 transient LH2 pipe LOC의 성공·실패 분기 20건, 다섯 area-bin 양수 재고 종료 경로의 두 기상 조건 10건을 시설 campaign까지 통과시켰습니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
+공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 미배포 개발 소스는 LayeredTank 경계 감사 계약 검사를 포함해 **221개**를 통과합니다. 별도 실행 진단은 steady 설비 경계와 5개 transient LH2 pipe LOC의 성공·실패 분기 20건, 다섯 area-bin 양수 재고 종료 경로의 두 기상 조건 10건을 시설 campaign까지 통과시켰습니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
 GitHub Actions에서 portable 검사와 wheel catalogue/명령 포함을 확인합니다.
 새 안내의 도움말·시설·빈도 예제도 깨끗한 소스 export에서 확인합니다.
 `validate_*.py`는 개발 PC 경로와 이전 결과를 참조할 수 있어 클론 직후의 일반 사용 명령이 아닙니다.
