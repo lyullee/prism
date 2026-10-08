@@ -6,6 +6,8 @@ import shutil
 import xml.etree.ElementTree as ET
 import sys
 ROOT=Path(__file__).resolve().parents[1]
+if json.loads((ROOT/'CURRENT_STATUS.json').read_text(encoding='utf-8'))['package_version']!='0.4.0':
+    raise RuntimeError('Historical v0.4.0 record: use the current version record script instead.')
 sys.path.insert(0,str(ROOT/'src'))
 from lh2_tno.backend import tree_digest
 OUT=ROOT/'results/20261008/equipment_coupling_v040'

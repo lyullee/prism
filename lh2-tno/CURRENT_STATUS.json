@@ -1,6 +1,6 @@
 {
   "date_kst": "2026-10-08",
-  "package_version": "0.4.0",
+  "package_version": "0.5.0",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
   "legacy_tno_lh2_frequency_entries": 6,
@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 136,
+  "unit_contract_conservation_tests_passed": 154,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -78,7 +78,7 @@
   "github_repository_private": true,
   "github_main_baseline": "v0.3.0",
   "github_development_branch": "codex/tno-lh2-development",
-  "module_structure": "separate integration package/add-on to legacy TNO and external LH2 providers",
+  "module_structure": "single TNO launcher with standard default and optional LH2 mode; internal providers remain separate",
   "equipment_resolved_atmospheric_gas_source_supported": true,
   "equipment_PH_to_gas_exit_checked": true,
   "equipment_flow_recalculation_in_resolved_path": false,
@@ -88,5 +88,16 @@
   "equipment_upstream_service_frequency_compatibility_checked": true,
   "actual_equipment_coupling_scope": "Native VentStack/SteadyNetwork: two prescribed synthetic steady PH states, 0.37 s closure, horizontal atmospheric gas exit Mach<=0.3; no tank feedback or field calibration.",
   "equipment_coupling_record": "docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md",
-  "equipment_coupling_results": "results/20261008/equipment_coupling_v040"
+  "equipment_coupling_results": "results/20261008/equipment_coupling_v040",
+  "unified_tno_mode_launcher_implemented": true,
+  "default_execution_mode": "standard",
+  "optional_execution_modes": [
+    "lh2"
+  ],
+  "automatic_mode_fallback": false,
+  "original_tno_source_modified_for_mode_selection": false,
+  "standard_mode_actual_legacy_qra_executed": true,
+  "lh2_mode_actual_consequence_execution": true,
+  "mode_record": "docs/TNO_LH2_v050_옵셔널모드_개발기록_20261008.md",
+  "mode_results": "results/20261008/mode_v050"
 }

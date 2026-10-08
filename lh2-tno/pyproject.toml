@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lh2-tno"
-version = "0.4.0"
+version = "0.5.0"
 description = "Generic LH2 facility contracts and auditable research model orchestration"
 requires-python = ">=3.12"
 dependencies = ["pydantic>=2.10,<3"]
@@ -14,6 +14,10 @@ test = ["pytest>=8", "numpy>=1.26,<3"]
 
 [project.scripts]
 lh2-tno = "lh2_tno.cli:main"
+tno = "tno_host:main"
+
+[tool.setuptools]
+py-modules = ["tno_host"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

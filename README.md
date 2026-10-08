@@ -28,3 +28,12 @@ does not certify complete facility QRA, field accident frequencies, or
 fresh physics calculations at 1 Hz. See
 [`CURRENT_STATUS.json`](lh2-tno/CURRENT_STATUS.json) and
 the [IJHE research protocol](lh2-tno/docs/IJHE_연구프로토콜.md).
+
+## Optional execution modes
+
+Use `python tno.py --mode standard --backend backend.json <qra arguments>`
+for the pinned original TNO engine, or `python tno.py --mode lh2 <facility.json>`
+for the LH2 extension. Standard is the default; modes never silently fall back.
+After installation, `tno --mode ...` provides the same launcher. Internal
+providers stay separated, and each mode retains its current input and physics
+limits. See [v0.5.0 mode record](lh2-tno/docs/TNO_LH2_v050_옵셔널모드_개발기록_20261008.md).

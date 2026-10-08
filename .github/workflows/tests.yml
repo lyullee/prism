@@ -23,4 +23,4 @@ jobs:
       - name: Verify frequency catalogue is shipped in the wheel
         run: |
           python -m pip wheel --no-deps --no-build-isolation ./lh2-tno -w wheelhouse
-          python -c "import glob,zipfile; z=zipfile.ZipFile(glob.glob('wheelhouse/lh2_tno-*.whl')[0]); assert 'lh2_tno/data/frequency_catalogue.json' in z.namelist()"
+          python -c "import glob,zipfile; z=zipfile.ZipFile(glob.glob('wheelhouse/lh2_tno-*.whl')[0]); assert 'lh2_tno/data/frequency_catalogue.json' in z.namelist(); assert 'tno_host.py' in z.namelist()"
