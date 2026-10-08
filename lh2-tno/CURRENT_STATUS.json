@@ -198,6 +198,8 @@
   "ijhe_completion_goal_status": "active",
   "ijhe_completion_goal_record": "docs/PRISM_IJHE_완성목표_20261009.md",
   "multi_event_weather_barrier_campaign_implemented": true,
+  "facility_component_coverage_report_implemented": true,
+  "facility_component_coverage_report_scope": "campaign coverage.by_component reports generated events, frequency, executed/uncomputed cases and explicit exclusions for each facility component",
   "legacy_tno_ir_fn_aggregator_connected_to_lh2_campaign": true,
   "campaign_actual_scope": "G1 finite-inventory liquid-jet operator-limited plus G3 tank-hole; two aligned wind speeds",
   "campaign_actual_fresh_physics_cases_passed": 6,
