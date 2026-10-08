@@ -224,6 +224,37 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     times = [r['elapsed_ms'] for r in cases if r['status'].startswith('EXECUTED') or r['status']=='FAILED']
     generated_frequency=sum(e.annual_frequency_per_year for e in events.values())
     evaluated_frequency=sum(r['initiating_frequency_per_year']*r['release_branch_probability']*r['annual_condition_probability'] for r in cases if r['status']=='EXECUTED')
+    # Keep a component-level accounting alongside the event-level ledger.  A
+    # facility review should be able to answer which physical equipment is
+    # covered without inferring it from event IDs or from a single aggregate
+    # percentage.  Operator-limited and domain-incomplete cases remain
+    # partial even when a numerical result exists.
+    event_component={event.id:event.model_component_id for event in events.values()}
+    component_coverage=[]
+    for component in f.components:
+        component_events=[event for event in events.values() if event.model_component_id==component.id]
+        component_cases=[case for case in cases if event_component.get(case['event_id'])==component.id]
+        excluded_reason=excluded.get(component.id)
+        if excluded_reason is not None:
+            scope_status='EXCLUDED'
+        elif not component_events:
+            scope_status='NO_EVENT_GENERATED'
+        elif any(case['status'] in {'UNCOMPUTED','FAILED','EXECUTED_DOMAIN_INCOMPLETE','EXECUTED_OPERATOR_LIMITED'} for case in component_cases):
+            scope_status='PARTIAL'
+        else:
+            scope_status='EXECUTED'
+        component_coverage.append({
+            'component_id': component.id,
+            'kind': component.kind,
+            'scope_status': scope_status,
+            'excluded_reason': excluded_reason,
+            'generated_event_count': len(component_events),
+            'generated_initiation_frequency_per_year': sum(event.annual_frequency_per_year for event in component_events),
+            'campaign_case_count': len(component_cases),
+            'executed_case_count': sum(case['status']=='EXECUTED' for case in component_cases),
+            'uncomputed_case_count': sum(case['status'] in {'UNCOMPUTED','FAILED','EXECUTED_DOMAIN_INCOMPLETE','EXECUTED_OPERATOR_LIMITED'} for case in component_cases),
+            'uncomputed_reasons': sorted({case.get('reason') for case in component_cases if case['status'] != 'EXECUTED' and case.get('reason')}),
+        })
     return {'status':'DECLARED_SCOPE_EXECUTED' if scope_complete else 'PARTIAL_DECLARED_SCOPE',
         'facility_id': f.id, 'facility_digest': f.digest(), 'campaign_digest': campaign.digest(),
         'scope_provenance': campaign.scope_provenance, 'events':[e.model_dump(mode='json') for e in events.values()],
@@ -232,7 +263,8 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
         'coverage':{'generated_initiation_frequency_per_year':generated_frequency,
             'fully_executed_case_weighted_frequency_per_year':evaluated_frequency,
             'fraction_of_generated_initiation_frequency':evaluated_frequency/generated_frequency if generated_frequency else None,
-            'meaning':'frequency coverage only; not fraction of risk captured, not physical validation'},
+            'meaning':'frequency coverage only; not fraction of risk captured, not physical validation',
+            'by_component':component_coverage},
         'declared_scope_numerically_complete': scope_complete, 'synthetic_release_horizon_present': synthetic,
         'declared_scope_annual_ir_low_high': known['ir_low_high'] if scope_complete else None,
         'known_contribution_annual_ir_low_high': known['ir_low_high'],
