@@ -127,6 +127,12 @@ class HomogeneousTankAccidentProvider:
             )
             cumulative_enthalpy += mass_flow * interval_s * enthalpy
             if self.release_kind == "gas":
+                quality = exit_state.quality
+                if quality is None or quality < 1.0 - 1.0e-9:
+                    raise ValueError(
+                        "external provider atmospheric state is not a vapour exit; "
+                        "use --release-kind liquid for a two-phase flash"
+                    )
                 density = float(exit_state.density_kg_m3)
                 velocity = mass_flow / (density * area)
                 steps.append({
