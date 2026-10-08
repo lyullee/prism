@@ -360,6 +360,13 @@ def merge_facility_campaign_results(
         if component_statuses[component_id] != "EXECUTED":
             source_complete = False
             blocking_reasons.append(f"component {component_id}: {component_statuses[component_id]}")
+    for component_id in sorted(expected_components):
+        if component_id not in component_rows:
+            component_statuses[component_id] = "MISSING_COVERAGE_LEDGER"
+            source_complete = False
+            blocking_reasons.append(
+                f"component {component_id}: missing coverage ledger row"
+            )
 
     family_rows: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for matrix in scope_matrices:

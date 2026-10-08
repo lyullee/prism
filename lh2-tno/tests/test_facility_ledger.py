@@ -187,6 +187,21 @@ def test_facility_ledger_rejects_malformed_case_accounting_rows():
         merge_facility_campaign_results([result], expected_component_ids=("tank-01",))
 
 
+def test_facility_ledger_withholds_total_when_component_coverage_row_is_missing():
+    result = _result(
+        event_id="event-no-coverage", asset_id="asset-no-coverage", component_id="tank-01",
+        frequency=1e-3,
+    )
+    result.pop("coverage")
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-01",)
+    )
+
+    assert merged["facility_total_risk_available"] is False
+    assert merged["component_statuses"]["tank-01"] == "MISSING_COVERAGE_LEDGER"
+    assert "component tank-01: missing coverage ledger row" in merged["blocking_reasons"]
+
+
 def test_facility_ledger_can_feed_frequency_uncertainty_without_physics_rerun():
     result = merge_facility_campaign_results(
         [_result(
