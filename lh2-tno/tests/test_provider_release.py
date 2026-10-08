@@ -80,7 +80,7 @@ def _liquid_release() -> ResolvedLiquidRelease:
         position_enu_m=(0.0, 0.0, 1.0),
         direction_enu=(1.0, 0.0, 0.0),
         ambient_pressure_pa_abs=101325.0,
-        ambient_temperature_k=20.0,
+        ambient_temperature_k=288.15,
         duration_s=0.2,
         available_mass_kg=1.0,
         cumulative_mass_out_kg=0.2,

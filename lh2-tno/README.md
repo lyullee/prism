@@ -179,6 +179,8 @@ python lh2-tno/scripts/build_provider_request_catalog.py `
 
 저장소의 `examples/provider_release_catalog_synthetic.json`은 adapter 실행을 확인하기 위한 합성 packet이다. 실제 설비·실측·빈도 근거가 아니며, 외부 provider가 생성한 packet으로 교체해야 한다.
 
+합성 액체 packet(`examples/provider_release_catalog_synthetic_liquid.json`)은 request adapter 뒤에 기존 설비 campaign과 backend를 이어 보는 진단도 제공합니다. `LH2_VESSEL AREA_0.01%` 개구와 정확히 맞는 1건을 source→SLABx-LH2/DynamicLH2PoolX→확산→점화·피해까지 실행했고, 9개 다른 개구 사건은 `UNCOMPUTED`로 남겼습니다. case 약 1.61초, campaign 약 1.81초였지만 packet·기상·종료근거가 합성이라 시설 전체 IR/F-N은 보류하고 `EXECUTED_OPERATOR_LIMITED`로 표시합니다. 결과는 `results/20261009/provider_release_full_chain_diagnostic/`에 기록합니다.
+
 `request-defaults`의 `source_operator`와 `release_termination`은 설비별로 검토해 작성해야 합니다. provider duration과 종료시각이 일치하지 않거나, 두 양단 파열 set을 단일 packet으로 넣거나, source/frequency를 defaults에 넣으면 해당 packet은 `uncomputed`로 남습니다. 예제 defaults의 합성 확률·기상·종료근거는 실제 시설 값이 아닙니다.
 
 공개 소스/예제/문서는 [Zenodo 소프트웨어 기록](https://doi.org/10.5281/zenodo.23241358)의 배포 파일을 사용합니다. 버전별 DOI는 릴리스 후 이 문서와 `CITATION.cff`에 기록합니다.

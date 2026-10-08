@@ -471,5 +471,25 @@
   "provider_release_contract_synthetic_cli_uncomputed": 0,
   "provider_release_contract_synthetic_cli_frequency_assigned": false,
   "provider_release_contract_test_status": "5 adapter tests (gas and liquid); full portable suite 249 passed",
-  "provider_release_contract_synthetic_example": "examples/provider_release_catalog_synthetic.json"
+  "provider_release_contract_synthetic_example": "examples/provider_release_catalog_synthetic.json",
+  "provider_release_full_chain_diagnostic_executed": true,
+  "provider_release_full_chain_diagnostic_record": "results/20261009/provider_release_full_chain_diagnostic/campaign_result.json",
+  "provider_release_full_chain_diagnostic_status": "PARTIAL_DECLARED_SCOPE",
+  "provider_release_full_chain_diagnostic_provider_packets": 1,
+  "provider_release_full_chain_diagnostic_generated_events": 10,
+  "provider_release_full_chain_diagnostic_matched_request_branches": 1,
+  "provider_release_full_chain_diagnostic_executed_cases": 1,
+  "provider_release_full_chain_diagnostic_operator_limited_cases": 1,
+  "provider_release_full_chain_diagnostic_uncomputed_cases": 9,
+  "provider_release_full_chain_diagnostic_case_elapsed_ms": 1612.14270000346,
+  "provider_release_full_chain_diagnostic_campaign_elapsed_ms": 1808.3128000143915,
+  "provider_release_full_chain_diagnostic_known_contribution_ir_low_high": {
+    "receptor-01": [
+      6.5e-05,
+      6.5e-05
+    ]
+  },
+  "provider_release_full_chain_diagnostic_total_facility_risk_withheld": true,
+  "provider_release_full_chain_diagnostic_physical_validation_claim": false,
+  "provider_release_full_chain_diagnostic_scope": "synthetic provider-resolved liquid packet; exact LH2_VESSEL AREA_0.01% storage match; end-to-end chain executed; not actual facility QRA"
 }

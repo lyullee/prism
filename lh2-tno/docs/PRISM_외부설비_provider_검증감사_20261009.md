@@ -89,6 +89,8 @@ python lh2-tno/scripts/build_provider_request_catalog.py `
 
 `examples/provider_release_catalog_synthetic.json`은 위 adapter의 동작만 재현하는 합성 입력이다. 실제 센터 또는 일반 액화수소시설의 방출·빈도 증거로 사용하지 않는다.
 
+추가로 합성 액체 packet을 `provider_release → EquipmentManifest/FrequencyPlan exact-match → campaign backend`까지 전달했다. `LH2_VESSEL AREA_0.01%` 한 건이 실행되어 source, SLABx-LH2/DynamicLH2PoolX, 확산, 점화·피해와 known IR 기여가 생성되었고, 다른 9개 문헌 개구는 `UNCOMPUTED`로 남았다. case 약 1.61초, campaign 약 1.81초이며 `EXECUTED_OPERATOR_LIMITED`, 시설 전체 IR/F-N `WITHHELD`이다. 이 결과는 adapter와 전체 연결의 합성 진단이지 실제 설비 QRA가 아니다. 실행 기록은 `results/20261009/provider_release_full_chain_diagnostic/`에 둔다.
+
 ## 재현·해석 주의
 
 - provider의 822개 회귀 통과는 provider 내부 단위·상태식·연결 보존성 검증의 범위다.
