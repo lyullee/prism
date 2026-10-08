@@ -122,6 +122,26 @@ def build_ijhe_completion_audit(
             "no executed release-to-consequence case is present",
         ),
         _check(
+            "equipment_model_binding_to_accident_release",
+            current_status.get("equipment_model_binding_status") == "ACCIDENT_RELEASE_INTERFACE_BOUND"
+            and isinstance(current_status.get("equipment_model_binding_component_count"), int)
+            and current_status.get("equipment_model_binding_component_count") > 0
+            and current_status.get("equipment_model_binding_accident_release_supported_component_count")
+            == current_status.get("equipment_model_binding_component_count"),
+            {
+                "model_binding_status": current_status.get("equipment_model_binding_status"),
+                "component_count": current_status.get("equipment_model_binding_component_count"),
+                "state_supported_component_count": current_status.get(
+                    "equipment_model_binding_state_supported_component_count"
+                ),
+                "accident_release_supported_component_count": current_status.get(
+                    "equipment_model_binding_accident_release_supported_component_count"
+                ),
+                "record": current_status.get("equipment_model_binding_record"),
+            },
+            "one or more equipment models lacks an accident-release interface and provider termination ledger",
+        ),
+        _check(
             "actual_provider_release_packet",
             actual_packet_available is True,
             {

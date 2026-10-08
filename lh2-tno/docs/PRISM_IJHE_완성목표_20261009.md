@@ -71,4 +71,4 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
   --output results/20261009/provider_release_full_chain_diagnostic/ijhe_completion_audit.json
 ```
 
-현재 실제 합성 provider 경로의 판정은 `INCOMPLETE_EVIDENCE`다. 실제 provider 사고 packet 부재, 사고 가족 미완결, 시설 IR/F-N 보류, 독립 전체 체인 물리검증 부재, 완전 시설 빈도 credible interval 부재가 차단 이유로 남는다. 이 감사기가 `READY_FOR_IJHE_SCOPE`를 내기 전에는 논문에서 전체 시설 QRA 완성으로 표현하지 않는다.
+현재 실제 합성 provider 경로의 판정은 `INCOMPLETE_EVIDENCE`다. 설비 모델은 `STATE_ONLY_BOUND`이고 사고 release export 0개이며, 실제 provider 사고 packet 부재, 사고 가족 미완결, 시설 IR/F-N 보류, 독립 전체 체인 물리검증 부재, 완전 시설 빈도 credible interval 부재가 차단 이유로 남는다. 이 감사기가 `READY_FOR_IJHE_SCOPE`를 내기 전에는 논문에서 전체 시설 QRA 완성으로 표현하지 않는다.

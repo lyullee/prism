@@ -27,6 +27,11 @@ def _status(validated=True):
     return {
         "physical_validation_claim": validated,
         "physical_validation_evidence_status": "INDEPENDENT_END_TO_END" if validated else "RESTRICTED",
+        "equipment_model_binding_status": "ACCIDENT_RELEASE_INTERFACE_BOUND" if validated else "STATE_ONLY_BOUND",
+        "equipment_model_binding_component_count": 1,
+        "equipment_model_binding_state_supported_component_count": 1,
+        "equipment_model_binding_accident_release_supported_component_count": 1 if validated else 0,
+        "equipment_model_binding_record": "model_binding.json",
         "provider_release_contract_actual_facility_packet_available": validated,
         "external_provider_evidence_release_inventory_status": "QUALIFIED_ACCIDENT_RELEASE_EXPORT" if validated else "NO_ACCIDENT_RELEASE_EXPORT",
         "one_hz_fresh_physics_demonstrated": False,
@@ -50,7 +55,7 @@ def test_completion_audit_blocks_incomplete_facility_claim():
     )
     assert report["status"] == "INCOMPLETE_EVIDENCE"
     assert report["complete_facility_qra_claim"] is False
-    assert len(report["blocking_reasons"]) == 5
+    assert len(report["blocking_reasons"]) == 6
 
 
 def test_completion_audit_passes_only_when_every_claim_gate_is_present():
