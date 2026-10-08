@@ -33,10 +33,21 @@ def _qualified_gas_release() -> dict:
         "duration_s": 1.0,
         "available_mass_kg": 1.0,
         "cumulative_mass_out_kg": 0.1,
-        "cumulative_static_enthalpy_out_j": 1.0,
+        "cumulative_static_enthalpy_out_j": 100.0,
         "termination_provenance": "fixture",
         "failure_opening_diameter_m": 0.01,
-        "steps": [{"time_s": 0.0, "mass_flow_kg_s": 0.1}],
+        "steps": [{
+            "time_s": 0.0,
+            "mass_flow_kg_s": 0.1,
+            "pressure_pa_abs": 101325.0,
+            "specific_enthalpy_j_kg": 1000.0,
+            "temperature_k": 293.15,
+            "density_kg_m3": 1.0,
+            "effective_area_m2": 1.0,
+            "velocity_m_s": 0.1,
+            "area_provenance": "fixture",
+            "velocity_origin": "provider_resolved",
+        }],
     }
 
 
@@ -134,3 +145,19 @@ def test_release_inventory_accepts_explicit_complete_contract(tmp_path):
     assert report["accident_release_candidate_file_count"] == 1
     assert report["accident_release_qualified_file_count"] == 1
     assert report["promotion_status"] == "QUALIFIED_ACCIDENT_RELEASE_EXPORT"
+
+
+def test_release_inventory_rechecks_provider_continuity_and_ledger(tmp_path):
+    candidate = _qualified_gas_release()
+    candidate["steps"][0]["velocity_m_s"] = 0.2
+    (tmp_path / "release.json").write_text(json.dumps(candidate), encoding="utf-8")
+
+    from lh2_tno.provider_evidence import _release_packet_inventory
+
+    report = _release_packet_inventory(tmp_path)
+
+    assert report["accident_release_candidate_file_count"] == 1
+    assert report["accident_release_qualified_file_count"] == 0
+    assert report["strict_validation_failures"][0]["file"] == "release.json"
+    assert any("mass/area/density/velocity" in row["error"] for row in report["strict_validation_failures"])
+    assert "accident release candidates failed strict PRISM boundary validation" in report["blocking_reasons"]

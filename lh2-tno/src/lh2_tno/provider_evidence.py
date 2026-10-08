@@ -16,6 +16,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from .provider_release import ProviderReleaseContractError, load_provider_release
+
 
 CONFIG_FILES = (
     "center_assets.json",
@@ -113,6 +115,7 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
     flow_only_files = 0
     candidate_files: list[dict[str, Any]] = []
     qualified_files: list[dict[str, Any]] = []
+    strict_validation_failures: list[dict[str, str]] = []
     missing_reasons: dict[str, int] = {}
 
     for path in _json_inventory_paths(root):
@@ -173,6 +176,17 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
                 for key in missing:
                     missing_reasons[f"missing:{key}"] = missing_reasons.get(f"missing:{key}", 0) + 1
                 continue
+            # Field presence is only the first gate. Re-run the exact PRISM
+            # boundary validator so continuity, mass/enthalpy closure, clock
+            # ordering, vertical handoff rules, and non-finite values cannot
+            # hide behind a superficially complete provider packet.
+            try:
+                load_provider_release(obj)
+            except (ProviderReleaseContractError, ValueError, TypeError) as error:
+                strict_validation_failures.append(
+                    {"file": relative, "error": str(error)}
+                )
+                continue
             qualified_files.append(entry)
 
     blockers: list[str] = []
@@ -180,6 +194,8 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
         blockers.append("provider export contains no explicit accidental resolved-release packet")
     if candidate_files and not qualified_files:
         blockers.append("accident release candidates are missing the complete PRISM export contract")
+    if strict_validation_failures:
+        blockers.append("accident release candidates failed strict PRISM boundary validation")
     if flow_only_files:
         blockers.append("normal or screening flow JSON was found without an accident-release contract")
     return {
@@ -191,6 +207,7 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
         "accident_release_qualified_file_count": len(qualified_files),
         "candidate_files": candidate_files[:50],
         "qualified_files": qualified_files[:50],
+        "strict_validation_failures": strict_validation_failures[:50],
         "blocking_reasons": list(dict.fromkeys(blockers)),
         "missing_field_counts": dict(sorted(missing_reasons.items())),
         "contract": {

@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 257,
+  "unit_contract_conservation_tests_passed": 258,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -461,6 +461,9 @@
   "external_provider_evidence_normal_or_screening_flow_files": 24,
   "external_provider_evidence_release_files_scanned": 555,
   "external_provider_evidence_release_inventory_blocker": "No machine-readable accidental resolved-release packet with explicit provider_export_schema; normal/screening flow JSON is withheld.",
+  "external_provider_evidence_release_strict_boundary_validation": true,
+  "external_provider_evidence_release_strict_validation_failure_count": 0,
+  "external_provider_evidence_release_promotion_policy": "Candidate field presence is followed by ResolvedGasRelease/ResolvedLiquidRelease validation; continuity, mass/enthalpy closure, provider clock, and handoff rules are never inferred.",
   "provider_release_contract_adapter_implemented": true,
   "provider_release_contract_adapter_module": "src/lh2_tno/provider_release.py",
   "provider_release_contract_adapter_cli": "scripts/build_provider_request_catalog.py",
@@ -470,7 +473,7 @@
   "provider_release_contract_synthetic_cli_templates": 1,
   "provider_release_contract_synthetic_cli_uncomputed": 0,
   "provider_release_contract_synthetic_cli_frequency_assigned": false,
-  "provider_release_contract_test_status": "6 adapter tests (gas/liquid/context fail-closed); full portable suite 257 passed",
+  "provider_release_contract_test_status": "6 adapter tests (gas/liquid/context fail-closed); full portable suite 258 passed",
   "provider_release_contract_synthetic_example": "examples/provider_release_catalog_synthetic.json",
   "provider_release_full_chain_diagnostic_executed": true,
   "provider_release_full_chain_diagnostic_record": "results/20261009/provider_release_full_chain_diagnostic/campaign_result.json",
@@ -510,7 +513,7 @@
   "major_accident_scope_matrix_blocking_reasons": 13,
   "major_accident_scope_matrix_facility_total_risk_available": false,
   "major_accident_scope_matrix_frequency_rows_additive": false,
-  "major_accident_scope_matrix_test_status": "5 matrix tests; full portable suite 257 passed",
+  "major_accident_scope_matrix_test_status": "5 matrix tests; full portable suite 258 passed",
   "major_accident_scope_matrix_subset_diagnostic_executed": true,
   "major_accident_scope_matrix_subset_diagnostic_record": "results/20261009/equipment_inventory_campaign/accident_scope_matrix.json",
   "major_accident_scope_matrix_subset_families": ["pipe_hole", "inventory_depletion"],
@@ -525,5 +528,5 @@
   "ijhe_completion_audit_check_count": 8,
   "ijhe_completion_audit_blocking_reason_count": 5,
   "ijhe_completion_audit_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 257 passed"
+  "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 258 passed"
 }
