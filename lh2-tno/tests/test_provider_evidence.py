@@ -76,6 +76,11 @@ def test_provider_evidence_preserves_partial_readiness_and_counts(tmp_path):
     assert report["coverage"]["operation_sequences"]["physical_time_missing"] == 1
     assert report["readiness"]["center_binding_ready"] is False
     assert report["promotion_policy"]["screening_values_are_not_promoted"] is True
+    request = report["release_evidence"]["provider_export_request"]
+    assert request["provider_export_schema"] == "prism.resolved_release.v1"
+    assert "failure_opening_diameter_m" not in request["common_required_fields"]
+    assert request["accidental_leak_required_fields"] == ["failure_opening_diameter_m"]
+    assert "failure_opening_diameter_m" in request["emergency_relief_forbidden_fields"]
 
 
 def test_provider_evidence_can_reach_executable_provider_status(tmp_path):
@@ -145,6 +150,7 @@ def test_release_inventory_accepts_explicit_complete_contract(tmp_path):
     assert report["accident_release_candidate_file_count"] == 1
     assert report["accident_release_qualified_file_count"] == 1
     assert report["promotion_status"] == "QUALIFIED_ACCIDENT_RELEASE_EXPORT"
+    assert report["provider_export_request"]["clock_rules"]
 
 
 def test_release_inventory_rechecks_provider_continuity_and_ledger(tmp_path):

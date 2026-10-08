@@ -84,6 +84,31 @@ _LIQUID_RELEASE_KEYS = {
     "droplet_partition_provenance",
 }
 
+# This is a provider-facing request, not a permissive parser.  Keeping the
+# fields in one machine-readable place lets an external digital twin produce
+# the same packet for a generic outdoor LH2 plant without reverse-engineering
+# the validator or treating a normal-flow result as an accident source.
+ACCIDENT_RELEASE_EXPORT_REQUEST = {
+    "provider_export_schema": "prism.resolved_release.v1",
+    "accepted_event_kinds": ["accidental_leak", "emergency_relief"],
+    "common_required_fields": sorted((_GENERIC_RELEASE_KEYS - {"failure_opening_diameter_m"}) | {"provider_export_schema"}),
+    "gas_required_fields": sorted(_GAS_RELEASE_KEYS),
+    "liquid_required_fields": sorted(_LIQUID_RELEASE_KEYS),
+    "accidental_leak_required_fields": ["failure_opening_diameter_m"],
+    "emergency_relief_forbidden_fields": ["failure_opening_diameter_m"],
+    "clock_rules": [
+        "steps is a non-empty left-held provider history",
+        "time_s starts at zero and is strictly increasing",
+        "duration_s is the provider termination time",
+        "mass and static/total enthalpy ledgers close before promotion",
+    ],
+    "ownership_rules": [
+        "equipment_twin owns the resolved outlet and discharge boundary",
+        "PRISM assigns literature frequency only after component/opening exact match",
+        "normal or screening flow must not be promoted as an accident packet",
+    ],
+}
+
 
 def _iter_json_objects(value: Any):
     """Yield every nested JSON object without interpreting provider values."""
@@ -244,6 +269,7 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
             "emergency_relief_requires_no_random_failure_opening": True,
             "screening_and_normal_flow_is_not_promotable": True,
         },
+        "provider_export_request": ACCIDENT_RELEASE_EXPORT_REQUEST,
     }
 
 

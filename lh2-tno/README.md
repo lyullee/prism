@@ -190,6 +190,8 @@ python -m venv .venv
 
 현재 검사센터 provider에는 자체 회귀검증 822건 통과 기록이 있지만, 센터 자산 바인딩과 전방 비교 허용이 모두 `false`이고 파라미터 89건·운전시퀀스 52행의 물리시간이 미확정이어서 결과는 `PARTIAL_PROVIDER_EVIDENCE`입니다. 이 숫자는 solver 검증 범위이며 센터 QRA 완료나 시설 IR/F-N을 뜻하지 않습니다. 상세한 원자료 해시·차단 사유·승격 규칙은 [외부 provider 검증 감사 기록](docs/PRISM_외부설비_provider_검증감사_20261009.md)에 보관합니다.
 
+외부 모델 담당자가 실제 사고 packet을 만들 때 필요한 공통 필드·시계·질량/엔탈피 장부·소유권·exact opening 규칙은 [provider 방출 packet 요청 사양](docs/PRISM_provider_resolved_release_v1_요청사양_20261009.md)에 정리했습니다. `audit_external_provider.py`도 같은 사양을 `release_evidence.provider_export_request`로 출력합니다.
+
 감사기는 이제 provider 루트의 JSON을 재귀적으로 인벤토리하여 사고 방출 계약도 확인합니다. `event_kind=accidental_leak`, 고장 개구, 시간별 `steps`, 지속시간, 누적 질량·엔탈피, 설비·포트·위치·방출 digest, 그리고 명시적인 `provider_export_schema`가 모두 있는 packet만 `QUALIFIED_ACCIDENT_RELEASE_EXPORT` 후보로 셉니다. 필드가 모두 있어도 `ResolvedGasRelease`/`ResolvedLiquidRelease` strict 검증을 다시 실행해 출구 연속성, 질량·엔탈피 장부, provider 시계, 수직 handoff와 유한값을 확인하며, 실패는 `strict_validation_failures`로 보존합니다. 일반 운전·스크리닝 JSON에 유량 열이 있어도 사고 계약이 없으면 `normal_or_screening_flow_file_count`로만 기록하며, 최신 감사에서 센터 JSON **556개**를 확인했지만 사고 방출 후보 0건·적격 0건으로 시설 위험 계산 승격이 차단됩니다.
 
 provider가 `prism.resolved_release.v1` packet을 내보내면 다음 adapter로 명시된 피해 계산 문맥에 연결할 수 있습니다. adapter는 packet의 상·개구·시간·질량/엔탈피 장부를 strict contract로 검증하고, `weather`, `ignition`, `domain`, 평가시계, 종료근거를 담은 defaults와 결합합니다. 빈도는 이 단계에서 부여하지 않으며, 이후 `--request-catalog`와 `bind_event()`의 설비·개구 exact-match에서만 연결됩니다.
