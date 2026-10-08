@@ -34,6 +34,10 @@ def _status(validated=True):
         "realtime_monitor_module": "src/lh2_tno/service.py",
         "realtime_monitor_test_status": "contract",
         "realtime_monitor_one_hz_claim": False,
+        "equipment_provider_release_worklist_status": "READY_FOR_PROVIDER_PACKETS",
+        "equipment_provider_release_worklist_event_count": 1,
+        "equipment_provider_release_worklist_provider_packet_count": 1,
+        "equipment_provider_release_worklist_uncomputed_count": 0,
     }
 
 
@@ -102,3 +106,19 @@ def test_completion_audit_unwraps_campaign_uncertainty_ledger():
         "scenario_count": 1,
         "facility_credible_interval": False,
     }
+
+
+def test_completion_audit_blocks_provider_worklist_with_uncomputed_events():
+    status = _status(True)
+    status["equipment_provider_release_worklist_provider_packet_count"] = 0
+    status["equipment_provider_release_worklist_uncomputed_count"] = 1
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+    )
+    assert report["status"] == "INCOMPLETE_EVIDENCE"
+    check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["provider_packet_count"] == 0

@@ -73,6 +73,20 @@ def build_ijhe_completion_audit(
     events = campaign_result.get("events", [])
     timing = campaign_result.get("timing", {})
     fresh_physics_cases = timing.get("fresh_physics_cases")
+    worklist_event_count = current_status.get("equipment_provider_release_worklist_event_count")
+    worklist_packet_count = current_status.get("equipment_provider_release_worklist_provider_packet_count")
+    worklist_uncomputed_count = current_status.get("equipment_provider_release_worklist_uncomputed_count")
+    worklist_status = current_status.get("equipment_provider_release_worklist_status")
+    worklist_complete = (
+        isinstance(worklist_event_count, int)
+        and worklist_event_count > 0
+        and isinstance(worklist_packet_count, int)
+        and worklist_packet_count == worklist_event_count
+        and isinstance(worklist_uncomputed_count, int)
+        and worklist_uncomputed_count == 0
+        and isinstance(worklist_status, str)
+        and worklist_status.startswith("READY_FOR_PROVIDER_PACKETS")
+    )
     executed_cases = [
         row for row in cases
         if isinstance(row, Mapping) and str(row.get("status", "")).startswith("EXECUTED")
@@ -107,6 +121,17 @@ def build_ijhe_completion_audit(
                 ),
             },
             "only synthetic or screening provider releases are available for this campaign",
+        ),
+        _check(
+            "provider_worklist_coverage",
+            worklist_complete,
+            {
+                "status": worklist_status,
+                "frequency_event_count": worklist_event_count,
+                "provider_packet_count": worklist_packet_count,
+                "uncomputed_provider_packet_count": worklist_uncomputed_count,
+            },
+            "the provider-release worklist still contains events without exact provider packets",
         ),
         _check(
             "release_duration_isolation_inventory_ledger",
