@@ -11,8 +11,8 @@
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.1은 v0.6.0 이후의 설비 경계·문헌 빈도·매니페스트 진단을 포함한 연구용 알파 릴리스입니다. 전체 시설 QRA와 독립 물리 검증은 여전히 별도 상태로 표시됩니다.
 
-**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. `TNO_PIPE` full-bore 양단은 `ResolvedGasReleaseSet`의 두 provider 출구를 한 사건으로 결합하고, 위치 배분은 `location_weight`로 명시합니다. 수직 전용 출구는 provider가 수평 handoff 단면·방향·혼합상태를 명시한 `VerticalGasHandoff`가 있을 때만 downstream 경로로 연결하며, PRISM이 수직 제트를 임의로 회전시키지 않습니다. **새로 provider가 계산한 액체·2상 대기 출구를 `ResolvedLiquidRelease`로 받아 flash 기체·지면 액체·액적 도착 시계를 그대로 SLABx-LH2/SLABx와 DynamicLH2PoolX에 전달하는 한 건의 전체 진단도 실행했습니다. airborne liquid은 검증된 별도 adapter가 없으면 거절합니다.** 이 액체 경계의 실제 개구가 문헌 `LH2_VESSEL` 0.01% bin과 일치하는 별도 campaign에서는 저장탱크·격리밸브·이송배관 15개 문헌 LOC를 생성하고, 정확히 일치하는 저장탱크 한 건만 빈도와 결합했습니다. 나머지 14개 LOC는 provider 이력 부재 또는 개구 불일치로 두 기상 조건에서 미계산 처리했습니다. `bind_event()`는 이제 `resolved_liquid_release`의 provider 개구를 직접 검사합니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. **추가로 일반 설비 매니페스트의 모든 부품을 명시적 문헌 FrequencyPlan으로 선택하거나 제외하고, 개구가 일치하는 방출 요청만 RiskCampaign에 연결하는 컴파일러를 넣었습니다.** 이번 0.6.1 개발 기능입니다. **259개 검사**와 LayeredTank-SLABx·문헌빈도 시설 연결 진단을 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [액체·2상 경계 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_설비액체2상_연결_개발기록_20261009.md) / [LayeredTank 문헌빈도 연결 기록](docs/PRISM_LayeredTank_문헌빈도_시설연결_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
-**일반 설비 매니페스트 연결 (개발 소스):** `EquipmentManifest`는 특정 검사센터의 태그를 코드에 고정하지 않고, 임의의 옥외 액화수소 설비 모델이 부품·포트·연결·운전 시나리오를 내보내는 공통 JSON 계약입니다. 위치·물성 기준·포트·제어 신호가 빠지면 PRISM은 값을 추정하지 않고 `PARTIAL`/`UNCOMPUTED`로 남깁니다. `EXECUTABLE`일 때만 엄격한 `Facility`로 승격되며 시설 위험 캠페인에 사용할 수 있습니다. 현재 센터 자료를 이 어댑터로 읽은 결과는 **PARTIAL**이며, P&ID 포트·좌표·실제 밸브 상태·시나리오 제어가 확인되기 전에는 센터 QRA로 승격하지 않습니다. 자세한 결과는 [설비 매니페스트 연결 기록](docs/PRISM_일반설비매니페스트_연결_개발기록_20261009.md)과 `scripts/validate_equipment_manifest.py`에 있습니다. **259개 검사**를 통과했습니다.
+**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. `TNO_PIPE` full-bore 양단은 `ResolvedGasReleaseSet`의 두 provider 출구를 한 사건으로 결합하고, 위치 배분은 `location_weight`로 명시합니다. 수직 전용 출구는 provider가 수평 handoff 단면·방향·혼합상태를 명시한 `VerticalGasHandoff`가 있을 때만 downstream 경로로 연결하며, PRISM이 수직 제트를 임의로 회전시키지 않습니다. **새로 provider가 계산한 액체·2상 대기 출구를 `ResolvedLiquidRelease`로 받아 flash 기체·지면 액체·액적 도착 시계를 그대로 SLABx-LH2/SLABx와 DynamicLH2PoolX에 전달하는 한 건의 전체 진단도 실행했습니다. airborne liquid은 검증된 별도 adapter가 없으면 거절합니다.** 이 액체 경계의 실제 개구가 문헌 `LH2_VESSEL` 0.01% bin과 일치하는 별도 campaign에서는 저장탱크·격리밸브·이송배관 15개 문헌 LOC를 생성하고, 정확히 일치하는 저장탱크 한 건만 빈도와 결합했습니다. 나머지 14개 LOC는 provider 이력 부재 또는 개구 불일치로 두 기상 조건에서 미계산 처리했습니다. `bind_event()`는 이제 `resolved_liquid_release`의 provider 개구를 직접 검사합니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. **추가로 일반 설비 매니페스트의 모든 부품을 명시적 문헌 FrequencyPlan으로 선택하거나 제외하고, 개구가 일치하는 방출 요청만 RiskCampaign에 연결하는 컴파일러를 넣었습니다.** 이번 0.6.1 개발 기능입니다. **263개 검사**와 LayeredTank-SLABx·문헌빈도 시설 연결 진단을 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [액체·2상 경계 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_설비액체2상_연결_개발기록_20261009.md) / [LayeredTank 문헌빈도 연결 기록](docs/PRISM_LayeredTank_문헌빈도_시설연결_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
+**일반 설비 매니페스트 연결 (개발 소스):** `EquipmentManifest`는 특정 검사센터의 태그를 코드에 고정하지 않고, 임의의 옥외 액화수소 설비 모델이 부품·포트·연결·운전 시나리오를 내보내는 공통 JSON 계약입니다. 위치·물성 기준·포트·제어 신호가 빠지면 PRISM은 값을 추정하지 않고 `PARTIAL`/`UNCOMPUTED`로 남깁니다. `EXECUTABLE`일 때만 엄격한 `Facility`로 승격되며 시설 위험 캠페인에 사용할 수 있습니다. 현재 센터 자료를 이 어댑터로 읽은 결과는 **PARTIAL**이며, P&ID 포트·좌표·실제 밸브 상태·시나리오 제어가 확인되기 전에는 센터 QRA로 승격하지 않습니다. 자세한 결과는 [설비 매니페스트 연결 기록](docs/PRISM_일반설비매니페스트_연결_개발기록_20261009.md)과 `scripts/validate_equipment_manifest.py`에 있습니다. **262개 검사**를 통과했습니다.
 
 `inventory_over_600s`는 600초 전체 provider 이력과 전용 종료 근거가 모두 있을 때만 사건 빈도와 피해를 결합합니다. 짧은 진단 이력은 이 사고의 대체 계산으로 인정하지 않습니다.
 
@@ -521,6 +521,32 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 설비 resolved 출구를 원시 P/T로 덮어쓸 수 없고 provider가 새 경계를 생성해야 합니다.
 위 API의 `pipeline`, `request`에 이어서 사용할 수 있습니다.
 
+외부 설비 디지털 트윈을 실제 갱신 경계로 사용할 때는 `release_resolver`를
+명시적으로 넘깁니다. resolver는 정규화된 센서 상태를 받아 이미 검증된
+`ConsequenceRequest`를 반환해야 하며, 그 안에는 `ResolvedGasRelease`,
+`ResolvedGasReleaseSet` 또는 `ResolvedLiquidRelease` 중 정확히 하나와 종료근거가
+있어야 합니다. PRISM은 이 경계에서 누출 크기·지속시간·빈도·방출 프로파일을
+추정하지 않습니다.
+
+```python
+from lh2_tno.service import ConsequenceService
+
+def equipment_release_resolver(template, normalized):
+    # 외부 lh2dt/공정 모델이 normalized를 사용해 계산하고,
+    # provider_release adapter로 만든 ConsequenceRequest를 반환한다.
+    return provider_request_from_equipment_model(template, normalized)
+
+result = service.update_from_telemetry(
+    request, normalized, pressure_tag="P", temperature_tag="T",
+    release_resolver=equipment_release_resolver,
+)
+```
+
+이 경로의 결과에는 `telemetry_boundary.equipment_release_resolved=true`가
+남습니다. resolver가 일반 source 입력을 반환하거나, provider 경계를 넣지 않거나,
+빈도를 함께 넣으면 즉시 거절됩니다. 따라서 센서 기반 빈도 학습과 알려지지 않은
+누출 크기 역추정은 여전히 수행되지 않습니다.
+
 ```python
 from lh2_tno.service import ConsequenceService
 from lh2_tno.telemetry import Frame, TagMapping, TelemetryNormalizer
@@ -586,7 +612,7 @@ F-N에는 인구 분포와 같은 사건의 피해자수 정의도 필요합니�
 
 현재 외부 snapshot의 `dynamic_validation_protocol.json` 선언 해시가 evidence JSON과 달라 상태를 `DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT`로 기록했습니다. 엄격 검증은 중단하고, 감사 모드만 지표와 불일치 파일을 보존합니다. 이 구성요소 증거는 설비 방출·대기 확산·점화·IR/F-N 전체 체인의 물리 검증이나 현장 절대위험 검증을 의미하지 않습니다.
 
-공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 0.6.1 개발 소스는 LayeredTank 경계 감사·유량 gate·endpoint enthalpy·액체 빈도 binding·일반 설비 매니페스트 계약·CLI 승격·빈도 범위 감사·외부 provider evidence audit·주요 사고 범위 매트릭스 검사를 포함해 **259개**를 통과합니다. 별도 실행 진단은 steady 설비 경계와 5개 transient LH2 pipe LOC의 성공·실패 분기 20건, 다섯 area-bin 양수 재고 종료 경로의 두 기상 조건 10건, LayeredTank의 문헌 `LH2_VESSEL` 정확 개구 1개와 두 기상 조건의 시설 campaign을 통과시켰습니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
+공개 v0.6.0은 단위·계약·보존·모드 검사 154개로 고정되어 있고, 현재 0.6.1 개발 소스는 LayeredTank 경계 감사·유량 gate·endpoint enthalpy·액체 빈도 binding·일반 설비 매니페스트 계약·CLI 승격·빈도 범위 감사·외부 provider evidence audit·주요 사고 범위 매트릭스 검사를 포함해 **263개**를 통과합니다. 별도 실행 진단은 steady 설비 경계와 5개 transient LH2 pipe LOC의 성공·실패 분기 20건, 다섯 area-bin 양수 재고 종료 경로의 두 기상 조건 10건, LayeredTank의 문헌 `LH2_VESSEL` 정확 개구 1개와 두 기상 조건의 시설 campaign을 통과시켰습니다. 어느 숫자도 독립 실험 검증을 대신하지 않습니다.
 GitHub Actions에서 portable 검사와 wheel catalogue/명령 포함을 확인합니다.
 새 안내의 도움말·시설·빈도 예제도 깨끗한 소스 export에서 확인합니다.
 `validate_*.py`는 개발 PC 경로와 이전 결과를 참조할 수 있어 클론 직후의 일반 사용 명령이 아닙니다.

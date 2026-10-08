@@ -2,6 +2,7 @@
 from __future__ import annotations
 from collections import OrderedDict
 import copy
+from collections.abc import Callable
 from pathlib import Path
 import time
 from .backend import BackendError, tree_digest
@@ -21,6 +22,47 @@ def request_from_telemetry(template, normalized, *, pressure_tag, temperature_ta
             raise ValueError('sensor quantity/component does not match the declared source boundary')
         data['source_input']['tank'][key]=value['value_si']
     return ConsequenceRequest.model_validate_json(__import__('json').dumps(data,allow_nan=False))
+
+
+def request_from_equipment_resolver(template, normalized, resolver: Callable):
+    """Accept one provider-owned release request for a normalized state.
+
+    The resolver is the explicit seam to an equipment digital twin.  It may
+    use the normalized pressure/temperature state, but it must return a
+    :class:`ConsequenceRequest` that already contains a validated
+    ``ResolvedGasRelease``, ``ResolvedGasReleaseSet`` or
+    ``ResolvedLiquidRelease``.  PRISM does not estimate a hole, duration,
+    frequency, or release profile from the sensor frame.
+    """
+    if not callable(resolver):
+        raise TypeError("release_resolver must be callable")
+    request = resolver(template, normalized)
+    if not isinstance(request, ConsequenceRequest):
+        raise ValueError("release_resolver must return a ConsequenceRequest")
+    if request.component_id != template.component_id:
+        raise ValueError("provider release component does not match telemetry template")
+    owners = (
+        request.resolved_release,
+        request.resolved_release_set,
+        request.resolved_liquid_release,
+    )
+    if sum(value is not None for value in owners) != 1:
+        raise ValueError("release_resolver must return exactly one provider release boundary")
+    if request.source_input is not None:
+        raise ValueError("provider release request must not mix source_input with a resolved boundary")
+    if any(
+        value is not None
+        for value in (
+            request.annual_frequency_per_year,
+            request.annual_frequency_provenance,
+            request.frequency_event,
+            request.initiation_intensity_per_s,
+        )
+    ):
+        raise ValueError("release_resolver must not assign initiating frequency")
+    if request.release_termination is None:
+        raise ValueError("provider release request requires explicit release termination")
+    return request
 
 
 class ConsequenceService:
@@ -54,11 +96,21 @@ class ConsequenceService:
             'cache_key':key,'realtime_fresh_physics_claim':False}
         return result
 
-    def update_from_telemetry(self,template,normalized,*,pressure_tag,temperature_tag):
-        request=request_from_telemetry(template,normalized,pressure_tag=pressure_tag,temperature_tag=temperature_tag)
+    def update_from_telemetry(self,template,normalized,*,pressure_tag,temperature_tag,release_resolver=None):
+        if release_resolver is None:
+            request = request_from_telemetry(
+                template, normalized, pressure_tag=pressure_tag, temperature_tag=temperature_tag
+            )
+        else:
+            request = request_from_equipment_resolver(template, normalized, release_resolver)
         result=self.evaluate(request)
         result['telemetry_boundary']={k:normalized[k] for k in
             ('origin','independent_measurement_claim','data_age_s','frame_digest','mapping_digest')}
         result['telemetry_boundary']['data_age_at_output_s']=normalized['data_age_s']+result['service']['service_elapsed_ms']/1000
-        result['telemetry_boundary']['interpretation']='known leak geometry; sensor pressure/temperature update, no inferred leak size or learned frequency'
+        result['telemetry_boundary']['equipment_release_resolved'] = release_resolver is not None
+        result['telemetry_boundary']['interpretation'] = (
+            'equipment resolver supplied provider release; no inferred leak size or learned frequency'
+            if release_resolver is not None
+            else 'known leak geometry; sensor pressure/temperature update, no inferred leak size or learned frequency'
+        )
         return result
