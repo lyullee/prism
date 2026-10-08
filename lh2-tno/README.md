@@ -11,7 +11,7 @@
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.0은 이름·명령·사용 설명 정비이며 물리 적용범위를 확대한 버전은 아닙니다.
 
-**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. `TNO_PIPE` full-bore 양단은 `ResolvedGasReleaseSet`의 두 provider 출구를 한 사건으로 결합하고, 위치 배분은 `location_weight`로 명시합니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 211개 검사와 32개 fresh transient/inventory/two-sided 물리 사례를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
+**개발 소스 추가 사항 (2026-10-09):** 다중 LOC·기상·방호 분기 실행기와 기존 TNO IR/F-N 합산 연결, 빈도 민감도, 문헌 p05/중앙/p95 빈도 구간 재가중, 통합 LH2 source의 압력 평형 자연 종료, G1 instantaneous-inventory용 명시적 SLABx-LH2 liquid-jet operator, 외부 설비 twin의 PH/network 출구를 `ResolvedGasRelease`로 받아 시설 campaign에 연결하는 경로를 추가했습니다. 추가로 `LayeredTankNetworkSimulator`와 `CommandedValve`를 이용해 탱크 상태→밸브 차단 성공·실패→기체 출구 종료/진단시계까지 연결하고, `HomogeneousTank`의 양수 재고 threshold 종료를 문헌 `LH2_PIPE` 5개 누출 크기와 두 기상 조건에 연결해 **10건을 모두 실행**했습니다. 자연 종료는 모델이 반환한 실제 시간 이력만 사용하며 요청 시간까지 유량을 연장하지 않습니다. G1은 구멍 누출로 대체하지 않고 2초 finite-inventory 질량 폐합을 수행하지만 일정 upstream·open spray-energy 가정 때문에 operator-limited로 표시합니다. transient 설비 경로는 차단 성공·실패 두 분기를 두 기상 조건에 전달해 **20건을 모두 실행**했습니다. `TNO_PIPE` full-bore 양단은 `ResolvedGasReleaseSet`의 두 provider 출구를 한 사건으로 결합하고, 위치 배분은 `location_weight`로 명시합니다. 수직 전용 출구는 provider가 수평 handoff 단면·방향·혼합상태를 명시한 `VerticalGasHandoff`가 있을 때만 downstream 경로로 연결하며, PRISM이 수직 제트를 임의로 회전시키지 않습니다. 장벽 성공확률 `0.99`와 재고 threshold·탱크 입력은 합성 진단값이며 현장 신뢰도·현장 재고 추정이 아닙니다. 추가로 DynamicLH2PoolX의 풀/확산 구성요소 hold-out 지표와 원자료 해시를 별도 장부로 확인했지만, protocol hash drift 때문에 제한 증거로만 기록했습니다. 빈도 구간은 자산별 공유 분위수 시나리오와 독립 event-bound 시나리오를 비교하고, catalogue에 공개된 로그정규 mu/sigma가 있는 LH2 사건에는 known-contribution p05/p50/p95 표본 구간도 계산할 수 있습니다. 이 구간은 물리 계산을 반복하지 않으며 불완전한 시설을 완전한 시설 신뢰구간으로 표시하지 않습니다. 아직 공개 0.6.0/PyPI에는 없는 개발 기능입니다. 213개 검사와 34개 fresh transient/inventory/two-sided/vertical-handoff 물리 사례를 확인했습니다. [완성 목표](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_IJHE_완성목표_20261009.md) / [사용·검증·실패 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_시설위험_실행기_개발기록_20261009.md) / [재고 소진 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_재고소진_연결_개발기록_20261009.md) / [물리 검증 근거](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md). 실제 시설 연간 위험은 설비·운전·물리 검증 자료가 없으므로 계속 별도로 보류합니다.
 
 `inventory_over_600s`는 600초 전체 provider 이력과 전용 종료 근거가 모두 있을 때만 사건 빈도와 피해를 결합합니다. 짧은 진단 이력은 이 사고의 대체 계산으로 인정하지 않습니다.
 
@@ -54,7 +54,7 @@ PRISM은 각 모델을 연결하고 입력·질량·시간·출처가 맞는지 
 | 누출→피해 | 방출, 지면 도달/풀, 극저온 전이, 확산, 점화, 화재/폭발, 인명 피해 | 제한된 옥외 진단 경로 |
 | 사고 빈도 | 17개 설비 프로파일, 55개 LOC/누출구간 행 | 문헌 기본선, 현장 사고빈도 검증 없음 |
 | 빈도→피해 | 문헌 LH2 배관 5개 area-bin을 설비 방출·차단 분기와 명시적으로 결합 | 현장 설비 수·위치·장벽 근거가 없어 일반 시설 전체 QRA는 미완료 |
-| 설비 출구 연결 | PH/network 출구, 5개 transient LH2 pipe area-bin, 양수 재고 threshold 종료 이력 수용 | 수평·대기압·Mach≤0.3 기체 출구만 현재 피해 adapter가 수용; 유량 재계산 없음; 종료 threshold·차단 성공은 입력된 provider 조건에 한정 |
+| 설비 출구 연결 | PH/network 출구, 5개 transient LH2 pipe area-bin, 양수 재고 threshold 종료, 양단 파열, provider-resolved vertical handoff 수용 | 수평 또는 명시적 수평 handoff가 있는 수직 출구의 대기압·Mach≤0.3 기체 경계만 현재 피해 adapter가 수용; 유량 재계산 없음; handoff·종료 threshold·차단 성공은 입력된 provider 조건에 한정 |
 | 센서 연결 | 단위·위치·품질·시간 검증, 알려진 누출의 P/T 갱신 | 누출 크기 역추정·경보 빈도 학습 없음 |
 | 결과 캐시 | 동일 입력·시설·모델 버전의 결과 재사용 | 변경 상태는 신규 계산, 신규 계산 1 Hz 미검증 |
 | 기존 엔진 QRA | 빈도 조회, 사건 생성, 점화·차단·기상, IR/F-N | 외부 엔진 기능, 새 LH2 전체 시설 결합은 미완료 |
@@ -239,7 +239,7 @@ backend에는 `tno` pin과 기존 엔진을 실행할 interpreter가 필요합�
 
 - `source_input` 또는 `resolved_release` 중 정확히 하나 선택.
 - 탱크 상태, 누출 구경·방향·높이, 재고와 방출 종료 근거.
-- source와 dispersion의 동일 기상. 현재 무풍·실내·수직 전용 출구 미지원.
+- source와 dispersion의 동일 기상. 현재 무풍·실내·provider handoff 없는 수직 전용 출구는 미지원.
 - 시계에 방출 종료/지연점화 시각 포함, 지연 연소 종료까지 평가.
 - 점화 분기, 복사율 범위, 장애물 에너지 분율과 출처.
 - 공간 영역·격자. 영역 밖 질량은 기록하지만 그 영역 밖의 피해는 계산하지 않음.
@@ -339,7 +339,7 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 등록한 모든 부품의 임의 누출을 즉시 지원하는 것은 아닙니다.
 
 `ResolvedGasRelease`에는 PH·엔탈피 기준·단면적·밀도·속도·유량·시계·누적 질량/정적 엔탈피와 provider 해시가 필요합니다. 포트에 `position_enu_m`을 선언하면 provider 방출 좌표도 같은 위치여야 합니다. 양단 파열은 `ResolvedGasReleaseSet`이 동일 사건 ID·공유 재고·서로 다른 outward 포트·두 위치를 검증합니다.
-현재 수평·대기압·Mach≤0.3 기체만 허용합니다. 액체/2상·수직·고압 팽창 출구와 재고 피드백은 추가 adapter가 필요합니다.
+현재 수평 또는 `VerticalGasHandoff`로 수평 단면을 선언한 수직 출구의 대기압·Mach≤0.3 기체만 허용합니다. 액체/2상·provider handoff 없는 수직 제트·고압 팽창 출구와 실제 재고 feedback은 추가 adapter가 필요합니다. 수직 handoff 경로도 synthetic provider 경계와 downstream 교차상호작용 미해결 때문에 operator-limited입니다.
 정상 벤트에 사고누출 빈도를 붙이지 않습니다. emergency relief도 기인 사건/요구 의미를 별도 검토합니다.
 상세: [경계 계약](https://github.com/lyullee/prism/blob/main/lh2-tno/src/lh2_tno/equipment_boundary.py), [설비 연결 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md).
 
@@ -463,7 +463,7 @@ v0.5 모드 검증의 설비 경계는 v0.4 기록 재생이며 최신 live prov
 우선 개발 항목:
 
 1. 전체 시설 LH2 사건/source/종료·위치 배분, 점화·차단·기상과 IR/F-N 결합.
-2. PH nozzle/flash, 액체·2상, 수직·팽창/high-Mach 출구 확장.
+2. PH nozzle/flash, 액체·2상, provider handoff 없는 수직·팽창/high-Mach 출구 확장과 handoff 물리검증.
 3. 양수 재고 종료 경계를 실제 탱크·배관·밸브·펌프 조건과 액체/2상 flash, actuator 지연·실패 분기로 확장하고 전량/양단 파열·수직 vent를 별도 사건으로 연결.
 4. 방출·풀·확산·화재/폭발 독립 검증과 관측 연산자.
 5. 프로파일 적용 민감도·상관을 반영한 전체 위험 불확실성.

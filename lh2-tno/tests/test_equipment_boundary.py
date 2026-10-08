@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from lh2_tno.contracts import Facility
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, thermodynamic_rows
+from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, VerticalGasHandoff, thermodynamic_rows
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
@@ -118,6 +118,35 @@ def test_inconsistent_or_ambiguous_provider_contracts_are_rejected(fault):
     if fault=='owner':d['discharge_owner']='consumer'
     if fault=='digest':d['provider_source_digest']='untracked'
     with pytest.raises(ValueError):ResolvedGasRelease.model_validate_json(json.dumps(d))
+
+
+def test_vertical_exit_requires_provider_handoff_and_preserves_original_direction():
+    d=packet()
+    d.update(direction_enu=[0.,0.,1.], vertical_handoff={
+        'position_enu_m':[1.,0.,2.], 'direction_enu':[1.,0.,0.],
+        'velocity_m_s':8., 'density_kg_m3':.2, 'temperature_k':150.,
+        'h2_mass_fraction':.5, 'half_width_m':.1, 'depth_m':.2,
+        'provenance':'synthetic vertical-to-horizontal provider handoff'})
+    release=ResolvedGasRelease.model_validate_json(json.dumps(d))
+    assert release.direction_enu == (0.,0.,1.)
+    assert release.vertical_handoff.direction_enu == (1.,0.,0.)
+    no_adapter=copy.deepcopy(d);no_adapter.pop('vertical_handoff')
+    with pytest.raises(ValueError, match='horizontal handoff adapter'):
+        ResolvedGasRelease.model_validate_json(json.dumps(no_adapter))
+    mixed=copy.deepcopy(d);mixed['direction_enu']=[.6,0.,.8]
+    with pytest.raises(ValueError, match='horizontal handoff adapter'):
+        ResolvedGasRelease.model_validate_json(json.dumps(mixed))
+
+
+def test_vertical_provider_handoff_is_accepted_by_consequence_contract():
+    d=packet()
+    d.update(direction_enu=[0.,0.,1.], vertical_handoff={
+        'position_enu_m':[1.,0.,2.], 'direction_enu':[1.,0.,0.],
+        'velocity_m_s':8., 'density_kg_m3':.2, 'temperature_k':150.,
+        'h2_mass_fraction':.5, 'half_width_m':.1, 'depth_m':.2,
+        'provenance':'synthetic vertical-to-horizontal provider handoff'})
+    request=ConsequenceRequest.model_validate_json(json.dumps(request_data(d)))
+    assert request.resolved_release.vertical_handoff.position_enu_m == (1.,0.,2.)
 
 
 @pytest.mark.parametrize('fault',['both','neither','inventory','position','clock','normal_frequency'])

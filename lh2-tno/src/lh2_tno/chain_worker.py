@@ -155,6 +155,12 @@ def run_chain(p,roots,module):
     weather=p['weather']; times=p['evaluation_times_s']; horizon=times[-1]
     ambient=source['ambient']; fluid=source['tank']['fluid']
     origin=np.asarray(p['source_position_enu_m'],float)
+    vertical_handoff=source.get('vertical_handoff') if resolved is not None else None
+    if vertical_handoff is not None:
+        # The provider has already resolved the vertical momentum into a
+        # horizontal carrier section.  Dispersion starts at that declared
+        # handoff position; PRISM does not rotate the vertical exit itself.
+        origin=np.asarray(vertical_handoff['position_enu_m'],float)
     to=math.radians((weather['wind_from_bearing_deg']+180)%360)
     down=np.array([math.sin(to),math.cos(to),0.])
     cross=np.array([math.cos(to),-math.sin(to),0.])
@@ -234,7 +240,28 @@ def run_chain(p,roots,module):
         key=(kind,rate,area,span,velocity,gas_temperature,gas_density,gas_area)
         if key in traj_cache:return traj_cache[key]
         near=[]; tt=0.; cross_offset=0.; base_origin=origin if kind=='jet' else pool_origin
-        if kind=='jet':
+        if kind=='jet' and vertical_handoff is not None:
+            handoff_direction=np.asarray(vertical_handoff['direction_enu'],float)
+            downvelocity=float(vertical_handoff['velocity_m_s']*np.dot(handoff_direction,down))
+            if downvelocity<=0:
+                raise ValueError('vertical handoff has no positive downwind velocity for this weather condition')
+            total=rate/vertical_handoff['h2_mass_fraction']
+            hs=handmod.FreeJetHandoffState(handoff_distance_m=0.01,duration_s=span,
+                total_rate_kg_s=total,h2_mass_fraction=vertical_handoff['h2_mass_fraction'],
+                temperature_K=vertical_handoff['temperature_k'],density_kg_m3=vertical_handoff['density_kg_m3'],
+                velocity_m_s=downvelocity,centre_height_m=vertical_handoff['position_enu_m'][2],
+                half_width_m=vertical_handoff['half_width_m'],depth_m=vertical_handoff['depth_m'],
+                mixture_cp_J_kgK=vertical_handoff['h2_mass_fraction']*14300.+(1-vertical_handoff['h2_mass_fraction'])*1006.,
+                source_model='equipment-resolved-vertical-gas + provider-horizontal-handoff',
+                geometry_closure='provider-resolved horizontal handoff section')
+            source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)
+            traces.append({'branch':kind,'handoff':asdict(hs),'handoff_age_s':0.,
+                           'entry_temperature_k':gas_temperature,'entry_density_kg_m3':gas_density,
+                           'mass_residual_relative':hs.mass_residual_relative(),
+                           'transition_mass_residual_kg_s':None,
+                           'transition_energy_residual_w':None,
+                           'provider_vertical_adapter':True})
+        elif kind=='jet':
             transition_input=transition.TransitionInput(
                 h2_rate_kg_s=rate,flash_vapour_mass_fraction=1.,flash_velocity_m_s=velocity,
                 flash_area_m2=gas_area if gas_area is not None else rate/(gas_density*velocity),
@@ -501,7 +528,7 @@ def run_chain(p,roots,module):
                   'finite_inventory_cloud','ignition_branches','fire_radiation','multi_energy_blast_zones','TNO_human_damage','conditional_risk'],
         'source':source_history,'pool':pool,'ground_arrival_pulses':ground_pulses,
         'source_operator':source_operator,
-        'operator_limited':bool(source_history.get('operator_limited',False)),
+        'operator_limited':bool(source_history.get('operator_limited',False) or vertical_handoff is not None),
         'source_ownership':{'state_owner':'equipment_twin' if resolved is not None else 'integrated_source',
             'discharge_owner':'equipment_twin' if resolved is not None else 'integrated_source',
             'discharge_recalculated':resolved is None},
@@ -523,7 +550,8 @@ def run_chain(p,roots,module):
             'effect_combination':'Frechet union upper bound min(1,sum(harm)) within one event branch; no independence assumed'},
         'limitations':[
             'If resolved equipment input is selected: horizontal atmospheric gas plane at Mach <=0.3; PH/continuity/static enthalpy checked, provider kinetic-energy closure is not certified.',
-            'Outdoor flat ground, non-calm wind, nonvertical nozzle, known leak geometry only.',
+            'Outdoor flat ground, non-calm wind, horizontal nozzle or provider-resolved vertical handoff, known leak geometry only.',
+            'A vertical provider exit is accepted only with a declared horizontal handoff section; the handoff is operator-limited and is not a PRISM rotation or independent vertical-jet validation.',
             'Ground deposition uses resolved per-class flight delays; distributed in-flight vapour generation is still collapsed to the terminal gas boundary at release time.',
             'The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.',
             'Rainout footprint is explicitly declared; it is not inferred from a single impact point or fitted to LFL/sensors.',

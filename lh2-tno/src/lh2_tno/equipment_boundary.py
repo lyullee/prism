@@ -8,7 +8,7 @@ from __future__ import annotations
 import math
 from typing import Literal
 from pydantic import Field, model_validator
-from .contracts import Contract, Name, Positive, Nonnegative, Vector, PropertyBasis
+from .contracts import Contract, Name, Positive, Nonnegative, Fraction, Vector, PropertyBasis
 
 
 class ResolvedGasStep(Contract):
@@ -30,6 +30,37 @@ class ResolvedGasStep(Contract):
             raise ValueError('resolved outlet mass/area/density/velocity do not close')
         if self.mass_flow_kg_s==0 and self.velocity_m_s!=0:
             raise ValueError('zero-flow interval requires zero bulk velocity')
+        return self
+
+
+class VerticalGasHandoff(Contract):
+    """Provider-resolved state after a vertical gas exit is redirected.
+
+    The adapter is a boundary contract, not a PRISM rotation of a vertical
+    jet.  It must provide the handoff position and a horizontal carrier
+    section that the downstream SLABx route can consume.
+    """
+
+    position_enu_m: Vector
+    direction_enu: Vector
+    velocity_m_s: Positive
+    density_kg_m3: Positive
+    temperature_k: Positive
+    h2_mass_fraction: Fraction
+    half_width_m: Positive
+    depth_m: Positive
+    provenance: Name
+
+    @model_validator(mode='after')
+    def valid(self):
+        if self.position_enu_m[2] <= 0:
+            raise ValueError('vertical handoff must be above flat ground')
+        if not math.isclose(sum(x*x for x in self.direction_enu), 1., abs_tol=1e-10, rel_tol=0):
+            raise ValueError('vertical handoff requires a unit horizontal direction')
+        if abs(self.direction_enu[2]) > 1e-10:
+            raise ValueError('vertical handoff direction must be horizontal')
+        if self.h2_mass_fraction <= 0:
+            raise ValueError('vertical handoff requires a positive hydrogen mass fraction')
         return self
 
 
@@ -59,6 +90,7 @@ class ResolvedGasRelease(Contract):
     cumulative_static_enthalpy_out_j: float
     steps: tuple[ResolvedGasStep, ...]
     termination_provenance: Name
+    vertical_handoff: VerticalGasHandoff | None = None
     # A failure opening can differ from an expanded exit area. Explicitly
     # retain it if attaching an accident-frequency definition.
     failure_opening_diameter_m: Positive | None = None
@@ -69,8 +101,11 @@ class ResolvedGasRelease(Contract):
             raise ValueError('resolved boundary requires the declared native enthalpy reference')
         if not math.isclose(sum(x*x for x in self.direction_enu),1.,abs_tol=1e-10,rel_tol=0):
             raise ValueError('unit ENU outlet direction required')
-        if self.direction_enu[2]!=0:
-            raise ValueError('resolved gas path currently supports horizontal exits; vertical momentum adapter required')
+        if abs(self.direction_enu[2]) > 1e-10:
+            if abs(self.direction_enu[0]) > 1e-10 or abs(self.direction_enu[1]) > 1e-10 or self.vertical_handoff is None:
+                raise ValueError('vertical exit requires a provider-resolved horizontal handoff adapter')
+        elif self.vertical_handoff is not None:
+            raise ValueError('vertical handoff metadata requires a vertical exit direction')
         if self.position_enu_m[2]<=0:
             raise ValueError('resolved gas exit must be above flat ground')
         if not self.steps or self.steps[0].time_s!=0 or self.steps[-1].time_s>=self.duration_s:

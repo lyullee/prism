@@ -297,12 +297,14 @@ class ConsequenceRequest(Contract):
 
 def resolved_source_context(release,weather):
     first=release.steps[0]
+    direction = release.vertical_handoff.direction_enu if release.vertical_handoff is not None else release.direction_enu
     return {'tank':{'fluid':release.property_basis.fluid},
-        'nozzle':{'height_m':release.position_enu_m[2],'direction_enu':list(release.direction_enu),
+        'nozzle':{'height_m':release.position_enu_m[2],'direction_enu':list(direction),
                   'diameter_m':math.sqrt(4*first.effective_area_m2/math.pi)},
         'ambient':{'pressure_pa':release.ambient_pressure_pa_abs,'temperature_k':release.ambient_temperature_k,
                    'wind_speed_m_s':weather.wind_speed_m_s,'wind_from_bearing_deg':weather.wind_from_bearing_deg},
-        'duration_s':release.duration_s,'time_step_s':release.duration_s}
+        'duration_s':release.duration_s,'time_step_s':release.duration_s,
+        'vertical_handoff':None if release.vertical_handoff is None else release.vertical_handoff.model_dump(mode='json')}
 
 
 def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
