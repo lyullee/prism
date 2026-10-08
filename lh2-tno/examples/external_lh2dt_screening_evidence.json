@@ -1,0 +1,56 @@
+{
+  "schema": "prism.external_lh2dt_screening_evidence.v1",
+  "snapshot_date": "2026-10-09",
+  "source": {
+    "project_root": "C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스템/06_액화수소_디지털트윈_물리모델",
+    "thread_title": "액화수소 설비 디지털 트윈 모델링#2",
+    "thread_id": "01a0ef39-9210-7213-b372-8c7f666a39b1",
+    "machine_status_recorded_date": "2026-10-06",
+    "source_files": {
+      "current_development_status.md": {
+        "sha256": "edf9e52edb10201df909fe759d216fa587da53b83e274c5a4952bf21ce0ce546",
+        "path": "docs/현재_개발상태.md"
+      },
+      "center_integration_test_readiness.md": {
+        "sha256": "85cbb168b04634db672761c89dac7fe804d9151b18d1768f06ef28c119255154",
+        "path": "docs/센터_통합테스트_준비도.md"
+      },
+      "two_ton_tank_pid_reference_audit.md": {
+        "sha256": "541acaac7c14de29b33021a5e52862562fafd3fe85dcee36f8701c0b5bcb34d8",
+        "path": "docs/센터_관련자료_2톤탱크_PID_연계_감사.md"
+      },
+      "current_development_status.json": {
+        "sha256": "f3db053a1366bfc7d68473a1f298bbeb70160be6bc3da0bd11fd6b22cf654186",
+        "path": "docs/benchmarks/current_development_status.json"
+      }
+    }
+  },
+  "screening_model_evidence": {
+    "projected_asset_count": 12,
+    "projected_asset_constructable_count": 12,
+    "confirmed_center_asset_count": 0,
+    "screening_scenario_count": 8,
+    "screening_scenario_pass_count": 8,
+    "topology_node_count": 21,
+    "topology_edge_count": 27,
+    "control_contract_confirmed_count": 0,
+    "forward_comparison_ready_count": 0,
+    "raw_historian_export_present": false,
+    "raw_historian_promotion_allowed_session_count": 0,
+    "resolved_accident_release_packet_count": 0,
+    "parameter_fitting_or_inverse_estimation": false
+  },
+  "reference_tank_pid_evidence": {
+    "nozzle_count": 7,
+    "valve_count": 18,
+    "instrument_and_safety_device_count": 12,
+    "source_hash_matches": true,
+    "internal_consistency_passed": true,
+    "center_port_netlist_promotion_allowed": false
+  },
+  "promotion_policy": {
+    "status": "SCREENING_ONLY_NO_RELEASE_PACKET",
+    "promotion_allowed": false,
+    "reason": "The external model supplies screening process-state and topology evidence, but no confirmed center asset binding, approved port netlist, command timing, raw historian export, or prism.resolved_release.v1 accident packet. It must not be counted as a provider release or a facility QRA case."
+  }
+}
