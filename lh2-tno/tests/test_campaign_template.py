@@ -1,9 +1,11 @@
 import json
 from pathlib import Path
 
+import pytest
 from lh2_tno.campaign import AnnualCondition
-from lh2_tno.campaign_template import build_equipment_campaign
+from lh2_tno.campaign_template import build_equipment_campaign, build_equipment_campaign_from_catalog
 from lh2_tno.consequences import ConsequenceRequest
+from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasStep
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
 
@@ -58,3 +60,72 @@ def test_campaign_compiler_does_not_substitute_a_different_opening():
     )
     assert all(branch.request is None for route in campaign.event_routes for branch in route.branches)
     assert all(branch.uncomputed_reason for route in campaign.event_routes for branch in route.branches)
+
+
+def test_campaign_catalog_matches_each_explicit_component_opening_without_substitution():
+    manifest, plan, storage_request, conditions = _campaign_inputs()
+    plan_payload = plan.model_dump(mode="json")
+    plan_payload["assets"][1]["location_weight"] = 0.1
+    plan_payload["assets"][1]["location_weight_provenance"] = "synthetic single reviewed pipe location"
+    plan = FrequencyPlan.model_validate_json(json.dumps(plan_payload))
+    payload = storage_request.model_dump(mode="json")
+    payload["component_id"] = "liquid-transfer-line-01"
+    payload["source_input"] = None
+    payload["resolved_release"] = ResolvedGasRelease(
+        component_id="liquid-transfer-line-01",
+        port_id="line-out",
+        event_id="synthetic-pipe-leak",
+        event_kind="accidental_leak",
+        upstream_service="LH2",
+        upstream_service_provenance="synthetic test",
+        enthalpy_convention="static_exit_enthalpy",
+        property_basis={"fluid": "Hydrogen", "energy_reference": "CoolProp-HEOS:Hydrogen:native"},
+        provider_source_digest="0" * 64,
+        provider_result_digest="1" * 64,
+        provider_boundary_reference="synthetic pipe exit",
+        input_origin="synthetic",
+        position_enu_m=(5.0, 0.0, 1.0),
+        direction_enu=(1.0, 0.0, 0.0),
+        ambient_pressure_pa_abs=101325.0,
+        ambient_temperature_k=288.15,
+        duration_s=0.2,
+        available_mass_kg=1.0,
+        cumulative_mass_out_kg=0.0002,
+        cumulative_static_enthalpy_out_j=20.0,
+        steps=(ResolvedGasStep(
+            time_s=0.0,
+            mass_flow_kg_s=0.001,
+            pressure_pa_abs=101325.0,
+            specific_enthalpy_j_kg=100000.0,
+            temperature_k=288.15,
+            density_kg_m3=1.0,
+            effective_area_m2=0.001,
+            velocity_m_s=1.0,
+            area_provenance="synthetic test",
+            velocity_origin="provider_resolved",
+        ),),
+        termination_provenance="synthetic test",
+        failure_opening_diameter_m=0.025,
+    ).model_dump(mode="json")
+    payload["source_position_enu_m"] = [5.0, 0.0, 1.0]
+    payload["available_mass_kg"] = 1.0
+    pipe_request = ConsequenceRequest.model_validate_json(json.dumps(payload))
+
+    campaign = build_equipment_campaign_from_catalog(
+        manifest, plan, (storage_request, pipe_request), conditions,
+        scope_provenance="synthetic catalog test",
+    )
+    branches = [branch for route in campaign.event_routes for branch in route.branches]
+    assert sum(branch.request is not None for branch in branches) == 2
+    assert sum(branch.uncomputed_reason is not None for branch in branches) == 8
+    matched_ids = {branch.request.component_id for branch in branches if branch.request is not None}
+    assert matched_ids == {"storage-tank-01", "liquid-transfer-line-01"}
+
+
+def test_campaign_catalog_rejects_ambiguous_exact_matches():
+    manifest, plan, request, conditions = _campaign_inputs()
+    with pytest.raises(ValueError, match="multiple request templates match"):
+        build_equipment_campaign_from_catalog(
+            manifest, plan, (request, request), conditions,
+            scope_provenance="synthetic ambiguous catalog test",
+        )

@@ -9,6 +9,7 @@ validated by :func:`bind_event`, or an explicit ``UNCOMPUTED`` branch.
 from __future__ import annotations
 
 import json
+from collections.abc import Sequence
 
 from .campaign import AnnualCondition, EventRoute, ReleaseBranch, RiskCampaign
 from .consequences import ConsequenceRequest
@@ -32,28 +33,73 @@ def build_equipment_campaign(
     binds the event and current weather immediately before execution.
     """
 
+    return build_equipment_campaign_from_catalog(
+        manifest,
+        frequency_plan,
+        (request_template,),
+        annual_conditions,
+        scope_provenance=scope_provenance,
+        maximum_physics_cases=maximum_physics_cases,
+    )
+
+
+def build_equipment_campaign_from_catalog(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+    request_templates: Sequence[ConsequenceRequest],
+    annual_conditions: tuple[AnnualCondition, ...],
+    *,
+    scope_provenance: str,
+    maximum_physics_cases: int = 200,
+) -> RiskCampaign:
+    """Compile one explicit request per matching equipment opening.
+
+    A real equipment provider normally has more than one source boundary.
+    This catalog variant lets each component/opening carry its own request
+    template.  Matching is still exact: component identity and physical
+    opening must pass :func:`bind_event`; no request is copied between
+    components and no diameter is substituted.  An event with no match is
+    retained as an explicit ``UNCOMPUTED`` branch.
+    """
+    if not request_templates:
+        raise ValueError("request catalog must contain at least one template")
     manifest_audit = audit_manifest(manifest)
     if manifest_audit["status"] != "EXECUTABLE":
         raise ValueError(
             "equipment manifest is not executable: "
             + "; ".join(manifest_audit["blocking_reasons"])
         )
-    if any(
-        value is not None
-        for value in (
-            request_template.annual_frequency_per_year,
-            request_template.annual_frequency_provenance,
-            request_template.frequency_event,
-            request_template.initiation_intensity_per_s,
-        )
-    ):
-        raise ValueError("request template must not already contain initiating frequency")
+    for index, request_template in enumerate(request_templates):
+        if any(
+            value is not None
+            for value in (
+                request_template.annual_frequency_per_year,
+                request_template.annual_frequency_provenance,
+                request_template.frequency_event,
+                request_template.initiation_intensity_per_s,
+            )
+        ):
+            raise ValueError(f"request template {index} must not contain initiating frequency")
     facility = manifest.to_facility()
     events = generate_events(facility, frequency_plan)
     routes: list[EventRoute] = []
     for event in events:
+        matches = []
+        errors = []
+        for index, request_template in enumerate(request_templates):
+            try:
+                matches.append((index, bind_event(request_template, event)))
+            except (ValueError, TypeError) as error:
+                errors.append(f"template {index}: {error}")
+        if len(matches) > 1:
+            raise ValueError(
+                f"multiple request templates match event {event.id}: "
+                + ", ".join(str(index) for index, _ in matches)
+            )
         try:
-            bound = bind_event(request_template, event)
+            if not matches:
+                raise ValueError("; ".join(errors) or "no request template matched event")
+            _, bound = matches[0]
             payload = bound.model_dump(mode="json")
             # Campaign templates carry no initiating frequency.  The campaign
             # executor binds the selected event separately for each weather
@@ -71,7 +117,7 @@ def build_equipment_campaign(
                 id="matched-provider-request",
                 probability_given_event=1.0,
                 provenance=(
-                    "explicit request template matched component and release opening; "
+                    "explicit request catalog matched component and release opening; "
                     "event frequency is bound at campaign execution"
                 ),
                 request=template,
