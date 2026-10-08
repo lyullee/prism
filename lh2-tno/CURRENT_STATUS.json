@@ -142,7 +142,7 @@
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
-  "equipment_frequency_scope_full_facility_diagnostic_status": "EXECUTABLE; 18 synthetic initiating events across LH2 vessel/pipe/valve, TNO relief device and TNO pump profiles; vaporizer and reliquefier explicitly excluded because no reviewed catalogue profile exists",
+  "equipment_frequency_scope_full_facility_diagnostic_status": "EXECUTABLE; 24 synthetic initiating events across LH2 vessel/pipe/valve, TNO relief device/pump and explicitly classified TNO heat-exchanger profiles; the boundary is explicitly excluded and real exchanger-side classification still requires engineering review",
   "equipment_frequency_scope_full_facility_diagnostic_record": "docs/PRISM_일반LH2_설비범위_진단_20261009.md",
   "equipment_frequency_scope_consequence_binding": "NOT_CREATED_BY_SCOPE_AUDIT",
   "equipment_campaign_compiler_implemented": true,

@@ -71,14 +71,14 @@ def test_full_scope_example_covers_reviewed_equipment_profiles_and_excludes_gaps
     result = audit_frequency_scope(manifest, plan)
 
     assert result["status"] == "EXECUTABLE"
-    assert result["generated_event_count"] == 18
+    assert result["generated_event_count"] == 24
     rows = {row["component_id"]: row for row in result["component_coverage"]}
     assert {row["status"] for row in rows.values()} == {"SELECTED", "EXCLUDED"}
     assert rows["transfer-valve-01"]["profiles"] == ["LH2_VALVE"]
     assert rows["pressure-relief-vent-01"]["profiles"] == ["TNO_RELIEF_DEVICE"]
     assert rows["liquid-transfer-pump-01"]["profiles"] == ["TNO_PUMP_STANDARD"]
-    assert "vaporizer-specific" in rows["ambient-vaporizer-01"]["reason"]
-    assert "reliquefier-specific" in rows["reliquefier-01"]["reason"]
+    assert rows["ambient-vaporizer-01"]["profiles"] == ["TNO_HX_OUTSIDE_TUBES"]
+    assert rows["reliquefier-01"]["profiles"] == ["TNO_HX_INSIDE_WEAK_SHELL"]
 
     profiles = {event["profile"] for event in result["events"]}
     assert profiles == {
@@ -87,10 +87,15 @@ def test_full_scope_example_covers_reviewed_equipment_profiles_and_excludes_gaps
         "LH2_VALVE",
         "TNO_RELIEF_DEVICE",
         "TNO_PUMP_STANDARD",
+        "TNO_HX_OUTSIDE_TUBES",
+        "TNO_HX_INSIDE_WEAK_SHELL",
     }
     assert {event["release"]["mode"] for event in result["events"]} == {
         "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s",
         "maximum_relief_discharge",
+        "two_sided_rupture",
     }
     # Scope auditing creates initiating events only.  It does not manufacture
     # provider release ledgers or consequence requests for these events.

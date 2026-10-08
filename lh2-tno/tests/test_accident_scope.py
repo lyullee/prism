@@ -284,7 +284,12 @@ def test_full_scope_example_exposes_equipment_families_without_inventing_provide
     assert rows["valve_hole"]["generated_event_count"] == 5
     assert rows["vent_hole"]["generated_event_count"] == 1
     assert rows["pump_hole"]["generated_event_count"] == 2
-    for family in ("vaporizer_hole", "reliquefier_hole", "liquid_two_phase", "two_sided_rupture", "vertical_handoff"):
+    assert rows["vaporizer_hole"]["generated_event_count"] == 1
+    assert rows["reliquefier_hole"]["generated_event_count"] == 1
+    assert rows["inventory_depletion"]["generated_event_count"] == 1
+    assert rows["inventory_over_600s"]["generated_event_count"] == 1
+    assert rows["two_sided_rupture"]["generated_event_count"] == 2
+    for family in ("liquid_two_phase", "vertical_handoff"):
         assert rows[family]["status"] == "NO_EVENT_GENERATED"
     assert matrix["facility_total_risk_available"] is False
     assert matrix["physical_validation_claim"] is False

@@ -42,11 +42,24 @@
       "physical_scope_ids": ["liquid-transfer-pump-01-connection"],
       "classification_basis": "synthetic example only; largest connecting pipe and pump construction require review",
       "nominal_diameter_m": 0.025
+    },
+    {
+      "id": "ambient-vaporizer",
+      "model_component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "physical_scope_ids": ["ambient-vaporizer-01-exchanger"],
+      "classification_basis": "synthetic design classification only: hydrogen is outside tubes; real exchanger layout and dangerous-fluid side require review"
+    },
+    {
+      "id": "reliquefier",
+      "model_component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "physical_scope_ids": ["reliquefier-01-exchanger"],
+      "classification_basis": "synthetic design classification only: hydrogen is inside weak-shell tubes; real exchanger layout and tube count require review",
+      "nominal_diameter_m": 0.025
     }
   ],
   "excluded_model_components": {
-    "ambient-vaporizer-01": "no reviewed vaporizer-specific initiating-event profile in the current catalogue; provider-specific failure scope is required",
-    "reliquefier-01": "no reviewed reliquefier-specific initiating-event profile in the current catalogue; provider-specific failure scope is required",
     "receiving-boundary-01": "boundary is an interface, not an accidental-release equipment item in this generic example"
   }
 }
