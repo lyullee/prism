@@ -37,8 +37,8 @@
       "id": "E",
       "name": "독립 물리 검증과 신규 계산 처리시간",
       "status": "partial",
-      "implemented": "237개 portable 검사, 일반 설비 매니페스트 완전/부분/후보/실내 승격 gate와 EXECUTABLE CLI 승격, 일반 설비의 명시적 FrequencyPlan 범위 감사와 합성 예제, 일반 설비 빈도 사건→방출 요청 캠페인 컴파일러와 합성 1건 실행·9건 미계산 진단, 액화수소검사지원센터 외부 export PARTIAL fail-closed audit, 자연 종료 실제 체인 1건, LH2 campaign 6건, steady equipment campaign 2건, transient isolation success/failure campaign 20건, 다섯 positive-mass inventory-depletion LOC의 10개 weather case, 합성 600초 inventory-over-horizon end-to-end 진단 1건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit 1건, DynamicLH2PoolX 풀/확산 구성요소의 hold-out 지표·질량잔차·원자료 해시 장부, 단계별 시간·질량 장부와 실패 시험 보존; liquid provider case fresh elapsed 약 14.24초, transient 20건 7.8–49.5초/건, inventory 10건 1.59–2.31초/건, 양단 2건 8.41–8.75초/건, variable-state vertical handoff 2건 3.213–3.363초/건, 600초 진단 30.95초 기록, variable-state vertical handoff 3회 신규 프로세스 benchmark의 campaign p50/p95/p99 7.170/7.352/7.368초와 wall p50/p95/p99 12.005/12.245/12.266초 보존; LayeredTank-SLABx bridge fresh end-to-end diagnostic: 1 case, 2.238 s, 0 kg mass residual, 2.4529% provider/SLABx rate difference inside 5% gate; LayeredTank positive-threshold feedback fresh end-to-end diagnostic: 16 intervals over 8.0 s, provider mass residual 5.65e-18 kg, energy residual 1.34e-8 J, chain elapsed 21.392 s; exact-size LayeredTank literature campaign: 15 LOCs, 1 matched provider event, 2 weather cases, 30 uncomputed event-weather/operator-limited cases, 4.594 s campaign elapsed",
-      "remaining": "source protocol 해시 drift 해소, 실제 설비 방출원·대기확산·점화·IR/F-N 독립 실험 검증, 실측/복원/합성 출처와 분할, 관측연산자·수렴 및 반복 p50/p95/p99; 1 Hz 미검증"
+      "implemented": "239개 portable 검사, 일반 설비 매니페스트 완전/부분/후보/실내 승격 gate와 EXECUTABLE CLI 승격, 일반 설비의 명시적 FrequencyPlan 범위 감사와 합성 예제, 일반 설비 빈도 사건→방출 요청 캠페인 컴파일러와 합성 1건 실행·9건 미계산 진단, 액화수소검사지원센터 외부 export PARTIAL fail-closed audit, 자연 종료 실제 체인 1건, LH2 campaign 6건, steady equipment campaign 2건, transient isolation success/failure campaign 20건, 다섯 positive-mass inventory-depletion LOC의 10개 weather case, 합성 600초 inventory-over-horizon end-to-end 진단 1건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit 1건, DynamicLH2PoolX 풀/확산 구성요소의 hold-out 지표·질량잔차·원자료 해시 장부, 단계별 시간·질량 장부와 실패 시험 보존; liquid provider case fresh elapsed 약 14.24초, transient 20건 7.8–49.5초/건, inventory 10건 1.59–2.31초/건, 양단 2건 8.41–8.75초/건, variable-state vertical handoff 2건 3.213–3.363초/건, 600초 진단 30.95초 기록, variable-state vertical handoff 3회 신규 프로세스 benchmark의 campaign p50/p95/p99 7.170/7.352/7.368초와 wall p50/p95/p99 12.005/12.245/12.266초 보존; LayeredTank-SLABx bridge fresh end-to-end diagnostic: 1 case, 2.238 s, 0 kg mass residual, 2.4529% provider/SLABx rate difference inside 5% gate; LayeredTank positive-threshold feedback fresh end-to-end diagnostic: 16 intervals over 8.0 s, provider mass residual 5.65e-18 kg, energy residual 1.34e-8 J, chain elapsed 21.392 s; exact-size LayeredTank literature campaign: 15 LOCs, 1 matched provider event, 2 weather cases, 30 uncomputed event-weather/operator-limited cases, 4.594 s campaign elapsed; 외부 LH2 디지털트윈 provider evidence audit가 822개 provider 회귀 통과 수와 센터 바인딩/전방비교/파라미터/명령시간 차단을 읽기 전용으로 기록",
+      "remaining": "source protocol 해시 drift 해소, 실제 설비 방출원·대기확산·점화·IR/F-N 독립 실험 검증, 실측/복원/합성 출처와 분할, 관측연산자·수렴 및 반복 p50/p95/p99; 1 Hz 미검증; provider 자체 822개 회귀 통과는 solver 검증일 뿐 센터 설비 수치검증·forward comparison·시설 QRA를 대체하지 않음"
     }
   ],
   "excluded_from_required_scope": [
@@ -48,7 +48,7 @@
     "폭굉",
     "전체 도미노"
   ],
-  "next_priority": "실제 설비 목록에 LayeredTank-SLABx bridge·positive-threshold feedback·exact-size literature binding을 포트별로 확장하고, 실제 액체/2상 tank feedback·재고 소진·flash/분무 에너지·airborne droplet adapter를 검증한 뒤, 명시적 FrequencyPlan의 각 사건에 provider 방출 request를 연결하고 차단 신뢰도·양단 교차상호작용·실제 물리 검증과 시설 전체 빈도/IR/F-N을 연결",
+  "next_priority": "실제 설비 목록에 LayeredTank-SLABx bridge·positive-threshold feedback·exact-size literature binding을 포트별로 확장하고, 실제 액체/2상 tank feedback·재고 소진·flash/분무 에너지·airborne droplet adapter를 검증한 뒤, 명시적 FrequencyPlan의 각 사건에 provider 방출 request를 연결하고 차단 신뢰도·양단 교차상호작용·실제 물리 검증과 시설 전체 빈도/IR/F-N을 연결; 외부 provider evidence audit에서 확인된 822개 자체 회귀와 센터 미확정 파라미터·명령시간을 논문 표에 분리 기록",
   "physical_validation_claim": false,
   "total_facility_annual_risk_complete": false,
   "new_release_published": false,
@@ -131,5 +131,14 @@
   "equipment_campaign_compiler_diagnostic_status": "PARTIAL_DECLARED_SCOPE",
   "equipment_campaign_compiler_diagnostic_executed_cases": 1,
   "equipment_campaign_compiler_diagnostic_uncomputed_cases": 9,
-  "equipment_campaign_compiler_diagnostic_total_facility_risk_withheld": true
+  "equipment_campaign_compiler_diagnostic_total_facility_risk_withheld": true,
+  "external_provider_evidence_audit_implemented": true,
+  "external_provider_evidence_audit_status": "PARTIAL_PROVIDER_EVIDENCE",
+  "external_provider_evidence_audit_record": "results/20261009/provider_evidence/center_provider_audit.json",
+  "external_provider_evidence_provider_regression_tests": 822,
+  "external_provider_evidence_center_binding_ready": false,
+  "external_provider_evidence_forward_comparison_allowed": false,
+  "external_provider_evidence_parameter_request_count": 89,
+  "external_provider_evidence_operation_sequence_rows": 52,
+  "external_provider_evidence_total_facility_risk_withheld": true
 }

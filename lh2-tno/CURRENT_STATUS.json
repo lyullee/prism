@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 237,
+  "unit_contract_conservation_tests_passed": 239,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -411,5 +411,19 @@
   "layered_tank_literature_frequency_binding_total_facility_risk_withheld": true,
   "layered_tank_literature_frequency_binding_elapsed_ms": 4593.888600007631,
   "layered_tank_literature_frequency_binding_uncertainty_recomputed_physics": false,
-  "layered_tank_literature_frequency_binding_physical_validation_claim": false
+  "layered_tank_literature_frequency_binding_physical_validation_claim": false,
+  "external_provider_evidence_audit_implemented": true,
+  "external_provider_evidence_audit_module": "src/lh2_tno/provider_evidence.py",
+  "external_provider_evidence_audit_script": "scripts/audit_external_provider.py",
+  "external_provider_evidence_audit_status": "PARTIAL_PROVIDER_EVIDENCE",
+  "external_provider_evidence_audit_record": "results/20261009/provider_evidence/center_provider_audit.json",
+  "external_provider_evidence_provider_regression_tests": 822,
+  "external_provider_evidence_center_binding_ready": false,
+  "external_provider_evidence_forward_comparison_allowed": false,
+  "external_provider_evidence_parameter_request_count": 89,
+  "external_provider_evidence_parameter_unconfirmed_count": 89,
+  "external_provider_evidence_operation_sequence_rows": 52,
+  "external_provider_evidence_operation_physical_time_missing": 52,
+  "external_provider_evidence_total_facility_risk_withheld": true,
+  "external_provider_evidence_promotion_policy": "Provider regression pass count is evidence of solver tests only; no center value, screening default, command tag or port is promoted without explicit reviewed binding."
 }
