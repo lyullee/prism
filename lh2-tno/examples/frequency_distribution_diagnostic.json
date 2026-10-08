@@ -1,0 +1,12 @@
+[
+  {
+    "id": "published-shared-normal",
+    "provenance": "diagnostic: use catalogue-published LH2 log-rate mu/sigma; shared normal draw within each asset",
+    "correlation_assumption": "within_asset_shared_normal"
+  },
+  {
+    "id": "published-independent-normal",
+    "provenance": "diagnostic: use catalogue-published LH2 log-rate mu/sigma; independent normal draw per event",
+    "correlation_assumption": "independent_event_normal"
+  }
+]

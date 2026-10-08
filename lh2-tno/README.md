@@ -309,6 +309,17 @@ Purple 배관에는 최소 적용 길이 10 m와 flange 포함 범위가 있습�
 는 자산별로 같은 분위수를 모든 LOC에 적용하는 `within_asset_shared_quantile`과, 각 사건에
 분위수를 따로 지정하는 `independent_event_bounds`를 명시적으로 비교할 수 있습니다. 이는 상관 가정
 민감도 비교이며, 별도 distribution API는 catalogue에 공개된 로그정규 mu/sigma가 있는 사건만 표본화합니다. 현재 사례처럼 미계산·operator-limited 경로가 있으면 known-contribution 구간으로만 보고하고 시설 전체 credible interval로 부르지 않습니다.
+
+분포 표본화는 다음처럼 실행합니다. 입력 파일은 `examples/frequency_distribution_diagnostic.json` 형식의 두 시나리오 배열입니다.
+
+```powershell
+python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign campaign.json `
+  --frequency-distribution examples/frequency_distribution_diagnostic.json `
+  --frequency-distribution-draws 2000 --frequency-distribution-seed 20261009 `
+  --output distribution_result.json
+```
+
+출력의 `literature_frequency_distribution.scenarios[*]`는 known contribution의 p05/p50/p95와 사건별 표본 빈도를 담습니다. 표본화는 저장된 피해 원자를 다시 가중하므로 SLABx-LH2나 확산 물리를 반복 실행하지 않습니다.
 실증 P/T/유량은 물리 검증에 쓰지만 사고 건수·관찰 설비수·기간을 대신하지 않습니다.
 확인된 사고와 동일 범위의 관찰 노출이 생기면 선택형 Gamma-Poisson 업데이트 계약을 적용할 수 있습니다.
 경보 건수를 누출 건수로 세거나 문헌 로그정규 분포를 근거 없이 Gamma로 바꾸지 않습니다.
