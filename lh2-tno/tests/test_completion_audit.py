@@ -30,6 +30,10 @@ def _status(validated=True):
         "provider_release_contract_actual_facility_packet_available": validated,
         "external_provider_evidence_release_inventory_status": "QUALIFIED_ACCIDENT_RELEASE_EXPORT" if validated else "NO_ACCIDENT_RELEASE_EXPORT",
         "one_hz_fresh_physics_demonstrated": False,
+        "realtime_monitor_implemented": True,
+        "realtime_monitor_module": "src/lh2_tno/service.py",
+        "realtime_monitor_test_status": "contract",
+        "realtime_monitor_one_hz_claim": False,
     }
 
 

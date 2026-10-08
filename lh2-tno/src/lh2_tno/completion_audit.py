@@ -180,6 +180,20 @@ def build_ijhe_completion_audit(
             },
             "fresh-case timing evidence is missing",
         ),
+        _check(
+            "realtime_monitor_contract",
+            current_status.get("realtime_monitor_implemented") is True,
+            {
+                "implemented": current_status.get("realtime_monitor_implemented"),
+                "module": current_status.get("realtime_monitor_module"),
+                "test_status": current_status.get("realtime_monitor_test_status"),
+                "one_hz_fresh_physics_demonstrated": current_status.get(
+                    "realtime_monitor_one_hz_claim",
+                    current_status.get("one_hz_fresh_physics_demonstrated"),
+                ),
+            },
+            "sensor-conditioned realtime monitor contract is missing",
+        ),
     ]
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
