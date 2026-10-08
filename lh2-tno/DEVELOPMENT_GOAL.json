@@ -63,8 +63,8 @@
   "layered_tank_boundary_audit_record": "results/20261009/layered_tank_boundary/layered_tank_boundary_audit.json",
   "layered_tank_boundary_audit_provider_export": "results/20261009/layered_tank_boundary/provider_export.json",
   "layered_tank_boundary_audit_ready_for_resolved_liquid_release": false,
-  "development_archive_step": "PRISM-IJHE-step23-source.zip",
-  "development_archive_git_commit": "a5746db644cb43edcbea4563ca99c1f78f893a33",
+  "development_archive_step": "PRISM-IJHE-step24-source.zip",
+  "development_archive_git_commit": "ec677f4cd2938d8834480c2001361da56214ba65",
   "development_archive_hash_errors": 0,
   "layered_tank_boundary_audit_cases": 2,
   "layered_tank_boundary_audit_atmospheric_probe_executed": true,
@@ -77,5 +77,5 @@
     "provider result has no atmospheric exit geometry and direction",
     "provider result does not declare an atmospheric release termination contract"
   ],
-  "development_archive_manifest": "MANIFEST_SHA256_step23.json"
+  "development_archive_manifest": "MANIFEST_SHA256_step24.json"
 }
