@@ -126,6 +126,9 @@ def test_published_frequency_distribution_sampling_returns_known_interval_withou
     assert result['frequency_distribution_credible_interval'] is True
     assert len(result['scenarios'][0]['known_expected_death_quantiles'][0]) == 3
     assert result['scenarios'][0]['event_frequency_quantiles_per_year'][events[0].id][1] > 0
+    stability = result['scenarios'][0]['asset_rank_stability'][events[0].asset_id]
+    assert stability['mean_rank_low_high'] == pytest.approx([1.0, 1.0])
+    assert stability['top_rank_probability_low_high'] == pytest.approx([1.0, 1.0])
 
 
 def test_distribution_sampling_rejects_events_without_published_mu_sigma():

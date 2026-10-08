@@ -222,6 +222,8 @@ def sample_literature_frequency_distributions(
         rng = random.Random(seed)
         ir_samples = {rid: [[], []] for rid in sorted(ids)}
         asset_samples = {asset: [[], []] for asset in sorted(assets)}
+        rank_sums = {asset: [0.0, 0.0] for asset in sorted(assets)}
+        rank_top_counts = {asset: [0, 0] for asset in sorted(assets)}
         total_samples = [[], []]
         event_samples = {event_id: [] for event_id in sorted(event_ids)}
         for _ in range(draws):
@@ -255,6 +257,15 @@ def sample_literature_frequency_distributions(
             for asset in asset_totals:
                 for endpoint in range(2):
                     asset_samples[asset][endpoint].append(asset_totals[asset][endpoint])
+            # Ranks are deterministic under exact ties: asset id is the
+            # secondary key.  This makes a reported priority ordering
+            # reproducible without pretending that ties have a physical
+            # meaning.
+            for endpoint in range(2):
+                order = sorted(sorted(assets), key=lambda asset: (-asset_totals[asset][endpoint], asset))
+                for rank, asset in enumerate(order, start=1):
+                    rank_sums[asset][endpoint] += rank
+                rank_top_counts[order[0]][endpoint] += 1
             for endpoint in range(2):
                 total_samples[endpoint].append(total[endpoint])
 
@@ -269,6 +280,14 @@ def sample_literature_frequency_distributions(
             'known_expected_death_quantiles': [_quantile_triplet(endpoints) for endpoints in total_samples],
             'asset_known_expected_death_quantiles': {asset: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
                                                      for asset, endpoint_values in asset_samples.items()},
+            'asset_rank_stability': {
+                asset: {
+                    'mean_rank_low_high': [rank_sums[asset][i] / draws for i in range(2)],
+                    'top_rank_probability_low_high': [rank_top_counts[asset][i] / draws for i in range(2)],
+                    'rank_definition': '1 is highest known expected-fatality contribution; exact ties use asset id',
+                }
+                for asset in sorted(assets)
+            },
             'uncomputed_cases': result['uncomputed_cases'],
             'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
             'physical_validation_claim': False,
