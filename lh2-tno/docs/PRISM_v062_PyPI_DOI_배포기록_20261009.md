@@ -54,4 +54,4 @@ python -m pip install prism-risk==0.6.2
 prism --describe-modes
 ```
 
-외부 설비 provider와 원계측 자료는 배포 파일에 포함하지 않았다. provider 사고 방출 packet이 없으면 PRISM은 해당 사건을 `UNCOMPUTED`로 남기며 시설 전체 연간 IR/F-N을 0으로 대체하지 않는다. 최신 provider 감사는 JSON 556개를 검사했고 정상·스크리닝 유량 24개와 사고 방출 후보 0개를 분리했다. 따라서 0.6.2의 DOI/PyPI 공개는 소프트웨어 재현성 확보를 뜻하며, 전체 시설 QRA 완료·독립 물리 검증·1 Hz 신규 물리 계산 완료를 뜻하지 않는다.
+외부 설비 provider와 원계측 자료는 배포 파일에 포함하지 않았다. provider 사고 방출 packet이 없으면 PRISM은 해당 사건을 `UNCOMPUTED`로 남기며 시설 전체 연간 IR/F-N을 0으로 대체하지 않는다. 최신 provider 감사는 JSON 559개를 검사했고 정상·스크리닝 유량 24개와 사고 방출 후보 0개를 분리했다. 따라서 0.6.2의 DOI/PyPI 공개는 소프트웨어 재현성 확보를 뜻하며, 전체 시설 QRA 완료·독립 물리 검증·1 Hz 신규 물리 계산 완료를 뜻하지 않는다.

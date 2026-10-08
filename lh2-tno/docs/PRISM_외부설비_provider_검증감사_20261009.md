@@ -22,7 +22,7 @@ python lh2-tno/scripts/audit_external_provider.py `
 
 `results/20261009/provider_evidence/center_provider_audit_with_release_inventory.json`
 
-이 최신 재귀 인벤토리는 provider 루트의 JSON **556개**를 검사했다. 그중 정상·스크리닝 유량 파일은 24개였고, 사고 방출 packet 후보와 strict 검증 적격 packet은 각각 0개였다.
+이 최신 재귀 인벤토리는 provider 루트의 JSON **559개**를 검사했다. 그중 정상·스크리닝 유량 파일은 24개였고, 사고 방출 packet 후보와 strict 검증 적격 packet은 각각 0개였다.
 
 외부 원자료는 저장소에 복사하지 않고 다음 모델 루트에서 읽었다.
 

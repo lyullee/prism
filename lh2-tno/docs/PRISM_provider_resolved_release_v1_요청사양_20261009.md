@@ -83,7 +83,7 @@ python scripts/build_provider_request_catalog.py `
 
 ## 현재 외부 자료의 판정
 
-검사센터 provider 폴더 556개 JSON을 읽기 전용으로 감사한 결과, 정상·스크리닝 유량 파일 24개는 확인됐지만 적격 사고 packet과 비상 릴리프 packet은 각각 0건이었다. 따라서 현재 자료로는 실제 시설 위험을 계산하지 않는다. 감사기는 필요한 필드와 소유권·시계 규칙을 `release_evidence.provider_export_request`로 함께 출력한다.
+검사센터 provider 폴더 559개 JSON을 읽기 전용으로 감사한 결과, 정상·스크리닝 유량 파일 24개는 확인됐지만 적격 사고 packet과 비상 릴리프 packet은 각각 0건이었다. 따라서 현재 자료로는 실제 시설 위험을 계산하지 않는다. 감사기는 필요한 필드와 소유권·시계 규칙을 `release_evidence.provider_export_request`로 함께 출력한다.
 
 재현 명령:
 
