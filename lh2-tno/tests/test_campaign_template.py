@@ -4,7 +4,9 @@ from pathlib import Path
 import pytest
 from lh2_tno.campaign import AnnualCondition
 from lh2_tno.campaign_template import (
+    RequestBranchTemplate,
     build_equipment_campaign,
+    build_equipment_campaign_from_branch_catalog,
     build_equipment_campaign_from_catalog,
     build_equipment_campaign_from_provider_catalog,
 )
@@ -183,4 +185,74 @@ def test_provider_catalog_rejects_duplicate_provider_event_ids():
             _defaults(),
             conditions,
             scope_provenance="synthetic duplicate provider campaign",
+        )
+
+
+def test_branch_catalog_preserves_isolation_partition_and_matches_exact_event():
+    manifest, plan, request, conditions = _campaign_inputs()
+    branches = (
+        RequestBranchTemplate(
+            id="isolation-success",
+            probability_given_event=0.7,
+            provenance="synthetic reviewed success branch",
+            request=request,
+        ),
+        RequestBranchTemplate(
+            id="isolation-failure",
+            probability_given_event=0.3,
+            provenance="synthetic reviewed failure branch",
+            request=request,
+        ),
+    )
+    campaign = build_equipment_campaign_from_branch_catalog(
+        manifest, plan, branches, conditions,
+        scope_provenance="synthetic branch catalog test",
+    )
+    matched_route = next(
+        route for route in campaign.event_routes
+        if route.event_id.endswith("storage-shell/AREA_0.01%")
+    )
+    assert [branch.id for branch in matched_route.branches] == [
+        "isolation-success", "isolation-failure"
+    ]
+    assert sum(branch.probability_given_event for branch in matched_route.branches) == pytest.approx(1.0)
+    assert all(branch.request is not None for branch in matched_route.branches)
+
+
+def test_branch_catalog_retains_missing_probability_as_uncomputed_remainder():
+    manifest, plan, request, conditions = _campaign_inputs()
+    branch = RequestBranchTemplate(
+        id="isolation-success",
+        probability_given_event=0.7,
+        provenance="synthetic partial branch catalog",
+        request=request,
+    )
+    campaign = build_equipment_campaign_from_branch_catalog(
+        manifest, plan, (branch,), conditions,
+        scope_provenance="synthetic partial branch catalog test",
+    )
+    matched_route = next(
+        route for route in campaign.event_routes
+        if route.event_id.endswith("storage-shell/AREA_0.01%")
+    )
+    assert matched_route.branches[-1].id == "uncomputed-provider-branch-remainder"
+    assert matched_route.branches[-1].probability_given_event == pytest.approx(0.3)
+    assert matched_route.branches[-1].request is None
+
+
+def test_branch_catalog_rejects_probability_above_one():
+    manifest, plan, request, conditions = _campaign_inputs()
+    branches = tuple(
+        RequestBranchTemplate(
+            id=branch_id,
+            probability_given_event=0.6,
+            provenance="synthetic over-partition",
+            request=request,
+        )
+        for branch_id in ("a", "b")
+    )
+    with pytest.raises(ValueError, match="probabilities exceed one"):
+        build_equipment_campaign_from_branch_catalog(
+            manifest, plan, branches, conditions,
+            scope_provenance="synthetic over-partition test",
         )

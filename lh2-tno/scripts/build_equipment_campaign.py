@@ -15,7 +15,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from lh2_tno.campaign import AnnualCondition
 from lh2_tno.campaign_template import (
+    RequestBranchTemplate,
     build_equipment_campaign,
+    build_equipment_campaign_from_branch_catalog,
     build_equipment_campaign_from_catalog,
     build_equipment_campaign_from_provider_catalog,
 )
@@ -37,6 +39,10 @@ def main() -> int:
     requests.add_argument("--request-template", type=Path)
     requests.add_argument("--request-catalog", type=Path,
                           help="JSON array or {'templates': [...]} of consequence request templates")
+    requests.add_argument(
+        "--request-branch-catalog", type=Path,
+        help="JSON array or {'branches': [...]} of explicit conditional provider/barrier branches",
+    )
     requests.add_argument(
         "--provider-release-catalog", type=Path,
         help="explicit prism.resolved_release.v1 packet catalog from the equipment model",
@@ -75,6 +81,16 @@ def main() -> int:
             ConsequenceRequest.model_validate_json(json.dumps(item, allow_nan=False))
             for item in catalog
         )
+    elif args.request_branch_catalog:
+        catalog = json.loads(args.request_branch_catalog.read_text(encoding="utf-8"))
+        if isinstance(catalog, dict):
+            catalog = catalog.get("branches")
+        if not isinstance(catalog, list):
+            raise ValueError("branch request catalog must be a JSON array or an object with a branches array")
+        request_branches = tuple(
+            RequestBranchTemplate.model_validate_json(json.dumps(item, allow_nan=False))
+            for item in catalog
+        )
     else:
         try:
             loader = (
@@ -101,6 +117,11 @@ def main() -> int:
     elif args.request_catalog:
         campaign = build_equipment_campaign_from_catalog(
             manifest, plan, request_templates, conditions,
+            scope_provenance=args.scope_provenance,
+        )
+    elif args.request_branch_catalog:
+        campaign = build_equipment_campaign_from_branch_catalog(
+            manifest, plan, request_branches, conditions,
             scope_provenance=args.scope_provenance,
         )
     else:
@@ -132,6 +153,7 @@ def main() -> int:
         "input_mode": (
             "request_template" if args.request_template else
             "request_catalog" if args.request_catalog else
+            "request_branch_catalog" if args.request_branch_catalog else
             "provider_release_catalog"
         ),
         "provider_release_kind": args.release_kind if args.provider_release_catalog else None,

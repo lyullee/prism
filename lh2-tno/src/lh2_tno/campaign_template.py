@@ -10,8 +10,10 @@ from __future__ import annotations
 
 import json
 from collections.abc import Mapping, Sequence
+from pydantic import model_validator
 
 from .campaign import AnnualCondition, EventRoute, ReleaseBranch, RiskCampaign
+from .contracts import Contract, Fraction, Name
 from .consequences import ConsequenceRequest
 from .equipment_manifest import EquipmentManifest, audit_manifest
 from .frequency import FrequencyPlan, bind_event, generate_events
@@ -20,6 +22,35 @@ from .provider_release import (
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
 )
+
+
+class RequestBranchTemplate(Contract):
+    """One provider-resolved barrier/isolation branch for a frequency event.
+
+    The branch probability is conditional on initiation.  It is intentionally
+    separate from the consequence request so a provider can supply distinct
+    success/failure histories without copying one history into another branch.
+    """
+
+    id: Name
+    probability_given_event: Fraction
+    provenance: Name
+    request: ConsequenceRequest
+
+    @model_validator(mode="after")
+    def request_has_no_frequency(self):
+        request = self.request
+        if any(
+            value is not None
+            for value in (
+                request.annual_frequency_per_year,
+                request.annual_frequency_provenance,
+                request.frequency_event,
+                request.initiation_intensity_per_s,
+            )
+        ):
+            raise ValueError("request branch templates must not contain initiating frequency")
+        return self
 
 
 def build_equipment_campaign(
@@ -137,6 +168,101 @@ def build_equipment_campaign_from_catalog(
         routes.append(EventRoute(event_id=event.id, branches=(branch,)))
     return RiskCampaign(
         id="equipment-manifest-campaign",
+        frequency_plan=frequency_plan,
+        annual_conditions=annual_conditions,
+        event_routes=tuple(routes),
+        scope_provenance=scope_provenance,
+        maximum_physics_cases=maximum_physics_cases,
+    )
+
+
+def build_equipment_campaign_from_branch_catalog(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+    branch_templates: Sequence[RequestBranchTemplate],
+    annual_conditions: tuple[AnnualCondition, ...],
+    *,
+    scope_provenance: str,
+    maximum_physics_cases: int = 200,
+) -> RiskCampaign:
+    """Compile explicit isolation/barrier branches without dropping probability.
+
+    Each template is matched by component and physical opening.  For an event
+    with at least one match, matched conditional probabilities must not exceed
+    one; a missing remainder is retained as an explicit ``UNCOMPUTED`` branch.
+    This allows a provider to submit isolation-success and isolation-failure
+    histories while keeping an absent failure history visible in the campaign.
+    """
+    if not branch_templates:
+        raise ValueError("branch request catalog must contain at least one template")
+    manifest_audit = audit_manifest(manifest)
+    if manifest_audit["status"] != "EXECUTABLE":
+        raise ValueError(
+            "equipment manifest is not executable: "
+            + "; ".join(manifest_audit["blocking_reasons"])
+        )
+    if len({item.id for item in branch_templates}) != len(branch_templates):
+        raise ValueError("branch request catalog ids must be unique")
+    facility = manifest.to_facility()
+    events = generate_events(facility, frequency_plan)
+    routes: list[EventRoute] = []
+    for event in events:
+        matches = []
+        errors = []
+        for item in branch_templates:
+            try:
+                matches.append((item, bind_event(item.request, event)))
+            except (ValueError, TypeError) as error:
+                errors.append(f"branch {item.id}: {error}")
+        if not matches:
+            branch = ReleaseBranch(
+                id="uncomputed-no-matching-request",
+                probability_given_event=1.0,
+                provenance="no physical branch request was inferred or size-substituted",
+                uncomputed_reason="; ".join(errors) or "no branch request matched event",
+            )
+            routes.append(EventRoute(event_id=event.id, branches=(branch,)))
+            continue
+        total = sum(item.probability_given_event for item, _ in matches)
+        if total > 1.0 + 1e-10:
+            raise ValueError(
+                f"branch probabilities exceed one for event {event.id}: {total}"
+            )
+        branches: list[ReleaseBranch] = []
+        for item, bound in matches:
+            payload = bound.model_dump(mode="json")
+            payload.update(
+                annual_frequency_per_year=None,
+                annual_frequency_provenance=None,
+                frequency_event=None,
+                initiation_intensity_per_s=None,
+            )
+            template = ConsequenceRequest.model_validate_json(
+                json.dumps(payload, allow_nan=False)
+            )
+            branches.append(
+                ReleaseBranch(
+                    id=item.id,
+                    probability_given_event=item.probability_given_event,
+                    provenance=item.provenance,
+                    request=template,
+                )
+            )
+        remainder = 1.0 - total
+        if remainder > 1e-10:
+            branches.append(
+                ReleaseBranch(
+                    id="uncomputed-provider-branch-remainder",
+                    probability_given_event=remainder,
+                    provenance="provider branch catalog did not cover the full initiated-event partition",
+                    uncomputed_reason=(
+                        f"missing provider branch probability {remainder:.12g} for event {event.id}"
+                    ),
+                )
+            )
+        routes.append(EventRoute(event_id=event.id, branches=tuple(branches)))
+    return RiskCampaign(
+        id="equipment-manifest-branch-campaign",
         frequency_plan=frequency_plan,
         annual_conditions=annual_conditions,
         event_routes=tuple(routes),
