@@ -301,9 +301,9 @@
     "provider result has no atmospheric exit geometry and direction",
     "provider result does not declare an atmospheric release termination contract"
   ],
-  "development_archive_step": "PRISM-IJHE-step25-source.zip",
-  "development_archive_git_commit": "32e769d8aa77c44a94d5f092ce445201d1d4d311",
-  "development_archive_manifest": "MANIFEST_SHA256_step25.json",
+  "development_archive_step": "PRISM-IJHE-step26-source.zip",
+  "development_archive_git_commit": "86b0d85749f562868dba3184bd4b5a6941de68e9",
+  "development_archive_manifest": "MANIFEST_SHA256_step26.json",
   "development_archive_hash_errors": 0,
   "layered_tank_boundary_audit_cases": 2,
   "layered_tank_boundary_audit_atmospheric_probe_executed": true,
