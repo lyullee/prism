@@ -329,6 +329,14 @@ Purple 배관에는 최소 적용 길이 10 m와 flange 포함 범위가 있습�
 
 이 경로에서 확인한 것은 **명령된 차단이 주어진 조건에서 방출을 멈추는지**입니다. 0.25초 뒤 유량이 0이 되고 질량·에너지 잔차도 기록됩니다. 밸브 고장확률, 실제 actuator 지연, 액체·2상 방출, 현장 압력·재고 보정은 아직 계산하지 않습니다. 결과는 `results/20261009/equipment_isolation_campaign/`에 저장하며, 다른 LOC는 `UNCOMPUTED`, 시설 전체 위험도는 `null`로 남깁니다.
 
+개발 환경에서 이 진단을 다시 실행하려면 외부 provider 경로가 현재 스크립트와 같아야 합니다.
+
+```powershell
+.venv\Scripts\python.exe lh2-tno/scripts/validate_equipment_isolation.py
+```
+
+이 명령은 provider transient 이력을 한 번 계산한 뒤 두 기상 조건의 시설 사례에 전달합니다. 실행시간은 PC·격자·시계에 따라 달라지며, 결과의 `verification.json`과 `campaign_result.json`을 함께 확인합니다.
+
 ### 센서 갱신
 
 ```text
