@@ -126,7 +126,7 @@
   "publication_workflow_run": "https://github.com/lyullee/prism/actions/runs/37795878407",
   "publication_record": "docs/PRISM_v060_PyPI_DOI_배포완료_20261008.md",
   "development_date_kst": "2026-10-09",
-  "development_since_public_release": "post-0.6.0 campaign/sensitivity/natural-termination/literature-uncertainty development; unpublished",
+  "development_since_public_release": "post-0.6.0 campaign/sensitivity/natural-termination/literature-uncertainty/inventory-liquid-jet development; unpublished",
   "ijhe_completion_goal_status": "active",
   "ijhe_completion_goal_record": "docs/PRISM_IJHE_완성목표_20261009.md",
   "multi_event_weather_barrier_campaign_implemented": true,

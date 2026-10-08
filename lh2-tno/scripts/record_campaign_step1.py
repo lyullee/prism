@@ -41,7 +41,7 @@ record={'date_kst':'2026-10-09','goal_status':'active','baseline_public_release'
 (OUT/'frequency_sensitivity.json').write_text(json.dumps(sens,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 p=ROOT/'CURRENT_STATUS.json'
 status=json.loads(p.read_text(encoding='utf-8'))
-status.update({'development_date_kst':'2026-10-09','development_since_public_release':'post-0.6.0 campaign/sensitivity/natural-termination/literature-uncertainty development; unpublished',
+status.update({'development_date_kst':'2026-10-09','development_since_public_release':'post-0.6.0 campaign/sensitivity/natural-termination/literature-uncertainty/inventory-liquid-jet development; unpublished',
     'unit_contract_conservation_tests_passed':194,'ijhe_completion_goal_status':'active',
     'ijhe_completion_goal_record':'docs/PRISM_IJHE_완성목표_20261009.md',
     'multi_event_weather_barrier_campaign_implemented':True,'legacy_tno_ir_fn_aggregator_connected_to_lh2_campaign':True,
