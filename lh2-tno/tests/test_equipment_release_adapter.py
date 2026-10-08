@@ -3,6 +3,7 @@ import pytest
 from lh2_tno.equipment_release_adapter import (
     EquipmentReleaseExportError,
     build_resolved_gas_release_from_provider_response,
+    build_resolved_liquid_release_from_provider_response,
 )
 
 
@@ -99,3 +100,84 @@ def test_adapter_requires_explicit_event_kind():
     del response["data"]["event_kind"]
     with pytest.raises(EquipmentReleaseExportError, match="event_kind=accidental_leak"):
         _build(response)
+
+
+def _liquid_response():
+    return {
+        "operation": "liquid_release",
+        "data": {
+            "event_kind": "accidental_leak",
+            "upstream_service": "LH2",
+            "fluid": "ParaHydrogen",
+            "phase_basis": "two_phase",
+            "duration_s": 0.2,
+            "available_mass_kg": 1.0,
+            "cumulative_mass_out_kg": 0.04,
+            "cumulative_specific_enthalpy_out_j": 40000.0,
+            "reference_area_m2": 0.02,
+            "reference_area_provenance": "provider flashed-gas reference area",
+            "termination_provenance": "provider positive-mass threshold",
+            "droplet_partition_provenance": "provider ballistic ground interception",
+            "steps": [
+                {
+                    "time_s": 0.0,
+                    "total_mass_flow_kg_s": 0.2,
+                    "gas_mass_flow_kg_s": 0.1,
+                    "ground_liquid_mass_flow_kg_s": 0.1,
+                    "airborne_liquid_mass_flow_kg_s": 0.0,
+                    "specific_enthalpy_j_kg": 1.0e6,
+                    "gas_pressure_pa_abs": 100000.0,
+                    "gas_temperature_k": 20.5,
+                    "gas_density_kg_m3": 0.2,
+                    "gas_effective_area_m2": 0.02,
+                    "gas_velocity_m_s": 25.0,
+                    "gas_velocity_origin": "provider_resolved",
+                    "droplet_class_outcomes": [
+                        {
+                            "ground_liquid_mass_flow_kg_s": 0.1,
+                            "airborne_liquid_mass_flow_kg_s": 0.0,
+                            "flight_time_s": 0.1,
+                            "impact_position_m": [1.0, 0.0, 0.0],
+                            "droplet_diameter_m": 0.001,
+                        }
+                    ],
+                }
+            ],
+        },
+    }
+
+
+def _build_liquid(response=None):
+    return build_resolved_liquid_release_from_provider_response(
+        _liquid_response() if response is None else response,
+        component_id="tank-1",
+        port_id="tank-1.liquid-leak",
+        event_id="tank-1/liquid/area-1",
+        provider_source_digest="b" * 64,
+        upstream_service_provenance="provider liquid tank state",
+        provider_boundary_reference="provider liquid flash and ground partition",
+        input_origin="model_prediction",
+        position_enu_m=[0.0, 0.0, 1.0],
+        direction_enu=[1.0, 0.0, 0.0],
+        ambient_pressure_pa_abs=100000.0,
+        ambient_temperature_k=288.15,
+        failure_opening_diameter_m=0.1,
+    )
+
+
+def test_liquid_adapter_promotes_partition_and_mass_ledger():
+    release = _build_liquid()
+    assert release.phase_basis == "two_phase"
+    assert release.integrated_mass_kg == pytest.approx(0.04)
+    assert release.integrated_specific_enthalpy_out_j == pytest.approx(40000.0)
+
+
+def test_liquid_adapter_rejects_airborne_liquid_without_adapter():
+    response = _liquid_response()
+    step = response["data"]["steps"][0]
+    step["airborne_liquid_mass_flow_kg_s"] = 0.01
+    step["total_mass_flow_kg_s"] = 0.21
+    step["droplet_class_outcomes"][0]["airborne_liquid_mass_flow_kg_s"] = 0.01
+    response["data"]["cumulative_mass_out_kg"] = 0.042
+    with pytest.raises(EquipmentReleaseExportError, match="failed strict PRISM validation"):
+        _build_liquid(response)

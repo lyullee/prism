@@ -13,7 +13,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .contracts import canonical_digest
-from .equipment_boundary import ResolvedGasRelease
+from .equipment_boundary import ResolvedGasRelease, ResolvedLiquidRelease
 
 
 class EquipmentReleaseExportError(ValueError):
@@ -31,6 +31,16 @@ _STEP_FIELDS = (
     "velocity_m_s",
     "area_provenance",
     "velocity_origin",
+)
+
+_LIQUID_STEP_FIELDS = (
+    "time_s",
+    "total_mass_flow_kg_s",
+    "gas_mass_flow_kg_s",
+    "ground_liquid_mass_flow_kg_s",
+    "airborne_liquid_mass_flow_kg_s",
+    "specific_enthalpy_j_kg",
+    "droplet_class_outcomes",
 )
 
 
@@ -198,7 +208,155 @@ def build_resolved_gas_release_from_provider_response(
         ) from error
 
 
+def build_resolved_liquid_release_from_provider_response(
+    provider_response: Mapping[str, Any],
+    *,
+    component_id: str,
+    port_id: str,
+    event_id: str,
+    provider_source_digest: str,
+    upstream_service_provenance: str,
+    provider_boundary_reference: str,
+    input_origin: str,
+    position_enu_m: Sequence[float],
+    direction_enu: Sequence[float],
+    ambient_pressure_pa_abs: float,
+    ambient_temperature_k: float,
+    failure_opening_diameter_m: float,
+    provider_result: Any | None = None,
+    provider_result_digest: str | None = None,
+) -> ResolvedLiquidRelease:
+    """Build a strict liquid/two-phase packet from provider-owned rows.
+
+    The provider response must explicitly declare the accident kind, phase
+    partition, liquid/gas mass split, droplet classes, and termination
+    provenance.  In particular, a positive airborne-liquid rate is rejected
+    by the downstream contract until a validated droplet adapter exists.
+    """
+
+    if not isinstance(provider_response, Mapping):
+        raise EquipmentReleaseExportError("provider_response must be an object")
+    data = provider_response.get("data")
+    if not isinstance(data, Mapping):
+        raise EquipmentReleaseExportError("provider_response.data must be an object")
+    if data.get("event_kind") != "accidental_leak":
+        raise EquipmentReleaseExportError(
+            "provider data must explicitly declare event_kind=accidental_leak"
+        )
+    raw_steps = data.get("steps")
+    if not isinstance(raw_steps, Sequence) or isinstance(raw_steps, (str, bytes)) or not raw_steps:
+        raise EquipmentReleaseExportError("provider data must contain a non-empty liquid steps history")
+    steps: list[dict[str, Any]] = []
+    for index, raw in enumerate(raw_steps):
+        if not isinstance(raw, Mapping):
+            raise EquipmentReleaseExportError(f"provider data.steps[{index}] must be an object")
+        missing = [field for field in _LIQUID_STEP_FIELDS if field not in raw]
+        if missing:
+            raise EquipmentReleaseExportError(
+                f"provider data.steps[{index}] missing required fields: {', '.join(missing)}"
+            )
+        row = dict(raw)
+        for field in _LIQUID_STEP_FIELDS[:6]:
+            row[field] = _finite(row[field], f"provider data.steps[{index}].{field}")
+            if row[field] < 0.0 and field != "specific_enthalpy_j_kg":
+                raise EquipmentReleaseExportError(
+                    f"provider data.steps[{index}].{field} must be non-negative"
+                )
+        if not isinstance(row["droplet_class_outcomes"], Sequence) or isinstance(
+            row["droplet_class_outcomes"], (str, bytes)
+        ):
+            raise EquipmentReleaseExportError(
+                f"provider data.steps[{index}].droplet_class_outcomes must be an array"
+            )
+        steps.append(row)
+
+    duration_s = _positive(data.get("duration_s"), "provider data.duration_s")
+    available_mass_kg = _positive(data.get("available_mass_kg"), "provider data.available_mass_kg")
+    cumulative_mass = _finite(
+        data.get("cumulative_mass_out_kg"), "provider data.cumulative_mass_out_kg"
+    )
+    cumulative_enthalpy = _finite(
+        data.get("cumulative_specific_enthalpy_out_j"),
+        "provider data.cumulative_specific_enthalpy_out_j",
+    )
+    phase_basis = _text(data.get("phase_basis"), "provider data.phase_basis")
+    upstream_service = _text(data.get("upstream_service"), "provider data.upstream_service")
+    fluid = _text(data.get("fluid"), "provider data.fluid")
+    reference_area = _positive(
+        data.get("reference_area_m2"), "provider data.reference_area_m2"
+    )
+    reference_area_provenance = _text(
+        data.get("reference_area_provenance"),
+        "provider data.reference_area_provenance",
+    )
+    termination = _text(
+        data.get("termination_provenance"), "provider data.termination_provenance"
+    )
+    droplet_provenance = _text(
+        data.get("droplet_partition_provenance"),
+        "provider data.droplet_partition_provenance",
+    )
+    result_payload = provider_response if provider_result is None else provider_result
+    result_digest = provider_result_digest or canonical_digest(result_payload)
+    if not isinstance(result_digest, str) or len(result_digest) != 64:
+        raise EquipmentReleaseExportError("provider_result_digest must be a 64-character digest")
+
+    packet = {
+        "component_id": _text(component_id, "component_id"),
+        "port_id": _text(port_id, "port_id"),
+        "event_id": _text(event_id, "event_id"),
+        "event_kind": "accidental_leak",
+        "upstream_service": upstream_service,
+        "upstream_service_provenance": _text(
+            upstream_service_provenance, "upstream_service_provenance"
+        ),
+        "boundary_kind": "resolved_atmospheric_liquid_exit",
+        "phase_basis": phase_basis,
+        "enthalpy_convention": "provider_total_outlet_enthalpy",
+        "property_basis": {
+            "fluid": fluid,
+            "backend": "CoolProp-HEOS",
+            "energy_reference": f"CoolProp-HEOS:{fluid}:native",
+        },
+        "provider_source_digest": _text(provider_source_digest, "provider_source_digest"),
+        "provider_result_digest": result_digest,
+        "provider_boundary_reference": _text(
+            provider_boundary_reference, "provider_boundary_reference"
+        ),
+        "input_origin": _text(input_origin, "input_origin"),
+        "position_enu_m": _vector(position_enu_m, "position_enu_m"),
+        "direction_enu": _vector(direction_enu, "direction_enu"),
+        "ambient_pressure_pa_abs": _positive(
+            ambient_pressure_pa_abs, "ambient_pressure_pa_abs"
+        ),
+        "ambient_temperature_k": _positive(
+            ambient_temperature_k, "ambient_temperature_k"
+        ),
+        "duration_s": duration_s,
+        "available_mass_kg": available_mass_kg,
+        "cumulative_mass_out_kg": cumulative_mass,
+        "cumulative_specific_enthalpy_out_j": cumulative_enthalpy,
+        "reference_area_m2": reference_area,
+        "reference_area_provenance": reference_area_provenance,
+        "steps": steps,
+        "termination_provenance": termination,
+        "droplet_partition_provenance": droplet_provenance,
+        "failure_opening_diameter_m": _positive(
+            failure_opening_diameter_m, "failure_opening_diameter_m"
+        ),
+    }
+    try:
+        return ResolvedLiquidRelease.model_validate_json(
+            json.dumps(packet, allow_nan=False)
+        )
+    except (TypeError, ValueError) as error:
+        raise EquipmentReleaseExportError(
+            f"provider liquid history failed strict PRISM validation: {error}"
+        ) from error
+
+
 __all__ = [
     "EquipmentReleaseExportError",
     "build_resolved_gas_release_from_provider_response",
+    "build_resolved_liquid_release_from_provider_response",
 ]

@@ -22,6 +22,7 @@ from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.contracts import Facility, canonical_digest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease
+from lh2_tno.equipment_release_adapter import build_resolved_liquid_release_from_provider_response
 from lh2_tno.pipeline import ResearchPipeline
 
 
@@ -30,8 +31,8 @@ def save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def provider_packet(source: dict, provider: dict) -> dict:
-    """Map the external liquid-jet history to the explicit provider contract."""
+def provider_packet(source: dict, provider: dict) -> ResolvedLiquidRelease:
+    """Map the external liquid-jet history through the shared adapter."""
     duration = float(source["duration_s"])
     steps = []
     h_out = float(CP.PropsSI("H", "P", source["tank"]["pressure_pa"],
@@ -69,32 +70,40 @@ def provider_packet(source: dict, provider: dict) -> dict:
         raise ValueError("provider returned no left-held liquid interval")
     ends = [x["time_s"] for x in steps[1:]] + [duration]
     mass = sum(x["total_mass_flow_kg_s"] * (end - x["time_s"]) for x, end in zip(steps, ends))
-    return {
-        "component_id": "storage", "port_id": "storage.out",
-        "event_id": "slabx-lh2-liquid-jet-provider-diagnostic",
-        "event_kind": "accidental_leak", "upstream_service": "LH2",
-        "upstream_service_provenance": "SLABx-LH2 liquid-jet source operator",
-        "boundary_kind": "resolved_atmospheric_liquid_exit", "phase_basis": "two_phase",
-        "enthalpy_convention": "provider_total_outlet_enthalpy",
-        "property_basis": {"fluid": source["tank"]["fluid"], "backend": "CoolProp-HEOS",
-                            "energy_reference": f"CoolProp-HEOS:{source['tank']['fluid']}:native"},
-        "provider_source_digest": canonical_digest(source),
-        "provider_result_digest": canonical_digest(provider),
-        "provider_boundary_reference": "SLABx-LH2 atmospheric flash and ground interception result",
-        "input_origin": "model_prediction", "position_enu_m": [0.0, 0.0, source["nozzle"]["height_m"]],
-        "direction_enu": list(source["nozzle"]["direction_enu"]),
-        "ambient_pressure_pa_abs": source["ambient"]["pressure_pa"],
-        "ambient_temperature_k": source["ambient"]["temperature_k"],
-        "duration_s": duration, "available_mass_kg": mass,
-        "cumulative_mass_out_kg": mass,
-        "cumulative_specific_enthalpy_out_j": mass * h_out,
-        "reference_area_m2": float(provider["data"]["steps"][0]["gas"]["effective_area_m2"]),
-        "reference_area_provenance": "SLABx-LH2 flashed-gas outlet area",
-        "steps": steps,
-        "termination_provenance": "declared finite diagnostic inventory depletion horizon",
-        "droplet_partition_provenance": "SLABx-LH2 ballistic ground-interception result",
-        "failure_opening_diameter_m": source["nozzle"]["diameter_m"],
+    response = {
+        "data": {
+            "event_kind": "accidental_leak",
+            "upstream_service": "LH2",
+            "fluid": source["tank"]["fluid"],
+            "phase_basis": "two_phase",
+            "duration_s": duration,
+            "available_mass_kg": mass,
+            "cumulative_mass_out_kg": mass,
+            "cumulative_specific_enthalpy_out_j": mass * h_out,
+            "reference_area_m2": float(provider["data"]["steps"][0]["gas"]["effective_area_m2"]),
+            "reference_area_provenance": "SLABx-LH2 flashed-gas outlet area",
+            "steps": steps,
+            "termination_provenance": "declared finite diagnostic inventory depletion horizon",
+            "droplet_partition_provenance": "SLABx-LH2 ballistic ground-interception result",
+        }
     }
+    return build_resolved_liquid_release_from_provider_response(
+        response,
+        component_id="storage",
+        port_id="storage.out",
+        event_id="slabx-lh2-liquid-jet-provider-diagnostic",
+        provider_source_digest=canonical_digest(source),
+        provider_result=provider,
+        provider_result_digest=canonical_digest(provider),
+        upstream_service_provenance="SLABx-LH2 liquid-jet source operator",
+        provider_boundary_reference="SLABx-LH2 atmospheric flash and ground interception result",
+        input_origin="model_prediction",
+        position_enu_m=[0.0, 0.0, source["nozzle"]["height_m"]],
+        direction_enu=source["nozzle"]["direction_enu"],
+        ambient_pressure_pa_abs=source["ambient"]["pressure_pa"],
+        ambient_temperature_k=source["ambient"]["temperature_k"],
+        failure_opening_diameter_m=source["nozzle"]["diameter_m"],
+    )
 
 
 def main() -> None:
@@ -122,8 +131,7 @@ def main() -> None:
     config = BackendConfig.model_validate_json(json.dumps(config_raw))
     backend = IsolatedBackend(config)
     provider = backend.run("liquid_jet_source", source)
-    packet = provider_packet(source, provider)
-    release = ResolvedLiquidRelease.model_validate_json(json.dumps(packet, allow_nan=False))
+    release = provider_packet(source, provider)
     ground = provider["data"]["steps"][0]["ground"]
 
     facility_data = json.loads((ROOT / "examples" / "consequence_facility.json").read_text(encoding="utf-8"))
@@ -163,7 +171,7 @@ def main() -> None:
     out = ROOT / "results" / "20261009" / "equipment_liquid_release"
     save(out / "provider_source_request.json", source)
     save(out / "provider_source_response.json", provider)
-    save(out / "resolved_liquid_release.json", packet)
+    save(out / "resolved_liquid_release.json", release.model_dump(mode="json"))
     save(out / "facility.json", facility.model_dump(mode="json"))
     save(out / "request.json", request)
     save(out / "result.json", result)
