@@ -240,6 +240,7 @@ def run(request):
                            post_max<=1.0e-14 and
                            float(valve_cfg.get('closed_leakage_CdA_m2',0.0))==0.0)
         return {'data':{
+            'event_kind':'accidental_leak',
             'fluid':fluid.fluid,
             'steps':rows,
             'duration_s':duration,
@@ -390,6 +391,7 @@ def run(request):
             'provider horizon ended above the declared positive-mass depletion threshold; no extrapolation'
         )
         return {'data':{
+            'event_kind':'accidental_leak',
             'fluid':fluid.fluid,
             'steps':rows,
             'duration_s':elapsed,

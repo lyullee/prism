@@ -19,8 +19,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.backend import IsolatedBackend, tree_digest
 from lh2_tno.campaign import RiskCampaign
-from lh2_tno.contracts import Facility, canonical_digest
+from lh2_tno.contracts import Facility
 from lh2_tno.equipment_boundary import ResolvedGasRelease
+from lh2_tno.equipment_release_adapter import build_resolved_gas_release_from_provider_response
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
 
@@ -91,61 +92,26 @@ def make_release(
     request = dynamic_input(outcome, valve_area_m2)
     response = backend.run("equipment_dynamic_isolation", request)
     data = response["data"]
-    steps = []
-    for row in data["steps"]:
-        steps.append(
-            {
-                key: row[key]
-                for key in (
-                    "time_s",
-                    "mass_flow_kg_s",
-                    "pressure_pa_abs",
-                    "specific_enthalpy_j_kg",
-                    "temperature_k",
-                    "density_kg_m3",
-                    "effective_area_m2",
-                    "velocity_m_s",
-                )
-            }
-            | {
-                "area_provenance": "provider-declared commanded-valve area",
-                "velocity_origin": "mass_continuity_from_declared_area",
-            }
-        )
-    packet = {
-        "component_id": "terminal_pipe",
-        "port_id": "terminal_pipe.out",
-        "event_id": f"equipment-isolation-campaign/terminal_pipe/{loc}/{outcome}",
-        "event_kind": "accidental_leak",
-        "enthalpy_convention": "static_exit_enthalpy",
-        "property_basis": {
-            "fluid": "ParaHydrogen",
-            "backend": "CoolProp-HEOS",
-            "energy_reference": "CoolProp-HEOS:ParaHydrogen:native",
-        },
-        "upstream_service": "LH2",
-        "upstream_service_provenance": "LH2 service boundary; layered tank and commanded isolation valve are provider-owned",
-        "provider_source_digest": provider_digest,
-        "provider_result_digest": canonical_digest(response),
-        "provider_boundary_reference": "LayeredTankNetworkSimulator isolation_valve link to ambient sink",
-        "input_origin": "synthetic",
-        "position_enu_m": [0.0, 0.0, 1.0],
-        "direction_enu": [1.0, 0.0, 0.0],
-        "ambient_pressure_pa_abs": 100000.0,
-        "ambient_temperature_k": 288.15,
-        "duration_s": data["duration_s"],
-        "available_mass_kg": data["available_mass_kg"],
-        "cumulative_mass_out_kg": data["cumulative_mass_out_kg"],
-        "cumulative_static_enthalpy_out_j": data["cumulative_static_enthalpy_out_j"],
-        "steps": steps,
-        "termination_provenance": (
-            "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
-            if outcome == "success"
-            else "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+    release = build_resolved_gas_release_from_provider_response(
+        response,
+        component_id="terminal_pipe",
+        port_id="terminal_pipe.out",
+        event_id=f"equipment-isolation-campaign/terminal_pipe/{loc}/{outcome}",
+        provider_source_digest=provider_digest,
+        upstream_service_provenance=(
+            "LH2 service boundary; layered tank and commanded isolation valve are provider-owned"
         ),
-        "failure_opening_diameter_m": math.sqrt(4.0 * valve_area_m2 / math.pi),
-    }
-    return ResolvedGasRelease.model_validate_json(json.dumps(packet)), request, response
+        provider_boundary_reference=(
+            "LayeredTankNetworkSimulator isolation_valve link to ambient sink"
+        ),
+        input_origin="synthetic",
+        position_enu_m=[0.0, 0.0, 1.0],
+        direction_enu=[1.0, 0.0, 0.0],
+        ambient_pressure_pa_abs=100000.0,
+        ambient_temperature_k=288.15,
+        failure_opening_diameter_m=math.sqrt(4.0 * valve_area_m2 / math.pi),
+    )
+    return release, request, response
 
 
 def make_dynamic_facility() -> Facility:

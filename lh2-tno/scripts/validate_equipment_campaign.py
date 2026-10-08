@@ -23,6 +23,7 @@ from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest
 from lh2_tno.campaign import RiskCampaign
 from lh2_tno.contracts import Facility, canonical_digest
 from lh2_tno.equipment_boundary import ResolvedGasRelease
+from lh2_tno.equipment_release_adapter import build_resolved_gas_release_from_provider_response
 from lh2_tno.frequency import generate_events
 from lh2_tno.pipeline import ResearchPipeline
 
@@ -151,38 +152,42 @@ def make_release(backend: IsolatedBackend, provider_digest: str) -> ResolvedGasR
         step["mass_flow_kg_s"] * step["specific_enthalpy_j_kg"] * (end - step["time_s"])
         for step, end in zip(steps, ends)
     )
-    packet = {
-        "component_id": "terminal_pipe",
-        "port_id": "terminal_pipe.out",
-        "event_id": "equipment-coupling-campaign/terminal_pipe/AREA_100%",
-        "event_kind": "accidental_leak",
-        "enthalpy_convention": "static_exit_enthalpy",
-        "property_basis": {
-            "fluid": "ParaHydrogen",
-            "backend": "CoolProp-HEOS",
-            "energy_reference": "CoolProp-HEOS:ParaHydrogen:native",
-        },
-        "upstream_service": "LH2",
-        "upstream_service_provenance": "LH2 service boundary; native equipment model flashes the outlet to atmospheric gas",
-        "provider_source_digest": provider_digest,
-        "provider_result_digest": canonical_digest(exports),
-        "provider_boundary_reference": "SteadyNetwork terminal link to atmosphere; native terminal bore",
-        "input_origin": "synthetic",
-        "position_enu_m": [0.0, 0.0, 1.0],
-        "direction_enu": [1.0, 0.0, 0.0],
-        "ambient_pressure_pa_abs": 101325.0,
-        "ambient_temperature_k": 288.15,
-        "duration_s": duration_s,
-        "available_mass_kg": 0.01,
-        "cumulative_mass_out_kg": mass,
-        "cumulative_static_enthalpy_out_j": energy,
-        "steps": steps,
-        "termination_provenance": "synthetic 0.37 s command closure; provider transient feedback not qualified",
-        "failure_opening_diameter_m": 0.0254,
-    }
     save("provider_inputs.json", inputs)
     save("provider_exports.json", exports)
-    return ResolvedGasRelease.model_validate_json(json.dumps(packet))
+    provider_response = {
+        "data": {
+            "event_kind": "accidental_leak",
+            "duration_s": duration_s,
+            "available_mass_kg": 0.01,
+            "cumulative_mass_out_kg": mass,
+            "cumulative_static_enthalpy_out_j": energy,
+            "steps": steps,
+            "termination_provenance": (
+                "synthetic 0.37 s command closure; provider transient feedback not qualified"
+            ),
+        }
+    }
+    return build_resolved_gas_release_from_provider_response(
+        provider_response,
+        component_id="terminal_pipe",
+        port_id="terminal_pipe.out",
+        event_id="equipment-coupling-campaign/terminal_pipe/AREA_100%",
+        provider_source_digest=provider_digest,
+        provider_result=exports,
+        provider_result_digest=canonical_digest(exports),
+        upstream_service_provenance=(
+            "LH2 service boundary; native equipment model flashes the outlet to atmospheric gas"
+        ),
+        provider_boundary_reference=(
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ),
+        input_origin="synthetic",
+        position_enu_m=[0.0, 0.0, 1.0],
+        direction_enu=[1.0, 0.0, 0.0],
+        ambient_pressure_pa_abs=101325.0,
+        ambient_temperature_k=288.15,
+        failure_opening_diameter_m=0.0254,
+    )
 
 
 def main() -> None:
