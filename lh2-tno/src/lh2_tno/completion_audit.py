@@ -59,6 +59,19 @@ def build_ijhe_completion_audit(
             "no executed release-to-consequence case is present",
         ),
         _check(
+            "actual_provider_release_packet",
+            current_status.get("provider_release_contract_actual_facility_packet_available") is True,
+            {
+                "actual_facility_packet_available": current_status.get(
+                    "provider_release_contract_actual_facility_packet_available"
+                ),
+                "release_inventory_status": current_status.get(
+                    "external_provider_evidence_release_inventory_status"
+                ),
+            },
+            "only synthetic or screening provider releases are available for this campaign",
+        ),
+        _check(
             "release_duration_isolation_inventory_ledger",
             bool(executed_cases) and len(ledger_cases) == len(executed_cases),
             {
