@@ -5,15 +5,19 @@
       "id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "profile": "LH2_VESSEL",
-      "physical_scope_ids": ["storage-tank-01-shell"],
+      "physical_scope_ids": [
+        "storage-tank-01-shell"
+      ],
       "classification_basis": "synthetic example only; reviewed LH2 vessel profile must be confirmed for a real facility",
-      "nominal_diameter_m": 1.8
+      "nominal_diameter_m": 1.27
     },
     {
       "id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "profile": "LH2_PIPE",
-      "physical_scope_ids": ["liquid-transfer-line-01-segment"],
+      "physical_scope_ids": [
+        "liquid-transfer-line-01-segment"
+      ],
       "classification_basis": "synthetic example only; transfer pipe length and failure exposure require equipment review",
       "nominal_diameter_m": 0.025,
       "length_per_item_m": 10.0

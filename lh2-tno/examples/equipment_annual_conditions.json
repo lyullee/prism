@@ -1,0 +1,23 @@
+[
+  {
+    "id": "synthetic-west-3ms",
+    "annual_probability": 1.0,
+    "weather": {
+      "wind_speed_m_s": 3.0,
+      "wind_from_bearing_deg": 270.0,
+      "measurement_height_m": 10.0,
+      "roughness_m": 0.03,
+      "stability": "D",
+      "relative_humidity": 0.5
+    },
+    "population": [
+      {
+        "receptor_id": "receptor-01",
+        "persons": 1.0,
+        "presence_probability": 1.0,
+        "provenance": "synthetic demonstration receptor; not site occupancy data"
+      }
+    ],
+    "provenance": "synthetic single outdoor weather/population condition"
+  }
+]

@@ -1,0 +1,115 @@
+{
+  "component_id": "storage-tank-01",
+  "source_input": {
+    "tank": {
+      "pressure_pa": 600000.0,
+      "temperature_k": 20.893,
+      "volume_m3": 10.0,
+      "vapour_quality": 0.0,
+      "wall_heat_input_w": 0.0,
+      "fluid": "Hydrogen"
+    },
+    "pipe_sections": [],
+    "nozzle": {
+      "diameter_m": 0.0127,
+      "length_m": 0.01,
+      "height_m": 1.0,
+      "direction_enu": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "discharge_coefficient": 1.0,
+      "resistance_k": 0.0
+    },
+    "ambient": {
+      "pressure_pa": 101325.0,
+      "temperature_k": 288.15,
+      "wind_speed_m_s": 3.0,
+      "wind_from_bearing_deg": 270.0
+    },
+    "choices": {
+      "phase_model": "HEM",
+      "hnem_eta": null,
+      "fictitious_nozzle": "momentum_adiabatic",
+      "droplet_correlation": "rescigno_yellow_book",
+      "rescigno_quality_path": "printed_equation",
+      "distribution": "single_smd"
+    },
+    "duration_s": 0.2,
+    "time_step_s": 0.2
+  },
+  "available_mass_kg": 10.0,
+  "source_position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "weather": {
+    "wind_speed_m_s": 3.0,
+    "wind_from_bearing_deg": 270.0,
+    "measurement_height_m": 10.0,
+    "roughness_m": 0.03,
+    "stability": "D",
+    "relative_humidity": 0.5
+  },
+  "pool": null,
+  "ignition": {
+    "direct_probability": 0.1,
+    "delayed_probability_given_no_direct": 0.2,
+    "explosion_probability_given_delayed": 0.4,
+    "delayed_time_s": 1.0,
+    "burn_back_duration_s": 2.0,
+    "obstructed_energy_fraction": 0.08,
+    "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+    "deflagration_only": true
+  },
+  "domain": {
+    "downwind_bounds_m": [
+      -2.0,
+      80.0
+    ],
+    "crosswind_bounds_m": [
+      -10.0,
+      10.0
+    ],
+    "height_bounds_m": [
+      0.0,
+      12.0
+    ],
+    "cell_size_m": 0.5
+  },
+  "evaluation_times_s": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    10.0,
+    20.0
+  ],
+  "radiative_fraction_range": [
+    0.06,
+    0.12
+  ],
+  "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+  "annual_frequency_per_year": null,
+  "annual_frequency_provenance": null,
+  "occupancy_probability": 1.0,
+  "initiation_intensity_per_s": null,
+  "frequency_scope": "single_initiating_event_current_weather",
+  "dispersion_x_max_m": 100.0,
+  "transition_dx_m": 0.05,
+  "transition_x_max_m": 50.0,
+  "n_puff_steps": 80,
+  "release_termination": {
+    "basis": "synthetic_diagnostic_horizon",
+    "time_s": 0.2,
+    "provenance": "synthetic provider template; actual provider termination must replace this route"
+  }
+}
