@@ -324,6 +324,7 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 ```
 
 출력의 `literature_frequency_distribution.scenarios[*]`는 known contribution의 p05/p50/p95와 사건별 표본 빈도를 담습니다. `asset_rank_stability`에는 각 빈도 표본에서 계산된 기대 사망 기여도의 평균 순위와 1위 확률을 낮은/높은 복사율 끝점별로 기록합니다. 동률은 자산 ID로 결정해 재현성을 확보합니다. 표본화는 저장된 피해 원자를 다시 가중하므로 SLABx-LH2나 확산 물리를 반복 실행하지 않습니다. 이 순위는 계산된 known contribution 안에서만 유효하며, 미계산 사고를 포함한 시설 전체 우선순위를 뜻하지 않습니다.
+캠페인 기본 결과의 `coverage.by_component`에는 시설의 각 탱크·배관·밸브·펌프 등에 대해 생성된 사건 수, 개시빈도, 실행/미계산 건수와 명시적 제외 사유가 들어갑니다. `PARTIAL` 또는 `EXCLUDED` 설비가 남아 있으면 합산값을 전체 시설 위험으로 표시하지 않습니다.
 실증 P/T/유량은 물리 검증에 쓰지만 사고 건수·관찰 설비수·기간을 대신하지 않습니다.
 확인된 사고와 동일 범위의 관찰 노출이 생기면 선택형 Gamma-Poisson 업데이트 계약을 적용할 수 있습니다.
 경보 건수를 누출 건수로 세거나 문헌 로그정규 분포를 근거 없이 Gamma로 바꾸지 않습니다.
