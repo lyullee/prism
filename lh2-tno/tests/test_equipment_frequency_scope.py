@@ -100,3 +100,23 @@ def test_full_scope_example_covers_reviewed_equipment_profiles_and_excludes_gaps
     # Scope auditing creates initiating events only.  It does not manufacture
     # provider release ledgers or consequence requests for these events.
     assert result["promotion_policy"]["consequence_requests_are_not_created_by_this_audit"] is True
+
+
+def test_full_scope_example_has_explicit_accident_ports_for_selected_equipment():
+    manifest, _ = _full_scope_inputs()
+    selected_components = {
+        "storage-tank-01",
+        "liquid-transfer-line-01",
+        "transfer-valve-01",
+        "pressure-relief-vent-01",
+        "liquid-transfer-pump-01",
+        "ambient-vaporizer-01",
+        "reliquefier-01",
+    }
+    accident_ports = {
+        port.component_id
+        for port in manifest.ports
+        if "accident" in port.id
+    }
+    assert accident_ports == selected_components
+    assert "receiving-boundary-01" not in accident_ports
