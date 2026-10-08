@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import OrderedDict
 import copy
 from collections.abc import Callable
+import math
 from pathlib import Path
 import time
 from .backend import BackendError, tree_digest
@@ -113,4 +114,76 @@ class ConsequenceService:
             if release_resolver is not None
             else 'known leak geometry; sensor pressure/temperature update, no inferred leak size or learned frequency'
         )
+        return result
+
+
+class RealtimeConsequenceMonitor:
+    """Bounded synchronous monitor for sensor-conditioned consequence updates.
+
+    The monitor provides an explicit deadline record around
+    :class:`ConsequenceService`; it does not create a scheduler, estimate an
+    unknown leak, or learn a frequency from telemetry.  A deadline miss is
+    returned as data so an application can reject or alarm on that update
+    rather than silently presenting an old result as fresh physics.
+    """
+
+    def __init__(self, service: ConsequenceService, *, period_s: float = 1.0,
+                 deadline_s: float | None = None):
+        if not isinstance(service, ConsequenceService):
+            raise TypeError("service must be a ConsequenceService")
+        if not isinstance(period_s, (int, float)) or isinstance(period_s, bool):
+            raise ValueError("period_s must be a finite positive number")
+        if not math.isfinite(float(period_s)) or period_s <= 0:
+            raise ValueError("period_s must be a finite positive number")
+        if deadline_s is None:
+            deadline_s = float(period_s)
+        if not isinstance(deadline_s, (int, float)) or isinstance(deadline_s, bool):
+            raise ValueError("deadline_s must be a finite positive number")
+        if not math.isfinite(float(deadline_s)) or deadline_s <= 0:
+            raise ValueError("deadline_s must be a finite positive number")
+        self.service = service
+        self.period_s = float(period_s)
+        self.deadline_s = float(deadline_s)
+        self._last_source_time_by_stream: dict[str, float] = {}
+
+    def update_from_frame(self, template, normalizer, frame, *, now_s: float,
+                          pressure_tag: str, temperature_tag: str,
+                          release_resolver=None, ambient_pressure_pa: float | None = None):
+        """Normalize one frame, evaluate it, and attach a deadline ledger.
+
+        ``normalizer`` remains the authority for timestamp, unit, quality,
+        sensor-location, and pressure-basis checks.  The returned record always
+        identifies whether this update used fresh physics or an exact cache
+        hit.  No frequency or release geometry is inferred in this method.
+        """
+        normalized = normalizer.normalize(
+            frame, now_s=now_s, ambient_pressure_pa=ambient_pressure_pa
+        )
+        result = self.service.update_from_telemetry(
+            template,
+            normalized,
+            pressure_tag=pressure_tag,
+            temperature_tag=temperature_tag,
+            release_resolver=release_resolver,
+        )
+        source_time = float(frame.source_time_s)
+        previous = self._last_source_time_by_stream.get(frame.stream_id)
+        source_interval = None if previous is None else source_time - previous
+        self._last_source_time_by_stream[frame.stream_id] = source_time
+        elapsed_s = result["service"]["service_elapsed_ms"] / 1000.0
+        result["realtime"] = {
+            "period_s": self.period_s,
+            "deadline_s": self.deadline_s,
+            "deadline_status": "MET" if elapsed_s <= self.deadline_s else "MISSED",
+            "deadline_met": elapsed_s <= self.deadline_s,
+            "service_elapsed_s": elapsed_s,
+            "source_interval_s": source_interval,
+            "fresh_physics_this_update": result["service"]["fresh_physics_this_update"],
+            "exact_cache_hit": result["service"]["exact_cache_hit"],
+            "frequency_learning": False,
+            "release_inference": False,
+            "interpretation": (
+                "deadline ledger only; a missed deadline is not replaced with a stale result"
+            ),
+        }
         return result

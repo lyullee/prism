@@ -2,7 +2,8 @@ import json
 from pathlib import Path
 from lh2_tno.backend import BackendConfig,PackagePin,tree_digest
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.service import ConsequenceService,request_from_equipment_resolver,request_from_telemetry
+from lh2_tno.service import ConsequenceService,RealtimeConsequenceMonitor,request_from_equipment_resolver,request_from_telemetry
+from lh2_tno.telemetry import Frame,TagMapping,TelemetryNormalizer,Value
 from test_consequences import EXAMPLE
 from test_provider_release import _defaults, _release
 import pytest
@@ -95,3 +96,50 @@ def test_service_marks_provider_resolved_telemetry_update(tmp_path):
 def test_equipment_resolver_rejects_unresolved_or_non_request_output(bad):
     with pytest.raises((TypeError, ValueError)):
         request_from_equipment_resolver(request(), {'values': {}}, bad)
+
+
+def test_realtime_monitor_records_deadline_and_keeps_frequency_inference_off(tmp_path):
+    pipeline = Pipeline(tmp_path)
+    monitor = RealtimeConsequenceMonitor(ConsequenceService(pipeline), period_s=1.0)
+    normalizer = TelemetryNormalizer((
+        TagMapping(tag='P', component_id='storage', quantity='pressure', source_unit='Pa',
+                   pressure_basis='absolute', sensor_location='tank-vapour'),
+        TagMapping(tag='T', component_id='storage', quantity='temperature', source_unit='K',
+                   sensor_location='tank-vapour'),
+    ), maximum_age_s=2.0)
+    frame = Frame(
+        stream_id='monitor', sequence=1, source_time_s=100.0, arrival_time_s=100.1,
+        origin='synthetic',
+        values={'P': Value(value=600000., unit='Pa', quality='valid'),
+                'T': Value(value=20.893, unit='K', quality='valid')},
+    )
+    result = monitor.update_from_frame(
+        request(), normalizer, frame, now_s=100.2, pressure_tag='P', temperature_tag='T'
+    )
+    assert result['realtime']['deadline_status'] == 'MET'
+    assert result['realtime']['frequency_learning'] is False
+    assert result['realtime']['release_inference'] is False
+    assert result['service']['fresh_physics_this_update'] is True
+
+
+def test_realtime_monitor_reports_deadline_miss_without_stale_substitution(tmp_path):
+    pipeline = Pipeline(tmp_path)
+    monitor = RealtimeConsequenceMonitor(ConsequenceService(pipeline), period_s=1.0, deadline_s=1e-12)
+    normalizer = TelemetryNormalizer((
+        TagMapping(tag='P', component_id='storage', quantity='pressure', source_unit='Pa',
+                   pressure_basis='absolute', sensor_location='tank-vapour'),
+        TagMapping(tag='T', component_id='storage', quantity='temperature', source_unit='K',
+                   sensor_location='tank-vapour'),
+    ), maximum_age_s=2.0)
+    frame = Frame(
+        stream_id='monitor', sequence=1, source_time_s=100.0, arrival_time_s=100.1,
+        origin='synthetic',
+        values={'P': Value(value=600000., unit='Pa', quality='valid'),
+                'T': Value(value=20.893, unit='K', quality='valid')},
+    )
+    result = monitor.update_from_frame(
+        request(), normalizer, frame, now_s=100.2, pressure_tag='P', temperature_tag='T'
+    )
+    assert result['realtime']['deadline_status'] == 'MISSED'
+    assert result['realtime']['exact_cache_hit'] is False
+    assert result['realtime']['interpretation'].startswith('deadline ledger only')
