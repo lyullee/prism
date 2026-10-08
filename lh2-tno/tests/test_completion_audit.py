@@ -55,3 +55,23 @@ def test_completion_audit_passes_only_when_every_claim_gate_is_present():
     assert report["status"] == "READY_FOR_IJHE_SCOPE"
     assert report["complete_facility_qra_claim"] is True
     assert not report["blocking_reasons"]
+
+
+def test_completion_audit_reads_legacy_provider_inventory_alias_fail_closed():
+    status = _status(False)
+    status.pop("provider_release_contract_actual_facility_packet_available")
+    status["external_provider_evidence_accident_release_promotion_status"] = "NO_ACCIDENT_RELEASE_EXPORT"
+    status["external_provider_evidence_accident_release_qualified_files"] = 0
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(False),
+        _campaign_result(False),
+        None,
+    )
+    packet_check = next(item for item in report["checks"] if item["name"] == "actual_provider_release_packet")
+    assert packet_check["status"] == "BLOCKED"
+    assert packet_check["evidence"] == {
+        "actual_facility_packet_available": False,
+        "release_inventory_status": "NO_ACCIDENT_RELEASE_EXPORT",
+        "qualified_packet_count": 0,
+    }

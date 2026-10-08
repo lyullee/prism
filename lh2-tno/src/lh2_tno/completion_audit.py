@@ -31,6 +31,22 @@ def build_ijhe_completion_audit(
     uncertainty_result: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
+    # The status ledger historically used
+    # ``external_provider_evidence_accident_release_promotion_status`` while
+    # the newer release-inventory record uses
+    # ``external_provider_evidence_release_inventory_status``.  Read both
+    # names so a readiness report never turns a known fail-closed result into
+    # an unexplained ``null`` merely because the ledger predates the alias.
+    release_inventory_status = current_status.get("external_provider_evidence_release_inventory_status")
+    if release_inventory_status is None:
+        release_inventory_status = current_status.get("external_provider_evidence_accident_release_promotion_status")
+    actual_packet_available = current_status.get("provider_release_contract_actual_facility_packet_available")
+    if actual_packet_available is None:
+        qualified_count = current_status.get("external_provider_evidence_accident_release_qualified_files")
+        if isinstance(qualified_count, int) and qualified_count >= 0:
+            actual_packet_available = qualified_count > 0
+        elif release_inventory_status is not None:
+            actual_packet_available = release_inventory_status == "QUALIFIED_ACCIDENT_RELEASE_EXPORT"
     cases = campaign_result.get("cases", [])
     events = campaign_result.get("events", [])
     timing = campaign_result.get("timing", {})
@@ -60,13 +76,12 @@ def build_ijhe_completion_audit(
         ),
         _check(
             "actual_provider_release_packet",
-            current_status.get("provider_release_contract_actual_facility_packet_available") is True,
+            actual_packet_available is True,
             {
-                "actual_facility_packet_available": current_status.get(
-                    "provider_release_contract_actual_facility_packet_available"
-                ),
-                "release_inventory_status": current_status.get(
-                    "external_provider_evidence_release_inventory_status"
+                "actual_facility_packet_available": actual_packet_available,
+                "release_inventory_status": release_inventory_status,
+                "qualified_packet_count": current_status.get(
+                    "external_provider_evidence_accident_release_qualified_files"
                 ),
             },
             "only synthetic or screening provider releases are available for this campaign",
