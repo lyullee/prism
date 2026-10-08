@@ -9,6 +9,7 @@ from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import (ResolvedGasRelease, ResolvedGasReleaseSet,
     ResolvedLiquidRelease, VerticalGasHandoff, thermodynamic_rows)
 from lh2_tno.resolved_liquid_worker import resolve_liquid_rows
+from lh2_tno.layered_network_boundary import audit_layered_liquid_boundary
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
@@ -460,3 +461,65 @@ def test_liquid_provider_requires_a_liquid_or_two_phase_facility_port():
     result = ResearchPipeline(Facility.model_validate_json(json.dumps(liquid_facility)), Backend()).consequences(
         ConsequenceRequest.model_validate_json(json.dumps(d)))
     assert result['data']['status'] == 'END_TO_END_DIAGNOSTIC_EXECUTED'
+
+
+def test_layered_tank_network_boundary_is_audited_but_not_promoted_to_atmosphere():
+    """A liquid demand boundary is inventory evidence, not a release packet."""
+    from types import SimpleNamespace
+
+    flow = SimpleNamespace(
+        left='TK-1101', right='LH2-DEMAND-BOUNDARY', mass_flow_kg_s=0.115,
+        transmitted_specific_enthalpy_J_kg=97600.0,
+        source_port_id=None, target_port_id=None,
+    )
+    states = {
+        'TK-1101': SimpleNamespace(pressure_Pa=400000.0, phase='twophase'),
+        'LH2-DEMAND-BOUNDARY': SimpleNamespace(pressure_Pa=200000.0, phase='liquid'),
+    }
+    result = SimpleNamespace(
+        time_s=0.1,
+        tank=SimpleNamespace(
+            cumulative_boundary_mass_kg=-0.0115,
+            cumulative_boundary_energy_J=-1122.4,
+        ),
+        network_solution=SimpleNamespace(
+            link_flows={'E06::COMP-02': flow}, node_states=states,
+        ),
+    )
+    audit = audit_layered_liquid_boundary(
+        [result], component_id='TK-1101', source_node='TK-1101',
+        target_node='LH2-DEMAND-BOUNDARY', source_phase='liquid',
+        ambient_pressure_pa=101325.0, link_name='E06::COMP-02',
+    )
+    assert audit.outward_mass_flow_max_kg_s == pytest.approx(0.115)
+    assert audit.provider_cumulative_boundary_mass_kg == pytest.approx(-0.0115)
+    assert not audit.atmospheric_boundary
+    assert not audit.ready_for_resolved_liquid_release
+    assert 'target boundary pressure is not ambient' in audit.blocking_reasons
+    assert any('flash-gas' in reason for reason in audit.blocking_reasons)
+
+
+def test_layered_tank_network_boundary_reversed_link_keeps_outward_sign():
+    from types import SimpleNamespace
+
+    flow = SimpleNamespace(
+        left='LH2-DEMAND-BOUNDARY', right='TK-1101', mass_flow_kg_s=-0.2,
+        transmitted_specific_enthalpy_J_kg=10.0,
+        source_port_id='out', target_port_id='in',
+    )
+    states = {
+        'TK-1101': SimpleNamespace(pressure_Pa=400000.0, phase='twophase'),
+        'LH2-DEMAND-BOUNDARY': SimpleNamespace(pressure_Pa=101325.0, phase='liquid'),
+    }
+    result = SimpleNamespace(
+        time_s=0.1, network_solution=SimpleNamespace(
+            link_flows={'L': flow}, node_states=states,
+        ), tank=None,
+    )
+    audit = audit_layered_liquid_boundary(
+        [result], component_id='TK-1101', source_node='TK-1101',
+        target_node='LH2-DEMAND-BOUNDARY', source_phase='liquid',
+        ambient_pressure_pa=101325.0, link_name='L',
+    )
+    assert audit.observations[0].signed_mass_flow_kg_s == pytest.approx(0.2)
+    assert audit.observations[0].outward_mass_flow_kg_s == pytest.approx(0.2)
