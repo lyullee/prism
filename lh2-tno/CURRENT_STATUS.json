@@ -115,9 +115,14 @@
   "software_license": "MIT",
   "pypi_project_name": "prism-risk",
   "pypi_release_version": "0.6.0",
-  "pypi_publication_status": "release_prepared_not_yet_published",
+  "pypi_publication_status": "published_and_public_index_install_verified",
   "zenodo_version_doi": "10.5281/zenodo.23241359",
   "zenodo_record_id": "23241359",
-  "zenodo_publication_status": "reserved_draft_not_registered",
-  "public_artifacts_scope": "PRISM own source, examples, tests, documentation and wheel; external providers and raw field data excluded"
+  "zenodo_publication_status": "published_and_doi_resolver_verified",
+  "public_artifacts_scope": "PRISM own source, examples, tests, documentation and wheel; external providers and raw field data excluded",
+  "zenodo_concept_doi": "10.5281/zenodo.23241358",
+  "github_release_url": "https://github.com/lyullee/prism/releases/tag/v0.6.0",
+  "release_git_commit": "49abcd36b5314a45a3013f559a68bc53a6f6c090",
+  "publication_workflow_run": "https://github.com/lyullee/prism/actions/runs/37795878407",
+  "publication_record": "docs/PRISM_v060_PyPI_DOI_배포완료_20261008.md"
 }
