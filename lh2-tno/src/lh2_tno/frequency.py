@@ -79,6 +79,11 @@ class FrequencyAsset(Contract):
     pipe_conditions: Literal['default_conditions', 'increased_failure_potential'] | None = None
     pipe_correction_factor: float | None = None
     correction_provenance: Name | None = None
+    # Optional allocation of an item/length frequency to one reviewed physical
+    # rupture location.  Without this factor a generated event represents
+    # the entire counted exposure and cannot be bound to one outlet.
+    location_weight: Fraction | None = None
+    location_weight_provenance: Name | None = None
     relief_direct_substance_contact_and_atmospheric_discharge: bool | None = None
 
     @model_validator(mode='after')
@@ -116,6 +121,10 @@ class FrequencyAsset(Contract):
                 raise ValueError('Purple relief discharge requires direct substance contact and atmospheric discharge')
         elif self.relief_direct_substance_contact_and_atmospheric_discharge is not None:
             raise ValueError('relief applicability supplied for unrelated profile')
+        if (self.location_weight is None) != (self.location_weight_provenance is None):
+            raise ValueError('location weight and its provenance must be supplied together')
+        if self.location_weight is not None and self.location_weight <= 0:
+            raise ValueError('location weight must be positive')
         return self
 
 
@@ -165,6 +174,9 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
             multiplier = asset.length_per_item_m * asset.count
         else:
             multiplier = float(asset.count)
+        if asset.location_weight is not None:
+            multiplier *= asset.location_weight
+            limitations.append('This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.')
         for row in rows:
             rate = row['rate']
             if asset.vessel_external_impact_or_operating_error and row['loc'] in ('G1', 'G2'):
@@ -196,15 +208,28 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
 
 
 def bind_event(request, event: FrequencyEvent):
-    """Bind frequency to a matching tank-hole or resolved accident gas exit.
+    """Bind frequency to a matching hole or provider-resolved accident exit.
 
-    Never approximate 600 s/full-bore two-sided rupture by the current short
-    tank-nozzle diagnostic worker. Instantaneous inventory is accepted only
-    when the explicit inventory liquid-jet operator is selected.
+    A full-bore two-sided rupture requires two provider exits and one shared
+    event frequency. Never approximate it with one short tank/nozzle history.
+    Instantaneous inventory is accepted only when the explicit inventory
+    liquid-jet operator is selected.
     """
     from .consequences import ConsequenceRequest
     if request.component_id != event.model_component_id:
         raise ValueError('failure component and current source component must match; an upstream-port adapter is required otherwise')
+    if event.release.mode == 'two_sided_rupture':
+        if request.source_operator != 'equipment_two_sided_rupture' or request.resolved_release_set is None:
+            raise ValueError('two-sided rupture requires a provider-resolved two-endpoint release set; a single nozzle is not accepted')
+        if request.release_termination is None or request.release_termination.basis != 'two_sided_rupture':
+            raise ValueError('two-sided rupture binding requires explicit two-sided termination provenance')
+        payload = request.model_dump(mode='json')
+        if request.annual_frequency_per_year is not None:
+            raise ValueError('remove external frequency before binding a catalogue event')
+        payload['annual_frequency_per_year'] = event.annual_frequency_per_year
+        payload['annual_frequency_provenance'] = f'{event.id}; {event.source}; {event.source_sha256}'
+        payload['frequency_event'] = event.model_dump(mode='json')
+        return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
     if event.release.mode != 'hole':
         if not (event.release.mode == 'instantaneous_inventory' and
                 request.source_operator == 'inventory_liquid_jet'):

@@ -1,11 +1,13 @@
 """Validated inputs for the executable outdoor LH2 consequence chain."""
 from __future__ import annotations
+import json
 import math
+import time
 from typing import Literal
 from pydantic import Field, model_validator
 from .contracts import Contract, Name, Positive, Nonnegative, Fraction, Vector
 from .frequency import FrequencyEvent
-from .equipment_boundary import ResolvedGasRelease
+from .equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet
 
 
 class Weather(Contract):
@@ -80,7 +82,7 @@ class SpatialDomain(Contract):
 
 
 class ReleaseTermination(Contract):
-    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_over_600s', 'model_pressure_equalization']
+    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_over_600s', 'model_pressure_equalization', 'two_sided_rupture']
     time_s: Positive
     provenance: Name
 
@@ -89,8 +91,10 @@ class ConsequenceRequest(Contract):
     component_id: Name
     source_input: dict | None = None
     resolved_release: ResolvedGasRelease | None = None
+    resolved_release_set: ResolvedGasReleaseSet | None = None
     available_mass_kg: Positive
     source_position_enu_m: Vector
+    source_positions_enu_m: tuple[Vector, ...] | None = None
     weather: Weather
     pool: PoolBoundary | None = None
     ignition: IgnitionBranches
@@ -103,7 +107,7 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
-    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'inventory_over_600s'] = 'integrated_transient'
+    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'inventory_over_600s', 'equipment_two_sided_rupture', 'equipment_two_sided_rupture_endpoint'] = 'integrated_transient'
     # ``declared`` requires the source model to cover the requested horizon.
     # ``model_natural`` uses the model's actual pressure-equalisation stop and
     # never extrapolates the final flow interval.
@@ -123,10 +127,15 @@ class ConsequenceRequest(Contract):
             raise ValueError('evaluation clock must start at zero and increase')
         if times[-1]>600 or len(times)>500:
             raise ValueError('consequence horizon budget exceeded')
-        if (self.source_input is None)==(self.resolved_release is None):
-            raise ValueError('choose exactly one source owner: integrated source or equipment-resolved gas exit')
+        owners=sum(x is not None for x in (self.source_input,self.resolved_release,self.resolved_release_set))
+        if owners != 1:
+            raise ValueError('choose exactly one source owner: integrated source, equipment gas exit, or two-sided equipment gas exits')
         release=self.resolved_release
-        source=self.source_input if release is None else resolved_source_context(release,self.weather)
+        release_set=self.resolved_release_set
+        if release_set is not None:
+            source=resolved_source_context(release_set.releases[0],self.weather)
+        else:
+            source=self.source_input if release is None else resolved_source_context(release,self.weather)
         duration=source['duration_s']; dt=source['time_step_s']
         if not 0<dt<=duration<=times[-1] or duration/dt>100:
             raise ValueError('source horizon must lie inside consequence horizon; max 100 source intervals')
@@ -157,6 +166,27 @@ class ConsequenceRequest(Contract):
                 raise ValueError('equipment_inventory_depletion uses its declared provider horizon')
             if self.release_termination is None or self.release_termination.basis != 'inventory_depletion':
                 raise ValueError('equipment_inventory_depletion requires inventory-depletion termination provenance')
+        elif self.source_operator == 'equipment_two_sided_rupture':
+            if release_set is None:
+                raise ValueError('equipment_two_sided_rupture requires two provider-resolved endpoints')
+            if release is not None or self.source_input is not None:
+                raise ValueError('equipment_two_sided_rupture requires a resolved release set')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('equipment_two_sided_rupture uses the provider-declared horizon')
+            if self.release_termination is None or self.release_termination.basis != 'two_sided_rupture':
+                raise ValueError('equipment_two_sided_rupture requires two-sided rupture termination provenance')
+            if self.available_mass_kg != release_set.available_mass_kg:
+                raise ValueError('two-sided request and provider inventories disagree')
+            positions=self.source_positions_enu_m
+            if positions is None or tuple(positions) != release_set.positions_enu_m:
+                raise ValueError('two-sided request must declare both provider endpoint positions')
+        elif self.source_operator == 'equipment_two_sided_rupture_endpoint':
+            if release is None or release_set is not None:
+                raise ValueError('two-sided endpoint operator requires one resolved endpoint')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('two-sided endpoint uses the provider-declared horizon')
+            if self.release_termination is None or self.release_termination.basis != 'two_sided_rupture':
+                raise ValueError('two-sided endpoint requires two-sided rupture termination provenance')
         elif self.source_operator == 'inventory_over_600s':
             if release is not None:
                 raise ValueError('inventory_over_600s requires an integrated finite-inventory source')
@@ -170,6 +200,8 @@ class ConsequenceRequest(Contract):
             raise ValueError('inventory-depletion termination requires an explicit inventory source operator')
         elif self.release_termination is not None and self.release_termination.basis == 'inventory_over_600s':
             raise ValueError('inventory-over-600s termination requires the inventory_over_600s source operator')
+        elif self.release_termination is not None and self.release_termination.basis == 'two_sided_rupture' and self.source_operator != 'equipment_two_sided_rupture_endpoint':
+            raise ValueError('two-sided rupture termination requires the two-sided equipment operator')
         if self.source_duration_mode == 'model_natural':
             if release is not None:
                 raise ValueError('model_natural duration requires an integrated transient source')
@@ -186,12 +218,21 @@ class ConsequenceRequest(Contract):
         ambient=source['ambient']
         if ambient['wind_speed_m_s']!=self.weather.wind_speed_m_s or ambient['wind_from_bearing_deg']!=self.weather.wind_from_bearing_deg:
             raise ValueError('source and dispersion wind must agree')
-        if abs(self.source_position_enu_m[2]-source['nozzle']['height_m'])>1e-9:
+        if release_set is None and abs(self.source_position_enu_m[2]-source['nozzle']['height_m'])>1e-9:
             raise ValueError('source ENU height must equal nozzle height above flat ground')
-        if self.source_position_enu_m[2]<=0:
+        if release_set is None and self.source_position_enu_m[2]<=0:
             raise ValueError('resolved jet source height above ground required')
+        if release_set is not None:
+            if any(position[2] <= 0 for position in release_set.positions_enu_m):
+                raise ValueError('all two-sided resolved jet endpoints must be above flat ground')
+            if self.source_position_enu_m != release_set.positions_enu_m[0]:
+                raise ValueError('source_position_enu_m must anchor the first two-sided provider endpoint')
+            if any(release.ambient_pressure_pa_abs != release_set.releases[0].ambient_pressure_pa_abs or
+                   release.ambient_temperature_k != release_set.releases[0].ambient_temperature_k
+                   for release in release_set.releases[1:]):
+                raise ValueError('two-sided endpoints require one ambient boundary')
         direction=source['nozzle']['direction_enu']
-        if math.hypot(direction[0],direction[1])==0:
+        if release_set is None and math.hypot(direction[0],direction[1])==0:
             raise ValueError('vertical-only release requires a vertical near-field adapter')
         if release is not None:
             if release.component_id!=self.component_id or release.position_enu_m!=self.source_position_enu_m:
@@ -202,6 +243,12 @@ class ConsequenceRequest(Contract):
                 raise ValueError('all provider/command breakpoints must be explicit evaluation timestamps')
             if release.event_kind=='normal_vent' and any(x is not None for x in (self.annual_frequency_per_year,self.frequency_event,self.initiation_intensity_per_s)):
                 raise ValueError('normal vent history must not be assigned a random accident initiation frequency')
+        if release_set is not None:
+            if any(release.component_id != self.component_id or release.position_enu_m != position
+                   for release,position in zip(release_set.releases,self.source_positions_enu_m or ())):
+                raise ValueError('provider endpoints must match the declared two-sided component and positions')
+            if any(any(step.time_s not in times for step in release.steps) for release in release_set.releases):
+                raise ValueError('all two-sided provider breakpoints must be explicit evaluation timestamps')
         if self.annual_frequency_per_year is not None and self.annual_frequency_provenance is None:
             raise ValueError('annual frequency provenance required')
         event = self.frequency_event
@@ -216,14 +263,24 @@ class ConsequenceRequest(Contract):
             elif event.release.mode == 'inventory_over_600s':
                 if self.source_operator != 'inventory_over_600s' or self.release_termination.basis != 'inventory_over_600s':
                     raise ValueError('600 s inventory event requires the inventory_over_600s operator')
+            elif event.release.mode == 'two_sided_rupture':
+                if self.source_operator != 'equipment_two_sided_rupture' or release_set is None or self.release_termination.basis != 'two_sided_rupture':
+                    raise ValueError('two-sided rupture event requires the equipment_two_sided_rupture operator')
             elif event.release.mode != 'hole':
                 raise ValueError('frequency event requires a supported release operator')
-            if release is None and event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):
+            if release is None and release_set is None and event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):
                 raise ValueError('current source binding supports reviewed tank/vessel hole events only')
             if release is not None and (release.event_kind!='accidental_leak' or release.failure_opening_diameter_m is None):
                 raise ValueError('resolved frequency binding requires an accidental leak with explicit failure opening')
             if release is not None and event.basis=='LH2_LITERATURE' and release.upstream_service!='LH2':
                 raise ValueError('LH2 literature frequency must not be applied to a GH2/cold-GH2 component merely because it belongs to an LH2 facility')
+            if release_set is not None:
+                if event.release.mode != 'two_sided_rupture' or any(endpoint.upstream_service != 'LH2' and event.basis == 'LH2_LITERATURE' for endpoint in release_set.releases):
+                    raise ValueError('two-sided frequency and endpoint service must agree')
+                if any(endpoint.failure_opening_diameter_m is None or
+                       not math.isclose(endpoint.failure_opening_diameter_m,event.release.hole_diameter_m,rel_tol=1e-10,abs_tol=1e-12)
+                       for endpoint in release_set.releases):
+                    raise ValueError('two-sided frequency diameter must equal both physical endpoint openings')
             if self.annual_frequency_per_year != event.annual_frequency_per_year:
                 raise ValueError('request/event frequency mismatch')
             if self.initiation_intensity_per_s is not None and not math.isclose(
@@ -254,22 +311,104 @@ def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
     if request.component_id not in components:raise ValueError('source component not in facility')
     component=components[request.component_id]
     if pipeline.facility.environment!='outdoor':raise ValueError('outdoor consequence chain required')
-    if request.resolved_release is None:
+    if request.resolved_release is None and request.resolved_release_set is None:
         if component.kind!='storage_tank':raise ValueError('integrated source requires a storage tank boundary')
         tank=request.source_input['tank']
         if component.property_basis.fluid!=tank['fluid'] or component.property_basis.energy_reference!=f"CoolProp-HEOS:{tank['fluid']}:native":
             raise ValueError('source/facility property basis mismatch')
         if component.parameters_si['volume_m3']!=tank['volume_m3']:raise ValueError('source/facility tank volume mismatch')
     else:
-        release=request.resolved_release
-        if component.property_basis!=release.property_basis:
-            raise ValueError('provider/facility fluid or energy-reference mismatch')
-        port=next((x for x in pipeline.facility.ports if x.id==release.port_id),None)
-        if port is None or port.component_id!=component.id or port.direction=='in' or port.phase not in ('vapour','any'):
-            raise ValueError('resolved exit requires a matching outward gas facility port')
-        if port.position_enu_m is not None and release.position_enu_m != port.position_enu_m:
-            raise ValueError('provider release position does not match the declared facility port position')
+        releases = (request.resolved_release,) if request.resolved_release is not None else request.resolved_release_set.releases
+        for release in releases:
+            if component.property_basis!=release.property_basis:
+                raise ValueError('provider/facility fluid or energy-reference mismatch')
+            port=next((x for x in pipeline.facility.ports if x.id==release.port_id),None)
+            if port is None or port.component_id!=component.id or port.direction=='in' or port.phase not in ('vapour','any'):
+                raise ValueError('resolved exit requires a matching outward gas facility port')
+            if port.position_enu_m is not None and release.position_enu_m != port.position_enu_m:
+                raise ValueError('provider release position does not match the declared facility port position')
     if not pipeline.facility.receptors:raise ValueError('at least one receptor required')
+    if request.resolved_release_set is not None:
+        started=time.perf_counter()
+        endpoint_results=[]
+        for release in request.resolved_release_set.releases:
+            payload=request.model_dump(mode='json')
+            payload.update(
+                source_input=None,
+                resolved_release=release.model_dump(mode='json'),
+                resolved_release_set=None,
+                source_operator='equipment_two_sided_rupture_endpoint',
+                source_position_enu_m=list(release.position_enu_m),
+                source_positions_enu_m=None,
+                frequency_event=None,
+                annual_frequency_per_year=None,
+                annual_frequency_provenance=None,
+                initiation_intensity_per_s=None,
+            )
+            child=ConsequenceRequest.model_validate_json(json.dumps(payload,allow_nan=False))
+            endpoint_results.append(pipeline.consequences(child))
+        child_data=[result['data'] for result in endpoint_results]
+        branch_keys=('direct_fire','delayed_flash_fire','delayed_explosion','no_ignition')
+        probabilities=child_data[0]['ignition_branch_probabilities']
+        if any(data['ignition_branch_probabilities'] != probabilities for data in child_data[1:]):
+            raise ValueError('two-sided endpoints must use one ignition branch partition')
+        endpoint_receptors=[{row['id']:row for row in data['receptors']} for data in child_data]
+        receptor_ids=[row.id for row in pipeline.facility.receptors]
+        receptors=[]
+        for receptor_id in receptor_ids:
+            branch_harm=[]
+            for endpoint in range(2):
+                branch_harm.append({key:min(1.,sum(rows[receptor_id]['branch_harm_low_high'][endpoint][key] for rows in endpoint_receptors))
+                                    for key in branch_keys})
+            receptors.append({'id':receptor_id,
+                'branch_harm_low_high':branch_harm,
+                'harm_given_observed_release_low_high':[sum(probabilities[key]*branch_harm[i][key] for key in branch_keys) for i in range(2)]})
+        ledgers=[data.get('mass_ledger',{}) for data in child_data]
+        ledger_keys=sorted(set().union(*(ledger.keys() for ledger in ledgers)))
+        ledger={key:sum(float(item.get(key,0.)) for item in ledgers) for key in ledger_keys}
+        ledger['end_to_end_residual_kg']=sum(float(item.get('end_to_end_residual_kg',0.)) for item in ledgers)
+        data={
+            'status':'END_TO_END_DIAGNOSTIC_EXECUTED',
+            'full_chain_executed':all(item.get('full_chain_executed') is True for item in child_data),
+            'physical_validation_claim':False,
+            'facility_validation':'WITHHELD',
+            'realtime_requirement_demonstrated':False,
+            'stages':['two_sided_endpoint_a','two_sided_endpoint_b','frechet_union_of_endpoint_harm'],
+            'source_operator':'equipment_two_sided_rupture',
+            'operator_limited':True,
+            'source_ownership':{'state_owner':'equipment_twin','discharge_owner':'equipment_twin',
+                                'discharge_recalculated':False,'shared_inventory_owner':'equipment_twin'},
+            'release_endpoints':[item['source'] for item in child_data],
+            'endpoint_results':endpoint_results,
+            'ignition_branch_probabilities':probabilities,
+            'receptors':receptors,
+            'mass_ledger':ledger,
+            'explosion':{'domain_truncated':any(item.get('explosion',{}).get('domain_truncated',True) for item in child_data),
+                         'endpoint_results':[item.get('explosion',{}) for item in child_data],
+                         'combination':'Frechet union upper bound across endpoints; plume interaction unresolved'},
+            'stage_elapsed_ms':{'endpoint_a':endpoint_results[0].get('elapsed_ms'),
+                                'endpoint_b':endpoint_results[1].get('elapsed_ms'),
+                                'endpoint_aggregation':(time.perf_counter()-started)*1000},
+            'risk_semantics':{'observed_release':'conditional harm for both provider endpoints; no initiating-frequency multiplier',
+                              'endpoint_combination':'Frechet union upper bound min(1,sum(endpoint harm)); no independence assumed',
+                              'interaction':'endpoint plume, pressure and inventory feedback are not jointly solved'},
+            'limitations':['Two provider-resolved endpoints are evaluated separately and union-bounded at receptors.',
+                           'Cross-endpoint jet/plume interaction, pipe pressure coupling and dynamic shared-inventory feedback are not resolved.',
+                           'The event frequency is bound once to the shared two-sided rupture event; endpoint outputs are not assigned separate frequencies.'],
+        }
+        combined={'data':data,'facility_digest':pipeline.facility.digest(),
+                  'request_digest':request.digest(),
+                  'backend_config_digest':endpoint_results[0].get('backend_config_digest'),
+                  'worker_sha256':endpoint_results[0].get('worker_sha256'),
+                  'adapter_source_digest':endpoint_results[0].get('adapter_source_digest'),
+                  'elapsed_ms':(time.perf_counter()-started)*1000,
+                  'physical_validation_claim':False}
+        if request.frequency_event is not None:
+            combined['frequency_event']=request.frequency_event.model_dump(mode='json')
+            combined['frequency_scope']='single two-sided initiating event; endpoint union bound; not total annual facility IR'
+            combined['release_termination']=request.release_termination.model_dump(mode='json')
+            combined['release_termination_verification']='shared two-ended boundary declared by provider; cross-endpoint pressure/inventory feedback not independently validated'
+        return combined
     payload=request.model_dump(mode='json')
     if request.resolved_release is not None:
         payload['source_input']=resolved_source_context(request.resolved_release,request.weather)

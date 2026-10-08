@@ -100,6 +100,64 @@ class ResolvedGasRelease(Contract):
         return sum(x.mass_flow_kg_s*x.specific_enthalpy_j_kg*(end-x.time_s) for x,end in self.intervals())
 
 
+class ResolvedGasReleaseSet(Contract):
+    """Two provider-resolved endpoints for a full-bore pipe rupture.
+
+    A Purple full-bore pipe rupture is a two-ended event.  Keeping the two
+    exits as separate ``ResolvedGasRelease`` objects preserves their own
+    position, direction, PH state and time history; the set only owns the
+    shared inventory ledger and event identity.  It is deliberately not a
+    way to duplicate one endpoint or to add two independent frequencies.
+    """
+
+    event_id: Name
+    component_id: Name
+    rupture_mode: Literal['two_sided_rupture'] = 'two_sided_rupture'
+    releases: tuple[ResolvedGasRelease, ResolvedGasRelease]
+    available_mass_kg: Positive
+    cumulative_mass_out_kg: Nonnegative
+    inventory_provenance: Name
+
+    @model_validator(mode='after')
+    def ledger(self):
+        if any(release.component_id != self.component_id for release in self.releases):
+            raise ValueError('two-sided endpoints must belong to the same component')
+        if any(release.event_kind != 'accidental_leak' for release in self.releases):
+            raise ValueError('two-sided rupture endpoints must be accidental leaks')
+        if any(release.event_id != self.event_id for release in self.releases):
+            raise ValueError('two-sided endpoints must carry the shared rupture event id')
+        if self.releases[0].port_id == self.releases[1].port_id:
+            raise ValueError('two-sided rupture endpoints require distinct outward ports')
+        if self.releases[0].property_basis != self.releases[1].property_basis:
+            raise ValueError('two-sided endpoints require one property basis')
+        if self.releases[0].upstream_service != self.releases[1].upstream_service:
+            raise ValueError('two-sided endpoints require one upstream service')
+        if any(not math.isclose(release.available_mass_kg, self.available_mass_kg,
+                                rel_tol=1e-10, abs_tol=1e-12) for release in self.releases):
+            raise ValueError('endpoint and shared available inventories disagree')
+        if any(not math.isclose(release.duration_s, self.duration_s,
+                                rel_tol=0, abs_tol=1e-12) for release in self.releases):
+            raise ValueError('two-sided endpoints must share one release duration')
+        total = sum(release.cumulative_mass_out_kg for release in self.releases)
+        if not math.isclose(total, self.cumulative_mass_out_kg, rel_tol=1e-8, abs_tol=1e-10):
+            raise ValueError('shared cumulative mass does not close across endpoints')
+        if total > self.available_mass_kg + 1e-9:
+            raise ValueError('two-sided release exceeds the shared available inventory')
+        return self
+
+    @property
+    def duration_s(self):
+        return self.releases[0].duration_s
+
+    @property
+    def positions_enu_m(self):
+        return tuple(release.position_enu_m for release in self.releases)
+
+    @property
+    def integrated_mass_kg(self):
+        return sum(release.integrated_mass_kg for release in self.releases)
+
+
 def thermodynamic_rows(packet: dict, ambient_pressure: float, cp) -> tuple[list[dict],dict]:
     """Validate the contract, then resolve its PH state without solving flow."""
     from .resolved_gas_worker import resolve_gas_rows

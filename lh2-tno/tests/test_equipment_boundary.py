@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from lh2_tno.contracts import Facility
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.equipment_boundary import ResolvedGasRelease,thermodynamic_rows
+from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, thermodynamic_rows
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
 from lh2_tno.pipeline import ResearchPipeline
 from lh2_tno.service import request_from_telemetry
@@ -40,6 +40,31 @@ def request_data(p=None):
     return d
 
 
+def two_sided_request_data():
+    first = packet()
+    first.update(event_kind='accidental_leak', event_id='two-sided-test', port_id='vent.a',
+                 failure_opening_diameter_m=.0254)
+    second = copy.deepcopy(first)
+    second.update(port_id='vent.b', position_enu_m=[2., 0., 1.])
+    release_set = ResolvedGasReleaseSet.model_validate_json(json.dumps({
+        'event_id':'two-sided-test', 'component_id':'vent',
+        'releases':[first, second], 'available_mass_kg':5.,
+        'cumulative_mass_out_kg':first['cumulative_mass_out_kg']+second['cumulative_mass_out_kg'],
+        'inventory_provenance':'synthetic shared pipe inventory',
+    }))
+    d = request_data()
+    d.update(source_input=None, resolved_release=None,
+             resolved_release_set=release_set.model_dump(mode='json'),
+             source_operator='equipment_two_sided_rupture',
+             available_mass_kg=5., source_position_enu_m=[0., 0., 1.],
+             source_positions_enu_m=[[0., 0., 1.], [2., 0., 1.]],
+             annual_frequency_per_year=None, annual_frequency_provenance=None,
+             initiation_intensity_per_s=None,
+             release_termination={'basis':'two_sided_rupture','time_s':.37,
+                                  'provenance':'synthetic two-endpoint provider closure'})
+    return d, release_set
+
+
 def facility_data(kind='vent_stack'):
     parameters={'vent_stack':{'length_m':6.,'diameter_m':.0254},'pipe':{'length_m':1.,'diameter_m':.0254},
                 'storage_tank':{'volume_m3':1.}}.get(kind,{})
@@ -48,6 +73,15 @@ def facility_data(kind='vent_stack'):
         'parameters_si':parameters,'property_basis':packet()['property_basis']}],
         'ports':[{'id':'vent.out','component_id':'vent','phase':'vapour','direction':'out'}],'edges':[],
         'receptors':[{'id':'worker','position_enu_m':[2.,0.,1.]}]}
+
+
+def two_sided_facility_data():
+    f = facility_data('pipe')
+    f['ports'][0]['id'] = 'vent.a'
+    f['ports'].append({'id':'vent.b','component_id':'vent','phase':'vapour','direction':'out',
+                       'position_enu_m':[2.,0.,1.]})
+    f['ports'][0]['position_enu_m']=[0.,0.,1.]
+    return f
 
 
 class FakeCP:
@@ -120,6 +154,73 @@ def test_equipment_inventory_depletion_operator_requires_resolved_release_and_st
     }
     with pytest.raises(ValueError, match='resolved equipment release'):
         ConsequenceRequest.model_validate_json(json.dumps(d))
+
+
+def test_two_sided_release_set_closes_shared_inventory_and_requires_two_ports():
+    data, release_set = two_sided_request_data()
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    assert request.source_operator == 'equipment_two_sided_rupture'
+    assert request.resolved_release_set.integrated_mass_kg == pytest.approx(release_set.integrated_mass_kg)
+    bad = json.loads(json.dumps(data))
+    bad['resolved_release_set']['releases'][1]['port_id'] = 'vent.a'
+    with pytest.raises(ValueError, match='distinct outward ports'):
+        ConsequenceRequest.model_validate_json(json.dumps(bad))
+
+
+def test_two_sided_release_requires_explicit_endpoint_positions():
+    data, _ = two_sided_request_data()
+    data['source_positions_enu_m'] = [[0., 0., 1.]]
+    with pytest.raises(ValueError, match='both provider endpoint positions'):
+        ConsequenceRequest.model_validate_json(json.dumps(data))
+
+
+def test_two_sided_catalogue_event_binds_once_to_a_weighted_pipe_location():
+    facility = Facility.model_validate_json(json.dumps(two_sided_facility_data()))
+    asset = FrequencyAsset(id='pipe-segment', model_component_id='vent', profile='TNO_PIPE',
+        physical_scope_ids=('pipe-location-a',), nominal_diameter_m=.0254, length_per_item_m=10.,
+        pipe_conditions='default_conditions', pipe_correction_factor=1.,
+        location_weight=.1, location_weight_provenance='synthetic reviewed endpoint allocation',
+        classification_basis='synthetic pipe event test')
+    event = next(x for x in generate_events(facility, FrequencyPlan(id='two-sided', assets=(asset,))) if x.loc == 'G1')
+    bound = bind_event(ConsequenceRequest.model_validate_json(json.dumps(two_sided_request_data()[0])), event)
+    assert bound.source_operator == 'equipment_two_sided_rupture'
+    assert bound.frequency_event.release.mode == 'two_sided_rupture'
+    assert bound.annual_frequency_per_year == pytest.approx(1e-6)
+
+
+def test_two_sided_endpoints_reach_receptor_harm_with_one_shared_event():
+    class Backend:
+        def __init__(self):
+            self.calls = 0
+        def run(self, operation, payload):
+            assert operation == 'consequence_chain'
+            self.calls += 1
+            probabilities = {'direct_fire':.25, 'delayed_flash_fire':.225,
+                             'delayed_explosion':.15, 'no_ignition':.375}
+            receptors = []
+            for receptor in payload['receptors']:
+                branch = [
+                    {'direct_fire':.4, 'delayed_flash_fire':.2, 'delayed_explosion':.1, 'no_ignition':0.},
+                    {'direct_fire':.7, 'delayed_flash_fire':.6, 'delayed_explosion':.5, 'no_ignition':0.},
+                ]
+                receptors.append({'id':receptor['id'], 'branch_harm_low_high':branch,
+                    'harm_given_observed_release_low_high':[
+                        sum(probabilities[k]*branch[i][k] for k in probabilities) for i in range(2)]})
+            return {'data':{'status':'END_TO_END_DIAGNOSTIC_EXECUTED','full_chain_executed':True,
+                'physical_validation_claim':False,'facility_validation':'WITHHELD',
+                'receptors':receptors,'ignition_branch_probabilities':probabilities,
+                'source':{'duration_s':.37},'mass_ledger':{'released_kg':.001,
+                    'end_to_end_residual_kg':0.},'explosion':{'domain_truncated':False}},
+                'elapsed_ms':1.,'backend_config_digest':'backend','worker_sha256':'worker',
+                'adapter_source_digest':'adapter'}
+    data, _ = two_sided_request_data()
+    result = ResearchPipeline(Facility.model_validate_json(json.dumps(two_sided_facility_data())), Backend()).consequences(
+        ConsequenceRequest.model_validate_json(json.dumps(data)))
+    assert result['data']['source_operator'] == 'equipment_two_sided_rupture'
+    assert result['data']['full_chain_executed'] is True
+    assert result['data']['receptors'][0]['branch_harm_low_high'][0]['direct_fire'] == pytest.approx(.8)
+    assert result['data']['mass_ledger']['released_kg'] == pytest.approx(.002)
+    assert len(result['data']['endpoint_results']) == 2
 
 
 @pytest.mark.parametrize('fault',['temperature','density','liquid','mach','pressure'])

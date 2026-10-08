@@ -65,6 +65,16 @@ def test_pipe_thresholds_and_minimum_10m_include_flange_exposure(diameter,rates)
     assert rows[0].release.mode=='two_sided_rupture'
 
 
+def test_pipe_two_sided_event_can_bind_one_reviewed_location_with_explicit_weight():
+    rows=events(asset(profile='TNO_PIPE', vessel_external_impact_or_operating_error=None,
+        nominal_diameter_m=.025, length_per_item_m=10., pipe_conditions='default_conditions',
+        pipe_correction_factor=1., location_weight=.1,
+        location_weight_provenance='synthetic reviewed rupture segment allocation'))
+    assert rows[0].exposure_multiplier==pytest.approx(1.)
+    assert rows[0].annual_frequency_per_year==pytest.approx(1e-6*10*.1)
+    assert 'location_weight' in ' '.join(rows[0].limitations)
+
+
 def test_pipe_correction_and_count_apply_once_and_hole_is_capped():
     rows=events(asset(profile='TNO_PIPE', vessel_external_impact_or_operating_error=None,
         count=2, physical_scope_ids=('pipe-a','pipe-b'), nominal_diameter_m=.8, length_per_item_m=30.,

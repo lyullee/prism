@@ -251,7 +251,10 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'generated_event_count': len(component_events),
             'generated_initiation_frequency_per_year': sum(event.annual_frequency_per_year for event in component_events),
             'campaign_case_count': len(component_cases),
-            'executed_case_count': sum(case['status']=='EXECUTED' for case in component_cases),
+            'executed_case_count': sum(case['status'].startswith('EXECUTED') for case in component_cases),
+            'fully_validated_case_count': sum(case['status']=='EXECUTED' for case in component_cases),
+            'operator_limited_case_count': sum(case['status']=='EXECUTED_OPERATOR_LIMITED' for case in component_cases),
+            'domain_incomplete_case_count': sum(case['status']=='EXECUTED_DOMAIN_INCOMPLETE' for case in component_cases),
             'uncomputed_case_count': sum(case['status'] in {'UNCOMPUTED','FAILED','EXECUTED_DOMAIN_INCOMPLETE','EXECUTED_OPERATOR_LIMITED'} for case in component_cases),
             'uncomputed_reasons': sorted({case.get('reason') for case in component_cases if case['status'] != 'EXECUTED' and case.get('reason')}),
         })
