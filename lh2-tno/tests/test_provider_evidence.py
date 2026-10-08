@@ -161,3 +161,20 @@ def test_release_inventory_rechecks_provider_continuity_and_ledger(tmp_path):
     assert report["strict_validation_failures"][0]["file"] == "release.json"
     assert any("mass/area/density/velocity" in row["error"] for row in report["strict_validation_failures"])
     assert "accident release candidates failed strict PRISM boundary validation" in report["blocking_reasons"]
+
+
+def test_release_inventory_accepts_emergency_relief_without_random_opening(tmp_path):
+    relief = _qualified_gas_release()
+    relief.update(event_kind="emergency_relief", failure_opening_diameter_m=None)
+    relief.pop("failure_opening_diameter_m")
+    (tmp_path / "relief.json").write_text(json.dumps(relief), encoding="utf-8")
+
+    from lh2_tno.provider_evidence import _release_packet_inventory
+
+    report = _release_packet_inventory(tmp_path)
+
+    assert report["accident_release_candidate_file_count"] == 1
+    assert report["emergency_relief_candidate_file_count"] == 1
+    assert report["emergency_relief_qualified_file_count"] == 1
+    assert report["accident_release_qualified_file_count"] == 1
+    assert report["promotion_status"] == "QUALIFIED_ACCIDENT_RELEASE_EXPORT"

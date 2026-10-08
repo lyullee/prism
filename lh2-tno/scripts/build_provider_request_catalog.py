@@ -18,6 +18,7 @@ from lh2_tno.provider_release import (
     PROVIDER_RELEASE_SCHEMA,
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
+    load_provider_emergency_relief_catalog,
     load_provider_release_catalog,
 )
 
@@ -25,6 +26,11 @@ from lh2_tno.provider_release import (
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--provider-release-catalog", type=Path, required=True)
+    parser.add_argument(
+        "--release-kind", choices=("accidental_leak", "emergency_relief"),
+        default="accidental_leak",
+        help="strict packet family; emergency_relief is for TNO_RELIEF_DEVICE maximum discharge",
+    )
     parser.add_argument(
         "--request-defaults",
         type=Path,
@@ -35,7 +41,12 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        releases = load_provider_release_catalog(args.provider_release_catalog)
+        loader = (
+            load_provider_emergency_relief_catalog
+            if args.release_kind == "emergency_relief"
+            else load_provider_release_catalog
+        )
+        releases = loader(args.provider_release_catalog)
         defaults = json.loads(args.request_defaults.read_text(encoding="utf-8"))
         if not isinstance(defaults, dict):
             raise ProviderReleaseContractError("request defaults must be a JSON object")
@@ -60,6 +71,7 @@ def main() -> int:
     report = {
         "schema_version": "prism.provider_request_catalog.v1",
         "provider_release_schema": PROVIDER_RELEASE_SCHEMA,
+        "provider_release_kind": args.release_kind,
         "templates": templates,
         "uncomputed": uncomputed,
         "promotion_policy": {

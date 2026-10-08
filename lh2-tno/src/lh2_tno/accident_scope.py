@@ -70,6 +70,8 @@ def _request_families(request: ConsequenceRequest | None) -> set[str]:
         families.add("two_sided_rupture")
     if request.resolved_release is not None and request.resolved_release.vertical_handoff is not None:
         families.add("vertical_handoff")
+    if request.resolved_release is not None and request.resolved_release.event_kind == "emergency_relief":
+        families.add("vent_hole")
     if request.source_operator in {"inventory_liquid_jet", "equipment_inventory_depletion", "equipment_liquid_release"}:
         families.add("inventory_depletion")
     if request.source_operator == "inventory_over_600s":
@@ -86,7 +88,7 @@ def _event_families(
     base = _base_hole_family(
         component_kinds.get(event.get("model_component_id")), event.get("profile")
     )
-    if event.get("release", {}).get("mode") == "hole" and base is not None:
+    if event.get("release", {}).get("mode") in {"hole", "maximum_relief_discharge"} and base is not None:
         families.add(base)
     if event.get("release", {}).get("mode") == "two_sided_rupture":
         families.add("two_sided_rupture")

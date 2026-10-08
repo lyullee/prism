@@ -82,7 +82,7 @@ class SpatialDomain(Contract):
 
 
 class ReleaseTermination(Contract):
-    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_over_600s', 'model_pressure_equalization', 'two_sided_rupture']
+    basis: Literal['synthetic_diagnostic_horizon', 'reviewed_isolation_success', 'inventory_depletion', 'inventory_over_600s', 'model_pressure_equalization', 'two_sided_rupture', 'emergency_relief_discharge']
     time_s: Positive
     provenance: Name
 
@@ -108,7 +108,7 @@ class ConsequenceRequest(Contract):
     annual_frequency_provenance: Name | None = None
     frequency_event: FrequencyEvent | None = None
     release_termination: ReleaseTermination | None = None
-    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release', 'inventory_over_600s', 'equipment_two_sided_rupture', 'equipment_two_sided_rupture_endpoint'] = 'integrated_transient'
+    source_operator: Literal['integrated_transient', 'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release', 'inventory_over_600s', 'equipment_two_sided_rupture', 'equipment_two_sided_rupture_endpoint', 'equipment_emergency_relief'] = 'integrated_transient'
     # ``declared`` requires the source model to cover the requested horizon.
     # ``model_natural`` uses the model's actual pressure-equalisation stop and
     # never extrapolates the final flow interval.
@@ -181,6 +181,15 @@ class ConsequenceRequest(Contract):
                 raise ValueError('equipment_liquid_release requires inventory-depletion termination provenance')
             if self.available_mass_kg != liquid_release.available_mass_kg:
                 raise ValueError('liquid request and provider inventories disagree')
+        elif self.source_operator == 'equipment_emergency_relief':
+            if release is None or release_set is not None or liquid_release is not None or self.source_input is not None:
+                raise ValueError('equipment_emergency_relief requires one resolved gas release')
+            if release.event_kind != 'emergency_relief' or release.failure_opening_diameter_m is not None:
+                raise ValueError('equipment_emergency_relief requires a provider emergency-relief boundary without a random leak opening')
+            if self.source_duration_mode != 'declared':
+                raise ValueError('equipment_emergency_relief uses the provider-declared discharge horizon')
+            if self.release_termination is None or self.release_termination.basis != 'emergency_relief_discharge':
+                raise ValueError('equipment_emergency_relief requires emergency-relief termination provenance')
         elif self.source_operator == 'equipment_two_sided_rupture':
             if release_set is None:
                 raise ValueError('equipment_two_sided_rupture requires two provider-resolved endpoints')
@@ -290,12 +299,23 @@ class ConsequenceRequest(Contract):
             elif event.release.mode == 'two_sided_rupture':
                 if self.source_operator != 'equipment_two_sided_rupture' or release_set is None or self.release_termination.basis != 'two_sided_rupture':
                     raise ValueError('two-sided rupture event requires the equipment_two_sided_rupture operator')
+            elif event.release.mode == 'maximum_relief_discharge':
+                if (self.source_operator != 'equipment_emergency_relief' or release is None
+                        or release.event_kind != 'emergency_relief'
+                        or release.failure_opening_diameter_m is not None
+                        or self.release_termination.basis != 'emergency_relief_discharge'):
+                    raise ValueError('maximum relief discharge requires the equipment_emergency_relief operator and provider termination')
             elif event.release.mode != 'hole':
                 raise ValueError('frequency event requires a supported release operator')
             if release is None and release_set is None and liquid_release is None and event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):
                 raise ValueError('current source binding supports reviewed tank/vessel hole events only')
             provider_release = release if release is not None else liquid_release
-            if provider_release is not None and (provider_release.event_kind!='accidental_leak' or provider_release.failure_opening_diameter_m is None):
+            if event.release.mode == 'maximum_relief_discharge':
+                if (not isinstance(provider_release, ResolvedGasRelease)
+                        or provider_release.event_kind != 'emergency_relief'
+                        or provider_release.failure_opening_diameter_m is not None):
+                    raise ValueError('resolved relief binding requires an emergency-relief gas exit without a failure opening')
+            elif provider_release is not None and (provider_release.event_kind!='accidental_leak' or provider_release.failure_opening_diameter_m is None):
                 raise ValueError('resolved frequency binding requires an accidental leak with explicit failure opening')
             if provider_release is not None and event.basis=='LH2_LITERATURE' and provider_release.upstream_service!='LH2':
                 raise ValueError('LH2 literature frequency must not be applied to a GH2/cold-GH2 component merely because it belongs to an LH2 facility')

@@ -16,7 +16,11 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .provider_release import ProviderReleaseContractError, load_provider_release
+from .provider_release import (
+    ProviderReleaseContractError,
+    load_provider_emergency_relief,
+    load_provider_release,
+)
 
 
 CONFIG_FILES = (
@@ -115,6 +119,8 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
     flow_only_files = 0
     candidate_files: list[dict[str, Any]] = []
     qualified_files: list[dict[str, Any]] = []
+    emergency_relief_candidate_files: list[dict[str, Any]] = []
+    emergency_relief_qualified_files: list[dict[str, Any]] = []
     strict_validation_failures: list[dict[str, str]] = []
     missing_reasons: dict[str, int] = {}
 
@@ -127,14 +133,22 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
         files_scanned += 1
         objects = list(_iter_json_objects(value))
         flow_present = any(any(key in obj for key in _FLOW_KEYS) for obj in objects)
-        accident_objects = [obj for obj in objects if obj.get("event_kind") == "accidental_leak"]
+        accident_objects = [
+            obj for obj in objects
+            if obj.get("event_kind") in {"accidental_leak", "emergency_relief"}
+        ]
         if not accident_objects and flow_present:
             flow_only_files += 1
         for obj in accident_objects:
-            # A candidate needs a declared random opening and a time history.
-            candidate = all(key in obj for key in ("failure_opening_diameter_m", "steps", "duration_s"))
+            # Accidental leaks need a random failure opening; emergency relief
+            # has a provider discharge history but deliberately no random
+            # opening.  Both need a complete provider clock.
+            required_candidate_keys = ("steps", "duration_s")
+            if obj.get("event_kind") == "accidental_leak":
+                required_candidate_keys = ("failure_opening_diameter_m",) + required_candidate_keys
+            candidate = all(key in obj for key in required_candidate_keys)
             if not candidate:
-                for key in ("failure_opening_diameter_m", "steps", "duration_s"):
+                for key in required_candidate_keys:
                     if key not in obj:
                         missing_reasons[f"missing:{key}"] = missing_reasons.get(f"missing:{key}", 0) + 1
                 continue
@@ -148,7 +162,14 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
                 "schema": obj.get("provider_export_schema") or obj.get("schema_version"),
             }
             candidate_files.append(entry)
+            if obj.get("event_kind") == "emergency_relief":
+                emergency_relief_candidate_files.append(entry)
             required = set(_GENERIC_RELEASE_KEYS)
+            if obj.get("event_kind") == "emergency_relief":
+                # Relief packets may omit the random-leak-only field entirely;
+                # the dedicated strict adapter separately rejects a non-null
+                # value if a provider includes one.
+                required.discard("failure_opening_diameter_m")
             if "phase_basis" in obj or "cumulative_specific_enthalpy_out_j" in obj:
                 required.update(_LIQUID_RELEASE_KEYS)
             else:
@@ -181,17 +202,22 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
             # ordering, vertical handoff rules, and non-finite values cannot
             # hide behind a superficially complete provider packet.
             try:
-                load_provider_release(obj)
+                if obj.get("event_kind") == "emergency_relief":
+                    load_provider_emergency_relief(obj)
+                else:
+                    load_provider_release(obj)
             except (ProviderReleaseContractError, ValueError, TypeError) as error:
                 strict_validation_failures.append(
                     {"file": relative, "error": str(error)}
                 )
                 continue
             qualified_files.append(entry)
+            if obj.get("event_kind") == "emergency_relief":
+                emergency_relief_qualified_files.append(entry)
 
     blockers: list[str] = []
     if not candidate_files:
-        blockers.append("provider export contains no explicit accidental resolved-release packet")
+        blockers.append("provider export contains no explicit accidental or emergency-relief resolved-release packet")
     if candidate_files and not qualified_files:
         blockers.append("accident release candidates are missing the complete PRISM export contract")
     if strict_validation_failures:
@@ -205,14 +231,17 @@ def _release_packet_inventory(root: Path) -> dict[str, Any]:
         "normal_or_screening_flow_file_count": flow_only_files,
         "accident_release_candidate_file_count": len(candidate_files),
         "accident_release_qualified_file_count": len(qualified_files),
+        "emergency_relief_candidate_file_count": len(emergency_relief_candidate_files),
+        "emergency_relief_qualified_file_count": len(emergency_relief_qualified_files),
         "candidate_files": candidate_files[:50],
         "qualified_files": qualified_files[:50],
         "strict_validation_failures": strict_validation_failures[:50],
         "blocking_reasons": list(dict.fromkeys(blockers)),
         "missing_field_counts": dict(sorted(missing_reasons.items())),
         "contract": {
-            "required_event_kind": "accidental_leak",
+            "accepted_event_kinds": ["accidental_leak", "emergency_relief"],
             "required_provider_export_schema": "provider_export_schema",
+            "emergency_relief_requires_no_random_failure_opening": True,
             "screening_and_normal_flow_is_not_promotable": True,
         },
     }

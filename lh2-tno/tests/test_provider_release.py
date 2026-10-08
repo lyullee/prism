@@ -12,6 +12,8 @@ from lh2_tno.equipment_boundary import (
 from lh2_tno.provider_release import (
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
+    load_provider_emergency_relief,
+    load_provider_emergency_relief_catalog,
     load_provider_release,
     load_provider_release_catalog,
 )
@@ -187,6 +189,41 @@ def test_provider_liquid_packet_uses_liquid_operator_and_inventory_termination()
     assert request.source_operator == "equipment_liquid_release"
     assert request.release_termination is not None
     assert request.release_termination.basis == "inventory_depletion"
+
+
+def test_provider_emergency_relief_packet_uses_dedicated_operator_and_basis():
+    packet = _release().model_dump(mode="json")
+    packet.update(event_kind="emergency_relief", failure_opening_diameter_m=None)
+    release = load_provider_emergency_relief(packet)
+    defaults = _defaults()
+    defaults["source_operator"] = "equipment_emergency_relief"
+    defaults["release_termination"] = {
+        "basis": "emergency_relief_discharge",
+        "time_s": 0.2,
+        "provenance": "provider maximum relief discharge horizon",
+    }
+
+    request = build_consequence_request_from_provider_release(release, defaults)
+
+    assert request.source_operator == "equipment_emergency_relief"
+    assert request.resolved_release is not None
+    assert request.resolved_release.event_kind == "emergency_relief"
+    assert request.release_termination is not None
+    assert request.release_termination.basis == "emergency_relief_discharge"
+
+
+def test_provider_emergency_relief_catalog_is_separate_from_accidental_catalog(tmp_path):
+    packet = _release().model_dump(mode="json")
+    packet.update(event_kind="emergency_relief", failure_opening_diameter_m=None)
+    path = tmp_path / "relief.json"
+    path.write_text(json.dumps({"releases": [packet]}), encoding="utf-8")
+
+    rows = load_provider_emergency_relief_catalog(path)
+
+    assert len(rows) == 1
+    assert rows[0].event_kind == "emergency_relief"
+    with pytest.raises(ProviderReleaseContractError, match="accidental_leak"):
+        load_provider_release_catalog(path)
 
 
 def test_provider_request_adapter_rejects_integrated_source_defaults():

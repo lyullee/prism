@@ -181,3 +181,60 @@ def test_scope_matrix_can_promote_a_fully_executed_declared_subset():
     assert matrix["rows"][0]["status"] == "EXECUTED"
     assert matrix["matrix_complete"] is True
     assert matrix["facility_total_risk_available"] is True
+
+
+def test_scope_matrix_tracks_maximum_relief_discharge_as_vent_family():
+    root = Path(__file__).parents[1]
+    manifest = EquipmentManifest.model_validate_json(json.dumps({
+        "facility_id": "relief-scope",
+        "environment": "outdoor",
+        "configuration_origin": "synthetic",
+        "components": [{
+            "id": "relief-device",
+            "kind": "vent_stack",
+            "position_enu_m": [7.0, 0.0, 5.0],
+            "property_basis": {
+                "fluid": "Hydrogen",
+                "energy_reference": "CoolProp-HEOS:Hydrogen:native",
+            },
+            "parameters_si": {"length_m": 6.0, "diameter_m": 0.0254},
+        }],
+        "ports": [{
+            "id": "relief.out", "component_id": "relief-device", "phase": "vapour",
+            "direction": "out", "position_enu_m": [7.0, 0.0, 5.0],
+        }],
+        "edges": [],
+        "receptors": [{"id": "worker", "position_enu_m": [8.0, 0.0, 1.0]}],
+    }))
+    plan = FrequencyPlan.model_validate_json(json.dumps({
+        "id": "relief-scope-plan",
+        "assets": [{
+            "id": "relief-asset", "model_component_id": "relief-device",
+            "profile": "TNO_RELIEF_DEVICE",
+            "classification_basis": "synthetic relief device review",
+            "physical_scope_ids": ["relief-scope-01"],
+            "relief_direct_substance_contact_and_atmospheric_discharge": True,
+        }],
+    }))
+    request = ConsequenceRequest.model_validate_json(
+        (root / "examples/equipment_consequence_template.json").read_text(encoding="utf-8")
+    )
+    conditions = tuple(
+        AnnualCondition.model_validate_json(json.dumps(row, allow_nan=False))
+        for row in json.loads((root / "examples/equipment_annual_conditions.json").read_text(encoding="utf-8"))
+    )
+    campaign = build_equipment_campaign(
+        manifest, plan, request, conditions, scope_provenance="synthetic relief scope"
+    )
+    events = [event.model_dump(mode="json") for event in generate_events(manifest.to_facility(), plan)]
+    matrix = build_accident_scope_matrix(
+        campaign,
+        {"events": events, "cases": [], "total_facility_annual_ir_low_high": None},
+        manifest,
+        required_families=("vent_hole",),
+    )
+    row = matrix["rows"][0]
+    assert events[0]["release"]["mode"] == "maximum_relief_discharge"
+    assert row["family"] == "vent_hole"
+    assert row["status"] == "NO_CASE_EXECUTED"
+    assert row["generated_event_count"] == 1

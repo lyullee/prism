@@ -85,6 +85,18 @@ python lh2-tno/scripts/build_provider_request_catalog.py `
   --provider-release-catalog provider_releases.json `
   --request-defaults lh2-tno/examples/provider_request_defaults.json `
   --output provider_request_catalog.json
+
+비상 릴리프 packet은 accidental-leak catalog와 섞지 않고 다음처럼 별도 kind를 지정한다.
+
+```powershell
+python lh2-tno/scripts/build_provider_request_catalog.py `
+  --release-kind emergency_relief `
+  --provider-release-catalog provider_relief_releases.json `
+  --request-defaults lh2-tno/examples/provider_emergency_relief_defaults.json `
+  --output provider_relief_request_catalog.json
+```
+
+이 경로는 `event_kind=emergency_relief`와 random failure opening 부재를 검증하며, `equipment_emergency_relief`·`emergency_relief_discharge` 문맥 없이는 request를 만들지 않는다.
 ```
 
 이 결과는 아직 시설 위험 계산이 아니다. `EquipmentManifest`의 outward port/phase·좌표와 `FrequencyPlan`의 사고 크기가 `bind_event()`로 exact-match되어야 하며, 그 뒤에야 provider request가 방출→확산→점화→피해→IR/F-N campaign으로 전달된다. provider duration과 종료근거가 맞지 않는 packet, 정상 vent, 양단 파열 set을 단일 packet으로 표현한 자료는 자동 보정하지 않는다.

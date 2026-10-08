@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 from lh2_tno.contracts import Facility
 from lh2_tno.consequences import ConsequenceRequest
+from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasStep
 from lh2_tno.frequency import (FrequencyAsset, FrequencyPlan, FrequencyEvent, generate_events,
     bind_event, catalogue, DemandFailure, EventBranch, branch_frequencies,
     GammaRatePrior, ConfirmedLeakExperience, updated_rate, forecast_initiation_probability)
@@ -105,6 +106,59 @@ def test_relief_discharge_is_not_pfd_or_normal_vent_count():
     assert row.release.mode=='maximum_relief_discharge'
     assert DemandFailure(id='ESD',demands_per_year=10.,failure_probability_per_demand=.01,
         provenance='synthetic demands/proof tests').annual_failure_rate()['annual_frequency_per_year']==.1
+
+
+def test_maximum_relief_discharge_binds_only_to_emergency_relief_provider_exit():
+    relief_asset = asset(
+        id='relief-device',
+        model_component_id='terminal',
+        profile='TNO_RELIEF_DEVICE',
+        physical_scope_ids=('relief-scope',),
+        vessel_external_impact_or_operating_error=None,
+        relief_direct_substance_contact_and_atmospheric_discharge=True,
+    )
+    relief_plan = FrequencyPlan(
+        id='relief-diagnostic',
+        assets=(relief_asset,),
+        excluded_model_components={x.id: 'outside relief diagnostic' for x in facility().components if x.id != 'terminal'},
+    )
+    event = generate_events(facility(), relief_plan)[0]
+    step = ResolvedGasStep(
+        time_s=0.0, mass_flow_kg_s=1.0, pressure_pa_abs=101325.0,
+        specific_enthalpy_j_kg=1000.0, temperature_k=288.15,
+        density_kg_m3=1.0, effective_area_m2=1.0, velocity_m_s=1.0,
+        area_provenance='provider relief plane', velocity_origin='provider_resolved',
+    )
+    release = ResolvedGasRelease(
+        component_id='terminal', port_id='terminal.in', event_id='relief-event',
+        event_kind='emergency_relief', upstream_service='GH2',
+        upstream_service_provenance='synthetic provider relief state',
+        enthalpy_convention='static_exit_enthalpy',
+        property_basis={'fluid':'Hydrogen', 'energy_reference':'CoolProp-HEOS:Hydrogen:native'},
+        provider_source_digest='0'*64, provider_result_digest='1'*64,
+        provider_boundary_reference='synthetic maximum relief exit', input_origin='synthetic',
+        position_enu_m=(7.0,0.0,5.0), direction_enu=(1.0,0.0,0.0),
+        ambient_pressure_pa_abs=101325.0, ambient_temperature_k=288.15,
+        duration_s=0.2, available_mass_kg=1.0, cumulative_mass_out_kg=0.2,
+        cumulative_static_enthalpy_out_j=200.0, steps=(step,),
+        termination_provenance='synthetic relief discharge horizon',
+    )
+    data = json.loads((ROOT/'examples/consequence_request.json').read_text(encoding='utf-8'))
+    data.update(
+        component_id='terminal', source_input=None, resolved_release=release.model_dump(mode='json'),
+        resolved_release_set=None, resolved_liquid_release=None, available_mass_kg=1.0,
+        source_position_enu_m=[7.0,0.0,5.0], source_operator='equipment_emergency_relief',
+        annual_frequency_per_year=None, annual_frequency_provenance=None, frequency_event=None,
+        initiation_intensity_per_s=None,
+        release_termination={'basis':'emergency_relief_discharge','time_s':0.2,
+                             'provenance':'synthetic relief discharge horizon'},
+        evaluation_times_s=[0.0,0.2,0.5,1.0,2.0,3.0,5.0],
+    )
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    bound = bind_event(request, event)
+    assert bound.frequency_event is not None
+    assert bound.frequency_event.release.mode == 'maximum_relief_discharge'
+    assert bound.source_operator == 'equipment_emergency_relief'
 
 
 @pytest.mark.parametrize('fault',['unknown','missing_length','missing_vessel_condition','scope_count','implicit_relief','factor','item_length'])

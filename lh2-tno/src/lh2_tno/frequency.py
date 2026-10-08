@@ -230,6 +230,20 @@ def bind_event(request, event: FrequencyEvent):
         payload['annual_frequency_provenance'] = f'{event.id}; {event.source}; {event.source_sha256}'
         payload['frequency_event'] = event.model_dump(mode='json')
         return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
+    if event.release.mode == 'maximum_relief_discharge':
+        if request.source_operator != 'equipment_emergency_relief' or request.resolved_release is None:
+            raise ValueError('maximum relief discharge requires a provider-resolved emergency-relief gas exit')
+        if request.resolved_release.event_kind != 'emergency_relief' or request.resolved_release.failure_opening_diameter_m is not None:
+            raise ValueError('maximum relief discharge cannot be bound to a random leak opening or normal vent')
+        if request.release_termination is None or request.release_termination.basis != 'emergency_relief_discharge':
+            raise ValueError('maximum relief discharge requires explicit emergency-relief termination provenance')
+        payload = request.model_dump(mode='json')
+        if request.annual_frequency_per_year is not None:
+            raise ValueError('remove external frequency before binding a catalogue event')
+        payload['annual_frequency_per_year'] = event.annual_frequency_per_year
+        payload['annual_frequency_provenance'] = f'{event.id}; {event.source}; {event.source_sha256}'
+        payload['frequency_event'] = event.model_dump(mode='json')
+        return ConsequenceRequest.model_validate_json(json.dumps(payload, allow_nan=False))
     if event.release.mode != 'hole':
         if not (event.release.mode == 'instantaneous_inventory' and
                 request.source_operator == 'inventory_liquid_jet'):

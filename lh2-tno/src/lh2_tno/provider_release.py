@@ -79,6 +79,38 @@ def load_provider_release(packet: Mapping[str, Any] | str | Path) -> ProviderRel
     )
 
 
+def load_provider_emergency_relief(packet: Mapping[str, Any] | str | Path) -> ResolvedGasRelease:
+    """Validate an explicit maximum-relief-discharge provider packet.
+
+    Emergency relief is a reviewed initiating event with a provider-owned
+    discharge history.  It is kept separate from :func:`load_provider_release`
+    so a normal vent or an accidental-leak packet cannot be silently reused.
+    """
+    value = _read_packet(packet)
+    if value.get("provider_export_schema") != PROVIDER_RELEASE_SCHEMA:
+        raise ProviderReleaseContractError(
+            "provider_export_schema must be prism.resolved_release.v1"
+        )
+    if value.get("event_kind") != "emergency_relief":
+        raise ProviderReleaseContractError(
+            "emergency-relief adapter requires event_kind=emergency_relief"
+        )
+    if value.get("boundary_kind") != "resolved_atmospheric_gas_exit":
+        raise ProviderReleaseContractError(
+            "emergency-relief adapter requires a resolved atmospheric gas exit"
+        )
+    if value.get("failure_opening_diameter_m") is not None:
+        raise ProviderReleaseContractError(
+            "emergency-relief packet must not carry a random leak opening"
+        )
+    try:
+        return ResolvedGasRelease.model_validate_json(json.dumps(value, allow_nan=False))
+    except (ValueError, TypeError) as error:
+        raise ProviderReleaseContractError(
+            f"provider emergency-relief packet failed strict PRISM validation: {error}"
+        ) from error
+
+
 def load_provider_release_catalog(path: str | Path) -> tuple[ProviderRelease, ...]:
     """Load a JSON array or ``{"releases": [...]}`` catalog."""
     try:
@@ -91,6 +123,20 @@ def load_provider_release_catalog(path: str | Path) -> tuple[ProviderRelease, ..
             "provider release catalog must contain a non-empty JSON array"
         )
     return tuple(load_provider_release(row) for row in rows)
+
+
+def load_provider_emergency_relief_catalog(path: str | Path) -> tuple[ResolvedGasRelease, ...]:
+    """Load a catalog whose rows are all explicit emergency-relief exits."""
+    try:
+        value = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ProviderReleaseContractError(f"cannot read provider relief catalog: {error}") from error
+    rows = value.get("releases") if isinstance(value, dict) else value
+    if not isinstance(rows, list) or not rows:
+        raise ProviderReleaseContractError(
+            "provider emergency-relief catalog must contain a non-empty JSON array"
+        )
+    return tuple(load_provider_emergency_relief(row) for row in rows)
 
 
 def _same_position(left: Any, right: tuple[float, float, float]) -> bool:
