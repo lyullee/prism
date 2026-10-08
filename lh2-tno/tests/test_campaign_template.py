@@ -18,7 +18,7 @@ from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan
 from lh2_tno.frequency import FrequencyAsset
 from lh2_tno.provider_release import ProviderReleaseBranch
-from test_provider_release import _defaults, _release, _release_set
+from test_provider_release import _defaults, _liquid_release, _release, _release_set
 
 
 def _campaign_inputs():
@@ -176,6 +176,38 @@ def test_provider_catalog_compiles_packet_to_exact_frequency_route():
     request = next(branch.request for branch in branches if branch.request is not None)
     assert request.resolved_release is not None
     assert request.resolved_release.event_id == packet.event_id
+
+
+def test_provider_catalog_compiles_liquid_packet_to_exact_frequency_route():
+    manifest, plan, _, conditions = _campaign_inputs()
+    packet = _liquid_release().model_copy(
+        update={
+            "failure_opening_diameter_m": 0.0127,
+        }
+    )
+    defaults = _defaults()
+    defaults.update(
+        source_operator="equipment_liquid_release",
+        release_termination={
+            "basis": "inventory_depletion",
+            "time_s": packet.duration_s,
+            "provenance": "synthetic liquid provider inventory boundary",
+        },
+    )
+    campaign = build_equipment_campaign_from_provider_catalog(
+        manifest,
+        plan,
+        (packet,),
+        defaults,
+        conditions,
+        scope_provenance="synthetic direct liquid provider campaign",
+    )
+    branches = [branch for route in campaign.event_routes for branch in route.branches]
+    assert sum(branch.request is not None for branch in branches) == 1
+    request = next(branch.request for branch in branches if branch.request is not None)
+    assert request.resolved_liquid_release is not None
+    assert request.resolved_liquid_release.event_id == packet.event_id
+    assert request.source_operator == "equipment_liquid_release"
 
 
 def test_provider_catalog_rejects_duplicate_provider_event_ids():
