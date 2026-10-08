@@ -1,0 +1,59 @@
+{
+  "releases": [
+    {
+      "provider_export_schema": "prism.resolved_release.v1",
+      "component_id": "storage-tank-01",
+      "port_id": "tank-out",
+      "event_id": "provider-accident-01",
+      "event_kind": "accidental_leak",
+      "upstream_service": "GH2",
+      "upstream_service_provenance": "reviewed provider boundary",
+      "state_owner": "equipment_twin",
+      "discharge_owner": "equipment_twin",
+      "boundary_kind": "resolved_atmospheric_gas_exit",
+      "enthalpy_convention": "static_exit_enthalpy",
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "provider_source_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+      "provider_result_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "provider_boundary_reference": "provider-boundary-01",
+      "input_origin": "model_prediction",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "direction_enu": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "ambient_pressure_pa_abs": 101325.0,
+      "ambient_temperature_k": 288.15,
+      "duration_s": 0.2,
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 0.2,
+      "cumulative_static_enthalpy_out_j": 200.0,
+      "steps": [
+        {
+          "time_s": 0.0,
+          "mass_flow_kg_s": 1.0,
+          "pressure_pa_abs": 101325.0,
+          "specific_enthalpy_j_kg": 1000.0,
+          "temperature_k": 288.15,
+          "density_kg_m3": 1.0,
+          "effective_area_m2": 1.0,
+          "velocity_m_s": 1.0,
+          "area_provenance": "provider",
+          "velocity_origin": "provider_resolved"
+        }
+      ],
+      "termination_provenance": "provider inventory boundary",
+      "vertical_handoff": null,
+      "failure_opening_diameter_m": 0.01
+    }
+  ]
+}

@@ -111,6 +111,10 @@ class VerticalGasHandoff(Contract):
 
 
 class ResolvedGasRelease(Contract):
+    # Flat provider packets carry their contract version with the resolved
+    # boundary itself.  This prevents a normal-flow JSON object with similar
+    # fields from being mistaken for a PRISM accident export.
+    provider_export_schema: Literal['prism.resolved_release.v1'] = 'prism.resolved_release.v1'
     component_id: Name
     port_id: Name
     event_id: Name
@@ -316,6 +320,9 @@ class ResolvedLiquidRelease(Contract):
     refuses airborne liquid unless a separate validated droplet adapter exists.
     """
 
+    # Keep the same flat export marker as the gas boundary so a provider can
+    # use one request catalog for gas, liquid, and two-phase exits.
+    provider_export_schema: Literal['prism.resolved_release.v1'] = 'prism.resolved_release.v1'
     component_id: Name
     port_id: Name
     event_id: Name

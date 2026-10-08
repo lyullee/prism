@@ -72,6 +72,23 @@ provider가 다음 자료를 외부 검토와 함께 보강하면 같은 감사�
 
 감사 상태가 `EXECUTABLE_PROVIDER`가 된 뒤에도 PRISM의 일반 `EquipmentManifest`와 `FrequencyPlan` 관문을 통과해야 한다. 이후에만 방출 이력을 `ConsequenceRequest`에 연결하고, 시설 IR/F-N 합산을 시도한다. 문헌 빈도는 별도의 입력으로 유지하며 센서 신호로 자동 학습하지 않는다.
 
+## 방출 packet을 PRISM request로 연결하는 단계
+
+provider가 flat JSON `provider_export_schema=prism.resolved_release.v1`을 제공하면 `src/lh2_tno/provider_release.py`의 `load_provider_release()`가 `ResolvedGasRelease` 또는 `ResolvedLiquidRelease`로 strict 검증한다. 이어 `build_consequence_request_from_provider_release()`가 설비 ID·포트·위치·재고·provider 지속시간을 request에 복사하고, 사용자가 선언한 weather·ignition·domain·평가시계·종료근거를 결합한다. 이 함수는 source 입력, initiating frequency, 다른 release set을 defaults에서 받지 않으며, 충돌은 오류 또는 `uncomputed`로 남긴다.
+
+여러 packet은 다음 CLI로 request catalog로 만들 수 있다.
+
+```powershell
+python lh2-tno/scripts/build_provider_request_catalog.py `
+  --provider-release-catalog provider_releases.json `
+  --request-defaults lh2-tno/examples/provider_request_defaults.json `
+  --output provider_request_catalog.json
+```
+
+이 결과는 아직 시설 위험 계산이 아니다. `EquipmentManifest`의 outward port/phase·좌표와 `FrequencyPlan`의 사고 크기가 `bind_event()`로 exact-match되어야 하며, 그 뒤에야 provider request가 방출→확산→점화→피해→IR/F-N campaign으로 전달된다. provider duration과 종료근거가 맞지 않는 packet, 정상 vent, 양단 파열 set을 단일 packet으로 표현한 자료는 자동 보정하지 않는다.
+
+`examples/provider_release_catalog_synthetic.json`은 위 adapter의 동작만 재현하는 합성 입력이다. 실제 센터 또는 일반 액화수소시설의 방출·빈도 증거로 사용하지 않는다.
+
 ## 재현·해석 주의
 
 - provider의 822개 회귀 통과는 provider 내부 단위·상태식·연결 보존성 검증의 범위다.
