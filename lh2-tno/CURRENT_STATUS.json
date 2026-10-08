@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 195,
+  "unit_contract_conservation_tests_passed": 199,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -31,6 +31,14 @@
     40
   ],
   "physical_validation_claim": false,
+  "physical_validation_evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
+  "physical_validation_evidence_component": "DynamicLH2PoolX pool/spreading only",
+  "physical_validation_evidence_record": "docs/PRISM_물리검증_근거_20261009.md",
+  "physical_validation_evidence_results": "results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json",
+  "physical_validation_holdout_water_trial_4_radius_rmse_m": 0.13743685418725532,
+  "physical_validation_holdout_aluminium_trial_6_radius_rmse_m": 0.10158740079360236,
+  "physical_validation_holdout_video_band_coverage": 1.0,
+  "physical_validation_hse_test6_max_mass_residual_kg": 8.244516180866412e-13,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
   "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits; integrated source pressure-equalization natural termination, an explicit finite-inventory liquid-jet operator, five transient LH2_PIPE area-bin routes with explicit success/failure branches, and five HomogeneousTank positive-mass inventory-depletion routes are connected without flow extrapolation; G1 remains operator-limited, layered liquid/two-phase/non-pipe equipment LOCs and site-calibrated facility QRA remain incomplete.",
