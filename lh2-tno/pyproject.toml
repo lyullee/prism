@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lh2-tno"
-version = "0.3.0"
+version = "0.4.0"
 description = "Generic LH2 facility contracts and auditable research model orchestration"
 requires-python = ">=3.12"
 dependencies = ["pydantic>=2.10,<3"]

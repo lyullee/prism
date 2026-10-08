@@ -5,6 +5,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 from .contracts import Contract, Name, Positive, Nonnegative, Fraction, Vector
 from .frequency import FrequencyEvent
+from .equipment_boundary import ResolvedGasRelease
 
 
 class Weather(Contract):
@@ -86,7 +87,8 @@ class ReleaseTermination(Contract):
 
 class ConsequenceRequest(Contract):
     component_id: Name
-    source_input: dict
+    source_input: dict | None = None
+    resolved_release: ResolvedGasRelease | None = None
     available_mass_kg: Positive
     source_position_enu_m: Vector
     weather: Weather
@@ -116,7 +118,10 @@ class ConsequenceRequest(Contract):
             raise ValueError('evaluation clock must start at zero and increase')
         if times[-1]>120 or len(times)>500:
             raise ValueError('consequence horizon budget exceeded')
-        source=self.source_input
+        if (self.source_input is None)==(self.resolved_release is None):
+            raise ValueError('choose exactly one source owner: integrated source or equipment-resolved gas exit')
+        release=self.resolved_release
+        source=self.source_input if release is None else resolved_source_context(release,self.weather)
         duration=source['duration_s']; dt=source['time_step_s']
         if not 0<dt<=duration<=times[-1] or duration/dt>100:
             raise ValueError('source horizon must lie inside consequence horizon; max 100 source intervals')
@@ -136,6 +141,15 @@ class ConsequenceRequest(Contract):
         direction=source['nozzle']['direction_enu']
         if math.hypot(direction[0],direction[1])==0:
             raise ValueError('vertical-only release requires a vertical near-field adapter')
+        if release is not None:
+            if release.component_id!=self.component_id or release.position_enu_m!=self.source_position_enu_m:
+                raise ValueError('provider component/exit position must match consequence request')
+            if release.available_mass_kg!=self.available_mass_kg:
+                raise ValueError('provider and consequence inventories disagree')
+            if any(x.time_s not in times for x in release.steps):
+                raise ValueError('all provider/command breakpoints must be explicit evaluation timestamps')
+            if release.event_kind=='normal_vent' and any(x is not None for x in (self.annual_frequency_per_year,self.frequency_event,self.initiation_intensity_per_s)):
+                raise ValueError('normal vent history must not be assigned a random accident initiation frequency')
         if self.annual_frequency_per_year is not None and self.annual_frequency_provenance is None:
             raise ValueError('annual frequency provenance required')
         event = self.frequency_event
@@ -144,18 +158,33 @@ class ConsequenceRequest(Contract):
                 raise ValueError('bound event requires explicit release-duration/termination basis; frequency does not justify cutting a release short')
             if event.model_component_id != self.component_id or event.release.mode != 'hole' or event.exposure_multiplier != 1:
                 raise ValueError('frequency event requires a matching single-item hole release')
-            if event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):
+            if release is None and event.profile not in ('TNO_PRESSURE_VESSEL', 'TNO_PROCESS_VESSEL', 'TNO_REACTOR_VESSEL', 'LH2_VESSEL'):
                 raise ValueError('current source binding supports reviewed tank/vessel hole events only')
+            if release is not None and (release.event_kind!='accidental_leak' or release.failure_opening_diameter_m is None):
+                raise ValueError('resolved frequency binding requires an accidental leak with explicit failure opening')
+            if release is not None and event.basis=='LH2_LITERATURE' and release.upstream_service!='LH2':
+                raise ValueError('LH2 literature frequency must not be applied to a GH2/cold-GH2 component merely because it belongs to an LH2 facility')
             if self.annual_frequency_per_year != event.annual_frequency_per_year:
                 raise ValueError('request/event frequency mismatch')
             if self.initiation_intensity_per_s is not None and not math.isclose(
                     self.initiation_intensity_per_s, event.annual_frequency_per_year/(365.25*86400), rel_tol=1e-10, abs_tol=0):
                 raise ValueError('bound event cannot carry a conflicting initiation intensity; explicit stationary calendar-year conversion required')
-            if not math.isclose(source['nozzle']['diameter_m'], event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
+            opening=source['nozzle']['diameter_m'] if release is None else release.failure_opening_diameter_m
+            if not math.isclose(opening, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
                 raise ValueError('request/event leak diameter mismatch')
         if self.transition_x_max_m/self.transition_dx_m>10000:
             raise ValueError('near-field integration budget exceeded')
         return self
+
+
+def resolved_source_context(release,weather):
+    first=release.steps[0]
+    return {'tank':{'fluid':release.property_basis.fluid},
+        'nozzle':{'height_m':release.position_enu_m[2],'direction_enu':list(release.direction_enu),
+                  'diameter_m':math.sqrt(4*first.effective_area_m2/math.pi)},
+        'ambient':{'pressure_pa':release.ambient_pressure_pa_abs,'temperature_k':release.ambient_temperature_k,
+                   'wind_speed_m_s':weather.wind_speed_m_s,'wind_from_bearing_deg':weather.wind_from_bearing_deg},
+        'duration_s':release.duration_s,'time_step_s':release.duration_s}
 
 
 def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
@@ -164,13 +193,23 @@ def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
     if request.component_id not in components:raise ValueError('source component not in facility')
     component=components[request.component_id]
     if pipeline.facility.environment!='outdoor':raise ValueError('outdoor consequence chain required')
-    if component.kind!='storage_tank':raise ValueError('integrated source requires a storage tank boundary')
-    tank=request.source_input['tank']
-    if component.property_basis.fluid!=tank['fluid'] or component.property_basis.energy_reference!=f"CoolProp-HEOS:{tank['fluid']}:native":
-        raise ValueError('source/facility property basis mismatch')
-    if component.parameters_si['volume_m3']!=tank['volume_m3']:raise ValueError('source/facility tank volume mismatch')
+    if request.resolved_release is None:
+        if component.kind!='storage_tank':raise ValueError('integrated source requires a storage tank boundary')
+        tank=request.source_input['tank']
+        if component.property_basis.fluid!=tank['fluid'] or component.property_basis.energy_reference!=f"CoolProp-HEOS:{tank['fluid']}:native":
+            raise ValueError('source/facility property basis mismatch')
+        if component.parameters_si['volume_m3']!=tank['volume_m3']:raise ValueError('source/facility tank volume mismatch')
+    else:
+        release=request.resolved_release
+        if component.property_basis!=release.property_basis:
+            raise ValueError('provider/facility fluid or energy-reference mismatch')
+        port=next((x for x in pipeline.facility.ports if x.id==release.port_id),None)
+        if port is None or port.component_id!=component.id or port.direction=='in' or port.phase not in ('vapour','any'):
+            raise ValueError('resolved exit requires a matching outward gas facility port')
     if not pipeline.facility.receptors:raise ValueError('at least one receptor required')
     payload=request.model_dump(mode='json')
+    if request.resolved_release is not None:
+        payload['source_input']=resolved_source_context(request.resolved_release,request.weather)
     payload['receptors']=[x.model_dump(mode='json') for x in pipeline.facility.receptors]
     result=pipeline.backend.run('consequence_chain',payload)
     result['facility_digest']=pipeline.facility.digest()

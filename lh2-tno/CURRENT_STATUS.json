@@ -1,6 +1,6 @@
 {
   "date_kst": "2026-10-08",
-  "package_version": "0.3.0",
+  "package_version": "0.4.0",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
   "legacy_tno_lh2_frequency_entries": 6,
@@ -19,7 +19,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 100,
+  "unit_contract_conservation_tests_passed": 136,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -33,7 +33,7 @@
   "physical_validation_claim": false,
   "facility_validation": "WITHHELD",
   "one_hz_fresh_physics_demonstrated": false,
-  "current_scope": "Outdoor diagnostic chain plus reviewed frequency catalogue; one matching tank-hole event may be bound. Full event portfolio/facility twin and field-qualified risk remain incomplete.",
+  "current_scope": "Outdoor diagnostic integrated source chain plus resolved horizontal atmospheric low-Mach gas exits; frequency catalogue and single matched accident binding; full facility annual QRA and twin feedback remain incomplete.",
   "unsupported": [
     "indoor",
     "vertical_only_nozzle",
@@ -47,7 +47,11 @@
     "two_sided_pipe_rupture_in_new_chain",
     "atmospheric_storage_frequency_profile",
     "vacuum_loss_initiation_frequency",
-    "normal_vent_demand_frequency"
+    "normal_vent_demand_frequency",
+    "resolved_liquid_or_two_phase_exit",
+    "underexpanded_or_high_Mach_resolved_exit",
+    "PH_upstream_nozzle_discharge_for_saturated_liquid",
+    "bidirectional_dynamic_leak_inventory_energy_feedback"
   ],
   "record": "docs/방출부터_최종피해_연결완료_20261008.md",
   "results": "results/20261008/full_chain",
@@ -69,5 +73,20 @@
   "field_frequency_data_required_for_development": false,
   "field_frequency_data_required_for_first_manuscript": false,
   "default_frequency_research_mode": "literature-based baseline and uncertainty/sensitivity assessment",
-  "field_frequency_update_role": "optional future extension, inactive without confirmed events and exposure"
+  "field_frequency_update_role": "optional future extension, inactive without confirmed events and exposure",
+  "github_repository": "https://github.com/lyullee/tno-lh2",
+  "github_repository_private": true,
+  "github_main_baseline": "v0.3.0",
+  "github_development_branch": "codex/tno-lh2-development",
+  "module_structure": "separate integration package/add-on to legacy TNO and external LH2 providers",
+  "equipment_resolved_atmospheric_gas_source_supported": true,
+  "equipment_PH_to_gas_exit_checked": true,
+  "equipment_flow_recalculation_in_resolved_path": false,
+  "equipment_resolved_exit_to_final_harm_actual_execution": true,
+  "equipment_provider_clock_and_mass_static_enthalpy_ledger_checked": true,
+  "equipment_normal_vent_excluded_from_random_leak_frequency": true,
+  "equipment_upstream_service_frequency_compatibility_checked": true,
+  "actual_equipment_coupling_scope": "Native VentStack/SteadyNetwork: two prescribed synthetic steady PH states, 0.37 s closure, horizontal atmospheric gas exit Mach<=0.3; no tank feedback or field calibration.",
+  "equipment_coupling_record": "docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md",
+  "equipment_coupling_results": "results/20261008/equipment_coupling_v040"
 }

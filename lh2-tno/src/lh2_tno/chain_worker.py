@@ -74,17 +74,23 @@ def run_chain(p,roots,module):
     timings={}
     def mark(name,started):timings[name]=(time.perf_counter()-started)*1000
     start=time.perf_counter()
-    srcmod=module('slabx_lh2.integrated_lh2_source',roots['slabx_lh2'])
     cp=__import__('CoolProp.CoolProp',fromlist=['PropsSI'])
     source=p['source_input']; duration=source['duration_s']
-    inp=srcmod.IntegratedSourceInput(srcmod.TankState(**source['tank']),
-        tuple(srcmod.PipeSection(**x) for x in source['pipe_sections']),
-        srcmod.NozzleGeometry(**source['nozzle']),srcmod.AmbientState(**source['ambient']),
-        srcmod.ModelChoices(**source['choices']),duration,source['time_step_s'])
-    history=srcmod.evaluate_integrated_lh2_source(inp)
-    rows=asdict(history)['steps']
-    if not rows or len(rows)!=math.ceil(duration/source['time_step_s']-1e-10):
-        raise ValueError('source ended early; incomplete release horizon cannot be extrapolated')
+    resolved=p.get('resolved_release')
+    if resolved is not None:
+        from resolved_gas_worker import resolve_gas_rows
+        rows,source_history=resolve_gas_rows(resolved,source['ambient']['pressure_pa'],cp)
+    else:
+        srcmod=module('slabx_lh2.integrated_lh2_source',roots['slabx_lh2'])
+        inp=srcmod.IntegratedSourceInput(srcmod.TankState(**source['tank']),
+            tuple(srcmod.PipeSection(**x) for x in source['pipe_sections']),
+            srcmod.NozzleGeometry(**source['nozzle']),srcmod.AmbientState(**source['ambient']),
+            srcmod.ModelChoices(**source['choices']),duration,source['time_step_s'])
+        history=srcmod.evaluate_integrated_lh2_source(inp)
+        source_history=asdict(history)
+        rows=source_history['steps']
+        if not rows or len(rows)!=math.ceil(duration/source['time_step_s']-1e-10):
+            raise ValueError('source ended early; incomplete release horizon cannot be extrapolated')
     mass=branch_mass(rows,duration,'total_mass_flow_kg_s')
     if mass>p['available_mass_kg']+1e-9:raise ValueError('release exceeds available inventory')
     if max(abs(r['mass_residual_kg_s']) for r in rows)>1e-8:
@@ -167,15 +173,19 @@ def run_chain(p,roots,module):
     release_bearing=math.degrees(math.atan2(direction[0],direction[1]))%360
     packets=[]; traj_cache={}; traces=[]
     def trajectory(kind,rate,area,span,row=None):
-        key=(kind,rate,area,span)
+        velocity=0. if row is None else max(1e-5,float(np.linalg.norm(row['velocity_vector_m_s'])))
+        gas_temperature=tsat if row is None else row.get('gas_boundary_temperature_k',tsat)
+        gas_density=rho_g if row is None else row.get('gas_boundary_density_kg_m3',rho_g)
+        gas_area=None if row is None else row.get('gas_boundary_area_m2')
+        key=(kind,rate,area,span,velocity,gas_temperature,gas_density,gas_area)
         if key in traj_cache:return traj_cache[key]
         near=[]; tt=0.; cross_offset=0.; base_origin=origin if kind=='jet' else pool_origin
         if kind=='jet':
-            velocity=max(1e-5,float(np.linalg.norm(row['velocity_vector_m_s'])))
             transition_input=transition.TransitionInput(
                 h2_rate_kg_s=rate,flash_vapour_mass_fraction=1.,flash_velocity_m_s=velocity,
-                flash_area_m2=rate/(rho_g*velocity),droplet_diameter_m=max(row['droplet']['smd_m'],1e-8),
-                evaporation_kb_m2_s=1e-6,liquid_density_kg_m3=rho_l,h2_temperature_K=tsat,
+                flash_area_m2=gas_area if gas_area is not None else rate/(gas_density*velocity),
+                droplet_diameter_m=max(row.get('droplet',{}).get('smd_m',0.),1e-8),
+                evaporation_kb_m2_s=1e-6,liquid_density_kg_m3=rho_l,h2_temperature_K=gas_temperature,
                 ambient_temperature_K=ambient['temperature_k'],ambient_density_kg_m3=rho_air,
                 ambient_wind_m_s=weather['wind_speed_m_s'],release_height_m=origin[2],
                 friction_velocity_m_s=atm.u_star,release_bearing_deg=release_bearing,
@@ -212,10 +222,11 @@ def run_chain(p,roots,module):
                 total_rate_kg_s=total,h2_mass_fraction=hand.h2_mass_fraction,temperature_K=hand.temperature_K,
                 density_kg_m3=hand.density_kg_m3,velocity_m_s=downvelocity,centre_height_m=hand.height_m,
                 half_width_m=width,depth_m=depth,mixture_cp_J_kgK=hand.h2_mass_fraction*14300.+(1-hand.h2_mass_fraction)*1006.,
-                source_model='integrated-source-terminal-gas + vector-cryogenic-transition',
+                source_model='equipment-resolved-gas + vector-transition' if resolved is not None else 'integrated-source-terminal-gas + vector-cryogenic-transition',
                 geometry_closure='mass and downwind momentum preserving section')
             source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)
             traces.append({'branch':kind,'handoff':asdict(hs),'handoff_age_s':tt,
+                           'entry_temperature_k':gas_temperature,'entry_density_kg_m3':gas_density,
                            'mass_residual_relative':hs.mass_residual_relative(),
                            'transition_mass_residual_kg_s':hand.mass_residual_kg_s,
                            'transition_energy_residual_w':hand.energy_residual_W})
@@ -431,9 +442,13 @@ def run_chain(p,roots,module):
     return {'data':{
         'status':'END_TO_END_DIAGNOSTIC_EXECUTED','full_chain_executed':True,
         'physical_validation_claim':False,'facility_validation':'WITHHELD','realtime_requirement_demonstrated':False,
-        'stages':['integrated_release','rainout_and_dynamic_pool','vector_cryogenic_near_field','SLABx_dispersion',
+        'stages':['equipment_resolved_gas_exit' if resolved is not None else 'integrated_release',
+                  'rainout_and_dynamic_pool','vector_cryogenic_near_field','SLABx_dispersion',
                   'finite_inventory_cloud','ignition_branches','fire_radiation','multi_energy_blast_zones','TNO_human_damage','conditional_risk'],
-        'source':asdict(history),'pool':pool,'ground_arrival_pulses':ground_pulses,
+        'source':source_history,'pool':pool,'ground_arrival_pulses':ground_pulses,
+        'source_ownership':{'state_owner':'equipment_twin' if resolved is not None else 'integrated_source',
+            'discharge_owner':'equipment_twin' if resolved is not None else 'integrated_source',
+            'discharge_recalculated':resolved is None},
         'handoffs':traces,'cloud_history_unignited_counterfactual':cloud,
         'ignition_branch_probabilities':branch_probs,
         'explosion':{'ignition_time_s':td,'flammable_mass_in_domain_kg':fm,'cloud_centroid_enu_m':cloud_centre.tolist(),
@@ -451,6 +466,7 @@ def run_chain(p,roots,module):
             'initiation':'constant supplied hazard; disjoint first-event intervals; remaining consequence horizon; interval-left consequence approximation',
             'effect_combination':'Frechet union upper bound min(1,sum(harm)) within one event branch; no independence assumed'},
         'limitations':[
+            'If resolved equipment input is selected: horizontal atmospheric gas plane at Mach <=0.3; PH/continuity/static enthalpy checked, provider kinetic-energy closure is not certified.',
             'Outdoor flat ground, non-calm wind, nonvertical nozzle, known leak geometry only.',
             'Ground deposition uses resolved per-class flight delays; distributed in-flight vapour generation is still collapsed to the terminal gas boundary at release time.',
             'The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.',

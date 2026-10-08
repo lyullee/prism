@@ -11,6 +11,8 @@ from .contracts import canonical_digest
 
 def request_from_telemetry(template, normalized, *, pressure_tag, temperature_tag):
     """Use confirmed SI tank state. This is not inverse leak identification."""
+    if template.resolved_release is not None:
+        raise ValueError('resolved provider flow must be updated by the equipment model; cannot overwrite its PH boundary from raw P/T tags')
     if pressure_tag==temperature_tag:raise ValueError('distinct pressure and temperature tags required')
     data=template.model_dump(mode='json')
     for tag,quantity,key in ((pressure_tag,'pressure','pressure_pa'),(temperature_tag,'temperature','temperature_k')):

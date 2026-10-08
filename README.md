@@ -21,8 +21,9 @@ External physics runs require explicit local provider paths, source hashes,
 and dependency versions. The normal unit suite uses synthetic inputs and
 does not require those provider packages.
 
-Version 0.3.0 demonstrates one matching tank-hole event's automatically
-generated frequency connected to the diagnostic source-to-harm chain. It
+Version 0.4.0 also connects native equipment-resolved horizontal atmospheric
+low-Mach gas exits to dispersion and harm without recalculating discharge.
+The v0.3.0 tank-hole frequency baseline is preserved on the initial main commit. It
 does not certify complete facility QRA, field accident frequencies, or
 fresh physics calculations at 1 Hz. See
 [`CURRENT_STATUS.json`](lh2-tno/CURRENT_STATUS.json) and

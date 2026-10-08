@@ -23,3 +23,10 @@ GitHub에는 이 연동 패키지의 코드·합성 예제·시험·개발 문�
 
 명칭의 LH2는 액화수소다. LN2는 액체질소이므로 이 프로젝트의 최종 이름은
 TNO-LH2로 사용한다. 코드 배포 이름은 `lh2-tno`, import 이름은 `lh2_tno`다.
+
+GitHub private 저장소는 https://github.com/lyullee/tno-lh2 이다.
+`main`에는 초기 v0.3.0을 보관했고 `codex/tno-lh2-development`에서
+v0.4.0 설비 출구 연결을 개발한다. 실제 native VentStack/SteadyNetwork의
+수평·대기압·low-Mach 기체 출구를 이미 계산된 유량 그대로 받아
+최종 피해에 전달했다. 탱크 전단 LH2 source·수직 벤트·동적 leak feedback과
+전체 시설 QRA는 아직 완전 연결되지 않았다.

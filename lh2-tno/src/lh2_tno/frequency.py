@@ -184,7 +184,7 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
 
 
 def bind_event(request, event: FrequencyEvent):
-    """Bind reviewed frequency to a matching executable tank-hole scenario.
+    """Bind frequency to a matching tank-hole or resolved accident gas exit.
 
     Never approximate instantaneous inventory/600 s/full-bore two-sided rupture
     by the current short tank-nozzle diagnostic worker.
@@ -194,7 +194,12 @@ def bind_event(request, event: FrequencyEvent):
         raise ValueError('failure component and current source component must match; an upstream-port adapter is required otherwise')
     if event.release.mode != 'hole':
         raise ValueError('this LOC requires a different release operator; frequency exists but its consequences remain uncomputed')
-    diameter = request.source_input['nozzle']['diameter_m']
+    if request.resolved_release is not None:
+        if request.resolved_release.event_kind!='accidental_leak' or request.resolved_release.failure_opening_diameter_m is None:
+            raise ValueError('resolved source frequency requires an accidental leak with a declared failure opening')
+        diameter=request.resolved_release.failure_opening_diameter_m
+    else:
+        diameter = request.source_input['nozzle']['diameter_m']
     if not math.isclose(diameter, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
         raise ValueError('frequency leak size must equal the physical source opening')
     if event.exposure_multiplier != 1:

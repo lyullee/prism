@@ -5,6 +5,8 @@ import json
 import re
 import shutil
 ROOT=Path(__file__).resolve().parents[1]
+if json.loads((ROOT/'CURRENT_STATUS.json').read_text(encoding='utf-8'))['package_version'] != '0.3.0':
+    raise RuntimeError('This refreshes the v0.3.0 frequency record only. Preserve later release status and use its matching record script.')
 OUT=ROOT/'results/20261008/frequency_v030'
 verification=json.loads((OUT/'verification.json').read_text(encoding='utf-8'))
 cli=json.loads((OUT/'cli_actual_g3_chain.json').read_text(encoding='utf-8'))

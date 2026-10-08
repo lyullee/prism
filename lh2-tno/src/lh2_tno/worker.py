@@ -53,6 +53,34 @@ def run(request):
         residual=hydraulic.mass_flow_kg_s*(outlet.specific_enthalpy_J_kg-left.specific_enthalpy_J_kg)-hydraulic.heat_into_fluid_W
         return {"data":{"hydraulic":asdict(hydraulic),"outlet":asdict(outlet),"energy_residual_w":residual},
                 "limitation":"steady stack component; tank/PSV transient not computed"}
+    if operation=="equipment_network_exit":
+        props=module('lh2dt.properties',roots['lh2dt'])
+        component=module('lh2dt.vent_stack',roots['lh2dt'])
+        networkmod=module('lh2dt.network',roots['lh2dt'])
+        fluid=props.HydrogenProperties(p['fluid'])
+        # Explicit PH boundaries: saturation is never resolved by a T offset.
+        def state(row):return fluid.from_ph(row['pressure_pa_abs'],row['specific_enthalpy_j_kg'])
+        left=state(p['upstream']);right=state(p['downstream'])
+        stack=component.VentStack(**p['stack'],properties=fluid)
+        network=networkmod.SteadyNetwork(fluid)
+        network.add_boundary('UPSTREAM',left);network.add_boundary('ATMOSPHERE',right)
+        network.add_link(p['provider_link_id'],'UPSTREAM','ATMOSPHERE',stack,
+            source_port_id='UPSTREAM.gas',target_port_id='ATMOSPHERE.in')
+        solution=network.solve()
+        if not solution.pressure_solver_success:raise ValueError('equipment network pressure solution failed')
+        flow=solution.link_flows[p['provider_link_id']]
+        if flow.mass_flow_kg_s<0:raise ValueError('outward release export requires outward resolved flow')
+        outlet=fluid.from_ph(right.pressure_Pa,flow.transmitted_specific_enthalpy_J_kg)
+        native=stack.evaluate(left,right)
+        area=math.pi*stack.diameter**2/4
+        velocity=flow.mass_flow_kg_s/(outlet.density_kg_m3*area)
+        return {'data':{'flow':asdict(flow),'outlet':asdict(outlet),'hydraulic':asdict(native),
+                'effective_area_m2':area,'velocity_m_s':velocity,
+                'velocity_origin':'mass_continuity_from_declared_area',
+                'upstream':asdict(left),'downstream':asdict(right),
+                'state_owner':'equipment_twin','discharge_owner':'equipment_twin',
+                'static_enthalpy_transport_only':True},
+                'limitation':'Native steady VentStack/SteadyNetwork PH export. Terminal area is declared stack bore; velocity derived by continuity. Total kinetic-energy closure and transient feedback are not qualified.'}
     if operation=="declared_pool":
         m=module("dynamiclh2poolx",roots["dynamiclh2poolx"])
         if p["inflow_origin"] not in {"synthetic_declared_ground", "reviewed_ground_measurement"}:
