@@ -192,6 +192,7 @@
   "ijhe_completion_audit_implemented": true,
   "ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
   "ijhe_completion_audit_record": "results/20261009/provider_release_full_chain_diagnostic/ijhe_completion_audit.json",
+  "ijhe_completion_audit_check_count": 7,
   "ijhe_completion_audit_blocking_reason_count": 4,
   "ijhe_completion_audit_complete_facility_qra_claim": false,
   "ijhe_completion_audit_test_status": "2 audit tests; full portable suite 257 passed"

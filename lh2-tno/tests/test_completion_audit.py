@@ -4,7 +4,11 @@ from lh2_tno.completion_audit import build_ijhe_completion_audit
 def _campaign_result(total=True):
     return {
         "events": [{"id": "event-1"}],
-        "cases": [{"status": "EXECUTED"}],
+        "cases": [{
+            "status": "EXECUTED",
+            "termination": {"basis": "synthetic", "time_s": 0.2},
+            "mass_ledger": {"end_to_end_residual_kg": 0.0},
+        }],
         "timing": {"fresh_physics_cases": 1, "campaign_elapsed_ms": 12.5},
         "total_facility_annual_ir_low_high": {"r1": [1e-6, 2e-6]} if total else None,
         "total_facility_expected_death_fn_low_high": [[], []] if total else None,

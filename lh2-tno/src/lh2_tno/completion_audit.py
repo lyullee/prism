@@ -39,6 +39,14 @@ def build_ijhe_completion_audit(
         row for row in cases
         if isinstance(row, Mapping) and str(row.get("status", "")).startswith("EXECUTED")
     ]
+    ledger_cases = [
+        row for row in executed_cases
+        if isinstance(row.get("termination"), Mapping)
+        and _finite(row["termination"].get("time_s"))
+        and row["termination"].get("time_s") > 0
+        and isinstance(row.get("mass_ledger"), Mapping)
+        and _finite(row["mass_ledger"].get("end_to_end_residual_kg"))
+    ]
     checks = [
         _check(
             "equipment_state_to_release_to_consequence",
@@ -49,6 +57,22 @@ def build_ijhe_completion_audit(
                 "executed_case_count": len(executed_cases),
             },
             "no executed release-to-consequence case is present",
+        ),
+        _check(
+            "release_duration_isolation_inventory_ledger",
+            bool(executed_cases) and len(ledger_cases) == len(executed_cases),
+            {
+                "executed_case_count": len(executed_cases),
+                "cases_with_termination_and_mass_ledger": len(ledger_cases),
+                "max_end_to_end_residual_kg": max(
+                    (
+                        abs(float(row["mass_ledger"]["end_to_end_residual_kg"]))
+                        for row in ledger_cases
+                    ),
+                    default=None,
+                ),
+            },
+            "one or more executed cases lacks a finite release termination time or mass/inventory ledger",
         ),
         _check(
             "declared_major_accident_scope",
