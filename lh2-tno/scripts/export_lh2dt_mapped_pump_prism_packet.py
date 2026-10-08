@@ -45,14 +45,15 @@ def _save(path: Path, value: object) -> None:
 
 
 def _request(*, source_digest: str, component_id: str, opening_diameter_m: float,
-             state_digest: str, height_m: float, model_revision: str) -> AccidentReleaseExportRequest:
-    port_id = f"{component_id}.accident-out"
+             state_digest: str, height_m: float, model_revision: str,
+             event_id: str | None, port_id: str | None) -> AccidentReleaseExportRequest:
+    port_id = port_id or f"{component_id}.accident-out"
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
         "component_id": component_id,
         "port_id": port_id,
-        "event_id": f"{component_id}/{port_id}/{opening_diameter_m:.12g}m",
+        "event_id": event_id or f"{component_id}/{port_id}/{opening_diameter_m:.12g}m",
         "failure_mode": "explicit_pump_downstream_atmospheric_outlet",
         "failure_opening_diameter_m": opening_diameter_m,
         "horizon_s": 600.0,
@@ -220,6 +221,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         opening_diameter_m=args.opening_diameter_m,
         state_digest=canonical_digest(state_payload),
         height_m=args.nozzle_height_m, model_revision=args.model_revision,
+        event_id=args.event_id,
+        port_id=args.port_id,
     )
     provider = MappedPumpAccidentProvider(
         root, duration_s=args.duration_s, time_step_s=args.time_step_s,
@@ -275,6 +278,8 @@ def main() -> int:
     parser.add_argument("--flow-match-tolerance", type=float, default=0.02)
     parser.add_argument("--nozzle-height-m", type=float, default=0.5)
     parser.add_argument("--component-id", default="mapped-pump-diagnostic")
+    parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
+    parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")
     parser.add_argument("--model-revision", default="external-library-mapped-pump-0.1.1")
     args = parser.parse_args()
     try:

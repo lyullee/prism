@@ -32,6 +32,7 @@ def _save(path: Path, value: object) -> None:
 
 def _facility(
     component_id: str,
+    port_id: str,
     position: tuple[float, float, float],
     phase: str,
     fluid: str,
@@ -53,7 +54,7 @@ def _facility(
             "parameters_si": {"length_m": 0.01, "diameter_m": 0.01},
         }],
         "ports": [{
-            "id": f"{component_id}.accident-out",
+            "id": port_id,
             "component_id": component_id,
             "phase": phase,
             "direction": "out",
@@ -143,6 +144,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
     config = BackendConfig.model_validate_json(json.dumps(config_raw, allow_nan=False))
     facility = _facility(
         release.component_id,
+        release.port_id,
         tuple(release.position_enu_m),
         "two_phase" if isinstance(release, ResolvedLiquidRelease) else "vapour",
         release.property_basis.fluid,

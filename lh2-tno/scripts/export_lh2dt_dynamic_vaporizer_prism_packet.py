@@ -50,14 +50,15 @@ def _save(path: Path, value: object) -> None:
 
 def _request(*, source_digest: str, component_id: str, opening_diameter_m: float,
              state_digest: str, height_m: float, model_class: str,
+             event_id: str | None, port_id: str | None,
              model_revision: str, mode: str) -> AccidentReleaseExportRequest:
-    port_id = f"{component_id}.accident-out"
+    port_id = port_id or f"{component_id}.accident-out"
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
         "component_id": component_id,
         "port_id": port_id,
-        "event_id": f"{component_id}/{port_id}/{opening_diameter_m:.12g}m",
+        "event_id": event_id or f"{component_id}/{port_id}/{opening_diameter_m:.12g}m",
         "failure_mode": "explicit_atmospheric_outlet_valve",
         "failure_opening_diameter_m": opening_diameter_m,
         "horizon_s": 600.0,
@@ -275,7 +276,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         opening_diameter_m=args.opening_diameter_m,
         state_digest=canonical_digest(state_payload),
         height_m=args.nozzle_height_m, model_class=model_class,
-        model_revision=args.model_revision, mode=args.mode,
+        model_revision=args.model_revision, mode=args.mode, event_id=args.event_id,
+        port_id=args.port_id,
     )
     provider = DynamicVaporizerAccidentProvider(
         root, mode=args.mode, duration_s=args.duration_s,
@@ -338,6 +340,8 @@ def main() -> int:
     parser.add_argument("--stroke-time-s", type=float, default=0.2)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
     parser.add_argument("--component-id", default="dynamic-vaporizer-diagnostic")
+    parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
+    parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")
     parser.add_argument("--model-revision", default="external-library-dynamic-gas-unit-0.1.1")
     args = parser.parse_args()
     try:

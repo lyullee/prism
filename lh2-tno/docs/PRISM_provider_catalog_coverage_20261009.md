@@ -41,6 +41,8 @@ python scripts/audit_provider_catalog_coverage.py `
 
 실제 일반 LH2 설비에 대해 적격으로 승인된 provider packet은 0건이므로 실제 시설 coverage는 계속 `NO_EXACT_MATCH`다. 별도 합성 진단에서는 `lh2dt.LayeredTankNetworkSimulator→SLABx-LH2` 결과를 저장탱크 다섯 area-bin의 설비·포트·개구에 맞춰 `PARTIAL_EXACT_MATCH`(5/24)로 반복 재현했다. 다섯 case 모두 provider 질량 잔차와 5% 유량 gate를 통과했지만, 합성 threshold·종료시계·재고·기상 때문에 실제 방출 이력이나 시설 위험으로 승격하지 않는다. 배관·밸브·벤트·펌프 등 나머지 19개 사건은 packet 없이 남아 있다. 상세 결과는 `results/20261010/layered_tank_worklist_packets/provider_catalog_coverage.json`과 `campaign_verification.json`이다. 기존 단일 사건 재현 결과도 `results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_layered_exact.json`에 보존한다.
 
+2026-10-12에는 같은 coverage gate에 PRISM-side 설비 adapter의 구조 진단 packet을 추가했다. 저장탱크 5건에 `MappedPump` G2, `DynamicVaporizer` G3, `DynamicReliquefier` G6를 각각 실제 worklist의 component·accident port·개구·경계 종류와 exact-match하여 `PARTIAL_EXACT_MATCH`가 **8/24**가 되었다. 결합 결과는 `results/20261012/combined_structural_provider_catalog_coverage.json`이며, `provider_packet_count=8`, `exact_match_count=8`, `unmatched_event_count=16`, `extra_packet_count=0`이다. 펌프·기화기·재액화기 packet은 모두 `synthetic_diagnostic`이고 최종 chain 실행은 확인했지만 `provider_packet_promoted=false`이므로 실제 시설 coverage, 빈도 결합, IR/F-N 승격으로 해석하지 않는다. 나머지 16건은 packet 없이 `UNMATCHED_NO_PROVIDER_PACKET`로 남긴다.
+
 
 ### provider 종료근거와 실제 지속시간 바인딩
 

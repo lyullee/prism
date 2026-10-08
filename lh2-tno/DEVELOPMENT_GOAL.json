@@ -690,5 +690,18 @@
   "external_lh2dt_mapped_pump_prism_packet_export_provider_packet_promoted": false,
   "external_lh2dt_mapped_pump_prism_packet_export_physical_validation_claim": false,
   "external_lh2dt_mapped_pump_prism_packet_export_frequency_inference": false,
-  "external_lh2dt_mapped_pump_prism_packet_export_facility_qra_claim": false
+  "external_lh2dt_mapped_pump_prism_packet_export_facility_qra_claim": false,
+  "external_lh2dt_structural_adapter_worklist_coverage_status": "PARTIAL_EXACT_MATCH; 8 of 24 synthetic diagnostic packets exact-match component, accident port, opening and boundary; 16 remain UNMATCHED_NO_PROVIDER_PACKET",
+  "external_lh2dt_structural_adapter_worklist_coverage_record": "results/20261012/combined_structural_provider_catalog_coverage.json",
+  "external_lh2dt_structural_adapter_worklist_coverage_provider_packet_count": 8,
+  "external_lh2dt_structural_adapter_worklist_coverage_exact_match_count": 8,
+  "external_lh2dt_structural_adapter_worklist_coverage_unmatched_count": 16,
+  "external_lh2dt_structural_adapter_worklist_coverage_extra_packet_count": 0,
+  "external_lh2dt_structural_adapter_worklist_coverage_actual_qualified_packet_count": 0,
+  "external_lh2dt_structural_adapter_worklist_coverage_frequency_inference": false,
+  "external_lh2dt_structural_adapter_worklist_coverage_facility_qra_claim": false,
+  "external_lh2dt_structural_adapter_worklist_coverage_physical_validation_claim": false,
+  "equipment_provider_release_worklist_synthetic_exact_match_count": 8,
+  "equipment_provider_release_worklist_synthetic_exact_unmatched_count": 16,
+  "equipment_provider_release_worklist_synthetic_exact_coverage_status": "PARTIAL_EXACT_MATCH; 8 synthetic diagnostic packets exact-matched, 16 events remain without packets"
 }
