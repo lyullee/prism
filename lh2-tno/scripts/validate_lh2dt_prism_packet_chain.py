@@ -92,7 +92,11 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
         # pool dry-depth threshold before a finite wet cell is formed.  Use a
         # declared sensitivity footprint for that diagnostic only; the
         # footprint is never inferred for a facility assessment.
-        pool_radius = 0.005 if release.integrated_mass_kg < 0.1 else 0.05
+        pool_radius = (
+            0.0001 if release.integrated_mass_kg < 1.0e-4
+            else 0.005 if release.integrated_mass_kg < 0.1
+            else 0.05
+        )
         if release.property_basis.fluid == "ParaHydrogen":
             pool_fluid = "Hydrogen"
             pool_translation = "para_hydrogen_to_hydrogen"
@@ -110,7 +114,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
             "conductivity_w_mk": 0.6,
             "diffusivity_m2_s": 1.5e-7,
             "initial_temperature_k": release.ambient_temperature_k,
-            "domain_radius_m": max(0.25, 5.0 * pool_radius),
+            "domain_radius_m": max(0.005, 5.0 * pool_radius) if pool_radius < 0.001 else max(0.25, 5.0 * pool_radius),
             "radial_step_m": pool_radius / 20.0,
             "maximum_time_step_s": 0.01,
         }
@@ -154,6 +158,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
         "boundary_kind": release.boundary_kind,
         "provider_duration_s": release.duration_s,
         "provider_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,
+        "pool_sensitivity_radius_m": defaults.get("pool", {}).get("radius_m") if isinstance(defaults.get("pool"), dict) else None,
         "consequence_chain_executed": result_data.get("status", "").startswith("END_TO_END"),
         "facility_ir_fn_claim": False,
         "frequency_inference": False,

@@ -73,6 +73,12 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 
 현재 실제 합성 provider 경로의 판정은 `INCOMPLETE_EVIDENCE`다. 설비 모델은 `STATE_ONLY_BOUND`이고 사고 release export 0개이며, 실제 provider 사고 packet 부재, 사고 가족 미완결, 시설 IR/F-N 보류, 독립 전체 체인 물리검증 부재, 완전 시설 빈도 credible interval 부재가 차단 이유로 남는다. 이 감사기가 `READY_FOR_IJHE_SCOPE`를 내기 전에는 논문에서 전체 시설 QRA 완성으로 표현하지 않는다.
 
+## 2026-10-12 DynamicHEMPipe 방출 경계 추가
+
+외부 `DynamicHEMPipe`를 명시적 full-bore atmospheric outlet로 실행하는 PRISM 측 adapter를 추가했다. 유한체적 pipe 상태가 반환한 유량·엔탈피를 10개 왼쪽 유지 interval로 보존하고, `prism.resolved_release.v1` 액체/2상 packet의 질량·에너지 장부를 다시 적분했다. `0.001 s` 진단에서 질량 잔차는 `0 kg`, 에너지 잔차는 약 `-5.42e-20 J`였다.
+
+이 packet은 잔류 pipe inventory를 보유한 고정 진단시계이며 전량 방출·현장 배관 파손 확률·차단 성공을 의미하지 않는다. `validate_lh2dt_prism_packet_chain.py`의 `radius_m=0.0001 m` 선언 sensitivity footprint를 사용해 최종 피해 체인까지 실행했지만, 이 footprint와 synthetic inlet/geometry는 현장 형상으로 승격하지 않는다.
+
 ## 2026-10-12 LayeredTank strict packet과 전체 chain
 
 외부 `LayeredTankNetworkSimulator+CommandedValve`의 합성 양수 재고 threshold 이력을 `scripts/export_lh2dt_layered_tank_prism_packet.py`로 `prism.external_accident_history.v1`에 맞추고, 공통 strict adapter를 통해 `prism.resolved_release.v1` 액체 packet으로 변환했다. provider 16개 interval의 왼쪽 유지 시간, `inventory_depletion` 종료 basis, 누적 질량·엔탈피를 검사한 결과 8.0 s 방출, 질량 잔차 `1.73e-18 kg`, 에너지 잔차 `0 J`를 얻었다. `scripts/validate_lh2dt_prism_packet_chain.py`는 이 packet을 DynamicLH2PoolX, SLABx-LH2/SLABx, cloud, 점화, 화재·폭발 및 TNO 피해까지 실행했다.

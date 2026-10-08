@@ -114,6 +114,12 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 이 adapter가 제공하지 않는 flash gas, airborne liquid, 현장 개구·차단 신뢰도·실제 재고 입력은 미계산으로 남는다. 따라서 이 결과는 provider 구조와 PRISM chain의 연결 증거이지 `qualified_actual`, 빈도 추론, 시설 IR/F-N 또는 독립 물리검증 결과가 아니다.
 
+## PRISM 측 DynamicHEMPipe 진단 adapter (2026-10-12)
+
+`scripts/export_lh2dt_dynamic_pipe_prism_packet.py`는 `lh2dt.DynamicHEMPipe`의 유한체적 질량·내부에너지·벽 온도 상태를 명시적인 full-bore 대기 출구 사고로 실행한다. provider가 계산한 출구 유량과 pipe의 실제 상태 엔탈피를 대기압 `P-H` 상태로 변환하고, 기체·지면 액체 분할과 누적 엔탈피 장부를 `equipment_release_adapter.py`에 넘긴다. duration `0.001 s`, `1e-4 s` step의 10개 구간에서 질량 잔차 `0 kg`, 에너지 잔차 `-5.42e-20 J`를 확인했다.
+
+이 packet은 `synthetic_diagnostic_horizon`으로 끝나며 pipe 재고를 전량 소진했다고 주장하지 않는다. `validate_lh2dt_prism_packet_chain.py`는 declared sensitivity pool radius `0.0001 m`를 사용해 같은 packet을 DynamicLH2PoolX, SLABx-LH2/SLABx, cloud, 점화, 화재·폭발, TNO 피해까지 실행했다. 작은 packet에서 이 footprint는 wet-cell 수치 조건을 위한 명시값이며 실제 배수면적·누출면적 추정이 아니다. 결과는 여전히 `provider_packet_promoted=false`, 빈도·시설 IR/F-N·독립 물리검증 보류다.
+
 ## provider 구현 예
 
 외부 모델이 다음 형태를 구현하면 PRISM 연결 함수를 호출할 수 있다.
