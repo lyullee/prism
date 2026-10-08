@@ -65,5 +65,16 @@
   "layered_tank_boundary_audit_ready_for_resolved_liquid_release": false,
   "development_archive_step": "PRISM-IJHE-step22-source.zip",
   "development_archive_git_commit": "6460a5c53598bd3bb7378a3a815ff842ab7cad2e",
-  "development_archive_hash_errors": 0
+  "development_archive_hash_errors": 0,
+  "layered_tank_boundary_audit_cases": 2,
+  "layered_tank_boundary_audit_atmospheric_probe_executed": true,
+  "layered_tank_boundary_audit_atmospheric_probe_boundary": true,
+  "layered_tank_boundary_audit_atmospheric_probe_ready_for_resolved_liquid_release": false,
+  "layered_tank_boundary_audit_atmospheric_probe_max_outward_mass_flow_kg_s": 0.0013395423880893465,
+  "layered_tank_boundary_audit_atmospheric_probe_record": "results/20261009/layered_tank_boundary/liquid_atmospheric_probe_audit.json",
+  "layered_tank_boundary_audit_atmospheric_probe_blocking_reasons": [
+    "provider result has no flash-gas/ground-liquid/airborne-liquid partition",
+    "provider result has no atmospheric exit geometry and direction",
+    "provider result does not declare an atmospheric release termination contract"
+  ]
 }

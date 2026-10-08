@@ -352,7 +352,7 @@ python prism.py --mode lh2 facility.json --backend backend.json --risk-campaign 
 
 `ResolvedGasRelease`에는 PH·엔탈피 기준·단면적·밀도·속도·유량·시계·누적 질량/정적 엔탈피와 provider 해시가 필요합니다. 포트에 `position_enu_m`을 선언하면 provider 방출 좌표도 같은 위치여야 합니다. 양단 파열은 `ResolvedGasReleaseSet`이 동일 사건 ID·공유 재고·서로 다른 outward 포트·두 위치를 검증합니다.
 현재 수평 또는 `VerticalGasHandoff`로 수평 단면을 선언한 수직 출구의 대기압·Mach≤0.3 기체와, provider가 flash·지면 액체·액적 도착을 완결한 `ResolvedLiquidRelease`를 허용합니다. 액체/2상 경계에는 `phase=liquid` 또는 `phase=two_phase`인 outward facility port가 필요합니다. airborne liquid, LayeredTank 액체/2상 재고 feedback, provider handoff 없는 수직 제트·고압 팽창 출구는 추가 adapter가 필요합니다. 수직 handoff와 provider liquid 경로도 synthetic provider 경계와 downstream 교차상호작용 미해결 때문에 operator-limited입니다.
-외부 `LayeredTankNetworkSimulator` 결과는 `scripts/audit_layered_tank_boundary.py`로 먼저 감사할 수 있습니다. 탱크 재고·포트·링크 유량이 있어도 대기압 출구, flash/지면/비산 액체 분할, 출구 형상, 종료 계약이 없으면 `ResolvedLiquidRelease`로 승격하지 않습니다. 실제 provider 실행 결과와 판정은 [LayeredTank 경계 감사 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_LayeredTank_경계감사_개발기록_20261009.md)에 보존합니다.
+외부 `LayeredTankNetworkSimulator` 결과는 `scripts/audit_layered_tank_boundary.py`로 먼저 감사할 수 있습니다. 탱크 재고·포트·링크 유량이 있어도 대기압 출구, flash/지면/비산 액체 분할, 출구 형상, 종료 계약이 없으면 `ResolvedLiquidRelease`로 승격하지 않습니다. 액체 포트를 101,325 Pa 경계에 연결한 probe는 대기 경계까지 확인했지만 동일한 누락으로 승격이 보류되었습니다. 실제 provider 실행 결과와 판정은 [LayeredTank 경계 감사 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_LayeredTank_경계감사_개발기록_20261009.md)에 보존합니다.
 정상 벤트에 사고누출 빈도를 붙이지 않습니다. emergency relief도 기인 사건/요구 의미를 별도 검토합니다.
 상세: [경계 계약](https://github.com/lyullee/prism/blob/main/lh2-tno/src/lh2_tno/equipment_boundary.py), [설비 연결 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/TNO_LH2_v040_설비경계연결_개발기록_20261008.md).
 

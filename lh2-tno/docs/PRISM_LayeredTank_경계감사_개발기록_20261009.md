@@ -31,6 +31,14 @@
 기계 판독 원본은 `results/20261009/layered_tank_boundary/provider_export.json`이고,
 감사 결과는 같은 디렉터리의 `layered_tank_boundary_audit.json`이다.
 
+추가로 액체 셀 포트 `liquid_port`를 101,325 Pa 경계에 직접 연결하는 최소
+probe도 실행했다. 이 경우 대기 경계 판정은 `true`이고 최대 outward 유량은
+`1.33954e-03 kg/s`였지만, 공급자 결과에는 여전히 플래시 가스·지상 액체·비산
+액체 분할, 출구 형상, 종료 계약이 없어서 `ready_for_resolved_liquid_release`
+는 `false`다. 원본은
+`results/20261009/layered_tank_boundary/liquid_atmospheric_probe_export.json`,
+판정은 `liquid_atmospheric_probe_audit.json`에 저장했다.
+
 ## 판정
 
 이번 결과는 **탱크·포트·네트워크 계산이 실행되었다**는 증거다. 그러나 PRISM의
@@ -70,5 +78,5 @@ python scripts/audit_layered_tank_boundary.py `
    DynamicLH2PoolX, 점화, IR/F-N 경로에 연결한다.
 
 이번 기록은 LayeredTank 액체·2상 재고 피드백이 완성되었다는 뜻이 아니다.
-오히려 어떤 출력이 이미 연결 가능하고 어떤 출력이 아직 필요한지 확인한
-경계 시험이다.
+대기압 액체 포트까지는 연결 가능하지만, 피해 체인에 넣을 provider-owned
+flash/액적/종료 경계가 없으면 승격하지 않는다는 것을 확인한 경계 시험이다.
