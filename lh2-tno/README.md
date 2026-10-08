@@ -659,13 +659,13 @@ IJHE 연구는 설비 경계·질량/시간 일관성·문헌 빈도·조건부 
 
 ## 배포와 인용
 
-- [PyPI·DOI 배포 완료 기록과 다음 버전 배포 절차](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_v060_PyPI_DOI_배포완료_20261008.md)
+- [PRISM 0.6.2 PyPI·DOI 배포 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_v062_PyPI_DOI_배포기록_20261009.md) / [이전 0.6.0 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_v060_PyPI_DOI_배포완료_20261008.md)
 - Python 배포명: **prism-risk**, 버전 **0.6.2**, 라이선스 **MIT**.
-- [PyPI 프로젝트](https://pypi.org/project/prism-risk/) / [Zenodo DOI](https://doi.org/10.5281/zenodo.23241359).
-- 버전 고정 인용은 **10.5281/zenodo.23241359**, 전체 버전 인용은 [10.5281/zenodo.23241358](https://doi.org/10.5281/zenodo.23241358)입니다.
+- [PyPI 프로젝트](https://pypi.org/project/prism-risk/0.6.2/) / [Zenodo v0.6.2 DOI](https://doi.org/10.5281/zenodo.23246944).
+- 버전 고정 인용은 **10.5281/zenodo.23246944**, 전체 버전 인용은 [10.5281/zenodo.23241358](https://doi.org/10.5281/zenodo.23241358)입니다.
 - [CITATION.cff](https://github.com/lyullee/prism/blob/main/CITATION.cff)에 소프트웨어 인용 정보를 보관합니다.
 - DOI는 소프트웨어 버전 기록이며 IJHE 논문 DOI나 물리 검증 인증이 아닙니다.
-- v0.6.0의 PyPI 공개 배포와 DOI 발행·연결은 확인되어 있고, v0.6.2는 GitHub release와 PyPI workflow 실행 후 최신 영수증을 `CURRENT_STATUS.json`에 기록합니다.
+- v0.6.2의 PyPI 공개 배포와 DOI 발행·연결 확인을 완료했습니다. 등록 상태와 commit/workflow 영수증은 `CURRENT_STATUS.json`과 [배포 기록](docs/PRISM_v062_PyPI_DOI_배포기록_20261009.md)에 보관합니다.
 
 ```powershell
 python -m pip install prism-risk==0.6.2

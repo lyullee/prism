@@ -8,7 +8,7 @@ authors:
     affiliation: "Korea Gas Safety Corporation"
 version: "0.6.2"
 date-released: 2026-10-09
-doi: "10.5281/zenodo.23241358"
+doi: "10.5281/zenodo.23246944"
 repository-code: "https://github.com/lyullee/prism"
 url: "https://pypi.org/project/prism-risk/"
 license: MIT
