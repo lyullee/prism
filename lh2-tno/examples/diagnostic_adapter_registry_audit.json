@@ -1,0 +1,89 @@
+{
+  "schema_version": "prism.diagnostic_adapter_registry_audit.v1",
+  "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED",
+  "binding_catalog": "examples\\generic_lh2_model_binding.json",
+  "adapter_count": 7,
+  "resolved_adapter_count": 7,
+  "provider_instance_count": 0,
+  "qualified_provider_packet_count": 0,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "rows": [
+    {
+      "component_kind": "storage_tank",
+      "module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+      "provider_class": "LayeredTankAccidentProvider",
+      "resolved_class": "scripts.export_lh2dt_layered_tank_prism_packet.LayeredTankAccidentProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "component_kind": "pipe",
+      "module": "scripts/export_lh2dt_dynamic_pipe_prism_packet.py",
+      "provider_class": "DynamicPipeAccidentProvider",
+      "resolved_class": "scripts.export_lh2dt_dynamic_pipe_prism_packet.DynamicPipeAccidentProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "component_kind": "valve",
+      "module": "scripts/export_lh2dt_valve_prism_packet.py",
+      "provider_class": "ValveAccidentProvider",
+      "resolved_class": "scripts.export_lh2dt_valve_prism_packet.ValveAccidentProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "component_kind": "vent_stack",
+      "module": "scripts/export_lh2dt_vent_stack_prism_packet.py",
+      "provider_class": "VentStackAccidentProvider",
+      "resolved_class": "scripts.export_lh2dt_vent_stack_prism_packet.VentStackAccidentProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "component_kind": "pump",
+      "module": "scripts/export_lh2dt_mapped_pump_prism_packet.py",
+      "provider_class": "MappedPumpAccidentProvider",
+      "resolved_class": "scripts.export_lh2dt_mapped_pump_prism_packet.MappedPumpAccidentProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "component_kind": "vaporizer",
+      "module": "scripts/export_lh2dt_dynamic_vaporizer_prism_packet.py",
+      "provider_class": "DynamicVaporizerAccidentProvider",
+      "resolved_class": "scripts.export_lh2dt_dynamic_vaporizer_prism_packet.DynamicVaporizerAccidentProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "component_kind": "reliquefier",
+      "module": "scripts/export_lh2dt_reliquefier_two_sided_prism_packet.py",
+      "provider_class": "TwoSidedReliquefierProvider",
+      "resolved_class": "scripts.export_lh2dt_reliquefier_two_sided_prism_packet.TwoSidedReliquefierProvider",
+      "export_method": "export_accident_history",
+      "evidence_status": "synthetic_diagnostic",
+      "provider_instance_registered": false,
+      "qualified_provider_packet": false
+    }
+  ],
+  "policy": {
+    "provider_instance_must_be_registered_by_host": true,
+    "normal_state_model_is_not_an_accident_provider": true,
+    "evaluate_simulate_fallback": false,
+    "synthetic_or_screening_evidence_is_not_qualified": true
+  }
+}
