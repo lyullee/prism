@@ -82,6 +82,7 @@ def build_facility_evidence_request(
             raise ValueError("scope_matrix row family must be a non-empty string")
         family = family.strip()
         status = _status(row)
+        not_applicable = status == "NOT_APPLICABLE"
         additional = _FAMILY_REQUIREMENTS.get(
             family,
             ("provider-specific accident history for the declared family",),
@@ -90,13 +91,20 @@ def build_facility_evidence_request(
             {
                 "family": family,
                 "current_status": status,
+                "applicability": "NOT_APPLICABLE" if not_applicable else "APPLICABLE",
+                "evidence_required": not not_applicable,
                 "generated_event_count": row.get("generated_event_count", 0),
                 "executed_case_count": row.get("executed_case_count", 0),
                 "uncomputed_case_count": row.get("uncomputed_case_count", 0),
                 "operator_limited_case_count": row.get("operator_limited_case_count", 0),
                 "event_ids": list(row.get("event_ids", ())),
-                "required_provider_evidence": list(_COMMON_REQUIREMENTS + additional),
-                "promotion_allowed_now": status == "EXECUTED" and row.get("uncomputed_case_count", 0) == 0,
+                "required_provider_evidence": (
+                    [] if not_applicable else list(_COMMON_REQUIREMENTS + additional)
+                ),
+                "promotion_allowed_now": (
+                    not_applicable
+                    or (status == "EXECUTED" and row.get("uncomputed_case_count", 0) == 0)
+                ),
             }
         )
 

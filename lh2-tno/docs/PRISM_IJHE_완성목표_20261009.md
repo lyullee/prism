@@ -17,7 +17,7 @@
 - native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구와 provider가 명시한 수직→수평 `VerticalGasHandoff` 경계를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 이번 단계에서는 외부 `lh2dt` `HomogeneousTank`+`Valve`가 내보낸 flash 기체·지면 액체·액적 도착 시계를 `ResolvedLiquidRelease`로 수용해 DynamicLH2PoolX와 최종 피해까지 한 건 실행했다. provider의 `ParaHydrogen`과 native 풀 모델의 `Hydrogen` 기준은 provenance가 있는 명시적 변환 경계로만 연결하며, 교차 물성 검증 전까지 operator-limited로 남긴다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 483개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 매니페스트에 없는 사고 family의 `NOT_APPLICABLE` 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 484개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 매니페스트에 없는 사고 family의 `NOT_APPLICABLE` 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 - DynamicLH2PoolX의 물/알루미늄 hold-out 반경 오차와 HSE 질량잔차를 해시 장부로 확인했지만, protocol snapshot 해시 drift가 있어 제한 구성요소 증거로만 사용한다. 설비 방출·대기확산·점화·IR/F-N 전체 체인의 물리 검증으로 확대하지 않는다.
 
 ## 단계별 작업과 통과 기준
@@ -231,7 +231,7 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 
 ## 2026-10-19 미완료 증거 요청을 자동화
 
-부분 시설 평가의 다음 입력을 명확히 하기 위해 `facility_evidence_request.py`와 CLI를 추가했다. 최신 assessment와 5개 source matrix를 병합한 사고범위 matrix를 넣으면 12개 사고군·11개 component별로 필요한 실제 provider 근거를 나열한다. 요구사항은 exact event/component/port/opening, 방출 시간 이력과 종료 basis, 차단 및 재고 소진, 질량·에너지 폐합, `prism.external_accident_history.v1` schema, 독립 물리검증이다.
+부분 시설 평가의 다음 입력을 명확히 하기 위해 `facility_evidence_request.py`와 CLI를 추가했다. 사고범위에 설비가 실제로 없다고 판정된 `NOT_APPLICABLE` 사고 family는 범위 기록만 남기고 provider 증거 요청에서 제외하며, 실제 설비가 있는 family의 누락·미계산은 계속 요청·차단한다. 최신 assessment와 5개 source matrix를 병합한 사고범위 matrix를 넣으면 12개 사고군·11개 component별로 필요한 실제 provider 근거를 나열한다. 요구사항은 exact event/component/port/opening, 방출 시간 이력과 종료 basis, 차단 및 재고 소진, 질량·에너지 폐합, `prism.external_accident_history.v1` schema, 독립 물리검증이다.
 
 요청서의 상태는 `OPEN_EVIDENCE_REQUEST`이며 문헌 빈도는 복사하지 않고, 센서나 provider packet에서 빈도를 학습하지 않는다. 따라서 이 자동화는 다음 실증 데이터의 입구를 만든 것이고 시설 total IR/F-N을 조기 승격하는 기능이 아니다. 현재 생성된 요약은 [`facility_evidence_request_summary.json`](../examples/facility_evidence_request_summary.json)이다.
 

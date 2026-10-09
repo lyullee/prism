@@ -48,3 +48,25 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     assert report["frequency_policy"]["infer_frequency_from_provider_or_sensor"] is False
     assert {row["component_id"] for row in report["component_requests"]} == {"pipe-01", "vent-01"}
     assert report["excluded_components"] == [{"component_id": "boundary-01", "current_status": "EXCLUDED"}]
+
+
+def test_not_applicable_family_does_not_create_a_provider_evidence_request():
+    report = build_facility_evidence_request(
+        _assessment(),
+        {
+            "facility_id": "facility",
+            "rows": [{
+                "family": "pump_hole",
+                "status": "NOT_APPLICABLE",
+                "generated_event_count": 0,
+                "executed_case_count": 0,
+                "uncomputed_case_count": 0,
+                "event_ids": [],
+            }],
+        },
+    )
+    row = report["family_requests"][0]
+    assert row["applicability"] == "NOT_APPLICABLE"
+    assert row["evidence_required"] is False
+    assert row["required_provider_evidence"] == []
+    assert row["promotion_allowed_now"] is True
