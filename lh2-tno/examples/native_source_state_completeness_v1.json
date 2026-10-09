@@ -1,0 +1,386 @@
+{
+  "schema_version": "prism.native_source_state_completeness.v1",
+  "status": "SOURCE_STATE_AUDITED_WITH_GAS_HANDOFF_BLOCKERS",
+  "native_model_count": 7,
+  "gas_model_count": 4,
+  "gas_models_complete_for_compressible_adapter": 0,
+  "gas_models_blocked_for_compressible_adapter": 4,
+  "required_fields_for_compressible_adapter": [
+    "source_specific_entropy_j_kgk",
+    "throat_pressure_pa_abs",
+    "throat_density_kg_m3",
+    "throat_specific_enthalpy_j_kg"
+  ],
+  "entries": [
+    {
+      "model_class": "LayeredTank",
+      "provider_response": "results/20261025/native_layered_tank_isolation/provider_response.json",
+      "phase_family": "liquid_or_two_phase",
+      "provider_model": "lh2dt.layered_tank.LayeredTank",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 0,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 0,
+        "source_temperature_k": 0,
+        "source_density_kg_m3": 0,
+        "source_specific_enthalpy_j_kg": 0,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 0,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 0,
+        "choked": 0,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "NOT_APPLICABLE_CURRENT_GAS_ADAPTER",
+      "interpretation": "Liquid/two-phase native contract requires its own validated near-field handoff"
+    },
+    {
+      "model_class": "DynamicHEMPipe",
+      "provider_response": "results/20261025/native_dynamic_pipe_isolation/provider_response.json",
+      "phase_family": "liquid_or_two_phase",
+      "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 0,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 0,
+        "source_temperature_k": 0,
+        "source_density_kg_m3": 0,
+        "source_specific_enthalpy_j_kg": 0,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 0,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 0,
+        "choked": 0,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "NOT_APPLICABLE_CURRENT_GAS_ADAPTER",
+      "interpretation": "Liquid/two-phase native contract requires its own validated near-field handoff"
+    },
+    {
+      "model_class": "StrokeLimitedCommandedValve",
+      "provider_response": "results/20261025/native_stroke_valve/provider_response.json",
+      "phase_family": "gas",
+      "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 2,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 2,
+        "source_temperature_k": 2,
+        "source_density_kg_m3": 2,
+        "source_specific_enthalpy_j_kg": 2,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 0,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 0,
+        "choked": 2,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "INCOMPLETE",
+      "interpretation": "Provider source state exists but cannot be consumed by the optional compressible adapter"
+    },
+    {
+      "model_class": "MappedPump",
+      "provider_response": "results/20261025/native_mapped_pump/provider_response.json",
+      "phase_family": "liquid",
+      "provider_model": "lh2dt.pump.MappedPump",
+      "interval_count": 4,
+      "provider_source_state_interval_count": 0,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 0,
+        "source_temperature_k": 0,
+        "source_density_kg_m3": 0,
+        "source_specific_enthalpy_j_kg": 0,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 0,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 0,
+        "choked": 0,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 2,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 3,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "NOT_APPLICABLE_CURRENT_GAS_ADAPTER",
+      "interpretation": "Liquid/two-phase native contract requires its own validated near-field handoff"
+    },
+    {
+      "model_class": "DynamicVaporizer",
+      "provider_response": "results/20261025/native_dynamic_vaporizer/provider_response.json",
+      "phase_family": "gas",
+      "provider_model": "lh2dt.dynamic_vaporizer.DynamicVaporizer",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 2,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 2,
+        "source_temperature_k": 2,
+        "source_density_kg_m3": 2,
+        "source_specific_enthalpy_j_kg": 2,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 2,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 2,
+        "choked": 2,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "INCOMPLETE",
+      "interpretation": "Provider source state exists but cannot be consumed by the optional compressible adapter"
+    },
+    {
+      "model_class": "DynamicReliquefier",
+      "provider_response": "results/20261025/native_dynamic_reliquefier/provider_response.json",
+      "phase_family": "gas",
+      "provider_model": "lh2dt.dynamic_reliquefier.DynamicReliquefier",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 2,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 2,
+        "source_temperature_k": 2,
+        "source_density_kg_m3": 2,
+        "source_specific_enthalpy_j_kg": 2,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 2,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 2,
+        "choked": 2,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "INCOMPLETE",
+      "interpretation": "Provider source state exists but cannot be consumed by the optional compressible adapter"
+    },
+    {
+      "model_class": "VentStack",
+      "provider_response": "results/20261025/native_vent_stack/provider_response.json",
+      "phase_family": "gas",
+      "provider_model": "lh2dt.vent_stack.VentStack",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 2,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 2,
+        "source_temperature_k": 2,
+        "source_density_kg_m3": 2,
+        "source_specific_enthalpy_j_kg": 2,
+        "source_specific_entropy_j_kgk": 0,
+        "throat_pressure_pa_abs": 0,
+        "throat_temperature_k": 0,
+        "throat_density_kg_m3": 0,
+        "throat_specific_enthalpy_j_kg": 0,
+        "throat_mass_flux_kg_m2_s": 0,
+        "choked": 2,
+        "provider_source_state_provenance": 0
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [
+        {
+          "interval": 0,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        },
+        {
+          "interval": 1,
+          "missing_fields": [
+            "source_specific_entropy_j_kgk",
+            "throat_pressure_pa_abs",
+            "throat_density_kg_m3",
+            "throat_specific_enthalpy_j_kg"
+          ]
+        }
+      ],
+      "compressible_adapter_status": "INCOMPLETE",
+      "interpretation": "Provider source state exists but cannot be consumed by the optional compressible adapter"
+    }
+  ],
+  "limitations": [
+    "This audit reports provider evidence; it does not infer missing entropy or throat states",
+    "Gas source-state completeness does not qualify a provider or validate a near-field correlation",
+    "Liquid/two-phase cases need a separate validated handoff and are not silently recast as gas",
+    "No frequency inference, physical validation claim, or facility IR/F-N promotion is made"
+  ]
+}
