@@ -4,7 +4,7 @@
   "results_root": "lh2-tno",
   "packet_count": 25,
   "exact_worklist_event_count": 24,
-  "consequence_chain_event_count": 16,
+  "consequence_chain_event_count": 18,
   "frequency_bound_event_count": 1,
   "provider_packet_promoted_count": 0,
   "physical_validation_claim_count": 0,
@@ -27,7 +27,7 @@
     },
     "reliquefier": {
       "packet_count": 2,
-      "chain_count": 0,
+      "chain_count": 2,
       "frequency_bound_count": 0
     },
     "storage-shell": {
@@ -208,15 +208,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261018/reliquefier_worklist_G4_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -238,15 +240,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261018/reliquefier_worklist_G5_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
