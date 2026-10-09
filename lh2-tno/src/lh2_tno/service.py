@@ -1611,6 +1611,99 @@ class FacilityRealtimeConsequenceMonitor:
             row.get("status") == "AVAILABLE_PROVIDER_RELEASE_PATH"
             for row in release_path_rows
         )
+        release_path_component_rows: dict[str, dict[str, object]] = {}
+        isolation_status_counts: dict[str, int] = {}
+        inventory_status_counts: dict[str, int] = {}
+        termination_basis_counts: dict[str, int] = {}
+        for component_id, entry in components.items():
+            if entry.get("status") != "ACCEPTED":
+                continue
+            path = entry.get("equipment_release_path")
+            if not isinstance(path, Mapping):
+                continue
+            isolation = path.get("isolation")
+            inventory = path.get("inventory")
+            termination = path.get("termination")
+            isolation_status = (
+                isolation.get("status")
+                if isinstance(isolation, Mapping)
+                else None
+            )
+            inventory_status = (
+                inventory.get("status")
+                if isinstance(inventory, Mapping)
+                else None
+            )
+            termination_basis = (
+                termination.get("basis")
+                if isinstance(termination, Mapping)
+                else None
+            )
+            row: dict[str, object] = {
+                "status": path.get("status"),
+                "duration_s": path.get("duration_s"),
+                "termination_basis": termination_basis,
+                "isolation_status": isolation_status,
+                "inventory_status": inventory_status,
+                "boundary_count": path.get("boundary_count"),
+                "shared_inventory": (
+                    inventory.get("shared_inventory")
+                    if isinstance(inventory, Mapping)
+                    else None
+                ),
+                "remaining_mass_kg": (
+                    inventory.get("remaining_mass_kg")
+                    if isinstance(inventory, Mapping)
+                    else None
+                ),
+                "mass_residual_kg": (
+                    inventory.get("mass_residual_kg")
+                    if isinstance(inventory, Mapping)
+                    else None
+                ),
+            }
+            release_path_component_rows[component_id] = row
+            for counts, value in (
+                (isolation_status_counts, isolation_status),
+                (inventory_status_counts, inventory_status),
+                (termination_basis_counts, termination_basis),
+            ):
+                if isinstance(value, str) and value:
+                    counts[value] = counts.get(value, 0) + 1
+        if not release_path_component_rows:
+            release_path_accounting = {
+                "status": "WITHHELD_NO_ACCEPTED_RELEASE_PATH",
+                "component_rows": {},
+                "isolation_status_counts": {},
+                "inventory_status_counts": {},
+                "termination_basis_counts": {},
+                "mass_aggregation_performed": False,
+                "frequency_inference_performed": False,
+                "policy": (
+                    "release mass is never summed across components; shared two-sided "
+                    "inventory remains a component-level ledger"
+                ),
+            }
+        else:
+            release_path_accounting = {
+                "status": (
+                    "AVAILABLE_COMPLETE_BATCH"
+                    if batch_status == "ACCEPTED"
+                    and len(release_path_component_rows) == len(component_ids)
+                    and release_path_available_count == len(component_ids)
+                    else "AVAILABLE_PARTIAL_BATCH"
+                ),
+                "component_rows": release_path_component_rows,
+                "isolation_status_counts": isolation_status_counts,
+                "inventory_status_counts": inventory_status_counts,
+                "termination_basis_counts": termination_basis_counts,
+                "mass_aggregation_performed": False,
+                "frequency_inference_performed": False,
+                "policy": (
+                    "release mass is never summed across components; shared two-sided "
+                    "inventory remains a component-level ledger"
+                ),
+            }
         ignition_rows = {
             component_id: entry["ignition"]
             for component_id, entry in components.items()
@@ -1767,6 +1860,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "equipment_release_path_component_count": release_path_available_count,
                 "equipment_release_path_withheld_component_count": len(accepted)
                 - release_path_available_count,
+                "equipment_release_path_accounting": release_path_accounting,
                 "current_weather_ignition_accounting": ignition_accounting,
                 "current_weather_annual_ir_low_high": (
                     current_weather_ir if current_weather_risk_available else None

@@ -587,6 +587,18 @@ def test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_
     assert path['isolation']['status'] == 'WITHHELD_SYNTHETIC_HORIZON'
     assert result['aggregate']['provider_release_resolved_component_count'] == 1
     assert result['aggregate']['equipment_release_path_component_count'] == 1
+    path_accounting = result['aggregate']['equipment_release_path_accounting']
+    assert path_accounting['status'] == 'AVAILABLE_COMPLETE_BATCH'
+    assert path_accounting['isolation_status_counts'] == {
+        'WITHHELD_SYNTHETIC_HORIZON': 1
+    }
+    assert path_accounting['inventory_status_counts'] == {
+        'MASS_BALANCE_CLOSED': 1
+    }
+    assert path_accounting['termination_basis_counts'] == {
+        'synthetic_diagnostic_horizon': 1
+    }
+    assert path_accounting['mass_aggregation_performed'] is False
 
 
 def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_fallback(tmp_path):

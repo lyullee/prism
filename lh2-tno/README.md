@@ -982,6 +982,12 @@ facility_monitor = FacilityRealtimeConsequenceMonitor(
 
 각 accepted component에는 `equipment_release_path`도 기록됩니다. provider resolver가 반환한 사고 경계의 지속시간, 종료 basis, available/cumulative/remaining mass와 provider digest를 보존하며, 양단 방출은 shared inventory로 표시합니다. resolver가 없으면 `WITHHELD_PROVIDER_RELEASE_NOT_RESOLVED`로 남고 누출량 0으로 대체하지 않습니다. 자세한 계약은 [실시간 방출 경로 장부 개발기록](docs/PRISM_실시간_방출경로_장부_개발기록_20261010.md)을 참고합니다.
 
+시설 `aggregate.equipment_release_path_accounting`은 accepted 설비별 종료
+basis, 차단 상태, 재고 상태, 잔여 질량과 상태별 개수를 함께 보여줍니다.
+설비 질량을 시설 총량으로 더하지 않으므로 양단 방출의 shared inventory가
+중복 계산되지 않습니다. 방출 경로가 없는 설비나 실패한 설비는 `WITHHELD`로
+남고, 누락된 방출을 0 kg 또는 정상 차단으로 바꾸지 않습니다.
+
 표 형식 입력에서 provider resolver까지 연결하는 최소 경로는 `update_from_rows()` → `frame_from_row()` → `TelemetryNormalizer` → 설비 상태 → provider 방출 경계 → consequence 결과 → 시설 장부입니다. 이 경로는 `tests/test_consequence_service.py`의 `test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence`에서 상태 압력, provider 사고 ID, 방출시간, 종료 상태, 잔여 재고를 함께 검증합니다. 예시 provider가 합성이라면 이 테스트가 통과해도 qualified 실제 설비 packet이나 시설 연간 IR/F/N이 열리지는 않습니다.
 
 행 배치에 각 설비의 `RealtimeFrequencyBinding`과 시설의 `RealtimePopulationBinding`을 함께 선언하면 같은 경로에서 설비별 현재 기상 IR을 합산하고, 수용점 인구를 곱한 조건부 expected-death F/N 기여와 p05/발표값/p95 빈도 재가중을 계산합니다. 이 값은 현재 배치의 조건부 진단 결과이며 `facility_annual_risk_available=false`, `facility_fn_available=false`를 유지합니다. 센서로 빈도를 학습하거나 누락 설비를 0으로 처리하지 않습니다.
