@@ -478,14 +478,14 @@
   "external_model_native_contract_audit_record": "results/20261018/lh2dt_native_contract_audit.json",
   "external_model_native_contract_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
   "external_model_native_contract_audit_binding_count": 8,
-  "external_model_native_contract_audit_native_accident_export_component_count": 5,
+  "external_model_native_contract_audit_native_accident_export_component_count": 6,
   "external_model_native_contract_audit_external_component_count": 7,
   "external_model_native_contract_audit_diagnostic_adapter_contract_verified_count": 7,
   "external_model_native_contract_audit_provider_packet_promoted": false,
   "external_model_native_contract_audit_frequency_inference": false,
   "external_model_native_contract_audit_facility_qra_claim": false,
-  "external_model_native_contract_audit_source_digest": "9a8bea26182ee2346f86c5361c8b8d554916a3ee6d70b814c606c65650f9468c",
-  "external_model_native_contract_audit_test_status": "2 static contract-audit tests; external lh2dt full suite 365 passed; PRISM full portable suite remains 441 passed",
+  "external_model_native_contract_audit_source_digest": "f03e4c80e93bc7a48c118551fa35ed50f857edb53eb1dd373fa5ec2f85a9a9ff",
+  "external_model_native_contract_audit_test_status": "2 static contract-audit tests; external lh2dt full suite 368 passed; PRISM full portable suite remains 441 passed",
   "equipment_state_snapshot_contract_implemented": true,
   "equipment_state_snapshot_contract_module": "src/lh2_tno/state_snapshot.py",
   "equipment_state_snapshot_contract_schema": "prism.equipment_state_snapshot.v1",
@@ -1378,12 +1378,11 @@
   "diagnostic_campaign_binding_latest_test_status": "latest refined campaign binding regenerated; structural event/case/risk-atom check passed; packet digest equality proven for 18/24 events",
   "ijhe_completion_audit_latest_diagnostic_binding_status": "PASS diagnostic-only; current 24-event campaign structurally reaches 24 cases and 96 risk atoms; packet identity consumed false",
   "external_model_native_contract_audit_native_accident_export_missing_components": [
-    "pipe",
     "pump"
   ],
-  "external_model_native_contract_audit_external_source_commit": "4adcb2a",
-  "lh2dt_native_accident_export_implementation_status": "DynamicVaporizer, DynamicReliquefier, StrokeLimitedCommandedValve, VentStack and LayeredTank native export_accident_history(request) implemented; DynamicHEMPipe and MappedPump remain missing and qualified provider promotion is withheld",
+  "external_model_native_contract_audit_external_source_commit": "be8c8f3",
+  "lh2dt_native_accident_export_implementation_status": "DynamicVaporizer, DynamicReliquefier, StrokeLimitedCommandedValve, VentStack, LayeredTank and DynamicHEMPipe native export_accident_history(request) implemented; MappedPump remains missing and qualified provider promotion is withheld",
   "lh2dt_native_accident_export_schema": "prism.external_accident_history.v1",
-  "lh2dt_native_accident_export_external_repository_commit": "4adcb2a",
-  "lh2dt_native_accident_export_external_repository_test_status": "365 passed"
+  "lh2dt_native_accident_export_external_repository_commit": "be8c8f3",
+  "lh2dt_native_accident_export_external_repository_test_status": "368 passed"
 }
