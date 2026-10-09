@@ -601,7 +601,7 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_total_facility_risk_available": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_physical_validation_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_downward_guard": "implemented fail-closed in src/lh2_tno/chain_worker.py; no zero-horizontal-direction normalization",
-  "unit_contract_conservation_tests_passed": 410,
+  "unit_contract_conservation_tests_passed": 411,
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_status": "PARTIAL_DECLARED_SCOPE; 7 synthetic storage branch cases executed through the full consequence chain, 21 cases explicitly UNCOMPUTED; all executed cases remain operator-limited",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full_adaptive.json",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_case_count": 7,
@@ -1110,7 +1110,7 @@
   "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py",
   "ijhe_completion_audit_source_state_rebound_record": "results/20261017/ijhe_completion_audit_source_state_rebound.json",
   "ijhe_completion_audit_source_state_rebound_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_source_state_rebound_check_count": 13,
+  "ijhe_completion_audit_source_state_rebound_check_count": 14,
   "ijhe_completion_audit_source_state_rebound_blocking_reason_count": 6,
   "ijhe_completion_audit_source_state_rebound_passed_checks": [
     "equipment_state_to_release_to_consequence",
@@ -1119,7 +1119,8 @@
     "release_duration_isolation_inventory_ledger",
     "physical_validation_evidence_restricted_component",
     "processing_time_evidence",
-    "realtime_monitor_contract"
+    "realtime_monitor_contract",
+    "diagnostic_vertical_handoff_evidence"
   ],
   "ijhe_completion_audit_source_state_rebound_blocked_checks": [
     "equipment_model_binding_to_accident_release",
@@ -1132,5 +1133,14 @@
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_record": "results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json",
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_component": "DynamicLH2PoolX pool/spreading only",
-  "ijhe_completion_audit_source_state_rebound_full_chain_physical_validation_claim": false
+  "ijhe_completion_audit_source_state_rebound_full_chain_physical_validation_claim": false,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_record": "results/20261009/vertical_vent/verification.json",
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_status": "PASS_DIAGNOSTIC_ONLY",
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_generated_events": 5,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_executed_cases": 2,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_uncomputed_cases": 10,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_provider_consumed": true,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_physical_validation_claim": false,
+  "ijhe_completion_audit_source_state_rebound_test_status": "18 audit tests; full portable suite 411 passed",
+  "ijhe_completion_audit_source_state_rebound_record_status": "INCOMPLETE_EVIDENCE; 14 checks, 6 blocking reasons; restricted component validation and vertical handoff diagnostics recorded separately"
 }

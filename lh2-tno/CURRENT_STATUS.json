@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 410,
+  "unit_contract_conservation_tests_passed": 411,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -1634,7 +1634,7 @@
   "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py",
   "ijhe_completion_audit_source_state_rebound_record": "results/20261017/ijhe_completion_audit_source_state_rebound.json",
   "ijhe_completion_audit_source_state_rebound_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_source_state_rebound_check_count": 13,
+  "ijhe_completion_audit_source_state_rebound_check_count": 14,
   "ijhe_completion_audit_source_state_rebound_blocking_reason_count": 6,
   "ijhe_completion_audit_source_state_rebound_passed_checks": [
     "equipment_state_to_release_to_consequence",
@@ -1643,7 +1643,8 @@
     "release_duration_isolation_inventory_ledger",
     "physical_validation_evidence_restricted_component",
     "processing_time_evidence",
-    "realtime_monitor_contract"
+    "realtime_monitor_contract",
+    "diagnostic_vertical_handoff_evidence"
   ],
   "ijhe_completion_audit_source_state_rebound_blocked_checks": [
     "equipment_model_binding_to_accident_release",
@@ -1656,5 +1657,14 @@
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_record": "results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json",
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_component": "DynamicLH2PoolX pool/spreading only",
-  "ijhe_completion_audit_source_state_rebound_full_chain_physical_validation_claim": false
+  "ijhe_completion_audit_source_state_rebound_full_chain_physical_validation_claim": false,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_record": "results/20261009/vertical_vent/verification.json",
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_status": "PASS_DIAGNOSTIC_ONLY",
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_generated_events": 5,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_executed_cases": 2,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_uncomputed_cases": 10,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_provider_consumed": true,
+  "ijhe_completion_audit_source_state_rebound_vertical_handoff_physical_validation_claim": false,
+  "ijhe_completion_audit_source_state_rebound_test_status": "18 audit tests; full portable suite 411 passed",
+  "ijhe_completion_audit_source_state_rebound_record_status": "INCOMPLETE_EVIDENCE; 14 checks, 6 blocking reasons; restricted component validation and vertical handoff diagnostics recorded separately"
 }
