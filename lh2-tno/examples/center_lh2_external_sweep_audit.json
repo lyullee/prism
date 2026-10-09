@@ -1,0 +1,287 @@
+{
+  "schema_version": "prism.external_lh2_sweep_audit.v1",
+  "status": "SCREENING_ONLY_EXTERNAL_SWEEP",
+  "source_root": "<external-lh2-sweep-root>",
+  "missing_datasets": [],
+  "aggregate": {
+    "tank_sweep_record_count": 68,
+    "csv_case_record_count": 68,
+    "tno_policy_record_count": 6,
+    "tno_policy_runtime_s": {
+      "count": 6,
+      "min": 0.36883510000006936,
+      "median": 0.38109350000013364,
+      "p95": 0.39991480000071533,
+      "max": 0.40395400000124937
+    },
+    "maximum_tank_mass_residual_kg": 1.0419221041502169e-11,
+    "maximum_tank_energy_residual_J": 5.811452865600586e-07,
+    "all_declared_tank_cases_present": true,
+    "engineering_judgement_qra_grade_count": 6
+  },
+  "promotion_gates": {
+    "numerical_closure_evidence_allowed": true,
+    "processing_time_evidence_allowed": true,
+    "independent_physical_validation_claim": false,
+    "qualified_provider_packet": false,
+    "facility_ir_fn_claim": false,
+    "frequency_inference": false,
+    "reason": "The external sweep contains model outputs and engineering-judgement risk proxies. Residuals are internal numerical closure checks; no measured release, independent experiment, qualified accident packet, or facility population evidence is supplied."
+  },
+  "datasets": {
+    "sweep_results.json": {
+      "relative_path": "sweep_results.json",
+      "sha256": "26803af1f1b3c84507abb16f61099babc1a671f803e77743f2b89e25f24560ea",
+      "size_bytes": 26576,
+      "record_count": 28,
+      "status_counts": {
+        "COMPLETED_HORIZON": 20,
+        "FAILED_BEFORE_HORIZON": 8
+      },
+      "qra_grade_counts": {},
+      "runtime_s": {
+        "count": 28,
+        "min": 17.14983790000042,
+        "median": 44.0652211000006,
+        "p95": 50.42149884000045,
+        "max": 57.92149939999945
+      },
+      "max_mass_residual_kg": {
+        "count": 20,
+        "min": 2.2737367544323206e-12,
+        "median": 3.637978807091713e-12,
+        "p95": 7.183942329902493e-12,
+        "max": 7.190692485892214e-12
+      },
+      "max_energy_residual_J": {
+        "count": 20,
+        "min": 1.2852251529693604e-07,
+        "median": 1.9837170839309692e-07,
+        "p95": 4.429370164871216e-07,
+        "max": 4.7124922275543213e-07
+      },
+      "overall_max_ir_proxy_per_y": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "hyram_field_count": 0,
+      "risk_proxy_field_count": 0
+    },
+    "secondary_results.json": {
+      "relative_path": "secondary_results.json",
+      "sha256": "2f0756b2f04cac221d5a5910338bced014f357ea4bbdc142e9d29d0249c1a43a",
+      "size_bytes": 34513,
+      "record_count": 32,
+      "status_counts": {
+        "COMPLETED_HORIZON": 30,
+        "FAILED_BEFORE_HORIZON": 2
+      },
+      "qra_grade_counts": {},
+      "runtime_s": {
+        "count": 32,
+        "min": 39.382636000000275,
+        "median": 53.93564174999938,
+        "p95": 87.95714309500036,
+        "max": 90.66077730000143
+      },
+      "max_mass_residual_kg": {
+        "count": 30,
+        "min": 1.6058265828178264e-12,
+        "median": 5.8690829973784275e-12,
+        "p95": 8.852918398360998e-12,
+        "max": 1.0419221041502169e-11
+      },
+      "max_energy_residual_J": {
+        "count": 30,
+        "min": 1.1920928955078125e-07,
+        "median": 2.4028122425079346e-07,
+        "p95": 3.801658749580382e-07,
+        "max": 5.811452865600586e-07
+      },
+      "overall_max_ir_proxy_per_y": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "hyram_field_count": 0,
+      "risk_proxy_field_count": 0
+    },
+    "cd_results.json": {
+      "relative_path": "cd_results.json",
+      "sha256": "5b6f7d5193c9be54cac569ec27c212cdd491096c798fa7066841b3a142699573",
+      "size_bytes": 9886,
+      "record_count": 8,
+      "status_counts": {
+        "COMPLETED_HORIZON": 8
+      },
+      "qra_grade_counts": {},
+      "runtime_s": {
+        "count": 8,
+        "min": 43.65622000000076,
+        "median": 62.0214656499993,
+        "p95": 71.53974271499992,
+        "max": 72.36435359999996
+      },
+      "max_mass_residual_kg": {
+        "count": 8,
+        "min": 3.637978807091713e-12,
+        "median": 5.002220859751105e-12,
+        "p95": 7.054445916310213e-12,
+        "max": 8.000711204658728e-12
+      },
+      "max_energy_residual_J": {
+        "count": 8,
+        "min": 1.5040859580039978e-07,
+        "median": 1.9674189388751984e-07,
+        "p95": 4.2282044887542714e-07,
+        "max": 5.010515451431274e-07
+      },
+      "overall_max_ir_proxy_per_y": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "hyram_field_count": 0,
+      "risk_proxy_field_count": 0
+    },
+    "tno_policy_results.json": {
+      "relative_path": "tno_policy_results.json",
+      "sha256": "e754c00536bd037de35e9b5608714faf85cf44130bcbc7c2f253d22d038c32a6",
+      "size_bytes": 6039,
+      "record_count": 6,
+      "status_counts": {
+        "COMPLETED": 6
+      },
+      "qra_grade_counts": {
+        "ENGINEERING_JUDGEMENT": 6
+      },
+      "runtime_s": {
+        "count": 6,
+        "min": 0.36883510000006936,
+        "median": 0.38109350000013364,
+        "p95": 0.39991480000071533,
+        "max": 0.40395400000124937
+      },
+      "max_mass_residual_kg": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "max_energy_residual_J": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "overall_max_ir_proxy_per_y": {
+        "count": 6,
+        "min": 1.7338383673469388e-07,
+        "median": 1.7338383673469388e-07,
+        "p95": 1.747413061224603e-07,
+        "max": 1.7474130612246364e-07
+      },
+      "hyram_field_count": 0,
+      "risk_proxy_field_count": 6
+    },
+    "risk_model_matrix.json": {
+      "relative_path": "risk_model_matrix.json",
+      "sha256": "01a3f90cd1592e3a67ba6f2d3f904fd6b6b83c5c9c4b54f6d8a12ebb9b4f567d",
+      "size_bytes": 6422,
+      "record_count": 16,
+      "status_counts": {},
+      "qra_grade_counts": {},
+      "runtime_s": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "max_mass_residual_kg": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "max_energy_residual_J": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "overall_max_ir_proxy_per_y": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "hyram_field_count": 0,
+      "risk_proxy_field_count": 16
+    },
+    "vent_fire_risk_results.json": {
+      "relative_path": "vent_fire_risk_results.json",
+      "sha256": "5472ba1ca5c211f4d2ff35110d31b7303de0c3bf4de92b6b4a2e036aaed71b17",
+      "size_bytes": 69291,
+      "record_count": 46,
+      "status_counts": {
+        "COMPLETED_HORIZON": 46
+      },
+      "qra_grade_counts": {},
+      "runtime_s": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "max_mass_residual_kg": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "max_energy_residual_J": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "overall_max_ir_proxy_per_y": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "p95": null,
+        "max": null
+      },
+      "hyram_field_count": 46,
+      "risk_proxy_field_count": 0
+    },
+    "all_case_summary.csv": {
+      "relative_path": "all_case_summary.csv",
+      "sha256": "44f7b4bf363722bc44139d263a7e4581b0e581ec68920a2263dd2b0c769a405e",
+      "size_bytes": 21050,
+      "record_count": 68,
+      "status_counts": {
+        "COMPLETED_HORIZON": 58,
+        "FAILED_BEFORE_HORIZON": 10
+      },
+      "header_count": 27,
+      "raw_rows_copied": false
+    }
+  }
+}
