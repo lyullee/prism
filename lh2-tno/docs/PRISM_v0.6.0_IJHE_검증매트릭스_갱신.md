@@ -91,3 +91,36 @@ python scripts/bind_native_full_scope_union_evidence.py `
 계약 검증이지 현장 시설 QRA 승인이라는 뜻은 아니다.
 
 \n
+
+## v0.6.0 준비도 원장
+
+여러 감사 파일을 따로 열지 않고 현재 개발 상태를 검토할 수 있도록
+[`v060_readiness_report.json`](../results/20261026/native_full_scope_union_assessment/v060_readiness_report.json)을
+추가했다. 이 원장은 다음 정보를 한 파일에 모은다.
+
+- 설비 component별 상태, 사건·case·위험 원자 수, qualified evidence 보류 수
+- 12개 사고 family의 조건부 계산 상태와 엄격 승격 상태
+- 문헌 빈도 시나리오·순위 안정성 및 센서 기반 빈도 학습 제외 선언
+- cache와 fresh physics 처리시간, campaign p95/p99
+- SLABx-LH2를 포함한 검증 domain과 제한된 주장 범위
+- 조건부 chain 완료 기준 A~E와 시설 전체 QRA 승격을 막는 strict gate
+
+원장은 계산을 다시 수행하거나 부족한 증거를 추정하지 않는다. 따라서 현재
+`CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN` 및
+`INCOMPLETE_EVIDENCE` 상태를 그대로 보존하며, qualified provider evidence,
+독립 물리검증, 엄격한 시설 범위, 시설 전체 QRA의 네 gate가 열려 있음을
+명시한다.
+
+재생 명령은 다음과 같다.
+
+```powershell
+python scripts/build_v060_readiness_report.py `
+  --objective-audit results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json `
+  --union-verification results/20261026/native_full_scope_union_assessment/verification.json `
+  --scope-matrix results/20261026/native_full_scope_union_assessment/scope_matrix.json `
+  --facility-assessment results/20261026/native_full_scope_union_assessment/facility_assessment.json `
+  --completion-audit results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json `
+  --validation-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
+  --realtime-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
+  --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
+```

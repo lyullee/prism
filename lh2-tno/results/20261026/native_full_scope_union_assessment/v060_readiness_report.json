@@ -1,0 +1,526 @@
+{
+  "schema_version": "prism.v060_ijhe_readiness_report.v1",
+  "release": "PRISM v0.6.0",
+  "objective_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
+  "completion_audit_status": "INCOMPLETE_EVIDENCE",
+  "conditional_chain_complete": true,
+  "strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "promotion": {
+    "facility_total_risk_available": false,
+    "complete_facility_qra_claim": false,
+    "qualified_provider_packet_case_count": 0,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false
+  },
+  "chain": {
+    "event_count": 34,
+    "case_count": 44,
+    "risk_atom_count": 176,
+    "conditional_case_count": 44,
+    "conditional_executed_case_count": 44,
+    "not_numerically_executed_case_count": 0,
+    "qualified_evidence_withheld_case_count": 29,
+    "annual_condition_count": 5,
+    "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
+    "conditional_ir_fn_available": true
+  },
+  "equipment": {
+    "component_rows": [
+      {
+        "component_id": "ambient-vaporizer-01",
+        "status": "EXECUTED",
+        "event_count": 3,
+        "conditional_case_count": 3,
+        "conditional_executed_case_count": 3,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 12,
+        "strict_gate_categories": []
+      },
+      {
+        "component_id": "inventory-depletion-pipe-01",
+        "status": "EXECUTED",
+        "event_count": 5,
+        "conditional_case_count": 10,
+        "conditional_executed_case_count": 10,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 40,
+        "strict_gate_categories": []
+      },
+      {
+        "component_id": "liquid-transfer-line-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "risk_atom_count": 20,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "liquid-transfer-pump-01",
+        "status": "PARTIAL",
+        "event_count": 2,
+        "conditional_case_count": 2,
+        "conditional_executed_case_count": 2,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "risk_atom_count": 8,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "pressure-relief-vent-01",
+        "status": "EXECUTED",
+        "event_count": 1,
+        "conditional_case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 4,
+        "strict_gate_categories": []
+      },
+      {
+        "component_id": "receiving-boundary-01",
+        "status": "EXCLUDED",
+        "event_count": 0,
+        "conditional_case_count": 0,
+        "conditional_executed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 0,
+        "strict_gate_categories": [
+          "FAMILY_SCOPE_PARTIAL"
+        ]
+      },
+      {
+        "component_id": "reliquefier-01",
+        "status": "PARTIAL",
+        "event_count": 3,
+        "conditional_case_count": 3,
+        "conditional_executed_case_count": 3,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "risk_atom_count": 12,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "storage-tank-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "risk_atom_count": 20,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "transfer-valve-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "risk_atom_count": 20,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 10,
+        "conditional_executed_case_count": 10,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 10,
+        "risk_atom_count": 40,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      }
+    ],
+    "observed_component_count": 9,
+    "expected_component_count": 10,
+    "component_status_counts": {
+      "EXCLUDED": 1,
+      "EXECUTED": 3,
+      "PARTIAL": 6
+    }
+  },
+  "accident_families": {
+    "required_family_count": 12,
+    "conditional_chain_complete": true,
+    "strict_matrix_complete": false,
+    "rows": [
+      {
+        "family": "vessel_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 5,
+        "case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "pipe_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 10,
+        "case_count": 15,
+        "conditional_executed_case_count": 15,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "valve_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 5,
+        "case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "vent_hole",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "pump_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 2,
+        "case_count": 2,
+        "conditional_executed_case_count": 2,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "vaporizer_hole",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "reliquefier_hole",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "liquid_two_phase",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 21,
+        "case_count": 21,
+        "conditional_executed_case_count": 21,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 17,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "inventory_depletion",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 23,
+        "case_count": 28,
+        "conditional_executed_case_count": 28,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 17,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "inventory_over_600s",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "two_sided_rupture",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 2,
+        "case_count": 2,
+        "conditional_executed_case_count": 2,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "vertical_handoff",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 5,
+        "case_count": 10,
+        "conditional_executed_case_count": 10,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 10,
+        "uncomputed_reasons": []
+      }
+    ]
+  },
+  "frequency": {
+    "scenario_count": null,
+    "correlation_comparison_present": true,
+    "asset_rank_stability": {
+      "scenario_count": 5,
+      "top_ids_by_endpoint": [
+        [
+          "ambient-vaporizer"
+        ],
+        [
+          "ambient-vaporizer"
+        ]
+      ],
+      "top_id_consistent_by_endpoint": [
+        true,
+        true
+      ],
+      "top_id_consistent": true,
+      "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
+    },
+    "scenario_family_rank_stability": {
+      "scenario_count": 5,
+      "top_ids_by_endpoint": [
+        [
+          "inventory_depletion"
+        ],
+        [
+          "inventory_depletion"
+        ]
+      ],
+      "top_id_consistent_by_endpoint": [
+        true,
+        true
+      ],
+      "top_id_consistent": true,
+      "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
+    },
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning": false
+  },
+  "timing": {
+    "cache_p95_ms": 23.30389991402626,
+    "cache_meets_one_hz_all_samples": true,
+    "fresh_physics_elapsed_ms": 2731.322699924931,
+    "fresh_physics_meets_one_hz": false,
+    "campaign_case_p95_ms": 28542.989770037835,
+    "campaign_case_p99_ms": 59995.055033995304,
+    "stage_elapsed_ms": {
+      "cloud_observation": {
+        "sample_count": 42,
+        "sum_ms": 41809.156600153074,
+        "median_ms": 88.64010003162548,
+        "max_ms": 25651.04170003906,
+        "p95_ms": 4306.818615068898,
+        "p99_ms": 17355.595586006457
+      },
+      "endpoint_a": {
+        "sample_count": 2,
+        "sum_ms": 6476.146999979392,
+        "median_ms": 3238.073499989696,
+        "max_ms": 3286.455399938859,
+        "p95_ms": 3281.6172099439427,
+        "p99_ms": 3285.487761939876
+      },
+      "endpoint_aggregation": {
+        "sample_count": 2,
+        "sum_ms": 13091.17749996949,
+        "median_ms": 6545.588749984745,
+        "max_ms": 6630.809099995531,
+        "p95_ms": 6622.2870649944525,
+        "p99_ms": 6629.104692995315
+      },
+      "endpoint_b": {
+        "sample_count": 2,
+        "sum_ms": 6613.024500082247,
+        "median_ms": 3306.5122500411235,
+        "max_ms": 3343.2980000507087,
+        "p95_ms": 3339.61942504975,
+        "p99_ms": 3342.562285050517
+      },
+      "fire_explosion_damage_risk": {
+        "sample_count": 42,
+        "sum_ms": 3529.979499988258,
+        "median_ms": 70.51400002092123,
+        "max_ms": 258.136700023897,
+        "p95_ms": 137.9187649581581,
+        "p99_ms": 209.34415797819338
+      },
+      "near_field_and_dispersion": {
+        "sample_count": 42,
+        "sum_ms": 198928.01799997687,
+        "median_ms": 1430.0847500562668,
+        "max_ms": 48637.88269995712,
+        "p95_ms": 22653.147350036288,
+        "p99_ms": 43802.631257960995
+      },
+      "pool": {
+        "sample_count": 42,
+        "sum_ms": 3914.0400998294353,
+        "median_ms": 0.005449983291327953,
+        "max_ms": 491.90849997103214,
+        "p95_ms": 368.1367799523286,
+        "p99_ms": 442.8072279610201
+      },
+      "source": {
+        "sample_count": 42,
+        "sum_ms": 30453.379600076005,
+        "median_ms": 721.531999995932,
+        "max_ms": 830.3482999326661,
+        "p95_ms": 741.5979299519676,
+        "p99_ms": 811.3605029729658
+      }
+    }
+  },
+  "validation_domains": [
+    {
+      "id": "dynamiclh2poolx_pool_spreading",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": null
+    },
+    {
+      "id": "equipment_observation",
+      "status": "RESTRICTED_OBSERVATION_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": null
+    },
+    {
+      "id": "native_external_model_contract",
+      "status": "DIAGNOSTIC_INTERFACE_ONLY",
+      "physical_validation_claim": false,
+      "facility_qra_claim": null
+    },
+    {
+      "id": "facility_conditional_diagnostic_chain",
+      "status": "CONDITIONAL_DIAGNOSTIC_ONLY",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_consequence_component",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "ijhe_scope_audit",
+      "status": "INCOMPLETE_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_lh2_sweep_screening",
+      "status": "SCREENING_CLOSURE_AND_TIMING_ONLY",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    }
+  ],
+  "completion_criteria": [
+    {
+      "id": "A_equipment_state_and_release",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
+        "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "B_release_to_final_damage",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "C_facility_ir_fn_and_scope",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "scope_matrix.json",
+        "facility_assessment.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "D_literature_frequency_uncertainty",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "E_validation_and_processing_time",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
+      ],
+      "strict_gate_open": false
+    }
+  ],
+  "explicit_exclusions": [
+    "field_accident_frequency_collection",
+    "sensor_based_frequency_learning",
+    "indoor_release_and_confinement",
+    "detonation_or_DDT",
+    "full_domino_escalation"
+  ],
+  "interpretation": "The v0.6.0 declared outdoor chain is numerically connected for conditional diagnostics. Operator-limited cases, missing qualified provider packets, restricted component validation, and strict facility-QRA gates remain visible and are not replaced by another scenario."
+}
