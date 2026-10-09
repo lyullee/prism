@@ -5,8 +5,10 @@ from lh2_tno.inspection_timeseries import (
     frame_from_row,
     normalise_unit_map,
     resolve_unit,
+    state_snapshot_from_row,
     summarise_numeric,
 )
+from lh2_tno.telemetry import TagMapping, TelemetryNormalizer
 
 
 def test_signal_classification_does_not_infer_units_from_tag_name():
@@ -52,3 +54,47 @@ def test_frame_from_row_requires_explicit_tag_unit_and_quality():
             origin="historian_measured",
             bindings={"PT1105A": {"tag": "P", "quality": "valid"}},
         )
+
+
+def test_state_snapshot_from_row_uses_normalizer_and_remains_state_only():
+    normalizer = TelemetryNormalizer(
+        (
+            TagMapping(
+                tag="P",
+                component_id="tank-01",
+                quantity="pressure",
+                source_unit="bar",
+                pressure_basis="absolute",
+                sensor_location="tank-01.shell",
+            ),
+            TagMapping(
+                tag="T",
+                component_id="tank-01",
+                quantity="temperature",
+                source_unit="degC",
+                sensor_location="tank-01.shell",
+            ),
+        ),
+        maximum_age_s=2.0,
+    )
+    snapshot = state_snapshot_from_row(
+        {"PT1105A": 2.1, "TT1106": 20.0},
+        stream_id="tank-01-historian",
+        sequence=1,
+        source_time_s=10.0,
+        arrival_time_s=10.1,
+        origin="historian_measured",
+        bindings={
+            "PT1105A": {"tag": "P", "unit": "bar", "quality": "valid"},
+            "TT1106": {"tag": "T", "unit": "degC", "quality": "valid"},
+        },
+        normalizer=normalizer,
+        now_s=10.2,
+        component_id="tank-01",
+        position_enu_m=(1.0, 2.0, 3.0),
+    )
+    assert snapshot.pressure_pa_abs == pytest.approx(210000.0)
+    assert snapshot.temperature_k == pytest.approx(293.15)
+    assert snapshot.origin == "historian_measured"
+    assert snapshot.position_enu_m == (1.0, 2.0, 3.0)
+    assert "provider_release" not in snapshot.to_mapping()

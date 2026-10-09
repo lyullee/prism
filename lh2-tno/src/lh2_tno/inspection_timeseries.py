@@ -12,6 +12,7 @@ import re
 from collections.abc import Iterable, Mapping
 from typing import Any
 
+from .state_snapshot import EquipmentStateSnapshot, build_state_snapshot_from_normalized
 from .telemetry import Frame, Value
 
 
@@ -151,3 +152,56 @@ def frame_from_row(
         )
     except (TypeError, ValueError) as error:
         raise ValueError(f"invalid telemetry frame metadata: {error}") from error
+
+
+def state_snapshot_from_row(
+    row: Mapping[str, Any],
+    *,
+    stream_id: str,
+    sequence: int,
+    source_time_s: float,
+    arrival_time_s: float,
+    origin: str,
+    bindings: Mapping[str, Mapping[str, Any]],
+    normalizer: Any,
+    now_s: float,
+    component_id: str,
+    pressure_tag: str | None = None,
+    temperature_tag: str | None = None,
+    position_enu_m: tuple[float, float, float] | None = None,
+    ambient_pressure_pa: float | None = None,
+) -> EquipmentStateSnapshot:
+    """Build a state-only equipment snapshot from one explicitly bound row.
+
+    The normalizer remains the authority for sensor location, source-unit
+    conversion, pressure basis, freshness, ordering, and quality.  This
+    helper only composes ``frame_from_row`` with the existing state-snapshot
+    contract; it does not create an accident request, opening, duration,
+    frequency, or provider release.
+    """
+    if not callable(getattr(normalizer, "normalize", None)):
+        raise TypeError("normalizer must provide normalize()")
+    if not isinstance(component_id, str) or not component_id.strip():
+        raise ValueError("component_id must be a nonempty string")
+    frame = frame_from_row(
+        row,
+        stream_id=stream_id,
+        sequence=sequence,
+        source_time_s=source_time_s,
+        arrival_time_s=arrival_time_s,
+        origin=origin,
+        bindings=bindings,
+    )
+    normalized = normalizer.normalize(
+        frame,
+        now_s=now_s,
+        ambient_pressure_pa=ambient_pressure_pa,
+    )
+    return build_state_snapshot_from_normalized(
+        normalized,
+        component_id=component_id,
+        captured_at_s=source_time_s,
+        pressure_tag=pressure_tag,
+        temperature_tag=temperature_tag,
+        position_enu_m=position_enu_m,
+    )
