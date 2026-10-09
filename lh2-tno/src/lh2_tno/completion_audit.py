@@ -1047,6 +1047,9 @@ def build_ijhe_completion_audit(
                     ),
                     "population_accounting": assessment.get("population_accounting"),
                     "scenario_branch_accounting": assessment.get("scenario_branch_accounting"),
+                    "release_termination_inventory_ledger": assessment.get(
+                        "release_termination_inventory_ledger"
+                    ),
                     "coverage": coverage,
                     "facility_total_risk_available": assessment.get(
                         "facility_total_risk_available"

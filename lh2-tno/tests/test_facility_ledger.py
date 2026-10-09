@@ -114,6 +114,10 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
     assert result["scenario_family_contributions"] == {}
     assert result["population_accounting"]["status"] == "NOT_RECORDED_IN_INPUT"
+    assert result["release_termination_inventory_ledger"]["schema_version"] == (
+        "prism.release_termination_inventory_ledger.v1"
+    )
+    assert result["release_termination_inventory_ledger"]["summary"]["case_count"] == 2
     assert result["scenario_branch_accounting"]["status"] == "EXPLICIT_BRANCH_ACCOUNTING"
     assert result["scenario_branch_accounting"]["cross_product_count"] == 1
     assert result["scenario_branch_accounting"]["release_branches"]["release-1"][
@@ -436,6 +440,46 @@ def test_facility_ledger_preserves_weather_and_termination_branch_metadata():
         "model_pressure_equalization": 1,
     }
     assert branches["ignition_branches"]["direct_fire"]["positive_harm_atom_count"] == 1
+
+
+def test_facility_ledger_carries_release_duration_isolation_and_inventory_rows():
+    result = _result(
+        event_id="event-release-ledger", asset_id="asset-release-ledger",
+        component_id="tank-release-ledger", frequency=1e-3,
+    )
+    result["cases"][0].update({
+        "termination": {
+            "basis": "reviewed_isolation_success",
+            "time_s": 0.25,
+            "provenance": "provider valve closure ledger",
+        },
+        "mass_ledger": {"released_kg": 0.2, "end_to_end_residual_kg": 0.0},
+        "provider_packet_identity": {
+            "event_id": "event-release-ledger",
+            "component_id": "tank-release-ledger",
+            "provider_result_digests": ["b" * 64],
+            "termination_bases": ["reviewed_isolation_success"],
+            "duration_s": [0.25],
+            "available_mass_kg": [10.0],
+            "cumulative_mass_out_kg": [0.2],
+        },
+    })
+    result["risk_atoms"][0]["provider_packet_identity"] = result["cases"][0][
+        "provider_packet_identity"
+    ]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-release-ledger",)
+    )
+
+    release = merged["release_termination_inventory_ledger"]
+    assert release["summary"]["complete_row_count"] == 1
+    assert release["summary"]["termination_basis_counts"] == {
+        "reviewed_isolation_success": 1
+    }
+    row = release["rows"][0]
+    assert row["isolation_status"] == "provider_declared_isolation_success"
+    assert row["provider"]["duration_s"] == [0.25]
+    assert row["provider"]["residual_mass_kg"] == [9.8]
 
 
 def test_facility_ledger_accepts_not_applicable_accident_family():

@@ -194,6 +194,9 @@ def build_facility_assessment(
         "annual_condition_count": population_accounting.get("annual_condition_count", 0),
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
+        "release_termination_inventory_ledger": ledger.get(
+            "release_termination_inventory_ledger"
+        ),
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
@@ -211,6 +214,11 @@ def build_facility_assessment(
                 "annual-condition weather, release/termination, and ignition branches are "
                 "preserved over the same validated atoms; no frequency inference or branch "
                 "reallocation is performed"
+            ),
+            "release_termination_inventory": (
+                "case-level provider duration, termination, isolation, inventory and mass "
+                "closure are carried through the merged facility ledger without filling "
+                "missing branch values"
             ),
         },
     }

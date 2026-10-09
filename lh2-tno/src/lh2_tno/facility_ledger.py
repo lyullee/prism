@@ -16,6 +16,7 @@ from statistics import median
 from typing import Any
 
 from .contracts import canonical_digest
+from .release_ledger import build_release_termination_inventory_ledger
 
 
 class FacilityLedgerError(ValueError):
@@ -749,6 +750,10 @@ def merge_facility_campaign_results(
         merged_atoms,
         merged_annual_conditions,
     )
+    release_termination_inventory_ledger = build_release_termination_inventory_ledger(
+        merged_cases,
+        withheld_cases=merged_missing,
+    )
     expected_components = {str(component_id) for component_id in expected_component_ids}
     observed_components = set(seen_components)
     if not expected_components:
@@ -1072,6 +1077,9 @@ def merge_facility_campaign_results(
         "population_row_count": population_accounting["population_row_count"],
         "scenario_branch_status": scenario_branch_accounting["status"],
         "scenario_branch_cross_product_count": scenario_branch_accounting["cross_product_count"],
+        "release_termination_inventory_summary": release_termination_inventory_ledger[
+            "summary"
+        ],
         "case_status_counts": dict(sorted(case_status_counts.items())),
         "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
         "operator_limited_case_count": operator_limited_case_count,
@@ -1109,6 +1117,7 @@ def merge_facility_campaign_results(
         "annual_condition_count": population_accounting["annual_condition_count"],
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
+        "release_termination_inventory_ledger": release_termination_inventory_ledger,
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,
@@ -1184,6 +1193,11 @@ def merge_facility_campaign_results(
                 "annual-condition weather, release/termination, and ignition branches are "
                 "preserved as diagnostics over the same risk atoms; no branch frequency is "
                 "inferred, reallocated, or double-counted"
+            ),
+            "release_termination_inventory": (
+                "case-level provider duration, termination, isolation, inventory and mass "
+                "closure are retained in one facility ledger; withheld copies remain in the "
+                "summary and are never converted to zero risk"
             ),
         },
     }

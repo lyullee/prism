@@ -490,6 +490,10 @@ def _facility_assessment(**overrides):
             "release_branches": {"release-1": {"termination_basis_counts": {"inventory_depletion": 1}}},
             "ignition_branches": {"direct_fire": {"risk_atom_count": 96}},
         },
+        "release_termination_inventory_ledger": {
+            "schema_version": "prism.release_termination_inventory_ledger.v1",
+            "summary": {"case_count": 24, "complete_row_count": 24},
+        },
         "conditional_diagnostic_facility_coverage": {
             "event_count": 24,
             "case_count": 24,
@@ -898,6 +902,9 @@ def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_t
     assert check["evidence"]["scenario_branch_accounting"]["status"] == (
         "EXPLICIT_BRANCH_ACCOUNTING"
     )
+    assert check["evidence"]["release_termination_inventory_ledger"][
+        "schema_version"
+    ] == "prism.release_termination_inventory_ledger.v1"
     assert report["complete_facility_qra_claim"] is False
     assert len(report["blocking_reasons"]) == 6
 
