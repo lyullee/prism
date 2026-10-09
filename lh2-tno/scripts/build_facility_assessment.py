@@ -44,6 +44,11 @@ def main() -> int:
         type=Path,
         help="optional provider_catalog_coverage report to reconcile qualified packets",
     )
+    parser.add_argument(
+        "--facility-case-packet-coverage",
+        type=Path,
+        help="optional exact facility-case coverage audit against qualified provider packets",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -54,6 +59,11 @@ def main() -> int:
             if args.provider_qualification_coverage
             else None
         )
+        facility_case_packet_coverage = (
+            _object(args.facility_case_packet_coverage)
+            if args.facility_case_packet_coverage
+            else None
+        )
         assessment = build_facility_assessment(
             results,
             expected_component_ids=tuple(args.expected_component_id),
@@ -61,6 +71,7 @@ def main() -> int:
             required_accident_families=tuple(args.required_accident_family),
             frequency_scenarios=_scenarios(args.scenarios),
             provider_qualification_coverage=provider_qualification_coverage,
+            facility_case_packet_coverage=facility_case_packet_coverage,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError, FacilityLedgerError) as error:
         raise SystemExit(f"facility assessment input error: {error}") from error
@@ -95,6 +106,11 @@ def main() -> int:
         "provider_qualification_coverage_complete": (
             assessment["provider_qualification_coverage"]["complete"]
             if assessment["provider_qualification_coverage"] is not None
+            else None
+        ),
+        "facility_case_packet_coverage_complete": (
+            assessment["facility_case_packet_coverage"]["complete"]
+            if assessment["facility_case_packet_coverage"] is not None
             else None
         ),
     }, ensure_ascii=False))

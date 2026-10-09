@@ -2922,8 +2922,8 @@
   "native_generic_scope_vertical_merged_frequency_scenarios_builder": "scripts/build_merged_frequency_scenarios.py",
   "native_generic_scope_vertical_merged_frequency_uncertainty_record": "results/20261023/native_generic_scope_vertical_merged_frequency_uncertainty_v1.json",
   "native_generic_scope_vertical_merged_frequency_uncertainty_status": "5 literature reweighting scenarios cover all 29 merged events; vertical handoff fixed at declared diagnostic rates; no fresh physics or facility credible interval",
-  "native_generic_scope_vertical_merged_facility_assessment_record": "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v5.json",
-  "native_generic_scope_vertical_merged_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; facility ledger reprocessed with explicit branch accounting, release/termination/inventory rows and stage timing; facility total and qualified QRA remain withheld",
+  "native_generic_scope_vertical_merged_facility_assessment_record": "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json",
+  "native_generic_scope_vertical_merged_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; facility ledger reprocessed with explicit branch accounting, release/termination/inventory rows and stage timing; facility case packet coverage 0/34; facility total and qualified QRA remain withheld",
   "native_generic_scope_vertical_merged_facility_assessment_conditional_risk_available": true,
   "native_generic_scope_vertical_merged_facility_assessment_frequency_scenario_count": 5,
   "native_generic_scope_vertical_merged_facility_assessment_fresh_physics_executed": false,
@@ -3045,5 +3045,14 @@
   "ijhe_completion_audit_case_packet_coverage_record": "results/20261024/native_generic_scope_vertical_case_packet_coverage_v1.json",
   "ijhe_completion_audit_case_packet_coverage_status": "NO_CASE_MATCH; 0/34 qualified provider cases; audit blocker retained",
   "ijhe_completion_audit_case_packet_coverage_frequency_inference": false,
-  "ijhe_completion_audit_case_packet_coverage_physical_validation_claim": false
+  "ijhe_completion_audit_case_packet_coverage_physical_validation_claim": false,
+  "facility_assessment_case_packet_coverage_gate_implemented": true,
+  "facility_assessment_case_packet_coverage_gate_module": "src/lh2_tno/facility_assessment.py",
+  "facility_assessment_case_packet_coverage_gate_script_option": "--facility-case-packet-coverage",
+  "facility_assessment_case_packet_coverage_gate_record": "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json",
+  "facility_assessment_case_packet_coverage_gate_status": "NO_CASE_MATCH; 0/34 qualified provider cases; facility QRA withheld",
+  "facility_assessment_case_packet_coverage_gate_complete": false,
+  "facility_assessment_case_packet_coverage_gate_frequency_inference": false,
+  "facility_assessment_case_packet_coverage_gate_physical_validation_claim": false,
+  "facility_assessment_case_packet_coverage_gate_ir_fn_promotion": "requires full exact case coverage plus independent scope and validation gates"
 }

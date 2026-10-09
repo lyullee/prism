@@ -31,6 +31,7 @@ def build_facility_assessment(
     required_accident_families: Sequence[str] = (),
     frequency_scenarios: Sequence[LiteratureFrequencyScenario] = (),
     provider_qualification_coverage: Mapping[str, Any] | None = None,
+    facility_case_packet_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return one facility risk, coverage, and frequency-sensitivity artifact.
 
@@ -104,9 +105,61 @@ def build_facility_assessment(
     qualification_gate_allows_qra = (
         qualification_gate is None or qualification_gate["complete"]
     )
+    case_coverage_gate = None
+    if facility_case_packet_coverage is not None:
+        coverage = facility_case_packet_coverage
+        case_request_count = coverage.get("case_request_count")
+        qualified_case_count = coverage.get("qualified_provider_case_count")
+        qualified_event_count = coverage.get("qualified_provider_event_count")
+        ledger_case_count = ledger.get("provider_packet_case_count")
+        reasons: list[str] = []
+        if coverage.get("schema") != "prism.facility_case_provider_coverage.v1":
+            reasons.append("facility case packet coverage has an unexpected schema")
+        if coverage.get("status") != "QUALIFIED_FULL_CASE_COVERAGE":
+            reasons.append("facility case packet coverage is not full qualified coverage")
+        if not isinstance(case_request_count, int) or case_request_count <= 0:
+            reasons.append("facility case packet coverage lacks a positive case request count")
+        if qualified_case_count != case_request_count:
+            reasons.append("facility case packet coverage has cases without qualified packets")
+        if not isinstance(qualified_event_count, int) or qualified_event_count <= 0:
+            reasons.append("facility case packet coverage has no qualified provider events")
+        if isinstance(ledger_case_count, int) and case_request_count != ledger_case_count:
+            reasons.append("facility case packet coverage count does not match the merged facility ledger")
+        policy = coverage.get("promotion_policy")
+        if not isinstance(policy, Mapping):
+            reasons.append("facility case packet coverage lacks its promotion policy")
+            policy = {}
+        if policy.get("frequency_is_not_assigned") is not True:
+            reasons.append("facility case packet coverage does not close the frequency boundary")
+        if policy.get("physical_validation_claim") is not False:
+            reasons.append("facility case packet coverage contains a physical-validation claim")
+        if policy.get("facility_ir_fn_promotion") != (
+            "requires this full case gate plus independent scope and validation gates"
+        ):
+            reasons.append("facility case packet coverage does not define the IR/F-N promotion boundary")
+        case_coverage_gate = {
+            "schema": coverage.get("schema"),
+            "coverage_status": coverage.get("status"),
+            "case_request_count": case_request_count,
+            "ledger_provider_packet_case_count": ledger_case_count,
+            "qualified_provider_event_count": qualified_event_count,
+            "qualified_provider_case_count": qualified_case_count,
+            "provider_evidence_row_count": coverage.get("provider_evidence_row_count"),
+            "status_counts": coverage.get("status_counts"),
+            "complete": not reasons,
+            "blocking_reasons": reasons,
+            "frequency_inference_performed": False,
+            "frequency_is_not_assigned": policy.get("frequency_is_not_assigned"),
+            "physical_validation_claim": False,
+            "facility_ir_fn_promotion": policy.get("facility_ir_fn_promotion"),
+        }
+    case_coverage_allows_qra = (
+        case_coverage_gate is None or case_coverage_gate["complete"]
+    )
     qualified_facility_qra_available = (
         ledger["qualified_facility_qra_available"]
         and qualification_gate_allows_qra
+        and case_coverage_allows_qra
     )
     # Older saved ledgers predate the explicit F/N diagnostics field.  Keep
     # those artifacts readable and derive the explanation from their retained
@@ -215,6 +268,10 @@ def build_facility_assessment(
         "provider_qualification_coverage_complete": (
             qualification_gate["complete"] if qualification_gate is not None else None
         ),
+        "facility_case_packet_coverage": case_coverage_gate,
+        "facility_case_packet_coverage_complete": (
+            case_coverage_gate["complete"] if case_coverage_gate is not None else None
+        ),
         "conditional_diagnostic_facility_risk_available": ledger[
             "conditional_diagnostic_facility_risk_available"
         ],
@@ -243,6 +300,10 @@ def build_facility_assessment(
             "conditional_diagnostic_facility": "the atom-level facility IR/F-N sum is exposed for diagnostics and frequency sensitivity, while qualification blockers continue to withhold the facility total",
             "frequency": "optional literature scenarios reweight saved risk atoms and do not infer missing frequency",
             "provider_packet": ledger["semantics"]["provider_packet"],
+            "facility_case_packet_coverage": (
+                "exact facility case identity must be qualified before the facility QRA gate can open; "
+                "missing cases remain explicit and do not infer frequency or physical validation"
+            ),
             "scenario_branch_accounting": (
                 "annual-condition weather, release/termination, and ignition branches are "
                 "preserved over the same validated atoms; no frequency inference or branch "

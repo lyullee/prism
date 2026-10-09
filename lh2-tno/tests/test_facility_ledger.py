@@ -769,3 +769,85 @@ def test_facility_assessment_withholds_provider_qualification_coverage_on_count_
     assert any("does not match" in reason for reason in gate["blocking_reasons"])
     assert assessment["qualified_facility_qra_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
+
+
+def test_facility_assessment_reconciles_case_packet_coverage_and_withholds_qra():
+    result = _result(
+        event_id="event-case-coverage",
+        asset_id="asset-case-coverage",
+        component_id="tank-case-coverage",
+        frequency=1e-3,
+    )
+    assessment = build_facility_assessment(
+        [result],
+        expected_component_ids=("tank-case-coverage",),
+        facility_case_packet_coverage={
+            "schema": "prism.facility_case_provider_coverage.v1",
+            "status": "NO_CASE_MATCH",
+            "case_request_count": 1,
+            "qualified_provider_event_count": 0,
+            "qualified_provider_case_count": 0,
+            "provider_evidence_row_count": 0,
+            "status_counts": {"MISSING_QUALIFIED_PROVIDER_EVIDENCE": 1},
+            "promotion_policy": {
+                "frequency_is_not_assigned": True,
+                "physical_validation_claim": False,
+                "facility_ir_fn_promotion": (
+                    "requires this full case gate plus independent scope and validation gates"
+                ),
+            },
+        },
+    )
+    gate = assessment["facility_case_packet_coverage"]
+    assert gate["complete"] is False
+    assert any("not full qualified coverage" in reason for reason in gate["blocking_reasons"])
+    assert assessment["facility_case_packet_coverage_complete"] is False
+    assert assessment["qualified_facility_qra_available"] is False
+    assert assessment["complete_facility_qra_claim"] is False
+
+
+def test_facility_assessment_accepts_exact_full_case_packet_coverage():
+    result = _result(
+        event_id="event-case-coverage-full",
+        asset_id="asset-case-coverage-full",
+        component_id="tank-case-coverage-full",
+        frequency=1e-3,
+    )
+    result.update(
+        physical_validation_claim=True,
+        provider_packet_case_count=1,
+        qualified_provider_packet_case_count=1,
+        provider_packet_promoted=True,
+        provider_packet_missing_evidence_cases=[],
+    )
+    assessment = build_facility_assessment(
+        [result],
+        expected_component_ids=("tank-case-coverage-full",),
+        provider_qualification_coverage={
+            "status": "FULLY_MATCHED",
+            "qualification_assessed": True,
+            "qualification_status": "QUALIFIED_FULL_WORKLIST",
+            "worklist_event_count": 1,
+            "exact_match_count": 1,
+            "qualified_provider_packet_count": 1,
+            "unqualified_exact_match_count": 0,
+        },
+        facility_case_packet_coverage={
+            "schema": "prism.facility_case_provider_coverage.v1",
+            "status": "QUALIFIED_FULL_CASE_COVERAGE",
+            "case_request_count": 1,
+            "qualified_provider_event_count": 1,
+            "qualified_provider_case_count": 1,
+            "provider_evidence_row_count": 1,
+            "status_counts": {"QUALIFIED_CASE_COVERAGE": 1},
+            "promotion_policy": {
+                "frequency_is_not_assigned": True,
+                "physical_validation_claim": False,
+                "facility_ir_fn_promotion": (
+                    "requires this full case gate plus independent scope and validation gates"
+                ),
+            },
+        },
+    )
+    assert assessment["facility_case_packet_coverage_complete"] is True
+    assert assessment["qualified_facility_qra_available"] is True
