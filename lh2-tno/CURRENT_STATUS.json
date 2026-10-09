@@ -2924,5 +2924,13 @@
   "native_generic_scope_vertical_merged_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; wrapper reconnected 5 frequency scenarios and 34 conditional cases; facility total and qualified QRA remain withheld",
   "native_generic_scope_vertical_merged_facility_assessment_conditional_risk_available": true,
   "native_generic_scope_vertical_merged_facility_assessment_frequency_scenario_count": 5,
-  "native_generic_scope_vertical_merged_facility_assessment_fresh_physics_executed": false
+  "native_generic_scope_vertical_merged_facility_assessment_fresh_physics_executed": false,
+  "near_receptor_facility_chain_diagnostic_record": "results/20261024/native_generic_near_receptor_campaign_result_one_event_v2.json",
+  "near_receptor_facility_chain_diagnostic_summary": "examples/native_lh2_near_receptor_ir_fn_chain_verification.json",
+  "near_receptor_facility_chain_diagnostic_status": "PARTIAL_DECLARED_SCOPE; one fresh EXECUTED_OPERATOR_LIMITED storage-vessel case plus 23 explicit UNCOMPUTED branches; nonzero conditional IR 4.68e-05 at synthetic 0.5 m receptor; facility total withheld",
+  "near_receptor_facility_chain_diagnostic_fresh_physics_cases": 1,
+  "near_receptor_facility_chain_diagnostic_case_elapsed_ms": 2694.034499931149,
+  "near_receptor_facility_chain_diagnostic_mass_residual_kg": 7.922487752849133e-19,
+  "near_receptor_facility_chain_diagnostic_provider_packet_promoted": false,
+  "near_receptor_facility_chain_diagnostic_physical_validation_claim": false
 }

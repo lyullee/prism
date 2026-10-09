@@ -134,3 +134,9 @@ generic v12 campaign에는 수직 handoff 사건이 생성되지 않았기 때�
 `audit_scope_ledger_consistency.py`의 결과 [`native_generic_scope_vertical_merged_ledger_consistency_v1.json`](../results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json)는 scope event 29개와 ledger event 29개가 일치하는 `CONSISTENT_SCOPE_LEDGER`다. 이 결과는 event·case 회계가 맞는다는 뜻이며, provider 자격·독립 물리검증·시설 IR/F-N을 의미하지 않는다. 최신 IJHE 감사 [`ijhe_completion_audit_native_generic_scope_vertical_v4.json`](../results/20261023/ijhe_completion_audit_native_generic_scope_vertical_v4.json)는 이 병합을 읽어도 `INCOMPLETE_EVIDENCE`를 유지하고, 실제 provider packet 부재·partial 사고군·시설 IR/F-N 보류 세 가지 차단 이유를 남긴다.
 
 병합 원장을 시설 assessment wrapper로 다시 읽은 결과는 `results/20261023/native_generic_scope_vertical_merged_facility_assessment_v1.json`이다. 이 결과는 5개 빈도 시나리오와 원장 risk atom을 다시 연결해 조건부 IR/F-N 필드를 노출하지만, `facility_total_risk_available=false`, `qualified_facility_qra_available=false`, `complete_facility_qra_claim=false`를 유지한다. 따라서 assessment wrapper는 시설 계산 경로가 실제로 호출됐다는 진단 증거이며, 부분·합성 입력을 완전한 시설 QRA로 바꾸는 승격 단계가 아니다.
+
+## 비영 조건부 IR/F-N 연결 확인
+
+병합 시설 원장의 일반 수용점은 source에서 20 m 떨어져 있어 현재 합성 방출량에서는 harm이 0으로 보인다. 계산 경로가 0값에만 의존하지 않는지 확인하기 위해 별도 [near-receptor 검증 요약](../examples/native_lh2_near_receptor_ir_fn_chain_verification.json)을 만들었다. `generic_lh2_near_receptor_manifest.json`의 합성 수용점을 source에서 0.5 m로 두고 저장탱크 `AREA_0.01%` 한 사건을 fresh physics로 실행한 결과, 한 `EXECUTED_OPERATOR_LIMITED` case에서 risk atom 4개와 조건부 IR `4.68×10^-5`가 생성됐다. 방출 질량잔차는 `7.92×10^-19 kg`, 새 물리 계산시간은 약 `2.694 s`였다.
+
+이 진단 campaign은 24개 생성 LOC 중 한 개만 실행하고 나머지 23개를 명시적 `UNCOMPUTED`로 남긴다. 따라서 nonzero IR은 수용점·기상·점화·피해 계산이 연결됐다는 증거이고, 실제 시설 인구·provider 적격성·물리검증·시설 전체 IR/F-N을 뜻하지 않는다. 원래 20 m generic geometry와도 합산하지 않는다.

@@ -11,6 +11,8 @@
 
 **2026-10-23 현재 일반 LH2 전체범위 기준:** 24개 문헌 사건을 현재 외부 `lh2dt_models` native 사고 exporter로 재실행해 **24/24 exact packet**을 만들고, 24개 요청 branch를 방출→SLABx-LH2/SLABx→점화·피해 chain까지 연결했다. 여기에 기존 수직 벤트 handoff의 5개 개구면적 사건과 10개 기상·case를 같은 시설 원장으로 결합해 최신 병합 진단은 29개 event, 34개 case, 136개 risk atom을 기록한다. 병합 원장에 대해 5개 문헌 빈도 재가중 시나리오도 모두 생성했으며 수직 handoff 빈도는 선언된 진단값을 `published`로 고정했다. 최신 병합 IJHE 감사는 19개 검사 중 16개 통과·3개 차단인 `INCOMPLETE_EVIDENCE`이며, 수직 handoff는 `PARTIAL`로 명시됐다. 합성 provider·부분 사고범위·시설 IR/F-N 보류는 그대로다. 상세 기록은 [native 일반 LH2 전체범위 패킷·캠페인 기록](docs/PRISM_native_일반LH2_전체범위_패킷캠페인_20261023.md)이다.
 
+시설 IR/F-N 연결 자체를 0값 결과에 의존하지 않도록, 별도의 합성 near-receptor 진단도 실행했다. 저장탱크 `AREA_0.01%` 한 건을 설비→방출→pool/SLABx→점화·피해→수용점까지 새로 계산하고, 수용점을 source에서 0.5 m로 둔 결과 조건부 IR은 `4.68×10⁻⁵`로 나타났다. 나머지 23개 LOC는 명시적 `UNCOMPUTED`로 남겼고 시설 전체 IR/F-N은 승격하지 않았다. 이 결과는 [near-receptor chain 검증 요약](examples/native_lh2_near_receptor_ir_fn_chain_verification.json)에서 확인한다.
+
 > 현재는 연구용 진단 계산 시스템입니다. 방출부터 최종 피해까지 실행하는 경로는 구현했지만,
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
 > v0.6.2는 v0.6.0 이후의 설비 경계·문헌 빈도·매니페스트 진단을 포함한 연구용 알파 릴리스입니다. 전체 시설 QRA와 독립 물리 검증은 여전히 별도 상태로 표시됩니다.
