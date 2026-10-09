@@ -1023,7 +1023,7 @@ print(result["realtime"]["deadline_status"])  # MET 또는 MISSED
 
 현재 native LH2 packet을 사용한 재현 benchmark [`native_lh2_realtime_cache_benchmark_v1.json`](examples/native_lh2_realtime_cache_benchmark_v1.json)은 fresh physics 약 `2685.50 ms`, exact-cache 20/20 hit, cache median `31.47 ms`, p95 `33.23 ms`를 기록했습니다. 따라서 이 실행에서는 동일한 정규화 요청의 cache 조회가 1 Hz deadline을 만족했지만, 상태가 바뀌어 fresh physics가 필요한 갱신은 1 Hz로 주장하지 않습니다. 재현 명령은 `scripts/benchmark_realtime_cache.py`이며, 결과에는 `realtime_fresh_physics_claim=false`가 고정됩니다.
 
-반복 모니터링에서 interpreter 시작 비용을 줄이려면 `PersistentIsolatedBackend`를 사용할 수 있습니다. 이 warm worker는 외부 모델과 adapter source pin을 매 요청 확인하고, 풍속 등 입력이 바뀐 요청은 매번 새 물리 계산으로 실행합니다. 현재 일반 LH2 진단 측정에서 후속 fresh physics 중앙값은 약 2.36초로 1 Hz를 충족하지 않았습니다. 따라서 warm worker는 실행 지연을 줄이는 구조 개선이지, 새 물리 계산 1 Hz 또는 운영 SLA의 증거가 아닙니다. 상세 결과는 [warm worker 실시간 진단 개발 기록](docs/PRISM_warm_worker_실시간진단_개발기록_20261027.md)을 참고합니다.
+반복 모니터링에서 interpreter 시작 비용을 줄이려면 `PersistentIsolatedBackend`를 사용할 수 있습니다. 이 warm worker는 외부 모델과 adapter source pin을 매 요청 확인하고, 풍속 등 입력이 바뀐 요청은 매번 새 물리 계산으로 실행합니다. 현재 일반 LH2 진단 측정에서 후속 fresh physics p50/p95/p99는 약 `1,864/2,043/2,043 ms`로 1 Hz를 충족하지 않았습니다. 따라서 warm worker는 실행 지연을 줄이는 구조 개선이지, 새 물리 계산 1 Hz 또는 운영 SLA의 증거가 아닙니다. 상세 결과는 [warm worker 실시간 진단 개발 기록](docs/PRISM_warm_worker_실시간진단_개발기록_20261027.md)을 참고합니다.
 
 여러 설비를 같은 시각에 확인해야 할 때는 `FacilityRealtimeConsequenceMonitor`를
 사용합니다. 설비마다 `RealtimeConsequenceMonitor`, 센서 정규화기, 방출 resolver와

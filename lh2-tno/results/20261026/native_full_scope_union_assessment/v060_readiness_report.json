@@ -351,9 +351,9 @@
     "sensor_frequency_learning": false
   },
   "timing": {
-    "cache_p95_ms": 54.43750007543713,
+    "cache_p95_ms": 61.27649999689311,
     "cache_meets_one_hz_all_samples": true,
-    "fresh_physics_elapsed_ms": 2663.142599980347,
+    "fresh_physics_elapsed_ms": 2711.2096999771893,
     "fresh_physics_meets_one_hz": false,
     "campaign_case_p95_ms": 28542.989770037835,
     "campaign_case_p99_ms": 59995.055033995304,
@@ -608,11 +608,11 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
-      "sha256": "f4f262ef79421283215289d7e85fdd8edbae6bb34f726b1464beaba254873edf"
+      "sha256": "dae3a8459952618a9aae7c7f0afce8eda49bba271335962536a77611bac7b09d"
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "3d85ae51bcb53fb0d6c2cae6b292ae53f99a96816452aa65074f437ef0aee4b9"
+      "sha256": "dc7c89fe40d768a47b98c3aa910f3b584737df922a2ade55c9c644809c5106e3"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
@@ -624,15 +624,15 @@
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "9931764fa27a4719fe713e394f0a8586cf138fbebb680bac6340e28d53e9a71a"
+      "sha256": "180c218b1cc3f763be29ecfa0a9b73c1ad227ebc119ef4676d2de673258bf06e"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "4877adf47cad822ea07344cefbb7aa7f93afb911e5820a8c611176f52146e7f3"
+      "sha256": "2d378a235c9735e07ba5c9b4a40f3d0982a4cac462ba27ad73d594137bdfab86"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
-      "sha256": "c73053fc6665d99b347e3646f699a88eeedb574620d43cf43f7098b30cba6b52"
+      "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
     },
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",

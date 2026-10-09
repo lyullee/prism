@@ -1577,6 +1577,11 @@ def build_ijhe_completion_audit(
             )
             and persistent.get("realtime_fresh_physics_claim") is False
             and persistent.get("steady_fresh_physics_meets_one_hz") is False
+            and isinstance(persistent.get("steady_p50_ms"), (int, float))
+            and isinstance(persistent.get("steady_p95_ms"), (int, float))
+            and isinstance(persistent.get("steady_p99_ms"), (int, float))
+            and persistent.get("steady_p50_ms", 0) <= persistent.get("steady_p95_ms", 0)
+            and persistent.get("steady_p95_ms", 0) <= persistent.get("steady_p99_ms", 0)
         )
         benchmark_valid = (
             benchmark.get("schema_version") == "prism.realtime_cache_benchmark.v1"

@@ -124,8 +124,10 @@ def benchmark(
             "backend_elapsed_ms_values": warm_backend_ms,
             "startup_elapsed_ms": warm_ms[0],
             "steady_elapsed_ms_values": steady_ms,
+            "steady_p50_ms": statistics.median(steady_ms),
             "steady_median_ms": statistics.median(steady_ms),
             "steady_p95_ms": warm_p95,
+            "steady_p99_ms": sorted(steady_ms)[int(0.99 * (len(steady_ms) - 1))],
             "fresh_physics_meets_one_hz": all(value <= 1000.0 for value in warm_ms),
             "steady_fresh_physics_meets_one_hz": all(
                 value <= 1000.0 for value in (warm_ms[1:] or warm_ms)
