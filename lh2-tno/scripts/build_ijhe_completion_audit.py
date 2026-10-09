@@ -27,6 +27,7 @@ def main() -> int:
     parser.add_argument("--provider-worklist", type=Path)
     parser.add_argument("--diagnostic-adapter-registry", type=Path)
     parser.add_argument("--diagnostic-adapter-execution", type=Path)
+    parser.add_argument("--diagnostic-worklist-evidence", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -43,6 +44,13 @@ def main() -> int:
         )
         if diagnostic_execution is not None:
             diagnostic_execution["_record_path"] = str(args.diagnostic_adapter_execution)
+        worklist_evidence = (
+            _object(args.diagnostic_worklist_evidence)
+            if args.diagnostic_worklist_evidence
+            else None
+        )
+        if worklist_evidence is not None:
+            worklist_evidence["_record_path"] = str(args.diagnostic_worklist_evidence)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -51,6 +59,7 @@ def main() -> int:
             worklist,
             registry,
             diagnostic_execution,
+            worklist_evidence,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

@@ -57,6 +57,7 @@ def build_ijhe_completion_audit(
     provider_worklist: Mapping[str, Any] | None = None,
     diagnostic_adapter_registry: Mapping[str, Any] | None = None,
     diagnostic_adapter_execution: Mapping[str, Any] | None = None,
+    diagnostic_worklist_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -236,6 +237,57 @@ def build_ijhe_completion_audit(
                     "A worklist item reached the diagnostic provider and consequence-chain boundary; "
                     "this evidence is intentionally non-qualifying and does not satisfy the provider, "
                     "frequency, facility-QRA, or physical-validation gates."
+                ),
+            }
+        )
+    if diagnostic_worklist_evidence is not None:
+        evidence = diagnostic_worklist_evidence
+        worklist_count = evidence.get("worklist_event_count")
+        candidate_count = evidence.get("candidate_event_count")
+        exact_count = evidence.get("exact_match_event_count")
+        strict_count = evidence.get("strict_packet_valid_event_count")
+        chain_count = evidence.get("consequence_chain_event_count")
+        coverage_valid = (
+            isinstance(evidence.get("status"), str)
+            and evidence.get("status", "").startswith("PARTIAL_DIAGNOSTIC_EVIDENCE")
+            and isinstance(worklist_count, int)
+            and worklist_count > 0
+            and isinstance(candidate_count, int)
+            and isinstance(exact_count, int)
+            and isinstance(strict_count, int)
+            and isinstance(chain_count, int)
+            and 0 < exact_count == strict_count <= candidate_count <= worklist_count
+            and chain_count > 0
+            and evidence.get("qualified_provider_packet_count") == 0
+            and evidence.get("frequency_bound") is False
+            and evidence.get("facility_qra_claim") is False
+            and evidence.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_worklist_packet_coverage_evidence",
+                "status": "PASS" if coverage_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": evidence.get("_record_path"),
+                    "status": evidence.get("status"),
+                    "worklist_event_count": worklist_count,
+                    "candidate_event_count": candidate_count,
+                    "exact_match_event_count": exact_count,
+                    "strict_packet_valid_event_count": strict_count,
+                    "consequence_chain_event_count": chain_count,
+                    "qualified_provider_packet_count": evidence.get(
+                        "qualified_provider_packet_count"
+                    ),
+                    "frequency_bound": evidence.get("frequency_bound"),
+                    "facility_qra_claim": evidence.get("facility_qra_claim"),
+                    "physical_validation_claim": evidence.get("physical_validation_claim"),
+                },
+                "interpretation": (
+                    "Saved external-model packets cover only the exact-matched worklist subset; "
+                    "this diagnostic evidence does not close the missing events or qualify the "
+                    "provider packets."
                 ),
             }
         )

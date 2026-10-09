@@ -75,6 +75,23 @@ def _diagnostic_execution(**overrides):
     return execution
 
 
+def _worklist_evidence(**overrides):
+    evidence = {
+        "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
+        "worklist_event_count": 24,
+        "candidate_event_count": 19,
+        "exact_match_event_count": 19,
+        "strict_packet_valid_event_count": 19,
+        "consequence_chain_event_count": 10,
+        "qualified_provider_packet_count": 0,
+        "frequency_bound": False,
+        "facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    evidence.update(overrides)
+    return evidence
+
+
 def test_completion_audit_blocks_incomplete_facility_claim():
     report = build_ijhe_completion_audit(
         _status(False),
@@ -267,6 +284,45 @@ def test_completion_audit_rejects_invalid_diagnostic_execution_without_promoting
     check = next(
         item for item in report["checks"]
         if item["name"] == "diagnostic_worklist_execution_evidence"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert report["status"] == "READY_FOR_IJHE_SCOPE"
+
+
+def test_completion_audit_records_partial_provider_worklist_coverage():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        diagnostic_worklist_evidence=_worklist_evidence(_record_path="evidence.json"),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_packet_coverage_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["exact_match_event_count"] == 19
+    assert len(report["blocking_reasons"]) == 6
+
+
+def test_completion_audit_rejects_worklist_evidence_without_chain_or_strict_packets():
+    report = build_ijhe_completion_audit(
+        _status(True),
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        diagnostic_worklist_evidence=_worklist_evidence(
+            strict_packet_valid_event_count=18,
+            consequence_chain_event_count=0,
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_packet_coverage_evidence"
     )
     assert check["status"] == "BLOCKED"
     assert check["diagnostic_only"] is True
