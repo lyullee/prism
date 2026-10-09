@@ -40,6 +40,8 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     )
     assert report["status"] == "OPEN_EVIDENCE_REQUEST"
     assert report["provider_export_schema_required"] == "prism.external_accident_history.v1"
+    assert report["promotion_gate"]["provider_packet_evidence_schema"] == "prism.provider_packet_evidence.v1"
+    assert report["promotion_gate"]["exact_event_component_port_and_digest_match_required"] is True
     assert report["family_requests"][0]["promotion_allowed_now"] is False
     assert "pipe upstream/downstream state and isolation response history" in report["family_requests"][0]["required_provider_evidence"]
     assert report["blocking_reasons"] == ["family pipe_hole: PARTIAL"]

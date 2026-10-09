@@ -17,7 +17,7 @@ SCHEMA = "prism.facility_evidence_request.v1"
 PROVIDER_SCHEMA = "prism.external_accident_history.v1"
 
 _COMMON_REQUIREMENTS = (
-    "qualified_actual provider status with source SHA-256 and evidence identifier",
+    "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
     "exact component_id, accident port, event_id, opening geometry, position and direction",
     "provider-owned time history with start/end clock and explicit termination basis",
     "provider mass and energy closure with residuals and initial/final inventory",
@@ -136,6 +136,17 @@ def build_facility_evidence_request(
             "risk_atom_count": len(ledger.get("risk_atoms", ())) if isinstance(ledger.get("risk_atoms"), Sequence) else 0,
             "facility_total_risk_available": ledger.get("facility_total_risk_available", False),
             "physical_validation_claim": ledger.get("physical_validation_claim", False),
+            "provider_packet_case_count": ledger.get("provider_packet_case_count", 0),
+            "qualified_provider_packet_case_count": ledger.get(
+                "qualified_provider_packet_case_count", 0
+            ),
+            "provider_packet_promoted": ledger.get("provider_packet_promoted", False),
+            "qualified_facility_qra_available": ledger.get(
+                "qualified_facility_qra_available", False
+            ),
+            "complete_facility_qra_claim": ledger.get(
+                "complete_facility_qra_claim", False
+            ),
         },
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blockers)),
         "family_requests": family_rows,
@@ -148,6 +159,9 @@ def build_facility_evidence_request(
         },
         "promotion_gate": {
             "qualified_provider_packet_required": True,
+            "provider_packet_evidence_schema": "prism.provider_packet_evidence.v1",
+            "provider_qualification_schema": "prism.provider_qualification_evidence.v1",
+            "exact_event_component_port_and_digest_match_required": True,
             "independent_physical_validation_required": True,
             "complete_declared_scope_required": True,
             "facility_ir_fn_remains_withheld_until_all_true": True,

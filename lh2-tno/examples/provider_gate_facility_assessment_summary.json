@@ -23,6 +23,9 @@
   "evidence_request_status": "OPEN_EVIDENCE_REQUEST",
   "evidence_request_family_count": 12,
   "evidence_request_component_count": 11,
+  "provider_packet_evidence_schema": "prism.provider_packet_evidence.v1",
+  "provider_qualification_schema": "prism.provider_qualification_evidence.v1",
+  "exact_identity_match_required": true,
   "frequency_inference": false,
   "blocking_reasons": [
     "campaign 442a4eb7da58b4bf7eabb04245d99e74d2eaea32cfc9631445d922e932d1fa50: qualified provider packet promotion is unavailable",
