@@ -3616,7 +3616,7 @@
       "evidence": {
         "status": "RESTRICTED_EVIDENCE_MATRIX",
         "decision": "FACILITY_QRA_WITHHELD",
-        "domain_count": 6,
+        "domain_count": 7,
         "blocking_reason_count": 0,
         "claims_closed": true,
         "record": "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"

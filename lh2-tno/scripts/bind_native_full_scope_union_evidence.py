@@ -61,6 +61,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         args.equipment_audit,
         output_dir / "facility_assessment.json",
         native_contract_path=args.native_contract,
+        slabx_validation_path=args.slabx_validation_evidence,
         ijhe_audit_path=args.ijhe_audit_source,
         external_sweep_path=args.external_sweep,
     )

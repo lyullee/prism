@@ -76,7 +76,24 @@ def _records(tmp_path: Path) -> dict[str, Path]:
             "frequency_inference": False,
         },
     })
-    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep}
+    slabx = _write(tmp_path / "slabx.json", {
+        "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+        "model": {"name": "SLABx-LH2", "slabx_lh2_version": "0.1.2"},
+        "scope": {"supports": ["dispersion"], "excludes": ["facility QRA"]},
+        "metrics": {
+            "ffi_case_count": 6,
+            "flacs_comparison_row_count": 6,
+            "pool_radius_median_ratio": 1.03,
+            "max_scenario_mass_residual_kg": 1e-12,
+            "runtime_repeat_inventory_difference_kg": 0.0,
+        },
+        "source_results": {"path": "external/results.json", "sha256": "a" * 64},
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+    })
+    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx}
 
 
 def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
@@ -94,6 +111,35 @@ def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
     assert claims["restricted_pool_spreading_component_evidence"]["allowed"] is True
     assert claims["conditional_source_to_facility_diagnostic_chain"]["status"] == "CONDITIONAL_ONLY"
     assert claims["qualified_facility_qra"]["allowed"] is False
+
+
+def test_matrix_records_slabx_component_evidence_without_opening_qra(tmp_path):
+    paths = _records(tmp_path)
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        slabx_validation_path=paths["slabx"],
+    )
+    domain = next(row for row in matrix["evidence_domains"] if row["id"] == "slabx_lh2_consequence_component")
+    assert domain["status"] == "RESTRICTED_COMPONENT_EVIDENCE"
+    assert domain["ffi_case_count"] == 6
+    assert domain["physical_validation_claim"] is False
+    claims = {row["claim"]: row for row in matrix["claims"]}
+    assert claims["restricted_slabx_lh2_consequence_component_evidence"]["allowed"] is True
+    assert matrix["facility_qra_claim"] is False
+
+
+def test_matrix_rejects_slabx_promotion_claim(tmp_path):
+    paths = _records(tmp_path)
+    payload = json.loads(paths["slabx"].read_text(encoding="utf-8"))
+    payload["physical_validation_claim"] = True
+    paths["slabx"].write_text(json.dumps(payload), encoding="utf-8")
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        slabx_validation_path=paths["slabx"],
+    )
+    assert matrix["status"] == "EVIDENCE_MATRIX_REVIEW_REQUIRED"
+    assert any("SLABx-LH2 evidence" in reason for reason in matrix["blocking_reasons"])
+    assert matrix["physical_validation_claim"] is False
 
 
 def test_matrix_rejects_an_upstream_claim_that_would_open_promotion(tmp_path):

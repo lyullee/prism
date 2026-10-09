@@ -50,7 +50,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["population_accounting_mismatch_count"] == 0
     assert verification["validation_evidence_matrix_status"] == "RESTRICTED_EVIDENCE_MATRIX"
     assert verification["validation_evidence_matrix_decision"] == "FACILITY_QRA_WITHHELD"
-    assert verification["validation_evidence_matrix_domain_count"] == 6
+    assert verification["validation_evidence_matrix_domain_count"] == 7
     assert verification["validation_evidence_matrix_physical_validation_claim"] is False
     assert verification["validation_evidence_matrix_facility_qra_claim"] is False
     assert verification["realtime_cache_benchmark_cache_hits"] == 10

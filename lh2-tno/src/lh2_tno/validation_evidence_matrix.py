@@ -146,6 +146,56 @@ def _native_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) 
     }
 
 
+def _slabx_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
+    """Record SLABx-LH2 component validation without opening facility gates.
+
+    SLABx-LH2 is the consequence component used by the conditional chain.  Its
+    external comparison and repeat-runtime evidence are useful for an IJHE
+    evidence table, but they do not validate the equipment release boundary,
+    initiating frequency, ignition model, or the complete facility QRA.  Keep
+    this distinction explicit in the machine-readable matrix.
+    """
+    if payload.get("status") != "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE":
+        blockers.append("SLABx-LH2 evidence is not the restricted consequence-evidence status")
+    for field in (
+        "physical_validation_claim",
+        "full_chain_validation_claim",
+        "frequency_inference_performed",
+        "facility_qra_claim",
+    ):
+        _require_false(payload, field, "SLABx-LH2 evidence", blockers)
+    scope = payload.get("scope") if isinstance(payload.get("scope"), Mapping) else {}
+    metrics = payload.get("metrics") if isinstance(payload.get("metrics"), Mapping) else {}
+    source_results = payload.get("source_results") if isinstance(payload.get("source_results"), Mapping) else {}
+    return {
+        "id": "slabx_lh2_consequence_component",
+        "status": "RESTRICTED_COMPONENT_EVIDENCE",
+        "supports": [
+            "declared outdoor hydrogen dispersion and LFL comparison cases",
+            "cryogenic pool-radius and evaporation comparison cases",
+            "mass-closure and repeat-runtime checks for the external consequence model",
+        ],
+        "does_not_support": [
+            "equipment accident release, isolation, or inventory-depletion validation",
+            "initiating-event frequency or sensor-frequency learning",
+            "ignition, fire, explosion, IR/F-N, or facility-QRA validation",
+            "indoor, detonation/DDT, obstacle, or terrain cases outside declared applicability",
+        ],
+        "model": payload.get("model"),
+        "declared_scope": scope,
+        "ffi_case_count": metrics.get("ffi_case_count"),
+        "flacs_comparison_row_count": metrics.get("flacs_comparison_row_count"),
+        "pool_radius_median_ratio": metrics.get("pool_radius_median_ratio"),
+        "max_scenario_mass_residual_kg": metrics.get("max_scenario_mass_residual_kg"),
+        "runtime_repeat_inventory_difference_kg": metrics.get("runtime_repeat_inventory_difference_kg"),
+        "source_results": source_results,
+        "source": _source(path, "SLABx-LH2 restricted consequence component record", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _facility_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     for field in ("facility_total_risk_available", "qualified_facility_qra_available", "complete_facility_qra_claim"):
         _require_false(payload, field, "facility assessment", blockers)
@@ -244,6 +294,7 @@ def build_validation_evidence_matrix(
     facility_assessment_path: str | Path,
     *,
     native_contract_path: str | Path | None = None,
+    slabx_validation_path: str | Path | None = None,
     ijhe_audit_path: str | Path | None = None,
     external_sweep_path: str | Path | None = None,
 ) -> dict[str, Any]:
@@ -260,6 +311,9 @@ def build_validation_evidence_matrix(
     if native_contract_path is not None:
         native_path, native = _read_object(native_contract_path, "native contract audit")
         domains.insert(2, _native_domain(native_path, native, blockers))
+    if slabx_validation_path is not None:
+        slabx_path, slabx = _read_object(slabx_validation_path, "SLABx-LH2 validation evidence")
+        domains.append(_slabx_domain(slabx_path, slabx, blockers))
     if ijhe_audit_path is not None:
         audit_path, audit = _read_object(ijhe_audit_path, "IJHE audit")
         domains.append(_audit_domain(audit_path, audit, blockers))
@@ -286,6 +340,12 @@ def build_validation_evidence_matrix(
             "status": "CONDITIONAL_ONLY",
             "allowed": not any("facility assessment" in item for item in unique_blockers),
             "basis": "facility_conditional_diagnostic_chain",
+        },
+        {
+            "claim": "restricted_slabx_lh2_consequence_component_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("SLABx-LH2 evidence" in item for item in unique_blockers),
+            "basis": "slabx_lh2_consequence_component",
         },
         {
             "claim": "independent_full_chain_physical_validation",

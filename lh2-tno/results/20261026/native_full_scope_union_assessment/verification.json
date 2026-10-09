@@ -59,7 +59,7 @@
   ],
   "validation_evidence_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
   "validation_evidence_matrix_decision": "FACILITY_QRA_WITHHELD",
-  "validation_evidence_matrix_domain_count": 6,
+  "validation_evidence_matrix_domain_count": 7,
   "validation_evidence_matrix_physical_validation_claim": false,
   "validation_evidence_matrix_facility_qra_claim": false,
   "realtime_cache_benchmark_cache_hits": 10,

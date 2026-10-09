@@ -72,8 +72,8 @@
       "diagnostic_adapter_contract_verified_count": 7,
       "source": {
         "label": "native external-model contract audit",
-        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261018\\lh2dt_native_contract_audit.json",
-        "sha256": "671c7b97783ebc7769b3fc6650814e3fbc47bd464afbf0e97aae687c810d6124",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261022\\lh2dt_native_contract_audit_native_catalog.json",
+        "sha256": "2125e4f1eae665f605407f2d9fedf043fec5483998665e9b0ad21d2f38d088ef",
         "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND"
       },
       "physical_validation_claim": false,
@@ -106,6 +106,58 @@
       "facility_qra_claim": false
     },
     {
+      "id": "slabx_lh2_consequence_component",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "supports": [
+        "declared outdoor hydrogen dispersion and LFL comparison cases",
+        "cryogenic pool-radius and evaporation comparison cases",
+        "mass-closure and repeat-runtime checks for the external consequence model"
+      ],
+      "does_not_support": [
+        "equipment accident release, isolation, or inventory-depletion validation",
+        "initiating-event frequency or sensor-frequency learning",
+        "ignition, fire, explosion, IR/F-N, or facility-QRA validation",
+        "indoor, detonation/DDT, obstacle, or terrain cases outside declared applicability"
+      ],
+      "model": {
+        "name": "SLABx-LH2",
+        "slabx_lh2_version": "0.1.2",
+        "slabx_version": "1.0.6"
+      },
+      "declared_scope": {
+        "supports": [
+          "cryogenic-hydrogen pool radius and evaporation comparison",
+          "outdoor hydrogen dispersion/LFL comparison under declared applicability",
+          "inventory mass-closure and repeat-runtime evidence from the external model"
+        ],
+        "excludes": [
+          "equipment accident release or provider qualification",
+          "initiating-event frequency or sensor frequency learning",
+          "ignition, fire, explosion, blast, IR/F-N, or facility-QRA validation",
+          "indoor, detonation/DDT, obstacle/terrain cases outside the declared SLABx applicability"
+        ]
+      },
+      "ffi_case_count": 6,
+      "flacs_comparison_row_count": 6,
+      "pool_radius_median_ratio": 1.0305005693059233,
+      "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+      "runtime_repeat_inventory_difference_kg": 0.0,
+      "source_results": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2-v0.1.2-rc\\slabx-lh2\\paper_results\\results.json",
+        "sha256": "a014b3e09133320204579a36d4b6591cc7640249bf862ef6f4485e4d859775cb",
+        "generated_utc": "2026-08-25T23:53:16Z"
+      },
+      "source": {
+        "label": "SLABx-LH2 restricted consequence component record",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261024\\slabx_lh2_validation_audit_v1.json",
+        "sha256": "01d9a0e7d823f51340c9784616947fc3190905e269da06138f5c2192f028d58a",
+        "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
       "id": "ijhe_scope_audit",
       "status": "INCOMPLETE_EVIDENCE",
       "supports": [
@@ -118,7 +170,7 @@
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "c42da94b5ccf37a509f21166923d97d88551ccb5d2f441613589c1a4bd0247ad",
+        "sha256": "72fd66ffb4b7b3cea3958430835fccc5c468dcfef812f8a7f889a22bdf6aae83",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,
@@ -179,6 +231,12 @@
       "status": "CONDITIONAL_ONLY",
       "allowed": true,
       "basis": "facility_conditional_diagnostic_chain"
+    },
+    {
+      "claim": "restricted_slabx_lh2_consequence_component_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_consequence_component"
     },
     {
       "claim": "independent_full_chain_physical_validation",

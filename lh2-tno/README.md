@@ -21,6 +21,16 @@ coverage에는 시설 전체 상태 snapshot coverage를 통과한 뒤에도 4�
 native catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 
+**SLABx-LH2 검증 매트릭스 연결 보완:** 통합 `validation_evidence_matrix.json`에도
+`slabx_lh2_consequence_component` domain을 별도로 기록합니다. SLABx-LH2의 외부
+분산·LFL 비교 6건, pool 반경 비교 6건, 질량 폐합과 반복 실행 결과를 논문용 구성요소
+근거로 추적할 수 있지만, 설비 누출·차단·재고 소진·빈도·점화·IR/F-N을 검증한 것으로
+확장하지 않습니다. 이 domain은 `RESTRICTED_COMPONENT_EVIDENCE`이며, 전체 시설
+물리검증과 QRA 승격은 계속 fail-closed입니다. 구현은
+`src/lh2_tno/validation_evidence_matrix.py`와 `scripts/bind_native_full_scope_union_evidence.py`에
+있고, 상세 감사는 [v0.6.0 IJHE 검증 매트릭스 갱신 기록](docs/PRISM_v0.6.0_IJHE_검증매트릭스_갱신.md)을
+참조합니다.
+
 **2026-10-27 시설 case 증거 선택 보완:** 하나의 initiating event가 차단 성공·실패나
 양단 출구처럼 여러 provider packet을 가질 수 있으므로, 시설 case 감사기가 event ID 하나만
 보고 마지막 packet으로 덮어쓰지 않도록 시설 case 감사기에서만 exact component·port·source
