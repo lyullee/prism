@@ -35,6 +35,23 @@ native catalog와 SLABx-LH2 구성요소 검사는 diagnostic-only PASS다.
 
 따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다.
 
+### 미계산과 증거 제한의 분리
+
+시설 원장의 이전 `uncomputed_case_count`는 엄격한 승격을 막기 위해
+`EXECUTED_OPERATOR_LIMITED` 행도 함께 보존했다. 그래서 그 숫자만 보면 계산되지 않은
+사건이 29건처럼 보일 수 있다. 현재 union의 실제 수치 회계는 다음과 같다.
+
+| 원장 필드 | 값 | 뜻 |
+|---|---:|---|
+| `numerically_executed_case_count` | 44 | 방출부터 조건부 피해 원자까지 숫자가 생성된 case |
+| `not_numerically_executed_case_count` | 0 | `UNCOMPUTED` 또는 `FAILED`로 실제 수치가 없는 case |
+| `qualified_evidence_withheld_case_count` | 29 | 계산은 되었지만 operator-limited라 qualified 근거로 보류한 case |
+| 기존 `uncomputed_case_count` | 29 | 위 제한 행을 엄격한 범위 장부에 보존한 호환 필드 |
+
+따라서 현재 결과는 “44개 case의 조건부 chain 계산 완료, 29개 case의 적격 근거 승격 보류,
+실제 수치 미계산 0개”로 읽어야 한다. 이 구분은 시설 전체 QRA gate를 열지 않으며,
+문헌 빈도나 독립 물리검증을 새로 만들지도 않는다.
+
 ## 재현 명령
 
 ```powershell

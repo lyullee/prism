@@ -311,6 +311,19 @@ def build_facility_evidence_request(
                 "generated_event_count": row.get("generated_event_count", 0),
                 "executed_case_count": row.get("executed_case_count", 0),
                 "uncomputed_case_count": row.get("uncomputed_case_count", 0),
+                "not_numerically_executed_case_count": row.get(
+                    "not_numerically_executed_case_count",
+                    row.get("failed_case_count", 0),
+                ),
+                "qualified_evidence_withheld_case_count": row.get(
+                    "qualified_evidence_withheld_case_count",
+                    int(row.get("operator_limited_case_count", 0) or 0)
+                    + int(row.get("domain_incomplete_case_count", 0) or 0),
+                ),
+                "numerically_executed_case_count": row.get(
+                    "numerically_executed_case_count",
+                    row.get("conditional_executed_case_count", row.get("executed_case_count", 0)),
+                ),
                 "strict_uncomputed_case_count": strict_uncomputed_case_count,
                 "conditional_executed_case_count": row.get(
                     "conditional_executed_case_count", row.get("executed_case_count", 0)
@@ -382,6 +395,15 @@ def build_facility_evidence_request(
                 "strict_uncomputed_case_count": coverage.get(
                     "strict_uncomputed_case_count", 0
                 ),
+                "not_numerically_executed_case_count": coverage.get(
+                    "not_numerically_executed_case_count", 0
+                ),
+                "qualified_evidence_withheld_case_count": coverage.get(
+                    "qualified_evidence_withheld_case_count", 0
+                ),
+                "numerically_executed_case_count": coverage.get(
+                    "numerically_executed_case_count", 0
+                ),
                 "operator_limited_case_count": coverage.get(
                     "operator_limited_case_count", 0
                 ),
@@ -441,6 +463,15 @@ def build_facility_evidence_request(
             ),
             "conditional_uncomputed_case_count": ledger.get(
                 "conditional_uncomputed_case_count", 0
+            ),
+            "not_numerically_executed_case_count": ledger.get(
+                "not_numerically_executed_case_count", 0
+            ),
+            "qualified_evidence_withheld_case_count": ledger.get(
+                "qualified_evidence_withheld_case_count", 0
+            ),
+            "numerically_executed_case_count": ledger.get(
+                "numerically_executed_case_count", 0
             ),
             "risk_atom_count": len(ledger.get("risk_atoms", ())) if isinstance(ledger.get("risk_atoms"), Sequence) else 0,
             "facility_total_risk_available": ledger.get("facility_total_risk_available", False),

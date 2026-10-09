@@ -59,6 +59,9 @@ def test_scope_matrix_marks_generated_and_missing_accident_families_explicitly()
     assert rows["vessel_hole"]["conditional_executed_case_count"] == 1
     assert rows["vessel_hole"]["generated_event_count"] == 5
     assert rows["vessel_hole"]["operator_limited_case_count"] == 1
+    assert rows["vessel_hole"]["numerically_executed_case_count"] == 1
+    assert rows["vessel_hole"]["not_numerically_executed_case_count"] == 4
+    assert rows["vessel_hole"]["qualified_evidence_withheld_case_count"] == 1
     assert rows["pipe_hole"]["status"] == "PARTIAL"
     assert rows["pipe_hole"]["generated_event_count"] == 5
     assert rows["pipe_hole"]["uncomputed_branch_count"] == 5

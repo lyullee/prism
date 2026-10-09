@@ -98,7 +98,7 @@
       "source": {
         "label": "facility assessment",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "sha256": "522bd92b66a37cc68ed8ec4d2d3fb60917c43cb396a6a39b72ad38b777ea88ab",
+        "sha256": "226b2fbee3370d5a2bb12e28dccbfaa88ba0106d457292edb7c5f6990c60126c",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,

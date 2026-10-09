@@ -265,6 +265,16 @@ def build_accident_scope_matrix(
             "domain_incomplete_case_count": sum(case.get("status") == "EXECUTED_DOMAIN_INCOMPLETE" for case in family_cases),
             "failed_case_count": sum(case.get("status") == "FAILED" for case in family_cases),
             "uncomputed_case_count": sum(case.get("status") in _PARTIAL_STATUSES for case in family_cases),
+            "not_numerically_executed_case_count": sum(
+                case.get("status") in {"UNCOMPUTED", "FAILED"} for case in family_cases
+            ),
+            "qualified_evidence_withheld_case_count": sum(
+                case.get("status") in {"EXECUTED_OPERATOR_LIMITED", "EXECUTED_DOMAIN_INCOMPLETE"}
+                for case in family_cases
+            ),
+            "numerically_executed_case_count": sum(
+                str(case.get("status", "")).startswith("EXECUTED") for case in family_cases
+            ),
             "uncomputed_reasons": sorted({str(case.get("reason")) for case in family_cases if case.get("status") != "EXECUTED" and case.get("reason")}),
             "frequency_rows_are_not_additive_across_families": True,
         })

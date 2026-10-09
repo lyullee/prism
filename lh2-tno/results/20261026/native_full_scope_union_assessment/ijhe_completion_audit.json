@@ -2881,8 +2881,12 @@
             "EXECUTED_OPERATOR_LIMITED": 29
           },
           "operator_limited_case_count": 29,
+          "domain_incomplete_case_count": 0,
           "explicit_uncomputed_status_count": 0,
           "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 29,
+          "numerically_executed_case_count": 44,
           "observed_component_count": 9,
           "expected_component_count": 10,
           "component_status_counts": {
@@ -2907,6 +2911,9 @@
               "operator_limited_case_count": 0,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 0,
+              "numerically_executed_case_count": 3,
               "risk_atom_count": 12,
               "case_status_counts": {
                 "EXECUTED": 3
@@ -2933,6 +2940,9 @@
               "operator_limited_case_count": 0,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 0,
+              "numerically_executed_case_count": 10,
               "risk_atom_count": 40,
               "case_status_counts": {
                 "EXECUTED": 10
@@ -2959,6 +2969,9 @@
               "operator_limited_case_count": 5,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 5,
+              "numerically_executed_case_count": 5,
               "risk_atom_count": 20,
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
@@ -2987,6 +3000,9 @@
               "operator_limited_case_count": 2,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 2,
+              "numerically_executed_case_count": 2,
               "risk_atom_count": 8,
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 2
@@ -3014,6 +3030,9 @@
               "operator_limited_case_count": 0,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 0,
+              "numerically_executed_case_count": 1,
               "risk_atom_count": 4,
               "case_status_counts": {
                 "EXECUTED": 1
@@ -3034,6 +3053,9 @@
               "operator_limited_case_count": 0,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 0,
+              "numerically_executed_case_count": 0,
               "risk_atom_count": 0,
               "case_status_counts": {},
               "strict_uncomputed_status_counts": {},
@@ -3058,6 +3080,9 @@
               "operator_limited_case_count": 2,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 2,
+              "numerically_executed_case_count": 3,
               "risk_atom_count": 12,
               "case_status_counts": {
                 "EXECUTED": 1,
@@ -3090,6 +3115,9 @@
               "operator_limited_case_count": 5,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 5,
+              "numerically_executed_case_count": 5,
               "risk_atom_count": 20,
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
@@ -3121,6 +3149,9 @@
               "operator_limited_case_count": 5,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 5,
+              "numerically_executed_case_count": 5,
               "risk_atom_count": 20,
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 5
@@ -3152,6 +3183,9 @@
               "operator_limited_case_count": 10,
               "domain_incomplete_case_count": 0,
               "failed_case_count": 0,
+              "not_numerically_executed_case_count": 0,
+              "qualified_evidence_withheld_case_count": 10,
+              "numerically_executed_case_count": 10,
               "risk_atom_count": 40,
               "case_status_counts": {
                 "EXECUTED_OPERATOR_LIMITED": 10

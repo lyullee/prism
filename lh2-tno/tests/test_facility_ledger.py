@@ -104,6 +104,9 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["timing"]["case_p95_ms"] == pytest.approx(5.0)
     assert result["timing"]["campaign_elapsed_ms"] == pytest.approx(20.0)
     assert result["timing"]["campaign_elapsed_ms_p95"] == pytest.approx(10.0)
+    assert result["not_numerically_executed_case_count"] == 0
+    assert result["qualified_evidence_withheld_case_count"] == 0
+    assert result["numerically_executed_case_count"] == 2
     assert result["risk_atoms_digest"]
     assert result["component_contributions"]["tank-01"]["annual_ir_low_high"]["receptor-a"] == pytest.approx(
         [0.0007, 0.0008]
@@ -285,6 +288,9 @@ def test_facility_ledger_exposes_component_case_accounting_and_gate_categories()
     assert coverage["conditional_uncomputed_case_count"] == 0
     assert coverage["strict_uncomputed_case_count"] == 1
     assert coverage["operator_limited_case_count"] == 1
+    assert coverage["not_numerically_executed_case_count"] == 0
+    assert coverage["qualified_evidence_withheld_case_count"] == 1
+    assert coverage["numerically_executed_case_count"] == 1
     assert coverage["strict_gate_categories"] == [
         "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
     ]

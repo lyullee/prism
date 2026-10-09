@@ -1086,6 +1086,18 @@ def merge_facility_campaign_results(
         count for status, count in case_status_counts.items()
         if "FAILED" in status
     )
+    domain_incomplete_case_count = sum(
+        count for status, count in case_status_counts.items()
+        if "DOMAIN_INCOMPLETE" in status
+    )
+    # Keep numerical execution separate from qualification evidence.  An
+    # operator-limited or domain-incomplete row has a computed diagnostic
+    # result, but its evidence is withheld from qualified-facility promotion.
+    not_numerically_executed_case_count = explicit_uncomputed_status_count + failed_case_count
+    qualified_evidence_withheld_case_count = (
+        operator_limited_case_count + domain_incomplete_case_count
+    )
+    numerically_executed_case_count = conditional_executed_case_count
     # Keep the same case identity and fail-closed semantics at equipment
     # level.  This is the machine-readable answer to "which equipment was
     # actually joined to the facility chain?" and prevents a facility total
@@ -1149,6 +1161,14 @@ def merge_facility_campaign_results(
             count for status, count in status_counts.items()
             if "FAILED" in status
         )
+        component_not_numerically_executed_count = sum(
+            count for status, count in status_counts.items()
+            if status in {"UNCOMPUTED", "FAILED"}
+        )
+        component_numerically_executed_count = component_conditional_executed_case_count
+        component_qualified_evidence_withheld_count = (
+            component_operator_limited_count + component_domain_incomplete_count
+        )
         component_status = component_statuses.get(
             component_id,
             "MISSING_COVERAGE_LEDGER" if component_id in expected_components else "UNKNOWN_COMPONENT",
@@ -1166,6 +1186,9 @@ def merge_facility_campaign_results(
             "operator_limited_case_count": component_operator_limited_count,
             "domain_incomplete_case_count": component_domain_incomplete_count,
             "failed_case_count": component_failed_count,
+            "not_numerically_executed_case_count": component_not_numerically_executed_count,
+            "qualified_evidence_withheld_case_count": component_qualified_evidence_withheld_count,
+            "numerically_executed_case_count": component_numerically_executed_count,
             "risk_atom_count": len(component_atoms.get(component_id, [])),
             "case_status_counts": dict(sorted(status_counts.items())),
             "strict_uncomputed_status_counts": dict(
@@ -1277,8 +1300,12 @@ def merge_facility_campaign_results(
         "case_status_counts": dict(sorted(case_status_counts.items())),
         "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
         "operator_limited_case_count": operator_limited_case_count,
+        "domain_incomplete_case_count": domain_incomplete_case_count,
         "explicit_uncomputed_status_count": explicit_uncomputed_status_count,
         "failed_case_count": failed_case_count,
+        "not_numerically_executed_case_count": not_numerically_executed_case_count,
+        "qualified_evidence_withheld_case_count": qualified_evidence_withheld_case_count,
+        "numerically_executed_case_count": numerically_executed_case_count,
         "observed_component_count": len(observed_components),
         "expected_component_count": len(expected_components),
         "component_status_counts": {
@@ -1303,6 +1330,9 @@ def merge_facility_campaign_results(
         "conditional_case_count": conditional_case_count,
         "conditional_executed_case_count": conditional_executed_case_count,
         "conditional_uncomputed_case_count": conditional_uncomputed_case_count,
+        "not_numerically_executed_case_count": not_numerically_executed_case_count,
+        "qualified_evidence_withheld_case_count": qualified_evidence_withheld_case_count,
+        "numerically_executed_case_count": numerically_executed_case_count,
         "events": merged_events,
         "annual_conditions": [
             merged_annual_conditions[condition_id]

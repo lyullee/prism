@@ -41,6 +41,9 @@
       "operator_limited_case_count": 5,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 5,
+      "numerically_executed_case_count": 5,
       "strict_blocking_reason": "vessel_hole: PARTIAL",
       "conditional_statuses": [
         "EXECUTED"
@@ -79,6 +82,9 @@
       "operator_limited_case_count": 5,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 5,
+      "numerically_executed_case_count": 15,
       "strict_blocking_reason": "pipe_hole: PARTIAL",
       "conditional_statuses": [
         "EXECUTED",
@@ -114,6 +120,9 @@
       "operator_limited_case_count": 5,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 5,
+      "numerically_executed_case_count": 5,
       "strict_blocking_reason": "valve_hole: PARTIAL",
       "conditional_statuses": [
         "EXECUTED"
@@ -143,6 +152,9 @@
       "operator_limited_case_count": 0,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
       "strict_blocking_reason": null,
       "conditional_statuses": [
         "EXECUTED"
@@ -173,6 +185,9 @@
       "operator_limited_case_count": 2,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 2,
+      "numerically_executed_case_count": 2,
       "strict_blocking_reason": "pump_hole: PARTIAL",
       "conditional_statuses": [
         "EXECUTED"
@@ -202,6 +217,9 @@
       "operator_limited_case_count": 0,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
       "strict_blocking_reason": null,
       "conditional_statuses": [
         "EXECUTED"
@@ -231,6 +249,9 @@
       "operator_limited_case_count": 0,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
       "strict_blocking_reason": null,
       "conditional_statuses": [
         "EXECUTED"
@@ -280,6 +301,9 @@
       "operator_limited_case_count": 17,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 17,
+      "numerically_executed_case_count": 21,
       "strict_blocking_reason": "liquid_two_phase: PARTIAL",
       "conditional_statuses": [
         "EXECUTED"
@@ -331,6 +355,9 @@
       "operator_limited_case_count": 17,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 17,
+      "numerically_executed_case_count": 28,
       "strict_blocking_reason": "inventory_depletion: PARTIAL",
       "conditional_statuses": [
         "EXECUTED",
@@ -362,6 +389,9 @@
       "operator_limited_case_count": 0,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 0,
+      "numerically_executed_case_count": 1,
       "strict_blocking_reason": null,
       "conditional_statuses": [
         "EXECUTED"
@@ -392,6 +422,9 @@
       "operator_limited_case_count": 2,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 2,
+      "numerically_executed_case_count": 2,
       "strict_blocking_reason": "two_sided_rupture: PARTIAL",
       "conditional_statuses": [
         "EXECUTED"
@@ -425,6 +458,9 @@
       "operator_limited_case_count": 10,
       "domain_incomplete_case_count": 0,
       "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 10,
+      "numerically_executed_case_count": 10,
       "strict_blocking_reason": "vertical_handoff: PARTIAL",
       "conditional_statuses": [
         "UNCOMPUTED"

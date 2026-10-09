@@ -132,7 +132,13 @@
         "required_family_count": 12,
         "scope_matrix_complete": false,
         "conditional_chain_complete": true,
-        "strict_partial_or_blocked_family_count": 8
+        "strict_partial_or_blocked_family_count": 8,
+        "scope_not_numerically_executed_case_count": 0,
+        "scope_qualified_evidence_withheld_case_count": 63,
+        "scope_numerically_executed_case_count": 92,
+        "facility_not_numerically_executed_case_count": 0,
+        "facility_qualified_evidence_withheld_case_count": 29,
+        "facility_numerically_executed_case_count": 44
       },
       "blocking_reason": null,
       "interpretation": "조건부 실행 범위는 닫혔지만 operator-limited family를 엄격한 complete facility scope로 승격하지 않는다."

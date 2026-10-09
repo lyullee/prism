@@ -102,6 +102,24 @@ def build_ijhe_objective_coverage_audit(
         if isinstance(uncertainty, Mapping) and isinstance(uncertainty.get("scenarios"), list)
         else 0
     )
+    scope_rows = scope_matrix.get("rows", [])
+    if not isinstance(scope_rows, list):
+        scope_rows = []
+    scope_not_numerically_executed = sum(
+        int(row.get("not_numerically_executed_case_count", 0) or 0)
+        for row in scope_rows
+        if isinstance(row, Mapping)
+    )
+    scope_qualified_evidence_withheld = sum(
+        int(row.get("qualified_evidence_withheld_case_count", 0) or 0)
+        for row in scope_rows
+        if isinstance(row, Mapping)
+    )
+    scope_numerically_executed = sum(
+        int(row.get("numerically_executed_case_count", row.get("conditional_executed_case_count", 0)) or 0)
+        for row in scope_rows
+        if isinstance(row, Mapping)
+    )
 
     rows: list[dict[str, Any]] = []
 
@@ -280,6 +298,18 @@ def build_ijhe_objective_coverage_audit(
             "scope_matrix_complete": scope_matrix.get("matrix_complete"),
             "conditional_chain_complete": scope_matrix.get("conditional_chain_complete"),
             "strict_partial_or_blocked_family_count": len(scope_matrix.get("blocking_reasons", [])) if isinstance(scope_matrix.get("blocking_reasons"), list) else None,
+            "scope_not_numerically_executed_case_count": scope_not_numerically_executed,
+            "scope_qualified_evidence_withheld_case_count": scope_qualified_evidence_withheld,
+            "scope_numerically_executed_case_count": scope_numerically_executed,
+            "facility_not_numerically_executed_case_count": facility_coverage.get(
+                "not_numerically_executed_case_count"
+            ),
+            "facility_qualified_evidence_withheld_case_count": facility_coverage.get(
+                "qualified_evidence_withheld_case_count"
+            ),
+            "facility_numerically_executed_case_count": facility_coverage.get(
+                "numerically_executed_case_count"
+            ),
         },
         blocking_reason=None if scope_ok else "조건부 scope chain이 닫히지 않았다",
         interpretation="조건부 실행 범위는 닫혔지만 operator-limited family를 엄격한 complete facility scope로 승격하지 않는다.",

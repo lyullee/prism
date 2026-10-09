@@ -15,6 +15,15 @@ qualified provider packet·독립 물리검증·엄격한 전체범위·시설 �
 catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 
+이번 원장 보완에서는 `uncomputed_case_count` 하나만 보고 실제 상태를 판단하지 않도록
+세 숫자를 따로 기록합니다. 현재 union은 44개 case를 수치상 실행했고
+`not_numerically_executed_case_count=0`입니다. 그중 29개는 계산 결과는 있으나
+`EXECUTED_OPERATOR_LIMITED`라 qualified evidence로 승격하지 않은
+`qualified_evidence_withheld_case_count`입니다. 따라서 예전의 엄격한
+`uncomputed_case_count=29`는 실제 미계산 29건이라는 뜻이 아니라 제한 증거 행을
+보존한 숫자이며, 실제 미계산과 증거 제한을 각각 시설 원장·사고군·설비별로 확인할 수
+있습니다.
+
 union 빈도 민감도는 5개 시나리오로 확장했습니다. 설비별 공유 분위수 3개와
 사건별 독립 p05/p95 2개를 같은 저장 risk atom에 적용하며, 공개 분위수가 없는
 수직 handoff·재고 소진 9개 진단 사건은 `fixed` 선언 빈도를 유지합니다. 물리를

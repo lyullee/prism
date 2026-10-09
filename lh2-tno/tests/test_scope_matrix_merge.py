@@ -33,6 +33,9 @@ def test_scope_matrix_merge_preserves_partial_family_and_counts_events():
     assert rows["pipe_hole"]["generated_event_count"] == 3
     assert rows["pipe_hole"]["uncomputed_case_count"] == 1
     assert rows["pipe_hole"]["strict_uncomputed_case_count"] == 1
+    assert rows["pipe_hole"]["not_numerically_executed_case_count"] == 0
+    assert rows["pipe_hole"]["qualified_evidence_withheld_case_count"] == 0
+    assert rows["pipe_hole"]["numerically_executed_case_count"] == 3
     assert rows["pipe_hole"]["domain_incomplete_case_count"] == 0
     assert rows["pipe_hole"]["strict_blocking_reason"] == "pipe_hole: PARTIAL"
     assert rows["vertical_handoff"]["status"] == "PARTIAL"
@@ -64,6 +67,9 @@ def test_scope_matrix_merge_does_not_underreport_legacy_operator_limited_rows():
     row = merged["rows"][0]
     assert row["uncomputed_case_count"] == 5
     assert row["strict_uncomputed_case_count"] == 25
+    assert row["not_numerically_executed_case_count"] == 0
+    assert row["qualified_evidence_withheld_case_count"] == 25
+    assert row["numerically_executed_case_count"] == 75
 
 
 def test_scope_matrix_merge_preserves_not_applicable_family_and_ignores_it_in_blocking():
@@ -149,4 +155,7 @@ def test_scope_matrix_merge_preserves_strict_status_breakdown():
     assert row["fully_validated_case_count"] == 1
     assert row["operator_limited_case_count"] == 1
     assert row["domain_incomplete_case_count"] == 1
+    assert row["not_numerically_executed_case_count"] == 0
+    assert row["qualified_evidence_withheld_case_count"] == 2
+    assert row["numerically_executed_case_count"] == 3
     assert row["strict_blocking_reason"] == "liquid_two_phase: PARTIAL"

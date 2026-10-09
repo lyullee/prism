@@ -95,6 +95,33 @@ def _conditional_executed_case_count(row: Mapping[str, Any]) -> int:
     )
 
 
+def _not_numerically_executed_case_count(row: Mapping[str, Any]) -> int:
+    """Return actual missing numerical cases without double-counting strict rows.
+
+    Older scope rows used ``uncomputed_case_count`` for both genuine missing
+    cases and duplicate strict evidence rows.  When a row reports a case
+    count and an executed count, the residual case count is authoritative;
+    otherwise fall back to the old status breakdown.
+    """
+    if row.get("not_numerically_executed_case_count") is not None:
+        return max(0, int(row.get("not_numerically_executed_case_count", 0) or 0))
+    failed = max(0, int(row.get("failed_case_count", 0) or 0))
+    case_count = row.get("case_count")
+    executed = row.get("executed_case_count")
+    if case_count is not None and executed is not None:
+        residual = max(
+            0,
+            int(case_count or 0) - int(executed or 0),
+        )
+        return max(failed, residual)
+    return max(
+        0,
+        int(row.get("uncomputed_case_count", 0) or 0)
+        - int(row.get("operator_limited_case_count", 0) or 0)
+        - int(row.get("domain_incomplete_case_count", 0) or 0),
+    )
+
+
 def merge_scope_matrices(
     matrices: Sequence[Mapping[str, Any]],
     *,
@@ -162,6 +189,31 @@ def merge_scope_matrices(
             int(row.get("domain_incomplete_case_count", 0) or 0) for row in source_rows
         )
         failed_count = sum(int(row.get("failed_case_count", 0) or 0) for row in source_rows)
+        not_numerically_executed_count = sum(
+            _not_numerically_executed_case_count(row)
+            for row in source_rows
+        )
+        evidence_withheld_count = sum(
+            int(
+                row.get(
+                    "qualified_evidence_withheld_case_count",
+                    int(row.get("operator_limited_case_count", 0) or 0)
+                    + int(row.get("domain_incomplete_case_count", 0) or 0),
+                )
+                or 0
+            )
+            for row in source_rows
+        )
+        numerically_executed_count = sum(
+            int(
+                row.get(
+                    "numerically_executed_case_count",
+                    _conditional_executed_case_count(row),
+                )
+                or 0
+            )
+            for row in source_rows
+        )
         frequency = sum(
             float(row.get("generated_initiation_frequency_per_year", 0.0) or 0.0)
             for row in source_rows
@@ -187,6 +239,9 @@ def merge_scope_matrices(
             "operator_limited_case_count": operator_limited_count,
             "domain_incomplete_case_count": domain_incomplete_count,
             "failed_case_count": failed_count,
+            "not_numerically_executed_case_count": not_numerically_executed_count,
+            "qualified_evidence_withheld_case_count": evidence_withheld_count,
+            "numerically_executed_case_count": numerically_executed_count,
             "strict_blocking_reason": (
                 None if status in {"EXECUTED", "NOT_APPLICABLE"} else f"{family}: {status}"
             ),
