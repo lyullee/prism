@@ -1350,6 +1350,7 @@ class FacilityRealtimeConsequenceMonitor:
                     "component_id": component_id,
                     "stream_id": frame.stream_id,
                     "source_time_s": float(frame.source_time_s),
+                    "arrival_time_s": float(frame.arrival_time_s),
                     "frame_digest": result.get("telemetry_boundary", {}).get("frame_digest"),
                     "mapping_digest": result.get("telemetry_boundary", {}).get("mapping_digest"),
                     "equipment_release_path": result.get(
@@ -1379,6 +1380,52 @@ class FacilityRealtimeConsequenceMonitor:
         accepted = [entry for entry in components.values() if entry["status"] == "ACCEPTED"]
         rejected = [entry for entry in components.values() if entry["status"] != "ACCEPTED"]
         batch_status = "ACCEPTED" if not rejected and not unknown_ids else "REJECTED"
+        accepted_time_rows = [
+            entry
+            for entry in accepted
+            if isinstance(entry.get("source_time_s"), (int, float))
+            and not isinstance(entry.get("source_time_s"), bool)
+            and isinstance(entry.get("arrival_time_s"), (int, float))
+            and not isinstance(entry.get("arrival_time_s"), bool)
+        ]
+        if not accepted_time_rows:
+            facility_time_window = {
+                "status": "WITHHELD_NO_ACCEPTED_COMPONENT_TIMES",
+                "accepted_component_count": 0,
+                "source_time_min_s": None,
+                "source_time_max_s": None,
+                "source_time_span_s": None,
+                "arrival_time_min_s": None,
+                "arrival_time_max_s": None,
+                "arrival_time_span_s": None,
+                "coherence_asserted": False,
+                "coherence_policy": (
+                    "component timestamps are reported only; PRISM does not infer, resample, "
+                    "or synchronize missing times"
+                ),
+            }
+        else:
+            source_times = [float(entry["source_time_s"]) for entry in accepted_time_rows]
+            arrival_times = [float(entry["arrival_time_s"]) for entry in accepted_time_rows]
+            facility_time_window = {
+                "status": (
+                    "MEASURED_COMPLETE_COMPONENT_WINDOW"
+                    if batch_status == "ACCEPTED" and len(accepted_time_rows) == len(component_ids)
+                    else "MEASURED_PARTIAL_COMPONENT_WINDOW"
+                ),
+                "accepted_component_count": len(accepted_time_rows),
+                "source_time_min_s": min(source_times),
+                "source_time_max_s": max(source_times),
+                "source_time_span_s": max(source_times) - min(source_times),
+                "arrival_time_min_s": min(arrival_times),
+                "arrival_time_max_s": max(arrival_times),
+                "arrival_time_span_s": max(arrival_times) - min(arrival_times),
+                "coherence_asserted": False,
+                "coherence_policy": (
+                    "component timestamps are reported only; PRISM does not infer, resample, "
+                    "or synchronize missing times"
+                ),
+            }
         deadline_misses = sum(
             entry["result"]["realtime"]["deadline_status"] == "MISSED"
             for entry in accepted
@@ -1550,6 +1597,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "fresh_physics_count": fresh_count,
                 "cache_hit_count": cache_count,
                 "deadline_miss_count": deadline_misses,
+                "facility_time_window": facility_time_window,
                 "provider_release_resolved_component_count": release_resolved_count,
                 "equipment_release_path_component_count": release_path_available_count,
                 "equipment_release_path_withheld_component_count": len(accepted)

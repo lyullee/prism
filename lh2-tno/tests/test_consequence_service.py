@@ -336,6 +336,53 @@ def test_facility_realtime_monitor_accepts_exact_component_rows(tmp_path):
     assert result['accepted_component_count'] == 2
     assert result['components']['storage-tank-01']['frame_digest']
     assert result['components']['transfer-pump-01']['mapping_digest']
+    window = result['aggregate']['facility_time_window']
+    assert window['status'] == 'MEASURED_COMPLETE_COMPONENT_WINDOW'
+    assert window['source_time_span_s'] == pytest.approx(0.0)
+    assert window['arrival_time_span_s'] == pytest.approx(0.0)
+    assert window['coherence_asserted'] is False
+
+
+def test_facility_realtime_monitor_reports_measured_async_component_window(tmp_path):
+    first, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    second, _ = _facility_binding(tmp_path, 'transfer-pump-01')
+    facility = FacilityRealtimeConsequenceMonitor({
+        'storage-tank-01': first, 'transfer-pump-01': second,
+    })
+    result = facility.update_from_rows(
+        {
+            'storage-tank-01': {'PT': 600000.0, 'TT': 20.893},
+            'transfer-pump-01': {'PT': 610000.0, 'TT': 21.0},
+        },
+        {
+            'storage-tank-01': {
+                'stream_id': 'tank-row-stream', 'sequence': 1,
+                'source_time_s': 100.0, 'arrival_time_s': 100.1,
+                'origin': 'synthetic',
+                'bindings': {
+                    'PT': {'tag': 'P', 'unit': 'Pa', 'quality': 'valid'},
+                    'TT': {'tag': 'T', 'unit': 'K', 'quality': 'valid'},
+                },
+            },
+            'transfer-pump-01': {
+                'stream_id': 'pump-row-stream', 'sequence': 2,
+                'source_time_s': 101.5, 'arrival_time_s': 101.8,
+                'origin': 'synthetic',
+                'bindings': {
+                    'PT': {'tag': 'P', 'unit': 'Pa', 'quality': 'valid'},
+                    'TT': {'tag': 'T', 'unit': 'K', 'quality': 'valid'},
+                },
+            },
+        },
+        now_s=102.0,
+    )
+    assert result['status'] == 'ACCEPTED'
+    window = result['aggregate']['facility_time_window']
+    assert window['status'] == 'MEASURED_COMPLETE_COMPONENT_WINDOW'
+    assert window['source_time_span_s'] == pytest.approx(1.5)
+    assert window['arrival_time_span_s'] == pytest.approx(1.7)
+    assert window['coherence_asserted'] is False
+    assert result['components']['transfer-pump-01']['arrival_time_s'] == pytest.approx(101.8)
 
 
 def test_facility_realtime_monitor_rejects_nonexact_row_component_set(tmp_path):
@@ -403,6 +450,56 @@ def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
     assert path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
     assert result['aggregate']['equipment_release_path_component_count'] == 1
     assert result['aggregate']['equipment_release_path_withheld_component_count'] == 0
+
+
+def test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence(tmp_path):
+    base, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    provider_request = __import__(
+        'lh2_tno.provider_release', fromlist=['build_consequence_request_from_provider_release']
+    ).build_consequence_request_from_provider_release(_release(), _defaults())
+    seen = {}
+
+    def resolver(_template, state):
+        seen['state'] = state
+        return provider_request
+
+    binding = FacilityRealtimeBinding(
+        component_id=base.component_id,
+        template=base.template,
+        monitor=base.monitor,
+        normalizer=base.normalizer,
+        pressure_tag=base.pressure_tag,
+        temperature_tag=base.temperature_tag,
+        release_resolver=resolver,
+    )
+    result = FacilityRealtimeConsequenceMonitor(
+        {'storage-tank-01': binding}, facility_id='generic-outdoor-lh2'
+    ).update_from_rows(
+        {'storage-tank-01': {'PT': 600000.0, 'TT': 20.893}},
+        {
+            'storage-tank-01': {
+                'stream_id': 'tank-row-stream', 'sequence': 11,
+                'source_time_s': 100.0, 'arrival_time_s': 100.1,
+                'origin': 'model_prediction',
+                'bindings': {
+                    'PT': {'tag': 'P', 'unit': 'Pa', 'quality': 'valid'},
+                    'TT': {'tag': 'T', 'unit': 'K', 'quality': 'valid'},
+                },
+            }
+        },
+        now_s=100.2,
+    )
+    assert result['status'] == 'ACCEPTED'
+    assert seen['state']['values']['P']['value_si'] == pytest.approx(600000.0)
+    component = result['components']['storage-tank-01']
+    assert component['result']['data']['provider_event'] == 'provider-accident-01'
+    path = component['equipment_release_path']
+    assert path['status'] == 'AVAILABLE_PROVIDER_RELEASE_PATH'
+    assert path['duration_s'] == pytest.approx(0.2)
+    assert path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
+    assert path['isolation']['status'] == 'WITHHELD_SYNTHETIC_HORIZON'
+    assert result['aggregate']['provider_release_resolved_component_count'] == 1
+    assert result['aggregate']['equipment_release_path_component_count'] == 1
 
 
 def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_fallback(tmp_path):

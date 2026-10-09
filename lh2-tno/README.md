@@ -40,6 +40,7 @@
 실시간 디지털트윈 입력은 `RealtimeConsequenceMonitor.update_from_row()`로 같은 검사를 거쳐 처리할 수 있습니다. 이 메서드는 행→프레임→정규화→provider resolver(선택)→피해 계산의 처리시간과 deadline을 남기며, 명시적 바인딩 없이 값이나 빈도를 추정하지 않습니다.
 
 여러 설비를 동시에 처리할 때는 `FacilityRealtimeConsequenceMonitor.update_from_rows()`가 설비별 행과 시각·스트림·열 바인딩을 받아 하나의 원자적 배치로 넘깁니다. 선언된 설비 집합과 행 집합이 다르면 즉시 거절하며, 부분 배치를 시설 위험 합계로 만들지 않습니다.
+accepted 배치에는 `aggregate.facility_time_window`도 포함됩니다. 이 장부는 설비별 원본 시각과 도착 시각의 최소·최대·범위를 그대로 기록합니다. 서로 다른 시각을 임의로 맞추거나 보간하지 않으므로 `coherence_asserted=false`이며, 허용 시간창 판정은 상위 디지털트윈 운영 정책이 담당합니다.
 
 오류가 있는 행은 구조화된 `REJECTED` 장부로 반환되고, 누락·추가 컴포넌트와 원인 메시지가 남습니다. 시스템은 이 경우 이전 결과나 0 위험을 대신 사용하지 않습니다.
 
@@ -955,6 +956,8 @@ facility_monitor = FacilityRealtimeConsequenceMonitor(
 같은 순위 장부에는 문헌 빈도 `p05`·`published`·`p95`를 적용한 설비별 peak IR과 순위도 선택적으로 기록됩니다. `frequency_sensitivity_rank_stable=true`이면 세 빈도 가정에서 순위가 유지된다는 뜻이고, 물리 피해를 다시 계산하거나 빈도를 학습했다는 뜻이 아닙니다. 범위가 없는 설비는 `null`로 보류됩니다.
 
 각 accepted component에는 `equipment_release_path`도 기록됩니다. provider resolver가 반환한 사고 경계의 지속시간, 종료 basis, available/cumulative/remaining mass와 provider digest를 보존하며, 양단 방출은 shared inventory로 표시합니다. resolver가 없으면 `WITHHELD_PROVIDER_RELEASE_NOT_RESOLVED`로 남고 누출량 0으로 대체하지 않습니다. 자세한 계약은 [실시간 방출 경로 장부 개발기록](docs/PRISM_실시간_방출경로_장부_개발기록_20261010.md)을 참고합니다.
+
+표 형식 입력에서 provider resolver까지 연결하는 최소 경로는 `update_from_rows()` → `frame_from_row()` → `TelemetryNormalizer` → 설비 상태 → provider 방출 경계 → consequence 결과 → 시설 장부입니다. 이 경로는 `tests/test_consequence_service.py`의 `test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence`에서 상태 압력, provider 사고 ID, 방출시간, 종료 상태, 잔여 재고를 함께 검증합니다. 예시 provider가 합성이라면 이 테스트가 통과해도 qualified 실제 설비 packet이나 시설 연간 IR/F/N이 열리지는 않습니다.
 
 provider consequence 결과에 네 가지 옥외 점화 branch(`direct_fire`, `delayed_flash_fire`, `delayed_explosion`, `no_ignition`)가 모두 있으면 `snapshot["aggregate"]["current_weather_ignition_accounting"]`에 설비별 branch 확률과 명시 문헌 빈도로 가중한 현재 조건 branch 발생률을 기록합니다. branch가 빠지거나 빈도 binding이 없으면 해당 행 또는 branch rate를 보류하며, 이를 시설 연간 IR/F-N으로 승격하지 않습니다.
 
