@@ -1621,42 +1621,62 @@ class FacilityRealtimeConsequenceMonitor:
         """
         if not isinstance(rows, Mapping) or not isinstance(row_bindings, Mapping):
             raise TypeError("rows and row_bindings must be component mappings")
-        declared = set(self.bindings)
-        row_components = set(rows)
-        metadata_components = set(row_bindings)
-        if row_components != declared or metadata_components != declared:
-            missing_rows = sorted(declared - row_components)
-            unknown_rows = sorted(row_components - declared)
-            missing_metadata = sorted(declared - metadata_components)
-            unknown_metadata = sorted(metadata_components - declared)
-            raise ValueError(
-                "facility row batch must exactly match declared components; "
-                f"missing_rows={missing_rows}, unknown_rows={unknown_rows}, "
-                f"missing_metadata={missing_metadata}, unknown_metadata={unknown_metadata}"
-            )
-
         from .inspection_timeseries import frame_from_row
 
         frames: dict[str, object] = {}
+        declared = set(self.bindings)
+        row_components = set(rows)
+        metadata_components = set(row_bindings)
+        unknown_rows = sorted(row_components - declared)
+        row_input_errors: dict[str, dict[str, str]] = {}
         for component_id in sorted(declared):
+            if component_id not in rows or component_id not in row_bindings:
+                continue
             metadata = row_bindings[component_id]
-            if not isinstance(metadata, Mapping):
-                raise ValueError(
-                    f"row binding for {component_id} must be a mapping"
+            try:
+                if not isinstance(metadata, Mapping):
+                    raise ValueError("row binding must be a mapping")
+                keys = set(metadata)
+                if keys != _REALTIME_ROW_BINDING_KEYS:
+                    raise ValueError(
+                        "row binding must contain exactly "
+                        f"{sorted(_REALTIME_ROW_BINDING_KEYS)}"
+                    )
+                frames[component_id] = frame_from_row(
+                    rows[component_id],
+                    stream_id=metadata["stream_id"],
+                    sequence=metadata["sequence"],
+                    source_time_s=metadata["source_time_s"],
+                    arrival_time_s=metadata["arrival_time_s"],
+                    origin=metadata["origin"],
+                    bindings=metadata["bindings"],
                 )
-            keys = set(metadata)
-            if keys != _REALTIME_ROW_BINDING_KEYS:
-                raise ValueError(
-                    f"row binding for {component_id} must contain exactly "
-                    f"{sorted(_REALTIME_ROW_BINDING_KEYS)}"
-                )
-            frames[component_id] = frame_from_row(
-                rows[component_id],
-                stream_id=metadata["stream_id"],
-                sequence=metadata["sequence"],
-                source_time_s=metadata["source_time_s"],
-                arrival_time_s=metadata["arrival_time_s"],
-                origin=metadata["origin"],
-                bindings=metadata["bindings"],
-            )
-        return self.update_from_frames(frames, now_s=now_s)
+            except (TypeError, ValueError) as error:
+                row_input_errors[component_id] = {
+                    "error_type": type(error).__name__,
+                    "error": str(error),
+                }
+
+        # Keep the existing facility rejection accounting for extra component
+        # rows, while preserving a structured error for each malformed row.
+        frames.update({component_id: None for component_id in unknown_rows})
+        result = self.update_from_frames(frames, now_s=now_s)
+        for component_id, error in row_input_errors.items():
+            result["components"][component_id] = {
+                "status": "REJECTED",
+                "component_id": component_id,
+                "error_type": "RowInputError",
+                "error": error["error"],
+            }
+        result["row_input_errors"] = row_input_errors
+        result["missing_row_components"] = sorted(declared - row_components)
+        result["missing_row_metadata_components"] = sorted(
+            declared - metadata_components
+        )
+        result["unknown_row_metadata_components"] = sorted(
+            metadata_components - declared
+        )
+        result["row_batch_exact_component_set"] = (
+            row_components == declared and metadata_components == declared
+        )
+        return result

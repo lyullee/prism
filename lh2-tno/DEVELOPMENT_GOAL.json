@@ -1480,6 +1480,7 @@
   "inspection_timeseries_frame_adapter_facility_row_batch_implemented": true,
   "inspection_timeseries_frame_adapter_facility_row_batch": "FacilityRealtimeConsequenceMonitor.update_from_rows() -> exact component set -> update_from_frames()",
   "inspection_timeseries_frame_adapter_facility_row_batch_policy": "All declared components must provide explicit row metadata and source-column bindings; partial or extra component rows are rejected before facility aggregation.",
+  "inspection_timeseries_frame_adapter_facility_row_batch_error_ledger": "REJECTED batch with row_input_errors and missing/unknown component metadata; no stale or zero-risk fallback",
   "inspection_timeseries_frame_adapter_test_status": "explicit valid-row conversion, missing-unit rejection, and state-only snapshot composition passed",
   "pool_footprint_evidence_contract_implemented": true,
   "pool_footprint_evidence_schema": "prism.resolved_pool_footprint.v1",

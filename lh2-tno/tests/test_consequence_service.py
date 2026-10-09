@@ -341,12 +341,41 @@ def test_facility_realtime_monitor_accepts_exact_component_rows(tmp_path):
 def test_facility_realtime_monitor_rejects_nonexact_row_component_set(tmp_path):
     binding, _ = _facility_binding(tmp_path, 'storage-tank-01')
     facility = FacilityRealtimeConsequenceMonitor({'storage-tank-01': binding})
-    with pytest.raises(ValueError, match='exactly match declared components'):
-        facility.update_from_rows(
-            {},
-            {'storage-tank-01': {}},
-            now_s=100.2,
-        )
+    result = facility.update_from_rows(
+        {},
+        {'storage-tank-01': {}},
+        now_s=100.2,
+    )
+    assert result['status'] == 'REJECTED'
+    assert result['row_batch_exact_component_set'] is False
+    assert result['missing_row_components'] == ['storage-tank-01']
+    assert result['components']['storage-tank-01']['error_type'] == 'MissingFrame'
+
+
+def test_facility_realtime_monitor_returns_structured_row_input_error(tmp_path):
+    binding, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    facility = FacilityRealtimeConsequenceMonitor({'storage-tank-01': binding})
+    result = facility.update_from_rows(
+        {'storage-tank-01': {'PT': 600000.0, 'TT': 20.893}},
+        {
+            'storage-tank-01': {
+                'stream_id': 'tank-stream',
+                'sequence': 1,
+                'source_time_s': 100.0,
+                'arrival_time_s': 100.1,
+                'origin': 'synthetic',
+                'bindings': {
+                    'PT': {'tag': 'P', 'quality': 'valid'},
+                    # Missing unit is an input error, never an implicit default.
+                },
+            }
+        },
+        now_s=100.2,
+    )
+    assert result['status'] == 'REJECTED'
+    assert result['row_input_errors']['storage-tank-01']['error_type'] == 'ValueError'
+    assert result['components']['storage-tank-01']['error_type'] == 'RowInputError'
+    assert result['aggregate']['facility_annual_risk_available'] is False
 
 
 def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
