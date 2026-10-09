@@ -1,0 +1,98 @@
+{
+  "schema_version": "prism.vertical_handoff_chain_audit.v1",
+  "status": "VERTICAL_OPERATOR_LIMITED_CHAIN_CLOSED",
+  "facility_id": "generic-lh2-full-scope-example",
+  "event_prefix": "generic-lh2-full-scope-example/vertical-handoff/",
+  "vertical_event_count": 5,
+  "vertical_chain_closed_event_count": 5,
+  "vertical_chain_mismatch_event_ids": [],
+  "vertical_case_count": 10,
+  "vertical_risk_atom_count": 40,
+  "vertical_handoff_state_history_event_count": 5,
+  "event_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "catalog_release_count": 1,
+      "status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "catalog_release_count": 1,
+      "status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "catalog_release_count": 1,
+      "status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "catalog_release_count": 1,
+      "status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "case_count": 2,
+      "risk_atom_count": 8,
+      "catalog_release_count": 1,
+      "status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "blocking_reasons": [],
+      "qualified_provider_packet": false,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false
+    }
+  ],
+  "vertical_conditional_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "vertical_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "base_packet_chain_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+  "all_declared_events_diagnostic_chain_closed": true,
+  "qualified_provider_packet_count": 0,
+  "provider_packet_qualification_claim": false,
+  "frequency_from_provider_packet": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The five vertical-handoff events are joined to their native release catalog by provider result digest and checked through termination/inventory and final-harm atoms. They remain synthetic/operator-limited diagnostics; the result does not create a provider packet, infer frequency, or promote facility IR/F-N."
+}
