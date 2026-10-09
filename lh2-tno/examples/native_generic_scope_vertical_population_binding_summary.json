@@ -1,0 +1,64 @@
+{
+  "schema_version": "prism.native_generic_scope_vertical_population_binding_summary.v1",
+  "source_ledger": "results/20261024/native_generic_scope_vertical_merged_facility_ledger_population_v2.json",
+  "source_ledger_sha256": "9babdad5af3a6c783ce43170d39355daad5b6c9cb28feab4b5e470fc943c15f8",
+  "source_assessment": "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v2.json",
+  "assessment_digest": "113af63095f0bf63641fa2fdf04a2eca04b6f2014461afdda61f454eccef1225",
+  "facility_id": "generic-lh2-full-scope-example",
+  "status": "PARTIAL_FACILITY_SCOPE",
+  "event_count": 29,
+  "case_count": 34,
+  "risk_atom_count": 136,
+  "annual_condition_count": 3,
+  "population_accounting": {
+    "status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+    "annual_condition_count": 3,
+    "referenced_condition_count": 3,
+    "referenced_condition_ids": [
+      "D-3ms-west",
+      "D-4ms-west",
+      "synthetic-generic-worker-west-3ms"
+    ],
+    "missing_condition_ids": [],
+    "missing_population_condition_ids": [],
+    "mismatched_receptor_ids": {},
+    "invalid_population_rows": {},
+    "rebound_diagnostic_condition_ids": [
+      "D-3ms-west",
+      "D-4ms-west"
+    ],
+    "population_row_count": 3,
+    "population_receptor_ids": [
+      "worker-01"
+    ],
+    "population_provenance": {
+      "D-3ms-west": "synthetic annual condition partition; no site weather qualification",
+      "D-4ms-west": "synthetic annual condition partition; no site weather qualification",
+      "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
+    },
+    "receptor_ids": [
+      "worker-01"
+    ]
+  },
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_diagnostics": {
+    "status": "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
+    "endpoint_level_count_low_high": [
+      0,
+      0
+    ],
+    "max_expected_deaths_low_high": [
+      0.0,
+      0.0
+    ],
+    "curve_uses_threshold": "N >= 1 expected deaths"
+  },
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "interpretation": "The facility ledger now carries annual weather/population metadata. The vertical receptor collapse is explicitly diagnostic and therefore is not treated as qualified facility population evidence."
+}

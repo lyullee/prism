@@ -760,13 +760,13 @@
   "ijhe_completion_audit_cli": "scripts/build_ijhe_completion_audit.py",
   "ijhe_completion_audit_schema": "prism.ijhe_completion_audit.v1",
   "ijhe_completion_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v6.json",
+  "ijhe_completion_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v8.json",
   "ijhe_completion_audit_provider_worklist": "results/20261009/provider_evidence/generic_lh2_provider_release_worklist.json",
   "ijhe_completion_audit_check_count": 22,
   "ijhe_completion_audit_blocking_reason_count": 3,
   "ijhe_completion_audit_realtime_monitor_contract_status": "PASS; monitor contract present; one_hz_fresh_physics_demonstrated=false",
   "ijhe_completion_audit_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_test_status": "22 audit checks; full portable suite 541 passed",
+  "ijhe_completion_audit_test_status": "22 audit checks; full portable suite 544 passed",
   "ijhe_completion_audit_uncertainty_wrapper_compatibility": true,
   "ijhe_completion_audit_uncertainty_scenario_count": 5,
   "ijhe_completion_audit_uncertainty_facility_credible_interval": false,
@@ -2945,7 +2945,7 @@
   "equipment_model_binding_latest_accident_release_interface_component_count": 7,
   "equipment_model_binding_latest_diagnostic_adapter_component_count": 7,
   "equipment_model_binding_latest_qualified_provider_packet_component_count": 0,
-  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v6.json",
+  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v8.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 22 checks, 3 blockers; native binding reconciliation PASS",
   "ijhe_completion_audit_latest_blocking_reasons": [
     "only synthetic or screening provider releases are available for this campaign",
@@ -2959,8 +2959,11 @@
   "realtime_population_binding_status": "CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN; explicit receptor population and literature frequency required; facility F/N remains withheld",
   "realtime_population_binding_frequency_learning": false,
   "realtime_population_binding_facility_fn_available": false,
+  "facility_population_accounting_implemented": true,
+  "facility_population_accounting_output": "population_accounting on facility ledger and assessment",
+  "facility_population_accounting_latest_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC; 3 annual conditions, 29 events, 34 cases, 136 risk atoms; vertical many-to-one receptor collapse remains diagnostic",
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": ["CURVE_AVAILABLE", "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY", "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS", "NO_RISK_ATOMS"],
-  "full_portable_test_count_latest": 541
+  "full_portable_test_count_latest": 544
 }

@@ -113,6 +113,10 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     )
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
     assert result["scenario_family_contributions"] == {}
+    assert result["population_accounting"]["status"] == "NOT_RECORDED_IN_INPUT"
+    assert result["conditional_diagnostic_facility_coverage"]["population_status"] == (
+        "NOT_RECORDED_IN_INPUT"
+    )
     assert result["conditional_diagnostic_facility_expected_death_fn_diagnostics"] == {
         "status": "CURVE_AVAILABLE",
         "endpoint_level_count_low_high": [1, 1],
@@ -147,6 +151,58 @@ def test_facility_ledger_explains_zero_harm_fn_curve_without_promoting_zero_to_m
         "endpoint_level_count_low_high": [0, 0],
         "max_expected_deaths_low_high": [0.0, 0.0],
         "curve_uses_threshold": "N >= 1 expected deaths",
+    }
+
+
+def test_facility_ledger_preserves_annual_condition_population_provenance():
+    result = _result(
+        event_id="event-population-provenance",
+        asset_id="asset-population-provenance",
+        component_id="tank-population-provenance",
+        frequency=1e-3,
+    )
+    result["annual_conditions"] = [{
+        "id": "weather-1",
+        "annual_probability": 1.0,
+        "weather": {"wind_speed_m_s": 3.0, "stability": "D"},
+        "population": [
+            {"receptor_id": "receptor-a", "persons": 12.0, "presence_probability": 0.5},
+            {"receptor_id": "receptor-b", "persons": 4.0, "presence_probability": 1.0},
+        ],
+        "provenance": "test synthetic condition",
+    }]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-population-provenance",)
+    )
+
+    assert merged["annual_condition_count"] == 1
+    assert merged["population_accounting"]["status"] == "EXPLICIT_CONDITION_POPULATION"
+    assert merged["population_accounting"]["population_row_count"] == 2
+    assert merged["population_accounting"]["population_provenance"] == {
+        "weather-1": "test synthetic condition"
+    }
+    assert merged["annual_conditions"][0]["population"][0]["persons"] == 12.0
+
+
+def test_facility_ledger_marks_condition_population_receptor_mismatch():
+    result = _result(
+        event_id="event-population-mismatch",
+        asset_id="asset-population-mismatch",
+        component_id="tank-population-mismatch",
+        frequency=1e-3,
+    )
+    result["annual_conditions"] = [{
+        "id": "weather-1",
+        "population": [{"receptor_id": "other-receptor", "persons": 1.0}],
+    }]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-population-mismatch",)
+    )
+
+    assert merged["population_accounting"]["status"] == "RECEPTOR_POPULATION_MISMATCH"
+    assert merged["population_accounting"]["mismatched_receptor_ids"]["weather-1"] == {
+        "expected": ["receptor-a", "receptor-b"],
+        "observed": ["other-receptor"],
     }
 
 

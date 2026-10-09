@@ -102,3 +102,58 @@ def test_campaign_namespace_derives_component_coverage_when_source_omits_ledger(
     assert row["generated_event_count"] == 1
     assert row["executed_case_count"] == 1
     assert row["fully_validated_case_count"] == 1
+
+
+def test_campaign_namespace_rebinds_population_with_explicit_collision_policy():
+    result = {
+        "facility_id": "source-facility",
+        "campaign_digest": "source-digest",
+        "events": [{
+            "id": "source-facility/pipe/G1",
+            "asset_id": "source-asset",
+            "model_component_id": "source-component",
+        }],
+        "cases": [{"event_id": "source-facility/pipe/G1"}],
+        "uncomputed_cases": [],
+        "annual_conditions": [{
+            "id": "weather-1",
+            "population": [
+                {"receptor_id": "near", "persons": 20.0, "presence_probability": 0.5},
+                {"receptor_id": "downwind", "persons": 10.0, "presence_probability": 0.5},
+            ],
+        }],
+        "risk_atoms": [{
+            "event_id": "source-facility/pipe/G1",
+            "asset_id": "source-asset",
+            "receptor_harm_low_high": {
+                "near": [0.2, 0.3],
+                "downwind": [0.4, 0.1],
+            },
+            "expected_deaths_low_high": [0.6, 0.4],
+        }],
+        "coverage": {"by_component": [{"component_id": "source-component"}]},
+    }
+
+    rebound = rebind_campaign_result(
+        result,
+        source_facility_id="source-facility",
+        facility_id="target-facility",
+        namespace="target-facility/rebound",
+        source_asset_id="source-asset",
+        asset_id="target-asset",
+        source_component_id="source-component",
+        component_id="target-component",
+        receptor_map={"near": "worker-01", "downwind": "worker-01"},
+    )
+
+    condition = rebound["annual_conditions"][0]
+    assert condition["population"] == [{
+        "receptor_id": "worker-01",
+        "persons": 30.0,
+        "presence_probability": 0.5,
+        "provenance": "population; many-to-one receptor rebind from downwind",
+    }]
+    assert condition["population_rebind"]["status"] == "MANY_TO_ONE_DIAGNOSTIC"
+    assert rebound["campaign_namespace_rebind"]["population_rebind_condition_ids"] == [
+        "weather-1"
+    ]

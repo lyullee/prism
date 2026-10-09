@@ -120,6 +120,71 @@ def rebind_campaign_result(
                     for endpoint in range(2)
                 ]
 
+    population_rebind_condition_ids: list[str] = []
+    annual_conditions = output.get("annual_conditions")
+    if receptor_mapping and isinstance(annual_conditions, list):
+        for condition in annual_conditions:
+            if not isinstance(condition, dict) or not condition.get("id"):
+                continue
+            population = condition.get("population")
+            if not isinstance(population, list):
+                continue
+            remapped_population: dict[str, dict[str, Any]] = {}
+            source_receptor_ids: list[str] = []
+            collision = False
+            for row in population:
+                if not isinstance(row, dict) or not row.get("receptor_id"):
+                    continue
+                source_id = str(row["receptor_id"])
+                source_receptor_ids.append(source_id)
+                target_id = receptor_mapping.get(source_id, source_id)
+                mapped = dict(row)
+                mapped["receptor_id"] = target_id
+                previous = remapped_population.get(target_id)
+                if previous is None:
+                    remapped_population[target_id] = mapped
+                    continue
+                collision = True
+                previous_persons = previous.get("persons")
+                current_persons = mapped.get("persons")
+                if (
+                    isinstance(previous_persons, (int, float))
+                    and not isinstance(previous_persons, bool)
+                    and isinstance(current_persons, (int, float))
+                    and not isinstance(current_persons, bool)
+                ):
+                    previous["persons"] = float(previous_persons) + float(current_persons)
+                previous_presence = previous.get("presence_probability", 1.0)
+                current_presence = mapped.get("presence_probability", 1.0)
+                if (
+                    isinstance(previous_presence, (int, float))
+                    and not isinstance(previous_presence, bool)
+                    and isinstance(current_presence, (int, float))
+                    and not isinstance(current_presence, bool)
+                ):
+                    previous["presence_probability"] = max(
+                        float(previous_presence), float(current_presence)
+                    )
+                previous["provenance"] = (
+                    f"{previous.get('provenance', 'population')}; "
+                    f"many-to-one receptor rebind from {source_id}"
+                )
+            condition["population"] = list(remapped_population.values())
+            condition["population_rebind"] = {
+                "status": (
+                    "MANY_TO_ONE_DIAGNOSTIC" if collision else "ONE_TO_ONE_DIAGNOSTIC"
+                ),
+                "source_receptor_ids": sorted(set(source_receptor_ids)),
+                "target_receptor_ids": sorted(remapped_population),
+                "policy": (
+                    "persons summed and presence probability conservatively maximized; "
+                    "risk-harm collapse remains diagnostic"
+                    if collision
+                    else "receptor IDs remapped without collision"
+                ),
+            }
+            population_rebind_condition_ids.append(str(condition["id"]))
+
     coverage = output.get("coverage")
     if isinstance(coverage, dict):
         rows = coverage.get("by_component")
@@ -207,6 +272,10 @@ def rebind_campaign_result(
         "receptor_map": receptor_mapping,
         "receptor_collapse_policy": (
             "many_to_one_endpoint_maximum" if receptor_mapping else None
+        ),
+        "population_rebind_condition_ids": population_rebind_condition_ids,
+        "population_rebind_collapse_policy": (
+            "many_to_one_person_sum_presence_max" if population_rebind_condition_ids else None
         ),
         "diagnostic_only": True,
         "physical_validation_claim": False,

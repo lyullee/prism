@@ -143,6 +143,10 @@ def _validate_atoms(
         condition_id = str(atom.get("annual_condition_id", ""))
         branch_id = str(atom.get("release_branch_id", ""))
         ignition_id = str(atom.get("ignition_branch", ""))
+        if not condition_id or not branch_id or not ignition_id:
+            raise FacilityLedgerError(
+                f"risk atom {index} requires annual condition, release branch, and ignition branch IDs"
+            )
         key = (event_id, condition_id, branch_id, ignition_id)
         if key in seen_atom_keys:
             raise FacilityLedgerError(
@@ -210,6 +214,103 @@ def _validate_atoms(
         # aggregation, never during packet or event merging.
         _ = frequency * conditional_weight
     return discovered_receptors, errors
+
+
+def _population_accounting(
+    conditions: Mapping[str, Mapping[str, Any]],
+    *,
+    referenced_condition_ids: Sequence[str],
+    receptor_ids: set[str],
+) -> dict[str, Any]:
+    """Describe whether annual-condition population reached the facility ledger.
+
+    Expected deaths are retained on each risk atom for backward compatibility,
+    but a facility result is easier to audit when the annual-condition weather
+    and population rows are carried alongside those atoms.  This helper is
+    deliberately diagnostic: it never invents population for a missing or
+    mismatched condition.
+    """
+    referenced = sorted({str(condition_id) for condition_id in referenced_condition_ids})
+    missing_condition_ids: list[str] = []
+    missing_population_ids: list[str] = []
+    mismatched_receptor_ids: dict[str, dict[str, list[str]]] = {}
+    invalid_population_rows: dict[str, list[int]] = {}
+    rebound_diagnostic_ids: list[str] = []
+    population_row_count = 0
+    population_receptor_ids: set[str] = set()
+    provenance: dict[str, str] = {}
+
+    for condition_id in referenced:
+        condition = conditions.get(condition_id)
+        if condition is None:
+            missing_condition_ids.append(condition_id)
+            continue
+        if condition.get("provenance"):
+            provenance[condition_id] = str(condition["provenance"])
+        population_rebind = condition.get("population_rebind")
+        if isinstance(population_rebind, Mapping) and population_rebind.get("status") == (
+            "MANY_TO_ONE_DIAGNOSTIC"
+        ):
+            rebound_diagnostic_ids.append(condition_id)
+        population = condition.get("population")
+        if not isinstance(population, Sequence) or isinstance(population, (str, bytes)):
+            missing_population_ids.append(condition_id)
+            continue
+        row_ids: set[str] = set()
+        for row_index, row in enumerate(population):
+            if not isinstance(row, Mapping) or not row.get("receptor_id"):
+                invalid_population_rows.setdefault(condition_id, []).append(row_index)
+                continue
+            receptor_id = str(row["receptor_id"])
+            row_ids.add(receptor_id)
+            population_receptor_ids.add(receptor_id)
+            population_row_count += 1
+            persons = row.get("persons")
+            presence = row.get("presence_probability", 1.0)
+            if (
+                isinstance(persons, bool)
+                or not isinstance(persons, (int, float))
+                or not math.isfinite(float(persons))
+                or float(persons) < 0.0
+                or isinstance(presence, bool)
+                or not isinstance(presence, (int, float))
+                or not math.isfinite(float(presence))
+                or not 0.0 <= float(presence) <= 1.0
+            ):
+                invalid_population_rows.setdefault(condition_id, []).append(row_index)
+        if row_ids != receptor_ids:
+            mismatched_receptor_ids[condition_id] = {
+                "expected": sorted(receptor_ids),
+                "observed": sorted(row_ids),
+            }
+
+    if not referenced:
+        status = "NO_RISK_ATOMS"
+    elif not conditions:
+        status = "NOT_RECORDED_IN_INPUT"
+    elif missing_condition_ids or missing_population_ids or invalid_population_rows:
+        status = "MISSING_CONDITION_POPULATION"
+    elif mismatched_receptor_ids:
+        status = "RECEPTOR_POPULATION_MISMATCH"
+    elif rebound_diagnostic_ids:
+        status = "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC"
+    else:
+        status = "EXPLICIT_CONDITION_POPULATION"
+    return {
+        "status": status,
+        "annual_condition_count": len(conditions),
+        "referenced_condition_count": len(referenced),
+        "referenced_condition_ids": referenced,
+        "missing_condition_ids": missing_condition_ids,
+        "missing_population_condition_ids": missing_population_ids,
+        "mismatched_receptor_ids": mismatched_receptor_ids,
+        "invalid_population_rows": invalid_population_rows,
+        "rebound_diagnostic_condition_ids": rebound_diagnostic_ids,
+        "population_row_count": population_row_count,
+        "population_receptor_ids": sorted(population_receptor_ids),
+        "population_provenance": provenance,
+        "receptor_ids": sorted(receptor_ids),
+    }
 
 
 def _fn_curve(atoms: Sequence[Mapping[str, Any]], endpoint: int) -> dict[str, list[float]]:
@@ -319,6 +420,7 @@ def merge_facility_campaign_results(
     component_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
     source_digests: list[str] = []
     event_accounting: dict[str, dict[str, int]] = {}
+    merged_annual_conditions: dict[str, dict[str, Any]] = {}
 
     for campaign_id, result in campaign_rows:
         events = result.get("events")
@@ -347,6 +449,29 @@ def merge_facility_campaign_results(
                 )
             seen_assets[asset_id] = campaign_id
             merged_events.append(dict(event))
+
+        annual_conditions = result.get("annual_conditions", [])
+        if not isinstance(annual_conditions, Sequence) or isinstance(
+            annual_conditions, (str, bytes)
+        ):
+            raise FacilityLedgerError(
+                f"campaign {campaign_id} has an invalid annual_conditions list"
+            )
+        for condition_index, condition in enumerate(annual_conditions):
+            if not isinstance(condition, Mapping) or not condition.get("id"):
+                raise FacilityLedgerError(
+                    f"campaign {campaign_id} annual_conditions[{condition_index}] must contain an id"
+                )
+            condition_id = str(condition["id"])
+            normalized_condition = dict(condition)
+            previous_condition = merged_annual_conditions.get(condition_id)
+            if previous_condition is not None and canonical_digest(previous_condition) != canonical_digest(
+                normalized_condition
+            ):
+                raise FacilityLedgerError(
+                    f"annual condition {condition_id} has conflicting metadata across campaigns"
+                )
+            merged_annual_conditions[condition_id] = normalized_condition
 
         atoms = result.get("risk_atoms", [])
         if not isinstance(atoms, Sequence) or isinstance(atoms, (str, bytes)):
@@ -486,6 +611,14 @@ def merge_facility_campaign_results(
 
     if receptor_ids is None or not receptor_ids:
         raise FacilityLedgerError("facility campaigns contain no receptor risk atoms")
+    referenced_condition_ids = [
+        str(atom.get("annual_condition_id", "")) for atom in merged_atoms
+    ]
+    population_accounting = _population_accounting(
+        merged_annual_conditions,
+        referenced_condition_ids=referenced_condition_ids,
+        receptor_ids=receptor_ids,
+    )
     expected_components = {str(component_id) for component_id in expected_component_ids}
     observed_components = set(seen_components)
     if not expected_components:
@@ -804,6 +937,9 @@ def merge_facility_campaign_results(
         "conditional_uncomputed_case_count": conditional_uncomputed_case_count,
         "overlapping_case_uncomputed_count": overlapping_case_uncomputed_count,
         "risk_atom_count": len(merged_atoms),
+        "annual_condition_count": population_accounting["annual_condition_count"],
+        "population_status": population_accounting["status"],
+        "population_row_count": population_accounting["population_row_count"],
         "case_status_counts": dict(sorted(case_status_counts.items())),
         "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
         "operator_limited_case_count": operator_limited_case_count,
@@ -834,6 +970,12 @@ def merge_facility_campaign_results(
         "conditional_executed_case_count": conditional_executed_case_count,
         "conditional_uncomputed_case_count": conditional_uncomputed_case_count,
         "events": merged_events,
+        "annual_conditions": [
+            merged_annual_conditions[condition_id]
+            for condition_id in sorted(merged_annual_conditions)
+        ],
+        "annual_condition_count": population_accounting["annual_condition_count"],
+        "population_accounting": population_accounting,
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,
