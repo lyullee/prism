@@ -2919,5 +2919,10 @@
   "native_generic_scope_vertical_merged_frequency_scenarios_record": "examples/native_lh2_generic_vertical_frequency_scenarios.json",
   "native_generic_scope_vertical_merged_frequency_scenarios_builder": "scripts/build_merged_frequency_scenarios.py",
   "native_generic_scope_vertical_merged_frequency_uncertainty_record": "results/20261023/native_generic_scope_vertical_merged_frequency_uncertainty_v1.json",
-  "native_generic_scope_vertical_merged_frequency_uncertainty_status": "5 literature reweighting scenarios cover all 29 merged events; vertical handoff fixed at declared diagnostic rates; no fresh physics or facility credible interval"
+  "native_generic_scope_vertical_merged_frequency_uncertainty_status": "5 literature reweighting scenarios cover all 29 merged events; vertical handoff fixed at declared diagnostic rates; no fresh physics or facility credible interval",
+  "native_generic_scope_vertical_merged_facility_assessment_record": "results/20261023/native_generic_scope_vertical_merged_facility_assessment_v1.json",
+  "native_generic_scope_vertical_merged_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; wrapper reconnected 5 frequency scenarios and 34 conditional cases; facility total and qualified QRA remain withheld",
+  "native_generic_scope_vertical_merged_facility_assessment_conditional_risk_available": true,
+  "native_generic_scope_vertical_merged_facility_assessment_frequency_scenario_count": 5,
+  "native_generic_scope_vertical_merged_facility_assessment_fresh_physics_executed": false
 }
