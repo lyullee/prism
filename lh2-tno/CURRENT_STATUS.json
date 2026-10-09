@@ -55,7 +55,7 @@
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "realtime_monitor_deadline_test_scope": "Synthetic Pipeline contract tests cover MET/MISSED deadline ledgers; no 1 Hz fresh-physics claim is made.",
-  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m. The refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED; bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented. Conditional diagnostic facility IR/F-N is now exposed from the 96 evaluated risk atoms, while qualified facility IR/F-N remains withheld until failed/limited physics, actual geometry, and physical validation are resolved. Separate namespaced two-sided rupture diagnostic adds 2 events/16 risk atoms; conditional facility IR/F-N is nonzero for the mapped near-worker endpoint, while two-sided cross-endpoint interaction remains operator-limited. A separate namespaced inventory-depletion campaign is now merged as inventory-depletion-pipe-01 without double-counting the generic transfer-line: 5 events, 10 executed cases, 0 uncomputed cases and 40 zero-harm diagnostic risk atoms; the facility assessment now covers 36 events, 50 cases and 160 atoms across 10 components.",
+  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m. The refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED; bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented. Conditional diagnostic facility IR/F-N is now exposed from the 96 evaluated risk atoms, while qualified facility IR/F-N remains withheld until failed/limited physics, actual geometry, and physical validation are resolved. Separate namespaced two-sided rupture diagnostic adds 2 events/16 risk atoms; conditional facility IR/F-N is nonzero for the mapped near-worker endpoint, while two-sided cross-endpoint interaction remains operator-limited. A separate namespaced inventory-depletion campaign is now merged as inventory-depletion-pipe-01 without double-counting the generic transfer-line: 5 events, 10 executed cases, 0 uncomputed cases and 40 zero-harm diagnostic risk atoms; the facility assessment now covers 36 events, 50 cases and 160 atoms across 10 components. A separate isolation-success/failure campaign is now namespaced as isolation-diagnostic-pipe-01 and merged without replacing the generic transfer-line: 5 events, 20 executed branch/weather cases and 80 risk atoms; ten cases carry reviewed_isolation_success at 0.25 s and ten retain synthetic failure horizon.",
   "unsupported": [
     "DDT_detonation",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
@@ -2122,8 +2122,8 @@
   "native_lh2dt_packet_campaign_facility_assessment_physical_validation_claim": false,
   "native_lh2dt_packet_campaign_facility_assessment_frequency_inference": false,
   "native_lh2dt_packet_campaign_facility_assessment_provider_packet_promoted": false,
-  "ijhe_completion_audit_latest_facility_assessment_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_facility_assessment.json",
-  "ijhe_completion_audit_latest_facility_assessment_status": "INCOMPLETE_EVIDENCE; 27 checks and 3 blockers; merged 36 events/50 cases/160 atoms including inventory depletion; conditional IR/F-N available, qualified total withheld",
+  "ijhe_completion_audit_latest_facility_assessment_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_facility_assessment.json",
+  "ijhe_completion_audit_latest_facility_assessment_status": "INCOMPLETE_EVIDENCE; 27 checks and 3 blockers; merged 41 events/70 cases/240 atoms including isolation success/failure and inventory depletion; conditional IR/F-N available, qualified total withheld",
   "vertical_handoff_facility_merge_implemented": true,
   "vertical_handoff_facility_merge_module": "src/lh2_tno/vertical_handoff_campaign.py",
   "vertical_handoff_facility_merge_script": "scripts/rebind_vertical_handoff_campaign.py",
@@ -2193,8 +2193,8 @@
   "scope_matrix_merge_module": "src/lh2_tno/scope_matrix_merge.py",
   "scope_matrix_merge_script": "scripts/merge_scope_matrices.py",
   "scope_matrix_merge_record": "results/20261019/generic_vertical_two_sided_merged_scope_matrix.json",
-  "scope_matrix_merge_status": "INCOMPLETE_DECLARED_SCOPE; 4 disjoint matrices merged by family; inventory depletion is explicitly represented while incomplete families remain partial",
-  "scope_matrix_merge_source_matrix_count": 4,
+  "scope_matrix_merge_status": "INCOMPLETE_DECLARED_SCOPE; 5 disjoint matrices merged by family; isolation success/failure is explicitly represented while incomplete families remain partial",
+  "scope_matrix_merge_source_matrix_count": 5,
   "scope_matrix_merge_required_family_count": 12,
   "scope_matrix_merge_matrix_complete": false,
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_facility_assessment_record": "examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_facility_assessment_summary.json",
@@ -2303,5 +2303,73 @@
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_facility_assessment_scope_blocker_count": 26,
   "campaign_namespace_rebind_coverage_fallback_implemented": true,
-  "campaign_namespace_rebind_coverage_fallback_policy": "If a stand-alone diagnostic omits coverage.by_component, derive one explicit component row from event/case accounting during rebind; no frequency inference or QRA promotion."
+  "campaign_namespace_rebind_coverage_fallback_policy": "If a stand-alone diagnostic omits coverage.by_component, derive one explicit component row from event/case accounting during rebind; no frequency inference or QRA promotion.",
+  "isolation_diagnostic_facility_merge_implemented": true,
+  "isolation_diagnostic_facility_merge_status": "EXECUTED_DIAGNOSTIC_COMPONENT; disjoint provider isolation success/failure campaign merged; facility QRA remains withheld",
+  "isolation_diagnostic_facility_merge_source_record": "results/20261009/equipment_isolation_campaign/campaign_result.json",
+  "isolation_diagnostic_facility_merge_result_record": "results/20261019/isolation_diagnostic_rebound_facility_result.json",
+  "isolation_diagnostic_facility_merge_provenance_record": "results/20261019/isolation_diagnostic_rebound_facility.provenance.json",
+  "isolation_diagnostic_facility_merge_scope_matrix_record": "results/20261019/isolation_diagnostic_scope_matrix_rebound.json",
+  "isolation_diagnostic_facility_merge_event_count": 5,
+  "isolation_diagnostic_facility_merge_case_count": 20,
+  "isolation_diagnostic_facility_merge_executed_case_count": 20,
+  "isolation_diagnostic_facility_merge_uncomputed_case_count": 0,
+  "isolation_diagnostic_facility_merge_risk_atom_count": 80,
+  "isolation_diagnostic_facility_merge_nonzero_risk_atom_count": 0,
+  "isolation_diagnostic_facility_merge_reviewed_success_case_count": 10,
+  "isolation_diagnostic_facility_merge_failure_horizon_case_count": 10,
+  "isolation_diagnostic_facility_merge_close_time_s": 0.25,
+  "isolation_diagnostic_facility_merge_post_close_max_flow_kg_s": 0.0,
+  "isolation_diagnostic_facility_merge_component_id": "isolation-diagnostic-pipe-01",
+  "isolation_diagnostic_facility_merge_receptor_map": {
+    "near_worker": "worker-01",
+    "downwind_worker": "worker-01",
+    "side_worker": "worker-01",
+    "distant_worker": "worker-01"
+  },
+  "isolation_diagnostic_facility_merge_receptor_collapse_policy": "many_to_one_endpoint_maximum",
+  "isolation_diagnostic_facility_merge_declared_frequency_per_year": 6.38e-06,
+  "isolation_diagnostic_facility_merge_diagnostic_only": true,
+  "isolation_diagnostic_facility_merge_physical_validation_claim": false,
+  "isolation_diagnostic_facility_merge_facility_qra_claim": false,
+  "isolation_diagnostic_facility_merge_frequency_inference": false,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_record": "examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json",
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_full_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_facility_assessment.json",
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 240 risk atoms across 11 components; inventory depletion and isolation diagnostics executed; conditional IR/F-N available; qualified facility total withheld",
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_event_count": 41,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_case_count": 70,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_uncomputed_case_count": 37,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_risk_atom_count": 240,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_nonzero_risk_atom_count": 4,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_component_count": 11,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_frequency_scenario_count": 5,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_conditional_ir_low_high": {
+    "worker-01": [
+      1e-07,
+      1e-07
+    ]
+  },
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_conditional_fn": [
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        1e-07
+      ]
+    },
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        1e-07
+      ]
+    }
+  ],
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_facility_total_risk_available": false,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_physical_validation_claim": false,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_frequency_inference": false,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_provider_packet_promoted": false,
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_scope_blocker_count": 27
 }

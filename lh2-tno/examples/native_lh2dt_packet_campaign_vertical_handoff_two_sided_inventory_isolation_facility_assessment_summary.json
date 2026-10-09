@@ -1,0 +1,229 @@
+{
+  "schema_version": "prism.native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.v1",
+  "status": "PARTIAL_FACILITY_SCOPE",
+  "assessment_digest": "5703a4df4a35747789bae6f5c79587aedc1a93fa8b8abce52b484baaaa66c0be",
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_results": [
+    "results/20261019/generic_native_packet_rebound_g1_handoff_result.json",
+    "results/20261019/vertical_handoff_rebound_facility_result.json",
+    "results/20261019/two_sided_rupture_rebound_facility_result.json",
+    "results/20261019/inventory_depletion_rebound_facility_result.json",
+    "results/20261019/isolation_diagnostic_rebound_facility_result.json"
+  ],
+  "facility_ledger_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_facility_ledger.json",
+  "assessment_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_facility_assessment.json",
+  "vertical_handoff_rebind_provenance_record": "results/20261019/vertical_handoff_rebound_facility.provenance.json",
+  "two_sided_rebind_provenance_record": "results/20261019/two_sided_rupture_rebound_facility.provenance.json",
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      1e-07,
+      1e-07
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        1e-07
+      ]
+    },
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        1e-07
+      ]
+    }
+  ],
+  "conditional_diagnostic_facility_coverage": {
+    "event_count": 41,
+    "case_count": 70,
+    "uncomputed_case_count": 37,
+    "overlapping_case_uncomputed_count": 37,
+    "risk_atom_count": 240,
+    "case_status_counts": {
+      "EXECUTED": 14,
+      "EXECUTED_OPERATOR_LIMITED": 22,
+      "UNCOMPUTED": 5
+    },
+    "uncomputed_status_counts": {
+      "EXECUTED_DOMAIN_INCOMPLETE": 1,
+      "EXECUTED_OPERATOR_LIMITED": 26,
+      "UNCOMPUTED": 10
+    },
+    "operator_limited_case_count": 22,
+    "explicit_uncomputed_status_count": 5,
+    "failed_case_count": 0,
+    "observed_component_count": 11,
+    "expected_component_count": 11,
+    "component_status_counts": {
+      "EXCLUDED": 1,
+      "EXECUTED": 3,
+      "PARTIAL": 8
+    },
+    "required_accident_family_count": 12,
+    "scope_blocker_count": 27
+  },
+  "event_count": 41,
+  "case_count": 70,
+  "uncomputed_case_count": 37,
+  "risk_atom_count": 240,
+  "nonzero_risk_atom_count": 4,
+  "observed_component_count": 11,
+  "expected_component_count": 11,
+  "component_statuses": {
+    "ambient-vaporizer-01": "PARTIAL",
+    "inventory-depletion-pipe-01": "EXECUTED",
+    "isolation-diagnostic-pipe-01": "EXECUTED",
+    "liquid-transfer-line-01": "PARTIAL",
+    "liquid-transfer-pump-01": "PARTIAL",
+    "pressure-relief-vent-01": "EXECUTED",
+    "receiving-boundary-01": "EXCLUDED",
+    "reliquefier-01": "PARTIAL",
+    "storage-tank-01": "PARTIAL",
+    "transfer-valve-01": "PARTIAL",
+    "two-sided-rupture-pipe-01": "PARTIAL",
+    "vertical-handoff-terminal-pipe-01": "PARTIAL"
+  },
+  "required_accident_family_count": 12,
+  "accident_family_statuses": {
+    "vessel_hole": "PARTIAL",
+    "pipe_hole": "PARTIAL",
+    "valve_hole": "PARTIAL",
+    "vent_hole": "EXECUTED",
+    "pump_hole": "PARTIAL",
+    "vaporizer_hole": "EXECUTED",
+    "reliquefier_hole": "EXECUTED",
+    "liquid_two_phase": "PARTIAL",
+    "inventory_depletion": "PARTIAL",
+    "inventory_over_600s": "EXECUTED",
+    "two_sided_rupture": "PARTIAL",
+    "vertical_handoff": "PARTIAL"
+  },
+  "vertical_handoff": {
+    "status": "PARTIAL",
+    "generated_event_count": 5,
+    "executed_case_count": 2,
+    "uncomputed_case_count": 10,
+    "provider_handoff_consumed": true,
+    "source_facility_id": "vertical-vent-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "namespace": "generic-lh2-full-scope-example/vertical-handoff",
+    "asset_id": "vertical-handoff-vent",
+    "component_id": "vertical-handoff-terminal-pipe-01",
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "two_sided_rupture": {
+    "status": "PARTIAL",
+    "generated_event_count": 2,
+    "executed_case_count": 4,
+    "uncomputed_case_count": 6,
+    "source_facility_id": "two-sided-rupture-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "namespace": "generic-lh2-full-scope-example/two-sided-rupture",
+    "asset_id": "two-sided-rupture-pipe",
+    "component_id": "two-sided-rupture-pipe-01",
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "nonzero_risk_atom_count": 4
+  },
+  "frequency_scenario_count": 5,
+  "frequency_scenario_record": "examples/native_lh2_vertical_handoff_frequency_scenarios.json",
+  "facility_credible_interval": false,
+  "fresh_physics_executed": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "frequency_inference": false,
+  "diagnostic_only": true,
+  "interpretation": "The generic native packet, vertical handoff, two-sided rupture, inventory-depletion, and disjoint isolation success/failure campaigns are merged into one diagnostic facility ledger. The isolation campaign adds five pipe events and twenty executed branch/weather cases, including ten provider-confirmed reviewed-isolation-success cases and ten explicitly synthetic isolation-failure-horizon cases. It strengthens release duration and barrier accounting without replacing generic transfer-line scope or promoting synthetic physics to qualified facility QRA.",
+  "merged_scope_matrix_record": "results/20261019/generic_vertical_two_sided_merged_scope_matrix.json",
+  "scope_matrix_count": 1,
+  "inventory_depletion_rebind_provenance_record": "results/20261019/inventory_depletion_rebound_facility.provenance.json",
+  "inventory_depletion": {
+    "status": "EXECUTED",
+    "generated_event_count": 5,
+    "executed_case_count": 10,
+    "uncomputed_case_count": 0,
+    "risk_atom_count": 40,
+    "nonzero_risk_atom_count": 0,
+    "termination_basis": "inventory_depletion",
+    "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory recorded per case",
+    "source_facility_id": "equipment-inventory-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "namespace": "generic-lh2-full-scope-example/inventory-depletion",
+    "asset_id": "inventory-depletion-pipe",
+    "component_id": "inventory-depletion-pipe-01",
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "declared_frequency_per_year": 6.38e-06,
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_inference": false
+  },
+  "isolation_diagnostic_rebind_provenance_record": "results/20261019/isolation_diagnostic_rebound_facility.provenance.json",
+  "isolation_diagnostic": {
+    "status": "EXECUTED_DIAGNOSTIC_COMPONENT",
+    "generated_event_count": 5,
+    "case_count": 20,
+    "executed_case_count": 20,
+    "uncomputed_case_count": 0,
+    "risk_atom_count": 80,
+    "nonzero_risk_atom_count": 0,
+    "branch_counts": {
+      "provider-isolation-success": 10,
+      "provider-isolation-failure": 10
+    },
+    "termination_basis_counts": {
+      "reviewed_isolation_success": 10,
+      "synthetic_diagnostic_horizon": 10
+    },
+    "success_close_time_s": 0.25,
+    "success_post_close_max_flow_kg_s": 0.0,
+    "source_facility_id": "equipment-isolation-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "namespace": "generic-lh2-full-scope-example/isolation-diagnostic",
+    "asset_id": "isolation-diagnostic-pipe",
+    "component_id": "isolation-diagnostic-pipe-01",
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "declared_frequency_per_year": 6.38e-06,
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_inference": false
+  }
+}

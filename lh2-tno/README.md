@@ -985,3 +985,9 @@ G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`�
 
 네 개 범위표의 병합 결과는 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`입니다. family별 상태가 `PARTIAL`이면 시설 전체 위험도를 올리지 않으며, 12개 사고 family 중 빠진 provider history·operator-limited physics·synthetic release는 감사 결과에 남습니다. 독립 진단 결과에 component coverage가 없을 때는 namespace rebind 단계가 event/case 회계에서 한 행을 만들어 설비별 연결 상태를 보존합니다. 이 기능은 회계 보완이며 빈도 추론·물리검증·QRA 승격이 아닙니다.
 
+### 차단 성공·실패와 방출 지속시간 결합
+
+`equipment_isolation_campaign`도 공통 시설 장부에 별도 component로 연결했습니다. `isolation-diagnostic-pipe-01`은 5개 opening bin, 20개 실행 branch/weather case, 80개 risk atom을 보유합니다. 성공 10개는 0.25초 차단 후 유량 0인 `reviewed_isolation_success`, 실패 10개는 0.5초 diagnostic horizon인 `synthetic_diagnostic_horizon`으로 각각 기록됩니다.
+
+최신 다중 campaign 요약은 [`isolation 포함 시설 평가`](examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json)입니다. 전체는 41개 event, 70개 case, 240개 atom, 11개 component이며, 이 결과도 조건부 진단 IR/F-N만 제공하고 시설 전체 위험도는 `false`로 유지합니다. 성공 branch를 실패 branch의 대체값으로 사용하지 않으며, synthetic 종료시계와 실제 차단 신뢰도 부족은 IJHE 감사 blocker로 남습니다.
+

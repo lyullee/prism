@@ -203,3 +203,9 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 
 최신 평가 결과는 36개 event, 50개 case, 37개 미계산 case, 160개 risk atom, 10개 component다. `inventory-depletion-pipe-01`은 coverage 회계 보완 후 `EXECUTED`로 보이지만 전체 시설 상태는 `PARTIAL_FACILITY_SCOPE`다. IJHE 감사는 27개 검사와 3개 blocker를 유지한다. 따라서 이번 추가는 설비 상태→재고 소진 방출→피해 chain의 연결을 강화한 것이며, 전체 시설 QRA가 끝났다는 의미는 아니다.
 
+## 2026-10-19 차단 성공·실패 경로를 시설 장부에 추가
+
+차단 성공과 차단 실패가 같은 사건에서 서로 다른 종료시간을 만드는 문제를 별도 campaign으로 검증했다. `equipment_isolation_campaign`의 다섯 배관 개구를 `isolation-diagnostic-pipe-01`로 rebind하고, 10개 성공 case와 10개 실패 case를 각각 보존했다. 성공은 0.25초 차단 후 유량 0을 provider가 확인한 `reviewed_isolation_success`, 실패는 0.5초 동안 열린 상태를 유지한 `synthetic_diagnostic_horizon`이다.
+
+이 결과를 generic·vertical handoff·two-sided rupture·inventory depletion과 함께 합치면 41개 event, 70개 case, 240개 risk atom, 11개 component가 된다. 빈도는 기존 문헌 pipe rate를 명시적으로 고정하며, 이 추가 campaign에서 빈도를 학습하거나 새로 추정하지 않는다. 실패 horizon과 synthetic 입력은 계속 제한으로 표시되므로 전체 시설 IR/F-N은 보류한다.
+
