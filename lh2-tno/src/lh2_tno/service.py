@@ -288,6 +288,8 @@ class RealtimeFrequencyBinding:
     occupancy_probability: float
     provenance: str
     source_digest: str
+    frequency_p05_per_year: float | None = None
+    frequency_p95_per_year: float | None = None
 
     def __post_init__(self):
         for field in ("event_id", "asset_id", "provenance"):
@@ -313,6 +315,29 @@ class RealtimeFrequencyBinding:
             r"[0-9a-fA-F]{64}", self.source_digest
         ):
             raise ValueError("source_digest must be a 64-character SHA-256 digest")
+        bounds = (self.frequency_p05_per_year, self.frequency_p95_per_year)
+        if (bounds[0] is None) != (bounds[1] is None):
+            raise ValueError(
+                "frequency_p05_per_year and frequency_p95_per_year must be supplied together"
+            )
+        if bounds[0] is not None:
+            for field, value in zip(
+                ("frequency_p05_per_year", "frequency_p95_per_year"), bounds
+            ):
+                if isinstance(value, bool) or not isinstance(value, (int, float)):
+                    raise ValueError(f"{field} must be numeric")
+                if not math.isfinite(float(value)) or float(value) < 0.0:
+                    raise ValueError(
+                        f"{field} must be finite and nonnegative"
+                    )
+            if not (
+                float(bounds[0])
+                <= float(self.initiating_frequency_per_year)
+                <= float(bounds[1])
+            ):
+                raise ValueError(
+                    "frequency bounds must satisfy p05 <= published <= p95"
+                )
 
     @property
     def conditional_weight(self) -> float:
@@ -322,6 +347,15 @@ class RealtimeFrequencyBinding:
             * float(self.release_branch_probability)
             * float(self.occupancy_probability)
         )
+
+    def weighted_frequency(self, frequency_per_year: float | None = None) -> float:
+        """Return one literature frequency after declared condition weights."""
+        value = (
+            self.initiating_frequency_per_year
+            if frequency_per_year is None
+            else frequency_per_year
+        )
+        return float(value) * self.conditional_weight
 
 
 @dataclass(frozen=True)
@@ -422,19 +456,33 @@ def _realtime_current_weather_risk(
             }
         receptor_harm[receptor_id] = [float(harm[0]), float(harm[1])]
 
-    frequency_per_current_weather = (
-        float(frequency.initiating_frequency_per_year) * frequency.conditional_weight
+    def annual_ir_for_frequency(value: float) -> dict[str, list[float]]:
+        weighted_frequency = frequency.weighted_frequency(value)
+        return {
+            receptor_id: [
+                weighted_frequency * harm[0],
+                weighted_frequency * harm[1],
+            ]
+            for receptor_id, harm in sorted(receptor_harm.items())
+        }
+
+    annual_ir = annual_ir_for_frequency(
+        float(frequency.initiating_frequency_per_year)
     )
-    annual_ir = {
-        receptor_id: [
-            frequency_per_current_weather * harm[0],
-            frequency_per_current_weather * harm[1],
-        ]
-        for receptor_id, harm in sorted(receptor_harm.items())
-    }
+    frequency_sensitivity = None
+    if frequency.frequency_p05_per_year is not None:
+        frequency_sensitivity = {
+            "p05": annual_ir_for_frequency(float(frequency.frequency_p05_per_year)),
+            "published": annual_ir,
+            "p95": annual_ir_for_frequency(float(frequency.frequency_p95_per_year)),
+            "source": frequency.provenance,
+            "source_digest": frequency.source_digest,
+            "physics_reexecuted": False,
+        }
     return {
         "status": "AVAILABLE_CURRENT_WEATHER_IR",
         "annual_ir_low_high": annual_ir,
+        "frequency_sensitivity_current_weather_ir_low_high": frequency_sensitivity,
         "risk_atom": {
             "event_id": frequency.event_id,
             "asset_id": frequency.asset_id,
@@ -447,6 +495,8 @@ def _realtime_current_weather_risk(
             "frequency_provenance": frequency.provenance,
             "frequency_source_digest": frequency.source_digest,
             "frequency_is_not_inferred": True,
+            "frequency_p05_per_year": frequency.frequency_p05_per_year,
+            "frequency_p95_per_year": frequency.frequency_p95_per_year,
             "expected_deaths_low_high": None,
         },
         "reason": "reviewed literature frequency was multiplied by provider consequence harm for the current weather frame",
@@ -481,6 +531,7 @@ class FacilityRealtimeConsequenceMonitor:
             raise ValueError("component binding count exceeds max_components")
 
         normalized: dict[str, FacilityRealtimeBinding] = {}
+        frequency_event_owners: dict[str, str] = {}
         for key, binding in bindings.items():
             if not isinstance(key, str) or not key:
                 raise ValueError("component binding keys must be nonempty strings")
@@ -510,6 +561,15 @@ class FacilityRealtimeConsequenceMonitor:
                 raise TypeError(
                     "frequency_binding must be a RealtimeFrequencyBinding"
                 )
+            if binding.frequency_binding is not None:
+                event_id = binding.frequency_binding.event_id
+                previous_owner = frequency_event_owners.get(event_id)
+                if previous_owner is not None and previous_owner != key:
+                    raise ValueError(
+                        "one literature event cannot be bound to multiple realtime components: "
+                        f"{event_id} ({previous_owner}, {key})"
+                    )
+                frequency_event_owners[event_id] = key
             if binding.ambient_pressure_pa is not None:
                 if (isinstance(binding.ambient_pressure_pa, bool)
                         or not isinstance(binding.ambient_pressure_pa, (int, float))
@@ -656,6 +716,32 @@ class FacilityRealtimeConsequenceMonitor:
                 totals = current_weather_ir.setdefault(str(receptor_id), [0.0, 0.0])
                 totals[0] += float(endpoints[0])
                 totals[1] += float(endpoints[1])
+        sensitivity_rows = [
+            row
+            for row in current_weather_risk_rows
+            if isinstance(
+                row.get("frequency_sensitivity_current_weather_ir_low_high"),
+                Mapping,
+            )
+        ]
+        current_weather_frequency_sensitivity: dict[str, dict[str, list[float]]] = {}
+        if len(sensitivity_rows) == len(component_ids):
+            for row in sensitivity_rows:
+                scenarios = row["frequency_sensitivity_current_weather_ir_low_high"]
+                if not isinstance(scenarios, Mapping):
+                    continue
+                for scenario_id, values in scenarios.items():
+                    if not isinstance(values, Mapping):
+                        continue
+                    scenario_totals = current_weather_frequency_sensitivity.setdefault(
+                        str(scenario_id), {}
+                    )
+                    for receptor_id, endpoints in values.items():
+                        if not isinstance(endpoints, (list, tuple)) or len(endpoints) != 2:
+                            continue
+                        totals = scenario_totals.setdefault(str(receptor_id), [0.0, 0.0])
+                        totals[0] += float(endpoints[0])
+                        totals[1] += float(endpoints[1])
         current_weather_risk_available = (
             batch_status == "ACCEPTED"
             and len(accepted) == len(component_ids)
@@ -689,6 +775,18 @@ class FacilityRealtimeConsequenceMonitor:
                 "current_weather_ir_component_count": len(current_weather_risk_rows),
                 "current_weather_ir_withheld_component_count": len(accepted)
                 - len(current_weather_risk_rows),
+                "current_weather_frequency_sensitivity_ir_low_high": (
+                    current_weather_frequency_sensitivity
+                    if current_weather_risk_available
+                    and len(sensitivity_rows) == len(component_ids)
+                    and current_weather_frequency_sensitivity
+                    else None
+                ),
+                "current_weather_frequency_sensitivity_available": bool(
+                    current_weather_risk_available
+                    and len(sensitivity_rows) == len(component_ids)
+                    and current_weather_frequency_sensitivity
+                ),
                 "facility_fn_available": False,
                 "frequency_learning": False,
                 "release_inference": False,

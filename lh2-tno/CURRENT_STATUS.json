@@ -2195,7 +2195,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, and partial-provider precedence accounting; full portable suite 511 passed, 1 skipped",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, and partial-provider precedence accounting; full portable suite 512 passed, 1 skipped",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -2437,8 +2437,8 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 511,
-  "full_portable_test_status": "511 passed, 1 skipped",
+  "full_portable_test_count": 512,
+  "full_portable_test_status": "512 passed, 1 skipped",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -2473,7 +2473,7 @@
   "facility_realtime_monitor_api": "FacilityRealtimeBinding; RealtimeFrequencyBinding; FacilityRealtimeConsequenceMonitor.update_from_frames",
   "facility_realtime_monitor_policy": "Each declared component supplies one frame and its own normalizer, consequence monitor, template, and optional provider release resolver. Missing/unknown/duplicate streams or any component error reject the facility snapshot; accepted component results remain diagnostic, with no stale or zero-risk substitution.",
   "facility_realtime_monitor_risk_policy": "The coordinator records component consequence provenance, cache/fresh-physics mode, and deadlines only. Sensor frequency learning, release inference, annual frequency, IR/F-N, and facility QRA remain disabled.",
-  "facility_realtime_monitor_test_status": "current-weather IR binding, missing-harm withholding, deadline and facility rejection tests; full portable suite 511 passed, 1 skipped",
+  "facility_realtime_monitor_test_status": "current-weather IR binding, p05/p95 sensitivity, duplicate-event guard, missing-harm withholding, deadline and facility rejection tests; full portable suite 512 passed, 1 skipped",
   "facility_realtime_monitor_one_hz_claim": false,
   "facility_realtime_monitor_facility_annual_risk_available": false,
   "facility_realtime_monitor_current_status": "IMPLEMENTED_DIAGNOSTIC_MULTI_COMPONENT_LEDGER; facility annual IR/F-N withheld until qualified provider packets, complete accident coverage, and independent physical validation are available.",
@@ -2706,5 +2706,8 @@
   "facility_realtime_monitor_current_weather_ir_policy": "Only explicit reviewed literature frequency, annual condition probability, release-branch probability, occupancy probability and provider receptor harm are multiplied; missing frequency or harm is WITHHELD; no sensor frequency learning.",
   "facility_realtime_monitor_current_weather_ir_available": true,
   "facility_realtime_monitor_facility_fn_available": false,
-  "facility_realtime_monitor_frequency_learning": false
+  "facility_realtime_monitor_frequency_learning": false,
+  "facility_realtime_monitor_frequency_sensitivity_implemented": true,
+  "facility_realtime_monitor_frequency_sensitivity_policy": "Optional literature p05/published/p95 reweighting over the same provider harm result; p05/p95 must bracket published frequency; no physics rerun, distribution inference or sensor learning.",
+  "facility_realtime_monitor_duplicate_frequency_event_guard": true
 }

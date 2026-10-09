@@ -299,6 +299,8 @@ def test_realtime_monitor_uses_explicit_literature_frequency_for_current_weather
             occupancy_probability=0.25,
             provenance='published LH2 vessel frequency median',
             source_digest='a' * 64,
+            frequency_p05_per_year=5.0e-4,
+            frequency_p95_per_year=2.0e-3,
         ),
     )
     facility = FacilityRealtimeConsequenceMonitor({'storage-tank-01': binding})
@@ -309,6 +311,13 @@ def test_realtime_monitor_uses_explicit_literature_frequency_for_current_weather
     assert result['aggregate']['current_weather_ir_available'] is True
     assert result['aggregate']['current_weather_annual_ir_low_high']['worker-01'] == pytest.approx(
         [2.0e-5, 4.0e-5]
+    )
+    assert result['aggregate']['current_weather_frequency_sensitivity_available'] is True
+    assert result['aggregate']['current_weather_frequency_sensitivity_ir_low_high']['p05']['worker-01'] == pytest.approx(
+        [1.0e-5, 2.0e-5]
+    )
+    assert result['aggregate']['current_weather_frequency_sensitivity_ir_low_high']['p95']['worker-01'] == pytest.approx(
+        [4.0e-5, 8.0e-5]
     )
     assert result['aggregate']['facility_annual_risk_available'] is False
     assert result['aggregate']['facility_fn_available'] is False
@@ -322,6 +331,31 @@ def test_realtime_frequency_binding_rejects_non_sha256_source():
             annual_condition_probability=1.0, release_branch_probability=1.0,
             occupancy_probability=1.0, provenance='literature', source_digest='short',
         )
+
+
+def test_realtime_monitor_rejects_duplicate_frequency_event_bindings(tmp_path):
+    first, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    second, _ = _facility_binding(tmp_path, 'transfer-pump-01')
+    frequency = RealtimeFrequencyBinding(
+        event_id='duplicate-event', asset_id='asset-1',
+        initiating_frequency_per_year=1.0e-3,
+        annual_condition_probability=1.0, release_branch_probability=1.0,
+        occupancy_probability=1.0, provenance='literature', source_digest='b' * 64,
+    )
+    first = FacilityRealtimeBinding(
+        component_id=first.component_id, template=first.template, monitor=first.monitor,
+        normalizer=first.normalizer, pressure_tag=first.pressure_tag,
+        temperature_tag=first.temperature_tag, frequency_binding=frequency,
+    )
+    second = FacilityRealtimeBinding(
+        component_id=second.component_id, template=second.template, monitor=second.monitor,
+        normalizer=second.normalizer, pressure_tag=second.pressure_tag,
+        temperature_tag=second.temperature_tag, frequency_binding=frequency,
+    )
+    with pytest.raises(ValueError, match='one literature event'):
+        FacilityRealtimeConsequenceMonitor({
+            'storage-tank-01': first, 'transfer-pump-01': second,
+        })
 
 
 def test_facility_realtime_monitor_requires_unique_declared_component_identity(tmp_path):
