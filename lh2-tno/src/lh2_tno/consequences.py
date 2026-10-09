@@ -8,6 +8,7 @@ from pydantic import Field, model_validator
 from .contracts import Contract, Name, Positive, Nonnegative, Fraction, Vector
 from .frequency import FrequencyEvent
 from .equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, ResolvedLiquidRelease
+from .two_sided_interaction import combine_endpoint_harm
 
 
 class Weather(Contract):
@@ -490,14 +491,12 @@ def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
         probabilities=child_data[0]['ignition_branch_probabilities']
         if any(data['ignition_branch_probabilities'] != probabilities for data in child_data[1:]):
             raise ValueError('two-sided endpoints must use one ignition branch partition')
-        endpoint_receptors=[{row['id']:row for row in data['receptors']} for data in child_data]
+        endpoint_receptors=[{row['id']:row['branch_harm_low_high'] for row in data['receptors']} for data in child_data]
         receptor_ids=[row.id for row in pipeline.facility.receptors]
+        interaction = combine_endpoint_harm(endpoint_receptors, receptor_ids)
         receptors=[]
         for receptor_id in receptor_ids:
-            branch_harm=[]
-            for endpoint in range(2):
-                branch_harm.append({key:min(1.,sum(rows[receptor_id]['branch_harm_low_high'][endpoint][key] for rows in endpoint_receptors))
-                                    for key in branch_keys})
+            branch_harm=interaction['receptors'][receptor_id]['branch_harm_low_high']
             receptors.append({'id':receptor_id,
                 'branch_harm_low_high':branch_harm,
                 'harm_given_observed_release_low_high':[sum(probabilities[key]*branch_harm[i][key] for key in branch_keys) for i in range(2)]})
@@ -511,7 +510,7 @@ def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
             'physical_validation_claim':False,
             'facility_validation':'WITHHELD',
             'realtime_requirement_demonstrated':False,
-            'stages':['two_sided_endpoint_a','two_sided_endpoint_b','frechet_union_of_endpoint_harm'],
+            'stages':['two_sided_endpoint_a','two_sided_endpoint_b','frechet_union_with_intersection_interval'],
             'source_operator':'equipment_two_sided_rupture',
             'operator_limited':True,
             'source_ownership':{'state_owner':'equipment_twin','discharge_owner':'equipment_twin',
@@ -520,15 +519,23 @@ def evaluate_consequences(pipeline, request: ConsequenceRequest) -> dict:
             'endpoint_results':endpoint_results,
             'ignition_branch_probabilities':probabilities,
             'receptors':receptors,
+            'two_sided_interaction_diagnostic':interaction,
+            'frequency_application':{
+                'event_id':request.frequency_event.id if request.frequency_event is not None else None,
+                'annual_frequency_per_year':request.annual_frequency_per_year,
+                'endpoint_count':2,
+                'endpoint_frequency_multiplier':1.0,
+                'application':'one shared two-sided initiating event; endpoint frequency is not split or duplicated',
+            },
             'mass_ledger':ledger,
             'explosion':{'domain_truncated':any(item.get('explosion',{}).get('domain_truncated',True) for item in child_data),
                          'endpoint_results':[item.get('explosion',{}) for item in child_data],
-                         'combination':'Frechet union upper bound across endpoints; plume interaction unresolved'},
+                         'combination':'Frechet union upper bound across endpoints; intersection interval recorded; plume interaction unresolved'},
             'stage_elapsed_ms':{'endpoint_a':endpoint_results[0].get('elapsed_ms'),
                                 'endpoint_b':endpoint_results[1].get('elapsed_ms'),
                                 'endpoint_aggregation':(time.perf_counter()-started)*1000},
             'risk_semantics':{'observed_release':'conditional harm for both provider endpoints; no initiating-frequency multiplier',
-                              'endpoint_combination':'Frechet union upper bound min(1,sum(endpoint harm)); no independence assumed',
+                              'endpoint_combination':'Frechet union upper bound min(1,sum(endpoint harm)); intersection lower/upper interval recorded; no independence assumed',
                               'interaction':'endpoint plume, pressure and inventory feedback are not jointly solved'},
             'limitations':['Two provider-resolved endpoints are evaluated separately and union-bounded at receptors.',
                            'Cross-endpoint jet/plume interaction, pipe pressure coupling and dynamic shared-inventory feedback are not resolved.',
