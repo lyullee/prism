@@ -385,6 +385,48 @@ def test_facility_realtime_monitor_reports_measured_async_component_window(tmp_p
     assert result['components']['transfer-pump-01']['arrival_time_s'] == pytest.approx(101.8)
 
 
+def test_facility_realtime_monitor_rejects_source_time_window_overrun(tmp_path):
+    first, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    second, _ = _facility_binding(tmp_path, 'transfer-pump-01')
+    facility = FacilityRealtimeConsequenceMonitor(
+        {'storage-tank-01': first, 'transfer-pump-01': second},
+        max_source_time_span_s=1.0,
+    )
+    result = facility.update_from_rows(
+        {
+            'storage-tank-01': {'PT': 600000.0, 'TT': 20.893},
+            'transfer-pump-01': {'PT': 610000.0, 'TT': 21.0},
+        },
+        {
+            'storage-tank-01': {
+                'stream_id': 'tank-window-stream', 'sequence': 1,
+                'source_time_s': 100.0, 'arrival_time_s': 100.1,
+                'origin': 'synthetic',
+                'bindings': {
+                    'PT': {'tag': 'P', 'unit': 'Pa', 'quality': 'valid'},
+                    'TT': {'tag': 'T', 'unit': 'K', 'quality': 'valid'},
+                },
+            },
+            'transfer-pump-01': {
+                'stream_id': 'pump-window-stream', 'sequence': 2,
+                'source_time_s': 101.5, 'arrival_time_s': 101.6,
+                'origin': 'synthetic',
+                'bindings': {
+                    'PT': {'tag': 'P', 'unit': 'Pa', 'quality': 'valid'},
+                    'TT': {'tag': 'T', 'unit': 'K', 'quality': 'valid'},
+                },
+            },
+        },
+        now_s=102.0,
+    )
+    assert result['status'] == 'REJECTED'
+    assert result['time_window_rejection']['status'] == 'REJECTED_SOURCE_TIME_WINDOW'
+    assert result['aggregate']['deadline_status'] == 'REJECTED'
+    assert result['aggregate']['facility_annual_risk_available'] is False
+    assert result['aggregate']['facility_time_window']['source_time_span_s'] == pytest.approx(1.5)
+    assert result['aggregate']['facility_time_window']['within_configured_source_time_window'] is False
+
+
 def test_facility_realtime_monitor_rejects_nonexact_row_component_set(tmp_path):
     binding, _ = _facility_binding(tmp_path, 'storage-tank-01')
     facility = FacilityRealtimeConsequenceMonitor({'storage-tank-01': binding})
@@ -792,3 +834,13 @@ def test_facility_realtime_monitor_requires_unique_declared_component_identity(t
     binding, _ = _facility_binding(tmp_path, 'storage-tank-01')
     with pytest.raises(ValueError, match='binding key'):
         FacilityRealtimeConsequenceMonitor({'wrong-key': binding})
+
+
+@pytest.mark.parametrize('bad_window', [0.0, -1.0, True, float('nan')])
+def test_facility_realtime_monitor_rejects_invalid_source_time_window(tmp_path, bad_window):
+    binding, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    with pytest.raises(ValueError, match='max_source_time_span_s'):
+        FacilityRealtimeConsequenceMonitor(
+            {'storage-tank-01': binding},
+            max_source_time_span_s=bad_window,
+        )

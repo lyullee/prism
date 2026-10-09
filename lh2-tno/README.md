@@ -41,6 +41,7 @@
 
 여러 설비를 동시에 처리할 때는 `FacilityRealtimeConsequenceMonitor.update_from_rows()`가 설비별 행과 시각·스트림·열 바인딩을 받아 하나의 원자적 배치로 넘깁니다. 선언된 설비 집합과 행 집합이 다르면 즉시 거절하며, 부분 배치를 시설 위험 합계로 만들지 않습니다.
 accepted 배치에는 `aggregate.facility_time_window`도 포함됩니다. 이 장부는 설비별 원본 시각과 도착 시각의 최소·최대·범위를 그대로 기록합니다. 서로 다른 시각을 임의로 맞추거나 보간하지 않으므로 `coherence_asserted=false`이며, 허용 시간창 판정은 상위 디지털트윈 운영 정책이 담당합니다.
+상위 운영 정책을 PRISM 배치에서 직접 강제하려면 `FacilityRealtimeConsequenceMonitor(..., max_source_time_span_s=1.0)`처럼 양의 허용 원본 시각 범위를 명시합니다. 완전한 배치가 이 범위를 넘으면 계산된 설비 결과는 진단용으로 남기되 시설 상태는 `REJECTED`, `time_window_rejection.status="REJECTED_SOURCE_TIME_WINDOW"`가 되고 IR/F-N 합산은 닫힙니다. 기본값 `None`은 시간 범위를 측정만 하는 호환 모드입니다.
 
 오류가 있는 행은 구조화된 `REJECTED` 장부로 반환되고, 누락·추가 컴포넌트와 원인 메시지가 남습니다. 시스템은 이 경우 이전 결과나 0 위험을 대신 사용하지 않습니다.
 

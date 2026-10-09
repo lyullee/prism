@@ -1203,6 +1203,7 @@ class FacilityRealtimeConsequenceMonitor:
         facility_id: str = "facility",
         max_components: int = 128,
         population_binding: RealtimePopulationBinding | None = None,
+        max_source_time_span_s: float | None = None,
     ):
         if not isinstance(bindings, Mapping) or not bindings:
             raise ValueError("nonempty component binding mapping required")
@@ -1214,6 +1215,16 @@ class FacilityRealtimeConsequenceMonitor:
             raise ValueError("max_components must be between 1 and 10000")
         if len(bindings) > max_components:
             raise ValueError("component binding count exceeds max_components")
+        if max_source_time_span_s is not None:
+            if (
+                isinstance(max_source_time_span_s, bool)
+                or not isinstance(max_source_time_span_s, (int, float))
+                or not math.isfinite(float(max_source_time_span_s))
+                or float(max_source_time_span_s) <= 0.0
+            ):
+                raise ValueError(
+                    "max_source_time_span_s must be finite and positive when supplied"
+                )
         if population_binding is not None and not isinstance(
             population_binding, RealtimePopulationBinding
         ):
@@ -1269,6 +1280,11 @@ class FacilityRealtimeConsequenceMonitor:
         self.facility_id = facility_id
         self.bindings = normalized
         self.population_binding = population_binding
+        self.max_source_time_span_s = (
+            None
+            if max_source_time_span_s is None
+            else float(max_source_time_span_s)
+        )
 
     def update_from_frames(self, frames: Mapping[str, object], *, now_s: float) -> dict:
         """Process one coherent frame per declared component.
@@ -1398,6 +1414,8 @@ class FacilityRealtimeConsequenceMonitor:
                 "arrival_time_min_s": None,
                 "arrival_time_max_s": None,
                 "arrival_time_span_s": None,
+                "configured_max_source_time_span_s": self.max_source_time_span_s,
+                "within_configured_source_time_window": None,
                 "coherence_asserted": False,
                 "coherence_policy": (
                     "component timestamps are reported only; PRISM does not infer, resample, "
@@ -1420,12 +1438,36 @@ class FacilityRealtimeConsequenceMonitor:
                 "arrival_time_min_s": min(arrival_times),
                 "arrival_time_max_s": max(arrival_times),
                 "arrival_time_span_s": max(arrival_times) - min(arrival_times),
+                "configured_max_source_time_span_s": self.max_source_time_span_s,
+                "within_configured_source_time_window": (
+                    None
+                    if self.max_source_time_span_s is None
+                    else max(source_times) - min(source_times)
+                    <= self.max_source_time_span_s
+                ),
                 "coherence_asserted": False,
                 "coherence_policy": (
                     "component timestamps are reported only; PRISM does not infer, resample, "
                     "or synchronize missing times"
                 ),
             }
+        time_window_rejection = None
+        if (
+            batch_status == "ACCEPTED"
+            and self.max_source_time_span_s is not None
+            and facility_time_window["within_configured_source_time_window"] is False
+        ):
+            time_window_rejection = {
+                "status": "REJECTED_SOURCE_TIME_WINDOW",
+                "configured_max_source_time_span_s": self.max_source_time_span_s,
+                "observed_source_time_span_s": facility_time_window["source_time_span_s"],
+                "reason": (
+                    "complete component batch exceeded the configured source-time window; "
+                    "facility aggregation was withheld"
+                ),
+            }
+            facility_time_window["status"] = "REJECTED_SOURCE_TIME_WINDOW"
+            batch_status = "REJECTED"
         deadline_misses = sum(
             entry["result"]["realtime"]["deadline_status"] == "MISSED"
             for entry in accepted
@@ -1579,7 +1621,9 @@ class FacilityRealtimeConsequenceMonitor:
             }
         )
         aggregate_deadline_status = (
-            "REJECTED" if rejected or unknown_ids else ("MISSED" if deadline_misses else "MET")
+            "REJECTED"
+            if rejected or unknown_ids or time_window_rejection is not None
+            else ("MISSED" if deadline_misses else "MET")
         )
         return {
             "facility_id": self.facility_id,
@@ -1590,6 +1634,7 @@ class FacilityRealtimeConsequenceMonitor:
             "unknown_frame_components": list(unknown_ids),
             "missing_frame_components": list(missing_ids),
             "duplicate_streams": {key: list(value) for key, value in duplicate_streams.items()},
+            "time_window_rejection": time_window_rejection,
             "components": components,
             "aggregate": {
                 "deadline_status": aggregate_deadline_status,
@@ -1598,6 +1643,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "cache_hit_count": cache_count,
                 "deadline_miss_count": deadline_misses,
                 "facility_time_window": facility_time_window,
+                "max_source_time_span_s": self.max_source_time_span_s,
                 "provider_release_resolved_component_count": release_resolved_count,
                 "equipment_release_path_component_count": release_path_available_count,
                 "equipment_release_path_withheld_component_count": len(accepted)
