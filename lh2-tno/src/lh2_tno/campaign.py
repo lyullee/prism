@@ -340,9 +340,18 @@ class RiskCampaign(Contract):
             raise ValueError('annual joint weather/population partition must close to one')
         if not self.event_routes or len({x.event_id for x in self.event_routes}) != len(self.event_routes):
             raise ValueError('unique nonempty event routes required')
-        evidence_ids = [x.event_id for x in self.provider_packet_evidence]
-        if len(set(evidence_ids)) != len(evidence_ids):
-            raise ValueError('provider packet evidence cannot duplicate an event')
+        evidence_identities = [
+            (
+                x.event_id,
+                x.component_id,
+                tuple(x.port_ids),
+                tuple(x.provider_source_digests),
+                tuple(x.provider_result_digests),
+            )
+            for x in self.provider_packet_evidence
+        ]
+        if len(set(evidence_identities)) != len(evidence_identities):
+            raise ValueError('provider packet evidence cannot duplicate an exact packet identity')
         return self
 
 
@@ -355,6 +364,26 @@ def prepared_request(template, event, condition):
             wind_from_bearing_deg=condition.weather.wind_from_bearing_deg)
     q = ConsequenceRequest.model_validate_json(json.dumps(d, allow_nan=False))
     return bind_event(q, event)
+
+
+def _matching_provider_packet_evidence(
+    evidence_rows: tuple[ProviderPacketEvidence, ...],
+    identity: dict | None,
+) -> ProviderPacketEvidence | None:
+    """Find qualification evidence for one exact consumed packet.
+
+    One initiating event can legitimately have several conditional release
+    branches (for example isolation success and isolation failure).  Matching
+    only on ``event_id`` would either overwrite one branch or let evidence for
+    one endpoint qualify another.  Keep the lookup exact on every identity
+    field carried by the provider packet.
+    """
+    if identity is None:
+        return None
+    for evidence in evidence_rows:
+        if _provider_packet_evidence_matches(identity, evidence):
+            return evidence
+    return None
 
 
 def _checked_harm(data, receptor_ids, probabilities):
@@ -419,8 +448,10 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                 branch.request,
             ))
         event_scenario_families[event.id] = tuple(dict.fromkeys(families))
-    provider_evidence = {row.event_id: row for row in campaign.provider_packet_evidence}
-    unknown_evidence_events = sorted(set(provider_evidence) - set(events))
+    provider_evidence = tuple(campaign.provider_packet_evidence)
+    unknown_evidence_events = sorted(
+        {row.event_id for row in provider_evidence} - set(events)
+    )
     if unknown_evidence_events:
         raise ValueError(
             'provider packet evidence references unknown generated events: '
@@ -513,7 +544,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     missing.append(row.copy())
                 if row['status'].startswith('EXECUTED') and packet_identity is not None:
                     provider_packet_case_count += 1
-                    evidence = provider_evidence.get(e.id)
+                    evidence = _matching_provider_packet_evidence(
+                        provider_evidence, packet_identity
+                    )
                     if (
                         row['status'] == 'EXECUTED'
                         and _provider_packet_evidence_matches(packet_identity, evidence)

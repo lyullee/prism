@@ -82,6 +82,14 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--allow-distinct-event-evidence",
+        action="store_true",
+        help=(
+            "allow multiple qualification rows for one event when their exact "
+            "component/port/source/result packet identities differ (conditional branches)"
+        ),
+    )
+    parser.add_argument(
         "--physical-validation-evidence",
         type=Path,
         help=(
@@ -196,7 +204,10 @@ def main() -> int:
     provider_evidence = ()
     if args.provider_evidence_catalog:
         try:
-            evidence = load_provider_packet_evidence_catalog(args.provider_evidence_catalog)
+            evidence = load_provider_packet_evidence_catalog(
+                args.provider_evidence_catalog,
+                allow_distinct_event_id_packets=args.allow_distinct_event_evidence,
+            )
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, ProviderPacketPromotionError) as error:
             raise SystemExit(f"provider packet evidence input error: {error}") from error
         generated_event_ids = {route.event_id for route in campaign.event_routes}

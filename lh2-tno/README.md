@@ -43,11 +43,12 @@ storage vent, supply/vaporizer boundary에 연결되며 원자료 상대경로·
 참조합니다.
 
 **2026-10-27 시설 case 증거 선택 보완:** 하나의 initiating event가 차단 성공·실패나
-양단 출구처럼 여러 provider packet을 가질 수 있으므로, 시설 case 감사기가 event ID 하나만
-보고 마지막 packet으로 덮어쓰지 않도록 시설 case 감사기에서만 exact component·port·source
-digest·result digest를 기준으로 후보를 선택합니다. 일반 campaign/provider catalog의 event
-ID 단일성은 유지하며, 동일한 exact packet의 중복은 계속 거부합니다. 이 변경은 증거 identity
-감사만 보완합니다. 자세한 기록은 [시설 case provider packet branch coverage 개발기록](docs/PRISM_시설case_provider_packet_branch_coverage_개발기록_20261027.md)을
+양단 출구처럼 여러 provider packet을 가질 수 있으므로, 시설 case 감사기와 campaign 실행기가
+event ID 하나만 보고 마지막 packet으로 덮어쓰지 않도록 exact component·port·source
+digest·result digest를 기준으로 후보를 선택합니다. 동일한 exact packet의 중복은 계속
+거부하고, 서로 다른 조건부 branch packet만 같은 event에 함께 기록할 수 있습니다. 이 변경은
+증거 identity 감사만 보완하며 빈도를 만들거나 provider 자격을 자동 승격하지 않습니다.
+자세한 기록은 [시설 case provider packet branch coverage 개발기록](docs/PRISM_시설case_provider_packet_branch_coverage_개발기록_20261027.md)을
 참조합니다.
 
 확장 사건의 상태 근거는 [`extension_state_snapshot_coverage.json`](results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에 사건별로 기록합니다. 현재 vertical handoff 5개와 inventory depletion 5개는 모두 `BOUND_AND_ECHOED`입니다. 수직 벤트는 provider PH 입력 압력·온도에서, 재고 소진은 provider의 초기 압력·액체분율에서 상태 snapshot을 만들었고, 방출 유량·질량·결과 digest로 상태를 거꾸로 만들지 않았습니다. snapshot은 합성 `model_prediction` 입력이므로 현장 상태나 적격 provider 근거로 승격하지 않습니다.

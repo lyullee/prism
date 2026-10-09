@@ -9,6 +9,7 @@ from lh2_tno.campaign import (
     PhysicalValidationEvidence,
     ProviderPacketEvidence,
     RiskCampaign,
+    _matching_provider_packet_evidence,
     _provider_packet_evidence_matches,
     _provider_packet_identity,
 )
@@ -75,6 +76,76 @@ def test_provider_packet_qualification_requires_exact_event_and_digest_identity(
     assert not _provider_packet_evidence_matches(
         {**identity, "provider_result_digests": ["c" * 64]}, evidence
     )
+
+
+def test_conditional_branches_match_distinct_packet_evidence_without_cross_qualification():
+    first = ProviderPacketEvidence(
+        event_id="scope/tank/G1",
+        component_id="tank-01",
+        port_ids=("tank-out",),
+        provider_source_digests=("a" * 64,),
+        provider_result_digests=("b" * 64,),
+        evidence_id="lh2-actual-success",
+    )
+    second = ProviderPacketEvidence(
+        event_id="scope/tank/G1",
+        component_id="tank-01",
+        port_ids=("tank-out",),
+        provider_source_digests=("c" * 64,),
+        provider_result_digests=("d" * 64,),
+        evidence_id="lh2-actual-failure",
+    )
+    rows = (first, second)
+    assert _matching_provider_packet_evidence(
+        rows,
+        {
+            "event_id": "scope/tank/G1",
+            "component_id": "tank-01",
+            "port_ids": ["tank-out"],
+            "provider_source_digests": ["a" * 64],
+            "provider_result_digests": ["b" * 64],
+        },
+    ) == first
+    assert _matching_provider_packet_evidence(
+        rows,
+        {
+            "event_id": "scope/tank/G1",
+            "component_id": "tank-01",
+            "port_ids": ["tank-out"],
+            "provider_source_digests": ["e" * 64],
+            "provider_result_digests": ["f" * 64],
+        },
+    ) is None
+
+
+def test_campaign_evidence_allows_distinct_packet_identities_for_one_event():
+    _, data = inputs()
+    evidence = [
+        {
+            "event_id": "test/shell/G3",
+            "component_id": "storage",
+            "port_ids": ["tank-out"],
+            "provider_source_digests": ["a" * 64],
+            "provider_result_digests": ["b" * 64],
+            "evidence_id": "lh2-actual-success",
+        },
+        {
+            "event_id": "test/shell/G3",
+            "component_id": "storage",
+            "port_ids": ["tank-out"],
+            "provider_source_digests": ["c" * 64],
+            "provider_result_digests": ["d" * 64],
+            "evidence_id": "lh2-actual-failure",
+        },
+    ]
+    campaign = RiskCampaign.model_validate_json(
+        json.dumps({**data, "provider_packet_evidence": evidence})
+    )
+    assert len(campaign.provider_packet_evidence) == 2
+    with pytest.raises(ValueError, match="exact packet identity"):
+        RiskCampaign.model_validate_json(
+            json.dumps({**data, "provider_packet_evidence": evidence + [evidence[0]]})
+        )
 
 
 def test_provider_packet_evidence_can_be_built_from_promoted_export_result():
