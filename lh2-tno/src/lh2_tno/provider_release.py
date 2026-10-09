@@ -423,7 +423,11 @@ def build_consequence_request_from_provider_release(
     )
     _merge_provider_clock(payload, (release,))
     if isinstance(release, ResolvedLiquidRelease):
-        if release.pool_footprint is not None:
+        if release.no_rainout_evidence is not None:
+            # Do not let a template's declared sensitivity radius create a
+            # pool when the provider explicitly resolved zero ground rainout.
+            payload["pool"] = None
+        elif release.pool_footprint is not None:
             pool = payload.get("pool")
             if not isinstance(pool, dict):
                 raise ProviderReleaseContractError(

@@ -17,7 +17,7 @@
 - native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구와 provider가 명시한 수직→수평 `VerticalGasHandoff` 경계를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 이번 단계에서는 외부 `lh2dt` `HomogeneousTank`+`Valve`가 내보낸 flash 기체·지면 액체·액적 도착 시계를 `ResolvedLiquidRelease`로 수용해 DynamicLH2PoolX와 최종 피해까지 한 건 실행했다. provider의 `ParaHydrogen`과 native 풀 모델의 `Hydrogen` 기준은 provenance가 있는 명시적 변환 경계로만 연결하며, 교차 물성 검증 전까지 operator-limited로 남긴다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 484개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 매니페스트에 없는 사고 family의 `NOT_APPLICABLE` 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 487개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, no-rainout pool 경계 3건, 문헌 빈도 분위수 재가중 검사를 확인했다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 매니페스트에 없는 사고 family의 `NOT_APPLICABLE` 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 - DynamicLH2PoolX의 물/알루미늄 hold-out 반경 오차와 HSE 질량잔차를 해시 장부로 확인했지만, protocol snapshot 해시 drift가 있어 제한 구성요소 증거로만 사용한다. 설비 방출·대기확산·점화·IR/F-N 전체 체인의 물리 검증으로 확대하지 않는다.
 
 ## 단계별 작업과 통과 기준
@@ -109,7 +109,7 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 
 외부 `LayeredTankNetworkSimulator+CommandedValve`의 합성 양수 재고 threshold 이력을 `scripts/export_lh2dt_layered_tank_prism_packet.py`로 `prism.external_accident_history.v1`에 맞추고, 공통 strict adapter를 통해 `prism.resolved_release.v1` 액체 packet으로 변환했다. provider 16개 interval의 왼쪽 유지 시간, `inventory_depletion` 종료 basis, 누적 질량·엔탈피를 검사한 결과 8.0 s 방출, 질량 잔차 `1.73e-18 kg`, 에너지 잔차 `0 J`를 얻었다. `scripts/validate_lh2dt_prism_packet_chain.py`는 이 packet을 DynamicLH2PoolX, SLABx-LH2/SLABx, cloud, 점화, 화재·폭발 및 TNO 피해까지 실행했다.
 
-이 실행은 선언된 `0.005 m` sensitivity pool footprint를 사용해 작은 합성 packet의 wet-cell 조건을 확인한 것이다. 외부 provider가 flash gas와 airborne liquid을 계산하지 않고, 설비 형상·개구·차단 신뢰도·현장 재고도 합성이므로 `EXECUTED_OPERATOR_LIMITED` 진단으로만 기록한다. provider packet 승격·빈도 부여·시설 IR/F-N·독립 물리검증은 계속 보류한다. 외부 `lh2dt` 각 클래스에 native 사고 export를 넣고 24개 사건과 exact-match하는 작업은 다음 단계다.
+이 실행은 선언된 `0.005 m` sensitivity pool footprint를 사용해 작은 합성 packet의 wet-cell 조건을 확인한 것이다. 지면 액체가 없는 provider 결과는 `prism.no_rainout_evidence.v1`로 선언할 수 있으며, 이 경우 기본 pool context를 사용하지 않는다. 외부 provider가 flash gas와 airborne liquid을 계산하지 않고, 설비 형상·개구·차단 신뢰도·현장 재고도 합성이므로 `EXECUTED_OPERATOR_LIMITED` 진단으로만 기록한다. provider packet 승격·빈도 부여·시설 IR/F-N·독립 물리검증은 계속 보류한다. 외부 `lh2dt` 각 클래스에 native 사고 export를 넣고 24개 사건과 exact-match하는 작업은 다음 단계다.
 
 ## 2026-10-11 연결 경계 보완
 

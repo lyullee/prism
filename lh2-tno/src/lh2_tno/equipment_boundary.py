@@ -388,6 +388,16 @@ class PoolFootprintEvidence(Contract):
     source_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
 
 
+class NoRainoutEvidence(Contract):
+    """Provider evidence that no liquid reaches the ground footprint."""
+
+    schema_version: Literal['prism.no_rainout_evidence.v1'] = 'prism.no_rainout_evidence.v1'
+    origin: Literal['provider_resolved', 'reviewed_measurement']
+    basis: Literal['all_liquid_flash', 'no_ground_interception']
+    provenance: Name
+    source_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
+
+
 class ResolvedLiquidStep(Contract):
     """Left-held provider state after liquid/two-phase flash partition."""
 
@@ -468,6 +478,7 @@ class ResolvedLiquidRelease(Contract):
     termination_provenance: Name
     droplet_partition_provenance: Name
     pool_footprint: PoolFootprintEvidence | None = None
+    no_rainout_evidence: NoRainoutEvidence | None = None
     termination_basis: ProviderTerminationBasis | None = None
     failure_opening_diameter_m: Positive | None = None
 
@@ -493,6 +504,17 @@ class ResolvedLiquidRelease(Contract):
             raise ValueError('provider liquid enthalpy ledger does not close')
         if mass > self.available_mass_kg + 1e-9:
             raise ValueError('resolved liquid release exceeds available inventory')
+        ground_mass = sum(
+            step.ground_liquid_mass_flow_kg_s * (end - step.time_s)
+            for step, end in self.intervals()
+        )
+        if self.no_rainout_evidence is not None:
+            if ground_mass > 1e-12:
+                raise ValueError('no-rainout evidence conflicts with positive ground liquid')
+            if self.pool_footprint is not None:
+                raise ValueError('no-rainout evidence cannot be combined with a pool footprint')
+            if self.no_rainout_evidence.origin == 'provider_resolved' and self.no_rainout_evidence.source_digest != self.provider_result_digest:
+                raise ValueError('provider-resolved no-rainout evidence must be covered by the provider result digest')
         if self.pool_footprint is not None and self.pool_footprint.origin == 'provider_resolved':
             if self.pool_footprint.source_digest != self.provider_result_digest:
                 raise ValueError('provider-resolved pool footprint must be covered by the provider result digest')

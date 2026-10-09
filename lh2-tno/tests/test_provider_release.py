@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from lh2_tno.equipment_boundary import (
+    NoRainoutEvidence,
     ResolvedGasRelease,
     ResolvedGasReleaseSet,
     ResolvedGasStep,
@@ -256,6 +257,43 @@ def test_provider_resolved_pool_footprint_is_digest_bound_and_consumed():
     }]
     with pytest.raises(ValueError, match="footprint position"):
         ResolvedLiquidRelease.model_validate_json(json.dumps(misplaced))
+
+
+def test_provider_no_rainout_evidence_suppresses_declared_pool_context():
+    release = _liquid_release().model_copy(update={
+        "no_rainout_evidence": NoRainoutEvidence(
+            origin="provider_resolved",
+            basis="all_liquid_flash",
+            provenance="provider flash partition closes with zero ground liquid",
+            source_digest="3" * 64,
+        ),
+    })
+    request = build_consequence_request_from_provider_release(release, _defaults())
+    assert request.pool is None
+    assert request.resolved_liquid_release is not None
+    assert request.resolved_liquid_release.no_rainout_evidence is not None
+
+
+def test_provider_no_rainout_evidence_rejects_positive_ground_liquid():
+    data = _liquid_release().model_dump(mode="json")
+    data["steps"][0]["gas_mass_flow_kg_s"] = 0.9
+    data["steps"][0]["ground_liquid_mass_flow_kg_s"] = 0.1
+    data["steps"][0]["gas_effective_area_m2"] = 0.9
+    data["steps"][0]["droplet_class_outcomes"] = [{
+        "ground_liquid_mass_flow_kg_s": 0.1,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "flight_time_s": 0.1,
+        "impact_position_m": [0.2, 0.0, 0.0],
+        "droplet_diameter_m": 5e-4,
+    }]
+    data["no_rainout_evidence"] = {
+        "origin": "provider_resolved",
+        "basis": "all_liquid_flash",
+        "provenance": "contradictory test evidence",
+        "source_digest": "3" * 64,
+    }
+    with pytest.raises(ValueError, match="no-rainout evidence conflicts"):
+        ResolvedLiquidRelease.model_validate_json(json.dumps(data))
 
 
 def test_provider_duration_template_uses_packet_basis_and_each_branch_clock():

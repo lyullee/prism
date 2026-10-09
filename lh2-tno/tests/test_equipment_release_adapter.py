@@ -167,7 +167,7 @@ def _liquid_response():
     }
 
 
-def _build_liquid(response=None):
+def _build_liquid(response=None, provider_result_digest=None):
     return build_resolved_liquid_release_from_provider_response(
         _liquid_response() if response is None else response,
         component_id="tank-1",
@@ -182,6 +182,7 @@ def _build_liquid(response=None):
         ambient_pressure_pa_abs=100000.0,
         ambient_temperature_k=288.15,
         failure_opening_diameter_m=0.1,
+        provider_result_digest=provider_result_digest,
     )
 
 
@@ -214,3 +215,22 @@ def test_liquid_adapter_rejects_airborne_liquid_without_adapter():
     response["data"]["cumulative_mass_out_kg"] = 0.042
     with pytest.raises(EquipmentReleaseExportError, match="failed strict PRISM validation"):
         _build_liquid(response)
+
+
+def test_liquid_adapter_carries_no_rainout_evidence_and_suppresses_pool_context():
+    response = _liquid_response()
+    step = response["data"]["steps"][0]
+    step["total_mass_flow_kg_s"] = 0.2
+    step["gas_mass_flow_kg_s"] = 0.2
+    step["gas_effective_area_m2"] = 0.04
+    step["ground_liquid_mass_flow_kg_s"] = 0.0
+    step["droplet_class_outcomes"] = []
+    response["data"]["cumulative_mass_out_kg"] = 0.04
+    response["data"]["no_rainout_evidence"] = {
+        "origin": "provider_resolved",
+        "basis": "all_liquid_flash",
+        "provenance": "provider flash partition has zero ground interception",
+        "source_digest": "c" * 64,
+    }
+    release = _build_liquid(response, provider_result_digest="c" * 64)
+    assert release.no_rainout_evidence is not None
