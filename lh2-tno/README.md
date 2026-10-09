@@ -39,6 +39,8 @@
 
 실시간 디지털트윈 입력은 `RealtimeConsequenceMonitor.update_from_row()`로 같은 검사를 거쳐 처리할 수 있습니다. 이 메서드는 행→프레임→정규화→provider resolver(선택)→피해 계산의 처리시간과 deadline을 남기며, 명시적 바인딩 없이 값이나 빈도를 추정하지 않습니다.
 
+여러 설비를 동시에 처리할 때는 `FacilityRealtimeConsequenceMonitor.update_from_rows()`가 설비별 행과 시각·스트림·열 바인딩을 받아 하나의 원자적 배치로 넘깁니다. 선언된 설비 집합과 행 집합이 다르면 즉시 거절하며, 부분 배치를 시설 위험 합계로 만들지 않습니다.
+
 **검사센터 공학문서 감사 (2026-10-22):** `scripts/audit_engineering_document_evidence.py`는 P&ID·도면·운전절차서·비상절차서·시험절차서 PDF 18개를 해시와 페이지 수로 기록하고, P&ID 4개·도면 2개·운전절차 2개·비상절차 2개를 일반 설비 모델링 후보로 분류했습니다. 이 자료는 토폴로지·위치·조치 후보를 제공하지만 사고 방출 이력은 아니므로 `state_snapshot_binding_allowed=false`, `provider_packet_created=false`, `frequency_applied=false`, `facility_qra_claim=false`를 유지합니다. 상세 규칙은 [검사센터 공학문서 증거 감사](docs/PRISM_검사센터_공학문서_증거감사_20261022.md), 공개 요약은 `examples/inspection_center_engineering_document_audit.json`에 있습니다.
 
 **외부 LH2 위험 스윕·처리시간 감사 (2026-10-22):** `scripts/audit_external_lh2_sweep.py`는 탱크·PSV 스윕 68건과 TNO 정책 계산 6건의 해시, 내부 질량·에너지 잔차, 실행시간, `ENGINEERING_JUDGEMENT` 위험 proxy를 기록했습니다. 탱크 최대 질량 잔차는 약 `1.04×10⁻¹¹ kg`, 최대 에너지 잔차는 약 `5.81×10⁻⁷ J`, TNO 정책 p95 실행시간은 약 `0.400 s`입니다. 실패한 탱크 사례는 그대로 보존하며, 이 자료는 내부 폐합·처리시간 screening evidence일 뿐 독립 물리검증·적격 provider packet·시설 IR/F-N·빈도 추정이 아닙니다. 상세 정책은 [외부 LH2 위험 스윕 처리시간 감사](docs/PRISM_외부LH2_위험스윕_처리시간_감사_20261022.md), 공개 요약은 `examples/center_lh2_external_sweep_audit.json`에 있습니다.

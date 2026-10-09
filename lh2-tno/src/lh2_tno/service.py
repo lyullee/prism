@@ -591,6 +591,16 @@ class FacilityRealtimeBinding:
     frequency_binding: RealtimeFrequencyBinding | None = None
 
 
+_REALTIME_ROW_BINDING_KEYS = frozenset({
+    "stream_id",
+    "sequence",
+    "source_time_s",
+    "arrival_time_s",
+    "origin",
+    "bindings",
+})
+
+
 def _realtime_current_weather_risk(
     result: Mapping[str, object], frequency: RealtimeFrequencyBinding | None
 ) -> dict[str, object]:
@@ -1591,3 +1601,62 @@ class FacilityRealtimeConsequenceMonitor:
                 ),
             },
         }
+
+    def update_from_rows(
+        self,
+        rows: Mapping[str, Mapping[str, object]],
+        row_bindings: Mapping[str, Mapping[str, object]],
+        *,
+        now_s: float,
+    ) -> dict:
+        """Process one explicit tabular row for every declared component.
+
+        ``row_bindings`` is component keyed and must provide exactly
+        ``stream_id``, ``sequence``, ``source_time_s``, ``arrival_time_s``,
+        ``origin``, and a source-column binding map.  This method performs no
+        tag, unit, quality, timestamp, or component inference; it delegates
+        each row to ``frame_from_row`` and then uses the existing atomic
+        facility frame batch.  Any extra or missing component row is rejected
+        before a partial batch can be interpreted as a facility snapshot.
+        """
+        if not isinstance(rows, Mapping) or not isinstance(row_bindings, Mapping):
+            raise TypeError("rows and row_bindings must be component mappings")
+        declared = set(self.bindings)
+        row_components = set(rows)
+        metadata_components = set(row_bindings)
+        if row_components != declared or metadata_components != declared:
+            missing_rows = sorted(declared - row_components)
+            unknown_rows = sorted(row_components - declared)
+            missing_metadata = sorted(declared - metadata_components)
+            unknown_metadata = sorted(metadata_components - declared)
+            raise ValueError(
+                "facility row batch must exactly match declared components; "
+                f"missing_rows={missing_rows}, unknown_rows={unknown_rows}, "
+                f"missing_metadata={missing_metadata}, unknown_metadata={unknown_metadata}"
+            )
+
+        from .inspection_timeseries import frame_from_row
+
+        frames: dict[str, object] = {}
+        for component_id in sorted(declared):
+            metadata = row_bindings[component_id]
+            if not isinstance(metadata, Mapping):
+                raise ValueError(
+                    f"row binding for {component_id} must be a mapping"
+                )
+            keys = set(metadata)
+            if keys != _REALTIME_ROW_BINDING_KEYS:
+                raise ValueError(
+                    f"row binding for {component_id} must contain exactly "
+                    f"{sorted(_REALTIME_ROW_BINDING_KEYS)}"
+                )
+            frames[component_id] = frame_from_row(
+                rows[component_id],
+                stream_id=metadata["stream_id"],
+                sequence=metadata["sequence"],
+                source_time_s=metadata["source_time_s"],
+                arrival_time_s=metadata["arrival_time_s"],
+                origin=metadata["origin"],
+                bindings=metadata["bindings"],
+            )
+        return self.update_from_frames(frames, now_s=now_s)
