@@ -10,6 +10,7 @@ from lh2_tno.diagnostic_adapter_runner import (
 )
 from lh2_tno.service import request_from_equipment_resolver
 from test_equipment_accident_export import _Provider, _request
+from test_equipment_accident_export import _snapshot
 from test_consequence_service import request as consequence_template
 from test_provider_release import _defaults
 
@@ -108,6 +109,29 @@ def test_runner_resolver_factory_connects_state_callbacks_to_consequence_request
     assert request.resolved_release.event_id == "provider-accident-500000"
     assert request.frequency_event is None
     assert len(provider.requests) == 1
+
+
+def test_runner_resolver_can_bind_canonical_state_snapshot_before_provider_call():
+    runner = DiagnosticAdapterRunner.from_binding_catalog(CATALOG)
+    provider = _Provider()
+    resolver = runner.make_resolver(
+        "storage_tank",
+        lambda _template, _state: _request(
+            component_id="storage-tank-01",
+            port_id="tank-out",
+            event_id="provider-accident-with-state",
+        ),
+        lambda _template, _state: _defaults(),
+        provider=provider,
+        state_snapshot_builder=lambda _template, _state: _snapshot("storage-tank-01"),
+    )
+
+    resolved = resolver(object(), {"values": {"PT": {"value_si": 500000.0}}})
+
+    assert resolved.resolved_release is not None
+    handed = provider.requests[0]
+    assert handed["state_snapshot"]["component_id"] == "storage-tank-01"
+    assert handed["state_snapshot_digest"] == _snapshot("storage-tank-01").digest()
 
 
 def test_runner_resolver_factory_plugs_into_state_boundary_contract():

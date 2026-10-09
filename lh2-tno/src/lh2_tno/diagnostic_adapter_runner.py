@@ -36,12 +36,14 @@ from .equipment_accident_export import (
     export_equipment_gas_accident_history,
     export_equipment_inventory_release_history,
     export_equipment_liquid_accident_history,
+    bind_state_snapshot_to_export_request,
 )
 from .consequences import ConsequenceRequest
 from .provider_release import (
     ProviderReleaseContractError,
     build_consequence_request_from_provider_release,
 )
+from .state_snapshot import EquipmentStateSnapshot
 
 
 DIAGNOSTIC_ADAPTER_REGISTRY_SCHEMA = "prism.diagnostic_adapter_registry.v1"
@@ -427,6 +429,7 @@ class DiagnosticAdapterRunner:
         provider: AccidentHistoryProvider | None = None,
         provider_instance_id: str | None = None,
         release_kind: str = "gas",
+        state_snapshot_builder=None,
     ):
         """Build a resolver callback for ``request_from_equipment_resolver``.
 
@@ -444,9 +447,27 @@ class DiagnosticAdapterRunner:
             raise DiagnosticAdapterRunnerError(
                 "consequence_defaults_builder must be callable"
             )
+        if state_snapshot_builder is not None and not callable(state_snapshot_builder):
+            raise DiagnosticAdapterRunnerError(
+                "state_snapshot_builder must be callable when supplied"
+            )
 
         def resolve(template, normalized):
             export_request = request_builder(template, normalized)
+            if state_snapshot_builder is not None:
+                snapshot = state_snapshot_builder(template, normalized)
+                if not isinstance(snapshot, EquipmentStateSnapshot):
+                    raise DiagnosticAdapterRunnerError(
+                        "state_snapshot_builder must return EquipmentStateSnapshot"
+                    )
+                try:
+                    export_request = bind_state_snapshot_to_export_request(
+                        export_request, snapshot
+                    )
+                except (EquipmentAccidentExportError, TypeError, ValueError) as error:
+                    raise DiagnosticAdapterRunnerError(
+                        f"state snapshot could not be attached to export request: {error}"
+                    ) from error
             defaults = consequence_defaults_builder(template, normalized)
             execution = self.execute(
                 component_kind,

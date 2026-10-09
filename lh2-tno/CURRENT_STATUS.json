@@ -831,10 +831,12 @@
   "equipment_state_snapshot_contract_module": "src/lh2_tno/state_snapshot.py",
   "equipment_state_snapshot_contract_schema": "prism.equipment_state_snapshot.v1",
   "equipment_state_snapshot_provider_handoff": true,
+  "equipment_state_snapshot_resolver_binding_implemented": true,
+  "equipment_state_snapshot_resolver_binding_module": "src/lh2_tno/diagnostic_adapter_runner.py",
   "equipment_state_snapshot_accident_inference": false,
   "equipment_state_snapshot_digest_binding": true,
   "equipment_state_snapshot_accident_field_rejection": true,
-  "equipment_state_snapshot_test_status": "5 new state handoff/digest/component/forbidden-field/normalized-telemetry tests; full portable suite 417 passed; qualified provider packet remains 0",
+  "equipment_state_snapshot_test_status": "6 new state handoff/digest/component/forbidden-field/normalized-telemetry/resolver-binding tests; full portable suite 419 passed; qualified provider packet remains 0",
   "equipment_provider_qualification_gate_implemented": true,
   "equipment_provider_qualification_gate_schema": "prism.provider_qualification_evidence.v1",
   "equipment_provider_qualification_gate_requirements": [

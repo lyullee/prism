@@ -62,6 +62,30 @@ execution = runner.execute(
 
 각 ID는 하나의 provider 객체에만 연결되고, 다른 설비 종류로 재사용하거나 중복 등록할 수 없다. `DiagnosticAdapterExecution.audit_record()`에도 `provider_instance_id`를 남기므로 시설 ledger가 탱크·배관·밸브별 packet을 섞지 않는다. 이 기능은 다중 설비 연결 계약을 완성한 것이며, 실제 각 설비의 사고 이력·종료 장부·qualified evidence를 공급했다는 뜻은 아니다.
 
+### 공정 상태를 provider 요청에 전달하는 선택형 경계
+
+실시간 상태 resolver가 계산한 상태를 사고 provider가 동일한 시점에 사용해야 할 때는 `make_resolver(..., state_snapshot_builder=...)`를 사용한다. callback은 `EquipmentStateSnapshot`을 반환하고, runner는 요청의 `state_snapshot`과 `state_snapshot_digest`를 canonical 값으로 교체한 뒤 provider를 호출한다.
+
+```python
+from lh2_tno.state_snapshot import build_state_snapshot_from_normalized
+
+resolver = runner.make_resolver(
+    "storage_tank",
+    request_builder,
+    consequence_defaults_builder,
+    provider=provider,
+    state_snapshot_builder=lambda template, normalized: (
+        build_state_snapshot_from_normalized(
+            normalized,
+            component_id=template.component_id,
+            captured_at_s=host_clock_s(),
+        )
+    ),
+)
+```
+
+이 callback은 상태값만 바꾸며 누출구경·빈도·방출시간·차단·재고소진을 만들지 않는다. snapshot에 사고 전용 키가 있거나 설비 ID·digest가 맞지 않으면 provider 호출 전에 중단한다. `state_snapshot_builder`를 생략한 기존 resolver는 이전 요청을 그대로 사용하므로, 기존 진단 실행은 자동으로 적격 상태로 승격되지 않는다.
+
 ## 현재 확인 결과
 
 ```powershell

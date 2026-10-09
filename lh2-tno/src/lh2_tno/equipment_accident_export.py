@@ -23,7 +23,7 @@ termination outcome from a process-state snapshot.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import math
 from typing import Any, Protocol, runtime_checkable
 
@@ -550,6 +550,56 @@ class InventoryReleaseExportRequest:
         }
 
 
+def bind_state_snapshot_to_export_request(
+    request: AccidentReleaseExportRequest
+    | EmergencyReliefExportRequest
+    | InventoryReleaseExportRequest
+    | Mapping[str, Any],
+    snapshot: EquipmentStateSnapshot,
+) -> AccidentReleaseExportRequest | EmergencyReliefExportRequest | InventoryReleaseExportRequest:
+    """Attach one canonical process state to an explicit export request.
+
+    This helper is intentionally the only convenience path that changes a
+    request's state digest.  It never creates or changes accident geometry,
+    frequency, duration, or termination policy.
+    """
+    if not isinstance(snapshot, EquipmentStateSnapshot):
+        raise EquipmentAccidentExportError(
+            "snapshot must be an EquipmentStateSnapshot"
+        )
+    if isinstance(request, AccidentReleaseExportRequest):
+        return replace(
+            request,
+            state_snapshot=snapshot,
+            state_snapshot_digest=snapshot.digest(),
+        )
+    if isinstance(request, EmergencyReliefExportRequest):
+        return replace(
+            request,
+            state_snapshot=snapshot,
+            state_snapshot_digest=snapshot.digest(),
+        )
+    if isinstance(request, InventoryReleaseExportRequest):
+        return replace(
+            request,
+            state_snapshot=snapshot,
+            state_snapshot_digest=snapshot.digest(),
+        )
+    if not isinstance(request, Mapping):
+        raise EquipmentAccidentExportError("export request must be an object")
+    payload = dict(request)
+    schema = payload.get("schema_version")
+    payload["state_snapshot"] = snapshot.to_mapping()
+    payload["state_snapshot_digest"] = snapshot.digest()
+    if schema == ACCIDENT_EXPORT_REQUEST_SCHEMA:
+        return AccidentReleaseExportRequest.from_mapping(payload)
+    if schema == "prism.equipment_emergency_relief_export_request.v1":
+        return EmergencyReliefExportRequest.from_mapping(payload)
+    if schema == "prism.equipment_inventory_export_request.v1":
+        return InventoryReleaseExportRequest.from_mapping(payload)
+    raise EquipmentAccidentExportError("export request has an unsupported schema_version")
+
+
 @runtime_checkable
 class AccidentHistoryProvider(Protocol):
     """Protocol implemented by a qualified external equipment model."""
@@ -879,6 +929,7 @@ __all__ = [
     "EmergencyReliefExportRequest",
     "InventoryReleaseExportRequest",
     "EquipmentStateSnapshot",
+    "bind_state_snapshot_to_export_request",
     "AccidentReleaseExportResult",
     "export_equipment_gas_accident_history",
     "export_equipment_liquid_accident_history",
