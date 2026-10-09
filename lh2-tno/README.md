@@ -1012,3 +1012,5 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 `physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 465개 portable 테스트로 확인했다.
 
 문헌 빈도 p05·published·p95 및 분포 샘플링 결과에도 같은 승격 상태를 전달한다. 따라서 빈도 민감도 표가 계산되어도 `provider_packet_promoted`와 `complete_facility_qra_claim`을 별도로 확인할 수 있고, 빈도 불확실성 결과가 물리검증이나 시설 완결성을 대신하지 않는다.
+
+새 gate를 반영해 기존 5개 campaign 결과를 물리 재실행 없이 다시 집계했다. [`provider-gate assessment summary`](examples/provider_gate_facility_assessment_summary.json)는 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom, provider packet case 0건, qualified facility QRA `false`를 기록한다. 원본 ledger·assessment·evidence request는 `results/20261019/`에 생성했다.

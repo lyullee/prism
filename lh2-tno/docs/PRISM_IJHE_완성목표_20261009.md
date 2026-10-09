@@ -222,3 +222,5 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 또한 `physical_validation_evidence`를 `not_validated`/`independent_validated`로 분리했다. 완전한 시설 범위, 모든 실행 case의 qualified packet, 독립 물리검증 근거가 모두 있을 때만 `complete_facility_qra_claim`을 열 수 있다. 기존 수치 합산 장부의 `facility_total_risk_available`와 별도로 자격 상태를 보고하므로, 구조 연결·합성 진단 결과를 실제 시설 QRA로 오인하지 않는다. 현재 결과에는 qualified packet이 없고 물리검증 상태도 제한적이어서 승격 게이트는 닫혀 있다. 관련 portable suite는 465개 테스트가 통과했다.
 
 문헌 빈도 불확실성 함수도 이 상태를 각 시나리오와 최상위 결과에 전달한다. p05·published·p95 재가중 또는 lognormal 샘플링이 실행되어도 provider packet 적격성, 독립 물리검증, 완전 시설 QRA 상태는 별도 gate로 남는다.
+
+새 gate 적용 후 기존 5개 disjoint campaign을 재집계한 결과는 `results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_assessment.json`에 보관했다. 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom이며 provider packet case와 qualified packet case는 모두 0이다. 이 재집계는 새 물리 계산이 아니라 저장된 risk atom의 시설 회계·빈도 불확실성 결과를 갱신한 것이다.

@@ -2394,6 +2394,11 @@
   "facility_assessment_provider_gate_propagation_module": "src/lh2_tno/facility_assessment.py",
   "frequency_uncertainty_provider_gate_propagation_implemented": true,
   "frequency_uncertainty_provider_gate_propagation_module": "src/lh2_tno/uncertainty.py",
+  "provider_gate_reissued_facility_ledger_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_ledger.json",
+  "provider_gate_reissued_facility_assessment_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_assessment.json",
+  "provider_gate_reissued_evidence_request_record": "results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_evidence_request.json",
+  "provider_gate_reissued_summary_record": "examples/provider_gate_facility_assessment_summary.json",
+  "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
   "full_portable_test_count": 465,
   "full_portable_test_status": "465 passed"
 }
