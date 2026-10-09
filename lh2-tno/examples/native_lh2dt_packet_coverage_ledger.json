@@ -4,7 +4,7 @@
   "results_root": "lh2-tno",
   "packet_count": 25,
   "exact_worklist_event_count": 24,
-  "consequence_chain_event_count": 18,
+  "consequence_chain_event_count": 25,
   "frequency_bound_event_count": 1,
   "provider_packet_promoted_count": 0,
   "physical_validation_claim_count": 0,
@@ -37,7 +37,7 @@
     },
     "transfer-line": {
       "packet_count": 6,
-      "chain_count": 3,
+      "chain_count": 6,
       "frequency_bound_count": 1
     },
     "transfer-pump": {
@@ -47,7 +47,7 @@
     },
     "transfer-valve": {
       "packet_count": 5,
-      "chain_count": 1,
+      "chain_count": 5,
       "frequency_bound_count": 0
     }
   },
@@ -467,15 +467,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/dynamic_pipe_worklist_AREA_0.1pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_DYNAMIC_PIPE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -497,15 +499,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/dynamic_pipe_worklist_AREA_1pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_DYNAMIC_PIPE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -559,15 +563,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/dynamic_pipe_worklist_AREA_100pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_DYNAMIC_PIPE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -591,7 +597,7 @@
       "exact_worklist_event": true,
       "chain_executed": true,
       "chain_verification_paths": [
-        "lh2-tno/results/20261018/native_dynamic_pipe_full_bore_facility_frequency/verification.json"
+        "lh2-tno/results/20261019/dynamic_pipe_worklist_AREA_100pct_chain_native/verification.json"
       ],
       "frequency_bound": true,
       "frequency_event_id": null,
@@ -685,15 +691,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/valve_worklist_AREA_0.01pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -715,15 +723,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/valve_worklist_AREA_0.1pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -777,15 +787,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/valve_worklist_AREA_10pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {
@@ -807,15 +819,17 @@
       "integrated_mass_kg": null,
       "mass_residual_kg": null,
       "exact_worklist_event": true,
-      "chain_executed": false,
-      "chain_verification_paths": [],
+      "chain_executed": true,
+      "chain_verification_paths": [
+        "lh2-tno/results/20261019/valve_worklist_AREA_100pct_chain_native/verification.json"
+      ],
       "frequency_bound": false,
       "frequency_event_id": null,
       "provider_packet_promoted": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
       "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
-      "evidence_status": "NATIVE_PACKET_ONLY",
+      "evidence_status": "NATIVE_PACKET_WITH_CONSEQUENCE_CHAIN",
       "diagnostic_only": true
     },
     {

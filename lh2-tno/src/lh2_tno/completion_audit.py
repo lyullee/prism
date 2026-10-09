@@ -67,6 +67,7 @@ def build_ijhe_completion_audit(
     native_full_bore_result: Mapping[str, Any] | None = None,
     native_full_bore_frequency_result: Mapping[str, Any] | None = None,
     native_packet_coverage_ledger: Mapping[str, Any] | None = None,
+    native_packet_campaign_ledger: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -367,6 +368,78 @@ def build_ijhe_completion_audit(
                     "Saved native lh2dt packet outputs are indexed by equipment family and opening. "
                     "The ledger demonstrates diagnostic interface coverage only; it does not qualify "
                     "the provider, assign a facility frequency, or unlock facility IR/F-N."
+                ),
+            }
+        )
+    if native_packet_campaign_ledger is not None:
+        packet_campaign = native_packet_campaign_ledger
+        expected_worklist_events = (
+            provider_worklist.get("generated_event_count")
+            if isinstance(provider_worklist, Mapping)
+            else None
+        )
+        event_count = packet_campaign.get("event_count")
+        case_count = packet_campaign.get("case_count")
+        chain_count = packet_campaign.get("chain_executed_case_count")
+        failed_count = packet_campaign.get("failed_case_count")
+        campaign_valid = (
+            packet_campaign.get("schema_version") == "prism.native_lh2dt_packet_campaign_execution.v1"
+            and packet_campaign.get("status") == "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED"
+            and isinstance(event_count, int)
+            and event_count > 0
+            and case_count == event_count
+            and isinstance(chain_count, int)
+            and isinstance(failed_count, int)
+            and chain_count + failed_count == case_count
+            and packet_campaign.get("packet_identity_consumed") is True
+            and packet_campaign.get("packet_identity_case_count") == case_count
+            and packet_campaign.get("packet_digest_case_count") == case_count
+            and isinstance(packet_campaign.get("failed_cases"), list)
+            and len(packet_campaign.get("failed_cases")) == failed_count
+            and packet_campaign.get("facility_total_risk_available") is False
+            and packet_campaign.get("provider_packet_promoted") is False
+            and packet_campaign.get("frequency_from_provider_packet") is False
+            and packet_campaign.get("facility_qra_claim") is False
+            and packet_campaign.get("physical_validation_claim") is False
+            and isinstance(packet_campaign.get("policy"), Mapping)
+            and packet_campaign["policy"].get("provider_packet_promoted") is False
+            and packet_campaign["policy"].get("frequency_inference_performed") is False
+            and packet_campaign["policy"].get("frequency_from_provider_packet") is False
+            and packet_campaign["policy"].get("facility_qra_claim") is False
+            and packet_campaign["policy"].get("physical_validation_claim") is False
+            and (expected_worklist_events is None or event_count == expected_worklist_events)
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_packet_campaign_execution",
+                "status": "PASS" if campaign_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if campaign_valid
+                    else "native packet campaign ledger is missing, malformed, or hides a failed case"
+                ),
+                "evidence": {
+                    "record": packet_campaign.get("_record_path"),
+                    "status": packet_campaign.get("status"),
+                    "event_count": event_count,
+                    "expected_worklist_event_count": expected_worklist_events,
+                    "case_count": case_count,
+                    "chain_executed_case_count": chain_count,
+                    "packet_identity_case_count": packet_campaign.get("packet_identity_case_count"),
+                    "packet_digest_case_count": packet_campaign.get("packet_digest_case_count"),
+                    "packet_identity_consumed": packet_campaign.get("packet_identity_consumed"),
+                    "operator_limited_case_count": packet_campaign.get("operator_limited_case_count"),
+                    "failed_case_count": failed_count,
+                    "failed_cases": packet_campaign.get("failed_cases"),
+                    "risk_atom_count": packet_campaign.get("risk_atom_count"),
+                    "facility_total_risk_available": packet_campaign.get("facility_total_risk_available"),
+                    "facility_qra_claim": packet_campaign.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The native packet identities were consumed by the facility campaign and every failed "
+                    "case is preserved explicitly. This diagnostic result does not qualify the provider, "
+                    "invent a frequency, or expose facility total IR/F-N."
                 ),
             }
         )

@@ -171,3 +171,9 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 
 `build_ijhe_completion_audit.py --native-packet-coverage-ledger`를 사용하면 이 장부의 일관성을 별도 진단검사로 확인할 수 있다. 최신 감사는 `results/20261018/ijhe_completion_audit_with_native_packet_coverage.json`에 25개 검사를 기록하며 상태는 여전히 `INCOMPLETE_EVIDENCE`, 차단 이유는 3개다. 이 단계가 추가한 것은 방출 패킷의 설비별 추적성이고, 현장용 provider 적격성·미계산 사고의 실행·시설 전체 IR/F-N을 닫은 것은 아니다. 장부의 읽는 법과 현재 행별 범위는 [네이티브 LH2DT 사고 패킷 장부](PRISM_네이티브_LH2DT_사고패킷_장부_20261018.md)에 정리했다.
 
+## 2026-10-19 native packet 시설 campaign 소비
+
+`rebind_campaign_to_worklist_packets.py`로 24개 작업목록 사건의 요청을 저장된 strict native packet으로 다시 만들고, `run_lh2_mixed_provider_campaign.py`로 시설 campaign을 재실행했다. `examples/native_lh2dt_packet_campaign_execution_ledger.json`은 24/24 packet identity와 source/result digest 소비, 23개 체인 실행, 19개 운전자 제한, 1개 명시적 실패를 기록한다. 실패 사건은 `ambient-vaporizer/G1`이며 압축성·underexpanded plane handoff가 없어 실패했다. 이 결과는 방출 packet이 시설 계산 요청에 실제로 들어갔다는 증거지만, 실패·운전자 제한·합성 경계를 보존하므로 시설 전체 IR/F-N이나 provider 적격성으로 승격하지 않는다.
+
+최신 감사는 `results/20261019/ijhe_completion_audit_with_native_packet_campaign.json`의 26개 검사 중 새 `diagnostic_native_packet_campaign_execution`을 PASS 진단 전용으로 기록한다. 차단 이유는 적격 현장 packet 부재, 일부 사고군의 불완전성, 시설 IR/F-N 보류라는 3개가 그대로 남는다. 상세 재현 절차는 [네이티브 packet 시설 campaign 감사](PRISM_네이티브패킷_시설캠페인_감사_20261019.md)에 있다.
+

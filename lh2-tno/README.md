@@ -959,4 +959,6 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 
 현재 장부는 네이티브 패킷 25건, 작업목록 exact-match 24건, consequence-chain 연결 18건을 기록한다. 장부는 `diagnostic_only`이며 provider 승격·빈도 추론·시설 IR/F-N·물리검증을 열지 않는다. 읽는 법과 사고군별 표는 [네이티브 LH2DT 사고 패킷 장부](docs/PRISM_네이티브_LH2DT_사고패킷_장부_20261018.md)를 참조한다.
 
+저장된 네이티브 packet을 실제 시설 campaign 요청에 다시 넣은 결과도 별도 감사한다. `examples/native_lh2dt_packet_campaign_execution_ledger.json`은 24개 event와 24개 case에서 packet identity·source/result digest를 모두 보존했고, 23개 case가 체인까지 실행됐음을 기록한다. 19개는 `EXECUTED_OPERATOR_LIMITED`, `ambient-vaporizer/G1`은 압축성 plane handoff 부재로 명시적 `FAILED`다. 이 실패를 다른 방출모델로 대체하지 않으며 시설 전체 IR/F-N은 계속 보류한다. 자세한 실행·재현 명령은 [네이티브 packet 시설 campaign 감사](docs/PRISM_네이티브패킷_시설캠페인_감사_20261019.md)에 있다.
+
 
