@@ -1910,7 +1910,7 @@
   "external_scenario_evidence_scope": "facility-neutral screening only; outdoor candidate rows retained; indoor/semi-enclosed/test-building rows outside declared outdoor scope",
   "external_scenario_evidence_test_status": "scenario importer and IJHE diagnostic evidence check passed; full portable suite 441 passed",
   "ijhe_completion_audit_latest_scenario_evidence_status": "PASS diagnostic-only; 52 records from 3 CSVs, 41 outdoor candidates and 11 out-of-scope rows",
-  "full_test_suite_status": "CI Run #413: 579 passed, 1 skipped; local portable command: 579 passed, 1 skipped with CoolProp-dependent native generic-scope collection excluded; CI installs CoolProp and executes the full suite",
+  "full_test_suite_status": "CI Run #415 completed successfully in 27 s; local portable command: 582 passed, 1 skipped with CoolProp-dependent native generic-scope collection excluded; CI installs CoolProp and executes the full suite",
   "diagnostic_campaign_binding_latest_record": "results/20261018/generic_lh2_diagnostic_campaign_binding_current.json",
   "diagnostic_campaign_binding_latest_status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING; structural event/case/risk-atom binding complete",
   "diagnostic_campaign_binding_latest_packet_event_count": 24,
@@ -2215,7 +2215,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, partial-provider precedence, facility branch/release/timing evidence, configurable realtime source-time gate, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and fail-closed realtime facility risk handoff; CI Run #413 full suite 579 passed, 1 skipped (local portable suite 579 passed, 1 skipped)",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, partial-provider precedence, facility branch/release/timing evidence, configurable realtime source-time gate, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and fail-closed realtime facility risk handoff; CI Run #415 completed successfully in 27 s (local portable suite 582 passed, 1 skipped)",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -2500,7 +2500,7 @@
   "facility_realtime_monitor_ignition_accounting": "Implemented in aggregate.current_weather_ignition_accounting; validates the complete outdoor four-branch provider probability set and optionally applies only explicit literature condition/release/occupancy weights, without facility-risk promotion.",
   "facility_realtime_monitor_component_risk_ranking": "Implemented in aggregate.component_risk_ranking; ranks only components with explicit literature frequency and valid current-weather receptor IR, retains missing/rejected components as withheld null rows, and never reallocates frequency or promotes facility IR/F-N.",
   "facility_realtime_monitor_frequency_rank_sensitivity": "Implemented in aggregate.component_risk_ranking rows; optional p05/published/p95 peak IR and rank maps are exposed only when every scenario has a valid provider harm map, with missing scenarios withheld as null and no physics rerun or frequency learning.",
-  "facility_realtime_monitor_test_status": "current-weather IR binding, p05/p95 sensitivity, component-risk ranking/withholding, duplicate-event guard, missing-harm withholding, deadline/facility rejection, asynchronous time-window, configurable source-time gate, row-to-provider consequence-chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and fail-closed facility handoff tests; CI Run #413 full suite 579 passed, 1 skipped (local portable suite 582 passed, 1 skipped)",
+  "facility_realtime_monitor_test_status": "current-weather IR binding, p05/p95 sensitivity, component-risk ranking/withholding, duplicate-event guard, missing-harm withholding, deadline/facility rejection, asynchronous time-window, configurable source-time gate, row-to-provider consequence-chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and fail-closed facility handoff tests; CI Run #415 completed successfully in 27 s (local portable suite 582 passed, 1 skipped)",
   "facility_realtime_monitor_one_hz_claim": false,
   "facility_realtime_monitor_facility_annual_risk_available": false,
   "facility_realtime_monitor_current_status": "IMPLEMENTED_DIAGNOSTIC_MULTI_COMPONENT_LEDGER; facility annual IR/F-N withheld until qualified provider packets, complete accident coverage, and independent physical validation are available.",
@@ -3097,5 +3097,6 @@
   "realtime_facility_campaign_adapter_status": "CONDITIONAL_LEDGER_BRIDGE_OPERATOR_LIMITED; explicit annual/release/ignition metadata required; qualified facility IR/F-N withheld",
   "realtime_facility_campaign_adapter_population_basis": "population_weighted expected deaths are opt-in and closed against annual-condition population rows; legacy atoms keep historical closure",
   "realtime_facility_campaign_adapter_facility_qra_promotion": false,
-  "realtime_facility_campaign_adapter_test_status": "targeted adapter + ledger tests 31 passed before full portable rerun"
+  "realtime_facility_campaign_adapter_test_status": "targeted adapter + facility ledger tests 31 passed; local portable suite 582 passed/1 skipped; CI Run #415 completed successfully in 27 s",
+  "realtime_facility_campaign_adapter_ci_run": "https://github.com/lyullee/prism/actions/runs/37958982378"
 }
