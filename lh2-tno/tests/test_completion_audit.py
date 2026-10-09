@@ -46,6 +46,34 @@ def _status(validated=True):
     }
 
 
+def _diagnostic_execution(**overrides):
+    execution = {
+        "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "adapter_execution": {
+            "provider_instance_id": "storage-tank-01",
+        },
+        "worklist_item_id": "scope/storage-shell/AREA_0.01%/provider-release",
+        "worklist_exact_match": {
+            "event_id": True,
+            "component_id": True,
+            "port_id": True,
+            "opening_diameter_m": True,
+        },
+        "consequence_chain_executed": True,
+        "consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+        "fresh_execution_elapsed_ms": 1000.0,
+        "qualified_provider_packet_count": 0,
+        "provider_packet_promoted": False,
+        "worklist_frequency_bound": False,
+        "consequence_context_frequency_bound": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    execution.update(overrides)
+    return execution
+
+
 def test_completion_audit_blocks_incomplete_facility_claim():
     report = build_ijhe_completion_audit(
         _status(False),
@@ -196,3 +224,50 @@ def test_completion_audit_records_resolved_diagnostic_adapter_execution_contract
     )
     assert check["status"] == "PASS"
     assert check["evidence"]["resolved_adapter_count"] == 7
+
+
+def test_completion_audit_records_nonqualifying_worklist_chain_execution():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        diagnostic_adapter_execution=_diagnostic_execution(_record_path="runner.json"),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_execution_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert check["evidence"]["record"] == "runner.json"
+    assert check["evidence"]["provider_instance_id"] == "storage-tank-01"
+    assert len(report["blocking_reasons"]) == 6
+
+
+def test_completion_audit_rejects_invalid_diagnostic_execution_without_promoting_it():
+    execution = _diagnostic_execution(
+        worklist_exact_match={
+            "event_id": True,
+            "component_id": True,
+            "port_id": False,
+            "opening_diameter_m": True,
+        },
+        worklist_frequency_bound=True,
+    )
+    report = build_ijhe_completion_audit(
+        _status(True),
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        diagnostic_adapter_execution=execution,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_execution_evidence"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert report["status"] == "READY_FOR_IJHE_SCOPE"

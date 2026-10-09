@@ -56,6 +56,7 @@ def build_ijhe_completion_audit(
     uncertainty_result: Mapping[str, Any] | None = None,
     provider_worklist: Mapping[str, Any] | None = None,
     diagnostic_adapter_registry: Mapping[str, Any] | None = None,
+    diagnostic_adapter_execution: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -173,6 +174,69 @@ def build_ijhe_completion_audit(
                 },
                 "the declared diagnostic adapter registry is not fully resolved",
             )
+        )
+    if diagnostic_adapter_execution is not None:
+        execution = diagnostic_adapter_execution
+        adapter_execution = execution.get("adapter_execution")
+        exact_match = execution.get("worklist_exact_match")
+        exact_match_fields = ("event_id", "component_id", "port_id", "opening_diameter_m")
+        exact_match_complete = (
+            isinstance(exact_match, Mapping)
+            and all(exact_match.get(field) is True for field in exact_match_fields)
+        )
+        execution_valid = (
+            isinstance(execution.get("status"), str)
+            and execution.get("status", "").startswith("EXECUTED")
+            and isinstance(adapter_execution, Mapping)
+            and isinstance(execution.get("worklist_item_id"), str)
+            and bool(execution.get("worklist_item_id"))
+            and exact_match_complete
+            and execution.get("consequence_chain_executed") is True
+            and isinstance(execution.get("consequence_chain_status"), str)
+            and execution.get("consequence_chain_status", "").startswith("END_TO_END")
+            and execution.get("qualified_provider_packet_count") == 0
+            and execution.get("provider_packet_promoted") is False
+            and execution.get("worklist_frequency_bound") is False
+            and execution.get("consequence_context_frequency_bound") is False
+            and execution.get("frequency_inference_performed") is False
+            and execution.get("facility_qra_claim") is False
+            and execution.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_worklist_execution_evidence",
+                "status": "PASS" if execution_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": execution.get("_record_path"),
+                    "status": execution.get("status"),
+                    "worklist_item_id": execution.get("worklist_item_id"),
+                    "provider_instance_id": adapter_execution.get("provider_instance_id")
+                    if isinstance(adapter_execution, Mapping)
+                    else None,
+                    "worklist_exact_match": exact_match,
+                    "consequence_chain_executed": execution.get("consequence_chain_executed"),
+                    "consequence_chain_status": execution.get("consequence_chain_status"),
+                    "consequence_chain_elapsed_ms": execution.get("fresh_execution_elapsed_ms"),
+                    "qualified_provider_packet_count": execution.get(
+                        "qualified_provider_packet_count"
+                    ),
+                    "provider_packet_promoted": execution.get("provider_packet_promoted"),
+                    "worklist_frequency_bound": execution.get("worklist_frequency_bound"),
+                    "consequence_context_frequency_bound": execution.get(
+                        "consequence_context_frequency_bound"
+                    ),
+                    "frequency_inference_performed": execution.get("frequency_inference_performed"),
+                    "facility_qra_claim": execution.get("facility_qra_claim"),
+                    "physical_validation_claim": execution.get("physical_validation_claim"),
+                },
+                "interpretation": (
+                    "A worklist item reached the diagnostic provider and consequence-chain boundary; "
+                    "this evidence is intentionally non-qualifying and does not satisfy the provider, "
+                    "frequency, facility-QRA, or physical-validation gates."
+                ),
+            }
         )
     checks.extend([
         _check(

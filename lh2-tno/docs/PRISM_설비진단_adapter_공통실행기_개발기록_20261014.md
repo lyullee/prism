@@ -109,7 +109,7 @@ python scripts/audit_diagnostic_adapter_registry.py `
 4. 주요 사고 범위의 모든 provider packet이 채워지고 미계산 항목이 0이 되어야 한다.
 5. 그 뒤에야 qualified facility IR/F-N과 불확실성 구간을 계산한다.
 
-현재 공통 실행기 감사 파일은 `results/20261014/diagnostic_adapter_registry_audit_live.json`이다. 인스턴스 분리 계약을 포함한 portable suite는 384개로 통과했으며, 전체 IJHE 완료 감사의 qualified provider gate는 계속 차단 상태다.
+현재 공통 실행기 감사 파일은 `results/20261014/diagnostic_adapter_registry_audit_live.json`이다. 인스턴스 분리 계약을 포함한 portable suite는 386개로 통과했으며, 전체 IJHE 완료 감사의 qualified provider gate는 계속 차단 상태다.
 
 재현 가능한 축약 결과는 `examples/diagnostic_adapter_registry_audit.json`에도 보존했다.
 

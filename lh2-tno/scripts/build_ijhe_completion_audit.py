@@ -26,6 +26,7 @@ def main() -> int:
     parser.add_argument("--uncertainty-result", type=Path)
     parser.add_argument("--provider-worklist", type=Path)
     parser.add_argument("--diagnostic-adapter-registry", type=Path)
+    parser.add_argument("--diagnostic-adapter-execution", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -35,8 +36,21 @@ def main() -> int:
         uncertainty = _object(args.uncertainty_result) if args.uncertainty_result else None
         worklist = _object(args.provider_worklist) if args.provider_worklist else None
         registry = _object(args.diagnostic_adapter_registry) if args.diagnostic_adapter_registry else None
+        diagnostic_execution = (
+            _object(args.diagnostic_adapter_execution)
+            if args.diagnostic_adapter_execution
+            else None
+        )
+        if diagnostic_execution is not None:
+            diagnostic_execution["_record_path"] = str(args.diagnostic_adapter_execution)
         report = build_ijhe_completion_audit(
-            status, matrix, campaign, uncertainty, worklist, registry
+            status,
+            matrix,
+            campaign,
+            uncertainty,
+            worklist,
+            registry,
+            diagnostic_execution,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
