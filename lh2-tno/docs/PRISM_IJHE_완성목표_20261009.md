@@ -224,3 +224,5 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 문헌 빈도 불확실성 함수도 이 상태를 각 시나리오와 최상위 결과에 전달한다. p05·published·p95 재가중 또는 lognormal 샘플링이 실행되어도 provider packet 적격성, 독립 물리검증, 완전 시설 QRA 상태는 별도 gate로 남는다.
 
 새 gate 적용 후 기존 5개 disjoint campaign을 재집계한 결과는 `results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_assessment.json`에 보관했다. 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom이며 provider packet case와 qualified packet case는 모두 0이다. 이 재집계는 새 물리 계산이 아니라 저장된 risk atom의 시설 회계·빈도 불확실성 결과를 갱신한 것이다.
+
+이 assessment를 완료 감사기에 다시 넣은 결과도 `examples/ijhe_completion_audit_provider_gate_summary.json`에 보관했다. 15개 검사, 4개 blocker이며 방출→피해 chain·문헌 빈도 불확실성·지속시간/차단/재고 장부·처리시간 계약은 통과한다. 실제 사고 provider packet, 전체 사고범위, 시설 IR/F-N은 여전히 `BLOCKED`다.

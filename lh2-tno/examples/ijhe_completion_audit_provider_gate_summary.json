@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.ijhe_completion_audit_summary.v1",
+  "source_record": "results/20261019/ijhe_completion_audit_provider_gate_reissued.json",
+  "status": "INCOMPLETE_EVIDENCE",
+  "check_count": 15,
+  "blocking_reason_count": 4,
+  "blocking_reasons": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ],
+  "check_statuses": {
+    "equipment_state_to_release_to_consequence": "PASS",
+    "provider_worklist_scope_alignment": "PASS",
+    "diagnostic_adapter_execution_contract": "PASS",
+    "diagnostic_conditional_facility_risk_evidence": "PASS",
+    "diagnostic_frequency_uncertainty_evidence": "PASS",
+    "equipment_model_binding_to_accident_release": "PASS",
+    "actual_provider_release_packet": "BLOCKED",
+    "provider_worklist_coverage": "BLOCKED",
+    "release_duration_isolation_inventory_ledger": "PASS",
+    "declared_major_accident_scope": "BLOCKED",
+    "facility_ir_fn_available": "BLOCKED",
+    "physical_validation_evidence": "PASS",
+    "frequency_uncertainty_reported": "PASS",
+    "processing_time_evidence": "PASS",
+    "realtime_monitor_contract": "PASS"
+  },
+  "complete_facility_qra_claim": false,
+  "facility_total_risk_available": null
+}\n

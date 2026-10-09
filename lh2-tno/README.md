@@ -1014,3 +1014,5 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 문헌 빈도 p05·published·p95 및 분포 샘플링 결과에도 같은 승격 상태를 전달한다. 따라서 빈도 민감도 표가 계산되어도 `provider_packet_promoted`와 `complete_facility_qra_claim`을 별도로 확인할 수 있고, 빈도 불확실성 결과가 물리검증이나 시설 완결성을 대신하지 않는다.
 
 새 gate를 반영해 기존 5개 campaign 결과를 물리 재실행 없이 다시 집계했다. [`provider-gate assessment summary`](examples/provider_gate_facility_assessment_summary.json)는 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom, provider packet case 0건, qualified facility QRA `false`를 기록한다. 원본 ledger·assessment·evidence request는 `results/20261019/`에 생성했다.
+
+같은 결과를 IJHE 완료 감사기에 다시 넣은 요약은 [`ijhe_completion_audit_provider_gate_summary.json`](examples/ijhe_completion_audit_provider_gate_summary.json)이다. 15개 검사 중 chain·빈도 불확실성·방출 지속시간/차단/재고 장부·처리시간은 통과했고, 실제 provider packet·주요 사고범위 완결·시설 IR/F-N 때문에 4개 blocker가 남아 `INCOMPLETE_EVIDENCE`이다.
