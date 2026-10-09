@@ -941,11 +941,13 @@ def build_ijhe_completion_audit(
                     "frequency_bound": evidence.get("frequency_bound"),
                     "facility_qra_claim": evidence.get("facility_qra_claim"),
                     "physical_validation_claim": evidence.get("physical_validation_claim"),
+                    "qualification_readiness": evidence.get("qualification_readiness"),
                 },
                 "interpretation": (
                     "Saved external-model packets cover only the exact-matched worklist subset; "
                     "this diagnostic evidence does not close the missing events or qualify the "
-                    "provider packets."
+                    "provider packets. Qualification-readiness blockers are copied separately so "
+                    "exact packet identity is not mistaken for actual facility evidence."
                 ),
             }
         )
@@ -1517,6 +1519,11 @@ def build_ijhe_completion_audit(
                 "structural_diagnostic_coverage": structural_worklist_coverage,
                 "qualified_provider_packet_count": (
                     diagnostic_worklist_evidence.get("qualified_provider_packet_count")
+                    if isinstance(diagnostic_worklist_evidence, Mapping)
+                    else None
+                ),
+                "qualification_readiness": (
+                    diagnostic_worklist_evidence.get("qualification_readiness")
                     if isinstance(diagnostic_worklist_evidence, Mapping)
                     else None
                 ),

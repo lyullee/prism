@@ -9,7 +9,7 @@ from lh2_tno.status_consistency import build_status_consistency_report, load_jso
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v17.json"
+AUDIT = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v18.json"
 ASSESSMENT = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
 EVIDENCE_REQUEST = ROOT / "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json"
 LEDGER = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_ledger_population_v3.json"

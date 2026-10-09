@@ -953,6 +953,10 @@ def test_completion_audit_accepts_complete_structural_worklist_without_qualifyin
             exact_match_event_count=24,
             strict_packet_valid_event_count=24,
             consequence_chain_event_count=15,
+            qualification_readiness={
+                "status_counts": {"BLOCKED_REVIEW": 24},
+                "blocker_counts": {"qualification_sidecar_missing": 24},
+            },
             _record_path="full-evidence.json",
         ),
     )
@@ -960,6 +964,9 @@ def test_completion_audit_accepts_complete_structural_worklist_without_qualifyin
     assert check["status"] == "PASS"
     assert check["evidence"]["structural_diagnostic_coverage"] is True
     assert check["evidence"]["qualified_provider_packet_count"] == 0
+    assert check["evidence"]["qualification_readiness"]["status_counts"] == {
+        "BLOCKED_REVIEW": 24
+    }
     assert report["complete_facility_qra_claim"] is False
 
 
