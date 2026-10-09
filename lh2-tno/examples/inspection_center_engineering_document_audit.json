@@ -1,0 +1,333 @@
+{
+  "schema_version": "prism.engineering_document_evidence.v1",
+  "status": "ENGINEERING_DOCUMENT_SCREENING_ONLY",
+  "source_root": "<engineering-document-root>",
+  "source_file_count": 18,
+  "aggregate": {
+    "document_class_count": {
+      "emergency_procedure_candidate": 2,
+      "engineering_drawing_candidate": 2,
+      "operating_procedure_candidate": 2,
+      "pid_topology_candidate": 4,
+      "project_reference_candidate": 1,
+      "test_or_inspection_procedure_candidate": 1,
+      "unclassified_document": 6
+    },
+    "candidate_evidence_count": {
+      "emergency_action": 2,
+      "equipment_geometry": 2,
+      "equipment_topology": 4,
+      "instrument_candidate": 1,
+      "isolation_action_candidate": 2,
+      "layout_candidate": 2,
+      "measurement_context": 1,
+      "normal_sequence": 2,
+      "operator_action_candidate": 2,
+      "port_and_line_labels": 4,
+      "project_scope_context": 1
+    },
+    "page_count_status_count": {
+      "PAGE_COUNT_READ": 18
+    },
+    "accident_release_packet_count": 0,
+    "qualified_provider_packet_count": 0
+  },
+  "promotion_gates": {
+    "equipment_topology_candidate_allowed": true,
+    "state_snapshot_binding_allowed": false,
+    "frequency_applied": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false,
+    "reason": "Engineering PDFs are preparation evidence only. Exact equipment IDs, port coordinates, reviewed units, calibration/quality records, and an accident-only provider history are required before state or QRA promotion."
+  },
+  "files": [
+    {
+      "relative_path": "(별첨1-1) 펌프기화기 평가시스템 시험절차서.pdf",
+      "sha256": "b8b9e0f7f9d9465cad503ebca8dbb2f5624b9232e06821021faeaf25be15c87f",
+      "size_bytes": 920391,
+      "suffix": ".pdf",
+      "document_class": "test_or_inspection_procedure_candidate",
+      "candidate_evidence": [
+        "measurement_context",
+        "instrument_candidate"
+      ],
+      "page_count": 22,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "1. 진공단열배관 단열성능 평가검사 장비 운영 가이드Ver5.pdf",
+      "sha256": "83f0cb3b8ada25ed66d8ef0888466ffe29b53f61296a199189d401d9de962706",
+      "size_bytes": 262770,
+      "suffix": ".pdf",
+      "document_class": "operating_procedure_candidate",
+      "candidate_evidence": [
+        "normal_sequence",
+        "operator_action_candidate"
+      ],
+      "page_count": 12,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "1세부_용기시험동_P&ID.pdf",
+      "sha256": "2605d4bb20d3b6d5d477b45e1b4342e7f3df58e36fdd72ae8e618af3c383759f",
+      "size_bytes": 148384,
+      "suffix": ".pdf",
+      "document_class": "pid_topology_candidate",
+      "candidate_evidence": [
+        "equipment_topology",
+        "port_and_line_labels"
+      ],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "240725_A1-9301(P&ID).pdf",
+      "sha256": "102c8d1a85928ad1155766fb817ffecc0328ae1f37dacc295ee74e0baa3d1403",
+      "size_bytes": 1209574,
+      "suffix": ".pdf",
+      "document_class": "pid_topology_candidate",
+      "candidate_evidence": [
+        "equipment_topology",
+        "port_and_line_labels"
+      ],
+      "page_count": 3,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "2세부 내용.pdf",
+      "sha256": "e6be536962eac9bff83286dc3bec0b191e4f18cd23f17e91d8a9c29331541197",
+      "size_bytes": 2943394,
+      "suffix": ".pdf",
+      "document_class": "unclassified_document",
+      "candidate_evidence": [],
+      "page_count": 2,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "2톤 저장탱크_GA.pdf",
+      "sha256": "3b9725ad7df886354a596701c0aa3b2d4a27fd1aa392668e1fe2d2754a670532",
+      "size_bytes": 136293,
+      "suffix": ".pdf",
+      "document_class": "engineering_drawing_candidate",
+      "candidate_evidence": [
+        "equipment_geometry",
+        "layout_candidate"
+      ],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "2톤 저장탱크_P&ID.pdf",
+      "sha256": "41a6ceefc42359abe7cdbd7fc5cef32639ae7336caf4c4c54b72a6c67979041d",
+      "size_bytes": 146553,
+      "suffix": ".pdf",
+      "document_class": "pid_topology_candidate",
+      "candidate_evidence": [
+        "equipment_topology",
+        "port_and_line_labels"
+      ],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "5.마동-준공도면(2502) (1).pdf",
+      "sha256": "1e14d2485628faac531e0e1bd7324661c08eefd3c78aab1fca91ce360610f73e",
+      "size_bytes": 2958425,
+      "suffix": ".pdf",
+      "document_class": "engineering_drawing_candidate",
+      "candidate_evidence": [
+        "equipment_geometry",
+        "layout_candidate"
+      ],
+      "page_count": 24,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "A1-9101.pdf",
+      "sha256": "6ae95baf75f3186ba43c107eb1913aafdab853ca9351e031daf123f7eee384fc",
+      "size_bytes": 294233,
+      "suffix": ".pdf",
+      "document_class": "unclassified_document",
+      "candidate_evidence": [],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "A1-9102.pdf",
+      "sha256": "b2ed0e612e75fdb9ef9dea745db2c345af1741c46e6925e873a0e2d1721bfc26",
+      "size_bytes": 477118,
+      "suffix": ".pdf",
+      "document_class": "unclassified_document",
+      "candidate_evidence": [],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "A1-9103.pdf",
+      "sha256": "361e5539acdd0bdb1b637c926a0b9b3b69b440f02829b59c1bc159ff6f4f986e",
+      "size_bytes": 318000,
+      "suffix": ".pdf",
+      "document_class": "unclassified_document",
+      "candidate_evidence": [],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "A1-9106.pdf",
+      "sha256": "5ed4d4634e9aa1d848c9f3e00cd5236dad8eefa4463b01bc0918c79a6e6b4468",
+      "size_bytes": 410498,
+      "suffix": ".pdf",
+      "document_class": "unclassified_document",
+      "candidate_evidence": [],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "A1-9107.pdf",
+      "sha256": "166a4e208f9ac29a41e37965ecb8df7005be5dd29322e0fbbe783e9abc4e8e76",
+      "size_bytes": 175106,
+      "suffix": ".pdf",
+      "document_class": "unclassified_document",
+      "candidate_evidence": [],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "p&id 진공배관 성능장비rev2.pdf",
+      "sha256": "fb840d85686a175878d0a08a8d9f1593672ee8068fa76136a93edad5b438766b",
+      "size_bytes": 282703,
+      "suffix": ".pdf",
+      "document_class": "pid_topology_candidate",
+      "candidate_evidence": [
+        "equipment_topology",
+        "port_and_line_labels"
+      ],
+      "page_count": 1,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "액화수소검사지원센터 비상대응절차서.pdf",
+      "sha256": "b41aa5ca9159373445eb3e53ec23ab17c49f530a67eeab15f2246ce2127adc79",
+      "size_bytes": 7354253,
+      "suffix": ".pdf",
+      "document_class": "emergency_procedure_candidate",
+      "candidate_evidence": [
+        "emergency_action",
+        "isolation_action_candidate"
+      ],
+      "page_count": 41,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "액화수소검사지원센터 비상대응훈련 시나리오.pdf",
+      "sha256": "9343958b760f93375456ef1e03318d8af1b62e39add3bea216f15a3fbd691e71",
+      "size_bytes": 1755714,
+      "suffix": ".pdf",
+      "document_class": "emergency_procedure_candidate",
+      "candidate_evidence": [
+        "emergency_action",
+        "isolation_action_candidate"
+      ],
+      "page_count": 11,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "액화수소검사지원센터 액화수소 하역 운전절차서.pdf",
+      "sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
+      "size_bytes": 7234802,
+      "suffix": ".pdf",
+      "document_class": "operating_procedure_candidate",
+      "candidate_evidence": [
+        "normal_sequence",
+        "operator_action_candidate"
+      ],
+      "page_count": 27,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    },
+    {
+      "relative_path": "협약용 연구개발계획서_에너지R&D(일반)_유엔이_0521.pdf",
+      "sha256": "b774dec728fb1a512475a25e4d6dac3af76742a2a6566ab6b6b27083b02066b1",
+      "size_bytes": 17707053,
+      "suffix": ".pdf",
+      "document_class": "project_reference_candidate",
+      "candidate_evidence": [
+        "project_scope_context"
+      ],
+      "page_count": 228,
+      "page_count_status": "PAGE_COUNT_READ",
+      "status": "READ_METADATA",
+      "raw_text_copied": false,
+      "accident_release_packet": false,
+      "qualified_provider_packet": false
+    }
+  ]
+}
