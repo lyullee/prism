@@ -628,7 +628,7 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_total_facility_risk_available": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_physical_validation_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_downward_guard": "implemented fail-closed in src/lh2_tno/chain_worker.py; no zero-horizontal-direction normalization",
-  "unit_contract_conservation_tests_passed": 427,
+  "unit_contract_conservation_tests_passed": 428,
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_status": "PARTIAL_DECLARED_SCOPE; 7 synthetic storage branch cases executed through the full consequence chain, 21 cases explicitly UNCOMPUTED; all executed cases remain operator-limited",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full_adaptive.json",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_case_count": 7,
@@ -1219,9 +1219,9 @@
   "major_accident_scope_matrix_catalog_record": "results/20261017/generic_mixed_accident_scope_matrix_with_catalog.json",
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
-  "ijhe_completion_audit_latest_record": "results/20261017/ijhe_completion_audit_after_scenario_catalog.json",
+  "ijhe_completion_audit_latest_record": "results/20261017/ijhe_completion_audit_after_worklist_alignment.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_latest_check_count": 18,
+  "ijhe_completion_audit_latest_check_count": 19,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [
     "one or more equipment models lacks an accident-release interface and provider termination ledger",
@@ -1233,7 +1233,7 @@
   "provider_worklist_scenario_family_binding_module": "src/lh2_tno/provider_worklist.py",
   "provider_worklist_scenario_family_binding_catalog": "src/lh2_tno/accident_scenario_catalog.py",
   "provider_worklist_scenario_family_binding_policy": "Each frequency event carries declared scenario_families and top-level counts; this does not infer frequency or create a provider packet. Missing packets remain UNCOMPUTED.",
-  "provider_worklist_scenario_family_binding_test_status": "provider worklist and catalogue tests; full portable suite 427 passed",
+  "provider_worklist_scenario_family_binding_test_status": "provider worklist and catalogue tests; full portable suite 428 passed",
   "provider_worklist_scenario_family_binding_record": "results/20261017/provider_worklist_with_scenario_families.json",
   "provider_worklist_scope_alignment_implemented": true,
   "provider_worklist_scope_alignment_module": "src/lh2_tno/accident_scenario_catalog.py::audit_worklist_scope_alignment",
@@ -1241,5 +1241,9 @@
   "provider_worklist_scope_alignment_schema": "prism.accident_scenario_worklist_alignment.v1",
   "provider_worklist_scope_alignment_status": "ALIGNED for generic 24-event structural diagnostic; provider packet count remains 0 and facility QRA is withheld",
   "provider_worklist_scope_alignment_record": "results/20261017/generic_mixed_accident_scope_matrix_with_worklist_alignment.json",
-  "provider_worklist_scope_alignment_test_status": "scope/worklist alignment tests; full portable suite 427 passed"
+  "provider_worklist_scope_alignment_test_status": "scope/worklist alignment tests; full portable suite 428 passed",
+  "ijhe_completion_audit_worklist_alignment_check_implemented": true,
+  "ijhe_completion_audit_worklist_alignment_check_name": "provider_worklist_scope_alignment",
+  "ijhe_completion_audit_worklist_alignment_check_policy": "Diagnostic PASS only when worklist event IDs and primary accident families align; does not create packets, infer frequency, or promote facility QRA.",
+  "ijhe_completion_audit_worklist_alignment_check_record": "results/20261017/ijhe_completion_audit_after_scenario_catalog.json"
 }

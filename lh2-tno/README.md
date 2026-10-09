@@ -901,7 +901,7 @@ MIT는 PRISM 자체 배포 파일에 적용하며 외부 모델과 원자료의 
 
 사고 가족별 범위도 같은 평가에 연결됩니다. `results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json`은 현재 혼합 캠페인의 12개 주요 사고 가족을 `EXECUTED` 4개, `PARTIAL` 7개, `NO_EVENT_GENERATED` 1개로 기록합니다. 이 표는 사고 빈도를 합산하는 표가 아니라, 어떤 사고가 계산됐고 어떤 사고가 빠졌는지를 시설 총위험도 승격 전에 확인하는 장부입니다.
 
-사고 family의 설비 적용범위와 필요한 provider 방출·종료 계약은 [LH2 사고 시나리오 카탈로그](docs/PRISM_LH2_사고시나리오_카탈로그_20261017.md)와 `src/lh2_tno/accident_scenario_catalog.py`에 고정되어 있습니다. `scripts/export_accident_scenario_catalog.py`는 12개 야외 주요사고 family를 manifest의 설비 ID와 함께 JSON으로 내보냅니다. 이 카탈로그는 누출 packet이나 빈도를 만들어 내지 않으며, packet이 없거나 종료 장부가 부족하면 해당 family를 `UNCOMPUTED` 또는 `NO_EVENT_GENERATED`로 남깁니다. 최신 개발 소스는 **427개 portable 검사**를 통과했지만, 현재 외부 provider 적격 사고 packet은 0건이고 시설 전체 IR/F-N은 계속 보류됩니다.
+사고 family의 설비 적용범위와 필요한 provider 방출·종료 계약은 [LH2 사고 시나리오 카탈로그](docs/PRISM_LH2_사고시나리오_카탈로그_20261017.md)와 `src/lh2_tno/accident_scenario_catalog.py`에 고정되어 있습니다. `scripts/export_accident_scenario_catalog.py`는 12개 야외 주요사고 family를 manifest의 설비 ID와 함께 JSON으로 내보냅니다. 이 카탈로그는 누출 packet이나 빈도를 만들어 내지 않으며, packet이 없거나 종료 장부가 부족하면 해당 family를 `UNCOMPUTED` 또는 `NO_EVENT_GENERATED`로 남깁니다. 최신 개발 소스는 **428개 portable 검사**를 통과했지만, 현재 외부 provider 적격 사고 packet은 0건이고 시설 전체 IR/F-N은 계속 보류됩니다.
 
 provider worklist의 각 event에는 `scenario_families`가 함께 기록됩니다. 따라서 저장탱크 구멍이 `vessel_hole`과 `liquid_two_phase`에 걸리는 것처럼 설비 family와 상변화·재고 사고를 명시적으로 추적할 수 있습니다. 이 필드는 빈도를 재배분하지 않고, 필요한 provider packet이 없을 때 미계산 상태를 유지하기 위한 연결표입니다.
 

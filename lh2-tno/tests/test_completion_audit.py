@@ -23,6 +23,32 @@ def _matrix(complete=True):
     }
 
 
+def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        {
+            **_matrix(complete=False),
+            "provider_worklist_alignment": {
+                "status": "ALIGNED",
+                "worklist_event_count": 2,
+                "campaign_event_count": 2,
+                "aligned_event_count": 2,
+                "missing_event_ids": [],
+                "primary_family_mismatches": [],
+                "provider_packet_created": False,
+                "frequency_inference_performed": False,
+            },
+        },
+        _campaign_result(total=False),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "provider_worklist_scope_alignment"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def _status(validated=True):
     return {
         "physical_validation_claim": validated,

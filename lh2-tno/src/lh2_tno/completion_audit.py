@@ -163,6 +163,52 @@ def build_ijhe_completion_audit(
             "no executed release-to-consequence case is present",
         ),
     ]
+    worklist_alignment = scope_matrix.get("provider_worklist_alignment")
+    if isinstance(worklist_alignment, Mapping):
+        alignment_valid = (
+            worklist_alignment.get("status") == "ALIGNED"
+            and isinstance(worklist_alignment.get("worklist_event_count"), int)
+            and worklist_alignment.get("worklist_event_count") > 0
+            and worklist_alignment.get("aligned_event_count")
+            == worklist_alignment.get("worklist_event_count")
+            and worklist_alignment.get("provider_packet_created") is False
+            and worklist_alignment.get("frequency_inference_performed") is False
+        )
+        checks.append(
+            {
+                "name": "provider_worklist_scope_alignment",
+                "status": "PASS" if alignment_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "status": worklist_alignment.get("status"),
+                    "worklist_event_count": worklist_alignment.get(
+                        "worklist_event_count"
+                    ),
+                    "campaign_event_count": worklist_alignment.get(
+                        "campaign_event_count"
+                    ),
+                    "aligned_event_count": worklist_alignment.get(
+                        "aligned_event_count"
+                    ),
+                    "missing_event_ids": worklist_alignment.get("missing_event_ids"),
+                    "primary_family_mismatches": worklist_alignment.get(
+                        "primary_family_mismatches"
+                    ),
+                    "provider_packet_created": worklist_alignment.get(
+                        "provider_packet_created"
+                    ),
+                    "frequency_inference_performed": worklist_alignment.get(
+                        "frequency_inference_performed"
+                    ),
+                },
+                "interpretation": (
+                    "The provider worklist and campaign share event IDs and primary accident "
+                    "families. This is a structural diagnostic check; it does not create a "
+                    "provider packet or qualify facility risk."
+                ),
+            }
+        )
     if registry is not None:
         checks.append(
             _check(
