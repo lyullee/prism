@@ -17,11 +17,13 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest  # noqa: E402
 from lh2_tno.contracts import Facility  # noqa: E402
-from lh2_tno.equipment_boundary import ResolvedLiquidRelease  # noqa: E402
+from lh2_tno.equipment_boundary import ResolvedGasReleaseSet, ResolvedLiquidRelease  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     build_consequence_request_from_provider_release,
+    build_consequence_request_from_provider_release_set,
     load_provider_release,
+    load_provider_release_set,
     load_provider_emergency_relief,
 )
 
@@ -70,20 +72,56 @@ def _facility(
     return Facility.model_validate_json(json.dumps(raw, allow_nan=False))
 
 
+def _two_sided_facility(release_set: ResolvedGasReleaseSet) -> Facility:
+    """Build the minimal synthetic facility required by both endpoints."""
+    basis = {
+        "fluid": release_set.releases[0].property_basis.fluid,
+        "backend": "CoolProp-HEOS",
+        "energy_reference": release_set.releases[0].property_basis.energy_reference,
+    }
+    raw = {
+        "id": "lh2dt-prism-two-sided-chain-diagnostic",
+        "configuration_origin": "synthetic",
+        "environment": "outdoor",
+        "components": [{
+            "id": release_set.component_id,
+            "kind": "pipe",
+            "position_enu_m": list(release_set.releases[0].position_enu_m),
+            "property_basis": basis,
+            "parameters_si": {"length_m": 0.01, "diameter_m": 0.025},
+        }],
+        "ports": [
+            {
+                "id": release.port_id,
+                "component_id": release_set.component_id,
+                "phase": "vapour",
+                "direction": "out",
+                "position_enu_m": list(release.position_enu_m),
+            }
+            for release in release_set.releases
+        ],
+        "edges": [],
+        "receptors": [
+            {"id": "near_worker", "position_enu_m": [2.0, 0.0, 1.0]},
+            {"id": "downwind_worker", "position_enu_m": [10.0, 0.0, 0.1]},
+            {"id": "side_worker", "position_enu_m": [25.0, 4.0, 1.8]},
+        ],
+    }
+    return Facility.model_validate_json(json.dumps(raw, allow_nan=False))
+
+
 def run(packet_path: Path, output_dir: Path, backend_config_path: Path, release_kind: str = "accidental_leak") -> dict:
     release = (
         load_provider_emergency_relief(packet_path)
         if release_kind == "emergency_relief"
+        else load_provider_release_set(packet_path)
+        if release_kind == "two_sided_rupture"
         else load_provider_release(packet_path)
     )
-    defaults_name = (
-        "provider_request_defaults_liquid.json"
-        if isinstance(release, ResolvedLiquidRelease)
-        else "provider_request_defaults.json"
-    )
+    defaults_name = "provider_request_defaults_liquid.json" if isinstance(release, ResolvedLiquidRelease) else "provider_request_defaults.json"
     defaults = json.loads((ROOT / "examples" / defaults_name).read_text(encoding="utf-8"))
     defaults["component_id"] = release.component_id
-    defaults["source_position_enu_m"] = list(release.position_enu_m)
+    defaults["source_position_enu_m"] = list(release.positions_enu_m[0] if isinstance(release, ResolvedGasReleaseSet) else release.position_enu_m)
     defaults["available_mass_kg"] = release.available_mass_kg
     defaults["resolved_release"] = None
     defaults["source_input"] = None
@@ -125,7 +163,7 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path, release_
             "maximum_time_step_s": 0.01,
         }
     defaults["release_termination"] = {
-        "basis": "provider_declared",
+        "basis": "two_sided_rupture" if release_kind == "two_sided_rupture" else "provider_declared",
         "time_s": "provider_duration",
         "provenance": "provider packet termination basis and duration; synthetic diagnostic context",
     }
@@ -135,13 +173,24 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path, release_
         list(defaults["evaluation_times_s"])
         + [float(release.duration_s)]
     ))
-    if isinstance(release, ResolvedLiquidRelease):
+    if release_kind == "two_sided_rupture":
+        defaults["source_operator"] = "equipment_two_sided_rupture"
+        defaults["source_positions_enu_m"] = [list(position) for position in release.positions_enu_m]
+    elif isinstance(release, ResolvedLiquidRelease):
         defaults["source_operator"] = "equipment_liquid_release"
     elif release_kind == "emergency_relief":
         defaults["source_operator"] = "equipment_emergency_relief"
+    elif release.termination_basis == "inventory_depletion":
+        defaults["source_operator"] = "equipment_inventory_depletion"
+    elif release.termination_basis == "inventory_over_600s":
+        defaults["source_operator"] = "equipment_inventory_over_600s"
     else:
         defaults["source_operator"] = "integrated_transient"
-    request = build_consequence_request_from_provider_release(release, defaults)
+    request = (
+        build_consequence_request_from_provider_release_set(release, defaults)
+        if release_kind == "two_sided_rupture"
+        else build_consequence_request_from_provider_release(release, defaults)
+    )
 
     config_raw = json.loads(backend_config_path.read_text(encoding="utf-8"))
     for pin in config_raw.get("packages", []):
@@ -149,12 +198,16 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path, release_
         if root.exists():
             pin["sha256"] = tree_digest(root)
     config = BackendConfig.model_validate_json(json.dumps(config_raw, allow_nan=False))
-    facility = _facility(
-        release.component_id,
-        release.port_id,
-        tuple(release.position_enu_m),
-        "two_phase" if isinstance(release, ResolvedLiquidRelease) else "vapour",
-        release.property_basis.fluid,
+    facility = (
+        _two_sided_facility(release)
+        if release_kind == "two_sided_rupture"
+        else _facility(
+            release.component_id,
+            release.port_id,
+            tuple(release.position_enu_m),
+            "two_phase" if isinstance(release, ResolvedLiquidRelease) else "vapour",
+            release.property_basis.fluid,
+        )
     )
     pipeline = ResearchPipeline(facility, IsolatedBackend(config))
     result = pipeline.consequences(request)
@@ -162,9 +215,9 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path, release_
     verification = {
         "status": result_data.get("status"),
         "source_operator": request.source_operator,
-        "provider_packet_schema": release.provider_export_schema,
-        "provider_model_provenance": release.upstream_service_provenance,
-        "boundary_kind": release.boundary_kind,
+        "provider_packet_schema": "prism.resolved_release_set.v1" if isinstance(release, ResolvedGasReleaseSet) else release.provider_export_schema,
+        "provider_model_provenance": release.inventory_provenance if isinstance(release, ResolvedGasReleaseSet) else release.upstream_service_provenance,
+        "boundary_kind": "two_sided_rupture" if isinstance(release, ResolvedGasReleaseSet) else release.boundary_kind,
         "provider_duration_s": release.duration_s,
         "provider_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,
         "pool_sensitivity_radius_m": defaults.get("pool", {}).get("radius_m") if isinstance(defaults.get("pool"), dict) else None,
@@ -189,7 +242,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run one strict lh2dt PRISM packet through consequence damage")
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--release-kind", choices=("accidental_leak", "emergency_relief"), default="accidental_leak")
+    parser.add_argument("--release-kind", choices=("accidental_leak", "emergency_relief", "two_sided_rupture"), default="accidental_leak")
     parser.add_argument(
         "--backend-config",
         type=Path,

@@ -61,7 +61,8 @@ def load_provider_release(packet: Mapping[str, Any] | str | Path) -> ProviderRel
     """Validate one flat ``prism.resolved_release.v1`` accident packet.
 
     A wrapper envelope, a normal vent, and a packet without an explicit random
-    opening are rejected.  The returned object is a strict PRISM boundary and
+    opening are rejected unless the provider explicitly declares an inventory
+    termination basis.  The returned object is a strict PRISM boundary and
     is safe to place in a ``ConsequenceRequest`` only after a facility port
     and a frequency event are matched separately.
     """
@@ -74,9 +75,11 @@ def load_provider_release(packet: Mapping[str, Any] | str | Path) -> ProviderRel
         raise ProviderReleaseContractError(
             "only event_kind=accidental_leak can enter a random-release catalog"
         )
-    if value.get("failure_opening_diameter_m") is None:
+    if value.get("failure_opening_diameter_m") is None and value.get("termination_basis") not in {
+        "inventory_depletion", "inventory_over_600s"
+    }:
         raise ProviderReleaseContractError(
-            "accidental release requires failure_opening_diameter_m"
+            "accidental release without an opening requires inventory termination basis"
         )
     boundary = value.get("boundary_kind")
     try:

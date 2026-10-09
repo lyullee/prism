@@ -41,7 +41,25 @@ python scripts/audit_provider_catalog_coverage.py `
 
 실제 일반 LH2 설비에 대해 적격으로 승인된 provider packet은 0건이므로 실제 시설 coverage는 계속 `NO_EXACT_MATCH`다. 별도 합성 진단에서는 `lh2dt.LayeredTankNetworkSimulator→SLABx-LH2` 결과를 저장탱크 다섯 area-bin의 설비·포트·개구에 맞춰 `PARTIAL_EXACT_MATCH`(5/24)로 반복 재현했다. 다섯 case 모두 provider 질량 잔차와 5% 유량 gate를 통과했지만, 합성 threshold·종료시계·재고·기상 때문에 실제 방출 이력이나 시설 위험으로 승격하지 않는다. 배관·밸브·벤트·펌프 등 나머지 19개 사건은 packet 없이 남아 있다. 상세 결과는 `results/20261010/layered_tank_worklist_packets/provider_catalog_coverage.json`과 `campaign_verification.json`이다. 기존 단일 사건 재현 결과도 `results/20261009/provider_evidence/generic_lh2_provider_catalog_coverage_layered_exact.json`에 보존한다.
 
-2026-10-13에는 `MappedPump` G1과 `Valve` transfer-valve 5개를 accidental-leak catalog에 추가했다. 저장탱크 5건, 펌프 2건, 기화기 G3, 재액화기 G6, `DynamicHEMPipe` transfer-line 5건, `Valve` transfer-valve 5건을 accidental-leak catalog에 exact-match하고, `VentStack` pressure-relief G1은 별도 emergency-relief catalog에 exact-match했다. release family를 교차 재사용하지 않는 결합 결과는 `results/20261013/combined_provider_catalog_family_coverage_v4.json`이며, `provider_packet_count=20`, `exact_match_count=20`, `unmatched_event_count=4`, `extra_packet_count=0`이다. 모든 packet은 `synthetic_diagnostic`이고 실제 적격 provider packet은 0건이다. 대표 Valve·MappedPump G1·VentStack G1은 synthetic facility에서 최종 chain까지 실행했지만 일부 tiny-packet transfer-line case는 SLABx 입력 격자 오류로 `UNCOMPUTED`에 남긴다. 따라서 이 결과를 실제 시설 coverage, 빈도 결합, IR/F-N 승격으로 해석하지 않는다. 남은 4건은 ambient-vaporizer G1/G2의 재고방출과 reliquefier G4/G5의 양단 파열이며 packet 없이 `UNMATCHED_NO_PROVIDER_PACKET`로 남긴다.
+2026-10-14에는 `MappedPump` G1과 `Valve` transfer-valve 5개를 포함한 기존 19개 accidental-leak packet과 `VentStack` G1 emergency-relief packet에 더해, `DynamicVaporizer` G1/G2 재고 방출과 `DynamicReliquefier` G4/G5 양단 파열 set을 추가했다. 결합 결과는 `results/20261014/combined_provider_catalog_family_coverage_v5.json`이며, `provider_packet_count=24`, `exact_match_count=24`, `unmatched_event_count=0`, `extra_packet_count=0`이다. accidental leak, emergency relief, two-sided rupture를 서로 다른 loader와 operator로 검사하므로 한쪽 endpoint나 relief packet을 다른 사건에 재사용할 수 없다. 모든 packet은 `synthetic_diagnostic`이고 실제 적격 provider packet은 0건이다. G2 inventory-over-600s는 synthetic facility에서 source→SLABx-LH2→cloud→점화·피해 chain까지 실행했고 질량 잔차는 약 `3.4e-21 kg`이다. G1은 고압·작은 진단 면적에서 low-Mach exit scope을 넘어 fail-closed했고, G4/G5는 반대 방향 endpoint가 현재 handoff의 상류 제트 제한에 걸려 consequence chain을 실행하지 않았다. 따라서 `FULLY_MATCHED`는 구조 계약 완료를 뜻하며, 실제 시설 coverage·빈도 결합·IR/F-N 승격을 뜻하지 않는다.
+
+### 재고 방출과 양단 파열의 추가 계약
+
+`InventoryReleaseExportRequest`(`prism.equipment_inventory_export_request.v1`)는 기화기·재액화기처럼 사고 시 설비 재고가 방출되는 사건을 위한 요청이다. `instantaneous_inventory`는 provider가 `inventory_depletion`을 선언해야 하고, `inventory_over_600s`는 정확히 600초 이력과 `inventory_over_600s` 종료근거를 요구한다. 두 모드 모두 PRISM이 누출 구경이나 지속시간을 역산하지 않는다. 새 adapter의 대기 밸브 면적은 진단 계산에만 사용되고 failure opening으로 packet에 기록되지 않는다. 이전 packet이 진단 면적 메타데이터를 가지고 있는 경우에도 frequency binding은 그 값을 문헌 hole 구경과 비교하지 않는다.
+
+`TwoSidedReliquefierProvider`는 하나의 공유 finite-volume 상태와 두 개의 명시적 대기 endpoint를 계산한다. 두 endpoint는 같은 `event_id`, component, 재고, duration을 가지지만 서로 다른 port와 방향을 유지하며 `prism.resolved_release_set.v1`로 묶인다. 양단 set의 두 endpoint가 모두 있어야 coverage에 들어가며, 한 endpoint를 복제해 양단 파열을 흉내 낼 수 없다. 현재 consequence worker는 바람과 반대인 endpoint의 upwind handoff를 자동 회전하지 않고 거부한다. 압축성·고마하 출구와 양방향 plume 상호작용은 후속 개발 항목이다.
+
+검증 명령은 다음과 같다.
+
+```powershell
+$worklist = "results/20261009/provider_evidence/generic_lh2_provider_release_worklist.json"
+python scripts/audit_provider_catalog_family_coverage.py `
+  --provider-worklist $worklist `
+  --accidental-catalog results/20261014/combined_accidental_provider_release_catalog_v5.json `
+  --emergency-relief-catalog results/20261012/structural_emergency_relief_provider_catalog.json `
+  --two-sided-catalog results/20261014/structural_two_sided_provider_catalog.json `
+  --output results/20261014/combined_provider_catalog_family_coverage_v5.json
+```
 
 
 ### provider 종료근거와 실제 지속시간 바인딩

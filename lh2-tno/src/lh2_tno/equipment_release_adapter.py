@@ -178,8 +178,10 @@ def build_resolved_gas_release_from_provider_response(
         )
     if event_kind not in {"accidental_leak", "emergency_relief"}:
         raise EquipmentReleaseExportError("unsupported gas provider event kind")
-    if event_kind == "accidental_leak" and failure_opening_diameter_m is None:
-        raise EquipmentReleaseExportError("accidental gas release requires a failure opening")
+    if event_kind == "accidental_leak" and failure_opening_diameter_m is None and data.get("termination_basis") not in {"inventory_depletion", "inventory_over_600s"}:
+        raise EquipmentReleaseExportError(
+            "accidental gas release without an opening requires inventory termination basis"
+        )
     if event_kind == "emergency_relief" and failure_opening_diameter_m is not None:
         raise EquipmentReleaseExportError("emergency-relief gas release must not carry a random opening")
     raw_steps = data.get("steps")
@@ -295,7 +297,7 @@ def build_resolved_liquid_release_from_provider_response(
     direction_enu: Sequence[float],
     ambient_pressure_pa_abs: float,
     ambient_temperature_k: float,
-    failure_opening_diameter_m: float,
+    failure_opening_diameter_m: float | None,
     provider_result: Any | None = None,
     provider_result_digest: str | None = None,
 ) -> ResolvedLiquidRelease:
@@ -315,6 +317,10 @@ def build_resolved_liquid_release_from_provider_response(
     if data.get("event_kind") != "accidental_leak":
         raise EquipmentReleaseExportError(
             "provider data must explicitly declare event_kind=accidental_leak"
+        )
+    if failure_opening_diameter_m is None and data.get("termination_basis") not in {"inventory_depletion", "inventory_over_600s"}:
+        raise EquipmentReleaseExportError(
+            "accidental liquid release without an opening requires inventory termination basis"
         )
     raw_steps = data.get("steps")
     if not isinstance(raw_steps, Sequence) or isinstance(raw_steps, (str, bytes)) or not raw_steps:
@@ -415,8 +421,9 @@ def build_resolved_liquid_release_from_provider_response(
         "termination_provenance": termination,
         "droplet_partition_provenance": droplet_provenance,
         "termination_basis": termination_basis,
-        "failure_opening_diameter_m": _positive(
-            failure_opening_diameter_m, "failure_opening_diameter_m"
+        "failure_opening_diameter_m": (
+            _positive(failure_opening_diameter_m, "failure_opening_diameter_m")
+            if failure_opening_diameter_m is not None else None
         ),
     }
     try:

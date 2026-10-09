@@ -6,8 +6,10 @@ from lh2_tno.equipment_accident_export import (
     EquipmentAccidentExportError,
     AccidentReleaseExportRequest,
     EmergencyReliefExportRequest,
+    InventoryReleaseExportRequest,
     export_equipment_gas_accident_history,
     export_equipment_emergency_relief_history,
+    export_equipment_inventory_release_history,
 )
 
 
@@ -187,3 +189,70 @@ def test_emergency_relief_export_uses_separate_no_random_opening_contract():
     assert result.release.failure_opening_diameter_m is None
     assert result.release.termination_basis == "emergency_relief_discharge"
     assert result.provider_packet_promoted is False
+
+
+def test_inventory_export_requires_provider_owned_inventory_termination():
+    payload = {
+        "schema_version": "prism.equipment_inventory_export_request.v1",
+        "event_kind": "accidental_leak",
+        "component_id": "vaporizer-1",
+        "port_id": "vaporizer-1.out",
+        "event_id": "vaporizer-1/inventory",
+        "release_mode": "instantaneous_inventory",
+        "horizon_s": 600.0,
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "ambient_pressure_pa_abs": 100000.0,
+        "ambient_temperature_k": 288.15,
+        "provider_source_digest": "a" * 64,
+        "provider_boundary_reference": "inventory outlet",
+        "input_origin": "model_prediction",
+        "model_package": "lh2dt",
+        "model_class": "DynamicVaporizer",
+        "model_revision": "test-revision",
+        "state_snapshot_digest": "b" * 64,
+        "evidence_status": "synthetic_diagnostic",
+        "scenario_provenance": "explicit inventory diagnostic",
+        "provider_termination_required": True,
+    }
+    request = InventoryReleaseExportRequest.from_mapping(payload)
+    result = export_equipment_inventory_release_history(_Provider(), request)
+    assert result.release.failure_opening_diameter_m is None
+    assert result.release.termination_basis == "inventory_depletion"
+    assert result.release.event_kind == "accidental_leak"
+
+
+def test_inventory_export_rejects_hole_like_termination():
+    class HoleTerminatingProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response(request)
+            response["data"]["termination_basis"] = "provider_positive_mass_threshold"
+            return response
+
+    payload = {
+        "schema_version": "prism.equipment_inventory_export_request.v1",
+        "event_kind": "accidental_leak",
+        "component_id": "vaporizer-1",
+        "port_id": "vaporizer-1.out",
+        "event_id": "vaporizer-1/inventory",
+        "release_mode": "instantaneous_inventory",
+        "horizon_s": 600.0,
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "ambient_pressure_pa_abs": 100000.0,
+        "ambient_temperature_k": 288.15,
+        "provider_source_digest": "a" * 64,
+        "provider_boundary_reference": "inventory outlet",
+        "input_origin": "model_prediction",
+        "model_package": "lh2dt",
+        "model_class": "DynamicVaporizer",
+        "model_revision": "test-revision",
+        "state_snapshot_digest": "b" * 64,
+        "evidence_status": "synthetic_diagnostic",
+        "scenario_provenance": "explicit inventory diagnostic",
+        "provider_termination_required": True,
+    }
+    with pytest.raises(EquipmentAccidentExportError, match="inventory_depletion"):
+        export_equipment_inventory_release_history(
+            HoleTerminatingProvider(), InventoryReleaseExportRequest.from_mapping(payload)
+        )

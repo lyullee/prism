@@ -301,6 +301,101 @@ class EmergencyReliefExportRequest:
         }
 
 
+@dataclass(frozen=True)
+class InventoryReleaseExportRequest:
+    """Explicit provider request for an inventory-defined accidental release.
+
+    These events intentionally carry no random failure opening.  The provider
+    owns the finite inventory and must terminate it with either
+    ``inventory_depletion`` or a complete ``inventory_over_600s`` horizon.
+    """
+
+    component_id: str
+    port_id: str
+    event_id: str
+    release_mode: str
+    horizon_s: float
+    position_enu_m: tuple[float, float, float]
+    direction_enu: tuple[float, float, float]
+    ambient_pressure_pa_abs: float
+    ambient_temperature_k: float
+    provider_source_digest: str
+    provider_boundary_reference: str
+    input_origin: str
+    model_package: str
+    model_class: str
+    model_revision: str
+    state_snapshot_digest: str
+    evidence_status: str
+    scenario_provenance: str
+    start_time_s: float = 0.0
+    provider_termination_required: bool = True
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, Any]) -> "InventoryReleaseExportRequest":
+        if not isinstance(value, Mapping):
+            raise EquipmentAccidentExportError("inventory release request must be an object")
+        payload = dict(value)
+        if payload.get("schema_version") != "prism.equipment_inventory_export_request.v1":
+            raise EquipmentAccidentExportError("inventory release request has an invalid schema_version")
+        if payload.get("event_kind") != "accidental_leak":
+            raise EquipmentAccidentExportError("inventory release request requires event_kind=accidental_leak")
+        if payload.get("release_mode") not in {"instantaneous_inventory", "inventory_over_600s"}:
+            raise EquipmentAccidentExportError("inventory release request has an unsupported release_mode")
+        if payload.get("provider_termination_required") is not True:
+            raise EquipmentAccidentExportError("inventory release request must explicitly set provider_termination_required=true")
+        payload.pop("schema_version", None)
+        payload.pop("event_kind", None)
+        try:
+            request = cls(**payload)
+        except TypeError as error:
+            raise EquipmentAccidentExportError(f"inventory release request has missing or unknown fields: {error}") from error
+        for field in (
+            "component_id", "port_id", "event_id", "provider_boundary_reference",
+            "input_origin", "model_package", "model_class", "model_revision",
+            "state_snapshot_digest", "scenario_provenance",
+        ):
+            _text(getattr(request, field), field)
+        _digest(request.provider_source_digest, "provider_source_digest")
+        _digest(request.state_snapshot_digest, "state_snapshot_digest")
+        _positive(request.horizon_s, "horizon_s")
+        _positive(request.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
+        _positive(request.ambient_temperature_k, "ambient_temperature_k")
+        if request.start_time_s < 0.0 or request.horizon_s <= request.start_time_s:
+            raise EquipmentAccidentExportError("inventory release request has invalid start/horizon clock")
+        _vector(request.position_enu_m, "position_enu_m")
+        _vector(request.direction_enu, "direction_enu", nonzero=True)
+        if request.evidence_status not in _EVIDENCE_STATUSES:
+            raise EquipmentAccidentExportError(f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}")
+        return request
+
+    def to_mapping(self) -> dict[str, Any]:
+        return {
+            "schema_version": "prism.equipment_inventory_export_request.v1",
+            "event_kind": "accidental_leak",
+            "component_id": self.component_id,
+            "port_id": self.port_id,
+            "event_id": self.event_id,
+            "release_mode": self.release_mode,
+            "start_time_s": self.start_time_s,
+            "horizon_s": self.horizon_s,
+            "position_enu_m": list(self.position_enu_m),
+            "direction_enu": list(self.direction_enu),
+            "ambient_pressure_pa_abs": self.ambient_pressure_pa_abs,
+            "ambient_temperature_k": self.ambient_temperature_k,
+            "provider_source_digest": self.provider_source_digest,
+            "provider_boundary_reference": self.provider_boundary_reference,
+            "input_origin": self.input_origin,
+            "model_package": self.model_package,
+            "model_class": self.model_class,
+            "model_revision": self.model_revision,
+            "state_snapshot_digest": self.state_snapshot_digest,
+            "evidence_status": self.evidence_status,
+            "scenario_provenance": self.scenario_provenance,
+            "provider_termination_required": self.provider_termination_required,
+        }
+
+
 @runtime_checkable
 class AccidentHistoryProvider(Protocol):
     """Protocol implemented by a qualified external equipment model."""
@@ -315,7 +410,7 @@ class AccidentReleaseExportResult:
     """Strict release plus promotion metadata for one provider export."""
 
     release: Any
-    request: AccidentReleaseExportRequest | EmergencyReliefExportRequest
+    request: AccidentReleaseExportRequest | EmergencyReliefExportRequest | InventoryReleaseExportRequest
     provider_response: Mapping[str, Any]
     provider_result_digest: str
     provider_class: str
@@ -550,6 +645,74 @@ def export_equipment_emergency_relief_history(
     )
 
 
+def export_equipment_inventory_release_history(
+    provider: AccidentHistoryProvider,
+    request: InventoryReleaseExportRequest | Mapping[str, Any],
+    *,
+    release_kind: str = "gas",
+) -> AccidentReleaseExportResult:
+    """Run a strict provider-owned inventory accidental-release history."""
+
+    scenario = (
+        request if isinstance(request, InventoryReleaseExportRequest)
+        else InventoryReleaseExportRequest.from_mapping(request)
+    )
+    response, provider_class = _call_provider(provider, scenario)  # type: ignore[arg-type]
+    data = response.get("data")
+    if not isinstance(data, Mapping):
+        raise EquipmentAccidentExportError("provider inventory export must contain data")
+    basis = data.get("termination_basis")
+    if scenario.release_mode == "instantaneous_inventory":
+        if basis != "inventory_depletion":
+            raise EquipmentAccidentExportError("instantaneous inventory export requires inventory_depletion termination")
+    elif basis != "inventory_over_600s" or not math.isclose(float(data.get("duration_s", -1.0)), 600.0, rel_tol=0.0, abs_tol=1.0e-9):
+        raise EquipmentAccidentExportError("inventory_over_600s export requires a 600 s inventory_over_600s history")
+    common = {
+        "provider_response": response,
+        "component_id": scenario.component_id,
+        "port_id": scenario.port_id,
+        "event_id": scenario.event_id,
+        "provider_source_digest": scenario.provider_source_digest,
+        "upstream_service_provenance": scenario.scenario_provenance,
+        "provider_boundary_reference": scenario.provider_boundary_reference,
+        "input_origin": scenario.input_origin,
+        "position_enu_m": scenario.position_enu_m,
+        "direction_enu": scenario.direction_enu,
+        "ambient_pressure_pa_abs": scenario.ambient_pressure_pa_abs,
+        "ambient_temperature_k": scenario.ambient_temperature_k,
+        "failure_opening_diameter_m": None,
+        "event_kind": "accidental_leak",
+        "provider_result": response,
+    }
+    try:
+        if release_kind == "gas":
+            release = build_resolved_gas_release_from_provider_response(**common)
+        elif release_kind == "liquid":
+            release = build_resolved_liquid_release_from_provider_response(**common)
+        else:
+            raise EquipmentAccidentExportError("release_kind must be gas or liquid")
+    except EquipmentReleaseExportError as error:
+        raise EquipmentAccidentExportError(str(error)) from error
+    from .contracts import canonical_digest
+
+    result_digest = canonical_digest(response)
+    promotion_status = (
+        "QUALIFIED_PROVIDER_PACKET"
+        if scenario.evidence_status == "qualified_actual"
+        else "DIAGNOSTIC_PACKET_NOT_PROMOTED"
+    )
+    return AccidentReleaseExportResult(
+        release=release,
+        request=scenario,
+        provider_response=response,
+        provider_result_digest=result_digest,
+        provider_class=provider_class,
+        provider_method="export_accident_history",
+        provider_export_schema=EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+        promotion_status=promotion_status,
+    )
+
+
 __all__ = [
     "ACCIDENT_EXPORT_REQUEST_SCHEMA",
     "EXTERNAL_ACCIDENT_EXPORT_SCHEMA",
@@ -557,8 +720,10 @@ __all__ = [
     "EquipmentAccidentExportError",
     "AccidentReleaseExportRequest",
     "EmergencyReliefExportRequest",
+    "InventoryReleaseExportRequest",
     "AccidentReleaseExportResult",
     "export_equipment_gas_accident_history",
     "export_equipment_liquid_accident_history",
     "export_equipment_emergency_relief_history",
+    "export_equipment_inventory_release_history",
 ]

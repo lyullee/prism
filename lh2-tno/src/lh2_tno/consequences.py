@@ -364,8 +364,19 @@ class ConsequenceRequest(Contract):
                         or provider_release.event_kind != 'emergency_relief'
                         or provider_release.failure_opening_diameter_m is not None):
                     raise ValueError('resolved relief binding requires an emergency-relief gas exit without a failure opening')
-            elif provider_release is not None and (provider_release.event_kind!='accidental_leak' or provider_release.failure_opening_diameter_m is None):
-                raise ValueError('resolved frequency binding requires an accidental leak with explicit failure opening')
+            elif provider_release is not None:
+                inventory_mode = event.release.mode in {'instantaneous_inventory', 'inventory_over_600s'}
+                if provider_release.event_kind != 'accidental_leak':
+                    raise ValueError('resolved frequency binding requires an accidental-leak provider boundary')
+                if inventory_mode:
+                    # New inventory adapters leave this field null.  Legacy
+                    # diagnostic packets may still carry the provider's
+                    # calculation-area metadata; inventory frequency binding
+                    # deliberately ignores it and never compares it with the
+                    # literature LOC diameter.
+                    pass
+                elif provider_release.failure_opening_diameter_m is None:
+                    raise ValueError('resolved hole frequency binding requires an explicit failure opening')
             if provider_release is not None and event.basis=='LH2_LITERATURE' and provider_release.upstream_service!='LH2':
                 raise ValueError('LH2 literature frequency must not be applied to a GH2/cold-GH2 component merely because it belongs to an LH2 facility')
             if release_set is not None:

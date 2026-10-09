@@ -230,6 +230,8 @@ class ResolvedGasReleaseSet(Contract):
     available_mass_kg: Positive
     cumulative_mass_out_kg: Nonnegative
     inventory_provenance: Name
+    provider_source_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
+    provider_result_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
 
     @model_validator(mode='after')
     def ledger(self):
