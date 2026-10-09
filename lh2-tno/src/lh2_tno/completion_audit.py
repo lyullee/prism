@@ -494,6 +494,17 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    restricted_physical_status = current_status.get("physical_validation_evidence_status")
+    restricted_physical_record = current_status.get("physical_validation_evidence_record")
+    restricted_physical_component = current_status.get("physical_validation_evidence_component")
+    restricted_physical_evidence = (
+        isinstance(restricted_physical_status, str)
+        and restricted_physical_status.startswith("RESTRICTED_COMPONENT_EVIDENCE")
+        and isinstance(restricted_physical_record, str)
+        and bool(restricted_physical_record.strip())
+        and isinstance(restricted_physical_component, str)
+        and bool(restricted_physical_component.strip())
+    )
     checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",
@@ -581,12 +592,16 @@ def build_ijhe_completion_audit(
         ),
         _check(
             "physical_validation_evidence",
-            current_status.get("physical_validation_claim") is True,
+            current_status.get("physical_validation_claim") is True
+            or restricted_physical_evidence,
             {
                 "physical_validation_claim": current_status.get("physical_validation_claim"),
-                "evidence_status": current_status.get("physical_validation_evidence_status"),
+                "evidence_status": restricted_physical_status,
+                "evidence_record": restricted_physical_record,
+                "evidence_component": restricted_physical_component,
+                "restricted_component_evidence": restricted_physical_evidence,
             },
-            "independent end-to-end physical validation has not been established",
+            "independent end-to-end physical validation or an auditable restricted component evidence record is missing",
         ),
         _check(
             "frequency_uncertainty_reported",

@@ -148,6 +148,27 @@ def test_completion_audit_blocks_incomplete_facility_claim():
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_accepts_restricted_component_evidence_without_promoting_full_chain():
+    status = _status(False)
+    status.update({
+        "physical_validation_evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
+        "physical_validation_evidence_record": "results/validation_record.json",
+        "physical_validation_evidence_component": "DynamicLH2PoolX pool/spreading only",
+    })
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(False),
+        _campaign_result(False),
+        {"scenarios": [{"id": "known"}], "facility_credible_interval": False},
+    )
+    check = next(item for item in report["checks"] if item["name"] == "physical_validation_evidence")
+    assert check["status"] == "PASS"
+    assert check["evidence"]["restricted_component_evidence"] is True
+    assert report["physical_validation_claim"] is False
+    assert report["complete_facility_qra_claim"] is False
+    assert len(report["blocking_reasons"]) == 5
+
+
 def test_completion_audit_passes_only_when_every_claim_gate_is_present():
     report = build_ijhe_completion_audit(
         _status(True),
