@@ -109,6 +109,7 @@ def build_v060_readiness_report(
     completion_audit: Mapping[str, Any],
     validation_matrix: Mapping[str, Any],
     realtime_benchmark: Mapping[str, Any],
+    facility_evidence_request: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -118,6 +119,24 @@ def build_v060_readiness_report(
     completion = _mapping(completion_audit, "completion_audit")
     validation = _mapping(validation_matrix, "validation_matrix")
     realtime = _mapping(realtime_benchmark, "realtime_benchmark")
+    evidence_request = None
+    if facility_evidence_request is not None:
+        evidence_request = _mapping(
+            facility_evidence_request, "facility_evidence_request"
+        )
+    evidence_promotion_gate = (
+        evidence_request.get("promotion_gate")
+        if isinstance(evidence_request, Mapping)
+        and isinstance(evidence_request.get("promotion_gate"), Mapping)
+        else {}
+    )
+    evidence_promotion_allowed = evidence_promotion_gate.get(
+        "facility_promotion_allowed_now"
+    )
+    if evidence_promotion_allowed is None and evidence_promotion_gate.get(
+        "facility_ir_fn_remains_withheld_until_all_true"
+    ) is True:
+        evidence_promotion_allowed = False
 
     objective_checks = {
         str(row.get("id")): _check_row(row)
@@ -201,6 +220,49 @@ def build_v060_readiness_report(
             "stage_elapsed_ms": timing.get("stage_elapsed_ms", {}),
         },
         "validation_domains": domains,
+        "evidence_request": (
+            {
+                "status": evidence_request.get("status"),
+                "provider_export_schema_required": evidence_request.get(
+                    "provider_export_schema_required"
+                ),
+                "case_request_count": evidence_request.get("case_request_count"),
+                "family_request_count": len(evidence_request.get("family_requests", ()))
+                if isinstance(evidence_request.get("family_requests"), Sequence)
+                and not isinstance(evidence_request.get("family_requests"), (str, bytes))
+                else None,
+                "component_request_count": len(evidence_request.get("component_requests", ()))
+                if isinstance(evidence_request.get("component_requests"), Sequence)
+                and not isinstance(evidence_request.get("component_requests"), (str, bytes))
+                else None,
+                "blocking_reasons": list(evidence_request.get("blocking_reasons", ()))
+                if isinstance(evidence_request.get("blocking_reasons"), Sequence)
+                and not isinstance(evidence_request.get("blocking_reasons"), (str, bytes))
+                else [],
+                "strict_gate_categories": list(
+                    evidence_request.get("current_assessment", {}).get(
+                        "strict_gate_categories", ()
+                    )
+                )
+                if isinstance(evidence_request.get("current_assessment"), Mapping)
+                and isinstance(
+                    evidence_request.get("current_assessment", {}).get(
+                        "strict_gate_categories", ()
+                    ),
+                    Sequence,
+                )
+                and not isinstance(
+                    evidence_request.get("current_assessment", {}).get(
+                        "strict_gate_categories", ()
+                    ),
+                    (str, bytes),
+                )
+                else [],
+                "facility_promotion_allowed_now": evidence_promotion_allowed,
+            }
+            if evidence_request is not None
+            else None
+        ),
         "completion_criteria": [
             {
                 "id": "A_equipment_state_and_release",
@@ -424,6 +486,35 @@ def validate_v060_readiness_report(
                     errors.append(f"source_artifacts.{source_id}.sha256 must be a SHA-256 digest")
                 if not isinstance(source.get("path"), str) or not source.get("path"):
                     errors.append(f"source_artifacts.{source_id}.path must be nonempty")
+
+    evidence_request = value.get("evidence_request")
+    if evidence_request is not None:
+        if not isinstance(evidence_request, Mapping):
+            errors.append("evidence_request must be an object when present")
+        else:
+            for field in (
+                "case_request_count",
+                "family_request_count",
+                "component_request_count",
+            ):
+                if evidence_request.get(field) is not None:
+                    _nonnegative_int(
+                        evidence_request.get(field),
+                        f"evidence_request.{field}",
+                        errors,
+                    )
+            if evidence_request.get("provider_export_schema_required") != "prism.external_accident_history.v1":
+                errors.append(
+                    "evidence_request.provider_export_schema_required must be prism.external_accident_history.v1"
+                )
+            if not isinstance(evidence_request.get("blocking_reasons"), list):
+                errors.append("evidence_request.blocking_reasons must be an array")
+            if not isinstance(evidence_request.get("strict_gate_categories"), list):
+                errors.append("evidence_request.strict_gate_categories must be an array")
+            if evidence_request.get("facility_promotion_allowed_now") is True:
+                errors.append(
+                    "evidence_request cannot allow facility promotion in a readiness ledger"
+                )
 
     if errors:
         raise V060ReadinessError("; ".join(errors))

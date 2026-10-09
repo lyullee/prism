@@ -468,6 +468,43 @@
       "facility_qra_claim": false
     }
   ],
+  "evidence_request": {
+    "status": "OPEN_EVIDENCE_REQUEST",
+    "provider_export_schema_required": "prism.external_accident_history.v1",
+    "case_request_count": 44,
+    "family_request_count": 12,
+    "component_request_count": 9,
+    "blocking_reasons": [
+      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: declared scope is incomplete",
+      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: uncomputed cases remain",
+      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: excluded components remain",
+      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: synthetic release horizon",
+      "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
+      "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
+      "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
+      "missing expected components: receiving-boundary-01",
+      "component liquid-transfer-line-01: PARTIAL",
+      "component liquid-transfer-pump-01: PARTIAL",
+      "component receiving-boundary-01: EXCLUDED",
+      "component reliquefier-01: PARTIAL",
+      "component storage-tank-01: PARTIAL",
+      "component transfer-valve-01: PARTIAL",
+      "component vertical-handoff-terminal-pipe-01: PARTIAL",
+      "accident family vessel_hole: PARTIAL",
+      "accident family pipe_hole: PARTIAL",
+      "accident family valve_hole: PARTIAL",
+      "accident family pump_hole: PARTIAL",
+      "accident family liquid_two_phase: PARTIAL",
+      "accident family inventory_depletion: PARTIAL",
+      "accident family two_sided_rupture: PARTIAL",
+      "accident family vertical_handoff: PARTIAL"
+    ],
+    "strict_gate_categories": [
+      "MISSING_PROVIDER_CASES",
+      "OPERATOR_LIMITED_INPUT"
+    ],
+    "facility_promotion_allowed_now": false
+  },
   "completion_criteria": [
     {
       "id": "A_equipment_state_and_release",
@@ -551,6 +588,10 @@
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
       "sha256": "789580593a0657a543afb0c5298c1490fe79317b3aa82ba8878054f416576bae"
+    },
+    "facility_evidence_request": {
+      "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
+      "sha256": "43c03fc0edd6c57d9048cf8bc19c6074e34a30e78f2a76356426ebb69e63209f"
     }
   },
   "invariant_validation": {

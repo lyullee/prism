@@ -104,7 +104,8 @@ python scripts/bind_native_full_scope_union_evidence.py `
 - cache와 fresh physics 처리시간, campaign p95/p99
 - SLABx-LH2를 포함한 검증 domain과 제한된 주장 범위
 - 조건부 chain 완료 기준 A~E와 시설 전체 QRA 승격을 막는 strict gate
-- 입력 감사 파일 7개의 저장 경로와 SHA-256 digest
+- 현재 provider 증거 요청 장부의 상태, 44개 case 요청·12개 사고군·9개 설비 요약
+- 입력 감사 파일 8개의 저장 경로와 SHA-256 digest
 
 원장은 계산을 다시 수행하거나 부족한 증거를 추정하지 않는다. 따라서 현재
 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN` 및
@@ -121,6 +122,12 @@ python scripts/bind_native_full_scope_union_evidence.py `
 센서 빈도 학습 제외, strict gate가 남아 있을 때의 승격 플래그를 자동 검사한다.
 검사에 실패하면 결과 파일을 정상 원장으로 쓰지 않는다.
 
+`evidence_request` 블록은 `facility_evidence_request.json`을 요약한 것이다. 이
+블록은 “현재 어떤 자료를 받아야 하는가”를 보여주지만, 요청이 존재한다는 이유로
+provider packet을 qualified로 바꾸거나 시설 IR/F-N을 열지 않는다. 실제 packet을
+받으면 같은 event/component/port와 source/result digest를 exact-match한 뒤 별도의
+qualification gate를 다시 통과해야 한다.
+
 재생 명령은 다음과 같다.
 
 ```powershell
@@ -132,5 +139,6 @@ python scripts/build_v060_readiness_report.py `
   --completion-audit results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json `
   --validation-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
   --realtime-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
+  --facility-evidence-request results/20261026/native_full_scope_union_assessment/facility_evidence_request.json `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```

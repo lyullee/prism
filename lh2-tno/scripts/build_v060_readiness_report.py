@@ -44,6 +44,11 @@ def main() -> int:
     parser.add_argument("--completion-audit", type=Path, required=True)
     parser.add_argument("--validation-matrix", type=Path, required=True)
     parser.add_argument("--realtime-benchmark", type=Path, required=True)
+    parser.add_argument(
+        "--facility-evidence-request",
+        type=Path,
+        help="Optional current provider-evidence request ledger.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -55,6 +60,11 @@ def main() -> int:
             completion_audit=_load(args.completion_audit),
             validation_matrix=_load(args.validation_matrix),
             realtime_benchmark=_load(args.realtime_benchmark),
+            facility_evidence_request=(
+                _load(args.facility_evidence_request)
+                if args.facility_evidence_request is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -67,6 +77,10 @@ def main() -> int:
         "validation_matrix": _source_artifact(args.validation_matrix),
         "realtime_benchmark": _source_artifact(args.realtime_benchmark),
     }
+    if args.facility_evidence_request is not None:
+        report["source_artifacts"]["facility_evidence_request"] = _source_artifact(
+            args.facility_evidence_request
+        )
     try:
         validation = validate_v060_readiness_report(report)
     except ValueError as error:

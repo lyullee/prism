@@ -59,6 +59,19 @@ def _inputs():
     }
 
 
+def _evidence_request():
+    return {
+        "status": "OPEN_EVIDENCE_REQUEST",
+        "provider_export_schema_required": "prism.external_accident_history.v1",
+        "case_request_count": 3,
+        "family_requests": [{"family": "vessel_hole"}],
+        "component_requests": [{"component_id": "tank-1"}],
+        "blocking_reasons": ["qualified packets remain open"],
+        "current_assessment": {"strict_gate_categories": ["MISSING_PROVIDER_CASES"]},
+        "promotion_gate": {"facility_promotion_allowed_now": False},
+    }
+
+
 def test_report_keeps_conditional_chain_and_strict_gate_separate():
     report = build_v060_readiness_report(**_inputs())
     assert report["schema_version"] == "prism.v060_ijhe_readiness_report.v1"
@@ -99,4 +112,26 @@ def test_report_validator_rejects_case_accounting_drift():
     report = deepcopy(report)
     report["chain"]["conditional_executed_case_count"] = 2
     with pytest.raises(V060ReadinessError, match="conditional cases"):
+        validate_v060_readiness_report(report)
+
+
+def test_report_records_actionable_evidence_request_without_opening_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(), facility_evidence_request=_evidence_request()
+    )
+    request = report["evidence_request"]
+    assert request["case_request_count"] == 3
+    assert request["family_request_count"] == 1
+    assert request["component_request_count"] == 1
+    assert request["facility_promotion_allowed_now"] is False
+    result = validate_v060_readiness_report(report)
+    assert result["status"] == "VALID"
+
+
+def test_report_validator_rejects_evidence_request_that_allows_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(), facility_evidence_request=_evidence_request()
+    )
+    report["evidence_request"]["facility_promotion_allowed_now"] = True
+    with pytest.raises(V060ReadinessError, match="cannot allow facility promotion"):
         validate_v060_readiness_report(report)
