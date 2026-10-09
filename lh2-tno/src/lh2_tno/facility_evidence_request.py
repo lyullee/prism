@@ -50,6 +50,14 @@ _GATE_REQUIREMENTS: dict[str, str] = {
     "FAMILY_SCOPE_PARTIAL": "complete the family-specific accident branch and termination coverage",
 }
 
+_CASE_STATUS_RANK = {
+    "EXECUTED": 0,
+    "EXECUTED_OPERATOR_LIMITED": 1,
+    "EXECUTED_DOMAIN_INCOMPLETE": 2,
+    "UNCOMPUTED": 3,
+    "FAILED": 4,
+}
+
 
 def _gate_categories(row: Mapping[str, Any], status: str, strict_uncomputed_case_count: Any) -> list[str]:
     """Classify why strict promotion is withheld without inferring a cause."""
@@ -101,6 +109,127 @@ def _rows(value: Any, label: str) -> list[Mapping[str, Any]]:
 def _status(row: Mapping[str, Any]) -> str:
     value = row.get("status")
     return value.strip() if isinstance(value, str) and value.strip() else "UNSPECIFIED"
+
+
+def _case_identity(row: Mapping[str, Any]) -> tuple[str, str, str]:
+    """Return the stable facility case key used to collapse ledger duplicates."""
+    return (
+        str(row.get("event_id", "")),
+        str(row.get("annual_condition_id", "")),
+        str(row.get("release_branch_id", "")),
+    )
+
+
+def _case_status_rank(value: Any) -> int:
+    return _CASE_STATUS_RANK.get(str(value), 5)
+
+
+def _case_required_families(row: Mapping[str, Any]) -> list[str]:
+    families = row.get("scenario_families", ())
+    if not isinstance(families, Sequence) or isinstance(families, (str, bytes)):
+        return []
+    return sorted({str(family) for family in families if str(family).strip()})
+
+
+def _build_case_requests(
+    ledger: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    """Build exact provider requests from facility cases without inventing inputs.
+
+    The merged ledger historically contains a case in both ``cases`` and
+    ``uncomputed_cases`` when a consequence run exposed a second limitation.
+    We collapse those rows by event/condition/branch and retain the most
+    restrictive status plus all declared reasons.  A request is emitted when
+    the case is not fully executed or when the facility has no qualified
+    provider packet coverage.  This makes the request actionable while keeping
+    the promotion gate fail-closed.
+    """
+    rows: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for source_name in ("cases", "uncomputed_cases"):
+        source = ledger.get(source_name, ())
+        if not isinstance(source, Sequence) or isinstance(source, (str, bytes)):
+            continue
+        for raw in source:
+            if not isinstance(raw, Mapping):
+                continue
+            key = _case_identity(raw)
+            current = rows.get(key)
+            if current is None:
+                current = dict(raw)
+                current["_reasons"] = []
+                rows[key] = current
+            current_status = str(current.get("status", "UNSPECIFIED"))
+            candidate_status = str(raw.get("status", "UNSPECIFIED"))
+            if _case_status_rank(candidate_status) > _case_status_rank(current_status):
+                current["status"] = candidate_status
+            for field in ("reason", "uncomputed_reason"):
+                reason = raw.get(field)
+                if isinstance(reason, str) and reason.strip() and reason.strip() not in current["_reasons"]:
+                    current["_reasons"].append(reason.strip())
+
+    try:
+        case_count = max(0, int(ledger.get("case_count", len(rows)) or 0))
+    except (TypeError, ValueError):
+        case_count = len(rows)
+    try:
+        qualified_count = max(0, int(ledger.get("qualified_provider_packet_case_count", 0) or 0))
+    except (TypeError, ValueError):
+        qualified_count = 0
+    qualification_gap = qualified_count < case_count
+
+    requests: list[dict[str, Any]] = []
+    for key in sorted(rows):
+        row = rows[key]
+        status = str(row.get("status", "UNSPECIFIED"))
+        identity = row.get("provider_packet_identity")
+        if not isinstance(identity, Mapping):
+            identity = {}
+        families = _case_required_families(row)
+        family_requirements: list[str] = []
+        for family in families:
+            family_requirements.extend(_FAMILY_REQUIREMENTS.get(
+                family,
+                ("provider-specific accident history for the declared family",),
+            ))
+        reasons = list(row.get("_reasons", ()))
+        if status != "EXECUTED":
+            reasons.append(f"current case status is {status}")
+        if not identity:
+            reasons.append("provider packet identity is absent from the facility case")
+        if qualification_gap:
+            reasons.append(
+                f"qualified provider packet coverage is {qualified_count}/{case_count} cases"
+            )
+        if not reasons:
+            continue
+        port_ids = identity.get("port_ids", ())
+        source_digests = identity.get("provider_source_digests", ())
+        result_digests = identity.get("provider_result_digests", ())
+        requests.append({
+            "request_id": "/".join(str(part) for part in key),
+            "event_id": row.get("event_id"),
+            "asset_id": row.get("asset_id"),
+            "component_id": identity.get("component_id", row.get("component_id")),
+            "release_branch_id": row.get("release_branch_id"),
+            "annual_condition_id": row.get("annual_condition_id"),
+            "scenario_families": families,
+            "current_status": status,
+            "request_kind": "QUALIFIED_PROVIDER_PACKET",
+            "qualification_required": qualification_gap,
+            "exact_match_required": {
+                "event_id": row.get("event_id"),
+                "component_id": identity.get("component_id", row.get("component_id")),
+                "port_ids": list(port_ids) if isinstance(port_ids, Sequence) and not isinstance(port_ids, (str, bytes)) else [],
+                "provider_source_digests": list(source_digests) if isinstance(source_digests, Sequence) and not isinstance(source_digests, (str, bytes)) else [],
+                "provider_result_digests": list(result_digests) if isinstance(result_digests, Sequence) and not isinstance(result_digests, (str, bytes)) else [],
+            },
+            "current_provider_packet_identity": dict(identity),
+            "required_provider_evidence": list(dict.fromkeys(
+                [*_COMMON_REQUIREMENTS, *family_requirements]
+            )),
+            "blocking_reasons": list(dict.fromkeys(reasons)),
+        })
+    return requests
 
 
 def build_facility_evidence_request(
@@ -264,6 +393,7 @@ def build_facility_evidence_request(
         for component in components
         for category in component["strict_gate_categories"]
     })
+    case_requests = _build_case_requests(ledger)
 
     return {
         "schema_version": SCHEMA,
@@ -305,6 +435,8 @@ def build_facility_evidence_request(
         },
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blockers)),
         "family_requests": family_rows,
+        "case_request_count": len(case_requests),
+        "case_requests": case_requests,
         "component_requests": components,
         "excluded_components": excluded_components,
         "frequency_policy": {

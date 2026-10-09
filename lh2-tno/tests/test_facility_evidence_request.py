@@ -187,3 +187,48 @@ def test_gate_categories_preserve_domain_and_failure_reasons():
     assert row["strict_gate_categories"] == ["DOMAIN_INCOMPLETE", "FAILED_PROVIDER_CASE"]
     assert "DOMAIN_INCOMPLETE" in report["current_assessment"]["strict_gate_categories"]
     assert report["strict_gate_catalog"]["FAILED_PROVIDER_CASE"].startswith("repeat the failed")
+
+
+def test_case_requests_preserve_exact_vertical_handoff_identity_and_qualification_gap():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "facility/vertical-handoff/terminal-valve/AREA_100%",
+            "asset_id": "vertical-handoff-vent",
+            "release_branch_id": "provider-vertical-handoff",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["pipe_hole", "liquid_two_phase", "vertical_handoff"],
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "reason": "synthetic vertical handoff",
+            "provider_packet_identity": {
+                "event_id": "facility/vertical-handoff/terminal-valve/AREA_100%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "port_ids": ["terminal_pipe.out"],
+                "provider_source_digests": ["source-digest"],
+                "provider_result_digests": ["result-digest"],
+            },
+        }],
+        "uncomputed_cases": [],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "vertical_handoff",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+            "event_ids": ["facility/vertical-handoff/terminal-valve/AREA_100%"],
+        }]},
+    )
+    assert report["case_request_count"] == 1
+    request = report["case_requests"][0]
+    assert request["request_kind"] == "QUALIFIED_PROVIDER_PACKET"
+    assert request["qualification_required"] is True
+    assert request["exact_match_required"]["component_id"] == "vertical-handoff-terminal-pipe-01"
+    assert request["exact_match_required"]["port_ids"] == ["terminal_pipe.out"]
+    assert "provider-owned vertical-to-horizontal handoff state and boundary" in request[
+        "required_provider_evidence"
+    ]
+    assert any("EXECUTED_OPERATOR_LIMITED" in reason for reason in request["blocking_reasons"])
