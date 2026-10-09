@@ -73,6 +73,25 @@ def test_model_binding_reports_diagnostic_adapter_without_promoting_provider_cla
     )
     assert report["status"] == "STATE_ONLY_BOUND"
     assert report["diagnostic_release_adapter_component_count"] == 1
+    assert report["accident_release_interface_component_count"] == 0
+    assert report["qualified_accident_release_component_count"] == 0
     assert report["component_rows"][0]["status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
     assert report["diagnostic_release_adapter_claim"] is True
     assert report["accident_release_claim"] is False
+
+
+def test_native_catalog_counts_interface_and_adapter_separately_from_qualified_packet():
+    manifest = EquipmentManifest.from_json(
+        ROOT / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    report = audit_equipment_model_binding(
+        manifest,
+        ROOT / "examples" / "generic_lh2_native_model_binding.json",
+    )
+    assert report["status"] == "STATE_ONLY_BOUND"  # boundary is state-only
+    assert report["accident_release_interface_component_count"] == 7
+    assert report["diagnostic_release_adapter_component_count"] == 7
+    assert report["qualified_accident_release_component_count"] == 0
+    assert report["diagnostic_release_adapter_claim"] is True
+    assert report["accident_release_claim"] is False
+    assert report["facility_qra_claim"] is False

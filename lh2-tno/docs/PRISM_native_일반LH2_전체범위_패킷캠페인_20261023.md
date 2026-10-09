@@ -117,7 +117,7 @@ $py = "C:\Users\lyul\.cache\codex-runtimes\codex-primary-runtime\dependencies\py
 - `native_generic_scope_packet_campaign_ledger_v10.json`: 24개 event/case, 24개 chain 실행, 실패 0개, 24개 packet identity/digest 소비를 기록한다.
 - `native_generic_scope_worklist_packet_evidence_v7.json`: worklist 24개, candidate 24개, exact/strict 24개, consequence-chain 24개를 확인한다. 모두 synthetic diagnostic evidence다.
 - `ijhe_completion_audit_native_generic_scope_v12.json`: generic native campaign 기준 19개 검사 중 16개 PASS, 3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다.
-- `ijhe_completion_audit_native_generic_scope_vertical_v4.json`: generic v12와 all-bin vertical handoff를 병합하고 29개 event용 5개 빈도 재가중 시나리오를 연결한 최신 감사다. 19개 검사 중 16개 PASS, 3개 BLOCKED이며, vertical handoff가 병합 범위표에 `PARTIAL`로 들어갔음을 확인한다.
+- `ijhe_completion_audit_native_generic_scope_vertical_v4.json`: generic v12와 all-bin vertical handoff를 병합한 2026-10-23 감사 스냅샷이다. 19개 검사 중 16개 PASS, 3개 BLOCKED이며, vertical handoff가 병합 범위표에 `PARTIAL`로 들어갔음을 확인한다. 최신 입력과 native binding 보정은 [`ijhe_completion_audit_native_generic_scope_vertical_v5.json`](../results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v5.json)에서 22개 검사 중 19개 PASS, 3개 BLOCKED로 다시 기록했다.
 
 남은 세 가지 차단 이유는 다음과 같다.
 
@@ -133,7 +133,7 @@ generic v12 campaign에는 수직 handoff 사건이 생성되지 않았기 때�
 
 최신 병합 원장은 [`native_generic_scope_vertical_merged_facility_ledger_repaired_v1.json`](../results/20261023/native_generic_scope_vertical_merged_facility_ledger_repaired_v1.json)이며 29개 event, 34개 case, 136개 risk atom을 보유한다. 병합 범위표 [`native_generic_scope_vertical_merged_scope_matrix_v1.json`](../results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json)는 12개 family를 다시 확인하고 `vertical_handoff: PARTIAL`을 유지한다. 조건부 chain은 모두 도달했지만 strict 상태에는 operator-limited와 domain-incomplete가 남는다.
 
-`audit_scope_ledger_consistency.py`의 결과 [`native_generic_scope_vertical_merged_ledger_consistency_v1.json`](../results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json)는 scope event 29개와 ledger event 29개가 일치하는 `CONSISTENT_SCOPE_LEDGER`다. 이 결과는 event·case 회계가 맞는다는 뜻이며, provider 자격·독립 물리검증·시설 IR/F-N을 의미하지 않는다. 최신 IJHE 감사 [`ijhe_completion_audit_native_generic_scope_vertical_v4.json`](../results/20261023/ijhe_completion_audit_native_generic_scope_vertical_v4.json)는 이 병합을 읽어도 `INCOMPLETE_EVIDENCE`를 유지하고, 실제 provider packet 부재·partial 사고군·시설 IR/F-N 보류 세 가지 차단 이유를 남긴다.
+`audit_scope_ledger_consistency.py`의 결과 [`native_generic_scope_vertical_merged_ledger_consistency_v1.json`](../results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json)는 scope event 29개와 ledger event 29개가 일치하는 `CONSISTENT_SCOPE_LEDGER`다. 이 결과는 event·case 회계가 맞다는 뜻이며, provider 자격·독립 물리검증·시설 IR/F-N을 의미하지 않는다. 최신 IJHE 감사 [`ijhe_completion_audit_native_generic_scope_vertical_v5.json`](../results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v5.json)는 이 병합을 읽어도 `INCOMPLETE_EVIDENCE`를 유지하고, 실제 provider packet 부재·partial 사고군·시설 IR/F-N 보류 세 가지 차단 이유를 남긴다.
 
 병합 원장을 시설 assessment wrapper로 다시 읽은 결과는 `results/20261023/native_generic_scope_vertical_merged_facility_assessment_v1.json`이다. 이 결과는 5개 빈도 시나리오와 원장 risk atom을 다시 연결해 조건부 IR/F-N 필드를 노출하지만, `facility_total_risk_available=false`, `qualified_facility_qra_available=false`, `complete_facility_qra_claim=false`를 유지한다. 따라서 assessment wrapper는 시설 계산 경로가 실제로 호출됐다는 진단 증거이며, 부분·합성 입력을 완전한 시설 QRA로 바꾸는 승격 단계가 아니다.
 

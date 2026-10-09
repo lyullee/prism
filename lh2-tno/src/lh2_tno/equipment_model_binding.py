@@ -61,6 +61,10 @@ def audit_equipment_model_binding(
     accident-release exports are still missing.  ``ACCIDENT_RELEASE_INTERFACE``
     means the catalog declares the packet interface for every kind; it still
     does not prove that a packet was produced or independently validated.
+
+    The returned counts deliberately separate three gates: an accident-release
+    interface, a diagnostic adapter, and a qualified provider packet.  A native
+    method or a diagnostic wrapper is never counted as a qualified packet.
     """
     if isinstance(manifest, EquipmentManifest):
         manifest_obj = manifest
@@ -229,20 +233,27 @@ def audit_equipment_model_binding(
         "binding_catalog_sha256": catalog_digest,
         "component_count": len(manifest_obj.components),
         "component_rows": component_rows,
+        # Count adapter availability independently of the row's overall status.
+        # A component can expose both a native accident interface and a
+        # diagnostic adapter; the old status-based count incorrectly returned
+        # zero for that valid combination.
         "diagnostic_release_adapter_component_count": sum(
-            row["status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
+            (row.get("diagnostic_release_adapter") or {}).get("status") == "available"
             for row in component_rows
         ),
-        "qualified_accident_release_component_count": sum(
+        "accident_release_interface_component_count": sum(
             row["status"] == "ACCIDENT_RELEASE_INTERFACE_BOUND"
             for row in component_rows
         ),
+        # No provider packet is qualified by this catalog alone.  Qualification
+        # is established by the separate provider-evidence gate.
+        "qualified_accident_release_component_count": 0,
         "unused_binding_kinds": unused_kinds,
         "blocking_reasons": list(dict.fromkeys(blockers)),
         "physical_validation_claim": False,
         "accident_release_claim": False,
         "diagnostic_release_adapter_claim": any(
-            row["status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
+            (row.get("diagnostic_release_adapter") or {}).get("status") == "available"
             for row in component_rows
         ),
         "facility_qra_claim": False,

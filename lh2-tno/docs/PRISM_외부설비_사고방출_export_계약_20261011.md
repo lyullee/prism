@@ -195,3 +195,6 @@ provider는 실제 차단 명령, 검출 지연, 재고/에너지 장부, 종료
 ```
 
 현재 portable test suite는 새 계약·물성 기준 테스트를 포함해 371개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
+## 2026-10-24 native export 재감사
+
+초기 문서의 “전용 메서드가 없다”는 문장은 2026-10-11 시점의 기록이다. 최신 외부 소스 감사에서는 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기 7개가 `export_accident_history(request)`를 구현한 것을 확인했다. [`native_equipment_model_binding_audit_v1.json`](../results/20261024/native_equipment_model_binding_audit_v1.json)은 native 사고 인터페이스 7개와 진단 adapter 7개를 별도로 세며, qualified provider packet은 0개로 유지한다. 따라서 native export 존재는 계약 연결을 완료한 것이고, 현장 provider 자격·독립 물리검증·시설 IR/F-N 완료를 의미하지 않는다.
