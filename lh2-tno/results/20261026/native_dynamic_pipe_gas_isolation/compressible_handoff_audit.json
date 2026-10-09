@@ -1,0 +1,21 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_GENERATED_SOURCE_STATE_BOUND",
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "algorithm": "birch_momentum_energy",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "port_id": "native-dynamic-pipe-out",
+  "event_id": "native-dynamic-pipe/accidental-leak-001",
+  "upstream_provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "upstream_provider_result_digest": "174c066fb241cb3ba4210db762acfbe4a1e8b9f45136a9e3c13c69c3b1a33b41",
+  "handoff_provider_source_digest": "9738293ce609c39b1cf86bf85e6ed88e13562071e2c76fa90e7cb781e36fa7b6",
+  "handoff_provider_result_digest": "66b0ca881f232b75abfc256a2774bd062a6a29d07ed344402e226eeae4e583b5",
+  "interval_count": 2,
+  "inactive_interval_count": 1,
+  "max_energy_residual_j_per_kg": 0.0,
+  "max_entropy_residual_j_per_kgk": 127.46694409902557,
+  "evidence_status": "synthetic_diagnostic",
+  "provider_source_state_required": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false
+}

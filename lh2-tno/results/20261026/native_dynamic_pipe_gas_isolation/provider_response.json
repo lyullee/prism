@@ -1,0 +1,96 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_state_snapshot_digest": "9f18d7e9b3fcdaab649e95c208004269ee7483547c9dbfb29f3f97c842a4de50",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "native-dynamic-pipe/accidental-leak-001",
+    "component_id": "native-dynamic-pipe-diagnostic",
+    "port_id": "native-dynamic-pipe-out",
+    "duration_s": 0.060000000000000005,
+    "available_mass_kg": 0.06310489224680658,
+    "cumulative_mass_out_kg": 1.6135811961058726e-05,
+    "cumulative_specific_enthalpy_out_j": 63.9333960079404,
+    "cumulative_static_enthalpy_out_j": 63.9333960079404,
+    "termination_basis": "reviewed_isolation_success",
+    "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+    "upstream_service": "LH2",
+    "fluid": "Hydrogen",
+    "phase_basis": "gas",
+    "reference_area_m2": 7.853981633974482e-07,
+    "reference_area_provenance": "explicit failed pipe opening area",
+    "droplet_partition_provenance": "DynamicHEMPipe gas outlet at ambient pressure; no liquid partition",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 0.0003227162392211745,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3962205.072929315,
+        "temperature_k": 300.2741836039255,
+        "density_kg_m3": 0.08176578487108252,
+        "effective_area_m2": 7.853981633974482e-07,
+        "velocity_m_s": 5025.26916548844,
+        "area_provenance": "explicit failed pipe opening area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 1000000.0000000001,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.8034764427488552,
+          "source_specific_enthalpy_j_kg": 3962205.072929315,
+          "source_specific_entropy_j_kgk": 44013.20870542226,
+          "throat_pressure_pa_abs": 517025.0270159457,
+          "throat_temperature_k": 247.6168609399935,
+          "throat_density_kg_m3": 0.504564260684398,
+          "throat_specific_enthalpy_j_kg": 3215912.7521901955,
+          "throat_mass_flux_kg_m2_s": 616.43312694883,
+          "choked": true,
+          "provider_source_state_provenance": "native DynamicHEMPipe upstream entropy and hydraulic throat result"
+        }
+      },
+      {
+        "time_s": 0.05,
+        "mass_flow_kg_s": 0.0,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3961754.812455557,
+        "temperature_k": 300.24272702753564,
+        "density_kg_m3": 0.08177434847059889,
+        "effective_area_m2": 7.853981633974482e-07,
+        "velocity_m_s": 0.0,
+        "area_provenance": "explicit failed pipe opening area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 999638.2744196325,
+          "source_temperature_k": 299.968706018782,
+          "source_density_kg_m3": 0.8032709952101029,
+          "source_specific_enthalpy_j_kg": 3961754.812455557,
+          "source_specific_entropy_j_kgk": 44013.2086977468,
+          "throat_pressure_pa_abs": 999638.2744196325,
+          "throat_temperature_k": 299.96870601878214,
+          "throat_density_kg_m3": 0.8032709952101024,
+          "throat_specific_enthalpy_j_kg": 3961754.812455559,
+          "throat_mass_flux_kg_m2_s": 0.0,
+          "choked": false,
+          "provider_source_state_provenance": "native DynamicHEMPipe upstream entropy and hydraulic throat result"
+        }
+      }
+    ],
+    "provider_meta": {
+      "native_inventory_owner": "DynamicHEMPipe",
+      "initial_mass_kg": 0.06310489224680658,
+      "final_mass_kg": 0.06308875643484553,
+      "residual_mass_kg": 0.0,
+      "final_pressure_pa_abs": 999638.2744196325,
+      "pressure_equalized": false,
+      "isolation_time_s": 0.05,
+      "post_isolation_observation_s": 0.01,
+      "isolation_success": true,
+      "time_step_s": 0.05,
+      "valve": {
+        "area_m2": 7.853981633974482e-07,
+        "discharge_coefficient": 0.8,
+        "choked_intervals": 1
+      }
+    }
+  }
+}

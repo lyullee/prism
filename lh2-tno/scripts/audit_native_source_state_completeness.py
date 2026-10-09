@@ -21,7 +21,7 @@ _CASES = (
     # separate scenario row so the liquid/two-phase contract is never recast
     # as gas while the optional compressible adapter can be audited against
     # the provider's actual gas export.
-    ("DynamicHEMPipe", "results/20261026/native_dynamic_pipe_gas_horizon/provider_response.json", "gas"),
+    ("DynamicHEMPipe", "results/20261026/native_dynamic_pipe_gas_isolation/provider_response.json", "gas"),
     ("StrokeLimitedCommandedValve", "results/20261025/native_stroke_valve/provider_response.json", "gas"),
     ("MappedPump", "results/20261025/native_mapped_pump/provider_response.json", "liquid"),
     ("DynamicVaporizer", "results/20261025/native_dynamic_vaporizer/provider_response.json", "gas"),

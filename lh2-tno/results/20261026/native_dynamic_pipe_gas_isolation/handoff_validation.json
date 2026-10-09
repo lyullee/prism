@@ -1,0 +1,13 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_VALIDATED",
+  "event_id": "native-dynamic-pipe/accidental-leak-001",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "provider_result_digest": "174c066fb241cb3ba4210db762acfbe4a1e8b9f45136a9e3c13c69c3b1a33b41",
+  "max_mach_number": 3.8072504483943233,
+  "handoff_state_count": 2,
+  "handoff_consumed": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The provider-owned gas boundary is conservation-checked. This command does not assign frequency, qualify the provider, or promote facility IR/F-N."
+}

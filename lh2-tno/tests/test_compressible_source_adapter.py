@@ -134,3 +134,40 @@ def test_source_state_adapter_refuses_digest_mismatch():
     packet["provider_result_digest"] = "b" * 64
     with pytest.raises(CompressibleSourceAdapterError, match="digest"):
         build_compressible_plane_handoff(packet, provider, properties=_Properties())
+
+
+def test_source_state_adapter_preserves_zero_flow_termination_interval():
+    provider, packet = _provider_and_packet()
+    zero_provider_step = json.loads(json.dumps(provider["data"]["steps"][0]))
+    zero_provider_step["time_s"] = 0.1
+    zero_provider_step["mass_flow_kg_s"] = 0.0
+    zero_provider_step["velocity_m_s"] = 0.0
+    zero_provider_step["provider_source_state"].update(
+        throat_pressure_pa_abs=101325.0,
+        throat_temperature_k=290.0,
+        throat_density_kg_m3=0.1,
+        throat_specific_enthalpy_j_kg=3.9e6,
+        throat_mass_flux_kg_m2_s=0.0,
+        choked=False,
+    )
+    provider["data"]["duration_s"] = 0.2
+    provider["data"]["steps"].append(zero_provider_step)
+    packet["duration_s"] = 0.2
+    packet["steps"].append({
+        "time_s": 0.1,
+        "mass_flow_kg_s": 0.0,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3.9e6,
+        "temperature_k": 290.0,
+        "density_kg_m3": 0.1,
+        "effective_area_m2": 0.001,
+        "velocity_m_s": 0.0,
+        "area_provenance": "synthetic",
+        "velocity_origin": "provider_resolved",
+    })
+    packet["provider_result_digest"] = canonical_digest(provider)
+    result = build_compressible_plane_handoff(
+        packet, provider, properties=_Properties()
+    )
+    assert result.audit["inactive_interval_count"] == 1
+    assert result.export["handoff"]["states"][1]["velocity_m_s"] == 0.0

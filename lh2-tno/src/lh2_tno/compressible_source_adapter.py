@@ -133,6 +133,7 @@ def build_compressible_plane_handoff(
     states: list[dict[str, Any]] = []
     max_energy_residual = 0.0
     max_entropy_residual = 0.0
+    inactive_interval_count = 0
     for index, (step, raw) in enumerate(zip(release.steps, raw_steps)):
         if not isinstance(raw, Mapping):
             raise CompressibleSourceAdapterError(f"provider data.steps[{index}] must be an object")
@@ -148,7 +149,40 @@ def build_compressible_plane_handoff(
         h_t = _finite(source.get("throat_specific_enthalpy_j_kg"), f"steps[{index}].throat_specific_enthalpy_j_kg")
         s_t = _finite(source.get("source_specific_entropy_j_kgk"), f"steps[{index}].source_specific_entropy_j_kgk")
         area = _positive(step.effective_area_m2, f"steps[{index}].effective_area_m2")
-        mdot = _positive(step.mass_flow_kg_s, f"steps[{index}].mass_flow_kg_s")
+        mdot = _finite(step.mass_flow_kg_s, f"steps[{index}].mass_flow_kg_s")
+        if mdot < 0.0:
+            raise CompressibleSourceAdapterError(
+                f"steps[{index}].mass_flow_kg_s must be nonnegative"
+            )
+        if mdot == 0.0:
+            if index == 0:
+                raise CompressibleSourceAdapterError(
+                    "first compressible handoff interval must contain an active gas flow"
+                )
+            # Preserve a provider-declared closed/isolated interval.  No
+            # plane velocity or expansion is inferred for zero flow; the
+            # state simply closes the release mass boundary at zero.
+            throat_temperature = _positive(
+                source.get("throat_temperature_k"),
+                f"steps[{index}].throat_temperature_k",
+            )
+            width = math.sqrt(area)
+            states.append({
+                "time_s": step.time_s,
+                "direction_enu": list(release.direction_enu),
+                "velocity_m_s": 0.0,
+                "density_kg_m3": rho_t,
+                "temperature_k": throat_temperature,
+                "h2_mass_fraction": 1.0,
+                "half_width_m": width / 2.0,
+                "depth_m": width,
+                "provenance": (
+                    "provider-declared zero-flow termination interval; "
+                    "no active compressible plume"
+                ),
+            })
+            inactive_interval_count += 1
+            continue
         u_t = mdot / (rho_t * area)
         u_plane = u_t + (p_t - release.ambient_pressure_pa_abs) * area / mdot
         if not math.isfinite(u_plane) or u_plane <= 0.0:
@@ -245,6 +279,7 @@ def build_compressible_plane_handoff(
         "handoff_provider_source_digest": source_digest,
         "handoff_provider_result_digest": result_digest,
         "interval_count": len(states),
+        "inactive_interval_count": inactive_interval_count,
         "max_energy_residual_j_per_kg": max_energy_residual,
         "max_entropy_residual_j_per_kgk": max_entropy_residual,
         "evidence_status": evidence_status,

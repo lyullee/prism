@@ -83,7 +83,10 @@ class VerticalGasHandoffState(Contract):
 
     time_s: Nonnegative
     direction_enu: Vector
-    velocity_m_s: Positive
+    # A provider may explicitly return a zero-flow termination interval.  A
+    # zero carrier velocity is valid there and must close the corresponding
+    # gas release mass flow without inventing a residual plume.
+    velocity_m_s: Nonnegative
     density_kg_m3: Positive
     temperature_k: Positive
     h2_mass_fraction: Fraction

@@ -1,0 +1,65 @@
+{
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "port_id": "native-dynamic-pipe-out",
+  "event_id": "native-dynamic-pipe/accidental-leak-001",
+  "upstream_provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "upstream_provider_result_digest": "174c066fb241cb3ba4210db762acfbe4a1e8b9f45136a9e3c13c69c3b1a33b41",
+  "handoff_provider_source_digest": "9738293ce609c39b1cf86bf85e6ed88e13562071e2c76fa90e7cb781e36fa7b6",
+  "handoff_provider_result_digest": "66b0ca881f232b75abfc256a2774bd062a6a29d07ed344402e226eeae4e583b5",
+  "handoff_model": "prism-notional-plane-adapter",
+  "handoff_revision": "0.1.0",
+  "evidence_status": "synthetic_diagnostic",
+  "scenario_provenance": "Optional source-state notional-plane diagnostic; provider source/throat states were captured, but provider qualification and independent near-field validation are pending",
+  "handoff": {
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "direction_enu": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "velocity_m_s": 1826.050146249136,
+    "density_kg_m3": 0.16554191995916187,
+    "temperature_k": 148.31619293642382,
+    "h2_mass_fraction": 1.0,
+    "half_width_m": 0.0005166186383822977,
+    "depth_m": 0.0010332372767645954,
+    "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+    "states": [
+      {
+        "time_s": 0.0,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1826.050146249136,
+        "density_kg_m3": 0.16554191995916187,
+        "temperature_k": 148.31619293642382,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0005166186383822977,
+        "depth_m": 0.0010332372767645954,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.05,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 0.0,
+        "density_kg_m3": 0.8032709952101024,
+        "temperature_k": 299.96870601878214,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.000443113462726379,
+        "depth_m": 0.000886226925452758,
+        "provenance": "provider-declared zero-flow termination interval; no active compressible plume"
+      }
+    ]
+  }
+}

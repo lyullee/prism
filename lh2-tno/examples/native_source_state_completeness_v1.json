@@ -115,7 +115,7 @@
     },
     {
       "model_class": "DynamicHEMPipe",
-      "provider_response": "results/20261026/native_dynamic_pipe_gas/provider_response.json",
+      "provider_response": "results/20261026/native_dynamic_pipe_gas_isolation/provider_response.json",
       "phase_family": "gas",
       "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
       "interval_count": 2,
