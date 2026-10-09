@@ -30,6 +30,21 @@ status: RESTRICTED_COMPONENT_EVIDENCE
 이 자료가 허용하는 표현은 “선언된 옥외 적용범위 안에서 SLABx-LH2 피해영향
 구성요소에 제한된 비교·폐합 근거가 있다”이다.
 
+## 운전 시나리오 근거 연결
+
+준비도 원장은 `--scenario-evidence-audit`로 전달한 시나리오 screening summary도
+`scenario_evidence` 블록에 보존한다. 현재 참조 파일은
+`examples/inspection_center_scenario_evidence_reaudit_summary.json`이며, 52개
+시나리오 행과 후보 사고군·감시 신호를 기록한다. 이 자료는 일반적인 옥외 LH2
+설비의 사고군 후보와 후속 provider 자료 요청을 정리하는 데 사용한다.
+
+시나리오 설명이나 압력·온도·유량·밸브 신호는 방출량, 종료시간, 개구 크기 또는
+사고빈도를 역산하지 않는다. 따라서 원장 검증기는 시나리오 근거가 포함되어도
+`candidate_only=true`, `frequency_assigned=false`,
+`sensor_frequency_learning_used=false`, `facility_qra_claim=false`를 요구한다.
+실제 설비별 방출 packet과 검토된 문헌 빈도가 들어오기 전에는 strict facility
+QRA gate가 닫힌 상태로 유지된다.
+
 ## 계속 차단하는 주장
 
 다음 결과는 새 domain으로도 열리지 않는다.

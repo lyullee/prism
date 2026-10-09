@@ -100,6 +100,68 @@ def _family_rows(scope: Mapping[str, Any]) -> list[dict[str, Any]]:
     return result
 
 
+def _scenario_evidence_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
+    """Keep scenario-register evidence visible without promoting it to QRA input.
+
+    Both the full ``prism.scenario_evidence_audit.v1`` record and the small,
+    tracked screening summary are accepted.  The summary deliberately carries
+    only counts and policy flags; it never contains a release rate or a
+    frequency inferred from an operating trace.
+    """
+    files = audit.get("files") if isinstance(audit.get("files"), Mapping) else {}
+    summary = audit.get("summary") if isinstance(audit.get("summary"), Mapping) else audit
+    candidate_counts = audit.get("candidate_accident_family_counts")
+    if not isinstance(candidate_counts, Mapping):
+        candidate_counts = summary.get("family_candidate_counts")
+    if not isinstance(candidate_counts, Mapping):
+        candidate_counts = summary.get("candidate_family_counts")
+    candidate_counts = candidate_counts if isinstance(candidate_counts, Mapping) else {}
+    signal_counts = audit.get("candidate_monitoring_signal_counts")
+    if not isinstance(signal_counts, Mapping):
+        signal_counts = summary.get("candidate_monitoring_signal_counts")
+    signal_counts = signal_counts if isinstance(signal_counts, Mapping) else {}
+    scope_counts = audit.get("scope_status_counts")
+    if not isinstance(scope_counts, Mapping):
+        scope_counts = summary.get("scope_status_counts")
+    scope_counts = scope_counts if isinstance(scope_counts, Mapping) else {}
+    policy = audit.get("promotion_policy")
+    policy = policy if isinstance(policy, Mapping) else {}
+    provider = audit.get("provider_promotion")
+    provider = provider if isinstance(provider, Mapping) else {}
+    scenario_count = files.get("scenario_rows")
+    if scenario_count is None:
+        scenario_count = summary.get("record_count")
+    if scenario_count is None and isinstance(audit.get("scenario_records"), Sequence):
+        scenario_count = len(audit["scenario_records"])
+    blocking_reasons = audit.get("blocking_reasons")
+    if not isinstance(blocking_reasons, Sequence) or isinstance(blocking_reasons, (str, bytes)):
+        blocking_reasons = list(audit.get("limitations", ()))
+    qualified_count = provider.get("qualified_packet_count", 0)
+    frequency_assigned = provider.get("frequency_assigned")
+    if frequency_assigned is None:
+        frequency_assigned = policy.get("frequency_applied", False)
+    sensor_learning = policy.get("sensor_frequency_learning_used", False)
+    facility_claim = policy.get("facility_qra_claim", False)
+    return {
+        "schema": audit.get("schema") or audit.get("schema_version"),
+        "status": audit.get("status"),
+        "scenario_row_count": scenario_count,
+        "candidate_accident_family_counts": dict(sorted(candidate_counts.items())),
+        "candidate_monitoring_signal_counts": dict(sorted(signal_counts.items())),
+        "scope_status_counts": dict(sorted(scope_counts.items())),
+        "csv_count": files.get("csv_count", audit.get("source_file_count")),
+        "workbook_count": files.get("workbook_count"),
+        "telemetry_candidate_sheet_count": files.get("telemetry_candidate_sheet_count"),
+        "telemetry_metadata_incomplete_sheet_count": files.get("telemetry_metadata_incomplete_sheet_count"),
+        "qualified_provider_packet_count": qualified_count,
+        "frequency_assigned": frequency_assigned,
+        "sensor_frequency_learning_used": sensor_learning,
+        "facility_qra_claim": facility_claim,
+        "candidate_only": True,
+        "blocking_reasons": list(blocking_reasons),
+    }
+
+
 def build_v060_readiness_report(
     *,
     objective_audit: Mapping[str, Any],
@@ -110,6 +172,7 @@ def build_v060_readiness_report(
     validation_matrix: Mapping[str, Any],
     realtime_benchmark: Mapping[str, Any],
     facility_evidence_request: Mapping[str, Any] | None = None,
+    scenario_evidence_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -123,6 +186,11 @@ def build_v060_readiness_report(
     if facility_evidence_request is not None:
         evidence_request = _mapping(
             facility_evidence_request, "facility_evidence_request"
+        )
+    scenario_evidence = None
+    if scenario_evidence_audit is not None:
+        scenario_evidence = _scenario_evidence_summary(
+            _mapping(scenario_evidence_audit, "scenario_evidence_audit")
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -263,6 +331,7 @@ def build_v060_readiness_report(
             if evidence_request is not None
             else None
         ),
+        "scenario_evidence": scenario_evidence,
         "completion_criteria": [
             {
                 "id": "A_equipment_state_and_release",
@@ -516,6 +585,58 @@ def validate_v060_readiness_report(
                     "evidence_request cannot allow facility promotion in a readiness ledger"
                 )
 
+    scenario_evidence = value.get("scenario_evidence")
+    if scenario_evidence is not None:
+        if not isinstance(scenario_evidence, Mapping):
+            errors.append("scenario_evidence must be an object when present")
+        else:
+            allowed_schemas = {
+                "prism.scenario_evidence_audit.v1",
+                "prism.external_scenario_evidence.v1",
+                "prism.inspection_center_screening_summary.v1",
+            }
+            if scenario_evidence.get("schema") not in allowed_schemas:
+                errors.append("scenario_evidence.schema is not a supported screening schema")
+            for field in (
+                "scenario_row_count",
+                "csv_count",
+                "workbook_count",
+                "telemetry_candidate_sheet_count",
+                "telemetry_metadata_incomplete_sheet_count",
+                "qualified_provider_packet_count",
+            ):
+                if scenario_evidence.get(field) is not None:
+                    _nonnegative_int(
+                        scenario_evidence.get(field),
+                        f"scenario_evidence.{field}",
+                        errors,
+                    )
+            for field in (
+                "candidate_accident_family_counts",
+                "candidate_monitoring_signal_counts",
+                "scope_status_counts",
+            ):
+                counts = scenario_evidence.get(field)
+                if not isinstance(counts, Mapping):
+                    errors.append(f"scenario_evidence.{field} must be an object")
+                    continue
+                for key, count in counts.items():
+                    _nonnegative_int(count, f"scenario_evidence.{field}.{key}", errors)
+            for field in (
+                "frequency_assigned",
+                "sensor_frequency_learning_used",
+                "facility_qra_claim",
+                "candidate_only",
+            ):
+                if scenario_evidence.get(field) is not False and field != "candidate_only":
+                    errors.append(f"scenario_evidence.{field} must remain false")
+            if scenario_evidence.get("candidate_only") is not True:
+                errors.append("scenario_evidence.candidate_only must remain true")
+            if not isinstance(scenario_evidence.get("blocking_reasons"), list):
+                errors.append("scenario_evidence.blocking_reasons must be an array")
+            if scenario_evidence.get("qualified_provider_packet_count") not in (0, None):
+                errors.append("scenario evidence cannot report a qualified provider packet")
+
     if errors:
         raise V060ReadinessError("; ".join(errors))
     return {
@@ -524,7 +645,7 @@ def validate_v060_readiness_report(
         "strict_blocking_check_count": len(strict_blockers),
         "component_row_count": len(components),
         "accident_family_row_count": len(family_rows),
-        "invariant_count": 12,
+        "invariant_count": 13,
     }
 
 

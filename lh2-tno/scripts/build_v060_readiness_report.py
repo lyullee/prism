@@ -49,6 +49,11 @@ def main() -> int:
         type=Path,
         help="Optional current provider-evidence request ledger.",
     )
+    parser.add_argument(
+        "--scenario-evidence-audit",
+        type=Path,
+        help="Optional read-only scenario register/screening evidence summary.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -63,6 +68,11 @@ def main() -> int:
             facility_evidence_request=(
                 _load(args.facility_evidence_request)
                 if args.facility_evidence_request is not None
+                else None
+            ),
+            scenario_evidence_audit=(
+                _load(args.scenario_evidence_audit)
+                if args.scenario_evidence_audit is not None
                 else None
             ),
         )
@@ -80,6 +90,10 @@ def main() -> int:
     if args.facility_evidence_request is not None:
         report["source_artifacts"]["facility_evidence_request"] = _source_artifact(
             args.facility_evidence_request
+        )
+    if args.scenario_evidence_audit is not None:
+        report["source_artifacts"]["scenario_evidence_audit"] = _source_artifact(
+            args.scenario_evidence_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

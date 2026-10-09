@@ -72,6 +72,25 @@ def _evidence_request():
     }
 
 
+def _scenario_evidence():
+    return {
+        "schema_version": "prism.inspection_center_screening_summary.v1",
+        "status": "SCREENING_EVIDENCE_IMPORTED",
+        "source_file_count": 3,
+        "record_count": 4,
+        "candidate_family_counts": {"pipe_hole": 2, "vent_hole": 1},
+        "candidate_monitoring_signal_counts": {"pressure": 4},
+        "scope_status_counts": {"CANDIDATE_OUTDOOR_SCREENING": 4},
+        "promotion_policy": {
+            "frequency_applied": False,
+            "sensor_frequency_learning_used": False,
+            "provider_packet_created": False,
+            "facility_qra_claim": False,
+        },
+        "limitations": ["candidate hazards only"],
+    }
+
+
 def test_report_keeps_conditional_chain_and_strict_gate_separate():
     report = build_v060_readiness_report(**_inputs())
     assert report["schema_version"] == "prism.v060_ijhe_readiness_report.v1"
@@ -134,4 +153,28 @@ def test_report_validator_rejects_evidence_request_that_allows_promotion():
     )
     report["evidence_request"]["facility_promotion_allowed_now"] = True
     with pytest.raises(V060ReadinessError, match="cannot allow facility promotion"):
+        validate_v060_readiness_report(report)
+
+
+def test_report_records_scenario_evidence_without_frequency_or_qra_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(), scenario_evidence_audit=_scenario_evidence()
+    )
+    evidence = report["scenario_evidence"]
+    assert evidence["schema"] == "prism.inspection_center_screening_summary.v1"
+    assert evidence["scenario_row_count"] == 4
+    assert evidence["candidate_accident_family_counts"] == {"pipe_hole": 2, "vent_hole": 1}
+    assert evidence["frequency_assigned"] is False
+    assert evidence["sensor_frequency_learning_used"] is False
+    assert evidence["facility_qra_claim"] is False
+    assert evidence["candidate_only"] is True
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_rejects_scenario_evidence_promotion_flags():
+    report = build_v060_readiness_report(
+        **_inputs(), scenario_evidence_audit=_scenario_evidence()
+    )
+    report["scenario_evidence"]["frequency_assigned"] = True
+    with pytest.raises(V060ReadinessError, match="scenario_evidence.frequency_assigned"):
         validate_v060_readiness_report(report)

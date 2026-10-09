@@ -505,6 +505,51 @@
     ],
     "facility_promotion_allowed_now": false
   },
+  "scenario_evidence": {
+    "schema": "prism.inspection_center_screening_summary.v1",
+    "status": "SCREENING_EVIDENCE_IMPORTED",
+    "scenario_row_count": 52,
+    "candidate_accident_family_counts": {
+      "inventory_over_600s": 2,
+      "pipe_hole": 17,
+      "valve_hole": 30,
+      "vaporizer_hole": 4,
+      "vent_hole": 4,
+      "vertical_handoff": 2,
+      "vessel_hole": 2
+    },
+    "candidate_monitoring_signal_counts": {
+      "hydrogen_detection": 32,
+      "leak_test": 25,
+      "mass_flow": 41,
+      "pressure": 52,
+      "relief_state": 17,
+      "temperature": 10,
+      "vacuum_level": 3,
+      "valve_state": 43,
+      "vent_state": 2,
+      "ventilation_state": 7
+    },
+    "scope_status_counts": {
+      "CANDIDATE_OUTDOOR_SCREENING": 41,
+      "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
+    },
+    "csv_count": 3,
+    "workbook_count": null,
+    "telemetry_candidate_sheet_count": null,
+    "telemetry_metadata_incomplete_sheet_count": null,
+    "qualified_provider_packet_count": 0,
+    "frequency_assigned": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_claim": false,
+    "candidate_only": true,
+    "blocking_reasons": [
+      "Procedure and failure text identifies candidate scenarios only; it does not provide an initiating frequency.",
+      "Monitoring signal names are candidate tags and are not inverse leak-size or frequency estimators.",
+      "Each candidate still requires an equipment-owned accident history, termination ledger and provider packet.",
+      "Indoor, semi-enclosed and test-building rows are retained as evidence but marked outside the declared outdoor scope."
+    ]
+  },
   "completion_criteria": [
     {
       "id": "A_equipment_state_and_release",
@@ -592,6 +637,10 @@
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
       "sha256": "43c03fc0edd6c57d9048cf8bc19c6074e34a30e78f2a76356426ebb69e63209f"
+    },
+    "scenario_evidence_audit": {
+      "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
+      "sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3"
     }
   },
   "invariant_validation": {
@@ -600,6 +649,6 @@
     "strict_blocking_check_count": 4,
     "component_row_count": 10,
     "accident_family_row_count": 12,
-    "invariant_count": 12
+    "invariant_count": 13
   }
 }

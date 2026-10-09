@@ -3247,13 +3247,21 @@
   "v060_current_facility_total_risk_available": false,
   "v060_current_complete_facility_qra_claim": false,
 
-  "v060_current_readiness_report_sha256": "e9386badfc12d0fe87643dc0ea6a342313a4ad87cb2c0753ca9f04484029741e",
+  "v060_current_readiness_report_sha256": "353ee7e88be8038075bbc7d9153e4e99ec14f246baa75b8976504580a4f756f8",
   "v060_current_evidence_request": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "v060_current_evidence_request_sha256": "43c03fc0edd6c57d9048cf8bc19c6074e34a30e78f2a76356426ebb69e63209f",
   "v060_current_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
   "v060_current_evidence_request_case_count": 44,
   "v060_current_evidence_request_family_count": 12,
   "v060_current_evidence_request_component_count": 9,
-  "v060_current_evidence_request_facility_promotion_allowed_now": false
+  "v060_current_evidence_request_facility_promotion_allowed_now": false,
+  "v060_current_scenario_evidence": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
+  "v060_current_scenario_evidence_sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3",
+  "v060_current_scenario_evidence_status": "SCREENING_EVIDENCE_IMPORTED",
+  "v060_current_scenario_evidence_row_count": 52,
+  "v060_current_scenario_evidence_candidate_family_count": 7,
+  "v060_current_scenario_evidence_candidate_only": true,
+  "v060_current_scenario_evidence_frequency_assigned": false,
+  "v060_current_scenario_evidence_facility_qra_claim": false
 
 }

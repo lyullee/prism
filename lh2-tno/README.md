@@ -110,6 +110,15 @@ provider·독립 물리검증·시설 전체 IR/F-N은 열리지 않습니다.
 
 **v0.6.0 준비도 원장의 증거 요청 요약:** `scripts/build_v060_readiness_report.py`에 `--facility-evidence-request`를 전달하면 readiness report의 `evidence_request` 블록에 현재 provider export schema, case·사고군·설비별 요청 수, strict gate category와 시설 승격 가능 여부가 함께 기록됩니다. 이 요약은 누락 자료의 추적성을 높이지만 qualified packet이나 시설 IR/F-N을 자동 승격하지 않습니다.
 
+**시나리오 근거의 준비도 원장 연결:** 같은 스크립트에 `--scenario-evidence-audit`를
+전달하면 실제 운전·위험 시나리오 자료의 행 수, 후보 사고군, 후보 감시 신호와 범위
+밖 행 수를 `scenario_evidence` 블록에 기록합니다. 이 입력은 설비별 provider 방출
+packet·빈도·시설 IR/F-N을 만들지 않는 screening evidence로만 취급하며,
+`frequency_assigned=false`, `sensor_frequency_learning_used=false`,
+`facility_qra_claim=false`를 검증기가 강제합니다. 현재 준비도 원장은
+`examples/inspection_center_scenario_evidence_reaudit_summary.json`을 해시와 함께
+참조하고, 52개 행(옥외 후보 41개·범위 밖 11개)의 후보 사고군을 보존합니다.
+
 **provider 재고 소진 연결 (개발 소스):** 설비 provider가 기체 전체 재고 소진 이력을 계산한 경우 `equipment_inventory_depletion`을 사용하고, 액체·2상 전체 재고 이력은 `equipment_liquid_release`를 사용해 `instantaneous_inventory` 문헌 사건과 결합할 수 있습니다. 정확히 600초 이력을 반환한 기체·액체 provider는 각각 `equipment_inventory_over_600s`·`equipment_liquid_over_600s`와 `inventory_over_600s` 종료근거를 사용합니다. PRISM은 짧은 누출을 전량 방출로 늘리거나 센서값에서 재고·빈도를 추정하지 않습니다.
 
 **차단 branch 빈도 연결 (개발 소스):** 하나의 initiating event에 대한 provider 방출 이력(예: isolation-success/isolation-failure)은 `--request-branch-catalog`으로 조건부 확률과 함께 입력할 수 있습니다. 물리 개구가 맞는 branch만 연결하고, 확률 합이 1보다 작으면 누락분을 `UNCOMPUTED`로 보존하며 1을 넘으면 거부합니다.
