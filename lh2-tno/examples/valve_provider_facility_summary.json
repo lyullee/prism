@@ -3,15 +3,15 @@
   "generated_at_kst": "2026-10-21",
   "purpose": "compact pointer for the external lh2dt.Valve provider campaign and its facility replacement ledger",
   "provider_campaign": {
-    "record": "results/20261021/valve_provider_all_bins_campaign/campaign_result.json",
-    "verification": "results/20261021/valve_provider_all_bins_campaign/verification.json",
-    "scope_matrix": "results/20261021/valve_provider_all_bins_campaign/scope_matrix.json",
+    "record": "results/20261022/valve_provider_all_bins_campaign_repaired/campaign_result.json",
+    "verification": "results/20261022/valve_provider_all_bins_campaign_repaired/verification.json",
+    "scope_matrix": "results/20261022/valve_provider_all_bins_campaign_repaired/scope_matrix.json",
     "generated_events": 5,
     "total_cases": 10,
-    "executed_operator_limited_cases": 8,
-    "failed_backend_deadline_cases": 2,
+    "executed_operator_limited_cases": 10,
+    "failed_backend_deadline_cases": 0,
     "withheld_cases": 10,
-    "risk_atoms": 32,
+    "risk_atoms": 40,
     "frequency_inference": false,
     "physical_validation_claim": false,
     "facility_qra_claim": false,
@@ -25,17 +25,19 @@
     "weather_cases": [
       "D-3ms-west",
       "D-4ms-west"
-    ]
+    ],
+    "retry_record": "results/20261022/valve_area_0.01_retry/campaign_result.json",
+    "retry_timeout_s": 360.0
   },
   "facility_replacement": {
-    "ledger": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json",
-    "assessment": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
-    "scope_matrix": "results/20261021/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_merged_scope_matrix.json",
+    "ledger": "results/20261022/native_campaign_with_repaired_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json",
+    "assessment": "results/20261022/native_campaign_with_repaired_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
+    "scope_matrix": "results/20261022/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_repaired_merged_scope_matrix.json",
     "campaign_count": 7,
     "event_count": 41,
     "case_count": 80,
     "uncomputed_case_count": 37,
-    "risk_atom_count": 304,
+    "risk_atom_count": 312,
     "conditional_diagnostic_facility_annual_ir_low_high": {
       "worker-01": [
         1.0694000000000011e-06,
@@ -45,7 +47,7 @@
     "facility_total_risk_available": false
   },
   "ijhe_audit": {
-    "record": "results/20261021/ijhe_completion_audit_valve_transfer_line_replacement.json",
+    "record": "results/20261022/ijhe_completion_audit_repaired_valve_transfer_line_replacement.json",
     "status": "INCOMPLETE_EVIDENCE",
     "blocking_reasons": [
       "only synthetic or screening provider releases are available for this campaign",
@@ -55,8 +57,8 @@
   },
   "limitations": [
     "external provider packets use synthetic liquid state and bounded diagnostic horizon",
-    "AREA_0.01% cases exceeded backend deadline",
-    "operator-limited provider closure and facility evidence remain unqualified",
+    "AREA_0.01% cases required a targeted 360 s retry after initial 180 s deadline failures",
+    "all executed cases remain operator-limited; provider qualification and independent physical validation remain absent",
     "no sensor-derived frequency inference"
   ]
 }

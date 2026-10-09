@@ -44,7 +44,7 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def _backend() -> tuple[BackendConfig, Path]:
+def _backend(timeout_s: float | None = None) -> tuple[BackendConfig, Path]:
     raw = _load(ROOT / "results/20261009/backend_config_current.json")
     provider = Path(
         r"C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템"
@@ -52,6 +52,8 @@ def _backend() -> tuple[BackendConfig, Path]:
     )
     raw["packages"] = [p for p in raw["packages"] if p["name"] != "lh2dt"]
     raw["packages"].append({"name": "lh2dt", "root": str(provider), "sha256": tree_digest(provider)})
+    if timeout_s is not None:
+        raw["timeout_s"] = timeout_s
     return BackendConfig.model_validate_json(json.dumps(raw)), provider
 
 
@@ -140,12 +142,24 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--area-bin",
+        action="append",
+        choices=sorted(PACKETS),
+        help="run only the selected literature area bin; repeat for a targeted retry",
+    )
+    parser.add_argument(
+        "--timeout-s",
+        type=float,
+        help="override the isolated backend deadline for a targeted retry",
+    )
     args = parser.parse_args()
     facility = _facility()
     plan = _frequency_plan()
-    events = generate_events(facility, plan)
-    if {event.loc for event in events} != set(PACKETS):
-        raise AssertionError("the valve frequency plan did not generate all five area bins")
+    selected_locs = set(args.area_bin or PACKETS)
+    events = list(generate_events(facility, plan))
+    if not selected_locs.issubset({event.loc for event in events}):
+        raise AssertionError("the valve frequency plan did not generate the requested area bins")
 
     conditions = []
     for condition_id, probability, speed in [("D-3ms-west", 0.4, 3.0), ("D-4ms-west", 0.6, 4.0)]:
@@ -172,6 +186,17 @@ def main() -> None:
     routes = []
     packet_records = {}
     for event in events:
+        if event.loc not in selected_locs:
+            routes.append({
+                "event_id": event.id,
+                "branches": [{
+                    "id": "targeted_retry_withheld",
+                    "probability_given_event": 1.0,
+                    "provenance": "targeted retry intentionally withheld this area bin",
+                    "uncomputed_reason": "targeted retry selected a different area bin",
+                }],
+            })
+            continue
         packet = _load(PACKETS[event.loc])
         packet_records[event.id] = packet
         routes.append({
@@ -191,7 +216,7 @@ def main() -> None:
         "event_routes": routes,
         "scope_provenance": "five exact LH2_VALVE literature area bins use saved external lh2dt.Valve liquid/two-phase packets through the SLABx-LH2/SLABx and native TNO IR/F-N chain; provider horizon and facility context remain synthetic diagnostic evidence",
     }))
-    config, provider = _backend()
+    config, provider = _backend(args.timeout_s)
     result = ResearchPipeline(facility, IsolatedBackend(config)).facility_risk(campaign)
     _save(args.output_dir / "campaign_result_debug.json", result)
     executed = [case for case in result["cases"] if case["status"].startswith("EXECUTED")]
@@ -199,7 +224,8 @@ def main() -> None:
     # The external provider packets are diagnostic evidence.  Operator-limited
     # cases remain usable for a conditional chain, while backend failures stay
     # explicitly withheld and are never converted to zero risk.
-    if len(result["events"]) != 5 or len(executed) + len(failed) != 10:
+    expected_case_count = len(selected_locs) * len(conditions)
+    if len(result["events"]) != len(PACKETS) or len(executed) + len(failed) != expected_case_count:
         raise AssertionError({"events": len(result["events"]), "executed": len(executed), "failed": len(failed), "uncomputed": len(result["uncomputed_cases"])})
     if any(abs(case["mass_ledger"]["end_to_end_residual_kg"]) > 1e-8 for case in executed):
         raise AssertionError("valve packet mass ledger did not close")
@@ -213,6 +239,7 @@ def main() -> None:
     _save(args.output_dir / "verification.json", {
         "status": result["status"],
         "generated_events": len(result["events"]),
+        "selected_area_bins": sorted(selected_locs),
         "executed_cases": len(executed),
         "failed_cases": len(failed),
         "uncomputed_cases": len(result["uncomputed_cases"]),
@@ -234,6 +261,7 @@ def main() -> None:
     print(json.dumps({
         "status": result["status"],
         "generated_events": len(result["events"]),
+        "selected_area_bins": sorted(selected_locs),
         "executed_cases": len(executed),
         "uncomputed_cases": len(result["uncomputed_cases"]),
         "risk_atoms": len(result["risk_atoms"]),
