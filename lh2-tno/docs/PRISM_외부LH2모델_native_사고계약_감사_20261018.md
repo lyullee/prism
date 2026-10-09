@@ -52,12 +52,12 @@ python scripts/audit_lh2dt_native_contract.py `
 - PRISM-side adapter가 같은 이름의 메서드를 제공해도 외부 모델 native 기능으로 기록하지 않는다.
 - source digest와 계약 감사는 재현성 자료이며, 독립 물리검증이나 현장 빈도 근거를 대신하지 않는다.
 
-정적 감사 테스트 2건과 방출 ledger domain/withheld 분리 테스트를 포함한 PRISM portable suite는 441건 통과했고, 외부 `lh2dt_models` 전체 회귀시험은 371건 통과했다. 이 결과는 native method 존재를 확인한 것이며, qualified provider packet·현장 빈도·시설 IR/F-N·독립 물리검증을 승격하지 않는다.
+정적 감사 테스트 2건과 방출 ledger domain/withheld 분리 테스트를 포함한 PRISM portable suite는 441건 통과했고, 외부 `lh2dt_models` 전체 회귀시험은 372건 통과했다. 이 결과는 native method 존재를 확인한 것이며, qualified provider packet·현장 빈도·시설 IR/F-N·독립 물리검증을 승격하지 않는다.
 
 ## native export 재감사 후속 기록
 
-외부 저장소 커밋 `9ce57d6`에서 일곱 native 사고 export를 검증했다. `LayeredTank` 시험은 등엔탈피 출구 flash의 기체/액체 분할, 지상 액체 보존, 탱크 질량 잔차 0을 확인하고, `DynamicHEMPipe` 시험은 명시적 파손 개구의 기체 재고수지와 액체 입력 거부를 확인한다. `MappedPump` 시험은 H-Q-N map 운전점과 상류 재고 장부를 분리해 보존하는지 확인한다. 밸브·벤트 시험은 개방 명령 또는 고정 출구가 상류 재고 장부 없이 유량을 만들지 않도록 확인한다. 이 경계는 PRISM의 기존 합성 adapter를 자동으로 대체하지 않으며, 실제 차단·재고소진·시설 형상 결합과 qualified provider packet 생성이 완료될 때까지 시설 완료 감사는 계속 제한된다.
+외부 저장소 커밋 `f9d6c39`에서 일곱 native 사고 export를 검증했다. `LayeredTank` 시험은 등엔탈피 출구 flash의 기체/액체 분할, 지상 액체 보존, 탱크 질량 잔차 0을 확인하고, `DynamicHEMPipe` 시험은 명시적 파손 개구의 기체 재고수지와 액체 입력 거부를 확인한다. `MappedPump` 시험은 H-Q-N map 운전점과 상류 재고 장부를 분리해 보존하는지 확인한다. 밸브·벤트 시험은 개방 명령 또는 고정 출구가 상류 재고 장부 없이 유량을 만들지 않도록 확인한다. 이 경계는 PRISM의 기존 합성 adapter를 자동으로 대체하지 않으며, 실제 차단·재고소진·시설 형상 결합과 qualified provider packet 생성이 완료될 때까지 시설 완료 감사는 계속 제한된다.
 
 ## native LayeredTank strict smoke
 
-`scripts/run_lh2dt_native_layered_tank_smoke.py`는 외부 `LayeredTank.export_accident_history(request)`를 직접 호출한 뒤 PRISM의 `export_equipment_liquid_accident_history()`와 strict `ResolvedLiquidRelease` 검증을 통과시킨다. 2026-10-18 합성 실행은 0.05 s 이력, strict 질량 잔차 0 kg, 엔탈피 잔차 0 J, native export 약 1.52 s를 기록했다. 같은 packet을 `validate_lh2dt_prism_packet_chain.py`에 넣은 전체 consequence chain도 `END_TO_END_DIAGNOSTIC_EXECUTED`로 약 20.34 s에 끝났다. 이 결과는 방출→피해 연결 코드가 실제 native 탱크 응답을 소비했다는 증거지만, 합성 형상·초기상태·개구·기상과 airborne-liquid 미구현 때문에 qualified provider packet, 현장 빈도, 시설 IR/F-N으로 승격하지 않는다. 결과는 `results/20261018/native_layered_tank_smoke_chain/verification.json`에 보존한다.
+`scripts/run_lh2dt_native_layered_tank_smoke.py`는 외부 `LayeredTank.export_accident_history(request)`를 직접 호출한 뒤 PRISM의 `export_equipment_liquid_accident_history()`와 strict `ResolvedLiquidRelease` 검증을 통과시킨다. 2026-10-18 합성 실행은 0.05 s 이력, strict 질량 잔차 0 kg, 엔탈피 잔차 0 J, native export 약 1.64 s를 기록했다. 같은 packet을 `validate_lh2dt_prism_packet_chain.py`에 넣은 전체 consequence chain도 `END_TO_END_DIAGNOSTIC_EXECUTED`로 약 20.34 s에 끝났다. 이 결과는 방출→피해 연결 코드가 실제 native 탱크 응답을 소비했다는 증거지만, 합성 형상·초기상태·개구·기상과 airborne-liquid 미구현 때문에 qualified provider packet, 현장 빈도, 시설 IR/F-N으로 승격하지 않는다. 결과는 `results/20261018/native_layered_tank_smoke_chain/verification.json`에 보존한다.
