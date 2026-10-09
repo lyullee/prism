@@ -189,3 +189,9 @@ G1의 실패를 숨기기 위해 저마하 packet을 바꾸어 넣지 않고, so
 
 결합한 시설 평가 `results/20261019/native_campaign_with_vertical_handoff_facility_assessment.json`은 generic 24개와 vertical 5개를 합쳐 29개 event, 34개 case, 104개 risk atom을 보며, 5개 문헌 빈도 시나리오에서 vertical event의 선언 진단 빈도를 고정해 재가중한다. vertical handoff는 2개 실행 case와 10개 미계산 case를 가진 `PARTIAL`로 남는다. 따라서 최신 IJHE 감사는 여전히 `INCOMPLETE_EVIDENCE` 27개 검사·3개 blocker이며, 조건부 진단 IR/F-N만 노출하고 시설 전체 IR/F-N·credible interval·qualified provider·물리검증은 보류한다. 상세 수치는 [`vertical handoff 시설 평가 요약`](../examples/native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.json)과 [`시설 campaign 감사`](PRISM_네이티브패킷_시설캠페인_감사_20261019.md)를 사용한다.
 
+## 2026-10-19 two-sided rupture와 공통 사고범위 장부
+
+두 종단 provider-set campaign을 공통 시설 namespace에 결합했다. `rebind_campaign_namespace.py`는 원본 시설·asset·component ID를 exact-match하고 event ID와 risk atom 수용점을 함께 바꾼다. 결과는 2개 endpoint event, 4개 실행 operator-limited case row, 6개 uncomputed row, 16개 risk atom이다. 네 harm atom은 `worker-01`에 비영 피해를 가지며, 조건부 진단 시설 IR/F-N은 [1.0×10^-7, 1.0×10^-7] / year와 1명 F-N 수준을 표시한다. 이 값은 합성 two-sided geometry와 명시적 many-to-one receptor maximum의 결과라서 물리검증·시설 QRA로 승격하지 않는다.
+
+generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 최신 범위 장부를 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`에 만들었다. `vertical_handoff`와 `two_sided_rupture`는 이제 모두 `PARTIAL`로 표시되고, `NO_EVENT_GENERATED`가 숨겨지지 않는다. 최신 평가 `results/20261019/native_campaign_with_vertical_handoff_two_sided_facility_assessment.json`은 31개 event, 40개 case, 120개 atom을 집계하지만 22개 operator-limited와 5개 명시적 uncomputed case, 부분 사고 family, synthetic provider가 남아 전체 시설 IR/F-N을 `null`로 유지한다.
+

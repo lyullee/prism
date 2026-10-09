@@ -971,3 +971,9 @@ G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`�
 
 결합 시설 장부는 29개 event, 34개 case, 104개 risk atom을 기록하고, vertical handoff를 `PARTIAL`로 추적합니다. 2개 실행 case와 10개 미계산 case가 남으므로 조건부 진단 IR/F-N은 표시하되 시설 전체 위험도는 계속 `null`입니다. 문헌 빈도 5개 시나리오와 결합 요약은 [`native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.json`](examples/native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.json), rebind 실행기는 `scripts/rebind_vertical_handoff_campaign.py`입니다. synthetic handoff·operator-limited physics·미계산 사고군·물리검증 부족은 그대로 표시되며 provider 승격이나 빈도 추론은 하지 않습니다.
 
+### Two-sided rupture와 시설 사고범위 통합
+
+별도 두 종단 rupture campaign도 `scripts/rebind_campaign_namespace.py`로 공통 시설 ID 아래에 결합했습니다. event·asset·component·receptor 매핑은 provenance에 남고, `near_worker` 등은 `worker-01`로 명시적으로 축약됩니다. 이 결과는 2개 event와 16개 risk atom을 추가하며, 비영 near-worker harm 때문에 조건부 진단 IR/F-N이 표시됩니다. 최신 시설 평가는 31개 event, 40개 case, 120개 risk atom이고, 요약은 [`native_lh2dt_packet_campaign_vertical_handoff_two_sided_facility_assessment_summary.json`](examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_facility_assessment_summary.json)입니다.
+
+`scope_matrix_merge.py`는 generic·vertical·two-sided matrix를 family별로 합쳐 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`에 보관합니다. 부분 또는 미계산 family를 `EXECUTED`로 바꾸지 않으므로 `vertical_handoff`와 `two_sided_rupture`의 `PARTIAL` 상태가 시설 감사에 그대로 보입니다. two-sided endpoint 상호작용, 합성 geometry·인구·provider handoff 검증은 남은 제한이며, 시설 전체 IR/F-N은 계속 `null`입니다.
+
