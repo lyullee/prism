@@ -2401,8 +2401,8 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 470,
-  "full_portable_test_status": "470 passed",
+  "full_portable_test_count": 472,
+  "full_portable_test_status": "472 passed",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -2418,5 +2418,10 @@
   "physical_validation_evidence_cli_input_implemented": true,
   "physical_validation_evidence_cli_input": "scripts/build_equipment_campaign.py --physical-validation-evidence",
   "physical_validation_evidence_cli_policy": "Only prism PhysicalValidationEvidence records pass; independent_validated requires a nonempty evidence_id and a 64-character SHA-256 digest; no external validation is inferred.",
-  "physical_validation_evidence_cli_current_status": "IMPLEMENTED; compile smoke accepted an independent_validated sidecar; current external independent validation evidence remains unavailable"
+  "physical_validation_evidence_cli_current_status": "IMPLEMENTED; compile smoke accepted an independent_validated sidecar; current external independent validation evidence remains unavailable",
+  "provider_catalog_qualification_audit_implemented": true,
+  "provider_catalog_qualification_audit_module": "src/lh2_tno/provider_catalog_coverage.py",
+  "provider_catalog_qualification_audit_script": "scripts/audit_provider_catalog_coverage.py --provider-evidence-catalog",
+  "provider_catalog_qualification_audit_policy": "Structural exact-match and qualified evidence exact-match are reported separately; synthetic packets never qualify; the audit does not assign frequency or claim physical validation/facility QRA.",
+  "provider_catalog_qualification_audit_current_status": "IMPLEMENTED; qualification rows are digest-bound and synthetic packets are withheld; current external qualified packet count remains 0"
 }

@@ -25,6 +25,8 @@ python scripts/audit_provider_catalog_coverage.py `
   --output provider_coverage.json
 ```
 
+실제 qualification sidecar가 있으면 같은 명령에 `--provider-evidence-catalog provider_packet_evidence.json`을 추가한다. 보고서는 구조 `exact_match_count`와 `qualified_provider_packet_count`를 분리하고, event/component/port 및 source/result digest가 모두 맞는 행만 qualified로 센다. `input_origin=synthetic` packet은 sidecar가 있어도 `UNQUALIFIED_SYNTHETIC_PACKET`으로 남는다. 이 qualification 감사는 빈도·물리검증·시설 IR/F-N을 승인하지 않는다.
+
 양단 파열은 `--release-kind two_sided_rupture`와 `prism.resolved_release_set.v1` catalog를 사용한다. 비상 릴리프는 `--release-kind emergency_relief`로 분리한다. 세 catalog를 섞으면 안 된다.
 
 ## 무엇을 검사하는가

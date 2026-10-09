@@ -12,6 +12,7 @@ import math
 from collections import Counter
 from typing import Any, Mapping, Sequence
 
+from .campaign import ProviderPacketEvidence
 from .equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, ResolvedLiquidRelease
 
 
@@ -102,9 +103,46 @@ def _match_item(item: Mapping[str, Any], packet: ProviderPacket) -> tuple[bool, 
     return not reasons, reasons
 
 
+def _packet_evidence_matches(
+    packet: ProviderPacket,
+    evidence: ProviderPacketEvidence,
+) -> tuple[bool, list[str]]:
+    """Compare a qualification row with the exact packet identity and digests."""
+
+    if isinstance(packet, ResolvedGasReleaseSet):
+        ports = tuple(row.port_id for row in packet.releases)
+        sources = tuple(row.provider_source_digest for row in packet.releases)
+        results = tuple(row.provider_result_digest for row in packet.releases)
+        event_id = packet.event_id
+        component_id = packet.component_id
+    else:
+        ports = (packet.port_id,)
+        sources = (packet.provider_source_digest,)
+        results = (packet.provider_result_digest,)
+        event_id = packet.event_id
+        component_id = packet.component_id
+    checks = (
+        (evidence.event_id == event_id, "evidence event_id disagrees with packet"),
+        (evidence.component_id == component_id, "evidence component_id disagrees with packet"),
+        (evidence.port_ids == ports, "evidence port_ids disagree with packet"),
+        (evidence.provider_source_digests == sources, "evidence source digests disagree with packet"),
+        (evidence.provider_result_digests == results, "evidence result digests disagree with packet"),
+    )
+    reasons = [reason for matched, reason in checks if not matched]
+    return not reasons, reasons
+
+
+def _packet_is_synthetic(packet: ProviderPacket) -> bool:
+    if isinstance(packet, ResolvedGasReleaseSet):
+        return any(row.input_origin == "synthetic" for row in packet.releases)
+    return packet.input_origin == "synthetic"
+
+
 def audit_provider_catalog_coverage(
     worklist: Mapping[str, Any],
     provider_packets: Sequence[ProviderPacket],
+    *,
+    provider_packet_evidence: Sequence[ProviderPacketEvidence] | None = None,
 ) -> dict[str, Any]:
     """Audit a strict packet catalog against every declared work-list item.
 
@@ -119,10 +157,16 @@ def audit_provider_catalog_coverage(
     packets = tuple(provider_packets)
     if len({packet.event_id for packet in packets}) != len(packets):
         raise ValueError("provider packet event_id values must be unique for coverage audit")
+    evidence_rows = tuple(provider_packet_evidence or ())
+    if provider_packet_evidence is not None and len({row.event_id for row in evidence_rows}) != len(evidence_rows):
+        raise ValueError("provider packet evidence event_id values must be unique for coverage audit")
+    evidence_by_event = {row.event_id: row for row in evidence_rows}
+    qualification_assessed = provider_packet_evidence is not None
 
     packet_by_event = {packet.event_id: packet for packet in packets}
     item_rows: list[dict[str, Any]] = []
     matched_events: set[str] = set()
+    qualified_events: set[str] = set()
     status_counts: Counter[str] = Counter()
     for item in items:
         event_id = item.get("event_id")
@@ -138,12 +182,39 @@ def audit_provider_catalog_coverage(
             matched, reasons = _match_item(item, packet)
             if matched:
                 matched_events.add(event_id)
+                qualification_status = "NOT_ASSESSED"
+                qualification_reasons: list[str] = []
+                if qualification_assessed:
+                    evidence = evidence_by_event.get(event_id)
+                    if evidence is None:
+                        qualification_status = "UNQUALIFIED_NO_EVIDENCE"
+                        qualification_reasons.append(
+                            "no provider_packet_evidence row has this event_id"
+                        )
+                    elif _packet_is_synthetic(packet):
+                        qualification_status = "UNQUALIFIED_SYNTHETIC_PACKET"
+                        qualification_reasons.append(
+                            "synthetic input-origin packets cannot be qualified"
+                        )
+                    else:
+                        evidence_match, qualification_reasons = _packet_evidence_matches(
+                            packet, evidence
+                        )
+                        qualification_status = (
+                            "QUALIFIED_EXACT_MATCH"
+                            if evidence_match
+                            else "UNQUALIFIED_EVIDENCE_MISMATCH"
+                        )
+                        if evidence_match:
+                            qualified_events.add(event_id)
                 row = {
                     "event_id": event_id,
                     "component_id": item.get("component_id"),
                     "status": "EXACT_MATCH",
                     "packet": _packet_identity(packet),
                     "reasons": [],
+                    "qualification_status": qualification_status,
+                    "qualification_reasons": qualification_reasons,
                 }
             else:
                 row = {
@@ -162,6 +233,11 @@ def audit_provider_catalog_coverage(
         for packet in packets
         if packet.event_id not in worklist_events
     ]
+    extra_evidence_events = (
+        sorted(set(evidence_by_event) - worklist_events)
+        if qualification_assessed
+        else []
+    )
     blocking_reasons: list[str] = []
     if status_counts["UNMATCHED_NO_PROVIDER_PACKET"]:
         blocking_reasons.append("one or more declared events have no provider packet")
@@ -169,6 +245,10 @@ def audit_provider_catalog_coverage(
         blocking_reasons.append("one or more provider packets fail exact worklist identity or boundary checks")
     if extra_packets:
         blocking_reasons.append("provider catalog contains packets outside the declared frequency worklist")
+    if qualification_assessed and extra_evidence_events:
+        blocking_reasons.append(
+            "provider packet evidence contains events outside the declared frequency worklist"
+        )
     status = "FULLY_MATCHED" if not blocking_reasons else (
         "NO_EXACT_MATCH" if not matched_events else "PARTIAL_EXACT_MATCH"
     )
@@ -181,6 +261,23 @@ def audit_provider_catalog_coverage(
         "exact_match_count": len(matched_events),
         "unmatched_event_count": len(items) - len(matched_events),
         "extra_packet_count": len(extra_packets),
+        "qualification_assessed": qualification_assessed,
+        "qualified_provider_packet_count": len(qualified_events),
+        "unqualified_exact_match_count": len(matched_events - qualified_events),
+        "extra_evidence_event_count": len(extra_evidence_events),
+        "extra_evidence_events": extra_evidence_events,
+        "qualification_status": (
+            "NOT_ASSESSED"
+            if not qualification_assessed
+            else (
+                "QUALIFIED_FULL_WORKLIST"
+                if len(matched_events) == len(items)
+                and len(qualified_events) == len(items)
+                and not extra_packets
+                and not extra_evidence_events
+                else "QUALIFIED_PARTIAL_OR_BLOCKED"
+            )
+        ),
         "status_counts": dict(sorted(status_counts.items())),
         "blocking_reasons": list(dict.fromkeys(blocking_reasons)),
         "work_items": item_rows,
@@ -193,4 +290,3 @@ def audit_provider_catalog_coverage(
             "campaign_requires_separate_exact_binding": True,
         },
     }
-

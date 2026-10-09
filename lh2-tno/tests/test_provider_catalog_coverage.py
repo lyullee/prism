@@ -1,4 +1,5 @@
 from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasStep, ResolvedLiquidRelease, ResolvedLiquidStep
+from lh2_tno.campaign import ProviderPacketEvidence
 from lh2_tno.provider_catalog_coverage import audit_provider_catalog_coverage
 
 
@@ -109,3 +110,45 @@ def test_coverage_rejects_opening_substitution():
     row = report["work_items"][0]
     assert row["status"] == "UNMATCHED_PACKET_CONTRACT"
     assert any("opening" in reason for reason in row["reasons"])
+
+
+def test_coverage_counts_only_exact_non_synthetic_qualification_evidence():
+    packet = _gas()
+    evidence = ProviderPacketEvidence(
+        event_id=packet.event_id,
+        component_id=packet.component_id,
+        port_ids=(packet.port_id,),
+        provider_source_digests=(packet.provider_source_digest,),
+        provider_result_digests=(packet.provider_result_digest,),
+        evidence_id="provider-actual-001",
+    )
+    report = audit_provider_catalog_coverage(
+        {"work_items": [_item("event-1")]},
+        (packet,),
+        provider_packet_evidence=(evidence,),
+    )
+
+    assert report["qualification_status"] == "QUALIFIED_FULL_WORKLIST"
+    assert report["qualified_provider_packet_count"] == 1
+    assert report["work_items"][0]["qualification_status"] == "QUALIFIED_EXACT_MATCH"
+
+
+def test_coverage_does_not_qualify_synthetic_packet_even_with_matching_evidence():
+    packet = _gas()
+    packet = packet.model_copy(update={"input_origin": "synthetic"})
+    evidence = ProviderPacketEvidence(
+        event_id=packet.event_id,
+        component_id=packet.component_id,
+        port_ids=(packet.port_id,),
+        provider_source_digests=(packet.provider_source_digest,),
+        provider_result_digests=(packet.provider_result_digest,),
+        evidence_id="provider-synthetic-001",
+    )
+    report = audit_provider_catalog_coverage(
+        {"work_items": [_item("event-1")]},
+        (packet,),
+        provider_packet_evidence=(evidence,),
+    )
+
+    assert report["qualified_provider_packet_count"] == 0
+    assert report["work_items"][0]["qualification_status"] == "UNQUALIFIED_SYNTHETIC_PACKET"
