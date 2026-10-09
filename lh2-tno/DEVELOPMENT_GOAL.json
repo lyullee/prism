@@ -2170,5 +2170,10 @@
   "external_vertical_handoff_evidence_inventory_accepted_artifact_count": 5,
   "external_vertical_handoff_evidence_inventory_status": "SCREENING_ONLY_UNBOUND; accepted handoff replay lacks exact PRISM release identity, provider release ledger and facility validation metadata",
   "external_vertical_handoff_evidence_inventory_provider_packet_qualification": false,
-  "external_vertical_handoff_evidence_inventory_physical_validation_claim": false
+  "external_vertical_handoff_evidence_inventory_physical_validation_claim": false,
+  "ijhe_completion_audit_case_packet_coverage_check": "facility_case_provider_packet_coverage",
+  "ijhe_completion_audit_case_packet_coverage_record": "results/20261024/native_generic_scope_vertical_case_packet_coverage_v1.json",
+  "ijhe_completion_audit_case_packet_coverage_status": "NO_CASE_MATCH; 0/34 qualified provider cases; fail-closed IJHE blocker",
+  "ijhe_completion_audit_case_packet_coverage_frequency_inference": false,
+  "ijhe_completion_audit_case_packet_coverage_physical_validation_claim": false
 }

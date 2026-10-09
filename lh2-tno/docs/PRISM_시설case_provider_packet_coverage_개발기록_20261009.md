@@ -37,3 +37,18 @@ $py = 'C:\Users\lyul\.cache\codex-runtimes\codex-primary-runtime\dependencies\py
 검증기는 빈도, 센서 신호, 누출 면적, 차단확률을 추정하지 않는다. 전체 case가
 정확히 연결되어도 독립 물리검증, 사고범위 완성, 시설 IR/F-N gate가 별도로 통과되어야
 시설 위험도를 공개할 수 있다.
+
+## IJHE 완료 감사 연결 (2026-10-09)
+
+`build_ijhe_completion_audit.py --facility-case-packet-coverage`를 사용하면 이
+장부가 IJHE 완료 감사의 `facility_case_provider_packet_coverage` 검사로 들어간다.
+`QUALIFIED_FULL_CASE_COVERAGE`가 아니면 차단 상태로 남기며, 현재 병합 일반 LH2
+범위에서는 34개 case 중 0개가 qualified라서 `NO_CASE_MATCH`와 함께 감사 blocker로
+기록된다. 이 검사는 기존의 합성 packet·부분 사고범위·시설 IR/F-N 차단을 대신하지
+않고, “실행된 consequence case”와 “적격 provider packet이 정확히 연결된 case”를
+분리해 보여준다.
+
+최신 재생 결과는
+`results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v12.json`이며,
+25개 검사 중 21개가 통과하고 4개가 차단된 `INCOMPLETE_EVIDENCE`다. 새로 추가된
+차단은 `facility cases do not all have exact qualified provider packet evidence`이다.

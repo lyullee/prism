@@ -72,6 +72,7 @@ def build_ijhe_completion_audit(
     validation_evidence_matrix: Mapping[str, Any] | None = None,
     scope_ledger_consistency: Mapping[str, Any] | None = None,
     native_binding_reconciliation: Mapping[str, Any] | None = None,
+    facility_case_packet_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1506,6 +1507,57 @@ def build_ijhe_completion_audit(
             "matrix and facility ledger use different event or case accounting."
         )
         checks.append(consistency_check)
+    if facility_case_packet_coverage is not None:
+        case_coverage = facility_case_packet_coverage
+        case_promotion_policy = case_coverage.get("promotion_policy")
+        if not isinstance(case_promotion_policy, Mapping):
+            case_promotion_policy = {}
+        requested_case_count = case_coverage.get("case_request_count")
+        qualified_case_count = case_coverage.get("qualified_provider_case_count")
+        qualified_event_count = case_coverage.get("qualified_provider_event_count")
+        case_coverage_valid = (
+            case_coverage.get("schema") == "prism.facility_case_provider_coverage.v1"
+            and case_coverage.get("status") == "QUALIFIED_FULL_CASE_COVERAGE"
+            and isinstance(requested_case_count, int)
+            and requested_case_count > 0
+            and qualified_case_count == requested_case_count
+            and isinstance(qualified_event_count, int)
+            and qualified_event_count > 0
+            and case_promotion_policy.get("frequency_is_not_assigned") is True
+            and case_promotion_policy.get("physical_validation_claim") is False
+            and case_promotion_policy.get("facility_ir_fn_promotion")
+            == "requires this full case gate plus independent scope and validation gates"
+        )
+        checks.append(
+            {
+                "name": "facility_case_provider_packet_coverage",
+                "status": "PASS" if case_coverage_valid else "BLOCKED",
+                "diagnostic_only": False,
+                "blocking_reason": (
+                    None
+                    if case_coverage_valid
+                    else "facility cases do not all have exact qualified provider packet evidence"
+                ),
+                "evidence": {
+                    "record": case_coverage.get("_record_path"),
+                    "schema": case_coverage.get("schema"),
+                    "status": case_coverage.get("status"),
+                    "case_request_count": requested_case_count,
+                    "qualified_provider_event_count": qualified_event_count,
+                    "qualified_provider_case_count": qualified_case_count,
+                    "provider_evidence_row_count": case_coverage.get("provider_evidence_row_count"),
+                    "status_counts": case_coverage.get("status_counts"),
+                    "blocking_reasons": case_coverage.get("blocking_reasons", []),
+                    "promotion_policy": case_promotion_policy,
+                },
+                "interpretation": (
+                    "Every merged facility weather/release case must resolve to an exact qualified "
+                    "provider packet before the facility chain can be presented as complete. A packet "
+                    "may be reused across weather cases, but missing case identity remains a blocker; "
+                    "this check never infers frequency or physical validation."
+                ),
+            }
+        )
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

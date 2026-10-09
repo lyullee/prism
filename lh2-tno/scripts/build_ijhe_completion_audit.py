@@ -58,6 +58,11 @@ def main() -> int:
         type=Path,
         help="optional reconciliation of the native source audit and model-binding catalog",
     )
+    parser.add_argument(
+        "--facility-case-packet-coverage",
+        type=Path,
+        help="optional exact facility-case coverage audit against qualified provider packets",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -181,6 +186,13 @@ def main() -> int:
         )
         if native_binding_reconciliation is not None:
             native_binding_reconciliation["_record_path"] = str(args.native_binding_reconciliation)
+        facility_case_packet_coverage = (
+            _object(args.facility_case_packet_coverage)
+            if args.facility_case_packet_coverage
+            else None
+        )
+        if facility_case_packet_coverage is not None:
+            facility_case_packet_coverage["_record_path"] = str(args.facility_case_packet_coverage)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -204,6 +216,7 @@ def main() -> int:
             validation_evidence_matrix,
             scope_ledger_consistency,
             native_binding_reconciliation,
+            facility_case_packet_coverage,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

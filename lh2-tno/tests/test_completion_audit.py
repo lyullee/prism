@@ -618,6 +618,60 @@ def test_completion_audit_passes_only_when_every_claim_gate_is_present():
         {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
     )
     assert report["status"] == "READY_FOR_IJHE_SCOPE"
+
+
+def test_completion_audit_blocks_missing_facility_case_provider_packets():
+    report = build_ijhe_completion_audit(
+        _status(True),
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        facility_case_packet_coverage={
+            "schema": "prism.facility_case_provider_coverage.v1",
+            "status": "NO_CASE_MATCH",
+            "case_request_count": 2,
+            "qualified_provider_event_count": 0,
+            "qualified_provider_case_count": 0,
+            "provider_evidence_row_count": 0,
+            "status_counts": {"MISSING_QUALIFIED_PROVIDER_EVIDENCE": 2},
+            "blocking_reasons": ["one or more facility cases have no qualified provider evidence"],
+            "promotion_policy": {
+                "frequency_is_not_assigned": True,
+                "physical_validation_claim": False,
+                "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates",
+            },
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "facility_case_provider_packet_coverage")
+    assert check["status"] == "BLOCKED"
+    assert report["status"] == "INCOMPLETE_EVIDENCE"
+
+
+def test_completion_audit_accepts_full_facility_case_provider_coverage():
+    report = build_ijhe_completion_audit(
+        _status(True),
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        facility_case_packet_coverage={
+            "schema": "prism.facility_case_provider_coverage.v1",
+            "status": "QUALIFIED_FULL_CASE_COVERAGE",
+            "case_request_count": 2,
+            "qualified_provider_event_count": 1,
+            "qualified_provider_case_count": 2,
+            "provider_evidence_row_count": 1,
+            "status_counts": {"QUALIFIED_CASE_COVERAGE": 2},
+            "blocking_reasons": [],
+            "promotion_policy": {
+                "frequency_is_not_assigned": True,
+                "physical_validation_claim": False,
+                "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates",
+            },
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "facility_case_provider_packet_coverage")
+    assert check["status"] == "PASS"
+    assert report["status"] == "READY_FOR_IJHE_SCOPE"
     assert report["complete_facility_qra_claim"] is True
     assert not report["blocking_reasons"]
 

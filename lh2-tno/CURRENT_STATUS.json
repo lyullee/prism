@@ -2908,12 +2908,13 @@
   "native_generic_scope_vertical_merged_scope_matrix_record": "results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json",
   "native_generic_scope_vertical_merged_ledger_consistency_record": "results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json",
   "native_generic_scope_vertical_merged_campaign_status": "PARTIAL_FACILITY_SCOPE; generic v12 plus vertical all-bin diagnostic; 29 events; 34 cases; 136 risk atoms; facility total withheld",
-  "native_generic_scope_vertical_merged_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v11.json",
-  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 24 checks, 3 blocking reasons; branch/release/timing evidence refreshed; merged 5-scenario frequency uncertainty remains diagnostic-only",
+  "native_generic_scope_vertical_merged_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v12.json",
+  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 25 checks, 4 blocking reasons; merged 5-scenario frequency uncertainty remains diagnostic-only; 0/34 facility case packet coverage",
   "native_generic_scope_vertical_merged_audit_blockers": [
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
-    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+    "facility cases do not all have exact qualified provider packet evidence"
   ],
   "native_generic_scope_vertical_merged_consistency_status": "CONSISTENT_SCOPE_LEDGER; 29 scope events and 29 ledger events; conditional uncomputed count 0",
   "native_generic_scope_vertical_merged_vertical_handoff_status": "PARTIAL; five area-bin events and ten weather/case records, synthetic/operator-limited provider handoff, no facility IR/F-N promotion",
@@ -2945,12 +2946,13 @@
   "equipment_model_binding_latest_accident_release_interface_component_count": 7,
   "equipment_model_binding_latest_diagnostic_adapter_component_count": 7,
   "equipment_model_binding_latest_qualified_provider_packet_component_count": 0,
-  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v11.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 24 checks, 3 blockers; native binding reconciliation PASS",
+  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v12.json",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 4 blockers; facility case packet coverage is 0/34",
   "ijhe_completion_audit_latest_blocking_reasons": [
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
-    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+    "facility cases do not all have exact qualified provider packet evidence"
   ],
   "realtime_population_binding_implemented": true,
   "realtime_population_binding_module": "src/lh2_tno/service.py",
@@ -3009,7 +3011,7 @@
   "diagnostic_campaign_binding_fail_closed_packet_event_coverage_ratio": 0.8275862068965517,
   "diagnostic_campaign_binding_fail_closed_unbound_event_family": "vertical_handoff",
   "diagnostic_campaign_binding_fail_closed_policy": "A matched packet subset never satisfies full facility packet consumption when campaign-only events remain; no frequency, provider qualification, or facility QRA promotion is performed.",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 24 checks, 3 blockers; fail-closed packet coverage records 24/24 matched subset and 5 unbound vertical-handoff events",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 4 blockers; facility case packet coverage is 0/34 and remains fail-closed",
   "ijhe_completion_audit_latest_packet_subset_consumed": true,
   "ijhe_completion_audit_latest_full_campaign_packet_consumed": false,
   "full_portable_test_count_latest": 556,
@@ -3038,5 +3040,10 @@
   "external_vertical_handoff_evidence_inventory_accepted_artifact_count": 5,
   "external_vertical_handoff_evidence_inventory_status": "SCREENING_ONLY_UNBOUND; accepted handoff replay lacks exact PRISM release identity, provider release ledger and facility validation metadata",
   "external_vertical_handoff_evidence_inventory_provider_packet_qualification": false,
-  "external_vertical_handoff_evidence_inventory_physical_validation_claim": false
+  "external_vertical_handoff_evidence_inventory_physical_validation_claim": false,
+  "ijhe_completion_audit_case_packet_coverage_check": "facility_case_provider_packet_coverage",
+  "ijhe_completion_audit_case_packet_coverage_record": "results/20261024/native_generic_scope_vertical_case_packet_coverage_v1.json",
+  "ijhe_completion_audit_case_packet_coverage_status": "NO_CASE_MATCH; 0/34 qualified provider cases; audit blocker retained",
+  "ijhe_completion_audit_case_packet_coverage_frequency_inference": false,
+  "ijhe_completion_audit_case_packet_coverage_physical_validation_claim": false
 }
