@@ -17,3 +17,11 @@ def test_native_direct_coverage_declares_all_seven_models():
         "LayeredTank", "DynamicHEMPipe", "StrokeLimitedCommandedValve",
         "MappedPump", "DynamicVaporizer", "DynamicReliquefier", "VentStack",
     }
+
+
+def test_native_direct_coverage_can_record_source_state_completion():
+    report = _MODULE.build()
+    assert report["source_state_completion_count"] == 2
+    assert report["source_state_completion_blocked_count"] == 5
+    thermal = next(item for item in report["entries"] if item["model_class"] == "DynamicVaporizer")
+    assert thermal["source_state_completion_status"] == "COMPLETED_ISENTROPIC_THROAT_FIELDS"

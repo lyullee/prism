@@ -34,7 +34,12 @@
           "source_specific_enthalpy_j_kg": 3958281.3603453613,
           "throat_pressure_pa_abs": 101325.0,
           "throat_mass_flux_kg_m2_s": 5.351712945359748,
-          "choked": false
+          "choked": false,
+          "source_specific_entropy_j_kgk": 53457.385950011405,
+          "throat_temperature_k": 299.85081827519684,
+          "throat_density_kg_m3": 0.0818811906168217,
+          "throat_specific_enthalpy_j_kg": 3956145.428810143,
+          "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
         }
       },
       {
@@ -55,7 +60,12 @@
           "source_specific_enthalpy_j_kg": 3956114.924707096,
           "throat_pressure_pa_abs": 101325.0,
           "throat_mass_flux_kg_m2_s": 0.0,
-          "choked": false
+          "choked": false,
+          "source_specific_entropy_j_kgk": 53457.54145370315,
+          "throat_temperature_k": 299.85407618109264,
+          "throat_density_kg_m3": 0.0818803012954971,
+          "throat_specific_enthalpy_j_kg": 3956192.0569726597,
+          "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
         }
       }
     ],

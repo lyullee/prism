@@ -1,0 +1,13 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_VALIDATED",
+  "event_id": "native-vaporizer/accidental-leak-001",
+  "component_id": "native-vaporizer-diagnostic",
+  "provider_result_digest": "d7d3c263cc2d78c7dec240696831380dce2e83fa97288c291faba8cdc9fdc705",
+  "max_mach_number": 4.569371457519502,
+  "handoff_state_count": 1,
+  "handoff_consumed": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The provider-owned gas boundary is conservation-checked. This command does not assign frequency, qualify the provider, or promote facility IR/F-N."
+}

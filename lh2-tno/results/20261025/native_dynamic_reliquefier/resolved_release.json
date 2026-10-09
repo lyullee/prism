@@ -16,7 +16,7 @@
     "energy_reference": "CoolProp-HEOS:Hydrogen:native"
   },
   "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
-  "provider_result_digest": "a442d00f9c1cdb49b8ed57c6016232ce8f6d11509e9ba902565f24b5f76d100a",
+  "provider_result_digest": "8afece448e086e69751a4e06007019a498cfcf9d9a2faae4419e707eef0f5e3a",
   "provider_boundary_reference": "lh2dt.DynamicReliquefier.export_accident_history native gas outlet",
   "input_origin": "model_prediction",
   "position_enu_m": [
@@ -47,7 +47,20 @@
       "velocity_m_s": 52.31360696435685,
       "area_provenance": "explicit atmospheric valve area scaled by stroke state",
       "velocity_origin": "mass_continuity_from_declared_area",
-      "provider_source_state": null
+      "provider_source_state": {
+        "source_pressure_pa_abs": 101500.0,
+        "source_temperature_k": 300.0,
+        "source_density_kg_m3": 0.0819817519609035,
+        "source_specific_enthalpy_j_kg": 3958281.3603453613,
+        "source_specific_entropy_j_kgk": 53457.385950011405,
+        "throat_pressure_pa_abs": 101325.0,
+        "throat_temperature_k": 299.85081827519684,
+        "throat_density_kg_m3": 0.0818811906168217,
+        "throat_specific_enthalpy_j_kg": 3956145.428810143,
+        "throat_mass_flux_kg_m2_s": 5.351712945359748,
+        "choked": false,
+        "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+      }
     },
     {
       "time_s": 0.05,
@@ -60,7 +73,20 @@
       "velocity_m_s": 0.0,
       "area_provenance": "explicit atmospheric valve area scaled by stroke state",
       "velocity_origin": "mass_continuity_from_declared_area",
-      "provider_source_state": null
+      "provider_source_state": {
+        "source_pressure_pa_abs": 101318.68452689658,
+        "source_temperature_k": 299.848688865458,
+        "source_density_kg_m3": 0.08187667132294561,
+        "source_specific_enthalpy_j_kg": 3956114.924707096,
+        "source_specific_entropy_j_kgk": 53457.54145370315,
+        "throat_pressure_pa_abs": 101325.0,
+        "throat_temperature_k": 299.85407618109264,
+        "throat_density_kg_m3": 0.0818803012954971,
+        "throat_specific_enthalpy_j_kg": 3956192.0569726597,
+        "throat_mass_flux_kg_m2_s": 0.0,
+        "choked": false,
+        "provider_source_state_provenance": "native provider source pressure/temperature/throat pressure; entropy and throat state completed by the same provider property backend"
+      }
     }
   ],
   "termination_provenance": "DynamicVaporizer finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",

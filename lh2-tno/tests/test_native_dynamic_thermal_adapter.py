@@ -21,11 +21,11 @@ def _provider() -> tuple[object, dict[str, object]]:
     return _MODULE.NativeDynamicThermalProvider(response), response
 
 
-def test_native_dynamic_thermal_provider_preserves_identity_and_strips_only_incomplete_trace():
+def test_native_dynamic_thermal_provider_preserves_identity_and_completed_trace():
     provider, response = _provider()
     result = provider.export_accident_history({"event_id": "thermal/event-1", "component_id": "thermal-A", "port_id": "gas-out"})
     assert result["data"]["event_id"] == response["data"]["event_id"]
-    assert "provider_source_state" not in result["data"]["steps"][0]
+    assert result["data"]["steps"][0]["provider_source_state"]["opening"] == 1.0
 
 
 @pytest.mark.parametrize("field,value", [("event_id", "thermal/event-2"), ("component_id", "thermal-B"), ("port_id", "other-out")])

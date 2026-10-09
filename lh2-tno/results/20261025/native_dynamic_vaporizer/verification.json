@@ -6,7 +6,7 @@
   "provider_export_schema": "prism.external_accident_history.v1",
   "provider_method": "export_accident_history",
   "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
-  "provider_result_digest": "106319f36429366073df26df5da34bfbfaf375c40d21d7c9963cc2b0cce1ab1d",
+  "provider_result_digest": "a3342d9bdb8aa2350438ec940d43d3d957ea6822f907eb4a8c8eb3cd8f642db4",
   "provider_packet_promoted": false,
   "termination_basis": "synthetic_diagnostic_horizon",
   "duration_s": 0.1,
@@ -15,15 +15,41 @@
   "provider_mass_residual_kg": 0.0,
   "final_mass_kg": 0.0008187667132294561,
   "state_snapshot_digest_match": true,
-  "native_result_digest": "2b0a73cc6107563b32b034721083a97720485855fb2f0077b00fc4b759842906",
-  "native_source_trace_preserved_out_of_band": true,
+  "native_result_digest": "a3342d9bdb8aa2350438ec940d43d3d957ea6822f907eb4a8c8eb3cd8f642db4",
+  "native_provider_result_digest": "2b0a73cc6107563b32b034721083a97720485855fb2f0077b00fc4b759842906",
+  "native_source_trace_completed_in_packet": true,
+  "source_state_completion": {
+    "schema_version": "prism.native_source_state_completion.v1",
+    "status": "COMPLETED_ISENTROPIC_THROAT_FIELDS",
+    "interval_count": 2,
+    "intervals": [
+      {
+        "interval": 0,
+        "time_s": 0.0,
+        "source_entropy_completed": true,
+        "throat_state_completed": true
+      },
+      {
+        "interval": 1,
+        "time_s": 0.05,
+        "source_entropy_completed": true,
+        "throat_state_completed": true
+      }
+    ],
+    "source_pressure_inferred": false,
+    "throat_pressure_inferred": false,
+    "near_field_plane_generated": false,
+    "physical_validation_claim": false,
+    "provider_packet_qualified": false,
+    "facility_qra_claim": false
+  },
   "physical_validation_claim": false,
   "frequency_inference_performed": false,
   "facility_qra_claim": false,
   "limitations": [
     "synthetic finite-volume geometry, thermal boundary, gas state and atmospheric opening",
-    "native source trace lacks the complete PRISM ProviderSourceState throat record",
-    "high-speed output therefore requires a separate provider compressible-plane handoff",
+    "source entropy and throat thermodynamic fields are completed from the native source pressure/temperature/throat pressure using the same provider property backend",
+    "this deterministic completion is not an independent near-field calculation; high-speed output still requires the separate compressible-plane handoff",
     "provider packet remains diagnostic and has no field frequency or independent physical validation"
   ]
 }

@@ -1,11 +1,10 @@
 """Export native ``DynamicVaporizer`` or ``DynamicReliquefier`` history.
 
 The external finite-volume model owns the transient mass/energy state and its
-native accident outlet.  PRISM only validates the returned gas history.  The
-current external helper emits a compact source trace that is retained in the
-raw response but is not yet the complete PRISM ``ProviderSourceState`` record;
-this adapter therefore keeps high-speed compressible handoff as an explicit
-follow-up rather than inferring it.
+native accident outlet.  PRISM validates the returned gas history and
+completes omitted source-state thermodynamic fields from the same provider
+property backend.  This does not create a near-field jet solution; the raw
+native result digest and the deterministic completion audit remain separate.
 """
 from __future__ import annotations
 
@@ -25,6 +24,9 @@ from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     AccidentReleaseExportRequest,
     export_equipment_gas_accident_history,
+)
+from lh2_tno.native_source_state import (  # noqa: E402
+    complete_isentropic_throat_source_states,
 )
 from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
@@ -48,7 +50,7 @@ def _save(path: Path, value: object) -> None:
 
 
 class NativeDynamicThermalProvider:
-    """Keep exact event identity and strip only an incomplete optional trace."""
+    """Keep exact event identity after deterministic source-state completion."""
 
     def __init__(self, response: Mapping[str, Any]) -> None:
         self.response = dict(response)
@@ -58,11 +60,7 @@ class NativeDynamicThermalProvider:
         for key in ("event_id", "component_id", "port_id"):
             if request.get(key) != data.get(key):
                 raise ValueError(f"native provider {key} does not match PRISM request")
-        strict = json.loads(json.dumps(self.response, allow_nan=False))
-        for step in strict.get("data", {}).get("steps", []):
-            if isinstance(step, dict):
-                step.pop("provider_source_state", None)
-        return strict
+        return json.loads(json.dumps(self.response, allow_nan=False))
 
 
 def _native_model(root: Path, *, mode: str, fluid_volume_m3: float, wall_heat_capacity_j_k: float,
@@ -175,7 +173,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_source_digest": source_digest,
         "state_snapshot_digest": snapshot.digest(),
     }
-    native_response = model.export_accident_history(native_request)
+    native_response_raw = model.export_accident_history(native_request)
+    native_response, source_state_completion = complete_isentropic_throat_source_states(
+        native_response_raw,
+        properties=properties,
+    )
     result = export_equipment_gas_accident_history(NativeDynamicThermalProvider(native_response), request)
     data = native_response["data"]
     meta = data.get("provider_meta") if isinstance(data.get("provider_meta"), Mapping) else {}
@@ -197,14 +199,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "final_mass_kg": meta.get("final_mass_kg"),
         "state_snapshot_digest_match": native_response.get("provider_state_snapshot_digest") == snapshot.digest(),
         "native_result_digest": canonical_digest(native_response),
-        "native_source_trace_preserved_out_of_band": True,
+        "native_provider_result_digest": canonical_digest(native_response_raw),
+        "native_source_trace_completed_in_packet": True,
+        "source_state_completion": source_state_completion,
         "physical_validation_claim": False,
         "frequency_inference_performed": False,
         "facility_qra_claim": False,
         "limitations": [
             "synthetic finite-volume geometry, thermal boundary, gas state and atmospheric opening",
-            "native source trace lacks the complete PRISM ProviderSourceState throat record",
-            "high-speed output therefore requires a separate provider compressible-plane handoff",
+            "source entropy and throat thermodynamic fields are completed from the native source pressure/temperature/throat pressure using the same provider property backend",
+            "this deterministic completion is not an independent near-field calculation; high-speed output still requires the separate compressible-plane handoff",
             "provider packet remains diagnostic and has no field frequency or independent physical validation",
         ],
     }

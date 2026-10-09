@@ -44,6 +44,17 @@ def build() -> dict[str, Any]:
             "provider_model": verification.get("provider_model"),
             "provider_source_digest": verification.get("provider_source_digest"),
             "provider_result_digest": verification.get("provider_result_digest"),
+            "native_provider_result_digest": verification.get("native_provider_result_digest"),
+            "source_state_completion_status": (
+                verification.get("source_state_completion", {}).get("status")
+                if isinstance(verification.get("source_state_completion"), dict)
+                else None
+            ),
+            "source_state_completion_interval_count": (
+                verification.get("source_state_completion", {}).get("interval_count")
+                if isinstance(verification.get("source_state_completion"), dict)
+                else None
+            ),
             "termination_basis": verification.get("termination_basis"),
             "duration_s": verification.get("duration_s"),
             "provider_packet_promoted": verification.get("provider_packet_promoted"),
@@ -65,6 +76,13 @@ def build() -> dict[str, Any]:
         "end_to_end_chain_count": sum(item["chain_status"] == "END_TO_END_DIAGNOSTIC_EXECUTED" for item in entries),
         "same_packet_chain_count": sum(bool(item["same_packet_chain"]) for item in entries),
         "chain_variant_count": sum(not bool(item["same_packet_chain"]) for item in entries),
+        "source_state_completion_count": sum(
+            item["source_state_completion_status"] == "COMPLETED_ISENTROPIC_THROAT_FIELDS"
+            for item in entries
+        ),
+        "source_state_completion_blocked_count": sum(
+            item["source_state_completion_status"] is None for item in entries
+        ),
         "provider_packet_promoted_count": sum(bool(item["provider_packet_promoted"]) for item in entries),
         "physical_validation_claim_count": sum(bool(item["physical_validation_claim"]) for item in entries),
         "frequency_inference_count": sum(bool(item["frequency_inference_performed"]) for item in entries),

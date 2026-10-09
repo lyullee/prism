@@ -1,0 +1,50 @@
+{
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "component_id": "native-vaporizer-diagnostic",
+  "port_id": "native-vaporizer-gas-out",
+  "event_id": "native-vaporizer/accidental-leak-001",
+  "upstream_provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "upstream_provider_result_digest": "d7d3c263cc2d78c7dec240696831380dce2e83fa97288c291faba8cdc9fdc705",
+  "handoff_provider_source_digest": "b1aabaf83037534f95fcdb10ad55c7f39cc9c22a57e1afb9e1979a0cb808d7d1",
+  "handoff_provider_result_digest": "9c9ff8bce082e26d5c5c0e901eb28a697764e9fedb7e75f8b2e67576d5b11c4c",
+  "handoff_model": "prism-notional-plane-adapter",
+  "handoff_revision": "0.1.0",
+  "evidence_status": "synthetic_diagnostic",
+  "scenario_provenance": "Optional source-state notional-plane diagnostic; provider source/throat states were captured, but provider qualification and independent near-field validation are pending",
+  "handoff": {
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "direction_enu": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "velocity_m_s": 1820.3254783420525,
+    "density_kg_m3": 0.15284403467956048,
+    "temperature_k": 160.62933287636469,
+    "h2_mass_fraction": 1.0,
+    "half_width_m": 0.0014748374650134972,
+    "depth_m": 0.0029496749300269944,
+    "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+    "states": [
+      {
+        "time_s": 0.0,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1820.3254783420525,
+        "density_kg_m3": 0.15284403467956048,
+        "temperature_k": 160.62933287636469,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0014748374650134972,
+        "depth_m": 0.0029496749300269944,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      }
+    ]
+  }
+}

@@ -16,6 +16,6 @@ python scripts/export_lh2dt_native_dynamic_thermal_prism_packet.py `
 
 native finite-volume 질량, 최종 질량, 종료 basis와 방출량을 원본 응답에 보존하고, PRISM은 strict gas release의 시간·질량·엔탈피·대기면을 검사한다. 기본 horizon은 잔류 재고가 있으므로 `synthetic_diagnostic_horizon`이다.
 
-현재 외부 helper의 `provider_source_state`는 개방도·choked·source 상태와 throat pressure 일부만 제공하며 PRISM의 완전한 throat 온도·밀도·엔탈피·엔트로피 기록을 아직 충족하지 않는다. 원본 trace는 `provider_response.json`에 유지하고 strict packet의 선택 필드에서는 제거한다. 고속 방출에는 별도 provider 압축성 plane handoff가 필요하며 PRISM이 source pressure에서 임의로 근접장을 만들지 않는다.
+현재 외부 helper의 `provider_source_state`는 개방도·choked·source 상태와 throat pressure 일부를 제공한다. PRISM 어댑터는 이 명시된 source pressure/temperature/throat pressure를 동일 provider 물성 backend에 넣어 source entropy와 throat 온도·밀도·엔탈피를 결정적으로 보완하고, 원본 native result digest와 보완 packet digest를 함께 기록한다. 이는 근접장 제트 계산이 아니며, 고속 방출에는 별도 provider 압축성 plane handoff가 계속 필요하다.
 
 따라서 이 연결은 **기화기·재액화기 상태→native 방출→strict gas packet→피해 계산**의 코드 경계를 확인하는 합성 진단이다. 현장 빈도, 차단 신뢰도, 독립 물리검증, 시설 IR/F-N으로 승격하지 않는다.

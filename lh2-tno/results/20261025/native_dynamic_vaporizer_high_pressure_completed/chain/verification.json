@@ -1,0 +1,20 @@
+{
+  "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "source_operator": "integrated_transient",
+  "provider_packet_schema": "prism.resolved_release.v1",
+  "provider_model_provenance": "native external DynamicVaporizer finite-volume accident export; synthetic geometry and state",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "provider_duration_s": 0.05,
+  "provider_mass_residual_kg": 0.0,
+  "pool_sensitivity_radius_m": null,
+  "consequence_chain_executed": true,
+  "facility_ir_fn_claim": false,
+  "frequency_inference": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "limitations": [
+    "synthetic facility, receptors, weather and ignition context",
+    "no initiating frequency was applied",
+    "single external-provider diagnostic packet only; provider model is not site-calibrated"
+  ]
+}
