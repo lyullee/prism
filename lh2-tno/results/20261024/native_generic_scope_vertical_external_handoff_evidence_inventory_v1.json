@@ -1,0 +1,164 @@
+{
+  "schema_version": "prism.external_vertical_handoff_evidence_inventory.v1",
+  "status": "SCREENING_EVIDENCE_ONLY",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\reference\\preslhy",
+  "artifact_count": 5,
+  "accepted_artifact_count": 5,
+  "provider_packet_qualification_claim": false,
+  "facility_physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "interpretation": "Five accepted PreSLHy/DEGADI handoff replay artifacts are retained as candidate handoff-contract evidence. They are not rebound to the five generic LH2 vertical events because exact PRISM release identity, provider release ledger, and facility validation metadata are absent.",
+  "artifacts": [
+    {
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\reference\\preslhy\\observed_wind_magnitude_step002_2026-09-06\\handoff.json",
+      "source_sha256": "c948e02c3f5a28b01328a7ccbeb066d16051726a6eea1b52596ea1c927aee50d",
+      "artifact_id": "observed_wind_magnitude_step002_2026-09-06",
+      "accepted": true,
+      "maximum_target_flux_replay_error": 8.737555595044258e-16,
+      "original_replay": {
+        "temperature_max_abs_K": 0.0,
+        "sampled_flux_max_scaled_error": 0.0,
+        "arc_max_relative_error": 0.0,
+        "flux_sections_checked": 7
+      },
+      "input_contract": "PreSLHy/DEGADI handoff flux replay; no PRISM facility event binding",
+      "event_id": null,
+      "component_id": null,
+      "port_id": null,
+      "provider_export_schema": null,
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "mass_balance": null,
+      "energy_balance": null,
+      "termination_basis": null,
+      "qualification_status": "SCREENING_ONLY_UNBOUND",
+      "blocking_reasons": [
+        "no exact PRISM event_id/component_id/port_id binding",
+        "no prism.resolved_release.v1 source/result digest pair",
+        "no provider-owned release mass/inventory/termination ledger",
+        "accepted handoff replay is not independent facility physical validation"
+      ]
+    },
+    {
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\reference\\preslhy\\observed_wind_vector_step001_2026-09-06\\handoff.json",
+      "source_sha256": "328471a6487b1111b7eec74b1c5cf784be3f1ae99aba8d73e8bdcb45d9ee604d",
+      "artifact_id": "observed_wind_vector_step001_2026-09-06",
+      "accepted": true,
+      "maximum_target_flux_replay_error": 8.737555595044258e-16,
+      "original_replay": {
+        "temperature_max_abs_K": 0.0,
+        "sampled_flux_max_scaled_error": 0.0,
+        "arc_max_relative_error": 0.0,
+        "flux_sections_checked": 7
+      },
+      "input_contract": "PreSLHy/DEGADI handoff flux replay; no PRISM facility event binding",
+      "event_id": null,
+      "component_id": null,
+      "port_id": null,
+      "provider_export_schema": null,
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "mass_balance": null,
+      "energy_balance": null,
+      "termination_basis": null,
+      "qualification_status": "SCREENING_ONLY_UNBOUND",
+      "blocking_reasons": [
+        "no exact PRISM event_id/component_id/port_id binding",
+        "no prism.resolved_release.v1 source/result digest pair",
+        "no provider-owned release mass/inventory/termination ledger",
+        "accepted handoff replay is not independent facility physical validation"
+      ]
+    },
+    {
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\reference\\preslhy\\observed_wind_vector_step002_2026-09-06\\handoff.json",
+      "source_sha256": "328471a6487b1111b7eec74b1c5cf784be3f1ae99aba8d73e8bdcb45d9ee604d",
+      "artifact_id": "observed_wind_vector_step002_2026-09-06",
+      "accepted": true,
+      "maximum_target_flux_replay_error": 8.737555595044258e-16,
+      "original_replay": {
+        "temperature_max_abs_K": 0.0,
+        "sampled_flux_max_scaled_error": 0.0,
+        "arc_max_relative_error": 0.0,
+        "flux_sections_checked": 7
+      },
+      "input_contract": "PreSLHy/DEGADI handoff flux replay; no PRISM facility event binding",
+      "event_id": null,
+      "component_id": null,
+      "port_id": null,
+      "provider_export_schema": null,
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "mass_balance": null,
+      "energy_balance": null,
+      "termination_basis": null,
+      "qualification_status": "SCREENING_ONLY_UNBOUND",
+      "blocking_reasons": [
+        "no exact PRISM event_id/component_id/port_id binding",
+        "no prism.resolved_release.v1 source/result digest pair",
+        "no provider-owned release mass/inventory/termination ledger",
+        "accepted handoff replay is not independent facility physical validation"
+      ]
+    },
+    {
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\reference\\preslhy\\yawed_trial10_step001_2026-09-06\\handoff.json",
+      "source_sha256": "69c54b6933e095032337c0e0b92e321e6a911192d2ef62265483dc2e1a72ee8d",
+      "artifact_id": "yawed_trial10_step001_2026-09-06",
+      "accepted": true,
+      "maximum_target_flux_replay_error": 8.737555595044258e-16,
+      "original_replay": {
+        "temperature_max_abs_K": 0.0,
+        "sampled_flux_max_scaled_error": 0.0,
+        "arc_max_relative_error": 0.0,
+        "flux_sections_checked": 7
+      },
+      "input_contract": "PreSLHy/DEGADI handoff flux replay; no PRISM facility event binding",
+      "event_id": null,
+      "component_id": null,
+      "port_id": null,
+      "provider_export_schema": null,
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "mass_balance": null,
+      "energy_balance": null,
+      "termination_basis": null,
+      "qualification_status": "SCREENING_ONLY_UNBOUND",
+      "blocking_reasons": [
+        "no exact PRISM event_id/component_id/port_id binding",
+        "no prism.resolved_release.v1 source/result digest pair",
+        "no provider-owned release mass/inventory/termination ledger",
+        "accepted handoff replay is not independent facility physical validation"
+      ]
+    },
+    {
+      "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\reference\\preslhy\\yawed_trial10_step002_2026-09-06\\handoff.json",
+      "source_sha256": "69c54b6933e095032337c0e0b92e321e6a911192d2ef62265483dc2e1a72ee8d",
+      "artifact_id": "yawed_trial10_step002_2026-09-06",
+      "accepted": true,
+      "maximum_target_flux_replay_error": 8.737555595044258e-16,
+      "original_replay": {
+        "temperature_max_abs_K": 0.0,
+        "sampled_flux_max_scaled_error": 0.0,
+        "arc_max_relative_error": 0.0,
+        "flux_sections_checked": 7
+      },
+      "input_contract": "PreSLHy/DEGADI handoff flux replay; no PRISM facility event binding",
+      "event_id": null,
+      "component_id": null,
+      "port_id": null,
+      "provider_export_schema": null,
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "mass_balance": null,
+      "energy_balance": null,
+      "termination_basis": null,
+      "qualification_status": "SCREENING_ONLY_UNBOUND",
+      "blocking_reasons": [
+        "no exact PRISM event_id/component_id/port_id binding",
+        "no prism.resolved_release.v1 source/result digest pair",
+        "no provider-owned release mass/inventory/termination ledger",
+        "accepted handoff replay is not independent facility physical validation"
+      ]
+    }
+  ]
+}

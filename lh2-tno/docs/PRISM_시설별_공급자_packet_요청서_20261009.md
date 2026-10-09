@@ -21,6 +21,13 @@ case가 있다. 현재 결과는 방출→SLABx-LH2→피해 계산까지 실행
 승격하지 않는다. 5개 사건 자체가 10개 기상 case로 확장된다는 점을 요청서에
 명시한다.
 
+외부 `DEGALI_TRANSFER`/PreSLHy 자료에서 `accepted=true`인 handoff replay 5건도
+확인했다. 이 자료는 flux replay 오차와 내부 handoff 계약을 점검하는 데는
+유용하지만, PRISM의 사건 ID·설비 component·사고 port·방출 digest·재고 및
+종료 장부가 없다. 따라서 [`native_generic_scope_vertical_external_handoff_evidence_inventory_v1.json`](../results/20261024/native_generic_scope_vertical_external_handoff_evidence_inventory_v1.json)에
+`SCREENING_ONLY_UNBOUND`로 기록했고, 수직 5개 사건의 provider packet이나
+독립 시설 물리검증으로 사용하지 않았다.
+
 ## 자동 생성 파일
 
 다음 명령은 최신 시설 assessment와 병합 scope matrix를 읽어 case별 요청서를
@@ -58,4 +65,3 @@ $py = 'C:\Users\lyul\.cache\codex-runtimes\codex-primary-runtime\dependencies\py
 질량·에너지 잔차, 초기/최종 inventory, property basis, source/result SHA-256,
 검증 근거를 같이 제출해야 한다. 이 자료를 받은 뒤에만 같은 사건의 기존
 SLABx-LH2 결과를 재실행하고, 시설 ledger와 IR/F-N 집계에 반영한다.
-
