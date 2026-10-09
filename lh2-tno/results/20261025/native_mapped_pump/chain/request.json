@@ -1,0 +1,255 @@
+{
+  "component_id": "native-mapped-pump-diagnostic",
+  "source_input": null,
+  "resolved_release": null,
+  "resolved_release_set": null,
+  "resolved_liquid_release": {
+    "provider_export_schema": "prism.resolved_release.v1",
+    "component_id": "native-mapped-pump-diagnostic",
+    "port_id": "native-mapped-pump-liquid-out",
+    "event_id": "native-mapped-pump/accidental-leak-001",
+    "event_kind": "accidental_leak",
+    "upstream_service": "LH2",
+    "upstream_service_provenance": "native external MappedPump H-Q-N accident export; synthetic source state and reserve",
+    "state_owner": "equipment_twin",
+    "discharge_owner": "equipment_twin",
+    "boundary_kind": "resolved_atmospheric_liquid_exit",
+    "phase_basis": "liquid",
+    "enthalpy_convention": "provider_total_outlet_enthalpy",
+    "property_basis": {
+      "fluid": "Hydrogen",
+      "backend": "CoolProp-HEOS",
+      "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+    },
+    "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+    "provider_result_digest": "ef162cdf511a278a38f065ba9cfda30c2ef52df18f13970ef9226eda5e7cc5e4",
+    "provider_boundary_reference": "lh2dt.MappedPump.export_accident_history native liquid/two-phase outlet",
+    "input_origin": "model_prediction",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      0.5
+    ],
+    "direction_enu": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "ambient_pressure_pa_abs": 101325.0,
+    "ambient_temperature_k": 288.15,
+    "duration_s": 0.2,
+    "available_mass_kg": 1.0,
+    "cumulative_mass_out_kg": 5.1929795281010754e-05,
+    "cumulative_specific_enthalpy_out_j": -0.17599669191979955,
+    "reference_area_m2": 2.27328786006411e-07,
+    "reference_area_provenance": "explicit failed atmospheric pump opening area",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "total_mass_flow_kg_s": 0.0002596489764050538,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": -3389.1273972373338,
+        "gas_pressure_pa_abs": null,
+        "gas_temperature_k": null,
+        "gas_density_kg_m3": null,
+        "gas_effective_area_m2": null,
+        "gas_velocity_m_s": null,
+        "gas_velocity_origin": null,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.001
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.05,
+        "total_mass_flow_kg_s": 0.0002596489764050538,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": -3389.1273972373338,
+        "gas_pressure_pa_abs": null,
+        "gas_temperature_k": null,
+        "gas_density_kg_m3": null,
+        "gas_effective_area_m2": null,
+        "gas_velocity_m_s": null,
+        "gas_velocity_origin": null,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.001
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.1,
+        "total_mass_flow_kg_s": 0.0002596489764050538,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": -3389.1273972373338,
+        "gas_pressure_pa_abs": null,
+        "gas_temperature_k": null,
+        "gas_density_kg_m3": null,
+        "gas_effective_area_m2": null,
+        "gas_velocity_m_s": null,
+        "gas_velocity_origin": null,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.001
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 0.15000000000000002,
+        "total_mass_flow_kg_s": 0.0002596489764050538,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": -3389.1273972373338,
+        "gas_pressure_pa_abs": null,
+        "gas_temperature_k": null,
+        "gas_density_kg_m3": null,
+        "gas_effective_area_m2": null,
+        "gas_velocity_m_s": null,
+        "gas_velocity_origin": null,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0002596489764050538,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.001
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      }
+    ],
+    "termination_provenance": "operator-declared bounded pump feed-through horizon; upstream reserve remains explicit",
+    "droplet_partition_provenance": "native pump outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+    "pool_footprint": null,
+    "no_rainout_evidence": null,
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "failure_opening_diameter_m": 0.000538
+  },
+  "available_mass_kg": 1.0,
+  "source_position_enu_m": [
+    0.0,
+    0.0,
+    0.5
+  ],
+  "source_positions_enu_m": null,
+  "weather": {
+    "wind_speed_m_s": 3.0,
+    "wind_from_bearing_deg": 270.0,
+    "measurement_height_m": 10.0,
+    "roughness_m": 0.03,
+    "stability": "D",
+    "relative_humidity": 0.5
+  },
+  "pool": {
+    "footprint_origin": "declared_sensitivity",
+    "footprint_provenance": null,
+    "footprint_evidence_digest": null,
+    "fluid": "Hydrogen",
+    "fluid_translation": "none",
+    "translation_provenance": null,
+    "radius_m": 0.0001,
+    "conductivity_w_mk": 0.6,
+    "diffusivity_m2_s": 1.5e-07,
+    "initial_temperature_k": 288.15,
+    "domain_radius_m": 0.005,
+    "radial_step_m": 5e-06,
+    "maximum_time_step_s": 0.01
+  },
+  "ignition": {
+    "direct_probability": 0.1,
+    "delayed_probability_given_no_direct": 0.2,
+    "explosion_probability_given_delayed": 0.4,
+    "delayed_time_s": 1.0,
+    "burn_back_duration_s": 2.0,
+    "obstructed_energy_fraction": 0.08,
+    "provenance": "declared sensitivity; replace with reviewed facility input",
+    "deflagration_only": true
+  },
+  "domain": {
+    "downwind_bounds_m": [
+      -2.0,
+      80.0
+    ],
+    "crosswind_bounds_m": [
+      -10.0,
+      10.0
+    ],
+    "height_bounds_m": [
+      0.0,
+      12.0
+    ],
+    "cell_size_m": 0.5
+  },
+  "evaluation_times_s": [
+    0.0,
+    0.05,
+    0.1,
+    0.15000000000000002,
+    0.2,
+    0.3,
+    0.5,
+    1.0,
+    2.0,
+    3.0,
+    5.0,
+    10.0,
+    20.0
+  ],
+  "radiative_fraction_range": [
+    0.06,
+    0.12
+  ],
+  "radiation_provenance": "declared LH2 spill/jet sensitivity; replace with reviewed facility input",
+  "annual_frequency_per_year": null,
+  "annual_frequency_provenance": null,
+  "frequency_event": null,
+  "release_termination": {
+    "basis": "synthetic_diagnostic_horizon",
+    "time_s": 0.2,
+    "provenance": "provider packet termination basis and duration; synthetic diagnostic context"
+  },
+  "source_operator": "equipment_liquid_release",
+  "source_duration_mode": "declared",
+  "occupancy_probability": 1.0,
+  "initiation_intensity_per_s": null,
+  "frequency_scope": "single_initiating_event_current_weather",
+  "dispersion_x_max_m": 100.0,
+  "transition_dx_m": 0.05,
+  "transition_x_max_m": 50.0,
+  "n_puff_steps": 80
+}

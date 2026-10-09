@@ -1,0 +1,34 @@
+{
+  "schema_version": "prism.native_lh2dt_mapped_pump_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.pump.MappedPump",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_result_digest": "ef162cdf511a278a38f065ba9cfda30c2ef52df18f13970ef9226eda5e7cc5e4",
+  "provider_packet_promoted": false,
+  "phase_basis": "liquid",
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "duration_s": 0.2,
+  "available_mass_kg": 1.0,
+  "cumulative_mass_out_kg": 5.1929795281010754e-05,
+  "upstream_reserve_remaining_kg": 0.999948070204719,
+  "pump_operating_point": {
+    "mass_flow_kg_s": 0.013333333333333332,
+    "pressure_rise_pa": 100000.0,
+    "map_head_pressure_rise_pa": 100000.0,
+    "map_limited": false,
+    "cavitation_margin_m": null
+  },
+  "state_snapshot_digest_match": true,
+  "strict_packet_mass_residual_kg": -6.776263578034403e-21,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic liquid source state, H-Q-N map, atmospheric opening and upstream reserve",
+    "MappedPump owns no finite inventory, seal failure model or isolation reliability",
+    "airborne liquid remains zero under the native provider contract",
+    "bounded feed-through horizon is diagnostic and not a qualified facility frequency case"
+  ]
+}
