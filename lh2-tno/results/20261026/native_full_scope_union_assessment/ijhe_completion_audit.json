@@ -33,13 +33,13 @@
       "name": "diagnostic_adapter_execution_contract",
       "status": "PASS",
       "evidence": {
-        "source": "current_status",
-        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED; 7/7 PRISM-side adapter classes resolved, 0 provider instances and 0 qualified packets",
+        "source": "diagnostic_adapter_registry",
+        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED",
         "adapter_count": 7,
         "resolved_adapter_count": 7,
         "provider_instance_count": 0,
         "qualified_provider_packet_count": 0,
-        "record": "results/20261014/diagnostic_adapter_registry_audit_live.json"
+        "record": null
       },
       "blocking_reason": null
     },
@@ -2679,6 +2679,28 @@
       "interpretation": "The vertical-to-horizontal provider handoff diagnostic consumed a declared handoff boundary and is represented in the merged facility scope matrix; it remains synthetic/operator-limited and is not promoted to a qualified vertical accident family."
     },
     {
+      "name": "diagnostic_realtime_cache_benchmark",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "schema_version": "prism.realtime_cache_benchmark.v1",
+        "facility_id": "generic-lh2-near-receptor-diagnostic",
+        "request_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "fresh_physics_elapsed_ms": 2731.322699924931,
+        "cache_hits": 10,
+        "cache_sample_count": 10,
+        "cache_median_ms": 22.69885002169758,
+        "cache_p95_ms": 23.30389991402626,
+        "one_hz_deadline_s": 1.0,
+        "fresh_physics_meets_one_hz": false,
+        "cache_meets_one_hz_all_samples": true,
+        "realtime_fresh_physics_claim": false
+      },
+      "interpretation": "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in this benchmark. The separately measured fresh-physics run is slower and no fresh-physics 1 Hz service claim is made."
+    },
+    {
       "name": "equipment_model_binding_to_accident_release",
       "status": "PASS",
       "evidence": {
@@ -2851,6 +2873,21 @@
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null
+    },
+    {
+      "name": "validation_evidence_matrix",
+      "status": "PASS",
+      "evidence": {
+        "status": "RESTRICTED_EVIDENCE_MATRIX",
+        "decision": "FACILITY_QRA_WITHHELD",
+        "domain_count": 6,
+        "blocking_reason_count": 0,
+        "claims_closed": true,
+        "record": "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
     }
   ],
   "blocking_reasons": [

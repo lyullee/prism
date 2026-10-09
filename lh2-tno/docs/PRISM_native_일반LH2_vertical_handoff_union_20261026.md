@@ -12,6 +12,32 @@ python scripts/run_native_full_scope_union_assessment.py `
   --output-dir results/20261026/native_full_scope_union_assessment
 ```
 
+union 결과에 검증근거와 실시간 처리 증거를 묶으려면 다음 단계를 실행한다. 이
+명령은 새 provider 물리 계산을 만들지 않고, 기존 원장과 명시된 증거의 승격 게이트를
+다시 검사한다.
+
+```powershell
+python scripts/benchmark_realtime_cache.py `
+  --manifest examples/generic_lh2_near_receptor_manifest.json `
+  --campaign results/20261026/native_full_scope_frequency_assessment/campaign.json `
+  --backend-config results/20261009/backend_config_current.json `
+  --repetitions 10 `
+  --output results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json
+
+python scripts/bind_native_full_scope_union_evidence.py `
+  --union-dir results/20261026/native_full_scope_union_assessment `
+  --current-status CURRENT_STATUS.json `
+  --pool-record results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json `
+  --equipment-audit results/20261009/validation_evidence/equipment_validation_audit_live.json `
+  --native-contract examples/diagnostic_adapter_registry_audit.json `
+  --external-sweep examples/center_lh2_external_sweep_audit.json `
+  --ijhe-audit-source results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json `
+  --provider-worklist results/20261026/native_full_scope_frequency_assessment/provider_worklist.json `
+  --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
+  --vertical-handoff-result results/20261020/vertical_vent_all_bins/verification.json `
+  --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json
+```
+
 ## 연결 결과
 
 | 항목 | 결과 |
@@ -41,4 +67,12 @@ python scripts/run_native_full_scope_union_assessment.py `
 - `facility_assessment.json`: 조건부 IR/F-N과 시설 QRA gate
 - `facility_evidence_request.json`: 각 사고군·case의 provider packet·물리검증·종료/재고 증거 요구
 - `verification.json`: 병합 수·상태·제한 자동 검사
-- `ijhe_completion_audit.json`: 17개 검사 중 13개 PASS·4개 BLOCKED
+- `validation_evidence_matrix.json`: 6개 근거 영역을 제한 상태로 묶은 통합 장부 (`FACILITY_QRA_WITHHELD`)
+- `realtime_cache_benchmark.json`: fresh physics와 동일 요청 cache 처리시간을 분리한 실행 기록
+- `ijhe_completion_audit.json`: 19개 검사 중 15개 PASS·4개 BLOCKED
+
+이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
+cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,
+상태 변화가 있는 fresh physics의 1 Hz 운영 보장은 하지 않는다. 검증 매트릭스도
+풀 spreading·정상운전 관측·native 계약·조건부 시설진단·외부 sweep을 각각 제한 근거로
+보존하며 독립 전체 물리검증이나 시설 전체 QRA를 열지 않는다.

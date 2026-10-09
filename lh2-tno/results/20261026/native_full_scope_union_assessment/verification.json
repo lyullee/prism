@@ -33,5 +33,18 @@
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",
     "the merged conditional IR/F-N is diagnostic and facility total IR/F-N remains withheld",
     "frequency scenarios reweight saved atoms and do not infer vertical frequency"
-  ]
+  ],
+  "validation_evidence_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
+  "validation_evidence_matrix_decision": "FACILITY_QRA_WITHHELD",
+  "validation_evidence_matrix_domain_count": 6,
+  "validation_evidence_matrix_physical_validation_claim": false,
+  "validation_evidence_matrix_facility_qra_claim": false,
+  "realtime_cache_benchmark_cache_hits": 10,
+  "realtime_cache_benchmark_cache_p95_ms": 23.30389991402626,
+  "realtime_cache_benchmark_fresh_physics_elapsed_ms": 2731.322699924931,
+  "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
+  "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_audit_check_count": 19,
+  "ijhe_audit_pass_count": 15,
+  "ijhe_audit_blocked_count": 4
 }

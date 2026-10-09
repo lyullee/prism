@@ -1,0 +1,27 @@
+{
+  "schema_version": "prism.realtime_cache_benchmark.v1",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "request_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+  "fresh_physics_elapsed_ms": 2731.322699924931,
+  "fresh_backend_elapsed_ms": 2705.504299956374,
+  "cache_elapsed_ms_values": [
+    23.930200026370585,
+    23.30389991402626,
+    22.689700010232627,
+    22.708000033162534,
+    22.213099990040064,
+    22.55269989836961,
+    22.108100005425513,
+    22.348099970258772,
+    23.25239998754114,
+    23.162500001490116
+  ],
+  "cache_median_ms": 22.69885002169758,
+  "cache_p95_ms": 23.30389991402626,
+  "cache_hits": 10,
+  "one_hz_deadline_s": 1.0,
+  "fresh_physics_meets_one_hz": false,
+  "cache_meets_one_hz_all_samples": true,
+  "realtime_fresh_physics_claim": false,
+  "interpretation": "Exact cache samples meet a 1 Hz lookup deadline in this run; the fresh physics sample is measured separately and is not a 1 Hz service-level claim."
+}

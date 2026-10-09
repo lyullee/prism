@@ -18,6 +18,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     scope = _load("scope_matrix.json")
     assessment = _load("facility_assessment.json")
     evidence_request = _load("facility_evidence_request.json")
+    validation_matrix = _load("validation_evidence_matrix.json")
+    benchmark = _load("realtime_cache_benchmark.json")
     rebound = _load("vertical_handoff_rebound_result.json")
     audit = _load("ijhe_completion_audit.json")
 
@@ -38,6 +40,18 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["facility_evidence_request_family_count"] == 12
     assert verification["facility_evidence_request_case_count"] == 34
     assert verification["facility_evidence_request_promotion_allowed"] is False
+    assert verification["validation_evidence_matrix_status"] == "RESTRICTED_EVIDENCE_MATRIX"
+    assert verification["validation_evidence_matrix_decision"] == "FACILITY_QRA_WITHHELD"
+    assert verification["validation_evidence_matrix_domain_count"] == 6
+    assert verification["validation_evidence_matrix_physical_validation_claim"] is False
+    assert verification["validation_evidence_matrix_facility_qra_claim"] is False
+    assert verification["realtime_cache_benchmark_cache_hits"] == 10
+    assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
+    assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
+    assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
+    assert verification["ijhe_audit_check_count"] == 19
+    assert verification["ijhe_audit_pass_count"] == 15
+    assert verification["ijhe_audit_blocked_count"] == 4
 
     assert result["event_count"] == 29
     assert result["case_count"] == 34
@@ -59,11 +73,28 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 17
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 13
+    assert len(audit["checks"]) == 19
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 15
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 4
     vertical_check = next(
         check for check in audit["checks"]
         if check["name"] == "diagnostic_vertical_handoff_evidence"
     )
     assert vertical_check["status"] == "PASS"
+    realtime_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "diagnostic_realtime_cache_benchmark"
+    )
+    assert realtime_check["status"] == "PASS"
+    matrix_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "validation_evidence_matrix"
+    )
+    assert matrix_check["status"] == "PASS"
+    assert validation_matrix["status"] == "RESTRICTED_EVIDENCE_MATRIX"
+    assert validation_matrix["decision"] == "FACILITY_QRA_WITHHELD"
+    assert validation_matrix["physical_validation_claim"] is False
+    assert validation_matrix["facility_qra_claim"] is False
+    assert benchmark["cache_hits"] == 10
+    assert benchmark["fresh_physics_meets_one_hz"] is False
+    assert benchmark["realtime_fresh_physics_claim"] is False
