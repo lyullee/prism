@@ -2264,5 +2264,21 @@
   "facility_chain_closure_facility_fn_aggregate_closed": true,
   "facility_chain_closure_qualified_provider_packet_count": 0,
   "facility_chain_closure_facility_qra_claim": false,
-  "facility_chain_closure_test_status": "3 targeted chain-closure tests passed; local portable suite 587 passed/1 skipped"
+  "facility_chain_closure_test_status": "3 targeted chain-closure tests passed; local portable suite 587 passed/1 skipped",
+  "vertical_handoff_chain_audit_implemented": true,
+  "vertical_handoff_chain_audit_module": "src/lh2_tno/vertical_handoff_chain_audit.py",
+  "vertical_handoff_chain_audit_script": "scripts/audit_vertical_handoff_chain.py",
+  "vertical_handoff_chain_audit_record": "results/20261024/native_generic_scope_vertical_handoff_chain_v1.json",
+  "vertical_handoff_chain_audit_status": "VERTICAL_OPERATOR_LIMITED_CHAIN_CLOSED; 5 events and 10 cases match native release catalog digests through termination/inventory and final-harm atoms",
+  "vertical_handoff_chain_event_count": 5,
+  "vertical_handoff_chain_closed_event_count": 5,
+  "vertical_handoff_chain_case_count": 10,
+  "vertical_handoff_chain_risk_atom_count": 40,
+  "vertical_handoff_chain_state_history_event_count": 5,
+  "vertical_handoff_chain_all_declared_events_closed": true,
+  "vertical_handoff_chain_qualified_provider_packet_count": 0,
+  "vertical_handoff_chain_frequency_from_provider_packet": false,
+  "vertical_handoff_chain_physical_validation_claim": false,
+  "vertical_handoff_chain_facility_qra_claim": false,
+  "vertical_handoff_chain_test_status": "3 targeted vertical handoff chain tests passed; local portable suite 590 passed/1 skipped"
 }
