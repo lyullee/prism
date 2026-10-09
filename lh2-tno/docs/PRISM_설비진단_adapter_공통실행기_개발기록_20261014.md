@@ -76,3 +76,5 @@ python scripts/audit_diagnostic_adapter_registry.py `
 5. 그 뒤에야 qualified facility IR/F-N과 불확실성 구간을 계산한다.
 
 현재 공통 실행기 감사 파일은 `results/20261014/diagnostic_adapter_registry_audit_live.json`이다. 전체 IJHE 완료 감사의 qualified provider gate는 계속 차단 상태다.
+
+재현 가능한 축약 결과는 `examples/diagnostic_adapter_registry_audit.json`에도 보존했다.
