@@ -238,6 +238,97 @@ def build_equipment_campaign_from_catalog(
     )
 
 
+def build_equipment_campaign_from_event_catalog(
+    manifest: EquipmentManifest,
+    frequency_plan: FrequencyPlan,
+    event_requests: Mapping[str, ConsequenceRequest],
+    annual_conditions: tuple[AnnualCondition, ...],
+    *,
+    scope_provenance: str,
+    maximum_physics_cases: int = 200,
+) -> RiskCampaign:
+    """Compile requests selected by exact initiating-event ID.
+
+    The ordinary catalog compiler rejects two templates that share one
+    component/opening because that shape is ambiguous without an event key.
+    Mixed LH2 provider catalogs legitimately contain such pairs (for example
+    two frequency LOCs on one two-sided rupture component), so this variant
+    resolves the reviewed event ID first and then applies the same exact
+    physical ``bind_event`` contract.  Missing IDs and binding failures remain
+    explicit ``UNCOMPUTED`` branches.
+    """
+    if not event_requests:
+        raise ValueError("event request catalog must contain at least one template")
+    manifest_audit = audit_manifest(manifest)
+    if manifest_audit["status"] != "EXECUTABLE":
+        raise ValueError(
+            "equipment manifest is not executable: "
+            + "; ".join(manifest_audit["blocking_reasons"])
+        )
+    for event_id, request in event_requests.items():
+        if not event_id.strip():
+            raise ValueError("event request catalog ids must be nonempty")
+        if any(
+            value is not None
+            for value in (
+                request.annual_frequency_per_year,
+                request.annual_frequency_provenance,
+                request.frequency_event,
+                request.initiation_intensity_per_s,
+            )
+        ):
+            raise ValueError(f"request template for {event_id} must not contain initiating frequency")
+    facility = manifest.to_facility()
+    routes: list[EventRoute] = []
+    for event in generate_events(facility, frequency_plan):
+        request = event_requests.get(event.id)
+        if request is None:
+            branch = ReleaseBranch(
+                id="uncomputed-no-event-request",
+                probability_given_event=1.0,
+                provenance="event-keyed request catalog has no exact initiating event id",
+                uncomputed_reason="no provider request template matched this frequency event id",
+            )
+        else:
+            try:
+                bound = bind_event(request, event)
+                payload = bound.model_dump(mode="json")
+                payload.update(
+                    annual_frequency_per_year=None,
+                    annual_frequency_provenance=None,
+                    frequency_event=None,
+                    initiation_intensity_per_s=None,
+                )
+                template = ConsequenceRequest.model_validate_json(
+                    json.dumps(payload, allow_nan=False)
+                )
+                branch = ReleaseBranch(
+                    id="matched-event-provider-request",
+                    probability_given_event=1.0,
+                    provenance=(
+                        "event-id-selected provider request; exact component/opening binding "
+                        "and event frequency are retained at execution"
+                    ),
+                    request=template,
+                )
+            except (ValueError, TypeError) as error:
+                branch = ReleaseBranch(
+                    id="uncomputed-event-provider-binding",
+                    probability_given_event=1.0,
+                    provenance="provider request exists but exact event binding failed",
+                    uncomputed_reason=f"{type(error).__name__}: {error}",
+                )
+        routes.append(EventRoute(event_id=event.id, branches=(branch,)))
+    return RiskCampaign(
+        id="equipment-manifest-event-provider-campaign",
+        frequency_plan=frequency_plan,
+        annual_conditions=annual_conditions,
+        event_routes=tuple(routes),
+        scope_provenance=scope_provenance,
+        maximum_physics_cases=maximum_physics_cases,
+    )
+
+
 def build_equipment_campaign_from_branch_catalog(
     manifest: EquipmentManifest,
     frequency_plan: FrequencyPlan,

@@ -8,6 +8,7 @@ from lh2_tno.campaign_template import (
     build_equipment_campaign,
     build_equipment_campaign_from_branch_catalog,
     build_equipment_campaign_from_catalog,
+    build_equipment_campaign_from_event_catalog,
     build_equipment_campaign_from_provider_branch_catalog,
     build_equipment_campaign_from_provider_catalog,
     build_equipment_campaign_from_provider_worklist,
@@ -15,8 +16,7 @@ from lh2_tno.campaign_template import (
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import ResolvedLiquidRelease, ResolvedLiquidStep
 from lh2_tno.equipment_manifest import EquipmentManifest
-from lh2_tno.frequency import FrequencyPlan
-from lh2_tno.frequency import FrequencyAsset
+from lh2_tno.frequency import FrequencyPlan, FrequencyAsset, generate_events
 from lh2_tno.provider_release import ProviderReleaseBranch
 from test_provider_release import _defaults, _liquid_release, _release, _release_set
 
@@ -55,6 +55,22 @@ def test_campaign_compiler_preserves_one_matching_and_nine_uncomputed_routes():
     assert matched.frequency_event is None
     assert matched.annual_frequency_per_year is None
     assert matched.component_id == "storage-tank-01"
+
+
+def test_event_keyed_campaign_compiler_preserves_missing_ids_without_cross_copying():
+    manifest, plan, request, conditions = _campaign_inputs()
+    events = generate_events(manifest.to_facility(), plan)
+    campaign = build_equipment_campaign_from_event_catalog(
+        manifest,
+        plan,
+        {events[0].id: request},
+        conditions,
+        scope_provenance="synthetic event-keyed provider test",
+    )
+    assert sum(branch.request is not None for route in campaign.event_routes for branch in route.branches) == 1
+    assert sum(branch.uncomputed_reason is not None for route in campaign.event_routes for branch in route.branches) == 9
+    assert campaign.event_routes[0].branches[0].request is not None
+    assert campaign.event_routes[1].branches[0].request is None
 
 
 def test_campaign_compiler_does_not_substitute_a_different_opening():

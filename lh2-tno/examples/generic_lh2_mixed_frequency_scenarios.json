@@ -1,0 +1,105 @@
+{
+  "scenarios": [
+    {
+      "id": "generic-lh2-published-central",
+      "asset_quantiles": {
+        "storage-shell": "published",
+        "transfer-line": "published",
+        "transfer-valve": "published",
+        "pressure-relief-vent": "published",
+        "transfer-pump": "published",
+        "ambient-vaporizer": "published",
+        "reliquefier": "published"
+      },
+      "provenance": "published LH2/TNO catalogue central rates; generic outdoor diagnostic campaign"
+    },
+    {
+      "id": "generic-lh2-literature-low",
+      "asset_quantiles": {
+        "storage-shell": "p05",
+        "transfer-line": "p05",
+        "transfer-valve": "p05",
+        "pressure-relief-vent": "published",
+        "transfer-pump": "published",
+        "ambient-vaporizer": "published",
+        "reliquefier": "published"
+      },
+      "provenance": "published marginal p05 bounds where available; central rate retained for assets without a published bound"
+    },
+    {
+      "id": "generic-lh2-literature-high",
+      "asset_quantiles": {
+        "storage-shell": "p95",
+        "transfer-line": "p95",
+        "transfer-valve": "p95",
+        "pressure-relief-vent": "published",
+        "transfer-pump": "published",
+        "ambient-vaporizer": "published",
+        "reliquefier": "published"
+      },
+      "provenance": "published marginal p95 bounds where available; central rate retained for assets without a published bound"
+    },
+    {
+      "id": "generic-lh2-independent-low",
+      "event_quantiles": {
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": "p05",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": "published",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1": "published",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2": "published",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": "published",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": "published",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": "published",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4": "published",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5": "published",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6": "published"
+      },
+      "provenance": "published marginal p05 bounds per generated event where available; central rate retained otherwise",
+      "correlation_assumption": "independent_event_bounds"
+    },
+    {
+      "id": "generic-lh2-independent-high",
+      "event_quantiles": {
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": "p95",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": "published",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1": "published",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2": "published",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": "published",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": "published",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": "published",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4": "published",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5": "published",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6": "published"
+      },
+      "provenance": "published marginal p95 bounds per generated event where available; central rate retained otherwise",
+      "correlation_assumption": "independent_event_bounds"
+    }
+  ]
+}
