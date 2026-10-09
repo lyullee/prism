@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from lh2_tno.campaign import AnnualCondition, RiskCampaign
+from lh2_tno.campaign import AnnualCondition, PhysicalValidationEvidence, RiskCampaign
 from lh2_tno.campaign_template import (
     RequestBranchTemplate,
     build_equipment_campaign,
@@ -79,6 +79,13 @@ def main() -> int:
         help=(
             "optional prism.provider_packet_evidence.v1 object/array to attach to the compiled campaign; "
             "missing events remain unqualified"
+        ),
+    )
+    parser.add_argument(
+        "--physical-validation-evidence",
+        type=Path,
+        help=(
+            "optional prism physical-validation evidence JSON; independent validation requires an evidence ID and SHA-256"
         ),
     )
     parser.add_argument("--annual-conditions", type=Path, required=True)
@@ -186,6 +193,7 @@ def main() -> int:
             conditions,
             scope_provenance=args.scope_provenance,
         )
+    provider_evidence = ()
     if args.provider_evidence_catalog:
         try:
             evidence = load_provider_packet_evidence_catalog(args.provider_evidence_catalog)
@@ -198,9 +206,20 @@ def main() -> int:
                 "provider packet evidence references unknown generated events: "
                 + ", ".join(unknown)
             )
+        provider_evidence = evidence
+    physical_validation = PhysicalValidationEvidence()
+    if args.physical_validation_evidence:
+        try:
+            physical_validation = PhysicalValidationEvidence.model_validate_json(
+                args.physical_validation_evidence.read_text(encoding="utf-8")
+            )
+        except (OSError, UnicodeDecodeError, ValueError) as error:
+            raise SystemExit(f"physical validation evidence input error: {error}") from error
+    if provider_evidence or args.physical_validation_evidence:
         campaign = RiskCampaign.model_validate({
             **campaign.model_dump(),
-            "provider_packet_evidence": evidence,
+            "provider_packet_evidence": provider_evidence,
+            "physical_validation_evidence": physical_validation,
         })
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
@@ -239,6 +258,7 @@ def main() -> int:
         ),
         "provider_packet_evidence_count": len(campaign.provider_packet_evidence),
         "provider_packet_evidence_attached": bool(campaign.provider_packet_evidence),
+        "physical_validation_evidence_status": campaign.physical_validation_evidence.status,
     }, ensure_ascii=False))
     return 0
 

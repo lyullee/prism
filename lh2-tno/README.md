@@ -304,7 +304,7 @@ python -m venv .venv
   --output provider_packet_evidence.json
 ```
 
-생성된 evidence catalog를 campaign에 연결하려면 컴파일러에 `--provider-evidence-catalog provider_packet_evidence.json`을 추가합니다. evidence에 없는 사건은 자동으로 다른 packet으로 대체하지 않고 `UNCOMPUTED`/미자격으로 남습니다. 현재 external evidence inventory에는 이 sidecar를 갖춘 실제 packet이 없어 qualified packet 수는 0건이며 시설 IR/F-N 승격은 계속 보류됩니다.
+생성된 evidence catalog를 campaign에 연결하려면 컴파일러에 `--provider-evidence-catalog provider_packet_evidence.json`을 추가합니다. 독립 물리검증 기록은 `--physical-validation-evidence validation.json`으로 별도 연결하며, `independent_validated`에는 evidence ID와 SHA-256이 모두 필요합니다. evidence에 없는 사건은 자동으로 다른 packet으로 대체하지 않고 `UNCOMPUTED`/미자격으로 남습니다. 현재 external evidence inventory에는 이 sidecar를 갖춘 실제 packet과 독립 검증 기록이 없어 qualified packet 수는 0건이며 시설 IR/F-N 승격은 계속 보류됩니다.
 
 ```powershell
 .venv\Scripts\python.exe lh2-tno/scripts/build_equipment_campaign.py `

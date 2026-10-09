@@ -2414,5 +2414,9 @@
   "provider_packet_evidence_catalog_campaign_attachment_implemented": true,
   "provider_packet_evidence_catalog_campaign_attachment_script": "scripts/build_equipment_campaign.py --provider-evidence-catalog",
   "provider_packet_evidence_catalog_campaign_attachment_policy": "Attach only validated prism.provider_packet_evidence.v1 rows whose event IDs exist in the generated FrequencyPlan; omitted events remain uncomputed/unqualified; no initiating frequency is inferred.",
-  "provider_packet_evidence_catalog_current_status": "IMPLEMENTED; compile smoke attached 1 of 24 evidence rows and preserved 23 missing-provider branches; current external qualified packet count remains 0"
+  "provider_packet_evidence_catalog_current_status": "IMPLEMENTED; compile smoke attached 1 of 24 evidence rows and preserved 23 missing-provider branches; current external qualified packet count remains 0",
+  "physical_validation_evidence_cli_input_implemented": true,
+  "physical_validation_evidence_cli_input": "scripts/build_equipment_campaign.py --physical-validation-evidence",
+  "physical_validation_evidence_cli_policy": "Only prism PhysicalValidationEvidence records pass; independent_validated requires a nonempty evidence_id and a 64-character SHA-256 digest; no external validation is inferred.",
+  "physical_validation_evidence_cli_current_status": "IMPLEMENTED; compile smoke accepted an independent_validated sidecar; current external independent validation evidence remains unavailable"
 }
