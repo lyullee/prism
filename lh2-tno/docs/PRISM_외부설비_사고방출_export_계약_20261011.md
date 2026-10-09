@@ -170,4 +170,4 @@ provider는 실제 차단 명령, 검출 지연, 재고/에너지 장부, 종료
   --output results/20261011/equipment_accident_export_interface_audit.json
 ```
 
-현재 portable test suite는 새 계약·물성 기준 테스트를 포함해 364개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
+현재 portable test suite는 새 계약·물성 기준 테스트를 포함해 371개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
