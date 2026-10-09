@@ -2093,7 +2093,7 @@
   "equipment_model_binding_latest_accident_release_interface_component_count": 7,
   "equipment_model_binding_latest_diagnostic_adapter_component_count": 7,
   "equipment_model_binding_latest_qualified_provider_packet_component_count": 0,
-  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v9.json",
+  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v11.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 24 checks, 3 blockers; native binding reconciliation PASS",
   "realtime_population_binding_implemented": true,
   "realtime_population_binding_module": "src/lh2_tno/service.py",
@@ -2108,7 +2108,7 @@
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": ["CURVE_AVAILABLE", "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY", "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS", "NO_RISK_ATOMS"],
-  "full_portable_test_count_latest": 550,
+  "full_portable_test_count_latest": 551,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": ["annual_condition_weather", "release_branch_termination", "ignition_branch"],
@@ -2134,5 +2134,17 @@
   "qualified_provider_synthetic_input_guard_record": "docs/PRISM_합성입력_적격provider_차단_개발기록_20261009.md",
   "two_sided_provider_qualification_digest_guard_implemented": true,
   "two_sided_provider_qualification_digest_guard_policy": "A promoted two-sided release set must match source digests for every endpoint and optional result digests in endpoint order; single-endpoint qualification continues to use the singular digest.",
-  "two_sided_provider_qualification_digest_guard_record": "docs/PRISM_합성입력_적격provider_차단_개발기록_20261009.md"
+  "two_sided_provider_qualification_digest_guard_record": "docs/PRISM_합성입력_적격provider_차단_개발기록_20261009.md",
+
+  "diagnostic_campaign_binding_fail_closed_latest_record": "results/20261024/native_generic_scope_vertical_diagnostic_campaign_binding_v4.json",
+  "diagnostic_campaign_binding_fail_closed_latest_status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING; 24/24 packet subset digests match; 5 vertical-handoff events remain unbound",
+  "diagnostic_campaign_binding_fail_closed_packet_subset_identity_consumed": true,
+  "diagnostic_campaign_binding_fail_closed_full_campaign_identity_consumed": false,
+  "diagnostic_campaign_binding_fail_closed_packet_scope_subset_complete": true,
+  "diagnostic_campaign_binding_fail_closed_unbound_campaign_event_count": 5,
+  "diagnostic_campaign_binding_fail_closed_packet_event_coverage_ratio": 0.8275862068965517,
+  "ijhe_completion_audit_latest_packet_subset_consumed": true,
+  "ijhe_completion_audit_latest_full_campaign_packet_consumed": false,
+  "full_portable_test_count_latest": 551
+
 }

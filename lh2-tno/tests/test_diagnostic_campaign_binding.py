@@ -69,3 +69,52 @@ def test_binding_preserves_physical_claim_gate():
     report = build_diagnostic_campaign_binding(_packet_evidence(), campaign)
     assert report["status"] == "BLOCKED_DIAGNOSTIC_CAMPAIGN_BINDING"
     assert report["packet_claims_preserved"] is False
+
+
+def test_packet_identity_consumption_is_withheld_when_campaign_has_unbound_events(tmp_path):
+    packet_path = tmp_path / "resolved_release.json"
+    packet_path.write_text(
+        '{"provider_source_digest":"' + "a" * 64 + '",'
+        '"provider_result_digest":"' + "b" * 64 + '"}',
+        encoding="utf-8",
+    )
+    packet_evidence = _packet_evidence()
+    packet_evidence["rows"][0]["evidence"]["resolved_packet_paths"] = [str(packet_path)]
+    campaign = _campaign_result()
+    campaign["cases"][0]["provider_packet_identity"] = {
+        "provider_source_digests": ["a" * 64],
+        "provider_result_digests": ["b" * 64],
+    }
+    campaign["events"].append({
+        "id": "unbound-event",
+        "model_component_id": "tank-01",
+        "release": {"hole_diameter_m": 0.2},
+    })
+    campaign["cases"].append({
+        "event_id": "unbound-event",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "provider_packet_identity": {
+            "provider_source_digests": ["c" * 64],
+            "provider_result_digests": ["d" * 64],
+        },
+    })
+    campaign["risk_atoms"].append({"event_id": "unbound-event", "ignition_branch": "no_ignition"})
+
+    report = build_diagnostic_campaign_binding(
+        packet_evidence,
+        campaign,
+        {
+            "work_items": [{
+                "event_id": "scope/tank/AREA_1%",
+                "component_id": "tank-01",
+                "required_opening_diameter_m": 0.1,
+            }],
+        },
+    )
+
+    assert report["packet_scope_subset_complete"] is True
+    assert report["packet_subset_identity_consumed"] is True
+    assert report["packet_identity_consumed"] is False
+    assert report["campaign_scope_packet_coverage_complete"] is False
+    assert report["unbound_campaign_event_ids"] == ["unbound-event"]
+    assert "full campaign packet consumption is withheld" in report["packet_identity_consumption_reason"]

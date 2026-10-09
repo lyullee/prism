@@ -6,11 +6,11 @@ The audit deliberately separates two questions that are easy to confuse:
   ledgers; and
 * did the campaign actually consume the saved provider packet values?
 
-The current campaign format stores the first relationship, but not a provider
-packet digest on every event or case.  Therefore this module reports a
-structural diagnostic binding while keeping ``packet_identity_consumed`` false.
-It never creates a frequency, promotes a packet, or turns an incomplete
-facility result into a qualified QRA.
+The current campaign format stores the first relationship and provider packet
+identity on cases, but a saved packet file must still be digest-checked for each
+campaign event.  The report therefore separates an exact packet-subset
+consumption result from full campaign coverage.  It never creates a frequency,
+promotes a packet, or turns an incomplete facility result into a qualified QRA.
 """
 from __future__ import annotations
 
@@ -217,11 +217,10 @@ def build_diagnostic_campaign_binding(
         if packet_digest_pairs_by_event[event_id] == campaign_pairs_by_event[event_id]
     )
     digest_mismatch_event_ids = sorted(set(digest_checked_event_ids) - set(digest_match_event_ids))
-    packet_identity_consumed = (
+    packet_subset_identity_consumed = (
         len(digest_match_event_ids) == len(packet_ids)
         and not packet_digest_unreadable_event_ids
-        and identity_case_count == len(campaign_cases)
-        and bool(campaign_cases)
+        and bool(packet_ids)
     )
     risk_atom_count_by_event = {event_id: len(rows) for event_id, rows in atom_by_event.items()}
     structural_complete = (
@@ -242,6 +241,27 @@ def build_diagnostic_campaign_binding(
         and geometry_matches == geometry_checked
         and all(risk_atom_count_by_event.get(event_id, 0) > 0 for event_id in packet_ids)
     )
+    packet_scope_subset_complete = (
+        bool(packet_ids)
+        and packet_ids <= event_ids
+        and packet_ids <= case_ids
+        and packet_ids <= atom_ids
+        and not missing_events
+        and not missing_cases
+        and not missing_atoms
+        and component_checked == len(event_matches)
+        and component_matches == component_checked
+        and geometry_checked > 0
+        and geometry_matches == geometry_checked
+        and all(risk_atom_count_by_event.get(event_id, 0) > 0 for event_id in packet_ids)
+    )
+    campaign_scope_packet_coverage_complete = bool(event_ids) and event_ids <= packet_ids
+    packet_identity_consumed = (
+        packet_subset_identity_consumed
+        and campaign_scope_packet_coverage_complete
+        and identity_case_count == len(campaign_cases)
+        and bool(campaign_cases)
+    )
     packet_claims_preserved = (
         packet_evidence.get("qualified_provider_packet_count") == 0
         and packet_evidence.get("frequency_bound") is False
@@ -255,7 +275,7 @@ def build_diagnostic_campaign_binding(
     )
     return {
         "schema_version": "prism.diagnostic_campaign_binding.v1",
-        "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING" if structural_complete and packet_claims_preserved else "BLOCKED_DIAGNOSTIC_CAMPAIGN_BINDING",
+        "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING" if packet_scope_subset_complete and packet_claims_preserved else "BLOCKED_DIAGNOSTIC_CAMPAIGN_BINDING",
         "packet_event_count": len(packet_ids),
         "campaign_event_count": len(event_ids),
         "campaign_case_count": len(campaign_cases),
@@ -267,6 +287,11 @@ def build_diagnostic_campaign_binding(
         "missing_campaign_case_ids": missing_cases,
         "missing_campaign_risk_atom_ids": missing_atoms,
         "unexpected_campaign_event_ids": unexpected_events,
+        "unbound_campaign_event_ids": unexpected_events,
+        "unbound_campaign_event_count": len(unexpected_events),
+        "packet_event_coverage_ratio": len(event_matches) / len(event_ids) if event_ids else 0.0,
+        "packet_case_coverage_ratio": len(case_matches) / len(case_ids) if case_ids else 0.0,
+        "packet_risk_atom_event_coverage_ratio": len(atom_matches) / len(atom_ids) if atom_ids else 0.0,
         "component_match_count": component_matches,
         "component_checked_count": component_checked,
         "opening_geometry_match_count": geometry_matches,
@@ -279,15 +304,21 @@ def build_diagnostic_campaign_binding(
         "campaign_provider_identity_case_count": identity_case_count,
         "campaign_provider_identity_recorded": identity_case_count == len(campaign_cases) and bool(campaign_cases),
         "structural_binding_complete": structural_complete,
+        "packet_scope_subset_complete": packet_scope_subset_complete,
+        "campaign_scope_packet_coverage_complete": campaign_scope_packet_coverage_complete,
         "packet_digest_checked_event_count": len(digest_checked_event_ids),
         "packet_digest_match_event_count": len(digest_match_event_ids),
         "packet_digest_mismatch_event_ids": digest_mismatch_event_ids,
         "packet_digest_unreadable_event_ids": sorted(set(packet_digest_unreadable_event_ids)),
+        "packet_subset_identity_consumed": packet_subset_identity_consumed,
         "packet_identity_consumed": packet_identity_consumed,
         "packet_identity_consumption_reason": (
             "campaign result provider source/result digests match the packet-evidence files for every "
             "event; packet identity is recorded but qualification and facility claims remain separate"
             if packet_identity_consumed
+            else "selected packet subset source/result digests match the packet-evidence files, but "
+            "one or more campaign events have no packet evidence; full campaign packet consumption is withheld"
+            if packet_subset_identity_consumed and not campaign_scope_packet_coverage_complete
             else "campaign result preserves provider source/result digests, but those digests were not "
             "proven equal to the packet-evidence files supplied to this audit"
             if identity_case_count == len(campaign_cases) and bool(campaign_cases)

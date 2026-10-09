@@ -980,7 +980,21 @@ def build_ijhe_completion_audit(
                     "packet_event_to_campaign_case_match_count": case_match_count,
                     "packet_event_to_campaign_risk_atom_match_count": atom_match_count,
                     "structural_binding_complete": binding.get("structural_binding_complete"),
+                    "packet_scope_subset_complete": binding.get("packet_scope_subset_complete"),
+                    "campaign_scope_packet_coverage_complete": binding.get(
+                        "campaign_scope_packet_coverage_complete"
+                    ),
+                    "unbound_campaign_event_count": binding.get("unbound_campaign_event_count"),
+                    "unbound_campaign_event_ids": binding.get("unbound_campaign_event_ids"),
+                    "packet_event_coverage_ratio": binding.get("packet_event_coverage_ratio"),
+                    "packet_case_coverage_ratio": binding.get("packet_case_coverage_ratio"),
+                    "packet_risk_atom_event_coverage_ratio": binding.get(
+                        "packet_risk_atom_event_coverage_ratio"
+                    ),
                     "packet_identity_consumed": binding.get("packet_identity_consumed"),
+                    "packet_subset_identity_consumed": binding.get(
+                        "packet_subset_identity_consumed"
+                    ),
                     "packet_digest_checked_event_count": binding.get(
                         "packet_digest_checked_event_count"
                     ),
@@ -998,10 +1012,9 @@ def build_ijhe_completion_audit(
                     ),
                 },
                 "interpretation": (
-                    "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
-                    "The campaign may preserve provider packet identity metadata, but equality with the "
-                    "packet-evidence files must still be proven; packet time histories remain unconsumed "
-                    "evidence and the result stays diagnostic-only."
+                "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
+                    "The matched packet subset may have exact digest consumption, but any campaign-only "
+                    "events keep the full facility binding gate blocked; the result stays diagnostic-only."
                 ),
             }
         )
