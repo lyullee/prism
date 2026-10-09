@@ -150,6 +150,24 @@ def test_facility_ledger_explains_zero_harm_fn_curve_without_promoting_zero_to_m
     }
 
 
+def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():
+    result = _result(
+        event_id="event-legacy-fn-diagnostics",
+        asset_id="asset-legacy-fn-diagnostics",
+        component_id="tank-legacy-fn-diagnostics",
+        frequency=1e-3,
+    )
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-legacy-fn-diagnostics",)
+    )
+    merged.pop("conditional_diagnostic_facility_expected_death_fn_diagnostics")
+    assessment = build_facility_assessment([merged])
+
+    assert assessment[
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+    ]["status"] == "CURVE_AVAILABLE"
+
+
 def test_facility_ledger_exposes_component_case_accounting_and_gate_categories():
     result = _result(
         event_id="event-component-ledger",

@@ -12,7 +12,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .contracts import canonical_digest
-from .facility_ledger import merge_facility_campaign_results
+from .facility_ledger import _fn_diagnostics, merge_facility_campaign_results
 from .uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty
 
 
@@ -101,6 +101,16 @@ def build_facility_assessment(
         ledger["qualified_facility_qra_available"]
         and qualification_gate_allows_qra
     )
+    # Older saved ledgers predate the explicit F/N diagnostics field.  Keep
+    # those artifacts readable and derive the explanation from their retained
+    # risk atoms instead of treating the missing metadata as a failed
+    # assessment.
+    fn_diagnostics = ledger.get(
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+    )
+    if not isinstance(fn_diagnostics, Mapping):
+        atoms = ledger.get("risk_atoms", ())
+        fn_diagnostics = _fn_diagnostics(atoms if isinstance(atoms, Sequence) else ())
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -129,9 +139,7 @@ def build_facility_assessment(
         "conditional_diagnostic_facility_expected_death_fn_low_high": ledger[
             "conditional_diagnostic_facility_expected_death_fn_low_high"
         ],
-        "conditional_diagnostic_facility_expected_death_fn_diagnostics": ledger[
-            "conditional_diagnostic_facility_expected_death_fn_diagnostics"
-        ],
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": fn_diagnostics,
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
