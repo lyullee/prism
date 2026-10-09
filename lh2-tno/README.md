@@ -92,6 +92,20 @@
 
 합성 `lh2dt→SLABx-LH2` 진단은 이 작업목록의 저장탱크 `AREA_0.01%` 사건에 대해 `storage-tank-01/tank-accident-out/0.0127 m` 경계를 구조적으로 exact-match했고, 2026-10-15에는 저장탱크 5개 개구까지 같은 identity 계약으로 확장했다. 종료시계·기상·재고가 합성이므로 실제 provider packet·빈도·시설 QRA로 승격하지 않습니다. 전체 24개 worklist의 최신 packet 증거 결과는 `examples/generic_lh2_provider_worklist_packet_evidence.json`과 [worklist packet 증거 감사 기록](docs/PRISM_worklist_패킷증거감사_20261015.md)에 남습니다.
 
+worklist identity를 보존한 LayeredTank packet을 직접 만들 때는 export 명령의 `--event-id`와 `--port-id`를 지정합니다. `--full-open-area-m2`는 worklist 개구에서 계산하고, 출력 폴더에는 `provider_response.json`, `resolved_release.json`, `verification.json`을 함께 둡니다.
+
+```powershell
+python scripts/export_lh2dt_layered_tank_prism_packet.py `
+  --lh2dt-root "<lh2dt 모델 루트>" `
+  --output-dir results/20261015/storage_tank_worklist_packets/AREA_0.01pct `
+  --component-id storage-tank-01 `
+  --port-id tank-accident-out `
+  --event-id "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%" `
+  --full-open-area-m2 0.000126676869774374
+```
+
+이 export는 외부 모델의 synthetic geometry와 종료시계를 보존하는 진단 packet이다. 실행 뒤 `scripts/audit_provider_worklist_packet_evidence.py`를 사용해 전체 worklist와 대조하고, qualified packet·빈도·시설 위험으로 자동 승격하지 않는다.
+
 provider packet이 들어오면 먼저 `scripts/audit_provider_catalog_coverage.py`로 작업목록과 대조합니다. 이 단계는 event/component/포트/개구/기체·액체 경계를 exact-match하고, 빠진 사건과 작업목록 밖 packet을 별도로 기록합니다. `FULLY_MATCHED`도 빈도 부여나 물리 검증 완료를 뜻하지 않으며, 이후 strict request context와 facility IR/F-N gate가 필요합니다. 자세한 사용법은 [provider packet coverage gate 기록](docs/PRISM_provider_catalog_coverage_20261009.md)을 참고합니다.
 
 외부 [LH2 디지털 트윈 스크리닝 연결 감사](docs/PRISM_외부LH2DT_스크리닝_연결감사_20261009.md)는 12개 자산·8개 시나리오·21개 노드/27개 간선과 별도 공정 진단 후보 목록(고장 후보 444개·point 546개·센서 후보 62개·비상 시나리오 31개)을 근거로 보존하지만, live I/O·확정 센터 자산·전방비교 준비·사고 방출 packet이 없으므로 PRISM provider packet으로 승격하지 않습니다.
