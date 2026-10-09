@@ -16,6 +16,8 @@ from __future__ import annotations
 
 from collections import Counter
 from collections.abc import Mapping
+from pathlib import Path
+import json
 from typing import Any
 
 
@@ -48,10 +50,26 @@ def _same_float(left: float | None, right: float | None, *, tolerance: float = 1
     return left is not None and right is not None and abs(left - right) <= tolerance * max(1.0, abs(left), abs(right))
 
 
+def _packet_digest_pairs(path: Path) -> set[tuple[str, str]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    rows = payload.get("releases") if isinstance(payload, Mapping) else None
+    packets = rows if isinstance(rows, list) else [payload]
+    pairs = set()
+    for row in packets:
+        if not isinstance(row, Mapping):
+            continue
+        source = row.get("provider_source_digest")
+        result = row.get("provider_result_digest")
+        if isinstance(source, str) and isinstance(result, str):
+            pairs.add((source, result))
+    return pairs
+
+
 def build_diagnostic_campaign_binding(
     packet_evidence: Mapping[str, Any],
     campaign_result: Mapping[str, Any],
     provider_worklist: Mapping[str, Any] | None = None,
+    packet_root: str | Path | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed structural packet-to-campaign binding report."""
     packet_rows = packet_evidence.get("rows")
@@ -154,6 +172,57 @@ def build_diagnostic_campaign_binding(
         and row["provider_packet_identity"].get("provider_source_digests")
         and row["provider_packet_identity"].get("provider_result_digests")
     )
+    packet_root_path = Path(packet_root) if packet_root is not None else Path.cwd()
+    packet_digest_pairs_by_event: dict[str, set[tuple[str, str]]] = {}
+    packet_digest_unreadable_event_ids: list[str] = []
+    for event_id, row in packet_by_event.items():
+        evidence = row.get("evidence")
+        paths = evidence.get("resolved_packet_paths") if isinstance(evidence, Mapping) else None
+        pairs: set[tuple[str, str]] = set()
+        if isinstance(paths, list):
+            for raw_path in paths:
+                if not isinstance(raw_path, str):
+                    continue
+                path = Path(raw_path)
+                if not path.is_absolute():
+                    path = packet_root_path / path
+                try:
+                    pairs.update(_packet_digest_pairs(path))
+                except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError):
+                    packet_digest_unreadable_event_ids.append(event_id)
+        packet_digest_pairs_by_event[event_id] = pairs
+    campaign_pairs_by_event: dict[str, set[tuple[str, str]]] = {}
+    for event_id, rows in case_by_event.items():
+        pairs: set[tuple[str, str]] = set()
+        for row in rows:
+            identity = row.get("provider_packet_identity")
+            if not isinstance(identity, Mapping):
+                continue
+            sources = identity.get("provider_source_digests")
+            results = identity.get("provider_result_digests")
+            if isinstance(sources, list) and isinstance(results, list):
+                pairs.update(
+                    (source, result)
+                    for source in sources
+                    for result in results
+                    if isinstance(source, str) and isinstance(result, str)
+                )
+        campaign_pairs_by_event[event_id] = pairs
+    digest_checked_event_ids = sorted(
+        event_id for event_id in packet_ids
+        if packet_digest_pairs_by_event.get(event_id) and campaign_pairs_by_event.get(event_id)
+    )
+    digest_match_event_ids = sorted(
+        event_id for event_id in digest_checked_event_ids
+        if packet_digest_pairs_by_event[event_id] == campaign_pairs_by_event[event_id]
+    )
+    digest_mismatch_event_ids = sorted(set(digest_checked_event_ids) - set(digest_match_event_ids))
+    packet_identity_consumed = (
+        len(digest_match_event_ids) == len(packet_ids)
+        and not packet_digest_unreadable_event_ids
+        and identity_case_count == len(campaign_cases)
+        and bool(campaign_cases)
+    )
     risk_atom_count_by_event = {event_id: len(rows) for event_id, rows in atom_by_event.items()}
     structural_complete = (
         bool(packet_ids)
@@ -210,10 +279,17 @@ def build_diagnostic_campaign_binding(
         "campaign_provider_identity_case_count": identity_case_count,
         "campaign_provider_identity_recorded": identity_case_count == len(campaign_cases) and bool(campaign_cases),
         "structural_binding_complete": structural_complete,
-        "packet_identity_consumed": False,
+        "packet_digest_checked_event_count": len(digest_checked_event_ids),
+        "packet_digest_match_event_count": len(digest_match_event_ids),
+        "packet_digest_mismatch_event_ids": digest_mismatch_event_ids,
+        "packet_digest_unreadable_event_ids": sorted(set(packet_digest_unreadable_event_ids)),
+        "packet_identity_consumed": packet_identity_consumed,
         "packet_identity_consumption_reason": (
-            "campaign result preserves provider source/result digests for every case, but those digests "
-            "were not proven equal to the packet-evidence files supplied to this audit"
+            "campaign result provider source/result digests match the packet-evidence files for every "
+            "event; packet identity is recorded but qualification and facility claims remain separate"
+            if packet_identity_consumed
+            else "campaign result preserves provider source/result digests, but those digests were not "
+            "proven equal to the packet-evidence files supplied to this audit"
             if identity_case_count == len(campaign_cases) and bool(campaign_cases)
             else "campaign event/case records contain no provider_source_digest or provider_result_digest; "
             "the result proves event identity and opening geometry only"

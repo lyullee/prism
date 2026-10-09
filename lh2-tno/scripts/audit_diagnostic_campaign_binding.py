@@ -19,6 +19,12 @@ def main() -> int:
     parser.add_argument("--packet-evidence", type=Path, required=True)
     parser.add_argument("--campaign-result", type=Path, required=True)
     parser.add_argument("--provider-worklist", type=Path)
+    parser.add_argument(
+        "--packet-root",
+        type=Path,
+        default=Path.cwd(),
+        help="repository root used to resolve relative resolved_packet_paths",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -37,6 +43,7 @@ def main() -> int:
             packet_evidence,
             campaign_result,
             provider_worklist,
+            args.packet_root,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"diagnostic campaign binding input error: {error}") from error
@@ -57,6 +64,8 @@ def main() -> int:
         "campaign_risk_atom_count": report["campaign_risk_atom_count"],
         "structural_binding_complete": report["structural_binding_complete"],
         "packet_identity_consumed": report["packet_identity_consumed"],
+        "packet_digest_checked_event_count": report["packet_digest_checked_event_count"],
+        "packet_digest_match_event_count": report["packet_digest_match_event_count"],
         "output": str(args.output),
     }, ensure_ascii=False))
     return 0 if report["status"].startswith("PARTIAL_") else 2

@@ -453,7 +453,7 @@ def test_completion_audit_records_packet_to_campaign_structural_binding():
     assert len(report["blocking_reasons"]) == 6
 
 
-def test_completion_audit_keeps_campaign_binding_diagnostic_when_packet_identity_is_claimed():
+def test_completion_audit_accepts_packet_identity_consumption_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(True),
         _matrix(True),
@@ -465,7 +465,7 @@ def test_completion_audit_keeps_campaign_binding_diagnostic_when_packet_identity
         item for item in report["checks"]
         if item["name"] == "diagnostic_worklist_campaign_binding_evidence"
     )
-    assert check["status"] == "BLOCKED"
+    assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
     assert check["blocking_reason"] is None
     assert report["status"] == "READY_FOR_IJHE_SCOPE"

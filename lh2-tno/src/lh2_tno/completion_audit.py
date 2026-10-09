@@ -309,7 +309,7 @@ def build_ijhe_completion_audit(
             and case_match_count == packet_count
             and atom_match_count == packet_count
             and binding.get("structural_binding_complete") is True
-            and binding.get("packet_identity_consumed") is False
+            and isinstance(binding.get("packet_identity_consumed"), bool)
             and binding.get("frequency_from_provider_packet") is False
             and binding.get("packet_claims_preserved") is True
         )
@@ -331,6 +331,12 @@ def build_ijhe_completion_audit(
                     "packet_event_to_campaign_risk_atom_match_count": atom_match_count,
                     "structural_binding_complete": binding.get("structural_binding_complete"),
                     "packet_identity_consumed": binding.get("packet_identity_consumed"),
+                    "packet_digest_checked_event_count": binding.get(
+                        "packet_digest_checked_event_count"
+                    ),
+                    "packet_digest_match_event_count": binding.get(
+                        "packet_digest_match_event_count"
+                    ),
                     "frequency_from_provider_packet": binding.get("frequency_from_provider_packet"),
                     "packet_claims_preserved": binding.get("packet_claims_preserved"),
                     "executed_case_count": binding.get("executed_case_count"),
