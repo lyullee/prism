@@ -173,3 +173,54 @@ def test_provider_can_be_constructed_only_from_explicit_constructor_config():
 
     with pytest.raises(DiagnosticAdapterRunnerError, match="cannot construct"):
         runner.register_provider_from_config("storage_tank", {})
+
+
+def test_runner_keeps_multiple_physical_instances_separate():
+    runner = DiagnosticAdapterRunner.from_binding_catalog(CATALOG)
+    first = _Provider()
+    second = _Provider()
+    runner.register_provider_instance("tank-01", "storage_tank", first)
+    runner.register_provider_instance("tank-02", "storage_tank", second)
+
+    first_execution = runner.execute(
+        "storage_tank",
+        _request(
+            component_id="tank-01",
+            port_id="tank-out",
+            event_id="provider-accident-tank-01",
+        ),
+        provider_instance_id="tank-01",
+    )
+    second_execution = runner.execute(
+        "storage_tank",
+        _request(
+            component_id="tank-02",
+            port_id="tank-out",
+            event_id="provider-accident-tank-02",
+        ),
+        provider_instance_id="tank-02",
+    )
+
+    assert runner.provider_instance_ids == ("tank-01", "tank-02")
+    assert first_execution.provider_instance_id == "tank-01"
+    assert second_execution.provider_instance_id == "tank-02"
+    assert len(first.requests) == 1
+    assert len(second.requests) == 1
+
+
+def test_runner_rejects_instance_kind_mismatch_and_duplicate_ids():
+    runner = DiagnosticAdapterRunner.from_binding_catalog(CATALOG)
+    runner.register_provider_instance("tank-01", "storage_tank", _Provider())
+
+    with pytest.raises(DiagnosticAdapterRunnerError, match="duplicate provider instance"):
+        runner.register_provider_instance("tank-01", "storage_tank", _Provider())
+    with pytest.raises(DiagnosticAdapterRunnerError, match="bound to storage_tank"):
+        runner.execute(
+            "pipe",
+            _request(
+                component_id="tank-01",
+                port_id="tank-out",
+                event_id="provider-accident-mismatch",
+            ),
+            provider_instance_id="tank-01",
+        )

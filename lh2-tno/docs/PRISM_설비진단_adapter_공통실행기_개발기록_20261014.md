@@ -40,6 +40,28 @@ provider 생성자를 자동으로 호출하지 않는 이유는 설비마다 �
 
 `register_provider_from_config()`는 host가 제공한 생성자 인자만 전달한다. PRISM은 manifest 압력·온도나 센서값을 생성자 인자로 채우지 않으며, 인자가 빠지거나 잘못되면 사고 계산 전에 실패한다. 이 경로는 실제 설비 provider를 연결하기 위한 준비가 완료되었다는 뜻이지, 현재 catalog의 synthetic adapter를 qualified provider로 바꾸는 기능은 아니다.
 
+### 물리 설비 인스턴스별 등록
+
+시설에는 같은 종류의 설비가 여러 개 있을 수 있으므로 runner는 이제 `component_kind`와 별도로 host가 정한 `instance_id`를 보존한다.
+
+```python
+runner.register_provider_instance_from_config(
+    "storage-tank-01",
+    "storage_tank",
+    {"lh2dt_root": root, "time_step_s": 0.05, ...},
+)
+runner.register_provider_instance_from_config(
+    "storage-tank-02",
+    "storage_tank",
+    {"lh2dt_root": root, "time_step_s": 0.05, ...},
+)
+execution = runner.execute(
+    "storage_tank", request, provider_instance_id="storage-tank-02"
+)
+```
+
+각 ID는 하나의 provider 객체에만 연결되고, 다른 설비 종류로 재사용하거나 중복 등록할 수 없다. `DiagnosticAdapterExecution.audit_record()`에도 `provider_instance_id`를 남기므로 시설 ledger가 탱크·배관·밸브별 packet을 섞지 않는다. 이 기능은 다중 설비 연결 계약을 완성한 것이며, 실제 각 설비의 사고 이력·종료 장부·qualified evidence를 공급했다는 뜻은 아니다.
+
 ## 현재 확인 결과
 
 ```powershell
@@ -87,7 +109,7 @@ python scripts/audit_diagnostic_adapter_registry.py `
 4. 주요 사고 범위의 모든 provider packet이 채워지고 미계산 항목이 0이 되어야 한다.
 5. 그 뒤에야 qualified facility IR/F-N과 불확실성 구간을 계산한다.
 
-현재 공통 실행기 감사 파일은 `results/20261014/diagnostic_adapter_registry_audit_live.json`이다. 전체 IJHE 완료 감사의 qualified provider gate는 계속 차단 상태다.
+현재 공통 실행기 감사 파일은 `results/20261014/diagnostic_adapter_registry_audit_live.json`이다. 인스턴스 분리 계약을 포함한 portable suite는 384개로 통과했으며, 전체 IJHE 완료 감사의 qualified provider gate는 계속 차단 상태다.
 
 재현 가능한 축약 결과는 `examples/diagnostic_adapter_registry_audit.json`에도 보존했다.
 

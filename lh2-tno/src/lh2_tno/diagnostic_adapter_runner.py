@@ -90,6 +90,7 @@ class DiagnosticAdapterExecution:
 
     spec: DiagnosticAdapterSpec
     result: AccidentReleaseExportResult
+    provider_instance_id: str | None = None
 
     @property
     def promoted(self) -> bool:
@@ -102,6 +103,7 @@ class DiagnosticAdapterExecution:
 
         return {
             "component_kind": self.spec.component_kind,
+            "provider_instance_id": self.provider_instance_id,
             "adapter_module": self.spec.module,
             "adapter_provider_class": self.spec.provider_class,
             "evidence_status": self.spec.evidence_status,
@@ -190,6 +192,7 @@ class DiagnosticAdapterRunner:
         if len(self._specs) != len(specs):
             raise DiagnosticAdapterRunnerError("duplicate component kind in adapter specs")
         self._providers: dict[str, AccidentHistoryProvider] = {}
+        self._provider_instances: dict[str, tuple[str, AccidentHistoryProvider]] = {}
 
     @classmethod
     def from_binding_catalog(
@@ -260,6 +263,61 @@ class DiagnosticAdapterRunner:
         self.register_provider(component_kind, provider)
         return provider
 
+    def register_provider_instance(
+        self,
+        instance_id: str,
+        component_kind: str,
+        provider: AccidentHistoryProvider,
+    ) -> None:
+        """Bind a host-created provider to one physical equipment instance.
+
+        ``component_kind`` selects the declared adapter contract while
+        ``instance_id`` identifies the actual tank, pipe, valve, or other
+        facility item.  The runner never derives either value from a sensor
+        frame and never shares one provider object between instance IDs.
+        """
+
+        identifier = _text(instance_id, "instance_id")
+        if identifier in self._provider_instances:
+            raise DiagnosticAdapterRunnerError(
+                f"duplicate provider instance id: {identifier}"
+            )
+        self._spec(component_kind)
+        if not callable(getattr(provider, "export_accident_history", None)):
+            raise DiagnosticAdapterRunnerError(
+                "registered provider must expose export_accident_history(request)"
+            )
+        self._provider_instances[identifier] = (component_kind, provider)
+
+    def register_provider_instance_from_config(
+        self,
+        instance_id: str,
+        component_kind: str,
+        constructor_kwargs: Mapping[str, Any],
+    ) -> AccidentHistoryProvider:
+        """Construct one physical provider from explicit host arguments."""
+
+        if not isinstance(constructor_kwargs, Mapping):
+            raise DiagnosticAdapterRunnerError(
+                "constructor_kwargs must be a mapping"
+            )
+        provider_class = self.resolve_provider_class(component_kind)
+        try:
+            provider = provider_class(**dict(constructor_kwargs))
+        except Exception as error:
+            raise DiagnosticAdapterRunnerError(
+                f"cannot construct diagnostic adapter instance {instance_id}: "
+                f"{type(error).__name__}: {error}"
+            ) from error
+        self.register_provider_instance(instance_id, component_kind, provider)
+        return provider
+
+    @property
+    def provider_instance_ids(self) -> tuple[str, ...]:
+        """Return explicitly registered physical equipment instance IDs."""
+
+        return tuple(self._provider_instances)
+
     def execute(
         self,
         component_kind: str,
@@ -269,6 +327,7 @@ class DiagnosticAdapterRunner:
         | Mapping[str, Any],
         *,
         provider: AccidentHistoryProvider | None = None,
+        provider_instance_id: str | None = None,
         release_kind: str = "gas",
     ) -> DiagnosticAdapterExecution:
         """Call one provider through the strict PRISM export contract."""
@@ -278,7 +337,27 @@ class DiagnosticAdapterRunner:
                 f"release_kind must be one of {sorted(_RELEASE_KINDS)}"
             )
         spec = self._spec(component_kind)
-        selected = provider if provider is not None else self._providers.get(component_kind)
+        if provider is not None and provider_instance_id is not None:
+            raise DiagnosticAdapterRunnerError(
+                "provider and provider_instance_id cannot both be supplied"
+            )
+        selected_instance_id = None
+        if provider_instance_id is not None:
+            selected_instance_id = _text(provider_instance_id, "provider_instance_id")
+            try:
+                bound_kind, bound_provider = self._provider_instances[selected_instance_id]
+            except KeyError as error:
+                raise DiagnosticAdapterRunnerError(
+                    f"no provider instance registered for {selected_instance_id}"
+                ) from error
+            if bound_kind != component_kind:
+                raise DiagnosticAdapterRunnerError(
+                    f"provider instance {selected_instance_id} is bound to "
+                    f"{bound_kind}, not {component_kind}"
+                )
+            selected = bound_provider
+        else:
+            selected = provider if provider is not None else self._providers.get(component_kind)
         if selected is None:
             raise DiagnosticAdapterRunnerError(
                 f"no provider instance registered for component kind {component_kind}"
@@ -302,7 +381,11 @@ class DiagnosticAdapterRunner:
             raise DiagnosticAdapterRunnerError(
                 f"diagnostic adapter execution failed for {component_kind}: {error}"
             ) from error
-        return DiagnosticAdapterExecution(spec=spec, result=result)
+        return DiagnosticAdapterExecution(
+            spec=spec,
+            result=result,
+            provider_instance_id=selected_instance_id,
+        )
 
     def to_consequence_request(
         self,
@@ -342,6 +425,7 @@ class DiagnosticAdapterRunner:
         consequence_defaults_builder,
         *,
         provider: AccidentHistoryProvider | None = None,
+        provider_instance_id: str | None = None,
         release_kind: str = "gas",
     ):
         """Build a resolver callback for ``request_from_equipment_resolver``.
@@ -368,6 +452,7 @@ class DiagnosticAdapterRunner:
                 component_kind,
                 export_request,
                 provider=provider,
+                provider_instance_id=provider_instance_id,
                 release_kind=release_kind,
             )
             return self.to_consequence_request(execution, defaults)
