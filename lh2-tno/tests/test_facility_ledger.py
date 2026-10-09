@@ -377,6 +377,7 @@ def test_facility_assessment_withholds_provider_qualification_coverage_on_count_
         frequency=1e-3,
     )
     result.update(
+        physical_validation_claim=True,
         provider_packet_case_count=1,
         qualified_provider_packet_case_count=1,
         provider_packet_promoted=True,
@@ -399,3 +400,5 @@ def test_facility_assessment_withholds_provider_qualification_coverage_on_count_
     gate = assessment["provider_qualification_coverage"]
     assert gate["complete"] is False
     assert any("does not match" in reason for reason in gate["blocking_reasons"])
+    assert assessment["qualified_facility_qra_available"] is False
+    assert assessment["complete_facility_qra_claim"] is False

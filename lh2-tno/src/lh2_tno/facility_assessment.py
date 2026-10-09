@@ -83,6 +83,13 @@ def build_facility_assessment(
             "frequency_inference_performed": False,
             "physical_validation_claim": False,
         }
+    qualification_gate_allows_qra = (
+        qualification_gate is None or qualification_gate["complete"]
+    )
+    qualified_facility_qra_available = (
+        ledger["qualified_facility_qra_available"]
+        and qualification_gate_allows_qra
+    )
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -93,14 +100,15 @@ def build_facility_assessment(
             "qualified_provider_packet_case_count"
         ],
         "provider_packet_promoted": ledger["provider_packet_promoted"],
-        "qualified_facility_qra_available": ledger[
-            "qualified_facility_qra_available"
-        ],
-        "complete_facility_qra_claim": ledger["complete_facility_qra_claim"],
+        "qualified_facility_qra_available": qualified_facility_qra_available,
+        "complete_facility_qra_claim": qualified_facility_qra_available,
         "provider_qualification_blocking_reasons": ledger[
             "provider_qualification_blocking_reasons"
         ],
         "provider_qualification_coverage": qualification_gate,
+        "provider_qualification_coverage_complete": (
+            qualification_gate["complete"] if qualification_gate is not None else None
+        ),
         "conditional_diagnostic_facility_risk_available": ledger[
             "conditional_diagnostic_facility_risk_available"
         ],
