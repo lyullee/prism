@@ -220,3 +220,5 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 실제 설비 모델의 사고 이력이 들어오는 다음 단계를 위해 `campaign.py`에 `prism.provider_packet_evidence.v1` 계약을 추가했다. 이 레코드는 event/component/port와 provider source/result digest, qualification evidence ID를 함께 보유한다. 캠페인이 소비한 packet identity와 이 값들이 exact-match일 때만 `qualified_provider_packet_case_count`를 증가시키며, 이 과정에서 문헌 빈도는 읽기 전용으로 유지된다.
 
 또한 `physical_validation_evidence`를 `not_validated`/`independent_validated`로 분리했다. 완전한 시설 범위, 모든 실행 case의 qualified packet, 독립 물리검증 근거가 모두 있을 때만 `complete_facility_qra_claim`을 열 수 있다. 기존 수치 합산 장부의 `facility_total_risk_available`와 별도로 자격 상태를 보고하므로, 구조 연결·합성 진단 결과를 실제 시설 QRA로 오인하지 않는다. 현재 결과에는 qualified packet이 없고 물리검증 상태도 제한적이어서 승격 게이트는 닫혀 있다. 관련 portable suite는 465개 테스트가 통과했다.
+
+문헌 빈도 불확실성 함수도 이 상태를 각 시나리오와 최상위 결과에 전달한다. p05·published·p95 재가중 또는 lognormal 샘플링이 실행되어도 provider packet 적격성, 독립 물리검증, 완전 시설 QRA 상태는 별도 gate로 남는다.

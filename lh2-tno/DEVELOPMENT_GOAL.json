@@ -1757,6 +1757,8 @@
   "physical_validation_campaign_gate_policy": "Independent validation evidence is required together with complete scope and qualified provider packets; synthetic or screening evidence cannot promote the claim.",
   "facility_assessment_provider_gate_propagation_implemented": true,
   "facility_assessment_provider_gate_propagation_module": "src/lh2_tno/facility_assessment.py",
+  "frequency_uncertainty_provider_gate_propagation_implemented": true,
+  "frequency_uncertainty_provider_gate_propagation_module": "src/lh2_tno/uncertainty.py",
   "full_portable_test_count": 465,
   "full_portable_test_status": "465 passed"
 }

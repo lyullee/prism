@@ -192,6 +192,11 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             'uncomputed_cases': result['uncomputed_cases'],
             'declared_scope_annual_ir_low_high': ir if result['declared_scope_numerically_complete'] else None,
             'total_facility_annual_ir_low_high': ir if result['total_facility_annual_ir_low_high'] is not None else None,
+            'provider_packet_promoted': result.get('provider_packet_promoted') is True,
+            'qualified_provider_packet_case_count': result.get(
+                'qualified_provider_packet_case_count', 0
+            ),
+            'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
         })
     return {
         'campaign_digest': result['campaign_digest'],
@@ -205,6 +210,12 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
         'correlation_comparison_present': any(
             s.correlation_assumption == 'independent_event_bounds' for s in scenarios
         ) and any(s.correlation_assumption == 'within_asset_shared_quantile' for s in scenarios),
+        'provider_packet_promoted': result.get('provider_packet_promoted') is True,
+        'provider_packet_case_count': result.get('provider_packet_case_count', 0),
+        'qualified_provider_packet_case_count': result.get(
+            'qualified_provider_packet_case_count', 0
+        ),
+        'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
         'physical_validation_claim': False,
     }
 
@@ -399,6 +410,11 @@ def sample_literature_frequency_distributions(
             },
             'uncomputed_cases': result['uncomputed_cases'],
             'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
+            'provider_packet_promoted': result.get('provider_packet_promoted') is True,
+            'qualified_provider_packet_case_count': result.get(
+                'qualified_provider_packet_case_count', 0
+            ),
+            'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
             'physical_validation_claim': False,
         })
     return {
@@ -409,6 +425,12 @@ def sample_literature_frequency_distributions(
         'statistical_confidence_interval': False,
         'frequency_distribution_credible_interval': True,
         'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
+        'provider_packet_promoted': result.get('provider_packet_promoted') is True,
+        'provider_packet_case_count': result.get('provider_packet_case_count', 0),
+        'qualified_provider_packet_case_count': result.get(
+            'qualified_provider_packet_case_count', 0
+        ),
+        'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
         'conditional_diagnostic_facility_risk': 'sampled known-atom facility expected-death totals are diagnostic frequency-model outputs; they are not a qualified facility confidence interval when scope blockers remain',
         'semantics': 'published lognormal initiating-frequency distributions with explicit shared-asset or independent-event normal draws; optional fixed events retain their declared catalogue frequency; physical harm/weather/barrier/population/ignition remain fixed and incomplete scope remains incomplete',
         'physical_validation_claim': False,

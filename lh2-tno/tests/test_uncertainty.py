@@ -71,6 +71,9 @@ def test_published_literature_quantiles_reweight_atoms_without_physics():
         'liquid_two_phase': 1, 'valve_hole': 2
     }
     assert result['facility_credible_interval'] is False
+    assert result['provider_packet_promoted'] is False
+    assert result['qualified_provider_packet_case_count'] == 0
+    assert result['complete_facility_qra_claim'] is False
 
 
 def test_p05_requires_a_published_event_bound():
@@ -155,6 +158,8 @@ def test_published_frequency_distribution_sampling_returns_known_interval_withou
     )
     assert result['fresh_physics_executed'] is False
     assert result['frequency_distribution_credible_interval'] is True
+    assert result['provider_packet_promoted'] is False
+    assert result['complete_facility_qra_claim'] is False
     assert len(result['scenarios'][0]['known_expected_death_quantiles'][0]) == 3
     assert result['scenarios'][0]['event_frequency_quantiles_per_year'][events[0].id][1] > 0
     stability = result['scenarios'][0]['asset_rank_stability'][events[0].asset_id]
