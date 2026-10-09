@@ -12,7 +12,17 @@ ASSESSMENT_PATH = ROOT / "results/20261024/native_generic_scope_vertical_merged_
 
 
 def _json(path: Path) -> dict:
-    value = json.loads(path.read_text(encoding="utf-8"))
+    def reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict:
+        result: dict[str, object] = {}
+        for key, item in pairs:
+            if key in result:
+                raise AssertionError(f"duplicate JSON key in {path}: {key}")
+            result[key] = item
+        return result
+
+    value = json.loads(
+        path.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys
+    )
     assert isinstance(value, dict)
     return value
 
@@ -50,4 +60,14 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
         assert status["ijhe_completion_audit_latest_facility_assessment_record"].endswith(
             ASSESSMENT_PATH.name
         )
-
+        assert status["full_portable_test_count"] == 562
+        assert status["full_portable_test_status"] == "562 passed"
+        assert status["facility_evidence_request_latest_record"].endswith(
+            "native_generic_scope_vertical_facility_evidence_request_v2.json"
+        )
+        if "facility_ledger_latest_record" in status:
+            assert status["facility_ledger_latest_record"].endswith(
+                "native_generic_scope_vertical_merged_facility_ledger_population_v3.json"
+            )
+        if "ijhe_audit_latest_record" in status:
+            assert status["ijhe_audit_latest_record"].endswith(AUDIT_PATH.name)
