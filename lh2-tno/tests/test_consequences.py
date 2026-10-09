@@ -2,9 +2,11 @@
 import copy
 import json
 from pathlib import Path
+from types import SimpleNamespace
 import numpy as np
 import pytest
-from lh2_tno.chain_worker import box_fractions, branch_mass, dose_harm, mole_fraction, pulse_mass, weighted_union_harm
+from lh2_tno.chain_worker import (box_fractions, branch_mass, dose_harm,
+    mole_fraction, pulse_mass, weighted_union_harm, wind_conditioned_handoff)
 from lh2_tno.consequences import ConsequenceRequest
 
 EXAMPLE=Path(__file__).parents[1]/'examples/consequence_request.json'
@@ -50,6 +52,26 @@ def test_air_mixture_is_molar_not_mass_fraction():
 def test_combined_damage_uses_valid_union_upper_bound_without_independence():
     assert weighted_union_harm(.4,.3)==pytest.approx(.7)
     assert weighted_union_harm(.8,.6)==1.
+
+
+def test_wind_conditioned_handoff_waits_for_actual_downwind_recovery():
+    rows = (
+        SimpleNamespace(x_m=.05, h2_liquid_rate_kg_s=0., wind_alignment_deg=5.,
+                        east_m=-1.0, north_m=0., height_m=1.),
+        SimpleNamespace(x_m=.10, h2_liquid_rate_kg_s=0., wind_alignment_deg=5.,
+                        east_m=.2, north_m=0., height_m=1.),
+    )
+    selected = wind_conditioned_handoff(rows, h2_rate_kg_s=.1,
+                                       downwind_vector=(1., 0., 0.))
+    assert selected is rows[1]
+
+
+def test_wind_conditioned_handoff_withholds_when_transition_never_crosses_source_plane():
+    rows = (SimpleNamespace(x_m=.05, h2_liquid_rate_kg_s=0.,
+                            wind_alignment_deg=5., east_m=-1., north_m=0.,
+                            height_m=1.),)
+    assert wind_conditioned_handoff(rows, h2_rate_kg_s=.1,
+                                    downwind_vector=(1., 0., 0.)) is None
 
 
 def test_thermal_stop_does_not_drop_last_interval():

@@ -79,6 +79,39 @@ def dose_harm(samples, stop, probit):
     return {'dose':dose,'harm_probability':pe,'flame_contact':False}
 
 
+def wind_conditioned_handoff(rows, *, h2_rate_kg_s, downwind_vector,
+                             liquid_tolerance=1e-5,
+                             wind_alignment_tolerance_deg=10.0):
+    """Select a qualified handoff after an initially upwind jet has recovered.
+
+    ``SLABx-LH2`` selects the first state that is gas-dominated and aligned
+    with the ambient wind.  A jet pointed against the wind can satisfy those
+    tests while it is still on the upwind side of the outlet.  This helper
+    keeps the actual vector-transition states and advances to the first
+    *downwind* state instead of rotating the source or inventing a plume
+    origin.  ``None`` means the declared transition horizon is insufficient.
+    """
+    downwind = np.asarray(downwind_vector, dtype=float)
+    if downwind.shape != (3,) or not np.isfinite(downwind).all():
+        raise ValueError('downwind_vector must be a finite 3-vector')
+    norm = float(np.linalg.norm(downwind))
+    if norm <= 0.0:
+        raise ValueError('downwind_vector must be nonzero')
+    downwind /= norm
+    for row in rows:
+        if row.x_m <= 0.0:
+            continue
+        if row.h2_liquid_rate_kg_s > liquid_tolerance * h2_rate_kg_s:
+            continue
+        alignment = row.wind_alignment_deg
+        if alignment is not None and alignment > wind_alignment_tolerance_deg:
+            continue
+        position = np.array([row.east_m, row.north_m, 0.0], dtype=float)
+        if float(np.dot(position, downwind)) > 0.0:
+            return row
+    return None
+
+
 def run_chain(p,roots,module):
     timings={}
     def mark(name,started):timings[name]=(time.perf_counter()-started)*1000
@@ -240,17 +273,86 @@ def run_chain(p,roots,module):
         pool_origin=origin+np.asarray(positions[0])-np.array([0.,0.,origin[2]])
         knots=sorted(set([0.,horizon]+[r[k] for r in ground_pulses for k in ('start','end')]))
         inflow=m.DeclaredInflow(tuple(knots),tuple(sum(r['rate'] for r in ground_pulses if r['start']<=t<r['end']) for t in knots))
-        pool=m.run_dynamic_pool(m.DynamicPoolConfig(surface=surface,numerics=numerics,
-                    ambient_pressure_Pa=ambient['pressure_pa']),inflow,tuple(times)).to_dict()
+        # DynamicLH2PoolX reports wet area at requested output times.  A tiny
+        # rainout can evaporate completely between two coarse consequence
+        # timestamps, leaving a positive evaporation increment with zero area
+        # at both endpoints.  Add a bounded early-time refinement so the
+        # evaporation packet retains a resolved area; this changes sampling,
+        # not the solver's CFL or physical closure.
+        positive_times=sorted(t for t in times if t>0.)
+        first_interval=positive_times[0] if positive_times else horizon
+        fine_step=min(boundary['maximum_time_step_s'], first_interval/10.)
+        fine_step=max(fine_step, 1.e-9)
+        refinement_window=min(horizon, max(first_interval*10., fine_step*10.))
+        pool=None
+        unresolved_wet_area=False
+        pool_refinement_attempts=0
+        pool_packet_count_raw=0
+        for attempt in range(5):
+            refined=[]
+            cursor=0.
+            while cursor < refinement_window-1.e-12:
+                refined.append(cursor)
+                cursor += fine_step
+            refined.append(refinement_window)
+            pool_times=tuple(sorted(set(float(t) for t in tuple(times)+tuple(knots)+tuple(refined) if 0.<=t<=horizon)))
+            pool=m.run_dynamic_pool(m.DynamicPoolConfig(surface=surface,numerics=numerics,
+                        ambient_pressure_Pa=ambient['pressure_pa']),inflow,pool_times).to_dict()
+            unresolved_wet_area=False
+            ledger=pool['ledger']
+            for a,b in zip(ledger,ledger[1:]):
+                evaporated=b['cumulative_evaporation_kg']-a['cumulative_evaporation_kg']
+                if evaporated>1.e-12 and max(a['wet_area_m2'],b['wet_area_m2'])<=0.:
+                    unresolved_wet_area=True
+                    break
+            pool_refinement_attempts=attempt+1
+            if not unresolved_wet_area:
+                break
+            fine_step/=10.
+        if unresolved_wet_area:
+            raise ValueError('pool evaporation wet surface remains unresolved after declared time refinement')
         if abs(pool['mass_balance_residual_kg'])>max(1e-8,mass*1e-8):
             raise ValueError('pool mass balance failed')
+        raw_pool_packets=[]
         for a,b in zip(pool['ledger'],pool['ledger'][1:]):
             evaporated=b['cumulative_evaporation_kg']-a['cumulative_evaporation_kg']
             if evaporated>1e-12:
                 area=max(a['wet_area_m2'],b['wet_area_m2'])
                 if area<=0:raise ValueError('pool vapour has no wet surface area')
-                pool_packets.append({'start':a['time_s'],'end':b['time_s'],'mass':evaporated,
-                                     'area':area,'temperature':b['pool_temperature_K']})
+                raw_pool_packets.append({'start':a['time_s'],'end':b['time_s'],'mass':evaporated,
+                                         'area':area,'temperature':b['pool_temperature_K']})
+        pool_packet_count_raw=len(raw_pool_packets)
+        # The refined ledger may contain thousands of tiny evaporation
+        # increments.  Merge only adjacent intervals, preserving total mass,
+        # the maximum resolved wet area (conservative for concentration), and
+        # a mass-weighted temperature.  This is an explicit observation
+        # coarsening; it does not alter the DynamicLH2PoolX mass ledger.
+        max_packets=200
+        group=[]
+        def flush_pool_group():
+            if not group:
+                return
+            total=sum(item['mass'] for item in group)
+            pool_packets.append({
+                'start':group[0]['start'], 'end':group[-1]['end'],
+                'mass':total, 'area':max(item['area'] for item in group),
+                'temperature':sum(item['mass']*item['temperature'] for item in group)/total,
+            })
+            group.clear()
+        for item in raw_pool_packets:
+            if group and (item['start'] > group[-1]['end'] + 1.e-12 or len(group) >= max_packets):
+                flush_pool_group()
+            group.append(item)
+        flush_pool_group()
+        if pool_adapter is not None:
+            pool_adapter['output_refinement']={
+                'attempts':pool_refinement_attempts,
+                'initial_time_step_s':fine_step * (10. ** max(0, pool_refinement_attempts-1)),
+                'refinement_window_s':refinement_window,
+                'raw_packet_count':pool_packet_count_raw,
+                'coarsened_packet_count':len(pool_packets),
+                'coarsening_max_adjacent_packets':max_packets,
+            }
     mark('pool',start)
     # Resolve vector bending and carrier entrainment before SLAB handoff.
     start=time.perf_counter()
@@ -333,12 +435,29 @@ def run_chain(p,roots,module):
             # Do not compute a complete 100-m cryogenic transition when the
             # conservative SLAB handoff has already been reached at 5 cm.
             hand=None
+            selected_from_upwind_recovery=False
+            initial_handoff=None
             for limit in sorted(set(min(x,p['transition_x_max_m']) for x in (.5,2.,10.,50.,p['transition_x_max_m']))):
                 near=transition.integrate_transition(transition_input,x_max_m=limit,
                             dx_m=p['transition_dx_m'],stop_on_passive=False)
                 try:
                     hand=transition.select_handoff(near,h2_rate_kg_s=rate,ground_contact_required=False,
                                 wind_alignment_tolerance_deg=10.)
+                    initial_handoff=hand
+                    # An opposite-direction jet can satisfy SLABx-LH2's
+                    # gas/alignment guards before it has crossed the outlet
+                    # plane.  Keep the resolved near field and select the
+                    # first later state whose actual ENU position is
+                    # downwind; do not rotate the source by assumption.
+                    if float(np.dot([hand.east_m,hand.north_m,0.],down)) <= 0.:
+                        recovered=wind_conditioned_handoff(
+                            near,h2_rate_kg_s=rate,downwind_vector=down,
+                            liquid_tolerance=1e-5,
+                            wind_alignment_tolerance_deg=10.)
+                        if recovered is None:
+                            raise RuntimeError('vector transition remains upwind within the declared horizon')
+                        hand=recovered
+                        selected_from_upwind_recovery=True
                     break
                 except RuntimeError:
                     continue
@@ -353,7 +472,7 @@ def run_chain(p,roots,module):
             depth=total/(hand.density_kg_m3*downvelocity*2*width)
             start_x=float(np.dot([hand.east_m,hand.north_m,0.],down))
             cross_offset=float(np.dot([hand.east_m,hand.north_m,0.],cross))
-            if start_x<=0:raise ValueError('handoff remains upwind; no silent rotation into a downwind source')
+            if start_x<=0:raise ValueError('handoff remains upwind within the declared transition horizon')
             hs=handmod.FreeJetHandoffState(handoff_distance_m=start_x,duration_s=span,
                 total_rate_kg_s=total,h2_mass_fraction=hand.h2_mass_fraction,temperature_K=hand.temperature_K,
                 density_kg_m3=hand.density_kg_m3,velocity_m_s=downvelocity,centre_height_m=hand.height_m,
@@ -365,11 +484,28 @@ def run_chain(p,roots,module):
                            'entry_temperature_k':gas_temperature,'entry_density_kg_m3':gas_density,
                            'mass_residual_relative':hs.mass_residual_relative(),
                            'transition_mass_residual_kg_s':hand.mass_residual_kg_s,
-                           'transition_energy_residual_w':hand.energy_residual_W})
+                           'transition_energy_residual_w':hand.energy_residual_W,
+                           'wind_conditioned_recovery':selected_from_upwind_recovery,
+                           'initial_handoff_position_enu_m':None if initial_handoff is None else [
+                               initial_handoff.east_m,initial_handoff.north_m,initial_handoff.height_m],
+                           'initial_handoff_downwind_m':None if initial_handoff is None else float(
+                               np.dot([initial_handoff.east_m,initial_handoff.north_m,0.],down))})
         else:
             source_model=sourcemod.EvaporatingPool(substance,rate,area,duration=span,T_source=tsat)
-        traj,used=plume.run_dispersion(source_model,atm,emission,water,x_max=p['dispersion_x_max_m'],
-                                    t_max=max(horizon-tt,span+1e-3),n_puff_steps=p['n_puff_steps'])
+        try:
+            traj,used=plume.run_dispersion(source_model,atm,emission,water,x_max=p['dispersion_x_max_m'],
+                                        t_max=max(horizon-tt,span+1e-3),n_puff_steps=p['n_puff_steps'])
+        except Exception as error:
+            if 'x must be non-decreasing' in str(error):
+                raise ValueError(
+                    f'dispersion finite-release puff handoff remained non-monotonic for {kind} '
+                    f'packet rate={rate:.9g}, area={area:.9g}, span={span:.9g}; '
+                    'source was withheld without sorting or rotating the release'
+                ) from error
+            raise ValueError(
+                f'dispersion failed for {kind} packet rate={rate:.9g}, area={area:.9g}, '
+                f'span={span:.9g}: {type(error).__name__}: {error}'
+            ) from error
         if not np.all(np.isfinite(traj.vol_frac)):raise ValueError('nonfinite dispersion state')
         result=(near,traj,tt,cross_offset,base_origin)
         traj_cache[key]=result

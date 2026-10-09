@@ -50,7 +50,7 @@
     "field accident-frequency collection and sensor-frequency learning",
     "indoor dispersion, DDT/detonation and full domino interaction"
   ],
-  "next_priority": "Replace declared-sensitivity pool radius with provider-resolved pool footprint or explicit no_rainout evidence; repair small-release wet-surface and full-bore x-order numerical contracts; implement wind-conditioned two-sided endpoint handoff/plume interaction. Keep representative 1 m location_weight separate from remaining 9 m exposure and retain facility IR/F-N fail-closed until these routes are independently validated.",
+  "next_priority": "Replace declared-sensitivity pool radius with provider-resolved pool footprint or explicit no_rainout evidence; complete full-bore finite-release puff handoff validation; extend the implemented wind-conditioned two-sided endpoint handoff to paired plume interaction and frequency weighting. Keep representative 1 m location_weight separate from remaining 9 m exposure and retain facility IR/F-N fail-closed until these routes are independently validated.",
   "layered_tank_worklist_packet_campaign_implemented": true,
   "layered_tank_worklist_packet_campaign_status": "SYNTHETIC_STRUCTURAL_ONLY; storage-tank-01 five area-bin packets exact-match 5/24 worklist events",
   "layered_tank_worklist_packet_campaign_record": "results/20261010/layered_tank_worklist_packets/campaign_verification.json",
