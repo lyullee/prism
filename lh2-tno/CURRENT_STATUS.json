@@ -3112,5 +3112,19 @@
   "diagnostic_campaign_binding_packet_value_mismatch_event_count": 0,
   "diagnostic_campaign_binding_packet_subset_value_consumed": true,
   "diagnostic_campaign_binding_packet_time_step_history_replayed": false,
-  "diagnostic_campaign_binding_packet_value_consumption_test_status": "5 targeted packet-binding tests passed; local portable suite 584 passed/1 skipped"
+  "diagnostic_campaign_binding_packet_value_consumption_test_status": "5 targeted packet-binding tests passed; local portable suite 584 passed/1 skipped",
+  "facility_chain_closure_audit_implemented": true,
+  "facility_chain_closure_audit_module": "src/lh2_tno/chain_closure_audit.py",
+  "facility_chain_closure_audit_script": "scripts/audit_facility_chain_closure.py",
+  "facility_chain_closure_audit_record": "results/20261024/native_generic_scope_vertical_chain_closure_v1.json",
+  "facility_chain_closure_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED; 24 packet events close release aggregates through case termination/inventory, final harm atoms and conditional facility IR/F-N; 5 vertical handoff events remain packetless",
+  "facility_chain_closure_packet_event_count": 24,
+  "facility_chain_closure_closed_event_count": 24,
+  "facility_chain_closure_campaign_event_count": 29,
+  "facility_chain_closure_campaign_events_without_packet_count": 5,
+  "facility_chain_closure_facility_ir_aggregate_closed": true,
+  "facility_chain_closure_facility_fn_aggregate_closed": true,
+  "facility_chain_closure_qualified_provider_packet_count": 0,
+  "facility_chain_closure_facility_qra_claim": false,
+  "facility_chain_closure_test_status": "3 targeted chain-closure tests passed; local portable suite 587 passed/1 skipped"
 }
