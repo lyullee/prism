@@ -70,3 +70,26 @@ def test_digest_mismatch_is_blocking_and_does_not_promote_case():
     assert report["qualified_provider_case_count"] == 0
     assert report["status_counts"] == {"UNQUALIFIED_EVIDENCE_MISMATCH": 1}
     assert "provider_result_digests mismatch" in report["case_rows"][0]["blocking_reasons"]
+
+
+def test_same_event_can_select_distinct_exact_provider_packets():
+    second_request = _request(condition="D-4ms-west")
+    second_request["request_id"] = "event-01/D-4ms-west/release-02"
+    second_request["release_branch_id"] = "release-02"
+    second_request["exact_match_required"]["provider_result_digests"] = ["c" * 64]
+    second_evidence = _evidence()
+    second_evidence["evidence_id"] = "evidence-event-01-release-02"
+    second_evidence["provider_result_digests"] = ["c" * 64]
+
+    report = audit_facility_case_packet_coverage(
+        {
+            "facility_id": "facility",
+            "case_requests": [_request(), second_request],
+        },
+        [_evidence(), second_evidence],
+    )
+
+    assert report["status"] == "QUALIFIED_FULL_CASE_COVERAGE"
+    assert report["qualified_provider_event_count"] == 1
+    assert report["qualified_provider_case_count"] == 2
+    assert report["status_counts"] == {"QUALIFIED_EXACT_MATCH": 2}

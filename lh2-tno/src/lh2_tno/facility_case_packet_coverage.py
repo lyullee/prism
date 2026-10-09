@@ -99,7 +99,14 @@ def audit_facility_case_packet_coverage(
         evidence_rows: tuple[ProviderPacketEvidence, ...] = ()
     else:
         evidence_rows = load_provider_packet_evidence_catalog(provider_evidence)
-    evidence_by_event = {row.event_id: row for row in evidence_rows}
+    # Keep every evidence row for an event.  One initiating event can have
+    # multiple provider packets when release branches (or equipment ports)
+    # have different exact source/result digests.  Collapsing to a single
+    # dictionary entry would make the result depend on input order and could
+    # incorrectly mark a valid case as a digest mismatch.
+    evidence_by_event: dict[str, list[ProviderPacketEvidence]] = {}
+    for row in evidence_rows:
+        evidence_by_event.setdefault(row.event_id, []).append(row)
 
     rows: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
@@ -117,13 +124,28 @@ def audit_facility_case_packet_coverage(
             reasons.append("request exact provider identity is incomplete")
         if not requested["port_ids"]:
             reasons.append("request exact port_ids are empty")
-        evidence = evidence_by_event.get(event_id)
-        if evidence is None:
+        candidates = evidence_by_event.get(event_id, [])
+        if not candidates:
             status = "MISSING_QUALIFIED_PROVIDER_EVIDENCE"
             reasons.append("no qualified provider evidence has this event_id")
             evidence_identity = None
         else:
-            evidence_identity = _evidence_identity(evidence)
+            # Select by the complete exact identity, rather than by event ID
+            # alone.  If no candidate matches, report the closest candidate's
+            # mismatches so the evidence request remains actionable.
+            candidate_identities = [
+                _evidence_identity(candidate) for candidate in candidates
+            ]
+            exact_candidates = [
+                identity
+                for identity in candidate_identities
+                if not _identity_reasons(requested, identity)
+            ]
+            evidence_identity = (
+                exact_candidates[0]
+                if exact_candidates
+                else candidate_identities[0]
+            )
             reasons.extend(_identity_reasons(requested, evidence_identity))
             status = "QUALIFIED_EXACT_MATCH" if not reasons else "UNQUALIFIED_EVIDENCE_MISMATCH"
             if not reasons:

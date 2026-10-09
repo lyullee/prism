@@ -83,9 +83,25 @@ def load_provider_packet_evidence_catalog(
             raise ProviderPacketPromotionError(
                 f"provider packet evidence row {index} failed strict validation: {error}"
             ) from error
-    if len({row.event_id for row in rows}) != len(rows):
+    # A single initiating event may legitimately have more than one promoted
+    # packet when conditional release branches use different provider
+    # endpoints or source/result digests.  Keep rejecting an exact duplicate
+    # identity: it is ambiguous and usually indicates that the same packet was
+    # appended twice.  Facility case coverage selects the matching identity
+    # for each case instead of relying on input order.
+    identities = {
+        (
+            row.event_id,
+            row.component_id,
+            tuple(row.port_ids),
+            tuple(row.provider_source_digests),
+            tuple(row.provider_result_digests),
+        )
+        for row in rows
+    }
+    if len(identities) != len(rows):
         raise ProviderPacketPromotionError(
-            "provider packet evidence event_id values must be unique"
+            "provider packet evidence event_id values must be unique per exact packet identity"
         )
     return tuple(rows)
 
