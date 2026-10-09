@@ -942,6 +942,8 @@ facility_monitor = FacilityRealtimeConsequenceMonitor(
 
 `snapshot["aggregate"]["component_risk_ranking"]`에는 같은 batch에서 현재 기상 IR이 계산된 설비의 진단용 우선순위가 기록됩니다. 높은 불확실성 끝점의 수용점 IR을 기준으로 정렬하며, 빈도 binding·frame·피해가 빠진 설비는 `rank=null`과 `[null, null]`로 보류합니다. 누락을 0으로 만들지 않고 빈도를 재분배하지 않으므로, 자세한 출력 계약과 예시는 [실시간 설비별 위험순위 개발기록](docs/PRISM_실시간_설비별_위험순위_개발기록_20261010.md)을 참고합니다.
 
+같은 순위 장부에는 문헌 빈도 `p05`·`published`·`p95`를 적용한 설비별 peak IR과 순위도 선택적으로 기록됩니다. `frequency_sensitivity_rank_stable=true`이면 세 빈도 가정에서 순위가 유지된다는 뜻이고, 물리 피해를 다시 계산하거나 빈도를 학습했다는 뜻이 아닙니다. 범위가 없는 설비는 `null`로 보류됩니다.
+
 각 accepted component에는 `equipment_release_path`도 기록됩니다. provider resolver가 반환한 사고 경계의 지속시간, 종료 basis, available/cumulative/remaining mass와 provider digest를 보존하며, 양단 방출은 shared inventory로 표시합니다. resolver가 없으면 `WITHHELD_PROVIDER_RELEASE_NOT_RESOLVED`로 남고 누출량 0으로 대체하지 않습니다. 자세한 계약은 [실시간 방출 경로 장부 개발기록](docs/PRISM_실시간_방출경로_장부_개발기록_20261010.md)을 참고합니다.
 
 provider consequence 결과에 네 가지 옥외 점화 branch(`direct_fire`, `delayed_flash_fire`, `delayed_explosion`, `no_ignition`)가 모두 있으면 `snapshot["aggregate"]["current_weather_ignition_accounting"]`에 설비별 branch 확률과 명시 문헌 빈도로 가중한 현재 조건 branch 발생률을 기록합니다. branch가 빠지거나 빈도 binding이 없으면 해당 행 또는 branch rate를 보류하며, 이를 시설 연간 IR/F-N으로 승격하지 않습니다.

@@ -750,6 +750,36 @@ def _realtime_component_risk_ranking(
     """
     rows: list[dict[str, object]] = []
     available_rows: list[dict[str, object]] = []
+    sensitivity_scenarios = ("p05", "published", "p95")
+
+    def peak_from_receptor_ir(
+        receptor_ir: Mapping[str, object],
+    ) -> tuple[list[float] | None, list[str | None] | None]:
+        """Return the two endpoint peaks without accepting a partial map."""
+        peaks: list[float] = []
+        receptors: list[str] = []
+        for endpoint in range(2):
+            candidates: list[tuple[float, str]] = []
+            for receptor_id, values in receptor_ir.items():
+                if (
+                    not isinstance(values, (list, tuple))
+                    or len(values) != 2
+                    or isinstance(values[endpoint], bool)
+                    or not isinstance(values[endpoint], (int, float))
+                    or not math.isfinite(float(values[endpoint]))
+                    or float(values[endpoint]) < 0.0
+                ):
+                    return None, None
+                candidates.append((float(values[endpoint]), str(receptor_id)))
+            if not candidates:
+                return None, None
+            peak_value, receptor_id = max(
+                candidates, key=lambda row: (row[0], row[1])
+            )
+            peaks.append(peak_value)
+            receptors.append(receptor_id)
+        return peaks, receptors
+
     for component_id in sorted(component_ids):
         entry = components.get(component_id)
         entry_status = entry.get("status") if isinstance(entry, Mapping) else None
@@ -757,42 +787,44 @@ def _realtime_component_risk_ranking(
         risk_status = risk.get("status") if isinstance(risk, Mapping) else None
         peaks: list[float | None] = [None, None]
         peak_receptors: list[str | None] = [None, None]
+        sensitivity_peaks: dict[str, list[float] | None] = {
+            scenario: None for scenario in sensitivity_scenarios
+        }
+        sensitivity_receptors: dict[str, list[str | None] | None] = {
+            scenario: None for scenario in sensitivity_scenarios
+        }
         row_status = "WITHHELD_COMPONENT_RESULT"
         reason = "component has no accepted realtime risk result"
         if entry_status == "ACCEPTED" and isinstance(risk, Mapping):
             if risk_status == "AVAILABLE_CURRENT_WEATHER_IR":
                 annual_ir = risk.get("annual_ir_low_high")
                 if isinstance(annual_ir, Mapping) and annual_ir:
-                    valid = True
-                    for endpoint in range(2):
-                        candidates: list[tuple[float, str]] = []
-                        for receptor_id, values in annual_ir.items():
-                            if (
-                                isinstance(values, (list, tuple))
-                                and len(values) == 2
-                                and isinstance(values[endpoint], (int, float))
-                                and not isinstance(values[endpoint], bool)
-                                and math.isfinite(float(values[endpoint]))
-                                and float(values[endpoint]) >= 0.0
-                            ):
-                                candidates.append((float(values[endpoint]), str(receptor_id)))
-                            else:
-                                valid = False
-                        if candidates:
-                            peak_value, receptor_id = max(
-                                candidates, key=lambda row: (row[0], row[1])
-                            )
-                            peaks[endpoint] = peak_value
-                            peak_receptors[endpoint] = receptor_id
-                        else:
-                            valid = False
+                    peak_values, peak_ids = peak_from_receptor_ir(annual_ir)
+                    valid = peak_values is not None and peak_ids is not None
+                    if valid:
+                        peaks = list(peak_values)
+                        peak_receptors = list(peak_ids)
                     if valid:
                         row_status = "AVAILABLE_CURRENT_WEATHER_IR"
                         reason = "ranked from accepted current-weather receptor IR"
+                        sensitivity = risk.get(
+                            "frequency_sensitivity_current_weather_ir_low_high"
+                        )
+                        if isinstance(sensitivity, Mapping):
+                            for scenario in sensitivity_scenarios:
+                                scenario_ir = sensitivity.get(scenario)
+                                if isinstance(scenario_ir, Mapping):
+                                    scenario_peaks, scenario_ids = peak_from_receptor_ir(
+                                        scenario_ir
+                                    )
+                                    if scenario_peaks is not None and scenario_ids is not None:
+                                        sensitivity_peaks[scenario] = scenario_peaks
+                                        sensitivity_receptors[scenario] = scenario_ids
                         available_rows.append({
                             "component_id": component_id,
                             "peak_annual_ir_low_high": peaks,
                             "peak_receptor_id_low_high": peak_receptors,
+                            "frequency_sensitivity_peak_annual_ir_low_high": sensitivity_peaks,
                         })
                     else:
                         row_status = "WITHHELD_INVALID_CURRENT_WEATHER_IR"
@@ -813,6 +845,12 @@ def _realtime_component_risk_ranking(
             "risk_status": row_status,
             "peak_annual_ir_low_high": peaks,
             "peak_receptor_id_low_high": peak_receptors,
+            "frequency_sensitivity_peak_annual_ir_low_high": sensitivity_peaks,
+            "frequency_sensitivity_peak_receptor_id": sensitivity_receptors,
+            "frequency_sensitivity_rank": {
+                scenario: None for scenario in sensitivity_scenarios
+            },
+            "frequency_sensitivity_rank_stable": None,
             "frequency_is_not_reallocated": True,
             "reason": reason,
         })
@@ -828,6 +866,56 @@ def _realtime_component_risk_ranking(
     for row in rows:
         if row["component_id"] in ranks:
             row["rank"] = ranks[row["component_id"]]
+
+    # Rank only the components that carry a complete p05/published/p95 map for
+    # the same provider consequence.  A missing scenario remains ``None`` and
+    # never becomes a zero-risk or worst-case placeholder.
+    sensitivity_complete_rows = []
+    for row in rows:
+        peaks_by_scenario = row.get("frequency_sensitivity_peak_annual_ir_low_high")
+        if not isinstance(peaks_by_scenario, Mapping):
+            continue
+        if all(
+            isinstance(peaks_by_scenario.get(scenario), (list, tuple))
+            and len(peaks_by_scenario[scenario]) == 2
+            for scenario in sensitivity_scenarios
+        ):
+            sensitivity_complete_rows.append(row)
+    for scenario in sensitivity_scenarios:
+        scenario_rows = [
+            row
+            for row in sensitivity_complete_rows
+            if isinstance(
+                row["frequency_sensitivity_peak_annual_ir_low_high"].get(scenario),
+                (list, tuple),
+            )
+        ]
+        scenario_rows.sort(
+            key=lambda row: (
+                -float(
+                    row["frequency_sensitivity_peak_annual_ir_low_high"][scenario][1]
+                ),
+                -float(
+                    row["frequency_sensitivity_peak_annual_ir_low_high"][scenario][0]
+                ),
+                str(row["component_id"]),
+            )
+        )
+        scenario_ranks = {
+            row["component_id"]: index for index, row in enumerate(scenario_rows, 1)
+        }
+        for row in rows:
+            row["frequency_sensitivity_rank"][scenario] = scenario_ranks.get(
+                row["component_id"]
+            )
+    for row in rows:
+        rank_map = row["frequency_sensitivity_rank"]
+        values = [rank_map[scenario] for scenario in sensitivity_scenarios]
+        row["frequency_sensitivity_rank_stable"] = (
+            len(sensitivity_complete_rows) > 0
+            and all(value is not None for value in values)
+            and len(set(values)) == 1
+        ) if any(value is not None for value in values) else None
     if not rows:
         status = "NO_COMPONENTS"
     elif len(available_rows) == len(rows):
@@ -844,6 +932,15 @@ def _realtime_component_risk_ranking(
         "ranking_basis": (
             "descending peak receptor current-weather annual IR at the high uncertainty endpoint; "
             "diagnostic triage only"
+        ),
+        "frequency_sensitivity_scenarios": list(sensitivity_scenarios),
+        "frequency_sensitivity_complete_component_count": len(sensitivity_complete_rows),
+        "frequency_sensitivity_status": (
+            "AVAILABLE_CURRENT_WEATHER_FREQUENCY_RANKING"
+            if sensitivity_complete_rows and len(sensitivity_complete_rows) == len(available_rows)
+            else "PARTIAL_CURRENT_WEATHER_FREQUENCY_RANKING"
+            if sensitivity_complete_rows
+            else "WITHHELD_CURRENT_WEATHER_FREQUENCY_RANKING"
         ),
         "frequency_reallocation_performed": False,
         "facility_ir_fn_promotion": False,
