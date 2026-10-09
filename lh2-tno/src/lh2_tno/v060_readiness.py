@@ -249,4 +249,197 @@ def build_v060_readiness_report(
     return readiness
 
 
-__all__ = ["READINESS_SCHEMA", "V060ReadinessError", "build_v060_readiness_report"]
+def _nonnegative_int(value: Any, label: str, errors: list[str]) -> None:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, int)
+        or value < 0
+    ):
+        errors.append(f"{label} must be a nonnegative integer")
+
+
+def validate_v060_readiness_report(
+    report: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate cross-section invariants in a generated v0.6.0 report.
+
+    This is an accounting validator, not a physical-model validator.  It
+    catches stale or hand-edited readiness ledgers before they are cited in an
+    IJHE record, while preserving the fail-closed rule for qualified facility
+    QRA claims.
+    """
+    value = _mapping(report, "readiness_report")
+    errors: list[str] = []
+    if value.get("schema_version") != READINESS_SCHEMA:
+        errors.append("unexpected readiness report schema_version")
+
+    chain = value.get("chain")
+    chain = chain if isinstance(chain, Mapping) else {}
+    for field in (
+        "event_count",
+        "case_count",
+        "risk_atom_count",
+        "conditional_case_count",
+        "conditional_executed_case_count",
+        "not_numerically_executed_case_count",
+        "qualified_evidence_withheld_case_count",
+        "annual_condition_count",
+    ):
+        if field in chain and chain.get(field) is not None:
+            _nonnegative_int(chain.get(field), f"chain.{field}", errors)
+    conditional_cases = chain.get("conditional_case_count")
+    executed_cases = chain.get("conditional_executed_case_count")
+    unexecuted_cases = chain.get("not_numerically_executed_case_count")
+    if all(isinstance(item, int) and not isinstance(item, bool)
+           for item in (conditional_cases, executed_cases, unexecuted_cases)):
+        if executed_cases + unexecuted_cases != conditional_cases:
+            errors.append(
+                "chain conditional cases do not equal executed plus not-numerically-executed cases"
+            )
+    if chain.get("conditional_ir_fn_available") is True:
+        if value.get("promotion", {}).get("facility_total_risk_available") is True:
+            errors.append(
+                "conditional IR/F-N availability cannot promote facility_total_risk_available"
+            )
+
+    equipment = value.get("equipment")
+    equipment = equipment if isinstance(equipment, Mapping) else {}
+    components = equipment.get("component_rows")
+    if not isinstance(components, list):
+        errors.append("equipment.component_rows must be an array")
+        components = []
+    observed = equipment.get("observed_component_count")
+    expected = equipment.get("expected_component_count")
+    if observed is not None:
+        _nonnegative_int(observed, "equipment.observed_component_count", errors)
+    if expected is not None:
+        _nonnegative_int(expected, "equipment.expected_component_count", errors)
+    if (
+        isinstance(observed, int)
+        and not isinstance(observed, bool)
+        and isinstance(expected, int)
+        and not isinstance(expected, bool)
+        and observed > expected
+    ):
+        errors.append("equipment observed component count exceeds expected count")
+
+    families = value.get("accident_families")
+    families = families if isinstance(families, Mapping) else {}
+    family_rows = families.get("rows")
+    if not isinstance(family_rows, list):
+        errors.append("accident_families.rows must be an array")
+        family_rows = []
+    required_count = families.get("required_family_count")
+    if required_count != len(family_rows):
+        errors.append("accident family count does not match accident family rows")
+    for index, row in enumerate(family_rows):
+        if not isinstance(row, Mapping):
+            errors.append(f"accident_families.rows[{index}] must be an object")
+            continue
+        for field in (
+            "case_count",
+            "conditional_executed_case_count",
+            "not_numerically_executed_case_count",
+            "qualified_evidence_withheld_case_count",
+        ):
+            if row.get(field) is not None:
+                _nonnegative_int(row.get(field), f"accident_families.rows[{index}].{field}", errors)
+        if (
+            row.get("conditional_status") == "EXECUTED"
+            and row.get("not_numerically_executed_case_count") not in (0, None)
+        ):
+            errors.append(
+                f"accident family row {index} is conditionally EXECUTED but has numerically unexecuted cases"
+            )
+
+    exclusion_set = set(value.get("explicit_exclusions", ()))
+    required_exclusions = {
+        "field_accident_frequency_collection",
+        "sensor_based_frequency_learning",
+        "indoor_release_and_confinement",
+        "detonation_or_DDT",
+        "full_domino_escalation",
+    }
+    if not required_exclusions.issubset(exclusion_set):
+        errors.append("required v0.6.0 exclusion declarations are incomplete")
+    frequency = value.get("frequency")
+    frequency = frequency if isinstance(frequency, Mapping) else {}
+    if frequency.get("sensor_frequency_learning") is not False:
+        errors.append("sensor_frequency_learning must remain false")
+
+    promotion = value.get("promotion")
+    promotion = promotion if isinstance(promotion, Mapping) else {}
+    strict_blockers = value.get("strict_blocking_check_ids")
+    if not isinstance(strict_blockers, list):
+        errors.append("strict_blocking_check_ids must be an array")
+        strict_blockers = []
+    if strict_blockers:
+        for field in (
+            "facility_total_risk_available",
+            "complete_facility_qra_claim",
+            "physical_validation_claim",
+            "facility_qra_claim",
+        ):
+            if promotion.get(field) is True:
+                errors.append(
+                    f"promotion.{field}=true while strict blockers remain"
+                )
+    if promotion.get("complete_facility_qra_claim") is True:
+        for field in (
+            "facility_total_risk_available",
+            "physical_validation_claim",
+            "facility_qra_claim",
+        ):
+            if promotion.get(field) is not True:
+                errors.append(
+                    f"complete facility QRA claim requires promotion.{field}=true"
+                )
+        if strict_blockers:
+            errors.append("complete facility QRA claim requires zero strict blockers")
+    if value.get("conditional_chain_complete") is True and not family_rows:
+        errors.append("conditional chain cannot be complete without accident family rows")
+
+    source_artifacts = value.get("source_artifacts")
+    if source_artifacts is not None:
+        if not isinstance(source_artifacts, Mapping):
+            errors.append("source_artifacts must be an object when present")
+        else:
+            required_sources = {
+                "objective_audit",
+                "union_verification",
+                "scope_matrix",
+                "facility_assessment",
+                "completion_audit",
+                "validation_matrix",
+                "realtime_benchmark",
+            }
+            if not required_sources.issubset(source_artifacts):
+                errors.append("source_artifacts is missing one or more required inputs")
+            for source_id, source in source_artifacts.items():
+                if not isinstance(source, Mapping):
+                    errors.append(f"source_artifacts.{source_id} must be an object")
+                    continue
+                digest = source.get("sha256")
+                if not isinstance(digest, str) or len(digest) != 64:
+                    errors.append(f"source_artifacts.{source_id}.sha256 must be a SHA-256 digest")
+                if not isinstance(source.get("path"), str) or not source.get("path"):
+                    errors.append(f"source_artifacts.{source_id}.path must be nonempty")
+
+    if errors:
+        raise V060ReadinessError("; ".join(errors))
+    return {
+        "schema_version": READINESS_SCHEMA,
+        "status": "VALID",
+        "strict_blocking_check_count": len(strict_blockers),
+        "component_row_count": len(components),
+        "accident_family_row_count": len(family_rows),
+        "invariant_count": 12,
+    }
+
+
+__all__ = [
+    "READINESS_SCHEMA",
+    "V060ReadinessError",
+    "build_v060_readiness_report",
+    "validate_v060_readiness_report",
+]

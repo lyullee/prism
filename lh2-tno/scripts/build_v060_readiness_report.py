@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -11,7 +12,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from lh2_tno.v060_readiness import build_v060_readiness_report  # noqa: E402
+from lh2_tno.v060_readiness import (  # noqa: E402
+    build_v060_readiness_report,
+    validate_v060_readiness_report,
+)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -19,6 +23,16 @@ def _load(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return value
+
+
+def _source_artifact(path: Path) -> dict[str, str]:
+    resolved = path.resolve()
+    digest = hashlib.sha256(resolved.read_bytes()).hexdigest()
+    try:
+        display_path = resolved.relative_to(ROOT).as_posix()
+    except ValueError:
+        display_path = str(resolved)
+    return {"path": display_path, "sha256": digest}
 
 
 def main() -> int:
@@ -44,6 +58,19 @@ def main() -> int:
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
+    report["source_artifacts"] = {
+        "objective_audit": _source_artifact(args.objective_audit),
+        "union_verification": _source_artifact(args.union_verification),
+        "scope_matrix": _source_artifact(args.scope_matrix),
+        "facility_assessment": _source_artifact(args.facility_assessment),
+        "completion_audit": _source_artifact(args.completion_audit),
+        "validation_matrix": _source_artifact(args.validation_matrix),
+        "realtime_benchmark": _source_artifact(args.realtime_benchmark),
+    }
+    try:
+        validation = validate_v060_readiness_report(report)
+    except ValueError as error:
+        raise SystemExit(f"v0.6.0 readiness invariant error: {error}") from error
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({
@@ -53,6 +80,7 @@ def main() -> int:
         "case_count": report["chain"]["case_count"],
         "risk_atom_count": report["chain"]["risk_atom_count"],
         "strict_blocking_check_ids": report["strict_blocking_check_ids"],
+        "validation": validation,
         "output": str(args.output),
     }, ensure_ascii=False))
     return 0

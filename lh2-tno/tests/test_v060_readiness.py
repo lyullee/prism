@@ -1,4 +1,12 @@
-from lh2_tno.v060_readiness import build_v060_readiness_report
+from copy import deepcopy
+
+import pytest
+
+from lh2_tno.v060_readiness import (
+    V060ReadinessError,
+    build_v060_readiness_report,
+    validate_v060_readiness_report,
+)
 
 
 def _inputs():
@@ -68,3 +76,27 @@ def test_report_marks_explicit_exclusions_and_withheld_cases():
     assert report["chain"]["qualified_evidence_withheld_case_count"] == 1
     assert report["equipment"]["component_rows"][0]["strict_gate_categories"] == ["MISSING_PROVIDER_CASES"]
     assert report["validation_domains"][0]["status"] == "RESTRICTED_COMPONENT_EVIDENCE"
+
+
+def test_report_validator_accepts_current_fail_closed_shape():
+    report = build_v060_readiness_report(**_inputs())
+    result = validate_v060_readiness_report(report)
+    assert result["status"] == "VALID"
+    assert result["strict_blocking_check_count"] == 2
+    assert result["accident_family_row_count"] == 1
+
+
+def test_report_validator_rejects_promotion_while_strict_gates_remain_open():
+    report = build_v060_readiness_report(**_inputs())
+    report = deepcopy(report)
+    report["promotion"]["complete_facility_qra_claim"] = True
+    with pytest.raises(V060ReadinessError, match="complete_facility_qra_claim=true"):
+        validate_v060_readiness_report(report)
+
+
+def test_report_validator_rejects_case_accounting_drift():
+    report = build_v060_readiness_report(**_inputs())
+    report = deepcopy(report)
+    report["chain"]["conditional_executed_case_count"] = 2
+    with pytest.raises(V060ReadinessError, match="conditional cases"):
+        validate_v060_readiness_report(report)

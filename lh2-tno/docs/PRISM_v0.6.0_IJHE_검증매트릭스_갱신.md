@@ -104,12 +104,17 @@ python scripts/bind_native_full_scope_union_evidence.py `
 - cache와 fresh physics 처리시간, campaign p95/p99
 - SLABx-LH2를 포함한 검증 domain과 제한된 주장 범위
 - 조건부 chain 완료 기준 A~E와 시설 전체 QRA 승격을 막는 strict gate
+- 입력 감사 파일 7개의 저장 경로와 SHA-256 digest
 
 원장은 계산을 다시 수행하거나 부족한 증거를 추정하지 않는다. 따라서 현재
 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN` 및
 `INCOMPLETE_EVIDENCE` 상태를 그대로 보존하며, qualified provider evidence,
 독립 물리검증, 엄격한 시설 범위, 시설 전체 QRA의 네 gate가 열려 있음을
 명시한다.
+
+생성기는 원장을 저장하기 전에 case 수 보존, 사고 family 수, 조건부 실행 회계,
+센서 빈도 학습 제외, strict gate가 남아 있을 때의 승격 플래그를 자동 검사한다.
+검사에 실패하면 결과 파일을 정상 원장으로 쓰지 않는다.
 
 재생 명령은 다음과 같다.
 
