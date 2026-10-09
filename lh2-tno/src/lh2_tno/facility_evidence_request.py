@@ -77,6 +77,11 @@ def build_facility_evidence_request(
     scope_matrix = _mapping(scope_matrix, "scope_matrix")
     ledger = _mapping(assessment.get("facility_risk_ledger"), "assessment.facility_risk_ledger")
     matrix_rows = _rows(scope_matrix.get("rows", ()), "scope_matrix.rows")
+    facility_promotion_gate = (
+        assessment.get("facility_total_risk_available") is True
+        and assessment.get("qualified_facility_qra_available") is True
+        and assessment.get("complete_facility_qra_claim") is True
+    )
 
     family_rows: list[dict[str, Any]] = []
     for row in matrix_rows:
@@ -93,6 +98,11 @@ def build_facility_evidence_request(
             family,
             ("provider-specific accident history for the declared family",),
         )
+        strict_uncomputed_case_count = row.get("uncomputed_case_count", 0)
+        family_scope_ready = (
+            not_applicable
+            or (status == "EXECUTED" and strict_uncomputed_case_count == 0)
+        )
         family_rows.append(
             {
                 "family": family,
@@ -103,7 +113,7 @@ def build_facility_evidence_request(
                 "generated_event_count": row.get("generated_event_count", 0),
                 "executed_case_count": row.get("executed_case_count", 0),
                 "uncomputed_case_count": row.get("uncomputed_case_count", 0),
-                "strict_uncomputed_case_count": row.get("uncomputed_case_count", 0),
+                "strict_uncomputed_case_count": strict_uncomputed_case_count,
                 "conditional_executed_case_count": row.get(
                     "conditional_executed_case_count", row.get("executed_case_count", 0)
                 ),
@@ -122,7 +132,19 @@ def build_facility_evidence_request(
                 ),
                 "promotion_allowed_now": (
                     not_applicable
-                    or (status == "EXECUTED" and row.get("uncomputed_case_count", 0) == 0)
+                    or family_scope_ready
+                ),
+                "family_scope_ready": family_scope_ready,
+                "facility_promotion_allowed_now": family_scope_ready and facility_promotion_gate,
+                "facility_promotion_blocking_reasons": (
+                    []
+                    if family_scope_ready and facility_promotion_gate
+                    else list(dict.fromkeys([
+                        *([] if family_scope_ready else [f"{family}: {status}"]),
+                        *([] if facility_promotion_gate else [
+                            "facility qualified IR/F-N gate is closed"
+                        ]),
+                    ]))
                 ),
             }
         )
@@ -184,6 +206,7 @@ def build_facility_evidence_request(
             "complete_facility_qra_claim": ledger.get(
                 "complete_facility_qra_claim", False
             ),
+            "facility_promotion_allowed_now": facility_promotion_gate,
         },
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blockers)),
         "family_requests": family_rows,

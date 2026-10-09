@@ -43,3 +43,5 @@
 증거 요청서도 이 회계를 사용한다. 가족별 요청 행은 조건부 실행 수, 조건부 미계산 수, 엄격 보류 수와 엄격 차단 이유를 함께 보여주므로, 다음 실제 provider 자료의 우선순위를 바로 정할 수 있다.
 
 범위 병합기에도 family별 완전 계산·운영자 제한·domain incomplete·실패 수와 strict 차단 이유를 보존하도록 추가했다. 따라서 캠페인을 합친 뒤에도 어떤 family의 수치 chain과 어떤 provider 자격이 남아 있는지 추적할 수 있다.
+
+증거 요청서는 family scope 준비 상태와 시설 전체 QRA 승격 상태를 별도 필드로 기록한다. 일부 family가 `EXECUTED`여도 시설 적격 IR/F-N gate가 닫혀 있으면 `facility_promotion_allowed_now=false`로 남는다.
