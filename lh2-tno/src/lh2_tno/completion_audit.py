@@ -1042,6 +1042,9 @@ def build_ijhe_completion_audit(
                     ),
                     "conditional_diagnostic_facility_annual_ir_low_high": conditional_ir,
                     "conditional_diagnostic_facility_expected_death_fn_low_high": conditional_fn,
+                    "conditional_diagnostic_facility_expected_death_fn_diagnostics": assessment.get(
+                        "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+                    ),
                     "coverage": coverage,
                     "facility_total_risk_available": assessment.get(
                         "facility_total_risk_available"

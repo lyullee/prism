@@ -471,6 +471,12 @@ def _facility_assessment(**overrides):
             [[0.0, 0.0]],
             [[0.0, 0.0]],
         ],
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": {
+            "status": "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
+            "endpoint_level_count_low_high": [0, 0],
+            "max_expected_deaths_low_high": [0.0, 0.0],
+            "curve_uses_threshold": "N >= 1 expected deaths",
+        },
         "conditional_diagnostic_facility_coverage": {
             "event_count": 24,
             "case_count": 24,
@@ -870,6 +876,9 @@ def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_t
     assert check["diagnostic_only"] is True
     assert check["blocking_reason"] is None
     assert check["evidence"]["coverage"]["risk_atom_count"] == 96
+    assert check["evidence"][
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+    ]["status"] == "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS"
     assert report["complete_facility_qra_claim"] is False
     assert len(report["blocking_reasons"]) == 6
 
