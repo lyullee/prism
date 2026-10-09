@@ -2195,7 +2195,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, and partial-provider precedence accounting; full portable suite 508 passed",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, and partial-provider precedence accounting; full portable suite 509 passed, 1 skipped",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -2437,8 +2437,8 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 508,
-  "full_portable_test_status": "508 passed",
+  "full_portable_test_count": 509,
+  "full_portable_test_status": "509 passed, 1 skipped",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -2694,5 +2694,12 @@
     "MISSING_PROVIDER_CASES",
     "OPERATOR_LIMITED_INPUT"
   ],
-  "facility_evidence_request_strict_gate_taxonomy_policy": "Categories identify missing provider cases, operator-limited inputs, domain gaps, failed cases and residual family scope; they do not infer frequency or promote facility QRA."
+  "facility_evidence_request_strict_gate_taxonomy_policy": "Categories identify missing provider cases, operator-limited inputs, domain gaps, failed cases and residual family scope; they do not infer frequency or promote facility QRA.",
+  "facility_ledger_latest_component_coverage_count": 12,
+  "facility_ledger_latest_component_coverage_schema": "component_coverage.v1; case identity is event+annual_condition+release_branch+ignition; strict evidence rows retained",
+  "facility_assessment_latest_component_coverage_count": 12,
+  "facility_evidence_request_latest_component_coverage_included": true,
+  "facility_component_case_accounting_implemented": true,
+  "facility_component_case_accounting_scope": "provider component_id first; event model_component_id fallback; conditional cases deduplicated by event/condition/release/ignition; strict rows retained",
+  "facility_component_case_accounting_gate_policy": "MISSING_PROVIDER_CASES, OPERATOR_LIMITED_INPUT, DOMAIN_INCOMPLETE, FAILED_PROVIDER_CASE and FAMILY_SCOPE_PARTIAL are diagnostic categories only; no frequency inference or QRA promotion"
 }

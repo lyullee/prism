@@ -79,6 +79,52 @@ def _case_identity(row: Mapping[str, Any]) -> tuple[str, ...]:
     return (event_id,)
 
 
+def _case_component_id(
+    row: Mapping[str, Any], event_component: Mapping[str, str]
+) -> str:
+    """Resolve the equipment model that owns a case row.
+
+    Native provider packets carry their component in ``provider_packet_identity``;
+    older campaign rows may expose it directly or only through the event.  The
+    event fallback keeps the ledger compatible with those legacy rows while an
+    explicit ``UNMAPPED_COMPONENT`` value makes a broken handoff visible.
+    """
+    provider_identity = row.get("provider_packet_identity")
+    if isinstance(provider_identity, Mapping):
+        component_id = provider_identity.get("component_id")
+        if component_id:
+            return str(component_id)
+    for key in ("component_id", "model_component_id"):
+        component_id = row.get(key)
+        if component_id:
+            return str(component_id)
+    event_id = str(row.get("event_id", ""))
+    return str(event_component.get(event_id, "UNMAPPED_COMPONENT"))
+
+
+def _component_gate_categories(
+    *,
+    status: str,
+    strict_uncomputed_case_count: int,
+    operator_limited_case_count: int,
+    domain_incomplete_case_count: int,
+    failed_case_count: int,
+) -> list[str]:
+    """Classify component blockers using the facility evidence taxonomy."""
+    categories: list[str] = []
+    if strict_uncomputed_case_count:
+        categories.append("MISSING_PROVIDER_CASES")
+    if operator_limited_case_count:
+        categories.append("OPERATOR_LIMITED_INPUT")
+    if domain_incomplete_case_count:
+        categories.append("DOMAIN_INCOMPLETE")
+    if failed_case_count:
+        categories.append("FAILED_PROVIDER_CASE")
+    if status not in {"EXECUTED", "NOT_APPLICABLE"} and not categories:
+        categories.append("FAMILY_SCOPE_PARTIAL")
+    return categories
+
+
 def _validate_atoms(
     atoms: Sequence[Any],
     *,
@@ -544,6 +590,100 @@ def merge_facility_campaign_results(
         count for status, count in case_status_counts.items()
         if "FAILED" in status
     )
+    # Keep the same case identity and fail-closed semantics at equipment
+    # level.  This is the machine-readable answer to "which equipment was
+    # actually joined to the facility chain?" and prevents a facility total
+    # from hiding a missing or operator-limited component handoff.
+    component_case_status_by_identity: dict[str, dict[tuple[str, ...], str]] = defaultdict(dict)
+    component_strict_uncomputed_counts: dict[str, int] = defaultdict(int)
+    component_strict_uncomputed_status_counts: dict[str, dict[str, int]] = defaultdict(
+        lambda: defaultdict(int)
+    )
+    for case in merged_cases:
+        component_id = _case_component_id(case, event_component)
+        identity = _case_identity(case)
+        status = str(case.get("status", "UNKNOWN"))
+        previous = component_case_status_by_identity[component_id].get(identity)
+        if previous is None or (
+            not previous.startswith("EXECUTED") and status.startswith("EXECUTED")
+        ):
+            component_case_status_by_identity[component_id][identity] = status
+    for case in merged_missing:
+        component_id = _case_component_id(case, event_component)
+        identity = _case_identity(case)
+        status = str(case.get("status", "UNKNOWN"))
+        component_strict_uncomputed_counts[component_id] += 1
+        component_strict_uncomputed_status_counts[component_id][status] += 1
+        previous = component_case_status_by_identity[component_id].get(identity)
+        if previous is None:
+            component_case_status_by_identity[component_id][identity] = status
+
+    component_event_ids: dict[str, set[str]] = defaultdict(set)
+    for event in merged_events:
+        component_event_ids[str(event["model_component_id"])].add(str(event["id"]))
+    component_coverage: dict[str, dict[str, Any]] = {}
+    coverage_component_ids = (
+        set(expected_components)
+        | set(observed_components)
+        | set(component_statuses)
+        | set(component_case_status_by_identity)
+        | set(component_atoms)
+    )
+    for component_id in sorted(coverage_component_ids):
+        statuses_for_component = component_case_status_by_identity.get(component_id, {})
+        status_counts: dict[str, int] = defaultdict(int)
+        for status in statuses_for_component.values():
+            status_counts[status] += 1
+        component_conditional_case_count = len(statuses_for_component)
+        component_conditional_executed_case_count = sum(
+            status.startswith("EXECUTED") for status in statuses_for_component.values()
+        )
+        component_conditional_uncomputed_case_count = (
+            component_conditional_case_count - component_conditional_executed_case_count
+        )
+        component_operator_limited_count = sum(
+            count for status, count in status_counts.items()
+            if "OPERATOR_LIMITED" in status
+        )
+        component_domain_incomplete_count = sum(
+            count for status, count in status_counts.items()
+            if "DOMAIN_INCOMPLETE" in status
+        )
+        component_failed_count = sum(
+            count for status, count in status_counts.items()
+            if "FAILED" in status
+        )
+        component_status = component_statuses.get(
+            component_id,
+            "MISSING_COVERAGE_LEDGER" if component_id in expected_components else "UNKNOWN_COMPONENT",
+        )
+        strict_count = component_strict_uncomputed_counts.get(component_id, 0)
+        component_coverage[component_id] = {
+            "component_id": component_id,
+            "status": component_status,
+            "event_count": len(component_event_ids.get(component_id, set())),
+            "event_ids": sorted(component_event_ids.get(component_id, set())),
+            "conditional_case_count": component_conditional_case_count,
+            "conditional_executed_case_count": component_conditional_executed_case_count,
+            "conditional_uncomputed_case_count": component_conditional_uncomputed_case_count,
+            "strict_uncomputed_case_count": strict_count,
+            "operator_limited_case_count": component_operator_limited_count,
+            "domain_incomplete_case_count": component_domain_incomplete_count,
+            "failed_case_count": component_failed_count,
+            "risk_atom_count": len(component_atoms.get(component_id, [])),
+            "case_status_counts": dict(sorted(status_counts.items())),
+            "strict_uncomputed_status_counts": dict(
+                sorted(component_strict_uncomputed_status_counts.get(component_id, {}).items())
+            ),
+            "strict_gate_categories": _component_gate_categories(
+                status=component_status,
+                strict_uncomputed_case_count=strict_count,
+                operator_limited_case_count=component_operator_limited_count,
+                domain_incomplete_case_count=component_domain_incomplete_count,
+                failed_case_count=component_failed_count,
+            ),
+            "frequency_is_not_reallocated": True,
+        }
     component_contributions: dict[str, dict[str, Any]] = {}
     for component_id in sorted(observed_components):
         atoms = component_atoms.get(component_id, [])
@@ -565,6 +705,7 @@ def merge_facility_campaign_results(
                 _fn_curve(atoms, endpoint) for endpoint in range(2)
             ],
             "frequency_is_not_reallocated": True,
+            "coverage": component_coverage.get(component_id, {}),
         }
     scenario_family_contributions: dict[str, dict[str, Any]] = {}
     for family, atoms in sorted(family_atoms.items()):
@@ -637,6 +778,7 @@ def merge_facility_campaign_results(
             status: sum(value == status for value in component_statuses.values())
             for status in sorted(set(component_statuses.values()))
         },
+        "component_case_accounting": component_coverage,
         "required_accident_family_count": len(required_accident_families),
         "scope_blocker_count": len(unique_blocking),
     }
@@ -660,6 +802,8 @@ def merge_facility_campaign_results(
         "risk_atoms": merged_atoms,
         "risk_atoms_digest": canonical_digest(merged_atoms),
         "component_contributions": component_contributions,
+        "component_coverage_schema": "prism.component_coverage.v1",
+        "component_coverage": component_coverage,
         "scenario_family_contributions": scenario_family_contributions,
         "observed_asset_ids": sorted(seen_assets),
         "observed_component_ids": sorted(observed_components),
@@ -713,6 +857,11 @@ def merge_facility_campaign_results(
                 "facility IR/F-N is calculated from the atoms that reached the risk ledger, "
                 "but remains diagnostic-only whenever declared scope, physical validation, "
                 "or release-horizon blockers are present"
+            ),
+            "component_coverage": (
+                "each case is assigned to its provider component when available, then to its "
+                "event component; conditional case identities are deduplicated, while strict "
+                "uncomputed counts retain raw evidence rows and never create a frequency"
             ),
             "scenario_family_contributions": (
                 "risk atoms retain their declared scenario_families; overlapping physical "

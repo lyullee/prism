@@ -199,15 +199,52 @@ def build_facility_evidence_request(
     component_statuses = ledger.get("component_statuses", {})
     if not isinstance(component_statuses, Mapping):
         raise ValueError("assessment.facility_risk_ledger.component_statuses must be an object")
-    components = [
-        {
-            "component_id": str(component_id),
-            "current_status": str(status),
-            "required_evidence": list(_COMMON_REQUIREMENTS),
-        }
-        for component_id, status in sorted(component_statuses.items())
-        if str(status) != "EXCLUDED"
-    ]
+    component_coverage = ledger.get("component_coverage", {})
+    if not isinstance(component_coverage, Mapping):
+        component_coverage = {}
+    components: list[dict[str, Any]] = []
+    for component_id, status in sorted(component_statuses.items()):
+        if str(status) == "EXCLUDED":
+            continue
+        coverage = component_coverage.get(str(component_id), {})
+        if not isinstance(coverage, Mapping):
+            coverage = {}
+        gate_categories = [
+            str(category) for category in coverage.get("strict_gate_categories", ())
+        ]
+        components.append(
+            {
+                "component_id": str(component_id),
+                "current_status": str(status),
+                "event_count": coverage.get("event_count", 0),
+                "conditional_case_count": coverage.get("conditional_case_count", 0),
+                "conditional_executed_case_count": coverage.get(
+                    "conditional_executed_case_count", 0
+                ),
+                "conditional_uncomputed_case_count": coverage.get(
+                    "conditional_uncomputed_case_count", 0
+                ),
+                "strict_uncomputed_case_count": coverage.get(
+                    "strict_uncomputed_case_count", 0
+                ),
+                "operator_limited_case_count": coverage.get(
+                    "operator_limited_case_count", 0
+                ),
+                "risk_atom_count": coverage.get("risk_atom_count", 0),
+                "strict_gate_categories": gate_categories,
+                "strict_gate_requirements": [
+                    _GATE_REQUIREMENTS[category]
+                    for category in gate_categories
+                    if category in _GATE_REQUIREMENTS
+                ],
+                "required_evidence": list(_COMMON_REQUIREMENTS)
+                + [
+                    _GATE_REQUIREMENTS[category]
+                    for category in gate_categories
+                    if category in _GATE_REQUIREMENTS
+                ],
+            }
+        )
     excluded_components = [
         {"component_id": str(component_id), "current_status": str(status)}
         for component_id, status in sorted(component_statuses.items())
@@ -222,6 +259,10 @@ def build_facility_evidence_request(
         category
         for row in family_rows
         for category in row["strict_gate_categories"]
+    } | {
+        category
+        for component in components
+        for category in component["strict_gate_categories"]
     })
 
     return {

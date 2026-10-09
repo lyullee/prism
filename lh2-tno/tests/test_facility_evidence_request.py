@@ -16,6 +16,20 @@ def _assessment() -> dict:
             "physical_validation_claim": False,
             "blocking_reasons": ["family pipe_hole: PARTIAL", "family pipe_hole: PARTIAL"],
             "component_statuses": {"pipe-01": "PARTIAL", "vent-01": "EXECUTED", "boundary-01": "EXCLUDED"},
+            "component_coverage": {
+                "pipe-01": {
+                    "event_count": 2,
+                    "conditional_case_count": 3,
+                    "conditional_executed_case_count": 2,
+                    "conditional_uncomputed_case_count": 1,
+                    "strict_uncomputed_case_count": 1,
+                    "operator_limited_case_count": 2,
+                    "risk_atom_count": 4,
+                    "strict_gate_categories": [
+                        "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
+                    ],
+                },
+            },
         },
     }
 
@@ -62,6 +76,14 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     assert report["frequency_policy"]["infer_frequency_from_provider_or_sensor"] is False
     assert {row["component_id"] for row in report["component_requests"]} == {"pipe-01", "vent-01"}
     assert report["excluded_components"] == [{"component_id": "boundary-01", "current_status": "EXCLUDED"}]
+    pipe = next(row for row in report["component_requests"] if row["component_id"] == "pipe-01")
+    assert pipe["conditional_executed_case_count"] == 2
+    assert pipe["conditional_uncomputed_case_count"] == 1
+    assert pipe["strict_gate_categories"] == [
+        "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
+    ]
+    assert len(pipe["strict_gate_requirements"]) == 2
+    assert "operator-limited boundary inputs" in " ".join(pipe["required_evidence"])
 
 
 def test_request_preserves_facility_level_conditional_case_accounting():

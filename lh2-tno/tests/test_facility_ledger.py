@@ -115,6 +115,59 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["scenario_family_contributions"] == {}
 
 
+def test_facility_ledger_exposes_component_case_accounting_and_gate_categories():
+    result = _result(
+        event_id="event-component-ledger",
+        asset_id="asset-component-ledger",
+        component_id="pipe-01",
+        frequency=1e-3,
+        incomplete=True,
+    )
+    result["cases"][0]["status"] = "EXECUTED_OPERATOR_LIMITED"
+    result["cases"][0]["provider_packet_identity"] = {"component_id": "pipe-01"}
+    result["uncomputed_cases"][0]["status"] = "EXECUTED_OPERATOR_LIMITED"
+    result["uncomputed_cases"][0]["provider_packet_identity"] = {"component_id": "pipe-01"}
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("pipe-01", "tank-01")
+    )
+
+    coverage = merged["component_coverage"]["pipe-01"]
+    assert merged["component_coverage_schema"] == "prism.component_coverage.v1"
+    assert coverage["event_count"] == 1
+    assert coverage["conditional_case_count"] == 1
+    assert coverage["conditional_executed_case_count"] == 1
+    assert coverage["conditional_uncomputed_case_count"] == 0
+    assert coverage["strict_uncomputed_case_count"] == 1
+    assert coverage["operator_limited_case_count"] == 1
+    assert coverage["strict_gate_categories"] == [
+        "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
+    ]
+    assert merged["component_contributions"]["pipe-01"]["coverage"] == coverage
+
+    missing = merged["component_coverage"]["tank-01"]
+    assert missing["status"] == "MISSING_COVERAGE_LEDGER"
+    assert missing["conditional_case_count"] == 0
+    assert missing["strict_gate_categories"] == ["FAMILY_SCOPE_PARTIAL"]
+
+
+def test_facility_ledger_assigns_legacy_case_rows_from_event_component():
+    result = _result(
+        event_id="event-legacy-component",
+        asset_id="asset-legacy-component",
+        component_id="tank-legacy",
+        frequency=1e-3,
+    )
+    result["cases"][0].pop("provider_packet_identity", None)
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-legacy",)
+    )
+    coverage = merged["conditional_diagnostic_facility_coverage"][
+        "component_case_accounting"
+    ]["tank-legacy"]
+    assert coverage["conditional_executed_case_count"] == 1
+    assert coverage["event_ids"] == ["event-legacy-component"]
+
+
 def test_facility_ledger_promotes_qualified_qra_only_after_packet_and_validation_gates():
     result = _result(
         event_id="event-qualified", asset_id="asset-qualified",
