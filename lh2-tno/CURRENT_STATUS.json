@@ -2902,5 +2902,18 @@
   "native_generic_scope_packet_campaign_ledger_record": "results/20261023/native_generic_scope_packet_campaign_ledger_v10.json",
   "native_generic_scope_packet_campaign_ledger_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED; 24 events/cases; 24 chain-executed; 0 failed; packet identity and digest consumed for all 24; facility risk withheld",
   "native_generic_scope_frequency_uncertainty_record": "results/20261023/native_generic_scope_frequency_uncertainty_v8.json",
-  "native_generic_scope_frequency_uncertainty_status": "5 literature reweighting scenarios; fresh physics false; facility credible interval false; correlation comparison present"
+  "native_generic_scope_frequency_uncertainty_status": "5 literature reweighting scenarios; fresh physics false; facility credible interval false; correlation comparison present",
+  "native_generic_scope_vertical_merged_facility_ledger_record": "results/20261023/native_generic_scope_vertical_merged_facility_ledger_repaired_v1.json",
+  "native_generic_scope_vertical_merged_scope_matrix_record": "results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json",
+  "native_generic_scope_vertical_merged_ledger_consistency_record": "results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json",
+  "native_generic_scope_vertical_merged_campaign_status": "PARTIAL_FACILITY_SCOPE; generic v12 plus vertical all-bin diagnostic; 29 events; 34 cases; 136 risk atoms; facility total withheld",
+  "native_generic_scope_vertical_merged_audit_record": "results/20261023/ijhe_completion_audit_native_generic_scope_vertical_v3.json",
+  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 19 checks, 3 blocking reasons; vertical handoff is represented in the merged scope as PARTIAL",
+  "native_generic_scope_vertical_merged_audit_blockers": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ],
+  "native_generic_scope_vertical_merged_consistency_status": "CONSISTENT_SCOPE_LEDGER; 29 scope events and 29 ledger events; conditional uncomputed count 0",
+  "native_generic_scope_vertical_merged_vertical_handoff_status": "PARTIAL; five area-bin events and ten weather/case records, synthetic/operator-limited provider handoff, no facility IR/F-N promotion"
 }

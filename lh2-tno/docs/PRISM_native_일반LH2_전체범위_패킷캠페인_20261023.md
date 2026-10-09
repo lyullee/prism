@@ -89,7 +89,7 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
 
 ## 범위와 빈도 판정
 
-`results/20261023/native_generic_scope_matrix_v6.json`은 12개 사고 family를 감사한다. 저장탱크·액체/2상·재고소진은 `PARTIAL`, 수직 handoff는 `NO_EVENT_GENERATED`, 시설 전체 IR/F-N은 보류다. `results/20261023/native_generic_scope_ledger_consistency_v6.json`은 24개 event ID와 실제 원장을 비교해 `CONSISTENT_SCOPE_LEDGER`를 반환했다.
+`results/20261023/native_generic_scope_matrix_v6.json`은 generic native campaign의 12개 사고 family를 감사한다. generic campaign만 보면 수직 handoff는 `NO_EVENT_GENERATED`였지만, 별도 all-bin 수직 handoff 진단을 공통 시설 namespace로 결합한 최신 병합 범위표에서는 `vertical_handoff: PARTIAL`로 기록된다. 병합 결과 `results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json`은 29개 event·34개 case를 보존하며, 저장탱크·액체/2상·재고소진·양단 파열과 수직 handoff의 strict 상태를 승격하지 않는다. `results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json`은 병합 범위표와 시설 원장의 29개 event ID를 비교해 `CONSISTENT_SCOPE_LEDGER`를 반환했다.
 
 `results/20261023/native_generic_scope_frequency_uncertainty_v8.json`은 문헌 빈도만 다시 가중하는 5개 시나리오를 계산했다. 새 물리 계산을 다시 하지 않았고, facility credible interval도 만들지 않았다. 이는 빈도 문헌의 불확실성을 표시하는 기능이며 현장 빈도 학습이 아니다.
 
@@ -98,7 +98,8 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
 - `native_generic_scope_packet_coverage_v7.json`: 24개 packet identity와 24개 consequence-chain event identity를 확인했지만, 빈도를 packet에 자동 결합하지 않는다.
 - `native_generic_scope_packet_campaign_ledger_v10.json`: 24개 event/case, 24개 chain 실행, 실패 0개, 24개 packet identity/digest 소비를 기록한다.
 - `native_generic_scope_worklist_packet_evidence_v7.json`: worklist 24개, candidate 24개, exact/strict 24개, consequence-chain 24개를 확인한다. 모두 synthetic diagnostic evidence다.
-- `ijhe_completion_audit_native_generic_scope_v12.json`: 19개 검사 중 16개 PASS, 3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다.
+- `ijhe_completion_audit_native_generic_scope_v12.json`: generic native campaign 기준 19개 검사 중 16개 PASS, 3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다.
+- `ijhe_completion_audit_native_generic_scope_vertical_v3.json`: generic v12와 all-bin vertical handoff를 병합한 최신 감사다. 19개 검사 중 16개 PASS, 3개 BLOCKED이며, vertical handoff가 병합 범위표에 `PARTIAL`로 들어갔음을 확인한다.
 
 남은 세 가지 차단 이유는 다음과 같다.
 
@@ -106,4 +107,12 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
 2. 선언한 주요 사고 범위에 partial·미계산 family가 있다.
 3. 위 두 이유 때문에 시설 IR/F-N을 제공할 수 없다.
 
-따라서 현재 결과는 “설비 상태에서 방출을 만들고, 방출을 SLABx-LH2/SLABx와 피해 계산까지 연결하는 진단 체인”의 증거다. 일반 액화수소시설의 완전한 QRA나 IJHE용 검증 완료 결과가 아니다. IJHE 원고에는 이 경계를 그대로 쓰고, 다음 단계는 현장 설비 provider packet·수직 handoff·액체 flash/재고 종료 검증·독립 실험 비교로 제한하는 것이 맞다.
+따라서 현재 결과는 “설비 상태에서 방출을 만들고, 방출을 SLABx-LH2/SLABx와 피해 계산까지 연결하며, 수직 handoff를 시설 event ledger에 결합하는 진단 체인”의 증거다. 일반 액화수소시설의 완전한 QRA나 IJHE용 검증 완료 결과가 아니다. IJHE 원고에는 이 경계를 그대로 쓰고, 다음 단계는 현장 설비 provider packet·수직 handoff의 독립 검증·액체 flash/재고 종료 검증·독립 실험 비교로 제한하는 것이 맞다.
+
+## 수직 handoff를 generic 시설 원장에 결합한 최신 진단
+
+generic v12 campaign에는 수직 handoff 사건이 생성되지 않았기 때문에, 기존 `results/20261020/vertical_vent_all_bins/verification.json`의 all-bin 진단을 별도 namespace로 보존한 뒤 `scripts/merge_facility_campaigns.py`로 generic campaign과 병합했다. 이 단계는 새 사고빈도를 만들지 않고, 수직 벤트의 `AREA_0.01%`, `AREA_0.1%`, `AREA_1%`, `AREA_10%`, `AREA_100%` 다섯 event와 두 기상 조건의 10개 case를 기존 시설 ID 아래에 기록하는 회계 결합이다.
+
+최신 병합 원장은 [`native_generic_scope_vertical_merged_facility_ledger_repaired_v1.json`](../results/20261023/native_generic_scope_vertical_merged_facility_ledger_repaired_v1.json)이며 29개 event, 34개 case, 136개 risk atom을 보유한다. 병합 범위표 [`native_generic_scope_vertical_merged_scope_matrix_v1.json`](../results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json)는 12개 family를 다시 확인하고 `vertical_handoff: PARTIAL`을 유지한다. 조건부 chain은 모두 도달했지만 strict 상태에는 operator-limited와 domain-incomplete가 남는다.
+
+`audit_scope_ledger_consistency.py`의 결과 [`native_generic_scope_vertical_merged_ledger_consistency_v1.json`](../results/20261023/native_generic_scope_vertical_merged_ledger_consistency_v1.json)는 scope event 29개와 ledger event 29개가 일치하는 `CONSISTENT_SCOPE_LEDGER`다. 이 결과는 event·case 회계가 맞는다는 뜻이며, provider 자격·독립 물리검증·시설 IR/F-N을 의미하지 않는다. 최신 IJHE 감사 [`ijhe_completion_audit_native_generic_scope_vertical_v3.json`](../results/20261023/ijhe_completion_audit_native_generic_scope_vertical_v3.json)는 이 병합을 읽어도 `INCOMPLETE_EVIDENCE`를 유지하고, 실제 provider packet 부재·partial 사고군·시설 IR/F-N 보류 세 가지 차단 이유를 남긴다.

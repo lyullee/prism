@@ -942,6 +942,33 @@ def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_prom
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_marks_vertical_handoff_as_merged_when_scope_row_exists():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        {
+            **_matrix(complete=False),
+            "rows": [{"family": "vertical_handoff", "generated_event_count": 5}],
+        },
+        _campaign_result(False),
+        None,
+        vertical_handoff_result={
+            "status": "PARTIAL_DECLARED_SCOPE",
+            "generated_events": 5,
+            "executed_cases": 10,
+            "provider_vertical_handoff_consumed": True,
+            "operator_limited": True,
+            "facility_total_risk_withheld": True,
+            "physical_validation_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_vertical_handoff_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert "merged facility scope matrix" in check["interpretation"]
+
+
 def test_completion_audit_records_packet_to_campaign_structural_binding():
     report = build_ijhe_completion_audit(
         _status(False),

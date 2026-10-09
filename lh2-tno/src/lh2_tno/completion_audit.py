@@ -1117,6 +1117,28 @@ def build_ijhe_completion_audit(
             and vertical.get("facility_total_risk_withheld") is True
             and vertical.get("physical_validation_claim") is False
         )
+        scope_rows = scope_matrix.get("rows", [])
+        merged_vertical_handoff = (
+            any(
+                isinstance(row, Mapping)
+                and row.get("family") == "vertical_handoff"
+                and int(row.get("generated_event_count", 0) or 0) > 0
+                for row in scope_rows
+            )
+            if isinstance(scope_rows, list)
+            else False
+        )
+        vertical_interpretation = (
+            "The vertical-to-horizontal provider handoff diagnostic consumed a declared "
+            "handoff boundary and is represented in the merged facility scope matrix; it "
+            "remains synthetic/operator-limited and is not promoted to a qualified vertical "
+            "accident family."
+            if merged_vertical_handoff
+            else
+            "A separate vertical-to-horizontal provider handoff diagnostic consumed a "
+            "declared handoff boundary; it is not merged into the generic facility scope "
+            "or promoted to a qualified vertical accident family."
+        )
         checks.append(
             {
                 "name": "diagnostic_vertical_handoff_evidence",
@@ -1137,11 +1159,7 @@ def build_ijhe_completion_audit(
                     ),
                     "physical_validation_claim": vertical.get("physical_validation_claim"),
                 },
-                "interpretation": (
-                    "A separate vertical-to-horizontal provider handoff diagnostic consumed a "
-                    "declared handoff boundary; it is not merged into the generic facility scope "
-                    "or promoted to a qualified vertical accident family."
-                ),
+                "interpretation": vertical_interpretation,
             }
         )
     restricted_physical_status = current_status.get("physical_validation_evidence_status")
