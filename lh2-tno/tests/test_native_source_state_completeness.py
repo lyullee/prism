@@ -14,8 +14,9 @@ _SPEC.loader.exec_module(_MODULE)
 def test_native_source_state_audit_keeps_gas_and_liquid_scope_separate():
     report = _MODULE.build()
     assert report["native_model_count"] == 7
-    assert report["gas_model_count"] == 4
-    assert report["gas_models_complete_for_compressible_adapter"] == 3
+    assert report["native_scenario_count"] == 8
+    assert report["gas_model_count"] == 5
+    assert report["gas_models_complete_for_compressible_adapter"] == 4
     assert report["gas_models_blocked_for_compressible_adapter"] == 1
     assert {entry["phase_family"] for entry in report["entries"]} == {"gas", "liquid", "liquid_or_two_phase"}
 
@@ -30,5 +31,13 @@ def test_native_source_state_audit_reports_exact_missing_fields():
     vaporizer = next(entry for entry in report["entries"] if entry["model_class"] == "DynamicVaporizer")
     assert vaporizer["compressible_adapter_status"] == "COMPLETE"
     assert vaporizer["missing_required_by_interval"] == []
+    pipe_gas = next(
+        entry
+        for entry in report["entries"]
+        if entry["model_class"] == "DynamicHEMPipe"
+        and entry["phase_family"] == "gas"
+    )
+    assert pipe_gas["compressible_adapter_status"] == "COMPLETE"
+    assert pipe_gas["missing_required_by_interval"] == []
     vent = next(entry for entry in report["entries"] if entry["model_class"] == "VentStack")
     assert vent["compressible_adapter_status"] == "INCOMPLETE"

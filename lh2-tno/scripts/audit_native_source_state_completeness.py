@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 _CASES = (
     ("LayeredTank", "results/20261025/native_layered_tank_isolation/provider_response.json", "liquid_or_two_phase"),
     ("DynamicHEMPipe", "results/20261025/native_dynamic_pipe_isolation/provider_response.json", "liquid_or_two_phase"),
+    # The same native class also has an explicit gas branch.  Keep it as a
+    # separate scenario row so the liquid/two-phase contract is never recast
+    # as gas while the optional compressible adapter can be audited against
+    # the provider's actual gas export.
+    ("DynamicHEMPipe", "results/20261026/native_dynamic_pipe_gas_horizon/provider_response.json", "gas"),
     ("StrokeLimitedCommandedValve", "results/20261025/native_stroke_valve/provider_response.json", "gas"),
     ("MappedPump", "results/20261025/native_mapped_pump/provider_response.json", "liquid"),
     ("DynamicVaporizer", "results/20261025/native_dynamic_vaporizer/provider_response.json", "gas"),
@@ -101,11 +106,13 @@ def build() -> dict[str, Any]:
             "interpretation": interpretation,
         })
     gas_entries = [entry for entry in entries if entry["phase_family"] == "gas"]
+    model_classes = sorted({entry["model_class"] for entry in entries})
     complete_gas = sum(entry["compressible_adapter_status"] == "COMPLETE" for entry in gas_entries)
     return {
         "schema_version": "prism.native_source_state_completeness.v1",
         "status": "SOURCE_STATE_AUDITED_WITH_GAS_HANDOFF_BLOCKERS",
-        "native_model_count": len(entries),
+        "native_model_count": len(model_classes),
+        "native_scenario_count": len(entries),
         "gas_model_count": len(gas_entries),
         "gas_models_complete_for_compressible_adapter": complete_gas,
         "gas_models_blocked_for_compressible_adapter": len(gas_entries) - complete_gas,

@@ -2,8 +2,9 @@
   "schema_version": "prism.native_source_state_completeness.v1",
   "status": "SOURCE_STATE_AUDITED_WITH_GAS_HANDOFF_BLOCKERS",
   "native_model_count": 7,
-  "gas_model_count": 4,
-  "gas_models_complete_for_compressible_adapter": 3,
+  "native_scenario_count": 8,
+  "gas_model_count": 5,
+  "gas_models_complete_for_compressible_adapter": 4,
   "gas_models_blocked_for_compressible_adapter": 1,
   "required_fields_for_compressible_adapter": [
     "source_specific_entropy_j_kgk",
@@ -111,6 +112,37 @@
       ],
       "compressible_adapter_status": "NOT_APPLICABLE_CURRENT_GAS_ADAPTER",
       "interpretation": "Liquid/two-phase native contract requires its own validated near-field handoff"
+    },
+    {
+      "model_class": "DynamicHEMPipe",
+      "provider_response": "results/20261026/native_dynamic_pipe_gas/provider_response.json",
+      "phase_family": "gas",
+      "provider_model": "lh2dt.dynamic_pipe.DynamicHEMPipe",
+      "interval_count": 2,
+      "provider_source_state_interval_count": 2,
+      "field_presence_counts": {
+        "source_pressure_pa_abs": 2,
+        "source_temperature_k": 2,
+        "source_density_kg_m3": 2,
+        "source_specific_enthalpy_j_kg": 2,
+        "source_specific_entropy_j_kgk": 2,
+        "throat_pressure_pa_abs": 2,
+        "throat_temperature_k": 2,
+        "throat_density_kg_m3": 2,
+        "throat_specific_enthalpy_j_kg": 2,
+        "throat_mass_flux_kg_m2_s": 2,
+        "choked": 2,
+        "provider_source_state_provenance": 2
+      },
+      "required_fields_for_compressible_adapter": [
+        "source_specific_entropy_j_kgk",
+        "throat_pressure_pa_abs",
+        "throat_density_kg_m3",
+        "throat_specific_enthalpy_j_kg"
+      ],
+      "missing_required_by_interval": [],
+      "compressible_adapter_status": "COMPLETE",
+      "interpretation": "All required source/throat fields are present for the optional adapter"
     },
     {
       "model_class": "StrokeLimitedCommandedValve",

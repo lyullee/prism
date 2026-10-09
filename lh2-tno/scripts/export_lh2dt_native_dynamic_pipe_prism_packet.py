@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     AccidentReleaseExportRequest,
+    export_equipment_gas_accident_history,
     export_equipment_liquid_accident_history,
 )
 from lh2_tno.state_snapshot import (  # noqa: E402
@@ -75,6 +76,11 @@ def _native_pipe(lh2dt_root: Path, *, length_m: float, diameter_m: float, roughn
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
+    if args.source_mode == "gas":
+        # A gas source is defined by native p-T state; carrying the two-phase
+        # quality input would change the provider branch and invalidate the
+        # source-state audit.
+        args.initial_quality = None
     if args.isolation_time_s is not None and args.isolation_time_s > args.horizon_s:
         raise ValueError("isolation time must not exceed horizon")
     source_digest = _tree_digest(root)
@@ -84,12 +90,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         diameter_m=args.pipe_diameter_m,
         roughness_m=args.roughness_m,
     )
-    source = properties.saturated_liquid(args.initial_pressure_pa_abs)
-    vapor = properties.saturated_vapor(args.initial_pressure_pa_abs)
-    source_enthalpy = source.specific_enthalpy_J_kg + args.initial_quality * (
-        vapor.specific_enthalpy_J_kg - source.specific_enthalpy_J_kg
-    )
-    source_state = properties.from_ph(args.initial_pressure_pa_abs, source_enthalpy)
+    if args.source_mode == "gas":
+        source_state = properties.from_pT(
+            args.initial_pressure_pa_abs, args.initial_temperature_k
+        )
+    else:
+        source = properties.saturated_liquid(args.initial_pressure_pa_abs)
+        vapor = properties.saturated_vapor(args.initial_pressure_pa_abs)
+        source_enthalpy = source.specific_enthalpy_J_kg + args.initial_quality * (
+            vapor.specific_enthalpy_J_kg - source.specific_enthalpy_J_kg
+        )
+        source_state = properties.from_ph(args.initial_pressure_pa_abs, source_enthalpy)
     initial_state = pipe.initialize(source_state, wall_temperature_K=args.wall_temperature_k)
     snapshot = EquipmentStateSnapshot.from_mapping({
         "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
@@ -99,7 +110,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "pressure_pa_abs": args.initial_pressure_pa_abs,
         "temperature_k": float(source_state.temperature_K),
         "mass_kg": float(initial_state.mass_kg),
-        "phase": "two_phase",
+        "phase": (
+            "vapour"
+            if source_state.phase in {"gas", "supercritical_gas", "supercritical"}
+            else "two_phase"
+        ),
         "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
         "measurements": {
             "initial_pressure": {
@@ -107,11 +122,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 "value_si": args.initial_pressure_pa_abs,
                 "sensor_location": f"{args.component_id}.fluid_volume",
             },
-            "initial_quality": {
-                "quantity": "level_fraction",
-                "value_si": args.initial_quality,
-                "sensor_location": f"{args.component_id}.fluid_volume",
-            },
+            **(
+                {
+                    "initial_quality": {
+                        "quantity": "level_fraction",
+                        "value_si": args.initial_quality,
+                        "sensor_location": f"{args.component_id}.fluid_volume",
+                    }
+                }
+                if args.initial_quality is not None
+                else {}
+            ),
         },
     })
     request = AccidentReleaseExportRequest.from_mapping({
@@ -146,7 +167,6 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "failure_mode": "explicit_failed_opening",
         "initial_pressure_pa_abs": args.initial_pressure_pa_abs,
         "initial_temperature_k": args.initial_temperature_k,
-        "initial_quality": args.initial_quality,
         "ambient_pressure_pa_abs": args.ambient_pressure_pa_abs,
         "ambient_temperature_k": args.ambient_temperature_k,
         "failure_opening_diameter_m": args.failure_opening_diameter_m,
@@ -159,12 +179,20 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_source_digest": source_digest,
         "state_snapshot_digest": snapshot.digest(),
     }
+    if args.initial_quality is not None:
+        native_request["initial_quality"] = args.initial_quality
     if args.isolation_time_s is not None:
         native_request["isolation_time_s"] = args.isolation_time_s
         native_request["post_isolation_observation_s"] = args.post_isolation_observation_s
     native_response = pipe.export_accident_history(native_request)
-    result = export_equipment_liquid_accident_history(
-        NativeDynamicPipeProvider(native_response), request
+    result = (
+        export_equipment_gas_accident_history(
+            NativeDynamicPipeProvider(native_response), request
+        )
+        if args.source_mode == "gas"
+        else export_equipment_liquid_accident_history(
+            NativeDynamicPipeProvider(native_response), request
+        )
     )
     data = native_response["data"]
     provider_meta = data.get("provider_meta") if isinstance(data.get("provider_meta"), Mapping) else {}
@@ -178,6 +206,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_result_digest": result.provider_result_digest,
         "provider_packet_promoted": result.provider_packet_promoted,
         "phase_basis": data.get("phase_basis"),
+        "source_phase": source_state.phase,
         "termination_basis": data.get("termination_basis"),
         "duration_s": data.get("duration_s"),
         "available_mass_kg": data.get("available_mass_kg"),
@@ -215,6 +244,10 @@ def main() -> int:
     parser.add_argument("--roughness-m", type=float, default=1.0e-6)
     parser.add_argument("--initial-pressure-pa-abs", type=float, default=500000.0)
     parser.add_argument("--initial-temperature-k", type=float, default=27.0)
+    parser.add_argument(
+        "--source-mode", choices=("two_phase", "gas"), default="two_phase",
+        help="native initial state family; gas mode omits initial_quality and exports the gas source trace",
+    )
     parser.add_argument("--initial-quality", type=float, default=0.1)
     parser.add_argument("--wall-temperature-k", type=float, default=27.0)
     parser.add_argument("--ambient-pressure-pa-abs", type=float, default=101325.0)
@@ -225,8 +258,14 @@ def main() -> int:
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--isolation-time-s", type=float, default=0.05)
     parser.add_argument("--post-isolation-observation-s", type=float, default=0.01)
+    parser.add_argument(
+        "--no-isolation", action="store_true",
+        help="omit the diagnostic isolation clock so every provider interval remains an active gas outlet",
+    )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
     args = parser.parse_args()
+    if args.no_isolation:
+        args.isolation_time_s = None
     try:
         result = run(args)
     except (ImportError, KeyError, OSError, TypeError, ValueError) as error:

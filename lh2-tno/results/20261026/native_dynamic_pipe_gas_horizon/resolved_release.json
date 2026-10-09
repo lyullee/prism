@@ -1,0 +1,97 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "port_id": "native-dynamic-pipe-out",
+  "event_id": "native-dynamic-pipe/accidental-leak-001",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "native external DynamicHEMPipe accident export; synthetic geometry and state",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_result_digest": "b12c62c967a3ebc7d25c5d8576528db386554c7ca66b3926533cc747d2763dcb",
+  "provider_boundary_reference": "lh2dt.DynamicHEMPipe.export_accident_history native outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.1,
+  "available_mass_kg": 0.06310489224680658,
+  "cumulative_mass_out_kg": 3.8717420515247395e-05,
+  "cumulative_static_enthalpy_out_j": 153.39590244297767,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 0.0003872452719192645,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3962205.072929315,
+      "temperature_k": 300.2741836039255,
+      "density_kg_m3": 0.08176578487108252,
+      "effective_area_m2": 7.853981633974482e-07,
+      "velocity_m_s": 6030.101643330571,
+      "area_provenance": "explicit failed pipe opening area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": {
+        "source_pressure_pa_abs": 1000000.0000000001,
+        "source_temperature_k": 300.0,
+        "source_density_kg_m3": 0.8034764427488552,
+        "source_specific_enthalpy_j_kg": 3962205.072929315,
+        "source_specific_entropy_j_kgk": 44013.20870542226,
+        "throat_pressure_pa_abs": 517025.0270159457,
+        "throat_temperature_k": 247.6168609399935,
+        "throat_density_kg_m3": 0.504564260684398,
+        "throat_specific_enthalpy_j_kg": 3215912.7521901955,
+        "throat_mass_flux_kg_m2_s": 616.43312694883,
+        "choked": true,
+        "provider_source_state_provenance": "native DynamicHEMPipe upstream entropy and hydraulic throat result"
+      }
+    },
+    {
+      "time_s": 0.05,
+      "mass_flow_kg_s": 0.0003871031383856833,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3961664.7759264708,
+      "temperature_k": 300.2364367711283,
+      "density_kg_m3": 0.0817760611175293,
+      "effective_area_m2": 7.853981633974482e-07,
+      "velocity_m_s": 6027.130885839263,
+      "area_provenance": "explicit failed pipe opening area",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": {
+        "source_pressure_pa_abs": 999565.9506873075,
+        "source_temperature_k": 299.9624482696326,
+        "source_density_kg_m3": 0.8032299147519956,
+        "source_specific_enthalpy_j_kg": 3961664.7759264708,
+        "source_specific_entropy_j_kgk": 44013.20870542224,
+        "throat_pressure_pa_abs": 516865.2644307889,
+        "throat_temperature_k": 247.5943578586627,
+        "throat_density_kg_m3": 0.5044546516849115,
+        "throat_specific_enthalpy_j_kg": 3215596.0830305326,
+        "throat_mass_flux_kg_m2_s": 616.206871614604,
+        "choked": true,
+        "provider_source_state_provenance": "native DynamicHEMPipe upstream entropy and hydraulic throat result"
+      }
+    }
+  ],
+  "termination_provenance": "DynamicHEMPipe finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.001
+}
