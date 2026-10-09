@@ -57,7 +57,7 @@ python scripts/build_ijhe_completion_audit.py `
   --output results/20261014/ijhe_completion_audit_live_with_worklist_evidence.json
 ```
 
-현재 감사 결과는 `INCOMPLETE_EVIDENCE`이며 16개 검사 중 7개가 차단된다. 새 `diagnostic_worklist_packet_coverage_evidence` 검사는 24/24 coverage를 PASS로 기록하지만 `diagnostic_only=true`이고 차단 이유를 제거하지 않는다. 24개가 모두 구조적으로 연결되었다는 뜻과, 24개가 실제·적격 provider packet이라는 뜻을 혼동하지 않는다. `diagnostic_conditional_facility_risk_evidence`도 24개 event·24개 case·96개 risk atom에서 조건부 시설 IR/F-N 계산을 PASS로 기록하고, `diagnostic_frequency_uncertainty_evidence`는 5개 문헌 시나리오와 자산 순위 재가중을 PASS로 기록하지만, qualified total과 facility credible interval은 계속 보류한다. 실제 설비 모델의 적격 사고방출 export, 12개 주요 사고 가족의 완결, 시설 IR/F-N, 독립 물리검증과 시설 전체 빈도 불확실성이 추가로 필요하다.
+현재 감사 결과는 `INCOMPLETE_EVIDENCE`이며 17개 검사 중 7개가 차단된다. 새 `diagnostic_worklist_packet_coverage_evidence` 검사는 24/24 coverage를 PASS로 기록하지만 `diagnostic_only=true`이고 차단 이유를 제거하지 않는다. 24개가 모두 구조적으로 연결되었다는 뜻과, 24개가 실제·적격 provider packet이라는 뜻을 혼동하지 않는다. `diagnostic_conditional_facility_risk_evidence`도 24개 event·24개 case·96개 risk atom에서 조건부 시설 IR/F-N 계산을 PASS로 기록하고, `diagnostic_frequency_uncertainty_evidence`는 5개 문헌 시나리오와 자산 순위 재가중을 PASS로 기록하고, 별도 `diagnostic_vertical_handoff_evidence`는 5개 generated event 중 2개 실행 case를 PASS로 기록하지만, qualified total과 facility credible interval은 계속 보류한다. 실제 설비 모델의 적격 사고방출 export, 12개 주요 사고 가족의 완결, 시설 IR/F-N, 독립 물리검증과 시설 전체 빈도 불확실성이 추가로 필요하다.
 
 ## 개발 판단
 

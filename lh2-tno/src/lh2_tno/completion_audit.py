@@ -59,6 +59,7 @@ def build_ijhe_completion_audit(
     diagnostic_adapter_execution: Mapping[str, Any] | None = None,
     diagnostic_worklist_evidence: Mapping[str, Any] | None = None,
     facility_assessment: Mapping[str, Any] | None = None,
+    vertical_handoff_result: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -388,6 +389,46 @@ def build_ijhe_completion_audit(
                     "Published frequency scenarios are re-applied to saved diagnostic risk atoms "
                     "and asset rankings; this does not create a complete-facility confidence interval "
                     "or claim fresh-physics validation."
+                ),
+            }
+        )
+    if vertical_handoff_result is not None:
+        vertical = vertical_handoff_result
+        vertical_valid = (
+            isinstance(vertical.get("status"), str)
+            and vertical.get("status", "").startswith("PARTIAL_DECLARED_SCOPE")
+            and vertical.get("generated_events") == 5
+            and isinstance(vertical.get("executed_cases"), int)
+            and vertical.get("executed_cases") > 0
+            and vertical.get("provider_vertical_handoff_consumed") is True
+            and vertical.get("operator_limited") is True
+            and vertical.get("facility_total_risk_withheld") is True
+            and vertical.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_vertical_handoff_evidence",
+                "status": "PASS" if vertical_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": vertical.get("_record_path"),
+                    "status": vertical.get("status"),
+                    "generated_events": vertical.get("generated_events"),
+                    "executed_cases": vertical.get("executed_cases"),
+                    "provider_vertical_handoff_consumed": vertical.get(
+                        "provider_vertical_handoff_consumed"
+                    ),
+                    "operator_limited": vertical.get("operator_limited"),
+                    "facility_total_risk_withheld": vertical.get(
+                        "facility_total_risk_withheld"
+                    ),
+                    "physical_validation_claim": vertical.get("physical_validation_claim"),
+                },
+                "interpretation": (
+                    "A separate vertical-to-horizontal provider handoff diagnostic consumed a "
+                    "declared handoff boundary; it is not merged into the generic facility scope "
+                    "or promoted to a qualified vertical accident family."
                 ),
             }
         )

@@ -389,6 +389,32 @@ def test_completion_audit_records_diagnostic_frequency_uncertainty():
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_promotion():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        vertical_handoff_result={
+            "status": "PARTIAL_DECLARED_SCOPE",
+            "generated_events": 5,
+            "executed_cases": 2,
+            "provider_vertical_handoff_consumed": True,
+            "operator_limited": True,
+            "facility_total_risk_withheld": True,
+            "physical_validation_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_vertical_handoff_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+    assert len(report["blocking_reasons"]) == 6
+
+
 def test_completion_audit_rejects_worklist_evidence_without_chain_or_strict_packets():
     report = build_ijhe_completion_audit(
         _status(True),
