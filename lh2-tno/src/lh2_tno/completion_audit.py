@@ -344,6 +344,53 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    if uncertainty is not None:
+        scenarios = uncertainty.get("scenarios")
+        valid_scenarios = [
+            row
+            for row in scenarios
+            if isinstance(row, Mapping)
+            and isinstance(row.get("scenario"), Mapping)
+            and isinstance(row.get("conditional_diagnostic_facility_annual_ir_low_high"), Mapping)
+            and bool(row.get("conditional_diagnostic_facility_annual_ir_low_high"))
+            and isinstance(row.get("conditional_diagnostic_facility_expected_death_fn_low_high"), list)
+            and len(row.get("conditional_diagnostic_facility_expected_death_fn_low_high")) == 2
+            and isinstance(row.get("asset_rank_by_known_expected_fatalities_low_high"), list)
+            and len(row.get("asset_rank_by_known_expected_fatalities_low_high")) == 2
+        ] if isinstance(scenarios, list) else []
+        diagnostic_frequency_valid = (
+            isinstance(scenarios, list)
+            and len(valid_scenarios) == len(scenarios)
+            and len(scenarios) > 0
+            and uncertainty.get("conditional_diagnostic_facility_risk")
+            and uncertainty.get("facility_credible_interval") is False
+            and uncertainty.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_frequency_uncertainty_evidence",
+                "status": "PASS" if diagnostic_frequency_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "scenario_count": len(scenarios) if isinstance(scenarios, list) else 0,
+                    "valid_scenario_count": len(valid_scenarios),
+                    "facility_credible_interval": uncertainty.get("facility_credible_interval"),
+                    "fresh_physics_executed": uncertainty.get("fresh_physics_executed"),
+                    "correlation_comparison_present": uncertainty.get(
+                        "correlation_comparison_present"
+                    ),
+                    "conditional_diagnostic_facility_risk": uncertainty.get(
+                        "conditional_diagnostic_facility_risk"
+                    ),
+                },
+                "interpretation": (
+                    "Published frequency scenarios are re-applied to saved diagnostic risk atoms "
+                    "and asset rankings; this does not create a complete-facility confidence interval "
+                    "or claim fresh-physics validation."
+                ),
+            }
+        )
     checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",

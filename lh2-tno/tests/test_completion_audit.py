@@ -353,6 +353,42 @@ def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_t
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_records_diagnostic_frequency_uncertainty():
+    uncertainty = {
+        "scenarios": [
+            {
+                "scenario": {"id": "central"},
+                "conditional_diagnostic_facility_annual_ir_low_high": {
+                    "worker-01": [1.0e-6, 2.0e-6]
+                },
+                "conditional_diagnostic_facility_expected_death_fn_low_high": [
+                    {}, {}
+                ],
+                "asset_rank_by_known_expected_fatalities_low_high": [{}, {}],
+            }
+        ],
+        "facility_credible_interval": False,
+        "fresh_physics_executed": False,
+        "physical_validation_claim": False,
+        "correlation_comparison_present": True,
+        "conditional_diagnostic_facility_risk": "saved atoms",
+    }
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        uncertainty,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_frequency_uncertainty_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["scenario_count"] == 1
+    assert len(report["blocking_reasons"]) == 6
+
+
 def test_completion_audit_rejects_worklist_evidence_without_chain_or_strict_packets():
     report = build_ijhe_completion_audit(
         _status(True),
