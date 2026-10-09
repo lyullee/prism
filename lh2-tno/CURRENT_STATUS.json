@@ -1361,5 +1361,24 @@
   "diagnostic_adapter_runner_external_smoke_physical_validation_claim": false,
   "diagnostic_adapter_runner_instance_registry_implemented": true,
   "diagnostic_adapter_runner_instance_registry_policy": "Host must register one explicit provider object per physical instance_id; component_kind and instance_id are checked together; no sensor or frequency inference.",
-  "diagnostic_adapter_runner_instance_registry_test_count": 2
+  "diagnostic_adapter_runner_instance_registry_test_count": 2,
+  "diagnostic_adapter_runner_worklist_smoke_record": "results/20261014/diagnostic_adapter_runner_worklist_storage_001.json",
+  "diagnostic_adapter_runner_worklist_smoke_example": "examples/diagnostic_adapter_runner_worklist_storage_001.json",
+  "diagnostic_adapter_runner_worklist_smoke_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC; exact-match diagnostic; qualified packet 0",
+  "diagnostic_adapter_runner_worklist_smoke_digest": "DF2351A43E692F06C161FD9E5EF5D922D0CB9C17E65777B557C47315BF6EEC6E",
+  "diagnostic_adapter_runner_worklist_smoke_provider_instance_id": "storage-tank-01",
+  "diagnostic_adapter_runner_worklist_smoke_worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
+  "diagnostic_adapter_runner_worklist_smoke_exact_match": {
+    "event_id": true,
+    "component_id": true,
+    "port_id": true,
+    "opening_diameter_m": true
+  },
+  "diagnostic_adapter_runner_worklist_smoke_frequency_bound": false,
+  "diagnostic_adapter_runner_worklist_smoke_elapsed_ms": 1535.6211999896914,
+  "diagnostic_adapter_runner_worklist_smoke_duration_s": 0.05,
+  "diagnostic_adapter_runner_worklist_smoke_mass_residual_kg": 0.0,
+  "diagnostic_adapter_runner_worklist_smoke_energy_residual_j": 0.0,
+  "diagnostic_adapter_runner_worklist_smoke_provider_packet_promoted": false,
+  "diagnostic_adapter_runner_worklist_smoke_qualified_packet_count": 0
 }

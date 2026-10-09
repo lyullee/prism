@@ -28,6 +28,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--lh2dt-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--provider-worklist", type=Path)
+    parser.add_argument("--worklist-event-id")
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--target-release-kg", type=float, default=1.0e-4)
     # The strict liquid packet intentionally caps its left-held history at
@@ -42,15 +44,47 @@ def main() -> int:
 
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
-    opening_diameter_m = (4.0 * args.full_open_area_m2 / 3.141592653589793) ** 0.5
-    component_id = args.component_id
-    port_id = f"{component_id}.accident-out"
-    event_id = f"{component_id}/{port_id}/{opening_diameter_m:.12g}m"
+    worklist_item = None
+    if args.provider_worklist is not None:
+        try:
+            worklist = json.loads(args.provider_worklist.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise SystemExit(f"cannot read provider worklist: {error}") from error
+        items = worklist.get("work_items") if isinstance(worklist, dict) else None
+        if not isinstance(items, list):
+            raise SystemExit("provider worklist must contain work_items")
+        candidates = [
+            item for item in items
+            if isinstance(item, dict)
+            and item.get("component_id") == args.component_id
+            and (args.worklist_event_id is None or item.get("event_id") == args.worklist_event_id)
+        ]
+        if len(candidates) != 1:
+            raise SystemExit(
+                "worklist selection must identify exactly one item; "
+                f"got {len(candidates)}"
+            )
+        worklist_item = candidates[0]
+        ports = worklist_item.get("accident_port_ids")
+        diameter = worklist_item.get("required_opening_diameter_m")
+        if len(ports or []) != 1 or diameter is None:
+            raise SystemExit("selected worklist item must declare one port and an opening diameter")
+        component_id = str(worklist_item["component_id"])
+        port_id = str(ports[0])
+        event_id = str(worklist_item["event_id"])
+        opening_diameter_m = float(diameter)
+        full_open_area_m2 = 3.141592653589793 * opening_diameter_m**2 / 4.0
+    else:
+        opening_diameter_m = (4.0 * args.full_open_area_m2 / 3.141592653589793) ** 0.5
+        component_id = args.component_id
+        port_id = f"{component_id}.accident-out"
+        event_id = f"{component_id}/{port_id}/{opening_diameter_m:.12g}m"
+        full_open_area_m2 = args.full_open_area_m2
     state_payload = {
         "time_step_s": args.time_step_s,
         "target_release_kg": args.target_release_kg,
         "max_intervals": args.max_intervals,
-        "full_open_area_m2": args.full_open_area_m2,
+        "full_open_area_m2": full_open_area_m2,
     }
     request = _request(
         provider_source_digest=source_digest,
@@ -68,20 +102,42 @@ def main() -> int:
         ROOT / "examples" / "generic_lh2_model_binding.json"
     )
     start = time.perf_counter()
-    runner.register_provider_from_config(
+    constructor_kwargs = {
+        "lh2dt_root": root,
+        "time_step_s": args.time_step_s,
+        "target_release_kg": args.target_release_kg,
+        "max_intervals": args.max_intervals,
+        "full_open_area_m2": full_open_area_m2,
+        "request": request,
+    }
+    provider_instance_id = component_id if worklist_item is not None else None
+    if provider_instance_id is None:
+        runner.register_provider_from_config("storage_tank", constructor_kwargs)
+    else:
+        runner.register_provider_instance_from_config(
+            provider_instance_id, "storage_tank", constructor_kwargs
+        )
+    execution = runner.execute(
         "storage_tank",
-        {
-            "lh2dt_root": root,
-            "time_step_s": args.time_step_s,
-            "target_release_kg": args.target_release_kg,
-            "max_intervals": args.max_intervals,
-            "full_open_area_m2": args.full_open_area_m2,
-            "request": request,
-        },
+        request,
+        provider_instance_id=provider_instance_id,
+        release_kind="liquid",
     )
-    execution = runner.execute("storage_tank", request, release_kind="liquid")
     elapsed_ms = (time.perf_counter() - start) * 1000.0
     release = execution.result.release
+    exact_worklist_match = None
+    if worklist_item is not None:
+        exact_worklist_match = {
+            "event_id": release.event_id == worklist_item["event_id"],
+            "component_id": release.component_id == worklist_item["component_id"],
+            "port_id": release.port_id == worklist_item["accident_port_ids"][0],
+            "opening_diameter_m": abs(
+                float(release.failure_opening_diameter_m)
+                - float(worklist_item["required_opening_diameter_m"])
+            ) <= 1.0e-12,
+        }
+        if not all(exact_worklist_match.values()):
+            raise RuntimeError(f"runner release did not exact-match worklist: {exact_worklist_match}")
     payload = {
         "schema_version": "prism.diagnostic_adapter_runner_smoke.v1",
         "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
@@ -89,6 +145,9 @@ def main() -> int:
         "provider_instance_count": 1,
         "qualified_provider_packet_count": 0,
         "provider_packet_promoted": execution.promoted,
+        "worklist_item_id": None if worklist_item is None else worklist_item["id"],
+        "worklist_exact_match": exact_worklist_match,
+        "worklist_frequency_bound": False,
         "fresh_execution_elapsed_ms": elapsed_ms,
         "strict_packet_duration_s": release.duration_s,
         "strict_packet_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,

@@ -138,3 +138,18 @@ python scripts/run_diagnostic_adapter_runner_smoke.py `
 | 빈도·시설 QRA | 계산하지 않음 |
 
 이 결과는 외부 모델과 공통 실행기 사이의 호출·strict packet 경계가 실제로 통과했다는 뜻이다. 개구, 저장탱크 형상, 대기 경계, 임계값은 진단용 합성 설정이며 현장 사고 이력이나 검증된 방출빈도로 승격하지 않는다. 액체 flash·비산 액적·현장 차단 신뢰도·시설 IR/F-N도 이 smoke에 포함되지 않는다. 원본 결과는 `examples/diagnostic_adapter_runner_layered_tank_smoke.json`에 고정하고, 실행 스크립트는 `scripts/run_diagnostic_adapter_runner_smoke.py`에 둔다.
+
+### worklist exact-match 실행
+
+다중 설비 registry가 실제 worklist 항목을 보존하는지도 저장탱크 `AREA_0.01%` 항목으로 확인했다.
+
+```powershell
+python scripts/run_diagnostic_adapter_runner_smoke.py `
+  --lh2dt-root "<외부 lh2dt 루트>" `
+  --provider-worklist results/20261014/generic_lh2_provider_release_worklist_diagnostic_adapter.json `
+  --component-id storage-tank-01 `
+  --worklist-event-id "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%" `
+  --output results/20261014/diagnostic_adapter_runner_worklist_storage_001.json
+```
+
+실행 결과는 `provider_instance_id=storage-tank-01`, event/component/port/opening 네 항목 exact-match `true`, 방출시간 `0.05 s`, 질량·엔탈피 잔차 `0`이었다. `worklist_frequency_bound=false`, `qualified_provider_packet_count=0`을 유지하므로 문헌 빈도를 자동 부여하지 않는다. 이 결과는 [worklist 실행 예시](../examples/diagnostic_adapter_runner_worklist_storage_001.json)에 보존했다.

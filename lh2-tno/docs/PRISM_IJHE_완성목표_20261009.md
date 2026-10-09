@@ -121,3 +121,5 @@ python scripts/build_ijhe_completion_audit.py `
 `scripts/run_diagnostic_adapter_runner_smoke.py`는 외부 `lh2dt` LayeredTank 모델을 host가 명시한 생성자 인자로 만들고, `DiagnosticAdapterRunner.register_provider_from_config()`와 `execute(..., release_kind="liquid")`로 실제 provider 인스턴스를 한 번 호출한다. 기본 진단은 합성 `1e-6 m²` 개구, `0.05 s` 간격, 양수 재고 임계값 종료를 사용한다. strict packet은 `0.1 s` 방출, 질량 잔차 `0 kg`, 엔탈피 잔차 약 `-4.44e-16 J`를 반환했고 새 physics 호출 시간은 약 `1556 ms`였다.
 
 이 결과는 **실제 외부 adapter 인스턴스가 공통 실행기와 strict 액체 packet 경계를 통과했다는 증거**다. packet의 evidence status는 `synthetic_diagnostic`이고 `provider_packet_promoted=false`, qualified packet 수는 0이다. 따라서 현장 설비 형상·재고·사고빈도·시설 IR/F-N·독립 물리검증·1 Hz 실시간 계산을 주장하지 않는다. 재현 결과는 `examples/diagnostic_adapter_runner_layered_tank_smoke.json`, 실행 스크립트는 `scripts/run_diagnostic_adapter_runner_smoke.py`에 보존했다.
+
+같은 runner를 저장탱크 worklist의 `AREA_0.01%` 항목에도 적용했다. `provider_instance_id=storage-tank-01`을 명시하고 event/component/port/opening 네 필드를 exact-match했으며, `worklist_frequency_bound=false`를 유지했다. 이는 설비별 worklist→provider→strict packet 연결을 확인한 것이고, qualified provider packet·문헌 빈도·시설 전체 위험을 완성한 증거는 아니다. 결과는 `examples/diagnostic_adapter_runner_worklist_storage_001.json`이다.

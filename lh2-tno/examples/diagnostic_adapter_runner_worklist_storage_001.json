@@ -1,0 +1,39 @@
+{
+  "schema_version": "prism.diagnostic_adapter_runner_smoke.v1",
+  "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+  "adapter_execution": {
+    "component_kind": "storage_tank",
+    "provider_instance_id": "storage-tank-01",
+    "adapter_module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+    "adapter_provider_class": "LayeredTankAccidentProvider",
+    "evidence_status": "synthetic_diagnostic",
+    "provider_result_digest": "d759df7111cb7fce2f69b2e0e211c7004c4f88990276044c76756a6feb196bea",
+    "promotion_status": "DIAGNOSTIC_PACKET_NOT_PROMOTED",
+    "provider_packet_promoted": false,
+    "provider_method": "export_accident_history",
+    "provider_export_schema": "prism.external_accident_history.v1"
+  },
+  "provider_instance_count": 1,
+  "qualified_provider_packet_count": 0,
+  "provider_packet_promoted": false,
+  "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
+  "worklist_exact_match": {
+    "event_id": true,
+    "component_id": true,
+    "port_id": true,
+    "opening_diameter_m": true
+  },
+  "worklist_frequency_bound": false,
+  "fresh_execution_elapsed_ms": 1535.6211999896914,
+  "strict_packet_duration_s": 0.05,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 0.0,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "limitations": [
+    "synthetic LayeredTank geometry, opening and atmospheric boundary",
+    "provider evidence_status is synthetic_diagnostic",
+    "no frequency or facility IR/F-N was attached"
+  ]
+}
