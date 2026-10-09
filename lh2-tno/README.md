@@ -937,3 +937,7 @@ campaign 결과의 `release_termination_inventory_ledger`에는 사건×차단 �
 로그정규 `mu/sigma` 표본화도 같은 원칙을 적용합니다. 기본은 분포가 없는 사건을 거부하고, 혼합 시설 캠페인에서는 `fixed_event_policy=hold_published`를 명시해야 해당 사건의 catalogue 빈도를 고정한 채 shared-asset/independent-event 표본을 계산합니다. 결과는 빈도 모델 기반 known-contribution 구간이며 전체 시설 credible interval이 아닙니다.
 
 재현 명령은 `scripts/compute_frequency_distribution_uncertainty.py`이며, `--draws`와 `--seed`를 장부에 남깁니다. 이 명령도 물리 재실행이나 센서 기반 빈도 학습을 하지 않습니다.
+
+### 배관 native 2상 연결 예제
+
+`scripts/run_lh2dt_native_dynamic_pipe_frequency_case.py`는 외부 `DynamicHEMPipe`의 액체·2상 초기 품질, 대기 flash, 기체·지상 액체 질량, 종료시계와 잔차를 반환받고 `LH2_PIPE AREA_0.01%` 문헌 빈도를 적용해 consequence chain을 실행한다. 실행 요약은 `examples/native_lh2dt_dynamic_pipe_frequency_case_verification.json`에 있다. 결과는 `PARTIAL_DECLARED_SCOPE`이며 다른 opening bin·설비는 명시적으로 미계산/제외되고, airborne liquid·시설 총 IR/F-N·qualified packet은 보류된다.

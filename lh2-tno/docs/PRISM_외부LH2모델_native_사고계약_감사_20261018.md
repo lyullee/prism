@@ -67,3 +67,11 @@ python scripts/audit_lh2dt_native_contract.py `
 `scripts/run_lh2dt_native_frequency_case.py`는 한 단계 더 좁은 연결시험이다. 기존 혼합 캠페인의 `LH2_VESSEL AREA_0.01%` 문헌 빈도(중앙값 `6.5×10⁻⁴ item⁻¹ year⁻¹`)는 그대로 읽고, 그 사건의 방출 이력만 native `LayeredTank.export_accident_history()`로 다시 생성한다. 개구 직경 `0.0127 m`를 exact-match로 확인한 뒤 provider packet을 `ResolvedLiquidRelease`로 변환하고, 동일한 facility manifest·기상·점화·IR/F-N 계산기에 넣는다. 따라서 이 실행은 **문헌 빈도 → native 방출 → SLABx-LH2/풀 → 분산·점화·피해** 연결을 실제로 확인한다.
 
 2026-10-18 실행 결과는 `results/20261018/native_lh2dt_frequency_case/verification.json`과 추적 가능한 요약본 `examples/native_lh2dt_frequency_case_verification.json`에 저장되어 있다. native export는 약 0.29 s, 전체 혼합 캠페인 재실행은 약 23.8 s였고, 해당 저장탱크 사건은 `EXECUTED_OPERATOR_LIMITED`로 끝났다. provider 질량 잔차는 0 kg이며 문헌 빈도는 provider packet에서 추정하지 않았다. 이 결과도 합성 초기상태·형상·대기경계·선언된 작은 풀 footprint를 사용하고, 나머지 사고가족이 부분/미계산이므로 qualified provider와 시설 총 IR/F-N으로 승격하지 않는다. 이 구분을 보존하기 위해 `qualified_provider_packet_count=0`, `provider_packet_promoted=false`, `facility_qra_claim=false`를 고정한다.
+
+## native DynamicHEMPipe 액체·2상 방출과 배관 빈도 진단
+
+외부 저장소 `lh2dt_models` 커밋 `78e1af1`에서 `DynamicHEMPipe.export_accident_history(request)`가 명시적 `initial_quality`를 받도록 확장됐다. 품질이 0이면 액체, 0과 1 사이면 균질 2상 상태로 시작하고, 대기압 flash 결과를 기체 질량·지상 액체 질량으로 나눠 반환한다. airborne liquid은 독립 액적 검증 전까지 0으로 고정하며, 질량·엔탈피 장부와 종료시계를 packet에 남긴다. 기존 기체 경로는 그대로 보존한다.
+
+`scripts/run_lh2dt_native_dynamic_pipe_frequency_case.py`는 `LH2_PIPE AREA_0.01%`의 문헌 개구 `0.00025 m`와 정확히 일치하는 native 배관 packet을 생성해 strict liquid adapter와 전체 consequence chain에 넣는다. 2026-10-18 실행은 `phase_basis=two_phase`, provider 질량 잔차 `0 kg`, 엔탈피 잔차 약 `-2.78×10⁻¹⁷ J`, native export 약 `0.24 s`, consequence chain 약 `16.8 s`를 기록했다. 파이프의 다른 네 개 개구 bin은 `UNCOMPUTED`로 명시했고, 다른 설비는 이 단일 진단에서 제외 사유를 기록했다.
+
+결과는 `results/20261018/native_lh2dt_dynamic_pipe_frequency_case/verification.json`과 [추적 요약](../examples/native_lh2dt_dynamic_pipe_frequency_case_verification.json)에 보관한다. 이 실행은 문헌 빈도를 provider packet에서 추정하지 않고 그대로 적용한 부분 진단이다. 10 m 합성 배관의 한 검토 위치에만 위치 가중치 `0.1`을 배분했으며, 잔류 재고가 있는 0.01 s 진단시계·합성 형상·선언된 작은 풀 footprint를 사용했다. 따라서 qualified provider packet, 현장 빈도, 시설 전체 IR/F-N, 물리검증을 승격하지 않는다.

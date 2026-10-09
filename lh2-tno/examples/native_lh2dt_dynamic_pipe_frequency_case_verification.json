@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_frequency_case.v1",
+  "status": "PARTIAL_DECLARED_SCOPE",
+  "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+  "component_id": "liquid-transfer-line-01",
+  "catalogue_opening_diameter_m": 0.00025,
+  "provider_opening_diameter_m": 0.00025,
+  "exact_opening_match": true,
+  "phase_basis": "two_phase",
+  "provider_source_digest": "abc522c0dfa6df51931ff95f93aa5896a501031d654e95289fe476851f7acea4",
+  "provider_result_digest": "8adf9c35f345b9c7e4b927cb9de0b4b952e6b2d35a2559a5429a7a8b013edb52",
+  "provider_duration_s": 0.01,
+  "provider_mass_residual_kg": 0.0,
+  "provider_energy_residual_j": -2.7755575615628914e-17,
+  "literature_frequency_bound": true,
+  "frequency_source": "compiled campaign LH2_PIPE AREA_0.01% literature row",
+  "frequency_from_provider_packet": false,
+  "provider_packet_promoted": false,
+  "qualified_provider_packet_count": 0,
+  "native_export_elapsed_ms": 241.96980008855462,
+  "consequence_chain_elapsed_ms": 16833.07509997394,
+  "consequence_chain_executed": true,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "facility_total_risk_available": false,
+  "limitations": [
+    "synthetic DynamicHEMPipe geometry, initial quality, opening and atmospheric boundary",
+    "bounded horizon retains residual pipe inventory",
+    "airborne liquid remains explicitly zero pending independent droplet validation",
+    "literature frequency is diagnostic input and not site-calibrated"
+  ]
+}

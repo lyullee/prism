@@ -148,3 +148,7 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 저장탱크에 대해서는 `scripts/run_lh2dt_native_frequency_case.py`로 문헌 `LH2_VESSEL AREA_0.01%` 빈도와 native `LayeredTank` 방출을 한 사건에서 결합했다. 개구 `0.0127 m` exact-match, provider 질량 잔차 0 kg, native export 약 0.29 s, consequence campaign 약 23.8 s, 사건 상태 `EXECUTED_OPERATOR_LIMITED`를 기록했다. 빈도는 packet에서 추정하지 않고 기존 문헌 catalogue에서 읽었다. 결과는 `results/20261018/native_lh2dt_frequency_case/verification.json`이다.
 
 현재 IJHE 완료 감사는 `INCOMPLETE_EVIDENCE`이며 22개 검사 중 차단 이유는 세 가지다. 합성/스크리닝 provider 외에 적격 packet이 없고, 선언한 주요 사고가족 중 부분·미계산 항목이 있으며, 그 때문에 시설 IR/F-N 총값을 보류한다. 이 native frequency case는 첫 번째 연결을 강화하지만 이 세 차단 이유를 해소하지 않는다.
+
+## 2026-10-18 native DynamicHEMPipe 2상 연결
+
+배관 경계도 같은 방식으로 확인했다. 외부 `DynamicHEMPipe` native export는 명시적 액체·2상 초기 품질을 받고 대기 flash의 기체/지상 액체 분할과 질량·엔탈피 장부를 반환한다. `LH2_PIPE AREA_0.01%` 개구와 문헌 빈도를 한 정확한 사건에 결합한 결과는 `PARTIAL_DECLARED_SCOPE`이며, 2상 packet은 strict adapter와 SLABx-LH2 consequence chain까지 소비됐다. 다른 opening bin과 나머지 설비는 명시적 미계산/제외로 남겼다. airborne liquid, 전량 방출, 현장 위치별 빈도, 물리검증을 추가하지 않았으므로 이 연결도 시설 전체 위험도 완료를 의미하지 않는다.
