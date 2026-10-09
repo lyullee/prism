@@ -2795,6 +2795,14 @@
   "ijhe_completion_audit_frequency_family_repaired_status": "INCOMPLETE_EVIDENCE",
   "ijhe_completion_audit_frequency_family_repaired_record": "results/20261022/ijhe_completion_audit_frequency_family_repaired.json",
   "ijhe_completion_audit_frequency_family_repaired_check_count": 16,
-  "ijhe_completion_audit_frequency_family_repaired_blocking_reason_count": 5,
-  "ijhe_completion_audit_frequency_uncertainty_status": "PASS_DIAGNOSTIC_ONLY"
+  "ijhe_completion_audit_frequency_family_repaired_blocking_reason_count": 4,
+  "ijhe_completion_audit_frequency_uncertainty_status": "PASS_DIAGNOSTIC_ONLY",
+  "facility_scope_matrix_rebuild_conditional_scope_fields_complete": true,
+  "ijhe_completion_audit_frequency_family_repaired_conditional_scope_status": "PASS_DIAGNOSTIC_ONLY",
+  "ijhe_completion_audit_frequency_family_repaired_blocked_checks": [
+    "actual_provider_release_packet",
+    "provider_worklist_coverage",
+    "declared_major_accident_scope",
+    "facility_ir_fn_available"
+  ]
 }

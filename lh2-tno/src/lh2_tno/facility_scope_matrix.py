@@ -224,6 +224,7 @@ def build_scope_matrix_from_facility_ledger(
     case_rows = [row for row in cases if isinstance(row, Mapping)]
     rows: list[dict[str, Any]] = []
     blocking: list[str] = []
+    conditional_blocking: list[str] = []
     for family in families:
         event_ids = sorted(
             event_id for event_id, observed in event_families.items() if family in observed
@@ -243,7 +244,7 @@ def build_scope_matrix_from_facility_ledger(
         if status not in {"EXECUTED", "NOT_APPLICABLE"}:
             blocking.append(f"{family}: {status}")
         if conditional_status not in {"EXECUTED", "NOT_APPLICABLE"}:
-            blocking.append(f"{family}: {conditional_status}")
+            conditional_blocking.append(f"{family}: {conditional_status}")
         frequency = sum(
             float(events[index].get("annual_frequency_per_year", 0.0) or 0.0)
             for index in range(len(events))
@@ -284,6 +285,7 @@ def build_scope_matrix_from_facility_ledger(
         "conditional_executed_case_count": len(case_rows) - ledger_conditional_uncomputed,
         "conditional_uncomputed_case_count": ledger_conditional_uncomputed,
         "conditional_chain_complete": ledger_conditional_uncomputed == 0,
+        "conditional_chain_blocking_reasons": list(dict.fromkeys(conditional_blocking)),
         "facility_total_risk_available": facility_ledger.get("facility_total_risk_available") is True,
         "matrix_complete": matrix_complete,
         "blocking_reasons": list(dict.fromkeys(blocking)),

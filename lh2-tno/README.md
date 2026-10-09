@@ -7,7 +7,7 @@
 **버전 0.6.2 / 기준일 2026-10-09** — 기본 `standard` 분석과 선택형 `lh2` 분석을 공통 실행기에서 선택합니다.
 범용 액화수소시설에 적용하는 인터페이스이며 특정 실증센터의 설비·태그를 필수로 요구하지 않습니다.
 
-**2026-10-22 최신 개발 기준점:** 밸브 5개 면적 구간과 두 기상 조건을 포함한 7개 캠페인 시설 원장은 41개 사건·80개 case·312개 risk atom을 보존한다. 최신 IJHE 감사는 `INCOMPLETE_EVIDENCE`이며, 시설 원장에는 조건부 수치 결과 78건과 `UNCOMPUTED` 2건이 함께 남아 있다. 이전 시점의 범위표와 원장 namespace가 달랐던 문제는 `build_ledger_scope_matrix.py`로 원장 기반 범위표를 재생성해 해소했으며, 새 `scope_ledger_consistency` 감사는 `CONSISTENT_SCOPE_LEDGER`를 반환한다. 문헌 빈도 불확실성 5개 시나리오도 보정 원장에 연결되어 조건부 known-atom 민감도를 다시 계산했지만 `facility_credible_interval=false`를 유지한다. 엄격한 시설 범위는 여전히 부분 상태이고 적격 provider packet·독립 검증·시설 IR/F-N은 보류된다. 검증근거 통합장부도 6개 영역으로 생성되어 모든 승격 주장을 분리한다. 현재 상태 파일과 [밸브 결합 개발기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)에 기록된다. 시설 원장에는 12개 설비별 `component_coverage`가 있어 설비별 사건·조건부 실행·엄격 보류·risk atom을 따로 확인할 수 있다. 전체 portable test suite는 **526개 통과**다.
+**2026-10-22 최신 개발 기준점:** 밸브 5개 면적 구간과 두 기상 조건을 포함한 7개 캠페인 시설 원장은 41개 사건·80개 case·312개 risk atom을 보존한다. 최신 IJHE 감사는 `INCOMPLETE_EVIDENCE`(16개 검사 중 4개 차단)이며, 시설 원장에는 조건부 수치 결과 78건과 `UNCOMPUTED` 2건이 함께 남아 있다. 이전 시점의 범위표와 원장 namespace가 달랐던 문제는 `build_ledger_scope_matrix.py`로 원장 기반 범위표를 재생성해 해소했으며, 새 `scope_ledger_consistency` 감사는 `CONSISTENT_SCOPE_LEDGER`를 반환한다. 문헌 빈도 불확실성 5개 시나리오도 보정 원장에 연결되어 조건부 known-atom 민감도를 다시 계산했지만 `facility_credible_interval=false`를 유지한다. 엄격한 시설 범위는 여전히 부분 상태이고 적격 provider packet·독립 검증·시설 IR/F-N은 보류된다. 검증근거 통합장부도 6개 영역으로 생성되어 모든 승격 주장을 분리한다. 현재 상태 파일과 [밸브 결합 개발기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)에 기록된다. 시설 원장에는 12개 설비별 `component_coverage`가 있어 설비별 사건·조건부 실행·엄격 보류·risk atom을 따로 확인할 수 있다. 전체 portable test suite는 **526개 통과**다.
 
 > 현재는 연구용 진단 계산 시스템입니다. 방출부터 최종 피해까지 실행하는 경로는 구현했지만,
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
