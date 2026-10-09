@@ -1087,6 +1087,25 @@ def build_ijhe_completion_audit(
             )
             for row in scenario_rows
         )
+    conditional_scope_fields_present = (
+        "conditional_chain_complete" in scope_matrix
+        or any(
+            isinstance(row, Mapping) and "conditional_status" in row
+            for row in scope_matrix.get("rows", [])
+        )
+    )
+    conditional_scope_valid = (
+        isinstance(scope_matrix.get("conditional_chain_complete"), bool)
+        and isinstance(scope_matrix.get("conditional_chain_blocking_reasons"), list)
+        and isinstance(scope_matrix.get("rows"), list)
+        and all(
+            isinstance(row, Mapping)
+            and isinstance(row.get("conditional_status"), str)
+            and isinstance(row.get("conditional_executed_case_count"), int)
+            and isinstance(row.get("conditional_uncomputed_case_count"), int)
+            for row in scope_matrix["rows"]
+        )
+    )
     checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",
@@ -1196,6 +1215,33 @@ def build_ijhe_completion_audit(
             },
             "one or more declared accident families are missing, partial, or uncomputed",
         ),
+        {
+            "name": "conditional_accident_scope_accounting",
+            "status": (
+                "PASS"
+                if conditional_scope_valid or not conditional_scope_fields_present
+                else "BLOCKED"
+            ),
+            "diagnostic_only": True,
+            "evidence": {
+                "conditional_chain_complete": scope_matrix.get("conditional_chain_complete"),
+                "conditional_chain_blocking_reasons": scope_matrix.get(
+                    "conditional_chain_blocking_reasons", []
+                ),
+                "strict_matrix_complete": scope_matrix.get("matrix_complete"),
+                "strict_blocking_reasons": scope_matrix.get("blocking_reasons", []),
+            },
+            "blocking_reason": (
+                None
+                if conditional_scope_valid or not conditional_scope_fields_present
+                else "conditional accident-scope accounting is missing or malformed"
+            ),
+            "interpretation": (
+                "Conditional execution status counts numerical consequence-chain outputs, "
+                "including operator-limited cases, while strict matrix_complete remains the "
+                "facility qualification gate."
+            ),
+        },
         _check(
             "facility_ir_fn_available",
             campaign_result.get("total_facility_annual_ir_low_high") is not None

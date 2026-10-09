@@ -283,3 +283,9 @@ generic 시설의 `liquid-transfer-line-01` 다섯 개 개구면적을 설비 pr
 기존 generic transfer-line event를 중복해서 더하지 않도록 `generic_campaign_without_transfer_line_for_replacement.json`을 파생 입력으로 만들고, 그 자리를 설비 campaign으로 교체했다. 최신 결합 ledger `results/20261020/native_campaign_with_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json`은 41개 event, 75개 case, 280개 risk atom, 32개 미계산 case를 기록한다. 이전 all-bin 장부의 37개 미계산 case에서 5개가 줄었고 `liquid-transfer-line-01`은 `EXECUTED`가 됐다. 탱크·펌프·밸브·양단파열·수직 handoff의 미계산·operator-limited 범위는 그대로 차단된다.
 
 새 빈도 시나리오는 `examples/native_lh2_transfer_line_replacement_frequency_scenarios.json`에 있으며 시설 assessment와 조건부 IR/F-N을 다시 계산한다. `results/20261020/ijhe_completion_audit_transfer_line_replacement.json`은 27개 검사를 수행하고, 실제 qualified provider packet 부재, 부분 주요 사고범위, 시설 전체 IR/F-N 보류의 세 차단을 유지한다. 상세 연결 규칙과 재현 명령은 [설비 상태·배관 개구면적 시설 결합 기록](PRISM_설비상태_배관개구면적_시설결합_개발기록_20261020.md)을 따른다.
+
+## 2026-10-22 현재 감사 기준점
+
+최신 밸브 보완 시설 원장은 `results/20261022/native_campaign_with_repaired_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json`에 있다. 41개 사건, 80개 case, 37개 미계산/보류 case, 312개 risk atom을 기록하며, 밸브 다섯 면적 구간과 두 기상 조건의 10개 case는 모두 `EXECUTED_OPERATOR_LIMITED`로 끝났다. 이 수치는 방출부터 피해까지 숫자를 계산했다는 뜻이지, 적격 provider·독립 검증·시설 전체 QRA를 의미하지 않는다.
+
+최신 범위표는 조건부 수치 회계와 엄격한 시설 승격을 분리한다. 조건부 범위에는 `inventory_depletion: PARTIAL`과 5개 미계산 case가 남아 있다. `results/20261022/ijhe_completion_audit_repaired_valve_transfer_line_replacement.json`은 28개 검사 중 25개 통과·3개 차단이며, 새 `conditional_accident_scope_accounting`은 형식 검사를 통과한다. 남은 차단은 적격 provider 방출 packet 부재, 주요 사고 범위 미완결, 시설 IR/F-N 보류다. 전체 portable test suite는 495개 통과했다.

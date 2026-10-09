@@ -1767,7 +1767,7 @@
   "mixed_lh2_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261022/ijhe_completion_audit_repaired_valve_transfer_line_replacement.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_latest_check_count": 27,
+  "ijhe_completion_audit_latest_check_count": 28,
   "ijhe_completion_audit_latest_blocking_reason_count": 3,
   "ijhe_completion_audit_latest_blocking_reasons": [
     "only synthetic or screening provider releases are available for this campaign",
@@ -2179,7 +2179,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit, namespace rebind, coverage fallback and scope-matrix merge tests passed; full portable suite 460 passed",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope accounting; full portable suite 495 passed",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -2422,7 +2422,7 @@
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
   "full_portable_test_count": 494,
-  "full_portable_test_status": "494 passed",
+  "full_portable_test_status": "495 passed",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -2653,5 +2653,11 @@
   ],
   "scope_matrix_latest_conditional_uncomputed_case_count": 5,
   "scope_matrix_conditional_status_policy": "EXECUTED_OPERATOR_LIMITED counts as numerical chain execution but never as qualified facility execution; strict matrix_complete remains fail-closed.",
-  "conditional_scope_audit_record": "results/20261022/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_repaired_merged_scope_matrix.json"
+  "conditional_scope_audit_record": "results/20261022/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_repaired_merged_scope_matrix.json",
+  "ijhe_completion_audit_latest_conditional_scope_check_status": "PASS diagnostic-only; conditional fields are present and well-formed; conditional chain remains incomplete for inventory_depletion",
+  "ijhe_completion_audit_latest_conditional_scope_chain_complete": false,
+  "ijhe_completion_audit_latest_conditional_scope_blocking_reasons": [
+    "inventory_depletion: PARTIAL"
+  ],
+  "ijhe_completion_audit_latest_conditional_scope_uncomputed_case_count": 5
 }

@@ -49,6 +49,32 @@ def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidenc
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_records_conditional_scope_accounting_without_opening_facility_gate():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        {
+            **_matrix(complete=False),
+            "conditional_chain_complete": False,
+            "conditional_chain_blocking_reasons": ["pipe_hole: PARTIAL"],
+            "rows": [{
+                "family": "pipe_hole",
+                "conditional_status": "PARTIAL",
+                "conditional_executed_case_count": 1,
+                "conditional_uncomputed_case_count": 2,
+            }],
+        },
+        _campaign_result(total=False),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "conditional_accident_scope_accounting"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["conditional_chain_complete"] is False
+    assert any("declared accident families" in reason for reason in report["blocking_reasons"])
+
+
 def test_completion_audit_records_native_model_contract_audit_as_diagnostic_evidence():
     report = build_ijhe_completion_audit(
         _status(validated=False),

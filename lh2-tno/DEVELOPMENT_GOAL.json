@@ -2011,5 +2011,8 @@
     "inventory_depletion: PARTIAL"
   ],
   "scope_matrix_conditional_uncomputed_case_count": 5,
-  "scope_matrix_conditional_status_policy": "Numerical execution and facility qualification are reported separately; operator-limited cases never open facility IR/F-N."
+  "scope_matrix_conditional_status_policy": "Numerical execution and facility qualification are reported separately; operator-limited cases never open facility IR/F-N.",
+  "ijhe_audit_latest_check_count": 28,
+  "ijhe_audit_latest_test_status": "28-check IJHE audit with conditional accident-scope accounting; full portable suite 495 passed",
+  "ijhe_audit_latest_conditional_scope_check_status": "PASS diagnostic-only; conditional chain remains incomplete for inventory_depletion with 5 uncomputed cases"
 }
