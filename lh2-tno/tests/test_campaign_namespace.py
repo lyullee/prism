@@ -56,3 +56,49 @@ def test_campaign_namespace_rebinds_event_component_and_collapsed_receptors():
     assert rebound["coverage"]["by_component"][0]["component_id"] == "target-component"
     assert rebound["campaign_namespace_rebind"]["receptor_collapse_policy"] == "many_to_one_endpoint_maximum"
     assert rebound["campaign_namespace_rebind"]["diagnostic_only"] is True
+
+
+def test_campaign_namespace_derives_component_coverage_when_source_omits_ledger():
+    result = {
+        "facility_id": "source-facility",
+        "campaign_digest": "source-digest",
+        "events": [{
+            "id": "source-facility/pipe/G1",
+            "asset_id": "source-asset",
+            "model_component_id": "source-component",
+            "annual_frequency_per_year": 2.5e-6,
+        }],
+        "cases": [{
+            "event_id": "source-facility/pipe/G1",
+            "asset_id": "source-asset",
+            "status": "EXECUTED",
+        }],
+        "uncomputed_cases": [],
+        "risk_atoms": [{
+            "event_id": "source-facility/pipe/G1",
+            "asset_id": "source-asset",
+            "receptor_harm_low_high": {"near": [0.0, 0.0]},
+            "expected_deaths_low_high": [0.0, 0.0],
+        }],
+        "coverage": {
+            "generated_initiation_frequency_per_year": 2.5e-6,
+        },
+    }
+
+    rebound = rebind_campaign_result(
+        result,
+        source_facility_id="source-facility",
+        facility_id="target-facility",
+        namespace="target-facility/diagnostic",
+        source_asset_id="source-asset",
+        asset_id="target-asset",
+        source_component_id="source-component",
+        component_id="target-component",
+    )
+
+    row = rebound["coverage"]["by_component"][0]
+    assert row["component_id"] == "target-component"
+    assert row["scope_status"] == "EXECUTED"
+    assert row["generated_event_count"] == 1
+    assert row["executed_case_count"] == 1
+    assert row["fully_validated_case_count"] == 1

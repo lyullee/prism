@@ -12,9 +12,10 @@
         "ambient-vaporizer": "published",
         "reliquefier": "published",
         "vertical-handoff-vent": "published",
-        "two-sided-rupture-pipe": "published"
+        "two-sided-rupture-pipe": "published",
+        "inventory-depletion-pipe": "published"
       },
-      "provenance": "published LH2/TNO catalogue central rates; generic outdoor diagnostic campaign; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate"
+      "provenance": "published LH2/TNO catalogue central rates; generic outdoor diagnostic campaign; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate; inventory depletion fixed at declared diagnostic rate; no field or inferred frequency"
     },
     {
       "id": "generic-lh2-literature-low",
@@ -27,9 +28,10 @@
         "ambient-vaporizer": "published",
         "reliquefier": "published",
         "vertical-handoff-vent": "published",
-        "two-sided-rupture-pipe": "published"
+        "two-sided-rupture-pipe": "published",
+        "inventory-depletion-pipe": "published"
       },
-      "provenance": "published marginal p05 bounds where available; central rate retained for assets without a published bound; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate"
+      "provenance": "published marginal p05 bounds where available; central rate retained for assets without a published bound; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate; inventory depletion fixed at declared diagnostic rate; no field or inferred frequency"
     },
     {
       "id": "generic-lh2-literature-high",
@@ -42,9 +44,10 @@
         "ambient-vaporizer": "published",
         "reliquefier": "published",
         "vertical-handoff-vent": "published",
-        "two-sided-rupture-pipe": "published"
+        "two-sided-rupture-pipe": "published",
+        "inventory-depletion-pipe": "published"
       },
-      "provenance": "published marginal p95 bounds where available; central rate retained for assets without a published bound; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate"
+      "provenance": "published marginal p95 bounds where available; central rate retained for assets without a published bound; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate; inventory depletion fixed at declared diagnostic rate; no field or inferred frequency"
     },
     {
       "id": "generic-lh2-independent-low",
@@ -79,9 +82,14 @@
         "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%": "published",
         "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%": "published",
         "generic-lh2-full-scope-example/two-sided-rupture/terminal_pipe_segment/G1": "published",
-        "generic-lh2-full-scope-example/two-sided-rupture/terminal_pipe_segment/G2": "published"
+        "generic-lh2-full-scope-example/two-sided-rupture/terminal_pipe_segment/G2": "published",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%": "p05",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%": "p05",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%": "p05"
       },
-      "provenance": "published marginal p05 bounds per generated event where available; central rate retained otherwise; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate",
+      "provenance": "published marginal p05 bounds per generated event where available; central rate retained otherwise; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate; inventory depletion fixed at declared diagnostic rate; no field or inferred frequency",
       "correlation_assumption": "independent_event_bounds"
     },
     {
@@ -117,9 +125,14 @@
         "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%": "published",
         "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%": "published",
         "generic-lh2-full-scope-example/two-sided-rupture/terminal_pipe_segment/G1": "published",
-        "generic-lh2-full-scope-example/two-sided-rupture/terminal_pipe_segment/G2": "published"
+        "generic-lh2-full-scope-example/two-sided-rupture/terminal_pipe_segment/G2": "published",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%": "p95",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%": "p95",
+        "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%": "p95"
       },
-      "provenance": "published marginal p95 bounds per generated event where available; central rate retained otherwise; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate",
+      "provenance": "published marginal p95 bounds per generated event where available; central rate retained otherwise; vertical handoff fixed at declared diagnostic rate; two-sided rupture fixed at declared diagnostic rate; inventory depletion fixed at declared diagnostic rate; no field or inferred frequency",
       "correlation_assumption": "independent_event_bounds"
     }
   ],

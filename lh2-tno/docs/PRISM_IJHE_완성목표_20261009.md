@@ -195,3 +195,11 @@ G1의 실패를 숨기기 위해 저마하 packet을 바꾸어 넣지 않고, so
 
 generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 최신 범위 장부를 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`에 만들었다. `vertical_handoff`와 `two_sided_rupture`는 이제 모두 `PARTIAL`로 표시되고, `NO_EVENT_GENERATED`가 숨겨지지 않는다. 최신 평가 `results/20261019/native_campaign_with_vertical_handoff_two_sided_facility_assessment.json`은 31개 event, 40개 case, 120개 atom을 집계하지만 22개 operator-limited와 5개 명시적 uncomputed case, 부분 사고 family, synthetic provider가 남아 전체 시설 IR/F-N을 `null`로 유지한다.
 
+## 2026-10-19 재고 소진 설비를 포함한 네 번째 시설 campaign
+
+이번 단계에서 기존 generic campaign, vertical handoff, two-sided rupture에 독립적으로 실행된 inventory-depletion campaign을 하나의 시설 평가로 연결했다. 네 campaign은 서로 다른 물리 범위를 같은 사건으로 합치지 않도록 namespace와 component ID를 분리한다. 재고 소진 설비는 `inventory-depletion-pipe-01`이며 5개 event, 10개 실행 case, 0개 미계산 case, 40개 risk atom을 갖는다. 각 case의 종료는 provider의 positive-mass depletion threshold다.
+
+문헌 빈도 시나리오도 다섯 개 asset/event 시나리오에 재고 소진 설비를 명시적으로 포함했다. 중앙·p05·p95·independent event 시나리오에서 선언된 진단 빈도만 재가중하며, provider packet에서 빈도를 추론하지 않는다. 시설 credible interval과 최종 IR/F-N 승격은 여전히 범위 완결성과 물리검증 이후의 단계다.
+
+최신 평가 결과는 36개 event, 50개 case, 37개 미계산 case, 160개 risk atom, 10개 component다. `inventory-depletion-pipe-01`은 coverage 회계 보완 후 `EXECUTED`로 보이지만 전체 시설 상태는 `PARTIAL_FACILITY_SCOPE`다. IJHE 감사는 27개 검사와 3개 blocker를 유지한다. 따라서 이번 추가는 설비 상태→재고 소진 방출→피해 chain의 연결을 강화한 것이며, 전체 시설 QRA가 끝났다는 의미는 아니다.
+

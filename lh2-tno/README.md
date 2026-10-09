@@ -977,3 +977,11 @@ G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`�
 
 `scope_matrix_merge.py`는 generic·vertical·two-sided matrix를 family별로 합쳐 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`에 보관합니다. 부분 또는 미계산 family를 `EXECUTED`로 바꾸지 않으므로 `vertical_handoff`와 `two_sided_rupture`의 `PARTIAL` 상태가 시설 감사에 그대로 보입니다. two-sided endpoint 상호작용, 합성 geometry·인구·provider handoff 검증은 남은 제한이며, 시설 전체 IR/F-N은 계속 `null`입니다.
 
+### Inventory depletion을 포함한 공통 시설 평가
+
+독립적으로 실행한 재고 소진 진단도 공통 시설 평가에 결합할 수 있습니다. `scripts/rebind_campaign_namespace.py`로 `inventory-depletion-pipe-01`을 별도 namespace에 넣고, 기존 transfer-line 사건과 중복 합산하지 않습니다. provider가 선언한 positive-mass depletion threshold와 종료시간은 case별로 보존됩니다.
+
+최신 네 campaign 결합 결과는 [`native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_facility_assessment_summary.json`](examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_facility_assessment_summary.json)에 있습니다. 36개 event, 50개 case, 160개 risk atom, 10개 component를 기록하며, inventory depletion 부분만 5개 event·10개 실행 case·0개 미계산 case·40개 atom입니다. `conditional_diagnostic_facility_annual_ir_low_high`와 F/N은 계산되지만, `facility_total_risk_available`은 `false`입니다.
+
+네 개 범위표의 병합 결과는 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`입니다. family별 상태가 `PARTIAL`이면 시설 전체 위험도를 올리지 않으며, 12개 사고 family 중 빠진 provider history·operator-limited physics·synthetic release는 감사 결과에 남습니다. 독립 진단 결과에 component coverage가 없을 때는 namespace rebind 단계가 event/case 회계에서 한 행을 만들어 설비별 연결 상태를 보존합니다. 이 기능은 회계 보완이며 빈도 추론·물리검증·QRA 승격이 아닙니다.
+

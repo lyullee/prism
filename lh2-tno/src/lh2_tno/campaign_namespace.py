@@ -127,6 +127,63 @@ def rebind_campaign_result(
             for row in rows:
                 if isinstance(row, dict) and row.get("component_id") == source_component_id:
                     row["component_id"] = component_id
+        else:
+            # Some stand-alone diagnostic campaigns predate the facility
+            # coverage ledger and only carry event/case accounting.  Rebind
+            # that evidence into one explicit component row so the facility
+            # merge can distinguish an executed diagnostic from missing
+            # coverage metadata.  This is bookkeeping only; it does not
+            # promote the campaign or add any frequency inference.
+            event_rows = [row for row in output.get("events", []) if isinstance(row, dict)]
+            case_rows = [row for row in output.get("cases", []) if isinstance(row, dict)]
+            uncomputed_rows = [
+                row for row in output.get("uncomputed_cases", []) if isinstance(row, dict)
+            ]
+            event_ids = {str(row.get("id")) for row in event_rows if row.get("id")}
+            frequencies = {
+                str(row.get("id")): float(row.get("annual_frequency_per_year", 0.0) or 0.0)
+                for row in event_rows
+                if row.get("id")
+            }
+            statuses = [str(row.get("status", "")) for row in case_rows]
+            executed = sum(
+                status in {
+                    "EXECUTED",
+                    "EXECUTED_OPERATOR_LIMITED",
+                    "EXECUTED_DOMAIN_INCOMPLETE",
+                }
+                for status in statuses
+            )
+            fully_validated = sum(status == "EXECUTED" for status in statuses)
+            operator_limited = sum(status == "EXECUTED_OPERATOR_LIMITED" for status in statuses)
+            domain_incomplete = sum(status == "EXECUTED_DOMAIN_INCOMPLETE" for status in statuses)
+            uncomputed_reasons = sorted({
+                str(row.get("reason"))
+                for row in uncomputed_rows
+                if row.get("reason")
+            })
+            scope_status = (
+                "NO_EVENT_GENERATED" if not event_ids else
+                "EXECUTED"
+                if not uncomputed_rows and all(status == "EXECUTED" for status in statuses)
+                else "PARTIAL"
+            )
+            rows = [{
+                "component_id": component_id,
+                "kind": "diagnostic_component",
+                "scope_status": scope_status,
+                "excluded_reason": None,
+                "generated_event_count": len(event_ids),
+                "generated_initiation_frequency_per_year": sum(frequencies.values()),
+                "campaign_case_count": len(case_rows),
+                "executed_case_count": executed,
+                "fully_validated_case_count": fully_validated,
+                "operator_limited_case_count": operator_limited,
+                "domain_incomplete_case_count": domain_incomplete,
+                "uncomputed_case_count": len(uncomputed_rows),
+                "uncomputed_reasons": uncomputed_reasons,
+            }]
+            coverage["by_component"] = rows
 
     output["facility_id"] = facility_id
     output["source_facility_id"] = result.get("facility_id")
