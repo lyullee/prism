@@ -1881,7 +1881,7 @@
   "external_scenario_evidence_scope": "facility-neutral screening only; outdoor candidate rows retained; indoor/semi-enclosed/test-building rows outside declared outdoor scope",
   "external_scenario_evidence_test_status": "scenario importer and IJHE diagnostic evidence check passed; full portable suite 441 passed",
   "ijhe_completion_audit_latest_scenario_evidence_status": "PASS diagnostic-only; 52 records from 3 CSVs, 41 outdoor candidates and 11 out-of-scope rows",
-  "full_test_suite_status": "444 passed",
+  "full_test_suite_status": "445 passed",
   "diagnostic_campaign_binding_latest_record": "results/20261018/generic_lh2_diagnostic_campaign_binding_current.json",
   "diagnostic_campaign_binding_latest_status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING; structural event/case/risk-atom binding complete",
   "diagnostic_campaign_binding_latest_packet_event_count": 24,
