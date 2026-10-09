@@ -317,12 +317,16 @@ def _population_accounting(
 def _scenario_branch_accounting(
     atoms: Sequence[Mapping[str, Any]],
     conditions: Mapping[str, Mapping[str, Any]],
+    *,
+    event_frequencies: Mapping[str, float] | None = None,
 ) -> dict[str, Any]:
     """Preserve the condition, release, and ignition dimensions of each atom.
 
     The facility IR/F-N sum is intentionally performed over risk atoms.  This
     companion ledger makes the dimensions behind that sum inspectable without
-    reweighting or inventing a frequency.  A release branch is the explicit
+    inventing a frequency.  An optional scenario frequency map is used only by
+    literature sensitivity outputs to show the same branch topology under a
+    published reweighting.  A release branch is the explicit
     isolation/termination branch carried by the provider packet identity; an
     ignition branch is the conditional outcome label on the atom.  Family
     views remain attached to atoms and are never summed as independent risk.
@@ -334,12 +338,14 @@ def _scenario_branch_accounting(
             "release_branches": {},
             "ignition_branches": {},
             "cross_product_count": 0,
+            "missing_dimension_atom_count": 0,
         }
 
     condition_groups: dict[str, dict[str, Any]] = {}
     release_groups: dict[str, dict[str, Any]] = {}
     ignition_groups: dict[str, dict[str, Any]] = {}
     cross_product: set[tuple[str, str, str]] = set()
+    missing_dimension_atom_count = 0
 
     def _group(group: dict[str, dict[str, Any]], key: str) -> dict[str, Any]:
         return group.setdefault(
@@ -367,10 +373,16 @@ def _scenario_branch_accounting(
         condition_id = str(atom.get("annual_condition_id", ""))
         release_id = str(atom.get("release_branch_id", ""))
         ignition_id = str(atom.get("ignition_branch", ""))
+        if not condition_id or not release_id or not ignition_id:
+            missing_dimension_atom_count += 1
         families = _families(atom)
         cross_product.add((condition_id, release_id, ignition_id))
         conditional_weight = float(atom.get("conditional_weight", 0.0))
-        initiating_frequency = float(atom.get("initiating_frequency_per_year", 0.0))
+        initiating_frequency = (
+            float(event_frequencies[event_id])
+            if event_frequencies is not None and event_id in event_frequencies
+            else float(atom.get("initiating_frequency_per_year", 0.0))
+        )
 
         condition_row = _group(condition_groups, condition_id)
         condition_row["event_ids"].add(event_id)
@@ -443,11 +455,16 @@ def _scenario_branch_accounting(
             **row,
         }
     return {
-        "status": "EXPLICIT_BRANCH_ACCOUNTING",
+        "status": (
+            "BRANCH_DIMENSIONS_MISSING"
+            if missing_dimension_atom_count
+            else "EXPLICIT_BRANCH_ACCOUNTING"
+        ),
         "annual_conditions": condition_output,
         "release_branches": _finalize(release_groups),
         "ignition_branches": _finalize(ignition_groups),
         "cross_product_count": len(cross_product),
+        "missing_dimension_atom_count": missing_dimension_atom_count,
         "frequency_reallocation_performed": False,
     }
 

@@ -766,7 +766,7 @@
   "ijhe_completion_audit_blocking_reason_count": 3,
   "ijhe_completion_audit_realtime_monitor_contract_status": "PASS; monitor contract present; one_hz_fresh_physics_demonstrated=false",
   "ijhe_completion_audit_complete_facility_qra_claim": false,
-  "ijhe_completion_audit_test_status": "22 audit checks; full portable suite 546 passed",
+  "ijhe_completion_audit_test_status": "22 audit checks; full portable suite 547 passed",
   "ijhe_completion_audit_uncertainty_wrapper_compatibility": true,
   "ijhe_completion_audit_uncertainty_scenario_count": 5,
   "ijhe_completion_audit_uncertainty_facility_credible_interval": false,
@@ -2965,7 +2965,7 @@
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": ["CURVE_AVAILABLE", "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY", "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS", "NO_RISK_ATOMS"],
-  "full_portable_test_count_latest": 546,
+  "full_portable_test_count_latest": 547,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": ["annual_condition_weather", "release_branch_termination", "ignition_branch"],
@@ -2974,5 +2974,7 @@
   "facility_scenario_branch_accounting_latest_summary": "Latest 29-event/136-atom merged diagnostic: 3 annual conditions, 2 release branches, 4 ignition branches, 12 observed condition×release×ignition combinations; facility total remains withheld.",
   "facility_release_termination_inventory_ledger_implemented": true,
   "facility_release_termination_inventory_ledger_output": "release_termination_inventory_ledger on facility ledger and assessment; duration, termination, isolation, inventory and mass closure per case",
-  "facility_release_termination_inventory_ledger_policy": "Provider-declared duration and termination evidence is retained; missing, operator-limited and domain-incomplete branches remain explicit and never become zero risk."
+  "facility_release_termination_inventory_ledger_policy": "Provider-declared duration and termination evidence is retained; missing, operator-limited and domain-incomplete branches remain explicit and never become zero risk.",
+  "frequency_uncertainty_branch_accounting_implemented": true,
+  "frequency_uncertainty_branch_accounting_output": "Each literature reweighting scenario carries scenario_branch_accounting with the same condition/release/ignition topology and scenario-specific weighted frequency sums."
 }

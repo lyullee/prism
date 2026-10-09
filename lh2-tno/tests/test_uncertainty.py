@@ -79,6 +79,37 @@ def test_published_literature_quantiles_reweight_atoms_without_physics():
     )
 
 
+def test_frequency_uncertainty_preserves_branch_topology_and_reweights_branch_frequency():
+    events = _valve_events()
+    payload = _result((events[0],))
+    atom = payload['risk_atoms'][0]
+    atom.update({
+        'annual_condition_id': 'weather-1',
+        'release_branch_id': 'isolation-success',
+        'ignition_branch': 'direct_fire',
+    })
+    payload['annual_conditions'] = [{
+        'id': 'weather-1',
+        'annual_probability': 0.4,
+        'weather': {'wind_speed_m_per_s': 3.0},
+    }]
+    result = literature_frequency_uncertainty(
+        payload,
+        (LiteratureFrequencyScenario(
+            id='branch-low',
+            asset_quantiles={'valves': 'p05'},
+            provenance='published test bounds',
+        ),),
+    )
+    branch = result['scenarios'][0]['scenario_branch_accounting']
+    assert branch['status'] == 'EXPLICIT_BRANCH_ACCOUNTING'
+    assert branch['annual_conditions']['weather-1']['weather']['wind_speed_m_per_s'] == 3.0
+    assert branch['release_branches']['isolation-success']['weighted_frequency_per_year'] == pytest.approx(
+        events[0].marginal_p05_per_year
+    )
+    assert branch['ignition_branches']['direct_fire']['risk_atom_count'] == 1
+
+
 def test_frequency_uncertainty_accepts_facility_event_family_annotations():
     events = _valve_events()
     payload = _result(events)

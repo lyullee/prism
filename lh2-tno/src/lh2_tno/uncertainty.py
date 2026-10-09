@@ -18,6 +18,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 
 from .contracts import Contract, Name, canonical_digest
+from .facility_ledger import _scenario_branch_accounting
 from .frequency import FrequencyEvent
 
 
@@ -157,6 +158,11 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
     assets = {e.asset_id for e in events.values()}
     ids = set(result["known_contribution_annual_ir_low_high"])
     atoms = result["risk_atoms"]
+    annual_conditions = {
+        str(condition.get("id")): condition
+        for condition in result.get("annual_conditions", ())
+        if isinstance(condition, dict) and condition.get("id")
+    }
     event_ids = set(events)
     for scenario in scenarios:
         if scenario.correlation_assumption == "within_asset_shared_quantile":
@@ -215,6 +221,11 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
                                     for key, v in contribution.items() if key in computed_assets)
                            for asset, value in contribution.items()})
         family_contribution = _scenario_family_contribution(atoms, event_frequency)
+        scenario_branch_accounting = _scenario_branch_accounting(
+            atoms,
+            annual_conditions,
+            event_frequencies=event_frequency,
+        )
         outputs.append({
             'scenario': scenario.model_dump(mode='json'),
             'known_annual_ir_low_high': ir,
@@ -229,6 +240,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             'scenario_family_rank_by_known_expected_fatalities_low_high': _rank_contributions(
                 family_contribution
             ),
+            'scenario_branch_accounting': scenario_branch_accounting,
             'event_frequency_per_year': event_frequency,
             'uncomputed_cases': result['uncomputed_cases'],
             'declared_scope_annual_ir_low_high': ir if result['declared_scope_numerically_complete'] else None,
