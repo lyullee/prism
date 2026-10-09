@@ -1,0 +1,3129 @@
+{
+  "schema_version": "prism.ijhe_completion_audit.v1",
+  "status": "INCOMPLETE_EVIDENCE",
+  "checks": [
+    {
+      "name": "equipment_state_to_release_to_consequence",
+      "status": "PASS",
+      "evidence": {
+        "generated_event_count": 29,
+        "case_count": 34,
+        "executed_case_count": 34
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "external_native_model_contract_audit",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261022\\lh2dt_native_contract_audit_native_catalog.json",
+        "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
+        "binding_count": 8,
+        "native_accident_export_component_count": 7,
+        "diagnostic_adapter_contract_verified_count": 7,
+        "provider_packet_promoted": false,
+        "frequency_inference_performed": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "This static audit separates native external accident export methods from PRISM-side diagnostic wrappers. It is evidence of the integration boundary, not a qualified provider packet or facility QRA."
+    },
+    {
+      "name": "native_model_binding_reconciliation",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261022\\native_binding_reconciliation.json",
+        "status": "RECONCILED_NATIVE_INTERFACES",
+        "native_accident_export_component_count": 7,
+        "reconciled_native_component_count": 7,
+        "blocking_reason_count": 0,
+        "provider_packet_promoted": false,
+        "frequency_inference_performed": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "The model catalog and native source audit agree on accident-export interface presence. This closes a bookkeeping mismatch only; runtime packets, field qualification, frequency evidence and facility IR/F-N remain separate gates."
+    },
+    {
+      "name": "diagnostic_native_full_bore_chain",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_dynamic_pipe_full_bore_case_verification.json",
+        "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+        "event_id": "generic-lh2-full-bore-diagnostic/transfer-line/full-bore",
+        "component_id": "liquid-transfer-line-01",
+        "termination_basis": "model_pressure_equalization",
+        "provider_duration_s": 0.03141380098162305,
+        "provider_final_pressure_pa_abs": 101325.00000000426,
+        "provider_pressure_equalized": true,
+        "provider_final_pressure_matches_ambient": true,
+        "provider_mass_residual_kg": 0.0,
+        "consequence_chain_executed": true,
+        "frequency_applied": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "Native finite full-bore pressure-equalization output reached the PRISM liquid/two-phase consequence chain. This is diagnostic integration evidence; it does not qualify a provider, assign a frequency, or promote facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_native_lh2dt_packet_coverage",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261023\\native_generic_scope_packet_coverage_v7.json",
+        "status": "PARTIAL_NATIVE_DIAGNOSTIC_EVIDENCE",
+        "packet_count": 24,
+        "exact_worklist_event_count": 24,
+        "expected_worklist_event_count": 24,
+        "consequence_chain_event_count": 24,
+        "frequency_bound_event_count": 0,
+        "provider_packet_promoted_count": 0,
+        "physical_validation_claim_count": 0,
+        "facility_qra_claim_count": 0,
+        "family_summary": {
+          "ambient-vaporizer": {
+            "packet_count": 3,
+            "chain_count": 3,
+            "frequency_bound_count": 0
+          },
+          "pressure-relief-vent": {
+            "packet_count": 1,
+            "chain_count": 1,
+            "frequency_bound_count": 0
+          },
+          "reliquefier": {
+            "packet_count": 3,
+            "chain_count": 3,
+            "frequency_bound_count": 0
+          },
+          "storage-shell": {
+            "packet_count": 5,
+            "chain_count": 5,
+            "frequency_bound_count": 0
+          },
+          "transfer-line": {
+            "packet_count": 5,
+            "chain_count": 5,
+            "frequency_bound_count": 0
+          },
+          "transfer-pump": {
+            "packet_count": 2,
+            "chain_count": 2,
+            "frequency_bound_count": 0
+          },
+          "transfer-valve": {
+            "packet_count": 5,
+            "chain_count": 5,
+            "frequency_bound_count": 0
+          }
+        }
+      },
+      "interpretation": "Saved native lh2dt packet outputs are indexed by equipment family and opening. The ledger demonstrates diagnostic interface coverage only; it does not qualify the provider, assign a facility frequency, or unlock facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_native_packet_campaign_execution",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261023\\native_generic_scope_packet_campaign_ledger_v10.json",
+        "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+        "event_count": 24,
+        "expected_worklist_event_count": 24,
+        "case_count": 24,
+        "chain_executed_case_count": 24,
+        "packet_identity_case_count": 24,
+        "packet_digest_case_count": 24,
+        "uncomputed_case_count": 0,
+        "uncomputed_without_packet_identity_case_count": 0,
+        "packet_identity_consumed": true,
+        "operator_limited_case_count": 19,
+        "failed_case_count": 0,
+        "failed_cases": [],
+        "risk_atom_count": 96,
+        "facility_total_risk_available": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "The native packet identities were consumed by the facility campaign and every failed case is preserved explicitly. This diagnostic result does not qualify the provider, invent a frequency, or expose facility total IR/F-N."
+    },
+    {
+      "name": "diagnostic_native_full_bore_frequency_binding",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_dynamic_pipe_full_bore_facility_frequency_case_verification.json",
+        "status": "PARTIAL_DECLARED_SCOPE",
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "full_bore_match": true,
+        "termination_basis": "model_pressure_equalization",
+        "provider_duration_s": 0.0314138009816233,
+        "provider_pressure_equalized": true,
+        "provider_final_pressure_matches_ambient": true,
+        "provider_mass_residual_kg": -1.734723475976807e-18,
+        "annual_frequency_per_year": 1.9e-07,
+        "annual_frequency_provenance": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%; Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf; 6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+        "frequency_applied": true,
+        "frequency_exact_opening_match": true,
+        "consequence_chain_executed": true,
+        "facility_campaign_executed": true,
+        "facility_campaign_status": "PARTIAL_DECLARED_SCOPE",
+        "facility_campaign_event_count": 5,
+        "facility_campaign_case_count": 5,
+        "facility_campaign_executed_case_count": 1,
+        "facility_campaign_uncomputed_case_count": 4,
+        "facility_campaign_risk_atom_count": 4,
+        "facility_campaign_conditional_risk_available": true,
+        "facility_total_risk_available": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "The native finite full-bore provider packet is bound to the declared LH2_PIPE AREA_100% literature event at one reviewed outlet and reaches the PRISM consequence chain. This diagnostic evidence does not calibrate a site frequency, complete the facility event set, or promote facility IR/F-N."
+    },
+    {
+      "name": "literature_frequency_provenance_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261018\\generic_lh2_frequency_provenance_current.json",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "profile_count": 7,
+        "event_count": 24,
+        "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+        "field_frequency_collection_used": false,
+        "sensor_frequency_learning_used": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "The selected literature frequency profiles and generated event rows have source and catalogue digest provenance. This does not make the rates field-validated or create a facility credible interval."
+    },
+    {
+      "name": "external_scenario_evidence_import",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261020\\inspection_center_scenario_evidence_reaudit.json",
+        "status": "SCREENING_EVIDENCE_IMPORTED",
+        "source_file_count": 3,
+        "record_count": 52,
+        "scope_status_counts": {
+          "CANDIDATE_OUTDOOR_SCREENING": 41,
+          "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
+        },
+        "frequency_applied": false,
+        "sensor_frequency_learning_used": false,
+        "provider_packet_created": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "External procedure and failure tables are retained as facility-neutral screening evidence. Candidate families and monitoring tags do not create a frequency, provider release packet or facility IR/F-N result."
+    },
+    {
+      "name": "diagnostic_adapter_execution_contract",
+      "status": "PASS",
+      "evidence": {
+        "source": "diagnostic_adapter_registry",
+        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED",
+        "adapter_count": 7,
+        "resolved_adapter_count": 7,
+        "provider_instance_count": 0,
+        "qualified_provider_packet_count": 0,
+        "record": null
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "diagnostic_worklist_execution_evidence",
+      "status": "BLOCKED",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261014\\diagnostic_adapter_runner_layered_tank_smoke.json",
+        "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "worklist_item_id": null,
+        "provider_instance_id": null,
+        "worklist_exact_match": null,
+        "consequence_chain_executed": null,
+        "consequence_chain_status": null,
+        "consequence_chain_elapsed_ms": null,
+        "fresh_adapter_execution_elapsed_ms": 1663.510600104928,
+        "qualified_provider_packet_count": 0,
+        "provider_packet_promoted": false,
+        "worklist_frequency_bound": false,
+        "consequence_context_frequency_bound": null,
+        "frequency_inference_performed": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "A worklist item reached the diagnostic provider and consequence-chain boundary; this evidence is intentionally non-qualifying and does not satisfy the provider, frequency, facility-QRA, or physical-validation gates."
+    },
+    {
+      "name": "diagnostic_worklist_packet_coverage_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261023\\native_generic_scope_worklist_packet_evidence_v7.json",
+        "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
+        "worklist_event_count": 24,
+        "candidate_event_count": 24,
+        "exact_match_event_count": 24,
+        "strict_packet_valid_event_count": 24,
+        "consequence_chain_event_count": 24,
+        "qualified_provider_packet_count": 0,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "Saved external-model packets cover only the exact-matched worklist subset; this diagnostic evidence does not close the missing events or qualify the provider packets."
+    },
+    {
+      "name": "diagnostic_worklist_campaign_binding_evidence",
+      "status": "BLOCKED",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\native_generic_scope_vertical_diagnostic_campaign_binding_v4.json",
+        "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING",
+        "packet_event_count": 24,
+        "campaign_event_count": 29,
+        "campaign_case_count": 34,
+        "campaign_risk_atom_count": 136,
+        "packet_event_to_campaign_event_match_count": 24,
+        "packet_event_to_campaign_case_match_count": 24,
+        "packet_event_to_campaign_risk_atom_match_count": 24,
+        "structural_binding_complete": false,
+        "packet_scope_subset_complete": true,
+        "campaign_scope_packet_coverage_complete": false,
+        "unbound_campaign_event_count": 5,
+        "unbound_campaign_event_ids": [
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+        ],
+        "packet_event_coverage_ratio": 0.8275862068965517,
+        "packet_case_coverage_ratio": 0.8275862068965517,
+        "packet_risk_atom_event_coverage_ratio": 0.8275862068965517,
+        "packet_identity_consumed": false,
+        "packet_subset_identity_consumed": true,
+        "packet_digest_checked_event_count": 24,
+        "packet_digest_match_event_count": 24,
+        "frequency_from_provider_packet": false,
+        "packet_claims_preserved": true,
+        "executed_case_count": 34,
+        "campaign_provider_identity_case_count": 34,
+        "campaign_provider_identity_recorded": true
+      },
+      "interpretation": "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. The matched packet subset may have exact digest consumption, but any campaign-only events keep the full facility binding gate blocked; the result stays diagnostic-only."
+    },
+    {
+      "name": "diagnostic_conditional_facility_risk_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\native_generic_scope_vertical_merged_facility_assessment_population_v6.json",
+        "status": "PARTIAL_FACILITY_SCOPE",
+        "conditional_diagnostic_facility_risk_available": true,
+        "conditional_diagnostic_facility_annual_ir_low_high": {
+          "worker-01": [
+            0.0,
+            0.0
+          ]
+        },
+        "conditional_diagnostic_facility_expected_death_fn_low_high": [
+          {
+            "expected_deaths": [],
+            "cumulative_frequency_per_year": []
+          },
+          {
+            "expected_deaths": [],
+            "cumulative_frequency_per_year": []
+          }
+        ],
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": {
+          "status": "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
+          "endpoint_level_count_low_high": [
+            0,
+            0
+          ],
+          "max_expected_deaths_low_high": [
+            0.0,
+            0.0
+          ],
+          "curve_uses_threshold": "N >= 1 expected deaths"
+        },
+        "population_accounting": {
+          "status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+          "annual_condition_count": 3,
+          "referenced_condition_count": 3,
+          "referenced_condition_ids": [
+            "D-3ms-west",
+            "D-4ms-west",
+            "synthetic-generic-worker-west-3ms"
+          ],
+          "missing_condition_ids": [],
+          "missing_population_condition_ids": [],
+          "mismatched_receptor_ids": {},
+          "invalid_population_rows": {},
+          "rebound_diagnostic_condition_ids": [
+            "D-3ms-west",
+            "D-4ms-west"
+          ],
+          "population_row_count": 3,
+          "population_receptor_ids": [
+            "worker-01"
+          ],
+          "population_provenance": {
+            "D-3ms-west": "synthetic annual condition partition; no site weather qualification",
+            "D-4ms-west": "synthetic annual condition partition; no site weather qualification",
+            "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
+          },
+          "receptor_ids": [
+            "worker-01"
+          ]
+        },
+        "scenario_branch_accounting": {
+          "status": "EXPLICIT_BRANCH_ACCOUNTING",
+          "annual_conditions": {
+            "D-3ms-west": {
+              "annual_probability": 0.4,
+              "weather": {
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 2.0,
+              "weighted_frequency_per_year": 8.288000000000002e-05,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
+            },
+            "D-4ms-west": {
+              "annual_probability": 0.6,
+              "weather": {
+                "wind_speed_m_s": 4.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 3.0000000000000004,
+              "weighted_frequency_per_year": 0.00012432,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
+            },
+            "synthetic-generic-worker-west-3ms": {
+              "annual_probability": 1.0,
+              "weather": {
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic single outdoor weather/population condition for generic LH2 campaign",
+              "event_count": 24,
+              "risk_atom_count": 96,
+              "conditional_weight_sum": 24.0,
+              "weighted_frequency_per_year": 0.0138259,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "matched-event-provider-request"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "inventory_depletion",
+                "inventory_over_600s",
+                "liquid_two_phase",
+                "pipe_hole",
+                "pump_hole",
+                "reliquefier_hole",
+                "two_sided_rupture",
+                "valve_hole",
+                "vaporizer_hole",
+                "vent_hole",
+                "vessel_hole"
+              ]
+            }
+          },
+          "release_branches": {
+            "matched-event-provider-request": {
+              "event_count": 24,
+              "risk_atom_count": 96,
+              "conditional_weight_sum": 24.0,
+              "weighted_frequency_per_year": 0.0138259,
+              "annual_condition_ids": [
+                "synthetic-generic-worker-west-3ms"
+              ],
+              "release_branch_ids": [],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "inventory_depletion",
+                "inventory_over_600s",
+                "liquid_two_phase",
+                "pipe_hole",
+                "pump_hole",
+                "reliquefier_hole",
+                "two_sided_rupture",
+                "valve_hole",
+                "vaporizer_hole",
+                "vent_hole",
+                "vessel_hole"
+              ],
+              "termination_basis_counts": {
+                "emergency_relief_discharge": 4,
+                "inventory_depletion": 24,
+                "inventory_over_600s": 4,
+                "synthetic_diagnostic_horizon": 56,
+                "two_sided_rupture": 16
+              }
+            },
+            "provider-vertical-handoff": {
+              "event_count": 5,
+              "risk_atom_count": 40,
+              "conditional_weight_sum": 5.000000000000001,
+              "weighted_frequency_per_year": 0.00020720000000000005,
+              "annual_condition_ids": [
+                "D-3ms-west",
+                "D-4ms-west"
+              ],
+              "release_branch_ids": [],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ],
+              "termination_basis_counts": {}
+            }
+          },
+          "ignition_branches": {
+            "delayed_explosion": {
+              "event_count": 29,
+              "risk_atom_count": 34,
+              "conditional_weight_sum": 2.0880000000000005,
+              "weighted_frequency_per_year": 0.0010103832000000002,
+              "annual_condition_ids": [
+                "D-3ms-west",
+                "D-4ms-west",
+                "synthetic-generic-worker-west-3ms"
+              ],
+              "release_branch_ids": [
+                "matched-event-provider-request",
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [],
+              "scenario_families": [
+                "inventory_depletion",
+                "inventory_over_600s",
+                "liquid_two_phase",
+                "pipe_hole",
+                "pump_hole",
+                "reliquefier_hole",
+                "two_sided_rupture",
+                "valve_hole",
+                "vaporizer_hole",
+                "vent_hole",
+                "vessel_hole"
+              ]
+            },
+            "delayed_flash_fire": {
+              "event_count": 29,
+              "risk_atom_count": 34,
+              "conditional_weight_sum": 3.132000000000002,
+              "weighted_frequency_per_year": 0.0015155748,
+              "annual_condition_ids": [
+                "D-3ms-west",
+                "D-4ms-west",
+                "synthetic-generic-worker-west-3ms"
+              ],
+              "release_branch_ids": [
+                "matched-event-provider-request",
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [],
+              "scenario_families": [
+                "inventory_depletion",
+                "inventory_over_600s",
+                "liquid_two_phase",
+                "pipe_hole",
+                "pump_hole",
+                "reliquefier_hole",
+                "two_sided_rupture",
+                "valve_hole",
+                "vaporizer_hole",
+                "vent_hole",
+                "vessel_hole"
+              ]
+            },
+            "direct_fire": {
+              "event_count": 29,
+              "risk_atom_count": 34,
+              "conditional_weight_sum": 2.9000000000000012,
+              "weighted_frequency_per_year": 0.0014033099999999996,
+              "annual_condition_ids": [
+                "D-3ms-west",
+                "D-4ms-west",
+                "synthetic-generic-worker-west-3ms"
+              ],
+              "release_branch_ids": [
+                "matched-event-provider-request",
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [],
+              "scenario_families": [
+                "inventory_depletion",
+                "inventory_over_600s",
+                "liquid_two_phase",
+                "pipe_hole",
+                "pump_hole",
+                "reliquefier_hole",
+                "two_sided_rupture",
+                "valve_hole",
+                "vaporizer_hole",
+                "vent_hole",
+                "vessel_hole"
+              ]
+            },
+            "no_ignition": {
+              "event_count": 29,
+              "risk_atom_count": 34,
+              "conditional_weight_sum": 20.88,
+              "weighted_frequency_per_year": 0.010103831999999998,
+              "annual_condition_ids": [
+                "D-3ms-west",
+                "D-4ms-west",
+                "synthetic-generic-worker-west-3ms"
+              ],
+              "release_branch_ids": [
+                "matched-event-provider-request",
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [],
+              "scenario_families": [
+                "inventory_depletion",
+                "inventory_over_600s",
+                "liquid_two_phase",
+                "pipe_hole",
+                "pump_hole",
+                "reliquefier_hole",
+                "two_sided_rupture",
+                "valve_hole",
+                "vaporizer_hole",
+                "vent_hole",
+                "vessel_hole"
+              ]
+            }
+          },
+          "cross_product_count": 12,
+          "missing_dimension_atom_count": 0,
+          "frequency_reallocation_performed": false
+        },
+        "release_termination_inventory_ledger": {
+          "schema_version": "prism.release_termination_inventory_ledger.v1",
+          "rows": [
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+              "asset_id": "storage-shell",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.00065,
+              "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 0.05,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_depletion",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+                "component_id": "storage-tank-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "4f54ba9a11c465be115dce37dbaa8294307622d5b3071cb2e268dd51ec011051"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt LayeredTank explicit liquid accidental outlet; explicit placement from manifest port tank-accident-out"
+                ],
+                "duration_s": [
+                  0.05
+                ],
+                "available_mass_kg": [
+                  0.028492061899609754
+                ],
+                "cumulative_mass_out_kg": [
+                  0.008166514093845672
+                ],
+                "residual_mass_kg": [
+                  0.02032554780576408
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.008166514093845672,
+                "end_to_end_residual_kg": 7.922487752849133e-19
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+              "asset_id": "storage-shell",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.00014,
+              "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 5.999999999999993e-05,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_depletion",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+                "component_id": "storage-tank-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "0a74343fec0d061060c5694c3d6df1de37e583b1b75a780e01a8feb4e509bd5b"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt LayeredTank explicit liquid accidental outlet; explicit placement from manifest port tank-accident-out"
+                ],
+                "duration_s": [
+                  5.999999999999993e-05
+                ],
+                "available_mass_kg": [
+                  0.028492061899609754
+                ],
+                "cumulative_mass_out_kg": [
+                  0.00010057792972414069
+                ],
+                "residual_mass_kg": [
+                  0.02839148396988561
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.00010057792972414058,
+                "end_to_end_residual_kg": -5.1070936330184226e-11
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+              "asset_id": "storage-shell",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 2.8e-05,
+              "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 5.999999999999999e-06,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_depletion",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+                "component_id": "storage-tank-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "b632faa25b88526fb1c51c6f3363e3287b7b1771bd4d1150921a5d5c2936a16f"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt LayeredTank explicit liquid accidental outlet; explicit placement from manifest port tank-accident-out"
+                ],
+                "duration_s": [
+                  5.999999999999999e-06
+                ],
+                "available_mass_kg": [
+                  0.028492061899609754
+                ],
+                "cumulative_mass_out_kg": [
+                  0.00010057966768755135
+                ],
+                "residual_mass_kg": [
+                  0.028391482231922203
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.00010057966768755134,
+                "end_to_end_residual_kg": 1.6207376256754819e-21
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+              "asset_id": "storage-shell",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 5.7e-06,
+              "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 1e-06,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_depletion",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+                "component_id": "storage-tank-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "bdf3a343ef4755d7ff378a9bc16d7108f91ee2d026c7b680e91fe6195c1d001a"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt LayeredTank explicit liquid accidental outlet; explicit placement from manifest port tank-accident-out"
+                ],
+                "duration_s": [
+                  1e-06
+                ],
+                "available_mass_kg": [
+                  0.028492061899609754
+                ],
+                "cumulative_mass_out_kg": [
+                  0.00016756351240572947
+                ],
+                "residual_mass_kg": [
+                  0.028324498387204026
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.00016756351240572947,
+                "end_to_end_residual_kg": 1.0632579593756618e-20
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+              "asset_id": "storage-shell",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 1.2e-06,
+              "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 1e-06,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_depletion",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+                "component_id": "storage-tank-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "b8a6145939fbbdb7cb20d0e30cdac83acd75c4cdc167915accdade9de552b465"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt LayeredTank explicit liquid accidental outlet; explicit placement from manifest port tank-accident-out"
+                ],
+                "duration_s": [
+                  1e-06
+                ],
+                "available_mass_kg": [
+                  0.028492061899609754
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0016625666208320196
+                ],
+                "residual_mass_kg": [
+                  0.026829495278777735
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0016625666208320196,
+                "end_to_end_residual_kg": 2.168404344971009e-19
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+              "asset_id": "transfer-line",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 3.4e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.001,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+                "component_id": "liquid-transfer-line-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "4fea4e1f7ede1ed700f4417b43c48540abb47caa39f52df1fcfd2a96dd40bb8d"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicHEMPipe explicit full-bore atmospheric outlet; explicit placement from manifest port line-accident-out"
+                ],
+                "duration_s": [
+                  0.001
+                ],
+                "available_mass_kg": [
+                  3.4802029894759985e-06
+                ],
+                "cumulative_mass_out_kg": [
+                  2.014140456353654e-08
+                ],
+                "residual_mass_kg": [
+                  3.460061584912462e-06
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 2.0141404563536543e-08,
+                "end_to_end_residual_kg": 4.963083675318166e-23
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+              "asset_id": "transfer-line",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 1.6e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.001,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+                "component_id": "liquid-transfer-line-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "cba990527f03460aae7eed33eb3cfba73c37035db1fc98e7c270b6f62d34ba7b"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicHEMPipe explicit full-bore atmospheric outlet; explicit placement from manifest port line-accident-out"
+                ],
+                "duration_s": [
+                  0.001
+                ],
+                "available_mass_kg": [
+                  3.480202989475999e-05
+                ],
+                "cumulative_mass_out_kg": [
+                  4.4338658741797916e-07
+                ],
+                "residual_mass_kg": [
+                  3.435864330734201e-05
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 4.4338658741797906e-07,
+                "end_to_end_residual_kg": 6.617444900424221e-23
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+              "asset_id": "transfer-line",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 8e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.001,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+                "component_id": "liquid-transfer-line-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "6b792c6208b7c15c09d42c5e2cb4799781b0ee72b9c87eddb8a70d0af2978a30"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicHEMPipe explicit full-bore atmospheric outlet; explicit placement from manifest port line-accident-out"
+                ],
+                "duration_s": [
+                  0.001
+                ],
+                "available_mass_kg": [
+                  0.00034802029894760006
+                ],
+                "cumulative_mass_out_kg": [
+                  1.1651055997280421e-06
+                ],
+                "residual_mass_kg": [
+                  0.000346855193347872
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 1.1651055997280421e-06,
+                "end_to_end_residual_kg": -1.2904017555827232e-22
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+              "asset_id": "transfer-line",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 3.9e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.001,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+                "component_id": "liquid-transfer-line-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "f7bb10ae6cab9a7296e0b9bb836339a8239f8aa6731088459d1b9f14da84350c"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicHEMPipe explicit full-bore atmospheric outlet; explicit placement from manifest port line-accident-out"
+                ],
+                "duration_s": [
+                  0.001
+                ],
+                "available_mass_kg": [
+                  0.0034802029894759993
+                ],
+                "cumulative_mass_out_kg": [
+                  2.1053319426559835e-05
+                ],
+                "residual_mass_kg": [
+                  0.0034591496700494394
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 2.1053319426559835e-05,
+                "end_to_end_residual_kg": -1.6820983299904304e-09
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+              "asset_id": "transfer-line",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 1.9e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.0001,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+                "component_id": "liquid-transfer-line-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "3236c56854295b662daecd2a1809dee99921cf5355ca803abb2b3f37f1d0a29a"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicHEMPipe explicit full-bore atmospheric outlet; explicit placement from manifest port line-accident-out"
+                ],
+                "duration_s": [
+                  0.0001
+                ],
+                "available_mass_kg": [
+                  0.034802029894759993
+                ],
+                "cumulative_mass_out_kg": [
+                  0.00040250847725729254
+                ],
+                "residual_mass_kg": [
+                  0.0343995214175027
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.00040250847725729254,
+                "end_to_end_residual_kg": 2.91335855174532e-20
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+              "asset_id": "transfer-valve",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.00012,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+                "component_id": "transfer-valve-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "3cbb832db788835b8ae506741cc399c33bdcd2152359a932616f54c750c211dc"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt Valve explicit atmospheric outlet; explicit placement from manifest port valve-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  3.797180625577987e-05
+                ],
+                "cumulative_mass_out_kg": [
+                  3.164317187981656e-05
+                ],
+                "residual_mass_kg": [
+                  6.328634375963311e-06
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 3.164317187981656e-05,
+                "end_to_end_residual_kg": 5.451120236724452e-20
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+              "asset_id": "transfer-valve",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 5.2e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+                "component_id": "transfer-valve-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "bb95931b2c231710e4db00886ef04fefe4fadbed5c0d2ca4b4b28f03a1a57e12"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt Valve explicit atmospheric outlet; explicit placement from manifest port valve-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  0.0003797180625577988
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0003164317187981657
+                ],
+                "residual_mass_kg": [
+                  6.328634375963314e-05
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0003164317187981657,
+                "end_to_end_residual_kg": -1.5720931501039814e-18
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+              "asset_id": "transfer-valve",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 2.2e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+                "component_id": "transfer-valve-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "24ca8445c878d45c2bcab77eaaa42a8a606deabcd6b085e4e692626d134b53da"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt Valve explicit atmospheric outlet; explicit placement from manifest port valve-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  0.0037971806255779894
+                ],
+                "cumulative_mass_out_kg": [
+                  0.003164317187981658
+                ],
+                "residual_mass_kg": [
+                  0.0006328634375963316
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.003164317187981658,
+                "end_to_end_residual_kg": 6.114900252818245e-17
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+              "asset_id": "transfer-valve",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 9.3e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+                "component_id": "transfer-valve-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "5154cb33599f6110c91d953bbcdc76810b677a4b4f75b598f702d33a22e8234f"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt Valve explicit atmospheric outlet; explicit placement from manifest port valve-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  0.03797180625577989
+                ],
+                "cumulative_mass_out_kg": [
+                  0.03164317187981657
+                ],
+                "residual_mass_kg": [
+                  0.006328634375963316
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.03164317187981657,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+              "asset_id": "transfer-valve",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 3.9e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+                "component_id": "transfer-valve-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "883b26f8626b33def4b470bf06bc5e87608f36743222ca556ea8c1f329afbda0"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt Valve explicit atmospheric outlet; explicit placement from manifest port valve-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  0.3797180625577989
+                ],
+                "cumulative_mass_out_kg": [
+                  0.31643171879816573
+                ],
+                "residual_mass_kg": [
+                  0.06328634375963316
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.3164317187981657,
+                "end_to_end_residual_kg": 2.7811163476281457e-16
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+              "asset_id": "pressure-relief-vent",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED",
+              "ledger_status": "COMPLETE",
+              "reason": null,
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 2e-05,
+              "termination": {
+                "basis": "emergency_relief_discharge",
+                "time_s": 0.5,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+                "component_id": "pressure-relief-vent-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "d9d48901aeb45b895793aa95b1f65eedbd7d632a31a86b9f866300b50f208936"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt VentStack explicit atmospheric outlet; explicit placement from manifest port vent-accident-out"
+                ],
+                "duration_s": [
+                  0.5
+                ],
+                "available_mass_kg": [
+                  0.0008087150217064195
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0006739291847553497
+                ],
+                "residual_mass_kg": [
+                  0.00013478583695106987
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0006739291847553497,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+              "asset_id": "transfer-pump",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.0001,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+                "component_id": "liquid-transfer-pump-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "fcffd8d561b078e7c22127becf45b853e59bf4912a4fb069e0c448df3b010f57"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt MappedPump liquid feed plus explicit atmospheric valve; explicit placement from manifest port pump-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  0.00048
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0004
+                ],
+                "residual_mass_kg": [
+                  7.999999999999999e-05
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0004000000000000001,
+                "end_to_end_residual_kg": 1.5178830414797062e-18
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+              "asset_id": "transfer-pump",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.0005,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.2,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+                "component_id": "liquid-transfer-pump-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "7d24471d6892321cad3b2a9119a6f7e41ae3f4e58cf2deace99517f25c200ecf"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt MappedPump liquid feed plus explicit atmospheric valve; explicit placement from manifest port pump-accident-out"
+                ],
+                "duration_s": [
+                  0.2
+                ],
+                "available_mass_kg": [
+                  0.00048
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0004
+                ],
+                "residual_mass_kg": [
+                  7.999999999999999e-05
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0004000000000000001,
+                "end_to_end_residual_kg": 1.5178830414797062e-18
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+              "asset_id": "ambient-vaporizer",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED",
+              "ledger_status": "COMPLETE",
+              "reason": null,
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 5e-05,
+              "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 1.6000000000000003,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_depletion",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+                "component_id": "ambient-vaporizer-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "09ec7fdd89a9177f41d0029b22f5d1d3b0952178255786aff5201d79e6bcab65"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt.DynamicVaporizer explicit inventory outlet; explicit placement from manifest port vaporizer-accident-out"
+                ],
+                "duration_s": [
+                  1.6000000000000003
+                ],
+                "available_mass_kg": [
+                  4.956379784841933e-06
+                ],
+                "cumulative_mass_out_kg": [
+                  4.956379784841932e-06
+                ],
+                "residual_mass_kg": [
+                  8.470329472543003e-22
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 4.956379784841933e-06,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+              "asset_id": "ambient-vaporizer",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED",
+              "ledger_status": "COMPLETE",
+              "reason": null,
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 5e-05,
+              "termination": {
+                "basis": "inventory_over_600s",
+                "time_s": 600.0,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "provider_declared_inventory_over_600s",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+                "component_id": "ambient-vaporizer-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "3d72b7dbb98bbde33f2ea7e8247b05b84cda9b4493b6dbcad3f546e38f2f399b"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt.DynamicVaporizer explicit inventory outlet; explicit placement from manifest port vaporizer-accident-out"
+                ],
+                "duration_s": [
+                  600.0
+                ],
+                "available_mass_kg": [
+                  0.0008238536226639276
+                ],
+                "cumulative_mass_out_kg": [
+                  4.956379784841932e-06
+                ],
+                "residual_mass_kg": [
+                  0.0008188972428790857
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 4.956379784841932e-06,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+              "asset_id": "ambient-vaporizer",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED",
+              "ledger_status": "COMPLETE",
+              "reason": null,
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.001,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.5,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+                "component_id": "ambient-vaporizer-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "61a2e6b2aa7ab9b6e450717d8fafe1aadd841c8aee9491b87e42ca5854c9da7e"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt lh2dt.DynamicVaporizer finite-volume inventory with explicit atmospheric valve; explicit placement from manifest port vaporizer-accident-out"
+                ],
+                "duration_s": [
+                  0.5
+                ],
+                "available_mass_kg": [
+                  0.0008238536226639276
+                ],
+                "cumulative_mass_out_kg": [
+                  7.221896865709533e-06
+                ],
+                "residual_mass_kg": [
+                  0.0008166317257982181
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 7.221896865709533e-06,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+              "asset_id": "reliquefier",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 1e-05,
+              "termination": {
+                "basis": "two_sided_rupture",
+                "time_s": 1e-05,
+                "provenance": "mixed provider catalog two-sided rupture termination; provider clock retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+                "component_id": "reliquefier-01",
+                "provider_export_schema": "prism.resolved_release_set.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "7e48b930eedd84af5d8ae191acd88af85a7c268750242a5f975b1c56de8c09e3",
+                  "89ec419f870ca51665dc2b5777bee3d23d836bd7b959354b7184295db6810e7a"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicReliquefier shared state with two explicit atmospheric outlets; explicit placement from manifest port reliquefier-accident-out-1",
+                  "lh2dt DynamicReliquefier shared state with two explicit atmospheric outlets; explicit placement from manifest port reliquefier-accident-out-2"
+                ],
+                "duration_s": [
+                  1e-05,
+                  1e-05
+                ],
+                "available_mass_kg": [
+                  0.0008238536226639276,
+                  0.0008238536226639276
+                ],
+                "cumulative_mass_out_kg": [
+                  3.595846016954127e-08,
+                  3.595846016954127e-08
+                ],
+                "residual_mass_kg": [
+                  0.0008238176642037581,
+                  0.0008238176642037581
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 7.191692033908256e-08,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+              "asset_id": "reliquefier",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.001,
+              "termination": {
+                "basis": "two_sided_rupture",
+                "time_s": 1e-05,
+                "provenance": "mixed provider catalog two-sided rupture termination; provider clock retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+                "component_id": "reliquefier-01",
+                "provider_export_schema": "prism.resolved_release_set.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "c6c97f674d74eef5b60692c785426f84a4cc3463378cca702f87328d6c7f4220",
+                  "73412f57c2241e028bbee4221641e663ddb47125452076fa6abeeb6a9e191354"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt DynamicReliquefier shared state with two explicit atmospheric outlets; explicit placement from manifest port reliquefier-accident-out-1",
+                  "lh2dt DynamicReliquefier shared state with two explicit atmospheric outlets; explicit placement from manifest port reliquefier-accident-out-2"
+                ],
+                "duration_s": [
+                  1e-05,
+                  1e-05
+                ],
+                "available_mass_kg": [
+                  0.0008238536226639276,
+                  0.0008238536226639276
+                ],
+                "cumulative_mass_out_kg": [
+                  3.595846016954127e-08,
+                  3.595846016954127e-08
+                ],
+                "residual_mass_kg": [
+                  0.0008238176642037581,
+                  0.0008238176642037581
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 7.191692033908256e-08,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+              "asset_id": "reliquefier",
+              "release_branch_id": "matched-event-provider-request",
+              "annual_condition_id": "synthetic-generic-worker-west-3ms",
+              "status": "EXECUTED",
+              "ledger_status": "COMPLETE",
+              "reason": null,
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.01,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.5,
+                "provenance": "mixed provider catalog termination context; provider duration retained"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+                "component_id": "reliquefier-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52"
+                ],
+                "provider_result_digests": [
+                  "bb5d6ae94cb4d16c65ed02f6b0fd22236374be78f61787118dc7ffb515c1e9f1"
+                ],
+                "provider_boundary_references": [
+                  "lh2dt lh2dt.DynamicReliquefier finite-volume inventory with explicit atmospheric valve; explicit placement from manifest port reliquefier-accident-out-1"
+                ],
+                "duration_s": [
+                  0.5
+                ],
+                "available_mass_kg": [
+                  0.0008238536226639276
+                ],
+                "cumulative_mass_out_kg": [
+                  5.226060443124568e-06
+                ],
+                "residual_mass_kg": [
+                  0.0008186275622208031
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 5.226060443124566e-06,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-3ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.00012,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  1.6583741752980332e-09
+                ],
+                "residual_mass_kg": [
+                  0.009999998341625824
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 1.6583741752980332e-09,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-4ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 0.00012,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  1.6583741752980332e-09
+                ],
+                "residual_mass_kg": [
+                  0.009999998341625824
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 1.6583741752980332e-09,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-3ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 5.2e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  1.653545292876029e-07
+                ],
+                "residual_mass_kg": [
+                  0.009999834645470712
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 1.653545292876029e-07,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-4ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 5.2e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  1.653545292876029e-07
+                ],
+                "residual_mass_kg": [
+                  0.009999834645470712
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 1.653545292876029e-07,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-3ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 2.2e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  4.629740437409607e-06
+                ],
+                "residual_mass_kg": [
+                  0.00999537025956259
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 4.629740437409607e-06,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-4ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 2.2e-05,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  4.629740437409607e-06
+                ],
+                "residual_mass_kg": [
+                  0.00999537025956259
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 4.629740437409607e-06,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-3ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 9.3e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  0.00010052648374898754
+                ],
+                "residual_mass_kg": [
+                  0.009899473516251013
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.00010052648374898754,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-4ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 9.3e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  0.00010052648374898754
+                ],
+                "residual_mass_kg": [
+                  0.009899473516251013
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.00010052648374898754,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-3ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 3.9e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0018175777704088902
+                ],
+                "residual_mass_kg": [
+                  0.00818242222959111
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0018175777704088902,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            },
+            {
+              "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+              "asset_id": "vertical-handoff-terminal-pipe-01",
+              "release_branch_id": "provider-vertical-handoff",
+              "annual_condition_id": "D-4ms-west",
+              "status": "EXECUTED_OPERATOR_LIMITED",
+              "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+              "reason": "source operator has declared constant-state or open physical closure limitations",
+              "release_branch_probability": 1.0,
+              "initiating_frequency_per_year": 3.9e-06,
+              "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": "synthetic vertical provider history; no flow extrapolation"
+              },
+              "isolation_status": "not_declared",
+              "inventory_status": "not_inventory_termination",
+              "provider": {
+                "packet_consumed": true,
+                "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+                "component_id": "vertical-handoff-terminal-pipe-01",
+                "provider_export_schema": "prism.resolved_release.v1",
+                "provider_source_digests": [
+                  "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+                ],
+                "provider_result_digests": [
+                  "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+                ],
+                "provider_boundary_references": [
+                  "SteadyNetwork terminal link to atmosphere; native terminal bore"
+                ],
+                "duration_s": [
+                  0.37
+                ],
+                "available_mass_kg": [
+                  0.01
+                ],
+                "cumulative_mass_out_kg": [
+                  0.0018175777704088902
+                ],
+                "residual_mass_kg": [
+                  0.00818242222959111
+                ]
+              },
+              "mass_ledger": {
+                "released_kg": 0.0018175777704088902,
+                "end_to_end_residual_kg": 0.0
+              },
+              "provider_termination_matches_request": true
+            }
+          ],
+          "summary": {
+            "case_count": 34,
+            "ledger_status_counts": {
+              "COMPLETE": 5,
+              "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 29
+            },
+            "termination_basis_counts": {
+              "emergency_relief_discharge": 1,
+              "inventory_depletion": 6,
+              "inventory_over_600s": 1,
+              "synthetic_diagnostic_horizon": 24,
+              "two_sided_rupture": 2
+            },
+            "complete_row_count": 5,
+            "operator_limited_or_domain_incomplete_row_count": 29,
+            "domain_incomplete_row_count": 0,
+            "uncomputed_row_count": 0,
+            "incomplete_row_count": 0,
+            "provider_packet_consumed_row_count": 34,
+            "withheld_case_count": 35,
+            "withheld_case_status_counts": {
+              "EXECUTED_DOMAIN_INCOMPLETE": 6,
+              "EXECUTED_OPERATOR_LIMITED": 29
+            },
+            "withheld_operator_limited_case_count": 29,
+            "withheld_domain_incomplete_case_count": 6
+          },
+          "semantics": {
+            "one_row": "event × release branch × annual condition",
+            "isolation": "reported only when the provider termination basis explicitly says reviewed_isolation_success",
+            "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
+            "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
+            "operator_limited": "numerically executed but not qualified facility evidence",
+            "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"
+          }
+        },
+        "timing": {
+          "campaign_count": 2,
+          "fresh_physics_cases": 34,
+          "case_min_ms": 1379.0437000570819,
+          "case_median_ms": 3226.7782000708394,
+          "case_max_ms": 63828.999700024724,
+          "case_p95_ms": 38148.95522997243,
+          "case_p99_ms": 60743.73489101768,
+          "campaign_elapsed_ms": 281645.2619000338,
+          "campaign_elapsed_ms_sum": 281645.2619000338,
+          "campaign_elapsed_ms_min": 21212.362500024028,
+          "campaign_elapsed_ms_median": 140822.6309500169,
+          "campaign_elapsed_ms_max": 260432.89940000977,
+          "campaign_elapsed_ms_p95": 248471.8725550105,
+          "campaign_elapsed_ms_p99": 258040.69403100992,
+          "distribution": "across separately executed equipment campaigns; not repeated-run latency",
+          "stage_elapsed_ms": {
+            "cloud_observation": {
+              "sample_count": 32,
+              "sum_ms": 39729.751600301825,
+              "median_ms": 195.53319999249652,
+              "max_ms": 24913.360100006685,
+              "p95_ms": 4672.160195023753,
+              "p99_ms": 18791.60354200171
+            },
+            "endpoint_a": {
+              "sample_count": 2,
+              "sum_ms": 6567.82810005825,
+              "median_ms": 3283.914050029125,
+              "max_ms": 3393.945200019516,
+              "p95_ms": 3382.942085020477,
+              "p99_ms": 3391.7445770197082
+            },
+            "endpoint_aggregation": {
+              "sample_count": 2,
+              "sum_ms": 13235.336199984886,
+              "median_ms": 6617.668099992443,
+              "max_ms": 6779.345400049351,
+              "p95_ms": 6763.17767004366,
+              "p99_ms": 6776.111854048213
+            },
+            "endpoint_b": {
+              "sample_count": 2,
+              "sum_ms": 6665.791300009005,
+              "median_ms": 3332.8956500045024,
+              "max_ms": 3384.5430000219494,
+              "p95_ms": 3379.3782650202047,
+              "p99_ms": 3383.5100530216005
+            },
+            "fire_explosion_damage_risk": {
+              "sample_count": 32,
+              "sum_ms": 2834.4950993778184,
+              "median_ms": 69.95219993405044,
+              "max_ms": 267.38609990570694,
+              "p95_ms": 136.4930350042414,
+              "p99_ms": 226.98048293008486
+            },
+            "near_field_and_dispersion": {
+              "sample_count": 32,
+              "sum_ms": 190127.8248996241,
+              "median_ms": 1712.518049927894,
+              "max_ms": 48599.86850002315,
+              "p95_ms": 29360.676819970824,
+              "p99_ms": 45139.76078200854
+            },
+            "pool": {
+              "sample_count": 32,
+              "sum_ms": 3723.7331001088023,
+              "median_ms": 125.73854997754097,
+              "max_ms": 384.56560007762164,
+              "p95_ms": 362.81106500537135,
+              "p99_ms": 378.7232470524032
+            },
+            "source": {
+              "sample_count": 32,
+              "sum_ms": 22899.146999581717,
+              "median_ms": 712.7924499800429,
+              "max_ms": 769.2459999816492,
+              "p95_ms": 744.8616249545012,
+              "p99_ms": 765.2670879627112
+            }
+          }
+        },
+        "coverage": {
+          "event_count": 29,
+          "case_count": 34,
+          "uncomputed_case_count": 35,
+          "strict_uncomputed_case_count": 35,
+          "conditional_case_count": 34,
+          "conditional_executed_case_count": 34,
+          "conditional_uncomputed_case_count": 0,
+          "overlapping_case_uncomputed_count": 35,
+          "risk_atom_count": 136,
+          "annual_condition_count": 3,
+          "population_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+          "population_row_count": 3,
+          "case_status_counts": {
+            "EXECUTED": 5,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "uncomputed_status_counts": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 6,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "operator_limited_case_count": 29,
+          "explicit_uncomputed_status_count": 0,
+          "failed_case_count": 0,
+          "observed_component_count": 8,
+          "expected_component_count": 9,
+          "component_status_counts": {
+            "EXCLUDED": 1,
+            "EXECUTED": 2,
+            "PARTIAL": 6
+          },
+          "component_case_accounting": {
+            "ambient-vaporizer-01": {
+              "component_id": "ambient-vaporizer-01",
+              "status": "EXECUTED",
+              "event_count": 3,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+                "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+                "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+              ],
+              "conditional_case_count": 3,
+              "conditional_executed_case_count": 3,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 0,
+              "operator_limited_case_count": 0,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 12,
+              "case_status_counts": {
+                "EXECUTED": 3
+              },
+              "strict_uncomputed_status_counts": {},
+              "strict_gate_categories": [],
+              "frequency_is_not_reallocated": true
+            },
+            "liquid-transfer-line-01": {
+              "component_id": "liquid-transfer-line-01",
+              "status": "PARTIAL",
+              "event_count": 5,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+                "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+                "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+                "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+                "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+              ],
+              "conditional_case_count": 5,
+              "conditional_executed_case_count": 5,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 7,
+              "operator_limited_case_count": 5,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 20,
+              "case_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 5
+              },
+              "strict_uncomputed_status_counts": {
+                "EXECUTED_DOMAIN_INCOMPLETE": 2,
+                "EXECUTED_OPERATOR_LIMITED": 5
+              },
+              "strict_gate_categories": [
+                "MISSING_PROVIDER_CASES",
+                "OPERATOR_LIMITED_INPUT"
+              ],
+              "frequency_is_not_reallocated": true
+            },
+            "liquid-transfer-pump-01": {
+              "component_id": "liquid-transfer-pump-01",
+              "status": "PARTIAL",
+              "event_count": 2,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+                "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+              ],
+              "conditional_case_count": 2,
+              "conditional_executed_case_count": 2,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 2,
+              "operator_limited_case_count": 2,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 8,
+              "case_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 2
+              },
+              "strict_uncomputed_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 2
+              },
+              "strict_gate_categories": [
+                "MISSING_PROVIDER_CASES",
+                "OPERATOR_LIMITED_INPUT"
+              ],
+              "frequency_is_not_reallocated": true
+            },
+            "pressure-relief-vent-01": {
+              "component_id": "pressure-relief-vent-01",
+              "status": "EXECUTED",
+              "event_count": 1,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+              ],
+              "conditional_case_count": 1,
+              "conditional_executed_case_count": 1,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 0,
+              "operator_limited_case_count": 0,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 4,
+              "case_status_counts": {
+                "EXECUTED": 1
+              },
+              "strict_uncomputed_status_counts": {},
+              "strict_gate_categories": [],
+              "frequency_is_not_reallocated": true
+            },
+            "receiving-boundary-01": {
+              "component_id": "receiving-boundary-01",
+              "status": "EXCLUDED",
+              "event_count": 0,
+              "event_ids": [],
+              "conditional_case_count": 0,
+              "conditional_executed_case_count": 0,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 0,
+              "operator_limited_case_count": 0,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 0,
+              "case_status_counts": {},
+              "strict_uncomputed_status_counts": {},
+              "strict_gate_categories": [
+                "FAMILY_SCOPE_PARTIAL"
+              ],
+              "frequency_is_not_reallocated": true
+            },
+            "reliquefier-01": {
+              "component_id": "reliquefier-01",
+              "status": "PARTIAL",
+              "event_count": 3,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+                "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+                "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+              ],
+              "conditional_case_count": 3,
+              "conditional_executed_case_count": 3,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 2,
+              "operator_limited_case_count": 2,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 12,
+              "case_status_counts": {
+                "EXECUTED": 1,
+                "EXECUTED_OPERATOR_LIMITED": 2
+              },
+              "strict_uncomputed_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 2
+              },
+              "strict_gate_categories": [
+                "MISSING_PROVIDER_CASES",
+                "OPERATOR_LIMITED_INPUT"
+              ],
+              "frequency_is_not_reallocated": true
+            },
+            "storage-tank-01": {
+              "component_id": "storage-tank-01",
+              "status": "PARTIAL",
+              "event_count": 5,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+                "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+                "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+                "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+                "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+              ],
+              "conditional_case_count": 5,
+              "conditional_executed_case_count": 5,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 9,
+              "operator_limited_case_count": 5,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 20,
+              "case_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 5
+              },
+              "strict_uncomputed_status_counts": {
+                "EXECUTED_DOMAIN_INCOMPLETE": 4,
+                "EXECUTED_OPERATOR_LIMITED": 5
+              },
+              "strict_gate_categories": [
+                "MISSING_PROVIDER_CASES",
+                "OPERATOR_LIMITED_INPUT"
+              ],
+              "frequency_is_not_reallocated": true
+            },
+            "transfer-valve-01": {
+              "component_id": "transfer-valve-01",
+              "status": "PARTIAL",
+              "event_count": 5,
+              "event_ids": [
+                "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+                "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+                "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+                "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+                "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+              ],
+              "conditional_case_count": 5,
+              "conditional_executed_case_count": 5,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 5,
+              "operator_limited_case_count": 5,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 20,
+              "case_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 5
+              },
+              "strict_uncomputed_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 5
+              },
+              "strict_gate_categories": [
+                "MISSING_PROVIDER_CASES",
+                "OPERATOR_LIMITED_INPUT"
+              ],
+              "frequency_is_not_reallocated": true
+            },
+            "vertical-handoff-terminal-pipe-01": {
+              "component_id": "vertical-handoff-terminal-pipe-01",
+              "status": "PARTIAL",
+              "event_count": 5,
+              "event_ids": [
+                "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+                "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+                "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+                "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+                "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+              ],
+              "conditional_case_count": 10,
+              "conditional_executed_case_count": 10,
+              "conditional_uncomputed_case_count": 0,
+              "strict_uncomputed_case_count": 10,
+              "operator_limited_case_count": 10,
+              "domain_incomplete_case_count": 0,
+              "failed_case_count": 0,
+              "risk_atom_count": 40,
+              "case_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 10
+              },
+              "strict_uncomputed_status_counts": {
+                "EXECUTED_OPERATOR_LIMITED": 10
+              },
+              "strict_gate_categories": [
+                "MISSING_PROVIDER_CASES",
+                "OPERATOR_LIMITED_INPUT"
+              ],
+              "frequency_is_not_reallocated": true
+            }
+          },
+          "required_accident_family_count": 12,
+          "scope_blocker_count": 23
+        },
+        "facility_total_risk_available": false,
+        "complete_facility_qra_claim": false
+      },
+      "interpretation": "The facility IR/F-N aggregation is present as a conditional diagnostic view over the saved risk atoms; withheld total-facility qualification and the remaining scope, provider, frequency, and validation gates are preserved."
+    },
+    {
+      "name": "diagnostic_frequency_uncertainty_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "scenario_count": 5,
+        "valid_scenario_count": 5,
+        "facility_credible_interval": false,
+        "fresh_physics_executed": false,
+        "correlation_comparison_present": true,
+        "conditional_diagnostic_facility_risk": "each scenario reweights the saved risk atoms and exposes a conditional facility IR/F-N diagnostic; incomplete scope, synthetic horizons, and operator limits still withhold a qualified facility total"
+      },
+      "interpretation": "Published frequency scenarios are re-applied to saved diagnostic risk atoms and asset rankings; this does not create a complete-facility confidence interval or claim fresh-physics validation."
+    },
+    {
+      "name": "diagnostic_vertical_handoff_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261020\\vertical_vent_all_bins\\verification.json",
+        "status": "PARTIAL_DECLARED_SCOPE",
+        "generated_events": 5,
+        "executed_cases": 10,
+        "provider_vertical_handoff_consumed": true,
+        "operator_limited": true,
+        "facility_total_risk_withheld": true,
+        "physical_validation_claim": false
+      },
+      "interpretation": "The vertical-to-horizontal provider handoff diagnostic consumed a declared handoff boundary and is represented in the merged facility scope matrix; it remains synthetic/operator-limited and is not promoted to a qualified vertical accident family."
+    },
+    {
+      "name": "diagnostic_combined_chain_closure",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\native_generic_scope_combined_chain_closure_v1.json",
+        "schema_version": "prism.facility_combined_chain_closure_audit.v1",
+        "status": "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED",
+        "declared_event_count": 29,
+        "packet_subset_closed_event_count": 24,
+        "vertical_handoff_closed_event_count": 5,
+        "combined_diagnostic_closed_event_count": 29,
+        "event_count_matches_declared_scope": true,
+        "mismatch_event_ids": [],
+        "facility_ir_aggregate_closed": true,
+        "facility_fn_aggregate_closed": true,
+        "qualified_provider_packet_count": 0,
+        "facility_qra_claim": false
+      },
+      "interpretation": "The packet-subset and operator-limited vertical audits are consumed directly by the IJHE completion report. Their 29-event diagnostic closure is recorded without converting synthetic/operator-limited events into qualified packets, frequencies, physical validation, or facility QRA."
+    },
+    {
+      "name": "diagnostic_slabx_lh2_validation_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\slabx_lh2_validation_audit_v1.json",
+        "schema_version": "prism.slabx_lh2_validation_audit.v1",
+        "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+        "model": {
+          "name": "SLABx-LH2",
+          "slabx_lh2_version": "0.1.2",
+          "slabx_version": "1.0.6"
+        },
+        "check_count": 5,
+        "metrics": {
+          "ffi_case_count": 6,
+          "flacs_comparison_row_count": 6,
+          "pool_radius_median_ratio": 1.0305005693059233,
+          "lfl_in_bracket": 5,
+          "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+          "runtime_repeat_inventory_difference_kg": 0.0
+        },
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "SLABx-LH2 cryogenic-dispersion and pool evidence is consumed as a restricted consequence-component record. It does not qualify the equipment release, initiating frequency, ignition model, or facility QRA."
+    },
+    {
+      "name": "diagnostic_realtime_cache_benchmark",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\native_lh2_realtime_cache_benchmark_v1.json",
+        "schema_version": "prism.realtime_cache_benchmark.v1",
+        "facility_id": "generic-lh2-near-receptor-diagnostic",
+        "request_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "fresh_physics_elapsed_ms": 2685.4985000099987,
+        "cache_hits": 20,
+        "cache_sample_count": 20,
+        "cache_median_ms": 31.465799955185503,
+        "cache_p95_ms": 33.22970005683601,
+        "one_hz_deadline_s": 1.0,
+        "fresh_physics_meets_one_hz": false,
+        "cache_meets_one_hz_all_samples": true,
+        "realtime_fresh_physics_claim": false
+      },
+      "interpretation": "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in this benchmark. The separately measured fresh-physics run is slower and no fresh-physics 1 Hz service claim is made."
+    },
+    {
+      "name": "equipment_model_binding_to_accident_release",
+      "status": "PASS",
+      "evidence": {
+        "model_binding_status": "STATE_ONLY_BOUND",
+        "component_count": 8,
+        "state_supported_component_count": 8,
+        "accident_release_supported_component_count": 7,
+        "diagnostic_release_adapter_component_count": 7,
+        "record": "results/20261024/native_equipment_model_binding_audit_v1.json"
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "actual_provider_release_packet",
+      "status": "BLOCKED",
+      "evidence": {
+        "actual_facility_packet_available": false,
+        "release_inventory_status": "NO_ACCIDENT_RELEASE_EXPORT",
+        "qualified_packet_count": 0
+      },
+      "blocking_reason": "only synthetic or screening provider releases are available for this campaign"
+    },
+    {
+      "name": "provider_worklist_coverage",
+      "status": "PASS",
+      "evidence": {
+        "source": "provider_worklist",
+        "status": "READY_FOR_PROVIDER_PACKETS",
+        "frequency_event_count": 24,
+        "provider_packet_count": 0,
+        "uncomputed_provider_packet_count": 24,
+        "diagnostic_release_adapter_component_count": null,
+        "structural_diagnostic_coverage": true,
+        "qualified_provider_packet_count": 0
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "release_duration_isolation_inventory_ledger",
+      "status": "PASS",
+      "evidence": {
+        "executed_case_count": 34,
+        "cases_with_termination_and_mass_ledger": 34,
+        "release_ledger_schema": null,
+        "release_ledger_row_count": null,
+        "release_ledger_summary": null,
+        "max_end_to_end_residual_kg": 1.6820983299904304e-09
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "declared_major_accident_scope",
+      "status": "BLOCKED",
+      "evidence": {
+        "matrix_status": false,
+        "blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ],
+        "required_family_count": 12
+      },
+      "blocking_reason": "one or more declared accident families are missing, partial, or uncomputed"
+    },
+    {
+      "name": "conditional_accident_scope_accounting",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "evidence": {
+        "conditional_chain_complete": true,
+        "conditional_chain_blocking_reasons": [],
+        "strict_matrix_complete": false,
+        "strict_blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ]
+      },
+      "blocking_reason": null,
+      "interpretation": "Conditional execution status counts numerical consequence-chain outputs, including operator-limited cases, while strict matrix_complete remains the facility qualification gate."
+    },
+    {
+      "name": "facility_ir_fn_available",
+      "status": "BLOCKED",
+      "evidence": {
+        "total_facility_annual_ir_low_high": null,
+        "total_facility_expected_death_fn_low_high": null
+      },
+      "blocking_reason": "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    },
+    {
+      "name": "physical_validation_evidence",
+      "status": "PASS",
+      "evidence": {
+        "physical_validation_claim": false,
+        "evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
+        "evidence_record": "docs/PRISM_물리검증_근거_20261009.md",
+        "evidence_component": "DynamicLH2PoolX pool/spreading only",
+        "restricted_component_evidence": true
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "frequency_uncertainty_reported",
+      "status": "PASS",
+      "evidence": {
+        "uncertainty_result_present": true,
+        "scenario_count": 5,
+        "facility_credible_interval": false,
+        "conditional_frequency_uncertainty": true
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "processing_time_evidence",
+      "status": "PASS",
+      "evidence": {
+        "fresh_physics_cases": 34,
+        "campaign_elapsed_ms": 281645.2619000338,
+        "case_p95_ms": 38148.95522997243,
+        "case_p99_ms": 60743.73489101768,
+        "timing_distribution": "across separately executed equipment campaigns; not repeated-run latency",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "realtime_monitor_contract",
+      "status": "PASS",
+      "evidence": {
+        "implemented": true,
+        "module": "src/lh2_tno/service.py",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, asynchronous time-window, configurable source-time gate, structured row rejection, row-to-provider chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and realtime facility risk handoff preservation/promotion-block assertions; local portable suite 582 passed/1 skipped, CI Run #413 full suite 579 passed/1 skipped",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "validation_evidence_matrix",
+      "status": "PASS",
+      "evidence": {
+        "status": "RESTRICTED_EVIDENCE_MATRIX",
+        "decision": "FACILITY_QRA_WITHHELD",
+        "domain_count": 6,
+        "blocking_reason_count": 0,
+        "claims_closed": true,
+        "record": "results\\20261022\\validation_evidence_matrix_repaired_valve_transfer_line_replacement.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
+    },
+    {
+      "name": "scope_ledger_consistency",
+      "status": "PASS",
+      "evidence": {
+        "status": "CONSISTENT_SCOPE_LEDGER",
+        "scope_event_count": 29,
+        "ledger_event_count": 29,
+        "scope_conditional_uncomputed_case_count": 0,
+        "ledger_conditional_uncomputed_case_count": 0,
+        "blocking_reason_count": 0,
+        "record": "results\\20261023\\native_generic_scope_vertical_merged_ledger_consistency_v1.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": false,
+      "interpretation": "A merged facility result cannot be promoted while its declared scope matrix and facility ledger use different event or case accounting."
+    },
+    {
+      "name": "facility_case_provider_packet_coverage",
+      "status": "BLOCKED",
+      "diagnostic_only": false,
+      "blocking_reason": "facility cases do not all have exact qualified provider packet evidence",
+      "evidence": {
+        "record": "results\\20261024\\native_generic_scope_vertical_case_packet_coverage_v1.json",
+        "schema": "prism.facility_case_provider_coverage.v1",
+        "status": "NO_CASE_MATCH",
+        "case_request_count": 34,
+        "qualified_provider_event_count": 0,
+        "qualified_provider_case_count": 0,
+        "provider_evidence_row_count": 0,
+        "status_counts": {
+          "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 34
+        },
+        "blocking_reasons": [
+          "one or more facility cases have no qualified provider evidence"
+        ],
+        "promotion_policy": {
+          "frequency_is_not_assigned": true,
+          "sensor_frequency_learning": false,
+          "exact_case_identity_required": true,
+          "physical_validation_claim": false,
+          "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates"
+        }
+      },
+      "interpretation": "Every merged facility weather/release case must resolve to an exact qualified provider packet before the facility chain can be presented as complete. A packet may be reused across weather cases, but missing case identity remains a blocker; this check never infers frequency or physical validation."
+    }
+  ],
+  "blocking_reasons": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+    "facility cases do not all have exact qualified provider packet evidence"
+  ],
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "interpretation": "Readiness evidence gate; a blocked check is not treated as zero risk or as an implicit accident substitution."
+}

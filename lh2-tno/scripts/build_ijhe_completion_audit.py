@@ -73,6 +73,11 @@ def main() -> int:
         type=Path,
         help="optional digest-bound SLABx-LH2 consequence validation evidence",
     )
+    parser.add_argument(
+        "--realtime-cache-benchmark",
+        type=Path,
+        help="optional exact-cache versus fresh-physics realtime benchmark",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -217,6 +222,13 @@ def main() -> int:
         )
         if slabx_validation_evidence is not None:
             slabx_validation_evidence["_record_path"] = str(args.slabx_validation_evidence)
+        realtime_cache_benchmark = (
+            _object(args.realtime_cache_benchmark)
+            if args.realtime_cache_benchmark
+            else None
+        )
+        if realtime_cache_benchmark is not None:
+            realtime_cache_benchmark["_record_path"] = str(args.realtime_cache_benchmark)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -243,6 +255,7 @@ def main() -> int:
             facility_case_packet_coverage,
             combined_chain_closure,
             slabx_validation_evidence,
+            realtime_cache_benchmark,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

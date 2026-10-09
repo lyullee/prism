@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v14.json"
+AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v15.json"
 ASSESSMENT_PATH = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
 
 
@@ -32,7 +32,7 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
     assessment = _json(ASSESSMENT_PATH)
 
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 32
+    assert len(audit["checks"]) == 33
     assert len(audit["blocking_reasons"]) == 4
     case_check = next(
         check for check in audit["checks"]
@@ -60,8 +60,8 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
         assert status["ijhe_completion_audit_latest_facility_assessment_record"].endswith(
             ASSESSMENT_PATH.name
         )
-        assert status["full_portable_test_count"] == 601
-        assert status["full_portable_test_status"] == "601 passed"
+        assert status["full_portable_test_count"] == 604
+        assert status["full_portable_test_status"] == "604 passed"
         assert status["facility_evidence_request_latest_record"].endswith(
             "native_generic_scope_vertical_facility_evidence_request_v2.json"
         )

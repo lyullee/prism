@@ -1154,6 +1154,66 @@ def test_completion_audit_keeps_malformed_slabx_evidence_diagnostic_only():
     assert report["complete_facility_qra_claim"] is False
 
 
+def test_completion_audit_consumes_realtime_cache_benchmark_without_fresh_physics_claim():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        realtime_cache_benchmark={
+            "schema_version": "prism.realtime_cache_benchmark.v1",
+            "facility_id": "generic-lh2-near-receptor-diagnostic",
+            "request_event_id": "event-01",
+            "fresh_physics_elapsed_ms": 2685.5,
+            "cache_elapsed_ms_values": [31.0, 33.0],
+            "cache_hits": 2,
+            "cache_median_ms": 32.0,
+            "cache_p95_ms": 33.0,
+            "one_hz_deadline_s": 1.0,
+            "fresh_physics_meets_one_hz": False,
+            "cache_meets_one_hz_all_samples": True,
+            "realtime_fresh_physics_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_realtime_cache_benchmark"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["cache_hits"] == 2
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_keeps_invalid_realtime_cache_benchmark_diagnostic_only():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        realtime_cache_benchmark={
+            "schema_version": "prism.realtime_cache_benchmark.v1",
+            "fresh_physics_elapsed_ms": 2685.5,
+            "cache_elapsed_ms_values": [31.0],
+            "cache_hits": 0,
+            "cache_median_ms": 31.0,
+            "cache_p95_ms": 31.0,
+            "one_hz_deadline_s": 1.0,
+            "fresh_physics_meets_one_hz": True,
+            "cache_meets_one_hz_all_samples": True,
+            "realtime_fresh_physics_claim": True,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_realtime_cache_benchmark"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_marks_vertical_handoff_as_merged_when_scope_row_exists():
     report = build_ijhe_completion_audit(
         _status(False),

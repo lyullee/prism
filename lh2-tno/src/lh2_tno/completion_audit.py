@@ -75,6 +75,7 @@ def build_ijhe_completion_audit(
     facility_case_packet_coverage: Mapping[str, Any] | None = None,
     combined_chain_closure: Mapping[str, Any] | None = None,
     slabx_validation_evidence: Mapping[str, Any] | None = None,
+    realtime_cache_benchmark: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1294,6 +1295,59 @@ def build_ijhe_completion_audit(
                     "SLABx-LH2 cryogenic-dispersion and pool evidence is consumed as a "
                     "restricted consequence-component record. It does not qualify the "
                     "equipment release, initiating frequency, ignition model, or facility QRA."
+                ),
+            }
+        )
+    if realtime_cache_benchmark is not None:
+        benchmark = realtime_cache_benchmark
+        cache_values = benchmark.get("cache_elapsed_ms_values")
+        benchmark_valid = (
+            benchmark.get("schema_version") == "prism.realtime_cache_benchmark.v1"
+            and isinstance(benchmark.get("fresh_physics_elapsed_ms"), (int, float))
+            and benchmark.get("fresh_physics_elapsed_ms", 0) > 0
+            and isinstance(cache_values, list)
+            and bool(cache_values)
+            and all(isinstance(value, (int, float)) and value >= 0 for value in cache_values)
+            and isinstance(benchmark.get("cache_hits"), int)
+            and benchmark.get("cache_hits") == len(cache_values)
+            and isinstance(benchmark.get("cache_median_ms"), (int, float))
+            and isinstance(benchmark.get("cache_p95_ms"), (int, float))
+            and benchmark.get("cache_median_ms", float("inf")) <= 1000
+            and benchmark.get("cache_p95_ms", float("inf")) <= 1000
+            and benchmark.get("one_hz_deadline_s") == 1.0
+            and benchmark.get("fresh_physics_meets_one_hz") is False
+            and benchmark.get("cache_meets_one_hz_all_samples") is True
+            and benchmark.get("realtime_fresh_physics_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_realtime_cache_benchmark",
+                "status": "PASS" if benchmark_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": benchmark.get("_record_path"),
+                    "schema_version": benchmark.get("schema_version"),
+                    "facility_id": benchmark.get("facility_id"),
+                    "request_event_id": benchmark.get("request_event_id"),
+                    "fresh_physics_elapsed_ms": benchmark.get("fresh_physics_elapsed_ms"),
+                    "cache_hits": benchmark.get("cache_hits"),
+                    "cache_sample_count": len(cache_values) if isinstance(cache_values, list) else None,
+                    "cache_median_ms": benchmark.get("cache_median_ms"),
+                    "cache_p95_ms": benchmark.get("cache_p95_ms"),
+                    "one_hz_deadline_s": benchmark.get("one_hz_deadline_s"),
+                    "fresh_physics_meets_one_hz": benchmark.get("fresh_physics_meets_one_hz"),
+                    "cache_meets_one_hz_all_samples": benchmark.get(
+                        "cache_meets_one_hz_all_samples"
+                    ),
+                    "realtime_fresh_physics_claim": benchmark.get(
+                        "realtime_fresh_physics_claim"
+                    ),
+                },
+                "interpretation": (
+                    "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in "
+                    "this benchmark. The separately measured fresh-physics run is slower and no "
+                    "fresh-physics 1 Hz service claim is made."
                 ),
             }
         )

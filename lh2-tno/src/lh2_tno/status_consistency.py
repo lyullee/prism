@@ -111,6 +111,20 @@ def build_status_consistency_report(
         if isinstance(audit_slabx_check, Mapping)
         else {}
     )
+    audit_realtime_cache_check = next(
+        (
+            row
+            for row in audit_checks
+            if isinstance(row, Mapping)
+            and row.get("name") == "diagnostic_realtime_cache_benchmark"
+        ),
+        None,
+    ) if isinstance(audit_checks, Sequence) and not isinstance(audit_checks, (str, bytes)) else None
+    audit_realtime_cache_evidence = (
+        audit_realtime_cache_check.get("evidence", {})
+        if isinstance(audit_realtime_cache_check, Mapping)
+        else {}
+    )
     audit_check_count = len(audit_checks or ())
     audit_blocking_reason_count = len(audit.get("blocking_reasons", ()))
     # The completion audit grows as new evidence gates are added.  Compare
@@ -238,6 +252,54 @@ def build_status_consistency_report(
                 else None
             ),
             "facility_qra_claim": audit_slabx_evidence.get("facility_qra_claim"),
+        },
+    )
+    _check(
+        checks,
+        "audit_realtime_cache_benchmark_gate",
+        audit_realtime_cache_check is not None
+        and audit_realtime_cache_check.get("status") == "PASS"
+        and audit_realtime_cache_check.get("diagnostic_only") is True
+        and audit_realtime_cache_evidence.get("schema_version")
+        == "prism.realtime_cache_benchmark.v1"
+        and isinstance(audit_realtime_cache_evidence.get("cache_hits"), int)
+        and audit_realtime_cache_evidence.get("cache_hits")
+        == audit_realtime_cache_evidence.get("cache_sample_count")
+        and audit_realtime_cache_evidence.get("cache_median_ms", float("inf")) <= 1000
+        and audit_realtime_cache_evidence.get("cache_p95_ms", float("inf")) <= 1000
+        and audit_realtime_cache_evidence.get("one_hz_deadline_s") == 1.0
+        and audit_realtime_cache_evidence.get("fresh_physics_meets_one_hz") is False
+        and audit_realtime_cache_evidence.get("cache_meets_one_hz_all_samples") is True
+        and audit_realtime_cache_evidence.get("realtime_fresh_physics_claim") is False
+        and all(
+            _endswith(
+                status.get("realtime_cache_benchmark_record"),
+                "native_lh2_realtime_cache_benchmark_v1.json",
+            )
+            for status in (current_status, development_goal)
+        ),
+        {
+            "status": (
+                audit_realtime_cache_check.get("status")
+                if isinstance(audit_realtime_cache_check, Mapping)
+                else None
+            ),
+            "diagnostic_only": (
+                audit_realtime_cache_check.get("diagnostic_only")
+                if isinstance(audit_realtime_cache_check, Mapping)
+                else None
+            ),
+            "schema_version": audit_realtime_cache_evidence.get("schema_version"),
+            "cache_hits": audit_realtime_cache_evidence.get("cache_hits"),
+            "cache_sample_count": audit_realtime_cache_evidence.get("cache_sample_count"),
+            "cache_median_ms": audit_realtime_cache_evidence.get("cache_median_ms"),
+            "cache_p95_ms": audit_realtime_cache_evidence.get("cache_p95_ms"),
+            "fresh_physics_meets_one_hz": audit_realtime_cache_evidence.get(
+                "fresh_physics_meets_one_hz"
+            ),
+            "cache_meets_one_hz_all_samples": audit_realtime_cache_evidence.get(
+                "cache_meets_one_hz_all_samples"
+            ),
         },
     )
 
