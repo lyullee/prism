@@ -2030,6 +2030,8 @@
   "inspection_timeseries_frame_adapter_policy": "Each source column requires explicit tag, engineering unit, quality, timestamps, stream ID, and origin; no unit/value inference, accident release ownership, duration, frequency, provider qualification, or facility QRA promotion.",
   "inspection_timeseries_frame_adapter_snapshot_composer_implemented": true,
   "inspection_timeseries_frame_adapter_snapshot_composer": "state_snapshot_from_row() -> TelemetryNormalizer -> EquipmentStateSnapshot",
+  "inspection_timeseries_frame_adapter_realtime_row_entrypoint_implemented": true,
+  "inspection_timeseries_frame_adapter_realtime_row_entrypoint": "RealtimeConsequenceMonitor.update_from_row() -> frame_from_row() -> update_from_frame()",
   "inspection_timeseries_frame_adapter_test_status": "explicit valid-row conversion, missing-unit rejection, and state-only snapshot composition passed",
   "pool_footprint_evidence_contract_implemented": true,
   "pool_footprint_evidence_schema": "prism.resolved_pool_footprint.v1",

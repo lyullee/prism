@@ -197,6 +197,37 @@ def test_realtime_monitor_records_deadline_and_keeps_frequency_inference_off(tmp
     assert result['service']['fresh_physics_this_update'] is True
 
 
+def test_realtime_monitor_accepts_explicit_tabular_row_without_inference(tmp_path):
+    pipeline = Pipeline(tmp_path)
+    monitor = RealtimeConsequenceMonitor(ConsequenceService(pipeline), period_s=1.0)
+    normalizer = TelemetryNormalizer((
+        TagMapping(tag='P', component_id='storage', quantity='pressure', source_unit='bar',
+                   pressure_basis='absolute', sensor_location='tank-vapour'),
+        TagMapping(tag='T', component_id='storage', quantity='temperature', source_unit='degC',
+                   sensor_location='tank-vapour'),
+    ), maximum_age_s=2.0)
+    result = monitor.update_from_row(
+        request(),
+        normalizer,
+        {'PT1105A': 6.0, 'TT1106': 20.0},
+        stream_id='monitor-row',
+        sequence=1,
+        source_time_s=100.0,
+        arrival_time_s=100.1,
+        origin='historian_measured',
+        bindings={
+            'PT1105A': {'tag': 'P', 'unit': 'bar', 'quality': 'valid'},
+            'TT1106': {'tag': 'T', 'unit': 'degC', 'quality': 'valid'},
+        },
+        now_s=100.2,
+        pressure_tag='P',
+        temperature_tag='T',
+    )
+    assert result['data']['pressure'] == pytest.approx(600000.0)
+    assert result['telemetry_boundary']['origin'] == 'historian_measured'
+    assert result['realtime']['frequency_learning'] is False
+
+
 def test_realtime_monitor_reports_deadline_miss_without_stale_substitution(tmp_path):
     pipeline = Pipeline(tmp_path)
     monitor = RealtimeConsequenceMonitor(ConsequenceService(pipeline), period_s=1.0, deadline_s=1e-12)

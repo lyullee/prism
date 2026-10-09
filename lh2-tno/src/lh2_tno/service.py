@@ -393,6 +393,54 @@ class RealtimeConsequenceMonitor:
         }
         return result
 
+    def update_from_row(
+        self,
+        template,
+        normalizer,
+        row: Mapping[str, object],
+        *,
+        stream_id: str,
+        sequence: int,
+        source_time_s: float,
+        arrival_time_s: float,
+        origin: str,
+        bindings: Mapping[str, Mapping[str, object]],
+        now_s: float,
+        pressure_tag: str,
+        temperature_tag: str,
+        release_resolver=None,
+        ambient_pressure_pa: float | None = None,
+    ):
+        """Run one explicit tabular row through the realtime monitor.
+
+        This is a convenience boundary for a digital-twin historian or CSV
+        adapter.  ``frame_from_row`` still requires explicit tag, unit, and
+        quality metadata before the existing normalizer and deadline ledger
+        run.  The row is never interpreted as an accident release or a
+        frequency observation.
+        """
+        from .inspection_timeseries import frame_from_row
+
+        frame = frame_from_row(
+            row,
+            stream_id=stream_id,
+            sequence=sequence,
+            source_time_s=source_time_s,
+            arrival_time_s=arrival_time_s,
+            origin=origin,
+            bindings=bindings,
+        )
+        return self.update_from_frame(
+            template,
+            normalizer,
+            frame,
+            now_s=now_s,
+            pressure_tag=pressure_tag,
+            temperature_tag=temperature_tag,
+            release_resolver=release_resolver,
+            ambient_pressure_pa=ambient_pressure_pa,
+        )
+
 
 @dataclass(frozen=True)
 class RealtimeFrequencyBinding:
