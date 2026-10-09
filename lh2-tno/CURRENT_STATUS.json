@@ -1,5 +1,5 @@
 {
-  "date_kst": "2026-10-23",
+  "date_kst": "2026-10-27",
   "package_version": "0.6.2",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 431,
+  "unit_contract_conservation_tests_passed": 691,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -29,8 +29,8 @@
     10
   ],
   "exact_cache_lookup_milliseconds_observed_range": [
-    20,
-    40
+    30,
+    61
   ],
   "physical_validation_claim": false,
   "physical_validation_evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
@@ -45,17 +45,17 @@
   "physical_validation_holdout_aluminium_trial_6_radius_rmse_m": 0.10158740079360236,
   "physical_validation_holdout_video_band_coverage": 1.0,
   "physical_validation_hse_test6_max_mass_residual_kg": 8.244516180866412e-13,
-  "facility_validation": "WITHHELD; merged generic-plus-vertical diagnostic has 29 events, 34 conditional cases and 136 risk atoms, with 5 EXECUTED and 29 EXECUTED_OPERATOR_LIMITED cases in the merged ledger. Facility IR/F-N remains withheld because provider evidence is synthetic diagnostic and declared scope is partial.",
+  "facility_validation": "WITHHELD; native union diagnostic has 34 events, 44 conditional cases and 176 risk atoms. Qualified provider packet count is 0, eight accident families remain PARTIAL, and facility IR/F-N remains withheld.",
   "one_hz_fresh_physics_demonstrated": false,
   "realtime_monitor_implemented": true,
   "realtime_monitor_module": "src/lh2_tno/service.py",
   "realtime_monitor_policy": "Normalize each frame, run the declared consequence service, and record deadline status, input age, exact-cache/fresh-physics mode; never infer leak size or initiating frequency and never substitute stale output after a deadline miss.",
-  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, asynchronous time-window, configurable source-time gate, structured row rejection, row-to-provider chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and realtime facility risk handoff preservation/promotion-block assertions; local portable suite 582 passed/1 skipped, CI Run #413 full suite 579 passed/1 skipped",
+  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 691 passed; CI Run #483 completed successfully.",
   "realtime_monitor_one_hz_claim": false,
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "realtime_monitor_deadline_test_scope": "Synthetic Pipeline contract tests cover MET/MISSED deadline ledgers; no 1 Hz fresh-physics claim is made.",
-  "current_scope": "2026-10-23 current-source native generic plus vertical-handoff merged LH2 scope: 24 generic literature events plus 5 declared vertical-handoff area-bin events; 29 merged events, 34 conditional cases and 136 risk atoms. Five merged literature reweighting scenarios cover all 29 events; facility IR/F-N, qualified provider status and physical validation remain withheld.",
+  "current_scope": "2026-10-27 current-source native generic plus vertical-handoff and inventory-depletion union: 34 events, 44 conditional cases and 176 risk atoms; five literature reweighting scenarios and observed-state evidence are preserved; facility IR/F-N, qualified provider status and independent full-chain physical validation remain withheld.",
   "unsupported": [
     "DDT_detonation",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
@@ -2843,8 +2843,8 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 617,
-  "full_portable_test_status_latest": "562 passed",
+  "full_portable_test_count_latest": 691,
+  "full_portable_test_status_latest": "691 passed",
   "full_portable_test_record_latest": "pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -2975,7 +2975,7 @@
   "realtime_cache_benchmark_record": "results/20261024/native_lh2_realtime_cache_benchmark_v1.json",
   "realtime_cache_benchmark_summary": "examples/native_lh2_realtime_cache_benchmark_v1.json",
   "realtime_cache_benchmark_script": "scripts/benchmark_realtime_cache.py",
-  "realtime_cache_benchmark_status": "EXACT_CACHE_1HZ_DIAGNOSTIC; 20/20 cache hits, median 31.47 ms, p95 33.23 ms; fresh physics 2,685.50 ms and not a 1 Hz claim",
+  "realtime_cache_benchmark_status": "EXACT_CACHE_1HZ_DIAGNOSTIC plus persistent-worker fresh-physics diagnostic; cache 10/10 hits, p95 54.44 ms; cold fresh physics 2663 ms; warm steady median 2360 ms; fresh physics is not a 1 Hz claim",
   "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
   "domain_recovery_audit_record": "results/20261024/domain_recovery_audit_flammability_gate_v2.json",
   "domain_recovery_audit_status": "DOMAIN_RECOVERY_REVIEWED; 24 events compared; 0 persistent domain-incomplete events; 6 recovered; 22/24 flammability proofs; facility IR/F-N and provider qualification promotion false",
@@ -3271,5 +3271,12 @@
   "v060_current_completion_audit_blocking_reason_count": 3,
   "v060_current_completion_audit_provider_worklist_coverage": "PASS",
   "v060_current_completion_audit_actual_provider_release_packet": "BLOCKED",
-  "v060_current_completion_audit_qualified_provider_packet_count": 0
+  "v060_current_completion_audit_qualified_provider_packet_count": 0,
+  "realtime_backend_persistent_worker_implemented": true,
+  "realtime_backend_persistent_worker_module": "src/lh2_tno/backend.py",
+  "realtime_backend_persistent_worker_policy": "Optional warm worker retains one pinned interpreter for changed-input fresh physics; source pins and adapter digest are checked around every request; timeout/error never becomes a cache result.",
+  "realtime_backend_persistent_worker_benchmark_record": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
+  "realtime_backend_persistent_worker_steady_median_ms": 2359.8010999849066,
+  "realtime_backend_persistent_worker_steady_p95_ms": 2359.8010999849066,
+  "realtime_backend_persistent_worker_fresh_one_hz": false
 }

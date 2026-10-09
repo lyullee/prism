@@ -1,7 +1,7 @@
 """Facility-aware source evaluation through the existing TNO evidence gate."""
 from __future__ import annotations
 from dataclasses import dataclass
-from .backend import IsolatedBackend
+from .backend import BackendLike
 from .contracts import Facility, PropertyBasis, SourceLedger, canonical_digest
 from .source import integrated_source
 
@@ -18,7 +18,7 @@ class SourceEvaluation:
 
 
 class ResearchPipeline:
-    def __init__(self, facility: Facility, backend: IsolatedBackend):
+    def __init__(self, facility: Facility, backend: BackendLike):
         self.facility=facility
         self.backend=backend
 

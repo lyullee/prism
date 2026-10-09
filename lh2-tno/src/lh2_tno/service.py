@@ -298,7 +298,13 @@ class ConsequenceService:
             while len(self._cache)>self.capacity:self._cache.popitem(last=False)
         result['service']={'exact_cache_hit':hit,'fresh_physics_this_update':not hit,
             'service_elapsed_ms':(time.perf_counter()-start)*1000,'physics_run_elapsed_ms':result['elapsed_ms'],
-            'cache_key':key,'realtime_fresh_physics_claim':False}
+            'cache_key':key,
+            'backend_mode':(
+                'persistent_worker'
+                if result.get('persistent_worker') is True
+                else 'isolated_process'
+            ),
+            'realtime_fresh_physics_claim':False}
         return result
 
     def update_from_telemetry(self,template,normalized,*,pressure_tag,temperature_tag,release_resolver=None):

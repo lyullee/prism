@@ -7,7 +7,7 @@ import subprocess
 import threading
 import time
 from queue import Empty, Queue
-from typing import Literal
+from typing import Literal, Protocol
 from pydantic import Field
 from .contracts import Contract, Name, Positive, canonical_digest
 
@@ -34,6 +34,15 @@ class BackendConfig(Contract):
 
 class BackendError(RuntimeError):
     pass
+
+
+class BackendLike(Protocol):
+    """Runtime backend contract shared by cold and persistent workers."""
+
+    config: BackendConfig
+
+    def run(self, operation: str, payload: dict) -> dict:
+        ...
 
 
 class IsolatedBackend:
