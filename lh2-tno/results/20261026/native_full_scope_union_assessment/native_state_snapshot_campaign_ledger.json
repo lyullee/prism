@@ -1,0 +1,92 @@
+{
+  "schema_version": "prism.native_lh2dt_packet_campaign_execution.v1",
+  "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+  "campaign_id": "equipment-manifest-event-provider-campaign",
+  "campaign_scope_provenance": "current-source native generic scope; synthetic diagnostic only",
+  "event_count": 24,
+  "result_event_count": 24,
+  "case_count": 24,
+  "chain_executed_case_count": 24,
+  "packet_identity_case_count": 24,
+  "packet_digest_case_count": 24,
+  "uncomputed_case_count": 0,
+  "uncomputed_without_packet_identity_case_count": 0,
+  "packet_identity_consumed": true,
+  "route_event_set_matches_result": true,
+  "route_event_set_matches_cases": true,
+  "status_counts": {
+    "EXECUTED": 5,
+    "EXECUTED_OPERATOR_LIMITED": 19
+  },
+  "operator_limited_case_count": 19,
+  "operator_limited_event_ids": [
+    "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+  ],
+  "failed_case_count": 0,
+  "failed_cases": [],
+  "risk_atom_count": 96,
+  "known_contribution_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "facility_total_risk_available": false,
+  "frequency_from_provider_packet": false,
+  "frequency_source": "campaign FrequencyPlan; provider packet carries release history only",
+  "provider_packet_case_count": 24,
+  "qualified_provider_packet_case_count": 0,
+  "provider_packet_promoted": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "rebind_provenance_status": null,
+  "compressible_handoff_rebind": null,
+  "state_snapshot_campaign_reconciliation": {
+    "status": "STATE_SNAPSHOT_CAMPAIGN_RECONCILED",
+    "event_set_match": true,
+    "campaign_event_count": 24,
+    "audit_event_count": 24,
+    "bound_event_count": 24,
+    "unbound_event_ids": [],
+    "component_mismatch_event_ids": [],
+    "provider_result_digest_mismatch_event_ids": [],
+    "audit_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+  },
+  "diagnostic_only": true,
+  "policy": {
+    "provider_packet_promoted": false,
+    "frequency_inference_performed": false,
+    "frequency_from_provider_packet": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false
+  },
+  "interpretation": "The campaign consumed the strict native packet identities and preserved every failed or operator-limited case.  Literature frequencies remain campaign inputs; the provider packet does not generate a rate, and a partial campaign does not expose facility total IR/F-N."
+}

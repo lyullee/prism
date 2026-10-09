@@ -124,3 +124,40 @@ def test_native_packet_campaign_reconciles_state_snapshot_event_set():
     assert reconciliation["status"] == "STATE_SNAPSHOT_CAMPAIGN_RECONCILED"
     assert reconciliation["event_set_match"] is True
     assert reconciliation["bound_event_count"] == 1
+
+
+def test_native_packet_campaign_rejects_provider_result_digest_mismatch():
+    campaign = {
+        "id": "campaign-state-digest",
+        "event_routes": [{"event_id": "event-1"}],
+    }
+    result = {
+        "events": [{"id": "event-1"}],
+        "cases": [{
+            "event_id": "event-1",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "provider_packet_identity": {
+                "component_id": "tank-1",
+                "provider_result_digests": ["campaign-result"],
+            },
+        }],
+        "risk_atoms": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    audit = {
+        "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+        "rows": [{
+            "event_id": "event-1",
+            "component_id": "tank-1",
+            "provider_result_digest": "different-result",
+            "status": "BOUND_AND_ECHOED",
+        }],
+    }
+    ledger = build_native_packet_campaign_execution_ledger(
+        campaign, result, state_snapshot_audit=audit
+    )
+    reconciliation = ledger["state_snapshot_campaign_reconciliation"]
+    assert reconciliation["status"] == "PARTIAL_STATE_SNAPSHOT_CAMPAIGN_RECONCILIATION"
+    assert reconciliation["event_set_match"] is False
+    assert reconciliation["provider_result_digest_mismatch_event_ids"] == ["event-1"]

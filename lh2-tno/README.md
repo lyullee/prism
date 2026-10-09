@@ -9,10 +9,14 @@
 추가했습니다. 현재 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`으로,
 24/24 native 상태 snapshot·방출 packet·campaign 재결합과 조건부 IR/F-N은 확인되지만
 qualified provider packet·독립 물리검증·엄격한 전체범위·시설 전체 QRA는 보류됩니다.
+기본 native 24개 사건은 event·설비 ID·provider result digest까지 24/24 일치하지만,
+union 34개 사건 중 vertical handoff와 inventory depletion 확장 10개는 별도 상태
+snapshot 원문이 없어 시설 전체 상태 coverage gate가 열리지 않습니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
-기존 fail-closed IJHE 감사도 23개 검사 중 19개 PASS·4개 BLOCKED이며, native
-catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
+기존 fail-closed IJHE 감사도 23개 검사 중 19개 PASS·4개 BLOCKED이며, objective
+coverage에는 시설 전체 상태 snapshot coverage를 포함한 5개 strict gate가 남습니다.
+native catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 
 이번 원장 보완에서는 `uncomputed_case_count` 하나만 보고 실제 상태를 판단하지 않도록

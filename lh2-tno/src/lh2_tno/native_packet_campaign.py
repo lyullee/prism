@@ -90,6 +90,7 @@ def build_native_packet_campaign_execution_ledger(
         "bound_event_count": None,
         "unbound_event_ids": [],
         "component_mismatch_event_ids": [],
+        "provider_result_digest_mismatch_event_ids": [],
     }
     if isinstance(state_snapshot_audit, Mapping):
         snapshot_rows = state_snapshot_audit.get("rows")
@@ -119,7 +120,32 @@ def build_native_packet_campaign_execution_ledger(
                 and snapshot_by_event[event_id].get("component_id")
                 != campaign_component_by_event.get(event_id)
             )
-            exact = route_ids == set(snapshot_by_event) and not missing_ids and not component_mismatches
+            campaign_result_digest_by_event = {
+                str(case.get("event_id")): {
+                    str(digest)
+                    for digest in case.get("provider_packet_identity", {}).get(
+                        "provider_result_digests", []
+                    )
+                    if isinstance(digest, str) and digest
+                }
+                for case in cases
+                if isinstance(case, Mapping)
+                and isinstance(case.get("event_id"), str)
+                and isinstance(case.get("provider_packet_identity"), Mapping)
+            }
+            provider_result_digest_mismatches = sorted(
+                str(event_id)
+                for event_id in route_ids & set(snapshot_by_event)
+                if isinstance(snapshot_by_event[event_id].get("provider_result_digest"), str)
+                and snapshot_by_event[event_id].get("provider_result_digest")
+                not in campaign_result_digest_by_event.get(event_id, set())
+            )
+            exact = (
+                route_ids == set(snapshot_by_event)
+                and not missing_ids
+                and not component_mismatches
+                and not provider_result_digest_mismatches
+            )
             state_snapshot_summary = {
                 "status": "STATE_SNAPSHOT_CAMPAIGN_RECONCILED" if exact else "PARTIAL_STATE_SNAPSHOT_CAMPAIGN_RECONCILIATION",
                 "event_set_match": exact,
@@ -128,6 +154,7 @@ def build_native_packet_campaign_execution_ledger(
                 "bound_event_count": len(bound_ids),
                 "unbound_event_ids": missing_ids,
                 "component_mismatch_event_ids": component_mismatches,
+                "provider_result_digest_mismatch_event_ids": provider_result_digest_mismatches,
                 "audit_status": state_snapshot_audit.get("status"),
             }
     handoff_rebind = (

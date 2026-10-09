@@ -23,6 +23,9 @@ from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.facility_evidence_request import build_facility_evidence_request  # noqa: E402
 from lh2_tno.facility_ledger import merge_facility_campaign_results  # noqa: E402
 from lh2_tno.campaign_namespace import rebind_campaign_result  # noqa: E402
+from lh2_tno.native_packet_campaign import (  # noqa: E402
+    build_native_packet_campaign_execution_ledger,
+)
 from lh2_tno.scope_matrix_merge import merge_scope_matrices  # noqa: E402
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
 from lh2_tno.frequency_scenario_extension import (  # noqa: E402
@@ -192,7 +195,8 @@ def _extend_frequency_scenarios(
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
     base_dir = args.base_dir
-    base_result = _load(base_dir / "campaign_result.json")
+    base_campaign = _load(args.base_campaign or (base_dir / "campaign.json"))
+    base_result = _load(args.base_campaign_result or (base_dir / "campaign_result.json"))
     base_facility = _load(base_dir / "facility.json")
     base_scope = _load(base_dir / "scope_matrix.json")
     base_frequency_scenarios = _load(base_dir / "frequency_scenarios.json")
@@ -200,8 +204,40 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     vertical_scope_source = _load(args.vertical_scope_matrix)
     inventory_source = _load(args.inventory_result)
     inventory_scope_source = _load(args.inventory_scope_matrix)
+    state_snapshot_audit = (
+        _load(args.state_snapshot_binding_audit)
+        if args.state_snapshot_binding_audit is not None
+        else None
+    )
+    if state_snapshot_audit is not None:
+        native_state_snapshot_ledger = build_native_packet_campaign_execution_ledger(
+            base_campaign,
+            base_result,
+            state_snapshot_audit=state_snapshot_audit,
+        )
+    else:
+        native_state_snapshot_ledger = {
+            "schema_version": "prism.native_lh2dt_packet_campaign_execution.v1",
+            "status": "STATE_SNAPSHOT_CAMPAIGN_AUDIT_NOT_PROVIDED",
+            "event_count": len(base_campaign.get("event_routes", [])),
+            "case_count": len(base_result.get("cases", [])),
+            "diagnostic_only": True,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "interpretation": (
+                "The union output was built without a state snapshot audit; native campaign/state "
+                "identity reconciliation remains unavailable."
+            ),
+        }
 
     facility_id = str(base_result.get("facility_id", "")).strip()
+    facility_reference_id = str(base_facility.get("id", "")).strip()
+    if facility_reference_id:
+        # A freshly rerun native campaign may retain the same event identities but
+        # use a source-catalog facility label.  Keep the union namespace anchored
+        # to the selected base facility while preserving packet digests.
+        facility_id = facility_reference_id
+        base_result["facility_id"] = facility_id
     if not facility_id:
         raise ValueError("base campaign result has no facility_id")
     namespace = f"{facility_id}/vertical-handoff"
@@ -348,6 +384,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "facility_evidence_request_promotion_allowed": (
             assessment["complete_facility_qra_claim"] is True
         ),
+        "native_state_snapshot_campaign_status": native_state_snapshot_ledger["status"],
+        "native_state_snapshot_campaign_event_count": native_state_snapshot_ledger.get("event_count"),
+        "native_state_snapshot_campaign_case_count": native_state_snapshot_ledger.get("case_count"),
+        "native_state_snapshot_campaign_bound_event_count": native_state_snapshot_ledger.get(
+            "state_snapshot_campaign_reconciliation", {}
+        ).get("bound_event_count"),
+        "native_state_snapshot_campaign_provider_result_digest_mismatch_count": len(
+            native_state_snapshot_ledger.get("state_snapshot_campaign_reconciliation", {})
+            .get("provider_result_digest_mismatch_event_ids", [])
+        ),
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -356,6 +402,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "independent-event p05/p95 scenarios use fixed declared rates for events without published bounds",
             "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
             "inventory depletion population, weather and geometry remain synthetic diagnostics",
+            "the native state snapshot reconciliation covers only the base 24-event packet campaign; "
+            "vertical-handoff and inventory-depletion extension events require their own state snapshot "
+            "records before they can be treated as state-bound",
         ],
     }
     output = args.output_dir
@@ -383,6 +432,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     _save(output / "facility_assessment.json", assessment)
     _save(output / "facility_evidence_request.json", evidence_request)
+    _save(output / "native_state_snapshot_campaign_ledger.json", native_state_snapshot_ledger)
+    if state_snapshot_audit is not None:
+        _save(output / "state_snapshot_binding_audit.json", state_snapshot_audit)
     _save(output / "verification.json", verification)
     return verification
 
@@ -390,10 +442,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-dir", type=Path, required=True)
+    parser.add_argument("--base-campaign", type=Path, default=None)
+    parser.add_argument("--base-campaign-result", type=Path, default=None)
     parser.add_argument("--vertical-result", type=Path, required=True)
     parser.add_argument("--vertical-scope-matrix", type=Path, required=True)
     parser.add_argument("--inventory-result", type=Path, required=True)
     parser.add_argument("--inventory-scope-matrix", type=Path, required=True)
+    parser.add_argument("--state-snapshot-binding-audit", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     try:

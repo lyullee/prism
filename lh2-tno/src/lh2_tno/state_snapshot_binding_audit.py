@@ -95,6 +95,16 @@ def _classify(
         "declared_digest": declared,
         "computed_digest": computed,
         "provider_echo_digest": echo,
+        "provider_source_digest": (
+            provider_response.get("provider_source_digest")
+            or verification.get("provider_source_digest")
+            or request.get("provider_source_digest")
+        ),
+        "provider_result_digest": (
+            provider_response.get("provider_result_digest")
+            or verification.get("provider_result_digest")
+            or request.get("provider_result_digest")
+        ),
         "digest_match": status == "BOUND_AND_ECHOED",
         "reason": reason,
     }

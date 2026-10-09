@@ -31,6 +31,7 @@ native catalog와 SLABx-LH2 구성요소 검사는 diagnostic-only PASS다.
 | 독립 물리검증 | BLOCKED_EVIDENCE | 제한 evidence matrix이며 physical validation claim=false |
 | qualified provider packet | BLOCKED_EVIDENCE | qualified packet 0건; 현재 packet은 native diagnostic |
 | 엄격한 시설 범위 | BLOCKED_EVIDENCE | 8개 family가 `EXECUTED_OPERATOR_LIMITED`라 PARTIAL |
+| 시설 전체 상태 snapshot coverage | BLOCKED_EVIDENCE | 기본 native 24/24는 event·component·provider result digest가 일치하지만 union 34개 사건 중 확장 10개는 별도 상태 원문이 없음 |
 | 시설 전체 IR/F-N 승격 | BLOCKED_EVIDENCE | 위 게이트가 닫히지 않아 `facility_total_risk_available=false` |
 
 따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다.
@@ -67,6 +68,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json `
   --validation-evidence-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
+  --native-state-snapshot-campaign-ledger results/20261026/native_full_scope_union_assessment/native_state_snapshot_campaign_ledger.json `
   --output results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json
 ```
 
@@ -74,4 +76,4 @@ python scripts/build_ijhe_objective_coverage_audit.py `
 
 ## 다음 개발 기준
 
-IJHE 논문에 수치 결과를 넣을 때는 먼저 이 장부에서 해당 행의 상태와 `evidence_paths`를 확인한다. 조건부 행은 계산 구조와 민감도 설명에 사용할 수 있고, BLOCKED 행은 한계와 후속 검증 항목으로 제시한다. 시설 전체 IR/F-N을 승격하려면 네 개의 엄격한 행을 실제 자료로 닫고, 기존 fail-closed completion audit도 함께 통과해야 한다.
+IJHE 논문에 수치 결과를 넣을 때는 먼저 이 장부에서 해당 행의 상태와 `evidence_paths`를 확인한다. 조건부 행은 계산 구조와 민감도 설명에 사용할 수 있고, BLOCKED 행은 한계와 후속 검증 항목으로 제시한다. 시설 전체 IR/F-N을 승격하려면 다섯 개의 엄격한 행을 실제 자료로 닫고, 기존 fail-closed completion audit도 함께 통과해야 한다. 특히 union에 추가된 모든 설비·사고 사건이 상태 snapshot과 provider result digest까지 일대일로 연결돼야 한다.

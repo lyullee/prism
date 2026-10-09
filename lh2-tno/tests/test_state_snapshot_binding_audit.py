@@ -32,6 +32,23 @@ def test_canonical_snapshot_and_provider_echo_are_bound():
     assert report["rows"][0]["status"] == "BOUND_AND_ECHOED"
 
 
+def test_provider_result_digest_is_preserved_for_campaign_reconciliation():
+    snapshot = _snapshot()
+    report = build_state_snapshot_binding_audit(diagnostic_records=[{
+        "event_id": "event-with-result",
+        "component_id": "tank-1",
+        "provider_result_digest": "result-123",
+        "request": {
+            "state_snapshot": snapshot.to_mapping(),
+            "state_snapshot_digest": snapshot.digest(),
+        },
+        "provider_response": {
+            "provider_state_snapshot_digest": snapshot.digest(),
+        },
+    }])
+    assert report["rows"][0]["provider_result_digest"] == "result-123"
+
+
 def test_digest_only_does_not_count_as_binding():
     report = build_state_snapshot_binding_audit(diagnostic_records=[{
         "event_id": "event-2",

@@ -7,10 +7,13 @@
 ```powershell
 python scripts/run_native_full_scope_union_assessment.py `
   --base-dir results/20261026/native_full_scope_frequency_assessment `
+  --base-campaign results/20261027/native_generic_scope_packets_state_bound/campaign_assessment/campaign.json `
+  --base-campaign-result results/20261027/native_generic_scope_packets_state_bound/campaign_assessment/campaign_result.json `
   --vertical-result results/20261020/vertical_handoff_rebound_facility_result_all_bins.json `
   --vertical-scope-matrix results/20261020/vertical_handoff_scope_matrix_all_bins.json `
   --inventory-result results/20261019/inventory_depletion_rebound_facility_result.json `
   --inventory-scope-matrix results/20261019/inventory_depletion_scope_matrix_rebound.json `
+  --state-snapshot-binding-audit results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json `
   --output-dir results/20261026/native_full_scope_union_assessment
 ```
 
@@ -40,6 +43,7 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --native-full-bore-result results/20261027/native_dynamic_pipe_full_bore_state_bound/verification.json `
   --state-snapshot-binding-audit results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json `
+  --native-state-snapshot-campaign-ledger results/20261026/native_full_scope_union_assessment/native_state_snapshot_campaign_ledger.json `
   --native-scope-packet-catalog-verification results/20261027/native_generic_scope_packets_state_bound/verification.json
 ```
 
@@ -85,9 +89,15 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
 - `facility_assessment.json`: 조건부 IR/F-N과 시설 QRA gate
 - `facility_evidence_request.json`: 각 사고군·case의 provider packet·물리검증·종료/재고 증거 요구
 - `verification.json`: 병합 수·상태·제한 자동 검사
+- `native_state_snapshot_campaign_ledger.json`: 새로 실행한 기본 24개 native 사건의
+  상태 snapshot, component ID, provider result digest 대조. 24/24가 일치하며,
+  수직 handoff·inventory depletion 확장 10개 사건은 별도 상태 원문이 없어 전체
+  시설 상태 연결로 승격하지 않는다.
 - `validation_evidence_matrix.json`: 6개 근거 영역을 제한 상태로 묶은 통합 장부 (`FACILITY_QRA_WITHHELD`)
 - `realtime_cache_benchmark.json`: fresh physics와 동일 요청 cache 처리시간을 분리한 실행 기록
-- `state_snapshot_binding_audit.json`: 24개 union campaign 사건과 2개 최신 native 진단의 상태 handoff를 원문·digest·provider echo로 대조한다. union campaign은 24개 `UNBOUND`, 최신 진단 2개는 `BOUND_AND_ECHOED`다.
+- `state_snapshot_binding_audit.json`: native 24개 packet exporter의 원문·digest·provider echo를
+  대조한다. union 전체의 상태 연결은 별도 `native_state_snapshot_campaign_ledger.json`에서
+  기본 24개 사건만 결과 digest까지 재대조하며, 확장 10개 사건은 상태 연결 보류로 남긴다.
 - `ijhe_completion_audit.json`: 23개 검사 중 19개 PASS·4개 BLOCKED. 새 `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 모두 `diagnostic_only=true`로 유지된다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 qualified provider·시설 IR/F-N을 열지 않는다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청

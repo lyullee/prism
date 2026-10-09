@@ -21,8 +21,8 @@
   "population_accounting_mismatch_count": 0,
   "conditional_diagnostic_facility_annual_ir_low_high": {
     "worker-01": [
-      4.6800000000000006e-05,
-      4.6800000000000006e-05
+      0.0,
+      0.0
     ]
   },
   "facility_total_risk_available": false,
@@ -36,6 +36,11 @@
   "facility_evidence_request_family_count": 12,
   "facility_evidence_request_case_count": 44,
   "facility_evidence_request_promotion_allowed": false,
+  "native_state_snapshot_campaign_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+  "native_state_snapshot_campaign_event_count": 24,
+  "native_state_snapshot_campaign_case_count": 24,
+  "native_state_snapshot_campaign_bound_event_count": 24,
+  "native_state_snapshot_campaign_provider_result_digest_mismatch_count": 0,
   "limitations": [
     "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -43,7 +48,8 @@
     "frequency scenarios reweight saved atoms and do not infer vertical frequency",
     "independent-event p05/p95 scenarios use fixed declared rates for events without published bounds",
     "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
-    "inventory depletion population, weather and geometry remain synthetic diagnostics"
+    "inventory depletion population, weather and geometry remain synthetic diagnostics",
+    "the native state snapshot reconciliation covers only the base 24-event packet campaign; vertical-handoff and inventory-depletion extension events require their own state snapshot records before they can be treated as state-bound"
   ],
   "validation_evidence_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
   "validation_evidence_matrix_decision": "FACILITY_QRA_WITHHELD",

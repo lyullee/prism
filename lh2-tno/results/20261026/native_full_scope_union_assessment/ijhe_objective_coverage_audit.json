@@ -232,6 +232,24 @@
       },
       "blocking_reason": "qualified provider·strict scope·독립검증 gate가 닫히지 않아 facility IR/F-N을 보류한다",
       "interpretation": "조건부 IR/F-N 값은 존재하지만 시설 전체 QRA라는 표현은 사용하지 않는다."
+    },
+    {
+      "id": "strict_facility_state_snapshot_coverage",
+      "requirement": "시설 전체 사건이 설비 상태 snapshot과 native 방출 결과 digest까지 일대일로 이어져야 한다",
+      "status": "BLOCKED_EVIDENCE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "observed": {
+        "union_event_count": 34,
+        "state_snapshot_campaign_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+        "state_snapshot_campaign_event_count": 24,
+        "state_snapshot_campaign_bound_event_count": 24,
+        "provider_result_digest_mismatch_event_ids": []
+      },
+      "blocking_reason": "base native campaign의 상태 snapshot은 확인되지만 vertical-handoff와 inventory-depletion 확장 사건까지 시설 전체 상태 연결이 닫히지 않았다",
+      "interpretation": "시설 전체 gate는 확장 사건별 상태 snapshot와 provider result digest까지 확인될 때만 통과한다. 부분 연결을 전체 연결로 승격하지 않는다."
     }
   ],
   "core_chain_check_ids": [
@@ -248,14 +266,16 @@
     "independent_physical_validation",
     "qualified_provider_evidence",
     "strict_facility_scope",
-    "strict_facility_qra"
+    "strict_facility_qra",
+    "strict_facility_state_snapshot_coverage"
   ],
   "core_blocking_check_ids": [],
   "strict_blocking_check_ids": [
     "independent_physical_validation",
     "qualified_provider_evidence",
     "strict_facility_scope",
-    "strict_facility_qra"
+    "strict_facility_qra",
+    "strict_facility_state_snapshot_coverage"
   ],
   "conditional_chain_complete": true,
   "strict_facility_qra_claim": false,

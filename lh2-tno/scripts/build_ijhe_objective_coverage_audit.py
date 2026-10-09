@@ -37,6 +37,7 @@ def main() -> int:
     parser.add_argument("--slabx-validation-evidence", type=Path)
     parser.add_argument("--validation-evidence-matrix", type=Path)
     parser.add_argument("--realtime-cache-benchmark", type=Path)
+    parser.add_argument("--native-state-snapshot-campaign-ledger", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -62,6 +63,11 @@ def main() -> int:
             realtime_cache_benchmark=(
                 _object(args.realtime_cache_benchmark)
                 if args.realtime_cache_benchmark
+                else None
+            ),
+            native_state_snapshot_campaign_ledger=(
+                _object(args.native_state_snapshot_campaign_ledger)
+                if args.native_state_snapshot_campaign_ledger
                 else None
             ),
         )

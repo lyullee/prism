@@ -74,6 +74,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     realtime = _with_record(args.realtime_cache_benchmark)
     native_full_bore = _with_record(args.native_full_bore_result)
     state_snapshot_binding = _with_record(args.state_snapshot_binding_audit)
+    native_state_snapshot_campaign = _with_record(args.native_state_snapshot_campaign_ledger)
     native_scope_packet_catalog = _with_record(args.native_scope_packet_catalog_verification)
     slabx_validation = _with_record(args.slabx_validation_evidence)
 
@@ -130,6 +131,28 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             ),
             "state_snapshot_binding_unbound_count": (
                 state_snapshot_binding.get("unbound_count") if state_snapshot_binding else None
+            ),
+            "native_state_snapshot_campaign_status": (
+                native_state_snapshot_campaign.get("status")
+                if native_state_snapshot_campaign else None
+            ),
+            "native_state_snapshot_campaign_event_count": (
+                native_state_snapshot_campaign.get("event_count")
+                if native_state_snapshot_campaign else None
+            ),
+            "native_state_snapshot_campaign_bound_event_count": (
+                native_state_snapshot_campaign.get("state_snapshot_campaign_reconciliation", {}).get(
+                    "bound_event_count"
+                )
+                if native_state_snapshot_campaign else None
+            ),
+            "native_state_snapshot_campaign_provider_result_digest_mismatch_count": (
+                len(
+                    native_state_snapshot_campaign.get(
+                        "state_snapshot_campaign_reconciliation", {}
+                    ).get("provider_result_digest_mismatch_event_ids", [])
+                )
+                if native_state_snapshot_campaign else None
             ),
             "native_scope_packet_catalog_status": (
                 native_scope_packet_catalog.get("status") if native_scope_packet_catalog else None
@@ -196,6 +219,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional canonical equipment-state handoff audit; remains diagnostic-only.",
+    )
+    parser.add_argument(
+        "--native-state-snapshot-campaign-ledger",
+        type=Path,
+        default=None,
+        help="Optional base native-campaign reconciliation of state and provider result digests.",
     )
     parser.add_argument(
         "--native-scope-packet-catalog-verification",

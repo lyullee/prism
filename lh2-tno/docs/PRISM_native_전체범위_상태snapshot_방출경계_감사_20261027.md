@@ -48,6 +48,9 @@ python scripts/build_native_scope_packet_evidence.py `
 넣고 `run_native_full_scope_frequency_assessment.py`를 실행한다. 마지막으로
 `audit_native_packet_campaign_execution.py --state-snapshot-audit ...`를 호출하면
 packet identity 소비와 snapshot event/component 대조가 별도 장부에 남는다.
+현재 union 재현에서는 `run_native_full_scope_union_assessment.py`에 이 catalog의
+campaign과 result를 함께 넘겨 `native_state_snapshot_campaign_ledger.json`을 만들고,
+provider result digest까지 같은 사건별로 대조한다.
 
 | 항목 | 결과 |
 |---|---:|
@@ -77,15 +80,16 @@ echo가 배열인 경우에도 모든 endpoint가 같은 canonical digest를 보
 
 기존 2026-10-26 union 감사의 26행(대표 진단 2행 + campaign 24행)은 이전
 campaign JSON에 상태 payload가 없었기 때문에 24행이 `UNBOUND`였다. 이번
-카탈로그는 새로 실행한 24개 native verification 원문을 별도 증거로 보존한다.
+카탈로그는 새로 실행한 24개 native verification 원문을 보존하고, union은 이
+동일한 새 campaign result를 사용해 packet 결과 digest까지 재결합한다.
 
 이후 `rebind_campaign_to_worklist_packets.py`로 24개 campaign request를 이
 카탈로그의 strict packet에 다시 결합하고, `run_native_full_scope_frequency_assessment.py`를
 재실행했다. 결과는 24/24 event, 24/24 case, 24/24 consequence-chain 실행,
 96개 risk atom, 19개 `EXECUTED_OPERATOR_LIMITED`였고 시설 전체 QRA는 계속
-보류됐다. `native_packet_campaign_ledger.json`의
+보류됐다. `native_state_snapshot_campaign_ledger.json`의
 `state_snapshot_campaign_reconciliation`은 campaign event ID 24개와 snapshot
-감사 event 24개가 일치하고, 24개가 모두 bound이며, component mismatch가 0개임을
-기록한다. 이 대조는 상태 snapshot이 campaign에 사용된 native packet과 같은
-사건에 붙었음을 보여주는 진단 연결이며, provider 자격이나 현장 위험도 승격은
-아니다.
+감사 event 24개, component ID, provider result digest가 모두 일치함을 기록한다.
+이 대조는 상태 snapshot이 campaign에 사용된 native packet과 같은 사건에 붙었음을
+보여주는 진단 연결이며, 수직 handoff·inventory depletion까지 자동으로 bound했다고
+가정하지 않는다. provider 자격이나 현장 위험도 승격도 아니다.
