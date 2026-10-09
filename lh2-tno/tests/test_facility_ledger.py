@@ -106,6 +106,27 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
         [0.0007, 0.0008]
     )
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
+    assert result["scenario_family_contributions"] == {}
+
+
+def test_facility_ledger_reports_scenario_family_views_without_double_counting():
+    result = _result(
+        event_id="event-tank-family", asset_id="tank-asset-family",
+        component_id="tank-01", frequency=1e-3,
+    )
+    result["risk_atoms"][0]["scenario_families"] = ["vessel_hole", "liquid_two_phase"]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-01",)
+    )
+    assert set(merged["scenario_family_contributions"]) == {
+        "vessel_hole", "liquid_two_phase"
+    }
+    assert merged["scenario_family_contributions"]["vessel_hole"][
+        "annual_ir_low_high"
+    ] == merged["scenario_family_contributions"]["liquid_two_phase"][
+        "annual_ir_low_high"
+    ]
+    assert merged["semantics"]["scenario_family_contributions"]
 
 
 def test_facility_ledger_rejects_duplicate_event_or_atom():

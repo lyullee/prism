@@ -7,12 +7,14 @@ from __future__ import annotations
 import json
 import math
 import time
+from collections import Counter
 from statistics import median
 from pydantic import Field, model_validator
 from .contracts import Contract, Name, Fraction, Nonnegative, canonical_digest
 from .consequences import ConsequenceRequest, Weather
 from .frequency import FrequencyPlan, bind_event, generate_events
 from .backend import BackendError
+from .accident_scenario_catalog import scenario_families_for_release
 
 IGNITION_KEYS = {'direct_fire', 'delayed_flash_fire', 'delayed_explosion', 'no_ignition'}
 
@@ -192,6 +194,13 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     if f.environment != 'outdoor' or not f.receptors:
         raise ValueError('outdoor facility and explicit receptors required')
     events = {x.id: x for x in generate_events(f, campaign.frequency_plan)}
+    component_kinds = {component.id: component.kind for component in f.components}
+    event_scenario_families = {
+        event.id: scenario_families_for_release(
+            component_kinds.get(event.model_component_id), event.release.mode
+        )
+        for event in events.values()
+    }
     routes = {x.event_id: x for x in campaign.event_routes}
     if set(events) != set(routes):
         raise ValueError('every generated LOC needs exactly one route or explicit uncomputed branch')
@@ -221,7 +230,8 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                 row = {'event_id': e.id, 'asset_id': e.asset_id, 'release_branch_id': b.id,
                     'annual_condition_id': c.id, 'initiating_frequency_per_year': e.annual_frequency_per_year,
                     'release_branch_probability': b.probability_given_event,
-                    'annual_condition_probability': c.annual_probability}
+                    'annual_condition_probability': c.annual_probability,
+                    'scenario_families': list(event_scenario_families[e.id])}
                 if e.annual_frequency_per_year*b.probability_given_event*c.annual_probability == 0:
                     row.update(status='ZERO_WEIGHT', elapsed_ms=0.0)
                     cases.append(row)
@@ -273,6 +283,7 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                         'annual_condition_id': c.id, 'release_branch_id': b.id, 'ignition_branch': key,
                         'initiating_frequency_per_year': e.annual_frequency_per_year,
                         'conditional_weight': weight,
+                        'scenario_families': list(event_scenario_families[e.id]),
                         'provider_packet_identity': packet_identity,
                         'receptor_harm_low_high': {rid: [harms[rid][i][key] for i in range(2)] for rid in receptor_ids},
                         'expected_deaths_low_high': [sum(population[rid]*harms[rid][i][key] for rid in receptor_ids) for i in range(2)]})
@@ -320,16 +331,24 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'uncomputed_case_count': sum(case['status'] in {'UNCOMPUTED','FAILED','EXECUTED_DOMAIN_INCOMPLETE','EXECUTED_OPERATOR_LIMITED'} for case in component_cases),
             'uncomputed_reasons': sorted({case.get('reason') for case in component_cases if case['status'] != 'EXECUTED' and case.get('reason')}),
         })
+    scenario_family_event_counts = Counter(
+        family for families in event_scenario_families.values() for family in families
+    )
+    event_rows = []
+    for event in events.values():
+        row = event.model_dump(mode='json')
+        event_rows.append(row)
     return {'status':'DECLARED_SCOPE_EXECUTED' if scope_complete else 'PARTIAL_DECLARED_SCOPE',
         'facility_id': f.id, 'facility_digest': f.digest(), 'campaign_digest': campaign.digest(),
-        'scope_provenance': campaign.scope_provenance, 'events':[e.model_dump(mode='json') for e in events.values()],
+        'scope_provenance': campaign.scope_provenance, 'events':event_rows,
         'annual_conditions':[c.model_dump(mode='json') for c in campaign.annual_conditions],
         'cases': cases, 'uncomputed_cases': missing, 'excluded_model_components': excluded,
         'coverage':{'generated_initiation_frequency_per_year':generated_frequency,
             'fully_executed_case_weighted_frequency_per_year':evaluated_frequency,
             'fraction_of_generated_initiation_frequency':evaluated_frequency/generated_frequency if generated_frequency else None,
             'meaning':'frequency coverage only; not fraction of risk captured, not physical validation',
-            'by_component':component_coverage},
+            'by_component':component_coverage,
+            'scenario_family_event_counts': dict(sorted(scenario_family_event_counts.items()))},
         'declared_scope_numerically_complete': scope_complete, 'synthetic_release_horizon_present': synthetic,
         'declared_scope_annual_ir_low_high': known['ir_low_high'] if scope_complete else None,
         'known_contribution_annual_ir_low_high': known['ir_low_high'],

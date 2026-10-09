@@ -126,6 +126,8 @@ def test_frequency_weather_barrier_ignition_each_weighted_once():
     assert by_component['storage']['uncomputed_case_count']==4
     assert by_component['isolation']['scope_status']=='EXCLUDED'
     assert by_component['isolation']['excluded_reason']
+    assert all('scenario_families' in atom for atom in r['risk_atoms'])
+    assert r['coverage']['scenario_family_event_counts']['vessel_hole'] == 1
 
 
 def test_societal_outcomes_remain_separate_before_fn_accumulation():

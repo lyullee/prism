@@ -406,10 +406,16 @@ def merge_facility_campaign_results(
         for event in merged_events
     }
     component_atoms: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    family_atoms: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for atom in merged_atoms:
         weight = float(atom["initiating_frequency_per_year"]) * float(atom["conditional_weight"])
         harm = atom["receptor_harm_low_high"]
         component_atoms[event_component[str(atom["event_id"])]].append(atom)
+        families = atom.get("scenario_families", ())
+        if isinstance(families, Sequence) and not isinstance(families, (str, bytes)):
+            for family in families:
+                if isinstance(family, str) and family.strip():
+                    family_atoms[family].append(atom)
         for endpoint in range(2):
             for receptor_id in endpoint_ir:
                 endpoint_ir[receptor_id][endpoint] += weight * float(harm[receptor_id][endpoint])
@@ -475,6 +481,28 @@ def merge_facility_campaign_results(
             ],
             "frequency_is_not_reallocated": True,
         }
+    scenario_family_contributions: dict[str, dict[str, Any]] = {}
+    for family, atoms in sorted(family_atoms.items()):
+        family_ir = {
+            receptor_id: [0.0, 0.0] for receptor_id in sorted(receptor_ids)
+        }
+        for atom in atoms:
+            weight = float(atom["initiating_frequency_per_year"]) * float(atom["conditional_weight"])
+            harm = atom["receptor_harm_low_high"]
+            for endpoint in range(2):
+                for receptor_id in family_ir:
+                    family_ir[receptor_id][endpoint] += weight * float(
+                        harm[receptor_id][endpoint]
+                    )
+        scenario_family_contributions[family] = {
+            "event_count": len({str(atom["event_id"]) for atom in atoms}),
+            "risk_atom_count": len(atoms),
+            "annual_ir_low_high": family_ir,
+            "expected_death_fn_low_high": [
+                _fn_curve(atoms, endpoint) for endpoint in range(2)
+            ],
+            "frequency_is_not_reallocated": True,
+        }
     total_available = source_complete and not source_synthetic and not merged_exclusions
     unique_blocking = list(dict.fromkeys(blocking_reasons))
     timing = {
@@ -525,6 +553,7 @@ def merge_facility_campaign_results(
         "risk_atoms": merged_atoms,
         "risk_atoms_digest": canonical_digest(merged_atoms),
         "component_contributions": component_contributions,
+        "scenario_family_contributions": scenario_family_contributions,
         "observed_asset_ids": sorted(seen_assets),
         "observed_component_ids": sorted(observed_components),
         "expected_component_ids": sorted(expected_components),
@@ -562,6 +591,10 @@ def merge_facility_campaign_results(
                 "facility IR/F-N is calculated from the atoms that reached the risk ledger, "
                 "but remains diagnostic-only whenever declared scope, physical validation, "
                 "or release-horizon blockers are present"
+            ),
+            "scenario_family_contributions": (
+                "risk atoms retain their declared scenario_families; overlapping physical "
+                "families are views of the same atoms and must not be summed across families"
             ),
         },
     }
