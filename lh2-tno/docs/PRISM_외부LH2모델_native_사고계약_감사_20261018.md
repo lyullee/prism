@@ -75,6 +75,8 @@ python scripts/audit_lh2dt_native_contract.py `
 
 현재 소스에서 실제 native 응답이 PRISM strict packet과 피해 chain에 소비된 것을 재확인했다. 입력은 여전히 합성 탱크 형상·초기상태·개구·대기경계이며 airborne liquid은 0으로 제한된다. 따라서 이 결과는 설비별 현장 packet, 현장 빈도, 독립 물리검증 또는 시설 IR/F-N을 열지 않는다.
 
+같은 소스에서 `DynamicHEMPipe` full-bore도 재실행했다. `results/20261022/native_dynamic_pipe_full_bore_current/verification.json`은 0.01 m 개구, 2상 상태, provider 자연 종료 `model_pressure_equalization`, 방출 지속시간 `0.03141380098 s`, 최종 압력 `101325.000000004 Pa`, 질량 잔차 `0 kg`, native export 약 `0.69 s`, 전체 consequence chain 약 `34.63 s`를 기록한다. 상태는 `END_TO_END_DIAGNOSTIC_EXECUTED`이다. 이 실행은 최신 native 배관 응답도 PRISM strict packet과 방출→피해 chain에서 소비됨을 확인하지만, 합성 1 m 배관과 선언형 pool footprint를 사용하므로 현장 차단 신뢰도·빈도·시설 전체 IR/F-N을 승격하지 않는다.
+
 ## native packet과 문헌 빈도를 함께 쓰는 저장탱크 진단
 
 `scripts/run_lh2dt_native_frequency_case.py`는 한 단계 더 좁은 연결시험이다. 기존 혼합 캠페인의 `LH2_VESSEL AREA_0.01%` 문헌 빈도(중앙값 `6.5×10⁻⁴ item⁻¹ year⁻¹`)는 그대로 읽고, 그 사건의 방출 이력만 native `LayeredTank.export_accident_history()`로 다시 생성한다. 개구 직경 `0.0127 m`를 exact-match로 확인한 뒤 provider packet을 `ResolvedLiquidRelease`로 변환하고, 동일한 facility manifest·기상·점화·IR/F-N 계산기에 넣는다. 따라서 이 실행은 **문헌 빈도 → native 방출 → SLABx-LH2/풀 → 분산·점화·피해** 연결을 실제로 확인한다.
