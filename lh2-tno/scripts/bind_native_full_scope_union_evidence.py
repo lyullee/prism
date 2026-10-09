@@ -73,6 +73,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     vertical = _with_record(args.vertical_handoff_result)
     realtime = _with_record(args.realtime_cache_benchmark)
     native_full_bore = _with_record(args.native_full_bore_result)
+    state_snapshot_binding = _with_record(args.state_snapshot_binding_audit)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -86,6 +87,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         validation_evidence_matrix=matrix,
         realtime_cache_benchmark=realtime,
         native_full_bore_result=native_full_bore,
+        state_snapshot_binding_audit=state_snapshot_binding,
     )
 
     verification_path = output_dir / "verification.json"
@@ -112,6 +114,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "ijhe_audit_pass_count": sum(row["status"] == "PASS" for row in audit["checks"]),
             "ijhe_audit_blocked_count": sum(
                 row["status"] == "BLOCKED" for row in audit["checks"]
+            ),
+            "state_snapshot_binding_status": (
+                state_snapshot_binding.get("status") if state_snapshot_binding else None
+            ),
+            "state_snapshot_binding_record_count": (
+                state_snapshot_binding.get("record_count") if state_snapshot_binding else None
+            ),
+            "state_snapshot_binding_bound_count": (
+                state_snapshot_binding.get("bound_count") if state_snapshot_binding else None
+            ),
+            "state_snapshot_binding_unbound_count": (
+                state_snapshot_binding.get("unbound_count") if state_snapshot_binding else None
             ),
         }
     )
@@ -150,6 +164,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional native finite full-bore diagnostic record; remains diagnostic-only.",
+    )
+    parser.add_argument(
+        "--state-snapshot-binding-audit",
+        type=Path,
+        default=None,
+        help="Optional canonical equipment-state handoff audit; remains diagnostic-only.",
     )
     args = parser.parse_args()
     try:

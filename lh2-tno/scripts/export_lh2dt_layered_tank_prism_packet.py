@@ -277,6 +277,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "strict_packet_mass_residual_kg": result.release.cumulative_mass_out_kg - result.release.integrated_mass_kg,
         "strict_packet_energy_residual_j": result.release.cumulative_specific_enthalpy_out_j - result.release.integrated_specific_enthalpy_out_j,
         "provider_packet_promoted": result.provider_packet_promoted,
+        "state_snapshot": result.request.state_snapshot.to_mapping() if result.request.state_snapshot is not None else None,
         "state_snapshot_handoff": {
             "present": result.request.state_snapshot is not None,
             "schema_version": (

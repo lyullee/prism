@@ -1,0 +1,76 @@
+{
+  "status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+  "provider_result_digest": "7b11d84855eeb4a8e87276014b0913d65b17067f19d241ecd52ef517f2cdc55b",
+  "provider_run_meta": {
+    "status": "LAYERED_TANK_INVENTORY_THRESHOLD_REACHED",
+    "available_mass_kg": 0.028492061899609754,
+    "threshold_mass_kg": 0.028392061899609754,
+    "remaining_mass_kg": 0.028359758163217307,
+    "cumulative_mass_out_kg": 0.0001323037363924441,
+    "duration_s": 0.1,
+    "interval_count": 2,
+    "max_abs_mass_residual_kg": 2.5614276324970042e-18,
+    "max_abs_energy_residual_j": 0.038260458256402785,
+    "termination_basis": "inventory_depletion_positive_threshold",
+    "operator_limited": true,
+    "physical_validation_claim": false
+  },
+  "strict_packet_duration_s": 0.1,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 0.0,
+  "provider_packet_promoted": false,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "layered-tank-diagnostic",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 204952.5178434031,
+    "temperature_k": 22.96893651066565,
+    "mass_kg": 0.028492061899609754,
+    "liquid_fraction": null,
+    "phase": "liquid",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 204952.5178434031,
+        "sensor_location": "layered-tank-diagnostic.liquid_cell_0",
+        "quality": "valid"
+      },
+      "initial_temperature": {
+        "quantity": "temperature",
+        "value_si": 22.96893651066565,
+        "sensor_location": "layered-tank-diagnostic.liquid_cell_0",
+        "quality": "valid"
+      },
+      "initial_mass": {
+        "quantity": "mass",
+        "value_si": 0.028492061899609754,
+        "sensor_location": "layered-tank-diagnostic.inventory",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "digest": "19631aef0afec899848508bf70df5368a52401e570d9335ec1d5135aa1e77bf9",
+    "provider_echo_digest": "19631aef0afec899848508bf70df5368a52401e570d9335ec1d5135aa1e77bf9",
+    "digest_match": true
+  },
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic LayeredTank geometry, opening and atmospheric boundary",
+    "liquid-port ground interception is explicit; flash and airborne-liquid physics are not supplied",
+    "provider packet remains synthetic_diagnostic and is not a qualified facility release"
+  ]
+}

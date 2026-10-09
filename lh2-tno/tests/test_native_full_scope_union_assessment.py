@@ -57,8 +57,11 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 20
-    assert verification["ijhe_audit_pass_count"] == 16
+    assert verification["ijhe_audit_check_count"] == 21
+    assert verification["ijhe_audit_pass_count"] == 17
+    assert verification["state_snapshot_binding_status"] == "PARTIAL_STATE_SNAPSHOT_BINDING"
+    assert verification["state_snapshot_binding_bound_count"] == 2
+    assert verification["state_snapshot_binding_unbound_count"] == 24
     assert verification["ijhe_audit_blocked_count"] == 4
 
     assert result["event_count"] == 34
@@ -96,8 +99,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 20
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 16
+    assert len(audit["checks"]) == 21
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 17
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 4
     vertical_check = next(
         check for check in audit["checks"]

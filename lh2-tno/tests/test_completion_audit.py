@@ -191,6 +191,35 @@ def test_completion_audit_records_native_full_bore_chain_as_diagnostic_evidence(
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_records_state_snapshot_binding_as_diagnostic_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        state_snapshot_binding_audit={
+            "schema_version": "prism.state_snapshot_binding_audit.v1",
+            "status": "PARTIAL_STATE_SNAPSHOT_BINDING",
+            "record_count": 25,
+            "bound_count": 1,
+            "declared_digest_only_count": 0,
+            "unbound_count": 24,
+            "digest_mismatch_count": 0,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "policy": {
+                "digest_only_is_binding": False,
+                "provider_echo_required": True,
+            },
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_equipment_state_snapshot_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def test_completion_audit_records_native_binding_reconciliation_as_diagnostic_evidence():
     report = build_ijhe_completion_audit(
         _status(validated=False),

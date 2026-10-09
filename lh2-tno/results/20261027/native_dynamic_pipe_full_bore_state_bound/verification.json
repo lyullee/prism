@@ -1,0 +1,70 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_full_bore_case.v1",
+  "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "event_id": "generic-lh2-full-bore-diagnostic/transfer-line/full-bore",
+  "component_id": "liquid-transfer-line-01",
+  "opening_diameter_m": 0.01,
+  "full_bore_match": true,
+  "phase_basis": "two_phase",
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_result_digest": "e67f137a4e66ed1e07c1bf2815b36aceac0e35d025ee1ce005e5fb2c78e33e12",
+  "provider_termination_basis": "model_pressure_equalization",
+  "provider_duration_s": 0.03141380098162305,
+  "provider_available_mass_kg": 0.0025156266507964497,
+  "provider_cumulative_mass_out_kg": 0.002064137529294226,
+  "provider_mass_residual_kg": 0.0,
+  "provider_final_pressure_pa_abs": 101325.00000000426,
+  "provider_pressure_equalized": true,
+  "provider_final_pressure_matches_ambient": true,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "liquid-transfer-line-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 500000.0,
+    "temperature_k": 27.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "two_phase",
+    "position_enu_m": [
+      5.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "initial_pressure": {
+        "quantity": "pressure",
+        "value_si": 500000.0,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      },
+      "initial_quality": {
+        "quantity": "level_fraction",
+        "value_si": 0.1,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "digest": "5a9f7a82ab7e1842b097a72c50e05ac5cbab5f743cd898ebbdce42b28704983d",
+    "provider_echo_digest": "5a9f7a82ab7e1842b097a72c50e05ac5cbab5f743cd898ebbdce42b28704983d",
+    "digest_match": true
+  },
+  "provider_export_elapsed_ms": 688.7257000198588,
+  "consequence_chain_elapsed_ms": 34347.61240007356,
+  "consequence_chain_executed": true,
+  "frequency_applied": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "limitations": [
+    "synthetic 1 m pipe, initial state, full-bore opening and atmospheric boundary",
+    "provider pressure-equalization termination is finite-state evidence, not field isolation reliability",
+    "declared-sensitivity pool footprint remains operator-limited",
+    "airborne liquid remains zero pending independent droplet validation"
+  ]
+}

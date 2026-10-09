@@ -77,6 +77,7 @@ def build_ijhe_completion_audit(
     slabx_validation_evidence: Mapping[str, Any] | None = None,
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
     domain_recovery_audit: Mapping[str, Any] | None = None,
+    state_snapshot_binding_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -365,6 +366,57 @@ def build_ijhe_completion_audit(
                     "Native finite full-bore pressure-equalization output reached the PRISM liquid/two-phase "
                     "consequence chain. This is diagnostic integration evidence; it does not qualify a provider, "
                     "assign a frequency, or promote facility IR/F-N."
+                ),
+            }
+        )
+    if state_snapshot_binding_audit is not None:
+        snapshot_audit = state_snapshot_binding_audit
+        policy = snapshot_audit.get("policy")
+        if not isinstance(policy, Mapping):
+            policy = {}
+        bound_count = snapshot_audit.get("bound_count")
+        mismatch_count = snapshot_audit.get("digest_mismatch_count")
+        snapshot_binding_valid = (
+            snapshot_audit.get("schema_version") == "prism.state_snapshot_binding_audit.v1"
+            and snapshot_audit.get("status") in {
+                "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+                "PARTIAL_STATE_SNAPSHOT_BINDING",
+            }
+            and isinstance(bound_count, int)
+            and bound_count > 0
+            and mismatch_count == 0
+            and policy.get("digest_only_is_binding") is False
+            and policy.get("provider_echo_required") is True
+            and snapshot_audit.get("physical_validation_claim") is False
+            and snapshot_audit.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_equipment_state_snapshot_binding",
+                "status": "PASS" if snapshot_binding_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if snapshot_binding_valid
+                    else "no validated equipment state snapshot is both carried and echoed by a provider"
+                ),
+                "evidence": {
+                    "record": snapshot_audit.get("_record_path"),
+                    "schema_version": snapshot_audit.get("schema_version"),
+                    "status": snapshot_audit.get("status"),
+                    "record_count": snapshot_audit.get("record_count"),
+                    "bound_count": bound_count,
+                    "declared_digest_only_count": snapshot_audit.get(
+                        "declared_digest_only_count"
+                    ),
+                    "unbound_count": snapshot_audit.get("unbound_count"),
+                    "digest_mismatch_count": mismatch_count,
+                    "policy": policy,
+                },
+                "interpretation": (
+                    "At least one diagnostic provider received a canonical equipment state snapshot and "
+                    "echoed its digest. Campaign rows without the payload remain unbound; this check "
+                    "does not qualify physical accuracy, frequency or facility IR/F-N."
                 ),
             }
         )

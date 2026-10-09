@@ -38,7 +38,8 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
   --vertical-handoff-result results/20261020/vertical_vent_all_bins/verification.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
-  --native-full-bore-result results/20261022/native_dynamic_pipe_full_bore_current/verification.json
+  --native-full-bore-result results/20261027/native_dynamic_pipe_full_bore_state_bound/verification.json `
+  --state-snapshot-binding-audit results/20261026/native_full_scope_union_assessment/state_snapshot_binding_audit.json
 ```
 
 ## 연결 결과
@@ -76,7 +77,8 @@ python scripts/bind_native_full_scope_union_evidence.py `
 - `verification.json`: 병합 수·상태·제한 자동 검사
 - `validation_evidence_matrix.json`: 6개 근거 영역을 제한 상태로 묶은 통합 장부 (`FACILITY_QRA_WITHHELD`)
 - `realtime_cache_benchmark.json`: fresh physics와 동일 요청 cache 처리시간을 분리한 실행 기록
-- `ijhe_completion_audit.json`: 20개 검사 중 16개 PASS·4개 BLOCKED. 기존 native finite full-bore pressure-equalization 진단은 `diagnostic_native_full_bore_chain`으로 연결되지만 diagnostic-only로 유지된다.
+- `state_snapshot_binding_audit.json`: 24개 union campaign 사건과 2개 최신 native 진단의 상태 handoff를 원문·digest·provider echo로 대조한다. union campaign은 24개 `UNBOUND`, 최신 진단 2개는 `BOUND_AND_ECHOED`다.
+- `ijhe_completion_audit.json`: 21개 검사 중 17개 PASS·4개 BLOCKED. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`은 모두 diagnostic-only로 유지된다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
 cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,

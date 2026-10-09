@@ -114,11 +114,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 20,
+      "check_count": 21,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "685c73886e489aa19936ea4f378d3fd381cc96f8e6d008c0ae978fb827e34c4c",
+        "sha256": "abbf5ffd5fe6965afa374107f40ceb1ebaab11b5a80a84f1735e819d1fb1ee43",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,

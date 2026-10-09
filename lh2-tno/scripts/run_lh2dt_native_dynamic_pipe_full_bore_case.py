@@ -20,7 +20,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest  # noqa: E402
-from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     AccidentReleaseExportRequest,
     export_equipment_liquid_accident_history,
@@ -28,6 +27,10 @@ from lh2_tno.equipment_accident_export import (  # noqa: E402
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import build_consequence_request_from_provider_release  # noqa: E402
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
+)
 
 
 def _tree_digest(root: Path) -> str:
@@ -56,7 +59,7 @@ class NativeDynamicPipeProvider:
         return dict(self.model.export_accident_history(payload))
 
 
-def _request(source_digest: str, state_digest: str) -> AccidentReleaseExportRequest:
+def _request(source_digest: str, snapshot: EquipmentStateSnapshot) -> AccidentReleaseExportRequest:
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
@@ -76,7 +79,8 @@ def _request(source_digest: str, state_digest: str) -> AccidentReleaseExportRequ
         "model_package": "lh2dt_models",
         "model_class": "lh2dt.dynamic_pipe.DynamicHEMPipe",
         "model_revision": "native-export-3d9b982",
-        "state_snapshot_digest": state_digest,
+        "state_snapshot_digest": snapshot.digest(),
+        "state_snapshot": snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit native full-bore finite-inventory diagnostic; not site-calibrated",
         "provider_termination_required": True,
@@ -127,13 +131,6 @@ def run(args: Any) -> dict[str, Any]:
     from lh2dt.properties import HydrogenProperties
 
     source_digest = _tree_digest(external_root)
-    state_digest = canonical_digest({
-        "source": "native-dynamic-pipe-full-bore-case",
-        "pressure_pa_abs": 500000.0,
-        "initial_quality": 0.1,
-        "length_m": 1.0,
-        "inner_diameter_m": 0.01,
-    })
     model = DynamicHEMPipe(
         1.0,
         0.01,
@@ -142,6 +139,28 @@ def run(args: Any) -> dict[str, Any]:
         ambient_temperature_K=288.15,
         properties=HydrogenProperties("Hydrogen"),
     )
+    snapshot = EquipmentStateSnapshot.from_mapping({
+        "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        "component_id": "liquid-transfer-line-01",
+        "captured_at_s": 0.0,
+        "origin": "model_prediction",
+        "pressure_pa_abs": 500000.0,
+        "temperature_k": 27.0,
+        "phase": "two_phase",
+        "position_enu_m": [5.0, 0.0, 1.0],
+        "measurements": {
+            "initial_pressure": {
+                "quantity": "pressure",
+                "value_si": 500000.0,
+                "sensor_location": "liquid-transfer-line-01.fluid_volume",
+            },
+            "initial_quality": {
+                "quantity": "level_fraction",
+                "value_si": 0.1,
+                "sensor_location": "liquid-transfer-line-01.fluid_volume",
+            },
+        },
+    })
     provider = NativeDynamicPipeProvider(model, {
         "initial_pressure_pa_abs": 500000.0,
         "initial_temperature_k": 27.0,
@@ -154,7 +173,7 @@ def run(args: Any) -> dict[str, Any]:
         "droplet_flight_time_s": 0.0,
     })
     started = time.perf_counter()
-    adapted = export_equipment_liquid_accident_history(provider, _request(source_digest, state_digest))
+    adapted = export_equipment_liquid_accident_history(provider, _request(source_digest, snapshot))
     export_elapsed_ms = (time.perf_counter() - started) * 1000.0
     release = adapted.release
     request = build_consequence_request_from_provider_release(release, _defaults())
@@ -198,6 +217,22 @@ def run(args: Any) -> dict[str, Any]:
         "provider_final_pressure_pa_abs": final_pressure,
         "provider_pressure_equalized": pressure_equalized,
         "provider_final_pressure_matches_ambient": pressure_matches_ambient,
+        "state_snapshot": adapted.request.state_snapshot.to_mapping() if adapted.request.state_snapshot is not None else None,
+        "state_snapshot_handoff": {
+            "present": adapted.request.state_snapshot is not None,
+            "schema_version": (
+                adapted.request.state_snapshot.schema_version
+                if adapted.request.state_snapshot is not None
+                else None
+            ),
+            "digest": adapted.request.state_snapshot_digest,
+            "provider_echo_digest": adapted.provider_response.get("provider_state_snapshot_digest"),
+            "digest_match": (
+                adapted.request.state_snapshot is not None
+                and adapted.provider_response.get("provider_state_snapshot_digest")
+                == adapted.request.state_snapshot_digest
+            ),
+        },
         "provider_export_elapsed_ms": export_elapsed_ms,
         "consequence_chain_elapsed_ms": chain_elapsed_ms,
         "consequence_chain_executed": data.get("full_chain_executed") is True,

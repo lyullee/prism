@@ -18,7 +18,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261022\\native_dynamic_pipe_full_bore_current\\verification.json",
+        "record": "results\\20261027\\native_dynamic_pipe_full_bore_state_bound\\verification.json",
         "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
         "event_id": "generic-lh2-full-bore-diagnostic/transfer-line/full-bore",
         "component_id": "liquid-transfer-line-01",
@@ -34,6 +34,31 @@
         "physical_validation_claim": false
       },
       "interpretation": "Native finite full-bore pressure-equalization output reached the PRISM liquid/two-phase consequence chain. This is diagnostic integration evidence; it does not qualify a provider, assign a frequency, or promote facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_equipment_state_snapshot_binding",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment\\state_snapshot_binding_audit.json",
+        "schema_version": "prism.state_snapshot_binding_audit.v1",
+        "status": "PARTIAL_STATE_SNAPSHOT_BINDING",
+        "record_count": 26,
+        "bound_count": 2,
+        "declared_digest_only_count": 0,
+        "unbound_count": 24,
+        "digest_mismatch_count": 0,
+        "policy": {
+          "canonical_schema": "prism.equipment_state_snapshot.v1",
+          "digest_only_is_binding": false,
+          "provider_echo_required": true,
+          "diagnostic_only": true,
+          "physical_validation_claim": false,
+          "facility_qra_claim": false
+        }
+      },
+      "interpretation": "At least one diagnostic provider received a canonical equipment state snapshot and echoed its digest. Campaign rows without the payload remain unbound; this check does not qualify physical accuracy, frequency or facility IR/F-N."
     },
     {
       "name": "provider_worklist_scope_alignment",

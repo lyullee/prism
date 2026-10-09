@@ -20,11 +20,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
     AccidentReleaseExportRequest,
     export_equipment_liquid_accident_history,
+)
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
 )
 
 
@@ -52,7 +55,7 @@ def _request(
     opening_diameter_m: float,
     position_enu_m: list[float],
     model_revision: str,
-    state_snapshot_digest: str,
+    state_snapshot: EquipmentStateSnapshot,
 ) -> AccidentReleaseExportRequest:
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
@@ -73,7 +76,8 @@ def _request(
         "model_package": "lh2dt_models",
         "model_class": "DynamicHEMPipe",
         "model_revision": model_revision,
-        "state_snapshot_digest": state_snapshot_digest,
+        "state_snapshot_digest": state_snapshot.digest(),
+        "state_snapshot": state_snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit external DynamicHEMPipe full-bore diagnostic; not site-calibrated",
         "provider_termination_required": True,
@@ -218,19 +222,30 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
     area = math.pi * args.inner_diameter_m**2 / 4.0
-    state_payload = {
-        "duration_s": args.duration_s,
-        "time_step_s": args.time_step_s,
-        "length_m": args.length_m,
-        "inner_diameter_m": args.inner_diameter_m,
-        "roughness_m": args.roughness_m,
-        "inlet_pressure_pa": args.inlet_pressure_pa,
-        "inlet_temperature_k": args.inlet_temperature_k,
-        "wall_heat_capacity_j_k": args.wall_heat_capacity_j_k,
-    }
     component_id = args.component_id
     port_id = args.port_id or f"{component_id}.accident-out"
     event_id = args.event_id or f"{component_id}/{port_id}/{args.inner_diameter_m:.12g}m"
+    snapshot = EquipmentStateSnapshot.from_mapping({
+        "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        "component_id": component_id,
+        "captured_at_s": 0.0,
+        "origin": "model_prediction",
+        "pressure_pa_abs": args.inlet_pressure_pa,
+        "temperature_k": args.inlet_temperature_k,
+        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "measurements": {
+            "inlet_pressure": {
+                "quantity": "pressure",
+                "value_si": args.inlet_pressure_pa,
+                "sensor_location": f"{component_id}.fluid_volume",
+            },
+            "inlet_temperature": {
+                "quantity": "temperature",
+                "value_si": args.inlet_temperature_k,
+                "sensor_location": f"{component_id}.fluid_volume",
+            },
+        },
+    })
     request = _request(
         provider_source_digest=source_digest,
         component_id=component_id,
@@ -239,7 +254,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         opening_diameter_m=args.inner_diameter_m,
         position_enu_m=[0.0, 0.0, args.nozzle_height_m],
         model_revision=args.model_revision,
-        state_snapshot_digest=canonical_digest(state_payload),
+        state_snapshot=snapshot,
     )
     provider = DynamicPipeAccidentProvider(
         root,
@@ -262,6 +277,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "strict_packet_interval_count": len(result.release.steps),
         "strict_packet_mass_residual_kg": result.release.cumulative_mass_out_kg - result.release.integrated_mass_kg,
         "strict_packet_energy_residual_j": result.release.cumulative_specific_enthalpy_out_j - result.release.integrated_specific_enthalpy_out_j,
+        "state_snapshot": result.request.state_snapshot.to_mapping() if result.request.state_snapshot is not None else None,
+        "state_snapshot_handoff": {
+            "present": result.request.state_snapshot is not None,
+            "schema_version": (
+                result.request.state_snapshot.get("schema_version")
+                if result.request.state_snapshot is not None
+                else None
+            ),
+            "digest": result.request.state_snapshot_digest,
+            "provider_echo_digest": result.provider_response.get("provider_state_snapshot_digest"),
+            "digest_match": (
+                result.request.state_snapshot is not None
+                and result.provider_response.get("provider_state_snapshot_digest")
+                == result.request.state_snapshot_digest
+            ),
+        },
         "provider_packet_promoted": result.provider_packet_promoted,
         "physical_validation_claim": False,
         "frequency_inference": False,
