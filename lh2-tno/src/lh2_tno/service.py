@@ -6,6 +6,7 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 import math
 from pathlib import Path
+import re
 import time
 from .backend import BackendError, tree_digest
 from .consequences import ConsequenceRequest
@@ -268,6 +269,62 @@ class RealtimeConsequenceMonitor:
 
 
 @dataclass(frozen=True)
+class RealtimeFrequencyBinding:
+    """A reviewed literature frequency attached to one live component event.
+
+    This is deliberately separate from the telemetry state and from the
+    provider release resolver.  The monitor may use this binding to calculate
+    the current-weather annual IR contribution, but it never estimates or
+    learns the frequency from a sensor frame.  Full facility annual IR/F-N
+    still requires the declared weather, population, accident-family and
+    evidence gates outside this monitor.
+    """
+
+    event_id: str
+    asset_id: str
+    initiating_frequency_per_year: float
+    annual_condition_probability: float
+    release_branch_probability: float
+    occupancy_probability: float
+    provenance: str
+    source_digest: str
+
+    def __post_init__(self):
+        for field in ("event_id", "asset_id", "provenance"):
+            value = getattr(self, field)
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"{field} must be a nonempty string")
+        frequency = self.initiating_frequency_per_year
+        if isinstance(frequency, bool) or not isinstance(frequency, (int, float)):
+            raise ValueError("initiating_frequency_per_year must be numeric")
+        if not math.isfinite(float(frequency)) or frequency < 0.0:
+            raise ValueError("initiating_frequency_per_year must be finite and nonnegative")
+        for field in (
+            "annual_condition_probability",
+            "release_branch_probability",
+            "occupancy_probability",
+        ):
+            value = getattr(self, field)
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise ValueError(f"{field} must be numeric")
+            if not math.isfinite(float(value)) or not 0.0 <= float(value) <= 1.0:
+                raise ValueError(f"{field} must be finite and within [0, 1]")
+        if not isinstance(self.source_digest, str) or not re.fullmatch(
+            r"[0-9a-fA-F]{64}", self.source_digest
+        ):
+            raise ValueError("source_digest must be a 64-character SHA-256 digest")
+
+    @property
+    def conditional_weight(self) -> float:
+        """Probability weight outside the provider consequence calculation."""
+        return (
+            float(self.annual_condition_probability)
+            * float(self.release_branch_probability)
+            * float(self.occupancy_probability)
+        )
+
+
+@dataclass(frozen=True)
 class FacilityRealtimeBinding:
     """The declared digital-twin boundary for one facility component.
 
@@ -285,12 +342,124 @@ class FacilityRealtimeBinding:
     temperature_tag: str
     release_resolver: Callable | None = None
     ambient_pressure_pa: float | None = None
+    frequency_binding: RealtimeFrequencyBinding | None = None
+
+
+def _realtime_current_weather_risk(
+    result: Mapping[str, object], frequency: RealtimeFrequencyBinding | None
+) -> dict[str, object]:
+    """Extract current-weather IR from provider consequence harm endpoints.
+
+    The chain worker exposes ``harm_given_observed_release_low_high`` for each
+    receptor.  No population or multi-weather information is available at the
+    monitor boundary, so this helper intentionally returns IR only and keeps
+    F/N and full-facility annual risk closed.
+    """
+    if frequency is None:
+        return {
+            "status": "WITHHELD_MISSING_LITERATURE_FREQUENCY",
+            "annual_ir_low_high": None,
+            "risk_atom": None,
+            "reason": "no reviewed literature frequency binding was supplied",
+        }
+    data = result.get("data")
+    if not isinstance(data, Mapping):
+        return {
+            "status": "WITHHELD_MISSING_CONSEQUENCE_DATA",
+            "annual_ir_low_high": None,
+            "risk_atom": None,
+            "reason": "consequence result has no data object",
+        }
+    receptors = data.get("receptors")
+    if not isinstance(receptors, list) or not receptors:
+        return {
+            "status": "WITHHELD_MISSING_RECEPTOR_HARM",
+            "annual_ir_low_high": None,
+            "risk_atom": None,
+            "reason": "consequence result has no receptor harm endpoints",
+        }
+    receptor_harm: dict[str, list[float]] = {}
+    for index, receptor in enumerate(receptors):
+        if not isinstance(receptor, Mapping):
+            return {
+                "status": "WITHHELD_INVALID_RECEPTOR_HARM",
+                "annual_ir_low_high": None,
+                "risk_atom": None,
+                "reason": f"receptor row {index} is not an object",
+            }
+        receptor_id = receptor.get("id")
+        harm = receptor.get("harm_given_observed_release_low_high")
+        if not isinstance(receptor_id, str) or not receptor_id.strip():
+            return {
+                "status": "WITHHELD_INVALID_RECEPTOR_HARM",
+                "annual_ir_low_high": None,
+                "risk_atom": None,
+                "reason": f"receptor row {index} has no nonempty id",
+            }
+        if (
+            not isinstance(harm, (list, tuple))
+            or len(harm) != 2
+            or any(
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(float(value))
+                or not 0.0 <= float(value) <= 1.0
+                for value in harm
+            )
+        ):
+            return {
+                "status": "WITHHELD_INVALID_RECEPTOR_HARM",
+                "annual_ir_low_high": None,
+                "risk_atom": None,
+                "reason": f"receptor {receptor_id} harm endpoints must be finite values in [0, 1]",
+            }
+        if receptor_id in receptor_harm:
+            return {
+                "status": "WITHHELD_DUPLICATE_RECEPTOR",
+                "annual_ir_low_high": None,
+                "risk_atom": None,
+                "reason": f"duplicate receptor id: {receptor_id}",
+            }
+        receptor_harm[receptor_id] = [float(harm[0]), float(harm[1])]
+
+    frequency_per_current_weather = (
+        float(frequency.initiating_frequency_per_year) * frequency.conditional_weight
+    )
+    annual_ir = {
+        receptor_id: [
+            frequency_per_current_weather * harm[0],
+            frequency_per_current_weather * harm[1],
+        ]
+        for receptor_id, harm in sorted(receptor_harm.items())
+    }
+    return {
+        "status": "AVAILABLE_CURRENT_WEATHER_IR",
+        "annual_ir_low_high": annual_ir,
+        "risk_atom": {
+            "event_id": frequency.event_id,
+            "asset_id": frequency.asset_id,
+            "initiating_frequency_per_year": frequency.initiating_frequency_per_year,
+            "conditional_weight": frequency.conditional_weight,
+            "annual_condition_probability": frequency.annual_condition_probability,
+            "release_branch_probability": frequency.release_branch_probability,
+            "occupancy_probability": frequency.occupancy_probability,
+            "receptor_harm_low_high": receptor_harm,
+            "frequency_provenance": frequency.provenance,
+            "frequency_source_digest": frequency.source_digest,
+            "frequency_is_not_inferred": True,
+            "expected_deaths_low_high": None,
+        },
+        "reason": "reviewed literature frequency was multiplied by provider consequence harm for the current weather frame",
+    }
 
 
 class FacilityRealtimeConsequenceMonitor:
     """Batch coordinator for independent component monitors.
 
-    This class combines *provenance and deadline ledgers*, not annual risk.
+    This class combines *provenance and deadline ledgers* and can optionally
+    calculate a current-weather IR contribution from an explicit reviewed
+    literature frequency binding.  It never infers a frequency from telemetry
+    and never promotes the current-weather view to facility annual IR/F-N.
     Each component still owns its normalizer, consequence service, provider
     release resolver, and cache.  Missing/unknown/duplicate frames and any
     component exception make the batch ``REJECTED``; accepted component
@@ -335,6 +504,12 @@ class FacilityRealtimeConsequenceMonitor:
                 raise ValueError("pressure and temperature tags must be distinct")
             if binding.release_resolver is not None and not callable(binding.release_resolver):
                 raise TypeError("release_resolver must be callable")
+            if binding.frequency_binding is not None and not isinstance(
+                binding.frequency_binding, RealtimeFrequencyBinding
+            ):
+                raise TypeError(
+                    "frequency_binding must be a RealtimeFrequencyBinding"
+                )
             if binding.ambient_pressure_pa is not None:
                 if (isinstance(binding.ambient_pressure_pa, bool)
                         or not isinstance(binding.ambient_pressure_pa, (int, float))
@@ -427,6 +602,9 @@ class FacilityRealtimeConsequenceMonitor:
                     "source_time_s": float(frame.source_time_s),
                     "frame_digest": result.get("telemetry_boundary", {}).get("frame_digest"),
                     "mapping_digest": result.get("telemetry_boundary", {}).get("mapping_digest"),
+                    "risk": _realtime_current_weather_risk(
+                        result, binding.frequency_binding
+                    ),
                     "result": result,
                 }
             except Exception as exc:  # preserve an explicit rejection in the ledger
@@ -440,6 +618,7 @@ class FacilityRealtimeConsequenceMonitor:
 
         accepted = [entry for entry in components.values() if entry["status"] == "ACCEPTED"]
         rejected = [entry for entry in components.values() if entry["status"] != "ACCEPTED"]
+        batch_status = "ACCEPTED" if not rejected and not unknown_ids else "REJECTED"
         deadline_misses = sum(
             entry["result"]["realtime"]["deadline_status"] == "MISSED"
             for entry in accepted
@@ -456,10 +635,36 @@ class FacilityRealtimeConsequenceMonitor:
             bool(entry["result"].get("telemetry_boundary", {}).get("equipment_release_resolved"))
             for entry in accepted
         )
+        component_risk_rows = {
+            component_id: entry["risk"]
+            for component_id, entry in components.items()
+            if entry.get("status") == "ACCEPTED" and "risk" in entry
+        }
+        current_weather_risk_rows = [
+            row
+            for row in component_risk_rows.values()
+            if row.get("status") == "AVAILABLE_CURRENT_WEATHER_IR"
+        ]
+        current_weather_ir: dict[str, list[float]] = {}
+        for row in current_weather_risk_rows:
+            values = row.get("annual_ir_low_high")
+            if not isinstance(values, Mapping):
+                continue
+            for receptor_id, endpoints in values.items():
+                if not isinstance(endpoints, (list, tuple)) or len(endpoints) != 2:
+                    continue
+                totals = current_weather_ir.setdefault(str(receptor_id), [0.0, 0.0])
+                totals[0] += float(endpoints[0])
+                totals[1] += float(endpoints[1])
+        current_weather_risk_available = (
+            batch_status == "ACCEPTED"
+            and len(accepted) == len(component_ids)
+            and len(current_weather_risk_rows) == len(component_ids)
+            and bool(current_weather_ir)
+        )
         aggregate_deadline_status = (
             "REJECTED" if rejected or unknown_ids else ("MISSED" if deadline_misses else "MET")
         )
-        batch_status = "ACCEPTED" if not rejected and not unknown_ids else "REJECTED"
         return {
             "facility_id": self.facility_id,
             "status": batch_status,
@@ -477,11 +682,21 @@ class FacilityRealtimeConsequenceMonitor:
                 "cache_hit_count": cache_count,
                 "deadline_miss_count": deadline_misses,
                 "provider_release_resolved_component_count": release_resolved_count,
+                "current_weather_annual_ir_low_high": (
+                    current_weather_ir if current_weather_risk_available else None
+                ),
+                "current_weather_ir_available": current_weather_risk_available,
+                "current_weather_ir_component_count": len(current_weather_risk_rows),
+                "current_weather_ir_withheld_component_count": len(accepted)
+                - len(current_weather_risk_rows),
+                "facility_fn_available": False,
                 "frequency_learning": False,
                 "release_inference": False,
                 "facility_annual_risk_available": False,
                 "interpretation": (
                     "component consequence outputs and provenance are available; "
+                    "current-weather IR is available only when each accepted component "
+                    "has an explicit reviewed literature frequency and receptor harm; "
                     "facility annual IR/F-N remains withheld"
                 ),
             },

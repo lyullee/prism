@@ -4,6 +4,7 @@ from lh2_tno.backend import BackendConfig,PackagePin,tree_digest
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.service import (ConsequenceService, FacilityRealtimeBinding,
     FacilityRealtimeConsequenceMonitor, RealtimeConsequenceMonitor,
+    RealtimeFrequencyBinding,
     request_from_equipment_resolver, request_from_telemetry,
     validate_equipment_process_state)
 from lh2_tno.telemetry import Frame,TagMapping,TelemetryNormalizer,Value
@@ -27,6 +28,16 @@ class Pipeline:
                 'provider_event': None if request.resolved_release is None else request.resolved_release.event_id,
             },'elapsed_ms':100.,
             'adapter_source_digest':tree_digest(Path(__file__).parents[1]/'src/lh2_tno')}
+
+
+class RiskPipeline(Pipeline):
+    def consequences(self, request):
+        result = super().consequences(request)
+        result['data']['receptors'] = [{
+            'id': 'worker-01',
+            'harm_given_observed_release_low_high': [0.2, 0.4],
+        }]
+        return result
 
 
 def request():return ConsequenceRequest.model_validate_json(EXAMPLE.read_text(encoding='utf-8'))
@@ -232,6 +243,7 @@ def test_facility_realtime_monitor_aggregates_component_provenance_and_deadlines
     assert result['aggregate']['deadline_status'] == 'MET'
     assert result['aggregate']['fresh_physics_count'] == 2
     assert result['aggregate']['facility_annual_risk_available'] is False
+    assert result['aggregate']['current_weather_ir_available'] is False
     assert result['components']['storage-tank-01']['frame_digest']
     assert result['components']['transfer-pump-01']['mapping_digest']
 
@@ -265,6 +277,51 @@ def test_facility_realtime_monitor_rejects_duplicate_stream_and_unknown_componen
     assert result['unknown_frame_components'] == ['unexpected']
     assert result['duplicate_streams']['shared'] == ['storage-tank-01', 'transfer-pump-01']
     assert result['components']['storage-tank-01']['error_type'] == 'DuplicateFrameStream'
+
+
+def test_realtime_monitor_uses_explicit_literature_frequency_for_current_weather_ir(tmp_path):
+    base_binding, frame = _facility_binding(tmp_path, 'storage-tank-01')
+    binding = FacilityRealtimeBinding(
+        component_id=base_binding.component_id,
+        template=base_binding.template,
+        monitor=RealtimeConsequenceMonitor(
+            ConsequenceService(RiskPipeline(tmp_path)), period_s=1.0
+        ),
+        normalizer=base_binding.normalizer,
+        pressure_tag=base_binding.pressure_tag,
+        temperature_tag=base_binding.temperature_tag,
+        frequency_binding=RealtimeFrequencyBinding(
+            event_id='storage-tank-hole-01',
+            asset_id='storage-tank-01',
+            initiating_frequency_per_year=1.0e-3,
+            annual_condition_probability=0.5,
+            release_branch_probability=0.8,
+            occupancy_probability=0.25,
+            provenance='published LH2 vessel frequency median',
+            source_digest='a' * 64,
+        ),
+    )
+    facility = FacilityRealtimeConsequenceMonitor({'storage-tank-01': binding})
+    result = facility.update_from_frames({'storage-tank-01': frame}, now_s=100.2)
+
+    assert result['status'] == 'ACCEPTED'
+    assert result['components']['storage-tank-01']['risk']['status'] == 'AVAILABLE_CURRENT_WEATHER_IR'
+    assert result['aggregate']['current_weather_ir_available'] is True
+    assert result['aggregate']['current_weather_annual_ir_low_high']['worker-01'] == pytest.approx(
+        [2.0e-5, 4.0e-5]
+    )
+    assert result['aggregate']['facility_annual_risk_available'] is False
+    assert result['aggregate']['facility_fn_available'] is False
+    assert result['aggregate']['frequency_learning'] is False
+
+
+def test_realtime_frequency_binding_rejects_non_sha256_source():
+    with pytest.raises(ValueError, match='64-character SHA-256'):
+        RealtimeFrequencyBinding(
+            event_id='e', asset_id='a', initiating_frequency_per_year=1.0e-3,
+            annual_condition_probability=1.0, release_branch_probability=1.0,
+            occupancy_probability=1.0, provenance='literature', source_digest='short',
+        )
 
 
 def test_facility_realtime_monitor_requires_unique_declared_component_identity(tmp_path):

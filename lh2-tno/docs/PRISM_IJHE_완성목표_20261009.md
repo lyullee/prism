@@ -47,7 +47,11 @@
 있으면 전체 snapshot은 `REJECTED`다. 성공한 component 결과는 원인 분석을 위해
 보존하지만 누락 설비에 이전 결과나 0을 넣지 않는다. `aggregate`에는 설비별
 fresh-physics/cache 횟수, deadline miss 횟수, provider 방출 경계 개수와
-`facility_annual_risk_available=false`가 남는다.
+`facility_annual_risk_available=false`가 남는다. `RealtimeFrequencyBinding`을 설비별로
+명시하면 문헌 빈도와 수용점 피해를 결합한 `current_weather_annual_ir_low_high`를 조건부
+진단값으로 기록할 수 있다. 빈도 binding이나 수용점 피해가 하나라도 빠지면 해당 설비는
+`WITHHELD`로 남고, 센서에서 빈도를 학습하지 않는다. 여러 기상·인구·사고 family가 닫히지
+않은 상태에서는 `facility_annual_risk_available=false`와 `facility_fn_available=false`를 유지한다.
 
 이 기능은 디지털트윈 화면과 운영 수집기 사이의 **동기 회계 경계**다. OPC-UA·MQTT
 수집, 비동기 scheduler, 알람 화면, 시설 연간 빈도와 IR/F-N 계산은 별도 계층이며,
@@ -288,5 +292,6 @@ generic 시설의 `liquid-transfer-line-01` 다섯 개 개구면적을 설비 pr
 
 최신 밸브 보완 시설 원장은 `results/20261022/native_campaign_with_repaired_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json`에 있다. 41개 사건, 80개 case, 37개 미계산/보류 case, 312개 risk atom을 기록하며, 밸브 다섯 면적 구간과 두 기상 조건의 10개 case는 모두 `EXECUTED_OPERATOR_LIMITED`로 끝났다. 이 수치는 방출부터 피해까지 숫자를 계산했다는 뜻이지, 적격 provider·독립 검증·시설 전체 QRA를 의미하지 않는다.
 
-최신 범위표는 조건부 수치 회계와 엄격한 시설 승격을 분리한다. 조건부 범위는 12개 선언 family 모두 `EXECUTED`이며 미계산 case가 0개다. 엄격한 범위는 9개 family가 `PARTIAL`로 남아 있다. `results/20261022/ijhe_completion_audit_repaired_valve_transfer_line_replacement.json`은 29개 검사 중 26개 통과·3개 차단이며, 새 `conditional_accident_scope_accounting`은 형식 검사를 통과한다. 남은 차단은 적격 provider 방출 packet 부재, 주요 사고 범위 미완결, 시설 IR/F-N 보류다. 검증근거 통합장부가 각 근거의 허용 범위를 별도로 기록하며 전체 portable test suite는 509개 통과, 1개 건너뜀이다. 최신 시설 원장은 12개 설비별 component_coverage를 보존한다.
+최신 범위표는 조건부 수치 회계와 엄격한 시설 승격을 분리한다. 조건부 범위는 12개 선언 family 모두 `EXECUTED`이며 미계산 case가 0개다. 엄격한 범위는 9개 family가 `PARTIAL`로 남아 있다. `results/20261022/ijhe_completion_audit_repaired_valve_transfer_line_replacement.json`은 29개 검사 중 26개 통과·3개 차단이며, 새 `conditional_accident_scope_accounting`은 형식 검사를 통과한다. 남은 차단은 적격 provider 방출 packet 부재, 주요 사고 범위 미완결, 시설 IR/F-N 보류다. 검증근거 통합장부가 각 근거의 허용 범위를 별도로 기록하며 전체 portable test suite는 511개 통과, 1개 건너뜀이다. 최신 시설 원장은 12개 설비별 component_coverage를 보존한다.
+
 
