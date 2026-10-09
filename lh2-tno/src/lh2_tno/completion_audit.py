@@ -71,6 +71,7 @@ def build_ijhe_completion_audit(
     provider_qualification_coverage: Mapping[str, Any] | None = None,
     validation_evidence_matrix: Mapping[str, Any] | None = None,
     scope_ledger_consistency: Mapping[str, Any] | None = None,
+    native_binding_reconciliation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -265,6 +266,54 @@ def build_ijhe_completion_audit(
                     "This static audit separates native external accident export methods from "
                     "PRISM-side diagnostic wrappers. It is evidence of the integration boundary, "
                     "not a qualified provider packet or facility QRA."
+                ),
+            }
+        )
+    if native_binding_reconciliation is not None:
+        reconciliation = native_binding_reconciliation
+        reconciliation_valid = (
+            reconciliation.get("schema_version") == "prism.native_binding_reconciliation.v1"
+            and reconciliation.get("status") == "RECONCILED_NATIVE_INTERFACES"
+            and isinstance(reconciliation.get("rows"), list)
+            and isinstance(reconciliation.get("native_accident_export_component_count"), int)
+            and reconciliation.get("reconciled_native_component_count")
+            == reconciliation.get("native_accident_export_component_count")
+            and reconciliation.get("provider_packet_promoted") is False
+            and reconciliation.get("frequency_inference_performed") is False
+            and reconciliation.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "native_model_binding_reconciliation",
+                "status": "PASS" if reconciliation_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if reconciliation_valid
+                    else "native model binding catalog does not reconcile with the external source audit"
+                ),
+                "evidence": {
+                    "record": reconciliation.get("_record_path"),
+                    "status": reconciliation.get("status"),
+                    "native_accident_export_component_count": reconciliation.get(
+                        "native_accident_export_component_count"
+                    ),
+                    "reconciled_native_component_count": reconciliation.get(
+                        "reconciled_native_component_count"
+                    ),
+                    "blocking_reason_count": len(reconciliation.get("blocking_reasons", []))
+                    if isinstance(reconciliation.get("blocking_reasons"), list)
+                    else None,
+                    "provider_packet_promoted": reconciliation.get("provider_packet_promoted"),
+                    "frequency_inference_performed": reconciliation.get(
+                        "frequency_inference_performed"
+                    ),
+                    "facility_qra_claim": reconciliation.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The model catalog and native source audit agree on accident-export interface presence. "
+                    "This closes a bookkeeping mismatch only; runtime packets, field qualification, frequency "
+                    "evidence and facility IR/F-N remain separate gates."
                 ),
             }
         )

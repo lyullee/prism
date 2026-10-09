@@ -1,0 +1,148 @@
+{
+  "schema_version": "prism.equipment_model_binding.v1",
+  "facility_neutral": true,
+  "catalog_purpose": "generic outdoor LH2 model-library native accident-export interface binding; native export is converted and strictly validated by PRISM; facility qualification remains separate",
+  "bindings": [
+    {
+      "component_kind": "storage_tank",
+      "model_package": "lh2dt.layered_tank",
+      "model_class": "LayeredTank",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/layered_tank.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+        "provider_class": "LayeredTankAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "pipe",
+      "model_package": "lh2dt.dynamic_pipe",
+      "model_class": "DynamicHEMPipe",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/dynamic_pipe.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_dynamic_pipe_prism_packet.py",
+        "provider_class": "DynamicPipeAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "valve",
+      "model_package": "lh2dt.valve",
+      "model_class": "StrokeLimitedCommandedValve",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/valve.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_valve_prism_packet.py",
+        "provider_class": "ValveAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "vent_stack",
+      "model_package": "lh2dt.vent_stack",
+      "model_class": "VentStack",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/vent_stack.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_vent_stack_prism_packet.py",
+        "provider_class": "VentStackAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "pump",
+      "model_package": "lh2dt.pump",
+      "model_class": "MappedPump",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/pump.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_mapped_pump_prism_packet.py",
+        "provider_class": "MappedPumpAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "vaporizer",
+      "model_package": "lh2dt.dynamic_vaporizer",
+      "model_class": "DynamicVaporizer",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/dynamic_vaporizer.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_dynamic_vaporizer_prism_packet.py",
+        "provider_class": "DynamicVaporizerAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "reliquefier",
+      "model_package": "lh2dt.dynamic_reliquefier",
+      "model_class": "DynamicReliquefier",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "accident_release_export_status": "supported",
+      "termination_ledger_status": "provider_termination_and_mass",
+      "provider_export_schema": "prism.resolved_release.v1",
+      "qualification": "native export_accident_history contract verified by source audit and external regression tests; no facility-qualified packet",
+      "source_path": "external lh2dt_models/src/lh2dt/dynamic_reliquefier.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_reliquefier_two_sided_prism_packet.py",
+        "provider_class": "TwoSidedReliquefierProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
+    },
+    {
+      "component_kind": "boundary",
+      "model_package": "prism.interface",
+      "model_class": "FacilityBoundary",
+      "model_revision": "prism-0.6.2",
+      "state_export_status": "supported",
+      "accident_release_export_status": "missing",
+      "termination_ledger_status": "missing",
+      "provider_export_schema": null,
+      "qualification": "interface only; excluded from accidental-release frequency",
+      "source_path": "PRISM generic facility boundary contract",
+      "diagnostic_release_adapter": {
+        "status": "missing"
+      }
+    }
+  ]
+}

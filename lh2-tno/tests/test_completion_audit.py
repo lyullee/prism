@@ -164,6 +164,29 @@ def test_completion_audit_records_native_full_bore_chain_as_diagnostic_evidence(
     check = next(item for item in report["checks"] if item["name"] == "diagnostic_native_full_bore_chain")
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_records_native_binding_reconciliation_as_diagnostic_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        native_binding_reconciliation={
+            "schema_version": "prism.native_binding_reconciliation.v1",
+            "status": "RECONCILED_NATIVE_INTERFACES",
+            "rows": [{}],
+            "native_accident_export_component_count": 1,
+            "reconciled_native_component_count": 1,
+            "provider_packet_promoted": False,
+            "frequency_inference_performed": False,
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"] if item["name"] == "native_model_binding_reconciliation"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
     assert check["blocking_reason"] is None
 
 

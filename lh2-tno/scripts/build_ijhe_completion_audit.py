@@ -53,6 +53,11 @@ def main() -> int:
         type=Path,
         help="optional comparison of the declared scope matrix and merged facility ledger",
     )
+    parser.add_argument(
+        "--native-binding-reconciliation",
+        type=Path,
+        help="optional reconciliation of the native source audit and model-binding catalog",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -169,6 +174,13 @@ def main() -> int:
         )
         if scope_ledger_consistency is not None:
             scope_ledger_consistency["_record_path"] = str(args.scope_ledger_consistency)
+        native_binding_reconciliation = (
+            _object(args.native_binding_reconciliation)
+            if args.native_binding_reconciliation
+            else None
+        )
+        if native_binding_reconciliation is not None:
+            native_binding_reconciliation["_record_path"] = str(args.native_binding_reconciliation)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -191,6 +203,7 @@ def main() -> int:
             provider_qualification_coverage,
             validation_evidence_matrix,
             scope_ledger_consistency,
+            native_binding_reconciliation,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

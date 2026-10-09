@@ -62,6 +62,19 @@ python scripts/audit_lh2dt_native_contract.py `
 
 `scripts/run_lh2dt_native_layered_tank_smoke.py`는 외부 `LayeredTank.export_accident_history(request)`를 직접 호출한 뒤 PRISM의 `export_equipment_liquid_accident_history()`와 strict `ResolvedLiquidRelease` 검증을 통과시킨다. 2026-10-18 최신 실행은 외부 커밋 `6ed5689` 소스 digest `239439eb…`, 0.05 s 이력, strict 질량 잔차 0 kg, 엔탈피 잔차 0 J, native export 약 1.70 s를 기록했다. 같은 packet을 `validate_lh2dt_prism_packet_chain.py`에 넣은 전체 consequence chain도 `END_TO_END_DIAGNOSTIC_EXECUTED`로 약 31.65 s에 끝났다. 이 결과는 방출→피해 연결 코드가 실제 native 탱크 응답을 소비했다는 증거지만, 합성 형상·초기상태·개구·기상과 airborne-liquid 미구현 때문에 qualified provider packet, 현장 빈도, 시설 IR/F-N으로 승격하지 않는다. 결과는 `results/20261018/native_layered_tank_smoke_chain/verification.json`에 보존한다.
 
+## 2026-10-22 외부 소스 기준 재실행
+
+현재 `lh2dt_models` 소스 digest `1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52`로 `run_lh2dt_native_layered_tank_smoke.py --run-consequence-chain`을 다시 실행했다. 결과는 `results/20261022/native_layered_tank_smoke_current_chain/verification.json`에 있다.
+
+- native `LayeredTank.export_accident_history(request)` 실행: 약 1.83 s
+- strict packet 이력: 0.05 s
+- 질량 잔차: 0 kg
+- 엔탈피 잔차: 0 J
+- 전체 방출→SLABx-LH2/풀→점화→피해 chain: 약 19.53 s
+- chain 상태: `END_TO_END_DIAGNOSTIC_EXECUTED`
+
+현재 소스에서 실제 native 응답이 PRISM strict packet과 피해 chain에 소비된 것을 재확인했다. 입력은 여전히 합성 탱크 형상·초기상태·개구·대기경계이며 airborne liquid은 0으로 제한된다. 따라서 이 결과는 설비별 현장 packet, 현장 빈도, 독립 물리검증 또는 시설 IR/F-N을 열지 않는다.
+
 ## native packet과 문헌 빈도를 함께 쓰는 저장탱크 진단
 
 `scripts/run_lh2dt_native_frequency_case.py`는 한 단계 더 좁은 연결시험이다. 기존 혼합 캠페인의 `LH2_VESSEL AREA_0.01%` 문헌 빈도(중앙값 `6.5×10⁻⁴ item⁻¹ year⁻¹`)는 그대로 읽고, 그 사건의 방출 이력만 native `LayeredTank.export_accident_history()`로 다시 생성한다. 개구 직경 `0.0127 m`를 exact-match로 확인한 뒤 provider packet을 `ResolvedLiquidRelease`로 변환하고, 동일한 facility manifest·기상·점화·IR/F-N 계산기에 넣는다. 따라서 이 실행은 **문헌 빈도 → native 방출 → SLABx-LH2/풀 → 분산·점화·피해** 연결을 실제로 확인한다.
