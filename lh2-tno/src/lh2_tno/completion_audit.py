@@ -39,9 +39,13 @@ def _normalise_uncertainty_result(
         return None
     if isinstance(uncertainty_result.get("scenarios"), list):
         return uncertainty_result
-    nested = uncertainty_result.get("literature_frequency_uncertainty")
-    if isinstance(nested, Mapping):
-        return nested
+    # ``build_facility_assessment`` wraps the same ledger under
+    # ``frequency_uncertainty``.  Accept that explicit wrapper as well as the
+    # campaign-level historical name; never synthesize a missing scenario.
+    for key in ("literature_frequency_uncertainty", "frequency_uncertainty"):
+        nested = uncertainty_result.get(key)
+        if isinstance(nested, Mapping):
+            return nested
     return uncertainty_result
 
 

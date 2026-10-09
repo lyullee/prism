@@ -113,6 +113,26 @@ def test_completion_audit_unwraps_campaign_uncertainty_ledger():
     }
 
 
+def test_completion_audit_unwraps_facility_assessment_uncertainty_ledger():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        {
+            "frequency_uncertainty": {
+                "scenarios": [{"id": "known"}],
+                "facility_credible_interval": False,
+            },
+            "assessment_digest": "assessment-wrapper",
+        },
+    )
+    uncertainty_check = next(
+        item for item in report["checks"] if item["name"] == "frequency_uncertainty_reported"
+    )
+    assert uncertainty_check["status"] == "BLOCKED"
+    assert uncertainty_check["evidence"]["scenario_count"] == 1
+
+
 def test_completion_audit_blocks_provider_worklist_with_uncomputed_events():
     status = _status(True)
     status["equipment_provider_release_worklist_provider_packet_count"] = 0
