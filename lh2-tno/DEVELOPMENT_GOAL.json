@@ -2093,7 +2093,7 @@
   "equipment_model_binding_latest_accident_release_interface_component_count": 7,
   "equipment_model_binding_latest_diagnostic_adapter_component_count": 7,
   "equipment_model_binding_latest_qualified_provider_packet_component_count": 0,
-  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v5.json",
+  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v6.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 22 checks, 3 blockers; native binding reconciliation PASS",
   "realtime_population_binding_implemented": true,
   "realtime_population_binding_module": "src/lh2_tno/service.py",
