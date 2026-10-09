@@ -242,6 +242,16 @@ def scenario_families_for_request(
 
     release = getattr(request, "resolved_release", None)
     if release is not None:
+        # ``scenario_families_for_release`` is intentionally conservative
+        # before a provider packet is consumed and therefore includes the
+        # liquid/two-phase cross-cutting family for an LH2 pipe hole.  Once a
+        # strict atmospheric-gas packet is present, retaining that family
+        # would mislabel a gas-only DynamicHEMPipe branch as a liquid release.
+        # Keep the primary pipe mechanism family and remove only the
+        # unsupported liquid family; the packet's gas boundary remains
+        # visible in the provider identity and consequence stages.
+        if getattr(release, "boundary_kind", None) == "resolved_atmospheric_gas_exit":
+            families = [family for family in families if family != "liquid_two_phase"]
         if getattr(release, "vertical_handoff", None) is not None:
             families.append("vertical_handoff")
         if getattr(release, "event_kind", None) == "emergency_relief":

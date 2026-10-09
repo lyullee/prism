@@ -388,6 +388,19 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             component_kinds.get(event.model_component_id), event.release.mode
         ))
         for branch in routes[event.id].branches:
+            # The release-only mapping must stay conservative until a branch
+            # request is consumed.  A strict gas packet is the point where a
+            # liquid/two-phase cross-cutting family can be removed safely;
+            # otherwise a gas-only provider history would be counted in the
+            # liquid family merely because its upstream service is LH2.
+            if branch.request is not None and getattr(
+                branch.request, "resolved_release", None
+            ) is not None and getattr(
+                branch.request.resolved_release,
+                "boundary_kind",
+                None,
+            ) == "resolved_atmospheric_gas_exit":
+                families = [family for family in families if family != "liquid_two_phase"]
             families.extend(scenario_families_for_request(
                 component_kinds.get(event.model_component_id),
                 event.release.mode,

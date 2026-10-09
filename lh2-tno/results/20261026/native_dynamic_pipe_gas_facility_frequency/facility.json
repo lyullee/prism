@@ -1,0 +1,73 @@
+{
+  "id": "native-dynamic-pipe-gas-facility-diagnostic",
+  "configuration_origin": "synthetic",
+  "environment": "outdoor",
+  "components": [
+    {
+      "id": "native-dynamic-pipe-diagnostic",
+      "kind": "pipe",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 1.0,
+        "diameter_m": 0.1
+      }
+    }
+  ],
+  "ports": [
+    {
+      "id": "native-dynamic-pipe-out",
+      "component_id": "native-dynamic-pipe-diagnostic",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {
+      "id": "near_worker",
+      "position_enu_m": [
+        2.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "downwind_worker",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        0.1
+      ]
+    },
+    {
+      "id": "side_worker",
+      "position_enu_m": [
+        25.0,
+        4.0,
+        1.8
+      ]
+    },
+    {
+      "id": "distant_worker",
+      "position_enu_m": [
+        60.0,
+        0.0,
+        1.8
+      ]
+    }
+  ]
+}

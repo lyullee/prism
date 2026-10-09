@@ -85,6 +85,21 @@ def test_consumed_provider_request_adds_vertical_handoff_family():
     )
 
 
+def test_consumed_atmospheric_gas_packet_does_not_claim_liquid_two_phase():
+    request = SimpleNamespace(
+        resolved_liquid_release=None,
+        resolved_release_set=None,
+        source_operator="integrated_transient",
+        resolved_release=SimpleNamespace(
+            boundary_kind="resolved_atmospheric_gas_exit",
+            vertical_handoff=None,
+            compressible_plane_handoff=SimpleNamespace(),
+            event_kind="accidental_leak",
+        ),
+    )
+    assert scenario_families_for_request("pipe", "hole", request) == ("pipe_hole",)
+
+
 def test_consumed_provider_request_keeps_two_sided_and_liquid_families_explicit():
     request = SimpleNamespace(
         resolved_liquid_release=SimpleNamespace(),

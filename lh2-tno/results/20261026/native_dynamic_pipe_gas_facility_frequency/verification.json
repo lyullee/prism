@@ -1,0 +1,73 @@
+{
+  "schema_version": "prism.native_dynamic_pipe_gas_facility_frequency_case.v1",
+  "status": "NATIVE_GAS_PACKET_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "campaign_status": "PARTIAL_DECLARED_SCOPE",
+  "facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
+  "facility_id": "native-dynamic-pipe-gas-facility-diagnostic",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "provider_packet_event_id": "native-dynamic-pipe/accidental-leak-001",
+  "campaign_frequency_event_id": "native-dynamic-pipe-gas-facility-frequency/native-pipe/AREA_0.01%",
+  "provider_event_id_rebound": true,
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_result_digest": "174c066fb241cb3ba4210db762acfbe4a1e8b9f45136a9e3c13c69c3b1a33b41",
+  "provider_termination_basis": "reviewed_isolation_success",
+  "provider_duration_s": 0.060000000000000005,
+  "provider_mass_residual_kg": 0.0,
+  "compressible_plane_handoff_consumed": true,
+  "exact_opening_match": true,
+  "literature_frequency_applied": true,
+  "frequency_source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+  "frequency_annual_central_per_year": 3.4e-06,
+  "frequency_p05_per_year": 3.2554838825238133e-07,
+  "frequency_p95_per_year": 3.5511808894583394e-05,
+  "frequency_from_provider_packet": false,
+  "event_count": 5,
+  "case_count": 10,
+  "executed_case_count": 2,
+  "uncomputed_case_count": 10,
+  "risk_atom_count": 8,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "distant_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "frequency_scenario_count": 3,
+  "facility_total_risk_available": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "campaign_elapsed_ms": 3676.169599988498,
+  "fresh_physics_executed": false,
+  "limitations": [
+    "provider packet, geometry, weather and population remain synthetic or diagnostic",
+    "provider event identity is explicitly mapped to the matching frequency event; it is not silently rewritten",
+    "unmatched opening bins remain UNCOMPUTED",
+    "operator-limited compressible-plane handoff is not independent physical validation",
+    "literature frequency uncertainty is a conditional reweighting of saved atoms, not a facility credible interval",
+    "facility IR/F-N promotion remains closed until qualified provider, complete scope and validation gates pass"
+  ]
+}

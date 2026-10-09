@@ -1,0 +1,40 @@
+[
+  {
+    "id": "D-3ms-west",
+    "annual_probability": 0.4,
+    "weather": {
+      "wind_speed_m_s": 3.0,
+      "wind_from_bearing_deg": 270.0,
+      "measurement_height_m": 10.0,
+      "roughness_m": 0.03,
+      "stability": "D",
+      "relative_humidity": 0.5
+    },
+    "population": [
+      {"receptor_id": "near_worker", "persons": 20.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"},
+      {"receptor_id": "downwind_worker", "persons": 10.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"},
+      {"receptor_id": "side_worker", "persons": 10.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"},
+      {"receptor_id": "distant_worker", "persons": 10.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"}
+    ],
+    "provenance": "synthetic outdoor weather/population condition; diagnostic only"
+  },
+  {
+    "id": "D-4ms-west",
+    "annual_probability": 0.6,
+    "weather": {
+      "wind_speed_m_s": 4.0,
+      "wind_from_bearing_deg": 270.0,
+      "measurement_height_m": 10.0,
+      "roughness_m": 0.03,
+      "stability": "D",
+      "relative_humidity": 0.5
+    },
+    "population": [
+      {"receptor_id": "near_worker", "persons": 20.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"},
+      {"receptor_id": "downwind_worker", "persons": 10.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"},
+      {"receptor_id": "side_worker", "persons": 10.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"},
+      {"receptor_id": "distant_worker", "persons": 10.0, "presence_probability": 0.5, "provenance": "synthetic outdoor group"}
+    ],
+    "provenance": "synthetic outdoor weather/population condition; diagnostic only"
+  }
+]

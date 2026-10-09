@@ -1,0 +1,18 @@
+{
+  "id": "native-dynamic-pipe-gas-facility-frequency",
+  "assets": [
+    {
+      "id": "native-pipe",
+      "model_component_id": "native-dynamic-pipe-diagnostic",
+      "profile": "LH2_PIPE",
+      "physical_scope_ids": ["native-dynamic-pipe-diagnostic-hole-exposure"],
+      "classification_basis": "synthetic pipe frequency binding for a native gas diagnostic; reviewed facility segmentation is required",
+      "count": 1,
+      "nominal_diameter_m": 0.1,
+      "length_per_item_m": 1.0,
+      "location_weight": 1.0,
+      "location_weight_provenance": "one declared diagnostic outlet; remaining physical exposure is outside this case"
+    }
+  ],
+  "excluded_model_components": {}
+}
