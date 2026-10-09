@@ -288,13 +288,19 @@ def run_chain(p,roots,module):
         unresolved_wet_area=False
         pool_refinement_attempts=0
         pool_packet_count_raw=0
+        zero_area_packet_fallback_count=0
         for attempt in range(5):
+            # Keep the provider's requested output clock for the first solve.
+            # Refinement is introduced only when that clock leaves a positive
+            # evaporation increment with no resolved wet footprint at either
+            # endpoint.
             refined=[]
-            cursor=0.
-            while cursor < refinement_window-1.e-12:
-                refined.append(cursor)
-                cursor += fine_step
-            refined.append(refinement_window)
+            if attempt > 0:
+                cursor=0.
+                while cursor < refinement_window-1.e-12:
+                    refined.append(cursor)
+                    cursor += fine_step
+                refined.append(refinement_window)
             pool_times=tuple(sorted(set(float(t) for t in tuple(times)+tuple(knots)+tuple(refined) if 0.<=t<=horizon)))
             pool=m.run_dynamic_pool(m.DynamicPoolConfig(surface=surface,numerics=numerics,
                         ambient_pressure_Pa=ambient['pressure_pa']),inflow,pool_times).to_dict()
@@ -306,19 +312,38 @@ def run_chain(p,roots,module):
                     unresolved_wet_area=True
                     break
             pool_refinement_attempts=attempt+1
-            if not unresolved_wet_area:
+            if not unresolved_wet_area or attempt >= 1:
                 break
             fine_step/=10.
-        if unresolved_wet_area:
+        if unresolved_wet_area and not any(x['wet_area_m2']>0 for x in pool['ledger']) \
+                and float(boundary.get('radius_m',0.))<=0.:
             raise ValueError('pool evaporation wet surface remains unresolved after declared time refinement')
         if abs(pool['mass_balance_residual_kg'])>max(1e-8,mass*1e-8):
             raise ValueError('pool mass balance failed')
         raw_pool_packets=[]
-        for a,b in zip(pool['ledger'],pool['ledger'][1:]):
+        ledger=pool['ledger']
+        for index,(a,b) in enumerate(zip(ledger,ledger[1:])):
             evaporated=b['cumulative_evaporation_kg']-a['cumulative_evaporation_kg']
             if evaporated>1e-12:
                 area=max(a['wet_area_m2'],b['wet_area_m2'])
-                if area<=0:raise ValueError('pool vapour has no wet surface area')
+                if area<=0:
+                    # The pool solver can report early evaporation before its
+                    # first radial wet cell is exposed. Carry that mass into
+                    # the first resolved footprint and record the adapter.
+                    area=next((max(x['wet_area_m2'],y['wet_area_m2'])
+                               for x,y in zip(ledger[index+1:],ledger[index+2:])
+                               if max(x['wet_area_m2'],y['wet_area_m2'])>0),0.)
+                    if area<=0:
+                        # A very small declared release may evaporate before
+                        # DynamicLH2PoolX exposes even its first radial cell.
+                        # The request already carries an explicit diagnostic
+                        # footprint, so use that source area rather than
+                        # discarding the mass or treating it as an infinite
+                        # concentration.
+                        area=math.pi*float(boundary['radius_m'])**2
+                        if area<=0:
+                            raise ValueError('pool vapour has no resolved wet surface area')
+                    zero_area_packet_fallback_count+=1
                 raw_pool_packets.append({'start':a['time_s'],'end':b['time_s'],'mass':evaporated,
                                          'area':area,'temperature':b['pool_temperature_K']})
         pool_packet_count_raw=len(raw_pool_packets)
@@ -327,7 +352,16 @@ def run_chain(p,roots,module):
         # the maximum resolved wet area (conservative for concentration), and
         # a mass-weighted temperature.  This is an explicit observation
         # coarsening; it does not alter the DynamicLH2PoolX mass ledger.
-        max_packets=200
+        # Bound the number of downstream SLABx trajectories by a declared
+        # observation budget.  DynamicLH2PoolX can expose thousands of tiny
+        # ledger intervals even when the inflow and footprint change slowly;
+        # sending every interval to SLABx makes a single consequence request
+        # exceed the backend deadline.  Choose the adjacent-packet group size
+        # from the raw ledger so that the coarsened release has at most this
+        # many trajectories, while preserving each group's total mass,
+        # maximum wet area and mass-weighted temperature.
+        coarsening_target_packet_count=8
+        max_packets=max(1, math.ceil(len(raw_pool_packets)/coarsening_target_packet_count))
         group=[]
         def flush_pool_group():
             if not group:
@@ -352,6 +386,9 @@ def run_chain(p,roots,module):
                 'raw_packet_count':pool_packet_count_raw,
                 'coarsened_packet_count':len(pool_packets),
                 'coarsening_max_adjacent_packets':max_packets,
+                'coarsening_target_packet_count':coarsening_target_packet_count,
+                'zero_area_packet_fallback_count':zero_area_packet_fallback_count,
+                'zero_area_packet_fallback_method':'first downstream resolved wet area, otherwise declared source area',
             }
     mark('pool',start)
     # Resolve vector bending and carrier entrainment before SLAB handoff.
