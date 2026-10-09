@@ -89,6 +89,27 @@ python scripts/audit_diagnostic_campaign_binding.py `
 
 `build_ijhe_completion_audit.py --diagnostic-campaign-binding`을 사용하면 이 결과가 `diagnostic_worklist_campaign_binding_evidence` 검사로 들어간다. 최신 live audit는 18개 검사 중 7개 차단이고, 이 결합 검사는 `PASS`이면서 `diagnostic_only=true`이다. campaign 실행 코드에는 이제 provider source/result digest, port, 종료 basis, 방출시간을 case와 risk atom에 보존하는 `provider_packet_identity` ledger가 들어갔다. 2026-10-15 재실행에서는 24/24 case에 identity가 기록됐다. worklist의 선택 packet 파일과 digest를 대조한 결과는 24개 중 18개 일치, 6개 불일치이며, 불일치 사건은 저장탱크 5개와 ambient-vaporizer G1이다. 따라서 `packet_identity_consumed=false`를 유지한다. campaign이 provider identity를 보존한다는 것과 검사된 외부 packet을 완전히 동일하게 사용했다는 것을 분리해 기록한다. native 사고 export와 독립 물리검증도 확보해야 한다.
 
+## 선택 packet을 다시 연결한 실행
+
+digest 불일치를 구조적으로 해소하기 위해 `scripts/rebind_campaign_to_worklist_packets.py`를 추가했다. 이 명령은 evidence 행이 `exact_opening_match=true`와 `strict_packet_valid=true`인 경우에만 선택 packet 하나를 읽고, 기존 campaign의 기상·점화·영역·시설 포트 배치와 결합한다. 결과 파일은 `RiskCampaign`의 strict schema를 그대로 유지하고, rebind 설명은 별도 `*.provenance.json`에 저장한다. provider packet에 없는 빈도나 방출 경로를 생성하지 않는다.
+
+```powershell
+python scripts/rebind_campaign_to_worklist_packets.py `
+  --campaign results/20261014/generic_mixed_provider_campaign_pool.json `
+  --packet-evidence results/20261014/generic_lh2_provider_worklist_packet_evidence.json `
+  --packet-root . `
+  --output results/20261015/generic_mixed_provider_campaign_rebound_worklist.json
+python scripts/run_lh2_mixed_provider_campaign.py `
+  --manifest examples/generic_lh2_full_scope_manifest.json `
+  --campaign results/20261015/generic_mixed_provider_campaign_rebound_worklist.json `
+  --backend-config results/20261009/backend_config_current.json `
+  --output results/20261015/generic_mixed_provider_campaign_worklist_rebound_result.json
+```
+
+재실행 결과는 24/24 packet source/result digest 쌍이 일치했지만, 24개 case 중 23개만 risk atom을 만들었다. 4건은 `EXECUTED`, 19건은 `EXECUTED_OPERATOR_LIMITED`, 1건은 `FAILED`다. 실패는 `ambient-vaporizer/G1`의 provider 출구 속도가 현재 저마하 가스 확산 어댑터 범위를 넘은 경우로, 원장은 `resolved low-Mach gas exit scope exceeded; compressible/underexpanded plane adapter required`를 보존한다. 이 packet을 기존 저마하 packet으로 바꾸거나 유량·시간을 다시 계산하지 않았다. 따라서 최신 결합 감사 `results/20261015/generic_lh2_diagnostic_campaign_binding_worklist_rebound.json`의 `packet_identity_consumed=true`, digest match `24/24`, structural binding `false`는 서로 모순되지 않는다. packet을 소비했다는 것과 모든 packet의 피해 계산이 성공했다는 것은 별도 조건이다.
+
+이 실행으로 확인된 다음 개발 항목은 고속·압축성/underexpanded gas exit용 별도 plane adapter와 독립 검증 자료다. adapter가 준비되기 전까지 해당 사건은 `FAILED`/미계산으로 남기며, 시설 IR/F-N과 전체 사고 범위는 승격하지 않는다.
+
 추가 파일:
 
 - `src/lh2_tno/diagnostic_campaign_binding.py`: packet/event/case/risk-atom 구조 결합 감사
