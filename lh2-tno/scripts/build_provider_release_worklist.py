@@ -46,6 +46,9 @@ def main() -> int:
         "model_binding_accident_release_supported_component_count": result.get(
             "model_binding_accident_release_supported_component_count"
         ),
+        "model_binding_diagnostic_release_adapter_component_count": result.get(
+            "model_binding_diagnostic_release_adapter_component_count"
+        ),
         "status_counts": result.get("status_counts", {}),
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))

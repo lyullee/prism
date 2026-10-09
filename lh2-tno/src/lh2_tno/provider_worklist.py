@@ -65,6 +65,8 @@ class ProviderReleaseWorkItem(Contract):
     status: Literal["UNCOMPUTED_PROVIDER_PACKET", "UNCOMPUTED_NO_ACCIDENT_PORT"]
     model_binding_status: str | None = None
     model_accident_release_export_status: str | None = None
+    model_diagnostic_release_adapter_status: str | None = None
+    model_diagnostic_release_adapter_module: str | None = None
     blocking_reasons: tuple[str, ...] = ()
 
 
@@ -227,6 +229,11 @@ def build_provider_release_worklist(
             )
         if binding_row is not None and binding_row.get("accident_release_export_status") != "supported":
             reasons.append("bound equipment model has no accident-release provider export")
+            adapter = binding_row.get("diagnostic_release_adapter") or {}
+            if adapter.get("status") == "available":
+                reasons.append(
+                    "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+                )
         status = (
             "UNCOMPUTED_NO_ACCIDENT_PORT"
             if port_missing
@@ -248,6 +255,12 @@ def build_provider_release_worklist(
                 model_accident_release_export_status=(binding_row or {}).get(
                     "accident_release_export_status"
                 ),
+                model_diagnostic_release_adapter_status=(
+                    (binding_row or {}).get("diagnostic_release_adapter") or {}
+                ).get("status"),
+                model_diagnostic_release_adapter_module=(
+                    (binding_row or {}).get("diagnostic_release_adapter") or {}
+                ).get("module"),
                 status=status,
                 blocking_reasons=tuple(reasons),
             )
@@ -270,6 +283,14 @@ def build_provider_release_worklist(
         "model_binding_accident_release_supported_component_count": (
             sum(
                 row.get("accident_release_export_status") == "supported"
+                for row in model_binding_report.get("component_rows", ())
+            )
+            if model_binding_report is not None
+            else None
+        ),
+        "model_binding_diagnostic_release_adapter_component_count": (
+            sum(
+                ((row.get("diagnostic_release_adapter") or {}).get("status") == "available")
                 for row in model_binding_report.get("component_rows", ())
             )
             if model_binding_report is not None

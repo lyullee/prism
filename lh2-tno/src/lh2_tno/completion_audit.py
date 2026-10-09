@@ -87,11 +87,17 @@ def build_ijhe_completion_audit(
             + status_counts.get("UNCOMPUTED_NO_ACCIDENT_PORT", 0)
         ) if isinstance(status_counts, Mapping) else None
         worklist_status = provider_worklist.get("status")
+        worklist_diagnostic_adapter_count = provider_worklist.get(
+            "model_binding_diagnostic_release_adapter_component_count"
+        )
     else:
         worklist_event_count = current_status.get("equipment_provider_release_worklist_event_count")
         worklist_packet_count = current_status.get("equipment_provider_release_worklist_provider_packet_count")
         worklist_uncomputed_count = current_status.get("equipment_provider_release_worklist_uncomputed_count")
         worklist_status = current_status.get("equipment_provider_release_worklist_status")
+        worklist_diagnostic_adapter_count = current_status.get(
+            "equipment_model_binding_diagnostic_release_adapter_component_count"
+        )
     worklist_complete = (
         isinstance(worklist_event_count, int)
         and worklist_event_count > 0
@@ -141,6 +147,9 @@ def build_ijhe_completion_audit(
                 "accident_release_supported_component_count": current_status.get(
                     "equipment_model_binding_accident_release_supported_component_count"
                 ),
+                "diagnostic_release_adapter_component_count": current_status.get(
+                    "equipment_model_binding_diagnostic_release_adapter_component_count"
+                ),
                 "record": current_status.get("equipment_model_binding_record"),
             },
             "one or more equipment models lacks an accident-release interface and provider termination ledger",
@@ -166,6 +175,7 @@ def build_ijhe_completion_audit(
                 "frequency_event_count": worklist_event_count,
                 "provider_packet_count": worklist_packet_count,
                 "uncomputed_provider_packet_count": worklist_uncomputed_count,
+                "diagnostic_release_adapter_component_count": worklist_diagnostic_adapter_count,
             },
             "the provider-release worklist still contains events without exact provider packets",
         ),

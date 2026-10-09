@@ -20,6 +20,7 @@ MODEL_BINDING_SCHEMA = "prism.equipment_model_binding.v1"
 _STATE_STATUSES = {"supported", "partial", "missing"}
 _RELEASE_STATUSES = {"supported", "screening_only", "missing"}
 _LEDGER_STATUSES = {"provider_termination_and_mass", "normal_flow_only", "missing"}
+_DIAGNOSTIC_ADAPTER_STATUSES = {"available", "missing"}
 
 
 class EquipmentModelBindingError(ValueError):
@@ -114,6 +115,33 @@ def audit_equipment_model_binding(
             blockers.append(f"{kind}: supported accident release requires prism.resolved_release.v1")
         if release_status != "supported" and provider_schema is not None:
             blockers.append(f"{kind}: non-supported accident release must not advertise a provider schema")
+        diagnostic_adapter = raw.get("diagnostic_release_adapter")
+        if diagnostic_adapter is None:
+            diagnostic_adapter = {"status": "missing"}
+        if not isinstance(diagnostic_adapter, Mapping):
+            raise EquipmentModelBindingError(
+                f"bindings[{index}].diagnostic_release_adapter must be an object"
+            )
+        diagnostic_status = diagnostic_adapter.get("status", "missing")
+        if diagnostic_status not in _DIAGNOSTIC_ADAPTER_STATUSES:
+            raise EquipmentModelBindingError(
+                f"bindings[{index}].diagnostic_release_adapter.status must be one of {_DIAGNOSTIC_ADAPTER_STATUSES}"
+            )
+        diagnostic_module = diagnostic_adapter.get("module")
+        diagnostic_class = diagnostic_adapter.get("provider_class")
+        diagnostic_evidence = diagnostic_adapter.get("evidence_status")
+        if diagnostic_status == "available":
+            for field, value in (("module", diagnostic_module), ("provider_class", diagnostic_class), ("evidence_status", diagnostic_evidence)):
+                if not isinstance(value, str) or not value.strip():
+                    raise EquipmentModelBindingError(
+                        f"bindings[{index}].diagnostic_release_adapter.{field} must be a non-empty string when status=available"
+                    )
+            if diagnostic_evidence not in {"synthetic_diagnostic", "screening_only"}:
+                raise EquipmentModelBindingError(
+                    f"bindings[{index}].diagnostic_release_adapter.evidence_status must be synthetic_diagnostic or screening_only"
+                )
+        elif any(value is not None for value in (diagnostic_module, diagnostic_class, diagnostic_evidence)):
+            blockers.append(f"{kind}: missing diagnostic adapter must not advertise adapter metadata")
         by_kind[kind] = {
             "component_kind": kind,
             "model_package": model_package,
@@ -123,6 +151,12 @@ def audit_equipment_model_binding(
             "accident_release_export_status": release_status,
             "termination_ledger_status": ledger_status,
             "provider_export_schema": provider_schema,
+            "diagnostic_release_adapter": {
+                "status": diagnostic_status,
+                "module": diagnostic_module,
+                "provider_class": diagnostic_class,
+                "evidence_status": diagnostic_evidence,
+            },
             "qualification": raw.get("qualification"),
             "source_path": raw.get("source_path"),
         }
@@ -142,15 +176,21 @@ def audit_equipment_model_binding(
             continue
         row = dict(binding)
         row["component_id"] = component.id
-        row["status"] = (
-            "ACCIDENT_RELEASE_INTERFACE_BOUND"
-            if binding["state_export_status"] == "supported"
+        if (
+            binding["state_export_status"] == "supported"
             and binding["accident_release_export_status"] == "supported"
             and binding["termination_ledger_status"] == "provider_termination_and_mass"
-            else "STATE_ONLY_BOUND"
-            if binding["state_export_status"] == "supported"
-            else "PARTIAL"
-        )
+        ):
+            row["status"] = "ACCIDENT_RELEASE_INTERFACE_BOUND"
+        elif (
+            binding["state_export_status"] == "supported"
+            and binding["diagnostic_release_adapter"]["status"] == "available"
+        ):
+            row["status"] = "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
+        elif binding["state_export_status"] == "supported":
+            row["status"] = "STATE_ONLY_BOUND"
+        else:
+            row["status"] = "PARTIAL"
         row["blocking_reasons"] = []
         if binding["state_export_status"] != "supported":
             row["blocking_reasons"].append("normal process-state export is not fully supported")
@@ -164,7 +204,11 @@ def audit_equipment_model_binding(
     if unused_kinds:
         blockers.extend(f"binding has no manifest component for kind {kind}" for kind in unused_kinds)
     state_complete = bool(component_rows) and all(
-        row["status"] in {"STATE_ONLY_BOUND", "ACCIDENT_RELEASE_INTERFACE_BOUND"}
+        row["status"] in {
+            "STATE_ONLY_BOUND",
+            "DIAGNOSTIC_RELEASE_ADAPTER_BOUND",
+            "ACCIDENT_RELEASE_INTERFACE_BOUND",
+        }
         for row in component_rows
     ) and not any("no model binding" in reason for reason in blockers)
     release_complete = state_complete and all(
@@ -185,16 +229,29 @@ def audit_equipment_model_binding(
         "binding_catalog_sha256": catalog_digest,
         "component_count": len(manifest_obj.components),
         "component_rows": component_rows,
+        "diagnostic_release_adapter_component_count": sum(
+            row["status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
+            for row in component_rows
+        ),
+        "qualified_accident_release_component_count": sum(
+            row["status"] == "ACCIDENT_RELEASE_INTERFACE_BOUND"
+            for row in component_rows
+        ),
         "unused_binding_kinds": unused_kinds,
         "blocking_reasons": list(dict.fromkeys(blockers)),
         "physical_validation_claim": False,
         "accident_release_claim": False,
+        "diagnostic_release_adapter_claim": any(
+            row["status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
+            for row in component_rows
+        ),
         "facility_qra_claim": False,
         "frequency_inference_performed": False,
         "promotion_policy": {
             "normal_state_model_is_not_an_accident_release": True,
             "model_class_name_is_not_a_provider_packet": True,
             "provider_schema_requires_actual_packet": True,
+            "diagnostic_adapter_is_not_qualified_provider": True,
             "frequency_is_bound_outside_model_catalog": True,
             "accident_export_interface": {
                 "schema_version": "prism.equipment_accident_export_request.v1",

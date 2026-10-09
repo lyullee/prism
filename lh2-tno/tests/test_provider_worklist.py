@@ -87,12 +87,16 @@ def test_provider_worklist_surfaces_state_only_model_binding_without_promoting_p
 
     assert result["model_binding_status"] == "STATE_ONLY_BOUND"
     assert result["model_binding_accident_release_supported_component_count"] == 0
+    assert result["model_binding_diagnostic_release_adapter_component_count"] == 7
     assert result["provider_packet_count"] == 0
     assert all(row["status"] == "UNCOMPUTED_PROVIDER_PACKET" for row in result["work_items"])
-    assert all(row["model_binding_status"] == "STATE_ONLY_BOUND" for row in result["work_items"])
+    assert all(row["model_binding_status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND" for row in result["work_items"])
     assert all(row["model_accident_release_export_status"] == "missing" for row in result["work_items"])
     assert all(
-        "no accident-release provider export" in reason
+        any("no accident-release provider export" in reason for reason in row["blocking_reasons"])
         for row in result["work_items"]
-        for reason in row["blocking_reasons"]
+    )
+    assert all(
+        any("diagnostic adapter is synthetic/screening" in reason for reason in row["blocking_reasons"])
+        for row in result["work_items"]
     )

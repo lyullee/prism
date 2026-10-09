@@ -13,7 +13,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "model-library regression and conservation tests; no accident packet",
-      "source_path": "external lh2dt_models/src/lh2dt/layered_tank.py"
+      "source_path": "external lh2dt_models/src/lh2dt/layered_tank.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+        "provider_class": "LayeredTankAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "pipe",
@@ -25,7 +31,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "dynamic normal-flow regression tests; no accident packet",
-      "source_path": "external lh2dt_models/src/lh2dt/dynamic_pipe.py"
+      "source_path": "external lh2dt_models/src/lh2dt/dynamic_pipe.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_dynamic_pipe_prism_packet.py",
+        "provider_class": "DynamicPipeAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "valve",
@@ -37,7 +49,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "command and stroke regression tests; no failure opening history",
-      "source_path": "external lh2dt_models/src/lh2dt/valve.py"
+      "source_path": "external lh2dt_models/src/lh2dt/valve.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_valve_prism_packet.py",
+        "provider_class": "ValveAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "vent_stack",
@@ -49,7 +67,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "one-way normal-flow model; emergency-relief packet absent",
-      "source_path": "external lh2dt_models/src/lh2dt/vent_stack.py"
+      "source_path": "external lh2dt_models/src/lh2dt/vent_stack.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_vent_stack_prism_packet.py",
+        "provider_class": "VentStackAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "pump",
@@ -61,7 +85,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "normal hydraulic operating-point model; no pump failure packet",
-      "source_path": "external lh2dt_models/src/lh2dt/pump.py"
+      "source_path": "external lh2dt_models/src/lh2dt/pump.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_mapped_pump_prism_packet.py",
+        "provider_class": "MappedPumpAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "vaporizer",
@@ -73,7 +103,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "thermal state model; exchanger-side accident classification remains open",
-      "source_path": "external lh2dt_models/src/lh2dt/dynamic_vaporizer.py"
+      "source_path": "external lh2dt_models/src/lh2dt/dynamic_vaporizer.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_dynamic_vaporizer_prism_packet.py",
+        "provider_class": "DynamicVaporizerAccidentProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "reliquefier",
@@ -85,7 +121,13 @@
       "termination_ledger_status": "normal_flow_only",
       "provider_export_schema": null,
       "qualification": "thermal state model; exchanger-side accident classification remains open",
-      "source_path": "external lh2dt_models/src/lh2dt/dynamic_reliquefier.py"
+      "source_path": "external lh2dt_models/src/lh2dt/dynamic_reliquefier.py",
+      "diagnostic_release_adapter": {
+        "status": "available",
+        "module": "scripts/export_lh2dt_reliquefier_two_sided_prism_packet.py",
+        "provider_class": "TwoSidedReliquefierProvider",
+        "evidence_status": "synthetic_diagnostic"
+      }
     },
     {
       "component_kind": "boundary",
@@ -97,7 +139,10 @@
       "termination_ledger_status": "missing",
       "provider_export_schema": null,
       "qualification": "interface only; excluded from accidental-release frequency",
-      "source_path": "PRISM generic facility boundary contract"
+      "source_path": "PRISM generic facility boundary contract",
+      "diagnostic_release_adapter": {
+        "status": "missing"
+      }
     }
   ]
 }

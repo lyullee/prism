@@ -10,7 +10,7 @@ from lh2_tno.equipment_model_binding import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def _catalog(*, release_status="missing", schema=None):
+def _catalog(*, release_status="missing", schema=None, diagnostic_adapter=None):
     return {
         "schema_version": "prism.equipment_model_binding.v1",
         "facility_neutral": True,
@@ -23,6 +23,7 @@ def _catalog(*, release_status="missing", schema=None):
             "accident_release_export_status": release_status,
             "termination_ledger_status": "provider_termination_and_mass" if release_status == "supported" else "normal_flow_only",
             "provider_export_schema": schema,
+            **({"diagnostic_release_adapter": diagnostic_adapter} if diagnostic_adapter is not None else {}),
         }],
     }
 
@@ -56,3 +57,22 @@ def test_model_binding_release_interface_requires_schema():
     )
     assert report["status"] == "STATE_ONLY_BOUND"
     assert any("requires prism.resolved_release.v1" in reason for reason in report["blocking_reasons"])
+
+
+def test_model_binding_reports_diagnostic_adapter_without_promoting_provider_claim():
+    manifest = EquipmentManifest.from_json(ROOT / "examples" / "equipment_manifest.json")
+    manifest = manifest.model_copy(update={"components": (manifest.components[0],)})
+    report = audit_equipment_model_binding(
+        manifest,
+        _catalog(diagnostic_adapter={
+            "status": "available",
+            "module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+            "provider_class": "LayeredTankAccidentProvider",
+            "evidence_status": "synthetic_diagnostic",
+        }),
+    )
+    assert report["status"] == "STATE_ONLY_BOUND"
+    assert report["diagnostic_release_adapter_component_count"] == 1
+    assert report["component_rows"][0]["status"] == "DIAGNOSTIC_RELEASE_ADAPTER_BOUND"
+    assert report["diagnostic_release_adapter_claim"] is True
+    assert report["accident_release_claim"] is False
