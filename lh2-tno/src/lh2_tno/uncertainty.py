@@ -197,6 +197,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
                 'qualified_provider_packet_case_count', 0
             ),
             'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
+            'physical_validation_claim': result.get('physical_validation_claim') is True,
         })
     return {
         'campaign_digest': result['campaign_digest'],
@@ -216,7 +217,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             'qualified_provider_packet_case_count', 0
         ),
         'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
-        'physical_validation_claim': False,
+        'physical_validation_claim': result.get('physical_validation_claim') is True,
     }
 
 
@@ -415,7 +416,7 @@ def sample_literature_frequency_distributions(
                 'qualified_provider_packet_case_count', 0
             ),
             'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
-            'physical_validation_claim': False,
+            'physical_validation_claim': result.get('physical_validation_claim') is True,
         })
     return {
         'campaign_digest': result['campaign_digest'],
@@ -433,5 +434,5 @@ def sample_literature_frequency_distributions(
         'complete_facility_qra_claim': result.get('complete_facility_qra_claim') is True,
         'conditional_diagnostic_facility_risk': 'sampled known-atom facility expected-death totals are diagnostic frequency-model outputs; they are not a qualified facility confidence interval when scope blockers remain',
         'semantics': 'published lognormal initiating-frequency distributions with explicit shared-asset or independent-event normal draws; optional fixed events retain their declared catalogue frequency; physical harm/weather/barrier/population/ignition remain fixed and incomplete scope remains incomplete',
-        'physical_validation_claim': False,
+        'physical_validation_claim': result.get('physical_validation_claim') is True,
     }

@@ -169,6 +169,22 @@ def test_published_frequency_distribution_sampling_returns_known_interval_withou
     assert set(family_stability) == {'valve_hole', 'liquid_two_phase'}
 
 
+def test_frequency_uncertainty_preserves_upstream_physical_validation_claim():
+    events = _valve_events()
+    payload = _result(events)
+    payload['physical_validation_claim'] = True
+    result = literature_frequency_uncertainty(
+        payload,
+        (LiteratureFrequencyScenario(
+            id='validated-central',
+            asset_quantiles={'valves': 'published'},
+            provenance='validated test input',
+        ),),
+    )
+    assert result['physical_validation_claim'] is True
+    assert result['scenarios'][0]['physical_validation_claim'] is True
+
+
 def test_distribution_sampling_can_hold_mixed_catalogue_events_fixed():
     events = _valve_events()
     fixed = events[0].model_copy(update={

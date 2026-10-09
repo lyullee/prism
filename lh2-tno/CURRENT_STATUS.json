@@ -2401,6 +2401,6 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 465,
-  "full_portable_test_status": "465 passed"
+  "full_portable_test_count": 466,
+  "full_portable_test_status": "466 passed"
 }
