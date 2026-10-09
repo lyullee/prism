@@ -70,3 +70,22 @@ def test_not_applicable_family_does_not_create_a_provider_evidence_request():
     assert row["evidence_required"] is False
     assert row["required_provider_evidence"] == []
     assert row["promotion_allowed_now"] is True
+
+
+def test_two_sided_request_exposes_joint_interaction_evidence_gap():
+    report = build_facility_evidence_request(
+        _assessment(),
+        {
+            "facility_id": "facility",
+            "rows": [{
+                "family": "two_sided_rupture",
+                "status": "PARTIAL",
+                "generated_event_count": 1,
+                "executed_case_count": 1,
+                "uncomputed_case_count": 1,
+                "event_ids": ["rupture-01"],
+            }],
+        },
+    )
+    required = report["family_requests"][0]["required_provider_evidence"]
+    assert any("paired plume/pressure/inventory interaction" in item for item in required)

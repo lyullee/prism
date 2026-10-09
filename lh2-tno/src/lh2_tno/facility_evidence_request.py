@@ -35,7 +35,10 @@ _FAMILY_REQUIREMENTS: dict[str, tuple[str, ...]] = {
     "liquid_two_phase": ("flash quality, gas/liquid/ground partition and droplet treatment",),
     "inventory_depletion": ("positive inventory threshold, depletion clock and final residual mass",),
     "inventory_over_600s": ("complete 600 s provider history and end-of-horizon inventory",),
-    "two_sided_rupture": ("both provider outlets, endpoint geometry and same-event coupling",),
+    "two_sided_rupture": (
+        "both provider outlets, endpoint geometry and same-event coupling",
+        "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration",
+    ),
     "vertical_handoff": ("provider-owned vertical-to-horizontal handoff state and boundary",),
 }
 
