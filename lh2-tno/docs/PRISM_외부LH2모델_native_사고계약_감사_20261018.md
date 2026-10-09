@@ -52,4 +52,4 @@ python scripts/audit_lh2dt_native_contract.py `
 - PRISM-side adapter가 같은 이름의 메서드를 제공해도 외부 모델 native 기능으로 기록하지 않는다.
 - source digest와 계약 감사는 재현성 자료이며, 독립 물리검증이나 현장 빈도 근거를 대신하지 않는다.
 
-정적 감사 테스트 2건을 포함한 portable test suite는 433건 통과했다.
+정적 감사 테스트 2건과 방출 ledger domain/withheld 분리 테스트를 포함한 portable test suite는 436건 통과했다.

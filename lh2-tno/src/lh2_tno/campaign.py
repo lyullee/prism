@@ -350,7 +350,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     for event in events.values():
         row = event.model_dump(mode='json')
         event_rows.append(row)
-    release_termination_inventory_ledger = build_release_termination_inventory_ledger(cases)
+    release_termination_inventory_ledger = build_release_termination_inventory_ledger(
+        cases, withheld_cases=missing
+    )
     return {'status':'DECLARED_SCOPE_EXECUTED' if scope_complete else 'PARTIAL_DECLARED_SCOPE',
         'facility_id': f.id, 'facility_digest': f.digest(), 'campaign_digest': campaign.digest(),
         'scope_provenance': campaign.scope_provenance, 'events':event_rows,

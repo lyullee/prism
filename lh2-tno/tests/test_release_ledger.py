@@ -80,3 +80,36 @@ def test_release_ledger_does_not_infer_inventory_from_mass_without_provider_basi
     assert row["inventory_status"] == "not_inventory_termination"
     assert row["provider"]["available_mass_kg"] is None
     assert row["ledger_status"] == "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE"
+
+
+def test_release_ledger_keeps_domain_incomplete_separate_from_operator_limited():
+    report = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "tank/full-bore",
+            "status": "EXECUTED_DOMAIN_INCOMPLETE",
+            "termination": {"basis": "synthetic_diagnostic_horizon", "time_s": 1.0},
+            "mass_ledger": {"released_kg": 1.0, "end_to_end_residual_kg": 0.0},
+        }]
+    )
+    assert report["rows"][0]["ledger_status"] == "DOMAIN_INCOMPLETE"
+    assert report["summary"]["domain_incomplete_row_count"] == 1
+    assert report["summary"]["operator_limited_or_domain_incomplete_row_count"] == 0
+
+
+def test_release_ledger_summarizes_withheld_domain_case_without_duplicate_row():
+    report = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "tank/full-bore",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "termination": {"basis": "synthetic_diagnostic_horizon", "time_s": 1.0},
+            "mass_ledger": {"released_kg": 1.0, "end_to_end_residual_kg": 0.0},
+        }],
+        withheld_cases=[{
+            "event_id": "tank/full-bore",
+            "status": "EXECUTED_DOMAIN_INCOMPLETE",
+            "reason": "outside-domain flammable mass unresolved",
+        }],
+    )
+    assert len(report["rows"]) == 1
+    assert report["summary"]["withheld_case_count"] == 1
+    assert report["summary"]["withheld_domain_incomplete_case_count"] == 1

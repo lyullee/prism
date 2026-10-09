@@ -90,6 +90,8 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
         ledger_status = "INCOMPLETE"
     elif status == "EXECUTED":
         ledger_status = "COMPLETE"
+    elif status == "EXECUTED_DOMAIN_INCOMPLETE":
+        ledger_status = "DOMAIN_INCOMPLETE"
     elif status.startswith("EXECUTED"):
         ledger_status = "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE"
     else:
@@ -141,9 +143,14 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
 
 def build_release_termination_inventory_ledger(
     cases: list[Mapping[str, Any]] | tuple[Mapping[str, Any], ...],
+    withheld_cases: list[Mapping[str, Any]] | tuple[Mapping[str, Any], ...] = (),
 ) -> dict[str, Any]:
     """Return a machine-readable ledger without promoting any case."""
     rows = [_row(case) for case in cases]
+    withheld = list(withheld_cases)
+    withheld_status_counts = Counter(
+        str(case.get("status", "UNKNOWN")) for case in withheld
+    )
     status_counts = Counter(row["ledger_status"] for row in rows)
     basis_counts = Counter(
         row["termination"]["basis"]
@@ -161,10 +168,19 @@ def build_release_termination_inventory_ledger(
             "operator_limited_or_domain_incomplete_row_count": status_counts.get(
                 "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE", 0
             ),
+            "domain_incomplete_row_count": status_counts.get("DOMAIN_INCOMPLETE", 0),
             "uncomputed_row_count": status_counts.get("UNCOMPUTED", 0),
             "incomplete_row_count": status_counts.get("INCOMPLETE", 0),
             "provider_packet_consumed_row_count": sum(
                 bool(row["provider"]["packet_consumed"]) for row in rows
+            ),
+            "withheld_case_count": len(withheld),
+            "withheld_case_status_counts": dict(sorted(withheld_status_counts.items())),
+            "withheld_operator_limited_case_count": withheld_status_counts.get(
+                "EXECUTED_OPERATOR_LIMITED", 0
+            ),
+            "withheld_domain_incomplete_case_count": withheld_status_counts.get(
+                "EXECUTED_DOMAIN_INCOMPLETE", 0
             ),
         },
         "semantics": {
@@ -173,6 +189,7 @@ def build_release_termination_inventory_ledger(
             "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
             "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
             "operator_limited": "numerically executed but not qualified facility evidence",
+            "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows",
         },
     }
 
