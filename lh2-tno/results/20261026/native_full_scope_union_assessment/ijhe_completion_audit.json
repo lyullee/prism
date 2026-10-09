@@ -61,6 +61,33 @@
       "interpretation": "At least one diagnostic provider received a canonical equipment state snapshot and echoed its digest. Campaign rows without the payload remain unbound; this check does not qualify physical accuracy, frequency or facility IR/F-N."
     },
     {
+      "name": "diagnostic_native_scope_packet_catalog_coverage",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
+        "schema_version": "prism.native_generic_scope_packet_catalog.v1",
+        "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
+        "frequency_event_count": 24,
+        "exact_native_packet_count": 24,
+        "uncomputed_event_count": 0,
+        "state_snapshot_binding": {
+          "audit": "state_snapshot_binding_audit.json",
+          "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+          "record_count": 24,
+          "bound_count": 24,
+          "unbound_count": 0,
+          "digest_mismatch_count": 0
+        },
+        "provider_packet_promoted": false,
+        "frequency_inference_performed": false,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "The native generic-scope catalog closes diagnostic exact-packet coverage and preserves the state snapshot gate. It remains separate from qualified provider evidence and does not unlock facility IR/F-N."
+    },
+    {
       "name": "provider_worklist_scope_alignment",
       "status": "PASS",
       "diagnostic_only": true,

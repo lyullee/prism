@@ -78,6 +78,7 @@ def build_ijhe_completion_audit(
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
     domain_recovery_audit: Mapping[str, Any] | None = None,
     state_snapshot_binding_audit: Mapping[str, Any] | None = None,
+    native_scope_packet_catalog_verification: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -417,6 +418,60 @@ def build_ijhe_completion_audit(
                     "At least one diagnostic provider received a canonical equipment state snapshot and "
                     "echoed its digest. Campaign rows without the payload remain unbound; this check "
                     "does not qualify physical accuracy, frequency or facility IR/F-N."
+                ),
+            }
+        )
+    if native_scope_packet_catalog_verification is not None:
+        catalog = native_scope_packet_catalog_verification
+        snapshot_summary = catalog.get("state_snapshot_binding")
+        if not isinstance(snapshot_summary, Mapping):
+            snapshot_summary = {}
+        event_count = catalog.get("frequency_event_count")
+        exact_count = catalog.get("exact_native_packet_count")
+        uncomputed_count = catalog.get("uncomputed_event_count")
+        catalog_valid = (
+            catalog.get("schema_version") == "prism.native_generic_scope_packet_catalog.v1"
+            and catalog.get("status") == "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
+            and isinstance(event_count, int)
+            and event_count > 0
+            and exact_count == event_count
+            and uncomputed_count == 0
+            and snapshot_summary.get("status") == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+            and snapshot_summary.get("record_count") == event_count
+            and snapshot_summary.get("bound_count") == event_count
+            and snapshot_summary.get("unbound_count") == 0
+            and catalog.get("provider_packet_promoted") is False
+            and catalog.get("frequency_inference_performed") is False
+            and catalog.get("physical_validation_claim") is False
+            and catalog.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_scope_packet_catalog_coverage",
+                "status": "PASS" if catalog_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if catalog_valid
+                    else "native generic-scope catalog is missing exact packets or state-snapshot reconciliation"
+                ),
+                "evidence": {
+                    "record": catalog.get("_record_path"),
+                    "schema_version": catalog.get("schema_version"),
+                    "status": catalog.get("status"),
+                    "frequency_event_count": event_count,
+                    "exact_native_packet_count": exact_count,
+                    "uncomputed_event_count": uncomputed_count,
+                    "state_snapshot_binding": snapshot_summary,
+                    "provider_packet_promoted": catalog.get("provider_packet_promoted"),
+                    "frequency_inference_performed": catalog.get("frequency_inference_performed"),
+                    "physical_validation_claim": catalog.get("physical_validation_claim"),
+                    "facility_qra_claim": catalog.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The native generic-scope catalog closes diagnostic exact-packet coverage and preserves "
+                    "the state snapshot gate. It remains separate from qualified provider evidence and does "
+                    "not unlock facility IR/F-N."
                 ),
             }
         )

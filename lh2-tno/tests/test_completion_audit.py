@@ -1404,3 +1404,36 @@ def test_completion_audit_rejects_worklist_evidence_without_chain_or_strict_pack
     assert check["diagnostic_only"] is True
     assert check["blocking_reason"] is None
     assert report["status"] == "READY_FOR_IJHE_SCOPE"
+
+
+def test_completion_audit_records_exact_native_scope_catalog_separately_from_provider_gate():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_scope_packet_catalog_verification={
+            "schema_version": "prism.native_generic_scope_packet_catalog.v1",
+            "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
+            "frequency_event_count": 24,
+            "exact_native_packet_count": 24,
+            "uncomputed_event_count": 0,
+            "state_snapshot_binding": {
+                "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+                "record_count": 24,
+                "bound_count": 24,
+                "unbound_count": 0,
+            },
+            "provider_packet_promoted": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "_record_path": "catalog.json",
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_scope_packet_catalog_coverage"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False

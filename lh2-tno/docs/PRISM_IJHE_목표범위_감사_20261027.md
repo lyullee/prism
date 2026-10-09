@@ -15,7 +15,9 @@
 
 원장: [`ijhe_objective_coverage_audit.json`](../results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)
 
-현재 최종 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다.
+현재 최종 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 기존
+fail-closed IJHE 감사도 22개 검사 중 18개 PASS·4개 BLOCKED로 갱신되었고, 그중
+새 native catalog 검사는 diagnostic-only PASS다.
 
 | 목표 | 상태 | 현재 근거 |
 |---|---|---|

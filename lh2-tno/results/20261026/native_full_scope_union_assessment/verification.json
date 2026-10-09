@@ -53,11 +53,14 @@
   "realtime_cache_benchmark_fresh_physics_elapsed_ms": 2731.322699924931,
   "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_audit_check_count": 21,
-  "ijhe_audit_pass_count": 17,
+  "ijhe_audit_check_count": 22,
+  "ijhe_audit_pass_count": 18,
   "ijhe_audit_blocked_count": 4,
   "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
   "state_snapshot_binding_record_count": 24,
   "state_snapshot_binding_bound_count": 24,
-  "state_snapshot_binding_unbound_count": 0
+  "state_snapshot_binding_unbound_count": 0,
+  "native_scope_packet_catalog_status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
+  "native_scope_packet_catalog_event_count": 24,
+  "native_scope_packet_catalog_exact_packet_count": 24
 }

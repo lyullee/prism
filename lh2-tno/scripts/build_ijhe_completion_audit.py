@@ -83,6 +83,11 @@ def main() -> int:
         type=Path,
         help="optional baseline versus larger-domain sensitivity comparison",
     )
+    parser.add_argument(
+        "--native-scope-packet-catalog-verification",
+        type=Path,
+        help="optional exact native generic-scope catalog verification",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -241,6 +246,15 @@ def main() -> int:
         )
         if domain_recovery_audit is not None:
             domain_recovery_audit["_record_path"] = str(args.domain_recovery_audit)
+        native_scope_packet_catalog_verification = (
+            _object(args.native_scope_packet_catalog_verification)
+            if args.native_scope_packet_catalog_verification
+            else None
+        )
+        if native_scope_packet_catalog_verification is not None:
+            native_scope_packet_catalog_verification["_record_path"] = str(
+                args.native_scope_packet_catalog_verification
+            )
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -269,6 +283,8 @@ def main() -> int:
             slabx_validation_evidence,
             realtime_cache_benchmark,
             domain_recovery_audit,
+            None,
+            native_scope_packet_catalog_verification,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

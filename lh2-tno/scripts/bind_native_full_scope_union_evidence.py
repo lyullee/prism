@@ -74,6 +74,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     realtime = _with_record(args.realtime_cache_benchmark)
     native_full_bore = _with_record(args.native_full_bore_result)
     state_snapshot_binding = _with_record(args.state_snapshot_binding_audit)
+    native_scope_packet_catalog = _with_record(args.native_scope_packet_catalog_verification)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -88,6 +89,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         realtime_cache_benchmark=realtime,
         native_full_bore_result=native_full_bore,
         state_snapshot_binding_audit=state_snapshot_binding,
+        native_scope_packet_catalog_verification=native_scope_packet_catalog,
     )
 
     verification_path = output_dir / "verification.json"
@@ -126,6 +128,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             ),
             "state_snapshot_binding_unbound_count": (
                 state_snapshot_binding.get("unbound_count") if state_snapshot_binding else None
+            ),
+            "native_scope_packet_catalog_status": (
+                native_scope_packet_catalog.get("status") if native_scope_packet_catalog else None
+            ),
+            "native_scope_packet_catalog_event_count": (
+                native_scope_packet_catalog.get("frequency_event_count")
+                if native_scope_packet_catalog else None
+            ),
+            "native_scope_packet_catalog_exact_packet_count": (
+                native_scope_packet_catalog.get("exact_native_packet_count")
+                if native_scope_packet_catalog else None
             ),
         }
     )
@@ -170,6 +183,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional canonical equipment-state handoff audit; remains diagnostic-only.",
+    )
+    parser.add_argument(
+        "--native-scope-packet-catalog-verification",
+        type=Path,
+        default=None,
+        help="Optional exact native generic-scope packet catalog verification.",
     )
     args = parser.parse_args()
     try:
