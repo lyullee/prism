@@ -1218,5 +1218,15 @@
   "major_accident_scope_matrix_catalog_schema": "prism.accident_scenario_catalog.v1",
   "major_accident_scope_matrix_catalog_record": "results/20261017/generic_mixed_accident_scope_matrix_with_catalog.json",
   "major_accident_scope_matrix_catalog_family_count": 12,
-  "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld"
+  "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
+  "ijhe_completion_audit_latest_record": "results/20261017/ijhe_completion_audit_after_scenario_catalog.json",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_latest_check_count": 18,
+  "ijhe_completion_audit_latest_blocking_reason_count": 4,
+  "ijhe_completion_audit_latest_blocking_reasons": [
+    "one or more equipment models lacks an accident-release interface and provider termination ledger",
+    "only synthetic or screening provider releases are available for this campaign",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ]
 }
