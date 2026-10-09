@@ -64,6 +64,7 @@ def build_ijhe_completion_audit(
     native_model_contract_audit: Mapping[str, Any] | None = None,
     frequency_provenance_report: Mapping[str, Any] | None = None,
     scenario_evidence_report: Mapping[str, Any] | None = None,
+    native_full_bore_result: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -229,6 +230,50 @@ def build_ijhe_completion_audit(
                     "This static audit separates native external accident export methods from "
                     "PRISM-side diagnostic wrappers. It is evidence of the integration boundary, "
                     "not a qualified provider packet or facility QRA."
+                ),
+            }
+        )
+    if native_full_bore_result is not None:
+        full_bore = native_full_bore_result
+        residual = full_bore.get("provider_mass_residual_kg")
+        natural_termination = full_bore.get("provider_termination_basis") == "model_pressure_equalization"
+        full_bore_valid = (
+            full_bore.get("schema_version") == "prism.native_lh2dt_dynamic_pipe_full_bore_case.v1"
+            and full_bore.get("status") == "END_TO_END_DIAGNOSTIC_EXECUTED"
+            and natural_termination
+            and full_bore.get("provider_pressure_equalized") is True
+            and _finite(residual)
+            and abs(float(residual)) <= 1e-8
+            and full_bore.get("consequence_chain_executed") is True
+            and full_bore.get("frequency_applied") is False
+            and full_bore.get("facility_qra_claim") is False
+            and full_bore.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_full_bore_chain",
+                "status": "PASS" if full_bore_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None if full_bore_valid else "native full-bore diagnostic evidence is missing or malformed",
+                "evidence": {
+                    "record": full_bore.get("_record_path"),
+                    "status": full_bore.get("status"),
+                    "event_id": full_bore.get("event_id"),
+                    "component_id": full_bore.get("component_id"),
+                    "termination_basis": full_bore.get("provider_termination_basis"),
+                    "provider_duration_s": full_bore.get("provider_duration_s"),
+                    "provider_final_pressure_pa_abs": full_bore.get("provider_final_pressure_pa_abs"),
+                    "provider_pressure_equalized": full_bore.get("provider_pressure_equalized"),
+                    "provider_mass_residual_kg": residual,
+                    "consequence_chain_executed": full_bore.get("consequence_chain_executed"),
+                    "frequency_applied": full_bore.get("frequency_applied"),
+                    "facility_qra_claim": full_bore.get("facility_qra_claim"),
+                    "physical_validation_claim": full_bore.get("physical_validation_claim"),
+                },
+                "interpretation": (
+                    "Native finite full-bore pressure-equalization output reached the PRISM liquid/two-phase "
+                    "consequence chain. This is diagnostic integration evidence; it does not qualify a provider, "
+                    "assign a frequency, or promote facility IR/F-N."
                 ),
             }
         )

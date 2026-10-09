@@ -34,6 +34,7 @@ def main() -> int:
     parser.add_argument("--native-model-contract-audit", type=Path)
     parser.add_argument("--frequency-provenance-report", type=Path)
     parser.add_argument("--scenario-evidence-report", type=Path)
+    parser.add_argument("--native-full-bore-result", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -99,6 +100,13 @@ def main() -> int:
         )
         if scenario_evidence_report is not None:
             scenario_evidence_report["_record_path"] = str(args.scenario_evidence_report)
+        native_full_bore_result = (
+            _object(args.native_full_bore_result)
+            if args.native_full_bore_result
+            else None
+        )
+        if native_full_bore_result is not None:
+            native_full_bore_result["_record_path"] = str(args.native_full_bore_result)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -114,6 +122,7 @@ def main() -> int:
             native_model_contract_audit,
             frequency_provenance_report,
             scenario_evidence_report,
+            native_full_bore_result,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

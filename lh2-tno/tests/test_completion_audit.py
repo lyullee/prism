@@ -73,6 +73,33 @@ def test_completion_audit_records_native_model_contract_audit_as_diagnostic_evid
     assert check["status"] == "PASS"
 
 
+def test_completion_audit_records_native_full_bore_chain_as_diagnostic_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        native_full_bore_result={
+            "schema_version": "prism.native_lh2dt_dynamic_pipe_full_bore_case.v1",
+            "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+            "event_id": "full-bore-01",
+            "component_id": "pipe-01",
+            "provider_termination_basis": "model_pressure_equalization",
+            "provider_duration_s": 0.04,
+            "provider_final_pressure_pa_abs": 101000.0,
+            "provider_pressure_equalized": True,
+            "provider_mass_residual_kg": 0.0,
+            "consequence_chain_executed": True,
+            "frequency_applied": False,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "diagnostic_native_full_bore_chain")
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+
+
 def test_completion_audit_records_frequency_provenance_as_diagnostic_evidence():
     report = build_ijhe_completion_audit(
         {"physical_validation_claim": False},

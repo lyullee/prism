@@ -143,11 +143,13 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 
 ## 2026-10-18 최신 연결 상태
 
-외부 `lh2dt_models`의 일곱 설비 클래스가 native `export_accident_history(request)` 경계를 제공하도록 구현되었고, 외부 회귀시험 374건과 PRISM portable suite 445건을 통과했다. 이 사실은 사고 방출 계약이 있다는 뜻이며, 실제 적격 provider packet이나 시설 전체 QRA가 완료됐다는 뜻은 아니다.
+외부 `lh2dt_models`의 일곱 설비 클래스가 native `export_accident_history(request)` 경계를 제공하도록 구현되었고, 외부 회귀시험 375건과 PRISM portable suite 447건을 통과했다. 이 사실은 사고 방출 계약이 있다는 뜻이며, 실제 적격 provider packet이나 시설 전체 QRA가 완료됐다는 뜻은 아니다.
 
 저장탱크에 대해서는 `scripts/run_lh2dt_native_frequency_case.py`로 문헌 `LH2_VESSEL AREA_0.01%` 빈도와 native `LayeredTank` 방출을 한 사건에서 결합했다. 개구 `0.0127 m` exact-match, provider 질량 잔차 0 kg, native export 약 0.29 s, consequence campaign 약 23.8 s, 사건 상태 `EXECUTED_OPERATOR_LIMITED`를 기록했다. 빈도는 packet에서 추정하지 않고 기존 문헌 catalogue에서 읽었다. 결과는 `results/20261018/native_lh2dt_frequency_case/verification.json`이다.
 
-현재 IJHE 완료 감사는 `INCOMPLETE_EVIDENCE`이며 22개 검사 중 차단 이유는 세 가지다. 합성/스크리닝 provider 외에 적격 packet이 없고, 선언한 주요 사고가족 중 부분·미계산 항목이 있으며, 그 때문에 시설 IR/F-N 총값을 보류한다. 이 native frequency case는 첫 번째 연결을 강화하지만 이 세 차단 이유를 해소하지 않는다.
+현재 IJHE 완료 감사는 `INCOMPLETE_EVIDENCE`이며 23개 검사 중 차단 이유는 세 가지다. 합성/스크리닝 provider 외에 적격 packet이 없고, 선언한 주요 사고가족 중 부분·미계산 항목이 있으며, 그 때문에 시설 IR/F-N 총값을 보류한다. 이 native frequency case는 첫 번째 연결을 강화하지만 이 세 차단 이유를 해소하지 않는다.
+
+감사기에 `--native-full-bore-result examples/native_lh2dt_dynamic_pipe_full_bore_case_verification.json`을 주면 23번째 진단 검사 `diagnostic_native_full_bore_chain`이 추가된다. 이 검사는 `model_pressure_equalization`, 최종 압력, provider 질량 잔차, consequence chain 실행을 확인하고, 빈도·시설 QRA·물리검증 승격은 명시적으로 거부한다. 최신 기록은 `results/20261018/ijhe_completion_audit_with_full_bore.json`이며 이 검사는 PASS 진단 전용이고 전체 차단 이유 수는 세 가지로 유지된다.
 
 ## 2026-10-18 native DynamicHEMPipe 2상 연결
 
@@ -158,3 +160,4 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 검사센터의 인수·벤트·공급 및 원본 학습 XLSX 17개, 78개 sheet를 `scripts/audit_inspection_center_timeseries.py`로 읽어 파일 해시, 헤더, 행 수, 신호 접두어, 집계 범위를 기록했다. `PT`·`DPT`·`TT` 후보는 발견했지만 파일 헤더만으로 공학 단위를 확정할 수 없으므로 실제 숫자값이 있는 522개 후보 수치 열을 `MISSING_OR_UNCONFIRMED`로 남겼다. 이 감사는 일반 LH2 시설에서 재사용할 수 있는 입력 준비도 검사이며 센터의 태그나 수치를 일반 설비 기본값으로 복사하지 않는다.
 
 따라서 검사센터 시계열은 현재 `state_snapshot_binding_allowed=false`, `frequency_applied=false`, `sensor_frequency_learning_used=false`, `provider_packet_created=false`, `facility_qra_claim=false`다. exact tag-to-unit map, 압력 기준·온도 기준·유량 기준, 보정·결측·시각 품질, 설비·포트 대응표와 별도의 상태 adapter 검증이 끝나야 실시간 사고 초기조건으로 연결할 수 있다. 자세한 절차와 제한은 [검사센터 시계열 상태 감사](PRISM_검사센터_시계열상태감사_20261018.md)에 기록했다.
+
