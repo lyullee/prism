@@ -17,6 +17,7 @@ def test_native_full_scope_frequency_assessment_preserves_facility_gates():
     assessment = _load("facility_assessment.json")
     result = _load("campaign_result.json")
     scope = _load("scope_matrix.json")
+    worklist = _load("provider_worklist.json")
     audit = _load("ijhe_completion_audit.json")
 
     assert verification["frequency_event_count"] == 24
@@ -27,6 +28,9 @@ def test_native_full_scope_frequency_assessment_preserves_facility_gates():
     assert verification["strict_uncomputed_case_count"] == 19
     assert verification["risk_atom_count"] == 96
     assert verification["frequency_scenario_count"] == 3
+    assert verification["provider_worklist_event_count"] == 24
+    assert verification["provider_worklist_packet_count"] == 0
+    assert verification["provider_worklist_alignment_status"] == "ALIGNED"
     assert verification["frequency_checks"]["frequency_is_taken_from_catalogue_event"] is True
     assert verification["frequency_checks"]["risk_atom_frequency_mismatch_count"] == 0
     assert verification["conditional_diagnostic_facility_risk_available"] is True
@@ -53,8 +57,14 @@ def test_native_full_scope_frequency_assessment_preserves_facility_gates():
     assert rows["vertical_handoff"]["status"] == "NO_EVENT_GENERATED"
     assert rows["vessel_hole"]["status"] == "PARTIAL"
     assert rows["pipe_hole"]["status"] == "PARTIAL"
+    assert scope["provider_worklist_alignment"]["status"] == "ALIGNED"
+    assert scope["provider_worklist_alignment"]["aligned_event_count"] == 24
+
+    assert worklist["generated_event_count"] == 24
+    assert worklist["provider_packet_count"] == 0
+    assert len(worklist["work_items"]) == 24
 
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 15
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 11
+    assert len(audit["checks"]) == 16
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 12
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 4

@@ -26,6 +26,7 @@ python scripts/run_native_full_scope_frequency_assessment.py `
 | 운전자 제한 `EXECUTED_OPERATOR_LIMITED` | 19개 |
 | risk atom | 96개 |
 | 빈도 불확실성 시나리오 | 중앙·p05·p95 3개 |
+| provider 방출 worklist | 24개 사건 요청·24개 정합 (`ALIGNED`), 실제 qualified packet 0개 |
 | 조건부 시설 IR/F-N | 계산됨 |
 | 적격 시설 전체 위험도 | 보류 |
 
@@ -36,6 +37,8 @@ python scripts/run_native_full_scope_frequency_assessment.py `
 ## 사고군 범위
 
 `scope_matrix.json`은 다음을 분리한다.
+
+- `provider_worklist.json`은 각 문헌 빈도 사건에 필요한 방출 패킷의 사건 ID·사고군·방출 모드·종료 기준·필수 필드를 1:1로 요청한다. 이번 실행은 24/24 사건이 캠페인과 정합하지만 실제 적격 packet은 0개라서 worklist 자체는 `READY_FOR_PROVIDER_PACKETS`로 남는다.
 
 - `vessel_hole`, `pipe_hole`, `valve_hole`, `pump_hole`, `liquid_two_phase`, `inventory_depletion`, `two_sided_rupture`는 사건과 결과가 있으나 운전자 제한 때문에 `PARTIAL`이다.
 - `vent_hole`, `vaporizer_hole`, `reliquefier_hole`, `inventory_over_600s`는 이번 선언 범위에서 계산 경로를 확인했다. 해당 사건의 완전성은 각 case 상태와 종료 장부를 함께 읽어야 한다.
@@ -53,8 +56,9 @@ python scripts/run_native_full_scope_frequency_assessment.py `
 - `campaign_result.json`: 24개 사건, case, 방출 종료·재고 장부, 96개 risk atom
 - `facility_assessment.json`: 조건부 시설 IR/F-N과 문헌 빈도 민감도
 - `scope_matrix.json`: 설비별·사고군별 완전/부분/미생성 상태
+- `provider_worklist.json`: 24개 빈도 사건과 provider 방출 packet 요청의 1:1 정합표
 - `frequency_scenarios.json`: 자산별 shared central/p05/p95 가정
 - `binding_provenance.json`: 사건 빈도와 provider packet의 분리·digest 기록
 - `ijhe_completion_audit.json`: 15개 검사와 현재 4개 차단 사유
 
-이 기록은 IJHE 방법론의 “설비 상태 → 방출·종료 → 확산·피해 → 시설 IR/F-N” 연결을 보여주는 진단 근거다. 실제 일반 시설 결과로 사용하려면 설비별 검토 형상·운전 재고·차단 신뢰도, qualified provider packet, 독립 물리검증, vertical handoff 사건을 추가해야 한다.
+이 기록은 IJHE 방법론의 “설비 상태 → 방출·종료 → 확산·피해 → 시설 IR/F-N” 연결을 보여주는 진단 근거다. 실제 일반 시설 결과로 사용하려면 설비별 검토 형상·운전 재고·차단 신뢰도, qualified provider packet, 독립 물리검증, vertical handoff 사건을 추가해야 한다. 현재 감사는 16개 검사 중 12개 통과, 4개 차단이며, worklist 정합성은 통과했지만 packet 자격·사고군 완전성·시설 전체 위험도는 계속 fail-closed다.

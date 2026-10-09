@@ -13,6 +13,23 @@
       "blocking_reason": null
     },
     {
+      "name": "provider_worklist_scope_alignment",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "status": "ALIGNED",
+        "worklist_event_count": 24,
+        "campaign_event_count": 24,
+        "aligned_event_count": 24,
+        "missing_event_ids": [],
+        "primary_family_mismatches": [],
+        "provider_packet_created": false,
+        "frequency_inference_performed": false
+      },
+      "interpretation": "The provider worklist and campaign share event IDs and primary accident families. This is a structural diagnostic check; it does not create a provider packet or qualify facility risk."
+    },
+    {
       "name": "diagnostic_adapter_execution_contract",
       "status": "PASS",
       "evidence": {
@@ -1542,82 +1559,82 @@
         "timing": {
           "campaign_count": 1,
           "fresh_physics_cases": 24,
-          "case_min_ms": 1516.4075000211596,
-          "case_median_ms": 4122.312250023242,
-          "case_max_ms": 65669.72919995897,
-          "case_p95_ms": 52022.658750024806,
-          "case_p99_ms": 63438.94427297403,
-          "campaign_elapsed_ms": 265840.9273000434,
-          "campaign_elapsed_ms_sum": 265840.9273000434,
-          "campaign_elapsed_ms_min": 265840.9273000434,
-          "campaign_elapsed_ms_median": 265840.9273000434,
-          "campaign_elapsed_ms_max": 265840.9273000434,
-          "campaign_elapsed_ms_p95": 265840.9273000434,
-          "campaign_elapsed_ms_p99": 265840.9273000434,
+          "case_min_ms": 1485.906400019303,
+          "case_median_ms": 4168.114149942994,
+          "case_max_ms": 64603.106800001115,
+          "case_p95_ms": 50922.65885003139,
+          "case_p99_ms": 62306.81359500507,
+          "campaign_elapsed_ms": 262861.83980002534,
+          "campaign_elapsed_ms_sum": 262861.83980002534,
+          "campaign_elapsed_ms_min": 262861.83980002534,
+          "campaign_elapsed_ms_median": 262861.83980002534,
+          "campaign_elapsed_ms_max": 262861.83980002534,
+          "campaign_elapsed_ms_p95": 262861.83980002534,
+          "campaign_elapsed_ms_p99": 262861.83980002534,
           "stage_elapsed_ms": {
             "cloud_observation": {
               "sample_count": 22,
-              "sum_ms": 41789.4983002916,
-              "median_ms": 232.07570001250133,
-              "max_ms": 26631.528400001116,
-              "p95_ms": 5450.792055029888,
-              "p99_ms": 22190.569213007093
+              "sum_ms": 41193.89500003308,
+              "median_ms": 243.82720002904534,
+              "max_ms": 26355.118600069545,
+              "p95_ms": 5338.917885086266,
+              "p99_ms": 21949.398841073253
             },
             "endpoint_a": {
               "sample_count": 2,
-              "sum_ms": 6454.632600070909,
-              "median_ms": 3227.3163000354543,
-              "max_ms": 3242.024000035599,
-              "p95_ms": 3240.5532300355844,
-              "p99_ms": 3241.729846035596
+              "sum_ms": 6428.752100095153,
+              "median_ms": 3214.3760500475764,
+              "max_ms": 3257.484000059776,
+              "p95_ms": 3253.173205058556,
+              "p99_ms": 3256.621841059532
             },
             "endpoint_aggregation": {
               "sample_count": 2,
-              "sum_ms": 13112.8439999884,
-              "median_ms": 6556.4219999942,
-              "max_ms": 6618.137500016019,
-              "p95_ms": 6611.965950013837,
-              "p99_ms": 6616.903190015582
+              "sum_ms": 13042.61519992724,
+              "median_ms": 6521.30759996362,
+              "max_ms": 6620.5348999938,
+              "p95_ms": 6610.612169990782,
+              "p99_ms": 6618.550353993196
             },
             "endpoint_b": {
               "sample_count": 2,
-              "sum_ms": 6656.313799903728,
-              "median_ms": 3328.156899951864,
-              "max_ms": 3375.153600005433,
-              "p95_ms": 3370.453930000076,
-              "p99_ms": 3374.2136660043616
+              "sum_ms": 6611.973499879241,
+              "median_ms": 3305.9867499396205,
+              "max_ms": 3362.1067999629304,
+              "p95_ms": 3356.4947949605994,
+              "p99_ms": 3360.984398962464
             },
             "fire_explosion_damage_risk": {
               "sample_count": 22,
-              "sum_ms": 2214.9601001292467,
-              "median_ms": 71.00705004995689,
-              "max_ms": 266.5624999208376,
-              "p95_ms": 154.78821501019408,
-              "p99_ms": 243.30722593935198
+              "sum_ms": 2189.903900027275,
+              "median_ms": 70.78504998935387,
+              "max_ms": 259.38579998910427,
+              "p95_ms": 159.56831499352117,
+              "p99_ms": 238.65827499073922
             },
             "near_field_and_dispersion": {
               "sample_count": 22,
-              "sum_ms": 182831.4745000098,
-              "median_ms": 2502.6764000649564,
-              "max_ms": 49430.59430003632,
-              "p95_ms": 36793.36131003218,
-              "p99_ms": 46932.461768035995
+              "sum_ms": 180831.14349970128,
+              "median_ms": 2477.9544500051998,
+              "max_ms": 48221.87660005875,
+              "p95_ms": 36108.273379947044,
+              "p99_ms": 45821.25385103513
             },
             "pool": {
               "sample_count": 22,
-              "sum_ms": 3818.616599892266,
-              "median_ms": 134.0343999909237,
-              "max_ms": 368.7358000315726,
-              "p95_ms": 368.2652000512462,
-              "p99_ms": 368.64010303630494
+              "sum_ms": 3896.3544997386634,
+              "median_ms": 129.4912500306964,
+              "max_ms": 481.8356999894604,
+              "p95_ms": 378.98786497535184,
+              "p99_ms": 460.40120998630294
             },
             "source": {
               "sample_count": 22,
-              "sum_ms": 16353.488700231537,
-              "median_ms": 723.1767000048421,
-              "max_ms": 955.6618001079187,
-              "p95_ms": 811.6614649828989,
-              "p99_ms": 925.4496250813826
+              "sum_ms": 16264.382500201464,
+              "median_ms": 730.5986499995925,
+              "max_ms": 818.6782000120729,
+              "p95_ms": 793.5066200094298,
+              "p99_ms": 813.5860990115907
             }
           },
           "distribution": "across separately executed equipment campaigns; not repeated-run latency"
@@ -1666,67 +1683,67 @@
           "stage_timing": {
             "cloud_observation": {
               "sample_count": 22,
-              "sum_ms": 41789.4983002916,
-              "median_ms": 232.07570001250133,
-              "max_ms": 26631.528400001116,
-              "p95_ms": 5450.792055029888,
-              "p99_ms": 22190.569213007093
+              "sum_ms": 41193.89500003308,
+              "median_ms": 243.82720002904534,
+              "max_ms": 26355.118600069545,
+              "p95_ms": 5338.917885086266,
+              "p99_ms": 21949.398841073253
             },
             "endpoint_a": {
               "sample_count": 2,
-              "sum_ms": 6454.632600070909,
-              "median_ms": 3227.3163000354543,
-              "max_ms": 3242.024000035599,
-              "p95_ms": 3240.5532300355844,
-              "p99_ms": 3241.729846035596
+              "sum_ms": 6428.752100095153,
+              "median_ms": 3214.3760500475764,
+              "max_ms": 3257.484000059776,
+              "p95_ms": 3253.173205058556,
+              "p99_ms": 3256.621841059532
             },
             "endpoint_aggregation": {
               "sample_count": 2,
-              "sum_ms": 13112.8439999884,
-              "median_ms": 6556.4219999942,
-              "max_ms": 6618.137500016019,
-              "p95_ms": 6611.965950013837,
-              "p99_ms": 6616.903190015582
+              "sum_ms": 13042.61519992724,
+              "median_ms": 6521.30759996362,
+              "max_ms": 6620.5348999938,
+              "p95_ms": 6610.612169990782,
+              "p99_ms": 6618.550353993196
             },
             "endpoint_b": {
               "sample_count": 2,
-              "sum_ms": 6656.313799903728,
-              "median_ms": 3328.156899951864,
-              "max_ms": 3375.153600005433,
-              "p95_ms": 3370.453930000076,
-              "p99_ms": 3374.2136660043616
+              "sum_ms": 6611.973499879241,
+              "median_ms": 3305.9867499396205,
+              "max_ms": 3362.1067999629304,
+              "p95_ms": 3356.4947949605994,
+              "p99_ms": 3360.984398962464
             },
             "fire_explosion_damage_risk": {
               "sample_count": 22,
-              "sum_ms": 2214.9601001292467,
-              "median_ms": 71.00705004995689,
-              "max_ms": 266.5624999208376,
-              "p95_ms": 154.78821501019408,
-              "p99_ms": 243.30722593935198
+              "sum_ms": 2189.903900027275,
+              "median_ms": 70.78504998935387,
+              "max_ms": 259.38579998910427,
+              "p95_ms": 159.56831499352117,
+              "p99_ms": 238.65827499073922
             },
             "near_field_and_dispersion": {
               "sample_count": 22,
-              "sum_ms": 182831.4745000098,
-              "median_ms": 2502.6764000649564,
-              "max_ms": 49430.59430003632,
-              "p95_ms": 36793.36131003218,
-              "p99_ms": 46932.461768035995
+              "sum_ms": 180831.14349970128,
+              "median_ms": 2477.9544500051998,
+              "max_ms": 48221.87660005875,
+              "p95_ms": 36108.273379947044,
+              "p99_ms": 45821.25385103513
             },
             "pool": {
               "sample_count": 22,
-              "sum_ms": 3818.616599892266,
-              "median_ms": 134.0343999909237,
-              "max_ms": 368.7358000315726,
-              "p95_ms": 368.2652000512462,
-              "p99_ms": 368.64010303630494
+              "sum_ms": 3896.3544997386634,
+              "median_ms": 129.4912500306964,
+              "max_ms": 481.8356999894604,
+              "p95_ms": 378.98786497535184,
+              "p99_ms": 460.40120998630294
             },
             "source": {
               "sample_count": 22,
-              "sum_ms": 16353.488700231537,
-              "median_ms": 723.1767000048421,
-              "max_ms": 955.6618001079187,
-              "p95_ms": 811.6614649828989,
-              "p99_ms": 925.4496250813826
+              "sum_ms": 16264.382500201464,
+              "median_ms": 730.5986499995925,
+              "max_ms": 818.6782000120729,
+              "p95_ms": 793.5066200094298,
+              "p99_ms": 813.5860990115907
             }
           },
           "case_status_counts": {
@@ -2015,12 +2032,12 @@
       "name": "provider_worklist_coverage",
       "status": "BLOCKED",
       "evidence": {
-        "source": "current_status",
-        "status": "STRUCTURAL_CATALOGS_AVAILABLE; 24 synthetic provider packets exact-matched; actual qualified packet count remains 0; mixed campaign execution is partial and fail-closed",
+        "source": "provider_worklist",
+        "status": "READY_FOR_PROVIDER_PACKETS",
         "frequency_event_count": 24,
-        "provider_packet_count": 24,
-        "uncomputed_provider_packet_count": 0,
-        "diagnostic_release_adapter_component_count": 7,
+        "provider_packet_count": 0,
+        "uncomputed_provider_packet_count": 24,
+        "diagnostic_release_adapter_component_count": null,
         "structural_diagnostic_coverage": false,
         "qualified_provider_packet_count": null,
         "qualification_readiness": null
@@ -2147,9 +2164,9 @@
       "status": "PASS",
       "evidence": {
         "fresh_physics_cases": 24,
-        "campaign_elapsed_ms": 265840.9273000434,
-        "case_p95_ms": 52022.6587500248,
-        "case_p99_ms": 63438.94427297403,
+        "campaign_elapsed_ms": 262861.83980002534,
+        "case_p95_ms": 50922.65885003139,
+        "case_p99_ms": 62306.81359500507,
         "timing_distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification",
         "one_hz_fresh_physics_demonstrated": false
       },

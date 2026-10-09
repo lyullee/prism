@@ -997,17 +997,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2647.783700027503,
+      "elapsed_ms": 2657.0260000880808,
       "request_digest": "0ae7fa828529d03260f082fa1111b5e8b490fccdc486d367f7d9aeddbf2802e7",
-      "result_digest": "475e232d190687674c679b5968cd5a07435c2632a878a3c05df592ad70d026d4",
+      "result_digest": "84a6cd0348f63fc652280f9dc6e51c1e3bb5d65364f3b53684b449e8929a98ca",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.2252001045272,
-        "pool": 128.39620001614094,
-        "near_field_and_dispersion": 1420.7004000199959,
-        "cloud_observation": 97.903500078246,
-        "fire_explosion_damage_risk": 66.93460000678897
+        "source": 732.6935000019148,
+        "pool": 128.75629996415228,
+        "near_field_and_dispersion": 1413.018099963665,
+        "cloud_observation": 95.66679992713034,
+        "fire_explosion_damage_risk": 70.4259000485763
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -1087,17 +1087,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 65669.72919995897,
+      "elapsed_ms": 64603.106800001115,
       "request_digest": "d8d09637ec46085b31a9c4ee64097cc7b1f93bbdf1241d306d5309c23f94e4ed",
-      "result_digest": "afb22d6e0e5945ac0da589744212b135f904e57f9fd565c0df53cf5c8266a334",
+      "result_digest": "46e344f76f774915f9bc241632a2d0886a1ff3fb9d47f1800948e801ebef8228",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.9714999664575,
-        "pool": 334.9918000167236,
-        "near_field_and_dispersion": 37534.72510003485,
-        "cloud_observation": 26631.528400001116,
-        "fire_explosion_damage_risk": 155.8231000090018
+        "source": 714.6397999022156,
+        "pool": 332.4486999772489,
+        "near_field_and_dispersion": 36790.339699946344,
+        "cloud_observation": 26355.118600069545,
+        "fire_explosion_damage_risk": 137.8602999029681
       },
       "mass_ledger": {
         "released_kg": 0.00010057792972414058,
@@ -1179,17 +1179,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3794.306099996902,
+      "elapsed_ms": 3732.3757000267506,
       "request_digest": "e16845715eb6a0806a5193c061a54bfae5f5d22a72b9ec626464d8763ca9cce6",
-      "result_digest": "19a9e26e1d5a180084069d01a2a939959808d944dcb17777a061bb69af14a90a",
+      "result_digest": "2b1d8a006b20043c0fdb53655d6e7e90a23aed18e4a0a3b0ae47e905de09fd57",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 729.695999994874,
-        "pool": 133.46659997478127,
-        "near_field_and_dispersion": 2437.4920000554994,
-        "cloud_observation": 189.25239995587617,
-        "fire_explosion_damage_risk": 70.82720007747412
+        "source": 707.984899985604,
+        "pool": 130.00979996286333,
+        "near_field_and_dispersion": 2423.8614999921992,
+        "cloud_observation": 183.5607000393793,
+        "fire_explosion_damage_risk": 66.72340002842247
       },
       "mass_ledger": {
         "released_kg": 0.00010057966768755134,
@@ -1271,17 +1271,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2343.622300075367,
+      "elapsed_ms": 2347.5309000350535,
       "request_digest": "f31f6a139ee9d3a14635d00cbe3fbc2acfedeedd3f696e8bb62b461aabca22ae",
-      "result_digest": "92c7fd0b452076d5dc5f4341a6d9b2e6356f2e65a2570509ebbf45cd0c11d8ad",
+      "result_digest": "bb5ddf1ee3e2e7f2d28fe34f22f55c9a70c0d0ba6d701868c06eba3087322556",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 809.1376000083983,
-        "pool": 136.75819989293814,
-        "near_field_and_dispersion": 1042.6070000976324,
-        "cloud_observation": 80.24419995490462,
-        "fire_explosion_damage_risk": 67.99020001199096
+        "source": 818.6782000120729,
+        "pool": 127.68679996952415,
+        "near_field_and_dispersion": 1040.0804000673816,
+        "cloud_observation": 82.14950002729893,
+        "fire_explosion_damage_risk": 69.40709997434169
       },
       "mass_ledger": {
         "released_kg": 0.00016756351240572947,
@@ -1363,17 +1363,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2571.3210999965668,
+      "elapsed_ms": 2624.5473000453785,
       "request_digest": "b079cc49b9972ce22272c8de2f41a0f6e133fec1da68309ea5d68e679f3c74ce",
-      "result_digest": "58d14a1aeb7027843d22a4e19a3694b578e3b7055c836887a8cfae79feed44db",
+      "result_digest": "5da6f31a182a980c24ca12a91a29c3b6d87335a9076e92ea279560c09fb116c5",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.8887000344694,
-        "pool": 129.17460000608116,
-        "near_field_and_dispersion": 1351.2711999937892,
-        "cloud_observation": 92.85310003906488,
-        "fire_explosion_damage_risk": 68.97160003427416
+        "source": 740.0022000074387,
+        "pool": 125.46169990673661,
+        "near_field_and_dispersion": 1389.3445000285283,
+        "cloud_observation": 92.11799991317093,
+        "fire_explosion_damage_risk": 68.64419998601079
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -1455,17 +1455,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4768.8451000722125,
+      "elapsed_ms": 4533.395699923858,
       "request_digest": "2b8bcec77821c98c01363528e4b6492d5a06fd841db0985ba7a7e713ed71ffee",
-      "result_digest": "c4b48561d7f28e49c5c87490951cbfe6a1a4fd28136a5d89d6f62713b468820e",
+      "result_digest": "6d4d51709ba2669aa722ef07c21254dd52a9fd6f82b1d480a3d66451cb4b5607",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 745.8627000451088,
-        "pool": 133.7327000219375,
-        "near_field_and_dispersion": 3145.8994999993593,
-        "cloud_observation": 322.701400029473,
-        "fire_explosion_damage_risk": 133.88510001823306
+        "source": 750.1917000627145,
+        "pool": 126.3231000630185,
+        "near_field_and_dispersion": 3098.959199967794,
+        "cloud_observation": 282.37219993025064,
+        "fire_explosion_damage_risk": 68.43860005028546
       },
       "mass_ledger": {
         "released_kg": 2.0141404563536543e-08,
@@ -1545,17 +1545,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10195.749600068666,
+      "elapsed_ms": 9783.135599922389,
       "request_digest": "e6ecc745654a173a5a559648692ff12847d028578935c25f5dda0370494d5265",
-      "result_digest": "e910bfcfaa5e36eaeda73f923ec36dee0a28b31d1edc7c07892ab02c840537ae",
+      "result_digest": "8e0e7768215ea6a3a8fc546d8b752a75ab27095bebcb57cdf216ef82e071ed85",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 955.6618001079187,
-        "pool": 157.82279998529702,
-        "near_field_and_dispersion": 8166.8678999412805,
-        "cloud_observation": 376.4326999662444,
-        "fire_explosion_damage_risk": 69.76330000907183
+        "source": 722.5164000410587,
+        "pool": 129.48940007481724,
+        "near_field_and_dispersion": 8276.469599921256,
+        "cloud_observation": 372.9681000113487,
+        "fire_explosion_damage_risk": 68.36629996541888
       },
       "mass_ledger": {
         "released_kg": 4.4338658741797906e-07,
@@ -1635,17 +1635,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10447.896700003184,
+      "elapsed_ms": 10379.12130006589,
       "request_digest": "c68a7f97e91944f3140e16b84f0f75385a06b51daae2c9b88bb47bb0412d5a71",
-      "result_digest": "544436736de48ddc509b7f29b4dfa449dc558ac8e460a10c3aad1c8c0c6e6ffb",
+      "result_digest": "5251051e4f65abf2dcbddd3a56108f419acbad930c96075ca46f0058c8510cf9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 713.5389000177383,
-        "pool": 134.33609995990992,
-        "near_field_and_dispersion": 8914.125800016336,
-        "cloud_observation": 393.68950005155057,
-        "fire_explosion_damage_risk": 78.19649996235967
+        "source": 775.9605000028387,
+        "pool": 126.09349994454533,
+        "near_field_and_dispersion": 8761.864200001583,
+        "cloud_observation": 371.7859999742359,
+        "fire_explosion_damage_risk": 103.10429998207837
       },
       "mass_ledger": {
         "released_kg": 1.1651055997280421e-06,
@@ -1725,17 +1725,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 55970.66430002451,
+      "elapsed_ms": 54619.22330001835,
       "request_digest": "e40bb2f626060e4c91c058b1421be7fe27e5b85ad20220e86136622c175213e2",
-      "result_digest": "2cc0b91b7a6f9a4c90ca8aee32ea5cad2aa48db6d9bcd0f40ad19e3d91d8410b",
+      "result_digest": "317371dadc19f7ee3c2dc9efdd5d9d435774058cd4a7e562e580ce170de8b053",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 811.7942999815568,
-        "pool": 327.9164000414312,
-        "near_field_and_dispersion": 49430.59430003632,
-        "cloud_observation": 4817.870800034143,
-        "fire_explosion_damage_risk": 266.5624999208376
+        "source": 717.285200022161,
+        "pool": 481.8356999894604,
+        "near_field_and_dispersion": 48221.87660005875,
+        "cloud_observation": 4643.844400066882,
+        "fire_explosion_damage_risk": 259.38579998910427
       },
       "mass_ledger": {
         "released_kg": 2.1053319426559835e-05,
@@ -1817,17 +1817,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 21150.594900012948,
+      "elapsed_ms": 20679.948700009845,
       "request_digest": "3735d839ee2aafd311e9e921eefbbd9096d630a5b72993b8ba81aac8f2333651",
-      "result_digest": "0d9682ffc57e942754fde2bc774b3724676652d33f262f12d3167e978f7cc3fc",
+      "result_digest": "8c186a4b38abbc5ad0102f181e5f27fdf3241320f06d0be32b9fd35b4b1c2a40",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 713.9485999941826,
-        "pool": 132.38570000976324,
-        "near_field_and_dispersion": 19603.330499958247,
-        "cloud_observation": 399.5486000785604,
-        "fire_explosion_damage_risk": 71.18690002243966
+        "source": 730.595700093545,
+        "pool": 129.50699997600168,
+        "near_field_and_dispersion": 19138.52469995618,
+        "cloud_observation": 383.0529999686405,
+        "fire_explosion_damage_risk": 70.55060006678104
       },
       "mass_ledger": {
         "released_kg": 0.00040250847725729254,
@@ -1909,17 +1909,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 29650.627300026827,
+      "elapsed_ms": 29975.460300105624,
       "request_digest": "ac544293b19c76d6a304c5db5b6522baf61d6f957889eda2f32ec313877e8afd",
-      "result_digest": "bb9bb4ad3117fa3b214d51550643fd147cddc531cbbda73472293d335f92cbdc",
+      "result_digest": "07b3ae1c2c839da123c8b86a042cc1bd8869d84ae26f5416f90ed85a3c344151",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 724.3819000432268,
-        "pool": 326.9540999317542,
-        "near_field_and_dispersion": 22707.449299981818,
-        "cloud_observation": 5484.103700029664,
-        "fire_explosion_damage_risk": 132.45080003980547
+        "source": 749.03400009498,
+        "pool": 321.65420008823276,
+        "near_field_and_dispersion": 23149.013299960643,
+        "cloud_observation": 5375.5007000872865,
+        "fire_explosion_damage_risk": 133.4491999587044
       },
       "mass_ledger": {
         "released_kg": 3.164317187981656e-05,
@@ -1999,17 +1999,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3231.4674999797717,
+      "elapsed_ms": 3267.0925999991596,
       "request_digest": "62c522502383eef8f80b0a4383cef53709520ad1b89ac1de197e75861a8656cc",
-      "result_digest": "e200e2a55879891358e9a894d28cb3813eff6ac7b0fb4d008caf4ba2d4d294d9",
+      "result_digest": "a36bc5f2d114a5a851429d61a30983e65b08cc3b86a33f007a9670d4a5c1b743",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 714.5095000742003,
-        "pool": 368.2801000541076,
-        "near_field_and_dispersion": 1550.7015999173746,
-        "cloud_observation": 218.88219995889813,
-        "fire_explosion_damage_risk": 135.12540003284812
+        "source": 730.6015999056399,
+        "pool": 360.4832999408245,
+        "near_field_and_dispersion": 1551.1513999663293,
+        "cloud_observation": 220.78239999245852,
+        "fire_explosion_damage_risk": 160.68329999689013
       },
       "mass_ledger": {
         "released_kg": 0.0003164317187981657,
@@ -2089,17 +2089,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3576.896999962628,
+      "elapsed_ms": 3802.83259996213,
       "request_digest": "a53925880198adb9b8e0a882edd8ce1008429742b314dc1c728d8beb4de86935",
-      "result_digest": "5fa7b646a8f57e51146f1255d2c4111bfe54b07ccc54e8d6a9b0b530d431a1a5",
+      "result_digest": "e266d441b16dde2d520e0a0bec9bb68cbec1da141da7b337dbad2c840414c207",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 712.8752999706194,
-        "pool": 367.9820999968797,
-        "near_field_and_dispersion": 1880.2343000425026,
-        "cloud_observation": 246.00130005273968,
-        "fire_explosion_damage_risk": 134.73620009608567
+        "source": 728.2652999274433,
+        "pool": 364.1899999929592,
+        "near_field_and_dispersion": 2063.9966999879107,
+        "cloud_observation": 256.46039994899184,
+        "fire_explosion_damage_risk": 137.6844000769779
       },
       "mass_ledger": {
         "released_kg": 0.003164317187981658,
@@ -2179,17 +2179,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6975.625399965793,
+      "elapsed_ms": 7003.844600054435,
       "request_digest": "f6379e3698a765f69107a2911d57cc09535924e006dc4d79721c33f9f2f2efca",
-      "result_digest": "8b52f7b14500106132570d083d3b321c8d2cc7b9424819d5222abd6c765e2fe4",
+      "result_digest": "22c6d7f555b4fb7d560fe8ba867fdac7594af5f5711cd035a05145db938315c9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 716.5195998968557,
-        "pool": 129.53129992820323,
-        "near_field_and_dispersion": 5621.401600074023,
-        "cloud_observation": 220.98290000576526,
-        "fire_explosion_damage_risk": 69.61980008054525
+        "source": 732.4766999809071,
+        "pool": 129.49309998657554,
+        "near_field_and_dispersion": 5563.335799961351,
+        "cloud_observation": 246.37449998408556,
+        "fire_explosion_damage_risk": 82.65610004309565
       },
       "mass_ledger": {
         "released_kg": 0.03164317187981657,
@@ -2269,17 +2269,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 7893.031600047834,
+      "elapsed_ms": 8004.416099982336,
       "request_digest": "02831473ea20573fbc215c9afe0c9565c601a3f3c7aa0ea17f8ad850d30f5bc8",
-      "result_digest": "8b49e5a0c8a49330e0650ee2f70c97264248fbead3013d22b4d1db1afda6f92e",
+      "result_digest": "23356053a78803c2350d079650b5c6a06cfa47d6a4307ec095610f2d69de5ee0",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.5727999573573,
-        "pool": 140.56640001945198,
-        "near_field_and_dispersion": 6511.523199966177,
-        "cloud_observation": 235.99279997870326,
-        "fire_explosion_damage_risk": 67.86469998769462
+        "source": 752.5259000249207,
+        "pool": 147.53409998957068,
+        "near_field_and_dispersion": 6527.2246999666095,
+        "cloud_observation": 241.27990007400513,
+        "fire_explosion_damage_risk": 71.31679996382445
       },
       "mass_ledger": {
         "released_kg": 0.3164317187981657,
@@ -2357,17 +2357,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 3812.2286000289023,
+      "elapsed_ms": 3763.4497000835836,
       "request_digest": "cc623b36db3363939754e01a42cf9eeaf857784fe2db658e59840422675d4d76",
-      "result_digest": "60c04e4a455d929892ae137d70e133a17c3b2bd92186e6fe867bf6b529041bea",
+      "result_digest": "9b318f631d1699d487de47f7e7fedc807b550d67fb44d0559ec944c12a94396e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 727.8618999989703,
-        "pool": 0.005499925464391708,
-        "near_field_and_dispersion": 2567.8608000744134,
-        "cloud_observation": 228.1586000462994,
-        "fire_explosion_damage_risk": 81.18499990087003
+        "source": 720.7562000257894,
+        "pool": 0.005799927748739719,
+        "near_field_and_dispersion": 2532.0474000182003,
+        "cloud_observation": 234.09729998093098,
+        "fire_explosion_damage_risk": 70.8020000020042
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -2446,17 +2446,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3270.6010999390855,
+      "elapsed_ms": 3277.242499985732,
       "request_digest": "430cbe4eef148d21cefee097420e644987b353dcef26aa2e5536cbbe5d7f76ef",
-      "result_digest": "669523b9f3d56ffe5cc83fdfad78cd0c0867070b704e53bd4833cf506d418673",
+      "result_digest": "7a7bd2bb1799fe75a9b5b6a2de75402ed52011f8ba9c85a247886fe0b9597c2a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 719.2931000608951,
-        "pool": 368.7358000315726,
-        "near_field_and_dispersion": 1580.3415999980643,
-        "cloud_observation": 224.93550006765872,
-        "fire_explosion_damage_risk": 134.63759992737323
+        "source": 723.4403999755159,
+        "pool": 379.76669997442514,
+        "near_field_and_dispersion": 1574.1731999441981,
+        "cloud_observation": 223.41959993354976,
+        "fire_explosion_damage_risk": 134.14300000295043
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -2536,17 +2536,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3255.380199989304,
+      "elapsed_ms": 3228.571599931456,
       "request_digest": "3d0f119d262a0f42bbc5faa3a66379ed4cd36ebea196185c95c78aa56e7df4e3",
-      "result_digest": "45f25dc189534289675a9bfd6aa4e2d6e0bf15cc42616c0e8e534e84fbc75fc8",
+      "result_digest": "fecf5e4dc769939052b1131c87a872d6a3d60e8d1b2f007d41267ba257ee3aa5",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 731.0699999798089,
-        "pool": 367.5383999943733,
-        "near_field_and_dispersion": 1563.3673999691382,
-        "cloud_observation": 215.30989999882877,
-        "fire_explosion_damage_risk": 134.13369993213564
+        "source": 717.6453999709338,
+        "pool": 355.5684000020847,
+        "near_field_and_dispersion": 1556.377400062047,
+        "cloud_observation": 223.78820006269962,
+        "fire_explosion_damage_risk": 138.38359992951155
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -2624,17 +2624,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 4432.395900017582,
+      "elapsed_ms": 4609.881400014274,
       "request_digest": "5683dd6e475fb67e6d39e90733f8c54b3ec365c8222eab12aeca1a08b056f893",
-      "result_digest": "f9d9d7c4c4cdd7d03604b426e26ce8148a3a737eea0ec73dcc7447fcf2a854a8",
+      "result_digest": "8e26a0671ca3b6cad151475519dd699094e2c92eb61838e3009b271640b405c1",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 726.9936000229791,
-        "pool": 0.00700005330145359,
-        "near_field_and_dispersion": 3051.864799926989,
-        "cloud_observation": 380.56909991428256,
-        "fire_explosion_damage_risk": 69.17200004681945
+        "source": 794.4301000097767,
+        "pool": 0.011299969628453255,
+        "near_field_and_dispersion": 3159.815900027752,
+        "cloud_observation": 380.26270002592355,
+        "fire_explosion_damage_risk": 68.99389997124672
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -2711,17 +2711,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1946.5980000095442,
+      "elapsed_ms": 1957.5486000394449,
       "request_digest": "7ac9590855380c3aa5a9a87efdb275843b25a6bc5bb06ac79b91bca5a5e3be05",
-      "result_digest": "e829b4ad325e00e4d9b762cb572548a24facd6e7fec39f62dee705930d10c2a4",
+      "result_digest": "651a3269e8917125da738fcabbad012247c6d93f51bbd59e124adb15bd7f423d",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 753.7650000303984,
-        "pool": 0.023900065571069717,
-        "near_field_and_dispersion": 263.227199902758,
-        "cloud_observation": 640.79670002684,
-        "fire_explosion_damage_risk": 70.03559998702258
+        "source": 756.9038000656292,
+        "pool": 0.02389994915574789,
+        "near_field_and_dispersion": 287.0593999978155,
+        "cloud_observation": 630.5866000475362,
+        "fire_explosion_damage_risk": 70.76809997670352
       },
       "mass_ledger": {
         "released_kg": 4.956379784841932e-06,
@@ -2798,17 +2798,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1516.4075000211596,
+      "elapsed_ms": 1485.906400019303,
       "request_digest": "ad3212db093a318f5a438c8f4a046307737aa4777b19977b20b8550f65f37147",
-      "result_digest": "e6899cdb87199e2375e0ea35d8ccc307a3e9f76a29fddf2c27fe53876525115c",
+      "result_digest": "d901b084df281ee636b209905dba97789781897da5006ce4d07e1fd923f1d62c",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 743.9980999333784,
-        "pool": 0.005499925464391708,
-        "near_field_and_dispersion": 405.0442000152543,
-        "cloud_observation": 97.59340004529804,
-        "fire_explosion_damage_risk": 68.17650003358722
+        "source": 722.3476000363007,
+        "pool": 0.005700043402612209,
+        "near_field_and_dispersion": 393.02459999453276,
+        "cloud_observation": 97.18579996842891,
+        "fire_explosion_damage_risk": 67.59180000517517
       },
       "mass_ledger": {
         "released_kg": 7.221896865709533e-06,
@@ -2896,15 +2896,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6618.540800060146,
+      "elapsed_ms": 6422.490200027823,
       "request_digest": "d79e6fbbe9ebb27460c1b3b754b95898c7bbfb1897b8133bedadfae03af31738",
-      "result_digest": "17206e6bc51cbcde8bda0916b02bc6101c67a5980f36a7d913d570d67f1dd484",
+      "result_digest": "d85fa1ef4d66ccf984b083c189a4a7f86d51f1de5e25de8a0edd8880bb12aaff",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "endpoint_a": 3242.024000035599,
-        "endpoint_b": 3375.153600005433,
-        "endpoint_aggregation": 6618.137500016019
+        "endpoint_a": 3171.268100035377,
+        "endpoint_b": 3249.8666999163106,
+        "endpoint_aggregation": 6422.080299933441
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -2993,15 +2993,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6495.188799919561,
+      "elapsed_ms": 6620.979799889028,
       "request_digest": "76da7d0e7799e6b66a717260a00fabd6a2f4d9c2a56486741dd70be3313001f5",
-      "result_digest": "ba0c8725df0c3830a3f6dea29cef39075fbc02abc839ca897a693e623774d995",
+      "result_digest": "ee29739def58da581c2ef4857cec592d7a3df966544d8b4b5843a25b2be9e9bf",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "endpoint_a": 3212.60860003531,
-        "endpoint_b": 3281.160199898295,
-        "endpoint_aggregation": 6494.706499972381
+        "endpoint_a": 3257.484000059776,
+        "endpoint_b": 3362.1067999629304,
+        "endpoint_aggregation": 6620.5348999938
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -3079,17 +3079,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 3258.761000004597,
+      "elapsed_ms": 3123.8831999944523,
       "request_digest": "cab036cf53de66c81a242c2542b1a874c3413250722cdeee91e92ed64bc7d2a6",
-      "result_digest": "8cd4afb41718910dc86d8f5bd3c555627a4784e8966d4c7a174e3ae7a3aabbc3",
+      "result_digest": "7ee209d0a92782a256be08f1c788f1b24e7aa3c39fd4509ab13be475f6b3647c",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 715.922600007616,
-        "pool": 0.005400041118264198,
-        "near_field_and_dispersion": 2080.844799987972,
-        "cloud_observation": 194.14759997744113,
-        "fire_explosion_damage_risk": 67.68179999198765
+        "source": 725.4074000520632,
+        "pool": 0.00600004568696022,
+        "near_field_and_dispersion": 1919.585199910216,
+        "cloud_observation": 201.51959999930114,
+        "fire_explosion_damage_risk": 70.52520010620356
       },
       "mass_ledger": {
         "released_kg": 5.226060443124566e-06,
@@ -3170,17 +3170,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2647.783700027503,
+      "elapsed_ms": 2657.0260000880808,
       "request_digest": "0ae7fa828529d03260f082fa1111b5e8b490fccdc486d367f7d9aeddbf2802e7",
-      "result_digest": "475e232d190687674c679b5968cd5a07435c2632a878a3c05df592ad70d026d4",
+      "result_digest": "84a6cd0348f63fc652280f9dc6e51c1e3bb5d65364f3b53684b449e8929a98ca",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.2252001045272,
-        "pool": 128.39620001614094,
-        "near_field_and_dispersion": 1420.7004000199959,
-        "cloud_observation": 97.903500078246,
-        "fire_explosion_damage_risk": 66.93460000678897
+        "source": 732.6935000019148,
+        "pool": 128.75629996415228,
+        "near_field_and_dispersion": 1413.018099963665,
+        "cloud_observation": 95.66679992713034,
+        "fire_explosion_damage_risk": 70.4259000485763
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -3260,17 +3260,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 65669.72919995897,
+      "elapsed_ms": 64603.106800001115,
       "request_digest": "d8d09637ec46085b31a9c4ee64097cc7b1f93bbdf1241d306d5309c23f94e4ed",
-      "result_digest": "afb22d6e0e5945ac0da589744212b135f904e57f9fd565c0df53cf5c8266a334",
+      "result_digest": "46e344f76f774915f9bc241632a2d0886a1ff3fb9d47f1800948e801ebef8228",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.9714999664575,
-        "pool": 334.9918000167236,
-        "near_field_and_dispersion": 37534.72510003485,
-        "cloud_observation": 26631.528400001116,
-        "fire_explosion_damage_risk": 155.8231000090018
+        "source": 714.6397999022156,
+        "pool": 332.4486999772489,
+        "near_field_and_dispersion": 36790.339699946344,
+        "cloud_observation": 26355.118600069545,
+        "fire_explosion_damage_risk": 137.8602999029681
       },
       "mass_ledger": {
         "released_kg": 0.00010057792972414058,
@@ -3352,17 +3352,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3794.306099996902,
+      "elapsed_ms": 3732.3757000267506,
       "request_digest": "e16845715eb6a0806a5193c061a54bfae5f5d22a72b9ec626464d8763ca9cce6",
-      "result_digest": "19a9e26e1d5a180084069d01a2a939959808d944dcb17777a061bb69af14a90a",
+      "result_digest": "2b1d8a006b20043c0fdb53655d6e7e90a23aed18e4a0a3b0ae47e905de09fd57",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 729.695999994874,
-        "pool": 133.46659997478127,
-        "near_field_and_dispersion": 2437.4920000554994,
-        "cloud_observation": 189.25239995587617,
-        "fire_explosion_damage_risk": 70.82720007747412
+        "source": 707.984899985604,
+        "pool": 130.00979996286333,
+        "near_field_and_dispersion": 2423.8614999921992,
+        "cloud_observation": 183.5607000393793,
+        "fire_explosion_damage_risk": 66.72340002842247
       },
       "mass_ledger": {
         "released_kg": 0.00010057966768755134,
@@ -3444,17 +3444,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2343.622300075367,
+      "elapsed_ms": 2347.5309000350535,
       "request_digest": "f31f6a139ee9d3a14635d00cbe3fbc2acfedeedd3f696e8bb62b461aabca22ae",
-      "result_digest": "92c7fd0b452076d5dc5f4341a6d9b2e6356f2e65a2570509ebbf45cd0c11d8ad",
+      "result_digest": "bb5ddf1ee3e2e7f2d28fe34f22f55c9a70c0d0ba6d701868c06eba3087322556",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 809.1376000083983,
-        "pool": 136.75819989293814,
-        "near_field_and_dispersion": 1042.6070000976324,
-        "cloud_observation": 80.24419995490462,
-        "fire_explosion_damage_risk": 67.99020001199096
+        "source": 818.6782000120729,
+        "pool": 127.68679996952415,
+        "near_field_and_dispersion": 1040.0804000673816,
+        "cloud_observation": 82.14950002729893,
+        "fire_explosion_damage_risk": 69.40709997434169
       },
       "mass_ledger": {
         "released_kg": 0.00016756351240572947,
@@ -3536,17 +3536,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2571.3210999965668,
+      "elapsed_ms": 2624.5473000453785,
       "request_digest": "b079cc49b9972ce22272c8de2f41a0f6e133fec1da68309ea5d68e679f3c74ce",
-      "result_digest": "58d14a1aeb7027843d22a4e19a3694b578e3b7055c836887a8cfae79feed44db",
+      "result_digest": "5da6f31a182a980c24ca12a91a29c3b6d87335a9076e92ea279560c09fb116c5",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.8887000344694,
-        "pool": 129.17460000608116,
-        "near_field_and_dispersion": 1351.2711999937892,
-        "cloud_observation": 92.85310003906488,
-        "fire_explosion_damage_risk": 68.97160003427416
+        "source": 740.0022000074387,
+        "pool": 125.46169990673661,
+        "near_field_and_dispersion": 1389.3445000285283,
+        "cloud_observation": 92.11799991317093,
+        "fire_explosion_damage_risk": 68.64419998601079
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -3628,17 +3628,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4768.8451000722125,
+      "elapsed_ms": 4533.395699923858,
       "request_digest": "2b8bcec77821c98c01363528e4b6492d5a06fd841db0985ba7a7e713ed71ffee",
-      "result_digest": "c4b48561d7f28e49c5c87490951cbfe6a1a4fd28136a5d89d6f62713b468820e",
+      "result_digest": "6d4d51709ba2669aa722ef07c21254dd52a9fd6f82b1d480a3d66451cb4b5607",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 745.8627000451088,
-        "pool": 133.7327000219375,
-        "near_field_and_dispersion": 3145.8994999993593,
-        "cloud_observation": 322.701400029473,
-        "fire_explosion_damage_risk": 133.88510001823306
+        "source": 750.1917000627145,
+        "pool": 126.3231000630185,
+        "near_field_and_dispersion": 3098.959199967794,
+        "cloud_observation": 282.37219993025064,
+        "fire_explosion_damage_risk": 68.43860005028546
       },
       "mass_ledger": {
         "released_kg": 2.0141404563536543e-08,
@@ -3718,17 +3718,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10195.749600068666,
+      "elapsed_ms": 9783.135599922389,
       "request_digest": "e6ecc745654a173a5a559648692ff12847d028578935c25f5dda0370494d5265",
-      "result_digest": "e910bfcfaa5e36eaeda73f923ec36dee0a28b31d1edc7c07892ab02c840537ae",
+      "result_digest": "8e0e7768215ea6a3a8fc546d8b752a75ab27095bebcb57cdf216ef82e071ed85",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 955.6618001079187,
-        "pool": 157.82279998529702,
-        "near_field_and_dispersion": 8166.8678999412805,
-        "cloud_observation": 376.4326999662444,
-        "fire_explosion_damage_risk": 69.76330000907183
+        "source": 722.5164000410587,
+        "pool": 129.48940007481724,
+        "near_field_and_dispersion": 8276.469599921256,
+        "cloud_observation": 372.9681000113487,
+        "fire_explosion_damage_risk": 68.36629996541888
       },
       "mass_ledger": {
         "released_kg": 4.4338658741797906e-07,
@@ -3808,17 +3808,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10447.896700003184,
+      "elapsed_ms": 10379.12130006589,
       "request_digest": "c68a7f97e91944f3140e16b84f0f75385a06b51daae2c9b88bb47bb0412d5a71",
-      "result_digest": "544436736de48ddc509b7f29b4dfa449dc558ac8e460a10c3aad1c8c0c6e6ffb",
+      "result_digest": "5251051e4f65abf2dcbddd3a56108f419acbad930c96075ca46f0058c8510cf9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 713.5389000177383,
-        "pool": 134.33609995990992,
-        "near_field_and_dispersion": 8914.125800016336,
-        "cloud_observation": 393.68950005155057,
-        "fire_explosion_damage_risk": 78.19649996235967
+        "source": 775.9605000028387,
+        "pool": 126.09349994454533,
+        "near_field_and_dispersion": 8761.864200001583,
+        "cloud_observation": 371.7859999742359,
+        "fire_explosion_damage_risk": 103.10429998207837
       },
       "mass_ledger": {
         "released_kg": 1.1651055997280421e-06,
@@ -3898,17 +3898,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 55970.66430002451,
+      "elapsed_ms": 54619.22330001835,
       "request_digest": "e40bb2f626060e4c91c058b1421be7fe27e5b85ad20220e86136622c175213e2",
-      "result_digest": "2cc0b91b7a6f9a4c90ca8aee32ea5cad2aa48db6d9bcd0f40ad19e3d91d8410b",
+      "result_digest": "317371dadc19f7ee3c2dc9efdd5d9d435774058cd4a7e562e580ce170de8b053",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 811.7942999815568,
-        "pool": 327.9164000414312,
-        "near_field_and_dispersion": 49430.59430003632,
-        "cloud_observation": 4817.870800034143,
-        "fire_explosion_damage_risk": 266.5624999208376
+        "source": 717.285200022161,
+        "pool": 481.8356999894604,
+        "near_field_and_dispersion": 48221.87660005875,
+        "cloud_observation": 4643.844400066882,
+        "fire_explosion_damage_risk": 259.38579998910427
       },
       "mass_ledger": {
         "released_kg": 2.1053319426559835e-05,
@@ -3990,17 +3990,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 21150.594900012948,
+      "elapsed_ms": 20679.948700009845,
       "request_digest": "3735d839ee2aafd311e9e921eefbbd9096d630a5b72993b8ba81aac8f2333651",
-      "result_digest": "0d9682ffc57e942754fde2bc774b3724676652d33f262f12d3167e978f7cc3fc",
+      "result_digest": "8c186a4b38abbc5ad0102f181e5f27fdf3241320f06d0be32b9fd35b4b1c2a40",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 713.9485999941826,
-        "pool": 132.38570000976324,
-        "near_field_and_dispersion": 19603.330499958247,
-        "cloud_observation": 399.5486000785604,
-        "fire_explosion_damage_risk": 71.18690002243966
+        "source": 730.595700093545,
+        "pool": 129.50699997600168,
+        "near_field_and_dispersion": 19138.52469995618,
+        "cloud_observation": 383.0529999686405,
+        "fire_explosion_damage_risk": 70.55060006678104
       },
       "mass_ledger": {
         "released_kg": 0.00040250847725729254,
@@ -4082,17 +4082,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 29650.627300026827,
+      "elapsed_ms": 29975.460300105624,
       "request_digest": "ac544293b19c76d6a304c5db5b6522baf61d6f957889eda2f32ec313877e8afd",
-      "result_digest": "bb9bb4ad3117fa3b214d51550643fd147cddc531cbbda73472293d335f92cbdc",
+      "result_digest": "07b3ae1c2c839da123c8b86a042cc1bd8869d84ae26f5416f90ed85a3c344151",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 724.3819000432268,
-        "pool": 326.9540999317542,
-        "near_field_and_dispersion": 22707.449299981818,
-        "cloud_observation": 5484.103700029664,
-        "fire_explosion_damage_risk": 132.45080003980547
+        "source": 749.03400009498,
+        "pool": 321.65420008823276,
+        "near_field_and_dispersion": 23149.013299960643,
+        "cloud_observation": 5375.5007000872865,
+        "fire_explosion_damage_risk": 133.4491999587044
       },
       "mass_ledger": {
         "released_kg": 3.164317187981656e-05,
@@ -4172,17 +4172,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3231.4674999797717,
+      "elapsed_ms": 3267.0925999991596,
       "request_digest": "62c522502383eef8f80b0a4383cef53709520ad1b89ac1de197e75861a8656cc",
-      "result_digest": "e200e2a55879891358e9a894d28cb3813eff6ac7b0fb4d008caf4ba2d4d294d9",
+      "result_digest": "a36bc5f2d114a5a851429d61a30983e65b08cc3b86a33f007a9670d4a5c1b743",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 714.5095000742003,
-        "pool": 368.2801000541076,
-        "near_field_and_dispersion": 1550.7015999173746,
-        "cloud_observation": 218.88219995889813,
-        "fire_explosion_damage_risk": 135.12540003284812
+        "source": 730.6015999056399,
+        "pool": 360.4832999408245,
+        "near_field_and_dispersion": 1551.1513999663293,
+        "cloud_observation": 220.78239999245852,
+        "fire_explosion_damage_risk": 160.68329999689013
       },
       "mass_ledger": {
         "released_kg": 0.0003164317187981657,
@@ -4262,17 +4262,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3576.896999962628,
+      "elapsed_ms": 3802.83259996213,
       "request_digest": "a53925880198adb9b8e0a882edd8ce1008429742b314dc1c728d8beb4de86935",
-      "result_digest": "5fa7b646a8f57e51146f1255d2c4111bfe54b07ccc54e8d6a9b0b530d431a1a5",
+      "result_digest": "e266d441b16dde2d520e0a0bec9bb68cbec1da141da7b337dbad2c840414c207",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 712.8752999706194,
-        "pool": 367.9820999968797,
-        "near_field_and_dispersion": 1880.2343000425026,
-        "cloud_observation": 246.00130005273968,
-        "fire_explosion_damage_risk": 134.73620009608567
+        "source": 728.2652999274433,
+        "pool": 364.1899999929592,
+        "near_field_and_dispersion": 2063.9966999879107,
+        "cloud_observation": 256.46039994899184,
+        "fire_explosion_damage_risk": 137.6844000769779
       },
       "mass_ledger": {
         "released_kg": 0.003164317187981658,
@@ -4352,17 +4352,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6975.625399965793,
+      "elapsed_ms": 7003.844600054435,
       "request_digest": "f6379e3698a765f69107a2911d57cc09535924e006dc4d79721c33f9f2f2efca",
-      "result_digest": "8b52f7b14500106132570d083d3b321c8d2cc7b9424819d5222abd6c765e2fe4",
+      "result_digest": "22c6d7f555b4fb7d560fe8ba867fdac7594af5f5711cd035a05145db938315c9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 716.5195998968557,
-        "pool": 129.53129992820323,
-        "near_field_and_dispersion": 5621.401600074023,
-        "cloud_observation": 220.98290000576526,
-        "fire_explosion_damage_risk": 69.61980008054525
+        "source": 732.4766999809071,
+        "pool": 129.49309998657554,
+        "near_field_and_dispersion": 5563.335799961351,
+        "cloud_observation": 246.37449998408556,
+        "fire_explosion_damage_risk": 82.65610004309565
       },
       "mass_ledger": {
         "released_kg": 0.03164317187981657,
@@ -4442,17 +4442,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 7893.031600047834,
+      "elapsed_ms": 8004.416099982336,
       "request_digest": "02831473ea20573fbc215c9afe0c9565c601a3f3c7aa0ea17f8ad850d30f5bc8",
-      "result_digest": "8b49e5a0c8a49330e0650ee2f70c97264248fbead3013d22b4d1db1afda6f92e",
+      "result_digest": "23356053a78803c2350d079650b5c6a06cfa47d6a4307ec095610f2d69de5ee0",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 721.5727999573573,
-        "pool": 140.56640001945198,
-        "near_field_and_dispersion": 6511.523199966177,
-        "cloud_observation": 235.99279997870326,
-        "fire_explosion_damage_risk": 67.86469998769462
+        "source": 752.5259000249207,
+        "pool": 147.53409998957068,
+        "near_field_and_dispersion": 6527.2246999666095,
+        "cloud_observation": 241.27990007400513,
+        "fire_explosion_damage_risk": 71.31679996382445
       },
       "mass_ledger": {
         "released_kg": 0.3164317187981657,
@@ -4532,17 +4532,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3270.6010999390855,
+      "elapsed_ms": 3277.242499985732,
       "request_digest": "430cbe4eef148d21cefee097420e644987b353dcef26aa2e5536cbbe5d7f76ef",
-      "result_digest": "669523b9f3d56ffe5cc83fdfad78cd0c0867070b704e53bd4833cf506d418673",
+      "result_digest": "7a7bd2bb1799fe75a9b5b6a2de75402ed52011f8ba9c85a247886fe0b9597c2a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 719.2931000608951,
-        "pool": 368.7358000315726,
-        "near_field_and_dispersion": 1580.3415999980643,
-        "cloud_observation": 224.93550006765872,
-        "fire_explosion_damage_risk": 134.63759992737323
+        "source": 723.4403999755159,
+        "pool": 379.76669997442514,
+        "near_field_and_dispersion": 1574.1731999441981,
+        "cloud_observation": 223.41959993354976,
+        "fire_explosion_damage_risk": 134.14300000295043
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -4622,17 +4622,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3255.380199989304,
+      "elapsed_ms": 3228.571599931456,
       "request_digest": "3d0f119d262a0f42bbc5faa3a66379ed4cd36ebea196185c95c78aa56e7df4e3",
-      "result_digest": "45f25dc189534289675a9bfd6aa4e2d6e0bf15cc42616c0e8e534e84fbc75fc8",
+      "result_digest": "fecf5e4dc769939052b1131c87a872d6a3d60e8d1b2f007d41267ba257ee3aa5",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "source": 731.0699999798089,
-        "pool": 367.5383999943733,
-        "near_field_and_dispersion": 1563.3673999691382,
-        "cloud_observation": 215.30989999882877,
-        "fire_explosion_damage_risk": 134.13369993213564
+        "source": 717.6453999709338,
+        "pool": 355.5684000020847,
+        "near_field_and_dispersion": 1556.377400062047,
+        "cloud_observation": 223.78820006269962,
+        "fire_explosion_damage_risk": 138.38359992951155
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -4721,15 +4721,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6618.540800060146,
+      "elapsed_ms": 6422.490200027823,
       "request_digest": "d79e6fbbe9ebb27460c1b3b754b95898c7bbfb1897b8133bedadfae03af31738",
-      "result_digest": "17206e6bc51cbcde8bda0916b02bc6101c67a5980f36a7d913d570d67f1dd484",
+      "result_digest": "d85fa1ef4d66ccf984b083c189a4a7f86d51f1de5e25de8a0edd8880bb12aaff",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "endpoint_a": 3242.024000035599,
-        "endpoint_b": 3375.153600005433,
-        "endpoint_aggregation": 6618.137500016019
+        "endpoint_a": 3171.268100035377,
+        "endpoint_b": 3249.8666999163106,
+        "endpoint_aggregation": 6422.080299933441
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -4818,15 +4818,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6495.188799919561,
+      "elapsed_ms": 6620.979799889028,
       "request_digest": "76da7d0e7799e6b66a717260a00fabd6a2f4d9c2a56486741dd70be3313001f5",
-      "result_digest": "ba0c8725df0c3830a3f6dea29cef39075fbc02abc839ca897a693e623774d995",
+      "result_digest": "ee29739def58da581c2ef4857cec592d7a3df966544d8b4b5843a25b2be9e9bf",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
       "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
       "stage_elapsed_ms": {
-        "endpoint_a": 3212.60860003531,
-        "endpoint_b": 3281.160199898295,
-        "endpoint_aggregation": 6494.706499972381
+        "endpoint_a": 3257.484000059776,
+        "endpoint_b": 3362.1067999629304,
+        "endpoint_aggregation": 6620.5348999938
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -12293,17 +12293,17 @@
     "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
     "worker_sha256": "f79a8840e7e53e03810438f626caad161583f7a3d49976973b0dd4d99c5b54ac",
     "adapter_source_digest": "8197a8ec40d9962bab0d371ea601c6adbbb39edd79223e6e4906f78f45fc1562",
-    "elapsed_ms": 185.7062999624759,
+    "elapsed_ms": 198.49209999665618,
     "physical_validation_claim": false
   },
   "timing": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 1516.4075000211596,
-    "case_median_ms": 4122.312250023242,
-    "case_max_ms": 65669.72919995897,
-    "case_p95_ms": 52022.6587500248,
-    "case_p99_ms": 63438.94427297403,
-    "campaign_elapsed_ms": 265840.9273000434,
+    "case_min_ms": 1485.906400019303,
+    "case_median_ms": 4168.114149942994,
+    "case_max_ms": 64603.106800001115,
+    "case_p95_ms": 50922.65885003139,
+    "case_p99_ms": 62306.81359500507,
+    "campaign_elapsed_ms": 262861.83980002534,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "semantics": {

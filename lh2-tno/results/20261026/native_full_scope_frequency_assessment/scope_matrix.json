@@ -191,7 +191,34 @@
     ],
     "all_requested_families_declared": true
   },
-  "provider_worklist_alignment": null,
+  "provider_worklist_alignment": {
+    "schema": "prism.accident_scenario_worklist_alignment.v1",
+    "status": "ALIGNED",
+    "worklist_event_count": 24,
+    "campaign_event_count": 24,
+    "aligned_event_count": 24,
+    "missing_event_ids": [],
+    "duplicate_event_ids": [],
+    "empty_family_item_ids": [],
+    "unknown_family_item_ids": [],
+    "primary_family_mismatches": [],
+    "extra_campaign_event_ids": [],
+    "primary_family_counts": {
+      "inventory_depletion": 1,
+      "inventory_over_600s": 1,
+      "pipe_hole": 5,
+      "pump_hole": 2,
+      "reliquefier_hole": 1,
+      "two_sided_rupture": 2,
+      "valve_hole": 5,
+      "vaporizer_hole": 1,
+      "vent_hole": 1,
+      "vessel_hole": 5
+    },
+    "blocking_reasons": [],
+    "frequency_inference_performed": false,
+    "provider_packet_created": false
+  },
   "rows": [
     {
       "family": "vessel_hole",

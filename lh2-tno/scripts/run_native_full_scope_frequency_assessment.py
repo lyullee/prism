@@ -31,6 +31,7 @@ from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.frequency import FrequencyEvent, FrequencyPlan, generate_events  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
+from lh2_tno.provider_worklist import build_provider_release_worklist  # noqa: E402
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
 
 
@@ -152,6 +153,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     events = generate_events(facility, campaign.frequency_plan)
     if len(events) != len(campaign.event_routes):
         raise ValueError("campaign route count does not match generated frequency events")
+    provider_worklist = build_provider_release_worklist(
+        manifest,
+        campaign.frequency_plan,
+    )
 
     started = time.perf_counter()
     result = ResearchPipeline(
@@ -164,6 +169,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         result,
         manifest,
         required_families=MAJOR_ACCIDENT_FAMILIES,
+        provider_worklist=provider_worklist,
     )
     scenarios = _frequency_scenarios(events)
     assessment = build_facility_assessment(
@@ -196,6 +202,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "risk_atom_count": len(result.get("risk_atoms", [])),
         "frequency_checks": _event_frequency_checks(result),
         "frequency_scenario_count": len(assessment.get("frequency_uncertainty", {}).get("scenarios", [])),
+        "provider_worklist_event_count": provider_worklist.get("generated_event_count", 0),
+        "provider_worklist_packet_count": provider_worklist.get("provider_packet_count", 0),
+        "provider_worklist_status": provider_worklist.get("status"),
+        "provider_worklist_alignment_status": scope_matrix.get(
+            "provider_worklist_alignment", {}
+        ).get("status"),
         "conditional_diagnostic_facility_risk_available": assessment.get(
             "conditional_diagnostic_facility_risk_available"
         ),
@@ -233,6 +245,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "frequency_plan.json", campaign.frequency_plan.model_dump(mode="json"))
     _save(output / "campaign.json", campaign.model_dump(mode="json"))
     _save(output / "campaign_result.json", result)
+    _save(output / "provider_worklist.json", provider_worklist)
     _save(output / "scope_matrix.json", scope_matrix)
     _save(
         output / "frequency_scenarios.json",
