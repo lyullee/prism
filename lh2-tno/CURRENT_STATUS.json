@@ -3014,7 +3014,7 @@
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 4 blockers; facility case packet coverage is 0/34 and remains fail-closed",
   "ijhe_completion_audit_latest_packet_subset_consumed": true,
   "ijhe_completion_audit_latest_full_campaign_packet_consumed": false,
-  "full_portable_test_count_latest": 556,
+  "full_portable_test_count_latest": 558,
   "full_portable_test_status_latest": "556 passed",
   "facility_evidence_request_case_level_implemented": true,
   "facility_evidence_request_case_level_record": "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json",
