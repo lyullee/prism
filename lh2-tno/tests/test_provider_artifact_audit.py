@@ -1,0 +1,43 @@
+import json
+
+from lh2_tno.provider_artifact_audit import audit_provider_artifact_root
+
+
+def test_provider_artifact_audit_keeps_diagnostic_packets_unqualified(tmp_path):
+    (tmp_path / "equipment" ).mkdir()
+    (tmp_path / "equipment" / "provider_response.json").write_text(
+        json.dumps({"ok": True, "physical_validation_claim": False}), encoding="utf-8"
+    )
+    (tmp_path / "equipment" / "verification.json").write_text(
+        json.dumps({"facility_total_risk_withheld": True}), encoding="utf-8"
+    )
+
+    report = audit_provider_artifact_root(tmp_path)
+
+    assert report["status"] == "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY"
+    assert report["provider_response_count"] == 1
+    assert report["qualification_artifact_count"] == 0
+    assert report["physical_validation_artifact_count"] == 0
+    assert report["complete_facility_qra_artifact_count"] == 0
+    assert report["promotion_policy"]["frequency_assigned"] is False
+
+
+def test_provider_artifact_audit_detects_qualification_record(tmp_path):
+    (tmp_path / "provider_response.json").write_text(
+        json.dumps({
+            "provider_qualification": {
+                "schema_version": "prism.provider_qualification_evidence.v1",
+                "status": "qualified_actual",
+                "evidence_id": "evidence-1",
+            },
+            "physical_validation_claim": True,
+            "complete_facility_qra_claim": True,
+        }), encoding="utf-8"
+    )
+
+    report = audit_provider_artifact_root(tmp_path)
+
+    assert report["qualification_artifact_count"] == 1
+    assert report["physical_validation_artifact_count"] == 1
+    assert report["complete_facility_qra_artifact_count"] == 1
+    assert report["status"] == "ARTIFACTS_REQUIRE_PRISM_RECONCILIATION"

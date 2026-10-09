@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.provider_artifact_audit_summary.v1",
+  "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+  "source_kind": "외부_LH2_디지털트윈_출력_아카이브",
+  "artifact_count": 84,
+  "provider_response_count": 2,
+  "verification_artifact_count": 12,
+  "qualification_artifact_count": 0,
+  "physical_validation_artifact_count": 0,
+  "complete_facility_qra_artifact_count": 0,
+  "diagnostic_artifact_count": 84,
+  "artifact_kind_counts": {
+    "campaign_result": 14,
+    "other_json": 56,
+    "provider_response": 2,
+    "verification": 12
+  },
+  "blocking_reasons": [
+    "no prism.provider_qualification_evidence.v1 record was found",
+    "no artifact claims independent physical validation",
+    "no artifact claims a complete facility QRA"
+  ],
+  "promotion_policy": {
+    "frequency_assigned": false,
+    "provider_release_packet_promoted": false,
+    "physical_validation_promoted": false,
+    "facility_qra_promoted": false,
+    "qualification_requires_separate_exact_digest_bound_evidence": true
+  },
+  "interpretation": "외부 출력은 provider response와 verification 자료를 포함하지만 qualification sidecar, 독립 물리검증, 완전 시설 QRA 주장이 발견되지 않았다. 따라서 현재 PRISM에서는 진단 근거로만 보존하고 빈도·provider release·시설 IR/F-N을 승격하지 않는다.",
+  "source_audit_record": "results/20261020/provider_artifact_audit_external.json"
+}

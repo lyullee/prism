@@ -2420,8 +2420,8 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 492,
-  "full_portable_test_status": "492 passed",
+  "full_portable_test_count": 494,
+  "full_portable_test_status": "494 passed",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -2555,5 +2555,17 @@
     "transfer-valve-01": "PARTIAL",
     "two-sided-rupture-pipe-01": "PARTIAL",
     "vertical-handoff-terminal-pipe-01": "PARTIAL"
-  }
+  },
+  "inspection_center_scenario_reaudit_record": "results/20261020/inspection_center_scenario_evidence_reaudit.json",
+  "inspection_center_scenario_reaudit_summary": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
+  "inspection_center_scenario_reaudit_status": "SCREENING_EVIDENCE_ONLY; 52 records across 3 CSV files; 41 outdoor candidates and 11 outside declared scope",
+  "inspection_center_scenario_reaudit_frequency_applied": false,
+  "inspection_center_scenario_reaudit_sensor_frequency_learning_used": false,
+  "inspection_center_scenario_reaudit_facility_qra_claim": false,
+  "external_provider_artifact_audit_record": "results/20261020/provider_artifact_audit_external.json",
+  "external_provider_artifact_audit_summary": "examples/provider_artifact_audit_external_summary.json",
+  "external_provider_artifact_audit_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY; 84 JSON artifacts, 0 qualification records, 0 independent physical-validation claims, 0 complete-facility-QRA claims",
+  "external_provider_artifact_audit_qualification_count": 0,
+  "external_provider_artifact_audit_physical_validation_count": 0,
+  "external_provider_artifact_audit_facility_qra_count": 0
 }
