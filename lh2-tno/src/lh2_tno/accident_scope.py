@@ -119,6 +119,26 @@ def _status(case_rows: list[dict[str, Any]], request_count: int) -> str:
     return "UNCOMPUTED"
 
 
+def _conditional_status(case_rows: list[dict[str, Any]], request_count: int) -> str:
+    """Classify numerical execution while keeping provider qualification separate.
+
+    ``EXECUTED_OPERATOR_LIMITED`` and ``EXECUTED_DOMAIN_INCOMPLETE`` have a
+    numerical result, but they are not qualified facility evidence.  The
+    strict status above therefore remains ``PARTIAL``; this second status says
+    whether the consequence chain produced a number for every case.
+    """
+    if not case_rows:
+        return "UNCOMPUTED" if request_count == 0 else "NO_CASE_EXECUTED"
+    statuses = {str(row.get("status")) for row in case_rows}
+    if all(status.startswith("EXECUTED") for status in statuses):
+        return "EXECUTED"
+    if any(status.startswith("EXECUTED") for status in statuses):
+        return "PARTIAL"
+    if statuses == {"FAILED"}:
+        return "FAILED"
+    return "UNCOMPUTED"
+
+
 def build_accident_scope_matrix(
     campaign: RiskCampaign,
     result: dict[str, Any],
@@ -214,10 +234,17 @@ def build_accident_scope_matrix(
             status = "UNCOMPUTED" if not family_cases else "PARTIAL"
         else:
             status = _status(family_cases, request_count)
+        conditional_status = _conditional_status(family_cases, request_count)
+        conditional_executed_case_count = sum(
+            str(case.get("status", "")).startswith("EXECUTED") for case in family_cases
+        )
         rows.append({
             "family": family,
             "scenario_definition": scenario_definition(family),
             "status": status,
+            "conditional_status": (
+                "NOT_APPLICABLE" if status == "NOT_APPLICABLE" else conditional_status
+            ),
             "event_ids": event_ids,
             "generated_event_count": len(event_ids),
             "applicability": "NOT_APPLICABLE" if not declared_component_ids else "APPLICABLE",
@@ -234,6 +261,8 @@ def build_accident_scope_matrix(
             "uncomputed_branch_count": uncomputed_branch_count,
             "case_count": len(family_cases),
             "executed_case_count": sum(str(case.get("status", "")).startswith("EXECUTED") for case in family_cases),
+            "conditional_executed_case_count": conditional_executed_case_count,
+            "conditional_uncomputed_case_count": len(family_cases) - conditional_executed_case_count,
             "fully_validated_case_count": sum(case.get("status") == "EXECUTED" for case in family_cases),
             "operator_limited_case_count": sum(case.get("status") == "EXECUTED_OPERATOR_LIMITED" for case in family_cases),
             "domain_incomplete_case_count": sum(case.get("status") == "EXECUTED_DOMAIN_INCOMPLETE" for case in family_cases),
@@ -244,11 +273,14 @@ def build_accident_scope_matrix(
         })
 
     blocking: list[str] = []
+    conditional_blocking: list[str] = []
     if audit["status"] != "EXECUTABLE":
         blocking.append("equipment manifest is not executable")
     for row in rows:
         if row["status"] not in {"EXECUTED", "NOT_APPLICABLE"}:
             blocking.append(f"{row['family']}: {row['status']}")
+        if row["conditional_status"] not in {"EXECUTED", "NOT_APPLICABLE"}:
+            conditional_blocking.append(f"{row['family']}: {row['conditional_status']}")
     if result.get("total_facility_annual_ir_low_high") is None:
         blocking.append("campaign does not provide total facility annual IR")
     if worklist_alignment is not None and worklist_alignment["status"] != "ALIGNED":
@@ -278,6 +310,8 @@ def build_accident_scope_matrix(
         "declared_scope_numerically_complete": all(
             row["status"] in {"EXECUTED", "NOT_APPLICABLE"} for row in rows
         ),
+        "conditional_chain_complete": not conditional_blocking,
+        "conditional_chain_blocking_reasons": list(dict.fromkeys(conditional_blocking)),
         "facility_total_risk_available": result.get("total_facility_annual_ir_low_high") is not None,
         "matrix_complete": not blocking,
         "blocking_reasons": list(dict.fromkeys(blocking)),

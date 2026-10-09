@@ -2005,5 +2005,11 @@
   ],
   "valve_provider_campaign_failed_cases": 0,
   "valve_provider_campaign_retry_record": "results/20261022/valve_area_0.01_retry/campaign_result.json",
-  "valve_provider_campaign_retry_timeout_s": 360.0
+  "valve_provider_campaign_retry_timeout_s": 360.0,
+  "scope_matrix_conditional_chain_complete": false,
+  "scope_matrix_conditional_blocking_reasons": [
+    "inventory_depletion: PARTIAL"
+  ],
+  "scope_matrix_conditional_uncomputed_case_count": 5,
+  "scope_matrix_conditional_status_policy": "Numerical execution and facility qualification are reported separately; operator-limited cases never open facility IR/F-N."
 }

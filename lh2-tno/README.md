@@ -1115,3 +1115,5 @@ python scripts/validate_equipment_campaign.py `
 이 통합은 밸브 모델을 별도 애드온으로 분리하지 않고 같은 PRISM 시설 원장에 선택형 외부 방출 경계로 연결한 것이다. 그러나 현재 패킷은 합성·스크리닝 자료이고 provider 자격·독립 물리검증·완전한 사고군이 없으므로 시설 전체 IR/F-N은 계속 차단된다. 자세한 내용은 [밸브 방출 패킷 시설 결합 기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)과 [IJHE 완료 감사](results/20261021/ijhe_completion_audit_valve_transfer_line_replacement.json)를 참조한다.
 
 `validate_valve_campaign.py --area-bin AREA_0.01% --timeout-s 360`처럼 제한시간 초과 사례만 선택 재실행할 수 있다. 이 재시도 후 밸브 10개 사례가 모두 계산됐지만 모두 `EXECUTED_OPERATOR_LIMITED`이며, 시설 원장은 [`repaired ledger`](results/20261022/native_campaign_with_repaired_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json)에서 312개 위험 원자로 갱신됐다. 제한시간 개선은 계산 누락을 줄인 것이고 provider 자격·물리검증·시설 전체 QRA 승격을 의미하지 않는다.
+
+사고범위 표의 `conditional_status`/`conditional_chain_complete`는 수치 계산 완료 여부를 별도로 보여준다. 운전자 제한 사례는 조건부 숫자 계산으로 세지만 엄격한 `status`/`matrix_complete`는 계속 `PARTIAL`로 유지한다. 현재 조건부 범위에도 재고 소진 계열의 기존 5개 미계산 분기가 남아 있다.

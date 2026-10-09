@@ -2646,5 +2646,12 @@
     "facility_ir_fn_available"
   ],
   "valve_provider_campaign_retry_record": "results/20261022/valve_area_0.01_retry/campaign_result.json",
-  "valve_provider_campaign_retry_timeout_s": 360.0
+  "valve_provider_campaign_retry_timeout_s": 360.0,
+  "scope_matrix_latest_conditional_chain_complete": false,
+  "scope_matrix_latest_conditional_blocking_reasons": [
+    "inventory_depletion: PARTIAL"
+  ],
+  "scope_matrix_latest_conditional_uncomputed_case_count": 5,
+  "scope_matrix_conditional_status_policy": "EXECUTED_OPERATOR_LIMITED counts as numerical chain execution but never as qualified facility execution; strict matrix_complete remains fail-closed.",
+  "conditional_scope_audit_record": "results/20261022/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_repaired_merged_scope_matrix.json"
 }

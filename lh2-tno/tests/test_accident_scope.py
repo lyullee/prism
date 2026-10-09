@@ -55,6 +55,8 @@ def test_scope_matrix_marks_generated_and_missing_accident_families_explicitly()
 
     rows = {row["family"]: row for row in matrix["rows"]}
     assert rows["vessel_hole"]["status"] == "PARTIAL"
+    assert rows["vessel_hole"]["conditional_status"] == "PARTIAL"
+    assert rows["vessel_hole"]["conditional_executed_case_count"] == 1
     assert rows["vessel_hole"]["generated_event_count"] == 5
     assert rows["vessel_hole"]["operator_limited_case_count"] == 1
     assert rows["pipe_hole"]["status"] == "PARTIAL"
@@ -62,6 +64,7 @@ def test_scope_matrix_marks_generated_and_missing_accident_families_explicitly()
     assert rows["pipe_hole"]["uncomputed_branch_count"] == 5
     assert rows["two_sided_rupture"]["status"] == "NO_EVENT_GENERATED"
     assert matrix["matrix_complete"] is False
+    assert matrix["conditional_chain_complete"] is False
     assert matrix["facility_total_risk_available"] is False
     assert any("two_sided_rupture: NO_EVENT_GENERATED" in reason for reason in matrix["blocking_reasons"])
     assert all(row["frequency_rows_are_not_additive_across_families"] for row in matrix["rows"])

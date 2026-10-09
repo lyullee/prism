@@ -30,6 +30,53 @@ def _status(rows: Sequence[Mapping[str, Any]]) -> str:
     return "PARTIAL"
 
 
+def _conditional_status(rows: Sequence[Mapping[str, Any]]) -> str:
+    """Merge numerical execution status without promoting provider evidence."""
+    statuses = set()
+    for row in rows:
+        if int(row.get("generated_event_count", 0) or 0) == 0:
+            # A disjoint source can legitimately have no event for a family;
+            # that source must not make another campaign's executed family
+            # look numerically incomplete.
+            continue
+        if row.get("conditional_status") is not None:
+            statuses.add(str(row["conditional_status"]))
+            continue
+        # Matrices written before the conditional-status field can still be
+        # classified from their case accounting.  Operator-limited rows count
+        # as numerically executed here, while strict provider status remains
+        # unchanged in the merged ``status`` field.
+        cases = int(row.get("case_count", 0) or 0)
+        executed = int(
+            row.get(
+                "conditional_executed_case_count",
+                int(row.get("fully_validated_case_count", 0) or 0)
+                + int(row.get("operator_limited_case_count", 0) or 0)
+                + int(row.get("domain_incomplete_case_count", 0) or 0),
+            )
+            or 0
+        )
+        if cases > 0 and executed == cases:
+            statuses.add("EXECUTED")
+        elif executed > 0:
+            statuses.add("PARTIAL")
+        else:
+            statuses.add(str(row.get("status", "UNCOMPUTED")))
+    generated = sum(int(row.get("generated_event_count", 0) or 0) for row in rows)
+    if not rows:
+        return "NO_EVENT_GENERATED"
+    effective = statuses - {"NOT_APPLICABLE"}
+    if generated == 0 and not effective:
+        return "NOT_APPLICABLE"
+    if generated == 0:
+        return "NO_EVENT_GENERATED"
+    if effective == {"EXECUTED"}:
+        return "EXECUTED"
+    if effective == {"FAILED"}:
+        return "FAILED"
+    return "PARTIAL"
+
+
 def merge_scope_matrices(
     matrices: Sequence[Mapping[str, Any]],
     *,
@@ -70,6 +117,7 @@ def merge_scope_matrices(
 
     merged_rows: list[dict[str, Any]] = []
     blocking: list[str] = []
+    conditional_blocking: list[str] = []
     for family in families:
         source_rows = by_family[family]
         event_ids: list[str] = []
@@ -78,10 +126,23 @@ def merge_scope_matrices(
             if isinstance(values, Sequence) and not isinstance(values, (str, bytes)):
                 event_ids.extend(str(value) for value in values)
         status = _status(source_rows)
+        conditional_status = _conditional_status(source_rows)
         generated = sum(int(row.get("generated_event_count", 0) or 0) for row in source_rows)
         case_count = sum(int(row.get("case_count", 0) or 0) for row in source_rows)
         executed_count = sum(int(row.get("executed_case_count", 0) or 0) for row in source_rows)
         uncomputed_count = sum(int(row.get("uncomputed_case_count", 0) or 0) for row in source_rows)
+        conditional_executed_count = sum(
+            int(
+                row.get(
+                    "conditional_executed_case_count",
+                    int(row.get("fully_validated_case_count", 0) or 0)
+                    + int(row.get("operator_limited_case_count", 0) or 0)
+                    + int(row.get("domain_incomplete_case_count", 0) or 0),
+                )
+                or 0
+            )
+            for row in source_rows
+        )
         frequency = sum(
             float(row.get("generated_initiation_frequency_per_year", 0.0) or 0.0)
             for row in source_rows
@@ -89,11 +150,14 @@ def merge_scope_matrices(
         merged = {
             "family": family,
             "status": status,
+            "conditional_status": conditional_status,
             "source_matrix_count": len(source_rows),
             "event_ids": sorted(dict.fromkeys(event_ids)),
             "generated_event_count": generated,
             "case_count": case_count,
             "executed_case_count": executed_count,
+            "conditional_executed_case_count": conditional_executed_count,
+            "conditional_uncomputed_case_count": max(0, case_count - conditional_executed_count),
             "uncomputed_case_count": uncomputed_count,
             "generated_initiation_frequency_per_year": frequency,
             "fully_validated_case_count": sum(
@@ -111,6 +175,8 @@ def merge_scope_matrices(
         merged_rows.append(merged)
         if status not in {"EXECUTED", "NOT_APPLICABLE"}:
             blocking.append(f"{family}: {status}")
+        if conditional_status not in {"EXECUTED", "NOT_APPLICABLE"}:
+            conditional_blocking.append(f"{family}: {conditional_status}")
 
     provider_alignment = None
     if alignment_record is not None:
@@ -135,6 +201,8 @@ def merge_scope_matrices(
         "declared_scope_numerically_complete": all(
             row["status"] in {"EXECUTED", "NOT_APPLICABLE"} for row in merged_rows
         ),
+        "conditional_chain_complete": not conditional_blocking,
+        "conditional_chain_blocking_reasons": list(dict.fromkeys(conditional_blocking)),
         "facility_total_risk_available": False,
         "matrix_complete": not blocking,
         "blocking_reasons": list(dict.fromkeys(blocking)),
