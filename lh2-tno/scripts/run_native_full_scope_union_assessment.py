@@ -208,7 +208,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         namespace=namespace,
         asset_id="vertical-handoff-vent",
         component_id="vertical-handoff-terminal-pipe-01",
-        receptor_map={"worker-01": "worker-01"},
+        receptor_map={
+            "worker-01": "worker-01",
+            "near_worker": "worker-01",
+            "downwind_worker": "worker-01",
+            "side_worker": "worker-01",
+            "distant_worker": "worker-01",
+        },
     )
     vertical_scope = _rebind_vertical_scope_matrix(
         vertical_scope_source,
@@ -301,6 +307,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "conditional_diagnostic_facility_risk_available": assessment[
             "conditional_diagnostic_facility_risk_available"
         ],
+        "population_accounting_status": assessment.get("population_accounting", {}).get(
+            "status"
+        ),
+        "population_accounting_mismatch_count": len(
+            assessment.get("population_accounting", {}).get(
+                "mismatched_receptor_ids", {}
+            )
+        ),
         "conditional_diagnostic_facility_annual_ir_low_high": assessment[
             "conditional_diagnostic_facility_annual_ir_low_high"
         ],

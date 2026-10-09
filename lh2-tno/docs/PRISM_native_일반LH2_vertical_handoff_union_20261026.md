@@ -31,13 +31,14 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --current-status CURRENT_STATUS.json `
   --pool-record results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json `
   --equipment-audit results/20261009/validation_evidence/equipment_validation_audit_live.json `
-  --native-contract examples/diagnostic_adapter_registry_audit.json `
+  --native-contract results/20261018/lh2dt_native_contract_audit.json `
   --external-sweep examples/center_lh2_external_sweep_audit.json `
   --ijhe-audit-source results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json `
   --provider-worklist results/20261026/native_full_scope_frequency_assessment/provider_worklist.json `
   --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
   --vertical-handoff-result results/20261020/vertical_vent_all_bins/verification.json `
-  --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json
+  --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
+  --native-full-bore-result results/20261022/native_dynamic_pipe_full_bore_current/verification.json
 ```
 
 ## 연결 결과
@@ -60,7 +61,7 @@ python scripts/bind_native_full_scope_union_evidence.py `
 
 수직 결과의 event ID, provider packet identity, 설비 ID와 수용점 ID를 `generic-lh2-near-receptor-diagnostic/vertical-handoff/...` namespace로 함께 바꿨다. 사고범위 표에서도 `vertical_handoff`가 `NO_EVENT_GENERATED`에서 `PARTIAL`로 바뀌고, 조건부 chain은 10개 case 모두 숫자를 갖는다. 그러나 source history가 synthetic/operator-limited이고 전체 시설의 다른 사고군도 partial이므로 시설 전체 IR/F-N과 QRA gate는 계속 닫혀 있다.
 
-재고 소진 결과는 `generic-lh2-full-scope-example/inventory-depletion/...`를 현재 시설 namespace로 옮겼다. 원래 `D-3ms-west`, `D-4ms-west`였던 기상·인구 조건 ID도 namespace 아래로 분리해 기존 native 조건과 충돌하지 않게 했고, 네 개의 synthetic 수용점을 현재 `worker-01`로 명시적으로 합쳤다. 이 추가 branch의 10개 case는 모두 `inventory_depletion`으로 종료되며, 병합 사고군 표에서는 기존 native 재고 소진 branch와 합쳐져 `inventory_depletion` 23개 event·28개 case·조건부 28개 실행으로 보인다. 이는 기존 partial 사고군의 수치 연결을 넓히는 진단 회계이지, 현장 배관 빈도나 qualified packet을 새로 만든 것이 아니다.
+재고 소진 결과는 `generic-lh2-full-scope-example/inventory-depletion/...`를 현재 시설 namespace로 옮겼다. 원래 `D-3ms-west`, `D-4ms-west`였던 기상·인구 조건 ID도 namespace 아래로 분리해 기존 native 조건과 충돌하지 않게 했고, 네 개의 synthetic 수용점을 현재 `worker-01`로 명시적으로 합쳤다. 수직 handoff branch도 같은 방식으로 조건 ID와 인구 수용점을 namespace·receptor map에 맞춰 변환했으며, 현재 population ledger는 `RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC`이고 mismatch가 0개다. 이 추가 branch의 10개 case는 모두 `inventory_depletion`으로 종료되며, 병합 사고군 표에서는 기존 native 재고 소진 branch와 합쳐져 `inventory_depletion` 23개 event·28개 case·조건부 28개 실행으로 보인다. 이는 기존 partial 사고군의 수치 연결을 넓히는 진단 회계이지, 현장 배관 빈도나 qualified packet을 새로 만든 것이 아니다.
 
 빈도는 수직 또는 재고 소진 결과에서 역산하지 않았다. 기존 문헌 시나리오에 `vertical-handoff-vent`와 `inventory-depletion-pipe` 자산을 `published`로 명시해 저장된 risk atom만 재가중했다. 따라서 이 union은 사고군 누락을 줄인 범위 회계와 조건부 진단이며 현장 빈도, qualified packet, 독립 물리검증, 1 Hz 신규 물리 계산을 주장하지 않는다.
 
@@ -75,7 +76,7 @@ python scripts/bind_native_full_scope_union_evidence.py `
 - `verification.json`: 병합 수·상태·제한 자동 검사
 - `validation_evidence_matrix.json`: 6개 근거 영역을 제한 상태로 묶은 통합 장부 (`FACILITY_QRA_WITHHELD`)
 - `realtime_cache_benchmark.json`: fresh physics와 동일 요청 cache 처리시간을 분리한 실행 기록
-- `ijhe_completion_audit.json`: 19개 검사 중 15개 PASS·4개 BLOCKED
+- `ijhe_completion_audit.json`: 20개 검사 중 16개 PASS·4개 BLOCKED. 기존 native finite full-bore pressure-equalization 진단은 `diagnostic_native_full_bore_chain`으로 연결되지만 diagnostic-only로 유지된다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
 cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,

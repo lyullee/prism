@@ -72,6 +72,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     facility_record["_record_path"] = str(output_dir / "facility_assessment.json")
     vertical = _with_record(args.vertical_handoff_result)
     realtime = _with_record(args.realtime_cache_benchmark)
+    native_full_bore = _with_record(args.native_full_bore_result)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -84,6 +85,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         vertical_handoff_result=vertical,
         validation_evidence_matrix=matrix,
         realtime_cache_benchmark=realtime,
+        native_full_bore_result=native_full_bore,
     )
 
     verification_path = output_dir / "verification.json"
@@ -143,6 +145,12 @@ def main() -> int:
     parser.add_argument("--diagnostic-adapter-registry", type=Path, required=True)
     parser.add_argument("--vertical-handoff-result", type=Path, required=True)
     parser.add_argument("--realtime-cache-benchmark", type=Path, required=True)
+    parser.add_argument(
+        "--native-full-bore-result",
+        type=Path,
+        default=None,
+        help="Optional native finite full-bore diagnostic record; remains diagnostic-only.",
+    )
     args = parser.parse_args()
     try:
         result = run(args)

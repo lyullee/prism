@@ -67,14 +67,14 @@
         "frequency inference",
         "facility QRA"
       ],
-      "binding_count": null,
-      "native_accident_export_component_count": null,
-      "diagnostic_adapter_contract_verified_count": null,
+      "binding_count": 8,
+      "native_accident_export_component_count": 7,
+      "diagnostic_adapter_contract_verified_count": 7,
       "source": {
         "label": "native external-model contract audit",
-        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\diagnostic_adapter_registry_audit.json",
-        "sha256": "95d528d07b5572dfde7f91a0320fa640f32039197545225f333ceb0214637270",
-        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED"
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261018\\lh2dt_native_contract_audit.json",
+        "sha256": "671c7b97783ebc7769b3fc6650814e3fbc47bd464afbf0e97aae687c810d6124",
+        "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND"
       },
       "physical_validation_claim": false,
       "full_chain_validation_claim": false
@@ -98,7 +98,7 @@
       "source": {
         "label": "facility assessment",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "sha256": "780d941aafd55c3593a64e5a0e286ce1df42e22a5699a56ec38d08e6302a2c5c",
+        "sha256": "2677c20b489b586054ef54435930bef89fba7f4947dda80ba1b6616ec31be9f8",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,
@@ -114,11 +114,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 19,
+      "check_count": 20,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "5e8d92c4e2f7033b7b8d7960ad56e66f3902d54fc4d3f1d86b4a20e4024a1f0d",
+        "sha256": "685c73886e489aa19936ea4f378d3fd381cc96f8e6d008c0ae978fb827e34c4c",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,

@@ -17,6 +17,8 @@
   "inventory_depletion_conditional_executed_case_count": 28,
   "inventory_depletion_operator_limited_case_count": 17,
   "conditional_diagnostic_facility_risk_available": true,
+  "population_accounting_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+  "population_accounting_mismatch_count": 0,
   "conditional_diagnostic_facility_annual_ir_low_high": {
     "worker-01": [
       4.6800000000000006e-05,
@@ -51,7 +53,7 @@
   "realtime_cache_benchmark_fresh_physics_elapsed_ms": 2731.322699924931,
   "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_audit_check_count": 19,
-  "ijhe_audit_pass_count": 15,
+  "ijhe_audit_check_count": 20,
+  "ijhe_audit_pass_count": 16,
   "ijhe_audit_blocked_count": 4
 }

@@ -75,60 +75,35 @@
   },
   "annual_condition_count": 5,
   "population_accounting": {
-    "status": "RECEPTOR_POPULATION_MISMATCH",
+    "status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
     "annual_condition_count": 5,
     "referenced_condition_count": 5,
     "referenced_condition_ids": [
-      "D-3ms-west",
-      "D-4ms-west",
       "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
       "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
       "synthetic-generic-worker-west-3ms"
     ],
     "missing_condition_ids": [],
     "missing_population_condition_ids": [],
-    "mismatched_receptor_ids": {
-      "D-3ms-west": {
-        "expected": [
-          "worker-01"
-        ],
-        "observed": [
-          "distant_worker",
-          "downwind_worker",
-          "near_worker",
-          "side_worker"
-        ]
-      },
-      "D-4ms-west": {
-        "expected": [
-          "worker-01"
-        ],
-        "observed": [
-          "distant_worker",
-          "downwind_worker",
-          "near_worker",
-          "side_worker"
-        ]
-      }
-    },
+    "mismatched_receptor_ids": {},
     "invalid_population_rows": {},
     "rebound_diagnostic_condition_ids": [
       "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-      "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west"
+      "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
     ],
-    "population_row_count": 11,
+    "population_row_count": 5,
     "population_receptor_ids": [
-      "distant_worker",
-      "downwind_worker",
-      "near_worker",
-      "side_worker",
       "worker-01"
     ],
     "population_provenance": {
-      "D-3ms-west": "synthetic annual condition partition; no site weather qualification",
-      "D-4ms-west": "synthetic annual condition partition; no site weather qualification",
       "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": "synthetic annual condition partition; no site weather qualification",
       "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": "synthetic annual condition partition; no site weather qualification",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
       "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
     },
     "receptor_ids": [
@@ -138,66 +113,6 @@
   "scenario_branch_accounting": {
     "status": "EXPLICIT_BRANCH_ACCOUNTING",
     "annual_conditions": {
-      "D-3ms-west": {
-        "annual_probability": 0.4,
-        "weather": {
-          "wind_speed_m_s": 3.0,
-          "wind_from_bearing_deg": 270.0,
-          "measurement_height_m": 10.0,
-          "roughness_m": 0.03,
-          "stability": "D",
-          "relative_humidity": 0.5
-        },
-        "provenance": "synthetic annual condition partition; no site weather qualification",
-        "event_count": 5,
-        "risk_atom_count": 20,
-        "conditional_weight_sum": 2.0,
-        "weighted_frequency_per_year": 8.288000000000002e-05,
-        "annual_condition_ids": [],
-        "release_branch_ids": [
-          "provider-vertical-handoff"
-        ],
-        "ignition_branches": [
-          "delayed_explosion",
-          "delayed_flash_fire",
-          "direct_fire",
-          "no_ignition"
-        ],
-        "scenario_families": [
-          "liquid_two_phase",
-          "pipe_hole"
-        ]
-      },
-      "D-4ms-west": {
-        "annual_probability": 0.6,
-        "weather": {
-          "wind_speed_m_s": 4.0,
-          "wind_from_bearing_deg": 270.0,
-          "measurement_height_m": 10.0,
-          "roughness_m": 0.03,
-          "stability": "D",
-          "relative_humidity": 0.5
-        },
-        "provenance": "synthetic annual condition partition; no site weather qualification",
-        "event_count": 5,
-        "risk_atom_count": 20,
-        "conditional_weight_sum": 3.0000000000000004,
-        "weighted_frequency_per_year": 0.00012432,
-        "annual_condition_ids": [],
-        "release_branch_ids": [
-          "provider-vertical-handoff"
-        ],
-        "ignition_branches": [
-          "delayed_explosion",
-          "delayed_flash_fire",
-          "direct_fire",
-          "no_ignition"
-        ],
-        "scenario_families": [
-          "liquid_two_phase",
-          "pipe_hole"
-        ]
-      },
       "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": {
         "annual_probability": 0.4,
         "weather": {
@@ -251,6 +166,66 @@
           "no_ignition"
         ],
         "scenario_families": []
+      },
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": {
+        "annual_probability": 0.4,
+        "weather": {
+          "wind_speed_m_s": 3.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "provenance": "synthetic annual condition partition; no site weather qualification",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "conditional_weight_sum": 2.0,
+        "weighted_frequency_per_year": 8.288000000000002e-05,
+        "annual_condition_ids": [],
+        "release_branch_ids": [
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "liquid_two_phase",
+          "pipe_hole"
+        ]
+      },
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": {
+        "annual_probability": 0.6,
+        "weather": {
+          "wind_speed_m_s": 4.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "provenance": "synthetic annual condition partition; no site weather qualification",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "conditional_weight_sum": 3.0000000000000004,
+        "weighted_frequency_per_year": 0.00012432,
+        "annual_condition_ids": [],
+        "release_branch_ids": [
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "liquid_two_phase",
+          "pipe_hole"
+        ]
       },
       "synthetic-generic-worker-west-3ms": {
         "annual_probability": 1.0,
@@ -354,8 +329,8 @@
         "conditional_weight_sum": 5.000000000000001,
         "weighted_frequency_per_year": 0.00020720000000000005,
         "annual_condition_ids": [
-          "D-3ms-west",
-          "D-4ms-west"
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
         ],
         "release_branch_ids": [],
         "ignition_branches": [
@@ -378,10 +353,10 @@
         "conditional_weight_sum": 2.448000000000001,
         "weighted_frequency_per_year": 0.0010108425600000002,
         "annual_condition_ids": [
-          "D-3ms-west",
-          "D-4ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "synthetic-generic-worker-west-3ms"
         ],
         "release_branch_ids": [
@@ -411,10 +386,10 @@
         "conditional_weight_sum": 3.6720000000000024,
         "weighted_frequency_per_year": 0.0015162638400000002,
         "annual_condition_ids": [
-          "D-3ms-west",
-          "D-4ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "synthetic-generic-worker-west-3ms"
         ],
         "release_branch_ids": [
@@ -443,10 +418,10 @@
         "conditional_weight_sum": 3.4000000000000017,
         "weighted_frequency_per_year": 0.0014039479999999995,
         "annual_condition_ids": [
-          "D-3ms-west",
-          "D-4ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "synthetic-generic-worker-west-3ms"
         ],
         "release_branch_ids": [
@@ -475,10 +450,10 @@
         "conditional_weight_sum": 24.479999999999993,
         "weighted_frequency_per_year": 0.010108425599999998,
         "annual_condition_ids": [
-          "D-3ms-west",
-          "D-4ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "synthetic-generic-worker-west-3ms"
         ],
         "release_branch_ids": [
@@ -1727,7 +1702,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -1777,7 +1752,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -1827,7 +1802,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -1877,7 +1852,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -1927,7 +1902,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -1977,7 +1952,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -2027,7 +2002,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -2077,7 +2052,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -2127,7 +2102,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -2177,7 +2152,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "status": "EXECUTED_OPERATOR_LIMITED",
         "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
         "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -2630,8 +2605,8 @@
     "overlapping_case_uncomputed_count": 29,
     "risk_atom_count": 176,
     "annual_condition_count": 5,
-    "population_status": "RECEPTOR_POPULATION_MISMATCH",
-    "population_row_count": 11,
+    "population_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+    "population_row_count": 5,
     "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
     "scenario_branch_cross_product_count": 20,
     "release_termination_inventory_summary": {
@@ -4591,84 +4566,6 @@
     ],
     "annual_conditions": [
       {
-        "id": "D-3ms-west",
-        "annual_probability": 0.4,
-        "weather": {
-          "wind_speed_m_s": 3.0,
-          "wind_from_bearing_deg": 270.0,
-          "measurement_height_m": 10.0,
-          "roughness_m": 0.03,
-          "stability": "D",
-          "relative_humidity": 0.5
-        },
-        "population": [
-          {
-            "receptor_id": "near_worker",
-            "persons": 20.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          },
-          {
-            "receptor_id": "downwind_worker",
-            "persons": 10.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          },
-          {
-            "receptor_id": "side_worker",
-            "persons": 10.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          },
-          {
-            "receptor_id": "distant_worker",
-            "persons": 10.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          }
-        ],
-        "provenance": "synthetic annual condition partition; no site weather qualification"
-      },
-      {
-        "id": "D-4ms-west",
-        "annual_probability": 0.6,
-        "weather": {
-          "wind_speed_m_s": 4.0,
-          "wind_from_bearing_deg": 270.0,
-          "measurement_height_m": 10.0,
-          "roughness_m": 0.03,
-          "stability": "D",
-          "relative_humidity": 0.5
-        },
-        "population": [
-          {
-            "receptor_id": "near_worker",
-            "persons": 20.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          },
-          {
-            "receptor_id": "downwind_worker",
-            "persons": 10.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          },
-          {
-            "receptor_id": "side_worker",
-            "persons": 10.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          },
-          {
-            "receptor_id": "distant_worker",
-            "persons": 10.0,
-            "presence_probability": 0.5,
-            "provenance": "synthetic disjoint outdoor groups; not field population"
-          }
-        ],
-        "provenance": "synthetic annual condition partition; no site weather qualification"
-      },
-      {
         "id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
         "annual_probability": 0.4,
         "weather": {
@@ -4737,6 +4634,72 @@
         }
       },
       {
+        "id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+        "annual_probability": 0.4,
+        "weather": {
+          "wind_speed_m_s": 3.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "population": [
+          {
+            "receptor_id": "worker-01",
+            "persons": 50.0,
+            "presence_probability": 0.5,
+            "provenance": "synthetic disjoint outdoor groups; not field population; many-to-one receptor rebind from downwind_worker; many-to-one receptor rebind from side_worker; many-to-one receptor rebind from distant_worker"
+          }
+        ],
+        "provenance": "synthetic annual condition partition; no site weather qualification",
+        "population_rebind": {
+          "status": "MANY_TO_ONE_DIAGNOSTIC",
+          "source_receptor_ids": [
+            "distant_worker",
+            "downwind_worker",
+            "near_worker",
+            "side_worker"
+          ],
+          "target_receptor_ids": [
+            "worker-01"
+          ]
+        }
+      },
+      {
+        "id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+        "annual_probability": 0.6,
+        "weather": {
+          "wind_speed_m_s": 4.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "population": [
+          {
+            "receptor_id": "worker-01",
+            "persons": 50.0,
+            "presence_probability": 0.5,
+            "provenance": "synthetic disjoint outdoor groups; not field population; many-to-one receptor rebind from downwind_worker; many-to-one receptor rebind from side_worker; many-to-one receptor rebind from distant_worker"
+          }
+        ],
+        "provenance": "synthetic annual condition partition; no site weather qualification",
+        "population_rebind": {
+          "status": "MANY_TO_ONE_DIAGNOSTIC",
+          "source_receptor_ids": [
+            "distant_worker",
+            "downwind_worker",
+            "near_worker",
+            "side_worker"
+          ],
+          "target_receptor_ids": [
+            "worker-01"
+          ]
+        }
+      },
+      {
         "id": "synthetic-generic-worker-west-3ms",
         "annual_probability": 1.0,
         "weather": {
@@ -4760,60 +4723,35 @@
     ],
     "annual_condition_count": 5,
     "population_accounting": {
-      "status": "RECEPTOR_POPULATION_MISMATCH",
+      "status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
       "annual_condition_count": 5,
       "referenced_condition_count": 5,
       "referenced_condition_ids": [
-        "D-3ms-west",
-        "D-4ms-west",
         "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
         "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "synthetic-generic-worker-west-3ms"
       ],
       "missing_condition_ids": [],
       "missing_population_condition_ids": [],
-      "mismatched_receptor_ids": {
-        "D-3ms-west": {
-          "expected": [
-            "worker-01"
-          ],
-          "observed": [
-            "distant_worker",
-            "downwind_worker",
-            "near_worker",
-            "side_worker"
-          ]
-        },
-        "D-4ms-west": {
-          "expected": [
-            "worker-01"
-          ],
-          "observed": [
-            "distant_worker",
-            "downwind_worker",
-            "near_worker",
-            "side_worker"
-          ]
-        }
-      },
+      "mismatched_receptor_ids": {},
       "invalid_population_rows": {},
       "rebound_diagnostic_condition_ids": [
         "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-        "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west"
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
       ],
-      "population_row_count": 11,
+      "population_row_count": 5,
       "population_receptor_ids": [
-        "distant_worker",
-        "downwind_worker",
-        "near_worker",
-        "side_worker",
         "worker-01"
       ],
       "population_provenance": {
-        "D-3ms-west": "synthetic annual condition partition; no site weather qualification",
-        "D-4ms-west": "synthetic annual condition partition; no site weather qualification",
         "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": "synthetic annual condition partition; no site weather qualification",
         "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": "synthetic annual condition partition; no site weather qualification",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": "synthetic annual condition partition; no site weather qualification",
         "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
       },
       "receptor_ids": [
@@ -4823,66 +4761,6 @@
     "scenario_branch_accounting": {
       "status": "EXPLICIT_BRANCH_ACCOUNTING",
       "annual_conditions": {
-        "D-3ms-west": {
-          "annual_probability": 0.4,
-          "weather": {
-            "wind_speed_m_s": 3.0,
-            "wind_from_bearing_deg": 270.0,
-            "measurement_height_m": 10.0,
-            "roughness_m": 0.03,
-            "stability": "D",
-            "relative_humidity": 0.5
-          },
-          "provenance": "synthetic annual condition partition; no site weather qualification",
-          "event_count": 5,
-          "risk_atom_count": 20,
-          "conditional_weight_sum": 2.0,
-          "weighted_frequency_per_year": 8.288000000000002e-05,
-          "annual_condition_ids": [],
-          "release_branch_ids": [
-            "provider-vertical-handoff"
-          ],
-          "ignition_branches": [
-            "delayed_explosion",
-            "delayed_flash_fire",
-            "direct_fire",
-            "no_ignition"
-          ],
-          "scenario_families": [
-            "liquid_two_phase",
-            "pipe_hole"
-          ]
-        },
-        "D-4ms-west": {
-          "annual_probability": 0.6,
-          "weather": {
-            "wind_speed_m_s": 4.0,
-            "wind_from_bearing_deg": 270.0,
-            "measurement_height_m": 10.0,
-            "roughness_m": 0.03,
-            "stability": "D",
-            "relative_humidity": 0.5
-          },
-          "provenance": "synthetic annual condition partition; no site weather qualification",
-          "event_count": 5,
-          "risk_atom_count": 20,
-          "conditional_weight_sum": 3.0000000000000004,
-          "weighted_frequency_per_year": 0.00012432,
-          "annual_condition_ids": [],
-          "release_branch_ids": [
-            "provider-vertical-handoff"
-          ],
-          "ignition_branches": [
-            "delayed_explosion",
-            "delayed_flash_fire",
-            "direct_fire",
-            "no_ignition"
-          ],
-          "scenario_families": [
-            "liquid_two_phase",
-            "pipe_hole"
-          ]
-        },
         "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": {
           "annual_probability": 0.4,
           "weather": {
@@ -4936,6 +4814,66 @@
             "no_ignition"
           ],
           "scenario_families": []
+        },
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": {
+          "annual_probability": 0.4,
+          "weather": {
+            "wind_speed_m_s": 3.0,
+            "wind_from_bearing_deg": 270.0,
+            "measurement_height_m": 10.0,
+            "roughness_m": 0.03,
+            "stability": "D",
+            "relative_humidity": 0.5
+          },
+          "provenance": "synthetic annual condition partition; no site weather qualification",
+          "event_count": 5,
+          "risk_atom_count": 20,
+          "conditional_weight_sum": 2.0,
+          "weighted_frequency_per_year": 8.288000000000002e-05,
+          "annual_condition_ids": [],
+          "release_branch_ids": [
+            "provider-vertical-handoff"
+          ],
+          "ignition_branches": [
+            "delayed_explosion",
+            "delayed_flash_fire",
+            "direct_fire",
+            "no_ignition"
+          ],
+          "scenario_families": [
+            "liquid_two_phase",
+            "pipe_hole"
+          ]
+        },
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": {
+          "annual_probability": 0.6,
+          "weather": {
+            "wind_speed_m_s": 4.0,
+            "wind_from_bearing_deg": 270.0,
+            "measurement_height_m": 10.0,
+            "roughness_m": 0.03,
+            "stability": "D",
+            "relative_humidity": 0.5
+          },
+          "provenance": "synthetic annual condition partition; no site weather qualification",
+          "event_count": 5,
+          "risk_atom_count": 20,
+          "conditional_weight_sum": 3.0000000000000004,
+          "weighted_frequency_per_year": 0.00012432,
+          "annual_condition_ids": [],
+          "release_branch_ids": [
+            "provider-vertical-handoff"
+          ],
+          "ignition_branches": [
+            "delayed_explosion",
+            "delayed_flash_fire",
+            "direct_fire",
+            "no_ignition"
+          ],
+          "scenario_families": [
+            "liquid_two_phase",
+            "pipe_hole"
+          ]
         },
         "synthetic-generic-worker-west-3ms": {
           "annual_probability": 1.0,
@@ -5039,8 +4977,8 @@
           "conditional_weight_sum": 5.000000000000001,
           "weighted_frequency_per_year": 0.00020720000000000005,
           "annual_condition_ids": [
-            "D-3ms-west",
-            "D-4ms-west"
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
           ],
           "release_branch_ids": [],
           "ignition_branches": [
@@ -5063,10 +5001,10 @@
           "conditional_weight_sum": 2.448000000000001,
           "weighted_frequency_per_year": 0.0010108425600000002,
           "annual_condition_ids": [
-            "D-3ms-west",
-            "D-4ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "synthetic-generic-worker-west-3ms"
           ],
           "release_branch_ids": [
@@ -5096,10 +5034,10 @@
           "conditional_weight_sum": 3.6720000000000024,
           "weighted_frequency_per_year": 0.0015162638400000002,
           "annual_condition_ids": [
-            "D-3ms-west",
-            "D-4ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "synthetic-generic-worker-west-3ms"
           ],
           "release_branch_ids": [
@@ -5128,10 +5066,10 @@
           "conditional_weight_sum": 3.4000000000000017,
           "weighted_frequency_per_year": 0.0014039479999999995,
           "annual_condition_ids": [
-            "D-3ms-west",
-            "D-4ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "synthetic-generic-worker-west-3ms"
           ],
           "release_branch_ids": [
@@ -5160,10 +5098,10 @@
           "conditional_weight_sum": 24.479999999999993,
           "weighted_frequency_per_year": 0.010108425599999998,
           "annual_condition_ids": [
-            "D-3ms-west",
-            "D-4ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "synthetic-generic-worker-west-3ms"
           ],
           "release_branch_ids": [
@@ -6412,7 +6350,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-3ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6462,7 +6400,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-4ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6512,7 +6450,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-3ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6562,7 +6500,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-4ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6612,7 +6550,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-3ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6662,7 +6600,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-4ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6712,7 +6650,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-3ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6762,7 +6700,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-4ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6812,7 +6750,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-3ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -6862,7 +6800,7 @@
           "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
           "asset_id": "vertical-handoff-vent",
           "release_branch_id": "provider-vertical-handoff",
-          "annual_condition_id": "D-4ms-west",
+          "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
           "status": "EXECUTED_OPERATOR_LIMITED",
           "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
           "reason": "source operator has declared constant-state or open physical closure limitations",
@@ -9480,7 +9418,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 0.00012,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -9561,7 +9499,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 0.00012,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -9642,7 +9580,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 5.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -9723,7 +9661,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 5.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -9804,7 +9742,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 2.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -9885,7 +9823,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 2.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -9966,7 +9904,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 9.3e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -10047,7 +9985,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 9.3e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -10128,7 +10066,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 3.9e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -10209,7 +10147,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 3.9e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -12408,7 +12346,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 0.00012,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -12489,7 +12427,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 0.00012,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -12570,7 +12508,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 5.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -12651,7 +12589,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 5.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -12732,7 +12670,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 2.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -12813,7 +12751,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 2.2e-05,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -12894,7 +12832,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 9.3e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -12975,7 +12913,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 9.3e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -13056,7 +12994,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "initiating_frequency_per_year": 3.9e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.4,
@@ -13137,7 +13075,7 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
         "release_branch_id": "provider-vertical-handoff",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "initiating_frequency_per_year": 3.9e-06,
         "release_branch_probability": 1.0,
         "annual_condition_probability": 0.6,
@@ -19203,7 +19141,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 0.00012,
@@ -19264,7 +19202,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 0.00012,
@@ -19325,7 +19263,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 0.00012,
@@ -19386,7 +19324,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 0.00012,
@@ -19447,7 +19385,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 0.00012,
@@ -19508,7 +19446,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 0.00012,
@@ -19569,7 +19507,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 0.00012,
@@ -19630,7 +19568,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 0.00012,
@@ -19691,7 +19629,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 5.2e-05,
@@ -19752,7 +19690,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 5.2e-05,
@@ -19813,7 +19751,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 5.2e-05,
@@ -19874,7 +19812,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 5.2e-05,
@@ -19935,7 +19873,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 5.2e-05,
@@ -19996,7 +19934,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 5.2e-05,
@@ -20057,7 +19995,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 5.2e-05,
@@ -20118,7 +20056,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 5.2e-05,
@@ -20179,7 +20117,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20240,7 +20178,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20301,7 +20239,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20362,7 +20300,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20423,7 +20361,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20484,7 +20422,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20545,7 +20483,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20606,7 +20544,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 2.2e-05,
@@ -20667,7 +20605,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 9.3e-06,
@@ -20728,7 +20666,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 9.3e-06,
@@ -20789,7 +20727,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 9.3e-06,
@@ -20850,7 +20788,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 9.3e-06,
@@ -20911,7 +20849,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 9.3e-06,
@@ -20972,7 +20910,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 9.3e-06,
@@ -21033,7 +20971,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 9.3e-06,
@@ -21094,7 +21032,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 9.3e-06,
@@ -21155,7 +21093,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21216,7 +21154,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21277,7 +21215,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21338,7 +21276,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-3ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21399,7 +21337,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_explosion",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21460,7 +21398,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "delayed_flash_fire",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21521,7 +21459,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "direct_fire",
         "initiating_frequency_per_year": 3.9e-06,
@@ -21582,7 +21520,7 @@
       {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
         "asset_id": "vertical-handoff-vent",
-        "annual_condition_id": "D-4ms-west",
+        "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
         "release_branch_id": "provider-vertical-handoff",
         "ignition_branch": "no_ignition",
         "initiating_frequency_per_year": 3.9e-06,
@@ -22401,7 +22339,7 @@
         ]
       }
     ],
-    "risk_atoms_digest": "5682850185abfd7ccc3f537162a4283d6f6fab595a01c74e72d1754400d4190c",
+    "risk_atoms_digest": "916068647aa7f2851bff840bc4d03a5666d91a72474db2a98c368dd5d124f5c9",
     "component_contributions": {
       "ambient-vaporizer-01": {
         "event_count": 3,
@@ -23717,8 +23655,8 @@
       "overlapping_case_uncomputed_count": 29,
       "risk_atom_count": 176,
       "annual_condition_count": 5,
-      "population_status": "RECEPTOR_POPULATION_MISMATCH",
-      "population_row_count": 11,
+      "population_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+      "population_row_count": 5,
       "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
       "scenario_branch_cross_product_count": 20,
       "release_termination_inventory_summary": {
@@ -24253,7 +24191,7 @@
   },
   "frequency_uncertainty": {
     "campaign_digest": "d0be0ca6194198e896591ff1cea8209f6a0da0e75ca7506aa58e329916ec441a",
-    "physical_risk_atoms_digest": "5682850185abfd7ccc3f537162a4283d6f6fab595a01c74e72d1754400d4190c",
+    "physical_risk_atoms_digest": "916068647aa7f2851bff840bc4d03a5666d91a72474db2a98c368dd5d124f5c9",
     "scenarios": [
       {
         "scenario": {
@@ -24473,66 +24411,6 @@
         "scenario_branch_accounting": {
           "status": "EXPLICIT_BRANCH_ACCOUNTING",
           "annual_conditions": {
-            "D-3ms-west": {
-              "annual_probability": 0.4,
-              "weather": {
-                "wind_speed_m_s": 3.0,
-                "wind_from_bearing_deg": 270.0,
-                "measurement_height_m": 10.0,
-                "roughness_m": 0.03,
-                "stability": "D",
-                "relative_humidity": 0.5
-              },
-              "provenance": "synthetic annual condition partition; no site weather qualification",
-              "event_count": 5,
-              "risk_atom_count": 20,
-              "conditional_weight_sum": 2.0,
-              "weighted_frequency_per_year": 8.288000000000002e-05,
-              "annual_condition_ids": [],
-              "release_branch_ids": [
-                "provider-vertical-handoff"
-              ],
-              "ignition_branches": [
-                "delayed_explosion",
-                "delayed_flash_fire",
-                "direct_fire",
-                "no_ignition"
-              ],
-              "scenario_families": [
-                "liquid_two_phase",
-                "pipe_hole"
-              ]
-            },
-            "D-4ms-west": {
-              "annual_probability": 0.6,
-              "weather": {
-                "wind_speed_m_s": 4.0,
-                "wind_from_bearing_deg": 270.0,
-                "measurement_height_m": 10.0,
-                "roughness_m": 0.03,
-                "stability": "D",
-                "relative_humidity": 0.5
-              },
-              "provenance": "synthetic annual condition partition; no site weather qualification",
-              "event_count": 5,
-              "risk_atom_count": 20,
-              "conditional_weight_sum": 3.0000000000000004,
-              "weighted_frequency_per_year": 0.00012432,
-              "annual_condition_ids": [],
-              "release_branch_ids": [
-                "provider-vertical-handoff"
-              ],
-              "ignition_branches": [
-                "delayed_explosion",
-                "delayed_flash_fire",
-                "direct_fire",
-                "no_ignition"
-              ],
-              "scenario_families": [
-                "liquid_two_phase",
-                "pipe_hole"
-              ]
-            },
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": {
               "annual_probability": 0.4,
               "weather": {
@@ -24586,6 +24464,66 @@
                 "no_ignition"
               ],
               "scenario_families": []
+            },
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": {
+              "annual_probability": 0.4,
+              "weather": {
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 2.0,
+              "weighted_frequency_per_year": 8.288000000000002e-05,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
+            },
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": {
+              "annual_probability": 0.6,
+              "weather": {
+                "wind_speed_m_s": 4.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 3.0000000000000004,
+              "weighted_frequency_per_year": 0.00012432,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
             },
             "synthetic-generic-worker-west-3ms": {
               "annual_probability": 1.0,
@@ -24689,8 +24627,8 @@
               "conditional_weight_sum": 5.000000000000001,
               "weighted_frequency_per_year": 0.00020720000000000005,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west"
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
               ],
               "release_branch_ids": [],
               "ignition_branches": [
@@ -24713,10 +24651,10 @@
               "conditional_weight_sum": 2.448000000000001,
               "weighted_frequency_per_year": 0.0010108425600000002,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -24746,10 +24684,10 @@
               "conditional_weight_sum": 3.6720000000000024,
               "weighted_frequency_per_year": 0.0015162638400000002,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -24778,10 +24716,10 @@
               "conditional_weight_sum": 3.4000000000000017,
               "weighted_frequency_per_year": 0.0014039479999999995,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -24810,10 +24748,10 @@
               "conditional_weight_sum": 24.479999999999993,
               "weighted_frequency_per_year": 0.010108425599999998,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -26618,7 +26556,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 0.00012,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -26699,7 +26637,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 0.00012,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -26780,7 +26718,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 5.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -26861,7 +26799,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 5.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -26942,7 +26880,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 2.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -27023,7 +26961,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 2.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -27104,7 +27042,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 9.3e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -27185,7 +27123,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 9.3e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -27266,7 +27204,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 3.9e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -27347,7 +27285,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 3.9e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -27650,66 +27588,6 @@
         "scenario_branch_accounting": {
           "status": "EXPLICIT_BRANCH_ACCOUNTING",
           "annual_conditions": {
-            "D-3ms-west": {
-              "annual_probability": 0.4,
-              "weather": {
-                "wind_speed_m_s": 3.0,
-                "wind_from_bearing_deg": 270.0,
-                "measurement_height_m": 10.0,
-                "roughness_m": 0.03,
-                "stability": "D",
-                "relative_humidity": 0.5
-              },
-              "provenance": "synthetic annual condition partition; no site weather qualification",
-              "event_count": 5,
-              "risk_atom_count": 20,
-              "conditional_weight_sum": 2.0,
-              "weighted_frequency_per_year": 8.288000000000002e-05,
-              "annual_condition_ids": [],
-              "release_branch_ids": [
-                "provider-vertical-handoff"
-              ],
-              "ignition_branches": [
-                "delayed_explosion",
-                "delayed_flash_fire",
-                "direct_fire",
-                "no_ignition"
-              ],
-              "scenario_families": [
-                "liquid_two_phase",
-                "pipe_hole"
-              ]
-            },
-            "D-4ms-west": {
-              "annual_probability": 0.6,
-              "weather": {
-                "wind_speed_m_s": 4.0,
-                "wind_from_bearing_deg": 270.0,
-                "measurement_height_m": 10.0,
-                "roughness_m": 0.03,
-                "stability": "D",
-                "relative_humidity": 0.5
-              },
-              "provenance": "synthetic annual condition partition; no site weather qualification",
-              "event_count": 5,
-              "risk_atom_count": 20,
-              "conditional_weight_sum": 3.0000000000000004,
-              "weighted_frequency_per_year": 0.00012432,
-              "annual_condition_ids": [],
-              "release_branch_ids": [
-                "provider-vertical-handoff"
-              ],
-              "ignition_branches": [
-                "delayed_explosion",
-                "delayed_flash_fire",
-                "direct_fire",
-                "no_ignition"
-              ],
-              "scenario_families": [
-                "liquid_two_phase",
-                "pipe_hole"
-              ]
-            },
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": {
               "annual_probability": 0.4,
               "weather": {
@@ -27763,6 +27641,66 @@
                 "no_ignition"
               ],
               "scenario_families": []
+            },
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": {
+              "annual_probability": 0.4,
+              "weather": {
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 2.0,
+              "weighted_frequency_per_year": 8.288000000000002e-05,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
+            },
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": {
+              "annual_probability": 0.6,
+              "weather": {
+                "wind_speed_m_s": 4.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 3.0000000000000004,
+              "weighted_frequency_per_year": 0.00012432,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
             },
             "synthetic-generic-worker-west-3ms": {
               "annual_probability": 1.0,
@@ -27866,8 +27804,8 @@
               "conditional_weight_sum": 5.000000000000001,
               "weighted_frequency_per_year": 0.00020720000000000005,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west"
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
               ],
               "release_branch_ids": [],
               "ignition_branches": [
@@ -27890,10 +27828,10 @@
               "conditional_weight_sum": 2.448000000000001,
               "weighted_frequency_per_year": 0.0009392562992472949,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -27923,10 +27861,10 @@
               "conditional_weight_sum": 3.6720000000000024,
               "weighted_frequency_per_year": 0.0014088844488709422,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -27955,10 +27893,10 @@
               "conditional_weight_sum": 3.4000000000000017,
               "weighted_frequency_per_year": 0.0013045226378434645,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -27987,10 +27925,10 @@
               "conditional_weight_sum": 24.479999999999993,
               "weighted_frequency_per_year": 0.009392562992472944,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -29795,7 +29733,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 0.00012,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -29876,7 +29814,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 0.00012,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -29957,7 +29895,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 5.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -30038,7 +29976,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 5.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -30119,7 +30057,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 2.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -30200,7 +30138,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 2.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -30281,7 +30219,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 9.3e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -30362,7 +30300,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 9.3e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -30443,7 +30381,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 3.9e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -30524,7 +30462,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 3.9e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -30827,66 +30765,6 @@
         "scenario_branch_accounting": {
           "status": "EXPLICIT_BRANCH_ACCOUNTING",
           "annual_conditions": {
-            "D-3ms-west": {
-              "annual_probability": 0.4,
-              "weather": {
-                "wind_speed_m_s": 3.0,
-                "wind_from_bearing_deg": 270.0,
-                "measurement_height_m": 10.0,
-                "roughness_m": 0.03,
-                "stability": "D",
-                "relative_humidity": 0.5
-              },
-              "provenance": "synthetic annual condition partition; no site weather qualification",
-              "event_count": 5,
-              "risk_atom_count": 20,
-              "conditional_weight_sum": 2.0,
-              "weighted_frequency_per_year": 8.288000000000002e-05,
-              "annual_condition_ids": [],
-              "release_branch_ids": [
-                "provider-vertical-handoff"
-              ],
-              "ignition_branches": [
-                "delayed_explosion",
-                "delayed_flash_fire",
-                "direct_fire",
-                "no_ignition"
-              ],
-              "scenario_families": [
-                "liquid_two_phase",
-                "pipe_hole"
-              ]
-            },
-            "D-4ms-west": {
-              "annual_probability": 0.6,
-              "weather": {
-                "wind_speed_m_s": 4.0,
-                "wind_from_bearing_deg": 270.0,
-                "measurement_height_m": 10.0,
-                "roughness_m": 0.03,
-                "stability": "D",
-                "relative_humidity": 0.5
-              },
-              "provenance": "synthetic annual condition partition; no site weather qualification",
-              "event_count": 5,
-              "risk_atom_count": 20,
-              "conditional_weight_sum": 3.0000000000000004,
-              "weighted_frequency_per_year": 0.00012432,
-              "annual_condition_ids": [],
-              "release_branch_ids": [
-                "provider-vertical-handoff"
-              ],
-              "ignition_branches": [
-                "delayed_explosion",
-                "delayed_flash_fire",
-                "direct_fire",
-                "no_ignition"
-              ],
-              "scenario_families": [
-                "liquid_two_phase",
-                "pipe_hole"
-              ]
-            },
             "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west": {
               "annual_probability": 0.4,
               "weather": {
@@ -30940,6 +30818,66 @@
                 "no_ignition"
               ],
               "scenario_families": []
+            },
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west": {
+              "annual_probability": 0.4,
+              "weather": {
+                "wind_speed_m_s": 3.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 2.0,
+              "weighted_frequency_per_year": 8.288000000000002e-05,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
+            },
+            "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west": {
+              "annual_probability": 0.6,
+              "weather": {
+                "wind_speed_m_s": 4.0,
+                "wind_from_bearing_deg": 270.0,
+                "measurement_height_m": 10.0,
+                "roughness_m": 0.03,
+                "stability": "D",
+                "relative_humidity": 0.5
+              },
+              "provenance": "synthetic annual condition partition; no site weather qualification",
+              "event_count": 5,
+              "risk_atom_count": 20,
+              "conditional_weight_sum": 3.0000000000000004,
+              "weighted_frequency_per_year": 0.00012432,
+              "annual_condition_ids": [],
+              "release_branch_ids": [
+                "provider-vertical-handoff"
+              ],
+              "ignition_branches": [
+                "delayed_explosion",
+                "delayed_flash_fire",
+                "direct_fire",
+                "no_ignition"
+              ],
+              "scenario_families": [
+                "liquid_two_phase",
+                "pipe_hole"
+              ]
             },
             "synthetic-generic-worker-west-3ms": {
               "annual_probability": 1.0,
@@ -31043,8 +30981,8 @@
               "conditional_weight_sum": 5.000000000000001,
               "weighted_frequency_per_year": 0.00020720000000000005,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west"
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
               ],
               "release_branch_ids": [],
               "ignition_branches": [
@@ -31067,10 +31005,10 @@
               "conditional_weight_sum": 2.448000000000001,
               "weighted_frequency_per_year": 0.002652366145418502,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -31100,10 +31038,10 @@
               "conditional_weight_sum": 3.6720000000000024,
               "weighted_frequency_per_year": 0.003978549218127753,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -31132,10 +31070,10 @@
               "conditional_weight_sum": 3.4000000000000017,
               "weighted_frequency_per_year": 0.003683841868636807,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -31164,10 +31102,10 @@
               "conditional_weight_sum": 24.479999999999993,
               "weighted_frequency_per_year": 0.026523661454185016,
               "annual_condition_ids": [
-                "D-3ms-west",
-                "D-4ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
                 "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+                "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
                 "synthetic-generic-worker-west-3ms"
               ],
               "release_branch_ids": [
@@ -32972,7 +32910,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 0.00012,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -33053,7 +32991,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 0.00012,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -33134,7 +33072,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 5.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -33215,7 +33153,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 5.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -33296,7 +33234,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 2.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -33377,7 +33315,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 2.2e-05,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -33458,7 +33396,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 9.3e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -33539,7 +33477,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 9.3e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -33620,7 +33558,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-3ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
             "initiating_frequency_per_year": 3.9e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.4,
@@ -33701,7 +33639,7 @@
             "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
             "asset_id": "vertical-handoff-vent",
             "release_branch_id": "provider-vertical-handoff",
-            "annual_condition_id": "D-4ms-west",
+            "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
             "initiating_frequency_per_year": 3.9e-06,
             "release_branch_probability": 1.0,
             "annual_condition_probability": 0.6,
@@ -33812,5 +33750,5 @@
     "release_termination_inventory": "case-level provider duration, termination, isolation, inventory and mass closure are carried through the merged facility ledger without filling missing branch values",
     "timing": "facility timing preserves observed whole-case and stage elapsed values; it does not claim repeated-run throughput or fresh-physics 1 Hz service"
   },
-  "assessment_digest": "f9c32e7012427c7e908a2f39490cc5845c84149efd2065e6bf2d30f303f4964a"
+  "assessment_digest": "b07e8fcfb3fe325fac086ff412f7783e564fdef835baa04b75c57ec61790b4ce"
 }

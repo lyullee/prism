@@ -106,6 +106,75 @@ def rebind_vertical_handoff_campaign_result(
                 for endpoint in range(2)
             ]
 
+    # A rebound campaign may carry the same weather-condition IDs as the
+    # target facility (for example D-3ms-west/D-4ms-west).  Keep the source
+    # weather and population evidence intact while namespacing those IDs so
+    # the facility ledger cannot silently merge incompatible populations.
+    condition_id_map: dict[str, str] = {}
+    annual_conditions = output.get("annual_conditions")
+    if isinstance(annual_conditions, list):
+        for condition in annual_conditions:
+            if not isinstance(condition, dict) or not condition.get("id"):
+                raise ValueError("vertical campaign annual conditions must contain string IDs")
+            old_id = str(condition["id"])
+            new_id = f"{namespace.rstrip('/')}/{old_id}"
+            condition_id_map[old_id] = new_id
+            condition["id"] = new_id
+            if receptor_mapping:
+                population = condition.get("population")
+                if not isinstance(population, list):
+                    raise ValueError(
+                        f"vertical campaign condition {old_id} has no population list"
+                    )
+                remapped_population: dict[str, dict[str, Any]] = {}
+                collision = False
+                for row in population:
+                    if not isinstance(row, dict) or not row.get("receptor_id"):
+                        raise ValueError(
+                            f"vertical campaign condition {old_id} has an invalid population row"
+                        )
+                    source_id = str(row["receptor_id"])
+                    target_id = receptor_mapping.get(source_id, source_id)
+                    mapped = dict(row)
+                    mapped["receptor_id"] = target_id
+                    previous = remapped_population.get(target_id)
+                    if previous is None:
+                        remapped_population[target_id] = mapped
+                        continue
+                    collision = True
+                    if isinstance(previous.get("persons"), (int, float)) and isinstance(
+                        mapped.get("persons"), (int, float)
+                    ):
+                        previous["persons"] = float(previous["persons"]) + float(mapped["persons"])
+                    previous_presence = previous.get("presence_probability", 1.0)
+                    current_presence = mapped.get("presence_probability", 1.0)
+                    if isinstance(previous_presence, (int, float)) and isinstance(
+                        current_presence, (int, float)
+                    ):
+                        previous["presence_probability"] = max(
+                            float(previous_presence), float(current_presence)
+                        )
+                    previous["provenance"] = (
+                        f"{previous.get('provenance', 'population')}; "
+                        f"many-to-one receptor rebind from {source_id}"
+                    )
+                condition["population"] = list(remapped_population.values())
+                condition["population_rebind"] = {
+                    "status": "MANY_TO_ONE_DIAGNOSTIC" if collision else "ONE_TO_ONE_DIAGNOSTIC",
+                    "source_receptor_ids": sorted({
+                        str(row.get("receptor_id")) for row in population if isinstance(row, dict)
+                    }),
+                    "target_receptor_ids": sorted(remapped_population),
+                }
+        for key in ("cases", "uncomputed_cases", "risk_atoms"):
+            rows = output.get(key)
+            if not isinstance(rows, list):
+                continue
+            for row in rows:
+                if isinstance(row, dict) and row.get("annual_condition_id"):
+                    old_id = str(row["annual_condition_id"])
+                    row["annual_condition_id"] = condition_id_map.get(old_id, old_id)
+
     for key in ("events", "cases", "uncomputed_cases", "risk_atoms"):
         rows = output.get(key)
         if isinstance(rows, list):
@@ -138,6 +207,12 @@ def rebind_vertical_handoff_campaign_result(
         "component_id": component_id,
         "receptor_map": receptor_mapping,
         "receptor_collapse_policy": "many_to_one_endpoint_maximum" if receptor_mapping else None,
+        "annual_condition_id_map": condition_id_map,
+        "condition_rebind_policy": (
+            "namespaced_condition_ids_preserve_source_weather"
+            if condition_id_map
+            else None
+        ),
         "diagnostic_only": True,
         "physical_validation_claim": False,
         "facility_qra_claim": False,

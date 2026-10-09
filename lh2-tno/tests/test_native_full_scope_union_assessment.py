@@ -46,6 +46,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["inventory_depletion_operator_limited_case_count"] == 17
     assert verification["facility_evidence_request_case_count"] == 44
     assert verification["facility_evidence_request_promotion_allowed"] is False
+    assert verification["population_accounting_status"] == "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC"
+    assert verification["population_accounting_mismatch_count"] == 0
     assert verification["validation_evidence_matrix_status"] == "RESTRICTED_EVIDENCE_MATRIX"
     assert verification["validation_evidence_matrix_decision"] == "FACILITY_QRA_WITHHELD"
     assert verification["validation_evidence_matrix_domain_count"] == 6
@@ -55,8 +57,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 19
-    assert verification["ijhe_audit_pass_count"] == 15
+    assert verification["ijhe_audit_check_count"] == 20
+    assert verification["ijhe_audit_pass_count"] == 16
     assert verification["ijhe_audit_blocked_count"] == 4
 
     assert result["event_count"] == 34
@@ -65,6 +67,9 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert result["facility_id"] == "generic-lh2-near-receptor-diagnostic"
     assert rebound["vertical_handoff_rebind"]["diagnostic_only"] is True
     assert rebound["vertical_handoff_rebind"]["facility_qra_claim"] is False
+    assert rebound["vertical_handoff_rebind"]["condition_rebind_policy"] == (
+        "namespaced_condition_ids_preserve_source_weather"
+    )
     assert inventory_rebound["campaign_namespace_rebind"]["diagnostic_only"] is True
     assert inventory_rebound["campaign_namespace_rebind"]["facility_qra_claim"] is False
     assert inventory_rebound["campaign_namespace_rebind"]["condition_rebind_policy"] == (
@@ -82,6 +87,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert rows["inventory_depletion"]["case_count"] == 28
     assert rows["inventory_depletion"]["conditional_executed_case_count"] == 28
     assert assessment["conditional_diagnostic_facility_risk_available"] is True
+    assert assessment["population_accounting"]["status"] == "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC"
+    assert assessment["population_accounting"]["mismatched_receptor_ids"] == {}
     assert assessment["facility_total_risk_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
     assert evidence_request["status"] == "OPEN_EVIDENCE_REQUEST"
@@ -89,8 +96,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 19
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 15
+    assert len(audit["checks"]) == 20
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 16
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 4
     vertical_check = next(
         check for check in audit["checks"]
@@ -107,6 +114,12 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
         if check["name"] == "validation_evidence_matrix"
     )
     assert matrix_check["status"] == "PASS"
+    full_bore_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "diagnostic_native_full_bore_chain"
+    )
+    assert full_bore_check["status"] == "PASS"
+    assert full_bore_check["diagnostic_only"] is True
     assert validation_matrix["status"] == "RESTRICTED_EVIDENCE_MATRIX"
     assert validation_matrix["decision"] == "FACILITY_QRA_WITHHELD"
     assert validation_matrix["physical_validation_claim"] is False
