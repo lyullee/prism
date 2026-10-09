@@ -140,3 +140,11 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 ## 2026-10-16 고속 출구 연결 작업
 
 고속 `ambient-vaporizer/G1`을 임의로 저마하 packet으로 바꾸지 않기 위해 외부 handoff 부착 경계를 추가했다. `src/lh2_tno/compressible_handoff.py`와 `scripts/attach_compressible_plane_handoff.py`는 `prism.compressible_plane_handoff.v1`의 event/component/port 및 upstream source/result digest를 exact-match하고, 모든 provider interval의 수소 질량 장부를 `ResolvedGasRelease`로 재검증한다. 19개 interval synthetic smoke가 부착·검증되었지만 provider export·독립 물리검증·시설 QRA로 승격하지 않았다. 선택된 G1의 실제 상태는 여전히 provider handoff 부재로 `COMPRESSIBLE_PLANE_HANDOFF_BLOCKED`다. 전체 portable suite는 405개 통과했다. 계약과 필요한 외부 입력은 [압축성 근접장 handoff 계약](PRISM_압축성근접장_handoff_계약_20261016.md)에 기록했다.
+
+## 2026-10-18 최신 연결 상태
+
+외부 `lh2dt_models`의 일곱 설비 클래스가 native `export_accident_history(request)` 경계를 제공하도록 구현되었고, 외부 회귀시험 373건과 PRISM portable suite 441건을 통과했다. 이 사실은 사고 방출 계약이 있다는 뜻이며, 실제 적격 provider packet이나 시설 전체 QRA가 완료됐다는 뜻은 아니다.
+
+저장탱크에 대해서는 `scripts/run_lh2dt_native_frequency_case.py`로 문헌 `LH2_VESSEL AREA_0.01%` 빈도와 native `LayeredTank` 방출을 한 사건에서 결합했다. 개구 `0.0127 m` exact-match, provider 질량 잔차 0 kg, native export 약 0.29 s, consequence campaign 약 23.8 s, 사건 상태 `EXECUTED_OPERATOR_LIMITED`를 기록했다. 빈도는 packet에서 추정하지 않고 기존 문헌 catalogue에서 읽었다. 결과는 `results/20261018/native_lh2dt_frequency_case/verification.json`이다.
+
+현재 IJHE 완료 감사는 `INCOMPLETE_EVIDENCE`이며 22개 검사 중 차단 이유는 세 가지다. 합성/스크리닝 provider 외에 적격 packet이 없고, 선언한 주요 사고가족 중 부분·미계산 항목이 있으며, 그 때문에 시설 IR/F-N 총값을 보류한다. 이 native frequency case는 첫 번째 연결을 강화하지만 이 세 차단 이유를 해소하지 않는다.

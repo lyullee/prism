@@ -68,7 +68,7 @@ def _request(source_digest: str, state_digest: str) -> AccidentReleaseExportRequ
         "input_origin": "model_prediction",
         "model_package": "lh2dt_models",
         "model_class": "lh2dt.layered_tank.LayeredTank",
-        "model_revision": "native-export-067631a",
+        "model_revision": "native-export-4b1ea87",
         "state_snapshot_digest": state_digest,
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit native external LayeredTank diagnostic; not site-calibrated",
