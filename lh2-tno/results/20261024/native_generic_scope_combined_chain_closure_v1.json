@@ -1,0 +1,28 @@
+{
+  "schema_version": "prism.facility_combined_chain_closure_audit.v1",
+  "status": "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED",
+  "facility_id": "generic-lh2-full-scope-example",
+  "declared_event_count": 29,
+  "packet_subset_event_count": 24,
+  "packet_subset_closed_event_count": 24,
+  "vertical_handoff_event_count": 5,
+  "vertical_handoff_closed_event_count": 5,
+  "combined_diagnostic_closed_event_count": 29,
+  "event_count_matches_declared_scope": true,
+  "class_counts": {
+    "qualified_subset_diagnostic_events": 24,
+    "operator_limited_vertical_events": 5,
+    "combined_diagnostic_events": 29
+  },
+  "mismatch_event_ids": [],
+  "facility_ir_aggregate_closed": true,
+  "facility_fn_aggregate_closed": true,
+  "qualified_provider_packet_count": 0,
+  "operator_limited_vertical_event_count": 5,
+  "frequency_from_provider_packet": false,
+  "physical_validation_claim": false,
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "All declared events reached a diagnostic final-harm atom when the qualified-subset closure and the operator-limited vertical closure are read together. The five vertical events remain a separate synthetic/operator-limited class; no provider qualification, field frequency, physical validation, facility total IR/F-N, or QRA promotion follows."
+}
