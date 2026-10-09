@@ -516,3 +516,205 @@ def build_provider_packet_request_catalog(audit: Mapping[str, Any]) -> dict[str,
             "provider packet values and ownership remain missing until the external equipment model exports them",
         ],
     }
+
+
+# ---------------------------------------------------------------------------
+# Generic external CSV screening import
+# ---------------------------------------------------------------------------
+
+EXTERNAL_SCENARIO_EVIDENCE_SCHEMA = "prism.external_scenario_evidence.v1"
+
+_EXTERNAL_CATEGORY_FAMILY_MAP: dict[str, tuple[str, ...]] = {
+    "flange_connect": ("pipe_hole", "valve_hole"),
+    "purge_vent": ("vent_hole", "vertical_handoff"),
+    "valve_close": ("valve_hole",),
+    "main_line_open": ("pipe_hole", "valve_hole"),
+    "gas_phase_fill": ("vessel_hole", "pipe_hole"),
+    "pressure_rise_monitor": ("vent_hole", "inventory_over_600s"),
+    "relief_vent": ("vent_hole", "inventory_over_600s"),
+    "supply_start": ("pipe_hole", "valve_hole"),
+    "vaporizer_pass": ("vaporizer_hole",),
+    "test_building_supply_gas": ("pipe_hole",),
+}
+
+_EXTERNAL_CATEGORY_SIGNAL_MAP: dict[str, tuple[str, ...]] = {
+    "flange_connect": ("leak_test", "hydrogen_detection"),
+    "purge_vent": ("vent_state", "hydrogen_detection", "pressure"),
+    "valve_close": ("valve_state", "pressure", "mass_flow"),
+    "main_line_open": ("valve_state", "pressure", "mass_flow"),
+    "gas_phase_fill": ("valve_state", "pressure", "temperature"),
+    "pressure_rise_monitor": ("pressure", "vacuum_level", "relief_state"),
+    "relief_vent": ("pressure", "relief_state", "hydrogen_detection"),
+    "supply_start": ("pressure", "mass_flow", "valve_state"),
+    "vaporizer_pass": ("temperature", "mass_flow", "pressure"),
+    "test_building_supply_gas": ("hydrogen_detection", "ventilation_state", "pressure"),
+}
+
+_EXTERNAL_FIELD_ALIASES: dict[str, tuple[str, ...]] = {
+    "scenario": ("시나리오", "scenario"),
+    "equipment": ("탱크", "tank", "공급모드", "supply_mode"),
+    "step": ("절차번호", "step", "step_no"),
+    "action": ("동작내용", "action", "operation"),
+    "category": ("위험성분류", "risk_classification", "risk_class"),
+    "leak_failure": ("누출_예상고장", "leak_failure", "release_failure"),
+    "leak_risk": ("누출_위험", "leak_risk", "release_risk"),
+    "leak_control": ("누출_조치방법", "leak_control", "release_control"),
+    "leak_basis": ("누출_근거기준", "leak_basis", "release_basis"),
+    "fire_risk": ("화재_위험", "fire_risk"),
+    "explosion_risk": ("폭발_위험", "explosion_risk"),
+}
+
+
+def _external_value(row: Mapping[str, Any], aliases: tuple[str, ...]) -> str | None:
+    for alias in aliases:
+        value = row.get(alias)
+        if value is not None and str(value).strip():
+            return str(value).strip()
+    return None
+
+
+def _external_contains_any(text: str, terms: tuple[str, ...]) -> bool:
+    lowered = text.casefold()
+    return any(term.casefold() in lowered for term in terms)
+
+
+def _external_scope_status(row_text: str) -> str:
+    if _external_contains_any(row_text, ("밀폐", "반밀폐", "시험동", "건물", "indoor", "enclosed")):
+        return "OUTSIDE_DECLARED_OUTDOOR_SCOPE"
+    return "CANDIDATE_OUTDOOR_SCREENING"
+
+
+def _external_signals(category: str | None, row_text: str) -> tuple[str, ...]:
+    selected = list(_EXTERNAL_CATEGORY_SIGNAL_MAP.get(category or "", ()))
+    text_rules = (
+        ("pressure", ("압력", "pressure", "배압", "과압")),
+        ("temperature", ("온도", "냉각", "temperature", "결빙")),
+        ("mass_flow", ("유량", "flow", "공급")),
+        ("valve_state", ("밸브", "XV", "valve", "개방", "폐쇄")),
+        ("hydrogen_detection", ("가스검지", "검지기", "hydrogen detector", "누출감지")),
+        ("ventilation_state", ("환기", "ventilation")),
+        ("relief_state", ("PSV", "안전밸브", "relief", "벤트")),
+        ("vacuum_level", ("진공", "vacuum")),
+        ("leak_test", ("기밀", "누설시험", "leak test")),
+    )
+    for signal, terms in text_rules:
+        if _external_contains_any(row_text, terms):
+            selected.append(signal)
+    return tuple(dict.fromkeys(selected))
+
+
+def _external_record(
+    row: Mapping[str, Any],
+    *,
+    source_path: Path,
+    relative_path: str,
+    source_sha256: str,
+    row_number: int,
+) -> dict[str, Any]:
+    category = _external_value(row, _EXTERNAL_FIELD_ALIASES["category"])
+    text = " ".join(str(value) for value in row.values() if value is not None)
+    return {
+        "id": f"{relative_path}:{row_number}",
+        "source_file": relative_path,
+        "source_path": str(source_path),
+        "source_sha256": source_sha256,
+        "row_number": row_number,
+        "scenario": _external_value(row, _EXTERNAL_FIELD_ALIASES["scenario"]),
+        "equipment_tag": _external_value(row, _EXTERNAL_FIELD_ALIASES["equipment"]),
+        "procedure_step": _external_value(row, _EXTERNAL_FIELD_ALIASES["step"]),
+        "action": _external_value(row, _EXTERNAL_FIELD_ALIASES["action"]),
+        "risk_classification": category,
+        "candidate_accident_families": list(_EXTERNAL_CATEGORY_FAMILY_MAP.get(category or "", ())),
+        "candidate_monitoring_signals": list(_external_signals(category, text)),
+        "scope_status": _external_scope_status(text),
+        "leak_failure": _external_value(row, _EXTERNAL_FIELD_ALIASES["leak_failure"]),
+        "leak_risk": _external_value(row, _EXTERNAL_FIELD_ALIASES["leak_risk"]),
+        "leak_control": _external_value(row, _EXTERNAL_FIELD_ALIASES["leak_control"]),
+        "leak_basis": _external_value(row, _EXTERNAL_FIELD_ALIASES["leak_basis"]),
+        "fire_risk": _external_value(row, _EXTERNAL_FIELD_ALIASES["fire_risk"]),
+        "explosion_risk": _external_value(row, _EXTERNAL_FIELD_ALIASES["explosion_risk"]),
+        "frequency_applied": False,
+        "provider_packet_created": False,
+        "facility_qra_claim": False,
+    }
+
+
+def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
+    """Import external procedure/failure CSVs as non-promoting evidence."""
+    source_root = Path(root).resolve()
+    if not source_root.is_dir():
+        raise ValueError(f"scenario evidence root is not a directory: {source_root}")
+    files = sorted(source_root.rglob("*.csv"))
+    if not files:
+        raise ValueError(f"no CSV scenario evidence found below {source_root}")
+    records: list[dict[str, Any]] = []
+    file_rows: list[dict[str, Any]] = []
+    errors: list[str] = []
+    for path in files:
+        relative = path.relative_to(source_root).as_posix()
+        digest = _sha256(path)
+        row_count = 0
+        try:
+            with path.open("r", encoding="utf-8-sig", newline="") as handle:
+                reader = csv.DictReader(handle)
+                if reader.fieldnames is None:
+                    raise ValueError("CSV header is missing")
+                for row_number, row in enumerate(reader, start=2):
+                    if not any(value is not None and str(value).strip() for value in row.values()):
+                        continue
+                    row_count += 1
+                    records.append(_external_record(
+                        row,
+                        source_path=path,
+                        relative_path=relative,
+                        source_sha256=digest,
+                        row_number=row_number,
+                    ))
+        except (OSError, UnicodeDecodeError, csv.Error, ValueError) as error:
+            errors.append(f"{relative}: {error}")
+        file_rows.append({
+            "path": relative,
+            "absolute_path": str(path),
+            "sha256": digest,
+            "row_count": row_count,
+        })
+    family_counts = Counter(
+        family for record in records for family in record["candidate_accident_families"]
+    )
+    signal_counts = Counter(
+        signal for record in records for signal in record["candidate_monitoring_signals"]
+    )
+    scope_counts = Counter(record["scope_status"] for record in records)
+    status = "SCREENING_EVIDENCE_IMPORTED" if records and not errors else (
+        "PARTIAL_SCREENING_EVIDENCE" if records else "FAILED_SCREENING_EVIDENCE"
+    )
+    return {
+        "schema_version": EXTERNAL_SCENARIO_EVIDENCE_SCHEMA,
+        "status": status,
+        "source_root": str(source_root),
+        "source_file_count": len(files),
+        "source_files": file_rows,
+        "records": records,
+        "summary": {
+            "record_count": len(records),
+            "family_candidate_counts": dict(sorted(family_counts.items())),
+            "monitoring_signal_candidate_counts": dict(sorted(signal_counts.items())),
+            "scope_status_counts": dict(sorted(scope_counts.items())),
+        },
+        "errors": errors,
+        "policy": {
+            "facility_neutral": True,
+            "frequency_applied": False,
+            "sensor_frequency_learning_used": False,
+            "provider_packet_created": False,
+            "facility_qra_claim": False,
+            "indoor_and_enclosed_rows_excluded_from_outdoor_scope": True,
+            "candidate_family_map_is_not_a_frequency_map": True,
+        },
+        "limitations": [
+            "Procedure and failure text identifies candidate scenarios only; it does not provide an initiating frequency.",
+            "Monitoring signal names are candidate tags and are not inverse leak-size or frequency estimators.",
+            "Each candidate still requires an equipment-owned accident history, termination ledger and provider packet.",
+            "Indoor, semi-enclosed and test-building rows are retained as evidence but marked outside the declared outdoor scope.",
+        ],
+    }

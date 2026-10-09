@@ -97,6 +97,32 @@ def test_completion_audit_records_frequency_provenance_as_diagnostic_evidence():
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_records_external_scenario_evidence_as_non_promoting_evidence():
+    report = build_ijhe_completion_audit(
+        {"physical_validation_claim": False},
+        {},
+        {"cases": [], "events": []},
+        scenario_evidence_report={
+            "schema_version": "prism.external_scenario_evidence.v1",
+            "status": "SCREENING_EVIDENCE_IMPORTED",
+            "source_files": [{"path": "sequence.csv"}],
+            "records": [{"id": "sequence.csv:2"}],
+            "summary": {"scope_status_counts": {"CANDIDATE_OUTDOOR_SCREENING": 1}},
+            "policy": {
+                "facility_neutral": True,
+                "frequency_applied": False,
+                "sensor_frequency_learning_used": False,
+                "provider_packet_created": False,
+                "facility_qra_claim": False,
+                "candidate_family_map_is_not_a_frequency_map": True,
+            },
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "external_scenario_evidence_import")
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def _status(validated=True):
     return {
         "physical_validation_claim": validated,

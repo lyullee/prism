@@ -1757,7 +1757,7 @@
   "mixed_lh2_accident_scope_matrix_catalog_family_count": 12,
   "mixed_lh2_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261018/ijhe_completion_audit_refined_pool_current.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 22 checks, 4 blocking reasons",
   "ijhe_completion_audit_latest_check_count": 21,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [
@@ -1866,5 +1866,22 @@
   "frequency_provenance_report_physical_validation_claim": false,
   "frequency_provenance_report_test_status": "2 provenance tests plus IJHE diagnostic provenance check; full portable suite 439 passed",
   "ijhe_completion_audit_latest_blocker_count": 4,
-  "ijhe_completion_audit_latest_frequency_provenance_status": "PASS diagnostic-only; source/catalogue hashes and 24 generated events traced"
+  "ijhe_completion_audit_latest_frequency_provenance_status": "PASS diagnostic-only; source/catalogue hashes and 24 generated events traced",
+  "external_scenario_evidence_import_implemented": true,
+  "external_scenario_evidence_module": "src/lh2_tno/scenario_evidence.py",
+  "external_scenario_evidence_script": "scripts/import_scenario_evidence.py",
+  "external_scenario_evidence_record": "results/20261009/inspection_center_scenario_evidence.json",
+  "external_scenario_evidence_status": "SCREENING_EVIDENCE_IMPORTED",
+  "external_scenario_evidence_source_file_count": 3,
+  "external_scenario_evidence_record_count": 52,
+  "external_scenario_evidence_outdoor_candidate_count": 41,
+  "external_scenario_evidence_out_of_scope_count": 11,
+  "external_scenario_evidence_frequency_applied": false,
+  "external_scenario_evidence_sensor_frequency_learning_used": false,
+  "external_scenario_evidence_provider_packet_created": false,
+  "external_scenario_evidence_facility_qra_claim": false,
+  "external_scenario_evidence_scope": "facility-neutral screening only; outdoor candidate rows retained; indoor/semi-enclosed/test-building rows outside declared outdoor scope",
+  "external_scenario_evidence_test_status": "scenario importer and IJHE diagnostic evidence check passed; full portable suite 441 passed",
+  "ijhe_completion_audit_latest_scenario_evidence_status": "PASS diagnostic-only; 52 records from 3 CSVs, 41 outdoor candidates and 11 out-of-scope rows",
+  "full_test_suite_status": "441 passed"
 }

@@ -93,3 +93,23 @@ def test_time_series_metadata_is_observed_but_not_promoted(tmp_path):
     assert telemetry["promotion_status"] == "TELEMETRY_CANDIDATE_METADATA_INCOMPLETE"
     assert report["provider_promotion"]["qualified_packet_count"] == 0
     assert any("sensor traces" in reason for reason in report["blocking_reasons"])
+
+
+def test_external_csv_import_maps_candidates_without_frequency(tmp_path):
+    path = tmp_path / "sequence.csv"
+    path.write_text(
+        "시나리오,탱크,절차번호,동작내용,위험성분류,누출_예상고장,누출_위험,누출_조치방법\n"
+        "저장,TANK1,1,XV10 OPEN,relief_vent,valve stuck,vent leak,ESD and gas detector\n"
+        "공급,TANK1,2,시험동 공급,test_building_supply_gas,line leak,indoor accumulation,ventilation\n",
+        encoding="utf-8-sig",
+    )
+    from lh2_tno.scenario_evidence import import_scenario_evidence
+
+    report = import_scenario_evidence(tmp_path)
+    assert report["status"] == "SCREENING_EVIDENCE_IMPORTED"
+    assert report["summary"]["record_count"] == 2
+    assert report["summary"]["family_candidate_counts"]["vent_hole"] == 1
+    assert report["policy"]["frequency_applied"] is False
+    assert report["policy"]["facility_qra_claim"] is False
+    assert report["records"][1]["scope_status"] == "OUTSIDE_DECLARED_OUTDOOR_SCOPE"
+    assert "hydrogen_detection" in report["records"][0]["candidate_monitoring_signals"]

@@ -63,6 +63,7 @@ def build_ijhe_completion_audit(
     vertical_handoff_result: Mapping[str, Any] | None = None,
     native_model_contract_audit: Mapping[str, Any] | None = None,
     frequency_provenance_report: Mapping[str, Any] | None = None,
+    scenario_evidence_report: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -273,6 +274,53 @@ def build_ijhe_completion_audit(
                     "The selected literature frequency profiles and generated event rows have source "
                     "and catalogue digest provenance. This does not make the rates field-validated or "
                     "create a facility credible interval."
+                ),
+            }
+        )
+    if scenario_evidence_report is not None:
+        scenario_evidence = scenario_evidence_report
+        scenario_policy = scenario_evidence.get("policy")
+        if not isinstance(scenario_policy, Mapping):
+            scenario_policy = {}
+        scenario_evidence_valid = (
+            scenario_evidence.get("schema_version") == "prism.external_scenario_evidence.v1"
+            and scenario_evidence.get("status") in {
+                "SCREENING_EVIDENCE_IMPORTED",
+                "PARTIAL_SCREENING_EVIDENCE",
+            }
+            and isinstance(scenario_evidence.get("source_files"), list)
+            and len(scenario_evidence.get("source_files")) > 0
+            and isinstance(scenario_evidence.get("records"), list)
+            and len(scenario_evidence.get("records")) > 0
+            and scenario_policy.get("facility_neutral") is True
+            and scenario_policy.get("frequency_applied") is False
+            and scenario_policy.get("sensor_frequency_learning_used") is False
+            and scenario_policy.get("provider_packet_created") is False
+            and scenario_policy.get("facility_qra_claim") is False
+            and scenario_policy.get("candidate_family_map_is_not_a_frequency_map") is True
+        )
+        checks.append(
+            {
+                "name": "external_scenario_evidence_import",
+                "status": "PASS" if scenario_evidence_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None if scenario_evidence_valid else "external scenario evidence report is missing or malformed",
+                "evidence": {
+                    "record": scenario_evidence.get("_record_path"),
+                    "status": scenario_evidence.get("status"),
+                    "source_file_count": scenario_evidence.get("source_file_count"),
+                    "record_count": len(scenario_evidence.get("records", []))
+                    if isinstance(scenario_evidence.get("records"), list) else None,
+                    "scope_status_counts": scenario_evidence.get("summary", {}).get("scope_status_counts"),
+                    "frequency_applied": scenario_policy.get("frequency_applied"),
+                    "sensor_frequency_learning_used": scenario_policy.get("sensor_frequency_learning_used"),
+                    "provider_packet_created": scenario_policy.get("provider_packet_created"),
+                    "facility_qra_claim": scenario_policy.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "External procedure and failure tables are retained as facility-neutral screening "
+                    "evidence. Candidate families and monitoring tags do not create a frequency, "
+                    "provider release packet or facility IR/F-N result."
                 ),
             }
         )
