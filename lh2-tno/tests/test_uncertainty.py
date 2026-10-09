@@ -73,6 +73,25 @@ def test_p05_requires_a_published_event_bound():
         ))
 
 
+def test_fixed_quantile_keeps_catalogue_rate_when_no_bounds_exist():
+    events = _valve_events()
+    event = events[0].model_copy(update={
+        'marginal_p05_per_year': None,
+        'marginal_p95_per_year': None,
+        'frequency_distribution': 'none',
+        'log_rate_mu': None,
+        'log_rate_sigma': None,
+    })
+    result = literature_frequency_uncertainty(_result((event,)), (
+        LiteratureFrequencyScenario(
+            id='mixed-catalogue-fixed',
+            asset_quantiles={'valves': 'fixed'},
+            provenance='catalogue median held fixed because no published bounds exist',
+        ),
+    ))
+    assert result['scenarios'][0]['event_frequency_per_year'][event.id] == event.annual_frequency_per_year
+
+
 def test_independent_event_bounds_can_be_compared_with_shared_asset_bounds():
     events = _valve_events()
     independent = LiteratureFrequencyScenario(

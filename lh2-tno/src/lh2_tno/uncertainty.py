@@ -22,8 +22,8 @@ from .frequency import FrequencyEvent
 
 class LiteratureFrequencyScenario(Contract):
     id: Name
-    asset_quantiles: dict[str, Literal["p05", "published", "p95"]] = Field(default_factory=dict)
-    event_quantiles: dict[str, Literal["p05", "published", "p95"]] = Field(default_factory=dict)
+    asset_quantiles: dict[str, Literal["p05", "published", "fixed", "p95"]] = Field(default_factory=dict)
+    event_quantiles: dict[str, Literal["p05", "published", "fixed", "p95"]] = Field(default_factory=dict)
     provenance: Name
     correlation_assumption: Literal["within_asset_shared_quantile", "independent_event_bounds"] = "within_asset_shared_quantile"
 
@@ -56,7 +56,7 @@ class LiteratureFrequencyDistributionScenario(Contract):
 
 
 def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
-    if quantile == "published":
+    if quantile in {"published", "fixed"}:
         return event.annual_frequency_per_year
     value = event.marginal_p05_per_year if quantile == "p05" else event.marginal_p95_per_year
     if value is None:
@@ -67,11 +67,12 @@ def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
 
 
 def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFrequencyScenario, ...]) -> dict:
-    """Reweight saved risk atoms using published event frequency bounds.
+    """Reweight saved risk atoms using published bounds and explicit fixed rates.
 
     The physical harm, weather, population, barrier and ignition terms remain
-    fixed.  Every generated asset must be addressed explicitly, and a p05/p95
-    case fails if any of its event rows lacks a corresponding published bound.
+    fixed. Every generated asset must be addressed explicitly. A p05/p95 case
+    fails if any of its event rows lacks a corresponding published bound;
+    ``fixed`` deliberately retains that event's declared catalogue rate.
     """
     if not scenarios or len({s.id for s in scenarios}) != len(scenarios):
         raise ValueError("nonempty unique literature-frequency scenarios required")
@@ -158,7 +159,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
         'statistical_confidence_interval': False,
         'facility_credible_interval': False,
         'conditional_diagnostic_facility_risk': 'each scenario reweights the saved risk atoms and exposes a conditional facility IR/F-N diagnostic; incomplete scope, synthetic horizons, and operator limits still withhold a qualified facility total',
-        'semantics': 'published marginal event-frequency quantiles with an explicit within-asset shared or independent-event bound comparison; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
+        'semantics': 'published marginal event-frequency quantiles plus explicit fixed catalogue rates, with within-asset shared or independent-event bound comparison; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
         'correlation_comparison_present': any(
             s.correlation_assumption == 'independent_event_bounds' for s in scenarios
         ) and any(s.correlation_assumption == 'within_asset_shared_quantile' for s in scenarios),
