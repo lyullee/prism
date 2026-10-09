@@ -1881,7 +1881,7 @@
   "external_scenario_evidence_scope": "facility-neutral screening only; outdoor candidate rows retained; indoor/semi-enclosed/test-building rows outside declared outdoor scope",
   "external_scenario_evidence_test_status": "scenario importer and IJHE diagnostic evidence check passed; full portable suite 441 passed",
   "ijhe_completion_audit_latest_scenario_evidence_status": "PASS diagnostic-only; 52 records from 3 CSVs, 41 outdoor candidates and 11 out-of-scope rows",
-  "full_test_suite_status": "441 passed",
+  "full_test_suite_status": "444 passed",
   "diagnostic_campaign_binding_latest_record": "results/20261018/generic_lh2_diagnostic_campaign_binding_current.json",
   "diagnostic_campaign_binding_latest_status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING; structural event/case/risk-atom binding complete",
   "diagnostic_campaign_binding_latest_packet_event_count": 24,
@@ -1969,5 +1969,30 @@
   "native_lh2dt_dynamic_pipe_frequency_case_facility_qra_claim": false,
   "native_lh2dt_dynamic_pipe_frequency_case_facility_total_risk_available": false,
   "native_lh2dt_dynamic_pipe_frequency_case_physical_validation_claim": false,
-  "native_lh2dt_dynamic_pipe_frequency_case_interpretation": "Diagnostic evidence that a literature LH2_PIPE frequency can be retained while a native DynamicHEMPipe liquid/two-phase packet is consumed by the consequence chain; airborne liquid remains zero and facility total risk is withheld."
+  "native_lh2dt_dynamic_pipe_frequency_case_interpretation": "Diagnostic evidence that a literature LH2_PIPE frequency can be retained while a native DynamicHEMPipe liquid/two-phase packet is consumed by the consequence chain; airborne liquid remains zero and facility total risk is withheld.",
+  "inspection_center_timeseries_audit_implemented": true,
+  "inspection_center_timeseries_audit_script": "scripts/audit_inspection_center_timeseries.py",
+  "inspection_center_timeseries_audit_record": "results/20261018/inspection_center_timeseries_audit.json",
+  "inspection_center_timeseries_audit_summary": "examples/inspection_center_timeseries_audit.json",
+  "inspection_center_timeseries_audit_status": "SCREENING_ONLY_UNIT_BASIS_UNCONFIRMED",
+  "inspection_center_timeseries_audit_workbook_count": 17,
+  "inspection_center_timeseries_audit_sheet_count": 78,
+  "inspection_center_timeseries_audit_signal_category_count": {
+    "differential_pressure": 126,
+    "pressure": 246,
+    "sequence_metadata": 105,
+    "temperature": 93,
+    "time": 10,
+    "unknown": 493
+  },
+  "inspection_center_timeseries_audit_numeric_signal_unit_status_count": {
+    "MISSING_OR_UNCONFIRMED": 522
+  },
+  "inspection_center_timeseries_audit_error_count": 0,
+  "inspection_center_timeseries_audit_state_snapshot_binding_allowed": false,
+  "inspection_center_timeseries_audit_frequency_applied": false,
+  "inspection_center_timeseries_audit_sensor_frequency_learning_used": false,
+  "inspection_center_timeseries_audit_provider_packet_created": false,
+  "inspection_center_timeseries_audit_facility_qra_claim": false,
+  "inspection_center_timeseries_audit_interpretation": "Inspection-centre XLSX data is screening evidence only; unresolved engineering units and tag-to-equipment mapping keep state snapshots, frequency inference, provider packets, and facility QRA closed."
 }
