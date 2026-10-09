@@ -1,0 +1,30 @@
+{
+  "schema_version": "prism.native_lh2dt_dynamic_pipe_full_bore_case.v1",
+  "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "event_id": "generic-lh2-full-bore-diagnostic/transfer-line/full-bore",
+  "component_id": "liquid-transfer-line-01",
+  "opening_diameter_m": 0.01,
+  "full_bore_match": true,
+  "phase_basis": "two_phase",
+  "provider_source_digest": "e30261e3cf2471b8bce91b70f3960364bed0faeeacf3214ecfd5dc5ddb61c19e",
+  "provider_result_digest": "79911906a1ec14cf10e86733daa1dba3e757ab8079c9e1fab7a82048b165924b",
+  "provider_termination_basis": "model_pressure_equalization",
+  "provider_duration_s": 0.03741451207459886,
+  "provider_available_mass_kg": 0.0025156266507964497,
+  "provider_cumulative_mass_out_kg": 0.002104964028173169,
+  "provider_mass_residual_kg": 0.0,
+  "provider_final_pressure_pa_abs": 91665.84962779489,
+  "provider_pressure_equalized": true,
+  "provider_export_elapsed_ms": 717.9912000428885,
+  "consequence_chain_elapsed_ms": 37194.73610003479,
+  "consequence_chain_executed": true,
+  "frequency_applied": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "limitations": [
+    "synthetic 1 m pipe, initial state, full-bore opening and atmospheric boundary",
+    "provider pressure-equalization termination is finite-state evidence, not field isolation reliability",
+    "declared-sensitivity pool footprint remains operator-limited",
+    "airborne liquid remains zero pending independent droplet validation"
+  ]
+}

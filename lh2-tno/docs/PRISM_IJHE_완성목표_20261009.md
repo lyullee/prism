@@ -81,7 +81,7 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 
 ## 2026-10-12 DynamicHEMPipe 방출 경계 추가
 
-외부 `DynamicHEMPipe`를 명시적 full-bore atmospheric outlet로 실행하는 PRISM 측 adapter를 추가했다. 유한체적 pipe 상태가 반환한 유량·엔탈피를 10개 왼쪽 유지 interval로 보존하고, `prism.resolved_release.v1` 액체/2상 packet의 질량·에너지 장부를 다시 적분했다. `0.001 s` 진단에서 질량 잔차는 `0 kg`, 에너지 잔차는 약 `-5.42e-20 J`였다.
+외부 `DynamicHEMPipe`를 명시적 full-bore atmospheric outlet로 실행하는 PRISM 측 adapter를 추가했다. 유한체적 pipe 상태가 반환한 유량·엔탈피를 왼쪽 유지 interval로 보존하고, `prism.resolved_release.v1` 액체/2상 packet의 질량·에너지 장부를 다시 적분했다. `0.001 s` 진단에서 질량 잔차는 `0 kg`, 에너지 잔차는 약 `-5.42e-20 J`였다. 이후 외부 커밋 `4cedec3`의 압력 평형 종료를 `source_duration_mode=model_natural`로 정식 연결해, 0.01 m full-bore 합성 배관에서 `model_pressure_equalization`, 최종 압력 `91,665.85 Pa`, 질량 잔차 `0 kg`을 기록하고 consequence chain까지 실행했다. 상세 기록은 [native 사고계약 감사](PRISM_외부LH2모델_native_사고계약_감사_20261018.md)의 full-bore 절에 있다.
 
 이 packet은 잔류 pipe inventory를 보유한 고정 진단시계이며 전량 방출·현장 배관 파손 확률·차단 성공을 의미하지 않는다. `validate_lh2dt_prism_packet_chain.py`의 `radius_m=0.0001 m` 선언 sensitivity footprint를 사용해 최종 피해 체인까지 실행했지만, 이 footprint와 synthetic inlet/geometry는 현장 형상으로 승격하지 않는다.
 

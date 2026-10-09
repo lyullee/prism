@@ -430,6 +430,26 @@ def test_provider_liquid_packet_uses_liquid_operator_and_inventory_termination()
     assert request.release_termination.basis == "inventory_depletion"
 
 
+def test_provider_liquid_packet_accepts_model_natural_pressure_equalization():
+    packet = _liquid_release().model_dump(mode="json")
+    packet["termination_basis"] = "model_pressure_equalization"
+    release = load_provider_release(packet)
+    defaults = _defaults()
+    defaults["source_operator"] = "equipment_liquid_release"
+    defaults["source_duration_mode"] = "model_natural"
+    defaults["release_termination"] = {
+        "basis": "provider_declared",
+        "time_s": "provider_duration",
+        "provenance": "native pressure-equalization provider clock",
+    }
+
+    request = build_consequence_request_from_provider_release(release, defaults)
+
+    assert request.source_duration_mode == "model_natural"
+    assert request.release_termination is not None
+    assert request.release_termination.basis == "model_pressure_equalization"
+
+
 def test_provider_emergency_relief_packet_uses_dedicated_operator_and_basis():
     packet = _release().model_dump(mode="json")
     packet.update(event_kind="emergency_relief", failure_opening_diameter_m=None)

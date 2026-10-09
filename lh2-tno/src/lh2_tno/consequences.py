@@ -210,15 +210,18 @@ class ConsequenceRequest(Contract):
                 raise ValueError('equipment_liquid_release requires an accidental-leak resolved release')
             if release is not None or release_set is not None or self.source_input is not None:
                 raise ValueError('equipment_liquid_release requires one resolved liquid release')
-            if self.source_duration_mode != 'declared':
-                raise ValueError('equipment_liquid_release uses the provider-declared horizon')
+            if self.source_duration_mode not in {'declared', 'model_natural'}:
+                raise ValueError('equipment_liquid_release uses a provider-declared or provider-natural horizon')
             if self.release_termination is None or self.release_termination.basis not in {
-                'inventory_depletion', 'reviewed_isolation_success', 'synthetic_diagnostic_horizon'
+                'inventory_depletion', 'reviewed_isolation_success', 'synthetic_diagnostic_horizon',
+                'model_pressure_equalization',
             }:
                 raise ValueError(
                     'equipment_liquid_release requires provider inventory, reviewed isolation, '
-                    'or explicit diagnostic-horizon termination provenance'
+                    'pressure-equalization, or explicit diagnostic-horizon termination provenance'
                 )
+            if self.source_duration_mode == 'model_natural' and self.release_termination.basis != 'model_pressure_equalization':
+                raise ValueError('provider-natural liquid duration requires pressure-equalization termination provenance')
             if self.available_mass_kg != liquid_release.available_mass_kg:
                 raise ValueError('liquid request and provider inventories disagree')
         elif self.source_operator == 'equipment_liquid_over_600s':
@@ -280,8 +283,8 @@ class ConsequenceRequest(Contract):
         elif self.release_termination is not None and self.release_termination.basis == 'two_sided_rupture' and self.source_operator != 'equipment_two_sided_rupture_endpoint':
             raise ValueError('two-sided rupture termination requires the two-sided equipment operator')
         if self.source_duration_mode == 'model_natural':
-            if release is not None:
-                raise ValueError('model_natural duration requires an integrated transient source')
+            if liquid_release is None and release is not None:
+                raise ValueError('model_natural duration requires an integrated transient source or provider liquid release')
             if self.release_termination is None or self.release_termination.basis != 'model_pressure_equalization':
                 raise ValueError('model_natural duration requires pressure-equalization termination provenance')
             if self.release_termination.time_s != duration:
