@@ -11,8 +11,9 @@
 qualified provider packet·독립 물리검증·엄격한 전체범위·시설 전체 QRA는 보류됩니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
-기존 fail-closed IJHE 감사도 22개 검사 중 18개 PASS·4개 BLOCKED이며, native
-catalog PASS는 qualified provider 승인을 의미하지 않습니다.
+기존 fail-closed IJHE 감사도 23개 검사 중 19개 PASS·4개 BLOCKED이며, native
+catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
+의미하지 않습니다.
 
 **2026-10-27 상태 snapshot 방출경계 보완:** 일반 옥외 LH2 매니페스트의 24개
 문헌 사건을 외부 `lh2dt_models` 사고 exporter로 다시 실행해 **24/24 exact

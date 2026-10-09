@@ -16,13 +16,14 @@
 원장: [`ijhe_objective_coverage_audit.json`](../results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)
 
 현재 최종 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 기존
-fail-closed IJHE 감사도 22개 검사 중 18개 PASS·4개 BLOCKED로 갱신되었고, 그중
-새 native catalog 검사는 diagnostic-only PASS다.
+fail-closed IJHE 감사도 23개 검사 중 19개 PASS·4개 BLOCKED로 갱신되었고,
+native catalog와 SLABx-LH2 구성요소 검사는 diagnostic-only PASS다.
 
 | 목표 | 상태 | 현재 근거 |
 |---|---|---|
 | 설비 상태 → native 방출 | PASS | 24/24 사건 exact packet, 상태 snapshot 24/24 `BOUND_AND_ECHOED` |
 | 방출 → 최종 피해 | CONDITIONALLY_COMPLETE | native campaign 24/24 case 실행, union risk atom 176개 |
+| SLABx-LH2 피해영향 구성요소 | CONDITIONALLY_COMPLETE | 6개 FFI·6개 FLACS 비교, 질량잔차 1.77×10⁻¹² kg, 반복 재고차 0 kg |
 | 문헌 빈도 불확실성 | CONDITIONALLY_COMPLETE | 문헌 빈도 시나리오를 저장된 risk atom에 재가중 |
 | 기상·점화·인구 결합 | CONDITIONALLY_COMPLETE | 5개 연간조건, 명시적 ignition branch, receptor mismatch 0 |
 | 일반 LH2 설비 범위 | CONDITIONALLY_COMPLETE | 탱크·배관·밸브·펌프·벤트·기화기·재액화기 범위 원장 |
@@ -46,6 +47,7 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --state-snapshot-audit results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json `
   --native-packet-evidence results/20261027/native_generic_scope_packets_state_bound/packet_evidence.json `
   --native-packet-campaign-ledger results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json `
+  --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json `
   --validation-evidence-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --output results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json

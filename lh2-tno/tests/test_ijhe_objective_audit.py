@@ -65,6 +65,22 @@ def _inputs():
             "provider_packet_promoted": False,
             "_record_path": "campaign.json",
         },
+        "slabx_validation_evidence": {
+            "schema_version": "prism.slabx_lh2_validation_audit.v1",
+            "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+            "checks": [{"name": "model_identity", "status": "PASS"}],
+            "metrics": {
+                "ffi_case_count": 6,
+                "flacs_comparison_row_count": 6,
+                "max_scenario_mass_residual_kg": 1.0e-12,
+                "runtime_repeat_inventory_difference_kg": 0.0,
+            },
+            "physical_validation_claim": False,
+            "full_chain_validation_claim": False,
+            "facility_qra_claim": False,
+            "frequency_inference_performed": False,
+            "_record_path": "slabx.json",
+        },
         "validation_evidence_matrix": {
             "status": "RESTRICTED_EVIDENCE_MATRIX",
             "physical_validation_claim": False,
@@ -88,6 +104,7 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert report["strict_facility_qra_claim"] is False
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
     assert "release_to_final_damage" not in report["core_blocking_check_ids"]
+    assert "slabx_lh2_component_consequence_validation" not in report["core_blocking_check_ids"]
 
 
 def test_objective_audit_blocks_missing_native_event():

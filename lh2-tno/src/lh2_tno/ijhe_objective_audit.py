@@ -53,6 +53,7 @@ def build_ijhe_objective_coverage_audit(
     state_snapshot_audit: Mapping[str, Any],
     native_packet_evidence: Mapping[str, Any],
     native_packet_campaign_ledger: Mapping[str, Any],
+    slabx_validation_evidence: Mapping[str, Any] | None = None,
     validation_evidence_matrix: Mapping[str, Any] | None = None,
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -71,6 +72,7 @@ def build_ijhe_objective_coverage_audit(
     snapshot_path = _record_path(state_snapshot_audit, None)
     packet_path = _record_path(native_packet_evidence, None)
     campaign_path = _record_path(native_packet_campaign_ledger, None)
+    slabx_path = _record_path(slabx_validation_evidence, None)
     validation_path = _record_path(validation_evidence_matrix, None)
     benchmark_path = _record_path(realtime_cache_benchmark, None)
 
@@ -175,6 +177,41 @@ def build_ijhe_objective_coverage_audit(
         },
         blocking_reason=None if damage_ok else "조건부 시설 피해 결과가 없거나 risk atom/F-N 진단이 없다",
         interpretation="worker-01 수용점의 조건부 IR/F-N은 계산되지만 시설 전체 QRA 승격은 별도 gate다.",
+    ))
+
+    slabx_checks = slabx_validation_evidence.get("checks") if isinstance(slabx_validation_evidence, Mapping) else None
+    slabx_ok = (
+        isinstance(slabx_validation_evidence, Mapping)
+        and slabx_validation_evidence.get("schema_version") == "prism.slabx_lh2_validation_audit.v1"
+        and slabx_validation_evidence.get("status") == "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE"
+        and isinstance(slabx_checks, list)
+        and bool(slabx_checks)
+        and all(isinstance(row, Mapping) and row.get("status") == "PASS" for row in slabx_checks)
+        and slabx_validation_evidence.get("physical_validation_claim") is False
+        and slabx_validation_evidence.get("full_chain_validation_claim") is False
+        and slabx_validation_evidence.get("facility_qra_claim") is False
+        and slabx_validation_evidence.get("frequency_inference_performed") is False
+    )
+    slabx_metrics = slabx_validation_evidence.get("metrics") if isinstance(slabx_validation_evidence, Mapping) else None
+    if not isinstance(slabx_metrics, Mapping):
+        slabx_metrics = {}
+    rows.append(_row(
+        "slabx_lh2_component_consequence_validation",
+        "SLABx-LH2의 극저온 풀·옥외 확산 구성요소 근거를 추적하되 전체 chain 검증과 분리해야 한다",
+        "CONDITIONALLY_COMPLETE" if slabx_ok else "BLOCKED_EVIDENCE",
+        evidence_paths=(slabx_path,),
+        observed={
+            "slabx_status": slabx_validation_evidence.get("status") if isinstance(slabx_validation_evidence, Mapping) else None,
+            "check_count": len(slabx_checks) if isinstance(slabx_checks, list) else None,
+            "ffi_case_count": slabx_metrics.get("ffi_case_count"),
+            "flacs_comparison_row_count": slabx_metrics.get("flacs_comparison_row_count"),
+            "pool_radius_median_ratio": slabx_metrics.get("pool_radius_median_ratio"),
+            "max_scenario_mass_residual_kg": slabx_metrics.get("max_scenario_mass_residual_kg"),
+            "runtime_repeat_inventory_difference_kg": slabx_metrics.get("runtime_repeat_inventory_difference_kg"),
+            "physical_validation_claim": slabx_validation_evidence.get("physical_validation_claim") if isinstance(slabx_validation_evidence, Mapping) else None,
+        },
+        blocking_reason=None if slabx_ok else "SLABx-LH2 구성요소 검증 장부가 없거나 restricted claim 경계를 만족하지 않는다",
+        interpretation="구성요소 비교·재현성 근거는 피해영향 모델의 제한된 근거로 사용하지만 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다.",
     ))
 
     frequency_ok = uncertainty_scenarios > 0 and facility_assessment.get("physical_validation_claim") is False
@@ -324,8 +361,8 @@ def build_ijhe_objective_coverage_audit(
         interpretation="조건부 IR/F-N 값은 존재하지만 시설 전체 QRA라는 표현은 사용하지 않는다.",
     ))
 
-    core_rows = rows[:7]
-    strict_rows = rows[7:]
+    core_rows = rows[:8]
+    strict_rows = rows[8:]
     core_blocked = [row["id"] for row in core_rows if row["status"] == "BLOCKED_EVIDENCE"]
     strict_blocked = [row["id"] for row in strict_rows if row["status"] == "BLOCKED_EVIDENCE"]
     if not core_blocked and strict_blocked:

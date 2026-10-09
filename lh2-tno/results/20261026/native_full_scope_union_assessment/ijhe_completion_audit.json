@@ -3207,6 +3207,34 @@
       "interpretation": "The vertical-to-horizontal provider handoff diagnostic consumed a declared handoff boundary and is represented in the merged facility scope matrix; it remains synthetic/operator-limited and is not promoted to a qualified vertical accident family."
     },
     {
+      "name": "diagnostic_slabx_lh2_validation_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\slabx_lh2_validation_audit_v1.json",
+        "schema_version": "prism.slabx_lh2_validation_audit.v1",
+        "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+        "model": {
+          "name": "SLABx-LH2",
+          "slabx_lh2_version": "0.1.2",
+          "slabx_version": "1.0.6"
+        },
+        "check_count": 5,
+        "metrics": {
+          "ffi_case_count": 6,
+          "flacs_comparison_row_count": 6,
+          "pool_radius_median_ratio": 1.0305005693059233,
+          "lfl_in_bracket": 5,
+          "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+          "runtime_repeat_inventory_difference_kg": 0.0
+        },
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "SLABx-LH2 cryogenic-dispersion and pool evidence is consumed as a restricted consequence-component record. It does not qualify the equipment release, initiating frequency, ignition model, or facility QRA."
+    },
+    {
       "name": "diagnostic_realtime_cache_benchmark",
       "status": "PASS",
       "diagnostic_only": true,

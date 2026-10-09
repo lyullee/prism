@@ -75,6 +75,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     native_full_bore = _with_record(args.native_full_bore_result)
     state_snapshot_binding = _with_record(args.state_snapshot_binding_audit)
     native_scope_packet_catalog = _with_record(args.native_scope_packet_catalog_verification)
+    slabx_validation = _with_record(args.slabx_validation_evidence)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -90,6 +91,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         native_full_bore_result=native_full_bore,
         state_snapshot_binding_audit=state_snapshot_binding,
         native_scope_packet_catalog_verification=native_scope_packet_catalog,
+        slabx_validation_evidence=slabx_validation,
     )
 
     verification_path = output_dir / "verification.json"
@@ -140,6 +142,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 native_scope_packet_catalog.get("exact_native_packet_count")
                 if native_scope_packet_catalog else None
             ),
+            "slabx_validation_evidence_status": (
+                slabx_validation.get("status") if slabx_validation else None
+            ),
+            "slabx_validation_evidence_check_count": (
+                len(slabx_validation.get("checks", []))
+                if slabx_validation and isinstance(slabx_validation.get("checks"), list)
+                else None
+            ),
+            "slabx_validation_evidence_physical_validation_claim": (
+                slabx_validation.get("physical_validation_claim") if slabx_validation else None
+            ),
         }
     )
     _save(output_dir / "validation_evidence_matrix.json", matrix)
@@ -189,6 +202,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional exact native generic-scope packet catalog verification.",
+    )
+    parser.add_argument(
+        "--slabx-validation-evidence",
+        type=Path,
+        default=None,
+        help="Optional restricted SLABx-LH2 consequence-component validation record.",
     )
     args = parser.parse_args()
     try:

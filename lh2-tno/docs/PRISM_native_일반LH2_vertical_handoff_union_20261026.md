@@ -79,7 +79,7 @@ python scripts/bind_native_full_scope_union_evidence.py `
 - `validation_evidence_matrix.json`: 6개 근거 영역을 제한 상태로 묶은 통합 장부 (`FACILITY_QRA_WITHHELD`)
 - `realtime_cache_benchmark.json`: fresh physics와 동일 요청 cache 처리시간을 분리한 실행 기록
 - `state_snapshot_binding_audit.json`: 24개 union campaign 사건과 2개 최신 native 진단의 상태 handoff를 원문·digest·provider echo로 대조한다. union campaign은 24개 `UNBOUND`, 최신 진단 2개는 `BOUND_AND_ECHOED`다.
-- `ijhe_completion_audit.json`: 22개 검사 중 18개 PASS·4개 BLOCKED. 새 `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하지만, `diagnostic_only=true`로 유지된다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 qualified provider·시설 IR/F-N을 열지 않는다.
+- `ijhe_completion_audit.json`: 23개 검사 중 19개 PASS·4개 BLOCKED. 새 `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 모두 `diagnostic_only=true`로 유지된다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 qualified provider·시설 IR/F-N을 열지 않는다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
 cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,

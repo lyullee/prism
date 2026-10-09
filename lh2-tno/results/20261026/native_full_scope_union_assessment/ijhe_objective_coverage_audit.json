@@ -64,6 +64,26 @@
       "interpretation": "worker-01 수용점의 조건부 IR/F-N은 계산되지만 시설 전체 QRA 승격은 별도 gate다."
     },
     {
+      "id": "slabx_lh2_component_consequence_validation",
+      "requirement": "SLABx-LH2의 극저온 풀·옥외 확산 구성요소 근거를 추적하되 전체 chain 검증과 분리해야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261024\\slabx_lh2_validation_audit_v1.json"
+      ],
+      "observed": {
+        "slabx_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+        "check_count": 5,
+        "ffi_case_count": 6,
+        "flacs_comparison_row_count": 6,
+        "pool_radius_median_ratio": 1.0305005693059233,
+        "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+        "runtime_repeat_inventory_difference_kg": 0.0,
+        "physical_validation_claim": false
+      },
+      "blocking_reason": null,
+      "interpretation": "구성요소 비교·재현성 근거는 피해영향 모델의 제한된 근거로 사용하지만 방출·점화·IR/F-N 전체 물리검증으로 승격하지 않는다."
+    },
+    {
       "id": "literature_frequency_uncertainty",
       "requirement": "문헌 빈도를 그대로 입력하되 여러 빈도 시나리오의 불확실성을 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
@@ -209,6 +229,7 @@
     "equipment_state_to_native_release",
     "native_release_to_consequence_chain",
     "release_to_final_damage",
+    "slabx_lh2_component_consequence_validation",
     "literature_frequency_uncertainty",
     "weather_ignition_population",
     "generic_lh2_scope",

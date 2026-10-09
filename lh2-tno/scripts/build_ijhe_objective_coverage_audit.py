@@ -34,6 +34,7 @@ def main() -> int:
     parser.add_argument("--state-snapshot-audit", type=Path, required=True)
     parser.add_argument("--native-packet-evidence", type=Path, required=True)
     parser.add_argument("--native-packet-campaign-ledger", type=Path, required=True)
+    parser.add_argument("--slabx-validation-evidence", type=Path)
     parser.add_argument("--validation-evidence-matrix", type=Path)
     parser.add_argument("--realtime-cache-benchmark", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -48,6 +49,11 @@ def main() -> int:
             state_snapshot_audit=_object(args.state_snapshot_audit),
             native_packet_evidence=_object(args.native_packet_evidence),
             native_packet_campaign_ledger=_object(args.native_packet_campaign_ledger),
+            slabx_validation_evidence=(
+                _object(args.slabx_validation_evidence)
+                if args.slabx_validation_evidence
+                else None
+            ),
             validation_evidence_matrix=(
                 _object(args.validation_evidence_matrix)
                 if args.validation_evidence_matrix
