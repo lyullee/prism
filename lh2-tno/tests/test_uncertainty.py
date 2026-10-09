@@ -74,6 +74,9 @@ def test_published_literature_quantiles_reweight_atoms_without_physics():
     assert result['provider_packet_promoted'] is False
     assert result['qualified_provider_packet_case_count'] == 0
     assert result['complete_facility_qra_claim'] is False
+    assert low['conditional_diagnostic_facility_expected_death_fn_diagnostics']['status'] == (
+        'SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY'
+    )
 
 
 def test_frequency_uncertainty_accepts_facility_event_family_annotations():

@@ -228,6 +228,42 @@ def _fn_curve(atoms: Sequence[Mapping[str, Any]], endpoint: int) -> dict[str, li
     }
 
 
+def _fn_diagnostics(
+    atoms: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Explain an empty F/N curve instead of treating it as missing work.
+
+    PRISM keeps F/N levels at ``N >= 1``.  A valid consequence calculation can
+    therefore produce an empty curve when every declared receptor has zero
+    harm, or when all expected-death values are positive but below one.  The
+    status and maxima make that distinction machine-readable while preserving
+    the conventional curve representation.
+    """
+    curves = [_fn_curve(atoms, endpoint) for endpoint in range(2)]
+    maxima = [
+        max(
+            (float(atom["expected_deaths_low_high"][endpoint]) for atom in atoms),
+            default=0.0,
+        )
+        for endpoint in range(2)
+    ]
+    level_counts = [len(curve["expected_deaths"]) for curve in curves]
+    if not atoms:
+        status = "NO_RISK_ATOMS"
+    elif any(level_counts):
+        status = "CURVE_AVAILABLE"
+    elif any(value > 0.0 for value in maxima):
+        status = "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY"
+    else:
+        status = "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS"
+    return {
+        "status": status,
+        "endpoint_level_count_low_high": level_counts,
+        "max_expected_deaths_low_high": maxima,
+        "curve_uses_threshold": "N >= 1 expected deaths",
+    }
+
+
 def merge_facility_campaign_results(
     campaign_results: Sequence[Mapping[str, Any]],
     *,
@@ -545,6 +581,7 @@ def merge_facility_campaign_results(
         for endpoint in range(2):
             for receptor_id in endpoint_ir:
                 endpoint_ir[receptor_id][endpoint] += weight * float(harm[receptor_id][endpoint])
+    fn_diagnostics = _fn_diagnostics(merged_atoms)
     fn = [_fn_curve(merged_atoms, endpoint) for endpoint in range(2)]
     # Keep a separate facility-level diagnostic view of the atoms that were
     # actually evaluated.  This is deliberately not promoted to
@@ -818,6 +855,7 @@ def merge_facility_campaign_results(
         "known_contribution_expected_death_fn_low_high": fn,
         "conditional_diagnostic_facility_annual_ir_low_high": known_ir,
         "conditional_diagnostic_facility_expected_death_fn_low_high": fn,
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": fn_diagnostics,
         "conditional_diagnostic_facility_risk_available": bool(merged_atoms),
         "conditional_diagnostic_facility_basis": (
             "linear sum of validated risk atoms from the evaluated equipment campaigns; "

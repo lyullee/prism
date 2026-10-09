@@ -1,0 +1,54 @@
+{
+  "schema_version": "prism.near_receptor_facility_assessment_summary.v1",
+  "source_campaign_result": "results/20261024/native_generic_near_receptor_campaign_result_one_event_v2.json",
+  "source_campaign_result_sha256": "6acd909ea01afb7ba1f8023b228bfe3c009bd410e80ba6cc12604f755fea8e7b",
+  "assessment_digest": "e16185bd5358ec5524002d7daf8d82fd9cbaf4095ad190694622656b14d5a29b",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "status": "PARTIAL_FACILITY_SCOPE",
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      4.6800000000000006e-05,
+      4.6800000000000006e-05
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.6800000000000006e-05
+      ]
+    },
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.6800000000000006e-05
+      ]
+    }
+  ],
+  "conditional_diagnostic_facility_expected_death_fn_diagnostics": {
+    "status": "CURVE_AVAILABLE",
+    "endpoint_level_count_low_high": [
+      1,
+      1
+    ],
+    "max_expected_deaths_low_high": [
+      1.0,
+      1.0
+    ],
+    "curve_uses_threshold": "N >= 1 expected deaths"
+  },
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "risk_atom_count": 4,
+  "case_count": 24,
+  "conditional_executed_case_count": 1,
+  "strict_uncomputed_case_count": 24,
+  "fresh_physics_executed": false,
+  "physical_validation_claim": false,
+  "interpretation": "A near-receptor synthetic geometry produces a nonzero diagnostic IR/F/N through the saved facility ledger. It is evidence of chain connectivity; it is not a complete facility QRA or provider-qualified result."
+}

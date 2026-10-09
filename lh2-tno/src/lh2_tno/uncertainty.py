@@ -82,6 +82,32 @@ def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
     return value
 
 
+def _fn_diagnostics(
+    outcomes: list[list[tuple[float, float]]],
+    curves: list[dict[str, list[float]]],
+) -> dict:
+    """Keep frequency-sensitivity F/N emptiness distinguishable from absence."""
+    maxima = [
+        max((float(deaths) for deaths, _ in values), default=0.0)
+        for values in outcomes
+    ]
+    level_counts = [len(curve["expected_deaths"]) for curve in curves]
+    if not any(outcomes):
+        status = "NO_RISK_ATOMS"
+    elif any(level_counts):
+        status = "CURVE_AVAILABLE"
+    elif any(value > 0.0 for value in maxima):
+        status = "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY"
+    else:
+        status = "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS"
+    return {
+        "status": status,
+        "endpoint_level_count_low_high": level_counts,
+        "max_expected_deaths_low_high": maxima,
+        "curve_uses_threshold": "N >= 1 expected deaths",
+    }
+
+
 def _scenario_family_contribution(
     atoms: list[dict],
     event_frequency: dict[str, float],
@@ -181,6 +207,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             ns = sorted({n for n, _ in values if n >= 1})
             fn.append({'expected_deaths': ns,
                        'cumulative_frequency_per_year': [sum(f for deaths, f in values if deaths >= n) for n in ns]})
+        fn_diagnostics = _fn_diagnostics(outcomes, fn)
         ranked = []
         for i in range(2):
             ranked.append({asset: None if asset not in computed_assets else
@@ -194,6 +221,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             'known_expected_death_fn_low_high': fn,
             'conditional_diagnostic_facility_annual_ir_low_high': ir,
             'conditional_diagnostic_facility_expected_death_fn_low_high': fn,
+            'conditional_diagnostic_facility_expected_death_fn_diagnostics': fn_diagnostics,
             'conditional_diagnostic_facility_risk_available': bool(atoms),
             'asset_known_annual_expected_fatalities_low_high': contribution,
             'asset_rank_by_known_expected_fatalities_low_high': ranked,

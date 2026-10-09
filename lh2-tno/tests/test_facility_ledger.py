@@ -113,6 +113,41 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     )
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
     assert result["scenario_family_contributions"] == {}
+    assert result["conditional_diagnostic_facility_expected_death_fn_diagnostics"] == {
+        "status": "CURVE_AVAILABLE",
+        "endpoint_level_count_low_high": [1, 1],
+        "max_expected_deaths_low_high": [1.2, 1.4],
+        "curve_uses_threshold": "N >= 1 expected deaths",
+    }
+
+
+def test_facility_ledger_explains_zero_harm_fn_curve_without_promoting_zero_to_missing():
+    result = _result(
+        event_id="event-zero-harm",
+        asset_id="asset-zero-harm",
+        component_id="tank-zero-harm",
+        frequency=1e-3,
+    )
+    result["risk_atoms"][0]["receptor_harm_low_high"] = {
+        "receptor-a": [0.0, 0.0],
+        "receptor-b": [0.0, 0.0],
+    }
+    result["risk_atoms"][0]["expected_deaths_low_high"] = [0.0, 0.0]
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-zero-harm",)
+    )
+
+    assert merged["conditional_diagnostic_facility_risk_available"] is True
+    assert merged["conditional_diagnostic_facility_expected_death_fn_low_high"] == [
+        {"expected_deaths": [], "cumulative_frequency_per_year": []},
+        {"expected_deaths": [], "cumulative_frequency_per_year": []},
+    ]
+    assert merged["conditional_diagnostic_facility_expected_death_fn_diagnostics"] == {
+        "status": "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
+        "endpoint_level_count_low_high": [0, 0],
+        "max_expected_deaths_low_high": [0.0, 0.0],
+        "curve_uses_threshold": "N >= 1 expected deaths",
+    }
 
 
 def test_facility_ledger_exposes_component_case_accounting_and_gate_categories():

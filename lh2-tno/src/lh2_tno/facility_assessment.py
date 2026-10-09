@@ -129,6 +129,9 @@ def build_facility_assessment(
         "conditional_diagnostic_facility_expected_death_fn_low_high": ledger[
             "conditional_diagnostic_facility_expected_death_fn_low_high"
         ],
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": ledger[
+            "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+        ],
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
