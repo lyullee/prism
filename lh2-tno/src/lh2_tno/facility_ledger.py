@@ -313,6 +313,132 @@ def _population_accounting(
     }
 
 
+def _scenario_branch_accounting(
+    atoms: Sequence[Mapping[str, Any]],
+    conditions: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Preserve the condition, release, and ignition dimensions of each atom.
+
+    The facility IR/F-N sum is intentionally performed over risk atoms.  This
+    companion ledger makes the dimensions behind that sum inspectable without
+    reweighting or inventing a frequency.  A release branch is the explicit
+    isolation/termination branch carried by the provider packet identity; an
+    ignition branch is the conditional outcome label on the atom.  Family
+    views remain attached to atoms and are never summed as independent risk.
+    """
+    if not atoms:
+        return {
+            "status": "NO_RISK_ATOMS",
+            "annual_conditions": {},
+            "release_branches": {},
+            "ignition_branches": {},
+            "cross_product_count": 0,
+        }
+
+    condition_groups: dict[str, dict[str, Any]] = {}
+    release_groups: dict[str, dict[str, Any]] = {}
+    ignition_groups: dict[str, dict[str, Any]] = {}
+    cross_product: set[tuple[str, str, str]] = set()
+
+    def _group(group: dict[str, dict[str, Any]], key: str) -> dict[str, Any]:
+        return group.setdefault(
+            key,
+            {
+                "event_ids": set(),
+                "risk_atom_count": 0,
+                "annual_condition_ids": set(),
+                "release_branch_ids": set(),
+                "ignition_branches": set(),
+                "scenario_families": set(),
+            },
+        )
+
+    def _families(atom: Mapping[str, Any]) -> set[str]:
+        values = atom.get("scenario_families", ())
+        if not isinstance(values, Sequence) or isinstance(values, (str, bytes)):
+            return set()
+        return {str(value) for value in values if isinstance(value, str) and value.strip()}
+
+    for atom in atoms:
+        event_id = str(atom.get("event_id", ""))
+        condition_id = str(atom.get("annual_condition_id", ""))
+        release_id = str(atom.get("release_branch_id", ""))
+        ignition_id = str(atom.get("ignition_branch", ""))
+        families = _families(atom)
+        cross_product.add((condition_id, release_id, ignition_id))
+
+        condition_row = _group(condition_groups, condition_id)
+        condition_row["event_ids"].add(event_id)
+        condition_row["risk_atom_count"] += 1
+        condition_row["release_branch_ids"].add(release_id)
+        condition_row["ignition_branches"].add(ignition_id)
+        condition_row["scenario_families"].update(families)
+
+        release_row = _group(release_groups, release_id)
+        release_row["event_ids"].add(event_id)
+        release_row["risk_atom_count"] += 1
+        release_row["annual_condition_ids"].add(condition_id)
+        release_row["ignition_branches"].add(ignition_id)
+        release_row["scenario_families"].update(families)
+        identity = atom.get("provider_packet_identity")
+        termination_bases = identity.get("termination_bases", ()) if isinstance(identity, Mapping) else ()
+        if isinstance(termination_bases, Sequence) and not isinstance(termination_bases, (str, bytes)):
+            counts = release_row.setdefault("termination_basis_counts", defaultdict(int))
+            for basis in termination_bases:
+                if isinstance(basis, str) and basis.strip():
+                    counts[str(basis)] += 1
+
+        ignition_row = _group(ignition_groups, ignition_id)
+        ignition_row["event_ids"].add(event_id)
+        ignition_row["risk_atom_count"] += 1
+        ignition_row["annual_condition_ids"].add(condition_id)
+        ignition_row["release_branch_ids"].add(release_id)
+        ignition_row["scenario_families"].update(families)
+        deaths = atom.get("expected_deaths_low_high", ())
+        if isinstance(deaths, Sequence) and not isinstance(deaths, (str, bytes)) and any(
+            isinstance(value, (int, float)) and not isinstance(value, bool) and float(value) > 0.0
+            for value in deaths
+        ):
+            ignition_row["positive_harm_atom_count"] = ignition_row.get("positive_harm_atom_count", 0) + 1
+
+    def _finalize(group: Mapping[str, Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
+        output: dict[str, dict[str, Any]] = {}
+        for key in sorted(group):
+            row = group[key]
+            value = {
+                "event_count": len(row["event_ids"]),
+                "risk_atom_count": int(row["risk_atom_count"]),
+                "annual_condition_ids": sorted(row.get("annual_condition_ids", ())),
+                "release_branch_ids": sorted(row.get("release_branch_ids", ())),
+                "ignition_branches": sorted(row.get("ignition_branches", ())),
+                "scenario_families": sorted(row.get("scenario_families", ())),
+            }
+            if "termination_basis_counts" in row:
+                value["termination_basis_counts"] = dict(sorted(row["termination_basis_counts"].items()))
+            if "positive_harm_atom_count" in row:
+                value["positive_harm_atom_count"] = int(row["positive_harm_atom_count"])
+            output[key] = value
+        return output
+
+    condition_output: dict[str, dict[str, Any]] = {}
+    for condition_id, row in _finalize(condition_groups).items():
+        source = conditions.get(condition_id, {})
+        condition_output[condition_id] = {
+            "annual_probability": source.get("annual_probability"),
+            "weather": source.get("weather", source.get("weather_state")),
+            "provenance": source.get("provenance"),
+            **row,
+        }
+    return {
+        "status": "EXPLICIT_BRANCH_ACCOUNTING",
+        "annual_conditions": condition_output,
+        "release_branches": _finalize(release_groups),
+        "ignition_branches": _finalize(ignition_groups),
+        "cross_product_count": len(cross_product),
+        "frequency_reallocation_performed": False,
+    }
+
+
 def _fn_curve(atoms: Sequence[Mapping[str, Any]], endpoint: int) -> dict[str, list[float]]:
     outcomes = []
     for atom in atoms:
@@ -618,6 +744,10 @@ def merge_facility_campaign_results(
         merged_annual_conditions,
         referenced_condition_ids=referenced_condition_ids,
         receptor_ids=receptor_ids,
+    )
+    scenario_branch_accounting = _scenario_branch_accounting(
+        merged_atoms,
+        merged_annual_conditions,
     )
     expected_components = {str(component_id) for component_id in expected_component_ids}
     observed_components = set(seen_components)
@@ -940,6 +1070,8 @@ def merge_facility_campaign_results(
         "annual_condition_count": population_accounting["annual_condition_count"],
         "population_status": population_accounting["status"],
         "population_row_count": population_accounting["population_row_count"],
+        "scenario_branch_status": scenario_branch_accounting["status"],
+        "scenario_branch_cross_product_count": scenario_branch_accounting["cross_product_count"],
         "case_status_counts": dict(sorted(case_status_counts.items())),
         "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
         "operator_limited_case_count": operator_limited_case_count,
@@ -976,6 +1108,7 @@ def merge_facility_campaign_results(
         ],
         "annual_condition_count": population_accounting["annual_condition_count"],
         "population_accounting": population_accounting,
+        "scenario_branch_accounting": scenario_branch_accounting,
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,
@@ -1046,6 +1179,11 @@ def merge_facility_campaign_results(
             "scenario_family_contributions": (
                 "risk atoms retain their declared scenario_families; overlapping physical "
                 "families are views of the same atoms and must not be summed across families"
+            ),
+            "scenario_branch_accounting": (
+                "annual-condition weather, release/termination, and ignition branches are "
+                "preserved as diagnostics over the same risk atoms; no branch frequency is "
+                "inferred, reallocated, or double-counted"
             ),
         },
     }

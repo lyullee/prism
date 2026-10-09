@@ -114,6 +114,14 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
     assert result["scenario_family_contributions"] == {}
     assert result["population_accounting"]["status"] == "NOT_RECORDED_IN_INPUT"
+    assert result["scenario_branch_accounting"]["status"] == "EXPLICIT_BRANCH_ACCOUNTING"
+    assert result["scenario_branch_accounting"]["cross_product_count"] == 1
+    assert result["scenario_branch_accounting"]["release_branches"]["release-1"][
+        "risk_atom_count"
+    ] == 2
+    assert result["scenario_branch_accounting"]["ignition_branches"]["direct_fire"][
+        "event_count"
+    ] == 2
     assert result["conditional_diagnostic_facility_coverage"]["population_status"] == (
         "NOT_RECORDED_IN_INPUT"
     )
@@ -222,6 +230,9 @@ def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():
     assert assessment[
         "conditional_diagnostic_facility_expected_death_fn_diagnostics"
     ]["status"] == "CURVE_AVAILABLE"
+    assert assessment["scenario_branch_accounting"]["status"] == (
+        "EXPLICIT_BRANCH_ACCOUNTING"
+    )
 
 
 def test_facility_ledger_exposes_component_case_accounting_and_gate_categories():
@@ -395,6 +406,36 @@ def test_facility_ledger_keeps_weather_and_release_branches_as_distinct_cases():
     assert coverage["conditional_uncomputed_case_count"] == 0
     assert coverage["strict_uncomputed_case_count"] == 1
     assert coverage["overlapping_case_uncomputed_count"] == 1
+
+
+def test_facility_ledger_preserves_weather_and_termination_branch_metadata():
+    result = _result(
+        event_id="event-branches", asset_id="asset-branches", component_id="tank-branches",
+        frequency=1e-3,
+    )
+    result["annual_conditions"] = [{
+        "id": "weather-1",
+        "annual_probability": 0.7,
+        "weather": {"wind_speed_m_per_s": 3.0, "stability_class": "D"},
+        "provenance": "literature-weather-bin",
+    }]
+    result["risk_atoms"][0]["provider_packet_identity"] = {
+        "termination_bases": ["explicit_provider_termination", "model_pressure_equalization"],
+    }
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-branches",)
+    )
+
+    branches = merged["scenario_branch_accounting"]
+    assert branches["status"] == "EXPLICIT_BRANCH_ACCOUNTING"
+    assert branches["cross_product_count"] == 1
+    assert branches["annual_conditions"]["weather-1"]["annual_probability"] == pytest.approx(0.7)
+    assert branches["annual_conditions"]["weather-1"]["weather"]["wind_speed_m_per_s"] == pytest.approx(3.0)
+    assert branches["release_branches"]["release-1"]["termination_basis_counts"] == {
+        "explicit_provider_termination": 1,
+        "model_pressure_equalization": 1,
+    }
+    assert branches["ignition_branches"]["direct_fire"]["positive_harm_atom_count"] == 1
 
 
 def test_facility_ledger_accepts_not_applicable_accident_family():

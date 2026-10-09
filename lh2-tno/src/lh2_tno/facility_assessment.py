@@ -15,6 +15,7 @@ from .contracts import canonical_digest
 from .facility_ledger import (
     _fn_diagnostics,
     _population_accounting,
+    _scenario_branch_accounting,
     merge_facility_campaign_results,
 )
 from .uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty
@@ -147,6 +148,20 @@ def build_facility_assessment(
             ],
             receptor_ids=receptors,
         )
+    scenario_branch_accounting = ledger.get("scenario_branch_accounting")
+    if not isinstance(scenario_branch_accounting, Mapping):
+        atoms = ledger.get("risk_atoms", ())
+        atom_rows = (
+            atoms
+            if isinstance(atoms, Sequence) and not isinstance(atoms, (str, bytes))
+            else ()
+        )
+        conditions = {
+            str(condition.get("id")): condition
+            for condition in ledger.get("annual_conditions", ())
+            if isinstance(condition, Mapping) and condition.get("id")
+        }
+        scenario_branch_accounting = _scenario_branch_accounting(atom_rows, conditions)
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -178,6 +193,7 @@ def build_facility_assessment(
         "conditional_diagnostic_facility_expected_death_fn_diagnostics": fn_diagnostics,
         "annual_condition_count": population_accounting.get("annual_condition_count", 0),
         "population_accounting": population_accounting,
+        "scenario_branch_accounting": scenario_branch_accounting,
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
@@ -191,6 +207,11 @@ def build_facility_assessment(
             "conditional_diagnostic_facility": "the atom-level facility IR/F-N sum is exposed for diagnostics and frequency sensitivity, while qualification blockers continue to withhold the facility total",
             "frequency": "optional literature scenarios reweight saved risk atoms and do not infer missing frequency",
             "provider_packet": ledger["semantics"]["provider_packet"],
+            "scenario_branch_accounting": (
+                "annual-condition weather, release/termination, and ignition branches are "
+                "preserved over the same validated atoms; no frequency inference or branch "
+                "reallocation is performed"
+            ),
         },
     }
     assessment["assessment_digest"] = canonical_digest(assessment)

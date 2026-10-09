@@ -483,6 +483,13 @@ def _facility_assessment(**overrides):
             "referenced_condition_count": 1,
             "referenced_condition_ids": ["weather-1"],
         },
+        "scenario_branch_accounting": {
+            "status": "EXPLICIT_BRANCH_ACCOUNTING",
+            "cross_product_count": 1,
+            "annual_conditions": {"weather-1": {"weather": {"wind_speed_m_per_s": 3.0}}},
+            "release_branches": {"release-1": {"termination_basis_counts": {"inventory_depletion": 1}}},
+            "ignition_branches": {"direct_fire": {"risk_atom_count": 96}},
+        },
         "conditional_diagnostic_facility_coverage": {
             "event_count": 24,
             "case_count": 24,
@@ -887,6 +894,9 @@ def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_t
     ]["status"] == "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS"
     assert check["evidence"]["population_accounting"]["status"] == (
         "NOT_RECORDED_IN_INPUT"
+    )
+    assert check["evidence"]["scenario_branch_accounting"]["status"] == (
+        "EXPLICIT_BRANCH_ACCOUNTING"
     )
     assert report["complete_facility_qra_claim"] is False
     assert len(report["blocking_reasons"]) == 6

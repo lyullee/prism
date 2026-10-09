@@ -1046,6 +1046,7 @@ def build_ijhe_completion_audit(
                         "conditional_diagnostic_facility_expected_death_fn_diagnostics"
                     ),
                     "population_accounting": assessment.get("population_accounting"),
+                    "scenario_branch_accounting": assessment.get("scenario_branch_accounting"),
                     "coverage": coverage,
                     "facility_total_risk_available": assessment.get(
                         "facility_total_risk_available"
