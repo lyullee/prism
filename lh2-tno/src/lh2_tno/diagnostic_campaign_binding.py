@@ -146,6 +146,14 @@ def build_diagnostic_campaign_binding(
         for rows in case_by_event.values()
         for row in rows
     )
+    identity_case_count = sum(
+        1
+        for row in campaign_cases
+        if isinstance(row, Mapping)
+        and isinstance(row.get("provider_packet_identity"), Mapping)
+        and row["provider_packet_identity"].get("provider_source_digests")
+        and row["provider_packet_identity"].get("provider_result_digests")
+    )
     risk_atom_count_by_event = {event_id: len(rows) for event_id, rows in atom_by_event.items()}
     structural_complete = (
         bool(packet_ids)
@@ -199,10 +207,15 @@ def build_diagnostic_campaign_binding(
         "risk_atom_count_by_event": risk_atom_count_by_event,
         "case_status_counts": dict(case_status_counts),
         "executed_case_count": executed_case_count,
+        "campaign_provider_identity_case_count": identity_case_count,
+        "campaign_provider_identity_recorded": identity_case_count == len(campaign_cases) and bool(campaign_cases),
         "structural_binding_complete": structural_complete,
         "packet_identity_consumed": False,
         "packet_identity_consumption_reason": (
-            "campaign event/case records contain no provider_source_digest or provider_result_digest; "
+            "campaign result preserves provider source/result digests for every case, but those digests "
+            "were not proven equal to the packet-evidence files supplied to this audit"
+            if identity_case_count == len(campaign_cases) and bool(campaign_cases)
+            else "campaign event/case records contain no provider_source_digest or provider_result_digest; "
             "the result proves event identity and opening geometry only"
         ),
         "frequency_from_provider_packet": False,

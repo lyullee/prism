@@ -81,6 +81,44 @@ class ReleaseBranch(Contract):
         return self
 
 
+def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
+    """Return compact provider identity metadata carried into result ledgers.
+
+    The consequence request already owns the strict resolved release object,
+    but the historical campaign result only retained a request digest.  Keep
+    the provider source/result digests and clock identity beside each case so
+    a later audit can distinguish packet consumption from event-ID matching.
+    This helper records identity only; it never copies the full flow history or
+    assigns frequency.
+    """
+    packets = []
+    if request.resolved_release is not None:
+        packets.append(request.resolved_release)
+    if request.resolved_liquid_release is not None:
+        packets.append(request.resolved_liquid_release)
+    release_set = request.resolved_release_set
+    if release_set is not None:
+        packets.extend(release_set.releases)
+    if not packets:
+        return None
+    first = packets[0]
+    source_digests = [getattr(packet, "provider_source_digest", None) for packet in packets]
+    result_digests = [getattr(packet, "provider_result_digest", None) for packet in packets]
+    return {
+        "event_id": first.event_id,
+        "component_id": first.component_id,
+        "provider_export_schema": (
+            "prism.resolved_release_set.v1" if release_set is not None
+            else first.provider_export_schema
+        ),
+        "port_ids": [packet.port_id for packet in packets],
+        "provider_source_digests": [value for value in source_digests if value is not None],
+        "provider_result_digests": [value for value in result_digests if value is not None],
+        "provider_boundary_references": [packet.provider_boundary_reference for packet in packets],
+        "termination_bases": [packet.termination_basis for packet in packets],
+        "duration_s": [packet.duration_s for packet in packets],
+    }
+
 class EventRoute(Contract):
     event_id: Name
     branches: tuple[ReleaseBranch, ...]
@@ -193,6 +231,8 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     missing.append(row.copy()); cases.append(row)
                     continue
                 q = prepared[(e.id, b.id, c.id)]
+                packet_identity = _provider_packet_identity(q)
+                row['provider_packet_identity'] = packet_identity
                 synthetic |= q.release_termination.basis == 'synthetic_diagnostic_horizon'
                 exposures.add(q.radiative_fraction_range)
                 begin = time.perf_counter()
@@ -213,7 +253,8 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     adapter_source_digest=result.get('adapter_source_digest'),
                     stage_elapsed_ms=data.get('stage_elapsed_ms', {}),
                     mass_ledger=data.get('mass_ledger'),
-                    termination=q.release_termination.model_dump(mode='json'))
+                    termination=q.release_termination.model_dump(mode='json'),
+                    provider_packet_identity=packet_identity)
                 if data.get('explosion', {}).get('domain_truncated') is not False:
                     row['status'] = 'EXECUTED_DOMAIN_INCOMPLETE'
                     row['reason'] = 'outside-domain flammable mass unresolved or domain-completeness flag absent'
@@ -232,6 +273,7 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                         'annual_condition_id': c.id, 'release_branch_id': b.id, 'ignition_branch': key,
                         'initiating_frequency_per_year': e.annual_frequency_per_year,
                         'conditional_weight': weight,
+                        'provider_packet_identity': packet_identity,
                         'receptor_harm_low_high': {rid: [harms[rid][i][key] for i in range(2)] for rid in receptor_ids},
                         'expected_deaths_low_high': [sum(population[rid]*harms[rid][i][key] for rid in receptor_ids) for i in range(2)]})
     if len(exposures) > 1:

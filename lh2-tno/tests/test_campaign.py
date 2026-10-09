@@ -2,14 +2,46 @@
 import copy
 import json
 from pathlib import Path
+from types import SimpleNamespace
 import pytest
 from lh2_tno.backend import BackendError
-from lh2_tno.campaign import RiskCampaign
+from lh2_tno.campaign import RiskCampaign, _provider_packet_identity
 from lh2_tno.contracts import Facility
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
 
 ROOT=Path(__file__).parents[1]
+
+
+def test_provider_packet_identity_keeps_digest_and_clock_without_flow_history():
+    release = SimpleNamespace(
+        provider_export_schema='prism.resolved_release.v1',
+        event_id='scope/tank/G1',
+        component_id='tank-01',
+        port_id='tank-out',
+        provider_source_digest='a' * 64,
+        provider_result_digest='b' * 64,
+        provider_boundary_reference='provider outlet',
+        termination_basis='inventory_depletion',
+        duration_s=0.25,
+    )
+    request = SimpleNamespace(
+        resolved_release=release,
+        resolved_liquid_release=None,
+        resolved_release_set=None,
+    )
+    identity = _provider_packet_identity(request)
+    assert identity == {
+        'event_id': 'scope/tank/G1',
+        'component_id': 'tank-01',
+        'provider_export_schema': 'prism.resolved_release.v1',
+        'port_ids': ['tank-out'],
+        'provider_source_digests': ['a' * 64],
+        'provider_result_digests': ['b' * 64],
+        'provider_boundary_references': ['provider outlet'],
+        'termination_bases': ['inventory_depletion'],
+        'duration_s': [0.25],
+    }
 
 
 def inputs():

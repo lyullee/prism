@@ -334,11 +334,18 @@ def build_ijhe_completion_audit(
                     "frequency_from_provider_packet": binding.get("frequency_from_provider_packet"),
                     "packet_claims_preserved": binding.get("packet_claims_preserved"),
                     "executed_case_count": binding.get("executed_case_count"),
+                    "campaign_provider_identity_case_count": binding.get(
+                        "campaign_provider_identity_case_count"
+                    ),
+                    "campaign_provider_identity_recorded": binding.get(
+                        "campaign_provider_identity_recorded"
+                    ),
                 },
                 "interpretation": (
                     "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
-                    "The campaign does not carry provider packet digests, so packet time histories remain "
-                    "unconsumed evidence and the result stays diagnostic-only."
+                    "The campaign may preserve provider packet identity metadata, but equality with the "
+                    "packet-evidence files must still be proven; packet time histories remain unconsumed "
+                    "evidence and the result stays diagnostic-only."
                 ),
             }
         )

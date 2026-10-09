@@ -85,9 +85,9 @@ python scripts/audit_diagnostic_campaign_binding.py `
 
 현재 결과는 `PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING`이다. exact/strict packet 사건 24개가 campaign event 24개, case 24개, risk atom 96개에 모두 도달했고, 설비 component ID도 24/24가 일치했다. 개구 직경을 선언한 21개 사건은 campaign의 개구와 일치했으며, pressure-relief·instantaneous-inventory·inventory-over-600s처럼 개구 직경을 정의하지 않는 3개 사건은 `opening_geometry_unchecked_event_count=3`으로 따로 기록했다. campaign case 상태는 `EXECUTED` 5건과 `EXECUTED_OPERATOR_LIMITED` 19건이다.
 
-이 결과는 **구조적 결합**을 증명한다. 현재 campaign event/case에는 provider packet의 `provider_source_digest`·`provider_result_digest`가 없으므로 `packet_identity_consumed=false`로 남긴다. 즉 campaign이 24개 사건을 인식하고 피해 risk atom까지 만들었다는 뜻이지, 저장된 외부 packet의 시간별 유량·엔탈피를 실제로 소비했다는 뜻은 아니다. campaign 빈도는 독립된 문헌 catalog에서 왔으며 `frequency_from_provider_packet=false`를 유지한다. qualified provider packet, 시설 전체 IR/F-N, 물리검증은 이 감사로 승격되지 않는다.
+이 결과는 **구조적 결합**을 증명한다. 이전 공식 campaign 결과에는 provider packet의 `provider_source_digest`·`provider_result_digest`가 없었고, 2026-10-15 재실행 결과에는 24/24 case에 `provider_packet_identity`가 기록됐다. 그러나 그 digest가 이 worklist packet 증거 파일과 같은지는 확인되지 않아 `packet_identity_consumed=false`로 남긴다. 즉 campaign이 24개 사건을 인식하고 피해 risk atom까지 만들었다는 것과, 검사된 외부 packet의 시간별 유량·엔탈피를 실제로 소비했다는 것을 분리한다. campaign 빈도는 독립된 문헌 catalog에서 왔으며 `frequency_from_provider_packet=false`를 유지한다. qualified provider packet, 시설 전체 IR/F-N, 물리검증은 이 감사로 승격되지 않는다.
 
-`build_ijhe_completion_audit.py --diagnostic-campaign-binding`을 사용하면 이 결과가 `diagnostic_worklist_campaign_binding_evidence` 검사로 들어간다. 최신 live audit는 18개 검사 중 7개 차단이고, 이 결합 검사는 `PASS`이면서 `diagnostic_only=true`이다. 남은 개발은 provider digest·방출 시계·상태 장부를 campaign request/case에 보존해 실제 packet 소비를 증명하고, native 사고 export와 독립 물리검증을 확보하는 일이다.
+`build_ijhe_completion_audit.py --diagnostic-campaign-binding`을 사용하면 이 결과가 `diagnostic_worklist_campaign_binding_evidence` 검사로 들어간다. 최신 live audit는 18개 검사 중 7개 차단이고, 이 결합 검사는 `PASS`이면서 `diagnostic_only=true`이다. campaign 실행 코드에는 이제 provider source/result digest, port, 종료 basis, 방출시간을 case와 risk atom에 보존하는 `provider_packet_identity` ledger가 들어갔다. 2026-10-15 재실행에서는 24/24 case에 identity가 기록됐다. 하지만 그 digest가 이번 worklist packet 증거 파일과 같은지 확인되지 않아 `packet_identity_consumed=false`를 유지한다. 따라서 campaign이 provider identity를 보존한다는 것과 검사된 외부 packet을 실제로 사용했다는 것을 분리해 기록한다. native 사고 export와 독립 물리검증도 확보해야 한다.
 
 추가 파일:
 
