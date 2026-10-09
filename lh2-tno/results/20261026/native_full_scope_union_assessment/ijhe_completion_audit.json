@@ -13,6 +13,32 @@
       "blocking_reason": null
     },
     {
+      "name": "diagnostic_observed_equipment_state_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\inspection_center_observed_state_evidence.json",
+        "schema_version": "prism.observed_equipment_state_evidence.v1",
+        "status": "OBSERVATION_STATE_EVIDENCE_ONLY",
+        "source_count": 3,
+        "sample_count": 8955,
+        "component_count": 3,
+        "policy": {
+          "canonical_snapshot_schema": "prism.equipment_state_snapshot.v1",
+          "state_only": true,
+          "release_scenario_generated": false,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_packet_promoted": false,
+          "physical_validation_claim": false,
+          "facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      },
+      "interpretation": "Observed telemetry supports equipment-state calibration and snapshot review. It does not generate an accident, infer frequency, qualify a provider packet, or promote facility IR/F-N."
+    },
+    {
       "name": "external_native_model_contract_audit",
       "status": "PASS",
       "diagnostic_only": true,

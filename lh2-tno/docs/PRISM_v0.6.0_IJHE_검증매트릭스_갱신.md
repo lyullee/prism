@@ -107,7 +107,8 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --native-packet-campaign-ledger results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json `
   --native-binding-reconciliation results/20261022/native_binding_reconciliation.json `
   --domain-recovery-audit results/20261024/domain_recovery_audit_flammability_gate_v2.json `
-  --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json
+  --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json `
+  --observed-state-evidence examples/inspection_center_observed_state_evidence.json
 ```
 
 매트릭스 domain 추가와 함께 검증한 테스트는 `tests/test_validation_evidence_matrix.py`
@@ -168,7 +169,7 @@ python scripts/build_v060_readiness_report.py `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```
 
-현재 completion audit는 29개 검사 중 26개 PASS·3개 BLOCKED다. 네이티브
+현재 completion audit는 30개 검사 중 27개 PASS·3개 BLOCKED다. 네이티브
 catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS로 만들지만,
 이는 합성 진단 packet의 exact-match일 뿐 qualified provider evidence가 아니다.
 따라서 실제 provider packet 0건, 엄격한 사고범위 차단, 시설 전체 IR/F-N 보류는

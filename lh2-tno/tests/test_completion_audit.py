@@ -1479,3 +1479,46 @@ def test_completion_audit_records_exact_native_scope_catalog_separately_from_pro
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
     assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_records_observed_state_evidence_without_accident_promotion():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        observed_state_evidence={
+            "schema_version": "prism.observed_equipment_state_evidence.v1",
+            "status": "OBSERVATION_STATE_EVIDENCE_ONLY",
+            "source_count": 3,
+            "sample_count": 8955,
+            "component_count": 3,
+            "source_rows": [
+                {"source_id": "inspection-center-intake-10-runs"},
+                {"source_id": "inspection-center-storage-vent-10-runs"},
+                {"source_id": "inspection-center-supply-10-runs"},
+            ],
+            "component_rows": [
+                {"component_id": "lh2-intake-tank"},
+                {"component_id": "lh2-storage-vent"},
+                {"component_id": "lh2-supply-vaporizer-boundary"},
+            ],
+            "policy": {
+                "canonical_snapshot_schema": "prism.equipment_state_snapshot.v1",
+                "state_only": True,
+                "release_scenario_generated": False,
+                "frequency_inference_performed": False,
+                "sensor_frequency_learning_used": False,
+                "provider_packet_promoted": False,
+                "physical_validation_claim": False,
+                "facility_qra_claim": False,
+                "diagnostic_only": True,
+            },
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_equipment_state_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False

@@ -57,8 +57,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 29
-    assert verification["ijhe_audit_pass_count"] == 26
+    assert verification["ijhe_audit_check_count"] == 30
+    assert verification["ijhe_audit_pass_count"] == 27
     assert verification["ijhe_audit_blocked_count"] == 3
     assert verification["native_scope_packet_catalog_status"] == (
         "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
@@ -106,14 +106,21 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 29
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 26
+    assert len(audit["checks"]) == 30
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 27
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 3
     state_snapshot_check = next(
         check for check in audit["checks"]
         if check["name"] == "diagnostic_equipment_state_snapshot_binding"
     )
     assert state_snapshot_check["status"] == "PASS"
+    observed_state_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "diagnostic_observed_equipment_state_evidence"
+    )
+    assert observed_state_check["status"] == "PASS"
+    assert observed_state_check["evidence"]["sample_count"] == 8955
+    assert observed_state_check["evidence"]["component_count"] == 3
     provider_worklist_check = next(
         check for check in audit["checks"]
         if check["name"] == "provider_worklist_coverage"

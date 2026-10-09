@@ -79,6 +79,7 @@ def build_ijhe_completion_audit(
     domain_recovery_audit: Mapping[str, Any] | None = None,
     state_snapshot_binding_audit: Mapping[str, Any] | None = None,
     native_scope_packet_catalog_verification: Mapping[str, Any] | None = None,
+    observed_state_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -281,6 +282,55 @@ def build_ijhe_completion_audit(
             "no executed release-to-consequence case is present",
         ),
     ]
+    if observed_state_evidence is not None:
+        observed = observed_state_evidence
+        policy = observed.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        observed_valid = (
+            observed.get("schema_version") == "prism.observed_equipment_state_evidence.v1"
+            and observed.get("status") == "OBSERVATION_STATE_EVIDENCE_ONLY"
+            and isinstance(observed.get("source_count"), int)
+            and observed.get("source_count") > 0
+            and isinstance(observed.get("sample_count"), int)
+            and observed.get("sample_count") > 0
+            and isinstance(observed.get("component_count"), int)
+            and observed.get("component_count") > 0
+            and isinstance(observed.get("source_rows"), list)
+            and len(observed.get("source_rows")) == observed.get("source_count")
+            and isinstance(observed.get("component_rows"), list)
+            and len(observed.get("component_rows")) == observed.get("component_count")
+            and policy.get("canonical_snapshot_schema") == "prism.equipment_state_snapshot.v1"
+            and policy.get("state_only") is True
+            and policy.get("release_scenario_generated") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("sensor_frequency_learning_used") is False
+            and policy.get("provider_packet_promoted") is False
+            and policy.get("physical_validation_claim") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("diagnostic_only") is True
+        )
+        checks.append(
+            {
+                "name": "diagnostic_observed_equipment_state_evidence",
+                "status": "PASS" if observed_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None if observed_valid else "observed equipment-state evidence is missing or malformed",
+                "evidence": {
+                    "record": observed.get("_record_path"),
+                    "schema_version": observed.get("schema_version"),
+                    "status": observed.get("status"),
+                    "source_count": observed.get("source_count"),
+                    "sample_count": observed.get("sample_count"),
+                    "component_count": observed.get("component_count"),
+                    "policy": policy,
+                },
+                "interpretation": (
+                    "Observed telemetry supports equipment-state calibration and snapshot review. "
+                    "It does not generate an accident, infer frequency, qualify a provider packet, "
+                    "or promote facility IR/F-N."
+                ),
+            }
+        )
     if native_model_contract_audit is not None:
         native_audit = native_model_contract_audit
         native_rows = native_audit.get("rows")

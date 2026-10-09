@@ -1,0 +1,96 @@
+{
+  "schema_version": "prism.observed_state_input_manifest.v1",
+  "description": "Normalized state-only evidence manifest for LH2 Inspection Support Center demonstration files. Paths are relative to the external data root and are not event-frequency inputs.",
+  "sources": [
+    {
+      "source_id": "inspection-center-intake-10-runs",
+      "path": "1. \uc561\ud654\uc218\uc18c \uc778\uc218 \uc2dc\ub098\ub9ac\uc624 \ub370\uc774\ud130/\uc561\ud654\uc218\uc18c_\uc778\uc218_\uc608\uce21\ub370\uc774\ud130_10\ud68c\ucc28.xlsx",
+      "format": "xlsx",
+      "sheet_index": 0,
+      "component_id": "lh2-intake-tank",
+      "origin": "historian_measured",
+      "time": {
+        "column": "at_step",
+        "mode": "step",
+        "cadence_s": 1.0
+      },
+      "signals": {
+        "pressure": {
+          "column": "PT1206",
+          "unit": "MPa",
+          "zero_is_missing": true,
+          "nonpositive_is_missing": true,
+          "sensor_location": "PT1206"
+        },
+        "temperature": {
+          "column": "TT1106",
+          "unit": "C",
+          "sensor_location": "TT1106"
+        },
+        "differential_pressure": {
+          "column": "DPT1101",
+          "unit": "kPa",
+          "sensor_location": "DPT1101"
+        }
+      }
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs",
+      "path": "2. \uc561\ud654\uc218\uc18c \uc800\uc7a5(\ubca4\ud2b8) \uc2dc\ub098\ub9ac\uc624 \ub370\uc774\ud130/\uc561\ud654\uc218\uc18c_\uc800\uc7a5\ubca4\ud2b8_\uc608\uce21\ub370\uc774\ud130_10\ud68c\ucc28.xlsx",
+      "format": "xlsx",
+      "sheet_index": 0,
+      "component_id": "lh2-storage-vent",
+      "origin": "historian_measured",
+      "time": {
+        "column": "timestamp",
+        "mode": "step",
+        "cadence_s": 15.0
+      },
+      "signals": {
+        "pressure": {
+          "column": "PT1105A",
+          "unit": "MPa",
+          "zero_is_missing": true,
+          "sensor_location": "PT1105A"
+        },
+        "differential_pressure": {
+          "column": "DPT1101",
+          "unit": "kPa",
+          "sensor_location": "DPT1101"
+        }
+      }
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs",
+      "path": "3. \uc561\ud654\uc218\uc18c \uacf5\uae09 \uc2dc\ub098\ub9ac\uc624 \ub370\uc774\ud130/\uc561\ud654\uc218\uc18c_\uacf5\uae09_\uc608\uce21\ub370\uc774\ud130_10\ud68c\ucc28.xlsx",
+      "format": "xlsx",
+      "sheet_index": 0,
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "origin": "historian_measured",
+      "time": {
+        "column": "at_step",
+        "mode": "step",
+        "cadence_s": 1.0
+      },
+      "signals": {
+        "pressure": {
+          "column": "PT1101",
+          "unit": "MPa",
+          "zero_is_missing": true,
+          "sensor_location": "PT1101"
+        },
+        "temperature": {
+          "column": "TT1116",
+          "unit": "C",
+          "sensor_location": "TT1116"
+        },
+        "differential_pressure": {
+          "column": "DPT1101",
+          "unit": "kPa",
+          "sensor_location": "DPT1101"
+        }
+      }
+    }
+  ],
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\\uc561\ud654\uc218\uc18c\uac80\uc0ac\uc9c0\uc6d0\uc13c\ud130 \ub370\uc774\ud130"
+}

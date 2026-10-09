@@ -16,12 +16,21 @@ union에 추가한 vertical handoff 5개와 inventory depletion 5개도 원래 p
 나머지 qualified provider·독립 물리검증·엄격한 전체범위·시설 전체 QRA gate는 여전히 보류됩니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
-최신 fail-closed IJHE 감사는 29개 검사 중 26개 PASS·3개 BLOCKED이며, native
+최신 fail-closed IJHE 감사는 30개 검사 중 27개 PASS·3개 BLOCKED이며, native
 catalog의 24/24 exact packet과 구조적 worklist coverage는 diagnostic-only로
 통과시켰습니다. qualified provider packet은 0건이고, objective
 coverage에는 시설 전체 상태 snapshot coverage를 통과한 뒤에도 4개 strict gate가 남습니다.
 native catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
+
+**2026-10-30 검사센터 운전상태 증거 연결:** `액화수소검사지원센터 데이터`의 인수·저장
+벤트·공급 예측 Excel 3개를 읽어 압력·온도·차압 시계열 8,955개를 canonical
+`prism.equipment_state_snapshot.v1` 상태 증거로 정리했습니다. 세 자료는 각각 intake tank,
+storage vent, supply/vaporizer boundary에 연결되며 원자료 상대경로·SHA-256·단위변환·결측
+정책을 함께 보존합니다. 이 자료는 설비 상태와 snapshot 재현성만 보강하고, 방출 시나리오
+생성·사고빈도 추정·센서 빈도 학습·provider 자격·독립 물리검증·시설 IR/F-N을 열지 않습니다.
+상세 원장은 [`inspection_center_observed_state_evidence.json`](examples/inspection_center_observed_state_evidence.json)과
+[실증데이터 상태증거 연결 기록](docs/PRISM_실증데이터_상태증거_연결_20261030.md)에서 확인할 수 있습니다.
 
 **SLABx-LH2 검증 매트릭스 연결 보완:** 통합 `validation_evidence_matrix.json`에도
 `slabx_lh2_consequence_component` domain을 별도로 기록합니다. SLABx-LH2의 외부
@@ -327,7 +336,7 @@ IJHE 감사에 `--validation-evidence-matrix`를 주면 이 장부를 29번째 �
 
 주요 사고의 범위는 `scripts/build_accident_scope_matrix.py`로 별도 감사할 수 있습니다. 이 보고서는 저장탱크·배관·밸브·벤트·펌프·증발기·재액화기·액체/2상·재고소진·양단 파열·수직 handoff를 행으로 만들고, 각 행을 `EXECUTED`, `PARTIAL`, `UNCOMPUTED`, `NO_EVENT_GENERATED`로 표시합니다. 행별 문헌 빈도는 사고 가족 간에 중복될 수 있으므로 합산하지 않으며, 시설 전체 IR/F-N 승격 여부와 차단 이유도 함께 기록합니다. 자세한 기준은 [주요 사고 범위 매트릭스 기록](docs/PRISM_주요사고_범위매트릭스_20261009.md)을 참고합니다.
 
-IJHE 제출 준비 상태는 `scripts/build_ijhe_completion_audit.py`로 자동 판정합니다. 최신 병합 감사 `results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json`은 29개 PASS 검사·5개 BLOCKED 검사(상위 차단사유 4개)인 `INCOMPLETE_EVIDENCE`를 유지합니다. `--combined-chain-closure` 입력은 29개 사건의 방출→최종피해 연결을 확인하고, `--domain-recovery-audit` 입력은 6개 prior domain blocker의 회복과 22/24 outside-LFL proof를 event별로 기록합니다. 이 gate는 영역 밖 inventory를 숨기지 않으며 provider 자격·시설 IR/F-N을 승격하지 않습니다. 차단 사유는 합성 또는 screening provider packet만 사용됨, 주요 사고 범위의 partial/미계산 항목, 시설 IR/F-N 보류, 그리고 34개 facility case의 qualified provider packet coverage 0건이다. 이 진단 검사들은 `diagnostic_only=true`이며 qualified 사고 packet·빈도·시설 QRA·독립 전체 물리검증을 대신하지 않는다.
+IJHE 제출 준비 상태는 `scripts/build_ijhe_completion_audit.py`로 자동 판정합니다. 현재 권위 원장 `results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json`은 30개 검사 중 27개 PASS·3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다. `--combined-chain-closure`와 `--domain-recovery-audit`는 방출→최종피해 chain과 계산영역 회복을 진단용으로 기록하고, `--observed-state-evidence`는 검사센터 Excel 3개에서 읽은 8,955개 상태 sample을 상태 증거로만 연결합니다. 이 gate는 영역 밖 inventory를 숨기지 않으며 provider 자격·시설 IR/F-N을 승격하지 않습니다. completion audit의 차단 사유는 합성 또는 screening provider packet만 사용됨, 주요 사고 범위의 partial/미계산 항목, 시설 IR/F-N 보류이고, readiness report에는 독립 물리검증 보류를 포함한 4개 strict gate가 남습니다. 이 진단 검사들은 `diagnostic_only=true`이며 qualified 사고 packet·빈도·시설 QRA·독립 전체 물리검증을 대신하지 않는다.
  IJHE용 파일을 갱신한 뒤에는 `scripts/audit_status_consistency.py`로 완료 감사·시설평가·증거요청·병합 원장·상태 장부가 같은 실행을 가리키는지 확인합니다. 현재 결과는 `results/20261024/ijhe_status_consistency_v11.json`의 `CONSISTENT`이며 20개 검사가 모두 통과한다. 완료 감사의 combined-chain, SLABx 및 realtime-cache 진단 검사를 직접 확인하며, 빈도 추정이나 시설 IR/F-N 승격을 수행하지 않습니다. 자세한 범위는 [SLABx-LH2 검증근거 통합 기록](docs/PRISM_SLABx_LH2_검증근거_통합_20261024.md), 상태 규칙은 [상태 장부 일관성 감사 기록](docs/PRISM_상태장부_일관성_감사_20261010.md)에 있습니다.
 
 ## 목차

@@ -84,6 +84,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     native_packet_campaign_ledger = _with_record(args.native_packet_campaign_ledger)
     native_binding_reconciliation = _with_record(args.native_binding_reconciliation)
     domain_recovery_audit = _with_record(args.domain_recovery_audit)
+    observed_state_evidence = _with_record(args.observed_state_evidence)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -106,6 +107,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         state_snapshot_binding_audit=state_snapshot_binding,
         native_scope_packet_catalog_verification=native_scope_packet_catalog,
         slabx_validation_evidence=slabx_validation,
+        observed_state_evidence=observed_state_evidence,
     )
 
     verification_path = output_dir / "verification.json"
@@ -280,6 +282,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional domain-recovery sensitivity audit.",
+    )
+    parser.add_argument(
+        "--observed-state-evidence",
+        type=Path,
+        default=None,
+        help="Optional normalized observed equipment-state evidence ledger.",
     )
     parser.add_argument(
         "--slabx-validation-evidence",

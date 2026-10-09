@@ -88,6 +88,11 @@ def main() -> int:
         type=Path,
         help="optional exact native generic-scope catalog verification",
     )
+    parser.add_argument(
+        "--observed-state-evidence",
+        type=Path,
+        help="optional normalized observed equipment-state evidence ledger",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -255,6 +260,13 @@ def main() -> int:
             native_scope_packet_catalog_verification["_record_path"] = str(
                 args.native_scope_packet_catalog_verification
             )
+        observed_state_evidence = (
+            _object(args.observed_state_evidence)
+            if args.observed_state_evidence
+            else None
+        )
+        if observed_state_evidence is not None:
+            observed_state_evidence["_record_path"] = str(args.observed_state_evidence)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -285,6 +297,7 @@ def main() -> int:
             domain_recovery_audit,
             None,
             native_scope_packet_catalog_verification,
+            observed_state_evidence,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
