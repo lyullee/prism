@@ -612,7 +612,7 @@
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "14ca735ce3fad5c508d61a3bb077603cf438e06aa4089f84eac02e565c8be47e"
+      "sha256": "a61ac339e6165cb3a53c9c61fb634ceb02142e5c81fc9989d9cd0703267740c6"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
@@ -624,11 +624,11 @@
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "1861e2f3866ff090148f5c1e41b42f69fc29876937465528cc1653da4e6215e1"
+      "sha256": "b87e5fe2b8b674332bd81cfcfd89c072b57b0e84bd8ddaf5852e689599f2e6aa"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "c5f3448aeab92f409149ca82b2b29497a3cb82c60bc0935bf0fe3dbb960860ca"
+      "sha256": "b10b762dcea10c1102412bfe9e9ac48ba6e274bb8b2b68e19c8ebac81f2a8b94"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",

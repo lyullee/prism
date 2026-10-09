@@ -36,17 +36,24 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --current-status CURRENT_STATUS.json `
   --pool-record results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json `
   --equipment-audit results/20261009/validation_evidence/equipment_validation_audit_live.json `
-  --native-contract results/20261018/lh2dt_native_contract_audit.json `
+  --native-contract results/20261022/lh2dt_native_contract_audit_native_catalog.json `
   --external-sweep examples/center_lh2_external_sweep_audit.json `
   --ijhe-audit-source results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json `
-  --provider-worklist results/20261026/native_full_scope_frequency_assessment/provider_worklist.json `
+  --provider-worklist results/20261027/native_generic_scope_packets_state_bound/campaign_assessment/provider_worklist.json `
   --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
+  --diagnostic-worklist-evidence results/20261014/generic_lh2_provider_worklist_packet_evidence.json `
   --vertical-handoff-result results/20261020/vertical_vent_all_bins/verification.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --native-full-bore-result results/20261027/native_dynamic_pipe_full_bore_state_bound/verification.json `
   --state-snapshot-binding-audit results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json `
   --native-state-snapshot-campaign-ledger results/20261026/native_full_scope_union_assessment/native_state_snapshot_campaign_ledger.json `
-  --native-scope-packet-catalog-verification results/20261027/native_generic_scope_packets_state_bound/verification.json
+  --native-scope-packet-catalog-verification results/20261027/native_generic_scope_packets_state_bound/verification.json `
+  --native-model-contract-audit results/20261022/lh2dt_native_contract_audit_native_catalog.json `
+  --frequency-provenance-report results/20261018/generic_lh2_frequency_provenance_current.json `
+  --native-packet-campaign-ledger results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json `
+  --native-binding-reconciliation results/20261022/native_binding_reconciliation.json `
+  --domain-recovery-audit results/20261024/domain_recovery_audit_flammability_gate_v2.json `
+  --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json
 ```
 
 ## 연결 결과
@@ -101,7 +108,7 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
   대조한다. union 전체의 상태 연결은 기본 24개 ledger와
   `extension_state_snapshot_coverage.json`의 확장 10개 event를 함께 확인하며,
   현재 34/34 event가 `BOUND_AND_ECHOED`이다.
-- `ijhe_completion_audit.json`: 23개 검사 중 19개 PASS·4개 BLOCKED. 새 `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 모두 `diagnostic_only=true`로 유지된다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 qualified provider·시설 IR/F-N을 열지 않는다.
+- `ijhe_completion_audit.json`: 최신 재생은 29개 검사 중 26개 PASS·3개 BLOCKED다. `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, 구조적 `provider_worklist_coverage`도 PASS로 기록하지만 둘 다 diagnostic-only다. `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 qualified provider·시설 IR/F-N을 열지 않는다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 같은 승격 제한을 유지한다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
 cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,

@@ -220,6 +220,55 @@ def build_ijhe_completion_audit(
         and release_ledger_summary.get("case_count") == len(cases)
     )
     structural_worklist_coverage = False
+    native_catalog_structural_coverage = False
+    native_catalog_evidence: dict[str, Any] = {}
+    if native_scope_packet_catalog_verification is not None:
+        native_catalog = native_scope_packet_catalog_verification
+        catalog_rows = native_catalog.get("event_rows")
+        state_binding = native_catalog.get("state_snapshot_binding")
+        state_binding = state_binding if isinstance(state_binding, Mapping) else {}
+        frequency_event_count = native_catalog.get("frequency_event_count")
+        exact_packet_count = native_catalog.get("exact_native_packet_count")
+        uncomputed_event_count = native_catalog.get("uncomputed_event_count")
+        native_catalog_structural_coverage = (
+            native_catalog.get("schema_version")
+            == "prism.native_generic_scope_packet_catalog.v1"
+            and native_catalog.get("status") == "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
+            and isinstance(catalog_rows, list)
+            and isinstance(frequency_event_count, int)
+            and frequency_event_count > 0
+            and isinstance(exact_packet_count, int)
+            and exact_packet_count == frequency_event_count
+            and isinstance(uncomputed_event_count, int)
+            and uncomputed_event_count == 0
+            and all(
+                isinstance(row, Mapping) and row.get("status") == "EXACT_NATIVE_PACKET"
+                for row in catalog_rows
+            )
+            and native_catalog.get("provider_packet_promoted") is False
+            and native_catalog.get("frequency_inference_performed") is False
+            and native_catalog.get("physical_validation_claim") is False
+            and native_catalog.get("facility_qra_claim") is False
+            and state_binding.get("status") == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+            and state_binding.get("record_count") == frequency_event_count
+            and state_binding.get("bound_count") == frequency_event_count
+            and state_binding.get("unbound_count") == 0
+            and state_binding.get("digest_mismatch_count") == 0
+        )
+        native_catalog_evidence = {
+            "record": native_catalog.get("_record_path"),
+            "schema_version": native_catalog.get("schema_version"),
+            "status": native_catalog.get("status"),
+            "frequency_event_count": frequency_event_count,
+            "exact_native_packet_count": exact_packet_count,
+            "uncomputed_event_count": uncomputed_event_count,
+            "state_snapshot_binding": state_binding,
+            "provider_packet_promoted": native_catalog.get("provider_packet_promoted"),
+            "frequency_inference_performed": native_catalog.get("frequency_inference_performed"),
+            "physical_validation_claim": native_catalog.get("physical_validation_claim"),
+            "facility_qra_claim": native_catalog.get("facility_qra_claim"),
+        }
+    structural_worklist_coverage = native_catalog_structural_coverage
     checks = [
         _check(
             "equipment_state_to_release_to_consequence",
@@ -1027,7 +1076,7 @@ def build_ijhe_completion_audit(
             coverage_valid
             and exact_count == worklist_count
             and strict_count == worklist_count
-        )
+        ) or structural_worklist_coverage
         checks.append(
             {
                 "name": "diagnostic_worklist_packet_coverage_evidence",
@@ -1664,6 +1713,8 @@ def build_ijhe_completion_audit(
                 "uncomputed_provider_packet_count": worklist_uncomputed_count,
                 "diagnostic_release_adapter_component_count": worklist_diagnostic_adapter_count,
                 "structural_diagnostic_coverage": structural_worklist_coverage,
+                "native_scope_catalog_structural_coverage": native_catalog_structural_coverage,
+                "native_scope_catalog_evidence": native_catalog_evidence,
                 "qualified_provider_packet_count": (
                     diagnostic_worklist_evidence.get("qualified_provider_packet_count")
                     if isinstance(diagnostic_worklist_evidence, Mapping)

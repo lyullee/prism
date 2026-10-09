@@ -878,6 +878,48 @@ def test_completion_audit_prefers_provider_worklist_file_over_stale_status():
     assert check["evidence"]["diagnostic_release_adapter_component_count"] == 7
 
 
+def test_completion_audit_uses_exact_native_catalog_for_structural_worklist_coverage():
+    status = _status(True)
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        {
+            "status": "READY_FOR_PROVIDER_PACKETS",
+            "generated_event_count": 2,
+            "provider_packet_count": 0,
+            "status_counts": {"UNCOMPUTED_PROVIDER_PACKET": 2},
+        },
+        native_scope_packet_catalog_verification={
+            "schema_version": "prism.native_generic_scope_packet_catalog.v1",
+            "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED",
+            "frequency_event_count": 2,
+            "exact_native_packet_count": 2,
+            "uncomputed_event_count": 0,
+            "event_rows": [
+                {"event_id": "e1", "status": "EXACT_NATIVE_PACKET"},
+                {"event_id": "e2", "status": "EXACT_NATIVE_PACKET"},
+            ],
+            "state_snapshot_binding": {
+                "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+                "record_count": 2,
+                "bound_count": 2,
+                "unbound_count": 0,
+                "digest_mismatch_count": 0,
+            },
+            "provider_packet_promoted": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
+    assert check["status"] == "PASS"
+    assert check["evidence"]["native_scope_catalog_structural_coverage"] is True
+    assert check["evidence"]["native_scope_catalog_evidence"]["exact_native_packet_count"] == 2
+
+
 def test_completion_audit_records_resolved_diagnostic_adapter_execution_contract():
     status = _status(False)
     status.update({

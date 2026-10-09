@@ -78,6 +78,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     native_state_snapshot_campaign = _with_record(args.native_state_snapshot_campaign_ledger)
     native_scope_packet_catalog = _with_record(args.native_scope_packet_catalog_verification)
     slabx_validation = _with_record(args.slabx_validation_evidence)
+    native_model_contract_audit = _with_record(args.native_model_contract_audit)
+    frequency_provenance_report = _with_record(args.frequency_provenance_report)
+    diagnostic_worklist_evidence = _with_record(args.diagnostic_worklist_evidence)
+    native_packet_campaign_ledger = _with_record(args.native_packet_campaign_ledger)
+    native_binding_reconciliation = _with_record(args.native_binding_reconciliation)
+    domain_recovery_audit = _with_record(args.domain_recovery_audit)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -88,9 +94,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         registry,
         facility_assessment=facility_record,
         vertical_handoff_result=vertical,
+        native_model_contract_audit=native_model_contract_audit,
+        frequency_provenance_report=frequency_provenance_report,
+        diagnostic_worklist_evidence=diagnostic_worklist_evidence,
+        native_packet_campaign_ledger=native_packet_campaign_ledger,
         validation_evidence_matrix=matrix,
+        native_binding_reconciliation=native_binding_reconciliation,
         realtime_cache_benchmark=realtime,
         native_full_bore_result=native_full_bore,
+        domain_recovery_audit=domain_recovery_audit,
         state_snapshot_binding_audit=state_snapshot_binding,
         native_scope_packet_catalog_verification=native_scope_packet_catalog,
         slabx_validation_evidence=slabx_validation,
@@ -232,6 +244,42 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional exact native generic-scope packet catalog verification.",
+    )
+    parser.add_argument(
+        "--native-model-contract-audit",
+        type=Path,
+        default=None,
+        help="Optional native external-model contract audit.",
+    )
+    parser.add_argument(
+        "--frequency-provenance-report",
+        type=Path,
+        default=None,
+        help="Optional literature-frequency provenance report.",
+    )
+    parser.add_argument(
+        "--diagnostic-worklist-evidence",
+        type=Path,
+        default=None,
+        help="Optional diagnostic provider-worklist packet evidence.",
+    )
+    parser.add_argument(
+        "--native-packet-campaign-ledger",
+        type=Path,
+        default=None,
+        help="Optional native packet campaign ledger.",
+    )
+    parser.add_argument(
+        "--native-binding-reconciliation",
+        type=Path,
+        default=None,
+        help="Optional native model-binding reconciliation.",
+    )
+    parser.add_argument(
+        "--domain-recovery-audit",
+        type=Path,
+        default=None,
+        help="Optional domain-recovery sensitivity audit.",
     )
     parser.add_argument(
         "--slabx-validation-evidence",

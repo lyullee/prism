@@ -95,9 +95,18 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --ijhe-audit-source results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json `
   --provider-worklist results/20261027/native_generic_scope_packets_state_bound/campaign_assessment/provider_worklist.json `
   --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
-  --vertical-handoff-result results/20261026/native_full_scope_union_assessment/vertical_handoff_rebound_result.json `
+  --diagnostic-worklist-evidence results/20261014/generic_lh2_provider_worklist_packet_evidence.json `
+  --vertical-handoff-result results/20261020/vertical_vent_all_bins/verification.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
+  --native-full-bore-result results/20261027/native_dynamic_pipe_full_bore_state_bound/verification.json `
+  --state-snapshot-binding-audit results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json `
+  --native-state-snapshot-campaign-ledger results/20261026/native_full_scope_union_assessment/native_state_snapshot_campaign_ledger.json `
   --native-scope-packet-catalog-verification results/20261027/native_generic_scope_packets_state_bound/verification.json `
+  --native-model-contract-audit results/20261022/lh2dt_native_contract_audit_native_catalog.json `
+  --frequency-provenance-report results/20261018/generic_lh2_frequency_provenance_current.json `
+  --native-packet-campaign-ledger results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json `
+  --native-binding-reconciliation results/20261022/native_binding_reconciliation.json `
+  --domain-recovery-audit results/20261024/domain_recovery_audit_flammability_gate_v2.json `
   --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json
 ```
 
@@ -155,5 +164,12 @@ python scripts/build_v060_readiness_report.py `
   --validation-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
   --realtime-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --facility-evidence-request results/20261026/native_full_scope_union_assessment/facility_evidence_request.json `
+  --scenario-evidence-audit examples/inspection_center_scenario_evidence_reaudit_summary.json `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```
+
+현재 completion audit는 29개 검사 중 26개 PASS·3개 BLOCKED다. 네이티브
+catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS로 만들지만,
+이는 합성 진단 packet의 exact-match일 뿐 qualified provider evidence가 아니다.
+따라서 실제 provider packet 0건, 엄격한 사고범위 차단, 시설 전체 IR/F-N 보류는
+그대로 readiness report에 남는다.

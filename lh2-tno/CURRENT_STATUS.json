@@ -1786,7 +1786,10 @@
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "diagnostic_union_chain_closure_audit_implemented": true,
   "diagnostic_union_chain_closure_audit_policy": "The completion audit may close the declared diagnostic chain from the exact packet subset plus a separately identified vertical-handoff subset when the combined closure proves exact union identity, event-count equality, no mismatches, and packet-subset identity consumption. This is diagnostic-only and cannot qualify providers, infer frequency, or promote facility IR/F-N.",
-  "ijhe_completion_audit_latest_check_status_counts": {"PASS": 29, "BLOCKED": 5},
+  "ijhe_completion_audit_latest_check_status_counts": {
+    "PASS": 29,
+    "BLOCKED": 5
+  },
   "ijhe_completion_audit_latest_check_count": 34,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [
@@ -3228,8 +3231,7 @@
     "physical_validation.json",
     "physical_validation_evidence.json",
     "validation.json"
-  ]
-,
+  ],
   "v060_current_readiness_report": "results/20261026/native_full_scope_union_assessment/v060_readiness_report.json",
   "v060_current_readiness_report_schema": "prism.v060_ijhe_readiness_report.v1",
   "v060_current_readiness_report_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
@@ -3246,8 +3248,7 @@
   ],
   "v060_current_facility_total_risk_available": false,
   "v060_current_complete_facility_qra_claim": false,
-
-  "v060_current_readiness_report_sha256": "353ee7e88be8038075bbc7d9153e4e99ec14f246baa75b8976504580a4f756f8",
+  "v060_current_readiness_report_sha256": "e3151c16a9567f3ef715f837e780bd47106bacee5fac090d1f0257334aa9ef1f",
   "v060_current_evidence_request": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "v060_current_evidence_request_sha256": "43c03fc0edd6c57d9048cf8bc19c6074e34a30e78f2a76356426ebb69e63209f",
   "v060_current_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
@@ -3262,6 +3263,13 @@
   "v060_current_scenario_evidence_candidate_family_count": 7,
   "v060_current_scenario_evidence_candidate_only": true,
   "v060_current_scenario_evidence_frequency_assigned": false,
-  "v060_current_scenario_evidence_facility_qra_claim": false
-
+  "v060_current_scenario_evidence_facility_qra_claim": false,
+  "v060_current_completion_audit": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
+  "v060_current_completion_audit_sha256": "b87e5fe2b8b674332bd81cfcfd89c072b57b0e84bd8ddaf5852e689599f2e6aa",
+  "v060_current_completion_audit_status": "INCOMPLETE_EVIDENCE",
+  "v060_current_completion_audit_check_count": 29,
+  "v060_current_completion_audit_blocking_reason_count": 3,
+  "v060_current_completion_audit_provider_worklist_coverage": "PASS",
+  "v060_current_completion_audit_actual_provider_release_packet": "BLOCKED",
+  "v060_current_completion_audit_qualified_provider_packet_count": 0
 }
