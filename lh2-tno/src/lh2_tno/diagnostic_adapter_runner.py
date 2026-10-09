@@ -232,6 +232,34 @@ class DiagnosticAdapterRunner:
             )
         self._providers[component_kind] = provider
 
+    def register_provider_from_config(
+        self,
+        component_kind: str,
+        constructor_kwargs: Mapping[str, Any],
+    ) -> AccidentHistoryProvider:
+        """Construct and register one provider from explicit host settings.
+
+        The mapping is passed directly to the declared adapter constructor.
+        No manifest state, sensor value, failure size, duration, or frequency
+        is inserted by PRISM.  A missing or extra constructor argument fails
+        before any accident export is attempted.
+        """
+
+        if not isinstance(constructor_kwargs, Mapping):
+            raise DiagnosticAdapterRunnerError(
+                "constructor_kwargs must be a mapping"
+            )
+        provider_class = self.resolve_provider_class(component_kind)
+        try:
+            provider = provider_class(**dict(constructor_kwargs))
+        except Exception as error:
+            raise DiagnosticAdapterRunnerError(
+                f"cannot construct diagnostic adapter {component_kind} from explicit config: "
+                f"{type(error).__name__}: {error}"
+            ) from error
+        self.register_provider(component_kind, provider)
+        return provider
+
     def execute(
         self,
         component_kind: str,

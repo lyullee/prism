@@ -19,6 +19,11 @@ runner = DiagnosticAdapterRunner.from_binding_catalog(
 provider = make_layered_tank_provider(...)
 runner.register_provider("storage_tank", provider)
 
+# 또는 host가 모든 생성자를 명시적으로 채운다.
+runner.register_provider_from_config(
+    "storage_tank", {"lh2dt_root": root, "time_step_s": 0.05, ...}
+)
+
 # request는 개구·포트·시계·경계·증거 상태를 포함하는 명시적 요청이다.
 execution = runner.execute(
     "storage_tank", request, release_kind="liquid"
@@ -32,6 +37,8 @@ print(execution.audit_record())
 `register_provider()`는 `export_accident_history(request)`가 없는 정상상태 모델을 거부한다. `execute()`는 gas, liquid, emergency-relief, inventory gas/liquid 경로를 기존 strict PRISM export 함수에 위임한다. 따라서 adapter가 반환하는 시간별 유량, 종료근거, 누적 질량·엔탈피, 액체·기체 분할 검사는 기존 `equipment_accident_export.py`와 `equipment_release_adapter.py`에서 계속 수행된다. `to_consequence_request()`는 이 strict release를 weather·점화·공간영역·평가시계·종료근거가 들어 있는 consequence context에 붙인다. 빈도는 이 단계에서 추가하지 않고 캠페인 경계에서만 추가한다.
 
 provider 생성자를 자동으로 호출하지 않는 이유는 설비마다 필요한 탱크 재고, 배관 크기, 밸브 상태, 기상, 수치 시간 간격이 다르기 때문이다. 실행기가 이 값을 기본값으로 만들어 버리면 정상상태 snapshot이나 임의의 누출을 사고 packet으로 오인할 수 있다. host는 현재 센서·공정 모델의 상태에서 사고 시나리오를 선택하고, 외부 모델이 계산한 provider 요청과 인스턴스를 넘겨야 한다.
+
+`register_provider_from_config()`는 host가 제공한 생성자 인자만 전달한다. PRISM은 manifest 압력·온도나 센서값을 생성자 인자로 채우지 않으며, 인자가 빠지거나 잘못되면 사고 계산 전에 실패한다. 이 경로는 실제 설비 provider를 연결하기 위한 준비가 완료되었다는 뜻이지, 현재 catalog의 synthetic adapter를 qualified provider로 바꾸는 기능은 아니다.
 
 ## 현재 확인 결과
 

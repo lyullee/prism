@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from lh2_tno.diagnostic_adapter_runner import (
+    DiagnosticAdapterSpec,
     DiagnosticAdapterRunner,
     DiagnosticAdapterRunnerError,
     load_diagnostic_adapter_specs,
@@ -15,6 +16,14 @@ from test_provider_release import _defaults
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "examples" / "generic_lh2_model_binding.json"
+
+
+class _ConfiguredProvider:
+    def __init__(self, marker):
+        self.marker = marker
+
+    def export_accident_history(self, request):
+        raise AssertionError("construction-only test provider must not export")
 
 
 def test_catalog_adapters_resolve_to_explicit_provider_methods():
@@ -145,3 +154,22 @@ def test_missing_adapter_is_not_invented_from_catalog():
     runner = DiagnosticAdapterRunner.from_binding_catalog(catalog)
     with pytest.raises(DiagnosticAdapterRunnerError, match="no diagnostic adapter"):
         runner.resolve_provider_class("boundary")
+
+
+def test_provider_can_be_constructed_only_from_explicit_constructor_config():
+    runner = DiagnosticAdapterRunner([
+        DiagnosticAdapterSpec(
+            component_kind="storage_tank",
+            module=__name__,
+            provider_class="_ConfiguredProvider",
+            evidence_status="synthetic_diagnostic",
+        )
+    ])
+    provider = runner.register_provider_from_config(
+        "storage_tank", {"marker": "explicit-host-setting"}
+    )
+
+    assert provider.marker == "explicit-host-setting"
+
+    with pytest.raises(DiagnosticAdapterRunnerError, match="cannot construct"):
+        runner.register_provider_from_config("storage_tank", {})
