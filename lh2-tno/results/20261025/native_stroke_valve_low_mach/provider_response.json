@@ -1,0 +1,71 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_state_snapshot_digest": "1422e7f46e37887ba2f0948c66dd1e273be5f272447a31acdd66b092d24d8fb3",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "native-stroke-valve/accidental-leak-001",
+    "component_id": "native-stroke-valve-diagnostic",
+    "port_id": "native-stroke-valve-gas-out",
+    "duration_s": 0.1,
+    "available_mass_kg": 1.0,
+    "cumulative_mass_out_kg": 2.1016127591579472e-06,
+    "cumulative_static_enthalpy_out_j": 8.318774611238888,
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "termination_provenance": "operator-declared bounded valve horizon; upstream reserve remains explicit",
+    "fluid": "Hydrogen",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 2.1016127591579473e-05,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3958281.3603453613,
+        "temperature_k": 300.00005299820754,
+        "density_kg_m3": 0.08184047334386349,
+        "effective_area_m2": 4.908738521234052e-06,
+        "velocity_m_s": 52.31360696435685,
+        "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 101500.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.0819817519609035,
+          "source_specific_enthalpy_j_kg": 3958281.3603453613,
+          "opening": 1.0,
+          "choked": false
+        }
+      },
+      {
+        "time_s": 0.05,
+        "mass_flow_kg_s": 2.1016127591579473e-05,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3958281.3603453613,
+        "temperature_k": 300.00005299820754,
+        "density_kg_m3": 0.08184047334386349,
+        "effective_area_m2": 4.908738521234052e-06,
+        "velocity_m_s": 52.31360696435685,
+        "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 101500.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.0819817519609035,
+          "source_specific_enthalpy_j_kg": 3958281.3603453613,
+          "opening": 1.0,
+          "choked": false
+        }
+      }
+    ],
+    "provider_meta": {
+      "native_inventory_owner": "upstream_provider_declared",
+      "initial_source_phase": "supercritical_gas",
+      "time_step_s": 0.05,
+      "valve": {
+        "area_m2": 4.908738521234052e-06,
+        "final_opening": 1.0,
+        "choked_intervals": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "prism.native_lh2dt_stroke_valve_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_result_digest": "1316c3af58cfdfc2b8a73e4e33ac43a526cbc0409f568b79dcb72acc17097d1b",
+  "native_provider_result_digest": "9828568ae1e0eba62d30c77ed246a71e11769c572dc6f2d9e0590f3fbae70b88",
+  "native_source_trace_preserved_out_of_band": true,
+  "provider_packet_promoted": false,
+  "phase_basis": "supercritical_gas",
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "duration_s": 0.1,
+  "available_mass_kg": 100.0,
+  "cumulative_mass_out_kg": 0.00012111170779661987,
+  "upstream_reserve_remaining_kg": 99.9998788882922,
+  "final_opening": 1.0,
+  "choked_intervals": 2,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic gas source state, valve geometry and upstream reserve",
+    "StrokeLimitedCommandedValve owns no upstream inventory or isolation reliability",
+    "native compact source trace is preserved in provider_response.json but is not promoted into the strict packet until its schema is expanded",
+    "bounded diagnostic horizon leaves explicit reserve and is not a qualified facility frequency case"
+  ]
+}
