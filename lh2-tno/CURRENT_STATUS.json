@@ -1814,5 +1814,11 @@
   "release_termination_inventory_ledger_incomplete_row_count": 14,
   "release_termination_inventory_ledger_test_status": "2 ledger unit tests plus campaign integration; full portable suite 431 passed",
   "mixed_lh2_provider_campaign_release_ledger_result": "results/20261018/generic_mixed_provider_campaign_release_ledger.json",
-  "mixed_lh2_provider_campaign_release_ledger_assessment": "results/20261018/generic_mixed_provider_release_ledger_assessment.json"
+  "mixed_lh2_provider_campaign_release_ledger_assessment": "results/20261018/generic_mixed_provider_release_ledger_assessment.json",
+  "ijhe_completion_audit_native_contract_record": "results/20261018/ijhe_completion_audit_native_contract.json",
+  "ijhe_completion_audit_native_contract_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_native_contract_check_count": 19,
+  "ijhe_completion_audit_native_contract_blocking_reason_count": 4,
+  "ijhe_completion_audit_native_contract_native_model_check": "PASS_DIAGNOSTIC_ONLY",
+  "ijhe_completion_audit_native_contract_test_status": "19 audit checks including native-vs-wrapper contract evidence; full portable suite 434 passed"
 }

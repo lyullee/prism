@@ -61,6 +61,7 @@ def build_ijhe_completion_audit(
     diagnostic_campaign_binding: Mapping[str, Any] | None = None,
     facility_assessment: Mapping[str, Any] | None = None,
     vertical_handoff_result: Mapping[str, Any] | None = None,
+    native_model_contract_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -185,6 +186,50 @@ def build_ijhe_completion_audit(
             "no executed release-to-consequence case is present",
         ),
     ]
+    if native_model_contract_audit is not None:
+        native_audit = native_model_contract_audit
+        native_rows = native_audit.get("rows")
+        native_audit_valid = (
+            native_audit.get("schema_version") == "prism.external_model_contract_audit.v1"
+            and native_audit.get("status") in {
+                "NATIVE_ACCIDENT_EXPORT_MISSING",
+                "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
+                "CONTRACT_AUDIT_INCOMPLETE",
+            }
+            and isinstance(native_rows, list)
+            and isinstance(native_audit.get("binding_count"), int)
+            and native_audit.get("binding_count") == len(native_rows)
+            and native_audit.get("provider_packet_promoted") is False
+            and native_audit.get("frequency_inference_performed") is False
+            and native_audit.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "external_native_model_contract_audit",
+                "status": "PASS" if native_audit_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None if native_audit_valid else "native external model contract audit is missing or malformed",
+                "evidence": {
+                    "record": native_audit.get("_record_path"),
+                    "status": native_audit.get("status"),
+                    "binding_count": native_audit.get("binding_count"),
+                    "native_accident_export_component_count": native_audit.get(
+                        "native_accident_export_component_count"
+                    ),
+                    "diagnostic_adapter_contract_verified_count": native_audit.get(
+                        "diagnostic_adapter_contract_verified_count"
+                    ),
+                    "provider_packet_promoted": native_audit.get("provider_packet_promoted"),
+                    "frequency_inference_performed": native_audit.get("frequency_inference_performed"),
+                    "facility_qra_claim": native_audit.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "This static audit separates native external accident export methods from "
+                    "PRISM-side diagnostic wrappers. It is evidence of the integration boundary, "
+                    "not a qualified provider packet or facility QRA."
+                ),
+            }
+        )
     worklist_alignment = scope_matrix.get("provider_worklist_alignment")
     if isinstance(worklist_alignment, Mapping):
         alignment_valid = (

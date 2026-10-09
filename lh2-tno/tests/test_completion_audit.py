@@ -49,6 +49,31 @@ def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidenc
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_records_native_model_contract_audit_as_diagnostic_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        native_model_contract_audit={
+            "schema_version": "prism.external_model_contract_audit.v1",
+            "status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+            "binding_count": 8,
+            "rows": [{}] * 8,
+            "native_accident_export_component_count": 0,
+            "diagnostic_adapter_contract_verified_count": 7,
+            "provider_packet_promoted": False,
+            "frequency_inference_performed": False,
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "external_native_model_contract_audit"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def _status(validated=True):
     return {
         "physical_validation_claim": validated,

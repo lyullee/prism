@@ -31,6 +31,7 @@ def main() -> int:
     parser.add_argument("--diagnostic-campaign-binding", type=Path)
     parser.add_argument("--facility-assessment", type=Path)
     parser.add_argument("--vertical-handoff-result", type=Path)
+    parser.add_argument("--native-model-contract-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -75,6 +76,13 @@ def main() -> int:
         )
         if vertical_handoff_result is not None:
             vertical_handoff_result["_record_path"] = str(args.vertical_handoff_result)
+        native_model_contract_audit = (
+            _object(args.native_model_contract_audit)
+            if args.native_model_contract_audit
+            else None
+        )
+        if native_model_contract_audit is not None:
+            native_model_contract_audit["_record_path"] = str(args.native_model_contract_audit)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -87,6 +95,7 @@ def main() -> int:
             campaign_binding,
             facility_assessment,
             vertical_handoff_result,
+            native_model_contract_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
