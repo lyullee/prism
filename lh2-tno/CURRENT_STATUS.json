@@ -55,7 +55,7 @@
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "realtime_monitor_deadline_test_scope": "Synthetic Pipeline contract tests cover MET/MISSED deadline ledgers; no 1 Hz fresh-physics claim is made.",
-  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m. The refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED; bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented. Facility IR/F-N remains withheld until failed/limited physics and actual geometry are resolved.",
+  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m. The refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED; bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented. Conditional diagnostic facility IR/F-N is now exposed from the 96 evaluated risk atoms, while qualified facility IR/F-N remains withheld until failed/limited physics, actual geometry, and physical validation are resolved.",
   "unsupported": [
     "DDT_detonation",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
@@ -538,7 +538,7 @@
   "facility_risk_ledger_module": "src/lh2_tno/facility_ledger.py",
   "facility_risk_ledger_cli": "scripts/merge_facility_campaigns.py",
   "facility_risk_ledger_policy": "Merge only already evaluated risk atoms from disjoint equipment campaigns; duplicate event IDs, duplicate assets, receptor mismatch, missing expected components, incomplete accident families, synthetic horizons, exclusions, uncomputed cases, or events without case/uncomputed-case accounting withhold total facility IR/F-N while retaining known contribution; component_contributions reports per-equipment IR/F-N without frequency reallocation.",
-  "facility_risk_ledger_test_status": "8 facility ledger tests; full portable suite 355 passed",
+  "facility_risk_ledger_test_status": "8 facility ledger tests; full portable suite 370 passed",
   "facility_risk_ledger_smoke": "results/20261009/facility_ledger_smoke/facility_ledger.json",
   "facility_risk_ledger_smoke_status": "FACILITY_SCOPE_EXECUTED for one declared synthetic inventory campaign; physical validation claim remains false",
   "facility_risk_ledger_smoke_campaign_count": 1,
@@ -546,6 +546,8 @@
   "facility_risk_ledger_smoke_blocking_reason_count": 0,
   "facility_risk_ledger_event_case_accounting_gate": "Every generated event must have an executed case or explicit uncomputed-case row; otherwise facility total is withheld.",
   "facility_risk_ledger_component_contributions": "Per-component annual IR and expected-death F-N are summed from validated risk atoms via event model_component_id; missing scope is not assigned zero frequency.",
+  "facility_risk_ledger_conditional_diagnostic_facility_view": "The ledger now exposes conditional_diagnostic_facility_annual_ir_low_high and conditional_diagnostic_facility_expected_death_fn_low_high from all validated risk atoms, with coverage and operator-limited counts; this diagnostic view never promotes a blocked campaign to a qualified facility total.",
+  "facility_risk_ledger_conditional_diagnostic_facility_available": true,
   "facility_assessment_implemented": true,
   "facility_assessment_module": "src/lh2_tno/facility_assessment.py",
   "facility_assessment_cli": "scripts/build_facility_assessment.py",
@@ -1261,6 +1263,26 @@
   },
   "mixed_lh2_facility_assessment_record": "results/20261014/generic_lh2_mixed_facility_assessment_refined_pool.json",
   "mixed_lh2_facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
+  "mixed_lh2_conditional_diagnostic_facility_risk_available": true,
+  "mixed_lh2_conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [1.749e-05, 1.749e-05]
+  },
+  "mixed_lh2_conditional_diagnostic_facility_coverage": {
+    "event_count": 24,
+    "case_count": 24,
+    "uncomputed_case_count": 20,
+    "overlapping_case_uncomputed_count": 20,
+    "risk_atom_count": 96,
+    "operator_limited_case_count": 19,
+    "uncomputed_status_counts": {
+      "EXECUTED_DOMAIN_INCOMPLETE": 1,
+      "EXECUTED_OPERATOR_LIMITED": 19
+    },
+    "explicit_uncomputed_status_count": 0,
+    "failed_case_count": 0,
+    "scope_blocker_count": 22
+  },
+  "mixed_lh2_conditional_diagnostic_facility_semantics": "Computed facility-level diagnostic IR/F-N from evaluated risk atoms; not a qualified total facility QRA or confidence interval while synthetic horizon, operator-limited physics, actual geometry, and physical validation blockers remain.",
   "mixed_lh2_frequency_scenario_count": 5,
   "mixed_lh2_frequency_correlation_comparison": true,
   "mixed_lh2_frequency_facility_credible_interval": false,

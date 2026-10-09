@@ -140,6 +140,9 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             'scenario': scenario.model_dump(mode='json'),
             'known_annual_ir_low_high': ir,
             'known_expected_death_fn_low_high': fn,
+            'conditional_diagnostic_facility_annual_ir_low_high': ir,
+            'conditional_diagnostic_facility_expected_death_fn_low_high': fn,
+            'conditional_diagnostic_facility_risk_available': bool(atoms),
             'asset_known_annual_expected_fatalities_low_high': contribution,
             'asset_rank_by_known_expected_fatalities_low_high': ranked,
             'event_frequency_per_year': event_frequency,
@@ -154,6 +157,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
         'fresh_physics_executed': False,
         'statistical_confidence_interval': False,
         'facility_credible_interval': False,
+        'conditional_diagnostic_facility_risk': 'each scenario reweights the saved risk atoms and exposes a conditional facility IR/F-N diagnostic; incomplete scope, synthetic horizons, and operator limits still withhold a qualified facility total',
         'semantics': 'published marginal event-frequency quantiles with an explicit within-asset shared or independent-event bound comparison; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
         'correlation_comparison_present': any(
             s.correlation_assumption == 'independent_event_bounds' for s in scenarios
@@ -277,7 +281,11 @@ def sample_literature_frequency_distributions(
             'event_frequency_quantiles_per_year': {event_id: _quantile_triplet(values) for event_id, values in event_samples.items()},
             'known_annual_ir_quantiles': {rid: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
                                           for rid, endpoint_values in ir_samples.items()},
+            'conditional_diagnostic_facility_annual_ir_quantiles': {rid: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
+                                                                     for rid, endpoint_values in ir_samples.items()},
             'known_expected_death_quantiles': [_quantile_triplet(endpoints) for endpoints in total_samples],
+            'conditional_diagnostic_facility_expected_death_quantiles': [_quantile_triplet(endpoints) for endpoints in total_samples],
+            'conditional_diagnostic_facility_risk_available': bool(atoms),
             'asset_known_expected_death_quantiles': {asset: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
                                                      for asset, endpoint_values in asset_samples.items()},
             'asset_rank_stability': {
@@ -300,6 +308,7 @@ def sample_literature_frequency_distributions(
         'statistical_confidence_interval': False,
         'frequency_distribution_credible_interval': True,
         'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
+        'conditional_diagnostic_facility_risk': 'sampled known-atom facility expected-death totals are diagnostic frequency-model outputs; they are not a qualified facility confidence interval when scope blockers remain',
         'semantics': 'published lognormal initiating-frequency distributions with explicit shared-asset or independent-event normal draws; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
         'physical_validation_claim': False,
     }

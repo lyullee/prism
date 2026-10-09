@@ -403,6 +403,45 @@ def merge_facility_campaign_results(
             for receptor_id in endpoint_ir:
                 endpoint_ir[receptor_id][endpoint] += weight * float(harm[receptor_id][endpoint])
     fn = [_fn_curve(merged_atoms, endpoint) for endpoint in range(2)]
+    # Keep a separate facility-level diagnostic view of the atoms that were
+    # actually evaluated.  This is deliberately not promoted to
+    # ``total_facility_*`` when the declared scope has blockers (for example
+    # an operator-limited release or a synthetic diagnostic horizon).  The
+    # diagnostic view is useful for wiring the facility aggregation and for
+    # sensitivity studies while making the qualification boundary explicit.
+    # A campaign may retain the same event in both ``cases`` and
+    # ``uncomputed_cases`` to preserve an operator-limited/diagnostic reason.
+    # Count one status per event for coverage summaries, preferring the
+    # evaluated case row when both rows exist; the raw row counts remain
+    # available separately above.
+    case_status_by_event: dict[str, str] = {}
+    for case in merged_cases:
+        event_id = str(case.get("event_id", ""))
+        case_status_by_event[event_id] = str(case.get("status", "UNKNOWN"))
+    overlapping_case_uncomputed_count = 0
+    uncomputed_status_counts: dict[str, int] = defaultdict(int)
+    for case in merged_missing:
+        event_id = str(case.get("event_id", ""))
+        uncomputed_status_counts[str(case.get("status", "UNKNOWN"))] += 1
+        if event_id in case_status_by_event:
+            overlapping_case_uncomputed_count += 1
+            continue
+        case_status_by_event[event_id] = str(case.get("status", "UNKNOWN"))
+    case_status_counts: dict[str, int] = defaultdict(int)
+    for status in case_status_by_event.values():
+        case_status_counts[status] += 1
+    operator_limited_case_count = sum(
+        count for status, count in case_status_counts.items()
+        if "OPERATOR_LIMITED" in status
+    )
+    explicit_uncomputed_status_count = sum(
+        count for status, count in case_status_counts.items()
+        if "UNCOMPUTED" in status
+    )
+    failed_case_count = sum(
+        count for status, count in case_status_counts.items()
+        if "FAILED" in status
+    )
     component_contributions: dict[str, dict[str, Any]] = {}
     for component_id in sorted(observed_components):
         atoms = component_atoms.get(component_id, [])
@@ -438,6 +477,22 @@ def merge_facility_campaign_results(
         "distribution": "across separately executed equipment campaigns; not repeated-run latency",
     }
     known_ir = {receptor_id: values[:] for receptor_id, values in endpoint_ir.items()}
+    conditional_diagnostic_coverage = {
+        "event_count": len(merged_events),
+        "case_count": len(merged_cases),
+        "uncomputed_case_count": len(merged_missing),
+        "overlapping_case_uncomputed_count": overlapping_case_uncomputed_count,
+        "risk_atom_count": len(merged_atoms),
+        "case_status_counts": dict(sorted(case_status_counts.items())),
+        "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
+        "operator_limited_case_count": operator_limited_case_count,
+        "explicit_uncomputed_status_count": explicit_uncomputed_status_count,
+        "failed_case_count": failed_case_count,
+        "observed_component_count": len(observed_components),
+        "expected_component_count": len(expected_components),
+        "required_accident_family_count": len(required_accident_families),
+        "scope_blocker_count": len(unique_blocking),
+    }
     return {
         "schema_version": "prism.facility_risk_ledger.v1",
         "status": "FACILITY_SCOPE_EXECUTED" if total_available else "PARTIAL_FACILITY_SCOPE",
@@ -465,6 +520,14 @@ def merge_facility_campaign_results(
         "declared_scope_numerically_complete": total_available,
         "known_contribution_annual_ir_low_high": known_ir,
         "known_contribution_expected_death_fn_low_high": fn,
+        "conditional_diagnostic_facility_annual_ir_low_high": known_ir,
+        "conditional_diagnostic_facility_expected_death_fn_low_high": fn,
+        "conditional_diagnostic_facility_risk_available": bool(merged_atoms),
+        "conditional_diagnostic_facility_basis": (
+            "linear sum of validated risk atoms from the evaluated equipment campaigns; "
+            "scope blockers are retained and this view is not a qualified facility total"
+        ),
+        "conditional_diagnostic_facility_coverage": conditional_diagnostic_coverage,
         "declared_scope_annual_ir_low_high": known_ir if total_available else None,
         "declared_scope_expected_death_fn_low_high": fn if total_available else None,
         "total_facility_annual_ir_low_high": known_ir if total_available else None,
@@ -479,5 +542,10 @@ def merge_facility_campaign_results(
             "missing_scope": "missing or incomplete equipment/families remain partial and never become zero risk",
             "frequency": "each atom retains its initiating event frequency; no frequency inference or reallocation is performed",
             "fn": "expected-death F-N curves use the same atom-level convention as the campaign backend",
+            "conditional_diagnostic_facility": (
+                "facility IR/F-N is calculated from the atoms that reached the risk ledger, "
+                "but remains diagnostic-only whenever declared scope, physical validation, "
+                "or release-horizon blockers are present"
+            ),
         },
     }

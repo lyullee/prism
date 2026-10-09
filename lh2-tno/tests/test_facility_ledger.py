@@ -145,6 +145,13 @@ def test_facility_ledger_withholds_total_for_missing_component_and_family():
     assert result["status"] == "PARTIAL_FACILITY_SCOPE"
     assert result["total_facility_annual_ir_low_high"] is None
     assert result["known_contribution_annual_ir_low_high"]["receptor-a"][0] == pytest.approx(0.0007)
+    assert result["conditional_diagnostic_facility_risk_available"] is True
+    assert result["conditional_diagnostic_facility_annual_ir_low_high"] == result[
+        "known_contribution_annual_ir_low_high"
+    ]
+    assert result["conditional_diagnostic_facility_coverage"]["uncomputed_case_count"] == 1
+    assert result["conditional_diagnostic_facility_coverage"]["overlapping_case_uncomputed_count"] == 1
+    assert result["conditional_diagnostic_facility_coverage"]["operator_limited_case_count"] == 0
     assert "missing expected components: pipe-01" in result["blocking_reasons"]
     assert "accident family pipe_hole: missing scope matrix" in result["blocking_reasons"]
     assert result["component_statuses"]["tank-01"] == "PARTIAL"
@@ -256,6 +263,10 @@ def test_facility_assessment_combines_ledger_and_frequency_scenarios():
     assert assessment["schema_version"] == "prism.facility_assessment.v1"
     assert assessment["status"] == "FACILITY_SCOPE_EXECUTED"
     assert assessment["facility_total_risk_available"] is True
+    assert assessment["conditional_diagnostic_facility_risk_available"] is True
+    assert assessment["conditional_diagnostic_facility_annual_ir_low_high"] == assessment[
+        "facility_risk_ledger"
+    ]["known_contribution_annual_ir_low_high"]
     assert assessment["fresh_physics_executed"] is False
     assert assessment["frequency_uncertainty"]["fresh_physics_executed"] is False
     assert assessment["facility_risk_ledger"]["component_contributions"]["tank-01"]

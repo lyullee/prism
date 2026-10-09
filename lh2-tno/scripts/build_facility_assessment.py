@@ -60,6 +60,12 @@ def main() -> int:
         "status": assessment["status"],
         "output": str(args.output),
         "facility_total_risk_available": assessment["facility_total_risk_available"],
+        "conditional_diagnostic_facility_risk_available": assessment[
+            "conditional_diagnostic_facility_risk_available"
+        ],
+        "conditional_diagnostic_operator_limited_case_count": assessment[
+            "conditional_diagnostic_facility_coverage"
+        ]["operator_limited_case_count"],
         "campaign_count": len(assessment["facility_risk_ledger"]["campaign_ids"]),
         "component_contribution_count": len(assessment["facility_risk_ledger"]["component_contributions"]),
         "frequency_scenario_count": len(uncertainty["scenarios"]) if uncertainty else 0,

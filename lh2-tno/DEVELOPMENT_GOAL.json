@@ -241,7 +241,9 @@
   "facility_risk_ledger_module": "src/lh2_tno/facility_ledger.py",
   "facility_risk_ledger_cli": "scripts/merge_facility_campaigns.py",
   "facility_risk_ledger_policy": "Merge only already evaluated risk atoms from disjoint equipment campaigns; duplicate event IDs, duplicate assets, receptor mismatch, missing expected components, incomplete accident families, synthetic horizons, exclusions, or uncomputed cases withhold total facility IR/F-N while retaining known contribution; component_contributions reports per-equipment IR/F-N without frequency reallocation.",
-  "facility_risk_ledger_test_status": "8 facility ledger tests; full portable suite 355 passed",
+  "facility_risk_ledger_conditional_diagnostic_facility_view": "The ledger exposes conditional_diagnostic_facility_annual_ir_low_high and conditional_diagnostic_facility_expected_death_fn_low_high from evaluated risk atoms, plus case-status coverage; this diagnostic view is separate from and never promotes a blocked qualified facility total.",
+  "facility_risk_ledger_conditional_diagnostic_facility_available": true,
+  "facility_risk_ledger_test_status": "8 facility ledger tests; full portable suite 370 passed",
   "facility_assessment_implemented": true,
   "facility_assessment_module": "src/lh2_tno/facility_assessment.py",
   "facility_assessment_cli": "scripts/build_facility_assessment.py",
@@ -774,7 +776,12 @@
     "campaign_elapsed_ms": 241101.17370006628
   },
   "mixed_lh2_facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
-  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m: the refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED. Bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented; facility IR/F-N remains withheld until failed/limited physics and actual geometry are resolved.",
+  "mixed_lh2_conditional_diagnostic_facility_risk_available": true,
+  "mixed_lh2_conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [1.749e-05, 1.749e-05]
+  },
+  "mixed_lh2_conditional_diagnostic_facility_semantics": "Conditional facility IR/F-N is explicitly calculated from all evaluated risk atoms; it is a diagnostic wiring result and not a qualified facility QRA while synthetic horizon, operator-limited physics, actual geometry, and physical validation blockers remain.",
+  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m: the refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED. Bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented; conditional diagnostic facility IR/F-N is exposed from the 96 evaluated risk atoms, while qualified facility IR/F-N remains withheld until failed/limited physics, actual geometry, and physical validation are resolved.",
   "mixed_lh2_provider_campaign_pool_diagnostic_option": "scripts/build_lh2_mixed_provider_campaign.py --pool-radius-m 0.005",
   "mixed_lh2_provider_campaign_pool_diagnostic_origin": "declared_sensitivity; not facility geometry"
 }

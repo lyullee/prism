@@ -865,3 +865,9 @@ prism --describe-modes
 
 외부 모델 없이 시설 검증과 문헌 빈도 생성이 가능합니다. source/확산/피해 물리 계산은 별도 검토된 provider가 필요합니다.
 MIT는 PRISM 자체 배포 파일에 적용하며 외부 모델과 원자료의 라이선스·재배포 권한을 변경하지 않습니다.
+
+## 시설 IR/F-N 연결 결과 읽기
+
+공식 혼합 LH2 재실행부터 시설 원장은 두 층의 결과를 저장합니다. `conditional_diagnostic_facility_annual_ir_low_high`와 `conditional_diagnostic_facility_expected_death_fn_low_high`는 실제로 만들어진 risk atom을 시설 수준에서 합한 **조건부 진단용 IR/F-N**입니다. 이 값으로 방출→확산→점화→화재·폭발→수용점 피해가 시설 원장까지 연결됐는지 확인하고, 문헌 빈도 p05/중앙/p95 시나리오를 다시 적용할 수 있습니다.
+
+`facility_total_risk_available`와 `total_facility_annual_ir_low_high`는 검증용 결과입니다. 예상 설비·사고가 모두 실행되고 미계산 사건, 합성 종료시계, 연산자 제한, 실제 형상 미확정, 물리검증 부족이 해소될 때만 채워집니다. 현재 공식 결과는 진단용 IR/F-N은 계산되지만 검증용 시설 총위험도는 `null`입니다. 이는 계산을 버린 것이 아니라, 부분 계산을 전체 시설 위험도로 잘못 표시하지 않도록 한 승격 경계입니다. 사건 수, risk atom 수, 연산자 제한 수, 차단 이유는 `conditional_diagnostic_facility_coverage`에서 확인할 수 있습니다.

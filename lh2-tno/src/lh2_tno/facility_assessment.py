@@ -49,6 +49,18 @@ def build_facility_assessment(
         "status": ledger["status"],
         "facility_id": ledger["facility_id"],
         "facility_total_risk_available": ledger["facility_total_risk_available"],
+        "conditional_diagnostic_facility_risk_available": ledger[
+            "conditional_diagnostic_facility_risk_available"
+        ],
+        "conditional_diagnostic_facility_annual_ir_low_high": ledger[
+            "conditional_diagnostic_facility_annual_ir_low_high"
+        ],
+        "conditional_diagnostic_facility_expected_death_fn_low_high": ledger[
+            "conditional_diagnostic_facility_expected_death_fn_low_high"
+        ],
+        "conditional_diagnostic_facility_coverage": ledger[
+            "conditional_diagnostic_facility_coverage"
+        ],
         "facility_risk_ledger": ledger,
         "frequency_uncertainty": uncertainty,
         "fresh_physics_executed": False,
@@ -56,6 +68,7 @@ def build_facility_assessment(
         "semantics": {
             "orchestration": "campaign results are merged once; no source or consequence model is rerun",
             "partial_scope": "missing equipment, accident families, or event case accounting remains explicit and withholds facility totals",
+            "conditional_diagnostic_facility": "the atom-level facility IR/F-N sum is exposed for diagnostics and frequency sensitivity, while qualification blockers continue to withhold the facility total",
             "frequency": "optional literature scenarios reweight saved risk atoms and do not infer missing frequency",
         },
     }

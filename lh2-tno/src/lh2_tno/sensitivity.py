@@ -71,11 +71,15 @@ def frequency_sensitivity(result: dict, scenarios: tuple[FrequencySensitivity, .
             ranked.append({asset:None if asset not in computed_assets else 1+sum(v[i]>value[i] and not math.isclose(v[i],value[i],rel_tol=1e-12,abs_tol=0) for key,v in contribution.items() if key in computed_assets) for asset,value in contribution.items()})
         outputs.append({'scenario':s.model_dump(mode='json'),'known_annual_ir_low_high':ir,
             'known_expected_death_fn_low_high':fn,'asset_known_annual_expected_fatalities_low_high':contribution,
+            'conditional_diagnostic_facility_annual_ir_low_high':ir,
+            'conditional_diagnostic_facility_expected_death_fn_low_high':fn,
+            'conditional_diagnostic_facility_risk_available':bool(atoms),
             'asset_rank_by_known_expected_fatalities_low_high':ranked,
             'uncomputed_cases':result['uncomputed_cases'],
             'declared_scope_annual_ir_low_high':ir if result['declared_scope_numerically_complete'] else None,
             'total_facility_annual_ir_low_high':ir if result['total_facility_annual_ir_low_high'] is not None else None})
     return {'campaign_digest':result['campaign_digest'],'physical_risk_atoms_digest':canonical_digest(atoms),
         'scenarios':outputs,'fresh_physics_executed':False,'statistical_confidence_interval':False,
+        'conditional_diagnostic_facility_risk':'deterministic frequency multipliers are applied to the saved atoms and exposed as a conditional facility IR/F-N diagnostic; scope blockers still withhold a qualified facility total',
         'semantics':'declared deterministic literature-frequency multipliers, fixed physics/weather/barriers/population; ranks only within computed scope',
         'physical_validation_claim':False}
