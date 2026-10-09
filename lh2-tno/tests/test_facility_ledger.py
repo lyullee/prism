@@ -152,6 +152,7 @@ def test_facility_ledger_withholds_total_for_missing_component_and_family():
     assert result["conditional_diagnostic_facility_coverage"]["uncomputed_case_count"] == 1
     assert result["conditional_diagnostic_facility_coverage"]["overlapping_case_uncomputed_count"] == 1
     assert result["conditional_diagnostic_facility_coverage"]["operator_limited_case_count"] == 0
+    assert len(result["scope_matrix_digests"]) == 1
     assert "missing expected components: pipe-01" in result["blocking_reasons"]
     assert "accident family pipe_hole: missing scope matrix" in result["blocking_reasons"]
     assert result["component_statuses"]["tank-01"] == "PARTIAL"
@@ -207,6 +208,20 @@ def test_facility_ledger_withholds_total_when_component_coverage_row_is_missing(
     assert merged["facility_total_risk_available"] is False
     assert merged["component_statuses"]["tank-01"] == "MISSING_COVERAGE_LEDGER"
     assert "component tank-01: missing coverage ledger row" in merged["blocking_reasons"]
+
+
+def test_facility_ledger_labels_explicit_component_exclusion_without_calling_it_partial():
+    result = _result(
+        event_id="event-excluded-interface", asset_id="asset-interface",
+        component_id="tank-01", frequency=1e-3,
+    )
+    result["coverage"]["by_component"][0]["scope_status"] = "EXCLUDED"
+    result["excluded_model_components"] = {"tank-01": "interface boundary has no accidental release mode"}
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-01",)
+    )
+    assert merged["component_statuses"]["tank-01"] == "EXCLUDED"
+    assert any("excluded components remain" in reason for reason in merged["blocking_reasons"])
 
 
 def test_facility_ledger_can_feed_frequency_uncertainty_without_physics_rerun():

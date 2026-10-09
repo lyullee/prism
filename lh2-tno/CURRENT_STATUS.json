@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 370,
+  "unit_contract_conservation_tests_passed": 371,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -538,7 +538,7 @@
   "facility_risk_ledger_module": "src/lh2_tno/facility_ledger.py",
   "facility_risk_ledger_cli": "scripts/merge_facility_campaigns.py",
   "facility_risk_ledger_policy": "Merge only already evaluated risk atoms from disjoint equipment campaigns; duplicate event IDs, duplicate assets, receptor mismatch, missing expected components, incomplete accident families, synthetic horizons, exclusions, uncomputed cases, or events without case/uncomputed-case accounting withhold total facility IR/F-N while retaining known contribution; component_contributions reports per-equipment IR/F-N without frequency reallocation.",
-  "facility_risk_ledger_test_status": "8 facility ledger tests; full portable suite 370 passed",
+  "facility_risk_ledger_test_status": "9 facility ledger tests; full portable suite 371 passed",
   "facility_risk_ledger_smoke": "results/20261009/facility_ledger_smoke/facility_ledger.json",
   "facility_risk_ledger_smoke_status": "FACILITY_SCOPE_EXECUTED for one declared synthetic inventory campaign; physical validation claim remains false",
   "facility_risk_ledger_smoke_campaign_count": 1,
@@ -1263,6 +1263,16 @@
   },
   "mixed_lh2_facility_assessment_record": "results/20261014/generic_lh2_mixed_facility_assessment_refined_pool.json",
   "mixed_lh2_facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
+  "mixed_lh2_accident_scope_matrix_record": "results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json",
+  "mixed_lh2_accident_scope_matrix_status": "INCOMPLETE_DECLARED_SCOPE",
+  "mixed_lh2_accident_scope_matrix_row_status_counts": {
+    "EXECUTED": 4,
+    "PARTIAL": 7,
+    "NO_EVENT_GENERATED": 1
+  },
+  "mixed_lh2_accident_scope_matrix_blocking_reason_count": 9,
+  "mixed_lh2_accident_scope_matrix_digest": "0cd50003d87728e232296a2f64506d7ca80287c62c1894ecf2e2b1ceddd633a9",
+  "mixed_lh2_facility_assessment_scope_matrix_count": 1,
   "mixed_lh2_conditional_diagnostic_facility_risk_available": true,
   "mixed_lh2_conditional_diagnostic_facility_annual_ir_low_high": {
     "worker-01": [1.749e-05, 1.749e-05]
@@ -1280,7 +1290,12 @@
     },
     "explicit_uncomputed_status_count": 0,
     "failed_case_count": 0,
-    "scope_blocker_count": 22
+    "component_status_counts": {
+      "EXECUTED": 2,
+      "PARTIAL": 5,
+      "EXCLUDED": 1
+    },
+    "scope_blocker_count": 18
   },
   "mixed_lh2_conditional_diagnostic_facility_semantics": "Computed facility-level diagnostic IR/F-N from evaluated risk atoms; not a qualified total facility QRA or confidence interval while synthetic horizon, operator-limited physics, actual geometry, and physical validation blockers remain.",
   "mixed_lh2_frequency_scenario_count": 5,

@@ -68,6 +68,7 @@ def main() -> int:
         ]["operator_limited_case_count"],
         "campaign_count": len(assessment["facility_risk_ledger"]["campaign_ids"]),
         "component_contribution_count": len(assessment["facility_risk_ledger"]["component_contributions"]),
+        "scope_matrix_count": len(assessment["facility_risk_ledger"]["scope_matrix_digests"]),
         "frequency_scenario_count": len(uncertainty["scenarios"]) if uncertainty else 0,
         "fresh_physics_executed": assessment["fresh_physics_executed"],
     }, ensure_ascii=False))

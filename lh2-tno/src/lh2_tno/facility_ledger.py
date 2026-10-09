@@ -4,8 +4,8 @@ Each input is an already evaluated PRISM campaign result.  This module does
 not rerun a source or consequence model.  It only combines risk atoms after
 checking that event IDs, asset ownership, receptor sets, and completeness
 claims are compatible.  Missing equipment or accident families keep the
-facility total risk unavailable; known contributions are still reported as a
-separate, explicitly partial quantity.
+facility total risk unavailable; known contributions and a separate
+conditional diagnostic facility IR/F-N view are still reported explicitly.
 """
 from __future__ import annotations
 
@@ -356,7 +356,16 @@ def merge_facility_campaign_results(
             blocking_reasons.append(
                 f"component {component_id} appears in multiple coverage ledgers"
             )
-        component_statuses[component_id] = "EXECUTED" if statuses == {"EXECUTED"} else "PARTIAL"
+        if statuses == {"EXECUTED"}:
+            component_statuses[component_id] = "EXECUTED"
+        elif statuses == {"EXCLUDED"}:
+            # Preserve an explicit non-release/interface exclusion as its own
+            # status.  It still blocks qualified facility promotion under the
+            # fail-closed policy, but must not be misreported as a partial
+            # physics execution.
+            component_statuses[component_id] = "EXCLUDED"
+        else:
+            component_statuses[component_id] = "PARTIAL"
         if component_statuses[component_id] != "EXECUTED":
             source_complete = False
             blocking_reasons.append(f"component {component_id}: {component_statuses[component_id]}")
@@ -369,9 +378,11 @@ def merge_facility_campaign_results(
             )
 
     family_rows: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    scope_matrix_digests: list[str] = []
     for matrix in scope_matrices:
         if not isinstance(matrix, Mapping):
             raise FacilityLedgerError("scope matrix entries must be objects")
+        scope_matrix_digests.append(canonical_digest(matrix))
         for row in matrix.get("rows", ()):  # type: ignore[union-attr]
             if isinstance(row, Mapping) and row.get("family"):
                 family_rows[str(row["family"])].append(row)
@@ -490,6 +501,10 @@ def merge_facility_campaign_results(
         "failed_case_count": failed_case_count,
         "observed_component_count": len(observed_components),
         "expected_component_count": len(expected_components),
+        "component_status_counts": {
+            status: sum(value == status for value in component_statuses.values())
+            for status in sorted(set(component_statuses.values()))
+        },
         "required_accident_family_count": len(required_accident_families),
         "scope_blocker_count": len(unique_blocking),
     }
@@ -516,6 +531,7 @@ def merge_facility_campaign_results(
         "component_statuses": component_statuses,
         "excluded_model_components": merged_exclusions,
         "required_accident_families": [str(family) for family in required_accident_families],
+        "scope_matrix_digests": scope_matrix_digests,
         "accident_family_statuses": family_statuses,
         "declared_scope_numerically_complete": total_available,
         "known_contribution_annual_ir_low_high": known_ir,
