@@ -307,6 +307,45 @@ class DiagnosticAdapterRunner:
                 f"adapter release could not be attached to consequence context: {error}"
             ) from error
 
+    def make_resolver(
+        self,
+        component_kind: str,
+        request_builder,
+        consequence_defaults_builder,
+        *,
+        provider: AccidentHistoryProvider | None = None,
+        release_kind: str = "gas",
+    ):
+        """Build a resolver callback for ``request_from_equipment_resolver``.
+
+        The two host callbacks have deliberately separate responsibilities:
+        ``request_builder`` turns the state snapshot into an explicit accident
+        export request, while ``consequence_defaults_builder`` supplies only
+        the consequence context.  Neither callback may put a frequency in the
+        request; the downstream campaign binds it from a reviewed plan.
+        """
+
+        self._spec(component_kind)
+        if not callable(request_builder):
+            raise DiagnosticAdapterRunnerError("request_builder must be callable")
+        if not callable(consequence_defaults_builder):
+            raise DiagnosticAdapterRunnerError(
+                "consequence_defaults_builder must be callable"
+            )
+
+        def resolve(template, normalized):
+            export_request = request_builder(template, normalized)
+            defaults = consequence_defaults_builder(template, normalized)
+            execution = self.execute(
+                component_kind,
+                export_request,
+                provider=provider,
+                release_kind=release_kind,
+            )
+            return self.to_consequence_request(execution, defaults)
+
+        return resolve
+
     def _spec(self, component_kind: str) -> DiagnosticAdapterSpec:
         kind = _text(component_kind, "component_kind")
         try:

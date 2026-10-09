@@ -59,6 +59,8 @@ python scripts/audit_diagnostic_adapter_registry.py `
 
 `RealtimeConsequenceMonitor`는 센서 frame을 정상 공정상태로 정규화하고, `request_from_equipment_resolver()`가 외부 provider가 만든 명시적 `ConsequenceRequest`를 받아 결과를 계산한다. 공통 adapter runner는 이 resolver가 provider packet을 만들기 전의 설비별 실행 계약이다.
 
+`DiagnosticAdapterRunner.make_resolver()`는 이 접점을 반복해서 작성하지 않도록 한다. host는 상태 snapshot을 받아 사고 export request를 만드는 callback과 consequence context를 만드는 callback을 각각 제공한다. 반환된 resolver를 `RealtimeConsequenceMonitor.update_from_frame(..., release_resolver=resolver)`에 넘기면, 상태 정규화 → 설비 provider 방출 → strict packet → consequence 계산 순서가 이어진다. 두 callback에서 빈도·구멍 크기·지속시간을 추정하지 않으며, provider request와 context가 불완전하면 즉시 오류로 남긴다.
+
 실시간 순서는 다음과 같다.
 
 1. 센서 frame을 압력·온도·액면·유량 등의 상태 snapshot으로 정규화한다.

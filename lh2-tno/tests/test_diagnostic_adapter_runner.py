@@ -7,7 +7,9 @@ from lh2_tno.diagnostic_adapter_runner import (
     DiagnosticAdapterRunnerError,
     load_diagnostic_adapter_specs,
 )
+from lh2_tno.service import request_from_equipment_resolver
 from test_equipment_accident_export import _Provider, _request
+from test_consequence_service import request as consequence_template
 from test_provider_release import _defaults
 
 
@@ -72,6 +74,55 @@ def test_runner_attaches_strict_release_to_consequence_context_without_frequency
     assert request.resolved_release.event_id == "provider-accident-01"
     assert request.annual_frequency_per_year is None
     assert request.frequency_event is None
+
+
+def test_runner_resolver_factory_connects_state_callbacks_to_consequence_request():
+    runner = DiagnosticAdapterRunner.from_binding_catalog(CATALOG)
+    provider = _Provider()
+    resolver = runner.make_resolver(
+        "storage_tank",
+        lambda _template, state: _request(
+            component_id="storage-tank-01",
+            port_id="tank-out",
+            event_id=f"provider-accident-{state['values']['PT']['value_si']:.0f}",
+        ),
+        lambda _template, _state: _defaults(),
+        provider=provider,
+    )
+
+    request = resolver(
+        object(),
+        {"values": {"PT": {"value_si": 500000.0}}},
+    )
+
+    assert request.resolved_release is not None
+    assert request.resolved_release.event_id == "provider-accident-500000"
+    assert request.frequency_event is None
+    assert len(provider.requests) == 1
+
+
+def test_runner_resolver_factory_plugs_into_state_boundary_contract():
+    runner = DiagnosticAdapterRunner.from_binding_catalog(CATALOG)
+    resolver = runner.make_resolver(
+        "storage_tank",
+        lambda _template, _state: _request(
+            component_id="storage-tank-01",
+            port_id="tank-out",
+            event_id="provider-accident-boundary",
+        ),
+        lambda _template, _state: _defaults(),
+        provider=_Provider(),
+    )
+    resolved = request_from_equipment_resolver(
+        consequence_template().model_copy(update={"component_id": "storage-tank-01"}),
+        {"values": {"PT": {"value_si": 500000.0}}},
+        resolver,
+    )
+
+    assert resolved.source_input is None
+    assert resolved.resolved_release is not None
+    assert resolved.resolved_release.event_id == "provider-accident-boundary"
+    assert resolved.annual_frequency_per_year is None
 
 
 def test_missing_adapter_is_not_invented_from_catalog():
