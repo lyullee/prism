@@ -110,7 +110,11 @@ def build_facility_assessment(
     )
     if not isinstance(fn_diagnostics, Mapping):
         atoms = ledger.get("risk_atoms", ())
-        fn_diagnostics = _fn_diagnostics(atoms if isinstance(atoms, Sequence) else ())
+        fn_diagnostics = _fn_diagnostics(
+            atoms
+            if isinstance(atoms, Sequence) and not isinstance(atoms, (str, bytes))
+            else ()
+        )
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
