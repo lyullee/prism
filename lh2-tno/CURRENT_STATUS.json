@@ -3101,5 +3101,6 @@
   "realtime_facility_campaign_adapter_ci_run": "https://github.com/lyullee/prism/actions/runs/37958982378",
   "realtime_facility_campaign_multi_condition_implemented": true,
   "realtime_facility_campaign_multi_condition_policy": "Same event ID is retained as one event across annual conditions; one current realtime_snapshot consequence basis per component; non-current annual conditions require explicit reviewed harm and provenance; current-weather harm is never copied automatically.",
-  "realtime_facility_campaign_multi_condition_test_status": "Multiple annual-condition adapter test passed; local portable suite 583 passed/1 skipped"
+  "realtime_facility_campaign_multi_condition_test_status": "Multiple annual-condition adapter test passed; local portable suite 583 passed/1 skipped",
+  "realtime_facility_campaign_multi_condition_ci_run": "https://github.com/lyullee/prism/actions/runs/37959769731"
 }
