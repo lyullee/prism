@@ -21,10 +21,10 @@ PRISM의 디지털트윈 모니터는 같은 입력을 반복해서 받으면 ex
 | 경로 | 측정값 | 의미 |
 |---|---:|---|
 | cold fresh physics | 약 2,663 ms | 새 프로세스를 포함한 한 번의 새 계산 |
-| warm fresh physics 첫 요청 | 약 2,596 ms | worker 시작 시간이 포함된 첫 요청 |
+| warm fresh physics 첫 요청 | 약 2,722 ms | worker 시작 시간이 포함된 첫 요청 |
 | warm fresh physics 후속 9건 | p50 1,864 ms / p95 2,043 ms / p99 2,043 ms | 매번 풍속을 바꾼 새 계산이며 cache hit가 아님 |
 | warm steady p50/p95/p99 | 1,864 / 2,043 / 2,043 ms | 세 분위수 모두 1 Hz 미충족 |
-| exact cache p95 | 약 54.4 ms | 동일 요청 반복 조회는 1 Hz 진단 기준 충족 |
+| exact cache p95 | 약 61.3 ms | 동일 요청 반복 조회는 1 Hz 진단 기준 충족 |
 
 따라서 이번 개발의 결론은 **warm worker가 반복 interpreter 시작 비용을 없애고 상태가 바뀐 fresh 계산을 계속 실행할 수 있게 했지만, 현재 SLABx-LH2 계산은 fresh physics 1 Hz를 아직 충족하지 않는다**는 것이다. 1 Hz를 충족한다고 기록한 경로는 동일 요청 exact cache뿐이다.
 
