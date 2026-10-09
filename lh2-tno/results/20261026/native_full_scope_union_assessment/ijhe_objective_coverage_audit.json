@@ -1,0 +1,235 @@
+{
+  "schema_version": "prism.ijhe_objective_coverage_audit.v1",
+  "status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
+  "objective": "일반 옥외 액화수소시설에서 설비 상태부터 방출·확산·점화·최종 피해·빈도 불확실성까지 실시간 진단 가능한 PRISM 모듈",
+  "regular_completion_audit_status": "INCOMPLETE_EVIDENCE",
+  "checks": [
+    {
+      "id": "equipment_state_to_native_release",
+      "requirement": "설비 상태 원문이 각 native 방출 packet에 전달되고 provider echo로 확인되어야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
+        "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json"
+      ],
+      "observed": {
+        "catalog_event_count": 24,
+        "exact_native_packet_count": 24,
+        "catalog_uncomputed_event_count": 0,
+        "state_snapshot_record_count": 24,
+        "state_snapshot_bound_count": 24,
+        "state_snapshot_unbound_count": 0,
+        "state_snapshot_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+      },
+      "blocking_reason": null,
+      "interpretation": "24개 일반 LH2 사건에서 canonical state snapshot digest와 provider echo를 대조한다."
+    },
+    {
+      "id": "native_release_to_consequence_chain",
+      "requirement": "native 방출이 지속시간·재고/차단 경계를 거쳐 SLABx-LH2와 최종 피해 계산까지 도달해야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261027\\native_generic_scope_packets_state_bound\\packet_evidence.json",
+        "results\\20261027\\native_generic_scope_packets_state_bound\\native_packet_campaign_ledger.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "observed": {
+        "packet_event_count": 24,
+        "packet_exact_event_count": 24,
+        "campaign_event_count": 24,
+        "campaign_case_count": 24,
+        "campaign_chain_executed_case_count": 24,
+        "campaign_uncomputed_case_count": 0,
+        "campaign_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+        "risk_atom_count": 176
+      },
+      "blocking_reason": null,
+      "interpretation": "수치 chain은 닫혔지만 19개 case가 operator-limited이고 packet은 qualified provider 증거가 아니다."
+    },
+    {
+      "id": "release_to_final_damage",
+      "requirement": "방출에서 확산·점화·화재/폭발·수용점 피해와 IR/F-N 진단까지 이어져야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "observed": {
+        "conditional_facility_risk_available": true,
+        "conditional_fn_curve_available": true,
+        "conditional_risk_atom_count": 176,
+        "facility_total_risk_available": false
+      },
+      "blocking_reason": null,
+      "interpretation": "worker-01 수용점의 조건부 IR/F-N은 계산되지만 시설 전체 QRA 승격은 별도 gate다."
+    },
+    {
+      "id": "literature_frequency_uncertainty",
+      "requirement": "문헌 빈도를 그대로 입력하되 여러 빈도 시나리오의 불확실성을 계산해야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "observed": {
+        "frequency_scenario_count": 3,
+        "frequency_inference_performed": false,
+        "physical_validation_claim": false
+      },
+      "blocking_reason": null,
+      "interpretation": "현장 빈도 학습은 하지 않고 문헌 p05/중앙/p95 계열을 저장된 risk atom에 재가중한다."
+    },
+    {
+      "id": "weather_ignition_population",
+      "requirement": "기상·점화·인구 분기를 명시적으로 곱해 최종 피해를 계산해야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "observed": {
+        "population_accounting_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+        "population_mismatch_count": 0,
+        "annual_condition_count": 5,
+        "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
+        "scenario_cross_product_count": null
+      },
+      "blocking_reason": null,
+      "interpretation": "현재 조건과 인구는 synthetic diagnostic이며 site weather/population qualification은 남아 있다."
+    },
+    {
+      "id": "generic_lh2_scope",
+      "requirement": "탱크·배관·밸브·펌프·벤트·기화기·재액화기 등 일반 LH2 설비 사고 범위를 명시해야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "observed": {
+        "required_family_count": 12,
+        "scope_matrix_complete": false,
+        "conditional_chain_complete": true,
+        "strict_partial_or_blocked_family_count": 8
+      },
+      "blocking_reason": null,
+      "interpretation": "조건부 실행 범위는 닫혔지만 operator-limited family를 엄격한 complete facility scope로 승격하지 않는다."
+    },
+    {
+      "id": "realtime_processing",
+      "requirement": "디지털 트윈 모니터링 입력에서 빠른 결과를 내고 신규 물리 계산의 시간을 별도로 보여줘야 한다",
+      "status": "CONDITIONALLY_COMPLETE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
+      ],
+      "observed": {
+        "cache_p95_ms": 23.30389991402626,
+        "cache_meets_one_hz_all_samples": true,
+        "fresh_physics_elapsed_ms": 2731.322699924931,
+        "fresh_physics_meets_one_hz": false
+      },
+      "blocking_reason": null,
+      "interpretation": "캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다."
+    },
+    {
+      "id": "independent_physical_validation",
+      "requirement": "실증 또는 독립 실험으로 방출·확산·피해 계산을 검증해야 한다",
+      "status": "BLOCKED_EVIDENCE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
+      ],
+      "observed": {
+        "validation_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      },
+      "blocking_reason": "현재 evidence matrix는 제한 근거이며 독립 물리검증 claim을 열지 않았다",
+      "interpretation": "액화수소검사지원센터 자료와 실험 자료는 후보 근거로 보존되지만 사고 방출 검증으로 자동 승격하지 않는다."
+    },
+    {
+      "id": "qualified_provider_evidence",
+      "requirement": "각 facility case에 exact qualified provider packet이 있어야 한다",
+      "status": "BLOCKED_EVIDENCE",
+      "evidence_paths": [
+        "results\\20261027\\native_generic_scope_packets_state_bound\\native_packet_campaign_ledger.json",
+        "results\\20261027\\native_generic_scope_packets_state_bound\\packet_evidence.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
+      ],
+      "observed": {
+        "provider_packet_case_count": 24,
+        "qualified_provider_packet_case_count": 0,
+        "provider_packet_promoted": false
+      },
+      "blocking_reason": "현재 packet은 native diagnostic packet이며 qualified provider packet은 0건이다",
+      "interpretation": "이 gate가 닫히기 전까지 결과는 조건부 진단 결과로만 표시한다."
+    },
+    {
+      "id": "strict_facility_scope",
+      "requirement": "선언한 주요사고 범위가 모든 설비·사고 family에 대해 엄격히 complete여야 한다",
+      "status": "BLOCKED_EVIDENCE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
+      ],
+      "observed": {
+        "scope_matrix_complete": false,
+        "blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ],
+        "conditional_chain_complete": true
+      },
+      "blocking_reason": "strict scope matrix에 PARTIAL family가 남아 있어 조건부 chain만 계산한다",
+      "interpretation": "PARTIAL은 수치 실행 실패가 아니라 operator-limited/qualification 근거가 부족하다는 표지다."
+    },
+    {
+      "id": "strict_facility_qra",
+      "requirement": "시설 전체 IR/F-N을 qualified QRA 결과로 승격해야 한다",
+      "status": "BLOCKED_EVIDENCE",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
+      ],
+      "observed": {
+        "facility_total_risk_available": false,
+        "complete_facility_qra_claim": false,
+        "conditional_diagnostic_facility_risk_available": true
+      },
+      "blocking_reason": "qualified provider·strict scope·독립검증 gate가 닫히지 않아 facility IR/F-N을 보류한다",
+      "interpretation": "조건부 IR/F-N 값은 존재하지만 시설 전체 QRA라는 표현은 사용하지 않는다."
+    }
+  ],
+  "core_chain_check_ids": [
+    "equipment_state_to_native_release",
+    "native_release_to_consequence_chain",
+    "release_to_final_damage",
+    "literature_frequency_uncertainty",
+    "weather_ignition_population",
+    "generic_lh2_scope",
+    "realtime_processing"
+  ],
+  "strict_gate_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "core_blocking_check_ids": [],
+  "strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "conditional_chain_complete": true,
+  "strict_facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "interpretation": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN은 상태 snapshot→native 방출→consequence→조건부 IR/F-N 연결이 닫혔다는 뜻이다. qualified provider, 독립 물리검증, 엄격한 전체범위가 확보되기 전에는 시설 전체 QRA로 승격하지 않는다."
+}

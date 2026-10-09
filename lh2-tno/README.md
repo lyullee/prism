@@ -4,6 +4,14 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
+**2026-10-27 IJHE 목표 범위 감사:** 방출→최종피해 chain과 시설 QRA 승격 게이트를
+분리한 [`ijhe_objective_coverage_audit.json`](results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)을
+추가했습니다. 현재 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`으로,
+24/24 native 상태 snapshot·방출 packet·campaign 재결합과 조건부 IR/F-N은 확인되지만
+qualified provider packet·독립 물리검증·엄격한 전체범위·시설 전체 QRA는 보류됩니다.
+자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
+참조합니다.
+
 **2026-10-27 상태 snapshot 방출경계 보완:** 일반 옥외 LH2 매니페스트의 24개
 문헌 사건을 외부 `lh2dt_models` 사고 exporter로 다시 실행해 **24/24 exact
 native packet**을 만들었습니다. 저장탱크·이송배관·밸브·벤트·펌프·기화기·재액화기
