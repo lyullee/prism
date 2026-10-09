@@ -27,6 +27,7 @@ from lh2_tno.equipment_accident_export import (  # noqa: E402
     AccidentReleaseExportRequest,
     export_equipment_liquid_accident_history,
 )
+from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.state_snapshot import (  # noqa: E402
     EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
     EquipmentStateSnapshot,
@@ -62,9 +63,16 @@ def _request(
     position_enu_m: list[float],
     direction_enu: list[float],
     model_revision: str,
-    state_snapshot: EquipmentStateSnapshot,
+    state_snapshot: EquipmentStateSnapshot | None = None,
+    state_snapshot_digest: str | None = None,
 ) -> AccidentReleaseExportRequest:
-    return AccidentReleaseExportRequest.from_mapping({
+    digest = (
+        state_snapshot.digest()
+        if state_snapshot is not None
+        else state_snapshot_digest
+        or canonical_digest({"request_state": "legacy_diagnostic"})
+    )
+    payload = {
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
         "component_id": component_id,
@@ -83,12 +91,14 @@ def _request(
         "model_package": "lh2dt_models",
         "model_class": "LayeredTankNetworkSimulator+CommandedValve",
         "model_revision": model_revision,
-        "state_snapshot_digest": state_snapshot.digest(),
-        "state_snapshot": state_snapshot.to_mapping(),
+        "state_snapshot_digest": digest,
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit external LayeredTank inventory-threshold diagnostic; not site-calibrated",
         "provider_termination_required": True,
-    })
+    }
+    if state_snapshot is not None:
+        payload["state_snapshot"] = state_snapshot.to_mapping()
+    return AccidentReleaseExportRequest.from_mapping(payload)
 
 
 class LayeredTankAccidentProvider:
@@ -103,7 +113,7 @@ class LayeredTankAccidentProvider:
         max_intervals: int,
         full_open_area_m2: float,
         request: AccidentReleaseExportRequest,
-        provider_export: Mapping[str, Any],
+        provider_export: Mapping[str, Any] | None = None,
     ) -> None:
         self.lh2dt_root = lh2dt_root.resolve()
         self.time_step_s = float(time_step_s)
@@ -111,16 +121,25 @@ class LayeredTankAccidentProvider:
         self.max_intervals = int(max_intervals)
         self.full_open_area_m2 = float(full_open_area_m2)
         self.request = request
-        self.provider_export = dict(provider_export)
+        self.provider_export = None if provider_export is None else dict(provider_export)
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         if request["event_id"] != self.request.event_id:
             raise ValueError("LayeredTank provider event does not match accident request")
-        export = dict(self.provider_export)
-        meta = {
-            "status": "PRECOMPUTED_EXTERNAL_LAYERED_TANK_EXPORT",
-            "source_state_snapshot_digest": request["state_snapshot_digest"],
-        }
+        if self.provider_export is None:
+            export, meta = _run_provider(
+                self.lh2dt_root,
+                time_step_s=self.time_step_s,
+                target_release_kg=self.target_release_kg,
+                max_intervals=self.max_intervals,
+                full_open_area_m2=self.full_open_area_m2,
+            )
+        else:
+            export = dict(self.provider_export)
+            meta = {
+                "status": "PRECOMPUTED_EXTERNAL_LAYERED_TANK_EXPORT",
+                "source_state_snapshot_digest": request["state_snapshot_digest"],
+            }
         raw_steps = export["steps"]
         if not raw_steps:
             raise ValueError("LayeredTank provider returned no accident intervals")
