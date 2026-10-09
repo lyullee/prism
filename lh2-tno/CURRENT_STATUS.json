@@ -1757,7 +1757,7 @@
   "mixed_lh2_accident_scope_matrix_catalog_family_count": 12,
   "mixed_lh2_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261018/ijhe_completion_audit_refined_pool_current.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 22 checks, 4 blocking reasons",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 22 checks, 4 blocking reasons; diagnostic campaign binding PASS",
   "ijhe_completion_audit_latest_check_count": 21,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [
@@ -1883,5 +1883,21 @@
   "external_scenario_evidence_scope": "facility-neutral screening only; outdoor candidate rows retained; indoor/semi-enclosed/test-building rows outside declared outdoor scope",
   "external_scenario_evidence_test_status": "scenario importer and IJHE diagnostic evidence check passed; full portable suite 441 passed",
   "ijhe_completion_audit_latest_scenario_evidence_status": "PASS diagnostic-only; 52 records from 3 CSVs, 41 outdoor candidates and 11 out-of-scope rows",
-  "full_test_suite_status": "441 passed"
+  "full_test_suite_status": "441 passed",
+  "diagnostic_campaign_binding_latest_record": "results/20261018/generic_lh2_diagnostic_campaign_binding_current.json",
+  "diagnostic_campaign_binding_latest_status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING; structural event/case/risk-atom binding complete",
+  "diagnostic_campaign_binding_latest_packet_event_count": 24,
+  "diagnostic_campaign_binding_latest_campaign_event_count": 24,
+  "diagnostic_campaign_binding_latest_campaign_case_count": 24,
+  "diagnostic_campaign_binding_latest_campaign_risk_atom_count": 96,
+  "diagnostic_campaign_binding_latest_event_case_atom_match_count": 24,
+  "diagnostic_campaign_binding_latest_structural_binding_complete": true,
+  "diagnostic_campaign_binding_latest_packet_identity_consumed": false,
+  "diagnostic_campaign_binding_latest_packet_digest_checked_event_count": 24,
+  "diagnostic_campaign_binding_latest_packet_digest_match_event_count": 18,
+  "diagnostic_campaign_binding_latest_frequency_from_provider_packet": false,
+  "diagnostic_campaign_binding_latest_qualified_provider_packet_count": 0,
+  "diagnostic_campaign_binding_latest_facility_qra_claim": false,
+  "diagnostic_campaign_binding_latest_test_status": "latest refined campaign binding regenerated; structural event/case/risk-atom check passed; packet digest equality proven for 18/24 events",
+  "ijhe_completion_audit_latest_diagnostic_binding_status": "PASS diagnostic-only; current 24-event campaign structurally reaches 24 cases and 96 risk atoms; packet identity consumed false"
 }
