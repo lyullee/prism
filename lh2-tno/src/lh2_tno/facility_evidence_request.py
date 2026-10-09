@@ -158,6 +158,32 @@ def _build_case_requests(
                 current = dict(raw)
                 current["_reasons"] = []
                 rows[key] = current
+            # A consequence ledger can expose the same case once as an
+            # executed row and once as an uncomputed/limitation row.  The
+            # provider identity is sometimes present on only one of those
+            # rows.  Preserve it instead of letting source-list order decide
+            # whether the exact packet request is useful.
+            current_identity = current.get("provider_packet_identity")
+            candidate_identity = raw.get("provider_packet_identity")
+            if isinstance(candidate_identity, Mapping):
+                if not isinstance(current_identity, Mapping) or not current_identity:
+                    current["provider_packet_identity"] = dict(candidate_identity)
+                elif dict(current_identity) != dict(candidate_identity):
+                    # Keep the first identity for traceability, but make the
+                    # ambiguity explicit so a later promotion cannot silently
+                    # select one of two conflicting packets.
+                    current["_reasons"].append(
+                        "duplicate ledger rows carry conflicting provider packet identities"
+                    )
+            current_families = _case_required_families(current)
+            candidate_families = _case_required_families(raw)
+            if candidate_families:
+                current["scenario_families"] = sorted(
+                    set(current_families).union(candidate_families)
+                )
+            for field in ("asset_id", "component_id"):
+                if not current.get(field) and raw.get(field):
+                    current[field] = raw[field]
             current_status = str(current.get("status", "UNSPECIFIED"))
             candidate_status = str(raw.get("status", "UNSPECIFIED"))
             if _case_status_rank(candidate_status) > _case_status_rank(current_status):

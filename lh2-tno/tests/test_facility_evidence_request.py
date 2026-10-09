@@ -232,3 +232,49 @@ def test_case_requests_preserve_exact_vertical_handoff_identity_and_qualificatio
         "required_provider_evidence"
     ]
     assert any("EXECUTED_OPERATOR_LIMITED" in reason for reason in request["blocking_reasons"])
+
+
+def test_case_request_merge_keeps_identity_present_only_on_duplicate_row():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "event-duplicate",
+            "asset_id": "asset-duplicate",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["pipe_hole"],
+            "status": "EXECUTED",
+        }],
+        "uncomputed_cases": [{
+            "event_id": "event-duplicate",
+            "asset_id": "asset-duplicate",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["vertical_handoff"],
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "provider_packet_identity": {
+                "event_id": "event-duplicate",
+                "component_id": "vertical-pipe-01",
+                "port_ids": ["pipe.out"],
+                "provider_source_digests": ["source-digest"],
+                "provider_result_digests": ["result-digest"],
+            },
+        }],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "vertical_handoff",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+        }]},
+    )
+    assert report["case_request_count"] == 1
+    request = report["case_requests"][0]
+    assert request["current_status"] == "EXECUTED_OPERATOR_LIMITED"
+    assert request["component_id"] == "vertical-pipe-01"
+    assert request["exact_match_required"]["port_ids"] == ["pipe.out"]
+    assert request["scenario_families"] == ["pipe_hole", "vertical_handoff"]

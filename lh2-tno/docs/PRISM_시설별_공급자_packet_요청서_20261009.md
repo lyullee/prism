@@ -49,6 +49,12 @@ $py = 'C:\Users\lyul\.cache\codex-runtimes\codex-primary-runtime\dependencies\py
 - 현재 packet 상태와 승격을 막는 이유
 - qualified provider packet으로 교체해야 한다는 요청 종류
 
+같은 사건·기상 조건·방출 branch가 `cases`와 `uncomputed_cases`에 중복으로 있으면
+요청 생성기는 두 행을 하나로 합친다. 한 행에만 있는 component, provider port/digest,
+scenario family는 보존한다. 두 행의 provider identity가 서로 다르면 첫 identity를
+임의로 승격하지 않고 `duplicate ledger rows carry conflicting provider packet
+identities`를 blocking reason으로 남긴다.
+
 사건/포트/digest가 실제 공급자 출력과 일치하지 않으면 packet을 결합하지
 않는다. 센서 신호나 임의 빈도로 누출 빈도를 학습하지 않으며, 외부 provider가
 실제 또는 검증된 모델 출력임을 명시하기 전까지 `qualification_required`는

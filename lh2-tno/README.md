@@ -167,6 +167,8 @@ IJHE 감사에 `--validation-evidence-matrix`를 주면 이 장부를 29번째 �
 
 **시설 case별 provider 요청 자동화 (2026-10-24):** `build_facility_evidence_request.py`는 이제 family/component 요약과 함께 `case_requests`를 생성합니다. 각 요청에는 사건·기상조건·방출 branch·component·port·source/result digest·현재 제한 사유가 들어갑니다. 최신 generic+vertical 원장에서는 34개 case 요청이 보존되고, 수직 handoff는 5개 event가 D-3/D-4 두 조건으로 확장된 10개 case로 표시됩니다. 현재 수직 packet은 synthetic 0.37 s handoff이므로 `qualification_required=true`이며, 이를 실제 provider packet으로 바꾸기 전에는 시설 IR/F-N을 열지 않습니다. [요청서 개발기록](docs/PRISM_시설별_공급자_packet_요청서_20261009.md) / [최신 요청 JSON](results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json)
 
+중복 ledger 행이 같은 사건·기상·방출 branch를 나타낼 때는 실행 행과 미계산 행을 합치면서 한쪽에만 있던 provider identity와 scenario family를 보존합니다. 두 행의 identity가 충돌하면 요청을 열어 두고 충돌을 blocking reason으로 기록하므로, 목록 순서만으로 공급자 packet이 선택되지 않습니다.
+
 같은 검토에서 외부 PreSLHy/DEGADI handoff replay 5건을 찾았지만, PRISM 사건·포트·방출 digest와 재고/종료 장부가 없어 `SCREENING_ONLY_UNBOUND`로만 인벤토리했습니다. [외부 handoff evidence inventory](results/20261024/native_generic_scope_vertical_external_handoff_evidence_inventory_v1.json)
 
 **문헌 빈도 근거 추적 (2026-10-18):** `scripts/build_frequency_provenance_report.py`는 빈도 계획을 17개 검토 프로파일 카탈로그와 대조하고, 실제 선택된 7개 프로파일·24개 사건의 `source`, 원자료 SHA-256, 카탈로그 digest, 중앙값, p05/p95와 제한사항을 하나의 보고서로 기록합니다. 현재 일반 LH2 예제 보고서 `results/20261018/generic_lh2_frequency_provenance_current.json`은 `PASS_WITH_SCOPE_LIMITATIONS`이며, 현장 사고빈도 수집·센서 기반 빈도 학습·물리검증 주장은 모두 `false`로 고정합니다. 해시 불일치나 이벤트 누락은 `FAILED_PROVENANCE_INTEGRITY`로 중지합니다. 자세한 기준은 [문헌 빈도 근거 추적 개발 기록](docs/PRISM_문헌빈도_근거추적_개발기록_20261018.md)을 참고합니다.
