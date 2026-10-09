@@ -959,6 +959,8 @@ facility_monitor = FacilityRealtimeConsequenceMonitor(
 
 표 형식 입력에서 provider resolver까지 연결하는 최소 경로는 `update_from_rows()` → `frame_from_row()` → `TelemetryNormalizer` → 설비 상태 → provider 방출 경계 → consequence 결과 → 시설 장부입니다. 이 경로는 `tests/test_consequence_service.py`의 `test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence`에서 상태 압력, provider 사고 ID, 방출시간, 종료 상태, 잔여 재고를 함께 검증합니다. 예시 provider가 합성이라면 이 테스트가 통과해도 qualified 실제 설비 packet이나 시설 연간 IR/F/N이 열리지는 않습니다.
 
+행 배치에 각 설비의 `RealtimeFrequencyBinding`과 시설의 `RealtimePopulationBinding`을 함께 선언하면 같은 경로에서 설비별 현재 기상 IR을 합산하고, 수용점 인구를 곱한 조건부 expected-death F/N 기여와 p05/발표값/p95 빈도 재가중을 계산합니다. 이 값은 현재 배치의 조건부 진단 결과이며 `facility_annual_risk_available=false`, `facility_fn_available=false`를 유지합니다. 센서로 빈도를 학습하거나 누락 설비를 0으로 처리하지 않습니다.
+
 provider consequence 결과에 네 가지 옥외 점화 branch(`direct_fire`, `delayed_flash_fire`, `delayed_explosion`, `no_ignition`)가 모두 있으면 `snapshot["aggregate"]["current_weather_ignition_accounting"]`에 설비별 branch 확률과 명시 문헌 빈도로 가중한 현재 조건 branch 발생률을 기록합니다. branch가 빠지거나 빈도 binding이 없으면 해당 행 또는 branch rate를 보류하며, 이를 시설 연간 IR/F-N으로 승격하지 않습니다.
 
 `components`에는 설비별 frame/mapping digest, fresh physics 또는 exact cache,

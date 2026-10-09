@@ -659,6 +659,92 @@ def test_realtime_monitor_calculates_conditional_expected_death_fn_from_explicit
     assert aggregate['frequency_learning'] is False
 
 
+def test_facility_row_batch_combines_literature_ir_and_conditional_fn(tmp_path):
+    first, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    second, _ = _facility_binding(tmp_path, 'transfer-pump-01')
+    frequencies = (
+        RealtimeFrequencyBinding(
+            event_id='storage-tank-hole-01', asset_id='storage-tank-01',
+            initiating_frequency_per_year=1.0e-3,
+            annual_condition_probability=0.5, release_branch_probability=0.8,
+            occupancy_probability=0.25, provenance='published LH2 vessel frequency median',
+            source_digest='f' * 64, frequency_p05_per_year=5.0e-4,
+            frequency_p95_per_year=2.0e-3,
+        ),
+        RealtimeFrequencyBinding(
+            event_id='transfer-pump-hole-01', asset_id='transfer-pump-01',
+            initiating_frequency_per_year=2.0e-3,
+            annual_condition_probability=0.5, release_branch_probability=0.8,
+            occupancy_probability=0.25, provenance='published LH2 pump frequency median',
+            source_digest='b' * 64, frequency_p05_per_year=1.0e-3,
+            frequency_p95_per_year=4.0e-3,
+        ),
+    )
+    bindings = []
+    for base, frequency in zip((first, second), frequencies):
+        bindings.append(FacilityRealtimeBinding(
+            component_id=base.component_id,
+            template=base.template,
+            monitor=RealtimeConsequenceMonitor(
+                ConsequenceService(RiskPipeline(tmp_path)), period_s=1.0
+            ),
+            normalizer=base.normalizer,
+            pressure_tag=base.pressure_tag,
+            temperature_tag=base.temperature_tag,
+            frequency_binding=frequency,
+        ))
+    population = RealtimePopulationBinding(
+        persons_by_receptor={'worker-01': 10.0},
+        provenance='declared outdoor worker population snapshot',
+        source_digest='c' * 64,
+    )
+    facility = FacilityRealtimeConsequenceMonitor(
+        {binding.component_id: binding for binding in bindings},
+        facility_id='generic-outdoor-lh2',
+        population_binding=population,
+    )
+    rows = {
+        'storage-tank-01': {'PT': 600000.0, 'TT': 20.893},
+        'transfer-pump-01': {'PT': 610000.0, 'TT': 21.0},
+    }
+    row_bindings = {
+        component_id: {
+            'stream_id': f'{component_id}-risk-row', 'sequence': sequence,
+            'source_time_s': 100.0, 'arrival_time_s': 100.1,
+            'origin': 'historian_measured',
+            'bindings': {
+                'PT': {'tag': 'P', 'unit': 'Pa', 'quality': 'valid'},
+                'TT': {'tag': 'T', 'unit': 'K', 'quality': 'valid'},
+            },
+        }
+        for sequence, component_id in enumerate(rows, 1)
+    }
+    result = facility.update_from_rows(rows, row_bindings, now_s=100.2)
+
+    aggregate = result['aggregate']
+    assert result['status'] == 'ACCEPTED'
+    assert aggregate['current_weather_ir_available'] is True
+    assert aggregate['current_weather_ir_component_count'] == 2
+    assert aggregate['current_weather_annual_ir_low_high']['worker-01'] == pytest.approx(
+        [6.0e-5, 1.2e-4]
+    )
+    assert aggregate['conditional_current_weather_expected_death_fn_available'] is True
+    assert aggregate['conditional_current_weather_expected_death_fn_low_high'] == pytest.approx(
+        [6.0e-4, 1.2e-3]
+    )
+    assert aggregate['current_weather_frequency_sensitivity_available'] is True
+    assert aggregate['conditional_current_weather_expected_death_fn']['frequency_sensitivity_expected_death_fn_low_high']['p95'] == pytest.approx(
+        [1.2e-3, 2.4e-3]
+    )
+    ignition = aggregate['current_weather_ignition_accounting']
+    assert ignition['status'] == 'AVAILABLE_CURRENT_WEATHER_IGNITION_ACCOUNTING'
+    assert ignition['weighted_branch_frequency_per_year']['direct_fire'] == pytest.approx(7.5e-5)
+    assert ignition['weighted_branch_frequency_per_year']['no_ignition'] == pytest.approx(9.0e-5)
+    assert aggregate['facility_fn_available'] is False
+    assert aggregate['facility_annual_risk_available'] is False
+    assert aggregate['frequency_learning'] is False
+
+
 def test_realtime_population_binding_rejects_invalid_population_source_digest():
     with pytest.raises(ValueError, match='64-character SHA-256'):
         RealtimePopulationBinding(
