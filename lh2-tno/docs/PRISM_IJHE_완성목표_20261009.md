@@ -219,10 +219,25 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 
 실제 설비 모델의 사고 이력이 들어오는 다음 단계를 위해 `campaign.py`에 `prism.provider_packet_evidence.v1` 계약을 추가했다. 이 레코드는 event/component/port와 provider source/result digest, qualification evidence ID를 함께 보유한다. 캠페인이 소비한 packet identity와 이 값들이 exact-match일 때만 `qualified_provider_packet_case_count`를 증가시키며, 이 과정에서 문헌 빈도는 읽기 전용으로 유지된다.
 
-또한 `physical_validation_evidence`를 `not_validated`/`independent_validated`로 분리했다. 완전한 시설 범위, 모든 실행 case의 qualified packet, 독립 물리검증 근거가 모두 있을 때만 `complete_facility_qra_claim`을 열 수 있다. 기존 수치 합산 장부의 `facility_total_risk_available`와 별도로 자격 상태를 보고하므로, 구조 연결·합성 진단 결과를 실제 시설 QRA로 오인하지 않는다. 현재 결과에는 qualified packet이 없고 물리검증 상태도 제한적이어서 승격 게이트는 닫혀 있다. 관련 portable suite는 466개 테스트가 통과했다.
+또한 `physical_validation_evidence`를 `not_validated`/`independent_validated`로 분리했다. 완전한 시설 범위, 모든 실행 case의 qualified packet, 독립 물리검증 근거가 모두 있을 때만 `complete_facility_qra_claim`을 열 수 있다. 기존 수치 합산 장부의 `facility_total_risk_available`와 별도로 자격 상태를 보고하므로, 구조 연결·합성 진단 결과를 실제 시설 QRA로 오인하지 않는다. 현재 결과에는 qualified packet이 없고 물리검증 상태도 제한적이어서 승격 게이트는 닫혀 있다. 관련 portable suite는 469개 테스트가 통과했다.
 
 문헌 빈도 불확실성 함수도 이 상태를 각 시나리오와 최상위 결과에 전달한다. p05·published·p95 재가중 또는 lognormal 샘플링이 실행되어도 provider packet 적격성, 독립 물리검증, 완전 시설 QRA 상태는 별도 gate로 남는다.
 
 새 gate 적용 후 기존 5개 disjoint campaign을 재집계한 결과는 `results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_assessment.json`에 보관했다. 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom이며 provider packet case와 qualified packet case는 모두 0이다. 이 재집계는 새 물리 계산이 아니라 저장된 risk atom의 시설 회계·빈도 불확실성 결과를 갱신한 것이다.
 
 이 assessment를 완료 감사기에 다시 넣은 결과도 `examples/ijhe_completion_audit_provider_gate_summary.json`에 보관했다. 15개 검사, 4개 blocker이며 방출→피해 chain·문헌 빈도 불확실성·지속시간/차단/재고 장부·처리시간 계약은 통과한다. 실제 사고 provider packet, 전체 사고범위, 시설 IR/F-N은 여전히 `BLOCKED`다.
+
+## 2026-10-19 파일 기반 provider packet 입구
+
+실제 외부 설비 모델이 저장한 `prism.resolved_release.v1` 또는 양단 파열용 `prism.resolved_release_set.v1` 파일과 별도 `prism.provider_qualification_evidence.v1` sidecar를 받으면, `scripts/build_provider_packet_evidence.py`가 두 파일을 strict 검증하고 `prism.provider_packet_evidence.v1`를 만든다. event/component/port와 source/result SHA-256이 정확히 일치해야 하며, `input_origin=synthetic` packet은 거부한다. 이 변환기는 문헌 initiating frequency를 만들거나 바꾸지 않는다.
+
+예시는 다음과 같다.
+
+```powershell
+.venv\Scripts\python.exe lh2-tno/scripts/build_provider_packet_evidence.py `
+  --release actual_resolved_release.json `
+  --qualification provider_qualification.json `
+  --output provider_packet_evidence.json
+```
+
+현재 저장된 검사·진단 자료에는 이 sidecar를 갖춘 실제 packet이 없으므로 `qualified_provider_packet_case_count=0`과 시설 QRA 보류 상태는 유지된다. 새 경로는 실제 자료가 들어왔을 때 수동 재조립 없이 같은 승격 규칙을 적용하기 위한 입구다.

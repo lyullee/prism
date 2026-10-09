@@ -1717,8 +1717,8 @@
   "inventory_depletion_facility_merge_physical_validation_claim": false,
   "inventory_depletion_facility_merge_frequency_inference": false,
   "inventory_depletion_facility_merge_facility_qra_claim": false,
-  "full_portable_test_count": 461,
-  "full_portable_test_status": "461 passed",
+  "full_portable_test_count": 469,
+  "full_portable_test_status": "469 passed",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_record": "examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 240 risk atoms across 11 components; isolation success/failure and inventory depletion diagnostics are merged; qualified facility total withheld",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_event_count": 41,
@@ -1752,7 +1752,7 @@
   "provider_packet_qualification_gate_module": "src/lh2_tno/campaign.py",
   "provider_packet_qualification_gate_schema": "prism.provider_packet_evidence.v1",
   "provider_packet_qualification_gate_policy": "Exact event/component/port/source-digest/result-digest match is required; provider packets never create or modify initiating frequency.",
-  "provider_packet_qualification_gate_current_status": "IMPLEMENTED; existing campaigns have 0 qualified provider packet cases and facility QRA remains withheld",
+  "provider_packet_qualification_gate_current_status": "IMPLEMENTED; file-based release-plus-qualification promotion path is available; existing campaigns have 0 qualified provider packet cases and facility QRA remains withheld",
   "physical_validation_campaign_gate_implemented": true,
   "physical_validation_campaign_gate_policy": "Independent validation evidence is required together with complete scope and qualified provider packets; synthetic or screening evidence cannot promote the claim.",
   "facility_assessment_provider_gate_propagation_implemented": true,
@@ -1766,6 +1766,10 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 466,
-  "full_portable_test_status": "466 passed"
+  "provider_packet_file_promotion_implemented": true,
+  "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
+  "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
+  "provider_packet_file_promotion_schema": "prism.provider_packet_evidence.v1",
+  "provider_packet_file_promotion_policy": "A saved prism.resolved_release.v1 or prism.resolved_release_set.v1 packet is strict-validated against a separate prism.provider_qualification_evidence.v1 sidecar; exact event/component/port and source/result digest identity is required; synthetic input is rejected; no initiating frequency is inferred.",
+  "provider_packet_file_promotion_current_status": "IMPLEMENTED; converter and rejection tests pass; current external evidence inventory still has 0 qualified packets"
 }

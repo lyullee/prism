@@ -295,6 +295,17 @@ python -m venv .venv
 
 외부 설비 모델이 `prism.resolved_release.v1` packet을 직접 내보내면 중간 request catalog 파일을 만들지 않고도 선택형 경로로 연결할 수 있습니다. 이 경로는 packet을 strict 검증한 뒤 defaults의 종료근거·source operator를 붙이고, 같은 exact-match 규칙으로 설비와 문헌 빈도를 연결합니다. packet 하나라도 문맥과 맞지 않으면 캠페인을 만들지 않으며, 실제 packet이 없는 설비에는 아무 값도 추정하지 않습니다.
 
+실제 provider가 저장한 방출 packet과 적격성 기록을 파일로 전달할 때는 `scripts/build_provider_packet_evidence.py`를 사용합니다. `--release`에는 `prism.resolved_release.v1` 또는 `prism.resolved_release_set.v1`, `--qualification`에는 별도 `prism.provider_qualification_evidence.v1` JSON을 넣습니다. 두 파일의 event/component/port 및 source/result SHA-256이 정확히 맞아야 `prism.provider_packet_evidence.v1`가 생성되며, `input_origin=synthetic`은 거부됩니다. 이 단계는 빈도를 추정하지 않고 기존 문헌 `FrequencyPlan`을 그대로 둡니다.
+
+```powershell
+.venv\Scripts\python.exe lh2-tno/scripts/build_provider_packet_evidence.py `
+  --release actual_resolved_release.json `
+  --qualification provider_qualification.json `
+  --output provider_packet_evidence.json
+```
+
+현재 external evidence inventory에는 이 sidecar를 갖춘 실제 packet이 없어 qualified packet 수는 0건이며 시설 IR/F-N 승격은 계속 보류됩니다.
+
 ```powershell
 .venv\Scripts\python.exe lh2-tno/scripts/build_equipment_campaign.py `
   --manifest lh2-tno/examples/equipment_manifest.json `
