@@ -98,7 +98,10 @@ def audit_facility_case_packet_coverage(
     if provider_evidence in (None, (), [], {}):
         evidence_rows: tuple[ProviderPacketEvidence, ...] = ()
     else:
-        evidence_rows = load_provider_packet_evidence_catalog(provider_evidence)
+        evidence_rows = load_provider_packet_evidence_catalog(
+            provider_evidence,
+            allow_distinct_event_id_packets=True,
+        )
     # Keep every evidence row for an event.  One initiating event can have
     # multiple provider packets when release branches (or equipment ports)
     # have different exact source/result digests.  Collapsing to a single

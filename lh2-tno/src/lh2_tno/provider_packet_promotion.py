@@ -42,8 +42,16 @@ def _object(value: Mapping[str, Any] | str | Path, label: str) -> Mapping[str, A
 
 def load_provider_packet_evidence_catalog(
     value: Sequence[Mapping[str, Any]] | Mapping[str, Any] | str | Path,
+    *,
+    allow_distinct_event_id_packets: bool = False,
 ) -> tuple[ProviderPacketEvidence, ...]:
-    """Load promoted evidence records from one object, array, or wrapper."""
+    """Load promoted evidence records from one object, array, or wrapper.
+
+    The ordinary campaign/catalog path keeps one evidence row per event.  The
+    facility case gate may opt in to distinct packets for the same event when
+    their exact component/port/source/result identity differs, which is needed
+    for conditional release branches.
+    """
 
     raw: Any = value
     if isinstance(value, (str, Path)):
@@ -83,12 +91,6 @@ def load_provider_packet_evidence_catalog(
             raise ProviderPacketPromotionError(
                 f"provider packet evidence row {index} failed strict validation: {error}"
             ) from error
-    # A single initiating event may legitimately have more than one promoted
-    # packet when conditional release branches use different provider
-    # endpoints or source/result digests.  Keep rejecting an exact duplicate
-    # identity: it is ambiguous and usually indicates that the same packet was
-    # appended twice.  Facility case coverage selects the matching identity
-    # for each case instead of relying on input order.
     identities = {
         (
             row.event_id,
@@ -99,9 +101,18 @@ def load_provider_packet_evidence_catalog(
         )
         for row in rows
     }
-    if len(identities) != len(rows):
+    if allow_distinct_event_id_packets:
+        # A single initiating event may have more than one promoted packet
+        # when conditional release branches use different provider endpoints
+        # or source/result digests.  Keep rejecting an exact duplicate
+        # identity: it is ambiguous and usually indicates that the same
+        # packet was appended twice.
+        duplicate = len(identities) != len(rows)
+    else:
+        duplicate = len({row.event_id for row in rows}) != len(rows)
+    if duplicate:
         raise ProviderPacketPromotionError(
-            "provider packet evidence event_id values must be unique per exact packet identity"
+            "provider packet evidence event_id values must be unique"
         )
     return tuple(rows)
 

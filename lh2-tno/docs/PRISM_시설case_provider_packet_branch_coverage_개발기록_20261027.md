@@ -8,7 +8,8 @@
 
 ## 변경 내용
 
-- `load_provider_packet_evidence_catalog()`은 같은 event ID라도 exact packet identity가 다르면 여러 행을 보존한다.
+- 시설 case 감사기가 `load_provider_packet_evidence_catalog(..., allow_distinct_event_id_packets=True)`를 명시적으로 사용하면 같은 event ID라도 exact packet identity가 다른 여러 행을 보존한다.
+- 일반 campaign/provider catalog 호출은 기존처럼 event ID 하나당 하나의 evidence 행을 요구한다.
 - event·component·port·source digest·result digest가 모두 같은 중복 행은 계속 거부한다.
 - `audit_facility_case_packet_coverage()`는 event ID 하나에 대한 후보 목록을 만든 뒤 exact identity를 비교한다.
 - exact match가 없으면 첫 후보의 불일치 항목을 blocking reason으로 남겨 잘못된 packet을 승격하지 않는다.
