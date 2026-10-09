@@ -218,7 +218,8 @@ def build_ijhe_completion_audit(
                     "worklist_exact_match": exact_match,
                     "consequence_chain_executed": execution.get("consequence_chain_executed"),
                     "consequence_chain_status": execution.get("consequence_chain_status"),
-                    "consequence_chain_elapsed_ms": execution.get("fresh_execution_elapsed_ms"),
+                    "consequence_chain_elapsed_ms": execution.get("consequence_chain_elapsed_ms"),
+                    "fresh_adapter_execution_elapsed_ms": execution.get("fresh_execution_elapsed_ms"),
                     "qualified_provider_packet_count": execution.get(
                         "qualified_provider_packet_count"
                     ),

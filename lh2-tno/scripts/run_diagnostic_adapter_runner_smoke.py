@@ -168,6 +168,7 @@ def main() -> int:
         if not all(exact_worklist_match.values()):
             raise RuntimeError(f"runner release did not exact-match worklist: {exact_worklist_match}")
     consequence_chain_verification = None
+    consequence_chain_result = None
     if args.run_consequence_chain:
         chain_dir = args.output.parent / f"{args.output.stem}_consequence_chain"
         packet_path = chain_dir / "runner_resolved_release.json"
@@ -201,6 +202,10 @@ def main() -> int:
         consequence_chain_verification = json.loads(
             verification_path.read_text(encoding="utf-8")
         )
+        consequence_result_path = chain_dir / "consequence_result.json"
+        consequence_chain_result = json.loads(
+            consequence_result_path.read_text(encoding="utf-8")
+        )
     payload = {
         "schema_version": "prism.diagnostic_adapter_runner_smoke.v1",
         "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
@@ -230,6 +235,10 @@ def main() -> int:
         "consequence_chain_record": (
             None if consequence_chain_verification is None
             else str(args.output.parent / f"{args.output.stem}_consequence_chain")
+        ),
+        "consequence_chain_elapsed_ms": (
+            None if consequence_chain_result is None
+            else consequence_chain_result.get("elapsed_ms")
         ),
         "fresh_execution_elapsed_ms": elapsed_ms,
         "strict_packet_duration_s": release.duration_s,

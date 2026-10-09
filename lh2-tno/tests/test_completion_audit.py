@@ -61,6 +61,7 @@ def _diagnostic_execution(**overrides):
         },
         "consequence_chain_executed": True,
         "consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+        "consequence_chain_elapsed_ms": 2000.0,
         "fresh_execution_elapsed_ms": 1000.0,
         "qualified_provider_packet_count": 0,
         "provider_packet_promoted": False,
