@@ -26,7 +26,7 @@
 |---|---|---|
 | A. 설비 상태 | 탱크·배관·밸브·펌프·기화기·벤트의 실제 지원 모델/포트/상/에너지 기준 확인, 사고 위치와 연결, 유량 소유권 유지 | 지원표, 동일 물성·시계, 설비별 실제 계산 전달, 질량·정적/전체 에너지 장부의 구분, 미지원 설비 표시. `ResolvedLiquidRelease`로 provider flash/지면 분할 계약을 추가했지만 LayeredTank 실제 액체/2상 상태와 모든 설비 지원은 남아 있다. |
 | B. 방출 경로 | 단일 구멍의 실제 종료, 차단 성공/실패, 재고 소진, 전량/600초·양단 파열·수직 벤트 전용 경로 | 통합 source의 압력 평형 자연 종료와 무연장 질량 장부, G1 SLABx-LH2 liquid-jet finite-inventory 질량 폐합, 5개 LH2 pipe area-bin 각각에 대한 합성 layered-tank/commanded-valve의 0.25초 isolation-success 및 0.5초 isolation-failure 진단 이력을 구현했다. 추가로 `ResolvedGasReleaseSet`·`equipment_two_sided_rupture`·`location_weight`를 구현해 TNO_PIPE full-bore 양단을 한 사건으로 두 번의 provider 경계에서 계산하고 Frechet 상한으로 결합했다. 이제 provider-resolved liquid/two-phase exit의 gas/ground partition과 pool/피해 연결 1건도 실행했다. barrier 확률은 합성값이고 재고 소진을 뜻하지 않는다. G1·양단·수직 handoff·liquid provider 경로는 provider 상호작용·액체/2상 feedback·실제 설비 입력의 물리 검증이 남아 있다. 수직 경로 자체는 handoff 계약과 synthetic campaign까지 구현했지만, 수직 제트 원거리 모델과 교차상호작용은 미완료다. |
-| C. 시설 위험 | 모든 LOC의 경로 배정, 위치 배분, 연간 기상/인구와 점화·차단 분기, 기존 TNO IR/F-N 함수 연결 | 5개 LH2 pipe LOC의 사건 목록과 20개 물리 사례를 모두 실행하고, 조건부 확률 폐합, 빈도 1회 적용, 수용점별 IR, 개별 사건별 인구 피해/F-N을 확인했다. 합성 종료·장벽과 실제 설비 목록/위치가 없으므로 total은 보류 |
+| C. 시설 위험 | 모든 LOC의 경로 배정, 위치 배분, 연간 기상/인구와 점화·차단 분기, 기존 TNO IR/F-N 함수 연결 | 5개 LH2 pipe LOC의 사건 목록과 20개 물리 사례를 모두 실행하고, 조건부 확률 폐합, 빈도 1회 적용, 수용점별 IR, 개별 사건별 인구 피해/F-N을 확인했다. 합성 종료·장벽과 실제 설비 목록/위치가 없으므로 total은 보류. 매니페스트에 없는 설비 family는 `NOT_APPLICABLE`로 구분하고, 존재하는 설비의 누락·미계산만 blocker로 남긴다. |
 | D. 빈도 불확실성 | LH2 문헌 분포, 상관 가정별 비교, TNO 기본값의 명시적 민감도, 위험 기여/설비 순위 안정성 | 근거 없는 사전분포 금지, TNO/LH2 대안 중복 금지, 상관 가정과 미계산 범위 공개, 분포·민감도·복사율 구간 구분 |
 | E. 검증·속도 | 보유 공정 자료·외부 실험 출처/분할, 관측 연산자와 독립 검증, 보존/수렴, 처리시간 | 학습/검증 누수 없음, 실측/복원/합성 구분, 적용범위별 오차, 하드웨어·신규/캐시 구분, 반복 p50/p95/p99와 실패 기록 |
 

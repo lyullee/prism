@@ -80,6 +80,29 @@ def test_scope_matrix_rejects_unknown_required_family():
         raise AssertionError("unknown family must fail closed")
 
 
+def test_scope_matrix_marks_absent_equipment_family_not_applicable():
+    manifest, plan, request, conditions = _campaign_inputs()
+    campaign = build_equipment_campaign(
+        manifest, plan, request, conditions, scope_provenance="not-applicable scope test"
+    )
+    matrix = build_accident_scope_matrix(
+        campaign,
+        {
+            "events": [],
+            "cases": [],
+            "total_facility_annual_ir_low_high": {"worker": [1e-8, 2e-8]},
+        },
+        manifest,
+        required_families=("pump_hole",),
+    )
+    row = matrix["rows"][0]
+    assert row["status"] == "NOT_APPLICABLE"
+    assert row["applicability"] == "NOT_APPLICABLE"
+    assert row["manifest_component_ids"] == []
+    assert matrix["matrix_complete"] is True
+    assert matrix["declared_scope_numerically_complete"] is True
+
+
 def test_scope_matrix_preserves_a_physics_failure_status():
     manifest, plan, request, conditions = _campaign_inputs()
     partial_campaign = build_equipment_campaign(

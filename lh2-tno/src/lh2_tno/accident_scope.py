@@ -142,6 +142,17 @@ def build_accident_scope_matrix(
         family = _base_hole_family(component.kind, None)
         if family is not None:
             manifest_family_components[family].append(component.id)
+    # Cross-cutting families (liquid/two-phase, inventory and handoff) apply
+    # to several equipment kinds, so the base-hole map above is not enough to
+    # decide whether a family is relevant to this particular facility.
+    manifest_scenario_components: dict[str, list[str]] = {}
+    for family in required_families:
+        applicable_kinds = set(scenario_definition(family)["equipment_kinds"])
+        manifest_scenario_components[family] = sorted(
+            component.id
+            for component in manifest.components
+            if component.kind in applicable_kinds
+        )
     selected_frequency_components = sorted(
         asset.model_component_id for asset in campaign.frequency_plan.assets
     )
@@ -187,13 +198,15 @@ def build_accident_scope_matrix(
             event_uncomputed_branch_count.get(event_id, 0) for event_id in event_ids
         )
         event_frequency = sum(float(events[event_id].get("annual_frequency_per_year", 0.0)) for event_id in event_ids)
-        declared_component_ids = sorted(manifest_family_components.get(family, ()))
+        declared_component_ids = list(manifest_scenario_components.get(family, ()))
         generated_component_ids = sorted({
             str(events[event_id].get("model_component_id"))
             for event_id in event_ids
             if events[event_id].get("model_component_id") is not None
         })
-        if not event_ids:
+        if not event_ids and not declared_component_ids:
+            status = "NOT_APPLICABLE"
+        elif not event_ids:
             status = "NO_EVENT_GENERATED"
         elif events_without_cases:
             status = "NO_CASE_EXECUTED" if not family_cases else "PARTIAL"
@@ -207,6 +220,7 @@ def build_accident_scope_matrix(
             "status": status,
             "event_ids": event_ids,
             "generated_event_count": len(event_ids),
+            "applicability": "NOT_APPLICABLE" if not declared_component_ids else "APPLICABLE",
             "event_without_case_count": len(events_without_cases),
             "event_ids_without_cases": events_without_cases,
             "generated_initiation_frequency_per_year": event_frequency,
@@ -233,7 +247,7 @@ def build_accident_scope_matrix(
     if audit["status"] != "EXECUTABLE":
         blocking.append("equipment manifest is not executable")
     for row in rows:
-        if row["status"] != "EXECUTED":
+        if row["status"] not in {"EXECUTED", "NOT_APPLICABLE"}:
             blocking.append(f"{row['family']}: {row['status']}")
     if result.get("total_facility_annual_ir_low_high") is None:
         blocking.append("campaign does not provide total facility annual IR")
@@ -254,11 +268,16 @@ def build_accident_scope_matrix(
         "manifest_family_component_ids": {
             family: sorted(ids) for family, ids in sorted(manifest_family_components.items())
         },
+        "manifest_scenario_component_ids": {
+            family: sorted(ids) for family, ids in sorted(manifest_scenario_components.items())
+        },
         "frequency_scope_selected_component_ids": selected_frequency_components,
         "frequency_scope_excluded_component_ids": excluded_frequency_components,
         "manifest_audit_status": audit["status"],
         "campaign_status": result.get("status"),
-        "declared_scope_numerically_complete": all(row["status"] == "EXECUTED" for row in rows),
+        "declared_scope_numerically_complete": all(
+            row["status"] in {"EXECUTED", "NOT_APPLICABLE"} for row in rows
+        ),
         "facility_total_risk_available": result.get("total_facility_annual_ir_low_high") is not None,
         "matrix_complete": not blocking,
         "blocking_reasons": list(dict.fromkeys(blocking)),

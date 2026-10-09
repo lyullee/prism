@@ -978,6 +978,13 @@ provider worklist의 각 event에는 `scenario_families`가 함께 기록됩니�
 
 `build_accident_scope_matrix.py --provider-worklist`를 사용하면 이 worklist와 campaign의 event ID·주 사고 family가 같은지 검사합니다. 구조가 `ALIGNED`여도 provider packet이 없으면 계산을 시작하지 않으며, 최신 generic 24-event 진단도 이 원칙에 따라 packet 0건·시설 QRA 보류로 기록됩니다.
 
+범위표는 매니페스트에 해당 설비 종류가 실제로 없을 때 그 사고 family를
+`NOT_APPLICABLE`로 기록합니다. 예를 들어 펌프가 없는 저장·이송 시설에서는
+`pump_hole`을 누락 사고로 세지 않습니다. 설비가 존재하는데 사건이 생성되지
+않았거나 계산되지 않은 경우에는 계속 `NO_EVENT_GENERATED`, `PARTIAL`,
+`UNCOMPUTED`로 남아 시설 완결성을 막습니다. `manifest_scenario_component_ids`와
+각 행의 `applicability`로 이 구분을 확인할 수 있습니다.
+
 실행된 risk atom에는 사고 family가 함께 남고, facility ledger의 `scenario_family_contributions`에서 탱크·배관 사고와 액체 2상·재고 사고의 기여를 따로 조회할 수 있습니다. 이 표는 같은 atom을 family별로 분류한 결과이므로 family별 수치를 서로 더하지 않습니다.
 
 campaign 결과의 `release_termination_inventory_ledger`에는 사건×차단 분기×연간 조건별로 provider packet digest, 방출 지속시간, 종료근거, provider 재고·누적 방출량·잔여량, 차단 선언을 한 행에 기록합니다. `UNCOMPUTED`와 `EXECUTED_OPERATOR_LIMITED`는 각각 누락·제한 상태로 남으며, 질량이 0이 되었다는 이유만으로 재고소진이나 차단 성공을 추론하지 않습니다. 최신 결과는 `results/20261018/generic_mixed_provider_campaign_release_ledger.json`이고, 24행 중 5행은 operator-limited, 14행은 실패, 5행은 미계산이며 시설 전체 IR/F-N은 계속 보류됩니다.
