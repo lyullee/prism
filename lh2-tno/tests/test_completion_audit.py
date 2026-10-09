@@ -478,6 +478,52 @@ def test_completion_audit_reads_legacy_provider_inventory_alias_fail_closed():
     }
 
 
+def test_completion_audit_reads_partial_provider_qualification_coverage():
+    status = _status(False)
+    status["provider_release_contract_actual_facility_packet_available"] = False
+    status["equipment_provider_release_worklist_provider_packet_count"] = 0
+    status["equipment_provider_release_worklist_uncomputed_count"] = 1
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(False),
+        _campaign_result(False),
+        provider_qualification_coverage={
+            "qualification_status": "QUALIFIED_PARTIAL_OR_BLOCKED",
+            "worklist_event_count": 2,
+            "exact_match_count": 1,
+            "qualified_provider_packet_count": 1,
+            "unqualified_exact_match_count": 0,
+        },
+    )
+
+    packet_check = next(item for item in report["checks"] if item["name"] == "actual_provider_release_packet")
+    coverage_check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
+    assert packet_check["status"] == "PASS"
+    assert packet_check["evidence"]["qualification_coverage_qualified_packet_count"] == 1
+    assert coverage_check["status"] == "BLOCKED"
+
+
+def test_completion_audit_accepts_full_provider_qualification_coverage_for_worklist_gate():
+    status = _status(False)
+    status["provider_release_contract_actual_facility_packet_available"] = False
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(False),
+        _campaign_result(False),
+        provider_qualification_coverage={
+            "qualification_status": "QUALIFIED_FULL_WORKLIST",
+            "worklist_event_count": 1,
+            "exact_match_count": 1,
+            "qualified_provider_packet_count": 1,
+            "unqualified_exact_match_count": 0,
+        },
+    )
+
+    coverage_check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
+    assert coverage_check["status"] == "PASS"
+    assert coverage_check["evidence"]["qualification_coverage_complete"] is True
+
+
 def test_completion_audit_unwraps_campaign_uncertainty_ledger():
     report = build_ijhe_completion_audit(
         _status(False),

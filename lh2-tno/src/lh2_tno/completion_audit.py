@@ -68,6 +68,7 @@ def build_ijhe_completion_audit(
     native_full_bore_frequency_result: Mapping[str, Any] | None = None,
     native_packet_coverage_ledger: Mapping[str, Any] | None = None,
     native_packet_campaign_ledger: Mapping[str, Any] | None = None,
+    provider_qualification_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -87,6 +88,24 @@ def build_ijhe_completion_audit(
             actual_packet_available = qualified_count > 0
         elif release_inventory_status is not None:
             actual_packet_available = release_inventory_status == "QUALIFIED_ACCIDENT_RELEASE_EXPORT"
+    qualification_status = None
+    qualified_provider_packet_count = None
+    qualified_worklist_coverage = False
+    if provider_qualification_coverage is not None:
+        qualification_status = provider_qualification_coverage.get("qualification_status")
+        qualified_provider_packet_count = provider_qualification_coverage.get(
+            "qualified_provider_packet_count"
+        )
+        qualified_worklist_coverage = (
+            qualification_status == "QUALIFIED_FULL_WORKLIST"
+            and isinstance(qualified_provider_packet_count, int)
+            and qualified_provider_packet_count > 0
+            and provider_qualification_coverage.get("exact_match_count")
+            == provider_qualification_coverage.get("worklist_event_count")
+            and provider_qualification_coverage.get("unqualified_exact_match_count") == 0
+        )
+        if isinstance(qualified_provider_packet_count, int) and qualified_provider_packet_count > 0:
+            actual_packet_available = True
     cases = campaign_result.get("cases", [])
     events = campaign_result.get("events", [])
     timing = campaign_result.get("timing", {})
@@ -121,6 +140,7 @@ def build_ijhe_completion_audit(
         and isinstance(worklist_status, str)
         and worklist_status.startswith("READY_FOR_PROVIDER_PACKETS")
     )
+    worklist_complete = worklist_complete or qualified_worklist_coverage
     registry = diagnostic_adapter_registry
     if registry is None and current_status.get("diagnostic_adapter_runner_implemented") is True:
         registry = {
@@ -1100,6 +1120,14 @@ def build_ijhe_completion_audit(
                 "qualified_packet_count": current_status.get(
                     "external_provider_evidence_accident_release_qualified_files"
                 ),
+                **(
+                    {
+                        "qualification_coverage_status": qualification_status,
+                        "qualification_coverage_qualified_packet_count": qualified_provider_packet_count,
+                    }
+                    if provider_qualification_coverage is not None
+                    else {}
+                ),
             },
             "only synthetic or screening provider releases are available for this campaign",
         ),
@@ -1118,6 +1146,15 @@ def build_ijhe_completion_audit(
                     diagnostic_worklist_evidence.get("qualified_provider_packet_count")
                     if isinstance(diagnostic_worklist_evidence, Mapping)
                     else None
+                ),
+                **(
+                    {
+                        "qualification_coverage_status": qualification_status,
+                        "qualification_coverage_qualified_packet_count": qualified_provider_packet_count,
+                        "qualification_coverage_complete": qualified_worklist_coverage,
+                    }
+                    if provider_qualification_coverage is not None
+                    else {}
                 ),
             },
             "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",

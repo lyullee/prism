@@ -68,6 +68,7 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
   --campaign-result results/20261009/provider_release_full_chain_diagnostic/campaign_result.json `
   --uncertainty-result results/20261009/provider_release_full_chain_diagnostic/campaign_result_with_uncertainty.json `
   --provider-worklist results/20261009/provider_evidence/generic_lh2_provider_release_worklist.json `
+  --provider-qualification-coverage results/20261009/provider_evidence/provider_catalog_coverage.json `
   --output results/20261009/provider_release_full_chain_diagnostic/ijhe_completion_audit.json
 ```
 
@@ -240,4 +241,4 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
   --output provider_packet_evidence.json
 ```
 
-생성된 evidence catalog를 `scripts/build_equipment_campaign.py --provider-evidence-catalog provider_packet_evidence.json`으로 컴파일된 campaign에 붙일 수 있다. 독립 물리검증 기록은 `--physical-validation-evidence validation.json`으로 별도 연결하며, `independent_validated`에는 evidence ID와 SHA-256이 모두 필요하다. `scripts/audit_provider_catalog_coverage.py --provider-evidence-catalog provider_packet_evidence.json`은 worklist 구조 exact-match와 qualification exact-match를 별도 집계하고, 합성 packet을 qualified로 세지 않는다. evidence에 없는 사건은 자동 대체하지 않고 미계산·미자격으로 유지한다. 현재 저장된 검사·진단 자료에는 이 sidecar를 갖춘 실제 packet과 독립 검증 기록이 없으므로 `qualified_provider_packet_case_count=0`과 시설 QRA 보류 상태는 유지된다. 새 경로는 실제 자료가 들어왔을 때 수동 재조립 없이 같은 승격 규칙을 적용하기 위한 입구다.
+생성된 evidence catalog를 `scripts/build_equipment_campaign.py --provider-evidence-catalog provider_packet_evidence.json`으로 컴파일된 campaign에 붙일 수 있다. 독립 물리검증 기록은 `--physical-validation-evidence validation.json`으로 별도 연결하며, `independent_validated`에는 evidence ID와 SHA-256이 모두 필요하다. `scripts/audit_provider_catalog_coverage.py --provider-evidence-catalog provider_packet_evidence.json`은 worklist 구조 exact-match와 qualification exact-match를 별도 집계하고, 합성 packet을 qualified로 세지 않는다. 그 coverage JSON을 완료 감사기의 `--provider-qualification-coverage`로 전달하면 자격 검증된 packet 수와 전체 worklist 충족 여부가 `actual_provider_release_packet`·`provider_worklist_coverage` 검사에 반영된다. evidence에 없는 사건은 자동 대체하지 않고 미계산·미자격으로 유지한다. 현재 저장된 검사·진단 자료에는 이 sidecar를 갖춘 실제 packet과 독립 검증 기록이 없으므로 `qualified_provider_packet_case_count=0`과 시설 QRA 보류 상태는 유지된다. 새 경로는 실제 자료가 들어왔을 때 수동 재조립 없이 같은 승격 규칙을 적용하기 위한 입구다.

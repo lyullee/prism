@@ -1717,8 +1717,8 @@
   "inventory_depletion_facility_merge_physical_validation_claim": false,
   "inventory_depletion_facility_merge_frequency_inference": false,
   "inventory_depletion_facility_merge_facility_qra_claim": false,
-  "full_portable_test_count": 472,
-  "full_portable_test_status": "472 passed",
+  "full_portable_test_count": 474,
+  "full_portable_test_status": "474 passed",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_record": "examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 240 risk atoms across 11 components; isolation success/failure and inventory depletion diagnostics are merged; qualified facility total withheld",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_event_count": 41,
@@ -1786,5 +1786,9 @@
   "provider_catalog_qualification_audit_module": "src/lh2_tno/provider_catalog_coverage.py",
   "provider_catalog_qualification_audit_script": "scripts/audit_provider_catalog_coverage.py --provider-evidence-catalog",
   "provider_catalog_qualification_audit_policy": "Structural exact-match and qualified evidence exact-match are reported separately; synthetic packets never qualify; the audit does not assign frequency or claim physical validation/facility QRA.",
-  "provider_catalog_qualification_audit_current_status": "IMPLEMENTED; qualification rows are digest-bound and synthetic packets are withheld; current external qualified packet count remains 0"
+  "provider_catalog_qualification_audit_current_status": "IMPLEMENTED; qualification rows are digest-bound and synthetic packets are withheld; current external qualified packet count remains 0",
+  "ijhe_completion_audit_provider_qualification_coverage_implemented": true,
+  "ijhe_completion_audit_provider_qualification_coverage_input": "scripts/build_ijhe_completion_audit.py --provider-qualification-coverage",
+  "ijhe_completion_audit_provider_qualification_coverage_policy": "The completion audit accepts only the provider_catalog_coverage qualification fields; qualified packet count and full-worklist status are evidence inputs, while structural-only or synthetic matches remain blocked.",
+  "ijhe_completion_audit_provider_qualification_coverage_current_status": "IMPLEMENTED; qualification coverage is propagated to actual_provider_release_packet and provider_worklist_coverage checks; current external qualified packet count remains 0 and IJHE status remains INCOMPLETE_EVIDENCE"
 }

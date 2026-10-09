@@ -38,6 +38,11 @@ def main() -> int:
     parser.add_argument("--native-full-bore-frequency-result", type=Path)
     parser.add_argument("--native-packet-coverage-ledger", type=Path)
     parser.add_argument("--native-packet-campaign-ledger", type=Path)
+    parser.add_argument(
+        "--provider-qualification-coverage",
+        type=Path,
+        help="optional provider_catalog_coverage report with qualification sidecars",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -131,6 +136,15 @@ def main() -> int:
         )
         if native_packet_campaign_ledger is not None:
             native_packet_campaign_ledger["_record_path"] = str(args.native_packet_campaign_ledger)
+        provider_qualification_coverage = (
+            _object(args.provider_qualification_coverage)
+            if args.provider_qualification_coverage
+            else None
+        )
+        if provider_qualification_coverage is not None:
+            provider_qualification_coverage["_record_path"] = str(
+                args.provider_qualification_coverage
+            )
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -150,6 +164,7 @@ def main() -> int:
             native_full_bore_frequency_result,
             native_packet_coverage_ledger,
             native_packet_campaign_ledger,
+            provider_qualification_coverage,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
