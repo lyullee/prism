@@ -22,6 +22,7 @@ def main() -> int:
     parser.add_argument("--facility-assessment", type=Path, required=True)
     parser.add_argument("--native-contract", type=Path)
     parser.add_argument("--ijhe-audit", type=Path)
+    parser.add_argument("--external-sweep", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -31,6 +32,7 @@ def main() -> int:
             args.facility_assessment,
             native_contract_path=args.native_contract,
             ijhe_audit_path=args.ijhe_audit,
+            external_sweep_path=args.external_sweep,
         )
     except (ValidationEvidenceMatrixError, OSError, TypeError, ValueError) as error:
         raise SystemExit(f"validation evidence matrix input error: {error}") from error

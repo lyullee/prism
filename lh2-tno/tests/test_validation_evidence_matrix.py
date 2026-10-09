@@ -60,7 +60,23 @@ def _records(tmp_path: Path) -> dict[str, Path]:
         "physical_validation_claim": False,
         "facility_qra_claim": False,
     })
-    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe}
+    sweep = _write(tmp_path / "sweep.json", {
+        "status": "SCREENING_ONLY_EXTERNAL_SWEEP",
+        "aggregate": {
+            "tank_sweep_record_count": 68,
+            "tno_policy_record_count": 6,
+            "maximum_tank_mass_residual_kg": 1e-11,
+            "maximum_tank_energy_residual_J": 1e-7,
+            "tno_policy_runtime_s": {"p95": 0.4},
+        },
+        "promotion_gates": {
+            "independent_physical_validation_claim": False,
+            "qualified_provider_packet": False,
+            "facility_ir_fn_claim": False,
+            "frequency_inference": False,
+        },
+    })
+    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep}
 
 
 def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
@@ -99,6 +115,19 @@ def test_matrix_requires_conditional_facility_coverage(tmp_path):
     matrix = build_validation_evidence_matrix(paths["pool"], paths["equipment"], paths["facility"])
     assert matrix["status"] == "EVIDENCE_MATRIX_REVIEW_REQUIRED"
     assert any("no conditional diagnostic coverage" in reason for reason in matrix["blocking_reasons"])
+
+
+def test_matrix_keeps_external_sweep_as_closure_and_timing_only(tmp_path):
+    paths = _records(tmp_path)
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        external_sweep_path=paths["sweep"],
+    )
+    domain = next(row for row in matrix["evidence_domains"] if row["id"] == "external_lh2_sweep_screening")
+    assert domain["status"] == "SCREENING_CLOSURE_AND_TIMING_ONLY"
+    assert domain["maximum_tank_mass_residual_kg"] == 1e-11
+    assert matrix["physical_validation_claim"] is False
+    assert matrix["facility_qra_claim"] is False
 
 
 def test_matrix_fails_when_an_input_is_missing(tmp_path):

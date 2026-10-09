@@ -176,6 +176,50 @@ def _facility_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]
     }
 
 
+def _external_sweep_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
+    """Keep external tank/PSV/TNO outputs as closure and timing evidence only."""
+
+    if payload.get("status") != "SCREENING_ONLY_EXTERNAL_SWEEP":
+        blockers.append("external LH2 sweep is not the screening-only status")
+    gates = payload.get("promotion_gates")
+    if not isinstance(gates, Mapping):
+        blockers.append("external LH2 sweep has no promotion gate object")
+        gates = {}
+    for field in (
+        "independent_physical_validation_claim",
+        "qualified_provider_packet",
+        "facility_ir_fn_claim",
+        "frequency_inference",
+    ):
+        if gates.get(field) is True:
+            blockers.append(f"external LH2 sweep asserts prohibited {field}=true")
+    aggregate = payload.get("aggregate") if isinstance(payload.get("aggregate"), Mapping) else {}
+    return {
+        "id": "external_lh2_sweep_screening",
+        "status": "SCREENING_CLOSURE_AND_TIMING_ONLY",
+        "supports": [
+            "internal mass/energy closure bookkeeping",
+            "external-model processing-time range",
+            "failed-case preservation and engineering-judgement proxy labeling",
+        ],
+        "does_not_support": [
+            "independent physical validation",
+            "qualified accident release packet",
+            "frequency inference",
+            "facility IR/F-N",
+        ],
+        "tank_sweep_record_count": aggregate.get("tank_sweep_record_count"),
+        "tno_policy_record_count": aggregate.get("tno_policy_record_count"),
+        "maximum_tank_mass_residual_kg": aggregate.get("maximum_tank_mass_residual_kg"),
+        "maximum_tank_energy_residual_J": aggregate.get("maximum_tank_energy_residual_J"),
+        "tno_policy_runtime_s": aggregate.get("tno_policy_runtime_s"),
+        "source": _source(path, "external LH2 sweep screening audit", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     if payload.get("status") == "COMPLETE_EVIDENCE":
         blockers.append("IJHE audit reports complete evidence; promotion must be reviewed instead of inferred")
@@ -201,6 +245,7 @@ def build_validation_evidence_matrix(
     *,
     native_contract_path: str | Path | None = None,
     ijhe_audit_path: str | Path | None = None,
+    external_sweep_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -218,6 +263,9 @@ def build_validation_evidence_matrix(
     if ijhe_audit_path is not None:
         audit_path, audit = _read_object(ijhe_audit_path, "IJHE audit")
         domains.append(_audit_domain(audit_path, audit, blockers))
+    if external_sweep_path is not None:
+        sweep_path, sweep = _read_object(external_sweep_path, "external LH2 sweep audit")
+        domains.append(_external_sweep_domain(sweep_path, sweep, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
