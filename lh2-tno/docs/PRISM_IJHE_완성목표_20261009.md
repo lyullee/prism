@@ -305,3 +305,19 @@ generic 시설의 `liquid-transfer-line-01` 다섯 개 개구면적을 설비 pr
 ## 2026-10-24 native 설비 인터페이스 보정
 
 이 문서의 2026-10-11 기록에 있는 “실제 `lh2dt_models` 클래스에는 전용 메서드가 없다”는 문장은 당시 스냅샷이다. 최신 소스 감사에서는 7개 설비 클래스의 `export_accident_history(request)`와 종료·질량 원장을 확인했다. 최신 binding 감사 [`native_equipment_model_binding_audit_v1.json`](../results/20261024/native_equipment_model_binding_audit_v1.json)은 사고 방출 인터페이스 7개·진단 adapter 7개·qualified provider packet 0개를 분리해 기록하고, 경계 component 때문에 전체 상태는 `STATE_ONLY_BOUND`로 남긴다. IJHE 완료 감사 [`ijhe_completion_audit_native_generic_scope_vertical_v8.json`](../results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v8.json)은 22개 검사 중 19개를 통과하지만 synthetic/screening provider, partial 사고범위, 시설 IR/F-N 보류라는 3개 blocker를 유지한다.
+
+## 2026-10-24 이후 요구사항 추적표
+
+| IJHE용 요구사항 | 현재 증거 | 판정 | 해석 |
+|---|---|---|---|
+| 설비 상태에서 사고 방출 경계로 전달 | native model binding audit, state-only snapshot, strict provider export contract | 진단 PASS / 승격 BLOCKED | 설비별 호출 경계는 있으나 적격 실제 사고 packet은 0건 |
+| 방출 지속시간·차단·재고 소진 보존 | facility `release_termination_inventory_ledger`와 provider 종료·질량 장부 | 진단 PASS | 누락·operator-limited·domain-incomplete branch는 0 위험으로 바꾸지 않음 |
+| 방출→SLABx-LH2/SLABx→점화·피해 | 29 event·34 case·136 risk atom 병합 원장 | 진단 PASS | 현재 결과는 합성/스크리닝 입력을 포함한 조건부 결과 |
+| 기상·인구·점화·방출 조합 회계 | `scenario_branch_accounting`, 최신 조합 12개 | 진단 PASS | 3 기상조건·2 방출 branch·4 점화 branch를 보존 |
+| 문헌 빈도 불확실성 | 5개 literature scenario와 branch별 재가중 장부 | 진단 PASS | 물리를 재실행하지 않으며 facility credible interval은 false |
+| 주요 사고 전체 범위 | 12개 사고 family scope matrix와 미계산 case | 차단 | partial/missing provider family가 남아 있음 |
+| 독립 물리 검증 | validation evidence matrix와 DynamicLH2PoolX 제한 증거 | 차단 | restricted component evidence이며 전체 시설 검증이 아님 |
+| 신규 계산 처리시간 | facility `timing.stage_elapsed_ms`의 단계별 count/sum/median/max/p95/p99 | 진단 PASS | 관찰된 실행시간 기록이며 1 Hz fresh-physics 보증이 아님 |
+| 시설 전체 IR/F-N | `facility_total_risk_available`, `complete_facility_qra_claim` | 차단 | 적격 packet·전체 사고범위·물리검증이 충족될 때까지 보류 |
+
+최신 compact evidence는 [`native_generic_scope_vertical_branch_release_accounting_summary.json`](../examples/native_generic_scope_vertical_branch_release_accounting_summary.json)과 [`native_generic_scope_vertical_frequency_branch_accounting_summary.json`](../examples/native_generic_scope_vertical_frequency_branch_accounting_summary.json)에 보존한다. 현재 전체 판정은 `INCOMPLETE_EVIDENCE`이며, 다음 개발 기준은 실제 provider 사고 packet 확보와 partial family의 독립 검증이다.

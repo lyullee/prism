@@ -2983,5 +2983,7 @@
   "frequency_branch_accounting_summary_status": "DIAGNOSTIC_ONLY; 5 literature scenarios preserve the same 12 condition×release×ignition combinations; facility credible interval false",
   "facility_stage_timing_accounting_implemented": true,
   "facility_stage_timing_accounting_output": "facility ledger timing.stage_elapsed_ms and completion-audit timing evidence",
-  "facility_stage_timing_accounting_policy": "Observed per-stage elapsed milliseconds are summarized with sample count, sum, median, max, p95 and p99; no throughput or fresh-physics 1 Hz claim is inferred."
+  "facility_stage_timing_accounting_policy": "Observed per-stage elapsed milliseconds are summarized with sample count, sum, median, max, p95 and p99; no throughput or fresh-physics 1 Hz claim is inferred.",
+  "ijhe_requirement_traceability_record": "docs/PRISM_IJHE_완성목표_20261009.md",
+  "ijhe_requirement_traceability_status": "INCOMPLETE_EVIDENCE; diagnostic chain and accounting pass, qualified provider/scope/physical-validation gates remain blocked"
 }
