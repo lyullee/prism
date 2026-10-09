@@ -96,3 +96,13 @@ def test_objective_audit_blocks_missing_native_event():
     report = build_ijhe_objective_coverage_audit(**inputs)
     assert report["status"] == "OBJECTIVE_CHAIN_INCOMPLETE"
     assert "equipment_state_to_native_release" in report["core_blocking_check_ids"]
+
+
+def test_objective_audit_fails_closed_for_missing_optional_structures():
+    inputs = _inputs()
+    inputs["facility_assessment"].pop("conditional_diagnostic_facility_coverage")
+    inputs["native_packet_campaign_ledger"].pop("qualified_provider_packet_case_count")
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    assert report["status"] == "OBJECTIVE_CHAIN_INCOMPLETE"
+    assert "release_to_final_damage" in report["core_blocking_check_ids"]
+    assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]

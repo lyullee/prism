@@ -86,7 +86,10 @@ def build_ijhe_objective_coverage_audit(
     campaign_cases = _int(native_packet_campaign_ledger.get("case_count"))
     campaign_executed = _int(native_packet_campaign_ledger.get("chain_executed_case_count"))
     campaign_uncomputed = _int(native_packet_campaign_ledger.get("uncomputed_case_count"))
-    risk_atoms = _int(facility_assessment.get("conditional_diagnostic_facility_coverage", {}).get("risk_atom_count"))
+    facility_coverage = facility_assessment.get("conditional_diagnostic_facility_coverage")
+    if not isinstance(facility_coverage, Mapping):
+        facility_coverage = {}
+    risk_atoms = _int(facility_coverage.get("risk_atom_count"))
     conditional_risk = facility_assessment.get("conditional_diagnostic_facility_risk_available") is True
     fn_curve = facility_assessment.get("conditional_diagnostic_facility_expected_death_fn_low_high")
     population = facility_assessment.get("population_accounting")
@@ -267,8 +270,11 @@ def build_ijhe_objective_coverage_audit(
         interpretation="액화수소검사지원센터 자료와 실험 자료는 후보 근거로 보존되지만 사고 방출 검증으로 자동 승격하지 않는다.",
     ))
 
+    qualified_count = native_packet_campaign_ledger.get("qualified_provider_packet_count")
     qualified_ok = (
-        native_packet_campaign_ledger.get("qualified_provider_packet_count", 0) > 0
+        isinstance(qualified_count, int)
+        and not isinstance(qualified_count, bool)
+        and qualified_count > 0
         and native_packet_campaign_ledger.get("provider_packet_promoted") is True
     )
     rows.append(_row(
