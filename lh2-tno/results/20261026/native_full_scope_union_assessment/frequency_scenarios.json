@@ -1,0 +1,55 @@
+{
+  "schema_version": "prism.native_full_scope_union_frequency_scenarios.v1",
+  "scenarios": [
+    {
+      "id": "native-full-scope-literature-central",
+      "asset_quantiles": {
+        "ambient-vaporizer": "published",
+        "pressure-relief-vent": "published",
+        "reliquefier": "published",
+        "storage-shell": "published",
+        "transfer-line": "published",
+        "transfer-pump": "published",
+        "transfer-valve": "published",
+        "vertical-handoff-vent": "published"
+      },
+      "event_quantiles": {},
+      "provenance": "published catalogue rates; conditional diagnostic only; vertical handoff fixed at declared diagnostic rate; no frequency inference",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "native-full-scope-literature-low",
+      "asset_quantiles": {
+        "ambient-vaporizer": "fixed",
+        "pressure-relief-vent": "fixed",
+        "reliquefier": "fixed",
+        "storage-shell": "p05",
+        "transfer-line": "p05",
+        "transfer-pump": "fixed",
+        "transfer-valve": "p05",
+        "vertical-handoff-vent": "published"
+      },
+      "event_quantiles": {},
+      "provenance": "published marginal p05 bounds where available; fixed catalogue rates otherwise; vertical handoff fixed at declared diagnostic rate; no frequency inference",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "native-full-scope-literature-high",
+      "asset_quantiles": {
+        "ambient-vaporizer": "fixed",
+        "pressure-relief-vent": "fixed",
+        "reliquefier": "fixed",
+        "storage-shell": "p95",
+        "transfer-line": "p95",
+        "transfer-pump": "fixed",
+        "transfer-valve": "p95",
+        "vertical-handoff-vent": "published"
+      },
+      "event_quantiles": {},
+      "provenance": "published marginal p95 bounds where available; fixed catalogue rates otherwise; vertical handoff fixed at declared diagnostic rate; no frequency inference",
+      "correlation_assumption": "within_asset_shared_quantile"
+    }
+  ],
+  "vertical_handoff_frequency_inference": false,
+  "facility_credible_interval": false
+}

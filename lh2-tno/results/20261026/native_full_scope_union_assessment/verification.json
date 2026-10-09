@@ -1,0 +1,33 @@
+{
+  "schema_version": "prism.native_full_scope_union_assessment.v1",
+  "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "base_event_count": 24,
+  "vertical_event_count": 5,
+  "merged_event_count": 29,
+  "merged_case_count": 34,
+  "merged_risk_atom_count": 136,
+  "vertical_handoff_status": "PARTIAL",
+  "vertical_handoff_conditional_status": "EXECUTED",
+  "vertical_handoff_conditional_executed_case_count": 10,
+  "vertical_handoff_operator_limited_case_count": 10,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      4.6800000000000006e-05,
+      4.6800000000000006e-05
+    ]
+  },
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "provider_packet_case_count": 34,
+  "qualified_provider_packet_case_count": 0,
+  "physical_validation_claim": false,
+  "frequency_scenario_count": 3,
+  "limitations": [
+    "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
+    "vertical provider history is synthetic/operator-limited and retains its termination horizon",
+    "the merged conditional IR/F-N is diagnostic and facility total IR/F-N remains withheld",
+    "frequency scenarios reweight saved atoms and do not infer vertical frequency"
+  ]
+}
