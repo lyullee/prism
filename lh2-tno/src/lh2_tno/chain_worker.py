@@ -205,12 +205,12 @@ def run_chain(p,roots,module):
     weather=p['weather']; times=p['evaluation_times_s']; horizon=times[-1]
     ambient=source['ambient']; fluid=source['tank']['fluid']
     origin=np.asarray(p['source_position_enu_m'],float)
-    vertical_handoff=source.get('vertical_handoff') if resolved is not None else None
-    if vertical_handoff is not None:
-        # The provider has already resolved the vertical momentum into a
-        # horizontal carrier section.  Dispersion starts at that declared
-        # handoff position; PRISM does not rotate the vertical exit itself.
-        origin=np.asarray(vertical_handoff['position_enu_m'],float)
+    provider_handoff=(source.get('vertical_handoff') or source.get('compressible_plane_handoff')) if resolved is not None else None
+    if provider_handoff is not None:
+        # The provider has already resolved the outlet into a horizontal
+        # carrier section. Dispersion starts at that declared handoff plane;
+        # PRISM does not expand or rotate the original exit itself.
+        origin=np.asarray(provider_handoff['position_enu_m'],float)
     to=math.radians((weather['wind_from_bearing_deg']+180)%360)
     down=np.array([math.sin(to),math.cos(to),0.])
     cross=np.array([math.cos(to),-math.sin(to),0.])
@@ -412,12 +412,15 @@ def run_chain(p,roots,module):
     direction=np.asarray(source['nozzle']['direction_enu'],float);direction/=np.linalg.norm(direction)
     release_bearing=math.degrees(math.atan2(direction[0],direction[1]))%360
     packets=[]; traj_cache={}; traces=[]; dispersion_handoff_fallbacks=[]
-    def vertical_handoff_state(row):
-        if vertical_handoff is None:
+    def provider_handoff_state(row):
+        if provider_handoff is None:
             return None
-        states = vertical_handoff.get('states') or ()
+        row_handoff = row.get('provider_handoff') if row is not None else None
+        if row_handoff is not None:
+            return row_handoff
+        states = provider_handoff.get('states') or ()
         if not states:
-            return vertical_handoff
+            return provider_handoff
         selected = states[0]
         for state in states:
             if state['time_s'] > row['time_s']:
@@ -429,7 +432,7 @@ def run_chain(p,roots,module):
         gas_temperature=tsat if row is None else row.get('gas_boundary_temperature_k',tsat)
         gas_density=rho_g if row is None else row.get('gas_boundary_density_kg_m3',rho_g)
         gas_area=None if row is None else row.get('gas_boundary_area_m2')
-        handoff = vertical_handoff_state(row) if kind == 'jet' and row is not None else None
+        handoff = provider_handoff_state(row) if kind == 'jet' and row is not None else None
         handoff_key = None if handoff is None else json.dumps(handoff, sort_keys=True, separators=(',', ':'))
         key=(kind,rate,area,span,velocity,gas_temperature,gas_density,gas_area,handoff_key)
         if key in traj_cache:return traj_cache[key]
@@ -444,7 +447,7 @@ def run_chain(p,roots,module):
             hs=handmod.FreeJetHandoffState(handoff_distance_m=0.01,duration_s=span,
                 total_rate_kg_s=total,h2_mass_fraction=handoff['h2_mass_fraction'],
                 temperature_K=handoff['temperature_k'],density_kg_m3=handoff['density_kg_m3'],
-                velocity_m_s=downvelocity,centre_height_m=vertical_handoff['position_enu_m'][2],
+                velocity_m_s=downvelocity,centre_height_m=provider_handoff['position_enu_m'][2],
                 half_width_m=handoff['half_width_m'],depth_m=handoff['depth_m'],
                 mixture_cp_J_kgK=handoff['h2_mass_fraction']*14300.+(1-handoff['h2_mass_fraction'])*1006.,
                 source_model='equipment-resolved-vertical-gas + provider-horizontal-handoff',
@@ -822,7 +825,7 @@ def run_chain(p,roots,module):
                   'finite_inventory_cloud','ignition_branches','fire_radiation','multi_energy_blast_zones','TNO_human_damage','conditional_risk'],
         'source':source_history,'pool':pool,'ground_arrival_pulses':ground_pulses,
         'source_operator':source_operator,
-        'operator_limited':bool(source_history.get('operator_limited',False) or vertical_handoff is not None
+        'operator_limited':bool(source_history.get('operator_limited',False) or provider_handoff is not None
                                  or dispersion_handoff_fallbacks),
         'source_ownership':{'state_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
             'discharge_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
@@ -846,10 +849,11 @@ def run_chain(p,roots,module):
             'initiation':'constant supplied hazard; disjoint first-event intervals; remaining consequence horizon; interval-left consequence approximation',
             'effect_combination':'Frechet union upper bound min(1,sum(harm)) within one event branch; no independence assumed'},
         'limitations':[
-            'If resolved gas equipment input is selected: horizontal atmospheric gas plane at Mach <=0.3; PH/continuity/static enthalpy checked, provider kinetic-energy closure is not certified.',
+            'If resolved gas equipment input is selected: the direct atmospheric plane is limited to Mach <=0.3; a higher-speed case requires a provider-resolved compressible_plane_handoff with a conservation-closed carrier section. PH/continuity/static enthalpy are checked, while provider kinetic-energy closure remains unqualified.',
             'If resolved liquid/two-phase equipment input is selected: provider flash, gas/ground partition and total enthalpy are consumed; airborne liquid and provider flash/droplet physics remain outside this route.',
             'Outdoor flat ground, non-calm wind, horizontal nozzle or provider-resolved vertical handoff, known leak geometry only.',
             'A vertical provider exit is accepted only with a declared horizontal handoff section; the handoff is operator-limited and is not a PRISM rotation or independent vertical-jet validation.',
+            'A compressible/underexpanded gas handoff is consumed only at the provider-declared plane; PRISM does not expand, rotate or invent that plane from outlet pressure and velocity.',
             'Ground deposition uses resolved per-class flight delays; distributed in-flight vapour generation is still collapsed to the terminal gas boundary at release time.',
             'When a provider packet uses ParaHydrogen, the native DynamicLH2PoolX Hydrogen backend is reached only through the explicit declared pool fluid translation; the translation is operator-limited and does not claim cross-basis validation.',
             'The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.',

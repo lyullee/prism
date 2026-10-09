@@ -9,6 +9,7 @@ from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.equipment_boundary import (ResolvedGasRelease, ResolvedGasReleaseSet,
     ResolvedLiquidRelease, VerticalGasHandoff, thermodynamic_rows)
 from lh2_tno.resolved_liquid_worker import resolve_liquid_rows
+from lh2_tno.resolved_gas_worker import resolve_gas_rows
 from lh2_tno.layered_network_boundary import audit_layered_liquid_boundary
 from lh2_tno.provider_liquid_partition import combine_provider_liquid_partition
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
@@ -226,6 +227,61 @@ def test_variable_vertical_handoff_states_close_provider_clock_and_mass():
     bad['vertical_handoff']['states'][1]['depth_m'] *= 1.1
     with pytest.raises(ValueError, match='does not close provider mass flow'):
         ResolvedGasRelease.model_validate_json(json.dumps(bad))
+
+
+def test_compressible_plane_handoff_closes_high_speed_provider_mass():
+    d = packet()
+    h2_fraction = .5
+    width = .05
+    states = []
+    for step, velocity in zip(d['steps'], (30., 40.)):
+        depth = step['mass_flow_kg_s'] / (h2_fraction * step['density_kg_m3'] * velocity * 2. * width)
+        states.append({
+            'time_s': step['time_s'], 'direction_enu': [1., 0., 0.],
+            'velocity_m_s': velocity, 'density_kg_m3': step['density_kg_m3'],
+            'temperature_k': step['temperature_k'], 'h2_mass_fraction': h2_fraction,
+            'half_width_m': width, 'depth_m': depth,
+            'provenance': 'synthetic compressible plane adapter state',
+        })
+    d['compressible_plane_handoff'] = {
+        'position_enu_m': [1., 0., 2.], 'direction_enu': [1., 0., 0.],
+        'velocity_m_s': 30., 'density_kg_m3': .2, 'temperature_k': 150.,
+        'h2_mass_fraction': h2_fraction, 'half_width_m': width,
+        'depth_m': states[0]['depth_m'], 'provenance': 'synthetic compressible plane adapter',
+        'states': states,
+    }
+    release = ResolvedGasRelease.model_validate_json(json.dumps(d))
+    assert release.compressible_plane_handoff is not None
+    assert [state.time_s for state in release.compressible_plane_handoff.states] == [0., .2]
+    bad = copy.deepcopy(d)
+    bad['compressible_plane_handoff']['states'][1]['depth_m'] *= 1.1
+    with pytest.raises(ValueError, match='does not close provider mass flow'):
+        ResolvedGasRelease.model_validate_json(json.dumps(bad))
+
+
+def test_low_mach_guard_requires_plane_handoff_and_consumes_it():
+    d = packet()
+    states = []
+    for step in d['steps']:
+        states.append({
+            'time_s': step['time_s'], 'direction_enu': [1., 0., 0.],
+            'velocity_m_s': 30., 'density_kg_m3': .2, 'temperature_k': 150.,
+            'h2_mass_fraction': .5, 'half_width_m': .05,
+            'depth_m': step['mass_flow_kg_s'] / (.5 * .2 * 30. * 2. * .05),
+            'provenance': 'synthetic compressible plane adapter state',
+        })
+    d['compressible_plane_handoff'] = {
+        'position_enu_m': [1., 0., 2.], 'direction_enu': [1., 0., 0.],
+        'velocity_m_s': 30., 'density_kg_m3': .2, 'temperature_k': 150.,
+        'h2_mass_fraction': .5, 'half_width_m': .05,
+        'depth_m': states[0]['depth_m'], 'states': states,
+        'provenance': 'synthetic compressible plane adapter',
+    }
+    rows, history = resolve_gas_rows(d, 101325., FakeCP(sound=10.))
+    assert len(rows) == 2
+    assert history['compressible_plane_handoff_consumed'] is True
+    with pytest.raises(ValueError, match='compressible/underexpanded plane adapter required'):
+        resolve_gas_rows(packet(), 101325., FakeCP(sound=10.))
 
 
 @pytest.mark.parametrize('fault',['both','neither','inventory','position','clock','normal_frequency'])

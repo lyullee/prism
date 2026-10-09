@@ -110,6 +110,21 @@ python scripts/run_lh2_mixed_provider_campaign.py `
 
 이 실행으로 확인된 다음 개발 항목은 고속·압축성/underexpanded gas exit용 별도 plane adapter와 독립 검증 자료다. adapter가 준비되기 전까지 해당 사건은 `FAILED`/미계산으로 남기며, 시설 IR/F-N과 전체 사고 범위는 승격하지 않는다.
 
+## 고속 기체 출구 handoff 계약
+
+고속 packet을 단순히 Mach 제한을 풀어 통과시키면 provider가 계산한 운동에너지와 SLABx의 carrier 상태가 섞여 결과 의미가 바뀐다. 그래서 `ResolvedGasRelease.compressible_plane_handoff`를 별도 경계로 추가했다. provider는 downstream plane의 위치와 수평 방향, carrier 속도·밀도·온도·수소 질량분율, 반폭·깊이와 provider clock을 반환해야 한다. 각 상태는
+
+```text
+rho_carrier × velocity × (2 × half_width) × depth × H2_mass_fraction
+  = provider H2 mass flow
+```
+
+을 만족해야 한다. PRISM은 이 plane을 SLABx near-field handoff로 소비할 뿐, 출구 압력·속도에서 팽창면을 추정하거나 제트를 회전시키지 않는다. adapter가 없으면 기존 저마하 guard가 동일하게 `compressible/underexpanded plane adapter required`를 반환한다.
+
+합성 carrier plane을 사용한 별도 smoke는 19개 provider clock 상태를 handoff로 소비하고 `END_TO_END_DIAGNOSTIC_EXECUTED`를 반환했다. 그러나 carrier plane 자체가 실제 provider export가 아니므로 이 결과는 adapter 계약 시험으로만 보관한다. 실제 G1을 계산하려면 외부 설비 모델이 동일한 plane 상태와 독립 검증 근거를 내보내야 한다. 현재 결과는 `results/20261016/compressible_plane_adapter_chain_smoke.json`이다.
+
+packet 자체의 판정은 `scripts/validate_compressible_plane_handoff.py`로 재현한다. 선택된 `results/20261014/vaporizer_worklist_g1/resolved_release.json`은 `COMPRESSIBLE_PLANE_HANDOFF_BLOCKED`이며, 과거 저마하 진단 packet `results/20261014/vaporizer_worklist_g1_lowmach/resolved_release.json`은 최대 Mach `0.243589`에서 `DIRECT_LOW_MACH_GAS_EXIT_VALIDATED`다. 이 두 결과를 분리해 기록함으로써, 계산 가능한 오래된 packet을 새 packet의 대체물로 자동 사용하지 않는다.
+
 추가 파일:
 
 - `src/lh2_tno/diagnostic_campaign_binding.py`: packet/event/case/risk-atom 구조 결합 감사

@@ -1,8 +1,9 @@
 """Resolved atmospheric gas exits supplied by an equipment-twin provider.
 
 The provider owns the flow calculation. This contract never estimates a leak
-from P/T or re-runs a tank/nozzle solver. Liquid and underexpanded outlets
-need their own source/flash adapter and are deliberately rejected here.
+from P/T or re-runs a tank/nozzle solver. Liquid outlets and high-speed gas
+outlets need their own source/flash or compressible-plane adapter; a high-speed
+packet without that provider-owned boundary remains rejected.
 """
 from __future__ import annotations
 import math
@@ -124,6 +125,58 @@ class VerticalGasHandoff(Contract):
         return selected
 
 
+class CompressibleGasPlaneHandoff(Contract):
+    """Provider-resolved plane after an underexpanded/compressible exit.
+
+    A high-Mach gas packet cannot be passed directly to PRISM's low-Mach
+    transition model.  The external provider must therefore supply a
+    conservation-closed carrier section at a declared downstream plane.  The
+    adapter owns the expansion/mixing calculation; PRISM only consumes this
+    handoff and never creates one from the outlet velocity.
+    """
+
+    position_enu_m: Vector
+    direction_enu: Vector
+    velocity_m_s: Positive
+    density_kg_m3: Positive
+    temperature_k: Positive
+    h2_mass_fraction: Fraction
+    half_width_m: Positive
+    depth_m: Positive
+    provenance: Name
+    states: tuple[VerticalGasHandoffState, ...] = ()
+
+    @model_validator(mode='after')
+    def valid(self):
+        if self.position_enu_m[2] <= 0:
+            raise ValueError('compressible plane handoff must be above flat ground')
+        if not math.isclose(sum(x*x for x in self.direction_enu), 1., abs_tol=1e-10, rel_tol=0):
+            raise ValueError('compressible plane handoff requires a unit direction')
+        if abs(self.direction_enu[2]) > 1e-10:
+            raise ValueError('compressible plane handoff direction must be horizontal')
+        if self.states:
+            if self.states[0].time_s != 0. or len(self.states) > 100:
+                raise ValueError('compressible plane handoff states must start at zero and be bounded')
+            if any(b.time_s <= a.time_s for a, b in zip(self.states, self.states[1:])):
+                raise ValueError('compressible plane handoff states require an ordered provider clock')
+        return self
+
+    def state_at(self, time_s: float) -> VerticalGasHandoffState:
+        """Return the provider state held over one release interval."""
+        if not self.states:
+            return VerticalGasHandoffState(
+                time_s=time_s, direction_enu=self.direction_enu, velocity_m_s=self.velocity_m_s,
+                density_kg_m3=self.density_kg_m3, temperature_k=self.temperature_k,
+                h2_mass_fraction=self.h2_mass_fraction, half_width_m=self.half_width_m,
+                depth_m=self.depth_m, provenance=self.provenance)
+        selected = self.states[0]
+        for state in self.states:
+            if state.time_s > time_s:
+                break
+            selected = state
+        return selected
+
+
 class ResolvedGasRelease(Contract):
     # Flat provider packets carry their contract version with the resolved
     # boundary itself.  This prevents a normal-flow JSON object with similar
@@ -156,6 +209,7 @@ class ResolvedGasRelease(Contract):
     termination_provenance: Name
     termination_basis: ProviderTerminationBasis | None = None
     vertical_handoff: VerticalGasHandoff | None = None
+    compressible_plane_handoff: CompressibleGasPlaneHandoff | None = None
     # A failure opening can differ from an expanded exit area. Explicitly
     # retain it if attaching an accident-frequency definition.
     failure_opening_diameter_m: Positive | None = None
@@ -167,15 +221,18 @@ class ResolvedGasRelease(Contract):
         if not math.isclose(sum(x*x for x in self.direction_enu),1.,abs_tol=1e-10,rel_tol=0):
             raise ValueError('unit ENU outlet direction required')
         if abs(self.direction_enu[2]) > 1e-10:
-            if abs(self.direction_enu[0]) > 1e-10 or abs(self.direction_enu[1]) > 1e-10 or self.vertical_handoff is None:
+            if (abs(self.direction_enu[0]) > 1e-10 or abs(self.direction_enu[1]) > 1e-10
+                    or self.vertical_handoff is None or self.compressible_plane_handoff is not None):
                 raise ValueError('vertical exit requires a provider-resolved horizontal handoff adapter')
+        elif self.vertical_handoff is not None and self.compressible_plane_handoff is not None:
+            raise ValueError('one gas release cannot declare two provider handoff adapters')
         elif self.vertical_handoff is not None:
             raise ValueError('vertical handoff metadata requires a vertical exit direction')
-        if self.vertical_handoff is not None:
-            handoff = self.vertical_handoff
+        if self.vertical_handoff is not None or self.compressible_plane_handoff is not None:
+            handoff = self.vertical_handoff or self.compressible_plane_handoff
             if handoff.states:
                 if len(handoff.states) != len(self.steps):
-                    raise ValueError('vertical handoff state count must match release steps')
+                    raise ValueError('provider handoff state count must match release steps')
                 for step, state in zip(self.steps, handoff.states):
                     if not math.isclose(step.time_s, state.time_s, rel_tol=0, abs_tol=1e-12):
                         raise ValueError('vertical handoff clock must match resolved release clock')

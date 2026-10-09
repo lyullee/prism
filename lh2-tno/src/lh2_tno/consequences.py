@@ -409,7 +409,8 @@ def resolved_source_context(release,weather):
         'ambient':{'pressure_pa':release.ambient_pressure_pa_abs,'temperature_k':release.ambient_temperature_k,
                    'wind_speed_m_s':weather.wind_speed_m_s,'wind_from_bearing_deg':weather.wind_from_bearing_deg},
         'duration_s':release.duration_s,'time_step_s':release.duration_s,
-        'vertical_handoff':None if release.vertical_handoff is None else release.vertical_handoff.model_dump(mode='json')}
+        'vertical_handoff':None if release.vertical_handoff is None else release.vertical_handoff.model_dump(mode='json'),
+        'compressible_plane_handoff':None if release.compressible_plane_handoff is None else release.compressible_plane_handoff.model_dump(mode='json')}
 
 
 def resolved_liquid_source_context(release, weather):
