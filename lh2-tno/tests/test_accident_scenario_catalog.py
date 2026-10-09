@@ -2,6 +2,7 @@ from lh2_tno.accident_scenario_catalog import (
     ACCIDENT_SCENARIO_CATALOG_SCHEMA,
     accident_scenario_catalog,
     audit_catalog_manifest,
+    audit_worklist_scope_alignment,
     scenario_definition,
     scenario_families_for_release,
 )
@@ -64,3 +65,26 @@ def test_release_event_family_mapping_keeps_cross_cutting_liquid_cases_explicit(
     assert scenario_families_for_release("pipe", "inventory_over_600s") == (
         "inventory_over_600s", "liquid_two_phase"
     )
+
+
+def test_worklist_scope_alignment_checks_primary_family_without_inventing_packets():
+    report = audit_worklist_scope_alignment(
+        {
+            "work_items": [
+                {
+                    "id": "event-1/provider-release",
+                    "event_id": "event-1",
+                    "scenario_families": ["vessel_hole", "liquid_two_phase"],
+                },
+                {
+                    "id": "event-2/provider-release",
+                    "event_id": "event-2",
+                    "scenario_families": ["pipe_hole"],
+                },
+            ]
+        },
+        {"event-1": {"vessel_hole"}, "event-2": {"pipe_hole"}},
+    )
+    assert report["status"] == "ALIGNED"
+    assert report["aligned_event_count"] == 2
+    assert report["provider_packet_created"] is False

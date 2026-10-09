@@ -8,6 +8,7 @@ or treats a diagnostic adapter as qualified evidence.
 from __future__ import annotations
 
 from copy import deepcopy
+from collections.abc import Mapping
 from typing import Any, Iterable
 
 
@@ -245,4 +246,95 @@ def audit_catalog_manifest(
         "scenario_count": len(rows),
         "rows": rows,
         "all_requested_families_declared": True,
+    }
+
+
+def audit_worklist_scope_alignment(
+    provider_worklist: Mapping[str, Any],
+    event_families: Mapping[str, set[str]],
+) -> dict[str, Any]:
+    """Check that worklist event IDs and primary families reach a scope matrix.
+
+    The worklist is the requested provider boundary and ``event_families`` is
+    the family observed by a campaign result.  Cross-cutting families such as
+    ``liquid_two_phase`` may be absent before a provider packet is consumed, so
+    only the first (mechanism) family is required for structural alignment.
+    """
+    items = provider_worklist.get("work_items")
+    if not isinstance(items, list):
+        raise ValueError("provider worklist work_items must be an array")
+    known = {row["family"] for row in _SCENARIOS}
+    seen: set[str] = set()
+    missing_event_ids: list[str] = []
+    duplicate_event_ids: list[str] = []
+    empty_family_item_ids: list[str] = []
+    unknown_family_item_ids: list[str] = []
+    primary_family_mismatches: list[dict[str, Any]] = []
+    aligned_event_ids: list[str] = []
+    family_counts: dict[str, int] = {}
+    for index, item in enumerate(items):
+        if not isinstance(item, Mapping):
+            raise ValueError(f"provider worklist work_items[{index}] must be an object")
+        event_id = str(item.get("event_id", ""))
+        item_id = str(item.get("id", event_id or f"work-item-{index}"))
+        if not event_id:
+            missing_event_ids.append(item_id)
+            continue
+        if event_id in seen:
+            duplicate_event_ids.append(event_id)
+        seen.add(event_id)
+        raw_families = item.get("scenario_families")
+        families = tuple(str(value) for value in raw_families) if isinstance(raw_families, list) else ()
+        if not families:
+            empty_family_item_ids.append(item_id)
+            continue
+        unknown = sorted(set(families) - known)
+        if unknown:
+            unknown_family_item_ids.append(item_id)
+            continue
+        primary = families[0]
+        family_counts[primary] = family_counts.get(primary, 0) + 1
+        observed = event_families.get(event_id)
+        if observed is None:
+            missing_event_ids.append(event_id)
+        elif primary not in observed:
+            primary_family_mismatches.append({
+                "event_id": event_id,
+                "worklist_primary_family": primary,
+                "observed_families": sorted(observed),
+            })
+        else:
+            aligned_event_ids.append(event_id)
+    worklist_event_ids = set(seen)
+    campaign_event_ids = set(event_families)
+    extra_campaign_event_ids = sorted(campaign_event_ids - worklist_event_ids)
+    blocking: list[str] = []
+    if missing_event_ids:
+        blocking.append("worklist event is missing from the campaign scope")
+    if duplicate_event_ids:
+        blocking.append("provider worklist contains duplicate event IDs")
+    if empty_family_item_ids:
+        blocking.append("provider worklist event has no scenario family")
+    if unknown_family_item_ids:
+        blocking.append("provider worklist event has an unknown scenario family")
+    if primary_family_mismatches:
+        blocking.append("worklist primary accident family disagrees with campaign scope")
+    if extra_campaign_event_ids:
+        blocking.append("campaign scope contains an event absent from the provider worklist")
+    return {
+        "schema": "prism.accident_scenario_worklist_alignment.v1",
+        "status": "ALIGNED" if not blocking else "PARTIAL_ALIGNMENT",
+        "worklist_event_count": len(items),
+        "campaign_event_count": len(campaign_event_ids),
+        "aligned_event_count": len(aligned_event_ids),
+        "missing_event_ids": sorted(set(missing_event_ids)),
+        "duplicate_event_ids": sorted(set(duplicate_event_ids)),
+        "empty_family_item_ids": sorted(set(empty_family_item_ids)),
+        "unknown_family_item_ids": sorted(set(unknown_family_item_ids)),
+        "primary_family_mismatches": primary_family_mismatches,
+        "extra_campaign_event_ids": extra_campaign_event_ids,
+        "primary_family_counts": dict(sorted(family_counts.items())),
+        "blocking_reasons": list(dict.fromkeys(blocking)),
+        "frequency_inference_performed": False,
+        "provider_packet_created": False,
     }

@@ -14,7 +14,11 @@ from typing import Any, Iterable
 from .campaign import RiskCampaign
 from .consequences import ConsequenceRequest
 from .equipment_manifest import EquipmentManifest, audit_manifest
-from .accident_scenario_catalog import audit_catalog_manifest, scenario_definition
+from .accident_scenario_catalog import (
+    audit_catalog_manifest,
+    audit_worklist_scope_alignment,
+    scenario_definition,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -121,6 +125,7 @@ def build_accident_scope_matrix(
     manifest: EquipmentManifest,
     *,
     required_families: tuple[str, ...] = MAJOR_ACCIDENT_FAMILIES,
+    provider_worklist: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed mechanism coverage matrix for one campaign result."""
     unknown = sorted(set(required_families) - set(MAJOR_ACCIDENT_FAMILIES))
@@ -163,6 +168,12 @@ def build_accident_scope_matrix(
         )
         event_families[event_id] = _event_families(event, requests, component_kinds)
         barrier_branches.update(str(branch.id) for branch in branches)
+
+    worklist_alignment = (
+        audit_worklist_scope_alignment(provider_worklist, event_families)
+        if provider_worklist is not None
+        else None
+    )
 
     rows: list[dict[str, Any]] = []
     for family in required_families:
@@ -226,12 +237,18 @@ def build_accident_scope_matrix(
             blocking.append(f"{row['family']}: {row['status']}")
     if result.get("total_facility_annual_ir_low_high") is None:
         blocking.append("campaign does not provide total facility annual IR")
+    if worklist_alignment is not None and worklist_alignment["status"] != "ALIGNED":
+        blocking.extend(
+            f"provider worklist alignment: {reason}"
+            for reason in worklist_alignment["blocking_reasons"]
+        )
     return {
         "schema_version": "prism.major_accident_scope.v1",
         "environment": manifest.environment,
         "scope": "outdoor_major_accidents",
         "required_families": list(required_families),
         "scenario_catalog": catalog_audit,
+        "provider_worklist_alignment": worklist_alignment,
         "rows": rows,
         "barrier_branch_ids": sorted(barrier_branches),
         "manifest_family_component_ids": {

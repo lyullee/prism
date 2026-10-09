@@ -23,6 +23,11 @@ def main() -> int:
     parser.add_argument("--equipment-manifest", type=Path, required=True)
     parser.add_argument("--risk-campaign", type=Path, required=True)
     parser.add_argument("--result", type=Path, required=True)
+    parser.add_argument(
+        "--provider-worklist",
+        type=Path,
+        help="optional provider worklist for event/family alignment auditing",
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
         "--required-family",
@@ -42,8 +47,19 @@ def main() -> int:
         if not isinstance(result, dict):
             raise ValueError("campaign result must be a JSON object")
         families = tuple(args.required_families or MAJOR_ACCIDENT_FAMILIES)
+        worklist = (
+            json.loads(args.provider_worklist.read_text(encoding="utf-8"))
+            if args.provider_worklist
+            else None
+        )
+        if worklist is not None and not isinstance(worklist, dict):
+            raise ValueError("provider worklist must be a JSON object")
         matrix = build_accident_scope_matrix(
-            campaign, result, manifest, required_families=families
+            campaign,
+            result,
+            manifest,
+            required_families=families,
+            provider_worklist=worklist,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"accident scope matrix input error: {error}") from error
@@ -60,6 +76,11 @@ def main() -> int:
                 "family_count": len(matrix["rows"]),
                 "blocking_reason_count": len(matrix["blocking_reasons"]),
                 "facility_total_risk_available": matrix["facility_total_risk_available"],
+                "provider_worklist_alignment": (
+                    matrix["provider_worklist_alignment"]["status"]
+                    if matrix["provider_worklist_alignment"] is not None
+                    else None
+                ),
             },
             ensure_ascii=False,
         )

@@ -243,6 +243,34 @@ def test_scope_matrix_tracks_maximum_relief_discharge_as_vent_family():
     assert matrix["manifest_family_component_ids"]["vent_hole"] == ["relief-device"]
 
 
+def test_scope_matrix_can_audit_provider_worklist_primary_family_alignment():
+    manifest, plan, request, conditions = _campaign_inputs()
+    campaign = build_equipment_campaign(
+        manifest, plan, request, conditions, scope_provenance="synthetic worklist alignment"
+    )
+    events = [event.model_dump(mode="json") for event in generate_events(manifest.to_facility(), plan)]
+    worklist = {
+        "work_items": [
+            {
+                "id": f"{event['id']}/provider-release",
+                "event_id": event["id"],
+                "scenario_families": [
+                    "vessel_hole" if event["profile"] == "LH2_VESSEL" else "pipe_hole"
+                ],
+            }
+            for event in events
+        ]
+    }
+    matrix = build_accident_scope_matrix(
+        campaign,
+        {"events": events, "cases": [], "total_facility_annual_ir_low_high": None},
+        manifest,
+        provider_worklist=worklist,
+    )
+    assert matrix["provider_worklist_alignment"]["status"] == "ALIGNED"
+    assert matrix["provider_worklist_alignment"]["provider_packet_created"] is False
+
+
 def test_full_scope_example_exposes_equipment_families_without_inventing_provider_cases():
     root = Path(__file__).parents[1]
     manifest = EquipmentManifest.from_json(

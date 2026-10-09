@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 425,
+  "unit_contract_conservation_tests_passed": 427,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -1756,6 +1756,13 @@
   "provider_worklist_scenario_family_binding_module": "src/lh2_tno/provider_worklist.py",
   "provider_worklist_scenario_family_binding_catalog": "src/lh2_tno/accident_scenario_catalog.py",
   "provider_worklist_scenario_family_binding_policy": "Each frequency event carries declared scenario_families and top-level counts; this does not infer frequency or create a provider packet. Missing packets remain UNCOMPUTED.",
-  "provider_worklist_scenario_family_binding_test_status": "provider worklist and catalogue tests; full portable suite 425 passed",
-  "provider_worklist_scenario_family_binding_record": "results/20261017/provider_worklist_with_scenario_families.json"
+  "provider_worklist_scenario_family_binding_test_status": "provider worklist and catalogue tests; full portable suite 427 passed",
+  "provider_worklist_scenario_family_binding_record": "results/20261017/provider_worklist_with_scenario_families.json",
+  "provider_worklist_scope_alignment_implemented": true,
+  "provider_worklist_scope_alignment_module": "src/lh2_tno/accident_scenario_catalog.py::audit_worklist_scope_alignment",
+  "provider_worklist_scope_alignment_cli": "scripts/build_accident_scope_matrix.py --provider-worklist",
+  "provider_worklist_scope_alignment_schema": "prism.accident_scenario_worklist_alignment.v1",
+  "provider_worklist_scope_alignment_status": "ALIGNED for generic 24-event structural diagnostic; provider packet count remains 0 and facility QRA is withheld",
+  "provider_worklist_scope_alignment_record": "results/20261017/generic_mixed_accident_scope_matrix_with_worklist_alignment.json",
+  "provider_worklist_scope_alignment_test_status": "scope/worklist alignment tests; full portable suite 427 passed"
 }
