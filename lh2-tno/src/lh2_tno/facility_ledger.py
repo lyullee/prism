@@ -423,8 +423,16 @@ def merge_facility_campaign_results(
             family_statuses[str(family)] = "MISSING_SCOPE_MATRIX"
             source_complete = False
             blocking_reasons.append(f"accident family {family}: missing scope matrix")
-        elif all(row.get("status") == "EXECUTED" for row in rows):
-            family_statuses[str(family)] = "EXECUTED"
+        elif all(row.get("status") in {"EXECUTED", "NOT_APPLICABLE"} for row in rows):
+            # A family absent from every contributing manifest is a declared
+            # scope exclusion, not an uncomputed accident. When at least one
+            # campaign contains the family, retain EXECUTED as the aggregate
+            # status even if another disjoint campaign reports it as absent.
+            family_statuses[str(family)] = (
+                "EXECUTED"
+                if any(row.get("status") == "EXECUTED" for row in rows)
+                else "NOT_APPLICABLE"
+            )
         else:
             family_statuses[str(family)] = "PARTIAL"
             source_complete = False

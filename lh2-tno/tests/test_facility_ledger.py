@@ -203,6 +203,24 @@ def test_facility_ledger_withholds_total_for_missing_component_and_family():
     assert result["component_statuses"]["tank-01"] == "PARTIAL"
 
 
+def test_facility_ledger_accepts_not_applicable_accident_family():
+    result = _result(
+        event_id="event-without-pump", asset_id="tank-asset", component_id="tank-01",
+        frequency=1e-3,
+    )
+    merged = merge_facility_campaign_results(
+        [{"campaign_id": "tank-only", "result": result}],
+        expected_component_ids=("tank-01",),
+        scope_matrices=[{
+            "rows": [{"family": "pump_hole", "status": "NOT_APPLICABLE"}],
+        }],
+        required_accident_families=("pump_hole",),
+    )
+    assert merged["accident_family_statuses"]["pump_hole"] == "NOT_APPLICABLE"
+    assert merged["status"] == "FACILITY_SCOPE_EXECUTED"
+    assert merged["facility_total_risk_available"] is True
+
+
 def test_facility_ledger_withholds_total_when_event_case_accounting_is_missing():
     result = _result(
         event_id="event-without-case", asset_id="asset-1", component_id="tank-01",
