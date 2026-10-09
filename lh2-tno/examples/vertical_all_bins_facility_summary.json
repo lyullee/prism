@@ -42,7 +42,13 @@
       "campaign_elapsed_ms_p95": 416065.2817599708,
       "campaign_elapsed_ms_p99": 458694.4245919632,
       "distribution": "across separately executed equipment campaigns; not repeated-run latency"
-    }
+    },
+    "component_status_counts": {
+      "EXCLUDED": 1,
+      "EXECUTED": 3,
+      "PARTIAL": 8
+    },
+    "campaign_count": 5
   },
   "conditional_diagnostic_risk": {
     "worker-01": [
@@ -66,5 +72,9 @@
     "partial accident-family scope",
     "no independent full-chain physical validation",
     "facility IR/F-N withheld"
-  ]
-}\n
+  ],
+  "tests": {
+    "portable_test_count": 492,
+    "portable_test_status": "492 passed"
+  }
+}

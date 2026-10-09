@@ -389,10 +389,12 @@
           "observed_component_count": 11,
           "expected_component_count": 11,
           "component_status_counts": {
-            "MISSING_COVERAGE_LEDGER": 11
+            "EXCLUDED": 1,
+            "EXECUTED": 3,
+            "PARTIAL": 8
           },
           "required_accident_family_count": 12,
-          "scope_blocker_count": 23
+          "scope_blocker_count": 27
         },
         "facility_total_risk_available": false,
         "complete_facility_qra_claim": false
@@ -557,7 +559,7 @@
       "evidence": {
         "implemented": true,
         "module": "src/lh2_tno/service.py",
-        "test_status": "2 single-component monitor tests + 4 facility monitor tests; full portable suite 491 passed",
+        "test_status": "2 single-component monitor tests + 4 facility monitor tests; full portable suite 492 passed",
         "one_hz_fresh_physics_demonstrated": false
       },
       "blocking_reason": null

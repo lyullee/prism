@@ -356,6 +356,41 @@ def test_facility_assessment_combines_ledger_and_frequency_scenarios():
     assert assessment["assessment_digest"]
 
 
+def test_facility_assessment_preserves_an_existing_facility_ledger():
+    first = _result(
+        event_id="event-existing-ledger-a",
+        asset_id="asset-existing-ledger-a",
+        component_id="tank-existing-ledger",
+        frequency=1e-3,
+    )
+    second = _result(
+        event_id="event-existing-ledger-b",
+        asset_id="asset-existing-ledger-b",
+        component_id="pipe-existing-ledger",
+        frequency=2e-3,
+    )
+    ledger = merge_facility_campaign_results(
+        [
+            {"campaign_id": "tank-campaign", "result": first},
+            {"campaign_id": "pipe-campaign", "result": second},
+        ],
+        expected_component_ids=("tank-existing-ledger", "pipe-existing-ledger"),
+    )
+
+    assessment = build_facility_assessment(
+        [ledger],
+        expected_component_ids=("tank-existing-ledger", "pipe-existing-ledger"),
+    )
+
+    assert assessment["facility_risk_ledger"]["campaign_ids"] == ledger["campaign_ids"]
+    assert assessment["facility_risk_ledger"]["component_statuses"] == ledger[
+        "component_statuses"
+    ]
+    assert assessment["conditional_diagnostic_facility_coverage"][
+        "component_status_counts"
+    ] == {"EXECUTED": 2}
+
+
 def test_facility_assessment_reconciles_provider_qualification_coverage():
     result = _result(
         event_id="event-qualified-coverage",

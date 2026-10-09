@@ -33,12 +33,23 @@ def build_facility_assessment(
     component list and any accident-family matrices that are required for a
     facility-total promotion.
     """
-    ledger = merge_facility_campaign_results(
-        campaign_results,
-        expected_component_ids=expected_component_ids,
-        scope_matrices=scope_matrices,
-        required_accident_families=required_accident_families,
-    )
+    # The CLI commonly receives the output of ``merge_facility_campaigns``.
+    # Re-merging that already aggregated ledger as if it were one equipment
+    # campaign discards its component coverage rows and turns every component
+    # into ``MISSING_COVERAGE_LEDGER``.  Preserve the authoritative facility
+    # ledger and only merge when the inputs are actual campaign results.
+    if (
+        len(campaign_results) == 1
+        and campaign_results[0].get("schema_version") == "prism.facility_risk_ledger.v1"
+    ):
+        ledger = dict(campaign_results[0])
+    else:
+        ledger = merge_facility_campaign_results(
+            campaign_results,
+            expected_component_ids=expected_component_ids,
+            scope_matrices=scope_matrices,
+            required_accident_families=required_accident_families,
+        )
     scenarios = tuple(frequency_scenarios)
     uncertainty = (
         literature_frequency_uncertainty(ledger, scenarios)

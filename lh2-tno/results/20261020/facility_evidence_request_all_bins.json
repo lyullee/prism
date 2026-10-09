@@ -19,21 +19,25 @@
     "complete_facility_qra_claim": false
   },
   "blocking_reasons": [
-    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: declared scope is incomplete",
-    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: uncomputed cases remain",
-    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: excluded components remain",
-    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: synthetic release horizon",
-    "component ambient-vaporizer-01: missing coverage ledger row",
-    "component inventory-depletion-pipe-01: missing coverage ledger row",
-    "component isolation-diagnostic-pipe-01: missing coverage ledger row",
-    "component liquid-transfer-line-01: missing coverage ledger row",
-    "component liquid-transfer-pump-01: missing coverage ledger row",
-    "component pressure-relief-vent-01: missing coverage ledger row",
-    "component reliquefier-01: missing coverage ledger row",
-    "component storage-tank-01: missing coverage ledger row",
-    "component transfer-valve-01: missing coverage ledger row",
-    "component two-sided-rupture-pipe-01: missing coverage ledger row",
-    "component vertical-handoff-terminal-pipe-01: missing coverage ledger row",
+    "campaign 442a4eb7da58b4bf7eabb04245d99e74d2eaea32cfc9631445d922e932d1fa50: declared scope is incomplete",
+    "campaign 442a4eb7da58b4bf7eabb04245d99e74d2eaea32cfc9631445d922e932d1fa50: uncomputed cases remain",
+    "campaign 442a4eb7da58b4bf7eabb04245d99e74d2eaea32cfc9631445d922e932d1fa50: excluded components remain",
+    "campaign 442a4eb7da58b4bf7eabb04245d99e74d2eaea32cfc9631445d922e932d1fa50: synthetic release horizon",
+    "campaign 9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12: declared scope is incomplete",
+    "campaign 9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12: uncomputed cases remain",
+    "campaign 9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12: synthetic release horizon",
+    "campaign 7f2c64d78b9f2e4f6624e8154a1c5811183fc7e0b946029c8eede94f965d0f0f: declared scope is incomplete",
+    "campaign 7f2c64d78b9f2e4f6624e8154a1c5811183fc7e0b946029c8eede94f965d0f0f: uncomputed cases remain",
+    "campaign d55c3fdb205089e659d4ebaa83e3696efef64143f3ea537bbd20185f74827c0e: synthetic release horizon",
+    "component ambient-vaporizer-01: PARTIAL",
+    "component liquid-transfer-line-01: PARTIAL",
+    "component liquid-transfer-pump-01: PARTIAL",
+    "component receiving-boundary-01: EXCLUDED",
+    "component reliquefier-01: PARTIAL",
+    "component storage-tank-01: PARTIAL",
+    "component transfer-valve-01: PARTIAL",
+    "component two-sided-rupture-pipe-01: PARTIAL",
+    "component vertical-handoff-terminal-pipe-01: PARTIAL",
     "accident family vessel_hole: PARTIAL",
     "accident family pipe_hole: PARTIAL",
     "accident family valve_hole: PARTIAL",
@@ -380,7 +384,7 @@
   "component_requests": [
     {
       "component_id": "ambient-vaporizer-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -391,7 +395,7 @@
     },
     {
       "component_id": "inventory-depletion-pipe-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "EXECUTED",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -402,7 +406,7 @@
     },
     {
       "component_id": "isolation-diagnostic-pipe-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "EXECUTED",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -413,7 +417,7 @@
     },
     {
       "component_id": "liquid-transfer-line-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -424,7 +428,7 @@
     },
     {
       "component_id": "liquid-transfer-pump-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -435,7 +439,7 @@
     },
     {
       "component_id": "pressure-relief-vent-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "EXECUTED",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -446,7 +450,7 @@
     },
     {
       "component_id": "reliquefier-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -457,7 +461,7 @@
     },
     {
       "component_id": "storage-tank-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -468,7 +472,7 @@
     },
     {
       "component_id": "transfer-valve-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -479,7 +483,7 @@
     },
     {
       "component_id": "two-sided-rupture-pipe-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -490,7 +494,7 @@
     },
     {
       "component_id": "vertical-handoff-terminal-pipe-01",
-      "current_status": "MISSING_COVERAGE_LEDGER",
+      "current_status": "PARTIAL",
       "required_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
@@ -500,7 +504,12 @@
       ]
     }
   ],
-  "excluded_components": [],
+  "excluded_components": [
+    {
+      "component_id": "receiving-boundary-01",
+      "current_status": "EXCLUDED"
+    }
+  ],
   "frequency_policy": {
     "use_documented_literature_frequency_only": true,
     "infer_frequency_from_provider_or_sensor": false,
