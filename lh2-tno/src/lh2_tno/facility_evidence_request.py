@@ -98,7 +98,9 @@ def build_facility_evidence_request(
             family,
             ("provider-specific accident history for the declared family",),
         )
-        strict_uncomputed_case_count = row.get("uncomputed_case_count", 0)
+        strict_uncomputed_case_count = row.get(
+            "strict_uncomputed_case_count", row.get("uncomputed_case_count", 0)
+        )
         family_scope_ready = (
             not_applicable
             or (status == "EXECUTED" and strict_uncomputed_case_count == 0)

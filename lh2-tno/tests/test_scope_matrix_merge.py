@@ -41,6 +41,31 @@ def test_scope_matrix_merge_preserves_partial_family_and_counts_events():
     assert merged["diagnostic_only"] is True
 
 
+def test_scope_matrix_merge_does_not_underreport_legacy_operator_limited_rows():
+    merged = merge_scope_matrices(
+        [{
+            "facility_id": "legacy-breakdown",
+            "rows": [{
+                "family": "pipe_hole",
+                "status": "PARTIAL",
+                "generated_event_count": 30,
+                "case_count": 75,
+                "executed_case_count": 75,
+                # Legacy row underreported this field while retaining the
+                # more detailed operator-limited count.
+                "uncomputed_case_count": 5,
+                "operator_limited_case_count": 25,
+                "fully_validated_case_count": 50,
+            }],
+        }],
+        facility_id="legacy-breakdown-merged",
+        required_families=("pipe_hole",),
+    )
+    row = merged["rows"][0]
+    assert row["uncomputed_case_count"] == 5
+    assert row["strict_uncomputed_case_count"] == 25
+
+
 def test_scope_matrix_merge_preserves_not_applicable_family_and_ignores_it_in_blocking():
     merged = merge_scope_matrices(
         [

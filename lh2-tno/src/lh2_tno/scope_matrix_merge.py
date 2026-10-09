@@ -178,7 +178,10 @@ def merge_scope_matrices(
             "conditional_executed_case_count": conditional_executed_count,
             "conditional_uncomputed_case_count": max(0, case_count - conditional_executed_count),
             "uncomputed_case_count": uncomputed_count,
-            "strict_uncomputed_case_count": uncomputed_count,
+            "strict_uncomputed_case_count": max(
+                uncomputed_count,
+                operator_limited_count + domain_incomplete_count + failed_count,
+            ),
             "generated_initiation_frequency_per_year": frequency,
             "fully_validated_case_count": fully_validated_count,
             "operator_limited_case_count": operator_limited_count,

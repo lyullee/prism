@@ -45,3 +45,5 @@
 범위 병합기에도 family별 완전 계산·운영자 제한·domain incomplete·실패 수와 strict 차단 이유를 보존하도록 추가했다. 따라서 캠페인을 합친 뒤에도 어떤 family의 수치 chain과 어떤 provider 자격이 남아 있는지 추적할 수 있다.
 
 증거 요청서는 family scope 준비 상태와 시설 전체 QRA 승격 상태를 별도 필드로 기록한다. 일부 family가 `EXECUTED`여도 시설 적격 IR/F-N gate가 닫혀 있으면 `facility_promotion_allowed_now=false`로 남는다.
+
+legacy 범위표의 `uncomputed_case_count`가 operator-limited 상세 수보다 작으면 병합기는 상세 수를 사용해 `strict_uncomputed_case_count`를 보수적으로 계산한다. 기존 필드는 호환성을 위해 그대로 보존한다.
