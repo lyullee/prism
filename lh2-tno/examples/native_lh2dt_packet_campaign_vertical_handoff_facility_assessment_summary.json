@@ -1,0 +1,124 @@
+{
+  "schema_version": "prism.native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.v1",
+  "status": "PARTIAL_FACILITY_SCOPE",
+  "assessment_digest": "55597c5f767abbe09c6b3bb9e12449a6ef315836368c21f31875d7fd6e8b41bc",
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_results": [
+    "results/20261019/generic_native_packet_rebound_g1_handoff_result.json",
+    "results/20261019/vertical_handoff_rebound_facility_result.json"
+  ],
+  "facility_ledger_record": "results/20261019/native_campaign_with_vertical_handoff_facility_ledger.json",
+  "assessment_record": "results/20261019/native_campaign_with_vertical_handoff_facility_assessment.json",
+  "vertical_handoff_rebind_provenance_record": "results/20261019/vertical_handoff_rebound_facility.provenance.json",
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "conditional_diagnostic_facility_coverage": {
+    "event_count": 29,
+    "case_count": 34,
+    "uncomputed_case_count": 31,
+    "overlapping_case_uncomputed_count": 31,
+    "risk_atom_count": 104,
+    "case_status_counts": {
+      "EXECUTED": 4,
+      "EXECUTED_OPERATOR_LIMITED": 21,
+      "UNCOMPUTED": 4
+    },
+    "uncomputed_status_counts": {
+      "EXECUTED_DOMAIN_INCOMPLETE": 1,
+      "EXECUTED_OPERATOR_LIMITED": 22,
+      "UNCOMPUTED": 8
+    },
+    "operator_limited_case_count": 21,
+    "explicit_uncomputed_status_count": 4,
+    "failed_case_count": 0,
+    "observed_component_count": 8,
+    "expected_component_count": 8,
+    "component_status_counts": {
+      "EXCLUDED": 1,
+      "EXECUTED": 1,
+      "PARTIAL": 7
+    },
+    "required_accident_family_count": 12,
+    "scope_blocker_count": 23
+  },
+  "event_count": 29,
+  "case_count": 34,
+  "uncomputed_case_count": 31,
+  "risk_atom_count": 104,
+  "observed_component_count": 8,
+  "expected_component_count": 8,
+  "component_statuses": {
+    "ambient-vaporizer-01": "PARTIAL",
+    "liquid-transfer-line-01": "PARTIAL",
+    "liquid-transfer-pump-01": "PARTIAL",
+    "pressure-relief-vent-01": "EXECUTED",
+    "receiving-boundary-01": "EXCLUDED",
+    "reliquefier-01": "PARTIAL",
+    "storage-tank-01": "PARTIAL",
+    "transfer-valve-01": "PARTIAL",
+    "vertical-handoff-terminal-pipe-01": "PARTIAL"
+  },
+  "required_accident_family_count": 12,
+  "accident_family_statuses": {
+    "vessel_hole": "PARTIAL",
+    "pipe_hole": "PARTIAL",
+    "valve_hole": "PARTIAL",
+    "vent_hole": "EXECUTED",
+    "pump_hole": "PARTIAL",
+    "vaporizer_hole": "EXECUTED",
+    "reliquefier_hole": "EXECUTED",
+    "liquid_two_phase": "PARTIAL",
+    "inventory_depletion": "PARTIAL",
+    "inventory_over_600s": "EXECUTED",
+    "two_sided_rupture": "PARTIAL",
+    "vertical_handoff": "PARTIAL"
+  },
+  "vertical_handoff": {
+    "status": "PARTIAL",
+    "generated_event_count": 5,
+    "executed_case_count": 2,
+    "uncomputed_case_count": 10,
+    "provider_handoff_consumed": true,
+    "source_facility_id": "vertical-vent-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "namespace": "generic-lh2-full-scope-example/vertical-handoff",
+    "asset_id": "vertical-handoff-vent",
+    "component_id": "vertical-handoff-terminal-pipe-01",
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "frequency_scenario_count": 5,
+  "frequency_scenario_record": "examples/native_lh2_vertical_handoff_frequency_scenarios.json",
+  "facility_credible_interval": false,
+  "fresh_physics_executed": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "frequency_inference": false,
+  "diagnostic_only": true,
+  "interpretation": "The separate vertical-handoff campaign is explicitly namespaced and merged with the native packet facility ledger. Its five generated events and two executed cases are visible alongside the generic campaigns; ten vertical area-bin cases remain uncomputed, and the explicit receptor map uses a many-to-one endpoint maximum for diagnostic comparison. Synthetic handoff, operator limits, incomplete accident families, and missing facility geometry continue to withhold qualified facility IR/F-N and total risk."
+}

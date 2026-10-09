@@ -183,3 +183,9 @@ G1의 실패를 숨기기 위해 저마하 packet을 바꾸어 넣지 않고, so
 
 최신 감사는 `results/20261019/ijhe_completion_audit_with_native_packet_campaign.json`의 26개 검사 중 새 `diagnostic_native_packet_campaign_execution`을 PASS 진단 전용으로 기록한다. 차단 이유는 적격 현장 packet 부재, 일부 사고군의 불완전성, 시설 IR/F-N 보류라는 3개가 그대로 남는다. 상세 재현 절차는 [네이티브 packet 시설 campaign 감사](PRISM_네이티브패킷_시설캠페인_감사_20261019.md)에 있다.
 
+## 2026-10-19 공통 시설 namespace에서 vertical handoff 결합
+
+별도 `vertical-vent-campaign`의 수직 방출 결과를 공통 시설에 넣을 때 시설 ID만 바꾸면 event·provider packet·설비·수용점이 서로 다른 장부로 남는다. 그래서 `vertical_handoff_campaign.py`가 event ID, provider packet ID, asset/component ID, facility ID를 함께 rebind하고 provenance를 남긴다. 원래 네 수용점은 현재 generic campaign의 `worker-01`에 명시적으로 매핑했으며, 충돌 시 endpoint maximum만 취하는 진단 규칙을 적용했다. 이는 현장 인구·좌표를 만든 것이 아니므로 물리검증이나 QRA 승격을 하지 않는다.
+
+결합한 시설 평가 `results/20261019/native_campaign_with_vertical_handoff_facility_assessment.json`은 generic 24개와 vertical 5개를 합쳐 29개 event, 34개 case, 104개 risk atom을 보며, 5개 문헌 빈도 시나리오에서 vertical event의 선언 진단 빈도를 고정해 재가중한다. vertical handoff는 2개 실행 case와 10개 미계산 case를 가진 `PARTIAL`로 남는다. 따라서 최신 IJHE 감사는 여전히 `INCOMPLETE_EVIDENCE` 27개 검사·3개 blocker이며, 조건부 진단 IR/F-N만 노출하고 시설 전체 IR/F-N·credible interval·qualified provider·물리검증은 보류한다. 상세 수치는 [`vertical handoff 시설 평가 요약`](../examples/native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.json)과 [`시설 campaign 감사`](PRISM_네이티브패킷_시설캠페인_감사_20261019.md)를 사용한다.
+

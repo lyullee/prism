@@ -965,4 +965,9 @@ G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`�
 
 최종 campaign 결과는 시설 ledger로도 재집계했다. 24개 사건과 96개 risk atom에 문헌 빈도 5개 시나리오를 적용한 조건부 진단 결과를 [`examples/native_lh2dt_packet_campaign_facility_assessment_summary.json`](examples/native_lh2dt_packet_campaign_facility_assessment_summary.json)에 보관했다. 20개 운전자 제한과 1개 domain-incomplete 상태가 남아 `facility_total_risk_available=false`이며, 조건부 합산을 자격 있는 시설 IR/F-N으로 표현하지 않는다.
 
+### 별도 vertical handoff 결과의 시설 결합
+
+수직 벤트 모델이 별도 campaign으로 생성한 결과도 `src/lh2_tno/vertical_handoff_campaign.py`를 통해 공통 시설 namespace로 결합할 수 있습니다. 이 과정은 시설 ID, event/provider packet ID, 설비·component ID를 함께 재작성하고, 서로 다른 수용점은 사용자가 지정한 매핑으로만 결합합니다. 현재 예시는 네 수용점을 `worker-01`로 매핑하고 여러 값이 겹치면 endpoint maximum을 취합니다. 이는 진단용 비교 규칙이며 실제 시설 좌표·인구를 대체하지 않습니다.
+
+결합 시설 장부는 29개 event, 34개 case, 104개 risk atom을 기록하고, vertical handoff를 `PARTIAL`로 추적합니다. 2개 실행 case와 10개 미계산 case가 남으므로 조건부 진단 IR/F-N은 표시하되 시설 전체 위험도는 계속 `null`입니다. 문헌 빈도 5개 시나리오와 결합 요약은 [`native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.json`](examples/native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_summary.json), rebind 실행기는 `scripts/rebind_vertical_handoff_campaign.py`입니다. synthetic handoff·operator-limited physics·미계산 사고군·물리검증 부족은 그대로 표시되며 provider 승격이나 빈도 추론은 하지 않습니다.
 
