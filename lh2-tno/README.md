@@ -4,6 +4,26 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
+**2026-10-27 상태 snapshot 방출경계 보완:** 일반 옥외 LH2 매니페스트의 24개
+문헌 사건을 외부 `lh2dt_models` 사고 exporter로 다시 실행해 **24/24 exact
+native packet**을 만들었습니다. 저장탱크·이송배관·밸브·벤트·펌프·기화기·재액화기
+양단 파열 어댑터가 모두 `prism.equipment_state_snapshot.v1` 원문을 요청에 넣고,
+provider가 같은 digest를 echo하는지 검사합니다. 별도
+`results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json`
+은 24개 중 24개를 `BOUND_AND_ECHOED`, digest 불일치 0건으로 기록합니다.
+이 결과는 상태 원문→사고 방출→SLABx-LH2/피해 chain의 진단 입력 보존을 닫은
+것이며, 합성 상태·문헌 빈도·operator-limited 방출·독립 물리검증·qualified
+provider·시설 IR/F-N을 실제 시설 근거로 승격하지 않습니다. 재현 명령과 제한은
+[native 전체범위 상태 snapshot 감사](docs/PRISM_native_전체범위_상태snapshot_방출경계_감사_20261027.md)를
+참조합니다.
+
+같은 24개 catalog packet을 `rebind_campaign_to_worklist_packets.py`로 기존
+문헌 campaign에 다시 넣어 재실행한 결과도 보존합니다. `results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json`은
+24/24 event·case가 native packet identity를 소비하고 24/24 consequence chain을
+실행했으며, snapshot event set 24개와 campaign event set 24개가 재결합됐음을
+기록합니다. 19개 case는 여전히 `EXECUTED_OPERATOR_LIMITED`이고 qualified
+provider·독립 물리검증·시설 전체 IR/F-N은 열리지 않습니다.
+
 **버전 0.6.2 / 기준일 2026-10-24** — 기본 `standard` 분석과 선택형 `lh2` 분석을 공통 실행기에서 선택합니다.
 범용 액화수소시설에 적용하는 인터페이스이며 특정 실증센터의 설비·태그를 필수로 요구하지 않습니다.
 

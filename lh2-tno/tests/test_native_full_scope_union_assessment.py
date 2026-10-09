@@ -59,9 +59,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
     assert verification["ijhe_audit_check_count"] == 21
     assert verification["ijhe_audit_pass_count"] == 17
-    assert verification["state_snapshot_binding_status"] == "PARTIAL_STATE_SNAPSHOT_BINDING"
-    assert verification["state_snapshot_binding_bound_count"] == 2
-    assert verification["state_snapshot_binding_unbound_count"] == 24
+    assert verification["state_snapshot_binding_status"] == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+    assert verification["state_snapshot_binding_record_count"] == 24
+    assert verification["state_snapshot_binding_bound_count"] == 24
+    assert verification["state_snapshot_binding_unbound_count"] == 0
     assert verification["ijhe_audit_blocked_count"] == 4
 
     assert result["event_count"] == 34

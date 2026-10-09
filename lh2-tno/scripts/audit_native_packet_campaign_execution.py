@@ -26,15 +26,26 @@ def main() -> int:
     parser.add_argument("--campaign", type=Path, required=True)
     parser.add_argument("--result", type=Path, required=True)
     parser.add_argument("--provenance", type=Path)
+    parser.add_argument(
+        "--state-snapshot-audit",
+        type=Path,
+        help="Optional native packet state-snapshot audit used for event/component reconciliation.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     campaign = _object(args.campaign)
     result = _object(args.result)
     provenance = _object(args.provenance) if args.provenance else None
-    ledger = build_native_packet_campaign_execution_ledger(campaign, result, provenance)
+    state_snapshot_audit = _object(args.state_snapshot_audit) if args.state_snapshot_audit else None
+    ledger = build_native_packet_campaign_execution_ledger(
+        campaign, result, provenance, state_snapshot_audit
+    )
     ledger["campaign_record"] = str(args.campaign)
     ledger["result_record"] = str(args.result)
     ledger["provenance_record"] = str(args.provenance) if args.provenance else None
+    ledger["state_snapshot_audit_record"] = (
+        str(args.state_snapshot_audit) if args.state_snapshot_audit else None
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({

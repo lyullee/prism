@@ -25,6 +25,10 @@ from lh2_tno.equipment_accident_export import (  # noqa: E402
     export_equipment_gas_accident_history,
 )
 from lh2_tno.equipment_boundary import ResolvedGasReleaseSet  # noqa: E402
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
+)
 
 
 def _tree_digest(root: Path) -> str:
@@ -43,7 +47,7 @@ def _save(path: Path, value: object) -> None:
 
 
 def _request(*, source_digest: str, component_id: str, port_id: str,
-             event_id: str, opening_diameter_m: float, state_digest: str,
+             event_id: str, opening_diameter_m: float, state_snapshot: EquipmentStateSnapshot,
              height_m: float, revision: str) -> AccidentReleaseExportRequest:
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
@@ -64,7 +68,8 @@ def _request(*, source_digest: str, component_id: str, port_id: str,
         "model_package": "lh2dt_models",
         "model_class": "DynamicReliquefier",
         "model_revision": revision,
-        "state_snapshot_digest": state_digest,
+        "state_snapshot_digest": state_snapshot.digest(),
+        "state_snapshot": state_snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit external DynamicReliquefier two-sided rupture diagnostic; not site-calibrated",
         "provider_termination_required": True,
@@ -160,6 +165,7 @@ class TwoSidedReliquefierProvider:
         for port in valves:
             responses[port] = {
                 "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+                "provider_state_snapshot_digest": request["state_snapshot_digest"],
                 "provider_model": "lh2dt.DynamicReliquefier",
                 "provider_source_digest": request["provider_source_digest"],
                 "data": {
@@ -199,10 +205,18 @@ class TwoSidedReliquefierProvider:
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
-    state_payload = vars(args).copy()
-    state_payload.pop("lh2dt_root", None)
-    state_payload.pop("output_dir", None)
     event_id = args.event_id or f"{args.component_id}/two-sided/{args.opening_diameter_m:.12g}m"
+    state_snapshot = EquipmentStateSnapshot.from_mapping({
+        "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        "component_id": args.component_id,
+        "captured_at_s": 0.0,
+        "origin": "synthetic",
+        "pressure_pa_abs": args.inlet_pressure_pa,
+        "temperature_k": args.inlet_temperature_k,
+        "phase": "vapour",
+        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "source_digest": source_digest,
+    })
     provider = TwoSidedReliquefierProvider(root, duration_s=args.duration_s, time_step_s=args.time_step_s,
         fluid_volume_m3=args.fluid_volume_m3, wall_heat_capacity_j_k=args.wall_heat_capacity_j_k,
         fluid_wall_ua_w_k=args.fluid_wall_ua_w_k, boundary_ua_w_k=args.boundary_ua_w_k,
@@ -211,7 +225,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         opening_diameter_m=args.opening_diameter_m, discharge_coefficient=args.discharge_coefficient)
     requests = [_request(source_digest=source_digest, component_id=args.component_id, port_id=port,
                           event_id=event_id, opening_diameter_m=args.opening_diameter_m,
-                          state_digest=canonical_digest(state_payload), height_m=args.nozzle_height_m,
+                          state_snapshot=state_snapshot, height_m=args.nozzle_height_m,
                           revision=args.model_revision) for port in ("reliquefier-accident-out-1", "reliquefier-accident-out-2")]
     results = [export_equipment_gas_accident_history(provider, request) for request in requests]
     releases = tuple(result.release for result in results)
@@ -239,6 +253,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     verification = {
         "status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
         "provider_model": "lh2dt.DynamicReliquefier",
+        "state_snapshot": state_snapshot.to_mapping(),
+        "state_snapshot_handoff": {
+            "present": True,
+            "digest": state_snapshot.digest(),
+            "provider_echo_digest": [result.provider_response.get("provider_state_snapshot_digest") for result in results],
+            "digest_match": all(result.provider_response.get("provider_state_snapshot_digest") == state_snapshot.digest() for result in results),
+        },
         "strict_packet_duration_s": release_set.duration_s,
         "strict_packet_endpoint_count": len(release_set.releases),
         "strict_packet_mass_residual_kg": release_set.cumulative_mass_out_kg - release_set.integrated_mass_kg,

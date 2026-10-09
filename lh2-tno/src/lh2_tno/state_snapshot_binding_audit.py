@@ -8,7 +8,7 @@ valid, and the provider echoes the same digest.
 """
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
+from collections.abc import Iterable, Mapping, Sequence
 from typing import Any
 
 from .state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot
@@ -64,7 +64,15 @@ def _classify(
             elif echo is None:
                 status = "SNAPSHOT_REQUESTED_NO_PROVIDER_ECHO"
                 reason = "canonical snapshot was requested but provider echo digest is absent"
-            elif echo != computed:
+            elif not (
+                echo == computed
+                or (
+                    isinstance(echo, Sequence)
+                    and not isinstance(echo, (str, bytes))
+                    and bool(echo)
+                    and all(item == computed for item in echo)
+                )
+            ):
                 status = "DIGEST_MISMATCH"
                 reason = "provider echo digest does not match the canonical snapshot"
             else:

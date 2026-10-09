@@ -1,0 +1,43 @@
+{
+  "status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.VentStack",
+  "provider_result_digest": "bde228e395dfdf4e6b5a5c3aa7f08c7b53b69d3a5b3f973c00116ae390d1e1ae",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "pressure-relief-vent-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 40.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      2.0
+    ],
+    "measurements": {},
+    "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
+    "provider_echo_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.5,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 0.0,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "steady VentStack two-port result repeated over a synthetic diagnostic horizon",
+    "synthetic upstream pressure/temperature, geometry and atmospheric boundary",
+    "no tank inventory feedback, relief setpoint or site calibration"
+  ]
+}

@@ -10,6 +10,7 @@ def build_native_packet_campaign_execution_ledger(
     campaign: Mapping[str, Any],
     result: Mapping[str, Any],
     provenance: Mapping[str, Any] | None = None,
+    state_snapshot_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Summarise native-packet campaign consumption without promoting QRA claims."""
     routes = campaign.get("event_routes")
@@ -81,6 +82,54 @@ def build_native_packet_campaign_execution_ledger(
         and len(cases) == len(routes)
         and packet_identity_consumed
     )
+    state_snapshot_summary: dict[str, Any] = {
+        "status": None,
+        "event_set_match": None,
+        "campaign_event_count": len(route_ids),
+        "audit_event_count": None,
+        "bound_event_count": None,
+        "unbound_event_ids": [],
+        "component_mismatch_event_ids": [],
+    }
+    if isinstance(state_snapshot_audit, Mapping):
+        snapshot_rows = state_snapshot_audit.get("rows")
+        if isinstance(snapshot_rows, list):
+            snapshot_by_event = {
+                str(row.get("event_id")): row
+                for row in snapshot_rows
+                if isinstance(row, Mapping) and isinstance(row.get("event_id"), str)
+            }
+            bound_ids = {
+                event_id for event_id, row in snapshot_by_event.items()
+                if row.get("status") == "BOUND_AND_ECHOED"
+            }
+            missing_ids = sorted(str(event_id) for event_id in route_ids - bound_ids)
+            campaign_component_by_event = {
+                str(case.get("event_id")): case.get("provider_packet_identity", {}).get("component_id")
+                for case in cases
+                if isinstance(case, Mapping)
+                and isinstance(case.get("event_id"), str)
+                and isinstance(case.get("provider_packet_identity"), Mapping)
+            }
+            component_mismatches = sorted(
+                str(event_id)
+                for event_id in route_ids & set(snapshot_by_event)
+                if isinstance(snapshot_by_event[event_id].get("component_id"), str)
+                and isinstance(campaign_component_by_event.get(event_id), str)
+                and snapshot_by_event[event_id].get("component_id")
+                != campaign_component_by_event.get(event_id)
+            )
+            exact = route_ids == set(snapshot_by_event) and not missing_ids and not component_mismatches
+            state_snapshot_summary = {
+                "status": "STATE_SNAPSHOT_CAMPAIGN_RECONCILED" if exact else "PARTIAL_STATE_SNAPSHOT_CAMPAIGN_RECONCILIATION",
+                "event_set_match": exact,
+                "campaign_event_count": len(route_ids),
+                "audit_event_count": len(snapshot_by_event),
+                "bound_event_count": len(bound_ids),
+                "unbound_event_ids": missing_ids,
+                "component_mismatch_event_ids": component_mismatches,
+                "audit_status": state_snapshot_audit.get("status"),
+            }
     handoff_rebind = (
         provenance
         if isinstance(provenance, Mapping)
@@ -136,6 +185,7 @@ def build_native_packet_campaign_execution_ledger(
             if handoff_rebind is not None
             else None
         ),
+        "state_snapshot_campaign_reconciliation": state_snapshot_summary,
         "diagnostic_only": True,
         "policy": {
             "provider_packet_promoted": provider_packet_promoted,

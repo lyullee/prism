@@ -91,3 +91,36 @@ def test_native_packet_campaign_keeps_uncomputed_cases_without_packet_identity()
     assert ledger["packet_identity_case_count"] == 1
     assert ledger["uncomputed_case_count"] == 1
     assert ledger["uncomputed_without_packet_identity_case_count"] == 1
+
+
+def test_native_packet_campaign_reconciles_state_snapshot_event_set():
+    campaign = {
+        "id": "campaign-state",
+        "event_routes": [{"event_id": "event-1"}],
+    }
+    result = {
+        "events": [{"id": "event-1"}],
+        "cases": [{
+            "event_id": "event-1",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "provider_packet_identity": {"component_id": "tank-1"},
+        }],
+        "risk_atoms": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    audit = {
+        "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+        "rows": [{
+            "event_id": "event-1",
+            "component_id": "tank-1",
+            "status": "BOUND_AND_ECHOED",
+        }],
+    }
+    ledger = build_native_packet_campaign_execution_ledger(
+        campaign, result, state_snapshot_audit=audit
+    )
+    reconciliation = ledger["state_snapshot_campaign_reconciliation"]
+    assert reconciliation["status"] == "STATE_SNAPSHOT_CAMPAIGN_RECONCILED"
+    assert reconciliation["event_set_match"] is True
+    assert reconciliation["bound_event_count"] == 1

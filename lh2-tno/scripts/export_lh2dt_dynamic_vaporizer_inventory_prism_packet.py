@@ -20,11 +20,14 @@ import CoolProp.CoolProp as CP
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
     InventoryReleaseExportRequest,
     export_equipment_inventory_release_history,
+)
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
 )
 
 
@@ -99,7 +102,7 @@ def _coarsen_steps(steps: list[dict[str, Any]], *, duration_s: float, maximum_st
 
 
 def _request(*, source_digest: str, component_id: str, event_id: str | None,
-             port_id: str | None, mode: str, state_digest: str,
+             port_id: str | None, mode: str, state_snapshot: EquipmentStateSnapshot,
              height_m: float, model_class: str, revision: str) -> InventoryReleaseExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return InventoryReleaseExportRequest.from_mapping({
@@ -120,7 +123,8 @@ def _request(*, source_digest: str, component_id: str, event_id: str | None,
         "model_package": "lh2dt_models",
         "model_class": model_class,
         "model_revision": revision,
-        "state_snapshot_digest": state_digest,
+        "state_snapshot_digest": state_snapshot.digest(),
+        "state_snapshot": state_snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": f"explicit external {model_class} inventory-defined diagnostic ({mode}); not site-calibrated",
         "provider_termination_required": True,
@@ -290,6 +294,7 @@ class DynamicGasInventoryProvider:
         )
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+            "provider_state_snapshot_digest": request["state_snapshot_digest"],
             "provider_model": model_class,
             "provider_source_digest": request["provider_source_digest"],
             "data": {
@@ -334,11 +339,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.lh2dt_root.resolve()
     source_digest = _tree_digest(root)
     model_class = "lh2dt.DynamicVaporizer" if args.mode == "vaporizer" else "lh2dt.DynamicReliquefier"
-    state_payload = vars(args).copy()
-    state_payload.pop("lh2dt_root", None)
-    state_payload.pop("output_dir", None)
+    state_snapshot = EquipmentStateSnapshot.from_mapping({
+        "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        "component_id": args.component_id,
+        "captured_at_s": 0.0,
+        "origin": "synthetic",
+        "pressure_pa_abs": args.inlet_pressure_pa,
+        "temperature_k": args.inlet_temperature_k,
+        "phase": "vapour",
+        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "source_digest": source_digest,
+    })
     request = _request(source_digest=source_digest, component_id=args.component_id, event_id=args.event_id,
-                       port_id=args.port_id, mode=args.release_mode, state_digest=canonical_digest(state_payload),
+                       port_id=args.port_id, mode=args.release_mode, state_snapshot=state_snapshot,
                        height_m=args.nozzle_height_m, model_class=model_class, revision=args.model_revision)
     provider = DynamicGasInventoryProvider(root, mode=args.mode, release_mode=args.release_mode,
         duration_s=args.duration_s, time_step_s=args.time_step_s, fluid_volume_m3=args.fluid_volume_m3,
@@ -354,6 +367,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_model": model_class,
         "release_mode": args.release_mode,
         "provider_result_digest": result.provider_result_digest,
+        "state_snapshot": result.request.state_snapshot.to_mapping() if result.request.state_snapshot else None,
+        "state_snapshot_handoff": {
+            "present": result.request.state_snapshot is not None,
+            "digest": result.request.state_snapshot_digest,
+            "provider_echo_digest": result.provider_response.get("provider_state_snapshot_digest"),
+            "digest_match": result.provider_response.get("provider_state_snapshot_digest") == result.request.state_snapshot_digest,
+        },
         "strict_packet_duration_s": result.release.duration_s,
         "strict_packet_interval_count": len(result.release.steps),
         "strict_packet_mass_residual_kg": result.release.cumulative_mass_out_kg - result.release.integrated_mass_kg,

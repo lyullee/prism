@@ -20,11 +20,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
     EmergencyReliefExportRequest,
     export_equipment_emergency_relief_history,
+)
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
 )
 
 
@@ -43,7 +46,7 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def _request(*, source_digest: str, component_id: str, port_id: str | None, event_id: str | None, state_digest: str, height_m: float, revision: str) -> EmergencyReliefExportRequest:
+def _request(*, source_digest: str, component_id: str, port_id: str | None, event_id: str | None, state_snapshot: EquipmentStateSnapshot, height_m: float, revision: str) -> EmergencyReliefExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return EmergencyReliefExportRequest.from_mapping({
         "schema_version": "prism.equipment_emergency_relief_export_request.v1",
@@ -62,7 +65,8 @@ def _request(*, source_digest: str, component_id: str, port_id: str | None, even
         "model_package": "lh2dt_models",
         "model_class": "VentStack",
         "model_revision": revision,
-        "state_snapshot_digest": state_digest,
+        "state_snapshot_digest": state_snapshot.digest(),
+        "state_snapshot": state_snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit external VentStack maximum-relief-discharge diagnostic over bounded horizon; not site-calibrated",
         "provider_termination_required": True,
@@ -143,6 +147,7 @@ class VentStackAccidentProvider:
         }
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+            "provider_state_snapshot_digest": request["state_snapshot_digest"],
             "provider_model": "lh2dt.VentStack",
             "provider_source_digest": request["provider_source_digest"],
             "data": data,
@@ -163,8 +168,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "integration_segments": args.integration_segments,
     }
     upstream = {"pressure_pa": args.inlet_pressure_pa, "temperature_k": args.inlet_temperature_k}
-    state_digest = canonical_digest({"stack": stack, "upstream": upstream, "duration_s": args.duration_s, "time_step_s": args.time_step_s})
-    request = _request(source_digest=source_digest, component_id=component_id, port_id=args.port_id, event_id=args.event_id, state_digest=state_digest, height_m=args.nozzle_height_m, revision=args.model_revision)
+    state_snapshot = EquipmentStateSnapshot.from_mapping({
+        "schema_version": EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        "component_id": component_id,
+        "captured_at_s": 0.0,
+        "origin": "synthetic",
+        "pressure_pa_abs": args.inlet_pressure_pa,
+        "temperature_k": args.inlet_temperature_k,
+        "phase": "vapour",
+        "position_enu_m": [0.0, 0.0, args.nozzle_height_m],
+        "source_digest": source_digest,
+    })
+    request = _request(source_digest=source_digest, component_id=component_id, port_id=args.port_id, event_id=args.event_id, state_snapshot=state_snapshot, height_m=args.nozzle_height_m, revision=args.model_revision)
     provider = VentStackAccidentProvider(root, duration_s=args.duration_s, time_step_s=args.time_step_s, stack=stack, upstream=upstream, ambient_temperature_k=args.ambient_temperature_k)
     result = export_equipment_emergency_relief_history(provider, request)
     release = result.release.model_dump(mode="json")
@@ -172,6 +187,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
         "provider_model": "lh2dt.VentStack",
         "provider_result_digest": result.provider_result_digest,
+        "state_snapshot": result.request.state_snapshot.to_mapping() if result.request.state_snapshot else None,
+        "state_snapshot_handoff": {
+            "present": result.request.state_snapshot is not None,
+            "digest": result.request.state_snapshot_digest,
+            "provider_echo_digest": result.provider_response.get("provider_state_snapshot_digest"),
+            "digest_match": result.provider_response.get("provider_state_snapshot_digest") == result.request.state_snapshot_digest,
+        },
         "strict_packet_duration_s": result.release.duration_s,
         "strict_packet_interval_count": len(result.release.steps),
         "strict_packet_mass_residual_kg": result.release.cumulative_mass_out_kg - result.release.integrated_mass_kg,

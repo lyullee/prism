@@ -76,6 +76,22 @@ def test_snapshot_digest_mismatch_is_fail_closed():
     assert report["digest_mismatch_count"] == 1
 
 
+def test_two_sided_provider_echo_list_is_bound_when_both_endpoints_echo():
+    snapshot = _snapshot()
+    report = build_state_snapshot_binding_audit(diagnostic_records=[{
+        "event_id": "two-sided",
+        "component_id": "tank-1",
+        "state_snapshot": snapshot.to_mapping(),
+        "state_snapshot_handoff": {
+            "present": True,
+            "digest": snapshot.digest(),
+            "provider_echo_digest": [snapshot.digest(), snapshot.digest()],
+        },
+    }])
+    assert report["status"] == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+    assert report["bound_count"] == 1
+
+
 def test_campaign_without_payload_is_unbound_even_when_release_exists():
     report = build_state_snapshot_binding_audit({
         "event_routes": [{

@@ -1,0 +1,57 @@
+{
+  "status": "EXTERNAL_LH2DT_DYNAMIC_PIPE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.DynamicHEMPipe",
+  "provider_result_digest": "96a89fcce9d5e9c4efd115f21eb190deeff01127393c311a963b6b7c8b187046",
+  "strict_packet_duration_s": 0.001,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": -3.308722450212111e-24,
+  "strict_packet_energy_residual_j": 0.0,
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "liquid-transfer-line-01",
+    "captured_at_s": 0.0,
+    "origin": "model_prediction",
+    "pressure_pa_abs": 250000.0,
+    "temperature_k": 20.5,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": null,
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {
+      "inlet_pressure": {
+        "quantity": "pressure",
+        "value_si": 250000.0,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      },
+      "inlet_temperature": {
+        "quantity": "temperature",
+        "value_si": 20.5,
+        "sensor_location": "liquid-transfer-line-01.fluid_volume",
+        "quality": "valid"
+      }
+    },
+    "source_digest": null,
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+    "provider_echo_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+    "digest_match": true
+  },
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic DynamicHEMPipe geometry, inlet state, full-bore opening and atmospheric boundary",
+    "short fixed diagnostic horizon retains residual pipe inventory",
+    "flash/airborne-liquid closure and site calibration are not supplied"
+  ]
+}

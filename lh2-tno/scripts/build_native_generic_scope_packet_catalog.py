@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.equipment_manifest import EquipmentManifest
 from lh2_tno.frequency import FrequencyPlan, FrequencyEvent, generate_events
+from lh2_tno.state_snapshot_binding_audit import build_state_snapshot_binding_audit
 
 
 def _save(path: Path, value: Any) -> None:
@@ -178,6 +179,30 @@ def _load_packet(spec: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     raise ValueError("exporter produced neither resolved_release.json nor resolved_release_set.json")
 
 
+def _load_state_binding_record(spec: dict[str, Any]) -> dict[str, Any]:
+    """Load the exporter verification ledger without inferring state from a release.
+
+    A native packet may be usable for structural consequence tests while its
+    process-state handoff is absent.  The catalog therefore records the
+    verification file as a separate audit input and leaves absent snapshots
+    unbound instead of reconstructing one from release values.
+    """
+
+    path = Path(spec["event_dir"]) / "verification.json"
+    record: dict[str, Any] = {
+        "event_id": spec["event_id"],
+        "component_id": spec["component_id"],
+        "_record_path": str(path),
+    }
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return record
+    if isinstance(value, dict):
+        record.update(value)
+    return record
+
+
 def _replace_flag(command: list[str], flag: str, value: str) -> list[str]:
     """Return a command with one explicit CLI flag replaced."""
 
@@ -260,6 +285,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
     source_digest = _tree_digest(args.lh2dt_root.resolve())
     rows: list[dict[str, Any]] = []
     successful: list[tuple[dict[str, Any], str, dict[str, Any]]] = []
+    state_binding_records: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
     for event_index, event in enumerate(events):
         spec = _spec(event, manifest, output_dir, args.lh2dt_root.resolve(), event_index=event_index)
@@ -297,6 +323,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             row["stderr_tail"] = completed.stderr[-2000:]
             failures.append(row)
             rows.append(row)
+            state_binding_records.append(_load_state_binding_record(spec))
             continue
         try:
             kind, packet = _load_packet(spec)
@@ -308,6 +335,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             row["errors"] = errors
             failures.append(row)
             rows.append(row)
+            state_binding_records.append(_load_state_binding_record(spec))
             continue
         row.update({
             "status": "EXACT_NATIVE_PACKET",
@@ -316,6 +344,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
         })
         successful.append((spec, kind, packet))
         rows.append(row)
+        state_binding_records.append(_load_state_binding_record(spec))
 
     accidental = [packet for spec, kind, packet in successful if kind == "release" and packet.get("event_kind") == "accidental_leak"]
     relief = [packet for spec, kind, packet in successful if kind == "release" and packet.get("event_kind") == "emergency_relief"]
@@ -323,6 +352,14 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
     _save(output_dir / "accidental_catalog.json", {"releases": accidental})
     _save(output_dir / "emergency_relief_catalog.json", {"releases": relief})
     _save(output_dir / "two_sided_catalog.json", {"release_sets": rupture})
+    state_binding_audit = build_state_snapshot_binding_audit(
+        diagnostic_records=state_binding_records,
+    )
+    state_binding_audit["inputs"] = {
+        "verification_records": [record.get("_record_path") for record in state_binding_records],
+        "catalog_output": str(output_dir),
+    }
+    _save(output_dir / "state_snapshot_binding_audit.json", state_binding_audit)
     verification = {
         "schema_version": "prism.native_generic_scope_packet_catalog.v1",
         "status": "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED" if not failures else "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_PARTIAL",
@@ -344,6 +381,14 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             "accidental_release": "accidental_catalog.json",
             "emergency_relief": "emergency_relief_catalog.json",
             "two_sided_rupture": "two_sided_catalog.json",
+        },
+        "state_snapshot_binding": {
+            "audit": "state_snapshot_binding_audit.json",
+            "status": state_binding_audit["status"],
+            "record_count": state_binding_audit["record_count"],
+            "bound_count": state_binding_audit["bound_count"],
+            "unbound_count": state_binding_audit["unbound_count"],
+            "digest_mismatch_count": state_binding_audit["digest_mismatch_count"],
         },
         "provider_packet_promoted": False,
         "frequency_inference_performed": False,

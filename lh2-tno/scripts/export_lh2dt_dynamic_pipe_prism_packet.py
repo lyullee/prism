@@ -212,6 +212,7 @@ class DynamicPipeAccidentProvider:
         }
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+            "provider_state_snapshot_digest": request["state_snapshot_digest"],
             "provider_model": "lh2dt.DynamicHEMPipe",
             "provider_source_digest": request["provider_source_digest"],
             "data": data,
@@ -281,7 +282,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "state_snapshot_handoff": {
             "present": result.request.state_snapshot is not None,
             "schema_version": (
-                result.request.state_snapshot.get("schema_version")
+                result.request.state_snapshot.schema_version
                 if result.request.state_snapshot is not None
                 else None
             ),

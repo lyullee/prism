@@ -1,0 +1,43 @@
+{
+  "status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.Valve",
+  "provider_result_digest": "e3a13612bafc4abe0a92aad31f1201513d61cffe3298754274917d6ebeab9b55",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "transfer-valve-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 250000.0,
+    "temperature_k": 20.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "liquid",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      0.5
+    ],
+    "measurements": {},
+    "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+    "provider_echo_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.2,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": 0.0,
+  "strict_packet_energy_residual_j": 1.7763568394002505e-15,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic liquid state, full-open Valve boundary and bounded diagnostic horizon",
+    "valve owns no inventory; available mass is explicit feed-through reserve",
+    "no valve failure/isolation reliability, field frequency or independent physical validation"
+  ]
+}

@@ -41,13 +41,13 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261026\\native_full_scope_union_assessment\\state_snapshot_binding_audit.json",
+        "record": "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json",
         "schema_version": "prism.state_snapshot_binding_audit.v1",
-        "status": "PARTIAL_STATE_SNAPSHOT_BINDING",
-        "record_count": 26,
-        "bound_count": 2,
+        "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+        "record_count": 24,
+        "bound_count": 24,
         "declared_digest_only_count": 0,
-        "unbound_count": 24,
+        "unbound_count": 0,
         "digest_mismatch_count": 0,
         "policy": {
           "canonical_schema": "prism.equipment_state_snapshot.v1",
