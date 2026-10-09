@@ -34,6 +34,12 @@ class Pipeline:
 class RiskPipeline(Pipeline):
     def consequences(self, request):
         result = super().consequences(request)
+        result['data']['ignition_branch_probabilities'] = {
+            'direct_fire': 0.25,
+            'delayed_flash_fire': 0.35,
+            'delayed_explosion': 0.10,
+            'no_ignition': 0.30,
+        }
         result['data']['receptors'] = [{
             'id': 'worker-01',
             'harm_given_observed_release_low_high': [0.2, 0.4],
@@ -261,6 +267,9 @@ def test_facility_realtime_monitor_aggregates_component_provenance_and_deadlines
     assert ranking['stale_or_zero_fallback_used'] is False
     assert result['aggregate']['equipment_release_path_component_count'] == 0
     assert result['aggregate']['equipment_release_path_withheld_component_count'] == 2
+    ignition = result['aggregate']['current_weather_ignition_accounting']
+    assert ignition['status'] == 'WITHHELD_CURRENT_WEATHER_IGNITION_ACCOUNTING'
+    assert ignition['weighted_branch_frequency_per_year'] is None
     assert result['components']['storage-tank-01']['frame_digest']
     assert result['components']['transfer-pump-01']['mapping_digest']
 
@@ -369,6 +378,13 @@ def test_realtime_monitor_uses_explicit_literature_frequency_for_current_weather
     assert result['aggregate']['current_weather_frequency_sensitivity_ir_low_high']['p95']['worker-01'] == pytest.approx(
         [4.0e-5, 8.0e-5]
     )
+    ignition = result['aggregate']['current_weather_ignition_accounting']
+    assert ignition['status'] == 'AVAILABLE_CURRENT_WEATHER_IGNITION_ACCOUNTING'
+    assert ignition['component_rows']['storage-tank-01']['branch_probabilities']['direct_fire'] == pytest.approx(0.25)
+    assert ignition['weighted_branch_frequency_per_year']['direct_fire'] == pytest.approx(2.5e-5)
+    assert ignition['weighted_branch_frequency_per_year']['no_ignition'] == pytest.approx(3.0e-5)
+    assert ignition['frequency_reallocation_performed'] is False
+    assert ignition['facility_ir_fn_promotion'] is False
     ranking = result['aggregate']['component_risk_ranking']
     assert ranking['status'] == 'AVAILABLE_CURRENT_WEATHER_COMPONENT_RANKING'
     assert ranking['available_component_count'] == 1

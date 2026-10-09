@@ -667,6 +667,76 @@ def _realtime_current_weather_risk(
     }
 
 
+def _realtime_ignition_accounting(
+    result: Mapping[str, object], frequency: RealtimeFrequencyBinding | None
+) -> dict[str, object]:
+    """Preserve provider ignition branches for one current consequence result.
+
+    The provider consequence output owns the branch probabilities.  This helper
+    only validates that the four declared outdoor branches are present and, when
+    a reviewed literature frequency is supplied, applies the same explicit
+    condition/release/occupancy weight used by the realtime IR helper.  It never
+    learns ignition or frequency from telemetry and never fills a missing branch.
+    """
+    branches = ("direct_fire", "delayed_flash_fire", "delayed_explosion", "no_ignition")
+    data = result.get("data")
+    reported = data.get("ignition_branch_probabilities") if isinstance(data, Mapping) else None
+    if not isinstance(reported, Mapping) or set(reported) != set(branches):
+        return {
+            "status": "WITHHELD_MISSING_IGNITION_BRANCHES",
+            "branch_probabilities": None,
+            "weighted_branch_frequency_per_year": None,
+            "frequency_inference_performed": False,
+            "reason": "provider consequence result did not expose the complete outdoor ignition branch set",
+        }
+    probabilities: dict[str, float] = {}
+    for branch in branches:
+        value = reported.get(branch)
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(float(value))
+            or not 0.0 <= float(value) <= 1.0
+        ):
+            return {
+                "status": "WITHHELD_INVALID_IGNITION_BRANCHES",
+                "branch_probabilities": None,
+                "weighted_branch_frequency_per_year": None,
+                "frequency_inference_performed": False,
+                "reason": f"ignition branch {branch} is not a finite probability in [0, 1]",
+            }
+        probabilities[branch] = float(value)
+    if not math.isclose(sum(probabilities.values()), 1.0, rel_tol=0.0, abs_tol=1.0e-10):
+        return {
+            "status": "WITHHELD_INVALID_IGNITION_BRANCHES",
+            "branch_probabilities": None,
+            "weighted_branch_frequency_per_year": None,
+            "frequency_inference_performed": False,
+            "reason": "ignition branch probabilities do not close to one",
+        }
+    weighted_rates = None
+    frequency_metadata = None
+    if frequency is not None:
+        weighted_frequency = frequency.weighted_frequency()
+        weighted_rates = {
+            branch: weighted_frequency * probabilities[branch] for branch in branches
+        }
+        frequency_metadata = {
+            "event_id": frequency.event_id,
+            "source_digest": frequency.source_digest,
+            "provenance": frequency.provenance,
+            "weighted_frequency_per_year": weighted_frequency,
+        }
+    return {
+        "status": "AVAILABLE_IGNITION_BRANCHES",
+        "branch_probabilities": probabilities,
+        "weighted_branch_frequency_per_year": weighted_rates,
+        "frequency": frequency_metadata,
+        "frequency_inference_performed": False,
+        "reason": "provider ignition branch probabilities were retained without branch substitution",
+    }
+
+
 def _realtime_component_risk_ranking(
     component_ids: Sequence[str], components: Mapping[str, Mapping[str, object]]
 ) -> dict[str, object]:
@@ -1134,6 +1204,9 @@ class FacilityRealtimeConsequenceMonitor:
                             "provider_release_resolved": False,
                         },
                     ),
+                    "ignition": _realtime_ignition_accounting(
+                        result, binding.frequency_binding
+                    ),
                     "risk": _realtime_current_weather_risk(
                         result, binding.frequency_binding
                     ),
@@ -1176,6 +1249,65 @@ class FacilityRealtimeConsequenceMonitor:
             row.get("status") == "AVAILABLE_PROVIDER_RELEASE_PATH"
             for row in release_path_rows
         )
+        ignition_rows = {
+            component_id: entry["ignition"]
+            for component_id, entry in components.items()
+            if entry.get("status") == "ACCEPTED" and isinstance(entry.get("ignition"), Mapping)
+        }
+        available_ignition_rows = {
+            component_id: row
+            for component_id, row in ignition_rows.items()
+            if row.get("status") == "AVAILABLE_IGNITION_BRANCHES"
+        }
+        ignition_branch_rates = None
+        if len(available_ignition_rows) == len(component_ids) and component_ids:
+            branch_names = (
+                "direct_fire",
+                "delayed_flash_fire",
+                "delayed_explosion",
+                "no_ignition",
+            )
+            totals = {branch: 0.0 for branch in branch_names}
+            complete_rates = True
+            for row in available_ignition_rows.values():
+                rates = row.get("weighted_branch_frequency_per_year")
+                if not isinstance(rates, Mapping) or set(rates) != set(branch_names):
+                    complete_rates = False
+                    break
+                for branch in branch_names:
+                    value = rates.get(branch)
+                    if (
+                        isinstance(value, bool)
+                        or not isinstance(value, (int, float))
+                        or not math.isfinite(float(value))
+                        or float(value) < 0.0
+                    ):
+                        complete_rates = False
+                        break
+                    totals[branch] += float(value)
+                if not complete_rates:
+                    break
+            if complete_rates:
+                ignition_branch_rates = totals
+        if not ignition_rows:
+            ignition_status = "NO_ACCEPTED_COMPONENTS"
+        elif len(available_ignition_rows) == len(component_ids):
+            ignition_status = "AVAILABLE_CURRENT_WEATHER_IGNITION_ACCOUNTING"
+        elif available_ignition_rows:
+            ignition_status = "PARTIAL_CURRENT_WEATHER_IGNITION_ACCOUNTING"
+        else:
+            ignition_status = "WITHHELD_CURRENT_WEATHER_IGNITION_ACCOUNTING"
+        ignition_accounting = {
+            "status": ignition_status,
+            "component_count": len(component_ids),
+            "available_component_count": len(available_ignition_rows),
+            "withheld_component_count": len(component_ids) - len(available_ignition_rows),
+            "component_rows": ignition_rows,
+            "weighted_branch_frequency_per_year": ignition_branch_rates,
+            "frequency_reallocation_performed": False,
+            "facility_ir_fn_promotion": False,
+            "frequency_inference_performed": False,
+        }
         component_risk_rows = {
             component_id: entry["risk"]
             for component_id, entry in components.items()
@@ -1267,6 +1399,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "equipment_release_path_component_count": release_path_available_count,
                 "equipment_release_path_withheld_component_count": len(accepted)
                 - release_path_available_count,
+                "current_weather_ignition_accounting": ignition_accounting,
                 "current_weather_annual_ir_low_high": (
                     current_weather_ir if current_weather_risk_available else None
                 ),
