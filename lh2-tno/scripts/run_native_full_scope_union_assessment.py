@@ -433,9 +433,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "independent-event p05/p95 scenarios use fixed declared rates for events without published bounds",
             "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
             "inventory depletion population, weather and geometry remain synthetic diagnostics",
-            "the native state snapshot reconciliation covers only the base 24-event packet campaign; "
-            "vertical-handoff and inventory-depletion extension events require their own state snapshot "
-            "records before they can be treated as state-bound",
+            "the native state snapshot reconciliation covers the base 24-event packet campaign; "
+            "vertical-handoff and inventory-depletion extension events have separate state snapshot "
+            "records and are state-bound for diagnostic accounting, but their synthetic "
+            "model-prediction origin does not qualify field evidence",
             "extension state coverage is audited per event; release values and result digests are never "
             "used to reconstruct a missing canonical equipment state snapshot",
         ],
