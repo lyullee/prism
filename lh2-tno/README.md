@@ -991,3 +991,16 @@ G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`�
 
 최신 다중 campaign 요약은 [`isolation 포함 시설 평가`](examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json)입니다. 전체는 41개 event, 70개 case, 240개 atom, 11개 component이며, 이 결과도 조건부 진단 IR/F-N만 제공하고 시설 전체 위험도는 `false`로 유지합니다. 성공 branch를 실패 branch의 대체값으로 사용하지 않으며, synthetic 종료시계와 실제 차단 신뢰도 부족은 IJHE 감사 blocker로 남습니다.
 
+### 다음 실증자료를 위한 evidence request
+
+현재 시설 평가와 사고범위 matrix에서 남은 증거 요구사항은 `src/lh2_tno/facility_evidence_request.py`가 자동으로 정리합니다. 다음처럼 최신 평가와 병합 matrix를 넣으면 설비별·사고군별 provider 자료 목록이 생성됩니다.
+
+```powershell
+$py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').FullName
+& $py scripts/build_facility_evidence_request.py `
+  --assessment results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_facility_assessment.json `
+  --scope-matrix results/20261019/generic_vertical_two_sided_merged_scope_matrix.json `
+  --output results/20261019/facility_evidence_request.json
+```
+
+출력은 `prism.external_accident_history.v1` provider packet, 정확한 component·port·개구·위치·방향, provider 소유 시간 이력과 종료근거, 재고·질량·에너지 폐합, 독립 물리검증을 요구한다. 현재 12개 사고군과 11개 component를 `OPEN_EVIDENCE_REQUEST`로 표시하며, 문헌 빈도를 센서나 provider 결과에서 추정하지 않는다. 실제 provider packet과 검증자료가 들어오기 전에는 이 요청서가 시설 IR/F-N 승격을 열지 않는다.

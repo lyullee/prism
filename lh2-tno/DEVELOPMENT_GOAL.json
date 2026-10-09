@@ -1736,5 +1736,16 @@
   "isolation_diagnostic_facility_merge_failure_horizon_case_count": 10,
   "isolation_diagnostic_facility_merge_physical_validation_claim": false,
   "isolation_diagnostic_facility_merge_frequency_inference": false,
-  "isolation_diagnostic_facility_merge_facility_qra_claim": false
+  "isolation_diagnostic_facility_merge_facility_qra_claim": false,
+  "facility_evidence_request_implemented": true,
+  "facility_evidence_request_module": "src/lh2_tno/facility_evidence_request.py",
+  "facility_evidence_request_script": "scripts/build_facility_evidence_request.py",
+  "facility_evidence_request_schema": "prism.facility_evidence_request.v1",
+  "facility_evidence_request_record": "examples/facility_evidence_request_summary.json",
+  "facility_evidence_request_status": "OPEN_EVIDENCE_REQUEST; 12 accident families and 11 components enumerated; no frequency inference or QRA promotion",
+  "facility_evidence_request_family_count": 12,
+  "facility_evidence_request_component_count": 11,
+  "facility_evidence_request_provider_schema": "prism.external_accident_history.v1",
+  "facility_evidence_request_frequency_inference": false,
+  "facility_evidence_request_facility_qra_claim": false
 }

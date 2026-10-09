@@ -209,3 +209,8 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 
 이 결과를 generic·vertical handoff·two-sided rupture·inventory depletion과 함께 합치면 41개 event, 70개 case, 240개 risk atom, 11개 component가 된다. 빈도는 기존 문헌 pipe rate를 명시적으로 고정하며, 이 추가 campaign에서 빈도를 학습하거나 새로 추정하지 않는다. 실패 horizon과 synthetic 입력은 계속 제한으로 표시되므로 전체 시설 IR/F-N은 보류한다.
 
+## 2026-10-19 미완료 증거 요청을 자동화
+
+부분 시설 평가의 다음 입력을 명확히 하기 위해 `facility_evidence_request.py`와 CLI를 추가했다. 최신 assessment와 5개 source matrix를 병합한 사고범위 matrix를 넣으면 12개 사고군·11개 component별로 필요한 실제 provider 근거를 나열한다. 요구사항은 exact event/component/port/opening, 방출 시간 이력과 종료 basis, 차단 및 재고 소진, 질량·에너지 폐합, `prism.external_accident_history.v1` schema, 독립 물리검증이다.
+
+요청서의 상태는 `OPEN_EVIDENCE_REQUEST`이며 문헌 빈도는 복사하지 않고, 센서나 provider packet에서 빈도를 학습하지 않는다. 따라서 이 자동화는 다음 실증 데이터의 입구를 만든 것이고 시설 total IR/F-N을 조기 승격하는 기능이 아니다. 현재 생성된 요약은 [`facility_evidence_request_summary.json`](../examples/facility_evidence_request_summary.json)이다.

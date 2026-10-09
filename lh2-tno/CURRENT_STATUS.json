@@ -2371,5 +2371,16 @@
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_physical_validation_claim": false,
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_frequency_inference": false,
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_provider_packet_promoted": false,
-  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_scope_blocker_count": 27
+  "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_scope_blocker_count": 27,
+  "facility_evidence_request_implemented": true,
+  "facility_evidence_request_module": "src/lh2_tno/facility_evidence_request.py",
+  "facility_evidence_request_script": "scripts/build_facility_evidence_request.py",
+  "facility_evidence_request_schema": "prism.facility_evidence_request.v1",
+  "facility_evidence_request_record": "examples/facility_evidence_request_summary.json",
+  "facility_evidence_request_status": "OPEN_EVIDENCE_REQUEST; 12 accident families and 11 components enumerated; no frequency inference or QRA promotion",
+  "facility_evidence_request_family_count": 12,
+  "facility_evidence_request_component_count": 11,
+  "facility_evidence_request_provider_schema": "prism.external_accident_history.v1",
+  "facility_evidence_request_frequency_inference": false,
+  "facility_evidence_request_facility_qra_claim": false
 }
