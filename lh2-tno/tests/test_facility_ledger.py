@@ -123,6 +123,9 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["scenario_branch_accounting"]["release_branches"]["release-1"][
         "risk_atom_count"
     ] == 2
+    assert result["scenario_branch_accounting"]["release_branches"]["release-1"][
+        "weighted_frequency_per_year"
+    ] == pytest.approx(0.002)
     assert result["scenario_branch_accounting"]["ignition_branches"]["direct_fire"][
         "event_count"
     ] == 2
@@ -439,6 +442,7 @@ def test_facility_ledger_preserves_weather_and_termination_branch_metadata():
         "explicit_provider_termination": 1,
         "model_pressure_equalization": 1,
     }
+    assert branches["release_branches"]["release-1"]["weighted_frequency_per_year"] == pytest.approx(1e-3)
     assert branches["ignition_branches"]["direct_fire"]["positive_harm_atom_count"] == 1
 
 
