@@ -1,0 +1,71 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "native-reliquefier-diagnostic",
+  "port_id": "native-reliquefier-gas-out",
+  "event_id": "native-reliquefier/accidental-leak-001",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "native external DynamicReliquefier finite-volume accident export; synthetic geometry and state",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_result_digest": "a442d00f9c1cdb49b8ed57c6016232ce8f6d11509e9ba902565f24b5f76d100a",
+  "provider_boundary_reference": "lh2dt.DynamicReliquefier.export_accident_history native gas outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.1,
+  "available_mass_kg": 0.0008198175196090351,
+  "cumulative_mass_out_kg": 1.0508063795789736e-06,
+  "cumulative_static_enthalpy_out_j": 4.159387305619444,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 2.1016127591579473e-05,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3958281.3603453613,
+      "temperature_k": 300.00005299820754,
+      "density_kg_m3": 0.08184047334386349,
+      "effective_area_m2": 4.908738521234052e-06,
+      "velocity_m_s": 52.31360696435685,
+      "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    },
+    {
+      "time_s": 0.05,
+      "mass_flow_kg_s": 0.0,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3788932.532138952,
+      "temperature_k": 288.15,
+      "density_kg_m3": 0.08520493577522305,
+      "effective_area_m2": 4.908738521234052e-06,
+      "velocity_m_s": 0.0,
+      "area_provenance": "explicit atmospheric valve area scaled by stroke state",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null
+    }
+  ],
+  "termination_provenance": "DynamicVaporizer finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.0025
+}

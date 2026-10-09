@@ -1,0 +1,30 @@
+{
+  "schema_version": "prism.native_lh2dt_vent_stack_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.vent_stack.VentStack",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_method": "export_accident_history",
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_result_digest": "9c114f65455eb1f7faf4f6b2724951f41f3b54e3ac9dd731aaa6088877c753a7",
+  "provider_packet_promoted": false,
+  "termination_basis": "synthetic_diagnostic_horizon",
+  "duration_s": 0.1,
+  "available_mass_kg": 1.0,
+  "cumulative_mass_out_kg": 3.827489552640163e-05,
+  "mass_reserve_remaining_kg": 0.9999617251044736,
+  "hydraulic": {
+    "mass_flow_kg_s": null,
+    "reynolds_number": null,
+    "pressure_drop_pa": null
+  },
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic upstream gas state, stack geometry and bounded horizon",
+    "VentStack owns no upstream inventory, relief setpoint or isolation reliability",
+    "native compact source trace is preserved in provider_response.json but not promoted to the incomplete strict source-state schema",
+    "diagnostic only; no field frequency or independent physical validation"
+  ]
+}
