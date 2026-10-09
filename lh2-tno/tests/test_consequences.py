@@ -5,7 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import numpy as np
 import pytest
-from lh2_tno.chain_worker import (box_fractions, branch_mass, dose_harm,
+from lh2_tno.chain_worker import (box_axis_domain_overlap_fractions, box_axis_overlap_fractions, box_fractions, branch_mass, dose_harm,
     mole_fraction, pulse_mass, weighted_union_harm, wind_conditioned_handoff)
 from lh2_tno.consequences import ConsequenceRequest
 
@@ -27,6 +27,16 @@ def test_grid_boundary_preserves_known_half_inventory():
     f=box_fractions(edges,[0.,0.,0.],[2.,2.,2.])
     dv=np.diff(edges[0])[:,None,None]*np.diff(edges[1])[None,:,None]*np.diff(edges[2])[None,None,:]
     assert np.sum(f*dv)==pytest.approx(4.)
+
+
+def test_axis_overlap_diagnostic_separates_marginal_clipping_without_double_counting():
+    edges=[np.linspace(0,5,21),np.linspace(-5,5,21),np.linspace(0,5,21)]
+    fractions=box_axis_overlap_fractions(edges,[0.,0.,0.],[2.,2.,2.])
+    marginal=box_axis_domain_overlap_fractions(edges,[0.,0.,0.],[2.,2.,2.])
+    assert marginal==pytest.approx([.5,1.,.5])
+    # The exact union overlap is one quarter of the packet volume; marginal
+    # outside masses must not be added together as the true outside mass.
+    assert np.prod(marginal)==pytest.approx(.25)
 
 
 def test_release_stop_retains_exact_emitted_inventory():

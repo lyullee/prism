@@ -13,6 +13,8 @@
 시설 평가 원장에도 case 자격 gate를 직접 기록하도록 보완했다. [`native_generic_scope_vertical_merged_facility_assessment_population_v6.json`](results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json)은 34개 요청 case와 0개 qualified provider case를 대조해 `facility_case_packet_coverage_complete=false`와 `qualified_facility_qra_available=false`를 남긴다. 이 값은 빈도를 추정하거나 risk atom을 0으로 만드는 기능이 아니며, 시설 IR/F-N 승격을 막는 증거 상태 표시다. 구현과 재현 명령은 [시설 평가 case coverage gate 개발기록](docs/PRISM_시설평가_case_coverage_gate_개발기록_20261009.md)에 있다.
 시설 원장의 `component_risk_ranking`은 같은 조건부 risk atom에서 설비별 최대 수용점 IR을 계산해 우선 확인할 설비를 정렬한다. 수용점을 합산하거나 빈도를 재할당하지 않고 `facility_ir_fn_promotion=false`를 유지하는 진단용 장부다. 규칙과 예시는 [설비별 조건부 위험 순위 장부](docs/PRISM_설비별_조건부위험순위_개발기록_20261010.md)에 있다.
 
+계산영역 회복 감사의 원인 추적도 추가했다. 대표 액체 pool 사건을 packet별로 분해한 결과, 점화 시점의 밖 질량은 풍하측 축에서만 발생했지만 유한 top-hat packet 지지 길이가 약 426 km로 계산되었다. 이는 작은 액체 방출의 SLABx carrier 수소 질량분율이 매우 작을 때 발생하는 관측 연산자 한계이며, 영역을 160 m로 늘리는 것만으로 닫히지 않는다. 풍하측·횡풍·높이별 marginal outside mass와 packet 지지경계는 `cloud_support_diagnostic_area_0_1_v1.json`에 기록했고, 이 진단은 밖의 질량·flammable mass·폭발·시설 QRA를 승격하지 않는다. 상세 기록은 [계산영역 회복 감사](docs/PRISM_domain_recovery_개발기록_20261024.md)에 있다.
+
 
 시설 IR/F-N 연결 자체를 0값 결과에 의존하지 않도록, 별도의 합성 near-receptor 진단도 실행했다. 저장탱크 `AREA_0.01%` 한 건을 설비→방출→pool/SLABx→점화·피해→수용점까지 새로 계산하고, 수용점을 source에서 0.5 m로 둔 결과 조건부 IR은 `4.68×10⁻⁵`로 나타났다. 나머지 23개 LOC는 명시적 `UNCOMPUTED`로 남겼고 시설 전체 IR/F-N은 승격하지 않았다. 이 결과는 [near-receptor chain 검증 요약](examples/native_lh2_near_receptor_ir_fn_chain_verification.json)에서 확인한다.
 

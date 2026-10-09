@@ -47,12 +47,31 @@ def grid_axes(domain):
 
 def box_fractions(edges, centre, sizes):
     """Exact overlap volume of a rectangular packet with each grid cell."""
+    fractions=box_axis_overlap_fractions(edges, centre, sizes)
+    return fractions[0][:,None,None]*fractions[1][None,:,None]*fractions[2][None,None,:]
+
+
+def box_axis_overlap_fractions(edges, centre, sizes):
+    """Return per-axis overlap fractions for a rectangular packet.
+
+    Each returned array contains the packet overlap fraction in every cell
+    along one axis.  Keeping the axes separate lets the caller diagnose
+    boundary clipping without double-counting a packet outside more than
+    one axis.
+    """
     fractions=[]
     for axis,c,size in zip(edges,centre,sizes):
         left=c-size/2; right=c+size/2
         overlap=np.maximum(0.,np.minimum(axis[1:],right)-np.maximum(axis[:-1],left))
         fractions.append(overlap/np.diff(axis))
-    return fractions[0][:,None,None]*fractions[1][None,:,None]*fractions[2][None,None,:]
+    return fractions
+
+
+def box_axis_domain_overlap_fractions(edges, centre, sizes):
+    """Return each packet's marginal overlap fraction with the domain."""
+    fractions=box_axis_overlap_fractions(edges,centre,sizes)
+    return [float(np.clip(np.sum(f*np.diff(axis))/size,0.,1.))
+            for axis,f,size in zip(edges,fractions,sizes)]
 
 
 def mole_fraction(hydrogen_density, air_density):
@@ -673,18 +692,39 @@ def run_chain(p,roots,module):
         length=amount/(rho*y*2*width*depth)
         centre[2]=max(depth/2,centre[2])
         sizes=np.array([length,2*width,depth])
-        return {'mass':amount,'centre':centre,'sizes':sizes,'rho_h':rho*y,'rho_a':rho*(1-y)}
+        return {'mass':amount,'centre':centre,'sizes':sizes,'rho_h':rho*y,'rho_a':rho*(1-y),
+                'carrier_density_kg_m3':rho,'h2_mass_fraction':y}
     cloud=[]; cloud_at={}; rec_history=[[] for _ in receptors]
     start=time.perf_counter()
     for t in times:
         dh=np.zeros_like(dv);da=np.zeros_like(dv);occupancy=np.zeros_like(dv)
         rh=np.zeros(len(receptors));ra=np.zeros(len(receptors));ro=np.zeros(len(receptors))
         emitted=0.
+        outside_by_axis=np.zeros(3)
+        support_min=np.full(3,np.inf)
+        support_max=np.full(3,-np.inf)
+        packet_lengths=[]
+        packet_widths=[]
+        packet_depths=[]
+        packet_h2_fractions=[]
         for packet in packets:
             s=state(packet,t)
             if s is None:continue
             emitted+=s['mass']
-            f=box_fractions(edges,s['centre'],s['sizes'])
+            axis_fractions=box_axis_overlap_fractions(edges,s['centre'],s['sizes'])
+            # These are marginal outside masses.  They diagnose which
+            # configured boundary clips a packet, while the scalar
+            # ``outside`` below remains the exact union outside mass.
+            outside_by_axis += s['mass']*(1.-np.asarray(
+                [float(np.clip(np.sum(f*np.diff(axis))/size,0.,1.))
+                 for axis,f,size in zip(edges,axis_fractions,s['sizes'])]))
+            support_min=np.minimum(support_min,s['centre']-s['sizes']/2)
+            support_max=np.maximum(support_max,s['centre']+s['sizes']/2)
+            packet_lengths.append(float(s['sizes'][0]))
+            packet_widths.append(float(s['sizes'][1]))
+            packet_depths.append(float(s['sizes'][2]))
+            packet_h2_fractions.append(float(s['h2_mass_fraction']))
+            f=axis_fractions[0][:,None,None]*axis_fractions[1][None,:,None]*axis_fractions[2][None,None,:]
             dh+=f*s['rho_h'];da+=f*s['rho_a'];occupancy+=f
             for i,r in enumerate(receptor_frames):
                 if np.all(np.abs(r-s['centre'])<=s['sizes']/2):
@@ -704,8 +744,24 @@ def run_chain(p,roots,module):
         if np.any(inside):
             indices=np.where(inside)
             bounds=[[float(edges[j][indices[j].min()]),float(edges[j][indices[j].max()+1])] for j in range(3)]
+        support_bounds=(
+            [[float(support_min[j]),float(support_max[j])] for j in range(3)]
+            if emitted>0 else None
+        )
         row={'time_s':t,'vapour_emitted_kg':emitted,'hydrogen_in_domain_kg':in_domain,
              'hydrogen_outside_domain_kg':outside,'mass_residual_kg':emitted-in_domain-outside,
+             'hydrogen_outside_domain_by_axis_kg':{
+                 'downwind':float(outside_by_axis[0]),
+                 'crosswind':float(outside_by_axis[1]),
+                 'height':float(outside_by_axis[2])},
+             'cloud_support_bounds_wind_frame_m':support_bounds,
+             'cloud_packet_diagnostic':{
+                 'section_count':len(packet_lengths),
+                 'maximum_length_m':max(packet_lengths,default=None),
+                 'maximum_width_m':max(packet_widths,default=None),
+                 'maximum_depth_m':max(packet_depths,default=None),
+                 'minimum_h2_mass_fraction':min(packet_h2_fractions,default=None),
+                 'maximum_h2_mass_fraction':max(packet_h2_fractions,default=None)},
              'flammable_mass_in_domain_kg':fm,'flammable_centroid_enu_m':to_enu(centroid),
              'flammable_bounds_wind_frame_m':bounds,'maximum_mole_fraction':float(np.max(concentration)),
              'overlapping_carrier_cells':int(np.sum(occupancy>1+1e-8)),
@@ -864,6 +920,8 @@ def run_chain(p,roots,module):
              'combustion_energy_j':fm*fire.H2_HEAT_OF_COMBUSTION,'obstructed_energy_fraction':ignition['obstructed_energy_fraction'],
              'radius_0_3_barg_m':r03,'radius_0_1_barg_m':r01,'model':'TNO multi-energy strength-10 anchor zones; deflagration only',
              'outside_domain_h2_kg_at_ignition':ign_cloud['hydrogen_outside_domain_kg'],
+             'outside_domain_h2_kg_by_axis_at_ignition':ign_cloud['hydrogen_outside_domain_by_axis_kg'],
+             'cloud_support_bounds_wind_frame_m_at_ignition':ign_cloud['cloud_support_bounds_wind_frame_m'],
              'domain_truncated':ign_cloud['outside_domain_inventory_nonzero']},
         'mass_ledger':{'released_kg':mass,'direct_gas_kg':gas_mass,'ground_inflow_kg':ground_mass,
             'pool_evaporated_kg':evaporated,'pool_remaining_kg':liquid,'pool_domain_escape_kg':escape,

@@ -1,0 +1,75 @@
+{
+  "schema": "prism.cloud_support_diagnostic.v1",
+  "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+  "source_record": "results/20261024/debug_domain_area_0_1_axis_v1.json",
+  "status": "DOMAIN_SUPPORT_ROOT_CAUSE_IDENTIFIED",
+  "diagnostic_only": true,
+  "facility_qra_promotion": false,
+  "provider_qualification": false,
+  "observation_operator": "finite-volume top-hat reconstruction of SLABx section averages",
+  "findings": {
+    "axis_attribution": "downwind-only marginal clipping at ignition; crosswind and height marginal clipping are zero",
+    "packet_support": "effective top-hat packet support is approximately 426324 m downwind at ignition, while the configured downwind domain is 162 m wide",
+    "early_onset": "downwind clipping is already present at 1e-6 s, so simply extending the far-downwind boundary does not close the packet",
+    "state_at_ignition": {
+      "time_s": 1.0,
+      "hydrogen_outside_domain_kg": 5.335807960558966e-05,
+      "hydrogen_outside_domain_by_axis_kg": {
+        "downwind": 5.335807960558967e-05,
+        "crosswind": 0.0,
+        "height": 0.0
+      },
+      "cloud_support_bounds_wind_frame_m": [
+        [
+          -213161.67022897064,
+          213162.3662404358
+        ],
+        [
+          -0.46890122394851746,
+          0.46890122394851746
+        ],
+        [
+          0.0,
+          0.561368425875889
+        ]
+      ],
+      "cloud_packet_diagnostic": {
+        "section_count": 333,
+        "maximum_length_m": 426324.03646940645,
+        "maximum_width_m": 0.9378024478970349,
+        "maximum_depth_m": 0.561368425875889,
+        "minimum_h2_mass_fraction": 2.6293439349252235e-13,
+        "maximum_h2_mass_fraction": 3.5453219577207417e-06
+      }
+    },
+    "first_observation": {
+      "time_s": 1e-06,
+      "hydrogen_outside_domain_kg": 1.3975821351156093e-06,
+      "hydrogen_outside_domain_by_axis_kg": {
+        "downwind": 1.397582135115609e-06,
+        "crosswind": 0.0,
+        "height": 0.0
+      },
+      "cloud_support_bounds_wind_frame_m": [
+        [
+          -183343.44366397292,
+          183342.59288620352
+        ],
+        [
+          -0.42538914006848433,
+          0.42538914006848433
+        ],
+        [
+          0.0,
+          0.00018891057687049894
+        ]
+      ]
+    }
+  },
+  "interpretation": "The liquid-pool SLABx carrier section has an extremely small H2 mass fraction for this small event. Converting the finite emitted inventory to one rectangular section therefore creates a very long packet. The result is preserved as outside-domain mass and remains withheld from flammable mass, blast, and facility QRA. A provider-resolved spatial envelope or a validated liquid-pool observation operator is required before promotion.",
+  "claims": {
+    "physical_validation_claim": false,
+    "complete_facility_qra_claim": false,
+    "frequency_promotion": false
+  }
+}
