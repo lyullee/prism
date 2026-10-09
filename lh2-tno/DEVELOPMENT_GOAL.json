@@ -753,10 +753,10 @@
   "mixed_lh2_provider_campaign_compiler_matched_request_count": 24,
   "mixed_lh2_provider_campaign_compiler_uncomputed_binding_count": 0,
   "mixed_lh2_provider_campaign_execution_record": "results/20261014/generic_mixed_provider_campaign_refined_pool_result.json",
-  "mixed_lh2_provider_campaign_execution_status": "PARTIAL_DECLARED_SCOPE refined official rerun; 5 EXECUTED, 16 EXECUTED_OPERATOR_LIMITED, 3 FAILED, 0 UNCOMPUTED after representative 1 m location_weight and declared-sensitivity pool footprint",
+  "mixed_lh2_provider_campaign_execution_status": "PARTIAL_DECLARED_SCOPE refined official rerun; 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, 0 UNCOMPUTED after representative 1 m location_weight and declared-sensitivity pool footprint",
   "mixed_lh2_provider_campaign_execution_executed_cases": 5,
-  "mixed_lh2_provider_campaign_execution_operator_limited_cases": 16,
-  "mixed_lh2_provider_campaign_execution_failed_cases": 3,
+  "mixed_lh2_provider_campaign_execution_operator_limited_cases": 19,
+  "mixed_lh2_provider_campaign_execution_failed_cases": 0,
   "mixed_lh2_provider_campaign_execution_uncomputed_cases": 0,
   "mixed_lh2_provider_campaign_execution_total_facility_risk_withheld": true,
   "mixed_lh2_facility_assessment_record": "results/20261014/generic_lh2_mixed_facility_assessment_refined_pool.json",
@@ -766,15 +766,15 @@
   "mixed_lh2_provider_campaign_frequency_plan": "examples/generic_lh2_mixed_frequency_plan.json",
   "mixed_lh2_provider_campaign_execution_timing_ms": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 1311.007000040263,
-    "case_median_ms": 6166.494700009935,
-    "case_max_ms": 69272.45520008728,
-    "case_p95_ms": 20461.34052001288,
-    "case_p99_ms": 58243.75146607284,
-    "campaign_elapsed_ms": 215895.684099989
+    "case_min_ms": 1547.3064000252634,
+    "case_median_ms": 7376.895949942991,
+    "case_max_ms": 60649.120799964294,
+    "case_p95_ms": 19164.473064953927,
+    "case_p99_ms": 51117.66540796029,
+    "campaign_elapsed_ms": 241101.17370006628
   },
   "mixed_lh2_facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
-  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m: the refined official rerun records 5 EXECUTED, 16 EXECUTED_OPERATOR_LIMITED, 3 FAILED, and 0 UNCOMPUTED. Bounded pool observation and wind-conditioned downwind handoff are implemented; facility IR/F-N remains withheld until failed/limited physics and actual geometry are resolved.",
+  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m: the refined official rerun records 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED, 0 FAILED, and 0 UNCOMPUTED. Bounded pool observation, wind-conditioned downwind handoff, and instantaneous provider-handoff fallback are implemented; facility IR/F-N remains withheld until failed/limited physics and actual geometry are resolved.",
   "mixed_lh2_provider_campaign_pool_diagnostic_option": "scripts/build_lh2_mixed_provider_campaign.py --pool-radius-m 0.005",
   "mixed_lh2_provider_campaign_pool_diagnostic_origin": "declared_sensitivity; not facility geometry"
 }

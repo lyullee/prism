@@ -411,7 +411,7 @@ def run_chain(p,roots,module):
     rho_air=cp.PropsSI('D','P',ambient['pressure_pa'],'T',ambient['temperature_k'],'Air')
     direction=np.asarray(source['nozzle']['direction_enu'],float);direction/=np.linalg.norm(direction)
     release_bearing=math.degrees(math.atan2(direction[0],direction[1]))%360
-    packets=[]; traj_cache={}; traces=[]
+    packets=[]; traj_cache={}; traces=[]; dispersion_handoff_fallbacks=[]
     def vertical_handoff_state(row):
         if vertical_handoff is None:
             return None
@@ -434,6 +434,7 @@ def run_chain(p,roots,module):
         key=(kind,rate,area,span,velocity,gas_temperature,gas_density,gas_area,handoff_key)
         if key in traj_cache:return traj_cache[key]
         near=[]; tt=0.; cross_offset=0.; base_origin=origin if kind=='jet' else pool_origin
+        handoff_start_x=0.
         if kind=='jet' and handoff is not None:
             handoff_direction=np.asarray(handoff['direction_enu'],float)
             downvelocity=float(handoff['velocity_m_s']*np.dot(handoff_direction,down))
@@ -449,6 +450,7 @@ def run_chain(p,roots,module):
                 source_model='equipment-resolved-vertical-gas + provider-horizontal-handoff',
                 geometry_closure='provider-resolved horizontal handoff section')
             source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)
+            handoff_start_x=hs.handoff_distance_m
             traces.append({'branch':kind,'handoff':asdict(hs),'handoff_age_s':0.,
                            'entry_temperature_k':gas_temperature,'entry_density_kg_m3':gas_density,
                            'mass_residual_relative':hs.mass_residual_relative(),
@@ -517,6 +519,7 @@ def run_chain(p,roots,module):
                 source_model='equipment-resolved-gas + vector-transition' if equipment_resolved else 'integrated-source-terminal-gas + vector-cryogenic-transition',
                 geometry_closure='mass and downwind momentum preserving section')
             source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)
+            handoff_start_x=start_x
             traces.append({'branch':kind,'handoff':asdict(hs),'handoff_age_s':tt,
                            'entry_temperature_k':gas_temperature,'entry_density_kg_m3':gas_density,
                            'mass_residual_relative':hs.mass_residual_relative(),
@@ -534,15 +537,72 @@ def run_chain(p,roots,module):
                                         t_max=max(horizon-tt,span+1e-3),n_puff_steps=p['n_puff_steps'])
         except Exception as error:
             if 'x must be non-decreasing' in str(error):
+                if kind != 'jet' or not hasattr(source_model,'state'):
+                    raise ValueError(
+                        f'dispersion finite-release puff handoff remained non-monotonic for {kind} '
+                        f'packet rate={rate:.9g}, area={area:.9g}, span={span:.9g}; '
+                        'source was withheld without sorting or rotating the release'
+                    ) from error
+                # A sub-millisecond release can be shorter than SLABx's first
+                # puff integration step.  If its first puff point moves a few
+                # millimetres upwind, represent the same provider-resolved
+                # handoff as an instantaneous packet.  This preserves mass,
+                # mixture, temperature, density, velocity and cross-section;
+                # only the unresolved temporal shape is changed and recorded
+                # as operator-limited.  No trajectory sorting or source
+                # rotation is performed.
+                state=source_model.state
+                class InstantaneousHandoff:
+                    name='instantaneous_provider_handoff'
+                    def __init__(self, original):
+                        self.substance=original.substance
+                        self.state=original.state
+                        self.mass=original.total_mass
+                        self.duration=original.duration
+                    @property
+                    def T(self): return self.state.temperature_K
+                    @property
+                    def rate(self): return self.mass/self.duration
+                    @property
+                    def total_mass(self): return self.mass
+                    @property
+                    def half_width(self): return self.state.half_width_m
+                    def released_mass(self,t): return self.mass
+                    def flux(self,x,t): return sourcemod.SourceFlux()
+                    def expanded(self,half_width): return self
+                    def initial_state(self,atmosphere,**kwargs):
+                        B=self.state.half_width_m; h=self.state.depth_m
+                        return sourcemod.SourceState(
+                            x_start=0.,t_start=0.,mode=sourcemod.Mode.PUFF,
+                            h=h,z_c=self.state.centre_height_m,b_half=B,b_shape=.9*B,
+                            b_half_x=B,b_shape_x=.9999*B,u=self.state.velocity_m_s,
+                            T=self.state.temperature_K,rho=self.state.density_kg_m3,
+                            cp=self.state.mixture_cp_J_kgK,
+                            m_emission=self.state.h2_mass_fraction,
+                            m_ev=self.state.h2_mass_fraction,m_water=0.,m_wv=0.,
+                            u_ambient_mean=atmosphere.wind_speed(max(
+                                self.state.centre_height_m+.5*h,1.e-6)),
+                            R_flux=.25*self.mass)
+                surrogate=InstantaneousHandoff(source_model)
+                traj,used=plume.run_dispersion(surrogate,atm,emission,water,
+                                               x_max=p['dispersion_x_max_m'],
+                                               t_max=max(horizon-tt,span+1e-3),
+                                               n_puff_steps=p['n_puff_steps'])
+                base_origin=origin+down*handoff_start_x
+                dispersion_handoff_fallbacks.append({
+                    'kind':kind,'rate_kg_s':rate,'span_s':span,
+                    'handoff_distance_m':handoff_start_x,
+                    'method':'instantaneous_provider_handoff_native_puff',
+                    'original_error':str(error),
+                })
+                traces.append({'branch':kind,'dispersion_handoff_fallback':True,
+                               'fallback_method':'instantaneous_provider_handoff_native_puff',
+                               'release_span_s':span,'handoff_distance_m':handoff_start_x})
+            else:
                 raise ValueError(
-                    f'dispersion finite-release puff handoff remained non-monotonic for {kind} '
-                    f'packet rate={rate:.9g}, area={area:.9g}, span={span:.9g}; '
-                    'source was withheld without sorting or rotating the release'
+                    f'dispersion failed for {kind} packet rate={rate:.9g}, area={area:.9g}, '
+                    f'span={span:.9g}: {type(error).__name__}: {error}'
                 ) from error
-            raise ValueError(
-                f'dispersion failed for {kind} packet rate={rate:.9g}, area={area:.9g}, '
-                f'span={span:.9g}: {type(error).__name__}: {error}'
-            ) from error
         if not np.all(np.isfinite(traj.vol_frac)):raise ValueError('nonfinite dispersion state')
         result=(near,traj,tt,cross_offset,base_origin)
         traj_cache[key]=result
@@ -762,12 +822,14 @@ def run_chain(p,roots,module):
                   'finite_inventory_cloud','ignition_branches','fire_radiation','multi_energy_blast_zones','TNO_human_damage','conditional_risk'],
         'source':source_history,'pool':pool,'ground_arrival_pulses':ground_pulses,
         'source_operator':source_operator,
-        'operator_limited':bool(source_history.get('operator_limited',False) or vertical_handoff is not None),
+        'operator_limited':bool(source_history.get('operator_limited',False) or vertical_handoff is not None
+                                 or dispersion_handoff_fallbacks),
         'source_ownership':{'state_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
             'discharge_owner':'equipment_twin' if equipment_resolved else 'integrated_source',
             'discharge_recalculated':not equipment_resolved},
         'thermodynamic_adapters':{'pool':pool_adapter},
-        'handoffs':traces,'cloud_history_unignited_counterfactual':cloud,
+        'handoffs':traces,'dispersion_handoff_fallbacks':dispersion_handoff_fallbacks,
+        'cloud_history_unignited_counterfactual':cloud,
         'ignition_branch_probabilities':branch_probs,
         'explosion':{'ignition_time_s':td,'flammable_mass_in_domain_kg':fm,'cloud_centroid_enu_m':cloud_centre.tolist(),
              'combustion_energy_j':fm*fire.H2_HEAT_OF_COMBUSTION,'obstructed_energy_fraction':ignition['obstructed_energy_fraction'],
@@ -793,6 +855,7 @@ def run_chain(p,roots,module):
             'The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.',
             'Rainout footprint is explicitly declared; it is not inferred from a single impact point or fitted to LFL/sensors.',
             'Finite-volume top-hat reconstruction of native section averages; not the frozen seven-test FFI observation operator or independent transient validation.',
+            'If a sub-millisecond finite-release puff handoff violates SLABx monotonicity, the same provider-resolved handoff is represented by native puff mode as an instantaneous packet; temporal shape is operator-limited and recorded in dispersion_handoff_fallbacks.',
             'Superposed carrier packets preserve H2 mass but overlapping air/temperature/pressure equilibration remains open.',
             'Ignition probabilities, burn-back duration, radiation range and obstruction fraction are declared scenario inputs.',
             'Fire does not feed heat back into the unignited pool evaporation model; ground flame deflection is a geometric approximation.',
