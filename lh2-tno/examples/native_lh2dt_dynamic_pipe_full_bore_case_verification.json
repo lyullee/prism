@@ -26,5 +26,6 @@
     "provider pressure-equalization termination is finite-state evidence, not field isolation reliability",
     "declared-sensitivity pool footprint remains operator-limited",
     "airborne liquid remains zero pending independent droplet validation"
-  ]
+  ],
+  "provider_final_pressure_matches_ambient": true
 }

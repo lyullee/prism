@@ -242,6 +242,7 @@ def build_ijhe_completion_audit(
             and full_bore.get("status") == "END_TO_END_DIAGNOSTIC_EXECUTED"
             and natural_termination
             and full_bore.get("provider_pressure_equalized") is True
+            and full_bore.get("provider_final_pressure_matches_ambient") is True
             and _finite(residual)
             and abs(float(residual)) <= 1e-8
             and full_bore.get("consequence_chain_executed") is True
@@ -264,6 +265,7 @@ def build_ijhe_completion_audit(
                     "provider_duration_s": full_bore.get("provider_duration_s"),
                     "provider_final_pressure_pa_abs": full_bore.get("provider_final_pressure_pa_abs"),
                     "provider_pressure_equalized": full_bore.get("provider_pressure_equalized"),
+                    "provider_final_pressure_matches_ambient": full_bore.get("provider_final_pressure_matches_ambient"),
                     "provider_mass_residual_kg": residual,
                     "consequence_chain_executed": full_bore.get("consequence_chain_executed"),
                     "frequency_applied": full_bore.get("frequency_applied"),

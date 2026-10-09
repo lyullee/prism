@@ -87,6 +87,7 @@ def test_completion_audit_records_native_full_bore_chain_as_diagnostic_evidence(
             "provider_duration_s": 0.04,
             "provider_final_pressure_pa_abs": 101000.0,
             "provider_pressure_equalized": True,
+            "provider_final_pressure_matches_ambient": True,
             "provider_mass_residual_kg": 0.0,
             "consequence_chain_executed": True,
             "frequency_applied": False,

@@ -10,6 +10,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -171,6 +172,14 @@ def run(args: Any) -> dict[str, Any]:
     _save(args.output_dir / "consequence_result.json", consequence)
     data = consequence.get("data", {})
     provider_data = adapted.provider_response.get("data", {})
+    final_pressure = provider_data.get("provider_meta", {}).get("final_pressure_pa_abs")
+    pressure_equalized = provider_data.get("provider_meta", {}).get("pressure_equalized")
+    pressure_matches_ambient = (
+        isinstance(final_pressure, (int, float))
+        and math.isclose(float(final_pressure), 101325.0, rel_tol=0.0, abs_tol=1.0e-3)
+    )
+    if pressure_equalized is True and not pressure_matches_ambient:
+        raise ValueError("provider pressure-equalization result does not match the declared ambient pressure")
     verification = {
         "schema_version": "prism.native_lh2dt_dynamic_pipe_full_bore_case.v1",
         "status": data.get("status"),
@@ -186,8 +195,9 @@ def run(args: Any) -> dict[str, Any]:
         "provider_available_mass_kg": release.available_mass_kg,
         "provider_cumulative_mass_out_kg": release.cumulative_mass_out_kg,
         "provider_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,
-        "provider_final_pressure_pa_abs": provider_data.get("provider_meta", {}).get("final_pressure_pa_abs"),
-        "provider_pressure_equalized": provider_data.get("provider_meta", {}).get("pressure_equalized"),
+        "provider_final_pressure_pa_abs": final_pressure,
+        "provider_pressure_equalized": pressure_equalized,
+        "provider_final_pressure_matches_ambient": pressure_matches_ambient,
         "provider_export_elapsed_ms": export_elapsed_ms,
         "consequence_chain_elapsed_ms": chain_elapsed_ms,
         "consequence_chain_executed": data.get("full_chain_executed") is True,
