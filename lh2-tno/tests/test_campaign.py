@@ -236,6 +236,12 @@ def test_frequency_weather_barrier_ignition_each_weighted_once():
     assert by_component['storage']['scope_status']=='PARTIAL'
     assert by_component['storage']['generated_event_count']==3
     assert by_component['storage']['uncomputed_case_count']==4
+    assert by_component['storage']['not_numerically_executed_case_count']==4
+    assert by_component['storage']['qualified_evidence_withheld_case_count']==0
+    assert by_component['storage']['numerically_executed_case_count']==4
+    assert r['coverage']['not_numerically_executed_case_count']==4
+    assert r['coverage']['qualified_evidence_withheld_case_count']==0
+    assert r['coverage']['numerically_executed_case_count']==4
     assert by_component['isolation']['scope_status']=='EXCLUDED'
     assert by_component['isolation']['excluded_reason']
     assert all('scenario_families' in atom for atom in r['risk_atoms'])

@@ -239,6 +239,15 @@ def build_scope_matrix_from_facility_ledger(
             in {"UNCOMPUTED", "FAILED", "EXECUTED_OPERATOR_LIMITED", "EXECUTED_DOMAIN_INCOMPLETE"}
             for row in family_cases
         )
+        not_numerically_executed = sum(
+            str(row.get("status", "")) in {"UNCOMPUTED", "FAILED"}
+            for row in family_cases
+        )
+        qualified_evidence_withheld = sum(
+            str(row.get("status", ""))
+            in {"EXECUTED_OPERATOR_LIMITED", "EXECUTED_DOMAIN_INCOMPLETE"}
+            for row in family_cases
+        )
         status = "NOT_APPLICABLE" if not event_ids else _status(family_cases)
         conditional_status = "NOT_APPLICABLE" if not event_ids else _conditional_status(family_cases)
         if status not in {"EXECUTED", "NOT_APPLICABLE"}:
@@ -262,6 +271,9 @@ def build_scope_matrix_from_facility_ledger(
             "conditional_uncomputed_case_count": conditional_uncomputed,
             "uncomputed_case_count": strict_uncomputed,
             "strict_uncomputed_case_count": strict_uncomputed,
+            "not_numerically_executed_case_count": not_numerically_executed,
+            "qualified_evidence_withheld_case_count": qualified_evidence_withheld,
+            "numerically_executed_case_count": executed,
             "generated_initiation_frequency_per_year": frequency,
             "frequency_rows_are_not_additive_across_families": True,
             "source": "facility_ledger_event_and_case_metadata",
@@ -284,6 +296,19 @@ def build_scope_matrix_from_facility_ledger(
         "case_count": len(case_rows),
         "conditional_executed_case_count": len(case_rows) - ledger_conditional_uncomputed,
         "conditional_uncomputed_case_count": ledger_conditional_uncomputed,
+        "not_numerically_executed_case_count": sum(
+            str(row.get("status", "")) in {"UNCOMPUTED", "FAILED"}
+            for row in case_rows
+        ),
+        "qualified_evidence_withheld_case_count": sum(
+            str(row.get("status", ""))
+            in {"EXECUTED_OPERATOR_LIMITED", "EXECUTED_DOMAIN_INCOMPLETE"}
+            for row in case_rows
+        ),
+        "numerically_executed_case_count": sum(
+            str(row.get("status", "")).startswith("EXECUTED")
+            for row in case_rows
+        ),
         "conditional_chain_complete": ledger_conditional_uncomputed == 0,
         "conditional_chain_blocking_reasons": list(dict.fromkeys(conditional_blocking)),
         "facility_total_risk_available": facility_ledger.get("facility_total_risk_available") is True,

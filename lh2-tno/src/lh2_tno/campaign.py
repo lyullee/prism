@@ -582,6 +582,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'operator_limited_case_count': sum(case['status']=='EXECUTED_OPERATOR_LIMITED' for case in component_cases),
             'domain_incomplete_case_count': sum(case['status']=='EXECUTED_DOMAIN_INCOMPLETE' for case in component_cases),
             'uncomputed_case_count': sum(case['status'] in {'UNCOMPUTED','FAILED','EXECUTED_DOMAIN_INCOMPLETE','EXECUTED_OPERATOR_LIMITED'} for case in component_cases),
+            'not_numerically_executed_case_count': sum(case['status'] in {'UNCOMPUTED','FAILED'} for case in component_cases),
+            'qualified_evidence_withheld_case_count': sum(case['status'] in {'EXECUTED_OPERATOR_LIMITED','EXECUTED_DOMAIN_INCOMPLETE'} for case in component_cases),
+            'numerically_executed_case_count': sum(case['status'].startswith('EXECUTED') for case in component_cases),
             'uncomputed_reasons': sorted({case.get('reason') for case in component_cases if case['status'] != 'EXECUTED' and case.get('reason')}),
         })
     scenario_family_event_counts = Counter(
@@ -603,6 +606,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
         'coverage':{'generated_initiation_frequency_per_year':generated_frequency,
             'fully_executed_case_weighted_frequency_per_year':evaluated_frequency,
             'fraction_of_generated_initiation_frequency':evaluated_frequency/generated_frequency if generated_frequency else None,
+            'not_numerically_executed_case_count':sum(case['status'] in {'UNCOMPUTED','FAILED'} for case in cases),
+            'qualified_evidence_withheld_case_count':sum(case['status'] in {'EXECUTED_OPERATOR_LIMITED','EXECUTED_DOMAIN_INCOMPLETE'} for case in cases),
+            'numerically_executed_case_count':sum(case['status'].startswith('EXECUTED') for case in cases),
             'meaning':'frequency coverage only; not fraction of risk captured, not physical validation',
             'by_component':component_coverage,
             'scenario_family_event_counts': dict(sorted(scenario_family_event_counts.items()))},

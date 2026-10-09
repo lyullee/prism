@@ -118,7 +118,7 @@
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "42c0cad464490ee44ec67f69df7e109661347a41adb52325f5af2a02b82e029b",
+        "sha256": "2f310af5d5ac449b75cbaa477b9dbb7a1ef991c56958d1084d497886298d6982",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,
