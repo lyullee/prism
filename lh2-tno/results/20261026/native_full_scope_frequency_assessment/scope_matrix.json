@@ -1,0 +1,1121 @@
+{
+  "schema_version": "prism.major_accident_scope.v1",
+  "environment": "outdoor",
+  "scope": "outdoor_major_accidents",
+  "required_families": [
+    "vessel_hole",
+    "pipe_hole",
+    "valve_hole",
+    "vent_hole",
+    "pump_hole",
+    "vaporizer_hole",
+    "reliquefier_hole",
+    "liquid_two_phase",
+    "inventory_depletion",
+    "inventory_over_600s",
+    "two_sided_rupture",
+    "vertical_handoff"
+  ],
+  "scenario_catalog": {
+    "schema": "prism.accident_scenario_catalog.v1",
+    "scenario_count": 12,
+    "rows": [
+      {
+        "family": "vessel_hole",
+        "equipment_kinds": [
+          "storage_tank"
+        ],
+        "applicable_component_ids": [
+          "storage-tank-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "pipe_hole",
+        "equipment_kinds": [
+          "pipe"
+        ],
+        "applicable_component_ids": [
+          "liquid-transfer-line-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "valve_hole",
+        "equipment_kinds": [
+          "valve"
+        ],
+        "applicable_component_ids": [
+          "transfer-valve-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "vent_hole",
+        "equipment_kinds": [
+          "vent_stack"
+        ],
+        "applicable_component_ids": [
+          "pressure-relief-vent-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "pump_hole",
+        "equipment_kinds": [
+          "pump"
+        ],
+        "applicable_component_ids": [
+          "liquid-transfer-pump-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "vaporizer_hole",
+        "equipment_kinds": [
+          "vaporizer"
+        ],
+        "applicable_component_ids": [
+          "ambient-vaporizer-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "reliquefier_hole",
+        "equipment_kinds": [
+          "reliquefier"
+        ],
+        "applicable_component_ids": [
+          "reliquefier-01"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      },
+      {
+        "family": "liquid_two_phase",
+        "equipment_kinds": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "applicable_component_ids": [
+          "ambient-vaporizer-01",
+          "liquid-transfer-line-01",
+          "liquid-transfer-pump-01",
+          "reliquefier-01",
+          "storage-tank-01",
+          "transfer-valve-01"
+        ],
+        "applicable_component_count": 6,
+        "scenario_declared": true
+      },
+      {
+        "family": "inventory_depletion",
+        "equipment_kinds": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "applicable_component_ids": [
+          "ambient-vaporizer-01",
+          "liquid-transfer-line-01",
+          "liquid-transfer-pump-01",
+          "reliquefier-01",
+          "storage-tank-01",
+          "transfer-valve-01"
+        ],
+        "applicable_component_count": 6,
+        "scenario_declared": true
+      },
+      {
+        "family": "inventory_over_600s",
+        "equipment_kinds": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "applicable_component_ids": [
+          "ambient-vaporizer-01",
+          "liquid-transfer-line-01",
+          "liquid-transfer-pump-01",
+          "reliquefier-01",
+          "storage-tank-01",
+          "transfer-valve-01"
+        ],
+        "applicable_component_count": 6,
+        "scenario_declared": true
+      },
+      {
+        "family": "two_sided_rupture",
+        "equipment_kinds": [
+          "pipe",
+          "valve"
+        ],
+        "applicable_component_ids": [
+          "liquid-transfer-line-01",
+          "transfer-valve-01"
+        ],
+        "applicable_component_count": 2,
+        "scenario_declared": true
+      },
+      {
+        "family": "vertical_handoff",
+        "equipment_kinds": [
+          "vent_stack",
+          "pipe",
+          "valve"
+        ],
+        "applicable_component_ids": [
+          "liquid-transfer-line-01",
+          "pressure-relief-vent-01",
+          "transfer-valve-01"
+        ],
+        "applicable_component_count": 3,
+        "scenario_declared": true
+      }
+    ],
+    "all_requested_families_declared": true
+  },
+  "provider_worklist_alignment": null,
+  "rows": [
+    {
+      "family": "vessel_hole",
+      "scenario_definition": {
+        "family": "vessel_hole",
+        "name": "LH2 vessel wall hole",
+        "equipment_kinds": [
+          "storage_tank"
+        ],
+        "release_modes": [
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "model_pressure_equalization"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "resolved gas or liquid release -> SLABx-LH2/TNO dispersion -> ignition/IR/F-N",
+        "uncomputed_default_reason": "provider-resolved vessel accident history is required"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.0008248999999999999,
+      "manifest_component_ids": [
+        "storage-tank-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "storage-tank-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 5,
+      "uncomputed_branch_count": 0,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "conditional_executed_case_count": 5,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 5,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "pipe_hole",
+      "scenario_definition": {
+        "family": "pipe_hole",
+        "name": "LH2 transfer pipe hole",
+        "equipment_kinds": [
+          "pipe"
+        ],
+        "release_modes": [
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "model_pressure_equalization"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "pipe outlet state -> two-phase/gas release -> SLABx-LH2/TNO damage chain",
+        "uncomputed_default_reason": "provider-resolved pipe accident history is required"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 6.379999999999999e-05,
+      "manifest_component_ids": [
+        "liquid-transfer-line-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "liquid-transfer-line-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 5,
+      "uncomputed_branch_count": 0,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "conditional_executed_case_count": 5,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 5,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "valve_hole",
+      "scenario_definition": {
+        "family": "valve_hole",
+        "name": "LH2 valve body or stem hole",
+        "equipment_kinds": [
+          "valve"
+        ],
+        "release_modes": [
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "model_pressure_equalization"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "valve state and upstream inventory -> resolved release -> TNO consequence chain",
+        "uncomputed_default_reason": "provider-resolved valve accident history is required"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.0002072,
+      "manifest_component_ids": [
+        "transfer-valve-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "transfer-valve-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 5,
+      "uncomputed_branch_count": 0,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "conditional_executed_case_count": 5,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 5,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "vent_hole",
+      "scenario_definition": {
+        "family": "vent_hole",
+        "name": "relief or vent discharge",
+        "equipment_kinds": [
+          "vent_stack"
+        ],
+        "release_modes": [
+          "maximum_relief_discharge",
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "emergency_relief_discharge",
+          "explicit_provider_termination"
+        ],
+        "required_source_operators": [
+          "equipment_emergency_relief",
+          "integrated_transient"
+        ],
+        "consequence_path": "relief/vent outlet -> gas plume -> ignition/thermal radiation/overpressure",
+        "uncomputed_default_reason": "qualified relief set-point and discharge history are required"
+      },
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "generated_event_count": 1,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 2e-05,
+      "manifest_component_ids": [
+        "pressure-relief-vent-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "pressure-relief-vent-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 1,
+      "uncomputed_branch_count": 0,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "pump_hole",
+      "scenario_definition": {
+        "family": "pump_hole",
+        "name": "LH2 pump casing or seal hole",
+        "equipment_kinds": [
+          "pump"
+        ],
+        "release_modes": [
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "model_pressure_equalization"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "pump state and seal/casing opening -> liquid/gas release -> TNO damage chain",
+        "uncomputed_default_reason": "provider-resolved pump accident history is required"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "generated_event_count": 2,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.0006000000000000001,
+      "manifest_component_ids": [
+        "liquid-transfer-pump-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "liquid-transfer-pump-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 2,
+      "uncomputed_branch_count": 0,
+      "case_count": 2,
+      "executed_case_count": 2,
+      "conditional_executed_case_count": 2,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 2,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 2,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "vaporizer_hole",
+      "scenario_definition": {
+        "family": "vaporizer_hole",
+        "name": "vaporizer tube or shell hole",
+        "equipment_kinds": [
+          "vaporizer"
+        ],
+        "release_modes": [
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "model_pressure_equalization"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "vaporizer state -> phase-resolved release -> SLABx-LH2/TNO damage chain",
+        "uncomputed_default_reason": "provider-resolved vaporizer accident history is required"
+      },
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "generated_event_count": 1,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.001,
+      "manifest_component_ids": [
+        "ambient-vaporizer-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "ambient-vaporizer-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 1,
+      "uncomputed_branch_count": 0,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "reliquefier_hole",
+      "scenario_definition": {
+        "family": "reliquefier_hole",
+        "name": "reliquefier weak-shell or line hole",
+        "equipment_kinds": [
+          "reliquefier"
+        ],
+        "release_modes": [
+          "hole"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "model_pressure_equalization"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "reliquefier state -> resolved gas/liquid release -> TNO damage chain",
+        "uncomputed_default_reason": "provider-resolved reliquefier accident history is required"
+      },
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "generated_event_count": 1,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.01,
+      "manifest_component_ids": [
+        "reliquefier-01"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "reliquefier-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 1,
+      "uncomputed_branch_count": 0,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "liquid_two_phase",
+      "scenario_definition": {
+        "family": "liquid_two_phase",
+        "name": "liquid LH2 two-phase release",
+        "equipment_kinds": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "release_modes": [
+          "hole",
+          "instantaneous_inventory",
+          "inventory_over_600s"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "inventory_depletion",
+          "inventory_over_600s"
+        ],
+        "required_source_operators": [
+          "equipment_liquid_release",
+          "equipment_inventory_depletion",
+          "equipment_inventory_over_600s",
+          "equipment_liquid_over_600s"
+        ],
+        "consequence_path": "liquid thermodynamic state -> flash/two-phase source -> SLABx-LH2 -> TNO damage chain",
+        "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 21,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.0127959,
+      "manifest_component_ids": [
+        "ambient-vaporizer-01",
+        "liquid-transfer-line-01",
+        "liquid-transfer-pump-01",
+        "reliquefier-01",
+        "storage-tank-01",
+        "transfer-valve-01"
+      ],
+      "manifest_component_count": 6,
+      "generated_component_ids": [
+        "ambient-vaporizer-01",
+        "liquid-transfer-line-01",
+        "liquid-transfer-pump-01",
+        "reliquefier-01",
+        "storage-tank-01",
+        "transfer-valve-01"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 21,
+      "uncomputed_branch_count": 0,
+      "case_count": 21,
+      "executed_case_count": 21,
+      "conditional_executed_case_count": 21,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 4,
+      "operator_limited_case_count": 17,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 17,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "inventory_depletion",
+      "scenario_definition": {
+        "family": "inventory_depletion",
+        "name": "finite-inventory depletion",
+        "equipment_kinds": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "release_modes": [
+          "instantaneous_inventory"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "required_source_operators": [
+          "equipment_inventory_depletion",
+          "equipment_liquid_release"
+        ],
+        "consequence_path": "inventory ledger reaches zero -> finite release -> TNO consequence chain",
+        "uncomputed_default_reason": "provider packet must close the mass inventory at depletion"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 18,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.0017458999999999999,
+      "manifest_component_ids": [
+        "ambient-vaporizer-01",
+        "liquid-transfer-line-01",
+        "liquid-transfer-pump-01",
+        "reliquefier-01",
+        "storage-tank-01",
+        "transfer-valve-01"
+      ],
+      "manifest_component_count": 6,
+      "generated_component_ids": [
+        "ambient-vaporizer-01",
+        "liquid-transfer-line-01",
+        "liquid-transfer-pump-01",
+        "storage-tank-01",
+        "transfer-valve-01"
+      ],
+      "components_without_generated_event": [
+        "reliquefier-01"
+      ],
+      "request_branch_count": 18,
+      "uncomputed_branch_count": 0,
+      "case_count": 18,
+      "executed_case_count": 18,
+      "conditional_executed_case_count": 18,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 17,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 17,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "inventory_over_600s",
+      "scenario_definition": {
+        "family": "inventory_over_600s",
+        "name": "600-second bounded inventory release",
+        "equipment_kinds": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "release_modes": [
+          "inventory_over_600s"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "inventory_over_600s"
+        ],
+        "required_source_operators": [
+          "equipment_inventory_over_600s",
+          "equipment_liquid_over_600s"
+        ],
+        "consequence_path": "600 s provider history -> bounded release -> SLABx-LH2/TNO damage chain",
+        "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger"
+      },
+      "status": "EXECUTED",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+      ],
+      "generated_event_count": 1,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 5e-05,
+      "manifest_component_ids": [
+        "ambient-vaporizer-01",
+        "liquid-transfer-line-01",
+        "liquid-transfer-pump-01",
+        "reliquefier-01",
+        "storage-tank-01",
+        "transfer-valve-01"
+      ],
+      "manifest_component_count": 6,
+      "generated_component_ids": [
+        "ambient-vaporizer-01"
+      ],
+      "components_without_generated_event": [
+        "liquid-transfer-line-01",
+        "liquid-transfer-pump-01",
+        "reliquefier-01",
+        "storage-tank-01",
+        "transfer-valve-01"
+      ],
+      "request_branch_count": 1,
+      "uncomputed_branch_count": 0,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "conditional_executed_case_count": 1,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "two_sided_rupture",
+      "scenario_definition": {
+        "family": "two_sided_rupture",
+        "name": "pipe two-sided rupture",
+        "equipment_kinds": [
+          "pipe",
+          "valve"
+        ],
+        "release_modes": [
+          "two_sided_rupture"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release_set.v1"
+        ],
+        "termination_bases": [
+          "two_sided_rupture"
+        ],
+        "required_source_operators": [
+          "equipment_two_sided_rupture"
+        ],
+        "consequence_path": "upstream and downstream endpoint releases -> union harm -> TNO IR/F-N",
+        "uncomputed_default_reason": "two endpoint packets and shared inventory closure are required"
+      },
+      "status": "PARTIAL",
+      "conditional_status": "EXECUTED",
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5"
+      ],
+      "generated_event_count": 2,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.00101,
+      "manifest_component_ids": [
+        "liquid-transfer-line-01",
+        "transfer-valve-01"
+      ],
+      "manifest_component_count": 2,
+      "generated_component_ids": [
+        "reliquefier-01"
+      ],
+      "components_without_generated_event": [
+        "liquid-transfer-line-01",
+        "transfer-valve-01"
+      ],
+      "request_branch_count": 2,
+      "uncomputed_branch_count": 0,
+      "case_count": 2,
+      "executed_case_count": 2,
+      "conditional_executed_case_count": 2,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 2,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 2,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "vertical_handoff",
+      "scenario_definition": {
+        "family": "vertical_handoff",
+        "name": "vertical vent to horizontal dispersion handoff",
+        "equipment_kinds": [
+          "vent_stack",
+          "pipe",
+          "valve"
+        ],
+        "release_modes": [
+          "hole",
+          "maximum_relief_discharge"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "emergency_relief_discharge"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_emergency_relief"
+        ],
+        "consequence_path": "vertical jet state -> horizontal SLABx handoff -> TNO damage chain",
+        "uncomputed_default_reason": "validated vertical free-jet and handoff state are required"
+      },
+      "status": "NO_EVENT_GENERATED",
+      "conditional_status": "UNCOMPUTED",
+      "event_ids": [],
+      "generated_event_count": 0,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0,
+      "manifest_component_ids": [
+        "liquid-transfer-line-01",
+        "pressure-relief-vent-01",
+        "transfer-valve-01"
+      ],
+      "manifest_component_count": 3,
+      "generated_component_ids": [],
+      "components_without_generated_event": [
+        "liquid-transfer-line-01",
+        "pressure-relief-vent-01",
+        "transfer-valve-01"
+      ],
+      "request_branch_count": 0,
+      "uncomputed_branch_count": 0,
+      "case_count": 0,
+      "executed_case_count": 0,
+      "conditional_executed_case_count": 0,
+      "conditional_uncomputed_case_count": 0,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    }
+  ],
+  "barrier_branch_ids": [
+    "matched-event-provider-request"
+  ],
+  "manifest_family_component_ids": {
+    "pipe_hole": [
+      "liquid-transfer-line-01"
+    ],
+    "pump_hole": [
+      "liquid-transfer-pump-01"
+    ],
+    "reliquefier_hole": [
+      "reliquefier-01"
+    ],
+    "valve_hole": [
+      "transfer-valve-01"
+    ],
+    "vaporizer_hole": [
+      "ambient-vaporizer-01"
+    ],
+    "vent_hole": [
+      "pressure-relief-vent-01"
+    ],
+    "vessel_hole": [
+      "storage-tank-01"
+    ]
+  },
+  "manifest_scenario_component_ids": {
+    "inventory_depletion": [
+      "ambient-vaporizer-01",
+      "liquid-transfer-line-01",
+      "liquid-transfer-pump-01",
+      "reliquefier-01",
+      "storage-tank-01",
+      "transfer-valve-01"
+    ],
+    "inventory_over_600s": [
+      "ambient-vaporizer-01",
+      "liquid-transfer-line-01",
+      "liquid-transfer-pump-01",
+      "reliquefier-01",
+      "storage-tank-01",
+      "transfer-valve-01"
+    ],
+    "liquid_two_phase": [
+      "ambient-vaporizer-01",
+      "liquid-transfer-line-01",
+      "liquid-transfer-pump-01",
+      "reliquefier-01",
+      "storage-tank-01",
+      "transfer-valve-01"
+    ],
+    "pipe_hole": [
+      "liquid-transfer-line-01"
+    ],
+    "pump_hole": [
+      "liquid-transfer-pump-01"
+    ],
+    "reliquefier_hole": [
+      "reliquefier-01"
+    ],
+    "two_sided_rupture": [
+      "liquid-transfer-line-01",
+      "transfer-valve-01"
+    ],
+    "valve_hole": [
+      "transfer-valve-01"
+    ],
+    "vaporizer_hole": [
+      "ambient-vaporizer-01"
+    ],
+    "vent_hole": [
+      "pressure-relief-vent-01"
+    ],
+    "vertical_handoff": [
+      "liquid-transfer-line-01",
+      "pressure-relief-vent-01",
+      "transfer-valve-01"
+    ],
+    "vessel_hole": [
+      "storage-tank-01"
+    ]
+  },
+  "frequency_scope_selected_component_ids": [
+    "ambient-vaporizer-01",
+    "liquid-transfer-line-01",
+    "liquid-transfer-pump-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01",
+    "transfer-valve-01"
+  ],
+  "frequency_scope_excluded_component_ids": [
+    "receiving-boundary-01"
+  ],
+  "manifest_audit_status": "EXECUTABLE",
+  "campaign_status": "PARTIAL_DECLARED_SCOPE",
+  "declared_scope_numerically_complete": false,
+  "conditional_chain_complete": false,
+  "conditional_chain_blocking_reasons": [
+    "vertical_handoff: UNCOMPUTED"
+  ],
+  "facility_total_risk_available": false,
+  "matrix_complete": false,
+  "blocking_reasons": [
+    "vessel_hole: PARTIAL",
+    "pipe_hole: PARTIAL",
+    "valve_hole: PARTIAL",
+    "pump_hole: PARTIAL",
+    "liquid_two_phase: PARTIAL",
+    "inventory_depletion: PARTIAL",
+    "two_sided_rupture: PARTIAL",
+    "vertical_handoff: NO_EVENT_GENERATED",
+    "campaign does not provide total facility annual IR"
+  ],
+  "physical_validation_claim": false,
+  "interpretation": "Mechanism and execution coverage accounting; rows with no generated event are explicit and frequency sums across rows must not be added."
+}
