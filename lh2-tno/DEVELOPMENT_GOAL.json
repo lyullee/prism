@@ -1024,5 +1024,12 @@
   "compressible_plane_handoff_attach_smoke_max_mach": 1.9998193819456764,
   "compressible_plane_handoff_attach_smoke_provider_export": false,
   "compressible_plane_handoff_attach_smoke_physical_validation_claim": false,
-  "compressible_plane_handoff_attach_smoke_facility_qra_claim": false
+  "compressible_plane_handoff_attach_smoke_facility_qra_claim": false,
+  "compressible_plane_handoff_chain_smoke_record": "results/20261016/vaporizer_g1_attached_smoke/chain/verification.json",
+  "compressible_plane_handoff_chain_smoke_digest": "1D3B60BF0A37A649F00D72E719C356854A43331259AAD288A35236E746D57261",
+  "compressible_plane_handoff_chain_smoke_status": "END_TO_END_DIAGNOSTIC_EXECUTED; attached synthetic handoff consumed; provider_packet_promoted=false; facility IR/F-N withheld",
+  "compressible_plane_handoff_chain_smoke_provider_handoff_consumed": true,
+  "compressible_plane_handoff_chain_smoke_source_model": "equipment-resolved-compressible-gas + provider-compressible-plane-handoff",
+  "compressible_plane_handoff_chain_smoke_physical_validation_claim": false,
+  "compressible_plane_handoff_chain_smoke_facility_qra_claim": false
 }

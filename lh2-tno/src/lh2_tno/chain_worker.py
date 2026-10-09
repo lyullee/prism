@@ -442,15 +442,21 @@ def run_chain(p,roots,module):
             handoff_direction=np.asarray(handoff['direction_enu'],float)
             downvelocity=float(handoff['velocity_m_s']*np.dot(handoff_direction,down))
             if downvelocity<=0:
-                raise ValueError('vertical handoff has no positive downwind velocity for this weather condition')
+                raise ValueError('provider handoff has no positive downwind velocity for this weather condition')
             total=rate/handoff['h2_mass_fraction']
+            handoff_is_compressible = source.get('compressible_plane_handoff') is not None
+            handoff_label = (
+                'equipment-resolved-compressible-gas + provider-compressible-plane-handoff'
+                if handoff_is_compressible else
+                'equipment-resolved-vertical-gas + provider-horizontal-handoff'
+            )
             hs=handmod.FreeJetHandoffState(handoff_distance_m=0.01,duration_s=span,
                 total_rate_kg_s=total,h2_mass_fraction=handoff['h2_mass_fraction'],
                 temperature_K=handoff['temperature_k'],density_kg_m3=handoff['density_kg_m3'],
                 velocity_m_s=downvelocity,centre_height_m=provider_handoff['position_enu_m'][2],
                 half_width_m=handoff['half_width_m'],depth_m=handoff['depth_m'],
                 mixture_cp_J_kgK=handoff['h2_mass_fraction']*14300.+(1-handoff['h2_mass_fraction'])*1006.,
-                source_model='equipment-resolved-vertical-gas + provider-horizontal-handoff',
+                source_model=handoff_label,
                 geometry_closure='provider-resolved horizontal handoff section')
             source_model=handmod.NearFieldHandoff(substance,hs,mass_tolerance=1e-8)
             handoff_start_x=hs.handoff_distance_m
@@ -459,7 +465,8 @@ def run_chain(p,roots,module):
                            'mass_residual_relative':hs.mass_residual_relative(),
                            'transition_mass_residual_kg_s':None,
                            'transition_energy_residual_w':None,
-                           'provider_vertical_adapter':True})
+                           'provider_vertical_adapter':not handoff_is_compressible,
+                           'provider_compressible_plane_adapter':handoff_is_compressible})
         elif kind=='jet':
             transition_input=transition.TransitionInput(
                 h2_rate_kg_s=rate,flash_vapour_mass_fraction=1.,flash_velocity_m_s=velocity,
