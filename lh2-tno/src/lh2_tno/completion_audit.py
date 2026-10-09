@@ -285,10 +285,30 @@ def build_ijhe_completion_audit(
         residual = full_bore_frequency.get("provider_mass_residual_kg")
         event_id = full_bore_frequency.get("event_id")
         frequency_event_id = full_bore_frequency.get("frequency_event_id")
+        facility_campaign_present = "facility_campaign_executed" in full_bore_frequency
+        facility_campaign_valid = (
+            not facility_campaign_present
+            or (
+                full_bore_frequency.get("facility_campaign_executed") is True
+                and full_bore_frequency.get("facility_campaign_status") == "PARTIAL_DECLARED_SCOPE"
+                and full_bore_frequency.get("facility_campaign_event_count") == 5
+                and full_bore_frequency.get("facility_campaign_case_count") == 5
+                and full_bore_frequency.get("facility_campaign_executed_case_count") == 1
+                and full_bore_frequency.get("facility_campaign_uncomputed_case_count") == 4
+                and full_bore_frequency.get("facility_campaign_risk_atom_count") == 4
+                and full_bore_frequency.get("facility_campaign_conditional_risk_available") is True
+                and full_bore_frequency.get("facility_total_risk_available") is False
+            )
+        )
         full_bore_frequency_valid = (
-            full_bore_frequency.get("schema_version")
-            == "prism.native_lh2dt_dynamic_pipe_full_bore_frequency_case.v1"
-            and full_bore_frequency.get("status") == "END_TO_END_DIAGNOSTIC_EXECUTED"
+            full_bore_frequency.get("schema_version") in {
+                "prism.native_lh2dt_dynamic_pipe_full_bore_frequency_case.v1",
+                "prism.native_lh2dt_dynamic_pipe_full_bore_facility_frequency_case.v1",
+            }
+            and full_bore_frequency.get("status") in {
+                "END_TO_END_DIAGNOSTIC_EXECUTED",
+                "PARTIAL_DECLARED_SCOPE",
+            }
             and isinstance(event_id, str)
             and event_id.endswith("/AREA_100%")
             and frequency_event_id == event_id
@@ -304,6 +324,7 @@ def build_ijhe_completion_audit(
             and full_bore_frequency.get("frequency_applied") is True
             and full_bore_frequency.get("frequency_exact_opening_match") is True
             and full_bore_frequency.get("consequence_chain_executed") is True
+            and facility_campaign_valid
             and full_bore_frequency.get("facility_qra_claim") is False
             and full_bore_frequency.get("physical_validation_claim") is False
         )
@@ -337,6 +358,25 @@ def build_ijhe_completion_audit(
                         "frequency_exact_opening_match"
                     ),
                     "consequence_chain_executed": full_bore_frequency.get("consequence_chain_executed"),
+                    "facility_campaign_executed": full_bore_frequency.get("facility_campaign_executed"),
+                    "facility_campaign_status": full_bore_frequency.get("facility_campaign_status"),
+                    "facility_campaign_event_count": full_bore_frequency.get("facility_campaign_event_count"),
+                    "facility_campaign_case_count": full_bore_frequency.get("facility_campaign_case_count"),
+                    "facility_campaign_executed_case_count": full_bore_frequency.get(
+                        "facility_campaign_executed_case_count"
+                    ),
+                    "facility_campaign_uncomputed_case_count": full_bore_frequency.get(
+                        "facility_campaign_uncomputed_case_count"
+                    ),
+                    "facility_campaign_risk_atom_count": full_bore_frequency.get(
+                        "facility_campaign_risk_atom_count"
+                    ),
+                    "facility_campaign_conditional_risk_available": full_bore_frequency.get(
+                        "facility_campaign_conditional_risk_available"
+                    ),
+                    "facility_total_risk_available": full_bore_frequency.get(
+                        "facility_total_risk_available"
+                    ),
                     "facility_qra_claim": full_bore_frequency.get("facility_qra_claim"),
                     "physical_validation_claim": full_bore_frequency.get("physical_validation_claim"),
                 },

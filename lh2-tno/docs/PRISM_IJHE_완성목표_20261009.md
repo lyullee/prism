@@ -153,6 +153,8 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 
 이번 단계에서는 `--native-full-bore-frequency-result examples/native_lh2dt_dynamic_pipe_full_bore_frequency_case_verification.json`도 추가했다. 새 검사 `diagnostic_native_full_bore_frequency_binding`은 native full-bore packet과 `LH2_PIPE AREA_100%` 문헌 사건 ID, `0.025 m` opening, 연간 빈도 `1.9×10⁻⁷ year⁻¹`, 자연 종료 및 피해 chain을 exact-match한다. 최신 감사는 `results/20261018/ijhe_completion_audit_with_full_bore_frequency.json`의 24개 검사 중 이 결합을 진단 전용 PASS로 기록한다. 적격 provider packet 부재, 부분·미계산 사고 범위, 시설 IR/F-N 보류라는 세 차단 이유는 그대로 유지한다.
 
+`native_lh2dt_dynamic_pipe_full_bore_facility_frequency_case_verification.json`은 같은 사건을 시설 campaign 장부까지 보낸 결과다. 5개 배관 opening bin 중 `AREA_100%`만 실행되어 1개 case·4개 `UNCOMPUTED` case와 4개 risk atom이 기록된다. 조건부 장부가 존재해도 전체 시설 IR/F-N은 `facility_total_risk_available=false`로 보류한다.
+
 ## 2026-10-18 native DynamicHEMPipe 2상 연결
 
 배관 경계도 같은 방식으로 확인했다. 외부 `DynamicHEMPipe` native export는 명시적 액체·2상 초기 품질을 받고 대기 flash의 기체/지상 액체 분할과 질량·엔탈피 장부를 반환한다. `LH2_PIPE AREA_0.01%` 개구와 문헌 빈도를 한 정확한 사건에 결합한 결과는 `PARTIAL_DECLARED_SCOPE`이며, 2상 packet은 strict adapter와 SLABx-LH2 consequence chain까지 소비됐다. 다른 opening bin과 나머지 설비는 명시적 미계산/제외로 남겼다. airborne liquid, 전량 방출, 현장 위치별 빈도, 물리검증을 추가하지 않았으므로 이 연결도 시설 전체 위험도 완료를 의미하지 않는다.
