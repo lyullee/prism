@@ -48,7 +48,8 @@
         1.0694000091786761e-06
       ]
     },
-    "facility_total_risk_available": false
+    "facility_total_risk_available": false,
+    "facility_promotion_allowed_now": false
   },
   "ijhe_audit": {
     "record": "results/20261022/ijhe_completion_audit_repaired_valve_transfer_line_replacement.json",
