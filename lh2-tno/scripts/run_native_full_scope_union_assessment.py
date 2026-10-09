@@ -1,11 +1,11 @@
-"""Merge the native general-LH2 campaign with the vertical-handoff diagnostic.
+"""Merge native general-LH2 diagnostic campaigns into one facility ledger.
 
-The base 24-event campaign and the five-event vertical-handoff campaign are
-independent diagnostic ledgers.  This script rebinds the vertical result into
-the base facility namespace, remaps its event IDs, merges the facility ledger
-and accident-family matrix, and reweights the saved atoms with the same
-literature-frequency scenarios.  It never promotes the synthetic handoff or
-creates a facility-QRA claim.
+The base 24-event campaign, the five-event vertical-handoff campaign and the
+five-event inventory-depletion campaign are independent diagnostic ledgers.
+This script rebinds the disjoint results into the base facility namespace,
+remaps event IDs, merges the facility ledger and accident-family matrix, and
+reweights the saved atoms with the same literature-frequency scenarios.  It
+never promotes the synthetic campaigns or creates a facility-QRA claim.
 """
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.facility_evidence_request import build_facility_evidence_request  # noqa: E402
 from lh2_tno.facility_ledger import merge_facility_campaign_results  # noqa: E402
+from lh2_tno.campaign_namespace import rebind_campaign_result  # noqa: E402
 from lh2_tno.scope_matrix_merge import merge_scope_matrices  # noqa: E402
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
 from lh2_tno.vertical_handoff_campaign import (  # noqa: E402
@@ -92,6 +93,71 @@ def _rebind_vertical_scope_matrix(
     return output
 
 
+def _rebind_inventory_scope_matrix(
+    source: dict[str, Any],
+    *,
+    facility_id: str,
+    namespace: str,
+) -> dict[str, Any]:
+    """Map the legacy inventory-depletion matrix to the rebound event IDs."""
+    output = deepcopy(source)
+    for row in output.get("rows", []):
+        if not isinstance(row, dict):
+            continue
+        mapped: list[str] = []
+        for event_id in row.get("event_ids", []):
+            value = str(event_id)
+            if "/terminal_pipe_asset/" in value:
+                suffix = value.split("/terminal_pipe_asset/", 1)[1]
+                value = f"{namespace}/terminal_pipe_asset/{suffix}"
+            mapped.append(value)
+        row["event_ids"] = mapped
+    output["facility_id"] = facility_id
+    output["source_scope_matrix"] = source.get("facility_id")
+    output["scope_rebind"] = {
+        "schema_version": "prism.inventory_depletion_scope_matrix_rebind.v1",
+        "facility_id": facility_id,
+        "namespace": namespace,
+        "diagnostic_only": True,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    return output
+
+
+def _rebind_inventory_conditions(
+    result: dict[str, Any],
+    *,
+    namespace: str,
+) -> dict[str, Any]:
+    """Namespace source weather/population condition IDs before facility merge."""
+    output = deepcopy(result)
+    conditions = output.get("annual_conditions", [])
+    if not isinstance(conditions, list):
+        raise ValueError("inventory campaign annual_conditions must be a list")
+    condition_map: dict[str, str] = {}
+    for condition in conditions:
+        if not isinstance(condition, dict) or not condition.get("id"):
+            raise ValueError("inventory campaign annual conditions require IDs")
+        old_id = str(condition["id"])
+        new_id = f"{namespace}/{old_id}"
+        condition_map[old_id] = new_id
+        condition["id"] = new_id
+    for key in ("cases", "uncomputed_cases", "risk_atoms"):
+        rows = output.get(key, [])
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if isinstance(row, dict) and row.get("annual_condition_id"):
+                old_id = str(row["annual_condition_id"])
+                row["annual_condition_id"] = condition_map.get(old_id, old_id)
+    rebind = output.get("campaign_namespace_rebind")
+    if isinstance(rebind, dict):
+        rebind["annual_condition_id_map"] = condition_map
+        rebind["condition_rebind_policy"] = "namespaced_condition_ids_preserve_source_weather"
+    return output
+
+
 def _extend_frequency_scenarios(
     source: dict[str, Any],
 ) -> tuple[LiteratureFrequencyScenario, ...]:
@@ -105,6 +171,7 @@ def _extend_frequency_scenarios(
         item = deepcopy(raw)
         if isinstance(item.get("asset_quantiles"), dict):
             item["asset_quantiles"]["vertical-handoff-vent"] = "published"
+            item["asset_quantiles"]["inventory-depletion-pipe"] = "published"
         elif isinstance(item.get("event_quantiles"), dict):
             for area in ("AREA_0.01%", "AREA_0.1%", "AREA_1%", "AREA_10%", "AREA_100%"):
                 item["event_quantiles"][
@@ -114,6 +181,7 @@ def _extend_frequency_scenarios(
             raise ValueError(f"frequency scenario {index} has no quantile map")
         provenance = str(item.get("provenance", "")).strip()
         suffix = "vertical handoff fixed at declared diagnostic rate; no frequency inference"
+        suffix += "; inventory depletion fixed at declared diagnostic rate; no frequency inference"
         item["provenance"] = f"{provenance}; {suffix}" if provenance else suffix
         scenarios.append(LiteratureFrequencyScenario.model_validate(item))
     return tuple(scenarios)
@@ -127,6 +195,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     base_frequency_scenarios = _load(base_dir / "frequency_scenarios.json")
     vertical_source = _load(args.vertical_result)
     vertical_scope_source = _load(args.vertical_scope_matrix)
+    inventory_source = _load(args.inventory_result)
+    inventory_scope_source = _load(args.inventory_scope_matrix)
 
     facility_id = str(base_result.get("facility_id", "")).strip()
     if not facility_id:
@@ -145,26 +215,52 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         facility_id=facility_id,
         namespace=namespace,
     )
+    inventory_namespace = f"{facility_id}/inventory-depletion"
+    inventory_result = rebind_campaign_result(
+        inventory_source,
+        source_facility_id=str(inventory_source.get("facility_id", "")).strip(),
+        facility_id=facility_id,
+        namespace=inventory_namespace,
+        source_asset_id="inventory-depletion-pipe",
+        asset_id="inventory-depletion-pipe",
+        source_component_id="inventory-depletion-pipe-01",
+        component_id="inventory-depletion-pipe-01",
+        receptor_map={
+            "near_worker": "worker-01",
+            "downwind_worker": "worker-01",
+            "side_worker": "worker-01",
+            "distant_worker": "worker-01",
+        },
+    )
+    inventory_result = _rebind_inventory_conditions(
+        inventory_result,
+        namespace=inventory_namespace,
+    )
+    inventory_scope = _rebind_inventory_scope_matrix(
+        inventory_scope_source,
+        facility_id=facility_id,
+        namespace=inventory_namespace,
+    )
 
     expected_components = tuple(
         str(component["id"]) for component in base_facility.get("components", [])
-    ) + ("vertical-handoff-terminal-pipe-01",)
+    ) + ("vertical-handoff-terminal-pipe-01", "inventory-depletion-pipe-01")
     merged = merge_facility_campaign_results(
-        [base_result, vertical_result],
+        [base_result, vertical_result, inventory_result],
         expected_component_ids=expected_components,
-        scope_matrices=[base_scope, vertical_scope],
+        scope_matrices=[base_scope, vertical_scope, inventory_scope],
         required_accident_families=MAJOR_ACCIDENT_FAMILIES,
     )
     merged_scope = merge_scope_matrices(
-        [base_scope, vertical_scope],
+        [base_scope, vertical_scope, inventory_scope],
         facility_id=facility_id,
         required_families=MAJOR_ACCIDENT_FAMILIES,
     )
     scenarios = _extend_frequency_scenarios(base_frequency_scenarios)
     assessment = build_facility_assessment(
-        [base_result, vertical_result],
+        [base_result, vertical_result, inventory_result],
         expected_component_ids=expected_components,
-        scope_matrices=[base_scope, vertical_scope],
+        scope_matrices=[base_scope, vertical_scope, inventory_scope],
         required_accident_families=MAJOR_ACCIDENT_FAMILIES,
         frequency_scenarios=scenarios,
     )
@@ -173,12 +269,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
     )
+    inventory_row = next(
+        row for row in merged_scope["rows"] if row["family"] == "inventory_depletion"
+    )
     verification = {
         "schema_version": "prism.native_full_scope_union_assessment.v1",
         "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
         "facility_id": facility_id,
         "base_event_count": len(base_result.get("events", [])),
         "vertical_event_count": len(vertical_result.get("events", [])),
+        "inventory_depletion_event_count": len(inventory_result.get("events", [])),
         "merged_event_count": merged["event_count"],
         "merged_case_count": merged["case_count"],
         "merged_risk_atom_count": len(merged.get("risk_atoms", [])),
@@ -188,6 +288,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "conditional_executed_case_count"
         ],
         "vertical_handoff_operator_limited_case_count": vertical_row[
+            "operator_limited_case_count"
+        ],
+        "inventory_depletion_status": inventory_row["status"],
+        "inventory_depletion_conditional_status": inventory_row["conditional_status"],
+        "inventory_depletion_conditional_executed_case_count": inventory_row[
+            "conditional_executed_case_count"
+        ],
+        "inventory_depletion_operator_limited_case_count": inventory_row[
             "operator_limited_case_count"
         ],
         "conditional_diagnostic_facility_risk_available": assessment[
@@ -215,12 +323,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
             "the merged conditional IR/F-N is diagnostic and facility total IR/F-N remains withheld",
             "frequency scenarios reweight saved atoms and do not infer vertical frequency",
+            "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
+            "inventory depletion population, weather and geometry remain synthetic diagnostics",
         ],
     }
     output = args.output_dir
     output.mkdir(parents=True, exist_ok=True)
     _save(output / "campaign_result.json", merged)
     _save(output / "vertical_handoff_rebound_result.json", vertical_result)
+    _save(output / "inventory_depletion_rebound_result.json", inventory_result)
     _save(output / "scope_matrix.json", merged_scope)
     _save(
         output / "frequency_scenarios.json",
@@ -228,6 +339,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "schema_version": "prism.native_full_scope_union_frequency_scenarios.v1",
             "scenarios": [scenario.model_dump(mode="json") for scenario in scenarios],
             "vertical_handoff_frequency_inference": False,
+            "inventory_depletion_frequency_inference": False,
             "facility_credible_interval": False,
         },
     )
@@ -242,6 +354,8 @@ def main() -> int:
     parser.add_argument("--base-dir", type=Path, required=True)
     parser.add_argument("--vertical-result", type=Path, required=True)
     parser.add_argument("--vertical-scope-matrix", type=Path, required=True)
+    parser.add_argument("--inventory-result", type=Path, required=True)
+    parser.add_argument("--inventory-scope-matrix", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -257,6 +371,7 @@ def main() -> int:
                 "merged_case_count": result["merged_case_count"],
                 "merged_risk_atom_count": result["merged_risk_atom_count"],
                 "vertical_handoff_status": result["vertical_handoff_status"],
+                "inventory_depletion_status": result["inventory_depletion_status"],
                 "facility_total_risk_available": result["facility_total_risk_available"],
                 "output": str(args.output_dir.resolve()),
             },

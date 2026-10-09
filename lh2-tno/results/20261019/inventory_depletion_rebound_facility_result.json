@@ -1,0 +1,1583 @@
+{
+  "status": "DECLARED_SCOPE_EXECUTED",
+  "facility_id": "generic-lh2-full-scope-example",
+  "facility_digest": "594912f9a5c0b1a0cd239f189868697f97ca3f964f532c9bf4e7abd0b86d6a1b",
+  "campaign_digest": "00acc0b5313938265584bce0481c629edebdbad7868e7b792b2bb03dbfb63adc",
+  "scope_provenance": "all five LH2_PIPE area-bin events use independent provider-owned homogeneous finite-storage inventory-depletion thresholds and resolved gas histories through SLABx-LH2/SLABx and native TNO IR/F-N; facility geometry, weather and population remain synthetic diagnostics; explicit facility namespace rebind to generic-lh2-full-scope-example",
+  "events": [
+    {
+      "id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "model_component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.01%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 3.4e-06,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 3.4e-06,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 3.2554838825238133e-07,
+      "marginal_p95_per_year": 3.5511808894583394e-05,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 3.5682482323055425e-05,
+        "area_fraction": 0.0001,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "model_component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 1.6e-06,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 1.6e-06,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 1.3386517161273802e-07,
+      "marginal_p95_per_year": 1.9123984561800025e-05,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.00011283791670955126,
+        "area_fraction": 0.001,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "model_component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 8e-07,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 8e-07,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 7.464077255362197e-08,
+      "marginal_p95_per_year": 8.573615206250296e-06,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.00035682482323055425,
+        "area_fraction": 0.01,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "model_component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_10%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 3.9e-07,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 3.9e-07,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 3.5602303956530105e-08,
+      "marginal_p95_per_year": 4.2723586050594105e-06,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.0011283791670955127,
+        "area_fraction": 0.1,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "model_component_id": "inventory-depletion-pipe-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_100%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 1.9e-07,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 1.9e-07,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 6.489473098932577e-09,
+      "marginal_p95_per_year": 5.563320009666715e-06,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.0035682482323055424,
+        "area_fraction": 1.0,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    }
+  ],
+  "annual_conditions": [
+    {
+      "id": "D-3ms-west",
+      "annual_probability": 0.4,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    },
+    {
+      "id": "D-4ms-west",
+      "annual_probability": 0.6,
+      "weather": {
+        "wind_speed_m_s": 4.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    }
+  ],
+  "cases": [
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.4e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 2091.621099971235,
+      "request_digest": "21d90294e8632522fc6d188a0579df53b007874ce10265077029d9fcbaf007c7",
+      "result_digest": "4092d86fb90121c6525b257fb530da6bad72bad7b309f7eb4ea424db311952e0",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 721.1826000129804,
+        "pool": 0.004299916326999664,
+        "near_field_and_dispersion": 835.3526999708265,
+        "cloud_observation": 83.9212000137195,
+        "fire_explosion_damage_risk": 75.5590999033302
+      },
+      "mass_ledger": {
+        "released_kg": 1.2125616572864818e-07,
+        "direct_gas_kg": 1.2125616572864818e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 1.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.4e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 2089.169600047171,
+      "request_digest": "b2c063feb2fc5f7b895ee15919c51402f81e2d8f631b736c60c76606caebb339",
+      "result_digest": "3330106d8628bb0b3c09bc818cf63edebebac2c83db16d1e1d8629980f038137",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 816.3367999950424,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 825.1994999591261,
+        "cloud_observation": 81.63409994449466,
+        "fire_explosion_damage_risk": 75.60750003904104
+      },
+      "mass_ledger": {
+        "released_kg": 1.2125616572864818e-07,
+        "direct_gas_kg": 1.2125616572864818e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 1.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 1.6e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 1683.0061000073329,
+      "request_digest": "a76deaf68becd851232a9ace5694bc8b33d3e1cdaefc56a50118c7cd7e289077",
+      "result_digest": "6980e7de1893f1a6a6479fbd49a05f5bb4a9c5ef15018df98dac481480afcf1a",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 722.2909999545664,
+        "pool": 0.00400003045797348,
+        "near_field_and_dispersion": 561.2362999236211,
+        "cloud_observation": 55.61919999308884,
+        "fire_explosion_damage_risk": 70.79440006054938
+      },
+      "mass_ledger": {
+        "released_kg": 4.022010171050504e-07,
+        "direct_gas_kg": 4.022010171050504e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 1.6e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 1587.3148000100628,
+      "request_digest": "fbd089f682d7e58ba197d51a7d18ff53533e3fce1ed28f5ab6139f82b91d48ba",
+      "result_digest": "a2e9a25105c44d79b429ae233b3f68e0d4a4cf22b6c86067c71c2eb8d2522578",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 720.238900044933,
+        "pool": 0.004500034265220165,
+        "near_field_and_dispersion": 469.4574000313878,
+        "cloud_observation": 54.57599996589124,
+        "fire_explosion_damage_risk": 69.1786000970751
+      },
+      "mass_ledger": {
+        "released_kg": 4.022010171050504e-07,
+        "direct_gas_kg": 4.022010171050504e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 8e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 2099.089300027117,
+      "request_digest": "2c6498913a9ee9cd0ed504402e2254412d91ae99218291f425e0324101754076",
+      "result_digest": "da618f2527ba6d9e99aff9156efdab3a71195fafaccf53fa017244e3e1a10482",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 790.5180999077857,
+        "pool": 0.004300032742321491,
+        "near_field_and_dispersion": 923.9521999843419,
+        "cloud_observation": 56.097200023941696,
+        "fire_explosion_damage_risk": 71.40359992627054
+      },
+      "mass_ledger": {
+        "released_kg": 2.6216519132821583e-06,
+        "direct_gas_kg": 2.6216519132821583e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 8e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 2071.0120999719948,
+      "request_digest": "07ed344883a55600978ffd453569064798ab1bbd0dd045fff9a2a891af897a1b",
+      "result_digest": "b4be993686d225bb702d0dca449d61825529731f00d8fc8f0640d0829607eb74",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 733.6562999989837,
+        "pool": 0.005499925464391708,
+        "near_field_and_dispersion": 938.4178000036627,
+        "cloud_observation": 56.47900002077222,
+        "fire_explosion_damage_risk": 68.75420000869781
+      },
+      "mass_ledger": {
+        "released_kg": 2.6216519132821583e-06,
+        "direct_gas_kg": 2.6216519132821583e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.9e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 2192.679400090128,
+      "request_digest": "0faa9b8c4e75413c1fc31e7366fb7d03a9377ad9342b3de3a9c645fe40f10e7f",
+      "result_digest": "649c28d00fe1befbe867be49028a0089588b1aafa8f06992ca1cb1c506a314e7",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 729.6336001018062,
+        "pool": 0.003700028173625469,
+        "near_field_and_dispersion": 1064.2733999993652,
+        "cloud_observation": 56.320799980312586,
+        "fire_explosion_damage_risk": 69.46469994727522
+      },
+      "mass_ledger": {
+        "released_kg": 2.1140345784364108e-05,
+        "direct_gas_kg": 2.1140345784364108e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.9e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 2159.123899997212,
+      "request_digest": "18f9a685b6a4b8625282b0d8cf2b5f7f3f1891978ccdd983003ca1bdb08bce12",
+      "result_digest": "09bbcf0831ffb76d82b1d094ca73e1b88a5724fd0f28ae2d6fb1ef52a89879d9",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 726.8589999293908,
+        "pool": 0.004300032742321491,
+        "near_field_and_dispersion": 1001.0785000631586,
+        "cloud_observation": 76.33270008955151,
+        "fire_explosion_damage_risk": 79.3834999203682
+      },
+      "mass_ledger": {
+        "released_kg": 2.1140345784364108e-05,
+        "direct_gas_kg": 2.1140345784364108e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.5,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 1.9e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 2281.879900023341,
+      "request_digest": "551b30ac102fd91d76b1cd43c69c699c17d331acd988e150a545af9ea9608372",
+      "result_digest": "6ca77685507d684e442d5609d1d63e8631428eb50cfeda8036383e91c6c69684",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 716.4041000651196,
+        "pool": 0.00400003045797348,
+        "near_field_and_dispersion": 1153.7866999860853,
+        "cloud_observation": 58.388000004924834,
+        "fire_explosion_damage_risk": 72.49480008613318
+      },
+      "mass_ledger": {
+        "released_kg": 2.6236186797952155e-05,
+        "direct_gas_kg": 2.6236186797952155e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.0625,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 1.9e-07,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 2309.123200015165,
+      "request_digest": "e6f0ae6b6637e04edb9d61d53c2d5b9626db5ac59a2273cf6ce56c3e0b41ec16",
+      "result_digest": "fa8701beff7e45f370691f57bb13be6757359ba7b375274c3649453c356cfe2f",
+      "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+      "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+      "stage_elapsed_ms": {
+        "source": 719.4655000930652,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 1132.895499933511,
+        "cloud_observation": 55.725499987602234,
+        "fire_explosion_damage_risk": 70.8534000441432
+      },
+      "mass_ledger": {
+        "released_kg": 2.6236186797952155e-05,
+        "direct_gas_kg": 2.6236186797952155e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.0625,
+        "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+      }
+    }
+  ],
+  "uncomputed_cases": [],
+  "excluded_model_components": {},
+  "coverage": {
+    "generated_initiation_frequency_per_year": 6.38e-06,
+    "fully_executed_case_weighted_frequency_per_year": 6.38e-06,
+    "fraction_of_generated_initiation_frequency": 1.0,
+    "meaning": "frequency coverage only; not fraction of risk captured, not physical validation",
+    "by_component": [
+      {
+        "component_id": "inventory-depletion-pipe-01",
+        "kind": "diagnostic_component",
+        "scope_status": "EXECUTED",
+        "excluded_reason": null,
+        "generated_event_count": 5,
+        "generated_initiation_frequency_per_year": 6.38e-06,
+        "campaign_case_count": 10,
+        "executed_case_count": 10,
+        "fully_validated_case_count": 10,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "uncomputed_case_count": 0,
+        "uncomputed_reasons": []
+      }
+    ]
+  },
+  "declared_scope_numerically_complete": true,
+  "synthetic_release_horizon_present": false,
+  "declared_scope_annual_ir_low_high": {
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "known_contribution_annual_ir_low_high": {
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "declared_scope_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "total_facility_annual_ir_low_high": {
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "total_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "risk_atoms": [
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.028800000000000006,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.04320000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.04000000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.28800000000000003,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0432,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.06480000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.06,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.43200000000000005,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.028800000000000006,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.04320000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.04000000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.28800000000000003,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0432,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.06480000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.06,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.43200000000000005,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.028800000000000006,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.04320000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.04000000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.28800000000000003,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0432,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.06480000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.06,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.43200000000000005,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.028800000000000006,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.04320000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.04000000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.28800000000000003,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0432,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.06480000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.06,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.43200000000000005,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.028800000000000006,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.04320000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.04000000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.28800000000000003,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0432,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.06480000000000001,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.06,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-inventory-depletion",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.43200000000000005,
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "aggregation_provenance": {
+    "ok": true,
+    "limitation": "Native legacy risk.total_individual_risk and risk.fn_curve; expected-death convention; external physics/coverage must be checked separately.",
+    "environment": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "dependencies": {
+        "CoolProp": "8.0.0",
+        "numpy": "2.5.3",
+        "scipy": "1.18.1"
+      }
+    },
+    "request_digest": "a6370fa082fe401dff36cb6a1f49fbcbeddd73e3869b969a31bd0da244fb0e36",
+    "backend_config_digest": "bf8328f46eccf3fa49375cac403a325560de638883b0e2fa17774494cfcec4ca",
+    "worker_sha256": "06e5eb73753d60fc251179dac2fb7a6efcc9b37905902042fc52d7c391e42769",
+    "adapter_source_digest": "6fa764014d3f760ab1bb633278ba66ab7f5747d0f6789eaa620c595d6a118d47",
+    "elapsed_ms": 274.23350000754,
+    "physical_validation_claim": false
+  },
+  "timing": {
+    "fresh_physics_cases": 10,
+    "case_min_ms": 1587.3148000100628,
+    "case_median_ms": 2095.355199999176,
+    "case_max_ms": 2309.123200015165,
+    "campaign_elapsed_ms": 20850.820600055158,
+    "distribution": "across cases; not repeated-run latency qualification"
+  },
+  "semantics": {
+    "individual_risk": "fixed person at each receptor; no population occupancy multiplier",
+    "societal_risk": "native legacy F-N of expected deaths per event/weather/barrier/ignition outcome; not a joint casualty distribution",
+    "weighting": "initiating frequency times annual joint condition times release/barrier branch times ignition; each once",
+    "endpoints": "two declared radiation sensitivities and within-branch harm union bounds; not frequency credible intervals",
+    "population": "disjoint outdoor groups at representative receptors; temporal presence in annual conditions"
+  },
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "one_hz_fresh_physics_demonstrated": false,
+  "source_facility_id": "equipment-inventory-campaign",
+  "source_campaign_digest": "00acc0b5313938265584bce0481c629edebdbad7868e7b792b2bb03dbfb63adc",
+  "campaign_namespace_rebind": {
+    "schema_version": "prism.campaign_namespace_rebind.v1",
+    "source_facility_id": "equipment-inventory-campaign",
+    "source_campaign_digest": "00acc0b5313938265584bce0481c629edebdbad7868e7b792b2bb03dbfb63adc",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "namespace": "generic-lh2-full-scope-example/inventory-depletion",
+    "source_asset_id": "terminal_pipe_asset",
+    "asset_id": "inventory-depletion-pipe",
+    "source_component_id": "terminal_pipe",
+    "component_id": "inventory-depletion-pipe-01",
+    "event_count": 5,
+    "event_id_map": {
+      "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%"
+    },
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_inference": false,
+    "interpretation": "A disjoint provider campaign was explicitly namespaced for facility aggregation. Source identifiers, partial case accounting and synthetic/operator limitations remain visible."
+  }
+}

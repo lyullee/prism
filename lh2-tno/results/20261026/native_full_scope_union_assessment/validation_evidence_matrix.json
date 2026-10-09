@@ -91,14 +91,14 @@
         "independent full-chain physical validation",
         "complete accident-family coverage"
       ],
-      "conditional_case_count": 34,
-      "conditional_executed_case_count": 34,
+      "conditional_case_count": 44,
+      "conditional_executed_case_count": 44,
       "conditional_uncomputed_case_count": 0,
       "strict_uncomputed_case_count": 29,
       "source": {
         "label": "facility assessment",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "sha256": "302c468271405690ad73f71a63da116364e323871e4d0403a796d517a2ec5ee9",
+        "sha256": "780d941aafd55c3593a64e5a0e286ce1df42e22a5699a56ec38d08e6302a2c5c",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,
@@ -114,11 +114,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 17,
+      "check_count": 19,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "2ca7882871924c876733bcb75e27efe80af30fbfbbe0ce39d3ce48ebf80deaec",
+        "sha256": "5e8d92c4e2f7033b7b8d7960ad56e66f3902d54fc4d3f1d86b4a20e4024a1f0d",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,

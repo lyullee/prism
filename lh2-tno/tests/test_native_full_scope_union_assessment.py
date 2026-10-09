@@ -21,13 +21,15 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     validation_matrix = _load("validation_evidence_matrix.json")
     benchmark = _load("realtime_cache_benchmark.json")
     rebound = _load("vertical_handoff_rebound_result.json")
+    inventory_rebound = _load("inventory_depletion_rebound_result.json")
     audit = _load("ijhe_completion_audit.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
-    assert verification["merged_event_count"] == 29
-    assert verification["merged_case_count"] == 34
-    assert verification["merged_risk_atom_count"] == 136
+    assert verification["inventory_depletion_event_count"] == 5
+    assert verification["merged_event_count"] == 34
+    assert verification["merged_case_count"] == 44
+    assert verification["merged_risk_atom_count"] == 176
     assert verification["vertical_handoff_status"] == "PARTIAL"
     assert verification["vertical_handoff_conditional_status"] == "EXECUTED"
     assert verification["vertical_handoff_conditional_executed_case_count"] == 10
@@ -38,7 +40,11 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["physical_validation_claim"] is False
     assert verification["facility_evidence_request_status"] == "OPEN_EVIDENCE_REQUEST"
     assert verification["facility_evidence_request_family_count"] == 12
-    assert verification["facility_evidence_request_case_count"] == 34
+    assert verification["inventory_depletion_status"] == "PARTIAL"
+    assert verification["inventory_depletion_conditional_status"] == "EXECUTED"
+    assert verification["inventory_depletion_conditional_executed_case_count"] == 28
+    assert verification["inventory_depletion_operator_limited_case_count"] == 17
+    assert verification["facility_evidence_request_case_count"] == 44
     assert verification["facility_evidence_request_promotion_allowed"] is False
     assert verification["validation_evidence_matrix_status"] == "RESTRICTED_EVIDENCE_MATRIX"
     assert verification["validation_evidence_matrix_decision"] == "FACILITY_QRA_WITHHELD"
@@ -53,23 +59,33 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["ijhe_audit_pass_count"] == 15
     assert verification["ijhe_audit_blocked_count"] == 4
 
-    assert result["event_count"] == 29
-    assert result["case_count"] == 34
-    assert len(result["risk_atoms"]) == 136
+    assert result["event_count"] == 34
+    assert result["case_count"] == 44
+    assert len(result["risk_atoms"]) == 176
     assert result["facility_id"] == "generic-lh2-near-receptor-diagnostic"
     assert rebound["vertical_handoff_rebind"]["diagnostic_only"] is True
     assert rebound["vertical_handoff_rebind"]["facility_qra_claim"] is False
+    assert inventory_rebound["campaign_namespace_rebind"]["diagnostic_only"] is True
+    assert inventory_rebound["campaign_namespace_rebind"]["facility_qra_claim"] is False
+    assert inventory_rebound["campaign_namespace_rebind"]["condition_rebind_policy"] == (
+        "namespaced_condition_ids_preserve_source_weather"
+    )
 
     rows = {row["family"]: row for row in scope["rows"]}
     assert rows["vertical_handoff"]["status"] == "PARTIAL"
     assert rows["vertical_handoff"]["conditional_status"] == "EXECUTED"
     assert rows["vertical_handoff"]["generated_event_count"] == 5
     assert rows["vertical_handoff"]["case_count"] == 10
+    assert rows["inventory_depletion"]["status"] == "PARTIAL"
+    assert rows["inventory_depletion"]["conditional_status"] == "EXECUTED"
+    assert rows["inventory_depletion"]["generated_event_count"] == 23
+    assert rows["inventory_depletion"]["case_count"] == 28
+    assert rows["inventory_depletion"]["conditional_executed_case_count"] == 28
     assert assessment["conditional_diagnostic_facility_risk_available"] is True
     assert assessment["facility_total_risk_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
     assert evidence_request["status"] == "OPEN_EVIDENCE_REQUEST"
-    assert evidence_request["case_request_count"] == 34
+    assert evidence_request["case_request_count"] == 44
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"

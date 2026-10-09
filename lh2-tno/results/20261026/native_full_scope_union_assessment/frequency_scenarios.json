@@ -11,10 +11,11 @@
         "transfer-line": "published",
         "transfer-pump": "published",
         "transfer-valve": "published",
-        "vertical-handoff-vent": "published"
+        "vertical-handoff-vent": "published",
+        "inventory-depletion-pipe": "published"
       },
       "event_quantiles": {},
-      "provenance": "published catalogue rates; conditional diagnostic only; vertical handoff fixed at declared diagnostic rate; no frequency inference",
+      "provenance": "published catalogue rates; conditional diagnostic only; vertical handoff fixed at declared diagnostic rate; no frequency inference; inventory depletion fixed at declared diagnostic rate; no frequency inference",
       "correlation_assumption": "within_asset_shared_quantile"
     },
     {
@@ -27,10 +28,11 @@
         "transfer-line": "p05",
         "transfer-pump": "fixed",
         "transfer-valve": "p05",
-        "vertical-handoff-vent": "published"
+        "vertical-handoff-vent": "published",
+        "inventory-depletion-pipe": "published"
       },
       "event_quantiles": {},
-      "provenance": "published marginal p05 bounds where available; fixed catalogue rates otherwise; vertical handoff fixed at declared diagnostic rate; no frequency inference",
+      "provenance": "published marginal p05 bounds where available; fixed catalogue rates otherwise; vertical handoff fixed at declared diagnostic rate; no frequency inference; inventory depletion fixed at declared diagnostic rate; no frequency inference",
       "correlation_assumption": "within_asset_shared_quantile"
     },
     {
@@ -43,13 +45,15 @@
         "transfer-line": "p95",
         "transfer-pump": "fixed",
         "transfer-valve": "p95",
-        "vertical-handoff-vent": "published"
+        "vertical-handoff-vent": "published",
+        "inventory-depletion-pipe": "published"
       },
       "event_quantiles": {},
-      "provenance": "published marginal p95 bounds where available; fixed catalogue rates otherwise; vertical handoff fixed at declared diagnostic rate; no frequency inference",
+      "provenance": "published marginal p95 bounds where available; fixed catalogue rates otherwise; vertical handoff fixed at declared diagnostic rate; no frequency inference; inventory depletion fixed at declared diagnostic rate; no frequency inference",
       "correlation_assumption": "within_asset_shared_quantile"
     }
   ],
   "vertical_handoff_frequency_inference": false,
+  "inventory_depletion_frequency_inference": false,
   "facility_credible_interval": false
 }

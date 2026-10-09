@@ -1,0 +1,5084 @@
+{
+  "status": "PARTIAL_DECLARED_SCOPE",
+  "facility_id": "generic-lh2-full-scope-example",
+  "facility_digest": "edea0f7e0676198670dc204de61090f452e4df6644345f86359b3a5f830a9e0a",
+  "campaign_digest": "9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12",
+  "scope_provenance": "synthetic vertical provider handoff through SLABx-LH2/SLABx and native TNO IR/F-N; handoff physics remains operator-limited; explicit facility namespace rebind to generic-lh2-full-scope-example",
+  "events": [
+    {
+      "id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "model_component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_0.01%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 0.00012,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 0.00012,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 4.4143229045141205e-05,
+      "marginal_p95_per_year": 0.0003262231195800764,
+      "frequency_distribution": "published_lognormal",
+      "log_rate_mu": -9.028,
+      "log_rate_sigma": 0.608,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.000254,
+        "area_fraction": 0.0001,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic LH2-service vent boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "model_component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_0.1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 5.2e-05,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 5.2e-05,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 8.622477495766756e-06,
+      "marginal_p95_per_year": 0.00031357816528445936,
+      "frequency_distribution": "published_lognormal",
+      "log_rate_mu": -9.8643,
+      "log_rate_sigma": 1.0924,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.0008032185256827682,
+        "area_fraction": 0.001,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic LH2-service vent boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "model_component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 2.2e-05,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 2.2e-05,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 2.057720688527284e-06,
+      "marginal_p95_per_year": 0.0002351967052387882,
+      "frequency_distribution": "published_lognormal",
+      "log_rate_mu": -10.7245,
+      "log_rate_sigma": 1.4405,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.00254,
+        "area_fraction": 0.01,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic LH2-service vent boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "model_component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_10%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 9.3e-06,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 9.3e-06,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 3.3789251339083347e-07,
+      "marginal_p95_per_year": 0.00025596700711635174,
+      "frequency_distribution": "published_lognormal",
+      "log_rate_mu": -11.5855,
+      "log_rate_sigma": 2.0154,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.008032185256827683,
+        "area_fraction": 0.1,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic LH2-service vent boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "model_component_id": "vertical-handoff-terminal-pipe-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_100%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 3.9e-06,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 3.9e-06,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 1.541781617567238e-07,
+      "marginal_p95_per_year": 9.865881321160032e-05,
+      "frequency_distribution": "published_lognormal",
+      "log_rate_mu": -12.4545,
+      "log_rate_sigma": 1.9641,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.0254,
+        "area_fraction": 1.0,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic LH2-service vent boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    }
+  ],
+  "annual_conditions": [
+    {
+      "id": "D-3ms-west",
+      "annual_probability": 0.4,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    },
+    {
+      "id": "D-4ms-west",
+      "annual_probability": 0.6,
+      "weather": {
+        "wind_speed_m_s": 4.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    }
+  ],
+  "cases": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 0.00012,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1379.0437000570819,
+      "request_digest": "9e4e73b7cca21bc9a49f5c8a62e7ef805894bc82f8079d961fe9d52e6eeef290",
+      "result_digest": "eaefd6721f64246c854d5040886841e50dd9ded65e15ada0682b6e40a913fb2d",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 691.5583000518382,
+        "pool": 0.00400003045797348,
+        "near_field_and_dispersion": 247.29760002810508,
+        "cloud_observation": 78.54300003964454,
+        "fire_explosion_damage_risk": 71.82249997276813
+      },
+      "mass_ledger": {
+        "released_kg": 1.6583741752980332e-09,
+        "direct_gas_kg": 1.6583741752980332e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 0.00012,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1392.5256000366062,
+      "request_digest": "0e653b87d5e5e448cb0a65f87edf327e312ad0c0f4468e2f3ca232cec800fdb4",
+      "result_digest": "7cfec88e623aa908b60313d10095fd428131b9b14e660944cdcf7bfe11ba1daa",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 696.2910000002012,
+        "pool": 0.00400003045797348,
+        "near_field_and_dispersion": 243.95159992855042,
+        "cloud_observation": 77.6342999888584,
+        "fire_explosion_damage_risk": 70.2574000461027
+      },
+      "mass_ledger": {
+        "released_kg": 1.6583741752980332e-09,
+        "direct_gas_kg": 1.6583741752980332e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 5.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1572.0948999514803,
+      "request_digest": "477ff4cd79fa6fc2ab6703df6e1d6879d14fa4240a0f50d183004f4401762728",
+      "result_digest": "f90852fdb4748a8fd03c2788c1e1808a68faefdcbd8226b7cba670219ffadbdd",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 726.7676999326795,
+        "pool": 0.003999914042651653,
+        "near_field_and_dispersion": 364.00160007178783,
+        "cloud_observation": 78.55279999785125,
+        "fire_explosion_damage_risk": 69.82400000561029
+      },
+      "mass_ledger": {
+        "released_kg": 1.653545292876029e-07,
+        "direct_gas_kg": 1.653545292876029e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 5.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1527.121699997224,
+      "request_digest": "a1b318272c7bb65a11401bb463a247faa4987becaecfa41a92faff10fade088a",
+      "result_digest": "d47da3eb161099e353d85d5afbdd952047f81d6db7c27c34360e65b3cc70c989",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 719.4521999917924,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 358.2602000096813,
+        "cloud_observation": 77.47540005948395,
+        "fire_explosion_damage_risk": 68.38509999215603
+      },
+      "mass_ledger": {
+        "released_kg": 1.653545292876029e-07,
+        "direct_gas_kg": 1.653545292876029e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 2.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1886.7062999634072,
+      "request_digest": "34266164b4b019899ea54eda40c6d2831adc7d3b14f9aecc45d7bf5926b25554",
+      "result_digest": "177db3a2a7a9bb1c9991a0038c19aef4459b9cb9d15ab33ae7b1b8c01a7e4d16",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 716.3546999217942,
+        "pool": 0.003999914042651653,
+        "near_field_and_dispersion": 727.333200047724,
+        "cloud_observation": 76.41109998803586,
+        "fire_explosion_damage_risk": 68.92859993968159
+      },
+      "mass_ledger": {
+        "released_kg": 4.629740437409607e-06,
+        "direct_gas_kg": 4.629740437409607e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 2.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1861.3404999487102,
+      "request_digest": "271ef7e88735e43dc756f1cfc6599ad6272ae229ec26ceebce16537488edbb4e",
+      "result_digest": "1d9a5fca3d8cfa86a36b9ca6a0dd03540954cd552a4ed675744cf889323fc0a8",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 714.0732000116259,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 648.1787000084296,
+        "cloud_observation": 75.31500002369285,
+        "fire_explosion_damage_risk": 67.28249997831881
+      },
+      "mass_ledger": {
+        "released_kg": 4.629740437409607e-06,
+        "direct_gas_kg": 4.629740437409607e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 9.3e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 2555.424500023946,
+      "request_digest": "384046db0c5dfa2bbfe16a88c62aaa2a7ae9e734ebe4ad16a121d85d80ccbb72",
+      "result_digest": "43cd5362db35117b6408acafa94f9348a8bf66956474f666e0e649836db0057a",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 700.2144000725821,
+        "pool": 0.003600027412176132,
+        "near_field_and_dispersion": 1425.7405999815091,
+        "cloud_observation": 78.47389997914433,
+        "fire_explosion_damage_risk": 67.64709996059537
+      },
+      "mass_ledger": {
+        "released_kg": 0.00010052648374898754,
+        "direct_gas_kg": 0.00010052648374898754,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 9.3e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 2548.2790999813005,
+      "request_digest": "c9d3f5c9323044dca3dca66f2790dfd3a32c1036ec52373285b8a403c6c14f01",
+      "result_digest": "472534e015c393bcb144586baaf4153cb9c851a93ec9e6fee2f6415121df0181",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 706.0186000308022,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 1402.1043999819085,
+        "cloud_observation": 78.71949998661876,
+        "fire_explosion_damage_risk": 68.8722999766469
+      },
+      "mass_ledger": {
+        "released_kg": 0.00010052648374898754,
+        "direct_gas_kg": 0.00010052648374898754,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.9e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 3193.0797999957576,
+      "request_digest": "dfdd03159e954bf510a1e3283b54b1da18d19c7d298a2dd79007e55f1a939c88",
+      "result_digest": "7668d41442a7e0439beaf36e648592c29edd6a53ea1f8c0e71089d7ffa18d83b",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 711.1495999852195,
+        "pool": 0.0039000296965241432,
+        "near_field_and_dispersion": 2052.5361000327393,
+        "cloud_observation": 75.39709995035082,
+        "fire_explosion_damage_risk": 69.02339996304363
+      },
+      "mass_ledger": {
+        "released_kg": 0.0018175777704088902,
+        "direct_gas_kg": 0.0018175777704088902,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.9e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 3034.4518999336287,
+      "request_digest": "9b9e4fc777a1bd617308d49dbe8933ee89c6b0231d6b0fe8e1312822f3188541",
+      "result_digest": "f74ce2a41cb53f841cf4752b5c4d7c1b3a5d8146dc5678b3134c17b2bf7f65f2",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 702.3692999500781,
+        "pool": 0.0038999132812023163,
+        "near_field_and_dispersion": 1922.164099989459,
+        "cloud_observation": 77.24140002392232,
+        "fire_explosion_damage_risk": 70.10080001782626
+      },
+      "mass_ledger": {
+        "released_kg": 0.0018175777704088902,
+        "direct_gas_kg": 0.0018175777704088902,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    }
+  ],
+  "uncomputed_cases": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 0.00012,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1379.0437000570819,
+      "request_digest": "9e4e73b7cca21bc9a49f5c8a62e7ef805894bc82f8079d961fe9d52e6eeef290",
+      "result_digest": "eaefd6721f64246c854d5040886841e50dd9ded65e15ada0682b6e40a913fb2d",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 691.5583000518382,
+        "pool": 0.00400003045797348,
+        "near_field_and_dispersion": 247.29760002810508,
+        "cloud_observation": 78.54300003964454,
+        "fire_explosion_damage_risk": 71.82249997276813
+      },
+      "mass_ledger": {
+        "released_kg": 1.6583741752980332e-09,
+        "direct_gas_kg": 1.6583741752980332e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 0.00012,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1392.5256000366062,
+      "request_digest": "0e653b87d5e5e448cb0a65f87edf327e312ad0c0f4468e2f3ca232cec800fdb4",
+      "result_digest": "7cfec88e623aa908b60313d10095fd428131b9b14e660944cdcf7bfe11ba1daa",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 696.2910000002012,
+        "pool": 0.00400003045797348,
+        "near_field_and_dispersion": 243.95159992855042,
+        "cloud_observation": 77.6342999888584,
+        "fire_explosion_damage_risk": 70.2574000461027
+      },
+      "mass_ledger": {
+        "released_kg": 1.6583741752980332e-09,
+        "direct_gas_kg": 1.6583741752980332e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 5.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1572.0948999514803,
+      "request_digest": "477ff4cd79fa6fc2ab6703df6e1d6879d14fa4240a0f50d183004f4401762728",
+      "result_digest": "f90852fdb4748a8fd03c2788c1e1808a68faefdcbd8226b7cba670219ffadbdd",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 726.7676999326795,
+        "pool": 0.003999914042651653,
+        "near_field_and_dispersion": 364.00160007178783,
+        "cloud_observation": 78.55279999785125,
+        "fire_explosion_damage_risk": 69.82400000561029
+      },
+      "mass_ledger": {
+        "released_kg": 1.653545292876029e-07,
+        "direct_gas_kg": 1.653545292876029e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 5.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1527.121699997224,
+      "request_digest": "a1b318272c7bb65a11401bb463a247faa4987becaecfa41a92faff10fade088a",
+      "result_digest": "d47da3eb161099e353d85d5afbdd952047f81d6db7c27c34360e65b3cc70c989",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 719.4521999917924,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 358.2602000096813,
+        "cloud_observation": 77.47540005948395,
+        "fire_explosion_damage_risk": 68.38509999215603
+      },
+      "mass_ledger": {
+        "released_kg": 1.653545292876029e-07,
+        "direct_gas_kg": 1.653545292876029e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 2.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1886.7062999634072,
+      "request_digest": "34266164b4b019899ea54eda40c6d2831adc7d3b14f9aecc45d7bf5926b25554",
+      "result_digest": "177db3a2a7a9bb1c9991a0038c19aef4459b9cb9d15ab33ae7b1b8c01a7e4d16",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 716.3546999217942,
+        "pool": 0.003999914042651653,
+        "near_field_and_dispersion": 727.333200047724,
+        "cloud_observation": 76.41109998803586,
+        "fire_explosion_damage_risk": 68.92859993968159
+      },
+      "mass_ledger": {
+        "released_kg": 4.629740437409607e-06,
+        "direct_gas_kg": 4.629740437409607e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 2.2e-05,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 1861.3404999487102,
+      "request_digest": "271ef7e88735e43dc756f1cfc6599ad6272ae229ec26ceebce16537488edbb4e",
+      "result_digest": "1d9a5fca3d8cfa86a36b9ca6a0dd03540954cd552a4ed675744cf889323fc0a8",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 714.0732000116259,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 648.1787000084296,
+        "cloud_observation": 75.31500002369285,
+        "fire_explosion_damage_risk": 67.28249997831881
+      },
+      "mass_ledger": {
+        "released_kg": 4.629740437409607e-06,
+        "direct_gas_kg": 4.629740437409607e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 9.3e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 2555.424500023946,
+      "request_digest": "384046db0c5dfa2bbfe16a88c62aaa2a7ae9e734ebe4ad16a121d85d80ccbb72",
+      "result_digest": "43cd5362db35117b6408acafa94f9348a8bf66956474f666e0e649836db0057a",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 700.2144000725821,
+        "pool": 0.003600027412176132,
+        "near_field_and_dispersion": 1425.7405999815091,
+        "cloud_observation": 78.47389997914433,
+        "fire_explosion_damage_risk": 67.64709996059537
+      },
+      "mass_ledger": {
+        "released_kg": 0.00010052648374898754,
+        "direct_gas_kg": 0.00010052648374898754,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 9.3e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 2548.2790999813005,
+      "request_digest": "c9d3f5c9323044dca3dca66f2790dfd3a32c1036ec52373285b8a403c6c14f01",
+      "result_digest": "472534e015c393bcb144586baaf4153cb9c851a93ec9e6fee2f6415121df0181",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 706.0186000308022,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 1402.1043999819085,
+        "cloud_observation": 78.71949998661876,
+        "fire_explosion_damage_risk": 68.8722999766469
+      },
+      "mass_ledger": {
+        "released_kg": 0.00010052648374898754,
+        "direct_gas_kg": 0.00010052648374898754,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.9e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.4,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 3193.0797999957576,
+      "request_digest": "dfdd03159e954bf510a1e3283b54b1da18d19c7d298a2dd79007e55f1a939c88",
+      "result_digest": "7668d41442a7e0439beaf36e648592c29edd6a53ea1f8c0e71089d7ffa18d83b",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 711.1495999852195,
+        "pool": 0.0039000296965241432,
+        "near_field_and_dispersion": 2052.5361000327393,
+        "cloud_observation": 75.39709995035082,
+        "fire_explosion_damage_risk": 69.02339996304363
+      },
+      "mass_ledger": {
+        "released_kg": 0.0018175777704088902,
+        "direct_gas_kg": 0.0018175777704088902,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.9e-06,
+      "release_branch_probability": 1.0,
+      "annual_condition_probability": 0.6,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "elapsed_ms": 3034.4518999336287,
+      "request_digest": "9b9e4fc777a1bd617308d49dbe8933ee89c6b0231d6b0fe8e1312822f3188541",
+      "result_digest": "f74ce2a41cb53f841cf4752b5c4d7c1b3a5d8146dc5678b3134c17b2bf7f65f2",
+      "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+      "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+      "stage_elapsed_ms": {
+        "source": 702.3692999500781,
+        "pool": 0.0038999132812023163,
+        "near_field_and_dispersion": 1922.164099989459,
+        "cloud_observation": 77.24140002392232,
+        "fire_explosion_damage_risk": 70.10080001782626
+      },
+      "mass_ledger": {
+        "released_kg": 0.0018175777704088902,
+        "direct_gas_kg": 0.0018175777704088902,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.37,
+        "provenance": "synthetic vertical provider history; no flow extrapolation"
+      },
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    }
+  ],
+  "excluded_model_components": {},
+  "release_termination_inventory_ledger": {
+    "schema_version": "prism.release_termination_inventory_ledger.v1",
+    "rows": [
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-3ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 0.00012,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            1.6583741752980332e-09
+          ],
+          "residual_mass_kg": [
+            0.009999998341625824
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 1.6583741752980332e-09,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-4ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 0.00012,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            1.6583741752980332e-09
+          ],
+          "residual_mass_kg": [
+            0.009999998341625824
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 1.6583741752980332e-09,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-3ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 5.2e-05,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            1.653545292876029e-07
+          ],
+          "residual_mass_kg": [
+            0.009999834645470712
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 1.653545292876029e-07,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-4ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 5.2e-05,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            1.653545292876029e-07
+          ],
+          "residual_mass_kg": [
+            0.009999834645470712
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 1.653545292876029e-07,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-3ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 2.2e-05,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            4.629740437409607e-06
+          ],
+          "residual_mass_kg": [
+            0.00999537025956259
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 4.629740437409607e-06,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-4ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 2.2e-05,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            4.629740437409607e-06
+          ],
+          "residual_mass_kg": [
+            0.00999537025956259
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 4.629740437409607e-06,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-3ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 9.3e-06,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            0.00010052648374898754
+          ],
+          "residual_mass_kg": [
+            0.009899473516251013
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 0.00010052648374898754,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-4ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 9.3e-06,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            0.00010052648374898754
+          ],
+          "residual_mass_kg": [
+            0.009899473516251013
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 0.00010052648374898754,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-3ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 3.9e-06,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            0.0018175777704088902
+          ],
+          "residual_mass_kg": [
+            0.00818242222959111
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 0.0018175777704088902,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      },
+      {
+        "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+        "asset_id": "terminal-valve",
+        "release_branch_id": "provider-vertical-handoff",
+        "annual_condition_id": "D-4ms-west",
+        "status": "EXECUTED_OPERATOR_LIMITED",
+        "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "reason": "source operator has declared constant-state or open physical closure limitations",
+        "release_branch_probability": 1.0,
+        "initiating_frequency_per_year": 3.9e-06,
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.37,
+          "provenance": "synthetic vertical provider history; no flow extrapolation"
+        },
+        "isolation_status": "not_declared",
+        "inventory_status": "not_inventory_termination",
+        "provider": {
+          "packet_consumed": true,
+          "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+          "component_id": "terminal_pipe",
+          "provider_export_schema": "prism.resolved_release.v1",
+          "provider_source_digests": [
+            "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          ],
+          "provider_result_digests": [
+            "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+          ],
+          "provider_boundary_references": [
+            "SteadyNetwork terminal link to atmosphere; native terminal bore"
+          ],
+          "duration_s": [
+            0.37
+          ],
+          "available_mass_kg": [
+            0.01
+          ],
+          "cumulative_mass_out_kg": [
+            0.0018175777704088902
+          ],
+          "residual_mass_kg": [
+            0.00818242222959111
+          ]
+        },
+        "mass_ledger": {
+          "released_kg": 0.0018175777704088902,
+          "end_to_end_residual_kg": 0.0
+        },
+        "provider_termination_matches_request": true
+      }
+    ],
+    "summary": {
+      "case_count": 10,
+      "ledger_status_counts": {
+        "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 10
+      },
+      "termination_basis_counts": {
+        "synthetic_diagnostic_horizon": 10
+      },
+      "complete_row_count": 0,
+      "operator_limited_or_domain_incomplete_row_count": 10,
+      "domain_incomplete_row_count": 0,
+      "uncomputed_row_count": 0,
+      "incomplete_row_count": 0,
+      "provider_packet_consumed_row_count": 10,
+      "withheld_case_count": 10,
+      "withheld_case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 10
+      },
+      "withheld_operator_limited_case_count": 10,
+      "withheld_domain_incomplete_case_count": 0
+    },
+    "semantics": {
+      "one_row": "event × release branch × annual condition",
+      "isolation": "reported only when the provider termination basis explicitly says reviewed_isolation_success",
+      "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
+      "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
+      "operator_limited": "numerically executed but not qualified facility evidence",
+      "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"
+    }
+  },
+  "coverage": {
+    "generated_initiation_frequency_per_year": 0.0002072,
+    "fully_executed_case_weighted_frequency_per_year": 0,
+    "fraction_of_generated_initiation_frequency": 0.0,
+    "meaning": "frequency coverage only; not fraction of risk captured, not physical validation",
+    "by_component": [
+      {
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "kind": "pipe",
+        "scope_status": "PARTIAL",
+        "excluded_reason": null,
+        "generated_event_count": 5,
+        "generated_initiation_frequency_per_year": 0.0002072,
+        "campaign_case_count": 10,
+        "executed_case_count": 10,
+        "fully_validated_case_count": 0,
+        "operator_limited_case_count": 10,
+        "domain_incomplete_case_count": 0,
+        "uncomputed_case_count": 10,
+        "uncomputed_reasons": [
+          "source operator has declared constant-state or open physical closure limitations"
+        ]
+      }
+    ],
+    "scenario_family_event_counts": {
+      "liquid_two_phase": 5,
+      "pipe_hole": 5
+    }
+  },
+  "declared_scope_numerically_complete": false,
+  "synthetic_release_horizon_present": true,
+  "declared_scope_annual_ir_low_high": null,
+  "known_contribution_annual_ir_low_high": {
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "declared_scope_expected_death_fn_low_high": null,
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "total_facility_annual_ir_low_high": null,
+  "total_facility_expected_death_fn_low_high": null,
+  "risk_atoms": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.028800000000000006,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.04320000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.04000000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.28800000000000003,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.0432,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.06480000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 0.00012,
+      "conditional_weight": 0.43200000000000005,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.6583741752980332e-09
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.028800000000000006,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.04320000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.04000000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.28800000000000003,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.0432,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.06480000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 5.2e-05,
+      "conditional_weight": 0.43200000000000005,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          1.653545292876029e-07
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.028800000000000006,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.04320000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.04000000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.28800000000000003,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.0432,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.06480000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 2.2e-05,
+      "conditional_weight": 0.43200000000000005,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          4.629740437409607e-06
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.028800000000000006,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.04320000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.04000000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.28800000000000003,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.0432,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.06480000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 9.3e-06,
+      "conditional_weight": 0.43200000000000005,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.00010052648374898754
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.028800000000000006,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.04320000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.04000000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.28800000000000003,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.0432,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.06480000000000001,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-vertical-handoff",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-06,
+      "conditional_weight": 0.43200000000000005,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_packet_identity": {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ],
+        "provider_boundary_references": [
+          "SteadyNetwork terminal link to atmosphere; native terminal bore"
+        ],
+        "termination_bases": [
+          null
+        ],
+        "termination_provenances": [
+          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.37
+        ],
+        "available_mass_kg": [
+          0.01
+        ],
+        "cumulative_mass_out_kg": [
+          0.0018175777704088902
+        ]
+      },
+      "receptor_harm_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "aggregation_provenance": {
+    "ok": true,
+    "limitation": "Native legacy risk.total_individual_risk and risk.fn_curve; expected-death convention; external physics/coverage must be checked separately.",
+    "environment": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "dependencies": {
+        "CoolProp": "8.0.0",
+        "numpy": "2.5.3",
+        "scipy": "1.18.1"
+      }
+    },
+    "request_digest": "fb29ae450107ad9a06ee5e44d521215667901ee25c3ec346bc32b86ba6134104",
+    "backend_config_digest": "d26e35c076d7bf322e6275a4209a7bdde63acb67588c397f576dd8ce9c1c85c4",
+    "worker_sha256": "f79a8840e7e53e03810438f626caad161583f7a3d49976973b0dd4d99c5b54ac",
+    "adapter_source_digest": "b6d4229b1af3a2c511d690f5fc734371c2a283d54ad1023aa08813984b577d47",
+    "elapsed_ms": 246.8295000726357,
+    "physical_validation_claim": false
+  },
+  "timing": {
+    "fresh_physics_cases": 10,
+    "case_min_ms": 1379.0437000570819,
+    "case_median_ms": 1874.0233999560587,
+    "case_max_ms": 3193.0797999957576,
+    "case_p95_ms": 3121.6972449677996,
+    "case_p99_ms": 3178.803288990166,
+    "campaign_elapsed_ms": 21212.362500024028,
+    "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+  },
+  "semantics": {
+    "individual_risk": "fixed person at each receptor; no population occupancy multiplier",
+    "societal_risk": "native legacy F-N of expected deaths per event/weather/barrier/ignition outcome; not a joint casualty distribution",
+    "weighting": "initiating frequency times annual joint condition times release/barrier branch times ignition; each once",
+    "endpoints": "two declared radiation sensitivities and within-branch harm union bounds; not frequency credible intervals",
+    "population": "disjoint outdoor groups at representative receptors; temporal presence in annual conditions"
+  },
+  "provider_packet_evidence": [],
+  "provider_packet_case_count": 10,
+  "qualified_provider_packet_case_count": 0,
+  "provider_packet_promoted": false,
+  "provider_packet_missing_evidence_cases": [
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-3ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+      "release_branch_id": "provider-vertical-handoff",
+      "annual_condition_id": "D-4ms-west",
+      "reason": "no matching qualified provider packet evidence"
+    }
+  ],
+  "physical_validation_evidence": {
+    "status": "not_validated",
+    "evidence_id": null,
+    "evidence_digest": null
+  },
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "one_hz_fresh_physics_demonstrated": false,
+  "source_facility_id": "vertical-vent-campaign",
+  "source_campaign_digest": "9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12",
+  "vertical_handoff_rebind": {
+    "schema_version": "prism.vertical_handoff_campaign_rebind.v1",
+    "source_facility_id": "vertical-vent-campaign",
+    "target_facility_id": "generic-lh2-full-scope-example",
+    "source_campaign_digest": "9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12",
+    "namespace": "generic-lh2-full-scope-example/vertical-handoff",
+    "event_count": 5,
+    "event_id_map": {
+      "vertical-vent-campaign/terminal-valve/AREA_0.01%": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "vertical-vent-campaign/terminal-valve/AREA_0.1%": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "vertical-vent-campaign/terminal-valve/AREA_1%": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "vertical-vent-campaign/terminal-valve/AREA_10%": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "vertical-vent-campaign/terminal-valve/AREA_100%": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+    },
+    "provider_event_id_map": {
+      "vertical-vent-campaign/terminal_pipe/AREA_0.01%": "generic-lh2-full-scope-example/vertical-handoff/provider/terminal_pipe/AREA_0.01%",
+      "vertical-vent-campaign/terminal_pipe/AREA_0.1%": "generic-lh2-full-scope-example/vertical-handoff/provider/terminal_pipe/AREA_0.1%",
+      "vertical-vent-campaign/terminal_pipe/AREA_1%": "generic-lh2-full-scope-example/vertical-handoff/provider/terminal_pipe/AREA_1%",
+      "vertical-vent-campaign/terminal_pipe/AREA_10%": "generic-lh2-full-scope-example/vertical-handoff/provider/terminal_pipe/AREA_10%",
+      "vertical-vent-campaign/terminal_pipe/AREA_100%": "generic-lh2-full-scope-example/vertical-handoff/provider/terminal_pipe/AREA_100%"
+    },
+    "asset_id": "vertical-handoff-vent",
+    "component_id": "vertical-handoff-terminal-pipe-01",
+    "receptor_map": {
+      "near_worker": "worker-01",
+      "downwind_worker": "worker-01",
+      "side_worker": "worker-01",
+      "distant_worker": "worker-01"
+    },
+    "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "interpretation": "The separate vertical-handoff diagnostic is namespaced as a disjoint facility component. Only its existing executed cases are merged; pending area bins and synthetic handoff limits remain explicit."
+  }
+}

@@ -6,14 +6,14 @@
   "status": "OPEN_EVIDENCE_REQUEST",
   "current_assessment": {
     "status": "PARTIAL_FACILITY_SCOPE",
-    "event_count": 29,
-    "case_count": 34,
+    "event_count": 34,
+    "case_count": 44,
     "uncomputed_case_count": 29,
     "strict_uncomputed_case_count": 29,
-    "conditional_case_count": 34,
-    "conditional_executed_case_count": 34,
+    "conditional_case_count": 44,
+    "conditional_executed_case_count": 44,
     "conditional_uncomputed_case_count": 0,
-    "risk_atom_count": 136,
+    "risk_atom_count": 176,
     "facility_total_risk_available": false,
     "physical_validation_claim": false,
     "provider_packet_case_count": 34,
@@ -104,11 +104,11 @@
       "conditional_status": "EXECUTED",
       "applicability": "APPLICABLE",
       "evidence_required": true,
-      "generated_event_count": 5,
-      "executed_case_count": 5,
+      "generated_event_count": 10,
+      "executed_case_count": 15,
       "uncomputed_case_count": 5,
       "strict_uncomputed_case_count": 5,
-      "conditional_executed_case_count": 5,
+      "conditional_executed_case_count": 15,
       "conditional_uncomputed_case_count": 0,
       "operator_limited_case_count": 5,
       "strict_gate_categories": [
@@ -124,7 +124,12 @@
         "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
         "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
-        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%"
       ],
       "strict_blocking_reason": "pipe_hole: PARTIAL",
       "required_provider_evidence": [
@@ -399,11 +404,11 @@
       "conditional_status": "EXECUTED",
       "applicability": "APPLICABLE",
       "evidence_required": true,
-      "generated_event_count": 18,
-      "executed_case_count": 18,
+      "generated_event_count": 23,
+      "executed_case_count": 28,
       "uncomputed_case_count": 17,
       "strict_uncomputed_case_count": 17,
-      "conditional_executed_case_count": 18,
+      "conditional_executed_case_count": 28,
       "conditional_uncomputed_case_count": 0,
       "operator_limited_case_count": 17,
       "strict_gate_categories": [
@@ -432,7 +437,12 @@
         "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
         "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
         "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
-        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%"
       ],
       "strict_blocking_reason": "inventory_depletion: PARTIAL",
       "required_provider_evidence": [
@@ -574,7 +584,7 @@
       ]
     }
   ],
-  "case_request_count": 34,
+  "case_request_count": 44,
   "case_requests": [
     {
       "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
@@ -649,7 +659,7 @@
         "positive inventory threshold, depletion clock and final residual mass"
       ],
       "blocking_reasons": [
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -725,7 +735,7 @@
         "complete 600 s provider history and end-of-horizon inventory"
       ],
       "blocking_reasons": [
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -801,7 +811,7 @@
         "vaporizer process-side state, failure mode and boundary history"
       ],
       "blocking_reasons": [
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -877,7 +887,7 @@
         "relief/vent set point, capacity and discharge termination history"
       ],
       "blocking_reasons": [
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -970,7 +980,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1063,7 +1073,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1139,7 +1149,7 @@
         "reliquefier failure mode, connected inventory and outlet history"
       ],
       "blocking_reasons": [
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1221,7 +1231,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1303,7 +1313,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1385,7 +1395,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1467,7 +1477,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1549,7 +1559,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1631,7 +1641,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1713,7 +1723,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1795,7 +1805,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1877,7 +1887,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -1959,7 +1969,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2041,7 +2051,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2123,7 +2133,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2205,7 +2215,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2287,7 +2297,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2369,7 +2379,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2451,7 +2461,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2533,7 +2543,317 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
+      ]
+    },
+    {
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "component_id": null,
+      "release_branch_id": "provider-inventory-depletion",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
+      "scenario_families": [],
+      "current_status": "EXECUTED",
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": null,
+        "port_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "current_provider_packet_identity": {},
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ],
+      "blocking_reasons": [
+        "provider packet identity is absent from the facility case",
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2613,7 +2933,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2693,7 +3013,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2773,7 +3093,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2853,7 +3173,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -2933,7 +3253,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -3013,7 +3333,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -3093,7 +3413,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -3173,7 +3493,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -3253,7 +3573,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
@@ -3333,7 +3653,7 @@
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
-        "qualified provider packet coverage is 0/34 cases"
+        "qualified provider packet coverage is 0/44 cases"
       ]
     }
   ],
@@ -3348,6 +3668,26 @@
       "strict_uncomputed_case_count": 0,
       "operator_limited_case_count": 0,
       "risk_atom_count": 12,
+      "strict_gate_categories": [],
+      "strict_gate_requirements": [],
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "inventory-depletion-pipe-01",
+      "current_status": "EXECUTED",
+      "event_count": 5,
+      "conditional_case_count": 10,
+      "conditional_executed_case_count": 10,
+      "conditional_uncomputed_case_count": 0,
+      "strict_uncomputed_case_count": 0,
+      "operator_limited_case_count": 0,
+      "risk_atom_count": 40,
       "strict_gate_categories": [],
       "strict_gate_requirements": [],
       "required_evidence": [

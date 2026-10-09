@@ -1,0 +1,87 @@
+{
+  "schema_version": "prism.major_accident_scope.v1",
+  "environment": "outdoor",
+  "scope": "outdoor_major_accidents",
+  "required_families": [
+    "pipe_hole",
+    "inventory_depletion"
+  ],
+  "rows": [
+    {
+      "family": "pipe_hole",
+      "status": "EXECUTED",
+      "event_ids": [
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 6.38e-06,
+      "request_branch_count": 5,
+      "uncomputed_branch_count": 0,
+      "case_count": 10,
+      "executed_case_count": 10,
+      "fully_validated_case_count": 10,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    },
+    {
+      "family": "inventory_depletion",
+      "status": "EXECUTED",
+      "event_ids": [
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 6.38e-06,
+      "request_branch_count": 5,
+      "uncomputed_branch_count": 0,
+      "case_count": 10,
+      "executed_case_count": 10,
+      "fully_validated_case_count": 10,
+      "operator_limited_case_count": 0,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 0,
+      "uncomputed_reasons": [],
+      "frequency_rows_are_not_additive_across_families": true
+    }
+  ],
+  "barrier_branch_ids": [
+    "provider-inventory-depletion"
+  ],
+  "manifest_audit_status": "EXECUTABLE",
+  "campaign_status": "DECLARED_SCOPE_EXECUTED",
+  "declared_scope_numerically_complete": true,
+  "facility_total_risk_available": false,
+  "matrix_complete": true,
+  "blocking_reasons": [],
+  "physical_validation_claim": false,
+  "interpretation": "Mechanism and execution coverage accounting; rows with no generated event are explicit and frequency sums across rows must not be added. This namespaced inventory-depletion campaign is retained as a disjoint diagnostic component and is not double-counted against the generic transfer-line rows.",
+  "facility_id": "generic-lh2-full-scope-example",
+  "scope_provenance": "; explicit namespace rebind for common facility ledger",
+  "scope_provenance_detail": {
+    "source_facility_id": "equipment-inventory-campaign",
+    "target_namespace": "generic-lh2-full-scope-example/inventory-depletion",
+    "target_asset_id": "inventory-depletion-pipe",
+    "target_component_id": "inventory-depletion-pipe-01",
+    "diagnostic_only": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_basis": "declared published diagnostic rate; no field or inferred rate"
+  },
+  "diagnostic_only": true
+}
