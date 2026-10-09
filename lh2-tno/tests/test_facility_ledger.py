@@ -240,6 +240,12 @@ def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():
     assert assessment["scenario_branch_accounting"]["status"] == (
         "EXPLICIT_BRANCH_ACCOUNTING"
     )
+    merged.pop("release_termination_inventory_ledger")
+    assessment = build_facility_assessment([merged])
+    assert assessment["release_termination_inventory_ledger"]["schema_version"] == (
+        "prism.release_termination_inventory_ledger.v1"
+    )
+    assert assessment["release_termination_inventory_ledger"]["summary"]["case_count"] == 1
 
 
 def test_facility_ledger_exposes_component_case_accounting_and_gate_categories():

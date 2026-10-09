@@ -18,6 +18,7 @@ from .facility_ledger import (
     _scenario_branch_accounting,
     merge_facility_campaign_results,
 )
+from .release_ledger import build_release_termination_inventory_ledger
 from .uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty
 
 
@@ -162,6 +163,27 @@ def build_facility_assessment(
             if isinstance(condition, Mapping) and condition.get("id")
         }
         scenario_branch_accounting = _scenario_branch_accounting(atom_rows, conditions)
+    release_termination_inventory_ledger = ledger.get(
+        "release_termination_inventory_ledger"
+    )
+    if not isinstance(release_termination_inventory_ledger, Mapping):
+        cases = ledger.get("cases", ())
+        uncomputed_cases = ledger.get("uncomputed_cases", ())
+        case_rows = (
+            cases
+            if isinstance(cases, Sequence) and not isinstance(cases, (str, bytes))
+            else ()
+        )
+        withheld_rows = (
+            uncomputed_cases
+            if isinstance(uncomputed_cases, Sequence)
+            and not isinstance(uncomputed_cases, (str, bytes))
+            else ()
+        )
+        release_termination_inventory_ledger = build_release_termination_inventory_ledger(
+            case_rows,
+            withheld_cases=withheld_rows,
+        )
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -194,9 +216,7 @@ def build_facility_assessment(
         "annual_condition_count": population_accounting.get("annual_condition_count", 0),
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
-        "release_termination_inventory_ledger": ledger.get(
-            "release_termination_inventory_ledger"
-        ),
+        "release_termination_inventory_ledger": release_termination_inventory_ledger,
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
