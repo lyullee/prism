@@ -3,6 +3,7 @@ import pytest
 from lh2_tno.equipment_accident_export import (
     ACCIDENT_EXPORT_REQUEST_SCHEMA,
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+    PROVIDER_QUALIFICATION_SCHEMA,
     EquipmentAccidentExportError,
     AccidentReleaseExportRequest,
     EmergencyReliefExportRequest,
@@ -48,7 +49,7 @@ def _request(**updates):
 
 
 def _response(request):
-    return {
+    response = {
         "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
         "data": {
             "event_kind": "accidental_leak",
@@ -89,6 +90,15 @@ def _response(request):
             ],
         },
     }
+    if request.get("evidence_status") == "qualified_actual":
+        response["provider_qualification"] = {
+            "schema_version": PROVIDER_QUALIFICATION_SCHEMA,
+            "status": "qualified_actual",
+            "provider_origin": "native_provider",
+            "evidence_id": "provider-actual-export-001",
+            "provider_source_digest": request["provider_source_digest"],
+        }
+    return response
 
 
 class _Provider:
@@ -121,6 +131,18 @@ def test_qualified_actual_requires_explicit_evidence_status():
     )
     assert result.provider_packet_promoted is True
     assert result.promotion_status == "QUALIFIED_PROVIDER_PACKET"
+
+
+def test_qualified_actual_requires_provider_qualification_record():
+    class UnqualifiedProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response({**request, "evidence_status": "synthetic_diagnostic"})
+            return response
+
+    with pytest.raises(EquipmentAccidentExportError, match="provider_qualification"):
+        export_equipment_gas_accident_history(
+            UnqualifiedProvider(), _request(evidence_status="qualified_actual")
+        )
 
 
 def test_state_only_model_cannot_be_used_as_accident_export():

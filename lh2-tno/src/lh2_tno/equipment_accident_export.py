@@ -37,6 +37,7 @@ from .state_snapshot import EquipmentStateSnapshot
 
 ACCIDENT_EXPORT_REQUEST_SCHEMA = "prism.equipment_accident_export_request.v1"
 EXTERNAL_ACCIDENT_EXPORT_SCHEMA = "prism.external_accident_history.v1"
+PROVIDER_QUALIFICATION_SCHEMA = "prism.provider_qualification_evidence.v1"
 _EVIDENCE_STATUSES = {"qualified_actual", "synthetic_diagnostic", "screening_only"}
 
 
@@ -124,6 +125,47 @@ def _state_snapshot_payload(
     if snapshot is None:
         return {}
     return {"state_snapshot": snapshot.to_mapping()}
+
+
+def _require_provider_qualification_if_claimed(
+    response: Mapping[str, Any],
+    request: Any,
+) -> None:
+    """Require a provider-owned qualification record before promotion.
+
+    The request flag is necessary but not sufficient.  A provider claiming
+    ``qualified_actual`` must echo the source digest and identify the native
+    accident export evidence.  This is a provenance gate, not a substitute for
+    the independent physical-validation and facility-QRA gates.
+    """
+    if getattr(request, "evidence_status", None) != "qualified_actual":
+        return
+    qualification = response.get("provider_qualification")
+    if not isinstance(qualification, Mapping):
+        raise EquipmentAccidentExportError(
+            "qualified_actual requires provider_qualification evidence"
+        )
+    if qualification.get("schema_version") != PROVIDER_QUALIFICATION_SCHEMA:
+        raise EquipmentAccidentExportError(
+            f"provider_qualification must declare {PROVIDER_QUALIFICATION_SCHEMA}"
+        )
+    if qualification.get("status") != "qualified_actual":
+        raise EquipmentAccidentExportError(
+            "provider_qualification status must be qualified_actual"
+        )
+    if qualification.get("provider_origin") not in {"native_provider", "reviewed_actual"}:
+        raise EquipmentAccidentExportError(
+            "provider_qualification provider_origin must identify a native or reviewed actual provider"
+        )
+    evidence_id = qualification.get("evidence_id")
+    if not isinstance(evidence_id, str) or not evidence_id.strip():
+        raise EquipmentAccidentExportError(
+            "provider_qualification evidence_id must be a non-empty identifier"
+        )
+    if qualification.get("provider_source_digest") != request.provider_source_digest:
+        raise EquipmentAccidentExportError(
+            "provider_qualification provider_source_digest disagrees with request"
+        )
 
 
 @dataclass(frozen=True)
@@ -585,6 +627,7 @@ def _call_provider(
         raise EquipmentAccidentExportError(
             "normal-state snapshot cannot be promoted as an accident history"
         )
+    _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 
 
@@ -631,6 +674,7 @@ def _call_emergency_relief_provider(
         raise EquipmentAccidentExportError(
             "normal-state snapshot cannot be promoted as an emergency-relief history"
         )
+    _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 
 
@@ -828,6 +872,7 @@ def export_equipment_inventory_release_history(
 __all__ = [
     "ACCIDENT_EXPORT_REQUEST_SCHEMA",
     "EXTERNAL_ACCIDENT_EXPORT_SCHEMA",
+    "PROVIDER_QUALIFICATION_SCHEMA",
     "AccidentHistoryProvider",
     "EquipmentAccidentExportError",
     "AccidentReleaseExportRequest",
