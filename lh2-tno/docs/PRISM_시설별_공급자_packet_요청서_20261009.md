@@ -36,7 +36,7 @@ case가 있다. 현재 결과는 방출→SLABx-LH2→피해 계산까지 실행
 ```powershell
 $py = 'C:\Users\lyul\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
 & $py scripts/build_facility_evidence_request.py `
-  --assessment results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v5.json `
+  --assessment results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json `
   --scope-matrix results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json `
   --output results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json
 ```

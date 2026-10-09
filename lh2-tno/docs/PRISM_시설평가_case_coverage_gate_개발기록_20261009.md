@@ -33,4 +33,4 @@ python scripts/build_facility_assessment.py `
 
 ## 검증
 
-시설 원장·완료 감사·case coverage 단위검사를 함께 실행했다. 새 gate를 포함한 대상 검사는 70개가 통과했다. GitHub Actions 실행 #379는 전체 portable suite 561개 통과를 확인했다.
+시설 원장·완료 감사·case coverage·상태 장부 일관성 단위검사를 함께 실행했다. 새 gate를 포함한 대상 검사는 70개가 통과했다. 최신 GitHub Actions 실행 #385는 전체 portable suite 562개 통과를 확인했다.
