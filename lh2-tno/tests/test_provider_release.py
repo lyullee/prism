@@ -236,6 +236,27 @@ def test_provider_resolved_pool_footprint_is_digest_bound_and_consumed():
     with pytest.raises(ValueError, match="provider-resolved pool footprint"):
         ResolvedLiquidRelease.model_validate_json(json.dumps(bad))
 
+    misplaced = _liquid_release().model_dump(mode="json")
+    misplaced["pool_footprint"] = {
+        "origin": "provider_resolved",
+        "radius_m": 0.2,
+        "impact_position_enu_m": (9.0, 0.0, 0.0),
+        "provenance": "provider ground interception footprint",
+        "source_digest": "3" * 64,
+    }
+    misplaced["steps"][0]["gas_mass_flow_kg_s"] = 0.9
+    misplaced["steps"][0]["ground_liquid_mass_flow_kg_s"] = 0.1
+    misplaced["steps"][0]["gas_effective_area_m2"] = 0.9
+    misplaced["steps"][0]["droplet_class_outcomes"] = [{
+        "ground_liquid_mass_flow_kg_s": 0.1,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "flight_time_s": 0.1,
+        "impact_position_m": [0.2, 0.0, 0.0],
+        "droplet_diameter_m": 5e-4,
+    }]
+    with pytest.raises(ValueError, match="footprint position"):
+        ResolvedLiquidRelease.model_validate_json(json.dumps(misplaced))
+
 
 def test_provider_duration_template_uses_packet_basis_and_each_branch_clock():
     release = _release().model_copy(

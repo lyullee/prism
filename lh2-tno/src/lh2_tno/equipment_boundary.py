@@ -496,6 +496,15 @@ class ResolvedLiquidRelease(Contract):
         if self.pool_footprint is not None and self.pool_footprint.origin == 'provider_resolved':
             if self.pool_footprint.source_digest != self.provider_result_digest:
                 raise ValueError('provider-resolved pool footprint must be covered by the provider result digest')
+        if self.pool_footprint is not None:
+            impact_positions = [
+                outcome.impact_position_m
+                for step in self.steps
+                for outcome in step.droplet_class_outcomes
+                if outcome.ground_liquid_mass_flow_kg_s > 1e-12 and outcome.impact_position_m is not None
+            ]
+            if any(math.dist(position, self.pool_footprint.impact_position_enu_m) > 1e-6 for position in impact_positions):
+                raise ValueError('pool footprint position disagrees with provider ground impact position')
         if self.event_kind != 'accidental_leak' and self.failure_opening_diameter_m is not None:
             raise ValueError('normal vent/relief is not a declared random-leak opening')
         return self
