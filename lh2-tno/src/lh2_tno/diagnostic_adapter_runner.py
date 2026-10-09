@@ -37,6 +37,11 @@ from .equipment_accident_export import (
     export_equipment_inventory_release_history,
     export_equipment_liquid_accident_history,
 )
+from .consequences import ConsequenceRequest
+from .provider_release import (
+    ProviderReleaseContractError,
+    build_consequence_request_from_provider_release,
+)
 
 
 DIAGNOSTIC_ADAPTER_REGISTRY_SCHEMA = "prism.diagnostic_adapter_registry.v1"
@@ -270,6 +275,37 @@ class DiagnosticAdapterRunner:
                 f"diagnostic adapter execution failed for {component_kind}: {error}"
             ) from error
         return DiagnosticAdapterExecution(spec=spec, result=result)
+
+    def to_consequence_request(
+        self,
+        execution: DiagnosticAdapterExecution,
+        request_defaults: Mapping[str, Any],
+    ) -> ConsequenceRequest:
+        """Attach an adapter result to an explicit consequence context.
+
+        ``request_defaults`` supplies only weather, ignition, domain, pool,
+        evaluation times, source operator, and termination provenance.  The
+        provider release, component, position, inventory, and provider clock
+        are copied from ``execution``.  Initiating frequency is deliberately
+        left unset so the campaign still binds a reviewed frequency event at
+        its own boundary.
+        """
+
+        if not isinstance(execution, DiagnosticAdapterExecution):
+            raise DiagnosticAdapterRunnerError(
+                "execution must be a DiagnosticAdapterExecution"
+            )
+        if not isinstance(request_defaults, Mapping):
+            raise DiagnosticAdapterRunnerError("request_defaults must be a mapping")
+        try:
+            return build_consequence_request_from_provider_release(
+                execution.result.release,
+                request_defaults,
+            )
+        except (ProviderReleaseContractError, TypeError, ValueError) as error:
+            raise DiagnosticAdapterRunnerError(
+                f"adapter release could not be attached to consequence context: {error}"
+            ) from error
 
     def _spec(self, component_kind: str) -> DiagnosticAdapterSpec:
         kind = _text(component_kind, "component_kind")

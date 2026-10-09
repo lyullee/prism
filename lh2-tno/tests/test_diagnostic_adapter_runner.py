@@ -7,6 +7,8 @@ from lh2_tno.diagnostic_adapter_runner import (
     DiagnosticAdapterRunnerError,
     load_diagnostic_adapter_specs,
 )
+from test_equipment_accident_export import _Provider, _request
+from test_provider_release import _defaults
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,6 +50,28 @@ def test_runner_does_not_fallback_to_normal_model_method():
 
     with pytest.raises(DiagnosticAdapterRunnerError, match="export_accident_history"):
         runner.register_provider("storage_tank", NormalStateOnlyModel())
+
+
+def test_runner_attaches_strict_release_to_consequence_context_without_frequency():
+    runner = DiagnosticAdapterRunner.from_binding_catalog(CATALOG)
+    runner.register_provider("storage_tank", _Provider())
+    execution = runner.execute(
+        "storage_tank",
+        _request(
+            component_id="storage-tank-01",
+            port_id="tank-out",
+            event_id="provider-accident-01",
+        ),
+        release_kind="gas",
+    )
+    defaults = _defaults()
+    request = runner.to_consequence_request(execution, defaults)
+
+    assert request.source_input is None
+    assert request.resolved_release is not None
+    assert request.resolved_release.event_id == "provider-accident-01"
+    assert request.annual_frequency_per_year is None
+    assert request.frequency_event is None
 
 
 def test_missing_adapter_is_not_invented_from_catalog():

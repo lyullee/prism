@@ -23,10 +23,13 @@ runner.register_provider("storage_tank", provider)
 execution = runner.execute(
     "storage_tank", request, release_kind="liquid"
 )
+consequence_request = runner.to_consequence_request(
+    execution, consequence_defaults
+)
 print(execution.audit_record())
 ```
 
-`register_provider()`는 `export_accident_history(request)`가 없는 정상상태 모델을 거부한다. `execute()`는 gas, liquid, emergency-relief, inventory gas/liquid 경로를 기존 strict PRISM export 함수에 위임한다. 따라서 adapter가 반환하는 시간별 유량, 종료근거, 누적 질량·엔탈피, 액체·기체 분할 검사는 기존 `equipment_accident_export.py`와 `equipment_release_adapter.py`에서 계속 수행된다.
+`register_provider()`는 `export_accident_history(request)`가 없는 정상상태 모델을 거부한다. `execute()`는 gas, liquid, emergency-relief, inventory gas/liquid 경로를 기존 strict PRISM export 함수에 위임한다. 따라서 adapter가 반환하는 시간별 유량, 종료근거, 누적 질량·엔탈피, 액체·기체 분할 검사는 기존 `equipment_accident_export.py`와 `equipment_release_adapter.py`에서 계속 수행된다. `to_consequence_request()`는 이 strict release를 weather·점화·공간영역·평가시계·종료근거가 들어 있는 consequence context에 붙인다. 빈도는 이 단계에서 추가하지 않고 캠페인 경계에서만 추가한다.
 
 provider 생성자를 자동으로 호출하지 않는 이유는 설비마다 필요한 탱크 재고, 배관 크기, 밸브 상태, 기상, 수치 시간 간격이 다르기 때문이다. 실행기가 이 값을 기본값으로 만들어 버리면 정상상태 snapshot이나 임의의 누출을 사고 packet으로 오인할 수 있다. host는 현재 센서·공정 모델의 상태에서 사고 시나리오를 선택하고, 외부 모델이 계산한 provider 요청과 인스턴스를 넘겨야 한다.
 
