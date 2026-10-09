@@ -98,6 +98,8 @@ def _response(request):
             "evidence_id": "provider-actual-export-001",
             "provider_source_digest": request["provider_source_digest"],
         }
+    if request.get("state_snapshot") is not None:
+        response["provider_state_snapshot_digest"] = request["state_snapshot_digest"]
     return response
 
 
@@ -225,6 +227,25 @@ def test_state_snapshot_json_position_round_trip_is_supported():
     round_trip = EquipmentStateSnapshot.from_mapping(snapshot.to_mapping())
     assert round_trip.position_enu_m == (1.0, 2.0, 3.0)
     assert round_trip.digest() == snapshot.digest()
+
+
+def test_provider_must_echo_state_snapshot_digest():
+    snapshot = _snapshot()
+
+    class MismatchedProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response(request)
+            response["provider_state_snapshot_digest"] = "e" * 64
+            return response
+
+    with pytest.raises(EquipmentAccidentExportError, match="snapshot digest"):
+        export_equipment_gas_accident_history(
+            MismatchedProvider(),
+            _request(
+                state_snapshot=snapshot.to_mapping(),
+                state_snapshot_digest=snapshot.digest(),
+            ),
+        )
 
 
 def test_state_snapshot_digest_mismatch_is_rejected():

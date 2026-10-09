@@ -677,6 +677,14 @@ def _call_provider(
         raise EquipmentAccidentExportError(
             "normal-state snapshot cannot be promoted as an accident history"
         )
+    if getattr(request, "state_snapshot", None) is not None:
+        declared_snapshot_digest = response.get("provider_state_snapshot_digest")
+        if declared_snapshot_digest is None:
+            declared_snapshot_digest = data.get("provider_state_snapshot_digest")
+        if declared_snapshot_digest != request.state_snapshot_digest:
+            raise EquipmentAccidentExportError(
+                "provider state snapshot digest must echo the request snapshot digest"
+            )
     _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 
@@ -724,6 +732,14 @@ def _call_emergency_relief_provider(
         raise EquipmentAccidentExportError(
             "normal-state snapshot cannot be promoted as an emergency-relief history"
         )
+    if getattr(request, "state_snapshot", None) is not None:
+        declared_snapshot_digest = response.get("provider_state_snapshot_digest")
+        if declared_snapshot_digest is None:
+            declared_snapshot_digest = data.get("provider_state_snapshot_digest")
+        if declared_snapshot_digest != request.state_snapshot_digest:
+            raise EquipmentAccidentExportError(
+                "provider state snapshot digest must echo the request snapshot digest"
+            )
     _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 

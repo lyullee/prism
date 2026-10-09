@@ -836,7 +836,8 @@
   "equipment_state_snapshot_accident_inference": false,
   "equipment_state_snapshot_digest_binding": true,
   "equipment_state_snapshot_accident_field_rejection": true,
-  "equipment_state_snapshot_test_status": "7 new state handoff/digest/component/forbidden-field/normalized-telemetry/resolver-binding/JSON-round-trip tests; full portable suite 420 passed; qualified provider packet remains 0",
+  "equipment_state_snapshot_test_status": "8 new state handoff/digest/component/forbidden-field/normalized-telemetry/resolver-binding/JSON-round-trip/provider-echo tests; full portable suite 421 passed; qualified provider packet remains 0",
+  "equipment_state_snapshot_provider_echo_required": true,
   "equipment_state_snapshot_external_provider_smoke_implemented": true,
   "equipment_state_snapshot_external_provider_smoke_script": "scripts/export_lh2dt_layered_tank_prism_packet.py",
   "equipment_state_snapshot_external_provider_smoke_record": "results/20261017/layered_tank_state_snapshot_smoke3/verification.json",
@@ -852,7 +853,7 @@
     "non-empty evidence_id",
     "provider_source_digest exact match"
   ],
-  "equipment_provider_qualification_gate_test_status": "qualified promotion with explicit record and rejection without record covered; full portable suite 420 passed; qualified provider packet remains 0",
+  "equipment_provider_qualification_gate_test_status": "qualified promotion with explicit record and rejection without record covered; full portable suite 421 passed; qualified provider packet remains 0",
   "equipment_release_adapter_implemented": true,
   "equipment_release_adapter_module": "src/lh2_tno/equipment_release_adapter.py",
   "equipment_release_adapter_used_by": [

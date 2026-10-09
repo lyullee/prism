@@ -78,6 +78,7 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 6. 요청이 `qualified_actual`이라고 선언하면 응답에도 `prism.provider_qualification_evidence.v1` 자격 기록, `qualified_actual` 상태, `native_provider` 또는 `reviewed_actual` 출처, evidence ID와 같은 provider source digest가 있어야 한다. 요청 플래그만으로는 승격되지 않는다.
 7. 위 자격 기록까지 있고 `qualified_actual`인 경우에만 함수 결과가 `QUALIFIED_PROVIDER_PACKET`가 된다. 이것은 물리 검증·빈도 결합·시설 QRA 완료를 뜻하지 않으며, 이후 coverage, frequency, validation, facility IR/F-N gate를 모두 통과해야 한다.
 8. `state_snapshot`이 있으면 schema·설비 ID·canonical digest를 확인하고, 사고 전용 키가 포함된 snapshot은 거절한다. PRISM은 snapshot에서 누출구경·빈도·지속시간·종료를 역산하지 않는다.
+9. `state_snapshot`이 있는 요청의 provider 응답은 `provider_state_snapshot_digest`를 echo해야 한다. digest가 없거나 요청과 다르면 provider가 동일 상태를 사용했다는 증거가 없으므로 strict packet을 거절한다.
 
 ## 현재 외부 `lh2dt` 상태
 
