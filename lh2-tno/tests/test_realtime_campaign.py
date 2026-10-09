@@ -1,4 +1,5 @@
 from pathlib import Path
+import copy
 
 import pytest
 
@@ -156,3 +157,50 @@ def test_realtime_campaign_does_not_turn_missing_release_path_into_zero_risk(tmp
             scenario_bindings=[_scenario_binding()],
             expected_component_ids=("storage-tank-01",),
         )
+
+
+def test_realtime_campaign_supports_multiple_annual_conditions_with_explicit_reviewed_harm(
+    tmp_path,
+):
+    snapshot = _snapshot(tmp_path)
+    conditions = _annual_conditions()
+    second = copy.deepcopy(conditions[0])
+    second.update(
+        id="weather-2",
+        annual_probability=0.4,
+        weather={"wind_speed_m_s": 7.0, "stability_class": "D"},
+    )
+    conditions[0]["annual_probability"] = 0.6
+    conditions.append(second)
+
+    current_binding = _scenario_binding()
+    current_binding["annual_condition_id"] = "weather-1"
+    current_binding["consequence_basis"] = "realtime_snapshot"
+    reviewed_binding = _scenario_binding(low=0.1)
+    reviewed_binding.update(
+        annual_condition_id="weather-2",
+        consequence_basis="reviewed_annual_condition",
+        consequence_provenance="reviewed SLABx-LH2 weather-2 consequence table",
+        observed_harm_low_high={"worker-01": [0.07, 0.14]},
+    )
+
+    result = build_realtime_facility_campaign_result(
+        snapshot,
+        annual_conditions=conditions,
+        scenario_bindings=[current_binding, reviewed_binding],
+        expected_component_ids=("storage-tank-01",),
+    )
+
+    assert len(result["events"]) == 1
+    assert len(result["cases"]) == 2
+    assert len(result["risk_atoms"]) == 8
+    assert result["events"][0]["id"] == "storage-tank-hole-01"
+    assert result["events"][0]["scenario_families"] == ["vessel_hole"]
+    ledger = merge_facility_campaign_results(
+        [result], expected_component_ids=("storage-tank-01",)
+    )
+    assert ledger["conditional_diagnostic_facility_annual_ir_low_high"]["worker-01"] == pytest.approx(
+        [1.48e-4, 2.96e-4]
+    )
+    assert ledger["population_accounting"]["referenced_condition_count"] == 2
+    assert ledger["facility_total_risk_available"] is False

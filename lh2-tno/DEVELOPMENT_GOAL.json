@@ -2235,6 +2235,9 @@
   "realtime_facility_campaign_adapter_record": "docs/PRISM_실시간_snapshot_시설ledger_연결_개발기록_20261010.md",
   "realtime_facility_campaign_adapter_status": "CONDITIONAL_LEDGER_BRIDGE_OPERATOR_LIMITED; explicit branch metadata and harm closure required",
   "realtime_facility_campaign_adapter_facility_qra_promotion": false,
-  "realtime_facility_campaign_adapter_test_status": "targeted adapter + facility ledger tests 31 passed; local portable suite 582 passed/1 skipped; CI Run #415 completed successfully in 27 s",
-  "realtime_facility_campaign_adapter_ci_run": "https://github.com/lyullee/prism/actions/runs/37958982378"
+  "realtime_facility_campaign_adapter_test_status": "targeted adapter + facility ledger tests 74 passed; local portable suite 583 passed/1 skipped; CI Run #415 completed successfully in 27 s",
+  "realtime_facility_campaign_adapter_ci_run": "https://github.com/lyullee/prism/actions/runs/37958982378",
+  "realtime_facility_campaign_multi_condition_implemented": true,
+  "realtime_facility_campaign_multi_condition_policy": "Same event ID is retained as one event across annual conditions; one current realtime_snapshot consequence basis per component; non-current annual conditions require explicit reviewed harm and provenance; current-weather harm is never copied automatically.",
+  "realtime_facility_campaign_multi_condition_test_status": "Multiple annual-condition adapter test passed; local portable suite 583 passed/1 skipped"
 }

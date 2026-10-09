@@ -19,6 +19,12 @@
 경우에만 기존 `merge_facility_campaign_results()`가 읽을 수 있는 조건부 campaign
 결과를 만든다.
 
+한 설비에 여러 annual condition을 연결할 수 있다. 같은 사건 ID는 하나의 event로
+병합하고, condition·release branch·ignition branch 차원은 risk atom과 case에
+그대로 남긴다. 현재 realtime snapshot을 쓰는 조건은 설비마다 하나만 허용한다.
+다른 annual condition은 별도의 검토 consequence 표와 provenance를 명시해야 하며,
+현재 기상 피해를 자동 복사하지 않는다.
+
 ## 연결 흐름
 
 ```text
@@ -62,6 +68,12 @@ merge_facility_campaign_results()
 - 네 가지 `ignition_branch_probabilities`
 - 수용점별 네 가지 `branch_harm_low_high`
 - 하나 이상의 `scenario_families`
+
+여러 연간조건을 한 설비에 연결할 때는 `consequence_basis`도 명시한다.
+`realtime_snapshot`은 현재 frame의 피해 폐합을 사용하며 설비당 하나만 둘 수
+있다. `reviewed_annual_condition`은 `observed_harm_low_high`와
+`consequence_provenance`를 별도로 요구한다. 이 검토 피해가 점화 branch 가중합과
+폐합되지 않으면 해당 campaign을 만들지 않는다.
 
 점화확률은 다음 네 branch를 모두 포함하고 합이 1이어야 한다.
 
@@ -147,6 +159,8 @@ expected_deaths[k]
 2. 인구 10명 조건에서 population-weighted expected deaths가 ledger에서 폐합된다.
 3. branch별 피해가 관측 피해와 다르면 즉시 거절한다.
 4. provider release path가 없으면 위험 0으로 바꾸지 않고 명확한 오류로 보류한다.
+5. 한 설비의 두 annual condition을 동일 event에 연결하되, 두 번째 조건은 별도
+   reviewed consequence harm으로 검증하고 event를 중복 생성하지 않는다.
 
 이 테스트는 합성 provider와 합성 피해를 사용한다. 따라서 통과 자체가 실제
 액화수소 시설의 qualified QRA 또는 독립 물리검증을 뜻하지 않는다.

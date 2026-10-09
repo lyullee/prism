@@ -1077,6 +1077,15 @@ ledger = merge_facility_campaign_results(
 전달하는 연결부”입니다. 연간 사고범위 전체, 적격 provider evidence,
 독립 물리검증이 채워지기 전에는 IJHE용 완전 시설 QRA 결과로 해석하지 않습니다.
 
+한 설비에 여러 연간 기상조건을 연결할 수도 있습니다. 이때 같은 사건 ID는
+시설 ledger에서 하나의 event로 보존되고, 조건별 case와 risk atom만 늘어납니다.
+현재 snapshot을 사용하는 조건은 `consequence_basis="realtime_snapshot"`으로
+두며 설비마다 하나만 허용합니다. 다른 연간조건은
+`consequence_basis="reviewed_annual_condition"`,
+`observed_harm_low_high`, `consequence_provenance`를 함께 제공해야 합니다.
+이 조건의 branch 피해는 현재 기상 피해를 복사하지 않고 별도 검토 결과로
+폐합합니다. 여러 조건을 선언하면서 이 basis를 생략하면 어댑터가 중단됩니다.
+
 표 형식 입력에서 provider resolver까지 연결하는 최소 경로는 `update_from_rows()` → `frame_from_row()` → `TelemetryNormalizer` → 설비 상태 → provider 방출 경계 → consequence 결과 → 시설 장부입니다. 이 경로는 `tests/test_consequence_service.py`의 `test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence`에서 상태 압력, provider 사고 ID, 방출시간, 종료 상태, 잔여 재고를 함께 검증합니다. 예시 provider가 합성이라면 이 테스트가 통과해도 qualified 실제 설비 packet이나 시설 연간 IR/F/N이 열리지는 않습니다.
 
 행 배치에 각 설비의 `RealtimeFrequencyBinding`과 시설의 `RealtimePopulationBinding`을 함께 선언하면 같은 경로에서 설비별 현재 기상 IR을 합산하고, 수용점 인구를 곱한 조건부 expected-death F/N 기여와 p05/발표값/p95 빈도 재가중을 계산합니다. 이 값은 현재 배치의 조건부 진단 결과이며 `facility_annual_risk_available=false`, `facility_fn_available=false`를 유지합니다. 센서로 빈도를 학습하거나 누락 설비를 0으로 처리하지 않습니다.
