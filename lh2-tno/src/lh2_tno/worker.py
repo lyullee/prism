@@ -101,6 +101,14 @@ def run(request):
         component=module('lh2dt.vent_stack',roots['lh2dt'])
         networkmod=module('lh2dt.network',roots['lh2dt'])
         fluid=props.HydrogenProperties(p['fluid'])
+        state_snapshot_digest = p.get('state_snapshot_digest')
+        if state_snapshot_digest is not None:
+            if not isinstance(state_snapshot_digest, str) or len(state_snapshot_digest) != 64:
+                raise ValueError('state_snapshot_digest must be a SHA-256 hex digest')
+            try:
+                int(state_snapshot_digest, 16)
+            except ValueError as error:
+                raise ValueError('state_snapshot_digest must be a SHA-256 hex digest') from error
         # Explicit PH boundaries: saturation is never resolved by a T offset.
         def state(row):return fluid.from_ph(row['pressure_pa_abs'],row['specific_enthalpy_j_kg'])
         left=state(p['upstream']);right=state(p['downstream'])
@@ -122,6 +130,7 @@ def run(request):
                 'velocity_origin':'mass_continuity_from_declared_area',
                 'upstream':asdict(left),'downstream':asdict(right),
                 'state_owner':'equipment_twin','discharge_owner':'equipment_twin',
+                'provider_state_snapshot_digest':state_snapshot_digest,
                 'static_enthalpy_transport_only':True},
                 'limitation':'Native steady VentStack/SteadyNetwork PH export. Terminal area is declared stack bore; velocity derived by continuity. Total kinetic-energy closure and transient feedback are not qualified.'}
     if operation=="equipment_dynamic_isolation":
@@ -274,6 +283,14 @@ def run(request):
         valvemod=module('lh2dt.valve',roots['lh2dt'])
         dynamicmod=module('lh2dt.dynamic_network',roots['lh2dt'])
         fluid=props.HydrogenProperties(p.get('fluid','ParaHydrogen'))
+        state_snapshot_digest = p.get('state_snapshot_digest')
+        if state_snapshot_digest is not None:
+            if not isinstance(state_snapshot_digest, str) or len(state_snapshot_digest) != 64:
+                raise ValueError('state_snapshot_digest must be a SHA-256 hex digest')
+            try:
+                int(state_snapshot_digest, 16)
+            except ValueError as error:
+                raise ValueError('state_snapshot_digest must be a SHA-256 hex digest') from error
         duration=float(p['duration_s']); dt=float(p['time_step_s'])
         if not math.isfinite(duration) or not math.isfinite(dt) or not 0.0<dt<=duration<=120.0:
             raise ValueError('dynamic inventory duration/time step outside bounded scope')
@@ -368,6 +385,8 @@ def run(request):
                 'density_kg_m3':outlet.density_kg_m3,
                 'effective_area_m2':valve_area,
                 'velocity_m_s':velocity,
+                'area_provenance':'provider-owned inventory valve area',
+                'velocity_origin':'mass_continuity_from_declared_area',
                 'upstream_pressure_pa_abs':tank.thermo(state).pressure_Pa,
                 'upstream_temperature_k':tank.thermo(state).temperature_K,
                 'interval_value_origin':'provider_interval_average_from_dynamic_network',
@@ -411,6 +430,7 @@ def run(request):
             'provider_link_id':'inventory_valve',
             'state_owner':'equipment_twin',
             'discharge_owner':'equipment_twin',
+            'provider_state_snapshot_digest':state_snapshot_digest,
             'termination_basis':termination,
             'termination_provenance':basis_provenance,
         },'limitation':'Provider-owned homogeneous finite-storage tank and commanded full-open valve. Depletion is an explicit positive-mass numerical threshold, not a claim that the external EOS admits a zero-mass state; no liquid two-phase tank feedback or plant calibration is inferred.'}

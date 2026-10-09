@@ -19,7 +19,7 @@
     "risk_atom_count": 176,
     "facility_total_risk_available": false,
     "physical_validation_claim": false,
-    "provider_packet_case_count": 34,
+    "provider_packet_case_count": 44,
     "qualified_provider_packet_case_count": 0,
     "provider_packet_promoted": false,
     "qualified_facility_qra_available": false,
@@ -35,9 +35,9 @@
     "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: uncomputed cases remain",
     "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: excluded components remain",
     "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: synthetic release horizon",
-    "campaign 9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12: declared scope is incomplete",
-    "campaign 9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12: uncomputed cases remain",
-    "campaign 9003659c5a7f38bedecc1b671c4af8ab82d63908885540df169aab603c756f12: synthetic release horizon",
+    "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
+    "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
+    "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
     "missing expected components: receiving-boundary-01",
     "component liquid-transfer-line-01: PARTIAL",
     "component liquid-transfer-pump-01: PARTIAL",
@@ -2586,354 +2586,1034 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          1.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          1.2125616572864818e-07
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          1.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          1.2125616572864818e-07
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          4.022010171050504e-07
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          4.022010171050504e-07
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          2.6216519132821583e-06
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          2.6216519132821583e-06
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          2.1140345784364108e-05
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.5
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          2.1140345784364108e-05
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.0625
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          2.6236186797952155e-05
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
-      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
       "asset_id": "inventory-depletion-pipe",
-      "component_id": null,
+      "component_id": "inventory-depletion-pipe-01",
       "release_branch_id": "provider-inventory-depletion",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west",
-      "scenario_families": [],
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
       "current_status": "EXECUTED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
-        "component_id": null,
-        "port_ids": [],
-        "provider_source_digests": [],
-        "provider_result_digests": []
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ]
       },
-      "current_provider_packet_identity": {},
+      "current_provider_packet_identity": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "provider_export_schema": "prism.resolved_release.v1",
+        "port_ids": [
+          "terminal_pipe.out"
+        ],
+        "provider_source_digests": [
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+        ],
+        "provider_result_digests": [
+          "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006"
+        ],
+        "provider_boundary_references": [
+          "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+        ],
+        "termination_bases": [
+          "inventory_depletion"
+        ],
+        "termination_provenances": [
+          "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
+        ],
+        "event_kinds": [
+          "accidental_leak"
+        ],
+        "input_origins": [
+          "synthetic"
+        ],
+        "duration_s": [
+          0.0625
+        ],
+        "available_mass_kg": [
+          0.00013416755831850078
+        ],
+        "cumulative_mass_out_kg": [
+          2.6236186797952155e-05
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101000.0,
+          "temperature_k": null,
+          "mass_kg": null,
+          "liquid_fraction": 0.0001,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+      },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
-        "independent physical validation or a declared validation gap for the release boundary"
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass",
+        "pipe upstream/downstream state and isolation response history"
       ],
       "blocking_reasons": [
-        "provider packet identity is absent from the facility case",
         "qualified provider packet coverage is 0/44 cases"
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2958,7 +3638,35 @@
         ],
         "cumulative_mass_out_kg": [
           1.6583741752980332e-09
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2966,8 +3674,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -2976,44 +3684,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3038,7 +3746,35 @@
         ],
         "cumulative_mass_out_kg": [
           1.6583741752980332e-09
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3046,8 +3782,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3056,44 +3792,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3118,7 +3854,35 @@
         ],
         "cumulative_mass_out_kg": [
           1.653545292876029e-07
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3126,8 +3890,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3136,44 +3900,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3198,7 +3962,35 @@
         ],
         "cumulative_mass_out_kg": [
           1.653545292876029e-07
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3206,8 +3998,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3216,44 +4008,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3278,7 +4070,35 @@
         ],
         "cumulative_mass_out_kg": [
           4.629740437409607e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3286,8 +4106,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3296,44 +4116,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3358,7 +4178,35 @@
         ],
         "cumulative_mass_out_kg": [
           4.629740437409607e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3366,8 +4214,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3376,44 +4224,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3438,7 +4286,35 @@
         ],
         "cumulative_mass_out_kg": [
           0.00010052648374898754
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3446,8 +4322,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3456,44 +4332,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3518,7 +4394,35 @@
         ],
         "cumulative_mass_out_kg": [
           0.00010052648374898754
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3526,8 +4430,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3536,44 +4440,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3598,7 +4502,35 @@
         ],
         "cumulative_mass_out_kg": [
           0.0018175777704088902
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3606,8 +4538,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
@@ -3616,44 +4548,44 @@
       ]
     },
     {
-      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+      "request_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
       "asset_id": "vertical-handoff-vent",
       "component_id": "vertical-handoff-terminal-pipe-01",
       "release_branch_id": "provider-vertical-handoff",
       "annual_condition_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
       "scenario_families": [
-        "liquid_two_phase",
-        "pipe_hole"
+        "pipe_hole",
+        "vertical_handoff"
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
         ]
       },
       "current_provider_packet_identity": {
-        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+        "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "provider_export_schema": "prism.resolved_release.v1",
         "port_ids": [
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
         "provider_result_digests": [
-          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3678,7 +4610,35 @@
         ],
         "cumulative_mass_out_kg": [
           0.0018175777704088902
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "terminal_pipe",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 101525.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "upstream_temperature_at_0_2_s": {
+              "quantity": "temperature",
+              "value_si": 21.0,
+              "sensor_location": "provider_input",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
+        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3686,8 +4646,8 @@
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
         "independent physical validation or a declared validation gap for the release boundary",
-        "flash quality, gas/liquid/ground partition and droplet treatment",
-        "pipe upstream/downstream state and isolation response history"
+        "pipe upstream/downstream state and isolation response history",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",

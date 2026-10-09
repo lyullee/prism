@@ -8,6 +8,7 @@ import pytest
 from lh2_tno.chain_worker import (box_axis_domain_overlap_fractions, box_axis_overlap_fractions, box_fractions, branch_mass, dose_harm,
     mole_fraction, outside_flammability_proven, pulse_mass, weighted_union_harm, wind_conditioned_handoff)
 from lh2_tno.consequences import ConsequenceRequest
+from lh2_tno.state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot
 
 EXAMPLE=Path(__file__).parents[1]/'examples/consequence_request.json'
 
@@ -123,6 +124,26 @@ def test_event_branches_partition_probability_without_repeated_leaks():
     probabilities=request.ignition.probabilities()
     assert sum(probabilities.values())==pytest.approx(1.)
     assert probabilities['delayed_explosion']==pytest.approx(.9*.2*.4)
+
+
+def test_state_snapshot_requires_payload_digest_and_provider_echo():
+    d=json.loads(EXAMPLE.read_text(encoding='utf-8'))
+    snapshot=EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id=d['component_id'],
+        captured_at_s=0.0,
+        origin='model_prediction',
+        pressure_pa_abs=101000.0,
+        temperature_k=20.5,
+    )
+    d['state_snapshot']=snapshot.to_mapping()
+    d['state_snapshot_digest']=snapshot.digest()
+    d['provider_state_snapshot_digest']=snapshot.digest()
+    request=ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.state_snapshot_digest==snapshot.digest()
+    d['provider_state_snapshot_digest']='0'*64
+    with pytest.raises(ValueError,match='provider_state_snapshot_digest'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))
 
 
 def test_model_natural_duration_requires_explicit_pressure_equalization_basis():

@@ -142,8 +142,15 @@ def make_release(
     opening_diameter_m: float = 0.0254,
     event_id: str = "equipment-coupling-campaign/terminal_pipe/AREA_100%",
     component_id: str = "terminal_pipe",
-) -> ResolvedGasRelease:
+    provider_state_snapshot_digests: tuple[str, ...] | None = None,
+    return_provider_details: bool = False,
+) -> ResolvedGasRelease | tuple[ResolvedGasRelease, list[dict], list[dict]]:
     inputs = [provider_input(20.5, opening_diameter_m), provider_input(21.0, opening_diameter_m)]
+    if provider_state_snapshot_digests is not None:
+        if len(provider_state_snapshot_digests) != len(inputs):
+            raise ValueError("provider state snapshot digest count must match provider inputs")
+        for item, digest in zip(inputs, provider_state_snapshot_digests):
+            item["state_snapshot_digest"] = digest
     exports = [backend.run("equipment_network_exit", item) for item in inputs]
     steps = []
     for time_s, response in zip((0.0, 0.2), exports):
@@ -185,7 +192,7 @@ def make_release(
             ),
         }
     }
-    return build_resolved_gas_release_from_provider_response(
+    release = build_resolved_gas_release_from_provider_response(
         provider_response,
         component_id=component_id,
         port_id=f"{component_id}.out",
@@ -206,6 +213,9 @@ def make_release(
         ambient_temperature_k=288.15,
         failure_opening_diameter_m=opening_diameter_m,
     )
+    if return_provider_details:
+        return release, inputs, exports
+    return release
 
 
 def main() -> None:

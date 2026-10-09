@@ -12,6 +12,8 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from .state_snapshot import EquipmentStateSnapshot
+
 
 EXTENSION_STATE_SNAPSHOT_COVERAGE_SCHEMA = "prism.extension_state_snapshot_coverage.v1"
 
@@ -65,6 +67,49 @@ def _identity_summary(cases: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _identity_state_row(
+    cases: Sequence[Mapping[str, Any]],
+    *,
+    allowed_component_ids: set[str] | None = None,
+) -> tuple[str, str, str | None, str | None]:
+    """Classify a state handoff carried in rebound case identities."""
+    identities = [
+        row.get("provider_packet_identity")
+        for row in cases
+        if isinstance(row.get("provider_packet_identity"), Mapping)
+    ]
+    if not identities:
+        return "UNBOUND", "no provider packet identity carries a state handoff", None, None
+    snapshots = [identity.get("state_snapshot") for identity in identities]
+    if any(not isinstance(snapshot, Mapping) for snapshot in snapshots):
+        return "UNBOUND", "provider packet identity has no canonical state snapshot payload", None, None
+    digests = {identity.get("state_snapshot_digest") for identity in identities}
+    echoes = {identity.get("provider_state_snapshot_digest") for identity in identities}
+    if len(digests) != 1 or len(echoes) != 1:
+        return "UNBOUND", "state snapshot digests differ between extension cases", None, None
+    digest = next(iter(digests))
+    echo = next(iter(echoes))
+    try:
+        parsed = EquipmentStateSnapshot.from_mapping(snapshots[0])
+        computed = parsed.digest()
+    except (TypeError, ValueError) as error:
+        return "UNBOUND", f"canonical state snapshot failed validation: {error}", digest, echo
+    if digest != computed:
+        return "UNBOUND", "state_snapshot_digest does not match canonical state snapshot", digest, echo
+    if echo != computed:
+        return "UNBOUND", "provider state snapshot echo does not match canonical state snapshot", digest, echo
+    if allowed_component_ids and parsed.component_id not in allowed_component_ids:
+        return (
+            "UNBOUND",
+            "state snapshot component_id is outside the source/target component mapping",
+            digest,
+            echo,
+        )
+    if any(snapshot != snapshots[0] for snapshot in snapshots[1:]):
+        return "UNBOUND", "canonical state snapshot payload differs between extension cases", digest, echo
+    return "BOUND_AND_ECHOED", "canonical state snapshot is carried in every case identity and echoed by the provider", digest, echo
+
+
 def _event_rows(
     result: Mapping[str, Any],
     *,
@@ -83,16 +128,28 @@ def _event_rows(
         identity = _identity_summary(cases)
         state = state_rows.get(event_id)
         if state is None:
-            status = "UNBOUND"
-            reason = (
-                "no canonical EquipmentStateSnapshot record exists for this extension event; "
-                "release values and result digests are not used to reconstruct equipment state"
+            target_component = event.get("model_component_id") or event.get("component_id")
+            allowed_components = {str(target_component)} if target_component else set()
+            rebind = result.get("campaign_namespace_rebind")
+            if not isinstance(rebind, Mapping):
+                rebind = result.get("vertical_handoff_rebind")
+            if isinstance(rebind, Mapping) and rebind.get("source_component_id"):
+                allowed_components.add(str(rebind["source_component_id"]))
+            status, reason, state_digest, state_echo = _identity_state_row(
+                cases,
+                allowed_component_ids=allowed_components,
             )
+            if status == "UNBOUND":
+                reason = (
+                    f"{reason}; release values and result digests are not used to reconstruct equipment state"
+                )
             state_path = None
         else:
             status = str(state.get("status", "UNBOUND"))
             reason = str(state.get("reason") or "state snapshot audit supplied no reason")
             state_path = state.get("record")
+            state_digest = state.get("declared_digest")
+            state_echo = state.get("provider_echo_digest")
         if not identity["provider_packet_identity_present"]:
             reason += "; extension result has no provider_packet_identity/provider state handoff"
         rows.append({
@@ -104,6 +161,8 @@ def _event_rows(
             "status": status,
             "snapshot_bound": status == "BOUND_AND_ECHOED",
             "provider_identity": identity,
+            "state_snapshot_digest": state_digest,
+            "provider_state_snapshot_digest": state_echo,
             "reason": reason,
             "policy": "release_boundary_is_not_a_state_snapshot",
         })

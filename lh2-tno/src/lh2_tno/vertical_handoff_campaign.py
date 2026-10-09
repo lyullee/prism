@@ -204,6 +204,7 @@ def rebind_vertical_handoff_campaign_result(
         "event_id_map": event_ids,
         "provider_event_id_map": provider_event_ids,
         "asset_id": asset_id,
+        "source_component_id": "terminal_pipe",
         "component_id": component_id,
         "receptor_map": receptor_mapping,
         "receptor_collapse_policy": "many_to_one_endpoint_maximum" if receptor_mapping else None,

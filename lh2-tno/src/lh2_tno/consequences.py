@@ -8,6 +8,7 @@ from pydantic import Field, model_validator
 from .contracts import Contract, Name, Positive, Nonnegative, Fraction, Vector
 from .frequency import FrequencyEvent
 from .equipment_boundary import ResolvedGasRelease, ResolvedGasReleaseSet, ResolvedLiquidRelease
+from .state_snapshot import EquipmentStateSnapshot
 from .two_sided_interaction import combine_endpoint_harm
 
 
@@ -110,6 +111,12 @@ class ReleaseTermination(Contract):
 
 class ConsequenceRequest(Contract):
     component_id: Name
+    # Equipment state is an input-side handoff from the digital twin. It is
+    # deliberately separate from the resolved accident packet: a release
+    # history must never be promoted to a normal operating state.
+    state_snapshot: EquipmentStateSnapshot | None = None
+    state_snapshot_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
+    provider_state_snapshot_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
     source_input: dict | None = None
     resolved_release: ResolvedGasRelease | None = None
     resolved_release_set: ResolvedGasReleaseSet | None = None
@@ -144,6 +151,17 @@ class ConsequenceRequest(Contract):
 
     @model_validator(mode='after')
     def valid(self):
+        if self.state_snapshot is None:
+            if self.state_snapshot_digest is not None or self.provider_state_snapshot_digest is not None:
+                raise ValueError('state snapshot digests require a canonical state_snapshot payload')
+        else:
+            if self.state_snapshot.component_id != self.component_id:
+                raise ValueError('state_snapshot component_id must match consequence component_id')
+            computed_state_digest = self.state_snapshot.digest()
+            if self.state_snapshot_digest != computed_state_digest:
+                raise ValueError('state_snapshot_digest does not match canonical state_snapshot')
+            if self.provider_state_snapshot_digest != computed_state_digest:
+                raise ValueError('provider_state_snapshot_digest must equal canonical state_snapshot digest')
         times=self.evaluation_times_s
         if len(times)<2 or times[0]!=0 or any(b<=a for a,b in zip(times,times[1:])):
             raise ValueError('evaluation clock must start at zero and increase')

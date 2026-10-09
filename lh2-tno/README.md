@@ -10,16 +10,18 @@
 24/24 native 상태 snapshot·방출 packet·campaign 재결합과 조건부 IR/F-N은 확인되지만
 qualified provider packet·독립 물리검증·엄격한 전체범위·시설 전체 QRA는 보류됩니다.
 기본 native 24개 사건은 event·설비 ID·provider result digest까지 24/24 일치하지만,
-union 34개 사건 중 vertical handoff와 inventory depletion 확장 10개는 별도 상태
-snapshot 원문이 없어 시설 전체 상태 coverage gate가 열리지 않습니다.
+union에 추가한 vertical handoff 5개와 inventory depletion 5개도 원래 provider 입력에서
+만든 canonical 상태 snapshot을 요청에 전달하고 echo digest를 확인해 10/10
+`BOUND_AND_ECHOED`가 되었습니다. 따라서 34개 union 사건의 상태 연결 gate는 통과했지만,
+나머지 qualified provider·독립 물리검증·엄격한 전체범위·시설 전체 QRA gate는 여전히 보류됩니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
 기존 fail-closed IJHE 감사도 23개 검사 중 19개 PASS·4개 BLOCKED이며, objective
-coverage에는 시설 전체 상태 snapshot coverage를 포함한 5개 strict gate가 남습니다.
+coverage에는 시설 전체 상태 snapshot coverage를 통과한 뒤에도 4개 strict gate가 남습니다.
 native catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 
-확장 사건의 누락 상태 근거는 [`extension_state_snapshot_coverage.json`](results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에 사건별로 기록합니다. 현재 vertical handoff 5개와 inventory depletion 5개가 모두 `UNBOUND`이며, 방출 유량·질량·결과 digest를 설비 상태 snapshot으로 거꾸로 만들지 않습니다. 이후 외부 설비 provider가 `prism.equipment_state_snapshot.v1` 원문과 echo digest를 제공하면 이 장부에 같은 event ID로 추가해 strict gate를 다시 계산합니다.
+확장 사건의 상태 근거는 [`extension_state_snapshot_coverage.json`](results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에 사건별로 기록합니다. 현재 vertical handoff 5개와 inventory depletion 5개는 모두 `BOUND_AND_ECHOED`입니다. 수직 벤트는 provider PH 입력 압력·온도에서, 재고 소진은 provider의 초기 압력·액체분율에서 상태 snapshot을 만들었고, 방출 유량·질량·결과 digest로 상태를 거꾸로 만들지 않았습니다. snapshot은 합성 `model_prediction` 입력이므로 현장 상태나 적격 provider 근거로 승격하지 않습니다.
 
 이번 원장 보완에서는 `uncomputed_case_count` 하나만 보고 실제 상태를 판단하지 않도록
 세 숫자를 따로 기록합니다. 현재 union은 44개 case를 수치상 실행했고
@@ -48,6 +50,17 @@ provider가 같은 digest를 echo하는지 검사합니다. 별도
 provider·시설 IR/F-N을 실제 시설 근거로 승격하지 않습니다. 재현 명령과 제한은
 [native 전체범위 상태 snapshot 감사](docs/PRISM_native_전체범위_상태snapshot_방출경계_감사_20261027.md)를
 참조합니다.
+
+**2026-10-27 확장 사건 상태 연결 완료:** 수직 벤트 all-bin 5개와 provider
+HomogeneousTank 재고 소진 5개를 새로 실행하면서, 각 생성기가 사고 계산 전에
+`prism.equipment_state_snapshot.v1` payload와 digest를 만들도록 연결했습니다. 수직
+벤트는 101,525 Pa와 20.5/21.0 K PH 경계 입력을, 재고 소진은 101,000 Pa와 초기
+액체분율 0.0001을 상태 원천으로 기록합니다. 공급자 worker가 같은 digest를 echo하고,
+campaign 결과의 각 기상 case identity에도 payload·선언 digest·echo digest를 보존합니다.
+통합 원장은 34개 event·44개 case·176개 risk atom이며, 확장 상태 coverage는 10/10
+`BOUND_AND_ECHOED`, union 상태 snapshot gate는 `PASS`입니다. 이 연결은 합성
+`model_prediction` 입력을 확인한 것이며, 현장 계측·독립 물리검증·qualified provider·시설
+전체 IR/F-N을 열지 않습니다. 상세 구현과 재현은 [확장 사건 상태 snapshot 기록](docs/PRISM_확장사건_상태snapshot_coverage_개발기록_20261027.md)을 참조합니다.
 
 같은 24개 catalog packet을 `rebind_campaign_to_worklist_packets.py`로 기존
 문헌 campaign에 다시 넣어 재실행한 결과도 보존합니다. `results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json`은

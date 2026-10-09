@@ -76,7 +76,13 @@ class EquipmentStateSnapshot(Contract):
         if not isinstance(value, Mapping):
             return value
         _scan_forbidden_keys(value)
-        return value
+        payload = dict(value)
+        # Nested JSON contracts pass ENU coordinates as arrays. Normalize the
+        # transport shape here as well as in ``from_mapping`` so a snapshot
+        # embedded inside ConsequenceRequest validates under strict mode.
+        if isinstance(payload.get("position_enu_m"), list):
+            payload["position_enu_m"] = tuple(payload["position_enu_m"])
+        return payload
 
     @model_validator(mode="after")
     def validate_state(self) -> "EquipmentStateSnapshot":

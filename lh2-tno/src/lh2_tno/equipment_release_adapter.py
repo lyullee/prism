@@ -196,7 +196,11 @@ def build_resolved_gas_release_from_provider_response(
             raise EquipmentReleaseExportError(
                 f"provider data.steps[{index}] missing required fields: {', '.join(missing)}"
             )
-        row = dict(raw)
+        # Provider histories may include diagnostic upstream/valve columns.
+        # Promote only the declared atmospheric boundary fields into the
+        # strict PRISM packet; retain the complete provider response and its
+        # digest outside the packet for provenance.
+        row = {field: raw[field] for field in _STEP_FIELDS}
         for field in _STEP_FIELDS[:8]:
             row[field] = _finite(row[field], f"provider data.steps[{index}].{field}")
         if row["mass_flow_kg_s"] < 0.0:

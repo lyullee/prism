@@ -112,7 +112,7 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
     first = packets[0]
     source_digests = [getattr(packet, "provider_source_digest", None) for packet in packets]
     result_digests = [getattr(packet, "provider_result_digest", None) for packet in packets]
-    return {
+    identity = {
         "event_id": first.event_id,
         "component_id": first.component_id,
         "provider_export_schema": (
@@ -137,6 +137,18 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
             getattr(packet, "cumulative_mass_out_kg", None) for packet in packets
         ],
     }
+    # Extension campaigns carry the canonical state payload in every case
+    # identity so a rebound facility ledger can audit state coverage without
+    # reconstructing state from release values. Native requests without a
+    # snapshot retain the historical compact identity shape.
+    state_snapshot = getattr(request, "state_snapshot", None)
+    if state_snapshot is not None:
+        identity.update({
+            "state_snapshot": state_snapshot.to_mapping(),
+            "state_snapshot_digest": getattr(request, "state_snapshot_digest", None),
+            "provider_state_snapshot_digest": getattr(request, "provider_state_snapshot_digest", None),
+        })
+    return identity
 
 
 def _provider_packet_evidence_matches(

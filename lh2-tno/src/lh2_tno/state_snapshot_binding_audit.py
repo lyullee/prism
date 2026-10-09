@@ -41,6 +41,7 @@ def _classify(
     echo = (
         provider_response.get("provider_state_snapshot_digest")
         or verification.get("provider_echo_digest")
+        or request.get("provider_state_snapshot_digest")
         or (handoff.get("provider_echo_digest") if handoff is not None else None)
     )
     if handoff is not None:

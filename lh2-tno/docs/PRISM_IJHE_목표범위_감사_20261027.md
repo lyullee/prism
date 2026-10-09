@@ -31,7 +31,7 @@ native catalog와 SLABx-LH2 구성요소 검사는 diagnostic-only PASS다.
 | 독립 물리검증 | BLOCKED_EVIDENCE | 제한 evidence matrix이며 physical validation claim=false |
 | qualified provider packet | BLOCKED_EVIDENCE | qualified packet 0건; 현재 packet은 native diagnostic |
 | 엄격한 시설 범위 | BLOCKED_EVIDENCE | 8개 family가 `EXECUTED_OPERATOR_LIMITED`라 PARTIAL |
-| 시설 전체 상태 snapshot coverage | BLOCKED_EVIDENCE | 기본 native 24/24는 event·component·provider result digest가 일치하지만 union 34개 사건 중 vertical handoff 5개와 inventory depletion 5개가 `UNBOUND` |
+| 시설 전체 상태 snapshot coverage | PASS | 기본 native 24/24와 union 확장 10/10을 합쳐 34/34 사건이 canonical state snapshot·provider echo·provider result digest까지 연결됨 |
 | 시설 전체 IR/F-N 승격 | BLOCKED_EVIDENCE | 위 게이트가 닫히지 않아 `facility_total_risk_available=false` |
 
 따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다.
@@ -73,8 +73,8 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --output results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json
 ```
 
-이 명령은 계산을 새로 실행하지 않는다. 저장된 원장과 digest·count·상태를 대조하고, 누락되거나 승격할 수 없는 근거를 `BLOCKED_EVIDENCE`로 남긴다. 확장 상태 장부의 사건별 목록은 [`extension_state_snapshot_coverage.json`](../results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에서 확인한다. 방출 유량·질량·결과 digest를 상태 snapshot으로 재구성하지 않으므로 현재 10개 확장 사건은 모두 `UNBOUND`이다.
+이 명령은 계산을 새로 실행하지 않는다. 저장된 원장과 digest·count·상태를 대조하고, 누락되거나 승격할 수 없는 근거를 `BLOCKED_EVIDENCE`로 남긴다. 확장 상태 장부의 사건별 목록은 [`extension_state_snapshot_coverage.json`](../results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에서 확인한다. 현재 10개 확장 사건은 provider가 원래 사용한 합성 model-prediction 입력에서 만든 canonical snapshot과 echo digest를 보존해 모두 `BOUND_AND_ECHOED`이다.
 
 ## 다음 개발 기준
 
-IJHE 논문에 수치 결과를 넣을 때는 먼저 이 장부에서 해당 행의 상태와 `evidence_paths`를 확인한다. 조건부 행은 계산 구조와 민감도 설명에 사용할 수 있고, BLOCKED 행은 한계와 후속 검증 항목으로 제시한다. 시설 전체 IR/F-N을 승격하려면 다섯 개의 엄격한 행을 실제 자료로 닫고, 기존 fail-closed completion audit도 함께 통과해야 한다. 특히 union에 추가된 모든 설비·사고 사건이 상태 snapshot과 provider result digest까지 일대일로 연결돼야 한다.
+IJHE 논문에 수치 결과를 넣을 때는 먼저 이 장부에서 해당 행의 상태와 `evidence_paths`를 확인한다. 조건부 행은 계산 구조와 민감도 설명에 사용할 수 있고, BLOCKED 행은 한계와 후속 검증 항목으로 제시한다. 시설 전체 IR/F-N을 승격하려면 남아 있는 네 개의 엄격한 행을 실제 자료로 닫고, 기존 fail-closed completion audit도 함께 통과해야 한다. 특히 union에 추가된 모든 설비·사고 사건이 상태 snapshot과 provider result digest까지 일대일로 연결되어야 하며, 현재 34개 사건의 state gate는 이 기준을 통과했다. 남은 4개 strict gate는 독립 물리검증·qualified provider·엄격한 사고범위·시설 전체 QRA 승격이다.

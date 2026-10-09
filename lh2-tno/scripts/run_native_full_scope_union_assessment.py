@@ -274,9 +274,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         source_facility_id=str(inventory_source.get("facility_id", "")).strip(),
         facility_id=facility_id,
         namespace=inventory_namespace,
-        source_asset_id="inventory-depletion-pipe",
+        source_asset_id=args.inventory_source_asset_id,
         asset_id="inventory-depletion-pipe",
-        source_component_id="inventory-depletion-pipe-01",
+        source_component_id=args.inventory_source_component_id,
         component_id="inventory-depletion-pipe-01",
         receptor_map={
             "near_worker": "worker-01",
@@ -485,6 +485,16 @@ def main() -> int:
     parser.add_argument("--vertical-scope-matrix", type=Path, required=True)
     parser.add_argument("--inventory-result", type=Path, required=True)
     parser.add_argument("--inventory-scope-matrix", type=Path, required=True)
+    parser.add_argument(
+        "--inventory-source-asset-id",
+        default="inventory-depletion-pipe",
+        help="asset ID in the inventory source campaign before namespace rebinding",
+    )
+    parser.add_argument(
+        "--inventory-source-component-id",
+        default="inventory-depletion-pipe-01",
+        help="component ID in the inventory source campaign before namespace rebinding",
+    )
     parser.add_argument("--state-snapshot-binding-audit", type=Path, default=None)
     parser.add_argument("--extension-state-snapshot-audit", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, required=True)

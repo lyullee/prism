@@ -22,6 +22,7 @@ from lh2_tno.contracts import Facility, canonical_digest
 from lh2_tno.equipment_boundary import ResolvedGasRelease
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
+from lh2_tno.state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot, StateMeasurement
 
 import validate_equipment_campaign as steady
 
@@ -49,13 +50,39 @@ def make_vertical_release(
     provider_digest: str,
     opening_diameter_m: float = 0.0254,
     event_id: str = "vertical-vent-campaign/terminal_pipe/AREA_100%",
-) -> ResolvedGasRelease:
-    raw = steady.make_release(
+) -> tuple[ResolvedGasRelease, EquipmentStateSnapshot, list[dict]]:
+    # This is the model input state used by the two provider PH boundary
+    # solves. It is carried as a state-only handoff; it contains no hole,
+    # release duration, frequency or provider accident result.
+    snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="terminal_pipe",
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=101525.0,
+        temperature_k=20.5,
+        position_enu_m=(0.0, 0.0, 1.0),
+        measurements={
+            "upstream_temperature_at_0_2_s": StateMeasurement(
+                quantity="temperature", value_si=21.0, sensor_location="provider_input"
+            ),
+        },
+        quality="valid",
+    )
+    raw_release, provider_inputs, provider_exports = steady.make_release(
         backend,
         provider_digest,
         opening_diameter_m=opening_diameter_m,
         event_id=event_id,
-    ).model_dump(mode="json")
+        provider_state_snapshot_digests=(snapshot.digest(), snapshot.digest()),
+        return_provider_details=True,
+    )
+    if any(
+        export.get("data", {}).get("provider_state_snapshot_digest") != snapshot.digest()
+        for export in provider_exports
+    ):
+        raise ValueError("vertical provider did not echo the canonical state snapshot digest")
+    raw = raw_release.model_dump(mode="json")
     raw.update(
         port_id="terminal_pipe.out",
         event_id=event_id,
@@ -108,7 +135,7 @@ def make_vertical_release(
             "states": states,
         },
     )
-    return ResolvedGasRelease.model_validate_json(json.dumps(raw))
+    return ResolvedGasRelease.model_validate_json(json.dumps(raw)), snapshot, provider_exports
 
 
 def main() -> None:
@@ -142,7 +169,7 @@ def main() -> None:
     events = generate_events(facility, plan)
     selected = next(event for event in events if event.loc == "AREA_100%")
     if args.all_area_bins:
-        releases = {
+        records = {
             event.id: make_vertical_release(
                 backend,
                 provider_digest,
@@ -151,23 +178,32 @@ def main() -> None:
             )
             for event in events
         }
+        releases = {event_id: record[0] for event_id, record in records.items()}
+        snapshots = {event_id: record[1] for event_id, record in records.items()}
         release = releases[selected.id]
         save("resolved_release_catalog.json", {
             event_id: value.model_dump(mode="json")
             for event_id, value in releases.items()
         })
     else:
-        release = make_vertical_release(backend, provider_digest)
+        release, selected_snapshot, _ = make_vertical_release(backend, provider_digest)
         releases = {selected.id: release}
+        snapshots = {selected.id: selected_snapshot}
     save("resolved_release.json", release.model_dump(mode="json"))
+    save("state_snapshots.json", {
+        event_id: snapshot.to_mapping() for event_id, snapshot in snapshots.items()
+    })
     base = json.loads(
         (ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json")
         .read_text(encoding="utf-8")
     )
-    def request_for(release_for_event: ResolvedGasRelease) -> dict:
+    def request_for(release_for_event: ResolvedGasRelease, snapshot_for_event: EquipmentStateSnapshot) -> dict:
         request = copy.deepcopy(base)
         request.update(
             component_id="terminal_pipe",
+            state_snapshot=snapshot_for_event.to_mapping(),
+            state_snapshot_digest=snapshot_for_event.digest(),
+            provider_state_snapshot_digest=snapshot_for_event.digest(),
             source_input=None,
             resolved_release=release_for_event.model_dump(mode="json"),
             resolved_release_set=None,
@@ -211,7 +247,7 @@ def main() -> None:
                     "id": "provider-vertical-handoff",
                     "probability_given_event": 1.0,
                     "provenance": "provider vertical exit plus declared horizontal handoff",
-                    "request": request_for(releases[event.id]),
+                    "request": request_for(releases[event.id], snapshots[event.id]),
                 }],
             })
         else:
@@ -245,6 +281,8 @@ def main() -> None:
         "provider_vertical_handoff_consumed": True,
         "provider_source_digest": provider_digest,
         "provider_result_digest": canonical_digest(release.model_dump(mode="json")),
+        "provider_state_snapshot_event_count": len(snapshots),
+        "provider_state_snapshot_bound_event_count": len(snapshots),
         "mass_residual_max_kg": max(abs(case["mass_ledger"]["end_to_end_residual_kg"]) for case in executed),
         "operator_limited": all(case["status"] == "EXECUTED_OPERATOR_LIMITED" for case in executed),
         "facility_total_risk_withheld": result["total_facility_annual_ir_low_high"] is None,

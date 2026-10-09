@@ -26,6 +26,7 @@ from lh2_tno.equipment_boundary import ResolvedGasRelease
 from lh2_tno.equipment_release_adapter import build_resolved_gas_release_from_provider_response
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
+from lh2_tno.state_snapshot import EQUIPMENT_STATE_SNAPSHOT_SCHEMA, EquipmentStateSnapshot
 
 import validate_equipment_campaign as steady
 
@@ -81,10 +82,27 @@ def make_release(
     provider_digest: str,
     event_id: str,
     area_m2: float,
-) -> tuple[ResolvedGasRelease, dict, dict]:
+) -> tuple[ResolvedGasRelease, dict, dict, EquipmentStateSnapshot]:
     request = provider_input(area_m2)
+    # The snapshot is built from the provider's declared initial tank state,
+    # before the inventory release is solved. Release history is never used to
+    # reconstruct this state.
+    snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="terminal_pipe",
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=request["initial"]["pressure_pa"],
+        liquid_fraction=request["initial"]["liquid_fraction"],
+        position_enu_m=(0.0, 0.0, 1.0),
+        quality="valid",
+    )
+    request["state_snapshot"] = snapshot.to_mapping()
+    request["state_snapshot_digest"] = snapshot.digest()
     response = backend.run("equipment_dynamic_inventory", request)
     data = response["data"]
+    if data.get("provider_state_snapshot_digest") != snapshot.digest():
+        raise ValueError("inventory provider did not echo the canonical state snapshot digest")
     release = build_resolved_gas_release_from_provider_response(
         response,
         component_id="terminal_pipe",
@@ -104,7 +122,7 @@ def make_release(
         ambient_temperature_k=288.15,
         failure_opening_diameter_m=math.sqrt(4.0 * area_m2 / math.pi),
     )
-    return release, request, response
+    return release, request, response, snapshot
 
 
 def main() -> None:
@@ -134,7 +152,7 @@ def main() -> None:
     provider_responses = {}
     for event in events:
         area_m2 = FULL_OPEN_AREA_M2 * event.release.area_fraction
-        release, provider_request, provider_response = make_release(
+        release, provider_request, provider_response, snapshot = make_release(
             backend, provider_digest, event.id, area_m2
         )
         data = provider_response["data"]
@@ -143,8 +161,13 @@ def main() -> None:
         releases[event.id] = release
         provider_requests[event.id] = provider_request
         provider_responses[event.id] = provider_response
+        provider_requests[event.id]["state_snapshot"] = snapshot.to_mapping()
     save("provider_inputs.json", provider_requests)
     save("provider_responses.json", provider_responses)
+    save("state_snapshots.json", {
+        event_id: request["state_snapshot"]
+        for event_id, request in provider_requests.items()
+    })
     save("facility.json", facility.model_dump(mode="json"))
     save("resolved_releases.json", {event_id: release.model_dump(mode="json") for event_id, release in releases.items()})
 
@@ -174,6 +197,11 @@ def main() -> None:
         template = copy.deepcopy(base_template)
         template.update(
             component_id="terminal_pipe",
+            state_snapshot=provider_requests[event.id]["state_snapshot"],
+            state_snapshot_digest=provider_requests[event.id]["state_snapshot_digest"],
+            provider_state_snapshot_digest=provider_responses[event.id]["data"][
+                "provider_state_snapshot_digest"
+            ],
             source_input=None,
             resolved_release=release.model_dump(mode="json"),
             available_mass_kg=release.available_mass_kg,
