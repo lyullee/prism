@@ -90,8 +90,11 @@ def test_provider_packet_evidence_can_be_built_from_promoted_export_result():
         release=release,
         provider_response={
             "provider_qualification": {
+                "schema_version": "prism.provider_qualification_evidence.v1",
                 "status": "qualified_actual",
+                "provider_origin": "native_provider",
                 "evidence_id": "lh2-actual-001",
+                "provider_source_digest": "a" * 64,
             }
         },
     )

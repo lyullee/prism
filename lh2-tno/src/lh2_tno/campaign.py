@@ -213,12 +213,23 @@ class ProviderPacketEvidence(Contract):
         qualification = response.get("provider_qualification")
         if not isinstance(qualification, Mapping):
             raise ValueError("promoted provider export lacks provider_qualification")
+        if qualification.get("schema_version") != "prism.provider_qualification_evidence.v1":
+            raise ValueError("provider qualification schema is invalid")
         if qualification.get("status") != "qualified_actual":
             raise ValueError("provider qualification status must be qualified_actual")
+        if qualification.get("provider_origin") not in {
+            "native_provider",
+            "reviewed_actual",
+        }:
+            raise ValueError("provider qualification origin is not an actual provider")
         evidence_id = qualification.get("evidence_id")
         if not isinstance(evidence_id, str) or not evidence_id.strip():
             raise ValueError("provider qualification requires evidence_id")
         packets = tuple(getattr(release, "releases", (release,)))
+        if qualification.get("provider_source_digest") != getattr(
+            packets[0], "provider_source_digest", None
+        ):
+            raise ValueError("provider qualification source digest disagrees with release")
         return cls(
             event_id=getattr(release, "event_id"),
             component_id=getattr(release, "component_id"),
