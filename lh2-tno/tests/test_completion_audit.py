@@ -472,6 +472,51 @@ def test_completion_audit_accepts_restricted_component_evidence_without_promotin
     assert len(report["blocking_reasons"]) == 5
 
 
+def test_completion_audit_records_validation_evidence_matrix_without_opening_qra():
+    matrix = {
+        "status": "RESTRICTED_EVIDENCE_MATRIX",
+        "decision": "FACILITY_QRA_WITHHELD",
+        "evidence_domains": [{"id": "pool"}, {"id": "facility"}],
+        "blocking_reasons": [],
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "facility_qra_claim": False,
+        "frequency_inference_performed": False,
+    }
+    report = build_ijhe_completion_audit(
+        _status(False), _matrix(False), _campaign_result(False),
+        validation_evidence_matrix=matrix,
+    )
+    check = next(item for item in report["checks"] if item["name"] == "validation_evidence_matrix")
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+    assert report["physical_validation_claim"] is False
+
+
+def test_completion_audit_blocks_unsafe_validation_evidence_matrix():
+    matrix = {
+        "status": "RESTRICTED_EVIDENCE_MATRIX",
+        "decision": "FACILITY_QRA_WITHHELD",
+        "evidence_domains": [],
+        "blocking_reasons": [],
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "facility_qra_claim": True,
+        "frequency_inference_performed": False,
+    }
+    report = build_ijhe_completion_audit(
+        _status(False), _matrix(False), _campaign_result(False),
+        validation_evidence_matrix=matrix,
+    )
+    check = next(item for item in report["checks"] if item["name"] == "validation_evidence_matrix")
+    assert check["status"] == "BLOCKED"
+    assert "validation evidence matrix" in check["blocking_reason"]
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_passes_only_when_every_claim_gate_is_present():
     report = build_ijhe_completion_audit(
         _status(True),
@@ -524,7 +569,7 @@ def test_completion_audit_reads_partial_provider_qualification_coverage():
 
     packet_check = next(item for item in report["checks"] if item["name"] == "actual_provider_release_packet")
     coverage_check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
-    assert packet_check["status"] == "PASS"
+    assert packet_check["status"] == "BLOCKED"
     assert packet_check["evidence"]["qualification_coverage_qualified_packet_count"] == 1
     assert coverage_check["status"] == "BLOCKED"
 

@@ -43,6 +43,11 @@ def main() -> int:
         type=Path,
         help="optional provider_catalog_coverage report with qualification sidecars",
     )
+    parser.add_argument(
+        "--validation-evidence-matrix",
+        type=Path,
+        help="optional fail-closed component/observation/facility evidence matrix",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -145,6 +150,13 @@ def main() -> int:
             provider_qualification_coverage["_record_path"] = str(
                 args.provider_qualification_coverage
             )
+        validation_evidence_matrix = (
+            _object(args.validation_evidence_matrix)
+            if args.validation_evidence_matrix
+            else None
+        )
+        if validation_evidence_matrix is not None:
+            validation_evidence_matrix["_record_path"] = str(args.validation_evidence_matrix)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -165,6 +177,7 @@ def main() -> int:
             native_packet_coverage_ledger,
             native_packet_campaign_ledger,
             provider_qualification_coverage,
+            validation_evidence_matrix,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

@@ -69,6 +69,7 @@ def build_ijhe_completion_audit(
     native_packet_coverage_ledger: Mapping[str, Any] | None = None,
     native_packet_campaign_ledger: Mapping[str, Any] | None = None,
     provider_qualification_coverage: Mapping[str, Any] | None = None,
+    validation_evidence_matrix: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -104,7 +105,17 @@ def build_ijhe_completion_audit(
             == provider_qualification_coverage.get("worklist_event_count")
             and provider_qualification_coverage.get("unqualified_exact_match_count") == 0
         )
-        if isinstance(qualified_provider_packet_count, int) and qualified_provider_packet_count > 0:
+        # A partial coverage report may contain one qualified-looking row, but
+        # it is not evidence that the current facility campaign has an actual
+        # qualified provider release.  Only a complete worklist qualification
+        # may fill an otherwise absent status-ledger value, and an explicit
+        # status-ledger ``False`` always remains authoritative.
+        if (
+            actual_packet_available is None
+            and qualified_worklist_coverage
+            and isinstance(qualified_provider_packet_count, int)
+            and qualified_provider_packet_count > 0
+        ):
             actual_packet_available = True
     cases = campaign_result.get("cases", [])
     events = campaign_result.get("events", [])
@@ -1311,6 +1322,41 @@ def build_ijhe_completion_audit(
             "sensor-conditioned realtime monitor contract is missing",
         ),
     ])
+    if validation_evidence_matrix is not None:
+        matrix_status = validation_evidence_matrix.get("status")
+        matrix_claims_closed = all(
+            validation_evidence_matrix.get(field) is False
+            for field in (
+                "physical_validation_claim",
+                "full_chain_validation_claim",
+                "accident_release_validation_claim",
+                "facility_qra_claim",
+                "frequency_inference_performed",
+            )
+        )
+        matrix_check = _check(
+            "validation_evidence_matrix",
+            matrix_status == "RESTRICTED_EVIDENCE_MATRIX" and matrix_claims_closed,
+            {
+                "status": matrix_status,
+                "decision": validation_evidence_matrix.get("decision"),
+                "domain_count": len(validation_evidence_matrix.get("evidence_domains", []))
+                if isinstance(validation_evidence_matrix.get("evidence_domains"), list)
+                else None,
+                "blocking_reason_count": len(validation_evidence_matrix.get("blocking_reasons", []))
+                if isinstance(validation_evidence_matrix.get("blocking_reasons"), list)
+                else None,
+                "claims_closed": matrix_claims_closed,
+                "record": validation_evidence_matrix.get("_record_path"),
+            },
+            "validation evidence matrix is missing, inconsistent, or contains an unsafe promotion claim",
+        )
+        matrix_check["diagnostic_only"] = True
+        matrix_check["interpretation"] = (
+            "The matrix keeps component, observation, interface and conditional evidence separate; "
+            "it documents the facility-QRA gate and does not open it."
+        )
+        checks.append(matrix_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {
