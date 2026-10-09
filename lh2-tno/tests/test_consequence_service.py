@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from lh2_tno.backend import BackendConfig,PackagePin,tree_digest
 from lh2_tno.consequences import ConsequenceRequest
+from lh2_tno.contracts import Facility
+from lh2_tno.frequency import FrequencyAsset, FrequencyPlan, generate_events
 from lh2_tno.service import (ConsequenceService, FacilityRealtimeBinding,
     FacilityRealtimeConsequenceMonitor, RealtimeConsequenceMonitor,
     RealtimeFrequencyBinding,
@@ -48,6 +50,49 @@ class RiskPipeline(Pipeline):
 
 
 def request():return ConsequenceRequest.model_validate_json(EXAMPLE.read_text(encoding='utf-8'))
+
+
+def test_realtime_frequency_binding_uses_packaged_catalogue_event():
+    facility = Facility.model_validate_json(
+        (Path(__file__).parents[1] / 'examples' / 'consequence_facility.json').read_text(
+            encoding='utf-8'
+        )
+    )
+    asset = FrequencyAsset(
+        id='tank-shell',
+        model_component_id='storage',
+        profile='TNO_PRESSURE_VESSEL',
+        classification_basis='packaged catalogue binding diagnostic',
+        physical_scope_ids=('tank-1',),
+        vessel_external_impact_or_operating_error=False,
+    )
+    plan = FrequencyPlan(
+        id='realtime-catalogue',
+        assets=(asset,),
+        excluded_model_components={
+            component.id: 'outside binding diagnostic'
+            for component in facility.components
+            if component.id != 'storage'
+        },
+    )
+    event = next(
+        event for event in generate_events(facility, plan) if event.loc == 'G1'
+    )
+    binding = RealtimeFrequencyBinding.from_frequency_event(
+        event,
+        annual_condition_probability=0.5,
+        release_branch_probability=0.25,
+        occupancy_probability=0.8,
+    )
+    assert binding.event_id == event.id
+    assert binding.asset_id == event.asset_id
+    assert binding.initiating_frequency_per_year == event.annual_frequency_per_year
+    assert binding.source_digest == event.source_sha256
+    assert binding.conditional_weight == pytest.approx(0.1)
+    assert binding.weighted_frequency() == pytest.approx(
+        event.annual_frequency_per_year * 0.1
+    )
+    assert event.id in binding.provenance
 
 
 def test_sensor_state_change_cannot_reuse_old_physics(tmp_path):

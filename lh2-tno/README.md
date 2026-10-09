@@ -932,6 +932,30 @@ frequency = RealtimeFrequencyBinding(
 # FacilityRealtimeBinding(..., frequency_binding=frequency)
 ```
 
+설비 빈도를 카탈로그에서 직접 만들었다면 수치를 다시 복사하지 않고
+`from_frequency_event()`로 실시간 binding을 만들 수 있습니다. 이 함수는
+패키지에 들어 있는 Purple/LH2 `FrequencyEvent`의 사건 ID·연간 빈도·문헌
+SHA-256·p05/p95를 그대로 전달합니다. 가동조건·방출분기·재실 확률은
+센서에서 추정하지 않으므로 호출자가 반드시 명시해야 합니다.
+
+```python
+from lh2_tno.frequency import generate_events
+
+catalogue_event = generate_events(facility_manifest.to_facility(), frequency_plan)[0]
+frequency = RealtimeFrequencyBinding.from_frequency_event(
+    catalogue_event,
+    annual_condition_probability=0.5,
+    release_branch_probability=0.8,
+    occupancy_probability=0.25,
+)
+# FacilityRealtimeBinding(..., frequency_binding=frequency)
+```
+
+따라서 실시간 경로는 내장 문헌 카탈로그 → 설비별 사건 binding → provider
+방출·피해 결과로 이어지며, telemetry 값으로 개시빈도를 학습하지 않습니다.
+카탈로그 사건이 실제 설비 개구·방출 branch와 정확히 맞지 않으면 binding하지
+않고 해당 risk atom을 보류합니다.
+
 provider 결과에 수용점 피해가 있으면 `snapshot["aggregate"]["current_weather_annual_ir_low_high"]`가 생성됩니다. 이는 현재 기상 조건의 진단값이며, `facility_annual_risk_available`와 전체 시설 F/N은 계속 `false`입니다.
 
 수용점별 인구 장부까지 명시하려면 `FacilityRealtimeConsequenceMonitor`에 `RealtimePopulationBinding`을 전달합니다.
