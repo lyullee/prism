@@ -28,14 +28,14 @@ python scripts/audit_lh2dt_native_contract.py `
 | 항목 | 결과 |
 |---|---:|
 | 외부 binding | 8개 |
-| 외부 `lh2dt` 설비 native 사고 export | 0/7 |
+| 외부 `lh2dt` 설비 native 사고 export | 2/7 |
 | 정상 상태 메서드가 확인된 외부 설비 | 7/7 |
 | PRISM-side 진단 adapter 계약 확인 | 7/7 |
 | qualified provider packet 승격 | 아니오 |
 
-저장탱크·배관·밸브·벤트·펌프·기화기·재액화기의 소스 파일은 모두 발견되지만, 각 클래스에 `export_accident_history(request)`가 없다. 경계 컴포넌트는 PRISM 인터페이스이므로 외부 native 대상에서 제외한다. 따라서 감사 상태는 `NATIVE_ACCIDENT_EXPORT_MISSING`이다.
+소스 파일은 모두 발견되며, `DynamicVaporizer`와 `DynamicReliquefier`는 `export_accident_history(request)`를 구현했다. 이 메서드는 명시된 기체·초임계 기체 상태와 대기 경계, 개구, 밸브 개방시간, 유한 관찰시계를 받아 `prism.external_accident_history.v1` 이력과 질량 장부를 반환한다. 관찰시계가 남은 재고를 가진 채 끝나면 `synthetic_diagnostic_horizon`으로 표시하고 qualified 승격을 막는다. 저장탱크·배관·밸브·벤트·펌프 5개 클래스에는 아직 native method가 없다. 경계 컴포넌트는 PRISM 인터페이스이므로 외부 native 대상에서 제외한다. 따라서 감사 상태는 여전히 `NATIVE_ACCIDENT_EXPORT_MISSING`이다.
 
-이 결과는 현재 병목을 구체화한다. 다음 실제 연결은 각 설비 solver가 다음을 자기 모델에서 반환하도록 하는 것이다.
+이 결과는 현재 병목을 구체화한다. 기화기·재액화기는 첫 native 사고경계가 생겼지만, 다음 연결은 나머지 설비 solver도 다음을 자기 모델에서 반환하도록 하는 것이다.
 
 1. 명시된 사고 포트와 고장 mode
 2. 시간별 질량·엔탈피·상 분할
@@ -52,4 +52,8 @@ python scripts/audit_lh2dt_native_contract.py `
 - PRISM-side adapter가 같은 이름의 메서드를 제공해도 외부 모델 native 기능으로 기록하지 않는다.
 - source digest와 계약 감사는 재현성 자료이며, 독립 물리검증이나 현장 빈도 근거를 대신하지 않는다.
 
-정적 감사 테스트 2건과 방출 ledger domain/withheld 분리 테스트를 포함한 portable test suite는 436건 통과했다.
+정적 감사 테스트 2건과 방출 ledger domain/withheld 분리 테스트를 포함한 PRISM portable suite는 441건 통과했고, 외부 `lh2dt_models` 전체 회귀시험은 359건 통과했다. 이 결과는 native method 존재를 확인한 것이며, qualified provider packet·현장 빈도·시설 IR/F-N·독립 물리검증을 승격하지 않는다.
+
+## native export 재감사 후속 기록
+
+외부 저장소 커밋 `d3d1091`에서 구현된 `DynamicVaporizer`와 `DynamicReliquefier`의 테스트는 작은 개구·0.5초 진단시계로 유량, 초크 여부, 종료 근거, 질량 잔차를 확인한다. 액체 상태 입력은 기체 전용 사고경계에서 거부한다. 이 경계는 PRISM의 기존 합성 adapter를 자동으로 대체하지 않으며, 저장탱크 등 나머지 5개 설비의 native export와 실제 차단·재고소진·시설 형상 결합이 완료될 때까지 완료 감사의 네 차단 사유를 그대로 유지한다.
