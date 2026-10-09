@@ -1,0 +1,27 @@
+{
+  "status": "PARTIAL_DECLARED_SCOPE",
+  "generated_events": 5,
+  "executed_cases": 10,
+  "provider_vertical_handoff_consumed": true,
+  "provider_source_digest": "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1",
+  "provider_result_digest": "66d2cc3f2486e5a69fea814b0463b145a10de131a66b097c0a1acd20aeec194d",
+  "mass_residual_max_kg": 0.0,
+  "operator_limited": true,
+  "facility_total_risk_withheld": true,
+  "physical_validation_claim": false,
+  "timing": {
+    "fresh_physics_cases": 10,
+    "case_min_ms": 1379.0437000570819,
+    "case_median_ms": 1874.0233999560587,
+    "case_max_ms": 3193.0797999957576,
+    "case_p95_ms": 3121.6972449677996,
+    "case_p99_ms": 3178.803288990166,
+    "campaign_elapsed_ms": 21212.362500024028,
+    "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+  },
+  "limitations": [
+    "synthetic variable-state vertical release history and horizontal handoff",
+    "vertical free-jet and handoff state are not independently validated",
+    "all generated area bins use separate provider calculations"
+  ]
+}

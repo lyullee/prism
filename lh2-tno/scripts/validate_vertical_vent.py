@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import copy
 import json
+import argparse
 from pathlib import Path
 import sys
 
@@ -43,11 +44,21 @@ def make_facility() -> Facility:
     return Facility.model_validate_json(json.dumps(raw))
 
 
-def make_vertical_release(backend: IsolatedBackend, provider_digest: str) -> ResolvedGasRelease:
-    raw = steady.make_release(backend, provider_digest).model_dump(mode="json")
+def make_vertical_release(
+    backend: IsolatedBackend,
+    provider_digest: str,
+    opening_diameter_m: float = 0.0254,
+    event_id: str = "vertical-vent-campaign/terminal_pipe/AREA_100%",
+) -> ResolvedGasRelease:
+    raw = steady.make_release(
+        backend,
+        provider_digest,
+        opening_diameter_m=opening_diameter_m,
+        event_id=event_id,
+    ).model_dump(mode="json")
     raw.update(
         port_id="terminal_pipe.out",
-        event_id="vertical-vent-campaign/terminal_pipe/AREA_100%",
+        event_id=event_id,
         position_enu_m=[0.0, 0.0, 1.0],
         direction_enu=[0.0, 0.0, 1.0],
     )
@@ -101,12 +112,21 @@ def make_vertical_release(backend: IsolatedBackend, provider_digest: str) -> Res
 
 
 def main() -> None:
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--all-area-bins",
+        action="store_true",
+        help="run a separate provider boundary calculation for every generated area bin",
+    )
+    parser.add_argument("--output-dir", type=Path, default=OUT)
+    args = parser.parse_args()
+    OUT = args.output_dir
+    OUT.mkdir(parents=True, exist_ok=True)
     config, provider = steady.load_backend()
     backend = IsolatedBackend(config)
     facility = make_facility()
     provider_digest = tree_digest(provider)
-    release = make_vertical_release(backend, provider_digest)
-    save("resolved_release.json", release.model_dump(mode="json"))
 
     plan = FrequencyPlan.model_validate_json(json.dumps({
         "id": "vertical-vent-campaign",
@@ -121,30 +141,52 @@ def main() -> None:
     }))
     events = generate_events(facility, plan)
     selected = next(event for event in events if event.loc == "AREA_100%")
+    if args.all_area_bins:
+        releases = {
+            event.id: make_vertical_release(
+                backend,
+                provider_digest,
+                opening_diameter_m=event.release.hole_diameter_m,
+                event_id=event.id,
+            )
+            for event in events
+        }
+        release = releases[selected.id]
+        save("resolved_release_catalog.json", {
+            event_id: value.model_dump(mode="json")
+            for event_id, value in releases.items()
+        })
+    else:
+        release = make_vertical_release(backend, provider_digest)
+        releases = {selected.id: release}
+    save("resolved_release.json", release.model_dump(mode="json"))
     base = json.loads(
         (ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json")
         .read_text(encoding="utf-8")
     )
-    base.update(
-        component_id="terminal_pipe",
-        source_input=None,
-        resolved_release=release.model_dump(mode="json"),
-        resolved_release_set=None,
-        source_operator="integrated_transient",
-        available_mass_kg=release.available_mass_kg,
-        source_position_enu_m=[0.0, 0.0, 1.0],
-        source_positions_enu_m=None,
-        annual_frequency_per_year=None,
-        annual_frequency_provenance=None,
-        frequency_event=None,
-        initiation_intensity_per_s=None,
-        release_termination={
-            "basis": "synthetic_diagnostic_horizon",
-            "time_s": release.duration_s,
-            "provenance": "synthetic vertical provider history; no flow extrapolation",
-        },
-        evaluation_times_s=[0.0, 0.1, 0.2, 0.37, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 10.0, 20.0],
-    )
+    def request_for(release_for_event: ResolvedGasRelease) -> dict:
+        request = copy.deepcopy(base)
+        request.update(
+            component_id="terminal_pipe",
+            source_input=None,
+            resolved_release=release_for_event.model_dump(mode="json"),
+            resolved_release_set=None,
+            source_operator="integrated_transient",
+            available_mass_kg=release_for_event.available_mass_kg,
+            source_position_enu_m=[0.0, 0.0, 1.0],
+            source_positions_enu_m=None,
+            annual_frequency_per_year=None,
+            annual_frequency_provenance=None,
+            frequency_event=None,
+            initiation_intensity_per_s=None,
+            release_termination={
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": release_for_event.duration_s,
+                "provenance": "synthetic vertical provider history; no flow extrapolation",
+            },
+            evaluation_times_s=[0.0, 0.1, 0.2, 0.37, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 10.0, 20.0],
+        )
+        return request
     population = [{
         "receptor_id": receptor.id,
         "persons": 20.0 if index == 0 else 10.0,
@@ -162,14 +204,14 @@ def main() -> None:
         })
     routes = []
     for event in events:
-        if event.id == selected.id:
+        if args.all_area_bins or event.id == selected.id:
             routes.append({
                 "event_id": event.id,
                 "branches": [{
                     "id": "provider-vertical-handoff",
                     "probability_given_event": 1.0,
                     "provenance": "provider vertical exit plus declared horizontal handoff",
-                    "request": base,
+                    "request": request_for(releases[event.id]),
                 }],
             })
         else:
@@ -211,6 +253,7 @@ def main() -> None:
         "limitations": [
             "synthetic variable-state vertical release history and horizontal handoff",
             "vertical free-jet and handoff state are not independently validated",
+            "all generated area bins use separate provider calculations" if args.all_area_bins else
             "only AREA_100% route is executed; other area bins remain explicit UNCOMPUTED cases",
         ],
     })

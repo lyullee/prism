@@ -209,6 +209,8 @@ def merge_facility_campaign_results(
     provider_qualification_blocking_reasons: list[str] = []
     blocking_reasons: list[str] = []
     timing_values: list[float] = []
+    fresh_physics_case_counts: list[int] = []
+    case_elapsed_values: list[float] = []
     component_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
     source_digests: list[str] = []
     event_accounting: dict[str, dict[str, int]] = {}
@@ -359,6 +361,23 @@ def merge_facility_campaign_results(
             elapsed = timing.get("campaign_elapsed_ms")
             if isinstance(elapsed, (int, float)) and math.isfinite(float(elapsed)) and elapsed >= 0:
                 timing_values.append(float(elapsed))
+            fresh_cases = timing.get("fresh_physics_cases")
+            if (
+                isinstance(fresh_cases, int)
+                and not isinstance(fresh_cases, bool)
+                and fresh_cases >= 0
+            ):
+                fresh_physics_case_counts.append(fresh_cases)
+            for case_row in result.get("cases", []):
+                if not isinstance(case_row, Mapping):
+                    continue
+                case_elapsed = case_row.get("elapsed_ms")
+                if (
+                    isinstance(case_elapsed, (int, float))
+                    and math.isfinite(float(case_elapsed))
+                    and case_elapsed >= 0
+                ):
+                    case_elapsed_values.append(float(case_elapsed))
 
     if receptor_ids is None or not receptor_ids:
         raise FacilityLedgerError("facility campaigns contain no receptor risk atoms")
@@ -553,6 +572,13 @@ def merge_facility_campaign_results(
     unique_blocking = list(dict.fromkeys(blocking_reasons))
     timing = {
         "campaign_count": len(campaign_rows),
+        "fresh_physics_cases": sum(fresh_physics_case_counts),
+        "case_min_ms": min(case_elapsed_values) if case_elapsed_values else None,
+        "case_median_ms": median(case_elapsed_values) if case_elapsed_values else None,
+        "case_max_ms": max(case_elapsed_values) if case_elapsed_values else None,
+        "case_p95_ms": _linear_percentile(case_elapsed_values, 0.95),
+        "case_p99_ms": _linear_percentile(case_elapsed_values, 0.99),
+        "campaign_elapsed_ms": sum(timing_values),
         "campaign_elapsed_ms_sum": sum(timing_values),
         "campaign_elapsed_ms_min": min(timing_values) if timing_values else None,
         "campaign_elapsed_ms_median": median(timing_values) if timing_values else None,

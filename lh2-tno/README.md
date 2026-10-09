@@ -1054,6 +1054,8 @@ G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`�
 
 네 개 범위표의 병합 결과는 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`입니다. family별 상태가 `PARTIAL`이면 시설 전체 위험도를 올리지 않으며, 12개 사고 family 중 빠진 provider history·operator-limited physics·synthetic release는 감사 결과에 남습니다. 독립 진단 결과에 component coverage가 없을 때는 namespace rebind 단계가 event/case 회계에서 한 행을 만들어 설비별 연결 상태를 보존합니다. 이 기능은 회계 보완이며 빈도 추론·물리검증·QRA 승격이 아닙니다.
 
+수직 벤트의 면적 구간을 하나의 대표 누출로 줄이지 않기 위해 `scripts/validate_vertical_vent.py --all-area-bins` 경로를 추가했습니다. `AREA_0.01%`부터 `AREA_100%`까지 다섯 개를 각각 provider 계산하고, 두 기상 조건의 10개 case를 같은 vertical handoff→SLABx 피해 chain으로 실행합니다. 최신 결과는 `results/20261020/vertical_vent_all_bins/`와 [모든 개구면적 연결 기록](docs/PRISM_수직벤트_모든개구면적_연결_개발기록_20261020.md)에 있습니다. 이 실행은 5개 event·10개 case·질량잔차 0 kg을 확인했지만, provider handoff가 합성·operator-limited이고 독립검증이 없어 시설 전체 IR/F-N을 열지 않습니다. 새 병합 원장은 설비 campaign별 `fresh_physics_cases`와 case p95/p99 처리시간도 보존합니다.
+
 ### 차단 성공·실패와 방출 지속시간 결합
 
 `equipment_isolation_campaign`도 공통 시설 장부에 별도 component로 연결했습니다. `isolation-diagnostic-pipe-01`은 5개 opening bin, 20개 실행 branch/weather case, 80개 risk atom을 보유합니다. 성공 10개는 0.25초 차단 후 유량 0인 `reviewed_isolation_success`, 실패 10개는 0.5초 diagnostic horizon인 `synthetic_diagnostic_horizon`으로 각각 기록됩니다.

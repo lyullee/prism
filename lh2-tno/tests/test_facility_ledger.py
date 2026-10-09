@@ -56,7 +56,7 @@ def _result(
             "limitations": ["test only"],
             "physical_validation_claim": False,
         }],
-        "cases": [{"event_id": event_id, "status": "EXECUTED"}],
+        "cases": [{"event_id": event_id, "status": "EXECUTED", "elapsed_ms": 5.0}],
         "uncomputed_cases": ([{"event_id": event_id, "status": "UNCOMPUTED"}] if incomplete else []),
         "risk_atoms": [atom],
         "declared_scope_numerically_complete": not incomplete,
@@ -69,7 +69,7 @@ def _result(
                 "scope_status": "PARTIAL" if incomplete else "EXECUTED",
             }],
         },
-        "timing": {"campaign_elapsed_ms": 10.0},
+        "timing": {"fresh_physics_cases": 1, "campaign_elapsed_ms": 10.0},
     }
 
 
@@ -100,6 +100,9 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
         "known_contribution_annual_ir_low_high"
     ]
     assert result["timing"]["campaign_count"] == 2
+    assert result["timing"]["fresh_physics_cases"] == 2
+    assert result["timing"]["case_p95_ms"] == pytest.approx(5.0)
+    assert result["timing"]["campaign_elapsed_ms"] == pytest.approx(20.0)
     assert result["timing"]["campaign_elapsed_ms_p95"] == pytest.approx(10.0)
     assert result["risk_atoms_digest"]
     assert result["component_contributions"]["tank-01"]["annual_ir_low_high"]["receptor-a"] == pytest.approx(

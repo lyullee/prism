@@ -1,0 +1,122 @@
+{
+  "schema_version": "prism.major_accident_scope.v1",
+  "environment": "outdoor",
+  "scope": "outdoor_major_accidents",
+  "required_families": [
+    "vertical_handoff"
+  ],
+  "scenario_catalog": {
+    "schema": "prism.accident_scenario_catalog.v1",
+    "scenario_count": 1,
+    "rows": [
+      {
+        "family": "vertical_handoff",
+        "equipment_kinds": [
+          "vent_stack",
+          "pipe",
+          "valve"
+        ],
+        "applicable_component_ids": [
+          "terminal_pipe"
+        ],
+        "applicable_component_count": 1,
+        "scenario_declared": true
+      }
+    ],
+    "all_requested_families_declared": true
+  },
+  "provider_worklist_alignment": null,
+  "rows": [
+    {
+      "family": "vertical_handoff",
+      "scenario_definition": {
+        "family": "vertical_handoff",
+        "name": "vertical vent to horizontal dispersion handoff",
+        "equipment_kinds": [
+          "vent_stack",
+          "pipe",
+          "valve"
+        ],
+        "release_modes": [
+          "hole",
+          "maximum_relief_discharge"
+        ],
+        "provider_schemas": [
+          "prism.resolved_release.v1"
+        ],
+        "termination_bases": [
+          "explicit_provider_termination",
+          "emergency_relief_discharge"
+        ],
+        "required_source_operators": [
+          "integrated_transient",
+          "equipment_emergency_relief"
+        ],
+        "consequence_path": "vertical jet state -> horizontal SLABx handoff -> TNO damage chain",
+        "uncomputed_default_reason": "validated vertical free-jet and handoff state are required"
+      },
+      "status": "PARTIAL",
+      "event_ids": [
+        "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+        "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+        "vertical-vent-campaign/terminal-valve/AREA_1%",
+        "vertical-vent-campaign/terminal-valve/AREA_10%",
+        "vertical-vent-campaign/terminal-valve/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "applicability": "APPLICABLE",
+      "event_without_case_count": 0,
+      "event_ids_without_cases": [],
+      "generated_initiation_frequency_per_year": 0.0002072,
+      "manifest_component_ids": [
+        "terminal_pipe"
+      ],
+      "manifest_component_count": 1,
+      "generated_component_ids": [
+        "terminal_pipe"
+      ],
+      "components_without_generated_event": [],
+      "request_branch_count": 5,
+      "uncomputed_branch_count": 0,
+      "case_count": 10,
+      "executed_case_count": 10,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 10,
+      "domain_incomplete_case_count": 0,
+      "failed_case_count": 0,
+      "uncomputed_case_count": 10,
+      "uncomputed_reasons": [
+        "source operator has declared constant-state or open physical closure limitations"
+      ],
+      "frequency_rows_are_not_additive_across_families": true
+    }
+  ],
+  "barrier_branch_ids": [
+    "provider-vertical-handoff"
+  ],
+  "manifest_family_component_ids": {
+    "pipe_hole": [
+      "terminal_pipe"
+    ]
+  },
+  "manifest_scenario_component_ids": {
+    "vertical_handoff": [
+      "terminal_pipe"
+    ]
+  },
+  "frequency_scope_selected_component_ids": [
+    "terminal_pipe"
+  ],
+  "frequency_scope_excluded_component_ids": [],
+  "manifest_audit_status": "EXECUTABLE",
+  "campaign_status": "PARTIAL_DECLARED_SCOPE",
+  "declared_scope_numerically_complete": false,
+  "facility_total_risk_available": false,
+  "matrix_complete": false,
+  "blocking_reasons": [
+    "vertical_handoff: PARTIAL",
+    "campaign does not provide total facility annual IR"
+  ],
+  "physical_validation_claim": false,
+  "interpretation": "Mechanism and execution coverage accounting; rows with no generated event are explicit and frequency sums across rows must not be added."
+}

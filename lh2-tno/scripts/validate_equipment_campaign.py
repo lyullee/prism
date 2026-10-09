@@ -67,7 +67,9 @@ def ph_state(pressure_pa: float, temperature_k: float) -> dict[str, float]:
     }
 
 
-def provider_input(temperature_k: float) -> dict:
+def provider_input(temperature_k: float, opening_diameter_m: float = 0.0254) -> dict:
+    if opening_diameter_m <= 0.0:
+        raise ValueError("opening_diameter_m must be positive")
     return {
         "fluid": "ParaHydrogen",
         "provider_link_id": "TERMINAL_FULL_BORE_LEAK",
@@ -75,7 +77,7 @@ def provider_input(temperature_k: float) -> dict:
         "downstream": ph_state(101325.0, 288.15),
         "stack": {
             "length_m": 6.0,
-            "inner_diameter_m": 0.0254,
+            "inner_diameter_m": opening_diameter_m,
             "roughness_m": 1.5e-6,
             "local_loss_coefficient": 2.0,
             "elevation_change_m": 0.0,
@@ -124,8 +126,13 @@ def make_facility() -> Facility:
     return Facility.model_validate_json(json.dumps(raw))
 
 
-def make_release(backend: IsolatedBackend, provider_digest: str) -> ResolvedGasRelease:
-    inputs = [provider_input(20.5), provider_input(21.0)]
+def make_release(
+    backend: IsolatedBackend,
+    provider_digest: str,
+    opening_diameter_m: float = 0.0254,
+    event_id: str = "equipment-coupling-campaign/terminal_pipe/AREA_100%",
+) -> ResolvedGasRelease:
+    inputs = [provider_input(20.5, opening_diameter_m), provider_input(21.0, opening_diameter_m)]
     exports = [backend.run("equipment_network_exit", item) for item in inputs]
     steps = []
     for time_s, response in zip((0.0, 0.2), exports):
@@ -171,7 +178,7 @@ def make_release(backend: IsolatedBackend, provider_digest: str) -> ResolvedGasR
         provider_response,
         component_id="terminal_pipe",
         port_id="terminal_pipe.out",
-        event_id="equipment-coupling-campaign/terminal_pipe/AREA_100%",
+        event_id=event_id,
         provider_source_digest=provider_digest,
         provider_result=exports,
         provider_result_digest=canonical_digest(exports),
@@ -186,7 +193,7 @@ def make_release(backend: IsolatedBackend, provider_digest: str) -> ResolvedGasR
         direction_enu=[1.0, 0.0, 0.0],
         ambient_pressure_pa_abs=101325.0,
         ambient_temperature_k=288.15,
-        failure_opening_diameter_m=0.0254,
+        failure_opening_diameter_m=opening_diameter_m,
     )
 
 

@@ -17,7 +17,7 @@
 - native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구와 provider가 명시한 수직→수평 `VerticalGasHandoff` 경계를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 이번 단계에서는 외부 `lh2dt` `HomogeneousTank`+`Valve`가 내보낸 flash 기체·지면 액체·액적 도착 시계를 `ResolvedLiquidRelease`로 수용해 DynamicLH2PoolX와 최종 피해까지 한 건 실행했다. provider의 `ParaHydrogen`과 native 풀 모델의 `Hydrogen` 기준은 provenance가 있는 명시적 변환 경계로만 연결하며, 교차 물성 검증 전까지 operator-limited로 남긴다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 491개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, no-rainout pool 경계 3건, 문헌 빈도 분위수 재가중 검사를 확인했다. 양단 endpoint마다 Frechet 교집합 가능 범위와 보수적 합집합 상한을 기록하되 공동 plume 해석은 보류하고, 공유 사건 빈도는 한 번만 적용한다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 매니페스트에 없는 사고 family의 `NOT_APPLICABLE` 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 491개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, **다섯 vertical 개구면적을 각각 provider 계산한 10개 case**, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, no-rainout pool 경계 3건, 문헌 빈도 분위수 재가중 검사를 확인했다. 양단 endpoint마다 Frechet 교집합 가능 범위와 보수적 합집합 상한을 기록하되 공동 plume 해석은 보류하고, 공유 사건 빈도는 한 번만 적용한다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 매니페스트에 없는 사고 family의 `NOT_APPLICABLE` 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 - DynamicLH2PoolX의 물/알루미늄 hold-out 반경 오차와 HSE 질량잔차를 해시 장부로 확인했지만, protocol snapshot 해시 drift가 있어 제한 구성요소 증거로만 사용한다. 설비 방출·대기확산·점화·IR/F-N 전체 체인의 물리 검증으로 확대하지 않는다.
 
 ## 단계별 작업과 통과 기준
@@ -215,6 +215,8 @@ G1의 실패를 숨기기 위해 저마하 packet을 바꾸어 넣지 않고, so
 
 generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 최신 범위 장부를 `results/20261019/generic_vertical_two_sided_merged_scope_matrix.json`에 만들었다. `vertical_handoff`와 `two_sided_rupture`는 이제 모두 `PARTIAL`로 표시되고, `NO_EVENT_GENERATED`가 숨겨지지 않는다. 최신 평가 `results/20261019/native_campaign_with_vertical_handoff_two_sided_facility_assessment.json`은 31개 event, 40개 case, 120개 atom을 집계하지만 22개 operator-limited와 5개 명시적 uncomputed case, 부분 사고 family, synthetic provider가 남아 전체 시설 IR/F-N을 `null`로 유지한다.
 
+2026-10-20에는 vertical handoff의 대표 면적 하나만 계산하던 경로를 확장했다. `scripts/validate_vertical_vent.py --all-area-bins`는 `AREA_0.01%`, `0.1%`, `1%`, `10%`, `100%`를 각기 다른 provider opening으로 계산하고 두 기상 조건에 연결한다. 그 결과 `results/20261020/vertical_vent_all_bins/verification.json`은 5개 generated event, 10개 executed case, provider handoff 소비, 최대 질량잔차 0 kg을 기록한다. 전체 시설 원장에 다시 결합한 `results/20261020/native_campaign_with_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json`은 41개 event, 70개 case, 272개 risk atom을 보존한다. 병합 원장은 신선 물리 계산 68건과 case p95 약 45.9 s, p99 약 49.2 s를 기록하지만, 이는 별도 설비 campaign을 합산한 진단 측정이며 1 Hz 서비스 보장이 아니다. provider handoff의 독립 검증과 나머지 부분 사고범위가 남아 있으므로 시설 전체 IR/F-N은 계속 보류한다. 상세 기록은 [vertical 모든 개구면적 연결](PRISM_수직벤트_모든개구면적_연결_개발기록_20261020.md)에서 확인한다.
+
 ## 2026-10-19 재고 소진 설비를 포함한 네 번째 시설 campaign
 
 이번 단계에서 기존 generic campaign, vertical handoff, two-sided rupture에 독립적으로 실행된 inventory-depletion campaign을 하나의 시설 평가로 연결했다. 네 campaign은 서로 다른 물리 범위를 같은 사건으로 합치지 않도록 namespace와 component ID를 분리한다. 재고 소진 설비는 `inventory-depletion-pipe-01`이며 5개 event, 10개 실행 case, 0개 미계산 case, 40개 risk atom을 갖는다. 각 case의 종료는 provider의 positive-mass depletion threshold다.
@@ -244,6 +246,8 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 문헌 빈도 불확실성 함수도 이 상태를 각 시나리오와 최상위 결과에 전달한다. p05·published·p95 재가중 또는 lognormal 샘플링이 실행되어도 provider packet 적격성, 독립 물리검증, 완전 시설 QRA 상태는 별도 gate로 남는다.
 
 새 gate 적용 후 기존 5개 disjoint campaign을 재집계한 결과는 `results/20261019/native_campaign_with_vertical_handoff_two_sided_inventory_isolation_provider_gate_assessment.json`에 보관했다. 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom이며 provider packet case와 qualified packet case는 모두 0이다. 이 재집계는 새 물리 계산이 아니라 저장된 risk atom의 시설 회계·빈도 불확실성 결과를 갱신한 것이다.
+
+최신 all-bin 재실행에서는 vertical campaign의 40개 risk atom을 포함해 총 272개 risk atom을 다시 집계했다. `results/20261020/ijhe_completion_audit_all_bins.json`은 27개 검사를 수행하고, 빈도 불확실성·처리시간·vertical handoff 진단은 통과시킨다. 현재 남은 차단은 부분 사고범위와 시설 IR/F-N 보류 두 가지다. 이 감사의 `INCOMPLETE_EVIDENCE` 상태는 계산 실패가 아니라, qualified provider packet·독립검증·모든 주요 사고군의 완전한 범위가 아직 없다는 뜻이다.
 
 이 assessment를 완료 감사기에 다시 넣은 결과도 `examples/ijhe_completion_audit_provider_gate_summary.json`에 보관했다. 15개 검사, 4개 blocker이며 방출→피해 chain·문헌 빈도 불확실성·지속시간/차단/재고 장부·처리시간 계약은 통과한다. 실제 사고 provider packet, 전체 사고범위, 시설 IR/F-N은 여전히 `BLOCKED`다.
 

@@ -1,0 +1,573 @@
+{
+  "schema_version": "prism.ijhe_completion_audit.v1",
+  "status": "INCOMPLETE_EVIDENCE",
+  "checks": [
+    {
+      "name": "equipment_state_to_release_to_consequence",
+      "status": "PASS",
+      "evidence": {
+        "generated_event_count": 41,
+        "case_count": 70,
+        "executed_case_count": 68
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "external_native_model_contract_audit",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261018\\lh2dt_native_contract_audit.json",
+        "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
+        "binding_count": 8,
+        "native_accident_export_component_count": 7,
+        "diagnostic_adapter_contract_verified_count": 7,
+        "provider_packet_promoted": false,
+        "frequency_inference_performed": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "This static audit separates native external accident export methods from PRISM-side diagnostic wrappers. It is evidence of the integration boundary, not a qualified provider packet or facility QRA."
+    },
+    {
+      "name": "diagnostic_native_full_bore_chain",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_dynamic_pipe_full_bore_case_verification.json",
+        "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+        "event_id": "generic-lh2-full-bore-diagnostic/transfer-line/full-bore",
+        "component_id": "liquid-transfer-line-01",
+        "termination_basis": "model_pressure_equalization",
+        "provider_duration_s": 0.03141380098162305,
+        "provider_final_pressure_pa_abs": 101325.00000000426,
+        "provider_pressure_equalized": true,
+        "provider_final_pressure_matches_ambient": true,
+        "provider_mass_residual_kg": 0.0,
+        "consequence_chain_executed": true,
+        "frequency_applied": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "Native finite full-bore pressure-equalization output reached the PRISM liquid/two-phase consequence chain. This is diagnostic integration evidence; it does not qualify a provider, assign a frequency, or promote facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_native_lh2dt_packet_coverage",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_packet_coverage_ledger.json",
+        "status": "PARTIAL_NATIVE_DIAGNOSTIC_EVIDENCE",
+        "packet_count": 25,
+        "exact_worklist_event_count": 24,
+        "expected_worklist_event_count": 24,
+        "consequence_chain_event_count": 25,
+        "frequency_bound_event_count": 1,
+        "provider_packet_promoted_count": 0,
+        "physical_validation_claim_count": 0,
+        "facility_qra_claim_count": 0,
+        "family_summary": {
+          "ambient-vaporizer": {
+            "packet_count": 3,
+            "chain_count": 3,
+            "frequency_bound_count": 0
+          },
+          "liquid-outlet": {
+            "packet_count": 1,
+            "chain_count": 1,
+            "frequency_bound_count": 0
+          },
+          "pressure-relief-vent": {
+            "packet_count": 1,
+            "chain_count": 1,
+            "frequency_bound_count": 0
+          },
+          "reliquefier": {
+            "packet_count": 2,
+            "chain_count": 2,
+            "frequency_bound_count": 0
+          },
+          "storage-shell": {
+            "packet_count": 5,
+            "chain_count": 5,
+            "frequency_bound_count": 0
+          },
+          "transfer-line": {
+            "packet_count": 6,
+            "chain_count": 6,
+            "frequency_bound_count": 1
+          },
+          "transfer-pump": {
+            "packet_count": 2,
+            "chain_count": 2,
+            "frequency_bound_count": 0
+          },
+          "transfer-valve": {
+            "packet_count": 5,
+            "chain_count": 5,
+            "frequency_bound_count": 0
+          }
+        }
+      },
+      "interpretation": "Saved native lh2dt packet outputs are indexed by equipment family and opening. The ledger demonstrates diagnostic interface coverage only; it does not qualify the provider, assign a facility frequency, or unlock facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_native_packet_campaign_execution",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_packet_campaign_execution_ledger_g1_handoff.json",
+        "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+        "event_count": 24,
+        "expected_worklist_event_count": 24,
+        "case_count": 24,
+        "chain_executed_case_count": 24,
+        "packet_identity_case_count": 24,
+        "packet_digest_case_count": 24,
+        "packet_identity_consumed": true,
+        "operator_limited_case_count": 20,
+        "failed_case_count": 0,
+        "failed_cases": [],
+        "risk_atom_count": 96,
+        "facility_total_risk_available": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "The native packet identities were consumed by the facility campaign and every failed case is preserved explicitly. This diagnostic result does not qualify the provider, invent a frequency, or expose facility total IR/F-N."
+    },
+    {
+      "name": "diagnostic_native_packet_compressible_handoff_rebind",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_packet_campaign_execution_ledger_g1_handoff.json",
+        "consumed": true,
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "original_provider_result_digest": "7554c951adb33574fd3c0631bc61c3383fb6292cdd49abdfa85d535e60e02d0d",
+        "handoff_provider_result_digest": "227caf76e92d93ed99e3653a2c20ccdbe81bc30c16328594c33d4c7e406ee885",
+        "physical_validation_claim": false,
+        "frequency_inference": false
+      },
+      "interpretation": "The campaign records an explicit same-source compressible-plane handoff rebind. This confirms packet identity controls only; it does not validate the near field, infer frequency, or promote facility QRA."
+    },
+    {
+      "name": "diagnostic_native_full_bore_frequency_binding",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\native_lh2dt_dynamic_pipe_full_bore_facility_frequency_case_verification.json",
+        "status": "PARTIAL_DECLARED_SCOPE",
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "full_bore_match": true,
+        "termination_basis": "model_pressure_equalization",
+        "provider_duration_s": 0.0314138009816233,
+        "provider_pressure_equalized": true,
+        "provider_final_pressure_matches_ambient": true,
+        "provider_mass_residual_kg": -1.734723475976807e-18,
+        "annual_frequency_per_year": 1.9e-07,
+        "annual_frequency_provenance": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%; Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf; 6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+        "frequency_applied": true,
+        "frequency_exact_opening_match": true,
+        "consequence_chain_executed": true,
+        "facility_campaign_executed": true,
+        "facility_campaign_status": "PARTIAL_DECLARED_SCOPE",
+        "facility_campaign_event_count": 5,
+        "facility_campaign_case_count": 5,
+        "facility_campaign_executed_case_count": 1,
+        "facility_campaign_uncomputed_case_count": 4,
+        "facility_campaign_risk_atom_count": 4,
+        "facility_campaign_conditional_risk_available": true,
+        "facility_total_risk_available": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "The native finite full-bore provider packet is bound to the declared LH2_PIPE AREA_100% literature event at one reviewed outlet and reaches the PRISM consequence chain. This diagnostic evidence does not calibrate a site frequency, complete the facility event set, or promote facility IR/F-N."
+    },
+    {
+      "name": "literature_frequency_provenance_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261018\\generic_lh2_frequency_provenance_current.json",
+        "status": "PASS_WITH_SCOPE_LIMITATIONS",
+        "profile_count": 7,
+        "event_count": 24,
+        "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+        "field_frequency_collection_used": false,
+        "sensor_frequency_learning_used": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "The selected literature frequency profiles and generated event rows have source and catalogue digest provenance. This does not make the rates field-validated or create a facility credible interval."
+    },
+    {
+      "name": "external_scenario_evidence_import",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261009\\inspection_center_scenario_evidence.json",
+        "status": "SCREENING_EVIDENCE_IMPORTED",
+        "source_file_count": 3,
+        "record_count": 52,
+        "scope_status_counts": {
+          "CANDIDATE_OUTDOOR_SCREENING": 41,
+          "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
+        },
+        "frequency_applied": false,
+        "sensor_frequency_learning_used": false,
+        "provider_packet_created": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "External procedure and failure tables are retained as facility-neutral screening evidence. Candidate families and monitoring tags do not create a frequency, provider release packet or facility IR/F-N result."
+    },
+    {
+      "name": "provider_worklist_scope_alignment",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "status": "ALIGNED",
+        "worklist_event_count": 24,
+        "campaign_event_count": 24,
+        "aligned_event_count": 24,
+        "missing_event_ids": [],
+        "primary_family_mismatches": [],
+        "provider_packet_created": false,
+        "frequency_inference_performed": false
+      },
+      "interpretation": "The provider worklist and campaign share event IDs and primary accident families. This is a structural diagnostic check; it does not create a provider packet or qualify facility risk."
+    },
+    {
+      "name": "diagnostic_adapter_execution_contract",
+      "status": "PASS",
+      "evidence": {
+        "source": "diagnostic_adapter_registry",
+        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED",
+        "adapter_count": 7,
+        "resolved_adapter_count": 7,
+        "provider_instance_count": 0,
+        "qualified_provider_packet_count": 0,
+        "record": null
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "diagnostic_worklist_execution_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261014\\diagnostic_adapter_runner_worklist_storage_001.json",
+        "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+        "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
+        "provider_instance_id": "storage-tank-01",
+        "worklist_exact_match": {
+          "event_id": true,
+          "component_id": true,
+          "port_id": true,
+          "opening_diameter_m": true
+        },
+        "consequence_chain_executed": true,
+        "consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+        "consequence_chain_elapsed_ms": 11215.867000049911,
+        "fresh_adapter_execution_elapsed_ms": 1581.4859999809414,
+        "qualified_provider_packet_count": 0,
+        "provider_packet_promoted": false,
+        "worklist_frequency_bound": false,
+        "consequence_context_frequency_bound": false,
+        "frequency_inference_performed": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "A worklist item reached the diagnostic provider and consequence-chain boundary; this evidence is intentionally non-qualifying and does not satisfy the provider, frequency, facility-QRA, or physical-validation gates."
+    },
+    {
+      "name": "diagnostic_worklist_packet_coverage_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "examples\\generic_lh2_provider_worklist_packet_evidence.json",
+        "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
+        "worklist_event_count": 24,
+        "candidate_event_count": 24,
+        "exact_match_event_count": 24,
+        "strict_packet_valid_event_count": 24,
+        "consequence_chain_event_count": 15,
+        "qualified_provider_packet_count": 0,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      },
+      "interpretation": "Saved external-model packets cover only the exact-matched worklist subset; this diagnostic evidence does not close the missing events or qualify the provider packets."
+    },
+    {
+      "name": "diagnostic_worklist_campaign_binding_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261018\\generic_lh2_diagnostic_campaign_binding_current.json",
+        "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING",
+        "packet_event_count": 24,
+        "campaign_event_count": 24,
+        "campaign_case_count": 24,
+        "campaign_risk_atom_count": 96,
+        "packet_event_to_campaign_event_match_count": 24,
+        "packet_event_to_campaign_case_match_count": 24,
+        "packet_event_to_campaign_risk_atom_match_count": 24,
+        "structural_binding_complete": true,
+        "packet_identity_consumed": false,
+        "packet_digest_checked_event_count": 24,
+        "packet_digest_match_event_count": 18,
+        "frequency_from_provider_packet": false,
+        "packet_claims_preserved": true,
+        "executed_case_count": 24,
+        "campaign_provider_identity_case_count": 24,
+        "campaign_provider_identity_recorded": true
+      },
+      "interpretation": "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. The campaign may preserve provider packet identity metadata, but equality with the packet-evidence files must still be proven; packet time histories remain unconsumed evidence and the result stays diagnostic-only."
+    },
+    {
+      "name": "diagnostic_conditional_facility_risk_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261020\\native_campaign_with_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
+        "status": "PARTIAL_FACILITY_SCOPE",
+        "conditional_diagnostic_facility_risk_available": true,
+        "conditional_diagnostic_facility_annual_ir_low_high": {
+          "worker-01": [
+            1e-07,
+            1e-07
+          ]
+        },
+        "conditional_diagnostic_facility_expected_death_fn_low_high": [
+          {
+            "expected_deaths": [
+              1.0
+            ],
+            "cumulative_frequency_per_year": [
+              1e-07
+            ]
+          },
+          {
+            "expected_deaths": [
+              1.0
+            ],
+            "cumulative_frequency_per_year": [
+              1e-07
+            ]
+          }
+        ],
+        "coverage": {
+          "event_count": 41,
+          "case_count": 70,
+          "uncomputed_case_count": 37,
+          "overlapping_case_uncomputed_count": 37,
+          "risk_atom_count": 272,
+          "case_status_counts": {
+            "EXECUTED": 14,
+            "EXECUTED_OPERATOR_LIMITED": 26,
+            "UNCOMPUTED": 1
+          },
+          "uncomputed_status_counts": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 34,
+            "UNCOMPUTED": 2
+          },
+          "operator_limited_case_count": 26,
+          "explicit_uncomputed_status_count": 1,
+          "failed_case_count": 0,
+          "observed_component_count": 11,
+          "expected_component_count": 11,
+          "component_status_counts": {
+            "MISSING_COVERAGE_LEDGER": 11
+          },
+          "required_accident_family_count": 12,
+          "scope_blocker_count": 23
+        },
+        "facility_total_risk_available": false,
+        "complete_facility_qra_claim": false
+      },
+      "interpretation": "The facility IR/F-N aggregation is present as a conditional diagnostic view over the saved risk atoms; withheld total-facility qualification and the remaining scope, provider, frequency, and validation gates are preserved."
+    },
+    {
+      "name": "diagnostic_frequency_uncertainty_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "scenario_count": 5,
+        "valid_scenario_count": 5,
+        "facility_credible_interval": false,
+        "fresh_physics_executed": false,
+        "correlation_comparison_present": true,
+        "conditional_diagnostic_facility_risk": "each scenario reweights the saved risk atoms and exposes a conditional facility IR/F-N diagnostic; incomplete scope, synthetic horizons, and operator limits still withhold a qualified facility total"
+      },
+      "interpretation": "Published frequency scenarios are re-applied to saved diagnostic risk atoms and asset rankings; this does not create a complete-facility confidence interval or claim fresh-physics validation."
+    },
+    {
+      "name": "diagnostic_vertical_handoff_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261020\\vertical_vent_all_bins\\verification.json",
+        "status": "PARTIAL_DECLARED_SCOPE",
+        "generated_events": 5,
+        "executed_cases": 10,
+        "provider_vertical_handoff_consumed": true,
+        "operator_limited": true,
+        "facility_total_risk_withheld": true,
+        "physical_validation_claim": false
+      },
+      "interpretation": "A separate vertical-to-horizontal provider handoff diagnostic consumed a declared handoff boundary; it is not merged into the generic facility scope or promoted to a qualified vertical accident family."
+    },
+    {
+      "name": "equipment_model_binding_to_accident_release",
+      "status": "PASS",
+      "evidence": {
+        "model_binding_status": "ACCIDENT_RELEASE_INTERFACE_BOUND",
+        "component_count": 7,
+        "state_supported_component_count": 7,
+        "accident_release_supported_component_count": 7,
+        "diagnostic_release_adapter_component_count": 7,
+        "record": "results/20261018/lh2dt_native_contract_audit.json"
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "actual_provider_release_packet",
+      "status": "PASS",
+      "evidence": {
+        "actual_facility_packet_available": true,
+        "release_inventory_status": "NO_ACCIDENT_RELEASE_EXPORT",
+        "qualified_packet_count": 0,
+        "qualification_coverage_status": "QUALIFIED_PARTIAL_OR_BLOCKED",
+        "qualification_coverage_qualified_packet_count": 1
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "provider_worklist_coverage",
+      "status": "PASS",
+      "evidence": {
+        "source": "provider_worklist",
+        "status": "READY_FOR_PROVIDER_PACKETS",
+        "frequency_event_count": 24,
+        "provider_packet_count": 0,
+        "uncomputed_provider_packet_count": 24,
+        "diagnostic_release_adapter_component_count": 7,
+        "structural_diagnostic_coverage": true,
+        "qualified_provider_packet_count": 0,
+        "qualification_coverage_status": "QUALIFIED_PARTIAL_OR_BLOCKED",
+        "qualification_coverage_qualified_packet_count": 1,
+        "qualification_coverage_complete": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "release_duration_isolation_inventory_ledger",
+      "status": "PASS",
+      "evidence": {
+        "executed_case_count": 68,
+        "cases_with_termination_and_mass_ledger": 68,
+        "release_ledger_schema": null,
+        "release_ledger_row_count": null,
+        "release_ledger_summary": null,
+        "max_end_to_end_residual_kg": 2.9357462569593815e-11
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "declared_major_accident_scope",
+      "status": "BLOCKED",
+      "evidence": {
+        "matrix_status": false,
+        "blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ],
+        "required_family_count": 12
+      },
+      "blocking_reason": "one or more declared accident families are missing, partial, or uncomputed"
+    },
+    {
+      "name": "facility_ir_fn_available",
+      "status": "BLOCKED",
+      "evidence": {
+        "total_facility_annual_ir_low_high": null,
+        "total_facility_expected_death_fn_low_high": null
+      },
+      "blocking_reason": "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    },
+    {
+      "name": "physical_validation_evidence",
+      "status": "PASS",
+      "evidence": {
+        "physical_validation_claim": false,
+        "evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
+        "evidence_record": "docs/PRISM_물리검증_근거_20261009.md",
+        "evidence_component": "DynamicLH2PoolX pool/spreading only",
+        "restricted_component_evidence": true
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "frequency_uncertainty_reported",
+      "status": "PASS",
+      "evidence": {
+        "uncertainty_result_present": true,
+        "scenario_count": 5,
+        "facility_credible_interval": false,
+        "conditional_frequency_uncertainty": true
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "processing_time_evidence",
+      "status": "PASS",
+      "evidence": {
+        "fresh_physics_cases": 68,
+        "campaign_elapsed_ms": 751515.4183000559,
+        "case_p95_ms": 45917.6186149998,
+        "case_p99_ms": 49155.94828402274,
+        "timing_distribution": "across separately executed equipment campaigns; not repeated-run latency",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "realtime_monitor_contract",
+      "status": "PASS",
+      "evidence": {
+        "implemented": true,
+        "module": "src/lh2_tno/service.py",
+        "test_status": "2 single-component monitor tests + 4 facility monitor tests; full portable suite 491 passed",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    }
+  ],
+  "blocking_reasons": [
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ],
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "interpretation": "Readiness evidence gate; a blocked check is not treated as zero risk or as an implicit accident substitution."
+}

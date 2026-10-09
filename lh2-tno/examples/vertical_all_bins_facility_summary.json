@@ -1,0 +1,70 @@
+{
+  "schema_version": "prism.vertical_all_bins_facility_summary.v1",
+  "facility_id": "generic-lh2-full-scope-example",
+  "vertical_handoff": {
+    "generated_events": 5,
+    "executed_cases": 10,
+    "provider_handoff_consumed": true,
+    "operator_limited": true,
+    "mass_residual_max_kg": 0.0,
+    "timing": {
+      "fresh_physics_cases": 10,
+      "case_min_ms": 1379.0437000570819,
+      "case_median_ms": 1874.0233999560587,
+      "case_max_ms": 3193.0797999957576,
+      "case_p95_ms": 3121.6972449677996,
+      "case_p99_ms": 3178.803288990166,
+      "campaign_elapsed_ms": 21212.362500024028,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    }
+  },
+  "merged_facility": {
+    "event_count": 41,
+    "case_count": 70,
+    "uncomputed_case_count": 37,
+    "risk_atom_count": 272,
+    "status": "PARTIAL_FACILITY_SCOPE",
+    "facility_total_risk_available": false,
+    "physical_validation_claim": false,
+    "timing": {
+      "campaign_count": 5,
+      "fresh_physics_cases": 68,
+      "case_min_ms": 0.0,
+      "case_median_ms": 6875.065800035372,
+      "case_max_ms": 49543.07030001655,
+      "case_p95_ms": 45917.6186149998,
+      "case_p99_ms": 49155.94828402274,
+      "campaign_elapsed_ms": 751515.4183000559,
+      "campaign_elapsed_ms_sum": 751515.4183000559,
+      "campaign_elapsed_ms_min": 20850.820600055158,
+      "campaign_elapsed_ms_median": 37180.95730000641,
+      "campaign_elapsed_ms_max": 469351.71029996127,
+      "campaign_elapsed_ms_p95": 416065.2817599708,
+      "campaign_elapsed_ms_p99": 458694.4245919632,
+      "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+    }
+  },
+  "conditional_diagnostic_risk": {
+    "worker-01": [
+      1e-07,
+      1e-07
+    ]
+  },
+  "ijhe_audit": {
+    "record": "results/20261020/ijhe_completion_audit_all_bins.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "check_count": 27,
+    "blocking_reason_count": 2,
+    "blocking_reasons": [
+      "one or more declared accident families are missing, partial, or uncomputed",
+      "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    ]
+  },
+  "evidence_request": "results/20261020/facility_evidence_request_all_bins.json",
+  "limitations": [
+    "synthetic/operator-limited provider handoff",
+    "partial accident-family scope",
+    "no independent full-chain physical validation",
+    "facility IR/F-N withheld"
+  ]
+}\n

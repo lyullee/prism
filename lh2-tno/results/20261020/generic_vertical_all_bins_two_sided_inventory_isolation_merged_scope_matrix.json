@@ -1,0 +1,412 @@
+{
+  "schema_version": "prism.major_accident_scope.v1",
+  "facility_id": "generic-lh2-full-scope-example",
+  "scope": "outdoor_major_accidents",
+  "required_families": [
+    "vessel_hole",
+    "pipe_hole",
+    "valve_hole",
+    "vent_hole",
+    "pump_hole",
+    "vaporizer_hole",
+    "reliquefier_hole",
+    "liquid_two_phase",
+    "inventory_depletion",
+    "inventory_over_600s",
+    "two_sided_rupture",
+    "vertical_handoff"
+  ],
+  "rows": [
+    {
+      "family": "vessel_hole",
+      "status": "PARTIAL",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "uncomputed_case_count": 5,
+      "generated_initiation_frequency_per_year": 0.0008248999999999999,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "pipe_hole",
+      "status": "PARTIAL",
+      "source_matrix_count": 3,
+      "event_ids": [
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "generated_event_count": 15,
+      "case_count": 35,
+      "executed_case_count": 35,
+      "uncomputed_case_count": 5,
+      "generated_initiation_frequency_per_year": 1.914e-05,
+      "fully_validated_case_count": 20,
+      "operator_limited_case_count": 15,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "EXECUTED",
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "valve_hole",
+      "status": "PARTIAL",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "uncomputed_case_count": 5,
+      "generated_initiation_frequency_per_year": 0.0002072,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 5,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "vent_hole",
+      "status": "EXECUTED",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "generated_initiation_frequency_per_year": 2e-05,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "EXECUTED"
+      ]
+    },
+    {
+      "family": "pump_hole",
+      "status": "PARTIAL",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "generated_event_count": 2,
+      "case_count": 2,
+      "executed_case_count": 2,
+      "uncomputed_case_count": 2,
+      "generated_initiation_frequency_per_year": 0.0006000000000000001,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 2,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "vaporizer_hole",
+      "status": "EXECUTED",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "generated_initiation_frequency_per_year": 0.001,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "EXECUTED"
+      ]
+    },
+    {
+      "family": "reliquefier_hole",
+      "status": "EXECUTED",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "generated_initiation_frequency_per_year": 0.01,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "EXECUTED"
+      ]
+    },
+    {
+      "family": "liquid_two_phase",
+      "status": "PARTIAL",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 17,
+      "case_count": 17,
+      "executed_case_count": 17,
+      "uncomputed_case_count": 17,
+      "generated_initiation_frequency_per_year": 0.0016384799999999999,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 17,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "inventory_depletion",
+      "status": "PARTIAL",
+      "source_matrix_count": 2,
+      "event_ids": [
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "generated_event_count": 23,
+      "case_count": 28,
+      "executed_case_count": 28,
+      "uncomputed_case_count": 17,
+      "generated_initiation_frequency_per_year": 0.00169486,
+      "fully_validated_case_count": 11,
+      "operator_limited_case_count": 17,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "EXECUTED",
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "inventory_over_600s",
+      "status": "EXECUTED",
+      "source_matrix_count": 1,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+      ],
+      "generated_event_count": 1,
+      "case_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "generated_initiation_frequency_per_year": 5e-05,
+      "fully_validated_case_count": 1,
+      "operator_limited_case_count": 0,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "EXECUTED"
+      ]
+    },
+    {
+      "family": "two_sided_rupture",
+      "status": "PARTIAL",
+      "source_matrix_count": 2,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "two-sided-rupture-campaign/terminal_pipe_segment/G1"
+      ],
+      "generated_event_count": 3,
+      "case_count": 4,
+      "executed_case_count": 4,
+      "uncomputed_case_count": 4,
+      "generated_initiation_frequency_per_year": 0.001011,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 4,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "PARTIAL"
+      ]
+    },
+    {
+      "family": "vertical_handoff",
+      "status": "PARTIAL",
+      "source_matrix_count": 2,
+      "event_ids": [
+        "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+        "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+        "vertical-vent-campaign/terminal-valve/AREA_1%",
+        "vertical-vent-campaign/terminal-valve/AREA_10%",
+        "vertical-vent-campaign/terminal-valve/AREA_100%"
+      ],
+      "generated_event_count": 5,
+      "case_count": 10,
+      "executed_case_count": 10,
+      "uncomputed_case_count": 10,
+      "generated_initiation_frequency_per_year": 0.0002072,
+      "fully_validated_case_count": 0,
+      "operator_limited_case_count": 10,
+      "failed_case_count": 0,
+      "frequency_rows_are_not_additive_across_families": true,
+      "source_statuses": [
+        "NO_EVENT_GENERATED",
+        "PARTIAL"
+      ]
+    }
+  ],
+  "provider_worklist_alignment": {
+    "schema": "prism.accident_scenario_worklist_alignment.v1",
+    "status": "ALIGNED",
+    "worklist_event_count": 24,
+    "campaign_event_count": 24,
+    "aligned_event_count": 24,
+    "missing_event_ids": [],
+    "duplicate_event_ids": [],
+    "empty_family_item_ids": [],
+    "unknown_family_item_ids": [],
+    "primary_family_mismatches": [],
+    "extra_campaign_event_ids": [],
+    "primary_family_counts": {
+      "inventory_depletion": 1,
+      "inventory_over_600s": 1,
+      "pipe_hole": 5,
+      "pump_hole": 2,
+      "reliquefier_hole": 1,
+      "two_sided_rupture": 2,
+      "valve_hole": 5,
+      "vaporizer_hole": 1,
+      "vent_hole": 1,
+      "vessel_hole": 5
+    },
+    "blocking_reasons": [],
+    "frequency_inference_performed": false,
+    "provider_packet_created": false,
+    "scope": "first source worklist only",
+    "facility_merge_additional_campaigns": 4,
+    "facility_merge_alignment_claim": false,
+    "interpretation": "The retained ALIGNED record applies only to the source worklist campaign; additional namespaced diagnostic campaigns are tracked separately."
+  },
+  "source_matrices": [
+    {
+      "facility_id": null,
+      "status": "PARTIAL_DECLARED_SCOPE",
+      "digest": "314a7bd984534a3d6fd23bf6327d9ab3c1828658ad6bbd37edac00c97f9ab30b",
+      "record_index": 0
+    },
+    {
+      "facility_id": null,
+      "status": "PARTIAL_DECLARED_SCOPE",
+      "digest": "6c0ad5c96a4303d9a2a209c97dd381bf23f541ce189f146702fc27e51efa5f67",
+      "record_index": 1
+    },
+    {
+      "facility_id": "generic-lh2-full-scope-example",
+      "status": "PARTIAL_DECLARED_SCOPE",
+      "digest": "c1b861a3d4053e344d52494545134e16751557656c001ae44194d4b9ab75a942",
+      "record_index": 2
+    },
+    {
+      "facility_id": "generic-lh2-full-scope-example",
+      "status": "DECLARED_SCOPE_EXECUTED",
+      "digest": "5f369f3e76df2ecaf43b69907cfe76eb6a832639fec83ea5978972a25cb129e3",
+      "record_index": 3
+    },
+    {
+      "facility_id": "generic-lh2-full-scope-example",
+      "status": "DECLARED_SCOPE_EXECUTED",
+      "digest": "679c1ef46d8f494f595811a42e67f2bb0cf20030287961c271fe697643978d15",
+      "record_index": 4
+    }
+  ],
+  "source_matrix_count": 5,
+  "declared_scope_numerically_complete": false,
+  "facility_total_risk_available": false,
+  "matrix_complete": false,
+  "blocking_reasons": [
+    "vessel_hole: PARTIAL",
+    "pipe_hole: PARTIAL",
+    "valve_hole: PARTIAL",
+    "pump_hole: PARTIAL",
+    "liquid_two_phase: PARTIAL",
+    "inventory_depletion: PARTIAL",
+    "two_sided_rupture: PARTIAL",
+    "vertical_handoff: PARTIAL"
+  ],
+  "physical_validation_claim": false,
+  "diagnostic_only": true,
+  "interpretation": "Disjoint mechanism matrices were merged by family for facility accounting. Rows remain PARTIAL/NO_EVENT_GENERATED when any supplied campaign is incomplete; family frequency rows are coverage views and must not be summed across families."
+}

@@ -1,0 +1,518 @@
+{
+  "schema_version": "prism.facility_evidence_request.v1",
+  "facility_id": "generic-lh2-full-scope-example",
+  "scope": "outdoor_major_accidents",
+  "provider_export_schema_required": "prism.external_accident_history.v1",
+  "status": "OPEN_EVIDENCE_REQUEST",
+  "current_assessment": {
+    "status": "PARTIAL_FACILITY_SCOPE",
+    "event_count": 41,
+    "case_count": 70,
+    "uncomputed_case_count": 37,
+    "risk_atom_count": 272,
+    "facility_total_risk_available": false,
+    "physical_validation_claim": false,
+    "provider_packet_case_count": 10,
+    "qualified_provider_packet_case_count": 0,
+    "provider_packet_promoted": false,
+    "qualified_facility_qra_available": false,
+    "complete_facility_qra_claim": false
+  },
+  "blocking_reasons": [
+    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: declared scope is incomplete",
+    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: uncomputed cases remain",
+    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: excluded components remain",
+    "campaign 73d95d9940a3c43c8babddd8e43cfe6fb12ce610bff3d6ff4c638222d4a68006: synthetic release horizon",
+    "component ambient-vaporizer-01: missing coverage ledger row",
+    "component inventory-depletion-pipe-01: missing coverage ledger row",
+    "component isolation-diagnostic-pipe-01: missing coverage ledger row",
+    "component liquid-transfer-line-01: missing coverage ledger row",
+    "component liquid-transfer-pump-01: missing coverage ledger row",
+    "component pressure-relief-vent-01: missing coverage ledger row",
+    "component reliquefier-01: missing coverage ledger row",
+    "component storage-tank-01: missing coverage ledger row",
+    "component transfer-valve-01: missing coverage ledger row",
+    "component two-sided-rupture-pipe-01: missing coverage ledger row",
+    "component vertical-handoff-terminal-pipe-01: missing coverage ledger row",
+    "accident family vessel_hole: PARTIAL",
+    "accident family pipe_hole: PARTIAL",
+    "accident family valve_hole: PARTIAL",
+    "accident family pump_hole: PARTIAL",
+    "accident family liquid_two_phase: PARTIAL",
+    "accident family inventory_depletion: PARTIAL",
+    "accident family two_sided_rupture: PARTIAL",
+    "accident family vertical_handoff: PARTIAL"
+  ],
+  "family_requests": [
+    {
+      "family": "vessel_hole",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 5,
+      "executed_case_count": 5,
+      "uncomputed_case_count": 5,
+      "operator_limited_case_count": 5,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "tank pressure, phase inventory and vessel opening history"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "pipe_hole",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 15,
+      "executed_case_count": 35,
+      "uncomputed_case_count": 5,
+      "operator_limited_case_count": 15,
+      "event_ids": [
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "pipe upstream/downstream state and isolation response history"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "valve_hole",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 5,
+      "executed_case_count": 5,
+      "uncomputed_case_count": 5,
+      "operator_limited_case_count": 5,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "valve opening command, travel/closure history and upstream state"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "vent_hole",
+      "current_status": "EXECUTED",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "operator_limited_case_count": 0,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "relief/vent set point, capacity and discharge termination history"
+      ],
+      "promotion_allowed_now": true
+    },
+    {
+      "family": "pump_hole",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 2,
+      "executed_case_count": 2,
+      "uncomputed_case_count": 2,
+      "operator_limited_case_count": 2,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "pump trip/seal failure state and connected inventory history"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "vaporizer_hole",
+      "current_status": "EXECUTED",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "operator_limited_case_count": 0,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "vaporizer process-side state, failure mode and boundary history"
+      ],
+      "promotion_allowed_now": true
+    },
+    {
+      "family": "reliquefier_hole",
+      "current_status": "EXECUTED",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "operator_limited_case_count": 0,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "reliquefier failure mode, connected inventory and outlet history"
+      ],
+      "promotion_allowed_now": true
+    },
+    {
+      "family": "liquid_two_phase",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 17,
+      "executed_case_count": 17,
+      "uncomputed_case_count": 17,
+      "operator_limited_case_count": 17,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "flash quality, gas/liquid/ground partition and droplet treatment"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "inventory_depletion",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 23,
+      "executed_case_count": 28,
+      "uncomputed_case_count": 17,
+      "operator_limited_case_count": 17,
+      "event_ids": [
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_1%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_10%",
+        "equipment-inventory-campaign/terminal_pipe_asset/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "positive inventory threshold, depletion clock and final residual mass"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "current_status": "EXECUTED",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 1,
+      "executed_case_count": 1,
+      "uncomputed_case_count": 0,
+      "operator_limited_case_count": 0,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "complete 600 s provider history and end-of-horizon inventory"
+      ],
+      "promotion_allowed_now": true
+    },
+    {
+      "family": "two_sided_rupture",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 3,
+      "executed_case_count": 4,
+      "uncomputed_case_count": 4,
+      "operator_limited_case_count": 4,
+      "event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "two-sided-rupture-campaign/terminal_pipe_segment/G1"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "both provider outlets, endpoint geometry and same-event coupling",
+        "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
+      ],
+      "promotion_allowed_now": false
+    },
+    {
+      "family": "vertical_handoff",
+      "current_status": "PARTIAL",
+      "applicability": "APPLICABLE",
+      "evidence_required": true,
+      "generated_event_count": 5,
+      "executed_case_count": 10,
+      "uncomputed_case_count": 10,
+      "operator_limited_case_count": 10,
+      "event_ids": [
+        "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+        "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+        "vertical-vent-campaign/terminal-valve/AREA_1%",
+        "vertical-vent-campaign/terminal-valve/AREA_10%",
+        "vertical-vent-campaign/terminal-valve/AREA_100%"
+      ],
+      "required_provider_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary",
+        "provider-owned vertical-to-horizontal handoff state and boundary"
+      ],
+      "promotion_allowed_now": false
+    }
+  ],
+  "component_requests": [
+    {
+      "component_id": "ambient-vaporizer-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "inventory-depletion-pipe-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "isolation-diagnostic-pipe-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "pressure-relief-vent-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "reliquefier-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "storage-tank-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "two-sided-rupture-pipe-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    },
+    {
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "current_status": "MISSING_COVERAGE_LEDGER",
+      "required_evidence": [
+        "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
+        "exact component_id, accident port, event_id, opening geometry, position and direction",
+        "provider-owned time history with start/end clock and explicit termination basis",
+        "provider mass and energy closure with residuals and initial/final inventory",
+        "independent physical validation or a declared validation gap for the release boundary"
+      ]
+    }
+  ],
+  "excluded_components": [],
+  "frequency_policy": {
+    "use_documented_literature_frequency_only": true,
+    "infer_frequency_from_provider_or_sensor": false,
+    "reallocate_frequency_between_families": false
+  },
+  "promotion_gate": {
+    "qualified_provider_packet_required": true,
+    "provider_packet_evidence_schema": "prism.provider_packet_evidence.v1",
+    "provider_qualification_schema": "prism.provider_qualification_evidence.v1",
+    "exact_event_component_port_and_digest_match_required": true,
+    "independent_physical_validation_required": true,
+    "complete_declared_scope_required": true,
+    "facility_ir_fn_remains_withheld_until_all_true": true
+  }
+}
