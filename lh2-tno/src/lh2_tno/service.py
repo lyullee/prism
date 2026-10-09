@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import OrderedDict
 import copy
 from collections.abc import Callable, Mapping
+from dataclasses import dataclass
 import math
 from pathlib import Path
 import time
@@ -264,3 +265,224 @@ class RealtimeConsequenceMonitor:
             ),
         }
         return result
+
+
+@dataclass(frozen=True)
+class FacilityRealtimeBinding:
+    """The declared digital-twin boundary for one facility component.
+
+    A binding is intentionally explicit.  The facility monitor does not look
+    up a request, sensor tags, or a release model by component name, because
+    such lookups could silently connect a normal-state signal to the wrong
+    accident boundary.
+    """
+
+    component_id: str
+    template: ConsequenceRequest
+    monitor: RealtimeConsequenceMonitor
+    normalizer: object
+    pressure_tag: str
+    temperature_tag: str
+    release_resolver: Callable | None = None
+    ambient_pressure_pa: float | None = None
+
+
+class FacilityRealtimeConsequenceMonitor:
+    """Batch coordinator for independent component monitors.
+
+    This class combines *provenance and deadline ledgers*, not annual risk.
+    Each component still owns its normalizer, consequence service, provider
+    release resolver, and cache.  Missing/unknown/duplicate frames and any
+    component exception make the batch ``REJECTED``; accepted component
+    results remain attached for diagnosis, but no stale result or zero-risk
+    placeholder is manufactured for the failed component.
+    """
+
+    def __init__(self, bindings: Mapping[str, FacilityRealtimeBinding], *,
+                 facility_id: str = "facility", max_components: int = 128):
+        if not isinstance(bindings, Mapping) or not bindings:
+            raise ValueError("nonempty component binding mapping required")
+        if not isinstance(facility_id, str) or not facility_id:
+            raise ValueError("facility_id must be a nonempty string")
+        if isinstance(max_components, bool) or not isinstance(max_components, int):
+            raise ValueError("max_components must be a positive integer")
+        if not 1 <= max_components <= 10000:
+            raise ValueError("max_components must be between 1 and 10000")
+        if len(bindings) > max_components:
+            raise ValueError("component binding count exceeds max_components")
+
+        normalized: dict[str, FacilityRealtimeBinding] = {}
+        for key, binding in bindings.items():
+            if not isinstance(key, str) or not key:
+                raise ValueError("component binding keys must be nonempty strings")
+            if not isinstance(binding, FacilityRealtimeBinding):
+                raise TypeError("bindings must contain FacilityRealtimeBinding values")
+            if binding.component_id != key:
+                raise ValueError("binding key must equal binding.component_id")
+            if not isinstance(binding.template, ConsequenceRequest):
+                raise TypeError("binding.template must be a ConsequenceRequest")
+            if binding.template.component_id != key:
+                raise ValueError("template component_id does not match binding")
+            if not isinstance(binding.monitor, RealtimeConsequenceMonitor):
+                raise TypeError("binding.monitor must be a RealtimeConsequenceMonitor")
+            if not callable(getattr(binding.normalizer, "normalize", None)):
+                raise TypeError("binding.normalizer must provide normalize()")
+            for tag_name, tag in (("pressure_tag", binding.pressure_tag),
+                                  ("temperature_tag", binding.temperature_tag)):
+                if not isinstance(tag, str) or not tag:
+                    raise ValueError(f"{tag_name} must be a nonempty string")
+            if binding.pressure_tag == binding.temperature_tag:
+                raise ValueError("pressure and temperature tags must be distinct")
+            if binding.release_resolver is not None and not callable(binding.release_resolver):
+                raise TypeError("release_resolver must be callable")
+            if binding.ambient_pressure_pa is not None:
+                if (isinstance(binding.ambient_pressure_pa, bool)
+                        or not isinstance(binding.ambient_pressure_pa, (int, float))
+                        or not math.isfinite(float(binding.ambient_pressure_pa))
+                        or binding.ambient_pressure_pa <= 0):
+                    raise ValueError("ambient_pressure_pa must be finite and positive")
+            normalized[key] = binding
+        self.facility_id = facility_id
+        self.bindings = normalized
+
+    def update_from_frames(self, frames: Mapping[str, object], *, now_s: float) -> dict:
+        """Process one coherent frame per declared component.
+
+        ``frames`` is a component-id keyed mapping.  The method deliberately
+        does not wait for missing components or reuse their previous result.
+        This makes the returned facility snapshot safe to reject in a control
+        room when one stream is late or malformed.
+        """
+        if not isinstance(frames, Mapping):
+            raise TypeError("frames must be a component-id mapping")
+        if (isinstance(now_s, bool) or not isinstance(now_s, (int, float))
+                or not math.isfinite(float(now_s)) or now_s < 0):
+            raise ValueError("now_s must be finite and nonnegative")
+
+        component_ids = tuple(sorted(self.bindings))
+        unknown_ids = tuple(sorted(str(key) for key in set(frames) - set(self.bindings)))
+        missing_ids = tuple(component_id for component_id in component_ids if component_id not in frames)
+        stream_to_components: dict[str, list[str]] = {}
+        frame_errors: dict[str, dict] = {}
+        for component_id in component_ids:
+            frame = frames.get(component_id)
+            if frame is None:
+                continue
+            stream_id = getattr(frame, "stream_id", None)
+            if not isinstance(stream_id, str) or not stream_id:
+                frame_errors[component_id] = {
+                    "status": "REJECTED",
+                    "error_type": "FrameContractError",
+                    "error": "frame must expose a nonempty stream_id",
+                }
+                continue
+            stream_to_components.setdefault(stream_id, []).append(component_id)
+        duplicate_streams = {
+            stream_id: tuple(component_ids_for_stream)
+            for stream_id, component_ids_for_stream in stream_to_components.items()
+            if len(component_ids_for_stream) > 1
+        }
+
+        components: dict[str, dict] = {}
+        for component_id in component_ids:
+            if component_id in missing_ids:
+                components[component_id] = {
+                    "status": "REJECTED",
+                    "error_type": "MissingFrame",
+                    "error": "facility snapshot requires one frame for every declared component",
+                }
+            elif component_id in frame_errors:
+                components[component_id] = frame_errors[component_id]
+            else:
+                frame = frames[component_id]
+                stream_id = frame.stream_id
+                if stream_id in duplicate_streams:
+                    components[component_id] = {
+                        "status": "REJECTED",
+                        "error_type": "DuplicateFrameStream",
+                        "error": f"stream_id is shared by components: {', '.join(duplicate_streams[stream_id])}",
+                        "stream_id": stream_id,
+                    }
+
+        for component_id in component_ids:
+            if component_id in components:
+                continue
+            binding = self.bindings[component_id]
+            frame = frames[component_id]
+            try:
+                result = binding.monitor.update_from_frame(
+                    binding.template,
+                    binding.normalizer,
+                    frame,
+                    now_s=float(now_s),
+                    pressure_tag=binding.pressure_tag,
+                    temperature_tag=binding.temperature_tag,
+                    release_resolver=binding.release_resolver,
+                    ambient_pressure_pa=binding.ambient_pressure_pa,
+                )
+                components[component_id] = {
+                    "status": "ACCEPTED",
+                    "component_id": component_id,
+                    "stream_id": frame.stream_id,
+                    "source_time_s": float(frame.source_time_s),
+                    "frame_digest": result.get("telemetry_boundary", {}).get("frame_digest"),
+                    "mapping_digest": result.get("telemetry_boundary", {}).get("mapping_digest"),
+                    "result": result,
+                }
+            except Exception as exc:  # preserve an explicit rejection in the ledger
+                components[component_id] = {
+                    "status": "REJECTED",
+                    "component_id": component_id,
+                    "stream_id": getattr(frame, "stream_id", None),
+                    "error_type": type(exc).__name__,
+                    "error": str(exc),
+                }
+
+        accepted = [entry for entry in components.values() if entry["status"] == "ACCEPTED"]
+        rejected = [entry for entry in components.values() if entry["status"] != "ACCEPTED"]
+        deadline_misses = sum(
+            entry["result"]["realtime"]["deadline_status"] == "MISSED"
+            for entry in accepted
+        )
+        fresh_count = sum(
+            bool(entry["result"]["service"]["fresh_physics_this_update"])
+            for entry in accepted
+        )
+        cache_count = sum(
+            bool(entry["result"]["service"]["exact_cache_hit"])
+            for entry in accepted
+        )
+        release_resolved_count = sum(
+            bool(entry["result"].get("telemetry_boundary", {}).get("equipment_release_resolved"))
+            for entry in accepted
+        )
+        aggregate_deadline_status = (
+            "REJECTED" if rejected or unknown_ids else ("MISSED" if deadline_misses else "MET")
+        )
+        batch_status = "ACCEPTED" if not rejected and not unknown_ids else "REJECTED"
+        return {
+            "facility_id": self.facility_id,
+            "status": batch_status,
+            "component_count": len(component_ids),
+            "accepted_component_count": len(accepted),
+            "rejected_component_count": len(rejected),
+            "unknown_frame_components": list(unknown_ids),
+            "missing_frame_components": list(missing_ids),
+            "duplicate_streams": {key: list(value) for key, value in duplicate_streams.items()},
+            "components": components,
+            "aggregate": {
+                "deadline_status": aggregate_deadline_status,
+                "deadline_met": batch_status == "ACCEPTED" and deadline_misses == 0,
+                "fresh_physics_count": fresh_count,
+                "cache_hit_count": cache_count,
+                "deadline_miss_count": deadline_misses,
+                "provider_release_resolved_component_count": release_resolved_count,
+                "frequency_learning": False,
+                "release_inference": False,
+                "facility_annual_risk_available": False,
+                "interpretation": (
+                    "component consequence outputs and provenance are available; "
+                    "facility annual IR/F-N remains withheld"
+                ),
+            },
+        }

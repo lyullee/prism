@@ -820,6 +820,49 @@ print(result["realtime"]["deadline_status"])  # MET 또는 MISSED
 이전 짧은 로컬 사례는 신규 기체 약 3초, 풀 약 7–10초, 동일 요청 캐시 약 20–40 ms였습니다.
 모든 시설/PC의 성능을 보장하지 않으며 **캐시 응답속도가 신규 물리 계산 1 Hz를 뜻하지 않습니다.**
 
+여러 설비를 같은 시각에 확인해야 할 때는 `FacilityRealtimeConsequenceMonitor`를
+사용합니다. 설비마다 `RealtimeConsequenceMonitor`, 센서 정규화기, 방출 resolver와
+사고 템플릿을 하나씩 명시합니다. 입력은 `component_id`별 frame 묶음이어야 하며,
+설비가 하나라도 빠지거나 잘못되거나 같은 `stream_id`를 공유하면 전체 묶음은
+`status="REJECTED"`가 됩니다. 이때 정상적으로 계산된 설비 결과는 진단용으로
+남지만 실패한 설비에 이전 결과나 0을 대신 넣지 않습니다.
+
+```python
+from lh2_tno.service import (
+    FacilityRealtimeBinding,
+    FacilityRealtimeConsequenceMonitor,
+)
+
+facility_monitor = FacilityRealtimeConsequenceMonitor({
+    "storage-tank-01": FacilityRealtimeBinding(
+        component_id="storage-tank-01", template=tank_template,
+        monitor=tank_monitor, normalizer=tank_normalizer,
+        pressure_tag="P_TANK", temperature_tag="T_TANK",
+        release_resolver=tank_release_resolver,
+    ),
+    "transfer-pump-01": FacilityRealtimeBinding(
+        component_id="transfer-pump-01", template=pump_template,
+        monitor=pump_monitor, normalizer=pump_normalizer,
+        pressure_tag="P_PUMP", temperature_tag="T_PUMP",
+        release_resolver=pump_release_resolver,
+    ),
+})
+
+snapshot = facility_monitor.update_from_frames({
+    "storage-tank-01": tank_frame,
+    "transfer-pump-01": pump_frame,
+}, now_s=100.2)
+print(snapshot["status"])                         # ACCEPTED 또는 REJECTED
+print(snapshot["aggregate"]["deadline_status"])  # MET, MISSED 또는 REJECTED
+```
+
+`components`에는 설비별 frame/mapping digest, fresh physics 또는 exact cache,
+처리시간, deadline, provider 방출 경계 여부가 보존되고 `aggregate`에는 설비 수,
+실패 수와 deadline 요약이 기록됩니다. 이 조정기는 시설 연간 빈도, IR/F-N,
+센서 기반 빈도 학습, 누출 크기 역추정을 수행하지 않으며
+`facility_annual_risk_available=false`를 항상 기록합니다. 시설 IR/F-N은 별도의
+문헌 빈도·사고범위·물리검증·시설 장부 gate를 통과한 campaign에서만 계산됩니다.
+
 ## 출력 해석
 
 `--output` 파일에 전체 결과를 저장합니다. 콘솔의 짧은 status만으로 피해를 판정하지 않습니다.
@@ -1021,7 +1064,7 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 
 실제 설비 모델이 사고 이력을 제공하면 `RiskCampaign.provider_packet_evidence`에 그 근거를 명시한다. `prism.provider_packet_evidence.v1` 레코드는 event·component·port와 provider source/result SHA-256 digest를 모두 적어야 하며, 실행된 `provider_packet_identity`와 정확히 일치할 때만 해당 case를 `qualified_provider_packet_case_count`로 센다. packet을 읽었다는 사실만으로 qualified 상태가 되지 않는다.
 
-`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 476개 portable 테스트로 확인했다.
+`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 480개 portable 테스트로 확인했다.
 
 문헌 빈도 p05·published·p95 및 분포 샘플링 결과에도 같은 승격 상태를 전달한다. 따라서 빈도 민감도 표가 계산되어도 `provider_packet_promoted`와 `complete_facility_qra_claim`을 별도로 확인할 수 있고, 빈도 불확실성 결과가 물리검증이나 시설 완결성을 대신하지 않는다.
 

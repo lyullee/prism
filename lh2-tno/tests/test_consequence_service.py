@@ -2,7 +2,8 @@ import json
 from pathlib import Path
 from lh2_tno.backend import BackendConfig,PackagePin,tree_digest
 from lh2_tno.consequences import ConsequenceRequest
-from lh2_tno.service import (ConsequenceService, RealtimeConsequenceMonitor,
+from lh2_tno.service import (ConsequenceService, FacilityRealtimeBinding,
+    FacilityRealtimeConsequenceMonitor, RealtimeConsequenceMonitor,
     request_from_equipment_resolver, request_from_telemetry,
     validate_equipment_process_state)
 from lh2_tno.telemetry import Frame,TagMapping,TelemetryNormalizer,Value
@@ -191,3 +192,82 @@ def test_realtime_monitor_reports_deadline_miss_without_stale_substitution(tmp_p
     assert result['realtime']['deadline_status'] == 'MISSED'
     assert result['realtime']['exact_cache_hit'] is False
     assert result['realtime']['interpretation'].startswith('deadline ledger only')
+
+
+def _facility_binding(tmp_path, component_id, *, deadline_s=1.0, stream_id=None):
+    template = request().model_copy(update={"component_id": component_id})
+    normalizer = TelemetryNormalizer((
+        TagMapping(tag='P', component_id=component_id, quantity='pressure', source_unit='Pa',
+                   pressure_basis='absolute', sensor_location='tank-vapour'),
+        TagMapping(tag='T', component_id=component_id, quantity='temperature', source_unit='K',
+                   sensor_location='tank-vapour'),
+    ), maximum_age_s=2.0)
+    frame = Frame(
+        stream_id=stream_id or f'{component_id}-stream', sequence=1,
+        source_time_s=100.0, arrival_time_s=100.1, origin='synthetic',
+        values={'P': Value(value=600000., unit='Pa', quality='valid'),
+                'T': Value(value=20.893, unit='K', quality='valid')},
+    )
+    monitor = RealtimeConsequenceMonitor(
+        ConsequenceService(Pipeline(tmp_path)), period_s=1.0, deadline_s=deadline_s
+    )
+    return FacilityRealtimeBinding(
+        component_id=component_id, template=template, monitor=monitor,
+        normalizer=normalizer, pressure_tag='P', temperature_tag='T'
+    ), frame
+
+
+def test_facility_realtime_monitor_aggregates_component_provenance_and_deadlines(tmp_path):
+    first, first_frame = _facility_binding(tmp_path, 'storage-tank-01')
+    second, second_frame = _facility_binding(tmp_path, 'transfer-pump-01')
+    facility = FacilityRealtimeConsequenceMonitor({
+        'storage-tank-01': first, 'transfer-pump-01': second,
+    }, facility_id='generic-outdoor-lh2')
+    result = facility.update_from_frames({
+        'storage-tank-01': first_frame, 'transfer-pump-01': second_frame,
+    }, now_s=100.2)
+    assert result['status'] == 'ACCEPTED'
+    assert result['component_count'] == 2
+    assert result['accepted_component_count'] == 2
+    assert result['aggregate']['deadline_status'] == 'MET'
+    assert result['aggregate']['fresh_physics_count'] == 2
+    assert result['aggregate']['facility_annual_risk_available'] is False
+    assert result['components']['storage-tank-01']['frame_digest']
+    assert result['components']['transfer-pump-01']['mapping_digest']
+
+
+def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_fallback(tmp_path):
+    first, first_frame = _facility_binding(tmp_path, 'storage-tank-01')
+    second, _ = _facility_binding(tmp_path, 'transfer-pump-01')
+    facility = FacilityRealtimeConsequenceMonitor({
+        'storage-tank-01': first, 'transfer-pump-01': second,
+    })
+    result = facility.update_from_frames({'storage-tank-01': first_frame}, now_s=100.2)
+    assert result['status'] == 'REJECTED'
+    assert result['aggregate']['deadline_status'] == 'REJECTED'
+    assert result['components']['transfer-pump-01']['error_type'] == 'MissingFrame'
+    assert result['aggregate']['facility_annual_risk_available'] is False
+    assert 'result' not in result['components']['transfer-pump-01']
+
+
+def test_facility_realtime_monitor_rejects_duplicate_stream_and_unknown_component(tmp_path):
+    first, first_frame = _facility_binding(tmp_path, 'storage-tank-01', stream_id='shared')
+    second, second_frame = _facility_binding(tmp_path, 'transfer-pump-01', stream_id='shared')
+    facility = FacilityRealtimeConsequenceMonitor({
+        'storage-tank-01': first, 'transfer-pump-01': second,
+    })
+    _, unknown_frame = _facility_binding(tmp_path, 'unexpected')
+    result = facility.update_from_frames({
+        'storage-tank-01': first_frame, 'transfer-pump-01': second_frame,
+        'unexpected': unknown_frame,  # an extra frame cannot be ignored
+    }, now_s=100.2)
+    assert result['status'] == 'REJECTED'
+    assert result['unknown_frame_components'] == ['unexpected']
+    assert result['duplicate_streams']['shared'] == ['storage-tank-01', 'transfer-pump-01']
+    assert result['components']['storage-tank-01']['error_type'] == 'DuplicateFrameStream'
+
+
+def test_facility_realtime_monitor_requires_unique_declared_component_identity(tmp_path):
+    binding, _ = _facility_binding(tmp_path, 'storage-tank-01')
+    with pytest.raises(ValueError, match='binding key'):
+        FacilityRealtimeConsequenceMonitor({'wrong-key': binding})

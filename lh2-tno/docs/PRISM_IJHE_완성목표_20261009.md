@@ -17,7 +17,7 @@
 - native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구와 provider가 명시한 수직→수평 `VerticalGasHandoff` 경계를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 이번 단계에서는 외부 `lh2dt` `HomogeneousTank`+`Valve`가 내보낸 flash 기체·지면 액체·액적 도착 시계를 `ResolvedLiquidRelease`로 수용해 DynamicLH2PoolX와 최종 피해까지 한 건 실행했다. provider의 `ParaHydrogen`과 native 풀 모델의 `Hydrogen` 기준은 provenance가 있는 명시적 변환 경계로만 연결하며, 교차 물성 검증 전까지 operator-limited로 남긴다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 394개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 480개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 여러 설비의 frame을 한 시설 snapshot으로 묶는 `FacilityRealtimeConsequenceMonitor`와 설비별 provenance/deadline 회계도 추가했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 - DynamicLH2PoolX의 물/알루미늄 hold-out 반경 오차와 HSE 질량잔차를 해시 장부로 확인했지만, protocol snapshot 해시 drift가 있어 제한 구성요소 증거로만 사용한다. 설비 방출·대기확산·점화·IR/F-N 전체 체인의 물리 검증으로 확대하지 않는다.
 
 ## 단계별 작업과 통과 기준
@@ -33,6 +33,25 @@
 600초 전량방출은 `inventory_over_600s` operator와 완전 provider 이력 계약을 구현했고, 합성 10 m³ 진단 1건에서 600초 end-to-end chain을 실행했다. 액체·2상 provider 출구는 `ResolvedLiquidRelease`로 한 건을 실행했으며, airborne liquid은 별도 adapter가 없으면 거절한다. 실제 LayeredTank 액체/2상 재고 입력·현장 검증·시설 전체 위험 연결은 아직 완료하지 않았다.
 
 단계 C의 실행 회계는 A/B에서 아직 계산하지 못한 항목을 즉시 드러내므로 먼저 공통 실행기를 구현한다. 이것이 A/B의 실제 공정 결합이나 장시간 방출을 완료했다는 뜻은 아니다.
+
+## 여러 설비의 실시간 snapshot 경계
+
+`RealtimeConsequenceMonitor`가 한 frame을 처리하는 동안 설비가 여러 개이면
+`FacilityRealtimeConsequenceMonitor`가 component ID별 monitor를 조정한다. 각
+설비는 자기 normalizer·사고 template·provider `release_resolver`를 명시해야 하며,
+시설 monitor가 이름으로 설비나 사고를 자동 선택하지 않는다. 따라서 저장탱크의
+압력 신호가 펌프의 방출 경계로 잘못 연결되지 않는다.
+
+한 호출은 선언한 모든 설비의 frame을 요구한다. 누락 frame, 알 수 없는 component,
+동일 stream ID의 재사용, 단위·시간·품질 오류, provider resolver 오류가 하나라도
+있으면 전체 snapshot은 `REJECTED`다. 성공한 component 결과는 원인 분석을 위해
+보존하지만 누락 설비에 이전 결과나 0을 넣지 않는다. `aggregate`에는 설비별
+fresh-physics/cache 횟수, deadline miss 횟수, provider 방출 경계 개수와
+`facility_annual_risk_available=false`가 남는다.
+
+이 기능은 디지털트윈 화면과 운영 수집기 사이의 **동기 회계 경계**다. OPC-UA·MQTT
+수집, 비동기 scheduler, 알람 화면, 시설 연간 빈도와 IR/F-N 계산은 별도 계층이며,
+이 monitor를 추가했다고 1 Hz 신규 물리 계산이나 시설 QRA가 입증되지는 않는다.
 
 ## 첫 구현: 다중 사건·기상 실행기
 
