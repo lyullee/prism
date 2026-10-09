@@ -122,6 +122,8 @@ provider packet이 들어오면 먼저 `scripts/audit_provider_catalog_coverage.
 
 2026-10-14부터 같은 감사에서 PRISM-side 진단 adapter를 별도 표시합니다. 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기 7개는 `DIAGNOSTIC_RELEASE_ADAPTER_BOUND`로 연결 경로가 기록되지만, 외부 모델 native 사고 export와 qualified provider packet은 여전히 0건입니다. 이 adapter는 합성·스크리닝 결과의 구조 연결만 확인하고 빈도·독립 물리검증·시설 IR/F-N을 승격하지 않습니다.
 
+**외부 모델 native 계약 감사:** `scripts/audit_lh2dt_native_contract.py`는 외부 `lh2dt` 소스의 클래스 정의를 실행하지 않고 정적으로 읽어, 정상 `simulate/step/evaluate`와 사고 전용 `export_accident_history(request)`를 구분합니다. 2026-10-18 감사에서 외부 7개 설비 클래스의 native 사고 export는 `0/7`, PRISM-side 진단 adapter 계약 확인은 `7/7`이었습니다. 이 결과는 누출 계산이 완료되었다는 뜻이 아니라, 실제 외부 solver가 사고 포트·차단·재고 종료를 반환하는 다음 연결 지점을 정확히 표시하는 증거입니다. 결과는 `results/20261018/lh2dt_native_contract_audit.json`에 저장되며, native 메서드가 생겨도 packet 자격·빈도·물리 검증·시설 IR/F-N gate를 별도로 통과해야 합니다.
+
 **실시간 공정상태→사고 방출 경계:** `validate_equipment_process_state()`는 압력·온도·액면·유량 같은 정상 공정 상태만 외부 설비 resolver에 전달합니다. 누출 개구·방출 단계·지속시간·재고 소진·사건 빈도·`Resolved*Release` packet이 상태 snapshot에 섞이면 즉시 거절합니다. 설비 provider가 별도의 사고 방출 이력과 종료 근거를 반환한 경우에만 `request_from_equipment_resolver()`가 SLABx-LH2/SLABx 피해 계산으로 넘깁니다. 원본 상태는 깊은 복사로 보존하고, 빈도는 문헌 `FrequencyPlan`에서 별도로 결합합니다. 상세 계약은 [실시간 공정상태와 사고 방출 경계 계약](docs/PRISM_실시간_공정상태_방출경계_계약_20261009.md)을 참고합니다.
 
 작업목록만 있는 기간에도 `scripts/build_equipment_campaign.py --provider-worklist-only`로 24개 사건과 24개 미계산 branch를 `RiskCampaign`에 넣을 수 있습니다. 이 모드는 물리 요청이나 위험 0을 만들지 않고, 시설 실행 회계에서 누락 사건을 보이게 합니다.
