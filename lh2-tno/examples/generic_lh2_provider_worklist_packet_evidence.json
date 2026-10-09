@@ -2,10 +2,10 @@
   "schema_version": "prism.provider_worklist_packet_evidence.v1",
   "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
   "worklist_event_count": 24,
-  "candidate_event_count": 19,
-  "exact_match_event_count": 19,
-  "strict_packet_valid_event_count": 19,
-  "consequence_chain_event_count": 10,
+  "candidate_event_count": 24,
+  "exact_match_event_count": 24,
+  "strict_packet_valid_event_count": 24,
+  "consequence_chain_event_count": 15,
   "qualified_provider_packet_count": 0,
   "frequency_bound": false,
   "facility_qra_claim": false,
@@ -15,41 +15,121 @@
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
       "component_id": "storage-tank-01",
-      "status": "UNCOMPUTED_PROVIDER_PACKET",
-      "candidate_count": 0,
-      "evidence": null
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results\\20261015\\storage_tank_worklist_packets\\AREA_0.01pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results\\20261015\\storage_tank_worklist_packets\\AREA_0.01pct\\resolved_release.json"
+        ],
+        "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      }
     },
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/provider-release",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
       "component_id": "storage-tank-01",
-      "status": "UNCOMPUTED_PROVIDER_PACKET",
-      "candidate_count": 0,
-      "evidence": null
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results\\20261015\\storage_tank_worklist_packets\\AREA_0.1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results\\20261015\\storage_tank_worklist_packets\\AREA_0.1pct\\resolved_release.json"
+        ],
+        "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      }
     },
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/provider-release",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
       "component_id": "storage-tank-01",
-      "status": "UNCOMPUTED_PROVIDER_PACKET",
-      "candidate_count": 0,
-      "evidence": null
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results\\20261015\\storage_tank_worklist_packets\\AREA_1pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results\\20261015\\storage_tank_worklist_packets\\AREA_1pct\\resolved_release.json"
+        ],
+        "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      }
     },
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/provider-release",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
       "component_id": "storage-tank-01",
-      "status": "UNCOMPUTED_PROVIDER_PACKET",
-      "candidate_count": 0,
-      "evidence": null
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results\\20261015\\storage_tank_worklist_packets\\AREA_10pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results\\20261015\\storage_tank_worklist_packets\\AREA_10pct\\resolved_release.json"
+        ],
+        "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      }
     },
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/provider-release",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
       "component_id": "storage-tank-01",
-      "status": "UNCOMPUTED_PROVIDER_PACKET",
-      "candidate_count": 0,
-      "evidence": null
+      "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
+      "candidate_count": 1,
+      "evidence": {
+        "response_path": "results\\20261015\\storage_tank_worklist_packets\\AREA_100pct\\provider_response.json",
+        "resolved_packet_paths": [
+          "results\\20261015\\storage_tank_worklist_packets\\AREA_100pct\\resolved_release.json"
+        ],
+        "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+        "response_identity_match": true,
+        "endpoint_complete": true,
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+        "verification_ok": true,
+        "qualified_provider_packet": false,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false
+      }
     },
     {
       "worklist_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/provider-release",

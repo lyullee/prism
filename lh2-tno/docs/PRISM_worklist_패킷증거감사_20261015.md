@@ -27,17 +27,17 @@ python scripts/audit_provider_worklist_packet_evidence.py `
 | 항목 | 결과 |
 |---|---:|
 | 전체 worklist 사건 | 24 |
-| 외부 response 후보가 있는 사건 | 19 |
-| event/component/port/opening과 strict packet까지 맞은 사건 | 19 |
-| 최종 consequence-chain 기록까지 있는 사건 | 10 |
+| 외부 response 후보가 있는 사건 | 24 |
+| event/component/port/opening과 strict packet까지 맞은 사건 | 24 |
+| 최종 consequence-chain 기록까지 있는 사건 | 15 |
 | 적격 provider packet | 0 |
 | 빈도 자동 연결 | 없음 |
 | 시설 IR/F-N 승격 | 없음 |
 | 독립 물리검증 승격 | 없음 |
 
-설비별로는 transfer-line 5건, transfer-valve 5건, pressure-relief-vent 1건, transfer-pump 2건, ambient-vaporizer 3건, reliquefier 3건이 진단 packet 증거를 가진다. storage-tank의 `AREA_0.01%`, `AREA_0.1%`, `AREA_1%`, `AREA_10%`, `AREA_100%` 5건은 현재 저장된 외부 response 후보가 없어 `UNCOMPUTED_PROVIDER_PACKET`이다. 이 5건을 정상 운전 시계열이나 다른 설비 packet으로 대신하지 않는다.
+설비별로는 storage-tank 5건, transfer-line 5건, transfer-valve 5건, pressure-relief-vent 1건, transfer-pump 2건, ambient-vaporizer 3건, reliquefier 3건이 진단 packet 증거를 가진다. storage-tank 5건은 외부 LayeredTank export 명령에 worklist의 event·port·개구를 전달해 생성했다. `AREA_100%`는 외부 모델의 양수 cell-mass 조건으로 더 작은 진단 시간 간격을 사용했다. 이 조정은 numerical stability를 기록한 것이며 현장 모델 보정이나 물리 검증으로 해석하지 않는다.
 
-`candidate_event_count=19`는 사건별 후보가 있다는 의미다. transfer-pump G2, ambient-vaporizer G1, reliquefier G4/G5처럼 후보 파일이 둘 이상인 경우에도, exact identity·endpoint·개구·strict schema·verification을 모두 만족하는 후보만 선택한다. 따라서 파일 수를 packet 수로 세지 않는다.
+`candidate_event_count=24`는 모든 worklist 사건에 후보가 있다는 의미다. transfer-pump G2, ambient-vaporizer G1, reliquefier G4/G5처럼 후보 파일이 둘 이상인 경우에도, exact identity·endpoint·개구·strict schema·verification을 모두 만족하는 후보만 선택한다. 따라서 파일 수를 packet 수로 세지 않는다.
 
 ## IJHE 감사와의 관계
 
@@ -56,11 +56,11 @@ python scripts/build_ijhe_completion_audit.py `
   --output results/20261014/ijhe_completion_audit_live_with_worklist_evidence.json
 ```
 
-현재 감사 결과는 `INCOMPLETE_EVIDENCE`이며 14개 검사 중 7개가 차단된다. 새 `diagnostic_worklist_packet_coverage_evidence` 검사는 19/24 coverage를 PASS로 기록하지만 `diagnostic_only=true`이고 차단 이유를 제거하지 않는다. 실제 설비 모델의 사고방출 export, 24개 사건 전체의 적격 packet, 12개 주요 사고 가족의 완결, 시설 IR/F-N, 독립 물리검증과 시설 전체 빈도 불확실성이 추가로 필요하다.
+현재 감사 결과는 `INCOMPLETE_EVIDENCE`이며 14개 검사 중 7개가 차단된다. 새 `diagnostic_worklist_packet_coverage_evidence` 검사는 24/24 coverage를 PASS로 기록하지만 `diagnostic_only=true`이고 차단 이유를 제거하지 않는다. 24개가 모두 구조적으로 연결되었다는 뜻과, 24개가 실제·적격 provider packet이라는 뜻을 혼동하지 않는다. 실제 설비 모델의 적격 사고방출 export, 12개 주요 사고 가족의 완결, 시설 IR/F-N, 독립 물리검증과 시설 전체 빈도 불확실성이 추가로 필요하다.
 
 ## 개발 판단
 
-이번 결과로 “방출→피해 chain을 여러 설비 유형에서 연결하는 코드 경로가 실행된다”는 진단 증거는 넓어졌다. 그러나 24개 worklist 전체의 사고 계산이 끝났거나 시설 위험도가 완성된 것은 아니다. 특히 storage-tank 5개 항목이 남아 있고, 19개 결과도 합성 또는 operator-limited 진단으로 분류되어 있다. 논문에서는 이를 설비별 연결·증거 감사 결과로만 제시하고, 실제 시설 QRA나 현장 사고빈도 검증으로 표현하지 않는다.
+이번 결과로 “방출→피해 chain을 여러 설비 유형에서 연결하는 코드 경로가 실행된다”는 진단 증거는 넓어졌다. 24개 worklist 모두에서 구조적 packet 증거를 찾았고 15개는 consequence-chain 기록까지 만들었다. 그러나 이것은 합성 또는 operator-limited 진단이며, 시설 위험도가 완성된 것은 아니다. 논문에서는 이를 설비별 연결·증거 감사 결과로만 제시하고, 실제 시설 QRA나 현장 사고빈도 검증으로 표현하지 않는다.
 
 관련 코드와 예시는 다음과 같다.
 

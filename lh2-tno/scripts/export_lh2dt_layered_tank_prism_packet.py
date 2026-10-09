@@ -182,8 +182,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     source_digest = _tree_digest(root)
     opening_diameter_m = math.sqrt(4.0 * args.full_open_area_m2 / math.pi)
     component_id = args.component_id
-    port_id = f"{component_id}.accident-out"
-    event_id = f"{component_id}/{port_id}/{opening_diameter_m:.12g}m"
+    port_id = args.port_id or f"{component_id}.accident-out"
+    event_id = args.event_id or f"{component_id}/{port_id}/{opening_diameter_m:.12g}m"
     direction = [1.0 / math.sqrt(2.0), 0.0, -1.0 / math.sqrt(2.0)]
     state_payload = {
         "time_step_s": args.time_step_s,
@@ -245,6 +245,14 @@ def main() -> int:
     parser.add_argument("--max-intervals", type=int, default=64)
     parser.add_argument("--full-open-area-m2", type=float, default=1.0e-8)
     parser.add_argument("--component-id", default="layered-tank-diagnostic")
+    parser.add_argument(
+        "--port-id",
+        help="Optional accident port identity to preserve when exporting a worklist item.",
+    )
+    parser.add_argument(
+        "--event-id",
+        help="Optional event identity to preserve when exporting a worklist item.",
+    )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
     parser.add_argument("--model-revision", default="external-library-layered-tank-0.1.1")
     args = parser.parse_args()
