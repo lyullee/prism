@@ -109,7 +109,7 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 
 외부 `LayeredTankNetworkSimulator+CommandedValve`의 합성 양수 재고 threshold 이력을 `scripts/export_lh2dt_layered_tank_prism_packet.py`로 `prism.external_accident_history.v1`에 맞추고, 공통 strict adapter를 통해 `prism.resolved_release.v1` 액체 packet으로 변환했다. provider 16개 interval의 왼쪽 유지 시간, `inventory_depletion` 종료 basis, 누적 질량·엔탈피를 검사한 결과 8.0 s 방출, 질량 잔차 `1.73e-18 kg`, 에너지 잔차 `0 J`를 얻었다. `scripts/validate_lh2dt_prism_packet_chain.py`는 이 packet을 DynamicLH2PoolX, SLABx-LH2/SLABx, cloud, 점화, 화재·폭발 및 TNO 피해까지 실행했다.
 
-이 실행은 선언된 `0.005 m` sensitivity pool footprint를 사용해 작은 합성 packet의 wet-cell 조건을 확인한 것이다. 지면 액체가 없는 provider 결과는 `prism.no_rainout_evidence.v1`로 선언할 수 있으며, 이 경우 기본 pool context를 사용하지 않는다. 외부 provider가 flash gas와 airborne liquid을 계산하지 않고, 설비 형상·개구·차단 신뢰도·현장 재고도 합성이므로 `EXECUTED_OPERATOR_LIMITED` 진단으로만 기록한다. provider packet 승격·빈도 부여·시설 IR/F-N·독립 물리검증은 계속 보류한다. 외부 `lh2dt` 각 클래스에 native 사고 export를 넣고 24개 사건과 exact-match하는 작업은 다음 단계다.
+이 실행은 선언된 `0.005 m` sensitivity pool footprint를 사용해 작은 합성 packet의 wet-cell 조건을 확인한 것이다. 지면 액체가 없는 provider 결과는 `prism.no_rainout_evidence.v1`로 선언할 수 있으며, 이 경우 기본 pool context를 사용하지 않는다. 외부 provider가 flash gas와 airborne liquid을 계산하지 않고, 설비 형상·개구·차단 신뢰도·현장 재고도 합성이므로 `EXECUTED_OPERATOR_LIMITED` 진단으로만 기록한다. 초단시간 finite-release puff는 provider 방출시간을 보존한 native puff를 먼저 시도하고, backend가 거부할 때만 순간화한다. provider packet 승격·빈도 부여·시설 IR/F-N·독립 물리검증은 계속 보류한다. 외부 `lh2dt` 각 클래스에 native 사고 export를 넣고 24개 사건과 exact-match하는 작업은 다음 단계다.
 
 ## 2026-10-11 연결 경계 보완
 

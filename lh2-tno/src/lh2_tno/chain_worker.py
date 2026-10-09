@@ -553,22 +553,16 @@ def run_chain(p,roots,module):
                         f'packet rate={rate:.9g}, area={area:.9g}, span={span:.9g}; '
                         'source was withheld without sorting or rotating the release'
                     ) from error
-                # A sub-millisecond release can be shorter than SLABx's first
-                # puff integration step.  If its first puff point moves a few
-                # millimetres upwind, represent the same provider-resolved
-                # handoff as an instantaneous packet.  This preserves mass,
-                # mixture, temperature, density, velocity and cross-section;
-                # only the unresolved temporal shape is changed and recorded
-                # as operator-limited.  No trajectory sorting or source
-                # rotation is performed.
                 state=source_model.state
-                class InstantaneousHandoff:
-                    name='instantaneous_provider_handoff'
-                    def __init__(self, original):
+                class FiniteHandoffPuff:
+                    """Native puff wrapper that retains the provider clock."""
+                    name='finite_provider_handoff'
+                    def __init__(self, original, *, instantaneous=False):
                         self.substance=original.substance
                         self.state=original.state
                         self.mass=original.total_mass
                         self.duration=original.duration
+                        self.instantaneous=instantaneous
                     @property
                     def T(self): return self.state.temperature_K
                     @property
@@ -577,7 +571,10 @@ def run_chain(p,roots,module):
                     def total_mass(self): return self.mass
                     @property
                     def half_width(self): return self.state.half_width_m
-                    def released_mass(self,t): return self.mass
+                    def released_mass(self,t):
+                        if self.instantaneous or self.duration <= 0.0:
+                            return self.mass
+                        return self.mass*min(max(t,0.0)/self.duration,1.0)
                     def flux(self,x,t): return sourcemod.SourceFlux()
                     def expanded(self,half_width): return self
                     def initial_state(self,atmosphere,**kwargs):
@@ -593,21 +590,36 @@ def run_chain(p,roots,module):
                             u_ambient_mean=atmosphere.wind_speed(max(
                                 self.state.centre_height_m+.5*h,1.e-6)),
                             R_flux=.25*self.mass)
-                surrogate=InstantaneousHandoff(source_model)
-                traj,used=plume.run_dispersion(surrogate,atm,emission,water,
-                                               x_max=p['dispersion_x_max_m'],
-                                               t_max=max(horizon-tt,span+1e-3),
-                                               n_puff_steps=p['n_puff_steps'])
+                finite_error=None
+                try:
+                    surrogate=FiniteHandoffPuff(source_model)
+                    traj,used=plume.run_dispersion(surrogate,atm,emission,water,
+                                                   x_max=p['dispersion_x_max_m'],
+                                                   t_max=max(horizon-tt,span+1e-3),
+                                                   n_puff_steps=p['n_puff_steps'])
+                    fallback_method='finite_provider_handoff_native_puff'
+                except Exception as error_finite:
+                    finite_error=str(error_finite)
+                    # Retain the explicit instantaneous fallback only when the
+                    # backend cannot integrate the finite provider clock.
+                    surrogate=FiniteHandoffPuff(source_model,instantaneous=True)
+                    traj,used=plume.run_dispersion(surrogate,atm,emission,water,
+                                                   x_max=p['dispersion_x_max_m'],
+                                                   t_max=max(horizon-tt,span+1e-3),
+                                                   n_puff_steps=p['n_puff_steps'])
+                    fallback_method='instantaneous_provider_handoff_native_puff'
                 base_origin=origin+down*handoff_start_x
                 dispersion_handoff_fallbacks.append({
                     'kind':kind,'rate_kg_s':rate,'span_s':span,
                     'handoff_distance_m':handoff_start_x,
-                    'method':'instantaneous_provider_handoff_native_puff',
+                    'method':fallback_method,
                     'original_error':str(error),
+                    'finite_handoff_error':finite_error,
                 })
                 traces.append({'branch':kind,'dispersion_handoff_fallback':True,
-                               'fallback_method':'instantaneous_provider_handoff_native_puff',
-                               'release_span_s':span,'handoff_distance_m':handoff_start_x})
+                               'fallback_method':fallback_method,
+                               'release_span_s':span,'handoff_distance_m':handoff_start_x,
+                               'temporal_shape_preserved':fallback_method == 'finite_provider_handoff_native_puff'})
             else:
                 raise ValueError(
                     f'dispersion failed for {kind} packet rate={rate:.9g}, area={area:.9g}, '
@@ -866,7 +878,7 @@ def run_chain(p,roots,module):
             'The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.',
             'Rainout footprint is explicitly declared; it is not inferred from a single impact point or fitted to LFL/sensors.',
             'Finite-volume top-hat reconstruction of native section averages; not the frozen seven-test FFI observation operator or independent transient validation.',
-            'If a sub-millisecond finite-release puff handoff violates SLABx monotonicity, the same provider-resolved handoff is represented by native puff mode as an instantaneous packet; temporal shape is operator-limited and recorded in dispersion_handoff_fallbacks.',
+            'If a sub-millisecond finite-release puff handoff violates SLABx monotonicity, PRISM first retries the same provider-resolved handoff as a finite-clock native puff; only if that backend retry fails does it use an instantaneous packet. The selected method, original error, finite retry error and temporal-shape preservation are recorded in dispersion_handoff_fallbacks.',
             'Superposed carrier packets preserve H2 mass but overlapping air/temperature/pressure equilibration remains open.',
             'Ignition probabilities, burn-back duration, radiation range and obstruction fraction are declared scenario inputs.',
             'Fire does not feed heat back into the unignited pool evaporation model; ground flame deflection is a geometric approximation.',

@@ -1,0 +1,56 @@
+{
+  "schema_version": "prism.finite_release_puff_handoff_replay.v1",
+  "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "source_request_record": "results\\20261019\\dynamic_pipe_worklist_AREA_1pct_chain_native\\request.json",
+  "source_request_digest_after_rebase": "7a951de35b0203c160bb4ae3b1ab25699f05edfdd5de9a14ab50fe17922dbce7",
+  "component_id": "liquid-transfer-line-01",
+  "original_position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "reviewed_manifest_position_enu_m": [
+    5.0,
+    0.0,
+    1.0
+  ],
+  "location_rebase_applied": true,
+  "case_count": 3,
+  "finite_clock_native_puff_case_count": 3,
+  "instantaneous_fallback_case_count": 0,
+  "full_chain_executed_case_count": 3,
+  "dispersion_handoff_fallbacks": [
+    {
+      "kind": "jet",
+      "rate_kg_s": 1.5022812139880306e-06,
+      "span_s": 9.999999999999999e-05,
+      "handoff_distance_m": 0.05,
+      "method": "finite_provider_handoff_native_puff",
+      "original_error": "x must be non-decreasing",
+      "finite_handoff_error": null
+    },
+    {
+      "kind": "jet",
+      "rate_kg_s": 1.4788719244728116e-06,
+      "span_s": 0.00010000000000000005,
+      "handoff_distance_m": 0.05,
+      "method": "finite_provider_handoff_native_puff",
+      "original_error": "x must be non-decreasing",
+      "finite_handoff_error": null
+    },
+    {
+      "kind": "jet",
+      "rate_kg_s": 1.473678848074999e-06,
+      "span_s": 9.999999999999983e-05,
+      "handoff_distance_m": 0.05,
+      "method": "finite_provider_handoff_native_puff",
+      "original_error": "x must be non-decreasing",
+      "finite_handoff_error": null
+    }
+  ],
+  "elapsed_ms": 27461.028899997473,
+  "diagnostic_only": true,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false
+}
