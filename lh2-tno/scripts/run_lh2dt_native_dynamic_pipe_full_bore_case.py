@@ -74,7 +74,7 @@ def _request(source_digest: str, state_digest: str) -> AccidentReleaseExportRequ
         "input_origin": "model_prediction",
         "model_package": "lh2dt_models",
         "model_class": "lh2dt.dynamic_pipe.DynamicHEMPipe",
-        "model_revision": "native-export-4cedec3",
+        "model_revision": "native-export-3d9b982",
         "state_snapshot_digest": state_digest,
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit native full-bore finite-inventory diagnostic; not site-calibrated",

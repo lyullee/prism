@@ -56,7 +56,7 @@ python scripts/audit_lh2dt_native_contract.py `
 
 ## native export 재감사 후속 기록
 
-외부 저장소 커밋 `4cedec3`에서 일곱 native 사고 export를 검증했다. `LayeredTank` 시험은 등엔탈피 출구 flash의 기체/액체 분할, 지상 액체 보존, 탱크 질량 잔차 0을 확인하고, `DynamicHEMPipe` 시험은 명시적 파손 개구의 기체 재고수지와 액체 입력 거부를 확인한다. `MappedPump` 시험은 H-Q-N map 운전점과 상류 재고 장부를 분리해 보존하는지 확인한다. 밸브·벤트 시험은 개방 명령 또는 고정 출구가 상류 재고 장부 없이 유량을 만들지 않도록 확인한다. 이 경계는 PRISM의 기존 합성 adapter를 자동으로 대체하지 않으며, 실제 차단·재고소진·시설 형상 결합과 qualified provider packet 생성이 완료될 때까지 시설 완료 감사는 계속 제한된다.
+외부 저장소 커밋 `3d9b982`에서 일곱 native 사고 export를 검증했다. `LayeredTank` 시험은 등엔탈피 출구 flash의 기체/액체 분할, 지상 액체 보존, 탱크 질량 잔차 0을 확인하고, `DynamicHEMPipe` 시험은 명시적 파손 개구의 기체 재고수지와 액체 입력 거부를 확인한다. `MappedPump` 시험은 H-Q-N map 운전점과 상류 재고 장부를 분리해 보존하는지 확인한다. 밸브·벤트 시험은 개방 명령 또는 고정 출구가 상류 재고 장부 없이 유량을 만들지 않도록 확인한다. 이 경계는 PRISM의 기존 합성 adapter를 자동으로 대체하지 않으며, 실제 차단·재고소진·시설 형상 결합과 qualified provider packet 생성이 완료될 때까지 시설 완료 감사는 계속 제한된다.
 
 ## native LayeredTank strict smoke
 
@@ -78,9 +78,9 @@ python scripts/audit_lh2dt_native_contract.py `
 
 ## native DynamicHEMPipe full-bore 유한 방출의 자연 종료 연결
 
-외부 `DynamicHEMPipe` 커밋 `4cedec3`에는 finite-bore 방출의 압력 평형 종료가 추가됐다. provider는 매 시간 간격의 유량·엔탈피·flash 결과를 반환하고, 대기압에 도달하거나 유량이 유한재고 기준 이하가 되면 `termination_basis=model_pressure_equalization`과 최종 압력을 함께 기록한다. adaptive step은 RK4 중간 상태가 음의 재고가 되지 않도록 간격을 줄인다. 기존 명시적 격리 시계는 같은 경로에서 유지된다.
+외부 `DynamicHEMPipe` 커밋 `3d9b982`에는 finite-bore 방출의 압력 평형 종료와 스텝 내부 이벤트 보정이 추가됐다. provider는 매 시간 간격의 유량·엔탈피·flash 결과를 반환하고, 대기압에 도달하거나 유량이 유한재고 기준 이하가 되면 `termination_basis=model_pressure_equalization`과 최종 압력을 함께 기록한다. adaptive step은 RK4 중간 상태가 음의 재고가 되지 않도록 간격을 줄인다. 기존 명시적 격리 시계는 같은 경로에서 유지된다.
 
-`scripts/run_lh2dt_native_dynamic_pipe_full_bore_case.py`는 합성 일반 LH2 매니페스트의 이송배관 full-bore (`0.01 m`)를 이 native provider에 연결하고, `source_duration_mode=model_natural`로 PRISM의 `equipment_liquid_release` validator와 consequence chain을 실행한다. 2026-10-18 기록 `results/20261018/native_dynamic_pipe_full_bore/verification.json`은 provider duration `0.0374145 s`, 최종 압력 `91,665.85 Pa`, `pressure_equalized=true`, 질량 잔차 `0 kg`, native export 약 `718 ms`, consequence chain 약 `37.2 s`, `END_TO_END_DIAGNOSTIC_EXECUTED`를 보인다. 이는 요청된 시간까지 유량을 연장하지 않고 provider가 반환한 자연 종료까지만 계산했다는 증거다.
+`scripts/run_lh2dt_native_dynamic_pipe_full_bore_case.py`는 합성 일반 LH2 매니페스트의 이송배관 full-bore (`0.01 m`)를 이 native provider에 연결하고, `source_duration_mode=model_natural`로 PRISM의 `equipment_liquid_release` validator와 consequence chain을 실행한다. 2026-10-18 기록 `results/20261018/native_dynamic_pipe_full_bore/verification.json`은 provider duration `0.0314138 s`, 최종 압력 `101,325.000000004 Pa`, `pressure_equalized=true`, 질량 잔차 `0 kg`, native export 약 `722 ms`, consequence chain 약 `54.9 s`, `END_TO_END_DIAGNOSTIC_EXECUTED`를 보인다. 이는 요청된 시간까지 유량을 연장하지 않고 provider가 반환한 자연 종료까지만 계산했다는 증거다.
 
 이 시험은 **방출→SLABx-LH2/풀→피해 chain의 연결 회귀**를 보강하지만, 1 m 합성 배관·초기상태·대기경계·선언된 pool footprint·airborne liquid 0 가정만 사용한다. 따라서 full-bore 사고가 시설 전체에 적용됐거나 현장 빈도·차단 신뢰도·시설 IR/F-N이 확보됐다고 해석하지 않는다. 현재 상태는 `END_TO_END_DIAGNOSTIC_EXECUTED`, `frequency_applied=false`, `facility_qra_claim=false`, `physical_validation_claim=false`이다.
 
