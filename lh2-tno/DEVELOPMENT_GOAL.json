@@ -1031,5 +1031,21 @@
   "compressible_plane_handoff_chain_smoke_provider_handoff_consumed": true,
   "compressible_plane_handoff_chain_smoke_source_model": "equipment-resolved-compressible-gas + provider-compressible-plane-handoff",
   "compressible_plane_handoff_chain_smoke_physical_validation_claim": false,
-  "compressible_plane_handoff_chain_smoke_facility_qra_claim": false
+  "compressible_plane_handoff_chain_smoke_facility_qra_claim": false,
+  "compressible_source_state_contract_implemented": true,
+  "compressible_source_state_contract_field": "ResolvedGasStep.provider_source_state",
+  "compressible_source_state_adapter_module": "src/lh2_tno/compressible_source_adapter.py",
+  "compressible_source_state_adapter_cli": "scripts/build_compressible_plane_handoff.py",
+  "compressible_source_state_adapter_policy": "Require exact provider response digest and provider-exported upstream/throat state for every interval; never infer source pressure from atmospheric continuity velocity; default diagnostic uses explicit Birch momentum plus provider-property energy closure.",
+  "compressible_source_state_selected_g1_block_record": "results/20261016/vaporizer_g1_source_state_block/audit.json",
+  "compressible_source_state_selected_g1_block_status": "COMPRESSIBLE_PLANE_HANDOFF_SOURCE_STATE_BLOCKED; historical high-speed packet lacks provider_source_state",
+  "compressible_source_state_smoke_record": "results/20261016/dynamic_source_state_smoke",
+  "compressible_source_state_smoke_status": "SOURCE_STATE_BOUND_HANDOFF_ATTACHED_AND_VALIDATED; low-pressure synthetic diagnostic; max Mach 0.0681",
+  "compressible_source_state_high_pressure_smoke_record": "results/20261016/dynamic_high_pressure_source_state_smoke",
+  "compressible_source_state_high_pressure_smoke_status": "SOURCE_STATE_BOUND_HANDOFF_ATTACHED_AND_VALIDATED; synthetic 1 MPa provider source; max handoff Mach 3.9982; provider qualification and physical validation withheld",
+  "compressible_source_state_high_pressure_smoke_max_energy_residual_j_per_kg": 0.0,
+  "compressible_source_state_high_pressure_smoke_max_entropy_residual_j_per_kgk": 190.20490721174428,
+  "compressible_source_state_high_pressure_smoke_provider_packet_promoted": false,
+  "compressible_source_state_high_pressure_smoke_physical_validation_claim": false,
+  "compressible_source_state_high_pressure_smoke_facility_qra_claim": false
 }

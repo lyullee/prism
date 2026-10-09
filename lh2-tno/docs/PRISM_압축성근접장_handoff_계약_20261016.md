@@ -55,3 +55,9 @@ python scripts/attach_compressible_plane_handoff.py `
 선택된 `ambient-vaporizer/G1` packet은 고속이지만 provider handoff가 없어서 `COMPRESSIBLE_PLANE_HANDOFF_BLOCKED`다. 별도로 보관된 저마하 packet은 최대 Mach `0.243589`로 계약을 통과하지만, 선택된 G1에 대체하지 않는다. 합성 handoff smoke는 연결 코드와 19개 시계 상태 소비만 확인했으며 실제 provider 증거 또는 독립 물리검증으로 승격하지 않는다.
 
 다음에 필요한 자료는 근접장 provider가 고정된 plane에서 내보낸 상태 이력, 그 계산의 원본·결과 digest, plane 선택 근거, 그리고 독립 실험의 동일 관측량이다. 이 자료가 없으면 시설 전체 IR/F-N은 계속 보류한다.
+
+## source-state adapter 보완
+
+`src/lh2_tno/compressible_source_adapter.py`와 `scripts/build_compressible_plane_handoff.py`는 provider가 위의 상류·throat 상태를 아직 별도 근접장 결과로 내보내지 못할 때 사용할 수 있는 선택형 진단 경로다. 각 구간에 `ResolvedGasStep.provider_source_state`가 있어야 하고, 원 provider 결과 digest와 정확히 일치해야 한다. 기본 `birch_momentum_energy` 구성은 질량·운동량으로 등가 평면 속도를 만들고 provider property backend에서 에너지를 닫는다. 이 출력은 `synthetic_diagnostic`으로만 기록하며, 실제 provider-owned 근접장 또는 독립 검증을 대신하지 않는다.
+
+기존 `vaporizer_worklist_g1`은 해당 source-state가 없어 `COMPRESSIBLE_PLANE_HANDOFF_SOURCE_STATE_BLOCKED`로 남는다. source-state가 포함된 합성 1 MPa smoke는 `results/20261016/dynamic_high_pressure_source_state_smoke`에 보관되어 있으며, handoff 최대 Mach `3.9982`와 에너지 잔차 `0 J/kg`를 확인했지만 provider 승격 및 시설 위험도 계산에는 사용하지 않았다.

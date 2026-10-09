@@ -37,6 +37,11 @@ class ResolvedGasStep(Contract):
     velocity_m_s: Nonnegative
     area_provenance: Name
     velocity_origin: Literal['provider_resolved', 'mass_continuity_from_declared_area']
+    # Optional provider-native source evidence.  It is deliberately kept
+    # separate from the resolved atmospheric boundary so downstream models
+    # cannot mistake packet continuity velocity for a compressible near-field
+    # solution.
+    provider_source_state: 'ProviderSourceState | None' = None
 
     @model_validator(mode='after')
     def continuity(self):
@@ -46,6 +51,31 @@ class ResolvedGasStep(Contract):
         if self.mass_flow_kg_s==0 and self.velocity_m_s!=0:
             raise ValueError('zero-flow interval requires zero bulk velocity')
         return self
+
+
+class ProviderSourceState(Contract):
+    """Upstream/throat state exported by the equipment provider.
+
+    This record is evidence for an optional compressible-plane adapter.  It
+    does not itself constitute an expansion solution or a validated nozzle
+    model.
+    """
+
+    source_pressure_pa_abs: Positive
+    source_temperature_k: Positive
+    source_density_kg_m3: Positive
+    source_specific_enthalpy_j_kg: float
+    source_specific_entropy_j_kgk: float
+    throat_pressure_pa_abs: Positive
+    throat_temperature_k: Positive
+    throat_density_kg_m3: Positive
+    throat_specific_enthalpy_j_kg: float
+    throat_mass_flux_kg_m2_s: Nonnegative
+    choked: bool
+    provider_source_state_provenance: Name
+
+
+ResolvedGasStep.model_rebuild()
 
 
 class VerticalGasHandoffState(Contract):

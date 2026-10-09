@@ -162,6 +162,14 @@ class DynamicGasInventoryProvider:
             exit_state = properties.from_ph(ambient_pressure, float(hydraulic.outlet_specific_enthalpy_J_kg))
             if exit_state.phase not in {"gas", "supercritical_gas"}:
                 raise ValueError("inventory gas-unit outlet is outside gas contract")
+            # Keep the upstream and throat states in the provider response.
+            # These are required inputs for any optional compressible-plane
+            # adapter; the atmospheric packet's continuity velocity is not a
+            # substitute for a near-field solution.
+            throat_state = properties.from_ps(
+                float(hydraulic.throat_pressure_Pa),
+                float(fluid.specific_entropy_J_kgK),
+            )
             result = model.step(state, fluid, 0.0, mass_flow, dt)
             enthalpy = float(hydraulic.outlet_specific_enthalpy_J_kg)
             cumulative_mass += mass_flow * dt
@@ -178,6 +186,23 @@ class DynamicGasInventoryProvider:
                 "velocity_m_s": mass_flow / (float(exit_state.density_kg_m3) * effective_area) if effective_area > 0.0 else 0.0,
                 "area_provenance": "explicit atmospheric valve area; inventory event does not promote this as failure opening",
                 "velocity_origin": "mass_continuity_from_declared_area",
+                "provider_source_state": {
+                    "source_pressure_pa_abs": float(fluid.pressure_Pa),
+                    "source_temperature_k": float(fluid.temperature_K),
+                    "source_density_kg_m3": float(fluid.density_kg_m3),
+                    "source_specific_enthalpy_j_kg": float(fluid.specific_enthalpy_J_kg),
+                    "source_specific_entropy_j_kgk": float(fluid.specific_entropy_J_kgK),
+                    "throat_pressure_pa_abs": float(hydraulic.throat_pressure_Pa),
+                    "throat_temperature_k": float(throat_state.temperature_K),
+                    "throat_density_kg_m3": float(throat_state.density_kg_m3),
+                    "throat_specific_enthalpy_j_kg": float(throat_state.specific_enthalpy_J_kg),
+                    "throat_mass_flux_kg_m2_s": float(hydraulic.mass_flux_kg_m2_s),
+                    "choked": bool(hydraulic.choked),
+                    "provider_source_state_provenance": (
+                        "lh2dt provider fluid state before Valve.evaluate; throat state "
+                        "resolved from provider entropy at provider throat pressure"
+                    ),
+                },
             })
             state = result.state
             time_s += dt
