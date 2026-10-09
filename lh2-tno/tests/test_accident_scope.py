@@ -343,7 +343,8 @@ def test_full_scope_example_exposes_equipment_families_without_inventing_provide
     assert rows["inventory_depletion"]["generated_event_count"] == 1
     assert rows["inventory_over_600s"]["generated_event_count"] == 1
     assert rows["two_sided_rupture"]["generated_event_count"] == 2
-    for family in ("liquid_two_phase", "vertical_handoff"):
-        assert rows[family]["status"] == "NO_EVENT_GENERATED"
+    assert rows["liquid_two_phase"]["generated_event_count"] == 21
+    assert rows["liquid_two_phase"]["status"] == "NO_CASE_EXECUTED"
+    assert rows["vertical_handoff"]["status"] == "NO_EVENT_GENERATED"
     assert matrix["facility_total_risk_available"] is False
     assert matrix["physical_validation_claim"] is False

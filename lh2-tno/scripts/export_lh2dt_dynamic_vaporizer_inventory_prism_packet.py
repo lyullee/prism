@@ -41,6 +41,47 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
+def _coarsen_steps(steps: list[dict[str, Any]], *, duration_s: float, maximum_steps: int = 96) -> list[dict[str, Any]]:
+    """Bound a long provider clock without changing its integrated mass/energy."""
+    if len(steps) <= maximum_steps:
+        return steps
+    if not steps or duration_s <= 0.0:
+        raise ValueError("cannot coarsen an empty or non-positive provider clock")
+    chunk = int(math.ceil(len(steps) / maximum_steps))
+    numeric = (
+        "mass_flow_kg_s", "pressure_pa_abs", "specific_enthalpy_j_kg",
+        "temperature_k", "density_kg_m3", "effective_area_m2", "velocity_m_s",
+    )
+    compact: list[dict[str, Any]] = []
+    for start in range(0, len(steps), chunk):
+        group = steps[start:start + chunk]
+        weighted: dict[str, float] = {key: 0.0 for key in numeric}
+        total_dt = 0.0
+        for offset, row in enumerate(group):
+            index = start + offset
+            end = steps[index + 1]["time_s"] if index + 1 < len(steps) else duration_s
+            dt = float(end) - float(row["time_s"])
+            if dt <= 0.0:
+                raise ValueError("provider clock contains a non-positive interval")
+            total_dt += dt
+            for key in numeric:
+                weighted[key] += float(row[key]) * dt
+        first = dict(group[0])
+        first["time_s"] = float(group[0]["time_s"])
+        for key in numeric:
+            first[key] = weighted[key] / total_dt
+        if first["effective_area_m2"] > 0.0 and first["density_kg_m3"] > 0.0:
+            # Preserve the strict mass/area/density/velocity closure after
+            # averaging a variable-opening provider trace.
+            first["velocity_m_s"] = first["mass_flow_kg_s"] / (
+                first["density_kg_m3"] * first["effective_area_m2"]
+            )
+        compact.append(first)
+    if len(compact) > maximum_steps or compact[-1]["time_s"] >= duration_s:
+        raise ValueError("coarsened provider clock is outside the bounded packet contract")
+    return compact
+
+
 def _request(*, source_digest: str, component_id: str, event_id: str | None,
              port_id: str | None, mode: str, state_digest: str,
              height_m: float, model_class: str, revision: str) -> InventoryReleaseExportRequest:
@@ -169,7 +210,7 @@ class DynamicGasInventoryProvider:
             throat_state = properties.from_ps(
                 float(hydraulic.throat_pressure_Pa),
                 float(fluid.specific_entropy_J_kgK),
-            )
+    )
             result = model.step(state, fluid, 0.0, mass_flow, dt)
             enthalpy = float(hydraulic.outlet_specific_enthalpy_J_kg)
             cumulative_mass += mass_flow * dt
@@ -216,6 +257,21 @@ class DynamicGasInventoryProvider:
         if self.release_mode == "inventory_over_600s" and not math.isclose(time_s, 600.0, rel_tol=0.0, abs_tol=1.0e-8):
             raise ValueError("inventory_over_600s provider clock disagrees with 600 s")
         basis = "inventory_depletion" if self.release_mode == "instantaneous_inventory" else "inventory_over_600s"
+        declared_duration = 600.0 if self.release_mode == "inventory_over_600s" else time_s
+        packet_steps = _coarsen_steps(steps, duration_s=declared_duration)
+        packet_mass = sum(
+            float(row["mass_flow_kg_s"]) * (
+                float(packet_steps[index + 1]["time_s"]) if index + 1 < len(packet_steps) else declared_duration
+            ) - float(row["mass_flow_kg_s"]) * float(row["time_s"])
+            for index, row in enumerate(packet_steps)
+        )
+        packet_enthalpy = sum(
+            float(row["mass_flow_kg_s"]) * float(row["specific_enthalpy_j_kg"]) * (
+                (float(packet_steps[index + 1]["time_s"]) if index + 1 < len(packet_steps) else declared_duration)
+                - float(row["time_s"])
+            )
+            for index, row in enumerate(packet_steps)
+        )
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
             "provider_model": model_class,
@@ -225,10 +281,10 @@ class DynamicGasInventoryProvider:
                 "event_id": request["event_id"],
                 "component_id": request["component_id"],
                 "port_id": request["port_id"],
-                "duration_s": time_s,
+                "duration_s": declared_duration,
                 "available_mass_kg": cumulative_mass if self.release_mode == "instantaneous_inventory" else initial_mass,
-                "cumulative_mass_out_kg": cumulative_mass,
-                "cumulative_static_enthalpy_out_j": cumulative_enthalpy,
+                "cumulative_mass_out_kg": packet_mass,
+                "cumulative_static_enthalpy_out_j": packet_enthalpy,
                 "termination_provenance": (
                     f"external {model_class} finite-volume releasable-inventory ledger; "
                     "atmospheric-pressure equilibrium residual is retained"
@@ -237,7 +293,7 @@ class DynamicGasInventoryProvider:
                 ),
                 "termination_basis": basis,
                 "fluid": "Hydrogen",
-                "steps": steps,
+                "steps": packet_steps,
                 "provider_meta": {
                     "model_class": model_class,
                     "release_mode": self.release_mode,
@@ -251,6 +307,8 @@ class DynamicGasInventoryProvider:
                     ),
                     "diagnostic_valve_area_m2": area,
                     "diagnostic_valve_area_is_not_failure_opening": True,
+                    "raw_interval_count": len(steps),
+                    "packet_interval_count": len(packet_steps),
                 },
             },
         }

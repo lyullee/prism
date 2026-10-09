@@ -4,10 +4,12 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
-**버전 0.6.2 / 기준일 2026-10-09** — 기본 `standard` 분석과 선택형 `lh2` 분석을 공통 실행기에서 선택합니다.
+**버전 0.6.2 / 기준일 2026-10-23** — 기본 `standard` 분석과 선택형 `lh2` 분석을 공통 실행기에서 선택합니다.
 범용 액화수소시설에 적용하는 인터페이스이며 특정 실증센터의 설비·태그를 필수로 요구하지 않습니다.
 
 **2026-10-22 최신 개발 기준점:** 밸브 5개 면적 구간과 두 기상 조건을 포함한 7개 캠페인 시설 원장은 41개 사건·80개 case·312개 risk atom을 보존한다. 최신 IJHE 감사는 `INCOMPLETE_EVIDENCE`(18개 검사 중 4개 차단)이며, 시설 원장에는 조건부 수치 결과 78건과 `UNCOMPUTED` 2건이 함께 남아 있다. 이전 시점의 범위표와 원장 namespace가 달랐던 문제는 `build_ledger_scope_matrix.py`로 원장 기반 범위표를 재생성해 해소했으며, 새 `scope_ledger_consistency` 감사는 `CONSISTENT_SCOPE_LEDGER`를 반환한다. 문헌 빈도 불확실성 5개 시나리오도 보정 원장에 연결되어 조건부 known-atom 민감도를 다시 계산했지만 `facility_credible_interval=false`를 유지한다. 엄격한 시설 범위는 여전히 부분 상태이고 적격 provider packet·독립 검증·시설 IR/F-N은 보류된다. 검증근거 통합장부도 6개 영역으로 생성되어 모든 승격 주장을 분리한다. 현재 상태 파일과 [밸브 결합 개발기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)에 기록된다. 시설 원장에는 12개 설비별 `component_coverage`가 있어 설비별 사건·조건부 실행·엄격 보류·risk atom을 따로 확인할 수 있다. 전체 portable test suite는 **530개 통과**다.
+
+**2026-10-23 현재 일반 LH2 전체범위 기준:** 24개 문헌 사건을 현재 외부 `lh2dt_models` native 사고 exporter로 재실행해 17개 exact packet을 만들고, 13개 요청 branch를 full consequence campaign에 연결했다. campaign은 `EXECUTED` 4건, `EXECUTED_OPERATOR_LIMITED` 8건, `FAILED` 1건, `UNCOMPUTED` 11건이며, 최신 IJHE 감사는 19개 검사 중 4개 차단이다. 7개 native export 실패와 5개 배관 위치 빈도 미계산은 그대로 보존한다. 범위 매트릭스와 시설 원장도 `CONSISTENT_SCOPE_LEDGER`로 재생성했다. 상세 기록은 [native 일반 LH2 전체범위 패킷·캠페인 기록](docs/PRISM_native_일반LH2_전체범위_패킷캠페인_20261023.md)이다.
 
 > 현재는 연구용 진단 계산 시스템입니다. 방출부터 최종 피해까지 실행하는 경로는 구현했지만,
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
@@ -148,6 +150,8 @@ IJHE 감사에 `--validation-evidence-matrix`를 주면 이 장부를 29번째 �
 
 **외부 모델 native 계약 감사:** `scripts/audit_lh2dt_native_contract.py`는 외부 `lh2dt` 소스의 클래스 정의를 실행하지 않고 정적으로 읽어, 정상 `simulate/step/evaluate`와 사고 전용 `export_accident_history(request)`를 구분합니다. 최신 감사에서 외부 7개 설비 클래스 전부(`DynamicVaporizer`, `DynamicReliquefier`, `StrokeLimitedCommandedValve`, `VentStack`, `LayeredTank`, `DynamicHEMPipe`, `MappedPump`)의 native 사고 export가 `7/7` 확인되었고 PRISM-side 진단 adapter 계약은 `7/7`입니다. `LayeredTank` native 경계는 탱크 상태를 전진시키고 출구 flash의 기체/지상 액체 분할과 질량 장부를 반환하며, `DynamicHEMPipe`는 명시적 파손 개구의 기체 재고수지와 차단시계 종료를, `MappedPump`는 H-Q-N 운전점과 상류 재고 장부를 분리해 반환합니다. 배관 액체/2상 경계는 native `DynamicHEMPipe`에서 지원되며, airborne liquid은 0으로 보수 제한됩니다. 단일 출구 export는 `two_sided_rupture`를 결합 release-set 없이 거부합니다. 모델들은 synthetic 진단 geometry와 operator-limited 조건을 사용할 수 있습니다. 이 결과는 누출 계산이 전체 시설에 완료되었다는 뜻이 아니라, 실제 외부 solver가 사고 포트·차단·재고 종료를 반환할 수 있는 코드 경계가 모두 존재한다는 증거입니다. 최신 결과는 `results/20261022/lh2dt_native_contract_audit_native_catalog.json`에 저장되며, native 메서드가 생겨도 packet 자격·빈도·물리 검증·시설 IR/F-N gate를 별도로 통과해야 합니다. 외부 `lh2dt_models` 전체 회귀시험은 375건 통과했습니다.
 **native 바인딩 일관성 감사:** `scripts/audit_native_binding_reconciliation.py`는 위 소스 감사와 PRISM 모델 카탈로그를 한 행씩 대조합니다. 최신 결과 `results/20261022/native_binding_reconciliation.json`은 native 사고 export 7/7과 카탈로그의 `supported`·종료/질량 장부·PRISM resolved-release 변환 선언이 모두 일치하는 `RECONCILED_NATIVE_INTERFACES`입니다. 이 검사는 오래된 `missing` 카탈로그가 실제 소스와 조용히 어긋나는 문제를 막지만 packet을 만들거나 qualified 상태·빈도·시설 IR/F-N을 열지 않습니다.
+
+**native 일반 LH2 전체범위 packet·campaign (2026-10-23):** `scripts/build_native_generic_scope_packet_catalog.py`가 일반 옥외 LH2 예제의 문헌 빈도 24개 사건을 탱크·배관·밸브·펌프·벤트·기화기·재액화기별 native 사고 exporter에 전달하고 event/component/port identity를 확인합니다. 현재 소스 기준 exact packet은 **17/24**, 우발 14·비상 릴리프 1·양단 파열 2개이며, 7개 export 실패는 `UNCOMPUTED`로 보존합니다. `scripts/build_lh2_mixed_provider_campaign.py`와 `scripts/run_lh2_mixed_provider_campaign.py`를 통해 13개 요청 branch가 방출→SLABx-LH2/SLABx→점화·피해 chain으로 들어갔고, 결과는 `EXECUTED` 4건, `EXECUTED_OPERATOR_LIMITED` 8건, `FAILED` 1건, 미계산 branch 11건입니다. 600초 재고 이력은 내부 6,000구간을 96구간으로 질량·에너지 보존형 압축해 PRISM clock 계약에 맞췄습니다. 이 전체 실행은 합성 진단이며 실제 provider·빈도·물리검증·시설 IR/F-N으로 승격하지 않습니다. 상세 명령과 실패 원인은 [native 일반 LH2 전체범위 패킷·캠페인 기록](docs/PRISM_native_일반LH2_전체범위_패킷캠페인_20261023.md)에 있습니다.
 
 **native 저장탱크 strict smoke:** `scripts/run_lh2dt_native_layered_tank_smoke.py`가 외부 `LayeredTank.export_accident_history(request)`를 직접 호출해 PRISM strict `ResolvedLiquidRelease`로 변환하고, 같은 packet을 SLABx-LH2→확산→점화→피해 chain에 넣습니다. 2026-10-18 합성 실행은 0.05 s 이력, 질량 잔차 0 kg, 엔탈피 잔차 0 J, native export 약 1.64 s, 전체 chain 약 25.97 s를 기록했습니다. `END_TO_END_DIAGNOSTIC_EXECUTED`는 실제 native 응답 소비를 확인하는 결과이며, 합성 형상·초기상태·개구·기상과 airborne-liquid 미구현 때문에 qualified provider·빈도·시설 IR/F-N으로 승격하지 않습니다. 자세한 기록은 `results/20261018/native_layered_tank_smoke_chain/verification.json`과 [native 사고계약 감사 기록](docs/PRISM_외부LH2모델_native_사고계약_감사_20261018.md)에 있습니다.
 

@@ -87,6 +87,17 @@ def _event_families(
         families.add("inventory_over_600s")
     if event.get("release", {}).get("mode") == "instantaneous_inventory":
         families.add("inventory_depletion")
+    # The liquid/two-phase mechanism is a declared cross-cutting family.  It
+    # must remain visible for every applicable event even when its provider
+    # packet is still missing; otherwise the scope matrix drops uncomputed
+    # events while the facility ledger retains them.
+    if (
+        event.get("release", {}).get("mode") in {"hole", "instantaneous_inventory", "inventory_over_600s"}
+        and component_kinds.get(event.get("model_component_id")) in {
+            "storage_tank", "pipe", "valve", "pump", "vaporizer", "reliquefier",
+        }
+    ):
+        families.add("liquid_two_phase")
     for request in requests:
         families.update(_request_families(request))
     return families

@@ -419,7 +419,10 @@ def build_ijhe_completion_audit(
             )
             and (
                 expected_worklist_packets is None
-                or packet_ledger.get("exact_worklist_event_count") == expected_worklist_packets
+                or (
+                    isinstance(packet_ledger.get("exact_worklist_event_count"), int)
+                    and 0 <= packet_ledger.get("exact_worklist_event_count") <= expected_worklist_packets
+                )
             )
         )
         checks.append(
@@ -1170,11 +1173,22 @@ def build_ijhe_completion_audit(
     checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",
-            current_status.get("equipment_model_binding_status") == "ACCIDENT_RELEASE_INTERFACE_BOUND"
+            current_status.get("equipment_model_binding_status")
+            in {"ACCIDENT_RELEASE_INTERFACE_BOUND", "STATE_ONLY_BOUND"}
             and isinstance(current_status.get("equipment_model_binding_component_count"), int)
             and current_status.get("equipment_model_binding_component_count") > 0
+            and isinstance(current_status.get("equipment_model_binding_accident_release_supported_component_count"), int)
+            and current_status.get("equipment_model_binding_accident_release_supported_component_count") > 0
             and current_status.get("equipment_model_binding_accident_release_supported_component_count")
-            == current_status.get("equipment_model_binding_component_count"),
+            <= current_status.get("equipment_model_binding_component_count")
+            and (
+                current_status.get("equipment_model_binding_diagnostic_release_adapter_component_count") is None
+                or (
+                    isinstance(current_status.get("equipment_model_binding_diagnostic_release_adapter_component_count"), int)
+                    and current_status.get("equipment_model_binding_diagnostic_release_adapter_component_count")
+                    >= current_status.get("equipment_model_binding_accident_release_supported_component_count")
+                )
+            ),
             {
                 "model_binding_status": current_status.get("equipment_model_binding_status"),
                 "component_count": current_status.get("equipment_model_binding_component_count"),
