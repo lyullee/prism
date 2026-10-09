@@ -478,14 +478,14 @@
   "external_model_native_contract_audit_record": "results/20261018/lh2dt_native_contract_audit.json",
   "external_model_native_contract_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
   "external_model_native_contract_audit_binding_count": 8,
-  "external_model_native_contract_audit_native_accident_export_component_count": 2,
+  "external_model_native_contract_audit_native_accident_export_component_count": 3,
   "external_model_native_contract_audit_external_component_count": 7,
   "external_model_native_contract_audit_diagnostic_adapter_contract_verified_count": 7,
   "external_model_native_contract_audit_provider_packet_promoted": false,
   "external_model_native_contract_audit_frequency_inference": false,
   "external_model_native_contract_audit_facility_qra_claim": false,
-  "external_model_native_contract_audit_source_digest": "d0874d9fbba03d6a0d9d6860f89d4ba49c6eaecb7398fd35ec3249c187e85040",
-  "external_model_native_contract_audit_test_status": "2 static contract-audit tests; external lh2dt full suite 359 passed; PRISM full portable suite remains 441 passed",
+  "external_model_native_contract_audit_source_digest": "4f8c704abf6b4d3a7c7515ea376137a42d93550f85bf05edf8824943a8c26a03",
+  "external_model_native_contract_audit_test_status": "2 static contract-audit tests; external lh2dt full suite 361 passed; PRISM full portable suite remains 441 passed",
   "equipment_state_snapshot_contract_implemented": true,
   "equipment_state_snapshot_contract_module": "src/lh2_tno/state_snapshot.py",
   "equipment_state_snapshot_contract_schema": "prism.equipment_state_snapshot.v1",
@@ -1380,13 +1380,12 @@
   "external_model_native_contract_audit_native_accident_export_missing_components": [
     "storage_tank",
     "pipe",
-    "valve",
     "vent_stack",
     "pump"
   ],
-  "external_model_native_contract_audit_external_source_commit": "d3d1091",
-  "lh2dt_native_accident_export_implementation_status": "DynamicVaporizer and DynamicReliquefier native export_accident_history(request) implemented; five external equipment classes remain missing and qualified provider promotion is withheld",
+  "external_model_native_contract_audit_external_source_commit": "6fa4c6e",
+  "lh2dt_native_accident_export_implementation_status": "DynamicVaporizer, DynamicReliquefier and StrokeLimitedCommandedValve native export_accident_history(request) implemented; four external equipment classes remain missing and qualified provider promotion is withheld",
   "lh2dt_native_accident_export_schema": "prism.external_accident_history.v1",
-  "lh2dt_native_accident_export_external_repository_commit": "d3d1091",
-  "lh2dt_native_accident_export_external_repository_test_status": "359 passed"
+  "lh2dt_native_accident_export_external_repository_commit": "6fa4c6e",
+  "lh2dt_native_accident_export_external_repository_test_status": "361 passed"
 }
