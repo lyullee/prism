@@ -42,10 +42,13 @@ python scripts/validate_lh2dt_prism_packet_chain.py `
 
 현재 재현 결과는 `chain/verification.json`의 `END_TO_END_DIAGNOSTIC_EXECUTED`이다. 이는 합성 설비·수용기·기상·점화 조건에서의 구조 연결 확인이며, 실제 밸브 고장빈도나 시설 IR/F-N이 아니다.
 
-## 중요한 제한
+## source/throat 상태 보완
 
-- 외부 고정원 helper의 각 구간 source trace에는 개방도·choked 표시는 있지만 PRISM `ProviderSourceState`가 요구하는 throat 상태 전체가 아직 없다. 원본 trace는 `provider_response.json`에 그대로 보존하고, strict packet에서는 선택 필드를 제거해 atmospheric boundary만 검증한다.
-- 따라서 고속 기본 케이스를 압축성 plane으로 자동 변환하지 않는다. source/throat 상태가 완전한 provider packet으로 제공되면 `build_compressible_plane_handoff.py`를 별도 적용해야 한다.
+외부 `lh2dt`의 `ValveResult`는 이미 throat 압력과 질량플럭스를 계산하고 있었지만, 사고 export가 이를 버리고 있었다. 외부 helper를 보완해 native upstream entropy와 throat 압력·온도·밀도·엔탈피·질량플럭스를 `provider_source_state`로 보존했다. PRISM 어댑터는 이 값을 다시 계산하지 않고 strict packet에 전달하며, native actuator의 `opening`처럼 PRISM 계약에 없는 보조 필드만 strict handoff에서 제거한다. 따라서 현재 감사는 기체 4개 중 밸브·기화기·재액화기 3개의 source/throat 상태를 완결로 판정하고, VentStack 1개는 throat 해가 없는 Darcy 모델이라 계속 차단한다.
+
+상태가 완전해졌다는 것은 provider가 근접장 팽창·혼합을 계산했다는 뜻이 아니다. 고속 기본 케이스는 여전히 `build_compressible_plane_handoff.py`가 요구하는 provider-resolved downstream plane을 별도로 가져야 한다.
+
+- source/throat 상태는 압축성 source-state adapter의 입력을 충족하지만, 이것만으로 고속 근접장 plane을 자동 생성하지 않는다. provider-resolved downstream plane과 독립 검증이 별도로 필요하다.
 - 밸브 자체에는 상류 재고, 차단 신뢰도, 현장 고장빈도가 없다. 남은 재고는 upstream reserve로 기록되며 빈도는 결합하지 않는다.
 - 이번 실행은 `synthetic_diagnostic`이고 `provider_packet_promoted=false`, `physical_validation_claim=false`, `facility_qra_claim=false`다.
 

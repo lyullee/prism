@@ -1,7 +1,7 @@
 {
   "provider_export_schema": "prism.external_accident_history.v1",
   "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
-  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_source_digest": "57dfd590dde1423a183546be579bfd4271b8d3d46d5ecea97b8b628c0eda2e13",
   "provider_state_snapshot_digest": "1422e7f46e37887ba2f0948c66dd1e273be5f272447a31acdd66b092d24d8fb3",
   "data": {
     "event_kind": "accidental_leak",
@@ -32,8 +32,15 @@
           "source_temperature_k": 300.0,
           "source_density_kg_m3": 0.0819817519609035,
           "source_specific_enthalpy_j_kg": 3958281.3603453613,
+          "source_specific_entropy_j_kgk": 53457.385950011405,
           "opening": 1.0,
-          "choked": false
+          "choked": false,
+          "throat_pressure_pa_abs": 101325.0,
+          "throat_temperature_k": 299.85081827519684,
+          "throat_density_kg_m3": 0.0818811906168217,
+          "throat_specific_enthalpy_j_kg": 3956145.428810143,
+          "throat_mass_flux_kg_m2_s": 5.351712945359748,
+          "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
         }
       },
       {
@@ -52,8 +59,15 @@
           "source_temperature_k": 300.0,
           "source_density_kg_m3": 0.0819817519609035,
           "source_specific_enthalpy_j_kg": 3958281.3603453613,
+          "source_specific_entropy_j_kgk": 53457.385950011405,
           "opening": 1.0,
-          "choked": false
+          "choked": false,
+          "throat_pressure_pa_abs": 101325.0,
+          "throat_temperature_k": 299.85081827519684,
+          "throat_density_kg_m3": 0.0818811906168217,
+          "throat_specific_enthalpy_j_kg": 3956145.428810143,
+          "throat_mass_flux_kg_m2_s": 5.351712945359748,
+          "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
         }
       }
     ],

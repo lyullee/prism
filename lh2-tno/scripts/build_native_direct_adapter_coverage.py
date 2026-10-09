@@ -7,6 +7,10 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+_SOURCE_STATE_COMPLETE_STATUSES = {
+    "COMPLETED_ISENTROPIC_THROAT_FIELDS",
+    "PROVIDER_NATIVE_SOURCE_THROAT_FIELDS",
+}
 
 _CASES = (
     ("LayeredTank", "scripts/export_lh2dt_native_layered_tank_prism_packet.py", "results/20261025/native_layered_tank_isolation/verification.json", "results/20261025/native_layered_tank_isolation/chain/verification.json", True),
@@ -77,7 +81,7 @@ def build() -> dict[str, Any]:
         "same_packet_chain_count": sum(bool(item["same_packet_chain"]) for item in entries),
         "chain_variant_count": sum(not bool(item["same_packet_chain"]) for item in entries),
         "source_state_completion_count": sum(
-            item["source_state_completion_status"] == "COMPLETED_ISENTROPIC_THROAT_FIELDS"
+            item["source_state_completion_status"] in _SOURCE_STATE_COMPLETE_STATUSES
             for item in entries
         ),
         "source_state_completion_blocked_count": sum(

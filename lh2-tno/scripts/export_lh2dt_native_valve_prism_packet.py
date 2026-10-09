@@ -56,19 +56,14 @@ class NativeStrokeValveProvider:
         self.response = dict(response)
 
     def _strict_response(self) -> dict[str, Any]:
-        """Adapt the native helper's optional source trace to PRISM's schema.
-
-        The current external fixed-source helper records a compact source trace
-        (including ``opening`` and ``choked``) but does not yet provide the
-        complete ``ProviderSourceState`` record required by PRISM.  Preserve
-        the untouched native response on disk and remove only that optional
-        trace from the strict handoff until the external schema is expanded.
-        """
+        """Pass the native source/throat state through without recalculation."""
         response = json.loads(json.dumps(self.response, allow_nan=False))
-        data = response.get("data", {})
-        for step in data.get("steps", []):
-            if isinstance(step, dict):
-                step.pop("provider_source_state", None)
+        # ``opening`` is a native actuator diagnostic, not part of PRISM's
+        # ProviderSourceState contract.  Keep it in provider_response.json but
+        # remove only this extra key before strict Pydantic validation.
+        for step in response.get("data", {}).get("steps", []):
+            if isinstance(step, dict) and isinstance(step.get("provider_source_state"), dict):
+                step["provider_source_state"].pop("opening", None)
         return response
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -191,11 +186,30 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "state_snapshot_digest": snapshot.digest(),
     }
     native_response = valve.export_accident_history(native_request)
+    strict_provider_response = NativeStrokeValveProvider(native_response)._strict_response()
     result = export_equipment_gas_accident_history(
         NativeStrokeValveProvider(native_response), request
     )
     data = native_response["data"]
     provider_meta = data.get("provider_meta") if isinstance(data.get("provider_meta"), Mapping) else {}
+    source_states = [
+        step.get("provider_source_state")
+        for step in data.get("steps", [])
+        if isinstance(step, Mapping)
+    ]
+    native_source_state_complete = bool(source_states) and all(
+        isinstance(state, Mapping)
+        and all(
+            state.get(field) is not None
+            for field in (
+                "source_specific_entropy_j_kgk",
+                "throat_pressure_pa_abs",
+                "throat_density_kg_m3",
+                "throat_specific_enthalpy_j_kg",
+            )
+        )
+        for state in source_states
+    )
     verification = {
         "schema_version": "prism.native_lh2dt_stroke_valve_packet_verification.v1",
         "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
@@ -205,7 +219,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_source_digest": source_digest,
         "provider_result_digest": result.provider_result_digest,
         "native_provider_result_digest": canonical_digest(native_response),
-        "native_source_trace_preserved_out_of_band": True,
+        "strict_provider_result_digest": canonical_digest(strict_provider_response),
+        "native_source_trace_preserved_in_packet": True,
+        "source_state_completion": {
+            "status": (
+                "PROVIDER_NATIVE_SOURCE_THROAT_FIELDS"
+                if native_source_state_complete else "INCOMPLETE"
+            ),
+            "interval_count": len(source_states),
+            "inference_performed": False,
+            "provenance": "external native ValveResult throat pressure and provider property state",
+        },
         "provider_packet_promoted": result.provider_packet_promoted,
         "phase_basis": data.get("provider_meta", {}).get("initial_source_phase") if isinstance(data.get("provider_meta"), Mapping) else None,
         "termination_basis": data.get("termination_basis"),
@@ -222,11 +246,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "limitations": [
             "synthetic gas source state, valve geometry and upstream reserve",
             "StrokeLimitedCommandedValve owns no upstream inventory or isolation reliability",
-            "native compact source trace is preserved in provider_response.json but is not promoted into the strict packet until its schema is expanded",
+            "native source entropy and hydraulic throat state are preserved in the strict packet; this is not an expansion/mixing solution",
             "bounded diagnostic horizon leaves explicit reserve and is not a qualified facility frequency case",
         ],
     }
     _save(args.output_dir / "provider_response.json", native_response)
+    _save(args.output_dir / "provider_response_strict.json", strict_provider_response)
     _save(args.output_dir / "resolved_release.json", result.release.model_dump(mode="json"))
     _save(args.output_dir / "verification.json", verification)
     return verification

@@ -1,0 +1,180 @@
+{
+  "component_id": "native-stroke-valve-diagnostic",
+  "source_input": null,
+  "resolved_release": {
+    "provider_export_schema": "prism.resolved_release.v1",
+    "component_id": "native-stroke-valve-diagnostic",
+    "port_id": "native-stroke-valve-gas-out",
+    "event_id": "native-stroke-valve/accidental-leak-001",
+    "event_kind": "accidental_leak",
+    "upstream_service": "LH2",
+    "upstream_service_provenance": "native external StrokeLimitedCommandedValve gas export; synthetic upstream state and reserve",
+    "state_owner": "equipment_twin",
+    "discharge_owner": "equipment_twin",
+    "boundary_kind": "resolved_atmospheric_gas_exit",
+    "enthalpy_convention": "static_exit_enthalpy",
+    "property_basis": {
+      "fluid": "Hydrogen",
+      "backend": "CoolProp-HEOS",
+      "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+    },
+    "provider_source_digest": "57dfd590dde1423a183546be579bfd4271b8d3d46d5ecea97b8b628c0eda2e13",
+    "provider_result_digest": "9e2f19090cffa1deecf6ea9a8f8a765959a26587ea50d0db8feadcdf561c75a0",
+    "provider_boundary_reference": "lh2dt.StrokeLimitedCommandedValve.export_accident_history native gas outlet",
+    "input_origin": "model_prediction",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "direction_enu": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "ambient_pressure_pa_abs": 101325.0,
+    "ambient_temperature_k": 288.15,
+    "duration_s": 0.1,
+    "available_mass_kg": 1.0,
+    "cumulative_mass_out_kg": 2.1016127591579472e-06,
+    "cumulative_static_enthalpy_out_j": 8.318774611238888,
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 2.1016127591579473e-05,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3958281.3603453613,
+        "temperature_k": 300.00005299820754,
+        "density_kg_m3": 0.08184047334386349,
+        "effective_area_m2": 4.908738521234052e-06,
+        "velocity_m_s": 52.31360696435685,
+        "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 101500.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.0819817519609035,
+          "source_specific_enthalpy_j_kg": 3958281.3603453613,
+          "source_specific_entropy_j_kgk": 53457.385950011405,
+          "throat_pressure_pa_abs": 101325.0,
+          "throat_temperature_k": 299.85081827519684,
+          "throat_density_kg_m3": 0.0818811906168217,
+          "throat_specific_enthalpy_j_kg": 3956145.428810143,
+          "throat_mass_flux_kg_m2_s": 5.351712945359748,
+          "choked": false,
+          "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+        }
+      },
+      {
+        "time_s": 0.05,
+        "mass_flow_kg_s": 2.1016127591579473e-05,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 3958281.3603453613,
+        "temperature_k": 300.00005299820754,
+        "density_kg_m3": 0.08184047334386349,
+        "effective_area_m2": 4.908738521234052e-06,
+        "velocity_m_s": 52.31360696435685,
+        "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "provider_source_state": {
+          "source_pressure_pa_abs": 101500.0,
+          "source_temperature_k": 300.0,
+          "source_density_kg_m3": 0.0819817519609035,
+          "source_specific_enthalpy_j_kg": 3958281.3603453613,
+          "source_specific_entropy_j_kgk": 53457.385950011405,
+          "throat_pressure_pa_abs": 101325.0,
+          "throat_temperature_k": 299.85081827519684,
+          "throat_density_kg_m3": 0.0818811906168217,
+          "throat_specific_enthalpy_j_kg": 3956145.428810143,
+          "throat_mass_flux_kg_m2_s": 5.351712945359748,
+          "choked": false,
+          "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+        }
+      }
+    ],
+    "termination_provenance": "operator-declared bounded valve horizon; upstream reserve remains explicit",
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "vertical_handoff": null,
+    "compressible_plane_handoff": null,
+    "failure_opening_diameter_m": 0.0025
+  },
+  "resolved_release_set": null,
+  "resolved_liquid_release": null,
+  "available_mass_kg": 1.0,
+  "source_position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "source_positions_enu_m": null,
+  "weather": {
+    "wind_speed_m_s": 3.0,
+    "wind_from_bearing_deg": 270.0,
+    "measurement_height_m": 10.0,
+    "roughness_m": 0.03,
+    "stability": "D",
+    "relative_humidity": 0.5
+  },
+  "pool": null,
+  "ignition": {
+    "direct_probability": 0.1,
+    "delayed_probability_given_no_direct": 0.2,
+    "explosion_probability_given_delayed": 0.4,
+    "delayed_time_s": 1.0,
+    "burn_back_duration_s": 2.0,
+    "obstructed_energy_fraction": 0.08,
+    "provenance": "declared sensitivity; replace with reviewed facility input",
+    "deflagration_only": true
+  },
+  "domain": {
+    "downwind_bounds_m": [
+      -2.0,
+      80.0
+    ],
+    "crosswind_bounds_m": [
+      -10.0,
+      10.0
+    ],
+    "height_bounds_m": [
+      0.0,
+      12.0
+    ],
+    "cell_size_m": 0.5
+  },
+  "evaluation_times_s": [
+    0.0,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    1.0,
+    2.0,
+    3.0,
+    5.0,
+    10.0,
+    20.0
+  ],
+  "radiative_fraction_range": [
+    0.06,
+    0.12
+  ],
+  "radiation_provenance": "declared LH2 spill/jet sensitivity; replace with reviewed facility input",
+  "annual_frequency_per_year": null,
+  "annual_frequency_provenance": null,
+  "frequency_event": null,
+  "release_termination": {
+    "basis": "synthetic_diagnostic_horizon",
+    "time_s": 0.1,
+    "provenance": "provider packet termination basis and duration; synthetic diagnostic context"
+  },
+  "source_operator": "integrated_transient",
+  "source_duration_mode": "declared",
+  "occupancy_probability": 1.0,
+  "initiation_intensity_per_s": null,
+  "frequency_scope": "single_initiating_event_current_weather",
+  "dispersion_x_max_m": 100.0,
+  "transition_dx_m": 0.05,
+  "transition_x_max_m": 50.0,
+  "n_puff_steps": 80
+}

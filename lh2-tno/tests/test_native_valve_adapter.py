@@ -34,6 +34,35 @@ def test_native_stroke_valve_provider_preserves_response_identity():
     }) == response
 
 
+def test_native_stroke_valve_provider_preserves_source_throat_and_removes_only_auxiliary_opening():
+    response = {
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "data": {
+            "event_id": "valve/event-1",
+            "component_id": "valve-A",
+            "port_id": "gas-out",
+            "steps": [{
+                "provider_source_state": {
+                    "source_specific_entropy_j_kgk": 46876.8,
+                    "throat_pressure_pa_abs": 261197.2,
+                    "throat_density_kg_m3": 0.25,
+                    "throat_specific_enthalpy_j_kg": 3.2e6,
+                    "opening": 1.0,
+                }
+            }],
+        },
+    }
+    provider = _MODULE.NativeStrokeValveProvider(response)
+    strict = provider.export_accident_history({
+        "event_id": "valve/event-1",
+        "component_id": "valve-A",
+        "port_id": "gas-out",
+    })
+    trace = strict["data"]["steps"][0]["provider_source_state"]
+    assert trace["throat_pressure_pa_abs"] == 261197.2
+    assert "opening" not in trace
+
+
 @pytest.mark.parametrize("field,value", [
     ("event_id", "valve/event-2"),
     ("component_id", "valve-B"),

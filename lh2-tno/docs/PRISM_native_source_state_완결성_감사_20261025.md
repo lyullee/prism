@@ -18,14 +18,14 @@
 
 | 구분 | 설비 | 판정 |
 |---|---|---|
-| 기체 | StrokeLimitedCommandedValve | source 상태는 있으나 entropy·throat 상태가 없어 차단 |
+| 기체 | StrokeLimitedCommandedValve | native entropy·throat 상태 제공으로 완결 |
 | 기체 | DynamicVaporizer | 동일 provider 물성 backend로 entropy·throat 상태를 완성 |
 | 기체 | DynamicReliquefier | 동일 provider 물성 backend로 entropy·throat 상태를 완성 |
 | 기체 | VentStack | source 상태는 있으나 entropy·throat 상태가 없어 차단 |
 | 액체·2상 | LayeredTank, DynamicHEMPipe | 현재 기체 adapter 대상 아님; 별도 2상 근접장 계약 필요 |
 | 액체 | MappedPump | 현재 기체 adapter 대상 아님; 액체/지면 액체 handoff 검증 필요 |
 
-따라서 이번 감사의 결과는 **기체 4개 중 압축성 adapter source-state 완결 2개, 차단 2개**다. DynamicVaporizer와 DynamicReliquefier는 native source pressure/temperature/throat pressure를 바탕으로 동일 provider 물성 backend가 entropy와 throat 온도·밀도·엔탈피를 결정적으로 채웠다. 이는 근접장 제트 해나 독립 검증이 아니므로 별도 compressible-plane handoff와 qualified evidence는 여전히 필요하다. StrokeLimitedCommandedValve와 VentStack은 throat pressure가 native 응답에 없어 차단된다.
+따라서 이번 감사의 결과는 **기체 4개 중 압축성 adapter source-state 완결 3개, 차단 1개**다. DynamicVaporizer와 DynamicReliquefier는 native source pressure/temperature/throat pressure를 바탕으로 동일 provider 물성 backend가 entropy와 throat 온도·밀도·엔탈피를 결정적으로 채웠고, StrokeLimitedCommandedValve는 native `ValveResult`가 계산한 throat 압력·질량플럭스와 provider entropy를 사고 export에 보존한다. 이는 근접장 제트 해나 독립 검증이 아니므로 별도 compressible-plane handoff와 qualified evidence는 여전히 필요하다. VentStack은 Darcy 모델 결과에 throat pressure가 없어 차단된다.
 
 재생 명령:
 

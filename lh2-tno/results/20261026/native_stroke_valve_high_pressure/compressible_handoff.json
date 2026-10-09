@@ -1,0 +1,65 @@
+{
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "component_id": "native-stroke-valve-diagnostic",
+  "port_id": "native-stroke-valve-gas-out",
+  "event_id": "native-stroke-valve/accidental-leak-001",
+  "upstream_provider_source_digest": "57dfd590dde1423a183546be579bfd4271b8d3d46d5ecea97b8b628c0eda2e13",
+  "upstream_provider_result_digest": "74883cc1dcb36ffe1c15ce2e454d4a2e2f24917e5db59a075d9ca5faeb74b337",
+  "handoff_provider_source_digest": "9be766ec31289b5590f5121fe44f0e4bd2a8556db3d7259dc800577dec0beeb9",
+  "handoff_provider_result_digest": "0f31ef80f50365d50517e2a9791015b6174f218fd3b72e8e37283f3446a32d03",
+  "handoff_model": "prism-notional-plane-adapter",
+  "handoff_revision": "0.1.0",
+  "evidence_status": "synthetic_diagnostic",
+  "scenario_provenance": "Optional source-state notional-plane diagnostic; provider source/throat states were captured, but provider qualification and independent near-field validation are pending",
+  "handoff": {
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "direction_enu": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "velocity_m_s": 1617.2851481653224,
+    "density_kg_m3": 0.13099049111660158,
+    "temperature_k": 187.41857521101977,
+    "h2_mass_fraction": 1.0,
+    "half_width_m": 0.0011955008356608222,
+    "depth_m": 0.0023910016713216443,
+    "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+    "states": [
+      {
+        "time_s": 0.0,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1617.2851481653224,
+        "density_kg_m3": 0.13099049111660158,
+        "temperature_k": 187.41857521101977,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0011955008356608222,
+        "depth_m": 0.0023910016713216443,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.05,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1617.2851481653224,
+        "density_kg_m3": 0.13099049111660158,
+        "temperature_k": 187.41857521101977,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0011955008356608222,
+        "depth_m": 0.0023910016713216443,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      }
+    ]
+  }
+}

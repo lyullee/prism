@@ -4,10 +4,17 @@
   "provider_model": "lh2dt.valve.StrokeLimitedCommandedValve",
   "provider_export_schema": "prism.external_accident_history.v1",
   "provider_method": "export_accident_history",
-  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
-  "provider_result_digest": "1316c3af58cfdfc2b8a73e4e33ac43a526cbc0409f568b79dcb72acc17097d1b",
-  "native_provider_result_digest": "9828568ae1e0eba62d30c77ed246a71e11769c572dc6f2d9e0590f3fbae70b88",
-  "native_source_trace_preserved_out_of_band": true,
+  "provider_source_digest": "57dfd590dde1423a183546be579bfd4271b8d3d46d5ecea97b8b628c0eda2e13",
+  "provider_result_digest": "74883cc1dcb36ffe1c15ce2e454d4a2e2f24917e5db59a075d9ca5faeb74b337",
+  "native_provider_result_digest": "8b06d8188c3ac2f26b2b925163400d941de8f5c74ed6cc4df898e893c982fc22",
+  "strict_provider_result_digest": "74883cc1dcb36ffe1c15ce2e454d4a2e2f24917e5db59a075d9ca5faeb74b337",
+  "native_source_trace_preserved_in_packet": true,
+  "source_state_completion": {
+    "status": "PROVIDER_NATIVE_SOURCE_THROAT_FIELDS",
+    "interval_count": 2,
+    "inference_performed": false,
+    "provenance": "external native ValveResult throat pressure and provider property state"
+  },
   "provider_packet_promoted": false,
   "phase_basis": "supercritical_gas",
   "termination_basis": "synthetic_diagnostic_horizon",
@@ -24,7 +31,7 @@
   "limitations": [
     "synthetic gas source state, valve geometry and upstream reserve",
     "StrokeLimitedCommandedValve owns no upstream inventory or isolation reliability",
-    "native compact source trace is preserved in provider_response.json but is not promoted into the strict packet until its schema is expanded",
+    "native source entropy and hydraulic throat state are preserved in the strict packet; this is not an expansion/mixing solution",
     "bounded diagnostic horizon leaves explicit reserve and is not a qualified facility frequency case"
   ]
 }

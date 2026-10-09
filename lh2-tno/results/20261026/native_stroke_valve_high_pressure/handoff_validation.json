@@ -1,0 +1,13 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_VALIDATED",
+  "event_id": "native-stroke-valve/accidental-leak-001",
+  "component_id": "native-stroke-valve-diagnostic",
+  "provider_result_digest": "74883cc1dcb36ffe1c15ce2e454d4a2e2f24917e5db59a075d9ca5faeb74b337",
+  "max_mach_number": 2.285507865080773,
+  "handoff_state_count": 2,
+  "handoff_consumed": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The provider-owned gas boundary is conservation-checked. This command does not assign frequency, qualify the provider, or promote facility IR/F-N."
+}

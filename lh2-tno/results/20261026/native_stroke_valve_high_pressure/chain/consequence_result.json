@@ -1,0 +1,1909 @@
+{
+  "ok": true,
+  "data": {
+    "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+    "full_chain_executed": true,
+    "physical_validation_claim": false,
+    "facility_validation": "WITHHELD",
+    "realtime_requirement_demonstrated": false,
+    "stages": [
+      "equipment_resolved_gas_exit",
+      "rainout_and_dynamic_pool",
+      "vector_cryogenic_near_field",
+      "SLABx_dispersion",
+      "finite_inventory_cloud",
+      "ignition_branches",
+      "fire_radiation",
+      "multi_energy_blast_zones",
+      "TNO_human_damage",
+      "conditional_risk"
+    ],
+    "source": {
+      "provider_boundary": {
+        "provider_export_schema": "prism.resolved_release.v1",
+        "component_id": "native-stroke-valve-diagnostic",
+        "port_id": "native-stroke-valve-gas-out",
+        "event_id": "native-stroke-valve/accidental-leak-001",
+        "event_kind": "accidental_leak",
+        "upstream_service": "LH2",
+        "upstream_service_provenance": "native external StrokeLimitedCommandedValve gas export; synthetic upstream state and reserve",
+        "state_owner": "equipment_twin",
+        "discharge_owner": "equipment_twin",
+        "boundary_kind": "resolved_atmospheric_gas_exit",
+        "enthalpy_convention": "static_exit_enthalpy",
+        "property_basis": {
+          "fluid": "Hydrogen",
+          "backend": "CoolProp-HEOS",
+          "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+        },
+        "provider_source_digest": "57dfd590dde1423a183546be579bfd4271b8d3d46d5ecea97b8b628c0eda2e13",
+        "provider_result_digest": "74883cc1dcb36ffe1c15ce2e454d4a2e2f24917e5db59a075d9ca5faeb74b337",
+        "provider_boundary_reference": "lh2dt.StrokeLimitedCommandedValve.export_accident_history native gas outlet",
+        "input_origin": "model_prediction",
+        "position_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "ambient_pressure_pa_abs": 101325.0,
+        "ambient_temperature_k": 288.15,
+        "duration_s": 0.1,
+        "available_mass_kg": 100.0,
+        "cumulative_mass_out_kg": 0.00012111170779661987,
+        "cumulative_static_enthalpy_out_j": 479.60409861580933,
+        "steps": [
+          {
+            "time_s": 0.0,
+            "mass_flow_kg_s": 0.0012111170779661987,
+            "pressure_pa_abs": 101325.0,
+            "specific_enthalpy_j_kg": 3960014.33173742,
+            "temperature_k": 300.1211294686865,
+            "density_kg_m3": 0.08180746853480732,
+            "effective_area_m2": 4.908738521234052e-06,
+            "velocity_m_s": 3015.9440150666587,
+            "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+            "velocity_origin": "mass_continuity_from_declared_area",
+            "provider_source_state": {
+              "source_pressure_pa_abs": 500000.0,
+              "source_temperature_k": 300.0,
+              "source_density_kg_m3": 0.4029121339141301,
+              "source_specific_enthalpy_j_kg": 3960014.33173742,
+              "source_specific_entropy_j_kgk": 46876.852666108665,
+              "throat_pressure_pa_abs": 261197.2645127105,
+              "throat_temperature_k": 248.38032212547427,
+              "throat_density_kg_m3": 0.254537963579241,
+              "throat_specific_enthalpy_j_kg": 3225978.3336829953,
+              "throat_mass_flux_kg_m2_s": 308.40843139413266,
+              "choked": true,
+              "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+            }
+          },
+          {
+            "time_s": 0.05,
+            "mass_flow_kg_s": 0.0012111170779661987,
+            "pressure_pa_abs": 101325.0,
+            "specific_enthalpy_j_kg": 3960014.33173742,
+            "temperature_k": 300.1211294686865,
+            "density_kg_m3": 0.08180746853480732,
+            "effective_area_m2": 4.908738521234052e-06,
+            "velocity_m_s": 3015.9440150666587,
+            "area_provenance": "native StrokeLimitedCommandedValve full-open bore scaled by stroke state",
+            "velocity_origin": "mass_continuity_from_declared_area",
+            "provider_source_state": {
+              "source_pressure_pa_abs": 500000.0,
+              "source_temperature_k": 300.0,
+              "source_density_kg_m3": 0.4029121339141301,
+              "source_specific_enthalpy_j_kg": 3960014.33173742,
+              "source_specific_entropy_j_kgk": 46876.852666108665,
+              "throat_pressure_pa_abs": 261197.2645127105,
+              "throat_temperature_k": 248.38032212547427,
+              "throat_density_kg_m3": 0.254537963579241,
+              "throat_specific_enthalpy_j_kg": 3225978.3336829953,
+              "throat_mass_flux_kg_m2_s": 308.40843139413266,
+              "choked": true,
+              "provider_source_state_provenance": "native upstream entropy and native hydraulic throat result"
+            }
+          }
+        ],
+        "termination_provenance": "operator-declared bounded valve horizon; upstream reserve remains explicit",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "vertical_handoff": null,
+        "compressible_plane_handoff": {
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "direction_enu": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "velocity_m_s": 1617.2851481653224,
+          "density_kg_m3": 0.13099049111660158,
+          "temperature_k": 187.41857521101977,
+          "h2_mass_fraction": 1.0,
+          "half_width_m": 0.0011955008356608222,
+          "depth_m": 0.0023910016713216443,
+          "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+          "states": [
+            {
+              "time_s": 0.0,
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "velocity_m_s": 1617.2851481653224,
+              "density_kg_m3": 0.13099049111660158,
+              "temperature_k": 187.41857521101977,
+              "h2_mass_fraction": 1.0,
+              "half_width_m": 0.0011955008356608222,
+              "depth_m": 0.0023910016713216443,
+              "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+            },
+            {
+              "time_s": 0.05,
+              "direction_enu": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "velocity_m_s": 1617.2851481653224,
+              "density_kg_m3": 0.13099049111660158,
+              "temperature_k": 187.41857521101977,
+              "h2_mass_fraction": 1.0,
+              "half_width_m": 0.0011955008356608222,
+              "depth_m": 0.0023910016713216443,
+              "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+            }
+          ]
+        },
+        "failure_opening_diameter_m": 0.0025
+      },
+      "thermodynamic_checks": [
+        {
+          "time_s": 0.0,
+          "PH_temperature_k": 300.1211294686865,
+          "PH_density_kg_m3": 0.08180746853480732,
+          "quality": -1.0,
+          "mach_number": 2.285507865080773,
+          "static_enthalpy_j_kg": 3960014.33173742,
+          "specific_kinetic_energy_j_kg": 4547959.151008199
+        },
+        {
+          "time_s": 0.05,
+          "PH_temperature_k": 300.1211294686865,
+          "PH_density_kg_m3": 0.08180746853480732,
+          "quality": -1.0,
+          "mach_number": 2.285507865080773,
+          "static_enthalpy_j_kg": 3960014.33173742,
+          "specific_kinetic_energy_j_kg": 4547959.151008199
+        }
+      ],
+      "model_name": "equipment-resolved-compressible-plane-gas-exit",
+      "steps": [
+        {
+          "time_s": 0.0,
+          "total_mass_flow_kg_s": 0.0012111170779661987,
+          "gas_mass_flow_kg_s": 0.0012111170779661987,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "mass_residual_kg_s": 0.0,
+          "real_nozzle": {
+            "pressure_pa": 101325.0,
+            "temperature_k": 300.1211294686865,
+            "density_kg_m3": 0.08180746853480732,
+            "velocity_m_s": 3015.9440150666587,
+            "enthalpy_j_kg": 3960014.33173742,
+            "diameter_m": 0.0025
+          },
+          "fictitious_nozzle": null,
+          "velocity_vector_m_s": [
+            3015.9440150666587,
+            0.0,
+            0.0
+          ],
+          "gas_boundary_temperature_k": 300.1211294686865,
+          "gas_boundary_density_kg_m3": 0.08180746853480732,
+          "gas_boundary_area_m2": 4.908738521234052e-06,
+          "droplet_class_outcomes": [],
+          "discharge_recalculated": false,
+          "provider_handoff": {
+            "time_s": 0.0,
+            "direction_enu": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "velocity_m_s": 1617.2851481653224,
+            "density_kg_m3": 0.13099049111660158,
+            "temperature_k": 187.41857521101977,
+            "h2_mass_fraction": 1.0,
+            "half_width_m": 0.0011955008356608222,
+            "depth_m": 0.0023910016713216443,
+            "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+          }
+        },
+        {
+          "time_s": 0.05,
+          "total_mass_flow_kg_s": 0.0012111170779661987,
+          "gas_mass_flow_kg_s": 0.0012111170779661987,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "mass_residual_kg_s": 0.0,
+          "real_nozzle": {
+            "pressure_pa": 101325.0,
+            "temperature_k": 300.1211294686865,
+            "density_kg_m3": 0.08180746853480732,
+            "velocity_m_s": 3015.9440150666587,
+            "enthalpy_j_kg": 3960014.33173742,
+            "diameter_m": 0.0025
+          },
+          "fictitious_nozzle": null,
+          "velocity_vector_m_s": [
+            3015.9440150666587,
+            0.0,
+            0.0
+          ],
+          "gas_boundary_temperature_k": 300.1211294686865,
+          "gas_boundary_density_kg_m3": 0.08180746853480732,
+          "gas_boundary_area_m2": 4.908738521234052e-06,
+          "droplet_class_outcomes": [],
+          "discharge_recalculated": false,
+          "provider_handoff": {
+            "time_s": 0.05,
+            "direction_enu": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "velocity_m_s": 1617.2851481653224,
+            "density_kg_m3": 0.13099049111660158,
+            "temperature_k": 187.41857521101977,
+            "h2_mass_fraction": 1.0,
+            "half_width_m": 0.0011955008356608222,
+            "depth_m": 0.0023910016713216443,
+            "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+          }
+        }
+      ],
+      "discharge_recalculated": false,
+      "equipment_dynamics_recalculated": false,
+      "mass_out_kg": 0.00012111170779661987,
+      "static_enthalpy_out_j": 479.60409861580933,
+      "compressible_plane_handoff_consumed": true,
+      "energy_scope": "provider static-enthalpy transport checked; kinetic energy reported separately; full source-to-cloud energy not qualified"
+    },
+    "pool": null,
+    "ground_arrival_pulses": [],
+    "source_operator": "integrated_transient",
+    "operator_limited": true,
+    "source_ownership": {
+      "state_owner": "equipment_twin",
+      "discharge_owner": "equipment_twin",
+      "discharge_recalculated": false
+    },
+    "thermodynamic_adapters": {
+      "pool": null
+    },
+    "handoffs": [
+      {
+        "branch": "jet",
+        "handoff": {
+          "handoff_distance_m": 0.01,
+          "duration_s": 0.05,
+          "total_rate_kg_s": 0.0012111170779661987,
+          "h2_mass_fraction": 1.0,
+          "temperature_K": 187.41857521101977,
+          "density_kg_m3": 0.13099049111660158,
+          "velocity_m_s": 1617.2851481653224,
+          "centre_height_m": 1.0,
+          "half_width_m": 0.0011955008356608222,
+          "depth_m": 0.0023910016713216443,
+          "mixture_cp_J_kgK": 14300.0,
+          "source_model": "equipment-resolved-compressible-gas + provider-compressible-plane-handoff",
+          "geometry_closure": "provider-resolved horizontal handoff section"
+        },
+        "handoff_age_s": 0.0,
+        "entry_temperature_k": 300.1211294686865,
+        "entry_density_kg_m3": 0.08180746853480732,
+        "mass_residual_relative": 1.7904167849836293e-16,
+        "transition_mass_residual_kg_s": null,
+        "transition_energy_residual_w": null,
+        "provider_vertical_adapter": false,
+        "provider_compressible_plane_adapter": true
+      },
+      {
+        "branch": "jet",
+        "handoff": {
+          "handoff_distance_m": 0.01,
+          "duration_s": 0.05,
+          "total_rate_kg_s": 0.0012111170779661987,
+          "h2_mass_fraction": 1.0,
+          "temperature_K": 187.41857521101977,
+          "density_kg_m3": 0.13099049111660158,
+          "velocity_m_s": 1617.2851481653224,
+          "centre_height_m": 1.0,
+          "half_width_m": 0.0011955008356608222,
+          "depth_m": 0.0023910016713216443,
+          "mixture_cp_J_kgK": 14300.0,
+          "source_model": "equipment-resolved-compressible-gas + provider-compressible-plane-handoff",
+          "geometry_closure": "provider-resolved horizontal handoff section"
+        },
+        "handoff_age_s": 0.0,
+        "entry_temperature_k": 300.1211294686865,
+        "entry_density_kg_m3": 0.08180746853480732,
+        "mass_residual_relative": 1.7904167849836293e-16,
+        "transition_mass_residual_kg_s": null,
+        "transition_energy_residual_w": null,
+        "provider_vertical_adapter": false,
+        "provider_compressible_plane_adapter": true
+      }
+    ],
+    "dispersion_handoff_fallbacks": [],
+    "cloud_history_unignited_counterfactual": [
+      {
+        "time_s": 0.0,
+        "vapour_emitted_kg": 0.0,
+        "hydrogen_in_domain_kg": 0.0,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.0,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": null,
+        "cloud_support_outside_axes": null,
+        "cloud_packet_diagnostic": {
+          "section_count": 0,
+          "maximum_length_m": null,
+          "maximum_width_m": null,
+          "maximum_depth_m": null,
+          "minimum_h2_mass_fraction": null,
+          "maximum_h2_mass_fraction": null,
+          "provider_mass_in_cloud_min_kg": null,
+          "provider_mass_in_cloud_max_kg": null,
+          "provider_half_length_min_m": null,
+          "provider_half_length_max_m": null,
+          "provider_velocity_min_m_s": null,
+          "provider_velocity_max_m_s": null
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.0,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 0.05,
+        "vapour_emitted_kg": 6.0555853898309935e-05,
+        "hydrogen_in_domain_kg": 6.055585389830992e-05,
+        "hydrogen_outside_domain_kg": 1.3552527156068805e-20,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 1.3446100654748147e-20
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.09157660372815303,
+        "flammable_hydrogen_outside_domain_kg": 1.3446100654748147e-20,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            -0.023509044562785075,
+            0.3344316396329722
+          ],
+          [
+            -0.07243221946177655,
+            0.07243221946177655
+          ],
+          [
+            0.927598415665533,
+            1.0725185824726784
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 1,
+          "maximum_length_m": 0.35794068419575725,
+          "maximum_width_m": 0.1448644389235531,
+          "maximum_depth_m": 0.1449201668071454,
+          "minimum_h2_mass_fraction": 0.0069674952519900545,
+          "maximum_h2_mass_fraction": 0.0069674952519900545,
+          "provider_mass_in_cloud_min_kg": 1.5138963474577484e-05,
+          "provider_mass_in_cloud_max_kg": 1.5138963474577484e-05,
+          "provider_half_length_min_m": 1.0,
+          "provider_half_length_max_m": 1.0,
+          "provider_velocity_min_m_s": 7.192611830423793,
+          "provider_velocity_max_m_s": 7.192611830423793
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.0013270758021164545,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 0.1,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.00012111170779661988,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": -1.3552527156068805e-20,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 2.016915098212222e-20,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.13643416070893022,
+        "flammable_hydrogen_outside_domain_kg": 2.016915098212222e-20,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            -0.02350904456278516,
+            0.49856178030138887
+          ],
+          [
+            -0.10736348880149595,
+            0.10736348880149595
+          ],
+          [
+            0.8810049847326973,
+            1.1199412739911885
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 0.35794068419575736,
+          "maximum_width_m": 0.2147269776029919,
+          "maximum_depth_m": 0.2389362892584911,
+          "minimum_h2_mass_fraction": 0.003258120740471335,
+          "maximum_h2_mass_fraction": 0.006967495251990056,
+          "provider_mass_in_cloud_min_kg": 1.5138963474577479e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 0.1519870647231008,
+          "provider_half_length_max_m": 1.0,
+          "provider_velocity_min_m_s": 3.9595880452957917,
+          "provider_velocity_max_m_s": 7.192611830423795
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.00275062558677784,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 0.2,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.00012111170779661987,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 1.3446100654748147e-20
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.027035862390147235,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            0.33655243962822423,
+            0.8559672067833366
+          ],
+          [
+            -0.13120924672443796,
+            0.13120924672443796
+          ],
+          [
+            0.8299113532137607,
+            1.1741664564220484
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 0.40970870566403916,
+          "maximum_width_m": 0.2624184934488759,
+          "maximum_depth_m": 0.3442551032082876,
+          "minimum_h2_mass_fraction": 0.0013510555601955263,
+          "maximum_h2_mass_fraction": 0.001930284250993578,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 0.17852970370933532,
+          "provider_half_length_max_m": 0.20512596860382884,
+          "provider_velocity_min_m_s": 2.5381373765819175,
+          "provider_velocity_max_m_s": 2.9574978233860865
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.0020230839852718907,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 0.3,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.0001211117077966199,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": -2.710505431213761e-20,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.0,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            0.5402035061607324,
+            1.1402620438341038
+          ],
+          [
+            -0.14519763270452718,
+            0.14519763270452718
+          ],
+          [
+            0.7952302972504355,
+            1.21218553011624
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 0.5154139922226806,
+          "maximum_width_m": 0.29039526540905436,
+          "maximum_depth_m": 0.41695523286580455,
+          "minimum_h2_mass_fraction": 0.0007975848076060958,
+          "maximum_h2_mass_fraction": 0.0010159406347771348,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 0.2317206488258717,
+          "provider_half_length_max_m": 0.2583075292486444,
+          "provider_velocity_min_m_s": 2.152488879824212,
+          "provider_velocity_max_m_s": 2.3023947397577227
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.0024822199884695913,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 0.5,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.00012111170779661987,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 1.3446100654748147e-20
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.00633154942147828,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            0.8473120710392688,
+            1.6442239225395265
+          ],
+          [
+            -0.16655612472992246,
+            0.16655612472992246
+          ],
+          [
+            0.7352566285563756,
+            1.2782692248294953
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 0.7283224168572228,
+          "maximum_width_m": 0.3331122494598449,
+          "maximum_depth_m": 0.5430125962731196,
+          "minimum_h2_mass_fraction": 0.0003764890290166835,
+          "maximum_h2_mass_fraction": 0.00044329510099777516,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 0.33803268198250286,
+          "provider_half_length_max_m": 0.36460110916389443,
+          "provider_velocity_min_m_s": 1.8770166863769429,
+          "provider_velocity_max_m_s": 1.9188030121069133
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.0020730827875327412,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 1.0,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.0001211117077966199,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": -2.710505431213761e-20,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.0,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            1.4837059363363982,
+            2.7991565169887296
+          ],
+          [
+            -0.21397055988194186,
+            0.21397055988194186
+          ],
+          [
+            0.5944768898922028,
+            1.430104927625131
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 1.2578564072208154,
+          "maximum_width_m": 0.4279411197638837,
+          "maximum_depth_m": 0.835628037732928,
+          "minimum_h2_mass_fraction": 0.00011002067276817164,
+          "maximum_h2_mass_fraction": 0.00012219097038458426,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 0.6037466739610101,
+          "provider_half_length_max_m": 0.6303280305612837,
+          "provider_velocity_min_m_s": 1.7336567889370795,
+          "provider_velocity_max_m_s": 1.7382861399960254
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.0011903489980803334,
+        "overlapping_carrier_cells": 0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 2.0,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.0001211117077966199,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": -2.710505431213761e-20,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.0,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            2.681926161387907,
+            5.050584412779488
+          ],
+          [
+            -0.30942922786173055,
+            0.30942922786173055
+          ],
+          [
+            0.32128837543450184,
+            1.7149976013178319
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 2.302361756984794,
+          "maximum_width_m": 0.6188584557234611,
+          "maximum_depth_m": 1.39370922588333,
+          "minimum_h2_mass_fraction": 2.4903119808434727e-05,
+          "maximum_h2_mass_fraction": 2.62805078031145e-05,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 1.1360020001991489,
+          "provider_half_length_max_m": 1.1626526938885564,
+          "provider_velocity_min_m_s": 1.7390666476353336,
+          "provider_velocity_max_m_s": 1.7411065716681524
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.00036748786882284375,
+        "overlapping_carrier_cells": 16,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 3.0,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.0001211117077966199,
+        "hydrogen_outside_domain_kg": 0.0,
+        "mass_residual_kg": -2.710505431213761e-20,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 0.0,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 0.0,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            3.910992729017753,
+            7.354560636215998
+          ],
+          [
+            -0.4080525675405745,
+            0.4080525675405745
+          ],
+          [
+            0.05777051792014121,
+            1.9845158051562466
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 3.384262997312161,
+          "maximum_width_m": 0.816105135081149,
+          "maximum_depth_m": 1.9267452872361053,
+          "minimum_h2_mass_fraction": 9.291784741853047e-06,
+          "maximum_h2_mass_fraction": 9.69491073940159e-06,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 1.6695403613574138,
+          "provider_half_length_max_m": 1.6962475379754642,
+          "provider_velocity_min_m_s": 1.7838592784925147,
+          "provider_velocity_max_m_s": 1.7860020840887951
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 0.00013636107929503597,
+        "overlapping_carrier_cells": 48,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 5.0,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.00012111170779661986,
+        "hydrogen_outside_domain_kg": 1.3552527156068805e-20,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 6.723050327374073e-21,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 4.362569941194201e-05,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            6.518709093971655,
+            12.058840569804216
+          ],
+          [
+            -0.613420143450976,
+            0.613420143450976
+          ],
+          [
+            0.0,
+            2.483234700464926
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 5.475224564787741,
+          "maximum_width_m": 1.226840286901952,
+          "maximum_depth_m": 2.483234700464926,
+          "minimum_h2_mass_fraction": 2.9641684053580556e-06,
+          "maximum_h2_mass_fraction": 3.0365261510118387e-06,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 2.7398611268590574,
+          "provider_half_length_max_m": 2.7666657475580445,
+          "provider_velocity_min_m_s": 1.869431699364909,
+          "provider_velocity_max_m_s": 1.8714837401196034
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 4.3143520671145356e-05,
+        "overlapping_carrier_cells": 110,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 10.0,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.00012111170779661984,
+        "hydrogen_outside_domain_kg": 2.710505431213761e-20,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 1.3446100654748147e-20,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 1.5452926981401267e-05,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            13.647731924712332,
+            24.538100198869007
+          ],
+          [
+            -1.1638265729819244,
+            1.1638265729819244
+          ],
+          [
+            0.0,
+            3.6759068229212253
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 10.824442689984481,
+          "maximum_width_m": 2.3276531459638488,
+          "maximum_depth_m": 3.6759068229212253,
+          "minimum_h2_mass_fraction": 5.338427570228115e-07,
+          "maximum_h2_mass_fraction": 5.417078992222449e-07,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 5.4301021920640915,
+          "provider_half_length_max_m": 5.457077295440061,
+          "provider_velocity_min_m_s": 2.0375852984198115,
+          "provider_velocity_max_m_s": 2.0390075084128867
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 7.732296213129015e-06,
+        "overlapping_carrier_cells": 616,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      },
+      {
+        "time_s": 20.0,
+        "vapour_emitted_kg": 0.00012111170779661987,
+        "hydrogen_in_domain_kg": 0.00012111170779661986,
+        "hydrogen_outside_domain_kg": 1.3552527156068805e-20,
+        "mass_residual_kg": 0.0,
+        "hydrogen_outside_domain_by_axis_kg": {
+          "downwind": 1.3446100654748147e-20,
+          "crosswind": 0.0,
+          "height": 0.0
+        },
+        "outside_domain_mole_fraction_upper_bound": 2.366270333180122e-06,
+        "flammable_hydrogen_outside_domain_kg": 0.0,
+        "outside_domain_flammability_proven": true,
+        "cloud_support_bounds_wind_frame_m": [
+          [
+            29.73844030769186,
+            51.540982901132594
+          ],
+          [
+            -2.370084893385602,
+            2.370084893385602
+          ],
+          [
+            0.0,
+            5.8525710584317014
+          ]
+        ],
+        "cloud_support_outside_axes": {
+          "downwind": false,
+          "crosswind": false,
+          "height": false
+        },
+        "cloud_packet_diagnostic": {
+          "section_count": 2,
+          "maximum_length_m": 21.734767988461833,
+          "maximum_width_m": 4.740169786771204,
+          "maximum_depth_m": 5.8525710584317014,
+          "minimum_h2_mass_fraction": 8.199820746417816e-08,
+          "maximum_h2_mass_fraction": 8.269733001171541e-08,
+          "provider_mass_in_cloud_min_kg": 3.0277926949154968e-05,
+          "provider_mass_in_cloud_max_kg": 3.0277926949154968e-05,
+          "provider_half_length_min_m": 10.849021556466596,
+          "provider_half_length_max_m": 10.876189588053226,
+          "provider_velocity_min_m_s": 2.2520721756138515,
+          "provider_velocity_max_m_s": 2.2529498483123382
+        },
+        "flammable_mass_in_domain_kg": 0.0,
+        "flammable_centroid_enu_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "flammable_bounds_wind_frame_m": null,
+        "maximum_mole_fraction": 1.1831351665981349e-06,
+        "overlapping_carrier_cells": 5158,
+        "ground_liquid_in_flight_kg": 0.0,
+        "outside_domain_inventory_nonzero": false
+      }
+    ],
+    "ignition_branch_probabilities": {
+      "direct_fire": 0.1,
+      "delayed_flash_fire": 0.10800000000000001,
+      "delayed_explosion": 0.07200000000000001,
+      "no_ignition": 0.7200000000000001
+    },
+    "explosion": {
+      "ignition_time_s": 1.0,
+      "flammable_mass_in_domain_kg": 0.0,
+      "cloud_centroid_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "combustion_energy_j": 0.0,
+      "obstructed_energy_fraction": 0.08,
+      "radius_0_3_barg_m": 0.0,
+      "radius_0_1_barg_m": 0.0,
+      "model": "TNO multi-energy strength-10 anchor zones; deflagration only",
+      "outside_domain_h2_kg_at_ignition": 0.0,
+      "outside_domain_h2_kg_by_axis_at_ignition": {
+        "downwind": 0.0,
+        "crosswind": 0.0,
+        "height": 0.0
+      },
+      "outside_domain_mole_fraction_upper_bound_at_ignition": 0.0,
+      "flammable_hydrogen_outside_domain_kg_at_ignition": 0.0,
+      "outside_domain_flammability_proven_at_ignition": true,
+      "cloud_support_bounds_wind_frame_m_at_ignition": [
+        [
+          1.4837059363363982,
+          2.7991565169887296
+        ],
+        [
+          -0.21397055988194186,
+          0.21397055988194186
+        ],
+        [
+          0.5944768898922028,
+          1.430104927625131
+        ]
+      ],
+      "cloud_support_outside_axes_at_ignition": {
+        "downwind": false,
+        "crosswind": false,
+        "height": false
+      },
+      "domain_truncation_reasons": [],
+      "inventory_outside_domain": false,
+      "domain_truncated": false
+    },
+    "mass_ledger": {
+      "released_kg": 0.00012111170779661987,
+      "direct_gas_kg": 0.00012111170779661987,
+      "ground_inflow_kg": 0.0,
+      "pool_evaporated_kg": 0.0,
+      "pool_remaining_kg": 0.0,
+      "pool_domain_escape_kg": 0.0,
+      "ground_liquid_in_flight_kg": 0.0,
+      "pool_numerical_adjustment_kg": 0.0,
+      "end_to_end_residual_kg": 0.0
+    },
+    "receptors": [
+      {
+        "id": "near_worker",
+        "position_enu_m": [
+          2.0,
+          0.0,
+          1.0
+        ],
+        "concentration_history": [
+          {
+            "time_s": 0.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.05,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.1,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.2,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.3,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.5,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 1.0,
+            "h2_mole_fraction": 0.001665567780434729,
+            "h2_volume_percent": 0.1665567780434729
+          },
+          {
+            "time_s": 2.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 3.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 5.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 10.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 20.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          }
+        ],
+        "thermal_flux_direct_low_high": [
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 181.2967032399951,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 181.2967032399951,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ],
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 362.5934064799902,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 362.5934064799902,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ]
+        ],
+        "thermal_flux_delayed_flash_low_high": [
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ],
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ]
+        ],
+        "thermal_direct_low_high": [
+          {
+            "dose": 102.60925689284998,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          },
+          {
+            "dose": 258.55912534674457,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          }
+        ],
+        "thermal_delayed_low_high": [
+          {
+            "dose": 0.0,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          },
+          {
+            "dose": 0.0,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          }
+        ],
+        "flash_fire_envelope_harm": 0.0,
+        "explosion_overpressure_band": "<0.1 barg",
+        "blast_individual_harm": 0.0,
+        "blast_indoor_fraction_of_deaths": 0.0,
+        "branch_harm_low_high": [
+          {
+            "direct_fire": 0.0,
+            "delayed_flash_fire": 0.0,
+            "delayed_explosion": 0.0,
+            "no_ignition": 0.0
+          },
+          {
+            "direct_fire": 0.0,
+            "delayed_flash_fire": 0.0,
+            "delayed_explosion": 0.0,
+            "no_ignition": 0.0
+          }
+        ],
+        "harm_given_observed_release_low_high": [
+          0.0,
+          0.0
+        ],
+        "annual_current_weather_contribution_low_high": null,
+        "first_initiation_harm_probability_low_high": null
+      },
+      {
+        "id": "downwind_worker",
+        "position_enu_m": [
+          10.0,
+          0.0,
+          0.1
+        ],
+        "concentration_history": [
+          {
+            "time_s": 0.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.05,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.1,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.2,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.3,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.5,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 1.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 2.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 3.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 5.0,
+            "h2_mole_fraction": 4.310593908945499e-05,
+            "h2_volume_percent": 0.004310593908945499
+          },
+          {
+            "time_s": 10.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 20.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          }
+        ],
+        "thermal_flux_direct_low_high": [
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 6.034007651885578,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 6.034007651885578,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ],
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 12.068015303771157,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 12.068015303771157,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ]
+        ],
+        "thermal_flux_delayed_flash_low_high": [
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ],
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ]
+        ],
+        "thermal_direct_low_high": [
+          {
+            "dose": 1.098519596663184,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          },
+          {
+            "dose": 2.7680959271159433,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          }
+        ],
+        "thermal_delayed_low_high": [
+          {
+            "dose": 0.0,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          },
+          {
+            "dose": 0.0,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          }
+        ],
+        "flash_fire_envelope_harm": 0.0,
+        "explosion_overpressure_band": "<0.1 barg",
+        "blast_individual_harm": 0.0,
+        "blast_indoor_fraction_of_deaths": 0.0,
+        "branch_harm_low_high": [
+          {
+            "direct_fire": 0.0,
+            "delayed_flash_fire": 0.0,
+            "delayed_explosion": 0.0,
+            "no_ignition": 0.0
+          },
+          {
+            "direct_fire": 0.0,
+            "delayed_flash_fire": 0.0,
+            "delayed_explosion": 0.0,
+            "no_ignition": 0.0
+          }
+        ],
+        "harm_given_observed_release_low_high": [
+          0.0,
+          0.0
+        ],
+        "annual_current_weather_contribution_low_high": null,
+        "first_initiation_harm_probability_low_high": null
+      },
+      {
+        "id": "side_worker",
+        "position_enu_m": [
+          25.0,
+          4.0,
+          1.8
+        ],
+        "concentration_history": [
+          {
+            "time_s": 0.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.05,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.1,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.2,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.3,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 0.5,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 1.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 2.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 3.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 5.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 10.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          },
+          {
+            "time_s": 20.0,
+            "h2_mole_fraction": 0.0,
+            "h2_volume_percent": 0.0
+          }
+        ],
+        "thermal_flux_direct_low_high": [
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.9494963014837899,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.9494963014837899,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ],
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 1.8989926029675799,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 1.8989926029675799,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ]
+        ],
+        "thermal_flux_delayed_flash_low_high": [
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ],
+          [
+            {
+              "time_s": 0.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.05,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 0.1,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 1.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 3.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            },
+            {
+              "time_s": 20.0,
+              "flux_w_m2": 0.0,
+              "flame_contact": false
+            }
+          ]
+        ],
+        "thermal_direct_low_high": [
+          {
+            "dose": 0.09332350394108102,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          },
+          {
+            "dose": 0.23516049413063028,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          }
+        ],
+        "thermal_delayed_low_high": [
+          {
+            "dose": 0.0,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          },
+          {
+            "dose": 0.0,
+            "harm_probability": 0.0,
+            "flame_contact": false
+          }
+        ],
+        "flash_fire_envelope_harm": 0.0,
+        "explosion_overpressure_band": "<0.1 barg",
+        "blast_individual_harm": 0.0,
+        "blast_indoor_fraction_of_deaths": 0.0,
+        "branch_harm_low_high": [
+          {
+            "direct_fire": 0.0,
+            "delayed_flash_fire": 0.0,
+            "delayed_explosion": 0.0,
+            "no_ignition": 0.0
+          },
+          {
+            "direct_fire": 0.0,
+            "delayed_flash_fire": 0.0,
+            "delayed_explosion": 0.0,
+            "no_ignition": 0.0
+          }
+        ],
+        "harm_given_observed_release_low_high": [
+          0.0,
+          0.0
+        ],
+        "annual_current_weather_contribution_low_high": null,
+        "first_initiation_harm_probability_low_high": null
+      }
+    ],
+    "stage_elapsed_ms": {
+      "source": 717.4118000548333,
+      "pool": 0.004100031219422817,
+      "near_field_and_dispersion": 797.5501000182703,
+      "cloud_observation": 82.4494999833405,
+      "fire_explosion_damage_risk": 68.11699992977083
+    },
+    "risk_semantics": {
+      "observed_release": "conditional harm, no initiating-frequency multiplier",
+      "annual": "single initiating event under current weather; not weather-integrated total annual IR",
+      "initiation": "constant supplied hazard; disjoint first-event intervals; remaining consequence horizon; interval-left consequence approximation",
+      "effect_combination": "Frechet union upper bound min(1,sum(harm)) within one event branch; no independence assumed"
+    },
+    "limitations": [
+      "If resolved gas equipment input is selected: the direct atmospheric plane is limited to Mach <=0.3; a higher-speed case requires a provider-resolved compressible_plane_handoff with a conservation-closed carrier section. PH/continuity/static enthalpy are checked, while provider kinetic-energy closure remains unqualified.",
+      "If resolved liquid/two-phase equipment input is selected: provider flash, gas/ground partition and total enthalpy are consumed; airborne liquid and provider flash/droplet physics remain outside this route.",
+      "Outdoor flat ground, non-calm wind, horizontal nozzle or provider-resolved vertical handoff, known leak geometry only.",
+      "A vertical provider exit is accepted only with a declared horizontal handoff section; the handoff is operator-limited and is not a PRISM rotation or independent vertical-jet validation.",
+      "A compressible/underexpanded gas handoff is consumed only at the provider-declared plane; PRISM does not expand, rotate or invent that plane from outlet pressure and velocity.",
+      "Ground deposition uses resolved per-class flight delays; distributed in-flight vapour generation is still collapsed to the terminal gas boundary at release time.",
+      "When a provider packet uses ParaHydrogen, the native DynamicLH2PoolX Hydrogen backend is reached only through the explicit declared pool fluid translation; the translation is operator-limited and does not claim cross-basis validation.",
+      "The gas branch enters a gas-only vector/cryogenic transition; nozzle vertical momentum is represented in fire geometry but not in this transition.",
+      "Rainout footprint is explicitly declared; it is not inferred from a single impact point or fitted to LFL/sensors.",
+      "Finite-volume top-hat reconstruction of native section averages; not the frozen seven-test FFI observation operator or independent transient validation.",
+      "If a sub-millisecond finite-release puff handoff violates SLABx monotonicity, PRISM first retries the same provider-resolved handoff as a finite-clock native puff; only if that backend retry fails does it use an instantaneous packet. The selected method, original error, finite retry error and temporal-shape preservation are recorded in dispersion_handoff_fallbacks.",
+      "Superposed carrier packets preserve H2 mass but overlapping air/temperature/pressure equilibration remains open.",
+      "Ignition probabilities, burn-back duration, radiation range and obstruction fraction are declared scenario inputs.",
+      "Fire does not feed heat back into the unignited pool evaporation model; ground flame deflection is a geometric approximation.",
+      "Quasi-steady flame geometry is used for short releases; flame establishment and propagation are unresolved.",
+      "Radiation uses the explicitly supplied fraction range; unexplained legacy Molina factor 22.7 is not used.",
+      "Blast uses two TNO anchor zones, not a continuous pressure/impulse curve; detonation and DDT unsupported.",
+      "Gas outside the configured spatial domain is explicitly ledgered; its flammable contribution and blast harm are uncomputed.",
+      "Hydrogen source mass accounting closes; total source-to-cloud energy closure and facility calibration are unqualified.",
+      "Numerical connection and timing measurements do not establish IJHE validation or 1-Hz fresh-physics capability."
+    ]
+  },
+  "limitation": "Executable complete diagnostic chain within declared assumptions; engineering/facility validation remains withheld.",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "dependencies": {
+      "CoolProp": "8.0.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1"
+    }
+  },
+  "request_digest": "6f9d88ba270dee7a542abb0c3468abc48aa6307fc836ab56620d5db92dbec0f8",
+  "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
+  "worker_sha256": "f79a8840e7e53e03810438f626caad161583f7a3d49976973b0dd4d99c5b54ac",
+  "adapter_source_digest": "dedc82a4b3e3184d8c9ef0d9fe60c63f5b140ad8cb4c569f18dd31284289c355",
+  "elapsed_ms": 1876.9023000495508,
+  "physical_validation_claim": false,
+  "facility_digest": "665d41408b464f14be4f7ab54b4a4cdf387572e0c081f49334f080192d2955c1"
+}

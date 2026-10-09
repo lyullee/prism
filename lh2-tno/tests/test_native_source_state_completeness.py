@@ -15,23 +15,20 @@ def test_native_source_state_audit_keeps_gas_and_liquid_scope_separate():
     report = _MODULE.build()
     assert report["native_model_count"] == 7
     assert report["gas_model_count"] == 4
-    assert report["gas_models_complete_for_compressible_adapter"] == 2
-    assert report["gas_models_blocked_for_compressible_adapter"] == 2
+    assert report["gas_models_complete_for_compressible_adapter"] == 3
+    assert report["gas_models_blocked_for_compressible_adapter"] == 1
     assert {entry["phase_family"] for entry in report["entries"]} == {"gas", "liquid", "liquid_or_two_phase"}
 
 
 def test_native_source_state_audit_reports_exact_missing_fields():
     report = _MODULE.build()
     valve = next(entry for entry in report["entries"] if entry["model_class"] == "StrokeLimitedCommandedValve")
-    assert valve["compressible_adapter_status"] == "INCOMPLETE"
-    assert valve["missing_required_by_interval"][0]["missing_fields"] == [
-        "source_specific_entropy_j_kgk",
-        "throat_pressure_pa_abs",
-        "throat_density_kg_m3",
-        "throat_specific_enthalpy_j_kg",
-    ]
+    assert valve["compressible_adapter_status"] == "COMPLETE"
+    assert valve["missing_required_by_interval"] == []
     tank = next(entry for entry in report["entries"] if entry["model_class"] == "LayeredTank")
     assert tank["compressible_adapter_status"] == "NOT_APPLICABLE_CURRENT_GAS_ADAPTER"
     vaporizer = next(entry for entry in report["entries"] if entry["model_class"] == "DynamicVaporizer")
     assert vaporizer["compressible_adapter_status"] == "COMPLETE"
     assert vaporizer["missing_required_by_interval"] == []
+    vent = next(entry for entry in report["entries"] if entry["model_class"] == "VentStack")
+    assert vent["compressible_adapter_status"] == "INCOMPLETE"
