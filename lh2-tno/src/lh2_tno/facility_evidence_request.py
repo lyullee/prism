@@ -85,6 +85,9 @@ def build_facility_evidence_request(
             raise ValueError("scope_matrix row family must be a non-empty string")
         family = family.strip()
         status = _status(row)
+        conditional_status = row.get("conditional_status", status)
+        if not isinstance(conditional_status, str) or not conditional_status.strip():
+            conditional_status = status
         not_applicable = status == "NOT_APPLICABLE"
         additional = _FAMILY_REQUIREMENTS.get(
             family,
@@ -94,13 +97,26 @@ def build_facility_evidence_request(
             {
                 "family": family,
                 "current_status": status,
+                "conditional_status": conditional_status,
                 "applicability": "NOT_APPLICABLE" if not_applicable else "APPLICABLE",
                 "evidence_required": not not_applicable,
                 "generated_event_count": row.get("generated_event_count", 0),
                 "executed_case_count": row.get("executed_case_count", 0),
                 "uncomputed_case_count": row.get("uncomputed_case_count", 0),
+                "strict_uncomputed_case_count": row.get("uncomputed_case_count", 0),
+                "conditional_executed_case_count": row.get(
+                    "conditional_executed_case_count", row.get("executed_case_count", 0)
+                ),
+                "conditional_uncomputed_case_count": row.get(
+                    "conditional_uncomputed_case_count", row.get("uncomputed_case_count", 0)
+                ),
                 "operator_limited_case_count": row.get("operator_limited_case_count", 0),
                 "event_ids": list(row.get("event_ids", ())),
+                "strict_blocking_reason": (
+                    None
+                    if not_applicable or status == "EXECUTED"
+                    else f"{family}: {status}"
+                ),
                 "required_provider_evidence": (
                     [] if not_applicable else list(_COMMON_REQUIREMENTS + additional)
                 ),
@@ -144,6 +160,16 @@ def build_facility_evidence_request(
             "event_count": ledger.get("event_count", 0),
             "case_count": ledger.get("case_count", 0),
             "uncomputed_case_count": ledger.get("uncomputed_case_count", 0),
+            "strict_uncomputed_case_count": ledger.get(
+                "conditional_diagnostic_facility_coverage", {}
+            ).get("strict_uncomputed_case_count", ledger.get("uncomputed_case_count", 0)),
+            "conditional_case_count": ledger.get("conditional_case_count", ledger.get("case_count", 0)),
+            "conditional_executed_case_count": ledger.get(
+                "conditional_executed_case_count", 0
+            ),
+            "conditional_uncomputed_case_count": ledger.get(
+                "conditional_uncomputed_case_count", 0
+            ),
             "risk_atom_count": len(ledger.get("risk_atoms", ())) if isinstance(ledger.get("risk_atoms"), Sequence) else 0,
             "facility_total_risk_available": ledger.get("facility_total_risk_available", False),
             "physical_validation_claim": ledger.get("physical_validation_claim", False),

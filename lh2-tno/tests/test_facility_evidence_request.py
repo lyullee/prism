@@ -43,11 +43,34 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     assert report["promotion_gate"]["provider_packet_evidence_schema"] == "prism.provider_packet_evidence.v1"
     assert report["promotion_gate"]["exact_event_component_port_and_digest_match_required"] is True
     assert report["family_requests"][0]["promotion_allowed_now"] is False
+    assert report["family_requests"][0]["conditional_status"] == "PARTIAL"
+    assert report["family_requests"][0]["conditional_executed_case_count"] == 3
+    assert report["family_requests"][0]["conditional_uncomputed_case_count"] == 1
+    assert report["family_requests"][0]["strict_blocking_reason"] == "pipe_hole: PARTIAL"
     assert "pipe upstream/downstream state and isolation response history" in report["family_requests"][0]["required_provider_evidence"]
     assert report["blocking_reasons"] == ["family pipe_hole: PARTIAL"]
     assert report["frequency_policy"]["infer_frequency_from_provider_or_sensor"] is False
     assert {row["component_id"] for row in report["component_requests"]} == {"pipe-01", "vent-01"}
     assert report["excluded_components"] == [{"component_id": "boundary-01", "current_status": "EXCLUDED"}]
+
+
+def test_request_preserves_facility_level_conditional_case_accounting():
+    assessment = _assessment()
+    assessment["facility_risk_ledger"]["conditional_case_count"] = 12
+    assessment["facility_risk_ledger"]["conditional_executed_case_count"] = 10
+    assessment["facility_risk_ledger"]["conditional_uncomputed_case_count"] = 2
+    assessment["facility_risk_ledger"]["conditional_diagnostic_facility_coverage"] = {
+        "strict_uncomputed_case_count": 7,
+    }
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": []},
+    )
+    current = report["current_assessment"]
+    assert current["conditional_case_count"] == 12
+    assert current["conditional_executed_case_count"] == 10
+    assert current["conditional_uncomputed_case_count"] == 2
+    assert current["strict_uncomputed_case_count"] == 7
 
 
 def test_not_applicable_family_does_not_create_a_provider_evidence_request():
