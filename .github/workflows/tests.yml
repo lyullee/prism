@@ -7,6 +7,12 @@ on:
 permissions:
   contents: read
 
+# A rapid series of commits should leave one current validation per ref.
+# Older in-progress checks are superseded by the newest commit.
+concurrency:
+  group: prism-tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     runs-on: ubuntu-latest
