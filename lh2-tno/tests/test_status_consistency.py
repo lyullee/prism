@@ -49,3 +49,15 @@ def test_changed_case_coverage_cannot_pass() -> None:
     report = _report(coverage=coverage)
     assert report["status"] == "INCONSISTENT"
     assert "coverage_gate" in report["blocking_reasons"]
+
+
+def test_changed_combined_chain_cannot_pass() -> None:
+    audit = deepcopy(load_json_object(AUDIT))
+    combined = next(
+        row for row in audit["checks"]
+        if row["name"] == "diagnostic_combined_chain_closure"
+    )
+    combined["evidence"]["combined_diagnostic_closed_event_count"] = 28
+    report = _report(audit=audit)
+    assert report["status"] == "INCONSISTENT"
+    assert "audit_combined_chain_gate" in report["blocking_reasons"]

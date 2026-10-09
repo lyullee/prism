@@ -1236,8 +1236,8 @@
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v13.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 31 checks, 4 blockers; combined 29-event diagnostic chain closure is consumed; facility case packet coverage is 0/34",
-  "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v2.json",
-  "published_status_consistency_status": "CONSISTENT; 15 checks, 0 blockers; dynamic audit-count reconciliation; diagnostic-only and facility IR/F-N remains withheld",
+  "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v3.json",
+  "published_status_consistency_status": "CONSISTENT; 16 checks, 0 blockers; dynamic audit-count and combined-chain reconciliation; diagnostic-only and facility IR/F-N remains withheld",
   "ijhe_completion_audit_latest_check_count": 31,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [

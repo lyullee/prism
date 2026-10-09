@@ -83,6 +83,20 @@ def build_status_consistency_report(
         if isinstance(audit_case_check, Mapping)
         else {}
     )
+    audit_combined_chain_check = next(
+        (
+            row
+            for row in audit_checks
+            if isinstance(row, Mapping)
+            and row.get("name") == "diagnostic_combined_chain_closure"
+        ),
+        None,
+    ) if isinstance(audit_checks, Sequence) and not isinstance(audit_checks, (str, bytes)) else None
+    audit_combined_chain_evidence = (
+        audit_combined_chain_check.get("evidence", {})
+        if isinstance(audit_combined_chain_check, Mapping)
+        else {}
+    )
     audit_check_count = len(audit_checks or ())
     audit_blocking_reason_count = len(audit.get("blocking_reasons", ()))
     # The completion audit grows as new evidence gates are added.  Compare
@@ -112,6 +126,54 @@ def build_status_consistency_report(
             "qualified_provider_case_count": audit_case_evidence.get(
                 "qualified_provider_case_count"
             ),
+        },
+    )
+    _check(
+        checks,
+        "audit_combined_chain_gate",
+        audit_combined_chain_check is not None
+        and audit_combined_chain_check.get("status") == "PASS"
+        and audit_combined_chain_check.get("diagnostic_only") is True
+        and audit_combined_chain_evidence.get("schema_version")
+        == "prism.facility_combined_chain_closure_audit.v1"
+        and audit_combined_chain_evidence.get("status")
+        == "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED"
+        and audit_combined_chain_evidence.get("declared_event_count") == 29
+        and audit_combined_chain_evidence.get("packet_subset_closed_event_count") == 24
+        and audit_combined_chain_evidence.get("vertical_handoff_closed_event_count") == 5
+        and audit_combined_chain_evidence.get("combined_diagnostic_closed_event_count") == 29
+        and audit_combined_chain_evidence.get("event_count_matches_declared_scope") is True
+        and audit_combined_chain_evidence.get("mismatch_event_ids") == []
+        and audit_combined_chain_evidence.get("facility_ir_aggregate_closed") is True
+        and audit_combined_chain_evidence.get("facility_fn_aggregate_closed") is True
+        and audit_combined_chain_evidence.get("qualified_provider_packet_count") == 0
+        and audit_combined_chain_evidence.get("facility_qra_claim") is False,
+        {
+            "status": (
+                audit_combined_chain_check.get("status")
+                if isinstance(audit_combined_chain_check, Mapping)
+                else None
+            ),
+            "diagnostic_only": (
+                audit_combined_chain_check.get("diagnostic_only")
+                if isinstance(audit_combined_chain_check, Mapping)
+                else None
+            ),
+            "declared_event_count": audit_combined_chain_evidence.get("declared_event_count"),
+            "packet_subset_closed_event_count": audit_combined_chain_evidence.get(
+                "packet_subset_closed_event_count"
+            ),
+            "vertical_handoff_closed_event_count": audit_combined_chain_evidence.get(
+                "vertical_handoff_closed_event_count"
+            ),
+            "combined_diagnostic_closed_event_count": audit_combined_chain_evidence.get(
+                "combined_diagnostic_closed_event_count"
+            ),
+            "mismatch_event_ids": audit_combined_chain_evidence.get("mismatch_event_ids"),
+            "qualified_provider_packet_count": audit_combined_chain_evidence.get(
+                "qualified_provider_packet_count"
+            ),
+            "facility_qra_claim": audit_combined_chain_evidence.get("facility_qra_claim"),
         },
     )
 
