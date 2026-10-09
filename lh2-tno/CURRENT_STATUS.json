@@ -3078,5 +3078,15 @@
   "facility_assessment_case_packet_coverage_gate_frequency_inference": false,
   "facility_assessment_case_packet_coverage_gate_physical_validation_claim": false,
   "facility_assessment_case_packet_coverage_gate_ir_fn_promotion": "requires full exact case coverage plus independent scope and validation gates",
-  "facility_assessment_case_packet_coverage_gate_test_status": "3 gate tests plus status-ledger consistency; full portable suite 562 passed"
+  "facility_assessment_case_packet_coverage_gate_test_status": "3 gate tests plus status-ledger consistency; full portable suite 562 passed",
+  "realtime_facility_risk_handoff_implemented": true,
+  "realtime_facility_risk_handoff_module": "src/lh2_tno/service.py",
+  "realtime_facility_risk_handoff_schema": "prism.realtime_facility_risk_handoff.v1",
+  "realtime_facility_risk_handoff_api": "build_realtime_facility_risk_handoff(snapshot)",
+  "realtime_facility_risk_handoff_record": "docs/PRISM_실시간_시설위험_handoff_개발기록_20261010.md",
+  "realtime_facility_risk_handoff_status": "DIAGNOSTIC_ONLY_LEDGER_PROMOTION_WITHHELD",
+  "realtime_facility_risk_handoff_mergeable": false,
+  "realtime_facility_risk_handoff_qualified_provider_evaluation": false,
+  "realtime_facility_risk_handoff_physical_validation_claim": false,
+  "realtime_facility_risk_handoff_test_status": "handoff preservation/promotion-block and malformed-snapshot tests; local consequence-service subset 42 passed"
 }

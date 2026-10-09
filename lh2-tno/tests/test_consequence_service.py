@@ -7,7 +7,7 @@ from lh2_tno.frequency import FrequencyAsset, FrequencyPlan, generate_events
 from lh2_tno.service import (ConsequenceService, FacilityRealtimeBinding,
     FacilityRealtimeConsequenceMonitor, RealtimeConsequenceMonitor,
     RealtimeFrequencyBinding,
-    RealtimePopulationBinding,
+    RealtimePopulationBinding, build_realtime_facility_risk_handoff,
     request_from_equipment_resolver, request_from_telemetry,
     validate_equipment_process_state)
 from lh2_tno.telemetry import Frame,TagMapping,TelemetryNormalizer,Value
@@ -849,6 +849,59 @@ def test_facility_row_batch_combines_literature_ir_and_conditional_fn(tmp_path):
     assert aggregate['facility_fn_available'] is False
     assert aggregate['facility_annual_risk_available'] is False
     assert aggregate['frequency_learning'] is False
+
+
+def test_realtime_facility_handoff_preserves_snapshot_but_blocks_ledger_promotion(tmp_path):
+    base, frame = _facility_binding(tmp_path, 'storage-tank-01')
+    binding = FacilityRealtimeBinding(
+        component_id=base.component_id,
+        template=base.template,
+        monitor=RealtimeConsequenceMonitor(
+            ConsequenceService(RiskPipeline(tmp_path)), period_s=1.0
+        ),
+        normalizer=base.normalizer,
+        pressure_tag=base.pressure_tag,
+        temperature_tag=base.temperature_tag,
+        frequency_binding=RealtimeFrequencyBinding(
+            event_id='storage-tank-hole-01', asset_id='storage-tank-01',
+            initiating_frequency_per_year=1.0e-3,
+            annual_condition_probability=0.5,
+            release_branch_probability=0.8,
+            occupancy_probability=0.25,
+            provenance='reviewed diagnostic literature frequency',
+            source_digest='1' * 64,
+            frequency_p05_per_year=5.0e-4,
+            frequency_p95_per_year=2.0e-3,
+        ),
+    )
+    snapshot = FacilityRealtimeConsequenceMonitor(
+        {'storage-tank-01': binding},
+        facility_id='generic-outdoor-lh2',
+        population_binding=RealtimePopulationBinding(
+            persons_by_receptor={'worker-01': 10.0},
+            provenance='declared diagnostic population',
+            source_digest='2' * 64,
+        ),
+    ).update_from_frames({'storage-tank-01': frame}, now_s=100.2)
+
+    handoff = build_realtime_facility_risk_handoff(snapshot)
+
+    assert handoff['schema'] == 'prism.realtime_facility_risk_handoff.v1'
+    assert handoff['handoff_status'] == 'DIAGNOSTIC_CURRENT_WEATHER_SNAPSHOT'
+    assert len(handoff['source_snapshot_digest']) == 64
+    assert handoff['available_realtime_risk_atom_component_count'] == 1
+    assert handoff['realtime_risk_atoms'][0]['ledger_compatible'] is False
+    assert handoff['facility_ledger_merge']['mergeable'] is False
+    assert handoff['facility_ledger_merge']['facility_annual_ir_available'] is False
+    assert handoff['facility_ledger_merge']['facility_fn_available'] is False
+    assert 'missing_annual_condition_id' in handoff['component_rows'][0]['ledger_blockers']
+    assert handoff['evidence_boundary']['physical_validation_claim'] is False
+    assert handoff['evidence_boundary']['qualification_evaluated_by_realtime_monitor'] is False
+
+
+def test_realtime_facility_handoff_rejects_malformed_snapshot():
+    with pytest.raises(ValueError, match='missing required fields'):
+        build_realtime_facility_risk_handoff({'status': 'ACCEPTED'})
 
 
 def test_realtime_population_binding_rejects_invalid_population_source_digest():

@@ -988,6 +988,30 @@ basis, 차단 상태, 재고 상태, 잔여 질량과 상태별 개수를 함께
 중복 계산되지 않습니다. 방출 경로가 없는 설비나 실패한 설비는 `WITHHELD`로
 남고, 누락된 방출을 0 kg 또는 정상 차단으로 바꾸지 않습니다.
 
+실시간 snapshot을 기존 시설 위험 장부로 넘길 때는
+`build_realtime_facility_risk_handoff(snapshot)`을 사용합니다. 이 함수는 원본
+snapshot의 digest, 설비별 frame·provider 방출경로·현재 기상 IR·빈도 민감도·처리시간을
+그대로 보존한 `prism.realtime_facility_risk_handoff.v1` 패킷을 만듭니다. 동시에
+실시간 결과를 시설 연간 IR/F-N으로 승격하지 않도록 `mergeable=false`를 고정합니다.
+실시간 risk atom에는 연간 기상 ID, 방출 branch ID, 점화 branch별 피해, 기대 사망수
+폐합이 없기 때문입니다. 이 경계에서 PRISM은 ID를 임의로 만들거나 전체 피해를
+점화 branch에 나누지 않습니다. 이후 별도 검토 캠페인이 branch별 consequence와
+적격 provider·독립 물리검증 증거를 채운 경우에만 일반 시설 ledger를 새로 만들 수
+있습니다.
+
+```python
+from lh2_tno.service import build_realtime_facility_risk_handoff
+
+snapshot = facility_monitor.update_from_frames(frames, now_s=100.2)
+handoff = build_realtime_facility_risk_handoff(snapshot)
+assert handoff["facility_ledger_merge"]["mergeable"] is False
+print(handoff["source_snapshot_digest"])
+```
+
+따라서 이 패킷은 디지털트윈 운영 화면과 후속 시설 캠페인의 입력 증거를 연결하는
+표준화된 중간 결과이며, 빠진 사고·기상·점화 branch를 0으로 간주한 시설 위험도는
+아닙니다.
+
 표 형식 입력에서 provider resolver까지 연결하는 최소 경로는 `update_from_rows()` → `frame_from_row()` → `TelemetryNormalizer` → 설비 상태 → provider 방출 경계 → consequence 결과 → 시설 장부입니다. 이 경로는 `tests/test_consequence_service.py`의 `test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence`에서 상태 압력, provider 사고 ID, 방출시간, 종료 상태, 잔여 재고를 함께 검증합니다. 예시 provider가 합성이라면 이 테스트가 통과해도 qualified 실제 설비 packet이나 시설 연간 IR/F/N이 열리지는 않습니다.
 
 행 배치에 각 설비의 `RealtimeFrequencyBinding`과 시설의 `RealtimePopulationBinding`을 함께 선언하면 같은 경로에서 설비별 현재 기상 IR을 합산하고, 수용점 인구를 곱한 조건부 expected-death F/N 기여와 p05/발표값/p95 빈도 재가중을 계산합니다. 이 값은 현재 배치의 조건부 진단 결과이며 `facility_annual_risk_available=false`, `facility_fn_available=false`를 유지합니다. 센서로 빈도를 학습하거나 누락 설비를 0으로 처리하지 않습니다.

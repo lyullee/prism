@@ -1987,3 +1987,169 @@ class FacilityRealtimeConsequenceMonitor:
             row_components == declared and metadata_components == declared
         )
         return result
+
+
+def build_realtime_facility_risk_handoff(snapshot: Mapping[str, object]) -> dict[str, object]:
+    """Export one realtime snapshot as a fail-closed facility handoff packet.
+
+    The realtime monitor produces a *conditional current-weather* view.  The
+    offline facility ledger, in contrast, requires an annual-condition ID,
+    release-branch ID, ignition-branch ID, branch-specific harm, and closed
+    expected-death endpoints for every risk atom.  These are different
+    contracts.  This exporter preserves the realtime evidence and makes the
+    missing ledger fields explicit; it never manufactures IDs, distributes a
+    total harm across ignition branches, or promotes the snapshot to annual
+    facility IR/F-N.
+
+    The returned packet is intentionally not accepted by
+    ``merge_facility_campaign_results``.  A separate reviewed campaign must
+    supply the missing scenario metadata and branch-specific consequence
+    evidence before the normal facility ledger can be built.
+    """
+    if not isinstance(snapshot, Mapping):
+        raise TypeError("snapshot must be a mapping")
+    required = {"facility_id", "status", "component_count", "components", "aggregate"}
+    missing = sorted(key for key in required if key not in snapshot)
+    if missing:
+        raise ValueError(
+            "realtime snapshot is missing required fields: " + ", ".join(missing)
+        )
+    components = snapshot.get("components")
+    aggregate = snapshot.get("aggregate")
+    if not isinstance(components, Mapping):
+        raise ValueError("realtime snapshot components must be a mapping")
+    if not isinstance(aggregate, Mapping):
+        raise ValueError("realtime snapshot aggregate must be a mapping")
+    component_count = snapshot.get("component_count")
+    if (
+        isinstance(component_count, bool)
+        or not isinstance(component_count, int)
+        or component_count < 1
+        or component_count != len(components)
+    ):
+        raise ValueError("realtime snapshot component_count does not match components")
+    if any(not isinstance(key, str) or not key.strip() for key in components):
+        raise ValueError("realtime snapshot component ids must be nonempty strings")
+
+    # Keep the original snapshot immutable for the caller while retaining a
+    # reproducible digest of exactly what crossed this boundary.
+    snapshot_copy = copy.deepcopy(dict(snapshot))
+    snapshot_digest = canonical_digest(snapshot_copy)
+    component_rows: list[dict[str, object]] = []
+    realtime_risk_atoms: list[dict[str, object]] = []
+    available_component_count = 0
+    for component_id in sorted(components):
+        entry = components[component_id]
+        if not isinstance(entry, Mapping):
+            raise ValueError(f"component entry must be a mapping: {component_id}")
+        risk = entry.get("risk")
+        risk_atom = risk.get("risk_atom") if isinstance(risk, Mapping) else None
+        risk_status = risk.get("status") if isinstance(risk, Mapping) else None
+        path = entry.get("equipment_release_path")
+        row = {
+            "component_id": component_id,
+            "component_status": entry.get("status"),
+            "frame_digest": entry.get("frame_digest"),
+            "mapping_digest": entry.get("mapping_digest"),
+            "risk_status": risk_status,
+            "risk_atom_digest": (
+                canonical_digest(risk_atom) if isinstance(risk_atom, Mapping) else None
+            ),
+            "release_path_status": (
+                path.get("status") if isinstance(path, Mapping) else None
+            ),
+            "ledger_compatible": False,
+            "ledger_blockers": [
+                "missing_annual_condition_id",
+                "missing_release_branch_id",
+                "missing_ignition_branch_id",
+                "missing_branch_specific_receptor_harm",
+                "expected_deaths_not_closed",
+            ],
+        }
+        if isinstance(risk_atom, Mapping):
+            available_component_count += 1
+            realtime_risk_atoms.append(
+                {
+                    "component_id": component_id,
+                    "scope": "CURRENT_WEATHER_CONDITIONAL_REALTIME",
+                    "atom": copy.deepcopy(dict(risk_atom)),
+                    "ledger_compatible": False,
+                    "reason": (
+                        "the realtime atom contains one observed-release harm map; "
+                        "it is not a branch-complete facility ledger atom"
+                    ),
+                }
+            )
+        component_rows.append(row)
+
+    current_weather_ir_available = bool(aggregate.get("current_weather_ir_available"))
+    conditional_fn_available = bool(
+        aggregate.get("conditional_current_weather_expected_death_fn_available")
+    )
+    handoff_status = (
+        "DIAGNOSTIC_CURRENT_WEATHER_SNAPSHOT"
+        if snapshot.get("status") == "ACCEPTED" and current_weather_ir_available
+        else "REJECTED_OR_WITHHELD_REALTIME_SNAPSHOT"
+    )
+    return {
+        "schema": "prism.realtime_facility_risk_handoff.v1",
+        "handoff_status": handoff_status,
+        "facility_id": str(snapshot.get("facility_id")),
+        "source_snapshot_status": snapshot.get("status"),
+        "source_snapshot_digest": snapshot_digest,
+        "source_snapshot": snapshot_copy,
+        "component_count": component_count,
+        "available_realtime_risk_atom_component_count": available_component_count,
+        "component_rows": component_rows,
+        "realtime_risk_atoms": realtime_risk_atoms,
+        "conditional_current_weather": {
+            "ir_available": current_weather_ir_available,
+            "annual_ir_low_high": copy.deepcopy(
+                aggregate.get("current_weather_annual_ir_low_high")
+            ),
+            "frequency_sensitivity_ir_low_high": copy.deepcopy(
+                aggregate.get("current_weather_frequency_sensitivity_ir_low_high")
+            ),
+            "expected_death_fn_available": conditional_fn_available,
+            "expected_death_fn_low_high": copy.deepcopy(
+                aggregate.get("conditional_current_weather_expected_death_fn_low_high")
+            ),
+        },
+        "facility_ledger_merge": {
+            "status": "WITHHELD_REALTIME_SNAPSHOT_NOT_FACILITY_LEDGER",
+            "mergeable": False,
+            "reason": (
+                "a realtime current-weather snapshot does not provide the complete "
+                "annual weather, release, ignition, population, and branch-specific "
+                "harm ledger required by facility QRA"
+            ),
+            "required_inputs": [
+                "annual_condition_id_and_probability",
+                "release_branch_id_and_probability",
+                "ignition_branch_id_and_probability",
+                "branch_specific_receptor_harm_low_high",
+                "expected_deaths_low_high_closed_over_receptors",
+                "qualified_provider_packet_evidence",
+                "independent_physical_validation_evidence",
+            ],
+            "frequency_inference_performed": False,
+            "frequency_learning": False,
+            "facility_annual_ir_available": False,
+            "facility_fn_available": False,
+            "facility_ir_fn_promotion": False,
+        },
+        "evidence_boundary": {
+            "qualified_provider_packet_count": None,
+            "qualification_evaluated_by_realtime_monitor": False,
+            "physical_validation_claim": False,
+            "frequency_source": "copied from explicit realtime binding when present",
+            "release_inference": bool(aggregate.get("release_inference", False)),
+            "processing_time": copy.deepcopy(aggregate.get("processing_time")),
+            "facility_time_window": copy.deepcopy(aggregate.get("facility_time_window")),
+            "interpretation": (
+                "handoff preserves an auditable digital-twin snapshot for a later "
+                "reviewed facility campaign; it is not an annual facility risk result"
+            ),
+        },
+    }
