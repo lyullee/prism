@@ -466,6 +466,21 @@ def build_ijhe_completion_audit(
         case_count = packet_campaign.get("case_count")
         chain_count = packet_campaign.get("chain_executed_case_count")
         failed_count = packet_campaign.get("failed_case_count")
+        packet_identity_count = packet_campaign.get("packet_identity_case_count")
+        packet_digest_count = packet_campaign.get("packet_digest_case_count")
+        uncomputed_count = packet_campaign.get("uncomputed_case_count", 0)
+        uncomputed_without_identity_count = packet_campaign.get(
+            "uncomputed_without_packet_identity_case_count", 0
+        )
+        partial_packet_scope = (
+            isinstance(packet_identity_count, int)
+            and isinstance(packet_digest_count, int)
+            and isinstance(uncomputed_count, int)
+            and isinstance(uncomputed_without_identity_count, int)
+            and packet_identity_count + uncomputed_without_identity_count == case_count
+            and packet_digest_count == packet_identity_count
+            and uncomputed_without_identity_count == uncomputed_count
+        )
         campaign_valid = (
             packet_campaign.get("schema_version") == "prism.native_lh2dt_packet_campaign_execution.v1"
             and packet_campaign.get("status") == "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED"
@@ -474,10 +489,9 @@ def build_ijhe_completion_audit(
             and case_count == event_count
             and isinstance(chain_count, int)
             and isinstance(failed_count, int)
-            and chain_count + failed_count == case_count
+            and chain_count + failed_count + uncomputed_count == case_count
             and packet_campaign.get("packet_identity_consumed") is True
-            and packet_campaign.get("packet_identity_case_count") == case_count
-            and packet_campaign.get("packet_digest_case_count") == case_count
+            and partial_packet_scope
             and isinstance(packet_campaign.get("failed_cases"), list)
             and len(packet_campaign.get("failed_cases")) == failed_count
             and packet_campaign.get("facility_total_risk_available") is False
@@ -512,6 +526,8 @@ def build_ijhe_completion_audit(
                     "chain_executed_case_count": chain_count,
                     "packet_identity_case_count": packet_campaign.get("packet_identity_case_count"),
                     "packet_digest_case_count": packet_campaign.get("packet_digest_case_count"),
+                    "uncomputed_case_count": uncomputed_count,
+                    "uncomputed_without_packet_identity_case_count": uncomputed_without_identity_count,
                     "packet_identity_consumed": packet_campaign.get("packet_identity_consumed"),
                     "operator_limited_case_count": packet_campaign.get("operator_limited_case_count"),
                     "failed_case_count": failed_count,

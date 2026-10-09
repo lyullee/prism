@@ -36,6 +36,14 @@ def build_native_packet_campaign_execution_ledger(
         row for row in cases
         if isinstance(row, Mapping) and isinstance(row.get("provider_packet_identity"), Mapping)
     ]
+    missing_identity_cases = [
+        row for row in cases
+        if isinstance(row, Mapping) and not isinstance(row.get("provider_packet_identity"), Mapping)
+    ]
+    uncomputed_without_identity_cases = [
+        row for row in missing_identity_cases
+        if str(row.get("status")) == "UNCOMPUTED"
+    ]
     digest_cases = [
         row for row in identity_cases
         if row["provider_packet_identity"].get("provider_source_digests")
@@ -62,8 +70,8 @@ def build_native_packet_campaign_execution_ledger(
     provider_packet_promoted = result.get("provider_packet_promoted") is True
     packet_identity_consumed = (
         bool(cases)
-        and len(identity_cases) == len(cases)
-        and len(digest_cases) == len(cases)
+        and len(identity_cases) + len(uncomputed_without_identity_cases) == len(cases)
+        and len(digest_cases) == len(identity_cases)
         and route_ids == result_event_ids == case_ids
     )
     result_total_ir = result.get("total_facility_annual_ir_low_high")
@@ -90,6 +98,12 @@ def build_native_packet_campaign_execution_ledger(
         "chain_executed_case_count": chain_executed_count,
         "packet_identity_case_count": len(identity_cases),
         "packet_digest_case_count": len(digest_cases),
+        "uncomputed_case_count": sum(
+            str(row.get("status")) == "UNCOMPUTED"
+            for row in cases
+            if isinstance(row, Mapping)
+        ),
+        "uncomputed_without_packet_identity_case_count": len(uncomputed_without_identity_cases),
         "packet_identity_consumed": packet_identity_consumed,
         "route_event_set_matches_result": route_ids == result_event_ids,
         "route_event_set_matches_cases": route_ids == case_ids,
@@ -110,14 +124,18 @@ def build_native_packet_campaign_execution_ledger(
         "facility_qra_claim": result.get("complete_facility_qra_claim") is True,
         "physical_validation_claim": result.get("physical_validation_claim") is True,
         "rebind_provenance_status": provenance.get("schema_version") if isinstance(provenance, Mapping) else None,
-        "compressible_handoff_rebind": {
-            "consumed": handoff_rebind is not None and handoff_rebind.get("compressible_plane_handoff_consumed") is True,
-            "event_id": handoff_rebind.get("event_id") if handoff_rebind else None,
-            "original_provider_result_digest": handoff_rebind.get("original_provider_result_digest") if handoff_rebind else None,
-            "handoff_provider_result_digest": handoff_rebind.get("handoff_provider_result_digest") if handoff_rebind else None,
-            "physical_validation_claim": handoff_rebind.get("physical_validation_claim") if handoff_rebind else False,
-            "frequency_inference": handoff_rebind.get("frequency_inference") if handoff_rebind else False,
-        },
+        "compressible_handoff_rebind": (
+            {
+                "consumed": handoff_rebind.get("compressible_plane_handoff_consumed") is True,
+                "event_id": handoff_rebind.get("event_id"),
+                "original_provider_result_digest": handoff_rebind.get("original_provider_result_digest"),
+                "handoff_provider_result_digest": handoff_rebind.get("handoff_provider_result_digest"),
+                "physical_validation_claim": handoff_rebind.get("physical_validation_claim", False),
+                "frequency_inference": handoff_rebind.get("frequency_inference", False),
+            }
+            if handoff_rebind is not None
+            else None
+        ),
         "diagnostic_only": True,
         "policy": {
             "provider_packet_promoted": provider_packet_promoted,

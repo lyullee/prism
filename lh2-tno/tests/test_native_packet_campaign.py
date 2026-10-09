@@ -61,3 +61,33 @@ def test_native_packet_campaign_records_explicit_compressible_handoff_rebind():
     assert ledger["compressible_handoff_rebind"]["consumed"] is True
     assert ledger["compressible_handoff_rebind"]["event_id"] == "event-1"
     assert ledger["compressible_handoff_rebind"]["physical_validation_claim"] is False
+
+
+def test_native_packet_campaign_keeps_uncomputed_cases_without_packet_identity():
+    campaign = {
+        "id": "campaign-partial",
+        "event_routes": [{"event_id": "event-1"}, {"event_id": "event-2"}],
+    }
+    result = {
+        "events": [{"id": "event-1"}, {"id": "event-2"}],
+        "cases": [
+            {
+                "event_id": "event-1",
+                "status": "EXECUTED_OPERATOR_LIMITED",
+                "provider_packet_identity": {
+                    "provider_source_digests": ["source"],
+                    "provider_result_digests": ["result"],
+                },
+            },
+            {"event_id": "event-2", "status": "UNCOMPUTED", "reason": "provider packet missing"},
+        ],
+        "risk_atoms": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    ledger = build_native_packet_campaign_execution_ledger(campaign, result)
+    assert ledger["status"] == "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED"
+    assert ledger["packet_identity_consumed"] is True
+    assert ledger["packet_identity_case_count"] == 1
+    assert ledger["uncomputed_case_count"] == 1
+    assert ledger["uncomputed_without_packet_identity_case_count"] == 1

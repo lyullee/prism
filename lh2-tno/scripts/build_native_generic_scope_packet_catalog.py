@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import json
 import math
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -176,6 +177,47 @@ def _load_packet(spec: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     raise ValueError("exporter produced neither resolved_release.json nor resolved_release_set.json")
 
 
+def _replace_flag(command: list[str], flag: str, value: str) -> list[str]:
+    """Return a command with one explicit CLI flag replaced."""
+
+    result = list(command)
+    try:
+        index = result.index(flag)
+    except ValueError as error:
+        raise ValueError(f"exporter command has no {flag} flag") from error
+    if index + 1 >= len(result):
+        raise ValueError(f"exporter command has no value after {flag}")
+    result[index + 1] = value
+    return result
+
+
+def _retry_commands(spec: dict[str, Any]) -> list[list[str]]:
+    """Return safe numerical retries without changing the physical opening.
+
+    The external LayeredTank and DynamicHEMPipe providers can become unstable
+    at the largest declared openings with the default diagnostic clock.  The
+    retries shorten the provider horizon and refine its integration step while
+    preserving the event's exact opening diameter/area.  No retry is supplied
+    for MappedPump: its failure is a hydraulic map-to-valve mismatch and must
+    be resolved with a reviewed pump map or feed boundary.
+    """
+
+    command = list(spec["command"])
+    if spec["component_id"] == "storage-tank-01":
+        # The 1.27 m generic tank is intentionally much larger than the
+        # external diagnostic vessel.  Large openings need a micro-step to
+        # keep the provider's positive-mass/EOS solve finite.
+        retry = _replace_flag(command, "--time-step-s", "0.000001")
+        retry = _replace_flag(retry, "--target-release-kg", "0.00001")
+        retry = _replace_flag(retry, "--max-intervals", "256")
+        return [retry]
+    if spec["component_id"] == "liquid-transfer-line-01" and float(spec["opening_diameter_m"]) >= 0.02:
+        retry = _replace_flag(command, "--duration-s", "0.0001")
+        retry = _replace_flag(retry, "--time-step-s", "0.00001")
+        return [retry]
+    return []
+
+
 def _validate_packet(spec: dict[str, Any], kind: str, packet: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     if kind == "two_sided":
@@ -217,7 +259,25 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
     failures: list[dict[str, Any]] = []
     for event_index, event in enumerate(events):
         spec = _spec(event, manifest, output_dir, args.lh2dt_root.resolve(), event_index=event_index)
-        completed = subprocess.run(spec["command"], cwd=ROOT, capture_output=True, text=True, check=False)
+        attempts: list[dict[str, Any]] = []
+        commands = [spec["command"], *_retry_commands(spec)]
+        completed = None
+        for attempt_index, command in enumerate(commands):
+            if attempt_index > 0:
+                # The previous provider may have written partial diagnostics
+                # before failing.  A retry must be read as one atomic packet.
+                shutil.rmtree(spec["event_dir"], ignore_errors=True)
+                Path(spec["event_dir"]).mkdir(parents=True, exist_ok=True)
+            completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+            attempts.append({
+                "attempt_index": attempt_index,
+                "command": command,
+                "returncode": completed.returncode,
+                "stderr_tail": completed.stderr[-2000:],
+            })
+            if completed.returncode == 0:
+                break
+        assert completed is not None
         row = {
             "event_id": event.id,
             "component_id": event.model_component_id,
@@ -226,6 +286,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             "script": spec["script"],
             "event_dir": str(Path(spec["event_dir"]).relative_to(output_dir)).replace("\\", "/"),
             "returncode": completed.returncode,
+            "attempts": attempts,
         }
         if completed.returncode != 0:
             row["status"] = "UNCOMPUTED_EXPORT_FAILED"
@@ -244,7 +305,11 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
             failures.append(row)
             rows.append(row)
             continue
-        row.update({"status": "EXACT_NATIVE_PACKET", "packet_kind": kind})
+        row.update({
+            "status": "EXACT_NATIVE_PACKET",
+            "packet_kind": kind,
+            "retry_used": len(attempts) > 1,
+        })
         successful.append((spec, kind, packet))
         rows.append(row)
 
@@ -264,6 +329,7 @@ def build_catalog(args: argparse.Namespace) -> dict[str, Any]:
         "frequency_event_count": len(events),
         "exact_native_packet_count": len(successful),
         "uncomputed_event_count": len(failures),
+        "retry_succeeded_event_count": sum(1 for row in rows if row.get("retry_used")),
         "event_rows": rows,
         "catalog_counts": {
             "accidental_release": len(accidental),
