@@ -2783,5 +2783,18 @@
   "ijhe_completion_audit_ledger_backed_scope_status": "INCOMPLETE_EVIDENCE",
   "ijhe_completion_audit_ledger_backed_scope_record": "results/20261022/ijhe_completion_audit_ledger_backed_scope.json",
   "ijhe_completion_audit_ledger_backed_scope_check_count": 15,
-  "ijhe_completion_audit_ledger_backed_scope_blocking_reason_count": 6
+  "ijhe_completion_audit_ledger_backed_scope_blocking_reason_count": 6,
+  "facility_frequency_uncertainty_reweighted": true,
+  "facility_frequency_uncertainty_scenario_record": "examples/native_lh2_transfer_line_replacement_frequency_scenarios.json",
+  "facility_frequency_uncertainty_record": "results/20261022/frequency_uncertainty_family_repaired.json",
+  "facility_frequency_uncertainty_scenario_count": 5,
+  "facility_frequency_uncertainty_fresh_physics_executed": false,
+  "facility_frequency_uncertainty_conditional_diagnostic": true,
+  "facility_frequency_uncertainty_facility_credible_interval": false,
+  "facility_frequency_uncertainty_policy": "Reweight saved risk atoms with published p05/central/p95 and independent-event bounds; fixed events retain catalogue rates; no sensor or provider frequency inference.",
+  "ijhe_completion_audit_frequency_family_repaired_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_frequency_family_repaired_record": "results/20261022/ijhe_completion_audit_frequency_family_repaired.json",
+  "ijhe_completion_audit_frequency_family_repaired_check_count": 16,
+  "ijhe_completion_audit_frequency_family_repaired_blocking_reason_count": 5,
+  "ijhe_completion_audit_frequency_uncertainty_status": "PASS_DIAGNOSTIC_ONLY"
 }

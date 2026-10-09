@@ -57,6 +57,20 @@ class LiteratureFrequencyDistributionScenario(Contract):
     fixed_event_policy: Literal["reject", "hold_published"] = "reject"
 
 
+def _frequency_event(row: dict) -> FrequencyEvent:
+    """Parse an event while ignoring non-frequency ledger annotations.
+
+    Facility-level audits may attach ``scenario_families`` and provenance
+    fields directly to event rows after the frequency event was generated.
+    Those fields are accounting metadata, not inputs to the frequency model.
+    Keep the strict ``FrequencyEvent`` contract while allowing the ledger
+    annotation to flow into uncertainty analysis.
+    """
+    fields = set(FrequencyEvent.model_fields)
+    filtered = {key: value for key, value in row.items() if key in fields}
+    return FrequencyEvent.model_validate_json(json.dumps(filtered, allow_nan=False))
+
+
 def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
     if quantile in {"published", "fixed"}:
         return event.annual_frequency_per_year
@@ -113,8 +127,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
     """
     if not scenarios or len({s.id for s in scenarios}) != len(scenarios):
         raise ValueError("nonempty unique literature-frequency scenarios required")
-    events = {e["id"]: FrequencyEvent.model_validate_json(json.dumps(e, allow_nan=False))
-              for e in result["events"]}
+    events = {e["id"]: _frequency_event(e) for e in result["events"]}
     assets = {e.asset_id for e in events.values()}
     ids = set(result["known_contribution_annual_ir_low_high"])
     atoms = result["risk_atoms"]
@@ -259,8 +272,7 @@ def sample_literature_frequency_distributions(
         raise ValueError('nonempty unique distribution scenarios required')
     if not isinstance(draws, int) or draws < 100 or draws > 100_000:
         raise ValueError('draw count must be an integer from 100 to 100000')
-    events = {e['id']: FrequencyEvent.model_validate_json(json.dumps(e, allow_nan=False))
-              for e in result['events']}
+    events = {e['id']: _frequency_event(e) for e in result['events']}
     if not events:
         raise ValueError('distribution sampling requires generated events')
     atoms = result['risk_atoms']

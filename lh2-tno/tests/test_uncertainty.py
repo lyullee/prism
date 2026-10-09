@@ -76,6 +76,22 @@ def test_published_literature_quantiles_reweight_atoms_without_physics():
     assert result['complete_facility_qra_claim'] is False
 
 
+def test_frequency_uncertainty_accepts_facility_event_family_annotations():
+    events = _valve_events()
+    payload = _result(events)
+    for event in payload['events']:
+        event['scenario_families'] = ['valve_hole', 'liquid_two_phase']
+    result = literature_frequency_uncertainty(
+        payload,
+        (LiteratureFrequencyScenario(
+            id='annotated-central',
+            asset_quantiles={'valves': 'published'},
+            provenance='facility ledger metadata is ignored by frequency parser',
+        ),),
+    )
+    assert result['scenarios'][0]['event_frequency_per_year'][events[0].id] == events[0].annual_frequency_per_year
+
+
 def test_p05_requires_a_published_event_bound():
     events = _valve_events()
     event = events[0].model_copy(update={'marginal_p05_per_year': None})
