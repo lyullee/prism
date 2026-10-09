@@ -93,13 +93,29 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
 
 `results/20261023/native_generic_scope_frequency_uncertainty_v8.json`은 문헌 빈도만 다시 가중하는 5개 시나리오를 계산했다. 새 물리 계산을 다시 하지 않았고, facility credible interval도 만들지 않았다. 이는 빈도 문헌의 불확실성을 표시하는 기능이며 현장 빈도 학습이 아니다.
 
+병합 시설 원장의 수직 handoff까지 같은 빈도 시나리오에 포함하려면 다음 순서로 입력을 만든다.
+
+```powershell
+$py = "C:\Users\lyul\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
+& $py scripts/build_merged_frequency_scenarios.py `
+  --source examples/generic_lh2_mixed_frequency_scenarios.json `
+  --output examples/native_lh2_generic_vertical_frequency_scenarios.json
+
+& $py scripts/compute_frequency_uncertainty.py `
+  --ledger results/20261023/native_generic_scope_vertical_merged_facility_ledger_repaired_v1.json `
+  --scenarios examples/native_lh2_generic_vertical_frequency_scenarios.json `
+  --output results/20261023/native_generic_scope_vertical_merged_frequency_uncertainty_v1.json
+```
+
+생성기는 generic asset 시나리오에 `vertical-handoff-vent: published`를 추가하고, event 시나리오에는 다섯 수직 handoff event를 `published`로 추가한다. 여기서 `published`는 현장 사고빈도를 새로 추정했다는 뜻이 아니라, 기존 수직 handoff 진단에 선언된 값을 빈도 재가중 입력으로 고정했다는 뜻이다. 따라서 결과는 29개 event를 다루는 5개 문헌 시나리오이지만, fresh physics·현장 빈도 학습·시설 credible interval을 만들지 않는다.
+
 ## packet 소비 감사와 IJHE 준비도
 
 - `native_generic_scope_packet_coverage_v7.json`: 24개 packet identity와 24개 consequence-chain event identity를 확인했지만, 빈도를 packet에 자동 결합하지 않는다.
 - `native_generic_scope_packet_campaign_ledger_v10.json`: 24개 event/case, 24개 chain 실행, 실패 0개, 24개 packet identity/digest 소비를 기록한다.
 - `native_generic_scope_worklist_packet_evidence_v7.json`: worklist 24개, candidate 24개, exact/strict 24개, consequence-chain 24개를 확인한다. 모두 synthetic diagnostic evidence다.
 - `ijhe_completion_audit_native_generic_scope_v12.json`: generic native campaign 기준 19개 검사 중 16개 PASS, 3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다.
-- `ijhe_completion_audit_native_generic_scope_vertical_v3.json`: generic v12와 all-bin vertical handoff를 병합한 최신 감사다. 19개 검사 중 16개 PASS, 3개 BLOCKED이며, vertical handoff가 병합 범위표에 `PARTIAL`로 들어갔음을 확인한다.
+- `ijhe_completion_audit_native_generic_scope_vertical_v4.json`: generic v12와 all-bin vertical handoff를 병합하고 29개 event용 5개 빈도 재가중 시나리오를 연결한 최신 감사다. 19개 검사 중 16개 PASS, 3개 BLOCKED이며, vertical handoff가 병합 범위표에 `PARTIAL`로 들어갔음을 확인한다.
 
 남은 세 가지 차단 이유는 다음과 같다.
 
