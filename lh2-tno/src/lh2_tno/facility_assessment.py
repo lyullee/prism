@@ -308,6 +308,20 @@ def build_facility_assessment(
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
+        "component_risk_ranking": ledger.get(
+            "component_risk_ranking",
+            {
+                "status": "NO_RISK_ATOMS",
+                "component_count": 0,
+                "ranking_basis": (
+                    "descending peak receptor annual IR at the high uncertainty endpoint; "
+                    "diagnostic triage only"
+                ),
+                "frequency_reallocation_performed": False,
+                "facility_ir_fn_promotion": False,
+                "rows": [],
+            },
+        ),
         "timing": timing,
         "facility_risk_ledger": ledger,
         "frequency_uncertainty": uncertainty,

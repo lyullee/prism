@@ -2424,6 +2424,159 @@
     "required_accident_family_count": 12,
     "scope_blocker_count": 23
   },
+  "component_risk_ranking": {
+    "status": "AVAILABLE",
+    "component_count": 8,
+    "ranking_basis": "descending peak receptor annual IR at the high uncertainty endpoint; diagnostic triage only",
+    "frequency_reallocation_performed": false,
+    "facility_ir_fn_promotion": false,
+    "rows": [
+      {
+        "component_id": "ambient-vaporizer-01",
+        "event_count": 3,
+        "risk_atom_count": 12,
+        "status": "EXECUTED",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 3,
+        "strict_uncomputed_case_count": 0,
+        "frequency_is_not_reallocated": true,
+        "rank": 1
+      },
+      {
+        "component_id": "liquid-transfer-line-01",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "status": "PARTIAL",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 5,
+        "strict_uncomputed_case_count": 7,
+        "frequency_is_not_reallocated": true,
+        "rank": 2
+      },
+      {
+        "component_id": "liquid-transfer-pump-01",
+        "event_count": 2,
+        "risk_atom_count": 8,
+        "status": "PARTIAL",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 2,
+        "strict_uncomputed_case_count": 2,
+        "frequency_is_not_reallocated": true,
+        "rank": 3
+      },
+      {
+        "component_id": "pressure-relief-vent-01",
+        "event_count": 1,
+        "risk_atom_count": 4,
+        "status": "EXECUTED",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 1,
+        "strict_uncomputed_case_count": 0,
+        "frequency_is_not_reallocated": true,
+        "rank": 4
+      },
+      {
+        "component_id": "reliquefier-01",
+        "event_count": 3,
+        "risk_atom_count": 12,
+        "status": "PARTIAL",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 3,
+        "strict_uncomputed_case_count": 2,
+        "frequency_is_not_reallocated": true,
+        "rank": 5
+      },
+      {
+        "component_id": "storage-tank-01",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "status": "PARTIAL",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 5,
+        "strict_uncomputed_case_count": 9,
+        "frequency_is_not_reallocated": true,
+        "rank": 6
+      },
+      {
+        "component_id": "transfer-valve-01",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "status": "PARTIAL",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 5,
+        "strict_uncomputed_case_count": 5,
+        "frequency_is_not_reallocated": true,
+        "rank": 7
+      },
+      {
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "event_count": 5,
+        "risk_atom_count": 40,
+        "status": "PARTIAL",
+        "peak_annual_ir_low_high": [
+          0.0,
+          0.0
+        ],
+        "peak_receptor_id_low_high": [
+          "worker-01",
+          "worker-01"
+        ],
+        "conditional_case_count": 10,
+        "strict_uncomputed_case_count": 10,
+        "frequency_is_not_reallocated": true,
+        "rank": 8
+      }
+    ]
+  },
   "timing": {
     "campaign_count": 2,
     "fresh_physics_cases": 34,
@@ -18265,6 +18418,159 @@
           "frequency_is_not_reallocated": true
         }
       }
+    },
+    "component_risk_ranking": {
+      "status": "AVAILABLE",
+      "component_count": 8,
+      "ranking_basis": "descending peak receptor annual IR at the high uncertainty endpoint; diagnostic triage only",
+      "frequency_reallocation_performed": false,
+      "facility_ir_fn_promotion": false,
+      "rows": [
+        {
+          "component_id": "ambient-vaporizer-01",
+          "event_count": 3,
+          "risk_atom_count": 12,
+          "status": "EXECUTED",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 3,
+          "strict_uncomputed_case_count": 0,
+          "frequency_is_not_reallocated": true,
+          "rank": 1
+        },
+        {
+          "component_id": "liquid-transfer-line-01",
+          "event_count": 5,
+          "risk_atom_count": 20,
+          "status": "PARTIAL",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 5,
+          "strict_uncomputed_case_count": 7,
+          "frequency_is_not_reallocated": true,
+          "rank": 2
+        },
+        {
+          "component_id": "liquid-transfer-pump-01",
+          "event_count": 2,
+          "risk_atom_count": 8,
+          "status": "PARTIAL",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 2,
+          "strict_uncomputed_case_count": 2,
+          "frequency_is_not_reallocated": true,
+          "rank": 3
+        },
+        {
+          "component_id": "pressure-relief-vent-01",
+          "event_count": 1,
+          "risk_atom_count": 4,
+          "status": "EXECUTED",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 1,
+          "strict_uncomputed_case_count": 0,
+          "frequency_is_not_reallocated": true,
+          "rank": 4
+        },
+        {
+          "component_id": "reliquefier-01",
+          "event_count": 3,
+          "risk_atom_count": 12,
+          "status": "PARTIAL",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 3,
+          "strict_uncomputed_case_count": 2,
+          "frequency_is_not_reallocated": true,
+          "rank": 5
+        },
+        {
+          "component_id": "storage-tank-01",
+          "event_count": 5,
+          "risk_atom_count": 20,
+          "status": "PARTIAL",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 5,
+          "strict_uncomputed_case_count": 9,
+          "frequency_is_not_reallocated": true,
+          "rank": 6
+        },
+        {
+          "component_id": "transfer-valve-01",
+          "event_count": 5,
+          "risk_atom_count": 20,
+          "status": "PARTIAL",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 5,
+          "strict_uncomputed_case_count": 5,
+          "frequency_is_not_reallocated": true,
+          "rank": 7
+        },
+        {
+          "component_id": "vertical-handoff-terminal-pipe-01",
+          "event_count": 5,
+          "risk_atom_count": 40,
+          "status": "PARTIAL",
+          "peak_annual_ir_low_high": [
+            0.0,
+            0.0
+          ],
+          "peak_receptor_id_low_high": [
+            "worker-01",
+            "worker-01"
+          ],
+          "conditional_case_count": 10,
+          "strict_uncomputed_case_count": 10,
+          "frequency_is_not_reallocated": true,
+          "rank": 8
+        }
+      ]
     },
     "component_coverage_schema": "prism.component_coverage.v1",
     "component_coverage": {

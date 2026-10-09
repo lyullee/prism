@@ -112,6 +112,16 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
         [0.0007, 0.0008]
     )
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
+    ranking = result["component_risk_ranking"]
+    assert ranking["status"] == "AVAILABLE"
+    assert ranking["component_count"] == 2
+    assert [row["component_id"] for row in ranking["rows"]] == ["pipe-01", "tank-01"]
+    assert ranking["rows"][0]["peak_annual_ir_low_high"] == pytest.approx(
+        [0.0007, 0.0008]
+    )
+    assert ranking["rows"][0]["peak_receptor_id_low_high"] == ["receptor-a", "receptor-a"]
+    assert ranking["frequency_reallocation_performed"] is False
+    assert ranking["facility_ir_fn_promotion"] is False
     assert result["scenario_family_contributions"] == {}
     assert result["population_accounting"]["status"] == "NOT_RECORDED_IN_INPUT"
     assert result["release_termination_inventory_ledger"]["schema_version"] == (

@@ -557,6 +557,78 @@ def _fn_diagnostics(
     }
 
 
+def _component_risk_ranking(
+    component_contributions: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Rank equipment by its peak conditional diagnostic IR contribution.
+
+    The ranking is a triage view over already evaluated risk atoms.  It uses
+    the largest receptor IR for each uncertainty endpoint, so receptor risks
+    are not summed across people or locations.  It does not reallocate
+    frequency, fill missing components, or open the facility QRA gate.
+    """
+    rows: list[dict[str, Any]] = []
+    for component_id, contribution in sorted(component_contributions.items()):
+        annual_ir = contribution.get("annual_ir_low_high", {})
+        receptor_rows = (
+            annual_ir.items() if isinstance(annual_ir, Mapping) else ()
+        )
+        peaks: list[float] = []
+        peak_receptors: list[str | None] = []
+        for endpoint in range(2):
+            candidates: list[tuple[float, str]] = []
+            for receptor_id, values in receptor_rows:
+                if (
+                    isinstance(values, Sequence)
+                    and not isinstance(values, (str, bytes))
+                    and len(values) == 2
+                    and isinstance(values[endpoint], (int, float))
+                    and not isinstance(values[endpoint], bool)
+                ):
+                    candidates.append((float(values[endpoint]), str(receptor_id)))
+            if candidates:
+                peak_value, receptor_id = max(candidates, key=lambda row: (row[0], row[1]))
+                peaks.append(peak_value)
+                peak_receptors.append(receptor_id)
+            else:
+                peaks.append(0.0)
+                peak_receptors.append(None)
+        coverage = contribution.get("coverage", {})
+        rows.append(
+            {
+                "component_id": str(component_id),
+                "event_count": int(contribution.get("event_count", 0)),
+                "risk_atom_count": int(contribution.get("risk_atom_count", 0)),
+                "status": coverage.get("status"),
+                "peak_annual_ir_low_high": peaks,
+                "peak_receptor_id_low_high": peak_receptors,
+                "conditional_case_count": coverage.get("conditional_case_count", 0),
+                "strict_uncomputed_case_count": coverage.get("strict_uncomputed_case_count", 0),
+                "frequency_is_not_reallocated": True,
+            }
+        )
+    rows.sort(
+        key=lambda row: (
+            -float(row["peak_annual_ir_low_high"][1]),
+            -float(row["peak_annual_ir_low_high"][0]),
+            row["component_id"],
+        )
+    )
+    for rank, row in enumerate(rows, start=1):
+        row["rank"] = rank
+    return {
+        "status": "AVAILABLE" if rows else "NO_RISK_ATOMS",
+        "component_count": len(rows),
+        "ranking_basis": (
+            "descending peak receptor annual IR at the high uncertainty endpoint; "
+            "diagnostic triage only"
+        ),
+        "frequency_reallocation_performed": False,
+        "facility_ir_fn_promotion": False,
+        "rows": rows,
+    }
+
+
 def merge_facility_campaign_results(
     campaign_results: Sequence[Mapping[str, Any]],
     *,
@@ -1077,6 +1149,7 @@ def merge_facility_campaign_results(
             "frequency_is_not_reallocated": True,
             "coverage": component_coverage.get(component_id, {}),
         }
+    component_risk_ranking = _component_risk_ranking(component_contributions)
     scenario_family_contributions: dict[str, dict[str, Any]] = {}
     for family, atoms in sorted(family_atoms.items()):
         family_ir = {
@@ -1190,6 +1263,7 @@ def merge_facility_campaign_results(
         "risk_atoms": merged_atoms,
         "risk_atoms_digest": canonical_digest(merged_atoms),
         "component_contributions": component_contributions,
+        "component_risk_ranking": component_risk_ranking,
         "component_coverage_schema": "prism.component_coverage.v1",
         "component_coverage": component_coverage,
         "scenario_family_contributions": scenario_family_contributions,
@@ -1259,6 +1333,11 @@ def merge_facility_campaign_results(
             "scenario_family_contributions": (
                 "risk atoms retain their declared scenario_families; overlapping physical "
                 "families are views of the same atoms and must not be summed across families"
+            ),
+            "component_risk_ranking": (
+                "equipment rows are ranked by peak receptor IR from the same conditional "
+                "risk atoms; this is a diagnostic triage view and never reallocates frequency "
+                "or promotes facility IR/F-N"
             ),
             "scenario_branch_accounting": (
                 "annual-condition weather, release/termination, and ignition branches are "

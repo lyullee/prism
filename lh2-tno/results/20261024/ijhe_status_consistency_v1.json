@@ -67,6 +67,18 @@
       }
     },
     {
+      "name": "component_risk_ranking",
+      "status": "PASS",
+      "evidence": {
+        "status": "AVAILABLE",
+        "ledger_component_count": 8,
+        "ranking_component_count": 8,
+        "assessment_component_count": 8,
+        "frequency_reallocation_performed": false,
+        "facility_ir_fn_promotion": false
+      }
+    },
+    {
       "name": "evidence_request_identity",
       "status": "PASS",
       "evidence": {

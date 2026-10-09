@@ -183,6 +183,63 @@ def build_status_consistency_report(
             ),
         },
     )
+    component_contributions = ledger.get("component_contributions")
+    component_contributions = (
+        component_contributions if isinstance(component_contributions, Mapping) else {}
+    )
+    component_risk_ranking = ledger.get("component_risk_ranking")
+    ranking_rows = (
+        component_risk_ranking.get("rows", ())
+        if isinstance(component_risk_ranking, Mapping)
+        else ()
+    )
+    ranking_ids = {
+        str(row.get("component_id"))
+        for row in ranking_rows
+        if isinstance(row, Mapping) and row.get("component_id")
+    }
+    _check(
+        checks,
+        "component_risk_ranking",
+        isinstance(component_risk_ranking, Mapping)
+        and component_risk_ranking.get("status") == "AVAILABLE"
+        and component_risk_ranking.get("component_count") == len(component_contributions)
+        and len(ranking_rows) == len(component_contributions)
+        and ranking_ids == {str(key) for key in component_contributions}
+        and component_risk_ranking.get("frequency_reallocation_performed") is False
+        and component_risk_ranking.get("facility_ir_fn_promotion") is False
+        and isinstance(assessment.get("component_risk_ranking"), Mapping)
+        and assessment["component_risk_ranking"].get("component_count")
+        == component_risk_ranking.get("component_count"),
+        {
+            "status": (
+                component_risk_ranking.get("status")
+                if isinstance(component_risk_ranking, Mapping)
+                else None
+            ),
+            "ledger_component_count": len(component_contributions),
+            "ranking_component_count": (
+                component_risk_ranking.get("component_count")
+                if isinstance(component_risk_ranking, Mapping)
+                else None
+            ),
+            "assessment_component_count": (
+                assessment.get("component_risk_ranking", {}).get("component_count")
+                if isinstance(assessment.get("component_risk_ranking"), Mapping)
+                else None
+            ),
+            "frequency_reallocation_performed": (
+                component_risk_ranking.get("frequency_reallocation_performed")
+                if isinstance(component_risk_ranking, Mapping)
+                else None
+            ),
+            "facility_ir_fn_promotion": (
+                component_risk_ranking.get("facility_ir_fn_promotion")
+                if isinstance(component_risk_ranking, Mapping)
+                else None
+            ),
+        },
+    )
     _check(
         checks,
         "evidence_request_identity",
