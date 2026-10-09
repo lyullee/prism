@@ -985,6 +985,11 @@ provider worklist의 각 event에는 `scenario_families`가 함께 기록됩니�
 `UNCOMPUTED`로 남아 시설 완결성을 막습니다. `manifest_scenario_component_ids`와
 각 행의 `applicability`로 이 구분을 확인할 수 있습니다.
 
+여러 campaign의 범위표를 `scope_matrix_merge`로 합칠 때도 모든 입력 행이
+`NOT_APPLICABLE`이면 그 상태를 유지하고, 다른 campaign에서 실제 사건이 실행되면
+그 실행 상태를 우선합니다. 비적용 설비를 누락으로 세지 않으면서 실제 설비의
+미계산 사고는 계속 시설 blocker로 남습니다.
+
 실행된 risk atom에는 사고 family가 함께 남고, facility ledger의 `scenario_family_contributions`에서 탱크·배관 사고와 액체 2상·재고 사고의 기여를 따로 조회할 수 있습니다. 이 표는 같은 atom을 family별로 분류한 결과이므로 family별 수치를 서로 더하지 않습니다.
 
 campaign 결과의 `release_termination_inventory_ledger`에는 사건×차단 분기×연간 조건별로 provider packet digest, 방출 지속시간, 종료근거, provider 재고·누적 방출량·잔여량, 차단 선언을 한 행에 기록합니다. `UNCOMPUTED`와 `EXECUTED_OPERATOR_LIMITED`는 각각 누락·제한 상태로 남으며, 질량이 0이 되었다는 이유만으로 재고소진이나 차단 성공을 추론하지 않습니다. 최신 결과는 `results/20261018/generic_mixed_provider_campaign_release_ledger.json`이고, 24행 중 5행은 operator-limited, 14행은 실패, 5행은 미계산이며 시설 전체 IR/F-N은 계속 보류됩니다.
@@ -1071,7 +1076,7 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 
 실제 설비 모델이 사고 이력을 제공하면 `RiskCampaign.provider_packet_evidence`에 그 근거를 명시한다. `prism.provider_packet_evidence.v1` 레코드는 event·component·port와 provider source/result SHA-256 digest를 모두 적어야 하며, 실행된 `provider_packet_identity`와 정확히 일치할 때만 해당 case를 `qualified_provider_packet_case_count`로 센다. packet을 읽었다는 사실만으로 qualified 상태가 되지 않는다.
 
-`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 482개 portable 테스트로 확인했다.
+`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 483개 portable 테스트로 확인했다.
 
 문헌 빈도 p05·published·p95 및 분포 샘플링 결과에도 같은 승격 상태를 전달한다. 따라서 빈도 민감도 표가 계산되어도 `provider_packet_promoted`와 `complete_facility_qra_claim`을 별도로 확인할 수 있고, 빈도 불확실성 결과가 물리검증이나 시설 완결성을 대신하지 않는다.
 

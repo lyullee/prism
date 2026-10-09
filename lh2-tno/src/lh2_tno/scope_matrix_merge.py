@@ -16,11 +16,16 @@ from .contracts import canonical_digest
 def _status(rows: Sequence[Mapping[str, Any]]) -> str:
     statuses = {str(row.get("status", "UNCOMPUTED")) for row in rows}
     generated = sum(int(row.get("generated_event_count", 0) or 0) for row in rows)
-    if not rows or generated == 0:
+    if not rows:
         return "NO_EVENT_GENERATED"
-    if statuses == {"EXECUTED"}:
+    effective = statuses - {"NOT_APPLICABLE"}
+    if generated == 0 and not effective:
+        return "NOT_APPLICABLE"
+    if generated == 0:
+        return "NO_EVENT_GENERATED"
+    if effective == {"EXECUTED"}:
         return "EXECUTED"
-    if statuses == {"FAILED"}:
+    if effective == {"FAILED"}:
         return "FAILED"
     return "PARTIAL"
 
@@ -104,7 +109,7 @@ def merge_scope_matrices(
             "source_statuses": sorted({str(row.get("status")) for row in source_rows}),
         }
         merged_rows.append(merged)
-        if status != "EXECUTED":
+        if status not in {"EXECUTED", "NOT_APPLICABLE"}:
             blocking.append(f"{family}: {status}")
 
     provider_alignment = None
@@ -127,7 +132,9 @@ def merge_scope_matrices(
         "provider_worklist_alignment": provider_alignment,
         "source_matrices": source_records,
         "source_matrix_count": len(source_records),
-        "declared_scope_numerically_complete": all(row["status"] == "EXECUTED" for row in merged_rows),
+        "declared_scope_numerically_complete": all(
+            row["status"] in {"EXECUTED", "NOT_APPLICABLE"} for row in merged_rows
+        ),
         "facility_total_risk_available": False,
         "matrix_complete": not blocking,
         "blocking_reasons": list(dict.fromkeys(blocking)),

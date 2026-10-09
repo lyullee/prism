@@ -36,3 +36,31 @@ def test_scope_matrix_merge_preserves_partial_family_and_counts_events():
     assert rows["vessel_hole"]["status"] == "NO_EVENT_GENERATED"
     assert merged["facility_total_risk_available"] is False
     assert merged["diagnostic_only"] is True
+
+
+def test_scope_matrix_merge_preserves_not_applicable_family_and_ignores_it_in_blocking():
+    merged = merge_scope_matrices(
+        [
+            {
+                "facility_id": "tank-campaign",
+                "rows": [{
+                    "family": "pump_hole", "status": "NOT_APPLICABLE",
+                    "generated_event_count": 0,
+                }],
+            },
+            {
+                "facility_id": "pipe-campaign",
+                "rows": [{
+                    "family": "pump_hole", "status": "NOT_APPLICABLE",
+                    "generated_event_count": 0,
+                }],
+            },
+        ],
+        facility_id="tank-and-pipe",
+        required_families=("pump_hole",),
+    )
+    row = merged["rows"][0]
+    assert row["status"] == "NOT_APPLICABLE"
+    assert merged["matrix_complete"] is True
+    assert merged["declared_scope_numerically_complete"] is True
+    assert merged["blocking_reasons"] == []
