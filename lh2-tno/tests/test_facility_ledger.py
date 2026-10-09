@@ -90,6 +90,9 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
 
     assert result["status"] == "FACILITY_SCOPE_EXECUTED"
     assert result["facility_total_risk_available"] is True
+    assert result["provider_packet_promoted"] is False
+    assert result["qualified_facility_qra_available"] is False
+    assert result["provider_qualification_blocking_reasons"]
     assert result["known_contribution_annual_ir_low_high"]["receptor-a"] == pytest.approx(
         [0.0014, 0.0016]
     )
@@ -107,6 +110,27 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     )
     assert result["component_contributions"]["tank-01"]["frequency_is_not_reallocated"] is True
     assert result["scenario_family_contributions"] == {}
+
+
+def test_facility_ledger_promotes_qualified_qra_only_after_packet_and_validation_gates():
+    result = _result(
+        event_id="event-qualified", asset_id="asset-qualified",
+        component_id="tank-qualified", frequency=1e-3,
+    )
+    result.update(
+        physical_validation_claim=True,
+        provider_packet_case_count=1,
+        qualified_provider_packet_case_count=1,
+        provider_packet_promoted=True,
+        provider_packet_missing_evidence_cases=[],
+    )
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-qualified",)
+    )
+    assert merged["provider_packet_promoted"] is True
+    assert merged["qualified_provider_packet_case_count"] == 1
+    assert merged["qualified_facility_qra_available"] is True
+    assert merged["complete_facility_qra_claim"] is True
 
 
 def test_facility_ledger_reports_scenario_family_views_without_double_counting():
@@ -299,6 +323,8 @@ def test_facility_assessment_combines_ledger_and_frequency_scenarios():
     assert assessment["schema_version"] == "prism.facility_assessment.v1"
     assert assessment["status"] == "FACILITY_SCOPE_EXECUTED"
     assert assessment["facility_total_risk_available"] is True
+    assert assessment["provider_packet_promoted"] is False
+    assert assessment["qualified_facility_qra_available"] is False
     assert assessment["conditional_diagnostic_facility_risk_available"] is True
     assert assessment["conditional_diagnostic_facility_annual_ir_low_high"] == assessment[
         "facility_risk_ledger"

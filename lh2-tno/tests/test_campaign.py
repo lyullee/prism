@@ -5,7 +5,13 @@ from pathlib import Path
 from types import SimpleNamespace
 import pytest
 from lh2_tno.backend import BackendError
-from lh2_tno.campaign import RiskCampaign, _provider_packet_identity
+from lh2_tno.campaign import (
+    PhysicalValidationEvidence,
+    ProviderPacketEvidence,
+    RiskCampaign,
+    _provider_packet_evidence_matches,
+    _provider_packet_identity,
+)
 from lh2_tno.contracts import Facility
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
@@ -47,6 +53,58 @@ def test_provider_packet_identity_keeps_digest_and_clock_without_flow_history():
         'available_mass_kg': [None],
         'cumulative_mass_out_kg': [None],
     }
+
+
+def test_provider_packet_qualification_requires_exact_event_and_digest_identity():
+    identity = {
+        "event_id": "scope/tank/G1",
+        "component_id": "tank-01",
+        "port_ids": ["tank-out"],
+        "provider_source_digests": ["a" * 64],
+        "provider_result_digests": ["b" * 64],
+    }
+    evidence = ProviderPacketEvidence(
+        event_id="scope/tank/G1",
+        component_id="tank-01",
+        port_ids=("tank-out",),
+        provider_source_digests=("a" * 64,),
+        provider_result_digests=("b" * 64,),
+        evidence_id="lh2-actual-001",
+    )
+    assert _provider_packet_evidence_matches(identity, evidence)
+    assert not _provider_packet_evidence_matches(
+        {**identity, "provider_result_digests": ["c" * 64]}, evidence
+    )
+
+
+def test_provider_packet_evidence_can_be_built_from_promoted_export_result():
+    release = SimpleNamespace(
+        event_id="scope/tank/G1",
+        component_id="tank-01",
+        port_id="tank-out",
+        provider_source_digest="a" * 64,
+        provider_result_digest="b" * 64,
+    )
+    result = SimpleNamespace(
+        provider_packet_promoted=True,
+        release=release,
+        provider_response={
+            "provider_qualification": {
+                "status": "qualified_actual",
+                "evidence_id": "lh2-actual-001",
+            }
+        },
+    )
+    evidence = ProviderPacketEvidence.from_export_result(result)
+    assert evidence.evidence_id == "lh2-actual-001"
+    assert evidence.provider_result_digests == ("b" * 64,)
+
+
+def test_physical_validation_evidence_is_fail_closed():
+    with pytest.raises(ValueError, match="independent physical validation"):
+        PhysicalValidationEvidence(status="independent_validated")
+    with pytest.raises(ValueError, match="unvalidated physical evidence"):
+        PhysicalValidationEvidence(status="not_validated", evidence_id="review-1")
 
 
 def inputs():
@@ -122,6 +180,10 @@ def test_frequency_weather_barrier_ignition_each_weighted_once():
     assert all(q['occupancy_probability']==1.0 for q in b.requests)
     assert all(q['weather']['wind_from_bearing_deg']==q['source_input']['ambient']['wind_from_bearing_deg'] for q in b.requests)
     assert r['total_facility_annual_ir_low_high'] is None
+    assert r['provider_packet_case_count'] == 0
+    assert r['qualified_provider_packet_case_count'] == 0
+    assert r['provider_packet_promoted'] is False
+    assert r['complete_facility_qra_claim'] is False
     assert r['declared_scope_annual_ir_low_high'] is None
     assert len(r['uncomputed_cases'])==4
     assert r['coverage']['fraction_of_generated_initiation_frequency']==pytest.approx(10/11)

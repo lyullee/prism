@@ -55,6 +55,11 @@ def build_native_packet_campaign_execution_ledger(
         for row in cases
         if isinstance(row, Mapping)
     )
+    provider_packet_case_count = result.get("provider_packet_case_count", 0)
+    qualified_provider_packet_case_count = result.get(
+        "qualified_provider_packet_case_count", 0
+    )
+    provider_packet_promoted = result.get("provider_packet_promoted") is True
     packet_identity_consumed = (
         bool(cases)
         and len(identity_cases) == len(cases)
@@ -99,7 +104,9 @@ def build_native_packet_campaign_execution_ledger(
         "facility_total_risk_available": result_total_ir is not None or result_total_fn is not None,
         "frequency_from_provider_packet": False,
         "frequency_source": "campaign FrequencyPlan; provider packet carries release history only",
-        "provider_packet_promoted": False,
+        "provider_packet_case_count": provider_packet_case_count,
+        "qualified_provider_packet_case_count": qualified_provider_packet_case_count,
+        "provider_packet_promoted": provider_packet_promoted,
         "facility_qra_claim": result.get("complete_facility_qra_claim") is True,
         "physical_validation_claim": result.get("physical_validation_claim") is True,
         "rebind_provenance_status": provenance.get("schema_version") if isinstance(provenance, Mapping) else None,
@@ -113,7 +120,7 @@ def build_native_packet_campaign_execution_ledger(
         },
         "diagnostic_only": True,
         "policy": {
-            "provider_packet_promoted": False,
+            "provider_packet_promoted": provider_packet_promoted,
             "frequency_inference_performed": False,
             "frequency_from_provider_packet": False,
             "facility_qra_claim": False,

@@ -49,6 +49,18 @@ def build_facility_assessment(
         "status": ledger["status"],
         "facility_id": ledger["facility_id"],
         "facility_total_risk_available": ledger["facility_total_risk_available"],
+        "provider_packet_case_count": ledger["provider_packet_case_count"],
+        "qualified_provider_packet_case_count": ledger[
+            "qualified_provider_packet_case_count"
+        ],
+        "provider_packet_promoted": ledger["provider_packet_promoted"],
+        "qualified_facility_qra_available": ledger[
+            "qualified_facility_qra_available"
+        ],
+        "complete_facility_qra_claim": ledger["complete_facility_qra_claim"],
+        "provider_qualification_blocking_reasons": ledger[
+            "provider_qualification_blocking_reasons"
+        ],
         "conditional_diagnostic_facility_risk_available": ledger[
             "conditional_diagnostic_facility_risk_available"
         ],
@@ -64,12 +76,13 @@ def build_facility_assessment(
         "facility_risk_ledger": ledger,
         "frequency_uncertainty": uncertainty,
         "fresh_physics_executed": False,
-        "physical_validation_claim": False,
+        "physical_validation_claim": ledger["physical_validation_claim"],
         "semantics": {
             "orchestration": "campaign results are merged once; no source or consequence model is rerun",
             "partial_scope": "missing equipment, accident families, or event case accounting remains explicit and withholds facility totals",
             "conditional_diagnostic_facility": "the atom-level facility IR/F-N sum is exposed for diagnostics and frequency sensitivity, while qualification blockers continue to withhold the facility total",
             "frequency": "optional literature scenarios reweight saved risk atoms and do not infer missing frequency",
+            "provider_packet": ledger["semantics"]["provider_packet"],
         },
     }
     assessment["assessment_digest"] = canonical_digest(assessment)

@@ -1004,3 +1004,9 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 ```
 
 출력은 `prism.external_accident_history.v1` provider packet, 정확한 component·port·개구·위치·방향, provider 소유 시간 이력과 종료근거, 재고·질량·에너지 폐합, 독립 물리검증을 요구한다. 현재 12개 사고군과 11개 component를 `OPEN_EVIDENCE_REQUEST`로 표시하며, 문헌 빈도를 센서나 provider 결과에서 추정하지 않는다. 실제 provider packet과 검증자료가 들어오기 전에는 이 요청서가 시설 IR/F-N 승격을 열지 않는다.
+
+### qualified provider packet과 물리검증의 승격 게이트
+
+실제 설비 모델이 사고 이력을 제공하면 `RiskCampaign.provider_packet_evidence`에 그 근거를 명시한다. `prism.provider_packet_evidence.v1` 레코드는 event·component·port와 provider source/result SHA-256 digest를 모두 적어야 하며, 실행된 `provider_packet_identity`와 정확히 일치할 때만 해당 case를 `qualified_provider_packet_case_count`로 센다. packet을 읽었다는 사실만으로 qualified 상태가 되지 않는다.
+
+`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 465개 portable 테스트로 확인했다.

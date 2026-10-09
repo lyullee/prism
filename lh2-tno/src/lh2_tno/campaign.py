@@ -8,7 +8,9 @@ import json
 import math
 import time
 from collections import Counter
+from collections.abc import Mapping
 from statistics import median
+from typing import Literal
 from pydantic import Field, model_validator
 from .contracts import Contract, Name, Fraction, Nonnegative, canonical_digest
 from .consequences import ConsequenceRequest, Weather
@@ -133,6 +135,25 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
         ],
     }
 
+
+def _provider_packet_evidence_matches(
+    identity: dict | None,
+    evidence: ProviderPacketEvidence | None,
+) -> bool:
+    """Compare a consumed packet identity with its declared qualification."""
+
+    if identity is None or evidence is None:
+        return False
+    return (
+        identity.get("event_id") == evidence.event_id
+        and identity.get("component_id") == evidence.component_id
+        and tuple(identity.get("port_ids", ())) == evidence.port_ids
+        and tuple(identity.get("provider_source_digests", ()))
+        == evidence.provider_source_digests
+        and tuple(identity.get("provider_result_digests", ()))
+        == evidence.provider_result_digests
+    )
+
 class EventRoute(Contract):
     event_id: Name
     branches: tuple[ReleaseBranch, ...]
@@ -146,6 +167,116 @@ class EventRoute(Contract):
         return self
 
 
+class ProviderPacketEvidence(Contract):
+    """Qualification record that promotes one provider accident packet.
+
+    A release packet carries source/result digests, but the consequence
+    request intentionally does not carry a provider's qualification document.
+    This small campaign-level record binds that document to the exact event,
+    component and endpoint digests consumed by the campaign.  It never creates
+    or changes an initiating frequency.
+    """
+
+    schema_version: Literal["prism.provider_packet_evidence.v1"] = (
+        "prism.provider_packet_evidence.v1"
+    )
+    event_id: Name
+    component_id: Name
+    port_ids: tuple[Name, ...]
+    provider_source_digests: tuple[str, ...]
+    provider_result_digests: tuple[str, ...]
+    evidence_id: Name
+    provider_qualification_schema: Literal[
+        "prism.provider_qualification_evidence.v1"
+    ] = "prism.provider_qualification_evidence.v1"
+    provider_export_schema: Literal[
+        "prism.external_accident_history.v1"
+    ] = "prism.external_accident_history.v1"
+    status: Literal["qualified_actual"] = "qualified_actual"
+
+    @classmethod
+    def from_export_result(cls, export_result: object) -> "ProviderPacketEvidence":
+        """Build a qualification record from a strict export result.
+
+        This convenience path keeps the provider's evidence ID and the exact
+        release digests together.  It accepts the public export-result
+        boundary by attributes so the campaign module does not import an
+        equipment adapter implementation.
+        """
+
+        if getattr(export_result, "provider_packet_promoted", False) is not True:
+            raise ValueError("only a promoted provider export can create qualification evidence")
+        release = getattr(export_result, "release", None)
+        response = getattr(export_result, "provider_response", None)
+        if release is None or not isinstance(response, Mapping):
+            raise ValueError("export result must contain a release and provider response")
+        qualification = response.get("provider_qualification")
+        if not isinstance(qualification, Mapping):
+            raise ValueError("promoted provider export lacks provider_qualification")
+        if qualification.get("status") != "qualified_actual":
+            raise ValueError("provider qualification status must be qualified_actual")
+        evidence_id = qualification.get("evidence_id")
+        if not isinstance(evidence_id, str) or not evidence_id.strip():
+            raise ValueError("provider qualification requires evidence_id")
+        packets = tuple(getattr(release, "releases", (release,)))
+        return cls(
+            event_id=getattr(release, "event_id"),
+            component_id=getattr(release, "component_id"),
+            port_ids=tuple(getattr(packet, "port_id") for packet in packets),
+            provider_source_digests=tuple(
+                getattr(packet, "provider_source_digest") for packet in packets
+            ),
+            provider_result_digests=tuple(
+                getattr(packet, "provider_result_digest") for packet in packets
+            ),
+            evidence_id=evidence_id,
+        )
+
+    @model_validator(mode="after")
+    def evidence_identity(self):
+        if not self.port_ids:
+            raise ValueError("provider packet evidence requires at least one port")
+        if not self.provider_source_digests or not self.provider_result_digests:
+            raise ValueError("provider packet evidence requires source and result digests")
+        if len(self.provider_source_digests) != len(self.provider_result_digests):
+            raise ValueError("provider source/result digest counts must match")
+        for label, values in (
+            ("provider_source_digests", self.provider_source_digests),
+            ("provider_result_digests", self.provider_result_digests),
+        ):
+            if len(set(values)) != len(values):
+                raise ValueError(f"{label} cannot contain duplicate digests")
+            for value in values:
+                if len(value) != 64:
+                    raise ValueError(f"{label} must contain SHA-256 digests")
+                try:
+                    int(value, 16)
+                except ValueError as error:
+                    raise ValueError(f"{label} must contain hexadecimal SHA-256 digests") from error
+        return self
+
+
+class PhysicalValidationEvidence(Contract):
+    """Independent evidence gate for a campaign's physical-validation claim."""
+
+    status: Literal["not_validated", "independent_validated"] = "not_validated"
+    evidence_id: Name | None = None
+    evidence_digest: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+
+    @model_validator(mode="after")
+    def explicit_status(self):
+        if self.status == "independent_validated":
+            if self.evidence_id is None or self.evidence_digest is None:
+                raise ValueError(
+                    "independent physical validation requires evidence_id and evidence_digest"
+                )
+        elif self.evidence_id is not None or self.evidence_digest is not None:
+            raise ValueError(
+                "unvalidated physical evidence cannot carry a validation identifier"
+            )
+        return self
+
+
 class RiskCampaign(Contract):
     id: Name
     frequency_plan: FrequencyPlan
@@ -153,6 +284,10 @@ class RiskCampaign(Contract):
     event_routes: tuple[EventRoute, ...]
     scope_provenance: Name
     maximum_physics_cases: int = Field(default=200, ge=1, le=2000)
+    provider_packet_evidence: tuple[ProviderPacketEvidence, ...] = ()
+    physical_validation_evidence: PhysicalValidationEvidence = Field(
+        default_factory=PhysicalValidationEvidence
+    )
 
     @model_validator(mode='after')
     def partition(self):
@@ -163,6 +298,9 @@ class RiskCampaign(Contract):
             raise ValueError('annual joint weather/population partition must close to one')
         if not self.event_routes or len({x.event_id for x in self.event_routes}) != len(self.event_routes):
             raise ValueError('unique nonempty event routes required')
+        evidence_ids = [x.event_id for x in self.provider_packet_evidence]
+        if len(set(evidence_ids)) != len(evidence_ids):
+            raise ValueError('provider packet evidence cannot duplicate an event')
         return self
 
 
@@ -216,6 +354,13 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     routes = {x.event_id: x for x in campaign.event_routes}
     if set(events) != set(routes):
         raise ValueError('every generated LOC needs exactly one route or explicit uncomputed branch')
+    provider_evidence = {row.event_id: row for row in campaign.provider_packet_evidence}
+    unknown_evidence_events = sorted(set(provider_evidence) - set(events))
+    if unknown_evidence_events:
+        raise ValueError(
+            'provider packet evidence references unknown generated events: '
+            + ', '.join(unknown_evidence_events)
+        )
     receptor_ids = [r.id for r in f.receptors]
     for c in campaign.annual_conditions:
         if set(x.receptor_id for x in c.population) != set(receptor_ids):
@@ -236,6 +381,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     cases, atoms, missing = [], [], []
     exposures = set()
     synthetic = False
+    provider_packet_case_count = 0
+    qualified_provider_packet_case_count = 0
+    provider_packet_missing_evidence_cases = []
     for e in events.values():
         for b in routes[e.id].branches:
             for c in campaign.annual_conditions:
@@ -285,6 +433,25 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     row['status'] = 'EXECUTED_OPERATOR_LIMITED'
                     row['reason'] = 'source operator has declared constant-state or open physical closure limitations'
                     missing.append(row.copy())
+                if row['status'].startswith('EXECUTED') and packet_identity is not None:
+                    provider_packet_case_count += 1
+                    evidence = provider_evidence.get(e.id)
+                    if (
+                        row['status'] == 'EXECUTED'
+                        and _provider_packet_evidence_matches(packet_identity, evidence)
+                    ):
+                        qualified_provider_packet_case_count += 1
+                    else:
+                        provider_packet_missing_evidence_cases.append({
+                            'event_id': e.id,
+                            'release_branch_id': b.id,
+                            'annual_condition_id': c.id,
+                            'reason': (
+                                'no matching qualified provider packet evidence'
+                                if evidence is None
+                                else 'provider packet identity disagrees with qualification record'
+                            ),
+                        })
                 cases.append(row)
                 population = {p.receptor_id: p.persons*p.presence_probability for p in c.population}
                 for key in sorted(IGNITION_KEYS):
@@ -306,6 +473,14 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     scope_complete = not missing
     excluded = campaign.frequency_plan.excluded_model_components
     full_facility_complete = scope_complete and not excluded and not synthetic
+    provider_packet_promoted = (
+        provider_packet_case_count > 0
+        and qualified_provider_packet_case_count == provider_packet_case_count
+        and not provider_packet_missing_evidence_cases
+    )
+    independent_physical_validation = (
+        campaign.physical_validation_evidence.status == 'independent_validated'
+    )
     times = [r['elapsed_ms'] for r in cases if r['status'].startswith('EXECUTED') or r['status']=='FAILED']
     generated_frequency=sum(e.annual_frequency_per_year for e in events.values())
     evaluated_frequency=sum(r['initiating_frequency_per_year']*r['release_branch_probability']*r['annual_condition_probability'] for r in cases if r['status']=='EXECUTED')
@@ -384,5 +559,22 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'weighting':'initiating frequency times annual joint condition times release/barrier branch times ignition; each once',
             'endpoints':'two declared radiation sensitivities and within-branch harm union bounds; not frequency credible intervals',
             'population':'disjoint outdoor groups at representative receptors; temporal presence in annual conditions'},
-        'physical_validation_claim':False, 'complete_facility_qra_claim':False,
+        'provider_packet_evidence': [
+            row.model_dump(mode='json') for row in campaign.provider_packet_evidence
+        ],
+        'provider_packet_case_count': provider_packet_case_count,
+        'qualified_provider_packet_case_count': qualified_provider_packet_case_count,
+        'provider_packet_promoted': provider_packet_promoted,
+        'provider_packet_missing_evidence_cases': provider_packet_missing_evidence_cases,
+        'physical_validation_evidence': campaign.physical_validation_evidence.model_dump(mode='json'),
+        'physical_validation_claim': (
+            full_facility_complete
+            and provider_packet_promoted
+            and independent_physical_validation
+        ),
+        'complete_facility_qra_claim': (
+            full_facility_complete
+            and provider_packet_promoted
+            and independent_physical_validation
+        ),
         'one_hz_fresh_physics_demonstrated':False}

@@ -2383,6 +2383,15 @@
   "facility_evidence_request_provider_schema": "prism.external_accident_history.v1",
   "facility_evidence_request_frequency_inference": false,
   "facility_evidence_request_facility_qra_claim": false,
-  "full_portable_test_count": 461,
-  "full_portable_test_status": "461 passed"
+  "provider_packet_qualification_gate_implemented": true,
+  "provider_packet_qualification_gate_module": "src/lh2_tno/campaign.py",
+  "provider_packet_qualification_gate_schema": "prism.provider_packet_evidence.v1",
+  "provider_packet_qualification_gate_policy": "Exact event/component/port/source-digest/result-digest match is required; provider packets never create or modify initiating frequency.",
+  "provider_packet_qualification_gate_current_status": "IMPLEMENTED; existing campaigns have 0 qualified provider packet cases and facility QRA remains withheld",
+  "physical_validation_campaign_gate_implemented": true,
+  "physical_validation_campaign_gate_policy": "Independent validation evidence is required together with complete scope and qualified provider packets; synthetic or screening evidence cannot promote the claim.",
+  "facility_assessment_provider_gate_propagation_implemented": true,
+  "facility_assessment_provider_gate_propagation_module": "src/lh2_tno/facility_assessment.py",
+  "full_portable_test_count": 465,
+  "full_portable_test_status": "465 passed"
 }

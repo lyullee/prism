@@ -203,6 +203,10 @@ def merge_facility_campaign_results(
     source_complete = True
     source_synthetic = False
     source_physical_validation = True
+    source_provider_packet_promoted = True
+    provider_packet_case_count = 0
+    qualified_provider_packet_case_count = 0
+    provider_qualification_blocking_reasons: list[str] = []
     blocking_reasons: list[str] = []
     timing_values: list[float] = []
     component_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -321,6 +325,32 @@ def merge_facility_campaign_results(
             source_complete = False
             blocking_reasons.append(f"campaign {campaign_id}: synthetic release horizon")
         source_physical_validation &= result.get("physical_validation_claim") is True
+        packet_case_count = result.get("provider_packet_case_count", 0)
+        qualified_packet_case_count = result.get("qualified_provider_packet_case_count", 0)
+        if (
+            isinstance(packet_case_count, bool)
+            or not isinstance(packet_case_count, int)
+            or packet_case_count < 0
+            or isinstance(qualified_packet_case_count, bool)
+            or not isinstance(qualified_packet_case_count, int)
+            or qualified_packet_case_count < 0
+            or qualified_packet_case_count > packet_case_count
+        ):
+            raise FacilityLedgerError(
+                f"campaign {campaign_id} has invalid provider packet qualification counts"
+            )
+        provider_packet_case_count += packet_case_count
+        qualified_provider_packet_case_count += qualified_packet_case_count
+        if result.get("provider_packet_promoted") is not True:
+            source_provider_packet_promoted = False
+            provider_qualification_blocking_reasons.append(
+                f"campaign {campaign_id}: qualified provider packet promotion is unavailable"
+            )
+        if result.get("provider_packet_missing_evidence_cases"):
+            source_provider_packet_promoted = False
+            provider_qualification_blocking_reasons.append(
+                f"campaign {campaign_id}: provider packet evidence does not match all consumed packets"
+            )
         digest = result.get("campaign_digest")
         if digest:
             source_digests.append(str(digest))
@@ -504,6 +534,14 @@ def merge_facility_campaign_results(
             "frequency_is_not_reallocated": True,
         }
     total_available = source_complete and not source_synthetic and not merged_exclusions
+    provider_packet_promoted = (
+        source_provider_packet_promoted
+        and provider_packet_case_count > 0
+        and provider_packet_case_count == qualified_provider_packet_case_count
+    )
+    qualified_facility_qra_available = (
+        total_available and provider_packet_promoted and source_physical_validation
+    )
     unique_blocking = list(dict.fromkeys(blocking_reasons))
     timing = {
         "campaign_count": len(campaign_rows),
@@ -578,6 +616,12 @@ def merge_facility_campaign_results(
         "total_facility_annual_ir_low_high": known_ir if total_available else None,
         "total_facility_expected_death_fn_low_high": fn if total_available else None,
         "physical_validation_claim": source_physical_validation and total_available,
+        "provider_packet_case_count": provider_packet_case_count,
+        "qualified_provider_packet_case_count": qualified_provider_packet_case_count,
+        "provider_packet_promoted": provider_packet_promoted,
+        "qualified_facility_qra_available": qualified_facility_qra_available,
+        "complete_facility_qra_claim": qualified_facility_qra_available,
+        "provider_qualification_blocking_reasons": list(dict.fromkeys(provider_qualification_blocking_reasons)),
         "synthetic_release_horizon_present": source_synthetic,
         "facility_total_risk_available": total_available,
         "blocking_reasons": unique_blocking,
@@ -586,6 +630,10 @@ def merge_facility_campaign_results(
             "risk_sum": "validated risk atoms are summed once across disjoint equipment campaigns",
             "missing_scope": "missing or incomplete equipment/families remain partial and never become zero risk",
             "frequency": "each atom retains its initiating event frequency; no frequency inference or reallocation is performed",
+            "provider_packet": (
+                "qualified provider packet evidence is counted separately from the numerical risk sum; "
+                "a provider release history never creates or changes an initiating frequency"
+            ),
             "fn": "expected-death F-N curves use the same atom-level convention as the campaign backend",
             "conditional_diagnostic_facility": (
                 "facility IR/F-N is calculated from the atoms that reached the risk ledger, "
