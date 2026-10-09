@@ -92,6 +92,30 @@ def _worklist_evidence(**overrides):
     return evidence
 
 
+def _facility_assessment(**overrides):
+    assessment = {
+        "status": "PARTIAL_FACILITY_SCOPE",
+        "facility_total_risk_available": False,
+        "complete_facility_qra_claim": False,
+        "conditional_diagnostic_facility_risk_available": True,
+        "conditional_diagnostic_facility_annual_ir_low_high": {
+            "worker-01": [1.0e-6, 2.0e-6]
+        },
+        "conditional_diagnostic_facility_expected_death_fn_low_high": [
+            [[0.0, 0.0]],
+            [[0.0, 0.0]],
+        ],
+        "conditional_diagnostic_facility_coverage": {
+            "event_count": 24,
+            "case_count": 24,
+            "risk_atom_count": 96,
+            "uncomputed_case_count": 20,
+        },
+    }
+    assessment.update(overrides)
+    return assessment
+
+
 def test_completion_audit_blocks_incomplete_facility_claim():
     report = build_ijhe_completion_audit(
         _status(False),
@@ -306,6 +330,26 @@ def test_completion_audit_records_partial_provider_worklist_coverage():
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
     assert check["evidence"]["exact_match_event_count"] == 19
+    assert len(report["blocking_reasons"]) == 6
+
+
+def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_total():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        facility_assessment=_facility_assessment(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_conditional_facility_risk_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert check["evidence"]["coverage"]["risk_atom_count"] == 96
+    assert report["complete_facility_qra_claim"] is False
     assert len(report["blocking_reasons"]) == 6
 
 

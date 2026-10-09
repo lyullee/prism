@@ -58,6 +58,7 @@ def build_ijhe_completion_audit(
     diagnostic_adapter_registry: Mapping[str, Any] | None = None,
     diagnostic_adapter_execution: Mapping[str, Any] | None = None,
     diagnostic_worklist_evidence: Mapping[str, Any] | None = None,
+    facility_assessment: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -288,6 +289,58 @@ def build_ijhe_completion_audit(
                     "Saved external-model packets cover only the exact-matched worklist subset; "
                     "this diagnostic evidence does not close the missing events or qualify the "
                     "provider packets."
+                ),
+            }
+        )
+    if facility_assessment is not None:
+        assessment = facility_assessment
+        coverage = assessment.get("conditional_diagnostic_facility_coverage")
+        conditional_ir = assessment.get("conditional_diagnostic_facility_annual_ir_low_high")
+        conditional_fn = assessment.get(
+            "conditional_diagnostic_facility_expected_death_fn_low_high"
+        )
+        diagnostic_facility_valid = (
+            assessment.get("conditional_diagnostic_facility_risk_available") is True
+            and isinstance(conditional_ir, Mapping)
+            and bool(conditional_ir)
+            and isinstance(conditional_fn, list)
+            and len(conditional_fn) == 2
+            and isinstance(coverage, Mapping)
+            and isinstance(coverage.get("event_count"), int)
+            and coverage.get("event_count") > 0
+            and isinstance(coverage.get("case_count"), int)
+            and coverage.get("case_count") > 0
+            and isinstance(coverage.get("risk_atom_count"), int)
+            and coverage.get("risk_atom_count") > 0
+            and assessment.get("facility_total_risk_available") is False
+            and assessment.get("complete_facility_qra_claim") is not True
+        )
+        checks.append(
+            {
+                "name": "diagnostic_conditional_facility_risk_evidence",
+                "status": "PASS" if diagnostic_facility_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": assessment.get("_record_path"),
+                    "status": assessment.get("status"),
+                    "conditional_diagnostic_facility_risk_available": assessment.get(
+                        "conditional_diagnostic_facility_risk_available"
+                    ),
+                    "conditional_diagnostic_facility_annual_ir_low_high": conditional_ir,
+                    "conditional_diagnostic_facility_expected_death_fn_low_high": conditional_fn,
+                    "coverage": coverage,
+                    "facility_total_risk_available": assessment.get(
+                        "facility_total_risk_available"
+                    ),
+                    "complete_facility_qra_claim": assessment.get(
+                        "complete_facility_qra_claim"
+                    ),
+                },
+                "interpretation": (
+                    "The facility IR/F-N aggregation is present as a conditional diagnostic view "
+                    "over the saved risk atoms; withheld total-facility qualification and the "
+                    "remaining scope, provider, frequency, and validation gates are preserved."
                 ),
             }
         )

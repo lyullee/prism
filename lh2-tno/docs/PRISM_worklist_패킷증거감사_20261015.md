@@ -49,6 +49,7 @@ python scripts/build_ijhe_completion_audit.py `
   --scope-matrix results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json `
   --campaign-result results/20261014/generic_mixed_provider_campaign_refined_pool_result.json `
   --uncertainty-result results/20261014/generic_lh2_mixed_facility_assessment_refined_pool.json `
+  --facility-assessment results/20261014/generic_lh2_mixed_facility_assessment_refined_pool.json `
   --provider-worklist results/20261014/generic_lh2_provider_release_worklist_diagnostic_adapter.json `
   --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
   --diagnostic-adapter-execution results/20261014/diagnostic_adapter_runner_worklist_storage_001.json `
@@ -56,7 +57,7 @@ python scripts/build_ijhe_completion_audit.py `
   --output results/20261014/ijhe_completion_audit_live_with_worklist_evidence.json
 ```
 
-현재 감사 결과는 `INCOMPLETE_EVIDENCE`이며 14개 검사 중 7개가 차단된다. 새 `diagnostic_worklist_packet_coverage_evidence` 검사는 24/24 coverage를 PASS로 기록하지만 `diagnostic_only=true`이고 차단 이유를 제거하지 않는다. 24개가 모두 구조적으로 연결되었다는 뜻과, 24개가 실제·적격 provider packet이라는 뜻을 혼동하지 않는다. 실제 설비 모델의 적격 사고방출 export, 12개 주요 사고 가족의 완결, 시설 IR/F-N, 독립 물리검증과 시설 전체 빈도 불확실성이 추가로 필요하다.
+현재 감사 결과는 `INCOMPLETE_EVIDENCE`이며 15개 검사 중 7개가 차단된다. 새 `diagnostic_worklist_packet_coverage_evidence` 검사는 24/24 coverage를 PASS로 기록하지만 `diagnostic_only=true`이고 차단 이유를 제거하지 않는다. 24개가 모두 구조적으로 연결되었다는 뜻과, 24개가 실제·적격 provider packet이라는 뜻을 혼동하지 않는다. `diagnostic_conditional_facility_risk_evidence`도 24개 event·24개 case·96개 risk atom에서 조건부 시설 IR/F-N 계산을 PASS로 기록하지만, qualified total은 계속 보류한다. 실제 설비 모델의 적격 사고방출 export, 12개 주요 사고 가족의 완결, 시설 IR/F-N, 독립 물리검증과 시설 전체 빈도 불확실성이 추가로 필요하다.
 
 ## 개발 판단
 
