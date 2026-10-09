@@ -15,7 +15,14 @@ def _worklist(required_opening=0.01):
     }
 
 
-def _write_packet(root, *, opening=0.01, event_id="scope/pipe/G1", component_id="pipe-01"):
+def _write_packet(
+    root,
+    *,
+    opening=0.01,
+    event_id="scope/pipe/G1",
+    component_id="pipe-01",
+    with_sidecars=False,
+):
     directory = root / "pipe_case"
     directory.mkdir()
     data = {
@@ -29,6 +36,8 @@ def _write_packet(root, *, opening=0.01, event_id="scope/pipe/G1", component_id=
         "termination_provenance": "explicit provider termination",
         "termination_basis": "synthetic_diagnostic_horizon",
         "property_basis": {"fluid": "Hydrogen"},
+        "provider_source_digest": "a" * 64,
+        "provider_result_digest": "b" * 64,
         "failure_opening_diameter_m": opening,
         "steps": [{"time_s": 0.0, "mass_flow_kg_s": 0.5}],
     }
@@ -49,6 +58,23 @@ def _write_packet(root, *, opening=0.01, event_id="scope/pipe/G1", component_id=
         "frequency_inference": False,
         "facility_qra_claim": False,
     }), encoding="utf-8")
+    if with_sidecars:
+        (directory / "provider_qualification.json").write_text(json.dumps({
+            "schema_version": "prism.provider_qualification_evidence.v1",
+            "status": "qualified_actual",
+            "provider_origin": "reviewed_actual",
+            "evidence_id": "provider-evidence-001",
+            "event_id": event_id,
+            "component_id": component_id,
+            "port_ids": ["pipe-out"],
+            "provider_source_digests": ["a" * 64],
+            "provider_result_digests": ["b" * 64],
+        }), encoding="utf-8")
+        (directory / "physical_validation.json").write_text(json.dumps({
+            "status": "independent_validated",
+            "evidence_id": "validation-001",
+            "evidence_digest": "c" * 64,
+        }), encoding="utf-8")
     chain = root / "pipe_case_chain"
     chain.mkdir()
     (chain / "verification.json").write_text(
@@ -102,3 +128,30 @@ def test_worklist_evidence_keeps_missing_events_uncomputed(tmp_path):
     assert report["worklist_event_count"] == 2
     assert report["candidate_event_count"] == 1
     assert report["rows"][1]["status"] == "UNCOMPUTED_PROVIDER_PACKET"
+
+
+def test_worklist_evidence_recognizes_exact_qualification_and_validation_sidecars(tmp_path):
+    _write_packet(tmp_path, with_sidecars=True)
+    report = build_provider_worklist_packet_evidence(_worklist(), tmp_path)
+    readiness = report["rows"][0]["evidence"]["qualification_readiness"]
+    assert readiness["qualification_sidecar_present"] is True
+    assert readiness["physical_validation_evidence_present"] is True
+    assert "qualification_sidecar_missing" not in readiness["blockers"]
+    assert "physical_validation_evidence_missing" not in readiness["blockers"]
+    assert report["qualification_readiness"]["qualification_sidecar_present_count"] == 1
+    assert report["qualification_readiness"]["physical_validation_evidence_present_count"] == 1
+    assert readiness["qualification_sidecar_path"].endswith("provider_qualification.json")
+    assert readiness["physical_validation_evidence_path"].endswith("physical_validation.json")
+
+
+def test_worklist_evidence_keeps_mismatched_sidecar_blocked(tmp_path):
+    _write_packet(tmp_path, with_sidecars=True)
+    sidecar = tmp_path / "pipe_case" / "provider_qualification.json"
+    payload = json.loads(sidecar.read_text(encoding="utf-8"))
+    payload["provider_result_digests"] = ["d" * 64]
+    sidecar.write_text(json.dumps(payload), encoding="utf-8")
+    report = build_provider_worklist_packet_evidence(_worklist(), tmp_path)
+    readiness = report["rows"][0]["evidence"]["qualification_readiness"]
+    assert readiness["qualification_sidecar_present"] is False
+    assert "qualification_sidecar_digest_mismatch" in readiness["blockers"]
+    assert readiness["physical_validation_evidence_present"] is True

@@ -98,9 +98,120 @@ def _verification(parent: Path) -> Mapping[str, Any] | None:
     return value if isinstance(value, Mapping) else None
 
 
+def _sidecar(parent: Path, names: tuple[str, ...]) -> tuple[Mapping[str, Any] | None, str | None]:
+    """Load the first declared evidence sidecar without guessing its values.
+
+    Provider folders are exchanged by several teams, so the audit accepts the
+    documented short names while keeping the path in the report.  A malformed
+    sidecar is returned as ``None`` with its path; callers can then distinguish
+    a missing record from a record that failed qualification validation.
+    """
+    for name in names:
+        path = parent / name
+        if not path.is_file():
+            continue
+        try:
+            value = _load(path)
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            return None, str(path)
+        return (value if isinstance(value, Mapping) else None), str(path)
+    return None, None
+
+
+def _unwrap(value: Mapping[str, Any] | None, key: str) -> Mapping[str, Any] | None:
+    if value is None:
+        return None
+    nested = value.get(key)
+    return nested if isinstance(nested, Mapping) else value
+
+
+def _qualification_sidecar_matches(
+    releases: list[Mapping[str, Any]],
+    payload: Mapping[str, Any] | None,
+) -> tuple[bool, str | None]:
+    """Check a qualification sidecar against every resolved endpoint."""
+    record = _unwrap(payload, "provider_qualification")
+    if record is None:
+        return False, "qualification_sidecar_invalid"
+    if record.get("schema_version") != "prism.provider_qualification_evidence.v1":
+        return False, "qualification_sidecar_invalid"
+    if record.get("status") != "qualified_actual":
+        return False, "qualification_sidecar_invalid"
+    if record.get("provider_origin") not in {"native_provider", "reviewed_actual"}:
+        return False, "qualification_sidecar_invalid"
+    if not isinstance(record.get("evidence_id"), str) or not str(record.get("evidence_id")).strip():
+        return False, "qualification_sidecar_invalid"
+    if not releases:
+        return False, "qualification_sidecar_invalid"
+    event_ids = {str(release.get("event_id")) for release in releases}
+    component_ids = {str(release.get("component_id")) for release in releases}
+    ports = tuple(str(release.get("port_id")) for release in releases)
+    if record.get("event_id") not in event_ids or record.get("component_id") not in component_ids:
+        return False, "qualification_sidecar_identity_mismatch"
+    declared_ports = record.get("port_ids")
+    if declared_ports is None:
+        declared_port = record.get("port_id")
+        declared_ports = [declared_port] if declared_port is not None else None
+    if not isinstance(declared_ports, (list, tuple)) or tuple(str(item) for item in declared_ports) != ports:
+        return False, "qualification_sidecar_identity_mismatch"
+    source_digests = tuple(str(release.get("provider_source_digest")) for release in releases)
+    result_digests = tuple(str(release.get("provider_result_digest")) for release in releases)
+    for digest in (*source_digests, *result_digests):
+        if len(digest) != 64:
+            return False, "qualification_sidecar_digest_mismatch"
+        try:
+            int(digest, 16)
+        except ValueError:
+            return False, "qualification_sidecar_digest_mismatch"
+    declared_sources = record.get("provider_source_digests")
+    if declared_sources is None:
+        declared_source = record.get("provider_source_digest")
+        declared_sources = [declared_source] if declared_source is not None else None
+    declared_results = record.get("provider_result_digests")
+    if declared_results is None:
+        declared_result = record.get("provider_result_digest")
+        declared_results = [declared_result] if declared_result is not None else None
+    if (
+        not isinstance(declared_sources, (list, tuple))
+        or tuple(str(item) for item in declared_sources) != source_digests
+        or not isinstance(declared_results, (list, tuple))
+        or tuple(str(item) for item in declared_results) != result_digests
+    ):
+        return False, "qualification_sidecar_digest_mismatch"
+    return True, None
+
+
+def _physical_validation_present(
+    verification: Mapping[str, Any] | None,
+    payload: Mapping[str, Any] | None,
+) -> tuple[bool, str | None]:
+    """Recognize an explicit independent-validation record only."""
+    record = _unwrap(payload, "physical_validation_evidence")
+    if record is None and isinstance(verification, Mapping):
+        record = _unwrap(verification, "physical_validation_evidence")
+    if record is None:
+        return False, "physical_validation_evidence_missing"
+    if record.get("status") != "independent_validated":
+        return False, "physical_validation_evidence_invalid"
+    evidence_id = record.get("evidence_id")
+    digest = record.get("evidence_digest")
+    if not isinstance(evidence_id, str) or not evidence_id.strip() or not isinstance(digest, str) or len(digest) != 64:
+        return False, "physical_validation_evidence_invalid"
+    try:
+        int(digest, 16)
+    except ValueError:
+        return False, "physical_validation_evidence_invalid"
+    return True, None
+
+
 def _qualification_readiness(
     releases: list[Mapping[str, Any]],
     verification: Mapping[str, Any] | None,
+    *,
+    qualification: Mapping[str, Any] | None,
+    physical_validation: Mapping[str, Any] | None,
+    qualification_path: str | None,
+    physical_validation_path: str | None,
 ) -> dict[str, Any]:
     """Explain why an exact packet is still withheld from qualification.
 
@@ -126,10 +237,31 @@ def _qualification_readiness(
         if isinstance(raw_limitations, (list, tuple)):
             limitations = [str(item) for item in raw_limitations if str(item).strip()]
 
-    blockers: list[str] = [
-        "qualification_sidecar_missing",
-        "physical_validation_evidence_missing",
-    ]
+    if qualification is None and qualification_path is None:
+        qualification_present, qualification_reason = False, "qualification_sidecar_missing"
+    else:
+        qualification_present, qualification_reason = _qualification_sidecar_matches(
+            releases, qualification
+        )
+    if physical_validation is None and physical_validation_path is None:
+        physical_validation_present, physical_validation_reason = (
+            False,
+            "physical_validation_evidence_missing",
+        )
+    elif physical_validation is None:
+        physical_validation_present, physical_validation_reason = (
+            False,
+            "physical_validation_evidence_invalid",
+        )
+    else:
+        physical_validation_present, physical_validation_reason = _physical_validation_present(
+            verification, physical_validation
+        )
+    blockers: list[str] = []
+    if not qualification_present:
+        blockers.append(qualification_reason or "qualification_sidecar_missing")
+    if not physical_validation_present:
+        blockers.append(physical_validation_reason or "physical_validation_evidence_missing")
     verification_status = str(verification.get("status", "")) if verification else ""
     if "OPERATOR_LIMITED" in verification_status or (
         isinstance(verification, Mapping) and verification.get("operator_limited") is True
@@ -150,8 +282,10 @@ def _qualification_readiness(
         "termination_bases": termination_bases,
         "verification_status": verification_status or None,
         "verification_limitations": limitations,
-        "qualification_sidecar_present": False,
-        "physical_validation_evidence_present": False,
+        "qualification_sidecar_present": qualification_present,
+        "qualification_sidecar_path": qualification_path,
+        "physical_validation_evidence_present": physical_validation_present,
+        "physical_validation_evidence_path": physical_validation_path,
     }
 
 
@@ -194,7 +328,31 @@ def _candidate_packet(candidate: Mapping[str, Any], work_item: Mapping[str, Any]
     )
     strict_valid = bool(matching) and all(_strict_packet_ok(release) for release in matching)
     verification = _verification(parent)
-    readiness = _qualification_readiness(matching, verification)
+    qualification, qualification_path = _sidecar(
+        parent, ("provider_qualification.json", "qualification.json")
+    )
+    physical_validation, physical_validation_path = _sidecar(
+        parent,
+        ("physical_validation.json", "physical_validation_evidence.json", "validation.json"),
+    )
+    if qualification is None and isinstance(candidate["response"], Mapping):
+        embedded = candidate["response"].get("provider_qualification")
+        if isinstance(embedded, Mapping):
+            qualification = embedded
+            qualification_path = str(response_path)
+    if physical_validation is None and isinstance(verification, Mapping):
+        embedded = verification.get("physical_validation_evidence")
+        if isinstance(embedded, Mapping):
+            physical_validation = embedded
+            physical_validation_path = str(parent / "verification.json")
+    readiness = _qualification_readiness(
+        matching,
+        verification,
+        qualification=qualification,
+        physical_validation=physical_validation,
+        qualification_path=qualification_path,
+        physical_validation_path=physical_validation_path,
+    )
     verification_ok = (
         isinstance(verification, Mapping)
         and isinstance(verification.get("status"), str)
@@ -323,6 +481,14 @@ def build_provider_worklist_packet_evidence(
             blocker_counts[str(blocker)] = blocker_counts.get(str(blocker), 0) + 1
         for origin in readiness.get("input_origins", ()):
             origin_counts[str(origin)] = origin_counts.get(str(origin), 0) + 1
+    qualification_sidecar_count = sum(
+        bool(readiness.get("qualification_sidecar_present"))
+        for readiness in readiness_rows
+    )
+    physical_validation_evidence_count = sum(
+        bool(readiness.get("physical_validation_evidence_present"))
+        for readiness in readiness_rows
+    )
     status = "PARTIAL_DIAGNOSTIC_EVIDENCE" if exact_rows else "NO_DIAGNOSTIC_PACKET_EVIDENCE"
     return {
         "schema_version": "prism.provider_worklist_packet_evidence.v1",
@@ -340,8 +506,8 @@ def build_provider_worklist_packet_evidence(
             "status_counts": dict(sorted(readiness_counts.items())),
             "blocker_counts": dict(sorted(blocker_counts.items())),
             "input_origin_counts": dict(sorted(origin_counts.items())),
-            "qualification_sidecar_present_count": 0,
-            "physical_validation_evidence_present_count": 0,
+            "qualification_sidecar_present_count": qualification_sidecar_count,
+            "physical_validation_evidence_present_count": physical_validation_evidence_count,
         },
         "rows": rows,
         "interpretation": (
