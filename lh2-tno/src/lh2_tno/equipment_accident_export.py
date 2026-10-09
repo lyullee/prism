@@ -168,6 +168,23 @@ def _require_provider_qualification_if_claimed(
         )
 
 
+def _reject_synthetic_qualified_request(input_origin: str, evidence_status: str) -> None:
+    """Keep synthetic scenarios outside the qualified-provider path.
+
+    ``qualified_actual`` is a provenance claim about the accident packet and
+    the facility scenario that produced it.  A provider may still run a
+    synthetic request for diagnostics, but that request must remain explicitly
+    diagnostic even when a test provider happens to return a qualification
+    sidecar.  Enforcing this at request construction prevents a direct export
+    result from being marked promoted before the later campaign-level gates
+    inspect the packet identity.
+    """
+    if evidence_status == "qualified_actual" and input_origin.strip().casefold() == "synthetic":
+        raise EquipmentAccidentExportError(
+            "qualified_actual cannot be requested for input_origin=synthetic"
+        )
+
+
 @dataclass(frozen=True)
 class AccidentReleaseExportRequest:
     """Explicit scenario sent to an external equipment accident exporter."""
@@ -220,6 +237,7 @@ class AccidentReleaseExportRequest:
             raise EquipmentAccidentExportError(
                 f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
             )
+        _reject_synthetic_qualified_request(self.input_origin, self.evidence_status)
         if self.provider_termination_required is not True:
             raise EquipmentAccidentExportError(
                 "provider_termination_required must remain true; PRISM never guesses termination"
@@ -336,6 +354,7 @@ class EmergencyReliefExportRequest:
             raise EquipmentAccidentExportError(
                 f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
             )
+        _reject_synthetic_qualified_request(self.input_origin, self.evidence_status)
         if self.provider_termination_required is not True:
             raise EquipmentAccidentExportError(
                 "provider_termination_required must remain true; PRISM never guesses termination"
@@ -473,6 +492,7 @@ class InventoryReleaseExportRequest:
             raise EquipmentAccidentExportError(
                 f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
             )
+        _reject_synthetic_qualified_request(self.input_origin, self.evidence_status)
         if self.provider_termination_required is not True:
             raise EquipmentAccidentExportError(
                 "provider_termination_required must remain true; PRISM never guesses termination"

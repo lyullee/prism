@@ -129,7 +129,8 @@ def test_explicit_provider_export_is_strictly_promoted_but_diagnostic_is_not_qua
 
 def test_qualified_actual_requires_explicit_evidence_status():
     result = export_equipment_gas_accident_history(
-        _Provider(), _request(evidence_status="qualified_actual")
+        _Provider(),
+        _request(evidence_status="qualified_actual", input_origin="model_prediction"),
     )
     assert result.provider_packet_promoted is True
     assert result.promotion_status == "QUALIFIED_PROVIDER_PACKET"
@@ -143,8 +144,18 @@ def test_qualified_actual_requires_provider_qualification_record():
 
     with pytest.raises(EquipmentAccidentExportError, match="provider_qualification"):
         export_equipment_gas_accident_history(
-            UnqualifiedProvider(), _request(evidence_status="qualified_actual")
+            UnqualifiedProvider(),
+            _request(evidence_status="qualified_actual", input_origin="model_prediction"),
         )
+
+
+def test_qualified_actual_rejects_synthetic_request_before_provider_call():
+    provider = _Provider()
+    with pytest.raises(EquipmentAccidentExportError, match="input_origin=synthetic"):
+        export_equipment_gas_accident_history(
+            provider, _request(evidence_status="qualified_actual")
+        )
+    assert provider.requests == []
 
 
 def test_state_only_model_cannot_be_used_as_accident_export():

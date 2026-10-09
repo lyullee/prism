@@ -2108,7 +2108,7 @@
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": ["CURVE_AVAILABLE", "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY", "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS", "NO_RISK_ATOMS"],
-  "full_portable_test_count_latest": 548,
+  "full_portable_test_count_latest": 549,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": ["annual_condition_weather", "release_branch_termination", "ignition_branch"],
@@ -2128,5 +2128,8 @@
   "facility_stage_timing_accounting_output": "facility ledger timing.stage_elapsed_ms and completion-audit timing evidence",
   "facility_stage_timing_accounting_policy": "Observed per-stage elapsed milliseconds are summarized with sample count, sum, median, max, p95 and p99; no throughput or fresh-physics 1 Hz claim is inferred.",
   "ijhe_requirement_traceability_record": "docs/PRISM_IJHE_완성목표_20261009.md",
-  "ijhe_requirement_traceability_status": "INCOMPLETE_EVIDENCE; diagnostic chain and accounting pass, qualified provider/scope/physical-validation gates remain blocked"
+  "ijhe_requirement_traceability_status": "INCOMPLETE_EVIDENCE; diagnostic chain and accounting pass, qualified provider/scope/physical-validation gates remain blocked",
+  "qualified_provider_synthetic_input_guard_implemented": true,
+  "qualified_provider_synthetic_input_guard_policy": "Requests with input_origin=synthetic and evidence_status=qualified_actual are rejected before provider invocation; diagnostic synthetic runs remain allowed and facility qualification remains unchanged.",
+  "qualified_provider_synthetic_input_guard_record": "docs/PRISM_합성입력_적격provider_차단_개발기록_20261009.md"
 }
