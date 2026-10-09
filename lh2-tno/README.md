@@ -1051,6 +1051,8 @@ near-receptor F/N 연결 검증은 `scripts/build_near_receptor_facility_assessm
 
 최신 29-event·34-case·136-risk-atom 병합 결과의 compact 추적성 증거는 [`native_generic_scope_vertical_branch_release_accounting_summary.json`](examples/native_generic_scope_vertical_branch_release_accounting_summary.json)입니다. 이 파일은 기상조건 3개, 분기 조합 12개, provider 종료근거와 질량 장부 요약을 보존하며, `facility_total_risk_available=false`와 `DIAGNOSTIC_ONLY`를 함께 기록합니다.
 
+같은 원장에 문헌 빈도 민감도 5개를 다시 적용한 branch 장부는 [`native_generic_scope_vertical_frequency_branch_accounting_summary.json`](examples/native_generic_scope_vertical_frequency_branch_accounting_summary.json)입니다. 다섯 시나리오 모두 같은 12개 조건×방출×점화 조합을 유지하고 branch별 가중 빈도만 바꾸며, `facility_credible_interval=false`를 유지합니다.
+
 `facility_total_risk_available`와 `total_facility_annual_ir_low_high`는 검증용 결과입니다. 예상 설비·사고가 모두 실행되고 미계산 사건, 합성 종료시계, 연산자 제한, 실제 형상 미확정, 물리검증 부족이 해소될 때만 채워집니다. 현재 공식 결과는 진단용 IR/F-N은 계산되지만 검증용 시설 총위험도는 `null`입니다. 이는 계산을 버린 것이 아니라, 부분 계산을 전체 시설 위험도로 잘못 표시하지 않도록 한 승격 경계입니다. 사건 수, risk atom 수, 연산자 제한 수, 차단 이유는 `conditional_diagnostic_facility_coverage`에서 확인할 수 있습니다.
 
 사고 가족별 범위도 같은 평가에 연결됩니다. `results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json`은 현재 혼합 캠페인의 12개 주요 사고 가족을 `EXECUTED` 4개, `PARTIAL` 7개, `NO_EVENT_GENERATED` 1개로 기록합니다. 이 표는 사고 빈도를 합산하는 표가 아니라, 어떤 사고가 계산됐고 어떤 사고가 빠졌는지를 시설 총위험도 승격 전에 확인하는 장부입니다.

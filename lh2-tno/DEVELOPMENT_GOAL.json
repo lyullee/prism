@@ -2121,5 +2121,7 @@
   "frequency_uncertainty_branch_accounting_implemented": true,
   "frequency_uncertainty_branch_accounting_output": "Each literature reweighting scenario carries scenario_branch_accounting with the same condition/release/ignition topology and scenario-specific weighted frequency sums.",
   "facility_branch_release_accounting_summary": "examples/native_generic_scope_vertical_branch_release_accounting_summary.json",
-  "facility_branch_release_accounting_summary_status": "DIAGNOSTIC_ONLY; latest merged 29 events, 34 cases, 136 risk atoms; facility total withheld"
+  "facility_branch_release_accounting_summary_status": "DIAGNOSTIC_ONLY; latest merged 29 events, 34 cases, 136 risk atoms; facility total withheld",
+  "frequency_branch_accounting_summary": "examples/native_generic_scope_vertical_frequency_branch_accounting_summary.json",
+  "frequency_branch_accounting_summary_status": "DIAGNOSTIC_ONLY; 5 literature scenarios preserve the same 12 condition×release×ignition combinations; facility credible interval false"
 }
