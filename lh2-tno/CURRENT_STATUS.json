@@ -2804,5 +2804,8 @@
     "provider_worklist_coverage",
     "declared_major_accident_scope",
     "facility_ir_fn_available"
-  ]
+  ],
+  "full_portable_test_count_latest": 526,
+  "full_portable_test_status_latest": "526 passed",
+  "full_portable_test_record_latest": "pytest -q"
 }
