@@ -198,12 +198,41 @@ def test_facility_ledger_withholds_total_for_missing_component_and_family():
         "known_contribution_annual_ir_low_high"
     ]
     assert result["conditional_diagnostic_facility_coverage"]["uncomputed_case_count"] == 1
+    assert result["conditional_diagnostic_facility_coverage"]["strict_uncomputed_case_count"] == 1
+    assert result["conditional_diagnostic_facility_coverage"]["conditional_case_count"] == 1
+    assert result["conditional_diagnostic_facility_coverage"]["conditional_executed_case_count"] == 1
+    assert result["conditional_diagnostic_facility_coverage"]["conditional_uncomputed_case_count"] == 0
     assert result["conditional_diagnostic_facility_coverage"]["overlapping_case_uncomputed_count"] == 1
     assert result["conditional_diagnostic_facility_coverage"]["operator_limited_case_count"] == 0
     assert len(result["scope_matrix_digests"]) == 1
     assert "missing expected components: pipe-01" in result["blocking_reasons"]
     assert "accident family pipe_hole: missing scope matrix" in result["blocking_reasons"]
     assert result["component_statuses"]["tank-01"] == "PARTIAL"
+
+
+def test_facility_ledger_keeps_weather_and_release_branches_as_distinct_cases():
+    result = _result(
+        event_id="event-multi-case", asset_id="asset-multi-case",
+        component_id="tank-multi-case", frequency=1e-3,
+    )
+    second = dict(result["cases"][0])
+    second.update({"annual_condition_id": "weather-2", "release_branch_id": "release-2"})
+    result["cases"].append(second)
+    second_missing = dict(second)
+    second_missing["status"] = "UNCOMPUTED"
+    result["uncomputed_cases"].append(second_missing)
+    result["declared_scope_numerically_complete"] = False
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-multi-case",)
+    )
+
+    coverage = merged["conditional_diagnostic_facility_coverage"]
+    assert coverage["case_count"] == 2
+    assert coverage["conditional_case_count"] == 2
+    assert coverage["conditional_executed_case_count"] == 2
+    assert coverage["conditional_uncomputed_case_count"] == 0
+    assert coverage["strict_uncomputed_case_count"] == 1
+    assert coverage["overlapping_case_uncomputed_count"] == 1
 
 
 def test_facility_ledger_accepts_not_applicable_accident_family():

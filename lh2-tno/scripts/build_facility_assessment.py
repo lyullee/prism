@@ -67,6 +67,7 @@ def main() -> int:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(assessment, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     uncertainty = assessment["frequency_uncertainty"]
+    coverage = assessment["conditional_diagnostic_facility_coverage"]
     print(json.dumps({
         "status": assessment["status"],
         "output": str(args.output),
@@ -74,9 +75,18 @@ def main() -> int:
         "conditional_diagnostic_facility_risk_available": assessment[
             "conditional_diagnostic_facility_risk_available"
         ],
-        "conditional_diagnostic_operator_limited_case_count": assessment[
-            "conditional_diagnostic_facility_coverage"
-        ]["operator_limited_case_count"],
+        "conditional_diagnostic_operator_limited_case_count": coverage.get(
+            "operator_limited_case_count", 0
+        ),
+        "conditional_diagnostic_case_count": coverage.get(
+            "conditional_case_count", coverage.get("case_count", 0)
+        ),
+        "conditional_diagnostic_uncomputed_case_count": coverage.get(
+            "conditional_uncomputed_case_count", coverage.get("uncomputed_case_count", 0)
+        ),
+        "strict_uncomputed_case_count": coverage.get(
+            "strict_uncomputed_case_count", coverage.get("uncomputed_case_count", 0)
+        ),
         "campaign_count": len(assessment["facility_risk_ledger"]["campaign_ids"]),
         "component_contribution_count": len(assessment["facility_risk_ledger"]["component_contributions"]),
         "scope_matrix_count": len(assessment["facility_risk_ledger"]["scope_matrix_digests"]),

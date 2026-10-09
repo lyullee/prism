@@ -56,6 +56,29 @@ def _unwrap_campaign(row: Mapping[str, Any], index: int) -> tuple[str, Mapping[s
     return str(campaign_id or f"campaign-{index + 1}"), row
 
 
+def _case_identity(row: Mapping[str, Any]) -> tuple[str, ...]:
+    """Return the stable identity used for facility case accounting.
+
+    One event can intentionally be evaluated for more than one weather,
+    release-branch, or ignition branch.  Event ID alone therefore collapses
+    distinct numerical cases.  Keep the same dimensions used by risk atoms;
+    fall back to the event ID only for legacy rows that do not carry the
+    dimensions yet.
+    """
+    event_id = str(row.get("event_id", ""))
+    condition_id = row.get("annual_condition_id")
+    branch_id = row.get("release_branch_id")
+    ignition_id = row.get("ignition_branch")
+    if any(value is not None and str(value) for value in (condition_id, branch_id, ignition_id)):
+        return (
+            event_id,
+            str(condition_id or ""),
+            str(branch_id or ""),
+            str(ignition_id or ""),
+        )
+    return (event_id,)
+
+
 def _validate_atoms(
     atoms: Sequence[Any],
     *,
@@ -483,27 +506,32 @@ def merge_facility_campaign_results(
     # an operator-limited release or a synthetic diagnostic horizon).  The
     # diagnostic view is useful for wiring the facility aggregation and for
     # sensitivity studies while making the qualification boundary explicit.
-    # A campaign may retain the same event in both ``cases`` and
+    # A campaign may retain the same case in both ``cases`` and
     # ``uncomputed_cases`` to preserve an operator-limited/diagnostic reason.
-    # Count one status per event for coverage summaries, preferring the
-    # evaluated case row when both rows exist; the raw row counts remain
-    # available separately above.
-    case_status_by_event: dict[str, str] = {}
+    # Count one status per *case identity* for coverage summaries, preferring
+    # the evaluated case row when both rows exist.  Event ID alone is not a
+    # case identity because one event can have multiple weather or release
+    # branches; the raw row counts remain available separately above.
+    case_status_by_identity: dict[tuple[str, ...], str] = {}
     for case in merged_cases:
-        event_id = str(case.get("event_id", ""))
-        case_status_by_event[event_id] = str(case.get("status", "UNKNOWN"))
+        case_status_by_identity[_case_identity(case)] = str(case.get("status", "UNKNOWN"))
     overlapping_case_uncomputed_count = 0
     uncomputed_status_counts: dict[str, int] = defaultdict(int)
     for case in merged_missing:
-        event_id = str(case.get("event_id", ""))
+        identity = _case_identity(case)
         uncomputed_status_counts[str(case.get("status", "UNKNOWN"))] += 1
-        if event_id in case_status_by_event:
+        if identity in case_status_by_identity:
             overlapping_case_uncomputed_count += 1
             continue
-        case_status_by_event[event_id] = str(case.get("status", "UNKNOWN"))
+        case_status_by_identity[identity] = str(case.get("status", "UNKNOWN"))
     case_status_counts: dict[str, int] = defaultdict(int)
-    for status in case_status_by_event.values():
+    for status in case_status_by_identity.values():
         case_status_counts[status] += 1
+    conditional_case_count = len(case_status_by_identity)
+    conditional_executed_case_count = sum(
+        status.startswith("EXECUTED") for status in case_status_by_identity.values()
+    )
+    conditional_uncomputed_case_count = conditional_case_count - conditional_executed_case_count
     operator_limited_case_count = sum(
         count for status, count in case_status_counts.items()
         if "OPERATOR_LIMITED" in status
@@ -592,6 +620,10 @@ def merge_facility_campaign_results(
         "event_count": len(merged_events),
         "case_count": len(merged_cases),
         "uncomputed_case_count": len(merged_missing),
+        "strict_uncomputed_case_count": len(merged_missing),
+        "conditional_case_count": conditional_case_count,
+        "conditional_executed_case_count": conditional_executed_case_count,
+        "conditional_uncomputed_case_count": conditional_uncomputed_case_count,
         "overlapping_case_uncomputed_count": overlapping_case_uncomputed_count,
         "risk_atom_count": len(merged_atoms),
         "case_status_counts": dict(sorted(case_status_counts.items())),
@@ -619,6 +651,9 @@ def merge_facility_campaign_results(
         "event_count": len(merged_events),
         "case_count": len(merged_cases),
         "uncomputed_case_count": len(merged_missing),
+        "conditional_case_count": conditional_case_count,
+        "conditional_executed_case_count": conditional_executed_case_count,
+        "conditional_uncomputed_case_count": conditional_uncomputed_case_count,
         "events": merged_events,
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
@@ -643,6 +678,11 @@ def merge_facility_campaign_results(
         "conditional_diagnostic_facility_basis": (
             "linear sum of validated risk atoms from the evaluated equipment campaigns; "
             "scope blockers are retained and this view is not a qualified facility total"
+        ),
+        "conditional_diagnostic_case_accounting": (
+            "conditional_case_count uses event, annual condition, release branch, and ignition "
+            "branch identity; strict_uncomputed_case_count retains duplicate evidence rows "
+            "used to explain operator-limited or domain-incomplete status"
         ),
         "conditional_diagnostic_facility_coverage": conditional_diagnostic_coverage,
         "declared_scope_annual_ir_low_high": known_ir if total_available else None,

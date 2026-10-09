@@ -7,7 +7,7 @@
 **버전 0.6.2 / 기준일 2026-10-09** — 기본 `standard` 분석과 선택형 `lh2` 분석을 공통 실행기에서 선택합니다.
 범용 액화수소시설에 적용하는 인터페이스이며 특정 실증센터의 설비·태그를 필수로 요구하지 않습니다.
 
-**2026-10-22 최신 개발 기준점:** 밸브 5개 면적 구간과 두 기상 조건을 포함한 7개 캠페인 시설 원장은 41개 사건·80개 case·312개 risk atom을 보존한다. 최신 IJHE 감사는 28개 검사 중 3개를 차단하며, 12개 선언 사고 family의 조건부 숫자 chain은 미계산 0건으로 닫혔다. 엄격한 시설 범위는 여전히 부분 상태이고 적격 provider packet·독립 검증·시설 IR/F-N은 보류된다. 현재 상태 파일과 [밸브 결합 개발기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)에 기록된다. 전체 portable test suite는 **496개**다.
+**2026-10-22 최신 개발 기준점:** 밸브 5개 면적 구간과 두 기상 조건을 포함한 7개 캠페인 시설 원장은 41개 사건·80개 case·312개 risk atom을 보존한다. 최신 IJHE 감사는 28개 검사 중 3개를 차단하며, 12개 선언 사고 family의 조건부 숫자 chain은 미계산 0건으로 닫혔다. 엄격한 시설 범위는 여전히 부분 상태이고 적격 provider packet·독립 검증·시설 IR/F-N은 보류된다. 현재 상태 파일과 [밸브 결합 개발기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)에 기록된다. 전체 portable test suite는 **497개**다.
 
 > 현재는 연구용 진단 계산 시스템입니다. 방출부터 최종 피해까지 실행하는 경로는 구현했지만,
 > 새 LH2 경로의 전체 시설 QRA, 현장 정확도와 매초 신규 물리 계산은 아직 검증되지 않았습니다.
@@ -1119,3 +1119,6 @@ python scripts/validate_equipment_campaign.py `
 `validate_valve_campaign.py --area-bin AREA_0.01% --timeout-s 360`처럼 제한시간 초과 사례만 선택 재실행할 수 있다. 이 재시도 후 밸브 10개 사례가 모두 계산됐지만 모두 `EXECUTED_OPERATOR_LIMITED`이며, 시설 원장은 [`repaired ledger`](results/20261022/native_campaign_with_repaired_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json)에서 312개 위험 원자로 갱신됐다. 제한시간 개선은 계산 누락을 줄인 것이고 provider 자격·물리검증·시설 전체 QRA 승격을 의미하지 않는다.
 
 사고범위 표의 `conditional_status`/`conditional_chain_complete`는 수치 계산 완료 여부를 별도로 보여준다. 운전자 제한 사례는 조건부 숫자 계산으로 세지만 엄격한 `status`/`matrix_complete`는 계속 `PARTIAL`로 유지한다. 이전 범위표 형식의 `executed_case_count`를 보정해 현재 조건부 범위는 12개 선언 family 모두 미계산 0건으로 기록한다.
+
+
+**2026-10-22 case 회계 보정:** 시설 원장의 서로 다른 기상·방출 branch를 event ID만으로 합치지 않도록 case 식별자를 보정했다. 최신 80개 case 중 78개는 조건부 숫자 chain을 실행했고 2개는 `UNCOMPUTED`로 남았다. 엄격 승격용 보류 복사본 37개와 구분한 자세한 정의는 [조건부 case 회계 보정 기록](docs/PRISM_조건부case_회계보정_20261022.md)에 있다.
