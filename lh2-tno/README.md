@@ -1000,6 +1000,12 @@ provider consequence 결과에 네 가지 옥외 점화 branch(`direct_fire`, `d
 문헌 p05/p95가 있으면 같은 피해 결과를 재실행하지 않고 `current_weather_frequency_sensitivity_ir_low_high`에 세 빈도 경계의 재가중 결과를 함께 기록하며, published 값이 p05와 p95 사이에 있지 않으면 입력을 거절합니다.
 시설 IR/F-N은 별도의 문헌 빈도·사고범위·물리검증·시설 장부 gate를 통과한 campaign에서만 계산됩니다. 인구 장부를 추가해도 센서 기반 빈도 학습, 누출 크기 역추정, 전체 시설 위험 승격은 수행하지 않습니다.
 
+`aggregate.processing_time`에는 accepted 설비의 `service_elapsed_ms`와
+`physics_run_elapsed_ms`를 설비별로 남기고, 배치 합계·평균·최대값을 기록합니다.
+이는 한 번의 동기 배치 처리시간을 보여주는 운영 장부이며, 지속 처리량이나
+새로운 물리계산의 1 Hz 달성 증거로 해석하지 않습니다. 설비가 거절되거나 시간
+측정값이 없으면 해당 행은 `WITHHELD` 또는 `PARTIAL`로 남습니다.
+
 ## 출력 해석
 
 `--output` 파일에 전체 결과를 저장합니다. 콘솔의 짧은 status만으로 피해를 판정하지 않습니다.

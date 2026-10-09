@@ -1522,6 +1522,82 @@ class FacilityRealtimeConsequenceMonitor:
             bool(entry["result"]["service"]["exact_cache_hit"])
             for entry in accepted
         )
+        processing_time_rows: dict[str, dict[str, float | bool]] = {}
+        processing_time_invalid_components: list[str] = []
+        for component_id, entry in components.items():
+            if entry.get("status") != "ACCEPTED":
+                continue
+            service_metadata = entry.get("result", {}).get("service", {})
+            service_elapsed_ms = (
+                service_metadata.get("service_elapsed_ms")
+                if isinstance(service_metadata, Mapping)
+                else None
+            )
+            physics_elapsed_ms = (
+                service_metadata.get("physics_run_elapsed_ms")
+                if isinstance(service_metadata, Mapping)
+                else None
+            )
+            if any(
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(float(value))
+                or float(value) < 0.0
+                for value in (service_elapsed_ms, physics_elapsed_ms)
+            ):
+                processing_time_invalid_components.append(component_id)
+                continue
+            processing_time_rows[component_id] = {
+                "service_elapsed_ms": float(service_elapsed_ms),
+                "physics_run_elapsed_ms": float(physics_elapsed_ms),
+                "fresh_physics_this_update": bool(
+                    service_metadata.get("fresh_physics_this_update")
+                ),
+                "exact_cache_hit": bool(service_metadata.get("exact_cache_hit")),
+            }
+        service_elapsed_values = [
+            row["service_elapsed_ms"] for row in processing_time_rows.values()
+        ]
+        physics_elapsed_values = [
+            row["physics_run_elapsed_ms"] for row in processing_time_rows.values()
+        ]
+        if not processing_time_rows:
+            processing_time = {
+                "status": "WITHHELD_NO_ACCEPTED_COMPONENT_TIMING",
+                "component_rows": {},
+                "invalid_components": processing_time_invalid_components,
+                "total_service_elapsed_ms": None,
+                "mean_service_elapsed_ms": None,
+                "max_service_elapsed_ms": None,
+                "total_physics_run_elapsed_ms": None,
+                "mean_physics_run_elapsed_ms": None,
+                "max_physics_run_elapsed_ms": None,
+                "measurement_policy": (
+                    "one synchronous facility batch only; these timings do not establish "
+                    "sustained throughput or a 1 Hz fresh-physics claim"
+                ),
+            }
+        else:
+            complete_timing = (
+                len(processing_time_rows) == len(component_ids)
+                and not processing_time_invalid_components
+                and batch_status == "ACCEPTED"
+            )
+            processing_time = {
+                "status": "AVAILABLE_COMPLETE_BATCH" if complete_timing else "AVAILABLE_PARTIAL_BATCH",
+                "component_rows": processing_time_rows,
+                "invalid_components": processing_time_invalid_components,
+                "total_service_elapsed_ms": sum(service_elapsed_values),
+                "mean_service_elapsed_ms": sum(service_elapsed_values) / len(service_elapsed_values),
+                "max_service_elapsed_ms": max(service_elapsed_values),
+                "total_physics_run_elapsed_ms": sum(physics_elapsed_values),
+                "mean_physics_run_elapsed_ms": sum(physics_elapsed_values) / len(physics_elapsed_values),
+                "max_physics_run_elapsed_ms": max(physics_elapsed_values),
+                "measurement_policy": (
+                    "one synchronous facility batch only; these timings do not establish "
+                    "sustained throughput or a 1 Hz fresh-physics claim"
+                ),
+            }
         release_resolved_count = sum(
             bool(entry["result"].get("telemetry_boundary", {}).get("equipment_release_resolved"))
             for entry in accepted
@@ -1685,6 +1761,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "cache_hit_count": cache_count,
                 "deadline_miss_count": deadline_misses,
                 "facility_time_window": facility_time_window,
+                "processing_time": processing_time,
                 "max_source_time_span_s": self.max_source_time_span_s,
                 "provider_release_resolved_component_count": release_resolved_count,
                 "equipment_release_path_component_count": release_path_available_count,

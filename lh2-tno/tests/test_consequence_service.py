@@ -823,6 +823,13 @@ def test_facility_row_batch_combines_literature_ir_and_conditional_fn(tmp_path):
     assert aggregate['conditional_current_weather_expected_death_fn']['frequency_sensitivity_expected_death_fn_low_high']['p95'] == pytest.approx(
         [1.2e-3, 2.4e-3]
     )
+    assert aggregate['processing_time']['status'] == 'AVAILABLE_COMPLETE_BATCH'
+    assert set(aggregate['processing_time']['component_rows']) == {
+        'storage-tank-01', 'transfer-pump-01'
+    }
+    assert aggregate['processing_time']['total_service_elapsed_ms'] >= 0.0
+    assert aggregate['processing_time']['total_physics_run_elapsed_ms'] >= 0.0
+    assert '1 Hz fresh-physics claim' in aggregate['processing_time']['measurement_policy']
     ignition = aggregate['current_weather_ignition_accounting']
     assert ignition['status'] == 'AVAILABLE_CURRENT_WEATHER_IGNITION_ACCOUNTING'
     assert ignition['weighted_branch_frequency_per_year']['direct_fire'] == pytest.approx(7.5e-5)
