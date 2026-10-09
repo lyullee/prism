@@ -83,7 +83,8 @@ class MappedPumpAccidentProvider:
                  head_curve_points: list[list[float]], reference_speed_rpm: float,
                  speed_rpm: float, isentropic_efficiency: float,
                  opening_diameter_m: float, discharge_coefficient: float,
-                 flow_match_tolerance: float) -> None:
+                 flow_match_tolerance: float,
+                 coupled_outlet_boundary: bool = False) -> None:
         self.root = root.resolve()
         self.duration_s = float(duration_s)
         self.time_step_s = float(time_step_s)
@@ -98,6 +99,7 @@ class MappedPumpAccidentProvider:
         self.opening_diameter_m = float(opening_diameter_m)
         self.discharge_coefficient = float(discharge_coefficient)
         self.flow_match_tolerance = float(flow_match_tolerance)
+        self.coupled_outlet_boundary = bool(coupled_outlet_boundary)
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         if self.duration_s <= 0.0 or self.time_step_s <= 0.0:
@@ -114,7 +116,6 @@ class MappedPumpAccidentProvider:
 
         properties = HydrogenProperties("Hydrogen")
         inlet = properties.from_pT(self.inlet_pressure_pa, self.inlet_temperature_k)
-        downstream = properties.from_pT(self.downstream_pressure_pa, self.downstream_temperature_k)
         if "liquid" not in str(inlet.phase).lower() or "gas" in str(inlet.phase).lower():
             raise ValueError("MappedPump diagnostic inlet must be liquid")
         pump = MappedPump(
@@ -124,18 +125,53 @@ class MappedPumpAccidentProvider:
             isentropic_efficiency=self.isentropic_efficiency,
             properties=properties,
         )
-        pump_result = pump.evaluate(inlet, downstream)
-        if pump_result.mass_flow_kg_s <= 0.0:
-            raise ValueError("MappedPump map produced no positive flow")
-        pump_outlet = properties.from_ph(
-            downstream.pressure_Pa, pump_result.outlet_specific_enthalpy_J_kg
-        )
         ambient_pressure = float(request["ambient_pressure_pa_abs"])
         ambient_temperature = float(request["ambient_temperature_k"])
         ambient = properties.from_pT(ambient_pressure, ambient_temperature)
         area = math.pi * self.opening_diameter_m**2 / 4.0
         valve = Valve(area, self.discharge_coefficient, properties=properties, allow_reverse=False)
-        valve_result = valve.evaluate(pump_outlet, ambient, opening=1.0)
+        def evaluate_boundary(pressure_pa: float) -> tuple[Any, Any, Any, float]:
+            downstream = properties.from_pT(pressure_pa, self.downstream_temperature_k)
+            pump_result = pump.evaluate(inlet, downstream)
+            pump_outlet = properties.from_ph(
+                pressure_pa, pump_result.outlet_specific_enthalpy_J_kg
+            )
+            valve_result = valve.evaluate(pump_outlet, ambient, opening=1.0)
+            return pump_result, pump_outlet, valve_result, float(
+                valve_result.mass_flow_kg_s - pump_result.mass_flow_kg_s
+            )
+
+        if self.coupled_outlet_boundary:
+            if self.downstream_pressure_pa <= ambient_pressure:
+                raise ValueError("coupled pump boundary upper pressure must exceed ambient pressure")
+            lower = ambient_pressure
+            upper = self.downstream_pressure_pa
+            _, _, _, lower_residual = evaluate_boundary(lower)
+            _, _, _, upper_residual = evaluate_boundary(upper)
+            if lower_residual > 0.0 or upper_residual < 0.0:
+                raise ValueError(
+                    "coupled pump and atmospheric valve flows have no bracket over the declared pressure range"
+                )
+            for _ in range(80):
+                midpoint = 0.5 * (lower + upper)
+                _, _, _, residual = evaluate_boundary(midpoint)
+                if residual > 0.0:
+                    upper = midpoint
+                else:
+                    lower = midpoint
+            solved_pressure = 0.5 * (lower + upper)
+            pump_result, pump_outlet, valve_result, _ = evaluate_boundary(solved_pressure)
+            boundary_pressure_pa = solved_pressure
+        else:
+            downstream = properties.from_pT(self.downstream_pressure_pa, self.downstream_temperature_k)
+            pump_result = pump.evaluate(inlet, downstream)
+            pump_outlet = properties.from_ph(
+                downstream.pressure_Pa, pump_result.outlet_specific_enthalpy_J_kg
+            )
+            valve_result = valve.evaluate(pump_outlet, ambient, opening=1.0)
+            boundary_pressure_pa = self.downstream_pressure_pa
+        if pump_result.mass_flow_kg_s <= 0.0:
+            raise ValueError("MappedPump map produced no positive flow")
         valve_flow = float(valve_result.mass_flow_kg_s)
         relative_error = abs(valve_flow - pump_result.mass_flow_kg_s) / pump_result.mass_flow_kg_s
         if relative_error > self.flow_match_tolerance:
@@ -199,6 +235,8 @@ class MappedPumpAccidentProvider:
                     "mass_flow_kg_s": pump_result.mass_flow_kg_s,
                     "valve_flow_kg_s": valve_flow,
                     "flow_relative_error": relative_error,
+                    "boundary_pressure_pa": boundary_pressure_pa,
+                    "coupled_outlet_boundary": self.coupled_outlet_boundary,
                     "pressure_rise_pa": pump_result.pressure_rise_Pa,
                     "map_head_pressure_rise_pa": pump_result.map_head_pressure_rise_Pa,
                     "map_limited": pump_result.map_limited,
@@ -232,6 +270,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         speed_rpm=args.speed_rpm, isentropic_efficiency=args.isentropic_efficiency,
         opening_diameter_m=args.opening_diameter_m, discharge_coefficient=args.discharge_coefficient,
         flow_match_tolerance=args.flow_match_tolerance,
+        coupled_outlet_boundary=args.coupled_outlet_boundary,
     )
     result = export_equipment_liquid_accident_history(provider, request)
     release = result.release.model_dump(mode="json")
@@ -250,6 +289,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "limitations": [
             "MappedPump owns no tank inventory; available mass is an explicit feed-through diagnostic reserve",
             "synthetic H-Q-N map, liquid states, downstream pressure and atmospheric valve geometry",
+            "coupled pump/valve pressure boundary is a numerical diagnostic closure when enabled",
             "no pump seal failure mode, isolation logic, field frequency or independent physical validation",
         ],
     }
@@ -276,6 +316,10 @@ def main() -> int:
     parser.add_argument("--opening-diameter-m", type=float, default=0.000538)
     parser.add_argument("--discharge-coefficient", type=float, default=0.7)
     parser.add_argument("--flow-match-tolerance", type=float, default=0.02)
+    parser.add_argument(
+        "--coupled-outlet-boundary", action="store_true",
+        help="solve the pump discharge pressure so mapped-pump and atmospheric-valve flows match",
+    )
     parser.add_argument("--nozzle-height-m", type=float, default=0.5)
     parser.add_argument("--component-id", default="mapped-pump-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")

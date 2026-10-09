@@ -15,6 +15,8 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+import CoolProp.CoolProp as CP
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -70,6 +72,20 @@ def _coarsen_steps(steps: list[dict[str, Any]], *, duration_s: float, maximum_st
         first["time_s"] = float(group[0]["time_s"])
         for key in numeric:
             first[key] = weighted[key] / total_dt
+        # Pressure and static enthalpy are the conserved thermodynamic
+        # boundary quantities.  Averaging temperature and density
+        # independently can create a state that is not on the declared EOS
+        # (the first 600 s interval exposed this at the 1e-4 level).  Rebuild
+        # those derived fields from the averaged P/H pair before the packet
+        # reaches the strict gas worker.
+        first["temperature_k"] = float(CP.PropsSI(
+            "T", "P", first["pressure_pa_abs"], "Hmass",
+            first["specific_enthalpy_j_kg"], "Hydrogen"
+        ))
+        first["density_kg_m3"] = float(CP.PropsSI(
+            "Dmass", "P", first["pressure_pa_abs"], "Hmass",
+            first["specific_enthalpy_j_kg"], "Hydrogen"
+        ))
         if first["effective_area_m2"] > 0.0 and first["density_kg_m3"] > 0.0:
             # Preserve the strict mass/area/density/velocity closure after
             # averaging a variable-opening provider trace.

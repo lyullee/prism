@@ -350,7 +350,10 @@ class ConsequenceRequest(Contract):
         if event is not None:
             if self.release_termination is None or self.release_termination.time_s != duration:
                 raise ValueError('bound event requires explicit release-duration/termination basis; frequency does not justify cutting a release short')
-            if event.model_component_id != self.component_id or event.exposure_multiplier != 1:
+            if (
+                event.model_component_id != self.component_id
+                or (event.exposure_multiplier != 1 and event.location_weight is None)
+            ):
                 raise ValueError('frequency event requires a matching single-item release')
             if event.release.mode == 'instantaneous_inventory':
                 if self.source_operator not in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'} or self.release_termination.basis != 'inventory_depletion':

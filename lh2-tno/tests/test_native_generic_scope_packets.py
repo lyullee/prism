@@ -31,7 +31,15 @@ def test_inventory_trace_coarsening_preserves_clock_and_integrated_mass():
         for i, row in enumerate(compact)
     )
     assert mass == 1200.0
-    assert all(row["velocity_m_s"] == 2.0 for row in compact)
+    # Temperature/density are rebuilt from the averaged P/H state, so the
+    # velocity must be checked against the retained mass/area closure rather
+    # than against the pre-EOS synthetic fixture value.
+    assert all(
+        row["velocity_m_s"] == row["mass_flow_kg_s"] / (
+            row["density_kg_m3"] * row["effective_area_m2"]
+        )
+        for row in compact
+    )
 
 
 def test_native_packet_identity_validator_rejects_wrong_port():

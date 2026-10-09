@@ -33,6 +33,8 @@ class FrequencyEvent(Contract):
     base_rate: Nonnegative
     rate_unit: Literal['item^-1 year^-1', 'm^-1 year^-1']
     exposure_multiplier: Positive
+    location_weight: Fraction | None = None
+    location_weight_provenance: Name | None = None
     annual_frequency_per_year: Nonnegative
     statistic: Literal['published_default', 'published_median']
     marginal_p05_per_year: Nonnegative | None = None
@@ -203,6 +205,8 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
                 log_rate_mu=row.get('mu'), log_rate_sigma=row.get('sigma'),
                 source=profile['source'], source_sha256=profile['source_sha256'], catalogue_digest=canonical_digest(data),
                 release=ReleaseDefinition(**release), classification_basis=asset.classification_basis,
+                location_weight=asset.location_weight,
+                location_weight_provenance=asset.location_weight_provenance,
                 limitations=tuple(dict.fromkeys(limitations))))
     return tuple(out)
 
@@ -286,7 +290,7 @@ def bind_event(request, event: FrequencyEvent):
         diameter = request.source_input['nozzle']['diameter_m']
     if event.release.mode == 'hole' and not math.isclose(diameter, event.release.hole_diameter_m, rel_tol=1e-10, abs_tol=1e-12):
         raise ValueError('frequency leak size must equal the physical source opening')
-    if event.release.mode == 'hole' and event.exposure_multiplier != 1:
+    if event.release.mode == 'hole' and event.exposure_multiplier != 1 and event.location_weight is None:
         raise ValueError('aggregated items/length need explicit location weights; cannot assign all frequency to one source point')
     payload = request.model_dump(mode='json')
     if request.annual_frequency_per_year is not None:

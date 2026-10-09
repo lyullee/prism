@@ -113,6 +113,7 @@ def _spec(
             "--duration-s", "0.2", "--time-step-s", "0.02",
             "--opening-diameter-m", repr(float(event.release.hole_diameter_m)),
             "--port-id", port, "--nozzle-height-m", "0.5",
+            "--coupled-outlet-boundary",
         ]
     elif event.model_component_id == "ambient-vaporizer-01":
         if event.release.mode == "instantaneous_inventory":
@@ -208,7 +209,10 @@ def _retry_commands(spec: dict[str, Any]) -> list[list[str]]:
         # external diagnostic vessel.  Large openings need a micro-step to
         # keep the provider's positive-mass/EOS solve finite.
         retry = _replace_flag(command, "--time-step-s", "0.000001")
-        retry = _replace_flag(retry, "--target-release-kg", "0.00001")
+        # Keep the exact opening area, but retain a slightly longer positive
+        # inventory trace so a microsecond-scale liquid-pool handoff is not
+        # dominated by endpoint roundoff in the downstream ledger.
+        retry = _replace_flag(retry, "--target-release-kg", "0.0001")
         retry = _replace_flag(retry, "--max-intervals", "256")
         return [retry]
     if spec["component_id"] == "liquid-transfer-line-01" and float(spec["opening_diameter_m"]) >= 0.02:
