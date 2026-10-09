@@ -49,7 +49,7 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
   --manifest examples/generic_lh2_full_scope_manifest.json `
   --campaign results/20261023/native_generic_scope_campaign_v11.json `
   --backend-config results/20261009/backend_config_current.json `
-  --output results/20261023/native_generic_scope_campaign_result_v11.json
+  --output results/20261023/native_generic_scope_campaign_result_v12.json
 ```
 
 ## 패킷 카탈로그 결과
@@ -72,33 +72,33 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
 
 ## 방출부터 피해까지 실행 결과
 
-컴파일 결과 `results/20261023/native_generic_scope_campaign_v11.json`은 24개 요청을 모두 packet과 연결했다. 실제 실행 `results/20261023/native_generic_scope_campaign_result_v11.json`은 다음과 같다.
+컴파일 결과 `results/20261023/native_generic_scope_campaign_v11.json`은 24개 요청을 모두 packet과 연결했다. 실제 실행 `results/20261023/native_generic_scope_campaign_result_v12.json`은 다음과 같다.
 
 | 상태 | 건수 | 의미 |
 |---|---:|---|
 | `EXECUTED` | 5 | chain을 통과했고 해당 상태의 제한 표시가 없는 실행 |
-| `EXECUTED_OPERATOR_LIMITED` | 18 | provider가 합성 상태, 종료시계, 경계 또는 미검증 가정을 소유하는 실행 |
-| `FAILED` | 1 | 계산 중 질량 장부 검사에서 중단된 실행 |
+| `EXECUTED_OPERATOR_LIMITED` | 19 | provider가 합성 상태, 종료시계, 경계 또는 미검증 가정을 소유하는 실행 |
+| `FAILED` | 0 | 계산 중 질량 장부 검사로 중단된 실행 없음 |
 | fresh physics case | 24 | 캐시가 아닌 새 피해 계산 |
 
-실패 사건은 `storage-shell/AREA_1%`이며 사유는 `end-to-end hydrogen mass ledger failed`이다. 이 오류를 허용오차 확대나 질량 보정으로 숨기지 않고 실패 원장에 남겼다. 다섯 사례는 `EXECUTED_DOMAIN_INCOMPLETE` 표지를 함께 갖는다. 여기에는 액체/2상 flash·airborne liquid, 재고 종료, 수직 handoff처럼 선언된 범위 중 아직 완전히 닫히지 않은 경계가 반영된다.
+이전 실행에서 `storage-shell/AREA_1%`가 `end-to-end hydrogen mass ledger failed`로 중단된 원인은 후속 시점에 이미 wet area가 보고되는 작은 초기 pool에서 불필요한 미세시계 재정제가 source 보간을 흔들었기 때문이다. 현재 worker는 전체 실행에 wet area가 전혀 없을 때만 재정제하고, wet area가 있으면 native solver가 닫은 질량 장부를 그대로 사용한다. 허용오차 확대나 질량 보정은 하지 않았다. 최신 실행은 24개 case 모두 chain에 도달했고, 6개 case에는 액체/2상 flash·airborne liquid·재고 종료 경계처럼 선언된 범위 중 아직 완전히 닫히지 않은 `domain-incomplete` 표지가 남는다.
 
-한 실행의 시간은 약 275.6초였다. case 시간의 p95는 약 51.3초, p99는 약 61.7초다. 이 값은 1 Hz 또는 실시간 서비스 수준을 보증하지 않으며, 동일 PC에서 새 물리 계산을 수행한 한 번의 campaign 분포다.
+한 실행의 시간은 약 260.4초였다. case 시간의 p95는 약 50.7초, p99는 약 61.7초다. 이 값은 1 Hz 또는 실시간 서비스 수준을 보증하지 않으며, 동일 PC에서 새 물리 계산을 수행한 한 번의 campaign 분포다.
 
 `total_facility_annual_ir_low_high`와 `total_facility_expected_death_fn_low_high`는 `null`이다. 실제로 계산된 risk atom이 없다는 뜻이 아니라, 일부 사건과 provider 증거가 합성·부분 상태이므로 시설 전체 위험도로 승격하지 않았다는 뜻이다.
 
 ## 범위와 빈도 판정
 
-`results/20261023/native_generic_scope_matrix_v5.json`은 12개 사고 family를 감사한다. 저장탱크·액체/2상·재고소진은 `PARTIAL`, 수직 handoff는 `NO_EVENT_GENERATED`, 시설 전체 IR/F-N은 보류다. `results/20261023/native_generic_scope_ledger_consistency_v5.json`은 24개 event ID와 실제 원장을 비교해 `CONSISTENT_SCOPE_LEDGER`를 반환했다.
+`results/20261023/native_generic_scope_matrix_v6.json`은 12개 사고 family를 감사한다. 저장탱크·액체/2상·재고소진은 `PARTIAL`, 수직 handoff는 `NO_EVENT_GENERATED`, 시설 전체 IR/F-N은 보류다. `results/20261023/native_generic_scope_ledger_consistency_v6.json`은 24개 event ID와 실제 원장을 비교해 `CONSISTENT_SCOPE_LEDGER`를 반환했다.
 
-`results/20261023/native_generic_scope_frequency_uncertainty_v7.json`은 문헌 빈도만 다시 가중하는 5개 시나리오를 계산했다. 새 물리 계산을 다시 하지 않았고, facility credible interval도 만들지 않았다. 이는 빈도 문헌의 불확실성을 표시하는 기능이며 현장 빈도 학습이 아니다.
+`results/20261023/native_generic_scope_frequency_uncertainty_v8.json`은 문헌 빈도만 다시 가중하는 5개 시나리오를 계산했다. 새 물리 계산을 다시 하지 않았고, facility credible interval도 만들지 않았다. 이는 빈도 문헌의 불확실성을 표시하는 기능이며 현장 빈도 학습이 아니다.
 
 ## packet 소비 감사와 IJHE 준비도
 
 - `native_generic_scope_packet_coverage_v7.json`: 24개 packet identity와 24개 consequence-chain event identity를 확인했지만, 빈도를 packet에 자동 결합하지 않는다.
-- `native_generic_scope_packet_campaign_ledger_v9.json`: 24개 event/case, 23개 chain 실행, 1개 실패, 24개 packet identity/digest 소비를 기록한다.
+- `native_generic_scope_packet_campaign_ledger_v10.json`: 24개 event/case, 24개 chain 실행, 실패 0개, 24개 packet identity/digest 소비를 기록한다.
 - `native_generic_scope_worklist_packet_evidence_v7.json`: worklist 24개, candidate 24개, exact/strict 24개, consequence-chain 24개를 확인한다. 모두 synthetic diagnostic evidence다.
-- `ijhe_completion_audit_native_generic_scope_v11.json`: 19개 검사 중 16개 PASS, 3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다.
+- `ijhe_completion_audit_native_generic_scope_v12.json`: 19개 검사 중 16개 PASS, 3개 BLOCKED인 `INCOMPLETE_EVIDENCE`다.
 
 남은 세 가지 차단 이유는 다음과 같다.
 

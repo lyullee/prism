@@ -312,7 +312,14 @@ def run_chain(p,roots,module):
                     unresolved_wet_area=True
                     break
             pool_refinement_attempts=attempt+1
-            if not unresolved_wet_area or attempt >= 1:
+            # A tiny source can evaporate between two early output points
+            # before the later pool footprint is reported.  If a resolved
+            # wet area exists anywhere in the same run, the native solver's
+            # mass ledger is already closed and an extra micro-clock can
+            # perturb the source interpolation.  Refine only when the whole
+            # run has no resolved wet area.
+            has_wet_area = any(x['wet_area_m2']>0. for x in ledger)
+            if not unresolved_wet_area or has_wet_area or attempt >= 1:
                 break
             fine_step/=10.
         if unresolved_wet_area and not any(x['wet_area_m2']>0 for x in pool['ledger']) \
