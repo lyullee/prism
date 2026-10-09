@@ -1,0 +1,364 @@
+{
+  "schema_version": "prism.native_generic_scope_vertical_branch_release_accounting_summary.v1",
+  "source_record": "results/20261024/native_generic_scope_vertical_merged_facility_ledger_population_v2.json",
+  "source_campaign_digest": "f6268ea4eef8a67f2921323e1a3117eb429752438a6ca17736384b41395801ff",
+  "status": "DIAGNOSTIC_ONLY",
+  "event_count": 29,
+  "case_count": 34,
+  "risk_atom_count": 136,
+  "facility_total_risk_available": false,
+  "qualified_facility_qra_available": false,
+  "population_accounting": {
+    "status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
+    "annual_condition_count": 3,
+    "referenced_condition_count": 3,
+    "referenced_condition_ids": [
+      "D-3ms-west",
+      "D-4ms-west",
+      "synthetic-generic-worker-west-3ms"
+    ],
+    "missing_condition_ids": [],
+    "missing_population_condition_ids": [],
+    "mismatched_receptor_ids": {},
+    "invalid_population_rows": {},
+    "rebound_diagnostic_condition_ids": [
+      "D-3ms-west",
+      "D-4ms-west"
+    ],
+    "population_row_count": 3,
+    "population_receptor_ids": [
+      "worker-01"
+    ],
+    "population_provenance": {
+      "D-3ms-west": "synthetic annual condition partition; no site weather qualification",
+      "D-4ms-west": "synthetic annual condition partition; no site weather qualification",
+      "synthetic-generic-worker-west-3ms": "synthetic single outdoor weather/population condition for generic LH2 campaign"
+    },
+    "receptor_ids": [
+      "worker-01"
+    ]
+  },
+  "scenario_branch_accounting": {
+    "status": "EXPLICIT_BRANCH_ACCOUNTING",
+    "annual_conditions": {
+      "D-3ms-west": {
+        "annual_probability": 0.4,
+        "weather": {
+          "wind_speed_m_s": 3.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "provenance": "synthetic annual condition partition; no site weather qualification",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "conditional_weight_sum": 2.0,
+        "weighted_frequency_per_year": 8.288000000000002e-05,
+        "annual_condition_ids": [],
+        "release_branch_ids": [
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "liquid_two_phase",
+          "pipe_hole"
+        ]
+      },
+      "D-4ms-west": {
+        "annual_probability": 0.6,
+        "weather": {
+          "wind_speed_m_s": 4.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "provenance": "synthetic annual condition partition; no site weather qualification",
+        "event_count": 5,
+        "risk_atom_count": 20,
+        "conditional_weight_sum": 3.0000000000000004,
+        "weighted_frequency_per_year": 0.00012432,
+        "annual_condition_ids": [],
+        "release_branch_ids": [
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "liquid_two_phase",
+          "pipe_hole"
+        ]
+      },
+      "synthetic-generic-worker-west-3ms": {
+        "annual_probability": 1.0,
+        "weather": {
+          "wind_speed_m_s": 3.0,
+          "wind_from_bearing_deg": 270.0,
+          "measurement_height_m": 10.0,
+          "roughness_m": 0.03,
+          "stability": "D",
+          "relative_humidity": 0.5
+        },
+        "provenance": "synthetic single outdoor weather/population condition for generic LH2 campaign",
+        "event_count": 24,
+        "risk_atom_count": 96,
+        "conditional_weight_sum": 24.0,
+        "weighted_frequency_per_year": 0.0138259,
+        "annual_condition_ids": [],
+        "release_branch_ids": [
+          "matched-event-provider-request"
+        ],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "inventory_depletion",
+          "inventory_over_600s",
+          "liquid_two_phase",
+          "pipe_hole",
+          "pump_hole",
+          "reliquefier_hole",
+          "two_sided_rupture",
+          "valve_hole",
+          "vaporizer_hole",
+          "vent_hole",
+          "vessel_hole"
+        ]
+      }
+    },
+    "release_branches": {
+      "matched-event-provider-request": {
+        "event_count": 24,
+        "risk_atom_count": 96,
+        "conditional_weight_sum": 24.0,
+        "weighted_frequency_per_year": 0.0138259,
+        "annual_condition_ids": [
+          "synthetic-generic-worker-west-3ms"
+        ],
+        "release_branch_ids": [],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "inventory_depletion",
+          "inventory_over_600s",
+          "liquid_two_phase",
+          "pipe_hole",
+          "pump_hole",
+          "reliquefier_hole",
+          "two_sided_rupture",
+          "valve_hole",
+          "vaporizer_hole",
+          "vent_hole",
+          "vessel_hole"
+        ],
+        "termination_basis_counts": {
+          "emergency_relief_discharge": 4,
+          "inventory_depletion": 24,
+          "inventory_over_600s": 4,
+          "synthetic_diagnostic_horizon": 56,
+          "two_sided_rupture": 16
+        }
+      },
+      "provider-vertical-handoff": {
+        "event_count": 5,
+        "risk_atom_count": 40,
+        "conditional_weight_sum": 5.000000000000001,
+        "weighted_frequency_per_year": 0.00020720000000000005,
+        "annual_condition_ids": [
+          "D-3ms-west",
+          "D-4ms-west"
+        ],
+        "release_branch_ids": [],
+        "ignition_branches": [
+          "delayed_explosion",
+          "delayed_flash_fire",
+          "direct_fire",
+          "no_ignition"
+        ],
+        "scenario_families": [
+          "liquid_two_phase",
+          "pipe_hole"
+        ],
+        "termination_basis_counts": {}
+      }
+    },
+    "ignition_branches": {
+      "delayed_explosion": {
+        "event_count": 29,
+        "risk_atom_count": 34,
+        "conditional_weight_sum": 2.0880000000000005,
+        "weighted_frequency_per_year": 0.0010103832000000002,
+        "annual_condition_ids": [
+          "D-3ms-west",
+          "D-4ms-west",
+          "synthetic-generic-worker-west-3ms"
+        ],
+        "release_branch_ids": [
+          "matched-event-provider-request",
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [],
+        "scenario_families": [
+          "inventory_depletion",
+          "inventory_over_600s",
+          "liquid_two_phase",
+          "pipe_hole",
+          "pump_hole",
+          "reliquefier_hole",
+          "two_sided_rupture",
+          "valve_hole",
+          "vaporizer_hole",
+          "vent_hole",
+          "vessel_hole"
+        ]
+      },
+      "delayed_flash_fire": {
+        "event_count": 29,
+        "risk_atom_count": 34,
+        "conditional_weight_sum": 3.132000000000002,
+        "weighted_frequency_per_year": 0.0015155748,
+        "annual_condition_ids": [
+          "D-3ms-west",
+          "D-4ms-west",
+          "synthetic-generic-worker-west-3ms"
+        ],
+        "release_branch_ids": [
+          "matched-event-provider-request",
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [],
+        "scenario_families": [
+          "inventory_depletion",
+          "inventory_over_600s",
+          "liquid_two_phase",
+          "pipe_hole",
+          "pump_hole",
+          "reliquefier_hole",
+          "two_sided_rupture",
+          "valve_hole",
+          "vaporizer_hole",
+          "vent_hole",
+          "vessel_hole"
+        ]
+      },
+      "direct_fire": {
+        "event_count": 29,
+        "risk_atom_count": 34,
+        "conditional_weight_sum": 2.9000000000000012,
+        "weighted_frequency_per_year": 0.0014033099999999996,
+        "annual_condition_ids": [
+          "D-3ms-west",
+          "D-4ms-west",
+          "synthetic-generic-worker-west-3ms"
+        ],
+        "release_branch_ids": [
+          "matched-event-provider-request",
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [],
+        "scenario_families": [
+          "inventory_depletion",
+          "inventory_over_600s",
+          "liquid_two_phase",
+          "pipe_hole",
+          "pump_hole",
+          "reliquefier_hole",
+          "two_sided_rupture",
+          "valve_hole",
+          "vaporizer_hole",
+          "vent_hole",
+          "vessel_hole"
+        ]
+      },
+      "no_ignition": {
+        "event_count": 29,
+        "risk_atom_count": 34,
+        "conditional_weight_sum": 20.88,
+        "weighted_frequency_per_year": 0.010103831999999998,
+        "annual_condition_ids": [
+          "D-3ms-west",
+          "D-4ms-west",
+          "synthetic-generic-worker-west-3ms"
+        ],
+        "release_branch_ids": [
+          "matched-event-provider-request",
+          "provider-vertical-handoff"
+        ],
+        "ignition_branches": [],
+        "scenario_families": [
+          "inventory_depletion",
+          "inventory_over_600s",
+          "liquid_two_phase",
+          "pipe_hole",
+          "pump_hole",
+          "reliquefier_hole",
+          "two_sided_rupture",
+          "valve_hole",
+          "vaporizer_hole",
+          "vent_hole",
+          "vessel_hole"
+        ]
+      }
+    },
+    "cross_product_count": 12,
+    "missing_dimension_atom_count": 0,
+    "frequency_reallocation_performed": false
+  },
+  "release_termination_inventory_summary": {
+    "case_count": 34,
+    "ledger_status_counts": {
+      "COMPLETE": 5,
+      "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 29
+    },
+    "termination_basis_counts": {
+      "emergency_relief_discharge": 1,
+      "inventory_depletion": 6,
+      "inventory_over_600s": 1,
+      "synthetic_diagnostic_horizon": 24,
+      "two_sided_rupture": 2
+    },
+    "complete_row_count": 5,
+    "operator_limited_or_domain_incomplete_row_count": 29,
+    "domain_incomplete_row_count": 0,
+    "uncomputed_row_count": 0,
+    "incomplete_row_count": 0,
+    "provider_packet_consumed_row_count": 34,
+    "withheld_case_count": 35,
+    "withheld_case_status_counts": {
+      "EXECUTED_DOMAIN_INCOMPLETE": 6,
+      "EXECUTED_OPERATOR_LIMITED": 29
+    },
+    "withheld_operator_limited_case_count": 29,
+    "withheld_domain_incomplete_case_count": 6
+  },
+  "release_termination_inventory_semantics": {
+    "one_row": "event × release branch × annual condition",
+    "isolation": "reported only when the provider termination basis explicitly says reviewed_isolation_success",
+    "inventory": "reported only from provider packet mass fields and explicit inventory termination basis",
+    "missing_branch": "UNCOMPUTED remains a missing branch and is never converted to zero risk",
+    "operator_limited": "numerically executed but not qualified facility evidence",
+    "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"
+  },
+  "frequency_reallocation_performed": false,
+  "physical_validation_claim": false,
+  "interpretation": "This summary proves that the merged diagnostic atoms retain weather, release/termination/isolation/inventory, ignition and population accounting. It is not a qualified facility QRA or a field-frequency estimate."
+}
