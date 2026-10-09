@@ -199,6 +199,108 @@ class AccidentReleaseExportRequest:
         return payload
 
 
+@dataclass(frozen=True)
+class EmergencyReliefExportRequest:
+    """Explicit provider request for a maximum-relief-discharge history.
+
+    Relief is a reviewed initiating event rather than a random leak opening,
+    so this request deliberately has no failure diameter field.
+    """
+
+    component_id: str
+    port_id: str
+    event_id: str
+    horizon_s: float
+    position_enu_m: tuple[float, float, float]
+    direction_enu: tuple[float, float, float]
+    ambient_pressure_pa_abs: float
+    ambient_temperature_k: float
+    provider_source_digest: str
+    provider_boundary_reference: str
+    input_origin: str
+    model_package: str
+    model_class: str
+    model_revision: str
+    state_snapshot_digest: str
+    evidence_status: str
+    scenario_provenance: str
+    start_time_s: float = 0.0
+    provider_termination_required: bool = True
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, Any]) -> "EmergencyReliefExportRequest":
+        if not isinstance(value, Mapping):
+            raise EquipmentAccidentExportError("emergency-relief request must be an object")
+        payload = dict(value)
+        if payload.get("schema_version") != "prism.equipment_emergency_relief_export_request.v1":
+            raise EquipmentAccidentExportError(
+                "emergency-relief request has an invalid schema_version"
+            )
+        if payload.get("event_kind") != "emergency_relief":
+            raise EquipmentAccidentExportError(
+                "emergency-relief request requires event_kind=emergency_relief"
+            )
+        if payload.get("provider_termination_required") is not True:
+            raise EquipmentAccidentExportError(
+                "emergency-relief request must explicitly set provider_termination_required=true"
+            )
+        payload.pop("schema_version", None)
+        payload.pop("event_kind", None)
+        try:
+            request = cls(**payload)
+        except TypeError as error:
+            raise EquipmentAccidentExportError(
+                f"emergency-relief request has missing or unknown fields: {error}"
+            ) from error
+        for field in (
+            "component_id", "port_id", "event_id", "provider_boundary_reference",
+            "input_origin", "model_package", "model_class", "model_revision",
+            "state_snapshot_digest", "scenario_provenance",
+        ):
+            _text(getattr(request, field), field)
+        _digest(request.provider_source_digest, "provider_source_digest")
+        _digest(request.state_snapshot_digest, "state_snapshot_digest")
+        _positive(request.horizon_s, "horizon_s")
+        _positive(request.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
+        _positive(request.ambient_temperature_k, "ambient_temperature_k")
+        if request.start_time_s < 0.0:
+            raise EquipmentAccidentExportError("start_time_s must be non-negative")
+        if request.horizon_s <= request.start_time_s:
+            raise EquipmentAccidentExportError("horizon_s must be greater than start_time_s")
+        _vector(request.position_enu_m, "position_enu_m")
+        _vector(request.direction_enu, "direction_enu", nonzero=True)
+        if request.evidence_status not in _EVIDENCE_STATUSES:
+            raise EquipmentAccidentExportError(
+                f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
+            )
+        return request
+
+    def to_mapping(self) -> dict[str, Any]:
+        return {
+            "schema_version": "prism.equipment_emergency_relief_export_request.v1",
+            "event_kind": "emergency_relief",
+            "component_id": self.component_id,
+            "port_id": self.port_id,
+            "event_id": self.event_id,
+            "start_time_s": self.start_time_s,
+            "horizon_s": self.horizon_s,
+            "position_enu_m": list(self.position_enu_m),
+            "direction_enu": list(self.direction_enu),
+            "ambient_pressure_pa_abs": self.ambient_pressure_pa_abs,
+            "ambient_temperature_k": self.ambient_temperature_k,
+            "provider_source_digest": self.provider_source_digest,
+            "provider_boundary_reference": self.provider_boundary_reference,
+            "input_origin": self.input_origin,
+            "model_package": self.model_package,
+            "model_class": self.model_class,
+            "model_revision": self.model_revision,
+            "state_snapshot_digest": self.state_snapshot_digest,
+            "evidence_status": self.evidence_status,
+            "scenario_provenance": self.scenario_provenance,
+            "provider_termination_required": self.provider_termination_required,
+        }
+
+
 @runtime_checkable
 class AccidentHistoryProvider(Protocol):
     """Protocol implemented by a qualified external equipment model."""
@@ -213,7 +315,7 @@ class AccidentReleaseExportResult:
     """Strict release plus promotion metadata for one provider export."""
 
     release: Any
-    request: AccidentReleaseExportRequest
+    request: AccidentReleaseExportRequest | EmergencyReliefExportRequest
     provider_response: Mapping[str, Any]
     provider_result_digest: str
     provider_class: str
@@ -275,6 +377,52 @@ def _call_provider(
     if data.get("normal_state_snapshot") is True or response.get("normal_state_snapshot") is True:
         raise EquipmentAccidentExportError(
             "normal-state snapshot cannot be promoted as an accident history"
+        )
+    return response, type(provider).__module__ + "." + type(provider).__qualname__
+
+
+def _call_emergency_relief_provider(
+    provider: AccidentHistoryProvider,
+    request: EmergencyReliefExportRequest,
+) -> tuple[Mapping[str, Any], str]:
+    exporter = getattr(provider, "export_accident_history", None)
+    if not callable(exporter):
+        raise EquipmentAccidentExportError(
+            "provider model has no export_accident_history(request); relief export cannot use evaluate/simulate"
+        )
+    try:
+        response = exporter(request.to_mapping())
+    except EquipmentAccidentExportError:
+        raise
+    except Exception as error:
+        raise EquipmentAccidentExportError(
+            f"provider emergency-relief export failed: {type(error).__name__}: {error}"
+        ) from error
+    if not isinstance(response, Mapping):
+        raise EquipmentAccidentExportError("provider emergency-relief export must return an object")
+    if response.get("provider_export_schema") != EXTERNAL_ACCIDENT_EXPORT_SCHEMA:
+        raise EquipmentAccidentExportError(
+            f"provider emergency-relief export must declare {EXTERNAL_ACCIDENT_EXPORT_SCHEMA}"
+        )
+    data = response.get("data")
+    if not isinstance(data, Mapping) or data.get("event_kind") != "emergency_relief":
+        raise EquipmentAccidentExportError(
+            "provider emergency-relief export data must explicitly declare event_kind=emergency_relief"
+        )
+    if data.get("failure_opening_diameter_m") is not None:
+        raise EquipmentAccidentExportError(
+            "provider emergency-relief export must not carry a random opening"
+        )
+    for key in ("event_id", "component_id", "port_id"):
+        declared = data.get(key, response.get(key))
+        expected = getattr(request, key)
+        if declared is not None and declared != expected:
+            raise EquipmentAccidentExportError(
+                f"provider emergency-relief export {key} disagrees with request"
+            )
+    if data.get("normal_state_snapshot") is True or response.get("normal_state_snapshot") is True:
+        raise EquipmentAccidentExportError(
+            "normal-state snapshot cannot be promoted as an emergency-relief history"
         )
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 
@@ -350,13 +498,67 @@ def export_equipment_liquid_accident_history(
     return _export(provider, request, release_kind="liquid")
 
 
+def export_equipment_emergency_relief_history(
+    provider: AccidentHistoryProvider,
+    request: EmergencyReliefExportRequest | Mapping[str, Any],
+) -> AccidentReleaseExportResult:
+    """Run a strict provider-owned maximum-relief-discharge history."""
+
+    scenario = (
+        request if isinstance(request, EmergencyReliefExportRequest)
+        else EmergencyReliefExportRequest.from_mapping(request)
+    )
+    response, provider_class = _call_emergency_relief_provider(provider, scenario)
+    common = {
+        "provider_response": response,
+        "component_id": scenario.component_id,
+        "port_id": scenario.port_id,
+        "event_id": scenario.event_id,
+        "provider_source_digest": scenario.provider_source_digest,
+        "upstream_service_provenance": scenario.scenario_provenance,
+        "provider_boundary_reference": scenario.provider_boundary_reference,
+        "input_origin": scenario.input_origin,
+        "position_enu_m": scenario.position_enu_m,
+        "direction_enu": scenario.direction_enu,
+        "ambient_pressure_pa_abs": scenario.ambient_pressure_pa_abs,
+        "ambient_temperature_k": scenario.ambient_temperature_k,
+        "failure_opening_diameter_m": None,
+        "event_kind": "emergency_relief",
+        "provider_result": response,
+    }
+    try:
+        release = build_resolved_gas_release_from_provider_response(**common)
+    except EquipmentReleaseExportError as error:
+        raise EquipmentAccidentExportError(str(error)) from error
+    from .contracts import canonical_digest
+
+    result_digest = canonical_digest(response)
+    promotion_status = (
+        "QUALIFIED_PROVIDER_PACKET"
+        if scenario.evidence_status == "qualified_actual"
+        else "DIAGNOSTIC_PACKET_NOT_PROMOTED"
+    )
+    return AccidentReleaseExportResult(
+        release=release,
+        request=scenario,
+        provider_response=response,
+        provider_result_digest=result_digest,
+        provider_class=provider_class,
+        provider_method="export_accident_history",
+        provider_export_schema=EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
+        promotion_status=promotion_status,
+    )
+
+
 __all__ = [
     "ACCIDENT_EXPORT_REQUEST_SCHEMA",
     "EXTERNAL_ACCIDENT_EXPORT_SCHEMA",
     "AccidentHistoryProvider",
     "EquipmentAccidentExportError",
     "AccidentReleaseExportRequest",
+    "EmergencyReliefExportRequest",
     "AccidentReleaseExportResult",
     "export_equipment_gas_accident_history",
     "export_equipment_liquid_accident_history",
+    "export_equipment_emergency_relief_history",
 ]

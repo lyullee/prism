@@ -23,8 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
-    AccidentReleaseExportRequest,
-    export_equipment_gas_accident_history,
+    EmergencyReliefExportRequest,
+    export_equipment_emergency_relief_history,
 )
 
 
@@ -43,16 +43,14 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def _request(*, source_digest: str, component_id: str, diameter_m: float, state_digest: str, height_m: float, revision: str) -> AccidentReleaseExportRequest:
-    port_id = f"{component_id}.accident-out"
-    return AccidentReleaseExportRequest.from_mapping({
-        "schema_version": "prism.equipment_accident_export_request.v1",
-        "event_kind": "accidental_leak",
+def _request(*, source_digest: str, component_id: str, port_id: str | None, event_id: str | None, state_digest: str, height_m: float, revision: str) -> EmergencyReliefExportRequest:
+    port_id = port_id or f"{component_id}.accident-out"
+    return EmergencyReliefExportRequest.from_mapping({
+        "schema_version": "prism.equipment_emergency_relief_export_request.v1",
+        "event_kind": "emergency_relief",
         "component_id": component_id,
         "port_id": port_id,
-        "event_id": f"{component_id}/{port_id}/{diameter_m:.12g}m",
-        "failure_mode": "explicit_vent_stack_outlet",
-        "failure_opening_diameter_m": diameter_m,
+        "event_id": event_id or f"{component_id}/{port_id}/maximum-relief-discharge",
         "horizon_s": 600.0,
         "position_enu_m": [0.0, 0.0, height_m],
         "direction_enu": [1.0, 0.0, 0.0],
@@ -66,7 +64,7 @@ def _request(*, source_digest: str, component_id: str, diameter_m: float, state_
         "model_revision": revision,
         "state_snapshot_digest": state_digest,
         "evidence_status": "synthetic_diagnostic",
-        "scenario_provenance": "explicit external VentStack steady diagnostic over bounded horizon; not site-calibrated",
+        "scenario_provenance": "explicit external VentStack maximum-relief-discharge diagnostic over bounded horizon; not site-calibrated",
         "provider_termination_required": True,
     })
 
@@ -120,7 +118,7 @@ class VentStackAccidentProvider:
         cumulative_mass = flow * self.duration_s
         cumulative_enthalpy = cumulative_mass * float(outlet.specific_enthalpy_J_kg)
         data = {
-            "event_kind": "accidental_leak",
+            "event_kind": "emergency_relief",
             "event_id": request["event_id"],
             "component_id": request["component_id"],
             "port_id": request["port_id"],
@@ -129,7 +127,7 @@ class VentStackAccidentProvider:
             "cumulative_mass_out_kg": cumulative_mass,
             "cumulative_static_enthalpy_out_j": cumulative_enthalpy,
             "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
-            "termination_basis": "synthetic_diagnostic_horizon",
+            "termination_basis": "emergency_relief_discharge",
             "fluid": "Hydrogen",
             "steps": steps,
             "provider_meta": {
@@ -166,9 +164,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     }
     upstream = {"pressure_pa": args.inlet_pressure_pa, "temperature_k": args.inlet_temperature_k}
     state_digest = canonical_digest({"stack": stack, "upstream": upstream, "duration_s": args.duration_s, "time_step_s": args.time_step_s})
-    request = _request(source_digest=source_digest, component_id=component_id, diameter_m=args.inner_diameter_m, state_digest=state_digest, height_m=args.nozzle_height_m, revision=args.model_revision)
+    request = _request(source_digest=source_digest, component_id=component_id, port_id=args.port_id, event_id=args.event_id, state_digest=state_digest, height_m=args.nozzle_height_m, revision=args.model_revision)
     provider = VentStackAccidentProvider(root, duration_s=args.duration_s, time_step_s=args.time_step_s, stack=stack, upstream=upstream, ambient_temperature_k=args.ambient_temperature_k)
-    result = export_equipment_gas_accident_history(provider, request)
+    result = export_equipment_emergency_relief_history(provider, request)
     release = result.release.model_dump(mode="json")
     verification = {
         "status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
@@ -212,6 +210,8 @@ def main() -> int:
     parser.add_argument("--ambient-temperature-k", type=float, default=288.15)
     parser.add_argument("--nozzle-height-m", type=float, default=2.0)
     parser.add_argument("--component-id", default="vent-stack-diagnostic")
+    parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
+    parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")
     parser.add_argument("--model-revision", default="external-library-vent-stack-0.1.1")
     args = parser.parse_args()
     try:

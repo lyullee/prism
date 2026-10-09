@@ -229,8 +229,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "wall_heat_capacity_j_k": args.wall_heat_capacity_j_k,
     }
     component_id = args.component_id
-    port_id = f"{component_id}.accident-out"
-    event_id = f"{component_id}/{port_id}/{args.inner_diameter_m:.12g}m"
+    port_id = args.port_id or f"{component_id}.accident-out"
+    event_id = args.event_id or f"{component_id}/{port_id}/{args.inner_diameter_m:.12g}m"
     request = _request(
         provider_source_digest=source_digest,
         component_id=component_id,
@@ -292,6 +292,8 @@ def main() -> int:
     parser.add_argument("--wall-heat-capacity-j-k", type=float, default=1000.0)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
     parser.add_argument("--component-id", default="dynamic-pipe-diagnostic")
+    parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")
+    parser.add_argument("--port-id", default=None, help="optional exact facility accident port id")
     parser.add_argument("--model-revision", default="external-library-dynamic-pipe-0.1.1")
     args = parser.parse_args()
     try:

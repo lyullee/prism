@@ -5,7 +5,9 @@ from lh2_tno.equipment_accident_export import (
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
     EquipmentAccidentExportError,
     AccidentReleaseExportRequest,
+    EmergencyReliefExportRequest,
     export_equipment_gas_accident_history,
+    export_equipment_emergency_relief_history,
 )
 
 
@@ -146,3 +148,42 @@ def test_provider_schema_and_identity_are_checked():
 
     with pytest.raises(EquipmentAccidentExportError, match="external_accident_history"):
         export_equipment_gas_accident_history(BadProvider(), _request())
+
+
+def test_emergency_relief_export_uses_separate_no_random_opening_contract():
+    payload = {
+        "schema_version": "prism.equipment_emergency_relief_export_request.v1",
+        "event_kind": "emergency_relief",
+        "component_id": "vent-1",
+        "port_id": "vent-1.out",
+        "event_id": "vent-1/maximum-relief-discharge",
+        "horizon_s": 0.2,
+        "position_enu_m": [0.0, 0.0, 2.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "ambient_pressure_pa_abs": 100000.0,
+        "ambient_temperature_k": 288.15,
+        "provider_source_digest": "a" * 64,
+        "provider_boundary_reference": "vent relief outlet",
+        "input_origin": "synthetic",
+        "model_package": "lh2dt",
+        "model_class": "VentStack",
+        "model_revision": "test-revision",
+        "state_snapshot_digest": "b" * 64,
+        "evidence_status": "synthetic_diagnostic",
+        "scenario_provenance": "explicit provider relief scenario",
+        "provider_termination_required": True,
+    }
+
+    class ReliefProvider:
+        def export_accident_history(self, request):
+            response = _response({"event_id": request["event_id"], "component_id": request["component_id"], "port_id": request["port_id"]})
+            response["data"]["event_kind"] = "emergency_relief"
+            response["data"]["termination_basis"] = "emergency_relief_discharge"
+            return response
+
+    request = EmergencyReliefExportRequest.from_mapping(payload)
+    result = export_equipment_emergency_relief_history(ReliefProvider(), request)
+    assert result.release.event_kind == "emergency_relief"
+    assert result.release.failure_opening_diameter_m is None
+    assert result.release.termination_basis == "emergency_relief_discharge"
+    assert result.provider_packet_promoted is False

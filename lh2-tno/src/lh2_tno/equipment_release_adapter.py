@@ -153,11 +153,12 @@ def build_resolved_gas_release_from_provider_response(
     direction_enu: Sequence[float],
     ambient_pressure_pa_abs: float,
     ambient_temperature_k: float,
-    failure_opening_diameter_m: float,
+    failure_opening_diameter_m: float | None,
+    event_kind: str = "accidental_leak",
     provider_result: Any | None = None,
     provider_result_digest: str | None = None,
 ) -> ResolvedGasRelease:
-    """Build one strict accidental gas release from a provider history.
+    """Build one strict gas release from a provider history.
 
     ``provider_response`` must contain the provider's ``data`` object and its
     complete left-held ``steps`` history.  The adapter copies the declared
@@ -171,10 +172,16 @@ def build_resolved_gas_release_from_provider_response(
     data = provider_response.get("data")
     if not isinstance(data, Mapping):
         raise EquipmentReleaseExportError("provider_response.data must be an object")
-    if data.get("event_kind") != "accidental_leak":
+    if data.get("event_kind") != event_kind:
         raise EquipmentReleaseExportError(
-            "provider data must explicitly declare event_kind=accidental_leak"
+            f"provider data must explicitly declare event_kind={event_kind}"
         )
+    if event_kind not in {"accidental_leak", "emergency_relief"}:
+        raise EquipmentReleaseExportError("unsupported gas provider event kind")
+    if event_kind == "accidental_leak" and failure_opening_diameter_m is None:
+        raise EquipmentReleaseExportError("accidental gas release requires a failure opening")
+    if event_kind == "emergency_relief" and failure_opening_diameter_m is not None:
+        raise EquipmentReleaseExportError("emergency-relief gas release must not carry a random opening")
     raw_steps = data.get("steps")
     if not isinstance(raw_steps, Sequence) or isinstance(raw_steps, (str, bytes)) or not raw_steps:
         raise EquipmentReleaseExportError("provider data must contain a non-empty steps history")
@@ -227,7 +234,7 @@ def build_resolved_gas_release_from_provider_response(
         "component_id": _text(component_id, "component_id"),
         "port_id": _text(port_id, "port_id"),
         "event_id": _text(event_id, "event_id"),
-        "event_kind": "accidental_leak",
+        "event_kind": event_kind,
         "enthalpy_convention": "static_exit_enthalpy",
         "property_basis": property_basis,
         "upstream_service": "LH2",
@@ -255,8 +262,9 @@ def build_resolved_gas_release_from_provider_response(
         "steps": steps,
         "termination_provenance": termination,
         "termination_basis": termination_basis,
-        "failure_opening_diameter_m": _positive(
-            failure_opening_diameter_m, "failure_opening_diameter_m"
+        "failure_opening_diameter_m": (
+            _positive(failure_opening_diameter_m, "failure_opening_diameter_m")
+            if failure_opening_diameter_m is not None else None
         ),
     }
     try:

@@ -22,6 +22,7 @@ from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import (  # noqa: E402
     build_consequence_request_from_provider_release,
     load_provider_release,
+    load_provider_emergency_relief,
 )
 
 
@@ -69,8 +70,12 @@ def _facility(
     return Facility.model_validate_json(json.dumps(raw, allow_nan=False))
 
 
-def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
-    release = load_provider_release(packet_path)
+def run(packet_path: Path, output_dir: Path, backend_config_path: Path, release_kind: str = "accidental_leak") -> dict:
+    release = (
+        load_provider_emergency_relief(packet_path)
+        if release_kind == "emergency_relief"
+        else load_provider_release(packet_path)
+    )
     defaults_name = (
         "provider_request_defaults_liquid.json"
         if isinstance(release, ResolvedLiquidRelease)
@@ -132,6 +137,8 @@ def run(packet_path: Path, output_dir: Path, backend_config_path: Path) -> dict:
     ))
     if isinstance(release, ResolvedLiquidRelease):
         defaults["source_operator"] = "equipment_liquid_release"
+    elif release_kind == "emergency_relief":
+        defaults["source_operator"] = "equipment_emergency_relief"
     else:
         defaults["source_operator"] = "integrated_transient"
     request = build_consequence_request_from_provider_release(release, defaults)
@@ -182,6 +189,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run one strict lh2dt PRISM packet through consequence damage")
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--release-kind", choices=("accidental_leak", "emergency_relief"), default="accidental_leak")
     parser.add_argument(
         "--backend-config",
         type=Path,
@@ -189,7 +197,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     try:
-        verification = run(args.packet, args.output_dir, args.backend_config)
+        verification = run(args.packet, args.output_dir, args.backend_config, args.release_kind)
     except (OSError, ValueError, KeyError, RuntimeError) as error:
         raise SystemExit(f"lh2dt PRISM packet chain failed: {error}") from error
     print(json.dumps(verification, ensure_ascii=False, indent=2))
