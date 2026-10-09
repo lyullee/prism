@@ -78,6 +78,11 @@ def main() -> int:
         type=Path,
         help="optional exact-cache versus fresh-physics realtime benchmark",
     )
+    parser.add_argument(
+        "--domain-recovery-audit",
+        type=Path,
+        help="optional baseline versus larger-domain sensitivity comparison",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -229,6 +234,13 @@ def main() -> int:
         )
         if realtime_cache_benchmark is not None:
             realtime_cache_benchmark["_record_path"] = str(args.realtime_cache_benchmark)
+        domain_recovery_audit = (
+            _object(args.domain_recovery_audit)
+            if args.domain_recovery_audit
+            else None
+        )
+        if domain_recovery_audit is not None:
+            domain_recovery_audit["_record_path"] = str(args.domain_recovery_audit)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -256,6 +268,7 @@ def main() -> int:
             combined_chain_closure,
             slabx_validation_evidence,
             realtime_cache_benchmark,
+            domain_recovery_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

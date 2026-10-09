@@ -76,6 +76,7 @@ def build_ijhe_completion_audit(
     combined_chain_closure: Mapping[str, Any] | None = None,
     slabx_validation_evidence: Mapping[str, Any] | None = None,
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
+    domain_recovery_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1348,6 +1349,46 @@ def build_ijhe_completion_audit(
                     "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in "
                     "this benchmark. The separately measured fresh-physics run is slower and no "
                     "fresh-physics 1 Hz service claim is made."
+                ),
+            }
+        )
+    if domain_recovery_audit is not None:
+        recovery = domain_recovery_audit
+        persistent = recovery.get("persistent_domain_incomplete_event_ids")
+        recovery_valid = (
+            recovery.get("schema") == "prism.domain_recovery_audit.v1"
+            and recovery.get("status") == "DOMAIN_RECOVERY_REVIEWED"
+            and isinstance(recovery.get("event_count"), int)
+            and recovery.get("event_count", 0) > 0
+            and isinstance(persistent, list)
+            and recovery.get("facility_ir_fn_promotion") is False
+            and recovery.get("qualified_provider_packet_promotion") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_domain_recovery_audit",
+                "status": "PASS" if recovery_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": recovery.get("_record_path"),
+                    "schema": recovery.get("schema"),
+                    "status": recovery.get("status"),
+                    "event_count": recovery.get("event_count"),
+                    "baseline_domain_incomplete_event_count": recovery.get(
+                        "baseline_domain_incomplete_event_count"
+                    ),
+                    "recovery_domain_incomplete_event_count": recovery.get(
+                        "recovery_domain_incomplete_event_count"
+                    ),
+                    "persistent_domain_incomplete_event_ids": persistent,
+                    "recovered_event_ids": recovery.get("recovered_event_ids"),
+                    "facility_ir_fn_promotion": recovery.get("facility_ir_fn_promotion"),
+                },
+                "interpretation": (
+                    "An explicit larger-domain sensitivity run was compared event by event. "
+                    "Persistent domain blockers remain visible and the comparison cannot "
+                    "promote provider qualification or facility IR/F-N."
                 ),
             }
         )

@@ -49,6 +49,31 @@ def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidenc
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_records_domain_recovery_without_promoting_qra():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        domain_recovery_audit={
+            "schema": "prism.domain_recovery_audit.v1",
+            "status": "DOMAIN_RECOVERY_REVIEWED",
+            "event_count": 2,
+            "baseline_domain_incomplete_event_count": 1,
+            "recovery_domain_incomplete_event_count": 1,
+            "persistent_domain_incomplete_event_ids": ["event-1"],
+            "recovered_event_ids": [],
+            "facility_ir_fn_promotion": False,
+            "qualified_provider_packet_promotion": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_domain_recovery_audit"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def test_completion_audit_blocks_inconsistent_scope_ledger():
     report = build_ijhe_completion_audit(
         _status(validated=False),

@@ -125,6 +125,20 @@ def build_status_consistency_report(
         if isinstance(audit_realtime_cache_check, Mapping)
         else {}
     )
+    audit_domain_recovery_check = next(
+        (
+            row
+            for row in audit_checks
+            if isinstance(row, Mapping)
+            and row.get("name") == "diagnostic_domain_recovery_audit"
+        ),
+        None,
+    ) if isinstance(audit_checks, Sequence) and not isinstance(audit_checks, (str, bytes)) else None
+    audit_domain_recovery_evidence = (
+        audit_domain_recovery_check.get("evidence", {})
+        if isinstance(audit_domain_recovery_check, Mapping)
+        else {}
+    )
     audit_check_count = len(audit_checks or ())
     audit_blocking_reason_count = len(audit.get("blocking_reasons", ()))
     # The completion audit grows as new evidence gates are added.  Compare
@@ -300,6 +314,51 @@ def build_status_consistency_report(
             "cache_meets_one_hz_all_samples": audit_realtime_cache_evidence.get(
                 "cache_meets_one_hz_all_samples"
             ),
+        },
+    )
+    _check(
+        checks,
+        "audit_domain_recovery_gate",
+        audit_domain_recovery_check is not None
+        and audit_domain_recovery_check.get("status") == "PASS"
+        and audit_domain_recovery_check.get("diagnostic_only") is True
+        and audit_domain_recovery_evidence.get("schema") == "prism.domain_recovery_audit.v1"
+        and audit_domain_recovery_evidence.get("status") == "DOMAIN_RECOVERY_REVIEWED"
+        and audit_domain_recovery_evidence.get("event_count") == 24
+        and audit_domain_recovery_evidence.get("baseline_domain_incomplete_event_count") == 6
+        and audit_domain_recovery_evidence.get("recovery_domain_incomplete_event_count") == 6
+        and isinstance(audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids"), list)
+        and len(audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids")) == 6
+        and audit_domain_recovery_evidence.get("facility_ir_fn_promotion") is False
+        and all(
+            _endswith(status.get("domain_recovery_audit_record"), "domain_recovery_audit_v1.json")
+            for status in (current_status, development_goal)
+        ),
+        {
+            "status": (
+                audit_domain_recovery_check.get("status")
+                if isinstance(audit_domain_recovery_check, Mapping)
+                else None
+            ),
+            "diagnostic_only": (
+                audit_domain_recovery_check.get("diagnostic_only")
+                if isinstance(audit_domain_recovery_check, Mapping)
+                else None
+            ),
+            "schema": audit_domain_recovery_evidence.get("schema"),
+            "event_count": audit_domain_recovery_evidence.get("event_count"),
+            "baseline_domain_incomplete_event_count": audit_domain_recovery_evidence.get(
+                "baseline_domain_incomplete_event_count"
+            ),
+            "recovery_domain_incomplete_event_count": audit_domain_recovery_evidence.get(
+                "recovery_domain_incomplete_event_count"
+            ),
+            "persistent_domain_incomplete_event_count": len(
+                audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids", [])
+            )
+            if isinstance(audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids"), list)
+            else None,
+            "facility_ir_fn_promotion": audit_domain_recovery_evidence.get("facility_ir_fn_promotion"),
         },
     )
 

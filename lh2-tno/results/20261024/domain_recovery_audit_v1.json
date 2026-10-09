@@ -1,0 +1,364 @@
+{
+  "schema": "prism.domain_recovery_audit.v1",
+  "status": "DOMAIN_RECOVERY_REVIEWED",
+  "scope": "explicit larger-domain sensitivity only",
+  "baseline": {
+    "status": "PARTIAL_DECLARED_SCOPE",
+    "campaign_digest": "eb2cb77ee2f31563355410e2adb44f715619461e4cb836e42bf0e5abfb384500",
+    "domain": {
+      "downwind_bounds_m": [
+        -2.0,
+        80.0
+      ],
+      "crosswind_bounds_m": [
+        -10.0,
+        10.0
+      ],
+      "height_bounds_m": [
+        0.0,
+        12.0
+      ],
+      "cell_size_m": 0.5
+    }
+  },
+  "recovery": {
+    "status": "PARTIAL_DECLARED_SCOPE",
+    "campaign_digest": "001596a36e52cbad7089a26c084444facf020a969d56eb72210ad56003a1c75b",
+    "domain": {
+      "downwind_bounds_m": [
+        -2.0,
+        160.0
+      ],
+      "crosswind_bounds_m": [
+        -20.0,
+        20.0
+      ],
+      "height_bounds_m": [
+        0.0,
+        20.0
+      ],
+      "cell_size_m": 1.0
+    }
+  },
+  "event_count": 24,
+  "event_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "baseline_statuses": [
+        "EXECUTED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "baseline_statuses": [
+        "EXECUTED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "baseline_statuses": [
+        "EXECUTED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "baseline_statuses": [
+        "EXECUTED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "baseline_statuses": [
+        "EXECUTED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "baseline_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": true,
+      "recovery_domain_incomplete": true,
+      "disposition": "PERSISTENT_DOMAIN_INCOMPLETE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "baseline_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": true,
+      "recovery_domain_incomplete": true,
+      "disposition": "PERSISTENT_DOMAIN_INCOMPLETE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "baseline_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": true,
+      "recovery_domain_incomplete": true,
+      "disposition": "PERSISTENT_DOMAIN_INCOMPLETE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "baseline_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": true,
+      "recovery_domain_incomplete": true,
+      "disposition": "PERSISTENT_DOMAIN_INCOMPLETE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "baseline_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": true,
+      "recovery_domain_incomplete": true,
+      "disposition": "PERSISTENT_DOMAIN_INCOMPLETE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "baseline_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_DOMAIN_INCOMPLETE",
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": true,
+      "recovery_domain_incomplete": true,
+      "disposition": "PERSISTENT_DOMAIN_INCOMPLETE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "baseline_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "recovery_statuses": [
+        "EXECUTED_OPERATOR_LIMITED"
+      ],
+      "baseline_domain_incomplete": false,
+      "recovery_domain_incomplete": false,
+      "disposition": "NO_DOMAIN_BLOCKER_IN_BASELINE"
+    }
+  ],
+  "counts": {
+    "NO_DOMAIN_BLOCKER_IN_BASELINE": 18,
+    "PERSISTENT_DOMAIN_INCOMPLETE": 6
+  },
+  "baseline_domain_incomplete_event_count": 6,
+  "recovery_domain_incomplete_event_count": 6,
+  "persistent_domain_incomplete_event_ids": [
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+  ],
+  "recovered_event_ids": [],
+  "facility_ir_fn_promotion": false,
+  "qualified_provider_packet_promotion": false,
+  "interpretation": "The larger-domain run is a sensitivity check. Persistent domain-incomplete events require a closed dispersion/observation domain or provider evidence; this audit never zeros their risk or promotes facility IR/F-N."
+}
