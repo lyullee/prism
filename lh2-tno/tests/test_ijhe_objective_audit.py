@@ -123,3 +123,53 @@ def test_objective_audit_fails_closed_for_missing_optional_structures():
     assert report["status"] == "OBJECTIVE_CHAIN_INCOMPLETE"
     assert "release_to_final_damage" in report["core_blocking_check_ids"]
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
+
+
+def test_objective_audit_requires_extension_state_coverage_for_full_union():
+    inputs = _inputs()
+    inputs["union_verification"]["merged_event_count"] = 2
+    inputs["native_packet_campaign_ledger"]["event_count"] = 1
+    inputs["native_packet_campaign_ledger"]["case_count"] = 1
+    inputs["native_packet_campaign_ledger"]["chain_executed_case_count"] = 1
+    inputs["native_packet_campaign_ledger"]["state_snapshot_campaign_reconciliation"] = {
+        "status": "STATE_SNAPSHOT_CAMPAIGN_RECONCILED",
+        "bound_event_count": 1,
+    }
+    inputs["native_state_snapshot_campaign_ledger"] = {
+        "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+        "event_count": 1,
+        "state_snapshot_campaign_reconciliation": {
+            "status": "STATE_SNAPSHOT_CAMPAIGN_RECONCILED",
+            "bound_event_count": 1,
+            "provider_result_digest_mismatch_event_ids": [],
+        },
+        "_record_path": "native-state.json",
+    }
+    inputs["extension_state_snapshot_coverage"] = {
+        "status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_INCOMPLETE",
+        "event_count": 1,
+        "bound_event_count": 0,
+        "unbound_event_count": 1,
+        "missing_event_ids": ["facility/extension/AREA_1%"],
+        "_record_path": "extension-state.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "strict_facility_state_snapshot_coverage"
+    )
+    assert check["status"] == "BLOCKED_EVIDENCE"
+    assert check["observed"]["extension_state_snapshot_unbound_event_count"] == 1
+
+    inputs["extension_state_snapshot_coverage"].update({
+        "status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_COMPLETE",
+        "bound_event_count": 1,
+        "unbound_event_count": 0,
+        "missing_event_ids": [],
+    })
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "strict_facility_state_snapshot_coverage"
+    )
+    assert check["status"] == "PASS"

@@ -34,6 +34,9 @@ from lh2_tno.frequency_scenario_extension import (  # noqa: E402
 from lh2_tno.vertical_handoff_campaign import (  # noqa: E402
     rebind_vertical_handoff_campaign_result,
 )
+from lh2_tno.extension_state_snapshot_coverage import (  # noqa: E402
+    build_extension_state_snapshot_coverage,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -209,6 +212,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         if args.state_snapshot_binding_audit is not None
         else None
     )
+    extension_state_snapshot_audit = (
+        _load(args.extension_state_snapshot_audit)
+        if args.extension_state_snapshot_audit is not None
+        else None
+    )
     if state_snapshot_audit is not None:
         native_state_snapshot_ledger = build_native_packet_campaign_execution_ledger(
             base_campaign,
@@ -285,6 +293,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         inventory_scope_source,
         facility_id=facility_id,
         namespace=inventory_namespace,
+    )
+
+    extension_state_snapshot_coverage = build_extension_state_snapshot_coverage(
+        extension_results={
+            "vertical_handoff": vertical_result,
+            "inventory_depletion": inventory_result,
+        },
+        state_snapshot_audit=extension_state_snapshot_audit,
     )
 
     expected_components = tuple(
@@ -394,6 +410,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             native_state_snapshot_ledger.get("state_snapshot_campaign_reconciliation", {})
             .get("provider_result_digest_mismatch_event_ids", [])
         ),
+        "extension_state_snapshot_coverage_status": extension_state_snapshot_coverage[
+            "status"
+        ],
+        "extension_state_snapshot_coverage_event_count": extension_state_snapshot_coverage[
+            "event_count"
+        ],
+        "extension_state_snapshot_coverage_bound_event_count": extension_state_snapshot_coverage[
+            "bound_event_count"
+        ],
+        "extension_state_snapshot_coverage_unbound_event_count": extension_state_snapshot_coverage[
+            "unbound_event_count"
+        ],
+        "extension_state_snapshot_missing_event_ids": extension_state_snapshot_coverage[
+            "missing_event_ids"
+        ],
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -405,6 +436,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "the native state snapshot reconciliation covers only the base 24-event packet campaign; "
             "vertical-handoff and inventory-depletion extension events require their own state snapshot "
             "records before they can be treated as state-bound",
+            "extension state coverage is audited per event; release values and result digests are never "
+            "used to reconstruct a missing canonical equipment state snapshot",
         ],
     }
     output = args.output_dir
@@ -433,6 +466,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "facility_assessment.json", assessment)
     _save(output / "facility_evidence_request.json", evidence_request)
     _save(output / "native_state_snapshot_campaign_ledger.json", native_state_snapshot_ledger)
+    _save(
+        output / "extension_state_snapshot_coverage.json",
+        extension_state_snapshot_coverage,
+    )
     if state_snapshot_audit is not None:
         _save(output / "state_snapshot_binding_audit.json", state_snapshot_audit)
     _save(output / "verification.json", verification)
@@ -449,6 +486,7 @@ def main() -> int:
     parser.add_argument("--inventory-result", type=Path, required=True)
     parser.add_argument("--inventory-scope-matrix", type=Path, required=True)
     parser.add_argument("--state-snapshot-binding-audit", type=Path, default=None)
+    parser.add_argument("--extension-state-snapshot-audit", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     try:

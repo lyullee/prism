@@ -239,6 +239,7 @@
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
         "results\\20261026\\native_full_scope_union_assessment\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261026\\native_full_scope_union_assessment\\extension_state_snapshot_coverage.json",
         "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
@@ -246,9 +247,25 @@
         "state_snapshot_campaign_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
         "state_snapshot_campaign_event_count": 24,
         "state_snapshot_campaign_bound_event_count": 24,
-        "provider_result_digest_mismatch_event_ids": []
+        "provider_result_digest_mismatch_event_ids": [],
+        "extension_state_snapshot_coverage_status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_INCOMPLETE",
+        "extension_state_snapshot_event_count": 10,
+        "extension_state_snapshot_bound_event_count": 0,
+        "extension_state_snapshot_unbound_event_count": 10,
+        "extension_state_snapshot_missing_event_ids": [
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%"
+        ]
       },
-      "blocking_reason": "base native campaign의 상태 snapshot은 확인되지만 vertical-handoff와 inventory-depletion 확장 사건까지 시설 전체 상태 연결이 닫히지 않았다",
+      "blocking_reason": "base native campaign의 상태 snapshot은 확인되지만 vertical-handoff와 inventory-depletion 확장 사건까지 시설 전체 상태 연결이 닫히지 않았다; 확장 사건별 canonical state snapshot이 필요하다",
       "interpretation": "시설 전체 gate는 확장 사건별 상태 snapshot와 provider result digest까지 확인될 때만 통과한다. 부분 연결을 전체 연결로 승격하지 않는다."
     }
   ],

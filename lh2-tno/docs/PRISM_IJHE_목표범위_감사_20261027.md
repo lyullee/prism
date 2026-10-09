@@ -31,7 +31,7 @@ native catalog와 SLABx-LH2 구성요소 검사는 diagnostic-only PASS다.
 | 독립 물리검증 | BLOCKED_EVIDENCE | 제한 evidence matrix이며 physical validation claim=false |
 | qualified provider packet | BLOCKED_EVIDENCE | qualified packet 0건; 현재 packet은 native diagnostic |
 | 엄격한 시설 범위 | BLOCKED_EVIDENCE | 8개 family가 `EXECUTED_OPERATOR_LIMITED`라 PARTIAL |
-| 시설 전체 상태 snapshot coverage | BLOCKED_EVIDENCE | 기본 native 24/24는 event·component·provider result digest가 일치하지만 union 34개 사건 중 확장 10개는 별도 상태 원문이 없음 |
+| 시설 전체 상태 snapshot coverage | BLOCKED_EVIDENCE | 기본 native 24/24는 event·component·provider result digest가 일치하지만 union 34개 사건 중 vertical handoff 5개와 inventory depletion 5개가 `UNBOUND` |
 | 시설 전체 IR/F-N 승격 | BLOCKED_EVIDENCE | 위 게이트가 닫히지 않아 `facility_total_risk_available=false` |
 
 따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다.
@@ -69,10 +69,11 @@ python scripts/build_ijhe_objective_coverage_audit.py `
   --validation-evidence-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
   --realtime-cache-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --native-state-snapshot-campaign-ledger results/20261026/native_full_scope_union_assessment/native_state_snapshot_campaign_ledger.json `
+  --extension-state-snapshot-coverage results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json `
   --output results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json
 ```
 
-이 명령은 계산을 새로 실행하지 않는다. 저장된 원장과 digest·count·상태를 대조하고, 누락되거나 승격할 수 없는 근거를 `BLOCKED_EVIDENCE`로 남긴다.
+이 명령은 계산을 새로 실행하지 않는다. 저장된 원장과 digest·count·상태를 대조하고, 누락되거나 승격할 수 없는 근거를 `BLOCKED_EVIDENCE`로 남긴다. 확장 상태 장부의 사건별 목록은 [`extension_state_snapshot_coverage.json`](../results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에서 확인한다. 방출 유량·질량·결과 digest를 상태 snapshot으로 재구성하지 않으므로 현재 10개 확장 사건은 모두 `UNBOUND`이다.
 
 ## 다음 개발 기준
 

@@ -19,6 +19,8 @@ coverage에는 시설 전체 상태 snapshot coverage를 포함한 5개 strict g
 native catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 
+확장 사건의 누락 상태 근거는 [`extension_state_snapshot_coverage.json`](results/20261026/native_full_scope_union_assessment/extension_state_snapshot_coverage.json)에 사건별로 기록합니다. 현재 vertical handoff 5개와 inventory depletion 5개가 모두 `UNBOUND`이며, 방출 유량·질량·결과 digest를 설비 상태 snapshot으로 거꾸로 만들지 않습니다. 이후 외부 설비 provider가 `prism.equipment_state_snapshot.v1` 원문과 echo digest를 제공하면 이 장부에 같은 event ID로 추가해 strict gate를 다시 계산합니다.
+
 이번 원장 보완에서는 `uncomputed_case_count` 하나만 보고 실제 상태를 판단하지 않도록
 세 숫자를 따로 기록합니다. 현재 union은 44개 case를 수치상 실행했고
 `not_numerically_executed_case_count=0`입니다. 그중 29개는 계산 결과는 있으나

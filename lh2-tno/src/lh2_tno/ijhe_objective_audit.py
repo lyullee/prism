@@ -57,6 +57,7 @@ def build_ijhe_objective_coverage_audit(
     validation_evidence_matrix: Mapping[str, Any] | None = None,
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
     native_state_snapshot_campaign_ledger: Mapping[str, Any] | None = None,
+    extension_state_snapshot_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -77,6 +78,7 @@ def build_ijhe_objective_coverage_audit(
     slabx_path = _record_path(slabx_validation_evidence, None)
     validation_path = _record_path(validation_evidence_matrix, None)
     benchmark_path = _record_path(realtime_cache_benchmark, None)
+    extension_state_path = _record_path(extension_state_snapshot_coverage, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -92,6 +94,21 @@ def build_ijhe_objective_coverage_audit(
     )
     union_state_campaign_bound_count = _int(
         union_state_campaign_reconciliation.get("bound_event_count")
+    )
+    extension_state_event_count = _int(
+        extension_state_snapshot_coverage.get("event_count")
+        if isinstance(extension_state_snapshot_coverage, Mapping)
+        else None
+    )
+    extension_state_bound_count = _int(
+        extension_state_snapshot_coverage.get("bound_event_count")
+        if isinstance(extension_state_snapshot_coverage, Mapping)
+        else None
+    )
+    extension_state_unbound_count = _int(
+        extension_state_snapshot_coverage.get("unbound_event_count")
+        if isinstance(extension_state_snapshot_coverage, Mapping)
+        else None
     )
 
     catalog_events = _int(native_catalog_verification.get("frequency_event_count"))
@@ -425,6 +442,14 @@ def build_ijhe_objective_coverage_audit(
         interpretation="조건부 IR/F-N 값은 존재하지만 시설 전체 QRA라는 표현은 사용하지 않는다.",
     ))
 
+    extension_state_ok = (
+        isinstance(extension_state_snapshot_coverage, Mapping)
+        and extension_state_snapshot_coverage.get("status")
+        == "EXTENSION_STATE_SNAPSHOT_COVERAGE_COMPLETE"
+        and extension_state_event_count is not None
+        and extension_state_bound_count == extension_state_event_count
+        and extension_state_unbound_count == 0
+    )
     union_state_ok = (
         isinstance(native_state_snapshot_campaign_ledger, Mapping)
         and native_state_snapshot_campaign_ledger.get("status")
@@ -432,14 +457,34 @@ def build_ijhe_objective_coverage_audit(
         and union_state_campaign_reconciliation.get("status")
         == "STATE_SNAPSHOT_CAMPAIGN_RECONCILED"
         and union_event_count is not None
-        and union_state_campaign_event_count == union_event_count
-        and union_state_campaign_bound_count == union_event_count
+        and (
+            (
+                isinstance(extension_state_snapshot_coverage, Mapping)
+                and extension_state_event_count is not None
+                and union_state_campaign_event_count is not None
+                and union_state_campaign_bound_count is not None
+                and union_state_campaign_event_count + extension_state_event_count
+                == union_event_count
+                and union_state_campaign_bound_count + (extension_state_bound_count or 0)
+                == union_event_count
+            )
+            or (
+                not isinstance(extension_state_snapshot_coverage, Mapping)
+                and union_state_campaign_event_count == union_event_count
+                and union_state_campaign_bound_count == union_event_count
+            )
+        )
+        and (
+            extension_state_ok
+            if isinstance(extension_state_snapshot_coverage, Mapping)
+            else True
+        )
     )
     rows.append(_row(
         "strict_facility_state_snapshot_coverage",
         "시설 전체 사건이 설비 상태 snapshot과 native 방출 결과 digest까지 일대일로 이어져야 한다",
         "PASS" if union_state_ok else "BLOCKED_EVIDENCE",
-        evidence_paths=(union_state_campaign_path, union_path),
+        evidence_paths=(union_state_campaign_path, extension_state_path, union_path),
         observed={
             "union_event_count": union_event_count,
             "state_snapshot_campaign_status": (
@@ -452,10 +497,23 @@ def build_ijhe_objective_coverage_audit(
             "provider_result_digest_mismatch_event_ids": union_state_campaign_reconciliation.get(
                 "provider_result_digest_mismatch_event_ids", []
             ),
+            "extension_state_snapshot_coverage_status": (
+                extension_state_snapshot_coverage.get("status")
+                if isinstance(extension_state_snapshot_coverage, Mapping)
+                else None
+            ),
+            "extension_state_snapshot_event_count": extension_state_event_count,
+            "extension_state_snapshot_bound_event_count": extension_state_bound_count,
+            "extension_state_snapshot_unbound_event_count": extension_state_unbound_count,
+            "extension_state_snapshot_missing_event_ids": (
+                extension_state_snapshot_coverage.get("missing_event_ids", [])
+                if isinstance(extension_state_snapshot_coverage, Mapping)
+                else []
+            ),
         },
         blocking_reason=None if union_state_ok else (
             "base native campaign의 상태 snapshot은 확인되지만 vertical-handoff와 inventory-depletion "
-            "확장 사건까지 시설 전체 상태 연결이 닫히지 않았다"
+            "확장 사건까지 시설 전체 상태 연결이 닫히지 않았다; 확장 사건별 canonical state snapshot이 필요하다"
         ),
         interpretation=(
             "시설 전체 gate는 확장 사건별 상태 snapshot와 provider result digest까지 확인될 때만 통과한다. "

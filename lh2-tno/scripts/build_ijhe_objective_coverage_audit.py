@@ -38,6 +38,7 @@ def main() -> int:
     parser.add_argument("--validation-evidence-matrix", type=Path)
     parser.add_argument("--realtime-cache-benchmark", type=Path)
     parser.add_argument("--native-state-snapshot-campaign-ledger", type=Path)
+    parser.add_argument("--extension-state-snapshot-coverage", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -68,6 +69,11 @@ def main() -> int:
             native_state_snapshot_campaign_ledger=(
                 _object(args.native_state_snapshot_campaign_ledger)
                 if args.native_state_snapshot_campaign_ledger
+                else None
+            ),
+            extension_state_snapshot_coverage=(
+                _object(args.extension_state_snapshot_coverage)
+                if args.extension_state_snapshot_coverage
                 else None
             ),
         )

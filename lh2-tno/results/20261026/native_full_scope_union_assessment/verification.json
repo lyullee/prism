@@ -41,6 +41,22 @@
   "native_state_snapshot_campaign_case_count": 24,
   "native_state_snapshot_campaign_bound_event_count": 24,
   "native_state_snapshot_campaign_provider_result_digest_mismatch_count": 0,
+  "extension_state_snapshot_coverage_status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_INCOMPLETE",
+  "extension_state_snapshot_coverage_event_count": 10,
+  "extension_state_snapshot_coverage_bound_event_count": 0,
+  "extension_state_snapshot_coverage_unbound_event_count": 10,
+  "extension_state_snapshot_missing_event_ids": [
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%"
+  ],
   "limitations": [
     "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -49,7 +65,8 @@
     "independent-event p05/p95 scenarios use fixed declared rates for events without published bounds",
     "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
     "inventory depletion population, weather and geometry remain synthetic diagnostics",
-    "the native state snapshot reconciliation covers only the base 24-event packet campaign; vertical-handoff and inventory-depletion extension events require their own state snapshot records before they can be treated as state-bound"
+    "the native state snapshot reconciliation covers only the base 24-event packet campaign; vertical-handoff and inventory-depletion extension events require their own state snapshot records before they can be treated as state-bound",
+    "extension state coverage is audited per event; release values and result digests are never used to reconstruct a missing canonical equipment state snapshot"
   ],
   "validation_evidence_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
   "validation_evidence_matrix_decision": "FACILITY_QRA_WITHHELD",

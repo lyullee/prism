@@ -1,0 +1,257 @@
+{
+  "schema_version": "prism.extension_state_snapshot_coverage.v1",
+  "status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_INCOMPLETE",
+  "policy": {
+    "canonical_state_required": true,
+    "provider_echo_required": true,
+    "release_values_may_reconstruct_state": false,
+    "result_digest_may_reconstruct_state": false,
+    "diagnostic_only": true,
+    "facility_qra_claim": false
+  },
+  "source_families": {
+    "vertical_handoff": 5,
+    "inventory_depletion": 5
+  },
+  "event_count": 10,
+  "bound_event_count": 0,
+  "unbound_event_count": 10,
+  "provider_identity_missing_event_count": 5,
+  "provider_identity_missing_event_ids": [
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%"
+  ],
+  "missing_event_ids": [
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%"
+  ],
+  "rows": [
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "d93bfb35e6085a0a7760b5473540a1ab4b4bfede301d024249794d75f45ae871"
+        ]
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "eb4164e29c2aab630dbb20d1db7f4a8c85f99c4c160872d6eefb6ed8df7067a4"
+        ]
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f88a367a411926534a8149cdc69e4a44bd581dc550873f304d4454d960322ccc"
+        ]
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "8e0d4ce35242e33a0d4a60630191e292174c4f12dd7c348964642890b3c0bcf2"
+        ]
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "vertical_handoff",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": true,
+        "provider_packet_identity_count": 2,
+        "provider_component_ids": [
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "provider_source_digests": [
+          "a539a3e2b4c6cc54871da9c9d47207f5a2dca19ccb93a87f09d9e5027a04aad1"
+        ],
+        "provider_result_digests": [
+          "f3007e02a81f2e559b35e3bd50e696514fe403f272eeba6f01a7d91eefe0bce4"
+        ]
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": false,
+        "provider_packet_identity_count": 0,
+        "provider_component_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state; extension result has no provider_packet_identity/provider state handoff",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": false,
+        "provider_packet_identity_count": 0,
+        "provider_component_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state; extension result has no provider_packet_identity/provider state handoff",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": false,
+        "provider_packet_identity_count": 0,
+        "provider_component_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state; extension result has no provider_packet_identity/provider state handoff",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": false,
+        "provider_packet_identity_count": 0,
+        "provider_component_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state; extension result has no provider_packet_identity/provider state handoff",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    },
+    {
+      "source_family": "inventory_depletion",
+      "source_record": null,
+      "state_snapshot_record": null,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "status": "UNBOUND",
+      "snapshot_bound": false,
+      "provider_identity": {
+        "provider_packet_identity_present": false,
+        "provider_packet_identity_count": 0,
+        "provider_component_ids": [],
+        "provider_source_digests": [],
+        "provider_result_digests": []
+      },
+      "reason": "no canonical EquipmentStateSnapshot record exists for this extension event; release values and result digests are not used to reconstruct equipment state; extension result has no provider_packet_identity/provider state handoff",
+      "policy": "release_boundary_is_not_a_state_snapshot"
+    }
+  ],
+  "source_record_paths": {
+    "vertical_handoff": null,
+    "inventory_depletion": null
+  },
+  "state_snapshot_audit_record_path": null,
+  "interpretation": "Extension events remain unbound until a canonical EquipmentStateSnapshot payload is supplied and echoed by the provider. A release boundary, flow history, or result digest is evidence of the release calculation only and cannot be promoted to state."
+}
