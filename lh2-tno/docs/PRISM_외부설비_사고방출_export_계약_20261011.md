@@ -44,6 +44,13 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 ```json
 {
   "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_qualification": {
+    "schema_version": "prism.provider_qualification_evidence.v1",
+    "status": "qualified_actual",
+    "provider_origin": "native_provider",
+    "evidence_id": "provider-actual-export-001",
+    "provider_source_digest": "<same as request provider_source_digest>"
+  },
   "data": {
     "event_kind": "accidental_leak",
     "component_id": "storage-tank-01",
