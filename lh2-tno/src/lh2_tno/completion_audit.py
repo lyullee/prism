@@ -957,7 +957,7 @@ def build_ijhe_completion_audit(
         event_match_count = binding.get("packet_event_to_campaign_event_match_count")
         case_match_count = binding.get("packet_event_to_campaign_case_match_count")
         atom_match_count = binding.get("packet_event_to_campaign_risk_atom_match_count")
-        campaign_binding_valid = (
+        packet_subset_binding_valid = (
             isinstance(binding.get("status"), str)
             and binding.get("status", "").startswith("PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING")
             and isinstance(packet_count, int)
@@ -970,6 +970,31 @@ def build_ijhe_completion_audit(
             and binding.get("frequency_from_provider_packet") is False
             and binding.get("packet_claims_preserved") is True
         )
+        # The generic provider worklist and the vertical-handoff adapter are
+        # intentionally maintained as separate evidence classes.  A partial
+        # packet-to-campaign binding therefore does not mean that a declared
+        # event is missing when the combined chain audit proves that the
+        # packet subset plus the handoff subset cover the exact campaign event
+        # count.  This branch changes only the diagnostic closure label; it
+        # never qualifies a provider packet or opens facility IR/F-N.
+        combined = combined_chain_closure if isinstance(combined_chain_closure, Mapping) else None
+        union_chain_closure_valid = (
+            not packet_subset_binding_valid
+            and isinstance(combined, Mapping)
+            and combined.get("schema_version") == "prism.facility_combined_chain_closure_audit.v1"
+            and combined.get("status") == "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED"
+            and combined.get("event_count_matches_declared_scope") is True
+            and combined.get("mismatch_event_ids") == []
+            and combined.get("combined_diagnostic_closed_event_count")
+            == combined.get("declared_event_count")
+            and isinstance(binding.get("campaign_event_count"), int)
+            and binding.get("campaign_event_count") == combined.get("declared_event_count")
+            and binding.get("packet_event_count") == combined.get("packet_subset_event_count")
+            and binding.get("packet_subset_identity_consumed") is True
+            and binding.get("frequency_from_provider_packet") is False
+            and binding.get("packet_claims_preserved") is True
+        )
+        campaign_binding_valid = packet_subset_binding_valid or union_chain_closure_valid
         checks.append(
             {
                 "name": "diagnostic_worklist_campaign_binding_evidence",
@@ -1002,6 +1027,15 @@ def build_ijhe_completion_audit(
                     "packet_subset_identity_consumed": binding.get(
                         "packet_subset_identity_consumed"
                     ),
+                    "packet_subset_binding_valid": packet_subset_binding_valid,
+                    "union_chain_closure_used": union_chain_closure_valid,
+                    "union_chain_closure_status": (
+                        combined.get("status") if isinstance(combined, Mapping) else None
+                    ),
+                    "union_chain_closure_record": (
+                        combined.get("_record_path") if isinstance(combined, Mapping) else None
+                    ),
+                    "diagnostic_scope_closure_complete": union_chain_closure_valid,
                     "packet_digest_checked_event_count": binding.get(
                         "packet_digest_checked_event_count"
                     ),
@@ -1019,7 +1053,13 @@ def build_ijhe_completion_audit(
                     ),
                 },
                 "interpretation": (
-                "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
+                    "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
+                    "When the combined packet/vertical chain audit closes the same declared event set, "
+                    "the diagnostic scope is considered connected even though the evidence classes remain "
+                    "separate. This does not qualify packets, assign frequency, or promote facility risk."
+                    if union_chain_closure_valid
+                    else
+                    "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
                     "The matched packet subset may have exact digest consumption, but any campaign-only "
                     "events keep the full facility binding gate blocked; the result stays diagnostic-only."
                 ),

@@ -1291,6 +1291,53 @@ def test_completion_audit_records_packet_to_campaign_structural_binding():
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_accepts_separate_vertical_subset_when_combined_chain_closes_scope():
+    binding = _campaign_binding(
+        campaign_event_count=29,
+        campaign_case_count=34,
+        campaign_risk_atom_count=136,
+        structural_binding_complete=False,
+        packet_scope_subset_complete=True,
+        campaign_scope_packet_coverage_complete=False,
+        packet_subset_identity_consumed=True,
+        unbound_campaign_event_count=5,
+    )
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        diagnostic_campaign_binding=binding,
+        combined_chain_closure={
+            "schema_version": "prism.facility_combined_chain_closure_audit.v1",
+            "status": "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED",
+            "declared_event_count": 29,
+            "packet_subset_event_count": 24,
+            "packet_subset_closed_event_count": 24,
+            "vertical_handoff_event_count": 5,
+            "vertical_handoff_closed_event_count": 5,
+            "combined_diagnostic_closed_event_count": 29,
+            "event_count_matches_declared_scope": True,
+            "mismatch_event_ids": [],
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_total_risk_available": False,
+            "complete_facility_qra_claim": False,
+            "facility_qra_claim": False,
+            "_record_path": "combined.json",
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_campaign_binding_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["union_chain_closure_used"] is True
+    assert check["evidence"]["diagnostic_scope_closure_complete"] is True
+    assert "does not qualify packets" in check["interpretation"]
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_accepts_packet_identity_consumption_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(True),

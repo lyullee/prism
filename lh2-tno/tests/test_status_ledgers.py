@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v19.json"
+AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json"
 ASSESSMENT_PATH = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
 
 

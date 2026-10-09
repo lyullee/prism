@@ -50,8 +50,8 @@ SLABx-LH2 결과가 선언된 적용범위에서 재현·비교·질량 보존 �
 `build_ijhe_completion_audit.py`에
 `--slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json`을
 주면 `diagnostic_slabx_lh2_validation_evidence` 검사가 추가된다. 최신
-[`ijhe_completion_audit_native_generic_scope_vertical_v19.json`](../results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v19.json)은
-34개 검사 중 30개 통과, 4개 차단인 `INCOMPLETE_EVIDENCE`다. exact-cache realtime benchmark 진단도 별도로 소비해 20/20 cache hit, 중앙 31.47 ms, p95 33.23 ms를 기록하지만 fresh physics 2,685.50 ms에는 1 Hz 주장을 하지 않는다. SLABx 검사는 PASS이지만
+[`ijhe_completion_audit_native_generic_scope_vertical_v20.json`](../results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json)은
+29개 PASS 검사·5개 BLOCKED 검사(상위 차단사유 4개)인 `INCOMPLETE_EVIDENCE`다. exact-cache realtime benchmark 진단도 별도로 소비해 20/20 cache hit, 중앙 31.47 ms, p95 33.23 ms를 기록하지만 fresh physics 2,685.50 ms에는 1 Hz 주장을 하지 않는다. SLABx 검사는 PASS이지만
 `diagnostic_only=true`이다.
 
 이 연결로 닫히는 범위는 다음과 같다.
