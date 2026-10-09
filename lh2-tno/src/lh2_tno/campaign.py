@@ -16,7 +16,10 @@ from .contracts import Contract, Name, Fraction, Nonnegative, canonical_digest
 from .consequences import ConsequenceRequest, Weather
 from .frequency import FrequencyPlan, bind_event, generate_events
 from .backend import BackendError
-from .accident_scenario_catalog import scenario_families_for_release
+from .accident_scenario_catalog import (
+    scenario_families_for_release,
+    scenario_families_for_request,
+)
 from .release_ledger import build_release_termination_inventory_ledger
 
 IGNITION_KEYS = {'direct_fire', 'delayed_flash_fire', 'delayed_explosion', 'no_ignition'}
@@ -356,15 +359,25 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
         raise ValueError('outdoor facility and explicit receptors required')
     events = {x.id: x for x in generate_events(f, campaign.frequency_plan)}
     component_kinds = {component.id: component.kind for component in f.components}
-    event_scenario_families = {
-        event.id: scenario_families_for_release(
-            component_kinds.get(event.model_component_id), event.release.mode
-        )
-        for event in events.values()
-    }
     routes = {x.event_id: x for x in campaign.event_routes}
     if set(events) != set(routes):
         raise ValueError('every generated LOC needs exactly one route or explicit uncomputed branch')
+    # Event metadata is conservative until a provider request is consumed.
+    # Union request-derived families into the event row so a real vertical
+    # handoff, inventory termination, emergency relief, or two-sided packet is
+    # not lost when cases and risk atoms are serialized.
+    event_scenario_families = {}
+    for event in events.values():
+        families = list(scenario_families_for_release(
+            component_kinds.get(event.model_component_id), event.release.mode
+        ))
+        for branch in routes[event.id].branches:
+            families.extend(scenario_families_for_request(
+                component_kinds.get(event.model_component_id),
+                event.release.mode,
+                branch.request,
+            ))
+        event_scenario_families[event.id] = tuple(dict.fromkeys(families))
     provider_evidence = {row.event_id: row for row in campaign.provider_packet_evidence}
     unknown_evidence_events = sorted(set(provider_evidence) - set(events))
     if unknown_evidence_events:

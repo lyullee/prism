@@ -70,6 +70,7 @@ def build_ijhe_completion_audit(
     native_packet_campaign_ledger: Mapping[str, Any] | None = None,
     provider_qualification_coverage: Mapping[str, Any] | None = None,
     validation_evidence_matrix: Mapping[str, Any] | None = None,
+    scope_ledger_consistency: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1357,6 +1358,35 @@ def build_ijhe_completion_audit(
             "it documents the facility-QRA gate and does not open it."
         )
         checks.append(matrix_check)
+    if scope_ledger_consistency is not None:
+        consistency_status = scope_ledger_consistency.get("status")
+        consistency_check = _check(
+            "scope_ledger_consistency",
+            consistency_status == "CONSISTENT_SCOPE_LEDGER"
+            and scope_ledger_consistency.get("facility_qra_claim") is False,
+            {
+                "status": consistency_status,
+                "scope_event_count": scope_ledger_consistency.get("scope_matrix_event_count"),
+                "ledger_event_count": scope_ledger_consistency.get("facility_ledger_event_count"),
+                "scope_conditional_uncomputed_case_count": scope_ledger_consistency.get(
+                    "scope_matrix_conditional_uncomputed_case_count"
+                ),
+                "ledger_conditional_uncomputed_case_count": scope_ledger_consistency.get(
+                    "facility_ledger_conditional_uncomputed_case_count"
+                ),
+                "blocking_reason_count": len(scope_ledger_consistency.get("blocking_reasons", []))
+                if isinstance(scope_ledger_consistency.get("blocking_reasons"), list)
+                else None,
+                "record": scope_ledger_consistency.get("_record_path"),
+            },
+            "scope matrix and merged facility ledger do not describe the same event/case accounting",
+        )
+        consistency_check["diagnostic_only"] = False
+        consistency_check["interpretation"] = (
+            "A merged facility result cannot be promoted while its declared scope "
+            "matrix and facility ledger use different event or case accounting."
+        )
+        checks.append(consistency_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

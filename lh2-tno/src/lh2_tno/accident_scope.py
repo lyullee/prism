@@ -18,6 +18,7 @@ from .accident_scenario_catalog import (
     audit_catalog_manifest,
     audit_worklist_scope_alignment,
     scenario_definition,
+    scenario_families_for_request,
 )
 
 
@@ -66,22 +67,7 @@ def _base_hole_family(kind: str | None, profile: str | None) -> str | None:
 
 
 def _request_families(request: ConsequenceRequest | None) -> set[str]:
-    if request is None:
-        return set()
-    families: set[str] = set()
-    if request.resolved_liquid_release is not None:
-        families.add("liquid_two_phase")
-    if request.resolved_release_set is not None or request.source_operator == "equipment_two_sided_rupture":
-        families.add("two_sided_rupture")
-    if request.resolved_release is not None and request.resolved_release.vertical_handoff is not None:
-        families.add("vertical_handoff")
-    if request.resolved_release is not None and request.resolved_release.event_kind == "emergency_relief":
-        families.add("vent_hole")
-    if request.source_operator in {"inventory_liquid_jet", "equipment_inventory_depletion", "equipment_liquid_release"}:
-        families.add("inventory_depletion")
-    if request.source_operator in {"inventory_over_600s", "equipment_inventory_over_600s", "equipment_liquid_over_600s"}:
-        families.add("inventory_over_600s")
-    return families
+    return set(scenario_families_for_request(None, "hole", request))
 
 
 def _event_families(

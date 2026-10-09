@@ -48,6 +48,11 @@ def main() -> int:
         type=Path,
         help="optional fail-closed component/observation/facility evidence matrix",
     )
+    parser.add_argument(
+        "--scope-ledger-consistency",
+        type=Path,
+        help="optional comparison of the declared scope matrix and merged facility ledger",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -157,6 +162,13 @@ def main() -> int:
         )
         if validation_evidence_matrix is not None:
             validation_evidence_matrix["_record_path"] = str(args.validation_evidence_matrix)
+        scope_ledger_consistency = (
+            _object(args.scope_ledger_consistency)
+            if args.scope_ledger_consistency
+            else None
+        )
+        if scope_ledger_consistency is not None:
+            scope_ledger_consistency["_record_path"] = str(args.scope_ledger_consistency)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -178,6 +190,7 @@ def main() -> int:
             native_packet_campaign_ledger,
             provider_qualification_coverage,
             validation_evidence_matrix,
+            scope_ledger_consistency,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

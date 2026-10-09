@@ -214,6 +214,55 @@ def scenario_families_for_release(
     return tuple(dict.fromkeys(families))
 
 
+def scenario_families_for_request(
+    component_kind: str | None,
+    release_mode: str,
+    request: Any | None = None,
+) -> tuple[str, ...]:
+    """Map a release and its consumed provider request to scenario families.
+
+    A release event alone cannot prove that a provider supplied a vertical
+    handoff, an endpoint set, or an inventory-specific termination. Once a
+    ``ConsequenceRequest`` is attached to a campaign branch, those properties
+    are known and must be visible in serialized case and risk-atom metadata.
+    ``request`` is duck-typed to keep this catalog independent from the
+    consequence model and avoid an import cycle.
+    """
+    families = list(scenario_families_for_release(component_kind, release_mode))
+    if request is None:
+        return tuple(families)
+
+    if getattr(request, "resolved_liquid_release", None) is not None:
+        families.append("liquid_two_phase")
+    if (
+        getattr(request, "resolved_release_set", None) is not None
+        or getattr(request, "source_operator", None) == "equipment_two_sided_rupture"
+    ):
+        families.append("two_sided_rupture")
+
+    release = getattr(request, "resolved_release", None)
+    if release is not None:
+        if getattr(release, "vertical_handoff", None) is not None:
+            families.append("vertical_handoff")
+        if getattr(release, "event_kind", None) == "emergency_relief":
+            families.append("vent_hole")
+
+    source_operator = getattr(request, "source_operator", None)
+    if source_operator in {
+        "inventory_liquid_jet",
+        "equipment_inventory_depletion",
+        "equipment_liquid_release",
+    }:
+        families.append("inventory_depletion")
+    if source_operator in {
+        "inventory_over_600s",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s",
+    }:
+        families.append("inventory_over_600s")
+    return tuple(dict.fromkeys(families))
+
+
 def audit_catalog_manifest(
     component_rows: Iterable[dict[str, Any]],
     required_families: Iterable[str] | None = None,

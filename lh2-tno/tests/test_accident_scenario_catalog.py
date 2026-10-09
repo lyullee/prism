@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 from lh2_tno.accident_scenario_catalog import (
     ACCIDENT_SCENARIO_CATALOG_SCHEMA,
     accident_scenario_catalog,
@@ -5,6 +7,7 @@ from lh2_tno.accident_scenario_catalog import (
     audit_worklist_scope_alignment,
     scenario_definition,
     scenario_families_for_release,
+    scenario_families_for_request,
 )
 
 
@@ -64,6 +67,33 @@ def test_release_event_family_mapping_keeps_cross_cutting_liquid_cases_explicit(
     )
     assert scenario_families_for_release("pipe", "inventory_over_600s") == (
         "inventory_over_600s", "liquid_two_phase"
+    )
+
+
+def test_consumed_provider_request_adds_vertical_handoff_family():
+    request = SimpleNamespace(
+        resolved_liquid_release=None,
+        resolved_release_set=None,
+        source_operator="integrated_transient",
+        resolved_release=SimpleNamespace(
+            vertical_handoff=SimpleNamespace(),
+            event_kind="accidental_leak",
+        ),
+    )
+    assert scenario_families_for_request("pipe", "hole", request) == (
+        "pipe_hole", "liquid_two_phase", "vertical_handoff"
+    )
+
+
+def test_consumed_provider_request_keeps_two_sided_and_liquid_families_explicit():
+    request = SimpleNamespace(
+        resolved_liquid_release=SimpleNamespace(),
+        resolved_release_set=SimpleNamespace(),
+        source_operator="equipment_two_sided_rupture",
+        resolved_release=None,
+    )
+    assert scenario_families_for_request("pipe", "two_sided_rupture", request) == (
+        "two_sided_rupture", "liquid_two_phase"
     )
 
 

@@ -49,6 +49,46 @@ def test_completion_audit_records_worklist_scope_alignment_as_diagnostic_evidenc
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_blocks_inconsistent_scope_ledger():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        scope_ledger_consistency={
+            "status": "INCONSISTENT_SCOPE_LEDGER",
+            "scope_matrix_event_count": 50,
+            "facility_ledger_event_count": 41,
+            "scope_matrix_conditional_uncomputed_case_count": 0,
+            "facility_ledger_conditional_uncomputed_case_count": 2,
+            "blocking_reasons": ["event IDs disagree"],
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "scope_ledger_consistency")
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is False
+    assert any("scope matrix and merged facility ledger" in reason for reason in report["blocking_reasons"])
+
+
+def test_completion_audit_accepts_consistent_scope_ledger_without_opening_qra():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        scope_ledger_consistency={
+            "status": "CONSISTENT_SCOPE_LEDGER",
+            "scope_matrix_event_count": 1,
+            "facility_ledger_event_count": 1,
+            "scope_matrix_conditional_uncomputed_case_count": 0,
+            "facility_ledger_conditional_uncomputed_case_count": 0,
+            "blocking_reasons": [],
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "scope_ledger_consistency")
+    assert check["status"] == "PASS"
+
+
 def test_completion_audit_records_conditional_scope_accounting_without_opening_facility_gate():
     report = build_ijhe_completion_audit(
         _status(validated=False),
