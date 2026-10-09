@@ -46,3 +46,17 @@ def test_recovered_event_is_reported_separately():
     )
     assert report["recovered_event_ids"] == ["e1"]
     assert report["counts"]["RECOVERED_BY_EXPLICIT_DOMAIN_RUN"] == 1
+
+
+def test_recovery_records_conservative_outside_lfl_proof():
+    recovery = _campaign({"e1": "EXECUTED_OPERATOR_LIMITED"})
+    recovery["cases"][0]["domain_assessment"] = {
+        "outside_domain_flammability_proven_at_ignition": True
+    }
+    report = build_domain_recovery_audit(
+        _campaign({"e1": "EXECUTED_DOMAIN_INCOMPLETE"}),
+        recovery,
+        _defaults(80.0),
+        _defaults(160.0),
+    )
+    assert report["recovery_flammability_proven_event_ids"] == ["e1"]

@@ -85,6 +85,25 @@ def weighted_union_harm(*effects):
     return min(1.,sum(effects))
 
 
+def outside_flammability_proven(outside_hydrogen_kg, mole_fraction_upper_bound,
+                                *, lfl_mole_fraction=0.04):
+    """Prove that finite-grid outside inventory cannot enter the fire branch.
+
+    ``mole_fraction_upper_bound`` is the conservative sum of packet mole
+    fractions over packets that cross the grid boundary.  If that sum stays
+    below the declared LFL, arbitrary packet overlap outside the grid cannot
+    produce a flammable hydrogen mixture under this observation operator.
+    Inventory outside the grid is still reported separately.
+    """
+    outside=float(outside_hydrogen_kg); upper=float(mole_fraction_upper_bound)
+    lfl=float(lfl_mole_fraction)
+    if not all(math.isfinite(x) for x in (outside,upper,lfl)):
+        raise ValueError('outside flammability proof inputs must be finite')
+    if outside<0. or upper<0. or lfl<=0.:
+        raise ValueError('outside flammability proof inputs must be nonnegative')
+    return outside<=1e-12 or upper<lfl
+
+
 def dose_harm(samples, stop, probit):
     """Exact dose for left-held physical flux; contact encoded separately."""
     dose=0.; contact=False
@@ -680,12 +699,18 @@ def run_chain(p,roots,module):
             def value(k):return float(np.interp(age,[r.time_s for r in near],[getattr(r,k) for r in near]))
             centre=to_frame(base_origin+np.array([value('east_m'),value('north_m'),value('height_m')-origin[2]]))
             width=value('effective_half_width_m');depth=value('layer_depth_m');rho=value('density_kg_m3');y=value('h2_mass_fraction')
+            provider_mass_in_cloud=None
+            provider_half_length=None
+            provider_velocity=None
         else:
             far_age=max(0.,age-tt)
             if far_age>float(traj.t[-1])+1e-8:raise ValueError('dispersion trajectory does not cover observation horizon')
             def value(k):return float(np.interp(far_age,traj.t,getattr(traj,k)))
             centre=to_frame(base_origin)+np.array([value('x'),offset,value('z_c')-base_origin[2]])
             width=value('b_half');depth=value('h');rho=value('rho');y=value('mass_frac')
+            provider_mass_in_cloud=value('mass_in_cloud')
+            provider_half_length=value('b_half_x')
+            provider_velocity=value('u')
         if not 0<y<=1 or min(width,depth,rho)<=0:raise ValueError('invalid carrier section')
         # The finite length is determined by H2 inventory and carrier density,
         # instead of an unlimited stationary footprint or an LFL mass proxy.
@@ -693,7 +718,10 @@ def run_chain(p,roots,module):
         centre[2]=max(depth/2,centre[2])
         sizes=np.array([length,2*width,depth])
         return {'mass':amount,'centre':centre,'sizes':sizes,'rho_h':rho*y,'rho_a':rho*(1-y),
-                'carrier_density_kg_m3':rho,'h2_mass_fraction':y}
+                'carrier_density_kg_m3':rho,'h2_mass_fraction':y,
+                'provider_mass_in_cloud_kg':provider_mass_in_cloud,
+                'provider_half_length_m':provider_half_length,
+                'provider_velocity_m_s':provider_velocity}
     cloud=[]; cloud_at={}; rec_history=[[] for _ in receptors]
     start=time.perf_counter()
     for t in times:
@@ -707,6 +735,11 @@ def run_chain(p,roots,module):
         packet_widths=[]
         packet_depths=[]
         packet_h2_fractions=[]
+        provider_masses=[]
+        provider_half_lengths=[]
+        provider_velocities=[]
+        outside_mole_fraction_upper_bound=0.
+        flammable_outside_mass=0.
         for packet in packets:
             s=state(packet,t)
             if s is None:continue
@@ -715,15 +748,33 @@ def run_chain(p,roots,module):
             # These are marginal outside masses.  They diagnose which
             # configured boundary clips a packet, while the scalar
             # ``outside`` below remains the exact union outside mass.
-            outside_by_axis += s['mass']*(1.-np.asarray(
+            marginal_overlap=np.asarray(
                 [float(np.clip(np.sum(f*np.diff(axis))/size,0.,1.))
-                 for axis,f,size in zip(edges,axis_fractions,s['sizes'])]))
+                 for axis,f,size in zip(edges,axis_fractions,s['sizes'])])
+            packet_outside_fraction=max(0.,1.-float(np.prod(marginal_overlap)))
+            outside_by_axis += s['mass']*(1.-marginal_overlap)
+            packet_mole_fraction=float(mole_fraction(
+                np.asarray([s['rho_h']]),np.asarray([s['rho_a']]))[0])
+            if packet_outside_fraction>0.:
+                # Packet concentrations can overlap outside the finite grid.
+                # Summing them is a conservative upper bound; if even this
+                # bound is below LFL, outside inventory cannot contribute to
+                # the declared fire/explosion branch.
+                outside_mole_fraction_upper_bound += packet_mole_fraction
+                if .04<=packet_mole_fraction<=.75:
+                    flammable_outside_mass += s['mass']*packet_outside_fraction
             support_min=np.minimum(support_min,s['centre']-s['sizes']/2)
             support_max=np.maximum(support_max,s['centre']+s['sizes']/2)
             packet_lengths.append(float(s['sizes'][0]))
             packet_widths.append(float(s['sizes'][1]))
             packet_depths.append(float(s['sizes'][2]))
             packet_h2_fractions.append(float(s['h2_mass_fraction']))
+            if s['provider_mass_in_cloud_kg'] is not None:
+                provider_masses.append(float(s['provider_mass_in_cloud_kg']))
+            if s['provider_half_length_m'] is not None:
+                provider_half_lengths.append(float(s['provider_half_length_m']))
+            if s['provider_velocity_m_s'] is not None:
+                provider_velocities.append(float(s['provider_velocity_m_s']))
             f=axis_fractions[0][:,None,None]*axis_fractions[1][None,:,None]*axis_fractions[2][None,None,:]
             dh+=f*s['rho_h'];da+=f*s['rho_a'];occupancy+=f
             for i,r in enumerate(receptor_frames):
@@ -748,20 +799,36 @@ def run_chain(p,roots,module):
             [[float(support_min[j]),float(support_max[j])] for j in range(3)]
             if emitted>0 else None
         )
+        support_outside_axes=(
+            {name: bool(support_min[j] < edges[j][0]-1e-12 or support_max[j] > edges[j][-1]+1e-12)
+             for j,name in enumerate(('downwind','crosswind','height'))}
+            if emitted>0 else None
+        )
         row={'time_s':t,'vapour_emitted_kg':emitted,'hydrogen_in_domain_kg':in_domain,
              'hydrogen_outside_domain_kg':outside,'mass_residual_kg':emitted-in_domain-outside,
              'hydrogen_outside_domain_by_axis_kg':{
                  'downwind':float(outside_by_axis[0]),
                  'crosswind':float(outside_by_axis[1]),
                  'height':float(outside_by_axis[2])},
+             'outside_domain_mole_fraction_upper_bound':float(min(1.,outside_mole_fraction_upper_bound)),
+             'flammable_hydrogen_outside_domain_kg':float(flammable_outside_mass),
+             'outside_domain_flammability_proven':outside_flammability_proven(
+                 outside,outside_mole_fraction_upper_bound),
              'cloud_support_bounds_wind_frame_m':support_bounds,
+             'cloud_support_outside_axes':support_outside_axes,
              'cloud_packet_diagnostic':{
                  'section_count':len(packet_lengths),
                  'maximum_length_m':max(packet_lengths,default=None),
                  'maximum_width_m':max(packet_widths,default=None),
                  'maximum_depth_m':max(packet_depths,default=None),
                  'minimum_h2_mass_fraction':min(packet_h2_fractions,default=None),
-                 'maximum_h2_mass_fraction':max(packet_h2_fractions,default=None)},
+                 'maximum_h2_mass_fraction':max(packet_h2_fractions,default=None),
+                 'provider_mass_in_cloud_min_kg':min(provider_masses,default=None),
+                 'provider_mass_in_cloud_max_kg':max(provider_masses,default=None),
+                 'provider_half_length_min_m':min(provider_half_lengths,default=None),
+                 'provider_half_length_max_m':max(provider_half_lengths,default=None),
+                 'provider_velocity_min_m_s':min(provider_velocities,default=None),
+                 'provider_velocity_max_m_s':max(provider_velocities,default=None)},
              'flammable_mass_in_domain_kg':fm,'flammable_centroid_enu_m':to_enu(centroid),
              'flammable_bounds_wind_frame_m':bounds,'maximum_mole_fraction':float(np.max(concentration)),
              'overlapping_carrier_cells':int(np.sum(occupancy>1+1e-8)),
@@ -921,8 +988,18 @@ def run_chain(p,roots,module):
              'radius_0_3_barg_m':r03,'radius_0_1_barg_m':r01,'model':'TNO multi-energy strength-10 anchor zones; deflagration only',
              'outside_domain_h2_kg_at_ignition':ign_cloud['hydrogen_outside_domain_kg'],
              'outside_domain_h2_kg_by_axis_at_ignition':ign_cloud['hydrogen_outside_domain_by_axis_kg'],
+             'outside_domain_mole_fraction_upper_bound_at_ignition':ign_cloud['outside_domain_mole_fraction_upper_bound'],
+             'flammable_hydrogen_outside_domain_kg_at_ignition':ign_cloud['flammable_hydrogen_outside_domain_kg'],
+             'outside_domain_flammability_proven_at_ignition':ign_cloud['outside_domain_flammability_proven'],
              'cloud_support_bounds_wind_frame_m_at_ignition':ign_cloud['cloud_support_bounds_wind_frame_m'],
-             'domain_truncated':ign_cloud['outside_domain_inventory_nonzero']},
+             'cloud_support_outside_axes_at_ignition':ign_cloud['cloud_support_outside_axes'],
+             'domain_truncation_reasons':[
+                 reason for reason,condition in (
+                     ('outside_domain_flammability_not_proven', not ign_cloud['outside_domain_flammability_proven']),
+                     ('provider_or_observation_support_exceeds_domain', any(ign_cloud['cloud_support_outside_axes'].values()) if ign_cloud['cloud_support_outside_axes'] else False),
+                 ) if condition],
+             'inventory_outside_domain':ign_cloud['outside_domain_inventory_nonzero'],
+             'domain_truncated':not ign_cloud['outside_domain_flammability_proven']},
         'mass_ledger':{'released_kg':mass,'direct_gas_kg':gas_mass,'ground_inflow_kg':ground_mass,
             'pool_evaporated_kg':evaporated,'pool_remaining_kg':liquid,'pool_domain_escape_kg':escape,
             'ground_liquid_in_flight_kg':ground_in_flight,

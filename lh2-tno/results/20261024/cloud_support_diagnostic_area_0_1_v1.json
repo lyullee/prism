@@ -1,7 +1,7 @@
 {
   "schema": "prism.cloud_support_diagnostic.v1",
   "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
-  "source_record": "results/20261024/debug_domain_area_0_1_axis_v1.json",
+  "source_record": "results/20261024/cloud_support_standard_domain_probe_area_0_1_v1.json",
   "status": "DOMAIN_SUPPORT_ROOT_CAUSE_IDENTIFIED",
   "diagnostic_only": true,
   "facility_qra_promotion": false,
@@ -9,8 +9,8 @@
   "observation_operator": "finite-volume top-hat reconstruction of SLABx section averages",
   "findings": {
     "axis_attribution": "downwind-only marginal clipping at ignition; crosswind and height marginal clipping are zero",
-    "packet_support": "effective top-hat packet support is approximately 426324 m downwind at ignition, while the configured downwind domain is 162 m wide",
-    "early_onset": "downwind clipping is already present at 1e-6 s, so simply extending the far-downwind boundary does not close the packet",
+    "packet_support": "SLABx itself reports a maximum puff half-length of approximately 213531 m at ignition; PRISM rectangular support is approximately 426324 m and agrees with that provider geometry for the reconstructed section",
+    "early_onset": "downwind clipping is already present at 1e-6 s, so simply extending the far-downwind boundary does not close the provider puff",
     "state_at_ignition": {
       "time_s": 1.0,
       "hydrogen_outside_domain_kg": 5.335807960558966e-05,
@@ -64,9 +64,32 @@
           0.00018891057687049894
         ]
       ]
-    }
+    },
+    "provider_geometry": {
+      "slabx_provider_half_length_max_m": 213531.2751275065,
+      "slabx_provider_mass_in_cloud_min_kg": 1.7206770317202208e-08,
+      "slabx_provider_mass_in_cloud_max_kg": 4.1941882934580656e-05,
+      "slabx_provider_velocity_range_m_s": [
+        1.0295412464982538,
+        1.0350622530501408
+      ],
+      "support_outside_axes_at_ignition": {
+        "downwind": true,
+        "crosswind": false,
+        "height": false
+      }
+    },
+    "flammability_gate": {
+      "outside_domain_mole_fraction_upper_bound_at_ignition": 5.093749524758042e-05,
+      "lfl_mole_fraction": 0.04,
+      "flammable_hydrogen_outside_domain_kg_at_ignition": 0.0,
+      "outside_domain_flammability_proven": true,
+      "consequence_domain_truncated": false,
+      "inventory_outside_domain_remains_diagnostic": true
+    },
+    "consequence_scope": "For the declared fire/explosion branch, the representative event is complete for flammability even though nonflammable hydrogen inventory remains outside the finite grid."
   },
-  "interpretation": "The liquid-pool SLABx carrier section has an extremely small H2 mass fraction for this small event. Converting the finite emitted inventory to one rectangular section therefore creates a very long packet. The result is preserved as outside-domain mass and remains withheld from flammable mass, blast, and facility QRA. A provider-resolved spatial envelope or a validated liquid-pool observation operator is required before promotion.",
+  "interpretation": "SLABx itself reports an extremely long finite-puff half-length for this small liquid-pool event. PRISM records that provider geometry and reconstructs the emitted inventory without clipping or setting outside mass to zero. A conservative sum of packet mole fractions outside the grid is 5.09e-5, far below the 0.04 LFL threshold, so the representative event is complete for the declared fire/explosion branch even though nonflammable inventory remains outside the finite grid. A provider-resolved validated spatial envelope or a validated liquid-pool observation operator is still required before treating the inventory ledger as spatially complete or promoting broader facility claims.",
   "claims": {
     "physical_validation_claim": false,
     "complete_facility_qra_claim": false,

@@ -1,0 +1,116 @@
+{
+  "domain": {
+    "downwind_bounds_m": [
+      -300000.0,
+      300000.0
+    ],
+    "crosswind_bounds_m": [
+      -20.0,
+      20.0
+    ],
+    "height_bounds_m": [
+      0.0,
+      20.0
+    ],
+    "cell_size_m": 1000.0
+  },
+  "explosion": {
+    "ignition_time_s": 1.0,
+    "flammable_mass_in_domain_kg": 0.0,
+    "cloud_centroid_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "combustion_energy_j": 0.0,
+    "obstructed_energy_fraction": 0.08,
+    "radius_0_3_barg_m": 0.0,
+    "radius_0_1_barg_m": 0.0,
+    "model": "TNO multi-energy strength-10 anchor zones; deflagration only",
+    "outside_domain_h2_kg_at_ignition": 2.710505431213761e-20,
+    "outside_domain_h2_kg_by_axis_at_ignition": {
+      "downwind": 0.0,
+      "crosswind": 1.2483497221864597e-22,
+      "height": 0.0
+    },
+    "cloud_support_bounds_wind_frame_m_at_ignition": [
+      [
+        -213161.67022897064,
+        213162.3662404358
+      ],
+      [
+        -0.46890122394851746,
+        0.46890122394851746
+      ],
+      [
+        0.0,
+        0.561368425875889
+      ]
+    ],
+    "cloud_support_outside_axes_at_ignition": {
+      "downwind": false,
+      "crosswind": false,
+      "height": false
+    },
+    "domain_truncation_reasons": [],
+    "domain_truncated": false
+  },
+  "cloud_at_ignition": {
+    "time_s": 1.0,
+    "vapour_emitted_kg": 0.00010057798079444456,
+    "hydrogen_in_domain_kg": 0.00010057798079444453,
+    "hydrogen_outside_domain_kg": 2.710505431213761e-20,
+    "mass_residual_kg": 0.0,
+    "hydrogen_outside_domain_by_axis_kg": {
+      "downwind": 0.0,
+      "crosswind": 1.2483497221864597e-22,
+      "height": 0.0
+    },
+    "cloud_support_bounds_wind_frame_m": [
+      [
+        -213161.67022897064,
+        213162.3662404358
+      ],
+      [
+        -0.46890122394851746,
+        0.46890122394851746
+      ],
+      [
+        0.0,
+        0.561368425875889
+      ]
+    ],
+    "cloud_support_outside_axes": {
+      "downwind": false,
+      "crosswind": false,
+      "height": false
+    },
+    "cloud_packet_diagnostic": {
+      "section_count": 333,
+      "maximum_length_m": 426324.03646940645,
+      "maximum_width_m": 0.9378024478970349,
+      "maximum_depth_m": 0.561368425875889,
+      "minimum_h2_mass_fraction": 2.6293439349252235e-13,
+      "maximum_h2_mass_fraction": 3.5453219577207417e-06,
+      "provider_mass_in_cloud_min_kg": 1.7206770317202208e-08,
+      "provider_mass_in_cloud_max_kg": 4.1941882934580656e-05,
+      "provider_half_length_min_m": 18.627058330458762,
+      "provider_half_length_max_m": 213531.2751275065,
+      "provider_velocity_min_m_s": 1.0295412464982538,
+      "provider_velocity_max_m_s": 1.0350622530501408
+    },
+    "flammable_mass_in_domain_kg": 0.0,
+    "flammable_centroid_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "flammable_bounds_wind_frame_m": null,
+    "maximum_mole_fraction": 6.271990370107232e-10,
+    "overlapping_carrier_cells": 0,
+    "ground_liquid_in_flight_kg": 0.0,
+    "outside_domain_inventory_nonzero": false
+  },
+  "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "operator_limited": true
+}

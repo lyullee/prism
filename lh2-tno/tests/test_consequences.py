@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 from lh2_tno.chain_worker import (box_axis_domain_overlap_fractions, box_axis_overlap_fractions, box_fractions, branch_mass, dose_harm,
-    mole_fraction, pulse_mass, weighted_union_harm, wind_conditioned_handoff)
+    mole_fraction, outside_flammability_proven, pulse_mass, weighted_union_harm, wind_conditioned_handoff)
 from lh2_tno.consequences import ConsequenceRequest
 
 EXAMPLE=Path(__file__).parents[1]/'examples/consequence_request.json'
@@ -62,6 +62,12 @@ def test_air_mixture_is_molar_not_mass_fraction():
 def test_combined_damage_uses_valid_union_upper_bound_without_independence():
     assert weighted_union_harm(.4,.3)==pytest.approx(.7)
     assert weighted_union_harm(.8,.6)==1.
+
+
+def test_outside_inventory_can_be_proven_nonflammable_without_zeroing_mass():
+    assert outside_flammability_proven(5e-5, 5e-5)
+    assert not outside_flammability_proven(5e-5, .04)
+    assert outside_flammability_proven(0., 1.)
 
 
 def test_wind_conditioned_handoff_waits_for_actual_downwind_recovery():

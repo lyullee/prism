@@ -1383,12 +1383,27 @@ def build_ijhe_completion_audit(
                     ),
                     "persistent_domain_incomplete_event_ids": persistent,
                     "recovered_event_ids": recovery.get("recovered_event_ids"),
+                    "recovery_flammability_proven_event_count": recovery.get(
+                        "recovery_flammability_proven_event_count"
+                    ),
+                    "recovery_flammability_proven_event_ids": recovery.get(
+                        "recovery_flammability_proven_event_ids"
+                    ),
                     "facility_ir_fn_promotion": recovery.get("facility_ir_fn_promotion"),
                 },
                 "interpretation": (
-                    "An explicit larger-domain sensitivity run was compared event by event. "
-                    "Persistent domain blockers remain visible and the comparison cannot "
-                    "promote provider qualification or facility IR/F-N."
+                    (
+                        "An explicit larger-domain sensitivity run was compared event by event. "
+                        "The conservative outside-LFL proof closes the fire/explosion domain "
+                        "gate for the recovered events, while provider qualification and "
+                        "facility IR/F-N remain withheld."
+                    )
+                    if recovery.get("recovery_domain_incomplete_event_count") == 0
+                    else (
+                        "An explicit larger-domain sensitivity run was compared event by event. "
+                        "Persistent domain blockers remain visible and the comparison cannot "
+                        "promote provider qualification or facility IR/F-N."
+                    )
                 ),
             }
         )

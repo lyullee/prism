@@ -465,7 +465,20 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     mass_ledger=data.get('mass_ledger'),
                     termination=q.release_termination.model_dump(mode='json'),
                     provider_packet_identity=packet_identity)
-                if data.get('explosion', {}).get('domain_truncated') is not False:
+                explosion = data.get('explosion', {})
+                row['domain_assessment'] = {
+                    'domain_truncated': explosion.get('domain_truncated'),
+                    'inventory_outside_domain': explosion.get('inventory_outside_domain'),
+                    'outside_domain_h2_kg_at_ignition': explosion.get('outside_domain_h2_kg_at_ignition'),
+                    'outside_domain_mole_fraction_upper_bound_at_ignition': explosion.get(
+                        'outside_domain_mole_fraction_upper_bound_at_ignition'
+                    ),
+                    'outside_domain_flammability_proven_at_ignition': explosion.get(
+                        'outside_domain_flammability_proven_at_ignition'
+                    ),
+                    'domain_truncation_reasons': explosion.get('domain_truncation_reasons', []),
+                }
+                if explosion.get('domain_truncated') is not False:
                     row['status'] = 'EXECUTED_DOMAIN_INCOMPLETE'
                     row['reason'] = 'outside-domain flammable mass unresolved or domain-completeness flag absent'
                     missing.append(row.copy())

@@ -1,10 +1,11 @@
-"""Compare a baseline campaign with an explicit larger-domain sensitivity run.
+"""Compare a baseline campaign with an explicit domain/flammability run.
 
 The audit is deliberately diagnostic.  A larger grid does not make a
 consequence result complete by itself: an event is recovered only when the
 campaign result no longer carries a domain-incomplete copy for that event.
-Persistent outside-domain mass remains a blocker and facility IR/F-N values
-are never promoted by this comparison.
+Outside inventory may remain when a conservative packet-concentration proof
+shows it cannot enter the declared fire/explosion branch.  Facility IR/F-N
+values are never promoted by this comparison.
 """
 from __future__ import annotations
 
@@ -32,6 +33,24 @@ def _event_statuses(campaign: Mapping[str, Any]) -> dict[str, set[str]]:
     return statuses
 
 
+def _flammability_proven_events(campaign: Mapping[str, Any]) -> set[str]:
+    """Return events whose every recorded case carries the LFL proof gate."""
+    values: dict[str, list[bool]] = {}
+    for key in ("cases", "uncomputed_cases"):
+        rows = campaign.get(key, [])
+        if not isinstance(rows, list):
+            raise ValueError(f"campaign.{key} must be an array")
+        for row in rows:
+            if not isinstance(row, Mapping) or not row.get("event_id"):
+                continue
+            assessment = row.get("domain_assessment")
+            proven = isinstance(assessment, Mapping) and assessment.get(
+                "outside_domain_flammability_proven_at_ignition"
+            ) is True
+            values.setdefault(str(row["event_id"]), []).append(proven)
+    return {event_id for event_id, flags in values.items() if flags and all(flags)}
+
+
 def _domain_bounds(defaults: Mapping[str, Any]) -> dict[str, Any]:
     domain = defaults.get("domain")
     if not isinstance(domain, Mapping):
@@ -51,6 +70,7 @@ def build_domain_recovery_audit(
     """Return an auditable comparison of two campaign result ledgers."""
     baseline = _event_statuses(baseline_campaign)
     recovery = _event_statuses(recovery_campaign)
+    recovery_flammability_proven = _flammability_proven_events(recovery_campaign)
     baseline_ids = set(baseline)
     recovery_ids = set(recovery)
     if baseline_ids != recovery_ids:
@@ -109,11 +129,23 @@ def build_domain_recovery_audit(
             for row in rows
             if row["disposition"] == "RECOVERED_BY_EXPLICIT_DOMAIN_RUN"
         ],
+        "recovery_flammability_proven_event_ids": sorted(recovery_flammability_proven),
+        "recovery_flammability_proven_event_count": len(recovery_flammability_proven),
         "facility_ir_fn_promotion": False,
         "qualified_provider_packet_promotion": False,
         "interpretation": (
-            "The larger-domain run is a sensitivity check. Persistent domain-incomplete "
-            "events require a closed dispersion/observation domain or provider evidence; "
-            "this audit never zeros their risk or promotes facility IR/F-N."
+            (
+                "The larger-domain run and conservative outside-LFL proof close the "
+                "fire/explosion flammability gate for the recovered event set. The "
+                "outside inventory ledger remains visible, and provider qualification "
+                "and facility IR/F-N are still withheld."
+            )
+            if not recovery_domain_ids
+            else (
+                "The larger-domain run and conservative outside-LFL proof are sensitivity "
+                "evidence. Persistent domain-incomplete events require a closed dispersion/"
+                "observation domain or provider evidence; this audit never zeros their risk "
+                "or promotes facility IR/F-N."
+            )
         ),
     }

@@ -316,6 +316,55 @@ def build_status_consistency_report(
             ),
         },
     )
+    domain_recovery_persistent_ids = audit_domain_recovery_evidence.get(
+        "persistent_domain_incomplete_event_ids"
+    )
+    domain_recovery_recovered_ids = audit_domain_recovery_evidence.get("recovered_event_ids")
+    # Keep the historical six-event diagnostic ledger valid for old published
+    # snapshots, while allowing the newer conservative outside-LFL proof to
+    # close those six domain blockers.  The latter is deliberately still a
+    # diagnostic gate: it records that fire/explosion flammability is bounded,
+    # but does not promote provider qualification or facility IR/F-N.
+    domain_recovery_historical_valid = (
+        audit_domain_recovery_evidence.get("recovery_domain_incomplete_event_count") == 6
+        and isinstance(domain_recovery_persistent_ids, list)
+        and len(domain_recovery_persistent_ids) == 6
+        and isinstance(domain_recovery_recovered_ids, list)
+        and len(domain_recovery_recovered_ids) == 0
+        and _endswith(
+            audit_domain_recovery_evidence.get("record"),
+            "domain_recovery_audit_v1.json",
+        )
+    )
+    domain_recovery_flammability_gate_valid = (
+        audit_domain_recovery_evidence.get("recovery_domain_incomplete_event_count") == 0
+        and isinstance(domain_recovery_persistent_ids, list)
+        and len(domain_recovery_persistent_ids) == 0
+        and isinstance(domain_recovery_recovered_ids, list)
+        and len(domain_recovery_recovered_ids) == 6
+        and audit_domain_recovery_evidence.get("recovery_flammability_proven_event_count") == 22
+        and _endswith(
+            audit_domain_recovery_evidence.get("record"),
+            "domain_recovery_audit_flammability_gate_v2.json",
+        )
+    )
+    domain_recovery_gate_valid = domain_recovery_historical_valid or domain_recovery_flammability_gate_valid
+    domain_recovery_record_valid = (
+        all(
+            _endswith(status.get("domain_recovery_audit_record"), "domain_recovery_audit_v1.json")
+            for status in (current_status, development_goal)
+        )
+        if domain_recovery_historical_valid
+        else all(
+            _endswith(
+                status.get("domain_recovery_audit_record"),
+                "domain_recovery_audit_flammability_gate_v2.json",
+            )
+            for status in (current_status, development_goal)
+        )
+        if domain_recovery_flammability_gate_valid
+        else False
+    )
     _check(
         checks,
         "audit_domain_recovery_gate",
@@ -326,14 +375,9 @@ def build_status_consistency_report(
         and audit_domain_recovery_evidence.get("status") == "DOMAIN_RECOVERY_REVIEWED"
         and audit_domain_recovery_evidence.get("event_count") == 24
         and audit_domain_recovery_evidence.get("baseline_domain_incomplete_event_count") == 6
-        and audit_domain_recovery_evidence.get("recovery_domain_incomplete_event_count") == 6
-        and isinstance(audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids"), list)
-        and len(audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids")) == 6
         and audit_domain_recovery_evidence.get("facility_ir_fn_promotion") is False
-        and all(
-            _endswith(status.get("domain_recovery_audit_record"), "domain_recovery_audit_v1.json")
-            for status in (current_status, development_goal)
-        ),
+        and domain_recovery_gate_valid
+        and domain_recovery_record_valid,
         {
             "status": (
                 audit_domain_recovery_check.get("status")
@@ -353,11 +397,22 @@ def build_status_consistency_report(
             "recovery_domain_incomplete_event_count": audit_domain_recovery_evidence.get(
                 "recovery_domain_incomplete_event_count"
             ),
-            "persistent_domain_incomplete_event_count": len(
-                audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids", [])
-            )
-            if isinstance(audit_domain_recovery_evidence.get("persistent_domain_incomplete_event_ids"), list)
+            "persistent_domain_incomplete_event_count": len(domain_recovery_persistent_ids)
+            if isinstance(domain_recovery_persistent_ids, list)
             else None,
+            "recovered_event_count": len(domain_recovery_recovered_ids)
+            if isinstance(domain_recovery_recovered_ids, list)
+            else None,
+            "recovery_flammability_proven_event_count": audit_domain_recovery_evidence.get(
+                "recovery_flammability_proven_event_count"
+            ),
+            "domain_recovery_gate_mode": (
+                "flammability_gate"
+                if domain_recovery_flammability_gate_valid
+                else "historical_persistent_domain"
+                if domain_recovery_historical_valid
+                else None
+            ),
             "facility_ir_fn_promotion": audit_domain_recovery_evidence.get("facility_ir_fn_promotion"),
         },
     )

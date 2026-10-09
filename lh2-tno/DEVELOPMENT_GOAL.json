@@ -1234,7 +1234,7 @@
   "major_accident_scope_matrix_catalog_record": "results/20261017/generic_mixed_accident_scope_matrix_with_catalog.json",
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
-  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v16.json",
+  "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v17.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 34 checks, 4 blockers; combined chain, restricted SLABx-LH2 evidence, exact-cache realtime benchmark and domain-recovery sensitivity are consumed; facility case packet coverage is 0/34 and remains fail-closed",
   "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v7.json",
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v16 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
@@ -2025,7 +2025,7 @@
   "facility_assessment_latest_frequency_scenario_count": 5,
   "facility_assessment_latest_provider_qualification_complete": false,
   "scope_matrix_latest_record": "results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json",
-  "ijhe_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v16.json",
+  "ijhe_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v17.json",
   "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 34 checks, 4 blockers; exact-cache realtime evidence is diagnostic-only; facility case packet coverage 0/34",
   "ijhe_audit_latest_blocking_reasons": [
     "only synthetic or screening provider releases are available for this campaign",
@@ -2300,8 +2300,8 @@
   "ijhe_completion_audit_combined_chain_closure_record": "results/20261024/native_generic_scope_combined_chain_closure_v1.json",
   "ijhe_completion_audit_combined_chain_closure_promotion": false,
   "ijhe_completion_audit_combined_chain_closure_test_status": "2 completion-audit tests; full portable suite 595 passed/1 skipped",
-  "native_generic_scope_vertical_merged_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v16.json",
-  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 4 blocking reasons; 29-event diagnostic chain, restricted SLABx-LH2 evidence, exact-cache realtime benchmark and domain-recovery sensitivity are consumed; 0/34 facility case packet coverage; 6 persistent domain-incomplete events",
+  "native_generic_scope_vertical_merged_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v17.json",
+  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 4 blocking reasons; 29-event diagnostic chain, restricted SLABx-LH2 evidence, exact-cache realtime benchmark and domain-recovery sensitivity are consumed; 0/34 facility case packet coverage; 0 persistent domain-incomplete events after outside-LFL proof; 6 prior events recovered; 22/24 flammability proofs",
   "slabx_lh2_validation_evidence_implemented": true,
   "slabx_lh2_validation_evidence_module": "src/lh2_tno/slabx_validation_audit.py",
   "slabx_lh2_validation_evidence_script": "scripts/audit_slabx_lh2_validation.py",
@@ -2333,7 +2333,7 @@
   "realtime_cache_benchmark_script": "scripts/benchmark_realtime_cache.py",
   "realtime_cache_benchmark_status": "EXACT_CACHE_1HZ_DIAGNOSTIC; 20/20 cache hits, median 31.47 ms, p95 33.23 ms; fresh physics 2,685.50 ms and not a 1 Hz claim",
   "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
-  "domain_recovery_audit_record": "results/20261024/domain_recovery_audit_v1.json",
-  "domain_recovery_audit_status": "DOMAIN_RECOVERY_REVIEWED; 24 events compared; 6 persistent domain-incomplete events; 0 recovered; facility IR/F-N and provider qualification promotion false",
+  "domain_recovery_audit_record": "results/20261024/domain_recovery_audit_flammability_gate_v2.json",
+  "domain_recovery_audit_status": "DOMAIN_RECOVERY_REVIEWED; 24 events compared; 0 persistent domain-incomplete events; 6 recovered; 22/24 flammability proofs; facility IR/F-N and provider qualification promotion false",
   "realtime_cache_benchmark_cache_meets_one_hz_all_samples": true
 }
