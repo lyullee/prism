@@ -169,3 +169,30 @@ def test_completion_audit_prefers_provider_worklist_file_over_stale_status():
     assert check["evidence"]["source"] == "provider_worklist"
     assert check["evidence"]["frequency_event_count"] == 2
     assert check["evidence"]["diagnostic_release_adapter_component_count"] == 7
+
+
+def test_completion_audit_records_resolved_diagnostic_adapter_execution_contract():
+    status = _status(False)
+    status.update({
+        "diagnostic_adapter_runner_implemented": True,
+        "diagnostic_adapter_registry_live_audit_status": (
+            "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED; 7/7"
+        ),
+        "diagnostic_adapter_registry_adapter_count": 7,
+        "diagnostic_adapter_registry_resolved_adapter_count": 7,
+        "diagnostic_adapter_registry_provider_instance_count": 0,
+        "diagnostic_adapter_registry_qualified_packet_count": 0,
+        "diagnostic_adapter_registry_live_audit_record": "registry.json",
+    })
+    report = build_ijhe_completion_audit(
+        status,
+        _matrix(False),
+        _campaign_result(False),
+        None,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_adapter_execution_contract"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["resolved_adapter_count"] == 7

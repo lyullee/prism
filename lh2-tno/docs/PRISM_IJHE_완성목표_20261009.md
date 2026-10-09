@@ -17,7 +17,7 @@
 - native 설비 모델이 계산한 수평·대기압·Mach≤0.3 기체 출구와 provider가 명시한 수직→수평 `VerticalGasHandoff` 경계를 `ResolvedGasRelease`로 수용하고 문헌 `LH2_PIPE` 5개 누출 크기를 각각 독립 실행했다. 추가로 `LayeredTankNetworkSimulator`/`CommandedValve`의 합성 tank·isolation success/failure history 10건을 같은 경계 계약과 시설 campaign에 연결했다. 이번 단계에서는 외부 `lh2dt` `HomogeneousTank`+`Valve`가 내보낸 flash 기체·지면 액체·액적 도착 시계를 `ResolvedLiquidRelease`로 수용해 DynamicLH2PoolX와 최종 피해까지 한 건 실행했다. provider의 `ParaHydrogen`과 native 풀 모델의 `Hydrogen` 기준은 provenance가 있는 명시적 변환 경계로만 연결하며, 교차 물성 검증 전까지 operator-limited로 남긴다. 소비자가 유량을 다시 계산하지 않는다.
 - 센서 단위·품질·시각 검사와 알려진 누출의 P/T 갱신, 동일 결과 캐시.
 - 기존 외부 TNO 엔진의 IR/F-N 기능은 있지만 새 LH2 경로의 사건·기상 자동 전체 합산에는 연결돼 있지 않았다.
-- 373개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
+- 381개 portable 검사, 자연 종료 실제 체인 1건, G1 finite-inventory liquid-jet operator-limited 사례 2건과 G3 사례 4건, steady equipment-resolved pipe campaign 2건, transient isolation success/failure pipe campaign 20건, 다섯 inventory-depletion LOC의 두 기상 조건 10건, 두 provider 출구를 결합한 양단 파열 campaign 2건, provider-resolved vertical handoff campaign 2건, provider-resolved liquid/two-phase exit의 pool·확산·피해 연결 1건, 문헌 빈도 분위수 재가중 검사를 확인했다. 현장 절대위험 검증·1 Hz 신규 계산·완전한 시설 feedback은 미완료다.
 - DynamicLH2PoolX의 물/알루미늄 hold-out 반경 오차와 HSE 질량잔차를 해시 장부로 확인했지만, protocol snapshot 해시 drift가 있어 제한 구성요소 증거로만 사용한다. 설비 방출·대기확산·점화·IR/F-N 전체 체인의 물리 검증으로 확대하지 않는다.
 
 ## 단계별 작업과 통과 기준
@@ -95,4 +95,21 @@ python lh2-tno/scripts/build_ijhe_completion_audit.py `
 
 외부 설비 모델이 정상 상태만 계산하고 사고 이력을 내보내지 않는 문제를 명확히 분리하기 위해 `src/lh2_tno/equipment_accident_export.py`를 추가했다. `AccidentReleaseExportRequest`는 사고 포트·개구·관찰시계·provider 종료 소유권·원본 digest를 필수화하고, provider는 `export_accident_history(request)`와 `prism.external_accident_history.v1`를 제공해야 한다. `evaluate()`·`simulate()`·`advance()`만 있는 모델은 사고 packet으로 사용하지 않는다. 합성·스크리닝 결과는 strict packet 검증 뒤에도 `DIAGNOSTIC_PACKET_NOT_PROMOTED`로 남긴다.
 
-현재 실제 `lh2dt_models` 클래스에는 이 전용 메서드가 없으므로 설비 매핑은 여전히 `STATE_ONLY_BOUND`, 실제 적격 packet은 0건이다. 2026-10-14부터 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기의 PRISM-side 진단 adapter 7건을 별도로 기록하지만, 이는 `synthetic_diagnostic` packet을 만드는 연결 시험이지 native provider export나 물리검증 완료가 아니다. 새 계약은 외부 모델이 구현될 때 사용할 PRISM 측 경계이며, 시설 IR/F-N·빈도·물리 검증 완료를 대신하지 않는다. 예시 요청은 `examples/equipment_accident_export_request.json`, 상세 규칙은 [외부 설비 사고방출 export 계약](PRISM_외부설비_사고방출_export_계약_20261011.md)에 기록했다. 새 계약 테스트를 포함한 portable suite는 373개이며, IJHE 자동 감사는 11개 검사 중 7개 차단 상태를 유지한다.
+현재 실제 `lh2dt_models` 클래스에는 이 전용 메서드가 없으므로 설비 매핑은 여전히 `STATE_ONLY_BOUND`, 실제 적격 packet은 0건이다. 2026-10-14부터 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기의 PRISM-side 진단 adapter 7건을 별도로 기록하지만, 이는 `synthetic_diagnostic` packet을 만드는 연결 시험이지 native provider export나 물리검증 완료가 아니다. 새 계약은 외부 모델이 구현될 때 사용할 PRISM 측 경계이며, 시설 IR/F-N·빈도·물리 검증 완료를 대신하지 않는다. 예시 요청은 `examples/equipment_accident_export_request.json`, 상세 규칙은 [외부 설비 사고방출 export 계약](PRISM_외부설비_사고방출_export_계약_20261011.md)에 기록했다. 새 계약 테스트를 포함한 portable suite는 381개이며, IJHE 자동 감사는 12개 검사 중 7개 차단 상태를 유지한다.
+
+## 2026-10-14 진단 adapter의 IJHE 감사 연결
+
+`build_ijhe_completion_audit.py`는 이제 `--diagnostic-adapter-registry`를 받을 수 있다. 이 ledger는 adapter 클래스가 catalog에서 해석되고 공통 `export_accident_history(request)` 메서드를 제공하는지만 검사한다. provider 인스턴스 수와 qualified packet 수를 별도로 표시하므로, adapter 실행 계약이 PASS여도 실제 사고 방출 provider와 시설 QRA가 완료된 것으로 해석하지 않는다.
+
+```powershell
+python scripts/build_ijhe_completion_audit.py `
+  --current-status CURRENT_STATUS.json `
+  --scope-matrix results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json `
+  --campaign-result results/20261014/generic_mixed_provider_campaign_refined_pool_result.json `
+  --uncertainty-result results/20261014/generic_lh2_mixed_facility_assessment_refined_pool.json `
+  --provider-worklist results/20261014/generic_lh2_provider_release_worklist_diagnostic_adapter.json `
+  --diagnostic-adapter-registry results/20261014/diagnostic_adapter_registry_audit_live.json `
+  --output results/20261014/ijhe_completion_audit_live_with_registry.json
+```
+
+현재 live 결과는 12개 검사 중 7개 차단, 5개 통과다. `diagnostic_adapter_execution_contract`는 7/7 클래스 해석으로 통과하지만 provider 인스턴스 0개·qualified packet 0개이며, 기존 설비 사고 packet·주요 사고 범위·시설 IR/F-N·독립 물리검증 gate는 그대로 차단된다. 결과는 `results/20261014/ijhe_completion_audit_live_with_registry.json`과 상태 장부에 기록했다.

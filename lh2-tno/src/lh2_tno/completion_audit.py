@@ -55,6 +55,7 @@ def build_ijhe_completion_audit(
     campaign_result: Mapping[str, Any],
     uncertainty_result: Mapping[str, Any] | None = None,
     provider_worklist: Mapping[str, Any] | None = None,
+    diagnostic_adapter_registry: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -108,6 +109,30 @@ def build_ijhe_completion_audit(
         and isinstance(worklist_status, str)
         and worklist_status.startswith("READY_FOR_PROVIDER_PACKETS")
     )
+    registry = diagnostic_adapter_registry
+    if registry is None and current_status.get("diagnostic_adapter_runner_implemented") is True:
+        registry = {
+            "status": current_status.get("diagnostic_adapter_registry_live_audit_status"),
+            "adapter_count": current_status.get("diagnostic_adapter_registry_adapter_count"),
+            "resolved_adapter_count": current_status.get(
+                "diagnostic_adapter_registry_resolved_adapter_count"
+            ),
+            "provider_instance_count": current_status.get(
+                "diagnostic_adapter_registry_provider_instance_count"
+            ),
+            "qualified_provider_packet_count": current_status.get(
+                "diagnostic_adapter_registry_qualified_packet_count"
+            ),
+            "record": current_status.get("diagnostic_adapter_registry_live_audit_record"),
+        }
+    registry_complete = (
+        isinstance(registry, Mapping)
+        and isinstance(registry.get("adapter_count"), int)
+        and registry.get("adapter_count") > 0
+        and registry.get("resolved_adapter_count") == registry.get("adapter_count")
+        and isinstance(registry.get("status"), str)
+        and registry.get("status", "").startswith("DECLARED_ADAPTERS_RESOLVED")
+    ) if registry is not None else None
     executed_cases = [
         row for row in cases
         if isinstance(row, Mapping) and str(row.get("status", "")).startswith("EXECUTED")
@@ -131,6 +156,25 @@ def build_ijhe_completion_audit(
             },
             "no executed release-to-consequence case is present",
         ),
+    ]
+    if registry is not None:
+        checks.append(
+            _check(
+                "diagnostic_adapter_execution_contract",
+                bool(registry_complete),
+                {
+                    "source": "diagnostic_adapter_registry" if diagnostic_adapter_registry is not None else "current_status",
+                    "status": registry.get("status"),
+                    "adapter_count": registry.get("adapter_count"),
+                    "resolved_adapter_count": registry.get("resolved_adapter_count"),
+                    "provider_instance_count": registry.get("provider_instance_count"),
+                    "qualified_provider_packet_count": registry.get("qualified_provider_packet_count"),
+                    "record": registry.get("record"),
+                },
+                "the declared diagnostic adapter registry is not fully resolved",
+            )
+        )
+    checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",
             current_status.get("equipment_model_binding_status") == "ACCIDENT_RELEASE_INTERFACE_BOUND"
@@ -265,7 +309,7 @@ def build_ijhe_completion_audit(
             },
             "sensor-conditioned realtime monitor contract is missing",
         ),
-    ]
+    ])
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {
