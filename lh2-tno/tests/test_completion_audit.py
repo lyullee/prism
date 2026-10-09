@@ -116,6 +116,26 @@ def _facility_assessment(**overrides):
     return assessment
 
 
+def _campaign_binding(**overrides):
+    binding = {
+        "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING",
+        "packet_event_count": 24,
+        "campaign_event_count": 24,
+        "campaign_case_count": 24,
+        "campaign_risk_atom_count": 96,
+        "packet_event_to_campaign_event_match_count": 24,
+        "packet_event_to_campaign_case_match_count": 24,
+        "packet_event_to_campaign_risk_atom_match_count": 24,
+        "structural_binding_complete": True,
+        "packet_identity_consumed": False,
+        "frequency_from_provider_packet": False,
+        "packet_claims_preserved": True,
+        "executed_case_count": 24,
+    }
+    binding.update(overrides)
+    return binding
+
+
 def test_completion_audit_blocks_incomplete_facility_claim():
     report = build_ijhe_completion_audit(
         _status(False),
@@ -413,6 +433,42 @@ def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_prom
     assert check["diagnostic_only"] is True
     assert report["complete_facility_qra_claim"] is False
     assert len(report["blocking_reasons"]) == 6
+
+
+def test_completion_audit_records_packet_to_campaign_structural_binding():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        diagnostic_campaign_binding=_campaign_binding(_record_path="binding.json"),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_campaign_binding_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["record"] == "binding.json"
+    assert len(report["blocking_reasons"]) == 6
+
+
+def test_completion_audit_keeps_campaign_binding_diagnostic_when_packet_identity_is_claimed():
+    report = build_ijhe_completion_audit(
+        _status(True),
+        _matrix(True),
+        _campaign_result(True),
+        {"scenarios": [{"id": "complete"}], "facility_credible_interval": True},
+        diagnostic_campaign_binding=_campaign_binding(packet_identity_consumed=True),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_worklist_campaign_binding_evidence"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert report["status"] == "READY_FOR_IJHE_SCOPE"
 
 
 def test_completion_audit_rejects_worklist_evidence_without_chain_or_strict_packets():

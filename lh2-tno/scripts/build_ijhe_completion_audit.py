@@ -28,6 +28,7 @@ def main() -> int:
     parser.add_argument("--diagnostic-adapter-registry", type=Path)
     parser.add_argument("--diagnostic-adapter-execution", type=Path)
     parser.add_argument("--diagnostic-worklist-evidence", type=Path)
+    parser.add_argument("--diagnostic-campaign-binding", type=Path)
     parser.add_argument("--facility-assessment", type=Path)
     parser.add_argument("--vertical-handoff-result", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -53,6 +54,13 @@ def main() -> int:
         )
         if worklist_evidence is not None:
             worklist_evidence["_record_path"] = str(args.diagnostic_worklist_evidence)
+        campaign_binding = (
+            _object(args.diagnostic_campaign_binding)
+            if args.diagnostic_campaign_binding
+            else None
+        )
+        if campaign_binding is not None:
+            campaign_binding["_record_path"] = str(args.diagnostic_campaign_binding)
         facility_assessment = (
             _object(args.facility_assessment)
             if args.facility_assessment
@@ -76,6 +84,7 @@ def main() -> int:
             registry,
             diagnostic_execution,
             worklist_evidence,
+            campaign_binding,
             facility_assessment,
             vertical_handoff_result,
         )

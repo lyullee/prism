@@ -58,6 +58,7 @@ def build_ijhe_completion_audit(
     diagnostic_adapter_registry: Mapping[str, Any] | None = None,
     diagnostic_adapter_execution: Mapping[str, Any] | None = None,
     diagnostic_worklist_evidence: Mapping[str, Any] | None = None,
+    diagnostic_campaign_binding: Mapping[str, Any] | None = None,
     facility_assessment: Mapping[str, Any] | None = None,
     vertical_handoff_result: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -290,6 +291,54 @@ def build_ijhe_completion_audit(
                     "Saved external-model packets cover only the exact-matched worklist subset; "
                     "this diagnostic evidence does not close the missing events or qualify the "
                     "provider packets."
+                ),
+            }
+        )
+    if diagnostic_campaign_binding is not None:
+        binding = diagnostic_campaign_binding
+        packet_count = binding.get("packet_event_count")
+        event_match_count = binding.get("packet_event_to_campaign_event_match_count")
+        case_match_count = binding.get("packet_event_to_campaign_case_match_count")
+        atom_match_count = binding.get("packet_event_to_campaign_risk_atom_match_count")
+        campaign_binding_valid = (
+            isinstance(binding.get("status"), str)
+            and binding.get("status", "").startswith("PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING")
+            and isinstance(packet_count, int)
+            and packet_count > 0
+            and event_match_count == packet_count
+            and case_match_count == packet_count
+            and atom_match_count == packet_count
+            and binding.get("structural_binding_complete") is True
+            and binding.get("packet_identity_consumed") is False
+            and binding.get("frequency_from_provider_packet") is False
+            and binding.get("packet_claims_preserved") is True
+        )
+        checks.append(
+            {
+                "name": "diagnostic_worklist_campaign_binding_evidence",
+                "status": "PASS" if campaign_binding_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": binding.get("_record_path"),
+                    "status": binding.get("status"),
+                    "packet_event_count": packet_count,
+                    "campaign_event_count": binding.get("campaign_event_count"),
+                    "campaign_case_count": binding.get("campaign_case_count"),
+                    "campaign_risk_atom_count": binding.get("campaign_risk_atom_count"),
+                    "packet_event_to_campaign_event_match_count": event_match_count,
+                    "packet_event_to_campaign_case_match_count": case_match_count,
+                    "packet_event_to_campaign_risk_atom_match_count": atom_match_count,
+                    "structural_binding_complete": binding.get("structural_binding_complete"),
+                    "packet_identity_consumed": binding.get("packet_identity_consumed"),
+                    "frequency_from_provider_packet": binding.get("frequency_from_provider_packet"),
+                    "packet_claims_preserved": binding.get("packet_claims_preserved"),
+                    "executed_case_count": binding.get("executed_case_count"),
+                },
+                "interpretation": (
+                    "Provider worklist event IDs structurally reach campaign events, cases, and risk atoms. "
+                    "The campaign does not carry provider packet digests, so packet time histories remain "
+                    "unconsumed evidence and the result stays diagnostic-only."
                 ),
             }
         )

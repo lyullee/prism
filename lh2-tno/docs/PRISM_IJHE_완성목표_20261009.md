@@ -126,3 +126,11 @@ python scripts/build_ijhe_completion_audit.py `
 이 결과는 **실제 외부 adapter 인스턴스가 공통 실행기와 strict 액체 packet 경계를 통과했다는 증거**다. packet의 evidence status는 `synthetic_diagnostic`이고 `provider_packet_promoted=false`, qualified packet 수는 0이다. 따라서 현장 설비 형상·재고·사고빈도·시설 IR/F-N·독립 물리검증·1 Hz 실시간 계산을 주장하지 않는다. 재현 결과는 `examples/diagnostic_adapter_runner_layered_tank_smoke.json`, 실행 스크립트는 `scripts/run_diagnostic_adapter_runner_smoke.py`에 보존했다.
 
 같은 runner를 저장탱크 worklist의 `AREA_0.01%` 항목에도 적용했다. `provider_instance_id=storage-tank-01`을 명시하고 event/component/port/opening 네 필드를 exact-match한 뒤 strict release를 consequence context와 synthetic final chain에 전달했다. chain은 `END_TO_END_DIAGNOSTIC_EXECUTED`로 종료되었고 약 11.22초, 질량 잔차 약 `-9.92×10⁻¹⁸ kg`였다. `worklist_frequency_bound=false`를 유지했으며 pool 반경 0.005 m는 선언 sensitivity 값이다. 이는 설비별 worklist→provider→방출→피해 연결을 확인한 것이고, qualified provider packet·문헌 빈도·시설 전체 위험을 완성한 증거는 아니다. 결과는 `examples/diagnostic_adapter_runner_worklist_storage_001.json`과 `results/20261014/diagnostic_adapter_runner_worklist_storage_001_consequence_chain`이다.
+
+## 2026-10-15 packet과 시설 campaign의 구조 결합 감사
+
+packet 증거가 시설 위험 계산 장부까지 이어지는지 확인하기 위해 `src/lh2_tno/diagnostic_campaign_binding.py`와 `scripts/audit_diagnostic_campaign_binding.py`를 추가했다. 24개 exact/strict worklist 사건의 ID를 campaign event·case·risk atom 장부와 대조한 결과, event 24/24, case 24/24, risk atom 24/24 사건 단위 match가 확인됐다. campaign에는 risk atom이 사건마다 4개씩 있어 총 96개이며, component ID는 24/24, 개구 직경을 선언한 사건은 21/21이 일치한다. relief와 재고기반 사고 3개는 개구 직경 자체가 없는 사고형식이므로 별도 미검사 수로 기록한다.
+
+이 감사는 현재 campaign이 worklist 사건을 구조적으로 인식한다는 점을 증명하지만, 외부 packet 시간 이력을 실제로 사용했다는 뜻은 아니다. campaign event/case에 `provider_source_digest`·`provider_result_digest`가 저장되지 않았으므로 `packet_identity_consumed=false`이고, 빈도도 provider packet에서 추정하지 않고 문헌 `FrequencyPlan`에서만 적용된다. 따라서 결과 상태는 `PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING`, qualified provider packet은 0개, 시설 total IR/F-N과 물리검증은 계속 보류한다.
+
+최신 portable suite는 399개가 통과했고, IJHE live audit는 18개 검사 중 7개 차단이다. 새 `diagnostic_worklist_campaign_binding_evidence`는 `PASS`이지만 `diagnostic_only=true`로 완료 gate에 영향을 주지 않는다. 실제 결합을 완료하려면 provider digest, 방출 시간 이력, 질량·엔탈피 장부를 campaign request와 case에 보존하고, 외부 설비 native accident export와 독립 물리검증을 확보해야 한다. 실행 결과는 `results/20261014/generic_lh2_diagnostic_campaign_binding.json`, 최신 감사 digest는 `0CA10E956F9D36EED5B5A20E3BB90F443F4FA8BCEB4A6D0C2C67F8281D3B5DF4`이다.

@@ -70,3 +70,28 @@ python scripts/build_ijhe_completion_audit.py `
 - `tests/test_provider_worklist_evidence.py`: endpoint, 중복 후보, chain 판정 시험
 - `examples/generic_lh2_provider_worklist_packet_evidence.json`: 재현 가능한 요약 결과
 - `results/20261014/generic_lh2_provider_worklist_packet_evidence.json`: 실행 결과 원본(ignored local result)
+
+## 2026-10-15 packet→campaign 구조 결합 감사
+
+packet 증거와 시설 campaign 결과를 같은 사건 식별자로 대조하는 별도 감사도 추가했다.
+
+```powershell
+python scripts/audit_diagnostic_campaign_binding.py `
+  --packet-evidence results/20261014/generic_lh2_provider_worklist_packet_evidence.json `
+  --campaign-result results/20261014/generic_mixed_provider_campaign_refined_pool_result.json `
+  --provider-worklist results/20261014/generic_lh2_provider_release_worklist_diagnostic_adapter.json `
+  --output results/20261014/generic_lh2_diagnostic_campaign_binding.json
+```
+
+현재 결과는 `PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING`이다. exact/strict packet 사건 24개가 campaign event 24개, case 24개, risk atom 96개에 모두 도달했고, 설비 component ID도 24/24가 일치했다. 개구 직경을 선언한 21개 사건은 campaign의 개구와 일치했으며, pressure-relief·instantaneous-inventory·inventory-over-600s처럼 개구 직경을 정의하지 않는 3개 사건은 `opening_geometry_unchecked_event_count=3`으로 따로 기록했다. campaign case 상태는 `EXECUTED` 5건과 `EXECUTED_OPERATOR_LIMITED` 19건이다.
+
+이 결과는 **구조적 결합**을 증명한다. 현재 campaign event/case에는 provider packet의 `provider_source_digest`·`provider_result_digest`가 없으므로 `packet_identity_consumed=false`로 남긴다. 즉 campaign이 24개 사건을 인식하고 피해 risk atom까지 만들었다는 뜻이지, 저장된 외부 packet의 시간별 유량·엔탈피를 실제로 소비했다는 뜻은 아니다. campaign 빈도는 독립된 문헌 catalog에서 왔으며 `frequency_from_provider_packet=false`를 유지한다. qualified provider packet, 시설 전체 IR/F-N, 물리검증은 이 감사로 승격되지 않는다.
+
+`build_ijhe_completion_audit.py --diagnostic-campaign-binding`을 사용하면 이 결과가 `diagnostic_worklist_campaign_binding_evidence` 검사로 들어간다. 최신 live audit는 18개 검사 중 7개 차단이고, 이 결합 검사는 `PASS`이면서 `diagnostic_only=true`이다. 남은 개발은 provider digest·방출 시계·상태 장부를 campaign request/case에 보존해 실제 packet 소비를 증명하고, native 사고 export와 독립 물리검증을 확보하는 일이다.
+
+추가 파일:
+
+- `src/lh2_tno/diagnostic_campaign_binding.py`: packet/event/case/risk-atom 구조 결합 감사
+- `scripts/audit_diagnostic_campaign_binding.py`: 재현 CLI
+- `tests/test_diagnostic_campaign_binding.py`: 결합·누락·claim 보존 시험
+- `results/20261014/generic_lh2_diagnostic_campaign_binding.json`: 실행 결과 원본(ignored local result)
