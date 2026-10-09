@@ -1,0 +1,103 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "native-dynamic-pipe-diagnostic",
+  "port_id": "native-dynamic-pipe-out",
+  "event_id": "native-dynamic-pipe/accidental-leak-001",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "native external DynamicHEMPipe accident export; synthetic geometry and state",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_liquid_exit",
+  "phase_basis": "two_phase",
+  "enthalpy_convention": "provider_total_outlet_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_result_digest": "c7286e988c0539299651c687df6bdc560bb731497f25f9341ebdeb56eca14256",
+  "provider_boundary_reference": "lh2dt.DynamicHEMPipe.export_accident_history native outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.060000000000000005,
+  "available_mass_kg": 2.5156266507964498,
+  "cumulative_mass_out_kg": 0.005955495423470514,
+  "cumulative_specific_enthalpy_out_j": 744.1039795985554,
+  "reference_area_m2": 7.853981633974483e-05,
+  "reference_area_provenance": "explicit failed pipe opening area",
+  "steps": [
+    {
+      "time_s": 0.0,
+      "total_mass_flow_kg_s": 0.11910990846941027,
+      "gas_mass_flow_kg_s": 0.033166258489926895,
+      "ground_liquid_mass_flow_kg_s": 0.08594364997948338,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 124944.09393147266,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 4.561941939468565,
+      "gas_effective_area_m2": 7.853981633974483e-05,
+      "gas_velocity_m_s": 92.56714009210425,
+      "gas_velocity_origin": "mass_continuity_from_declared_area",
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.08594364997948338,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    },
+    {
+      "time_s": 0.05,
+      "total_mass_flow_kg_s": 0.0,
+      "gas_mass_flow_kg_s": 0.0,
+      "ground_liquid_mass_flow_kg_s": 0.0,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 124914.83392396846,
+      "gas_pressure_pa_abs": null,
+      "gas_temperature_k": null,
+      "gas_density_kg_m3": null,
+      "gas_effective_area_m2": null,
+      "gas_velocity_m_s": null,
+      "gas_velocity_origin": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    }
+  ],
+  "termination_provenance": "DynamicHEMPipe native outlet closed at the caller-declared isolation time and remained closed through the observation delay",
+  "droplet_partition_provenance": "DynamicHEMPipe HEM outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+  "pool_footprint": null,
+  "no_rainout_evidence": null,
+  "termination_basis": "reviewed_isolation_success",
+  "failure_opening_diameter_m": 0.01
+}
