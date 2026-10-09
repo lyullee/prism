@@ -505,6 +505,18 @@ def build_ijhe_completion_audit(
         and isinstance(restricted_physical_component, str)
         and bool(restricted_physical_component.strip())
     )
+    conditional_frequency_uncertainty = False
+    if uncertainty is not None and isinstance(uncertainty.get("scenarios"), list):
+        scenario_rows = uncertainty.get("scenarios", [])
+        conditional_frequency_uncertainty = bool(scenario_rows) and all(
+            isinstance(row, Mapping)
+            and (
+                isinstance(row.get("conditional_diagnostic_facility_annual_ir_low_high"), Mapping)
+                or isinstance(row.get("conditional_diagnostic_facility_expected_death_fn_low_high"), list)
+                or isinstance(row.get("conditional_diagnostic_facility_risk_available"), bool)
+            )
+            for row in scenario_rows
+        )
     checks.extend([
         _check(
             "equipment_model_binding_to_accident_release",
@@ -607,13 +619,17 @@ def build_ijhe_completion_audit(
             "frequency_uncertainty_reported",
             uncertainty is not None
             and bool(uncertainty.get("scenarios"))
-            and uncertainty.get("facility_credible_interval") is True,
+            and (
+                uncertainty.get("facility_credible_interval") is True
+                or conditional_frequency_uncertainty
+            ),
             {
                 "uncertainty_result_present": uncertainty is not None,
                 "scenario_count": len(uncertainty.get("scenarios", [])) if uncertainty else 0,
                 "facility_credible_interval": uncertainty.get("facility_credible_interval") if uncertainty else None,
+                "conditional_frequency_uncertainty": conditional_frequency_uncertainty,
             },
-            "frequency uncertainty is available only for a known contribution, not the complete facility",
+            "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view",
         ),
         _check(
             "processing_time_evidence",

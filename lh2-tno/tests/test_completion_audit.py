@@ -221,6 +221,7 @@ def test_completion_audit_unwraps_campaign_uncertainty_ledger():
         "uncertainty_result_present": True,
         "scenario_count": 1,
         "facility_credible_interval": False,
+        "conditional_frequency_uncertainty": False,
     }
 
 
@@ -427,7 +428,13 @@ def test_completion_audit_records_diagnostic_frequency_uncertainty():
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
     assert check["evidence"]["scenario_count"] == 1
-    assert len(report["blocking_reasons"]) == 6
+    frequency_check = next(
+        item for item in report["checks"]
+        if item["name"] == "frequency_uncertainty_reported"
+    )
+    assert frequency_check["status"] == "PASS"
+    assert frequency_check["evidence"]["conditional_frequency_uncertainty"] is True
+    assert len(report["blocking_reasons"]) == 5
 
 
 def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_promotion():
