@@ -3,6 +3,7 @@ from lh2_tno.accident_scenario_catalog import (
     accident_scenario_catalog,
     audit_catalog_manifest,
     scenario_definition,
+    scenario_families_for_release,
 )
 
 
@@ -48,3 +49,18 @@ def test_catalog_manifest_audit_maps_equipment_to_scenarios():
     assert rows["vessel_hole"]["applicable_component_ids"] == ["tank-01"]
     assert rows["pipe_hole"]["applicable_component_ids"] == ["pipe-01"]
     assert rows["vertical_handoff"]["applicable_component_ids"] == ["pipe-01", "vent-01"]
+
+
+def test_release_event_family_mapping_keeps_cross_cutting_liquid_cases_explicit():
+    assert scenario_families_for_release("storage_tank", "hole") == (
+        "vessel_hole", "liquid_two_phase"
+    )
+    assert scenario_families_for_release("pipe", "two_sided_rupture") == (
+        "two_sided_rupture",
+    )
+    assert scenario_families_for_release("vent_stack", "maximum_relief_discharge") == (
+        "vent_hole",
+    )
+    assert scenario_families_for_release("pipe", "inventory_over_600s") == (
+        "inventory_over_600s", "liquid_two_phase"
+    )

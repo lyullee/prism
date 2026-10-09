@@ -38,6 +38,9 @@ def test_full_scope_provider_worklist_maps_every_frequency_event_without_fabrica
         "maximum_relief_discharge",
         "two_sided_rupture",
     }
+    assert result["scenario_family_counts"]["vessel_hole"] == 5
+    assert result["scenario_family_counts"]["liquid_two_phase"] == 21
+    assert all(row["scenario_families"] for row in rows)
 
     relief = [row for row in rows if row["release_mode"] == "maximum_relief_discharge"]
     assert relief and relief[0]["provider_event_kind"] == "emergency_relief"

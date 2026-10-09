@@ -174,6 +174,45 @@ def scenario_definition(family: str) -> dict[str, Any]:
     return rows[0]
 
 
+def scenario_families_for_release(
+    component_kind: str | None,
+    release_mode: str,
+) -> tuple[str, ...]:
+    """Map one initiating release event to declared scenario families.
+
+    The first family is the component/mechanism family. Additional families
+    are cross-cutting physical cases that the provider packet must satisfy. A
+    vertical handoff is excluded because it is known only after the provider
+    supplies a validated handoff state.
+    """
+    base_by_kind = {
+        "storage_tank": "vessel_hole",
+        "pipe": "pipe_hole",
+        "valve": "valve_hole",
+        "vent_stack": "vent_hole",
+        "pump": "pump_hole",
+        "vaporizer": "vaporizer_hole",
+        "reliquefier": "reliquefier_hole",
+    }
+    families: list[str] = []
+    if release_mode == "maximum_relief_discharge":
+        if component_kind == "vent_stack":
+            families.append("vent_hole")
+    elif release_mode == "two_sided_rupture":
+        families.append("two_sided_rupture")
+    elif release_mode == "instantaneous_inventory":
+        families.append("inventory_depletion")
+    elif release_mode == "inventory_over_600s":
+        families.append("inventory_over_600s")
+    elif release_mode == "hole" and component_kind in base_by_kind:
+        families.append(base_by_kind[component_kind])
+    if release_mode in {"hole", "instantaneous_inventory", "inventory_over_600s"} and component_kind in {
+        "storage_tank", "pipe", "valve", "pump", "vaporizer", "reliquefier"
+    }:
+        families.append("liquid_two_phase")
+    return tuple(dict.fromkeys(families))
+
+
 def audit_catalog_manifest(
     component_rows: Iterable[dict[str, Any]],
     required_families: Iterable[str] | None = None,

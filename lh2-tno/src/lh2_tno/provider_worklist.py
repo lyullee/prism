@@ -17,6 +17,7 @@ from .equipment_model_binding import audit_equipment_model_binding
 from .frequency import FrequencyPlan, generate_events
 from .provider_evidence import ACCIDENT_RELEASE_EXPORT_REQUEST
 from .scenario_evidence import PROVIDER_RELEASE_REQUIRED_FIELDS
+from .accident_scenario_catalog import scenario_families_for_release
 
 
 WORKLIST_SCHEMA = "prism.provider_release_worklist.v1"
@@ -47,6 +48,7 @@ class ProviderReleaseWorkItem(Contract):
         "two_sided_rupture",
         "maximum_relief_discharge",
     ]
+    scenario_families: tuple[Name, ...]
     provider_event_kind: Literal["accidental_leak", "emergency_relief"]
     provider_release_schema: Literal[
         "prism.resolved_release.v1", "prism.resolved_release_set.v1"
@@ -249,6 +251,9 @@ def build_provider_release_worklist(
                 loc=event.loc,
                 annual_frequency_per_year=event.annual_frequency_per_year,
                 release_mode=event.release.mode,
+                scenario_families=scenario_families_for_release(
+                    component_kind, event.release.mode
+                ),
                 **requirements,
                 accident_port_ids=tuple(port.id for port in ports),
                 model_binding_status=(binding_row or {}).get("status"),
@@ -267,6 +272,9 @@ def build_provider_release_worklist(
         )
 
     status_counts = Counter(item.status for item in items)
+    scenario_family_counts = Counter(
+        family for item in items for family in item.scenario_families
+    )
     overall = (
         "READY_FOR_PROVIDER_PACKETS"
         if items and not status_counts["UNCOMPUTED_NO_ACCIDENT_PORT"]
@@ -304,6 +312,7 @@ def build_provider_release_worklist(
         "generated_event_count": len(events),
         "provider_packet_count": 0,
         "status_counts": dict(status_counts),
+        "scenario_family_counts": dict(sorted(scenario_family_counts.items())),
         "promotion_policy": (
             "The worklist requests provider-owned release histories. It does not "
             "infer mass flow, duration, isolation, inventory, frequency, or a "

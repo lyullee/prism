@@ -628,7 +628,7 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_total_facility_risk_available": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_physical_validation_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_downward_guard": "implemented fail-closed in src/lh2_tno/chain_worker.py; no zero-horizontal-direction normalization",
-  "unit_contract_conservation_tests_passed": 412,
+  "unit_contract_conservation_tests_passed": 425,
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_status": "PARTIAL_DECLARED_SCOPE; 7 synthetic storage branch cases executed through the full consequence chain, 21 cases explicitly UNCOMPUTED; all executed cases remain operator-limited",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full_adaptive.json",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_case_count": 7,
@@ -1228,5 +1228,11 @@
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
-  ]
+  ],
+  "provider_worklist_scenario_family_binding_implemented": true,
+  "provider_worklist_scenario_family_binding_module": "src/lh2_tno/provider_worklist.py",
+  "provider_worklist_scenario_family_binding_catalog": "src/lh2_tno/accident_scenario_catalog.py",
+  "provider_worklist_scenario_family_binding_policy": "Each frequency event carries declared scenario_families and top-level counts; this does not infer frequency or create a provider packet. Missing packets remain UNCOMPUTED.",
+  "provider_worklist_scenario_family_binding_test_status": "provider worklist and catalogue tests; full portable suite 425 passed",
+  "provider_worklist_scenario_family_binding_record": "results/20261017/provider_worklist_with_scenario_families.json"
 }

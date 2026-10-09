@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 424,
+  "unit_contract_conservation_tests_passed": 425,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -1751,5 +1751,11 @@
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
-  ]
+  ],
+  "provider_worklist_scenario_family_binding_implemented": true,
+  "provider_worklist_scenario_family_binding_module": "src/lh2_tno/provider_worklist.py",
+  "provider_worklist_scenario_family_binding_catalog": "src/lh2_tno/accident_scenario_catalog.py",
+  "provider_worklist_scenario_family_binding_policy": "Each frequency event carries declared scenario_families and top-level counts; this does not infer frequency or create a provider packet. Missing packets remain UNCOMPUTED.",
+  "provider_worklist_scenario_family_binding_test_status": "provider worklist and catalogue tests; full portable suite 425 passed",
+  "provider_worklist_scenario_family_binding_record": "results/20261017/provider_worklist_with_scenario_families.json"
 }
