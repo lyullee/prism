@@ -1089,3 +1089,19 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 새 gate를 반영해 기존 5개 campaign 결과를 물리 재실행 없이 다시 집계했다. [`provider-gate assessment summary`](examples/provider_gate_facility_assessment_summary.json)는 41개 event, 70개 case, 37개 미계산 case, 240개 risk atom, provider packet case 0건, qualified facility QRA `false`를 기록한다. 원본 ledger·assessment·evidence request는 `results/20261019/`에 생성했다.
 
 같은 결과를 IJHE 완료 감사기에 다시 넣은 요약은 [`ijhe_completion_audit_provider_gate_summary.json`](examples/ijhe_completion_audit_provider_gate_summary.json)이다. 15개 검사 중 chain·빈도 불확실성·방출 지속시간/차단/재고 장부·처리시간은 통과했고, 실제 provider packet·주요 사고범위 완결·시설 IR/F-N 때문에 4개 blocker가 남아 `INCOMPLETE_EVIDENCE`이다.
+
+### 설비 배관 개구면적을 기존 시설 장부에 결합하는 방법
+
+`validate_equipment_campaign.py --all-area-bins`는 설비 provider가 계산한 `AREA_0.01%`~`AREA_100%` 방출을 각각 실행한다. 기존 시설 campaign과 결합할 때는 시설 ID·수용점 ID·component ID를 명시하고, 이미 사용한 asset ID와 겹치지 않게 지정한다.
+
+```powershell
+python scripts/validate_equipment_campaign.py `
+  --all-area-bins `
+  --facility-id generic-lh2-full-scope-example `
+  --common-receptor-id worker-01 `
+  --component-id liquid-transfer-line-01 `
+  --asset-id equipment-transfer-line_asset `
+  --output-dir results/20261020/equipment_campaign_all_bins_transfer_line_replacement
+```
+
+이 결과는 설비 campaign 자체의 계산을 완료해도 시설 전체 QRA를 자동으로 열지 않는다. 기존 event를 중복 합산하지 않도록 교체용 facility ledger를 만들고, 문헌 빈도 시나리오·사고범위 matrix·provider 자격·물리검증 gate를 함께 확인해야 한다. 실제 실행 결과와 재현 파일은 [설비 상태·배관 개구면적 시설 결합 기록](docs/PRISM_설비상태_배관개구면적_시설결합_개발기록_20261020.md)에 정리했다.

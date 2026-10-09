@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import copy
 import json
+import argparse
 import math
 from pathlib import Path
 import sys
@@ -88,19 +89,33 @@ def provider_input(temperature_k: float, opening_diameter_m: float = 0.0254) -> 
     }
 
 
-def make_facility() -> Facility:
+def make_facility(
+    facility_id: str = "equipment-coupling-campaign",
+    common_receptor_id: str | None = None,
+    component_id: str = "terminal_pipe",
+) -> Facility:
     basis = {
         "fluid": "ParaHydrogen",
         "backend": "CoolProp-HEOS",
         "energy_reference": "CoolProp-HEOS:ParaHydrogen:native",
     }
+    receptors = (
+        [{"id": common_receptor_id, "position_enu_m": [2.0, 0.0, 1.0]}]
+        if common_receptor_id
+        else [
+            {"id": "near_worker", "position_enu_m": [2.0, 0.0, 1.0]},
+            {"id": "downwind_worker", "position_enu_m": [10.0, 0.0, 0.1]},
+            {"id": "side_worker", "position_enu_m": [25.0, 4.0, 1.8]},
+            {"id": "distant_worker", "position_enu_m": [60.0, 0.0, 1.8]},
+        ]
+    )
     raw = {
-        "id": "equipment-coupling-campaign",
+        "id": facility_id,
         "configuration_origin": "synthetic",
         "environment": "outdoor",
         "components": [
             {
-                "id": "terminal_pipe",
+                "id": component_id,
                 "kind": "pipe",
                 "position_enu_m": [0.0, 0.0, 1.0],
                 "property_basis": basis,
@@ -109,19 +124,14 @@ def make_facility() -> Facility:
         ],
         "ports": [
             {
-                "id": "terminal_pipe.out",
-                "component_id": "terminal_pipe",
+                "id": f"{component_id}.out",
+                "component_id": component_id,
                 "phase": "vapour",
                 "direction": "out",
             }
         ],
         "edges": [],
-        "receptors": [
-            {"id": "near_worker", "position_enu_m": [2.0, 0.0, 1.0]},
-            {"id": "downwind_worker", "position_enu_m": [10.0, 0.0, 0.1]},
-            {"id": "side_worker", "position_enu_m": [25.0, 4.0, 1.8]},
-            {"id": "distant_worker", "position_enu_m": [60.0, 0.0, 1.8]},
-        ],
+        "receptors": receptors,
     }
     return Facility.model_validate_json(json.dumps(raw))
 
@@ -131,6 +141,7 @@ def make_release(
     provider_digest: str,
     opening_diameter_m: float = 0.0254,
     event_id: str = "equipment-coupling-campaign/terminal_pipe/AREA_100%",
+    component_id: str = "terminal_pipe",
 ) -> ResolvedGasRelease:
     inputs = [provider_input(20.5, opening_diameter_m), provider_input(21.0, opening_diameter_m)]
     exports = [backend.run("equipment_network_exit", item) for item in inputs]
@@ -176,8 +187,8 @@ def make_release(
     }
     return build_resolved_gas_release_from_provider_response(
         provider_response,
-        component_id="terminal_pipe",
-        port_id="terminal_pipe.out",
+        component_id=component_id,
+        port_id=f"{component_id}.out",
         event_id=event_id,
         provider_source_digest=provider_digest,
         provider_result=exports,
@@ -198,19 +209,47 @@ def make_release(
 
 
 def main() -> None:
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--all-area-bins",
+        action="store_true",
+        help="run a separate provider calculation for every generated area bin",
+    )
+    parser.add_argument(
+        "--facility-id",
+        default="equipment-coupling-campaign",
+        help="facility identifier to place on the campaign result; use the host facility ID when merging campaigns",
+    )
+    parser.add_argument(
+        "--common-receptor-id",
+        help="use one receptor ID shared with an existing facility campaign when merging results",
+    )
+    parser.add_argument(
+        "--asset-id",
+        default="terminal_pipe_asset",
+        help="asset ID emitted by the frequency plan; choose a disjoint ID when merging with another campaign",
+    )
+    parser.add_argument(
+        "--component-id",
+        default="terminal_pipe",
+        help="facility component ID for the coupled equipment boundary",
+    )
+    parser.add_argument("--output-dir", type=Path, default=OUT)
+    args = parser.parse_args()
+    OUT = args.output_dir
+    OUT.mkdir(parents=True, exist_ok=True)
     config, provider = load_backend()
     backend = IsolatedBackend(config)
-    facility = make_facility()
-    release = make_release(backend, tree_digest(provider))
-    save("facility.json", facility.model_dump(mode="json"))
-    save("resolved_release.json", release.model_dump(mode="json"))
+    facility = make_facility(args.facility_id, args.common_receptor_id, args.component_id)
+    provider_digest = tree_digest(provider)
 
     plan = {
         "id": "equipment-coupling-campaign",
         "assets": [
             {
-                "id": "terminal_pipe_asset",
-                "model_component_id": "terminal_pipe",
+                "id": args.asset_id,
+                "model_component_id": args.component_id,
                 "profile": "LH2_PIPE",
                 "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
                 "physical_scope_ids": ["terminal-pipe-1m"],
@@ -226,30 +265,55 @@ def main() -> None:
     events = generate_events(facility, frequency_plan)
     selected = next(event for event in events if event.loc == "AREA_100%")
 
+    if args.all_area_bins:
+        releases = {
+            event.id: make_release(
+                backend,
+                provider_digest,
+                opening_diameter_m=event.release.hole_diameter_m,
+                event_id=event.id,
+                component_id=args.component_id,
+            )
+            for event in events
+        }
+        release = releases[selected.id]
+        save("resolved_release_catalog.json", {
+            event_id: value.model_dump(mode="json")
+            for event_id, value in releases.items()
+        })
+    else:
+        release = make_release(backend, provider_digest, component_id=args.component_id)
+        releases = {selected.id: release}
+    save("facility.json", facility.model_dump(mode="json"))
+    save("resolved_release.json", release.model_dump(mode="json"))
+
     base_request = json.loads(
         (ROOT / "results" / "20261008" / "full_chain" / "gas_release_request.json")
         .read_text(encoding="utf-8")
     )
-    base_request.update(
-        component_id="terminal_pipe",
-        source_input=None,
-        resolved_release=release.model_dump(mode="json"),
-        available_mass_kg=0.01,
-        source_position_enu_m=[0.0, 0.0, 1.0],
-        annual_frequency_per_year=None,
-        annual_frequency_provenance=None,
-        frequency_event=None,
-        initiation_intensity_per_s=None,
-        release_termination={
-            "basis": "synthetic_diagnostic_horizon",
-            "time_s": 0.37,
-            "provenance": release.termination_provenance,
-        },
-        evaluation_times_s=[0.0, 0.1, 0.2, 0.37, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 10.0, 20.0],
-    )
+    def request_for(release_for_event: ResolvedGasRelease) -> dict:
+        request = copy.deepcopy(base_request)
+        request.update(
+            component_id=args.component_id,
+            source_input=None,
+            resolved_release=release_for_event.model_dump(mode="json"),
+            available_mass_kg=0.01,
+            source_position_enu_m=[0.0, 0.0, 1.0],
+            annual_frequency_per_year=None,
+            annual_frequency_provenance=None,
+            frequency_event=None,
+            initiation_intensity_per_s=None,
+            release_termination={
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 0.37,
+                "provenance": release_for_event.termination_provenance,
+            },
+            evaluation_times_s=[0.0, 0.1, 0.2, 0.37, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 10.0, 20.0],
+        )
+        return request
     routes = []
     for event in events:
-        if event.id == selected.id:
+        if args.all_area_bins or event.id == selected.id:
             routes.append(
                 {
                     "event_id": event.id,
@@ -258,7 +322,7 @@ def main() -> None:
                             "id": "provider-resolved-gas-exit",
                             "probability_given_event": 1.0,
                             "provenance": "native equipment-twin PH/network export; provider flow is not recomputed by PRISM",
-                            "request": copy.deepcopy(base_request),
+                            "request": request_for(releases[event.id]),
                         }
                     ],
                 }
@@ -280,7 +344,11 @@ def main() -> None:
     population = [
         {
             "receptor_id": receptor.id,
-            "persons": 20.0 if i == 0 else 10.0,
+            # Keep one effective person per receptor (2 persons x 0.5 presence)
+            # so the campaign's expected-death endpoint closes over the
+            # probability-of-death harm endpoints required by the facility
+            # ledger contract. This remains a synthetic diagnostic population.
+            "persons": 2.0,
             "presence_probability": 0.5,
             "provenance": "synthetic disjoint outdoor groups; not field population",
         }
@@ -321,16 +389,18 @@ def main() -> None:
     save("campaign_result.json", result)
     executed = [case for case in result["cases"] if case["status"] == "EXECUTED"]
     uncomputed = [case for case in result["uncomputed_cases"] if case["status"] == "UNCOMPUTED"]
-    assert len(executed) == 2, result["cases"]
-    assert len(uncomputed) == 8, result["cases"]
+    expected_executed = 10 if args.all_area_bins else 2
+    expected_uncomputed = 0 if args.all_area_bins else 8
+    assert len(executed) == expected_executed, result["cases"]
+    assert len(uncomputed) == expected_uncomputed, result["cases"]
     assert result["total_facility_annual_ir_low_high"] is None
     assert all(abs(case["mass_ledger"]["end_to_end_residual_kg"]) < 1e-8 for case in executed)
     assert all(case["request_digest"] for case in executed)
     save(
         "verification.json",
         {
-            "equipment_provider_cases": 2,
-            "uncomputed_other_pipe_locs": 8,
+            "equipment_provider_cases": len(executed),
+            "uncomputed_other_pipe_locs": len(uncomputed),
             "provider_flow_owned_by_equipment_twin": True,
             "provider_ph_and_continuity_checked": True,
             "resolved_gas_to_final_harm_executed": True,
@@ -345,6 +415,7 @@ def main() -> None:
             "limitations": [
                 "synthetic equipment boundary and weather/population conditions",
                 "provider is steady PH/network export; transient tank/valve feedback is not qualified",
+                "all generated area bins use separate provider calculations" if args.all_area_bins else
                 "only AREA_100% selected route executed; other pipe LOCs remain uncomputed",
             ],
         },

@@ -275,3 +275,11 @@ generic, vertical, two-sided 세 matrix를 `scope_matrix_merge.py`로 병합해 
 검사센터 CSV 3개를 현재 원본에서 재수입한 결과는 52개 후보 행이며, 41개가 일반 실외 범위 후보이고 11개가 선언 범위 밖이다. 이 자료는 `pipe_hole`, `valve_hole`, `vessel_hole`, `vaporizer_hole`, `vent_hole`, `vertical_handoff`, `inventory_over_600s`의 후보와 압력·유량·밸브·검지·온도·벤트 신호를 제공한다. 사고빈도·provider 방출 packet·종료시간·질량·에너지 폐합은 제공하지 않으므로 일반 시설 위험 계산에 직접 연결하지 않고 [`검사센터·외부 패킷 재감사 기록`](PRISM_검사센터_외부패킷_재감사_20261020.md)으로 보존한다.
 
 별도 외부 디지털트윈 출력 아카이브의 JSON 84개도 자동 검사했다. provider response 2개와 verification 12개는 확인됐지만 `prism.provider_qualification_evidence.v1`는 0개, 독립 물리검증 주장은 0개, 완전 시설 QRA 주장은 0개였다. 따라서 현재 자료는 `EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY`이며, 방출 계산이 실행됐다는 이유만으로 빈도·provider 적격성·시설 IR/F-N을 승격하지 않는다. 이 감사기와 요약은 `scripts/audit_provider_artifacts.py`, [`provider_artifact_audit_external_summary.json`](../examples/provider_artifact_audit_external_summary.json)에 있다.
+
+## 2026-10-20 transfer-line 설비 경계 교체 결합
+
+generic 시설의 `liquid-transfer-line-01` 다섯 개 개구면적을 설비 provider 경계와 직접 연결했다. `scripts/validate_equipment_campaign.py --all-area-bins`는 다섯 개 provider 방출 event를 만들고 각 event를 두 기상 조건에 연결해 10개 case를 실행한다. `--component-id liquid-transfer-line-01`과 공통 수용점 ID를 사용해 기존 시설 장부와 결합 가능한 결과를 만든다. 이때 빈도는 문헌 catalogue에서만 오며 provider·센서에서 추정하지 않는다.
+
+기존 generic transfer-line event를 중복해서 더하지 않도록 `generic_campaign_without_transfer_line_for_replacement.json`을 파생 입력으로 만들고, 그 자리를 설비 campaign으로 교체했다. 최신 결합 ledger `results/20261020/native_campaign_with_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json`은 41개 event, 75개 case, 280개 risk atom, 32개 미계산 case를 기록한다. 이전 all-bin 장부의 37개 미계산 case에서 5개가 줄었고 `liquid-transfer-line-01`은 `EXECUTED`가 됐다. 탱크·펌프·밸브·양단파열·수직 handoff의 미계산·operator-limited 범위는 그대로 차단된다.
+
+새 빈도 시나리오는 `examples/native_lh2_transfer_line_replacement_frequency_scenarios.json`에 있으며 시설 assessment와 조건부 IR/F-N을 다시 계산한다. `results/20261020/ijhe_completion_audit_transfer_line_replacement.json`은 27개 검사를 수행하고, 실제 qualified provider packet 부재, 부분 주요 사고범위, 시설 전체 IR/F-N 보류의 세 차단을 유지한다. 상세 연결 규칙과 재현 명령은 [설비 상태·배관 개구면적 시설 결합 기록](PRISM_설비상태_배관개구면적_시설결합_개발기록_20261020.md)을 따른다.

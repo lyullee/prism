@@ -1,0 +1,53 @@
+{
+  "schema_version": "prism.transfer_line_replacement_facility_summary.v1",
+  "purpose": "Replace five generic transfer-line uncomputed events with an equipment-twin all-area-bin diagnostic campaign without double counting.",
+  "facility_id": "generic-lh2-full-scope-example",
+  "equipment_campaign": "results/20261020/equipment_campaign_all_bins_transfer_line_replacement/campaign_result.json",
+  "frequency_scenarios": "examples/native_lh2_transfer_line_replacement_frequency_scenarios.json",
+  "facility_ledger": "results/20261020/native_campaign_with_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json",
+  "facility_assessment": "results/20261020/native_campaign_with_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
+  "scope_matrix": "results/20261020/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_merged_scope_matrix.json",
+  "evidence_request": "results/20261020/facility_evidence_request_transfer_line_replacement.json",
+  "ijhe_audit": "results/20261020/ijhe_completion_audit_transfer_line_replacement.json",
+  "equipment_area_bins": [
+    "AREA_0.01%",
+    "AREA_0.1%",
+    "AREA_1%",
+    "AREA_10%",
+    "AREA_100%"
+  ],
+  "equipment_executed_cases": 10,
+  "equipment_uncomputed_cases": 0,
+  "facility_event_count": 41,
+  "facility_case_count": 75,
+  "facility_uncomputed_case_count": 32,
+  "facility_risk_atom_count": 292,
+  "previous_all_bin_uncomputed_case_count": 37,
+  "replaced_uncomputed_case_count": 5,
+  "component_statuses": {
+    "ambient-vaporizer-01": "PARTIAL",
+    "inventory-depletion-pipe-01": "EXECUTED",
+    "isolation-diagnostic-pipe-01": "EXECUTED",
+    "liquid-transfer-line-01": "EXECUTED",
+    "liquid-transfer-pump-01": "PARTIAL",
+    "pressure-relief-vent-01": "EXECUTED",
+    "receiving-boundary-01": "EXCLUDED",
+    "reliquefier-01": "PARTIAL",
+    "storage-tank-01": "PARTIAL",
+    "transfer-valve-01": "PARTIAL",
+    "two-sided-rupture-pipe-01": "PARTIAL",
+    "vertical-handoff-terminal-pipe-01": "PARTIAL"
+  },
+  "facility_total_risk_available": false,
+  "conditional_diagnostic_facility_risk_available": true,
+  "audit_status": "INCOMPLETE_EVIDENCE",
+  "audit_blocking_reasons": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ],
+  "frequency_inference_performed": false,
+  "physical_validation_claim": false,
+  "one_hz_fresh_physics_demonstrated": false,
+  "interpretation": "Diagnostic facility accounting is extended; qualified facility QRA and facility total IR/F-N remain withheld."
+}
