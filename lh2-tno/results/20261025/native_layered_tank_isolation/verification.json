@@ -1,0 +1,27 @@
+{
+  "schema_version": "prism.native_lh2dt_layered_tank_packet_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_source_digest": "1b9503c459470b899f684b8883ed3fe155a0900d0eb335011a74de770ae5ce52",
+  "provider_result_digest": "91cb19ee6c6f8a4b8ee6d60b506d8defec56f5521e15b07df2c6483051dfb2da",
+  "provider_method": "export_accident_history",
+  "provider_packet_promoted": false,
+  "termination_basis": "reviewed_isolation_success",
+  "duration_s": 0.060000000000000005,
+  "available_mass_kg": 434.50988152270014,
+  "cumulative_mass_out_kg": 6.413244259390275e-05,
+  "mass_residual_kg": -5.684341886080802e-14,
+  "isolation_time_s": 0.05,
+  "post_isolation_observation_s": 0.01,
+  "isolation_success": true,
+  "state_snapshot_digest_match": true,
+  "physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic geometry, inventory and atmospheric boundary",
+    "native provider history is diagnostic evidence until independent qualification is supplied",
+    "state snapshot mass is a handoff metadata value; native provider owns the exact inventory ledger"
+  ]
+}
