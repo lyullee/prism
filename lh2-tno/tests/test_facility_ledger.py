@@ -333,3 +333,69 @@ def test_facility_assessment_combines_ledger_and_frequency_scenarios():
     assert assessment["frequency_uncertainty"]["fresh_physics_executed"] is False
     assert assessment["facility_risk_ledger"]["component_contributions"]["tank-01"]
     assert assessment["assessment_digest"]
+
+
+def test_facility_assessment_reconciles_provider_qualification_coverage():
+    result = _result(
+        event_id="event-qualified-coverage",
+        asset_id="asset-qualified-coverage",
+        component_id="tank-qualified-coverage",
+        frequency=1e-3,
+    )
+    result.update(
+        physical_validation_claim=True,
+        provider_packet_case_count=1,
+        qualified_provider_packet_case_count=1,
+        provider_packet_promoted=True,
+        provider_packet_missing_evidence_cases=[],
+    )
+    assessment = build_facility_assessment(
+        [result],
+        expected_component_ids=("tank-qualified-coverage",),
+        provider_qualification_coverage={
+            "status": "FULLY_MATCHED",
+            "qualification_assessed": True,
+            "qualification_status": "QUALIFIED_FULL_WORKLIST",
+            "worklist_event_count": 1,
+            "exact_match_count": 1,
+            "qualified_provider_packet_count": 1,
+            "unqualified_exact_match_count": 0,
+        },
+    )
+
+    gate = assessment["provider_qualification_coverage"]
+    assert gate["complete"] is True
+    assert gate["ledger_qualified_provider_packet_case_count"] == 1
+    assert assessment["qualified_facility_qra_available"] is True
+
+
+def test_facility_assessment_withholds_provider_qualification_coverage_on_count_mismatch():
+    result = _result(
+        event_id="event-mismatched-coverage",
+        asset_id="asset-mismatched-coverage",
+        component_id="tank-mismatched-coverage",
+        frequency=1e-3,
+    )
+    result.update(
+        provider_packet_case_count=1,
+        qualified_provider_packet_case_count=1,
+        provider_packet_promoted=True,
+        provider_packet_missing_evidence_cases=[],
+    )
+    assessment = build_facility_assessment(
+        [result],
+        expected_component_ids=("tank-mismatched-coverage",),
+        provider_qualification_coverage={
+            "status": "FULLY_MATCHED",
+            "qualification_assessed": True,
+            "qualification_status": "QUALIFIED_FULL_WORKLIST",
+            "worklist_event_count": 2,
+            "exact_match_count": 2,
+            "qualified_provider_packet_count": 2,
+            "unqualified_exact_match_count": 0,
+        },
+    )
+
+    gate = assessment["provider_qualification_coverage"]
+    assert gate["complete"] is False
+    assert any("does not match" in reason for reason in gate["blocking_reasons"])

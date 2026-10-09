@@ -39,17 +39,28 @@ def main() -> int:
     parser.add_argument("--scope-matrix", type=Path, action="append", default=[])
     parser.add_argument("--required-accident-family", action="append", default=[])
     parser.add_argument("--scenarios", type=Path)
+    parser.add_argument(
+        "--provider-qualification-coverage",
+        type=Path,
+        help="optional provider_catalog_coverage report to reconcile qualified packets",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
         results = [_object(path) for path in args.campaign_result]
         matrices = [_object(path) for path in args.scope_matrix]
+        provider_qualification_coverage = (
+            _object(args.provider_qualification_coverage)
+            if args.provider_qualification_coverage
+            else None
+        )
         assessment = build_facility_assessment(
             results,
             expected_component_ids=tuple(args.expected_component_id),
             scope_matrices=matrices,
             required_accident_families=tuple(args.required_accident_family),
             frequency_scenarios=_scenarios(args.scenarios),
+            provider_qualification_coverage=provider_qualification_coverage,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError, FacilityLedgerError) as error:
         raise SystemExit(f"facility assessment input error: {error}") from error
@@ -71,6 +82,11 @@ def main() -> int:
         "scope_matrix_count": len(assessment["facility_risk_ledger"]["scope_matrix_digests"]),
         "frequency_scenario_count": len(uncertainty["scenarios"]) if uncertainty else 0,
         "fresh_physics_executed": assessment["fresh_physics_executed"],
+        "provider_qualification_coverage_complete": (
+            assessment["provider_qualification_coverage"]["complete"]
+            if assessment["provider_qualification_coverage"] is not None
+            else None
+        ),
     }, ensure_ascii=False))
     return 0 if assessment["status"] == "FACILITY_SCOPE_EXECUTED" else 2
 

@@ -23,6 +23,7 @@ def build_facility_assessment(
     scope_matrices: Sequence[Mapping[str, Any]] = (),
     required_accident_families: Sequence[str] = (),
     frequency_scenarios: Sequence[LiteratureFrequencyScenario] = (),
+    provider_qualification_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return one facility risk, coverage, and frequency-sensitivity artifact.
 
@@ -44,6 +45,44 @@ def build_facility_assessment(
         if scenarios
         else None
     )
+    qualification_gate = None
+    if provider_qualification_coverage is not None:
+        coverage = provider_qualification_coverage
+        exact_match_count = coverage.get("exact_match_count")
+        worklist_event_count = coverage.get("worklist_event_count")
+        qualified_count = coverage.get("qualified_provider_packet_count")
+        unqualified_count = coverage.get("unqualified_exact_match_count")
+        ledger_qualified_count = ledger["qualified_provider_packet_case_count"]
+        reasons: list[str] = []
+        if coverage.get("qualification_assessed") is not True:
+            reasons.append("provider qualification coverage was not assessed")
+        if coverage.get("qualification_status") != "QUALIFIED_FULL_WORKLIST":
+            reasons.append("provider qualification coverage is not a full worklist qualification")
+        if not isinstance(exact_match_count, int) or not isinstance(worklist_event_count, int):
+            reasons.append("provider qualification coverage lacks integer worklist/exact-match counts")
+        elif exact_match_count != worklist_event_count:
+            reasons.append("provider qualification coverage has unmatched worklist events")
+        if not isinstance(qualified_count, int) or qualified_count <= 0:
+            reasons.append("provider qualification coverage has no qualified packets")
+        if unqualified_count != 0:
+            reasons.append("provider qualification coverage retains unqualified exact matches")
+        if isinstance(qualified_count, int) and qualified_count != ledger_qualified_count:
+            reasons.append(
+                "provider qualification coverage count does not match the merged campaign ledger"
+            )
+        qualification_gate = {
+            "coverage_status": coverage.get("status"),
+            "qualification_status": coverage.get("qualification_status"),
+            "worklist_event_count": worklist_event_count,
+            "exact_match_count": exact_match_count,
+            "qualified_provider_packet_count": qualified_count,
+            "unqualified_exact_match_count": unqualified_count,
+            "ledger_qualified_provider_packet_case_count": ledger_qualified_count,
+            "complete": not reasons,
+            "blocking_reasons": reasons,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+        }
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -61,6 +100,7 @@ def build_facility_assessment(
         "provider_qualification_blocking_reasons": ledger[
             "provider_qualification_blocking_reasons"
         ],
+        "provider_qualification_coverage": qualification_gate,
         "conditional_diagnostic_facility_risk_available": ledger[
             "conditional_diagnostic_facility_risk_available"
         ],

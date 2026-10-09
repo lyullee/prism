@@ -2401,8 +2401,8 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 474,
-  "full_portable_test_status": "474 passed",
+  "full_portable_test_count": 476,
+  "full_portable_test_status": "476 passed",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
@@ -2427,5 +2427,9 @@
   "ijhe_completion_audit_provider_qualification_coverage_implemented": true,
   "ijhe_completion_audit_provider_qualification_coverage_input": "scripts/build_ijhe_completion_audit.py --provider-qualification-coverage",
   "ijhe_completion_audit_provider_qualification_coverage_policy": "The completion audit accepts only the provider_catalog_coverage qualification fields; qualified packet count and full-worklist status are evidence inputs, while structural-only or synthetic matches remain blocked.",
-  "ijhe_completion_audit_provider_qualification_coverage_current_status": "IMPLEMENTED; qualification coverage is propagated to actual_provider_release_packet and provider_worklist_coverage checks; current external qualified packet count remains 0 and IJHE status remains INCOMPLETE_EVIDENCE"
+  "ijhe_completion_audit_provider_qualification_coverage_current_status": "IMPLEMENTED; qualification coverage is propagated to actual_provider_release_packet and provider_worklist_coverage checks; current external qualified packet count remains 0 and IJHE status remains INCOMPLETE_EVIDENCE",
+  "facility_assessment_provider_qualification_coverage_implemented": true,
+  "facility_assessment_provider_qualification_coverage_input": "scripts/build_facility_assessment.py --provider-qualification-coverage",
+  "facility_assessment_provider_qualification_coverage_policy": "The facility assessment reconciles coverage qualification status and qualified packet count with the merged campaign ledger; mismatches are explicit and never infer frequency or physical validation.",
+  "facility_assessment_provider_qualification_coverage_current_status": "IMPLEMENTED; assessment output records provider_qualification_coverage.complete and blocking reasons; current external qualified packet count remains 0"
 }
