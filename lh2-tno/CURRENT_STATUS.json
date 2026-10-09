@@ -2107,5 +2107,21 @@
     "case_p95_ms": 15014.350810076576,
     "case_p99_ms": 37485.93852710094,
     "one_hz_fresh_physics_demonstrated": false
-  }
+  },
+  "native_lh2dt_packet_campaign_facility_assessment_implemented": true,
+  "native_lh2dt_packet_campaign_facility_assessment_script": "scripts/build_facility_assessment.py",
+  "native_lh2dt_packet_campaign_facility_assessment_record": "examples/native_lh2dt_packet_campaign_facility_assessment_summary.json",
+  "native_lh2dt_packet_campaign_facility_assessment_full_record": "results/20261019/native_g1_handoff_facility_assessment.json",
+  "native_lh2dt_packet_campaign_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 24 cases and 96 risk atoms merged; conditional diagnostic ledger available; qualified facility total withheld",
+  "native_lh2dt_packet_campaign_facility_assessment_conditional_risk_available": true,
+  "native_lh2dt_packet_campaign_facility_assessment_facility_total_risk_available": false,
+  "native_lh2dt_packet_campaign_facility_assessment_operator_limited_case_count": 20,
+  "native_lh2dt_packet_campaign_facility_assessment_domain_incomplete_case_count": 1,
+  "native_lh2dt_packet_campaign_facility_assessment_risk_atom_count": 96,
+  "native_lh2dt_packet_campaign_facility_assessment_frequency_scenario_count": 5,
+  "native_lh2dt_packet_campaign_facility_assessment_physical_validation_claim": false,
+  "native_lh2dt_packet_campaign_facility_assessment_frequency_inference": false,
+  "native_lh2dt_packet_campaign_facility_assessment_provider_packet_promoted": false,
+  "ijhe_completion_audit_latest_facility_assessment_record": "results/20261019/native_g1_handoff_facility_assessment.json",
+  "ijhe_completion_audit_latest_facility_assessment_status": "PASS diagnostic-only; native campaign 24 events/96 atoms merged; conditional IR/F-N available, qualified total withheld"
 }

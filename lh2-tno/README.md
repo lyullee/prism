@@ -963,4 +963,6 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 
 G1 고속 출구는 이후 `scripts/rebind_campaign_to_compressible_handoff.py`로 별도 source/throat 기반 handoff를 명시적으로 재결합했다. event/component/port/source digest가 맞을 때만 같은 campaign 요청에 붙였고, provider result digest 변경과 `not independently validated` provenance를 별도 기록했다. 최종 네이티브 packet campaign은 **24/24 chain 실행, 20건 `EXECUTED_OPERATOR_LIMITED`, 0건 실패, 96 risk atom**으로 끝났지만 시설 전체 IR/F-N은 계속 `null`이다. 최신 장부는 [`examples/native_lh2dt_packet_campaign_execution_ledger_g1_handoff.json`](examples/native_lh2dt_packet_campaign_execution_ledger_g1_handoff.json), 최신 IJHE 감사는 `results/20261019/ijhe_completion_audit_with_native_packet_campaign_g1_handoff.json`이다. 이 handoff는 계산 경계를 연결한 진단 증거이며 provider 적격성·고속 근접장 물리검증·시설 QRA를 의미하지 않는다.
 
+최종 campaign 결과는 시설 ledger로도 재집계했다. 24개 사건과 96개 risk atom에 문헌 빈도 5개 시나리오를 적용한 조건부 진단 결과를 [`examples/native_lh2dt_packet_campaign_facility_assessment_summary.json`](examples/native_lh2dt_packet_campaign_facility_assessment_summary.json)에 보관했다. 20개 운전자 제한과 1개 domain-incomplete 상태가 남아 `facility_total_risk_available=false`이며, 조건부 합산을 자격 있는 시설 IR/F-N으로 표현하지 않는다.
+
 

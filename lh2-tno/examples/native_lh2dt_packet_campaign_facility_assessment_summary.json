@@ -1,0 +1,61 @@
+{
+  "schema_version": "prism.native_lh2dt_packet_campaign_facility_assessment_summary.v1",
+  "status": "PARTIAL_FACILITY_SCOPE",
+  "assessment_digest": "3cff3cb4edfb26c61b1ae4fd3b0344704da9a8e03eb3835ebb1e7d233e5122ac",
+  "campaign_result": "results/20261019/generic_native_packet_rebound_g1_handoff_result.json",
+  "assessment_record": "results/20261019/native_g1_handoff_facility_assessment.json",
+  "facility_total_risk_available": false,
+  "complete_facility_qra_claim": false,
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "conditional_diagnostic_facility_coverage": {
+    "event_count": 24,
+    "case_count": 24,
+    "uncomputed_case_count": 21,
+    "overlapping_case_uncomputed_count": 21,
+    "risk_atom_count": 96,
+    "case_status_counts": {
+      "EXECUTED": 4,
+      "EXECUTED_OPERATOR_LIMITED": 20
+    },
+    "uncomputed_status_counts": {
+      "EXECUTED_DOMAIN_INCOMPLETE": 1,
+      "EXECUTED_OPERATOR_LIMITED": 20
+    },
+    "operator_limited_case_count": 20,
+    "explicit_uncomputed_status_count": 0,
+    "failed_case_count": 0,
+    "observed_component_count": 7,
+    "expected_component_count": 7,
+    "component_status_counts": {
+      "EXCLUDED": 1,
+      "EXECUTED": 1,
+      "PARTIAL": 6
+    },
+    "required_accident_family_count": 12,
+    "scope_blocker_count": 19
+  },
+  "frequency_scenario_count": 5,
+  "facility_credible_interval": false,
+  "fresh_physics_executed": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "frequency_inference": false,
+  "diagnostic_only": true,
+  "interpretation": "The native packet campaign risk atoms were merged once into a facility ledger and five literature scenarios were reweighted. Operator-limited/domain-incomplete cases and the incomplete accident scope withhold qualified facility total IR/F-N."
+}
