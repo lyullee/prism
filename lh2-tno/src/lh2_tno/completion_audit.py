@@ -66,6 +66,7 @@ def build_ijhe_completion_audit(
     scenario_evidence_report: Mapping[str, Any] | None = None,
     native_full_bore_result: Mapping[str, Any] | None = None,
     native_full_bore_frequency_result: Mapping[str, Any] | None = None,
+    native_packet_coverage_ledger: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -300,6 +301,76 @@ def build_ijhe_completion_audit(
                 and full_bore_frequency.get("facility_total_risk_available") is False
             )
         )
+    if native_packet_coverage_ledger is not None:
+        packet_ledger = native_packet_coverage_ledger
+        packet_rows = packet_ledger.get("rows")
+        packet_policy = packet_ledger.get("policy")
+        if not isinstance(packet_policy, Mapping):
+            packet_policy = {}
+        expected_worklist_packets = (
+            provider_worklist.get("generated_event_count")
+            if isinstance(provider_worklist, Mapping)
+            else None
+        )
+        ledger_valid = (
+            packet_ledger.get("schema_version") == "prism.native_lh2dt_packet_coverage_ledger.v1"
+            and packet_ledger.get("status") == "PARTIAL_NATIVE_DIAGNOSTIC_EVIDENCE"
+            and isinstance(packet_rows, list)
+            and len(packet_rows) == packet_ledger.get("packet_count")
+            and packet_ledger.get("packet_count", 0) > 0
+            and packet_ledger.get("consequence_chain_event_count", 0) <= packet_ledger.get("packet_count", 0)
+            and packet_ledger.get("provider_packet_promoted_count") == 0
+            and packet_ledger.get("physical_validation_claim_count") == 0
+            and packet_ledger.get("facility_qra_claim_count") == 0
+            and packet_policy.get("diagnostic_only") is True
+            and packet_policy.get("frequency_inference_performed") is False
+            and packet_policy.get("provider_packet_promoted") is False
+            and packet_policy.get("facility_qra_claim") is False
+            and packet_policy.get("physical_validation_claim") is False
+            and all(
+                isinstance(row, Mapping)
+                and row.get("diagnostic_only") is True
+                and row.get("provider_packet_promoted") is False
+                and row.get("facility_qra_claim") is False
+                and row.get("physical_validation_claim") is False
+                for row in packet_rows
+            )
+            and (
+                expected_worklist_packets is None
+                or packet_ledger.get("exact_worklist_event_count") == expected_worklist_packets
+            )
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_lh2dt_packet_coverage",
+                "status": "PASS" if ledger_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if ledger_valid
+                    else "native lh2dt packet coverage ledger is missing, malformed, or contains a promoted claim"
+                ),
+                "evidence": {
+                    "record": packet_ledger.get("_record_path"),
+                    "status": packet_ledger.get("status"),
+                    "packet_count": packet_ledger.get("packet_count"),
+                    "exact_worklist_event_count": packet_ledger.get("exact_worklist_event_count"),
+                    "expected_worklist_event_count": expected_worklist_packets,
+                    "consequence_chain_event_count": packet_ledger.get("consequence_chain_event_count"),
+                    "frequency_bound_event_count": packet_ledger.get("frequency_bound_event_count"),
+                    "provider_packet_promoted_count": packet_ledger.get("provider_packet_promoted_count"),
+                    "physical_validation_claim_count": packet_ledger.get("physical_validation_claim_count"),
+                    "facility_qra_claim_count": packet_ledger.get("facility_qra_claim_count"),
+                    "family_summary": packet_ledger.get("family_summary"),
+                },
+                "interpretation": (
+                    "Saved native lh2dt packet outputs are indexed by equipment family and opening. "
+                    "The ledger demonstrates diagnostic interface coverage only; it does not qualify "
+                    "the provider, assign a facility frequency, or unlock facility IR/F-N."
+                ),
+            }
+        )
+    if native_full_bore_frequency_result is not None:
         full_bore_frequency_valid = (
             full_bore_frequency.get("schema_version") in {
                 "prism.native_lh2dt_dynamic_pipe_full_bore_frequency_case.v1",

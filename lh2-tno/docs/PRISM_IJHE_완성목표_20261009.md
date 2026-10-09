@@ -165,3 +165,9 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 
 따라서 검사센터 시계열은 현재 `state_snapshot_binding_allowed=false`, `frequency_applied=false`, `sensor_frequency_learning_used=false`, `provider_packet_created=false`, `facility_qra_claim=false`다. exact tag-to-unit map, 압력 기준·온도 기준·유량 기준, 보정·결측·시각 품질, 설비·포트 대응표와 별도의 상태 adapter 검증이 끝나야 실시간 사고 초기조건으로 연결할 수 있다. 자세한 절차와 제한은 [검사센터 시계열 상태 감사](PRISM_검사센터_시계열상태감사_20261018.md)에 기록했다.
 
+## 2026-10-18 네이티브 패킷 장부
+
+설비별 외부 모델 결과를 다시 확인할 수 있도록 `src/lh2_tno/native_packet_coverage.py`와 `scripts/build_native_lh2dt_packet_coverage_ledger.py`를 추가했다. 장부 `examples/native_lh2dt_packet_coverage_ledger.json`은 저장된 네이티브 사고 패킷 25건, 선언된 작업목록과 정확히 맞는 사건 24건, 피해영향 체인까지 연결된 사건 16건, 문헌 빈도가 연결된 진단 1건을 기록한다. 행마다 개구·방출시간·종료 근거·질량잔차·체인 경로를 보존하며, 승격·빈도 추론·시설 QRA·물리검증 플래그는 모두 닫혀 있다.
+
+`build_ijhe_completion_audit.py --native-packet-coverage-ledger`를 사용하면 이 장부의 일관성을 별도 진단검사로 확인할 수 있다. 최신 감사는 `results/20261018/ijhe_completion_audit_with_native_packet_coverage.json`에 25개 검사를 기록하며 상태는 여전히 `INCOMPLETE_EVIDENCE`, 차단 이유는 3개다. 이 단계가 추가한 것은 방출 패킷의 설비별 추적성이고, 현장용 provider 적격성·미계산 사고의 실행·시설 전체 IR/F-N을 닫은 것은 아니다. 장부의 읽는 법과 현재 행별 범위는 [네이티브 LH2DT 사고 패킷 장부](PRISM_네이티브_LH2DT_사고패킷_장부_20261018.md)에 정리했다.
+

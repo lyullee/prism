@@ -134,6 +134,42 @@ def test_completion_audit_records_native_full_bore_literature_frequency_binding(
     assert check["blocking_reason"] is None
 
 
+def test_completion_audit_records_native_packet_coverage_ledger():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        provider_worklist={"generated_event_count": 1},
+        native_packet_coverage_ledger={
+            "schema_version": "prism.native_lh2dt_packet_coverage_ledger.v1",
+            "status": "PARTIAL_NATIVE_DIAGNOSTIC_EVIDENCE",
+            "packet_count": 1,
+            "exact_worklist_event_count": 1,
+            "consequence_chain_event_count": 1,
+            "frequency_bound_event_count": 0,
+            "provider_packet_promoted_count": 0,
+            "physical_validation_claim_count": 0,
+            "facility_qra_claim_count": 0,
+            "rows": [{
+                "diagnostic_only": True,
+                "provider_packet_promoted": False,
+                "facility_qra_claim": False,
+                "physical_validation_claim": False,
+            }],
+            "policy": {
+                "diagnostic_only": True,
+                "frequency_inference_performed": False,
+                "provider_packet_promoted": False,
+                "facility_qra_claim": False,
+                "physical_validation_claim": False,
+            },
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "diagnostic_native_lh2dt_packet_coverage")
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def test_completion_audit_records_frequency_provenance_as_diagnostic_evidence():
     report = build_ijhe_completion_audit(
         {"physical_validation_claim": False},

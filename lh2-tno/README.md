@@ -946,4 +946,17 @@ campaign 결과의 `release_termination_inventory_ledger`에는 사건×차단 �
 
 `scripts/run_lh2dt_native_dynamic_pipe_frequency_case.py`는 외부 `DynamicHEMPipe`의 액체·2상 초기 품질, 대기 flash, 기체·지상 액체 질량, 종료시계와 잔차를 반환받고 `LH2_PIPE AREA_0.01%` 문헌 빈도를 적용해 consequence chain을 실행한다. 실행 요약은 `examples/native_lh2dt_dynamic_pipe_frequency_case_verification.json`에 있다. 결과는 `PARTIAL_DECLARED_SCOPE`이며 다른 opening bin·설비는 명시적으로 미계산/제외되고, airborne liquid·시설 총 IR/F-N·qualified packet은 보류된다.
 
+### 네이티브 LH2DT 패킷 장부
+
+설비별 외부 모델 출력의 방출시간·종료근거·질량잔차·피해체인 연결 여부는 [`examples/native_lh2dt_packet_coverage_ledger.json`](examples/native_lh2dt_packet_coverage_ledger.json)에 모아져 있다. 다음 명령으로 현재 결과를 다시 만들 수 있다.
+
+```powershell
+$py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').FullName
+& $py scripts/build_native_lh2dt_packet_coverage_ledger.py `
+  --provider-worklist results/20261017/provider_worklist_with_scenario_families.json `
+  --output examples/native_lh2dt_packet_coverage_ledger.json
+```
+
+현재 장부는 네이티브 패킷 25건, 작업목록 exact-match 24건, consequence-chain 연결 16건을 기록한다. 장부는 `diagnostic_only`이며 provider 승격·빈도 추론·시설 IR/F-N·물리검증을 열지 않는다. 읽는 법과 사고군별 표는 [네이티브 LH2DT 사고 패킷 장부](docs/PRISM_네이티브_LH2DT_사고패킷_장부_20261018.md)를 참조한다.
+
 
