@@ -942,6 +942,8 @@ facility_monitor = FacilityRealtimeConsequenceMonitor(
 
 `snapshot["aggregate"]["component_risk_ranking"]`에는 같은 batch에서 현재 기상 IR이 계산된 설비의 진단용 우선순위가 기록됩니다. 높은 불확실성 끝점의 수용점 IR을 기준으로 정렬하며, 빈도 binding·frame·피해가 빠진 설비는 `rank=null`과 `[null, null]`로 보류합니다. 누락을 0으로 만들지 않고 빈도를 재분배하지 않으므로, 자세한 출력 계약과 예시는 [실시간 설비별 위험순위 개발기록](docs/PRISM_실시간_설비별_위험순위_개발기록_20261010.md)을 참고합니다.
 
+각 accepted component에는 `equipment_release_path`도 기록됩니다. provider resolver가 반환한 사고 경계의 지속시간, 종료 basis, available/cumulative/remaining mass와 provider digest를 보존하며, 양단 방출은 shared inventory로 표시합니다. resolver가 없으면 `WITHHELD_PROVIDER_RELEASE_NOT_RESOLVED`로 남고 누출량 0으로 대체하지 않습니다. 자세한 계약은 [실시간 방출 경로 장부 개발기록](docs/PRISM_실시간_방출경로_장부_개발기록_20261010.md)을 참고합니다.
+
 `components`에는 설비별 frame/mapping digest, fresh physics 또는 exact cache,
 처리시간, deadline, provider 방출 경계 여부가 보존되고 `aggregate`에는 설비 수,
 실패 수와 deadline 요약이 기록됩니다. `FacilityRealtimeBinding`에

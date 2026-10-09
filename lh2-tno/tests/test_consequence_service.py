@@ -151,6 +151,14 @@ def test_service_marks_provider_resolved_telemetry_update(tmp_path):
     )
     assert result['data']['provider_event'] == 'provider-accident-01'
     assert result['telemetry_boundary']['equipment_release_resolved'] is True
+    release_path = result['equipment_release_path']
+    assert release_path['status'] == 'AVAILABLE_PROVIDER_RELEASE_PATH'
+    assert release_path['duration_s'] == pytest.approx(0.2)
+    assert release_path['boundaries'][0]['cumulative_mass_out_kg'] == pytest.approx(0.2)
+    assert release_path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
+    assert release_path['inventory']['status'] == 'MASS_BALANCE_CLOSED'
+    assert release_path['isolation']['status'] == 'WITHHELD_SYNTHETIC_HORIZON'
+    assert release_path['frequency_inference_performed'] is False
 
 
 @pytest.mark.parametrize('bad', [lambda template, state: template, lambda template, state: _defaults()])
@@ -251,8 +259,37 @@ def test_facility_realtime_monitor_aggregates_component_provenance_and_deadlines
     assert ranking['available_component_count'] == 0
     assert all(row['peak_annual_ir_low_high'] == [None, None] for row in ranking['rows'])
     assert ranking['stale_or_zero_fallback_used'] is False
+    assert result['aggregate']['equipment_release_path_component_count'] == 0
+    assert result['aggregate']['equipment_release_path_withheld_component_count'] == 2
     assert result['components']['storage-tank-01']['frame_digest']
     assert result['components']['transfer-pump-01']['mapping_digest']
+
+
+def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
+    base, frame = _facility_binding(tmp_path, 'storage-tank-01')
+    provider_request = __import__(
+        'lh2_tno.provider_release', fromlist=['build_consequence_request_from_provider_release']
+    ).build_consequence_request_from_provider_release(_release(), _defaults())
+    binding = FacilityRealtimeBinding(
+        component_id=base.component_id,
+        template=base.template,
+        monitor=base.monitor,
+        normalizer=base.normalizer,
+        pressure_tag=base.pressure_tag,
+        temperature_tag=base.temperature_tag,
+        release_resolver=lambda _template, _state: provider_request,
+    )
+    result = FacilityRealtimeConsequenceMonitor(
+        {'storage-tank-01': binding}
+    ).update_from_frames({'storage-tank-01': frame}, now_s=100.2)
+
+    assert result['status'] == 'ACCEPTED'
+    path = result['components']['storage-tank-01']['equipment_release_path']
+    assert path['status'] == 'AVAILABLE_PROVIDER_RELEASE_PATH'
+    assert path['boundary_count'] == 1
+    assert path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
+    assert result['aggregate']['equipment_release_path_component_count'] == 1
+    assert result['aggregate']['equipment_release_path_withheld_component_count'] == 0
 
 
 def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_fallback(tmp_path):
@@ -271,6 +308,7 @@ def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_f
     missing = next(row for row in ranking['rows'] if row['component_id'] == 'transfer-pump-01')
     assert missing['peak_annual_ir_low_high'] == [None, None]
     assert missing['rank'] is None
+    assert result['aggregate']['equipment_release_path_component_count'] == 0
     assert 'result' not in result['components']['transfer-pump-01']
 
 

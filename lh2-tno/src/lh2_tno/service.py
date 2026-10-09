@@ -145,6 +145,131 @@ def request_from_equipment_resolver(template, normalized, resolver: Callable):
     return request
 
 
+def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, object]:
+    """Summarize the provider-owned release path attached to one live request.
+
+    The telemetry adapter is allowed to pass a resolved gas, liquid, or two-sided
+    release into the consequence chain, but the monitor should expose the closure
+    evidence without copying the full time history into every facility snapshot.
+    This helper reports duration, termination/isolation basis, and mass inventory
+    closure.  It never estimates a missing value from pressure or temperature.
+    """
+    resolved_release = request.resolved_release
+    resolved_set = request.resolved_release_set
+    resolved_liquid = request.resolved_liquid_release
+    if resolved_release is None and resolved_set is None and resolved_liquid is None:
+        return {
+            "status": "WITHHELD_PROVIDER_RELEASE_NOT_RESOLVED",
+            "provider_release_resolved": False,
+            "boundary_count": 0,
+            "boundaries": [],
+            "termination": None,
+            "inventory": None,
+            "isolation": None,
+            "frequency_inference_performed": False,
+            "reason": "telemetry state did not supply a provider-owned accident release boundary",
+        }
+
+    if resolved_set is not None:
+        boundaries = list(resolved_set.releases)
+        available_mass = float(resolved_set.available_mass_kg)
+        cumulative_mass = float(resolved_set.cumulative_mass_out_kg)
+        inventory_provenance = str(resolved_set.inventory_provenance)
+        shared_inventory = True
+    else:
+        boundary = resolved_release or resolved_liquid
+        boundaries = [boundary]
+        available_mass = float(boundary.available_mass_kg)
+        cumulative_mass = float(boundary.cumulative_mass_out_kg)
+        inventory_provenance = str(getattr(boundary, "termination_provenance", ""))
+        shared_inventory = False
+
+    termination = request.release_termination
+    termination_payload = (
+        termination.model_dump(mode="json") if termination is not None else None
+    )
+    basis = termination.basis if termination is not None else None
+    isolation_status = {
+        "reviewed_isolation_success": "ISOLATION_SUCCESS_DECLARED",
+        "synthetic_diagnostic_horizon": "WITHHELD_SYNTHETIC_HORIZON",
+        "inventory_depletion": "INVENTORY_TERMINATION",
+        "inventory_over_600s": "HORIZON_BOUNDED_INVENTORY",
+        "model_pressure_equalization": "MODEL_NATURAL_TERMINATION",
+        "two_sided_rupture": "SHARED_TWO_SIDED_TERMINATION",
+        "emergency_relief_discharge": "EMERGENCY_RELIEF_TERMINATION",
+    }.get(str(basis), "WITHHELD_MISSING_TERMINATION")
+    residual = available_mass - cumulative_mass
+    if residual < -1.0e-9:
+        inventory_status = "INVALID_NEGATIVE_REMAINING_INVENTORY"
+    elif basis == "inventory_depletion":
+        inventory_status = (
+            "INVENTORY_DEPLETED" if residual <= 1.0e-9 else "INVENTORY_NOT_CLOSED"
+        )
+    elif basis == "inventory_over_600s":
+        inventory_status = "HORIZON_BOUNDED_INVENTORY"
+    else:
+        inventory_status = "MASS_BALANCE_CLOSED"
+
+    boundary_rows: list[dict[str, object]] = []
+    for boundary in boundaries:
+        row: dict[str, object] = {
+            "component_id": str(boundary.component_id),
+            "event_id": str(boundary.event_id),
+            "event_kind": str(boundary.event_kind),
+            "port_id": str(boundary.port_id),
+            "boundary_kind": str(boundary.boundary_kind),
+            "input_origin": str(boundary.input_origin),
+            "duration_s": float(boundary.duration_s),
+            "available_mass_kg": float(boundary.available_mass_kg),
+            "cumulative_mass_out_kg": float(boundary.cumulative_mass_out_kg),
+            "termination_provenance": str(boundary.termination_provenance),
+            "termination_basis": boundary.termination_basis,
+            "provider_source_digest": boundary.provider_source_digest,
+            "provider_result_digest": boundary.provider_result_digest,
+            "failure_opening_diameter_m": (
+                float(boundary.failure_opening_diameter_m)
+                if boundary.failure_opening_diameter_m is not None
+                else None
+            ),
+        }
+        if resolved_liquid is not None and boundary is resolved_liquid:
+            row["phase_basis"] = str(boundary.phase_basis)
+            row["reference_area_m2"] = float(boundary.reference_area_m2)
+        boundary_rows.append(row)
+
+    return {
+        "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
+        "provider_release_resolved": True,
+        "boundary_count": len(boundary_rows),
+        "boundaries": boundary_rows,
+        "duration_s": (
+            float(termination.time_s) if termination is not None else None
+        ),
+        "termination": termination_payload,
+        "isolation": {
+            "status": isolation_status,
+            "basis": basis,
+            "provenance": termination.provenance if termination is not None else None,
+        },
+        "inventory": {
+            "status": inventory_status,
+            "shared_inventory": shared_inventory,
+            "available_mass_kg": available_mass,
+            "cumulative_mass_out_kg": cumulative_mass,
+            "remaining_mass_kg": max(0.0, residual),
+            "mass_residual_kg": residual,
+            "provenance": inventory_provenance,
+        },
+        "source_operator": request.source_operator,
+        "source_duration_mode": request.source_duration_mode,
+        "frequency_inference_performed": False,
+        "reason": (
+            "provider-owned release duration, termination basis, and inventory ledger "
+            "were carried into the realtime consequence snapshot"
+        ),
+    }
+
+
 class ConsequenceService:
     """Bounded exact-result cache; changed states invoke fresh physics.
 
@@ -184,6 +309,7 @@ class ConsequenceService:
         else:
             request = request_from_equipment_resolver(template, normalized, release_resolver)
         result=self.evaluate(request)
+        result['equipment_release_path'] = _realtime_release_path_ledger(request)
         result['telemetry_boundary']={k:normalized[k] for k in
             ('origin','independent_measurement_claim','data_age_s','frame_digest','mapping_digest')}
         result['telemetry_boundary']['data_age_at_output_s']=normalized['data_age_s']+result['service']['service_elapsed_ms']/1000
@@ -1001,6 +1127,13 @@ class FacilityRealtimeConsequenceMonitor:
                     "source_time_s": float(frame.source_time_s),
                     "frame_digest": result.get("telemetry_boundary", {}).get("frame_digest"),
                     "mapping_digest": result.get("telemetry_boundary", {}).get("mapping_digest"),
+                    "equipment_release_path": result.get(
+                        "equipment_release_path",
+                        {
+                            "status": "WITHHELD_PROVIDER_RELEASE_PATH_NOT_RECORDED",
+                            "provider_release_resolved": False,
+                        },
+                    ),
                     "risk": _realtime_current_weather_risk(
                         result, binding.frequency_binding
                     ),
@@ -1033,6 +1166,15 @@ class FacilityRealtimeConsequenceMonitor:
         release_resolved_count = sum(
             bool(entry["result"].get("telemetry_boundary", {}).get("equipment_release_resolved"))
             for entry in accepted
+        )
+        release_path_rows = [
+            entry.get("equipment_release_path")
+            for entry in accepted
+            if isinstance(entry.get("equipment_release_path"), Mapping)
+        ]
+        release_path_available_count = sum(
+            row.get("status") == "AVAILABLE_PROVIDER_RELEASE_PATH"
+            for row in release_path_rows
         )
         component_risk_rows = {
             component_id: entry["risk"]
@@ -1122,6 +1264,9 @@ class FacilityRealtimeConsequenceMonitor:
                 "cache_hit_count": cache_count,
                 "deadline_miss_count": deadline_misses,
                 "provider_release_resolved_component_count": release_resolved_count,
+                "equipment_release_path_component_count": release_path_available_count,
+                "equipment_release_path_withheld_component_count": len(accepted)
+                - release_path_available_count,
                 "current_weather_annual_ir_low_high": (
                     current_weather_ir if current_weather_risk_available else None
                 ),
