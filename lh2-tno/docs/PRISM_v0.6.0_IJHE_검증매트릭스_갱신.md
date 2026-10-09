@@ -112,6 +112,11 @@ python scripts/bind_native_full_scope_union_evidence.py `
 독립 물리검증, 엄격한 시설 범위, 시설 전체 QRA의 네 gate가 열려 있음을
 명시한다.
 
+기존 `CURRENT_STATUS.json`에도 이 원장을
+`v060_current_readiness_report`로 가리키는 최신 포인터를 추가했다. 파일의
+오래된 개발 이력 필드는 보존되지만, 2026-10-26 통합 결과를 인용할 때는 이
+포인터와 원장의 SHA-256 입력 기록을 사용한다.
+
 생성기는 원장을 저장하기 전에 case 수 보존, 사고 family 수, 조건부 실행 회계,
 센서 빈도 학습 제외, strict gate가 남아 있을 때의 승격 플래그를 자동 검사한다.
 검사에 실패하면 결과 파일을 정상 원장으로 쓰지 않는다.

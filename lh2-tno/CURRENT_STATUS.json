@@ -3229,4 +3229,21 @@
     "physical_validation_evidence.json",
     "validation.json"
   ]
+,
+  "v060_current_readiness_report": "results/20261026/native_full_scope_union_assessment/v060_readiness_report.json",
+  "v060_current_readiness_report_schema": "prism.v060_ijhe_readiness_report.v1",
+  "v060_current_readiness_report_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
+  "v060_current_readiness_report_completion_audit_status": "INCOMPLETE_EVIDENCE",
+  "v060_current_readiness_report_authoritative_for": "2026-10-26 native full-scope union assessment",
+  "v060_current_union_event_count": 34,
+  "v060_current_union_case_count": 44,
+  "v060_current_union_risk_atom_count": 176,
+  "v060_current_strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "v060_current_facility_total_risk_available": false,
+  "v060_current_complete_facility_qra_claim": false
 }
