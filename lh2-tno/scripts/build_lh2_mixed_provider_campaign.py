@@ -167,6 +167,22 @@ def compile_campaign(args: argparse.Namespace) -> Any:
     defaults = _load_json(args.request_defaults)
     if not isinstance(defaults, dict):
         raise ValueError("request defaults must be a JSON object")
+    if args.pool_radius_m is not None:
+        if args.pool_radius_m <= 0.0:
+            raise ValueError("pool radius must be positive")
+        radius = float(args.pool_radius_m)
+        defaults["pool"] = {
+            "footprint_origin": "declared_sensitivity",
+            "fluid": "Hydrogen",
+            "fluid_translation": "none",
+            "radius_m": radius,
+            "conductivity_w_mk": 0.6,
+            "diffusivity_m2_s": 1.5e-7,
+            "initial_temperature_k": 288.15,
+            "domain_radius_m": radius * 10.0,
+            "radial_step_m": radius / 5.0,
+            "maximum_time_step_s": 0.01,
+        }
     conditions_raw = _load_json(args.annual_conditions)
     rows = conditions_raw.get("conditions") if isinstance(conditions_raw, dict) else conditions_raw
     if not isinstance(rows, list):
@@ -216,6 +232,11 @@ def main() -> int:
         "--rebase-positions",
         action="store_true",
         help="explicitly place generic provider outlets at matching manifest ports",
+    )
+    parser.add_argument(
+        "--pool-radius-m",
+        type=float,
+        help="opt-in declared_sensitivity pool footprint for a diagnostic run",
     )
     parser.add_argument("--maximum-physics-cases", type=int, default=200)
     parser.add_argument("--output", type=Path, required=True)

@@ -55,7 +55,7 @@
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "realtime_monitor_deadline_test_scope": "Synthetic Pipeline contract tests cover MET/MISSED deadline ledgers; no 1 Hz fresh-physics claim is made.",
-  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets and an explicit representative 1 m transfer-line location_weight=0.1: 21 accidental leaks, 1 emergency relief, and 2 two-sided rupture sets. All 24 requests reach physical execution; 5 execute, 5 are operator-limited, and 14 fail closed on pool-footprint or two-sided-handoff contracts. Facility IR/F-N remains withheld; literature frequency uncertainty is retained for known contribution only.",
+  "current_scope": "Outdoor generic LH2 mixed provider campaign with 24 synthetic structural packets, representative 1 m transfer-line location_weight=0.1, and an opt-in declared-sensitivity pool radius of 0.005 m: 5 cases execute, 12 remain operator-limited, and 7 fail closed on wet-surface, dispersion-order, or two-sided-handoff contracts. No explicit UNCOMPUTED branch remains in this diagnostic, but facility IR/F-N is withheld until failed/limited physics and actual geometry are resolved.",
   "unsupported": [
     "DDT_detonation",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
@@ -1180,7 +1180,7 @@
   "external_lh2dt_mapped_pump_prism_packet_export_physical_validation_claim": false,
   "external_lh2dt_mapped_pump_prism_packet_export_frequency_inference": false,
   "external_lh2dt_mapped_pump_prism_packet_export_facility_qra_claim": false,
-  "next_priority": "Add provider-resolved pool footprint or no_rainout evidence for transfer-line, valve, and pump packets; then implement wind-conditioned two-sided endpoint handoff/plume interaction. Keep representative 1 m location_weight separate from the remaining 9 m pipe exposure until reviewed segmentation is available. Repeat the 24-event campaign and only after failed/limited families are resolved consider facility IR/F-N promotion.",
+  "next_priority": "Replace declared-sensitivity pool radius with provider-resolved pool footprint or explicit no_rainout evidence; repair small-release wet-surface and full-bore x-order numerical contracts; implement wind-conditioned two-sided endpoint handoff/plume interaction. Keep representative 1 m location_weight separate from remaining 9 m exposure and retain facility IR/F-N fail-closed until these routes are independently validated.",
   "external_lh2dt_structural_adapter_worklist_coverage_status": "FULLY_MATCHED_SYNTHETIC_ONLY; 24 of 24 exact-match; physical mixed campaign remains partial",
   "external_lh2dt_structural_adapter_worklist_coverage_record": "results/20261014/combined_provider_catalog_family_coverage_v5.json",
   "external_lh2dt_structural_adapter_worklist_coverage_provider_packet_count": 24,
@@ -1238,11 +1238,11 @@
   "mixed_lh2_provider_campaign_compiler_matched_request_count": 24,
   "mixed_lh2_provider_campaign_compiler_uncomputed_binding_count": 0,
   "mixed_lh2_provider_campaign_compiler_manifest_position_rebase_opt_in": true,
-  "mixed_lh2_provider_campaign_execution_record": "results/20261014/generic_mixed_provider_campaign_weighted_result.json",
-  "mixed_lh2_provider_campaign_execution_status": "PARTIAL_DECLARED_SCOPE; 5 EXECUTED, 5 EXECUTED_OPERATOR_LIMITED, 14 FAILED, 0 UNCOMPUTED after explicit representative 1 m pipe location_weight; facility IR/F-N withheld",
+  "mixed_lh2_provider_campaign_execution_record": "results/20261014/generic_mixed_provider_campaign_pool_result.json",
+  "mixed_lh2_provider_campaign_execution_status": "PARTIAL_DECLARED_SCOPE; 5 EXECUTED, 12 EXECUTED_OPERATOR_LIMITED, 7 FAILED, 0 UNCOMPUTED after representative 1 m location_weight and declared-sensitivity pool footprint",
   "mixed_lh2_provider_campaign_execution_executed_cases": 5,
-  "mixed_lh2_provider_campaign_execution_operator_limited_cases": 5,
-  "mixed_lh2_provider_campaign_execution_failed_cases": 14,
+  "mixed_lh2_provider_campaign_execution_operator_limited_cases": 12,
+  "mixed_lh2_provider_campaign_execution_failed_cases": 7,
   "mixed_lh2_provider_campaign_execution_uncomputed_cases": 0,
   "mixed_lh2_provider_campaign_execution_known_contribution_ir_worker_01": [
     1.749e-05,
@@ -1252,14 +1252,14 @@
   "mixed_lh2_provider_campaign_execution_physical_validation_claim": false,
   "mixed_lh2_provider_campaign_execution_timing_ms": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 939.6942000603303,
-    "case_median_ms": 1337.8940499969758,
-    "case_max_ms": 13905.3565999493,
-    "case_p95_ms": 4649.720909987809,
-    "case_p99_ms": 11782.158312958196,
-    "campaign_elapsed_ms": 59734.64469995815
+    "case_min_ms": 1088.6525000678375,
+    "case_median_ms": 3565.5228000250645,
+    "case_max_ms": 19120.47399999574,
+    "case_p95_ms": 15471.909030049568,
+    "case_p99_ms": 18373.626533010975,
+    "campaign_elapsed_ms": 154401.2190999929
   },
-  "mixed_lh2_facility_assessment_record": "results/20261014/generic_lh2_mixed_facility_assessment_weighted.json",
+  "mixed_lh2_facility_assessment_record": "results/20261014/generic_lh2_mixed_facility_assessment_pool.json",
   "mixed_lh2_facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
   "mixed_lh2_frequency_scenario_count": 5,
   "mixed_lh2_frequency_correlation_comparison": true,
@@ -1267,5 +1267,7 @@
   "mixed_lh2_frequency_known_ir_low": 3.186433071805867e-07,
   "mixed_lh2_frequency_known_ir_central": 1.749e-05,
   "mixed_lh2_frequency_known_ir_high": 0.0010631967806999554,
-  "mixed_lh2_provider_campaign_frequency_plan": "examples/generic_lh2_mixed_frequency_plan.json"
+  "mixed_lh2_provider_campaign_frequency_plan": "examples/generic_lh2_mixed_frequency_plan.json",
+  "mixed_lh2_provider_campaign_pool_diagnostic_option": "scripts/build_lh2_mixed_provider_campaign.py --pool-radius-m 0.005",
+  "mixed_lh2_provider_campaign_pool_diagnostic_origin": "declared_sensitivity; not facility geometry"
 }
