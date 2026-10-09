@@ -781,7 +781,7 @@ $env:PYTHONPATH = "lh2-tno/src"
 import json
 from pathlib import Path
 from lh2_tno.contracts import Facility
-from lh2_tno.backend import BackendConfig, IsolatedBackend
+from lh2_tno.backend import BackendConfig, IsolatedBackend, PersistentIsolatedBackend
 from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.pipeline import ResearchPipeline
 
@@ -793,6 +793,19 @@ result = pipeline.consequences(request)
 Path("result.json").write_text(
     json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8"
 )
+```
+
+연속 디지털트윈 갱신에서 프로세스 시작 비용을 줄이려면 같은 pipeline에 `PersistentIsolatedBackend(config)`를 넣을 수 있습니다. 사용이 끝나면 반드시 `close()`를 호출합니다. 이 모드는 변경된 입력의 새 물리 계산을 수행하지만 1 Hz를 보장하지 않으며, pin·timeout·물리검증·시설 QRA 게이트는 그대로 유지합니다.
+
+```python
+from lh2_tno.backend import PersistentIsolatedBackend
+
+backend = PersistentIsolatedBackend(config)
+try:
+    monitor_pipeline = ResearchPipeline(facility, backend)
+    result = monitor_pipeline.consequences(request)
+finally:
+    backend.close()
 ```
 
 API 호출에는 CLI가 덧붙이는 `execution_mode` 표기가 자동 추가되지 않습니다.
