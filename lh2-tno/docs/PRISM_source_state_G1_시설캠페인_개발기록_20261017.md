@@ -96,6 +96,8 @@ G1은 이제 low-Mach guard에서 실패하지 않고 `EXECUTED_OPERATOR_LIMITED
 
 이번 혼합 분포 표본은 1,000회씩 두 시나리오를 계산했으며 `fresh_physics_executed=false`, `frequency_distribution_credible_interval=true`, `facility_credible_interval=false`를 기록했다. 이는 빈도 모델만 흔든 known-atom 진단 구간이고, 피해 물리·기상·장벽·점화와 미계산 범위는 그대로 고정한다.
 
+최신 IJHE 완료 감사(`results/20261017/ijhe_completion_audit_source_state_rebound.json`)는 13개 검사 중 6개를 통과하고 7개를 차단했다. 통과한 항목은 상태→방출→피해 연결, adapter 계약, 빈도 진단, 종료·질량 장부, 처리시간, 실시간 monitor 계약이다. 실제 qualified provider packet, 전체 사고범위, 시설 IR/F-N, 독립 전체 체인 물리검증, 완전 시설 빈도 credible interval은 아직 충족되지 않았다. 이 감사 결과는 기능이 실행됐다는 사실과 IJHE용 완성 주장을 분리하는 현재 기준점이다.
+
 이 혼합 catalogue를 위해 `LiteratureFrequencyScenario`에 `fixed` 선택지를 추가했다. `fixed`는 빈도를 0으로 만드는 값이 아니라 사건의 선언된 중앙 빈도를 보존하는 명시적 선택이다. 경계가 없는 사건에 `p05`/`p95`를 요청하면 기존과 같이 오류로 중단한다.
 
 ## 판단

@@ -1107,5 +1107,26 @@
   "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_credible_interval": true,
   "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_facility_credible_interval": false,
   "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_scenarios": "results/20261017/frequency_distribution_scenarios_source_state_rebound.json",
-  "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py"
+  "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py",
+  "ijhe_completion_audit_source_state_rebound_record": "results/20261017/ijhe_completion_audit_source_state_rebound.json",
+  "ijhe_completion_audit_source_state_rebound_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_source_state_rebound_check_count": 13,
+  "ijhe_completion_audit_source_state_rebound_blocking_reason_count": 7,
+  "ijhe_completion_audit_source_state_rebound_passed_checks": [
+    "equipment_state_to_release_to_consequence",
+    "diagnostic_adapter_execution_contract",
+    "diagnostic_frequency_uncertainty_evidence",
+    "release_duration_isolation_inventory_ledger",
+    "processing_time_evidence",
+    "realtime_monitor_contract"
+  ],
+  "ijhe_completion_audit_source_state_rebound_blocked_checks": [
+    "equipment_model_binding_to_accident_release",
+    "actual_provider_release_packet",
+    "provider_worklist_coverage",
+    "declared_major_accident_scope",
+    "facility_ir_fn_available",
+    "physical_validation_evidence",
+    "frequency_uncertainty_reported"
+  ]
 }
