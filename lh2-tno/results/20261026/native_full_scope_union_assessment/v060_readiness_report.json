@@ -552,5 +552,13 @@
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
       "sha256": "789580593a0657a543afb0c5298c1490fe79317b3aa82ba8878054f416576bae"
     }
+  },
+  "invariant_validation": {
+    "schema_version": "prism.v060_ijhe_readiness_report.v1",
+    "status": "VALID",
+    "strict_blocking_check_count": 4,
+    "component_row_count": 10,
+    "accident_family_row_count": 12,
+    "invariant_count": 12
   }
 }
