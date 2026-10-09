@@ -37,6 +37,10 @@
     "event_count": 41,
     "case_count": 80,
     "uncomputed_case_count": 37,
+    "conditional_case_count": 80,
+    "conditional_executed_case_count": 78,
+    "conditional_uncomputed_case_count": 2,
+    "strict_uncomputed_case_count": 37,
     "risk_atom_count": 312,
     "conditional_diagnostic_facility_annual_ir_low_high": {
       "worker-01": [
