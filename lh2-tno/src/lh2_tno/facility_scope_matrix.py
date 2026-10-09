@@ -239,6 +239,16 @@ def build_scope_matrix_from_facility_ledger(
             in {"UNCOMPUTED", "FAILED", "EXECUTED_OPERATOR_LIMITED", "EXECUTED_DOMAIN_INCOMPLETE"}
             for row in family_cases
         )
+        fully_validated = sum(str(row.get("status", "")) == "EXECUTED" for row in family_cases)
+        operator_limited = sum(
+            str(row.get("status", "")) == "EXECUTED_OPERATOR_LIMITED"
+            for row in family_cases
+        )
+        domain_incomplete = sum(
+            str(row.get("status", "")) == "EXECUTED_DOMAIN_INCOMPLETE"
+            for row in family_cases
+        )
+        failed = sum(str(row.get("status", "")) == "FAILED" for row in family_cases)
         not_numerically_executed = sum(
             str(row.get("status", "")) in {"UNCOMPUTED", "FAILED"}
             for row in family_cases
@@ -269,6 +279,10 @@ def build_scope_matrix_from_facility_ledger(
             "executed_case_count": executed,
             "conditional_executed_case_count": executed,
             "conditional_uncomputed_case_count": conditional_uncomputed,
+            "fully_validated_case_count": fully_validated,
+            "operator_limited_case_count": operator_limited,
+            "domain_incomplete_case_count": domain_incomplete,
+            "failed_case_count": failed,
             "uncomputed_case_count": strict_uncomputed,
             "strict_uncomputed_case_count": strict_uncomputed,
             "not_numerically_executed_case_count": not_numerically_executed,

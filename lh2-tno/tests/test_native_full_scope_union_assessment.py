@@ -87,6 +87,13 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     )
 
     rows = {row["family"]: row for row in scope["rows"]}
+    # The final union scope is rebuilt from the merged facility ledger.  This
+    # keeps cross-cutting pipe cases and gas-exit packets on the same identity
+    # set as the facility assessment rather than the three source matrices.
+    assert rows["pipe_hole"]["generated_event_count"] == 15
+    assert rows["pipe_hole"]["case_count"] == 25
+    assert rows["liquid_two_phase"]["generated_event_count"] == 17
+    assert rows["liquid_two_phase"]["case_count"] == 17
     assert rows["vertical_handoff"]["status"] == "PARTIAL"
     assert rows["vertical_handoff"]["conditional_status"] == "EXECUTED"
     assert rows["vertical_handoff"]["generated_event_count"] == 5

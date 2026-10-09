@@ -81,6 +81,11 @@ def test_ledger_backed_matrix_matches_repaired_ledger_accounting():
     assert rows["vertical_handoff"]["not_numerically_executed_case_count"] == 1
     assert rows["vertical_handoff"]["qualified_evidence_withheld_case_count"] == 0
     assert rows["vertical_handoff"]["numerically_executed_case_count"] == 0
+    assert rows["vertical_handoff"]["fully_validated_case_count"] == 0
+    assert rows["vertical_handoff"]["operator_limited_case_count"] == 0
+    assert rows["vertical_handoff"]["domain_incomplete_case_count"] == 0
+    assert rows["vertical_handoff"]["failed_case_count"] == 0
+    assert rows["vertical_handoff"]["uncomputed_case_count"] == 1
     assert rows["vertical_handoff"]["conditional_status"] == "UNCOMPUTED"
     assert matrix["not_numerically_executed_case_count"] == 1
     assert matrix["qualified_evidence_withheld_case_count"] == 0

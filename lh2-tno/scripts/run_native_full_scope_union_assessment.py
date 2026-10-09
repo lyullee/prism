@@ -20,13 +20,17 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
+from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.facility_evidence_request import build_facility_evidence_request  # noqa: E402
 from lh2_tno.facility_ledger import merge_facility_campaign_results  # noqa: E402
 from lh2_tno.campaign_namespace import rebind_campaign_result  # noqa: E402
 from lh2_tno.native_packet_campaign import (  # noqa: E402
     build_native_packet_campaign_execution_ledger,
 )
-from lh2_tno.scope_matrix_merge import merge_scope_matrices  # noqa: E402
+from lh2_tno.facility_scope_matrix import (  # noqa: E402
+    build_scope_matrix_from_facility_ledger,
+    repair_facility_ledger_scenario_families,
+)
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
 from lh2_tno.frequency_scenario_extension import (  # noqa: E402
     extend_frequency_scenarios_for_independent_event_bounds,
@@ -312,10 +316,31 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         scope_matrices=[base_scope, vertical_scope, inventory_scope],
         required_accident_families=MAJOR_ACCIDENT_FAMILIES,
     )
-    merged_scope = merge_scope_matrices(
-        [base_scope, vertical_scope, inventory_scope],
-        facility_id=facility_id,
+    # The merged facility ledger is the authority for the final scope view.
+    # Source campaign matrices intentionally retain their own family views,
+    # but they can disagree with the merged case tags when a physical event
+    # carries a cross-cutting family (for example vertical-handoff cases are
+    # also pipe-hole cases, while provider gas-exit packets no longer carry
+    # the liquid-two-phase overlay).  Rebuilding here keeps the scope matrix
+    # and facility ledger on the same event/case identity set without
+    # changing any frequency, consequence, or qualification result.
+    repaired_merged = repair_facility_ledger_scenario_families(merged)
+    merged_scope = build_scope_matrix_from_facility_ledger(
+        repaired_merged,
         required_families=MAJOR_ACCIDENT_FAMILIES,
+    )
+    merged_scope["source_campaign_scope_matrices"] = [
+        {
+            "facility_id": matrix.get("facility_id"),
+            "source": matrix.get("source", matrix.get("schema_version")),
+            "digest": canonical_digest(matrix),
+        }
+        for matrix in (base_scope, vertical_scope, inventory_scope)
+    ]
+    merged_scope["interpretation"] = (
+        "The final scope matrix is regenerated from the merged facility ledger. "
+        "Source campaign matrices remain provenance views; overlapping family "
+        "rows are not additive and the ledger's exact event/case identities are authoritative."
     )
     scenarios = _extend_frequency_scenarios(base_frequency_scenarios)
     independent_extension = extend_frequency_scenarios_for_independent_event_bounds(
