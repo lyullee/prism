@@ -1994,5 +1994,13 @@
   "inspection_center_timeseries_audit_sensor_frequency_learning_used": false,
   "inspection_center_timeseries_audit_provider_packet_created": false,
   "inspection_center_timeseries_audit_facility_qra_claim": false,
-  "inspection_center_timeseries_audit_interpretation": "Inspection-centre XLSX data is screening evidence only; unresolved engineering units and tag-to-equipment mapping keep state snapshots, frequency inference, provider packets, and facility QRA closed."
+  "inspection_center_timeseries_audit_interpretation": "Inspection-centre XLSX data is screening evidence only; unresolved engineering units and tag-to-equipment mapping keep state snapshots, frequency inference, provider packets, and facility QRA closed.",
+  "pool_footprint_evidence_contract_implemented": true,
+  "pool_footprint_evidence_schema": "prism.resolved_pool_footprint.v1",
+  "pool_footprint_provider_resolved_supported": true,
+  "pool_footprint_provider_resolved_requires_result_digest_match": true,
+  "pool_footprint_missing_behavior": "declared_sensitivity_diagnostic_only",
+  "pool_footprint_thermal_context_required": true,
+  "pool_footprint_qualified_provider_count": 0,
+  "pool_footprint_test_status": "provider-resolved digest binding and thermal-context handoff tests passed; existing diagnostic packets remain operator-limited"
 }

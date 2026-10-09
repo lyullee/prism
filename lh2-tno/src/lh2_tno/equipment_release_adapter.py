@@ -379,6 +379,9 @@ def build_resolved_liquid_release_from_provider_response(
         data.get("droplet_partition_provenance"),
         "provider data.droplet_partition_provenance",
     )
+    pool_footprint = data.get("pool_footprint")
+    if pool_footprint is not None and not isinstance(pool_footprint, Mapping):
+        raise EquipmentReleaseExportError("provider data.pool_footprint must be an object")
     result_payload = provider_response if provider_result is None else provider_result
     result_digest = provider_result_digest or canonical_digest(result_payload)
     if not isinstance(result_digest, str) or len(result_digest) != 64:
@@ -420,6 +423,7 @@ def build_resolved_liquid_release_from_provider_response(
         "steps": steps,
         "termination_provenance": termination,
         "droplet_partition_provenance": droplet_provenance,
+        "pool_footprint": dict(pool_footprint) if pool_footprint is not None else None,
         "termination_basis": termination_basis,
         "failure_opening_diameter_m": (
             _positive(failure_opening_diameter_m, "failure_opening_diameter_m")

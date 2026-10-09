@@ -423,6 +423,17 @@ def build_consequence_request_from_provider_release(
     )
     _merge_provider_clock(payload, (release,))
     if isinstance(release, ResolvedLiquidRelease):
+        if release.pool_footprint is not None:
+            pool = payload.get("pool")
+            if not isinstance(pool, dict):
+                raise ProviderReleaseContractError(
+                    "provider-resolved pool footprint requires thermal pool context in request defaults"
+                )
+            pool["footprint_origin"] = release.pool_footprint.origin
+            pool["radius_m"] = release.pool_footprint.radius_m
+            pool["footprint_provenance"] = release.pool_footprint.provenance
+            pool["footprint_evidence_digest"] = release.pool_footprint.source_digest
+            payload["pool"] = pool
         payload["resolved_liquid_release"] = release.model_dump(mode="json")
     else:
         payload["resolved_release"] = release.model_dump(mode="json")

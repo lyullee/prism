@@ -377,6 +377,17 @@ class LiquidDropletOutcome(Contract):
         return self
 
 
+class PoolFootprintEvidence(Contract):
+    """Provider-owned footprint evidence for liquid that reaches the ground."""
+
+    schema_version: Literal['prism.resolved_pool_footprint.v1'] = 'prism.resolved_pool_footprint.v1'
+    origin: Literal['provider_resolved', 'reviewed_design', 'measured']
+    radius_m: Positive
+    impact_position_enu_m: Vector
+    provenance: Name
+    source_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
+
+
 class ResolvedLiquidStep(Contract):
     """Left-held provider state after liquid/two-phase flash partition."""
 
@@ -456,6 +467,7 @@ class ResolvedLiquidRelease(Contract):
     steps: tuple[ResolvedLiquidStep, ...]
     termination_provenance: Name
     droplet_partition_provenance: Name
+    pool_footprint: PoolFootprintEvidence | None = None
     termination_basis: ProviderTerminationBasis | None = None
     failure_opening_diameter_m: Positive | None = None
 
@@ -481,6 +493,9 @@ class ResolvedLiquidRelease(Contract):
             raise ValueError('provider liquid enthalpy ledger does not close')
         if mass > self.available_mass_kg + 1e-9:
             raise ValueError('resolved liquid release exceeds available inventory')
+        if self.pool_footprint is not None and self.pool_footprint.origin == 'provider_resolved':
+            if self.pool_footprint.source_digest != self.provider_result_digest:
+                raise ValueError('provider-resolved pool footprint must be covered by the provider result digest')
         if self.event_kind != 'accidental_leak' and self.failure_opening_diameter_m is not None:
             raise ValueError('normal vent/relief is not a declared random-leak opening')
         return self

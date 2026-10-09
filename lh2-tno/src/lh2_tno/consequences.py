@@ -27,7 +27,9 @@ class Weather(Contract):
 
 class PoolBoundary(Contract):
     # A resolved/declared footprint is a physical boundary, not a fitted rate.
-    footprint_origin: Literal['reviewed_design', 'measured', 'declared_sensitivity']
+    footprint_origin: Literal['provider_resolved', 'reviewed_design', 'measured', 'declared_sensitivity']
+    footprint_provenance: Name | None = None
+    footprint_evidence_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
     # DynamicLH2PoolX currently implements the Hydrogen CoolProp basis.  Keep
     # that backend choice explicit so a ParaHydrogen provider packet cannot be
     # silently passed to a different property basis.
@@ -49,6 +51,13 @@ class PoolBoundary(Contract):
                 raise ValueError('ParaHydrogen-to-Hydrogen pool translation requires Hydrogen and provenance')
         elif self.translation_provenance is not None:
             raise ValueError('pool translation provenance requires an explicit translation')
+        if self.footprint_origin in {'provider_resolved', 'reviewed_design', 'measured'}:
+            if not self.footprint_provenance:
+                raise ValueError('resolved pool footprint requires provenance')
+        elif self.footprint_provenance is not None or self.footprint_evidence_digest is not None:
+            raise ValueError('declared sensitivity footprint cannot carry reviewed evidence metadata')
+        if self.footprint_origin == 'provider_resolved' and self.footprint_evidence_digest is None:
+            raise ValueError('provider-resolved pool footprint requires an evidence digest')
         if not self.radial_step_m <= self.radius_m < self.domain_radius_m:
             raise ValueError('pool footprint must be resolved and inside its domain')
         if self.domain_radius_m / self.radial_step_m > 1000:

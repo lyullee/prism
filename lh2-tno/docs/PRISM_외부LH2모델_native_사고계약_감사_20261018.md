@@ -75,3 +75,11 @@ python scripts/audit_lh2dt_native_contract.py `
 `scripts/run_lh2dt_native_dynamic_pipe_frequency_case.py`는 `LH2_PIPE AREA_0.01%`의 문헌 개구 `0.00025 m`와 정확히 일치하는 native 배관 packet을 생성해 strict liquid adapter와 전체 consequence chain에 넣는다. 2026-10-18 실행은 `phase_basis=two_phase`, provider 질량 잔차 `0 kg`, 엔탈피 잔차 약 `-2.78×10⁻¹⁷ J`, native export 약 `0.24 s`, consequence chain 약 `16.8 s`를 기록했다. 파이프의 다른 네 개 개구 bin은 `UNCOMPUTED`로 명시했고, 다른 설비는 이 단일 진단에서 제외 사유를 기록했다.
 
 결과는 `results/20261018/native_lh2dt_dynamic_pipe_frequency_case/verification.json`과 [추적 요약](../examples/native_lh2dt_dynamic_pipe_frequency_case_verification.json)에 보관한다. 이 실행은 문헌 빈도를 provider packet에서 추정하지 않고 그대로 적용한 부분 진단이다. 10 m 합성 배관의 한 검토 위치에만 위치 가중치 `0.1`을 배분했으며, 잔류 재고가 있는 0.01 s 진단시계·합성 형상·선언된 작은 풀 footprint를 사용했다. 따라서 qualified provider packet, 현장 빈도, 시설 전체 IR/F-N, 물리검증을 승격하지 않는다.
+
+## provider-resolved pool footprint 경계
+
+액체 packet이 지면 액체를 반환하는 것만으로는 풀의 반경을 알 수 없다. 기존 진단은 `PoolBoundary.footprint_origin=declared_sensitivity`를 사용해 작은 민감도 footprint를 명시했으며, 이 값은 시설 형상이나 적격 provider 증거가 아니다.
+
+이를 구분하기 위해 `prism.resolved_pool_footprint.v1` 계약을 추가했다. provider가 `origin=provider_resolved`, 충돌 위치, 반경, 근거, `provider_result_digest`와 같은 결과 digest를 반환하면 PRISM adapter가 thermal pool context의 반경과 provenance를 덮어쓴다. digest가 다르거나 thermal pool context가 없으면 요청을 거부한다. `reviewed_design`·`measured`도 provenance 없이는 받을 수 없다. 기존 packet에 footprint가 없으면 declared-sensitivity 진단만 허용되며, qualified 승격으로 바뀌지 않는다.
+
+이 경계는 풀 solver가 provider의 실제 바닥 형상을 대신 계산한다는 뜻이 아니다. 향후 provider가 위치별 wet area, 표면 재질, 배수·방호 형상을 함께 내보낼 때 확장할 수 있는 최소 계약이며, 현재 native LayeredTank·DynamicHEMPipe 결과는 해당 footprint를 제공하지 않아 `operator-limited` 상태로 남는다.

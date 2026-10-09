@@ -198,6 +198,45 @@ def test_provider_release_catalog_and_request_adapter_preserve_context(tmp_path)
     assert request.annual_frequency_per_year is None
 
 
+def test_provider_resolved_pool_footprint_is_digest_bound_and_consumed():
+    release_data = _liquid_release().model_dump(mode="json")
+    release_data["pool_footprint"] = {
+        "origin": "provider_resolved",
+        "radius_m": 0.2,
+        "impact_position_enu_m": (0.2, 0.0, 0.0),
+        "provenance": "provider ground interception footprint",
+        "source_digest": "3" * 64,
+    }
+    release = ResolvedLiquidRelease.model_validate_json(json.dumps(release_data))
+    defaults = _defaults()
+    defaults["pool"] = {
+        "footprint_origin": "declared_sensitivity",
+        "radius_m": 0.05,
+        "conductivity_w_mk": 0.6,
+        "diffusivity_m2_s": 1.5e-7,
+        "initial_temperature_k": 288.15,
+        "domain_radius_m": 0.5,
+        "radial_step_m": 0.01,
+        "maximum_time_step_s": 0.01,
+    }
+    request = build_consequence_request_from_provider_release(release, defaults)
+    assert request.pool is not None
+    assert request.pool.footprint_origin == "provider_resolved"
+    assert request.pool.radius_m == pytest.approx(0.2)
+    assert request.pool.footprint_evidence_digest == "3" * 64
+
+    bad = _liquid_release().model_dump(mode="json")
+    bad["pool_footprint"] = {
+        "origin": "provider_resolved",
+        "radius_m": 0.2,
+        "impact_position_enu_m": (0.2, 0.0, 0.0),
+        "provenance": "provider ground interception footprint",
+        "source_digest": "2" * 64,
+    }
+    with pytest.raises(ValueError, match="provider-resolved pool footprint"):
+        ResolvedLiquidRelease.model_validate_json(json.dumps(bad))
+
+
 def test_provider_duration_template_uses_packet_basis_and_each_branch_clock():
     release = _release().model_copy(
         update={
