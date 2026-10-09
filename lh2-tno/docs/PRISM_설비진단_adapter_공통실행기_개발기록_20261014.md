@@ -90,3 +90,29 @@ python scripts/audit_diagnostic_adapter_registry.py `
 현재 공통 실행기 감사 파일은 `results/20261014/diagnostic_adapter_registry_audit_live.json`이다. 전체 IJHE 완료 감사의 qualified provider gate는 계속 차단 상태다.
 
 재현 가능한 축약 결과는 `examples/diagnostic_adapter_registry_audit.json`에도 보존했다.
+
+## 외부 LayeredTank 인스턴스 smoke
+
+공통 registry 감사만으로는 provider 객체가 실제로 만들어지고 호출되는지 확인할 수 없으므로, 외부 `lh2dt` 소스 루트를 명시적으로 넘기는 smoke 명령을 추가했다.
+
+```powershell
+python scripts/run_diagnostic_adapter_runner_smoke.py `
+  --lh2dt-root "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\06_액화수소_디지털트윈_물리모델" `
+  --output results/20261014/diagnostic_adapter_runner_layered_tank_smoke.json
+```
+
+이 명령은 `LayeredTankAccidentProvider`를 명시적 생성자 설정으로 등록하고, liquid accident request를 `export_accident_history()`에 전달한다. 실행 결과는 다음과 같다.
+
+| 항목 | 결과 |
+|---|---:|
+| provider 인스턴스 | 1 |
+| strict liquid packet | 실행됨 |
+| 방출 시계 | 0.1 s, 양수 재고 임계값 종료 |
+| 질량 잔차 | 0 kg |
+| 엔탈피 잔차 | 약 -4.44×10⁻¹⁶ J |
+| 신규 physics 호출시간 | 약 1556 ms |
+| evidence status | `synthetic_diagnostic` |
+| qualified packet | 0 |
+| 빈도·시설 QRA | 계산하지 않음 |
+
+이 결과는 외부 모델과 공통 실행기 사이의 호출·strict packet 경계가 실제로 통과했다는 뜻이다. 개구, 저장탱크 형상, 대기 경계, 임계값은 진단용 합성 설정이며 현장 사고 이력이나 검증된 방출빈도로 승격하지 않는다. 액체 flash·비산 액적·현장 차단 신뢰도·시설 IR/F-N도 이 smoke에 포함되지 않는다. 원본 결과는 `examples/diagnostic_adapter_runner_layered_tank_smoke.json`에 고정하고, 실행 스크립트는 `scripts/run_diagnostic_adapter_runner_smoke.py`에 둔다.

@@ -1295,7 +1295,10 @@
   "mixed_lh2_facility_assessment_scope_matrix_count": 1,
   "mixed_lh2_conditional_diagnostic_facility_risk_available": true,
   "mixed_lh2_conditional_diagnostic_facility_annual_ir_low_high": {
-    "worker-01": [1.749e-05, 1.749e-05]
+    "worker-01": [
+      1.749e-05,
+      1.749e-05
+    ]
   },
   "mixed_lh2_conditional_diagnostic_facility_coverage": {
     "event_count": 24,
@@ -1342,5 +1345,18 @@
   "diagnostic_adapter_runner_test_status": "8 registry contract tests; full portable suite 382 passed",
   "ijhe_completion_audit_live_with_registry_record": "results/20261014/ijhe_completion_audit_live_with_registry.json",
   "ijhe_completion_audit_live_with_registry_digest": "6A971FA449CC3405F13DFB74B9B34BD4207260B7F18E5935F692A4F6E41C25DA",
-  "ijhe_completion_audit_live_with_registry_status": "INCOMPLETE_EVIDENCE; 12 checks, 7 blocking reasons; diagnostic adapter execution contract PASS (7/7 classes resolved, 0 provider instances)"
+  "ijhe_completion_audit_live_with_registry_status": "INCOMPLETE_EVIDENCE; 12 checks, 7 blocking reasons; diagnostic adapter execution contract PASS (7/7 classes resolved, 0 provider instances)",
+  "diagnostic_adapter_runner_external_smoke_record": "results/20261014/diagnostic_adapter_runner_layered_tank_smoke.json",
+  "diagnostic_adapter_runner_external_smoke_example": "examples/diagnostic_adapter_runner_layered_tank_smoke.json",
+  "diagnostic_adapter_runner_external_smoke_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC; provider instance 1; qualified packet 0; diagnostic only",
+  "diagnostic_adapter_runner_external_smoke_digest": "75A8CE1A8F7B7C52108C3FB2FF5C55744401AF60145F662CD36586EB72701EF8",
+  "diagnostic_adapter_runner_external_smoke_provider_instance_count": 1,
+  "diagnostic_adapter_runner_external_smoke_qualified_packet_count": 0,
+  "diagnostic_adapter_runner_external_smoke_provider_packet_promoted": false,
+  "diagnostic_adapter_runner_external_smoke_elapsed_ms": 1555.5750998901203,
+  "diagnostic_adapter_runner_external_smoke_mass_residual_kg": 0.0,
+  "diagnostic_adapter_runner_external_smoke_energy_residual_j": -4.440892098500626e-16,
+  "diagnostic_adapter_runner_external_smoke_frequency_inference": false,
+  "diagnostic_adapter_runner_external_smoke_facility_qra_claim": false,
+  "diagnostic_adapter_runner_external_smoke_physical_validation_claim": false
 }

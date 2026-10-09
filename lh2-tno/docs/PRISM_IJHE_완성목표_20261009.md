@@ -51,7 +51,7 @@
 - G1의 `source_operator=inventory_liquid_jet`은 instantaneous inventory LOC를 구멍 누출로 바꾸지 않고 SLABx-LH2 liquid-jet source를 호출한다. 명시한 분무·액적·증발 가정과 2초 재고 폐합을 사용하며, 일정 upstream 상태와 열린 spray-energy closure 때문에 `EXECUTED_OPERATOR_LIMITED`로 기록한다.
 - 설비 transient 진단은 외부 `LayeredTankNetworkSimulator`/`CommandedValve`에서 탱크 증기 셀 유량과 밸브 명령을 계산하고, 5개 `LH2_PIPE` area-bin의 isolation-success와 isolation-failure를 각각 `ResolvedGasRelease`로 전달한다. 성공은 0.25초 차단 뒤 유량 0, 실패는 0.5초 진단시계 동안 열린 유량으로 기록한다. 별도 `HomogeneousTank`/`DynamicNetworkSimulator` adapter는 다섯 area-bin에서 양수 재고 threshold에 도달한 실제 provider 구간을 두 기상 조건에 전달하여 10건을 실행했다. 합성 초기 압력·대기압 경계·저 Mach 수평 출구에 한정하며, barrier 확률과 재고 입력은 현장 근거가 아니고 실제 actuator 지연·실패확률·LayeredTank 액체/2상 방출은 아직 지원하지 않는다.
 
-이 단계의 예제·명령·측정 결과는 별도 실행 기록에 정리한다. 이번 구현은 공개 0.6.0을 덮어쓰지 않은 개발 변경이며 새 PyPI/DOI 릴리스는 만들지 않았다.
+이 단계의 예제·명령·측정 결과는 별도 실행 기록에 정리한다. 이번 구현은 공개 0.6.2 이후의 개발 변경이며, 현재 commit에 대해 새 PyPI/DOI 릴리스는 만들지 않았다. 기존 0.6.2 공개 기록은 `docs/PRISM_v062_PyPI_DOI_배포기록_20261009.md`에 고정되어 있다.
 
 ## 연구 완료와 구분할 것
 
@@ -113,3 +113,9 @@ python scripts/build_ijhe_completion_audit.py `
 ```
 
 현재 live 결과는 12개 검사 중 7개 차단, 5개 통과다. `diagnostic_adapter_execution_contract`는 7/7 클래스 해석으로 통과하지만 provider 인스턴스 0개·qualified packet 0개이며, 기존 설비 사고 packet·주요 사고 범위·시설 IR/F-N·독립 물리검증 gate는 그대로 차단된다. 결과는 `results/20261014/ijhe_completion_audit_live_with_registry.json`과 상태 장부에 기록했다.
+
+## 2026-10-14 외부 LayeredTank 공통 실행기 smoke
+
+`scripts/run_diagnostic_adapter_runner_smoke.py`는 외부 `lh2dt` LayeredTank 모델을 host가 명시한 생성자 인자로 만들고, `DiagnosticAdapterRunner.register_provider_from_config()`와 `execute(..., release_kind="liquid")`로 실제 provider 인스턴스를 한 번 호출한다. 기본 진단은 합성 `1e-6 m²` 개구, `0.05 s` 간격, 양수 재고 임계값 종료를 사용한다. strict packet은 `0.1 s` 방출, 질량 잔차 `0 kg`, 엔탈피 잔차 약 `-4.44e-16 J`를 반환했고 새 physics 호출 시간은 약 `1556 ms`였다.
+
+이 결과는 **실제 외부 adapter 인스턴스가 공통 실행기와 strict 액체 packet 경계를 통과했다는 증거**다. packet의 evidence status는 `synthetic_diagnostic`이고 `provider_packet_promoted=false`, qualified packet 수는 0이다. 따라서 현장 설비 형상·재고·사고빈도·시설 IR/F-N·독립 물리검증·1 Hz 실시간 계산을 주장하지 않는다. 재현 결과는 `examples/diagnostic_adapter_runner_layered_tank_smoke.json`, 실행 스크립트는 `scripts/run_diagnostic_adapter_runner_smoke.py`에 보존했다.
