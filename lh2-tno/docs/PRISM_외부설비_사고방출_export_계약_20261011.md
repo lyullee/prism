@@ -29,6 +29,14 @@ src/lh2_tno/equipment_accident_export.py
 
 PRISM은 누락된 값을 압력·센서·설비 종류에서 추정하지 않는다. `horizon_s`는 관찰 요청값일 뿐이며 provider가 반환한 실제 `duration_s`를 대신하지 않는다.
 
+## 정상 상태 snapshot 전달 경계 (2026-10-17)
+
+디지털트윈이 사고 시나리오를 계산하기 직전의 설비 상태를 provider에 전달해야 할 때는 `prism.equipment_state_snapshot.v1` 객체를 요청의 `state_snapshot`에 넣는다. 구현은 `src/lh2_tno/state_snapshot.py`의 `EquipmentStateSnapshot`과 `build_state_snapshot_from_normalized()`에 있다.
+
+snapshot에는 설비 ID, 상태를 읽은 시각, 자료 출처, 압력·온도·재고·상(phase), 위치와 정규화된 SI 측정값만 들어간다. snapshot 자체의 canonical digest가 요청의 `state_snapshot_digest`와 정확히 같아야 provider 호출이 허용된다. provider가 받은 요청에는 원본 snapshot이 그대로 포함되므로, 어떤 상태에서 사고 solver가 실행됐는지 재현할 수 있다.
+
+snapshot에 사고 전용 필드(`annual_frequency_per_year`, 누출구경, `duration_s`, `steps`, 종료 근거, resolved release 등)가 들어가면 즉시 거부한다. 따라서 정상 운전 상태를 사고 방출로 자동 승격할 수 없다. 사고 개구·빈도·지속시간·차단·재고 소진은 여전히 provider의 명시적 `export_accident_history()`가 소유한다. snapshot을 넣지 않은 기존 요청도 호환되지만, 기존 digest 값은 유지되고 사고정보를 추정하지 않는다.
+
 ## provider가 반환해야 하는 것
 
 provider 응답의 최상위에는 다음 schema가 있어야 한다.
@@ -61,6 +69,7 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 4. 정상 상태 snapshot 표시가 있으면 거절한다.
 5. strict adapter가 통과한 packet도 `evidence_status=synthetic_diagnostic` 또는 `screening_only`이면 `DIAGNOSTIC_PACKET_NOT_PROMOTED`로 남긴다.
 6. `qualified_actual`인 경우에만 함수 결과가 `QUALIFIED_PROVIDER_PACKET`가 된다. 이것은 물리 검증·빈도 결합·시설 QRA 완료를 뜻하지 않으며, 이후 coverage, frequency, validation, facility IR/F-N gate를 모두 통과해야 한다.
+7. `state_snapshot`이 있으면 schema·설비 ID·canonical digest를 확인하고, 사고 전용 키가 포함된 snapshot은 거절한다. PRISM은 snapshot에서 누출구경·빈도·지속시간·종료를 역산하지 않는다.
 
 ## 현재 외부 `lh2dt` 상태
 

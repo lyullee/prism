@@ -11,6 +11,11 @@ from lh2_tno.equipment_accident_export import (
     export_equipment_emergency_relief_history,
     export_equipment_inventory_release_history,
 )
+from lh2_tno.state_snapshot import (
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
+    build_state_snapshot_from_normalized,
+)
 
 
 def _request(**updates):
@@ -150,6 +155,93 @@ def test_provider_schema_and_identity_are_checked():
 
     with pytest.raises(EquipmentAccidentExportError, match="external_accident_history"):
         export_equipment_gas_accident_history(BadProvider(), _request())
+
+
+def _snapshot(component_id="tank-1"):
+    return EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id=component_id,
+        captured_at_s=10.0,
+        origin="historian_measured",
+        pressure_pa_abs=600000.0,
+        temperature_k=20.5,
+        phase="liquid",
+        measurements={
+            "PT": {
+                "quantity": "pressure",
+                "value_si": 600000.0,
+                "sensor_location": "tank-1.shell",
+            }
+        },
+        source_digest="c" * 64,
+    )
+
+
+def test_state_snapshot_is_handed_to_provider_and_bound_to_digest():
+    snapshot = _snapshot()
+    request = _request(
+        state_snapshot=snapshot.to_mapping(),
+        state_snapshot_digest=snapshot.digest(),
+    )
+    provider = _Provider()
+    export_equipment_gas_accident_history(provider, request)
+    handed = provider.requests[0]["state_snapshot"]
+    assert handed["schema_version"] == EQUIPMENT_STATE_SNAPSHOT_SCHEMA
+    assert handed["pressure_pa_abs"] == pytest.approx(600000.0)
+    assert handed["component_id"] == "tank-1"
+
+
+def test_state_snapshot_digest_mismatch_is_rejected():
+    snapshot = _snapshot()
+    with pytest.raises(EquipmentAccidentExportError, match="state_snapshot_digest"):
+        AccidentReleaseExportRequest.from_mapping(
+            _request(state_snapshot=snapshot.to_mapping(), state_snapshot_digest="b" * 64)
+        )
+
+
+def test_state_snapshot_cannot_carry_accident_fields():
+    snapshot = _snapshot().to_mapping()
+    snapshot["annual_frequency_per_year"] = 1.0e-4
+    with pytest.raises(EquipmentAccidentExportError, match="accident-owned field"):
+        AccidentReleaseExportRequest.from_mapping(
+            _request(state_snapshot=snapshot, state_snapshot_digest=_snapshot().digest())
+        )
+
+
+def test_state_snapshot_component_mismatch_is_rejected():
+    snapshot = _snapshot(component_id="other-tank")
+    with pytest.raises(EquipmentAccidentExportError, match="component_id"):
+        AccidentReleaseExportRequest.from_mapping(
+            _request(state_snapshot=snapshot.to_mapping(), state_snapshot_digest=snapshot.digest())
+        )
+
+
+def test_normalized_telemetry_builds_only_state_snapshot():
+    snapshot = build_state_snapshot_from_normalized(
+        {
+            "values": {
+                "PT": {
+                    "component_id": "tank-1",
+                    "quantity": "pressure",
+                    "value_si": 600000.0,
+                    "sensor_location": "tank-1.shell",
+                },
+                "TT": {
+                    "component_id": "tank-1",
+                    "quantity": "temperature",
+                    "value_si": 20.5,
+                    "sensor_location": "tank-1.shell",
+                },
+            },
+            "origin": "historian_measured",
+            "frame_digest": "d" * 64,
+        },
+        component_id="tank-1",
+        captured_at_s=100.0,
+    )
+    assert snapshot.pressure_pa_abs == pytest.approx(600000.0)
+    assert snapshot.temperature_k == pytest.approx(20.5)
+    assert snapshot.digest() != "d" * 64
 
 
 def test_emergency_relief_export_uses_separate_no_random_opening_contract():

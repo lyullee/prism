@@ -32,6 +32,7 @@ from .equipment_release_adapter import (
     build_resolved_gas_release_from_provider_response,
     build_resolved_liquid_release_from_provider_response,
 )
+from .state_snapshot import EquipmentStateSnapshot
 
 
 ACCIDENT_EXPORT_REQUEST_SCHEMA = "prism.equipment_accident_export_request.v1"
@@ -88,6 +89,43 @@ def _vector(value: Any, field: str, *, nonzero: bool = False) -> tuple[float, fl
     return vector
 
 
+def _coerce_state_snapshot(
+    value: EquipmentStateSnapshot | Mapping[str, Any] | None,
+    *,
+    component_id: str,
+    state_snapshot_digest: str,
+) -> EquipmentStateSnapshot | None:
+    """Validate an optional state snapshot and bind it to its request digest."""
+    if value is None:
+        return None
+    try:
+        snapshot = (
+            value
+            if isinstance(value, EquipmentStateSnapshot)
+            else EquipmentStateSnapshot.from_mapping(value)
+        )
+    except (TypeError, ValueError) as error:
+        raise EquipmentAccidentExportError(f"invalid state_snapshot: {error}") from error
+    if snapshot.component_id != component_id:
+        raise EquipmentAccidentExportError(
+            "state_snapshot component_id must match accident export request"
+        )
+    if snapshot.digest() != state_snapshot_digest:
+        raise EquipmentAccidentExportError(
+            "state_snapshot_digest does not match canonical state_snapshot payload"
+        )
+    return snapshot
+
+
+def _state_snapshot_payload(
+    snapshot: EquipmentStateSnapshot | None,
+) -> dict[str, Any]:
+    """Keep the optional field absent for legacy providers when unused."""
+    if snapshot is None:
+        return {}
+    return {"state_snapshot": snapshot.to_mapping()}
+
+
 @dataclass(frozen=True)
 class AccidentReleaseExportRequest:
     """Explicit scenario sent to an external equipment accident exporter."""
@@ -113,6 +151,7 @@ class AccidentReleaseExportRequest:
     scenario_provenance: str
     start_time_s: float = 0.0
     provider_termination_required: bool = True
+    state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
 
     def __post_init__(self) -> None:
         for field in (
@@ -143,6 +182,12 @@ class AccidentReleaseExportRequest:
             raise EquipmentAccidentExportError(
                 "provider_termination_required must remain true; PRISM never guesses termination"
             )
+        snapshot = _coerce_state_snapshot(
+            self.state_snapshot,
+            component_id=self.component_id,
+            state_snapshot_digest=self.state_snapshot_digest,
+        )
+        object.__setattr__(self, "state_snapshot", snapshot)
 
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> "AccidentReleaseExportRequest":
@@ -195,6 +240,7 @@ class AccidentReleaseExportRequest:
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
             "provider_termination_required": self.provider_termination_required,
+            **_state_snapshot_payload(self.state_snapshot),
         }
         return payload
 
@@ -226,6 +272,38 @@ class EmergencyReliefExportRequest:
     scenario_provenance: str
     start_time_s: float = 0.0
     provider_termination_required: bool = True
+    state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
+
+    def __post_init__(self) -> None:
+        for field in (
+            "component_id", "port_id", "event_id", "provider_boundary_reference",
+            "input_origin", "model_package", "model_class", "model_revision",
+            "state_snapshot_digest", "scenario_provenance",
+        ):
+            _text(getattr(self, field), field)
+        _digest(self.provider_source_digest, "provider_source_digest")
+        _digest(self.state_snapshot_digest, "state_snapshot_digest")
+        _positive(self.horizon_s, "horizon_s")
+        _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
+        _positive(self.ambient_temperature_k, "ambient_temperature_k")
+        if self.start_time_s < 0.0 or self.horizon_s <= self.start_time_s:
+            raise EquipmentAccidentExportError("emergency-relief request has invalid start/horizon clock")
+        _vector(self.position_enu_m, "position_enu_m")
+        _vector(self.direction_enu, "direction_enu", nonzero=True)
+        if self.evidence_status not in _EVIDENCE_STATUSES:
+            raise EquipmentAccidentExportError(
+                f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
+            )
+        if self.provider_termination_required is not True:
+            raise EquipmentAccidentExportError(
+                "provider_termination_required must remain true; PRISM never guesses termination"
+            )
+        snapshot = _coerce_state_snapshot(
+            self.state_snapshot,
+            component_id=self.component_id,
+            state_snapshot_digest=self.state_snapshot_digest,
+        )
+        object.__setattr__(self, "state_snapshot", snapshot)
 
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> "EmergencyReliefExportRequest":
@@ -298,6 +376,7 @@ class EmergencyReliefExportRequest:
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
             "provider_termination_required": self.provider_termination_required,
+            **_state_snapshot_payload(self.state_snapshot),
         }
 
 
@@ -330,6 +409,38 @@ class InventoryReleaseExportRequest:
     scenario_provenance: str
     start_time_s: float = 0.0
     provider_termination_required: bool = True
+    state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
+
+    def __post_init__(self) -> None:
+        for field in (
+            "component_id", "port_id", "event_id", "provider_boundary_reference",
+            "input_origin", "model_package", "model_class", "model_revision",
+            "state_snapshot_digest", "scenario_provenance",
+        ):
+            _text(getattr(self, field), field)
+        _digest(self.provider_source_digest, "provider_source_digest")
+        _digest(self.state_snapshot_digest, "state_snapshot_digest")
+        _positive(self.horizon_s, "horizon_s")
+        _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
+        _positive(self.ambient_temperature_k, "ambient_temperature_k")
+        if self.start_time_s < 0.0 or self.horizon_s <= self.start_time_s:
+            raise EquipmentAccidentExportError("inventory release request has invalid start/horizon clock")
+        _vector(self.position_enu_m, "position_enu_m")
+        _vector(self.direction_enu, "direction_enu", nonzero=True)
+        if self.evidence_status not in _EVIDENCE_STATUSES:
+            raise EquipmentAccidentExportError(
+                f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
+            )
+        if self.provider_termination_required is not True:
+            raise EquipmentAccidentExportError(
+                "provider_termination_required must remain true; PRISM never guesses termination"
+            )
+        snapshot = _coerce_state_snapshot(
+            self.state_snapshot,
+            component_id=self.component_id,
+            state_snapshot_digest=self.state_snapshot_digest,
+        )
+        object.__setattr__(self, "state_snapshot", snapshot)
 
     @classmethod
     def from_mapping(cls, value: Mapping[str, Any]) -> "InventoryReleaseExportRequest":
@@ -393,6 +504,7 @@ class InventoryReleaseExportRequest:
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
             "provider_termination_required": self.provider_termination_required,
+            **_state_snapshot_payload(self.state_snapshot),
         }
 
 
@@ -721,6 +833,7 @@ __all__ = [
     "AccidentReleaseExportRequest",
     "EmergencyReliefExportRequest",
     "InventoryReleaseExportRequest",
+    "EquipmentStateSnapshot",
     "AccidentReleaseExportResult",
     "export_equipment_gas_accident_history",
     "export_equipment_liquid_accident_history",
