@@ -47,15 +47,7 @@ def _conditional_status(rows: Sequence[Mapping[str, Any]]) -> str:
         # as numerically executed here, while strict provider status remains
         # unchanged in the merged ``status`` field.
         cases = int(row.get("case_count", 0) or 0)
-        executed = int(
-            row.get(
-                "conditional_executed_case_count",
-                int(row.get("fully_validated_case_count", 0) or 0)
-                + int(row.get("operator_limited_case_count", 0) or 0)
-                + int(row.get("domain_incomplete_case_count", 0) or 0),
-            )
-            or 0
-        )
+        executed = _conditional_executed_case_count(row)
         if cases > 0 and executed == cases:
             statuses.add("EXECUTED")
         elif executed > 0:
@@ -75,6 +67,32 @@ def _conditional_status(rows: Sequence[Mapping[str, Any]]) -> str:
     if effective == {"FAILED"}:
         return "FAILED"
     return "PARTIAL"
+
+
+def _conditional_executed_case_count(row: Mapping[str, Any]) -> int:
+    """Return the numerical case count from current or legacy scope rows.
+
+    Older merged matrices did not carry ``conditional_executed_case_count``
+    and sometimes left the per-status breakdown incomplete even though their
+    ``executed_case_count`` was authoritative.  A case counted as executed by
+    the scope builder has reached the consequence chain; failed cases are not
+    included in that field.  Prefer the explicit conditional field, then the
+    executed count, and only use the detailed breakdown as a final legacy
+    fallback.  This affects diagnostic accounting only; strict status and
+    facility qualification remain unchanged.
+    """
+    if row.get("conditional_executed_case_count") is not None:
+        return max(0, int(row.get("conditional_executed_case_count", 0) or 0))
+    if row.get("executed_case_count") is not None:
+        cases = int(row.get("case_count", 0) or 0)
+        executed = int(row.get("executed_case_count", 0) or 0)
+        return max(0, min(cases, executed))
+    return max(
+        0,
+        int(row.get("fully_validated_case_count", 0) or 0)
+        + int(row.get("operator_limited_case_count", 0) or 0)
+        + int(row.get("domain_incomplete_case_count", 0) or 0),
+    )
 
 
 def merge_scope_matrices(
@@ -132,16 +150,7 @@ def merge_scope_matrices(
         executed_count = sum(int(row.get("executed_case_count", 0) or 0) for row in source_rows)
         uncomputed_count = sum(int(row.get("uncomputed_case_count", 0) or 0) for row in source_rows)
         conditional_executed_count = sum(
-            int(
-                row.get(
-                    "conditional_executed_case_count",
-                    int(row.get("fully_validated_case_count", 0) or 0)
-                    + int(row.get("operator_limited_case_count", 0) or 0)
-                    + int(row.get("domain_incomplete_case_count", 0) or 0),
-                )
-                or 0
-            )
-            for row in source_rows
+            _conditional_executed_case_count(row) for row in source_rows
         )
         frequency = sum(
             float(row.get("generated_initiation_frequency_per_year", 0.0) or 0.0)

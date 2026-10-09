@@ -64,3 +64,29 @@ def test_scope_matrix_merge_preserves_not_applicable_family_and_ignores_it_in_bl
     assert merged["matrix_complete"] is True
     assert merged["declared_scope_numerically_complete"] is True
     assert merged["blocking_reasons"] == []
+
+
+def test_scope_matrix_merge_uses_legacy_executed_count_for_conditional_accounting():
+    merged = merge_scope_matrices(
+        [{
+            "facility_id": "legacy",
+            "rows": [{
+                "family": "inventory_depletion",
+                "status": "PARTIAL",
+                "generated_event_count": 5,
+                "case_count": 5,
+                "executed_case_count": 5,
+                "uncomputed_case_count": 2,
+                "fully_validated_case_count": 3,
+                "operator_limited_case_count": 0,
+            }],
+        }],
+        facility_id="legacy-merged",
+        required_families=("inventory_depletion",),
+    )
+    row = merged["rows"][0]
+    assert row["conditional_executed_case_count"] == 5
+    assert row["conditional_uncomputed_case_count"] == 0
+    assert row["conditional_status"] == "EXECUTED"
+    assert merged["conditional_chain_complete"] is True
+    assert merged["matrix_complete"] is False

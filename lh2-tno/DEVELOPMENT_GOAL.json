@@ -2006,13 +2006,11 @@
   "valve_provider_campaign_failed_cases": 0,
   "valve_provider_campaign_retry_record": "results/20261022/valve_area_0.01_retry/campaign_result.json",
   "valve_provider_campaign_retry_timeout_s": 360.0,
-  "scope_matrix_conditional_chain_complete": false,
-  "scope_matrix_conditional_blocking_reasons": [
-    "inventory_depletion: PARTIAL"
-  ],
-  "scope_matrix_conditional_uncomputed_case_count": 5,
+  "scope_matrix_conditional_chain_complete": true,
+  "scope_matrix_conditional_blocking_reasons": [],
+  "scope_matrix_conditional_uncomputed_case_count": 0,
   "scope_matrix_conditional_status_policy": "Numerical execution and facility qualification are reported separately; operator-limited cases never open facility IR/F-N.",
   "ijhe_audit_latest_check_count": 28,
-  "ijhe_audit_latest_test_status": "28-check IJHE audit with conditional accident-scope accounting; full portable suite 495 passed",
-  "ijhe_audit_latest_conditional_scope_check_status": "PASS diagnostic-only; conditional chain remains incomplete for inventory_depletion with 5 uncomputed cases"
+  "ijhe_audit_latest_test_status": "28-check IJHE audit with conditional accident-scope accounting; full portable suite 496 passed",
+  "ijhe_audit_latest_conditional_scope_check_status": "PASS diagnostic-only; all 12 declared families have numerical conditional execution; strict facility matrix remains partial"
 }
