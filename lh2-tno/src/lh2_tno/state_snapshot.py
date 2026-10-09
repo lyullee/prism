@@ -107,7 +107,13 @@ class EquipmentStateSnapshot(Contract):
             raise ValueError(
                 f"schema_version must be {EQUIPMENT_STATE_SNAPSHOT_SCHEMA}"
             )
-        return cls.model_validate(dict(value))
+        payload = dict(value)
+        # JSON arrays are the wire representation of the internal ENU tuple.
+        # Convert only this transport shape; all coordinates are still checked
+        # by the strict Pydantic model below.
+        if isinstance(payload.get("position_enu_m"), list):
+            payload["position_enu_m"] = tuple(payload["position_enu_m"])
+        return cls.model_validate(payload)
 
     def to_mapping(self) -> dict[str, Any]:
         return self.model_dump(mode="json")

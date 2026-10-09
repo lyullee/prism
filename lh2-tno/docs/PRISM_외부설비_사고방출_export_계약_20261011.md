@@ -85,6 +85,12 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 이번 단계에서는 `scripts/export_lh2dt_prism_accident_packet.py`에 첫 실행형 provider adapter를 추가했다. 이 adapter는 외부 `HomogeneousTank`와 `Valve`를 명시적인 failed-opening 시나리오로 실행하고, 외부 모델이 반환한 시간·상태·질량 장부를 새 계약으로 변환한다.
 
+## 외부 LayeredTank 상태 snapshot 실행 증거 (2026-10-17)
+
+`scripts/export_lh2dt_layered_tank_prism_packet.py`는 이제 외부 `LayeredTankNetworkSimulator`가 초기 계산에서 반환한 압력·온도·재고·상을 `prism.equipment_state_snapshot.v1`로 만들고, 그 snapshot digest를 가진 사고 요청을 같은 provider adapter에 전달한다. provider 응답에도 digest를 echo하도록 해 요청·provider 상태가 동일한지 확인한다.
+
+현재 외부 모델 smoke(`1e-6 m²` outlet, `0.05 s` step)는 0.1 s, 2 provider interval, provider mass residual `1.95e-18 kg`, strict packet mass residual `0 kg`, snapshot digest match `true`를 기록했다. 결과는 `results/20261017/layered_tank_state_snapshot_smoke3/`에 저장했다. 이 입력은 합성 탱크·대기 경계·재고 threshold이며 `synthetic_diagnostic`, `provider_packet_promoted=false`를 유지한다. 따라서 상태 전달이 실행됐다는 증거이지 실제 설비 적격 사고방출·빈도·시설 IR/F-N을 의미하지 않는다.
+
 ```powershell
 .venv\Scripts\python.exe scripts/export_lh2dt_prism_accident_packet.py `
   --lh2dt-root "C:\path\to\lh2dt_models" `

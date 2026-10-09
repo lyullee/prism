@@ -91,6 +91,7 @@ def _run_provider(
         saturated.wall_temperatures_K,
     ))
     initial_mass = tank.total_mass_kg(initial)
+    initial_endpoint = tank.thermo(initial).liquid[0]
     threshold_mass = initial_mass - target_release_kg
     if threshold_mass <= 0.0:
         raise ValueError("target_release_kg must be smaller than the initial inventory")
@@ -253,6 +254,14 @@ def _run_provider(
             "remaining_mass_kg": remaining_mass,
             "termination_basis": termination_basis,
             "termination_provenance": "provider stopped after a bounded interval crossed a declared positive mass threshold",
+        },
+        "initial_state": {
+            "pressure_pa_abs": float(initial_endpoint.pressure_Pa),
+            "temperature_k": float(initial_endpoint.temperature_K),
+            "density_kg_m3": float(initial_endpoint.density_kg_m3),
+            "specific_enthalpy_j_kg": float(initial_endpoint.specific_enthalpy_J_kg),
+            "phase": initial_endpoint.phase,
+            "mass_kg": float(initial_mass),
         },
         "available_mass_kg": initial_mass,
         "cumulative_mass_out_kg": cumulative_mass_out_kg,

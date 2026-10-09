@@ -22,11 +22,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_accident_export import (  # noqa: E402
     EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
     AccidentReleaseExportRequest,
     export_equipment_liquid_accident_history,
+)
+from lh2_tno.state_snapshot import (  # noqa: E402
+    EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+    EquipmentStateSnapshot,
 )
 from validate_layered_tank_inventory_slabsx import _run_provider  # noqa: E402
 
@@ -59,7 +62,7 @@ def _request(
     position_enu_m: list[float],
     direction_enu: list[float],
     model_revision: str,
-    state_snapshot_digest: str,
+    state_snapshot: EquipmentStateSnapshot,
 ) -> AccidentReleaseExportRequest:
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
@@ -80,7 +83,8 @@ def _request(
         "model_package": "lh2dt_models",
         "model_class": "LayeredTankNetworkSimulator+CommandedValve",
         "model_revision": model_revision,
-        "state_snapshot_digest": state_snapshot_digest,
+        "state_snapshot_digest": state_snapshot.digest(),
+        "state_snapshot": state_snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit external LayeredTank inventory-threshold diagnostic; not site-calibrated",
         "provider_termination_required": True,
@@ -99,6 +103,7 @@ class LayeredTankAccidentProvider:
         max_intervals: int,
         full_open_area_m2: float,
         request: AccidentReleaseExportRequest,
+        provider_export: Mapping[str, Any],
     ) -> None:
         self.lh2dt_root = lh2dt_root.resolve()
         self.time_step_s = float(time_step_s)
@@ -106,17 +111,16 @@ class LayeredTankAccidentProvider:
         self.max_intervals = int(max_intervals)
         self.full_open_area_m2 = float(full_open_area_m2)
         self.request = request
+        self.provider_export = dict(provider_export)
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         if request["event_id"] != self.request.event_id:
             raise ValueError("LayeredTank provider event does not match accident request")
-        export, meta = _run_provider(
-            self.lh2dt_root,
-            time_step_s=self.time_step_s,
-            target_release_kg=self.target_release_kg,
-            max_intervals=self.max_intervals,
-            full_open_area_m2=self.full_open_area_m2,
-        )
+        export = dict(self.provider_export)
+        meta = {
+            "status": "PRECOMPUTED_EXTERNAL_LAYERED_TANK_EXPORT",
+            "source_state_snapshot_digest": request["state_snapshot_digest"],
+        }
         raw_steps = export["steps"]
         if not raw_steps:
             raise ValueError("LayeredTank provider returned no accident intervals")
@@ -173,6 +177,7 @@ class LayeredTankAccidentProvider:
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
             "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
             "provider_source_digest": request["provider_source_digest"],
+            "provider_state_snapshot_digest": request["state_snapshot_digest"],
             "data": data,
         }
 
@@ -185,12 +190,42 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     port_id = args.port_id or f"{component_id}.accident-out"
     event_id = args.event_id or f"{component_id}/{port_id}/{opening_diameter_m:.12g}m"
     direction = [1.0 / math.sqrt(2.0), 0.0, -1.0 / math.sqrt(2.0)]
-    state_payload = {
-        "time_step_s": args.time_step_s,
-        "target_release_kg": args.target_release_kg,
-        "max_intervals": args.max_intervals,
-        "full_open_area_m2": args.full_open_area_m2,
-    }
+    provider_export, provider_meta = _run_provider(
+        root,
+        time_step_s=args.time_step_s,
+        target_release_kg=args.target_release_kg,
+        max_intervals=args.max_intervals,
+        full_open_area_m2=args.full_open_area_m2,
+    )
+    initial_state = provider_export["initial_state"]
+    state_snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id=component_id,
+        captured_at_s=0.0,
+        origin="model_prediction",
+        pressure_pa_abs=float(initial_state["pressure_pa_abs"]),
+        temperature_k=float(initial_state["temperature_k"]),
+        mass_kg=float(initial_state["mass_kg"]),
+        phase="liquid" if initial_state.get("phase") == "liquid" else "unknown",
+        position_enu_m=(0.0, 0.0, float(args.nozzle_height_m)),
+        measurements={
+            "initial_pressure": {
+                "quantity": "pressure",
+                "value_si": float(initial_state["pressure_pa_abs"]),
+                "sensor_location": f"{component_id}.liquid_cell_0",
+            },
+            "initial_temperature": {
+                "quantity": "temperature",
+                "value_si": float(initial_state["temperature_k"]),
+                "sensor_location": f"{component_id}.liquid_cell_0",
+            },
+            "initial_mass": {
+                "quantity": "mass",
+                "value_si": float(initial_state["mass_kg"]),
+                "sensor_location": f"{component_id}.inventory",
+            },
+        },
+    )
     request = _request(
         provider_source_digest=source_digest,
         component_id=component_id,
@@ -200,7 +235,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         position_enu_m=[0.0, 0.0, args.nozzle_height_m],
         direction_enu=direction,
         model_revision=args.model_revision,
-        state_snapshot_digest=canonical_digest(state_payload),
+        state_snapshot=state_snapshot,
     )
     provider = LayeredTankAccidentProvider(
         root,
@@ -209,6 +244,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         max_intervals=args.max_intervals,
         full_open_area_m2=args.full_open_area_m2,
         request=request,
+        provider_export=provider_export,
     )
     result = export_equipment_liquid_accident_history(provider, request)
     release = result.release.model_dump(mode="json")
@@ -217,10 +253,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
         "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
         "provider_result_digest": result.provider_result_digest,
+        "provider_run_meta": provider_meta,
         "strict_packet_duration_s": result.release.duration_s,
         "strict_packet_mass_residual_kg": result.release.cumulative_mass_out_kg - result.release.integrated_mass_kg,
         "strict_packet_energy_residual_j": result.release.cumulative_specific_enthalpy_out_j - result.release.integrated_specific_enthalpy_out_j,
         "provider_packet_promoted": result.provider_packet_promoted,
+        "state_snapshot_handoff": {
+            "present": result.request.state_snapshot is not None,
+            "schema_version": (
+                None if result.request.state_snapshot is None
+                else result.request.state_snapshot.schema_version
+            ),
+            "digest": result.request.state_snapshot_digest,
+            "provider_echo_digest": response.get("provider_state_snapshot_digest"),
+            "digest_match": response.get("provider_state_snapshot_digest") == result.request.state_snapshot_digest,
+        },
         "physical_validation_claim": False,
         "frequency_inference": False,
         "facility_qra_claim": False,

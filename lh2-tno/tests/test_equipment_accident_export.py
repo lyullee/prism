@@ -213,6 +213,20 @@ def test_state_snapshot_is_handed_to_provider_and_bound_to_digest():
     assert handed["component_id"] == "tank-1"
 
 
+def test_state_snapshot_json_position_round_trip_is_supported():
+    snapshot = EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id="tank-1",
+        captured_at_s=10.0,
+        origin="model_prediction",
+        pressure_pa_abs=600000.0,
+        position_enu_m=(1.0, 2.0, 3.0),
+    )
+    round_trip = EquipmentStateSnapshot.from_mapping(snapshot.to_mapping())
+    assert round_trip.position_enu_m == (1.0, 2.0, 3.0)
+    assert round_trip.digest() == snapshot.digest()
+
+
 def test_state_snapshot_digest_mismatch_is_rejected():
     snapshot = _snapshot()
     with pytest.raises(EquipmentAccidentExportError, match="state_snapshot_digest"):

@@ -481,7 +481,13 @@
   "equipment_state_snapshot_accident_inference": false,
   "equipment_state_snapshot_digest_binding": true,
   "equipment_state_snapshot_accident_field_rejection": true,
-  "equipment_state_snapshot_test_status": "6 new state handoff/digest/component/forbidden-field/normalized-telemetry/resolver-binding tests; full portable suite 419 passed; qualified provider packet remains 0",
+  "equipment_state_snapshot_test_status": "7 new state handoff/digest/component/forbidden-field/normalized-telemetry/resolver-binding/JSON-round-trip tests; full portable suite 420 passed; qualified provider packet remains 0",
+  "equipment_state_snapshot_external_provider_smoke_implemented": true,
+  "equipment_state_snapshot_external_provider_smoke_script": "scripts/export_lh2dt_layered_tank_prism_packet.py",
+  "equipment_state_snapshot_external_provider_smoke_record": "results/20261017/layered_tank_state_snapshot_smoke3/verification.json",
+  "equipment_state_snapshot_external_provider_smoke_status": "EXECUTED_OPERATOR_LIMITED; external LayeredTank initial pressure/temperature/inventory/phase snapshot echoed by provider; digest_match=true; provider_packet_promoted=false",
+  "equipment_state_snapshot_external_provider_smoke_provider_mass_residual_kg": 1.951563910473908e-18,
+  "equipment_state_snapshot_external_provider_smoke_strict_mass_residual_kg": 0.0,
   "equipment_provider_qualification_gate_implemented": true,
   "equipment_provider_qualification_gate_schema": "prism.provider_qualification_evidence.v1",
   "equipment_provider_qualification_gate_requirements": [
@@ -491,7 +497,7 @@
     "non-empty evidence_id",
     "provider_source_digest exact match"
   ],
-  "equipment_provider_qualification_gate_test_status": "qualified promotion with explicit record and rejection without record covered; full portable suite 418 passed; qualified provider packet remains 0",
+  "equipment_provider_qualification_gate_test_status": "qualified promotion with explicit record and rejection without record covered; full portable suite 420 passed; qualified provider packet remains 0",
   "equipment_release_adapter_implemented": true,
   "equipment_release_adapter_module": "src/lh2_tno/equipment_release_adapter.py",
   "equipment_release_adapter_used_by": [
