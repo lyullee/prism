@@ -179,7 +179,7 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 
 G1의 실패를 숨기기 위해 저마하 packet을 바꾸어 넣지 않고, source/throat 상태에서 생성된 별도 `resolved_release_with_handoff.json`을 명시적으로 재결합했다. `rebind_campaign_to_compressible_handoff.py`는 event ID, component ID, port ID, provider source digest를 기존 packet과 exact-match한 경우에만 요청을 다시 만든다. provider result digest가 달라진 사실과 handoff provenance는 `results/20261019/generic_native_packet_rebound_campaign_g1_handoff.provenance.json`에 남긴다.
 
-최종 24개 사건 실행은 `4 EXECUTED + 20 EXECUTED_OPERATOR_LIMITED + 0 FAILED`, 96 risk atom, facility total IR/F-N `null`이었다. G1은 `EXECUTED_OPERATOR_LIMITED`로 chain에 들어갔지만 handoff provenance가 `not independently validated`인 진단용 plane adapter이므로 provider 적격성·고속 근접장 물리 검증·시설 위험 승격은 하지 않는다. 최신 IJHE 감사 `results/20261019/ijhe_completion_audit_with_native_packet_campaign_g1_handoff.json`은 26개 검사를 수행하고 기존 3개 차단 이유를 그대로 유지한다. 즉 방출→피해 연결의 계산 경로는 24개 case에서 닫혔지만, 논문에서 전체 시설 QRA라고 부를 수 있는 증거가 된 것은 아니다.
+최종 24개 사건 실행은 `4 EXECUTED + 20 EXECUTED_OPERATOR_LIMITED + 0 FAILED`, 96 risk atom, facility total IR/F-N `null`이었다. G1은 `EXECUTED_OPERATOR_LIMITED`로 chain에 들어갔지만 handoff provenance가 `not independently validated`인 진단용 plane adapter이므로 provider 적격성·고속 근접장 물리 검증·시설 위험 승격은 하지 않는다. 최신 IJHE 감사 `results/20261019/ijhe_completion_audit_with_native_packet_campaign_g1_handoff.json`은 27개 검사를 수행하고 기존 3개 차단 이유를 그대로 유지한다. 즉 방출→피해 연결의 계산 경로는 24개 case에서 닫혔지만, 논문에서 전체 시설 QRA라고 부를 수 있는 증거가 된 것은 아니다.
 
 최신 감사는 `results/20261019/ijhe_completion_audit_with_native_packet_campaign.json`의 26개 검사 중 새 `diagnostic_native_packet_campaign_execution`을 PASS 진단 전용으로 기록한다. 차단 이유는 적격 현장 packet 부재, 일부 사고군의 불완전성, 시설 IR/F-N 보류라는 3개가 그대로 남는다. 상세 재현 절차는 [네이티브 packet 시설 campaign 감사](PRISM_네이티브패킷_시설캠페인_감사_20261019.md)에 있다.
 

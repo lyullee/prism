@@ -206,6 +206,50 @@ def test_completion_audit_records_native_packet_campaign_execution():
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_records_compressible_handoff_rebind_controls():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        provider_worklist={"generated_event_count": 1},
+        native_packet_campaign_ledger={
+            "schema_version": "prism.native_lh2dt_packet_campaign_execution.v1",
+            "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+            "event_count": 1,
+            "case_count": 1,
+            "chain_executed_case_count": 1,
+            "packet_identity_case_count": 1,
+            "packet_digest_case_count": 1,
+            "packet_identity_consumed": True,
+            "failed_case_count": 0,
+            "failed_cases": [],
+            "facility_total_risk_available": False,
+            "provider_packet_promoted": False,
+            "frequency_from_provider_packet": False,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+            "policy": {
+                "provider_packet_promoted": False,
+                "frequency_inference_performed": False,
+                "frequency_from_provider_packet": False,
+                "facility_qra_claim": False,
+                "physical_validation_claim": False,
+            },
+            "compressible_handoff_rebind": {
+                "consumed": True,
+                "event_id": "event-1",
+                "original_provider_result_digest": "a" * 64,
+                "handoff_provider_result_digest": "b" * 64,
+                "physical_validation_claim": False,
+                "frequency_inference": False,
+            },
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "diagnostic_native_packet_compressible_handoff_rebind")
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
 def test_completion_audit_records_frequency_provenance_as_diagnostic_evidence():
     report = build_ijhe_completion_audit(
         {"physical_validation_claim": False},

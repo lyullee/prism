@@ -443,6 +443,43 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+        handoff = packet_campaign.get("compressible_handoff_rebind")
+        if isinstance(handoff, Mapping):
+            handoff_valid = (
+                handoff.get("consumed") is True
+                and isinstance(handoff.get("event_id"), str)
+                and isinstance(handoff.get("original_provider_result_digest"), str)
+                and isinstance(handoff.get("handoff_provider_result_digest"), str)
+                and handoff.get("original_provider_result_digest") != handoff.get("handoff_provider_result_digest")
+                and handoff.get("physical_validation_claim") is False
+                and handoff.get("frequency_inference") is False
+            )
+            checks.append(
+                {
+                    "name": "diagnostic_native_packet_compressible_handoff_rebind",
+                    "status": "PASS" if handoff_valid else "BLOCKED",
+                    "diagnostic_only": True,
+                    "blocking_reason": (
+                        None
+                        if handoff_valid
+                        else "compressible handoff ledger is missing identity, digest, or non-promotion controls"
+                    ),
+                    "evidence": {
+                        "record": packet_campaign.get("_record_path"),
+                        "consumed": handoff.get("consumed"),
+                        "event_id": handoff.get("event_id"),
+                        "original_provider_result_digest": handoff.get("original_provider_result_digest"),
+                        "handoff_provider_result_digest": handoff.get("handoff_provider_result_digest"),
+                        "physical_validation_claim": handoff.get("physical_validation_claim"),
+                        "frequency_inference": handoff.get("frequency_inference"),
+                    },
+                    "interpretation": (
+                        "The campaign records an explicit same-source compressible-plane handoff rebind. "
+                        "This confirms packet identity controls only; it does not validate the near field, "
+                        "infer frequency, or promote facility QRA."
+                    ),
+                }
+            )
     if native_full_bore_frequency_result is not None:
         full_bore_frequency_valid = (
             full_bore_frequency.get("schema_version") in {
