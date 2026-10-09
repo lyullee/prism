@@ -152,6 +152,16 @@ def merge_scope_matrices(
         conditional_executed_count = sum(
             _conditional_executed_case_count(row) for row in source_rows
         )
+        fully_validated_count = sum(
+            int(row.get("fully_validated_case_count", 0) or 0) for row in source_rows
+        )
+        operator_limited_count = sum(
+            int(row.get("operator_limited_case_count", 0) or 0) for row in source_rows
+        )
+        domain_incomplete_count = sum(
+            int(row.get("domain_incomplete_case_count", 0) or 0) for row in source_rows
+        )
+        failed_count = sum(int(row.get("failed_case_count", 0) or 0) for row in source_rows)
         frequency = sum(
             float(row.get("generated_initiation_frequency_per_year", 0.0) or 0.0)
             for row in source_rows
@@ -168,16 +178,18 @@ def merge_scope_matrices(
             "conditional_executed_case_count": conditional_executed_count,
             "conditional_uncomputed_case_count": max(0, case_count - conditional_executed_count),
             "uncomputed_case_count": uncomputed_count,
+            "strict_uncomputed_case_count": uncomputed_count,
             "generated_initiation_frequency_per_year": frequency,
-            "fully_validated_case_count": sum(
-                int(row.get("fully_validated_case_count", 0) or 0) for row in source_rows
+            "fully_validated_case_count": fully_validated_count,
+            "operator_limited_case_count": operator_limited_count,
+            "domain_incomplete_case_count": domain_incomplete_count,
+            "failed_case_count": failed_count,
+            "strict_blocking_reason": (
+                None if status in {"EXECUTED", "NOT_APPLICABLE"} else f"{family}: {status}"
             ),
-            "operator_limited_case_count": sum(
-                int(row.get("operator_limited_case_count", 0) or 0) for row in source_rows
-            ),
-            "failed_case_count": sum(
-                int(row.get("failed_case_count", 0) or 0) for row in source_rows
-            ),
+            "conditional_statuses": sorted({
+                str(row.get("conditional_status", "UNCOMPUTED")) for row in source_rows
+            }),
             "frequency_rows_are_not_additive_across_families": True,
             "source_statuses": sorted({str(row.get("status")) for row in source_rows}),
         }

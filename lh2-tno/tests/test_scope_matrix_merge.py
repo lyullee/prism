@@ -32,6 +32,9 @@ def test_scope_matrix_merge_preserves_partial_family_and_counts_events():
     assert rows["pipe_hole"]["status"] == "PARTIAL"
     assert rows["pipe_hole"]["generated_event_count"] == 3
     assert rows["pipe_hole"]["uncomputed_case_count"] == 1
+    assert rows["pipe_hole"]["strict_uncomputed_case_count"] == 1
+    assert rows["pipe_hole"]["domain_incomplete_case_count"] == 0
+    assert rows["pipe_hole"]["strict_blocking_reason"] == "pipe_hole: PARTIAL"
     assert rows["vertical_handoff"]["status"] == "PARTIAL"
     assert rows["vessel_hole"]["status"] == "NO_EVENT_GENERATED"
     assert merged["facility_total_risk_available"] is False
@@ -90,3 +93,35 @@ def test_scope_matrix_merge_uses_legacy_executed_count_for_conditional_accountin
     assert row["conditional_status"] == "EXECUTED"
     assert merged["conditional_chain_complete"] is True
     assert merged["matrix_complete"] is False
+
+
+def test_scope_matrix_merge_preserves_strict_status_breakdown():
+    merged = merge_scope_matrices(
+        [{
+            "facility_id": "breakdown",
+            "rows": [{
+                "family": "liquid_two_phase",
+                "status": "PARTIAL",
+                "conditional_status": "EXECUTED",
+                "generated_event_count": 1,
+                "case_count": 3,
+                "executed_case_count": 3,
+                "conditional_executed_case_count": 3,
+                "uncomputed_case_count": 3,
+                "fully_validated_case_count": 1,
+                "operator_limited_case_count": 1,
+                "domain_incomplete_case_count": 1,
+                "failed_case_count": 0,
+            }],
+        }],
+        facility_id="breakdown-merged",
+        required_families=("liquid_two_phase",),
+    )
+    row = merged["rows"][0]
+    assert row["conditional_status"] == "EXECUTED"
+    assert row["conditional_executed_case_count"] == 3
+    assert row["conditional_uncomputed_case_count"] == 0
+    assert row["fully_validated_case_count"] == 1
+    assert row["operator_limited_case_count"] == 1
+    assert row["domain_incomplete_case_count"] == 1
+    assert row["strict_blocking_reason"] == "liquid_two_phase: PARTIAL"
