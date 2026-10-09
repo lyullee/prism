@@ -925,7 +925,7 @@
   "ijhe_completion_audit_live_with_runner_consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
   "ijhe_completion_audit_live_with_runner_qualified_provider_packet_count": 0,
   "ijhe_completion_audit_live_with_runner_frequency_bound": false,
-  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, asynchronous time-window, configurable source-time gate, structured row rejection, row-to-provider chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and realtime facility risk handoff preservation/promotion-block assertions; local portable suite 579 passed/1 skipped, CI Run #413 full suite 579 passed/1 skipped",
+  "realtime_monitor_test_status": "single-component and facility monitor tests with component-risk ranking, asynchronous time-window, configurable source-time gate, structured row rejection, row-to-provider chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and realtime facility risk handoff preservation/promotion-block assertions; local portable suite 582 passed/1 skipped, CI Run #413 full suite 579 passed/1 skipped",
   "provider_worklist_packet_evidence_audit_implemented": true,
   "provider_worklist_packet_evidence_audit_module": "src/lh2_tno/provider_worklist_evidence.py",
   "provider_worklist_packet_evidence_audit_script": "scripts/audit_provider_worklist_packet_evidence.py",
@@ -1849,7 +1849,7 @@
   "facility_realtime_monitor_ignition_accounting": "Implemented in aggregate.current_weather_ignition_accounting; validates the complete outdoor four-branch provider probability set and optionally applies only explicit literature condition/release/occupancy weights, without facility-risk promotion.",
   "facility_realtime_monitor_component_risk_ranking": "Implemented in aggregate.component_risk_ranking; ranks only components with explicit literature frequency and valid current-weather receptor IR, retains missing/rejected components as withheld null rows, and never reallocates frequency or promotes facility IR/F-N.",
   "facility_realtime_monitor_frequency_rank_sensitivity": "Implemented in aggregate.component_risk_ranking rows; optional p05/published/p95 peak IR and rank maps are exposed only when every scenario has a valid provider harm map, with missing scenarios withheld as null and no physics rerun or frequency learning.",
-  "facility_realtime_monitor_test_status": "current-weather IR binding, p05/p95 sensitivity, component-risk ranking/withholding, duplicate-event guard, missing-harm withholding, deadline/facility rejection, asynchronous time-window, configurable source-time gate, row-to-provider consequence-chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and fail-closed facility handoff tests; CI Run #413 full suite 579 passed, 1 skipped (local portable suite 579 passed, 1 skipped)",
+  "facility_realtime_monitor_test_status": "current-weather IR binding, p05/p95 sensitivity, component-risk ranking/withholding, duplicate-event guard, missing-harm withholding, deadline/facility rejection, asynchronous time-window, configurable source-time gate, row-to-provider consequence-chain, row-batch conditional IR/F-N, packaged catalogue FrequencyEvent binding, facility processing-time ledger, release-path state aggregation, and fail-closed facility handoff tests; CI Run #413 full suite 579 passed, 1 skipped (local portable suite 582 passed, 1 skipped)",
   "facility_realtime_monitor_one_hz_claim": false,
   "facility_realtime_monitor_facility_annual_risk_available": false,
   "facility_realtime_monitor_current_status": "IMPLEMENTED_DIAGNOSTIC_MULTI_COMPONENT_LEDGER; facility annual IR/F-N withheld until qualified provider packets, complete accident coverage, and independent physical validation are available.",
@@ -2227,5 +2227,13 @@
   "realtime_facility_risk_handoff_mergeable": false,
   "realtime_facility_risk_handoff_qualified_provider_evaluation": false,
   "realtime_facility_risk_handoff_physical_validation_claim": false,
-  "realtime_facility_risk_handoff_test_status": "handoff preservation/promotion-block and malformed-snapshot tests; local consequence-service subset 42 passed"
+  "realtime_facility_risk_handoff_test_status": "handoff preservation/promotion-block and malformed-snapshot tests; local consequence-service subset 42 passed",
+  "realtime_facility_campaign_adapter_implemented": true,
+  "realtime_facility_campaign_adapter_module": "src/lh2_tno/realtime_campaign.py",
+  "realtime_facility_campaign_adapter_schema": "prism.realtime_facility_campaign_result.v1",
+  "realtime_facility_campaign_adapter_api": "build_realtime_facility_campaign_result(snapshot, annual_conditions, scenario_bindings)",
+  "realtime_facility_campaign_adapter_record": "docs/PRISM_실시간_snapshot_시설ledger_연결_개발기록_20261010.md",
+  "realtime_facility_campaign_adapter_status": "CONDITIONAL_LEDGER_BRIDGE_OPERATOR_LIMITED; explicit branch metadata and harm closure required",
+  "realtime_facility_campaign_adapter_facility_qra_promotion": false,
+  "realtime_facility_campaign_adapter_test_status": "targeted adapter + facility ledger tests 31 passed before full portable rerun"
 }

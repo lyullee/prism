@@ -168,6 +168,7 @@ def _validate_atoms(
     event_ids: set[str],
     receptor_ids: set[str] | None,
     seen_atom_keys: set[tuple[str, str, str, str]],
+    annual_conditions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> tuple[set[str], list[str]]:
     discovered_receptors: set[str] = set()
     errors: list[str] = []
@@ -228,9 +229,61 @@ def _validate_atoms(
                     raise FacilityLedgerError(
                         f"risk atom {index} receptor {receptor_id} harm endpoint is outside [0, 1]"
                     )
+        expected_deaths = atom.get("expected_deaths_low_high", [0.0, 0.0])
+        expected_reference = {
+            endpoint: sum(float(harm[receptor][endpoint]) for receptor in harm)
+            for endpoint in range(2)
+        }
+        # Realtime campaign bindings may carry an explicit population-weighted
+        # F/N value.  Legacy atoms retain the historical receptor-harm sum
+        # contract unless they opt into this basis, so existing saved ledgers
+        # remain readable while the facility bridge can preserve population.
+        if atom.get("expected_deaths_basis") == "population_weighted":
+            condition_id = str(atom.get("annual_condition_id", ""))
+            condition = (annual_conditions or {}).get(condition_id)
+            population = condition.get("population") if isinstance(condition, Mapping) else None
+            if not isinstance(population, Sequence) or isinstance(population, (str, bytes)):
+                raise FacilityLedgerError(
+                    f"risk atom {index} population-weighted expected deaths require condition population"
+                )
+            population_by_receptor: dict[str, float] = {}
+            for population_row in population:
+                if not isinstance(population_row, Mapping) or not population_row.get("receptor_id"):
+                    raise FacilityLedgerError(
+                        f"risk atom {index} condition population row is invalid"
+                    )
+                receptor_id = str(population_row["receptor_id"])
+                persons = population_row.get("persons")
+                presence = population_row.get("presence_probability", 1.0)
+                if (
+                    isinstance(persons, bool)
+                    or not isinstance(persons, (int, float))
+                    or not math.isfinite(float(persons))
+                    or float(persons) < 0.0
+                    or isinstance(presence, bool)
+                    or not isinstance(presence, (int, float))
+                    or not math.isfinite(float(presence))
+                    or not 0.0 <= float(presence) <= 1.0
+                ):
+                    raise FacilityLedgerError(
+                        f"risk atom {index} condition population values are invalid"
+                    )
+                population_by_receptor[receptor_id] = float(persons) * float(presence)
+            if set(population_by_receptor) != atom_receptors:
+                raise FacilityLedgerError(
+                    f"risk atom {index} population receptor set does not match harm receptors"
+                )
+            expected_reference = {
+                endpoint: sum(
+                    population_by_receptor[receptor]
+                    * float(harm[receptor][endpoint])
+                    for receptor in harm
+                )
+                for endpoint in range(2)
+            }
         if not math.isclose(
-            float(atom.get("expected_deaths_low_high", [0.0, 0.0])[0]),
-            sum(float(harm[receptor][0]) for receptor in harm),
+            float(expected_deaths[0]),
+            expected_reference[0],
             rel_tol=1e-8,
             abs_tol=1e-12,
         ):
@@ -238,8 +291,8 @@ def _validate_atoms(
                 f"risk atom {index} low expected deaths do not close over receptors"
             )
         if not math.isclose(
-            float(atom.get("expected_deaths_low_high", [0.0, 0.0])[1]),
-            sum(float(harm[receptor][1]) for receptor in harm),
+            float(expected_deaths[1]),
+            expected_reference[1],
             rel_tol=1e-8,
             abs_tol=1e-12,
         ):
@@ -745,6 +798,7 @@ def merge_facility_campaign_results(
             event_ids=local_event_ids,
             receptor_ids=receptor_ids,
             seen_atom_keys=seen_atom_keys,
+            annual_conditions=merged_annual_conditions,
         )
         if receptor_ids is None:
             receptor_ids = discovered

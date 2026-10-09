@@ -1012,6 +1012,71 @@ print(handoff["source_snapshot_digest"])
 표준화된 중간 결과이며, 빠진 사고·기상·점화 branch를 0으로 간주한 시설 위험도는
 아닙니다.
 
+실시간 snapshot을 **조건부 시설 ledger의 risk atom으로 연결**해야 할 때는 별도
+어댑터를 사용합니다. `build_realtime_facility_campaign_result()`는 handoff가
+보류한 네 가지 축(연간 기상 조건, 방출 branch, 점화 branch, branch별 피해)을
+호출자가 명시한 경우에만 채웁니다. 센서 frame에서 이 값을 추정하지 않으며,
+branch별 피해의 확률 가중합이 snapshot의 관측 누출 피해와 일치하지 않으면
+즉시 `RealtimeCampaignBindingError`를 냅니다.
+
+```python
+from lh2_tno.realtime_campaign import build_realtime_facility_campaign_result
+from lh2_tno.facility_ledger import merge_facility_campaign_results
+
+campaign = build_realtime_facility_campaign_result(
+    snapshot,
+    annual_conditions=[{
+        "id": "weather-D-west", "annual_probability": 1.0,
+        "weather": {"wind_speed_m_s": 3.0, "stability_class": "D"},
+        "population": [{
+            "receptor_id": "worker-01", "persons": 10.0,
+            "presence_probability": 1.0,
+            "provenance": "reviewed outdoor population register",
+        }],
+        "provenance": "reviewed annual weather table",
+    }],
+    scenario_bindings=[{
+        "component_id": "storage-tank-01",
+        "event_id": "storage-tank-hole-01",
+        "asset_id": "storage-tank-01",
+        "annual_condition_id": "weather-D-west",
+        "release_branch_id": "reviewed-isolation",
+        "release_branch_probability": 1.0,
+        "ignition_branch_probabilities": {
+            "direct_fire": 0.25, "delayed_flash_fire": 0.35,
+            "delayed_explosion": 0.10, "no_ignition": 0.30,
+        },
+        "branch_harm_low_high": {
+            "worker-01": {
+                "direct_fire": [0.20, 0.40],
+                "delayed_flash_fire": [0.20, 0.40],
+                "delayed_explosion": [0.20, 0.40],
+                "no_ignition": [0.0, 0.0],
+            }
+        },
+        "scenario_families": ["vessel_hole"],
+    }],
+    expected_component_ids=("storage-tank-01",),
+)
+ledger = merge_facility_campaign_results(
+    [campaign], expected_component_ids=("storage-tank-01",)
+)
+```
+
+이 결과는 `prism.realtime_facility_campaign_result.v1`이며 네 점화 branch마다
+하나의 atom을 만듭니다. `conditional_diagnostic_facility_risk_available`는
+`true`가 될 수 있지만 현재 snapshot은 `EXECUTED_OPERATOR_LIMITED`로 남고,
+`facility_total_risk_available`, `qualified_facility_qra_available`,
+`complete_facility_qra_claim`은 `false`입니다. 아직 계산하지 않은 설비나
+방출경로가 있으면 전체를 0으로 채우지 않고 `UNCOMPUTED`/`MISSING_COVERAGE`로
+보류합니다. 인구가 1명보다 크거나 재실확률이 있으면 adapter가
+`expected_deaths_basis="population_weighted"`를 표시하고 시설 ledger가 그
+조건의 인구 장부로 기대 사망수 폐합을 다시 확인합니다.
+
+따라서 이 어댑터는 “실시간 결과를 시설 장부가 읽을 수 있는 조건부 기여로
+전달하는 연결부”입니다. 연간 사고범위 전체, 적격 provider evidence,
+독립 물리검증이 채워지기 전에는 IJHE용 완전 시설 QRA 결과로 해석하지 않습니다.
+
 표 형식 입력에서 provider resolver까지 연결하는 최소 경로는 `update_from_rows()` → `frame_from_row()` → `TelemetryNormalizer` → 설비 상태 → provider 방출 경계 → consequence 결과 → 시설 장부입니다. 이 경로는 `tests/test_consequence_service.py`의 `test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence`에서 상태 압력, provider 사고 ID, 방출시간, 종료 상태, 잔여 재고를 함께 검증합니다. 예시 provider가 합성이라면 이 테스트가 통과해도 qualified 실제 설비 packet이나 시설 연간 IR/F/N이 열리지는 않습니다.
 
 행 배치에 각 설비의 `RealtimeFrequencyBinding`과 시설의 `RealtimePopulationBinding`을 함께 선언하면 같은 경로에서 설비별 현재 기상 IR을 합산하고, 수용점 인구를 곱한 조건부 expected-death F/N 기여와 p05/발표값/p95 빈도 재가중을 계산합니다. 이 값은 현재 배치의 조건부 진단 결과이며 `facility_annual_risk_available=false`, `facility_fn_available=false`를 유지합니다. 센서로 빈도를 학습하거나 누락 설비를 0으로 처리하지 않습니다.
