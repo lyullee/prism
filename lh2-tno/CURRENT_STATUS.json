@@ -2382,5 +2382,7 @@
   "facility_evidence_request_component_count": 11,
   "facility_evidence_request_provider_schema": "prism.external_accident_history.v1",
   "facility_evidence_request_frequency_inference": false,
-  "facility_evidence_request_facility_qra_claim": false
+  "facility_evidence_request_facility_qra_claim": false,
+  "full_portable_test_count": 461,
+  "full_portable_test_status": "461 passed"
 }
