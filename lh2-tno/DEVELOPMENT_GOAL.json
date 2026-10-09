@@ -1634,7 +1634,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
   "native_lh2dt_packet_coverage_ledger_test_status": "native packet ledger + IJHE audit targeted tests passed; full portable suite 459 passed",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, partial-provider precedence, facility branch/release/timing evidence; full portable suite 560 passed",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, partial-provider precedence, facility branch/release/timing evidence; full portable suite 561 passed",
   "ijhe_completion_audit_partial_provider_precedence_implemented": true,
   "ijhe_completion_audit_partial_provider_precedence_policy": "Partial qualification coverage cannot override an explicit current-status false or open the actual provider packet gate; only complete worklist qualification can fill an absent status value.",
   "campaign_namespace_rebind_implemented": true,
@@ -2108,7 +2108,7 @@
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": ["CURVE_AVAILABLE", "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY", "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS", "NO_RISK_ATOMS"],
-  "full_portable_test_count_latest": 560,
+  "full_portable_test_count_latest": 561,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": ["annual_condition_weather", "release_branch_termination", "ignition_branch"],
@@ -2145,7 +2145,7 @@
   "diagnostic_campaign_binding_fail_closed_packet_event_coverage_ratio": 0.8275862068965517,
   "ijhe_completion_audit_latest_packet_subset_consumed": true,
   "ijhe_completion_audit_latest_full_campaign_packet_consumed": false,
-  "full_portable_test_count_latest": 560,
+  "full_portable_test_count_latest": 561,
   "facility_evidence_request_case_level_implemented": true,
   "facility_evidence_request_case_level_record": "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json",
   "facility_evidence_request_case_level_count": 34,
@@ -2184,5 +2184,6 @@
   "facility_assessment_case_packet_coverage_gate_complete": false,
   "facility_assessment_case_packet_coverage_gate_frequency_inference": false,
   "facility_assessment_case_packet_coverage_gate_physical_validation_claim": false,
-  "facility_assessment_case_packet_coverage_gate_ir_fn_promotion": "requires full exact case coverage plus independent scope and validation gates"
+  "facility_assessment_case_packet_coverage_gate_ir_fn_promotion": "requires full exact case coverage plus independent scope and validation gates",
+  "facility_assessment_case_packet_coverage_gate_test_status": "3 gate tests; full portable suite 561 passed"
 }

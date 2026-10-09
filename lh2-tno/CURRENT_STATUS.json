@@ -2196,7 +2196,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_provider_packet_promoted": false,
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, partial-provider precedence, facility branch/release/timing evidence; full portable suite 560 passed",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, strict-gate-taxonomy, partial-provider precedence, facility branch/release/timing evidence; full portable suite 561 passed",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -3014,8 +3014,8 @@
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 4 blockers; facility case packet coverage is 0/34 and remains fail-closed",
   "ijhe_completion_audit_latest_packet_subset_consumed": true,
   "ijhe_completion_audit_latest_full_campaign_packet_consumed": false,
-  "full_portable_test_count_latest": 560,
-  "full_portable_test_status_latest": "556 passed",
+  "full_portable_test_count_latest": 561,
+  "full_portable_test_status_latest": "561 passed",
   "facility_evidence_request_case_level_implemented": true,
   "facility_evidence_request_case_level_record": "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json",
   "facility_evidence_request_case_level_count": 34,
@@ -3054,5 +3054,6 @@
   "facility_assessment_case_packet_coverage_gate_complete": false,
   "facility_assessment_case_packet_coverage_gate_frequency_inference": false,
   "facility_assessment_case_packet_coverage_gate_physical_validation_claim": false,
-  "facility_assessment_case_packet_coverage_gate_ir_fn_promotion": "requires full exact case coverage plus independent scope and validation gates"
+  "facility_assessment_case_packet_coverage_gate_ir_fn_promotion": "requires full exact case coverage plus independent scope and validation gates",
+  "facility_assessment_case_packet_coverage_gate_test_status": "3 gate tests; full portable suite 561 passed"
 }
