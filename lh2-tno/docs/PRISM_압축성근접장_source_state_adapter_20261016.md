@@ -49,6 +49,8 @@ $lh2dt = 'C:/Users/lyul/Desktop/DocuData/액화수소 저장탱크_밴트 시스
 
 이 smoke는 source pressure 약 1 MPa의 합성 설비 상태에서 handoff 최대 Mach `3.9982`, 에너지 잔차 `0 J/kg`를 기록했다. 이는 알고리즘 연결과 장부 검사를 보인 것이며, 실제 설비 검증이나 사고빈도 근거가 아니다.
 
+이 handoff를 붙인 packet은 `results/20261016/dynamic_high_pressure_source_state_smoke/chain/verification.json`으로 방출부터 SLABx-LH2, 점화, 화재·폭발 및 TNO 피해까지 실행했다. handoff 소비는 `true`, provider 질량 잔차는 `0 kg`, 실행시간은 약 `5481 ms`였다. 이 실행은 합성 설비·기상·점화 조건의 end-to-end 진단이며, 실제 빈도·시설 IR/F-N·provider 승격을 의미하지 않는다.
+
 ## 현재 선택된 G1의 판정
 
 `results/20261014/vaporizer_worklist_g1`의 기존 고속 packet은 source/throat 상태를 포함하지 않는다. 새 adapter는 다음 이유로 중지한다.

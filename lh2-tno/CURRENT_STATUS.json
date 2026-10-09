@@ -1571,5 +1571,12 @@
   "compressible_source_state_high_pressure_smoke_max_entropy_residual_j_per_kgk": 190.20490721174428,
   "compressible_source_state_high_pressure_smoke_provider_packet_promoted": false,
   "compressible_source_state_high_pressure_smoke_physical_validation_claim": false,
-  "compressible_source_state_high_pressure_smoke_facility_qra_claim": false
+  "compressible_source_state_high_pressure_smoke_facility_qra_claim": false,
+  "compressible_source_state_high_pressure_chain_record": "results/20261016/dynamic_high_pressure_source_state_smoke/chain/verification.json",
+  "compressible_source_state_high_pressure_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED; SLABx-LH2, ignition, fire/explosion and TNO damage chain consumed source-state handoff; elapsed 5481.42 ms; no frequency and facility IR/F-N withheld",
+  "compressible_source_state_high_pressure_chain_handoff_consumed": true,
+  "compressible_source_state_high_pressure_chain_provider_mass_residual_kg": 0.0,
+  "compressible_source_state_high_pressure_chain_provider_packet_promoted": false,
+  "compressible_source_state_high_pressure_chain_physical_validation_claim": false,
+  "compressible_source_state_high_pressure_chain_facility_qra_claim": false
 }
