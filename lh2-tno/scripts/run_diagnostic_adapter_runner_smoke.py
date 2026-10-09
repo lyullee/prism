@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import subprocess
 import sys
 import time
 
@@ -30,6 +31,12 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--provider-worklist", type=Path)
     parser.add_argument("--worklist-event-id")
+    parser.add_argument("--run-consequence-chain", action="store_true")
+    parser.add_argument(
+        "--backend-config",
+        type=Path,
+        default=ROOT / "results" / "20261009" / "backend_config_current.json",
+    )
     parser.add_argument("--time-step-s", type=float, default=0.05)
     parser.add_argument("--target-release-kg", type=float, default=1.0e-4)
     # The strict liquid packet intentionally caps its left-held history at
@@ -125,6 +132,28 @@ def main() -> int:
     )
     elapsed_ms = (time.perf_counter() - start) * 1000.0
     release = execution.result.release
+    consequence_defaults = json.loads(
+        (ROOT / "examples" / "equipment_consequence_template.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    consequence_defaults.update(
+        component_id=release.component_id,
+        source_input=None,
+        available_mass_kg=release.available_mass_kg,
+        resolved_release=None,
+        resolved_release_set=None,
+        resolved_liquid_release=None,
+        source_operator="equipment_liquid_release",
+        release_termination={
+            "basis": "provider_declared",
+            "time_s": "provider_duration",
+            "provenance": "explicit diagnostic provider termination",
+        },
+    )
+    consequence_request = runner.to_consequence_request(
+        execution, consequence_defaults
+    )
     exact_worklist_match = None
     if worklist_item is not None:
         exact_worklist_match = {
@@ -138,6 +167,40 @@ def main() -> int:
         }
         if not all(exact_worklist_match.values()):
             raise RuntimeError(f"runner release did not exact-match worklist: {exact_worklist_match}")
+    consequence_chain_verification = None
+    if args.run_consequence_chain:
+        chain_dir = args.output.parent / f"{args.output.stem}_consequence_chain"
+        packet_path = chain_dir / "runner_resolved_release.json"
+        packet_path.parent.mkdir(parents=True, exist_ok=True)
+        packet_path.write_text(
+            json.dumps(release.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        chain_script = ROOT / "scripts" / "validate_lh2dt_prism_packet_chain.py"
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(chain_script),
+                "--packet",
+                str(packet_path),
+                "--output-dir",
+                str(chain_dir),
+                "--backend-config",
+                str(args.backend_config),
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode != 0:
+            detail = completed.stderr.strip() or completed.stdout.strip()
+            raise RuntimeError(
+                f"runner consequence chain failed (exit {completed.returncode}): {detail}"
+            )
+        verification_path = chain_dir / "verification.json"
+        consequence_chain_verification = json.loads(
+            verification_path.read_text(encoding="utf-8")
+        )
     payload = {
         "schema_version": "prism.diagnostic_adapter_runner_smoke.v1",
         "status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC",
@@ -148,6 +211,26 @@ def main() -> int:
         "worklist_item_id": None if worklist_item is None else worklist_item["id"],
         "worklist_exact_match": exact_worklist_match,
         "worklist_frequency_bound": False,
+        "consequence_context_attached": True,
+        "consequence_context_component_id": consequence_request.component_id,
+        "consequence_context_event_id": (
+            consequence_request.resolved_liquid_release.event_id
+            if consequence_request.resolved_liquid_release is not None
+            else None
+        ),
+        "consequence_context_frequency_bound": (
+            consequence_request.annual_frequency_per_year is not None
+            or consequence_request.frequency_event is not None
+        ),
+        "consequence_chain_executed": consequence_chain_verification is not None,
+        "consequence_chain_status": (
+            None if consequence_chain_verification is None
+            else consequence_chain_verification.get("status")
+        ),
+        "consequence_chain_record": (
+            None if consequence_chain_verification is None
+            else str(args.output.parent / f"{args.output.stem}_consequence_chain")
+        ),
         "fresh_execution_elapsed_ms": elapsed_ms,
         "strict_packet_duration_s": release.duration_s,
         "strict_packet_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,

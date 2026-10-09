@@ -846,7 +846,7 @@
   "diagnostic_adapter_runner_worklist_smoke_record": "results/20261014/diagnostic_adapter_runner_worklist_storage_001.json",
   "diagnostic_adapter_runner_worklist_smoke_example": "examples/diagnostic_adapter_runner_worklist_storage_001.json",
   "diagnostic_adapter_runner_worklist_smoke_status": "EXECUTED_OPERATOR_LIMITED_DIAGNOSTIC; exact-match diagnostic; qualified packet 0",
-  "diagnostic_adapter_runner_worklist_smoke_digest": "DF2351A43E692F06C161FD9E5EF5D922D0CB9C17E65777B557C47315BF6EEC6E",
+  "diagnostic_adapter_runner_worklist_smoke_digest": "07FD6792993CB124365E6418D069951751C56C6FFAA439F4599B8317906998F2",
   "diagnostic_adapter_runner_worklist_smoke_provider_instance_id": "storage-tank-01",
   "diagnostic_adapter_runner_worklist_smoke_worklist_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
   "diagnostic_adapter_runner_worklist_smoke_exact_match": {
@@ -856,10 +856,20 @@
     "opening_diameter_m": true
   },
   "diagnostic_adapter_runner_worklist_smoke_frequency_bound": false,
-  "diagnostic_adapter_runner_worklist_smoke_elapsed_ms": 1535.6211999896914,
+  "diagnostic_adapter_runner_worklist_smoke_elapsed_ms": 1522.5103000411764,
   "diagnostic_adapter_runner_worklist_smoke_duration_s": 0.05,
   "diagnostic_adapter_runner_worklist_smoke_mass_residual_kg": 0.0,
   "diagnostic_adapter_runner_worklist_smoke_energy_residual_j": 0.0,
   "diagnostic_adapter_runner_worklist_smoke_provider_packet_promoted": false,
-  "diagnostic_adapter_runner_worklist_smoke_qualified_packet_count": 0
+  "diagnostic_adapter_runner_worklist_smoke_qualified_packet_count": 0,
+  "diagnostic_adapter_runner_worklist_smoke_consequence_context_attached": true,
+  "diagnostic_adapter_runner_worklist_smoke_consequence_context_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+  "diagnostic_adapter_runner_worklist_smoke_consequence_context_frequency_bound": false,
+  "diagnostic_adapter_runner_worklist_smoke_consequence_chain_executed": true,
+  "diagnostic_adapter_runner_worklist_smoke_consequence_chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "diagnostic_adapter_runner_worklist_smoke_consequence_chain_record": "results/20261014/diagnostic_adapter_runner_worklist_storage_001_consequence_chain",
+  "diagnostic_adapter_runner_worklist_smoke_consequence_chain_elapsed_ms": 10316.289399983361,
+  "diagnostic_adapter_runner_worklist_smoke_chain_end_to_end_residual_kg": -9.915820975534519e-18,
+  "diagnostic_adapter_runner_worklist_smoke_chain_pool_sensitivity_radius_m": 0.005,
+  "diagnostic_adapter_runner_worklist_smoke_chain_facility_ir_fn_claim": false
 }
