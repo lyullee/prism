@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 409,
+  "unit_contract_conservation_tests_passed": 410,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -1621,5 +1621,15 @@
   "mixed_lh2_frequency_fixed_quantile_policy_implemented": true,
   "mixed_lh2_frequency_fixed_quantile_policy": "Events without published p05/p95 bounds retain their declared catalogue frequency under explicit fixed scenarios; no missing distribution or sensor-derived rate is invented",
   "mixed_lh2_source_state_rebound_record": "docs/PRISM_source_state_G1_시설캠페인_개발기록_20261017.md",
-  "mixed_lh2_provider_campaign_source_state_rebound_frequency_scenarios": "results/20261017/frequency_scenarios_source_state_rebound.json"
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_scenarios": "results/20261017/frequency_scenarios_source_state_rebound.json",
+  "mixed_lh2_frequency_distribution_sampling_mixed_catalogue_implemented": true,
+  "mixed_lh2_frequency_distribution_sampling_policy": "Published lognormal events are sampled under explicit shared-asset or independent-event normals; events without published lognormal parameters are rejected by default and may be explicitly held at declared catalogue frequency with fixed_event_policy=hold_published",
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_record": "results/20261017/frequency_distribution_source_state_rebound_cli.json",
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_scenario_count": 2,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_draws": 1000,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_fresh_physics_executed": false,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_credible_interval": true,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_facility_credible_interval": false,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_scenarios": "results/20261017/frequency_distribution_scenarios_source_state_rebound.json",
+  "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py"
 }

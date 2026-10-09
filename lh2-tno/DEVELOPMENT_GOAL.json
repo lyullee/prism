@@ -601,7 +601,7 @@
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_total_facility_risk_available": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_one_case_physical_validation_claim": false,
   "external_lh2dt_layered_tank_isolation_branch_campaign_downward_guard": "implemented fail-closed in src/lh2_tno/chain_worker.py; no zero-horizontal-direction normalization",
-  "unit_contract_conservation_tests_passed": 409,
+  "unit_contract_conservation_tests_passed": 410,
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_status": "PARTIAL_DECLARED_SCOPE; 7 synthetic storage branch cases executed through the full consequence chain, 21 cases explicitly UNCOMPUTED; all executed cases remain operator-limited",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_record": "results/20261011/layered_tank_isolation_branches_all/campaign_result_full_adaptive.json",
   "external_lh2dt_layered_tank_isolation_branch_campaign_full_execution_case_count": 7,
@@ -1097,5 +1097,15 @@
   "mixed_lh2_frequency_fixed_quantile_policy_implemented": true,
   "mixed_lh2_frequency_fixed_quantile_policy": "Events without published p05/p95 bounds retain their declared catalogue frequency under explicit fixed scenarios; no missing distribution or sensor-derived rate is invented",
   "mixed_lh2_source_state_rebound_record": "docs/PRISM_source_state_G1_시설캠페인_개발기록_20261017.md",
-  "mixed_lh2_provider_campaign_source_state_rebound_frequency_scenarios": "results/20261017/frequency_scenarios_source_state_rebound.json"
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_scenarios": "results/20261017/frequency_scenarios_source_state_rebound.json",
+  "mixed_lh2_frequency_distribution_sampling_mixed_catalogue_implemented": true,
+  "mixed_lh2_frequency_distribution_sampling_policy": "Published lognormal events are sampled under explicit shared-asset or independent-event normals; events without published lognormal parameters are rejected by default and may be explicitly held at declared catalogue frequency with fixed_event_policy=hold_published",
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_record": "results/20261017/frequency_distribution_source_state_rebound_cli.json",
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_scenario_count": 2,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_draws": 1000,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_fresh_physics_executed": false,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_credible_interval": true,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_facility_credible_interval": false,
+  "mixed_lh2_provider_campaign_source_state_rebound_frequency_distribution_scenarios": "results/20261017/frequency_distribution_scenarios_source_state_rebound.json",
+  "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py"
 }

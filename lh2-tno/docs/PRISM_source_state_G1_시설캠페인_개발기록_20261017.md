@@ -61,6 +61,8 @@
 - 결과: `results/20261017/generic_mixed_provider_campaign_source_state_rebound_result.json`
 - 빈도 시나리오: `results/20261017/frequency_scenarios_source_state_rebound.json`
 - 빈도 재가중 CLI 결과: `results/20261017/frequency_uncertainty_source_state_rebound_cli.json`
+- 빈도 분포 시나리오: `results/20261017/frequency_distribution_scenarios_source_state_rebound.json`
+- 빈도 로그정규 표본 CLI 결과: `results/20261017/frequency_distribution_source_state_rebound_cli.json`
 
 실행 요약:
 
@@ -87,9 +89,12 @@ G1은 이제 low-Mach guard에서 실패하지 않고 `EXECUTED_OPERATOR_LIMITED
 - 문헌 경계가 있는 자산은 `p05`, `published`, `p95`를 계산한다.
 - 경계가 없는 자산은 새 분포를 만들지 않고 `fixed`로 선언된 catalogue 빈도를 그대로 둔다.
 - shared-asset와 independent-event 방향을 별도 시나리오로 비교한다.
+- 로그정규 `mu/sigma`가 있는 사건은 shared-asset/independent-event 표본화를 수행하고, 나머지 사건은 `fixed_event_policy=hold_published`로 선언된 catalogue 빈도를 각 표본에서 그대로 유지한다.
 - 빈도 재가중은 저장된 risk atom의 initiating frequency만 바꾸며 물리 계산을 다시 하지 않는다.
 - worker-01의 이번 진단 known IR은 모든 시나리오에서 `[0.0, 0.0]`이었다. 이는 해당 합성 수용점 배치에서 산출된 값이며 안전 또는 시설 위험 0을 뜻하지 않는다.
 - 전체 시설 IR/F-N은 `null`로 유지한다. 20개 operator-limited case, 합성 종료시계, 실제 설비 형상 및 독립 물리검증이 남아 있기 때문이다.
+
+이번 혼합 분포 표본은 1,000회씩 두 시나리오를 계산했으며 `fresh_physics_executed=false`, `frequency_distribution_credible_interval=true`, `facility_credible_interval=false`를 기록했다. 이는 빈도 모델만 흔든 known-atom 진단 구간이고, 피해 물리·기상·장벽·점화와 미계산 범위는 그대로 고정한다.
 
 이 혼합 catalogue를 위해 `LiteratureFrequencyScenario`에 `fixed` 선택지를 추가했다. `fixed`는 빈도를 0으로 만드는 값이 아니라 사건의 선언된 중앙 빈도를 보존하는 명시적 선택이다. 경계가 없는 사건에 `p05`/`p95`를 요청하면 기존과 같이 오류로 중단한다.
 

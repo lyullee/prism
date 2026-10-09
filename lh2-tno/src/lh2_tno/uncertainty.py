@@ -53,6 +53,7 @@ class LiteratureFrequencyDistributionScenario(Contract):
     id: Name
     provenance: Name
     correlation_assumption: Literal["within_asset_shared_normal", "independent_event_normal"]
+    fixed_event_policy: Literal["reject", "hold_published"] = "reject"
 
 
 def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
@@ -191,10 +192,13 @@ def sample_literature_frequency_distributions(
     draws: int = 1000,
     seed: int = 20261009,
 ) -> dict:
-    """Sample only the published initiating-frequency distributions.
+    """Sample published distributions and optionally retain fixed catalogue rates.
 
     Physical harm, weather, population, barrier and ignition terms are held
-    fixed from ``result['risk_atoms']``.  This is a frequency-model credible
+    fixed from ``result['risk_atoms']``.  Events without a published
+    lognormal distribution are rejected by default; ``hold_published`` is an
+    explicit option to keep their declared catalogue frequency. This is a
+    frequency-model credible
     interval for the known contribution; it is not a physical or statistical
     confidence interval.  Incomplete facility scopes remain incomplete.
     """
@@ -210,9 +214,18 @@ def sample_literature_frequency_distributions(
     ids = set(result['known_contribution_annual_ir_low_high'])
     event_ids = set(events)
     assets = {e.asset_id for e in events.values()}
-    for event in events.values():
-        if event.frequency_distribution != 'published_lognormal':
-            raise ValueError(f'event {event.id} has no published lognormal distribution')
+    fixed_events = {
+        event.id: event
+        for event in events.values()
+        if event.frequency_distribution != 'published_lognormal'
+    }
+    for scenario in scenarios:
+        if fixed_events and scenario.fixed_event_policy == 'reject':
+            first = next(iter(fixed_events))
+            raise ValueError(
+                f'event {first} has no published lognormal distribution; '
+                'set fixed_event_policy=hold_published to retain its declared catalogue rate'
+            )
     for atom in atoms:
         event = events.get(atom['event_id'])
         if event is None or atom['asset_id'] != event.asset_id:
@@ -237,12 +250,17 @@ def sample_literature_frequency_distributions(
                 frequencies = {
                     event.id: event.exposure_multiplier * math.exp(event.log_rate_mu + event.log_rate_sigma * z_by_asset[event.asset_id])
                     for event in events.values()
+                    if event.frequency_distribution == 'published_lognormal'
                 }
             else:
                 frequencies = {
                     event.id: event.exposure_multiplier * math.exp(event.log_rate_mu + event.log_rate_sigma * rng.gauss(0.0, 1.0))
                     for event in events.values()
+                    if event.frequency_distribution == 'published_lognormal'
                 }
+            if scenario.fixed_event_policy == 'hold_published':
+                frequencies.update({event_id: event.annual_frequency_per_year
+                                     for event_id, event in fixed_events.items()})
             for event_id, value in frequencies.items():
                 event_samples[event_id].append(value)
             receptor_totals = {rid: [0.0, 0.0] for rid in sorted(ids)}
@@ -310,6 +328,6 @@ def sample_literature_frequency_distributions(
         'frequency_distribution_credible_interval': True,
         'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,
         'conditional_diagnostic_facility_risk': 'sampled known-atom facility expected-death totals are diagnostic frequency-model outputs; they are not a qualified facility confidence interval when scope blockers remain',
-        'semantics': 'published lognormal initiating-frequency distributions with explicit shared-asset or independent-event normal draws; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete',
+        'semantics': 'published lognormal initiating-frequency distributions with explicit shared-asset or independent-event normal draws; optional fixed events retain their declared catalogue frequency; physical harm/weather/barrier/population/ignition remain fixed and incomplete scope remains incomplete',
         'physical_validation_claim': False,
     }

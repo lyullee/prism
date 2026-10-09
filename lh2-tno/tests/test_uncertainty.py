@@ -150,6 +150,32 @@ def test_published_frequency_distribution_sampling_returns_known_interval_withou
     assert stability['top_rank_probability_low_high'] == pytest.approx([1.0, 1.0])
 
 
+def test_distribution_sampling_can_hold_mixed_catalogue_events_fixed():
+    events = _valve_events()
+    fixed = events[0].model_copy(update={
+        'frequency_distribution': 'none',
+        'log_rate_mu': None,
+        'log_rate_sigma': None,
+    })
+    result = sample_literature_frequency_distributions(
+        _result((fixed,)),
+        (LiteratureFrequencyDistributionScenario(
+            id='mixed-fixed',
+            provenance='published distribution plus fixed catalogue rate',
+            correlation_assumption='within_asset_shared_normal',
+            fixed_event_policy='hold_published',
+        ),),
+        draws=100,
+        seed=7,
+    )
+    row = result['scenarios'][0]
+    assert row['scenario']['fixed_event_policy'] == 'hold_published'
+    assert row['event_frequency_quantiles_per_year'][fixed.id] == pytest.approx(
+        [fixed.annual_frequency_per_year] * 3
+    )
+    assert result['frequency_distribution_credible_interval'] is True
+
+
 def test_distribution_sampling_rejects_events_without_published_mu_sigma():
     events = generate_events(
         Facility.model_validate_json(open('examples/consequence_facility.json', encoding='utf-8').read()),
