@@ -2932,5 +2932,11 @@
   "near_receptor_facility_chain_diagnostic_case_elapsed_ms": 2694.034499931149,
   "near_receptor_facility_chain_diagnostic_mass_residual_kg": 7.922487752849133e-19,
   "near_receptor_facility_chain_diagnostic_provider_packet_promoted": false,
-  "near_receptor_facility_chain_diagnostic_physical_validation_claim": false
+  "near_receptor_facility_chain_diagnostic_physical_validation_claim": false,
+  "realtime_cache_benchmark_record": "results/20261024/native_lh2_realtime_cache_benchmark_v1.json",
+  "realtime_cache_benchmark_summary": "examples/native_lh2_realtime_cache_benchmark_v1.json",
+  "realtime_cache_benchmark_script": "scripts/benchmark_realtime_cache.py",
+  "realtime_cache_benchmark_status": "EXACT_CACHE_1HZ_DIAGNOSTIC; 20/20 cache hits, median 31.47 ms, p95 33.23 ms; fresh physics 2,685.50 ms and not a 1 Hz claim",
+  "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
+  "realtime_cache_benchmark_cache_meets_one_hz_all_samples": true
 }

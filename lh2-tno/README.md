@@ -848,6 +848,8 @@ print(result["realtime"]["deadline_status"])  # MET 또는 MISSED
 이전 짧은 로컬 사례는 신규 기체 약 3초, 풀 약 7–10초, 동일 요청 캐시 약 20–40 ms였습니다.
 모든 시설/PC의 성능을 보장하지 않으며 **캐시 응답속도가 신규 물리 계산 1 Hz를 뜻하지 않습니다.**
 
+현재 native LH2 packet을 사용한 재현 benchmark [`native_lh2_realtime_cache_benchmark_v1.json`](examples/native_lh2_realtime_cache_benchmark_v1.json)은 fresh physics 약 `2685.50 ms`, exact-cache 20/20 hit, cache median `31.47 ms`, p95 `33.23 ms`를 기록했습니다. 따라서 이 실행에서는 동일한 정규화 요청의 cache 조회가 1 Hz deadline을 만족했지만, 상태가 바뀌어 fresh physics가 필요한 갱신은 1 Hz로 주장하지 않습니다. 재현 명령은 `scripts/benchmark_realtime_cache.py`이며, 결과에는 `realtime_fresh_physics_claim=false`가 고정됩니다.
+
 여러 설비를 같은 시각에 확인해야 할 때는 `FacilityRealtimeConsequenceMonitor`를
 사용합니다. 설비마다 `RealtimeConsequenceMonitor`, 센서 정규화기, 방출 resolver와
 사고 템플릿을 하나씩 명시합니다. 입력은 `component_id`별 frame 묶음이어야 하며,

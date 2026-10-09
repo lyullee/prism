@@ -85,6 +85,8 @@ $lh2dt = "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스
 
 한 실행의 시간은 약 260.4초였다. case 시간의 p95는 약 50.7초, p99는 약 61.7초다. 이 값은 1 Hz 또는 실시간 서비스 수준을 보증하지 않으며, 동일 PC에서 새 물리 계산을 수행한 한 번의 campaign 분포다.
 
+실시간 monitor의 동일 요청 cache 경로는 별도 benchmark로 측정했다. [`native_lh2_realtime_cache_benchmark_v1.json`](../examples/native_lh2_realtime_cache_benchmark_v1.json)은 native LH2 `AREA_0.01%` request에 대해 fresh physics 약 `2685.50 ms`, exact-cache 20/20 hit, cache median `31.47 ms`, p95 `33.23 ms`를 기록했다. 이 값은 cache lookup이 1 Hz deadline을 만족한 진단 증거이며, fresh physics 1 Hz 처리나 운영 SLA를 의미하지 않는다. 상태·방출 경계가 바뀌면 monitor는 새 계산을 수행하고 deadline 결과를 별도로 기록한다.
+
 `total_facility_annual_ir_low_high`와 `total_facility_expected_death_fn_low_high`는 `null`이다. 실제로 계산된 risk atom이 없다는 뜻이 아니라, 일부 사건과 provider 증거가 합성·부분 상태이므로 시설 전체 위험도로 승격하지 않았다는 뜻이다.
 
 ## 범위와 빈도 판정
