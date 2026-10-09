@@ -17,6 +17,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     result = _load("campaign_result.json")
     scope = _load("scope_matrix.json")
     assessment = _load("facility_assessment.json")
+    evidence_request = _load("facility_evidence_request.json")
     rebound = _load("vertical_handoff_rebound_result.json")
     audit = _load("ijhe_completion_audit.json")
 
@@ -33,6 +34,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["complete_facility_qra_claim"] is False
     assert verification["qualified_provider_packet_case_count"] == 0
     assert verification["physical_validation_claim"] is False
+    assert verification["facility_evidence_request_status"] == "OPEN_EVIDENCE_REQUEST"
+    assert verification["facility_evidence_request_family_count"] == 12
+    assert verification["facility_evidence_request_case_count"] == 34
+    assert verification["facility_evidence_request_promotion_allowed"] is False
 
     assert result["event_count"] == 29
     assert result["case_count"] == 34
@@ -49,6 +54,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert assessment["conditional_diagnostic_facility_risk_available"] is True
     assert assessment["facility_total_risk_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
+    assert evidence_request["status"] == "OPEN_EVIDENCE_REQUEST"
+    assert evidence_request["case_request_count"] == 34
+    assert len(evidence_request["family_requests"]) == 12
+    assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
     assert len(audit["checks"]) == 17
     assert sum(check["status"] == "PASS" for check in audit["checks"]) == 13

@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
+from lh2_tno.facility_evidence_request import build_facility_evidence_request  # noqa: E402
 from lh2_tno.facility_ledger import merge_facility_campaign_results  # noqa: E402
 from lh2_tno.scope_matrix_merge import merge_scope_matrices  # noqa: E402
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
@@ -167,6 +168,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         required_accident_families=MAJOR_ACCIDENT_FAMILIES,
         frequency_scenarios=scenarios,
     )
+    evidence_request = build_facility_evidence_request(assessment, merged_scope)
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -202,6 +204,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         ],
         "physical_validation_claim": assessment["physical_validation_claim"],
         "frequency_scenario_count": len(assessment["frequency_uncertainty"]["scenarios"]),
+        "facility_evidence_request_status": evidence_request["status"],
+        "facility_evidence_request_family_count": len(evidence_request["family_requests"]),
+        "facility_evidence_request_case_count": evidence_request["case_request_count"],
+        "facility_evidence_request_promotion_allowed": (
+            assessment["complete_facility_qra_claim"] is True
+        ),
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -224,6 +232,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         },
     )
     _save(output / "facility_assessment.json", assessment)
+    _save(output / "facility_evidence_request.json", evidence_request)
     _save(output / "verification.json", verification)
     return verification
 

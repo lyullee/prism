@@ -24,6 +24,10 @@
   "qualified_provider_packet_case_count": 0,
   "physical_validation_claim": false,
   "frequency_scenario_count": 3,
+  "facility_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
+  "facility_evidence_request_family_count": 12,
+  "facility_evidence_request_case_count": 34,
+  "facility_evidence_request_promotion_allowed": false,
   "limitations": [
     "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",

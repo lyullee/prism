@@ -27,6 +27,7 @@ python scripts/run_native_full_scope_union_assessment.py `
 | vertical operator-limited case | 10개 |
 | qualified provider packet | 0개 |
 | 시설 전체 IR/F-N | 보류 |
+| 자동 증거 요청 | 12개 사고군·34개 case |
 
 수직 결과의 event ID, provider packet identity, 설비 ID와 수용점 ID를 `generic-lh2-near-receptor-diagnostic/vertical-handoff/...` namespace로 함께 바꿨다. 사고범위 표에서도 `vertical_handoff`가 `NO_EVENT_GENERATED`에서 `PARTIAL`로 바뀌고, 조건부 chain은 10개 case 모두 숫자를 갖는다. 그러나 source history가 synthetic/operator-limited이고 전체 시설의 다른 사고군도 partial이므로 시설 전체 IR/F-N과 QRA gate는 계속 닫혀 있다.
 
@@ -38,5 +39,6 @@ python scripts/run_native_full_scope_union_assessment.py `
 - `vertical_handoff_rebound_result.json`: namespace rebind provenance가 포함된 5개 vertical 사건 원장
 - `scope_matrix.json`: 12개 주요 사고군의 병합 상태
 - `facility_assessment.json`: 조건부 IR/F-N과 시설 QRA gate
+- `facility_evidence_request.json`: 각 사고군·case의 provider packet·물리검증·종료/재고 증거 요구
 - `verification.json`: 병합 수·상태·제한 자동 검사
 - `ijhe_completion_audit.json`: 17개 검사 중 13개 PASS·4개 BLOCKED
