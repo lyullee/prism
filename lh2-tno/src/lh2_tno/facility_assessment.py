@@ -16,6 +16,7 @@ from .facility_ledger import (
     _fn_diagnostics,
     _population_accounting,
     _scenario_branch_accounting,
+    _stage_timing,
     merge_facility_campaign_results,
 )
 from .release_ledger import build_release_termination_inventory_ledger
@@ -184,6 +185,17 @@ def build_facility_assessment(
             case_rows,
             withheld_cases=withheld_rows,
         )
+    timing = ledger.get("timing")
+    timing = dict(timing) if isinstance(timing, Mapping) else {}
+    if not isinstance(timing.get("stage_elapsed_ms"), Mapping):
+        cases = ledger.get("cases", ())
+        case_rows = (
+            cases
+            if isinstance(cases, Sequence) and not isinstance(cases, (str, bytes))
+            else ()
+        )
+        timing["stage_elapsed_ms"] = _stage_timing(case_rows)
+        ledger["timing"] = timing
     assessment = {
         "schema_version": "prism.facility_assessment.v1",
         "status": ledger["status"],
@@ -220,6 +232,7 @@ def build_facility_assessment(
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],
+        "timing": timing,
         "facility_risk_ledger": ledger,
         "frequency_uncertainty": uncertainty,
         "fresh_physics_executed": False,
@@ -239,6 +252,10 @@ def build_facility_assessment(
                 "case-level provider duration, termination, isolation, inventory and mass "
                 "closure are carried through the merged facility ledger without filling "
                 "missing branch values"
+            ),
+            "timing": (
+                "facility timing preserves observed whole-case and stage elapsed values; "
+                "it does not claim repeated-run throughput or fresh-physics 1 Hz service"
             ),
         },
     }

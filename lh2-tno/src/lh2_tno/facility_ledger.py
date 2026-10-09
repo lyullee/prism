@@ -47,6 +47,42 @@ def _linear_percentile(values: Sequence[float], probability: float) -> float | N
     return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
 
 
+def _stage_timing(cases: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Summarize provider/consequence stage timing without claiming throughput.
+
+    A campaign may expose ``stage_elapsed_ms`` for each executed case.  Keep
+    each stage's observed samples separate from whole-case timing so a facility
+    reviewer can see where fresh physics time was spent.  Missing stage rows
+    remain missing; no interpolation or 1 Hz extrapolation is performed.
+    """
+    values: dict[str, list[float]] = defaultdict(list)
+    for case in cases:
+        stage_rows = case.get("stage_elapsed_ms")
+        if not isinstance(stage_rows, Mapping):
+            continue
+        for stage, elapsed in stage_rows.items():
+            if (
+                isinstance(stage, str)
+                and stage.strip()
+                and isinstance(elapsed, (int, float))
+                and not isinstance(elapsed, bool)
+                and math.isfinite(float(elapsed))
+                and elapsed >= 0
+            ):
+                values[stage].append(float(elapsed))
+    return {
+        stage: {
+            "sample_count": len(samples),
+            "sum_ms": sum(samples),
+            "median_ms": median(samples),
+            "max_ms": max(samples),
+            "p95_ms": _linear_percentile(samples, 0.95),
+            "p99_ms": _linear_percentile(samples, 0.99),
+        }
+        for stage, samples in sorted(values.items())
+    }
+
+
 def _unwrap_campaign(row: Mapping[str, Any], index: int) -> tuple[str, Mapping[str, Any]]:
     """Accept a result directly or ``{"campaign_id", "result"}`` wrapper."""
     result = row.get("result")
@@ -1088,6 +1124,7 @@ def merge_facility_campaign_results(
         "campaign_elapsed_ms_max": max(timing_values) if timing_values else None,
         "campaign_elapsed_ms_p95": _linear_percentile(timing_values, 0.95),
         "campaign_elapsed_ms_p99": _linear_percentile(timing_values, 0.99),
+        "stage_elapsed_ms": _stage_timing(merged_cases),
         "distribution": "across separately executed equipment campaigns; not repeated-run latency",
     }
     known_ir = {receptor_id: values[:] for receptor_id, values in endpoint_ir.items()}
@@ -1109,6 +1146,7 @@ def merge_facility_campaign_results(
         "release_termination_inventory_summary": release_termination_inventory_ledger[
             "summary"
         ],
+        "stage_timing": timing["stage_elapsed_ms"],
         "case_status_counts": dict(sorted(case_status_counts.items())),
         "uncomputed_status_counts": dict(sorted(uncomputed_status_counts.items())),
         "operator_limited_case_count": operator_limited_case_count,
@@ -1208,6 +1246,10 @@ def merge_facility_campaign_results(
                 "facility IR/F-N is calculated from the atoms that reached the risk ledger, "
                 "but remains diagnostic-only whenever declared scope, physical validation, "
                 "or release-horizon blockers are present"
+            ),
+            "timing": (
+                "whole-case and per-stage elapsed milliseconds are observed execution evidence; "
+                "they are not repeated-run latency, throughput, or a fresh-physics 1 Hz claim"
             ),
             "component_coverage": (
                 "each case is assigned to its provider component when available, then to its "

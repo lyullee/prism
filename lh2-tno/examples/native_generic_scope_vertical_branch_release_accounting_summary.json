@@ -360,5 +360,90 @@
   },
   "frequency_reallocation_performed": false,
   "physical_validation_claim": false,
-  "interpretation": "This summary proves that the merged diagnostic atoms retain weather, release/termination/isolation/inventory, ignition and population accounting. It is not a qualified facility QRA or a field-frequency estimate."
+  "interpretation": "This summary proves that the merged diagnostic atoms retain weather, release/termination/isolation/inventory, ignition and population accounting. It is not a qualified facility QRA or a field-frequency estimate.",
+  "timing": {
+    "campaign_count": 2,
+    "fresh_physics_cases": 34,
+    "case_min_ms": 1379.0437000570819,
+    "case_median_ms": 3226.7782000708394,
+    "case_max_ms": 63828.999700024724,
+    "case_p95_ms": 38148.95522997243,
+    "case_p99_ms": 60743.73489101768,
+    "campaign_elapsed_ms": 281645.2619000338,
+    "campaign_elapsed_ms_sum": 281645.2619000338,
+    "campaign_elapsed_ms_min": 21212.362500024028,
+    "campaign_elapsed_ms_median": 140822.6309500169,
+    "campaign_elapsed_ms_max": 260432.89940000977,
+    "campaign_elapsed_ms_p95": 248471.8725550105,
+    "campaign_elapsed_ms_p99": 258040.69403100992,
+    "distribution": "across separately executed equipment campaigns; not repeated-run latency",
+    "stage_elapsed_ms": {
+      "cloud_observation": {
+        "sample_count": 32,
+        "sum_ms": 39729.751600301825,
+        "median_ms": 195.53319999249652,
+        "max_ms": 24913.360100006685,
+        "p95_ms": 4672.160195023753,
+        "p99_ms": 18791.60354200171
+      },
+      "endpoint_a": {
+        "sample_count": 2,
+        "sum_ms": 6567.82810005825,
+        "median_ms": 3283.914050029125,
+        "max_ms": 3393.945200019516,
+        "p95_ms": 3382.942085020477,
+        "p99_ms": 3391.7445770197082
+      },
+      "endpoint_aggregation": {
+        "sample_count": 2,
+        "sum_ms": 13235.336199984886,
+        "median_ms": 6617.668099992443,
+        "max_ms": 6779.345400049351,
+        "p95_ms": 6763.17767004366,
+        "p99_ms": 6776.111854048213
+      },
+      "endpoint_b": {
+        "sample_count": 2,
+        "sum_ms": 6665.791300009005,
+        "median_ms": 3332.8956500045024,
+        "max_ms": 3384.5430000219494,
+        "p95_ms": 3379.3782650202047,
+        "p99_ms": 3383.5100530216005
+      },
+      "fire_explosion_damage_risk": {
+        "sample_count": 32,
+        "sum_ms": 2834.4950993778184,
+        "median_ms": 69.95219993405044,
+        "max_ms": 267.38609990570694,
+        "p95_ms": 136.4930350042414,
+        "p99_ms": 226.98048293008486
+      },
+      "near_field_and_dispersion": {
+        "sample_count": 32,
+        "sum_ms": 190127.8248996241,
+        "median_ms": 1712.518049927894,
+        "max_ms": 48599.86850002315,
+        "p95_ms": 29360.676819970824,
+        "p99_ms": 45139.76078200854
+      },
+      "pool": {
+        "sample_count": 32,
+        "sum_ms": 3723.7331001088023,
+        "median_ms": 125.73854997754097,
+        "max_ms": 384.56560007762164,
+        "p95_ms": 362.81106500537135,
+        "p99_ms": 378.7232470524032
+      },
+      "source": {
+        "sample_count": 32,
+        "sum_ms": 22899.146999581717,
+        "median_ms": 712.7924499800429,
+        "max_ms": 769.2459999816492,
+        "p95_ms": 744.8616249545012,
+        "p99_ms": 765.2670879627112
+      }
+    }
+  },
+  "stage_timing_available": true,
+  "timing_interpretation": "Observed case/stage elapsed milliseconds only; no repeated-run throughput or fresh-physics 1 Hz claim."
 }

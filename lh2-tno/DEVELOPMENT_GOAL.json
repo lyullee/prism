@@ -2108,7 +2108,7 @@
   "facility_fn_empty_curve_diagnostics_implemented": true,
   "facility_fn_empty_curve_diagnostics_output": "conditional_diagnostic_facility_expected_death_fn_diagnostics",
   "facility_fn_empty_curve_diagnostics_statuses": ["CURVE_AVAILABLE", "SUB_ONE_EXPECTED_DEATH_LEVEL_ONLY", "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS", "NO_RISK_ATOMS"],
-  "full_portable_test_count_latest": 547,
+  "full_portable_test_count_latest": 548,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": ["annual_condition_weather", "release_branch_termination", "ignition_branch"],
@@ -2123,5 +2123,8 @@
   "facility_branch_release_accounting_summary": "examples/native_generic_scope_vertical_branch_release_accounting_summary.json",
   "facility_branch_release_accounting_summary_status": "DIAGNOSTIC_ONLY; latest merged 29 events, 34 cases, 136 risk atoms; facility total withheld",
   "frequency_branch_accounting_summary": "examples/native_generic_scope_vertical_frequency_branch_accounting_summary.json",
-  "frequency_branch_accounting_summary_status": "DIAGNOSTIC_ONLY; 5 literature scenarios preserve the same 12 condition×release×ignition combinations; facility credible interval false"
+  "frequency_branch_accounting_summary_status": "DIAGNOSTIC_ONLY; 5 literature scenarios preserve the same 12 condition×release×ignition combinations; facility credible interval false",
+  "facility_stage_timing_accounting_implemented": true,
+  "facility_stage_timing_accounting_output": "facility ledger timing.stage_elapsed_ms and completion-audit timing evidence",
+  "facility_stage_timing_accounting_policy": "Observed per-stage elapsed milliseconds are summarized with sample count, sum, median, max, p95 and p99; no throughput or fresh-physics 1 Hz claim is inferred."
 }

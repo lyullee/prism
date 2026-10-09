@@ -494,6 +494,13 @@ def _facility_assessment(**overrides):
             "schema_version": "prism.release_termination_inventory_ledger.v1",
             "summary": {"case_count": 24, "complete_row_count": 24},
         },
+        "timing": {
+            "fresh_physics_cases": 24,
+            "case_p95_ms": 120.0,
+            "stage_elapsed_ms": {
+                "provider_release": {"sample_count": 24, "p95_ms": 35.0}
+            },
+        },
         "conditional_diagnostic_facility_coverage": {
             "event_count": 24,
             "case_count": 24,
@@ -905,6 +912,9 @@ def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_t
     assert check["evidence"]["release_termination_inventory_ledger"][
         "schema_version"
     ] == "prism.release_termination_inventory_ledger.v1"
+    assert check["evidence"]["timing"]["stage_elapsed_ms"]["provider_release"][
+        "p95_ms"
+    ] == 35.0
     assert report["complete_facility_qra_claim"] is False
     assert len(report["blocking_reasons"]) == 6
 

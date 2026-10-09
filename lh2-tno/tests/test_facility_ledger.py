@@ -231,6 +231,8 @@ def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():
     merged = merge_facility_campaign_results(
         [result], expected_component_ids=("tank-legacy-fn-diagnostics",)
     )
+    merged["cases"][0]["stage_elapsed_ms"] = {"source": 4.0}
+    merged["timing"].pop("stage_elapsed_ms", None)
     merged.pop("conditional_diagnostic_facility_expected_death_fn_diagnostics")
     assessment = build_facility_assessment([merged])
 
@@ -246,6 +248,7 @@ def test_facility_assessment_derives_fn_diagnostics_for_legacy_saved_ledger():
         "prism.release_termination_inventory_ledger.v1"
     )
     assert assessment["release_termination_inventory_ledger"]["summary"]["case_count"] == 1
+    assert assessment["timing"]["stage_elapsed_ms"]["source"]["p95_ms"] == pytest.approx(4.0)
 
 
 def test_facility_ledger_exposes_component_case_accounting_and_gate_categories():
@@ -490,6 +493,28 @@ def test_facility_ledger_carries_release_duration_isolation_and_inventory_rows()
     assert row["isolation_status"] == "provider_declared_isolation_success"
     assert row["provider"]["duration_s"] == [0.25]
     assert row["provider"]["residual_mass_kg"] == [9.8]
+
+
+def test_facility_ledger_preserves_stage_timing_without_one_hz_claim():
+    result = _result(
+        event_id="event-stage-timing", asset_id="asset-stage-timing",
+        component_id="tank-stage-timing", frequency=1e-3,
+    )
+    result["cases"][0]["stage_elapsed_ms"] = {
+        "provider_release": 12.0,
+        "slabx_consequence": 8.0,
+        "harm_aggregation": 2.0,
+    }
+    merged = merge_facility_campaign_results(
+        [result], expected_component_ids=("tank-stage-timing",)
+    )
+
+    stage = merged["timing"]["stage_elapsed_ms"]
+    assert stage["provider_release"]["sample_count"] == 1
+    assert stage["provider_release"]["p95_ms"] == pytest.approx(12.0)
+    assert stage["slabx_consequence"]["sum_ms"] == pytest.approx(8.0)
+    assert merged["semantics"]["timing"].endswith("1 Hz claim")
+    assert merged["conditional_diagnostic_facility_coverage"]["stage_timing"] == stage
 
 
 def test_facility_ledger_accepts_not_applicable_accident_family():

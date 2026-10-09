@@ -1050,6 +1050,7 @@ def build_ijhe_completion_audit(
                     "release_termination_inventory_ledger": assessment.get(
                         "release_termination_inventory_ledger"
                     ),
+                    "timing": assessment.get("timing"),
                     "coverage": coverage,
                     "facility_total_risk_available": assessment.get(
                         "facility_total_risk_available"
