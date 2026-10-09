@@ -66,6 +66,9 @@ def main() -> int:
         "packet_identity_consumed": report["packet_identity_consumed"],
         "packet_digest_checked_event_count": report["packet_digest_checked_event_count"],
         "packet_digest_match_event_count": report["packet_digest_match_event_count"],
+        "packet_value_checked_event_count": report["packet_value_checked_event_count"],
+        "packet_value_consumed_event_count": report["packet_value_consumed_event_count"],
+        "packet_subset_value_consumed": report["packet_subset_value_consumed"],
         "output": str(args.output),
     }, ensure_ascii=False))
     return 0 if report["status"].startswith("PARTIAL_") else 2

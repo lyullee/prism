@@ -51,18 +51,123 @@ def _same_float(left: float | None, right: float | None, *, tolerance: float = 1
 
 
 def _packet_digest_pairs(path: Path) -> set[tuple[str, str]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    rows = payload.get("releases") if isinstance(payload, Mapping) else None
-    packets = rows if isinstance(rows, list) else [payload]
+    packets = _packet_release_rows(path)
     pairs = set()
     for row in packets:
-        if not isinstance(row, Mapping):
-            continue
         source = row.get("provider_source_digest")
         result = row.get("provider_result_digest")
         if isinstance(source, str) and isinstance(result, str):
             pairs.add((source, result))
     return pairs
+
+
+def _packet_release_rows(path: Path) -> list[Mapping[str, Any]]:
+    """Read resolved-release rows without treating response metadata as a release."""
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, Mapping):
+        return []
+    rows = payload.get("releases")
+    packets = rows if isinstance(rows, list) else [payload]
+    return [row for row in packets if isinstance(row, Mapping)]
+
+
+def _same_numeric(left: Any, right: Any) -> bool:
+    if isinstance(left, bool) or isinstance(right, bool):
+        return False
+    if not isinstance(left, (int, float)) or not isinstance(right, (int, float)):
+        return False
+    return _same_float(float(left), float(right), tolerance=1.0e-8)
+
+
+def _same_value_sequence(left: Any, right: Any) -> bool:
+    if not isinstance(left, list) or not isinstance(right, list) or len(left) != len(right):
+        return False
+    for left_value, right_value in zip(left, right):
+        if isinstance(left_value, (int, float)) and isinstance(right_value, (int, float)):
+            if not _same_numeric(left_value, right_value):
+                return False
+        elif left_value != right_value:
+            return False
+    return True
+
+
+def _packet_value_mismatches(
+    packet_rows: list[Mapping[str, Any]],
+    case_rows: list[Mapping[str, Any]],
+) -> list[str]:
+    """Compare provider aggregate release values with every campaign case.
+
+    This is deliberately a consumption audit, not a qualification decision.
+    It checks the release aggregates that the facility ledger can carry
+    (duration, termination, available mass, cumulative mass and residual
+    released mass).  It does not claim that every provider time-step was
+    independently re-simulated by the consequence solver.
+    """
+    mismatches: list[str] = []
+    packet_by_result = {
+        row.get("provider_result_digest"): row
+        for row in packet_rows
+        if isinstance(row.get("provider_result_digest"), str)
+    }
+    if not packet_by_result:
+        return ["packet has no provider_result_digest rows"]
+    for case_index, case in enumerate(case_rows):
+        identity = case.get("provider_packet_identity")
+        if not isinstance(identity, Mapping):
+            mismatches.append(f"case[{case_index}] has no provider_packet_identity")
+            continue
+        results = identity.get("provider_result_digests")
+        sources = identity.get("provider_source_digests")
+        if not isinstance(results, list) or not isinstance(sources, list) or len(results) != len(sources):
+            mismatches.append(f"case[{case_index}] provider digest arrays are malformed")
+            continue
+        if len(results) != len(packet_rows):
+            mismatches.append(
+                f"case[{case_index}] packet endpoint count differs: identity={len(results)} packet={len(packet_rows)}"
+            )
+            continue
+        identity_fields = {
+            "duration_s": identity.get("duration_s"),
+            "available_mass_kg": identity.get("available_mass_kg"),
+            "cumulative_mass_out_kg": identity.get("cumulative_mass_out_kg"),
+            "termination_bases": identity.get("termination_bases"),
+            "termination_provenances": identity.get("termination_provenances"),
+        }
+        packet_fields = {key: [] for key in identity_fields}
+        for index, result_digest in enumerate(results):
+            packet = packet_by_result.get(result_digest)
+            if packet is None:
+                mismatches.append(
+                    f"case[{case_index}] missing packet result digest: {result_digest}"
+                )
+                continue
+            if packet.get("provider_source_digest") != sources[index]:
+                mismatches.append(f"case[{case_index}] source digest order differs at endpoint {index}")
+            packet_fields["duration_s"].append(packet.get("duration_s"))
+            packet_fields["available_mass_kg"].append(packet.get("available_mass_kg"))
+            packet_fields["cumulative_mass_out_kg"].append(packet.get("cumulative_mass_out_kg"))
+            packet_fields["termination_bases"].append(packet.get("termination_basis"))
+            packet_fields["termination_provenances"].append(packet.get("termination_provenance"))
+        for field, packet_values in packet_fields.items():
+            if not _same_value_sequence(identity_fields[field], packet_values):
+                mismatches.append(f"case[{case_index}] {field} differs from packet")
+        termination = case.get("termination")
+        termination = termination if isinstance(termination, Mapping) else {}
+        packet_durations = packet_fields["duration_s"]
+        case_time = termination.get("time_s")
+        finite_durations = [value for value in packet_durations if isinstance(value, (int, float))]
+        if finite_durations and not _same_numeric(case_time, max(finite_durations)):
+            mismatches.append(f"case[{case_index}] termination.time_s differs from provider duration")
+        mass_ledger = case.get("mass_ledger")
+        mass_ledger = mass_ledger if isinstance(mass_ledger, Mapping) else {}
+        cumulative = [
+            value for value in packet_fields["cumulative_mass_out_kg"]
+            if isinstance(value, (int, float))
+        ]
+        released = mass_ledger.get("released_kg")
+        if cumulative and not _same_numeric(released, sum(cumulative)):
+            mismatches.append(f"case[{case_index}] mass_ledger.released_kg differs from packet cumulative mass")
+    return mismatches
 
 
 def build_diagnostic_campaign_binding(
@@ -262,6 +367,42 @@ def build_diagnostic_campaign_binding(
         and identity_case_count == len(campaign_cases)
         and bool(campaign_cases)
     )
+    packet_value_mismatch_reasons: dict[str, list[str]] = {}
+    packet_value_consumed_event_ids: list[str] = []
+    for event_id in sorted(packet_ids & case_ids):
+        evidence = packet_by_event[event_id].get("evidence")
+        paths = evidence.get("resolved_packet_paths") if isinstance(evidence, Mapping) else None
+        packet_rows: list[Mapping[str, Any]] = []
+        if isinstance(paths, list):
+            for raw_path in paths:
+                if not isinstance(raw_path, str):
+                    continue
+                path = Path(raw_path)
+                if not path.is_absolute():
+                    path = packet_root_path / path
+                try:
+                    packet_rows.extend(_packet_release_rows(path))
+                except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError):
+                    packet_value_mismatch_reasons.setdefault(event_id, []).append(
+                        f"unable to read packet values: {raw_path}"
+                    )
+        mismatches = _packet_value_mismatches(packet_rows, case_by_event[event_id])
+        if mismatches:
+            packet_value_mismatch_reasons.setdefault(event_id, []).extend(mismatches)
+        elif packet_rows:
+            packet_value_consumed_event_ids.append(event_id)
+        else:
+            packet_value_mismatch_reasons.setdefault(event_id, []).append(
+                "no resolved packet rows were available"
+            )
+    packet_value_checked_event_ids = sorted(packet_ids & case_ids)
+    packet_value_consumed_event_ids = sorted(set(packet_value_consumed_event_ids))
+    packet_value_mismatch_event_ids = sorted(packet_value_mismatch_reasons)
+    packet_subset_value_consumed = (
+        bool(packet_ids)
+        and packet_value_checked_event_ids == sorted(packet_ids)
+        and packet_value_consumed_event_ids == sorted(packet_ids)
+    )
     packet_claims_preserved = (
         packet_evidence.get("qualified_provider_packet_count") == 0
         and packet_evidence.get("frequency_bound") is False
@@ -312,6 +453,18 @@ def build_diagnostic_campaign_binding(
         "packet_digest_unreadable_event_ids": sorted(set(packet_digest_unreadable_event_ids)),
         "packet_subset_identity_consumed": packet_subset_identity_consumed,
         "packet_identity_consumed": packet_identity_consumed,
+        "packet_value_checked_event_count": len(packet_value_checked_event_ids),
+        "packet_value_consumed_event_count": len(packet_value_consumed_event_ids),
+        "packet_value_consumed_event_ids": packet_value_consumed_event_ids,
+        "packet_value_mismatch_event_ids": packet_value_mismatch_event_ids,
+        "packet_value_mismatch_reasons": packet_value_mismatch_reasons,
+        "packet_subset_value_consumed": packet_subset_value_consumed,
+        "packet_time_step_history_replayed": False,
+        "packet_value_consumption_policy": (
+            "Duration, termination basis/provenance, available mass, cumulative release mass and case "
+            "released mass are compared to the saved resolved packet; provider time-step history is not "
+            "claimed to be independently replayed."
+        ),
         "packet_identity_consumption_reason": (
             "campaign result provider source/result digests match the packet-evidence files for every "
             "event; packet identity is recorded but qualification and facility claims remain separate"
@@ -332,8 +485,8 @@ def build_diagnostic_campaign_binding(
         "packet_claims_preserved": packet_claims_preserved,
         "interpretation": (
             "Provider worklist event IDs structurally reach facility events, cases, and risk atoms. "
-            "The campaign still uses its declared literature frequency catalog and does not prove that "
-            "the saved external packet time history was consumed; this diagnostic binding cannot qualify "
-            "the packets or close the facility-QRA gate."
+            "For the matched packet subset, release aggregate values are compared with the facility case "
+            "termination and mass ledger. The campaign still uses its declared literature frequency catalog, "
+            "does not replay every provider time step, and cannot qualify packets or close the facility-QRA gate."
         ),
     }

@@ -118,3 +118,77 @@ def test_packet_identity_consumption_is_withheld_when_campaign_has_unbound_event
     assert report["campaign_scope_packet_coverage_complete"] is False
     assert report["unbound_campaign_event_ids"] == ["unbound-event"]
     assert "full campaign packet consumption is withheld" in report["packet_identity_consumption_reason"]
+
+
+def test_packet_release_aggregates_are_checked_against_facility_case_ledger(tmp_path):
+    source_digest = "a" * 64
+    result_digest = "b" * 64
+    packet_path = tmp_path / "resolved_release.json"
+    packet_path.write_text(
+        "{"
+        '"provider_export_schema":"prism.resolved_release.v1",'
+        '"event_id":"scope/tank/AREA_1%",'
+        '"component_id":"tank-01",'
+        '"provider_source_digest":"' + source_digest + '",'
+        '"provider_result_digest":"' + result_digest + '",'
+        '"duration_s":2.0,'
+        '"available_mass_kg":5.0,'
+        '"cumulative_mass_out_kg":1.25,'
+        '"termination_basis":"reviewed_isolation_success",'
+        '"termination_provenance":"reviewed valve closure"'
+        "}",
+        encoding="utf-8",
+    )
+    packet_evidence = _packet_evidence()
+    packet_evidence["rows"][0]["evidence"]["resolved_packet_paths"] = [
+        str(packet_path)
+    ]
+    campaign = _campaign_result()
+    campaign["cases"][0].update(
+        provider_packet_identity={
+            "provider_source_digests": [source_digest],
+            "provider_result_digests": [result_digest],
+            "duration_s": [2.0],
+            "available_mass_kg": [5.0],
+            "cumulative_mass_out_kg": [1.25],
+            "termination_bases": ["reviewed_isolation_success"],
+            "termination_provenances": ["reviewed valve closure"],
+        },
+        termination={
+            "basis": "reviewed_isolation_success",
+            "time_s": 2.0,
+        },
+        mass_ledger={"released_kg": 1.25},
+    )
+    report = build_diagnostic_campaign_binding(
+        packet_evidence,
+        campaign,
+        {
+            "work_items": [{
+                "event_id": "scope/tank/AREA_1%",
+                "component_id": "tank-01",
+                "required_opening_diameter_m": 0.1,
+            }],
+        },
+        tmp_path,
+    )
+    assert report["packet_subset_value_consumed"] is True
+    assert report["packet_value_checked_event_count"] == 1
+    assert report["packet_value_consumed_event_count"] == 1
+    assert report["packet_value_mismatch_event_ids"] == []
+
+    campaign["cases"][0]["mass_ledger"]["released_kg"] = 1.0
+    mismatched = build_diagnostic_campaign_binding(
+        packet_evidence,
+        campaign,
+        {
+            "work_items": [{
+                "event_id": "scope/tank/AREA_1%",
+                "component_id": "tank-01",
+                "required_opening_diameter_m": 0.1,
+            }],
+        },
+        tmp_path,
+    )
+    assert mismatched["packet_subset_value_consumed"] is False
+    assert mismatched["packet_value_mismatch_event_ids"] == ["scope/tank/AREA_1%"]
