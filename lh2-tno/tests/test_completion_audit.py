@@ -1041,6 +1041,66 @@ def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_prom
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_consumes_combined_chain_closure_without_qra_promotion():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        combined_chain_closure={
+            "schema_version": "prism.facility_combined_chain_closure_audit.v1",
+            "status": "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED",
+            "declared_event_count": 29,
+            "packet_subset_closed_event_count": 24,
+            "vertical_handoff_closed_event_count": 5,
+            "combined_diagnostic_closed_event_count": 29,
+            "event_count_matches_declared_scope": True,
+            "mismatch_event_ids": [],
+            "facility_ir_aggregate_closed": True,
+            "facility_fn_aggregate_closed": True,
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_total_risk_available": False,
+            "complete_facility_qra_claim": False,
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_combined_chain_closure"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["combined_diagnostic_closed_event_count"] == 29
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_keeps_malformed_combined_chain_diagnostic_only():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        combined_chain_closure={
+            "schema_version": "prism.facility_combined_chain_closure_audit.v1",
+            "status": "BLOCKED_COMBINED_CHAIN_CLOSURE",
+            "declared_event_count": 29,
+            "combined_diagnostic_closed_event_count": 28,
+            "mismatch_event_ids": ["event-29"],
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_combined_chain_closure"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_marks_vertical_handoff_as_merged_when_scope_row_exists():
     report = build_ijhe_completion_audit(
         _status(False),

@@ -63,6 +63,11 @@ def main() -> int:
         type=Path,
         help="optional exact facility-case coverage audit against qualified provider packets",
     )
+    parser.add_argument(
+        "--combined-chain-closure",
+        type=Path,
+        help="optional combined packet/vertical diagnostic chain-closure audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -193,6 +198,13 @@ def main() -> int:
         )
         if facility_case_packet_coverage is not None:
             facility_case_packet_coverage["_record_path"] = str(args.facility_case_packet_coverage)
+        combined_chain_closure = (
+            _object(args.combined_chain_closure)
+            if args.combined_chain_closure
+            else None
+        )
+        if combined_chain_closure is not None:
+            combined_chain_closure["_record_path"] = str(args.combined_chain_closure)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -217,6 +229,7 @@ def main() -> int:
             scope_ledger_consistency,
             native_binding_reconciliation,
             facility_case_packet_coverage,
+            combined_chain_closure,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

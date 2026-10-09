@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v12.json"
+AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v13.json"
 ASSESSMENT_PATH = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
 
 
@@ -32,7 +32,7 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
     assessment = _json(ASSESSMENT_PATH)
 
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 25
+    assert len(audit["checks"]) == 31
     assert len(audit["blocking_reasons"]) == 4
     case_check = next(
         check for check in audit["checks"]

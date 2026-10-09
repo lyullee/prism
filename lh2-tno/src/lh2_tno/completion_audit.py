@@ -73,6 +73,7 @@ def build_ijhe_completion_audit(
     scope_ledger_consistency: Mapping[str, Any] | None = None,
     native_binding_reconciliation: Mapping[str, Any] | None = None,
     facility_case_packet_coverage: Mapping[str, Any] | None = None,
+    combined_chain_closure: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1183,6 +1184,76 @@ def build_ijhe_completion_audit(
                     "physical_validation_claim": vertical.get("physical_validation_claim"),
                 },
                 "interpretation": vertical_interpretation,
+            }
+        )
+    if combined_chain_closure is not None:
+        combined = combined_chain_closure
+        mismatch_ids = combined.get("mismatch_event_ids")
+        combined_valid = (
+            combined.get("schema_version")
+            == "prism.facility_combined_chain_closure_audit.v1"
+            and combined.get("status")
+            == "FULL_DIAGNOSTIC_CHAIN_CLOSED_OPERATOR_LIMITED"
+            and isinstance(combined.get("declared_event_count"), int)
+            and combined.get("declared_event_count", 0) > 0
+            and combined.get("combined_diagnostic_closed_event_count")
+            == combined.get("declared_event_count")
+            and combined.get("packet_subset_closed_event_count", 0)
+            + combined.get("vertical_handoff_closed_event_count", 0)
+            == combined.get("combined_diagnostic_closed_event_count")
+            and combined.get("event_count_matches_declared_scope") is True
+            and isinstance(mismatch_ids, list)
+            and not mismatch_ids
+            and combined.get("facility_ir_aggregate_closed") is True
+            and combined.get("facility_fn_aggregate_closed") is True
+            and combined.get("qualified_provider_packet_count") == 0
+            and combined.get("frequency_from_provider_packet") is False
+            and combined.get("physical_validation_claim") is False
+            and combined.get("facility_total_risk_available") is False
+            and combined.get("complete_facility_qra_claim") is False
+            and combined.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_combined_chain_closure",
+                "status": "PASS" if combined_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": combined.get("_record_path"),
+                    "schema_version": combined.get("schema_version"),
+                    "status": combined.get("status"),
+                    "declared_event_count": combined.get("declared_event_count"),
+                    "packet_subset_closed_event_count": combined.get(
+                        "packet_subset_closed_event_count"
+                    ),
+                    "vertical_handoff_closed_event_count": combined.get(
+                        "vertical_handoff_closed_event_count"
+                    ),
+                    "combined_diagnostic_closed_event_count": combined.get(
+                        "combined_diagnostic_closed_event_count"
+                    ),
+                    "event_count_matches_declared_scope": combined.get(
+                        "event_count_matches_declared_scope"
+                    ),
+                    "mismatch_event_ids": mismatch_ids,
+                    "facility_ir_aggregate_closed": combined.get(
+                        "facility_ir_aggregate_closed"
+                    ),
+                    "facility_fn_aggregate_closed": combined.get(
+                        "facility_fn_aggregate_closed"
+                    ),
+                    "qualified_provider_packet_count": combined.get(
+                        "qualified_provider_packet_count"
+                    ),
+                    "facility_qra_claim": combined.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The packet-subset and operator-limited vertical audits are consumed directly "
+                    "by the IJHE completion report. Their 29-event diagnostic closure is recorded "
+                    "without converting synthetic/operator-limited events into qualified packets, "
+                    "frequencies, physical validation, or facility QRA."
+                ),
             }
         )
     restricted_physical_status = current_status.get("physical_validation_evidence_status")

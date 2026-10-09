@@ -83,16 +83,21 @@ def build_status_consistency_report(
         if isinstance(audit_case_check, Mapping)
         else {}
     )
+    audit_check_count = len(audit_checks or ())
+    audit_blocking_reason_count = len(audit.get("blocking_reasons", ()))
+    # The completion audit grows as new evidence gates are added.  Compare
+    # the saved report with the status ledger instead of freezing an old
+    # check count and treating every new diagnostic gate as drift.
     _check(
         checks,
         "audit_identity",
         audit.get("status") == "INCOMPLETE_EVIDENCE"
-        and len(audit_checks or ()) == 25
-        and len(audit.get("blocking_reasons", ())) == 4,
+        and audit_check_count > 0
+        and audit_blocking_reason_count > 0,
         {
             "status": audit.get("status"),
-            "check_count": len(audit_checks or ()),
-            "blocking_reason_count": len(audit.get("blocking_reasons", ())),
+            "check_count": audit_check_count,
+            "blocking_reason_count": audit_blocking_reason_count,
         },
     )
     _check(
@@ -260,8 +265,9 @@ def build_status_consistency_report(
             checks,
             f"{label}_audit_pointer",
             _endswith(status.get("ijhe_completion_audit_latest_record"), audit_filename)
-            and status.get("ijhe_completion_audit_latest_check_count") == 25
-            and status.get("ijhe_completion_audit_latest_blocking_reason_count") == 4,
+            and status.get("ijhe_completion_audit_latest_check_count") == audit_check_count
+            and status.get("ijhe_completion_audit_latest_blocking_reason_count")
+            == audit_blocking_reason_count,
             {
                 "record": status.get("ijhe_completion_audit_latest_record"),
                 "check_count": status.get("ijhe_completion_audit_latest_check_count"),
@@ -300,7 +306,7 @@ def build_status_consistency_report(
                 checks,
                 f"{label}_legacy_audit_alias",
                 _endswith(status.get("ijhe_audit_latest_record"), audit_filename)
-                and status.get("ijhe_audit_latest_check_count") == 25,
+                and status.get("ijhe_audit_latest_check_count") == audit_check_count,
                 {
                     "record": status.get("ijhe_audit_latest_record"),
                     "check_count": status.get("ijhe_audit_latest_check_count"),
