@@ -2,7 +2,7 @@
 from __future__ import annotations
 from collections import OrderedDict
 import copy
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 import math
 from pathlib import Path
@@ -541,6 +541,128 @@ def _realtime_current_weather_risk(
     }
 
 
+def _realtime_component_risk_ranking(
+    component_ids: Sequence[str], components: Mapping[str, Mapping[str, object]]
+) -> dict[str, object]:
+    """Expose a conservative diagnostic priority view for one realtime batch.
+
+    Only components with an explicit literature frequency and valid current-weather
+    receptor IR can receive a numeric rank.  Missing, rejected, or malformed
+    component results stay visible with ``None`` peaks; they are never converted to
+    zero-risk rows.  This view is for operator triage and does not reallocate event
+    frequencies or promote the snapshot to a facility annual IR/F-N result.
+    """
+    rows: list[dict[str, object]] = []
+    available_rows: list[dict[str, object]] = []
+    for component_id in sorted(component_ids):
+        entry = components.get(component_id)
+        entry_status = entry.get("status") if isinstance(entry, Mapping) else None
+        risk = entry.get("risk") if isinstance(entry, Mapping) else None
+        risk_status = risk.get("status") if isinstance(risk, Mapping) else None
+        peaks: list[float | None] = [None, None]
+        peak_receptors: list[str | None] = [None, None]
+        row_status = "WITHHELD_COMPONENT_RESULT"
+        reason = "component has no accepted realtime risk result"
+        if entry_status == "ACCEPTED" and isinstance(risk, Mapping):
+            if risk_status == "AVAILABLE_CURRENT_WEATHER_IR":
+                annual_ir = risk.get("annual_ir_low_high")
+                if isinstance(annual_ir, Mapping) and annual_ir:
+                    valid = True
+                    for endpoint in range(2):
+                        candidates: list[tuple[float, str]] = []
+                        for receptor_id, values in annual_ir.items():
+                            if (
+                                isinstance(values, (list, tuple))
+                                and len(values) == 2
+                                and isinstance(values[endpoint], (int, float))
+                                and not isinstance(values[endpoint], bool)
+                                and math.isfinite(float(values[endpoint]))
+                                and float(values[endpoint]) >= 0.0
+                            ):
+                                candidates.append((float(values[endpoint]), str(receptor_id)))
+                            else:
+                                valid = False
+                        if candidates:
+                            peak_value, receptor_id = max(
+                                candidates, key=lambda row: (row[0], row[1])
+                            )
+                            peaks[endpoint] = peak_value
+                            peak_receptors[endpoint] = receptor_id
+                        else:
+                            valid = False
+                    if valid:
+                        row_status = "AVAILABLE_CURRENT_WEATHER_IR"
+                        reason = "ranked from accepted current-weather receptor IR"
+                        available_rows.append({
+                            "component_id": component_id,
+                            "peak_annual_ir_low_high": peaks,
+                            "peak_receptor_id_low_high": peak_receptors,
+                        })
+                    else:
+                        row_status = "WITHHELD_INVALID_CURRENT_WEATHER_IR"
+                        reason = "current-weather IR endpoints are incomplete or invalid"
+                else:
+                    row_status = "WITHHELD_MISSING_CURRENT_WEATHER_IR"
+                    reason = "current-weather IR has no receptor values"
+            else:
+                row_status = str(risk_status or "WITHHELD_COMPONENT_RISK")
+                reason = str(risk.get("reason") or "component risk was withheld")
+        elif entry_status is not None:
+            row_status = f"WITHHELD_{entry_status}_COMPONENT_RESULT"
+            reason = str(entry.get("error") or "component frame was rejected")
+        rows.append({
+            "rank": None,
+            "component_id": component_id,
+            "component_status": entry_status,
+            "risk_status": row_status,
+            "peak_annual_ir_low_high": peaks,
+            "peak_receptor_id_low_high": peak_receptors,
+            "frequency_is_not_reallocated": True,
+            "reason": reason,
+        })
+
+    available_rows.sort(
+        key=lambda row: (
+            -float(row["peak_annual_ir_low_high"][1]),
+            -float(row["peak_annual_ir_low_high"][0]),
+            str(row["component_id"]),
+        )
+    )
+    ranks = {row["component_id"]: index for index, row in enumerate(available_rows, 1)}
+    for row in rows:
+        if row["component_id"] in ranks:
+            row["rank"] = ranks[row["component_id"]]
+    if not rows:
+        status = "NO_COMPONENTS"
+    elif len(available_rows) == len(rows):
+        status = "AVAILABLE_CURRENT_WEATHER_COMPONENT_RANKING"
+    elif available_rows:
+        status = "PARTIAL_CURRENT_WEATHER_COMPONENT_RANKING"
+    else:
+        status = "WITHHELD_CURRENT_WEATHER_COMPONENT_RANKING"
+    return {
+        "status": status,
+        "component_count": len(rows),
+        "available_component_count": len(available_rows),
+        "withheld_component_count": len(rows) - len(available_rows),
+        "ranking_basis": (
+            "descending peak receptor current-weather annual IR at the high uncertainty endpoint; "
+            "diagnostic triage only"
+        ),
+        "frequency_reallocation_performed": False,
+        "facility_ir_fn_promotion": False,
+        "stale_or_zero_fallback_used": False,
+        "rows": sorted(
+            rows,
+            key=lambda row: (
+                row["rank"] is None,
+                row["rank"] if row["rank"] is not None else len(rows) + 1,
+                str(row["component_id"]),
+            ),
+        ),
+    }
+
+
 def _realtime_conditional_expected_death_fn(
     risk_rows: list[Mapping[str, object]],
     population: RealtimePopulationBinding | None,
@@ -917,6 +1039,9 @@ class FacilityRealtimeConsequenceMonitor:
             for component_id, entry in components.items()
             if entry.get("status") == "ACCEPTED" and "risk" in entry
         }
+        component_risk_ranking = _realtime_component_risk_ranking(
+            component_ids, components
+        )
         current_weather_risk_rows = [
             row
             for row in component_risk_rows.values()
@@ -1004,6 +1129,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "current_weather_ir_component_count": len(current_weather_risk_rows),
                 "current_weather_ir_withheld_component_count": len(accepted)
                 - len(current_weather_risk_rows),
+                "component_risk_ranking": component_risk_ranking,
                 "current_weather_frequency_sensitivity_ir_low_high": (
                     current_weather_frequency_sensitivity
                     if current_weather_risk_available

@@ -940,6 +940,8 @@ facility_monitor = FacilityRealtimeConsequenceMonitor(
 모든 설비가 같은 수용점 집합의 피해와 문헌 빈도를 갖는 경우에만
 `snapshot["aggregate"]["conditional_current_weather_expected_death_fn_low_high"]`가 생성됩니다. 이 값은 명시된 인구와 현재 기상에 대한 조건부 expected-death F/N 기여이며, `facility_fn_available`과 `facility_annual_risk_available`은 여전히 `false`입니다. 인구 장부가 없거나 수용점 ID가 맞지 않으면 `WITHHELD`로 남습니다.
 
+`snapshot["aggregate"]["component_risk_ranking"]`에는 같은 batch에서 현재 기상 IR이 계산된 설비의 진단용 우선순위가 기록됩니다. 높은 불확실성 끝점의 수용점 IR을 기준으로 정렬하며, 빈도 binding·frame·피해가 빠진 설비는 `rank=null`과 `[null, null]`로 보류합니다. 누락을 0으로 만들지 않고 빈도를 재분배하지 않으므로, 자세한 출력 계약과 예시는 [실시간 설비별 위험순위 개발기록](docs/PRISM_실시간_설비별_위험순위_개발기록_20261010.md)을 참고합니다.
+
 `components`에는 설비별 frame/mapping digest, fresh physics 또는 exact cache,
 처리시간, deadline, provider 방출 경계 여부가 보존되고 `aggregate`에는 설비 수,
 실패 수와 deadline 요약이 기록됩니다. `FacilityRealtimeBinding`에

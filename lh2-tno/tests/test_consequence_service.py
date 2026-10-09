@@ -245,6 +245,12 @@ def test_facility_realtime_monitor_aggregates_component_provenance_and_deadlines
     assert result['aggregate']['fresh_physics_count'] == 2
     assert result['aggregate']['facility_annual_risk_available'] is False
     assert result['aggregate']['current_weather_ir_available'] is False
+    ranking = result['aggregate']['component_risk_ranking']
+    assert ranking['status'] == 'WITHHELD_CURRENT_WEATHER_COMPONENT_RANKING'
+    assert ranking['component_count'] == 2
+    assert ranking['available_component_count'] == 0
+    assert all(row['peak_annual_ir_low_high'] == [None, None] for row in ranking['rows'])
+    assert ranking['stale_or_zero_fallback_used'] is False
     assert result['components']['storage-tank-01']['frame_digest']
     assert result['components']['transfer-pump-01']['mapping_digest']
 
@@ -260,6 +266,11 @@ def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_f
     assert result['aggregate']['deadline_status'] == 'REJECTED'
     assert result['components']['transfer-pump-01']['error_type'] == 'MissingFrame'
     assert result['aggregate']['facility_annual_risk_available'] is False
+    ranking = result['aggregate']['component_risk_ranking']
+    assert ranking['status'] == 'WITHHELD_CURRENT_WEATHER_COMPONENT_RANKING'
+    missing = next(row for row in ranking['rows'] if row['component_id'] == 'transfer-pump-01')
+    assert missing['peak_annual_ir_low_high'] == [None, None]
+    assert missing['rank'] is None
     assert 'result' not in result['components']['transfer-pump-01']
 
 
@@ -320,6 +331,16 @@ def test_realtime_monitor_uses_explicit_literature_frequency_for_current_weather
     assert result['aggregate']['current_weather_frequency_sensitivity_ir_low_high']['p95']['worker-01'] == pytest.approx(
         [4.0e-5, 8.0e-5]
     )
+    ranking = result['aggregate']['component_risk_ranking']
+    assert ranking['status'] == 'AVAILABLE_CURRENT_WEATHER_COMPONENT_RANKING'
+    assert ranking['available_component_count'] == 1
+    assert ranking['rows'][0]['component_id'] == 'storage-tank-01'
+    assert ranking['rows'][0]['rank'] == 1
+    assert ranking['rows'][0]['peak_annual_ir_low_high'] == pytest.approx(
+        [2.0e-5, 4.0e-5]
+    )
+    assert ranking['frequency_reallocation_performed'] is False
+    assert ranking['facility_ir_fn_promotion'] is False
     assert result['aggregate']['facility_annual_risk_available'] is False
     assert result['aggregate']['facility_fn_available'] is False
     assert result['aggregate']['frequency_learning'] is False
