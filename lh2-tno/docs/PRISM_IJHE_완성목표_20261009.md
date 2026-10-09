@@ -137,3 +137,6 @@ packet 증거가 시설 위험 계산 장부까지 이어지는지 확인하기 
 
 고속 기체 경로를 임의로 저마하로 낮추지 않기 위해 `ResolvedGasRelease.compressible_plane_handoff` 경계를 추가했다. provider가 downstream carrier plane의 위치·방향·열역학·단면·시간별 수소 질량분율을 제공하고 질량유량과 닫을 때만 SLABx near-field로 넘긴다. 합성 handoff smoke는 `END_TO_END_DIAGNOSTIC_EXECUTED`와 19개 상태 소비를 확인했지만 실제 provider export가 아니므로 IJHE 검증이나 시설 위험 승격에는 사용하지 않는다. 이 경계는 현재 G1 실패를 숨기지 않으면서 다음 실험에서 필요한 측정·export 자료를 구체화한다.
 packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane handoff가 없어 `COMPRESSIBLE_PLANE_HANDOFF_BLOCKED`이며, 별도로 보관된 저마하 진단 packet은 `DIRECT_LOW_MACH_GAS_EXIT_VALIDATED`와 최대 Mach `0.243589`를 보인다. 두 파일을 자동으로 섞지 않는 것이 packet identity와 피해 계산 범위를 보존하는 핵심이다.
+## 2026-10-16 고속 출구 연결 작업
+
+고속 `ambient-vaporizer/G1`을 임의로 저마하 packet으로 바꾸지 않기 위해 외부 handoff 부착 경계를 추가했다. `src/lh2_tno/compressible_handoff.py`와 `scripts/attach_compressible_plane_handoff.py`는 `prism.compressible_plane_handoff.v1`의 event/component/port 및 upstream source/result digest를 exact-match하고, 모든 provider interval의 수소 질량 장부를 `ResolvedGasRelease`로 재검증한다. 19개 interval synthetic smoke가 부착·검증되었지만 provider export·독립 물리검증·시설 QRA로 승격하지 않았다. 선택된 G1의 실제 상태는 여전히 provider handoff 부재로 `COMPRESSIBLE_PLANE_HANDOFF_BLOCKED`다. 전체 portable suite는 405개 통과했다. 계약과 필요한 외부 입력은 [압축성 근접장 handoff 계약](PRISM_압축성근접장_handoff_계약_20261016.md)에 기록했다.

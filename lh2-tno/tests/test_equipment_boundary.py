@@ -10,6 +10,10 @@ from lh2_tno.equipment_boundary import (ResolvedGasRelease, ResolvedGasReleaseSe
     ResolvedLiquidRelease, VerticalGasHandoff, thermodynamic_rows)
 from lh2_tno.resolved_liquid_worker import resolve_liquid_rows
 from lh2_tno.resolved_gas_worker import resolve_gas_rows
+from lh2_tno.compressible_handoff import (
+    CompressibleHandoffExportError,
+    attach_compressible_plane_handoff,
+)
 from lh2_tno.layered_network_boundary import audit_layered_liquid_boundary
 from lh2_tno.provider_liquid_partition import combine_provider_liquid_partition
 from lh2_tno.frequency import FrequencyAsset,FrequencyPlan,generate_events,bind_event
@@ -282,6 +286,48 @@ def test_low_mach_guard_requires_plane_handoff_and_consumes_it():
     assert history['compressible_plane_handoff_consumed'] is True
     with pytest.raises(ValueError, match='compressible/underexpanded plane adapter required'):
         resolve_gas_rows(packet(), 101325., FakeCP(sound=10.))
+
+
+def test_external_compressible_handoff_binds_exact_provider_digests():
+    d = packet()
+    h2_fraction = .5
+    width = .05
+    states = []
+    for step, velocity in zip(d['steps'], (30., 40.)):
+        depth = step['mass_flow_kg_s'] / (h2_fraction * step['density_kg_m3'] * velocity * 2. * width)
+        states.append({
+            'time_s': step['time_s'], 'direction_enu': [1., 0., 0.],
+            'velocity_m_s': velocity, 'density_kg_m3': step['density_kg_m3'],
+            'temperature_k': step['temperature_k'], 'h2_mass_fraction': h2_fraction,
+            'half_width_m': width, 'depth_m': depth,
+            'provenance': 'external near-field provider state',
+        })
+    handoff = {
+        'schema_version': 'prism.compressible_plane_handoff.v1',
+        'component_id': d['component_id'], 'port_id': d['port_id'], 'event_id': d['event_id'],
+        'upstream_provider_source_digest': d['provider_source_digest'],
+        'upstream_provider_result_digest': d['provider_result_digest'],
+        'handoff_provider_source_digest': 'c' * 64,
+        'handoff_provider_result_digest': 'd' * 64,
+        'handoff_model': 'external-compressible-near-field',
+        'handoff_revision': '0.1.0', 'evidence_status': 'synthetic_diagnostic',
+        'scenario_provenance': 'synthetic external handoff contract test',
+        'handoff': {
+            'position_enu_m': [1., 0., 2.], 'direction_enu': [1., 0., 0.],
+            'velocity_m_s': 30., 'density_kg_m3': .2, 'temperature_k': 150.,
+            'h2_mass_fraction': h2_fraction, 'half_width_m': width,
+            'depth_m': states[0]['depth_m'], 'provenance': 'external near-field provider',
+            'states': states,
+        },
+    }
+    attached, audit = attach_compressible_plane_handoff(d, handoff)
+    assert attached['compressible_plane_handoff']['states'][1]['time_s'] == .2
+    assert audit['status'] == 'COMPRESSIBLE_PLANE_HANDOFF_ATTACHED_AND_VALIDATED'
+    assert audit['upstream_provider_result_digest'] == d['provider_result_digest']
+    wrong = copy.deepcopy(handoff)
+    wrong['upstream_provider_result_digest'] = 'e' * 64
+    with pytest.raises(CompressibleHandoffExportError, match='exact upstream provider_result_digest'):
+        attach_compressible_plane_handoff(d, wrong)
 
 
 @pytest.mark.parametrize('fault',['both','neither','inventory','position','clock','normal_frequency'])
