@@ -53,6 +53,12 @@ fresh-physics/cache 횟수, deadline miss 횟수, provider 방출 경계 개수�
 `WITHHELD`로 남고, 센서에서 빈도를 학습하지 않는다. 여러 기상·인구·사고 family가 닫히지
 않은 상태에서는 `facility_annual_risk_available=false`와 `facility_fn_available=false`를 유지한다.
 
+수용점별 인구 장부가 필요한 실시간 진단에는 `RealtimePopulationBinding`을 별도로
+전달할 수 있다. 모든 accepted 설비의 수용점 집합과 인구 장부가 정확히 맞을 때
+`conditional_current_weather_expected_death_fn_low_high`를 계산하지만, 이는 현재
+기상과 명시 인구에 대한 조건부 expected-death 기여다. 전체 시설 F/N은 여전히
+`false`이며, 인구·빈도·사고범위가 센서에서 자동 생성되거나 보완되지 않는다.
+
 이 기능은 디지털트윈 화면과 운영 수집기 사이의 **동기 회계 경계**다. OPC-UA·MQTT
 수집, 비동기 scheduler, 알람 화면, 시설 연간 빈도와 IR/F-N 계산은 별도 계층이며,
 이 monitor를 추가했다고 1 Hz 신규 물리 계산이나 시설 QRA가 입증되지는 않는다.

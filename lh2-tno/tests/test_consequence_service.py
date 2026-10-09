@@ -5,6 +5,7 @@ from lh2_tno.consequences import ConsequenceRequest
 from lh2_tno.service import (ConsequenceService, FacilityRealtimeBinding,
     FacilityRealtimeConsequenceMonitor, RealtimeConsequenceMonitor,
     RealtimeFrequencyBinding,
+    RealtimePopulationBinding,
     request_from_equipment_resolver, request_from_telemetry,
     validate_equipment_process_state)
 from lh2_tno.telemetry import Frame,TagMapping,TelemetryNormalizer,Value
@@ -322,6 +323,64 @@ def test_realtime_monitor_uses_explicit_literature_frequency_for_current_weather
     assert result['aggregate']['facility_annual_risk_available'] is False
     assert result['aggregate']['facility_fn_available'] is False
     assert result['aggregate']['frequency_learning'] is False
+
+
+def test_realtime_monitor_calculates_conditional_expected_death_fn_from_explicit_population(tmp_path):
+    base_binding, frame = _facility_binding(tmp_path, 'storage-tank-01')
+    binding = FacilityRealtimeBinding(
+        component_id=base_binding.component_id,
+        template=base_binding.template,
+        monitor=RealtimeConsequenceMonitor(
+            ConsequenceService(RiskPipeline(tmp_path)), period_s=1.0
+        ),
+        normalizer=base_binding.normalizer,
+        pressure_tag=base_binding.pressure_tag,
+        temperature_tag=base_binding.temperature_tag,
+        frequency_binding=RealtimeFrequencyBinding(
+            event_id='storage-tank-hole-01',
+            asset_id='storage-tank-01',
+            initiating_frequency_per_year=1.0e-3,
+            annual_condition_probability=0.5,
+            release_branch_probability=0.8,
+            occupancy_probability=0.25,
+            provenance='published LH2 vessel frequency median',
+            source_digest='d' * 64,
+            frequency_p05_per_year=5.0e-4,
+            frequency_p95_per_year=2.0e-3,
+        ),
+    )
+    population = RealtimePopulationBinding(
+        persons_by_receptor={'worker-01': 10.0},
+        provenance='declared outdoor worker population snapshot',
+        source_digest='e' * 64,
+    )
+    facility = FacilityRealtimeConsequenceMonitor(
+        {'storage-tank-01': binding}, population_binding=population
+    )
+    result = facility.update_from_frames({'storage-tank-01': frame}, now_s=100.2)
+
+    aggregate = result['aggregate']
+    assert aggregate['conditional_current_weather_expected_death_fn_available'] is True
+    assert aggregate['conditional_current_weather_expected_death_fn_low_high'] == pytest.approx(
+        [2.0e-4, 4.0e-4]
+    )
+    sensitivity = aggregate[
+        'conditional_current_weather_expected_death_fn'
+    ]['frequency_sensitivity_expected_death_fn_low_high']
+    assert sensitivity['p05'] == pytest.approx([1.0e-4, 2.0e-4])
+    assert sensitivity['p95'] == pytest.approx([4.0e-4, 8.0e-4])
+    assert aggregate['facility_fn_available'] is False
+    assert aggregate['facility_annual_risk_available'] is False
+    assert aggregate['frequency_learning'] is False
+
+
+def test_realtime_population_binding_rejects_invalid_population_source_digest():
+    with pytest.raises(ValueError, match='64-character SHA-256'):
+        RealtimePopulationBinding(
+            persons_by_receptor={'worker-01': 1.0},
+            provenance='declared population',
+            source_digest='short',
+        )
 
 
 def test_realtime_frequency_binding_rejects_non_sha256_source():

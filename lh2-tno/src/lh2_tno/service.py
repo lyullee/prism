@@ -359,6 +359,44 @@ class RealtimeFrequencyBinding:
 
 
 @dataclass(frozen=True)
+class RealtimePopulationBinding:
+    """Explicit receptor population used for a conditional realtime F/N view.
+
+    The population is an input ledger, never a value inferred from telemetry.
+    It is intentionally separate from :class:`RealtimeFrequencyBinding`: the
+    latter carries annual condition, release-branch, and occupancy weights,
+    while this class carries the number of people represented at each receptor
+    for the current declared outdoor condition.  The resulting F/N contribution
+    remains conditional on the accepted component set and current weather; it
+    does not open the complete-facility QRA gate.
+    """
+
+    persons_by_receptor: Mapping[str, float]
+    provenance: str
+    source_digest: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.persons_by_receptor, Mapping) or not self.persons_by_receptor:
+            raise ValueError("persons_by_receptor must be a nonempty mapping")
+        for receptor_id, persons in self.persons_by_receptor.items():
+            if not isinstance(receptor_id, str) or not receptor_id.strip():
+                raise ValueError("population receptor ids must be nonempty strings")
+            if (
+                isinstance(persons, bool)
+                or not isinstance(persons, (int, float))
+                or not math.isfinite(float(persons))
+                or float(persons) < 0.0
+            ):
+                raise ValueError("population persons must be finite and nonnegative")
+        if not isinstance(self.provenance, str) or not self.provenance.strip():
+            raise ValueError("population provenance must be a nonempty string")
+        if not isinstance(self.source_digest, str) or not re.fullmatch(
+            r"[0-9a-fA-F]{64}", self.source_digest
+        ):
+            raise ValueError("population source_digest must be a 64-character SHA-256 digest")
+
+
+@dataclass(frozen=True)
 class FacilityRealtimeBinding:
     """The declared digital-twin boundary for one facility component.
 
@@ -503,13 +541,181 @@ def _realtime_current_weather_risk(
     }
 
 
+def _realtime_conditional_expected_death_fn(
+    risk_rows: list[Mapping[str, object]],
+    population: RealtimePopulationBinding | None,
+) -> dict[str, object]:
+    """Calculate a conditional current-weather expected-death contribution.
+
+    This is deliberately narrower than a facility F/N curve.  It requires one
+    explicit population ledger and one valid literature frequency binding for
+    every accepted component.  Missing receptors, malformed risk atoms, or an
+    incomplete batch return a withheld result rather than a zero contribution.
+    """
+
+    if population is None:
+        return {
+            "status": "WITHHELD_MISSING_POPULATION_LEDGER",
+            "expected_death_fn_low_high": None,
+            "frequency_sensitivity_expected_death_fn_low_high": None,
+            "reason": "explicit receptor population ledger was not supplied",
+        }
+    receptor_ids = set(population.persons_by_receptor)
+    scenario_totals: dict[str, list[float]] = {}
+    bounded_row_count = 0
+    for row_index, row in enumerate(risk_rows):
+        atom = row.get("risk_atom")
+        if not isinstance(atom, Mapping):
+            return {
+                "status": "WITHHELD_MISSING_FREQUENCY_ATOM",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+                "reason": f"risk row {row_index} has no frequency risk atom",
+            }
+        harms = atom.get("receptor_harm_low_high")
+        if not isinstance(harms, Mapping):
+            return {
+                "status": "WITHHELD_MISSING_RECEPTOR_HARM",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+                "reason": f"risk row {row_index} has no receptor harm ledger",
+            }
+        harm_ids = set(harms)
+        if harm_ids != receptor_ids:
+            return {
+                "status": "WITHHELD_POPULATION_RECEPTOR_MISMATCH",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+                "reason": (
+                    f"risk row {row_index} receptors do not exactly match population ledger: "
+                    f"population={sorted(receptor_ids)}, harm={sorted(harm_ids)}"
+                ),
+            }
+        frequency = atom.get("initiating_frequency_per_year")
+        conditional_weight = atom.get("conditional_weight")
+        if (
+            isinstance(frequency, bool)
+            or not isinstance(frequency, (int, float))
+            or not math.isfinite(float(frequency))
+            or float(frequency) < 0.0
+            or isinstance(conditional_weight, bool)
+            or not isinstance(conditional_weight, (int, float))
+            or not math.isfinite(float(conditional_weight))
+            or not 0.0 <= float(conditional_weight) <= 1.0
+        ):
+            return {
+                "status": "WITHHELD_INVALID_FREQUENCY_ATOM",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+                "reason": f"risk row {row_index} has an invalid frequency atom",
+            }
+
+        def add_scenario(scenario: str, scenario_frequency: float) -> None:
+            weighted = float(scenario_frequency) * float(conditional_weight)
+            scenario_sum = scenario_totals.setdefault(scenario, [0.0, 0.0])
+            for receptor_id in sorted(receptor_ids):
+                endpoints = harms.get(receptor_id)
+                persons = float(population.persons_by_receptor[receptor_id])
+                if (
+                    not isinstance(endpoints, (list, tuple))
+                    or len(endpoints) != 2
+                    or any(
+                        isinstance(value, bool)
+                        or not isinstance(value, (int, float))
+                        or not math.isfinite(float(value))
+                        or not 0.0 <= float(value) <= 1.0
+                        for value in endpoints
+                    )
+                ):
+                    raise ValueError(f"invalid receptor harm for {receptor_id}")
+                scenario_sum[0] += weighted * persons * float(endpoints[0])
+                scenario_sum[1] += weighted * persons * float(endpoints[1])
+
+        try:
+            add_scenario("published", float(frequency))
+        except (TypeError, ValueError) as error:
+            return {
+                "status": "WITHHELD_INVALID_RECEPTOR_HARM",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+                "reason": str(error),
+            }
+        p05 = atom.get("frequency_p05_per_year")
+        p95 = atom.get("frequency_p95_per_year")
+        if p05 is not None or p95 is not None:
+            if (
+                isinstance(p05, bool)
+                or not isinstance(p05, (int, float))
+                or not math.isfinite(float(p05))
+                or float(p05) < 0.0
+                or isinstance(p95, bool)
+                or not isinstance(p95, (int, float))
+                or not math.isfinite(float(p95))
+                or float(p95) < 0.0
+            ):
+                return {
+                    "status": "WITHHELD_INVALID_FREQUENCY_BOUNDS",
+                    "expected_death_fn_low_high": None,
+                    "frequency_sensitivity_expected_death_fn_low_high": None,
+                    "reason": f"risk row {row_index} has invalid frequency bounds",
+                }
+            try:
+                add_scenario("p05", float(p05))
+                add_scenario("p95", float(p95))
+                bounded_row_count += 1
+            except (TypeError, ValueError) as error:
+                return {
+                    "status": "WITHHELD_INVALID_RECEPTOR_HARM",
+                    "expected_death_fn_low_high": None,
+                    "frequency_sensitivity_expected_death_fn_low_high": None,
+                    "reason": str(error),
+                }
+
+    published = scenario_totals.get("published")
+    if published is None:
+        return {
+            "status": "WITHHELD_MISSING_PUBLISHED_FREQUENCY",
+            "expected_death_fn_low_high": None,
+            "frequency_sensitivity_expected_death_fn_low_high": None,
+            "reason": "no published frequency contribution was accumulated",
+        }
+    sensitivity = None
+    if (
+        bounded_row_count == len(risk_rows)
+        and bool(risk_rows)
+        and "p05" in scenario_totals
+        and "p95" in scenario_totals
+    ):
+        sensitivity = {
+            "p05": scenario_totals["p05"],
+            "published": published,
+            "p95": scenario_totals["p95"],
+            "physics_reexecuted": False,
+        }
+    return {
+        "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN",
+        "expected_death_fn_low_high": published,
+        "frequency_sensitivity_expected_death_fn_low_high": sensitivity,
+        "population_provenance": population.provenance,
+        "population_source_digest": population.source_digest,
+        "population_receptor_count": len(receptor_ids),
+        "frequency_learning": False,
+        "reason": (
+            "explicit receptor population was multiplied by the reviewed literature "
+            "frequency and current-weather consequence harm; full-facility F/N remains withheld"
+        ),
+    }
+
+
 class FacilityRealtimeConsequenceMonitor:
     """Batch coordinator for independent component monitors.
 
     This class combines *provenance and deadline ledgers* and can optionally
     calculate a current-weather IR contribution from an explicit reviewed
-    literature frequency binding.  It never infers a frequency from telemetry
-    and never promotes the current-weather view to facility annual IR/F-N.
+    literature frequency binding.  When an explicit receptor population ledger
+    is supplied, it also reports a conditional current-weather expected-death
+    F/N contribution.  It never infers a frequency from telemetry and never
+    promotes either conditional view to facility annual IR/F-N.
     Each component still owns its normalizer, consequence service, provider
     release resolver, and cache.  Missing/unknown/duplicate frames and any
     component exception make the batch ``REJECTED``; accepted component
@@ -517,8 +723,14 @@ class FacilityRealtimeConsequenceMonitor:
     placeholder is manufactured for the failed component.
     """
 
-    def __init__(self, bindings: Mapping[str, FacilityRealtimeBinding], *,
-                 facility_id: str = "facility", max_components: int = 128):
+    def __init__(
+        self,
+        bindings: Mapping[str, FacilityRealtimeBinding],
+        *,
+        facility_id: str = "facility",
+        max_components: int = 128,
+        population_binding: RealtimePopulationBinding | None = None,
+    ):
         if not isinstance(bindings, Mapping) or not bindings:
             raise ValueError("nonempty component binding mapping required")
         if not isinstance(facility_id, str) or not facility_id:
@@ -529,6 +741,10 @@ class FacilityRealtimeConsequenceMonitor:
             raise ValueError("max_components must be between 1 and 10000")
         if len(bindings) > max_components:
             raise ValueError("component binding count exceeds max_components")
+        if population_binding is not None and not isinstance(
+            population_binding, RealtimePopulationBinding
+        ):
+            raise TypeError("population_binding must be a RealtimePopulationBinding")
 
         normalized: dict[str, FacilityRealtimeBinding] = {}
         frequency_event_owners: dict[str, str] = {}
@@ -579,6 +795,7 @@ class FacilityRealtimeConsequenceMonitor:
             normalized[key] = binding
         self.facility_id = facility_id
         self.bindings = normalized
+        self.population_binding = population_binding
 
     def update_from_frames(self, frames: Mapping[str, object], *, now_s: float) -> dict:
         """Process one coherent frame per declared component.
@@ -748,6 +965,18 @@ class FacilityRealtimeConsequenceMonitor:
             and len(current_weather_risk_rows) == len(component_ids)
             and bool(current_weather_ir)
         )
+        conditional_expected_death_fn = (
+            _realtime_conditional_expected_death_fn(
+                current_weather_risk_rows, self.population_binding
+            )
+            if current_weather_risk_available
+            else {
+                "status": "WITHHELD_CURRENT_WEATHER_IR_UNAVAILABLE",
+                "expected_death_fn_low_high": None,
+                "frequency_sensitivity_expected_death_fn_low_high": None,
+                "reason": "all declared components do not have accepted current-weather IR",
+            }
+        )
         aggregate_deadline_status = (
             "REJECTED" if rejected or unknown_ids else ("MISSED" if deadline_misses else "MET")
         )
@@ -787,6 +1016,19 @@ class FacilityRealtimeConsequenceMonitor:
                     and len(sensitivity_rows) == len(component_ids)
                     and current_weather_frequency_sensitivity
                 ),
+                "conditional_current_weather_expected_death_fn_low_high": (
+                    conditional_expected_death_fn["expected_death_fn_low_high"]
+                ),
+                "conditional_current_weather_expected_death_fn_available": (
+                    conditional_expected_death_fn["status"]
+                    == "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN"
+                ),
+                "conditional_current_weather_expected_death_fn": conditional_expected_death_fn,
+                "population_binding_source_digest": (
+                    self.population_binding.source_digest
+                    if self.population_binding is not None
+                    else None
+                ),
                 "facility_fn_available": False,
                 "frequency_learning": False,
                 "release_inference": False,
@@ -795,7 +1037,8 @@ class FacilityRealtimeConsequenceMonitor:
                     "component consequence outputs and provenance are available; "
                     "current-weather IR is available only when each accepted component "
                     "has an explicit reviewed literature frequency and receptor harm; "
-                    "facility annual IR/F-N remains withheld"
+                    "an explicit population ledger adds a conditional current-weather "
+                    "expected-death F/N contribution; facility annual IR/F-N remains withheld"
                 ),
             },
         }

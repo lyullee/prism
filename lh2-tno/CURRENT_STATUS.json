@@ -2951,5 +2951,13 @@
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
-  ]
+  ],
+  "realtime_population_binding_implemented": true,
+  "realtime_population_binding_module": "src/lh2_tno/service.py",
+  "realtime_population_binding_class": "RealtimePopulationBinding",
+  "realtime_population_binding_output": "aggregate.conditional_current_weather_expected_death_fn_low_high",
+  "realtime_population_binding_status": "CONDITIONAL_CURRENT_WEATHER_EXPECTED_DEATH_FN; explicit receptor population and literature frequency required; facility F/N remains withheld",
+  "realtime_population_binding_frequency_learning": false,
+  "realtime_population_binding_facility_fn_available": false,
+  "full_portable_test_count_latest": 539
 }

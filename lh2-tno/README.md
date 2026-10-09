@@ -904,7 +904,25 @@ frequency = RealtimeFrequencyBinding(
 # FacilityRealtimeBinding(..., frequency_binding=frequency)
 ```
 
-provider 결과에 수용점 피해가 있으면 `snapshot["aggregate"]["current_weather_annual_ir_low_high"]`가 생성됩니다. 이는 현재 기상 조건의 진단값이며, `facility_annual_risk_available`와 F/N은 계속 `false`입니다.
+provider 결과에 수용점 피해가 있으면 `snapshot["aggregate"]["current_weather_annual_ir_low_high"]`가 생성됩니다. 이는 현재 기상 조건의 진단값이며, `facility_annual_risk_available`와 전체 시설 F/N은 계속 `false`입니다.
+
+수용점별 인구 장부까지 명시하려면 `FacilityRealtimeConsequenceMonitor`에 `RealtimePopulationBinding`을 전달합니다.
+
+```python
+from lh2_tno.service import RealtimePopulationBinding
+
+population = RealtimePopulationBinding(
+    persons_by_receptor={"worker-01": 10.0},
+    provenance="declared outdoor worker population snapshot",
+    source_digest="b" * 64,
+)
+facility_monitor = FacilityRealtimeConsequenceMonitor(
+    bindings, population_binding=population
+)
+```
+
+모든 설비가 같은 수용점 집합의 피해와 문헌 빈도를 갖는 경우에만
+`snapshot["aggregate"]["conditional_current_weather_expected_death_fn_low_high"]`가 생성됩니다. 이 값은 명시된 인구와 현재 기상에 대한 조건부 expected-death F/N 기여이며, `facility_fn_available`과 `facility_annual_risk_available`은 여전히 `false`입니다. 인구 장부가 없거나 수용점 ID가 맞지 않으면 `WITHHELD`로 남습니다.
 
 `components`에는 설비별 frame/mapping digest, fresh physics 또는 exact cache,
 처리시간, deadline, provider 방출 경계 여부가 보존되고 `aggregate`에는 설비 수,
@@ -916,7 +934,7 @@ provider 결과에 수용점 피해가 있으면 `snapshot["aggregate"]["current
 현재 기상 IR은 `WITHHELD`로 남깁니다. 이 조정기는 센서 기반 빈도 학습이나 누출 크기 역추정을
 수행하지 않고, F/N과 시설 전체 연간 IR은 여전히 `facility_annual_risk_available=false`로 보류합니다.
 문헌 p05/p95가 있으면 같은 피해 결과를 재실행하지 않고 `current_weather_frequency_sensitivity_ir_low_high`에 세 빈도 경계의 재가중 결과를 함께 기록하며, published 값이 p05와 p95 사이에 있지 않으면 입력을 거절합니다.
-시설 IR/F-N은 별도의 문헌 빈도·사고범위·물리검증·시설 장부 gate를 통과한 campaign에서만 계산됩니다.
+시설 IR/F-N은 별도의 문헌 빈도·사고범위·물리검증·시설 장부 gate를 통과한 campaign에서만 계산됩니다. 인구 장부를 추가해도 센서 기반 빈도 학습, 누출 크기 역추정, 전체 시설 위험 승격은 수행하지 않습니다.
 
 ## 출력 해석
 
