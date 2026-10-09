@@ -98,6 +98,63 @@ def _verification(parent: Path) -> Mapping[str, Any] | None:
     return value if isinstance(value, Mapping) else None
 
 
+def _qualification_readiness(
+    releases: list[Mapping[str, Any]],
+    verification: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    """Explain why an exact packet is still withheld from qualification.
+
+    Exact identity and a successful exporter run are useful diagnostic facts,
+    but they do not establish that the release represents a qualified facility
+    accident.  Keep the reasons machine-readable so an evidence request can be
+    closed one item at a time without changing the promotion policy.
+    """
+
+    origins = sorted({
+        str(release.get("input_origin"))
+        for release in releases
+        if release.get("input_origin") not in (None, "")
+    })
+    termination_bases = sorted({
+        str(release.get("termination_basis"))
+        for release in releases
+        if release.get("termination_basis") not in (None, "")
+    })
+    limitations = []
+    if isinstance(verification, Mapping):
+        raw_limitations = verification.get("limitations", ())
+        if isinstance(raw_limitations, (list, tuple)):
+            limitations = [str(item) for item in raw_limitations if str(item).strip()]
+
+    blockers: list[str] = [
+        "qualification_sidecar_missing",
+        "physical_validation_evidence_missing",
+    ]
+    verification_status = str(verification.get("status", "")) if verification else ""
+    if "OPERATOR_LIMITED" in verification_status or (
+        isinstance(verification, Mapping) and verification.get("operator_limited") is True
+    ):
+        blockers.append("operator_limited_input")
+    if any(origin in {"synthetic", "screening_only"} for origin in origins):
+        blockers.append("synthetic_or_screening_input_origin")
+    limitation_text = " ".join(limitations).lower()
+    if any(token in limitation_text for token in ("synthetic", "diagnostic horizon", "screening")):
+        blockers.append("synthetic_or_screening_boundary_declared")
+    if any("residual inventory" in str(release.get("termination_provenance", "")).lower()
+           for release in releases):
+        blockers.append("termination_leaves_declared_inventory_residual")
+    return {
+        "status": "BLOCKED_REVIEW" if blockers else "REVIEW_REQUIRED",
+        "blockers": list(dict.fromkeys(blockers)),
+        "input_origins": origins,
+        "termination_bases": termination_bases,
+        "verification_status": verification_status or None,
+        "verification_limitations": limitations,
+        "qualification_sidecar_present": False,
+        "physical_validation_evidence_present": False,
+    }
+
+
 def _candidate_packet(candidate: Mapping[str, Any], work_item: Mapping[str, Any]) -> dict[str, Any]:
     response_path = Path(str(candidate["path"]))
     parent = response_path.parent
@@ -137,6 +194,7 @@ def _candidate_packet(candidate: Mapping[str, Any], work_item: Mapping[str, Any]
     )
     strict_valid = bool(matching) and all(_strict_packet_ok(release) for release in matching)
     verification = _verification(parent)
+    readiness = _qualification_readiness(matching, verification)
     verification_ok = (
         isinstance(verification, Mapping)
         and isinstance(verification.get("status"), str)
@@ -159,6 +217,7 @@ def _candidate_packet(candidate: Mapping[str, Any], work_item: Mapping[str, Any]
         "frequency_bound": False,
         "facility_qra_claim": False,
         "physical_validation_claim": False,
+        "qualification_readiness": readiness,
     }
 
 
@@ -249,6 +308,21 @@ def build_provider_worklist_packet_evidence(
     matched_rows = [row for row in rows if row["candidate_count"] > 0]
     chain_events = _chain_events(root)
     chain_count = sum(row["event_id"] in chain_events for row in exact_rows)
+    readiness_rows = [
+        row["evidence"].get("qualification_readiness", {})
+        for row in exact_rows
+        if isinstance(row.get("evidence"), Mapping)
+    ]
+    readiness_counts: dict[str, int] = {}
+    blocker_counts: dict[str, int] = {}
+    origin_counts: dict[str, int] = {}
+    for readiness in readiness_rows:
+        status = str(readiness.get("status", "UNKNOWN"))
+        readiness_counts[status] = readiness_counts.get(status, 0) + 1
+        for blocker in readiness.get("blockers", ()):
+            blocker_counts[str(blocker)] = blocker_counts.get(str(blocker), 0) + 1
+        for origin in readiness.get("input_origins", ()):
+            origin_counts[str(origin)] = origin_counts.get(str(origin), 0) + 1
     status = "PARTIAL_DIAGNOSTIC_EVIDENCE" if exact_rows else "NO_DIAGNOSTIC_PACKET_EVIDENCE"
     return {
         "schema_version": "prism.provider_worklist_packet_evidence.v1",
@@ -262,11 +336,19 @@ def build_provider_worklist_packet_evidence(
         "frequency_bound": False,
         "facility_qra_claim": False,
         "physical_validation_claim": False,
+        "qualification_readiness": {
+            "status_counts": dict(sorted(readiness_counts.items())),
+            "blocker_counts": dict(sorted(blocker_counts.items())),
+            "input_origin_counts": dict(sorted(origin_counts.items())),
+            "qualification_sidecar_present_count": 0,
+            "physical_validation_evidence_present_count": 0,
+        },
         "rows": rows,
         "interpretation": (
             "Saved external-model outputs reached strict packet and exact worklist checks "
             "where reported; evidence remains diagnostic and is never promoted to qualified "
-            "provider coverage or facility risk."
+            "provider coverage or facility risk. Qualification readiness is reported separately "
+            "so operator-limited and synthetic boundaries cannot be mistaken for actual evidence."
         ),
     }
 

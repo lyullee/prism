@@ -70,6 +70,11 @@ def test_worklist_evidence_exact_matches_strict_packet_and_chain(tmp_path):
     assert report["consequence_chain_event_count"] == 1
     assert report["qualified_provider_packet_count"] == 0
     assert report["frequency_bound"] is False
+    readiness = report["rows"][0]["evidence"]["qualification_readiness"]
+    assert readiness["status"] == "BLOCKED_REVIEW"
+    assert "qualification_sidecar_missing" in readiness["blockers"]
+    assert "operator_limited_input" in readiness["blockers"]
+    assert report["qualification_readiness"]["blocker_counts"]["physical_validation_evidence_missing"] == 1
 
 
 def test_worklist_evidence_rejects_opening_mismatch(tmp_path):
