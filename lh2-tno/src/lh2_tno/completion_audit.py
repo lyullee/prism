@@ -62,6 +62,7 @@ def build_ijhe_completion_audit(
     facility_assessment: Mapping[str, Any] | None = None,
     vertical_handoff_result: Mapping[str, Any] | None = None,
     native_model_contract_audit: Mapping[str, Any] | None = None,
+    frequency_provenance_report: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -227,6 +228,51 @@ def build_ijhe_completion_audit(
                     "This static audit separates native external accident export methods from "
                     "PRISM-side diagnostic wrappers. It is evidence of the integration boundary, "
                     "not a qualified provider packet or facility QRA."
+                ),
+            }
+        )
+    if frequency_provenance_report is not None:
+        provenance = frequency_provenance_report
+        provenance_checks = provenance.get("checks")
+        provenance_policy = provenance.get("policy")
+        if not isinstance(provenance_policy, Mapping):
+            provenance_policy = {}
+        provenance_valid = (
+            provenance.get("schema_version") == "prism.frequency_provenance.v1"
+            and provenance.get("status") == "PASS_WITH_SCOPE_LIMITATIONS"
+            and isinstance(provenance.get("generated_events"), list)
+            and len(provenance.get("generated_events")) > 0
+            and isinstance(provenance.get("profile_provenance"), list)
+            and len(provenance.get("profile_provenance")) > 0
+            and isinstance(provenance_checks, list)
+            and len(provenance_checks) > 0
+            and all(isinstance(row, Mapping) and row.get("passed") is True for row in provenance_checks)
+            and provenance_policy.get("field_frequency_collection_used") is False
+            and provenance_policy.get("sensor_frequency_learning_used") is False
+            and provenance_policy.get("physical_validation_claim") is False
+        )
+        checks.append(
+            {
+                "name": "literature_frequency_provenance_evidence",
+                "status": "PASS" if provenance_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None if provenance_valid else "literature frequency provenance report is missing or malformed",
+                "evidence": {
+                    "record": provenance.get("_record_path"),
+                    "status": provenance.get("status"),
+                    "profile_count": len(provenance.get("profile_provenance", []))
+                    if isinstance(provenance.get("profile_provenance"), list) else None,
+                    "event_count": len(provenance.get("generated_events", []))
+                    if isinstance(provenance.get("generated_events"), list) else None,
+                    "catalogue_digest": provenance.get("catalogue", {}).get("digest"),
+                    "field_frequency_collection_used": provenance_policy.get("field_frequency_collection_used"),
+                    "sensor_frequency_learning_used": provenance_policy.get("sensor_frequency_learning_used"),
+                    "physical_validation_claim": provenance_policy.get("physical_validation_claim"),
+                },
+                "interpretation": (
+                    "The selected literature frequency profiles and generated event rows have source "
+                    "and catalogue digest provenance. This does not make the rates field-validated or "
+                    "create a facility credible interval."
                 ),
             }
         )

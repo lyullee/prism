@@ -1,5 +1,5 @@
 {
-  "date_kst": "2026-10-14",
+  "date_kst": "2026-10-18",
   "status": "ACTIVE",
   "public_baseline": "PRISM 0.6.0",
   "objective": "선언한 옥외 LH2 적용범위의 주요 사고를 설비 상태부터 시설 IR/F-N까지 계산하고, 미계산 사고·문헌 빈도 불확실성·물리 검증 근거·신규 처리시간을 명확히 보고하여 IJHE 연구를 준비한다.",
@@ -1233,9 +1233,9 @@
   "major_accident_scope_matrix_catalog_record": "results/20261017/generic_mixed_accident_scope_matrix_with_catalog.json",
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
-  "ijhe_completion_audit_latest_record": "results/20261018/ijhe_completion_audit_release_ledger.json",
+  "ijhe_completion_audit_latest_record": "results/20261018/ijhe_completion_audit_refined_pool_current.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_latest_check_count": 19,
+  "ijhe_completion_audit_latest_check_count": 21,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [
     "one or more equipment models lacks an accident-release interface and provider termination ledger",
@@ -1329,5 +1329,19 @@
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
-  ]
+  ],
+  "frequency_provenance_report_implemented": true,
+  "frequency_provenance_report_module": "src/lh2_tno/frequency_provenance.py",
+  "frequency_provenance_report_script": "scripts/build_frequency_provenance_report.py",
+  "frequency_provenance_report_record": "results/20261018/generic_lh2_frequency_provenance_current.json",
+  "frequency_provenance_report_status": "PASS_WITH_SCOPE_LIMITATIONS; 7 reviewed profiles, 24 generated events, source/catalogue hashes checked",
+  "frequency_provenance_report_catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+  "frequency_provenance_report_profile_count": 7,
+  "frequency_provenance_report_event_count": 24,
+  "frequency_provenance_report_field_frequency_collection_used": false,
+  "frequency_provenance_report_sensor_frequency_learning_used": false,
+  "frequency_provenance_report_physical_validation_claim": false,
+  "frequency_provenance_report_test_status": "2 provenance tests plus IJHE diagnostic provenance check; full portable suite 439 passed",
+  "ijhe_completion_audit_latest_blocker_count": 4,
+  "ijhe_completion_audit_latest_frequency_provenance_status": "PASS diagnostic-only; source/catalogue hashes and 24 generated events traced"
 }

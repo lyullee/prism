@@ -71,6 +71,29 @@ def test_completion_audit_records_native_model_contract_audit_as_diagnostic_evid
         if item["name"] == "external_native_model_contract_audit"
     )
     assert check["status"] == "PASS"
+
+
+def test_completion_audit_records_frequency_provenance_as_diagnostic_evidence():
+    report = build_ijhe_completion_audit(
+        {"physical_validation_claim": False},
+        {},
+        {"cases": [], "events": []},
+        frequency_provenance_report={
+            "schema_version": "prism.frequency_provenance.v1",
+            "status": "PASS_WITH_SCOPE_LIMITATIONS",
+            "profile_provenance": [{"profile": "LH2_VESSEL"}],
+            "generated_events": [{"id": "event-1"}],
+            "checks": [{"passed": True}],
+            "catalogue": {"digest": "a" * 64},
+            "policy": {
+                "field_frequency_collection_used": False,
+                "sensor_frequency_learning_used": False,
+                "physical_validation_claim": False,
+            },
+        },
+    )
+    check = next(item for item in report["checks"] if item["name"] == "literature_frequency_provenance_evidence")
+    assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
 
 

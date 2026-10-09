@@ -126,6 +126,8 @@ provider packet이 들어오면 먼저 `scripts/audit_provider_catalog_coverage.
 
 **보완 pool 재실행:** 최신 `results/20261018/generic_mixed_provider_campaign_refined_pool_current.json`은 24개 case 모두 실행되어 `EXECUTED` 5건, `EXECUTED_OPERATOR_LIMITED` 19건, `FAILED` 0건, `UNCOMPUTED` case row 0건을 기록했습니다. provider packet 소비는 24/24이고 release ledger 완전 행은 5건입니다. 19건의 제한 상태와 1건의 domain-incomplete 표시는 보존하며, 이 결과를 qualified provider나 시설 전체 IR/F-N으로 승격하지 않습니다.
 
+**문헌 빈도 근거 추적 (2026-10-18):** `scripts/build_frequency_provenance_report.py`는 빈도 계획을 17개 검토 프로파일 카탈로그와 대조하고, 실제 선택된 7개 프로파일·24개 사건의 `source`, 원자료 SHA-256, 카탈로그 digest, 중앙값, p05/p95와 제한사항을 하나의 보고서로 기록합니다. 현재 일반 LH2 예제 보고서 `results/20261018/generic_lh2_frequency_provenance_current.json`은 `PASS_WITH_SCOPE_LIMITATIONS`이며, 현장 사고빈도 수집·센서 기반 빈도 학습·물리검증 주장은 모두 `false`로 고정합니다. 해시 불일치나 이벤트 누락은 `FAILED_PROVENANCE_INTEGRITY`로 중지합니다. 자세한 기준은 [문헌 빈도 근거 추적 개발 기록](docs/PRISM_문헌빈도_근거추적_개발기록_20261018.md)을 참고합니다.
+
 **실시간 공정상태→사고 방출 경계:** `validate_equipment_process_state()`는 압력·온도·액면·유량 같은 정상 공정 상태만 외부 설비 resolver에 전달합니다. 누출 개구·방출 단계·지속시간·재고 소진·사건 빈도·`Resolved*Release` packet이 상태 snapshot에 섞이면 즉시 거절합니다. 설비 provider가 별도의 사고 방출 이력과 종료 근거를 반환한 경우에만 `request_from_equipment_resolver()`가 SLABx-LH2/SLABx 피해 계산으로 넘깁니다. 원본 상태는 깊은 복사로 보존하고, 빈도는 문헌 `FrequencyPlan`에서 별도로 결합합니다. 상세 계약은 [실시간 공정상태와 사고 방출 경계 계약](docs/PRISM_실시간_공정상태_방출경계_계약_20261009.md)을 참고합니다.
 
 작업목록만 있는 기간에도 `scripts/build_equipment_campaign.py --provider-worklist-only`로 24개 사건과 24개 미계산 branch를 `RiskCampaign`에 넣을 수 있습니다. 이 모드는 물리 요청이나 위험 0을 만들지 않고, 시설 실행 회계에서 누락 사건을 보이게 합니다.
