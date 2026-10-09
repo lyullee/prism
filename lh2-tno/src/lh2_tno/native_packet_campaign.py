@@ -68,6 +68,12 @@ def build_native_packet_campaign_execution_ledger(
         and len(cases) == len(routes)
         and packet_identity_consumed
     )
+    handoff_rebind = (
+        provenance
+        if isinstance(provenance, Mapping)
+        and provenance.get("schema_version") == "prism.campaign_compressible_handoff_rebind.v1"
+        else None
+    )
     return {
         "schema_version": "prism.native_lh2dt_packet_campaign_execution.v1",
         "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED" if structural_match else "MALFORMED_NATIVE_PACKET_CAMPAIGN",
@@ -97,6 +103,14 @@ def build_native_packet_campaign_execution_ledger(
         "facility_qra_claim": result.get("complete_facility_qra_claim") is True,
         "physical_validation_claim": result.get("physical_validation_claim") is True,
         "rebind_provenance_status": provenance.get("schema_version") if isinstance(provenance, Mapping) else None,
+        "compressible_handoff_rebind": {
+            "consumed": handoff_rebind is not None and handoff_rebind.get("compressible_plane_handoff_consumed") is True,
+            "event_id": handoff_rebind.get("event_id") if handoff_rebind else None,
+            "original_provider_result_digest": handoff_rebind.get("original_provider_result_digest") if handoff_rebind else None,
+            "handoff_provider_result_digest": handoff_rebind.get("handoff_provider_result_digest") if handoff_rebind else None,
+            "physical_validation_claim": handoff_rebind.get("physical_validation_claim") if handoff_rebind else False,
+            "frequency_inference": handoff_rebind.get("frequency_inference") if handoff_rebind else False,
+        },
         "diagnostic_only": True,
         "policy": {
             "provider_packet_promoted": False,

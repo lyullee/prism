@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import copy
 import json
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -218,3 +219,94 @@ def packet_rebind_provenance(
             "provider evidence, assign frequency, or complete the facility QRA."
         ),
     }
+
+
+def rebind_request_to_compressible_handoff(
+    current_request: dict[str, Any],
+    handoff_packet: Mapping[str, Any],
+    *,
+    event_id: str | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Replace one gas request with an explicit compressible-plane packet.
+
+    The handoff is a new provider result for the same event. It is checked
+    against the campaign's existing packet by event, component, port, and
+    source digest before the request is rebuilt. This prevents a packet from
+    another accident or equipment state being attached by shape alone.
+    """
+    if not isinstance(current_request, dict):
+        raise ProviderReleaseContractError("campaign request must be an object")
+    current_payload = current_request.get("resolved_release")
+    if not isinstance(current_payload, Mapping):
+        raise ProviderReleaseContractError("compressible handoff rebind requires an existing gas packet")
+    current_release = load_provider_release(current_payload)
+    handoff_release = load_provider_release(handoff_packet)
+    if not isinstance(current_release, ResolvedGasRelease) or not isinstance(handoff_release, ResolvedGasRelease):
+        raise ProviderReleaseContractError("compressible handoff rebind requires flat gas release packets")
+    checks = {
+        "event_id_match": current_release.event_id == handoff_release.event_id,
+        "component_id_match": current_release.component_id == handoff_release.component_id,
+        "port_id_match": current_release.port_id == handoff_release.port_id,
+        "source_digest_match": current_release.provider_source_digest == handoff_release.provider_source_digest,
+        "handoff_present": handoff_release.compressible_plane_handoff is not None,
+    }
+    if event_id is not None:
+        checks["requested_event_id_match"] = event_id == handoff_release.event_id
+    if not all(checks.values()):
+        failed = ", ".join(key for key, value in checks.items() if not value)
+        raise ProviderReleaseContractError(f"compressible handoff identity check failed: {failed}")
+    rebound = _request_from_selected_packet(current_request, handoff_release)
+    handoff = handoff_release.compressible_plane_handoff
+    assert handoff is not None
+    provenance = {
+        "schema_version": "prism.campaign_compressible_handoff_rebind.v1",
+        "event_id": handoff_release.event_id,
+        "component_id": handoff_release.component_id,
+        "port_id": handoff_release.port_id,
+        "original_provider_result_digest": current_release.provider_result_digest,
+        "handoff_provider_result_digest": handoff_release.provider_result_digest,
+        "identity_checks": checks,
+        "compressible_plane_handoff_consumed": True,
+        "handoff_provenance": handoff.provenance,
+        "facility_qra_claim": False,
+        "frequency_inference": False,
+        "physical_validation_claim": False,
+        "provider_packet_promoted": False,
+        "diagnostic_only": True,
+        "interpretation": (
+            "The request was explicitly rebound to a provider-supplied compressible plane for the "
+            "same event, component, port, and source state. The adapter remains diagnostic; its "
+            "near-field result is not independently validated and it does not create frequency or QRA claims."
+        ),
+    }
+    return rebound, provenance
+
+
+def rebind_campaign_to_compressible_handoff(
+    campaign: dict[str, Any],
+    handoff_packet: Mapping[str, Any],
+    *,
+    event_id: str,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Rebind exactly one campaign route to a validated compressible handoff."""
+    output = copy.deepcopy(campaign)
+    routes = output.get("event_routes")
+    if not isinstance(routes, list):
+        raise ValueError("campaign event_routes must be an array")
+    matches = [route for route in routes if isinstance(route, dict) and route.get("event_id") == event_id]
+    if len(matches) != 1:
+        raise ProviderReleaseContractError(f"campaign must contain exactly one route for handoff event: {event_id}")
+    route = matches[0]
+    branches = route.get("branches")
+    if not isinstance(branches, list):
+        raise ValueError(f"campaign route branches must be an array: {event_id}")
+    request_branches = [branch for branch in branches if isinstance(branch, dict) and branch.get("request") is not None]
+    if len(request_branches) != 1:
+        raise ProviderReleaseContractError(f"handoff rebind requires exactly one request branch: {event_id}")
+    branch = request_branches[0]
+    request, provenance = rebind_request_to_compressible_handoff(
+        branch["request"], handoff_packet, event_id=event_id
+    )
+    branch["request"] = request
+    validated = RiskCampaign.model_validate_json(json.dumps(output, ensure_ascii=False, allow_nan=False))
+    return validated.model_dump(mode="json"), provenance

@@ -30,3 +30,34 @@ def test_native_packet_campaign_preserves_failed_case_and_packet_identity():
     assert ledger["failed_case_count"] == 1
     assert ledger["chain_executed_case_count"] == 0
     assert ledger["facility_total_risk_available"] is False
+
+
+def test_native_packet_campaign_records_explicit_compressible_handoff_rebind():
+    campaign = {"id": "campaign-1", "event_routes": [{"event_id": "event-1"}]}
+    result = {
+        "events": [{"id": "event-1"}],
+        "cases": [{
+            "event_id": "event-1",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "provider_packet_identity": {
+                "provider_source_digests": ["source"],
+                "provider_result_digests": ["handoff-result"],
+            },
+        }],
+        "risk_atoms": [],
+        "complete_facility_qra_claim": False,
+        "physical_validation_claim": False,
+    }
+    provenance = {
+        "schema_version": "prism.campaign_compressible_handoff_rebind.v1",
+        "event_id": "event-1",
+        "original_provider_result_digest": "original",
+        "handoff_provider_result_digest": "handoff-result",
+        "compressible_plane_handoff_consumed": True,
+        "physical_validation_claim": False,
+        "frequency_inference": False,
+    }
+    ledger = build_native_packet_campaign_execution_ledger(campaign, result, provenance)
+    assert ledger["compressible_handoff_rebind"]["consumed"] is True
+    assert ledger["compressible_handoff_rebind"]["event_id"] == "event-1"
+    assert ledger["compressible_handoff_rebind"]["physical_validation_claim"] is False

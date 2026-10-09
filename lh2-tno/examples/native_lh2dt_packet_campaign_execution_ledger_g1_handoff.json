@@ -1,0 +1,88 @@
+{
+  "schema_version": "prism.native_lh2dt_packet_campaign_execution.v1",
+  "status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
+  "campaign_id": "equipment-manifest-event-provider-campaign",
+  "campaign_scope_provenance": "generic outdoor LH2 mixed provider family campaign; synthetic representative pipe location and pool footprint diagnostics only",
+  "event_count": 24,
+  "result_event_count": 24,
+  "case_count": 24,
+  "chain_executed_case_count": 24,
+  "packet_identity_case_count": 24,
+  "packet_digest_case_count": 24,
+  "packet_identity_consumed": true,
+  "route_event_set_matches_result": true,
+  "route_event_set_matches_cases": true,
+  "status_counts": {
+    "EXECUTED": 4,
+    "EXECUTED_OPERATOR_LIMITED": 20
+  },
+  "operator_limited_case_count": 20,
+  "operator_limited_event_ids": [
+    "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+    "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+    "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+    "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+  ],
+  "failed_case_count": 0,
+  "failed_cases": [],
+  "risk_atom_count": 96,
+  "known_contribution_annual_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "facility_total_risk_available": false,
+  "frequency_from_provider_packet": false,
+  "frequency_source": "campaign FrequencyPlan; provider packet carries release history only",
+  "provider_packet_promoted": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "rebind_provenance_status": "prism.campaign_compressible_handoff_rebind.v1",
+  "compressible_handoff_rebind": {
+    "consumed": true,
+    "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "original_provider_result_digest": "7554c951adb33574fd3c0631bc61c3383fb6292cdd49abdfa85d535e60e02d0d",
+    "handoff_provider_result_digest": "227caf76e92d93ed99e3653a2c20ccdbe81bc30c16328594c33d4c7e406ee885",
+    "physical_validation_claim": false,
+    "frequency_inference": false
+  },
+  "diagnostic_only": true,
+  "policy": {
+    "provider_packet_promoted": false,
+    "frequency_inference_performed": false,
+    "frequency_from_provider_packet": false,
+    "facility_qra_claim": false,
+    "physical_validation_claim": false
+  },
+  "interpretation": "The campaign consumed the strict native packet identities and preserved every failed or operator-limited case.  Literature frequencies remain campaign inputs; the provider packet does not generate a rate, and a partial campaign does not expose facility total IR/F-N.",
+  "campaign_record": "results\\20261019\\generic_native_packet_rebound_campaign_g1_handoff.json",
+  "result_record": "results\\20261019\\generic_native_packet_rebound_g1_handoff_result.json",
+  "provenance_record": "results\\20261019\\generic_native_packet_rebound_campaign_g1_handoff.provenance.json"
+}

@@ -1,11 +1,19 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from lh2_tno.campaign_packet_rebind import (
     _request_from_selected_packet,
     packet_rebind_provenance,
+    rebind_request_to_compressible_handoff,
 )
-from lh2_tno.equipment_boundary import ResolvedGasRelease, ResolvedGasStep
+from lh2_tno.equipment_boundary import (
+    CompressibleGasPlaneHandoff,
+    ResolvedGasRelease,
+    ResolvedGasStep,
+    VerticalGasHandoffState,
+)
 
 
 def _release() -> ResolvedGasRelease:
@@ -93,3 +101,58 @@ def test_rebind_provenance_is_separate_from_strict_campaign_schema():
     assert provenance["schema_version"] == "prism.campaign_packet_rebind.v1"
     assert provenance["event_count"] == 1
     assert provenance["frequency_bound"] is False
+
+
+def test_compressible_handoff_rebind_requires_same_source_and_preserves_diagnostic_policy():
+    release = _release()
+    handoff = CompressibleGasPlaneHandoff(
+        position_enu_m=(0.0, 0.0, 1.0),
+        direction_enu=(1.0, 0.0, 0.0),
+        velocity_m_s=1.0,
+        density_kg_m3=1.0,
+        temperature_k=288.15,
+        h2_mass_fraction=1.0,
+        half_width_m=0.5,
+        depth_m=1.0,
+        provenance="test compressible handoff; not independently validated",
+        states=(VerticalGasHandoffState(
+            time_s=0.0,
+            direction_enu=(1.0, 0.0, 0.0),
+            velocity_m_s=1.0,
+            density_kg_m3=1.0,
+            temperature_k=288.15,
+            h2_mass_fraction=1.0,
+            half_width_m=0.5,
+            depth_m=1.0,
+            provenance="test compressible handoff; not independently validated",
+        ),),
+    )
+    handoff_payload = release.model_dump(mode="json")
+    handoff_payload["compressible_plane_handoff"] = handoff.model_dump(mode="json")
+    handoff_payload["provider_result_digest"] = "2" * 64
+    request = _request()
+    request["resolved_release"] = release.model_dump(mode="json")
+
+    rebound, provenance = rebind_request_to_compressible_handoff(
+        request,
+        handoff_payload,
+        event_id=release.event_id,
+    )
+
+    assert rebound["resolved_release"]["provider_result_digest"] == "2" * 64
+    assert rebound["resolved_release"]["compressible_plane_handoff"] is not None
+    assert provenance["identity_checks"]["source_digest_match"] is True
+    assert provenance["compressible_plane_handoff_consumed"] is True
+    assert provenance["physical_validation_claim"] is False
+    assert provenance["frequency_inference"] is False
+
+
+def test_compressible_handoff_rebind_rejects_different_source_digest():
+    release = _release()
+    payload = release.model_dump(mode="json")
+    payload["provider_source_digest"] = "3" * 64
+    request = _request()
+    request["resolved_release"] = release.model_dump(mode="json")
+
+    with pytest.raises(ValueError, match="source_digest_match"):
+        rebind_request_to_compressible_handoff(request, payload, event_id=release.event_id)
