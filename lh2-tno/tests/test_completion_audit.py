@@ -1101,6 +1101,59 @@ def test_completion_audit_keeps_malformed_combined_chain_diagnostic_only():
     assert report["complete_facility_qra_claim"] is False
 
 
+def test_completion_audit_consumes_restricted_slabx_evidence_without_qra_promotion():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        slabx_validation_evidence={
+            "schema_version": "prism.slabx_lh2_validation_audit.v1",
+            "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+            "checks": [{"name": "model_identity", "status": "PASS"}],
+            "model": {"name": "SLABx-LH2"},
+            "metrics": {"ffi_case_count": 6},
+            "physical_validation_claim": False,
+            "full_chain_validation_claim": False,
+            "facility_qra_claim": False,
+            "frequency_inference_performed": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_slabx_lh2_validation_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_keeps_malformed_slabx_evidence_diagnostic_only():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        slabx_validation_evidence={
+            "schema_version": "prism.slabx_lh2_validation_audit.v1",
+            "status": "BLOCKED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+            "checks": [{"name": "model_identity", "status": "BLOCKED"}],
+            "physical_validation_claim": False,
+            "full_chain_validation_claim": False,
+            "facility_qra_claim": False,
+            "frequency_inference_performed": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_slabx_lh2_validation_evidence"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_marks_vertical_handoff_as_merged_when_scope_row_exists():
     report = build_ijhe_completion_audit(
         _status(False),

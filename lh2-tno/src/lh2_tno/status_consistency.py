@@ -97,6 +97,20 @@ def build_status_consistency_report(
         if isinstance(audit_combined_chain_check, Mapping)
         else {}
     )
+    audit_slabx_check = next(
+        (
+            row
+            for row in audit_checks
+            if isinstance(row, Mapping)
+            and row.get("name") == "diagnostic_slabx_lh2_validation_evidence"
+        ),
+        None,
+    ) if isinstance(audit_checks, Sequence) and not isinstance(audit_checks, (str, bytes)) else None
+    audit_slabx_evidence = (
+        audit_slabx_check.get("evidence", {})
+        if isinstance(audit_slabx_check, Mapping)
+        else {}
+    )
     audit_check_count = len(audit_checks or ())
     audit_blocking_reason_count = len(audit.get("blocking_reasons", ()))
     # The completion audit grows as new evidence gates are added.  Compare
@@ -174,6 +188,56 @@ def build_status_consistency_report(
                 "qualified_provider_packet_count"
             ),
             "facility_qra_claim": audit_combined_chain_evidence.get("facility_qra_claim"),
+        },
+    )
+    _check(
+        checks,
+        "audit_slabx_validation_gate",
+        audit_slabx_check is not None
+        and audit_slabx_check.get("status") == "PASS"
+        and audit_slabx_check.get("diagnostic_only") is True
+        and audit_slabx_evidence.get("schema_version")
+        == "prism.slabx_lh2_validation_audit.v1"
+        and audit_slabx_evidence.get("status")
+        == "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE"
+        and audit_slabx_evidence.get("check_count") == 5
+        and isinstance(audit_slabx_evidence.get("metrics"), Mapping)
+        and audit_slabx_evidence["metrics"].get("ffi_case_count") == 6
+        and audit_slabx_evidence["metrics"].get("flacs_comparison_row_count") == 6
+        and audit_slabx_evidence.get("physical_validation_claim") is False
+        and audit_slabx_evidence.get("facility_qra_claim") is False
+        and all(
+            _endswith(
+                status.get("slabx_lh2_validation_evidence_record"),
+                "slabx_lh2_validation_audit_v1.json",
+            )
+            for status in (current_status, development_goal)
+        ),
+        {
+            "status": (
+                audit_slabx_check.get("status")
+                if isinstance(audit_slabx_check, Mapping)
+                else None
+            ),
+            "diagnostic_only": (
+                audit_slabx_check.get("diagnostic_only")
+                if isinstance(audit_slabx_check, Mapping)
+                else None
+            ),
+            "schema_version": audit_slabx_evidence.get("schema_version"),
+            "evidence_status": audit_slabx_evidence.get("status"),
+            "check_count": audit_slabx_evidence.get("check_count"),
+            "ffi_case_count": (
+                audit_slabx_evidence.get("metrics", {}).get("ffi_case_count")
+                if isinstance(audit_slabx_evidence.get("metrics"), Mapping)
+                else None
+            ),
+            "flacs_comparison_row_count": (
+                audit_slabx_evidence.get("metrics", {}).get("flacs_comparison_row_count")
+                if isinstance(audit_slabx_evidence.get("metrics"), Mapping)
+                else None
+            ),
+            "facility_qra_claim": audit_slabx_evidence.get("facility_qra_claim"),
         },
     )
 
@@ -342,7 +406,10 @@ def build_status_consistency_report(
             checks,
             f"{label}_assessment_pointer",
             _endswith(status.get("ijhe_completion_audit_latest_facility_assessment_record"), assessment_filename)
-            and status.get("full_portable_test_count") == 562,
+            and isinstance(status.get("full_portable_test_count"), int)
+            and status.get("full_portable_test_count", 0) > 0
+            and status.get("full_portable_test_status")
+            == f"{status.get('full_portable_test_count')} passed",
             {
                 "assessment_record": status.get(
                     "ijhe_completion_audit_latest_facility_assessment_record"

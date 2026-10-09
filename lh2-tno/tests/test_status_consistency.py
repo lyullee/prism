@@ -9,7 +9,7 @@ from lh2_tno.status_consistency import build_status_consistency_report, load_jso
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v13.json"
+AUDIT = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v14.json"
 ASSESSMENT = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
 EVIDENCE_REQUEST = ROOT / "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json"
 LEDGER = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_ledger_population_v3.json"
@@ -61,3 +61,15 @@ def test_changed_combined_chain_cannot_pass() -> None:
     report = _report(audit=audit)
     assert report["status"] == "INCONSISTENT"
     assert "audit_combined_chain_gate" in report["blocking_reasons"]
+
+
+def test_changed_slabx_validation_cannot_pass() -> None:
+    audit = deepcopy(load_json_object(AUDIT))
+    slabx = next(
+        row for row in audit["checks"]
+        if row["name"] == "diagnostic_slabx_lh2_validation_evidence"
+    )
+    slabx["evidence"]["metrics"]["ffi_case_count"] = 5
+    report = _report(audit=audit)
+    assert report["status"] == "INCONSISTENT"
+    assert "audit_slabx_validation_gate" in report["blocking_reasons"]

@@ -74,6 +74,7 @@ def build_ijhe_completion_audit(
     native_binding_reconciliation: Mapping[str, Any] | None = None,
     facility_case_packet_coverage: Mapping[str, Any] | None = None,
     combined_chain_closure: Mapping[str, Any] | None = None,
+    slabx_validation_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1253,6 +1254,46 @@ def build_ijhe_completion_audit(
                     "by the IJHE completion report. Their 29-event diagnostic closure is recorded "
                     "without converting synthetic/operator-limited events into qualified packets, "
                     "frequencies, physical validation, or facility QRA."
+                ),
+            }
+        )
+    if slabx_validation_evidence is not None:
+        slabx = slabx_validation_evidence
+        slabx_checks = slabx.get("checks")
+        slabx_valid = (
+            slabx.get("schema_version") == "prism.slabx_lh2_validation_audit.v1"
+            and slabx.get("status") == "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE"
+            and isinstance(slabx_checks, list)
+            and bool(slabx_checks)
+            and all(
+                isinstance(row, Mapping) and row.get("status") == "PASS"
+                for row in slabx_checks
+            )
+            and slabx.get("physical_validation_claim") is False
+            and slabx.get("full_chain_validation_claim") is False
+            and slabx.get("facility_qra_claim") is False
+            and slabx.get("frequency_inference_performed") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_slabx_lh2_validation_evidence",
+                "status": "PASS" if slabx_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": slabx.get("_record_path"),
+                    "schema_version": slabx.get("schema_version"),
+                    "status": slabx.get("status"),
+                    "model": slabx.get("model"),
+                    "check_count": len(slabx_checks) if isinstance(slabx_checks, list) else None,
+                    "metrics": slabx.get("metrics"),
+                    "physical_validation_claim": slabx.get("physical_validation_claim"),
+                    "facility_qra_claim": slabx.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "SLABx-LH2 cryogenic-dispersion and pool evidence is consumed as a "
+                    "restricted consequence-component record. It does not qualify the "
+                    "equipment release, initiating frequency, ignition model, or facility QRA."
                 ),
             }
         )
