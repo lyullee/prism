@@ -1110,7 +1110,7 @@
   "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py",
   "ijhe_completion_audit_source_state_rebound_record": "results/20261017/ijhe_completion_audit_source_state_rebound.json",
   "ijhe_completion_audit_source_state_rebound_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_source_state_rebound_check_count": 14,
+  "ijhe_completion_audit_source_state_rebound_check_count": 15,
   "ijhe_completion_audit_source_state_rebound_blocking_reason_count": 6,
   "ijhe_completion_audit_source_state_rebound_passed_checks": [
     "equipment_state_to_release_to_consequence",
@@ -1120,7 +1120,8 @@
     "physical_validation_evidence_restricted_component",
     "processing_time_evidence",
     "realtime_monitor_contract",
-    "diagnostic_vertical_handoff_evidence"
+    "diagnostic_vertical_handoff_evidence",
+    "diagnostic_conditional_facility_risk_evidence"
   ],
   "ijhe_completion_audit_source_state_rebound_blocked_checks": [
     "equipment_model_binding_to_accident_release",
@@ -1142,5 +1143,17 @@
   "ijhe_completion_audit_source_state_rebound_vertical_handoff_provider_consumed": true,
   "ijhe_completion_audit_source_state_rebound_vertical_handoff_physical_validation_claim": false,
   "ijhe_completion_audit_source_state_rebound_test_status": "18 audit tests; full portable suite 411 passed",
-  "ijhe_completion_audit_source_state_rebound_record_status": "INCOMPLETE_EVIDENCE; 14 checks, 6 blocking reasons; restricted component validation and vertical handoff diagnostics recorded separately"
+  "ijhe_completion_audit_source_state_rebound_record_status": "INCOMPLETE_EVIDENCE; 14 checks, 6 blocking reasons; restricted component validation and vertical handoff diagnostics recorded separately",
+  "ijhe_completion_audit_source_state_rebound_facility_assessment_record": "results/20261017/generic_mixed_provider_source_state_rebound_assessment.json",
+  "ijhe_completion_audit_source_state_rebound_facility_assessment_status": "PASS_DIAGNOSTIC_ONLY",
+  "ijhe_completion_audit_source_state_rebound_conditional_facility_risk_available": true,
+  "ijhe_completion_audit_source_state_rebound_conditional_facility_ir_low_high": {
+    "worker-01": [
+      0.0,
+      0.0
+    ]
+  },
+  "ijhe_completion_audit_source_state_rebound_conditional_facility_uncomputed_case_count": 21,
+  "ijhe_completion_audit_source_state_rebound_conditional_facility_operator_limited_case_count": 20,
+  "ijhe_completion_audit_source_state_rebound_facility_total_risk_available": false
 }
