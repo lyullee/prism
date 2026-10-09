@@ -3548,17 +3548,46 @@
         "schema_version": "prism.realtime_cache_benchmark.v1",
         "facility_id": "generic-lh2-near-receptor-diagnostic",
         "request_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
-        "fresh_physics_elapsed_ms": 2731.322699924931,
+        "fresh_physics_elapsed_ms": 2663.142599980347,
         "cache_hits": 10,
         "cache_sample_count": 10,
-        "cache_median_ms": 22.69885002169758,
-        "cache_p95_ms": 23.30389991402626,
+        "cache_median_ms": 48.63154998747632,
+        "cache_p95_ms": 54.43750007543713,
         "one_hz_deadline_s": 1.0,
         "fresh_physics_meets_one_hz": false,
         "cache_meets_one_hz_all_samples": true,
-        "realtime_fresh_physics_claim": false
+        "realtime_fresh_physics_claim": false,
+        "persistent_fresh_physics": {
+          "persistent_worker": true,
+          "request_count": 4,
+          "startup_included_in_first_sample": true,
+          "service_elapsed_ms_values": [
+            2595.620800042525,
+            2359.8010999849066,
+            2481.152100022882,
+            2101.338700042106
+          ],
+          "backend_elapsed_ms_values": [
+            2540.9903000108898,
+            2288.753200089559,
+            2429.7256000572816,
+            2045.1287999749184
+          ],
+          "startup_elapsed_ms": 2595.620800042525,
+          "steady_elapsed_ms_values": [
+            2359.8010999849066,
+            2481.152100022882,
+            2101.338700042106
+          ],
+          "steady_median_ms": 2359.8010999849066,
+          "steady_p95_ms": 2359.8010999849066,
+          "fresh_physics_meets_one_hz": false,
+          "steady_fresh_physics_meets_one_hz": false,
+          "realtime_fresh_physics_claim": false,
+          "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
+        }
       },
-      "interpretation": "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in this benchmark. The separately measured fresh-physics run is slower and no fresh-physics 1 Hz service claim is made."
+      "interpretation": "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in this benchmark. The separately measured cold and warm fresh-physics runs remain diagnostic timing evidence; no fresh-physics 1 Hz service claim is made."
     },
     {
       "name": "diagnostic_domain_recovery_audit",

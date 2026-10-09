@@ -152,13 +152,42 @@
         "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
       ],
       "observed": {
-        "cache_p95_ms": 23.30389991402626,
+        "cache_p95_ms": 54.43750007543713,
         "cache_meets_one_hz_all_samples": true,
-        "fresh_physics_elapsed_ms": 2731.322699924931,
-        "fresh_physics_meets_one_hz": false
+        "fresh_physics_elapsed_ms": 2663.142599980347,
+        "fresh_physics_meets_one_hz": false,
+        "persistent_fresh_physics": {
+          "persistent_worker": true,
+          "request_count": 4,
+          "startup_included_in_first_sample": true,
+          "service_elapsed_ms_values": [
+            2595.620800042525,
+            2359.8010999849066,
+            2481.152100022882,
+            2101.338700042106
+          ],
+          "backend_elapsed_ms_values": [
+            2540.9903000108898,
+            2288.753200089559,
+            2429.7256000572816,
+            2045.1287999749184
+          ],
+          "startup_elapsed_ms": 2595.620800042525,
+          "steady_elapsed_ms_values": [
+            2359.8010999849066,
+            2481.152100022882,
+            2101.338700042106
+          ],
+          "steady_median_ms": 2359.8010999849066,
+          "steady_p95_ms": 2359.8010999849066,
+          "fresh_physics_meets_one_hz": false,
+          "steady_fresh_physics_meets_one_hz": false,
+          "realtime_fresh_physics_claim": false,
+          "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
+        }
       },
       "blocking_reason": null,
-      "interpretation": "캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다."
+      "interpretation": "캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다. warm worker는 반복 시작 비용을 줄이는 진단 경로이며, 측정된 fresh physics 시간을 별도로 보존한다."
     },
     {
       "id": "independent_physical_validation",

@@ -476,11 +476,37 @@ def run(request):
     raise ValueError("unsupported operation")
 
 
+def _serve() -> None:
+    """Serve newline-delimited requests while retaining imported modules."""
+    for line in sys.stdin:
+        if not line.strip():
+            continue
+        try:
+            request = json.loads(line)
+            with contextlib.redirect_stdout(sys.stderr):
+                result = run(request)
+            versions = {
+                name: importlib.metadata.version(name)
+                for name in request["required_versions"]
+            }
+            response = {
+                "ok": True,
+                **result,
+                "environment": {"python": sys.version, "dependencies": versions},
+            }
+        except Exception as error:
+            response = {"ok": False, "error": f"{type(error).__name__}: {error}"}
+        print(json.dumps(response, ensure_ascii=False, allow_nan=False), flush=True)
+
+
 if __name__=="__main__":
-    try:
-        request=json.load(sys.stdin)
-        with contextlib.redirect_stdout(sys.stderr): result=run(request)
-        versions={name:importlib.metadata.version(name) for name in request["required_versions"]}
-        print(json.dumps({"ok":True,**result,"environment":{"python":sys.version,"dependencies":versions}},ensure_ascii=False,allow_nan=False))
-    except Exception as e:
-        print(json.dumps({"ok":False,"error":f"{type(e).__name__}: {e}"},ensure_ascii=False))
+    if "--serve" in sys.argv[1:]:
+        _serve()
+    else:
+        try:
+            request=json.load(sys.stdin)
+            with contextlib.redirect_stdout(sys.stderr): result=run(request)
+            versions={name:importlib.metadata.version(name) for name in request["required_versions"]}
+            print(json.dumps({"ok":True,**result,"environment":{"python":sys.version,"dependencies":versions}},ensure_ascii=False,allow_nan=False))
+        except Exception as e:
+            print(json.dumps({"ok":False,"error":f"{type(e).__name__}: {e}"},ensure_ascii=False))

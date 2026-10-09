@@ -365,9 +365,10 @@ def build_ijhe_objective_coverage_audit(
             "cache_meets_one_hz_all_samples": realtime_cache_benchmark.get("cache_meets_one_hz_all_samples") if isinstance(realtime_cache_benchmark, Mapping) else None,
             "fresh_physics_elapsed_ms": realtime_cache_benchmark.get("fresh_physics_elapsed_ms") if isinstance(realtime_cache_benchmark, Mapping) else None,
             "fresh_physics_meets_one_hz": realtime_cache_benchmark.get("fresh_physics_meets_one_hz") if isinstance(realtime_cache_benchmark, Mapping) else None,
+            "persistent_fresh_physics": realtime_cache_benchmark.get("persistent_fresh_physics") if isinstance(realtime_cache_benchmark, Mapping) else None,
         },
         blocking_reason=None if realtime_ok else "cache 또는 fresh-physics 처리시간 측정이 없다",
-        interpretation="캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다.",
+        interpretation="캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다. warm worker는 반복 시작 비용을 줄이는 진단 경로이며, 측정된 fresh physics 시간을 별도로 보존한다.",
     ))
 
     physical_ok = (

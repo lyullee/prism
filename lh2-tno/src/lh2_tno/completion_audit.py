@@ -1550,6 +1550,34 @@ def build_ijhe_completion_audit(
     if realtime_cache_benchmark is not None:
         benchmark = realtime_cache_benchmark
         cache_values = benchmark.get("cache_elapsed_ms_values")
+        persistent = benchmark.get("persistent_fresh_physics")
+        persistent_values = (
+            persistent.get("service_elapsed_ms_values")
+            if isinstance(persistent, dict)
+            else None
+        )
+        persistent_steady_values = (
+            persistent.get("steady_elapsed_ms_values")
+            if isinstance(persistent, dict)
+            else None
+        )
+        persistent_valid = persistent is None or (
+            isinstance(persistent, dict)
+            and persistent.get("persistent_worker") is True
+            and isinstance(persistent.get("request_count"), int)
+            and persistent.get("request_count", 0) > 0
+            and isinstance(persistent_values, list)
+            and len(persistent_values) == persistent.get("request_count")
+            and all(isinstance(value, (int, float)) and value > 0 for value in persistent_values)
+            and isinstance(persistent_steady_values, list)
+            and bool(persistent_steady_values)
+            and all(
+                isinstance(value, (int, float)) and value > 0
+                for value in persistent_steady_values
+            )
+            and persistent.get("realtime_fresh_physics_claim") is False
+            and persistent.get("steady_fresh_physics_meets_one_hz") is False
+        )
         benchmark_valid = (
             benchmark.get("schema_version") == "prism.realtime_cache_benchmark.v1"
             and isinstance(benchmark.get("fresh_physics_elapsed_ms"), (int, float))
@@ -1567,6 +1595,7 @@ def build_ijhe_completion_audit(
             and benchmark.get("fresh_physics_meets_one_hz") is False
             and benchmark.get("cache_meets_one_hz_all_samples") is True
             and benchmark.get("realtime_fresh_physics_claim") is False
+            and persistent_valid
         )
         checks.append(
             {
@@ -1592,11 +1621,13 @@ def build_ijhe_completion_audit(
                     "realtime_fresh_physics_claim": benchmark.get(
                         "realtime_fresh_physics_claim"
                     ),
+                    "persistent_fresh_physics": persistent,
                 },
                 "interpretation": (
                     "Repeated exact-cache lookups meet the declared 1 Hz diagnostic deadline in "
-                    "this benchmark. The separately measured fresh-physics run is slower and no "
-                    "fresh-physics 1 Hz service claim is made."
+                    "this benchmark. The separately measured cold and warm fresh-physics runs "
+                    "remain diagnostic timing evidence; no fresh-physics 1 Hz service claim is "
+                    "made."
                 ),
             }
         )

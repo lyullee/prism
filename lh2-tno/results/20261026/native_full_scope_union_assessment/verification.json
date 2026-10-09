@@ -63,8 +63,8 @@
   "validation_evidence_matrix_physical_validation_claim": false,
   "validation_evidence_matrix_facility_qra_claim": false,
   "realtime_cache_benchmark_cache_hits": 10,
-  "realtime_cache_benchmark_cache_p95_ms": 23.30389991402626,
-  "realtime_cache_benchmark_fresh_physics_elapsed_ms": 2731.322699924931,
+  "realtime_cache_benchmark_cache_p95_ms": 54.43750007543713,
+  "realtime_cache_benchmark_fresh_physics_elapsed_ms": 2663.142599980347,
   "realtime_cache_benchmark_fresh_physics_meets_one_hz": false,
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
   "ijhe_audit_check_count": 30,
@@ -79,5 +79,34 @@
   "native_scope_packet_catalog_exact_packet_count": 24,
   "slabx_validation_evidence_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
   "slabx_validation_evidence_check_count": 5,
-  "slabx_validation_evidence_physical_validation_claim": false
+  "slabx_validation_evidence_physical_validation_claim": false,
+  "realtime_cache_benchmark_persistent_fresh_physics": {
+    "persistent_worker": true,
+    "request_count": 4,
+    "startup_included_in_first_sample": true,
+    "service_elapsed_ms_values": [
+      2595.620800042525,
+      2359.8010999849066,
+      2481.152100022882,
+      2101.338700042106
+    ],
+    "backend_elapsed_ms_values": [
+      2540.9903000108898,
+      2288.753200089559,
+      2429.7256000572816,
+      2045.1287999749184
+    ],
+    "startup_elapsed_ms": 2595.620800042525,
+    "steady_elapsed_ms_values": [
+      2359.8010999849066,
+      2481.152100022882,
+      2101.338700042106
+    ],
+    "steady_median_ms": 2359.8010999849066,
+    "steady_p95_ms": 2359.8010999849066,
+    "fresh_physics_meets_one_hz": false,
+    "steady_fresh_physics_meets_one_hz": false,
+    "realtime_fresh_physics_claim": false,
+    "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
+  }
 }

@@ -2,26 +2,55 @@
   "schema_version": "prism.realtime_cache_benchmark.v1",
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "request_event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
-  "fresh_physics_elapsed_ms": 2731.322699924931,
-  "fresh_backend_elapsed_ms": 2705.504299956374,
+  "fresh_physics_elapsed_ms": 2663.142599980347,
+  "fresh_backend_elapsed_ms": 2629.240399925038,
   "cache_elapsed_ms_values": [
-    23.930200026370585,
-    23.30389991402626,
-    22.689700010232627,
-    22.708000033162534,
-    22.213099990040064,
-    22.55269989836961,
-    22.108100005425513,
-    22.348099970258772,
-    23.25239998754114,
-    23.162500001490116
+    31.939600012265146,
+    31.64559998549521,
+    30.572099960409105,
+    30.6972999824211,
+    45.81310006324202,
+    51.44999991171062,
+    53.125400096178055,
+    60.604500002227724,
+    54.43750007543713,
+    53.98070008959621
   ],
-  "cache_median_ms": 22.69885002169758,
-  "cache_p95_ms": 23.30389991402626,
+  "cache_median_ms": 48.63154998747632,
+  "cache_p95_ms": 54.43750007543713,
   "cache_hits": 10,
   "one_hz_deadline_s": 1.0,
   "fresh_physics_meets_one_hz": false,
   "cache_meets_one_hz_all_samples": true,
   "realtime_fresh_physics_claim": false,
-  "interpretation": "Exact cache samples meet a 1 Hz lookup deadline in this run; the fresh physics sample is measured separately and is not a 1 Hz service-level claim."
+  "interpretation": "Exact cache samples meet a 1 Hz lookup deadline in this run; the fresh physics sample is measured separately and is not a 1 Hz service-level claim.",
+  "persistent_fresh_physics": {
+    "persistent_worker": true,
+    "request_count": 4,
+    "startup_included_in_first_sample": true,
+    "service_elapsed_ms_values": [
+      2595.620800042525,
+      2359.8010999849066,
+      2481.152100022882,
+      2101.338700042106
+    ],
+    "backend_elapsed_ms_values": [
+      2540.9903000108898,
+      2288.753200089559,
+      2429.7256000572816,
+      2045.1287999749184
+    ],
+    "startup_elapsed_ms": 2595.620800042525,
+    "steady_elapsed_ms_values": [
+      2359.8010999849066,
+      2481.152100022882,
+      2101.338700042106
+    ],
+    "steady_median_ms": 2359.8010999849066,
+    "steady_p95_ms": 2359.8010999849066,
+    "fresh_physics_meets_one_hz": false,
+    "steady_fresh_physics_meets_one_hz": false,
+    "realtime_fresh_physics_claim": false,
+    "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
+  }
 }

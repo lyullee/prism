@@ -129,6 +129,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "realtime_cache_benchmark_fresh_physics_meets_one_hz": (
                 realtime.get("fresh_physics_meets_one_hz") if realtime else None
             ),
+            "realtime_cache_benchmark_persistent_fresh_physics": (
+                realtime.get("persistent_fresh_physics") if realtime else None
+            ),
             "ijhe_audit_status": audit["status"],
             "ijhe_audit_check_count": len(audit["checks"]),
             "ijhe_audit_pass_count": sum(row["status"] == "PASS" for row in audit["checks"]),
@@ -205,6 +208,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "validation_matrix_decision": matrix["decision"],
         "cache_hits": realtime.get("cache_hits") if realtime else None,
         "fresh_physics_meets_one_hz": realtime.get("fresh_physics_meets_one_hz") if realtime else None,
+        "persistent_fresh_physics": realtime.get("persistent_fresh_physics") if realtime else None,
         "output": str(output_dir.resolve()),
         "source_audit_status": source_audit.get("status"),
     }
