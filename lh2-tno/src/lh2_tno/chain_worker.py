@@ -537,7 +537,7 @@ def run_chain(p,roots,module):
                                         t_max=max(horizon-tt,span+1e-3),n_puff_steps=p['n_puff_steps'])
         except Exception as error:
             if 'x must be non-decreasing' in str(error):
-                if kind != 'jet' or not hasattr(source_model,'state'):
+                if kind != 'jet' or not hasattr(source_model,'state') or span > 1.e-3:
                     raise ValueError(
                         f'dispersion finite-release puff handoff remained non-monotonic for {kind} '
                         f'packet rate={rate:.9g}, area={area:.9g}, span={span:.9g}; '
