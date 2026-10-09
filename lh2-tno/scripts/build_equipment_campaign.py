@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from lh2_tno.campaign import AnnualCondition
+from lh2_tno.campaign import AnnualCondition, RiskCampaign
 from lh2_tno.campaign_template import (
     RequestBranchTemplate,
     build_equipment_campaign,
@@ -33,6 +33,10 @@ from lh2_tno.provider_release import (
     load_provider_release_catalog,
     load_provider_release_set_branch_catalog,
     load_provider_release_set_catalog,
+)
+from lh2_tno.provider_packet_promotion import (
+    ProviderPacketPromotionError,
+    load_provider_packet_evidence_catalog,
 )
 
 
@@ -68,6 +72,14 @@ def main() -> int:
     parser.add_argument(
         "--request-defaults", type=Path,
         help="reviewed consequence context JSON; required with --provider-release-catalog",
+    )
+    parser.add_argument(
+        "--provider-evidence-catalog",
+        type=Path,
+        help=(
+            "optional prism.provider_packet_evidence.v1 object/array to attach to the compiled campaign; "
+            "missing events remain unqualified"
+        ),
     )
     parser.add_argument("--annual-conditions", type=Path, required=True)
     parser.add_argument("--scope-provenance", required=True)
@@ -174,6 +186,22 @@ def main() -> int:
             conditions,
             scope_provenance=args.scope_provenance,
         )
+    if args.provider_evidence_catalog:
+        try:
+            evidence = load_provider_packet_evidence_catalog(args.provider_evidence_catalog)
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, ProviderPacketPromotionError) as error:
+            raise SystemExit(f"provider packet evidence input error: {error}") from error
+        generated_event_ids = {route.event_id for route in campaign.event_routes}
+        unknown = sorted({row.event_id for row in evidence} - generated_event_ids)
+        if unknown:
+            raise SystemExit(
+                "provider packet evidence references unknown generated events: "
+                + ", ".join(unknown)
+            )
+        campaign = RiskCampaign.model_validate({
+            **campaign.model_dump(),
+            "provider_packet_evidence": evidence,
+        })
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(campaign.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
@@ -209,6 +237,8 @@ def main() -> int:
             if args.provider_release_catalog or args.provider_release_branch_catalog
             else None
         ),
+        "provider_packet_evidence_count": len(campaign.provider_packet_evidence),
+        "provider_packet_evidence_attached": bool(campaign.provider_packet_evidence),
     }, ensure_ascii=False))
     return 0
 

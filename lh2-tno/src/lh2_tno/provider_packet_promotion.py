@@ -8,7 +8,8 @@ assigns a frequency and it rejects packets marked as synthetic input.
 """
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
+import json
 from pathlib import Path
 from typing import Any
 
@@ -30,8 +31,6 @@ class ProviderPacketPromotionError(ValueError):
 
 def _object(value: Mapping[str, Any] | str | Path, label: str) -> Mapping[str, Any]:
     if isinstance(value, (str, Path)):
-        import json
-
         try:
             value = json.loads(Path(value).read_text(encoding="utf-8"))
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
@@ -39,6 +38,56 @@ def _object(value: Mapping[str, Any] | str | Path, label: str) -> Mapping[str, A
     if not isinstance(value, Mapping):
         raise ProviderPacketPromotionError(f"{label} must be a JSON object")
     return value
+
+
+def load_provider_packet_evidence_catalog(
+    value: Sequence[Mapping[str, Any]] | Mapping[str, Any] | str | Path,
+) -> tuple[ProviderPacketEvidence, ...]:
+    """Load promoted evidence records from one object, array, or wrapper."""
+
+    raw: Any = value
+    if isinstance(value, (str, Path)):
+        try:
+            raw = json.loads(Path(value).read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise ProviderPacketPromotionError(
+                f"cannot read provider packet evidence catalog: {error}"
+            ) from error
+    if isinstance(raw, Mapping):
+        if isinstance(raw.get("provider_packet_evidence"), list):
+            raw = raw["provider_packet_evidence"]
+        elif isinstance(raw.get("evidence"), list):
+            raw = raw["evidence"]
+        else:
+            raw = [raw]
+    if not isinstance(raw, Sequence) or isinstance(raw, (str, bytes)):
+        raise ProviderPacketPromotionError(
+            "provider packet evidence catalog must be an object, array, or wrapped array"
+        )
+    rows: list[ProviderPacketEvidence] = []
+    for index, item in enumerate(raw):
+        if isinstance(item, ProviderPacketEvidence):
+            rows.append(item)
+            continue
+        if not isinstance(item, Mapping):
+            raise ProviderPacketPromotionError(
+                f"provider packet evidence row {index} must be a JSON object"
+            )
+        try:
+            rows.append(
+                ProviderPacketEvidence.model_validate_json(
+                    json.dumps(item, ensure_ascii=False, allow_nan=False)
+                )
+            )
+        except ValueError as error:
+            raise ProviderPacketPromotionError(
+                f"provider packet evidence row {index} failed strict validation: {error}"
+            ) from error
+    if len({row.event_id for row in rows}) != len(rows):
+        raise ProviderPacketPromotionError(
+            "provider packet evidence event_id values must be unique"
+        )
+    return tuple(rows)
 
 
 def build_provider_packet_evidence_from_records(
@@ -121,4 +170,5 @@ __all__ = [
     "PROVIDER_QUALIFICATION_SCHEMA",
     "ProviderPacketPromotionError",
     "build_provider_packet_evidence_from_records",
+    "load_provider_packet_evidence_catalog",
 ]

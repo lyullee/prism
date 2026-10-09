@@ -2401,12 +2401,18 @@
   "provider_gate_reissued_ijhe_audit_record": "examples/ijhe_completion_audit_provider_gate_summary.json",
   "provider_gate_reissued_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 15 checks, 4 blockers; chain, frequency uncertainty, duration/isolation/inventory ledger and processing-time checks pass; actual provider packet, scope completeness and facility IR/F-N remain blocked",
   "provider_gate_reissued_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 37 uncomputed cases, 240 risk atoms; provider packet cases 0 and qualified facility QRA withheld",
-  "full_portable_test_count": 469,
-  "full_portable_test_status": "469 passed",
+  "full_portable_test_count": 470,
+  "full_portable_test_status": "470 passed",
   "provider_packet_file_promotion_implemented": true,
   "provider_packet_file_promotion_module": "src/lh2_tno/provider_packet_promotion.py",
   "provider_packet_file_promotion_script": "scripts/build_provider_packet_evidence.py",
   "provider_packet_file_promotion_schema": "prism.provider_packet_evidence.v1",
   "provider_packet_file_promotion_policy": "A saved prism.resolved_release.v1 or prism.resolved_release_set.v1 packet is strict-validated against a separate prism.provider_qualification_evidence.v1 sidecar; exact event/component/port and source/result digest identity is required; synthetic input is rejected; no initiating frequency is inferred.",
-  "provider_packet_file_promotion_current_status": "IMPLEMENTED; converter and rejection tests pass; current external evidence inventory still has 0 qualified packets"
+  "provider_packet_file_promotion_current_status": "IMPLEMENTED; converter and rejection tests pass; current external evidence inventory still has 0 qualified packets",
+  "provider_packet_evidence_catalog_loader_implemented": true,
+  "provider_packet_evidence_catalog_loader_module": "src/lh2_tno/provider_packet_promotion.py",
+  "provider_packet_evidence_catalog_campaign_attachment_implemented": true,
+  "provider_packet_evidence_catalog_campaign_attachment_script": "scripts/build_equipment_campaign.py --provider-evidence-catalog",
+  "provider_packet_evidence_catalog_campaign_attachment_policy": "Attach only validated prism.provider_packet_evidence.v1 rows whose event IDs exist in the generated FrequencyPlan; omitted events remain uncomputed/unqualified; no initiating frequency is inferred.",
+  "provider_packet_evidence_catalog_current_status": "IMPLEMENTED; compile smoke attached 1 of 24 evidence rows and preserved 23 missing-provider branches; current external qualified packet count remains 0"
 }

@@ -304,7 +304,7 @@ python -m venv .venv
   --output provider_packet_evidence.json
 ```
 
-현재 external evidence inventory에는 이 sidecar를 갖춘 실제 packet이 없어 qualified packet 수는 0건이며 시설 IR/F-N 승격은 계속 보류됩니다.
+생성된 evidence catalog를 campaign에 연결하려면 컴파일러에 `--provider-evidence-catalog provider_packet_evidence.json`을 추가합니다. evidence에 없는 사건은 자동으로 다른 packet으로 대체하지 않고 `UNCOMPUTED`/미자격으로 남습니다. 현재 external evidence inventory에는 이 sidecar를 갖춘 실제 packet이 없어 qualified packet 수는 0건이며 시설 IR/F-N 승격은 계속 보류됩니다.
 
 ```powershell
 .venv\Scripts\python.exe lh2-tno/scripts/build_equipment_campaign.py `
@@ -1020,7 +1020,7 @@ $py = (Get-Item '../output/prism-export-v060-1febujhk/venv/Scripts/python.exe').
 
 실제 설비 모델이 사고 이력을 제공하면 `RiskCampaign.provider_packet_evidence`에 그 근거를 명시한다. `prism.provider_packet_evidence.v1` 레코드는 event·component·port와 provider source/result SHA-256 digest를 모두 적어야 하며, 실행된 `provider_packet_identity`와 정확히 일치할 때만 해당 case를 `qualified_provider_packet_case_count`로 센다. packet을 읽었다는 사실만으로 qualified 상태가 되지 않는다.
 
-`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 469개 portable 테스트로 확인했다.
+`physical_validation_evidence.status=independent_validated`와 검증 근거 ID/digest도 별도로 필요하다. 따라서 캠페인 결과의 `provider_packet_promoted`, `physical_validation_claim`, `complete_facility_qra_claim`은 각각 독립적으로 기록되며, 기존 문헌 빈도는 그대로 유지된다. provider 방출 이력은 빈도를 만들거나 바꾸지 않는다. 현재 실행 결과는 qualified packet 0건이고, 이 게이트가 시설 전체 IR/F-N을 자동으로 열지는 않는다. 이 계약과 검사는 470개 portable 테스트로 확인했다.
 
 문헌 빈도 p05·published·p95 및 분포 샘플링 결과에도 같은 승격 상태를 전달한다. 따라서 빈도 민감도 표가 계산되어도 `provider_packet_promoted`와 `complete_facility_qra_claim`을 별도로 확인할 수 있고, 빈도 불확실성 결과가 물리검증이나 시설 완결성을 대신하지 않는다.
 

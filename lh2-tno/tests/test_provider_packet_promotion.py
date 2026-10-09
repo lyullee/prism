@@ -6,6 +6,7 @@ import pytest
 from lh2_tno.provider_packet_promotion import (
     ProviderPacketPromotionError,
     build_provider_packet_evidence_from_records,
+    load_provider_packet_evidence_catalog,
 )
 
 
@@ -64,3 +65,14 @@ def test_qualification_sidecar_must_match_source_digest():
         build_provider_packet_evidence_from_records(
             _release(), _qualification(provider_source_digest="2" * 64)
         )
+
+
+def test_evidence_catalog_accepts_wrapped_rows_and_rejects_duplicate_events():
+    evidence = build_provider_packet_evidence_from_records(_release(), _qualification())
+    wrapped = {"provider_packet_evidence": [evidence.model_dump(mode="json")]}
+
+    loaded = load_provider_packet_evidence_catalog(wrapped)
+
+    assert loaded == (evidence,)
+    with pytest.raises(ProviderPacketPromotionError, match="event_id values must be unique"):
+        load_provider_packet_evidence_catalog([evidence.model_dump(mode="json")] * 2)
