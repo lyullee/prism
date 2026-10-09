@@ -728,6 +728,21 @@ def test_facility_assessment_reconciles_provider_qualification_coverage():
             "qualified_provider_packet_count": 1,
             "unqualified_exact_match_count": 0,
         },
+        facility_case_packet_coverage={
+            "schema": "prism.facility_case_provider_coverage.v1",
+            "status": "QUALIFIED_FULL_CASE_COVERAGE",
+            "case_request_count": 1,
+            "qualified_provider_event_count": 1,
+            "qualified_provider_case_count": 1,
+            "provider_evidence_row_count": 1,
+            "promotion_policy": {
+                "frequency_is_not_assigned": True,
+                "physical_validation_claim": False,
+                "facility_ir_fn_promotion": (
+                    "requires this full case gate plus independent scope and validation gates"
+                ),
+            },
+        },
     )
 
     gate = assessment["provider_qualification_coverage"]
@@ -769,6 +784,30 @@ def test_facility_assessment_withholds_provider_qualification_coverage_on_count_
     assert any("does not match" in reason for reason in gate["blocking_reasons"])
     assert assessment["qualified_facility_qra_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
+
+
+def test_facility_assessment_requires_case_coverage_report_for_provider_cases():
+    result = _result(
+        event_id="event-case-coverage-required",
+        asset_id="asset-case-coverage-required",
+        component_id="tank-case-coverage-required",
+        frequency=1e-3,
+    )
+    result.update(
+        provider_packet_case_count=1,
+        qualified_provider_packet_case_count=1,
+        provider_packet_promoted=True,
+        provider_packet_missing_evidence_cases=[],
+    )
+    assessment = build_facility_assessment(
+        [result],
+        expected_component_ids=("tank-case-coverage-required",),
+    )
+
+    gate = assessment["facility_case_packet_coverage"]
+    assert gate["coverage_status"] == "MISSING_REPORT"
+    assert gate["complete"] is False
+    assert assessment["qualified_facility_qra_available"] is False
 
 
 def test_facility_assessment_reconciles_case_packet_coverage_and_withholds_qra():

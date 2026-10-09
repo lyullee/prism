@@ -105,13 +105,13 @@ def build_facility_assessment(
     qualification_gate_allows_qra = (
         qualification_gate is None or qualification_gate["complete"]
     )
+    ledger_case_count = ledger.get("provider_packet_case_count")
     case_coverage_gate = None
     if facility_case_packet_coverage is not None:
         coverage = facility_case_packet_coverage
         case_request_count = coverage.get("case_request_count")
         qualified_case_count = coverage.get("qualified_provider_case_count")
         qualified_event_count = coverage.get("qualified_provider_event_count")
-        ledger_case_count = ledger.get("provider_packet_case_count")
         reasons: list[str] = []
         if coverage.get("schema") != "prism.facility_case_provider_coverage.v1":
             reasons.append("facility case packet coverage has an unexpected schema")
@@ -152,6 +152,25 @@ def build_facility_assessment(
             "frequency_is_not_assigned": policy.get("frequency_is_not_assigned"),
             "physical_validation_claim": False,
             "facility_ir_fn_promotion": policy.get("facility_ir_fn_promotion"),
+        }
+    elif isinstance(ledger_case_count, int) and ledger_case_count > 0:
+        case_coverage_gate = {
+            "schema": None,
+            "coverage_status": "MISSING_REPORT",
+            "case_request_count": None,
+            "ledger_provider_packet_case_count": ledger_case_count,
+            "qualified_provider_event_count": 0,
+            "qualified_provider_case_count": 0,
+            "provider_evidence_row_count": 0,
+            "status_counts": {},
+            "complete": False,
+            "blocking_reasons": [
+                "facility case packet coverage report is required when provider cases are present"
+            ],
+            "frequency_inference_performed": False,
+            "frequency_is_not_assigned": None,
+            "physical_validation_claim": False,
+            "facility_ir_fn_promotion": None,
         }
     case_coverage_allows_qra = (
         case_coverage_gate is None or case_coverage_gate["complete"]

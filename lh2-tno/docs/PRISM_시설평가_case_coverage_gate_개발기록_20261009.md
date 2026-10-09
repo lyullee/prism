@@ -8,6 +8,8 @@
 
 `build_facility_assessment.py`에 `--facility-case-packet-coverage`를 추가했다. 입력 보고서가 다음 조건을 모두 만족해야 case gate가 열린다.
 
+병합 원장에 provider case가 하나라도 있으면 이 보고서를 생략할 수 없다. 보고서가 없을 때도 `MISSING_REPORT` gate를 원장에 남기고 시설 QRA를 닫는다.
+
 - schema가 `prism.facility_case_provider_coverage.v1`이다.
 - status가 `QUALIFIED_FULL_CASE_COVERAGE`이다.
 - 요청 case 수가 양수이고, qualified provider case 수가 그 수와 같다.
@@ -31,5 +33,4 @@ python scripts/build_facility_assessment.py `
 
 ## 검증
 
-시설 원장·완료 감사·case coverage 단위검사를 함께 실행했다. 새 gate를 포함한 대상 검사는 69개가 통과했다. 실제 공개 승격 상태는 GitHub Actions의 전체 portable suite가 확인할 때까지 558개 기준을 유지한다.
-
+시설 원장·완료 감사·case coverage 단위검사를 함께 실행했다. 새 gate를 포함한 대상 검사는 70개가 통과했다. GitHub Actions 실행 #378은 전체 portable suite 560개 통과를 확인했고, 이 문서의 필수 case coverage gate 보강은 다음 실행에서 재검증한다.
