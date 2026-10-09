@@ -84,6 +84,14 @@ python scripts/audit_lh2dt_native_contract.py `
 
 이 시험은 **방출→SLABx-LH2/풀→피해 chain의 연결 회귀**를 보강하지만, 1 m 합성 배관·초기상태·대기경계·선언된 pool footprint·airborne liquid 0 가정만 사용한다. 따라서 full-bore 사고가 시설 전체에 적용됐거나 현장 빈도·차단 신뢰도·시설 IR/F-N이 확보됐다고 해석하지 않는다. 현재 상태는 `END_TO_END_DIAGNOSTIC_EXECUTED`, `frequency_applied=false`, `facility_qra_claim=false`, `physical_validation_claim=false`이다.
 
+## native DynamicHEMPipe full-bore와 문헌 빈도 결합
+
+같은 provider packet에 문헌 빈도를 붙이는 경로도 별도 진단으로 확인했다. `scripts/run_lh2dt_native_dynamic_pipe_full_bore_frequency_case.py`는 합성 1 m·0.025 m 배관의 full-bore packet을 만들고, 빈도 계획에서 `generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%`를 생성한다. 배관 빈도는 길이 기반이므로 10 m 문헌 노출에 위치 가중치 `0.1`을 적용해 검토한 한 출구의 exposure multiplier를 정확히 `1`로 만든 뒤, `FrequencyEvent`의 개구 `0.025 m`와 provider opening을 exact-match한다.
+
+2026-10-18 실행 결과는 provider 자연 종료 `0.03141380098 s`, 최종 압력 `101325.0000000035 Pa`, 질량 잔차 약 `−1.7×10⁻¹⁸ kg`, native export 약 `751 ms`, consequence chain 약 `49.3 s`이다. 연간 빈도 `1.9×10⁻⁷ year⁻¹`은 Brooks, Ehrhart & LaFleur (2021) Table 2의 `LH2_PIPE AREA_100%` 행에서 읽었고, provider packet으로부터 추정하지 않았다. 결과 요약은 [native full-bore frequency verification](../examples/native_lh2dt_dynamic_pipe_full_bore_frequency_case_verification.json)에 보관한다.
+
+이 결합은 “문헌 initiating frequency → native 설비 방출 → 자연 종료 → SLABx-LH2/TNO 피해 chain”을 한 사건에서 확인한 것이다. 합성 형상·초기 상태·대기 경계·선언 pool footprint를 사용하므로 현장 빈도 보정, 차단 신뢰도, 물리검증, 시설 전체 IR/F-N으로 승격하지 않는다. 전체 감사의 새 검사 `diagnostic_native_full_bore_frequency_binding`은 `PASS` 진단 전용이며, 최신 감사는 24개 검사·3개 차단 이유를 유지한다.
+
 ## provider-resolved pool footprint 경계
 
 액체 packet이 지면 액체를 반환하는 것만으로는 풀의 반경을 알 수 없다. 기존 진단은 `PoolBoundary.footprint_origin=declared_sensitivity`를 사용해 작은 민감도 footprint를 명시했으며, 이 값은 시설 형상이나 적격 provider 증거가 아니다.

@@ -101,6 +101,39 @@ def test_completion_audit_records_native_full_bore_chain_as_diagnostic_evidence(
     assert check["blocking_reason"] is None
 
 
+def test_completion_audit_records_native_full_bore_literature_frequency_binding():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        native_full_bore_frequency_result={
+            "schema_version": "prism.native_lh2dt_dynamic_pipe_full_bore_frequency_case.v1",
+            "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+            "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+            "frequency_event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+            "full_bore_match": True,
+            "provider_termination_basis": "model_pressure_equalization",
+            "provider_pressure_equalized": True,
+            "provider_final_pressure_matches_ambient": True,
+            "provider_mass_residual_kg": 0.0,
+            "annual_frequency_per_year": 1.9e-7,
+            "annual_frequency_provenance": "LH2_PIPE AREA_100% literature row",
+            "frequency_applied": True,
+            "frequency_exact_opening_match": True,
+            "consequence_chain_executed": True,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_full_bore_frequency_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["blocking_reason"] is None
+
+
 def test_completion_audit_records_frequency_provenance_as_diagnostic_evidence():
     report = build_ijhe_completion_audit(
         {"physical_validation_claim": False},
