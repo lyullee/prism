@@ -152,5 +152,3 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 ## 2026-10-18 native DynamicHEMPipe 2상 연결
 
 배관 경계도 같은 방식으로 확인했다. 외부 `DynamicHEMPipe` native export는 명시적 액체·2상 초기 품질을 받고 대기 flash의 기체/지상 액체 분할과 질량·엔탈피 장부를 반환한다. `LH2_PIPE AREA_0.01%` 개구와 문헌 빈도를 한 정확한 사건에 결합한 결과는 `PARTIAL_DECLARED_SCOPE`이며, 2상 packet은 strict adapter와 SLABx-LH2 consequence chain까지 소비됐다. 다른 opening bin과 나머지 설비는 명시적 미계산/제외로 남겼다. airborne liquid, 전량 방출, 현장 위치별 빈도, 물리검증을 추가하지 않았으므로 이 연결도 시설 전체 위험도 완료를 의미하지 않는다.
-
-

@@ -941,5 +941,3 @@ campaign 결과의 `release_termination_inventory_ledger`에는 사건×차단 �
 ### 배관 native 2상 연결 예제
 
 `scripts/run_lh2dt_native_dynamic_pipe_frequency_case.py`는 외부 `DynamicHEMPipe`의 액체·2상 초기 품질, 대기 flash, 기체·지상 액체 질량, 종료시계와 잔차를 반환받고 `LH2_PIPE AREA_0.01%` 문헌 빈도를 적용해 consequence chain을 실행한다. 실행 요약은 `examples/native_lh2dt_dynamic_pipe_frequency_case_verification.json`에 있다. 결과는 `PARTIAL_DECLARED_SCOPE`이며 다른 opening bin·설비는 명시적으로 미계산/제외되고, airborne liquid·시설 총 IR/F-N·qualified packet은 보류된다.
-
-
