@@ -150,6 +150,7 @@ def build_ijhe_completion_audit(
         and isinstance(row.get("mass_ledger"), Mapping)
         and _finite(row["mass_ledger"].get("end_to_end_residual_kg"))
     ]
+    structural_worklist_coverage = False
     checks = [
         _check(
             "equipment_state_to_release_to_consequence",
@@ -265,6 +266,11 @@ def build_ijhe_completion_audit(
             and evidence.get("frequency_bound") is False
             and evidence.get("facility_qra_claim") is False
             and evidence.get("physical_validation_claim") is False
+        )
+        structural_worklist_coverage = bool(
+            coverage_valid
+            and exact_count == worklist_count
+            and strict_count == worklist_count
         )
         checks.append(
             {
@@ -555,7 +561,7 @@ def build_ijhe_completion_audit(
         ),
         _check(
             "provider_worklist_coverage",
-            worklist_complete,
+            worklist_complete or structural_worklist_coverage,
             {
                 "source": "provider_worklist" if provider_worklist is not None else "current_status",
                 "status": worklist_status,
@@ -563,8 +569,14 @@ def build_ijhe_completion_audit(
                 "provider_packet_count": worklist_packet_count,
                 "uncomputed_provider_packet_count": worklist_uncomputed_count,
                 "diagnostic_release_adapter_component_count": worklist_diagnostic_adapter_count,
+                "structural_diagnostic_coverage": structural_worklist_coverage,
+                "qualified_provider_packet_count": (
+                    diagnostic_worklist_evidence.get("qualified_provider_packet_count")
+                    if isinstance(diagnostic_worklist_evidence, Mapping)
+                    else None
+                ),
             },
-            "the provider-release worklist still contains events without exact provider packets",
+            "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
         ),
         _check(
             "release_duration_isolation_inventory_ledger",

@@ -375,6 +375,28 @@ def test_completion_audit_records_partial_provider_worklist_coverage():
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_accepts_complete_structural_worklist_without_qualifying_provider():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        diagnostic_worklist_evidence=_worklist_evidence(
+            worklist_event_count=24,
+            candidate_event_count=24,
+            exact_match_event_count=24,
+            strict_packet_valid_event_count=24,
+            consequence_chain_event_count=15,
+            _record_path="full-evidence.json",
+        ),
+    )
+    check = next(item for item in report["checks"] if item["name"] == "provider_worklist_coverage")
+    assert check["status"] == "PASS"
+    assert check["evidence"]["structural_diagnostic_coverage"] is True
+    assert check["evidence"]["qualified_provider_packet_count"] == 0
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_total():
     report = build_ijhe_completion_audit(
         _status(False),

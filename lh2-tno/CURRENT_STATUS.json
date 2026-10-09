@@ -21,7 +21,7 @@
   "equipment_coupling_requires_interface_work": true,
   "equipment_coupling_review": "docs/별도설비모델과_액화수소유닛_결합검토_20261008.md",
   "cli_execution_verified": true,
-  "unit_contract_conservation_tests_passed": 411,
+  "unit_contract_conservation_tests_passed": 412,
   "actual_backend_edge_checks_passed": 7,
   "fresh_gas_case_elapsed_seconds_approximate": 3,
   "fresh_pool_case_elapsed_seconds_observed_range": [
@@ -1634,27 +1634,27 @@
   "mixed_lh2_frequency_distribution_sampling_cli": "scripts/compute_frequency_distribution_uncertainty.py",
   "ijhe_completion_audit_source_state_rebound_record": "results/20261017/ijhe_completion_audit_source_state_rebound.json",
   "ijhe_completion_audit_source_state_rebound_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_completion_audit_source_state_rebound_check_count": 15,
-  "ijhe_completion_audit_source_state_rebound_blocking_reason_count": 5,
+  "ijhe_completion_audit_source_state_rebound_check_count": 16,
+  "ijhe_completion_audit_source_state_rebound_blocking_reason_count": 4,
   "ijhe_completion_audit_source_state_rebound_passed_checks": [
     "equipment_state_to_release_to_consequence",
     "diagnostic_adapter_execution_contract",
+    "diagnostic_worklist_packet_coverage_evidence",
+    "diagnostic_conditional_facility_risk_evidence",
     "diagnostic_frequency_uncertainty_evidence",
-    "frequency_uncertainty_reported_conditional_known_atoms",
+    "diagnostic_vertical_handoff_evidence",
+    "provider_worklist_structural_coverage",
     "release_duration_isolation_inventory_ledger",
     "physical_validation_evidence_restricted_component",
+    "frequency_uncertainty_reported_conditional_known_atoms",
     "processing_time_evidence",
-    "realtime_monitor_contract",
-    "diagnostic_vertical_handoff_evidence",
-    "diagnostic_conditional_facility_risk_evidence"
+    "realtime_monitor_contract"
   ],
   "ijhe_completion_audit_source_state_rebound_blocked_checks": [
     "equipment_model_binding_to_accident_release",
     "actual_provider_release_packet",
-    "provider_worklist_coverage",
     "declared_major_accident_scope",
-    "facility_ir_fn_available",
-    "frequency_uncertainty_reported"
+    "facility_ir_fn_available"
   ],
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
   "ijhe_completion_audit_source_state_rebound_physical_validation_evidence_record": "results/20261009/validation_evidence/dynamiclh2poolx_stage_c_prism_record_git_blob.json",
@@ -1667,8 +1667,8 @@
   "ijhe_completion_audit_source_state_rebound_vertical_handoff_uncomputed_cases": 10,
   "ijhe_completion_audit_source_state_rebound_vertical_handoff_provider_consumed": true,
   "ijhe_completion_audit_source_state_rebound_vertical_handoff_physical_validation_claim": false,
-  "ijhe_completion_audit_source_state_rebound_test_status": "18 audit tests; full portable suite 411 passed",
-  "ijhe_completion_audit_source_state_rebound_record_status": "INCOMPLETE_EVIDENCE; 15 checks, 5 blocking reasons; conditional frequency uncertainty and conditional facility IR/F-N remain diagnostic-only",
+  "ijhe_completion_audit_source_state_rebound_test_status": "19 audit tests; full portable suite 412 passed",
+  "ijhe_completion_audit_source_state_rebound_record_status": "INCOMPLETE_EVIDENCE; 16 checks, 4 blocking reasons; 24/24 structural worklist coverage is diagnostic-only and qualified packet count remains 0",
   "ijhe_completion_audit_source_state_rebound_facility_assessment_record": "results/20261017/generic_mixed_provider_source_state_rebound_assessment.json",
   "ijhe_completion_audit_source_state_rebound_facility_assessment_status": "PASS_DIAGNOSTIC_ONLY",
   "ijhe_completion_audit_source_state_rebound_conditional_facility_risk_available": true,
@@ -1684,5 +1684,11 @@
   "ijhe_completion_audit_source_state_rebound_frequency_uncertainty_status": "PASS_CONDITIONAL_KNOWN_ATOMS_ONLY",
   "ijhe_completion_audit_source_state_rebound_frequency_uncertainty_facility_credible_interval": false,
   "ijhe_completion_audit_source_state_rebound_frequency_uncertainty_scenario_count": 5,
-  "ijhe_completion_audit_source_state_rebound_full_facility_frequency_credible_interval": false
+  "ijhe_completion_audit_source_state_rebound_full_facility_frequency_credible_interval": false,
+  "ijhe_completion_audit_source_state_rebound_provider_worklist_structural_status": "PASS_DIAGNOSTIC_ONLY",
+  "ijhe_completion_audit_source_state_rebound_provider_worklist_event_count": 24,
+  "ijhe_completion_audit_source_state_rebound_provider_worklist_exact_match_count": 24,
+  "ijhe_completion_audit_source_state_rebound_provider_worklist_strict_packet_count": 24,
+  "ijhe_completion_audit_source_state_rebound_provider_worklist_qualified_packet_count": 0,
+  "ijhe_completion_audit_source_state_rebound_provider_worklist_consequence_chain_count": 15
 }

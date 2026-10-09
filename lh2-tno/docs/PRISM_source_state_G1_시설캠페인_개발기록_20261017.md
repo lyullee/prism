@@ -96,7 +96,7 @@ G1은 이제 low-Mach guard에서 실패하지 않고 `EXECUTED_OPERATOR_LIMITED
 
 이번 혼합 분포 표본은 1,000회씩 두 시나리오를 계산했으며 `fresh_physics_executed=false`, `frequency_distribution_credible_interval=true`, `facility_credible_interval=false`를 기록했다. 이는 빈도 모델만 흔든 known-atom 진단 구간이고, 피해 물리·기상·장벽·점화와 미계산 범위는 그대로 고정한다.
 
-최신 IJHE 완료 감사(`results/20261017/ijhe_completion_audit_source_state_rebound.json`)는 15개 검사 중 10개를 통과하고 5개를 차단했다. 공개 실험 hold-out과 질량 장부를 가진 `DynamicLH2PoolX` 풀/확산 구성요소 근거, 수직→수평 provider handoff 진단, 저장된 risk atom 기반 조건부 시설 IR/F-N 집계, 문헌 빈도 5개 시나리오의 조건부 불확실성을 별도 통과로 기록했으며, 모두 전체 chain 물리검증이나 qualified 사고가족·시설 총위험도로 승격하지 않는다. 조건부 집계는 24개 사건·24개 case·96개 risk atom을 보존하지만 20개 operator-limited와 21개 미계산 장부를 포함한다. 수직 진단은 5개 이벤트 중 2개만 실행하고 10개를 명시적으로 미계산으로 남겼다. 실제 qualified provider packet, 전체 사고범위, 시설 IR/F-N, 완전 시설 빈도 credible interval은 아직 충족되지 않았다. 이 감사 결과는 기능이 실행됐다는 사실과 IJHE용 완성 주장을 분리하는 현재 기준점이다.
+최신 IJHE 완료 감사(`results/20261017/ijhe_completion_audit_source_state_rebound.json`)는 16개 검사 중 12개를 통과하고 4개를 차단했다. 24개 worklist 항목의 exact-match·strict packet 구조, 공개 실험 hold-out과 질량 장부를 가진 `DynamicLH2PoolX` 풀/확산 구성요소 근거, 수직→수평 provider handoff 진단, 저장된 risk atom 기반 조건부 시설 IR/F-N 집계, 문헌 빈도 5개 시나리오의 조건부 불확실성을 별도 통과로 기록했으며, 모두 전체 chain 물리검증이나 qualified 사고가족·시설 총위험도로 승격하지 않는다. 조건부 집계는 24개 사건·24개 case·96개 risk atom을 보존하지만 20개 operator-limited와 21개 미계산 장부를 포함한다. 수직 진단은 5개 이벤트 중 2개만 실행하고 10개를 명시적으로 미계산으로 남겼다. 실제 qualified provider packet, 전체 사고범위, 시설 IR/F-N은 아직 충족되지 않았다. 이 감사 결과는 기능이 실행됐다는 사실과 IJHE용 완성 주장을 분리하는 현재 기준점이다.
 
 이 혼합 catalogue를 위해 `LiteratureFrequencyScenario`에 `fixed` 선택지를 추가했다. `fixed`는 빈도를 0으로 만드는 값이 아니라 사건의 선언된 중앙 빈도를 보존하는 명시적 선택이다. 경계가 없는 사건에 `p05`/`p95`를 요청하면 기존과 같이 오류로 중단한다.
 
