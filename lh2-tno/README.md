@@ -900,6 +900,8 @@ MIT는 PRISM 자체 배포 파일에 적용하며 외부 모델과 원자료의 
 `facility_total_risk_available`와 `total_facility_annual_ir_low_high`는 검증용 결과입니다. 예상 설비·사고가 모두 실행되고 미계산 사건, 합성 종료시계, 연산자 제한, 실제 형상 미확정, 물리검증 부족이 해소될 때만 채워집니다. 현재 공식 결과는 진단용 IR/F-N은 계산되지만 검증용 시설 총위험도는 `null`입니다. 이는 계산을 버린 것이 아니라, 부분 계산을 전체 시설 위험도로 잘못 표시하지 않도록 한 승격 경계입니다. 사건 수, risk atom 수, 연산자 제한 수, 차단 이유는 `conditional_diagnostic_facility_coverage`에서 확인할 수 있습니다.
 
 사고 가족별 범위도 같은 평가에 연결됩니다. `results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json`은 현재 혼합 캠페인의 12개 주요 사고 가족을 `EXECUTED` 4개, `PARTIAL` 7개, `NO_EVENT_GENERATED` 1개로 기록합니다. 이 표는 사고 빈도를 합산하는 표가 아니라, 어떤 사고가 계산됐고 어떤 사고가 빠졌는지를 시설 총위험도 승격 전에 확인하는 장부입니다.
+
+사고 family의 설비 적용범위와 필요한 provider 방출·종료 계약은 [LH2 사고 시나리오 카탈로그](docs/PRISM_LH2_사고시나리오_카탈로그_20261017.md)와 `src/lh2_tno/accident_scenario_catalog.py`에 고정되어 있습니다. `scripts/export_accident_scenario_catalog.py`는 12개 야외 주요사고 family를 manifest의 설비 ID와 함께 JSON으로 내보냅니다. 이 카탈로그는 누출 packet이나 빈도를 만들어 내지 않으며, packet이 없거나 종료 장부가 부족하면 해당 family를 `UNCOMPUTED` 또는 `NO_EVENT_GENERATED`로 남깁니다. 최신 개발 소스는 **424개 portable 검사**를 통과했지만, 현재 외부 provider 적격 사고 packet은 0건이고 시설 전체 IR/F-N은 계속 보류됩니다.
 # 압축성 기체 근접장 handoff (2026-10-16)
 
 고속 기체 출구는 출구 압력·속도만으로 PRISM이 팽창과 충격파를 다시 만들지 않습니다. 외부 provider가 `prism.compressible_plane_handoff.v1`로 downstream plane의 위치, 혼합상태, 단면, 시간별 상태를 내보내고 원 packet의 source/result digest를 지정해야 합니다. `scripts/attach_compressible_plane_handoff.py`가 이 handoff를 `ResolvedGasRelease`에 붙이면서 각 interval의 `rho × u × A × H2 fraction` 질량 장부와 식별자를 다시 검사합니다. `src/lh2_tno/chain_worker.py`는 공급자가 선언한 plane에서만 SLABx를 시작합니다.

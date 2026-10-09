@@ -14,6 +14,7 @@ from typing import Any, Iterable
 from .campaign import RiskCampaign
 from .consequences import ConsequenceRequest
 from .equipment_manifest import EquipmentManifest, audit_manifest
+from .accident_scenario_catalog import audit_catalog_manifest, scenario_definition
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -127,6 +128,10 @@ def build_accident_scope_matrix(
         raise ValueError(f"unknown accident families: {', '.join(unknown)}")
     audit = audit_manifest(manifest)
     component_kinds = _component_kind(manifest)
+    catalog_audit = audit_catalog_manifest(
+        ({"id": component.id, "kind": component.kind} for component in manifest.components),
+        required_families,
+    )
     manifest_family_components: dict[str, list[str]] = defaultdict(list)
     for component in manifest.components:
         family = _base_hole_family(component.kind, None)
@@ -187,6 +192,7 @@ def build_accident_scope_matrix(
             status = _status(family_cases, request_count)
         rows.append({
             "family": family,
+            "scenario_definition": scenario_definition(family),
             "status": status,
             "event_ids": event_ids,
             "generated_event_count": len(event_ids),
@@ -225,6 +231,7 @@ def build_accident_scope_matrix(
         "environment": manifest.environment,
         "scope": "outdoor_major_accidents",
         "required_families": list(required_families),
+        "scenario_catalog": catalog_audit,
         "rows": rows,
         "barrier_branch_ids": sorted(barrier_branches),
         "manifest_family_component_ids": {
