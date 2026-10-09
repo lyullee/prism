@@ -3180,11 +3180,11 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "scenario_count": 3,
-        "valid_scenario_count": 3,
+        "scenario_count": 5,
+        "valid_scenario_count": 5,
         "facility_credible_interval": false,
         "fresh_physics_executed": false,
-        "correlation_comparison_present": false,
+        "correlation_comparison_present": true,
         "conditional_diagnostic_facility_risk": "each scenario reweights the saved risk atoms and exposes a conditional facility IR/F-N diagnostic; incomplete scope, synthetic horizons, and operator limits still withhold a qualified facility total"
       },
       "interpretation": "Published frequency scenarios are re-applied to saved diagnostic risk atoms and asset rankings; this does not create a complete-facility confidence interval or claim fresh-physics validation."
@@ -3400,7 +3400,7 @@
       "status": "PASS",
       "evidence": {
         "uncertainty_result_present": true,
-        "scenario_count": 3,
+        "scenario_count": 5,
         "facility_credible_interval": false,
         "conditional_frequency_uncertainty": true
       },

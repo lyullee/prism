@@ -30,7 +30,8 @@
   "provider_packet_case_count": 34,
   "qualified_provider_packet_case_count": 0,
   "physical_validation_claim": false,
-  "frequency_scenario_count": 3,
+  "frequency_scenario_count": 5,
+  "frequency_correlation_comparison_present": true,
   "facility_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
   "facility_evidence_request_family_count": 12,
   "facility_evidence_request_case_count": 44,
@@ -40,6 +41,7 @@
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",
     "the merged conditional IR/F-N is diagnostic and facility total IR/F-N remains withheld",
     "frequency scenarios reweight saved atoms and do not infer vertical frequency",
+    "independent-event p05/p95 scenarios use fixed declared rates for events without published bounds",
     "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
     "inventory depletion population, weather and geometry remain synthetic diagnostics"
   ],

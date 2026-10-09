@@ -144,6 +144,42 @@ def _rank_contributions(
     return ranks
 
 
+def _rank_stability(
+    scenarios: list[dict],
+    rank_key: str,
+) -> dict[str, object]:
+    """Summarize whether the top asset or family changes across scenarios.
+
+    Rank maps already use deterministic integer ordering, so this helper only
+    reports sensitivity of the saved risk atoms. It does not create a
+    statistical confidence interval or promote an incomplete facility scope.
+    """
+    endpoint_top_ids: list[list[str]] = []
+    endpoint_consistent: list[bool] = []
+    for endpoint in range(2):
+        tops: list[str] = []
+        for row in scenarios:
+            ranks = row.get(rank_key)
+            mapping = ranks[endpoint] if isinstance(ranks, list) and len(ranks) > endpoint else {}
+            if isinstance(mapping, dict):
+                top = next(
+                    (str(identifier) for identifier, rank in mapping.items() if rank == 1),
+                    None,
+                )
+                if top is not None:
+                    tops.append(top)
+        unique = sorted(set(tops))
+        endpoint_top_ids.append(unique)
+        endpoint_consistent.append(bool(tops) and len(unique) == 1)
+    return {
+        "scenario_count": len(scenarios),
+        "top_ids_by_endpoint": endpoint_top_ids,
+        "top_id_consistent_by_endpoint": endpoint_consistent,
+        "top_id_consistent": bool(endpoint_consistent) and all(endpoint_consistent),
+        "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios",
+    }
+
+
 def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFrequencyScenario, ...]) -> dict:
     """Reweight saved risk atoms using published bounds and explicit fixed rates.
 
@@ -264,6 +300,12 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
         'correlation_comparison_present': any(
             s.correlation_assumption == 'independent_event_bounds' for s in scenarios
         ) and any(s.correlation_assumption == 'within_asset_shared_quantile' for s in scenarios),
+        'asset_rank_stability': _rank_stability(
+            outputs, 'asset_rank_by_known_expected_fatalities_low_high'
+        ),
+        'scenario_family_rank_stability': _rank_stability(
+            outputs, 'scenario_family_rank_by_known_expected_fatalities_low_high'
+        ),
         'provider_packet_promoted': result.get('provider_packet_promoted') is True,
         'provider_packet_case_count': result.get('provider_packet_case_count', 0),
         'qualified_provider_packet_case_count': result.get(

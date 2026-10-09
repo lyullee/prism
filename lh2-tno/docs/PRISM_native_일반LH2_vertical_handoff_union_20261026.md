@@ -65,7 +65,7 @@ python scripts/bind_native_full_scope_union_evidence.py `
 
 재고 소진 결과는 `generic-lh2-full-scope-example/inventory-depletion/...`를 현재 시설 namespace로 옮겼다. 원래 `D-3ms-west`, `D-4ms-west`였던 기상·인구 조건 ID도 namespace 아래로 분리해 기존 native 조건과 충돌하지 않게 했고, 네 개의 synthetic 수용점을 현재 `worker-01`로 명시적으로 합쳤다. 수직 handoff branch도 같은 방식으로 조건 ID와 인구 수용점을 namespace·receptor map에 맞춰 변환했으며, 현재 population ledger는 `RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC`이고 mismatch가 0개다. 이 추가 branch의 10개 case는 모두 `inventory_depletion`으로 종료되며, 병합 사고군 표에서는 기존 native 재고 소진 branch와 합쳐져 `inventory_depletion` 23개 event·28개 case·조건부 28개 실행으로 보인다. 이는 기존 partial 사고군의 수치 연결을 넓히는 진단 회계이지, 현장 배관 빈도나 qualified packet을 새로 만든 것이 아니다.
 
-빈도는 수직 또는 재고 소진 결과에서 역산하지 않았다. 기존 문헌 시나리오에 `vertical-handoff-vent`와 `inventory-depletion-pipe` 자산을 `published`로 명시해 저장된 risk atom만 재가중했다. 따라서 이 union은 사고군 누락을 줄인 범위 회계와 조건부 진단이며 현장 빈도, qualified packet, 독립 물리검증, 1 Hz 신규 물리 계산을 주장하지 않는다.
+빈도는 수직 또는 재고 소진 결과에서 역산하지 않았다. 기존 문헌 시나리오에 `vertical-handoff-vent`와 `inventory-depletion-pipe` 자산을 `published`로 명시해 저장된 risk atom만 재가중했다. 추가로 문헌 p05/p95가 있는 사건은 사건별 독립 경계 시나리오를 만들고, 수직 handoff·재고 소진처럼 공개 분위수가 없는 9개 진단 사건은 `fixed` 선언값을 유지했다. 따라서 5개 시나리오에서 설비별 공유 분위수와 독립 사건 경계를 비교할 수 있지만, 시설 credible interval이나 빈도 추론은 아니다. 이 union은 사고군 누락을 줄인 범위 회계와 조건부 진단이며 현장 빈도, qualified packet, 독립 물리검증, 1 Hz 신규 물리 계산을 주장하지 않는다.
 
 산출물은 `results/20261026/native_full_scope_union_assessment/` 아래에 있다.
 

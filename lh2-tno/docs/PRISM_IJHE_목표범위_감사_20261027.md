@@ -24,7 +24,7 @@ native catalog와 SLABx-LH2 구성요소 검사는 diagnostic-only PASS다.
 | 설비 상태 → native 방출 | PASS | 24/24 사건 exact packet, 상태 snapshot 24/24 `BOUND_AND_ECHOED` |
 | 방출 → 최종 피해 | CONDITIONALLY_COMPLETE | native campaign 24/24 case 실행, union risk atom 176개 |
 | SLABx-LH2 피해영향 구성요소 | CONDITIONALLY_COMPLETE | 6개 FFI·6개 FLACS 비교, 질량잔차 1.77×10⁻¹² kg, 반복 재고차 0 kg |
-| 문헌 빈도 불확실성 | CONDITIONALLY_COMPLETE | 문헌 빈도 시나리오를 저장된 risk atom에 재가중 |
+| 문헌 빈도 불확실성 | CONDITIONALLY_COMPLETE | 5개 문헌 시나리오(설비별 공유 3개 + 사건별 독립 p05/p95 2개), 9개 분위수 미제공 진단 사건은 fixed, 설비·사고군 상위순위 안정성 기록 |
 | 기상·점화·인구 결합 | CONDITIONALLY_COMPLETE | 5개 연간조건, 명시적 ignition branch, receptor mismatch 0 |
 | 일반 LH2 설비 범위 | CONDITIONALLY_COMPLETE | 탱크·배관·밸브·펌프·벤트·기화기·재액화기 범위 원장 |
 | 실시간 처리 | CONDITIONALLY_COMPLETE | cache p95는 1 Hz 기준 이내, 새 물리 계산은 1 Hz 미충족으로 별도 표시 |

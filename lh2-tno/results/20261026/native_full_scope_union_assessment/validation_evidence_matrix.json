@@ -98,7 +98,7 @@
       "source": {
         "label": "facility assessment",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "sha256": "2677c20b489b586054ef54435930bef89fba7f4947dda80ba1b6616ec31be9f8",
+        "sha256": "522bd92b66a37cc68ed8ec4d2d3fb60917c43cb396a6a39b72ad38b777ea88ab",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,
@@ -118,7 +118,7 @@
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "f11dcaf15928cec7795baba94b703c60d99af39e161553fd179b0246114109f5",
+        "sha256": "42c0cad464490ee44ec67f69df7e109661347a41adb52325f5af2a02b82e029b",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,

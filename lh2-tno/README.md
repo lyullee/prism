@@ -15,6 +15,12 @@ qualified provider packet·독립 물리검증·엄격한 전체범위·시설 �
 catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 
+union 빈도 민감도는 5개 시나리오로 확장했습니다. 설비별 공유 분위수 3개와
+사건별 독립 p05/p95 2개를 같은 저장 risk atom에 적용하며, 공개 분위수가 없는
+수직 handoff·재고 소진 9개 진단 사건은 `fixed` 선언 빈도를 유지합니다. 물리를
+다시 계산하거나 현장 빈도를 추정하지 않고, 설비·사고군 상위순위 안정성도 함께
+기록합니다.
+
 **2026-10-27 상태 snapshot 방출경계 보완:** 일반 옥외 LH2 매니페스트의 24개
 문헌 사건을 외부 `lh2dt_models` 사고 exporter로 다시 실행해 **24/24 exact
 native packet**을 만들었습니다. 저장탱크·이송배관·밸브·벤트·펌프·기화기·재액화기

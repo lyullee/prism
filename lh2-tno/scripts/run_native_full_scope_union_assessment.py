@@ -25,6 +25,9 @@ from lh2_tno.facility_ledger import merge_facility_campaign_results  # noqa: E40
 from lh2_tno.campaign_namespace import rebind_campaign_result  # noqa: E402
 from lh2_tno.scope_matrix_merge import merge_scope_matrices  # noqa: E402
 from lh2_tno.uncertainty import LiteratureFrequencyScenario  # noqa: E402
+from lh2_tno.frequency_scenario_extension import (  # noqa: E402
+    extend_frequency_scenarios_for_independent_event_bounds,
+)
 from lh2_tno.vertical_handoff_campaign import (  # noqa: E402
     rebind_vertical_handoff_campaign_result,
 )
@@ -263,6 +266,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         required_families=MAJOR_ACCIDENT_FAMILIES,
     )
     scenarios = _extend_frequency_scenarios(base_frequency_scenarios)
+    independent_extension = extend_frequency_scenarios_for_independent_event_bounds(
+        {
+            "scenarios": [scenario.model_dump(mode="json") for scenario in scenarios],
+        },
+        merged.get("events", []),
+    )
+    scenarios = tuple(
+        LiteratureFrequencyScenario.model_validate(row)
+        for row in independent_extension["scenarios"]
+    )
     assessment = build_facility_assessment(
         [base_result, vertical_result, inventory_result],
         expected_component_ids=expected_components,
@@ -326,6 +339,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         ],
         "physical_validation_claim": assessment["physical_validation_claim"],
         "frequency_scenario_count": len(assessment["frequency_uncertainty"]["scenarios"]),
+        "frequency_correlation_comparison_present": assessment[
+            "frequency_uncertainty"
+        ]["correlation_comparison_present"],
         "facility_evidence_request_status": evidence_request["status"],
         "facility_evidence_request_family_count": len(evidence_request["family_requests"]),
         "facility_evidence_request_case_count": evidence_request["case_request_count"],
@@ -337,6 +353,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
             "the merged conditional IR/F-N is diagnostic and facility total IR/F-N remains withheld",
             "frequency scenarios reweight saved atoms and do not infer vertical frequency",
+            "independent-event p05/p95 scenarios use fixed declared rates for events without published bounds",
             "inventory depletion is a namespaced diagnostic rebound, not a qualified site packet",
             "inventory depletion population, weather and geometry remain synthetic diagnostics",
         ],
@@ -354,6 +371,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "scenarios": [scenario.model_dump(mode="json") for scenario in scenarios],
             "vertical_handoff_frequency_inference": False,
             "inventory_depletion_frequency_inference": False,
+            "independent_event_bound_event_count": independent_extension[
+                "independent_event_bound_event_count"
+            ],
+            "independent_event_bound_fixed_event_count": independent_extension[
+                "independent_event_bound_fixed_event_count"
+            ],
+            "frequency_inference_performed": False,
             "facility_credible_interval": False,
         },
     )

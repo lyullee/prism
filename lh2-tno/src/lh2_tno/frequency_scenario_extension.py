@@ -71,3 +71,84 @@ def extend_frequency_scenarios_for_vertical_handoff(
             "inferred from telemetry."
         ),
     }
+
+
+def extend_frequency_scenarios_for_independent_event_bounds(
+    source: Mapping[str, Any],
+    event_rows: list[Mapping[str, Any]] | tuple[Mapping[str, Any], ...],
+) -> dict[str, Any]:
+    """Add independent-event p05/p95 bound scenarios to a merged ledger.
+
+    The existing merged-LH2 scenarios use one quantile for every event that
+    belongs to an asset.  That is useful for a shared exposure assumption but
+    does not show how the result changes when event bounds are treated
+    independently.  This helper adds two explicit comparison scenarios.  An
+    event without both published marginal bounds is retained at its declared
+    catalogue rate with ``fixed``; it is never assigned a guessed quantile.
+
+    The returned object is a new JSON-ready mapping and the input is not
+    mutated.  The output remains a frequency sensitivity report, not a
+    statistical confidence interval or a facility-QRA promotion.
+    """
+    raw_scenarios = source.get("scenarios")
+    if not isinstance(raw_scenarios, list) or not raw_scenarios:
+        raise ValueError("frequency scenario source must contain a non-empty scenarios list")
+    event_ids: list[str] = []
+    event_quantiles_low: dict[str, str] = {}
+    event_quantiles_high: dict[str, str] = {}
+    for index, row in enumerate(event_rows):
+        if not isinstance(row, Mapping) or not row.get("id"):
+            raise ValueError(f"event row {index} must contain an id")
+        event_id = str(row["id"])
+        if event_id in event_quantiles_low:
+            raise ValueError(f"duplicate event id in frequency extension: {event_id}")
+        event_ids.append(event_id)
+        has_bounds = (
+            row.get("marginal_p05_per_year") is not None
+            and row.get("marginal_p95_per_year") is not None
+        )
+        event_quantiles_low[event_id] = "p05" if has_bounds else "fixed"
+        event_quantiles_high[event_id] = "p95" if has_bounds else "fixed"
+    if not event_ids:
+        raise ValueError("independent-event frequency extension requires events")
+
+    scenarios = [deepcopy(dict(raw)) for raw in raw_scenarios]
+    scenarios.extend(
+        [
+            {
+                "id": "native-full-scope-independent-event-low",
+                "event_quantiles": event_quantiles_low,
+                "provenance": (
+                    "published marginal p05 bounds applied independently per event; "
+                    "events without both published bounds retain their declared rate as fixed; "
+                    "frequency sensitivity only; no frequency inference or credible interval"
+                ),
+                "correlation_assumption": "independent_event_bounds",
+            },
+            {
+                "id": "native-full-scope-independent-event-high",
+                "event_quantiles": event_quantiles_high,
+                "provenance": (
+                    "published marginal p95 bounds applied independently per event; "
+                    "events without both published bounds retain their declared rate as fixed; "
+                    "frequency sensitivity only; no frequency inference or credible interval"
+                ),
+                "correlation_assumption": "independent_event_bounds",
+            },
+        ]
+    )
+    return {
+        "schema_version": "prism.literature_frequency_scenarios.v1",
+        "scenarios": scenarios,
+        "extension": (
+            "Merged native LH2 scenarios retain their original within-asset assumptions; "
+            "independent-event p05/p95 comparison scenarios are appended with fixed rates "
+            "for events lacking published marginal bounds."
+        ),
+        "independent_event_bound_event_count": len(event_ids),
+        "independent_event_bound_fixed_event_count": sum(
+            value == "fixed" for value in event_quantiles_low.values()
+        ),
+        "frequency_inference_performed": False,
+        "facility_credible_interval": False,
+    }

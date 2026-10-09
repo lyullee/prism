@@ -215,6 +215,9 @@ def build_ijhe_objective_coverage_audit(
     ))
 
     frequency_ok = uncertainty_scenarios > 0 and facility_assessment.get("physical_validation_claim") is False
+    frequency_uncertainty = facility_assessment.get("frequency_uncertainty")
+    if not isinstance(frequency_uncertainty, Mapping):
+        frequency_uncertainty = {}
     rows.append(_row(
         "literature_frequency_uncertainty",
         "문헌 빈도를 그대로 입력하되 여러 빈도 시나리오의 불확실성을 계산해야 한다",
@@ -222,6 +225,19 @@ def build_ijhe_objective_coverage_audit(
         evidence_paths=(facility_path, union_path),
         observed={
             "frequency_scenario_count": uncertainty_scenarios,
+            "correlation_comparison_present": frequency_uncertainty.get(
+                "correlation_comparison_present"
+            ),
+            "asset_rank_top_id_consistent": (
+                frequency_uncertainty.get("asset_rank_stability", {}).get("top_id_consistent")
+                if isinstance(frequency_uncertainty.get("asset_rank_stability"), Mapping)
+                else None
+            ),
+            "scenario_family_rank_top_id_consistent": (
+                frequency_uncertainty.get("scenario_family_rank_stability", {}).get("top_id_consistent")
+                if isinstance(frequency_uncertainty.get("scenario_family_rank_stability"), Mapping)
+                else None
+            ),
             "frequency_inference_performed": union_verification.get("frequency_inference_performed", False),
             "physical_validation_claim": facility_assessment.get("physical_validation_claim"),
         },

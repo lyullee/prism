@@ -71,6 +71,9 @@ def test_published_literature_quantiles_reweight_atoms_without_physics():
         'liquid_two_phase': 1, 'valve_hole': 2
     }
     assert result['facility_credible_interval'] is False
+    assert result['asset_rank_stability']['scenario_count'] == 2
+    assert result['asset_rank_stability']['top_id_consistent'] is True
+    assert result['scenario_family_rank_stability']['top_id_consistent'] is True
     assert result['provider_packet_promoted'] is False
     assert result['qualified_provider_packet_case_count'] == 0
     assert result['complete_facility_qra_claim'] is False

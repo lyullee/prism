@@ -92,7 +92,10 @@
         "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
-        "frequency_scenario_count": 3,
+        "frequency_scenario_count": 5,
+        "correlation_comparison_present": true,
+        "asset_rank_top_id_consistent": true,
+        "scenario_family_rank_top_id_consistent": true,
         "frequency_inference_performed": false,
         "physical_validation_claim": false
       },
