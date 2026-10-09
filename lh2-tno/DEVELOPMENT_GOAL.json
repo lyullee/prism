@@ -1633,7 +1633,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
   "native_lh2dt_packet_coverage_ledger_test_status": "native packet ledger + IJHE audit targeted tests passed; full portable suite 459 passed",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, and validation-evidence-matrix accounting; full portable suite 505 passed",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit includes conditional accident-scope, unique case, merged strict-breakdown, conservative legacy-count, facility-promotion gate, validation-evidence-matrix, and strict-gate-taxonomy accounting; full portable suite 506 passed",
   "campaign_namespace_rebind_implemented": true,
   "campaign_namespace_rebind_module": "src/lh2_tno/campaign_namespace.py",
   "campaign_namespace_rebind_script": "scripts/rebind_campaign_namespace.py",
@@ -1735,8 +1735,8 @@
   "inventory_depletion_facility_merge_physical_validation_claim": false,
   "inventory_depletion_facility_merge_frequency_inference": false,
   "inventory_depletion_facility_merge_facility_qra_claim": false,
-  "full_portable_test_count": 505,
-  "full_portable_test_status": "505 passed",
+  "full_portable_test_count": 506,
+  "full_portable_test_status": "506 passed",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_record": "examples/native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_summary.json",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_status": "PARTIAL_FACILITY_SCOPE; 41 events, 70 cases, 240 risk atoms across 11 components; isolation success/failure and inventory depletion diagnostics are merged; qualified facility total withheld",
   "native_lh2dt_packet_campaign_vertical_handoff_two_sided_inventory_isolation_facility_assessment_event_count": 41,
@@ -2024,5 +2024,12 @@
   "facility_evidence_request_latest_conditional_case_count": 80,
   "facility_evidence_request_latest_conditional_executed_case_count": 78,
   "facility_evidence_request_latest_conditional_uncomputed_case_count": 2,
-  "facility_evidence_request_latest_strict_uncomputed_case_count": 37
+  "facility_evidence_request_latest_strict_uncomputed_case_count": 37,
+  "facility_evidence_request_strict_gate_taxonomy_implemented": true,
+  "facility_evidence_request_latest_strict_gate_categories": [
+    "FAMILY_SCOPE_PARTIAL",
+    "MISSING_PROVIDER_CASES",
+    "OPERATOR_LIMITED_INPUT"
+  ],
+  "facility_evidence_request_strict_gate_taxonomy_policy": "Categories identify missing provider cases, operator-limited inputs, domain gaps, failed cases and residual family scope; they do not infer frequency or promote facility QRA."
 }

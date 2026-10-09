@@ -47,6 +47,13 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     assert report["family_requests"][0]["conditional_executed_case_count"] == 3
     assert report["family_requests"][0]["conditional_uncomputed_case_count"] == 1
     assert report["family_requests"][0]["strict_blocking_reason"] == "pipe_hole: PARTIAL"
+    assert report["family_requests"][0]["strict_gate_categories"] == [
+        "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
+    ]
+    assert len(report["family_requests"][0]["strict_gate_requirements"]) == 2
+    assert report["current_assessment"]["strict_gate_categories"] == [
+        "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
+    ]
     assert report["family_requests"][0]["family_scope_ready"] is False
     assert report["family_requests"][0]["facility_promotion_allowed_now"] is False
     assert "facility qualified IR/F-N gate is closed" in report["family_requests"][0]["facility_promotion_blocking_reasons"]
@@ -140,3 +147,21 @@ def test_two_sided_request_exposes_joint_interaction_evidence_gap():
     )
     required = report["family_requests"][0]["required_provider_evidence"]
     assert any("paired plume/pressure/inventory interaction" in item for item in required)
+
+
+def test_gate_categories_preserve_domain_and_failure_reasons():
+    report = build_facility_evidence_request(
+        _assessment(),
+        {"facility_id": "facility", "rows": [{
+            "family": "vertical_handoff",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 0,
+            "operator_limited_case_count": 0,
+            "domain_incomplete_case_count": 2,
+            "failed_case_count": 1,
+        }]},
+    )
+    row = report["family_requests"][0]
+    assert row["strict_gate_categories"] == ["DOMAIN_INCOMPLETE", "FAILED_PROVIDER_CASE"]
+    assert "DOMAIN_INCOMPLETE" in report["current_assessment"]["strict_gate_categories"]
+    assert report["strict_gate_catalog"]["FAILED_PROVIDER_CASE"].startswith("repeat the failed")

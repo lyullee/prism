@@ -42,6 +42,46 @@ _FAMILY_REQUIREMENTS: dict[str, tuple[str, ...]] = {
     "vertical_handoff": ("provider-owned vertical-to-horizontal handoff state and boundary",),
 }
 
+_GATE_REQUIREMENTS: dict[str, str] = {
+    "MISSING_PROVIDER_CASES": "one exact qualified provider packet for every strict uncomputed case",
+    "OPERATOR_LIMITED_INPUT": "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence",
+    "DOMAIN_INCOMPLETE": "close the declared model-domain boundary and provide the missing consequence handoff evidence",
+    "FAILED_PROVIDER_CASE": "repeat the failed provider case with a reproducible error-free release ledger",
+    "FAMILY_SCOPE_PARTIAL": "complete the family-specific accident branch and termination coverage",
+}
+
+
+def _gate_categories(row: Mapping[str, Any], status: str, strict_uncomputed_case_count: Any) -> list[str]:
+    """Classify why strict promotion is withheld without inferring a cause."""
+    categories: list[str] = []
+    try:
+        strict_count = max(0, int(strict_uncomputed_case_count or 0))
+    except (TypeError, ValueError):
+        strict_count = 0
+    try:
+        operator_count = max(0, int(row.get("operator_limited_case_count", 0) or 0))
+    except (TypeError, ValueError):
+        operator_count = 0
+    try:
+        domain_count = max(0, int(row.get("domain_incomplete_case_count", 0) or 0))
+    except (TypeError, ValueError):
+        domain_count = 0
+    try:
+        failed_count = max(0, int(row.get("failed_case_count", 0) or 0))
+    except (TypeError, ValueError):
+        failed_count = 0
+    if strict_count:
+        categories.append("MISSING_PROVIDER_CASES")
+    if operator_count:
+        categories.append("OPERATOR_LIMITED_INPUT")
+    if domain_count:
+        categories.append("DOMAIN_INCOMPLETE")
+    if failed_count:
+        categories.append("FAILED_PROVIDER_CASE")
+    if status not in {"EXECUTED", "NOT_APPLICABLE"} and not categories:
+        categories.append("FAMILY_SCOPE_PARTIAL")
+    return categories
+
 
 def _mapping(value: Any, label: str) -> Mapping[str, Any]:
     if not isinstance(value, Mapping):
@@ -101,6 +141,7 @@ def build_facility_evidence_request(
         strict_uncomputed_case_count = row.get(
             "strict_uncomputed_case_count", row.get("uncomputed_case_count", 0)
         )
+        gate_categories = _gate_categories(row, status, strict_uncomputed_case_count)
         family_scope_ready = (
             not_applicable
             or (status == "EXECUTED" and strict_uncomputed_case_count == 0)
@@ -123,6 +164,10 @@ def build_facility_evidence_request(
                     "conditional_uncomputed_case_count", row.get("uncomputed_case_count", 0)
                 ),
                 "operator_limited_case_count": row.get("operator_limited_case_count", 0),
+                "strict_gate_categories": gate_categories,
+                "strict_gate_requirements": [
+                    _GATE_REQUIREMENTS[category] for category in gate_categories
+                ],
                 "event_ids": list(row.get("event_ids", ())),
                 "strict_blocking_reason": (
                     None
@@ -173,6 +218,12 @@ def build_facility_evidence_request(
     if not isinstance(blockers, Sequence) or isinstance(blockers, (str, bytes)):
         raise ValueError("assessment.facility_risk_ledger.blocking_reasons must be an array")
 
+    gate_categories = sorted({
+        category
+        for row in family_rows
+        for category in row["strict_gate_categories"]
+    })
+
     return {
         "schema_version": SCHEMA,
         "facility_id": assessment.get("facility_id", ledger.get("facility_id", scope_matrix.get("facility_id"))),
@@ -209,6 +260,7 @@ def build_facility_evidence_request(
                 "complete_facility_qra_claim", False
             ),
             "facility_promotion_allowed_now": facility_promotion_gate,
+            "strict_gate_categories": gate_categories,
         },
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blockers)),
         "family_requests": family_rows,
@@ -227,6 +279,10 @@ def build_facility_evidence_request(
             "independent_physical_validation_required": True,
             "complete_declared_scope_required": True,
             "facility_ir_fn_remains_withheld_until_all_true": True,
+        },
+        "strict_gate_catalog": {
+            category: _GATE_REQUIREMENTS[category]
+            for category in sorted(_GATE_REQUIREMENTS)
         },
     }
 
