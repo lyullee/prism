@@ -901,13 +901,15 @@ MIT는 PRISM 자체 배포 파일에 적용하며 외부 모델과 원자료의 
 
 사고 가족별 범위도 같은 평가에 연결됩니다. `results/20261014/generic_mixed_accident_scope_matrix_refined_pool.json`은 현재 혼합 캠페인의 12개 주요 사고 가족을 `EXECUTED` 4개, `PARTIAL` 7개, `NO_EVENT_GENERATED` 1개로 기록합니다. 이 표는 사고 빈도를 합산하는 표가 아니라, 어떤 사고가 계산됐고 어떤 사고가 빠졌는지를 시설 총위험도 승격 전에 확인하는 장부입니다.
 
-사고 family의 설비 적용범위와 필요한 provider 방출·종료 계약은 [LH2 사고 시나리오 카탈로그](docs/PRISM_LH2_사고시나리오_카탈로그_20261017.md)와 `src/lh2_tno/accident_scenario_catalog.py`에 고정되어 있습니다. `scripts/export_accident_scenario_catalog.py`는 12개 야외 주요사고 family를 manifest의 설비 ID와 함께 JSON으로 내보냅니다. 이 카탈로그는 누출 packet이나 빈도를 만들어 내지 않으며, packet이 없거나 종료 장부가 부족하면 해당 family를 `UNCOMPUTED` 또는 `NO_EVENT_GENERATED`로 남깁니다. 최신 개발 소스는 **429개 portable 검사**를 통과했지만, 현재 외부 provider 적격 사고 packet은 0건이고 시설 전체 IR/F-N은 계속 보류됩니다.
+사고 family의 설비 적용범위와 필요한 provider 방출·종료 계약은 [LH2 사고 시나리오 카탈로그](docs/PRISM_LH2_사고시나리오_카탈로그_20261017.md)와 `src/lh2_tno/accident_scenario_catalog.py`에 고정되어 있습니다. `scripts/export_accident_scenario_catalog.py`는 12개 야외 주요사고 family를 manifest의 설비 ID와 함께 JSON으로 내보냅니다. 이 카탈로그는 누출 packet이나 빈도를 만들어 내지 않으며, packet이 없거나 종료 장부가 부족하면 해당 family를 `UNCOMPUTED` 또는 `NO_EVENT_GENERATED`로 남깁니다. 최신 개발 소스는 **431개 portable 검사**를 통과했지만, 현재 외부 provider 적격 사고 packet은 0건이고 시설 전체 IR/F-N은 계속 보류됩니다.
 
 provider worklist의 각 event에는 `scenario_families`가 함께 기록됩니다. 따라서 저장탱크 구멍이 `vessel_hole`과 `liquid_two_phase`에 걸리는 것처럼 설비 family와 상변화·재고 사고를 명시적으로 추적할 수 있습니다. 이 필드는 빈도를 재배분하지 않고, 필요한 provider packet이 없을 때 미계산 상태를 유지하기 위한 연결표입니다.
 
 `build_accident_scope_matrix.py --provider-worklist`를 사용하면 이 worklist와 campaign의 event ID·주 사고 family가 같은지 검사합니다. 구조가 `ALIGNED`여도 provider packet이 없으면 계산을 시작하지 않으며, 최신 generic 24-event 진단도 이 원칙에 따라 packet 0건·시설 QRA 보류로 기록됩니다.
 
 실행된 risk atom에는 사고 family가 함께 남고, facility ledger의 `scenario_family_contributions`에서 탱크·배관 사고와 액체 2상·재고 사고의 기여를 따로 조회할 수 있습니다. 이 표는 같은 atom을 family별로 분류한 결과이므로 family별 수치를 서로 더하지 않습니다.
+
+campaign 결과의 `release_termination_inventory_ledger`에는 사건×차단 분기×연간 조건별로 provider packet digest, 방출 지속시간, 종료근거, provider 재고·누적 방출량·잔여량, 차단 선언을 한 행에 기록합니다. `UNCOMPUTED`와 `EXECUTED_OPERATOR_LIMITED`는 각각 누락·제한 상태로 남으며, 질량이 0이 되었다는 이유만으로 재고소진이나 차단 성공을 추론하지 않습니다. 최신 결과는 `results/20261018/generic_mixed_provider_campaign_release_ledger.json`이고, 24행 중 5행은 operator-limited, 14행은 실패, 5행은 미계산이며 시설 전체 IR/F-N은 계속 보류됩니다.
 
 문헌 빈도 민감도 결과에도 family별 known expected-fatality 기여와 순위 안정성이 기록됩니다. 최신 5개 빈도 시나리오 결과는 `results/20261017/frequency_uncertainty_family_atoms.json`에 있으며, 물리 재계산 없이 빈도만 재가중한 조건부 진단 결과입니다.
 # 압축성 기체 근접장 handoff (2026-10-16)

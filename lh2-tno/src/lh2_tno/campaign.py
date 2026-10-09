@@ -15,6 +15,7 @@ from .consequences import ConsequenceRequest, Weather
 from .frequency import FrequencyPlan, bind_event, generate_events
 from .backend import BackendError
 from .accident_scenario_catalog import scenario_families_for_release
+from .release_ledger import build_release_termination_inventory_ledger
 
 IGNITION_KEYS = {'direct_fire', 'delayed_flash_fire', 'delayed_explosion', 'no_ignition'}
 
@@ -118,7 +119,18 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
         "provider_result_digests": [value for value in result_digests if value is not None],
         "provider_boundary_references": [packet.provider_boundary_reference for packet in packets],
         "termination_bases": [packet.termination_basis for packet in packets],
+        "termination_provenances": [
+            getattr(packet, "termination_provenance", None) for packet in packets
+        ],
+        "event_kinds": [getattr(packet, "event_kind", None) for packet in packets],
+        "input_origins": [getattr(packet, "input_origin", None) for packet in packets],
         "duration_s": [packet.duration_s for packet in packets],
+        "available_mass_kg": [
+            getattr(packet, "available_mass_kg", None) for packet in packets
+        ],
+        "cumulative_mass_out_kg": [
+            getattr(packet, "cumulative_mass_out_kg", None) for packet in packets
+        ],
     }
 
 class EventRoute(Contract):
@@ -338,11 +350,13 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     for event in events.values():
         row = event.model_dump(mode='json')
         event_rows.append(row)
+    release_termination_inventory_ledger = build_release_termination_inventory_ledger(cases)
     return {'status':'DECLARED_SCOPE_EXECUTED' if scope_complete else 'PARTIAL_DECLARED_SCOPE',
         'facility_id': f.id, 'facility_digest': f.digest(), 'campaign_digest': campaign.digest(),
         'scope_provenance': campaign.scope_provenance, 'events':event_rows,
         'annual_conditions':[c.model_dump(mode='json') for c in campaign.annual_conditions],
         'cases': cases, 'uncomputed_cases': missing, 'excluded_model_components': excluded,
+        'release_termination_inventory_ledger': release_termination_inventory_ledger,
         'coverage':{'generated_initiation_frequency_per_year':generated_frequency,
             'fully_executed_case_weighted_frequency_per_year':evaluated_frequency,
             'fraction_of_generated_initiation_frequency':evaluated_frequency/generated_frequency if generated_frequency else None,

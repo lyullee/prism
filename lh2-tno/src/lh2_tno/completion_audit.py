@@ -150,6 +150,28 @@ def build_ijhe_completion_audit(
         and isinstance(row.get("mass_ledger"), Mapping)
         and _finite(row["mass_ledger"].get("end_to_end_residual_kg"))
     ]
+    release_ledger = campaign_result.get("release_termination_inventory_ledger")
+    release_ledger_summary = (
+        release_ledger.get("summary")
+        if isinstance(release_ledger, Mapping)
+        and isinstance(release_ledger.get("summary"), Mapping)
+        else None
+    )
+    release_ledger_rows = (
+        release_ledger.get("rows")
+        if isinstance(release_ledger, Mapping)
+        and isinstance(release_ledger.get("rows"), list)
+        else None
+    )
+    release_ledger_valid = release_ledger is None or (
+        isinstance(release_ledger, Mapping)
+        and release_ledger.get("schema_version")
+        == "prism.release_termination_inventory_ledger.v1"
+        and release_ledger_rows is not None
+        and len(release_ledger_rows) == len(cases)
+        and release_ledger_summary is not None
+        and release_ledger_summary.get("case_count") == len(cases)
+    )
     structural_worklist_coverage = False
     checks = [
         _check(
@@ -626,10 +648,21 @@ def build_ijhe_completion_audit(
         ),
         _check(
             "release_duration_isolation_inventory_ledger",
-            bool(executed_cases) and len(ledger_cases) == len(executed_cases),
+            bool(executed_cases)
+            and len(ledger_cases) == len(executed_cases)
+            and release_ledger_valid,
             {
                 "executed_case_count": len(executed_cases),
                 "cases_with_termination_and_mass_ledger": len(ledger_cases),
+                "release_ledger_schema": (
+                    release_ledger.get("schema_version")
+                    if isinstance(release_ledger, Mapping)
+                    else None
+                ),
+                "release_ledger_row_count": len(release_ledger_rows)
+                if release_ledger_rows is not None
+                else None,
+                "release_ledger_summary": release_ledger_summary,
                 "max_end_to_end_residual_kg": max(
                     (
                         abs(float(row["mass_ledger"]["end_to_end_residual_kg"]))

@@ -40,7 +40,12 @@ def test_provider_packet_identity_keeps_digest_and_clock_without_flow_history():
         'provider_result_digests': ['b' * 64],
         'provider_boundary_references': ['provider outlet'],
         'termination_bases': ['inventory_depletion'],
+        'termination_provenances': [None],
+        'event_kinds': [None],
+        'input_origins': [None],
         'duration_s': [0.25],
+        'available_mass_kg': [None],
+        'cumulative_mass_out_kg': [None],
     }
 
 
