@@ -1,6 +1,6 @@
 {
-  "date_kst": "2026-10-20",
-  "status": "ACTIVE",
+  "date_kst": "2026-10-21",
+  "status": "ACTIVE; IJHE completion chain remains incomplete evidence",
   "public_baseline": "PRISM 0.6.0",
   "objective": "선언한 옥외 LH2 적용범위의 주요 사고를 설비 상태부터 시설 IR/F-N까지 계산하고, 미계산 사고·문헌 빈도 불확실성·물리 검증 근거·신규 처리시간을 명확히 보고하여 IJHE 연구를 준비한다.",
   "completion_record": "docs/PRISM_IJHE_완성목표_20261009.md",
@@ -50,7 +50,7 @@
     "field accident-frequency collection and sensor-frequency learning",
     "indoor dispersion, DDT/detonation and full domino interaction"
   ],
-  "next_priority": "Obtain qualified provider accident histories and independent physical validation for the remaining partial families, then rerun the merged facility chain. Keep field-frequency learning, indoor/DDT/full-domino scope, and 1 Hz fresh-physics claims disabled.",
+  "next_priority": "Replace synthetic Valve provider packets with facility-qualified equipment exports, close the two AREA_0.01% backend deadline cases, then resolve the remaining accident-family evidence blockers before any facility IR/F-N claim.",
   "layered_tank_worklist_packet_campaign_implemented": true,
   "layered_tank_worklist_packet_campaign_status": "SYNTHETIC_STRUCTURAL_ONLY; storage-tank-01 five area-bin packets exact-match 5/24 worklist events",
   "layered_tank_worklist_packet_campaign_record": "results/20261010/layered_tank_worklist_packets/campaign_verification.json",
@@ -1975,5 +1975,32 @@
   "equipment_campaign_all_area_bins_frequency_inference": false,
   "equipment_campaign_all_area_bins_physical_validation_claim": false,
   "equipment_campaign_all_area_bins_facility_qra_claim": false,
-  "equipment_campaign_all_area_bins_frequency_scenarios": "examples/native_lh2_transfer_line_replacement_frequency_scenarios.json"
+  "equipment_campaign_all_area_bins_frequency_scenarios": "examples/native_lh2_transfer_line_replacement_frequency_scenarios.json",
+  "valve_provider_campaign_record": "results/20261021/valve_provider_all_bins_campaign/campaign_result.json",
+  "valve_provider_campaign_status": "PARTIAL_DECLARED_SCOPE; 8 EXECUTED_OPERATOR_LIMITED and 2 FAILED backend-deadline cases across five LH2_VALVE literature area bins and two synthetic weather cases",
+  "valve_provider_campaign_generated_events": 5,
+  "valve_provider_campaign_executed_cases": 8,
+  "valve_provider_campaign_withheld_cases": 10,
+  "valve_provider_campaign_frequency_inference": false,
+  "valve_provider_campaign_physical_validation_claim": false,
+  "valve_provider_campaign_facility_qra_claim": false,
+  "facility_ledger_latest_record": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json",
+  "facility_ledger_latest_status": "PARTIAL_FACILITY_SCOPE",
+  "facility_ledger_latest_event_count": 41,
+  "facility_ledger_latest_case_count": 80,
+  "facility_ledger_latest_uncomputed_case_count": 37,
+  "facility_ledger_latest_risk_atom_count": 304,
+  "facility_ledger_latest_total_risk_available": false,
+  "facility_assessment_latest_record": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
+  "facility_assessment_latest_conditional_diagnostic_risk_available": true,
+  "facility_assessment_latest_frequency_scenario_count": 5,
+  "facility_assessment_latest_provider_qualification_complete": false,
+  "scope_matrix_latest_record": "results/20261021/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_merged_scope_matrix.json",
+  "ijhe_audit_latest_record": "results/20261021/ijhe_completion_audit_valve_transfer_line_replacement.json",
+  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_audit_latest_blocking_reasons": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ]
 }

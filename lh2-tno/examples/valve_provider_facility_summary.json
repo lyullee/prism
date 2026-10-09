@@ -1,0 +1,62 @@
+{
+  "schema_version": "prism.valve_provider_facility_summary.v1",
+  "generated_at_kst": "2026-10-21",
+  "purpose": "compact pointer for the external lh2dt.Valve provider campaign and its facility replacement ledger",
+  "provider_campaign": {
+    "record": "results/20261021/valve_provider_all_bins_campaign/campaign_result.json",
+    "verification": "results/20261021/valve_provider_all_bins_campaign/verification.json",
+    "scope_matrix": "results/20261021/valve_provider_all_bins_campaign/scope_matrix.json",
+    "generated_events": 5,
+    "total_cases": 10,
+    "executed_operator_limited_cases": 8,
+    "failed_backend_deadline_cases": 2,
+    "withheld_cases": 10,
+    "risk_atoms": 32,
+    "frequency_inference": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "area_bins": [
+      "AREA_0.01%",
+      "AREA_0.1%",
+      "AREA_1%",
+      "AREA_10%",
+      "AREA_100%"
+    ],
+    "weather_cases": [
+      "D-3ms-west",
+      "D-4ms-west"
+    ]
+  },
+  "facility_replacement": {
+    "ledger": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json",
+    "assessment": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
+    "scope_matrix": "results/20261021/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_merged_scope_matrix.json",
+    "campaign_count": 7,
+    "event_count": 41,
+    "case_count": 80,
+    "uncomputed_case_count": 37,
+    "risk_atom_count": 304,
+    "conditional_diagnostic_facility_annual_ir_low_high": {
+      "worker-01": [
+        1.0694000000000011e-06,
+        1.0694000091786761e-06
+      ]
+    },
+    "facility_total_risk_available": false
+  },
+  "ijhe_audit": {
+    "record": "results/20261021/ijhe_completion_audit_valve_transfer_line_replacement.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "blocking_reasons": [
+      "only synthetic or screening provider releases are available for this campaign",
+      "one or more declared accident families are missing, partial, or uncomputed",
+      "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    ]
+  },
+  "limitations": [
+    "external provider packets use synthetic liquid state and bounded diagnostic horizon",
+    "AREA_0.01% cases exceeded backend deadline",
+    "operator-limited provider closure and facility evidence remain unqualified",
+    "no sensor-derived frequency inference"
+  ]
+}

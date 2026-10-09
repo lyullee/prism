@@ -1105,3 +1105,11 @@ python scripts/validate_equipment_campaign.py `
 ```
 
 이 결과는 설비 campaign 자체의 계산을 완료해도 시설 전체 QRA를 자동으로 열지 않는다. 기존 event를 중복 합산하지 않도록 교체용 facility ledger를 만들고, 문헌 빈도 시나리오·사고범위 matrix·provider 자격·물리검증 gate를 함께 확인해야 한다. 실제 실행 결과와 재현 파일은 [설비 상태·배관 개구면적 시설 결합 기록](docs/PRISM_설비상태_배관개구면적_시설결합_개발기록_20261020.md)에 정리했다.
+
+### 밸브 방출 패킷을 시설 원장에 결합한 최신 단계
+
+`scripts/validate_valve_campaign.py`는 기존 `transfer-valve-01`의 다섯 문헌 면적 사건을 저장된 `lh2dt.Valve` 액체/2상 방출 패킷과 연결한다. 각 패킷은 PRISM의 `valve-accident-out` 포트로 들어가 SLABx-LH2/SLABx 피해 계산과 native IR/F-N 원자로 전달된다. 결과는 [밸브 campaign](results/20261021/valve_provider_all_bins_campaign/campaign_result.json)에 있다.
+
+최신 7개 campaign 시설 원장은 [여기](results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json)에 있다. 고유 사건 41개, 사례 80개, 보류·미계산 복사본 37개, 위험 원자 304개를 기록한다. 밸브는 8개 `EXECUTED_OPERATOR_LIMITED` 사례와 2개 백엔드 시간 제한 실패를 갖는다. 실패를 0 위험으로 처리하지 않고 미계산으로 남긴다.
+
+이 통합은 밸브 모델을 별도 애드온으로 분리하지 않고 같은 PRISM 시설 원장에 선택형 외부 방출 경계로 연결한 것이다. 그러나 현재 패킷은 합성·스크리닝 자료이고 provider 자격·독립 물리검증·완전한 사고군이 없으므로 시설 전체 IR/F-N은 계속 차단된다. 자세한 내용은 [밸브 방출 패킷 시설 결합 기록](docs/PRISM_밸브_방출패킷_시설결합_개발기록_20261021.md)과 [IJHE 완료 감사](results/20261021/ijhe_completion_audit_valve_transfer_line_replacement.json)를 참조한다.

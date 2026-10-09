@@ -1,5 +1,5 @@
 {
-  "date_kst": "2026-10-20",
+  "date_kst": "2026-10-21",
   "package_version": "0.6.2",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
@@ -45,7 +45,7 @@
   "physical_validation_holdout_aluminium_trial_6_radius_rmse_m": 0.10158740079360236,
   "physical_validation_holdout_video_band_coverage": 1.0,
   "physical_validation_hse_test6_max_mass_residual_kg": 8.244516180866412e-13,
-  "facility_validation": "WITHHELD; transfer-line equipment-twin replacement completed for five area bins and two weather cases; merged facility ledger remains partial with 32 uncomputed cases and no qualified facility IR/F-N",
+  "facility_validation": "WITHHELD; external lh2dt.Valve packet campaign now replaces the old transfer-valve gaps for five literature area bins. The merged seven-campaign ledger has 41 events, 80 cases, 37 withheld/uncomputed copies and 304 risk atoms. Eight valve cases executed with operator-limited status and two AREA_0.01% cases failed at the backend deadline; qualified facility IR/F-N remains withheld.",
   "one_hz_fresh_physics_demonstrated": false,
   "realtime_monitor_implemented": true,
   "realtime_monitor_module": "src/lh2_tno/service.py",
@@ -55,7 +55,7 @@
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "realtime_monitor_deadline_test_scope": "Synthetic Pipeline contract tests cover MET/MISSED deadline ledgers; no 1 Hz fresh-physics claim is made.",
-  "current_scope": "2026-10-20 transfer-line replacement campaign: existing generic transfer-line events were removed from the derived facility ledger and replaced by five native equipment-twin area-bin events, each with two weather cases. The merged diagnostic facility ledger now has 41 events, 75 cases, 32 uncomputed cases and 292 risk atoms across 12 expected components; the prior all-bin ledger had 37 uncomputed cases, so this replacement removes five duplicate transfer-line gaps. liquid-transfer-line-01 is EXECUTED in the merged component ledger, while storage, pump, valve, tank, two-sided and vertical families remain partial. The conditional diagnostic IR/F-N and five literature frequency scenarios are retained, but qualified facility IR/F-N remains withheld because provider packets, independent physical validation, synthetic termination horizons and complete accident families are not closed.",
+  "current_scope": "2026-10-21 valve-provider facility replacement: five exact LH2_VALVE literature area bins were bound to saved lh2dt.Valve liquid/two-phase packets and run through the normal SLABx-LH2/SLABx and native TNO IR/F-N chain in two synthetic outdoor weather conditions. The seven-campaign merged ledger contains 41 unique events, 80 cases, 37 withheld/uncomputed copies and 304 risk atoms across 11 modeled components plus one excluded receiving boundary. transfer-valve-01 now contributes 32 conditional diagnostic atoms; eight cases are operator-limited and two small-area cases are backend-deadline failures. Facility total IR/F-N remains withheld because packets are synthetic/screening, provider qualification and independent physical validation are absent, and all 12 major-accident families are not closed.",
   "unsupported": [
     "DDT_detonation",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
@@ -1765,7 +1765,7 @@
   "mixed_lh2_accident_scope_matrix_catalog_record": "results/20261017/generic_mixed_accident_scope_matrix_with_catalog.json",
   "mixed_lh2_accident_scope_matrix_catalog_family_count": 12,
   "mixed_lh2_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
-  "ijhe_completion_audit_latest_record": "results/20261020/ijhe_completion_audit_transfer_line_replacement.json",
+  "ijhe_completion_audit_latest_record": "results/20261021/ijhe_completion_audit_valve_transfer_line_replacement.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
   "ijhe_completion_audit_latest_check_count": 27,
   "ijhe_completion_audit_latest_blocking_reason_count": 3,
@@ -2532,10 +2532,10 @@
   },
   "ijhe_completion_audit_all_bin_facility_total_risk_available": false,
   "ijhe_completion_audit_all_bin_physical_validation_claim": false,
-  "facility_evidence_request_latest_record": "results/20261020/facility_evidence_request_transfer_line_replacement.json",
-  "facility_evidence_request_latest_status": "OPEN_EVIDENCE_REQUEST; 12 accident families and 11 components",
+  "facility_evidence_request_latest_record": "results/20261021/facility_evidence_request_valve_transfer_line_replacement.json",
+  "facility_evidence_request_latest_status": "OPEN_EVIDENCE_REQUEST; 12 accident families, 11 modeled components and external Valve provider evidence",
   "facility_evidence_request_latest_event_count": 41,
-  "facility_evidence_request_latest_risk_atom_count": 292,
+  "facility_evidence_request_latest_risk_atom_count": 304,
   "facility_evidence_request_latest_two_sided_interaction_requirements": true,
   "facility_merge_all_bin_assessment_campaign_count": 5,
   "facility_merge_all_bin_component_status_counts": {
@@ -2605,5 +2605,44 @@
   "equipment_campaign_all_area_bins_frequency_inference": false,
   "equipment_campaign_all_area_bins_physical_validation_claim": false,
   "equipment_campaign_all_area_bins_facility_qra_claim": false,
-  "equipment_campaign_all_area_bins_frequency_scenarios": "examples/native_lh2_transfer_line_replacement_frequency_scenarios.json"
+  "equipment_campaign_all_area_bins_frequency_scenarios": "examples/native_lh2_transfer_line_replacement_frequency_scenarios.json",
+  "facility_merge_valve_transfer_line_replacement_record": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_ledger.json",
+  "facility_merge_valve_transfer_line_replacement_assessment_record": "results/20261021/native_campaign_with_valve_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_facility_assessment.json",
+  "facility_merge_valve_transfer_line_replacement_scope_matrix_record": "results/20261021/generic_transfer_line_replacement_vertical_all_bins_two_sided_inventory_isolation_with_valve_merged_scope_matrix.json",
+  "facility_merge_valve_transfer_line_replacement_status": "PARTIAL_FACILITY_SCOPE",
+  "facility_merge_valve_transfer_line_replacement_event_count": 41,
+  "facility_merge_valve_transfer_line_replacement_case_count": 80,
+  "facility_merge_valve_transfer_line_replacement_uncomputed_case_count": 37,
+  "facility_merge_valve_transfer_line_replacement_risk_atom_count": 304,
+  "facility_merge_valve_transfer_line_replacement_total_risk_available": false,
+  "facility_merge_valve_transfer_line_replacement_conditional_diagnostic_facility_risk": {
+    "worker-01": [
+      1.0694000000000011e-06,
+      1.0694000091786761e-06
+    ]
+  },
+  "facility_merge_valve_transfer_line_replacement_timing": {
+    "campaign_count": 7,
+    "fresh_physics_cases": 78,
+    "case_p95_ms": 49740.12163501464,
+    "case_p99_ms": 180080.54373297724,
+    "campaign_elapsed_ms": 1330413.1414000876,
+    "one_hz_fresh_physics_demonstrated": false
+  },
+  "valve_provider_campaign_record": "results/20261021/valve_provider_all_bins_campaign/campaign_result.json",
+  "valve_provider_campaign_verification_record": "results/20261021/valve_provider_all_bins_campaign/verification.json",
+  "valve_provider_campaign_scope_matrix_record": "results/20261021/valve_provider_all_bins_campaign/scope_matrix.json",
+  "valve_provider_campaign_generated_events": 5,
+  "valve_provider_campaign_executed_cases": 8,
+  "valve_provider_campaign_operator_limited_cases": 8,
+  "valve_provider_campaign_failed_cases": 2,
+  "valve_provider_campaign_withheld_cases": 10,
+  "valve_provider_campaign_physical_validation_claim": false,
+  "valve_provider_campaign_frequency_inference": false,
+  "valve_provider_campaign_facility_qra_claim": false,
+  "ijhe_completion_audit_latest_blocked_checks": [
+    "actual_provider_release_packet",
+    "declared_major_accident_scope",
+    "facility_ir_fn_available"
+  ]
 }
