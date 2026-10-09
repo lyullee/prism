@@ -53,7 +53,10 @@ def _lh2_events():
 
 def test_published_literature_quantiles_reweight_atoms_without_physics():
     events = _valve_events()
-    result = literature_frequency_uncertainty(_result(events), (
+    payload = _result(events)
+    for atom in payload['risk_atoms']:
+        atom['scenario_families'] = ['valve_hole', 'liquid_two_phase']
+    result = literature_frequency_uncertainty(payload, (
         LiteratureFrequencyScenario(id='low', asset_quantiles={'valves': 'p05'}, provenance='published test bounds'),
         LiteratureFrequencyScenario(id='high', asset_quantiles={'valves': 'p95'}, provenance='published test bounds'),
     ))
@@ -61,6 +64,12 @@ def test_published_literature_quantiles_reweight_atoms_without_physics():
     low, high = result['scenarios']
     assert low['event_frequency_per_year'][events[0].id] == events[0].marginal_p05_per_year
     assert high['event_frequency_per_year'][events[0].id] == events[0].marginal_p95_per_year
+    assert set(low['scenario_family_known_expected_fatalities_low_high']) == {
+        'valve_hole', 'liquid_two_phase'
+    }
+    assert low['scenario_family_rank_by_known_expected_fatalities_low_high'][0] == {
+        'liquid_two_phase': 1, 'valve_hole': 2
+    }
     assert result['facility_credible_interval'] is False
 
 
@@ -126,8 +135,11 @@ def test_frequency_scenario_rejects_mixed_correlation_inputs():
 
 def test_published_frequency_distribution_sampling_returns_known_interval_without_physics():
     events = _lh2_events()
+    payload = _result(events)
+    for atom in payload['risk_atoms']:
+        atom['scenario_families'] = ['valve_hole', 'liquid_two_phase']
     result = sample_literature_frequency_distributions(
-        _result(events),
+        payload,
         (
             LiteratureFrequencyDistributionScenario(
                 id='shared', provenance='published test mu/sigma',
@@ -148,6 +160,8 @@ def test_published_frequency_distribution_sampling_returns_known_interval_withou
     stability = result['scenarios'][0]['asset_rank_stability'][events[0].asset_id]
     assert stability['mean_rank_low_high'] == pytest.approx([1.0, 1.0])
     assert stability['top_rank_probability_low_high'] == pytest.approx([1.0, 1.0])
+    family_stability = result['scenarios'][0]['scenario_family_rank_stability']
+    assert set(family_stability) == {'valve_hole', 'liquid_two_phase'}
 
 
 def test_distribution_sampling_can_hold_mixed_catalogue_events_fixed():

@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import math
 import random
+from collections import defaultdict
 from typing import Literal
 
 from pydantic import Field, model_validator
@@ -65,6 +66,41 @@ def _event_frequency(event: FrequencyEvent, quantile: str) -> float:
     if not math.isfinite(value) or value < 0:
         raise ValueError(f"event {event.id} has an invalid published {quantile} frequency bound")
     return value
+
+
+def _scenario_family_contribution(
+    atoms: list[dict],
+    event_frequency: dict[str, float],
+) -> dict[str, list[float]]:
+    """Return expected-fatality views grouped by the atom's scenario families."""
+    contribution: dict[str, list[float]] = defaultdict(lambda: [0.0, 0.0])
+    for atom in atoms:
+        families = atom.get("scenario_families", ())
+        if not isinstance(families, (list, tuple)):
+            continue
+        weight = event_frequency[atom["event_id"]] * atom["conditional_weight"]
+        for family in families:
+            if not isinstance(family, str) or not family.strip():
+                continue
+            for endpoint in range(2):
+                contribution[family][endpoint] += weight * atom[
+                    "expected_deaths_low_high"
+                ][endpoint]
+    return dict(sorted(contribution.items()))
+
+
+def _rank_contributions(
+    contribution: dict[str, list[float]],
+) -> list[dict[str, int]]:
+    ranks: list[dict[str, int]] = []
+    families = sorted(contribution)
+    for endpoint in range(2):
+        order = sorted(
+            families,
+            key=lambda family: (-contribution[family][endpoint], family),
+        )
+        ranks.append({family: rank for rank, family in enumerate(order, start=1)})
+    return ranks
 
 
 def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFrequencyScenario, ...]) -> dict:
@@ -138,6 +174,7 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
                            1 + sum(v[i] > value[i] and not math.isclose(v[i], value[i], rel_tol=1e-12, abs_tol=0)
                                     for key, v in contribution.items() if key in computed_assets)
                            for asset, value in contribution.items()})
+        family_contribution = _scenario_family_contribution(atoms, event_frequency)
         outputs.append({
             'scenario': scenario.model_dump(mode='json'),
             'known_annual_ir_low_high': ir,
@@ -147,6 +184,10 @@ def literature_frequency_uncertainty(result: dict, scenarios: tuple[LiteratureFr
             'conditional_diagnostic_facility_risk_available': bool(atoms),
             'asset_known_annual_expected_fatalities_low_high': contribution,
             'asset_rank_by_known_expected_fatalities_low_high': ranked,
+            'scenario_family_known_expected_fatalities_low_high': family_contribution,
+            'scenario_family_rank_by_known_expected_fatalities_low_high': _rank_contributions(
+                family_contribution
+            ),
             'event_frequency_per_year': event_frequency,
             'uncomputed_cases': result['uncomputed_cases'],
             'declared_scope_annual_ir_low_high': ir if result['declared_scope_numerically_complete'] else None,
@@ -240,8 +281,17 @@ def sample_literature_frequency_distributions(
         rng = random.Random(seed)
         ir_samples = {rid: [[], []] for rid in sorted(ids)}
         asset_samples = {asset: [[], []] for asset in sorted(assets)}
+        scenario_families = sorted({
+            family
+            for atom in atoms
+            for family in atom.get("scenario_families", ())
+            if isinstance(family, str) and family.strip()
+        })
+        family_samples = {family: [[], []] for family in scenario_families}
         rank_sums = {asset: [0.0, 0.0] for asset in sorted(assets)}
         rank_top_counts = {asset: [0, 0] for asset in sorted(assets)}
+        family_rank_sums = {family: [0.0, 0.0] for family in scenario_families}
+        family_rank_top_counts = {family: [0, 0] for family in scenario_families}
         total_samples = [[], []]
         event_samples = {event_id: [] for event_id in sorted(event_ids)}
         for _ in range(draws):
@@ -265,6 +315,7 @@ def sample_literature_frequency_distributions(
                 event_samples[event_id].append(value)
             receptor_totals = {rid: [0.0, 0.0] for rid in sorted(ids)}
             asset_totals = {asset: [0.0, 0.0] for asset in sorted(assets)}
+            family_totals = {family: [0.0, 0.0] for family in scenario_families}
             total = [0.0, 0.0]
             for atom in atoms:
                 weight = frequencies[atom['event_id']] * atom['conditional_weight']
@@ -272,6 +323,9 @@ def sample_literature_frequency_distributions(
                     deaths = atom['expected_deaths_low_high'][endpoint]
                     total[endpoint] += weight * deaths
                     asset_totals[atom['asset_id']][endpoint] += weight * deaths
+                    for family in atom.get('scenario_families', ()):
+                        if family in family_totals:
+                            family_totals[family][endpoint] += weight * deaths
                     for rid in receptor_totals:
                         receptor_totals[rid][endpoint] += weight * atom['receptor_harm_low_high'][rid][endpoint]
             for rid in receptor_totals:
@@ -280,6 +334,9 @@ def sample_literature_frequency_distributions(
             for asset in asset_totals:
                 for endpoint in range(2):
                     asset_samples[asset][endpoint].append(asset_totals[asset][endpoint])
+            for family in family_totals:
+                for endpoint in range(2):
+                    family_samples[family][endpoint].append(family_totals[family][endpoint])
             # Ranks are deterministic under exact ties: asset id is the
             # secondary key.  This makes a reported priority ordering
             # reproducible without pretending that ties have a physical
@@ -289,6 +346,15 @@ def sample_literature_frequency_distributions(
                 for rank, asset in enumerate(order, start=1):
                     rank_sums[asset][endpoint] += rank
                 rank_top_counts[order[0]][endpoint] += 1
+            for endpoint in range(2):
+                family_order = sorted(
+                    scenario_families,
+                    key=lambda family: (-family_totals[family][endpoint], family),
+                )
+                if family_order:
+                    for rank, family in enumerate(family_order, start=1):
+                        family_rank_sums[family][endpoint] += rank
+                    family_rank_top_counts[family_order[0]][endpoint] += 1
             for endpoint in range(2):
                 total_samples[endpoint].append(total[endpoint])
 
@@ -314,6 +380,22 @@ def sample_literature_frequency_distributions(
                     'rank_definition': '1 is highest known expected-fatality contribution; exact ties use asset id',
                 }
                 for asset in sorted(assets)
+            },
+            'scenario_family_expected_death_quantiles': {
+                family: [_quantile_triplet(endpoints) for endpoints in endpoint_values]
+                for family, endpoint_values in family_samples.items()
+            },
+            'scenario_family_rank_stability': {
+                family: {
+                    'mean_rank_low_high': [
+                        family_rank_sums[family][i] / draws for i in range(2)
+                    ],
+                    'top_rank_probability_low_high': [
+                        family_rank_top_counts[family][i] / draws for i in range(2)
+                    ],
+                    'rank_definition': '1 is highest known expected-fatality contribution; exact ties use family id',
+                }
+                for family in scenario_families
             },
             'uncomputed_cases': result['uncomputed_cases'],
             'facility_credible_interval': result['total_facility_annual_ir_low_high'] is not None,

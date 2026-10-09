@@ -1219,7 +1219,7 @@
   "major_accident_scope_matrix_catalog_record": "results/20261017/generic_mixed_accident_scope_matrix_with_catalog.json",
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
-  "ijhe_completion_audit_latest_record": "results/20261017/ijhe_completion_audit_after_family_ledger.json",
+  "ijhe_completion_audit_latest_record": "results/20261017/ijhe_completion_audit_after_family_uncertainty.json",
   "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE",
   "ijhe_completion_audit_latest_check_count": 19,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
@@ -1254,5 +1254,15 @@
   "facility_scenario_family_contribution_test_status": "campaign and facility ledger tests; full portable suite 429 passed",
   "facility_scenario_family_contribution_record": "results/20261017/generic_mixed_provider_source_state_rebound_assessment_family_atoms.json",
   "campaign_scenario_family_risk_atom_binding_test_status": "campaign and facility ledger tests; full portable suite 429 passed",
-  "campaign_scenario_family_risk_atom_binding_record": "results/20261017/generic_mixed_provider_campaign_family_atoms_result.json"
+  "campaign_scenario_family_risk_atom_binding_record": "results/20261017/generic_mixed_provider_campaign_family_atoms_result.json",
+  "frequency_uncertainty_scenario_family_analysis_implemented": true,
+  "frequency_uncertainty_scenario_family_analysis_module": "src/lh2_tno/uncertainty.py",
+  "frequency_uncertainty_scenario_family_analysis_fields": [
+    "scenario_family_known_expected_fatalities_low_high",
+    "scenario_family_rank_by_known_expected_fatalities_low_high",
+    "scenario_family_rank_stability"
+  ],
+  "frequency_uncertainty_scenario_family_analysis_record": "results/20261017/frequency_uncertainty_family_atoms.json",
+  "frequency_uncertainty_scenario_family_analysis_status": "5 literature scenarios reweighted over saved family-tagged risk atoms; no physics rerun; facility credible interval withheld",
+  "frequency_uncertainty_scenario_family_analysis_test_status": "uncertainty tests; full portable suite 429 passed"
 }

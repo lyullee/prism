@@ -908,6 +908,8 @@ provider worklist의 각 event에는 `scenario_families`가 함께 기록됩니�
 `build_accident_scope_matrix.py --provider-worklist`를 사용하면 이 worklist와 campaign의 event ID·주 사고 family가 같은지 검사합니다. 구조가 `ALIGNED`여도 provider packet이 없으면 계산을 시작하지 않으며, 최신 generic 24-event 진단도 이 원칙에 따라 packet 0건·시설 QRA 보류로 기록됩니다.
 
 실행된 risk atom에는 사고 family가 함께 남고, facility ledger의 `scenario_family_contributions`에서 탱크·배관 사고와 액체 2상·재고 사고의 기여를 따로 조회할 수 있습니다. 이 표는 같은 atom을 family별로 분류한 결과이므로 family별 수치를 서로 더하지 않습니다.
+
+문헌 빈도 민감도 결과에도 family별 known expected-fatality 기여와 순위 안정성이 기록됩니다. 최신 5개 빈도 시나리오 결과는 `results/20261017/frequency_uncertainty_family_atoms.json`에 있으며, 물리 재계산 없이 빈도만 재가중한 조건부 진단 결과입니다.
 # 압축성 기체 근접장 handoff (2026-10-16)
 
 고속 기체 출구는 출구 압력·속도만으로 PRISM이 팽창과 충격파를 다시 만들지 않습니다. 외부 provider가 `prism.compressible_plane_handoff.v1`로 downstream plane의 위치, 혼합상태, 단면, 시간별 상태를 내보내고 원 packet의 source/result digest를 지정해야 합니다. `scripts/attach_compressible_plane_handoff.py`가 이 handoff를 `ResolvedGasRelease`에 붙이면서 각 interval의 `rho × u × A × H2 fraction` 질량 장부와 식별자를 다시 검사합니다. `src/lh2_tno/chain_worker.py`는 공급자가 선언한 plane에서만 SLABx를 시작합니다.
