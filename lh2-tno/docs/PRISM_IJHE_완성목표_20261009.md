@@ -143,7 +143,7 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 
 ## 2026-10-18 최신 연결 상태
 
-외부 `lh2dt_models`의 일곱 설비 클래스가 native `export_accident_history(request)` 경계를 제공하도록 구현되었고, 외부 회귀시험 373건과 PRISM portable suite 441건을 통과했다. 이 사실은 사고 방출 계약이 있다는 뜻이며, 실제 적격 provider packet이나 시설 전체 QRA가 완료됐다는 뜻은 아니다.
+외부 `lh2dt_models`의 일곱 설비 클래스가 native `export_accident_history(request)` 경계를 제공하도록 구현되었고, 외부 회귀시험 374건과 PRISM portable suite 441건을 통과했다. 이 사실은 사고 방출 계약이 있다는 뜻이며, 실제 적격 provider packet이나 시설 전체 QRA가 완료됐다는 뜻은 아니다.
 
 저장탱크에 대해서는 `scripts/run_lh2dt_native_frequency_case.py`로 문헌 `LH2_VESSEL AREA_0.01%` 빈도와 native `LayeredTank` 방출을 한 사건에서 결합했다. 개구 `0.0127 m` exact-match, provider 질량 잔차 0 kg, native export 약 0.29 s, consequence campaign 약 23.8 s, 사건 상태 `EXECUTED_OPERATOR_LIMITED`를 기록했다. 빈도는 packet에서 추정하지 않고 기존 문헌 catalogue에서 읽었다. 결과는 `results/20261018/native_lh2dt_frequency_case/verification.json`이다.
 
@@ -152,3 +152,5 @@ packet 판정 CLI도 추가했다. 선택된 vaporizer G1 packet은 고속 plane
 ## 2026-10-18 native DynamicHEMPipe 2상 연결
 
 배관 경계도 같은 방식으로 확인했다. 외부 `DynamicHEMPipe` native export는 명시적 액체·2상 초기 품질을 받고 대기 flash의 기체/지상 액체 분할과 질량·엔탈피 장부를 반환한다. `LH2_PIPE AREA_0.01%` 개구와 문헌 빈도를 한 정확한 사건에 결합한 결과는 `PARTIAL_DECLARED_SCOPE`이며, 2상 packet은 strict adapter와 SLABx-LH2 consequence chain까지 소비됐다. 다른 opening bin과 나머지 설비는 명시적 미계산/제외로 남겼다. airborne liquid, 전량 방출, 현장 위치별 빈도, 물리검증을 추가하지 않았으므로 이 연결도 시설 전체 위험도 완료를 의미하지 않는다.
+
+
