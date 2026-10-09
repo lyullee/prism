@@ -34,3 +34,9 @@ tests/test_provider_packet_promotion.py
 ```
 
 회귀 테스트는 자격 실제 요청이 비합성 입력에서만 실행되는지, 합성 자격 요청이 provider 호출 전에 거부되는지를 확인한다.
+
+## 양단 파열 자격 자료의 보완
+
+양단 파열은 하나의 사건에 두 provider 출구가 있으므로 qualification sidecar의 `provider_source_digests`와 선택적 `provider_result_digests`도 두 출구 순서와 정확히 같아야 한다. `ProviderPacketEvidence.from_export_result()`는 이제 단일 출구에는 단일 digest를, 양단 출구에는 복수 digest 배열을 요구한다. 첫 출구만 확인하고 두 번째 출구를 통과시키는 경로를 없앴다.
+
+이 검사는 두 endpoint를 한 사건으로 묶는 구조 검증이다. 두 endpoint의 plume 상호작용이나 독립 물리검증을 새로 주장하지 않으며, 현재 양단 파열의 operator-limited·시설 QRA 보류 정책은 그대로 유지한다.

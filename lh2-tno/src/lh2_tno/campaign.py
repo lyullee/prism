@@ -229,20 +229,36 @@ class ProviderPacketEvidence(Contract):
         if not isinstance(evidence_id, str) or not evidence_id.strip():
             raise ValueError("provider qualification requires evidence_id")
         packets = tuple(getattr(release, "releases", (release,)))
-        if qualification.get("provider_source_digest") != getattr(
-            packets[0], "provider_source_digest", None
-        ):
-            raise ValueError("provider qualification source digest disagrees with release")
+        if not packets:
+            raise ValueError("promoted provider export contains no release packets")
+        source_digests = tuple(
+            getattr(packet, "provider_source_digest", None) for packet in packets
+        )
+        result_digests = tuple(
+            getattr(packet, "provider_result_digest", None) for packet in packets
+        )
+        declared_sources = qualification.get("provider_source_digests")
+        if declared_sources is None:
+            declared_source = qualification.get("provider_source_digest")
+            if len(packets) != 1 or declared_source != source_digests[0]:
+                raise ValueError(
+                    "provider qualification source digest(s) disagree with release"
+                )
+        elif tuple(declared_sources) != source_digests:
+            raise ValueError(
+                "provider qualification source digest(s) disagree with release"
+            )
+        declared_results = qualification.get("provider_result_digests")
+        if declared_results is not None and tuple(declared_results) != result_digests:
+            raise ValueError(
+                "provider qualification result digest(s) disagree with release"
+            )
         return cls(
             event_id=getattr(release, "event_id"),
             component_id=getattr(release, "component_id"),
             port_ids=tuple(getattr(packet, "port_id") for packet in packets),
-            provider_source_digests=tuple(
-                getattr(packet, "provider_source_digest") for packet in packets
-            ),
-            provider_result_digests=tuple(
-                getattr(packet, "provider_result_digest") for packet in packets
-            ),
+            provider_source_digests=source_digests,
+            provider_result_digests=result_digests,
             evidence_id=evidence_id,
         )
 

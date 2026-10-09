@@ -103,6 +103,48 @@ def test_provider_packet_evidence_can_be_built_from_promoted_export_result():
     assert evidence.provider_result_digests == ("b" * 64,)
 
 
+def test_two_sided_provider_packet_evidence_requires_both_endpoint_digests():
+    left = SimpleNamespace(
+        port_id="tank-left-out",
+        provider_source_digest="a" * 64,
+        provider_result_digest="b" * 64,
+    )
+    right = SimpleNamespace(
+        port_id="tank-right-out",
+        provider_source_digest="c" * 64,
+        provider_result_digest="d" * 64,
+    )
+    release = SimpleNamespace(
+        event_id="scope/tank/G1",
+        component_id="tank-01",
+        releases=(left, right),
+    )
+    result = SimpleNamespace(
+        provider_packet_promoted=True,
+        release=release,
+        provider_response={
+            "provider_qualification": {
+                "schema_version": "prism.provider_qualification_evidence.v1",
+                "status": "qualified_actual",
+                "provider_origin": "native_provider",
+                "evidence_id": "lh2-two-sided-actual-001",
+                "provider_source_digests": ["a" * 64, "c" * 64],
+                "provider_result_digests": ["b" * 64, "d" * 64],
+            }
+        },
+    )
+    evidence = ProviderPacketEvidence.from_export_result(result)
+    assert evidence.port_ids == ("tank-left-out", "tank-right-out")
+    assert evidence.provider_source_digests == ("a" * 64, "c" * 64)
+
+    result.provider_response["provider_qualification"]["provider_source_digests"] = [
+        "a" * 64,
+        "e" * 64,
+    ]
+    with pytest.raises(ValueError, match="source digest"):
+        ProviderPacketEvidence.from_export_result(result)
+
+
 def test_physical_validation_evidence_is_fail_closed():
     with pytest.raises(ValueError, match="independent physical validation"):
         PhysicalValidationEvidence(status="independent_validated")

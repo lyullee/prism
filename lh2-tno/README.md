@@ -675,7 +675,7 @@ Purple 배관에는 최소 적용 길이 10 m와 flange 포함 범위가 있습�
 반환해야 binding할 수 있습니다. 현재 합성 campaign은 이 완전 이력을 제공하지 않아 G2를 미계산으로 유지합니다.
 빈도만으로 임의의 짧은 누출 시간은 정당화되지 않습니다.
 
-양단 파열 provider 입력은 `prism.resolved_release_set.v1` 최상위 packet으로 묶습니다. `releases`에 두 개의 `prism.resolved_release.v1` endpoint를 넣고 공유 재고·사건 ID를 한 번 선언하면, `scripts/build_provider_request_catalog.py`와 `scripts/build_equipment_campaign.py`의 `--release-kind two_sided_rupture`가 전용 adapter를 사용합니다. endpoint를 복사해 단일 누출로 바꾸거나 사건 빈도를 두 번 부여하지 않습니다.
+양단 파열 provider 입력은 `prism.resolved_release_set.v1` 최상위 packet으로 묶습니다. `releases`에 두 개의 `prism.resolved_release.v1` endpoint를 넣고 공유 재고·사건 ID를 한 번 선언하면, `scripts/build_provider_request_catalog.py`와 `scripts/build_equipment_campaign.py`의 `--release-kind two_sided_rupture`가 전용 adapter를 사용합니다. endpoint를 복사해 단일 누출로 바꾸거나 사건 빈도를 두 번 부여하지 않습니다. 적격 provider sidecar를 사용할 때는 두 endpoint의 source digest(및 제공된 result digest)가 모두 같은 순서로 일치해야 합니다.
 
 ### 문헌 빈도 불확실성과 상관 가정
 
