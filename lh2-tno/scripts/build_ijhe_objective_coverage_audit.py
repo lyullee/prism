@@ -40,6 +40,7 @@ def main() -> int:
     parser.add_argument("--native-state-snapshot-campaign-ledger", type=Path)
     parser.add_argument("--extension-state-snapshot-coverage", type=Path)
     parser.add_argument("--observed-state-replay-audit", type=Path)
+    parser.add_argument("--observed-state-runtime-frames", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -80,6 +81,11 @@ def main() -> int:
             observed_state_replay_audit=(
                 _object(args.observed_state_replay_audit)
                 if args.observed_state_replay_audit
+                else None
+            ),
+            observed_state_runtime_frames=(
+                _object(args.observed_state_runtime_frames)
+                if args.observed_state_runtime_frames
                 else None
             ),
         )

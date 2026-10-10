@@ -59,6 +59,7 @@ def build_ijhe_objective_coverage_audit(
     native_state_snapshot_campaign_ledger: Mapping[str, Any] | None = None,
     extension_state_snapshot_coverage: Mapping[str, Any] | None = None,
     observed_state_replay_audit: Mapping[str, Any] | None = None,
+    observed_state_runtime_frames: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -81,6 +82,7 @@ def build_ijhe_objective_coverage_audit(
     benchmark_path = _record_path(realtime_cache_benchmark, None)
     extension_state_path = _record_path(extension_state_snapshot_coverage, None)
     observed_replay_path = _record_path(observed_state_replay_audit, None)
+    observed_runtime_path = _record_path(observed_state_runtime_frames, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -611,6 +613,80 @@ def build_ijhe_objective_coverage_audit(
         interpretation=(
             "원문 재생성 일치는 입력 무결성 근거다. 사고 방출·빈도·독립 물리검증·"
             "시설 IR/F-N으로 승격하지 않는다."
+        ),
+    ))
+
+    runtime_policy = (
+        observed_state_runtime_frames.get("policy", {})
+        if isinstance(observed_state_runtime_frames, Mapping)
+        else {}
+    )
+    runtime_frames = (
+        observed_state_runtime_frames.get("frames", [])
+        if isinstance(observed_state_runtime_frames, Mapping)
+        else []
+    )
+    runtime_frames_ok = (
+        isinstance(observed_state_runtime_frames, Mapping)
+        and observed_state_runtime_frames.get("schema_version")
+        == "prism.observed_state_runtime_frames.v1"
+        and observed_state_runtime_frames.get("status") == "STATE_RUNTIME_FRAMES_READY"
+        and isinstance(observed_state_runtime_frames.get("source_count"), int)
+        and observed_state_runtime_frames.get("source_count", 0) > 0
+        and observed_state_runtime_frames.get("frame_count")
+        == observed_state_runtime_frames.get("source_count")
+        and isinstance(runtime_frames, list)
+        and len(runtime_frames) == observed_state_runtime_frames.get("frame_count")
+        and isinstance(observed_state_runtime_frames.get("evidence_sample_count"), int)
+        and observed_state_runtime_frames.get("evidence_sample_count", 0) > 0
+        and all(
+            isinstance(frame, Mapping)
+            and isinstance(frame.get("component_id"), str)
+            and isinstance(frame.get("frame_digest"), str)
+            and isinstance(frame.get("state_snapshot_digest"), str)
+            and isinstance(frame.get("values"), Mapping)
+            and isinstance(frame.get("state_snapshot"), Mapping)
+            for frame in runtime_frames
+        )
+        and runtime_policy.get("state_only") is True
+        and runtime_policy.get("release_scenario_generated") is False
+        and runtime_policy.get("frequency_inference_performed") is False
+        and runtime_policy.get("sensor_frequency_learning_used") is False
+        and runtime_policy.get("provider_packet_promoted") is False
+        and runtime_policy.get("physical_validation_claim") is False
+        and runtime_policy.get("facility_qra_claim") is False
+        and runtime_policy.get("provider_release_required_for_consequence") is True
+    )
+    rows.append(_row(
+        "diagnostic_observed_state_runtime_frames",
+        "관측 상태를 실시간 정상상태 모델/provider resolver 입력으로 내보내되 사고 방출·빈도·QRA로 자동 승격하지 않아야 한다",
+        "PASS" if runtime_frames_ok else "BLOCKED_EVIDENCE",
+        evidence_paths=(observed_runtime_path, observed_replay_path),
+        observed={
+            "source_count": (
+                observed_state_runtime_frames.get("source_count")
+                if isinstance(observed_state_runtime_frames, Mapping)
+                else None
+            ),
+            "frame_count": (
+                observed_state_runtime_frames.get("frame_count")
+                if isinstance(observed_state_runtime_frames, Mapping)
+                else None
+            ),
+            "evidence_sample_count": (
+                observed_state_runtime_frames.get("evidence_sample_count")
+                if isinstance(observed_state_runtime_frames, Mapping)
+                else None
+            ),
+            "policy": runtime_policy,
+        },
+        blocking_reason=None if runtime_frames_ok else (
+            "실시간 상태 frame artifact가 없거나 source/frame 수·digest·state-only 정책이 "
+            "검증되지 않았다"
+        ),
+        interpretation=(
+            "상태 frame은 정상상태 모델과 provider resolver에 넘길 수 있는 실행 입력이다. "
+            "provider가 방출 경계와 종료 조건을 반환하기 전에는 피해·빈도·시설 QRA를 계산하지 않는다."
         ),
     ))
 

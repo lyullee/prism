@@ -1,0 +1,218 @@
+{
+  "schema_version": "prism.observed_state_runtime_frames.v1",
+  "status": "STATE_RUNTIME_FRAMES_READY",
+  "source_count": 3,
+  "frame_count": 3,
+  "frames": [
+    {
+      "source_id": "inspection-center-intake-10-runs",
+      "component_id": "lh2-intake-tank",
+      "captured_at_s": 6838.0,
+      "origin": "historian_measured",
+      "quality": "valid",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "pressure",
+          "value_si": 536000.0,
+          "sensor_location": "PT1206",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "temperature",
+          "value_si": 22.149999999999977,
+          "sensor_location": "TT1106",
+          "quality": "valid"
+        },
+        "differential_pressure": {
+          "component_id": "lh2-intake-tank",
+          "quantity": "differential_pressure",
+          "value_si": 65099.99999999999,
+          "sensor_location": "DPT1101",
+          "quality": "valid"
+        }
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "lh2-intake-tank",
+        "captured_at_s": 6838.0,
+        "origin": "historian_measured",
+        "pressure_pa_abs": 536000.0,
+        "temperature_k": 22.149999999999977,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 536000.0,
+            "sensor_location": "PT1206",
+            "quality": "valid"
+          },
+          "temperature": {
+            "quantity": "temperature",
+            "value_si": 22.149999999999977,
+            "sensor_location": "TT1106",
+            "quality": "valid"
+          },
+          "differential_pressure": {
+            "quantity": "differential_pressure",
+            "value_si": 65099.99999999999,
+            "sensor_location": "DPT1101",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+        "quality": "valid"
+      },
+      "state_snapshot_digest": "b196c338403692f84264aa077b93f56c215671b19fc3366625d11535a3cc2fae",
+      "source_sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "frame_digest": "a26df2e23762996f1debf81109fda5240647e6d582305ba051de9dc1c0e0c7d1"
+    },
+    {
+      "source_id": "inspection-center-storage-vent-10-runs",
+      "component_id": "lh2-storage-vent",
+      "captured_at_s": 10080.0,
+      "origin": "historian_measured",
+      "quality": "valid",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "pressure",
+          "value_si": 605000.0,
+          "sensor_location": "PT1105A",
+          "quality": "valid"
+        },
+        "differential_pressure": {
+          "component_id": "lh2-storage-vent",
+          "quantity": "differential_pressure",
+          "value_si": 34800.0,
+          "sensor_location": "DPT1101",
+          "quality": "valid"
+        }
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "lh2-storage-vent",
+        "captured_at_s": 10080.0,
+        "origin": "historian_measured",
+        "pressure_pa_abs": 605000.0,
+        "temperature_k": null,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 605000.0,
+            "sensor_location": "PT1105A",
+            "quality": "valid"
+          },
+          "differential_pressure": {
+            "quantity": "differential_pressure",
+            "value_si": 34800.0,
+            "sensor_location": "DPT1101",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+        "quality": "valid"
+      },
+      "state_snapshot_digest": "71f8070794b7560b35be1d19ceec338786de5337b07c28155dcd0f9ef79c41f9",
+      "source_sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "frame_digest": "3e0263d6542fcb6e0052b673a65f6dfb028727aaf1ec7c19e70c760a19ffd97f"
+    },
+    {
+      "source_id": "inspection-center-supply-10-runs",
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "captured_at_s": 1440.0,
+      "origin": "historian_measured",
+      "quality": "valid",
+      "values": {
+        "pressure": {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "quantity": "pressure",
+          "value_si": 325000.0,
+          "sensor_location": "PT1101",
+          "quality": "valid"
+        },
+        "temperature": {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "quantity": "temperature",
+          "value_si": 290.25,
+          "sensor_location": "TT1116",
+          "quality": "valid"
+        },
+        "differential_pressure": {
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "quantity": "differential_pressure",
+          "value_si": 59600.0,
+          "sensor_location": "DPT1101",
+          "quality": "valid"
+        }
+      },
+      "state_snapshot": {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "lh2-supply-vaporizer-boundary",
+        "captured_at_s": 1440.0,
+        "origin": "historian_measured",
+        "pressure_pa_abs": 325000.0,
+        "temperature_k": 290.25,
+        "mass_kg": null,
+        "liquid_fraction": null,
+        "phase": null,
+        "position_enu_m": null,
+        "measurements": {
+          "pressure": {
+            "quantity": "pressure",
+            "value_si": 325000.0,
+            "sensor_location": "PT1101",
+            "quality": "valid"
+          },
+          "temperature": {
+            "quantity": "temperature",
+            "value_si": 290.25,
+            "sensor_location": "TT1116",
+            "quality": "valid"
+          },
+          "differential_pressure": {
+            "quantity": "differential_pressure",
+            "value_si": 59600.0,
+            "sensor_location": "DPT1101",
+            "quality": "valid"
+          }
+        },
+        "source_digest": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+        "quality": "valid"
+      },
+      "state_snapshot_digest": "e2177dec10dab478d11a498b4f95e90af6cc8b28a6def7d565eb559e2d7e882b",
+      "source_sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "frame_digest": "513f6d879362110461371dab9239dbfde8cdb846d1060322506d312a0cf5cddf"
+    }
+  ],
+  "evidence_sample_count": 8955,
+  "selection": {
+    "method": "latest_sample_by_captured_at_s_then_source_order",
+    "one_frame_per_source": true
+  },
+  "policy": {
+    "state_only": true,
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "provider_release_required_for_consequence": true,
+    "diagnostic_only": true
+  },
+  "interpretation": "Latest observed state frames are ready for an explicit normal-model or provider-resolver input. They do not create a release, frequency, or QRA result.",
+  "manifest": {
+    "path": "examples\\inspection_center_observed_state_manifest.json",
+    "schema_version": "prism.observed_state_input_manifest.v1",
+    "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터"
+  }
+}

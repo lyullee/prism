@@ -211,3 +211,39 @@ def test_objective_audit_records_observed_state_source_replay():
     )
     assert check["status"] == "PASS"
     assert check["observed"]["matched_source_count"] == 3
+
+
+def test_objective_audit_records_observed_state_runtime_frames_without_promotion():
+    inputs = _inputs()
+    inputs["observed_state_runtime_frames"] = {
+        "schema_version": "prism.observed_state_runtime_frames.v1",
+        "status": "STATE_RUNTIME_FRAMES_READY",
+        "source_count": 1,
+        "frame_count": 1,
+        "evidence_sample_count": 10,
+        "frames": [{
+            "component_id": "tank-1",
+            "frame_digest": "frame-digest",
+            "state_snapshot_digest": "snapshot-digest",
+            "values": {"pressure": {"value_si": 500000.0}},
+            "state_snapshot": {"schema_version": "prism.equipment_state_snapshot.v1"},
+        }],
+        "policy": {
+            "state_only": True,
+            "release_scenario_generated": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_packet_promoted": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "provider_release_required_for_consequence": True,
+        },
+        "_record_path": "observed-state-runtime.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_observed_state_runtime_frames"
+    )
+    assert check["status"] == "PASS"
+    assert report["frequency_inference_performed"] is False

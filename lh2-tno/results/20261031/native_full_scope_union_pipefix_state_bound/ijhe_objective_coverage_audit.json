@@ -505,6 +505,33 @@
       },
       "blocking_reason": null,
       "interpretation": "원문 재생성 일치는 입력 무결성 근거다. 사고 방출·빈도·독립 물리검증·시설 IR/F-N으로 승격하지 않는다."
+    },
+    {
+      "id": "diagnostic_observed_state_runtime_frames",
+      "requirement": "관측 상태를 실시간 정상상태 모델/provider resolver 입력으로 내보내되 사고 방출·빈도·QRA로 자동 승격하지 않아야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261102\\inspection_center_observed_state_runtime_frames.json",
+        "results\\20261101\\inspection_center_observed_state_replay_audit.json"
+      ],
+      "observed": {
+        "source_count": 3,
+        "frame_count": 3,
+        "evidence_sample_count": 8955,
+        "policy": {
+          "state_only": true,
+          "release_scenario_generated": false,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_packet_promoted": false,
+          "physical_validation_claim": false,
+          "facility_qra_claim": false,
+          "provider_release_required_for_consequence": true,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "상태 frame은 정상상태 모델과 provider resolver에 넘길 수 있는 실행 입력이다. provider가 방출 경계와 종료 조건을 반환하기 전에는 피해·빈도·시설 QRA를 계산하지 않는다."
     }
   ],
   "core_chain_check_ids": [
@@ -523,7 +550,8 @@
     "strict_facility_scope",
     "strict_facility_qra",
     "strict_facility_state_snapshot_coverage",
-    "diagnostic_observed_state_source_replay"
+    "diagnostic_observed_state_source_replay",
+    "diagnostic_observed_state_runtime_frames"
   ],
   "core_blocking_check_ids": [],
   "strict_blocking_check_ids": [

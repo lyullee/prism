@@ -63,6 +63,15 @@ storage vent, supply/vaporizer boundary에 연결되며 원자료 상대경로·
 `SOURCE_REPLAY_MATCHED`입니다. 이 결과는 입력 무결성과 재현성을 보강하지만 사고 방출,
 빈도 추정, provider 자격, 독립 물리검증 또는 시설 IR/F-N을 승격하지 않습니다.
 
+**2026-11-02 실시간 상태 frame 연결:** 원본 상태 장부에서 source별 최신 표본을
+하나씩 선택해 [`inspection_center_observed_state_runtime_frames.json`](results/20261102/inspection_center_observed_state_runtime_frames.json)의
+`prism.observed_state_runtime_frames.v1`로 내보냈습니다. 3개 component와 8,955개
+표본을 서비스의 정상상태 모델/provider resolver가 읽을 수 있는 `values`와
+canonical state snapshot으로 묶었습니다. provider가 방출량·종료·차단·재고 경계를
+반환하기 전에는 누출·빈도·피해·시설 QRA로 승격하지 않으며, 자세한 흐름은
+[실증데이터 실시간 상태 frame 연결 기록](docs/PRISM_실증데이터_실시간상태프레임_연결_20261102.md)에
+기록했습니다.
+
 관측 상태를 사고 방출로 잘못 승격하지 않도록 `observed_state_release_binding_audit.json`에서
 상태→시설 component→검토된 provider event 연결을 별도로 감사한다. 현재 센터 자료는
 3개 component와 8,955개 표본을 가지지만 검토된 provider packet이 없어 결과는
