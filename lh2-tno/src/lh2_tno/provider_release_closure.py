@@ -90,7 +90,81 @@ def _packet_rows(value: Mapping[str, Any]) -> tuple[Any, ...]:
         raise ProviderReleaseClosureError(str(error)) from error
 
 
-def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
+def _positive_threshold_evidence(packet: Any, evidence: Mapping[str, Any] | None) -> tuple[dict[str, bool], list[str]]:
+    """Audit an external provider's explicit positive-inventory threshold.
+
+    Some LH2 providers stop after the resolved inventory crosses a declared
+    positive threshold rather than extrapolating the state to zero mass.  The
+    packet contract keeps this provenance in the exporter verification ledger;
+    it is accepted here only when that ledger closes against the packet's
+    result digest and mass totals.  A prose termination string alone is never
+    enough evidence.
+    """
+    checks = {
+        "termination_evidence_present": isinstance(evidence, Mapping),
+        "termination_evidence_basis": False,
+        "termination_evidence_digest_matches": False,
+        "termination_evidence_available_matches_packet": False,
+        "termination_evidence_release_matches_packet": False,
+        "termination_evidence_threshold_positive": False,
+        "termination_evidence_remaining_at_or_below_threshold": False,
+        "termination_evidence_mass_residual_closed": False,
+    }
+    gaps: list[str] = []
+    if not isinstance(evidence, Mapping):
+        return checks, ["provider positive-inventory threshold evidence is missing"]
+    basis = evidence.get("termination_basis")
+    checks["termination_evidence_basis"] = basis == "inventory_depletion_positive_threshold"
+    if not checks["termination_evidence_basis"]:
+        gaps.append("provider termination evidence basis is not a positive inventory threshold")
+    digest = evidence.get("provider_result_digest")
+    checks["termination_evidence_digest_matches"] = (
+        isinstance(digest, str)
+        and digest == getattr(packet, "provider_result_digest", None)
+    )
+    if not checks["termination_evidence_digest_matches"]:
+        gaps.append("provider termination evidence result digest does not match packet")
+    available = evidence.get("available_mass_kg")
+    checks["termination_evidence_available_matches_packet"] = (
+        _same(available, packet.available_mass_kg)
+    )
+    if not checks["termination_evidence_available_matches_packet"]:
+        gaps.append("provider termination evidence available mass does not match packet")
+    released = evidence.get("cumulative_mass_out_kg")
+    checks["termination_evidence_release_matches_packet"] = (
+        _same(released, packet.cumulative_mass_out_kg)
+    )
+    if not checks["termination_evidence_release_matches_packet"]:
+        gaps.append("provider termination evidence released mass does not match packet")
+    threshold = evidence.get("threshold_mass_kg")
+    remaining = evidence.get("remaining_mass_kg")
+    checks["termination_evidence_threshold_positive"] = (
+        _finite(threshold) and float(threshold) > MASS_TOLERANCE_KG
+    )
+    if not checks["termination_evidence_threshold_positive"]:
+        gaps.append("provider positive inventory threshold is missing or non-positive")
+    checks["termination_evidence_remaining_at_or_below_threshold"] = (
+        _finite(remaining)
+        and _finite(threshold)
+        and float(remaining) <= float(threshold) + MASS_TOLERANCE_KG
+    )
+    if not checks["termination_evidence_remaining_at_or_below_threshold"]:
+        gaps.append("provider remaining inventory did not reach the declared threshold")
+    residual = evidence.get("max_abs_mass_residual_kg")
+    checks["termination_evidence_mass_residual_closed"] = (
+        _finite(residual) and abs(float(residual)) <= MASS_TOLERANCE_KG
+    )
+    if not checks["termination_evidence_mass_residual_closed"]:
+        gaps.append("provider termination evidence mass residual exceeds tolerance")
+    return checks, gaps
+
+
+def _audit_one(
+    packet: Any,
+    *,
+    packet_index: int,
+    termination_evidence: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     basis = packet.termination_basis
     mass = packet.provider_mass_balance
     gaps: list[str] = []
@@ -117,6 +191,8 @@ def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
     if not checks["packet_mass_within_available_inventory"]:
         gaps.append("cumulative release exceeds available provider inventory")
 
+    evidence_checks: dict[str, bool] = {}
+    evidence_gaps: list[str] = []
     if basis == "reviewed_isolation_success":
         checks["isolation_record_present"] = mass is not None
         checks["isolation_success_declared"] = bool(
@@ -135,10 +211,27 @@ def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
             if not ok:
                 gaps.append(f"{name} is missing or inconsistent")
     elif basis == "inventory_depletion":
-        checks["inventory_record_present"] = mass is not None
-        if mass is None:
+        evidence_checks, evidence_gaps = _positive_threshold_evidence(
+            packet, termination_evidence
+        )
+        threshold_closed = not evidence_gaps
+        checks["inventory_record_present"] = mass is not None or threshold_closed
+        if mass is None and not threshold_closed:
             gaps.append("provider mass balance is required for inventory depletion")
-        else:
+        if mass is None and threshold_closed:
+            checks["inventory_initial_matches_packet"] = evidence_checks[
+                "termination_evidence_available_matches_packet"
+            ]
+            checks["inventory_out_matches_packet"] = evidence_checks[
+                "termination_evidence_release_matches_packet"
+            ]
+            checks["inventory_final_depleted"] = evidence_checks[
+                "termination_evidence_remaining_at_or_below_threshold"
+            ]
+            checks["inventory_residual_reported_closed"] = evidence_checks[
+                "termination_evidence_mass_residual_closed"
+            ]
+        elif mass is not None:
             checks["inventory_initial_matches_packet"] = (
                 mass.initial_mass_kg is None
                 or _same(mass.initial_mass_kg, packet.available_mass_kg)
@@ -163,6 +256,10 @@ def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
             ):
                 if not checks[name]:
                     gaps.append(f"{name} is false")
+        if mass is None and threshold_closed:
+            checks["provider_accounting_residual_closed"] = True
+        elif mass is None:
+            gaps.extend(evidence_gaps)
 
     if mass is not None and mass.derived_accounting_residual_kg is not None:
         checks["provider_accounting_residual_closed"] = abs(
@@ -170,6 +267,8 @@ def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
         ) <= MASS_TOLERANCE_KG
         if not checks["provider_accounting_residual_closed"]:
             gaps.append("provider accounting residual exceeds tolerance")
+    elif mass is None and basis == "inventory_depletion" and not evidence_gaps:
+        checks["provider_accounting_residual_closed"] = True
     else:
         checks["provider_accounting_residual_closed"] = basis in {
             "emergency_relief_discharge",
@@ -192,6 +291,8 @@ def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
         "provider_mass_balance": (
             mass.model_dump(mode="json") if mass is not None else None
         ),
+        "termination_evidence": dict(termination_evidence) if termination_evidence else None,
+        "termination_evidence_checks": evidence_checks,
         "checks": checks,
         "closure_status": (
             "CLOSURE_READY_FOR_QUALIFICATION" if not gaps else "CLOSURE_EVIDENCE_OPEN"
@@ -204,11 +305,20 @@ def _audit_one(packet: Any, *, packet_index: int) -> dict[str, Any]:
 
 def audit_provider_release_closure(
     packet: Mapping[str, Any] | str | Path,
+    *,
+    termination_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed closure audit for a flat or two-sided packet."""
     value = _read(packet, "provider release packet")
     packets = _packet_rows(value)
-    rows = [_audit_one(item, packet_index=index) for index, item in enumerate(packets)]
+    rows = [
+        _audit_one(
+            item,
+            packet_index=index,
+            termination_evidence=termination_evidence,
+        )
+        for index, item in enumerate(packets)
+    ]
     status_counts = Counter(row["closure_status"] for row in rows)
     blocking = [
         f"packet[{row['packet_index']}]: {reason}"

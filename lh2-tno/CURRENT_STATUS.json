@@ -156,7 +156,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "880 passed, 1 skipped",
+  "latest_local_full_test_run": "882 passed, 1 skipped",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -3645,8 +3645,14 @@
   "generic_provider_release_closure_audit_module": "src/lh2_tno/generic_provider_release_closure.py",
   "generic_provider_release_closure_audit_script": "scripts/audit_generic_provider_release_closure.py",
   "generic_provider_release_closure_audit_record": "results/20261106/generic_lh2_provider_release_closure_current.json",
-  "generic_provider_release_closure_audit_status": "CLOSURE_EVIDENCE_OPEN; 24 events, 3 closure-ready and 21 open; 26 provider packets; 15 fixed/synthetic horizons and 6 inventory-depletion packets without provider mass balance; qualified provider count 0; frequency/QRA promotion false",
-  "generic_provider_release_closure_audit_sha256": "206DB77B2CAD629CDEAB4DD039011C45E3F66826D73BACE26F32EF5F75EF3A32",
+  "generic_provider_release_closure_audit_status": "CLOSURE_EVIDENCE_OPEN; 24 events, 8 closure-ready and 16 open; 26 provider packets; 15 fixed/synthetic horizons and 1 inventory-depletion packet without provider mass balance; 5 storage-tank packets closed by digest-bound positive-threshold sidecars; qualified provider count 0; frequency/QRA promotion false",
+  "generic_provider_release_closure_audit_sha256": "2536BEE7D78BB29C20AA7D3608548D238D18CDEAA6B86E0E45CB4D605E2FAC19",
   "generic_provider_release_closure_audit_readiness_record": "results/20261106/v060_readiness_report_with_generic_provider_closure.json",
-  "generic_provider_release_closure_audit_readiness_sha256": "0CA19D103093680A4558550340391395FB0FF61C8781BE16C7F057DB2ACB8DF9"
+  "generic_provider_release_closure_audit_readiness_sha256": "7F382E3749406A375ECA8A970027D6B52EC97B361A5BAA55C9181BBDBE449150",
+  "generic_provider_release_closure_audit_ready_event_count": 8,
+  "generic_provider_release_closure_audit_open_event_count": 16,
+  "generic_provider_release_closure_audit_open_horizon_event_count": 15,
+  "generic_provider_release_closure_audit_open_mass_balance_event_count": 1,
+  "generic_provider_release_closure_positive_threshold_sidecar_implemented": true,
+  "generic_provider_release_closure_positive_threshold_sidecar_policy": "Provider verification.json may close an inventory_depletion packet only when its positive threshold basis, result digest, available mass, released mass, remaining threshold crossing and mass residual all match; this does not claim zero-mass depletion, qualification, frequency inference or facility QRA."
 }

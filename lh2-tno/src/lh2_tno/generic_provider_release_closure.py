@@ -68,6 +68,34 @@ def _path_for(raw: Any, *, root: Path | None, source: Path | None) -> Path:
     return path
 
 
+def _provider_termination_evidence(
+    packet_path: Path,
+    packet: Mapping[str, Any],
+) -> tuple[Path, dict[str, Any]] | None:
+    """Load the exporter ledger paired with a resolved packet, if present.
+
+    Exporters keep positive-inventory threshold metadata in ``verification.json``
+    so the strict release contract does not confuse a provider residual with
+    zero inventory.  The digest check below binds that sidecar to the packet;
+    an unrelated verification file is ignored and the packet remains open.
+    """
+    path = packet_path.parent / "verification.json"
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(value, Mapping):
+        return None
+    meta = value.get("provider_run_meta")
+    if not isinstance(meta, Mapping):
+        return None
+    evidence = dict(meta)
+    digest = value.get("provider_result_digest")
+    if isinstance(digest, str):
+        evidence["provider_result_digest"] = digest
+    return path, evidence
+
+
 def _event_row(
     evidence: Mapping[str, Any],
     *,
@@ -91,7 +119,14 @@ def _event_row(
     for packet_index, raw_path in enumerate(raw_paths):
         try:
             packet_path = _path_for(raw_path, root=root, source=source)
-            audit = audit_provider_release_closure(packet_path)
+            packet_value = json.loads(packet_path.read_text(encoding="utf-8"))
+            sidecar = None
+            if isinstance(packet_value, Mapping):
+                sidecar = _provider_termination_evidence(packet_path, packet_value)
+            audit = audit_provider_release_closure(
+                packet_path,
+                termination_evidence=sidecar[1] if sidecar is not None else None,
+            )
             packet_status = audit["status"]
             reasons = list(audit.get("blocking_reasons", ()))
             packet_rows.append({
@@ -101,6 +136,10 @@ def _event_row(
                 "packet_count": audit.get("packet_count"),
                 "closure_status_counts": audit.get("closure_status_counts", {}),
                 "blocking_reasons": reasons,
+                "termination_evidence_path": (
+                    str(sidecar[0]) if sidecar is not None else None
+                ),
+                "termination_evidence_used": bool(sidecar is not None),
             })
             event_reasons.extend(f"packet[{packet_index}]: {reason}" for reason in reasons)
         except (GenericProviderReleaseClosureError, ProviderReleaseClosureError, OSError, ValueError) as error:

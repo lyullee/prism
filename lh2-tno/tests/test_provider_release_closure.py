@@ -69,6 +69,26 @@ def test_inventory_depletion_requires_zero_provider_final_mass():
     assert any("inventory_final_depleted" in reason for reason in report["blocking_reasons"])
 
 
+def test_inventory_depletion_accepts_bound_positive_threshold_sidecar():
+    value = _release()
+    value["termination_basis"] = "inventory_depletion"
+    evidence = {
+        "termination_basis": "inventory_depletion_positive_threshold",
+        "provider_result_digest": value["provider_result_digest"],
+        "available_mass_kg": value["available_mass_kg"],
+        "cumulative_mass_out_kg": value["cumulative_mass_out_kg"],
+        "threshold_mass_kg": 0.9,
+        "remaining_mass_kg": 0.8,
+        "max_abs_mass_residual_kg": 0.0,
+    }
+    report = audit_provider_release_closure(value, termination_evidence=evidence)
+    assert report["status"] == "CLOSURE_READY_FOR_QUALIFICATION"
+    row = report["packet_rows"][0]
+    assert row["checks"]["inventory_final_depleted"] is True
+    assert row["termination_evidence_checks"]["termination_evidence_digest_matches"] is True
+    assert report["promotion_gates"]["qualified_provider_packet_allowed"] is False
+
+
 def test_invalid_packet_is_rejected():
     with pytest.raises(ProviderReleaseClosureError):
         audit_provider_release_closure({"provider_export_schema": "wrong"})

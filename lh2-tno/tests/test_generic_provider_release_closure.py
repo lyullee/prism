@@ -77,3 +77,39 @@ def test_campaign_audit_keeps_packet_audit_errors_open(tmp_path):
 
     assert report["closure_open_event_count"] == 1
     assert "audit failed" in report["event_rows"][0]["blocking_reasons"][0]
+
+
+def test_campaign_audit_uses_bound_provider_threshold_verification(tmp_path):
+    packet = _release()
+    packet["termination_basis"] = "inventory_depletion"
+    packet_path = tmp_path / "resolved_release.json"
+    packet_path.write_text(json.dumps(packet), encoding="utf-8")
+    verification = {
+        "provider_result_digest": packet["provider_result_digest"],
+        "provider_run_meta": {
+            "termination_basis": "inventory_depletion_positive_threshold",
+            "available_mass_kg": packet["available_mass_kg"],
+            "cumulative_mass_out_kg": packet["cumulative_mass_out_kg"],
+            "threshold_mass_kg": 0.9,
+            "remaining_mass_kg": 0.8,
+            "max_abs_mass_residual_kg": 0.0,
+        },
+    }
+    (tmp_path / "verification.json").write_text(
+        json.dumps(verification), encoding="utf-8"
+    )
+    evidence = {
+        "rows": [
+            {
+                "event_id": "event-threshold",
+                "evidence": {"resolved_packet_paths": ["resolved_release.json"]},
+            }
+        ]
+    }
+    evidence_path = tmp_path / "evidence.json"
+    evidence_path.write_text(json.dumps(evidence), encoding="utf-8")
+
+    report = audit_generic_provider_release_closure(evidence_path)
+
+    assert report["closure_ready_event_count"] == 1
+    assert report["event_rows"][0]["packet_rows"][0]["termination_evidence_used"] is True
