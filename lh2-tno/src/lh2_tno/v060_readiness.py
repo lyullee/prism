@@ -248,6 +248,37 @@ def _observed_runtime_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _preslhy_slabx_window_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
+    """Expose the external PRESLHY/SLABx comparison without promotion."""
+    metrics = audit.get("metrics") if isinstance(audit.get("metrics"), Mapping) else {}
+    provenance = audit.get("provenance") if isinstance(audit.get("provenance"), Mapping) else {}
+    policy = audit.get("promotion_policy") if isinstance(audit.get("promotion_policy"), Mapping) else {}
+    return {
+        "schema_version": audit.get("schema_version"),
+        "status": audit.get("status"),
+        "source_directory": audit.get("source_directory"),
+        "sensor_row_count": metrics.get("sensor_row_count"),
+        "evaluable_sensor_row_count": metrics.get("evaluable_sensor_row_count"),
+        "predicted_sensor_row_count": metrics.get("predicted_sensor_row_count"),
+        "nonzero_prediction_row_count": metrics.get("nonzero_prediction_row_count"),
+        "evaluated_trial_count": metrics.get("evaluated_trial_count"),
+        "refinement_row_count": metrics.get("refinement_row_count"),
+        "numerical_gate_trial_count": metrics.get("numerical_gate_trial_count"),
+        "accepted_numerical_gate_count": metrics.get("accepted_numerical_gate_count"),
+        "mean_absolute_error_of_evaluable_windows_vol_pct": metrics.get(
+            "mean_absolute_error_of_evaluable_windows_vol_pct"
+        ),
+        "trials": provenance.get("trials"),
+        "final_level": provenance.get("final_level"),
+        "physical_validation_claim": audit.get("physical_validation_claim"),
+        "full_chain_validation_claim": audit.get("full_chain_validation_claim"),
+        "facility_qra_claim": audit.get("facility_qra_claim"),
+        "frequency_inference_performed": audit.get("frequency_inference_performed"),
+        "component_evidence_only": policy.get("component_evidence_only"),
+        "diagnostic_only": True,
+    }
+
+
 def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
     """Summarize duration, isolation, inventory, and domain closure evidence.
 
@@ -562,6 +593,7 @@ def build_v060_readiness_report(
     scenario_evidence_audit: Mapping[str, Any] | None = None,
     validation_intake_audit: Mapping[str, Any] | None = None,
     observed_state_runtime_frames: Mapping[str, Any] | None = None,
+    preslhy_slabx_window_comparison: Mapping[str, Any] | None = None,
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
     equipment_state_release_audit: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
@@ -609,6 +641,11 @@ def build_v060_readiness_report(
     if observed_state_runtime_frames is not None:
         observed_runtime = _observed_runtime_summary(
             _mapping(observed_state_runtime_frames, "observed_state_runtime_frames")
+        )
+    preslhy_slabx_window = None
+    if preslhy_slabx_window_comparison is not None:
+        preslhy_slabx_window = _preslhy_slabx_window_summary(
+            _mapping(preslhy_slabx_window_comparison, "preslhy_slabx_window_comparison")
         )
     atom_chain = None
     if risk_atom_chain_audit is not None:
@@ -1393,6 +1430,7 @@ def build_v060_readiness_report(
             ),
             "monitoring_state_evidence": validation_intake,
             "observed_state_runtime": observed_runtime,
+            "preslhy_slabx_window_comparison": preslhy_slabx_window,
         },
         "equipment": {
             "component_rows": component_rows,
@@ -1471,6 +1509,7 @@ def build_v060_readiness_report(
         "scenario_evidence": scenario_evidence,
         "validation_intake": validation_intake,
         "observed_state_runtime": observed_runtime,
+        "preslhy_slabx_window_comparison": preslhy_slabx_window,
         "completion_criteria": [
             {
                 "id": "A_equipment_state_and_release",
@@ -2919,6 +2958,42 @@ def validate_v060_readiness_report(
                     errors.append(f"observed_state_runtime.{field} must remain false")
             if observed_runtime.get("diagnostic_only") is not True:
                 errors.append("observed_state_runtime.diagnostic_only must remain true")
+
+    preslhy_slabx_window = value.get("preslhy_slabx_window_comparison")
+    if preslhy_slabx_window is not None:
+        if not isinstance(preslhy_slabx_window, Mapping):
+            errors.append("preslhy_slabx_window_comparison must be an object when present")
+        else:
+            if preslhy_slabx_window.get("schema_version") != "prism.preslhy_slabx_window_comparison_audit.v1":
+                errors.append("preslhy_slabx_window_comparison.schema_version is not supported")
+            for field in (
+                "sensor_row_count",
+                "evaluable_sensor_row_count",
+                "predicted_sensor_row_count",
+                "nonzero_prediction_row_count",
+                "evaluated_trial_count",
+                "refinement_row_count",
+                "numerical_gate_trial_count",
+                "accepted_numerical_gate_count",
+            ):
+                if preslhy_slabx_window.get(field) is not None:
+                    _nonnegative_int(
+                        preslhy_slabx_window.get(field),
+                        f"preslhy_slabx_window_comparison.{field}",
+                        errors,
+                    )
+            if preslhy_slabx_window.get("physical_validation_claim") is not False:
+                errors.append("preslhy_slabx_window_comparison.physical_validation_claim must remain false")
+            if preslhy_slabx_window.get("full_chain_validation_claim") is not False:
+                errors.append("preslhy_slabx_window_comparison.full_chain_validation_claim must remain false")
+            if preslhy_slabx_window.get("facility_qra_claim") is not False:
+                errors.append("preslhy_slabx_window_comparison.facility_qra_claim must remain false")
+            if preslhy_slabx_window.get("frequency_inference_performed") is not False:
+                errors.append("preslhy_slabx_window_comparison.frequency_inference_performed must remain false")
+            if preslhy_slabx_window.get("component_evidence_only") is not True:
+                errors.append("preslhy_slabx_window_comparison.component_evidence_only must remain true")
+            if preslhy_slabx_window.get("diagnostic_only") is not True:
+                errors.append("preslhy_slabx_window_comparison.diagnostic_only must remain true")
 
     if errors:
         raise V060ReadinessError("; ".join(errors))

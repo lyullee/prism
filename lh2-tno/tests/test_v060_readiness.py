@@ -126,6 +126,39 @@ def test_v060_readiness_records_external_lh2_model_root_review():
     assert review["diagnostic_only"] is True
 
 
+def test_v060_readiness_records_preslhy_slabx_window_comparison_without_promotion():
+    inputs = _inputs()
+    inputs["preslhy_slabx_window_comparison"] = {
+        "schema_version": "prism.preslhy_slabx_window_comparison_audit.v1",
+        "status": "RESTRICTED_PRESLHY_SLABX_WINDOW_COMPARISON",
+        "metrics": {
+            "sensor_row_count": 217,
+            "evaluable_sensor_row_count": 155,
+            "predicted_sensor_row_count": 155,
+            "nonzero_prediction_row_count": 105,
+            "evaluated_trial_count": 7,
+            "refinement_row_count": 21,
+            "numerical_gate_trial_count": 7,
+            "accepted_numerical_gate_count": 1,
+            "mean_absolute_error_of_evaluable_windows_vol_pct": 11.4,
+        },
+        "provenance": {"trials": [10, 11, 12, 22, 23, 24, 25], "final_level": 640},
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+        "frequency_inference_performed": False,
+        "promotion_policy": {"component_evidence_only": True},
+        "diagnostic_only": True,
+    }
+    report = build_v060_readiness_report(**inputs)
+    comparison = report["chain"]["preslhy_slabx_window_comparison"]
+    assert comparison["accepted_numerical_gate_count"] == 1
+    assert comparison["nonzero_prediction_row_count"] == 105
+    assert comparison["physical_validation_claim"] is False
+    assert report["preslhy_slabx_window_comparison"]["evaluated_trial_count"] == 7
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
 def test_v060_readiness_records_isolation_release_closure():
     inputs = _inputs()
     inputs["isolation_release_closure_audit"] = {

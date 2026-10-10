@@ -1,0 +1,75 @@
+{
+  "schema_version": "prism.preslhy_slabx_window_comparison_audit.v1",
+  "status": "RESTRICTED_PRESLHY_SLABX_WINDOW_COMPARISON",
+  "source_directory": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\model-comparison\\outputs\\preslhy_horizontal_slabx_gate_v1",
+  "source_files": [
+    {
+      "role": "sensor_predictions",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\model-comparison\\outputs\\preslhy_horizontal_slabx_gate_v1\\sensor_predictions_final.csv",
+      "sha256": "ebb1e2c2807c57f9ade410627c6a626e099cdf4bab5196359bac5df20e061cf2"
+    },
+    {
+      "role": "refinement_summary",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\model-comparison\\outputs\\preslhy_horizontal_slabx_gate_v1\\refinement_summary.csv",
+      "sha256": "c139f8e5109ed07cd96b3486b923a23d4fcc03feb4bca9acc6e661a0eddfe266"
+    },
+    {
+      "role": "numerical_gate",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\model-comparison\\outputs\\preslhy_horizontal_slabx_gate_v1\\numerical_gate.csv",
+      "sha256": "5495c8c701f10f3f1a96cfa5a57dc00b45f50d0ad5ff781f1ad096e239996f69"
+    },
+    {
+      "role": "provenance",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\model-comparison\\outputs\\preslhy_horizontal_slabx_gate_v1\\provenance.json",
+      "sha256": "afdd1ef25b7c4007e007d99cee3d16494d4747c8c372811464362b4125e0f81b"
+    }
+  ],
+  "provenance": {
+    "purpose": "unfitted native-SLABx reconstruction of public PRESLHY E3.5 horizontal releases",
+    "trials": [
+      10,
+      11,
+      12,
+      22,
+      23,
+      24,
+      25
+    ],
+    "final_level": 640,
+    "coordinate_frame": "mean-wind",
+    "observation_operator": "Xensor mean over the flow-defined source window shifted by +18 s for the reported sampling-line delay"
+  },
+  "metrics": {
+    "sensor_row_count": 217,
+    "evaluable_sensor_row_count": 155,
+    "predicted_sensor_row_count": 155,
+    "nonzero_prediction_row_count": 105,
+    "evaluated_trial_count": 7,
+    "refinement_row_count": 21,
+    "numerical_gate_trial_count": 7,
+    "accepted_numerical_gate_count": 1,
+    "mean_absolute_error_of_evaluable_windows_vol_pct": 11.428032301320203
+  },
+  "blocking_reasons": [],
+  "scope": {
+    "supports": [
+      "reproducible native-SLABx PRESLHY sensor-window comparison",
+      "trial-level numerical refinement and LFL-state traceability"
+    ],
+    "excludes": [
+      "equipment release qualification or initiating-event frequency",
+      "full time-history validation or independent end-to-end validation",
+      "ignition, fire, explosion, IR/F-N, or facility-QRA promotion"
+    ]
+  },
+  "physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference_performed": false,
+  "promotion_policy": {
+    "component_evidence_only": true,
+    "external_output_is_not_provider_packet": true,
+    "frequency_is_not_inferred": true,
+    "facility_qra_requires_independent_full_chain_validation": true
+  }
+}

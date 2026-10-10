@@ -65,6 +65,11 @@ def main() -> int:
         help="Optional observed-state runtime frames and service handoff contract.",
     )
     parser.add_argument(
+        "--preslhy-slabx-window-comparison",
+        type=Path,
+        help="Optional digest-bound PRESLHY/SLABx sensor-window comparison audit.",
+    )
+    parser.add_argument(
         "--risk-atom-chain-audit",
         type=Path,
         help="Optional case/atom-level release-to-final-damage chain audit.",
@@ -190,6 +195,11 @@ def main() -> int:
                 if args.observed_state_runtime_frames is not None
                 else None
             ),
+            preslhy_slabx_window_comparison=(
+                _load(args.preslhy_slabx_window_comparison)
+                if args.preslhy_slabx_window_comparison is not None
+                else None
+            ),
             risk_atom_chain_audit=(
                 _load(args.risk_atom_chain_audit)
                 if args.risk_atom_chain_audit is not None
@@ -312,6 +322,10 @@ def main() -> int:
     if args.observed_state_runtime_frames is not None:
         report["source_artifacts"]["observed_state_runtime_frames"] = _source_artifact(
             args.observed_state_runtime_frames
+        )
+    if args.preslhy_slabx_window_comparison is not None:
+        report["source_artifacts"]["preslhy_slabx_window_comparison"] = _source_artifact(
+            args.preslhy_slabx_window_comparison
         )
     if args.risk_atom_chain_audit is not None:
         report["source_artifacts"]["risk_atom_chain_audit"] = _source_artifact(
