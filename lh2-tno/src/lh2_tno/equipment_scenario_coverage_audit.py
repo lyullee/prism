@@ -92,6 +92,17 @@ def _crosswalk_rows(crosswalk: Mapping[str, Any] | None) -> dict[str, Mapping[st
             raise EquipmentScenarioCoverageAuditError(
                 f"crosswalk rows[{index}].identity_basis must be a non-empty string"
             )
+        accident_port_ids = raw.get("accident_port_ids")
+        if accident_port_ids is not None:
+            if (
+                not isinstance(accident_port_ids, list)
+                or not accident_port_ids
+                or any(not isinstance(value, str) or not value.strip() for value in accident_port_ids)
+                or len(set(accident_port_ids)) != len(accident_port_ids)
+            ):
+                raise EquipmentScenarioCoverageAuditError(
+                    f"crosswalk rows[{index}].accident_port_ids must be a nonempty unique string array"
+                )
         by_asset[asset_id] = raw
     return by_asset
 
@@ -150,6 +161,11 @@ def audit_equipment_scenario_coverage(
             "component_kind": kind,
             "identity_status": identity_status,
             "ready_for_state_model_input": state_ready,
+            "reviewed_accident_port_ids": list(
+                crosswalk_row.get("accident_port_ids", [])
+                if isinstance(crosswalk_row, Mapping)
+                else []
+            ),
             "status": asset_status,
             "blocking_reasons": asset_blockers,
             "scenario_families": [],
@@ -236,6 +252,7 @@ def audit_equipment_scenario_coverage(
             "candidate_identity_is_not_resolved_identity": True,
             "scenario_catalog_does_not_create_release": True,
             "scenario_mapping_is_not_frequency": True,
+            "accident_port_ids_are_never_inferred": True,
             "no_automatic_facility_qra_promotion": True,
         },
         "source_equipment_audit_status": equipment.get("status"),

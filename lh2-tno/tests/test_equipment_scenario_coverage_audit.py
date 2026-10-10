@@ -53,6 +53,7 @@ def test_resolved_crosswalk_maps_families_but_keeps_release_boundary_closed():
                 "component_kind": "storage_tank",
                 "identity_status": "resolved",
                 "identity_basis": "P&ID tank tag and port schedule",
+                "accident_port_ids": ["TK-1.accident-out"],
             },
             {
                 "asset_id": "PIPE-1",
@@ -67,6 +68,7 @@ def test_resolved_crosswalk_maps_families_but_keeps_release_boundary_closed():
     assert report["state_model_ready_mapped_asset_count"] == 1
     tank = next(row for row in report["assets"] if row["asset_id"] == "TK-1")
     assert "vessel_hole" in tank["scenario_families"]
+    assert tank["reviewed_accident_port_ids"] == ["TK-1.accident-out"]
     families = {row["family"]: row for row in report["scenario_families"]}
     assert families["vessel_hole"]["status"] == "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED"
     assert families["pipe_hole"]["status"] == "RELEASE_BOUNDARY_UNVERIFIED"

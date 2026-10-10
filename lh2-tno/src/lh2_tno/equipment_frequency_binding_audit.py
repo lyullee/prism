@@ -63,6 +63,15 @@ def _coverage_assets(coverage: Mapping[str, Any]) -> dict[str, Mapping[str, Any]
         asset_id = _text(row.get("asset_id"), f"coverage assets[{index}].asset_id")
         if asset_id in result:
             raise EquipmentFrequencyBindingAuditError(f"duplicate coverage asset_id: {asset_id}")
+        reviewed_ports = row.get("reviewed_accident_port_ids")
+        if reviewed_ports is not None and (
+            not isinstance(reviewed_ports, list)
+            or any(not isinstance(value, str) or not value.strip() for value in reviewed_ports)
+            or len(set(reviewed_ports)) != len(reviewed_ports)
+        ):
+            raise EquipmentFrequencyBindingAuditError(
+                f"coverage assets[{index}].reviewed_accident_port_ids must be a unique string array"
+            )
         result[asset_id] = row
     return result
 
@@ -150,6 +159,20 @@ def audit_equipment_frequency_binding(
             source_sha256 = _text(
                 event.get("source_sha256"), f"frequency event {event_id}.source_sha256"
             )
+            raw_port_ids = event.get("port_ids")
+            if raw_port_ids is None:
+                event_port_ids: tuple[str, ...] | None = None
+            elif (
+                not isinstance(raw_port_ids, list)
+                or not raw_port_ids
+                or any(not isinstance(value, str) or not value.strip() for value in raw_port_ids)
+                or len(set(raw_port_ids)) != len(raw_port_ids)
+            ):
+                raise EquipmentFrequencyBindingAuditError(
+                    f"frequency event {event_id}.port_ids must be a unique string array"
+                )
+            else:
+                event_port_ids = tuple(raw_port_ids)
             release = event.get("release")
             if not isinstance(release, Mapping):
                 raise EquipmentFrequencyBindingAuditError(
@@ -190,6 +213,25 @@ def audit_equipment_frequency_binding(
             component_kind = asset.get("component_kind")
             if asset_id not in resolved_assets:
                 row_blockers.append("frequency cannot bind to an unresolved asset identity")
+        port_binding_status = "UNBOUND_COMPONENT_EVENT"
+        if event_port_ids is not None:
+            reviewed_port_ids = (
+                tuple(asset.get("reviewed_accident_port_ids", ()))
+                if asset is not None
+                else ()
+            )
+            if not reviewed_port_ids:
+                row_blockers.append(
+                    "frequency event has reviewed port_ids but coverage has no accident-port crosswalk"
+                )
+                port_binding_status = "PORT_BINDING_WITHHELD"
+            elif any(port_id not in reviewed_port_ids for port_id in event_port_ids):
+                row_blockers.append(
+                    "frequency event port_ids are absent from the asset accident-port crosswalk"
+                )
+                port_binding_status = "PORT_BINDING_WITHHELD"
+            else:
+                port_binding_status = "BOUND_REVIEWED_PORT"
         expected_families = (
             scenario_families_for_release(component_kind, release_mode)
             if isinstance(component_kind, str)
@@ -230,6 +272,8 @@ def audit_equipment_frequency_binding(
             "basis": basis,
             "source": source,
             "source_sha256": source_sha256,
+            "port_ids": None if event_port_ids is None else list(event_port_ids),
+            "port_binding_status": port_binding_status,
             "annual_frequency_per_year": annual_rate,
             "release_mode": release_mode,
             "expected_scenario_families": list(expected_families),
@@ -289,6 +333,26 @@ def audit_equipment_frequency_binding(
         "bound_family_count": sum(bool(ids) for ids in family_event_ids.values()),
         "uncomputed_family_count": len(uncomputed_families),
         "uncomputed_families": uncomputed_families,
+        "frequency_port_binding": {
+            "schema_version": "prism.frequency_port_binding.v1",
+            "reviewed_port_bound_event_count": sum(
+                row.get("port_binding_status") == "BOUND_REVIEWED_PORT"
+                for row in event_rows
+            ),
+            "port_unbound_event_count": sum(
+                row.get("port_binding_status") == "UNBOUND_COMPONENT_EVENT"
+                for row in event_rows
+            ),
+            "port_binding_withheld_event_count": sum(
+                row.get("port_binding_status") == "PORT_BINDING_WITHHELD"
+                for row in event_rows
+            ),
+            "all_supplied_port_scopes_valid": not any(
+                row.get("port_binding_status") == "PORT_BINDING_WITHHELD"
+                for row in event_rows
+            ),
+            "strict_facility_qra_gate": False,
+        },
         "events": event_rows,
         "scenario_families": family_rows_for_output,
         "frequency_uncertainty": {
@@ -319,6 +383,7 @@ def audit_equipment_frequency_binding(
             "unresolved_assets_do_not_receive_zero_frequency": True,
             "unmapped_families_remain_uncomputed": True,
             "frequency_does_not_create_provider_release": True,
+            "reviewed_port_ids_are_never_inferred": True,
             "provider_release_required_before_consequence": True,
             "facility_qra_requires_complete_family_and_packet_coverage": True,
         },

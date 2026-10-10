@@ -103,6 +103,23 @@ def test_full_scope_example_covers_reviewed_equipment_profiles_and_excludes_gaps
     assert result["promotion_policy"]["consequence_requests_are_not_created_by_this_audit"] is True
 
 
+def test_full_scope_port_binding_counts_loc_specific_assets_as_scoped():
+    from lh2_tno.frequency_scope import audit_frequency_scope
+
+    manifest, plan = _full_scope_inputs()
+    result = audit_frequency_scope(manifest, plan)
+    reliquefier = next(
+        row for row in result["component_coverage"]
+        if row["component_id"] == "reliquefier-01"
+    )
+    assert reliquefier["port_scoped_asset_count"] == 1
+    assert reliquefier["port_unbound_asset_count"] == 0
+    assert set(reliquefier["reviewed_accident_port_ids"]) == {
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2",
+    }
+
+
 def test_full_scope_example_has_explicit_accident_ports_for_selected_equipment():
     manifest, _ = _full_scope_inputs()
     selected_components = {

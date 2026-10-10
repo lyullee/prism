@@ -128,6 +128,23 @@ def test_candidate_asset_does_not_mark_family_frequency_bound():
     assert all(not row["frequency_bound"] for row in report["scenario_families"])
 
 
+def test_port_scoped_frequency_requires_an_explicit_external_port_crosswalk():
+    coverage = _coverage()
+    coverage["assets"][0]["reviewed_accident_port_ids"] = ["TK-1.accident-out"]
+    event = _event()
+    event["port_ids"] = ["TK-1.accident-out"]
+    report = audit_equipment_frequency_binding(coverage, frequency_events=[event])
+    assert report["valid_frequency_event_count"] == 1
+    assert report["frequency_port_binding"]["reviewed_port_bound_event_count"] == 1
+    assert report["events"][0]["port_binding_status"] == "BOUND_REVIEWED_PORT"
+
+    event["port_ids"] = ["TK-1.wrong-out"]
+    mismatch = audit_equipment_frequency_binding(coverage, frequency_events=[event])
+    assert mismatch["valid_frequency_event_count"] == 0
+    assert mismatch["frequency_port_binding"]["port_binding_withheld_event_count"] == 1
+    assert any("accident-port crosswalk" in reason for reason in mismatch["blocking_reasons"])
+
+
 def test_bad_frequency_provenance_schema_is_rejected():
     with pytest.raises(EquipmentFrequencyBindingAuditError):
         audit_equipment_frequency_binding(

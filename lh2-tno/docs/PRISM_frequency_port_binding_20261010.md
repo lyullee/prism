@@ -69,6 +69,8 @@ provider 방출 작업목록을 만들 때 매니페스트에서 지정 포트�
 - `coverage.by_component[*].reviewed_accident_port_ids`: 설비별 검토된 사고 포트 목록
 - `coverage.by_component[*].generated_port_unbound_event_count`: 설비별 포트 미지정 이벤트 수
 
+외부 설비 모델 감사에서도 crosswalk 행에 `accident_port_ids`를 기록할 수 있다. 이 값이 있는 문헌 이벤트는 해당 목록에 포함되는지 다시 확인하고, 목록이 없거나 포트가 다르면 `PORT_BINDING_WITHHELD`로 남는다. 외부 모델의 정상 상태나 후보 포트 목록만으로 사고 포트를 추정하지 않는다.
+
 `strict_facility_qra_gate`는 현재 `false`로 유지한다. 즉, 이 기능은 잘못된 포트 결합을 막고 심사 가능한 누락을 드러내는 연결부이며, 독립 물리 검증·provider 자격 증명·시설 전체 범위 충족을 대신하지 않는다.
 
 배포된 `examples/generic_lh2_full_scope_frequency_plan.json`은 이 계약을 사용해 24개 문헌 이벤트를 모두 포트 지정 상태로 생성한다. 열교환기 양단 파열 LOC는 `port_ids_by_loc`에 두 출구를, 단일 구멍 LOC는 한 출구를 지정한다. 이 예제의 `frequency_port_binding`은 `port_scoped_event_count=24`, `port_unbound_event_count=0`이어야 한다.
