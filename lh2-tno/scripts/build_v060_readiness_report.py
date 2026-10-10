@@ -54,6 +54,11 @@ def main() -> int:
         type=Path,
         help="Optional read-only scenario register/screening evidence summary.",
     )
+    parser.add_argument(
+        "--risk-atom-chain-audit",
+        type=Path,
+        help="Optional case/atom-level release-to-final-damage chain audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -75,6 +80,11 @@ def main() -> int:
                 if args.scenario_evidence_audit is not None
                 else None
             ),
+            risk_atom_chain_audit=(
+                _load(args.risk_atom_chain_audit)
+                if args.risk_atom_chain_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -94,6 +104,10 @@ def main() -> int:
     if args.scenario_evidence_audit is not None:
         report["source_artifacts"]["scenario_evidence_audit"] = _source_artifact(
             args.scenario_evidence_audit
+        )
+    if args.risk_atom_chain_audit is not None:
+        report["source_artifacts"]["risk_atom_chain_audit"] = _source_artifact(
+            args.risk_atom_chain_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

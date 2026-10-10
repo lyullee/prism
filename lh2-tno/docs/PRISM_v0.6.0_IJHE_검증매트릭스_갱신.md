@@ -166,10 +166,13 @@ python scripts/build_v060_readiness_report.py `
   --realtime-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
   --facility-evidence-request results/20261026/native_full_scope_union_assessment/facility_evidence_request.json `
   --scenario-evidence-audit examples/inspection_center_scenario_evidence_reaudit_summary.json `
+  --risk-atom-chain-audit results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```
 
-현재 completion audit는 30개 검사 중 27개 PASS·3개 BLOCKED다. 네이티브
+현재 completion audit는 34개 검사 중 29개 PASS·5개 BLOCKED다. `risk_atom_chain_audit.json`은
+44개 case·176개 risk atom의 구조적 방출→최종피해 연결을 readiness report에 함께
+기록한다. 네이티브
 catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS로 만들지만,
 이는 합성 진단 packet의 exact-match일 뿐 qualified provider evidence가 아니다.
 따라서 실제 provider packet 0건, 엄격한 사고범위 차단, 시설 전체 IR/F-N 보류는

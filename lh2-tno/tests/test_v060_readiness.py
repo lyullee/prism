@@ -118,6 +118,21 @@ def _scenario_evidence():
     }
 
 
+def _atom_chain_audit():
+    return {
+        "schema_version": "prism.risk_atom_chain_audit.v1",
+        "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+        "case_count": 3,
+        "complete_case_count": 3,
+        "incomplete_case_count": 0,
+        "risk_atom_count": 12,
+        "operator_limited_case_count": 1,
+        "blocking_reasons": [],
+        "diagnostic_only": True,
+        "facility_qra_claim": False,
+    }
+
+
 def test_report_keeps_conditional_chain_and_strict_gate_separate():
     report = build_v060_readiness_report(**_inputs())
     assert report["schema_version"] == "prism.v060_ijhe_readiness_report.v1"
@@ -201,6 +216,28 @@ def test_report_records_scenario_evidence_without_frequency_or_qra_promotion():
     assert evidence["facility_qra_claim"] is False
     assert evidence["candidate_only"] is True
     assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_records_atom_level_release_to_damage_closure():
+    report = build_v060_readiness_report(
+        **_inputs(), risk_atom_chain_audit=_atom_chain_audit()
+    )
+    closure = report["chain"]["risk_atom_chain_closure"]
+    assert closure["status"] == "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC"
+    assert closure["case_count"] == 3
+    assert closure["complete_case_count"] == 3
+    assert closure["risk_atom_count"] == 12
+    assert closure["diagnostic_only"] is True
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_validator_rejects_atom_chain_qra_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(), risk_atom_chain_audit=_atom_chain_audit()
+    )
+    report["chain"]["risk_atom_chain_closure"]["facility_qra_claim"] = True
+    with pytest.raises(V060ReadinessError, match="risk atom chain closure cannot claim facility QRA"):
+        validate_v060_readiness_report(report)
 
 
 def test_report_uses_facility_release_boundary_gate_when_present():

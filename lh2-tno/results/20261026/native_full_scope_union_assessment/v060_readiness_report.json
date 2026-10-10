@@ -131,6 +131,17 @@
         "inventory_depletion_is_not_inferred": true,
         "facility_ir_fn_promotion": "independent qualification and physical-validation gates remain required"
       }
+    },
+    "risk_atom_chain_closure": {
+      "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+      "case_count": 44,
+      "complete_case_count": 44,
+      "incomplete_case_count": 0,
+      "risk_atom_count": 176,
+      "operator_limited_case_count": 29,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
     }
   },
   "equipment": {
@@ -458,72 +469,72 @@
     "cache_meets_one_hz_all_samples": true,
     "fresh_physics_elapsed_ms": 2711.2096999771893,
     "fresh_physics_meets_one_hz": false,
-    "campaign_case_p95_ms": 39990.522764984074,
-    "campaign_case_p99_ms": 77918.14879802638,
+    "campaign_case_p95_ms": 27587.356735067453,
+    "campaign_case_p99_ms": 60368.736392006984,
     "stage_elapsed_ms": {
       "cloud_observation": {
         "sample_count": 42,
-        "sum_ms": 49972.5804006448,
-        "median_ms": 92.08430000580847,
-        "max_ms": 31495.02640007995,
-        "p95_ms": 5229.753344983307,
-        "p99_ms": 21115.424006046866
+        "sum_ms": 42536.960800527595,
+        "median_ms": 89.55725003033876,
+        "max_ms": 26208.26930005569,
+        "p95_ms": 4380.032510048461,
+        "p99_ms": 17702.431686017586
       },
       "endpoint_a": {
         "sample_count": 2,
-        "sum_ms": 6401.225199922919,
-        "median_ms": 3200.6125999614596,
-        "max_ms": 3224.112599971704,
-        "p95_ms": 3221.7625999706797,
-        "p99_ms": 3223.6425999714993
+        "sum_ms": 6413.10930007603,
+        "median_ms": 3206.554650038015,
+        "max_ms": 3229.428800055757,
+        "p95_ms": 3227.141385053983,
+        "p99_ms": 3228.9713170554023
       },
       "endpoint_aggregation": {
         "sample_count": 2,
-        "sum_ms": 12999.437800026499,
-        "median_ms": 6499.718900013249,
-        "max_ms": 6540.731900022365,
-        "p95_ms": 6536.630600021454,
-        "p99_ms": 6539.911640022183
+        "sum_ms": 12936.53400009498,
+        "median_ms": 6468.26700004749,
+        "max_ms": 6493.827100028284,
+        "p95_ms": 6491.2710900302045,
+        "p99_ms": 6493.315898028668
       },
       "endpoint_b": {
         "sample_count": 2,
-        "sum_ms": 6594.790400005877,
-        "median_ms": 3297.3952000029385,
-        "max_ms": 3314.5625999895856,
-        "p95_ms": 3312.845859990921,
-        "p99_ms": 3314.2192519898526
+        "sum_ms": 6521.695900009945,
+        "median_ms": 3260.8479500049725,
+        "max_ms": 3263.484499999322,
+        "p95_ms": 3263.220844999887,
+        "p99_ms": 3263.431768999435
       },
       "fire_explosion_damage_risk": {
         "sample_count": 42,
-        "sum_ms": 4428.231300087646,
-        "median_ms": 70.73249999666587,
-        "max_ms": 386.94360002409667,
-        "p95_ms": 234.40599492168977,
-        "p99_ms": 325.151023982325
+        "sum_ms": 3562.8511999966577,
+        "median_ms": 70.37739997031167,
+        "max_ms": 289.6432999987155,
+        "p95_ms": 140.52179000573233,
+        "p99_ms": 228.6268539959559
       },
       "near_field_and_dispersion": {
         "sample_count": 42,
-        "sum_ms": 256519.0260997042,
-        "median_ms": 1457.3634500266053,
-        "max_ms": 74260.8180999523,
-        "p95_ms": 34202.71483000829,
-        "p99_ms": 60140.42146195295
+        "sum_ms": 198063.49149998277,
+        "median_ms": 1428.2409500447102,
+        "max_ms": 49182.34269996174,
+        "p95_ms": 21799.22704994677,
+        "p99_ms": 43906.76208199114
       },
       "pool": {
         "sample_count": 42,
-        "sum_ms": 3816.866099834442,
-        "median_ms": 0.005499983672052622,
-        "max_ms": 397.8687999770045,
-        "p95_ms": 358.92211993341334,
-        "p99_ms": 384.84646195429366
+        "sum_ms": 3679.0641001425683,
+        "median_ms": 0.005399982910603285,
+        "max_ms": 364.4901999505237,
+        "p95_ms": 351.8947399687022,
+        "p99_ms": 359.51763798482716
       },
       "source": {
         "sample_count": 42,
-        "sum_ms": 30398.89720012434,
-        "median_ms": 719.7199500515126,
-        "max_ms": 794.1579000325873,
-        "p95_ms": 753.1315449567046,
-        "p99_ms": 789.7622490208596
+        "sum_ms": 30342.252300237305,
+        "median_ms": 717.1405500266701,
+        "max_ms": 812.5166000099853,
+        "p95_ms": 768.6606599891091,
+        "p99_ms": 799.5640439935959
       }
     }
   },
@@ -578,10 +589,10 @@
     "family_request_count": 12,
     "component_request_count": 9,
     "blocking_reasons": [
-      "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: declared scope is incomplete",
-      "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: uncomputed cases remain",
-      "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: excluded components remain",
-      "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: synthetic release horizon",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: declared scope is incomplete",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
       "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
       "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
       "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
@@ -715,23 +726,23 @@
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "55145fcd4b7f187f2beaded9af7399117f294e45c79fb9b456c6049a1e8a0446"
+      "sha256": "e2e44505ba12b26f0a10ad1d953bb88df79dac0401c51fe632fe3bd4931cb154"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "7b855ef8b18e0c8b64b915384222c503faf26e3c4c0099c01f88917b16a7740b"
+      "sha256": "d6ad25e763e037d42c43369a4aae52d4b12200138bedf3484d01572347053b64"
     },
     "facility_assessment": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-      "sha256": "5b1db4a6b4985b2ca2793303cd4e7bf3f522d64d6349a996449b3a3c91e274a3"
+      "sha256": "df62a19cd788328ba4ccdaf8c60ba5fd4b458d536dad5a96d6821ef60556d2e7"
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "d537b97a07bc4e7edfaf08ec29a4341ab829ea97b14ef45cba7b316c784a1b48"
+      "sha256": "255b06aab11224425530c6f2ec46ce95f8ea7a7a145a3ff84a3513b21aa12556"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "60d6e0be62768052007cfeea1f7e9543a96cbd39232d0cf9b4dbaadf0fb65acb"
+      "sha256": "6e9b327eb42855555d5d904708a93fb500252219453df7457224e2f0d44ed543"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
@@ -739,11 +750,15 @@
     },
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
-      "sha256": "fe3ca251a263d537b80583b5d20baa09e5ef8a7183152698c0e6b5ed89c2d911"
+      "sha256": "b35928c0991de5fdfc9f3d19ee886b03cde5a96e8d599093f6afe7300d6e5654"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
       "sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3"
+    },
+    "risk_atom_chain_audit": {
+      "path": "results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json",
+      "sha256": "79a559637a71af5cc3692d4a16468d9ad4bb031a5b5ed2a9fa5a2b662007bd94"
     }
   },
   "invariant_validation": {

@@ -298,6 +298,7 @@ def build_v060_readiness_report(
     realtime_benchmark: Mapping[str, Any],
     facility_evidence_request: Mapping[str, Any] | None = None,
     scenario_evidence_audit: Mapping[str, Any] | None = None,
+    risk_atom_chain_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -317,6 +318,9 @@ def build_v060_readiness_report(
         scenario_evidence = _scenario_evidence_summary(
             _mapping(scenario_evidence_audit, "scenario_evidence_audit")
         )
+    atom_chain = None
+    if risk_atom_chain_audit is not None:
+        atom_chain = _mapping(risk_atom_chain_audit, "risk_atom_chain_audit")
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
         if isinstance(evidence_request, Mapping)
@@ -384,6 +388,25 @@ def build_v060_readiness_report(
             "scenario_branch_status": coverage.get("scenario_branch_status"),
             "conditional_ir_fn_available": facility.get("conditional_diagnostic_facility_risk_available"),
             "release_boundary": release_boundary,
+            "risk_atom_chain_closure": (
+                {
+                    "status": atom_chain.get("status"),
+                    "case_count": atom_chain.get("case_count"),
+                    "complete_case_count": atom_chain.get("complete_case_count"),
+                    "incomplete_case_count": atom_chain.get("incomplete_case_count"),
+                    "risk_atom_count": atom_chain.get("risk_atom_count"),
+                    "operator_limited_case_count": atom_chain.get(
+                        "operator_limited_case_count"
+                    ),
+                    "blocking_reason_count": len(atom_chain.get("blocking_reasons", ()))
+                    if isinstance(atom_chain.get("blocking_reasons"), Sequence)
+                    else None,
+                    "diagnostic_only": atom_chain.get("diagnostic_only"),
+                    "facility_qra_claim": atom_chain.get("facility_qra_claim"),
+                }
+                if atom_chain is not None
+                else None
+            ),
         },
         "equipment": {
             "component_rows": component_rows,
@@ -559,6 +582,43 @@ def validate_v060_readiness_report(
             errors.append(
                 "conditional IR/F-N availability cannot promote facility_total_risk_available"
             )
+
+    atom_chain = chain.get("risk_atom_chain_closure")
+    if atom_chain is not None:
+        if not isinstance(atom_chain, Mapping):
+            errors.append("chain.risk_atom_chain_closure must be an object")
+        else:
+            for field in (
+                "case_count",
+                "complete_case_count",
+                "incomplete_case_count",
+                "risk_atom_count",
+                "operator_limited_case_count",
+                "blocking_reason_count",
+            ):
+                if atom_chain.get(field) is not None:
+                    _nonnegative_int(
+                        atom_chain.get(field),
+                        f"chain.risk_atom_chain_closure.{field}",
+                        errors,
+                    )
+            if atom_chain.get("status") == "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC":
+                if atom_chain.get("case_count") != atom_chain.get("complete_case_count"):
+                    errors.append(
+                        "risk atom chain closure is full but complete case count differs"
+                    )
+                if atom_chain.get("incomplete_case_count") != 0:
+                    errors.append(
+                        "risk atom chain closure is full but incomplete cases remain"
+                    )
+                if atom_chain.get("blocking_reason_count") != 0:
+                    errors.append(
+                        "risk atom chain closure is full but blocking reasons remain"
+                    )
+            if atom_chain.get("diagnostic_only") is not True:
+                errors.append("risk atom chain closure must remain diagnostic_only")
+            if atom_chain.get("facility_qra_claim") is True:
+                errors.append("risk atom chain closure cannot claim facility QRA")
 
     release_boundary = chain.get("release_boundary")
     if release_boundary is not None:
