@@ -104,6 +104,11 @@ def main() -> int:
         type=Path,
         help="Optional facility-neutral generic-manifest frequency binding audit.",
     )
+    parser.add_argument(
+        "--isolation-union-extension-verification",
+        type=Path,
+        help="Optional namespaced isolation success/failure facility-extension verification.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -175,6 +180,11 @@ def main() -> int:
                 if args.generic_equipment_frequency_binding_audit is not None
                 else None
             ),
+            isolation_union_extension_verification=(
+                _load(args.isolation_union_extension_verification)
+                if args.isolation_union_extension_verification is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -234,6 +244,10 @@ def main() -> int:
     if args.generic_equipment_frequency_binding_audit is not None:
         report["source_artifacts"]["generic_equipment_frequency_binding_audit"] = _source_artifact(
             args.generic_equipment_frequency_binding_audit
+        )
+    if args.isolation_union_extension_verification is not None:
+        report["source_artifacts"]["isolation_union_extension_verification"] = _source_artifact(
+            args.isolation_union_extension_verification
         )
     try:
         validation = validate_v060_readiness_report(report)

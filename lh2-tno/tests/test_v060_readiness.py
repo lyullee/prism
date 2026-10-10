@@ -148,6 +148,30 @@ def _equipment_chain_audit():
     }
 
 
+def _isolation_extension_verification():
+    return {
+        "schema": "prism.isolation_union_extension_verification.v1",
+        "status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
+        "base_counts": {"events": 2, "cases": 3, "risk_atoms": 12},
+        "isolation_counts": {
+            "events": 1,
+            "cases": 4,
+            "risk_atoms": 16,
+            "success_cases": 2,
+            "failure_cases": 2,
+            "provider_response_consumed": True,
+            "state_snapshot_bound_cases": 4,
+        },
+        "merged_counts": {"events": 3, "cases": 7, "risk_atoms": 28},
+        "risk_atom_chain_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+        "equipment_state_release_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+        "facility_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+        "facility_component_contribution_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+        "qualified_provider_packet_case_count": 0,
+        "complete_facility_qra_claim": False,
+    }
+
+
 def test_report_keeps_conditional_chain_and_strict_gate_separate():
     report = build_v060_readiness_report(**_inputs())
     assert report["schema_version"] == "prism.v060_ijhe_readiness_report.v1"
@@ -207,6 +231,20 @@ def test_report_validator_rejects_realtime_facility_qra_claim():
     report["timing"]["runtime_profile"]["facility_qra_realtime_claim"] = True
     with pytest.raises(V060ReadinessError, match="real-time facility QRA"):
         validate_v060_readiness_report(report)
+
+
+def test_report_records_isolation_union_extension_without_promoting_qra():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        isolation_union_extension_verification=_isolation_extension_verification(),
+    )
+    extension = report["chain"]["isolation_union_extension"]
+    assert extension["isolation_counts"]["success_cases"] == 2
+    assert extension["isolation_counts"]["failure_cases"] == 2
+    assert extension["provider_response_consumed"] is True
+    assert extension["diagnostic_only"] is True
+    assert extension["facility_qra_claim"] is False
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
 
 
 def test_report_records_actionable_evidence_request_without_opening_promotion():

@@ -358,6 +358,7 @@ def build_v060_readiness_report(
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
+    isolation_union_extension_verification: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -431,6 +432,12 @@ def build_v060_readiness_report(
         generic_frequency_chain = _mapping(
             generic_equipment_frequency_binding_audit,
             "generic_equipment_frequency_binding_audit",
+        )
+    isolation_extension = None
+    if isolation_union_extension_verification is not None:
+        isolation_extension = _mapping(
+            isolation_union_extension_verification,
+            "isolation_union_extension_verification",
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -799,6 +806,50 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if generic_frequency_chain is not None
+                else None
+            ),
+            "isolation_union_extension": (
+                {
+                    "schema": isolation_extension.get("schema"),
+                    "status": isolation_extension.get("status"),
+                    "base_counts": isolation_extension.get("base_counts"),
+                    "isolation_counts": isolation_extension.get("isolation_counts"),
+                    "merged_counts": isolation_extension.get("merged_counts"),
+                    "risk_atom_chain_status": isolation_extension.get(
+                        "risk_atom_chain_status"
+                    ),
+                    "equipment_state_release_status": isolation_extension.get(
+                        "equipment_state_release_status"
+                    ),
+                    "facility_aggregate_closure_status": isolation_extension.get(
+                        "facility_aggregate_closure_status"
+                    ),
+                    "facility_component_contribution_status": isolation_extension.get(
+                        "facility_component_contribution_status"
+                    ),
+                    "provider_response_consumed": (
+                        isolation_extension.get("isolation_counts", {}).get(
+                            "provider_response_consumed"
+                        )
+                        if isinstance(isolation_extension.get("isolation_counts"), Mapping)
+                        else None
+                    ),
+                    "state_snapshot_bound_cases": (
+                        isolation_extension.get("isolation_counts", {}).get(
+                            "state_snapshot_bound_cases"
+                        )
+                        if isinstance(isolation_extension.get("isolation_counts"), Mapping)
+                        else None
+                    ),
+                    "qualified_provider_packet_case_count": isolation_extension.get(
+                        "qualified_provider_packet_case_count"
+                    ),
+                    "facility_qra_claim": isolation_extension.get(
+                        "complete_facility_qra_claim"
+                    ),
+                    "diagnostic_only": True,
+                }
+                if isolation_extension is not None
                 else None
             ),
         },
@@ -1427,6 +1478,105 @@ def validate_v060_readiness_report(
                     errors.append(
                         f"chain.generic_equipment_frequency_binding.{field} cannot be true"
                     )
+
+    isolation_extension = chain.get("isolation_union_extension")
+    if isolation_extension is not None:
+        if not isinstance(isolation_extension, Mapping):
+            errors.append("chain.isolation_union_extension must be an object")
+        else:
+            if isolation_extension.get("schema") != "prism.isolation_union_extension_verification.v1":
+                errors.append(
+                    "chain.isolation_union_extension.schema is unsupported"
+                )
+            if isolation_extension.get("status") != "ISOLATION_UNION_EXTENSION_DIAGNOSTIC":
+                errors.append(
+                    "chain.isolation_union_extension must remain diagnostic"
+                )
+            for counts_name in ("base_counts", "isolation_counts", "merged_counts"):
+                counts = isolation_extension.get(counts_name)
+                if not isinstance(counts, Mapping):
+                    errors.append(
+                        f"chain.isolation_union_extension.{counts_name} must be an object"
+                    )
+                    continue
+                for field in ("events", "cases", "risk_atoms"):
+                    if counts.get(field) is not None:
+                        _nonnegative_int(
+                            counts.get(field),
+                            f"chain.isolation_union_extension.{counts_name}.{field}",
+                            errors,
+                        )
+            base_counts = isolation_extension.get("base_counts")
+            isolation_counts = isolation_extension.get("isolation_counts")
+            merged_counts = isolation_extension.get("merged_counts")
+            if (
+                isinstance(base_counts, Mapping)
+                and isinstance(isolation_counts, Mapping)
+                and isinstance(merged_counts, Mapping)
+            ):
+                for field in ("events", "cases", "risk_atoms"):
+                    if (
+                        base_counts.get(field) is not None
+                        and isolation_counts.get(field) is not None
+                        and merged_counts.get(field) is not None
+                        and merged_counts.get(field)
+                        != base_counts.get(field) + isolation_counts.get(field)
+                    ):
+                        errors.append(
+                            f"chain.isolation_union_extension.{field} counts do not add"
+                        )
+                if (
+                    base_counts.get("events") != chain.get("event_count")
+                    or base_counts.get("cases") != chain.get("case_count")
+                    or base_counts.get("risk_atoms") != chain.get("risk_atom_count")
+                ):
+                    errors.append(
+                        "chain.isolation_union_extension base counts differ from primary chain"
+                    )
+            for field in (
+                "success_cases",
+                "failure_cases",
+                "state_snapshot_bound_cases",
+                "provider_response_consumed",
+                "qualified_provider_packet_case_count",
+            ):
+                if field in isolation_extension:
+                    value_for_field = isolation_extension.get(field)
+                    if field == "provider_response_consumed":
+                        if value_for_field is not True:
+                            errors.append(
+                                "isolation extension must record provider response consumption"
+                            )
+                    elif value_for_field is not None:
+                        _nonnegative_int(
+                            value_for_field,
+                            f"chain.isolation_union_extension.{field}",
+                            errors,
+                        )
+            # The flattened readiness block stores the two branch counters in
+            # isolation_counts; require balanced diagnostic branches there.
+            if isinstance(isolation_counts, Mapping):
+                success_cases = isolation_counts.get("success_cases")
+                failure_cases = isolation_counts.get("failure_cases")
+                if success_cases != failure_cases:
+                    errors.append(
+                        "isolation extension success/failure branch counts must balance"
+                    )
+                if isolation_counts.get("provider_response_consumed") is not True:
+                    errors.append(
+                        "isolation extension provider response must be consumed"
+                    )
+                if (
+                    isolation_counts.get("state_snapshot_bound_cases")
+                    != isolation_counts.get("cases")
+                ):
+                    errors.append(
+                        "isolation extension state snapshots must cover all cases"
+                    )
+            if isolation_extension.get("diagnostic_only") is not True:
+                errors.append("isolation extension must remain diagnostic_only")
+            if isolation_extension.get("facility_qra_claim") is True:
+                errors.append("isolation extension cannot claim facility QRA")
 
     equipment = value.get("equipment")
     equipment = equipment if isinstance(equipment, Mapping) else {}

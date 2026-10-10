@@ -198,6 +198,8 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 
 같은 원장의 `timing.runtime_profile`은 디지털 트윈에서 사용할 계산 경로를 세 가지로 구분한다. 저장된 피해 결과를 재사용하는 `cached_diagnostic_1hz`는 p95 61.28 ms로 1 Hz 진단 모니터링에 사용할 수 있다. 새 설비 상태로 SLABx-LH2를 다시 계산하는 fresh physics는 2711.21 ms로 1 Hz 조건을 만족하지 않는다. 전체 44-case campaign은 p95/p99 39591.67/79233.11 ms이므로 온라인 루프가 아니라 오프라인 평가와 빈도 민감도 분석에 사용한다. 이 프로파일은 처리시간을 기록할 뿐이며 시설 QRA의 실시간 승격을 주장하지 않는다.
 
+`chain.isolation_union_extension`에는 별도 차단 응답 진단도 연결했다. 기존 34-event·44-case 원장에 5개 isolation event와 20개 case를 이름공간으로 결합해, 차단 성공 10건과 실패 10건을 각각 보존한다. 20개 모두 설비 상태 snapshot이 연결되고 provider response가 소비됐지만, 이는 합성 barrier branch 진단이다. 차단 성공률을 현장 빈도로 바꾸지 않으며, qualified provider packet과 시설 QRA 승격은 계속 false다. 근거 파일은 [`isolation extension verification`](../results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json)이다.
+
 최신 외부 설비 결합 원장은 다음 명령으로 재현할 수 있다.
 
 ```powershell
@@ -221,6 +223,7 @@ python scripts/build_v060_readiness_report.py `
   --equipment-frequency-binding-audit results/20261104/equipment_frequency_binding_audit_current.json `
   --generic-equipment-scenario-coverage-audit results/20261105/generic_lh2_full_scope_equipment_scenario_coverage.json `
   --generic-equipment-frequency-binding-audit results/20261105/generic_lh2_full_scope_equipment_frequency_binding.json `
+  --isolation-union-extension-verification results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json `
   --output results/20261105/v060_readiness_report_with_generic_equipment_model.json
 ```
 
