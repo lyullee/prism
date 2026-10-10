@@ -317,10 +317,10 @@
       "scenario_count": 5,
       "top_ids_by_endpoint": [
         [
-          "ambient-vaporizer"
+          "storage-shell"
         ],
         [
-          "ambient-vaporizer"
+          "storage-shell"
         ]
       ],
       "top_id_consistent_by_endpoint": [
@@ -355,72 +355,72 @@
     "cache_meets_one_hz_all_samples": true,
     "fresh_physics_elapsed_ms": 2711.2096999771893,
     "fresh_physics_meets_one_hz": false,
-    "campaign_case_p95_ms": 28542.989770037835,
-    "campaign_case_p99_ms": 59995.055033995304,
+    "campaign_case_p95_ms": 27587.356735067453,
+    "campaign_case_p99_ms": 60368.736392006984,
     "stage_elapsed_ms": {
       "cloud_observation": {
         "sample_count": 42,
-        "sum_ms": 41809.156600153074,
-        "median_ms": 88.64010003162548,
-        "max_ms": 25651.04170003906,
-        "p95_ms": 4306.818615068898,
-        "p99_ms": 17355.595586006457
+        "sum_ms": 42536.960800527595,
+        "median_ms": 89.55725003033876,
+        "max_ms": 26208.26930005569,
+        "p95_ms": 4380.032510048461,
+        "p99_ms": 17702.431686017586
       },
       "endpoint_a": {
         "sample_count": 2,
-        "sum_ms": 6476.146999979392,
-        "median_ms": 3238.073499989696,
-        "max_ms": 3286.455399938859,
-        "p95_ms": 3281.6172099439427,
-        "p99_ms": 3285.487761939876
+        "sum_ms": 6413.10930007603,
+        "median_ms": 3206.554650038015,
+        "max_ms": 3229.428800055757,
+        "p95_ms": 3227.141385053983,
+        "p99_ms": 3228.9713170554023
       },
       "endpoint_aggregation": {
         "sample_count": 2,
-        "sum_ms": 13091.17749996949,
-        "median_ms": 6545.588749984745,
-        "max_ms": 6630.809099995531,
-        "p95_ms": 6622.2870649944525,
-        "p99_ms": 6629.104692995315
+        "sum_ms": 12936.53400009498,
+        "median_ms": 6468.26700004749,
+        "max_ms": 6493.827100028284,
+        "p95_ms": 6491.2710900302045,
+        "p99_ms": 6493.315898028668
       },
       "endpoint_b": {
         "sample_count": 2,
-        "sum_ms": 6613.024500082247,
-        "median_ms": 3306.5122500411235,
-        "max_ms": 3343.2980000507087,
-        "p95_ms": 3339.61942504975,
-        "p99_ms": 3342.562285050517
+        "sum_ms": 6521.695900009945,
+        "median_ms": 3260.8479500049725,
+        "max_ms": 3263.484499999322,
+        "p95_ms": 3263.220844999887,
+        "p99_ms": 3263.431768999435
       },
       "fire_explosion_damage_risk": {
         "sample_count": 42,
-        "sum_ms": 3529.979499988258,
-        "median_ms": 70.51400002092123,
-        "max_ms": 258.136700023897,
-        "p95_ms": 137.9187649581581,
-        "p99_ms": 209.34415797819338
+        "sum_ms": 3562.8511999966577,
+        "median_ms": 70.37739997031167,
+        "max_ms": 289.6432999987155,
+        "p95_ms": 140.52179000573233,
+        "p99_ms": 228.6268539959559
       },
       "near_field_and_dispersion": {
         "sample_count": 42,
-        "sum_ms": 198928.01799997687,
-        "median_ms": 1430.0847500562668,
-        "max_ms": 48637.88269995712,
-        "p95_ms": 22653.147350036288,
-        "p99_ms": 43802.631257960995
+        "sum_ms": 198063.49149998277,
+        "median_ms": 1428.2409500447102,
+        "max_ms": 49182.34269996174,
+        "p95_ms": 21799.22704994677,
+        "p99_ms": 43906.76208199114
       },
       "pool": {
         "sample_count": 42,
-        "sum_ms": 3914.0400998294353,
-        "median_ms": 0.005449983291327953,
-        "max_ms": 491.90849997103214,
-        "p95_ms": 368.1367799523286,
-        "p99_ms": 442.8072279610201
+        "sum_ms": 3679.0641001425683,
+        "median_ms": 0.005399982910603285,
+        "max_ms": 364.4901999505237,
+        "p95_ms": 351.8947399687022,
+        "p99_ms": 359.51763798482716
       },
       "source": {
         "sample_count": 42,
-        "sum_ms": 30453.379600076005,
-        "median_ms": 721.531999995932,
-        "max_ms": 830.3482999326661,
-        "p95_ms": 741.5979299519676,
-        "p99_ms": 811.3605029729658
+        "sum_ms": 30342.252300237305,
+        "median_ms": 717.1405500266701,
+        "max_ms": 812.5166000099853,
+        "p95_ms": 768.6606599891091,
+        "p99_ms": 799.5640439935959
       }
     }
   },
@@ -475,10 +475,10 @@
     "family_request_count": 12,
     "component_request_count": 9,
     "blocking_reasons": [
-      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: declared scope is incomplete",
-      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: uncomputed cases remain",
-      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: excluded components remain",
-      "campaign 30ff667a2213b88cb0334274fac1c4c912d4166c8e23ca9ac89d0076fceff7e4: synthetic release horizon",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: declared scope is incomplete",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
+      "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
       "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
       "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
       "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
@@ -612,23 +612,23 @@
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "a8544f333e22a33532ceeed9a6ba37a195f5f19b37bd954327a57eb93b526f82"
+      "sha256": "0f575ab0aca817ca2c0352f514e79a1e3b438a56516d039a9b0db3f7db16d0b8"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "1a84c3509888648a7218a575aba5ad4618c212aa5139ef09e9b0c87ce8f12750"
+      "sha256": "0b4173fdf98c507c915b27b203235e7ee8e2334c2014ed7f6a7e99b8ad3bb69b"
     },
     "facility_assessment": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-      "sha256": "fbb6f55044dde610d64b832a4f2a0c66d23c99432d46c83d3b13f066e71cb9ab"
+      "sha256": "679edbd5e54aac26876fc043ed00cca55ffdf5ccca69fff777f535f0124e876d"
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "180c218b1cc3f763be29ecfa0a9b73c1ad227ebc119ef4676d2de673258bf06e"
+      "sha256": "858404a0b994e893c2aad6bce54325e11276f003ae447371c5574f6a7953d8ed"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "c09c4385c4252f0bbeb2f5bdd541afa5187e390cb3b9f0866edc74e44457c902"
+      "sha256": "b0d7f88af167f6f89e9909dc018e2afb287168e2ef76e29b16b0122ea055a014"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
@@ -636,7 +636,7 @@
     },
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
-      "sha256": "2367ee8834349197b42eb8b86c4b55fc074edf514e9b62fd920881aecd53df28"
+      "sha256": "a86e491962812f98d20dddd3f017a514828be0080f4af58b87fbf92459525c09"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",

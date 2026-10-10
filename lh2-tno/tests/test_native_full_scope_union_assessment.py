@@ -15,6 +15,7 @@ def _load(name: str) -> dict:
 def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     verification = _load("verification.json")
     result = _load("campaign_result.json")
+    facility = _load("facility.json")
     scope = _load("scope_matrix.json")
     assessment = _load("facility_assessment.json")
     evidence_request = _load("facility_evidence_request.json")
@@ -75,6 +76,13 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert result["case_count"] == 44
     assert len(result["risk_atoms"]) == 176
     assert result["facility_id"] == "generic-lh2-near-receptor-diagnostic"
+    assert result["facility_id"] == facility["id"]
+    assert any(
+        harm > 0.0
+        for atom in result["risk_atoms"]
+        for endpoint in atom["receptor_harm_low_high"].values()
+        for harm in endpoint
+    )
     assert rebound["vertical_handoff_rebind"]["diagnostic_only"] is True
     assert rebound["vertical_handoff_rebind"]["facility_qra_claim"] is False
     assert rebound["vertical_handoff_rebind"]["condition_rebind_policy"] == (
@@ -106,6 +114,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert rows["inventory_depletion"]["case_count"] == 28
     assert rows["inventory_depletion"]["conditional_executed_case_count"] == 28
     assert assessment["conditional_diagnostic_facility_risk_available"] is True
+    assert assessment["conditional_diagnostic_facility_annual_ir_low_high"]["worker-01"][0] > 0.0
     assert assessment["population_accounting"]["status"] == "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC"
     assert assessment["population_accounting"]["mismatched_receptor_ids"] == {}
     assert assessment["facility_total_risk_available"] is False

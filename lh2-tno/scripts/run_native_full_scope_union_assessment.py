@@ -245,11 +245,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     facility_id = str(base_result.get("facility_id", "")).strip()
     facility_reference_id = str(base_facility.get("id", "")).strip()
     if facility_reference_id:
-        # A freshly rerun native campaign may retain the same event identities but
-        # use a source-catalog facility label.  Keep the union namespace anchored
-        # to the selected base facility while preserving packet digests.
-        facility_id = facility_reference_id
-        base_result["facility_id"] = facility_id
+        # The facility geometry is already consumed by the consequence solver.
+        # Relabelling a result after execution would silently attach harm values
+        # calculated for one receptor layout to another layout.  Require the
+        # serialized result and selected facility to agree instead of repairing
+        # the identity after the fact.
+        if facility_id != facility_reference_id:
+            raise ValueError(
+                "base campaign result facility_id does not match base facility id; "
+                "recompute the campaign with the selected facility geometry before union"
+            )
     if not facility_id:
         raise ValueError("base campaign result has no facility_id")
     namespace = f"{facility_id}/vertical-handoff"

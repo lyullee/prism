@@ -7,8 +7,8 @@
 ```powershell
 python scripts/run_native_full_scope_union_assessment.py `
   --base-dir results/20261026/native_full_scope_frequency_assessment `
-  --base-campaign results/20261027/native_generic_scope_packets_state_bound/campaign_assessment/campaign.json `
-  --base-campaign-result results/20261027/native_generic_scope_packets_state_bound/campaign_assessment/campaign_result.json `
+  --base-campaign results/20261030/native_near_receptor_scope_packets_state_bound/campaign.json `
+  --base-campaign-result results/20261030/native_near_receptor_scope_packets_state_bound/campaign_result.json `
   --vertical-result results/20261020/vertical_vent_all_bins/campaign_result.json `
   --vertical-scope-matrix results/20261020/vertical_handoff_scope_matrix_all_bins.json `
   --inventory-result results/20261009/equipment_inventory_campaign/campaign_result.json `
@@ -18,6 +18,13 @@ python scripts/run_native_full_scope_union_assessment.py `
   --state-snapshot-binding-audit results/20261027/native_generic_scope_packets_state_bound/state_snapshot_binding_audit.json `
   --output-dir results/20261026/native_full_scope_union_assessment
 ```
+
+`base-campaign`과 `base-campaign-result`는 `base-dir`의 시설(`generic-lh2-near-receptor-diagnostic`)에서
+실제로 실행한 결과를 사용해야 한다. 이전에는 20 m 수용점으로 계산한 상태결과를 0.5 m 진단시설
+namespace로 사후 이름변경할 수 있었고, 그 경우 IR이 0으로 남아도 오류가 드러나지 않았다.
+현재 union 실행기는 시설 ID가 다르면 즉시 실패하며, 2026-10-30 재계산은 동일한 native 상태 패킷
+digest를 유지한 채 0.5 m 수용점에서 다시 피해를 계산했다. 이 검사는 수용점 기하를 사후 대체하지
+않도록 하는 fail-closed 계약이다.
 
 union 결과에 검증근거와 실시간 처리 증거를 묶으려면 다음 단계를 실행한다. 이
 명령은 새 provider 물리 계산을 만들지 않고, 기존 원장과 명시된 증거의 승격 게이트를

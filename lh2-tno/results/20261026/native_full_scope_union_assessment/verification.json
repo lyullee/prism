@@ -21,8 +21,8 @@
   "population_accounting_mismatch_count": 0,
   "conditional_diagnostic_facility_annual_ir_low_high": {
     "worker-01": [
-      0.0,
-      0.0
+      4.6800000000000006e-05,
+      4.6800000000000006e-05
     ]
   },
   "facility_total_risk_available": false,

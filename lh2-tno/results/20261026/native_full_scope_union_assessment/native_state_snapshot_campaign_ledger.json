@@ -45,18 +45,26 @@
   "risk_atom_count": 96,
   "known_contribution_annual_ir_low_high": {
     "worker-01": [
-      0.0,
-      0.0
+      4.6800000000000006e-05,
+      4.6800000000000006e-05
     ]
   },
   "known_contribution_expected_death_fn_low_high": [
     {
-      "expected_deaths": [],
-      "cumulative_frequency_per_year": []
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.6800000000000006e-05
+      ]
     },
     {
-      "expected_deaths": [],
-      "cumulative_frequency_per_year": []
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.6800000000000006e-05
+      ]
     }
   ],
   "facility_total_risk_available": false,

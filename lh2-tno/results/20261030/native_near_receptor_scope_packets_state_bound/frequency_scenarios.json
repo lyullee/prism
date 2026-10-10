@@ -1,0 +1,53 @@
+{
+  "schema_version": "prism.native_full_scope_frequency_scenarios.v1",
+  "scenarios": [
+    {
+      "id": "native-full-scope-literature-central",
+      "asset_quantiles": {
+        "ambient-vaporizer": "published",
+        "pressure-relief-vent": "published",
+        "reliquefier": "published",
+        "storage-shell": "published",
+        "transfer-line": "published",
+        "transfer-pump": "published",
+        "transfer-valve": "published"
+      },
+      "event_quantiles": {},
+      "provenance": "published catalogue rates; conditional diagnostic only",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "native-full-scope-literature-low",
+      "asset_quantiles": {
+        "ambient-vaporizer": "fixed",
+        "pressure-relief-vent": "fixed",
+        "reliquefier": "fixed",
+        "storage-shell": "p05",
+        "transfer-line": "p05",
+        "transfer-pump": "fixed",
+        "transfer-valve": "p05"
+      },
+      "event_quantiles": {},
+      "provenance": "published marginal p05 bounds where available; fixed catalogue rates otherwise",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "native-full-scope-literature-high",
+      "asset_quantiles": {
+        "ambient-vaporizer": "fixed",
+        "pressure-relief-vent": "fixed",
+        "reliquefier": "fixed",
+        "storage-shell": "p95",
+        "transfer-line": "p95",
+        "transfer-pump": "fixed",
+        "transfer-valve": "p95"
+      },
+      "event_quantiles": {},
+      "provenance": "published marginal p95 bounds where available; fixed catalogue rates otherwise",
+      "correlation_assumption": "within_asset_shared_quantile"
+    }
+  ],
+  "event_catalogue_digest": "178edb0786166e71bf1c190ade14f76e00c4e846f6b9ac29490b4c2940b8a4a2",
+  "frequency_is_not_inferred": true,
+  "facility_credible_interval": false
+}
