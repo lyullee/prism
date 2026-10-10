@@ -937,6 +937,8 @@ def test_realtime_facility_handoff_preserves_snapshot_but_blocks_ledger_promotio
     assert 'missing_annual_condition_id' in handoff['component_rows'][0]['ledger_blockers']
     assert handoff['evidence_boundary']['physical_validation_claim'] is False
     assert handoff['evidence_boundary']['qualification_evaluated_by_realtime_monitor'] is False
+    assert handoff['evidence_boundary']['strict_release_boundary']['strict_release_boundary_ready'] is False
+    assert handoff['evidence_boundary']['strict_release_boundary']['facility_ir_fn_promotion'] is False
 
 
 def test_realtime_facility_handoff_rejects_malformed_snapshot():

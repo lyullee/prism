@@ -2184,6 +2184,12 @@ def build_realtime_facility_risk_handoff(snapshot: Mapping[str, object]) -> dict
     conditional_fn_available = bool(
         aggregate.get("conditional_current_weather_expected_death_fn_available")
     )
+    release_path_accounting = aggregate.get("equipment_release_path_accounting")
+    release_boundary_gate = None
+    if isinstance(release_path_accounting, Mapping):
+        candidate = release_path_accounting.get("strict_release_boundary")
+        if isinstance(candidate, Mapping):
+            release_boundary_gate = copy.deepcopy(dict(candidate))
     handoff_status = (
         "DIAGNOSTIC_CURRENT_WEATHER_SNAPSHOT"
         if snapshot.get("status") == "ACCEPTED" and current_weather_ir_available
@@ -2237,6 +2243,7 @@ def build_realtime_facility_risk_handoff(snapshot: Mapping[str, object]) -> dict
             "facility_ir_fn_promotion": False,
         },
         "evidence_boundary": {
+            "strict_release_boundary": release_boundary_gate,
             "qualified_provider_packet_count": None,
             "qualification_evaluated_by_realtime_monitor": False,
             "physical_validation_claim": False,
