@@ -181,7 +181,13 @@
       "case_count": 44,
       "case_asset_count": 9,
       "case_assets_outside_scope": [],
+      "case_assets_candidate_only": [
+        "inventory-depletion-pipe",
+        "vertical-handoff-vent"
+      ],
       "scope_mismatch_case_count": 0,
+      "candidate_identity_case_count": 20,
+      "candidate_manifest_record": "examples\\generic_case_asset_candidate_manifest.json",
       "scenario_family_count": 12,
       "families_with_cases": 12,
       "families_without_cases": 0,

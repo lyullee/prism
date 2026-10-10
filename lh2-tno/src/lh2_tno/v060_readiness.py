@@ -857,8 +857,17 @@ def build_v060_readiness_report(
                     "case_assets_outside_scope": equipment_case_bridge.get(
                         "case_assets_outside_scope"
                     ),
+                    "case_assets_candidate_only": equipment_case_bridge.get(
+                        "case_assets_candidate_only"
+                    ),
                     "scope_mismatch_case_count": equipment_case_bridge.get(
                         "scope_mismatch_case_count"
+                    ),
+                    "candidate_identity_case_count": equipment_case_bridge.get(
+                        "candidate_identity_case_count"
+                    ),
+                    "candidate_manifest_record": equipment_case_bridge.get(
+                        "candidate_manifest_record"
                     ),
                     "scenario_family_count": equipment_case_bridge.get(
                         "scenario_family_count"
