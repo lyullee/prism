@@ -1,0 +1,3607 @@
+{
+  "status": "DECLARED_SCOPE_EXECUTED",
+  "facility_id": "equipment-isolation-campaign",
+  "facility_digest": "096608f85a2542083f3cf19c2890920f0263303903fb597131bb2b8b64d75d20",
+  "campaign_digest": "d55c3fdb205089e659d4ebaa83e3696efef64143f3ea537bbd20185f74827c0e",
+  "scope_provenance": "all five reviewed LH2_PIPE area bins use independent native transient equipment-twin runs with explicit isolation-success and isolation-failure branches through PH validation, SLABx-LH2/SLABx consequence chain and native TNO IR/F-N; barrier probability and geometry are synthetic",
+  "events": [
+    {
+      "id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "model_component_id": "terminal_pipe",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.01%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 3.4e-06,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 3.4e-06,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 3.2554838825238133e-07,
+      "marginal_p95_per_year": 3.5511808894583394e-05,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 1.1283791670955125e-05,
+        "area_fraction": 0.0001,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "model_component_id": "terminal_pipe",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 1.6e-06,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 1.6e-06,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 1.3386517161273802e-07,
+      "marginal_p95_per_year": 1.9123984561800025e-05,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 3.568248232305542e-05,
+        "area_fraction": 0.001,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "model_component_id": "terminal_pipe",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 8e-07,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 8e-07,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 7.464077255362197e-08,
+      "marginal_p95_per_year": 8.573615206250296e-06,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.00011283791670955125,
+        "area_fraction": 0.01,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "model_component_id": "terminal_pipe",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_10%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 3.9e-07,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 3.9e-07,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 3.5602303956530105e-08,
+      "marginal_p95_per_year": 4.2723586050594105e-06,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.0003568248232305542,
+        "area_fraction": 0.1,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    },
+    {
+      "id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "model_component_id": "terminal_pipe",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_100%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 1.9e-07,
+      "rate_unit": "m^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "annual_frequency_per_year": 1.9e-07,
+      "statistic": "published_median",
+      "marginal_p05_per_year": 6.489473098932577e-09,
+      "marginal_p95_per_year": 5.563320009666715e-06,
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.0011283791670955124,
+        "area_fraction": 1.0,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "synthetic one-metre LH2-service pipe boundary; not a site frequency claim",
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
+      ],
+      "physical_validation_claim": false
+    }
+  ],
+  "annual_conditions": [
+    {
+      "id": "D-3ms-west",
+      "annual_probability": 0.4,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    },
+    {
+      "id": "D-4ms-west",
+      "annual_probability": 0.6,
+      "weather": {
+        "wind_speed_m_s": 4.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    }
+  ],
+  "cases": [
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.4e-06,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 8456.87390002422,
+      "request_digest": "4e6f00117339e9af1388194fcb23e97ae15752680a422c5bf262d2577777dcbe",
+      "result_digest": "fe43cd710db7cd4eb03c4f2d86515f92f53c18fbb7c5c108f130c765cda21fdf",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 719.5748999947682,
+        "pool": 0.012899981811642647,
+        "near_field_and_dispersion": 5582.092300057411,
+        "cloud_observation": 1769.7249000193551,
+        "fire_explosion_damage_risk": 120.24239997845143
+      },
+      "mass_ledger": {
+        "released_kg": 2.4299422405137615e-09,
+        "direct_gas_kg": 2.4299422405137615e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.4e-06,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 7799.886099994183,
+      "request_digest": "50e3078c77b2ce38f9085ae14597d3581d1912e49cf5dde3313ddd6b38be0618",
+      "result_digest": "455ee023fe8db9675be44747418cb3a7bbbaed71fec7a8f3c4392e254376b705",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 740.7025001011789,
+        "pool": 0.013299984857439995,
+        "near_field_and_dispersion": 4837.764300056733,
+        "cloud_observation": 1793.0580000393093,
+        "fire_explosion_damage_risk": 128.74319998081774
+      },
+      "mass_ledger": {
+        "released_kg": 2.4299422405137615e-09,
+        "direct_gas_kg": 2.4299422405137615e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.4e-06,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 14689.030100009404,
+      "request_digest": "33178747a5422426440c27d270fe79deface8fb74e11b6405d97653a0974b342",
+      "result_digest": "e6a6ff0b8a0f28f22508e620bfc04431b3bb715aedb5a2e7586789e5e6ec720e",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 725.0877999467775,
+        "pool": 0.013499986380338669,
+        "near_field_and_dispersion": 11157.808299991302,
+        "cloud_observation": 2376.472400035709,
+        "fire_explosion_damage_risk": 136.69760001357645
+      },
+      "mass_ledger": {
+        "released_kg": 4.859877311503615e-09,
+        "direct_gas_kg": 4.859877311503615e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.4e-06,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 14660.824900027364,
+      "request_digest": "fa6c7176ab742673a3509627a20206af068e072668ac79643ab00d572753a2de",
+      "result_digest": "5f00f7b2a5fd5928ce5adf12919bed0e2c053673c69cb2a68eda280666cf2095",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 719.1319999983534,
+        "pool": 0.013399985618889332,
+        "near_field_and_dispersion": 11123.743100091815,
+        "cloud_observation": 2400.9059000527486,
+        "fire_explosion_damage_risk": 136.0069999936968
+      },
+      "mass_ledger": {
+        "released_kg": 4.859877311503615e-09,
+        "direct_gas_kg": 4.859877311503615e-09,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 1.6e-06,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 9829.330799984746,
+      "request_digest": "6823584103ae9c53c93dd733b80ebc427ee29a5761d030e379df40135f1f0c73",
+      "result_digest": "d32c03e7545462aa4119797199943f6df0367e2b70cd86de6e49ce59cda5809f",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 720.1425000093877,
+        "pool": 0.013400102034211159,
+        "near_field_and_dispersion": 6974.765099934302,
+        "cloud_observation": 1766.9273000210524,
+        "fire_explosion_damage_risk": 120.90209999587387
+      },
+      "mass_ledger": {
+        "released_kg": 2.429941930073357e-08,
+        "direct_gas_kg": 2.429941930073357e-08,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 1.6e-06,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 9890.821699984372,
+      "request_digest": "6c6442c0bb08a2a19ec1153ecc26b4ded8ce257ddf0f9929f42817f9eaf9b806",
+      "result_digest": "5f5540184b0af73a16c33bbbe2331e670777c41bcde7c58ecb32a9362f74feee",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 732.7056999783963,
+        "pool": 0.013699987903237343,
+        "near_field_and_dispersion": 6967.540399986319,
+        "cloud_observation": 1799.2380999494344,
+        "fire_explosion_damage_risk": 123.82330000400543
+      },
+      "mass_ledger": {
+        "released_kg": 2.429941930073357e-08,
+        "direct_gas_kg": 2.429941930073357e-08,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 1.6e-06,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 17907.039700075984,
+      "request_digest": "282e50001a8eabee8b73ba4d20de46ea8b43ab0bf5fa4cf692d7abea30afc5eb",
+      "result_digest": "077ca6a968003a95d55260bb4ab6c36bb4ddc8855d81052fb214a729b4ea0bfe",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 730.1602000370622,
+        "pool": 0.01309998333454132,
+        "near_field_and_dispersion": 14335.082900011912,
+        "cloud_observation": 2448.5574999125674,
+        "fire_explosion_damage_risk": 139.0051000053063
+      },
+      "mass_ledger": {
+        "released_kg": 4.859876043874114e-08,
+        "direct_gas_kg": 4.859876043874114e-08,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 1.6e-06,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 17601.277100038715,
+      "request_digest": "70edf13e46760181d3e2c0720276851ef496fb51f4d5b8ab1d59131cc6143ec4",
+      "result_digest": "b244298a6a33a9413d266d4c3f3b460658b07a8a557c9b9e4d497f5c05b27ab6",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 741.8199999956414,
+        "pool": 0.015700003132224083,
+        "near_field_and_dispersion": 13999.391800025478,
+        "cloud_observation": 2431.805800064467,
+        "fire_explosion_damage_risk": 137.54670007620007
+      },
+      "mass_ledger": {
+        "released_kg": 4.859876043874114e-08,
+        "direct_gas_kg": 4.859876043874114e-08,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 8e-07,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 12455.293099978007,
+      "request_digest": "434c41defbff1fb3c26dbf273967cbd26b0b5186062aeb349fdcd927c452241f",
+      "result_digest": "63a0c4d1111ccb406a74b5d6e5ce6e08ecd90838b97600788d94c46933b550a8",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 722.1757000079378,
+        "pool": 0.01309998333454132,
+        "near_field_and_dispersion": 9542.950500035658,
+        "cloud_observation": 1828.5084000090137,
+        "fire_explosion_damage_risk": 91.79400000721216
+      },
+      "mass_ledger": {
+        "released_kg": 2.429938825669345e-07,
+        "direct_gas_kg": 2.429938825669345e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 8e-07,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 12279.05999997165,
+      "request_digest": "f71cdb586b180cbc398d69376455f90f5bd02a43dd1d9abbd88ee6e01c311d68",
+      "result_digest": "bd254c16711ca5e97850097f5ecb11d7a481ed20d8a26853ba72affb5e73f4e1",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 746.7112001031637,
+        "pool": 0.013999990187585354,
+        "near_field_and_dispersion": 9493.000000016764,
+        "cloud_observation": 1684.1973999980837,
+        "fire_explosion_damage_risk": 84.15470004547387
+      },
+      "mass_ledger": {
+        "released_kg": 2.429938825669345e-07,
+        "direct_gas_kg": 2.429938825669345e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 8e-07,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 25631.096399971284,
+      "request_digest": "a2c53e6f1f3fedf853fbeac32bd9048950478c742db2452558c4083df5a514c0",
+      "result_digest": "df85b106c2d83d39738f6ac3841d2c14ec2bc124514b752f3f2087df222ba501",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 794.8905000230297,
+        "pool": 0.013400102034211159,
+        "near_field_and_dispersion": 21916.543600033037,
+        "cloud_observation": 2475.106199970469,
+        "fire_explosion_damage_risk": 146.10130002256483
+      },
+      "mass_ledger": {
+        "released_kg": 4.859863367578811e-07,
+        "direct_gas_kg": 4.859863367578811e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 8e-07,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 26644.870699965395,
+      "request_digest": "a4fc867efaf5bbc6e68ff199f5141a5b55c8e51b5e8ec8cb321bad32a582ff9e",
+      "result_digest": "fc9d0c88d260947ea3dbddb648371baf8e6d9d0b8e740789d92900675a849cb2",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 738.8588000321761,
+        "pool": 0.013599987141788006,
+        "near_field_and_dispersion": 22817.91109999176,
+        "cloud_observation": 2630.888700019568,
+        "fire_explosion_damage_risk": 147.52390002831817
+      },
+      "mass_ledger": {
+        "released_kg": 4.859863367578811e-07,
+        "direct_gas_kg": 4.859863367578811e-07,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.9e-07,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 27595.018699998036,
+      "request_digest": "6af97384ce6d0278fceac22cee71c58611878524b2ec1a5403a6491f3f469abb",
+      "result_digest": "97f2588d758ff75a7342776e94662f54e6490cd6f45a8626ad8ce9ee864b891d",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 773.1625000014901,
+        "pool": 0.014199991710484028,
+        "near_field_and_dispersion": 24467.68899995368,
+        "cloud_observation": 1909.5975999953225,
+        "fire_explosion_damage_risk": 128.5418999614194
+      },
+      "mass_ledger": {
+        "released_kg": 2.429907781623369e-06,
+        "direct_gas_kg": 2.429907781623369e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.9e-07,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 22092.632099986076,
+      "request_digest": "f5514afc8f54f90574911ad4737854add8deb8d043aa6729dfa185c60a7b91ec",
+      "result_digest": "c665b470c560f66ef55d51ce0756e495fcaade44c176fb33573d10706d89368f",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 726.9123999867588,
+        "pool": 0.013100099749863148,
+        "near_field_and_dispersion": 19226.172299939208,
+        "cloud_observation": 1707.3319000191987,
+        "fire_explosion_damage_risk": 122.33419995754957
+      },
+      "mass_ledger": {
+        "released_kg": 2.429907781623369e-06,
+        "direct_gas_kg": 2.429907781623369e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 3.9e-07,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 47863.83519996889,
+      "request_digest": "21e69259b53a0b6bd857216b6766ba65530e33342f7e9089dced8315fe8dff90",
+      "result_digest": "cf4567587dcc31c7c0ced5f5ebc4bf69e05f4501e908a7c625021b358ca916da",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 732.9665999859571,
+        "pool": 0.014499993994832039,
+        "near_field_and_dispersion": 44176.67640000582,
+        "cloud_observation": 2517.505199997686,
+        "fire_explosion_damage_risk": 117.42529994808137
+      },
+      "mass_ledger": {
+        "released_kg": 4.859736604577814e-06,
+        "direct_gas_kg": 4.859736604577814e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 3.9e-07,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 47340.03859991208,
+      "request_digest": "a3b6eecaa2afc676b3fd49d60d5a67a5a7d507013015ad816026bb0e573d5008",
+      "result_digest": "d704b9accd4944654a44fc1ba6f603800f8797d1087f8bb71827a7baa2254ea2",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 821.1402000160888,
+        "pool": 0.013499986380338669,
+        "near_field_and_dispersion": 43662.30590001214,
+        "cloud_observation": 2407.7375000342727,
+        "fire_explosion_damage_risk": 139.81279998552054
+      },
+      "mass_ledger": {
+        "released_kg": 4.859736604577814e-06,
+        "direct_gas_kg": 4.859736604577814e-06,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 1.9e-07,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 22926.238600048237,
+      "request_digest": "a47a5952cfd133b84be75681bbc375769380958114445e459dac10ddbe8edcac",
+      "result_digest": "a06dfe094d6df29125aca5f440d56c7d1c5bc6a5bd764544459f71fcb71234ed",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 726.9539999542758,
+        "pool": 0.01309998333454132,
+        "near_field_and_dispersion": 19927.454399992712,
+        "cloud_observation": 1857.6229999307543,
+        "fire_explosion_damage_risk": 115.72060000617057
+      },
+      "mass_ledger": {
+        "released_kg": 2.4295973405856194e-05,
+        "direct_gas_kg": 2.4295973405856194e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 1.9e-07,
+      "release_branch_probability": 0.99,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 24783.234899980016,
+      "request_digest": "513544492feac7302449a4f062e371e0f8a24d01bfceddde7c938ad2f1bb8f20",
+      "result_digest": "9f27e64ef0d976f886b3d171cceb86946e8d7e051c03cc751a18a5cf7029bd32",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 740.7294999575242,
+        "pool": 0.013199984095990658,
+        "near_field_and_dispersion": 21728.989099967293,
+        "cloud_observation": 1916.6953000240028,
+        "fire_explosion_damage_risk": 114.8665000218898
+      },
+      "mass_ledger": {
+        "released_kg": 2.4295973405856194e-05,
+        "direct_gas_kg": 2.4295973405856194e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-3ms-west",
+      "initiating_frequency_per_year": 1.9e-07,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.4,
+      "status": "EXECUTED",
+      "elapsed_ms": 48982.023900025524,
+      "request_digest": "abb2ad7e8f36c680e0d0b2b0f08c3b5519e0023cc714e1e9a0a3599452ac875c",
+      "result_digest": "02e542e6a95624a9cdaf5eb5a42ad646c04fc695634fc3c2650c38ba3c9da9fd",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 802.7042000321671,
+        "pool": 0.013400102034211159,
+        "near_field_and_dispersion": 45177.49739997089,
+        "cloud_observation": 2547.8515999857336,
+        "fire_explosion_damage_risk": 138.45780002884567
+      },
+      "mass_ledger": {
+        "released_kg": 4.858468969799684e-05,
+        "direct_gas_kg": 4.858468969799684e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "D-4ms-west",
+      "initiating_frequency_per_year": 1.9e-07,
+      "release_branch_probability": 0.010000000000000009,
+      "annual_condition_probability": 0.6,
+      "status": "EXECUTED",
+      "elapsed_ms": 49543.07030001655,
+      "request_digest": "7460d15a669ee464a798716c43125edf9c54791fc49d32949ca855aa50b3058f",
+      "result_digest": "878be6f277691d9c226cb89e7cb47fbfd1b068257b397b7b4e3e9be0ff55475c",
+      "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+      "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+      "stage_elapsed_ms": {
+        "source": 745.6871999893337,
+        "pool": 0.013899989426136017,
+        "near_field_and_dispersion": 45902.022700058296,
+        "cloud_observation": 2456.6256999969482,
+        "fire_explosion_damage_risk": 150.2559999935329
+      },
+      "mass_ledger": {
+        "released_kg": 4.858468969799684e-05,
+        "direct_gas_kg": 4.858468969799684e-05,
+        "ground_inflow_kg": 0.0,
+        "pool_evaporated_kg": 0.0,
+        "pool_remaining_kg": 0.0,
+        "pool_domain_escape_kg": 0.0,
+        "ground_liquid_in_flight_kg": 0.0,
+        "pool_numerical_adjustment_kg": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "termination": {
+        "basis": "synthetic_diagnostic_horizon",
+        "time_s": 0.5,
+        "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+      }
+    }
+  ],
+  "uncomputed_cases": [],
+  "excluded_model_components": {},
+  "coverage": {
+    "generated_initiation_frequency_per_year": 6.38e-06,
+    "fully_executed_case_weighted_frequency_per_year": 6.38e-06,
+    "fraction_of_generated_initiation_frequency": 1.0,
+    "meaning": "frequency coverage only; not fraction of risk captured, not physical validation"
+  },
+  "declared_scope_numerically_complete": true,
+  "synthetic_release_horizon_present": true,
+  "declared_scope_annual_ir_low_high": {
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "known_contribution_annual_ir_low_high": {
+    "near_worker": [
+      0.0,
+      0.0
+    ],
+    "downwind_worker": [
+      0.0,
+      0.0
+    ],
+    "side_worker": [
+      0.0,
+      0.0
+    ],
+    "distant_worker": [
+      0.0,
+      0.0
+    ]
+  },
+  "declared_scope_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "known_contribution_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    },
+    {
+      "expected_deaths": [],
+      "cumulative_frequency_per_year": []
+    }
+  ],
+  "total_facility_annual_ir_low_high": null,
+  "total_facility_expected_death_fn_low_high": null,
+  "risk_atoms": [
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.028512000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.04276800000000001,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0396,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.28512000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.042768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.064152,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0594,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.42768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0004000000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0006480000000000007,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.0006000000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.4e-06,
+      "conditional_weight": 0.004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.028512000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.04276800000000001,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0396,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.28512000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.042768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.064152,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0594,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.42768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0004000000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0006480000000000007,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.0006000000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.6e-06,
+      "conditional_weight": 0.004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.028512000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.04276800000000001,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0396,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.28512000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.042768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.064152,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0594,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.42768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0004000000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0006480000000000007,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.0006000000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_1%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 8e-07,
+      "conditional_weight": 0.004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.028512000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.04276800000000001,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0396,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.28512000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.042768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.064152,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0594,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.42768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0004000000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0006480000000000007,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.0006000000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_10%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 3.9e-07,
+      "conditional_weight": 0.004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.028512000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.04276800000000001,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0396,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.28512000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.042768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.064152,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0594,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-success",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.42768,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0004000000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-3ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.002880000000000003,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_explosion",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "delayed_flash_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0006480000000000007,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "direct_fire",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.0006000000000000006,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "event_id": "equipment-isolation-campaign/terminal_pipe_asset/AREA_100%",
+      "asset_id": "terminal_pipe_asset",
+      "annual_condition_id": "D-4ms-west",
+      "release_branch_id": "provider-isolation-failure",
+      "ignition_branch": "no_ignition",
+      "initiating_frequency_per_year": 1.9e-07,
+      "conditional_weight": 0.004320000000000004,
+      "receptor_harm_low_high": {
+        "near_worker": [
+          0.0,
+          0.0
+        ],
+        "downwind_worker": [
+          0.0,
+          0.0
+        ],
+        "side_worker": [
+          0.0,
+          0.0
+        ],
+        "distant_worker": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_deaths_low_high": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "aggregation_provenance": {
+    "ok": true,
+    "limitation": "Native legacy risk.total_individual_risk and risk.fn_curve; expected-death convention; external physics/coverage must be checked separately.",
+    "environment": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "dependencies": {
+        "CoolProp": "8.0.0",
+        "numpy": "2.5.3",
+        "scipy": "1.18.1"
+      }
+    },
+    "request_digest": "edb0306fde17c047c4db2485d68aef95fda0ec89ac5f36b0afb9aa1cceb18f63",
+    "backend_config_digest": "c9b46fd7a14d815a810e38d3889864498b518ec92b5d1b34121e306a6d4603dc",
+    "worker_sha256": "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c",
+    "adapter_source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+    "elapsed_ms": 269.2713999422267,
+    "physical_validation_claim": false
+  },
+  "timing": {
+    "fresh_physics_cases": 20,
+    "case_min_ms": 7799.886099994183,
+    "case_median_ms": 19999.83590003103,
+    "case_max_ms": 49543.07030001655,
+    "campaign_elapsed_ms": 469351.71029996127,
+    "distribution": "across cases; not repeated-run latency qualification"
+  },
+  "semantics": {
+    "individual_risk": "fixed person at each receptor; no population occupancy multiplier",
+    "societal_risk": "native legacy F-N of expected deaths per event/weather/barrier/ignition outcome; not a joint casualty distribution",
+    "weighting": "initiating frequency times annual joint condition times release/barrier branch times ignition; each once",
+    "endpoints": "two declared radiation sensitivities and within-branch harm union bounds; not frequency credible intervals",
+    "population": "disjoint outdoor groups at representative receptors; temporal presence in annual conditions"
+  },
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "one_hz_fresh_physics_demonstrated": false
+}
