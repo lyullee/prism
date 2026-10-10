@@ -3562,5 +3562,6 @@
   "provider_port_state_live_resolver_implemented": true,
   "provider_port_state_frequency_inference": false,
   "provider_port_state_physical_validation_claim": false,
-  "provider_port_state_remote_commit": "74ab73c6234f9fc87849380b173430c732acd7a3"
+  "provider_port_state_live_state_snapshot_binding": true,
+  "provider_port_state_remote_commit": "d28340f29ac466bec76ee14d86cd6e7519c98fc2"
 }
