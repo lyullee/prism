@@ -62,6 +62,7 @@ def build_ijhe_objective_coverage_audit(
     observed_state_runtime_frames: Mapping[str, Any] | None = None,
     external_field_evidence: Mapping[str, Any] | None = None,
     external_field_model_comparison: Mapping[str, Any] | None = None,
+    validation_intake_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -87,6 +88,7 @@ def build_ijhe_objective_coverage_audit(
     observed_runtime_path = _record_path(observed_state_runtime_frames, None)
     external_field_path = _record_path(external_field_evidence, None)
     external_field_comparison_path = _record_path(external_field_model_comparison, None)
+    validation_intake_path = _record_path(validation_intake_audit, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -918,6 +920,86 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "비교 오차와 시간·기하 결합만 기록한다. measured_source_replay 또는 hash drift는 "
                 "독립 물리검증으로 승격하지 않으며, frequency·시설 QRA도 열지 않는다."
+            ),
+        ))
+
+    validation_intake_ok = (
+        isinstance(validation_intake_audit, Mapping)
+        and validation_intake_audit.get("schema_version")
+        == "prism.validation_intake_audit.v1"
+        and validation_intake_audit.get("status") == "SCREENED_NO_PROMOTION"
+        and validation_intake_audit.get("physical_validation_claim") is False
+        and validation_intake_audit.get("accident_release_validation_claim") is False
+        and validation_intake_audit.get("facility_qra_claim") is False
+        and validation_intake_audit.get("frequency_inference_performed") is False
+        and isinstance(validation_intake_audit.get("promotion_gates"), Mapping)
+        and validation_intake_audit["promotion_gates"].get("promotion_allowed") is False
+    )
+    if validation_intake_audit is not None:
+        intake_inputs = (
+            validation_intake_audit.get("inputs", {})
+            if isinstance(validation_intake_audit, Mapping)
+            else {}
+        )
+        intake_inspection = (
+            intake_inputs.get("inspection_timeseries", {})
+            if isinstance(intake_inputs, Mapping)
+            else {}
+        )
+        intake_aggregate = (
+            intake_inspection.get("aggregate", {})
+            if isinstance(intake_inspection, Mapping)
+            else {}
+        )
+        rows.append(_row(
+            "diagnostic_validation_intake_readiness",
+            "검사센터 시계열과 외부 검증 장부를 입력 준비도만으로 기록하고 사고 방출·빈도·시설 QRA로 승격하지 않아야 한다",
+            "PASS" if validation_intake_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(validation_intake_path,),
+            observed={
+                "intake_status": (
+                    validation_intake_audit.get("status")
+                    if isinstance(validation_intake_audit, Mapping)
+                    else None
+                ),
+                "source_file_count": (
+                    intake_inspection.get("source_file_count")
+                    if isinstance(intake_inspection, Mapping)
+                    else None
+                ),
+                "workbook_count": (
+                    intake_aggregate.get("workbook_count")
+                    if isinstance(intake_aggregate, Mapping)
+                    else None
+                ),
+                "sheet_count": (
+                    intake_aggregate.get("sheet_count")
+                    if isinstance(intake_aggregate, Mapping)
+                    else None
+                ),
+                "numeric_signal_unit_status_count": (
+                    intake_aggregate.get("numeric_signal_unit_status_count")
+                    if isinstance(intake_aggregate, Mapping)
+                    else None
+                ),
+                "promotion_allowed": (
+                    validation_intake_audit.get("promotion_gates", {}).get("promotion_allowed")
+                    if isinstance(validation_intake_audit, Mapping)
+                    and isinstance(validation_intake_audit.get("promotion_gates"), Mapping)
+                    else None
+                ),
+                "frequency_inference_performed": (
+                    validation_intake_audit.get("frequency_inference_performed")
+                    if isinstance(validation_intake_audit, Mapping)
+                    else None
+                ),
+            },
+            blocking_reason=None if validation_intake_ok else (
+                "검증 입력 장부의 schema·승격 차단 정책·정상 운전자료 경계가 확인되지 않았다"
+            ),
+            interpretation=(
+                "검사센터 시계열은 공정 상태 후보 증거로만 보존한다. 단위·자산 crosswalk·"
+                "provider 방출 packet·독립 holdout 근거가 없으면 물리검증, 빈도, 시설 QRA를 열지 않는다."
             ),
         ))
 

@@ -335,3 +335,38 @@ def test_objective_audit_records_external_field_evidence_without_promotion():
         "diagnostic_observed_state_source_replay",
         "diagnostic_observed_state_runtime_frames",
     ]
+
+
+def test_objective_audit_records_validation_intake_without_opening_qra():
+    inputs = _inputs()
+    inputs["validation_intake_audit"] = {
+        "schema_version": "prism.validation_intake_audit.v1",
+        "status": "SCREENED_NO_PROMOTION",
+        "physical_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "facility_qra_claim": False,
+        "frequency_inference_performed": False,
+        "inputs": {
+            "inspection_timeseries": {
+                "source_file_count": 17,
+                "aggregate": {
+                    "workbook_count": 17,
+                    "sheet_count": 78,
+                    "numeric_signal_unit_status_count": {
+                        "MISSING_OR_UNCONFIRMED": 522,
+                    },
+                },
+            },
+        },
+        "promotion_gates": {"promotion_allowed": False},
+        "_record_path": "validation-intake.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_validation_intake_readiness"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["workbook_count"] == 17
+    assert check["observed"]["promotion_allowed"] is False
+    assert report["strict_facility_qra_claim"] is False

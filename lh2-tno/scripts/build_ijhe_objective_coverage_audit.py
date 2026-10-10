@@ -43,6 +43,7 @@ def main() -> int:
     parser.add_argument("--observed-state-runtime-frames", type=Path)
     parser.add_argument("--external-field-evidence", type=Path)
     parser.add_argument("--external-field-model-comparison", type=Path)
+    parser.add_argument("--validation-intake-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -98,6 +99,11 @@ def main() -> int:
             external_field_model_comparison=(
                 _object(args.external_field_model_comparison)
                 if args.external_field_model_comparison
+                else None
+            ),
+            validation_intake_audit=(
+                _object(args.validation_intake_audit)
+                if args.validation_intake_audit
                 else None
             ),
         )
