@@ -26,6 +26,7 @@
         "examples/inspection_center_observed_state_manifest.json",
         "center_scenario_structure.storage_tanks"
       ],
+      "asset_identity_evidence_refs": [],
       "mapping_basis": "Receiving scenario stream is associated with a storage-tank process state; the run does not identify one reviewed tank asset.",
       "blocking_reasons": []
     },
@@ -47,6 +48,7 @@
         "examples/inspection_center_observed_state_manifest.json",
         "center_scenario_structure.storage_vent"
       ],
+      "asset_identity_evidence_refs": [],
       "mapping_basis": "Storage-vent scenario and pressure signal identify an operating vent path, but tank identity, valve order, and stack endpoint are unresolved.",
       "blocking_reasons": []
     },
@@ -67,6 +69,7 @@
         "examples/inspection_center_observed_state_manifest.json",
         "center_scenario_structure.gas_supply_vaporizer"
       ],
+      "asset_identity_evidence_refs": [],
       "mapping_basis": "Supply boundary has pressure, temperature, and differential-pressure channels consistent with a vaporizer boundary; P&ID endpoint and branch identity remain unresolved.",
       "blocking_reasons": []
     }
@@ -78,6 +81,7 @@
   "policy": {
     "state_data_are_not_accident_sources": true,
     "candidate_class_mapping_is_not_asset_identity": true,
+    "field_confirmed_asset_identity_is_not_release_evidence": true,
     "release_event_binding_is_not_created": true,
     "frequency_is_not_assigned": true,
     "facility_ir_fn_promotion": false,

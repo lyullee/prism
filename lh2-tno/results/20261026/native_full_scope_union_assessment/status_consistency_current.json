@@ -45,6 +45,19 @@
       }
     },
     {
+      "name": "observed_component_mapping_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.observed_component_mapping_audit.v1",
+        "status": "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY",
+        "observed_component_count": 3,
+        "candidate_mapping_count": 3,
+        "exact_facility_component_count": 0,
+        "rows_valid": true,
+        "record": "results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json"
+      }
+    },
+    {
       "name": "consequence_backend_chain_audit",
       "status": "PASS",
       "evidence": {
@@ -211,7 +224,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 756
+        "full_portable_test_count": 761
       }
     },
     {
@@ -242,7 +255,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 756
+        "full_portable_test_count": 761
       }
     },
     {

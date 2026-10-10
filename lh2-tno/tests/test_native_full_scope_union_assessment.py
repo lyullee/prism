@@ -203,7 +203,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
         for row in provider_packet_collection_manifest["rows"]
     )
     assert status_consistency["status"] == "CONSISTENT"
-    assert len(status_consistency["checks"]) == 23
+    assert len(status_consistency["checks"]) == 24
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "provider_packet_input_audit"
@@ -211,6 +211,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "observed_state_release_binding_audit"
+    )["status"] == "PASS"
+    assert next(
+        row for row in status_consistency["checks"]
+        if row["name"] == "observed_component_mapping_audit"
     )["status"] == "PASS"
     assert next(
         row for row in status_consistency["checks"]

@@ -3,9 +3,10 @@
 The inspection-center time series can identify *what kind of equipment* a
 stream appears to describe, but the current package does not have a reviewed
 asset register, P&ID endpoint identity, or accident-release packet for those
-streams.  This audit therefore records candidate component classes and
-aliases without creating a facility component ID, release event, frequency,
-or QRA result.
+streams.  This audit records candidate classes and aliases.  A facility
+component ID is accepted only when the manifest explicitly marks the asset
+identity as field-confirmed and supplies separate identity evidence; even
+then, no release event, frequency, or QRA result is created.
 """
 from __future__ import annotations
 
@@ -44,7 +45,7 @@ def audit_observed_component_mapping(
     observed_state_evidence: Mapping[str, Any],
     mapping_manifest: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Return a fail-closed candidate-class mapping report."""
+    """Return a fail-closed component mapping report."""
     if not isinstance(observed_state_evidence, Mapping):
         raise ValueError("observed_state_evidence must be an object")
     if observed_state_evidence.get("schema_version") != EVIDENCE_SCHEMA:
@@ -104,14 +105,35 @@ def audit_observed_component_mapping(
         if not evidence_refs:
             reasons.append("at least one evidence reference is required")
         review_status = str(mapping.get("review_status") or "").strip()
-        if review_status not in {"candidate", "unresolved"}:
-            reasons.append("review_status must remain candidate or unresolved until asset identity is reviewed")
         facility_component_id = str(mapping.get("facility_component_id") or "").strip()
+        identity_refs = _string_list(
+            mapping.get("asset_identity_evidence_refs", []),
+            f"mapping {mapping_id}.asset_identity_evidence_refs",
+        )
         if facility_component_id:
-            reasons.append("facility_component_id cannot be promoted by this diagnostic mapping audit")
-        status = "CANDIDATE_CLASS_MAPPING" if not reasons else "MAPPING_INPUT_INVALID"
+            if review_status != "field_confirmed":
+                reasons.append(
+                    "facility_component_id requires review_status=field_confirmed"
+                )
+            if not identity_refs:
+                reasons.append(
+                    "field-confirmed facility_component_id requires asset identity evidence"
+                )
+        elif review_status not in {"candidate", "unresolved"}:
+            reasons.append(
+                "review_status must be candidate or unresolved when facility_component_id is absent"
+            )
+        status = (
+            "EXACT_COMPONENT_MAPPING_NO_RELEASE"
+            if facility_component_id and not reasons
+            else "CANDIDATE_CLASS_MAPPING"
+            if not facility_component_id and not reasons
+            else "MAPPING_INPUT_INVALID"
+        )
         if status == "CANDIDATE_CLASS_MAPPING":
             candidate_ids.add(observed_component_id)
+        elif status == "EXACT_COMPONENT_MAPPING_NO_RELEASE":
+            exact_ids.add(observed_component_id)
         else:
             blocking_reasons.extend(reasons)
         rows.append({
@@ -120,10 +142,11 @@ def audit_observed_component_mapping(
             "source_ids": source_ids,
             "candidate_component_class": candidate_class,
             "candidate_facility_asset_aliases": aliases,
-            "facility_component_id": None,
+            "facility_component_id": facility_component_id or None,
             "review_status": review_status,
             "status": status,
             "evidence_refs": evidence_refs,
+            "asset_identity_evidence_refs": identity_refs,
             "mapping_basis": str(mapping.get("mapping_basis") or "").strip(),
             "blocking_reasons": list(dict.fromkeys(reasons)),
         })
@@ -136,21 +159,32 @@ def audit_observed_component_mapping(
         blocking_reasons.append(f"mapping contains components absent from evidence: {extra_components}")
     if len(rows) != len(observed):
         blocking_reasons.append("mapping manifest must contain exactly one row per observed component")
-    complete_candidate_mapping = (
+    complete_mapping = (
         not blocking_reasons
-        and len(candidate_ids) == len(observed)
-        and all(row["status"] == "CANDIDATE_CLASS_MAPPING" for row in rows)
+        and len(candidate_ids) + len(exact_ids) == len(observed)
+        and all(
+            row["status"]
+            in {"CANDIDATE_CLASS_MAPPING", "EXACT_COMPONENT_MAPPING_NO_RELEASE"}
+            for row in rows
+        )
     )
-    status = (
-        "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY"
-        if complete_candidate_mapping
-        else "PARTIAL_OR_INVALID_COMPONENT_MAPPINGS"
-    )
-    if complete_candidate_mapping:
+    if complete_mapping and exact_ids and not candidate_ids:
+        status = "EXACT_COMPONENT_MAPPINGS_NO_RELEASE"
+        blocking_reasons = ["provider release event binding remains separate and empty"]
+    elif complete_mapping and candidate_ids and exact_ids:
+        status = "MIXED_COMPONENT_MAPPINGS_NO_RELEASE"
+        blocking_reasons = [
+            "some exact facility asset identities remain unresolved",
+            "provider release event binding remains separate and empty",
+        ]
+    elif complete_mapping:
+        status = "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY"
         blocking_reasons = [
             "exact facility asset identity is unresolved",
             "provider release event binding remains separate and empty",
         ]
+    else:
+        status = "PARTIAL_OR_INVALID_COMPONENT_MAPPINGS"
     return {
         "schema": SCHEMA,
         "status": status,
@@ -162,7 +196,8 @@ def audit_observed_component_mapping(
         "blocking_reasons": list(dict.fromkeys(blocking_reasons)),
         "policy": {
             "state_data_are_not_accident_sources": True,
-            "candidate_class_mapping_is_not_asset_identity": True,
+            "candidate_class_mapping_is_not_asset_identity": not bool(exact_ids),
+            "field_confirmed_asset_identity_is_not_release_evidence": True,
             "release_event_binding_is_not_created": True,
             "frequency_is_not_assigned": True,
             "facility_ir_fn_promotion": False,

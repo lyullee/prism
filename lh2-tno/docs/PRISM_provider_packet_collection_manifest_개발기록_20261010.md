@@ -88,10 +88,11 @@ python scripts/audit_status_consistency.py `
   --coverage results/20261026/native_full_scope_union_assessment/facility_case_packet_coverage.json `
   --provider-packet-input-audit results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json `
   --observed-state-release-binding-audit results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json `
+  --observed-component-mapping-audit results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json `
   --consequence-backend-chain-audit results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json `
   --provider-packet-collection-manifest results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json `
   --output results/20261026/native_full_scope_union_assessment/status_consistency_current.json
 ```
 
-현재 일관성 결과는 23개 검사 통과입니다. 이 검사는 수집 준비 상태를 확인할 뿐,
+현재 일관성 결과는 24개 검사 통과입니다. 이 검사는 수집 준비 상태를 확인할 뿐,
 자료가 없는데도 facility QRA를 열지 않습니다.

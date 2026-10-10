@@ -61,3 +61,19 @@ def test_mapping_with_facility_id_is_fail_closed():
     assert report["status"] == "PARTIAL_OR_INVALID_COMPONENT_MAPPINGS"
     assert report["candidate_mapping_count"] == 1
     assert any("facility_component_id" in reason for reason in report["blocking_reasons"])
+
+
+def test_field_confirmed_asset_identity_is_allowed_but_release_stays_closed():
+    manifest = deepcopy(_manifest())
+    mapping = manifest["mappings"][0]
+    mapping["facility_component_id"] = "TK-1101"
+    mapping["review_status"] = "field_confirmed"
+    mapping["asset_identity_evidence_refs"] = ["pid:TK-1101"]
+    report = audit_observed_component_mapping(_evidence(), manifest)
+    assert report["status"] == "MIXED_COMPONENT_MAPPINGS_NO_RELEASE"
+    assert report["candidate_mapping_count"] == 1
+    assert report["exact_facility_component_count"] == 1
+    row = next(item for item in report["rows"] if item["observed_component_id"] == "intake")
+    assert row["status"] == "EXACT_COMPONENT_MAPPING_NO_RELEASE"
+    assert row["facility_component_id"] == "TK-1101"
+    assert report["policy"]["release_event_binding_is_not_created"] is True

@@ -99,6 +99,8 @@ def build_status_consistency_report(
     provider_packet_input_audit_filename: str | None = None,
     observed_state_release_binding_audit: Mapping[str, Any] | None = None,
     observed_state_release_binding_audit_filename: str | None = None,
+    observed_component_mapping_audit: Mapping[str, Any] | None = None,
+    observed_component_mapping_audit_filename: str | None = None,
     consequence_backend_chain_audit: Mapping[str, Any] | None = None,
     consequence_backend_chain_audit_filename: str | None = None,
     provider_packet_collection_manifest: Mapping[str, Any] | None = None,
@@ -286,6 +288,96 @@ def build_status_consistency_report(
                 "unmapped_component_count": unmapped_count,
                 "record": current_status.get(
                     "current_union_observed_state_release_binding_audit_record"
+                ),
+            },
+        )
+    if observed_component_mapping_audit is not None:
+        mapping_filename = (
+            observed_component_mapping_audit_filename
+            or "observed_component_mapping_audit.json"
+        )
+        mapping_status = observed_component_mapping_audit.get("status")
+        observed_count = observed_component_mapping_audit.get("observed_component_count")
+        candidate_count = observed_component_mapping_audit.get("candidate_mapping_count")
+        exact_count = observed_component_mapping_audit.get(
+            "exact_facility_component_count"
+        )
+        mapping_rows = observed_component_mapping_audit.get("rows")
+        rows_valid = (
+            isinstance(mapping_rows, Sequence)
+            and not isinstance(mapping_rows, (str, bytes))
+            and isinstance(observed_count, int)
+            and len(mapping_rows) == observed_count
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status")
+                in {"CANDIDATE_CLASS_MAPPING", "EXACT_COMPONENT_MAPPING_NO_RELEASE"}
+                and (
+                    row.get("facility_component_id") is None
+                    if row.get("status") == "CANDIDATE_CLASS_MAPPING"
+                    else isinstance(row.get("facility_component_id"), str)
+                    and bool(row.get("facility_component_id"))
+                )
+                for row in mapping_rows
+            )
+        )
+        _check(
+            checks,
+            "observed_component_mapping_audit",
+            observed_component_mapping_audit.get("schema")
+            == "prism.observed_component_mapping_audit.v1"
+            and mapping_status
+            in {
+                "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY",
+                "EXACT_COMPONENT_MAPPINGS_NO_RELEASE",
+                "MIXED_COMPONENT_MAPPINGS_NO_RELEASE",
+            }
+            and isinstance(observed_count, int)
+            and observed_count > 0
+            and isinstance(candidate_count, int)
+            and isinstance(exact_count, int)
+            and candidate_count + exact_count == observed_count
+            and rows_valid
+            and isinstance(
+                observed_component_mapping_audit.get("policy", {}).get(
+                    "candidate_class_mapping_is_not_asset_identity"
+                ),
+                bool,
+            )
+            and observed_component_mapping_audit.get("policy", {}).get(
+                "field_confirmed_asset_identity_is_not_release_evidence"
+            ) is True
+            and observed_component_mapping_audit.get("policy", {}).get(
+                "release_event_binding_is_not_created"
+            ) is True
+            and observed_component_mapping_audit.get("policy", {}).get(
+                "facility_ir_fn_promotion"
+            ) is False
+            and all(
+                _endswith(
+                    status.get("current_union_observed_component_mapping_audit_record"),
+                    mapping_filename,
+                )
+                for status in (current_status, development_goal)
+            )
+            and all(
+                isinstance(
+                    status.get("current_union_observed_component_mapping_audit_status"),
+                    str,
+                )
+                and str(mapping_status)
+                in status["current_union_observed_component_mapping_audit_status"]
+                for status in (current_status, development_goal)
+            ),
+            {
+                "schema": observed_component_mapping_audit.get("schema"),
+                "status": mapping_status,
+                "observed_component_count": observed_count,
+                "candidate_mapping_count": candidate_count,
+                "exact_facility_component_count": exact_count,
+                "rows_valid": rows_valid,
+                "record": current_status.get(
+                    "current_union_observed_component_mapping_audit_record"
                 ),
             },
         )
