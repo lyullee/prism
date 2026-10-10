@@ -180,7 +180,11 @@ def _release_closure_worklist():
         "open_case_count": 3,
         "summary": {
             "closure_status_counts": {"ISOLATION_OPEN": 2, "TERMINATION_OPEN": 1},
-            "closure_gap_counts": {"ISOLATION_OPEN": 3, "PROVIDER_QUALIFICATION_OPEN": 3},
+            "closure_gap_counts": {
+                "ISOLATION_OPEN": 3,
+                "PROVIDER_QUALIFICATION_OPEN": 3,
+                "TERMINATION_OPEN": 1,
+            },
             "termination_basis_counts": {"inventory_depletion": 2, "synthetic_diagnostic_horizon": 1},
             "isolation_status_counts": {"not_declared": 3},
             "inventory_status_counts": {"provider_declared_inventory_depletion": 2, "not_inventory_termination": 1},
@@ -296,6 +300,24 @@ def test_report_validator_rejects_release_closure_case_count_drift():
     )
     report["chain"]["release_closure_worklist"]["case_count"] = 2
     with pytest.raises(V060ReadinessError, match="status counts must equal case count"):
+        validate_v060_readiness_report(report)
+
+
+def test_report_validator_rejects_release_closure_open_status_drift():
+    report = build_v060_readiness_report(
+        **_inputs(), release_closure_worklist=_release_closure_worklist()
+    )
+    report["chain"]["release_closure_worklist"]["open_case_count"] = 2
+    with pytest.raises(V060ReadinessError, match="open cases must equal non-ready status counts"):
+        validate_v060_readiness_report(report)
+
+
+def test_report_validator_rejects_release_closure_gap_summary_drift():
+    report = build_v060_readiness_report(
+        **_inputs(), release_closure_worklist=_release_closure_worklist()
+    )
+    report["chain"]["release_closure_worklist"]["termination_open_case_count"] = 0
+    with pytest.raises(V060ReadinessError, match="termination_open_case_count"):
         validate_v060_readiness_report(report)
 
 

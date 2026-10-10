@@ -1388,6 +1388,40 @@ def validate_v060_readiness_report(
                     errors.append(
                         "release closure worklist status counts must equal case count"
                     )
+                ready_count = status_counts.get("READY_FOR_STRICT_REVIEW", 0)
+                if (
+                    release_closure.get("case_count") is not None
+                    and release_closure.get("open_case_count") is not None
+                    and isinstance(ready_count, int)
+                    and not isinstance(ready_count, bool)
+                    and release_closure.get("open_case_count")
+                    != release_closure.get("case_count") - ready_count
+                ):
+                    errors.append(
+                        "release closure worklist open cases must equal non-ready status counts"
+                    )
+            gap_counts = release_closure.get("closure_gap_counts")
+            if isinstance(gap_counts, Mapping):
+                summary_field_to_gap = {
+                    "provider_packet_required_case_count": "PROVIDER_QUALIFICATION_OPEN",
+                    "mass_closure_open_case_count": "MASS_CLOSURE_OPEN",
+                    "isolation_open_case_count": "ISOLATION_OPEN",
+                    "termination_open_case_count": "TERMINATION_OPEN",
+                    "inventory_closure_open_case_count": "INVENTORY_CLOSURE_OPEN",
+                }
+                for field, gap_name in summary_field_to_gap.items():
+                    summary_count = release_closure.get(field)
+                    gap_count = gap_counts.get(gap_name, 0)
+                    if (
+                        isinstance(summary_count, int)
+                        and not isinstance(summary_count, bool)
+                        and isinstance(gap_count, int)
+                        and not isinstance(gap_count, bool)
+                        and summary_count != gap_count
+                    ):
+                        errors.append(
+                            f"release closure worklist {field} must equal closure gap count {gap_name}"
+                        )
             if (
                 release_closure.get("case_count") is not None
                 and chain.get("case_count") is not None
