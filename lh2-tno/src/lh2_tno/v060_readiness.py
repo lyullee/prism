@@ -329,6 +329,57 @@ def _release_closure_worklist_summary(
     }
 
 
+def _frequency_port_binding_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
+    """Expose the reviewed accident-port trace in the readiness report.
+
+    The public facility assessment mirrors the nested ledger field.  Readiness
+    consumers should see both copies and whether they agree, while preserving
+    legacy ledgers as explicitly unaudited.  This helper only summarizes the
+    trace; it never supplies a port, reallocates a frequency, or opens QRA.
+    """
+    root = facility.get("frequency_port_binding")
+    ledger = facility.get("facility_risk_ledger")
+    nested = ledger.get("frequency_port_binding") if isinstance(ledger, Mapping) else None
+    selected = root if isinstance(root, Mapping) else nested
+    if not isinstance(selected, Mapping):
+        return {
+            "schema": None,
+            "status": "NOT_REPORTED",
+            "port_scoped_event_count": None,
+            "port_unbound_event_count": None,
+            "all_events_port_scoped": None,
+            "case_port_binding_mismatch_count": None,
+            "risk_atom_port_binding_mismatch_count": None,
+            "mismatch_count": None,
+            "assessment_nested_mirror_match": None,
+            "diagnostic_only": True,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        }
+    mirror_match = (
+        root is None
+        or nested is None
+        or root == nested
+    )
+    def _count(name: str) -> Any:
+        value = selected.get(name)
+        return value if isinstance(value, int) and not isinstance(value, bool) else value
+    return {
+        "schema": selected.get("schema_version"),
+        "status": selected.get("status"),
+        "port_scoped_event_count": _count("port_scoped_event_count"),
+        "port_unbound_event_count": _count("port_unbound_event_count"),
+        "all_events_port_scoped": selected.get("all_events_port_scoped"),
+        "case_port_binding_mismatch_count": _count("case_port_binding_mismatch_count"),
+        "risk_atom_port_binding_mismatch_count": _count("risk_atom_port_binding_mismatch_count"),
+        "mismatch_count": _count("mismatch_count"),
+        "assessment_nested_mirror_match": mirror_match,
+        "diagnostic_only": True,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+    }
+
+
 def _runtime_profile(
     realtime: Mapping[str, Any], timing: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -557,6 +608,7 @@ def build_v060_readiness_report(
                 if release_closure is not None
                 else None
             ),
+            "frequency_port_binding": _frequency_port_binding_summary(facility),
             "risk_atom_chain_closure": (
                 {
                     "status": atom_chain.get("status"),
@@ -1466,6 +1518,51 @@ def validate_v060_readiness_report(
                 errors.append(
                     "release closure worklist open cases cannot exceed case count"
                 )
+
+    frequency_port_binding = chain.get("frequency_port_binding")
+    if frequency_port_binding is not None:
+        if not isinstance(frequency_port_binding, Mapping):
+            errors.append("chain.frequency_port_binding must be an object")
+        else:
+            if frequency_port_binding.get("schema") not in {
+                None,
+                "prism.frequency_port_binding.v1",
+            }:
+                errors.append("chain.frequency_port_binding.schema is unsupported")
+            for field in (
+                "port_scoped_event_count",
+                "port_unbound_event_count",
+                "case_port_binding_mismatch_count",
+                "risk_atom_port_binding_mismatch_count",
+                "mismatch_count",
+            ):
+                if frequency_port_binding.get(field) is not None:
+                    _nonnegative_int(
+                        frequency_port_binding.get(field),
+                        f"chain.frequency_port_binding.{field}",
+                        errors,
+                    )
+            status = frequency_port_binding.get("status")
+            if status == "ALIGNED" and frequency_port_binding.get("mismatch_count") not in {
+                None,
+                0,
+            }:
+                errors.append(
+                    "aligned frequency port binding cannot contain mismatches"
+                )
+            if frequency_port_binding.get("assessment_nested_mirror_match") is False:
+                errors.append(
+                    "facility assessment and nested ledger frequency port bindings differ"
+                )
+            if frequency_port_binding.get("diagnostic_only") is not True:
+                errors.append(
+                    "frequency port binding must remain diagnostic_only"
+                )
+            for field in ("frequency_inference_allowed", "facility_qra_allowed"):
+                if frequency_port_binding.get(field) is True:
+                    errors.append(
+                        f"chain.frequency_port_binding.{field} cannot be true"
+                    )
 
     # External equipment/P&ID and frequency ledgers are readiness evidence.
     # They are intentionally copied into the v0.6.0 report without opening a

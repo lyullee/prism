@@ -55,6 +55,8 @@ PRISM은 이벤트를 만들 때 다음을 확인한다.
 
 IJHE 완료 감사에 `diagnostic_facility_frequency_port_binding` 검사도 기록된다. 이 검사는 포트 추적성만 확인하는 진단 검사이며, 통과해도 qualified provider·독립 물리검증·시설 전체 QRA 게이트를 열지 않는다.
 
+v0.6.0 준비도 보고서의 `chain.frequency_port_binding`에도 같은 추적이 요약된다. 공개 시설평가와 중첩 ledger의 복사본이 다르면 준비도 검증기가 오류를 내며, `NOT_REPORTED`·`PORT_BINDING_MISMATCH`·legacy 상태는 그대로 보류 상태로 남는다.
+
 포트가 다르면 빈도를 억지로 붙이지 않고 오류를 낸다. 이 오류는 해당 사고 케이스가 **미계산**이라는 뜻이며, 빈도를 0으로 바꾸거나 다른 포트로 옮기지 않는다.
 
 이 검사는 `bind_event()`에만 있지 않다. 이미 빈도가 들어 있는 `ConsequenceRequest`를 JSON으로 직접 만들더라도 요청 검증기가 provider 방출 포트와 `frequency_event.port_ids`를 다시 비교한다.

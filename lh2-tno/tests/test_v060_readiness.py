@@ -258,6 +258,53 @@ def test_report_validator_rejects_realtime_facility_qra_claim():
         validate_v060_readiness_report(report)
 
 
+def test_report_records_facility_frequency_port_binding_trace():
+    inputs = _inputs()
+    port_binding = {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "status": "ALIGNED",
+        "port_scoped_event_count": 2,
+        "port_unbound_event_count": 0,
+        "all_events_port_scoped": True,
+        "case_port_binding_mismatch_count": 0,
+        "risk_atom_port_binding_mismatch_count": 0,
+        "mismatch_count": 0,
+    }
+    inputs["facility_assessment"]["frequency_port_binding"] = port_binding
+    inputs["facility_assessment"]["facility_risk_ledger"] = {
+        "frequency_port_binding": port_binding,
+    }
+    report = build_v060_readiness_report(**inputs)
+    trace = report["chain"]["frequency_port_binding"]
+    assert trace["schema"] == "prism.frequency_port_binding.v1"
+    assert trace["status"] == "ALIGNED"
+    assert trace["port_scoped_event_count"] == 2
+    assert trace["assessment_nested_mirror_match"] is True
+    assert trace["frequency_inference_allowed"] is False
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_validator_rejects_frequency_port_binding_mirror_drift():
+    inputs = _inputs()
+    port_binding = {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "status": "ALIGNED",
+        "port_scoped_event_count": 2,
+        "port_unbound_event_count": 0,
+        "all_events_port_scoped": True,
+        "case_port_binding_mismatch_count": 0,
+        "risk_atom_port_binding_mismatch_count": 0,
+        "mismatch_count": 0,
+    }
+    inputs["facility_assessment"]["frequency_port_binding"] = port_binding
+    inputs["facility_assessment"]["facility_risk_ledger"] = {
+        "frequency_port_binding": {**port_binding, "port_scoped_event_count": 1},
+    }
+    report = build_v060_readiness_report(**inputs)
+    with pytest.raises(V060ReadinessError, match="assessment and nested ledger"):
+        validate_v060_readiness_report(report)
+
+
 def test_report_records_isolation_union_extension_without_promoting_qra():
     report = build_v060_readiness_report(
         **_inputs(),
