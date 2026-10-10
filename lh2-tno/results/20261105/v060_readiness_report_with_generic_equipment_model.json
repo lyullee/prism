@@ -138,10 +138,12 @@
       "case_count": 44,
       "open_case_count": 44,
       "closure_status_counts": {
-        "ISOLATION_OPEN": 20,
+        "INVENTORY_CLOSURE_OPEN": 15,
+        "ISOLATION_OPEN": 5,
         "TERMINATION_OPEN": 24
       },
       "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 15,
         "ISOLATION_OPEN": 44,
         "PROVIDER_QUALIFICATION_OPEN": 44,
         "TERMINATION_OPEN": 24
@@ -165,7 +167,7 @@
       "mass_closure_open_case_count": 0,
       "isolation_open_case_count": 44,
       "termination_open_case_count": 24,
-      "inventory_closure_open_case_count": 0,
+      "inventory_closure_open_case_count": 15,
       "release_boundary_promotion_allowed": false,
       "frequency_inference_allowed": false,
       "facility_qra_allowed": false,
@@ -1006,7 +1008,7 @@
     },
     "release_closure_worklist": {
       "path": "results/20261106/release_closure_worklist.json",
-      "sha256": "0c04ea32659f00623a98418fe40965f9d20e391a537d3eb1a6f5b95eceac76cd"
+      "sha256": "28e1d9d4cb46eed017845ba4170f2c111dd2645786b9aa5a805766004c4f6e64"
     }
   },
   "invariant_validation": {

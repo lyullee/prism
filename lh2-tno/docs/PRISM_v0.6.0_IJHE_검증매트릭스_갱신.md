@@ -200,7 +200,7 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 
 `chain.isolation_union_extension`에는 별도 차단 응답 진단도 연결했다. 기존 34-event·44-case 원장에 5개 isolation event와 20개 case를 이름공간으로 결합해, 차단 성공 10건과 실패 10건을 각각 보존한다. 20개 모두 설비 상태 snapshot이 연결되고 provider response가 소비됐지만, 이는 합성 barrier branch 진단이다. 차단 성공률을 현장 빈도로 바꾸지 않으며, qualified provider packet과 시설 QRA 승격은 계속 false다. 근거 파일은 [`isolation extension verification`](../results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json)이다.
 
-이번 갱신에는 [`release_closure_worklist.json`](../results/20261106/release_closure_worklist.json)도 연결했다. 이 원장은 44개 방출 case를 하나씩 펼쳐서 종료기준, 격리상태, 재고상태, end-to-end 질량잔차를 별도로 기록한다. 현재 44개 모두 격리 상태가 `not_declared`이고, 24개는 `synthetic_diagnostic_horizon`에서 끝나므로 종료근거가 열려 있다. 질량잔차가 허용범위를 벗어난 case는 0개지만, 이것만으로 provider qualification이나 시설 QRA가 열리지는 않는다. 각 case에는 필요한 provider 자료와 blocking reason이 함께 들어 있어 현장자료 수집용 fail-closed 목록으로 사용할 수 있다.
+이번 갱신에는 [`release_closure_worklist.json`](../results/20261106/release_closure_worklist.json)도 연결했다. 이 원장은 44개 방출 case를 하나씩 펼쳐서 종료기준, 격리상태, provider 재고잔량, end-to-end 질량잔차를 별도로 기록한다. 현재 44개 모두 격리 상태가 `not_declared`이고, 24개는 `synthetic_diagnostic_horizon`에서 끝나며, `inventory_depletion`으로 표시된 16개 중 15개는 provider 종료시점에 재고 잔량이 남아 있다. 전체 피해 계산의 질량잔차가 허용범위를 벗어난 case는 0개지만, provider 재고 잔량과 end-to-end 질량잔차는 서로 다른 검사이므로 provider qualification이나 시설 QRA가 열리지는 않는다. 각 case에는 필요한 provider 자료와 blocking reason이 함께 들어 있어 현장자료 수집용 fail-closed 목록으로 사용할 수 있다.
 
 최신 readiness 원장에 이 worklist를 함께 넣으려면 다음 인자를 추가한다.
 

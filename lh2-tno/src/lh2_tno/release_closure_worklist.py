@@ -99,6 +99,32 @@ def _case_closure(
     provider = row.get("provider")
     provider = provider if isinstance(provider, Mapping) else {}
 
+    available_mass = _as_list(provider.get("available_mass_kg"))
+    cumulative_mass_out = _as_list(provider.get("cumulative_mass_out_kg"))
+    residual_mass = _as_list(provider.get("residual_mass_kg"))
+    provider_available_mass_kg = (
+        available_mass[0] if available_mass and _finite_number(available_mass[0]) else None
+    )
+    provider_cumulative_mass_out_kg = (
+        cumulative_mass_out[-1]
+        if cumulative_mass_out and _finite_number(cumulative_mass_out[-1])
+        else None
+    )
+    provider_residual_mass_kg = (
+        residual_mass[-1] if residual_mass and _finite_number(residual_mass[-1]) else None
+    )
+    provider_inventory_balance_residual_kg = None
+    if (
+        _finite_number(provider_available_mass_kg)
+        and _finite_number(provider_cumulative_mass_out_kg)
+        and _finite_number(provider_residual_mass_kg)
+    ):
+        provider_inventory_balance_residual_kg = (
+            float(provider_available_mass_kg)
+            - float(provider_cumulative_mass_out_kg)
+            - float(provider_residual_mass_kg)
+        )
+
     gaps: list[str] = []
     if status in {"UNCOMPUTED", "FAILED"}:
         gaps.append("NUMERICAL_CASE_MISSING")
@@ -121,6 +147,17 @@ def _case_closure(
     inventory_status = str(row.get("inventory_status", "not_declared"))
     if inventory_status in {"not_declared", "unknown", ""}:
         gaps.append("INVENTORY_CLOSURE_OPEN")
+    if basis == "inventory_depletion":
+        if not _finite_number(provider_residual_mass_kg):
+            gaps.append("INVENTORY_CLOSURE_OPEN")
+        elif abs(float(provider_residual_mass_kg)) > MASS_RESIDUAL_TOLERANCE_KG:
+            gaps.append("INVENTORY_CLOSURE_OPEN")
+        if (
+            provider_inventory_balance_residual_kg is None
+            or abs(float(provider_inventory_balance_residual_kg))
+            > MASS_RESIDUAL_TOLERANCE_KG
+        ):
+            gaps.append("INVENTORY_CLOSURE_OPEN")
 
     # Operator-limited and domain-incomplete rows are numerically useful, but
     # their provider qualification remains withheld until the exact packet is
@@ -135,6 +172,8 @@ def _case_closure(
         closure_status = "NUMERICAL_CASE_MISSING"
     elif "MASS_CLOSURE_OPEN" in gaps:
         closure_status = "MASS_CLOSURE_OPEN"
+    elif "INVENTORY_CLOSURE_OPEN" in gaps:
+        closure_status = "INVENTORY_CLOSURE_OPEN"
     elif "TERMINATION_OPEN" in gaps:
         closure_status = "TERMINATION_OPEN"
     elif "ISOLATION_OPEN" in gaps:
@@ -156,6 +195,10 @@ def _case_closure(
         reasons.append("release termination is missing or synthetic")
     if "ISOLATION_OPEN" in gaps:
         reasons.append(f"isolation status is {isolation}")
+    if "INVENTORY_CLOSURE_OPEN" in gaps:
+        reasons.append(
+            "provider inventory residual is missing, nonzero at depletion, or not mass-balanced"
+        )
     if "MASS_CLOSURE_OPEN" in gaps:
         reasons.append("end-to-end mass closure residual is missing or outside tolerance")
     if "DOMAIN_CLOSURE_OPEN" in gaps:
@@ -176,6 +219,21 @@ def _case_closure(
             "inventory_status": inventory_status,
             "end_to_end_residual_kg": residual,
             "mass_residual_tolerance_kg": MASS_RESIDUAL_TOLERANCE_KG,
+            "provider_available_mass_kg": provider_available_mass_kg,
+            "provider_cumulative_mass_out_kg": provider_cumulative_mass_out_kg,
+            "provider_residual_mass_kg": provider_residual_mass_kg,
+            "provider_inventory_balance_residual_kg": provider_inventory_balance_residual_kg,
+            "provider_inventory_residual_closed": (
+                basis != "inventory_depletion"
+                or (
+                    _finite_number(provider_residual_mass_kg)
+                    and abs(float(provider_residual_mass_kg))
+                    <= MASS_RESIDUAL_TOLERANCE_KG
+                    and _finite_number(provider_inventory_balance_residual_kg)
+                    and abs(float(provider_inventory_balance_residual_kg))
+                    <= MASS_RESIDUAL_TOLERANCE_KG
+                )
+            ),
             "domain_truncated": domain.get("domain_truncated"),
             "inventory_outside_domain": domain.get("inventory_outside_domain"),
             "provider_packet_consumed": provider.get("packet_consumed"),

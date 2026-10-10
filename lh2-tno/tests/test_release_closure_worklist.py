@@ -27,7 +27,13 @@ def _assessment(*, status: str = "EXECUTED", isolation: str = "reviewed_success"
                     "inventory_outside_domain": False,
                 },
                 "mass_ledger": {"end_to_end_residual_kg": 0.0},
-                "provider": {"packet_consumed": True, "component_id": "tank-01"},
+                "provider": {
+                    "packet_consumed": True,
+                    "component_id": "tank-01",
+                    "available_mass_kg": [1.0],
+                    "cumulative_mass_out_kg": [1.0],
+                    "residual_mass_kg": [0.0],
+                },
             }],
         },
     }

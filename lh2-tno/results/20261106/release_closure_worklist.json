@@ -6,10 +6,12 @@
   "open_case_count": 44,
   "summary": {
     "closure_status_counts": {
-      "ISOLATION_OPEN": 20,
+      "INVENTORY_CLOSURE_OPEN": 15,
+      "ISOLATION_OPEN": 5,
       "TERMINATION_OPEN": 24
     },
     "closure_gap_counts": {
+      "INVENTORY_CLOSURE_OPEN": 15,
       "ISOLATION_OPEN": 44,
       "PROVIDER_QUALIFICATION_OPEN": 44,
       "TERMINATION_OPEN": 24
@@ -33,7 +35,7 @@
     "mass_closure_open_case_count": 0,
     "isolation_open_case_count": 44,
     "termination_open_case_count": 24,
-    "inventory_closure_open_case_count": 0
+    "inventory_closure_open_case_count": 15
   },
   "promotion_gates": {
     "release_boundary_promotion_allowed": false,
@@ -82,6 +84,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 4.956379784841933e-06,
+        "provider_cumulative_mass_out_kg": 4.956379784841932e-06,
+        "provider_residual_mass_kg": 8.470329472543003e-22,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -131,6 +138,11 @@
         "inventory_status": "provider_declared_inventory_over_600s",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0008238536226639276,
+        "provider_cumulative_mass_out_kg": 4.956379784841932e-06,
+        "provider_residual_mass_kg": 0.0008188972428790857,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -182,6 +194,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0008238536226639276,
+        "provider_cumulative_mass_out_kg": 7.221896865709533e-06,
+        "provider_residual_mass_kg": 0.0008166317257982181,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -232,6 +249,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0008087150217064195,
+        "provider_cumulative_mass_out_kg": 0.0006739291847553497,
+        "provider_residual_mass_kg": 0.00013478583695106987,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -283,6 +305,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0008238536226639276,
+        "provider_cumulative_mass_out_kg": 3.595846016954127e-08,
+        "provider_residual_mass_kg": 0.0008238176642037581,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -335,6 +362,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0008238536226639276,
+        "provider_cumulative_mass_out_kg": 3.595846016954127e-08,
+        "provider_residual_mass_kg": 0.0008238176642037581,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -387,6 +419,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0008238536226639276,
+        "provider_cumulative_mass_out_kg": 5.226060443124568e-06,
+        "provider_residual_mass_kg": 0.0008186275622208031,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -422,16 +459,19 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -441,6 +481,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": -1.2622412188089679e-18,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.028492061899609754,
+        "provider_cumulative_mass_out_kg": 0.008231481218448094,
+        "provider_residual_mass_kg": 0.020260580681161662,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -456,7 +501,9 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -477,16 +524,19 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -496,6 +546,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": -5.107098343877219e-11,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.028492061899609754,
+        "provider_cumulative_mass_out_kg": 0.00010057793011042302,
+        "provider_residual_mass_kg": 0.02839148396949933,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -511,7 +566,9 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -532,16 +589,19 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -551,6 +611,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 9.061240160287037e-21,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.028492061899609754,
+        "provider_cumulative_mass_out_kg": 0.00010057968692257683,
+        "provider_residual_mass_kg": 0.028391482212687176,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -566,7 +631,9 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -587,16 +654,19 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -606,6 +676,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 1.2953648392580413e-21,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.028492061899609754,
+        "provider_cumulative_mass_out_kg": 0.0001675637589142158,
+        "provider_residual_mass_kg": 0.02832449814069554,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -621,7 +696,9 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -642,16 +719,19 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "source operator has declared constant-state or open physical closure limitations",
         "current case status is EXECUTED_OPERATOR_LIMITED",
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -661,6 +741,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.028492061899609754,
+        "provider_cumulative_mass_out_kg": 0.0016625798516415606,
+        "provider_residual_mass_kg": 0.026829482047968194,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -676,7 +761,9 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -718,6 +805,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 4.963083675318166e-23,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 3.4802029894759985e-06,
+        "provider_cumulative_mass_out_kg": 2.014140456353654e-08,
+        "provider_residual_mass_kg": 3.460061584912462e-06,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -776,6 +868,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 6.617444900424221e-23,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 3.480202989475999e-05,
+        "provider_cumulative_mass_out_kg": 4.4338658741797916e-07,
+        "provider_residual_mass_kg": 3.435864330734201e-05,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -834,6 +931,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": -1.2904017555827232e-22,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00034802029894760006,
+        "provider_cumulative_mass_out_kg": 1.1651055997280421e-06,
+        "provider_residual_mass_kg": 0.000346855193347872,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -892,6 +994,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": -1.6820983299904304e-09,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0034802029894759993,
+        "provider_cumulative_mass_out_kg": 2.1053319426559835e-05,
+        "provider_residual_mass_kg": 0.0034591496700494394,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -950,6 +1057,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 2.91335855174532e-20,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.034802029894759993,
+        "provider_cumulative_mass_out_kg": 0.00040250847725729254,
+        "provider_residual_mass_kg": 0.0343995214175027,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1008,6 +1120,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 1.5178830414797062e-18,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00048,
+        "provider_cumulative_mass_out_kg": 0.0004,
+        "provider_residual_mass_kg": 7.999999999999999e-05,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1066,6 +1183,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 1.5178830414797062e-18,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00048,
+        "provider_cumulative_mass_out_kg": 0.0004,
+        "provider_residual_mass_kg": 7.999999999999999e-05,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1124,6 +1246,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 5.451120236724452e-20,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 3.797180625577987e-05,
+        "provider_cumulative_mass_out_kg": 3.164317187981656e-05,
+        "provider_residual_mass_kg": 6.328634375963311e-06,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1182,6 +1309,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": -1.5720931501039814e-18,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0003797180625577988,
+        "provider_cumulative_mass_out_kg": 0.0003164317187981657,
+        "provider_residual_mass_kg": 6.328634375963314e-05,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1240,6 +1372,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 6.114900252818245e-17,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.0037971806255779894,
+        "provider_cumulative_mass_out_kg": 0.003164317187981658,
+        "provider_residual_mass_kg": 0.0006328634375963316,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1298,6 +1435,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.03797180625577989,
+        "provider_cumulative_mass_out_kg": 0.03164317187981657,
+        "provider_residual_mass_kg": 0.006328634375963316,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1356,6 +1498,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 2.7811163476281457e-16,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.3797180625577989,
+        "provider_cumulative_mass_out_kg": 0.31643171879816573,
+        "provider_residual_mass_kg": 0.06328634375963316,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1392,14 +1539,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1409,6 +1559,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 1.2125616572864818e-07,
+        "provider_residual_mass_kg": 0.00013404630215277215,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1423,7 +1578,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1443,14 +1600,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1460,6 +1620,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 1.2125616572864818e-07,
+        "provider_residual_mass_kg": 0.00013404630215277215,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1474,7 +1639,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1494,14 +1661,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1511,6 +1681,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 4.022010171050504e-07,
+        "provider_residual_mass_kg": 0.00013376535730139574,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1525,7 +1700,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1545,14 +1722,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1562,6 +1742,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 4.022010171050504e-07,
+        "provider_residual_mass_kg": 0.00013376535730139574,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1576,7 +1761,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1596,14 +1783,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1613,6 +1803,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 2.6216519132821583e-06,
+        "provider_residual_mass_kg": 0.00013154590640521862,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1627,7 +1822,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1647,14 +1844,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1664,6 +1864,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 2.6216519132821583e-06,
+        "provider_residual_mass_kg": 0.00013154590640521862,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1678,7 +1883,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1698,14 +1905,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1715,6 +1925,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 2.1140345784364108e-05,
+        "provider_residual_mass_kg": 0.00011302721253413668,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1729,7 +1944,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1749,14 +1966,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1766,6 +1986,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 2.1140345784364108e-05,
+        "provider_residual_mass_kg": 0.00011302721253413668,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1780,7 +2005,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1800,14 +2027,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1817,6 +2047,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 2.6236186797952155e-05,
+        "provider_residual_mass_kg": 0.00010793137152054863,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1831,7 +2066,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1851,14 +2088,17 @@
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "provider_packet_identity_present": true,
-      "closure_status": "ISOLATION_OPEN",
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
       "closure_gaps": [
         "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
       "blocking_reasons": [
         "qualified provider packet coverage is 0/44 cases",
-        "isolation status is not_declared"
+        "isolation status is not_declared",
+        "provider inventory residual is missing, nonzero at depletion, or not mass-balanced",
+        "inventory status is provider_declared_inventory_depletion"
       ],
       "release_boundary": {
         "termination_basis": "inventory_depletion",
@@ -1868,6 +2108,11 @@
         "inventory_status": "provider_declared_inventory_depletion",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.00013416755831850078,
+        "provider_cumulative_mass_out_kg": 2.6236186797952155e-05,
+        "provider_residual_mass_kg": 0.00010793137152054863,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": false,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1882,7 +2127,9 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history",
         "reviewed isolation response status, trigger, actuation delay and final valve states",
-        "provider-owned isolation coverage for every connected inventory path"
+        "provider-owned isolation coverage for every connected inventory path",
+        "initial and final inventory with a positive threshold or an explicitly reviewed residual",
+        "inventory clock and termination basis tied to the provider time history"
       ]
     },
     {
@@ -1923,6 +2170,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 1.6583741752980332e-09,
+        "provider_residual_mass_kg": 0.009999998341625824,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -1979,6 +2231,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 1.6583741752980332e-09,
+        "provider_residual_mass_kg": 0.009999998341625824,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2035,6 +2292,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 1.653545292876029e-07,
+        "provider_residual_mass_kg": 0.009999834645470712,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2091,6 +2353,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 1.653545292876029e-07,
+        "provider_residual_mass_kg": 0.009999834645470712,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2147,6 +2414,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 4.629740437409607e-06,
+        "provider_residual_mass_kg": 0.00999537025956259,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2203,6 +2475,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 4.629740437409607e-06,
+        "provider_residual_mass_kg": 0.00999537025956259,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2259,6 +2536,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 0.00010052648374898754,
+        "provider_residual_mass_kg": 0.009899473516251013,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2315,6 +2597,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 0.00010052648374898754,
+        "provider_residual_mass_kg": 0.009899473516251013,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2371,6 +2658,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 0.0018175777704088902,
+        "provider_residual_mass_kg": 0.00818242222959111,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
@@ -2427,6 +2719,11 @@
         "inventory_status": "not_inventory_termination",
         "end_to_end_residual_kg": 0.0,
         "mass_residual_tolerance_kg": 1e-08,
+        "provider_available_mass_kg": 0.01,
+        "provider_cumulative_mass_out_kg": 0.0018175777704088902,
+        "provider_residual_mass_kg": 0.00818242222959111,
+        "provider_inventory_balance_residual_kg": 0.0,
+        "provider_inventory_residual_closed": true,
         "domain_truncated": null,
         "inventory_outside_domain": null,
         "provider_packet_consumed": true,
