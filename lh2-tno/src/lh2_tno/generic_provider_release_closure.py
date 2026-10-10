@@ -87,9 +87,69 @@ def _provider_termination_evidence(
     if not isinstance(value, Mapping):
         return None
     meta = value.get("provider_run_meta")
-    if not isinstance(meta, Mapping):
-        return None
-    evidence = dict(meta)
+    if isinstance(meta, Mapping):
+        evidence = dict(meta)
+    elif isinstance(packet.get("provider_meta"), Mapping):
+        # DynamicVaporizer stores the releasable-inventory ledger in the
+        # resolved packet while its verification record carries only the
+        # generic execution status.  Bind that provider-owned ledger to the
+        # packet itself instead of treating the remaining upstream reserve as
+        # an unaccounted zero-mass depletion.
+        provider_meta = dict(packet["provider_meta"])
+        if provider_meta.get("release_mode") == "instantaneous_inventory":
+            evidence = {
+                "termination_basis": "inventory_depletion_releasable_mass",
+                "available_mass_kg": packet.get("available_mass_kg"),
+                "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+                "available_mass_definition": provider_meta.get(
+                    "available_mass_definition"
+                ),
+                "remaining_releasable_mass_kg": (
+                    float(packet.get("available_mass_kg", 0.0))
+                    - float(packet.get("cumulative_mass_out_kg", 0.0))
+                ),
+                "provider_residual_mass_kg": provider_meta.get("residual_mass_kg"),
+            }
+        else:
+            return None
+    else:
+        # Some exporter envelopes keep provider_meta in the raw response
+        # under ``data`` while the resolved packet deliberately contains only
+        # the strict atmospheric boundary fields.
+        response_path = packet_path.parent / "provider_response.json"
+        try:
+            response_value = json.loads(response_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            return None
+        response_data = (
+            response_value.get("data")
+            if isinstance(response_value, Mapping)
+            else None
+        )
+        response_meta = (
+            response_data.get("provider_meta")
+            if isinstance(response_data, Mapping)
+            else None
+        )
+        if not isinstance(response_meta, Mapping):
+            return None
+        if response_meta.get("release_mode") != "instantaneous_inventory":
+            return None
+        evidence = {
+            "termination_basis": "inventory_depletion_releasable_mass",
+            "available_mass_kg": packet.get("available_mass_kg"),
+            "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+            "available_mass_definition": response_meta.get(
+                "available_mass_definition"
+            ),
+            "remaining_releasable_mass_kg": (
+                float(response_meta.get("remaining_releasable_mass_kg"))
+                if response_meta.get("remaining_releasable_mass_kg") is not None
+                else float(packet.get("available_mass_kg", 0.0))
+                - float(packet.get("cumulative_mass_out_kg", 0.0))
+            ),
+            "provider_residual_mass_kg": response_meta.get("residual_mass_kg"),
+        }
     digest = value.get("provider_result_digest")
     if isinstance(digest, str):
         evidence["provider_result_digest"] = digest

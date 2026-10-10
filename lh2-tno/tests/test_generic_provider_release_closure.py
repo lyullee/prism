@@ -113,3 +113,43 @@ def test_campaign_audit_uses_bound_provider_threshold_verification(tmp_path):
 
     assert report["closure_ready_event_count"] == 1
     assert report["event_rows"][0]["packet_rows"][0]["termination_evidence_used"] is True
+
+
+def test_campaign_audit_uses_packet_releasable_inventory_ledger(tmp_path):
+    packet = _release()
+    packet["termination_basis"] = "inventory_depletion"
+    packet_path = tmp_path / "resolved_release.json"
+    packet_path.write_text(json.dumps(packet), encoding="utf-8")
+    (tmp_path / "verification.json").write_text(
+        json.dumps({"provider_result_digest": packet["provider_result_digest"]}),
+        encoding="utf-8",
+    )
+    (tmp_path / "provider_response.json").write_text(
+        json.dumps({
+            "data": {
+                "provider_meta": {
+                    "release_mode": "instantaneous_inventory",
+                    "available_mass_definition": "cumulative releasable mass until atmospheric-pressure equilibrium",
+                    "remaining_releasable_mass_kg": 0.0,
+                    "residual_mass_kg": 0.0,
+                }
+            }
+        }),
+        encoding="utf-8",
+    )
+    evidence = {
+        "rows": [
+            {
+                "event_id": "event-releasable",
+                "evidence": {"resolved_packet_paths": ["resolved_release.json"]},
+            }
+        ]
+    }
+    evidence_path = tmp_path / "evidence.json"
+    evidence_path.write_text(json.dumps(evidence), encoding="utf-8")
+
+    report = audit_generic_provider_release_closure(evidence_path)
+
+    assert report["closure_ready_event_count"] == 1
+    row = report["event_rows"][0]["packet_rows"][0]
+    assert row["termination_evidence_used"] is True

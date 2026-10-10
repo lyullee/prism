@@ -4,15 +4,15 @@
   "source_schema_version": "prism.native_scope_packet_evidence.v1",
   "event_count": 24,
   "event_closure_status_counts": {
-    "CLOSURE_EVIDENCE_OPEN": 16,
-    "CLOSURE_READY_FOR_QUALIFICATION": 8
+    "CLOSURE_EVIDENCE_OPEN": 15,
+    "CLOSURE_READY_FOR_QUALIFICATION": 9
   },
-  "closure_ready_event_count": 8,
-  "closure_open_event_count": 16,
+  "closure_ready_event_count": 9,
+  "closure_open_event_count": 15,
   "packet_path_count": 24,
   "provider_packet_count": 26,
-  "closure_ready_packet_path_count": 8,
-  "closure_ready_provider_packet_count": 10,
+  "closure_ready_packet_path_count": 9,
+  "closure_ready_provider_packet_count": 11,
   "event_rows": [
     {
       "event_index": 0,
@@ -467,24 +467,18 @@
         {
           "packet_index": 0,
           "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\018_ambient-vaporizer-01_G1\\resolved_release.json",
-          "status": "CLOSURE_EVIDENCE_OPEN",
+          "status": "CLOSURE_READY_FOR_QUALIFICATION",
           "packet_count": 1,
           "closure_status_counts": {
-            "CLOSURE_EVIDENCE_OPEN": 1
+            "CLOSURE_READY_FOR_QUALIFICATION": 1
           },
-          "blocking_reasons": [
-            "packet[0]: provider mass balance is required for inventory depletion",
-            "packet[0]: provider positive-inventory threshold evidence is missing"
-          ],
-          "termination_evidence_path": null,
-          "termination_evidence_used": false
+          "blocking_reasons": [],
+          "termination_evidence_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\018_ambient-vaporizer-01_G1\\verification.json",
+          "termination_evidence_used": true
         }
       ],
-      "closure_status": "CLOSURE_EVIDENCE_OPEN",
-      "blocking_reasons": [
-        "packet[0]: packet[0]: provider mass balance is required for inventory depletion",
-        "packet[0]: packet[0]: provider positive-inventory threshold evidence is missing"
-      ]
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "blocking_reasons": []
     },
     {
       "event_index": 19,
@@ -610,8 +604,6 @@
     }
   ],
   "closure_gap_counts": {
-    "provider mass balance is required for inventory depletion": 1,
-    "provider positive-inventory threshold evidence is missing": 1,
     "termination basis is absent, synthetic, pressure-equalization, or fixed horizon": 15
   },
   "qualified_provider_packet_count": 0,

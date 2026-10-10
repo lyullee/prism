@@ -2760,14 +2760,16 @@
   "generic_provider_release_closure_audit_module": "src/lh2_tno/generic_provider_release_closure.py",
   "generic_provider_release_closure_audit_script": "scripts/audit_generic_provider_release_closure.py",
   "generic_provider_release_closure_audit_record": "results/20261106/generic_lh2_provider_release_closure_current.json",
-  "generic_provider_release_closure_audit_status": "CLOSURE_EVIDENCE_OPEN; 24 events, 8 closure-ready and 16 open; 26 provider packets; 15 fixed/synthetic horizons and 1 inventory-depletion packet without provider mass balance; 5 storage-tank packets closed by digest-bound positive-threshold sidecars; qualified provider count 0; frequency/QRA promotion false",
-  "generic_provider_release_closure_audit_sha256": "2536BEE7D78BB29C20AA7D3608548D238D18CDEAA6B86E0E45CB4D605E2FAC19",
+  "generic_provider_release_closure_audit_status": "CLOSURE_EVIDENCE_OPEN; 24 events, 9 closure-ready and 15 open; 26 provider packets; 15 fixed/synthetic horizons remain; 5 storage-tank packets use digest-bound positive-threshold ledgers and vaporizer G1 uses a digest-bound releasable-inventory ledger; qualified provider count 0; frequency/QRA promotion false",
+  "generic_provider_release_closure_audit_sha256": "620AF4ECA22E35943D6541FB9A4DBA495B7F17E60F09BD6AF647C608D3DD6A65",
   "generic_provider_release_closure_audit_readiness_record": "results/20261106/v060_readiness_report_with_generic_provider_closure.json",
-  "generic_provider_release_closure_audit_readiness_sha256": "7F382E3749406A375ECA8A970027D6B52EC97B361A5BAA55C9181BBDBE449150",
-  "generic_provider_release_closure_audit_ready_event_count": 8,
-  "generic_provider_release_closure_audit_open_event_count": 16,
+  "generic_provider_release_closure_audit_readiness_sha256": "4D6A002D4653AC7567093363A928ACA251B87F06DEDCB177781374158C5A2F13",
+  "generic_provider_release_closure_audit_ready_event_count": 9,
+  "generic_provider_release_closure_audit_open_event_count": 15,
   "generic_provider_release_closure_audit_open_horizon_event_count": 15,
-  "generic_provider_release_closure_audit_open_mass_balance_event_count": 1,
+  "generic_provider_release_closure_audit_open_mass_balance_event_count": 0,
   "generic_provider_release_closure_positive_threshold_sidecar_implemented": true,
-  "generic_provider_release_closure_positive_threshold_sidecar_policy": "Provider verification.json may close an inventory_depletion packet only when its positive threshold basis, result digest, available mass, released mass, remaining threshold crossing and mass residual all match; this does not claim zero-mass depletion, qualification, frequency inference or facility QRA."
+  "generic_provider_release_closure_positive_threshold_sidecar_policy": "Provider verification.json may close an inventory_depletion packet only when its positive threshold basis, result digest, available mass, released mass, remaining threshold crossing and mass residual all match; this does not claim zero-mass depletion, qualification, frequency inference or facility QRA.",
+  "generic_provider_release_closure_releasable_inventory_ledger_implemented": true,
+  "generic_provider_release_closure_releasable_inventory_ledger_policy": "A provider response may close only the explicitly declared releasable inventory at atmospheric-pressure equilibrium when its definition, packet released mass, zero releasable remainder, provider residual and result digest agree; upstream reserve remains explicit and promotion remains false."
 }

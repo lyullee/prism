@@ -370,15 +370,13 @@
       "schema_version": "prism.generic_provider_release_closure_audit.v1",
       "status": "CLOSURE_EVIDENCE_OPEN",
       "event_count": 24,
-      "closure_ready_event_count": 8,
-      "closure_open_event_count": 16,
+      "closure_ready_event_count": 9,
+      "closure_open_event_count": 15,
       "packet_path_count": 24,
       "provider_packet_count": 26,
-      "closure_ready_packet_path_count": 8,
-      "closure_ready_provider_packet_count": 10,
+      "closure_ready_packet_path_count": 9,
+      "closure_ready_provider_packet_count": 11,
       "closure_gap_counts": {
-        "provider mass balance is required for inventory depletion": 1,
-        "provider positive-inventory threshold evidence is missing": 1,
         "termination basis is absent, synthetic, pressure-equalization, or fixed horizon": 15
       },
       "qualified_provider_packet_count": 0,
@@ -1103,7 +1101,7 @@
     },
     "generic_provider_closure_audit": {
       "path": "results/20261106/generic_lh2_provider_release_closure_current.json",
-      "sha256": "2536bee7d78bb29c20aa7d3608548d238d18cdeaa6b86e0e45cb4d605e2fac19"
+      "sha256": "620af4eca22e35943d6541fb9a4dba495b7f17e60f09bd6af647c608d3dd6a65"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",

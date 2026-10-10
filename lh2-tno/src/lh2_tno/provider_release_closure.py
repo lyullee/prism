@@ -90,15 +90,14 @@ def _packet_rows(value: Mapping[str, Any]) -> tuple[Any, ...]:
         raise ProviderReleaseClosureError(str(error)) from error
 
 
-def _positive_threshold_evidence(packet: Any, evidence: Mapping[str, Any] | None) -> tuple[dict[str, bool], list[str]]:
-    """Audit an external provider's explicit positive-inventory threshold.
+def _inventory_termination_evidence(packet: Any, evidence: Mapping[str, Any] | None) -> tuple[dict[str, bool], list[str], str | None]:
+    """Audit an external provider's explicit inventory termination ledger.
 
-    Some LH2 providers stop after the resolved inventory crosses a declared
-    positive threshold rather than extrapolating the state to zero mass.  The
-    packet contract keeps this provenance in the exporter verification ledger;
-    it is accepted here only when that ledger closes against the packet's
-    result digest and mass totals.  A prose termination string alone is never
-    enough evidence.
+    LH2 providers can expose either a positive inventory threshold or a
+    separately defined *releasable* inventory that is exhausted while a
+    non-releasable upstream reserve remains.  Both are accepted only when the
+    provider ledger closes against the packet digest and mass totals.  A prose
+    termination string alone is never enough evidence.
     """
     checks = {
         "termination_evidence_present": isinstance(evidence, Mapping),
@@ -108,15 +107,25 @@ def _positive_threshold_evidence(packet: Any, evidence: Mapping[str, Any] | None
         "termination_evidence_release_matches_packet": False,
         "termination_evidence_threshold_positive": False,
         "termination_evidence_remaining_at_or_below_threshold": False,
+        "termination_evidence_releasable_definition_present": False,
+        "termination_evidence_releasable_remaining_closed": False,
+        "termination_evidence_provider_residual_closed": False,
         "termination_evidence_mass_residual_closed": False,
     }
     gaps: list[str] = []
     if not isinstance(evidence, Mapping):
-        return checks, ["provider positive-inventory threshold evidence is missing"]
+        return checks, ["provider inventory termination evidence is missing"], None
     basis = evidence.get("termination_basis")
-    checks["termination_evidence_basis"] = basis == "inventory_depletion_positive_threshold"
+    mode = (
+        "positive_threshold"
+        if basis == "inventory_depletion_positive_threshold"
+        else "releasable_inventory"
+        if basis == "inventory_depletion_releasable_mass"
+        else None
+    )
+    checks["termination_evidence_basis"] = mode is not None
     if not checks["termination_evidence_basis"]:
-        gaps.append("provider termination evidence basis is not a positive inventory threshold")
+        gaps.append("provider termination evidence basis is unsupported")
     digest = evidence.get("provider_result_digest")
     checks["termination_evidence_digest_matches"] = (
         isinstance(digest, str)
@@ -139,24 +148,58 @@ def _positive_threshold_evidence(packet: Any, evidence: Mapping[str, Any] | None
     threshold = evidence.get("threshold_mass_kg")
     remaining = evidence.get("remaining_mass_kg")
     checks["termination_evidence_threshold_positive"] = (
-        _finite(threshold) and float(threshold) > MASS_TOLERANCE_KG
+        mode == "positive_threshold"
+        and _finite(threshold)
+        and float(threshold) > MASS_TOLERANCE_KG
     )
-    if not checks["termination_evidence_threshold_positive"]:
-        gaps.append("provider positive inventory threshold is missing or non-positive")
     checks["termination_evidence_remaining_at_or_below_threshold"] = (
-        _finite(remaining)
+        mode == "positive_threshold"
+        and _finite(remaining)
         and _finite(threshold)
         and float(remaining) <= float(threshold) + MASS_TOLERANCE_KG
     )
-    if not checks["termination_evidence_remaining_at_or_below_threshold"]:
-        gaps.append("provider remaining inventory did not reach the declared threshold")
+    if mode == "positive_threshold":
+        if not checks["termination_evidence_threshold_positive"]:
+            gaps.append("provider positive inventory threshold is missing or non-positive")
+        if not checks["termination_evidence_remaining_at_or_below_threshold"]:
+            gaps.append("provider remaining inventory did not reach the declared threshold")
+    definition = evidence.get("available_mass_definition")
+    checks["termination_evidence_releasable_definition_present"] = (
+        mode == "releasable_inventory"
+        and isinstance(definition, str)
+        and "releasable mass" in definition.lower()
+    )
+    releasable_remaining = evidence.get("remaining_releasable_mass_kg")
+    checks["termination_evidence_releasable_remaining_closed"] = (
+        mode == "releasable_inventory"
+        and _finite(releasable_remaining)
+        and abs(float(releasable_remaining)) <= MASS_TOLERANCE_KG
+    )
+    checks["termination_evidence_provider_residual_closed"] = (
+        mode == "releasable_inventory"
+        and _finite(evidence.get("provider_residual_mass_kg"))
+        and abs(float(evidence["provider_residual_mass_kg"])) <= MASS_TOLERANCE_KG
+    )
+    if mode == "releasable_inventory":
+        if not checks["termination_evidence_releasable_definition_present"]:
+            gaps.append("provider releasable-inventory definition is missing")
+        if not checks["termination_evidence_releasable_remaining_closed"]:
+            gaps.append("provider releasable inventory did not close at the release boundary")
+        if not checks["termination_evidence_provider_residual_closed"]:
+            gaps.append("provider upstream residual mass exceeds tolerance")
     residual = evidence.get("max_abs_mass_residual_kg")
     checks["termination_evidence_mass_residual_closed"] = (
-        _finite(residual) and abs(float(residual)) <= MASS_TOLERANCE_KG
+        (
+            _finite(residual) and abs(float(residual)) <= MASS_TOLERANCE_KG
+        )
+        or (
+            mode == "releasable_inventory"
+            and checks["termination_evidence_provider_residual_closed"]
+        )
     )
     if not checks["termination_evidence_mass_residual_closed"]:
         gaps.append("provider termination evidence mass residual exceeds tolerance")
-    return checks, gaps
+    return checks, gaps, mode
 
 
 def _audit_one(
@@ -193,6 +236,7 @@ def _audit_one(
 
     evidence_checks: dict[str, bool] = {}
     evidence_gaps: list[str] = []
+    evidence_mode: str | None = None
     if basis == "reviewed_isolation_success":
         checks["isolation_record_present"] = mass is not None
         checks["isolation_success_declared"] = bool(
@@ -211,7 +255,7 @@ def _audit_one(
             if not ok:
                 gaps.append(f"{name} is missing or inconsistent")
     elif basis == "inventory_depletion":
-        evidence_checks, evidence_gaps = _positive_threshold_evidence(
+        evidence_checks, evidence_gaps, evidence_mode = _inventory_termination_evidence(
             packet, termination_evidence
         )
         threshold_closed = not evidence_gaps
@@ -227,7 +271,7 @@ def _audit_one(
             ]
             checks["inventory_final_depleted"] = evidence_checks[
                 "termination_evidence_remaining_at_or_below_threshold"
-            ]
+            ] or evidence_checks["termination_evidence_releasable_remaining_closed"]
             checks["inventory_residual_reported_closed"] = evidence_checks[
                 "termination_evidence_mass_residual_closed"
             ]
@@ -292,6 +336,7 @@ def _audit_one(
             mass.model_dump(mode="json") if mass is not None else None
         ),
         "termination_evidence": dict(termination_evidence) if termination_evidence else None,
+        "termination_evidence_mode": evidence_mode,
         "termination_evidence_checks": evidence_checks,
         "checks": checks,
         "closure_status": (
