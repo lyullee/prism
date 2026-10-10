@@ -276,7 +276,7 @@ def _provider_identity(path: Mapping[str, Any]) -> dict[str, Any] | None:
     if not rows:
         return None
     first = rows[0]
-    return {
+    identity = {
         "event_id": first.get("event_id"),
         "component_id": first.get("component_id"),
         "provider_export_schema": "prism.resolved_release.v1",
@@ -312,6 +312,10 @@ def _provider_identity(path: Mapping[str, Any]) -> dict[str, Any] | None:
             row.get("cumulative_mass_out_kg") for row in rows
         ],
     }
+    balances = [row.get("provider_mass_balance") for row in rows]
+    if any(value is not None for value in balances):
+        identity["provider_mass_balances"] = balances
+    return identity
 
 
 def _case_timing(component: Mapping[str, Any]) -> float:

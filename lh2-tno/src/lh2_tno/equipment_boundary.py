@@ -26,6 +26,53 @@ ProviderTerminationBasis = Literal[
 ]
 
 
+class ProviderMassBalance(Contract):
+    """Optional provider-owned inventory/mass-balance evidence.
+
+    ``available_mass_kg`` and ``cumulative_mass_out_kg`` close the PRISM
+    atmospheric release packet.  An equipment twin may additionally expose
+    its own state ledger (for example a pipe line inventory that remains
+    after an isolation command).  That ledger is retained separately so a
+    downstream evaluator cannot mistake a residual equipment inventory for
+    inventory depletion.
+
+    ``derived_accounting_residual_kg`` is the provider-state residual
+    ``final + cumulative_out - initial - cumulative_in``.  It is intentionally
+    recorded even when non-zero; a diagnostic packet must show the mismatch
+    instead of silently repairing it.
+    """
+
+    schema_version: Literal['prism.provider_mass_balance.v1'] = (
+        'prism.provider_mass_balance.v1'
+    )
+    initial_mass_kg: Nonnegative | None = None
+    cumulative_mass_in_kg: Nonnegative | None = None
+    cumulative_mass_out_kg: Nonnegative | None = None
+    final_mass_kg: Nonnegative | None = None
+    reported_residual_mass_kg: float | None = None
+    derived_accounting_residual_kg: float | None = None
+    isolation_time_s: Nonnegative | None = None
+    isolation_success: bool | None = None
+
+    @model_validator(mode='after')
+    def has_evidence(self):
+        if not any(
+            value is not None
+            for value in (
+                self.initial_mass_kg,
+                self.cumulative_mass_in_kg,
+                self.cumulative_mass_out_kg,
+                self.final_mass_kg,
+                self.reported_residual_mass_kg,
+                self.derived_accounting_residual_kg,
+                self.isolation_time_s,
+                self.isolation_success,
+            )
+        ):
+            raise ValueError('provider mass balance must retain at least one evidence value')
+        return self
+
+
 class ResolvedGasStep(Contract):
     time_s: Nonnegative
     mass_flow_kg_s: Nonnegative
@@ -241,6 +288,7 @@ class ResolvedGasRelease(Contract):
     steps: tuple[ResolvedGasStep, ...]
     termination_provenance: Name
     termination_basis: ProviderTerminationBasis | None = None
+    provider_mass_balance: ProviderMassBalance | None = None
     vertical_handoff: VerticalGasHandoff | None = None
     compressible_plane_handoff: CompressibleGasPlaneHandoff | None = None
     # A failure opening can differ from an expanded exit area. Explicitly
@@ -483,6 +531,7 @@ class ResolvedLiquidRelease(Contract):
     pool_footprint: PoolFootprintEvidence | None = None
     no_rainout_evidence: NoRainoutEvidence | None = None
     termination_basis: ProviderTerminationBasis | None = None
+    provider_mass_balance: ProviderMassBalance | None = None
     failure_opening_diameter_m: Positive | None = None
 
     @model_validator(mode='after')

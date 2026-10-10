@@ -15,6 +15,7 @@ from typing import Any
 from .contracts import canonical_digest
 from .equipment_boundary import (
     ProviderTerminationBasis,
+    ProviderMassBalance,
     ResolvedGasRelease,
     ResolvedLiquidRelease,
 )
@@ -139,6 +140,73 @@ def _property_basis(data: Mapping[str, Any]) -> dict[str, str]:
     }
 
 
+def _provider_mass_balance(
+    data: Mapping[str, Any],
+    *,
+    cumulative_mass_out_kg: float,
+) -> dict[str, Any] | None:
+    """Copy optional provider-state inventory evidence without repairing it."""
+
+    metadata = data.get("provider_meta")
+    if not isinstance(metadata, Mapping):
+        return None
+    recognized = (
+        "initial_mass_kg",
+        "cumulative_mass_in_kg",
+        "final_mass_kg",
+        "residual_mass_kg",
+        "isolation_time_s",
+        "isolation_success",
+    )
+    if not any(key in metadata for key in recognized):
+        return None
+
+    payload: dict[str, Any] = {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "cumulative_mass_out_kg": cumulative_mass_out_kg,
+    }
+    for key in (
+        "initial_mass_kg",
+        "cumulative_mass_in_kg",
+        "final_mass_kg",
+        "isolation_time_s",
+    ):
+        if key in metadata:
+            value = _finite(metadata[key], f"provider data.provider_meta.{key}")
+            if value < 0.0:
+                raise EquipmentReleaseExportError(
+                    f"provider data.provider_meta.{key} must be non-negative"
+                )
+            payload[key] = value
+    if "residual_mass_kg" in metadata:
+        payload["reported_residual_mass_kg"] = _finite(
+            metadata["residual_mass_kg"],
+            "provider data.provider_meta.residual_mass_kg",
+        )
+    if "isolation_success" in metadata:
+        value = metadata["isolation_success"]
+        if not isinstance(value, bool):
+            raise EquipmentReleaseExportError(
+                "provider data.provider_meta.isolation_success must be boolean"
+            )
+        payload["isolation_success"] = value
+
+    initial = payload.get("initial_mass_kg")
+    cumulative_in = payload.get("cumulative_mass_in_kg", 0.0)
+    final = payload.get("final_mass_kg")
+    if initial is not None and final is not None:
+        payload["derived_accounting_residual_kg"] = (
+            float(final) + cumulative_mass_out_kg - float(initial) - float(cumulative_in)
+        )
+    try:
+        ProviderMassBalance.model_validate(payload)
+    except (TypeError, ValueError) as error:
+        raise EquipmentReleaseExportError(
+            f"provider mass-balance metadata failed strict validation: {error}"
+        ) from error
+    return payload
+
+
 def build_resolved_gas_release_from_provider_response(
     provider_response: Mapping[str, Any],
     *,
@@ -230,6 +298,10 @@ def build_resolved_gas_release_from_provider_response(
     termination_basis = _termination_basis(
         data.get("termination_basis"), "provider data.termination_basis"
     )
+    provider_mass_balance = _provider_mass_balance(
+        data,
+        cumulative_mass_out_kg=cumulative_mass,
+    )
     property_basis = _property_basis(data)
     result_payload = provider_response if provider_result is None else provider_result
     result_digest = provider_result_digest or canonical_digest(result_payload)
@@ -268,6 +340,7 @@ def build_resolved_gas_release_from_provider_response(
         "steps": steps,
         "termination_provenance": termination,
         "termination_basis": termination_basis,
+        "provider_mass_balance": provider_mass_balance,
         "failure_opening_diameter_m": (
             _positive(failure_opening_diameter_m, "failure_opening_diameter_m")
             if failure_opening_diameter_m is not None else None
@@ -379,6 +452,10 @@ def build_resolved_liquid_release_from_provider_response(
     termination_basis = _termination_basis(
         data.get("termination_basis"), "provider data.termination_basis"
     )
+    provider_mass_balance = _provider_mass_balance(
+        data,
+        cumulative_mass_out_kg=cumulative_mass,
+    )
     droplet_provenance = _text(
         data.get("droplet_partition_provenance"),
         "provider data.droplet_partition_provenance",
@@ -430,6 +507,7 @@ def build_resolved_liquid_release_from_provider_response(
         "steps": steps,
         "termination_provenance": termination,
         "droplet_partition_provenance": droplet_provenance,
+        "provider_mass_balance": provider_mass_balance,
         "pool_footprint": dict(pool_footprint) if pool_footprint is not None else None,
         "no_rainout_evidence": (
             dict(no_rainout_evidence) if no_rainout_evidence is not None else None

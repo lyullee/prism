@@ -38,6 +38,38 @@ def _float_list(value: Any) -> list[float] | None:
     return values if all(item is not None for item in values) else None
 
 
+def _provider_mass_balances(identity: Mapping[str, Any]) -> tuple[list[dict[str, Any]], list[str]]:
+    """Normalize provider-owned mass ledgers and classify their closure."""
+
+    raw = identity.get("provider_mass_balances")
+    if not isinstance(raw, Sequence) or isinstance(raw, (str, bytes)):
+        return [], []
+    rows: list[dict[str, Any]] = []
+    statuses: list[str] = []
+    for item in raw:
+        if not isinstance(item, Mapping):
+            rows.append({"raw": item})
+            statuses.append("MALFORMED")
+            continue
+        row = dict(item)
+        derived = _finite(row.get("derived_accounting_residual_kg"))
+        initial = _finite(row.get("initial_mass_kg"))
+        final = _finite(row.get("final_mass_kg"))
+        cumulative_out = _finite(row.get("cumulative_mass_out_kg"))
+        cumulative_in = _finite(row.get("cumulative_mass_in_kg")) or 0.0
+        if derived is None and initial is not None and final is not None and cumulative_out is not None:
+            derived = final + cumulative_out - initial - cumulative_in
+            row["derived_accounting_residual_kg"] = derived
+        if derived is None:
+            statuses.append("PARTIAL")
+        elif abs(derived) <= _STRICT_RESIDUAL_TOLERANCE_KG:
+            statuses.append("CLOSED")
+        else:
+            statuses.append("UNBALANCED")
+        rows.append(row)
+    return rows, statuses
+
+
 def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
     if not isinstance(identity, Mapping):
         return {
@@ -45,17 +77,22 @@ def _provider_inventory(identity: Mapping[str, Any] | None) -> dict[str, Any]:
             "available_mass_kg": None,
             "cumulative_mass_out_kg": None,
             "residual_mass_kg": None,
+            "mass_balances": [],
+            "mass_balance_statuses": [],
         }
     available = _float_list(identity.get("available_mass_kg"))
     released = _float_list(identity.get("cumulative_mass_out_kg"))
     residual = None
     if available is not None and released is not None and len(available) == len(released):
         residual = [a - r for a, r in zip(available, released)]
+    mass_balances, mass_balance_statuses = _provider_mass_balances(identity)
     return {
         "packet_consumed": bool(identity.get("provider_result_digests")),
         "available_mass_kg": available,
         "cumulative_mass_out_kg": released,
         "residual_mass_kg": residual,
+        "mass_balances": mass_balances,
+        "mass_balance_statuses": mass_balance_statuses,
     }
 
 
@@ -131,6 +168,8 @@ def _row(case: Mapping[str, Any]) -> dict[str, Any]:
             "available_mass_kg": provider_inventory["available_mass_kg"],
             "cumulative_mass_out_kg": provider_inventory["cumulative_mass_out_kg"],
             "residual_mass_kg": provider_inventory["residual_mass_kg"],
+            "provider_mass_balances": provider_inventory["mass_balances"],
+            "provider_mass_balance_statuses": provider_inventory["mass_balance_statuses"],
         },
         "mass_ledger": {
             "released_kg": _finite(mass_ledger.get("released_kg")),
@@ -239,6 +278,7 @@ def evaluate_facility_release_boundary(
         "all_termination_bases_allowed": True,
         "all_isolation_or_inventory_statuses_closed": True,
         "all_mass_residuals_closed": True,
+        "all_provider_mass_balances_closed": True,
         "no_withheld_cases": True,
     }
     withheld_count = summary.get("withheld_case_count", 0)
@@ -305,6 +345,18 @@ def evaluate_facility_release_boundary(
                 checks["all_mass_residuals_closed"] = False
                 blocking.append(
                     f"{label}: provider inventory residual is not depleted within {tolerance:g} kg"
+                )
+        provider_balance_statuses = provider.get("provider_mass_balance_statuses")
+        if provider_balance_statuses:
+            if (
+                not isinstance(provider_balance_statuses, Sequence)
+                or isinstance(provider_balance_statuses, (str, bytes))
+                or not provider_balance_statuses
+                or any(status != "CLOSED" for status in provider_balance_statuses)
+            ):
+                checks["all_provider_mass_balances_closed"] = False
+                blocking.append(
+                    f"{label}: provider mass-balance evidence is not closed"
                 )
 
     unique_blocking = list(dict.fromkeys(blocking))

@@ -137,6 +137,14 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
             getattr(packet, "cumulative_mass_out_kg", None) for packet in packets
         ],
     }
+    provider_mass_balances = [
+        getattr(packet, "provider_mass_balance", None) for packet in packets
+    ]
+    if any(value is not None for value in provider_mass_balances):
+        identity["provider_mass_balances"] = [
+            value.model_dump(mode="json") if value is not None else None
+            for value in provider_mass_balances
+        ]
     # Extension campaigns carry the canonical state payload in every case
     # identity so a rebound facility ledger can audit state coverage without
     # reconstructing state from release values. Native requests without a

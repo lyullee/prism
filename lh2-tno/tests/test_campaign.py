@@ -14,6 +14,7 @@ from lh2_tno.campaign import (
     _provider_packet_identity,
 )
 from lh2_tno.contracts import Facility
+from lh2_tno.equipment_boundary import ProviderMassBalance
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
 
@@ -54,6 +55,33 @@ def test_provider_packet_identity_keeps_digest_and_clock_without_flow_history():
         'available_mass_kg': [None],
         'cumulative_mass_out_kg': [None],
     }
+
+
+def test_provider_packet_identity_keeps_optional_mass_balance_evidence():
+    release = SimpleNamespace(
+        provider_export_schema='prism.resolved_release.v1',
+        event_id='scope/pipe/G1',
+        component_id='pipe-01',
+        port_id='pipe-out',
+        provider_source_digest='a' * 64,
+        provider_result_digest='b' * 64,
+        provider_boundary_reference='provider outlet',
+        termination_basis='reviewed_isolation_success',
+        duration_s=0.25,
+        provider_mass_balance=ProviderMassBalance(
+            initial_mass_kg=2.0,
+            cumulative_mass_out_kg=1.0,
+            final_mass_kg=1.0,
+            reported_residual_mass_kg=1.0,
+            derived_accounting_residual_kg=0.0,
+        ),
+    )
+    identity = _provider_packet_identity(SimpleNamespace(
+        resolved_release=release,
+        resolved_liquid_release=None,
+        resolved_release_set=None,
+    ))
+    assert identity["provider_mass_balances"][0]["final_mass_kg"] == 1.0
 
 
 def test_provider_packet_qualification_requires_exact_event_and_digest_identity():

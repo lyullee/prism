@@ -226,6 +226,11 @@ def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, obje
             "termination_basis": boundary.termination_basis,
             "provider_source_digest": boundary.provider_source_digest,
             "provider_result_digest": boundary.provider_result_digest,
+            "provider_mass_balance": (
+                boundary.provider_mass_balance.model_dump(mode="json")
+                if getattr(boundary, "provider_mass_balance", None) is not None
+                else None
+            ),
             "failure_opening_diameter_m": (
                 float(boundary.failure_opening_diameter_m)
                 if boundary.failure_opening_diameter_m is not None

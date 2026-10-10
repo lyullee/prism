@@ -142,6 +142,42 @@ def test_facility_release_boundary_gate_accepts_reviewed_isolation_with_closed_m
     assert gate["provider_qualification_evaluated"] is False
 
 
+def test_provider_mass_balance_is_carried_and_blocks_unbalanced_promotion():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "pipe/isolation",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "reviewed_isolation_success",
+                "time_s": 0.25,
+                "provenance": "provider isolation record",
+            },
+            "provider_packet_identity": {
+                "provider_result_digests": ["b" * 64],
+                "available_mass_kg": [2.0],
+                "cumulative_mass_out_kg": [1.0],
+                "provider_mass_balances": [{
+                    "schema_version": "prism.provider_mass_balance.v1",
+                    "initial_mass_kg": 2.0,
+                    "cumulative_mass_out_kg": 1.0,
+                    "final_mass_kg": 1.2,
+                    "reported_residual_mass_kg": 1.2,
+                    "derived_accounting_residual_kg": 0.2,
+                }],
+            },
+            "mass_ledger": {
+                "released_kg": 1.0,
+                "end_to_end_residual_kg": 0.0,
+            },
+        }]
+    )
+    row = ledger["rows"][0]
+    assert row["provider"]["provider_mass_balance_statuses"] == ["UNBALANCED"]
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is False
+    assert gate["checks"]["all_provider_mass_balances_closed"] is False
+
+
 def test_facility_release_boundary_gate_rejects_synthetic_and_withheld_rows():
     ledger = build_release_termination_inventory_ledger(
         [{

@@ -1,0 +1,180 @@
+{
+  "schema_version": "prism.provider_mass_balance_audit.v1",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract",
+  "record_count": 7,
+  "status_counts": {
+    "CLOSED": 3,
+    "PARTIAL": 3,
+    "UNBALANCED": 1
+  },
+  "closed_record_count": 3,
+  "unbalanced_record_count": 1,
+  "diagnostic_only": true,
+  "promotion_allowed": false,
+  "rows": [
+    {
+      "record_index": 0,
+      "provider_model": "lh2dt.LayeredTank",
+      "event_id": "native-layered-tank/accidental-leak-001",
+      "component_id": "native-layered-tank-diagnostic",
+      "termination_basis": "inventory_depletion",
+      "available_mass_kg": 434.50988152270014,
+      "cumulative_mass_out_kg": 0.00015346569325836357,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": 434.50988152270014,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 0.00015346569325836357,
+        "final_mass_kg": 434.50972805700695,
+        "reported_residual_mass_kg": 5.684341886080802e-14,
+        "derived_accounting_residual_kg": 5.684341886080802e-14,
+        "isolation_time_s": null,
+        "isolation_success": null
+      },
+      "status": "CLOSED",
+      "validation_error": null
+    },
+    {
+      "record_index": 1,
+      "provider_model": "lh2dt.DynamicHEMPipe",
+      "event_id": "native-dynamic-pipe/accidental-leak-001",
+      "component_id": "native-dynamic-pipe-diagnostic",
+      "termination_basis": "reviewed_isolation_success",
+      "available_mass_kg": 2.5156266507964498,
+      "cumulative_mass_out_kg": 2.5156266507964498,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": 2.5156266507964498,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 2.5156266507964498,
+        "final_mass_kg": 1.093854225801009,
+        "reported_residual_mass_kg": 1.0938542258010093,
+        "derived_accounting_residual_kg": 1.0938542258010093,
+        "isolation_time_s": 0.05,
+        "isolation_success": true
+      },
+      "status": "UNBALANCED",
+      "validation_error": null
+    },
+    {
+      "record_index": 2,
+      "provider_model": "lh2dt.MappedPump",
+      "event_id": "native-mapped-pump/accidental-leak-001",
+      "component_id": "native-mapped-pump-diagnostic",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 0.0014578333333333336,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": null,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 0.0014578333333333336,
+        "final_mass_kg": null,
+        "reported_residual_mass_kg": 0.9985421666666666,
+        "derived_accounting_residual_kg": null,
+        "isolation_time_s": null,
+        "isolation_success": null
+      },
+      "status": "PARTIAL",
+      "validation_error": null
+    },
+    {
+      "record_index": 3,
+      "provider_model": "lh2dt.DynamicReliquefier",
+      "event_id": "native-reliquefier/accidental-leak-001",
+      "component_id": "native-reliquefier-diagnostic",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "available_mass_kg": 0.0008198175196090351,
+      "cumulative_mass_out_kg": 1.0508063795789736e-06,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": 0.0008198175196090351,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 1.0508063795789736e-06,
+        "final_mass_kg": 0.0008187667132294561,
+        "reported_residual_mass_kg": 0.0,
+        "derived_accounting_residual_kg": 0.0,
+        "isolation_time_s": null,
+        "isolation_success": null
+      },
+      "status": "CLOSED",
+      "validation_error": null
+    },
+    {
+      "record_index": 4,
+      "provider_model": "lh2dt.StrokeLimitedCommandedValve",
+      "event_id": "native-stroke-valve/accidental-leak-001",
+      "component_id": "native-stroke-valve-diagnostic",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "available_mass_kg": 100.0,
+      "cumulative_mass_out_kg": 0.00012111170779661987,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": null,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 0.00012111170779661987,
+        "final_mass_kg": null,
+        "reported_residual_mass_kg": 99.9998788882922,
+        "derived_accounting_residual_kg": null,
+        "isolation_time_s": null,
+        "isolation_success": null
+      },
+      "status": "PARTIAL",
+      "validation_error": null
+    },
+    {
+      "record_index": 5,
+      "provider_model": "lh2dt.DynamicVaporizer",
+      "event_id": "native-vaporizer/accidental-leak-001",
+      "component_id": "native-vaporizer-diagnostic",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "available_mass_kg": 0.0008198175196090351,
+      "cumulative_mass_out_kg": 1.0508063795789736e-06,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": 0.0008198175196090351,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 1.0508063795789736e-06,
+        "final_mass_kg": 0.0008187667132294561,
+        "reported_residual_mass_kg": 0.0,
+        "derived_accounting_residual_kg": 0.0,
+        "isolation_time_s": null,
+        "isolation_success": null
+      },
+      "status": "CLOSED",
+      "validation_error": null
+    },
+    {
+      "record_index": 6,
+      "provider_model": "lh2dt.VentStack",
+      "event_id": "native-vent-stack/accidental-leak-001",
+      "component_id": "native-vent-stack-diagnostic",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 3.827489552640163e-05,
+      "provider_mass_balance": {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": null,
+        "cumulative_mass_in_kg": null,
+        "cumulative_mass_out_kg": 3.827489552640163e-05,
+        "final_mass_kg": null,
+        "reported_residual_mass_kg": 0.9999617251044736,
+        "derived_accounting_residual_kg": null,
+        "isolation_time_s": null,
+        "isolation_success": null
+      },
+      "status": "PARTIAL",
+      "validation_error": null
+    }
+  ],
+  "interpretation": "CLOSED means the provider's declared initial/final/input/output ledger closes within tolerance. UNBALANCED remains visible and blocks strict release-boundary promotion; it is never repaired by PRISM.",
+  "source_files": [
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\layered\\provider_response.json",
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pipe\\provider_response.json",
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pump\\provider_response.json",
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\reliquefier\\provider_response.json",
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\valve\\provider_response.json",
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vaporizer\\provider_response.json",
+    "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vent\\provider_response.json"
+  ]
+}

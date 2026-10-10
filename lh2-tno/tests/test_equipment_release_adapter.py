@@ -74,6 +74,26 @@ def test_adapter_promotes_history_without_extending_it():
     assert release.termination_provenance == "provider positive-mass threshold"
 
 
+def test_adapter_preserves_provider_mass_balance_without_calling_residual_depletion():
+    response = _response()
+    response["data"]["provider_meta"] = {
+        "initial_mass_kg": 1.0,
+        "final_mass_kg": 0.8,
+        "residual_mass_kg": 0.8,
+        "isolation_time_s": 0.1,
+        "isolation_success": True,
+    }
+    release = _build(response)
+    balance = release.provider_mass_balance
+    assert balance is not None
+    assert balance.initial_mass_kg == pytest.approx(1.0)
+    assert balance.final_mass_kg == pytest.approx(0.8)
+    assert balance.cumulative_mass_out_kg == pytest.approx(0.015)
+    assert balance.reported_residual_mass_kg == pytest.approx(0.8)
+    assert balance.derived_accounting_residual_kg == pytest.approx(-0.185)
+    assert balance.isolation_success is True
+
+
 def test_gas_adapter_preserves_explicit_hydrogen_property_basis():
     response = _response()
     response["data"]["fluid"] = "Hydrogen"
