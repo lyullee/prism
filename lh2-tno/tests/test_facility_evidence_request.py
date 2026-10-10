@@ -232,6 +232,7 @@ def test_case_requests_preserve_exact_vertical_handoff_identity_and_qualificatio
     assert report["case_request_count"] == 1
     request = report["case_requests"][0]
     assert request["request_kind"] == "QUALIFIED_PROVIDER_PACKET"
+    assert request["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
     assert request["qualification_required"] is True
     assert request["exact_match_required"]["component_id"] == "vertical-handoff-terminal-pipe-01"
     assert request["exact_match_required"]["port_ids"] == ["terminal_pipe.out"]
@@ -285,3 +286,31 @@ def test_case_request_merge_keeps_identity_present_only_on_duplicate_row():
     assert request["component_id"] == "vertical-pipe-01"
     assert request["exact_match_required"]["port_ids"] == ["pipe.out"]
     assert request["scenario_families"] == ["pipe_hole", "vertical_handoff"]
+
+
+def test_case_request_marks_missing_numerical_case_separately():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "event-missing",
+            "asset_id": "asset-missing",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["pipe_hole"],
+            "status": "UNCOMPUTED",
+            "uncomputed_reason": "provider did not return a consequence result",
+        }],
+        "uncomputed_cases": [],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "pipe_hole",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+        }]},
+    )
+    assert report["case_requests"][0]["gap_class"] == "NUMERICAL_CASE_MISSING"

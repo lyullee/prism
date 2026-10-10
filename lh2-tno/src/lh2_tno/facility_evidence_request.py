@@ -131,6 +131,25 @@ def _case_required_families(row: Mapping[str, Any]) -> list[str]:
     return sorted({str(family) for family in families if str(family).strip()})
 
 
+def _case_gap_class(
+    status: str,
+    *,
+    identity: Mapping[str, Any],
+    qualification_gap: bool,
+) -> str:
+    """Classify the closure state of one requested facility case.
+
+    The classification is accounting metadata only.  It deliberately keeps a
+    numerically missing case separate from a computed case whose provider
+    qualification or exact packet identity is still unavailable.
+    """
+    if status in {"UNCOMPUTED", "FAILED"}:
+        return "NUMERICAL_CASE_MISSING"
+    if status.startswith("EXECUTED") or qualification_gap or not identity:
+        return "QUALIFICATION_EVIDENCE_WITHHELD"
+    return "FAMILY_SCOPE_PARTIAL"
+
+
 def _build_case_requests(
     ledger: Mapping[str, Any],
 ) -> list[dict[str, Any]]:
@@ -240,6 +259,11 @@ def _build_case_requests(
             "annual_condition_id": row.get("annual_condition_id"),
             "scenario_families": families,
             "current_status": status,
+            "gap_class": _case_gap_class(
+                status,
+                identity=identity,
+                qualification_gap=qualification_gap,
+            ),
             "request_kind": "QUALIFIED_PROVIDER_PACKET",
             "qualification_required": qualification_gap,
             "exact_match_required": {
