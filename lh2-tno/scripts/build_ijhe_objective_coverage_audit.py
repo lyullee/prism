@@ -47,6 +47,7 @@ def main() -> int:
     parser.add_argument("--external-equipment-model-audit", type=Path)
     parser.add_argument("--equipment-scenario-coverage-audit", type=Path)
     parser.add_argument("--equipment-frequency-binding-audit", type=Path)
+    parser.add_argument("--release-closure-worklist", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -122,6 +123,11 @@ def main() -> int:
             equipment_frequency_binding_audit=(
                 _object(args.equipment_frequency_binding_audit)
                 if args.equipment_frequency_binding_audit
+                else None
+            ),
+            release_closure_worklist=(
+                _object(args.release_closure_worklist)
+                if args.release_closure_worklist
                 else None
             ),
         )

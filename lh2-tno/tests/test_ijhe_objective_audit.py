@@ -539,3 +539,78 @@ def test_objective_audit_records_equipment_frequency_binding_without_qra_promoti
         "diagnostic_observed_state_source_replay",
         "diagnostic_observed_state_runtime_frames",
     ]
+
+
+def test_objective_audit_records_open_release_closure_worklist_without_promotion():
+    inputs = _inputs()
+    inputs["release_closure_worklist"] = {
+        "schema_version": "prism.release_closure_worklist.v1",
+        "status": "OPEN_RELEASE_CLOSURE_WORKLIST",
+        "case_count": 4,
+        "open_case_count": 4,
+        "summary": {
+            "closure_status_counts": {"TERMINATION_OPEN": 4},
+            "closure_gap_counts": {
+                "ISOLATION_OPEN": 4,
+                "TERMINATION_OPEN": 4,
+                "PROVIDER_QUALIFICATION_OPEN": 4,
+            },
+            "mass_closure_open_case_count": 0,
+            "isolation_open_case_count": 4,
+            "termination_open_case_count": 4,
+            "inventory_closure_open_case_count": 0,
+            "provider_packet_required_case_count": 4,
+        },
+        "promotion_gates": {
+            "release_boundary_promotion_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "physical_validation_claim": False,
+            "diagnostic_only": True,
+        },
+        "_record_path": "release-closure-worklist.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_release_closure_worklist"
+    )
+    assert check["status"] == "BLOCKED_EVIDENCE"
+    assert check["observed"]["open_case_count"] == 4
+    assert check["observed"]["closure_gap_counts"]["ISOLATION_OPEN"] == 4
+    assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
+    assert "diagnostic_release_closure_worklist" not in report["strict_blocking_check_ids"]
+
+
+def test_objective_audit_marks_closed_release_closure_worklist_as_diagnostic_pass():
+    inputs = _inputs()
+    inputs["release_closure_worklist"] = {
+        "schema_version": "prism.release_closure_worklist.v1",
+        "status": "CLOSED_DIAGNOSTIC_BOUNDARY_WORKLIST",
+        "case_count": 1,
+        "open_case_count": 0,
+        "summary": {
+            "closure_status_counts": {"READY_FOR_STRICT_REVIEW": 1},
+            "closure_gap_counts": {},
+            "mass_closure_open_case_count": 0,
+            "isolation_open_case_count": 0,
+            "termination_open_case_count": 0,
+            "inventory_closure_open_case_count": 0,
+            "provider_packet_required_case_count": 0,
+        },
+        "promotion_gates": {
+            "release_boundary_promotion_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "physical_validation_claim": False,
+            "diagnostic_only": True,
+        },
+        "_record_path": "closed-release-closure-worklist.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_release_closure_worklist"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["closure_closed"] is True

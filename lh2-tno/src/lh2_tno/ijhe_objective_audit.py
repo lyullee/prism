@@ -66,6 +66,7 @@ def build_ijhe_objective_coverage_audit(
     external_equipment_model_audit: Mapping[str, Any] | None = None,
     equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
+    release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -95,6 +96,7 @@ def build_ijhe_objective_coverage_audit(
     external_equipment_model_path = _record_path(external_equipment_model_audit, None)
     equipment_scenario_coverage_path = _record_path(equipment_scenario_coverage_audit, None)
     equipment_frequency_binding_path = _record_path(equipment_frequency_binding_audit, None)
+    release_closure_worklist_path = _record_path(release_closure_worklist, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -1338,6 +1340,118 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "문헌 빈도는 설비 사고 시작의 연간 빈도로만 사용한다. 실제 피해 계산은 provider가 "
                 "지속시간·차단·재고·질량수지를 가진 방출 packet을 제출한 뒤에만 수행한다."
+            ),
+        ))
+
+    # Release closure is a prerequisite for a qualified provider packet, but
+    # the worklist itself is an intake/collection ledger.  Keep it outside
+    # the core and strict slices above so an open worklist cannot be mistaken
+    # for a new numerical failure or silently change the established blocker
+    # taxonomy.  A closed worklist still does not promote provider evidence,
+    # frequency, physical validation, or facility QRA.
+    closure_summary = (
+        release_closure_worklist.get("summary", {})
+        if isinstance(release_closure_worklist, Mapping)
+        else {}
+    )
+    if not isinstance(closure_summary, Mapping):
+        closure_summary = {}
+    closure_gaps = closure_summary.get("closure_gap_counts", {})
+    if not isinstance(closure_gaps, Mapping):
+        closure_gaps = {}
+    closure_promotions = (
+        release_closure_worklist.get("promotion_gates", {})
+        if isinstance(release_closure_worklist, Mapping)
+        else {}
+    )
+    if not isinstance(closure_promotions, Mapping):
+        closure_promotions = {}
+    closure_case_count = (
+        _int(release_closure_worklist.get("case_count"))
+        if isinstance(release_closure_worklist, Mapping)
+        else None
+    )
+    closure_open_case_count = (
+        _int(release_closure_worklist.get("open_case_count"))
+        if isinstance(release_closure_worklist, Mapping)
+        else None
+    )
+    closure_input_ok = (
+        isinstance(release_closure_worklist, Mapping)
+        and release_closure_worklist.get("schema_version")
+        == "prism.release_closure_worklist.v1"
+        and release_closure_worklist.get("status") in {
+            "OPEN_RELEASE_CLOSURE_WORKLIST",
+            "CLOSED_DIAGNOSTIC_BOUNDARY_WORKLIST",
+        }
+        and closure_case_count is not None
+        and closure_case_count >= 0
+        and closure_open_case_count is not None
+        and 0 <= closure_open_case_count <= closure_case_count
+        and isinstance(closure_summary.get("closure_status_counts"), Mapping)
+        and closure_promotions.get("release_boundary_promotion_allowed") is False
+        and closure_promotions.get("frequency_inference_allowed") is False
+        and closure_promotions.get("facility_qra_allowed") is False
+        and closure_promotions.get("physical_validation_claim") is False
+        and closure_promotions.get("diagnostic_only") is True
+    )
+    closure_closed = (
+        closure_input_ok
+        and closure_open_case_count == 0
+        and release_closure_worklist.get("status")
+        == "CLOSED_DIAGNOSTIC_BOUNDARY_WORKLIST"
+    )
+    if release_closure_worklist is not None:
+        rows.append(_row(
+            "diagnostic_release_closure_worklist",
+            "방출 종료·격리·재고 소진·질량잔차의 provider closure를 사건별로 추적하고 미해결 항목을 표시해야 한다",
+            "PASS" if closure_closed else "BLOCKED_EVIDENCE",
+            evidence_paths=(release_closure_worklist_path,),
+            observed={
+                "schema_version": (
+                    release_closure_worklist.get("schema_version")
+                    if isinstance(release_closure_worklist, Mapping)
+                    else None
+                ),
+                "worklist_status": (
+                    release_closure_worklist.get("status")
+                    if isinstance(release_closure_worklist, Mapping)
+                    else None
+                ),
+                "case_count": closure_case_count,
+                "open_case_count": closure_open_case_count,
+                "closure_input_valid": closure_input_ok,
+                "closure_closed": closure_closed,
+                "closure_gap_counts": dict(closure_gaps),
+                "mass_closure_open_case_count": closure_summary.get(
+                    "mass_closure_open_case_count"
+                ),
+                "isolation_open_case_count": closure_summary.get(
+                    "isolation_open_case_count"
+                ),
+                "termination_open_case_count": closure_summary.get(
+                    "termination_open_case_count"
+                ),
+                "inventory_closure_open_case_count": closure_summary.get(
+                    "inventory_closure_open_case_count"
+                ),
+                "provider_packet_required_case_count": closure_summary.get(
+                    "provider_packet_required_case_count"
+                ),
+                "promotion_gates": dict(closure_promotions),
+            },
+            blocking_reason=(
+                None
+                if closure_closed
+                else (
+                    "release closure worklist 입력이 없거나 종료·격리·재고 closure가 "
+                    f"아직 열려 있다(open_case_count={closure_open_case_count})"
+                )
+            ),
+            interpretation=(
+                "이 행은 provider 자료 수집과 종료 경계 확인을 위한 진단 원장이다. "
+                "worklist가 닫혀도 qualified provider evidence·독립 물리검증·시설 QRA를 "
+                "자동으로 열지 않는다."
             ),
         ))
 
