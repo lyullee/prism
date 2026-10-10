@@ -11,6 +11,7 @@ import time
 from .backend import BackendError, tree_digest
 from .consequences import ConsequenceRequest
 from .contracts import canonical_digest
+from .state_snapshot import EquipmentStateSnapshot, build_state_snapshot_from_normalized
 
 
 # A process-state snapshot is deliberately smaller than a consequence request.
@@ -88,6 +89,82 @@ def validate_equipment_process_state(normalized: Mapping) -> dict:
     return copy.deepcopy(dict(normalized))
 
 
+def _bind_normalized_state_snapshot(
+    request: ConsequenceRequest,
+    normalized: Mapping,
+    *,
+    pressure_tag: str | None = None,
+    temperature_tag: str | None = None,
+    captured_at_s: float | None = None,
+) -> ConsequenceRequest:
+    """Bind a valid live state frame to the provider request by digest.
+
+    Older direct resolver calls may contain only ``values`` and therefore do
+    not have enough provenance to form a canonical snapshot.  Such calls keep
+    their historical behavior.  A realtime frame, however, carries origin,
+    capture time and a verified frame digest; that path must preserve the
+    state snapshot in the consequence request so the provider release can be
+    audited against the exact observed state.
+    """
+    capture = captured_at_s if captured_at_s is not None else normalized.get("captured_at_s")
+    origin = normalized.get("origin")
+    frame_digest = normalized.get("frame_digest")
+    if capture is None or origin not in {
+        "historian_measured", "model_prediction", "reconstructed",
+        "figure_digitized", "video_recovered", "synthetic",
+    }:
+        return request
+    if not isinstance(frame_digest, str) or len(frame_digest) != 64:
+        # A hand-authored diagnostic mapping is not a verified runtime frame.
+        # Do not claim a state binding from an invalid provenance token.
+        return request
+    raw_snapshot = normalized.get("state_snapshot")
+    raw_snapshot_digest = normalized.get("state_snapshot_digest")
+    try:
+        if raw_snapshot is not None or raw_snapshot_digest is not None:
+            if not isinstance(raw_snapshot, Mapping) or not isinstance(raw_snapshot_digest, str):
+                raise ValueError("state_snapshot and state_snapshot_digest must be supplied together")
+            snapshot = EquipmentStateSnapshot.from_mapping(raw_snapshot)
+            if snapshot.digest() != raw_snapshot_digest:
+                raise ValueError("state_snapshot_digest does not match the runtime snapshot")
+        else:
+            snapshot = build_state_snapshot_from_normalized(
+                normalized,
+                component_id=request.component_id,
+                captured_at_s=float(capture),
+                pressure_tag=pressure_tag,
+                temperature_tag=temperature_tag,
+            )
+    except (TypeError, ValueError) as error:
+        raise ValueError(
+            f"verified realtime state could not be converted to a canonical snapshot: {error}"
+        ) from error
+    if snapshot.component_id != request.component_id:
+        raise ValueError("runtime state snapshot component does not match provider request")
+    digest = snapshot.digest()
+    if request.state_snapshot is not None and request.state_snapshot.digest() != digest:
+        raise ValueError(
+            "provider request state_snapshot does not match the normalized realtime state"
+        )
+    payload = request.model_dump(mode="json")
+    payload.update(
+        state_snapshot=snapshot.model_dump(mode="json"),
+        state_snapshot_digest=digest,
+        provider_state_snapshot_digest=digest,
+        provider_state_snapshot_digests=(
+            [digest] * len(request.provider_state_snapshot_digests)
+            if request.provider_state_snapshot_digests is not None
+            else None
+        ),
+    )
+    try:
+        return ConsequenceRequest.model_validate_json(
+            __import__('json').dumps(payload, allow_nan=False)
+        )
+    except (TypeError, ValueError) as error:
+        raise ValueError(f"provider request state snapshot binding failed: {error}") from error
+
+
 def request_from_telemetry(template, normalized, *, pressure_tag, temperature_tag):
     """Use confirmed SI tank state. This is not inverse leak identification."""
     normalized = validate_equipment_process_state(normalized)
@@ -103,7 +180,15 @@ def request_from_telemetry(template, normalized, *, pressure_tag, temperature_ta
     return ConsequenceRequest.model_validate_json(__import__('json').dumps(data,allow_nan=False))
 
 
-def request_from_equipment_resolver(template, normalized, resolver: Callable):
+def request_from_equipment_resolver(
+    template,
+    normalized,
+    resolver: Callable,
+    *,
+    pressure_tag: str | None = None,
+    temperature_tag: str | None = None,
+    captured_at_s: float | None = None,
+):
     """Accept one provider-owned release request for a normalized state.
 
     The resolver is the explicit seam to an equipment digital twin.  It may
@@ -142,7 +227,13 @@ def request_from_equipment_resolver(template, normalized, resolver: Callable):
         raise ValueError("release_resolver must not assign initiating frequency")
     if request.release_termination is None:
         raise ValueError("provider release request requires explicit release termination")
-    return request
+    return _bind_normalized_state_snapshot(
+        request,
+        normalized,
+        pressure_tag=pressure_tag,
+        temperature_tag=temperature_tag,
+        captured_at_s=captured_at_s,
+    )
 
 
 def _provider_port_state_ledger(boundary) -> dict[str, object]:
@@ -177,6 +268,60 @@ def _provider_port_state_ledger(boundary) -> dict[str, object]:
             if steps and len(states) == len(steps)
             else "port-state evidence is partial or absent; release boundary remains the only accepted consequence input"
         ),
+    }
+
+
+def _provider_port_state_component_ledger(path: Mapping[str, object]) -> dict[str, object]:
+    """Summarize port-state coverage across every provider endpoint."""
+    raw_boundaries = path.get("boundaries")
+    boundaries = (
+        tuple(item for item in raw_boundaries if isinstance(item, Mapping))
+        if isinstance(raw_boundaries, Sequence) and not isinstance(raw_boundaries, (str, bytes))
+        else ()
+    )
+    summaries = tuple(
+        item.get("provider_port_state")
+        for item in boundaries
+        if isinstance(item.get("provider_port_state"), Mapping)
+    )
+    interval_count = sum(
+        int(summary.get("interval_count", 0))
+        for summary in summaries
+        if isinstance(summary.get("interval_count"), int)
+    )
+    bound_interval_count = sum(
+        int(summary.get("bound_interval_count", 0))
+        for summary in summaries
+        if isinstance(summary.get("bound_interval_count"), int)
+    )
+    all_boundaries_bound = bool(boundaries) and len(summaries) == len(boundaries)
+    all_intervals_bound = (
+        all_boundaries_bound
+        and interval_count > 0
+        and bound_interval_count == interval_count
+        and all(summary.get("all_intervals_bound") is True for summary in summaries)
+    )
+    missing_times = [
+        float(time_s)
+        for summary in summaries
+        for time_s in summary.get("missing_time_s", ())
+        if isinstance(time_s, (int, float)) and not isinstance(time_s, bool)
+    ]
+    return {
+        "status": (
+            "ALL_BOUNDARIES_ALL_INTERVALS_BOUND"
+            if all_intervals_bound
+            else "PARTIAL_OR_MISSING_PORT_STATE"
+        ),
+        "boundary_count": len(boundaries),
+        "port_state_boundary_count": len(summaries),
+        "interval_count": interval_count,
+        "bound_interval_count": bound_interval_count,
+        "all_boundaries_bound": all_boundaries_bound,
+        "all_intervals_bound": all_intervals_bound,
+        "missing_time_s": missing_times,
+        "frequency_inference_performed": False,
+        "physical_validation_claim": False,
     }
 
 
@@ -406,6 +551,13 @@ class ConsequenceService:
             ('origin','independent_measurement_claim','data_age_s','frame_digest','mapping_digest')}
         result['telemetry_boundary']['data_age_at_output_s']=normalized['data_age_s']+result['service']['service_elapsed_ms']/1000
         result['telemetry_boundary']['equipment_release_resolved'] = equipment_release_resolved
+        result['telemetry_boundary']['state_snapshot_binding_status'] = (
+            'BOUND_CANONICAL_RUNTIME_STATE'
+            if request.state_snapshot is not None
+            else 'NOT_AVAILABLE_OR_LEGACY_INPUT'
+        )
+        result['telemetry_boundary']['state_snapshot_digest'] = request.state_snapshot_digest
+        result['telemetry_boundary']['provider_state_snapshot_digest'] = request.provider_state_snapshot_digest
         result['telemetry_boundary']['interpretation'] = (
             'equipment resolver supplied provider release; no inferred leak size or learned frequency'
             if equipment_release_resolved
@@ -413,14 +565,30 @@ class ConsequenceService:
         )
         return result
 
-    def update_from_equipment_state(self, template, normalized, *, release_resolver):
+    def update_from_equipment_state(
+        self,
+        template,
+        normalized,
+        *,
+        release_resolver,
+        pressure_tag: str | None = None,
+        temperature_tag: str | None = None,
+        captured_at_s: float | None = None,
+    ):
         """Evaluate a state-only input after an explicit provider resolution.
 
         This is the runtime-frame entry point. The resolver remains the owner of
         accident release geometry, duration, isolation, inventory depletion and
         termination; the service only evaluates the returned request.
         """
-        request = request_from_equipment_resolver(template, normalized, release_resolver)
+        request = request_from_equipment_resolver(
+            template,
+            normalized,
+            release_resolver,
+            pressure_tag=pressure_tag,
+            temperature_tag=temperature_tag,
+            captured_at_s=captured_at_s,
+        )
         return self._update_from_request(
             request,
             normalized,
@@ -441,6 +609,9 @@ class ConsequenceService:
             template,
             normalized,
             release_resolver=release_resolver,
+            pressure_tag=pressure_tag,
+            temperature_tag=temperature_tag,
+            captured_at_s=normalized.get("captured_at_s"),
         )
 
 
@@ -486,6 +657,8 @@ class RealtimeConsequenceMonitor:
         normalized = normalizer.normalize(
             frame, now_s=now_s, ambient_pressure_pa=ambient_pressure_pa
         )
+        source_time = float(frame.source_time_s)
+        normalized["captured_at_s"] = source_time
         result = self.service.update_from_telemetry(
             template,
             normalized,
@@ -493,7 +666,6 @@ class RealtimeConsequenceMonitor:
             temperature_tag=temperature_tag,
             release_resolver=release_resolver,
         )
-        source_time = float(frame.source_time_s)
         previous = self._last_source_time_by_stream.get(frame.stream_id)
         source_interval = None if previous is None else source_time - previous
         self._last_source_time_by_stream[frame.stream_id] = source_time
@@ -546,6 +718,7 @@ class RealtimeConsequenceMonitor:
             template,
             normalized,
             release_resolver=release_resolver,
+            captured_at_s=float(runtime_frame["captured_at_s"]),
         )
         source_time = float(runtime_frame["captured_at_s"])
         stream_id = str(
@@ -2173,6 +2346,7 @@ class FacilityRealtimeConsequenceMonitor:
                     if isinstance(inventory, Mapping)
                     else None
                 ),
+                "provider_port_state": _provider_port_state_component_ledger(path),
             }
             release_path_component_rows[component_id] = row
             for counts, value in (
@@ -2223,6 +2397,39 @@ class FacilityRealtimeConsequenceMonitor:
                 release_path_component_rows=release_path_component_rows,
             )
         )
+        port_state_rows = {
+            component_id: row.get("provider_port_state")
+            for component_id, row in release_path_component_rows.items()
+            if isinstance(row.get("provider_port_state"), Mapping)
+        }
+        port_state_all_interval_count = sum(
+            row.get("all_intervals_bound") is True
+            for row in port_state_rows.values()
+        )
+        port_state_accounting = {
+            "status": (
+                "AVAILABLE_COMPLETE_ALL_INTERVALS_BOUND"
+                if batch_status == "ACCEPTED"
+                and len(port_state_rows) == len(component_ids)
+                and port_state_all_interval_count == len(component_ids)
+                else "AVAILABLE_COMPLETE_COMPONENT_AUDIT"
+                if batch_status == "ACCEPTED"
+                and len(port_state_rows) == len(component_ids)
+                else "AVAILABLE_PARTIAL_BATCH"
+                if port_state_rows
+                else "WITHHELD_NO_PROVIDER_PORT_STATE"
+            ),
+            "component_rows": port_state_rows,
+            "component_count": len(component_ids),
+            "component_with_state_count": len(port_state_rows),
+            "component_all_intervals_bound_count": port_state_all_interval_count,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+            "promotion_policy": (
+                "diagnostic coverage only; missing provider port states are not treated as zero "
+                "and never open provider qualification or facility IR/F-N"
+            ),
+        }
         ignition_rows = {
             component_id: entry["ignition"]
             for component_id, entry in components.items()
@@ -2389,6 +2596,10 @@ class FacilityRealtimeConsequenceMonitor:
                 "equipment_release_path_withheld_component_count": len(accepted)
                 - release_path_available_count,
                 "equipment_release_path_accounting": release_path_accounting,
+                "provider_port_state_accounting": port_state_accounting,
+                "provider_port_state_component_count": len(port_state_rows),
+                "provider_port_state_all_interval_component_count": port_state_all_interval_count,
+                "provider_port_state_withheld_component_count": len(accepted) - len(port_state_rows),
                 "current_weather_ignition_accounting": ignition_accounting,
                 "current_weather_annual_ir_low_high": (
                     current_weather_ir if current_weather_risk_available else None

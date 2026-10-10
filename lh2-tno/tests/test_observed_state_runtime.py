@@ -107,9 +107,12 @@ def test_runtime_frame_provider_resolver_seam_is_explicit():
     report = build_observed_state_runtime_frames([_source()])
     frame = report["frames"][0]
     template = request().model_copy(update={"component_id": "tank-01"})
+    release = _release().model_copy(update={"component_id": "tank-01"})
+    defaults = _defaults()
+    defaults["component_id"] = "tank-01"
     provider_request = build_consequence_request_from_provider_release(
-        _release(), _defaults()
-    ).model_copy(update={"component_id": "tank-01"})
+        release, defaults
+    )
     seen = {}
 
     def resolver(_template, state):
@@ -125,6 +128,9 @@ def test_runtime_frame_provider_resolver_seam_is_explicit():
     assert isinstance(resolved, ConsequenceRequest)
     assert resolved.source_input is None
     assert resolved.resolved_release is not None
+    assert resolved.state_snapshot is not None
+    assert resolved.state_snapshot_digest == frame["state_snapshot_digest"]
+    assert resolved.provider_state_snapshot_digest == frame["state_snapshot_digest"]
     assert "annual_frequency_per_year" not in seen["state"]
 
 
@@ -143,9 +149,12 @@ def test_runtime_frame_monitor_executes_provider_release_and_deadline(tmp_path):
         ConsequenceService(pipeline), period_s=1.0
     )
     template = request().model_copy(update={"component_id": "tank-01"})
+    release = _release().model_copy(update={"component_id": "tank-01"})
+    defaults = _defaults()
+    defaults["component_id"] = "tank-01"
     provider_request = build_consequence_request_from_provider_release(
-        _release(), _defaults()
-    ).model_copy(update={"component_id": "tank-01"})
+        release, defaults
+    )
     result = monitor.update_from_runtime_frame(
         template,
         frame,
@@ -153,6 +162,8 @@ def test_runtime_frame_monitor_executes_provider_release_and_deadline(tmp_path):
         release_resolver=lambda _template, _state: provider_request,
     )
     assert result["telemetry_boundary"]["equipment_release_resolved"] is True
+    assert result["telemetry_boundary"]["state_snapshot_binding_status"] == "BOUND_CANONICAL_RUNTIME_STATE"
+    assert result["telemetry_boundary"]["state_snapshot_digest"] == frame["state_snapshot_digest"]
     assert result["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
     assert result["realtime"]["runtime_frame"] is True
     assert result["realtime"]["deadline_status"] == "MET"
@@ -184,9 +195,12 @@ def test_facility_runtime_frames_execute_each_provider_and_preserve_facility_gat
     for component_id in ("tank-01", "tank-02"):
         component_tmp_path = tmp_path / component_id
         component_tmp_path.mkdir()
+        release = _release().model_copy(update={"component_id": component_id})
+        defaults = _defaults()
+        defaults["component_id"] = component_id
         provider_request = build_consequence_request_from_provider_release(
-            _release(), _defaults()
-        ).model_copy(update={"component_id": component_id})
+            release, defaults
+        )
         bindings[component_id] = FacilityRealtimeBinding(
             component_id=component_id,
             template=request().model_copy(update={"component_id": component_id}),

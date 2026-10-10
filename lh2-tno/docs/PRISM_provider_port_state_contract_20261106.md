@@ -49,6 +49,11 @@ resolver = provider_release_resolver_from_packet(
 시설 모니터 화면에서 “방출 패킷은 있으나 upstream 포트 상태 증거가 없는
 경우”를 별도로 표시할 수 있다.
 
+시설 집계 결과의 `aggregate.provider_port_state_accounting`은 모든 설비에
+대해 이 상태가 있는지와 모든 방출 구간이 덮였는지를 따로 기록한다. 이
+요약은 결합 누락을 드러내는 진단용 장부이며, 빈도나 물리검증을 대신하지
+않고 시설 IR/F-N 승격을 자동으로 열지 않는다.
+
 `resolver`는 실시간 상태 프레임을 받아도 압력이나 온도로 방출을 재추정하지
 않는다. 설비 모델에서 새 방출 패킷을 생성한 뒤 새 리졸버를 만들거나,
 애플리케이션이 프레임별로 검증된 패킷을 공급해야 한다. 주파수도 이 경계에서
@@ -58,6 +63,12 @@ resolver = provider_release_resolver_from_packet(
 프레임마다 설비 모델을 호출하려면 `provider_release_resolver_from_provider`
 를 사용한다. 콜백이 반환한 패킷은 매 프레임 다시 strict 검증되며, 콜백이
 정상상태 스냅샷만 반환하거나 포트가 바뀌면 계산이 중단된다.
+
+검증된 `RealtimeConsequenceMonitor` 또는 관측 runtime frame 경로에서는
+`prism.equipment_state_snapshot.v1`을 request에 자동으로 부착하고
+`state_snapshot_digest`와 provider echo digest를 같은 값으로 묶는다. provider가
+다른 상태 snapshot을 반환하면 요청이 거부된다. 이 기능은 상태와 방출의
+연결을 기록하지만, 사고 크기·차단·빈도를 상태값으로 추정하지 않는다.
 
 ## 현재 적용 범위와 남은 검증
 

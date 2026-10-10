@@ -255,6 +255,9 @@ def service_state_from_runtime_frame(
     normalized = {
         "values": normalized_values,
         "origin": origin,
+        "captured_at_s": captured_at_s,
+        "state_snapshot": dict(snapshot),
+        "state_snapshot_digest": snapshot_digest,
         "independent_measurement_claim": origin == "historian_measured",
         "data_age_s": now_s - captured_at_s,
         "frame_digest": frame_digest,

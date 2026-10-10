@@ -553,6 +553,9 @@ def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
     assert path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
     assert result['aggregate']['equipment_release_path_component_count'] == 1
     assert result['aggregate']['equipment_release_path_withheld_component_count'] == 0
+    assert result['aggregate']['provider_port_state_component_count'] == 1
+    assert result['aggregate']['provider_port_state_all_interval_component_count'] == 0
+    assert result['aggregate']['provider_port_state_accounting']['status'] == 'AVAILABLE_COMPLETE_COMPONENT_AUDIT'
 
 
 def test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_and_consequence(tmp_path):
@@ -596,6 +599,8 @@ def test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_
     assert seen['state']['values']['P']['value_si'] == pytest.approx(600000.0)
     component = result['components']['storage-tank-01']
     assert component['result']['data']['provider_event'] == 'provider-accident-01'
+    assert component['result']['telemetry_boundary']['state_snapshot_binding_status'] == 'BOUND_CANONICAL_RUNTIME_STATE'
+    assert component['result']['telemetry_boundary']['state_snapshot_digest']
     path = component['equipment_release_path']
     assert path['status'] == 'AVAILABLE_PROVIDER_RELEASE_PATH'
     assert path['duration_s'] == pytest.approx(0.2)
