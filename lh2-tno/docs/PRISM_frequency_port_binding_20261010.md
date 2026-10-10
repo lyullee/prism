@@ -49,6 +49,8 @@ PRISM은 이벤트를 만들 때 다음을 확인한다.
 
 포트가 다르면 빈도를 억지로 붙이지 않고 오류를 낸다. 이 오류는 해당 사고 케이스가 **미계산**이라는 뜻이며, 빈도를 0으로 바꾸거나 다른 포트로 옮기지 않는다.
 
+provider 방출 작업목록을 만들 때 매니페스트에서 지정 포트가 빠져 있으면 작업목록은 해당 이벤트를 `UNCOMPUTED_NO_ACCIDENT_PORT`로 남긴다. 정상 운전 포트를 사고 포트로 대체하지 않으며, 누락된 포트를 복구할 때까지 packet 수는 증가하지 않는다.
+
 ## 포트가 아직 없는 기존 계획
 
 기존 문헌 계획은 하위 호환을 위해 `port_ids` 없이도 읽을 수 있다. 이런 이벤트는 component-level 빈도로만 표시되며, provider가 반환한 특정 방출 포트의 근거가 자동으로 생기지 않는다. 따라서 보고서의 `frequency_port_binding`에 `port_unbound_event_count`로 남는다.
@@ -64,6 +66,8 @@ PRISM은 이벤트를 만들 때 다음을 확인한다.
 - `coverage.by_component[*].generated_port_unbound_event_count`: 설비별 포트 미지정 이벤트 수
 
 `strict_facility_qra_gate`는 현재 `false`로 유지한다. 즉, 이 기능은 잘못된 포트 결합을 막고 심사 가능한 누락을 드러내는 연결부이며, 독립 물리 검증·provider 자격 증명·시설 전체 범위 충족을 대신하지 않는다.
+
+배포된 `examples/generic_lh2_full_scope_frequency_plan.json`은 이 계약을 사용해 24개 문헌 이벤트를 모두 포트 지정 상태로 생성한다. 열교환기 양단 파열 LOC는 `port_ids_by_loc`에 두 출구를, 단일 구멍 LOC는 한 출구를 지정한다. 이 예제의 `frequency_port_binding`은 `port_scoped_event_count=24`, `port_unbound_event_count=0`이어야 한다.
 
 ## 빈도에 관한 경계
 

@@ -5,6 +5,7 @@
       "id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "profile": "LH2_VESSEL",
+      "port_ids": ["tank-accident-out"],
       "physical_scope_ids": ["storage-tank-01-shell"],
       "classification_basis": "synthetic example only; real tank classification and applicability review required",
       "nominal_diameter_m": 1.27
@@ -13,6 +14,7 @@
       "id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "profile": "LH2_PIPE",
+      "port_ids": ["line-accident-out"],
       "physical_scope_ids": ["liquid-transfer-line-01-segment"],
       "classification_basis": "synthetic example only; real pipe length, segmentation and failure exposure review required",
       "nominal_diameter_m": 0.025,
@@ -24,6 +26,7 @@
       "id": "transfer-valve",
       "model_component_id": "transfer-valve-01",
       "profile": "LH2_VALVE",
+      "port_ids": ["valve-accident-out"],
       "physical_scope_ids": ["transfer-valve-01-body"],
       "classification_basis": "synthetic example only; real valve construction and exposure review required",
       "nominal_diameter_m": 0.025
@@ -32,6 +35,7 @@
       "id": "pressure-relief-vent",
       "model_component_id": "pressure-relief-vent-01",
       "profile": "TNO_RELIEF_DEVICE",
+      "port_ids": ["vent-accident-out"],
       "physical_scope_ids": ["pressure-relief-vent-01-device"],
       "classification_basis": "synthetic example only; direct substance contact and atmospheric discharge must be confirmed",
       "nominal_diameter_m": 0.025,
@@ -41,6 +45,7 @@
       "id": "transfer-pump",
       "model_component_id": "liquid-transfer-pump-01",
       "profile": "TNO_PUMP_STANDARD",
+      "port_ids": ["pump-accident-out"],
       "physical_scope_ids": ["liquid-transfer-pump-01-connection"],
       "classification_basis": "synthetic example only; largest connecting pipe and pump construction require review",
       "nominal_diameter_m": 0.025
@@ -49,6 +54,7 @@
       "id": "ambient-vaporizer",
       "model_component_id": "ambient-vaporizer-01",
       "profile": "TNO_HX_OUTSIDE_TUBES",
+      "port_ids": ["vaporizer-accident-out"],
       "physical_scope_ids": ["ambient-vaporizer-01-exchanger"],
       "classification_basis": "synthetic design classification only: hydrogen is outside tubes; real exchanger layout and dangerous-fluid side require review"
     },
@@ -56,6 +62,11 @@
       "id": "reliquefier",
       "model_component_id": "reliquefier-01",
       "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "port_ids_by_loc": {
+        "G4": ["reliquefier-accident-out-1", "reliquefier-accident-out-2"],
+        "G5": ["reliquefier-accident-out-1", "reliquefier-accident-out-2"],
+        "G6": ["reliquefier-accident-out-1"]
+      },
       "physical_scope_ids": ["reliquefier-01-exchanger"],
       "classification_basis": "synthetic design classification only: hydrogen is inside weak-shell tubes; real exchanger layout and tube count require review",
       "nominal_diameter_m": 0.025

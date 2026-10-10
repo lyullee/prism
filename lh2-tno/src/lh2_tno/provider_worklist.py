@@ -8,6 +8,7 @@ export into an accident.  Missing packets remain ``UNCOMPUTED``.
 from __future__ import annotations
 
 from collections import Counter
+import json
 from pathlib import Path
 from typing import Any, Literal, Mapping
 
@@ -194,7 +195,26 @@ def build_provider_release_worklist(
             "work_items": [],
         }
 
-    events = generate_events(manifest.to_facility(), frequency_plan)
+    frequency_port_binding_warning = None
+    try:
+        events = generate_events(manifest.to_facility(), frequency_plan)
+    except ValueError as error:
+        # A missing mapped accident port must remain visible as an uncomputed
+        # work item. Re-run only event generation with port annotations
+        # stripped so the component-level worklist can report the missing
+        # physical exit; never use this fallback to create a packet.
+        message = str(error)
+        if "references unknown port" not in message:
+            raise
+        raw_plan = frequency_plan.model_dump(mode="json")
+        for asset in raw_plan["assets"]:
+            asset.pop("port_ids", None)
+            asset.pop("port_ids_by_loc", None)
+        unbound_plan = FrequencyPlan.model_validate_json(
+            json.dumps(raw_plan, allow_nan=False)
+        )
+        events = generate_events(manifest.to_facility(), unbound_plan)
+        frequency_port_binding_warning = message
     model_binding_report = None
     model_binding_by_kind: dict[str, dict[str, Any]] = {}
     if model_binding is not None:
@@ -216,15 +236,36 @@ def build_provider_release_worklist(
     items: list[ProviderReleaseWorkItem] = []
     for event in events:
         requirements = _requirements(event)
-        ports = ports_by_component.get(event.model_component_id, ())
+        if event.port_ids is not None:
+            ports_by_id = {
+                port.id: port
+                for port in manifest.ports
+                if port.component_id == event.model_component_id
+            }
+            ports = tuple(
+                ports_by_id[port_id]
+                for port_id in event.port_ids
+                if port_id in ports_by_id
+            )
+            missing_requested_ports = tuple(
+                port_id for port_id in event.port_ids if port_id not in ports_by_id
+            )
+        else:
+            ports = ports_by_component.get(event.model_component_id, ())
+            missing_requested_ports = ()
         component_kind = next(
             (component.kind for component in manifest.components if component.id == event.model_component_id),
             None,
         )
         binding_row = model_binding_by_kind.get(component_kind or "")
         reasons: list[str] = []
-        port_missing = len(ports) < requirements["provider_endpoint_count"]
+        port_missing = bool(missing_requested_ports) or len(ports) < requirements["provider_endpoint_count"]
         if port_missing:
+            if missing_requested_ports:
+                reasons.append(
+                    "frequency event references missing accident port(s): "
+                    + ", ".join(missing_requested_ports)
+                )
             reasons.append(
                 f"requires {requirements['provider_endpoint_count']} explicit accident port(s); "
                 f"found {len(ports)}"
@@ -310,6 +351,7 @@ def build_provider_release_worklist(
             else []
         ),
         "generated_event_count": len(events),
+        "frequency_port_binding_warning": frequency_port_binding_warning,
         "provider_packet_count": 0,
         "status_counts": dict(status_counts),
         "scenario_family_counts": dict(sorted(scenario_family_counts.items())),
