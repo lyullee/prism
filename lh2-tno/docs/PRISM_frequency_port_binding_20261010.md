@@ -19,7 +19,18 @@
 }
 ```
 
-이 값은 `physical_scope_ids`와 다른 정보다. `physical_scope_ids`는 문헌 빈도를 적용한 물리적 설비·배관 구간을 세고, `port_ids`는 그 빈도가 어느 사고 출구로 배분됐는지 기록한다.
+한 자산의 LOC가 한쪽 구멍과 양단 파열을 함께 만들면 `port_ids_by_loc`로 LOC별 포트를 지정한다. 예를 들어 `G1` 양단 파열에는 두 포트를, `G2` 구멍에는 한 포트를 넣는다.
+
+```json
+{
+  "port_ids_by_loc": {
+    "G1": ["pipe-accident-a", "pipe-accident-b"],
+    "G2": ["pipe-accident-a"]
+  }
+}
+```
+
+이 값은 `physical_scope_ids`와 다른 정보다. `physical_scope_ids`는 문헌 빈도를 적용한 물리적 설비·배관 구간을 세고, `port_ids` 또는 `port_ids_by_loc`는 그 빈도가 어느 사고 출구로 배분됐는지 기록한다.
 
 PRISM은 이벤트를 만들 때 다음을 확인한다.
 

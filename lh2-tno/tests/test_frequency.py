@@ -227,6 +227,32 @@ def test_reviewed_frequency_port_allocation_is_checked_against_facility_topology
         generate_events(facility(), plan(inward_asset))
 
 
+def test_loc_specific_ports_support_mixed_one_and_two_ended_frequency_rows():
+    raw = json.loads((ROOT / 'examples' / 'consequence_facility.json').read_text(encoding='utf-8'))
+    raw['ports'].append({
+        'id': 'transfer.out.2', 'component_id': 'transfer',
+        'phase': 'any', 'direction': 'out',
+    })
+    mixed_facility = Facility.model_validate_json(json.dumps(raw))
+    mixed_asset = asset(
+        id='transfer-pipe', model_component_id='transfer', profile='TNO_PIPE',
+        physical_scope_ids=('transfer-segment',),
+        vessel_external_impact_or_operating_error=None, nominal_diameter_m=.025,
+        length_per_item_m=2.0, pipe_conditions='default_conditions',
+        pipe_correction_factor=1.0,
+        port_ids_by_loc={'G1': ('transfer.out', 'transfer.out.2'), 'G2': ('transfer.out',)},
+    )
+    mixed_plan = FrequencyPlan(
+        id='mixed', assets=(mixed_asset,),
+        excluded_model_components={x.id: 'outside mixed port test' for x in mixed_facility.components if x.id != 'transfer'},
+    )
+    rows = generate_events(mixed_facility, mixed_plan)
+    assert rows[0].release.mode == 'two_sided_rupture'
+    assert rows[0].port_ids == ('transfer.out', 'transfer.out.2')
+    assert rows[1].release.mode == 'hole'
+    assert rows[1].port_ids == ('transfer.out',)
+
+
 def test_loc_bind_calls_existing_consequence_pipeline_and_carries_provenance():
     class Backend:
         def run(self,operation,payload):

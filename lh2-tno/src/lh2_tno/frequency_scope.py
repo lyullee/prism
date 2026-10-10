@@ -20,7 +20,11 @@ def _component_rows(manifest: EquipmentManifest, plan: FrequencyPlan) -> list[di
                 "frequency_asset_ids": [asset.id for asset in assets],
                 "profiles": [asset.profile for asset in assets],
                 "reviewed_accident_port_ids": sorted({
-                    port_id for asset in assets for port_id in (asset.port_ids or ())
+                    port_id
+                    for asset in assets
+                    for group in ([asset.port_ids] if asset.port_ids is not None else [])
+                    + list(asset.port_ids_by_loc.values())
+                    for port_id in group
                 }),
                 "port_scoped_asset_count": sum(asset.port_ids is not None for asset in assets),
                 "port_unbound_asset_count": sum(asset.port_ids is None for asset in assets),

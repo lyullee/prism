@@ -85,6 +85,9 @@ class FrequencyAsset(Contract):
     # from physical_scope_ids: one equipment item can have multiple reviewed
     # exits, while the literature rate still belongs to the item/segment.
     port_ids: tuple[Name, ...] | None = None
+    # LOC-specific override for profiles that mix one-ended holes and
+    # two-ended ruptures (for example Purple pipe or heat-exchanger rows).
+    port_ids_by_loc: dict[Name, tuple[Name, ...]] = Field(default_factory=dict)
     profile: Name
     # Explicit engineering classification, especially pressure vs atmospheric
     # cryogenic storage and tube/shell pressure hierarchy. Never infer from P alone.
@@ -147,6 +150,9 @@ class FrequencyAsset(Contract):
             not self.port_ids or len(set(self.port_ids)) != len(self.port_ids)
         ):
             raise ValueError('frequency asset port_ids must be nonempty and unique')
+        for loc, port_ids in self.port_ids_by_loc.items():
+            if not port_ids or len(set(port_ids)) != len(port_ids):
+                raise ValueError(f'frequency asset port_ids_by_loc[{loc}] must be nonempty and unique')
         return self
 
 
@@ -182,18 +188,20 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
         raise ValueError('every model component must have a frequency scope or explicit exclusion reason')
     facility_ports = {port.id: port for port in facility.ports}
     for asset in plan.assets:
-        if asset.port_ids is None:
-            continue
-        for port_id in asset.port_ids:
-            port = facility_ports.get(port_id)
-            if port is None:
-                raise ValueError(f'frequency asset {asset.id} references unknown port {port_id}')
-            if port.component_id != asset.model_component_id:
-                raise ValueError(
-                    f'frequency asset {asset.id} port {port_id} belongs to a different component'
-                )
-            if port.direction == 'in':
-                raise ValueError(f'frequency asset {asset.id} port {port_id} is not an outward exit')
+        candidate_groups = list(asset.port_ids_by_loc.values())
+        if asset.port_ids is not None:
+            candidate_groups.append(asset.port_ids)
+        for port_group in candidate_groups:
+            for port_id in port_group:
+                port = facility_ports.get(port_id)
+                if port is None:
+                    raise ValueError(f'frequency asset {asset.id} references unknown port {port_id}')
+                if port.component_id != asset.model_component_id:
+                    raise ValueError(
+                        f'frequency asset {asset.id} port {port_id} belongs to a different component'
+                    )
+                if port.direction == 'in':
+                    raise ValueError(f'frequency asset {asset.id} port {port_id} is not an outward exit')
     data = catalogue()
     out = []
     for asset in plan.assets:
@@ -230,8 +238,15 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
                 p05 = multiplier * math.exp(row['mu'] + NormalDist().inv_cdf(.05)*row['sigma'])
                 p95 = multiplier * math.exp(row['mu'] + NormalDist().inv_cdf(.95)*row['sigma'])
                 limitations.append('Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals.')
+            event_port_ids = asset.port_ids_by_loc.get(row['loc'], asset.port_ids)
+            if event_port_ids is not None:
+                expected_ports = 2 if release['mode'] == 'two_sided_rupture' else 1
+                if len(event_port_ids) != expected_ports:
+                    raise ValueError(
+                        f'frequency asset {asset.id} LOC {row["loc"]} requires {expected_ports} reviewed port id(s)'
+                    )
             out.append(FrequencyEvent(id=f'{plan.id}/{asset.id}/{row["loc"]}', asset_id=asset.id,
-                model_component_id=asset.model_component_id, port_ids=asset.port_ids,
+                model_component_id=asset.model_component_id, port_ids=event_port_ids,
                 profile=asset.profile, loc=row['loc'],
                 basis=profile['basis'], base_rate=rate, rate_unit=profile['unit'],
                 exposure_multiplier=multiplier, annual_frequency_per_year=rate*multiplier,
