@@ -734,6 +734,18 @@ python scripts/audit_provider_packet_inputs.py `
 
 현재 provider와 legacy 폴더를 함께 확인할 때는 `scripts/audit_provider_artifact_roots.py`를 사용합니다. 두 결과를 합쳐 시설 위험으로 승격하지 않고, 현재 적격 packet 수와 legacy schema 누락 수를 분리해 보여 줍니다.
 
+전체 액화수소 디지털트윈 모델 루트의 관측 release, raw historian, parameter,
+topology linkage, provider 응답을 한 번에 검토할 때는 다음 명령을 사용합니다.
+이 명령은 모델 산출물을 읽기만 하며, exact digest·qualification sidecar·독립
+물리검증이 없으면 provider·빈도·시설 QRA를 승격하지 않습니다.
+
+```powershell
+python scripts/review_external_lh2_model_root.py `
+  --source-root "<액화수소 디지털트윈 모델 루트>" `
+  --closure-audit results/20261106/generic_lh2_provider_release_closure_current.json `
+  --output results/20261106/external_lh2_model_root_review.json
+```
+
 센터 폴더의 시나리오 CSV와 Excel도 별도로 감사합니다. 현재 CSV 3개 52행에서 `pipe_hole` 11, `valve_hole` 23, `vaporizer_hole` 4, `vent_hole` 4, `vessel_hole` 1, `inventory_over_600s` 1개의 사고 후보 family를 확인했고, Excel 17개에서 sequence 시트 21개와 time-series 시트 43개를 확인했습니다. time-series 43개 시트의 timestamp/일시와 PT·TT·DPT 센서 열, 관측 샘플 간격(중앙값 1초 7개, 60초 26개, 900초 10개)도 읽기 전용으로 기록했습니다. 이 파일들은 설비 운전상태·위험 후보 근거로 보존하지만 방출량·종료시각·위치·질량/엔탈피 장부가 없어 provider packet으로 승격하지 않습니다. 센서 기반 빈도도 학습하지 않습니다. 결과는 [센터 시나리오 증거 감사 기록](docs/PRISM_센터_시나리오_증거감사_20261009.md)과 `results/20261009/provider_evidence/center_scenario_evidence_audit.json`에 기록합니다. 실제 `액화수소검사지원센터 데이터` 폴더를 2026-10-09에 재감사해 동일 수치를 확인했으며, 재감사 산출물은 `results/20261014/center_scenario_evidence_live_audit.json`과 `center_provider_packet_request_catalog_live.json`에 남겼습니다. 후보 family 38행은 별도의 provider packet 요청 catalog로 정리했지만 `qualified_packet_count=0`, 빈도 미부여 상태를 유지합니다 (`scripts/build_provider_packet_request_catalog.py`, `center_provider_packet_request_catalog.json`).
 
 provider가 `prism.resolved_release.v1` packet을 내보내면 다음 adapter로 명시된 피해 계산 문맥에 연결할 수 있습니다. adapter는 packet의 상·개구·시간·질량/엔탈피 장부를 strict contract로 검증하고, `weather`, `ignition`, `domain`, 평가시계, 종료근거를 담은 defaults와 결합합니다. 빈도는 이 단계에서 부여하지 않으며, 이후 `--request-catalog`와 `bind_event()`의 설비·개구 exact-match에서만 연결됩니다.
