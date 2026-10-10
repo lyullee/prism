@@ -391,7 +391,11 @@ def _frequency_port_binding_summary(
         "source": source,
         "diagnostic_only": True,
         "frequency_inference_allowed": False,
-        "facility_qra_allowed": selected.get("facility_qra_allowed") is True,
+        # Readiness itself never opens facility QRA.  Keep the lower-level
+        # port-completeness result separately so a fully reviewed port map can
+        # be visible without being mistaken for provider/validation closure.
+        "facility_qra_allowed": False,
+        "port_binding_facility_qra_allowed": selected.get("facility_qra_allowed") is True,
         "reviewed_frequency_port_case_count": selected.get(
             "reviewed_frequency_port_case_count"
         ),

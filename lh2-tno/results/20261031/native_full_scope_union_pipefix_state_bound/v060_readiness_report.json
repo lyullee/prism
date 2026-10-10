@@ -147,6 +147,7 @@
       "diagnostic_only": true,
       "frequency_inference_allowed": false,
       "facility_qra_allowed": false,
+      "port_binding_facility_qra_allowed": false,
       "reviewed_frequency_port_case_count": 0,
       "provider_packet_only_case_count": 44,
       "port_binding_mismatch_case_count": 0,

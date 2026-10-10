@@ -61,6 +61,8 @@ v0.6.0 준비도 보고서의 `chain.frequency_port_binding`에도 같은 추적
 
 오래된 시설 assessment에 이 필드가 아직 없으면 readiness builder가 최신 `facility_evidence_request.frequency_port_binding`을 진단 출처로 표시한다. 이때 `source=facility_evidence_request`, `status=PORT_BINDING_WITHHELD`처럼 자료 부족을 드러내며 assessment를 보정하거나 포트를 추론하지 않는다.
 
+readiness의 `facility_qra_allowed`는 전체 provider·검증 게이트가 남아 있는 동안 항상 `false`다. 하위 포트 연결 결과는 `port_binding_facility_qra_allowed`로 따로 보여 주어, 포트 검토 완료와 시설 QRA 승격을 섞지 않는다.
+
 포트가 다르면 빈도를 억지로 붙이지 않고 오류를 낸다. 이 오류는 해당 사고 케이스가 **미계산**이라는 뜻이며, 빈도를 0으로 바꾸거나 다른 포트로 옮기지 않는다.
 
 시설 증거요청서도 provider packet이 아직 없는 미계산 사건의 `frequency_port_ids`를 `exact_match_required.port_ids`에 그대로 넣는다. provider가 나중에 다른 포트를 반환하면 `PORT_BINDING_MISMATCH`로 표시하고, 해당 packet은 자격심사에 사용할 수 없다.

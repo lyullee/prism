@@ -2746,5 +2746,8 @@
   "current_union_facility_evidence_request_provider_packet_only_case_count": 44,
   "current_union_v060_readiness_port_binding_source": "facility_evidence_request",
   "current_union_v060_readiness_port_binding_facility_qra_allowed": false,
-  "current_union_v060_readiness_report_record": "results/20261031/native_full_scope_union_pipefix_state_bound/v060_readiness_report.json"
+  "current_union_v060_readiness_report_record": "results/20261031/native_full_scope_union_pipefix_state_bound/v060_readiness_report.json",
+  "v060_readiness_port_binding_qra_promotion_separation_implemented": true,
+  "v060_readiness_port_binding_qra_promotion_separation_field": "chain.frequency_port_binding.port_binding_facility_qra_allowed",
+  "v060_readiness_port_binding_qra_promotion_separation_policy": "Readiness keeps facility_qra_allowed=false even when the lower-level port map is complete; port completeness is reported separately from provider, validation and facility-QRA promotion."
 }
