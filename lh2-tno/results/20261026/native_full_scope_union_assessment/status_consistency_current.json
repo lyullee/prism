@@ -23,6 +23,16 @@
       }
     },
     {
+      "name": "provider_packet_input_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.provider_packet_input_audit.v1",
+        "status": "NO_PROVIDER_PACKET_INPUT",
+        "accepted_provider_packet_count": 0,
+        "record": "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json"
+      }
+    },
+    {
       "name": "audit_case_gate",
       "status": "PASS",
       "evidence": {
@@ -164,7 +174,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 724
+        "full_portable_test_count": 730
       }
     },
     {
@@ -195,7 +205,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 724
+        "full_portable_test_count": 730
       }
     },
     {

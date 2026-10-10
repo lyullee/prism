@@ -1,0 +1,5 @@
+{
+  "schema": "prism.provider_packet_input_manifest.v1",
+  "description": "Replace the empty records array with reviewed provider release/qualification pairs before a facility QRA gate can open.",
+  "records": []
+}

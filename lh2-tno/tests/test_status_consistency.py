@@ -14,6 +14,7 @@ ASSESSMENT = ROOT / "results/20261024/native_generic_scope_vertical_merged_facil
 EVIDENCE_REQUEST = ROOT / "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json"
 LEDGER = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_ledger_population_v3.json"
 COVERAGE = ROOT / "results/20261024/native_generic_scope_vertical_case_packet_coverage_v1.json"
+CURRENT_PROVIDER_INPUT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json"
 
 
 def _report(**overrides):
@@ -41,6 +42,29 @@ def test_current_published_artifacts_are_consistent() -> None:
     assert report["blocking_reasons"] == []
     assert report["facility_ir_fn_promotion"] is False
     assert all(row["status"] == "PASS" for row in report["checks"])
+
+
+def test_current_provider_packet_input_audit_is_bound_to_status_ledgers() -> None:
+    report = _report(
+        provider_packet_input_audit=load_json_object(CURRENT_PROVIDER_INPUT_AUDIT),
+        provider_packet_input_audit_filename=CURRENT_PROVIDER_INPUT_AUDIT.name,
+    )
+    check = next(row for row in report["checks"] if row["name"] == "provider_packet_input_audit")
+    assert check["status"] == "PASS"
+    assert report["status"] == "CONSISTENT"
+
+
+def test_provider_packet_input_audit_pointer_drift_is_blocked() -> None:
+    current_status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    current_status["current_union_provider_packet_input_audit_record"] = "stale.json"
+    report = _report(
+        current_status=current_status,
+        provider_packet_input_audit=load_json_object(CURRENT_PROVIDER_INPUT_AUDIT),
+        provider_packet_input_audit_filename=CURRENT_PROVIDER_INPUT_AUDIT.name,
+    )
+    check = next(row for row in report["checks"] if row["name"] == "provider_packet_input_audit")
+    assert check["status"] == "FAIL"
+    assert report["status"] == "INCONSISTENT"
 
 
 def test_changed_case_coverage_cannot_pass() -> None:

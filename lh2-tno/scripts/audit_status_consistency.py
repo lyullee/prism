@@ -24,6 +24,11 @@ def main() -> int:
     parser.add_argument("--evidence-request", type=Path, required=True)
     parser.add_argument("--ledger", type=Path, required=True)
     parser.add_argument("--coverage", type=Path, required=True)
+    parser.add_argument(
+        "--provider-packet-input-audit",
+        type=Path,
+        help="optional current provider release/qualification input audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -40,6 +45,16 @@ def main() -> int:
             evidence_request_filename=args.evidence_request.name,
             ledger_filename=args.ledger.name,
             coverage_filename=args.coverage.name,
+            provider_packet_input_audit=(
+                load_json_object(args.provider_packet_input_audit)
+                if args.provider_packet_input_audit is not None
+                else None
+            ),
+            provider_packet_input_audit_filename=(
+                args.provider_packet_input_audit.name
+                if args.provider_packet_input_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"status consistency input error: {error}") from error

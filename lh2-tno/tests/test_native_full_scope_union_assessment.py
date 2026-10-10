@@ -34,6 +34,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     component_contribution_chain = _load("facility_component_contribution_audit.json")
     frequency_uncertainty_chain = _load("facility_frequency_uncertainty_audit.json")
     status_consistency = _load("status_consistency_current.json")
+    provider_packet_input_audit = _load("provider_packet_input_audit.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -145,8 +146,15 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     )
     assert frequency_uncertainty_chain["scenario_count"] == 5
     assert frequency_uncertainty_chain["mismatch_count"] == 0
+    assert provider_packet_input_audit["schema"] == "prism.provider_packet_input_audit.v1"
+    assert provider_packet_input_audit["status"] == "NO_PROVIDER_PACKET_INPUT"
+    assert provider_packet_input_audit["accepted_provider_packet_count"] == 0
     assert status_consistency["status"] == "CONSISTENT"
-    assert len(status_consistency["checks"]) == 19
+    assert len(status_consistency["checks"]) == 20
+    assert next(
+        row for row in status_consistency["checks"]
+        if row["name"] == "provider_packet_input_audit"
+    )["status"] == "PASS"
     assert status_consistency["blocking_reasons"] == []
     assert status_consistency["facility_ir_fn_promotion"] is False
 

@@ -1,0 +1,20 @@
+{
+  "schema": "prism.provider_packet_input_audit.v1",
+  "status": "NO_PROVIDER_PACKET_INPUT",
+  "input_record_count": 0,
+  "accepted_provider_packet_count": 0,
+  "rejected_record_count": 0,
+  "duplicate_event_ids": [],
+  "blocking_reasons": [
+    "provider packet manifest contains no records"
+  ],
+  "provider_packet_evidence": [],
+  "records": [],
+  "promotion_policy": {
+    "frequency_is_not_assigned": true,
+    "synthetic_input_is_not_promoted": true,
+    "qualification_sidecar_is_required": true,
+    "strict_release_contract_is_required": true,
+    "facility_ir_fn_promotion": "requires exact facility case coverage and independent validation gates"
+  }
+}

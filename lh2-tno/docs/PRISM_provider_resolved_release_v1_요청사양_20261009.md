@@ -81,6 +81,23 @@ python scripts/build_provider_request_catalog.py `
 
 설비 campaign도 같은 `--release-kind two_sided_rupture`를 사용한다. 현재 adapter는 두 endpoint를 각각 consequence 계산한 뒤 한 사건의 Frechet receptor-harm union으로 결합한다. endpoint 사이의 plume·압력·공유 재고 상호작용은 operator-limited로 남기며, 외부 실증 packet이 없으면 실제 시설 위험으로 승격하지 않는다.
 
+## 여러 provider 파일의 일괄 접수
+
+실제 provider가 여러 설비의 packet을 제출할 때는 파일마다 별도 자격 sidecar를 붙이고, PRISM에서 일괄 접수할 수 있다. `scripts/audit_provider_packet_inputs.py`의 manifest는 다음 두 형식을 지원한다.
+
+- `release`와 `qualification`에 JSON 객체를 inline으로 넣는 방식
+- `release_path`와 `qualification_path`에 manifest 기준 상대경로를 넣는 방식
+
+각 행은 `build_provider_packet_evidence_from_records()`의 strict 검사를 통과해야 `prism.provider_packet_evidence.v1` catalog row가 된다. 합성 입력, sidecar 상태·provider origin 오류, source/result digest 불일치, 누락 파일과 중복 `event_id`는 행별 오류로 남고 catalog에서 제외된다. 빈 manifest도 오류 없이 `NO_PROVIDER_PACKET_INPUT`으로 기록해 “자료를 못 찾았다”와 “자료를 받아서 검증했다”를 구분한다.
+
+```powershell
+python scripts/audit_provider_packet_inputs.py `
+  --manifest provider_packet_manifest.json `
+  --output provider_packet_input_audit.json
+```
+
+이 출력은 시설 case exact-match의 입력으로 사용할 수 있지만, 문헌 빈도를 만들거나 방출→피해 chain을 실행하지 않는다. `QUALIFIED_PROVIDER_PACKET_CATALOG` 이후에도 `facility_case_packet_coverage.py`가 event·component·port·source/result digest를 다시 대조하고, 독립 물리검증과 주요 사고범위 gate를 별도로 확인한다.
+
 ## 현재 외부 자료의 판정
 
 검사센터 provider 폴더 559개 JSON을 읽기 전용으로 감사한 결과, 정상·스크리닝 유량 파일 24개는 확인됐지만 적격 사고 packet과 비상 릴리프 packet은 각각 0건이었다. 따라서 현재 자료로는 실제 시설 위험을 계산하지 않는다. 감사기는 필요한 필드와 소유권·시계 규칙을 `release_evidence.provider_export_request`로 함께 출력한다.

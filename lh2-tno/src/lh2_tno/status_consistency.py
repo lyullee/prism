@@ -95,6 +95,8 @@ def build_status_consistency_report(
     evidence_request_filename: str,
     ledger_filename: str,
     coverage_filename: str,
+    provider_packet_input_audit: Mapping[str, Any] | None = None,
+    provider_packet_input_audit_filename: str | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed cross-artifact consistency report."""
     checks: list[dict[str, Any]] = []
@@ -206,6 +208,33 @@ def build_status_consistency_report(
             "blocking_reason_count": audit_blocking_reason_count,
         },
     )
+    if provider_packet_input_audit is not None:
+        input_filename = provider_packet_input_audit_filename or "provider_packet_input_audit.json"
+        input_status = provider_packet_input_audit.get("status")
+        input_count = provider_packet_input_audit.get("accepted_provider_packet_count")
+        _check(
+            checks,
+            "provider_packet_input_audit",
+            provider_packet_input_audit.get("schema")
+            == "prism.provider_packet_input_audit.v1"
+            and isinstance(input_count, int)
+            and input_count >= 0
+            and all(
+                _endswith(status.get("current_union_provider_packet_input_audit_record"), input_filename)
+                for status in (current_status, development_goal)
+            )
+            and all(
+                isinstance(status.get("current_union_provider_packet_input_audit_status"), str)
+                and str(input_status) in status["current_union_provider_packet_input_audit_status"]
+                for status in (current_status, development_goal)
+            ),
+            {
+                "schema": provider_packet_input_audit.get("schema"),
+                "status": input_status,
+                "accepted_provider_packet_count": input_count,
+                "record": current_status.get("current_union_provider_packet_input_audit_record"),
+            },
+        )
     _check(
         checks,
         "audit_case_gate",
