@@ -2438,5 +2438,14 @@
   "state_snapshot_result_binding_policy": "Exact component and provider-result digest match; canonical state snapshot and provider echo digest required; no release-value reconstruction; unbound campaign input fails closed",
   "native_full_scope_union_reproduction_campaign": "results/20261030/native_near_receptor_scope_packets_state_bound/campaign_state_bound.json",
   "native_full_scope_union_reproduction_state_result_binding": true,
-  "native_full_scope_union_result_state_atom_count": 176
+  "native_full_scope_union_result_state_atom_count": 176,
+  "scope_ledger_consistency_rebuild_implemented": true,
+  "scope_ledger_consistency_rebuild_module": "src/lh2_tno/scope_ledger_consistency.py",
+  "scope_ledger_consistency_rebuild_script": "scripts/run_native_full_scope_union_assessment.py",
+  "scope_ledger_consistency_latest_record": "results/20261026/native_full_scope_union_assessment/scope_ledger_consistency_current.json",
+  "scope_ledger_consistency_latest_status": "CONSISTENT_SCOPE_LEDGER; current 34-event union scope and merged facility ledger agree family-by-family; overlapping family rows remain non-additive",
+  "scope_ledger_consistency_latest_event_count": 34,
+  "scope_ledger_consistency_latest_ledger_event_count": 34,
+  "scope_ledger_consistency_non_additive_family_accounting": true,
+  "scope_ledger_consistency_test_status": "native union regression plus standalone mismatch/match tests; targeted 5 passed"
 }

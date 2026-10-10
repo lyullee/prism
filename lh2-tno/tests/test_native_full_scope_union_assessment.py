@@ -26,6 +26,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     audit = _load("ijhe_completion_audit.json")
     case_packet_coverage = _load("facility_case_packet_coverage.json")
     base_state_binding = _load("base_result_state_snapshot_binding.json")
+    scope_ledger_consistency = _load("scope_ledger_consistency_current.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -88,6 +89,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["base_result_state_snapshot_binding_event_count"] == 24
     assert verification["base_result_state_snapshot_binding_case_count"] == 43
     assert verification["base_result_state_snapshot_binding_risk_atom_count"] == 96
+    assert verification["scope_ledger_consistency_status"] == "CONSISTENT_SCOPE_LEDGER"
+    assert verification["scope_ledger_consistency_blocking_reason_count"] == 0
+    assert verification["scope_ledger_consistency_scope_event_count"] == 34
+    assert verification["scope_ledger_consistency_ledger_event_count"] == 34
 
     assert result["event_count"] == 34
     assert result["case_count"] == 44
@@ -108,6 +113,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert base_state_binding["event_count"] == 24
     assert base_state_binding["bound_case_count"] == 43
     assert base_state_binding["bound_risk_atom_count"] == 96
+    assert scope_ledger_consistency["status"] == "CONSISTENT_SCOPE_LEDGER"
+    assert scope_ledger_consistency["blocking_reasons"] == []
     assert any(
         harm > 0.0
         for atom in result["risk_atoms"]

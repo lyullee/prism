@@ -47,6 +47,9 @@ from lh2_tno.vertical_handoff_campaign import (  # noqa: E402
 from lh2_tno.extension_state_snapshot_coverage import (  # noqa: E402
     build_extension_state_snapshot_coverage,
 )
+from lh2_tno.scope_ledger_consistency import (  # noqa: E402
+    audit_scope_ledger_consistency,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -474,6 +477,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         frequency_scenarios=scenarios,
         facility_case_packet_coverage=facility_case_packet_coverage,
     )
+    # Re-run the scope/ledger comparison from the exact artifacts being
+    # written. Source campaign matrices are provenance views and may use
+    # overlapping family rows; the rebuilt scope matrix and merged ledger
+    # must still agree family by family before the union is published.
+    assessment_ledger = assessment.get("facility_risk_ledger")
+    if not isinstance(assessment_ledger, dict):
+        raise ValueError("facility assessment does not contain facility_risk_ledger")
+    scope_ledger_consistency = audit_scope_ledger_consistency(
+        merged_scope,
+        assessment_ledger,
+    )
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -592,6 +606,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "extension_state_snapshot_missing_event_ids": extension_state_snapshot_coverage[
             "missing_event_ids"
         ],
+        "scope_ledger_consistency_status": scope_ledger_consistency["status"],
+        "scope_ledger_consistency_blocking_reason_count": len(
+            scope_ledger_consistency["blocking_reasons"]
+        ),
+        "scope_ledger_consistency_scope_event_count": scope_ledger_consistency[
+            "scope_matrix_event_count"
+        ],
+        "scope_ledger_consistency_ledger_event_count": scope_ledger_consistency[
+            "facility_ledger_event_count"
+        ],
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -614,6 +638,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "vertical_handoff_rebound_result.json", vertical_result)
     _save(output / "inventory_depletion_rebound_result.json", inventory_result)
     _save(output / "scope_matrix.json", merged_scope)
+    _save(output / "scope_ledger_consistency_current.json", scope_ledger_consistency)
     _save(
         output / "frequency_scenarios.json",
         {

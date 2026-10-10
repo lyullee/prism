@@ -108,6 +108,7 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
 - `vertical_handoff_rebound_result.json`: namespace rebind provenance가 포함된 5개 vertical 사건 원장
 - `inventory_depletion_rebound_result.json`: 재고 소진 branch·조건 ID namespace rebind provenance가 포함된 5개 사건 원장
 - `scope_matrix.json`: 12개 주요 사고군의 병합 상태
+- `scope_ledger_consistency_current.json`: 현재 병합 범위표와 facility ledger의 family별 일관성 감사. 34개 event가 일치하고, 겹치는 사고군 행은 비가산으로 보존한다.
 - `facility_assessment.json`: 조건부 IR/F-N과 시설 QRA gate
 - `facility_evidence_request.json`: 각 사고군·case의 provider packet·물리검증·종료/재고 증거 요구
 - `facility_case_packet_coverage.json`: 44개 facility case별 qualified provider packet 대조

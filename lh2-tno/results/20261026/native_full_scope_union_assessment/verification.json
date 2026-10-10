@@ -53,6 +53,10 @@
   "extension_state_snapshot_coverage_bound_event_count": 10,
   "extension_state_snapshot_coverage_unbound_event_count": 0,
   "extension_state_snapshot_missing_event_ids": [],
+  "scope_ledger_consistency_status": "CONSISTENT_SCOPE_LEDGER",
+  "scope_ledger_consistency_blocking_reason_count": 0,
+  "scope_ledger_consistency_scope_event_count": 34,
+  "scope_ledger_consistency_ledger_event_count": 34,
   "limitations": [
     "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",
