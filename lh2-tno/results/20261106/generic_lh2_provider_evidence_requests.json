@@ -1,0 +1,2184 @@
+{
+  "schema_version": "prism.generic_provider_evidence_requests.v1",
+  "status": "OPEN_PROVIDER_EVIDENCE_REQUESTS",
+  "source_schema_version": "prism.generic_provider_release_closure_audit.v1",
+  "source_status": "CLOSURE_EVIDENCE_OPEN",
+  "event_count": 24,
+  "packet_count": 26,
+  "packet_path_count": 24,
+  "request_count": 26,
+  "closure_open_request_count": 15,
+  "qualification_open_request_count": 11,
+  "qualified_provider_packet_count": 0,
+  "requests": [
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+        "duration_s": 0.05,
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.008231481218448094,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "692058cbd34a64b0e827c7dcca6b5c121a581c590b478c8d6491fe7824d009c7"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\000_storage-tank-01_AREA_0.01pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+        "duration_s": 5.999999999999993e-05,
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.00010057793011042302,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "93db6889dc056c9e0d233e4e64ccf3e80d8af918f28eac2092b8c246663b010f"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "93db6889dc056c9e0d233e4e64ccf3e80d8af918f28eac2092b8c246663b010f"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\001_storage-tank-01_AREA_0.1pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+        "duration_s": 5.999999999999999e-06,
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.00010057968692257683,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "f89a23c8a19748b53ea572df4b18486926891c2e43e054e8956792506e1f08ff"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "f89a23c8a19748b53ea572df4b18486926891c2e43e054e8956792506e1f08ff"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\002_storage-tank-01_AREA_1pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+        "duration_s": 1e-06,
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.0001675637589142158,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "92423ee6d4064e5afa18974df1db115f8c5e2edef953c8f2de4bf3d3bba3387c"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "92423ee6d4064e5afa18974df1db115f8c5e2edef953c8f2de4bf3d3bba3387c"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\003_storage-tank-01_AREA_10pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+        "duration_s": 1e-06,
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.0016625798516415606,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a13ea1d54371078e9f1362010fb589835be212e05023e673b9079e357187b9a3"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a13ea1d54371078e9f1362010fb589835be212e05023e673b9079e357187b9a3"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\004_storage-tank-01_AREA_100pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 3.4802029894759985e-06,
+        "cumulative_mass_out_kg": 2.014140456353654e-08,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a2aa33b77959219d602e861bb5d28b689acb8275fb2f446eb8e5d0e87edd57c6"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a2aa33b77959219d602e861bb5d28b689acb8275fb2f446eb8e5d0e87edd57c6"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 3.480202989475999e-05,
+        "cumulative_mass_out_kg": 4.4338658741797916e-07,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "8a74e121e603c03d01c96f36013dab1dc6500caaffa206ef1776ebc16778791d"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "8a74e121e603c03d01c96f36013dab1dc6500caaffa206ef1776ebc16778791d"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 0.00034802029894760006,
+        "cumulative_mass_out_kg": 1.1651055997280421e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "6321526f1b73b4f042177e8b3473b89c892e855787a6f8ebcfd4cbafbad11b85"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "6321526f1b73b4f042177e8b3473b89c892e855787a6f8ebcfd4cbafbad11b85"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\007_liquid-transfer-line-01_AREA_1pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 0.0034802029894759993,
+        "cumulative_mass_out_kg": 2.1053319426559835e-05,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "0dd657e8ab8e76ee09f96e4dffceab8a54187f16d91e748fd946735e22053ccf"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "0dd657e8ab8e76ee09f96e4dffceab8a54187f16d91e748fd946735e22053ccf"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\008_liquid-transfer-line-01_AREA_10pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.0001,
+        "available_mass_kg": 0.034802029894759993,
+        "cumulative_mass_out_kg": 0.00040250847725729254,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a3624efecb19ba260cf56543a0720c4e545b4e8240cb4231a55f1c404c5d529b"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a3624efecb19ba260cf56543a0720c4e545b4e8240cb4231a55f1c404c5d529b"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\009_liquid-transfer-line-01_AREA_100pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 3.797180625577987e-05,
+        "cumulative_mass_out_kg": 3.164317187981656e-05,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "bdf1c97f79537b66efac7cca03fe61d11a3546345fb35d7cb7bce5bb3177d0e8"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "bdf1c97f79537b66efac7cca03fe61d11a3546345fb35d7cb7bce5bb3177d0e8"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\010_transfer-valve-01_AREA_0.01pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.0003797180625577988,
+        "cumulative_mass_out_kg": 0.0003164317187981657,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "8529911e9fa63a213bb1eb524291b3537f363e52702f0b2ecae40b5b16d43ce2"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "8529911e9fa63a213bb1eb524291b3537f363e52702f0b2ecae40b5b16d43ce2"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\011_transfer-valve-01_AREA_0.1pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.0037971806255779894,
+        "cumulative_mass_out_kg": 0.003164317187981658,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "6e60617fc68dc1f7409a36914b57f50f4fe0f6323cf1d4181d266ccd122c815a"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "6e60617fc68dc1f7409a36914b57f50f4fe0f6323cf1d4181d266ccd122c815a"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\012_transfer-valve-01_AREA_1pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.03797180625577989,
+        "cumulative_mass_out_kg": 0.03164317187981657,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "b592913739901e48ce53301c7b8b04c9c66016cd4baa05d5d62c99d065782b35"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "b592913739901e48ce53301c7b8b04c9c66016cd4baa05d5d62c99d065782b35"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\013_transfer-valve-01_AREA_10pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.3797180625577989,
+        "cumulative_mass_out_kg": 0.31643171879816573,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "c17dab8de03b0859969a58ea7d8b84b66967176ee2fe967bc66a6e91854dce5e"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "c17dab8de03b0859969a58ea7d8b84b66967176ee2fe967bc66a6e91854dce5e"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\014_transfer-valve-01_AREA_100pct\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "port_id": "vent-accident-out",
+        "event_kind": "emergency_relief",
+        "input_origin": "model_prediction",
+        "termination_basis": "emergency_relief_discharge",
+        "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
+        "duration_s": 0.5,
+        "available_mass_kg": 0.0008087150217064195,
+        "cumulative_mass_out_kg": 0.0006739291847553497,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "372ff2bad3344ecba21f68c1cbd279085467a5e1c5b3a08f8e1f86ed8743bfb5"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "372ff2bad3344ecba21f68c1cbd279085467a5e1c5b3a08f8e1f86ed8743bfb5"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\015_pressure-relief-vent-01_G1\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "port_id": "pump-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external MappedPump H-Q-N point and matched atmospheric valve over bounded feed-through horizon",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.00048,
+        "cumulative_mass_out_kg": 0.0004,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "5690e9cc0fbba465f3de79078e47e7738a0b319cdd0fbddc8e008018c9435c72"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "pump_trip_or_seal_failure_history",
+          "accepted": "reviewed pump failure state and clock",
+          "reason": "pump release duration depends on the pump failure mode"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "upstream service must be closed at the pump boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "5690e9cc0fbba465f3de79078e47e7738a0b319cdd0fbddc8e008018c9435c72"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\016_liquid-transfer-pump-01_G1\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "port_id": "pump-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external MappedPump H-Q-N point and matched atmospheric valve over bounded feed-through horizon",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.00048,
+        "cumulative_mass_out_kg": 0.0004,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "ca3620c3c8484efb6fb486f62785ab9946e4839f86b1da2febcf7ac06f838225"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "pump_trip_or_seal_failure_history",
+          "accepted": "reviewed pump failure state and clock",
+          "reason": "pump release duration depends on the pump failure mode"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "upstream service must be closed at the pump boundary"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "ca3620c3c8484efb6fb486f62785ab9946e4839f86b1da2febcf7ac06f838225"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\017_liquid-transfer-pump-01_G2\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume releasable-inventory ledger; atmospheric-pressure equilibrium residual is retained",
+        "duration_s": 1.6000000000000003,
+        "available_mass_kg": 4.956379784841933e-06,
+        "cumulative_mass_out_kg": 4.956379784841932e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a4a02cc0a100ab910c7ab63b797f7c7e6105c201e60683599b48e83e3de0fc97"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a4a02cc0a100ab910c7ab63b797f7c7e6105c201e60683599b48e83e3de0fc97"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\018_ambient-vaporizer-01_G1\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_over_600s",
+        "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
+        "duration_s": 600.0,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 4.956379784841932e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a2f2b5c8a1afd4dab33c9fca88dfa33324de6c1f5ea1072fd6787bdbc25d3243"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "process_side_state_history",
+          "accepted": "reviewed vaporizer process-side state and boundary history",
+          "reason": "vaporizer failure must retain its own phase and inventory basis"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "the downstream gas boundary cannot define the upstream liquid release"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a2f2b5c8a1afd4dab33c9fca88dfa33324de6c1f5ea1072fd6787bdbc25d3243"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\019_ambient-vaporizer-01_G2\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume state with explicit valve; residual inventory retained at synthetic horizon",
+        "duration_s": 0.5,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 7.221896865709533e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "aadf02bc05ace43145e907f15bd16f74a29875714d0ee7c47b1dae3a29e44526"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "process_side_state_history",
+          "accepted": "reviewed vaporizer process-side state and boundary history",
+          "reason": "vaporizer failure must retain its own phase and inventory basis"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "the downstream gas boundary cannot define the upstream liquid release"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "aadf02bc05ace43145e907f15bd16f74a29875714d0ee7c47b1dae3a29e44526"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\020_ambient-vaporizer-01_G3\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4::reliquefier-accident-out-1",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "two_sided_rupture",
+        "termination_provenance": "external DynamicReliquefier shared inventory over declared two-sided rupture horizon",
+        "duration_s": 1e-05,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 3.595846016954127e-08,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "b7ce747804495d5afd8a3dafecac4d6e6038621a61c1cb11386244a953c697dd"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "b7ce747804495d5afd8a3dafecac4d6e6038621a61c1cb11386244a953c697dd"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
+      "packet_index": 0,
+      "packet_count": 2
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4::reliquefier-accident-out-2",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-2",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "two_sided_rupture",
+        "termination_provenance": "external DynamicReliquefier shared inventory over declared two-sided rupture horizon",
+        "duration_s": 1e-05,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 3.595846016954127e-08,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "abdc4cc50163fdf7638124167f3398cdefeec51280b171c2ed211c8cb1783e04"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "abdc4cc50163fdf7638124167f3398cdefeec51280b171c2ed211c8cb1783e04"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
+      "packet_index": 1,
+      "packet_count": 2
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5::reliquefier-accident-out-1",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "two_sided_rupture",
+        "termination_provenance": "external DynamicReliquefier shared inventory over declared two-sided rupture horizon",
+        "duration_s": 1e-05,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 3.595846016954127e-08,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "2169b734e2437b49041f88772bf44174cf97cd74e1024ac4c3b2481a03e9a8f9"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "2169b734e2437b49041f88772bf44174cf97cd74e1024ac4c3b2481a03e9a8f9"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
+      "packet_index": 0,
+      "packet_count": 2
+    },
+    {
+      "request_schema": "prism.provider_qualification_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5::reliquefier-accident-out-2",
+      "status": "OPEN_QUALIFICATION",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-2",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "two_sided_rupture",
+        "termination_provenance": "external DynamicReliquefier shared inventory over declared two-sided rupture horizon",
+        "duration_s": 1e-05,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 3.595846016954127e-08,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "d2839264515c5684780f8577ed60dc0f4488e8af5aeeeb5aa833890282a3a069"
+      },
+      "blocking_reasons": [],
+      "required_evidence": [
+        {
+          "field": "qualification_sidecar",
+          "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+          "reason": "closure readiness does not prove that a provider output is reviewed and qualified"
+        },
+        {
+          "field": "provider_source_digest",
+          "accepted": "exact SHA-256 of the provider source/state input",
+          "reason": "qualification must identify the source state used by the packet"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "exact SHA-256 of the resolved release result",
+          "reason": "qualification must bind to the result consumed by SLABx-LH2"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or explicit validation gap",
+          "reason": "provider qualification is separate from independent physical validation"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "d2839264515c5684780f8577ed60dc0f4488e8af5aeeeb5aa833890282a3a069"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_already_closed": true,
+        "qualification_sidecar_digest_bound": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "qualification_only",
+      "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
+      "packet_index": 1,
+      "packet_count": 2
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "status": "OPEN_CLOSURE",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external lh2dt.DynamicReliquefier finite-volume state with explicit valve; residual inventory retained at synthetic horizon",
+        "duration_s": 0.5,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 5.226060443124568e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "eb1350b9f6adb50ed9a3cb696876b0bace488662cf6ac5c6d79de80c0b78c1e7"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "reliquefier_failure_mode_and_endpoint_history",
+          "accepted": "reviewed failure mode with every affected endpoint",
+          "reason": "reliquefier cases may have more than one provider outlet"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "the endpoint history must close against the affected inventory"
+        }
+      ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "eb1350b9f6adb50ed9a3cb696876b0bace488662cf6ac5c6d79de80c0b78c1e7"
+        ],
+        "exact_digest_binding": true
+      },
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "request_kind": "release_closure_and_qualification",
+      "closure_status": "CLOSURE_EVIDENCE_OPEN",
+      "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\023_reliquefier-01_G6\\resolved_release.json",
+      "packet_index": 0,
+      "packet_count": 1
+    }
+  ],
+  "frequency_inference_allowed": false,
+  "facility_qra_allowed": false,
+  "diagnostic_only": true,
+  "policy": "Every generic provider packet is represented. Closure-open packets require termination, isolation and inventory evidence; closure-ready packets still require an exact qualification sidecar. No duration, inventory, frequency or facility QRA is inferred."
+}

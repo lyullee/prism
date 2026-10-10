@@ -193,6 +193,107 @@ def _closure_request(
     }
 
 
+def build_provider_qualification_request(
+    packet: Mapping[str, Any],
+    *,
+    event_id: Any = None,
+    event_kind: Any = None,
+    blocking_reasons: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Build a qualification-only request for a closure-ready packet.
+
+    Closure readiness is deliberately separate from provider qualification.
+    This request therefore preserves the exact packet identity and digests but
+    never invents a review record, physical-validation result, frequency, or
+    facility-QRA claim.
+    """
+
+    resolved_event_id = packet.get("event_id", event_id)
+    current = {
+        "event_id": resolved_event_id,
+        "component_id": packet.get("component_id"),
+        "port_id": packet.get("port_id"),
+        "event_kind": packet.get("event_kind", event_kind),
+        "input_origin": packet.get("input_origin"),
+        "termination_basis": packet.get("termination_basis"),
+        "termination_provenance": packet.get("termination_provenance"),
+        "duration_s": packet.get("duration_s"),
+        "available_mass_kg": packet.get("available_mass_kg"),
+        "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+        "provider_source_digest": packet.get("provider_source_digest"),
+        "provider_result_digest": packet.get("provider_result_digest"),
+    }
+    sidecar = {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": ["native_provider", "reviewed_actual"],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [packet.get("provider_source_digest")],
+        "provider_result_digests": [packet.get("provider_result_digest")],
+        "exact_digest_binding": True,
+    }
+    return {
+        "request_schema": "prism.provider_qualification_request.v1",
+        "request_id": str(resolved_event_id),
+        "status": "OPEN",
+        "current_packet": current,
+        "blocking_reasons": list(dict.fromkeys(str(item) for item in blocking_reasons)),
+        "required_evidence": [
+            {
+                "field": "qualification_sidecar",
+                "accepted": "prism.provider_qualification_evidence.v1 with status qualified_actual",
+                "reason": "closure readiness does not prove that a provider output is reviewed and qualified",
+            },
+            {
+                "field": "provider_source_digest",
+                "accepted": "exact SHA-256 of the provider source/state input",
+                "reason": "qualification must identify the source state used by the packet",
+            },
+            {
+                "field": "provider_result_digest",
+                "accepted": "exact SHA-256 of the resolved release result",
+                "reason": "qualification must bind to the result consumed by SLABx-LH2",
+            },
+            {
+                "field": "independent_validation_reference",
+                "accepted": "reviewed validation record or explicit validation gap",
+                "reason": "provider qualification is separate from independent physical validation",
+            },
+        ],
+        "qualification_sidecar_required": sidecar,
+        "acceptance": {
+            "exact_event_component_port_match": True,
+            "termination_evidence_already_closed": True,
+            "qualification_sidecar_digest_bound": True,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        },
+    }
+
+
+def build_provider_release_closure_request(
+    packet: Mapping[str, Any],
+    *,
+    event_id: Any = None,
+    event_kind: Any = None,
+    blocking_reasons: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Build a closure-and-qualification request for an open packet.
+
+    This public wrapper is used when the campaign audit could not attach its
+    inline request (for example, when the provider packet itself failed schema
+    loading).  The wrapper preserves the same fail-closed request template and
+    never repairs the packet or infers a release boundary.
+    """
+
+    return _closure_request(
+        packet,
+        event_id=event_id,
+        event_kind=event_kind,
+        blocking_reasons=blocking_reasons,
+    )
+
+
 class GenericProviderReleaseClosureError(ValueError):
     """Raised when campaign packet evidence is malformed."""
 
@@ -507,5 +608,7 @@ def audit_generic_provider_release_closure(
 __all__ = [
     "SCHEMA",
     "GenericProviderReleaseClosureError",
+    "build_provider_release_closure_request",
+    "build_provider_qualification_request",
     "audit_generic_provider_release_closure",
 ]
