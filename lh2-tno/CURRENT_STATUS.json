@@ -3819,7 +3819,9 @@
   "generic_provider_evidence_sidecar_manifest_template_entry_count": 26,
   "generic_provider_evidence_sidecar_manifest_template_promotion_allowed": false,
   "ci_local_reproduction_record": "results/20261106/ci_local_reproduction.json",
-  "ci_local_reproduction_status": "PASS_LOCAL_REPRODUCTION; 904 passed, 1 skipped; wheel frequency catalogue and entry points verified; GitHub Actions run not claimed",
+  "ci_local_reproduction_status": "PASS_LOCAL_AND_GITHUB_ACTIONS; 904 passed, 1 skipped; wheel frequency catalogue and entry points verified; run 38053206873 succeeded",
   "ci_local_reproduction_wheel_sha256": "7127d44747ae6fc4f0d3b0fc0208242ef3e1400ddf4905a8f641948bb1804d2e",
-  "ci_local_reproduction_github_actions_claim": false
+  "ci_local_reproduction_github_actions_claim": true,
+  "ci_local_reproduction_github_actions_run_id": 38053206873,
+  "ci_local_reproduction_github_actions_url": "https://github.com/lyullee/prism/actions/runs/38053206873"
 }

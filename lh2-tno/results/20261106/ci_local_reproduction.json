@@ -1,6 +1,6 @@
 {
   "schema_version": "prism.ci_local_reproduction.v1",
-  "status": "PASS_LOCAL_REPRODUCTION",
+  "status": "PASS_LOCAL_AND_GITHUB_ACTIONS",
   "commit": "d368aea",
   "workflow": "/.github/workflows/tests.yml",
   "python_requirement": ">=3.12",
@@ -13,8 +13,11 @@
     "prism_entrypoint": "prism = tno_host:main",
     "lh2_entrypoint": "lh2-tno = lh2_tno.cli:main"
   },
-  "github_actions_claim": false,
+  "github_actions_claim": true,
+  "github_actions_run_id": 38053206873,
+  "github_actions_conclusion": "success",
+  "github_actions_url": "https://github.com/lyullee/prism/actions/runs/38053206873",
   "facility_qra_claim": false,
-  "note": "Local reproduction of the repository workflow after the CI action hardening and qualification-sidecar manifest template changes; it does not assert that a private GitHub Actions run completed."
+  "note": "Local reproduction and authenticated GitHub Actions verification after the CI action hardening and qualification-sidecar manifest template changes; the recorded run completed successfully."
 }
 
