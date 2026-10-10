@@ -42,6 +42,8 @@
           "observed_component_count": 3,
           "state_model_bound_component_count": 3,
           "diagnostic_release_adapter_component_count": 3,
+          "facility_component_identity_resolved_count": 0,
+          "facility_component_identity_unresolved_count": 3,
           "qualified_provider_packet_count": 0,
           "valid": true
         }

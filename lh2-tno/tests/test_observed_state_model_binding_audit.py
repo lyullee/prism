@@ -23,11 +23,15 @@ def test_observed_signals_bind_to_normal_models_without_release_promotion():
     assert report["observed_component_count"] == 3
     assert report["state_model_bound_component_count"] == 3
     assert report["diagnostic_release_adapter_component_count"] == 3
+    assert report["facility_component_identity_resolved_count"] == 0
+    assert report["facility_component_identity_unresolved_count"] == 3
     assert report["qualified_provider_packet_count"] == 0
     assert report["policy"]["normal_state_model_is_not_accident_release"] is True
+    assert report["policy"]["facility_identity_required_for_accident_binding"] is True
     assert all(
         row["status"] == "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"
         and row["accident_release_export_status"] == "missing"
+        and row["facility_component_identity_resolved"] is False
         for row in report["rows"]
     )
 

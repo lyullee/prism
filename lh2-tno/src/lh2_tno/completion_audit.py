@@ -416,6 +416,16 @@ def build_ijhe_completion_audit(
                             if isinstance(model_binding, Mapping)
                             else None
                         ),
+                        "facility_component_identity_resolved_count": (
+                            model_binding.get("facility_component_identity_resolved_count")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "facility_component_identity_unresolved_count": (
+                            model_binding.get("facility_component_identity_unresolved_count")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
                         "qualified_provider_packet_count": (
                             model_binding.get("qualified_provider_packet_count")
                             if isinstance(model_binding, Mapping)

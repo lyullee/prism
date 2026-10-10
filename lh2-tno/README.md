@@ -72,6 +72,9 @@ ID를 추정하지 않는다. 연결 manifest 형식과 실행 방법은
 qualified provider packet은 0개입니다. 그러므로 이 연결은 디지털트윈 상태 진단을
 명확히 할 뿐, 누출·빈도·시설 IR/F-N을 열지 않습니다. 규칙과 재현 명령은
 [관측 상태→일반 모델 바인딩 개발 기록](docs/PRISM_관측상태_일반모델_바인딩_개발기록_20261010.md)에 있습니다.
+현재 실제 설비 ID가 해소된 매핑은 0/3개이며, 3개 모두 `candidate` 또는 `unresolved`입니다.
+따라서 정상 모델 종류와 실제 P&ID 자산 결합을 구분하고, `review_status=resolved`와
+`facility_component_id`가 없으면 사고 방출 경계로 넘기지 않습니다.
 
 방출 이후의 모델 handoff도 [`consequence_backend_chain_audit.json`](results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json)에서
 별도로 확인한다. 현재 계약은 일반 방출 경로의 `source → pool → near_field_and_dispersion → cloud_observation → fire_explosion_damage_risk`와

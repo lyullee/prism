@@ -5,6 +5,8 @@
   "observed_component_count": 3,
   "state_model_bound_component_count": 3,
   "diagnostic_release_adapter_component_count": 3,
+  "facility_component_identity_resolved_count": 0,
+  "facility_component_identity_unresolved_count": 3,
   "qualified_provider_packet_count": 0,
   "rows": [
     {
@@ -14,6 +16,9 @@
         "inspection-center-intake-10-runs"
       ],
       "model_component_kind": "storage_tank",
+      "mapping_review_status": "candidate",
+      "facility_component_id": null,
+      "facility_component_identity_resolved": false,
       "required_state_quantities": [
         "pressure",
         "temperature",
@@ -41,6 +46,9 @@
         "inspection-center-storage-vent-10-runs"
       ],
       "model_component_kind": "vent_stack",
+      "mapping_review_status": "unresolved",
+      "facility_component_id": null,
+      "facility_component_identity_resolved": false,
       "required_state_quantities": [
         "pressure",
         "differential_pressure"
@@ -66,6 +74,9 @@
         "inspection-center-supply-10-runs"
       ],
       "model_component_kind": "vaporizer",
+      "mapping_review_status": "candidate",
+      "facility_component_id": null,
+      "facility_component_identity_resolved": false,
       "required_state_quantities": [
         "pressure",
         "temperature",
@@ -91,6 +102,8 @@
   "policy": {
     "normal_state_model_is_not_accident_release": true,
     "diagnostic_adapter_is_not_qualified_provider": true,
+    "facility_component_identity_is_not_resolved": true,
+    "facility_identity_required_for_accident_binding": true,
     "release_event_binding_is_not_created": true,
     "frequency_is_not_assigned": true,
     "facility_ir_fn_promotion": false,

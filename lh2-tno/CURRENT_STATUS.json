@@ -3341,9 +3341,11 @@
   "current_union_observed_component_mapping_candidate_count": 3,
   "current_union_observed_component_mapping_exact_facility_component_count": 0,
   "current_union_observed_state_model_binding_audit_record": "results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json",
-  "current_union_observed_state_model_binding_audit_status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY; 3/3 observed components bind to facility-neutral normal-state models; 3 diagnostic adapters are separate; qualified provider packets remain 0",
+  "current_union_observed_state_model_binding_audit_status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY; 3/3 observed components bind to facility-neutral normal-state models; facility component identity resolved 0/3; 3 diagnostic adapters are separate; qualified provider packets remain 0",
   "current_union_observed_state_model_binding_observed_component_count": 3,
   "current_union_observed_state_model_binding_state_model_bound_component_count": 3,
   "current_union_observed_state_model_binding_diagnostic_adapter_component_count": 3,
+  "current_union_observed_state_model_binding_facility_component_identity_resolved_count": 0,
+  "current_union_observed_state_model_binding_facility_component_identity_unresolved_count": 3,
   "current_union_observed_state_model_binding_qualified_provider_packet_count": 0
 }

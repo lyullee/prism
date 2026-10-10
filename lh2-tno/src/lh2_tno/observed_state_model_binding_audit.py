@@ -81,6 +81,8 @@ def audit_observed_state_model_binding(
     blocking_reasons: list[str] = []
     state_bound_count = 0
     adapter_count = 0
+    facility_identity_resolved_count = 0
+    facility_identity_unresolved_count = 0
     for mapping in mapping_rows:
         mapping_id = str(mapping.get("mapping_id") or "").strip()
         component_id = str(mapping.get("observed_component_id") or "").strip()
@@ -104,6 +106,13 @@ def audit_observed_state_model_binding(
                 reasons.append(f"required state quantities are missing: {missing_quantities}")
         adapter = binding.get("diagnostic_release_adapter", {}) if binding else {}
         adapter_status = adapter.get("status", "missing") if isinstance(adapter, Mapping) else "missing"
+        review_status = str(mapping.get("review_status") or "unresolved").strip()
+        facility_component_id = str(mapping.get("facility_component_id") or "").strip() or None
+        identity_resolved = review_status == "resolved" and facility_component_id is not None
+        if identity_resolved:
+            facility_identity_resolved_count += 1
+        else:
+            facility_identity_unresolved_count += 1
         status = (
             "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"
             if not reasons
@@ -120,6 +129,9 @@ def audit_observed_state_model_binding(
             "observed_component_id": component_id,
             "source_ids": list(observed["source_ids"] if observed else ()),
             "model_component_kind": model_kind,
+            "mapping_review_status": review_status,
+            "facility_component_id": facility_component_id,
+            "facility_component_identity_resolved": identity_resolved,
             "required_state_quantities": required,
             "observed_state_quantities": sorted(observed["quantities"] if observed else ()),
             "model_package": binding.get("model_package") if binding else None,
@@ -150,12 +162,16 @@ def audit_observed_state_model_binding(
         "observed_component_count": len(source_by_component),
         "state_model_bound_component_count": state_bound_count,
         "diagnostic_release_adapter_component_count": adapter_count,
+        "facility_component_identity_resolved_count": facility_identity_resolved_count,
+        "facility_component_identity_unresolved_count": facility_identity_unresolved_count,
         "qualified_provider_packet_count": 0,
         "rows": rows,
         "blocking_reasons": list(dict.fromkeys(blocking_reasons)),
         "policy": {
             "normal_state_model_is_not_accident_release": True,
             "diagnostic_adapter_is_not_qualified_provider": True,
+            "facility_component_identity_is_not_resolved": facility_identity_resolved_count == 0,
+            "facility_identity_required_for_accident_binding": True,
             "release_event_binding_is_not_created": True,
             "frequency_is_not_assigned": True,
             "facility_ir_fn_promotion": False,

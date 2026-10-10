@@ -40,6 +40,8 @@ def main() -> int:
         "observed_component_count": report["observed_component_count"],
         "state_model_bound_component_count": report["state_model_bound_component_count"],
         "diagnostic_release_adapter_component_count": report["diagnostic_release_adapter_component_count"],
+        "facility_component_identity_resolved_count": report["facility_component_identity_resolved_count"],
+        "facility_component_identity_unresolved_count": report["facility_component_identity_unresolved_count"],
         "output": str(args.output),
     }, ensure_ascii=False))
     return 0 if report["status"] == "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY" else 2
