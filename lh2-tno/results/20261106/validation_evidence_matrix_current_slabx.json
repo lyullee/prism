@@ -347,6 +347,40 @@
       "physical_validation_claim": false,
       "full_chain_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_direct_component_comparison",
+      "status": "REVIEW_READY_COMPONENT_EVIDENCE",
+      "supports": [
+        "same-operator FFI Test 4 native-SLABx concentration comparison",
+        "30 matched sensors over the declared 275 s observation window",
+        "320/32 to 640/64 numerical refinement and LFL classification closure"
+      ],
+      "does_not_support": [
+        "independent holdout physical validation",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "row_count": 30,
+      "sensor_count": 30,
+      "mean_bias_vol_pct": -0.45313011850063983,
+      "mae_vol_pct": 0.6480842583399518,
+      "rmse_vol_pct": 1.2106452167244133,
+      "observed_lfl_pairs": 3,
+      "predicted_lfl_pairs": 3,
+      "true_positive": 3,
+      "false_negative": 0,
+      "false_positive": 0,
+      "independent_holdout_validation_claim": false,
+      "source": {
+        "label": "SLABx-LH2 direct component comparison audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\slabx_lh2_direct_comparison_audit.json",
+        "sha256": "984044ee9550e954cf0bc8fb03a5adb05e8c55516da9e539b05155107d5e7cdc",
+        "status": "DIRECT_COMPONENT_COMPARISON_REVIEW_READY"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "claims": [
@@ -397,6 +431,12 @@
       "status": "SUPPORTED_WITH_RESTRICTIONS",
       "allowed": true,
       "basis": "slabx_lh2_source_validation_gate"
+    },
+    {
+      "claim": "review_ready_slabx_lh2_direct_component_comparison",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_direct_component_comparison"
     },
     {
       "claim": "independent_full_chain_physical_validation",

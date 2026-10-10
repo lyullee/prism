@@ -161,7 +161,35 @@ def _records(tmp_path: Path) -> dict[str, Path]:
         "facility_qra_claim": False,
         "promotion_gates": {"full_chain_physical_validation_allowed": False},
     })
-    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison, "preslhy_window": preslhy_window, "source_gate": source_gate}
+    direct_comparison = _write(tmp_path / "direct_comparison.json", {
+        "schema_version": "prism.slabx_lh2_direct_comparison_audit.v1",
+        "status": "DIRECT_COMPONENT_COMPARISON_REVIEW_READY",
+        "metrics": {
+            "row_count": 30,
+            "sensor_count": 30,
+            "mean_bias_vol_pct": -0.45,
+            "MAE_vol_pct": 0.65,
+            "RMSE_vol_pct": 1.21,
+            "observed_LFL_pairs": 3,
+            "predicted_LFL_pairs": 3,
+            "TP": 3,
+            "FN": 0,
+            "FP": 0,
+        },
+        "claims": {
+            "direct_component_comparison_evidence": True,
+            "independent_holdout_validation_claim": False,
+            "independent_physical_validation_claim": False,
+            "full_chain_validation_claim": False,
+            "accident_release_validation_claim": False,
+            "frequency_inference_performed": False,
+            "facility_qra_claim": False,
+        },
+        "promotion_policy": {
+            "component_evidence_does_not_validate_facility_qra": True,
+        },
+    })
+    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison, "preslhy_window": preslhy_window, "source_gate": source_gate, "direct_comparison": direct_comparison}
 
 
 def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
@@ -259,6 +287,25 @@ def test_matrix_records_slabx_source_gate_evidence_without_opening_validation(tm
     claims = {row["claim"]: row for row in matrix["claims"]}
     assert claims["restricted_slabx_lh2_source_validation_gate_evidence"]["allowed"] is True
     assert matrix["physical_validation_claim"] is False
+
+
+def test_matrix_records_direct_slabx_comparison_without_opening_validation(tmp_path):
+    paths = _records(tmp_path)
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        slabx_direct_comparison_path=paths["direct_comparison"],
+    )
+    domain = next(
+        row for row in matrix["evidence_domains"]
+        if row["id"] == "slabx_lh2_direct_component_comparison"
+    )
+    assert domain["status"] == "REVIEW_READY_COMPONENT_EVIDENCE"
+    assert domain["row_count"] == 30
+    assert domain["false_negative"] == 0
+    claims = {row["claim"]: row for row in matrix["claims"]}
+    assert claims["review_ready_slabx_lh2_direct_component_comparison"]["allowed"] is True
+    assert matrix["physical_validation_claim"] is False
+    assert matrix["facility_qra_claim"] is False
 
 
 def test_matrix_rejects_slabx_promotion_claim(tmp_path):

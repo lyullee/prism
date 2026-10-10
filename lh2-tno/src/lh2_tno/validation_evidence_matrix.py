@@ -480,6 +480,61 @@ def _slabx_source_validation_gate_domain(
     }
 
 
+def _slabx_direct_comparison_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Record the accepted same-operator FFI Test 4 comparison."""
+
+    if payload.get("status") != "DIRECT_COMPONENT_COMPARISON_REVIEW_READY":
+        blockers.append("SLABx-LH2 direct comparison is not review-ready")
+    claims = payload.get("claims") if isinstance(payload.get("claims"), Mapping) else {}
+    for field in (
+        "independent_physical_validation_claim",
+        "full_chain_validation_claim",
+        "accident_release_validation_claim",
+        "frequency_inference_performed",
+        "facility_qra_claim",
+    ):
+        _require_false(claims, field, "SLABx-LH2 direct comparison", blockers)
+    if claims.get("direct_component_comparison_evidence") is not True:
+        blockers.append("SLABx-LH2 direct comparison does not assert its component evidence")
+    policy = payload.get("promotion_policy") if isinstance(payload.get("promotion_policy"), Mapping) else {}
+    if policy.get("component_evidence_does_not_validate_facility_qra") is not True:
+        blockers.append("SLABx-LH2 direct comparison must keep facility-QRA promotion closed")
+    metrics = payload.get("metrics") if isinstance(payload.get("metrics"), Mapping) else {}
+    return {
+        "id": "slabx_lh2_direct_component_comparison",
+        "status": "REVIEW_READY_COMPONENT_EVIDENCE",
+        "supports": [
+            "same-operator FFI Test 4 native-SLABx concentration comparison",
+            "30 matched sensors over the declared 275 s observation window",
+            "320/32 to 640/64 numerical refinement and LFL classification closure",
+        ],
+        "does_not_support": [
+            "independent holdout physical validation",
+            "equipment release, isolation or inventory-depletion validation",
+            "initiating frequency, ignition, IR/F-N or facility-QRA validation",
+        ],
+        "row_count": metrics.get("row_count"),
+        "sensor_count": metrics.get("sensor_count"),
+        "mean_bias_vol_pct": metrics.get("mean_bias_vol_pct"),
+        "mae_vol_pct": metrics.get("MAE_vol_pct"),
+        "rmse_vol_pct": metrics.get("RMSE_vol_pct"),
+        "observed_lfl_pairs": metrics.get("observed_LFL_pairs"),
+        "predicted_lfl_pairs": metrics.get("predicted_LFL_pairs"),
+        "true_positive": metrics.get("TP"),
+        "false_negative": metrics.get("FN"),
+        "false_positive": metrics.get("FP"),
+        "independent_holdout_validation_claim": claims.get("independent_holdout_validation_claim"),
+        "source": _source(path, "SLABx-LH2 direct component comparison audit", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     if payload.get("status") == "COMPLETE_EVIDENCE":
         blockers.append("IJHE audit reports complete evidence; promotion must be reviewed instead of inferred")
@@ -511,6 +566,7 @@ def build_validation_evidence_matrix(
     external_field_comparison_path: str | Path | None = None,
     preslhy_slabx_window_path: str | Path | None = None,
     slabx_source_validation_gate_path: str | Path | None = None,
+    slabx_direct_comparison_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -552,6 +608,11 @@ def build_validation_evidence_matrix(
             slabx_source_validation_gate_path, "SLABx-LH2 source validation gate audit"
         )
         domains.append(_slabx_source_validation_gate_domain(gate_path, gate, blockers))
+    if slabx_direct_comparison_path is not None:
+        direct_path, direct = _read_object(
+            slabx_direct_comparison_path, "SLABx-LH2 direct comparison audit"
+        )
+        domains.append(_slabx_direct_comparison_domain(direct_path, direct, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
@@ -602,6 +663,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("SLABx-LH2 source validation gates" in item for item in unique_blockers),
             "basis": "slabx_lh2_source_validation_gate",
+        },
+        {
+            "claim": "review_ready_slabx_lh2_direct_component_comparison",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("SLABx-LH2 direct comparison" in item for item in unique_blockers),
+            "basis": "slabx_lh2_direct_component_comparison",
         },
         {
             "claim": "independent_full_chain_physical_validation",

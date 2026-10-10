@@ -1,0 +1,201 @@
+{
+  "schema_version": "prism.slabx_lh2_direct_comparison_audit.v1",
+  "status": "DIRECT_COMPONENT_COMPARISON_REVIEW_READY",
+  "scope": "FFI Test 4 native-SLABx two-phase consequence component; same 275 s sensor operator",
+  "sources": [
+    {
+      "role": "sensor prediction ledger",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLAB 재구축\\model-comparison\\outputs\\test4_slabx_matched_sensor_gate_full\\sensor_predictions_n640.csv",
+      "sha256": "058e91e3ab217a07b34efcf3e74cdb85f70e990ae2ae1ebb36004442eb5670a6"
+    },
+    {
+      "role": "numerical refinement ledger",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLAB 재구축\\model-comparison\\outputs\\test4_slabx_matched_sensor_gate_full\\refinement_summary.csv",
+      "sha256": "c0855556ee98fe1767f6c7e287b990f48a6cf774fd6cfd386d90132957ec6f98"
+    },
+    {
+      "role": "reproduction README",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLAB 재구축\\model-comparison\\outputs\\test4_slabx_matched_sensor_gate_full\\README_REPRODUCE.md",
+      "sha256": "3fe2f0f987038a068e7685907a17acbc991e314c20a1f259037f6e195ffe8fd7"
+    },
+    {
+      "role": "route provenance",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLAB 재구축\\model-comparison\\outputs\\ffi_test4_actual_route_comparison_v1\\provenance.json",
+      "sha256": "c28c199b563cbe65b4ab6f7dd8acdaebaf676cbfd8f13fd4521a558a3fb53709"
+    }
+  ],
+  "checks": [
+    {
+      "name": "same_operator_sensor_window",
+      "status": "PASS",
+      "evidence": {
+        "row_count": 30,
+        "sensor_count": 30,
+        "tests": [
+          "4"
+        ],
+        "averaging_windows_s": [
+          275.0
+        ]
+      }
+    },
+    {
+      "name": "recomputed_metrics_are_finite",
+      "status": "PASS",
+      "evidence": {
+        "row_count": 30,
+        "sensor_count": 30,
+        "mean_bias_vol_pct": -0.45313011850063983,
+        "MAE_vol_pct": 0.6480842583399518,
+        "RMSE_vol_pct": 1.2106452167244133,
+        "observed_LFL_pairs": 3,
+        "predicted_LFL_pairs": 3,
+        "TP": 3,
+        "FN": 0,
+        "FP": 0
+      }
+    },
+    {
+      "name": "same_operator_lfl_classification",
+      "status": "PASS",
+      "evidence": {
+        "observed_LFL_pairs": 3,
+        "predicted_LFL_pairs": 3,
+        "TP": 3,
+        "FN": 0,
+        "FP": 0
+      }
+    },
+    {
+      "name": "accepted_refinement_matches_sensor_rows",
+      "status": "PASS",
+      "evidence": {
+        "accepted_refinement": {
+          "n_field_steps": 640,
+          "substeps": 64,
+          "TP": 3,
+          "RMSE_vol_pct": 1.2106452167244133,
+          "predicted_LFL_pairs": 3,
+          "n_sensor_height_pairs": 30,
+          "bias_vol_pct": -0.45313011850064,
+          "observed_LFL_pairs": 3,
+          "MAE_vol_pct": 0.6480842583399519,
+          "FN": 0,
+          "FP": 0
+        },
+        "recomputed": {
+          "row_count": 30,
+          "sensor_count": 30,
+          "mean_bias_vol_pct": -0.45313011850063983,
+          "MAE_vol_pct": 0.6480842583399518,
+          "RMSE_vol_pct": 1.2106452167244133,
+          "observed_LFL_pairs": 3,
+          "predicted_LFL_pairs": 3,
+          "TP": 3,
+          "FN": 0,
+          "FP": 0
+        }
+      }
+    },
+    {
+      "name": "numerical_refinement_converged",
+      "status": "PASS",
+      "evidence": {
+        "refinement_row_count": 2,
+        "relative_changes": {
+          "bias_vol_pct": 0.0002512982716614091,
+          "MAE_vol_pct": 0.00018496336630644938,
+          "RMSE_vol_pct": 3.4015674219649435e-05
+        },
+        "change_limit": 0.02
+      }
+    },
+    {
+      "name": "no_fit_provenance_declared",
+      "status": "PASS",
+      "evidence": {
+        "required_markers": [
+          "no sensor value",
+          "source rate",
+          "concentration coefficient"
+        ]
+      }
+    },
+    {
+      "name": "provenance_json_readable",
+      "status": "PASS",
+      "evidence": {
+        "size_bytes": 2618
+      }
+    }
+  ],
+  "metrics": {
+    "row_count": 30,
+    "sensor_count": 30,
+    "mean_bias_vol_pct": -0.45313011850063983,
+    "MAE_vol_pct": 0.6480842583399518,
+    "RMSE_vol_pct": 1.2106452167244133,
+    "observed_LFL_pairs": 3,
+    "predicted_LFL_pairs": 3,
+    "TP": 3,
+    "FN": 0,
+    "FP": 0,
+    "lfl_vol_pct": 4.0,
+    "refinement_relative_changes": {
+      "bias_vol_pct": 0.0002512982716614091,
+      "MAE_vol_pct": 0.00018496336630644938,
+      "RMSE_vol_pct": 3.4015674219649435e-05
+    },
+    "refinement_change_limit": 0.02
+  },
+  "refinement_rows": [
+    {
+      "n_field_steps": 320,
+      "substeps": 32,
+      "TP": 3,
+      "RMSE_vol_pct": 1.2106040372118745,
+      "predicted_LFL_pairs": 3,
+      "n_sensor_height_pairs": 30,
+      "bias_vol_pct": -0.453016276293373,
+      "observed_LFL_pairs": 3,
+      "MAE_vol_pct": 0.647964408661679,
+      "FN": 0,
+      "FP": 0
+    },
+    {
+      "n_field_steps": 640,
+      "substeps": 64,
+      "TP": 3,
+      "RMSE_vol_pct": 1.2106452167244133,
+      "predicted_LFL_pairs": 3,
+      "n_sensor_height_pairs": 30,
+      "bias_vol_pct": -0.45313011850064,
+      "observed_LFL_pairs": 3,
+      "MAE_vol_pct": 0.6480842583399519,
+      "FN": 0,
+      "FP": 0
+    }
+  ],
+  "blocking_reasons": [],
+  "claims": {
+    "direct_component_comparison_evidence": true,
+    "independent_holdout_validation_claim": false,
+    "independent_physical_validation_claim": false,
+    "full_chain_validation_claim": false,
+    "accident_release_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false
+  },
+  "promotion_policy": {
+    "same_operator_component_comparison_is_not_holdout_validation": true,
+    "numerical_refinement_is_not_physical_validation": true,
+    "external_review_required_before_independent_gate": true,
+    "component_evidence_does_not_validate_equipment_release": true,
+    "component_evidence_does_not_validate_facility_qra": true
+  },
+  "required_next_evidence": [
+    "independent holdout or new experiment not used to select the source mapping",
+    "reviewed source geometry and time-base provenance",
+    "equipment release packet, frequency binding and facility-chain validation"
+  ]
+}
