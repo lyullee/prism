@@ -76,6 +76,7 @@ def build_ijhe_completion_audit(
     native_binding_reconciliation: Mapping[str, Any] | None = None,
     facility_case_packet_coverage: Mapping[str, Any] | None = None,
     combined_chain_closure: Mapping[str, Any] | None = None,
+    risk_atom_chain_audit: Mapping[str, Any] | None = None,
     slabx_validation_evidence: Mapping[str, Any] | None = None,
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
     domain_recovery_audit: Mapping[str, Any] | None = None,
@@ -1635,6 +1636,69 @@ def build_ijhe_completion_audit(
                     "by the IJHE completion report. Their 29-event diagnostic closure is recorded "
                     "without converting synthetic/operator-limited events into qualified packets, "
                     "frequencies, physical validation, or facility QRA."
+                ),
+            }
+        )
+    if risk_atom_chain_audit is not None:
+        atom_chain = risk_atom_chain_audit
+        required_stages = {
+            "source",
+            "pool",
+            "near_field_and_dispersion",
+            "cloud_observation",
+            "fire_explosion_damage_risk",
+        }
+        stage_counts = atom_chain.get("stage_complete_case_counts")
+        atom_chain_valid = (
+            atom_chain.get("schema_version") == "prism.risk_atom_chain_audit.v1"
+            and atom_chain.get("status") == "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC"
+            and isinstance(atom_chain.get("case_count"), int)
+            and atom_chain.get("case_count", 0) > 0
+            and atom_chain.get("complete_case_count") == atom_chain.get("case_count")
+            and atom_chain.get("incomplete_case_count") == 0
+            and isinstance(atom_chain.get("risk_atom_count"), int)
+            and atom_chain.get("risk_atom_count", 0) > 0
+            and atom_chain.get("blocking_reasons") == []
+            and isinstance(atom_chain.get("required_stage_names"), list)
+            and set(atom_chain.get("required_stage_names", [])) == required_stages
+            and isinstance(stage_counts, Mapping)
+            and all(stage_counts.get(stage) == atom_chain.get("case_count") for stage in required_stages)
+            and atom_chain.get("diagnostic_only") is True
+            and atom_chain.get("provider_packet_promoted") is False
+            and atom_chain.get("physical_validation_claim") is False
+            and atom_chain.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_risk_atom_chain_closure",
+                "status": "PASS" if atom_chain_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if atom_chain_valid
+                    else "one or more executed cases do not retain a complete release-to-final-damage risk-atom chain"
+                ),
+                "evidence": {
+                    "record": atom_chain.get("_record_path"),
+                    "schema_version": atom_chain.get("schema_version"),
+                    "status": atom_chain.get("status"),
+                    "case_count": atom_chain.get("case_count"),
+                    "complete_case_count": atom_chain.get("complete_case_count"),
+                    "risk_atom_count": atom_chain.get("risk_atom_count"),
+                    "incomplete_case_count": atom_chain.get("incomplete_case_count"),
+                    "operator_limited_case_count": atom_chain.get("operator_limited_case_count"),
+                    "required_stage_names": atom_chain.get("required_stage_names"),
+                    "stage_complete_case_counts": stage_counts,
+                    "blocking_reason_count": len(atom_chain.get("blocking_reasons", []))
+                    if isinstance(atom_chain.get("blocking_reasons"), list)
+                    else None,
+                    "facility_qra_claim": atom_chain.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "Every numerical case reaches a recorded release boundary, mass ledger, "
+                    "dispersion/pool, cloud, ignition-damage stage and four branch-specific "
+                    "risk atoms. Operator-limited cases remain diagnostic and do not qualify "
+                    "the provider or facility QRA."
                 ),
             }
         )

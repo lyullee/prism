@@ -67,7 +67,8 @@ python scripts/bind_native_full_scope_union_evidence.py `
   --domain-recovery-audit results/20261024/domain_recovery_audit_flammability_gate_v2.json `
   --slabx-validation-evidence results/20261024/slabx_lh2_validation_audit_v1.json `
   --observed-state-evidence examples/inspection_center_observed_state_evidence.json `
-  --scope-ledger-consistency results/20261026/native_full_scope_union_assessment/scope_ledger_consistency_current.json
+  --scope-ledger-consistency results/20261026/native_full_scope_union_assessment/scope_ledger_consistency_current.json `
+  --risk-atom-chain-audit results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json
 ```
 
 ## 연결 결과
@@ -90,6 +91,7 @@ python scripts/bind_native_full_scope_union_evidence.py `
 | qualified provider packet | 0개 |
 | 시설 전체 IR/F-N | 보류 |
 | 자동 증거 요청 | 12개 사고군·44개 case |
+| 원자 단위 방출→최종피해 chain | 44/44 case·176/176 risk atom 구조적 폐합, diagnostic-only |
 
 수직 결과의 event ID, provider packet identity, 설비 ID와 수용점 ID를 `generic-lh2-near-receptor-diagnostic/vertical-handoff/...` namespace로 함께 바꿨다. 사고범위 표에서도 `vertical_handoff`가 `NO_EVENT_GENERATED`에서 `PARTIAL`로 바뀌고, 조건부 chain은 10개 case 모두 숫자를 갖는다. 그러나 source history가 synthetic/operator-limited이고 전체 시설의 다른 사고군도 partial이므로 시설 전체 IR/F-N과 QRA gate는 계속 닫혀 있다.
 
@@ -114,6 +116,9 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
 - `facility_evidence_request.json`: 각 사고군·case의 provider packet·물리검증·종료/재고 증거 요구
 - `facility_case_packet_coverage.json`: 44개 facility case별 qualified provider packet 대조
   결과. 현재 `NO_CASE_MATCH`이며 0/44 case가 qualified 상태다.
+- `risk_atom_chain_audit.json`: 각 case의 방출 종료·질량 장부·pool/확산·cloud·점화/피해
+  단계와 네 가지 점화 risk atom의 연결을 대조한다. 현재 44/44 case·176/176 atom이
+  구조적으로 닫혔고, 29개 operator-limited case는 진단 전용으로 남는다.
 - `verification.json`: 병합 수·상태·제한 자동 검사
 - `native_state_snapshot_campaign_ledger.json`: 새로 실행한 기본 24개 native 사건의
   상태 snapshot, component ID, provider result digest 대조. 24/24가 일치한다.
@@ -128,7 +133,7 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
   대조한다. union 전체의 상태 연결은 기본 24개 ledger와
   `extension_state_snapshot_coverage.json`의 확장 10개 event를 함께 확인하며,
   현재 34/34 event가 `BOUND_AND_ECHOED`이다.
-- `ijhe_completion_audit.json`: 최신 재생은 33개 검사 중 28개 PASS·5개 BLOCKED다. `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, 구조적 `provider_worklist_coverage`도 PASS로 기록하지만 둘 다 diagnostic-only다. `facility_case_provider_packet_coverage`는 44개 case를 모두 qualified provider 증거 없음으로 차단한다. `diagnostic_observed_equipment_state_evidence`는 검사센터 Excel 3개에서 읽은 8,955개 상태 sample과 3개 component를 보존하지만 상태 증거만 기록한다. `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 qualified provider·시설 IR/F-N을 열지 않는다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 같은 승격 제한을 유지한다.
+- `ijhe_completion_audit.json`: 최신 재생은 34개 검사 중 29개 PASS·5개 BLOCKED다. `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, 구조적 `provider_worklist_coverage`도 PASS로 기록하지만 둘 다 diagnostic-only다. `diagnostic_risk_atom_chain_closure`는 44/44 case와 176/176 risk atom에서 방출→최종피해 연결을 확인한다. `facility_case_provider_packet_coverage`는 44개 case를 모두 qualified provider 증거 없음으로 차단한다. `diagnostic_observed_equipment_state_evidence`는 검사센터 Excel 3개에서 읽은 8,955개 상태 sample과 3개 component를 보존하지만 상태 증거만 기록한다. `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 qualified provider·시설 IR/F-N을 열지 않는다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 같은 승격 제한을 유지한다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
 cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,

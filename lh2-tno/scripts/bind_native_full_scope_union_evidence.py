@@ -96,6 +96,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     domain_recovery_audit = _with_record(args.domain_recovery_audit)
     observed_state_evidence = _with_record(args.observed_state_evidence)
     scope_ledger_consistency = _with_record(args.scope_ledger_consistency)
+    risk_atom_chain_audit = _with_record(args.risk_atom_chain_audit)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -121,6 +122,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         slabx_validation_evidence=slabx_validation,
         observed_state_evidence=observed_state_evidence,
         scope_ledger_consistency=scope_ledger_consistency,
+        risk_atom_chain_audit=risk_atom_chain_audit,
     )
 
     verification_path = output_dir / "verification.json"
@@ -235,6 +237,31 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 if scope_ledger_consistency
                 else verification.get("scope_ledger_consistency_blocking_reason_count")
             ),
+            "risk_atom_chain_audit_status": (
+                risk_atom_chain_audit.get("status")
+                if risk_atom_chain_audit
+                else verification.get("risk_atom_chain_audit_status")
+            ),
+            "risk_atom_chain_audit_case_count": (
+                risk_atom_chain_audit.get("case_count")
+                if risk_atom_chain_audit
+                else verification.get("risk_atom_chain_audit_case_count")
+            ),
+            "risk_atom_chain_audit_complete_case_count": (
+                risk_atom_chain_audit.get("complete_case_count")
+                if risk_atom_chain_audit
+                else verification.get("risk_atom_chain_audit_complete_case_count")
+            ),
+            "risk_atom_chain_audit_risk_atom_count": (
+                risk_atom_chain_audit.get("risk_atom_count")
+                if risk_atom_chain_audit
+                else verification.get("risk_atom_chain_audit_risk_atom_count")
+            ),
+            "risk_atom_chain_audit_blocking_reason_count": (
+                len(risk_atom_chain_audit.get("blocking_reasons", []))
+                if risk_atom_chain_audit
+                else verification.get("risk_atom_chain_audit_blocking_reason_count")
+            ),
         }
     )
     _save(output_dir / "validation_evidence_matrix.json", matrix)
@@ -345,6 +372,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional current comparison of the merged scope matrix and facility ledger.",
+    )
+    parser.add_argument(
+        "--risk-atom-chain-audit",
+        type=Path,
+        default=None,
+        help="Optional case/atom-level release-to-final-damage chain audit.",
     )
     args = parser.parse_args()
     try:

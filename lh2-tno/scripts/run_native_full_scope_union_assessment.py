@@ -50,6 +50,9 @@ from lh2_tno.extension_state_snapshot_coverage import (  # noqa: E402
 from lh2_tno.scope_ledger_consistency import (  # noqa: E402
     audit_scope_ledger_consistency,
 )
+from lh2_tno.risk_atom_chain_audit import (  # noqa: E402
+    build_risk_atom_chain_audit,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -488,6 +491,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         merged_scope,
         assessment_ledger,
     )
+    risk_atom_chain_audit = build_risk_atom_chain_audit(assessment_ledger)
+    risk_atom_chain_audit["_record_path"] = str(
+        args.output_dir / "risk_atom_chain_audit.json"
+    )
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -616,6 +623,17 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "scope_ledger_consistency_ledger_event_count": scope_ledger_consistency[
             "facility_ledger_event_count"
         ],
+        "risk_atom_chain_audit_status": risk_atom_chain_audit["status"],
+        "risk_atom_chain_audit_case_count": risk_atom_chain_audit["case_count"],
+        "risk_atom_chain_audit_complete_case_count": risk_atom_chain_audit[
+            "complete_case_count"
+        ],
+        "risk_atom_chain_audit_risk_atom_count": risk_atom_chain_audit[
+            "risk_atom_count"
+        ],
+        "risk_atom_chain_audit_blocking_reason_count": len(
+            risk_atom_chain_audit["blocking_reasons"]
+        ),
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -639,6 +657,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "inventory_depletion_rebound_result.json", inventory_result)
     _save(output / "scope_matrix.json", merged_scope)
     _save(output / "scope_ledger_consistency_current.json", scope_ledger_consistency)
+    _save(output / "risk_atom_chain_audit.json", risk_atom_chain_audit)
     _save(
         output / "frequency_scenarios.json",
         {

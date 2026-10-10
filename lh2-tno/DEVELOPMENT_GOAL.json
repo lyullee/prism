@@ -1235,11 +1235,18 @@
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 33 checks, 5 blockers; diagnostic union closure now covers 34 events and 44 cases (176 risk atoms); scope-ledger consistency is PASS; qualification readiness remains limited to exact/strict diagnostic packets and facility case packet coverage is 0/44",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 34 checks, 5 blockers; diagnostic union closure now covers 34 events and 44 cases (176 risk atoms); atom-level release-to-final-damage closure is PASS for 44/44 cases; scope-ledger consistency is PASS; qualification readiness remains limited to exact/strict diagnostic packets and facility case packet coverage is 0/44",
   "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v11.json",
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "diagnostic_union_chain_closure_audit_implemented": true,
   "diagnostic_union_chain_closure_audit_policy": "The completion audit may close the declared diagnostic chain from the exact packet subset plus a separately identified vertical-handoff subset when the combined closure proves exact union identity, event-count equality, no mismatches, and packet-subset identity consumption. This is diagnostic-only and cannot qualify providers, infer frequency, or promote facility IR/F-N.",
+  "risk_atom_chain_audit_implemented": true,
+  "risk_atom_chain_audit_module": "src/lh2_tno/risk_atom_chain_audit.py",
+  "risk_atom_chain_audit_record": "results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json",
+  "risk_atom_chain_audit_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC; 44/44 cases and 176/176 risk atoms retain release termination, mass ledger, consequence stages and four ignition branches; 29 operator-limited cases remain diagnostic",
+  "risk_atom_chain_audit_promotion": false,
+  "current_union_ijhe_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
+  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 29 PASS, 5 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage closure is PASS for 44/44 cases; facility QRA remains withheld",
   "ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 29,
     "BLOCKED": 5
@@ -2032,7 +2039,7 @@
   "facility_assessment_latest_provider_qualification_complete": false,
   "scope_matrix_latest_record": "results/20261023/native_generic_scope_vertical_merged_scope_matrix_v1.json",
   "ijhe_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json",
-  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 33 checks, 5 blockers; scope-ledger consistency and state-bound result rebinding are PASS/diagnostic-only; facility case packet coverage 0/44",
+  "ijhe_audit_latest_status": "INCOMPLETE_EVIDENCE; 34 checks, 5 blockers; scope-ledger consistency, state-bound result rebinding and atom-level release-to-final-damage closure are PASS/diagnostic-only; facility case packet coverage 0/44",
   "ijhe_audit_latest_blocking_reasons": [
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
@@ -2306,8 +2313,8 @@
   "ijhe_completion_audit_combined_chain_closure_record": "results/20261024/native_generic_scope_combined_chain_closure_v1.json",
   "ijhe_completion_audit_combined_chain_closure_promotion": false,
   "ijhe_completion_audit_combined_chain_closure_test_status": "2 completion-audit tests; full portable suite 595 passed/1 skipped",
-  "native_generic_scope_vertical_merged_audit_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json",
-  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 33 checks, 5 blocking reasons; 34-event diagnostic union chain and scope-ledger consistency are consumed; restricted SLABx-LH2 evidence, exact-cache realtime benchmark and domain-recovery sensitivity remain diagnostic; 0/44 facility case packet coverage; qualification and facility QRA remain withheld",
+  "native_generic_scope_vertical_merged_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
+  "native_generic_scope_vertical_merged_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 5 blocking reasons; 34-event diagnostic union chain, atom-level 44-case/176-atom closure and scope-ledger consistency are consumed; restricted SLABx-LH2 evidence, exact-cache realtime benchmark and domain-recovery sensitivity remain diagnostic; 0/44 facility case packet coverage; qualification and facility QRA remain withheld",
   "slabx_lh2_validation_evidence_implemented": true,
   "slabx_lh2_validation_evidence_module": "src/lh2_tno/slabx_validation_audit.py",
   "slabx_lh2_validation_evidence_script": "scripts/audit_slabx_lh2_validation.py",
@@ -2392,9 +2399,9 @@
   "facility_release_boundary_gate_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "facility_release_boundary_gate_completion_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
   "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 4 completion-audit tests, public assessment propagation assertion, union case-coverage/raw-ledger reconciliation assertions, and state-snapshot result-binding tests; full portable suite 707 passed, 1 skipped",
-  "v060_ijhe_completion_audit_latest_check_count": 33,
+  "v060_ijhe_completion_audit_latest_check_count": 34,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
-    "PASS": 28,
+    "PASS": 29,
     "BLOCKED": 5
   },
   "v060_ijhe_completion_audit_latest_blocked_checks": [
