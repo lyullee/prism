@@ -3554,5 +3554,13 @@
   "ijhe_objective_coverage_audit_release_closure_sha256": "876E5B4036BDFF43E4F46030E58D957DA747D084B3BB39A64A20A278A0E49A53",
   "v060_readiness_release_closure_objective_record": "results/20261106/v060_readiness_report_with_release_closure_objective.json",
   "v060_readiness_release_closure_objective_sha256": "831FFA852D0D81A24CD1B2B80B6C4190E3ECBA22B7D97643B2694CB1D5C68D53",
-  "v060_readiness_release_closure_objective_status": "VALID; conditional diagnostic chain complete; 13 readiness invariants pass; strict blockers remain 4"
+  "v060_readiness_release_closure_objective_status": "VALID; conditional diagnostic chain complete; 13 readiness invariants pass; strict blockers remain 4",
+  "provider_port_state_contract_schema": "prism.provider_port_state.v1",
+  "provider_port_state_contract_implemented": true,
+  "provider_port_state_contract_document": "docs/PRISM_provider_port_state_contract_20261106.md",
+  "provider_port_state_release_binding": "ResolvedGasStep.provider_port_state and ResolvedLiquidStep.provider_port_state validate component/port identity, clock, fluid, phase and mass-flow closure",
+  "provider_port_state_live_resolver_implemented": true,
+  "provider_port_state_frequency_inference": false,
+  "provider_port_state_physical_validation_claim": false,
+  "provider_port_state_remote_commit": "7e848245ceb901b9fa050993fbeb07cf42382d1f"
 }
