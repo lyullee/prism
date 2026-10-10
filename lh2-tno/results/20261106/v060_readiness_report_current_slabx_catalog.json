@@ -400,6 +400,18 @@
       "facility_qra_allowed": false,
       "diagnostic_only": true
     },
+    "generic_provider_evidence_audit": {
+      "schema_version": "prism.generic_provider_evidence_audit.v1",
+      "status": "NO_QUALIFIED_PROVIDER_EVIDENCE",
+      "request_count": 26,
+      "packet_count": 26,
+      "qualification_sidecar_present_count": 0,
+      "exact_match_count": 0,
+      "qualified_provider_packet_count": 0,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "diagnostic_only": true
+    },
     "isolation_union_extension": {
       "schema": "prism.isolation_union_extension_verification.v1",
       "status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
@@ -1044,7 +1056,7 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261106/ijhe_objective_coverage_audit_with_provider_evidence_requests.json",
-      "sha256": "101680a0a28281cbeb0511a7cbcf03d08dddf8816ef95e0c61b634949df9dfaf"
+      "sha256": "2f6020a0cbdbe74e008c111719c7d5c5a0a45e73ede3ae07f49b01ef090cd07f"
     },
     "union_verification": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
@@ -1133,6 +1145,10 @@
     "generic_provider_evidence_requests": {
       "path": "results/20261106/generic_lh2_provider_evidence_requests.json",
       "sha256": "ec713ed34241340d30b217955f47ebc8afa62df5a55aa8b8ab85b93fca9b92e4"
+    },
+    "generic_provider_evidence_audit": {
+      "path": "results/20261106/generic_lh2_provider_evidence_audit_current.json",
+      "sha256": "6114f89fd5fdef78b26a5610337f4711b222023c763e684e5e79458832f99a1c"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",

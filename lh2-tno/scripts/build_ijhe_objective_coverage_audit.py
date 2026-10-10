@@ -52,6 +52,7 @@ def main() -> int:
     parser.add_argument("--generic-equipment-frequency-binding-audit", type=Path)
     parser.add_argument("--generic-provider-closure-audit", type=Path)
     parser.add_argument("--generic-provider-evidence-requests", type=Path)
+    parser.add_argument("--generic-provider-evidence-audit", type=Path)
     parser.add_argument("--release-closure-worklist", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -153,6 +154,11 @@ def main() -> int:
             generic_provider_evidence_requests=(
                 _object(args.generic_provider_evidence_requests)
                 if args.generic_provider_evidence_requests
+                else None
+            ),
+            generic_provider_evidence_audit=(
+                _object(args.generic_provider_evidence_audit)
+                if args.generic_provider_evidence_audit
                 else None
             ),
             release_closure_worklist=(

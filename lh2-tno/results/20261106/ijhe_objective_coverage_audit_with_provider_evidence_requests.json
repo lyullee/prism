@@ -825,6 +825,26 @@
       },
       "blocking_reason": null,
       "interpretation": "catalog는 자료 수집의 누락을 방지하는 진단 장부다. 종료시간, 재고, 빈도, 물리검증 또는 시설 QRA를 추정하거나 자동 승격하지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_provider_evidence_audit",
+      "requirement": "provider evidence catalog 각 packet의 qualification sidecar exact-match 감사가 실행되어야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results/20261106/generic_lh2_provider_evidence_audit_current.json"
+      ],
+      "observed": {
+        "schema_version": "prism.generic_provider_evidence_audit.v1",
+        "request_count": 26,
+        "packet_count": 26,
+        "qualification_sidecar_present_count": 0,
+        "exact_match_count": 0,
+        "qualified_provider_packet_count": 0,
+        "audit_input_valid": true,
+        "audit_matches_catalog": true
+      },
+      "blocking_reason": null,
+      "interpretation": "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계이며 독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
     }
   ],
   "core_chain_check_ids": [

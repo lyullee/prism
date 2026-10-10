@@ -782,3 +782,35 @@ def test_report_rejects_provider_evidence_request_packet_drift():
     )
     with pytest.raises(V060ReadinessError, match="disagrees with closure audit"):
         validate_v060_readiness_report(report)
+
+
+def test_report_binds_provider_sidecar_audit_to_evidence_catalog():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_provider_evidence_requests={
+            "schema_version": "prism.generic_provider_evidence_requests.v1",
+            "packet_count": 2,
+            "request_count": 2,
+            "closure_open_request_count": 1,
+            "qualification_open_request_count": 1,
+            "qualified_provider_packet_count": 0,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "diagnostic_only": True,
+        },
+        generic_provider_evidence_audit={
+            "schema_version": "prism.generic_provider_evidence_audit.v1",
+            "status": "NO_QUALIFIED_PROVIDER_EVIDENCE",
+            "packet_count": 2,
+            "request_count": 2,
+            "qualification_sidecar_present_count": 0,
+            "exact_match_count": 0,
+            "qualified_provider_packet_count": 0,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "diagnostic_only": True,
+        },
+    )
+    audit = report["chain"]["generic_provider_evidence_audit"]
+    assert audit["request_count"] == 2
+    assert validate_v060_readiness_report(report)["status"] == "VALID"

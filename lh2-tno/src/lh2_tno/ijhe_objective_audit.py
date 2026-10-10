@@ -71,6 +71,7 @@ def build_ijhe_objective_coverage_audit(
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_provider_closure_audit: Mapping[str, Any] | None = None,
     generic_provider_evidence_requests: Mapping[str, Any] | None = None,
+    generic_provider_evidence_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
@@ -110,6 +111,9 @@ def build_ijhe_objective_coverage_audit(
     )
     generic_provider_evidence_requests_path = _record_path(
         generic_provider_evidence_requests, None
+    )
+    generic_provider_evidence_audit_path = _record_path(
+        generic_provider_evidence_audit, None
     )
     release_closure_worklist_path = _record_path(release_closure_worklist, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
@@ -1910,6 +1914,69 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "catalog는 자료 수집의 누락을 방지하는 진단 장부다. 종료시간, 재고, 빈도, "
                 "물리검증 또는 시설 QRA를 추정하거나 자동 승격하지 않는다."
+            ),
+        ))
+
+    # Verify that the catalog was checked against adjacent qualification
+    # sidecars.  This is an intake diagnostic only and cannot open frequency
+    # or facility-QRA gates.
+    provider_audit = generic_provider_evidence_audit
+    provider_audit_input_ok = (
+        isinstance(provider_audit, Mapping)
+        and provider_audit.get("schema_version") == "prism.generic_provider_evidence_audit.v1"
+        and provider_audit.get("diagnostic_only") is True
+        and provider_audit.get("frequency_inference_allowed") is False
+        and provider_audit.get("facility_qra_allowed") is False
+        and _int(provider_audit.get("request_count")) is not None
+        and _int(provider_audit.get("packet_count")) is not None
+        and _int(provider_audit.get("exact_match_count")) is not None
+        and _int(provider_audit.get("qualified_provider_packet_count")) == 0
+    )
+    provider_audit_matches_catalog = (
+        provider_audit_input_ok
+        and (
+            not isinstance(provider_catalog, Mapping)
+            or _int(provider_audit.get("request_count"))
+            == _int(provider_catalog.get("request_count"))
+        )
+        and (
+            not isinstance(provider_catalog, Mapping)
+            or _int(provider_audit.get("packet_count"))
+            == _int(provider_catalog.get("packet_count"))
+        )
+    )
+    if generic_provider_evidence_audit is not None:
+        rows.append(_row(
+            "diagnostic_generic_provider_evidence_audit",
+            "provider evidence catalog의 각 packet에 qualification sidecar exact-match 감사가 실행되어야 한다",
+            "PASS" if provider_audit_matches_catalog else "BLOCKED_EVIDENCE",
+            evidence_paths=(generic_provider_evidence_audit_path,),
+            observed={
+                "schema_version": provider_audit.get("schema_version")
+                if isinstance(provider_audit, Mapping) else None,
+                "request_count": provider_audit.get("request_count")
+                if isinstance(provider_audit, Mapping) else None,
+                "packet_count": provider_audit.get("packet_count")
+                if isinstance(provider_audit, Mapping) else None,
+                "qualification_sidecar_present_count": provider_audit.get(
+                    "qualification_sidecar_present_count"
+                ) if isinstance(provider_audit, Mapping) else None,
+                "exact_match_count": provider_audit.get("exact_match_count")
+                if isinstance(provider_audit, Mapping) else None,
+                "qualified_provider_packet_count": provider_audit.get(
+                    "qualified_provider_packet_count"
+                ) if isinstance(provider_audit, Mapping) else None,
+                "audit_input_valid": provider_audit_input_ok,
+                "audit_matches_catalog": provider_audit_matches_catalog,
+            },
+            blocking_reason=(
+                None
+                if provider_audit_matches_catalog
+                else "qualification sidecar audit가 malformed이거나 evidence catalog의 request/packet 수와 일치하지 않는다"
+            ),
+            interpretation=(
+                "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계다. "
+                "독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
             ),
         ))
 
