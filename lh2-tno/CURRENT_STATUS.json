@@ -569,6 +569,7 @@
   "conditional_facility_risk_view_record": "results/20261104/conditional_facility_risk_view_current.json",
   "conditional_facility_risk_view_status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK; 34 events, 44 cases, 176 risk atoms; promotion_allowed=false",
   "conditional_facility_risk_view_test_status": "2 focused tests passed; source assessment digest retained",
+  "conditional_facility_risk_view_mass_balance_join": "provider_mass_balance_audit attached; 7 external records (3 CLOSED, 3 PARTIAL, 1 UNBALANCED); provider_mass_balance_promotion_allowed=false",
   "provider_mass_balance_contract_implemented": true,
   "provider_mass_balance_contract_schema": "prism.provider_mass_balance.v1",
   "provider_mass_balance_contract_modules": [

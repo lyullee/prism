@@ -3614,6 +3614,17 @@
       "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"
     }
   },
+  "provider_mass_balance_audit": {
+    "schema_version": "prism.provider_mass_balance_audit.v1",
+    "record_count": 7,
+    "status_counts": {
+      "CLOSED": 3,
+      "PARTIAL": 3,
+      "UNBALANCED": 1
+    },
+    "promotion_allowed": false,
+    "diagnostic_only": true
+  },
   "coverage": {
     "event_count": 34,
     "case_count": 44,
@@ -4154,7 +4165,8 @@
       "campaign 0c8a2a44910ec534262637f956cbf9da00bcabf931863cb39fd00635ee2b6df1: qualified provider packet promotion is unavailable",
       "campaign 0c8a2a44910ec534262637f956cbf9da00bcabf931863cb39fd00635ee2b6df1: provider packet evidence does not match all consumed packets"
     ],
-    "promotion_allowed": false
+    "promotion_allowed": false,
+    "provider_mass_balance_promotion_allowed": false
   },
   "semantics": {
     "risk_sum": "conditional IR/F-N is the sum of the risk atoms that reached the executed consequence ledger",
@@ -4163,5 +4175,7 @@
     "promotion": "this envelope is diagnostic-only until qualified provider coverage, strict scope, and independent physical validation gates close"
   },
   "source_assessment_path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
-  "source_assessment_sha256": "ff4a8bd999a1c13c77d8366fa06cb75ed8f9bc19237aa2d47813aa04fa37aa8a"
+  "source_assessment_sha256": "ff4a8bd999a1c13c77d8366fa06cb75ed8f9bc19237aa2d47813aa04fa37aa8a",
+  "provider_mass_balance_audit_path": "results/20261104/provider_mass_balance_audit_current.json",
+  "provider_mass_balance_audit_sha256": "8dd0ccc672799232e6386c59d140fb4a2dc4548807a8be5c166fa7e3fe39f662"
 }

@@ -1332,6 +1332,7 @@
   "provider_mass_balance_audit_document": "docs/PRISM_provider_mass_balance_audit_20261104.md",
   "provider_mass_balance_gate_policy": "Provider-state mass-balance evidence is preserved in case identity; PARTIAL or UNBALANCED evidence blocks strict release-boundary promotion and is never repaired into inventory depletion.",
   "provider_mass_balance_test_status": "802 passed, 1 skipped portable suite including provider mass-balance tests",
+  "conditional_facility_risk_view_mass_balance_join": "Conditional facility IR/F-N view carries the provider mass-balance audit summary; any PARTIAL or UNBALANCED provider state keeps promotion_allowed=false.",
   "mixed_lh2_provider_campaign_release_ledger_result": "results/20261018/generic_mixed_provider_campaign_refined_pool_current.json",
   "mixed_lh2_provider_campaign_release_ledger_assessment": "results/20261018/generic_mixed_provider_release_ledger_refined_pool_assessment.json",
   "mixed_lh2_provider_campaign_refined_pool_status": "24/24 cases executed; 5 EXECUTED, 19 EXECUTED_OPERATOR_LIMITED; no FAILED or UNCOMPUTED case rows",

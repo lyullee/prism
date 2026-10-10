@@ -26,6 +26,7 @@ def _nonnegative_int(value: object, name: str) -> int:
 
 def build_conditional_facility_risk_view(
     assessment: Mapping[str, Any],
+    provider_mass_balance_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return the conditional facility IR/F-N envelope from an assessment.
 
@@ -70,6 +71,11 @@ def build_conditional_facility_risk_view(
     release_ledger = _mapping(
         release_ledger, "release_termination_inventory_ledger"
     )
+    mass_balance_audit = None
+    if provider_mass_balance_audit is not None:
+        mass_balance_audit = _mapping(
+            provider_mass_balance_audit, "provider_mass_balance_audit"
+        )
 
     blockers = source.get("provider_qualification_blocking_reasons")
     if not isinstance(blockers, list):
@@ -103,6 +109,19 @@ def build_conditional_facility_risk_view(
         "scenario_family_contributions": dict(family_contributions),
         "scenario_branch_accounting": dict(branch_accounting),
         "release_termination_inventory_ledger": dict(release_ledger),
+        "provider_mass_balance_audit": (
+            {
+                "schema_version": mass_balance_audit.get("schema_version"),
+                "record_count": mass_balance_audit.get("record_count"),
+                "status_counts": dict(mass_balance_audit.get("status_counts", {}))
+                if isinstance(mass_balance_audit.get("status_counts"), Mapping)
+                else {},
+                "promotion_allowed": bool(mass_balance_audit.get("promotion_allowed")),
+                "diagnostic_only": bool(mass_balance_audit.get("diagnostic_only")),
+            }
+            if mass_balance_audit is not None
+            else None
+        ),
         "coverage": dict(coverage),
         "strict_release_boundary": strict_release_boundary,
         "qualification": {
@@ -126,6 +145,10 @@ def build_conditional_facility_risk_view(
             ),
             "blocking_reasons": list(blockers),
             "promotion_allowed": False,
+            "provider_mass_balance_promotion_allowed": bool(
+                mass_balance_audit is not None
+                and mass_balance_audit.get("promotion_allowed") is True
+            ),
         },
         "semantics": {
             "risk_sum": (

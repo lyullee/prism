@@ -69,3 +69,18 @@ def test_view_rejects_missing_conditional_fn() -> None:
     assessment.pop("conditional_diagnostic_facility_expected_death_fn_low_high")
     with pytest.raises(ValueError, match="expected-death F/N"):
         build_conditional_facility_risk_view(assessment)
+
+
+def test_view_carries_mass_balance_qualification_boundary() -> None:
+    view = build_conditional_facility_risk_view(
+        _assessment(),
+        provider_mass_balance_audit={
+            "schema_version": "prism.provider_mass_balance_audit.v1",
+            "record_count": 7,
+            "status_counts": {"CLOSED": 3, "PARTIAL": 3, "UNBALANCED": 1},
+            "diagnostic_only": True,
+            "promotion_allowed": False,
+        },
+    )
+    assert view["provider_mass_balance_audit"]["status_counts"]["UNBALANCED"] == 1
+    assert view["qualification"]["provider_mass_balance_promotion_allowed"] is False
