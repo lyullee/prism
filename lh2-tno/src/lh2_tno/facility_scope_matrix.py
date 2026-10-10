@@ -18,7 +18,7 @@ harm, risk atoms, or facility-QRA qualification.
 from __future__ import annotations
 
 import copy
-from collections import defaultdict
+from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -198,6 +198,74 @@ def _conditional_status(case_rows: Sequence[Mapping[str, Any]]) -> str:
     return "UNCOMPUTED"
 
 
+def _gap_assessment(
+    *,
+    family: str,
+    event_ids: Sequence[str],
+    case_rows: Sequence[Mapping[str, Any]],
+    status: str,
+    conditional_status: str,
+    not_numerically_executed: int,
+    qualified_evidence_withheld: int,
+) -> dict[str, Any]:
+    """Explain why a family is strict-partial without hiding numerical output.
+
+    The facility ledger deliberately keeps operator-limited and domain-limited
+    results as executed diagnostic cases.  A single ``PARTIAL`` label is too
+    coarse for an IJHE audit because it cannot distinguish a missing numerical
+    case from a computed case whose qualification evidence is withheld.  This
+    helper creates a small, machine-readable closure plan; it does not promote
+    any result or change frequency/consequence values.
+    """
+    status_counts = Counter(str(row.get("status", "UNKNOWN")) for row in case_rows)
+    reasons: list[str] = []
+    closure: list[str] = []
+    if not event_ids:
+        return {
+            "gap_class": "NOT_APPLICABLE",
+            "gap_reasons": [],
+            "closure_requirements": [],
+            "case_status_counts": dict(sorted(status_counts.items())),
+        }
+    if not case_rows:
+        reasons.append("event generated but no numerical consequence case is present")
+        closure.append("execute the declared release/termination case and store its provider result")
+    if not_numerically_executed:
+        reasons.append(
+            f"{not_numerically_executed} case(s) have no numerical consequence result"
+        )
+        closure.append(
+            "supply a complete state-bound packet and rerun the missing case; keep it out of facility QRA until then"
+        )
+    if qualified_evidence_withheld:
+        reasons.append(
+            f"{qualified_evidence_withheld} computed case(s) are operator/domain-limited and not qualified evidence"
+        )
+        closure.extend(
+            (
+                "replace diagnostic/operator-limited output with a qualified provider packet",
+                "attach independent physical validation for the applicable release and consequence domain",
+            )
+        )
+    if status not in {"EXECUTED", "NOT_APPLICABLE"} and not reasons:
+        reasons.append(f"strict status is {status}")
+        closure.append("resolve the strict status before claiming complete facility scope")
+    if not reasons:
+        gap_class = "COMPLETE"
+    elif not_numerically_executed:
+        gap_class = "NUMERICAL_CASE_MISSING"
+    else:
+        gap_class = "QUALIFICATION_EVIDENCE_WITHHELD"
+    return {
+        "gap_class": gap_class,
+        "gap_reasons": list(dict.fromkeys(reasons)),
+        "closure_requirements": list(dict.fromkeys(closure)),
+        "case_status_counts": dict(sorted(status_counts.items())),
+        "strict_status": status,
+        "conditional_status": conditional_status,
+    }
+
+
 def build_scope_matrix_from_facility_ledger(
     facility_ledger: Mapping[str, Any],
     *,
@@ -260,6 +328,15 @@ def build_scope_matrix_from_facility_ledger(
         )
         status = "NOT_APPLICABLE" if not event_ids else _status(family_cases)
         conditional_status = "NOT_APPLICABLE" if not event_ids else _conditional_status(family_cases)
+        gap = _gap_assessment(
+            family=family,
+            event_ids=event_ids,
+            case_rows=family_cases,
+            status=status,
+            conditional_status=conditional_status,
+            not_numerically_executed=not_numerically_executed,
+            qualified_evidence_withheld=qualified_evidence_withheld,
+        )
         if status not in {"EXECUTED", "NOT_APPLICABLE"}:
             blocking.append(f"{family}: {status}")
         if conditional_status not in {"EXECUTED", "NOT_APPLICABLE"}:
@@ -288,6 +365,10 @@ def build_scope_matrix_from_facility_ledger(
             "not_numerically_executed_case_count": not_numerically_executed,
             "qualified_evidence_withheld_case_count": qualified_evidence_withheld,
             "numerically_executed_case_count": executed,
+            "gap_class": gap["gap_class"],
+            "gap_reasons": gap["gap_reasons"],
+            "closure_requirements": gap["closure_requirements"],
+            "case_status_counts": gap["case_status_counts"],
             "generated_initiation_frequency_per_year": frequency,
             "frequency_rows_are_not_additive_across_families": True,
             "source": "facility_ledger_event_and_case_metadata",
@@ -300,12 +381,40 @@ def build_scope_matrix_from_facility_ledger(
         )
     )
     matrix_complete = not blocking and ledger_conditional_uncomputed == 0
+    gap_summary = {
+        "schema_version": "prism.scope_gap_summary.v1",
+        "families_with_numerical_case_gap": [
+            row["family"] for row in rows if row["gap_class"] == "NUMERICAL_CASE_MISSING"
+        ],
+        "families_with_qualification_gap": [
+            row["family"]
+            for row in rows
+            if row["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
+        ],
+        "families_complete": [
+            row["family"] for row in rows if row["gap_class"] == "COMPLETE"
+        ],
+        "family_count": len(rows),
+        "numerical_case_gap_family_count": sum(
+            row["gap_class"] == "NUMERICAL_CASE_MISSING" for row in rows
+        ),
+        "qualification_gap_family_count": sum(
+            row["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD" for row in rows
+        ),
+        "complete_family_count": sum(row["gap_class"] == "COMPLETE" for row in rows),
+        "interpretation": (
+            "A qualification gap means a numerical diagnostic exists but cannot be "
+            "promoted to qualified facility QRA. A numerical case gap means no "
+            "consequence result exists and must remain outside the facility total."
+        ),
+    }
     return {
         "schema_version": "prism.major_accident_scope.v1",
         "facility_id": facility_ledger.get("facility_id"),
         "scope": "outdoor_major_accidents",
         "required_families": list(families),
         "rows": rows,
+        "gap_summary": gap_summary,
         "event_count": len(event_families),
         "case_count": len(case_rows),
         "conditional_executed_case_count": len(case_rows) - ledger_conditional_uncomputed,

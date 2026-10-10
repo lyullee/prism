@@ -323,6 +323,20 @@ def build_ijhe_objective_coverage_audit(
     ))
 
     scope_ok = scope_matrix.get("conditional_chain_complete") is True
+    scope_gap_rows = scope_matrix.get("rows", [])
+    if not isinstance(scope_gap_rows, list):
+        scope_gap_rows = []
+    scope_gap_rows = [
+        {
+            "family": row.get("family"),
+            "gap_class": row.get("gap_class"),
+            "case_status_counts": row.get("case_status_counts", {}),
+            "gap_reasons": row.get("gap_reasons", []),
+            "closure_requirements": row.get("closure_requirements", []),
+        }
+        for row in scope_gap_rows
+        if isinstance(row, Mapping)
+    ]
     rows.append(_row(
         "generic_lh2_scope",
         "탱크·배관·밸브·펌프·벤트·기화기·재액화기 등 일반 LH2 설비 사고 범위를 명시해야 한다",
@@ -345,6 +359,8 @@ def build_ijhe_objective_coverage_audit(
             "facility_numerically_executed_case_count": facility_coverage.get(
                 "numerically_executed_case_count"
             ),
+            "scope_gap_summary": scope_matrix.get("gap_summary", {}),
+            "scope_gap_rows": scope_gap_rows,
         },
         blocking_reason=None if scope_ok else "조건부 scope chain이 닫히지 않았다",
         interpretation="조건부 실행 범위는 닫혔지만 operator-limited family를 엄격한 complete facility scope로 승격하지 않는다.",

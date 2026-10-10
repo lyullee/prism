@@ -556,7 +556,7 @@
       "status": "CONDITIONAL_PASS",
       "evidence": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
-        "results\\20261030\\native_near_receptor_scope_packets_state_bound\\state_snapshot_campaign_binding_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\state_snapshot_binding_audit.json"
       ],
       "strict_gate_open": false
     },
@@ -564,8 +564,8 @@
       "id": "B_release_to_final_damage",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "strict_gate_open": false
     },
@@ -582,8 +582,8 @@
       "id": "D_literature_frequency_uncertainty",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "strict_gate_open": false
     },
@@ -592,7 +592,7 @@
       "status": "CONDITIONAL_PASS",
       "evidence": [
         "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
       ],
       "strict_gate_open": false
     }
@@ -607,27 +607,27 @@
   "interpretation": "The v0.6.0 declared outdoor chain is numerically connected for conditional diagnostics. Operator-limited cases, missing qualified provider packets, restricted component validation, and strict facility-QRA gates remain visible and are not replaced by another scenario.",
   "source_artifacts": {
     "objective_audit": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/ijhe_objective_coverage_audit.json",
-      "sha256": "bf3343dfd6f9704741ea40f927d4a7716f61ecde67e539f4fb54b04bfa964576"
+      "path": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
+      "sha256": "44f9fd11a6fde9d6c3f5fa672f6ccf02580f278bd70461665e031a2d1b934617"
     },
     "union_verification": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/verification.json",
+      "path": "results/20261026/native_full_scope_union_assessment/verification.json",
       "sha256": "0f575ab0aca817ca2c0352f514e79a1e3b438a56516d039a9b0db3f7db16d0b8"
     },
     "scope_matrix": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/scope_matrix.json",
-      "sha256": "e2dd498dd2996041eef42abe49203e471129971b68a83ebebfb749d86f610379"
+      "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
+      "sha256": "f2af6c34cf9d4a7855754ca63c45ca158eff13e3581f3839401a04869a166cdd"
     },
     "facility_assessment": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/facility_assessment.json",
+      "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
       "sha256": "ac4e6768f818422e720e1b31331029e8b9b2aaed1e68fff8124a115082a12968"
     },
     "completion_audit": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/ijhe_completion_audit.json",
+      "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
       "sha256": "3de1c3303b9ede338b9eb35a3f77b25ee8e94a115f3b6f5fb99c6dd60f6219f3"
     },
     "validation_matrix": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/validation_evidence_matrix.json",
+      "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
       "sha256": "60d6e0be62768052007cfeea1f7e9543a96cbd39232d0cf9b4dbaadf0fb65acb"
     },
     "realtime_benchmark": {
@@ -635,7 +635,7 @@
       "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
     },
     "facility_evidence_request": {
-      "path": "results/20261030/native_full_scope_union_assessment_state_atoms/facility_evidence_request.json",
+      "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
       "sha256": "29b54010ffda19578c0d672bacbc144b8ff3355d6871ef2a1f8a9cb91e10c9e0"
     },
     "scenario_evidence_audit": {

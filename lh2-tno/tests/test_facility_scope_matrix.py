@@ -94,4 +94,33 @@ def test_ledger_backed_matrix_matches_repaired_ledger_accounting():
         "liquid_two_phase: PARTIAL",
         "vertical_handoff: UNCOMPUTED",
     ]
+    assert rows["pipe_hole"]["gap_class"] == "COMPLETE"
+    assert rows["vertical_handoff"]["gap_class"] == "NUMERICAL_CASE_MISSING"
+    assert rows["vertical_handoff"]["case_status_counts"] == {"UNCOMPUTED": 1}
+    assert rows["vertical_handoff"]["closure_requirements"]
+    assert matrix["gap_summary"]["numerical_case_gap_family_count"] == 2
     assert matrix["matrix_complete"] is False
+
+
+def test_operator_limited_cases_are_qualification_gaps_not_numerical_gaps():
+    ledger = _ledger()
+    ledger["conditional_uncomputed_case_count"] = 0
+    ledger["cases"] = [
+        {
+            "event_id": "facility/pipe/1",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "scenario_families": ["pipe_hole"],
+        },
+    ]
+    ledger["events"] = ledger["events"][:1]
+    ledger["events"][0]["scenario_families"] = ["pipe_hole"]
+    matrix = build_scope_matrix_from_facility_ledger(
+        ledger,
+        required_families=("pipe_hole",),
+    )
+    row = matrix["rows"][0]
+    assert row["conditional_status"] == "EXECUTED"
+    assert row["not_numerically_executed_case_count"] == 0
+    assert row["qualified_evidence_withheld_case_count"] == 1
+    assert row["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
+    assert matrix["gap_summary"]["families_with_qualification_gap"] == ["pipe_hole"]

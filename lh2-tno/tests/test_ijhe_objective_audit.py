@@ -10,6 +10,14 @@ def _inputs():
             "matrix_complete": False,
             "required_families": ["vessel_hole"],
             "blocking_reasons": ["vessel_hole: PARTIAL"],
+            "gap_summary": {"qualification_gap_family_count": 1},
+            "rows": [{
+                "family": "vessel_hole",
+                "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+                "case_status_counts": {"EXECUTED_OPERATOR_LIMITED": 1},
+                "gap_reasons": ["diagnostic evidence"],
+                "closure_requirements": ["qualified packet"],
+            }],
             "_record_path": "scope.json",
         },
         "facility_assessment": {
@@ -105,6 +113,9 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
     assert "release_to_final_damage" not in report["core_blocking_check_ids"]
     assert "slabx_lh2_component_consequence_validation" not in report["core_blocking_check_ids"]
+    scope_check = next(row for row in report["checks"] if row["id"] == "generic_lh2_scope")
+    assert scope_check["observed"]["scope_gap_summary"]["qualification_gap_family_count"] == 1
+    assert scope_check["observed"]["scope_gap_rows"][0]["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
 
 
 def test_objective_audit_blocks_missing_native_event():

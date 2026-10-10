@@ -10,7 +10,7 @@
       "status": "PASS",
       "evidence_paths": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
-        "results\\20261030\\native_near_receptor_scope_packets_state_bound\\state_snapshot_campaign_binding_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\state_snapshot_binding_audit.json"
       ],
       "observed": {
         "catalog_event_count": 24,
@@ -31,7 +31,7 @@
       "evidence_paths": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\packet_evidence.json",
         "results\\20261027\\native_generic_scope_packets_state_bound\\native_packet_campaign_ledger.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "packet_event_count": 24,
@@ -51,8 +51,8 @@
       "requirement": "방출에서 확산·점화·화재/폭발·수용점 피해와 IR/F-N 진단까지 이어져야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "conditional_facility_risk_available": true,
@@ -88,8 +88,8 @@
       "requirement": "문헌 빈도를 그대로 입력하되 여러 빈도 시나리오의 불확실성을 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "frequency_scenario_count": 5,
@@ -107,8 +107,8 @@
       "requirement": "기상·점화·인구 분기를 명시적으로 곱해 최종 피해를 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "population_accounting_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
@@ -125,8 +125,8 @@
       "requirement": "탱크·배관·밸브·펌프·벤트·기화기·재액화기 등 일반 LH2 설비 사고 범위를 명시해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\scope_matrix.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "required_family_count": 12,
@@ -138,7 +138,184 @@
         "scope_numerically_executed_case_count": 98,
         "facility_not_numerically_executed_case_count": 0,
         "facility_qualified_evidence_withheld_case_count": 29,
-        "facility_numerically_executed_case_count": 44
+        "facility_numerically_executed_case_count": 44,
+        "scope_gap_summary": {
+          "schema_version": "prism.scope_gap_summary.v1",
+          "families_with_numerical_case_gap": [],
+          "families_with_qualification_gap": [
+            "vessel_hole",
+            "pipe_hole",
+            "valve_hole",
+            "pump_hole",
+            "liquid_two_phase",
+            "inventory_depletion",
+            "two_sided_rupture",
+            "vertical_handoff"
+          ],
+          "families_complete": [
+            "vent_hole",
+            "vaporizer_hole",
+            "reliquefier_hole",
+            "inventory_over_600s"
+          ],
+          "family_count": 12,
+          "numerical_case_gap_family_count": 0,
+          "qualification_gap_family_count": 8,
+          "complete_family_count": 4,
+          "interpretation": "A qualification gap means a numerical diagnostic exists but cannot be promoted to qualified facility QRA. A numerical case gap means no consequence result exists and must remain outside the facility total."
+        },
+        "scope_gap_rows": [
+          {
+            "family": "vessel_hole",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED_OPERATOR_LIMITED": 5
+            },
+            "gap_reasons": [
+              "5 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "pipe_hole",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED": 10,
+              "EXECUTED_OPERATOR_LIMITED": 15
+            },
+            "gap_reasons": [
+              "15 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "valve_hole",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED_OPERATOR_LIMITED": 5
+            },
+            "gap_reasons": [
+              "5 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "vent_hole",
+            "gap_class": "COMPLETE",
+            "case_status_counts": {
+              "EXECUTED": 1
+            },
+            "gap_reasons": [],
+            "closure_requirements": []
+          },
+          {
+            "family": "pump_hole",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED_OPERATOR_LIMITED": 2
+            },
+            "gap_reasons": [
+              "2 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "vaporizer_hole",
+            "gap_class": "COMPLETE",
+            "case_status_counts": {
+              "EXECUTED": 1
+            },
+            "gap_reasons": [],
+            "closure_requirements": []
+          },
+          {
+            "family": "reliquefier_hole",
+            "gap_class": "COMPLETE",
+            "case_status_counts": {
+              "EXECUTED": 1
+            },
+            "gap_reasons": [],
+            "closure_requirements": []
+          },
+          {
+            "family": "liquid_two_phase",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED_OPERATOR_LIMITED": 17
+            },
+            "gap_reasons": [
+              "17 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "inventory_depletion",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED": 11,
+              "EXECUTED_OPERATOR_LIMITED": 17
+            },
+            "gap_reasons": [
+              "17 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "inventory_over_600s",
+            "gap_class": "COMPLETE",
+            "case_status_counts": {
+              "EXECUTED": 1
+            },
+            "gap_reasons": [],
+            "closure_requirements": []
+          },
+          {
+            "family": "two_sided_rupture",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED_OPERATOR_LIMITED": 2
+            },
+            "gap_reasons": [
+              "2 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          },
+          {
+            "family": "vertical_handoff",
+            "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+            "case_status_counts": {
+              "EXECUTED_OPERATOR_LIMITED": 10
+            },
+            "gap_reasons": [
+              "10 computed case(s) are operator/domain-limited and not qualified evidence"
+            ],
+            "closure_requirements": [
+              "replace diagnostic/operator-limited output with a qualified provider packet",
+              "attach independent physical validation for the applicable release and consequence domain"
+            ]
+          }
+        ]
       },
       "blocking_reason": null,
       "interpretation": "조건부 실행 범위는 닫혔지만 operator-limited family를 엄격한 complete facility scope로 승격하지 않는다."
@@ -149,7 +326,7 @@
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
         "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
       ],
       "observed": {
         "cache_p95_ms": 61.27649999689311,
@@ -214,7 +391,7 @@
       "requirement": "실증 또는 독립 실험으로 방출·확산·피해 계산을 검증해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\validation_evidence_matrix.json"
+        "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
       ],
       "observed": {
         "validation_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
@@ -231,7 +408,7 @@
       "evidence_paths": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\native_packet_campaign_ledger.json",
         "results\\20261027\\native_generic_scope_packets_state_bound\\packet_evidence.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\ijhe_completion_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
       ],
       "observed": {
         "provider_packet_case_count": 24,
@@ -246,8 +423,8 @@
       "requirement": "선언한 주요사고 범위가 모든 설비·사고 family에 대해 엄격히 complete여야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\scope_matrix.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\ijhe_completion_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
       ],
       "observed": {
         "scope_matrix_complete": false,
@@ -271,8 +448,8 @@
       "requirement": "시설 전체 IR/F-N을 qualified QRA 결과로 승격해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\ijhe_completion_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
       ],
       "observed": {
         "facility_total_risk_available": false,
@@ -287,9 +464,9 @@
       "requirement": "시설 전체 사건이 설비 상태 snapshot과 native 방출 결과 digest까지 일대일로 이어져야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\native_state_snapshot_campaign_ledger.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\extension_state_snapshot_coverage.json",
-        "results\\20261030\\native_full_scope_union_assessment_state_atoms\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261026\\native_full_scope_union_assessment\\extension_state_snapshot_coverage.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "union_event_count": 34,

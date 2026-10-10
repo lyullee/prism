@@ -42,6 +42,17 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 5,
       "numerically_executed_case_count": 5,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "5 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 5
+      },
       "generated_initiation_frequency_per_year": 0.0008248999999999999,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -81,6 +92,18 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 15,
       "numerically_executed_case_count": 25,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "15 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED": 10,
+        "EXECUTED_OPERATOR_LIMITED": 15
+      },
       "generated_initiation_frequency_per_year": 0.00027738,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -110,6 +133,17 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 5,
       "numerically_executed_case_count": 5,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "5 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 5
+      },
       "generated_initiation_frequency_per_year": 0.0002072,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -135,6 +169,12 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 0,
       "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "generated_initiation_frequency_per_year": 2e-05,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -161,6 +201,17 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 2,
       "numerically_executed_case_count": 2,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "2 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 2
+      },
       "generated_initiation_frequency_per_year": 0.0006000000000000001,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -186,6 +237,12 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 0,
       "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "generated_initiation_frequency_per_year": 0.001,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -211,6 +268,12 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 0,
       "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "generated_initiation_frequency_per_year": 0.01,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -252,6 +315,17 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 17,
       "numerically_executed_case_count": 17,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "17 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 17
+      },
       "generated_initiation_frequency_per_year": 0.0016959,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -299,6 +373,18 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 17,
       "numerically_executed_case_count": 28,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "17 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED": 11,
+        "EXECUTED_OPERATOR_LIMITED": 17
+      },
       "generated_initiation_frequency_per_year": 0.00175228,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -324,6 +410,12 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 0,
       "numerically_executed_case_count": 1,
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "generated_initiation_frequency_per_year": 5e-05,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -350,6 +442,17 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 2,
       "numerically_executed_case_count": 2,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "2 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 2
+      },
       "generated_initiation_frequency_per_year": 0.00101,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
@@ -379,11 +482,47 @@
       "not_numerically_executed_case_count": 0,
       "qualified_evidence_withheld_case_count": 10,
       "numerically_executed_case_count": 10,
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "10 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 10
+      },
       "generated_initiation_frequency_per_year": 0.0002072,
       "frequency_rows_are_not_additive_across_families": true,
       "source": "facility_ledger_event_and_case_metadata"
     }
   ],
+  "gap_summary": {
+    "schema_version": "prism.scope_gap_summary.v1",
+    "families_with_numerical_case_gap": [],
+    "families_with_qualification_gap": [
+      "vessel_hole",
+      "pipe_hole",
+      "valve_hole",
+      "pump_hole",
+      "liquid_two_phase",
+      "inventory_depletion",
+      "two_sided_rupture",
+      "vertical_handoff"
+    ],
+    "families_complete": [
+      "vent_hole",
+      "vaporizer_hole",
+      "reliquefier_hole",
+      "inventory_over_600s"
+    ],
+    "family_count": 12,
+    "numerical_case_gap_family_count": 0,
+    "qualification_gap_family_count": 8,
+    "complete_family_count": 4,
+    "interpretation": "A qualification gap means a numerical diagnostic exists but cannot be promoted to qualified facility QRA. A numerical case gap means no consequence result exists and must remain outside the facility total."
+  },
   "event_count": 34,
   "case_count": 44,
   "conditional_executed_case_count": 44,
@@ -408,7 +547,7 @@
   "source_facility_ledger_digest": "04e01f1d1300dec562e5da92692462efb96853cf848b6ecdc6e932317a1ee4f8",
   "source": "facility_ledger_event_and_case_metadata",
   "physical_validation_claim": false,
-  "interpretation": "The final scope matrix is regenerated from the merged facility ledger. Source campaign matrices remain provenance views; overlapping family rows are not additive and the ledger's exact event/case identities are authoritative.",
+  "interpretation": "The final scope matrix is regenerated from the merged facility ledger. Overlapping family rows are not additive. gap_class separates missing numerical cases from computed diagnostic cases whose qualification evidence is withheld.",
   "source_campaign_scope_matrices": [
     {
       "facility_id": null,
