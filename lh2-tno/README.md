@@ -12,6 +12,8 @@
 [`CURRENT_STATUS.json`](CURRENT_STATUS.json), [`DEVELOPMENT_GOAL.json`](DEVELOPMENT_GOAL.json),
 [`ijhe_objective_coverage_audit.json`](results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_objective_coverage_audit.json)에서 확인합니다.
 
+**2026-11-06 provider 증거 연결 갱신:** 일반 LH2 진단 catalog는 24개 사건 경로 안의 26개 provider packet을 26개 증거 요청으로 펼칩니다. 15개는 방출 종료·격리·재고와 qualification이 함께 열려 있고, 11개는 qualification만 열려 있으며, qualified provider는 0개입니다. [`generic_lh2_provider_evidence_requests.json`](results/20261106/generic_lh2_provider_evidence_requests.json)은 각 요청을 보존하고, [`ijhe_objective_coverage_audit_with_provider_evidence_requests.json`](results/20261106/ijhe_objective_coverage_audit_with_provider_evidence_requests.json)과 [`v060_readiness_report_current_slabx_catalog.json`](results/20261106/v060_readiness_report_current_slabx_catalog.json)은 이 수가 closure audit와 일치하는지 검사합니다. 이 장부는 누출시간·재고·빈도·시설 QRA를 추정하지 않으며, 현재 엄격한 차단 문턱은 독립 물리검증·qualified provider·엄격한 시설범위·시설 QRA 네 가지입니다.
+
 **방출부터 최종 피해까지의 현재 연결:** `results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json`은
 44개 case와 176개 risk atom을 방출 종료·질량 장부·pool/확산·cloud·점화/피해 단계와
 네 가지 점화 branch까지 대조합니다. 현재 44/44 case가 구조적으로 닫혔고, 그중
