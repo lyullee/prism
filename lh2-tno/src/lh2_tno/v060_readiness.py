@@ -329,7 +329,10 @@ def _release_closure_worklist_summary(
     }
 
 
-def _frequency_port_binding_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
+def _frequency_port_binding_summary(
+    facility: Mapping[str, Any],
+    evidence_request: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     """Expose the reviewed accident-port trace in the readiness report.
 
     The public facility assessment mirrors the nested ledger field.  Readiness
@@ -341,6 +344,16 @@ def _frequency_port_binding_summary(facility: Mapping[str, Any]) -> dict[str, An
     ledger = facility.get("facility_risk_ledger")
     nested = ledger.get("frequency_port_binding") if isinstance(ledger, Mapping) else None
     selected = root if isinstance(root, Mapping) else nested
+    source = "facility_assessment" if isinstance(selected, Mapping) else None
+    if not isinstance(selected, Mapping) and isinstance(evidence_request, Mapping):
+        request_binding = evidence_request.get("frequency_port_binding")
+        if isinstance(request_binding, Mapping):
+            # A legacy facility assessment may predate the port-binding field.
+            # The evidence request is allowed to expose its observed
+            # provider-only/reviewed-port split, but it can never repair the
+            # assessment or promote facility QRA.
+            selected = request_binding
+            source = "facility_evidence_request"
     if not isinstance(selected, Mapping):
         return {
             "schema": None,
@@ -352,14 +365,15 @@ def _frequency_port_binding_summary(facility: Mapping[str, Any]) -> dict[str, An
             "risk_atom_port_binding_mismatch_count": None,
             "mismatch_count": None,
             "assessment_nested_mirror_match": None,
+            "source": None,
             "diagnostic_only": True,
             "frequency_inference_allowed": False,
             "facility_qra_allowed": False,
         }
     mirror_match = (
-        root is None
-        or nested is None
-        or root == nested
+        None
+        if source == "facility_evidence_request"
+        else (root is None or nested is None or root == nested)
     )
     def _count(name: str) -> Any:
         value = selected.get(name)
@@ -374,9 +388,25 @@ def _frequency_port_binding_summary(facility: Mapping[str, Any]) -> dict[str, An
         "risk_atom_port_binding_mismatch_count": _count("risk_atom_port_binding_mismatch_count"),
         "mismatch_count": _count("mismatch_count"),
         "assessment_nested_mirror_match": mirror_match,
+        "source": source,
         "diagnostic_only": True,
         "frequency_inference_allowed": False,
-        "facility_qra_allowed": False,
+        "facility_qra_allowed": selected.get("facility_qra_allowed") is True,
+        "reviewed_frequency_port_case_count": selected.get(
+            "reviewed_frequency_port_case_count"
+        ),
+        "provider_packet_only_case_count": selected.get(
+            "provider_packet_only_case_count"
+        ),
+        "port_binding_mismatch_case_count": selected.get(
+            "port_binding_mismatch_case_count"
+        ),
+        "port_binding_withheld_case_count": selected.get(
+            "port_binding_withheld_case_count"
+        ),
+        "reviewed_frequency_ports_complete": selected.get(
+            "reviewed_frequency_ports_complete"
+        ),
     }
 
 
@@ -608,7 +638,9 @@ def build_v060_readiness_report(
                 if release_closure is not None
                 else None
             ),
-            "frequency_port_binding": _frequency_port_binding_summary(facility),
+            "frequency_port_binding": _frequency_port_binding_summary(
+                facility, facility_evidence_request
+            ),
             "risk_atom_chain_closure": (
                 {
                     "status": atom_chain.get("status"),

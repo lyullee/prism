@@ -284,6 +284,33 @@ def test_report_records_facility_frequency_port_binding_trace():
     assert validate_v060_readiness_report(report)["status"] == "VALID"
 
 
+def test_report_uses_evidence_request_port_summary_for_legacy_assessment():
+    inputs = _inputs()
+    inputs["facility_evidence_request"] = {
+        "frequency_port_binding": {
+            "schema_version": "prism.frequency_port_binding.v1",
+            "status": "PORT_BINDING_WITHHELD",
+            "case_count": 44,
+            "reviewed_frequency_port_case_count": 0,
+            "provider_packet_only_case_count": 44,
+            "port_binding_mismatch_case_count": 0,
+            "port_binding_withheld_case_count": 0,
+            "reviewed_frequency_ports_complete": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        },
+        **_evidence_request(),
+    }
+    report = build_v060_readiness_report(**inputs)
+    trace = report["chain"]["frequency_port_binding"]
+    assert trace["source"] == "facility_evidence_request"
+    assert trace["status"] == "PORT_BINDING_WITHHELD"
+    assert trace["reviewed_frequency_port_case_count"] == 0
+    assert trace["provider_packet_only_case_count"] == 44
+    assert trace["facility_qra_allowed"] is False
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
 def test_report_validator_rejects_frequency_port_binding_mirror_drift():
     inputs = _inputs()
     port_binding = {

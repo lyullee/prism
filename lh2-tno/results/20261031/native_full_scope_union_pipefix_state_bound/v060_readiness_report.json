@@ -132,6 +132,27 @@
         "facility_ir_fn_promotion": "independent qualification and physical-validation gates remain required"
       }
     },
+    "release_closure_worklist": null,
+    "frequency_port_binding": {
+      "schema": "prism.frequency_port_binding.v1",
+      "status": "PORT_BINDING_WITHHELD",
+      "port_scoped_event_count": null,
+      "port_unbound_event_count": null,
+      "all_events_port_scoped": null,
+      "case_port_binding_mismatch_count": null,
+      "risk_atom_port_binding_mismatch_count": null,
+      "mismatch_count": null,
+      "assessment_nested_mirror_match": null,
+      "source": "facility_evidence_request",
+      "diagnostic_only": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "reviewed_frequency_port_case_count": 0,
+      "provider_packet_only_case_count": 44,
+      "port_binding_mismatch_case_count": 0,
+      "port_binding_withheld_case_count": 0,
+      "reviewed_frequency_ports_complete": false
+    },
     "risk_atom_chain_closure": {
       "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
       "case_count": 44,
@@ -183,7 +204,13 @@
       "fresh_physics_executed": false,
       "diagnostic_only": true,
       "facility_qra_claim": false
-    }
+    },
+    "external_equipment_model_readiness": null,
+    "equipment_scenario_coverage": null,
+    "equipment_frequency_binding": null,
+    "generic_equipment_scenario_coverage": null,
+    "generic_equipment_frequency_binding": null,
+    "isolation_union_extension": null
   },
   "equipment": {
     "component_rows": [
@@ -506,9 +533,9 @@
     "sensor_frequency_learning": false
   },
   "timing": {
-    "cache_p95_ms": 61.27649999689311,
+    "cache_p95_ms": 24.54430004581809,
     "cache_meets_one_hz_all_samples": true,
-    "fresh_physics_elapsed_ms": 2711.2096999771893,
+    "fresh_physics_elapsed_ms": 2614.507299964316,
     "fresh_physics_meets_one_hz": false,
     "campaign_case_p95_ms": 39591.673405066846,
     "campaign_case_p99_ms": 79233.10563297477,
@@ -577,6 +604,27 @@
         "p95_ms": 786.4394950389395,
         "p99_ms": 808.7060489528812
       }
+    },
+    "runtime_profile": {
+      "recommended_mode": "cached_diagnostic_1hz",
+      "cache_mode": {
+        "p95_ms": 24.54430004581809,
+        "one_hz_ready": true,
+        "purpose": "reuse a validated consequence result for diagnostic monitoring"
+      },
+      "fresh_physics_mode": {
+        "elapsed_ms": 2614.507299964316,
+        "one_hz_ready": false,
+        "purpose": "recalculate SLABx-LH2 consequence from a new equipment state"
+      },
+      "campaign_mode": {
+        "p95_ms": 39591.673405066846,
+        "p99_ms": 79233.10563297477,
+        "online_one_hz_ready": false,
+        "purpose": "offline multi-case risk and sensitivity assessment"
+      },
+      "facility_qra_realtime_claim": false,
+      "interpretation": "One-hertz service is a cache-mode diagnostic claim only; fresh physics and the full campaign remain slower measured paths and do not imply qualified facility QRA."
     }
   },
   "validation_domains": [
@@ -667,7 +715,7 @@
       "status": "CONDITIONAL_PASS",
       "evidence": [
         "results\\20261031\\native_generic_scope_packets_pipefix\\verification.json",
-        "results\\20261031\\native_full_scope_union_pipefix_state_bound\\state_snapshot_binding_audit.json"
+        "results\\20261031\\native_generic_scope_packets_pipefix\\state_snapshot_binding_audit.json"
       ],
       "strict_gate_open": false
     },
@@ -719,7 +767,7 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_objective_coverage_audit.json",
-      "sha256": "fac80ac2136292f221fb7db9d918d8ded32efd5c405de3eb618dc94da41a3615"
+      "sha256": "18045fa6ea22bada842d04b8930729507b871975785def09aa9e24bc55dfdf45"
     },
     "union_verification": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
@@ -743,11 +791,11 @@
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
-      "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
+      "sha256": "cca60462e02e555e461a564941b13976ca636729cee27f7df50fdfae415b7b2a"
     },
     "facility_evidence_request": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",
-      "sha256": "7bea25290a4b89496063973943627f883d4df40508ce88ff5a9e2d45fdf04f8c"
+      "sha256": "e05ef4df546f64c89ba1146e57229c6a7a489061ddd336ca09b9e11c946fc992"
     },
     "risk_atom_chain_audit": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json",

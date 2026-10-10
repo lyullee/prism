@@ -802,12 +802,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
         "component_id": "ambient-vaporizer-01",
         "port_ids": [
           "vaporizer-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -914,12 +927,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
         "component_id": "ambient-vaporizer-01",
         "port_ids": [
           "vaporizer-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -1028,12 +1054,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "vaporizer-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
         "component_id": "ambient-vaporizer-01",
         "port_ids": [
           "vaporizer-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -1140,12 +1179,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "vent-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "vent-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
         "component_id": "pressure-relief-vent-01",
         "port_ids": [
           "vent-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -1254,6 +1306,20 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
         "component_id": "reliquefier-01",
@@ -1261,6 +1327,7 @@
           "reliquefier-accident-out-1",
           "reliquefier-accident-out-2"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
@@ -1385,6 +1452,20 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
         "component_id": "reliquefier-01",
@@ -1392,6 +1473,7 @@
           "reliquefier-accident-out-1",
           "reliquefier-accident-out-2"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
@@ -1516,12 +1598,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "reliquefier-accident-out-1"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
         "component_id": "reliquefier-01",
         "port_ids": [
           "reliquefier-accident-out-1"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -1632,12 +1727,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "tank-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
         "component_id": "storage-tank-01",
         "port_ids": [
           "tank-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -1772,12 +1880,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "tank-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
         "component_id": "storage-tank-01",
         "port_ids": [
           "tank-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -1912,12 +2033,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "tank-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
         "component_id": "storage-tank-01",
         "port_ids": [
           "tank-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2052,12 +2186,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "tank-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
         "component_id": "storage-tank-01",
         "port_ids": [
           "tank-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2192,12 +2339,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "tank-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
         "component_id": "storage-tank-01",
         "port_ids": [
           "tank-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2332,12 +2492,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "line-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
         "component_id": "liquid-transfer-line-01",
         "port_ids": [
           "line-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2466,12 +2639,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "line-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
         "component_id": "liquid-transfer-line-01",
         "port_ids": [
           "line-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2600,12 +2786,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "line-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
         "component_id": "liquid-transfer-line-01",
         "port_ids": [
           "line-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2735,12 +2934,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "line-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
         "component_id": "liquid-transfer-line-01",
         "port_ids": [
           "line-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -2870,12 +3082,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "line-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
         "component_id": "liquid-transfer-line-01",
         "port_ids": [
           "line-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3004,12 +3229,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "pump-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "pump-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
         "component_id": "liquid-transfer-pump-01",
         "port_ids": [
           "pump-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3125,12 +3363,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "pump-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "pump-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
         "component_id": "liquid-transfer-pump-01",
         "port_ids": [
           "pump-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3246,12 +3497,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "valve-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
         "component_id": "transfer-valve-01",
         "port_ids": [
           "valve-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3367,12 +3631,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "valve-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
         "component_id": "transfer-valve-01",
         "port_ids": [
           "valve-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3488,12 +3765,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "valve-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
         "component_id": "transfer-valve-01",
         "port_ids": [
           "valve-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3609,12 +3899,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "valve-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
         "component_id": "transfer-valve-01",
         "port_ids": [
           "valve-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3730,12 +4033,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "valve-accident-out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
         "component_id": "transfer-valve-01",
         "port_ids": [
           "valve-accident-out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
         ],
@@ -3847,12 +4163,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -3958,12 +4287,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4069,12 +4411,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4180,12 +4535,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4291,12 +4659,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4402,12 +4783,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4513,12 +4907,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4624,12 +5031,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4735,12 +5155,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4846,12 +5279,25 @@
       "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
         "component_id": "inventory-depletion-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
         ],
@@ -4960,12 +5406,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5084,12 +5543,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5208,12 +5680,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5332,12 +5817,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5456,12 +5954,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5580,12 +6091,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5704,12 +6228,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5828,12 +6365,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -5952,12 +6502,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -6076,12 +6639,25 @@
       ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
+      "frequency_port_ids": null,
+      "provider_packet_port_ids": [
+        "terminal_pipe.out"
+      ],
+      "port_binding": {
+        "status": "PROVIDER_PACKET_PORTS_ONLY",
+        "reviewed_frequency_port_ids": null,
+        "provider_packet_port_ids": [
+          "terminal_pipe.out"
+        ],
+        "frequency_inference_allowed": false
+      },
       "exact_match_required": {
         "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
         "component_id": "vertical-handoff-terminal-pipe-01",
         "port_ids": [
           "terminal_pipe.out"
         ],
+        "reviewed_frequency_port_ids": null,
         "provider_source_digests": [
           "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
@@ -6173,6 +6749,19 @@
       ]
     }
   ],
+  "frequency_port_binding": {
+    "schema_version": "prism.frequency_port_binding.v1",
+    "status": "PORT_BINDING_WITHHELD",
+    "case_count": 44,
+    "reviewed_frequency_port_case_count": 0,
+    "provider_packet_only_case_count": 44,
+    "port_binding_mismatch_case_count": 0,
+    "port_binding_withheld_case_count": 0,
+    "reviewed_frequency_ports_complete": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "policy": "Provider packet outlet ports remain separate from reviewed frequency ports; missing reviewed ports and mismatches remain qualification blockers."
+  },
   "component_requests": [
     {
       "component_id": "ambient-vaporizer-01",
