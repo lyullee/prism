@@ -226,7 +226,7 @@ def main() -> int:
     parser.add_argument("--facility-template", type=Path, default=ROOT / "examples" / "consequence_facility.json")
     parser.add_argument(
         "--bearings",
-        default="75,286,106,135,45",
+        default="75,285,286,106,135,45",
         help="declared ENU release bearings to run as diagnostics (not fitted)",
     )
     parser.add_argument(

@@ -27,6 +27,20 @@
     "current_replay_bearing_deg": 286.0,
     "current_replay_uses_declared_bearing": false,
     "current_replay_coordinate_axis_status": "source-relative axes are not mapped to ENU",
+    "derived_diagnostic_candidates": [
+      {
+        "bearing_deg": 285.0,
+        "basis": "axis-reflection candidate for a 75 degree north-referenced direction",
+        "status": "DIAGNOSTIC_ONLY"
+      },
+      {
+        "bearing_deg": 286.0,
+        "basis": "bearing used by the prior replay",
+        "status": "DIAGNOSTIC_ONLY"
+      }
+    ],
+    "opposite_weather_station_bearing_deg_from_north": 255.0,
+    "opposite_station_relation": "reported 180 degrees from the release point; consistent with 75 degree release bearing",
     "required_follow_up": "rerun the replay with the documentary direction and an independently established source-relative axis transform"
   },
   "qualification": {
