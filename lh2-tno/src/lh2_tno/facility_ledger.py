@@ -119,6 +119,20 @@ def _case_identity(row: Mapping[str, Any]) -> tuple[str, ...]:
     return (event_id,)
 
 
+def _strict_port_ids(value: Any, label: str) -> tuple[str, ...] | None:
+    """Normalize an optional reviewed accident-port list without inference."""
+    if value is None:
+        return None
+    if isinstance(value, (str, bytes)) or not isinstance(value, Sequence):
+        raise FacilityLedgerError(f"{label} must be a non-empty string array or null")
+    ports = tuple(value)
+    if not ports or any(not isinstance(port, str) or not port.strip() for port in ports):
+        raise FacilityLedgerError(f"{label} must be a non-empty string array or null")
+    if len(set(ports)) != len(ports):
+        raise FacilityLedgerError(f"{label} must not contain duplicate ports")
+    return ports
+
+
 def _case_component_id(
     row: Mapping[str, Any], event_component: Mapping[str, str]
 ) -> str:
@@ -741,6 +755,7 @@ def merge_facility_campaign_results(
     source_digests: list[str] = []
     event_accounting: dict[str, dict[str, int]] = {}
     merged_annual_conditions: dict[str, dict[str, Any]] = {}
+    event_port_ids: dict[str, tuple[str, ...] | None] = {}
 
     for campaign_id, result in campaign_rows:
         events = result.get("events")
@@ -761,6 +776,9 @@ def merge_facility_campaign_results(
             component_id = str(event.get("model_component_id", ""))
             if not component_id:
                 raise FacilityLedgerError(f"event {event_id} has no model component ID")
+            event_port_ids[event_id] = _strict_port_ids(
+                event.get("port_ids"), f"event {event_id} port_ids"
+            )
             seen_components.add(component_id)
             owner = seen_assets.get(asset_id)
             if owner is not None and owner != campaign_id:
@@ -929,6 +947,55 @@ def merge_facility_campaign_results(
                     and case_elapsed >= 0
                 ):
                     case_elapsed_values.append(float(case_elapsed))
+
+    # Preserve the reviewed accident exit all the way through the merged
+    # facility ledger.  A port-scoped event without the same port list on its
+    # cases or risk atoms is withheld rather than repaired or rebound.
+    port_binding_mismatches: list[dict[str, Any]] = []
+    for row_kind, rows in (
+        ("case", [*merged_cases, *merged_missing]),
+        ("risk_atom", merged_atoms),
+    ):
+        for row in rows:
+            event_id = str(row.get("event_id", ""))
+            expected = event_port_ids.get(event_id)
+            actual = _strict_port_ids(
+                row.get("frequency_port_ids"),
+                f"{row_kind} {event_id} frequency_port_ids",
+            )
+            if actual != expected:
+                port_binding_mismatches.append(
+                    {
+                        "row_kind": row_kind,
+                        "event_id": event_id,
+                        "expected_port_ids": None if expected is None else list(expected),
+                        "actual_port_ids": None if actual is None else list(actual),
+                    }
+                )
+    frequency_port_binding = {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "port_scoped_event_count": sum(value is not None for value in event_port_ids.values()),
+        "port_unbound_event_count": sum(value is None for value in event_port_ids.values()),
+        "all_events_port_scoped": all(value is not None for value in event_port_ids.values()),
+        "case_port_binding_mismatch_count": sum(
+            row["row_kind"] == "case" for row in port_binding_mismatches
+        ),
+        "risk_atom_port_binding_mismatch_count": sum(
+            row["row_kind"] == "risk_atom" for row in port_binding_mismatches
+        ),
+        "mismatch_count": len(port_binding_mismatches),
+        "mismatch_examples": port_binding_mismatches[:10],
+        "status": "ALIGNED" if not port_binding_mismatches else "PORT_BINDING_MISMATCH",
+        "policy": (
+            "Facility merge preserves reviewed event port_ids in cases and risk_atoms; "
+            "missing or mismatched rows are withheld and no accident port is inferred."
+        ),
+    }
+    if port_binding_mismatches:
+        source_complete = False
+        blocking_reasons.append(
+            "facility frequency port binding mismatch between events and cases/risk atoms"
+        )
 
     if receptor_ids is None or not receptor_ids:
         raise FacilityLedgerError("facility campaigns contain no receptor risk atoms")
@@ -1330,6 +1397,7 @@ def merge_facility_campaign_results(
         "campaign_digests": source_digests,
         "campaign_digest": canonical_digest({"campaign_ids": campaign_ids, "campaign_digests": source_digests}),
         "event_accounting": event_accounting,
+        "frequency_port_binding": frequency_port_binding,
         "event_count": len(merged_events),
         "case_count": len(merged_cases),
         "uncomputed_case_count": len(merged_missing),
@@ -1402,6 +1470,10 @@ def merge_facility_campaign_results(
             "risk_sum": "validated risk atoms are summed once across disjoint equipment campaigns",
             "missing_scope": "missing or incomplete equipment/families remain partial and never become zero risk",
             "frequency": "each atom retains its initiating event frequency; no frequency inference or reallocation is performed",
+            "frequency_port_binding": (
+                "reviewed event port_ids are carried into cases and risk_atoms and checked again "
+                "at facility merge; missing or mismatched port rows withhold the facility scope"
+            ),
             "provider_packet": (
                 "qualified provider packet evidence is counted separately from the numerical risk sum; "
                 "a provider release history never creates or changes an initiating frequency"

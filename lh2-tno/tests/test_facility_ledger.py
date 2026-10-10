@@ -16,10 +16,12 @@ def _result(
     frequency: float,
     conditional_weight: float = 1.0,
     incomplete: bool = False,
+    port_ids=None,
 ):
     atom = {
         "event_id": event_id,
         "asset_id": asset_id,
+        "frequency_port_ids": port_ids,
         "annual_condition_id": "weather-1",
         "release_branch_id": "release-1",
         "ignition_branch": "direct_fire",
@@ -55,8 +57,10 @@ def _result(
             "classification_basis": "facility-ledger test boundary",
             "limitations": ["test only"],
             "physical_validation_claim": False,
+            **({"port_ids": port_ids} if port_ids is not None else {}),
         }],
-        "cases": [{"event_id": event_id, "status": "EXECUTED", "elapsed_ms": 5.0}],
+        "cases": [{"event_id": event_id, "status": "EXECUTED", "elapsed_ms": 5.0,
+                   "frequency_port_ids": port_ids}],
         "uncomputed_cases": ([{"event_id": event_id, "status": "UNCOMPUTED"}] if incomplete else []),
         "risk_atoms": [atom],
         "declared_scope_numerically_complete": not incomplete,
@@ -131,6 +135,8 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
         "prism.release_termination_inventory_ledger.v1"
     )
     assert result["release_termination_inventory_ledger"]["summary"]["case_count"] == 2
+    assert result["frequency_port_binding"]["status"] == "ALIGNED"
+    assert result["frequency_port_binding"]["mismatch_count"] == 0
     assert result["scenario_branch_accounting"]["status"] == "EXPLICIT_BRANCH_ACCOUNTING"
     assert result["scenario_branch_accounting"]["cross_product_count"] == 1
     assert result["scenario_branch_accounting"]["release_branches"]["release-1"][
@@ -151,6 +157,36 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
         "max_expected_deaths_low_high": [1.2, 1.4],
         "curve_uses_threshold": "N >= 1 expected deaths",
     }
+
+
+def test_facility_ledger_keeps_port_trace_and_withholds_mismatch():
+    aligned = merge_facility_campaign_results(
+        [{
+            "campaign_id": "port-campaign",
+            "result": _result(
+                event_id="event-port", asset_id="port-asset", component_id="port-01",
+                frequency=1e-3, port_ids=["port-01-out"],
+            ),
+        }],
+        expected_component_ids=("port-01",),
+    )
+    assert aligned["frequency_port_binding"]["status"] == "ALIGNED"
+    assert aligned["frequency_port_binding"]["port_scoped_event_count"] == 1
+    assert aligned["cases"][0]["frequency_port_ids"] == ["port-01-out"]
+    assert aligned["risk_atoms"][0]["frequency_port_ids"] == ["port-01-out"]
+
+    mismatched = _result(
+        event_id="event-port-bad", asset_id="port-asset-bad", component_id="port-01",
+        frequency=1e-3, port_ids=["port-01-out"],
+    )
+    mismatched["risk_atoms"][0]["frequency_port_ids"] = ["other-out"]
+    withheld = merge_facility_campaign_results(
+        [{"campaign_id": "port-mismatch", "result": mismatched}],
+        expected_component_ids=("port-01",),
+    )
+    assert withheld["frequency_port_binding"]["status"] == "PORT_BINDING_MISMATCH"
+    assert withheld["frequency_port_binding"]["risk_atom_port_binding_mismatch_count"] == 1
+    assert withheld["facility_total_risk_available"] is False
 
 
 def test_facility_ledger_explains_zero_harm_fn_curve_without_promoting_zero_to_missing():
