@@ -1,0 +1,68 @@
+{
+  "schema_version": "prism.consequence_backend_chain_contract.v1",
+  "contract_id": "prism-lh2-outdoor-release-to-harm-v1",
+  "description": "Declared outdoor LH2 consequence chain used by the diagnostic facility campaign.",
+  "stages": [
+    {
+      "stage_id": "source",
+      "owner": "LH2 equipment process and release model",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "pool",
+      "owner": "DynamicLH2PoolX cryogenic pool and evaporation submodel",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "near_field_and_dispersion",
+      "owner": "SLABx-LH2 near-field and outdoor dispersion handoff",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "cloud_observation",
+      "owner": "SLABx-LH2 cloud observation and PRISM receptor sampling",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "fire_explosion_damage_risk",
+      "owner": "PRISM ignition, fire/explosion consequence and harm risk model",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "endpoint_a",
+      "owner": "SLABx-LH2 first outlet consequence branch",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "endpoint_aggregation",
+      "owner": "PRISM shared-inventory two-sided rupture aggregator",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "endpoint_b",
+      "owner": "SLABx-LH2 second outlet consequence branch",
+      "required_case_fields": []
+    }
+  ],
+  "paths": [
+    {
+      "path_id": "standard_release_to_harm",
+      "stage_ids": ["source", "pool", "near_field_and_dispersion", "cloud_observation", "fire_explosion_damage_risk"],
+      "scenario_families": [],
+      "required_case_fields": ["provider_packet_identity", "termination", "mass_ledger.released_kg", "domain_assessment"],
+      "required_atom_fields": ["receptor_harm_low_high", "expected_deaths_low_high"]
+    },
+    {
+      "path_id": "two_sided_rupture_harm",
+      "stage_ids": ["endpoint_a", "endpoint_aggregation", "endpoint_b"],
+      "scenario_families": ["two_sided_rupture"],
+      "required_case_fields": ["provider_packet_identity", "termination", "mass_ledger.released_kg", "domain_assessment"],
+      "required_atom_fields": ["receptor_harm_low_high", "expected_deaths_low_high"]
+    }
+  ],
+  "policy": {
+    "diagnostic_only": true,
+    "does_not_promote_facility_qra": true,
+    "does_not_infer_frequency": true
+  }
+}

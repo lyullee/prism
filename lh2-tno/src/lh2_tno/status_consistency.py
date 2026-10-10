@@ -99,6 +99,8 @@ def build_status_consistency_report(
     provider_packet_input_audit_filename: str | None = None,
     observed_state_release_binding_audit: Mapping[str, Any] | None = None,
     observed_state_release_binding_audit_filename: str | None = None,
+    consequence_backend_chain_audit: Mapping[str, Any] | None = None,
+    consequence_backend_chain_audit_filename: str | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed cross-artifact consistency report."""
     checks: list[dict[str, Any]] = []
@@ -282,6 +284,67 @@ def build_status_consistency_report(
                 "unmapped_component_count": unmapped_count,
                 "record": current_status.get(
                     "current_union_observed_state_release_binding_audit_record"
+                ),
+            },
+        )
+    if consequence_backend_chain_audit is not None:
+        chain_filename = (
+            consequence_backend_chain_audit_filename
+            or "consequence_backend_chain_audit.json"
+        )
+        chain_status = consequence_backend_chain_audit.get("status")
+        chain_case_count = consequence_backend_chain_audit.get("case_count")
+        chain_closed_case_count = consequence_backend_chain_audit.get("closed_case_count")
+        chain_stage_ids = consequence_backend_chain_audit.get("stage_ids")
+        required_chain_stage_ids = {
+            "source",
+            "pool",
+            "near_field_and_dispersion",
+            "cloud_observation",
+            "fire_explosion_damage_risk",
+            "endpoint_a",
+            "endpoint_aggregation",
+            "endpoint_b",
+        }
+        _check(
+            checks,
+            "consequence_backend_chain_audit",
+            consequence_backend_chain_audit.get("schema")
+            == "prism.consequence_backend_chain_audit.v1"
+            and chain_status == "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC"
+            and isinstance(chain_case_count, int)
+            and chain_case_count > 0
+            and chain_closed_case_count == chain_case_count
+            and isinstance(chain_stage_ids, Sequence)
+            and not isinstance(chain_stage_ids, (str, bytes))
+            and required_chain_stage_ids.issubset(set(chain_stage_ids))
+            and consequence_backend_chain_audit.get("blocking_reasons") == []
+            and consequence_backend_chain_audit.get("policy", {}).get("diagnostic_only") is True
+            and consequence_backend_chain_audit.get("policy", {}).get("facility_ir_fn_promotion") is False
+            and all(
+                _endswith(
+                    status.get("current_union_consequence_backend_chain_audit_record"),
+                    chain_filename,
+                )
+                for status in (current_status, development_goal)
+            )
+            and all(
+                isinstance(
+                    status.get("current_union_consequence_backend_chain_audit_status"),
+                    str,
+                )
+                and str(chain_status)
+                in status["current_union_consequence_backend_chain_audit_status"]
+                for status in (current_status, development_goal)
+            ),
+            {
+                "schema": consequence_backend_chain_audit.get("schema"),
+                "status": chain_status,
+                "case_count": chain_case_count,
+                "closed_case_count": chain_closed_case_count,
+                "stage_count": consequence_backend_chain_audit.get("stage_count"),
+                "record": current_status.get(
+                    "current_union_consequence_backend_chain_audit_record"
                 ),
             },
         )

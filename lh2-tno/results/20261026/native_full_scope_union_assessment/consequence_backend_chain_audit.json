@@ -1,0 +1,402 @@
+{
+  "schema": "prism.consequence_backend_chain_audit.v1",
+  "status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC",
+  "contract_schema": "prism.consequence_backend_chain_contract.v1",
+  "contract_id": "prism-lh2-outdoor-release-to-harm-v1",
+  "campaign_status": "PARTIAL_FACILITY_SCOPE",
+  "case_count": 44,
+  "closed_case_count": 44,
+  "stage_count": 8,
+  "stage_ids": [
+    "source",
+    "pool",
+    "near_field_and_dispersion",
+    "cloud_observation",
+    "fire_explosion_damage_risk",
+    "endpoint_a",
+    "endpoint_aggregation",
+    "endpoint_b"
+  ],
+  "stage_coverage": {
+    "source": 42,
+    "pool": 42,
+    "near_field_and_dispersion": 42,
+    "cloud_observation": 42,
+    "fire_explosion_damage_risk": 42,
+    "endpoint_a": 2,
+    "endpoint_aggregation": 2,
+    "endpoint_b": 2
+  },
+  "stage_missing_counts": {
+    "source": 0,
+    "pool": 0,
+    "near_field_and_dispersion": 0,
+    "cloud_observation": 0,
+    "fire_explosion_damage_risk": 0,
+    "endpoint_a": 0,
+    "endpoint_aggregation": 0,
+    "endpoint_b": 0
+  },
+  "missing_field_counts": {},
+  "missing_backend_digest_case_count": 0,
+  "case_rows": [
+    {
+      "case_index": 0,
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 1,
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 2,
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 3,
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 4,
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 5,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 6,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 7,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 8,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 9,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 10,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 11,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 12,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 13,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 14,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 15,
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 16,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 17,
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 18,
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 19,
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 20,
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 21,
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "path_id": "two_sided_rupture_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 22,
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "path_id": "two_sided_rupture_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 23,
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 24,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 25,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 26,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 27,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 28,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 29,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 30,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 31,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 32,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 33,
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 34,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 35,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 36,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 37,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 38,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 39,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 40,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 41,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 42,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    },
+    {
+      "case_index": 43,
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "path_id": "standard_release_to_harm",
+      "status": "BACKEND_CHAIN_CLOSED",
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "diagnostic_only": true,
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_ir_fn_promotion": false,
+    "provider_packet_promotion": false
+  },
+  "stages": [
+    {
+      "stage_id": "source",
+      "owner": "LH2 equipment process and release model",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "pool",
+      "owner": "DynamicLH2PoolX cryogenic pool and evaporation submodel",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "near_field_and_dispersion",
+      "owner": "SLABx-LH2 near-field and outdoor dispersion handoff",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "cloud_observation",
+      "owner": "SLABx-LH2 cloud observation and PRISM receptor sampling",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "fire_explosion_damage_risk",
+      "owner": "PRISM ignition, fire/explosion consequence and harm risk model",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "endpoint_a",
+      "owner": "SLABx-LH2 first outlet consequence branch",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "endpoint_aggregation",
+      "owner": "PRISM shared-inventory two-sided rupture aggregator",
+      "required_case_fields": []
+    },
+    {
+      "stage_id": "endpoint_b",
+      "owner": "SLABx-LH2 second outlet consequence branch",
+      "required_case_fields": []
+    }
+  ]
+}

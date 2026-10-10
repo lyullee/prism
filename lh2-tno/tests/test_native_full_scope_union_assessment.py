@@ -36,6 +36,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     status_consistency = _load("status_consistency_current.json")
     provider_packet_input_audit = _load("provider_packet_input_audit.json")
     observed_state_release_binding_audit = _load("observed_state_release_binding_audit.json")
+    consequence_backend_chain_audit = _load("consequence_backend_chain_audit.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -157,8 +158,17 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert observed_state_release_binding_audit["observed_component_count"] == 3
     assert observed_state_release_binding_audit["mapped_component_count"] == 0
     assert observed_state_release_binding_audit["unmapped_component_count"] == 3
+    assert consequence_backend_chain_audit["schema"] == (
+        "prism.consequence_backend_chain_audit.v1"
+    )
+    assert consequence_backend_chain_audit["status"] == (
+        "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC"
+    )
+    assert consequence_backend_chain_audit["case_count"] == 44
+    assert consequence_backend_chain_audit["closed_case_count"] == 44
+    assert consequence_backend_chain_audit["stage_count"] == 8
     assert status_consistency["status"] == "CONSISTENT"
-    assert len(status_consistency["checks"]) == 21
+    assert len(status_consistency["checks"]) == 22
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "provider_packet_input_audit"
@@ -166,6 +176,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "observed_state_release_binding_audit"
+    )["status"] == "PASS"
+    assert next(
+        row for row in status_consistency["checks"]
+        if row["name"] == "consequence_backend_chain_audit"
     )["status"] == "PASS"
     assert status_consistency["blocking_reasons"] == []
     assert status_consistency["facility_ir_fn_promotion"] is False

@@ -34,6 +34,11 @@ def main() -> int:
         type=Path,
         help="optional observed-state to provider-release binding audit",
     )
+    parser.add_argument(
+        "--consequence-backend-chain-audit",
+        type=Path,
+        help="optional LH2 release-to-consequence backend chain audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -68,6 +73,16 @@ def main() -> int:
             observed_state_release_binding_audit_filename=(
                 args.observed_state_release_binding_audit.name
                 if args.observed_state_release_binding_audit is not None
+                else None
+            ),
+            consequence_backend_chain_audit=(
+                load_json_object(args.consequence_backend_chain_audit)
+                if args.consequence_backend_chain_audit is not None
+                else None
+            ),
+            consequence_backend_chain_audit_filename=(
+                args.consequence_backend_chain_audit.name
+                if args.consequence_backend_chain_audit is not None
                 else None
             ),
         )
