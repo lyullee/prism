@@ -198,6 +198,8 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 
 2026-11-06에는 같은 일반 설비 24개 사건의 진단 packet 캠페인 결합도 별도 감사했다. [`generic_lh2_diagnostic_campaign_binding_current.json`](../results/20261106/generic_lh2_diagnostic_campaign_binding_current.json)은 packet event 24개가 campaign event 24개, case 24개, risk atom 96개로 빠짐없이 도달했음을 확인한다. provider source/result digest는 24/24, 방출 지속시간·available mass·누적 방출량·termination ledger 값은 24/24로 대조되어 소비되었다. 다만 19개 case는 `EXECUTED_OPERATOR_LIMITED`, 5개는 `EXECUTED`인 진단 실행이며, qualified provider packet 0개·provider 빈도 사용 false·물리검증 false·시설 QRA false를 보존한다. 따라서 이 감사는 방출값 전달의 구조적 결합을 닫았지만 현장 packet 자격이나 시설 위험도 승격을 의미하지 않는다.
 
+같은 campaign에 [`generic_lh2_chain_closure_current.json`](../results/20261106/generic_lh2_chain_closure_current.json)도 적용했다. 24개 packet event 모두 종료·재고 ledger, risk atom의 최종 피해 필드, 독립 IR 재집계와 F/N 재집계까지 폐합되었다(`PARTIAL_DIAGNOSTIC_CHAIN_CLOSED`). 여기서 `partial`은 계산 연결이 빠졌다는 뜻이 아니라 provider qualification·물리검증·시설 QRA 승격이 아직 열리지 않았다는 뜻이다. 특히 19개 case는 provider가 잔여 재고 또는 물리 closure를 완전히 입증하지 않아 operator-limited로 남아 있으며, 이 상태를 qualified packet으로 바꾸지 않는다.
+
 같은 원장의 `timing.runtime_profile`은 디지털 트윈에서 사용할 계산 경로를 세 가지로 구분한다. 최신 benchmark에서 저장된 피해 결과를 재사용하는 `cached_diagnostic_1hz`는 p95 24.54 ms로 1 Hz 진단 모니터링에 사용할 수 있다. 새 설비 상태로 SLABx-LH2를 다시 계산하는 fresh physics는 2614.51 ms로 1 Hz 조건을 만족하지 않는다. persistent worker의 변경입력 fresh physics도 steady p50/p95/p99가 1869/2104/2104 ms로 1 Hz를 만족하지 않는다. 전체 44-case campaign은 온라인 루프가 아니라 오프라인 평가와 빈도 민감도 분석에 사용한다. 이 프로파일은 처리시간을 기록할 뿐이며 시설 QRA의 실시간 승격을 주장하지 않는다.
 
 실행기 자체도 `prism.realtime_mode_contract.v1`을 반환한다. 동일 요청은

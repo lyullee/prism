@@ -299,6 +299,8 @@ def build_chain_closure_audit(
         expected_ir = campaign_result.get("known_contribution_annual_ir_low_high")
     ir_closed = _same_ir(expected_ir, aggregate_ir)
     expected_fn = campaign_result.get("conditional_diagnostic_facility_expected_death_fn_low_high")
+    if expected_fn is None:
+        expected_fn = campaign_result.get("known_contribution_expected_death_fn_low_high")
     fn_closed = (
         isinstance(expected_fn, list)
         and len(expected_fn) == 2
@@ -320,6 +322,7 @@ def build_chain_closure_audit(
     )
     return {
         "schema_version": CHAIN_CLOSURE_SCHEMA,
+        "diagnostic_only": True,
         "status": status,
         "facility_id": campaign_result.get("facility_id"),
         "campaign_event_count": len(events),

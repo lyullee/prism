@@ -107,6 +107,18 @@ def test_release_value_mismatch_blocks_event_chain(tmp_path: Path):
     assert report["packet_chain_mismatch_event_ids"] == ["facility/tank/G1"]
 
 
+def test_known_contribution_fn_fallback_is_recomputed(tmp_path: Path):
+    campaign = _campaign()
+    campaign["known_contribution_expected_death_fn_low_high"] = campaign.pop(
+        "conditional_diagnostic_facility_expected_death_fn_low_high"
+    )
+    report = build_chain_closure_audit(
+        campaign, packet_evidence=_packet_evidence(tmp_path), packet_root=tmp_path
+    )
+    assert report["diagnostic_only"] is True
+    assert report["facility_fn_aggregate_closed"] is True
+
+
 def test_unpacketised_handoff_is_reported_without_being_substituted(tmp_path: Path):
     campaign = _campaign()
     campaign["events"].append({"id": "facility/vertical/G1", "model_component_id": "vent-01"})

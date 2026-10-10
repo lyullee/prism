@@ -346,6 +346,26 @@
       "packet_claims_preserved": true,
       "diagnostic_only": true
     },
+    "generic_release_to_final_damage_closure": {
+      "schema_version": "prism.facility_chain_closure_audit.v1",
+      "status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+      "campaign_event_count": 24,
+      "campaign_case_count": 24,
+      "campaign_risk_atom_count": 96,
+      "packet_event_count": 24,
+      "packet_chain_closed_event_count": 24,
+      "packet_chain_mismatch_event_count": 0,
+      "campaign_events_without_packet_count": 0,
+      "facility_ir_aggregate_closed": true,
+      "facility_fn_aggregate_closed": true,
+      "facility_total_risk_available": false,
+      "complete_facility_qra_claim": false,
+      "qualified_provider_packet_count": 0,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
+    },
     "isolation_union_extension": {
       "schema": "prism.isolation_union_extension_verification.v1",
       "status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
@@ -1055,6 +1075,10 @@
     "generic_diagnostic_campaign_binding": {
       "path": "results/20261106/generic_lh2_diagnostic_campaign_binding_current.json",
       "sha256": "f09a83f2aa361c8511df50925ba3ddbe77ce2004d41995590406cce03118968e"
+    },
+    "generic_chain_closure_audit": {
+      "path": "results/20261106/generic_lh2_chain_closure_current.json",
+      "sha256": "15a7e91d1bf25b7bdff6a058a81d8fddee71ffb74a82ee704b1bb761034bec2d"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",

@@ -637,6 +637,26 @@ def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
             "frequency_from_provider_packet": False,
             "packet_claims_preserved": True,
         },
+        generic_chain_closure_audit={
+            "schema_version": "prism.facility_chain_closure_audit.v1",
+            "status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+            "diagnostic_only": True,
+            "campaign_event_count": 24,
+            "campaign_case_count": 24,
+            "campaign_risk_atom_count": 96,
+            "packet_event_count": 24,
+            "packet_chain_closed_event_count": 24,
+            "packet_chain_mismatch_event_count": 0,
+            "campaign_events_without_packet_count": 0,
+            "facility_ir_aggregate_closed": True,
+            "facility_fn_aggregate_closed": True,
+            "facility_total_risk_available": False,
+            "complete_facility_qra_claim": False,
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+        },
     )
     assert report["chain"]["generic_equipment_scenario_coverage"]["resolved_asset_count"] == 7
     assert report["chain"]["generic_equipment_frequency_binding"]["valid_frequency_event_count"] == 24
@@ -647,4 +667,7 @@ def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
     assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_identity_consumed"] is True
     assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_digest_match_event_count"] == 24
     assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_value_consumed_event_count"] == 24
+    assert report["chain"]["generic_release_to_final_damage_closure"]["packet_chain_closed_event_count"] == 24
+    assert report["chain"]["generic_release_to_final_damage_closure"]["facility_ir_aggregate_closed"] is True
+    assert report["chain"]["generic_release_to_final_damage_closure"]["facility_fn_aggregate_closed"] is True
     assert validate_v060_readiness_report(report)["status"] == "VALID"

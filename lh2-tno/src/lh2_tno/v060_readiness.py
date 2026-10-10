@@ -486,6 +486,7 @@ def build_v060_readiness_report(
     generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_diagnostic_campaign_binding: Mapping[str, Any] | None = None,
+    generic_chain_closure_audit: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -567,6 +568,12 @@ def build_v060_readiness_report(
         generic_diagnostic_chain = _mapping(
             generic_diagnostic_campaign_binding,
             "generic_diagnostic_campaign_binding",
+        )
+    generic_chain_closure = None
+    if generic_chain_closure_audit is not None:
+        generic_chain_closure = _mapping(
+            generic_chain_closure_audit,
+            "generic_chain_closure_audit",
         )
     generic_frequency_port_binding = (
         generic_frequency_chain.get("frequency_port_binding")
@@ -1004,6 +1011,30 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if generic_diagnostic_chain is not None
+                else None
+            ),
+            "generic_release_to_final_damage_closure": (
+                {
+                    "schema_version": generic_chain_closure.get("schema_version"),
+                    "status": generic_chain_closure.get("status"),
+                    "campaign_event_count": generic_chain_closure.get("campaign_event_count"),
+                    "campaign_case_count": generic_chain_closure.get("campaign_case_count"),
+                    "campaign_risk_atom_count": generic_chain_closure.get("campaign_risk_atom_count"),
+                    "packet_event_count": generic_chain_closure.get("packet_event_count"),
+                    "packet_chain_closed_event_count": generic_chain_closure.get("packet_chain_closed_event_count"),
+                    "packet_chain_mismatch_event_count": generic_chain_closure.get("packet_chain_mismatch_event_count"),
+                    "campaign_events_without_packet_count": generic_chain_closure.get("campaign_events_without_packet_count"),
+                    "facility_ir_aggregate_closed": generic_chain_closure.get("facility_ir_aggregate_closed"),
+                    "facility_fn_aggregate_closed": generic_chain_closure.get("facility_fn_aggregate_closed"),
+                    "facility_total_risk_available": generic_chain_closure.get("facility_total_risk_available"),
+                    "complete_facility_qra_claim": generic_chain_closure.get("complete_facility_qra_claim"),
+                    "qualified_provider_packet_count": generic_chain_closure.get("qualified_provider_packet_count"),
+                    "frequency_from_provider_packet": generic_chain_closure.get("frequency_from_provider_packet"),
+                    "physical_validation_claim": generic_chain_closure.get("physical_validation_claim"),
+                    "facility_qra_claim": generic_chain_closure.get("facility_qra_claim"),
+                    "diagnostic_only": True,
+                }
+                if generic_chain_closure is not None
                 else None
             ),
             "isolation_union_extension": (
@@ -1918,6 +1949,57 @@ def validate_v060_readiness_report(
                 errors.append(
                     "generic diagnostic campaign binding must preserve packet claims"
                 )
+
+    generic_chain_closure = chain.get("generic_release_to_final_damage_closure")
+    if generic_chain_closure is not None:
+        if not isinstance(generic_chain_closure, Mapping):
+            errors.append(
+                "chain.generic_release_to_final_damage_closure must be an object"
+            )
+        else:
+            if generic_chain_closure.get("schema_version") != "prism.facility_chain_closure_audit.v1":
+                errors.append(
+                    "chain.generic_release_to_final_damage_closure.schema_version is unsupported"
+                )
+            for field in (
+                "campaign_event_count",
+                "campaign_case_count",
+                "campaign_risk_atom_count",
+                "packet_event_count",
+                "packet_chain_closed_event_count",
+                "packet_chain_mismatch_event_count",
+                "campaign_events_without_packet_count",
+                "qualified_provider_packet_count",
+            ):
+                if generic_chain_closure.get(field) is not None:
+                    _nonnegative_int(
+                        generic_chain_closure.get(field),
+                        f"chain.generic_release_to_final_damage_closure.{field}",
+                        errors,
+                    )
+            if generic_chain_closure.get("diagnostic_only") is not True:
+                errors.append(
+                    "generic release-to-final-damage closure must remain diagnostic_only"
+                )
+            for field in (
+                "facility_total_risk_available",
+                "complete_facility_qra_claim",
+                "frequency_from_provider_packet",
+                "physical_validation_claim",
+                "facility_qra_claim",
+            ):
+                if generic_chain_closure.get(field) is True:
+                    errors.append(
+                        f"chain.generic_release_to_final_damage_closure.{field} cannot be true"
+                    )
+            for field in (
+                "facility_ir_aggregate_closed",
+                "facility_fn_aggregate_closed",
+            ):
+                if generic_chain_closure.get(field) is not True:
+                    errors.append(
+                        f"chain.generic_release_to_final_damage_closure.{field} must be true"
+                    )
 
     isolation_extension = chain.get("isolation_union_extension")
     if isolation_extension is not None:
