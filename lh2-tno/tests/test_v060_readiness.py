@@ -172,6 +172,27 @@ def _isolation_extension_verification():
     }
 
 
+def _release_closure_worklist():
+    return {
+        "schema_version": "prism.release_closure_worklist.v1",
+        "status": "OPEN_RELEASE_CLOSURE_WORKLIST",
+        "case_count": 3,
+        "open_case_count": 3,
+        "summary": {
+            "closure_status_counts": {"ISOLATION_OPEN": 2, "TERMINATION_OPEN": 1},
+            "closure_gap_counts": {"ISOLATION_OPEN": 3, "PROVIDER_QUALIFICATION_OPEN": 3},
+            "termination_basis_counts": {"inventory_depletion": 2, "synthetic_diagnostic_horizon": 1},
+            "isolation_status_counts": {"not_declared": 3},
+            "inventory_status_counts": {"provider_declared_inventory_depletion": 2, "not_inventory_termination": 1},
+            "provider_packet_required_case_count": 3,
+            "mass_closure_open_case_count": 0,
+            "isolation_open_case_count": 3,
+            "termination_open_case_count": 1,
+            "inventory_closure_open_case_count": 0,
+        },
+    }
+
+
 def test_report_keeps_conditional_chain_and_strict_gate_separate():
     report = build_v060_readiness_report(**_inputs())
     assert report["schema_version"] == "prism.v060_ijhe_readiness_report.v1"
@@ -245,6 +266,28 @@ def test_report_records_isolation_union_extension_without_promoting_qra():
     assert extension["diagnostic_only"] is True
     assert extension["facility_qra_claim"] is False
     assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_records_release_closure_worklist_without_opening_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(), release_closure_worklist=_release_closure_worklist()
+    )
+    worklist = report["chain"]["release_closure_worklist"]
+    assert worklist["schema"] == "prism.release_closure_worklist.v1"
+    assert worklist["open_case_count"] == 3
+    assert worklist["isolation_open_case_count"] == 3
+    assert worklist["release_boundary_promotion_allowed"] is False
+    assert worklist["diagnostic_only"] is True
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_validator_rejects_release_closure_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(), release_closure_worklist=_release_closure_worklist()
+    )
+    report["chain"]["release_closure_worklist"]["facility_qra_allowed"] = True
+    with pytest.raises(V060ReadinessError, match="release_closure_worklist.facility_qra_allowed"):
+        validate_v060_readiness_report(report)
 
 
 def test_report_records_actionable_evidence_request_without_opening_promotion():

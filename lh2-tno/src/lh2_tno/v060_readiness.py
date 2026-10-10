@@ -287,6 +287,48 @@ def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _release_closure_worklist_summary(
+    worklist: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Copy the case-level release closure worklist into the readiness chain.
+
+    The worklist is intentionally summarized rather than embedded in the
+    readiness report.  Its case-level JSON remains the actionable evidence
+    request, while this block makes the open closure gates visible to a
+    reviewer of the v0.6.0 report.
+    """
+    summary = worklist.get("summary")
+    summary = summary if isinstance(summary, Mapping) else {}
+    def _counts(name: str) -> dict[str, Any]:
+        value = summary.get(name, {})
+        return dict(sorted(value.items())) if isinstance(value, Mapping) else {}
+    return {
+        "schema": worklist.get("schema_version"),
+        "status": worklist.get("status"),
+        "case_count": worklist.get("case_count"),
+        "open_case_count": worklist.get("open_case_count"),
+        "closure_status_counts": _counts("closure_status_counts"),
+        "closure_gap_counts": _counts("closure_gap_counts"),
+        "termination_basis_counts": _counts("termination_basis_counts"),
+        "isolation_status_counts": _counts("isolation_status_counts"),
+        "inventory_status_counts": _counts("inventory_status_counts"),
+        "provider_packet_required_case_count": summary.get(
+            "provider_packet_required_case_count"
+        ),
+        "mass_closure_open_case_count": summary.get("mass_closure_open_case_count"),
+        "isolation_open_case_count": summary.get("isolation_open_case_count"),
+        "termination_open_case_count": summary.get("termination_open_case_count"),
+        "inventory_closure_open_case_count": summary.get(
+            "inventory_closure_open_case_count"
+        ),
+        "release_boundary_promotion_allowed": False,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "physical_validation_claim": False,
+        "diagnostic_only": True,
+    }
+
+
 def _runtime_profile(
     realtime: Mapping[str, Any], timing: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -359,6 +401,7 @@ def build_v060_readiness_report(
     generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
+    release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -439,6 +482,9 @@ def build_v060_readiness_report(
             isolation_union_extension_verification,
             "isolation_union_extension_verification",
         )
+    release_closure = None
+    if release_closure_worklist is not None:
+        release_closure = _mapping(release_closure_worklist, "release_closure_worklist")
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
         if isinstance(evidence_request, Mapping)
@@ -506,6 +552,11 @@ def build_v060_readiness_report(
             "scenario_branch_status": coverage.get("scenario_branch_status"),
             "conditional_ir_fn_available": facility.get("conditional_diagnostic_facility_risk_available"),
             "release_boundary": release_boundary,
+            "release_closure_worklist": (
+                _release_closure_worklist_summary(release_closure)
+                if release_closure is not None
+                else None
+            ),
             "risk_atom_chain_closure": (
                 {
                     "status": atom_chain.get("status"),
@@ -1290,6 +1341,76 @@ def validate_v060_readiness_report(
                     errors.append(
                         "facility release boundary cannot be ready with open mass residuals"
                     )
+
+    release_closure = chain.get("release_closure_worklist")
+    if release_closure is not None:
+        if not isinstance(release_closure, Mapping):
+            errors.append("chain.release_closure_worklist must be an object")
+        else:
+            if release_closure.get("schema") != "prism.release_closure_worklist.v1":
+                errors.append("chain.release_closure_worklist.schema is unsupported")
+            for field in ("case_count", "open_case_count"):
+                if release_closure.get(field) is not None:
+                    _nonnegative_int(
+                        release_closure.get(field),
+                        f"chain.release_closure_worklist.{field}",
+                        errors,
+                    )
+            for field in (
+                "closure_status_counts",
+                "closure_gap_counts",
+                "termination_basis_counts",
+                "isolation_status_counts",
+                "inventory_status_counts",
+            ):
+                counts = release_closure.get(field)
+                if not isinstance(counts, Mapping):
+                    errors.append(
+                        f"chain.release_closure_worklist.{field} must be an object"
+                    )
+                    continue
+                for key, count in counts.items():
+                    _nonnegative_int(
+                        count,
+                        f"chain.release_closure_worklist.{field}.{key}",
+                        errors,
+                    )
+            for field in (
+                "provider_packet_required_case_count",
+                "mass_closure_open_case_count",
+                "isolation_open_case_count",
+                "termination_open_case_count",
+                "inventory_closure_open_case_count",
+            ):
+                if release_closure.get(field) is not None:
+                    _nonnegative_int(
+                        release_closure.get(field),
+                        f"chain.release_closure_worklist.{field}",
+                        errors,
+                    )
+            for field in (
+                "release_boundary_promotion_allowed",
+                "frequency_inference_allowed",
+                "facility_qra_allowed",
+                "physical_validation_claim",
+            ):
+                if release_closure.get(field) is True:
+                    errors.append(
+                        f"chain.release_closure_worklist.{field} cannot be true"
+                    )
+            if release_closure.get("diagnostic_only") is not True:
+                errors.append(
+                    "release closure worklist must remain diagnostic_only"
+                )
+            if (
+                release_closure.get("case_count") is not None
+                and release_closure.get("open_case_count") is not None
+                and release_closure.get("open_case_count")
+                > release_closure.get("case_count")
+            ):
+                errors.append(
+                    "release closure worklist open cases cannot exceed case count"
+                )
 
     # External equipment/P&ID and frequency ledgers are readiness evidence.
     # They are intentionally copied into the v0.6.0 report without opening a

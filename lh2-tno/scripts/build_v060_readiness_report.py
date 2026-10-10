@@ -109,6 +109,11 @@ def main() -> int:
         type=Path,
         help="Optional namespaced isolation success/failure facility-extension verification.",
     )
+    parser.add_argument(
+        "--release-closure-worklist",
+        type=Path,
+        help="Optional case-level release termination/isolation/inventory closure worklist.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -185,6 +190,11 @@ def main() -> int:
                 if args.isolation_union_extension_verification is not None
                 else None
             ),
+            release_closure_worklist=(
+                _load(args.release_closure_worklist)
+                if args.release_closure_worklist is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -248,6 +258,10 @@ def main() -> int:
     if args.isolation_union_extension_verification is not None:
         report["source_artifacts"]["isolation_union_extension_verification"] = _source_artifact(
             args.isolation_union_extension_verification
+        )
+    if args.release_closure_worklist is not None:
+        report["source_artifacts"]["release_closure_worklist"] = _source_artifact(
+            args.release_closure_worklist
         )
     try:
         validation = validate_v060_readiness_report(report)

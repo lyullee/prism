@@ -132,6 +132,46 @@
         "facility_ir_fn_promotion": "independent qualification and physical-validation gates remain required"
       }
     },
+    "release_closure_worklist": {
+      "schema": "prism.release_closure_worklist.v1",
+      "status": "OPEN_RELEASE_CLOSURE_WORKLIST",
+      "case_count": 44,
+      "open_case_count": 44,
+      "closure_status_counts": {
+        "ISOLATION_OPEN": 20,
+        "TERMINATION_OPEN": 24
+      },
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 44,
+        "PROVIDER_QUALIFICATION_OPEN": 44,
+        "TERMINATION_OPEN": 24
+      },
+      "termination_basis_counts": {
+        "emergency_relief_discharge": 1,
+        "inventory_depletion": 16,
+        "inventory_over_600s": 1,
+        "synthetic_diagnostic_horizon": 24,
+        "two_sided_rupture": 2
+      },
+      "isolation_status_counts": {
+        "not_declared": 44
+      },
+      "inventory_status_counts": {
+        "not_inventory_termination": 27,
+        "provider_declared_inventory_depletion": 16,
+        "provider_declared_inventory_over_600s": 1
+      },
+      "provider_packet_required_case_count": 44,
+      "mass_closure_open_case_count": 0,
+      "isolation_open_case_count": 44,
+      "termination_open_case_count": 24,
+      "inventory_closure_open_case_count": 0,
+      "release_boundary_promotion_allowed": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "physical_validation_claim": false,
+      "diagnostic_only": true
+    },
     "risk_atom_chain_closure": {
       "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
       "case_count": 44,
@@ -963,6 +1003,10 @@
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",
       "sha256": "a49e4169ee779cf1823b03461bdf6539c5f02ebfd240da65631fa57d4cad7079"
+    },
+    "release_closure_worklist": {
+      "path": "results/20261106/release_closure_worklist.json",
+      "sha256": "0c04ea32659f00623a98418fe40965f9d20e391a537d3eb1a6f5b95eceac76cd"
     }
   },
   "invariant_validation": {
