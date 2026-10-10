@@ -1774,6 +1774,41 @@ class FacilityRealtimeConsequenceMonitor:
         snapshot["aggregate"]["runtime_arrival_latency_available"] = False
         return snapshot
 
+    def build_annual_campaign_result(
+        self,
+        snapshot: Mapping[str, object],
+        *,
+        annual_conditions: Sequence[Mapping[str, object]],
+        scenario_bindings: Sequence[Mapping[str, object]],
+        expected_component_ids: Sequence[str] = (),
+    ) -> dict[str, object]:
+        """Join an accepted realtime snapshot to explicit annual scenarios.
+
+        The monitor owns the component bindings, while the campaign adapter
+        owns annual weather, population, release-branch, ignition, and
+        reviewed non-current-weather consequence evidence.  This convenience
+        method keeps that handoff on the same monitor instance and rejects a
+        snapshot produced for another facility.  The delegated result remains
+        conditional/operator-limited; it never promotes a realtime snapshot
+        to a qualified facility QRA or learns frequency from telemetry.
+        """
+        if not isinstance(snapshot, Mapping):
+            raise TypeError("snapshot must be a mapping")
+        if snapshot.get("facility_id") != self.facility_id:
+            raise ValueError(
+                "snapshot facility_id does not match the realtime monitor: "
+                f"{snapshot.get('facility_id')!r} != {self.facility_id!r}"
+            )
+        from .realtime_campaign import build_realtime_facility_campaign_result
+
+        expected = tuple(expected_component_ids) or tuple(sorted(self.bindings))
+        return build_realtime_facility_campaign_result(
+            snapshot,
+            annual_conditions=annual_conditions,
+            scenario_bindings=scenario_bindings,
+            expected_component_ids=expected,
+        )
+
     def _aggregate_component_results(
         self,
         components: Mapping[str, Mapping[str, object]],

@@ -20,7 +20,7 @@ from test_consequence_service import RiskPipeline, _facility_binding
 from test_provider_release import _defaults, _release
 
 
-def _snapshot(tmp_path: Path, *, with_provider_path: bool = True):
+def _monitor(tmp_path: Path, *, with_provider_path: bool = True):
     base, frame = _facility_binding(tmp_path, "storage-tank-01")
     provider_request = build_consequence_request_from_provider_release(
         _release(), _defaults()
@@ -51,9 +51,17 @@ def _snapshot(tmp_path: Path, *, with_provider_path: bool = True):
         ),
         frequency_binding=frequency,
     )
-    return FacilityRealtimeConsequenceMonitor(
-        {"storage-tank-01": binding}, facility_id="generic-outdoor-lh2"
-    ).update_from_frames({"storage-tank-01": frame}, now_s=100.2)
+    return (
+        FacilityRealtimeConsequenceMonitor(
+            {"storage-tank-01": binding}, facility_id="generic-outdoor-lh2"
+        ),
+        frame,
+    )
+
+
+def _snapshot(tmp_path: Path, *, with_provider_path: bool = True):
+    monitor, frame = _monitor(tmp_path, with_provider_path=with_provider_path)
+    return monitor.update_from_frames({"storage-tank-01": frame}, now_s=100.2)
 
 
 def _annual_conditions():
@@ -132,6 +140,32 @@ def test_realtime_snapshot_becomes_conditional_facility_ledger_input(tmp_path):
     )
     assert ledger["population_accounting"]["status"] == "EXPLICIT_CONDITION_POPULATION"
     assert ledger["component_statuses"]["storage-tank-01"] == "PARTIAL"
+
+
+def test_monitor_owns_snapshot_to_annual_campaign_handoff(tmp_path):
+    monitor, frame = _monitor(tmp_path)
+    snapshot = monitor.update_from_frames(
+        {"storage-tank-01": frame}, now_s=100.2
+    )
+
+    result = monitor.build_annual_campaign_result(
+        snapshot,
+        annual_conditions=_annual_conditions(),
+        scenario_bindings=[_scenario_binding()],
+    )
+
+    assert result["status"] == "PARTIAL_DECLARED_SCOPE"
+    assert result["realtime_handoff"]["facility_id"] == "generic-outdoor-lh2"
+    assert result["complete_facility_qra_claim"] is False
+
+    foreign_snapshot = dict(snapshot)
+    foreign_snapshot["facility_id"] = "another-facility"
+    with pytest.raises(ValueError, match="facility_id"):
+        monitor.build_annual_campaign_result(
+            foreign_snapshot,
+            annual_conditions=_annual_conditions(),
+            scenario_bindings=[_scenario_binding()],
+        )
 
 
 def test_realtime_campaign_rejects_branch_harm_that_does_not_close(tmp_path):

@@ -1316,8 +1316,12 @@ print(handoff["source_snapshot_digest"])
 표준화된 중간 결과이며, 빠진 사고·기상·점화 branch를 0으로 간주한 시설 위험도는
 아닙니다.
 
-실시간 snapshot을 **조건부 시설 ledger의 risk atom으로 연결**해야 할 때는 별도
-어댑터를 사용합니다. `build_realtime_facility_campaign_result()`는 handoff가
+실시간 snapshot을 **조건부 시설 ledger의 risk atom으로 연결**해야 할 때는
+`FacilityRealtimeConsequenceMonitor.build_annual_campaign_result()`를 우선
+사용할 수 있습니다. 이 메서드는 snapshot을 만든 동일한 시설 monitor의 설비
+목록을 기본 expected component 집합으로 사용하고, 다른 시설의 snapshot이
+들어오면 즉시 거절합니다. 내부적으로 별도 어댑터를 호출하므로 직접
+`build_realtime_facility_campaign_result()`를 사용해도 됩니다. 이 어댑터는 handoff가
 보류한 네 가지 축(연간 기상 조건, 방출 branch, 점화 branch, branch별 피해)을
 호출자가 명시한 경우에만 채웁니다. 센서 frame에서 이 값을 추정하지 않으며,
 branch별 피해의 확률 가중합이 snapshot의 관측 누출 피해와 일치하지 않으면

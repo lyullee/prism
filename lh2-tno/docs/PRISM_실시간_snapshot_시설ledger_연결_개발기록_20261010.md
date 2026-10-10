@@ -38,6 +38,8 @@ FacilityRealtimeConsequenceMonitor
   ↓
 build_realtime_facility_risk_handoff()
   ↓  (연간조건·방출branch·점화branch·branch 피해를 자동 생성하지 않음)
+FacilityRealtimeConsequenceMonitor.build_annual_campaign_result()
+  ↓  (동일 monitor의 facility_id·설비 집합을 확인)
 build_realtime_facility_campaign_result()
   ↓  (호출자가 명시한 scenario binding 검증)
 merge_facility_campaign_results()
@@ -164,6 +166,11 @@ expected_deaths[k]
 
 이 테스트는 합성 provider와 합성 피해를 사용한다. 따라서 통과 자체가 실제
 액화수소 시설의 qualified QRA 또는 독립 물리검증을 뜻하지 않는다.
+
+`build_annual_campaign_result()`는 위 어댑터를 monitor의 공식 진입점으로 묶는다.
+다른 시설에서 만든 snapshot을 넘기거나 facility ID가 다르면 즉시 거절한다. 이
+편의 메서드도 조건부 campaign만 만들며, 센서에서 빈도를 학습하거나 qualified
+facility QRA로 승격시키지 않는다.
 
 ## 남은 작업
 
