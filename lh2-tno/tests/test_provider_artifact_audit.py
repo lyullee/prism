@@ -61,3 +61,16 @@ def test_provider_artifact_audit_excludes_named_virtual_environment_trees(tmp_pa
     assert report["artifact_count"] == 1
     assert report["physical_validation_artifact_count"] == 0
     assert report["complete_facility_qra_artifact_count"] == 0
+
+
+def test_provider_artifact_audit_reads_korean_windows_encoded_json(tmp_path):
+    (tmp_path / "provider_response.json").write_text(
+        '{"schema_version": "screening_only", "facility": "액화수소"}',
+        encoding="cp949",
+    )
+
+    report = audit_provider_artifact_root(tmp_path)
+
+    assert report["artifact_count"] == 1
+    assert report["errors"] == []
+    assert report["provider_response_count"] == 1

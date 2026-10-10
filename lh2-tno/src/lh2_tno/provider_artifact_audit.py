@@ -67,6 +67,21 @@ def _is_runtime_path(path: Path) -> bool:
     )
 
 
+def _read_json(path: Path) -> Any:
+    """Read a JSON artifact from common UTF-8 or Korean Windows encodings."""
+
+    raw = path.read_bytes()
+    decode_error: UnicodeDecodeError | None = None
+    for encoding in ("utf-8-sig", "cp949"):
+        try:
+            return json.loads(raw.decode(encoding))
+        except UnicodeDecodeError as error:
+            decode_error = error
+    if decode_error is not None:
+        raise decode_error
+    raise ValueError(f"unable to decode JSON artifact: {path}")
+
+
 def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
     """Inventory JSON artifacts below ``root`` using relative paths only."""
     source_root = Path(root).resolve()
@@ -86,7 +101,7 @@ def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
             continue
         relative = path.relative_to(source_root).as_posix()
         try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
+            payload = _read_json(path)
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
             errors.append({"file": relative, "error": str(error)})
             continue
