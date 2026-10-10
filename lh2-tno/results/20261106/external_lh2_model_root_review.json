@@ -1,0 +1,286 @@
+{
+  "schema_version": "prism.external_lh2_model_root_review.v1",
+  "generated_at": "2026-10-10T12:52:02.380609+00:00",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
+  "scope": "Read-only review of the existing LH2 digital-twin model and its release/validation artifacts before PRISM promotion.",
+  "provider_like_artifacts": {
+    "provider_response_count": 7,
+    "resolved_release_count": 7,
+    "verification_count": 7,
+    "provider_export_schemas": [
+      "prism.external_accident_history.v1"
+    ],
+    "exact_generic_identity_match_count": 0,
+    "qualification_sidecar_count": 0
+  },
+  "benchmark_reviews": [
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_observation_release_packet.json",
+      "sha256": "8d87b27fdc860b4036d1490a479b5d293750f6807970309d38b68ff5e1932b39",
+      "schema_version": "0.1",
+      "artifact_id": "center_observation_release_packet_v1",
+      "status": "observation_release_packet_fail_closed",
+      "promotion_flags": {
+        "release_ready_count": 0,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": false,
+        "parameter_update_allowed": false,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "binding_count": 15,
+        "metadata_confirmed_count": 0,
+        "candidate_data_available_count": 13,
+        "candidate_diagnostic_available_count": 4,
+        "release_ready_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_observation_release_plan.json",
+      "sha256": "b284b1adcf34c9b684239361541805fd86c8ed9846296e8b1c08ddb669fb30ca",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": "evidence_release_plan_only",
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_official_independent_validation_20261007.json",
+      "sha256": "f64783e8694b7daa8526691e59d338cb2d9a9e6fbb4cb5730298d5d2b4e1ff76",
+      "schema_version": "0.1",
+      "artifact_id": "center_official_independent_validation_20261007",
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": false,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "scenario_count": 8,
+        "released_scenario_count": 0,
+        "blocked_scenario_count": 8,
+        "simulator_invocation_count": 0,
+        "official_score": null
+      },
+      "raw_historian_gate": {
+        "raw_historian_export_present": false,
+        "explicit_raw_historian_session_count": 0,
+        "approved_field_record_session_count": 0,
+        "promotion_allowed_session_count": 0,
+        "ready_unit_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_parameter_release_packet.json",
+      "sha256": "500a8369cce4dee12d24073c5aca03db36f1da790c40d253066e2871e878b1c1",
+      "schema_version": "0.1",
+      "artifact_id": "center_parameter_release_packet_v1",
+      "status": "center_parameter_release_packet_fail_closed",
+      "promotion_flags": {
+        "release_ready_count": 0,
+        "center_promotion_allowed_count": 0,
+        "forward_comparison_allowed": false,
+        "parameter_update_allowed": false,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "asset_count": 12,
+        "required_field_count": 44,
+        "missing_field_count": 39,
+        "screening_candidate_available_count": 39,
+        "center_promotion_allowed_count": 0,
+        "release_ready_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_readiness_audit.json",
+      "sha256": "65268bf41977e99e5fcaa27427762f66f8f8a5ba4944e7ac8480de923ceb34dd",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": false,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "asset_count": 12,
+        "constructable_count": 0,
+        "ready_count": 0,
+        "scenario_count": 8,
+        "structurally_ready_scenario_count": 8,
+        "confirmed_intent_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_linkage_contract_audit.json",
+      "sha256": "4707e319ed3ad0345d2430c583f03d939dceae68c2f321d1d357de2e77cd75e4",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "edge_count": 27,
+        "edge_ready_count": 0,
+        "scenario_count": 8,
+        "structurally_ready_scenario_count": 8,
+        "model_coverage_ready_scenario_count": 8,
+        "scenario_edge_ready_count": 1
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_measurement_uncertainty_envelope_20261010.json",
+      "sha256": "8bc21dbcef38ae9ca11fcbeed0885ef7c1126d5a3ada90f613a2158116a91ad7",
+      "schema_version": "0.1",
+      "artifact_id": "center_measurement_uncertainty_envelope_20261010",
+      "status": "diagnostic_no_fit_measurement_uncertainty_residual_separation",
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_raw_historian_gate.json",
+      "sha256": "2f1457bb72df7c1dd8504630620ed11319a0319bec83e4c9ee08de925241f5ac",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "candidate_file_count": 14,
+        "session_table_count": 33,
+        "source_error_count": 0,
+        "explicit_raw_historian_session_count": 0,
+        "approved_field_record_session_count": 0,
+        "promotion_allowed_session_count": 0,
+        "raw_historian_export_present": false,
+        "ready_unit_count": 0
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_raw_workbook_structure_audit.json",
+      "sha256": "0ff4a17cb6d9e18ae84f00d3638fda1b5a278a173bea992492d629729cd7869b",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "unique_source_session_count": 20,
+        "source_file_resolved_count": 20,
+        "source_sheet_resolved_count": 20,
+        "header_row_observed_count": 20,
+        "alias_header_observed_session_count": 20,
+        "timestamp_header_observed_session_count": 20,
+        "provenance_column_observed_session_count": 13,
+        "provenance_value_count": 8953,
+        "strict_timestamp_sequence_session_count": 14,
+        "non_strict_timestamp_session_count": 6,
+        "timestamp_reversal_count": 6,
+        "duplicate_timestamp_count": 0,
+        "blank_timestamp_count": 0,
+        "unparseable_timestamp_count": 0,
+        "matched_channel_column_count": 137,
+        "channel_with_numeric_values_count": 137,
+        "channel_with_blank_values_count": 3,
+        "channel_with_nonnumeric_values_count": 0,
+        "channel_nonfinite_numeric_value_count": 0,
+        "promotion_allowed_count": 0,
+        "source_quality_classification_counts": {
+          "explicit_reconstructed": 20
+        }
+      }
+    },
+    {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_prediction_workbook_audit.json",
+      "sha256": "5296379db18b3aca15a7048c24a5b0c9cdaf0af8b5a056d7a56d38f7f49b72c6",
+      "schema_version": "0.1",
+      "artifact_id": null,
+      "status": null,
+      "promotion_flags": {
+        "release_ready_count": null,
+        "center_promotion_allowed_count": null,
+        "forward_comparison_allowed": null,
+        "parameter_update_allowed": null,
+        "official_score_promotion_allowed": null,
+        "ready_for_center_numerical_assembly": null,
+        "ready_for_numerical_binding": null,
+        "promotion_allowed": null
+      },
+      "counts": {
+        "workbook_count": 3
+      }
+    }
+  ],
+  "promotion": {
+    "provider_packet": false,
+    "frequency": false,
+    "facility_qra": false,
+    "physical_validation": false
+  },
+  "blocking_reasons": [
+    "Existing observation release packet is fail-closed: metadata_confirmed_count=0 and release_ready_count=0.",
+    "No explicit raw historian/DCS/PLC export session is present; official independent validation has 0 released scenarios and no official score.",
+    "Parameter release packet has 39 missing required fields and center promotion count 0.",
+    "Provider-like artifacts are diagnostic model outputs and do not exactly match current generic event/component/port/source/result identities.",
+    "No exact digest-bound prism.provider_qualification_evidence.v1 sidecar was found."
+  ],
+  "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+  "interpretation": "The external model directory is valuable for topology, component contracts, and screening diagnostics. It still needs reviewed metadata, raw historian evidence, exact generic release identities, and independent validation before it can open PRISM provider, frequency, or facility-QRA gates."
+}
