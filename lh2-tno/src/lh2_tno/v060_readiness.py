@@ -2915,6 +2915,8 @@ def validate_v060_readiness_report(
                 "sheet_count",
                 "workbook_or_sheet_error_count",
                 "released_accident_scenario_count",
+                "declared_unit_map_source_count",
+                "declared_unit_map_signal_count",
             ):
                 if validation_intake.get(field) is not None:
                     _nonnegative_int(
@@ -2934,6 +2936,17 @@ def validate_v060_readiness_report(
                 errors.append("validation_intake.diagnostic_only must remain true")
             if not isinstance(validation_intake.get("blocking_reasons"), list):
                 errors.append("validation_intake.blocking_reasons must be an array")
+            if validation_intake.get("declared_unit_map_supplied") is True:
+                if validation_intake.get("declared_unit_map_status") != (
+                    "DECLARED_UNIT_MAP_NOT_INDEPENDENTLY_REVIEWED"
+                ):
+                    errors.append(
+                        "validation_intake.declared_unit_map_status must remain unreviewed"
+                    )
+                if validation_intake.get("reviewed_unit_map_supplied") is not False:
+                    errors.append(
+                        "declared unit map cannot imply reviewed_unit_map_supplied=true"
+                    )
 
     observed_runtime = value.get("observed_state_runtime")
     if observed_runtime is not None:
