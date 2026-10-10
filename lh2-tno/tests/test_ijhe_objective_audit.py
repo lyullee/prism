@@ -101,6 +101,17 @@ def _inputs():
             "cache_p95_ms": 10.0,
             "fresh_physics_elapsed_ms": 2000.0,
             "fresh_physics_meets_one_hz": False,
+            "mode_contract": {
+                "schema": "prism.realtime_mode_contract.v1",
+                "observed_evaluation_modes": [
+                    "fresh_physics_background",
+                    "cached_diagnostic_1hz",
+                ],
+                "fresh_physics_1hz_claim": False,
+                "stale_fallback_used": False,
+                "frequency_learning": False,
+                "release_inference": False,
+            },
             "_record_path": "benchmark.json",
         },
     }
@@ -136,6 +147,15 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert weather_check["status"] == "CONDITIONALLY_COMPLETE"
     assert weather_check["observed"]["scenario_cross_product_count"] == 4
     assert weather_check["observed"]["scenario_missing_dimension_atom_count"] == 0
+
+
+def test_objective_audit_blocks_realtime_timing_without_mode_contract():
+    inputs = _inputs()
+    inputs["realtime_cache_benchmark"]["mode_contract"]["stale_fallback_used"] = True
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(row for row in report["checks"] if row["id"] == "realtime_processing")
+    assert check["status"] == "BLOCKED_EVIDENCE"
+    assert check["observed"]["mode_contract_valid"] is False
 
 
 def test_objective_audit_records_field_model_comparison_as_diagnostic_only():

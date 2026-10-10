@@ -414,10 +414,34 @@ def build_ijhe_objective_coverage_audit(
         interpretation="조건부 실행 범위는 닫혔지만 operator-limited family를 엄격한 complete facility scope로 승격하지 않는다.",
     ))
 
+    realtime_mode_contract = (
+        realtime_cache_benchmark.get("mode_contract")
+        if isinstance(realtime_cache_benchmark, Mapping)
+        else None
+    )
+    observed_modes = (
+        realtime_mode_contract.get("observed_evaluation_modes")
+        if isinstance(realtime_mode_contract, Mapping)
+        else None
+    )
+    realtime_mode_contract_ok = (
+        isinstance(realtime_mode_contract, Mapping)
+        and realtime_mode_contract.get("schema") == "prism.realtime_mode_contract.v1"
+        and isinstance(observed_modes, list)
+        and set(observed_modes) == {
+            "cached_diagnostic_1hz",
+            "fresh_physics_background",
+        }
+        and realtime_mode_contract.get("fresh_physics_1hz_claim") is False
+        and realtime_mode_contract.get("stale_fallback_used") is False
+        and realtime_mode_contract.get("frequency_learning") is False
+        and realtime_mode_contract.get("release_inference") is False
+    )
     realtime_ok = (
         isinstance(realtime_cache_benchmark, Mapping)
         and realtime_cache_benchmark.get("cache_meets_one_hz_all_samples") is True
         and realtime_cache_benchmark.get("fresh_physics_meets_one_hz") is False
+        and realtime_mode_contract_ok
     )
     rows.append(_row(
         "realtime_processing",
@@ -430,8 +454,14 @@ def build_ijhe_objective_coverage_audit(
             "fresh_physics_elapsed_ms": realtime_cache_benchmark.get("fresh_physics_elapsed_ms") if isinstance(realtime_cache_benchmark, Mapping) else None,
             "fresh_physics_meets_one_hz": realtime_cache_benchmark.get("fresh_physics_meets_one_hz") if isinstance(realtime_cache_benchmark, Mapping) else None,
             "persistent_fresh_physics": realtime_cache_benchmark.get("persistent_fresh_physics") if isinstance(realtime_cache_benchmark, Mapping) else None,
+            "mode_contract_schema": realtime_mode_contract.get("schema") if isinstance(realtime_mode_contract, Mapping) else None,
+            "mode_contract_observed_evaluation_modes": observed_modes,
+            "mode_contract_valid": realtime_mode_contract_ok,
+            "stale_fallback_used": realtime_mode_contract.get("stale_fallback_used") if isinstance(realtime_mode_contract, Mapping) else None,
+            "frequency_learning": realtime_mode_contract.get("frequency_learning") if isinstance(realtime_mode_contract, Mapping) else None,
+            "release_inference": realtime_mode_contract.get("release_inference") if isinstance(realtime_mode_contract, Mapping) else None,
         },
-        blocking_reason=None if realtime_ok else "cache 또는 fresh-physics 처리시간 측정이 없다",
+        blocking_reason=None if realtime_ok else "cache/fresh-physics 처리시간 또는 realtime mode contract가 유효하지 않다",
         interpretation="캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다. warm worker는 반복 시작 비용을 줄이는 진단 경로이며, 측정된 fresh physics 시간을 별도로 보존한다.",
     ))
 

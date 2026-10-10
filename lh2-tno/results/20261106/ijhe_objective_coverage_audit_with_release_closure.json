@@ -391,7 +391,16 @@
             "release_inference": false
           },
           "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
-        }
+        },
+        "mode_contract_schema": "prism.realtime_mode_contract.v1",
+        "mode_contract_observed_evaluation_modes": [
+          "fresh_physics_background",
+          "cached_diagnostic_1hz"
+        ],
+        "mode_contract_valid": true,
+        "stale_fallback_used": false,
+        "frequency_learning": false,
+        "release_inference": false
       },
       "blocking_reason": null,
       "interpretation": "캐시 응답은 1 Hz 기준을 만족하지만 매 입력마다 새 SLABx 물리를 1 Hz로 계산한다는 뜻은 아니다. warm worker는 반복 시작 비용을 줄이는 진단 경로이며, 측정된 fresh physics 시간을 별도로 보존한다."
