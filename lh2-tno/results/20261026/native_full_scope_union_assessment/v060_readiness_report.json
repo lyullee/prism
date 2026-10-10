@@ -608,7 +608,7 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
-      "sha256": "44f9fd11a6fde9d6c3f5fa672f6ccf02580f278bd70461665e031a2d1b934617"
+      "sha256": "5a95924fca05336db068e04e52616942b97595c07e4f35f97e0b473cfc9c709a"
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
@@ -616,7 +616,7 @@
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "f2af6c34cf9d4a7855754ca63c45ca158eff13e3581f3839401a04869a166cdd"
+      "sha256": "7b855ef8b18e0c8b64b915384222c503faf26e3c4c0099c01f88917b16a7740b"
     },
     "facility_assessment": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",

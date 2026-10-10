@@ -402,6 +402,7 @@ def build_scope_matrix_from_facility_ledger(
             row["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD" for row in rows
         ),
         "complete_family_count": sum(row["gap_class"] == "COMPLETE" for row in rows),
+        "family_rows_are_not_additive": True,
         "interpretation": (
             "A qualification gap means a numerical diagnostic exists but cannot be "
             "promoted to qualified facility QRA. A numerical case gap means no "

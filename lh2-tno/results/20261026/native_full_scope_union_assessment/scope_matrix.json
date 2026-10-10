@@ -521,6 +521,7 @@
     "numerical_case_gap_family_count": 0,
     "qualification_gap_family_count": 8,
     "complete_family_count": 4,
+    "family_rows_are_not_additive": true,
     "interpretation": "A qualification gap means a numerical diagnostic exists but cannot be promoted to qualified facility QRA. A numerical case gap means no consequence result exists and must remain outside the facility total."
   },
   "event_count": 34,
