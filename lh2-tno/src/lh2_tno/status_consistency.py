@@ -892,9 +892,15 @@ def build_status_consistency_report(
             ),
             {
                 "record": audit_pointer,
-                "check_count": status.get("ijhe_completion_audit_latest_check_count"),
-                "blocking_reason_count": status.get(
-                    "ijhe_completion_audit_latest_blocking_reason_count"
+                "check_count": (
+                    audit_check_count
+                    if current_pointer_selected
+                    else status.get("ijhe_completion_audit_latest_check_count")
+                ),
+                "blocking_reason_count": (
+                    audit_blocking_reason_count
+                    if current_pointer_selected
+                    else status.get("ijhe_completion_audit_latest_blocking_reason_count")
                 ),
             },
         )

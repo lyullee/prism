@@ -18,6 +18,11 @@ CURRENT_PROVIDER_INPUT_AUDIT = ROOT / "results/20261026/native_full_scope_union_
 CURRENT_STATE_RELEASE_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json"
 CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json"
 CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json"
+CURRENT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json"
+CURRENT_ASSESSMENT = ROOT / "results/20261026/native_full_scope_union_assessment/facility_assessment.json"
+CURRENT_EVIDENCE_REQUEST = ROOT / "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json"
+CURRENT_LEDGER = ROOT / "results/20261026/native_full_scope_union_assessment/campaign_result.json"
+CURRENT_COVERAGE = ROOT / "results/20261026/native_full_scope_union_assessment/facility_case_packet_coverage.json"
 
 
 def _report(**overrides):
@@ -45,6 +50,28 @@ def test_current_published_artifacts_are_consistent() -> None:
     assert report["blocking_reasons"] == []
     assert report["facility_ir_fn_promotion"] is False
     assert all(row["status"] == "PASS" for row in report["checks"])
+
+
+def test_current_union_pointer_evidence_reports_current_audit_counts() -> None:
+    report = build_status_consistency_report(
+        current_status=load_json_object(ROOT / "CURRENT_STATUS.json"),
+        development_goal=load_json_object(ROOT / "DEVELOPMENT_GOAL.json"),
+        audit=load_json_object(CURRENT_AUDIT),
+        assessment=load_json_object(CURRENT_ASSESSMENT),
+        evidence_request=load_json_object(CURRENT_EVIDENCE_REQUEST),
+        ledger=load_json_object(CURRENT_LEDGER),
+        coverage=load_json_object(CURRENT_COVERAGE),
+        audit_filename=CURRENT_AUDIT.name,
+        assessment_filename=CURRENT_ASSESSMENT.name,
+        evidence_request_filename=CURRENT_EVIDENCE_REQUEST.name,
+        ledger_filename=CURRENT_LEDGER.name,
+        coverage_filename=CURRENT_COVERAGE.name,
+    )
+    assert report["status"] == "CONSISTENT"
+    for name in ("current_status_audit_pointer", "development_goal_audit_pointer"):
+        evidence = next(row for row in report["checks"] if row["name"] == name)["evidence"]
+        assert evidence["check_count"] == 39
+        assert evidence["blocking_reason_count"] == 5
 
 
 def test_current_provider_packet_input_audit_is_bound_to_status_ledgers() -> None:
