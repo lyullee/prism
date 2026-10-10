@@ -26,6 +26,23 @@
 기계 판독 결과는
 `results/20261104/lh2dt_native_contract_audit_current.json`에 저장했다.
 
+## 외부 모델 전체 회귀시험 결과
+
+외부 정본의 전용 가상환경에서 아래 명령을 실행했다.
+
+```powershell
+.venv-local\Scripts\python.exe -m pytest -q
+```
+
+결과는 **1494 passed, 0 failed, 0 skipped, 1192.56초(19분 52초)**다.
+기계 판독용 결과는
+`results/20261104/lh2dt_native_external_regression_evidence.json`에 저장했다.
+
+이 결과는 외부 모델 코드가 현재 회귀시험에서 안정적으로 동작했다는 근거다.
+7개 native 사고방출 export와 PRISM diagnostic adapter의 연결을 다시 확인하는 데
+사용할 수 있지만, 실제 설비 provider packet의 자격 인정이나 시설 전체 IR/F-N
+승격을 의미하지는 않는다.
+
 ## 의미
 
 이제 외부 모델의 정상상태 `simulate()`, `step()`, `evaluate()`를 누출로 바꾸는 추정 경로는 사용하지 않는다. 각 설비가 명시적 사고 요청을 받고, 방출 단계·지속시간·종료 근거·질량/에너지 장부를 반환하는 경계가 존재한다.

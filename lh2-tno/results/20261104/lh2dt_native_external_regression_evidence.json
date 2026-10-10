@@ -1,0 +1,18 @@
+{
+  "schema_version": "prism-lh2dt-native-external-regression-evidence-v1",
+  "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
+  "command": ".venv-local\\Scripts\\python.exe -m pytest -q",
+  "status": "PASSED",
+  "tests_passed": 1494,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "elapsed_seconds": 1192.56,
+  "duration": "0:19:52",
+  "audit_record": "lh2-tno/results/20261104/lh2dt_native_contract_audit_current.json",
+  "native_accident_export_component_count": 7,
+  "diagnostic_adapter_contract_verified_count": 7,
+  "qualified_provider_packet_count": 0,
+  "physical_validation": false,
+  "facility_qra_claim": false,
+  "interpretation": "External model regression stability evidence only; it does not qualify provider packets or promote facility IR/F-N."
+}
