@@ -3806,6 +3806,54 @@
       "interpretation": "The conditional facility IR and F/N values are independently reproduced from all saved risk atoms. This is a numerical aggregation check; it does not qualify provider evidence or open the facility-QRA gate."
     },
     {
+      "name": "diagnostic_isolation_union_extension",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment\\isolation_extension\\verification.json",
+        "schema": "prism.isolation_union_extension_verification.v1",
+        "status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
+        "base_counts": {
+          "events": 34,
+          "cases": 44,
+          "risk_atoms": 176
+        },
+        "isolation_counts": {
+          "events": 5,
+          "cases": 20,
+          "risk_atoms": 80,
+          "success_cases": 10,
+          "failure_cases": 10,
+          "provider_response_consumed": true,
+          "state_snapshot_bound_cases": 20
+        },
+        "merged_counts": {
+          "events": 39,
+          "cases": 64,
+          "risk_atoms": 256
+        },
+        "risk_atom_chain_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+        "equipment_state_release_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+        "equipment_state_release_complete_cases": 64,
+        "equipment_state_release_incomplete_cases": 0,
+        "facility_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+        "facility_component_contribution_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+        "qualified_provider_packet_case_count": 0,
+        "facility_total_risk_available": false,
+        "complete_facility_qra_claim": false,
+        "policy": {
+          "diagnostic_only": true,
+          "synthetic_isolation_barrier_probability_not_inferred": true,
+          "provider_packet_promotion": false,
+          "frequency_inference_performed": false,
+          "physical_validation_claim": false,
+          "facility_ir_fn_promotion": false
+        }
+      },
+      "interpretation": "The namespaced isolation success/failure extension is consumed by the IJHE audit. Its state, release, consequence and conditional facility aggregation are diagnostic; qualified evidence, frequency inference, physical validation and facility QRA remain gated."
+    },
+    {
       "name": "diagnostic_slabx_lh2_validation_evidence",
       "status": "PASS",
       "diagnostic_only": true,

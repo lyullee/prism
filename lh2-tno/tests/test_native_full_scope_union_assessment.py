@@ -72,8 +72,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 38
-    assert verification["ijhe_audit_pass_count"] == 33
+    assert verification["ijhe_audit_check_count"] == 39
+    assert verification["ijhe_audit_pass_count"] == 34
     assert verification["ijhe_audit_blocked_count"] == 5
     assert verification["ijhe_audit_blocked_check_ids"] == [
         "facility_release_boundary",
@@ -85,6 +85,14 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["facility_case_packet_coverage_status"] == "NO_CASE_MATCH"
     assert verification["facility_case_packet_coverage_case_count"] == 44
     assert verification["facility_case_packet_coverage_qualified_case_count"] == 0
+    assert verification["isolation_union_extension_status"] == (
+        "ISOLATION_UNION_EXTENSION_DIAGNOSTIC"
+    )
+    assert verification["isolation_union_extension_merged_event_count"] == 39
+    assert verification["isolation_union_extension_merged_case_count"] == 64
+    assert verification["isolation_union_extension_merged_risk_atom_count"] == 256
+    assert verification["isolation_union_extension_provider_response_consumed"] is True
+    assert verification["isolation_union_extension_state_snapshot_bound_cases"] == 20
     assert verification["native_scope_packet_catalog_status"] == (
         "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
     )
@@ -279,8 +287,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 38
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 33
+    assert len(audit["checks"]) == 39
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 34
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 5
     assert objective_audit["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
     assert len(objective_audit["checks"]) == 13

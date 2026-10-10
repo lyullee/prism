@@ -87,6 +87,7 @@ def build_ijhe_completion_audit(
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
     facility_component_contribution_audit: Mapping[str, Any] | None = None,
     facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
+    isolation_union_extension_verification: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1917,6 +1918,90 @@ def build_ijhe_completion_audit(
                     "The conditional facility IR and F/N values are independently reproduced "
                     "from all saved risk atoms. This is a numerical aggregation check; it "
                     "does not qualify provider evidence or open the facility-QRA gate."
+                ),
+            }
+        )
+    if isolation_union_extension_verification is not None:
+        extension = isolation_union_extension_verification
+        base_counts = extension.get("base_counts")
+        isolation_counts = extension.get("isolation_counts")
+        merged_counts = extension.get("merged_counts")
+        extension_policy = extension.get("policy")
+        extension_valid = (
+            extension.get("schema") == "prism.isolation_union_extension_verification.v1"
+            and extension.get("status") == "ISOLATION_UNION_EXTENSION_DIAGNOSTIC"
+            and isinstance(base_counts, Mapping)
+            and isinstance(isolation_counts, Mapping)
+            and isinstance(merged_counts, Mapping)
+            and merged_counts.get("events") == base_counts.get("events", 0) + isolation_counts.get("events", 0)
+            and merged_counts.get("cases") == base_counts.get("cases", 0) + isolation_counts.get("cases", 0)
+            and merged_counts.get("risk_atoms") == base_counts.get("risk_atoms", 0) + isolation_counts.get("risk_atoms", 0)
+            and isolation_counts.get("success_cases") == isolation_counts.get("failure_cases")
+            and isolation_counts.get("provider_response_consumed") is True
+            and isolation_counts.get("state_snapshot_bound_cases") == isolation_counts.get("cases")
+            and extension.get("risk_atom_chain_status") == "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC"
+            and extension.get("equipment_state_release_status") == "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
+            and extension.get("equipment_state_release_complete_cases") == merged_counts.get("cases")
+            and extension.get("equipment_state_release_incomplete_cases") == 0
+            and extension.get("facility_aggregate_closure_status") == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
+            and extension.get("facility_component_contribution_status") == "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+            and extension.get("qualified_provider_packet_case_count") == 0
+            and extension.get("facility_total_risk_available") is False
+            and extension.get("complete_facility_qra_claim") is False
+            and isinstance(extension_policy, Mapping)
+            and extension_policy.get("diagnostic_only") is True
+            and extension_policy.get("frequency_inference_performed") is False
+            and extension_policy.get("physical_validation_claim") is False
+            and extension_policy.get("facility_ir_fn_promotion") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_isolation_union_extension",
+                "status": "PASS" if extension_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if extension_valid
+                    else "isolation union extension is missing a closed diagnostic chain or has an unsafe promotion flag"
+                ),
+                "evidence": {
+                    "record": extension.get("_record_path"),
+                    "schema": extension.get("schema"),
+                    "status": extension.get("status"),
+                    "base_counts": base_counts,
+                    "isolation_counts": isolation_counts,
+                    "merged_counts": merged_counts,
+                    "risk_atom_chain_status": extension.get("risk_atom_chain_status"),
+                    "equipment_state_release_status": extension.get(
+                        "equipment_state_release_status"
+                    ),
+                    "equipment_state_release_complete_cases": extension.get(
+                        "equipment_state_release_complete_cases"
+                    ),
+                    "equipment_state_release_incomplete_cases": extension.get(
+                        "equipment_state_release_incomplete_cases"
+                    ),
+                    "facility_aggregate_closure_status": extension.get(
+                        "facility_aggregate_closure_status"
+                    ),
+                    "facility_component_contribution_status": extension.get(
+                        "facility_component_contribution_status"
+                    ),
+                    "qualified_provider_packet_case_count": extension.get(
+                        "qualified_provider_packet_case_count"
+                    ),
+                    "facility_total_risk_available": extension.get(
+                        "facility_total_risk_available"
+                    ),
+                    "complete_facility_qra_claim": extension.get(
+                        "complete_facility_qra_claim"
+                    ),
+                    "policy": extension_policy,
+                },
+                "interpretation": (
+                    "The namespaced isolation success/failure extension is consumed by the IJHE audit. "
+                    "Its state, release, consequence and conditional facility aggregation are diagnostic; "
+                    "qualified evidence, frequency inference, physical validation and facility QRA remain gated."
                 ),
             }
         )

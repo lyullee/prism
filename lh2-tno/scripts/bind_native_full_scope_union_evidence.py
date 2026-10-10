@@ -107,6 +107,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     facility_frequency_uncertainty_audit = _with_record(
         args.facility_frequency_uncertainty_audit
     )
+    isolation_union_extension_verification = _with_record(
+        args.isolation_union_extension_verification
+    )
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -137,6 +140,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         facility_aggregate_closure_audit=facility_aggregate_closure_audit,
         facility_component_contribution_audit=facility_component_contribution_audit,
         facility_frequency_uncertainty_audit=facility_frequency_uncertainty_audit,
+        isolation_union_extension_verification=isolation_union_extension_verification,
     )
 
     verification_path = output_dir / "verification.json"
@@ -376,6 +380,54 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 if facility_frequency_uncertainty_audit
                 else verification.get("facility_frequency_uncertainty_audit_blocking_reason_count")
             ),
+            "isolation_union_extension_status": (
+                isolation_union_extension_verification.get("status")
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_status")
+            ),
+            "isolation_union_extension_merged_event_count": (
+                isolation_union_extension_verification.get("merged_counts", {}).get("events")
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_merged_event_count")
+            ),
+            "isolation_union_extension_merged_case_count": (
+                isolation_union_extension_verification.get("merged_counts", {}).get("cases")
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_merged_case_count")
+            ),
+            "isolation_union_extension_merged_risk_atom_count": (
+                isolation_union_extension_verification.get("merged_counts", {}).get("risk_atoms")
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_merged_risk_atom_count")
+            ),
+            "isolation_union_extension_provider_response_consumed": (
+                isolation_union_extension_verification.get("isolation_counts", {}).get(
+                    "provider_response_consumed"
+                )
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_provider_response_consumed")
+            ),
+            "isolation_union_extension_state_snapshot_bound_cases": (
+                isolation_union_extension_verification.get("isolation_counts", {}).get(
+                    "state_snapshot_bound_cases"
+                )
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_state_snapshot_bound_cases")
+            ),
+            "isolation_union_extension_equipment_state_release_status": (
+                isolation_union_extension_verification.get("equipment_state_release_status")
+                if isolation_union_extension_verification
+                else verification.get("isolation_union_extension_equipment_state_release_status")
+            ),
+            "isolation_union_extension_qualified_provider_packet_case_count": (
+                isolation_union_extension_verification.get(
+                    "qualified_provider_packet_case_count"
+                )
+                if isolation_union_extension_verification
+                else verification.get(
+                    "isolation_union_extension_qualified_provider_packet_case_count"
+                )
+            ),
         }
     )
     _save(output_dir / "validation_evidence_matrix.json", matrix)
@@ -516,6 +568,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional independent literature-frequency sensitivity audit.",
+    )
+    parser.add_argument(
+        "--isolation-union-extension-verification",
+        type=Path,
+        default=None,
+        help="Optional namespaced isolation success/failure facility-extension verification.",
     )
     args = parser.parse_args()
     try:

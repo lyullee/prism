@@ -16,15 +16,17 @@
 원장: [`ijhe_objective_coverage_audit.json`](../results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)
 
 현재 최종 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 최신
-fail-closed IJHE 감사는 38개 검사 중 33개 PASS·5개 BLOCKED로 재생성되었다.
+fail-closed IJHE 감사는 39개 검사 중 34개 PASS·5개 BLOCKED로 재생성되었다.
 24/24 native packet과 상태 snapshot 결합은 구조적 diagnostic coverage로 PASS가
 되었지만, qualified provider packet은 0건이고 native catalog·SLABx-LH2 구성요소
-검사는 계속 diagnostic-only다.
+검사는 계속 diagnostic-only다. 별도로 격리 성공·실패 5 event·20 case·80 risk atom을
+현재 시설에 namespaced 결합한 확장도 상태 snapshot·방출·피해·IR/F-N 구조 감사가 PASS로
+들어가지만, qualified packet과 시설 QRA를 열지 않는다.
 
 | 목표 | 상태 | 현재 근거 |
 |---|---|---|
 | 설비 상태 → native 방출 | PASS | 24/24 사건 exact packet, 상태 snapshot 24/24 `BOUND_AND_ECHOED` |
-| 방출 → 최종 피해 | CONDITIONALLY_COMPLETE | native campaign 24/24 case 실행, union risk atom 176개 |
+| 방출 → 최종 피해 | CONDITIONALLY_COMPLETE | native campaign 24/24 case 실행, 기본 union risk atom 176개와 격리 확장 80개를 별도 결합 |
 | SLABx-LH2 피해영향 구성요소 | CONDITIONALLY_COMPLETE | 6개 FFI·6개 FLACS 비교, 질량잔차 1.77×10⁻¹² kg, 반복 재고차 0 kg |
 | 문헌 빈도 불확실성 | CONDITIONALLY_COMPLETE | 5개 문헌 시나리오(설비별 공유 3개 + 사건별 독립 p05/p95 2개), 9개 분위수 미제공 진단 사건은 fixed, 설비·사고군 상위순위 안정성 기록 |
 | 기상·점화·인구 결합 | CONDITIONALLY_COMPLETE | 5개 연간조건, 20개 조건×방출×점화 cross-product, missing-dimension atom 0, receptor mismatch 0 |
@@ -33,7 +35,7 @@ fail-closed IJHE 감사는 38개 검사 중 33개 PASS·5개 BLOCKED로 재생�
 | 독립 물리검증 | BLOCKED_EVIDENCE | 제한 evidence matrix이며 physical validation claim=false |
 | qualified provider packet | BLOCKED_EVIDENCE | qualified packet 0건; 현재 packet은 native diagnostic |
 | 엄격한 시설 범위 | BLOCKED_EVIDENCE | 8개 family가 `EXECUTED_OPERATOR_LIMITED`라 PARTIAL |
-| 시설 전체 상태 snapshot coverage | PASS | 기본 native 24/24와 union 확장 10/10을 합쳐 34/34 사건이 canonical state snapshot·provider echo·provider result digest까지 연결됨 |
+| 시설 전체 상태 snapshot coverage | PASS | 기본 native 24/24와 union 확장 10/10, 격리 provider 응답 20/20 case를 각각 canonical state snapshot·provider echo·provider result digest까지 연결함 |
 | 시설 전체 IR/F-N 승격 | BLOCKED_EVIDENCE | 위 게이트가 닫히지 않아 `facility_total_risk_available=false` |
 
 따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다. 기상·점화·인구 연결은 `scenario_branch_accounting.cross_product_count=20`과 `missing_dimension_atom_count=0`을 함께 확인해야 한다.

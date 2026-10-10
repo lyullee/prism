@@ -123,6 +123,11 @@ def main() -> int:
         type=Path,
         help="optional independent literature-frequency sensitivity audit",
     )
+    parser.add_argument(
+        "--isolation-union-extension-verification",
+        type=Path,
+        help="optional namespaced isolation success/failure facility-extension verification",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -347,6 +352,15 @@ def main() -> int:
             facility_frequency_uncertainty_audit["_record_path"] = str(
                 args.facility_frequency_uncertainty_audit
             )
+        isolation_union_extension_verification = (
+            _object(args.isolation_union_extension_verification)
+            if args.isolation_union_extension_verification
+            else None
+        )
+        if isolation_union_extension_verification is not None:
+            isolation_union_extension_verification["_record_path"] = str(
+                args.isolation_union_extension_verification
+            )
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -383,6 +397,7 @@ def main() -> int:
             facility_aggregate_closure_audit,
             facility_component_contribution_audit,
             facility_frequency_uncertainty_audit,
+            isolation_union_extension_verification,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

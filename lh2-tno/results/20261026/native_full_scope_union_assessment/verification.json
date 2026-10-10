@@ -142,8 +142,8 @@
     "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
   },
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_audit_check_count": 38,
-  "ijhe_audit_pass_count": 33,
+  "ijhe_audit_check_count": 39,
+  "ijhe_audit_pass_count": 34,
   "ijhe_audit_blocked_count": 5,
   "ijhe_audit_blocked_check_ids": [
     "facility_release_boundary",
@@ -171,5 +171,13 @@
   "facility_frequency_uncertainty_audit_scenario_count": 5,
   "facility_frequency_uncertainty_audit_risk_atom_count": 176,
   "facility_frequency_uncertainty_audit_mismatch_count": 0,
-  "facility_frequency_uncertainty_audit_blocking_reason_count": 0
+  "facility_frequency_uncertainty_audit_blocking_reason_count": 0,
+  "isolation_union_extension_status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
+  "isolation_union_extension_merged_event_count": 39,
+  "isolation_union_extension_merged_case_count": 64,
+  "isolation_union_extension_merged_risk_atom_count": 256,
+  "isolation_union_extension_provider_response_consumed": true,
+  "isolation_union_extension_state_snapshot_bound_cases": 20,
+  "isolation_union_extension_equipment_state_release_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+  "isolation_union_extension_qualified_provider_packet_case_count": 0
 }

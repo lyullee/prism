@@ -16,13 +16,13 @@
         "ignition, fire, explosion, IR/F-N",
         "facility-QRA physical validation"
       ],
-      "provenance_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
-      "hash_mismatch_count": 4,
+      "provenance_status": "DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT",
+      "hash_mismatch_count": 1,
       "source": {
         "label": "DynamicLH2PoolX restricted component record",
-        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261017\\validation_evidence\\dynamiclh2poolx_stage_c_prism_record_current_source.json",
-        "sha256": "2b9e1b52256d0cfd2b4276ea30075e909e27995832404a38f126228dc30cffeb",
-        "status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT"
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261009\\validation_evidence\\dynamiclh2poolx_stage_c_prism_record_git_blob.json",
+        "sha256": "ae114e266bddf45d6a8907e770652fad20dd93e80ea707d59f880eef28321200",
+        "status": "DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT"
       },
       "physical_validation_claim": false,
       "full_chain_validation_claim": false
@@ -166,11 +166,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 35,
+      "check_count": 38,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "14a425bbed8636a61aa19991930d256d5d6ea01eafa9e2f3b8159d4146e40710",
+        "sha256": "228f7bb2812985065e666525b2117ba0775b1ad83ada10158c99352f0ed93662",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,
