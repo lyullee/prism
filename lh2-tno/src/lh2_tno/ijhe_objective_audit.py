@@ -1791,14 +1791,15 @@ def build_ijhe_objective_coverage_audit(
 
     row_by_id = {row["id"]: row for row in rows}
     completion_criteria = []
-    for criterion_id, check_id in (
-        ("A_equipment_state_and_release", "equipment_state_to_native_release"),
-        ("B_release_to_final_damage", "release_to_final_damage"),
-        ("C_facility_ir_fn_and_scope", "generic_lh2_scope"),
-        ("D_literature_frequency_uncertainty", "literature_frequency_uncertainty"),
-        ("E_validation_and_processing_time", "realtime_processing"),
+    for criterion_id, check_id, gate_ids in (
+        ("A_equipment_state_and_release", "equipment_state_to_native_release", ("qualified_provider_evidence",)),
+        ("B_release_to_final_damage", "release_to_final_damage", ("qualified_provider_evidence", "strict_facility_qra")),
+        ("C_facility_ir_fn_and_scope", "generic_lh2_scope", ("strict_facility_scope", "strict_facility_qra")),
+        ("D_literature_frequency_uncertainty", "literature_frequency_uncertainty", ("qualified_provider_evidence",)),
+        ("E_validation_and_processing_time", "realtime_processing", ("independent_physical_validation",)),
     ):
         check = row_by_id[check_id]
+        open_gate_ids = [gate_id for gate_id in gate_ids if gate_id in strict_blocked]
         completion_criteria.append({
             "id": criterion_id,
             "status": (
@@ -1808,7 +1809,9 @@ def build_ijhe_objective_coverage_audit(
             ),
             "check_id": check_id,
             "evidence": list(check.get("evidence_paths", [])),
-            "strict_gate_open": check_id in strict_blocked,
+            "strict_gate_ids": list(gate_ids),
+            "open_strict_gate_ids": open_gate_ids,
+            "strict_gate_open": bool(open_gate_ids),
         })
 
     return {

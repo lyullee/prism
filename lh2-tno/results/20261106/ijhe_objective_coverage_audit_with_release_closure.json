@@ -825,7 +825,13 @@
         "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
         "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json"
       ],
-      "strict_gate_open": false
+      "strict_gate_ids": [
+        "qualified_provider_evidence"
+      ],
+      "open_strict_gate_ids": [
+        "qualified_provider_evidence"
+      ],
+      "strict_gate_open": true
     },
     {
       "id": "B_release_to_final_damage",
@@ -835,7 +841,15 @@
         "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
         "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
-      "strict_gate_open": false
+      "strict_gate_ids": [
+        "qualified_provider_evidence",
+        "strict_facility_qra"
+      ],
+      "open_strict_gate_ids": [
+        "qualified_provider_evidence",
+        "strict_facility_qra"
+      ],
+      "strict_gate_open": true
     },
     {
       "id": "C_facility_ir_fn_and_scope",
@@ -845,7 +859,15 @@
         "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
         "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
-      "strict_gate_open": false
+      "strict_gate_ids": [
+        "strict_facility_scope",
+        "strict_facility_qra"
+      ],
+      "open_strict_gate_ids": [
+        "strict_facility_scope",
+        "strict_facility_qra"
+      ],
+      "strict_gate_open": true
     },
     {
       "id": "D_literature_frequency_uncertainty",
@@ -855,7 +877,13 @@
         "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
         "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
-      "strict_gate_open": false
+      "strict_gate_ids": [
+        "qualified_provider_evidence"
+      ],
+      "open_strict_gate_ids": [
+        "qualified_provider_evidence"
+      ],
+      "strict_gate_open": true
     },
     {
       "id": "E_validation_and_processing_time",
@@ -865,7 +893,13 @@
         "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
         "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
       ],
-      "strict_gate_open": false
+      "strict_gate_ids": [
+        "independent_physical_validation"
+      ],
+      "open_strict_gate_ids": [
+        "independent_physical_validation"
+      ],
+      "strict_gate_open": true
     }
   ],
   "explicit_exclusions": [

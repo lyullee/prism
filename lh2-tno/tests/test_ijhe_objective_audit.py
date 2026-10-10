@@ -119,6 +119,11 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
         "CONDITIONAL_PASS",
     ]
     assert "detonation_or_DDT" in report["explicit_exclusions"]
+    criteria = {item["id"]: item for item in report["completion_criteria"]}
+    assert criteria["C_facility_ir_fn_and_scope"]["strict_gate_open"] is True
+    assert "strict_facility_scope" in criteria["C_facility_ir_fn_and_scope"]["open_strict_gate_ids"]
+    assert criteria["E_validation_and_processing_time"]["strict_gate_open"] is True
+    assert "independent_physical_validation" in criteria["E_validation_and_processing_time"]["open_strict_gate_ids"]
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
     assert "release_to_final_damage" not in report["core_blocking_check_ids"]
     assert "slabx_lh2_component_consequence_validation" not in report["core_blocking_check_ids"]
