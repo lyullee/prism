@@ -26,6 +26,7 @@ from lh2_tno.provider_release import (
     load_provider_release_set_catalog,
     load_provider_release_set_branch_catalog,
     provider_release_resolver_from_packet,
+    provider_release_resolver_from_provider,
     provider_release_set_resolver_from_packet,
 )
 
@@ -598,6 +599,30 @@ def test_provider_packet_resolver_rejects_template_component_mismatch():
 
     with pytest.raises(ProviderReleaseContractError, match="telemetry template"):
         resolver(Template(), {"values": {}})
+
+
+def test_live_provider_resolver_revalidates_each_frame_without_inference():
+    calls = []
+
+    def provider(template, normalized):
+        calls.append(normalized)
+        return _release().model_dump(mode="json")
+
+    resolver = provider_release_resolver_from_provider(
+        provider,
+        _defaults(),
+        component_id="storage-tank-01",
+        port_id="tank-out",
+    )
+
+    class Template:
+        component_id = "storage-tank-01"
+
+    normalized = {"values": {"pressure": {"value_si": 900000.0}}}
+    request = resolver(Template(), normalized)
+    assert request.resolved_release is not None
+    assert calls == [normalized]
+    assert request.annual_frequency_per_year is None
 
 
 def test_provider_set_resolver_rebinds_explicit_two_sided_boundary():

@@ -50,6 +50,10 @@ resolver = provider_release_resolver_from_packet(
 생성하지 않는다. 주파수는 별도의 문헌 `FrequencyEvent` 연결 단계에서 한 번만
 부여한다.
 
+프레임마다 설비 모델을 호출하려면 `provider_release_resolver_from_provider`
+를 사용한다. 콜백이 반환한 패킷은 매 프레임 다시 strict 검증되며, 콜백이
+정상상태 스냅샷만 반환하거나 포트가 바뀌면 계산이 중단된다.
+
 ## 현재 적용 범위와 남은 검증
 
 합성 및 모델 예측 패킷에는 계약 검증과 방출→SLABx-LH2→피해 계산 연결이

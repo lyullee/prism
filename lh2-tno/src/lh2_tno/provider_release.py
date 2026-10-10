@@ -506,6 +506,44 @@ def provider_release_resolver_from_packet(
     return resolve
 
 
+def provider_release_resolver_from_provider(
+    provider: Callable[[Any, Mapping[str, Any]], ProviderRelease | Mapping[str, Any] | str | Path],
+    request_defaults: Mapping[str, Any],
+    *,
+    component_id: str | None = None,
+    port_id: str | None = None,
+) -> Callable[[Any, Mapping[str, Any]], ConsequenceRequest]:
+    """Build a frame-by-frame resolver for a live equipment digital twin.
+
+    ``provider`` must return a complete strict release packet for each frame;
+    pressure, temperature, or phase values are never filled in by PRISM.  A
+    changing packet is therefore revalidated at the boundary on every call,
+    while request context and initiating frequency remain outside the provider
+    seam.
+    """
+    if not callable(provider):
+        raise TypeError('provider must be callable')
+    defaults = copy.deepcopy(dict(request_defaults))
+
+    def resolve(template: Any, normalized: Mapping[str, Any]) -> ConsequenceRequest:
+        release = _coerce_provider_release(provider(template, normalized))
+        if template.component_id != release.component_id:
+            raise ProviderReleaseContractError(
+                'provider release component_id does not match the telemetry template'
+            )
+        if component_id is not None and release.component_id != component_id:
+            raise ProviderReleaseContractError(
+                'provider release component_id does not match the requested adapter component'
+            )
+        if port_id is not None and release.port_id != port_id:
+            raise ProviderReleaseContractError(
+                'provider release port_id does not match the requested adapter port'
+            )
+        return build_consequence_request_from_provider_release(release, defaults)
+
+    return resolve
+
+
 def build_consequence_request_from_provider_release_set(
     release_set: ResolvedGasReleaseSet,
     request_defaults: Mapping[str, Any],
