@@ -381,6 +381,40 @@
       "physical_validation_claim": false,
       "full_chain_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_independent_comparison",
+      "status": "RESTRICTED_INDEPENDENT_COMPARISON_SOURCE_GATE_OPEN",
+      "supports": [
+        "independent FFI Test 6 SLABx sensor comparison",
+        "published-source/no-fitting provenance and LFL classification accounting"
+      ],
+      "does_not_support": [
+        "independent physical validation while the source/numerical gate is open",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "row_count": 30,
+      "sensor_count": 30,
+      "mean_bias_vol_pct": -1.1924596629594961,
+      "mae_vol_pct": 1.8671267816835724,
+      "rmse_vol_pct": 4.535886153151856,
+      "observed_lfl_pairs": 6,
+      "predicted_lfl_pairs": 3,
+      "true_positive": 3,
+      "false_negative": 3,
+      "false_positive": 0,
+      "source_gate_accepted": false,
+      "independent_physical_validation_claim": false,
+      "source": {
+        "label": "SLABx-LH2 independent comparison audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\slabx_lh2_independent_comparison_audit.json",
+        "sha256": "da83e398618179b101d405a9426b5ed059ff341a2e08983ff5dcfc91523b7c39",
+        "status": "RESTRICTED_INDEPENDENT_COMPARISON_SOURCE_GATE_OPEN"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "claims": [
@@ -437,6 +471,12 @@
       "status": "SUPPORTED_WITH_RESTRICTIONS",
       "allowed": true,
       "basis": "slabx_lh2_direct_component_comparison"
+    },
+    {
+      "claim": "restricted_slabx_lh2_independent_comparison_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_independent_comparison"
     },
     {
       "claim": "independent_full_chain_physical_validation",

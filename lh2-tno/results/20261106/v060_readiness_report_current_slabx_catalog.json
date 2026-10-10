@@ -1082,6 +1082,12 @@
       "status": "REVIEW_READY_COMPONENT_EVIDENCE",
       "physical_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_independent_comparison",
+      "status": "RESTRICTED_INDEPENDENT_COMPARISON_SOURCE_GATE_OPEN",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "evidence_request": {
@@ -1334,7 +1340,7 @@
     },
     "validation_matrix": {
       "path": "results/20261106/validation_evidence_matrix_current_slabx.json",
-      "sha256": "830969b37b095fa90581415a29f91813b11d160e81cb9d492197e5623c55d435"
+      "sha256": "916a49acabedb20cc88b17aec85f0036e4f585b944bc094a18b08081ae727e24"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",

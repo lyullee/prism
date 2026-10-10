@@ -1,12 +1,12 @@
 {
   "schema_version": "prism.ci_local_reproduction.v2",
   "status": "LOCAL_WORKFLOW_EQUIVALENT_PASS",
-  "commit": "0fdb541",
+  "commit": "6d92de9 + independent-comparison working tree",
   "workflow": ".github/workflows/tests.yml",
   "python_requirement": ">=3.12",
-  "portable_test_status": "928 passed, 1 skipped",
+  "portable_test_status": "931 passed, 1 skipped",
   "wheel_filename": "prism_risk-0.6.2-py3-none-any.whl",
-  "wheel_sha256": "633ba86f83ab0a299942f445d4eb35c3f5a392234adfab0916dc55c14600b04f",
+  "wheel_sha256": "5764e3a081af95c8f7a392107b11fafbdef25c7427e658eba29de9effb114902",
   "wheel_contract_checks": {
     "frequency_catalogue_shipped": true,
     "tno_host_shipped": true,
@@ -21,7 +21,8 @@
   "remote_verification_policy": "Do not infer remote Actions success from local reproduction; inspect the authenticated Actions run separately.",
   "commands": [
     "python -m pytest -q (working-directory: lh2-tno)",
-    "python -m pip wheel --no-deps --no-build-isolation ./lh2-tno -w wheelhouse_ci_repro_20261106",
+    "python -m pip wheel --no-deps --no-build-isolation ./lh2-tno -w wheelhouse_ci_repro_20261106_independent_2",
     "frequency catalogue, tno_host.py and entry points checked from the wheel"
-  ]
+  ],
+  "wheel_path": "wheelhouse_ci_repro_20261106_independent_2/prism_risk-0.6.2-py3-none-any.whl"
 }
