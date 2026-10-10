@@ -2556,7 +2556,7 @@
   "v060_external_equipment_readiness_report_sha256": "B9902F92B48DE3F476B5AC5FA6776E23D2B10563F0E3452D3C87CD54E1BA1EC2",
   "v060_external_equipment_readiness_report_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 34 events, 44 cases, 176 risk atoms; external assets 12, state-ready 2, P&ID overlap 9, confirmed/candidate ports 14/13, enabled edges 0/27; scenario families 12 unresolved, frequency binding withheld",
   "v060_generic_equipment_readiness_report": "results/20261105/v060_readiness_report_with_generic_equipment_model.json",
-  "v060_generic_equipment_readiness_report_sha256": "BE9DA79CA318798D1F1730B00B347FEDA48893202EAC1906E773AE5E905247D7",
+  "v060_generic_equipment_readiness_report_sha256": "5FA4A3F733C3D3F80CCCD343BB566C621279A5736D1EA9BFE2F0B0A3E5139B40",
   "v060_generic_equipment_readiness_report_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; generic 7/7 assets resolved, 12 families declared, 24/24 literature events validly bound, vertical_handoff uncomputed; provider release and facility QRA promotion false",
   "v060_generic_equipment_readiness_runtime_profile": "cached_diagnostic_1hz is the recommended monitoring mode; fresh physics and full campaign are measured slower paths",
   "v060_generic_equipment_readiness_runtime_profile_status": "cache p95 61.28 ms and one-Hz diagnostic-ready; fresh physics 2711.21 ms and not one-Hz; campaign p95/p99 39591.67/79233.11 ms; no real-time facility QRA claim",
@@ -2660,6 +2660,7 @@
   "external_field_rebaseline_policy": "Current-file hash rebaseline is provenance repair only; explicit acknowledgement required; no frequency or physical-validation promotion.",
   "external_field_orientation_rebaseline_policy": "Orientation metrics are rebound only after event/source/receptor digest matching; no bearing fitting, independent validation, frequency inference or facility-QRA promotion.",
   "v060_release_closure_worklist": "results/20261106/release_closure_worklist.json",
-  "v060_release_closure_worklist_sha256": "28E1D9D4CB46EED017845BA4170F2C111DD2645786B9AA5A805766004C4F6E64",
-  "v060_release_closure_worklist_status": "OPEN_RELEASE_CLOSURE_WORKLIST; 44/44 cases remain open; 44 isolation declarations, 24 termination bases, and 15 provider inventory residuals require evidence; end-to-end mass residual open count 0; promotion false"
+  "v060_release_closure_worklist_sha256": "FDC9D60AC7C83AC9D76E28D63259ED2B4AA3B0B4B1C3B4CD571A120A7AE22B2C",
+  "v060_release_closure_worklist_status": "OPEN_RELEASE_CLOSURE_WORKLIST; 44/44 cases remain open; 44 isolation declarations, 24 termination bases, and 15 provider inventory residuals require evidence; end-to-end mass residual open count 0; provider_release_closure_audit is now required for packet intake; promotion false",
+  "v060_provider_release_closure_audit": "src/lh2_tno/provider_release_closure.py; scripts/audit_provider_release_closure.py; packet closure audit remains diagnostic and never opens qualification or facility QRA"
 }

@@ -213,6 +213,8 @@ python scripts/build_v060_readiness_report.py `
 
 `chain.release_closure_worklist`의 모든 승격 플래그는 의도적으로 `false`이며, 이는 종료근거가 채워질 때까지 빈도추론·시설 IR/F-N·물리검증 주장을 막는다.
 
+실제 provider packet을 받을 때는 [`audit_provider_release_closure.py`](../scripts/audit_provider_release_closure.py)를 먼저 실행한다. `prism.provider_release_closure_audit.v1`은 `reviewed_isolation_success`의 격리 성공·작동시각, `inventory_depletion`의 최종 재고와 provider 수지, 종료 provenance를 각각 검사한다. 이 감사가 `CLOSURE_READY_FOR_QUALIFICATION`을 반환해도 qualified provider 증거와 독립 물리검증이 자동으로 충족되는 것은 아니다.
+
 최신 외부 설비 결합 원장은 다음 명령으로 재현할 수 있다.
 
 ```powershell

@@ -130,6 +130,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "tank pressure, phase inventory and vessel opening history"
       ],
@@ -200,6 +201,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history"
       ],
@@ -259,6 +261,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "valve opening command, travel/closure history and upstream state"
       ],
@@ -303,6 +306,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "relief/vent set point, capacity and discharge termination history"
       ],
@@ -358,6 +362,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pump trip/seal failure state and connected inventory history"
       ],
@@ -402,6 +407,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "vaporizer process-side state, failure mode and boundary history"
       ],
@@ -445,6 +451,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "reliquefier failure mode, connected inventory and outlet history"
       ],
@@ -515,6 +522,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "flash quality, gas/liquid/ground partition and droplet treatment"
       ],
@@ -593,6 +601,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass"
       ],
@@ -637,6 +646,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "complete 600 s provider history and end-of-horizon inventory"
       ],
@@ -692,6 +702,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "both provider outlets, endpoint geometry and same-event coupling",
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
@@ -752,6 +763,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
@@ -870,6 +882,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass"
       ],
@@ -981,6 +994,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "complete 600 s provider history and end-of-horizon inventory"
       ],
@@ -1094,6 +1108,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "vaporizer process-side state, failure mode and boundary history"
       ],
@@ -1205,6 +1220,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "relief/vent set point, capacity and discharge termination history"
       ],
@@ -1332,6 +1348,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "both provider outlets, endpoint geometry and same-event coupling",
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
@@ -1462,6 +1479,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "both provider outlets, endpoint geometry and same-event coupling",
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
@@ -1578,6 +1596,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "reliquefier failure mode, connected inventory and outlet history"
       ],
@@ -1712,6 +1731,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -1851,6 +1871,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -1990,6 +2011,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2129,6 +2151,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2268,6 +2291,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2401,6 +2425,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2534,6 +2559,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2667,6 +2693,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2801,6 +2828,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -2935,6 +2963,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3055,6 +3084,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3175,6 +3205,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3295,6 +3326,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3415,6 +3447,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3535,6 +3568,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3655,6 +3689,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3775,6 +3810,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "flash quality, gas/liquid/ground partition and droplet treatment",
@@ -3888,6 +3924,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -3998,6 +4035,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4108,6 +4146,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4218,6 +4257,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4328,6 +4368,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4438,6 +4479,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4548,6 +4590,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4658,6 +4701,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4768,6 +4812,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4878,6 +4923,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
@@ -4999,6 +5045,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5122,6 +5169,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5245,6 +5293,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5368,6 +5417,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5491,6 +5541,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5614,6 +5665,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5737,6 +5789,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5860,6 +5913,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -5983,6 +6037,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -6106,6 +6161,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
@@ -6138,6 +6194,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary"
       ]
     },
@@ -6161,6 +6218,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary"
       ]
     },
@@ -6190,6 +6248,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -6221,6 +6280,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -6246,6 +6306,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary"
       ]
     },
@@ -6275,6 +6336,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -6306,6 +6368,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -6337,6 +6400,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -6368,6 +6432,7 @@
         "exact component_id, accident port, event_id, opening geometry, position and direction",
         "provider-owned time history with start/end clock and explicit termination basis",
         "provider mass and energy closure with residuals and initial/final inventory",
+        "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
         "independent physical validation or a declared validation gap for the release boundary",
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"

@@ -21,6 +21,7 @@ _COMMON_REQUIREMENTS = (
     "exact component_id, accident port, event_id, opening geometry, position and direction",
     "provider-owned time history with start/end clock and explicit termination basis",
     "provider mass and energy closure with residuals and initial/final inventory",
+    "prism.provider_release_closure_audit.v1 with termination, isolation and inventory checks closed",
     "independent physical validation or a declared validation gap for the release boundary",
 )
 

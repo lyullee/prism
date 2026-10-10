@@ -956,7 +956,7 @@
     },
     "facility_evidence_request": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",
-      "sha256": "7bea25290a4b89496063973943627f883d4df40508ce88ff5a9e2d45fdf04f8c"
+      "sha256": "370ec81d70b3419a9da2a2173fc899fd164d4b3b52ebfe420f4a447f9683d684"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
@@ -1008,7 +1008,7 @@
     },
     "release_closure_worklist": {
       "path": "results/20261106/release_closure_worklist.json",
-      "sha256": "28e1d9d4cb46eed017845ba4170f2c111dd2645786b9aa5a805766004c4f6e64"
+      "sha256": "fdc9d60ac7c83ac9d76e28d63259ed2b4aa3b0b4b1c3b4cd571a120a7ae22b2c"
     }
   },
   "invariant_validation": {
