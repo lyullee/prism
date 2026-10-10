@@ -251,6 +251,8 @@ def test_loc_specific_ports_support_mixed_one_and_two_ended_frequency_rows():
     assert rows[0].port_ids == ('transfer.out', 'transfer.out.2')
     assert rows[1].release.mode == 'hole'
     assert rows[1].port_ids == ('transfer.out',)
+    with pytest.raises(ValueError, match='unknown LOC'):
+        asset(port_ids_by_loc={'NOT_A_LOC': ('storage.out',)})
 
 
 def test_loc_bind_calls_existing_consequence_pipeline_and_carries_provenance():

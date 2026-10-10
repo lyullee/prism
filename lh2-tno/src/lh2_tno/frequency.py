@@ -153,6 +153,13 @@ class FrequencyAsset(Contract):
         for loc, port_ids in self.port_ids_by_loc.items():
             if not port_ids or len(set(port_ids)) != len(port_ids):
                 raise ValueError(f'frequency asset port_ids_by_loc[{loc}] must be nonempty and unique')
+        known_locs = {row['loc'] for row in profile['events']}
+        unknown_locs = set(self.port_ids_by_loc) - known_locs
+        if unknown_locs:
+            raise ValueError(
+                'frequency asset port_ids_by_loc references unknown LOC(s): '
+                + ', '.join(sorted(unknown_locs))
+            )
         return self
 
 
