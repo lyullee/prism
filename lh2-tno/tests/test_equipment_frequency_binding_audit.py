@@ -81,9 +81,33 @@ def test_event_for_unknown_asset_is_blocked():
     assert any("absent from scenario coverage" in reason for reason in report["blocking_reasons"])
 
 
+def test_candidate_asset_does_not_mark_family_frequency_bound():
+    report = audit_equipment_frequency_binding(
+        _coverage(resolved=False),
+        frequency_events=[_event()],
+    )
+    assert report["status"] == "FREQUENCY_BINDING_WITHHELD"
+    assert report["valid_frequency_event_count"] == 0
+    assert report["bound_family_count"] == 0
+    assert "vessel_hole" in report["uncomputed_families"]
+    assert "liquid_two_phase" in report["uncomputed_families"]
+    assert all(not row["frequency_bound"] for row in report["scenario_families"])
+
+
 def test_bad_frequency_provenance_schema_is_rejected():
     with pytest.raises(EquipmentFrequencyBindingAuditError):
         audit_equipment_frequency_binding(
             _coverage(),
             frequency_provenance={"schema_version": "wrong", "generated_events": []},
+        )
+
+
+def test_non_object_provenance_event_is_rejected():
+    with pytest.raises(EquipmentFrequencyBindingAuditError, match="must be an object"):
+        audit_equipment_frequency_binding(
+            _coverage(),
+            frequency_provenance={
+                "schema_version": "prism.frequency_provenance.v1",
+                "generated_events": ["malformed"],
+            },
         )

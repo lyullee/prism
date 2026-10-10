@@ -81,10 +81,14 @@ def _events_from_provenance(
             raise EquipmentFrequencyBindingAuditError(
                 "frequency provenance generated_events must be an array"
             )
-        return [
-            row for row in raw
-            if isinstance(row, Mapping)
-        ], frequency_provenance.get("_record_path")
+        rows: list[Mapping[str, Any]] = []
+        for index, row in enumerate(raw):
+            if not isinstance(row, Mapping):
+                raise EquipmentFrequencyBindingAuditError(
+                    f"frequency provenance generated_events[{index}] must be an object"
+                )
+            rows.append(row)
+        return rows, frequency_provenance.get("_record_path")
     if frequency_events is None:
         return [], None
     if not isinstance(frequency_events, Sequence) or isinstance(frequency_events, (str, bytes)):
@@ -206,8 +210,14 @@ def audit_equipment_frequency_binding(
                 row_blockers.append(
                     f"scenario family {family} is not declared applicable to asset {asset_id}"
                 )
-            else:
-                family_event_ids.setdefault(family, []).append(event_id)
+        # A family is frequency-bound only when the complete event identity,
+        # resolved asset and declared family applicability all validate.  Do
+        # not leave a misleading family event ID behind for candidate assets,
+        # duplicate IDs, absent assets, or malformed provenance rows.
+        if not row_blockers:
+            for family in expected_families:
+                if family in family_by_name:
+                    family_event_ids.setdefault(family, []).append(event_id)
         if not row_blockers:
             valid_event_count += 1
         else:
