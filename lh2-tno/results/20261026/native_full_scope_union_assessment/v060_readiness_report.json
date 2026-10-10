@@ -624,11 +624,11 @@
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "858404a0b994e893c2aad6bce54325e11276f003ae447371c5574f6a7953d8ed"
+      "sha256": "ece5d9b3d2cdf8ba21b67e745470532ff97e0566e1948bc453a99a76e48fbaa6"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "b0d7f88af167f6f89e9909dc018e2afb287168e2ef76e29b16b0122ea055a014"
+      "sha256": "ba67c9e5ff3d3788e382a91ff5bb3e33ced44467a344f53f9606556413298583"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
