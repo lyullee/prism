@@ -3819,7 +3819,7 @@
   "generic_provider_evidence_sidecar_manifest_template_entry_count": 26,
   "generic_provider_evidence_sidecar_manifest_template_promotion_allowed": false,
   "ci_local_reproduction_record": "results/20261106/ci_local_reproduction.json",
-  "ci_local_reproduction_status": "PASS_LOCAL_REPRODUCTION; 903 passed, 1 skipped; wheel frequency catalogue and entry points verified; GitHub Actions run not claimed",
-  "ci_local_reproduction_wheel_sha256": "52caaabe0c0373f04cc0d46e60a2ae361bc3e503b4274a6ce186a7d234dafe0b",
+  "ci_local_reproduction_status": "PASS_LOCAL_REPRODUCTION; 904 passed, 1 skipped; wheel frequency catalogue and entry points verified; GitHub Actions run not claimed",
+  "ci_local_reproduction_wheel_sha256": "7127d44747ae6fc4f0d3b0fc0208242ef3e1400ddf4905a8f641948bb1804d2e",
   "ci_local_reproduction_github_actions_claim": false
 }

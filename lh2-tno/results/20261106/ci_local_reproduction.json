@@ -1,12 +1,12 @@
 {
   "schema_version": "prism.ci_local_reproduction.v1",
   "status": "PASS_LOCAL_REPRODUCTION",
-  "commit": "333515027d00d4f5f19abc43a707b05b6d44c16f",
+  "commit": "d368aea",
   "workflow": "/.github/workflows/tests.yml",
   "python_requirement": ">=3.12",
-  "portable_test_status": "903 passed, 1 skipped",
+  "portable_test_status": "904 passed, 1 skipped",
   "wheel_filename": "prism_risk-0.6.2-py3-none-any.whl",
-  "wheel_sha256": "52caaabe0c0373f04cc0d46e60a2ae361bc3e503b4274a6ce186a7d234dafe0b",
+  "wheel_sha256": "7127d44747ae6fc4f0d3b0fc0208242ef3e1400ddf4905a8f641948bb1804d2e",
   "wheel_contract_checks": {
     "frequency_catalogue_shipped": true,
     "tno_host_shipped": true,
@@ -15,5 +15,6 @@
   },
   "github_actions_claim": false,
   "facility_qra_claim": false,
-  "note": "Local reproduction of the repository workflow after the qualification-sidecar manifest support changes; it does not assert that a private GitHub Actions run completed."
+  "note": "Local reproduction of the repository workflow after the CI action hardening and qualification-sidecar manifest template changes; it does not assert that a private GitHub Actions run completed."
 }
+
