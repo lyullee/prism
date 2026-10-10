@@ -323,6 +323,7 @@ def build_observed_state_runtime_frames(
             "schema": "prism.equipment_process_state.v1",
             "state_adapter": "service_state_from_runtime_frame",
             "resolver_adapter": "request_from_observed_state_runtime_frame",
+            "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
             "runtime_clock": "caller_supplied_now_s",
             "provider_release_required_for_consequence": True,
             "frequency_assignment": "rejected_by_request_from_equipment_resolver",

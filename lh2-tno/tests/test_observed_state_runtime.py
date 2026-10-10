@@ -122,3 +122,33 @@ def test_runtime_frame_provider_resolver_seam_is_explicit():
     assert resolved.source_input is None
     assert resolved.resolved_release is not None
     assert "annual_frequency_per_year" not in seen["state"]
+
+
+def test_runtime_frame_monitor_executes_provider_release_and_deadline(tmp_path):
+    from lh2_tno.provider_release import (
+        build_consequence_request_from_provider_release,
+    )
+    from lh2_tno.service import ConsequenceService, RealtimeConsequenceMonitor
+    from test_consequence_service import Pipeline, request
+    from test_provider_release import _defaults, _release
+
+    report = build_observed_state_runtime_frames([_source()])
+    frame = report["frames"][0]
+    pipeline = Pipeline(tmp_path)
+    monitor = RealtimeConsequenceMonitor(
+        ConsequenceService(pipeline), period_s=1.0
+    )
+    template = request().model_copy(update={"component_id": "tank-01"})
+    provider_request = build_consequence_request_from_provider_release(
+        _release(), _defaults()
+    ).model_copy(update={"component_id": "tank-01"})
+    result = monitor.update_from_runtime_frame(
+        template,
+        frame,
+        now_s=101.0,
+        release_resolver=lambda _template, _state: provider_request,
+    )
+    assert result["telemetry_boundary"]["equipment_release_resolved"] is True
+    assert result["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
+    assert result["realtime"]["runtime_frame"] is True
+    assert result["realtime"]["deadline_status"] == "MET"

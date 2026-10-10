@@ -659,6 +659,8 @@ def build_ijhe_objective_coverage_audit(
         == "service_state_from_runtime_frame"
         and runtime_handoff_contract.get("resolver_adapter")
         == "request_from_observed_state_runtime_frame"
+        and runtime_handoff_contract.get("monitor_method")
+        == "RealtimeConsequenceMonitor.update_from_runtime_frame"
         and runtime_handoff_contract.get("runtime_clock")
         == "caller_supplied_now_s"
         and runtime_handoff_contract.get("provider_release_required_for_consequence") is True

@@ -307,25 +307,49 @@ class ConsequenceService:
             'realtime_fresh_physics_claim':False}
         return result
 
-    def update_from_telemetry(self,template,normalized,*,pressure_tag,temperature_tag,release_resolver=None):
-        if release_resolver is None:
-            request = request_from_telemetry(
-                template, normalized, pressure_tag=pressure_tag, temperature_tag=temperature_tag
-            )
-        else:
-            request = request_from_equipment_resolver(template, normalized, release_resolver)
+    def _update_from_request(self, request, normalized, *, equipment_release_resolved):
         result=self.evaluate(request)
         result['equipment_release_path'] = _realtime_release_path_ledger(request)
         result['telemetry_boundary']={k:normalized[k] for k in
             ('origin','independent_measurement_claim','data_age_s','frame_digest','mapping_digest')}
         result['telemetry_boundary']['data_age_at_output_s']=normalized['data_age_s']+result['service']['service_elapsed_ms']/1000
-        result['telemetry_boundary']['equipment_release_resolved'] = release_resolver is not None
+        result['telemetry_boundary']['equipment_release_resolved'] = equipment_release_resolved
         result['telemetry_boundary']['interpretation'] = (
             'equipment resolver supplied provider release; no inferred leak size or learned frequency'
-            if release_resolver is not None
+            if equipment_release_resolved
             else 'known leak geometry; sensor pressure/temperature update, no inferred leak size or learned frequency'
         )
         return result
+
+    def update_from_equipment_state(self, template, normalized, *, release_resolver):
+        """Evaluate a state-only input after an explicit provider resolution.
+
+        This is the runtime-frame entry point. The resolver remains the owner of
+        accident release geometry, duration, isolation, inventory depletion and
+        termination; the service only evaluates the returned request.
+        """
+        request = request_from_equipment_resolver(template, normalized, release_resolver)
+        return self._update_from_request(
+            request,
+            normalized,
+            equipment_release_resolved=True,
+        )
+
+    def update_from_telemetry(self,template,normalized,*,pressure_tag,temperature_tag,release_resolver=None):
+        if release_resolver is None:
+            request = request_from_telemetry(
+                template, normalized, pressure_tag=pressure_tag, temperature_tag=temperature_tag
+            )
+            return self._update_from_request(
+                request,
+                normalized,
+                equipment_release_resolved=False,
+            )
+        return self.update_from_equipment_state(
+            template,
+            normalized,
+            release_resolver=release_resolver,
+        )
 
 
 class RealtimeConsequenceMonitor:
@@ -395,6 +419,63 @@ class RealtimeConsequenceMonitor:
             "release_inference": False,
             "interpretation": (
                 "deadline ledger only; a missed deadline is not replaced with a stale result"
+            ),
+        }
+        return result
+
+    def update_from_runtime_frame(
+        self,
+        template,
+        runtime_frame: Mapping[str, object],
+        *,
+        now_s: float,
+        release_resolver,
+        mapping_digest: str | None = None,
+    ):
+        """Consume a state-only runtime frame through the provider seam.
+
+        The frame adapter verifies its digest and state-only policy, then this
+        monitor evaluates only the provider-owned resolved release. A missing
+        resolver or missing provider termination is rejected by the service
+        contract; no fallback leak or learned frequency is created.
+        """
+        from .observed_state_runtime import service_state_from_runtime_frame
+
+        normalized = service_state_from_runtime_frame(
+            runtime_frame,
+            now_s=now_s,
+            mapping_digest=mapping_digest,
+        )
+        result = self.service.update_from_equipment_state(
+            template,
+            normalized,
+            release_resolver=release_resolver,
+        )
+        source_time = float(runtime_frame["captured_at_s"])
+        stream_id = str(
+            runtime_frame.get("source_id")
+            or runtime_frame.get("component_id")
+            or "runtime-frame"
+        )
+        previous = self._last_source_time_by_stream.get(stream_id)
+        source_interval = None if previous is None else source_time - previous
+        self._last_source_time_by_stream[stream_id] = source_time
+        elapsed_s = result["service"]["service_elapsed_ms"] / 1000.0
+        result["realtime"] = {
+            "period_s": self.period_s,
+            "deadline_s": self.deadline_s,
+            "deadline_status": "MET" if elapsed_s <= self.deadline_s else "MISSED",
+            "deadline_met": elapsed_s <= self.deadline_s,
+            "service_elapsed_s": elapsed_s,
+            "source_interval_s": source_interval,
+            "fresh_physics_this_update": result["service"]["fresh_physics_this_update"],
+            "exact_cache_hit": result["service"]["exact_cache_hit"],
+            "frequency_learning": False,
+            "release_inference": False,
+            "runtime_frame": True,
+            "interpretation": (
+                "provider release resolved from a state-only runtime frame; "
+                "a missed deadline is not replaced with a stale result"
             ),
         }
         return result
