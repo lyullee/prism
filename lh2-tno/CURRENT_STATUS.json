@@ -3770,5 +3770,9 @@
   "ijhe_objective_coverage_audit_current_provider_evidence_requests_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 26 checks; core blockers 0; strict blockers 4; provider evidence catalog diagnostic PASS",
   "ijhe_objective_coverage_audit_current_provider_evidence_requests_check_count": 26,
   "ijhe_objective_coverage_audit_current_provider_evidence_requests_catalog_check": "diagnostic_generic_provider_evidence_requests",
-  "ijhe_objective_coverage_audit_current_provider_evidence_requests_catalog_status": "PASS; 26 provider packets and 26 evidence requests; closure audit packet count matches; promotion false"
+  "ijhe_objective_coverage_audit_current_provider_evidence_requests_catalog_status": "PASS; 26 provider packets and 26 evidence requests; closure audit packet count matches; promotion false",
+  "ci_local_reproduction_record": "results/20261106/ci_local_reproduction.json",
+  "ci_local_reproduction_status": "PASS_LOCAL_REPRODUCTION; 891 passed, 1 skipped; wheel frequency catalogue and entry points verified; GitHub Actions run not claimed",
+  "ci_local_reproduction_wheel_sha256": "8b3edd3bb82f22c85dfbfc3a4c73c88cffd3f30a89d01a61f755cd2f7b1c6621",
+  "ci_local_reproduction_github_actions_claim": false
 }
