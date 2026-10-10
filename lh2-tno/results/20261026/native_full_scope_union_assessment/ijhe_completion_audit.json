@@ -4020,16 +4020,28 @@
     },
     {
       "name": "equipment_model_binding_to_accident_release",
-      "status": "PASS",
+      "status": "BLOCKED",
       "evidence": {
         "model_binding_status": "STATE_ONLY_BOUND",
         "component_count": 8,
         "state_supported_component_count": 8,
         "accident_release_supported_component_count": 7,
         "diagnostic_release_adapter_component_count": 7,
-        "record": "results/20261024/native_equipment_model_binding_audit_v1.json"
+        "record": "results/20261024/native_equipment_model_binding_audit_v1.json",
+        "external_model_contract_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+        "external_model_contract_native_accident_export_component_count": 0,
+        "external_model_contract_native_accident_export_missing_components": [
+          "storage_tank",
+          "pipe",
+          "valve",
+          "vent_stack",
+          "pump",
+          "vaporizer",
+          "reliquefier"
+        ],
+        "external_model_contract_record": "results\\20261026\\native_full_scope_union_assessment\\external_lh2dt_model_contract_audit.json"
       },
-      "blocking_reason": null
+      "blocking_reason": "the external equipment model source does not expose a native accident-release export"
     },
     {
       "name": "actual_provider_release_packet",
@@ -4276,6 +4288,7 @@
   ],
   "blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
+    "the external equipment model source does not expose a native accident-release export",
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",

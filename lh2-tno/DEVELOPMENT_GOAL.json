@@ -1248,13 +1248,15 @@
   "risk_atom_chain_audit_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC; 44/44 cases and 176/176 risk atoms retain release termination, mass ledger, consequence stages and four ignition branches; 29 operator-limited cases remain diagnostic",
   "risk_atom_chain_audit_promotion": false,
   "current_union_ijhe_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 39 checks, 34 PASS, 5 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage, equipment-state-to-release, independent facility IR/F-N aggregate closure, equipment-level contribution/ranking closure, and literature-frequency uncertainty closure are PASS; diagnostic isolation union extension covers 39 events, 64 cases, and 256 risk atoms with provider-response state snapshots bound for 20/20 isolation cases; qualified packet and facility QRA remain withheld",
+  "current_union_external_equipment_model_contract_audit_record": "results/20261026/native_full_scope_union_assessment/external_lh2dt_model_contract_audit.json",
+  "current_union_external_equipment_model_contract_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING; 0/7 external lh2dt component classes expose export_accident_history(request); 7 PRISM diagnostic adapters verified; no qualified packet promotion",
+  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 39 checks, 33 PASS, 6 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage, equipment-state-to-release, independent facility IR/F-N aggregate closure, equipment-level contribution/ranking closure, and literature-frequency uncertainty closure are PASS; diagnostic isolation union extension covers 39 events, 64 cases, and 256 risk atoms with provider-response state snapshots bound for 20/20 isolation cases; qualified packet and facility QRA remain withheld",
   "current_union_facility_assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261026/native_full_scope_union_assessment/campaign_result.json",
-  "current_union_full_test_count": 766,
+  "current_union_full_test_count": 767,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
-  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 13 objective checks; 9 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 39-check completion audit",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 13 objective checks; 9 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 39-check completion audit with the external model contract gate",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261026/native_full_scope_union_assessment/facility_frequency_uncertainty_audit.json",
   "current_union_facility_frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC; 5 literature scenarios independently reproduce conditional IR/F-N and ranking outputs for 176 risk atoms with 0 mismatches; no frequency inference, credible interval, or fresh physics",
   "current_union_facility_component_contribution_audit_record": "results/20261026/native_full_scope_union_assessment/facility_component_contribution_audit.json",
@@ -2475,7 +2477,7 @@
   "current_union_provider_packet_input_audit_status": "NO_PROVIDER_PACKET_INPUT; 0 release/qualification pairs accepted; actual qualified provider packet coverage remains 0/44 cases",
   "current_union_observed_state_release_binding_audit_record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json",
   "current_union_observed_state_release_binding_audit_status": "NO_STATE_TO_RELEASE_BINDING; 3 observed components have state evidence but no reviewed facility/provider-event binding",
-  "current_union_full_test_status": "766 passed, 1 skipped; includes provider packet input audit, observed-state release binding audit, observed component class mapping audit, observed-state normal-model binding audit in IJHE completion evidence, field-confirmed asset mapping guard, consequence backend chain audit, provider packet collection manifest, isolation response chain audit, isolation union extension audit, isolation provider-packet manifest audit, status-consistency current-pointer audit and independent facility closure audits",
+  "current_union_full_test_status": "767 passed, 1 skipped; includes provider packet input audit, observed-state release binding audit, observed component class mapping audit, observed-state normal-model binding audit in IJHE completion evidence, field-confirmed asset mapping guard, consequence backend chain audit, provider packet collection manifest, isolation response chain audit, isolation union extension audit, isolation provider-packet manifest audit, status-consistency current-pointer audit and independent facility closure audits",
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
   "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
@@ -2520,3 +2522,6 @@
   "current_union_observed_state_model_binding_facility_component_identity_unresolved_count": 3,
   "current_union_observed_state_model_binding_qualified_provider_packet_count": 0
 }
+
+
+

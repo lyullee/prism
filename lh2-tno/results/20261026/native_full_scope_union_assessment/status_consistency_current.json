@@ -19,7 +19,7 @@
       "evidence": {
         "status": "INCOMPLETE_EVIDENCE",
         "check_count": 39,
-        "blocking_reason_count": 5
+        "blocking_reason_count": 6
       }
     },
     {
@@ -230,7 +230,7 @@
       "evidence": {
         "record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
         "check_count": 39,
-        "blocking_reason_count": 5
+        "blocking_reason_count": 6
       }
     },
     {
@@ -238,7 +238,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 766
+        "full_portable_test_count": 767
       }
     },
     {
@@ -261,7 +261,7 @@
       "evidence": {
         "record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
         "check_count": 39,
-        "blocking_reason_count": 5
+        "blocking_reason_count": 6
       }
     },
     {
@@ -269,7 +269,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 766
+        "full_portable_test_count": 767
       }
     },
     {

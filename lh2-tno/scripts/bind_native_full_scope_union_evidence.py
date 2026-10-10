@@ -98,6 +98,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     observed_state_model_binding_audit = _with_record(
         args.observed_state_model_binding_audit
     )
+    external_equipment_model_contract_audit = _with_record(
+        args.external_equipment_model_contract_audit
+    )
     scope_ledger_consistency = _with_record(args.scope_ledger_consistency)
     risk_atom_chain_audit = _with_record(args.risk_atom_chain_audit)
     equipment_state_release_audit = _with_record(args.equipment_state_release_audit)
@@ -145,6 +148,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         facility_frequency_uncertainty_audit=facility_frequency_uncertainty_audit,
         isolation_union_extension_verification=isolation_union_extension_verification,
         observed_state_model_binding_audit=observed_state_model_binding_audit,
+        external_equipment_model_contract_audit=external_equipment_model_contract_audit,
     )
 
     verification_path = output_dir / "verification.json"
@@ -536,6 +540,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional observed-state to facility-neutral normal-model binding audit.",
+    )
+    parser.add_argument(
+        "--external-equipment-model-contract-audit",
+        type=Path,
+        default=None,
+        help="Optional static audit of the external digital-twin accident-release contract.",
     )
     parser.add_argument(
         "--slabx-validation-evidence",

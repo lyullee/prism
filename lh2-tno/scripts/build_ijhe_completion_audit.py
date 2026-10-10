@@ -104,6 +104,11 @@ def main() -> int:
         help="optional observed-state to facility-neutral normal-model binding audit",
     )
     parser.add_argument(
+        "--external-equipment-model-contract-audit",
+        type=Path,
+        help="optional static audit of the external digital-twin accident-release contract",
+    )
+    parser.add_argument(
         "--facility-aggregate-closure-audit",
         type=Path,
         help="optional independent facility IR/F-N aggregate closure audit",
@@ -325,6 +330,15 @@ def main() -> int:
             observed_state_model_binding_audit["_record_path"] = str(
                 args.observed_state_model_binding_audit
             )
+        external_equipment_model_contract_audit = (
+            _object(args.external_equipment_model_contract_audit)
+            if args.external_equipment_model_contract_audit
+            else None
+        )
+        if external_equipment_model_contract_audit is not None:
+            external_equipment_model_contract_audit["_record_path"] = str(
+                args.external_equipment_model_contract_audit
+            )
         facility_aggregate_closure_audit = (
             _object(args.facility_aggregate_closure_audit)
             if args.facility_aggregate_closure_audit
@@ -413,6 +427,7 @@ def main() -> int:
             facility_frequency_uncertainty_audit,
             isolation_union_extension_verification,
             observed_state_model_binding_audit,
+            external_equipment_model_contract_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

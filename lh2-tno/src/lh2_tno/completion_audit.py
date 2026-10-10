@@ -89,6 +89,7 @@ def build_ijhe_completion_audit(
     facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     observed_state_model_binding_audit: Mapping[str, Any] | None = None,
+    external_equipment_model_contract_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2372,6 +2373,28 @@ def build_ijhe_completion_audit(
                     and current_status.get("equipment_model_binding_diagnostic_release_adapter_component_count")
                     >= current_status.get("equipment_model_binding_accident_release_supported_component_count")
                 )
+            )
+            and (
+                external_equipment_model_contract_audit is None
+                or (
+                    external_equipment_model_contract_audit.get("schema_version")
+                    == "prism.external_model_contract_audit.v1"
+                    and external_equipment_model_contract_audit.get("status")
+                    == "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND"
+                    and isinstance(
+                        external_equipment_model_contract_audit.get(
+                            "native_accident_export_component_count"
+                        ),
+                        int,
+                    )
+                    and external_equipment_model_contract_audit.get(
+                        "native_accident_export_component_count"
+                    )
+                    > 0
+                    and not external_equipment_model_contract_audit.get(
+                        "native_accident_export_missing_components"
+                    )
+                )
             ),
             {
                 "model_binding_status": current_status.get("equipment_model_binding_status"),
@@ -2386,8 +2409,32 @@ def build_ijhe_completion_audit(
                     "equipment_model_binding_diagnostic_release_adapter_component_count"
                 ),
                 "record": current_status.get("equipment_model_binding_record"),
+                **(
+                    {
+                        "external_model_contract_status": external_equipment_model_contract_audit.get(
+                            "status"
+                        ),
+                        "external_model_contract_native_accident_export_component_count": external_equipment_model_contract_audit.get(
+                            "native_accident_export_component_count"
+                        ),
+                        "external_model_contract_native_accident_export_missing_components": external_equipment_model_contract_audit.get(
+                            "native_accident_export_missing_components"
+                        ),
+                        "external_model_contract_record": external_equipment_model_contract_audit.get(
+                            "_record_path"
+                        ),
+                    }
+                    if external_equipment_model_contract_audit is not None
+                    else {}
+                ),
             },
-            "one or more equipment models lacks an accident-release interface and provider termination ledger",
+            (
+                "the external equipment model source does not expose a native accident-release export"
+                if external_equipment_model_contract_audit is not None
+                and external_equipment_model_contract_audit.get("status")
+                != "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND"
+                else "one or more equipment models lacks an accident-release interface and provider termination ledger"
+            ),
         ),
         _check(
             "actual_provider_release_packet",

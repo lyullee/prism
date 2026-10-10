@@ -143,10 +143,11 @@
   },
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
   "ijhe_audit_check_count": 39,
-  "ijhe_audit_pass_count": 34,
-  "ijhe_audit_blocked_count": 5,
+  "ijhe_audit_pass_count": 33,
+  "ijhe_audit_blocked_count": 6,
   "ijhe_audit_blocked_check_ids": [
     "facility_release_boundary",
+    "equipment_model_binding_to_accident_release",
     "actual_provider_release_packet",
     "declared_major_accident_scope",
     "facility_ir_fn_available",

@@ -1746,3 +1746,28 @@ def test_completion_audit_blocks_malformed_observed_state_model_binding():
     )
     assert check["status"] == "BLOCKED"
     assert check["evidence"]["model_binding"]["valid"] is False
+
+
+def test_completion_audit_blocks_external_normal_model_without_native_release_export():
+    report = build_ijhe_completion_audit(
+        _status(True),
+        _matrix(True),
+        _campaign_result(True),
+        external_equipment_model_contract_audit={
+            "schema_version": "prism.external_model_contract_audit.v1",
+            "status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+            "native_accident_export_component_count": 0,
+            "native_accident_export_missing_components": ["storage_tank"],
+            "_record_path": "external-model-contract.json",
+        },
+    )
+    check = next(
+        item
+        for item in report["checks"]
+        if item["name"] == "equipment_model_binding_to_accident_release"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["external_model_contract_status"] == (
+        "NATIVE_ACCIDENT_EXPORT_MISSING"
+    )
+    assert report["complete_facility_qra_claim"] is False
