@@ -1062,6 +1062,90 @@ def _realtime_component_risk_ranking(
     }
 
 
+def _strict_realtime_release_boundary_gate(
+    *,
+    batch_status: str,
+    component_ids: Sequence[str],
+    release_path_component_rows: Mapping[str, Mapping[str, object]],
+) -> dict[str, object]:
+    """Classify whether one realtime batch has a closed release boundary.
+
+    The gate is intentionally narrower than facility-QRA qualification.  It
+    checks only the evidence available in the live provider path: complete
+    component coverage, a non-synthetic termination basis, an explicit
+    isolation/depletion outcome, and a closed non-negative mass residual.  It
+    never treats a missing path as zero risk and never evaluates provider
+    qualification or independent physical validation.
+    """
+
+    blockers: list[str] = []
+    component_set = set(component_ids)
+    row_set = set(release_path_component_rows)
+    if batch_status != "ACCEPTED":
+        blockers.append("realtime component batch is not accepted")
+    missing = sorted(component_set - row_set)
+    if missing:
+        blockers.append(
+            "release path missing for component(s): " + ", ".join(missing)
+        )
+    extra = sorted(row_set - component_set)
+    if extra:
+        blockers.append(
+            "release path contains undeclared component(s): " + ", ".join(extra)
+        )
+
+    allowed_termination = {"reviewed_isolation_success", "inventory_depletion"}
+    allowed_isolation = {"ISOLATION_SUCCESS_DECLARED", "INVENTORY_TERMINATION"}
+    allowed_inventory = {"MASS_BALANCE_CLOSED", "INVENTORY_DEPLETED"}
+    for component_id in sorted(component_set):
+        row = release_path_component_rows.get(component_id)
+        if not isinstance(row, Mapping):
+            continue
+        if row.get("status") != "AVAILABLE_PROVIDER_RELEASE_PATH":
+            blockers.append(f"{component_id}: provider release path is not available")
+        basis = row.get("termination_basis")
+        if basis not in allowed_termination:
+            if basis == "synthetic_diagnostic_horizon":
+                blockers.append(f"{component_id}: synthetic diagnostic horizon remains")
+            elif basis is None:
+                blockers.append(f"{component_id}: termination basis is missing")
+            else:
+                blockers.append(f"{component_id}: termination basis={basis} is not closed")
+        isolation = row.get("isolation_status")
+        if isolation not in allowed_isolation:
+            blockers.append(f"{component_id}: isolation outcome is not reviewed/closed")
+        inventory = row.get("inventory_status")
+        if inventory not in allowed_inventory:
+            blockers.append(f"{component_id}: inventory status={inventory} is not closed")
+        residual = row.get("mass_residual_kg")
+        if (
+            isinstance(residual, bool)
+            or not isinstance(residual, (int, float))
+            or not math.isfinite(float(residual))
+            or float(residual) < -1.0e-8
+        ):
+            blockers.append(f"{component_id}: mass residual is missing or negative")
+        elif basis == "inventory_depletion" and abs(float(residual)) > 1.0e-8:
+            blockers.append(
+                f"{component_id}: inventory-depletion residual exceeds 1e-8 kg"
+            )
+
+    return {
+        "strict_release_boundary_ready": not blockers,
+        "blocking_reasons": list(dict.fromkeys(blockers)),
+        "component_count": len(component_ids),
+        "component_path_count": len(release_path_component_rows),
+        "provider_qualification_evaluated": False,
+        "independent_physical_validation_claim": False,
+        "facility_ir_fn_promotion": False,
+        "frequency_inference_performed": False,
+        "policy": (
+            "release-boundary completeness only; passing this gate does not qualify "
+            "the provider packet, validate SLABx/physics, or promote facility IR/F-N"
+        ),
+    }
+
+
 def _realtime_conditional_expected_death_fn(
     risk_rows: list[Mapping[str, object]],
     population: RealtimePopulationBinding | None,
@@ -1710,6 +1794,13 @@ class FacilityRealtimeConsequenceMonitor:
                     "inventory remains a component-level ledger"
                 ),
             }
+        release_path_accounting["strict_release_boundary"] = (
+            _strict_realtime_release_boundary_gate(
+                batch_status=batch_status,
+                component_ids=component_ids,
+                release_path_component_rows=release_path_component_rows,
+            )
+        )
         ignition_rows = {
             component_id: entry["ignition"]
             for component_id, entry in components.items()

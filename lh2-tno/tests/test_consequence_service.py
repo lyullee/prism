@@ -599,6 +599,46 @@ def test_facility_realtime_monitor_row_batch_connects_state_to_provider_release_
         'synthetic_diagnostic_horizon': 1
     }
     assert path_accounting['mass_aggregation_performed'] is False
+    gate = path_accounting['strict_release_boundary']
+    assert gate['strict_release_boundary_ready'] is False
+    assert any('synthetic diagnostic horizon' in reason for reason in gate['blocking_reasons'])
+    assert gate['provider_qualification_evaluated'] is False
+    assert gate['facility_ir_fn_promotion'] is False
+
+
+def test_facility_realtime_monitor_closes_release_boundary_only_with_reviewed_isolation(
+    tmp_path,
+):
+    base, frame = _facility_binding(tmp_path, 'storage-tank-01')
+    defaults = _defaults()
+    defaults['release_termination'] = {
+        'basis': 'reviewed_isolation_success',
+        'time_s': 0.2,
+        'provenance': 'reviewed provider isolation closeout',
+    }
+    provider_request = __import__(
+        'lh2_tno.provider_release', fromlist=['build_consequence_request_from_provider_release']
+    ).build_consequence_request_from_provider_release(_release(), defaults)
+    binding = FacilityRealtimeBinding(
+        component_id=base.component_id,
+        template=base.template,
+        monitor=base.monitor,
+        normalizer=base.normalizer,
+        pressure_tag=base.pressure_tag,
+        temperature_tag=base.temperature_tag,
+        release_resolver=lambda _template, _state: provider_request,
+    )
+    result = FacilityRealtimeConsequenceMonitor(
+        {'storage-tank-01': binding}
+    ).update_from_frames({'storage-tank-01': frame}, now_s=100.2)
+
+    gate = result['aggregate']['equipment_release_path_accounting']['strict_release_boundary']
+    assert gate['strict_release_boundary_ready'] is True
+    assert gate['blocking_reasons'] == []
+    # The live boundary gate is not a qualification or facility-QRA gate.
+    assert gate['provider_qualification_evaluated'] is False
+    assert gate['independent_physical_validation_claim'] is False
+    assert gate['facility_ir_fn_promotion'] is False
 
 
 def test_facility_realtime_monitor_rejects_partial_batch_without_stale_or_zero_fallback(tmp_path):
