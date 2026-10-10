@@ -70,3 +70,14 @@ def test_completion_audit_blocks_unsafe_isolation_union_extension() -> None:
     )
     assert check["status"] == "BLOCKED"
     assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_missing_isolation_collection_manifest() -> None:
+    extension = json.loads(EXTENSION.read_text(encoding="utf-8"))
+    broken = copy.deepcopy(extension)
+    broken["provider_packet_collection_manifest_status"] = "MISSING"
+    report = _audit(broken)
+    check = next(
+        row for row in report["checks"] if row["name"] == "diagnostic_isolation_union_extension"
+    )
+    assert check["status"] == "BLOCKED"
