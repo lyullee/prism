@@ -1252,7 +1252,7 @@
   "current_union_facility_assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261026/native_full_scope_union_assessment/campaign_result.json",
-  "current_union_full_test_count": 730,
+  "current_union_full_test_count": 731,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
   "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 13 objective checks; 9 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 38-check completion audit",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261026/native_full_scope_union_assessment/facility_frequency_uncertainty_audit.json",
