@@ -98,6 +98,11 @@ def main() -> int:
         type=Path,
         help="optional normalized observed equipment-state evidence ledger",
     )
+    parser.add_argument(
+        "--facility-aggregate-closure-audit",
+        type=Path,
+        help="optional independent facility IR/F-N aggregate closure audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -281,6 +286,15 @@ def main() -> int:
         )
         if observed_state_evidence is not None:
             observed_state_evidence["_record_path"] = str(args.observed_state_evidence)
+        facility_aggregate_closure_audit = (
+            _object(args.facility_aggregate_closure_audit)
+            if args.facility_aggregate_closure_audit
+            else None
+        )
+        if facility_aggregate_closure_audit is not None:
+            facility_aggregate_closure_audit["_record_path"] = str(
+                args.facility_aggregate_closure_audit
+            )
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -312,6 +326,7 @@ def main() -> int:
             state_snapshot_binding_audit,
             native_scope_packet_catalog_verification,
             observed_state_evidence,
+            facility_aggregate_closure_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

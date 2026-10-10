@@ -16,7 +16,7 @@
 원장: [`ijhe_objective_coverage_audit.json`](../results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)
 
 현재 최종 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 최신
-fail-closed IJHE 감사는 35개 검사 중 30개 PASS·5개 BLOCKED로 재생성되었다.
+fail-closed IJHE 감사는 36개 검사 중 31개 PASS·5개 BLOCKED로 재생성되었다.
 24/24 native packet과 상태 snapshot 결합은 구조적 diagnostic coverage로 PASS가
 되었지만, qualified provider packet은 0건이고 native catalog·SLABx-LH2 구성요소
 검사는 계속 diagnostic-only다.
@@ -80,3 +80,8 @@ python scripts/build_ijhe_objective_coverage_audit.py `
 ## 다음 개발 기준
 
 IJHE 논문에 수치 결과를 넣을 때는 먼저 이 장부에서 해당 행의 상태와 `evidence_paths`를 확인한다. 조건부 행은 계산 구조와 민감도 설명에 사용할 수 있고, BLOCKED 행은 한계와 후속 검증 항목으로 제시한다. 시설 전체 IR/F-N을 승격하려면 남아 있는 네 개의 엄격한 행을 실제 자료로 닫고, 기존 fail-closed completion audit도 함께 통과해야 한다. 특히 union에 추가된 모든 설비·사고 사건이 상태 snapshot과 provider result digest까지 일대일로 연결되어야 하며, 현재 34개 사건의 state gate는 이 기준을 통과했다. 남은 4개 strict gate는 독립 물리검증·qualified provider·엄격한 사고범위·시설 전체 QRA 승격이다.
+
+
+### 시설 집계 재현성 감사 (2026-10-30 갱신)
+
+조건부 시설 IR/F/N은 `facility_aggregate_closure_audit.json`에서 176개 risk atom으로 독립 재계산했다. IR와 F/N 모두 불일치 0건으로 닫혔지만, 이는 diagnostic ledger aggregation closure이며 qualified facility QRA를 의미하지 않는다.

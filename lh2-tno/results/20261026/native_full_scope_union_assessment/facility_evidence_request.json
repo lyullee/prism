@@ -52,6 +52,7 @@
     "accident family pump_hole: PARTIAL",
     "accident family liquid_two_phase: PARTIAL",
     "accident family inventory_depletion: PARTIAL",
+    "accident family inventory_over_600s: PARTIAL",
     "accident family two_sided_rupture: PARTIAL",
     "accident family vertical_handoff: PARTIAL"
   ],

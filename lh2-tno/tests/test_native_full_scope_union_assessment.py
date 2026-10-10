@@ -29,6 +29,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     scope_ledger_consistency = _load("scope_ledger_consistency_current.json")
     atom_chain = _load("risk_atom_chain_audit.json")
     equipment_chain = _load("equipment_state_release_audit.json")
+    aggregate_chain = _load("facility_aggregate_closure_audit.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -63,8 +64,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 35
-    assert verification["ijhe_audit_pass_count"] == 30
+    assert verification["ijhe_audit_check_count"] == 36
+    assert verification["ijhe_audit_pass_count"] == 31
     assert verification["ijhe_audit_blocked_count"] == 5
     assert verification["ijhe_audit_blocked_check_ids"] == [
         "facility_release_boundary",
@@ -109,6 +110,13 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["equipment_state_release_audit_complete_case_count"] == 44
     assert verification["equipment_state_release_audit_component_count"] == 9
     assert verification["equipment_state_release_audit_blocking_reason_count"] == 0
+    assert verification["facility_aggregate_closure_audit_status"] == (
+        "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
+    )
+    assert verification["facility_aggregate_closure_audit_risk_atom_count"] == 176
+    assert verification["facility_aggregate_closure_audit_ir_mismatch_count"] == 0
+    assert verification["facility_aggregate_closure_audit_fn_mismatch_count"] == 0
+    assert verification["facility_aggregate_closure_audit_blocking_reason_count"] == 0
 
     assert result["event_count"] == 34
     assert result["case_count"] == 44
@@ -185,8 +193,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 35
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 30
+    assert len(audit["checks"]) == 36
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 31
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 5
     release_boundary_check = next(
         check for check in audit["checks"]
@@ -229,6 +237,19 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert equipment_chain["complete_case_count"] == 44
     assert equipment_chain["component_count"] == 9
     assert equipment_chain["provider_termination_echo_gap_case_count"] == 0
+    aggregate_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "diagnostic_facility_ir_fn_aggregate_closure"
+    )
+    assert aggregate_check["status"] == "PASS"
+    assert aggregate_check["evidence"]["risk_atom_count"] == 176
+    assert aggregate_check["evidence"]["ir_mismatch_count"] == 0
+    assert aggregate_check["evidence"]["fn_mismatch_count"] == 0
+    assert aggregate_chain["status"] == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
+    assert aggregate_chain["risk_atom_count"] == 176
+    assert aggregate_chain["ir_mismatch_count"] == 0
+    assert aggregate_chain["fn_mismatch_count"] == 0
+    assert aggregate_chain["blocking_reasons"] == []
     assert release_boundary_check["evidence"]["schema"] == (
         "prism.facility_release_boundary_gate.v1"
     )

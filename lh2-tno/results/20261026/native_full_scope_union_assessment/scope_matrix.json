@@ -545,7 +545,7 @@
     "two_sided_rupture: PARTIAL",
     "vertical_handoff: PARTIAL"
   ],
-  "source_facility_ledger_digest": "4ad5ae3c1cdfe04bd8aea63ea6ea56ab1c464b1ca3b840a03dc45562f5c9eb0b",
+  "source_facility_ledger_digest": "c9ae1d466a0e93d59bd5c3e3dfc262a73f9fce5c935391afa3bce060dcc6766b",
   "source": "facility_ledger_event_and_case_metadata",
   "physical_validation_claim": false,
   "interpretation": "The final scope matrix is regenerated from the merged facility ledger. Source campaign matrices remain provenance views; overlapping family rows are not additive and the ledger's exact event/case identities are authoritative.",
@@ -553,7 +553,7 @@
     {
       "facility_id": null,
       "source": "prism.major_accident_scope.v1",
-      "digest": "16874619e5550ed388183b5fc33d94b344cdafd036e24a058e946ceb1ddc5f71"
+      "digest": "fbc61233dfd1e7eb50c6e6f380300a18bf8a50d9ef7efe7e169caec11f7f5214"
     },
     {
       "facility_id": "generic-lh2-near-receptor-diagnostic",
@@ -563,7 +563,7 @@
     {
       "facility_id": "generic-lh2-near-receptor-diagnostic",
       "source": "prism.major_accident_scope.v1",
-      "digest": "79f03d6bd5d1746a633b5de60edfed832b63f545bde266aa7726866588b3fae0"
+      "digest": "132daec6781e746e76ced66befb09f0672136b7aa4f42645fbc15e1c93659035"
     }
   ],
   "provider_worklist_alignment": {

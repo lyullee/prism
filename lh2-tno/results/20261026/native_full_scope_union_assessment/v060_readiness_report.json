@@ -153,6 +153,15 @@
       "blocking_reason_count": 0,
       "diagnostic_only": true,
       "facility_qra_claim": false
+    },
+    "facility_ir_fn_aggregate_closure": {
+      "status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+      "risk_atom_count": 176,
+      "ir_mismatch_count": 0,
+      "fn_mismatch_count": 0,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
     }
   },
   "equipment": {
@@ -621,6 +630,7 @@
       "accident family pump_hole: PARTIAL",
       "accident family liquid_two_phase: PARTIAL",
       "accident family inventory_depletion: PARTIAL",
+      "accident family inventory_over_600s: PARTIAL",
       "accident family two_sided_rupture: PARTIAL",
       "accident family vertical_handoff: PARTIAL"
     ],
@@ -681,7 +691,7 @@
       "status": "CONDITIONAL_PASS",
       "evidence": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
-        "results\\20261026\\native_full_scope_union_assessment\\state_snapshot_binding_audit.json"
+        "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json"
       ],
       "strict_gate_open": false
     },
@@ -689,8 +699,8 @@
       "id": "B_release_to_final_damage",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
       ],
       "strict_gate_open": false
     },
@@ -707,8 +717,8 @@
       "id": "D_literature_frequency_uncertainty",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
       ],
       "strict_gate_open": false
     },
@@ -716,8 +726,8 @@
       "id": "E_validation_and_processing_time",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
-        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment_next\\realtime_cache_benchmark.json",
+        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json"
       ],
       "strict_gate_open": false
     }
@@ -732,48 +742,52 @@
   "interpretation": "The v0.6.0 declared outdoor chain is numerically connected for conditional diagnostics. Operator-limited cases, missing qualified provider packets, restricted component validation, and strict facility-QRA gates remain visible and are not replaced by another scenario.",
   "source_artifacts": {
     "objective_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
-      "sha256": "5a95924fca05336db068e04e52616942b97595c07e4f35f97e0b473cfc9c709a"
+      "path": "results/20261026/native_full_scope_union_assessment_next/ijhe_objective_coverage_audit.json",
+      "sha256": "3be686791a4eb643be6cb48dc4269c1a2b9581dc359eb3046c17d1927bd9aa43"
     },
     "union_verification": {
-      "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "5e0381fa4613a445d80901b8de33e3e9f543af6bd8529e87f13ca428b228828f"
+      "path": "results/20261026/native_full_scope_union_assessment_next/verification.json",
+      "sha256": "30f513ab885f1a2593826961c8d33c5e08db419c63504c0ce5d72e5021ec027d"
     },
     "scope_matrix": {
-      "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "52a0b434c1ed3b4157af556efd9e102a57e6fd4f0304165f96bc0e920c4153f4"
+      "path": "results/20261026/native_full_scope_union_assessment_next/scope_matrix.json",
+      "sha256": "894e49804f591f99b82d6f0482c4ad2d3140e08da86aada64df37db32c6bb2a6"
     },
     "facility_assessment": {
-      "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-      "sha256": "226544d25f57154db073fe2008511060e37243e62a926385dd269276f877b223"
+      "path": "results/20261026/native_full_scope_union_assessment_next/facility_assessment.json",
+      "sha256": "fb80e34d0ed28d38483ec157095131d27b2bc2d8a6b92805653ec1421489e68e"
     },
     "completion_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "14a425bbed8636a61aa19991930d256d5d6ea01eafa9e2f3b8159d4146e40710"
+      "path": "results/20261026/native_full_scope_union_assessment_next/ijhe_completion_audit.json",
+      "sha256": "12cfbbff7038e2e051874573b6418eae247c73d28576067f26cfb033848ef959"
     },
     "validation_matrix": {
-      "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "33eefe2482e4700b674f9eea0aa74af1a921ca50fd92aaef7505079e83b92000"
+      "path": "results/20261026/native_full_scope_union_assessment_next/validation_evidence_matrix.json",
+      "sha256": "80c250fe07cd55e509137152e17d4b417876a376a53a2d501f19140ccd00dd56"
     },
     "realtime_benchmark": {
-      "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
+      "path": "results/20261026/native_full_scope_union_assessment_next/realtime_cache_benchmark.json",
       "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
     },
     "facility_evidence_request": {
-      "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
-      "sha256": "bad6654c29ab30a55f6b3f3c2771fadab056dd6218782429e3ee572882919f5d"
+      "path": "results/20261026/native_full_scope_union_assessment_next/facility_evidence_request.json",
+      "sha256": "583732525ea0b046635cb02be2d23eee1575ea7d086600f4d8e24302f570f5ec"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
       "sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3"
     },
     "risk_atom_chain_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json",
-      "sha256": "79a559637a71af5cc3692d4a16468d9ad4bb031a5b5ed2a9fa5a2b662007bd94"
+      "path": "results/20261026/native_full_scope_union_assessment_next/risk_atom_chain_audit.json",
+      "sha256": "9dfb1c13ccff35f929a7b9531cc62dabd05f23437d2559154940826110eade08"
     },
     "equipment_state_release_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
-      "sha256": "72a5af6acf5b4c0bdf90318a126e5d8681d8eb3e26c6025e8511bc11fab9afe3"
+      "path": "results/20261026/native_full_scope_union_assessment_next/equipment_state_release_audit.json",
+      "sha256": "c877100709c938e2ed1a6ac04e74d4674646047cce449fa069fa3c925deda184"
+    },
+    "facility_aggregate_closure_audit": {
+      "path": "results/20261026/native_full_scope_union_assessment_next/facility_aggregate_closure_audit.json",
+      "sha256": "2c512fd77e749169c79e8eea099950069dc19daada0fe0292d52cda4008088db"
     }
   },
   "invariant_validation": {

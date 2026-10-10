@@ -300,6 +300,7 @@ def build_v060_readiness_report(
     scenario_evidence_audit: Mapping[str, Any] | None = None,
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
     equipment_state_release_audit: Mapping[str, Any] | None = None,
+    facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -326,6 +327,11 @@ def build_v060_readiness_report(
     if equipment_state_release_audit is not None:
         equipment_chain = _mapping(
             equipment_state_release_audit, "equipment_state_release_audit"
+        )
+    aggregate_chain = None
+    if facility_aggregate_closure_audit is not None:
+        aggregate_chain = _mapping(
+            facility_aggregate_closure_audit, "facility_aggregate_closure_audit"
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -430,6 +436,21 @@ def build_v060_readiness_report(
                     "facility_qra_claim": equipment_chain.get("facility_qra_claim"),
                 }
                 if equipment_chain is not None
+                else None
+            ),
+            "facility_ir_fn_aggregate_closure": (
+                {
+                    "status": aggregate_chain.get("status"),
+                    "risk_atom_count": aggregate_chain.get("risk_atom_count"),
+                    "ir_mismatch_count": aggregate_chain.get("ir_mismatch_count"),
+                    "fn_mismatch_count": aggregate_chain.get("fn_mismatch_count"),
+                    "blocking_reason_count": len(aggregate_chain.get("blocking_reasons", ()))
+                    if isinstance(aggregate_chain.get("blocking_reasons"), Sequence)
+                    else None,
+                    "diagnostic_only": aggregate_chain.get("diagnostic_only"),
+                    "facility_qra_claim": aggregate_chain.get("facility_qra_claim"),
+                }
+                if aggregate_chain is not None
                 else None
             ),
         },
@@ -681,6 +702,37 @@ def validate_v060_readiness_report(
                 errors.append("equipment state release chain must remain diagnostic_only")
             if equipment_chain.get("facility_qra_claim") is True:
                 errors.append("equipment state release chain cannot claim facility QRA")
+
+    aggregate_chain = chain.get("facility_ir_fn_aggregate_closure")
+    if aggregate_chain is not None:
+        if not isinstance(aggregate_chain, Mapping):
+            errors.append("chain.facility_ir_fn_aggregate_closure must be an object")
+        else:
+            for field in (
+                "risk_atom_count",
+                "ir_mismatch_count",
+                "fn_mismatch_count",
+                "blocking_reason_count",
+            ):
+                if aggregate_chain.get(field) is not None:
+                    _nonnegative_int(
+                        aggregate_chain.get(field),
+                        f"chain.facility_ir_fn_aggregate_closure.{field}",
+                        errors,
+                    )
+            if aggregate_chain.get("status") == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC":
+                if aggregate_chain.get("risk_atom_count", 0) <= 0:
+                    errors.append("facility IR/F-N aggregate closure has no risk atoms")
+                if aggregate_chain.get("ir_mismatch_count") != 0:
+                    errors.append("facility IR/F-N aggregate closure has IR mismatches")
+                if aggregate_chain.get("fn_mismatch_count") != 0:
+                    errors.append("facility IR/F-N aggregate closure has F/N mismatches")
+                if aggregate_chain.get("blocking_reason_count") != 0:
+                    errors.append("facility IR/F-N aggregate closure has blocking reasons")
+            if aggregate_chain.get("diagnostic_only") is not True:
+                errors.append("facility IR/F-N aggregate closure must remain diagnostic_only")
+            if aggregate_chain.get("facility_qra_claim") is True:
+                errors.append("facility IR/F-N aggregate closure cannot claim facility QRA")
 
     release_boundary = chain.get("release_boundary")
     if release_boundary is not None:

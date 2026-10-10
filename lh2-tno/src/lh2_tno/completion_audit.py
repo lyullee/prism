@@ -84,6 +84,7 @@ def build_ijhe_completion_audit(
     state_snapshot_binding_audit: Mapping[str, Any] | None = None,
     native_scope_packet_catalog_verification: Mapping[str, Any] | None = None,
     observed_state_evidence: Mapping[str, Any] | None = None,
+    facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1757,6 +1758,55 @@ def build_ijhe_completion_audit(
                     "Each numerical facility case retains the equipment state, provider packet, "
                     "release termination and digest identity. Operator-limited cases remain "
                     "diagnostic and do not qualify provider evidence or facility QRA."
+                ),
+            }
+        )
+    if facility_aggregate_closure_audit is not None:
+        aggregate = facility_aggregate_closure_audit
+        aggregate_valid = (
+            aggregate.get("schema_version")
+            == "prism.facility_aggregate_closure_audit.v1"
+            and aggregate.get("status")
+            == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
+            and isinstance(aggregate.get("risk_atom_count"), int)
+            and aggregate.get("risk_atom_count", 0) > 0
+            and aggregate.get("ir_mismatch_count") == 0
+            and aggregate.get("fn_mismatch_count") == 0
+            and aggregate.get("blocking_reasons") == []
+            and aggregate.get("diagnostic_only") is True
+            and aggregate.get("qualified_provider_packet") is False
+            and aggregate.get("physical_validation_claim") is False
+            and aggregate.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_facility_ir_fn_aggregate_closure",
+                "status": "PASS" if aggregate_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if aggregate_valid
+                    else "stored facility IR/F-N does not match an independent risk-atom aggregation"
+                ),
+                "evidence": {
+                    "record": aggregate.get("_record_path"),
+                    "schema_version": aggregate.get("schema_version"),
+                    "status": aggregate.get("status"),
+                    "risk_atom_count": aggregate.get("risk_atom_count"),
+                    "ir_mismatch_count": aggregate.get("ir_mismatch_count"),
+                    "fn_mismatch_count": aggregate.get("fn_mismatch_count"),
+                    "blocking_reason_count": len(aggregate.get("blocking_reasons", []))
+                    if isinstance(aggregate.get("blocking_reasons"), list)
+                    else None,
+                    "facility_total_risk_available": aggregate.get(
+                        "facility_total_risk_available"
+                    ),
+                    "facility_qra_claim": aggregate.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The conditional facility IR and F/N values are independently reproduced "
+                    "from all saved risk atoms. This is a numerical aggregation check; it "
+                    "does not qualify provider evidence or open the facility-QRA gate."
                 ),
             }
         )

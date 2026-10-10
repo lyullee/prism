@@ -56,6 +56,9 @@ from lh2_tno.risk_atom_chain_audit import (  # noqa: E402
 from lh2_tno.equipment_state_release_audit import (  # noqa: E402
     build_equipment_state_release_audit,
 )
+from lh2_tno.facility_aggregate_closure_audit import (  # noqa: E402
+    build_facility_aggregate_closure_audit,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -502,6 +505,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     equipment_state_release_audit["_record_path"] = str(
         args.output_dir / "equipment_state_release_audit.json"
     )
+    facility_aggregate_closure_audit = build_facility_aggregate_closure_audit(
+        assessment_ledger
+    )
+    facility_aggregate_closure_audit["_record_path"] = str(
+        args.output_dir / "facility_aggregate_closure_audit.json"
+    )
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -654,6 +663,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "equipment_state_release_audit_blocking_reason_count": len(
             equipment_state_release_audit["blocking_reasons"]
         ),
+        "facility_aggregate_closure_audit_status": facility_aggregate_closure_audit[
+            "status"
+        ],
+        "facility_aggregate_closure_audit_risk_atom_count": facility_aggregate_closure_audit[
+            "risk_atom_count"
+        ],
+        "facility_aggregate_closure_audit_ir_mismatch_count": facility_aggregate_closure_audit[
+            "ir_mismatch_count"
+        ],
+        "facility_aggregate_closure_audit_fn_mismatch_count": facility_aggregate_closure_audit[
+            "fn_mismatch_count"
+        ],
+        "facility_aggregate_closure_audit_blocking_reason_count": len(
+            facility_aggregate_closure_audit["blocking_reasons"]
+        ),
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -679,6 +703,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "scope_ledger_consistency_current.json", scope_ledger_consistency)
     _save(output / "risk_atom_chain_audit.json", risk_atom_chain_audit)
     _save(output / "equipment_state_release_audit.json", equipment_state_release_audit)
+    _save(
+        output / "facility_aggregate_closure_audit.json",
+        facility_aggregate_closure_audit,
+    )
     _save(
         output / "frequency_scenarios.json",
         {

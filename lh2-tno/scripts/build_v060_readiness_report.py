@@ -64,6 +64,11 @@ def main() -> int:
         type=Path,
         help="Optional case-level equipment-state to release-packet identity audit.",
     )
+    parser.add_argument(
+        "--facility-aggregate-closure-audit",
+        type=Path,
+        help="Optional independent facility IR/F-N aggregate closure audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -95,6 +100,11 @@ def main() -> int:
                 if args.equipment_state_release_audit is not None
                 else None
             ),
+            facility_aggregate_closure_audit=(
+                _load(args.facility_aggregate_closure_audit)
+                if args.facility_aggregate_closure_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -122,6 +132,10 @@ def main() -> int:
     if args.equipment_state_release_audit is not None:
         report["source_artifacts"]["equipment_state_release_audit"] = _source_artifact(
             args.equipment_state_release_audit
+        )
+    if args.facility_aggregate_closure_audit is not None:
+        report["source_artifacts"]["facility_aggregate_closure_audit"] = _source_artifact(
+            args.facility_aggregate_closure_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

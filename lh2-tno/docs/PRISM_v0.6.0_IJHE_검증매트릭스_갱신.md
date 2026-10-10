@@ -171,7 +171,7 @@ python scripts/build_v060_readiness_report.py `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```
 
-현재 completion audit는 35개 검사 중 30개 PASS·5개 BLOCKED다. `risk_atom_chain_audit.json`은
+현재 completion audit는 36개 검사 중 31개 PASS·5개 BLOCKED다. `risk_atom_chain_audit.json`은
 44개 case·176개 risk atom의 구조적 방출→최종피해 연결을, `equipment_state_release_audit.json`은
 44개 case·9개 component의 설비 상태→방출 packet identity를 readiness report에 함께
 기록한다. 네이티브
@@ -179,3 +179,8 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 이는 합성 진단 packet의 exact-match일 뿐 qualified provider evidence가 아니다.
 따라서 실제 provider packet 0건, 엄격한 사고범위 차단, 시설 전체 IR/F-N 보류는
 그대로 readiness report에 남는다.
+
+
+### 시설 IR/F/N 독립 집계 감사 (2026-10-30 갱신)
+
+`facility_aggregate_closure_audit.json`은 저장된 176개 risk atom의 `개시빈도 × 조건부 가중치 × 수용점 피해`를 다시 합산하고, N≥1 기준 F/N 곡선을 다시 만든다. 공식 조건부 시설 값과 비교한 결과는 `FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC`, IR 불일치 0건, F/N 불일치 0건이다. 이 검사는 계산 집계의 재현성만 닫으며, qualified provider·독립 전체 물리검증·완전 사고범위·시설 QRA 승격을 열지 않는다.

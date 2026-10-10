@@ -248,7 +248,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
         "status": "PARTIAL_FACILITY_SCOPE",
         "conditional_diagnostic_facility_risk_available": true,
         "conditional_diagnostic_facility_annual_ir_low_high": {
@@ -3482,7 +3482,7 @@
             }
           },
           "required_accident_family_count": 12,
-          "scope_blocker_count": 23
+          "scope_blocker_count": 24
         },
         "facility_total_risk_available": false,
         "complete_facility_qra_claim": false
@@ -3495,7 +3495,7 @@
       "diagnostic_only": false,
       "blocking_reason": "facility release boundary is not closed across all declared cases",
       "evidence": {
-        "record": "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
         "schema": "prism.facility_release_boundary_gate.v1",
         "schema_version": "prism.facility_release_boundary_gate.v1",
         "strict_release_boundary_ready": false,
@@ -3692,7 +3692,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261026\\native_full_scope_union_assessment\\risk_atom_chain_audit.json",
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\risk_atom_chain_audit.json",
         "schema_version": "prism.risk_atom_chain_audit.v1",
         "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
         "case_count": 44,
@@ -3725,7 +3725,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261026\\native_full_scope_union_assessment\\equipment_state_release_audit.json",
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\equipment_state_release_audit.json",
         "schema_version": "prism.equipment_state_release_audit.v1",
         "status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
         "case_count": 44,
@@ -3748,6 +3748,24 @@
         "facility_qra_claim": false
       },
       "interpretation": "Each numerical facility case retains the equipment state, provider packet, release termination and digest identity. Operator-limited cases remain diagnostic and do not qualify provider evidence or facility QRA."
+    },
+    {
+      "name": "diagnostic_facility_ir_fn_aggregate_closure",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\facility_aggregate_closure_audit.json",
+        "schema_version": "prism.facility_aggregate_closure_audit.v1",
+        "status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+        "risk_atom_count": 176,
+        "ir_mismatch_count": 0,
+        "fn_mismatch_count": 0,
+        "blocking_reason_count": 0,
+        "facility_total_risk_available": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "The conditional facility IR and F/N values are independently reproduced from all saved risk atoms. This is a numerical aggregation check; it does not qualify provider evidence or open the facility-QRA gate."
     },
     {
       "name": "diagnostic_slabx_lh2_validation_evidence",
@@ -4102,7 +4120,7 @@
         "domain_count": 7,
         "blocking_reason_count": 0,
         "claims_closed": true,
-        "record": "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\validation_evidence_matrix.json"
       },
       "blocking_reason": null,
       "diagnostic_only": true,
@@ -4118,7 +4136,7 @@
         "scope_conditional_uncomputed_case_count": 0,
         "ledger_conditional_uncomputed_case_count": 0,
         "blocking_reason_count": 0,
-        "record": "results\\20261026\\native_full_scope_union_assessment\\scope_ledger_consistency_current.json"
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\scope_ledger_consistency_current.json"
       },
       "blocking_reason": null,
       "diagnostic_only": false,
@@ -4130,7 +4148,7 @@
       "diagnostic_only": false,
       "blocking_reason": "facility cases do not all have exact qualified provider packet evidence",
       "evidence": {
-        "record": "results\\20261026\\native_full_scope_union_assessment\\facility_case_packet_coverage.json",
+        "record": "results\\20261026\\native_full_scope_union_assessment_next\\facility_case_packet_coverage.json",
         "schema": "prism.facility_case_provider_coverage.v1",
         "status": "NO_CASE_MATCH",
         "case_request_count": 44,

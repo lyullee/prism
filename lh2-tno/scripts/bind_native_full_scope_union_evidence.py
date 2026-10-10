@@ -98,6 +98,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     scope_ledger_consistency = _with_record(args.scope_ledger_consistency)
     risk_atom_chain_audit = _with_record(args.risk_atom_chain_audit)
     equipment_state_release_audit = _with_record(args.equipment_state_release_audit)
+    facility_aggregate_closure_audit = _with_record(
+        args.facility_aggregate_closure_audit
+    )
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -125,6 +128,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         scope_ledger_consistency=scope_ledger_consistency,
         risk_atom_chain_audit=risk_atom_chain_audit,
         equipment_state_release_audit=equipment_state_release_audit,
+        facility_aggregate_closure_audit=facility_aggregate_closure_audit,
     )
 
     verification_path = output_dir / "verification.json"
@@ -289,6 +293,31 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 if equipment_state_release_audit
                 else verification.get("equipment_state_release_audit_blocking_reason_count")
             ),
+            "facility_aggregate_closure_audit_status": (
+                facility_aggregate_closure_audit.get("status")
+                if facility_aggregate_closure_audit
+                else verification.get("facility_aggregate_closure_audit_status")
+            ),
+            "facility_aggregate_closure_audit_risk_atom_count": (
+                facility_aggregate_closure_audit.get("risk_atom_count")
+                if facility_aggregate_closure_audit
+                else verification.get("facility_aggregate_closure_audit_risk_atom_count")
+            ),
+            "facility_aggregate_closure_audit_ir_mismatch_count": (
+                facility_aggregate_closure_audit.get("ir_mismatch_count")
+                if facility_aggregate_closure_audit
+                else verification.get("facility_aggregate_closure_audit_ir_mismatch_count")
+            ),
+            "facility_aggregate_closure_audit_fn_mismatch_count": (
+                facility_aggregate_closure_audit.get("fn_mismatch_count")
+                if facility_aggregate_closure_audit
+                else verification.get("facility_aggregate_closure_audit_fn_mismatch_count")
+            ),
+            "facility_aggregate_closure_audit_blocking_reason_count": (
+                len(facility_aggregate_closure_audit.get("blocking_reasons", []))
+                if facility_aggregate_closure_audit
+                else verification.get("facility_aggregate_closure_audit_blocking_reason_count")
+            ),
         }
     )
     _save(output_dir / "validation_evidence_matrix.json", matrix)
@@ -411,6 +440,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional case-level equipment-state to release-packet identity audit.",
+    )
+    parser.add_argument(
+        "--facility-aggregate-closure-audit",
+        type=Path,
+        default=None,
+        help="Optional independent facility IR/F-N aggregate closure audit.",
     )
     args = parser.parse_args()
     try:
