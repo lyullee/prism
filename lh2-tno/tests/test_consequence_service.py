@@ -101,6 +101,9 @@ def test_sensor_state_change_cannot_reuse_old_physics(tmp_path):
     service.evaluate(a)
     cached=service.evaluate(a)
     assert pipeline.calls==1 and cached['service']['exact_cache_hit']
+    assert cached['service']['mode_contract']['evaluation_mode'] == 'cached_diagnostic_1hz'
+    assert cached['service']['mode_contract']['fresh_physics_1hz_claim'] is False
+    assert cached['service']['mode_contract']['stale_fallback_used'] is False
     cached['data']['pressure']=-999.
     assert service.evaluate(a)['data']['pressure']==600000.
     normalized={'values':{'PT':{'quantity':'pressure','component_id':'storage','value_si':500000.},
@@ -109,6 +112,8 @@ def test_sensor_state_change_cannot_reuse_old_physics(tmp_path):
     fresh=service.evaluate(b)
     assert pipeline.calls==2 and fresh['data']['pressure']==500000.
     assert not fresh['service']['exact_cache_hit']
+    assert fresh['service']['mode_contract']['evaluation_mode'] == 'fresh_physics_background'
+    assert fresh['service']['mode_contract']['fresh_physics_1hz_claim'] is False
     service.evaluate(a)
     assert pipeline.calls==3  # cache capacity eviction
 
@@ -240,6 +245,8 @@ def test_realtime_monitor_records_deadline_and_keeps_frequency_inference_off(tmp
     assert result['realtime']['frequency_learning'] is False
     assert result['realtime']['release_inference'] is False
     assert result['service']['fresh_physics_this_update'] is True
+    assert result['realtime']['mode_contract']['reported_mode'] == 'fresh_physics_background'
+    assert result['realtime']['mode_contract']['stale_fallback_used'] is False
 
 
 def test_realtime_monitor_accepts_explicit_tabular_row_without_inference(tmp_path):
@@ -294,6 +301,9 @@ def test_realtime_monitor_reports_deadline_miss_without_stale_substitution(tmp_p
     assert result['realtime']['deadline_status'] == 'MISSED'
     assert result['realtime']['exact_cache_hit'] is False
     assert result['realtime']['interpretation'].startswith('deadline ledger only')
+    assert result['realtime']['mode_contract']['reported_mode'] == 'deadline_missed'
+    assert result['realtime']['mode_contract']['evaluation_mode'] == 'fresh_physics_background'
+    assert result['realtime']['mode_contract']['stale_fallback_used'] is False
 
 
 def _facility_binding(tmp_path, component_id, *, deadline_s=1.0, stream_id=None):
@@ -333,6 +343,10 @@ def test_facility_realtime_monitor_aggregates_component_provenance_and_deadlines
     assert result['accepted_component_count'] == 2
     assert result['aggregate']['deadline_status'] == 'MET'
     assert result['aggregate']['fresh_physics_count'] == 2
+    assert result['aggregate']['realtime_mode_contract']['evaluation_mode_counts'] == {
+        'fresh_physics_background': 2,
+    }
+    assert result['aggregate']['realtime_mode_contract']['stale_fallback_used'] is False
     assert result['aggregate']['facility_annual_risk_available'] is False
     assert result['aggregate']['current_weather_ir_available'] is False
     ranking = result['aggregate']['component_risk_ranking']

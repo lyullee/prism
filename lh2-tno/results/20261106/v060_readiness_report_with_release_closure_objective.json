@@ -650,9 +650,9 @@
     "sensor_frequency_learning": false
   },
   "timing": {
-    "cache_p95_ms": 61.27649999689311,
+    "cache_p95_ms": 24.54430004581809,
     "cache_meets_one_hz_all_samples": true,
-    "fresh_physics_elapsed_ms": 2711.2096999771893,
+    "fresh_physics_elapsed_ms": 2614.507299964316,
     "fresh_physics_meets_one_hz": false,
     "campaign_case_p95_ms": 39591.673405066846,
     "campaign_case_p99_ms": 79233.10563297477,
@@ -725,12 +725,12 @@
     "runtime_profile": {
       "recommended_mode": "cached_diagnostic_1hz",
       "cache_mode": {
-        "p95_ms": 61.27649999689311,
+        "p95_ms": 24.54430004581809,
         "one_hz_ready": true,
         "purpose": "reuse a validated consequence result for diagnostic monitoring"
       },
       "fresh_physics_mode": {
-        "elapsed_ms": 2711.2096999771893,
+        "elapsed_ms": 2614.507299964316,
         "one_hz_ready": false,
         "purpose": "recalculate SLABx-LH2 consequence from a new equipment state"
       },
@@ -928,7 +928,7 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-      "sha256": "5312256567c425e57255841383db4b13ffca39fa16e311c30f506fba66edbaf7"
+      "sha256": "e5d70f3351c295cf8d17c0ba78e590d9d915634ab17927506979cbb4c95462be"
     },
     "union_verification": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
@@ -952,7 +952,7 @@
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
-      "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
+      "sha256": "cca60462e02e555e461a564941b13976ca636729cee27f7df50fdfae415b7b2a"
     },
     "facility_evidence_request": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",

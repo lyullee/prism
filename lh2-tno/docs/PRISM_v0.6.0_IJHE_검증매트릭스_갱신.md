@@ -196,7 +196,14 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 
 일반 시설 모듈 자체의 계약도 같은 readiness 원장에 별도로 연결했다. [`v060_readiness_report_with_generic_equipment_model.json`](../results/20261105/v060_readiness_report_with_generic_equipment_model.json)은 합성 facility-neutral manifest의 7개 설비와 12개 사고 family를 기록하고, 문헌 빈도 24개 중 24개를 유효하게 설비에 바인딩한다. `vertical_handoff`는 provider handoff 자료가 없어 미계산이며, 사고 방출·빈도 추론·시설 QRA 승격은 계속 false다. 이 항목은 액화수소검사지원센터 자료의 identity 공백과 분리된 일반 모듈 검증이다.
 
-같은 원장의 `timing.runtime_profile`은 디지털 트윈에서 사용할 계산 경로를 세 가지로 구분한다. 저장된 피해 결과를 재사용하는 `cached_diagnostic_1hz`는 p95 61.28 ms로 1 Hz 진단 모니터링에 사용할 수 있다. 새 설비 상태로 SLABx-LH2를 다시 계산하는 fresh physics는 2711.21 ms로 1 Hz 조건을 만족하지 않는다. 전체 44-case campaign은 p95/p99 39591.67/79233.11 ms이므로 온라인 루프가 아니라 오프라인 평가와 빈도 민감도 분석에 사용한다. 이 프로파일은 처리시간을 기록할 뿐이며 시설 QRA의 실시간 승격을 주장하지 않는다.
+같은 원장의 `timing.runtime_profile`은 디지털 트윈에서 사용할 계산 경로를 세 가지로 구분한다. 최신 benchmark에서 저장된 피해 결과를 재사용하는 `cached_diagnostic_1hz`는 p95 24.54 ms로 1 Hz 진단 모니터링에 사용할 수 있다. 새 설비 상태로 SLABx-LH2를 다시 계산하는 fresh physics는 2614.51 ms로 1 Hz 조건을 만족하지 않는다. persistent worker의 변경입력 fresh physics도 steady p50/p95/p99가 1869/2104/2104 ms로 1 Hz를 만족하지 않는다. 전체 44-case campaign은 온라인 루프가 아니라 오프라인 평가와 빈도 민감도 분석에 사용한다. 이 프로파일은 처리시간을 기록할 뿐이며 시설 QRA의 실시간 승격을 주장하지 않는다.
+
+실행기 자체도 `prism.realtime_mode_contract.v1`을 반환한다. 동일 요청은
+`cached_diagnostic_1hz`, 변경 요청의 새 SLABx-LH2 계산은 `fresh_physics_background`,
+deadline 초과는 `deadline_missed`로 표시된다. 계약에는 `fresh_physics_1hz_claim=false`와
+`stale_fallback_used=false`가 포함되므로, 캐시가 빠르다는 이유로 새 물리계산 1 Hz나
+오래된 결과 대체를 주장할 수 없다. 시설 batch는 이 mode를 설비별로 집계하고, 누락·잘못된
+mode 계약은 별도 invalid component으로 남긴다.
 
 `chain.isolation_union_extension`에는 별도 차단 응답 진단도 연결했다. 기존 34-event·44-case 원장에 5개 isolation event와 20개 case를 이름공간으로 결합해, 차단 성공 10건과 실패 10건을 각각 보존한다. 20개 모두 설비 상태 snapshot이 연결되고 provider response가 소비됐지만, 이는 합성 barrier branch 진단이다. 차단 성공률을 현장 빈도로 바꾸지 않으며, qualified provider packet과 시설 QRA 승격은 계속 false다. 근거 파일은 [`isolation extension verification`](../results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json)이다.
 

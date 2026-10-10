@@ -20,13 +20,21 @@ PRISM의 디지털트윈 모니터는 같은 입력을 반복해서 받으면 ex
 
 | 경로 | 측정값 | 의미 |
 |---|---:|---|
-| cold fresh physics | 약 2,663 ms | 새 프로세스를 포함한 한 번의 새 계산 |
-| warm fresh physics 첫 요청 | 약 2,722 ms | worker 시작 시간이 포함된 첫 요청 |
-| warm fresh physics 후속 9건 | p50 1,864 ms / p95 2,043 ms / p99 2,043 ms | 매번 풍속을 바꾼 새 계산이며 cache hit가 아님 |
-| warm steady p50/p95/p99 | 1,864 / 2,043 / 2,043 ms | 세 분위수 모두 1 Hz 미충족 |
-| exact cache p95 | 약 61.3 ms | 동일 요청 반복 조회는 1 Hz 진단 기준 충족 |
+| cold fresh physics | 약 2,615 ms | 새 프로세스를 포함한 한 번의 새 계산 |
+| warm fresh physics 첫 요청 | 약 2,532 ms | worker 시작 시간이 포함된 첫 요청 |
+| warm fresh physics 후속 9건 | p50 1,869 ms / p95 2,104 ms / p99 2,104 ms | 매번 풍속을 바꾼 새 계산이며 cache hit가 아님 |
+| warm steady p50/p95/p99 | 1,869 / 2,104 / 2,104 ms | 세 분위수 모두 1 Hz 미충족 |
+| exact cache p95 | 약 24.5 ms | 동일 요청 반복 조회는 1 Hz 진단 기준 충족 |
 
 따라서 이번 개발의 결론은 **warm worker가 반복 interpreter 시작 비용을 없애고 상태가 바뀐 fresh 계산을 계속 실행할 수 있게 했지만, 현재 SLABx-LH2 계산은 fresh physics 1 Hz를 아직 충족하지 않는다**는 것이다. 1 Hz를 충족한다고 기록한 경로는 동일 요청 exact cache뿐이다.
+
+각 업데이트에는 `prism.realtime_mode_contract.v1` 원장이 함께 붙는다. `evaluation_mode`가
+`cached_diagnostic_1hz`이면 동일한 요청의 exact cache를 조회한 것이고, `fresh_physics_background`이면
+입력 변경으로 SLABx-LH2를 새로 실행한 것이다. 처리시간이 deadline을 넘은 경우에는
+`reported_mode="deadline_missed"`로 별도 표시한다. 이 원장은 `fresh_physics_1hz_claim=false`,
+`stale_fallback_used=false`, `frequency_learning=false`, `release_inference=false`를 고정해
+빠른 캐시 응답을 새 물리계산이나 센서 빈도학습으로 오해하지 않게 한다. 시설 batch에도
+설비별 mode 수와 잘못된 계약 행을 보존한다.
 
 ## 실행 방법
 

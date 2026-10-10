@@ -83,6 +83,17 @@ def benchmark(
         "fresh_physics_meets_one_hz": fresh["service"]["service_elapsed_ms"] / 1000 <= 1.0,
         "cache_meets_one_hz_all_samples": all(value / 1000 <= 1.0 for value in cache_ms),
         "realtime_fresh_physics_claim": False,
+        "mode_contract": {
+            "schema": "prism.realtime_mode_contract.v1",
+            "observed_evaluation_modes": [
+                fresh["service"]["mode_contract"]["evaluation_mode"],
+                cached[0]["service"]["mode_contract"]["evaluation_mode"],
+            ],
+            "fresh_physics_1hz_claim": False,
+            "stale_fallback_used": False,
+            "frequency_learning": False,
+            "release_inference": False,
+        },
         "interpretation": (
             "Exact cache samples meet a 1 Hz lookup deadline in this run; the fresh physics "
             "sample is measured separately and is not a 1 Hz service-level claim."
@@ -133,6 +144,14 @@ def benchmark(
                 value <= 1000.0 for value in (warm_ms[1:] or warm_ms)
             ),
             "realtime_fresh_physics_claim": False,
+            "mode_contract": {
+                "schema": "prism.realtime_mode_contract.v1",
+                "observed_evaluation_mode": "fresh_physics_background",
+                "fresh_physics_1hz_claim": False,
+                "stale_fallback_used": False,
+                "frequency_learning": False,
+                "release_inference": False,
+            },
             "interpretation": (
                 "A pinned worker session removes repeated interpreter startup and preserves "
                 "fresh physics on changed weather inputs. This diagnostic does not qualify "

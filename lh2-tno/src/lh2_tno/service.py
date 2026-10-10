@@ -275,6 +275,54 @@ def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, obje
     }
 
 
+def _realtime_mode_contract(
+    service_metadata: Mapping[str, object],
+    *,
+    deadline_met: bool | None = None,
+    runtime_frame: bool = False,
+) -> dict[str, object]:
+    """Return an explicit mode ledger for one realtime consequence update.
+
+    The enum is intentionally operational rather than optimistic: an exact
+    cache hit is a fast diagnostic lookup, while a changed request is a fresh
+    physics evaluation that belongs on a background/async path until its
+    measured timing proves otherwise.  A missed deadline is exposed as a
+    separate reported mode and never converted to a stale result.
+    """
+    cache_hit = service_metadata.get("exact_cache_hit") is True
+    fresh_physics = service_metadata.get("fresh_physics_this_update") is True
+    if cache_hit and fresh_physics:
+        raise ValueError("realtime mode contract cannot mark a cache hit as fresh physics")
+    if not cache_hit and not fresh_physics:
+        raise ValueError("realtime mode contract requires cache hit or fresh physics")
+    evaluation_mode = "cached_diagnostic_1hz" if cache_hit else "fresh_physics_background"
+    reported_mode = (
+        "deadline_missed"
+        if deadline_met is False
+        else evaluation_mode
+    )
+    return {
+        "schema": "prism.realtime_mode_contract.v1",
+        "evaluation_mode": evaluation_mode,
+        "reported_mode": reported_mode,
+        "runtime_frame": bool(runtime_frame),
+        "deadline_met": deadline_met,
+        "exact_cache_hit": cache_hit,
+        "fresh_physics_this_update": fresh_physics,
+        "fresh_physics_1hz_claim": False,
+        "stale_fallback_used": False,
+        "frequency_learning": False,
+        "release_inference": False,
+        "interpretation": (
+            "exact cache lookup is eligible for a 1 Hz diagnostic polling path; "
+            "changed-input fresh physics remains a separately measured background path"
+            if cache_hit
+            else "fresh SLABx-LH2 physics was executed for this changed input; "
+            "do not interpret this result as a fresh-physics 1 Hz guarantee"
+        ),
+    }
+
+
 class ConsequenceService:
     """Bounded exact-result cache; changed states invoke fresh physics.
 
@@ -310,6 +358,9 @@ class ConsequenceService:
                 else 'isolated_process'
             ),
             'realtime_fresh_physics_claim':False}
+        result['service']['mode_contract'] = _realtime_mode_contract(
+            result['service']
+        )
         return result
 
     def _update_from_request(self, request, normalized, *, equipment_release_resolved):
@@ -426,6 +477,10 @@ class RealtimeConsequenceMonitor:
                 "deadline ledger only; a missed deadline is not replaced with a stale result"
             ),
         }
+        result["realtime"]["mode_contract"] = _realtime_mode_contract(
+            result["service"],
+            deadline_met=result["realtime"]["deadline_met"],
+        )
         return result
 
     def update_from_runtime_frame(
@@ -483,6 +538,11 @@ class RealtimeConsequenceMonitor:
                 "a missed deadline is not replaced with a stale result"
             ),
         }
+        result["realtime"]["mode_contract"] = _realtime_mode_contract(
+            result["service"],
+            deadline_met=result["realtime"]["deadline_met"],
+            runtime_frame=True,
+        )
         return result
 
     def update_from_row(
@@ -1917,8 +1977,10 @@ class FacilityRealtimeConsequenceMonitor:
             bool(entry["result"]["service"]["exact_cache_hit"])
             for entry in accepted
         )
-        processing_time_rows: dict[str, dict[str, float | bool]] = {}
+        processing_time_rows: dict[str, dict[str, float | bool | str | None]] = {}
         processing_time_invalid_components: list[str] = []
+        realtime_mode_counts: dict[str, int] = {}
+        realtime_mode_contract_invalid_components: list[str] = []
         for component_id, entry in components.items():
             if entry.get("status") != "ACCEPTED":
                 continue
@@ -1949,7 +2011,22 @@ class FacilityRealtimeConsequenceMonitor:
                     service_metadata.get("fresh_physics_this_update")
                 ),
                 "exact_cache_hit": bool(service_metadata.get("exact_cache_hit")),
+                "evaluation_mode": (
+                    service_metadata.get("mode_contract", {}).get("evaluation_mode")
+                    if isinstance(service_metadata.get("mode_contract"), Mapping)
+                    else None
+                ),
             }
+            mode_contract = service_metadata.get("mode_contract")
+            mode = (
+                mode_contract.get("evaluation_mode")
+                if isinstance(mode_contract, Mapping)
+                else None
+            )
+            if mode not in {"cached_diagnostic_1hz", "fresh_physics_background"}:
+                realtime_mode_contract_invalid_components.append(component_id)
+            else:
+                realtime_mode_counts[mode] = realtime_mode_counts.get(mode, 0) + 1
         service_elapsed_values = [
             row["service_elapsed_ms"] for row in processing_time_rows.values()
         ]
@@ -1967,6 +2044,8 @@ class FacilityRealtimeConsequenceMonitor:
                 "total_physics_run_elapsed_ms": None,
                 "mean_physics_run_elapsed_ms": None,
                 "max_physics_run_elapsed_ms": None,
+                "realtime_mode_counts": {},
+                "realtime_mode_contract_invalid_components": realtime_mode_contract_invalid_components,
                 "measurement_policy": (
                     "one synchronous facility batch only; these timings do not establish "
                     "sustained throughput or a 1 Hz fresh-physics claim"
@@ -1988,6 +2067,8 @@ class FacilityRealtimeConsequenceMonitor:
                 "total_physics_run_elapsed_ms": sum(physics_elapsed_values),
                 "mean_physics_run_elapsed_ms": sum(physics_elapsed_values) / len(physics_elapsed_values),
                 "max_physics_run_elapsed_ms": max(physics_elapsed_values),
+                "realtime_mode_counts": realtime_mode_counts,
+                "realtime_mode_contract_invalid_components": realtime_mode_contract_invalid_components,
                 "measurement_policy": (
                     "one synchronous facility batch only; these timings do not establish "
                     "sustained throughput or a 1 Hz fresh-physics claim"
@@ -2257,6 +2338,15 @@ class FacilityRealtimeConsequenceMonitor:
                 "deadline_miss_count": deadline_misses,
                 "facility_time_window": facility_time_window,
                 "processing_time": processing_time,
+                "realtime_mode_contract": {
+                    "schema": "prism.realtime_mode_contract.v1",
+                    "evaluation_mode_counts": realtime_mode_counts,
+                    "invalid_component_ids": realtime_mode_contract_invalid_components,
+                    "fresh_physics_1hz_claim": False,
+                    "stale_fallback_used": False,
+                    "frequency_learning": False,
+                    "release_inference": False,
+                },
                 "max_source_time_span_s": self.max_source_time_span_s,
                 "provider_release_resolved_component_count": release_resolved_count,
                 "equipment_release_path_component_count": release_path_available_count,
