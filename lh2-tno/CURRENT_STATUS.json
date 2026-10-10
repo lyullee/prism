@@ -3720,5 +3720,18 @@
   "validation_evidence_matrix_current_slabx_sha256": "E5606619E7324E2F00A35CFBD7F49C7ADC592E165DD55F8DB1554BDEECD9DD81",
   "validation_evidence_matrix_current_slabx_status": "RESTRICTED_EVIDENCE_MATRIX; 9 domains; current SLABx audit re-bound; component evidence supported; full-chain physical validation and facility QRA withheld",
   "validation_evidence_matrix_current_slabx_physical_validation_claim": false,
-  "validation_evidence_matrix_current_slabx_facility_qra_claim": false
+  "validation_evidence_matrix_current_slabx_facility_qra_claim": false,
+  "v060_readiness_current_slabx_record": "results/20261106/v060_readiness_report_current_slabx.json",
+  "v060_readiness_current_slabx_sha256": "631C6B78FFBFE214AF6DA55960E794676C0CBF60BE5CA67EB50D5D7C7A0C563C",
+  "v060_readiness_current_slabx_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 34 events, 44 cases, 176 risk atoms; validation matrix rebased to current SLABx audit; strict blockers remain independent physical validation, qualified provider evidence, strict facility scope, strict facility QRA",
+  "v060_readiness_current_slabx_conditional_chain_complete": true,
+  "v060_readiness_current_slabx_strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "v060_readiness_current_slabx_qualified_provider_packet_case_count": 0,
+  "v060_readiness_current_slabx_physical_validation_claim": false,
+  "v060_readiness_current_slabx_facility_qra_claim": false
 }

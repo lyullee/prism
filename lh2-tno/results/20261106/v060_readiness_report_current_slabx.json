@@ -1,0 +1,1135 @@
+{
+  "schema_version": "prism.v060_ijhe_readiness_report.v1",
+  "release": "PRISM v0.6.0",
+  "objective_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN",
+  "completion_audit_status": "INCOMPLETE_EVIDENCE",
+  "conditional_chain_complete": true,
+  "strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "promotion": {
+    "facility_total_risk_available": false,
+    "complete_facility_qra_claim": false,
+    "qualified_provider_packet_case_count": 0,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false
+  },
+  "chain": {
+    "event_count": 34,
+    "case_count": 44,
+    "risk_atom_count": 176,
+    "conditional_case_count": 44,
+    "conditional_executed_case_count": 44,
+    "not_numerically_executed_case_count": 0,
+    "qualified_evidence_withheld_case_count": 29,
+    "annual_condition_count": 5,
+    "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
+    "conditional_ir_fn_available": true,
+    "release_boundary": {
+      "schema": "prism.release_termination_inventory_ledger.v1",
+      "facility_gate_schema": "prism.facility_release_boundary_gate.v1",
+      "status": "PARTIAL_RELEASE_BOUNDARY_COVERAGE",
+      "case_count": 44,
+      "provider_packet_consumed_case_count": 44,
+      "complete_row_count": 15,
+      "withheld_case_count": 29,
+      "uncomputed_case_count": 0,
+      "termination_basis_counts": {
+        "emergency_relief_discharge": 1,
+        "inventory_depletion": 16,
+        "inventory_over_600s": 1,
+        "synthetic_diagnostic_horizon": 24,
+        "two_sided_rupture": 2
+      },
+      "isolation_status_counts": {
+        "not_declared": 44
+      },
+      "inventory_status_counts": {
+        "not_inventory_termination": 27,
+        "provider_declared_inventory_depletion": 16,
+        "provider_declared_inventory_over_600s": 1
+      },
+      "synthetic_horizon_case_count": 24,
+      "strict_release_boundary_ready": false,
+      "blocking_reasons": [
+        "29 release case(s) are operator/domain limited",
+        "24 release case(s) end at a synthetic diagnostic horizon",
+        "44 release case(s) have no reviewed isolation status",
+        "29 case(s) are withheld from the release ledger",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
+      ],
+      "facility_gate_checks": {
+        "all_rows_complete": false,
+        "all_termination_bases_allowed": false,
+        "all_isolation_or_inventory_statuses_closed": true,
+        "all_mass_residuals_closed": false,
+        "no_withheld_cases": false
+      },
+      "promotion_policy": {
+        "duration_is_not_inferred": true,
+        "isolation_is_not_inferred": true,
+        "inventory_depletion_is_not_inferred": true,
+        "facility_ir_fn_promotion": "independent qualification and physical-validation gates remain required"
+      }
+    },
+    "release_closure_worklist": {
+      "schema": "prism.release_closure_worklist.v1",
+      "status": "OPEN_RELEASE_CLOSURE_WORKLIST",
+      "case_count": 44,
+      "open_case_count": 44,
+      "closure_status_counts": {
+        "INVENTORY_CLOSURE_OPEN": 15,
+        "ISOLATION_OPEN": 5,
+        "TERMINATION_OPEN": 24
+      },
+      "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 15,
+        "ISOLATION_OPEN": 44,
+        "PROVIDER_QUALIFICATION_OPEN": 44,
+        "TERMINATION_OPEN": 24
+      },
+      "termination_basis_counts": {
+        "emergency_relief_discharge": 1,
+        "inventory_depletion": 16,
+        "inventory_over_600s": 1,
+        "synthetic_diagnostic_horizon": 24,
+        "two_sided_rupture": 2
+      },
+      "isolation_status_counts": {
+        "not_declared": 44
+      },
+      "inventory_status_counts": {
+        "not_inventory_termination": 27,
+        "provider_declared_inventory_depletion": 16,
+        "provider_declared_inventory_over_600s": 1
+      },
+      "provider_packet_required_case_count": 44,
+      "mass_closure_open_case_count": 0,
+      "isolation_open_case_count": 44,
+      "termination_open_case_count": 24,
+      "inventory_closure_open_case_count": 15,
+      "release_boundary_promotion_allowed": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "physical_validation_claim": false,
+      "diagnostic_only": true
+    },
+    "frequency_port_binding": {
+      "schema": "prism.frequency_port_binding.v1",
+      "status": "PORT_BINDING_WITHHELD",
+      "port_scoped_event_count": null,
+      "port_unbound_event_count": null,
+      "all_events_port_scoped": null,
+      "case_port_binding_mismatch_count": null,
+      "risk_atom_port_binding_mismatch_count": null,
+      "mismatch_count": null,
+      "assessment_nested_mirror_match": null,
+      "source": "facility_evidence_request",
+      "diagnostic_only": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "port_binding_facility_qra_allowed": false,
+      "reviewed_frequency_port_case_count": 0,
+      "provider_packet_only_case_count": 44,
+      "port_binding_mismatch_case_count": 0,
+      "port_binding_withheld_case_count": 0,
+      "reviewed_frequency_ports_complete": false
+    },
+    "risk_atom_chain_closure": {
+      "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+      "case_count": 44,
+      "complete_case_count": 44,
+      "incomplete_case_count": 0,
+      "risk_atom_count": 176,
+      "operator_limited_case_count": 29,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
+    },
+    "equipment_state_release_chain": {
+      "status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+      "case_count": 44,
+      "complete_case_count": 44,
+      "incomplete_case_count": 0,
+      "component_count": 9,
+      "operator_limited_case_count": 29,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
+    },
+    "facility_ir_fn_aggregate_closure": {
+      "status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+      "risk_atom_count": 176,
+      "ir_mismatch_count": 0,
+      "fn_mismatch_count": 0,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
+    },
+    "facility_component_contribution_closure": {
+      "status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+      "risk_atom_count": 176,
+      "component_count": 9,
+      "mismatch_count": 0,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
+    },
+    "facility_frequency_uncertainty_closure": {
+      "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+      "scenario_count": 5,
+      "risk_atom_count": 176,
+      "mismatch_count": 0,
+      "blocking_reason_count": 0,
+      "frequency_inference_performed": false,
+      "facility_credible_interval": false,
+      "fresh_physics_executed": false,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
+    },
+    "external_equipment_model_readiness": {
+      "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "asset_count": 12,
+      "state_model_ready_asset_count": 2,
+      "physical_time_assigned_event_count": 0,
+      "pid_identity_evidence": {
+        "exact_asset_id_overlap_count": 9,
+        "source_backed_overlap_count": 9,
+        "unmatched_external_asset_count": 3,
+        "general_facility_identity_resolved": false
+      },
+      "pid_port_evidence": {
+        "confirmed_port_mapping_count": 14,
+        "candidate_port_mapping_count": 13,
+        "promotion_allowed": false
+      },
+      "component_binding_evidence": {
+        "enabled_edge_count": 0,
+        "unresolved_edge_count": 27,
+        "promotion_allowed": false
+      },
+      "accident_release_packet_allowed": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    "equipment_scenario_coverage": {
+      "status": "CROSSWALK_REQUIRED",
+      "asset_count": 12,
+      "mapped_asset_count": 0,
+      "resolved_asset_count": 0,
+      "scenario_family_count": 12,
+      "accident_release_packet_allowed": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "diagnostic_only": true
+    },
+    "equipment_frequency_binding": {
+      "status": "FREQUENCY_BINDING_WITHHELD",
+      "resolved_asset_count": 0,
+      "frequency_event_count": 0,
+      "valid_frequency_event_count": 0,
+      "uncomputed_family_count": 12,
+      "provider_release_required": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "diagnostic_only": true
+    },
+    "generic_equipment_scenario_coverage": {
+      "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+      "asset_count": 7,
+      "mapped_asset_count": 7,
+      "resolved_asset_count": 7,
+      "scenario_family_count": 12,
+      "accident_release_packet_allowed": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "diagnostic_only": true
+    },
+    "generic_equipment_frequency_binding": {
+      "status": "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+      "resolved_asset_count": 7,
+      "frequency_event_count": 24,
+      "valid_frequency_event_count": 24,
+      "uncomputed_family_count": 1,
+      "frequency_port_binding": {
+        "schema": "prism.frequency_port_binding.v1",
+        "reviewed_port_bound_event_count": 24,
+        "port_unbound_event_count": 0,
+        "port_binding_withheld_event_count": 0,
+        "all_supplied_port_scopes_valid": true,
+        "strict_facility_qra_gate": false
+      },
+      "provider_release_required": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "diagnostic_only": true
+    },
+    "generic_diagnostic_campaign_binding": {
+      "schema_version": "prism.diagnostic_campaign_binding.v1",
+      "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING",
+      "packet_event_count": 24,
+      "campaign_event_count": 24,
+      "campaign_case_count": 24,
+      "campaign_risk_atom_count": 96,
+      "structural_binding_complete": true,
+      "packet_identity_consumed": true,
+      "packet_digest_checked_event_count": 24,
+      "packet_digest_match_event_count": 24,
+      "packet_value_checked_event_count": 24,
+      "packet_value_consumed_event_count": 24,
+      "packet_subset_value_consumed": true,
+      "qualified_provider_packet_count": 0,
+      "facility_qra_claim": false,
+      "physical_validation_claim": false,
+      "frequency_from_provider_packet": false,
+      "packet_claims_preserved": true,
+      "diagnostic_only": true
+    },
+    "generic_release_to_final_damage_closure": {
+      "schema_version": "prism.facility_chain_closure_audit.v1",
+      "status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+      "campaign_event_count": 24,
+      "campaign_case_count": 24,
+      "campaign_risk_atom_count": 96,
+      "packet_event_count": 24,
+      "packet_chain_closed_event_count": 24,
+      "packet_chain_mismatch_event_count": 0,
+      "campaign_events_without_packet_count": 0,
+      "facility_ir_aggregate_closed": true,
+      "facility_fn_aggregate_closed": true,
+      "facility_total_risk_available": false,
+      "complete_facility_qra_claim": false,
+      "qualified_provider_packet_count": 0,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    "generic_provider_release_closure": {
+      "schema_version": "prism.generic_provider_release_closure_audit.v1",
+      "status": "CLOSURE_EVIDENCE_OPEN",
+      "event_count": 24,
+      "closure_ready_event_count": 9,
+      "closure_open_event_count": 15,
+      "packet_path_count": 24,
+      "provider_packet_count": 26,
+      "closure_ready_packet_path_count": 9,
+      "closure_ready_provider_packet_count": 11,
+      "closure_gap_counts": {
+        "termination basis is absent, synthetic, pressure-equalization, or fixed horizon": 15
+      },
+      "qualified_provider_packet_count": 0,
+      "frequency_from_provider_packet": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    "isolation_union_extension": {
+      "schema": "prism.isolation_union_extension_verification.v1",
+      "status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
+      "base_counts": {
+        "events": 34,
+        "cases": 44,
+        "risk_atoms": 176
+      },
+      "isolation_counts": {
+        "events": 5,
+        "cases": 20,
+        "risk_atoms": 80,
+        "success_cases": 10,
+        "failure_cases": 10,
+        "provider_response_consumed": true,
+        "state_snapshot_bound_cases": 20
+      },
+      "merged_counts": {
+        "events": 39,
+        "cases": 64,
+        "risk_atoms": 256
+      },
+      "risk_atom_chain_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
+      "equipment_state_release_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+      "facility_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+      "facility_component_contribution_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+      "provider_response_consumed": true,
+      "state_snapshot_bound_cases": 20,
+      "qualified_provider_packet_case_count": 0,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
+    }
+  },
+  "equipment": {
+    "component_rows": [
+      {
+        "component_id": "ambient-vaporizer-01",
+        "status": "EXECUTED",
+        "event_count": 3,
+        "conditional_case_count": 3,
+        "conditional_executed_case_count": 3,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 12,
+        "strict_gate_categories": []
+      },
+      {
+        "component_id": "inventory-depletion-pipe-01",
+        "status": "EXECUTED",
+        "event_count": 5,
+        "conditional_case_count": 10,
+        "conditional_executed_case_count": 10,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 40,
+        "strict_gate_categories": []
+      },
+      {
+        "component_id": "liquid-transfer-line-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "risk_atom_count": 20,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "liquid-transfer-pump-01",
+        "status": "PARTIAL",
+        "event_count": 2,
+        "conditional_case_count": 2,
+        "conditional_executed_case_count": 2,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "risk_atom_count": 8,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "pressure-relief-vent-01",
+        "status": "EXECUTED",
+        "event_count": 1,
+        "conditional_case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 4,
+        "strict_gate_categories": []
+      },
+      {
+        "component_id": "receiving-boundary-01",
+        "status": "EXCLUDED",
+        "event_count": 0,
+        "conditional_case_count": 0,
+        "conditional_executed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "risk_atom_count": 0,
+        "strict_gate_categories": [
+          "FAMILY_SCOPE_PARTIAL"
+        ]
+      },
+      {
+        "component_id": "reliquefier-01",
+        "status": "PARTIAL",
+        "event_count": 3,
+        "conditional_case_count": 3,
+        "conditional_executed_case_count": 3,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "risk_atom_count": 12,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "storage-tank-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "risk_atom_count": 20,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "transfer-valve-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "risk_atom_count": 20,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      },
+      {
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "status": "PARTIAL",
+        "event_count": 5,
+        "conditional_case_count": 10,
+        "conditional_executed_case_count": 10,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 10,
+        "risk_atom_count": 40,
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ]
+      }
+    ],
+    "observed_component_count": 9,
+    "expected_component_count": 10,
+    "component_status_counts": {
+      "EXCLUDED": 1,
+      "EXECUTED": 3,
+      "PARTIAL": 6
+    }
+  },
+  "accident_families": {
+    "required_family_count": 12,
+    "conditional_chain_complete": true,
+    "strict_matrix_complete": false,
+    "rows": [
+      {
+        "family": "vessel_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 5,
+        "case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "pipe_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 15,
+        "case_count": 25,
+        "conditional_executed_case_count": 25,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 15,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "valve_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 5,
+        "case_count": 5,
+        "conditional_executed_case_count": 5,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "vent_hole",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "pump_hole",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 2,
+        "case_count": 2,
+        "conditional_executed_case_count": 2,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "vaporizer_hole",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "reliquefier_hole",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "liquid_two_phase",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 17,
+        "case_count": 17,
+        "conditional_executed_case_count": 17,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 17,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "inventory_depletion",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 23,
+        "case_count": 28,
+        "conditional_executed_case_count": 28,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 17,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "inventory_over_600s",
+        "status": "EXECUTED",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 1,
+        "case_count": 1,
+        "conditional_executed_case_count": 1,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "two_sided_rupture",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 2,
+        "case_count": 2,
+        "conditional_executed_case_count": 2,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "uncomputed_reasons": []
+      },
+      {
+        "family": "vertical_handoff",
+        "status": "PARTIAL",
+        "conditional_status": "EXECUTED",
+        "generated_event_count": 5,
+        "case_count": 10,
+        "conditional_executed_case_count": 10,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 10,
+        "uncomputed_reasons": []
+      }
+    ]
+  },
+  "frequency": {
+    "scenario_count": null,
+    "correlation_comparison_present": true,
+    "asset_rank_stability": {
+      "scenario_count": 5,
+      "top_ids_by_endpoint": [
+        [
+          "storage-shell"
+        ],
+        [
+          "storage-shell"
+        ]
+      ],
+      "top_id_consistent_by_endpoint": [
+        true,
+        true
+      ],
+      "top_id_consistent": true,
+      "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
+    },
+    "scenario_family_rank_stability": {
+      "scenario_count": 5,
+      "top_ids_by_endpoint": [
+        [
+          "inventory_depletion"
+        ],
+        [
+          "inventory_depletion"
+        ]
+      ],
+      "top_id_consistent_by_endpoint": [
+        true,
+        true
+      ],
+      "top_id_consistent": true,
+      "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
+    },
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning": false
+  },
+  "timing": {
+    "cache_p95_ms": 24.54430004581809,
+    "cache_meets_one_hz_all_samples": true,
+    "fresh_physics_elapsed_ms": 2614.507299964316,
+    "fresh_physics_meets_one_hz": false,
+    "campaign_case_p95_ms": 39591.673405066846,
+    "campaign_case_p99_ms": 79233.10563297477,
+    "stage_elapsed_ms": {
+      "cloud_observation": {
+        "sample_count": 42,
+        "sum_ms": 51800.39160058368,
+        "median_ms": 88.30055000726134,
+        "max_ms": 33419.912299956195,
+        "p95_ms": 5236.842049995882,
+        "p99_ms": 22230.202262977735
+      },
+      "endpoint_a": {
+        "sample_count": 2,
+        "sum_ms": 6729.137400048785,
+        "median_ms": 3364.5687000243925,
+        "max_ms": 3403.35999999661,
+        "p95_ms": 3399.4808699993882,
+        "p99_ms": 3402.5841739971656
+      },
+      "endpoint_aggregation": {
+        "sample_count": 2,
+        "sum_ms": 13396.818499895744,
+        "median_ms": 6698.409249947872,
+        "max_ms": 6769.395099952817,
+        "p95_ms": 6762.2965149523225,
+        "p99_ms": 6767.975382952718
+      },
+      "endpoint_b": {
+        "sample_count": 2,
+        "sum_ms": 6664.751500007696,
+        "median_ms": 3332.375750003848,
+        "max_ms": 3364.3298000097275,
+        "p95_ms": 3361.1343950091396,
+        "p99_ms": 3363.69071900961
+      },
+      "fire_explosion_damage_risk": {
+        "sample_count": 42,
+        "sum_ms": 4328.152899746783,
+        "median_ms": 70.48459997167811,
+        "max_ms": 470.4016000032425,
+        "p95_ms": 221.25958008109586,
+        "p99_ms": 370.8415050036265
+      },
+      "near_field_and_dispersion": {
+        "sample_count": 42,
+        "sum_ms": 259555.64580019563,
+        "median_ms": 1401.7469500540756,
+        "max_ms": 72922.5574999582,
+        "p95_ms": 33327.8423400712,
+        "p99_ms": 60529.80418395356
+      },
+      "pool": {
+        "sample_count": 42,
+        "sum_ms": 3764.827199978754,
+        "median_ms": 0.005550042260438204,
+        "max_ms": 372.5228999974206,
+        "p95_ms": 354.45217002416024,
+        "p99_ms": 369.4380189909134
+      },
+      "source": {
+        "sample_count": 42,
+        "sum_ms": 30474.865600350313,
+        "median_ms": 716.459900024347,
+        "max_ms": 817.320599919185,
+        "p95_ms": 786.4394950389395,
+        "p99_ms": 808.7060489528812
+      }
+    },
+    "runtime_profile": {
+      "recommended_mode": "cached_diagnostic_1hz",
+      "cache_mode": {
+        "p95_ms": 24.54430004581809,
+        "one_hz_ready": true,
+        "purpose": "reuse a validated consequence result for diagnostic monitoring"
+      },
+      "fresh_physics_mode": {
+        "elapsed_ms": 2614.507299964316,
+        "one_hz_ready": false,
+        "purpose": "recalculate SLABx-LH2 consequence from a new equipment state"
+      },
+      "campaign_mode": {
+        "p95_ms": 39591.673405066846,
+        "p99_ms": 79233.10563297477,
+        "online_one_hz_ready": false,
+        "purpose": "offline multi-case risk and sensitivity assessment"
+      },
+      "facility_qra_realtime_claim": false,
+      "interpretation": "One-hertz service is a cache-mode diagnostic claim only; fresh physics and the full campaign remain slower measured paths and do not imply qualified facility QRA."
+    }
+  },
+  "validation_domains": [
+    {
+      "id": "dynamiclh2poolx_pool_spreading",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": null
+    },
+    {
+      "id": "equipment_observation",
+      "status": "RESTRICTED_OBSERVATION_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": null
+    },
+    {
+      "id": "native_external_model_contract",
+      "status": "DIAGNOSTIC_INTERFACE_ONLY",
+      "physical_validation_claim": false,
+      "facility_qra_claim": null
+    },
+    {
+      "id": "facility_conditional_diagnostic_chain",
+      "status": "CONDITIONAL_DIAGNOSTIC_ONLY",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_consequence_component",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "ijhe_scope_audit",
+      "status": "INCOMPLETE_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_lh2_sweep_screening",
+      "status": "SCREENING_CLOSURE_AND_TIMING_ONLY",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_outdoor_field_observation",
+      "status": "RESTRICTED_OBSERVATION_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    },
+    {
+      "id": "external_field_model_comparison",
+      "status": "RESTRICTED_COMPARISON_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
+    }
+  ],
+  "evidence_request": {
+    "status": "OPEN_EVIDENCE_REQUEST",
+    "provider_export_schema_required": "prism.external_accident_history.v1",
+    "case_request_count": 44,
+    "family_request_count": 12,
+    "component_request_count": 9,
+    "blocking_reasons": [
+      "campaign a1cd5179d5ad2979519650afc3783add56ea57bcfe2b345e810eea3bddcb8950: declared scope is incomplete",
+      "campaign a1cd5179d5ad2979519650afc3783add56ea57bcfe2b345e810eea3bddcb8950: uncomputed cases remain",
+      "campaign a1cd5179d5ad2979519650afc3783add56ea57bcfe2b345e810eea3bddcb8950: excluded components remain",
+      "campaign a1cd5179d5ad2979519650afc3783add56ea57bcfe2b345e810eea3bddcb8950: synthetic release horizon",
+      "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: declared scope is incomplete",
+      "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: uncomputed cases remain",
+      "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: synthetic release horizon",
+      "missing expected components: receiving-boundary-01",
+      "component liquid-transfer-line-01: PARTIAL",
+      "component liquid-transfer-pump-01: PARTIAL",
+      "component receiving-boundary-01: EXCLUDED",
+      "component reliquefier-01: PARTIAL",
+      "component storage-tank-01: PARTIAL",
+      "component transfer-valve-01: PARTIAL",
+      "component vertical-handoff-terminal-pipe-01: PARTIAL",
+      "accident family vessel_hole: PARTIAL",
+      "accident family pipe_hole: PARTIAL",
+      "accident family valve_hole: PARTIAL",
+      "accident family pump_hole: PARTIAL",
+      "accident family liquid_two_phase: PARTIAL",
+      "accident family inventory_depletion: PARTIAL",
+      "accident family two_sided_rupture: PARTIAL",
+      "accident family vertical_handoff: PARTIAL"
+    ],
+    "strict_gate_categories": [
+      "MISSING_PROVIDER_CASES",
+      "OPERATOR_LIMITED_INPUT"
+    ],
+    "facility_promotion_allowed_now": false
+  },
+  "scenario_evidence": {
+    "schema": "prism.inspection_center_screening_summary.v1",
+    "status": "SCREENING_EVIDENCE_IMPORTED",
+    "scenario_row_count": 52,
+    "candidate_accident_family_counts": {
+      "inventory_over_600s": 2,
+      "pipe_hole": 17,
+      "valve_hole": 30,
+      "vaporizer_hole": 4,
+      "vent_hole": 4,
+      "vertical_handoff": 2,
+      "vessel_hole": 2
+    },
+    "candidate_monitoring_signal_counts": {
+      "hydrogen_detection": 32,
+      "leak_test": 25,
+      "mass_flow": 41,
+      "pressure": 52,
+      "relief_state": 17,
+      "temperature": 10,
+      "vacuum_level": 3,
+      "valve_state": 43,
+      "vent_state": 2,
+      "ventilation_state": 7
+    },
+    "scope_status_counts": {
+      "CANDIDATE_OUTDOOR_SCREENING": 41,
+      "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
+    },
+    "csv_count": 3,
+    "workbook_count": null,
+    "telemetry_candidate_sheet_count": null,
+    "telemetry_metadata_incomplete_sheet_count": null,
+    "qualified_provider_packet_count": 0,
+    "frequency_assigned": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_claim": false,
+    "candidate_only": true,
+    "blocking_reasons": [
+      "Procedure and failure text identifies candidate scenarios only; it does not provide an initiating frequency.",
+      "Monitoring signal names are candidate tags and are not inverse leak-size or frequency estimators.",
+      "Each candidate still requires an equipment-owned accident history, termination ledger and provider packet.",
+      "Indoor, semi-enclosed and test-building rows are retained as evidence but marked outside the declared outdoor scope."
+    ]
+  },
+  "completion_criteria": [
+    {
+      "id": "A_equipment_state_and_release",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
+        "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "B_release_to_final_damage",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "C_facility_ir_fn_and_scope",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "scope_matrix.json",
+        "facility_assessment.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "D_literature_frequency_uncertainty",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
+      ],
+      "strict_gate_open": false
+    },
+    {
+      "id": "E_validation_and_processing_time",
+      "status": "CONDITIONAL_PASS",
+      "evidence": [
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
+      ],
+      "strict_gate_open": false
+    }
+  ],
+  "explicit_exclusions": [
+    "field_accident_frequency_collection",
+    "sensor_based_frequency_learning",
+    "indoor_release_and_confinement",
+    "detonation_or_DDT",
+    "full_domino_escalation"
+  ],
+  "interpretation": "The v0.6.0 declared outdoor chain is numerically connected for conditional diagnostics. Operator-limited cases, missing qualified provider packets, restricted component validation, and strict facility-QRA gates remain visible and are not replaced by another scenario.",
+  "source_artifacts": {
+    "objective_audit": {
+      "path": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
+      "sha256": "876e5b4036bdff43e4f46030e58d957da747d084b3bb39a64a20a278a0e49a53"
+    },
+    "union_verification": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
+      "sha256": "12bf14da4336205e8f1f1b419ce153257eda7966691c122e4d47b1f2fe624e99"
+    },
+    "scope_matrix": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/scope_matrix.json",
+      "sha256": "bd75ddb57e2278d20eaa5d4e17179f2901243d3b0c92fa2f774b3975e183f2e5"
+    },
+    "facility_assessment": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
+      "sha256": "ff4a8bd999a1c13c77d8366fa06cb75ed8f9bc19237aa2d47813aa04fa37aa8a"
+    },
+    "completion_audit": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json",
+      "sha256": "25e5983d0895153c263038e9f6bb08ee871f6b40264e102e3f4f38a0bfac3bee"
+    },
+    "validation_matrix": {
+      "path": "results/20261106/validation_evidence_matrix_current_slabx.json",
+      "sha256": "e5606619e7324e2f00a35cfbd7f49c7adc592e165dd55f8db1554bdeecd9dd81"
+    },
+    "realtime_benchmark": {
+      "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
+      "sha256": "cca60462e02e555e461a564941b13976ca636729cee27f7df50fdfae415b7b2a"
+    },
+    "facility_evidence_request": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",
+      "sha256": "e05ef4df546f64c89ba1146e57229c6a7a489061ddd336ca09b9e11c946fc992"
+    },
+    "scenario_evidence_audit": {
+      "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
+      "sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3"
+    },
+    "risk_atom_chain_audit": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json",
+      "sha256": "bebc5b4ad8c25e1aa160c3310ff04c4cd7436e6dcd6bb829f423bc233fc87eef"
+    },
+    "equipment_state_release_audit": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json",
+      "sha256": "72a5cd80dcf0db7a44639af09b318b0308b9bdac1b8b0d7fe5a989c4da8717c3"
+    },
+    "facility_aggregate_closure_audit": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_aggregate_closure_audit.json",
+      "sha256": "ff9ba4ab81e18dda4ce1a85457138663aeb1c79c718ad649ff2e7b83b7cbb136"
+    },
+    "facility_component_contribution_audit": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_component_contribution_audit.json",
+      "sha256": "06d1c4769923194a75c0d2cfc7deb25ef34c88e3eb7d6096694f9d28d1aa7a2c"
+    },
+    "facility_frequency_uncertainty_audit": {
+      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_frequency_uncertainty_audit.json",
+      "sha256": "91d81d6a03f17433fa0d3a7dd616de912d9b1755ea489726dc1c22b66b7750de"
+    },
+    "external_equipment_model_audit": {
+      "path": "results/20261104/external_equipment_model_audit_current.json",
+      "sha256": "91aa517bfd944b15ec61ac447fc715d4a98730d2f9b6c6f5e8d812e3f8f9b5b2"
+    },
+    "equipment_scenario_coverage_audit": {
+      "path": "results/20261104/equipment_scenario_coverage_audit_current.json",
+      "sha256": "94b4764770b56a836ca3f9c51b031667746625e73234abd4422716ba82be2ac1"
+    },
+    "equipment_frequency_binding_audit": {
+      "path": "results/20261104/equipment_frequency_binding_audit_current.json",
+      "sha256": "40140db5e8579f511d93a7acdfcf70cdc2f07579e68a719fa53c198df1c7076d"
+    },
+    "generic_equipment_scenario_coverage_audit": {
+      "path": "results/20261105/generic_lh2_full_scope_equipment_scenario_coverage.json",
+      "sha256": "7e69f1a5630a1ca0ce4ce2253dd024af4122dd7ccdd096d9b9bf7e09daf259a5"
+    },
+    "generic_equipment_frequency_binding_audit": {
+      "path": "results/20261105/generic_lh2_full_scope_equipment_frequency_binding.json",
+      "sha256": "87d4a85cd4c303bc0bf98df36c9f28100397952055fd7b774e011288c616e478"
+    },
+    "generic_diagnostic_campaign_binding": {
+      "path": "results/20261106/generic_lh2_diagnostic_campaign_binding_current.json",
+      "sha256": "f09a83f2aa361c8511df50925ba3ddbe77ce2004d41995590406cce03118968e"
+    },
+    "generic_chain_closure_audit": {
+      "path": "results/20261106/generic_lh2_chain_closure_current.json",
+      "sha256": "15a7e91d1bf25b7bdff6a058a81d8fddee71ffb74a82ee704b1bb761034bec2d"
+    },
+    "generic_provider_closure_audit": {
+      "path": "results/20261106/generic_lh2_provider_release_closure_current.json",
+      "sha256": "afb631d1c8a15c7fc27638aa03f25b4fb971f594022bc5a1db00de2587de0513"
+    },
+    "isolation_union_extension_verification": {
+      "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",
+      "sha256": "a49e4169ee779cf1823b03461bdf6539c5f02ebfd240da65631fa57d4cad7079"
+    },
+    "release_closure_worklist": {
+      "path": "results/20261106/release_closure_worklist.json",
+      "sha256": "fdc9d60ac7c83ac9d76e28d63259ed2b4aa3b0b4b1c3b4cd571a120a7ae22b2c"
+    }
+  },
+  "invariant_validation": {
+    "schema_version": "prism.v060_ijhe_readiness_report.v1",
+    "status": "VALID",
+    "strict_blocking_check_count": 4,
+    "component_row_count": 10,
+    "accident_family_row_count": 12,
+    "invariant_count": 13
+  }
+}
