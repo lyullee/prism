@@ -1070,6 +1070,12 @@
       "status": "RESTRICTED_COMPONENT_EVIDENCE",
       "physical_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_source_validation_gate",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "evidence_request": {
@@ -1322,7 +1328,7 @@
     },
     "validation_matrix": {
       "path": "results/20261106/validation_evidence_matrix_current_slabx.json",
-      "sha256": "5ab6ca0657f6ed71ff4a9e3e32c39763766bc447cbb669667862e68cfefe0a62"
+      "sha256": "d2419d563eefaf32f608e504e5d2797676635e7dee2ff06ebe59652f708f6b33"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",

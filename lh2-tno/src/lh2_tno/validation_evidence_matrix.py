@@ -434,6 +434,52 @@ def _preslhy_slabx_window_domain(
     }
 
 
+def _slabx_source_validation_gate_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Record source-term gate evidence without calling it full-chain validation."""
+
+    if payload.get("status") != "RESTRICTED_SOURCE_VALIDATION_GATES":
+        blockers.append("SLABx-LH2 source validation gate audit is not restricted status")
+    for field in (
+        "physical_validation_claim",
+        "independent_physical_validation_claim",
+        "full_chain_validation_claim",
+        "frequency_inference_performed",
+        "facility_qra_claim",
+    ):
+        _require_false(payload, field, "SLABx-LH2 source validation gates", blockers)
+    promotion = payload.get("promotion_gates") if isinstance(payload.get("promotion_gates"), Mapping) else {}
+    if promotion.get("full_chain_physical_validation_allowed") is not False:
+        blockers.append("SLABx-LH2 source validation gates must keep full-chain validation closed")
+    closure = payload.get("casewise_numerical_closure") if isinstance(payload.get("casewise_numerical_closure"), Mapping) else {}
+    return {
+        "id": "slabx_lh2_source_validation_gate",
+        "status": "RESTRICTED_COMPONENT_EVIDENCE",
+        "supports": [
+            "source-term HEM/HNEM, mass-flow envelope and numerical closure bookkeeping",
+            "explicit separation of published, reproduced and non-transferable operators",
+        ],
+        "does_not_support": [
+            "independent full-chain physical validation",
+            "equipment release, isolation or inventory-depletion validation",
+            "initiating frequency, ignition, IR/F-N or facility-QRA validation",
+        ],
+        "gate_count": payload.get("gate_count"),
+        "status_counts": payload.get("status_counts"),
+        "independent_quantitative_gate_count": payload.get("independent_quantitative_gate_count"),
+        "casewise_row_count": closure.get("row_count"),
+        "casewise_mass_closed_row_count": closure.get("mass_closed_row_count"),
+        "casewise_energy_closed_row_count": closure.get("energy_closed_row_count"),
+        "source": _source(path, "SLABx-LH2 source validation gate audit", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     if payload.get("status") == "COMPLETE_EVIDENCE":
         blockers.append("IJHE audit reports complete evidence; promotion must be reviewed instead of inferred")
@@ -464,6 +510,7 @@ def build_validation_evidence_matrix(
     external_field_path: str | Path | None = None,
     external_field_comparison_path: str | Path | None = None,
     preslhy_slabx_window_path: str | Path | None = None,
+    slabx_source_validation_gate_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -500,6 +547,11 @@ def build_validation_evidence_matrix(
             preslhy_slabx_window_path, "PRESLHY-SLABx window comparison"
         )
         domains.append(_preslhy_slabx_window_domain(window_path, window, blockers))
+    if slabx_source_validation_gate_path is not None:
+        gate_path, gate = _read_object(
+            slabx_source_validation_gate_path, "SLABx-LH2 source validation gate audit"
+        )
+        domains.append(_slabx_source_validation_gate_domain(gate_path, gate, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
@@ -544,6 +596,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("PRESLHY-SLABx window evidence" in item for item in unique_blockers),
             "basis": "preslhy_slabx_window_comparison",
+        },
+        {
+            "claim": "restricted_slabx_lh2_source_validation_gate_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("SLABx-LH2 source validation gates" in item for item in unique_blockers),
+            "basis": "slabx_lh2_source_validation_gate",
         },
         {
             "claim": "independent_full_chain_physical_validation",

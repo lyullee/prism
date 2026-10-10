@@ -1,0 +1,116 @@
+{
+  "schema_version": "prism.slabx_lh2_source_validation_gate_audit.v1",
+  "status": "RESTRICTED_SOURCE_VALIDATION_GATES",
+  "scope": "SLABx-LH2 source-term gate ledger; component evidence only",
+  "gate_count": 6,
+  "status_counts": {
+    "automated": 1,
+    "casewise_observation_gate_not_source_fit": 1,
+    "implemented_existing_provenance_fixture": 1,
+    "published_validation_envelope_only": 1,
+    "restricted_comparison_operator_not_transferable_to_air_rainout": 1,
+    "retained_separate_source_reproduction": 1
+  },
+  "independent_quantitative_gate_count": 0,
+  "restricted_gate_count": 6,
+  "gates": [
+    {
+      "gate": "A_NASA_Alexandros_HEM_HNEM",
+      "operator": "critical mass flux / throat state",
+      "status": "implemented_existing_provenance_fixture",
+      "result": "NASA and HSE no-line HEM fixtures retained; integrated no-line 6 bara/12.7 mm result is recorded",
+      "source": "Alexandros2018 pp. 3-5; PRESLHY D6.5 pp. 33-36; validation/nasa_tp1484_hydrogen_benchmark.csv",
+      "independent_quantitative_validation": false
+    },
+    {
+      "gate": "B_PRESLHY_D65_Table12",
+      "operator": "HSE long-line mass-flow relative error",
+      "status": "published_validation_envelope_only",
+      "result": "Table 12 values transcribed; unpublished section K, roughness, wall state and time histories prevent an independent point prediction",
+      "source": "PRESLHY D6.5 p. 34, Table 12",
+      "independent_quantitative_validation": false
+    },
+    {
+      "gate": "C_Rescigno_Table3",
+      "operator": "phi / d_d,f / qL",
+      "status": "retained_separate_source_reproduction",
+      "result": "printed Eq. (2) and Table-inferred paths remain explicitly separated",
+      "source": "validation/rescigno_2025_reproduction.md",
+      "independent_quantitative_validation": false
+    },
+    {
+      "gate": "D_Nakamichi_helium",
+      "operator": "Fig.5 flow, Fig.6 image-liquid-volume-vs-distance, Fig.7 1-percent recognition distance",
+      "status": "restricted_comparison_operator_not_transferable_to_air_rainout",
+      "result": "digitised comparison rows are retained in nakamichi_2008_figure_benchmark.csv; this air/ground source path deliberately does not claim to predict the helium image operator or fit Cd, eta, SMD, wind, or evaporation",
+      "source": "Nakamichi2007.pdf pp. 28-30, Figs. 5-7",
+      "independent_quantitative_validation": false
+    },
+    {
+      "gate": "E_PRESLHY_D36_E35",
+      "operator": "elevated horizontal no-sustained-rainout classification",
+      "status": "casewise_observation_gate_not_source_fit",
+      "result": "existing trial 11 is source-closure blocked and trial 12 lacks steady window; no concentration or wind data are fitted",
+      "source": "validation/preslhy_e35_source_gates.csv; PRESLHY_D36.pdf",
+      "independent_quantitative_validation": false
+    },
+    {
+      "gate": "F_numerics",
+      "operator": "mass/energy, timestep, wind branches, zero and invalid input",
+      "status": "automated",
+      "result": "pytest test_integrated_lh2_source.py; deterministic history and branch tests",
+      "source": "tests/test_integrated_lh2_source.py",
+      "independent_quantitative_validation": false
+    }
+  ],
+  "casewise_numerical_closure": {
+    "row_count": 6,
+    "mass_closed_row_count": 6,
+    "energy_closed_row_count": 6,
+    "invalid_residual_row_count": 0,
+    "mass_residual_tolerance_kg_s": 1e-08,
+    "energy_residual_tolerance_w": 1e-06
+  },
+  "sources": {
+    "gate_ledger": {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2\\source\\slabx-lh2\\validation\\integrated_lh2_source_validation_gates.csv",
+      "sha256": "1224602856749b61de6276aeab120889b0353ae65a7c26c53cb705abc41fe5ad"
+    },
+    "casewise_ledger": {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2\\source\\slabx-lh2\\validation\\integrated_lh2_source_casewise.csv",
+      "sha256": "035b50009738287bfdd784fa33f91c4a6f2a9e924b653404104273eb092a02f2"
+    },
+    "summary": {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2\\source\\slabx-lh2\\validation\\integrated_lh2_source_validation.md",
+      "sha256": "76c60b897204d8f26613ff253ac2ba78a74004650dd052356aef98af595fe2ba"
+    }
+  },
+  "blocking_reasons": [],
+  "promotion_gates": {
+    "source_term_component_evidence_allowed": true,
+    "independent_physical_validation_allowed": false,
+    "full_chain_physical_validation_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "physical_validation_claim": false,
+  "independent_physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "policy": {
+    "source_gate_status_is_not_independent_validation": true,
+    "published_envelope_is_not_point_prediction": true,
+    "separate_operators_are_not_fit_into_each_other": true,
+    "numerical_mass_closure_is_not_physical_validation": true,
+    "rainout_classification_is_not_concentration_validation": true,
+    "no_facility_qra_promotion": true
+  },
+  "required_next_evidence": [
+    "independent holdout source-term measurements with reviewed geometry and time base",
+    "quantitative concentration or LFL comparison for the declared outdoor domain",
+    "reviewed release boundary, isolation and inventory evidence before facility QRA"
+  ]
+}

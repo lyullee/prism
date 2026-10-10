@@ -312,6 +312,41 @@
       "physical_validation_claim": false,
       "full_chain_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "slabx_lh2_source_validation_gate",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "supports": [
+        "source-term HEM/HNEM, mass-flow envelope and numerical closure bookkeeping",
+        "explicit separation of published, reproduced and non-transferable operators"
+      ],
+      "does_not_support": [
+        "independent full-chain physical validation",
+        "equipment release, isolation or inventory-depletion validation",
+        "initiating frequency, ignition, IR/F-N or facility-QRA validation"
+      ],
+      "gate_count": 6,
+      "status_counts": {
+        "automated": 1,
+        "casewise_observation_gate_not_source_fit": 1,
+        "implemented_existing_provenance_fixture": 1,
+        "published_validation_envelope_only": 1,
+        "restricted_comparison_operator_not_transferable_to_air_rainout": 1,
+        "retained_separate_source_reproduction": 1
+      },
+      "independent_quantitative_gate_count": 0,
+      "casewise_row_count": 6,
+      "casewise_mass_closed_row_count": 6,
+      "casewise_energy_closed_row_count": 6,
+      "source": {
+        "label": "SLABx-LH2 source validation gate audit",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\slabx_lh2_source_validation_gate_audit.json",
+        "sha256": "ed524420a15cae6ec73589aa6c37f2b3236f549ef971c31950b9583028f15c48",
+        "status": "RESTRICTED_SOURCE_VALIDATION_GATES"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "claims": [
@@ -356,6 +391,12 @@
       "status": "SUPPORTED_WITH_RESTRICTIONS",
       "allowed": true,
       "basis": "preslhy_slabx_window_comparison"
+    },
+    {
+      "claim": "restricted_slabx_lh2_source_validation_gate_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "slabx_lh2_source_validation_gate"
     },
     {
       "claim": "independent_full_chain_physical_validation",

@@ -143,7 +143,25 @@ def _records(tmp_path: Path) -> dict[str, Path]:
         "facility_qra_claim": False,
         "frequency_inference_performed": False,
     })
-    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison, "preslhy_window": preslhy_window}
+    source_gate = _write(tmp_path / "source_gate.json", {
+        "schema_version": "prism.slabx_lh2_source_validation_gate_audit.v1",
+        "status": "RESTRICTED_SOURCE_VALIDATION_GATES",
+        "gate_count": 6,
+        "status_counts": {"automated": 1},
+        "independent_quantitative_gate_count": 0,
+        "casewise_numerical_closure": {
+            "row_count": 6,
+            "mass_closed_row_count": 6,
+            "energy_closed_row_count": 6,
+        },
+        "physical_validation_claim": False,
+        "independent_physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "promotion_gates": {"full_chain_physical_validation_allowed": False},
+    })
+    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison, "preslhy_window": preslhy_window, "source_gate": source_gate}
 
 
 def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
@@ -223,6 +241,23 @@ def test_matrix_records_preslhy_slabx_window_comparison_without_opening_validati
     assert domain["nonzero_prediction_row_count"] == 105
     claims = {row["claim"]: row for row in matrix["claims"]}
     assert claims["restricted_preslhy_slabx_window_comparison_evidence"]["allowed"] is True
+    assert matrix["physical_validation_claim"] is False
+
+
+def test_matrix_records_slabx_source_gate_evidence_without_opening_validation(tmp_path):
+    paths = _records(tmp_path)
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        slabx_source_validation_gate_path=paths["source_gate"],
+    )
+    domain = next(
+        row for row in matrix["evidence_domains"]
+        if row["id"] == "slabx_lh2_source_validation_gate"
+    )
+    assert domain["gate_count"] == 6
+    assert domain["casewise_mass_closed_row_count"] == 6
+    claims = {row["claim"]: row for row in matrix["claims"]}
+    assert claims["restricted_slabx_lh2_source_validation_gate_evidence"]["allowed"] is True
     assert matrix["physical_validation_claim"] is False
 
 

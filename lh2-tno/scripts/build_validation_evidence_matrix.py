@@ -27,6 +27,7 @@ def main() -> int:
     parser.add_argument("--external-field-evidence", type=Path)
     parser.add_argument("--external-field-comparison", type=Path)
     parser.add_argument("--preslhy-slabx-window-comparison", type=Path)
+    parser.add_argument("--slabx-source-validation-gates", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -41,6 +42,7 @@ def main() -> int:
             external_field_path=args.external_field_evidence,
             external_field_comparison_path=args.external_field_comparison,
             preslhy_slabx_window_path=args.preslhy_slabx_window_comparison,
+            slabx_source_validation_gate_path=args.slabx_source_validation_gates,
         )
     except (ValidationEvidenceMatrixError, OSError, TypeError, ValueError) as error:
         raise SystemExit(f"validation evidence matrix input error: {error}") from error
