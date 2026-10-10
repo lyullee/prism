@@ -122,8 +122,8 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
   구조적으로 닫혔고, 29개 operator-limited case는 진단 전용으로 남는다.
 - `equipment_state_release_audit.json`: 44개 case와 9개 component에서 asset·component·상태
   snapshot digest·방출 packet·종료근거의 identity를 대조한다. 44/44 case가 구조적으로
-  닫혔으며, 수직 handoff 10개 synthetic horizon의 provider 종료근거 미선언은 별도
-  limitation으로 기록한다.
+  닫혔으며, 수직 handoff 10개 synthetic horizon도 provider 종료근거를 packet에
+  명시적으로 echo한다. 다만 synthetic/operator-limited라는 제한은 계속 기록한다.
 - `verification.json`: 병합 수·상태·제한 자동 검사
 - `native_state_snapshot_campaign_ledger.json`: 새로 실행한 기본 24개 native 사건의
   상태 snapshot, component ID, provider result digest 대조. 24/24가 일치한다.

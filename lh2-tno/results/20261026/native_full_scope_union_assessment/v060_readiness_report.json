@@ -485,8 +485,8 @@
     "stage_elapsed_ms": {
       "cloud_observation": {
         "sample_count": 42,
-        "sum_ms": 42536.960800527595,
-        "median_ms": 89.55725003033876,
+        "sum_ms": 42542.28670033626,
+        "median_ms": 90.8933500177227,
         "max_ms": 26208.26930005569,
         "p95_ms": 4380.032510048461,
         "p99_ms": 17702.431686017586
@@ -517,23 +517,23 @@
       },
       "fire_explosion_damage_risk": {
         "sample_count": 42,
-        "sum_ms": 3562.8511999966577,
-        "median_ms": 70.37739997031167,
+        "sum_ms": 3553.852599696256,
+        "median_ms": 70.06355002522469,
         "max_ms": 289.6432999987155,
         "p95_ms": 140.52179000573233,
         "p99_ms": 228.6268539959559
       },
       "near_field_and_dispersion": {
         "sample_count": 42,
-        "sum_ms": 198063.49149998277,
-        "median_ms": 1428.2409500447102,
+        "sum_ms": 197699.83359996695,
+        "median_ms": 1401.7469500540756,
         "max_ms": 49182.34269996174,
         "p95_ms": 21799.22704994677,
         "p99_ms": 43906.76208199114
       },
       "pool": {
         "sample_count": 42,
-        "sum_ms": 3679.0641001425683,
+        "sum_ms": 3679.063600022346,
         "median_ms": 0.005399982910603285,
         "max_ms": 364.4901999505237,
         "p95_ms": 351.8947399687022,
@@ -541,8 +541,8 @@
       },
       "source": {
         "sample_count": 42,
-        "sum_ms": 30342.252300237305,
-        "median_ms": 717.1405500266701,
+        "sum_ms": 30182.63030005619,
+        "median_ms": 713.8607500237413,
         "max_ms": 812.5166000099853,
         "p95_ms": 768.6606599891091,
         "p99_ms": 799.5640439935959
@@ -604,9 +604,9 @@
       "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
       "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
       "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
-      "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
-      "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
-      "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
+      "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: declared scope is incomplete",
+      "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: uncomputed cases remain",
+      "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: synthetic release horizon",
       "missing expected components: receiving-boundary-01",
       "component liquid-transfer-line-01: PARTIAL",
       "component liquid-transfer-pump-01: PARTIAL",
@@ -741,19 +741,19 @@
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "103c5304123b2e060707667bb882ed48987f490af68a87e4f9352cddc9353abe"
+      "sha256": "52a0b434c1ed3b4157af556efd9e102a57e6fd4f0304165f96bc0e920c4153f4"
     },
     "facility_assessment": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-      "sha256": "ffa360dd4d45f92685257f66ddf4090df1dfd6aa47e78a5d917bab8921189eaa"
+      "sha256": "226544d25f57154db073fe2008511060e37243e62a926385dd269276f877b223"
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "5da9af2616e0a94d396d59f9deb9bac612bcccafd9d5ee1d069a27966c3106fb"
+      "sha256": "14a425bbed8636a61aa19991930d256d5d6ea01eafa9e2f3b8159d4146e40710"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "2756acfa714b19d7769df90e376fd2f3add75ccb29174b8168a8a7688ac18cb6"
+      "sha256": "33eefe2482e4700b674f9eea0aa74af1a921ca50fd92aaef7505079e83b92000"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
@@ -761,7 +761,7 @@
     },
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
-      "sha256": "f06139d6e40f2556e2324c3d4efed015f0326d43c855b278440c1ab0b4b07ee2"
+      "sha256": "bad6654c29ab30a55f6b3f3c2771fadab056dd6218782429e3ee572882919f5d"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
@@ -773,7 +773,7 @@
     },
     "equipment_state_release_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
-      "sha256": "ca42afedf32ac4240417ff10ddb15c6819939073e4627ee82b826d4b6a87f709"
+      "sha256": "72a5af6acf5b4c0bdf90318a126e5d8681d8eb3e26c6025e8511bc11fab9afe3"
     }
   },
   "invariant_validation": {

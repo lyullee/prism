@@ -98,19 +98,8 @@
     "vertical-handoff-terminal-pipe-01": 0
   },
   "operator_limited_case_count": 29,
-  "provider_termination_echo_gap_case_count": 10,
-  "provider_termination_echo_gap_case_ids": [
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff"
-  ],
+  "provider_termination_echo_gap_case_count": 0,
+  "provider_termination_echo_gap_case_ids": [],
   "blocking_reasons": [],
   "diagnostic_only": true,
   "provider_packet_promoted": false,

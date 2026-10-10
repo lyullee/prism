@@ -2,7 +2,7 @@
   "status": "PARTIAL_DECLARED_SCOPE",
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "facility_digest": "edea0f7e0676198670dc204de61090f452e4df6644345f86359b3a5f830a9e0a",
-  "campaign_digest": "de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2",
+  "campaign_digest": "e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6",
   "scope_provenance": "synthetic vertical provider handoff through SLABx-LH2/SLABx and native TNO IR/F-N; handoff physics remains operator-limited; explicit facility namespace rebind to generic-lh2-near-receptor-diagnostic",
   "events": [
     {
@@ -290,19 +290,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -346,20 +346,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1331.7091999342665,
-      "request_digest": "7ea3c34ac5988cc11491705e8ddea276f7666963dac23dc57b3f7b16f609d622",
-      "result_digest": "835d395dc12409004460904036b978b79d9034efb06ea16e766538f5e7b2b7b4",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1370.5579999368638,
+      "request_digest": "2b83feeb797ab74019f3442dd77a6a9d3558f37c8a1c32ad39fc04df690389ad",
+      "result_digest": "d05412ff58c01178dba642f1496d1b0fcffa4c792f22b7e12e0f06e69052a2fc",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 717.2219000058249,
+        "source": 713.9642999973148,
         "pool": 0.0039000296965241432,
-        "near_field_and_dispersion": 251.8242000369355,
-        "cloud_observation": 76.95500005502254,
-        "fire_explosion_damage_risk": 70.70370006840676
+        "near_field_and_dispersion": 247.6794000249356,
+        "cloud_observation": 78.4059000434354,
+        "fire_explosion_damage_risk": 72.91339989751577
       },
       "mass_ledger": {
         "released_kg": 1.6583741752980332e-09,
@@ -407,19 +408,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -463,20 +464,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1322.6463000755757,
-      "request_digest": "aa24c4069456feb04c97fe276e316414f3e52f7968cecb331d0525df9314736f",
-      "result_digest": "c6baaad23e73c0ff9180c5d38a594fa4dcede11fdbe3e6a6b801986eeb3b29a2",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1335.1443000137806,
+      "request_digest": "dd83bfa83abbaf2d506662a911b4bf6efffb37dc08e8ede82d7939d9bb3f0d0a",
+      "result_digest": "886c9d228620630754a5ac10f42348f2708e71f72438a1cb232b43365b0c28cd",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 715.1437000138685,
-        "pool": 0.004300032742321491,
-        "near_field_and_dispersion": 250.92849996872246,
-        "cloud_observation": 77.6534000178799,
-        "fire_explosion_damage_risk": 68.9414000371471
+        "source": 709.0314999222755,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 244.03929989784956,
+        "cloud_observation": 77.11670000571758,
+        "fire_explosion_damage_risk": 68.34100000560284
       },
       "mass_ledger": {
         "released_kg": 1.6583741752980332e-09,
@@ -524,19 +526,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -580,20 +582,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1442.7757000084966,
-      "request_digest": "3c73ea36aad30805cd26b060aa5b2d4af70be93985d38291d00a6411890b896e",
-      "result_digest": "fc2b7e047376031df1f022c84a7d6f8789b1e1d71c2ba65eb095a88a965116db",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1472.1859999699518,
+      "request_digest": "81b9fc1999261654b0cddd61e1c956e58dc128fd2d9adbc1011ac14a868dca4c",
+      "result_digest": "cb8a3a793a16ba4b750774aa7f2884300687b63018057b6659ef4a016c4d4497",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 716.9279999798164,
-        "pool": 0.004100031219422817,
-        "near_field_and_dispersion": 366.9950000476092,
-        "cloud_observation": 81.4932999201119,
-        "fire_explosion_damage_risk": 67.37559998873621
+        "source": 699.2930000415072,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 359.3961000442505,
+        "cloud_observation": 81.69080002699047,
+        "fire_explosion_damage_risk": 70.11249999050051
       },
       "mass_ledger": {
         "released_kg": 1.653545292876029e-07,
@@ -641,19 +644,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -697,20 +700,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1439.9990000529215,
-      "request_digest": "a841951132ae64852f4855b97f538bbca5506c1e5a8701666c80a03aed57a45d",
-      "result_digest": "9bf0dddf6066ef0f150ea09d3304b349667964c19c313bab95ceb8df457045db",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1487.2869999380782,
+      "request_digest": "1d21dcfb26568a880f36d25cc8b62473d76abd694a175f019f15139bdcc859f8",
+      "result_digest": "dc03f430393a516dce8ade3d3273a24b997b3301c52a3871d789aff7c80edc19",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 715.7494999701157,
-        "pool": 0.004200031980872154,
-        "near_field_and_dispersion": 359.15519995614886,
-        "cloud_observation": 80.37029998376966,
-        "fire_explosion_damage_risk": 70.14259998686612
+        "source": 704.4187999563292,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 362.21389996353537,
+        "cloud_observation": 88.24399998411536,
+        "fire_explosion_damage_risk": 68.6692000599578
       },
       "mass_ledger": {
         "released_kg": 1.653545292876029e-07,
@@ -758,19 +762,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -814,20 +818,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1847.3675000714138,
-      "request_digest": "35ed2446ffa602c839f2aef5427cba5ea14116c14e7173bd4648efe62f8acd71",
-      "result_digest": "1a9e19d3d493e22b19edd97ad94b4ba341e77485c03dfcb38970d7f0dd6305e3",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1839.6285999333486,
+      "request_digest": "2fb129ba9e1a78de7360609878702346246d5e9ff51d3f0d37ae2a145de09be7",
+      "result_digest": "54244f707a36cb56c3d91102ed5046a1a4689797eb1cd489fc7b1911c79082b0",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 724.2991999955848,
-        "pool": 0.003999914042651653,
-        "near_field_and_dispersion": 754.1115999920294,
-        "cloud_observation": 80.49970003776252,
-        "fire_explosion_damage_risk": 72.29959999676794
+        "source": 704.778799903579,
+        "pool": 0.00409991480410099,
+        "near_field_and_dispersion": 752.4168000090867,
+        "cloud_observation": 79.15070001035929,
+        "fire_explosion_damage_risk": 67.85620003938675
       },
       "mass_ledger": {
         "released_kg": 4.629740437409607e-06,
@@ -875,19 +880,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -931,20 +936,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1775.4781999392435,
-      "request_digest": "86c4faca0dfc8bc25f247e17dfe0ef8f26d073ee2118a0b8d903a1d9a2686e3b",
-      "result_digest": "9bbfa261a3a17dc3966fc1a68cccdee5e18df2728f05212a56fbca24232aaa58",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1743.9486000221223,
+      "request_digest": "767020ad6f6bd88bffe6224a7b62534abb50795acb5abe3423fa968b0e332cd0",
+      "result_digest": "a583b0943371bb8c1f753d0e568b841dee1a93f660ea397d152c35d1c53b88f9",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 730.8236000826582,
-        "pool": 0.00400003045797348,
-        "near_field_and_dispersion": 677.6113999076188,
-        "cloud_observation": 77.7977000689134,
-        "fire_explosion_damage_risk": 71.9315999886021
+        "source": 702.3170999018475,
+        "pool": 0.003999914042651653,
+        "near_field_and_dispersion": 647.9182000039145,
+        "cloud_observation": 79.65550001244992,
+        "fire_explosion_damage_risk": 67.57799990009516
       },
       "mass_ledger": {
         "released_kg": 4.629740437409607e-06,
@@ -992,19 +998,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1048,20 +1054,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2519.1838999744505,
-      "request_digest": "e67ae3c6abc17f688db0746c66fadd4c648b5662d92086892a562dc48cbe7bde",
-      "result_digest": "f2624c91c6ea1d83b99b4806ef2b14a0cf8e0811e3068e12e3b92a00572c824b",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 2491.9376999605447,
+      "request_digest": "c842e316957c560d38ac63ff8b4423e9f077ca730aa821aa715019ae37af96b7",
+      "result_digest": "74164a1087de09ca9aeab904e41eab7f93e37489a11576d4a049e8bb5d477f9e",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 713.6784000322223,
-        "pool": 0.003800028935074806,
-        "near_field_and_dispersion": 1448.1806000694633,
-        "cloud_observation": 77.44430005550385,
-        "fire_explosion_damage_risk": 70.76129992492497
+        "source": 705.7098000077531,
+        "pool": 0.0039000296965241432,
+        "near_field_and_dispersion": 1402.1400000201538,
+        "cloud_observation": 76.69540005736053,
+        "fire_explosion_damage_risk": 70.48129988834262
       },
       "mass_ledger": {
         "released_kg": 0.00010052648374898754,
@@ -1109,19 +1116,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1165,20 +1172,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2541.1856999853626,
-      "request_digest": "2d96161f9674105942ab36b3e73fc6942607b1d19b0c94b0aec27b882edbde2f",
-      "result_digest": "0b54908b9b2169f0956c0d75ea97ecdc6d421a398c9750e55c500c7deadf0f18",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 2495.277400012128,
+      "request_digest": "0f9950fd29098bd1826005c9b694760d67e62c9da5343bf10206ab04c73c00b8",
+      "result_digest": "9f51289529cd6e5d500db876dba622f91be6a9ac012002d4b5acd332f4061892",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 713.0887999664992,
+        "source": 700.9118000278249,
         "pool": 0.003999914042651653,
-        "near_field_and_dispersion": 1466.5462999837473,
-        "cloud_observation": 78.36440007667989,
-        "fire_explosion_damage_risk": 67.67690007109195
+        "near_field_and_dispersion": 1401.3539000879973,
+        "cloud_observation": 77.47539994306862,
+        "fire_explosion_damage_risk": 66.41780002973974
       },
       "mass_ledger": {
         "released_kg": 0.00010052648374898754,
@@ -1226,19 +1234,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1282,20 +1290,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3218.3297000592574,
-      "request_digest": "fbbb0ba839dc56e6e4b4e07a61e7936d4a5c8f401f8ddfa3bc1dd12e73df7310",
-      "result_digest": "eca424d3c50c70675f1084a98f6f178113eda68b10e6a85082d37e420d087a72",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 3115.870299981907,
+      "request_digest": "2992172d6d5aa7468ae69608d6a99fab2d747335410ed65f86c3d753ef2292c8",
+      "result_digest": "e47d519ef5e1841dd3295579a1c62ede5fec922098bd186c5c194ebf68e7ba6d",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 724.8801999958232,
+        "source": 702.10960006807,
         "pool": 0.004100031219422817,
-        "near_field_and_dispersion": 2119.1264000954106,
-        "cloud_observation": 78.14460003282875,
-        "fire_explosion_damage_risk": 67.65350000932813
+        "near_field_and_dispersion": 2007.979999994859,
+        "cloud_observation": 79.68670001719147,
+        "fire_explosion_damage_risk": 66.948699997738
       },
       "mass_ledger": {
         "released_kg": 0.0018175777704088902,
@@ -1343,19 +1352,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1399,20 +1408,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3105.475699994713,
-      "request_digest": "f49791add1f4e3e361cd88a3fbdea2a0863a81743ad7bef7ddf4b6b716a5abe0",
-      "result_digest": "0c8640cb7944a912cb25f33b3ed283bfc1cf9ec396c98f416dba2c87e21b39fb",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 3026.4244000427425,
+      "request_digest": "19332c673029d44bcb24e9772d2e5586704689f83e8556156317393b7c52bbaf",
+      "result_digest": "ff47e811aa4e4c5df5b940131295b9e734a248fc1ca37d90f4b9bfffe00183be",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 730.2618999965489,
-        "pool": 0.0039000296965241432,
-        "near_field_and_dispersion": 2008.8603999465704,
-        "cloud_observation": 79.3710999423638,
-        "fire_explosion_damage_risk": 68.69460002053529
+        "source": 699.9185000313446,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 1914.5440999418497,
+        "cloud_observation": 75.29859989881516,
+        "fire_explosion_damage_risk": 67.86409998312593
       },
       "mass_ledger": {
         "released_kg": 0.0018175777704088902,
@@ -1462,19 +1472,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1518,20 +1528,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1331.7091999342665,
-      "request_digest": "7ea3c34ac5988cc11491705e8ddea276f7666963dac23dc57b3f7b16f609d622",
-      "result_digest": "835d395dc12409004460904036b978b79d9034efb06ea16e766538f5e7b2b7b4",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1370.5579999368638,
+      "request_digest": "2b83feeb797ab74019f3442dd77a6a9d3558f37c8a1c32ad39fc04df690389ad",
+      "result_digest": "d05412ff58c01178dba642f1496d1b0fcffa4c792f22b7e12e0f06e69052a2fc",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 717.2219000058249,
+        "source": 713.9642999973148,
         "pool": 0.0039000296965241432,
-        "near_field_and_dispersion": 251.8242000369355,
-        "cloud_observation": 76.95500005502254,
-        "fire_explosion_damage_risk": 70.70370006840676
+        "near_field_and_dispersion": 247.6794000249356,
+        "cloud_observation": 78.4059000434354,
+        "fire_explosion_damage_risk": 72.91339989751577
       },
       "mass_ledger": {
         "released_kg": 1.6583741752980332e-09,
@@ -1579,19 +1590,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1635,20 +1646,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1322.6463000755757,
-      "request_digest": "aa24c4069456feb04c97fe276e316414f3e52f7968cecb331d0525df9314736f",
-      "result_digest": "c6baaad23e73c0ff9180c5d38a594fa4dcede11fdbe3e6a6b801986eeb3b29a2",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1335.1443000137806,
+      "request_digest": "dd83bfa83abbaf2d506662a911b4bf6efffb37dc08e8ede82d7939d9bb3f0d0a",
+      "result_digest": "886c9d228620630754a5ac10f42348f2708e71f72438a1cb232b43365b0c28cd",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 715.1437000138685,
-        "pool": 0.004300032742321491,
-        "near_field_and_dispersion": 250.92849996872246,
-        "cloud_observation": 77.6534000178799,
-        "fire_explosion_damage_risk": 68.9414000371471
+        "source": 709.0314999222755,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 244.03929989784956,
+        "cloud_observation": 77.11670000571758,
+        "fire_explosion_damage_risk": 68.34100000560284
       },
       "mass_ledger": {
         "released_kg": 1.6583741752980332e-09,
@@ -1696,19 +1708,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1752,20 +1764,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1442.7757000084966,
-      "request_digest": "3c73ea36aad30805cd26b060aa5b2d4af70be93985d38291d00a6411890b896e",
-      "result_digest": "fc2b7e047376031df1f022c84a7d6f8789b1e1d71c2ba65eb095a88a965116db",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1472.1859999699518,
+      "request_digest": "81b9fc1999261654b0cddd61e1c956e58dc128fd2d9adbc1011ac14a868dca4c",
+      "result_digest": "cb8a3a793a16ba4b750774aa7f2884300687b63018057b6659ef4a016c4d4497",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 716.9279999798164,
-        "pool": 0.004100031219422817,
-        "near_field_and_dispersion": 366.9950000476092,
-        "cloud_observation": 81.4932999201119,
-        "fire_explosion_damage_risk": 67.37559998873621
+        "source": 699.2930000415072,
+        "pool": 0.003800028935074806,
+        "near_field_and_dispersion": 359.3961000442505,
+        "cloud_observation": 81.69080002699047,
+        "fire_explosion_damage_risk": 70.11249999050051
       },
       "mass_ledger": {
         "released_kg": 1.653545292876029e-07,
@@ -1813,19 +1826,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1869,20 +1882,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1439.9990000529215,
-      "request_digest": "a841951132ae64852f4855b97f538bbca5506c1e5a8701666c80a03aed57a45d",
-      "result_digest": "9bf0dddf6066ef0f150ea09d3304b349667964c19c313bab95ceb8df457045db",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1487.2869999380782,
+      "request_digest": "1d21dcfb26568a880f36d25cc8b62473d76abd694a175f019f15139bdcc859f8",
+      "result_digest": "dc03f430393a516dce8ade3d3273a24b997b3301c52a3871d789aff7c80edc19",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 715.7494999701157,
-        "pool": 0.004200031980872154,
-        "near_field_and_dispersion": 359.15519995614886,
-        "cloud_observation": 80.37029998376966,
-        "fire_explosion_damage_risk": 70.14259998686612
+        "source": 704.4187999563292,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 362.21389996353537,
+        "cloud_observation": 88.24399998411536,
+        "fire_explosion_damage_risk": 68.6692000599578
       },
       "mass_ledger": {
         "released_kg": 1.653545292876029e-07,
@@ -1930,19 +1944,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -1986,20 +2000,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1847.3675000714138,
-      "request_digest": "35ed2446ffa602c839f2aef5427cba5ea14116c14e7173bd4648efe62f8acd71",
-      "result_digest": "1a9e19d3d493e22b19edd97ad94b4ba341e77485c03dfcb38970d7f0dd6305e3",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1839.6285999333486,
+      "request_digest": "2fb129ba9e1a78de7360609878702346246d5e9ff51d3f0d37ae2a145de09be7",
+      "result_digest": "54244f707a36cb56c3d91102ed5046a1a4689797eb1cd489fc7b1911c79082b0",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 724.2991999955848,
-        "pool": 0.003999914042651653,
-        "near_field_and_dispersion": 754.1115999920294,
-        "cloud_observation": 80.49970003776252,
-        "fire_explosion_damage_risk": 72.29959999676794
+        "source": 704.778799903579,
+        "pool": 0.00409991480410099,
+        "near_field_and_dispersion": 752.4168000090867,
+        "cloud_observation": 79.15070001035929,
+        "fire_explosion_damage_risk": 67.85620003938675
       },
       "mass_ledger": {
         "released_kg": 4.629740437409607e-06,
@@ -2047,19 +2062,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -2103,20 +2118,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 1775.4781999392435,
-      "request_digest": "86c4faca0dfc8bc25f247e17dfe0ef8f26d073ee2118a0b8d903a1d9a2686e3b",
-      "result_digest": "9bbfa261a3a17dc3966fc1a68cccdee5e18df2728f05212a56fbca24232aaa58",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 1743.9486000221223,
+      "request_digest": "767020ad6f6bd88bffe6224a7b62534abb50795acb5abe3423fa968b0e332cd0",
+      "result_digest": "a583b0943371bb8c1f753d0e568b841dee1a93f660ea397d152c35d1c53b88f9",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 730.8236000826582,
-        "pool": 0.00400003045797348,
-        "near_field_and_dispersion": 677.6113999076188,
-        "cloud_observation": 77.7977000689134,
-        "fire_explosion_damage_risk": 71.9315999886021
+        "source": 702.3170999018475,
+        "pool": 0.003999914042651653,
+        "near_field_and_dispersion": 647.9182000039145,
+        "cloud_observation": 79.65550001244992,
+        "fire_explosion_damage_risk": 67.57799990009516
       },
       "mass_ledger": {
         "released_kg": 4.629740437409607e-06,
@@ -2164,19 +2180,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -2220,20 +2236,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2519.1838999744505,
-      "request_digest": "e67ae3c6abc17f688db0746c66fadd4c648b5662d92086892a562dc48cbe7bde",
-      "result_digest": "f2624c91c6ea1d83b99b4806ef2b14a0cf8e0811e3068e12e3b92a00572c824b",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 2491.9376999605447,
+      "request_digest": "c842e316957c560d38ac63ff8b4423e9f077ca730aa821aa715019ae37af96b7",
+      "result_digest": "74164a1087de09ca9aeab904e41eab7f93e37489a11576d4a049e8bb5d477f9e",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 713.6784000322223,
-        "pool": 0.003800028935074806,
-        "near_field_and_dispersion": 1448.1806000694633,
-        "cloud_observation": 77.44430005550385,
-        "fire_explosion_damage_risk": 70.76129992492497
+        "source": 705.7098000077531,
+        "pool": 0.0039000296965241432,
+        "near_field_and_dispersion": 1402.1400000201538,
+        "cloud_observation": 76.69540005736053,
+        "fire_explosion_damage_risk": 70.48129988834262
       },
       "mass_ledger": {
         "released_kg": 0.00010052648374898754,
@@ -2281,19 +2298,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -2337,20 +2354,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2541.1856999853626,
-      "request_digest": "2d96161f9674105942ab36b3e73fc6942607b1d19b0c94b0aec27b882edbde2f",
-      "result_digest": "0b54908b9b2169f0956c0d75ea97ecdc6d421a398c9750e55c500c7deadf0f18",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 2495.277400012128,
+      "request_digest": "0f9950fd29098bd1826005c9b694760d67e62c9da5343bf10206ab04c73c00b8",
+      "result_digest": "9f51289529cd6e5d500db876dba622f91be6a9ac012002d4b5acd332f4061892",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 713.0887999664992,
+        "source": 700.9118000278249,
         "pool": 0.003999914042651653,
-        "near_field_and_dispersion": 1466.5462999837473,
-        "cloud_observation": 78.36440007667989,
-        "fire_explosion_damage_risk": 67.67690007109195
+        "near_field_and_dispersion": 1401.3539000879973,
+        "cloud_observation": 77.47539994306862,
+        "fire_explosion_damage_risk": 66.41780002973974
       },
       "mass_ledger": {
         "released_kg": 0.00010052648374898754,
@@ -2398,19 +2416,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -2454,20 +2472,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3218.3297000592574,
-      "request_digest": "fbbb0ba839dc56e6e4b4e07a61e7936d4a5c8f401f8ddfa3bc1dd12e73df7310",
-      "result_digest": "eca424d3c50c70675f1084a98f6f178113eda68b10e6a85082d37e420d087a72",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 3115.870299981907,
+      "request_digest": "2992172d6d5aa7468ae69608d6a99fab2d747335410ed65f86c3d753ef2292c8",
+      "result_digest": "e47d519ef5e1841dd3295579a1c62ede5fec922098bd186c5c194ebf68e7ba6d",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 724.8801999958232,
+        "source": 702.10960006807,
         "pool": 0.004100031219422817,
-        "near_field_and_dispersion": 2119.1264000954106,
-        "cloud_observation": 78.14460003282875,
-        "fire_explosion_damage_risk": 67.65350000932813
+        "near_field_and_dispersion": 2007.979999994859,
+        "cloud_observation": 79.68670001719147,
+        "fire_explosion_damage_risk": 66.948699997738
       },
       "mass_ledger": {
         "released_kg": 0.0018175777704088902,
@@ -2515,19 +2534,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -2571,20 +2590,21 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3105.475699994713,
-      "request_digest": "f49791add1f4e3e361cd88a3fbdea2a0863a81743ad7bef7ddf4b6b716a5abe0",
-      "result_digest": "0c8640cb7944a912cb25f33b3ed283bfc1cf9ec396c98f416dba2c87e21b39fb",
-      "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-      "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
+      "elapsed_ms": 3026.4244000427425,
+      "request_digest": "19332c673029d44bcb24e9772d2e5586704689f83e8556156317393b7c52bbaf",
+      "result_digest": "ff47e811aa4e4c5df5b940131295b9e734a248fc1ca37d90f4b9bfffe00183be",
+      "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+      "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
       "stage_elapsed_ms": {
-        "source": 730.2618999965489,
-        "pool": 0.0039000296965241432,
-        "near_field_and_dispersion": 2008.8603999465704,
-        "cloud_observation": 79.3710999423638,
-        "fire_explosion_damage_risk": 68.69460002053529
+        "source": 699.9185000313446,
+        "pool": 0.004100031219422817,
+        "near_field_and_dispersion": 1914.5440999418497,
+        "cloud_observation": 75.29859989881516,
+        "fire_explosion_damage_risk": 67.86409998312593
       },
       "mass_ledger": {
         "released_kg": 0.0018175777704088902,
@@ -2640,10 +2660,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+            "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2690,10 +2710,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+            "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2740,10 +2760,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+            "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2790,10 +2810,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+            "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2840,10 +2860,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+            "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2890,10 +2910,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+            "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2940,10 +2960,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+            "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2990,10 +3010,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+            "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3040,10 +3060,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+            "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3090,10 +3110,10 @@
           "component_id": "terminal_pipe",
           "provider_export_schema": "prism.resolved_release.v1",
           "provider_source_digests": [
-            "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+            "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
           ],
           "provider_result_digests": [
-            "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+            "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
           ],
           "provider_boundary_references": [
             "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -3238,19 +3258,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3294,7 +3314,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3327,19 +3348,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3383,7 +3404,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3416,19 +3438,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3472,7 +3494,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3505,19 +3528,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3561,7 +3584,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3594,19 +3618,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3650,7 +3674,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3683,19 +3708,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3739,7 +3764,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3772,19 +3798,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3828,7 +3854,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3861,19 +3888,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -3917,7 +3944,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -3950,19 +3978,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4006,7 +4034,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4039,19 +4068,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4095,7 +4124,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4128,19 +4158,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4184,7 +4214,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4217,19 +4248,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4273,7 +4304,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4306,19 +4338,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4362,7 +4394,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4395,19 +4428,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4451,7 +4484,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4484,19 +4518,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4540,7 +4574,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4573,19 +4608,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4629,7 +4664,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4662,19 +4698,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4718,7 +4754,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4751,19 +4788,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4807,7 +4844,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4840,19 +4878,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4896,7 +4934,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -4929,19 +4968,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4985,7 +5024,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5018,19 +5058,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5074,7 +5114,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5107,19 +5148,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5163,7 +5204,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5196,19 +5238,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5252,7 +5294,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5285,19 +5328,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5341,7 +5384,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5374,19 +5418,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5430,7 +5474,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5463,19 +5508,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5519,7 +5564,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5552,19 +5598,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5608,7 +5654,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5641,19 +5688,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5697,7 +5744,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5730,19 +5778,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5786,7 +5834,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5819,19 +5868,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5875,7 +5924,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5908,19 +5958,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5964,7 +6014,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -5997,19 +6048,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6053,7 +6104,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6086,19 +6138,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6142,7 +6194,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6175,19 +6228,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6231,7 +6284,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6264,19 +6318,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6320,7 +6374,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6353,19 +6408,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6409,7 +6464,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6442,19 +6498,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6498,7 +6554,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6531,19 +6588,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6587,7 +6644,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6620,19 +6678,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6676,7 +6734,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6709,19 +6768,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6765,7 +6824,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -6790,21 +6850,21 @@
         "scipy": "1.18.1"
       }
     },
-    "request_digest": "2343390aacb452cd344df06865cbc3f408ee1766a7f47dcc3711ed36236cab1f",
-    "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
-    "worker_sha256": "0c8ace2bd559edeeed4f20b2e3064aa45338336570835487515759f81dcb82bc",
-    "adapter_source_digest": "95785cf006dc14cc742d045d30b3b62e2655bcd9227d32ed40a8c02f95e38624",
-    "elapsed_ms": 203.10889999382198,
+    "request_digest": "6baa8c0d2995eb025fe0a5b2664876e98c730ff85652b22da0726e53ab49fc2f",
+    "backend_config_digest": "d1b33f8be15d8d6744e0035e7a837739010e8c0c52dffc4e4b2c9a3cf0bc0175",
+    "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
+    "adapter_source_digest": "8ddb3ed77d546c65c386b1bbafeda3b73c638e8a5c424dce1a1d842042eea7a2",
+    "elapsed_ms": 245.02070003654808,
     "physical_validation_claim": false
   },
   "timing": {
     "fresh_physics_cases": 10,
-    "case_min_ms": 1322.6463000755757,
-    "case_median_ms": 1811.4228500053287,
-    "case_max_ms": 3218.3297000592574,
-    "case_p95_ms": 3167.5454000302125,
-    "case_p99_ms": 3208.1728400534485,
-    "campaign_elapsed_ms": 20759.865000029095,
+    "case_min_ms": 1335.1443000137806,
+    "case_median_ms": 1791.7885999777354,
+    "case_max_ms": 3115.870299981907,
+    "case_p95_ms": 3075.619645009283,
+    "case_p99_ms": 3107.820168987382,
+    "campaign_elapsed_ms": 20644.581399974413,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "semantics": {
@@ -6889,12 +6949,12 @@
   "complete_facility_qra_claim": false,
   "one_hz_fresh_physics_demonstrated": false,
   "source_facility_id": "vertical-vent-campaign",
-  "source_campaign_digest": "de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2",
+  "source_campaign_digest": "e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6",
   "vertical_handoff_rebind": {
     "schema_version": "prism.vertical_handoff_campaign_rebind.v1",
     "source_facility_id": "vertical-vent-campaign",
     "target_facility_id": "generic-lh2-near-receptor-diagnostic",
-    "source_campaign_digest": "de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2",
+    "source_campaign_digest": "e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6",
     "namespace": "generic-lh2-near-receptor-diagnostic/vertical-handoff",
     "event_count": 5,
     "event_id_map": {

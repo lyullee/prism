@@ -567,7 +567,9 @@
                 "pipe_hole",
                 "vertical_handoff"
               ],
-              "termination_basis_counts": {}
+              "termination_basis_counts": {
+                "synthetic_diagnostic_horizon": 40
+              }
             }
           },
           "ignition_branches": {
@@ -1949,10 +1951,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+                  "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -1999,10 +2001,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+                  "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2049,10 +2051,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+                  "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2099,10 +2101,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+                  "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2149,10 +2151,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+                  "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2199,10 +2201,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+                  "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2249,10 +2251,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+                  "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2299,10 +2301,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+                  "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2349,10 +2351,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+                  "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2399,10 +2401,10 @@
                 "component_id": "vertical-handoff-terminal-pipe-01",
                 "provider_export_schema": "prism.resolved_release.v1",
                 "provider_source_digests": [
-                  "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+                  "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
                 ],
                 "provider_result_digests": [
-                  "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+                  "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
                 ],
                 "provider_boundary_references": [
                   "SteadyNetwork terminal link to atmosphere; native terminal bore"
@@ -2965,23 +2967,23 @@
         "timing": {
           "campaign_count": 3,
           "fresh_physics_cases": 44,
-          "case_min_ms": 1322.6463000755757,
+          "case_min_ms": 1335.1443000137806,
           "case_median_ms": 2640.8502000267617,
           "case_max_ms": 64022.139200009406,
           "case_p95_ms": 27587.356735067453,
           "case_p99_ms": 60368.736392006984,
-          "campaign_elapsed_ms": 301737.2363001341,
-          "campaign_elapsed_ms_sum": 301737.2363001341,
+          "campaign_elapsed_ms": 301621.9527000794,
+          "campaign_elapsed_ms_sum": 301621.9527000794,
           "campaign_elapsed_ms_min": 19298.20160008967,
-          "campaign_elapsed_ms_median": 20759.865000029095,
+          "campaign_elapsed_ms_median": 20644.581399974413,
           "campaign_elapsed_ms_max": 261679.16970001534,
-          "campaign_elapsed_ms_p95": 237587.23923001668,
-          "campaign_elapsed_ms_p99": 256860.7836060156,
+          "campaign_elapsed_ms_p95": 237575.71087001121,
+          "campaign_elapsed_ms_p99": 256858.47793401452,
           "stage_elapsed_ms": {
             "cloud_observation": {
               "sample_count": 42,
-              "sum_ms": 42536.960800527595,
-              "median_ms": 89.55725003033876,
+              "sum_ms": 42542.28670033626,
+              "median_ms": 90.8933500177227,
               "max_ms": 26208.26930005569,
               "p95_ms": 4380.032510048461,
               "p99_ms": 17702.431686017586
@@ -3012,23 +3014,23 @@
             },
             "fire_explosion_damage_risk": {
               "sample_count": 42,
-              "sum_ms": 3562.8511999966577,
-              "median_ms": 70.37739997031167,
+              "sum_ms": 3553.852599696256,
+              "median_ms": 70.06355002522469,
               "max_ms": 289.6432999987155,
               "p95_ms": 140.52179000573233,
               "p99_ms": 228.6268539959559
             },
             "near_field_and_dispersion": {
               "sample_count": 42,
-              "sum_ms": 198063.49149998277,
-              "median_ms": 1428.2409500447102,
+              "sum_ms": 197699.83359996695,
+              "median_ms": 1401.7469500540756,
               "max_ms": 49182.34269996174,
               "p95_ms": 21799.22704994677,
               "p99_ms": 43906.76208199114
             },
             "pool": {
               "sample_count": 42,
-              "sum_ms": 3679.0641001425683,
+              "sum_ms": 3679.063600022346,
               "median_ms": 0.005399982910603285,
               "max_ms": 364.4901999505237,
               "p95_ms": 351.8947399687022,
@@ -3036,8 +3038,8 @@
             },
             "source": {
               "sample_count": 42,
-              "sum_ms": 30342.252300237305,
-              "median_ms": 717.1405500266701,
+              "sum_ms": 30182.63030005619,
+              "median_ms": 713.8607500237413,
               "max_ms": 812.5166000099853,
               "p95_ms": 768.6606599891091,
               "p99_ms": 799.5640439935959
@@ -3089,8 +3091,8 @@
           "stage_timing": {
             "cloud_observation": {
               "sample_count": 42,
-              "sum_ms": 42536.960800527595,
-              "median_ms": 89.55725003033876,
+              "sum_ms": 42542.28670033626,
+              "median_ms": 90.8933500177227,
               "max_ms": 26208.26930005569,
               "p95_ms": 4380.032510048461,
               "p99_ms": 17702.431686017586
@@ -3121,23 +3123,23 @@
             },
             "fire_explosion_damage_risk": {
               "sample_count": 42,
-              "sum_ms": 3562.8511999966577,
-              "median_ms": 70.37739997031167,
+              "sum_ms": 3553.852599696256,
+              "median_ms": 70.06355002522469,
               "max_ms": 289.6432999987155,
               "p95_ms": 140.52179000573233,
               "p99_ms": 228.6268539959559
             },
             "near_field_and_dispersion": {
               "sample_count": 42,
-              "sum_ms": 198063.49149998277,
-              "median_ms": 1428.2409500447102,
+              "sum_ms": 197699.83359996695,
+              "median_ms": 1401.7469500540756,
               "max_ms": 49182.34269996174,
               "p95_ms": 21799.22704994677,
               "p99_ms": 43906.76208199114
             },
             "pool": {
               "sample_count": 42,
-              "sum_ms": 3679.0641001425683,
+              "sum_ms": 3679.063600022346,
               "median_ms": 0.005399982910603285,
               "max_ms": 364.4901999505237,
               "p95_ms": 351.8947399687022,
@@ -3145,8 +3147,8 @@
             },
             "source": {
               "sample_count": 42,
-              "sum_ms": 30342.252300237305,
-              "median_ms": 717.1405500266701,
+              "sum_ms": 30182.63030005619,
+              "median_ms": 713.8607500237413,
               "max_ms": 812.5166000099853,
               "p95_ms": 768.6606599891091,
               "p99_ms": 799.5640439935959
@@ -4072,7 +4074,7 @@
       "status": "PASS",
       "evidence": {
         "fresh_physics_cases": 44,
-        "campaign_elapsed_ms": 301737.2363001341,
+        "campaign_elapsed_ms": 301621.9527000794,
         "case_p95_ms": 27587.356735067453,
         "case_p99_ms": 60368.736392006984,
         "timing_distribution": "across separately executed equipment campaigns; not repeated-run latency",

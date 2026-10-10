@@ -122,6 +122,10 @@ def make_vertical_release(
     raw.update(
         cumulative_mass_out_kg=mass,
         cumulative_static_enthalpy_out_j=energy,
+        termination_basis="synthetic_diagnostic_horizon",
+        termination_provenance=(
+            "synthetic vertical provider history; no flow extrapolation"
+        ),
         vertical_handoff={
             "position_enu_m": [0.0, 0.0, 2.0],
             "direction_enu": [1.0, 0.0, 0.0],

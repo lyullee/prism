@@ -1787,7 +1787,7 @@
   "current_union_risk_atom_chain_audit_record": "results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json",
   "current_union_risk_atom_chain_audit_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC; 44/44 cases and 176/176 risk atoms; 29 operator-limited cases remain diagnostic",
   "current_union_equipment_state_release_audit_record": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
-  "current_union_equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases and 9 components; 10 synthetic-horizon provider termination echoes remain explicitly limited",
+  "current_union_equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases and 9 components; synthetic-horizon termination basis/provider echo present in 10 cases; all remain operator-limited",
   "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v11.json",
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "diagnostic_union_chain_closure_audit_implemented": true,

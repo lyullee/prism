@@ -1250,7 +1250,7 @@
   "equipment_state_release_audit_implemented": true,
   "equipment_state_release_audit_module": "src/lh2_tno/equipment_state_release_audit.py",
   "equipment_state_release_audit_record": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
-  "equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases, 9 components; 10 synthetic-horizon provider termination echoes explicitly limited",
+  "equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases, 9 components; synthetic-horizon termination basis/provider echo present in 10 cases; all remain operator-limited",
   "ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 29,
     "BLOCKED": 5

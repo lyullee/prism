@@ -228,7 +228,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert equipment_chain["status"] == "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
     assert equipment_chain["complete_case_count"] == 44
     assert equipment_chain["component_count"] == 9
-    assert equipment_chain["provider_termination_echo_gap_case_count"] == 10
+    assert equipment_chain["provider_termination_echo_gap_case_count"] == 0
     assert release_boundary_check["evidence"]["schema"] == (
         "prism.facility_release_boundary_gate.v1"
     )

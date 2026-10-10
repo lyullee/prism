@@ -35,9 +35,9 @@
     "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
     "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
     "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
-    "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
-    "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
-    "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
+    "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: declared scope is incomplete",
+    "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: uncomputed cases remain",
+    "campaign e4ebd611a694d02c061a854e99f98b31975d3a1a0e690e295ce2820a3a4fe3b6: synthetic release horizon",
     "missing expected components: receiving-boundary-01",
     "component liquid-transfer-line-01: PARTIAL",
     "component liquid-transfer-pump-01: PARTIAL",
@@ -4857,10 +4857,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ]
       },
       "current_provider_packet_identity": {
@@ -4871,19 +4871,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -4927,7 +4927,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4979,10 +4980,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ]
       },
       "current_provider_packet_identity": {
@@ -4993,19 +4994,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "b2cad477b4bd995e7dab84aeacb3a12fb880b157b2b62c535ca979d3d1fd3e40"
+          "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5049,7 +5050,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5101,10 +5103,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ]
       },
       "current_provider_packet_identity": {
@@ -5115,19 +5117,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5171,7 +5173,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5223,10 +5226,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ]
       },
       "current_provider_packet_identity": {
@@ -5237,19 +5240,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "41ec614289c7c91dedc827d114d37685c0eb94efa8b483d7103f78f0249c533d"
+          "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5293,7 +5296,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5345,10 +5349,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ]
       },
       "current_provider_packet_identity": {
@@ -5359,19 +5363,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5415,7 +5419,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5467,10 +5472,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ]
       },
       "current_provider_packet_identity": {
@@ -5481,19 +5486,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "14b9e7201938118074e01afa941aa815c74e3e2afb6b869c3cb2afbf4d759b4d"
+          "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5537,7 +5542,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5589,10 +5595,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ]
       },
       "current_provider_packet_identity": {
@@ -5603,19 +5609,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5659,7 +5665,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5711,10 +5718,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ]
       },
       "current_provider_packet_identity": {
@@ -5725,19 +5732,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "073e89f6d0a6d2a4ad436256758ef5ae5ee61d494f7215afe0cfa21e300cd4e7"
+          "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5781,7 +5788,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5833,10 +5841,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ]
       },
       "current_provider_packet_identity": {
@@ -5847,19 +5855,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -5903,7 +5911,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5955,10 +5964,10 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ]
       },
       "current_provider_packet_identity": {
@@ -5969,19 +5978,19 @@
           "terminal_pipe.out"
         ],
         "provider_source_digests": [
-          "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+          "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
         ],
         "provider_result_digests": [
-          "d2a23722bf6ec65846b37d3e4997d09e1371b265248f8d18563cdb5887f42211"
+          "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b"
         ],
         "provider_boundary_references": [
           "SteadyNetwork terminal link to atmosphere; native terminal bore"
         ],
         "termination_bases": [
-          null
+          "synthetic_diagnostic_horizon"
         ],
         "termination_provenances": [
-          "synthetic 0.37 s command closure; provider transient feedback not qualified"
+          "synthetic vertical provider history; no flow extrapolation"
         ],
         "event_kinds": [
           "accidental_leak"
@@ -6025,7 +6034,8 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
-        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
