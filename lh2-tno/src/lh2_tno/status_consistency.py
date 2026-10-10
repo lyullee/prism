@@ -101,6 +101,8 @@ def build_status_consistency_report(
     observed_state_release_binding_audit_filename: str | None = None,
     consequence_backend_chain_audit: Mapping[str, Any] | None = None,
     consequence_backend_chain_audit_filename: str | None = None,
+    provider_packet_collection_manifest: Mapping[str, Any] | None = None,
+    provider_packet_collection_manifest_filename: str | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed cross-artifact consistency report."""
     checks: list[dict[str, Any]] = []
@@ -345,6 +347,77 @@ def build_status_consistency_report(
                 "stage_count": consequence_backend_chain_audit.get("stage_count"),
                 "record": current_status.get(
                     "current_union_consequence_backend_chain_audit_record"
+                ),
+            },
+        )
+    if provider_packet_collection_manifest is not None:
+        collection_filename = (
+            provider_packet_collection_manifest_filename
+            or "provider_packet_collection_manifest.json"
+        )
+        collection_status = provider_packet_collection_manifest.get("status")
+        request_count = provider_packet_collection_manifest.get("request_count")
+        open_request_count = provider_packet_collection_manifest.get("open_request_count")
+        qualified_packet_count = provider_packet_collection_manifest.get(
+            "qualified_packet_count"
+        )
+        collection_rows = provider_packet_collection_manifest.get("rows")
+        rows_valid = (
+            isinstance(collection_rows, Sequence)
+            and not isinstance(collection_rows, (str, bytes))
+            and isinstance(request_count, int)
+            and len(collection_rows) == request_count
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status") == "OPEN"
+                and row.get("release_path") is None
+                and row.get("qualification_path") is None
+                for row in collection_rows
+            )
+        )
+        _check(
+            checks,
+            "provider_packet_collection_manifest",
+            provider_packet_collection_manifest.get("schema")
+            == "prism.provider_packet_collection_manifest.v1"
+            and collection_status == "OPEN_PROVIDER_PACKET_COLLECTION"
+            and isinstance(request_count, int)
+            and request_count > 0
+            and open_request_count == request_count
+            and qualified_packet_count == 0
+            and rows_valid
+            and provider_packet_collection_manifest.get("blocking_reasons") == []
+            and provider_packet_collection_manifest.get("promotion_policy", {}).get(
+                "frequency_is_not_assigned"
+            ) is True
+            and provider_packet_collection_manifest.get("promotion_policy", {}).get(
+                "facility_ir_fn_promotion"
+            ) is False
+            and all(
+                _endswith(
+                    status.get("current_union_provider_packet_collection_manifest_record"),
+                    collection_filename,
+                )
+                for status in (current_status, development_goal)
+            )
+            and all(
+                isinstance(
+                    status.get("current_union_provider_packet_collection_manifest_status"),
+                    str,
+                )
+                and str(collection_status)
+                in status["current_union_provider_packet_collection_manifest_status"]
+                for status in (current_status, development_goal)
+            ),
+            {
+                "schema": provider_packet_collection_manifest.get("schema"),
+                "status": collection_status,
+                "request_count": request_count,
+                "open_request_count": open_request_count,
+                "qualified_packet_count": qualified_packet_count,
+                "rows_valid": rows_valid,
+                "record": current_status.get(
+                    "current_union_provider_packet_collection_manifest_record"
                 ),
             },
         )

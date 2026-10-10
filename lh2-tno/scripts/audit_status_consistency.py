@@ -39,6 +39,11 @@ def main() -> int:
         type=Path,
         help="optional LH2 release-to-consequence backend chain audit",
     )
+    parser.add_argument(
+        "--provider-packet-collection-manifest",
+        type=Path,
+        help="optional case-level worksheet for collecting provider packets",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -83,6 +88,16 @@ def main() -> int:
             consequence_backend_chain_audit_filename=(
                 args.consequence_backend_chain_audit.name
                 if args.consequence_backend_chain_audit is not None
+                else None
+            ),
+            provider_packet_collection_manifest=(
+                load_json_object(args.provider_packet_collection_manifest)
+                if args.provider_packet_collection_manifest is not None
+                else None
+            ),
+            provider_packet_collection_manifest_filename=(
+                args.provider_packet_collection_manifest.name
+                if args.provider_packet_collection_manifest is not None
                 else None
             ),
         )
