@@ -110,6 +110,17 @@ def _provider_termination_evidence(
                 ),
                 "provider_residual_mass_kg": provider_meta.get("residual_mass_kg"),
             }
+        elif provider_meta.get("termination_basis") == "inventory_depletion_positive_threshold":
+            evidence = {
+                "termination_basis": "inventory_depletion_positive_threshold",
+                "available_mass_kg": packet.get("available_mass_kg"),
+                "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+                "threshold_mass_kg": provider_meta.get("depletion_threshold_kg"),
+                "remaining_mass_kg": provider_meta.get("remaining_mass_kg"),
+                "max_abs_mass_residual_kg": provider_meta.get(
+                    "max_abs_mass_residual_kg"
+                ),
+            }
         else:
             return None
     else:
@@ -133,23 +144,35 @@ def _provider_termination_evidence(
         )
         if not isinstance(response_meta, Mapping):
             return None
-        if response_meta.get("release_mode") != "instantaneous_inventory":
+        if response_meta.get("release_mode") == "instantaneous_inventory":
+            evidence = {
+                "termination_basis": "inventory_depletion_releasable_mass",
+                "available_mass_kg": packet.get("available_mass_kg"),
+                "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+                "available_mass_definition": response_meta.get(
+                    "available_mass_definition"
+                ),
+                "remaining_releasable_mass_kg": (
+                    float(response_meta.get("remaining_releasable_mass_kg"))
+                    if response_meta.get("remaining_releasable_mass_kg") is not None
+                    else float(packet.get("available_mass_kg", 0.0))
+                    - float(packet.get("cumulative_mass_out_kg", 0.0))
+                ),
+                "provider_residual_mass_kg": response_meta.get("residual_mass_kg"),
+            }
+        elif response_meta.get("termination_basis") == "inventory_depletion_positive_threshold":
+            evidence = {
+                "termination_basis": "inventory_depletion_positive_threshold",
+                "available_mass_kg": packet.get("available_mass_kg"),
+                "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+                "threshold_mass_kg": response_meta.get("depletion_threshold_kg"),
+                "remaining_mass_kg": response_meta.get("remaining_mass_kg"),
+                "max_abs_mass_residual_kg": response_meta.get(
+                    "max_abs_mass_residual_kg"
+                ),
+            }
+        else:
             return None
-        evidence = {
-            "termination_basis": "inventory_depletion_releasable_mass",
-            "available_mass_kg": packet.get("available_mass_kg"),
-            "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
-            "available_mass_definition": response_meta.get(
-                "available_mass_definition"
-            ),
-            "remaining_releasable_mass_kg": (
-                float(response_meta.get("remaining_releasable_mass_kg"))
-                if response_meta.get("remaining_releasable_mass_kg") is not None
-                else float(packet.get("available_mass_kg", 0.0))
-                - float(packet.get("cumulative_mass_out_kg", 0.0))
-            ),
-            "provider_residual_mass_kg": response_meta.get("residual_mass_kg"),
-        }
     digest = value.get("provider_result_digest")
     if isinstance(digest, str):
         evidence["provider_result_digest"] = digest

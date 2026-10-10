@@ -150,7 +150,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "882 passed, 1 skipped",
+  "latest_local_full_test_run": "885 passed, 1 skipped",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
   "equipment_campaign_compiler_record": "docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md",
@@ -2771,5 +2771,11 @@
   "generic_provider_release_closure_positive_threshold_sidecar_implemented": true,
   "generic_provider_release_closure_positive_threshold_sidecar_policy": "Provider verification.json may close an inventory_depletion packet only when its positive threshold basis, result digest, available mass, released mass, remaining threshold crossing and mass residual all match; this does not claim zero-mass depletion, qualification, frequency inference or facility QRA.",
   "generic_provider_release_closure_releasable_inventory_ledger_implemented": true,
-  "generic_provider_release_closure_releasable_inventory_ledger_policy": "A provider response may close only the explicitly declared releasable inventory at atmospheric-pressure equilibrium when its definition, packet released mass, zero releasable remainder, provider residual and result digest agree; upstream reserve remains explicit and promotion remains false."
+  "generic_provider_release_closure_releasable_inventory_ledger_policy": "A provider response may close only the explicitly declared releasable inventory at atmospheric-pressure equilibrium when its definition, packet released mass, zero releasable remainder, provider residual and result digest agree; upstream reserve remains explicit and promotion remains false.",
+  "dynamic_pipe_provider_inlet_isolation_termination_implemented": true,
+  "dynamic_pipe_provider_inlet_isolation_termination_cli": "scripts/export_lh2dt_dynamic_pipe_prism_packet.py --inlet-isolation-time-s --termination-threshold-kg",
+  "dynamic_pipe_provider_history_coarsening_implemented": true,
+  "dynamic_pipe_provider_history_coarsening_policy": "Internal DynamicHEMPipe intervals may be compressed to at most 100 retained PRISM steps while preserving integrated mass and static enthalpy; no duration or threshold is inferred.",
+  "dynamic_pipe_provider_natural_termination_applied_to_generic_catalog": false,
+  "dynamic_pipe_provider_natural_termination_status": "CAPABILITY_IMPLEMENTED_REVIEWED_ISOLATION_REQUIRED; generic 5 transfer-line packets remain synthetic fixed-horizon until reviewed inlet isolation time and positive threshold are supplied"
 }

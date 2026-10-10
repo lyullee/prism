@@ -46,6 +46,92 @@ def _save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
+def _coarsen_steps(
+    steps: list[dict[str, Any]],
+    *,
+    duration_s: float,
+    max_steps: int = 100,
+) -> list[dict[str, Any]]:
+    """Compress a long provider history without changing its mass ledger.
+
+    The external solver may need thousands of small internal intervals to
+    reach a declared inventory threshold, while the PRISM boundary contract
+    deliberately bounds retained history to 100 intervals.  Each output row
+    is a time-bin average; mass and static enthalpy are integrated over the
+    original intervals before the averaged row is emitted.
+    """
+    if len(steps) <= max_steps:
+        return steps
+    group_size = math.ceil(len(steps) / max_steps)
+    result: list[dict[str, Any]] = []
+
+    def _interval_end(index: int) -> float:
+        return (
+            float(steps[index + 1]["time_s"])
+            if index + 1 < len(steps)
+            else float(duration_s)
+        )
+
+    def _time_average(rows: list[dict[str, Any]], field: str, widths: list[float]) -> float:
+        total = sum(widths)
+        return sum(float(row[field]) * width for row, width in zip(rows, widths)) / total
+
+    for start in range(0, len(steps), group_size):
+        rows = steps[start:start + group_size]
+        widths = [_interval_end(start + offset) - float(row["time_s"])
+                  for offset, row in enumerate(rows)]
+        width = sum(widths)
+        mass = sum(float(row["total_mass_flow_kg_s"]) * dt for row, dt in zip(rows, widths))
+        gas_mass = sum(float(row["gas_mass_flow_kg_s"]) * dt for row, dt in zip(rows, widths))
+        ground_mass = sum(
+            float(row["ground_liquid_mass_flow_kg_s"]) * dt
+            for row, dt in zip(rows, widths)
+        )
+        airborne_mass = sum(
+            float(row["airborne_liquid_mass_flow_kg_s"]) * dt
+            for row, dt in zip(rows, widths)
+        )
+        energy = sum(
+            float(row["total_mass_flow_kg_s"])
+            * float(row["specific_enthalpy_j_kg"])
+            * dt
+            for row, dt in zip(rows, widths)
+        )
+        enthalpy = energy / mass if mass > 0.0 else _time_average(rows, "specific_enthalpy_j_kg", widths)
+        pressure = _time_average(rows, "gas_pressure_pa_abs", widths)
+        temperature = _time_average(rows, "gas_temperature_k", widths)
+        density = _time_average(rows, "gas_density_kg_m3", widths)
+        area = _time_average(rows, "gas_effective_area_m2", widths)
+        gas_flow = gas_mass / width
+        ground_flow = ground_mass / width
+        airborne_flow = airborne_mass / width
+        total_flow = mass / width
+        gas_velocity = gas_flow / (density * area) if gas_flow > 0.0 else 0.0
+        impact = rows[0]["droplet_class_outcomes"][0].get("impact_position_m", [0.0, 0.0, 0.0])
+        result.append({
+            "time_s": float(rows[0]["time_s"]),
+            "total_mass_flow_kg_s": total_flow,
+            "gas_mass_flow_kg_s": gas_flow,
+            "ground_liquid_mass_flow_kg_s": ground_flow,
+            "airborne_liquid_mass_flow_kg_s": airborne_flow,
+            "specific_enthalpy_j_kg": enthalpy,
+            "gas_pressure_pa_abs": pressure,
+            "gas_temperature_k": temperature,
+            "gas_density_kg_m3": density,
+            "gas_effective_area_m2": area,
+            "gas_velocity_m_s": gas_velocity,
+            "gas_velocity_origin": "mass_continuity_from_declared_area",
+            "droplet_class_outcomes": [{
+                "ground_liquid_mass_flow_kg_s": ground_flow,
+                "airborne_liquid_mass_flow_kg_s": airborne_flow,
+                "flight_time_s": 0.0,
+                "impact_position_m": impact,
+                "droplet_diameter_m": 0.001,
+            }],
+        })
+    return result
+
+
 def _request(
     *,
     provider_source_digest: str,
@@ -99,6 +185,8 @@ class DynamicPipeAccidentProvider:
         inlet_pressure_pa: float,
         inlet_temperature_k: float,
         wall_heat_capacity_j_k: float,
+        termination_threshold_kg: float | None = None,
+        inlet_isolation_time_s: float | None = None,
     ) -> None:
         self.lh2dt_root = lh2dt_root.resolve()
         self.duration_s = float(duration_s)
@@ -109,6 +197,25 @@ class DynamicPipeAccidentProvider:
         self.inlet_pressure_pa = float(inlet_pressure_pa)
         self.inlet_temperature_k = float(inlet_temperature_k)
         self.wall_heat_capacity_j_k = float(wall_heat_capacity_j_k)
+        self.termination_threshold_kg = (
+            float(termination_threshold_kg)
+            if termination_threshold_kg is not None
+            else None
+        )
+        if self.termination_threshold_kg is not None and self.termination_threshold_kg <= 0.0:
+            raise ValueError("provider termination threshold must be positive")
+        self.inlet_isolation_time_s = (
+            float(inlet_isolation_time_s)
+            if inlet_isolation_time_s is not None
+            else None
+        )
+        if self.inlet_isolation_time_s is not None and self.inlet_isolation_time_s < 0.0:
+            raise ValueError("provider inlet isolation time must be non-negative")
+        if (
+            self.inlet_isolation_time_s is not None
+            and self.inlet_isolation_time_s > self.duration_s
+        ):
+            raise ValueError("provider inlet isolation time cannot exceed the horizon")
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         opening = float(request["failure_opening_diameter_m"])
@@ -144,8 +251,17 @@ class DynamicPipeAccidentProvider:
         cumulative_enthalpy = 0.0
         intervals = int(round(self.duration_s / self.time_step_s))
         time_s = 0.0
+        terminated_by_threshold = False
         for index in range(intervals):
-            result = pipe.step(state, inlet, outlet, self.time_step_s)
+            inlet_state = (
+                pipe.thermo(state)
+                if (
+                    self.inlet_isolation_time_s is not None
+                    and time_s >= self.inlet_isolation_time_s
+                )
+                else inlet
+            )
+            result = pipe.step(state, inlet_state, outlet, self.time_step_s)
             mass_flow = float(result.derivative.mass_flow_out_kg_s)
             if not math.isfinite(mass_flow) or mass_flow < 0.0:
                 raise ValueError(f"DynamicHEMPipe returned invalid outward flow at interval {index}")
@@ -181,18 +297,44 @@ class DynamicPipeAccidentProvider:
             })
             state = result.state
             time_s += self.time_step_s
-        if not math.isclose(time_s, self.duration_s, rel_tol=0.0, abs_tol=1.0e-10):
+            if (
+                self.termination_threshold_kg is not None
+                and state.mass_kg <= self.termination_threshold_kg
+            ):
+                terminated_by_threshold = True
+                break
+        if (
+            not terminated_by_threshold
+            and not math.isclose(time_s, self.duration_s, rel_tol=0.0, abs_tol=1.0e-10)
+        ):
             raise ValueError("DynamicHEMPipe provider clock disagrees with duration")
+        actual_duration_s = time_s
+        if actual_duration_s <= 0.0:
+            raise ValueError("DynamicHEMPipe provider produced no positive release duration")
+        packet_steps = _coarsen_steps(
+            steps,
+            duration_s=actual_duration_s,
+        )
+        termination_basis = (
+            "inventory_depletion"
+            if terminated_by_threshold
+            else "synthetic_diagnostic_horizon"
+        )
+        termination_provenance = (
+            "external DynamicHEMPipe isolated-inlet positive inventory threshold; residual pipe inventory retained"
+            if terminated_by_threshold
+            else "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained"
+        )
         data = {
             "event_kind": "accidental_leak",
             "event_id": request["event_id"],
             "component_id": request["component_id"],
             "port_id": request["port_id"],
-            "duration_s": self.duration_s,
+            "duration_s": actual_duration_s,
             "available_mass_kg": initial_mass,
             "cumulative_mass_out_kg": cumulative_mass,
-            "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
-            "termination_basis": "synthetic_diagnostic_horizon",
+            "termination_provenance": termination_provenance,
+            "termination_basis": termination_basis,
             "upstream_service": "LH2",
             "fluid": "Hydrogen",
             "phase_basis": "two_phase",
@@ -200,14 +342,27 @@ class DynamicPipeAccidentProvider:
             "reference_area_provenance": "external DynamicHEMPipe inner full-bore area",
             "cumulative_specific_enthalpy_out_j": cumulative_enthalpy,
             "droplet_partition_provenance": "provider atmospheric liquid partition; airborne liquid set to zero",
-            "steps": steps,
+            "steps": packet_steps,
             "provider_meta": {
                 "initial_mass_kg": initial_mass,
                 "final_mass_kg": state.mass_kg,
                 "residual_mass_kg": initial_mass - state.mass_kg - cumulative_mass,
-                "duration_s": self.duration_s,
+                "duration_s": actual_duration_s,
                 "time_step_s": self.time_step_s,
                 "model_class": "lh2dt.DynamicHEMPipe",
+                "termination_basis": (
+                    "inventory_depletion_positive_threshold"
+                    if terminated_by_threshold
+                    else "synthetic_diagnostic_horizon"
+                ),
+                "depletion_threshold_kg": self.termination_threshold_kg,
+                "remaining_mass_kg": float(state.mass_kg),
+                "max_abs_mass_residual_kg": abs(
+                    initial_mass - state.mass_kg - cumulative_mass
+                ),
+                "terminated_by_threshold": terminated_by_threshold,
+                "inlet_isolation_time_s": self.inlet_isolation_time_s,
+                "isolation_success": self.inlet_isolation_time_s is not None,
             },
         }
         return {
@@ -267,6 +422,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         inlet_pressure_pa=args.inlet_pressure_pa,
         inlet_temperature_k=args.inlet_temperature_k,
         wall_heat_capacity_j_k=args.wall_heat_capacity_j_k,
+        termination_threshold_kg=args.termination_threshold_kg,
+        inlet_isolation_time_s=args.inlet_isolation_time_s,
     )
     result = export_equipment_liquid_accident_history(provider, request)
     release = result.release.model_dump(mode="json")
@@ -322,6 +479,18 @@ def main() -> int:
     parser.add_argument("--inlet-pressure-pa", type=float, default=250000.0)
     parser.add_argument("--inlet-temperature-k", type=float, default=20.5)
     parser.add_argument("--wall-heat-capacity-j-k", type=float, default=1000.0)
+    parser.add_argument(
+        "--termination-threshold-kg",
+        type=float,
+        default=None,
+        help="optional positive provider inventory threshold for natural termination",
+    )
+    parser.add_argument(
+        "--inlet-isolation-time-s",
+        type=float,
+        default=None,
+        help="optional provider inlet isolation time; after this time the pipe inlet is held at its state",
+    )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
     parser.add_argument("--component-id", default="dynamic-pipe-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")

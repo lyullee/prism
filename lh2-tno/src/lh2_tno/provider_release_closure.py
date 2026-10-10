@@ -292,6 +292,11 @@ def _audit_one(
                 mass.reported_residual_mass_kg is None
                 or abs(float(mass.reported_residual_mass_kg)) <= MASS_TOLERANCE_KG
             )
+            if threshold_closed:
+                checks["inventory_final_depleted"] = (
+                    evidence_checks["termination_evidence_remaining_at_or_below_threshold"]
+                    or evidence_checks["termination_evidence_releasable_remaining_closed"]
+                )
             for name in (
                 "inventory_initial_matches_packet",
                 "inventory_out_matches_packet",
