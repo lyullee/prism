@@ -226,6 +226,8 @@ python scripts/build_ijhe_objective_coverage_audit.py `
 
 이 연결을 적용한 현재 원장은 [`ijhe_objective_coverage_audit_with_release_closure.json`](../results/20261106/ijhe_objective_coverage_audit_with_release_closure.json)과 [`v060_readiness_report_with_release_closure_objective.json`](../results/20261106/v060_readiness_report_with_release_closure_objective.json)이다. 전자는 22개 objective 행 중 종료 closure 행을 `BLOCKED_EVIDENCE`로 기록하고, 후자는 기존 readiness invariant 13개와 strict blocker 4개를 그대로 통과시킨다.
 
+readiness validator는 이제 `open_case_count = case_count - READY_FOR_STRICT_REVIEW`, 각 closure gap 집계와 요약 필드의 일치까지 검사한다. 따라서 원장의 case 수와 개별 gap 수가 서로 다른 상태로 저장되면 `VALID`가 되지 않는다.
+
 실제 provider packet을 받을 때는 [`audit_provider_release_closure.py`](../scripts/audit_provider_release_closure.py)를 먼저 실행한다. `prism.provider_release_closure_audit.v1`은 `reviewed_isolation_success`의 격리 성공·작동시각, `inventory_depletion`의 최종 재고와 provider 수지, 종료 provenance를 각각 검사한다. 이 감사가 `CLOSURE_READY_FOR_QUALIFICATION`을 반환해도 qualified provider 증거와 독립 물리검증이 자동으로 충족되는 것은 아니다.
 
 배치 manifest를 사용하는 경우에는 `scripts/audit_provider_packet_inputs.py --require-release-closure`를 사용한다. 이 옵션은 qualification sidecar가 맞더라도 종료·격리·재고 closure가 열린 packet을 `NO_PROVIDER_PACKET_INPUT`으로 남긴다. 기본 모드는 기존 packet identity 감사와의 호환성을 위해 closure 결과를 함께 기록하되 packet을 자동 승격하지 않는다.
