@@ -311,6 +311,7 @@ def audit_catalog_manifest(
 def audit_worklist_scope_alignment(
     provider_worklist: Mapping[str, Any],
     event_families: Mapping[str, set[str]],
+    event_ports: Mapping[str, tuple[str, ...] | None] | None = None,
 ) -> dict[str, Any]:
     """Check that worklist event IDs and primary families reach a scope matrix.
 
@@ -329,6 +330,7 @@ def audit_worklist_scope_alignment(
     empty_family_item_ids: list[str] = []
     unknown_family_item_ids: list[str] = []
     primary_family_mismatches: list[dict[str, Any]] = []
+    port_binding_mismatches: list[dict[str, Any]] = []
     aligned_event_ids: list[str] = []
     family_counts: dict[str, int] = {}
     for index, item in enumerate(items):
@@ -364,6 +366,21 @@ def audit_worklist_scope_alignment(
             })
         else:
             aligned_event_ids.append(event_id)
+        if event_ports is not None and event_id in event_ports:
+            expected_ports = event_ports[event_id]
+            if expected_ports is not None:
+                raw_ports = item.get("accident_port_ids")
+                actual_ports = (
+                    tuple(str(value) for value in raw_ports)
+                    if isinstance(raw_ports, list)
+                    else ()
+                )
+                if actual_ports != tuple(expected_ports):
+                    port_binding_mismatches.append({
+                        "event_id": event_id,
+                        "frequency_port_ids": list(expected_ports),
+                        "worklist_accident_port_ids": list(actual_ports),
+                    })
     worklist_event_ids = set(seen)
     campaign_event_ids = set(event_families)
     extra_campaign_event_ids = sorted(campaign_event_ids - worklist_event_ids)
@@ -378,6 +395,8 @@ def audit_worklist_scope_alignment(
         blocking.append("provider worklist event has an unknown scenario family")
     if primary_family_mismatches:
         blocking.append("worklist primary accident family disagrees with campaign scope")
+    if port_binding_mismatches:
+        blocking.append("worklist accident port binding disagrees with frequency event")
     if extra_campaign_event_ids:
         blocking.append("campaign scope contains an event absent from the provider worklist")
     return {
@@ -391,6 +410,7 @@ def audit_worklist_scope_alignment(
         "empty_family_item_ids": sorted(set(empty_family_item_ids)),
         "unknown_family_item_ids": sorted(set(unknown_family_item_ids)),
         "primary_family_mismatches": primary_family_mismatches,
+        "port_binding_mismatches": port_binding_mismatches,
         "extra_campaign_event_ids": extra_campaign_event_ids,
         "primary_family_counts": dict(sorted(family_counts.items())),
         "blocking_reasons": list(dict.fromkeys(blocking)),

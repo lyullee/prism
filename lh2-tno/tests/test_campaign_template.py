@@ -462,3 +462,36 @@ def test_provider_worklist_campaign_keeps_all_generic_events_uncomputed_without_
     assert all(branch.id == "uncomputed-provider-packet" for branch in branches)
     assert all(branch.request is None for branch in branches)
     assert all("provider accident packet required" in branch.uncomputed_reason for branch in branches)
+
+
+def test_provider_worklist_campaign_rejects_missing_frequency_port_binding():
+    root = Path(__file__).parents[1]
+    raw = json.loads(
+        (root / "examples" / "generic_lh2_full_scope_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    raw["ports"] = [
+        row for row in raw["ports"] if row["id"] != "line-accident-out"
+    ]
+    manifest = EquipmentManifest.model_validate_json(json.dumps(raw, allow_nan=False))
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples" / "generic_lh2_full_scope_frequency_plan.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    conditions = tuple(
+        AnnualCondition.model_validate_json(json.dumps(row, allow_nan=False))
+        for row in json.loads(
+            (root / "examples" / "equipment_annual_conditions.json").read_text(
+                encoding="utf-8"
+            )
+        )
+    )
+    with pytest.raises(ValueError, match="frequency port binding is incomplete"):
+        build_equipment_campaign_from_provider_worklist(
+            manifest,
+            plan,
+            conditions,
+            scope_provenance="missing mapped port must stay diagnostic",
+        )

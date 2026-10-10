@@ -198,7 +198,18 @@ def build_accident_scope_matrix(
         barrier_branches.update(str(branch.id) for branch in branches)
 
     worklist_alignment = (
-        audit_worklist_scope_alignment(provider_worklist, event_families)
+        audit_worklist_scope_alignment(
+            provider_worklist,
+            event_families,
+            {
+                event_id: (
+                    tuple(event.get("port_ids"))
+                    if isinstance(event.get("port_ids"), list)
+                    else None
+                )
+                for event_id, event in events.items()
+            },
+        )
         if provider_worklist is not None
         else None
     )

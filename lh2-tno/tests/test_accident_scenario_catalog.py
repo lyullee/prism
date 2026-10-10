@@ -138,3 +138,28 @@ def test_worklist_scope_alignment_checks_primary_family_without_inventing_packet
     assert report["status"] == "ALIGNED"
     assert report["aligned_event_count"] == 2
     assert report["provider_packet_created"] is False
+
+
+def test_worklist_scope_alignment_checks_port_scoped_frequency_identity():
+    worklist = {
+        "work_items": [{
+            "id": "event-1/provider-release",
+            "event_id": "event-1",
+            "scenario_families": ["vessel_hole"],
+            "accident_port_ids": ["tank-accident-out"],
+        }]
+    }
+    aligned = audit_worklist_scope_alignment(
+        worklist,
+        {"event-1": {"vessel_hole"}},
+        {"event-1": ("tank-accident-out",)},
+    )
+    assert aligned["status"] == "ALIGNED"
+    assert aligned["port_binding_mismatches"] == []
+    mismatched = audit_worklist_scope_alignment(
+        worklist,
+        {"event-1": {"vessel_hole"}},
+        {"event-1": ("tank-other-out",)},
+    )
+    assert mismatched["status"] == "PARTIAL_ALIGNMENT"
+    assert mismatched["port_binding_mismatches"][0]["frequency_port_ids"] == ["tank-other-out"]

@@ -105,6 +105,11 @@ def build_equipment_campaign_from_provider_worklist(
             "equipment manifest is not executable: "
             + "; ".join(report.get("blocking_reasons", ()))
         )
+    if report.get("frequency_port_binding_warning"):
+        raise ValueError(
+            "frequency port binding is incomplete; provider worklist remains diagnostic: "
+            + str(report["frequency_port_binding_warning"])
+        )
     items = {row["event_id"]: row for row in report["work_items"]}
     events = generate_events(manifest.to_facility(), frequency_plan)
     routes: list[EventRoute] = []

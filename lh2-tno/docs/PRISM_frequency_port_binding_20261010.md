@@ -51,6 +51,8 @@ PRISM은 이벤트를 만들 때 다음을 확인한다.
 
 provider 방출 작업목록을 만들 때 매니페스트에서 지정 포트가 빠져 있으면 작업목록은 해당 이벤트를 `UNCOMPUTED_NO_ACCIDENT_PORT`로 남긴다. 정상 운전 포트를 사고 포트로 대체하지 않으며, 누락된 포트를 복구할 때까지 packet 수는 증가하지 않는다.
 
+이런 worklist를 시설 캠페인으로 컴파일하려 하면 컴파일러도 중단한다. 포트 매핑이 복구되기 전에는 캠페인·IR/F-N 계산으로 진행하지 않고, worklist 자체만 진단 자료로 남긴다.
+
 ## 포트가 아직 없는 기존 계획
 
 기존 문헌 계획은 하위 호환을 위해 `port_ids` 없이도 읽을 수 있다. 이런 이벤트는 component-level 빈도로만 표시되며, provider가 반환한 특정 방출 포트의 근거가 자동으로 생기지 않는다. 따라서 보고서의 `frequency_port_binding`에 `port_unbound_event_count`로 남는다.
