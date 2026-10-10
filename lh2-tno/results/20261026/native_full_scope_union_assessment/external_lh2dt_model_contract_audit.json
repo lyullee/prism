@@ -2,7 +2,7 @@
   "schema_version": "prism.external_model_contract_audit.v1",
   "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
-  "external_model_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+  "external_model_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
   "binding_catalog_sha256": "a697d0b63853aef660ad4b27bb8fe1bc2a63e0b8bec4d2dd99a43f433f3c3461",
   "binding_count": 8,
   "native_accident_export_component_count": 7,

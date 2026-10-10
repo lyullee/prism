@@ -2,7 +2,7 @@
   "schema_version": "prism.external_native_export_smoke_manifest.v1",
   "status": "ALL_7_NATIVE_EXPORTS_EXECUTED_DIAGNOSTIC",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
-  "external_model_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
+  "external_model_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
   "component_count": 7,
   "qualified_provider_packet_count": 0,
   "physical_validation_claim": false,
@@ -13,15 +13,15 @@
       "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
       "provider_model": "lh2dt.LayeredTank",
       "provider_export_schema": "prism.external_accident_history.v1",
-      "termination_basis": "inventory_depletion",
-      "duration_s": 0.1,
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.05,
       "available_mass_kg": 434.50988152270014,
-      "cumulative_mass_out_kg": 0.00015346569325836357,
+      "cumulative_mass_out_kg": 7.673284887382976e-05,
       "mass_residual_kg": 5.684341886080802e-14,
       "strict_packet_mass_residual_kg": null,
       "isolation_success": null,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "84b251fe554ff1df85edc4a7f71c46b56dafe9b8f24804a9920503bc3ef40185"
+      "native_provider_response_sha256": "c71c592b3466ba05c7c8918e12f8b73ec3d4c63e0e9ea26614b1e97655be034a"
     },
     {
       "component": "pipe",
@@ -29,14 +29,14 @@
       "provider_model": "lh2dt.DynamicHEMPipe",
       "provider_export_schema": "prism.external_accident_history.v1",
       "termination_basis": "reviewed_isolation_success",
-      "duration_s": 0.07500000000000001,
+      "duration_s": 0.05,
       "available_mass_kg": 2.5156266507964498,
-      "cumulative_mass_out_kg": 2.5156266507964498,
-      "mass_residual_kg": 1.0938542258010093,
+      "cumulative_mass_out_kg": 2.0663809310315235,
+      "mass_residual_kg": -4.440892098500626e-16,
       "strict_packet_mass_residual_kg": null,
       "isolation_success": true,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "ec4867234d23f7a6975c1ccf9e545b8f6533c92bb723cfb9e55bb771d8663fa7"
+      "native_provider_response_sha256": "4a052ba03f81a8c4341c26e5c42dafc6d83d8e52befea6ec7eb192f4f747a5c1"
     },
     {
       "component": "valve",
@@ -51,7 +51,7 @@
       "strict_packet_mass_residual_kg": null,
       "isolation_success": null,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "40484dbd89ed5eaf3455b0c9a4b051c004cece52457fb588f931f82d5e7a539f"
+      "native_provider_response_sha256": "4ddbd8e0bb7b8549e987ebf4741cc400a26615fa68aab17b1df1a52e9f519689"
     },
     {
       "component": "vent",
@@ -66,7 +66,7 @@
       "strict_packet_mass_residual_kg": null,
       "isolation_success": null,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "94e649101fd72d5f5aba5dde8c71129a31ae334bd3262bcd0bab926dea39d947"
+      "native_provider_response_sha256": "188f52d762540fc41efd01642c722e73c7a5cd90a7bb8bc5224fd2656e8647c0"
     },
     {
       "component": "pump",
@@ -74,14 +74,14 @@
       "provider_model": "lh2dt.MappedPump",
       "provider_export_schema": "prism.external_accident_history.v1",
       "termination_basis": "synthetic_diagnostic_horizon",
-      "duration_s": 0.1,
+      "duration_s": 0.2,
       "available_mass_kg": 1.0,
-      "cumulative_mass_out_kg": 0.0014578333333333336,
+      "cumulative_mass_out_kg": 0.002915666666666667,
       "mass_residual_kg": null,
       "strict_packet_mass_residual_kg": 0.0,
       "isolation_success": null,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "216f3e32799855d00452016907e758ef1be89ab71bb161b4cb82f9e3caf05c62"
+      "native_provider_response_sha256": "c6f01805891d100e6acedf375831f68508854662d0255104fc8ab789eb073bca"
     },
     {
       "component": "vaporizer",
@@ -96,7 +96,7 @@
       "strict_packet_mass_residual_kg": null,
       "isolation_success": null,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "54c9d2b160a3e151d4a6deb93b2839198c7cffe40fffc60d0eda2d01a2d6e8a7"
+      "native_provider_response_sha256": "76b84f2d1116f84264763c6274851bbc3073df3c0d4b589e2cd37d980d8a683d"
     },
     {
       "component": "reliquefier",
@@ -111,7 +111,7 @@
       "strict_packet_mass_residual_kg": null,
       "isolation_success": null,
       "provider_state_snapshot_digest_match": true,
-      "native_provider_response_sha256": "2fde978357072b8fcd96ea3f00b96c5c1c68117efbd5bc9dacb4724afa571525"
+      "native_provider_response_sha256": "03fcac5723aaffe73f7f3188d7916ccb181da44b1119b89bc55f266631dc9106"
     }
   ],
   "limitations": [
@@ -120,7 +120,7 @@
     "no field qualification, independent validation, frequency inference, or facility IR/F-N promotion"
   ],
   "external_regression_summary_record": "results/20261026/native_full_scope_union_assessment/external_native_export_smoke/external_regression_summary.json",
-  "external_regression_status": "PASS; 1493 passed, 0 failed, 0 skipped; no-fitting static audit refreshed at 657 scanned Python files",
-  "external_regression_test_count": 1493,
-  "external_regression_duration_s": 1099.78
+  "external_regression_status": "PASS; 1494 passed, 0 failed, 0 skipped; no-fitting static audit refreshed at 657 scanned Python files",
+  "external_regression_test_count": 1494,
+  "external_regression_duration_s": 976.98
 }

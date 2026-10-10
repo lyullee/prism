@@ -3,11 +3,11 @@
   "status": "PASS",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
   "command": ".venv-local\\Scripts\\python.exe -m pytest -q",
-  "test_count": 1493,
-  "passed": 1493,
+  "test_count": 1494,
+  "passed": 1494,
   "failed": 0,
   "skipped": 0,
-  "duration_s": 1099.78,
+  "duration_s": 976.98,
   "no_fitting_policy_artifact": {
     "path": "docs/benchmarks/no_fitting_policy_audit.json",
     "sha256": "5caa7927402721fba7a5d01e256e6741d68627c63a3d681a85b634a905a032f8",
@@ -16,7 +16,7 @@
   },
   "native_contract_document": {
     "path": "docs/PRISM_native_LH2_사고방출_export_계약.md",
-    "sha256": "0975f3cc4c3f02eede5ded4b9d3ac8fe0cd0664d5e68156a5817c2564a74ff92"
+    "sha256": "ac278e79a2040b80a904b24e1510e5bbdaa4c6a55b9204e0d7656037954ad06e"
   },
   "interpretation": "External model regression and static no-fitting audit pass. This verifies the external solver code and contract only; it does not qualify field accident packets, frequencies, independent full-chain validation, or facility QRA."
 }
