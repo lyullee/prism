@@ -157,6 +157,12 @@ def test_report_keeps_conditional_chain_and_strict_gate_separate():
     assert report["accident_families"]["rows"][0]["conditional_status"] == "EXECUTED"
     assert report["timing"]["cache_meets_one_hz_all_samples"] is True
     assert report["timing"]["fresh_physics_meets_one_hz"] is False
+    profile = report["timing"]["runtime_profile"]
+    assert profile["recommended_mode"] == "cached_diagnostic_1hz"
+    assert profile["cache_mode"]["one_hz_ready"] is True
+    assert profile["fresh_physics_mode"]["one_hz_ready"] is False
+    assert profile["campaign_mode"]["online_one_hz_ready"] is False
+    assert profile["facility_qra_realtime_claim"] is False
     release = report["chain"]["release_boundary"]
     assert release["status"] == "PARTIAL_RELEASE_BOUNDARY_COVERAGE"
     assert release["termination_basis_counts"]["synthetic_diagnostic_horizon"] == 1
@@ -193,6 +199,13 @@ def test_report_validator_rejects_case_accounting_drift():
     report = deepcopy(report)
     report["chain"]["conditional_executed_case_count"] = 2
     with pytest.raises(V060ReadinessError, match="conditional cases"):
+        validate_v060_readiness_report(report)
+
+
+def test_report_validator_rejects_realtime_facility_qra_claim():
+    report = build_v060_readiness_report(**_inputs())
+    report["timing"]["runtime_profile"]["facility_qra_realtime_claim"] = True
+    with pytest.raises(V060ReadinessError, match="real-time facility QRA"):
         validate_v060_readiness_report(report)
 
 

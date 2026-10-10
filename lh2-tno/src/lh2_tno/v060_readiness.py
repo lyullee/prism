@@ -287,6 +287,56 @@ def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _runtime_profile(
+    realtime: Mapping[str, Any], timing: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Describe which execution mode can support a one-hertz diagnostic loop.
+
+    The benchmark contains three different operations that must not be merged:
+    reading a saved consequence result, running fresh consequence physics, and
+    running the complete multi-case campaign.  The profile makes that boundary
+    explicit for digital-twin integrators and keeps the QRA promotion claim
+    closed regardless of the measured latency.
+    """
+    cache_p95 = realtime.get("cache_p95_ms")
+    fresh_elapsed = realtime.get("fresh_physics_elapsed_ms")
+    cache_ready = realtime.get("cache_meets_one_hz_all_samples") is True
+    fresh_ready = realtime.get("fresh_physics_meets_one_hz") is True
+    campaign_p95 = timing.get("case_p95_ms")
+    campaign_p99 = timing.get("case_p99_ms")
+    if cache_ready:
+        recommended = "cached_diagnostic_1hz"
+    elif fresh_ready:
+        recommended = "fresh_physics_1hz"
+    else:
+        recommended = "offline_campaign"
+    return {
+        "recommended_mode": recommended,
+        "cache_mode": {
+            "p95_ms": cache_p95,
+            "one_hz_ready": cache_ready,
+            "purpose": "reuse a validated consequence result for diagnostic monitoring",
+        },
+        "fresh_physics_mode": {
+            "elapsed_ms": fresh_elapsed,
+            "one_hz_ready": fresh_ready,
+            "purpose": "recalculate SLABx-LH2 consequence from a new equipment state",
+        },
+        "campaign_mode": {
+            "p95_ms": campaign_p95,
+            "p99_ms": campaign_p99,
+            "online_one_hz_ready": False,
+            "purpose": "offline multi-case risk and sensitivity assessment",
+        },
+        "facility_qra_realtime_claim": False,
+        "interpretation": (
+            "One-hertz service is a cache-mode diagnostic claim only; fresh physics "
+            "and the full campaign remain slower measured paths and do not imply "
+            "qualified facility QRA."
+        ),
+    }
+
+
 def build_v060_readiness_report(
     *,
     objective_audit: Mapping[str, Any],
@@ -780,6 +830,7 @@ def build_v060_readiness_report(
             "campaign_case_p95_ms": timing.get("case_p95_ms"),
             "campaign_case_p99_ms": timing.get("case_p99_ms"),
             "stage_elapsed_ms": timing.get("stage_elapsed_ms", {}),
+            "runtime_profile": _runtime_profile(realtime, timing),
         },
         "validation_domains": domains,
         "evidence_request": (
@@ -1441,6 +1492,48 @@ def validate_v060_readiness_report(
     frequency = frequency if isinstance(frequency, Mapping) else {}
     if frequency.get("sensor_frequency_learning") is not False:
         errors.append("sensor_frequency_learning must remain false")
+
+    timing = value.get("timing")
+    timing = timing if isinstance(timing, Mapping) else {}
+    runtime_profile = timing.get("runtime_profile")
+    if runtime_profile is not None:
+        if not isinstance(runtime_profile, Mapping):
+            errors.append("timing.runtime_profile must be an object")
+        else:
+            allowed_modes = {
+                "cached_diagnostic_1hz",
+                "fresh_physics_1hz",
+                "offline_campaign",
+            }
+            if runtime_profile.get("recommended_mode") not in allowed_modes:
+                errors.append("timing.runtime_profile.recommended_mode is unsupported")
+            if runtime_profile.get("facility_qra_realtime_claim") is not False:
+                errors.append(
+                    "timing.runtime_profile cannot claim real-time facility QRA"
+                )
+            for mode in ("cache_mode", "fresh_physics_mode", "campaign_mode"):
+                block = runtime_profile.get(mode)
+                if not isinstance(block, Mapping):
+                    errors.append(f"timing.runtime_profile.{mode} must be an object")
+            cache_mode = runtime_profile.get("cache_mode")
+            if isinstance(cache_mode, Mapping) and cache_mode.get("one_hz_ready") is not None:
+                if not isinstance(cache_mode.get("one_hz_ready"), bool):
+                    errors.append(
+                        "timing.runtime_profile.cache_mode.one_hz_ready must be boolean"
+                    )
+            fresh_mode = runtime_profile.get("fresh_physics_mode")
+            if isinstance(fresh_mode, Mapping) and fresh_mode.get("one_hz_ready") is not None:
+                if not isinstance(fresh_mode.get("one_hz_ready"), bool):
+                    errors.append(
+                        "timing.runtime_profile.fresh_physics_mode.one_hz_ready must be boolean"
+                    )
+            campaign_mode = runtime_profile.get("campaign_mode")
+            if isinstance(campaign_mode, Mapping) and campaign_mode.get(
+                "online_one_hz_ready"
+            ) is not False:
+                errors.append(
+                    "timing.runtime_profile.campaign_mode must remain offline"
+                )
 
     promotion = value.get("promotion")
     promotion = promotion if isinstance(promotion, Mapping) else {}

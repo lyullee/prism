@@ -647,6 +647,27 @@
         "p95_ms": 786.4394950389395,
         "p99_ms": 808.7060489528812
       }
+    },
+    "runtime_profile": {
+      "recommended_mode": "cached_diagnostic_1hz",
+      "cache_mode": {
+        "p95_ms": 61.27649999689311,
+        "one_hz_ready": true,
+        "purpose": "reuse a validated consequence result for diagnostic monitoring"
+      },
+      "fresh_physics_mode": {
+        "elapsed_ms": 2711.2096999771893,
+        "one_hz_ready": false,
+        "purpose": "recalculate SLABx-LH2 consequence from a new equipment state"
+      },
+      "campaign_mode": {
+        "p95_ms": 39591.673405066846,
+        "p99_ms": 79233.10563297477,
+        "online_one_hz_ready": false,
+        "purpose": "offline multi-case risk and sensitivity assessment"
+      },
+      "facility_qra_realtime_claim": false,
+      "interpretation": "One-hertz service is a cache-mode diagnostic claim only; fresh physics and the full campaign remain slower measured paths and do not imply qualified facility QRA."
     }
   },
   "validation_domains": [
