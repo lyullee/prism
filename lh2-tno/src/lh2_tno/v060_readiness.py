@@ -623,6 +623,7 @@ def build_v060_readiness_report(
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     isolation_release_closure_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
+    equipment_family_case_bridge_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -768,6 +769,12 @@ def build_v060_readiness_report(
     release_closure = None
     if release_closure_worklist is not None:
         release_closure = _mapping(release_closure_worklist, "release_closure_worklist")
+    equipment_case_bridge = None
+    if equipment_family_case_bridge_audit is not None:
+        equipment_case_bridge = _mapping(
+            equipment_family_case_bridge_audit,
+            "equipment_family_case_bridge_audit",
+        )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
         if isinstance(evidence_request, Mapping)
@@ -838,6 +845,35 @@ def build_v060_readiness_report(
             "release_closure_worklist": (
                 _release_closure_worklist_summary(release_closure)
                 if release_closure is not None
+                else None
+            ),
+            "equipment_family_case_bridge": (
+                {
+                    "schema_version": equipment_case_bridge.get("schema_version"),
+                    "status": equipment_case_bridge.get("status"),
+                    "asset_count": equipment_case_bridge.get("asset_count"),
+                    "case_count": equipment_case_bridge.get("case_count"),
+                    "case_asset_count": equipment_case_bridge.get("case_asset_count"),
+                    "case_assets_outside_scope": equipment_case_bridge.get(
+                        "case_assets_outside_scope"
+                    ),
+                    "scope_mismatch_case_count": equipment_case_bridge.get(
+                        "scope_mismatch_case_count"
+                    ),
+                    "scenario_family_count": equipment_case_bridge.get(
+                        "scenario_family_count"
+                    ),
+                    "families_with_cases": equipment_case_bridge.get("families_with_cases"),
+                    "families_without_cases": equipment_case_bridge.get(
+                        "families_without_cases"
+                    ),
+                    "release_closure_gap_counts": equipment_case_bridge.get(
+                        "release_closure_gap_counts", {}
+                    ),
+                    "diagnostic_only": equipment_case_bridge.get("diagnostic_only"),
+                    "facility_qra_claim": equipment_case_bridge.get("facility_qra_claim"),
+                }
+                if equipment_case_bridge is not None
                 else None
             ),
             "frequency_port_binding": _frequency_port_binding_summary(

@@ -1,0 +1,1411 @@
+{
+  "schema_version": "prism.equipment_family_case_bridge_audit.v1",
+  "status": "CASE_SCOPE_MISMATCH_RELEASE_CLOSURE_OPEN",
+  "scope": "generic LH2 equipment-to-facility-case bridge; diagnostic only",
+  "coverage_record": "results\\20261105\\generic_lh2_full_scope_equipment_scenario_coverage.json",
+  "worklist_record": "results\\20261106\\release_closure_worklist.json",
+  "asset_count": 7,
+  "case_count": 44,
+  "case_asset_count": 9,
+  "case_assets_outside_scope": [
+    "inventory-depletion-pipe",
+    "vertical-handoff-vent"
+  ],
+  "scope_mismatch_case_count": 20,
+  "coverage_assets_without_cases": [],
+  "scenario_family_count": 12,
+  "families_with_cases": 12,
+  "families_without_cases": 0,
+  "assets": [
+    {
+      "asset_id": "storage-shell",
+      "component_kind": "storage_tank",
+      "coverage_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ],
+      "case_count": 5,
+      "case_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "coverage_families_without_case": [
+        "inventory_over_600s"
+      ],
+      "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 5,
+        "ISOLATION_OPEN": 5,
+        "PROVIDER_QUALIFICATION_OPEN": 5
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    },
+    {
+      "asset_id": "transfer-line",
+      "component_kind": "pipe",
+      "coverage_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "vertical_handoff"
+      ],
+      "case_count": 5,
+      "case_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "coverage_families_without_case": [
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "vertical_handoff"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 5,
+        "PROVIDER_QUALIFICATION_OPEN": 5,
+        "TERMINATION_OPEN": 5
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    },
+    {
+      "asset_id": "transfer-valve",
+      "component_kind": "valve",
+      "coverage_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "vertical_handoff"
+      ],
+      "case_count": 5,
+      "case_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "coverage_families_without_case": [
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "vertical_handoff"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 5,
+        "PROVIDER_QUALIFICATION_OPEN": 5,
+        "TERMINATION_OPEN": 5
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    },
+    {
+      "asset_id": "pressure-relief-vent",
+      "component_kind": "vent_stack",
+      "coverage_families": [
+        "vent_hole",
+        "vertical_handoff"
+      ],
+      "case_count": 1,
+      "case_families": [
+        "vent_hole"
+      ],
+      "coverage_families_without_case": [
+        "vertical_handoff"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 1,
+        "PROVIDER_QUALIFICATION_OPEN": 1
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    },
+    {
+      "asset_id": "transfer-pump",
+      "component_kind": "pump",
+      "coverage_families": [
+        "pump_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ],
+      "case_count": 2,
+      "case_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "coverage_families_without_case": [
+        "inventory_over_600s"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 2,
+        "PROVIDER_QUALIFICATION_OPEN": 2,
+        "TERMINATION_OPEN": 2
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    },
+    {
+      "asset_id": "ambient-vaporizer",
+      "component_kind": "vaporizer",
+      "coverage_families": [
+        "vaporizer_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ],
+      "case_count": 3,
+      "case_families": [
+        "inventory_depletion",
+        "inventory_over_600s",
+        "vaporizer_hole"
+      ],
+      "coverage_families_without_case": [
+        "liquid_two_phase"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 3,
+        "PROVIDER_QUALIFICATION_OPEN": 3,
+        "TERMINATION_OPEN": 1
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    },
+    {
+      "asset_id": "reliquefier",
+      "component_kind": "reliquefier",
+      "coverage_families": [
+        "reliquefier_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "two_sided_rupture"
+      ],
+      "case_count": 3,
+      "case_families": [
+        "reliquefier_hole",
+        "two_sided_rupture"
+      ],
+      "coverage_families_without_case": [
+        "inventory_depletion",
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 3,
+        "PROVIDER_QUALIFICATION_OPEN": 3,
+        "TERMINATION_OPEN": 1
+      },
+      "scope_status": "PARTIAL_FAMILY_CASE_COVERAGE"
+    }
+  ],
+  "scenario_families": [
+    {
+      "family": "vessel_hole",
+      "applicable_asset_ids": [
+        "storage-shell"
+      ],
+      "case_count": 5,
+      "case_asset_ids": [
+        "storage-shell"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 5,
+        "ISOLATION_OPEN": 5,
+        "PROVIDER_QUALIFICATION_OPEN": 5
+      },
+      "status": "CASE_BOUND_RELEASE_CLOSURE_OPEN"
+    },
+    {
+      "family": "pipe_hole",
+      "applicable_asset_ids": [
+        "transfer-line"
+      ],
+      "case_count": 25,
+      "case_asset_ids": [
+        "inventory-depletion-pipe",
+        "transfer-line",
+        "vertical-handoff-vent"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [
+        "inventory-depletion-pipe",
+        "vertical-handoff-vent"
+      ],
+      "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 10,
+        "ISOLATION_OPEN": 25,
+        "PROVIDER_QUALIFICATION_OPEN": 25,
+        "TERMINATION_OPEN": 15
+      },
+      "status": "CASE_SCOPE_MISMATCH"
+    },
+    {
+      "family": "valve_hole",
+      "applicable_asset_ids": [
+        "transfer-valve"
+      ],
+      "case_count": 5,
+      "case_asset_ids": [
+        "transfer-valve"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 5,
+        "PROVIDER_QUALIFICATION_OPEN": 5,
+        "TERMINATION_OPEN": 5
+      },
+      "status": "CASE_BOUND_RELEASE_CLOSURE_OPEN"
+    },
+    {
+      "family": "vent_hole",
+      "applicable_asset_ids": [
+        "pressure-relief-vent"
+      ],
+      "case_count": 1,
+      "case_asset_ids": [
+        "pressure-relief-vent"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 1,
+        "PROVIDER_QUALIFICATION_OPEN": 1
+      },
+      "status": "CASE_BOUND_RELEASE_CLOSURE_OPEN"
+    },
+    {
+      "family": "pump_hole",
+      "applicable_asset_ids": [
+        "transfer-pump"
+      ],
+      "case_count": 2,
+      "case_asset_ids": [
+        "transfer-pump"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 2,
+        "PROVIDER_QUALIFICATION_OPEN": 2,
+        "TERMINATION_OPEN": 2
+      },
+      "status": "CASE_BOUND_RELEASE_CLOSURE_OPEN"
+    },
+    {
+      "family": "vaporizer_hole",
+      "applicable_asset_ids": [
+        "ambient-vaporizer"
+      ],
+      "case_count": 1,
+      "case_asset_ids": [
+        "ambient-vaporizer"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 1,
+        "PROVIDER_QUALIFICATION_OPEN": 1,
+        "TERMINATION_OPEN": 1
+      },
+      "status": "CASE_BOUND_RELEASE_CLOSURE_OPEN"
+    },
+    {
+      "family": "reliquefier_hole",
+      "applicable_asset_ids": [
+        "reliquefier"
+      ],
+      "case_count": 1,
+      "case_asset_ids": [
+        "reliquefier"
+      ],
+      "applicable_assets_without_case": [],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 1,
+        "PROVIDER_QUALIFICATION_OPEN": 1,
+        "TERMINATION_OPEN": 1
+      },
+      "status": "CASE_BOUND_RELEASE_CLOSURE_OPEN"
+    },
+    {
+      "family": "liquid_two_phase",
+      "applicable_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-valve",
+        "transfer-pump",
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "case_count": 17,
+      "case_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-pump",
+        "transfer-valve"
+      ],
+      "applicable_assets_without_case": [
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 5,
+        "ISOLATION_OPEN": 17,
+        "PROVIDER_QUALIFICATION_OPEN": 17,
+        "TERMINATION_OPEN": 12
+      },
+      "status": "PARTIAL_ASSET_CASE_COVERAGE"
+    },
+    {
+      "family": "inventory_depletion",
+      "applicable_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-valve",
+        "transfer-pump",
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "case_count": 28,
+      "case_asset_ids": [
+        "ambient-vaporizer",
+        "inventory-depletion-pipe",
+        "storage-shell",
+        "transfer-line",
+        "transfer-pump",
+        "transfer-valve"
+      ],
+      "applicable_assets_without_case": [
+        "reliquefier"
+      ],
+      "case_assets_outside_family_scope": [
+        "inventory-depletion-pipe"
+      ],
+      "closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 15,
+        "ISOLATION_OPEN": 28,
+        "PROVIDER_QUALIFICATION_OPEN": 28,
+        "TERMINATION_OPEN": 12
+      },
+      "status": "CASE_SCOPE_MISMATCH"
+    },
+    {
+      "family": "inventory_over_600s",
+      "applicable_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-valve",
+        "transfer-pump",
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "case_count": 1,
+      "case_asset_ids": [
+        "ambient-vaporizer"
+      ],
+      "applicable_assets_without_case": [
+        "reliquefier",
+        "storage-shell",
+        "transfer-line",
+        "transfer-pump",
+        "transfer-valve"
+      ],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 1,
+        "PROVIDER_QUALIFICATION_OPEN": 1
+      },
+      "status": "PARTIAL_ASSET_CASE_COVERAGE"
+    },
+    {
+      "family": "two_sided_rupture",
+      "applicable_asset_ids": [
+        "transfer-line",
+        "transfer-valve",
+        "reliquefier"
+      ],
+      "case_count": 2,
+      "case_asset_ids": [
+        "reliquefier"
+      ],
+      "applicable_assets_without_case": [
+        "transfer-line",
+        "transfer-valve"
+      ],
+      "case_assets_outside_family_scope": [],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 2,
+        "PROVIDER_QUALIFICATION_OPEN": 2
+      },
+      "status": "PARTIAL_ASSET_CASE_COVERAGE"
+    },
+    {
+      "family": "vertical_handoff",
+      "applicable_asset_ids": [
+        "transfer-line",
+        "transfer-valve",
+        "pressure-relief-vent"
+      ],
+      "case_count": 10,
+      "case_asset_ids": [
+        "vertical-handoff-vent"
+      ],
+      "applicable_assets_without_case": [
+        "pressure-relief-vent",
+        "transfer-line",
+        "transfer-valve"
+      ],
+      "case_assets_outside_family_scope": [
+        "vertical-handoff-vent"
+      ],
+      "closure_gap_counts": {
+        "ISOLATION_OPEN": 10,
+        "PROVIDER_QUALIFICATION_OPEN": 10,
+        "TERMINATION_OPEN": 10
+      },
+      "status": "CASE_SCOPE_MISMATCH"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "asset_id": "ambient-vaporizer",
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "closure_status": "ISOLATION_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "asset_id": "ambient-vaporizer",
+      "scenario_families": [
+        "inventory_over_600s"
+      ],
+      "closure_status": "ISOLATION_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "asset_id": "ambient-vaporizer",
+      "scenario_families": [
+        "vaporizer_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "asset_id": "pressure-relief-vent",
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "closure_status": "ISOLATION_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "asset_id": "reliquefier",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "closure_status": "ISOLATION_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "asset_id": "reliquefier",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "closure_status": "ISOLATION_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "asset_id": "reliquefier",
+      "scenario_families": [
+        "reliquefier_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "asset_id": "storage-shell",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "asset_id": "storage-shell",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "asset_id": "storage-shell",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "asset_id": "storage-shell",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "asset_id": "storage-shell",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "asset_id": "transfer-line",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "asset_id": "transfer-line",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "asset_id": "transfer-line",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "asset_id": "transfer-line",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "asset_id": "transfer-line",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "asset_id": "transfer-pump",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "asset_id": "transfer-pump",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "asset_id": "transfer-valve",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "asset_id": "transfer-valve",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "asset_id": "transfer-valve",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "asset_id": "transfer-valve",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "asset_id": "transfer-valve",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "BOUND_TO_DECLARED_SCOPE",
+      "scope_blocking_reasons": []
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "event_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "asset_id": "inventory-depletion-pipe",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "closure_status": "INVENTORY_CLOSURE_OPEN",
+      "closure_gaps": [
+        "ISOLATION_OPEN",
+        "INVENTORY_CLOSURE_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    },
+    {
+      "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "event_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%",
+      "asset_id": "vertical-handoff-vent",
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "closure_status": "TERMINATION_OPEN",
+      "closure_gaps": [
+        "TERMINATION_OPEN",
+        "ISOLATION_OPEN",
+        "PROVIDER_QUALIFICATION_OPEN"
+      ],
+      "scope_status": "SCOPE_MISMATCH",
+      "scope_blocking_reasons": [
+        "case asset is absent from equipment scenario coverage",
+        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
+      ]
+    }
+  ],
+  "release_closure_gap_counts": {
+    "INVENTORY_CLOSURE_OPEN": 15,
+    "ISOLATION_OPEN": 44,
+    "PROVIDER_QUALIFICATION_OPEN": 44,
+    "TERMINATION_OPEN": 24
+  },
+  "blocking_reasons": [
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
+    "family pipe_hole has cases on undeclared assets: inventory-depletion-pipe, vertical-handoff-vent",
+    "family liquid_two_phase has declared assets without a worklist case: ambient-vaporizer, reliquefier",
+    "family inventory_depletion has declared assets without a worklist case: reliquefier",
+    "family inventory_depletion has cases on undeclared assets: inventory-depletion-pipe",
+    "family inventory_over_600s has declared assets without a worklist case: reliquefier, storage-shell, transfer-line, transfer-pump, transfer-valve",
+    "family two_sided_rupture has declared assets without a worklist case: transfer-line, transfer-valve",
+    "family vertical_handoff has declared assets without a worklist case: pressure-relief-vent, transfer-line, transfer-valve",
+    "family vertical_handoff has cases on undeclared assets: vertical-handoff-vent",
+    "case assets absent from equipment scenario coverage: inventory-depletion-pipe, vertical-handoff-vent"
+  ],
+  "promotion_gates": {
+    "equipment_case_bridge_allowed": false,
+    "release_boundary_promotion_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "physical_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "policy": {
+    "case_asset_identity_is_never_inferred": true,
+    "case_family_identity_is_never_inferred": true,
+    "scope_mismatch_does_not_create_zero_case": true,
+    "bridge_does_not_create_release_or_frequency": true,
+    "release_closure_is_reported_separately": true,
+    "facility_qra_requires_scope_and_release_closure": true
+  },
+  "required_next_evidence": [
+    "explicit crosswalk for every case asset, including vertical handoff and inventory-depletion branches",
+    "reviewed P&ID accident port for every mapped case asset",
+    "provider release packet with duration, isolation, inventory and mass balance",
+    "independent holdout consequence comparison"
+  ]
+}

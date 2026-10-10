@@ -174,6 +174,29 @@
       "physical_validation_claim": false,
       "diagnostic_only": true
     },
+    "equipment_family_case_bridge": {
+      "schema_version": "prism.equipment_family_case_bridge_audit.v1",
+      "status": "CASE_SCOPE_MISMATCH_RELEASE_CLOSURE_OPEN",
+      "asset_count": 7,
+      "case_count": 44,
+      "case_asset_count": 9,
+      "case_assets_outside_scope": [
+        "inventory-depletion-pipe",
+        "vertical-handoff-vent"
+      ],
+      "scope_mismatch_case_count": 20,
+      "scenario_family_count": 12,
+      "families_with_cases": 12,
+      "families_without_cases": 0,
+      "release_closure_gap_counts": {
+        "INVENTORY_CLOSURE_OPEN": 15,
+        "ISOLATION_OPEN": 44,
+        "PROVIDER_QUALIFICATION_OPEN": 44,
+        "TERMINATION_OPEN": 24
+      },
+      "diagnostic_only": true,
+      "facility_qra_claim": false
+    },
     "frequency_port_binding": {
       "schema": "prism.frequency_port_binding.v1",
       "status": "PORT_BINDING_WITHHELD",
@@ -1397,6 +1420,10 @@
     "release_closure_worklist": {
       "path": "results/20261106/release_closure_worklist.json",
       "sha256": "fdc9d60ac7c83ac9d76e28d63259ed2b4aa3b0b4b1c3b4cd571a120a7ae22b2c"
+    },
+    "equipment_family_case_bridge_audit": {
+      "path": "results/20261106/equipment_family_case_bridge_audit.json",
+      "sha256": "3f6a5d9518f48a963dc282baa959d954edb1fc369d33e71e2283d2e489a9d7f1"
     }
   },
   "invariant_validation": {

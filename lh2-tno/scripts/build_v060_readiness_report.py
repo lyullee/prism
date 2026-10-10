@@ -164,6 +164,11 @@ def main() -> int:
         type=Path,
         help="Optional case-level release termination/isolation/inventory closure worklist.",
     )
+    parser.add_argument(
+        "--equipment-family-case-bridge-audit",
+        type=Path,
+        help="Optional explicit equipment scenario-to-facility case bridge audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -295,6 +300,11 @@ def main() -> int:
                 if args.release_closure_worklist is not None
                 else None
             ),
+            equipment_family_case_bridge_audit=(
+                _load(args.equipment_family_case_bridge_audit)
+                if args.equipment_family_case_bridge_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -402,6 +412,10 @@ def main() -> int:
     if args.release_closure_worklist is not None:
         report["source_artifacts"]["release_closure_worklist"] = _source_artifact(
             args.release_closure_worklist
+        )
+    if args.equipment_family_case_bridge_audit is not None:
+        report["source_artifacts"]["equipment_family_case_bridge_audit"] = _source_artifact(
+            args.equipment_family_case_bridge_audit
         )
     try:
         validation = validate_v060_readiness_report(report)
