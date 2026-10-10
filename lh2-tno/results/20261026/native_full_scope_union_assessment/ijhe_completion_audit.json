@@ -101,7 +101,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261030\\native_near_receptor_scope_packets_state_bound\\state_snapshot_campaign_binding_audit.json",
+        "record": "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json",
         "schema_version": "prism.state_snapshot_binding_audit.v1",
         "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
         "record_count": 24,
@@ -191,6 +191,27 @@
       "interpretation": "The selected literature frequency profiles and generated event rows have source and catalogue digest provenance. This does not make the rates field-validated or create a facility credible interval."
     },
     {
+      "name": "external_scenario_evidence_import",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261020\\inspection_center_scenario_evidence_reaudit.json",
+        "status": "SCREENING_EVIDENCE_IMPORTED",
+        "source_file_count": 3,
+        "record_count": 52,
+        "scope_status_counts": {
+          "CANDIDATE_OUTDOOR_SCREENING": 41,
+          "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
+        },
+        "frequency_applied": false,
+        "sensor_frequency_learning_used": false,
+        "provider_packet_created": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "External procedure and failure tables are retained as facility-neutral screening evidence. Candidate families and monitoring tags do not create a frequency, provider release packet or facility IR/F-N result."
+    },
+    {
       "name": "provider_worklist_scope_alignment",
       "status": "PASS",
       "diagnostic_only": true,
@@ -248,7 +269,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
+        "record": "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
         "status": "PARTIAL_FACILITY_SCOPE",
         "conditional_diagnostic_facility_risk_available": true,
         "conditional_diagnostic_facility_annual_ir_low_high": {
@@ -3488,6 +3509,81 @@
       "interpretation": "The facility IR/F-N aggregation is present as a conditional diagnostic view over the saved risk atoms; withheld total-facility qualification and the remaining scope, provider, frequency, and validation gates are preserved."
     },
     {
+      "name": "facility_release_boundary",
+      "status": "BLOCKED",
+      "diagnostic_only": false,
+      "blocking_reason": "facility release boundary is not closed across all declared cases",
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "schema": null,
+        "strict_release_boundary_ready": false,
+        "case_count": 44,
+        "facility_gate_checks": {},
+        "blocking_reasons": [
+          "29 case(s) are withheld from the release ledger",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G6: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+          "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+          "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
+        ],
+        "promotion_policy": null
+      },
+      "interpretation": "Every declared case must have an allowed provider-owned termination basis and a closed mass/inventory ledger before the facility chain can be promoted. This gate does not assign frequency or validate physics."
+    },
+    {
       "name": "diagnostic_frequency_uncertainty_evidence",
       "status": "PASS",
       "diagnostic_only": true,
@@ -3872,7 +3968,7 @@
         "domain_count": 7,
         "blocking_reason_count": 0,
         "claims_closed": true,
-        "record": "results\\20261030\\native_full_scope_union_assessment_state_atoms\\validation_evidence_matrix.json"
+        "record": "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
       },
       "blocking_reason": null,
       "diagnostic_only": true,
@@ -3880,6 +3976,7 @@
     }
   ],
   "blocking_reasons": [
+    "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
     "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"

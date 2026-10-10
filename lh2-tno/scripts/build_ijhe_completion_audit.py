@@ -89,6 +89,11 @@ def main() -> int:
         help="optional exact native generic-scope catalog verification",
     )
     parser.add_argument(
+        "--state-snapshot-binding-audit",
+        type=Path,
+        help="optional state-snapshot/provider-echo binding audit",
+    )
+    parser.add_argument(
         "--observed-state-evidence",
         type=Path,
         help="optional normalized observed equipment-state evidence ledger",
@@ -260,6 +265,15 @@ def main() -> int:
             native_scope_packet_catalog_verification["_record_path"] = str(
                 args.native_scope_packet_catalog_verification
             )
+        state_snapshot_binding_audit = (
+            _object(args.state_snapshot_binding_audit)
+            if args.state_snapshot_binding_audit
+            else None
+        )
+        if state_snapshot_binding_audit is not None:
+            state_snapshot_binding_audit["_record_path"] = str(
+                args.state_snapshot_binding_audit
+            )
         observed_state_evidence = (
             _object(args.observed_state_evidence)
             if args.observed_state_evidence
@@ -295,7 +309,7 @@ def main() -> int:
             slabx_validation_evidence,
             realtime_cache_benchmark,
             domain_recovery_audit,
-            None,
+            state_snapshot_binding_audit,
             native_scope_packet_catalog_verification,
             observed_state_evidence,
         )

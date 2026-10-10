@@ -58,9 +58,15 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 30
-    assert verification["ijhe_audit_pass_count"] == 27
-    assert verification["ijhe_audit_blocked_count"] == 3
+    assert verification["ijhe_audit_check_count"] == 32
+    assert verification["ijhe_audit_pass_count"] == 28
+    assert verification["ijhe_audit_blocked_count"] == 4
+    assert verification["ijhe_audit_blocked_check_ids"] == [
+        "facility_release_boundary",
+        "actual_provider_release_packet",
+        "declared_major_accident_scope",
+        "facility_ir_fn_available",
+    ]
     assert verification["native_scope_packet_catalog_status"] == (
         "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
     )
@@ -70,7 +76,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["state_snapshot_binding_record_count"] == 24
     assert verification["state_snapshot_binding_bound_count"] == 24
     assert verification["state_snapshot_binding_unbound_count"] == 0
-    assert verification["ijhe_audit_blocked_count"] == 3
+    assert verification["ijhe_audit_blocked_count"] == 4
 
     assert result["event_count"] == 34
     assert result["case_count"] == 44
@@ -134,9 +140,14 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 30
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 27
-    assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 3
+    assert len(audit["checks"]) == 32
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 28
+    assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 4
+    release_boundary_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "facility_release_boundary"
+    )
+    assert release_boundary_check["status"] == "BLOCKED"
     state_snapshot_check = next(
         check for check in audit["checks"]
         if check["name"] == "diagnostic_equipment_state_snapshot_binding"

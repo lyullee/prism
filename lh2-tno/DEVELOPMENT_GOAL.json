@@ -1240,7 +1240,10 @@
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "diagnostic_union_chain_closure_audit_implemented": true,
   "diagnostic_union_chain_closure_audit_policy": "The completion audit may close the declared diagnostic chain from the exact packet subset plus a separately identified vertical-handoff subset when the combined closure proves exact union identity, event-count equality, no mismatches, and packet-subset identity consumption. This is diagnostic-only and cannot qualify providers, infer frequency, or promote facility IR/F-N.",
-  "ijhe_completion_audit_latest_check_status_counts": {"PASS": 29, "BLOCKED": 5},
+  "ijhe_completion_audit_latest_check_status_counts": {
+    "PASS": 29,
+    "BLOCKED": 5
+  },
   "ijhe_completion_audit_latest_check_count": 34,
   "ijhe_completion_audit_latest_blocking_reason_count": 4,
   "ijhe_completion_audit_latest_blocking_reasons": [
@@ -2372,5 +2375,31 @@
     "physical_validation.json",
     "physical_validation_evidence.json",
     "validation.json"
+  ],
+  "facility_release_boundary_gate_implemented": true,
+  "facility_release_boundary_gate_module": "src/lh2_tno/release_ledger.py",
+  "facility_release_boundary_gate_schema": "prism.facility_release_boundary_gate.v1",
+  "facility_release_boundary_gate_assessment_field": "strict_release_boundary",
+  "facility_release_boundary_gate_completion_audit_check": "facility_release_boundary",
+  "facility_release_boundary_gate_status": "BLOCKED_CURRENT_OFFICIAL_SCOPE; 44 cases, 29 withheld/operator-limited, synthetic and non-reviewed termination bases remain",
+  "facility_release_boundary_gate_allowed_bases": [
+    "reviewed_isolation_success",
+    "inventory_depletion"
+  ],
+  "facility_release_boundary_gate_mass_residual_tolerance_kg": 1e-08,
+  "facility_release_boundary_gate_promotion": false,
+  "facility_release_boundary_gate_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
+  "facility_release_boundary_gate_completion_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
+  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 2 completion-audit tests; full suite pending",
+  "v060_ijhe_completion_audit_latest_check_count": 32,
+  "v060_ijhe_completion_audit_latest_check_status_counts": {
+    "PASS": 28,
+    "BLOCKED": 4
+  },
+  "v060_ijhe_completion_audit_latest_blocked_checks": [
+    "facility_release_boundary",
+    "actual_provider_release_packet",
+    "declared_major_accident_scope",
+    "facility_ir_fn_available"
   ]
 }
