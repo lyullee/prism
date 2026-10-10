@@ -150,6 +150,52 @@ def _case_gap_class(
     return "FAMILY_SCOPE_PARTIAL"
 
 
+def _release_boundary_summary(row: Mapping[str, Any]) -> dict[str, Any]:
+    """Expose the current release-boundary evidence without recalculating it."""
+    termination = row.get("termination")
+    termination = termination if isinstance(termination, Mapping) else {}
+    domain = row.get("domain_assessment")
+    domain = domain if isinstance(domain, Mapping) else {}
+    mass = row.get("mass_ledger")
+    mass = mass if isinstance(mass, Mapping) else {}
+    return {
+        "termination_basis": termination.get("basis"),
+        "termination_time_s": termination.get("time_s"),
+        "termination_provenance": termination.get("provenance"),
+        "domain_truncated": domain.get("domain_truncated"),
+        "inventory_outside_domain": domain.get("inventory_outside_domain"),
+        "outside_domain_h2_kg_at_ignition": domain.get(
+            "outside_domain_h2_kg_at_ignition"
+        ),
+        "end_to_end_residual_kg": mass.get("end_to_end_residual_kg"),
+    }
+
+
+def _release_boundary_gaps(
+    row: Mapping[str, Any],
+    *,
+    status: str,
+) -> list[str]:
+    """List observable release-boundary limitations for the evidence request."""
+    summary = _release_boundary_summary(row)
+    gaps: list[str] = []
+    if summary["termination_basis"] is None:
+        gaps.append("current case has no explicit release termination record")
+    elif summary["termination_basis"] == "synthetic_diagnostic_horizon":
+        gaps.append("current release ends at a synthetic diagnostic horizon")
+    if summary["domain_truncated"] is True:
+        gaps.append("current consequence domain is truncated")
+    if summary["inventory_outside_domain"] is True:
+        gaps.append("current inventory remains outside the consequence domain")
+    if summary["end_to_end_residual_kg"] is None:
+        gaps.append("current case has no end-to-end mass-closure residual")
+    if status in {"EXECUTED_OPERATOR_LIMITED", "EXECUTED_DOMAIN_INCOMPLETE"}:
+        reason = row.get("reason")
+        if isinstance(reason, str) and reason.strip():
+            gaps.append(f"provider qualification withheld: {reason.strip()}")
+    return list(dict.fromkeys(gaps))
+
+
 def _build_case_requests(
     ledger: Mapping[str, Any],
 ) -> list[dict[str, Any]]:
@@ -264,6 +310,8 @@ def _build_case_requests(
                 identity=identity,
                 qualification_gap=qualification_gap,
             ),
+            "current_release_boundary": _release_boundary_summary(row),
+            "current_boundary_gaps": _release_boundary_gaps(row, status=status),
             "request_kind": "QUALIFIED_PROVIDER_PACKET",
             "qualification_required": qualification_gap,
             "exact_match_required": {

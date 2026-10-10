@@ -314,3 +314,52 @@ def test_case_request_marks_missing_numerical_case_separately():
         }]},
     )
     assert report["case_requests"][0]["gap_class"] == "NUMERICAL_CASE_MISSING"
+
+
+def test_case_request_exposes_release_boundary_gaps_without_recalculation():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "event-boundary",
+            "asset_id": "asset-boundary",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["pipe_hole"],
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "reason": "constant-state source boundary",
+            "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 600.0,
+                "provenance": "screening horizon",
+            },
+            "domain_assessment": {
+                "domain_truncated": True,
+                "inventory_outside_domain": True,
+                "outside_domain_h2_kg_at_ignition": 0.25,
+            },
+            "mass_ledger": {"end_to_end_residual_kg": 1.0e-9},
+        }],
+        "uncomputed_cases": [],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "pipe_hole",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+        }]},
+    )
+    request = report["case_requests"][0]
+    assert request["current_release_boundary"]["termination_basis"] == "synthetic_diagnostic_horizon"
+    assert request["current_release_boundary"]["termination_time_s"] == 600.0
+    assert "current release ends at a synthetic diagnostic horizon" in request[
+        "current_boundary_gaps"
+    ]
+    assert "current consequence domain is truncated" in request["current_boundary_gaps"]
+    assert "current inventory remains outside the consequence domain" in request[
+        "current_boundary_gaps"
+    ]
+    assert any("provider qualification withheld" in item for item in request["current_boundary_gaps"])

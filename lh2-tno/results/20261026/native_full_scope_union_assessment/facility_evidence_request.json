@@ -778,6 +778,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.6000000000000003,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 8.470329472543003e-22,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -877,6 +887,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_over_600s",
+        "termination_time_s": 600.0,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 1.0587911840678754e-22,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -976,6 +996,18 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.5,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 6.776263578034403e-21,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1075,6 +1107,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "emergency_relief_discharge",
+        "termination_time_s": 0.5,
+        "termination_provenance": "selected exact strict emergency-relief worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1174,6 +1216,18 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "two_sided_rupture",
+        "termination_time_s": 1e-05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": null,
+        "outside_domain_h2_kg_at_ignition": null,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1293,6 +1347,18 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "two_sided_rupture",
+        "termination_time_s": 1e-05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": null,
+        "outside_domain_h2_kg_at_ignition": null,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1412,6 +1478,18 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.5,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1513,6 +1591,18 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 7.922487752849133e-19
+      },
+      "current_boundary_gaps": [
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1637,6 +1727,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 5.999999999999993e-05,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": true,
+        "outside_domain_h2_kg_at_ignition": 5.3366243258405786e-05,
+        "end_to_end_residual_kg": -5.1070936330184226e-11
+      },
+      "current_boundary_gaps": [
+        "current inventory remains outside the consequence domain",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1761,6 +1864,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 5.999999999999999e-06,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": true,
+        "outside_domain_h2_kg_at_ignition": 9.972683794151785e-05,
+        "end_to_end_residual_kg": 1.6207376256754819e-21
+      },
+      "current_boundary_gaps": [
+        "current inventory remains outside the consequence domain",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -1885,6 +2001,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1e-06,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": true,
+        "outside_domain_h2_kg_at_ignition": 0.00010626419616014337,
+        "end_to_end_residual_kg": 1.0632579593756618e-20
+      },
+      "current_boundary_gaps": [
+        "current inventory remains outside the consequence domain",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2009,6 +2138,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1e-06,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": true,
+        "outside_domain_h2_kg_at_ignition": 0.0001309591574762132,
+        "end_to_end_residual_kg": 2.168404344971009e-19
+      },
+      "current_boundary_gaps": [
+        "current inventory remains outside the consequence domain",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2133,6 +2275,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.001,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 4.963083675318166e-23
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2251,6 +2406,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.001,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 6.617444900424221e-23
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2369,6 +2537,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.001,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": -1.2904017555827232e-22
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2487,6 +2668,20 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.001,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": true,
+        "outside_domain_h2_kg_at_ignition": 1.6691478722936977e-05,
+        "end_to_end_residual_kg": -1.6820983299904304e-09
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "current inventory remains outside the consequence domain",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2605,6 +2800,20 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.0001,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": true,
+        "outside_domain_h2_kg_at_ignition": 0.00016800666358818,
+        "end_to_end_residual_kg": 2.91335855174532e-20
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "current inventory remains outside the consequence domain",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2723,6 +2932,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 5.421010862427522e-20,
+        "end_to_end_residual_kg": 1.5178830414797062e-18
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2828,6 +3050,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 5.421010862427522e-20,
+        "end_to_end_residual_kg": 1.5178830414797062e-18
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -2933,6 +3168,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 5.451120236724452e-20
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3038,6 +3286,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": -1.5720931501039814e-18
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3143,6 +3404,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 6.114900252818245e-17
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3248,6 +3522,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 6.938893903907228e-18,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3353,6 +3640,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.2,
+        "termination_provenance": "selected exact strict worklist packet; provider clock retained",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 2.7811163476281457e-16
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3457,6 +3757,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3557,6 +3867,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 1.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 3.970466940254533e-23,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3657,6 +3977,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 1.0587911840678754e-22,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3757,6 +4087,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3857,6 +4197,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 4.235164736271502e-22,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -3957,6 +4307,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4057,6 +4417,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4157,6 +4527,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.5,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4257,6 +4637,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.0625,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 1.0164395367051604e-20,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4357,6 +4747,16 @@
       ],
       "current_status": "EXECUTED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "inventory_depletion",
+        "termination_time_s": 0.0625,
+        "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4457,6 +4857,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 4.1359030627651384e-25,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4566,6 +4979,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4675,6 +5101,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4784,6 +5223,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -4893,6 +5345,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -5002,6 +5467,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -5111,6 +5589,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 2.710505431213761e-20,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -5220,6 +5711,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 2.710505431213761e-20,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -5329,6 +5833,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 0.0,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
@@ -5438,6 +5955,19 @@
       ],
       "current_status": "EXECUTED_OPERATOR_LIMITED",
       "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "current_release_boundary": {
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_time_s": 0.37,
+        "termination_provenance": "synthetic vertical provider history; no flow extrapolation",
+        "domain_truncated": false,
+        "inventory_outside_domain": false,
+        "outside_domain_h2_kg_at_ignition": 2.168404344971009e-19,
+        "end_to_end_residual_kg": 0.0
+      },
+      "current_boundary_gaps": [
+        "current release ends at a synthetic diagnostic horizon",
+        "provider qualification withheld: source operator has declared constant-state or open physical closure limitations"
+      ],
       "request_kind": "QUALIFIED_PROVIDER_PACKET",
       "qualification_required": true,
       "exact_match_required": {
