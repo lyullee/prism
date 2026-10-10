@@ -1789,6 +1789,28 @@ def build_ijhe_objective_coverage_audit(
     else:
         status = "OBJECTIVE_CHAIN_INCOMPLETE"
 
+    row_by_id = {row["id"]: row for row in rows}
+    completion_criteria = []
+    for criterion_id, check_id in (
+        ("A_equipment_state_and_release", "equipment_state_to_native_release"),
+        ("B_release_to_final_damage", "release_to_final_damage"),
+        ("C_facility_ir_fn_and_scope", "generic_lh2_scope"),
+        ("D_literature_frequency_uncertainty", "literature_frequency_uncertainty"),
+        ("E_validation_and_processing_time", "realtime_processing"),
+    ):
+        check = row_by_id[check_id]
+        completion_criteria.append({
+            "id": criterion_id,
+            "status": (
+                "CONDITIONAL_PASS"
+                if check["status"] in {"PASS", "CONDITIONALLY_COMPLETE"}
+                else "BLOCKED"
+            ),
+            "check_id": check_id,
+            "evidence": list(check.get("evidence_paths", [])),
+            "strict_gate_open": check_id in strict_blocked,
+        })
+
     return {
         "schema_version": "prism.ijhe_objective_coverage_audit.v1",
         "status": status,
@@ -1803,6 +1825,14 @@ def build_ijhe_objective_coverage_audit(
         "strict_facility_qra_claim": strict_qra_ok,
         "physical_validation_claim": physical_ok,
         "frequency_inference_performed": False,
+        "completion_criteria": completion_criteria,
+        "explicit_exclusions": [
+            "field_accident_frequency_collection",
+            "sensor_based_frequency_learning",
+            "indoor_release_and_confinement",
+            "detonation_or_DDT",
+            "full_domino_escalation",
+        ],
         "interpretation": (
             "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN은 상태 snapshot→native 방출→"
             "consequence→조건부 IR/F-N 연결이 닫혔다는 뜻이다. qualified provider, 독립 물리검증, "

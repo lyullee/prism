@@ -228,6 +228,8 @@ python scripts/build_ijhe_objective_coverage_audit.py `
 
 일반 시설 연결은 `diagnostic_generic_equipment_scenario_coverage`와 `diagnostic_generic_equipment_frequency_binding` 두 행으로 보존한다. 합성 옥외 manifest의 7개 설비가 12개 사고군에 명시적으로 매핑되고, 문헌빈도 event 24개가 7개 설비에 연결되며, 1개 미계산 family도 숨기지 않는다. 이 빈도는 현장 학습 빈도가 아니고 정상 센서에서 추정한 값도 아니다. provider 방출 packet이 제출되기 전에는 지속시간·차단·재고 소진·질량수지와 결합하지 않으며, 시설 IR/F-N을 열지 않는다.
 
+objective 원장의 `completion_criteria`는 `A_equipment_state_and_release`부터 `E_validation_and_processing_time`까지 다섯 단계의 조건부 상태와 근거 경로를 기록한다. `explicit_exclusions`에는 이번 v0.6.0 필수범위 밖인 현장 사고빈도 수집, 센서 빈도 학습, 실내 방출·밀폐, 폭굉/DDT, 전체 도미노 확대를 고정한다. 따라서 모든 단계가 `CONDITIONAL_PASS`여도 strict provider·독립검증·시설 QRA gate가 닫혔다고 해석하지 않는다.
+
 `diagnostic_observed_state_model_binding`은 `results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json`을 읽는다. 현재 intake tank·storage vent·supply vaporizer의 3개 관측 component는 facility-neutral normal-state model 입력에 연결되고, 각 진단 adapter도 별도로 확인된다. 그러나 시설 component identity는 0/3, qualified provider packet은 0건이며 사고 방출·빈도·IR/F-N 승격은 계속 차단된다. 정상 운전 신호가 사고 release나 빈도를 자동으로 만든다고 해석하지 않기 위한 진단 행이다.
 
 readiness validator는 이제 `open_case_count = case_count - READY_FOR_STRICT_REVIEW`, 각 closure gap 집계와 요약 필드의 일치까지 검사한다. 따라서 원장의 case 수와 개별 gap 수가 서로 다른 상태로 저장되면 `VALID`가 되지 않는다.

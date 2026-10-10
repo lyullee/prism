@@ -111,6 +111,14 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
     assert report["conditional_chain_complete"] is True
     assert report["strict_facility_qra_claim"] is False
+    assert [item["status"] for item in report["completion_criteria"]] == [
+        "CONDITIONAL_PASS",
+        "CONDITIONAL_PASS",
+        "CONDITIONAL_PASS",
+        "CONDITIONAL_PASS",
+        "CONDITIONAL_PASS",
+    ]
+    assert "detonation_or_DDT" in report["explicit_exclusions"]
     assert "qualified_provider_evidence" in report["strict_blocking_check_ids"]
     assert "release_to_final_damage" not in report["core_blocking_check_ids"]
     assert "slabx_lh2_component_consequence_validation" not in report["core_blocking_check_ids"]

@@ -2665,8 +2665,8 @@
   "v060_provider_release_closure_audit": "src/lh2_tno/provider_release_closure.py; scripts/audit_provider_release_closure.py; packet closure audit remains diagnostic and never opens qualification or facility QRA",
   "v060_provider_packet_input_audit_strict_mode": "scripts/audit_provider_packet_inputs.py --require-release-closure; open termination/isolation/inventory closure remains rejected before qualified packet evidence",
   "ijhe_objective_coverage_audit_release_closure_record": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-  "ijhe_objective_coverage_audit_release_closure_sha256": "BCF8446DAE715DB9CE7B48991ED760985AD4FD015824FDB263480FCA519450E0",
+  "ijhe_objective_coverage_audit_release_closure_sha256": "8384AB04E99194C0C0810093D8DE5CC465A50687235F10CC944E552848819D2A",
   "v060_readiness_release_closure_objective_record": "results/20261106/v060_readiness_report_with_release_closure_objective.json",
-  "v060_readiness_release_closure_objective_sha256": "1FB5CB1DF663EF9BC1258A8A6AB8D91839850A6F860392F6E82CF8F5DD9CAD62",
+  "v060_readiness_release_closure_objective_sha256": "5FB39AB7E394A7945B0B9AA796AE3A252DF68D3D33ACAA118C893BEBBB9AC4E3",
   "v060_readiness_release_closure_objective_status": "VALID; conditional diagnostic chain complete; 13 readiness invariants pass; strict blockers remain 4"
 }
