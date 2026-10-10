@@ -2479,7 +2479,7 @@
   "current_union_provider_packet_input_audit_status": "NO_PROVIDER_PACKET_INPUT; 0 release/qualification pairs accepted; actual qualified provider packet coverage remains 0/44 cases",
   "current_union_observed_state_release_binding_audit_record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json",
   "current_union_observed_state_release_binding_audit_status": "NO_STATE_TO_RELEASE_BINDING; 3 observed components have state evidence but no reviewed facility/provider-event binding",
-  "current_union_full_test_status": "783 passed, 1 skipped; external lh2dt regression 1494 passed, 0 failed, 0 skipped; latest union 34 events/44 cases/176 risk atoms; native state→release identity complete for 44/44 cases after packet rebind state snapshot propagation; observed-state source replay 3/3 matched; runtime frames 3/3 ready; state-only provider-resolver handoff and realtime monitor execution path implemented; strict IJHE gates remain open",
+  "current_union_full_test_status": "788 passed, 1 skipped; external lh2dt regression 1494 passed, 0 failed, 0 skipped; latest union 34 events/44 cases/176 risk atoms; native state→release identity complete for 44/44 cases after packet rebind state snapshot propagation; observed-state source replay 3/3 matched; runtime frames 3/3 ready; state-only provider-resolver handoff and realtime monitor execution path implemented; strict IJHE gates remain open",
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
   "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
@@ -2538,5 +2538,8 @@
   "observed_state_runtime_monitor_status": "IMPLEMENTED; provider-resolved runtime frame reaches consequence service with deadline/cache/release-path ledger; no release or frequency inference",
   "observed_state_runtime_facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
   "observed_state_runtime_facility_monitor_status": "IMPLEMENTED; state-only component frames use the existing facility aggregation gates; arrival latency and annual facility QRA remain withheld",
-  "full_portable_test_status_latest": "783 passed, 1 skipped"
+  "external_field_evidence_latest_record": "results/20261103/external_field_evidence/preslhy_trial10_unverified.json",
+  "external_field_evidence_latest_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE_HASH_DRIFT; PRESLHY Trial 10 source/weather/receptor/common-clock structure and row counts verified, but source manifest hashes drift for source_boundary/weather/common_clock; no model-comparison or QRA promotion",
+  "external_field_evidence_scope": "outdoor LH2 observation evidence only; provider release, frequency, ignition, IR/FN and facility-QRA claims remain closed",
+  "full_portable_test_status_latest": "788 passed, 1 skipped"
 }

@@ -270,6 +270,53 @@ def _external_sweep_domain(path: Path, payload: Mapping[str, Any], blockers: lis
     }
 
 
+def _external_field_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Keep measured outdoor field observations separate from model claims."""
+
+    if payload.get("status") != "RESTRICTED_EXTERNAL_FIELD_EVIDENCE":
+        blockers.append("external field evidence is not in restricted verified status")
+    for field in (
+        "physical_validation_claim",
+        "full_chain_validation_claim",
+        "accident_release_validation_claim",
+        "facility_qra_claim",
+        "frequency_inference_performed",
+    ):
+        if payload.get(field) is True:
+            blockers.append(f"external field evidence asserts prohibited {field}=true")
+    source = payload.get("source_boundary") if isinstance(payload.get("source_boundary"), Mapping) else {}
+    weather = payload.get("weather") if isinstance(payload.get("weather"), Mapping) else {}
+    receptors = payload.get("receptor_observations") if isinstance(payload.get("receptor_observations"), Mapping) else {}
+    return {
+        "id": "external_outdoor_field_observation",
+        "status": "RESTRICTED_OBSERVATION_EVIDENCE",
+        "supports": [
+            "machine-readable outdoor LH2 source-boundary observations",
+            "measured weather and receptor concentration time series",
+            "common-clock and file-hash provenance for later model comparison",
+        ],
+        "does_not_support": [
+            "provider accident-release qualification",
+            "initiating frequency or sensor frequency learning",
+            "ignition, fire, explosion, IR/F-N, or facility-QRA validation",
+        ],
+        "event_id": payload.get("event_id"),
+        "dataset_id": payload.get("dataset_id"),
+        "source_row_count": source.get("row_count"),
+        "weather_row_count": weather.get("row_count"),
+        "receptor_row_count": receptors.get("row_count"),
+        "model_comparison_ready": payload.get("model_comparison_ready"),
+        "source": _source(path, "external outdoor field observation evidence", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     if payload.get("status") == "COMPLETE_EVIDENCE":
         blockers.append("IJHE audit reports complete evidence; promotion must be reviewed instead of inferred")
@@ -297,6 +344,7 @@ def build_validation_evidence_matrix(
     slabx_validation_path: str | Path | None = None,
     ijhe_audit_path: str | Path | None = None,
     external_sweep_path: str | Path | None = None,
+    external_field_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -320,6 +368,9 @@ def build_validation_evidence_matrix(
     if external_sweep_path is not None:
         sweep_path, sweep = _read_object(external_sweep_path, "external LH2 sweep audit")
         domains.append(_external_sweep_domain(sweep_path, sweep, blockers))
+    if external_field_path is not None:
+        field_path, field = _read_object(external_field_path, "external field evidence")
+        domains.append(_external_field_domain(field_path, field, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
@@ -346,6 +397,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("SLABx-LH2 evidence" in item for item in unique_blockers),
             "basis": "slabx_lh2_consequence_component",
+        },
+        {
+            "claim": "restricted_external_outdoor_field_observation_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("external field evidence" in item for item in unique_blockers),
+            "basis": "external_outdoor_field_observation",
         },
         {
             "claim": "independent_full_chain_physical_validation",
