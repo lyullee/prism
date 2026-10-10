@@ -671,3 +671,33 @@ def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
     assert report["chain"]["generic_release_to_final_damage_closure"]["facility_ir_aggregate_closed"] is True
     assert report["chain"]["generic_release_to_final_damage_closure"]["facility_fn_aggregate_closed"] is True
     assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_records_generic_provider_release_closure_without_promotion():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_provider_closure_audit={
+            "schema_version": "prism.generic_provider_release_closure_audit.v1",
+            "status": "CLOSURE_EVIDENCE_OPEN",
+            "event_count": 24,
+            "closure_ready_event_count": 3,
+            "closure_open_event_count": 21,
+            "packet_path_count": 24,
+            "provider_packet_count": 26,
+            "closure_ready_packet_path_count": 3,
+            "closure_ready_provider_packet_count": 5,
+            "closure_gap_counts": {
+                "provider mass balance is required for inventory depletion": 6,
+            },
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    )
+    closure = report["chain"]["generic_provider_release_closure"]
+    assert closure["closure_ready_event_count"] == 3
+    assert closure["closure_open_event_count"] == 21
+    assert closure["qualified_provider_packet_count"] == 0
+    assert validate_v060_readiness_report(report)["status"] == "VALID"

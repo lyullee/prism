@@ -487,6 +487,7 @@ def build_v060_readiness_report(
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_diagnostic_campaign_binding: Mapping[str, Any] | None = None,
     generic_chain_closure_audit: Mapping[str, Any] | None = None,
+    generic_provider_closure_audit: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -574,6 +575,12 @@ def build_v060_readiness_report(
         generic_chain_closure = _mapping(
             generic_chain_closure_audit,
             "generic_chain_closure_audit",
+        )
+    generic_provider_closure = None
+    if generic_provider_closure_audit is not None:
+        generic_provider_closure = _mapping(
+            generic_provider_closure_audit,
+            "generic_provider_closure_audit",
         )
     generic_frequency_port_binding = (
         generic_frequency_chain.get("frequency_port_binding")
@@ -1035,6 +1042,49 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if generic_chain_closure is not None
+                else None
+            ),
+            "generic_provider_release_closure": (
+                {
+                    "schema_version": generic_provider_closure.get("schema_version"),
+                    "status": generic_provider_closure.get("status"),
+                    "event_count": generic_provider_closure.get("event_count"),
+                    "closure_ready_event_count": generic_provider_closure.get(
+                        "closure_ready_event_count"
+                    ),
+                    "closure_open_event_count": generic_provider_closure.get(
+                        "closure_open_event_count"
+                    ),
+                    "packet_path_count": generic_provider_closure.get(
+                        "packet_path_count"
+                    ),
+                    "provider_packet_count": generic_provider_closure.get(
+                        "provider_packet_count"
+                    ),
+                    "closure_ready_packet_path_count": generic_provider_closure.get(
+                        "closure_ready_packet_path_count"
+                    ),
+                    "closure_ready_provider_packet_count": generic_provider_closure.get(
+                        "closure_ready_provider_packet_count"
+                    ),
+                    "closure_gap_counts": generic_provider_closure.get(
+                        "closure_gap_counts", {}
+                    ),
+                    "qualified_provider_packet_count": generic_provider_closure.get(
+                        "qualified_provider_packet_count"
+                    ),
+                    "frequency_from_provider_packet": generic_provider_closure.get(
+                        "frequency_from_provider_packet"
+                    ),
+                    "physical_validation_claim": generic_provider_closure.get(
+                        "physical_validation_claim"
+                    ),
+                    "facility_qra_claim": generic_provider_closure.get(
+                        "facility_qra_claim"
+                    ),
+                    "diagnostic_only": True,
+                }
+                if generic_provider_closure is not None
                 else None
             ),
             "isolation_union_extension": (
@@ -2000,6 +2050,57 @@ def validate_v060_readiness_report(
                     errors.append(
                         f"chain.generic_release_to_final_damage_closure.{field} must be true"
                     )
+
+    generic_provider_closure = chain.get("generic_provider_release_closure")
+    if generic_provider_closure is not None:
+        if not isinstance(generic_provider_closure, Mapping):
+            errors.append(
+                "chain.generic_provider_release_closure must be an object"
+            )
+        else:
+            if generic_provider_closure.get("schema_version") != (
+                "prism.generic_provider_release_closure_audit.v1"
+            ):
+                errors.append(
+                    "chain.generic_provider_release_closure.schema_version is unsupported"
+                )
+            for field in (
+                "event_count",
+                "closure_ready_event_count",
+                "closure_open_event_count",
+                "packet_path_count",
+                "provider_packet_count",
+                "closure_ready_packet_path_count",
+                "closure_ready_provider_packet_count",
+                "qualified_provider_packet_count",
+            ):
+                if generic_provider_closure.get(field) is not None:
+                    _nonnegative_int(
+                        generic_provider_closure.get(field),
+                        f"chain.generic_provider_release_closure.{field}",
+                        errors,
+                    )
+            for field in (
+                "frequency_from_provider_packet",
+                "physical_validation_claim",
+                "facility_qra_claim",
+            ):
+                if generic_provider_closure.get(field) is True:
+                    errors.append(
+                        f"chain.generic_provider_release_closure.{field} cannot be true"
+                    )
+            if generic_provider_closure.get("diagnostic_only") is not True:
+                errors.append(
+                    "generic provider release closure must remain diagnostic_only"
+                )
+            ready = generic_provider_closure.get("closure_ready_event_count")
+            opened = generic_provider_closure.get("closure_open_event_count")
+            total = generic_provider_closure.get("event_count")
+            if all(isinstance(value, int) and not isinstance(value, bool)
+                   for value in (ready, opened, total)) and ready + opened != total:
+                errors.append(
+                    "generic provider release closure event counts must close over event_count"
+                )
 
     isolation_extension = chain.get("isolation_union_extension")
     if isolation_extension is not None:

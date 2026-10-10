@@ -156,7 +156,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "876 passed, 1 skipped",
+  "latest_local_full_test_run": "880 passed, 1 skipped",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -3624,7 +3624,7 @@
   "facility_ledger_frequency_port_promotion_gate_policy": "ALIGNED means declared rows agree; qualified facility QRA also requires every event to have an explicit reviewed accident port. Provider outlets never create a reviewed frequency port.",
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
-  "latest_local_targeted_test_run": "35 passed",
+  "latest_local_targeted_test_run": "6 provider-closure tests; 27 readiness tests",
   "latest_remote_verified_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
   "latest_remote_ci_run": "run 649 completed successfully",
   "facility_assessment_qra_port_gate_exposed": true,
@@ -3640,5 +3640,13 @@
   "current_union_v060_readiness_report_record": "results/20261031/native_full_scope_union_pipefix_state_bound/v060_readiness_report.json",
   "v060_readiness_port_binding_qra_promotion_separation_implemented": true,
   "v060_readiness_port_binding_qra_promotion_separation_field": "chain.frequency_port_binding.port_binding_facility_qra_allowed",
-  "v060_readiness_port_binding_qra_promotion_separation_policy": "Readiness keeps facility_qra_allowed=false even when the lower-level port map is complete; port completeness is reported separately from provider, validation and facility-QRA promotion."
+  "v060_readiness_port_binding_qra_promotion_separation_policy": "Readiness keeps facility_qra_allowed=false even when the lower-level port map is complete; port completeness is reported separately from provider, validation and facility-QRA promotion.",
+  "generic_provider_release_closure_audit_implemented": true,
+  "generic_provider_release_closure_audit_module": "src/lh2_tno/generic_provider_release_closure.py",
+  "generic_provider_release_closure_audit_script": "scripts/audit_generic_provider_release_closure.py",
+  "generic_provider_release_closure_audit_record": "results/20261106/generic_lh2_provider_release_closure_current.json",
+  "generic_provider_release_closure_audit_status": "CLOSURE_EVIDENCE_OPEN; 24 events, 3 closure-ready and 21 open; 26 provider packets; 15 fixed/synthetic horizons and 6 inventory-depletion packets without provider mass balance; qualified provider count 0; frequency/QRA promotion false",
+  "generic_provider_release_closure_audit_sha256": "206DB77B2CAD629CDEAB4DD039011C45E3F66826D73BACE26F32EF5F75EF3A32",
+  "generic_provider_release_closure_audit_readiness_record": "results/20261106/v060_readiness_report_with_generic_provider_closure.json",
+  "generic_provider_release_closure_audit_readiness_sha256": "0CA19D103093680A4558550340391395FB0FF61C8781BE16C7F057DB2ACB8DF9"
 }

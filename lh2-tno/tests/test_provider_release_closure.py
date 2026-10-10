@@ -72,3 +72,10 @@ def test_inventory_depletion_requires_zero_provider_final_mass():
 def test_invalid_packet_is_rejected():
     with pytest.raises(ProviderReleaseClosureError):
         audit_provider_release_closure({"provider_export_schema": "wrong"})
+
+
+def test_emergency_relief_packet_uses_dedicated_provider_loader():
+    packet = ROOT / "results" / "20261031" / "native_generic_scope_packets_pipefix" / "events" / "015_pressure-relief-vent-01_G1" / "resolved_release.json"
+    report = audit_provider_release_closure(packet)
+    assert report["status"] == "CLOSURE_READY_FOR_QUALIFICATION"
+    assert report["packet_rows"][0]["event_kind"] == "emergency_relief"

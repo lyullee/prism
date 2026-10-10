@@ -17,6 +17,7 @@ from typing import Any
 
 from .provider_release import (
     ProviderReleaseContractError,
+    load_provider_emergency_relief,
     load_provider_release,
     load_provider_release_set,
 )
@@ -65,9 +66,17 @@ def _same(left: Any, right: Any) -> bool:
 
 
 def _packet_rows(value: Mapping[str, Any]) -> tuple[Any, ...]:
+    def _load_single(item: Mapping[str, Any]) -> Any:
+        # Emergency relief is a reviewed provider boundary with a dedicated
+        # loader.  Keeping it separate from accidental-leak catalog loading
+        # prevents relief packets from being silently treated as random leaks.
+        if item.get("event_kind") == "emergency_relief":
+            return load_provider_emergency_relief(item)
+        return load_provider_release(item)
+
     try:
         if isinstance(value.get("releases"), list):
-            return tuple(load_provider_release(item) for item in value["releases"])
+            return tuple(_load_single(item) for item in value["releases"])
         if isinstance(value.get("release_sets"), list):
             return tuple(
                 release
@@ -76,7 +85,7 @@ def _packet_rows(value: Mapping[str, Any]) -> tuple[Any, ...]:
             )
         if value.get("provider_export_schema") == "prism.resolved_release_set.v1":
             return tuple(load_provider_release_set(value).releases)
-        return (load_provider_release(value),)
+        return (_load_single(value),)
     except ProviderReleaseContractError as error:
         raise ProviderReleaseClosureError(str(error)) from error
 

@@ -1,0 +1,79 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from lh2_tno.generic_provider_release_closure import (
+    audit_generic_provider_release_closure,
+)
+
+
+def _release() -> dict:
+    root = Path(__file__).parents[1]
+    return json.loads(
+        (root / "examples" / "provider_release_catalog_synthetic.json").read_text(
+            encoding="utf-8"
+        )
+    )["releases"][0]
+
+
+def test_campaign_audit_counts_ready_and_open_events(tmp_path):
+    closed_value = _release()
+    closed_value.update({
+        "input_origin": "reviewed_measurement",
+        "termination_basis": "reviewed_isolation_success",
+        "provider_mass_balance": {
+            "schema_version": "prism.provider_mass_balance.v1",
+            "initial_mass_kg": closed_value["available_mass_kg"],
+            "cumulative_mass_out_kg": closed_value["cumulative_mass_out_kg"],
+            "final_mass_kg": closed_value["available_mass_kg"] - closed_value["cumulative_mass_out_kg"],
+            "reported_residual_mass_kg": 0.0,
+            "derived_accounting_residual_kg": 0.0,
+            "isolation_time_s": closed_value["duration_s"] / 2.0,
+            "isolation_success": True,
+        },
+    })
+    closed = tmp_path / "closed.json"
+    closed.write_text(json.dumps(closed_value), encoding="utf-8")
+    open_packet = _release()
+    open_packet["input_origin"] = "synthetic"
+    open_packet["termination_basis"] = "synthetic_diagnostic_horizon"
+    open_packet.pop("provider_mass_balance", None)
+    opened = tmp_path / "open.json"
+    opened.write_text(json.dumps(open_packet), encoding="utf-8")
+    evidence = {
+        "schema_version": "prism.native_scope_packet_evidence.v1",
+        "rows": [
+            {"event_id": "event-closed", "evidence": {"resolved_packet_paths": ["closed.json"]}},
+            {"event_id": "event-open", "evidence": {"resolved_packet_paths": ["open.json"]}},
+        ],
+    }
+    evidence_path = tmp_path / "evidence.json"
+    evidence_path.write_text(json.dumps(evidence), encoding="utf-8")
+
+    report = audit_generic_provider_release_closure(evidence_path)
+
+    assert report["event_count"] == 2
+    assert report["closure_ready_event_count"] == 1
+    assert report["closure_open_event_count"] == 1
+    assert report["closure_ready_provider_packet_count"] == 1
+    assert report["qualified_provider_packet_count"] == 0
+    assert report["diagnostic_only"] is True
+    assert report["promotion_gates"]["facility_qra_allowed"] is False
+
+
+def test_campaign_audit_keeps_packet_audit_errors_open(tmp_path):
+    invalid = tmp_path / "invalid.json"
+    invalid.write_text(json.dumps({"provider_export_schema": "wrong"}), encoding="utf-8")
+    evidence = {
+        "rows": [
+            {"event_id": "event-invalid", "evidence": {"resolved_packet_paths": ["invalid.json"]}},
+        ]
+    }
+    path = tmp_path / "evidence.json"
+    path.write_text(json.dumps(evidence), encoding="utf-8")
+
+    report = audit_generic_provider_release_closure(path)
+
+    assert report["closure_open_event_count"] == 1
+    assert "audit failed" in report["event_rows"][0]["blocking_reasons"][0]
