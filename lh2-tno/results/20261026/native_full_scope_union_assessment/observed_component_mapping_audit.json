@@ -1,0 +1,86 @@
+{
+  "schema": "prism.observed_component_mapping_audit.v1",
+  "status": "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY",
+  "observed_state_status": "OBSERVATION_STATE_EVIDENCE_ONLY",
+  "observed_component_count": 3,
+  "candidate_mapping_count": 3,
+  "exact_facility_component_count": 0,
+  "rows": [
+    {
+      "mapping_id": "center-intake-tank-class",
+      "observed_component_id": "lh2-intake-tank",
+      "source_ids": [
+        "inspection-center-intake-10-runs"
+      ],
+      "candidate_component_class": "storage_tank",
+      "candidate_facility_asset_aliases": [
+        "TK-1101",
+        "TK-1102",
+        "TANK1",
+        "TANK2"
+      ],
+      "facility_component_id": null,
+      "review_status": "candidate",
+      "status": "CANDIDATE_CLASS_MAPPING",
+      "evidence_refs": [
+        "examples/inspection_center_observed_state_manifest.json",
+        "center_scenario_structure.storage_tanks"
+      ],
+      "mapping_basis": "Receiving scenario stream is associated with a storage-tank process state; the run does not identify one reviewed tank asset.",
+      "blocking_reasons": []
+    },
+    {
+      "mapping_id": "center-storage-vent-class",
+      "observed_component_id": "lh2-storage-vent",
+      "source_ids": [
+        "inspection-center-storage-vent-10-runs"
+      ],
+      "candidate_component_class": "storage_tank_operating_vent_path",
+      "candidate_facility_asset_aliases": [
+        "XV10",
+        "XV11"
+      ],
+      "facility_component_id": null,
+      "review_status": "unresolved",
+      "status": "CANDIDATE_CLASS_MAPPING",
+      "evidence_refs": [
+        "examples/inspection_center_observed_state_manifest.json",
+        "center_scenario_structure.storage_vent"
+      ],
+      "mapping_basis": "Storage-vent scenario and pressure signal identify an operating vent path, but tank identity, valve order, and stack endpoint are unresolved.",
+      "blocking_reasons": []
+    },
+    {
+      "mapping_id": "center-supply-vaporizer-class",
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "source_ids": [
+        "inspection-center-supply-10-runs"
+      ],
+      "candidate_component_class": "vaporizer_supply_boundary",
+      "candidate_facility_asset_aliases": [
+        "VP-1101"
+      ],
+      "facility_component_id": null,
+      "review_status": "candidate",
+      "status": "CANDIDATE_CLASS_MAPPING",
+      "evidence_refs": [
+        "examples/inspection_center_observed_state_manifest.json",
+        "center_scenario_structure.gas_supply_vaporizer"
+      ],
+      "mapping_basis": "Supply boundary has pressure, temperature, and differential-pressure channels consistent with a vaporizer boundary; P&ID endpoint and branch identity remain unresolved.",
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [
+    "exact facility asset identity is unresolved",
+    "provider release event binding remains separate and empty"
+  ],
+  "policy": {
+    "state_data_are_not_accident_sources": true,
+    "candidate_class_mapping_is_not_asset_identity": true,
+    "release_event_binding_is_not_created": true,
+    "frequency_is_not_assigned": true,
+    "facility_ir_fn_promotion": false,
+    "diagnostic_only": true
+  }
+}

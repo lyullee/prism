@@ -57,6 +57,14 @@ ID를 추정하지 않는다. 연결 manifest 형식과 실행 방법은
 [관측 상태와 방출 packet 바인딩 감사 기록](docs/PRISM_관측상태_방출바인딩_개발기록_20261010.md)에
 있으며, 이 감사는 방출량·빈도·IR/F-N을 만들지 않는다.
 
+현재 3개 관측 component를 일반 설비 모델 후보에 배치하는 별도 장부도 만들었습니다.
+`inspection_center_observed_component_mapping_manifest.json`과
+`observed_component_mapping_audit.json`은 `storage_tank`,
+`storage_tank_operating_vent_path`, `vaporizer_supply_boundary` 후보 클래스와 가능한
+설비 alias만 기록합니다. 결과는 `CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY`이며 정확한
+자산 ID·P&ID 끝점·provider release event가 확인되기 전까지 사고 방출·빈도·시설 QRA로
+승격되지 않습니다. 자세한 규칙은 [검사센터 설비 클래스 매핑 개발 기록](docs/PRISM_검사센터_설비클래스_매핑_개발기록_20261010.md)에 있습니다.
+
 방출 이후의 모델 handoff도 [`consequence_backend_chain_audit.json`](results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json)에서
 별도로 확인한다. 현재 계약은 일반 방출 경로의 `source → pool → near_field_and_dispersion → cloud_observation → fire_explosion_damage_risk`와
 양단 파열 경로의 `endpoint_a → endpoint_aggregation → endpoint_b`를 선언하며,

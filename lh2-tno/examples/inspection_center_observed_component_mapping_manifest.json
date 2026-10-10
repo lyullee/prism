@@ -1,0 +1,45 @@
+{
+  "schema_version": "prism.observed_component_mapping_manifest.v1",
+  "description": "Diagnostic candidate mappings from inspection-center state streams to generic LH2 facility component classes. These are not reviewed asset identities or accident-release bindings.",
+  "mappings": [
+    {
+      "mapping_id": "center-intake-tank-class",
+      "observed_component_id": "lh2-intake-tank",
+      "source_ids": ["inspection-center-intake-10-runs"],
+      "candidate_component_class": "storage_tank",
+      "candidate_facility_asset_aliases": ["TK-1101", "TK-1102", "TANK1", "TANK2"],
+      "review_status": "candidate",
+      "evidence_refs": [
+        "examples/inspection_center_observed_state_manifest.json",
+        "center_scenario_structure.storage_tanks"
+      ],
+      "mapping_basis": "Receiving scenario stream is associated with a storage-tank process state; the run does not identify one reviewed tank asset."
+    },
+    {
+      "mapping_id": "center-storage-vent-class",
+      "observed_component_id": "lh2-storage-vent",
+      "source_ids": ["inspection-center-storage-vent-10-runs"],
+      "candidate_component_class": "storage_tank_operating_vent_path",
+      "candidate_facility_asset_aliases": ["XV10", "XV11"],
+      "review_status": "unresolved",
+      "evidence_refs": [
+        "examples/inspection_center_observed_state_manifest.json",
+        "center_scenario_structure.storage_vent"
+      ],
+      "mapping_basis": "Storage-vent scenario and pressure signal identify an operating vent path, but tank identity, valve order, and stack endpoint are unresolved."
+    },
+    {
+      "mapping_id": "center-supply-vaporizer-class",
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "source_ids": ["inspection-center-supply-10-runs"],
+      "candidate_component_class": "vaporizer_supply_boundary",
+      "candidate_facility_asset_aliases": ["VP-1101"],
+      "review_status": "candidate",
+      "evidence_refs": [
+        "examples/inspection_center_observed_state_manifest.json",
+        "center_scenario_structure.gas_supply_vaporizer"
+      ],
+      "mapping_basis": "Supply boundary has pressure, temperature, and differential-pressure channels consistent with a vaporizer boundary; P&ID endpoint and branch identity remain unresolved."
+    }
+  ]
+}
