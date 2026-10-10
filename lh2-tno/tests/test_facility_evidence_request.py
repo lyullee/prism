@@ -316,6 +316,79 @@ def test_case_request_marks_missing_numerical_case_separately():
     assert report["case_requests"][0]["gap_class"] == "NUMERICAL_CASE_MISSING"
 
 
+def test_case_request_preserves_reviewed_frequency_port_without_provider_packet():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "event-port-bound",
+            "asset_id": "asset-port-bound",
+            "component_id": "pipe-01",
+            "frequency_port_ids": ["pipe.out"],
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["pipe_hole"],
+            "status": "UNCOMPUTED",
+        }],
+        "uncomputed_cases": [],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "pipe_hole",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+        }]},
+    )
+    request = report["case_requests"][0]
+    assert request["frequency_port_ids"] == ["pipe.out"]
+    assert request["provider_packet_port_ids"] is None
+    assert request["port_binding"]["status"] == "REVIEWED_FREQUENCY_PORTS"
+    assert request["exact_match_required"]["port_ids"] == ["pipe.out"]
+    assert request["exact_match_required"]["reviewed_frequency_port_ids"] == ["pipe.out"]
+    assert request["port_binding"]["frequency_inference_allowed"] is False
+
+
+def test_case_request_rejects_provider_port_that_differs_from_frequency_port():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "event-port-mismatch",
+            "asset_id": "asset-port-mismatch",
+            "frequency_port_ids": ["pipe.out"],
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "scenario_families": ["pipe_hole"],
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "provider_packet_identity": {
+                "event_id": "event-port-mismatch",
+                "component_id": "pipe-01",
+                "port_ids": ["wrong.out"],
+                "provider_source_digests": ["source-digest"],
+                "provider_result_digests": ["result-digest"],
+            },
+        }],
+        "uncomputed_cases": [],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "pipe_hole",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+        }]},
+    )
+    request = report["case_requests"][0]
+    assert request["port_binding"]["status"] == "PORT_BINDING_MISMATCH"
+    assert request["exact_match_required"]["port_ids"] == ["pipe.out"]
+    assert any("port IDs differ" in reason for reason in request["blocking_reasons"])
+
+
 def test_case_request_exposes_release_boundary_gaps_without_recalculation():
     assessment = _assessment()
     ledger = assessment["facility_risk_ledger"]

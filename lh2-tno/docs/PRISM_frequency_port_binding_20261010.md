@@ -59,6 +59,8 @@ v0.6.0 준비도 보고서의 `chain.frequency_port_binding`에도 같은 추적
 
 포트가 다르면 빈도를 억지로 붙이지 않고 오류를 낸다. 이 오류는 해당 사고 케이스가 **미계산**이라는 뜻이며, 빈도를 0으로 바꾸거나 다른 포트로 옮기지 않는다.
 
+시설 증거요청서도 provider packet이 아직 없는 미계산 사건의 `frequency_port_ids`를 `exact_match_required.port_ids`에 그대로 넣는다. provider가 나중에 다른 포트를 반환하면 `PORT_BINDING_MISMATCH`로 표시하고, 해당 packet은 자격심사에 사용할 수 없다.
+
 이 검사는 `bind_event()`에만 있지 않다. 이미 빈도가 들어 있는 `ConsequenceRequest`를 JSON으로 직접 만들더라도 요청 검증기가 provider 방출 포트와 `frequency_event.port_ids`를 다시 비교한다.
 
 provider 방출 작업목록을 만들 때 매니페스트에서 지정 포트가 빠져 있으면 작업목록은 해당 이벤트를 `UNCOMPUTED_NO_ACCIDENT_PORT`로 남긴다. 정상 운전 포트를 사고 포트로 대체하지 않으며, 누락된 포트를 복구할 때까지 packet 수는 증가하지 않는다.

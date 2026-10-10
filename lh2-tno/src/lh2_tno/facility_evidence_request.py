@@ -132,6 +132,13 @@ def _case_required_families(row: Mapping[str, Any]) -> list[str]:
     return sorted({str(family) for family in families if str(family).strip()})
 
 
+def _port_ids(value: Any) -> list[str] | None:
+    """Normalize an explicit port list while preserving an absent list."""
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        return None
+    return [str(item) for item in value if str(item).strip()]
+
+
 def _case_gap_class(
     status: str,
     *,
@@ -250,6 +257,15 @@ def _build_case_requests(
             for field in ("asset_id", "component_id"):
                 if not current.get(field) and raw.get(field):
                     current[field] = raw[field]
+            current_frequency_ports = _port_ids(current.get("frequency_port_ids"))
+            candidate_frequency_ports = _port_ids(raw.get("frequency_port_ids"))
+            if candidate_frequency_ports is not None:
+                if current_frequency_ports is None:
+                    current["frequency_port_ids"] = candidate_frequency_ports
+                elif current_frequency_ports != candidate_frequency_ports:
+                    current["_reasons"].append(
+                        "duplicate ledger rows carry conflicting reviewed frequency port IDs"
+                    )
             current_status = str(current.get("status", "UNSPECIFIED"))
             candidate_status = str(raw.get("status", "UNSPECIFIED"))
             if _case_status_rank(candidate_status) > _case_status_rank(current_status):
@@ -294,7 +310,34 @@ def _build_case_requests(
             )
         if not reasons:
             continue
-        port_ids = identity.get("port_ids", ())
+        port_ids = identity.get("port_ids")
+        reviewed_frequency_port_ids = _port_ids(row.get("frequency_port_ids"))
+        provider_packet_port_ids = _port_ids(port_ids)
+        if reviewed_frequency_port_ids is not None and provider_packet_port_ids is not None:
+            if reviewed_frequency_port_ids != provider_packet_port_ids:
+                reasons.append(
+                    "provider packet port IDs differ from reviewed frequency port IDs"
+                )
+        requested_port_ids = (
+            reviewed_frequency_port_ids
+            if reviewed_frequency_port_ids is not None
+            else provider_packet_port_ids
+        )
+        port_binding_status = (
+            "PORT_BINDING_MISMATCH"
+            if reviewed_frequency_port_ids is not None
+            and provider_packet_port_ids is not None
+            and reviewed_frequency_port_ids != provider_packet_port_ids
+            else (
+                "REVIEWED_FREQUENCY_PORTS"
+                if reviewed_frequency_port_ids is not None
+                else (
+                    "PROVIDER_PACKET_PORTS_ONLY"
+                    if provider_packet_port_ids is not None
+                    else "PORT_BINDING_WITHHELD"
+                )
+            )
+        )
         source_digests = identity.get("provider_source_digests", ())
         result_digests = identity.get("provider_result_digests", ())
         requests.append({
@@ -315,10 +358,19 @@ def _build_case_requests(
             "current_boundary_gaps": _release_boundary_gaps(row, status=status),
             "request_kind": "QUALIFIED_PROVIDER_PACKET",
             "qualification_required": qualification_gap,
+            "frequency_port_ids": reviewed_frequency_port_ids,
+            "provider_packet_port_ids": provider_packet_port_ids,
+            "port_binding": {
+                "status": port_binding_status,
+                "reviewed_frequency_port_ids": reviewed_frequency_port_ids,
+                "provider_packet_port_ids": provider_packet_port_ids,
+                "frequency_inference_allowed": False,
+            },
             "exact_match_required": {
                 "event_id": row.get("event_id"),
                 "component_id": identity.get("component_id", row.get("component_id")),
-                "port_ids": list(port_ids) if isinstance(port_ids, Sequence) and not isinstance(port_ids, (str, bytes)) else [],
+                "port_ids": requested_port_ids or [],
+                "reviewed_frequency_port_ids": reviewed_frequency_port_ids,
                 "provider_source_digests": list(source_digests) if isinstance(source_digests, Sequence) and not isinstance(source_digests, (str, bytes)) else [],
                 "provider_result_digests": list(result_digests) if isinstance(result_digests, Sequence) and not isinstance(result_digests, (str, bytes)) else [],
             },
