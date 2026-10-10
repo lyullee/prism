@@ -1606,6 +1606,190 @@ class FacilityRealtimeConsequenceMonitor:
                     "error": str(exc),
                 }
 
+        return self._aggregate_component_results(
+            components,
+            unknown_ids=unknown_ids,
+            missing_ids=missing_ids,
+            duplicate_streams=duplicate_streams,
+        )
+
+    def update_from_runtime_frames(
+        self,
+        frames: Mapping[str, Mapping[str, object]],
+        *,
+        now_s: float,
+        mapping_digest: str | None = None,
+    ) -> dict:
+        """Evaluate one state-only runtime frame for every facility component.
+
+        Runtime frames carry measured equipment state and a source clock.  They
+        do not carry an arrival timestamp, leak geometry, accident frequency,
+        ignition probability, or inventory termination.  Each declared binding
+        must therefore provide an explicit provider release resolver; the
+        resulting component records then use the same facility aggregation and
+        fail-closed gates as historian telemetry.
+        """
+        if not isinstance(frames, Mapping):
+            raise TypeError("frames must be a component-id mapping")
+        if (
+            isinstance(now_s, bool)
+            or not isinstance(now_s, (int, float))
+            or not math.isfinite(float(now_s))
+            or now_s < 0
+        ):
+            raise ValueError("now_s must be finite and nonnegative")
+
+        component_ids = tuple(sorted(self.bindings))
+        unknown_ids = tuple(sorted(str(key) for key in set(frames) - set(self.bindings)))
+        missing_ids = tuple(
+            component_id for component_id in component_ids if component_id not in frames
+        )
+        stream_to_components: dict[str, list[str]] = {}
+        frame_errors: dict[str, dict[str, object]] = {}
+        for component_id in component_ids:
+            frame = frames.get(component_id)
+            if frame is None:
+                continue
+            if not isinstance(frame, Mapping):
+                frame_errors[component_id] = {
+                    "status": "REJECTED",
+                    "error_type": "RuntimeFrameContractError",
+                    "error": "runtime frame must be a mapping",
+                }
+                continue
+            frame_component_id = frame.get("component_id")
+            if frame_component_id != component_id:
+                frame_errors[component_id] = {
+                    "status": "REJECTED",
+                    "error_type": "RuntimeFrameContractError",
+                    "error": "runtime frame component_id does not match binding key",
+                }
+                continue
+            source_id = frame.get("source_id")
+            if not isinstance(source_id, str) or not source_id.strip():
+                frame_errors[component_id] = {
+                    "status": "REJECTED",
+                    "error_type": "RuntimeFrameContractError",
+                    "error": "runtime frame must expose a nonempty source_id",
+                }
+                continue
+            stream_to_components.setdefault(source_id, []).append(component_id)
+        duplicate_streams = {
+            stream_id: tuple(component_ids_for_stream)
+            for stream_id, component_ids_for_stream in stream_to_components.items()
+            if len(component_ids_for_stream) > 1
+        }
+
+        components: dict[str, dict[str, object]] = {}
+        for component_id in component_ids:
+            if component_id in missing_ids:
+                components[component_id] = {
+                    "status": "REJECTED",
+                    "error_type": "MissingRuntimeFrame",
+                    "error": "facility runtime snapshot requires one frame for every declared component",
+                }
+            elif component_id in frame_errors:
+                components[component_id] = frame_errors[component_id]
+            else:
+                frame = frames[component_id]
+                source_id = str(frame["source_id"])
+                if source_id in duplicate_streams:
+                    components[component_id] = {
+                        "status": "REJECTED",
+                        "error_type": "DuplicateRuntimeFrameSource",
+                        "error": (
+                            "source_id is shared by components: "
+                            + ", ".join(duplicate_streams[source_id])
+                        ),
+                        "stream_id": source_id,
+                    }
+
+        for component_id in component_ids:
+            if component_id in components:
+                continue
+            binding = self.bindings[component_id]
+            frame = frames[component_id]
+            try:
+                result = binding.monitor.update_from_runtime_frame(
+                    binding.template,
+                    frame,
+                    now_s=float(now_s),
+                    release_resolver=binding.release_resolver,
+                    mapping_digest=mapping_digest,
+                )
+                components[component_id] = {
+                    "status": "ACCEPTED",
+                    "component_id": component_id,
+                    "stream_id": str(frame["source_id"]),
+                    "source_time_s": float(frame["captured_at_s"]),
+                    # State-only frames intentionally have no network arrival
+                    # timestamp; leaving this null prevents false latency claims.
+                    "arrival_time_s": None,
+                    "frame_digest": result.get("telemetry_boundary", {}).get("frame_digest"),
+                    "mapping_digest": result.get("telemetry_boundary", {}).get("mapping_digest"),
+                    "runtime_frame": True,
+                    "equipment_release_path": result.get(
+                        "equipment_release_path",
+                        {
+                            "status": "WITHHELD_PROVIDER_RELEASE_PATH_NOT_RECORDED",
+                            "provider_release_resolved": False,
+                        },
+                    ),
+                    "ignition": _realtime_ignition_accounting(
+                        result, binding.frequency_binding
+                    ),
+                    "risk": _realtime_current_weather_risk(
+                        result, binding.frequency_binding
+                    ),
+                    "result": result,
+                }
+            except Exception as exc:  # preserve an explicit rejection in the ledger
+                components[component_id] = {
+                    "status": "REJECTED",
+                    "component_id": component_id,
+                    "stream_id": frame.get("source_id"),
+                    "error_type": type(exc).__name__,
+                    "error": str(exc),
+                }
+
+        snapshot = self._aggregate_component_results(
+            components,
+            unknown_ids=unknown_ids,
+            missing_ids=missing_ids,
+            duplicate_streams=duplicate_streams,
+        )
+        snapshot["runtime_frame_batch"] = {
+            "status": "STATE_ONLY_RUNTIME_BATCH",
+            "component_count": len(component_ids),
+            "accepted_component_count": sum(
+                entry.get("status") == "ACCEPTED" for entry in components.values()
+            ),
+            "arrival_time_available": False,
+            "mapping_digest_argument_supplied": mapping_digest is not None,
+            "release_inference": False,
+            "frequency_learning": False,
+            "facility_annual_risk_promotion": False,
+        }
+        snapshot["aggregate"]["runtime_frame_batch"] = True
+        snapshot["aggregate"]["runtime_arrival_latency_available"] = False
+        return snapshot
+
+    def _aggregate_component_results(
+        self,
+        components: Mapping[str, Mapping[str, object]],
+        *,
+        unknown_ids: tuple[str, ...] = (),
+        missing_ids: tuple[str, ...] = (),
+        duplicate_streams: Mapping[str, tuple[str, ...]] | None = None,
+    ) -> dict:
+        """Aggregate already-evaluated component records into one snapshot.
+
+        Both historian ``Frame`` inputs and state-only runtime frames use this
+        common aggregation path.  Keeping the aggregation separate prevents a
+        runtime adapter from bypassing the existing facility gates.
+        """
+        component_ids = tuple(sorted(self.bindings))
+        duplicate_streams = duplicate_streams or {}
         accepted = [entry for entry in components.values() if entry["status"] == "ACCEPTED"]
         rejected = [entry for entry in components.values() if entry["status"] != "ACCEPTED"]
         batch_status = "ACCEPTED" if not rejected and not unknown_ids else "REJECTED"
@@ -2086,7 +2270,6 @@ class FacilityRealtimeConsequenceMonitor:
                 ),
             },
         }
-
     def update_from_rows(
         self,
         rows: Mapping[str, Mapping[str, object]],

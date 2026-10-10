@@ -51,6 +51,10 @@ def test_runtime_frame_selects_latest_state_and_matches_service_shape():
     assert validate_equipment_process_state(normalized)["component_id"] == "tank-01"
     assert report["policy"]["release_scenario_generated"] is False
     assert report["policy"]["provider_release_required_for_consequence"] is True
+    assert (
+        report["runtime_handoff_contract"]["facility_monitor_method"]
+        == "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames"
+    )
 
 
 def test_runtime_frame_rejects_accident_owned_fields():
@@ -152,3 +156,66 @@ def test_runtime_frame_monitor_executes_provider_release_and_deadline(tmp_path):
     assert result["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
     assert result["realtime"]["runtime_frame"] is True
     assert result["realtime"]["deadline_status"] == "MET"
+
+
+def test_facility_runtime_frames_execute_each_provider_and_preserve_facility_gates(tmp_path):
+    from lh2_tno.service import (
+        ConsequenceService,
+        FacilityRealtimeBinding,
+        FacilityRealtimeConsequenceMonitor,
+        RealtimeConsequenceMonitor,
+    )
+    from lh2_tno.provider_release import build_consequence_request_from_provider_release
+    from test_consequence_service import Pipeline, request
+    from test_provider_release import _defaults, _release
+
+    first_source = _source()
+    first_source["component_id"] = "tank-01"
+    second_source = _source()
+    second_source["source_id"] = "historian-tank-02"
+    second_source["component_id"] = "tank-02"
+    report = build_observed_state_runtime_frames([first_source, second_source])
+
+    class RuntimeNormalizer:
+        def normalize(self, *_args, **_kwargs):
+            raise AssertionError("runtime-frame path must bypass historian normalizer")
+
+    bindings = {}
+    for component_id in ("tank-01", "tank-02"):
+        component_tmp_path = tmp_path / component_id
+        component_tmp_path.mkdir()
+        provider_request = build_consequence_request_from_provider_release(
+            _release(), _defaults()
+        ).model_copy(update={"component_id": component_id})
+        bindings[component_id] = FacilityRealtimeBinding(
+            component_id=component_id,
+            template=request().model_copy(update={"component_id": component_id}),
+            monitor=RealtimeConsequenceMonitor(
+                ConsequenceService(Pipeline(component_tmp_path))
+            ),
+            # Runtime frames bypass historian normalization but the binding
+            # still carries these explicit metadata fields for compatibility.
+            normalizer=RuntimeNormalizer(),
+            pressure_tag="pressure",
+            temperature_tag="temperature",
+            release_resolver=lambda _template, _state, p=provider_request: p,
+        )
+
+    result = FacilityRealtimeConsequenceMonitor(
+        bindings, facility_id="generic-outdoor-lh2"
+    ).update_from_runtime_frames(
+        {frame["component_id"]: frame for frame in report["frames"]},
+        now_s=101.0,
+    )
+    assert result["status"] == "ACCEPTED"
+    assert result["accepted_component_count"] == 2
+    assert result["runtime_frame_batch"]["status"] == "STATE_ONLY_RUNTIME_BATCH"
+    assert result["runtime_frame_batch"]["arrival_time_available"] is False
+    assert result["aggregate"]["runtime_frame_batch"] is True
+    assert result["aggregate"]["facility_annual_risk_available"] is False
+    assert result["aggregate"]["facility_fn_available"] is False
+    assert all(
+        result["components"][component_id]["result"]["realtime"]["runtime_frame"]
+        for component_id in ("tank-01", "tank-02")
+    )
+    assert result["aggregate"]["equipment_release_path_component_count"] == 2

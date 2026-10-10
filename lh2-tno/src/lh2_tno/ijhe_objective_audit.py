@@ -661,6 +661,8 @@ def build_ijhe_objective_coverage_audit(
         == "request_from_observed_state_runtime_frame"
         and runtime_handoff_contract.get("monitor_method")
         == "RealtimeConsequenceMonitor.update_from_runtime_frame"
+        and runtime_handoff_contract.get("facility_monitor_method")
+        == "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames"
         and runtime_handoff_contract.get("runtime_clock")
         == "caller_supplied_now_s"
         and runtime_handoff_contract.get("provider_release_required_for_consequence") is True
@@ -700,8 +702,8 @@ def build_ijhe_objective_coverage_audit(
             "runtime_handoff_contract": runtime_handoff_contract,
         },
         blocking_reason=None if runtime_frames_ok else (
-            "실시간 상태 frame artifact가 없거나 source/frame 수·digest·state-only 정책이 "
-            "검증되지 않았다"
+            "실시간 상태 frame artifact가 없거나 source/frame 수·digest·state-only·시설 monitor "
+            "계약이 검증되지 않았다"
         ),
         interpretation=(
             "상태 frame은 정상상태 모델과 provider resolver에 넘길 수 있는 실행 입력이다. "

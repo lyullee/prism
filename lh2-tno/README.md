@@ -1198,6 +1198,26 @@ print(snapshot["status"])                         # ACCEPTED 또는 REJECTED
 print(snapshot["aggregate"]["deadline_status"])  # MET, MISSED 또는 REJECTED
 ```
 
+이미 digital twin이 `prism.observed_state_runtime_frames.v1` 상태 프레임을
+만들고 있다면 센서 정규화기를 거치지 않고 시설 단위 provider 경계로 넘길 수도
+있습니다. `update_from_runtime_frames()`는 component별 `source_id`와
+`captured_at_s`를 검사하고, 각 binding의 명시적 release resolver를 실행한 뒤
+같은 시설 집계기를 사용합니다. runtime frame에는 네트워크 도착 시각이 없으므로
+도착 지연은 계산하지 않고 `runtime_arrival_latency_available=false`로 남깁니다.
+provider가 없는 설비, 누출·종료·재고가 없는 응답, 상태 프레임 위변조는 해당
+설비를 `REJECTED`로 만들며 이전 결과나 0을 대신 넣지 않습니다.
+
+```python
+runtime_snapshot = facility_monitor.update_from_runtime_frames(
+    {frame["component_id"]: frame for frame in runtime_report["frames"]},
+    now_s=runtime_clock_s,
+)
+print(runtime_snapshot["runtime_frame_batch"]["status"])
+# STATE_ONLY_RUNTIME_BATCH
+print(runtime_snapshot["aggregate"]["facility_annual_risk_available"])
+# False: runtime 상태 집계는 annual facility QRA 승격이 아님
+```
+
 문헌 빈도를 실시간 피해와 연결하려면 설비 binding에 별도로 붙입니다. 이 값은 센서에서 배우지 않고 검토된 문헌 사건에서 가져옵니다.
 
 ```python
