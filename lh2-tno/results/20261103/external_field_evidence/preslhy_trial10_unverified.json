@@ -110,6 +110,7 @@
   },
   "obstacle_geometry": {
     "obstacles_present": false,
+    "coordinate_reference": "source-relative metres; z above concrete pad",
     "promotion_status": "conditional_open_pad_only"
   },
   "common_clock": {
@@ -134,6 +135,9 @@
     "weather",
     "common_clock"
   ],
+  "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+  "weather_sha256": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed",
+  "receptor_observation_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
   "physical_validation_claim": false,
   "full_chain_validation_claim": false,
   "accident_release_validation_claim": false,

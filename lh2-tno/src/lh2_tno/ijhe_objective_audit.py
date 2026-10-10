@@ -61,6 +61,7 @@ def build_ijhe_objective_coverage_audit(
     observed_state_replay_audit: Mapping[str, Any] | None = None,
     observed_state_runtime_frames: Mapping[str, Any] | None = None,
     external_field_evidence: Mapping[str, Any] | None = None,
+    external_field_model_comparison: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -85,6 +86,7 @@ def build_ijhe_objective_coverage_audit(
     observed_replay_path = _record_path(observed_state_replay_audit, None)
     observed_runtime_path = _record_path(observed_state_runtime_frames, None)
     external_field_path = _record_path(external_field_evidence, None)
+    external_field_comparison_path = _record_path(external_field_model_comparison, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -828,6 +830,96 @@ def build_ijhe_objective_coverage_audit(
             "물리검증·방출 packet·빈도·시설 QRA를 열지 않는다."
         ),
     ))
+
+    comparison_status = (
+        external_field_model_comparison.get("status")
+        if isinstance(external_field_model_comparison, Mapping)
+        else None
+    )
+    comparison_policy = (
+        external_field_model_comparison.get("promotion_policy", {})
+        if isinstance(external_field_model_comparison, Mapping)
+        else {}
+    )
+    if not isinstance(comparison_policy, Mapping):
+        comparison_policy = {}
+    comparison_ok = (
+        isinstance(external_field_model_comparison, Mapping)
+        and external_field_model_comparison.get("schema_version")
+        == "prism.external_field_model_comparison.v1"
+        and comparison_status in {
+            "RESTRICTED_FIELD_MODEL_COMPARISON",
+            "RESTRICTED_FIELD_MODEL_COMPARISON_HASH_DRIFT",
+        }
+        and external_field_model_comparison.get("physical_validation_claim") is False
+        and external_field_model_comparison.get("full_chain_validation_claim") is False
+        and external_field_model_comparison.get("accident_release_validation_claim") is False
+        and external_field_model_comparison.get("frequency_inference_performed") is False
+        and external_field_model_comparison.get("facility_qra_claim") is False
+        and comparison_policy.get("measured_source_replay_is_not_independent_validation") is True
+        and comparison_policy.get("transport_delay_is_declared_not_fitted") is True
+        and comparison_policy.get("no_extrapolation_outside_prediction_horizon") is True
+        and comparison_policy.get("physical_validation_requires_external_review") is True
+        and comparison_policy.get("component_comparison_does_not_validate_facility_qra") is True
+    )
+    if external_field_model_comparison is not None:
+        comparison_matching = (
+            external_field_model_comparison.get("matching", {})
+            if isinstance(external_field_model_comparison, Mapping)
+            else {}
+        )
+        comparison_metrics = (
+            external_field_model_comparison.get("metrics", {})
+            if isinstance(external_field_model_comparison, Mapping)
+            else {}
+        )
+        rows.append(_row(
+            "diagnostic_external_field_model_comparison",
+            "외부 옥외 LH2 관측과 모델 농도를 동일 센서·공통시계·운반지연으로 비교하되 독립 물리검증으로 자동 승격하지 않아야 한다",
+            "PASS" if comparison_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(external_field_comparison_path,),
+            observed={
+                "status": comparison_status,
+                "event_id": (
+                    external_field_model_comparison.get("event_id")
+                    if isinstance(external_field_model_comparison, Mapping)
+                    else None
+                ),
+                "matched_row_count": (
+                    comparison_matching.get("matched_row_count")
+                    if isinstance(comparison_matching, Mapping)
+                    else None
+                ),
+                "matched_fraction": (
+                    comparison_matching.get("matched_fraction")
+                    if isinstance(comparison_matching, Mapping)
+                    else None
+                ),
+                "rmse_vol_pct": (
+                    comparison_metrics.get("rmse_vol_pct")
+                    if isinstance(comparison_metrics, Mapping)
+                    else None
+                ),
+                "source_boundary_mode": (
+                    external_field_model_comparison.get("source_boundary_binding", {}).get("mode")
+                    if isinstance(external_field_model_comparison, Mapping)
+                    and isinstance(external_field_model_comparison.get("source_boundary_binding"), Mapping)
+                    else None
+                ),
+                "independent_physical_validation_review_eligible": (
+                    external_field_model_comparison.get("independent_physical_validation_review_eligible")
+                    if isinstance(external_field_model_comparison, Mapping)
+                    else None
+                ),
+            },
+            blocking_reason=None if comparison_ok else (
+                "외부 모델-관측 비교 장부의 schema·시간·기하·승격 금지 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "비교 오차와 시간·기하 결합만 기록한다. measured_source_replay 또는 hash drift는 "
+                "독립 물리검증으로 승격하지 않으며, frequency·시설 QRA도 열지 않는다."
+            ),
+        ))
 
     core_rows = rows[:8]
     # The first 15 rows are the established core/strict gates.  The external

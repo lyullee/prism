@@ -125,6 +125,38 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert weather_check["observed"]["scenario_missing_dimension_atom_count"] == 0
 
 
+def test_objective_audit_records_field_model_comparison_as_diagnostic_only():
+    inputs = _inputs()
+    inputs["external_field_model_comparison"] = {
+        "schema_version": "prism.external_field_model_comparison.v1",
+        "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
+        "event_id": "field-trial-01",
+        "matching": {"matched_row_count": 4, "matched_fraction": 1.0},
+        "metrics": {"rmse_vol_pct": 0.02},
+        "source_boundary_binding": {"mode": "measured_source_replay"},
+        "independent_physical_validation_review_eligible": False,
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "promotion_policy": {
+            "measured_source_replay_is_not_independent_validation": True,
+            "transport_delay_is_declared_not_fitted": True,
+            "no_extrapolation_outside_prediction_horizon": True,
+            "physical_validation_requires_external_review": True,
+            "component_comparison_does_not_validate_facility_qra": True,
+        },
+        "_record_path": "comparison.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(row for row in report["checks"] if row["id"] == "diagnostic_external_field_model_comparison")
+    assert row["status"] == "PASS"
+    assert row["observed"]["matched_row_count"] == 4
+    assert report["physical_validation_claim"] is False
+    assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
+
+
 def test_objective_audit_blocks_missing_native_event():
     inputs = _inputs()
     inputs["native_catalog_verification"]["uncomputed_event_count"] = 1

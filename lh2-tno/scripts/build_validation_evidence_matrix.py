@@ -21,9 +21,11 @@ def main() -> int:
     parser.add_argument("--equipment-audit", type=Path, required=True)
     parser.add_argument("--facility-assessment", type=Path, required=True)
     parser.add_argument("--native-contract", type=Path)
+    parser.add_argument("--slabx-validation", type=Path)
     parser.add_argument("--ijhe-audit", type=Path)
     parser.add_argument("--external-sweep", type=Path)
     parser.add_argument("--external-field-evidence", type=Path)
+    parser.add_argument("--external-field-comparison", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -32,9 +34,11 @@ def main() -> int:
             args.equipment_audit,
             args.facility_assessment,
             native_contract_path=args.native_contract,
+            slabx_validation_path=args.slabx_validation,
             ijhe_audit_path=args.ijhe_audit,
             external_sweep_path=args.external_sweep,
             external_field_path=args.external_field_evidence,
+            external_field_comparison_path=args.external_field_comparison,
         )
     except (ValidationEvidenceMatrixError, OSError, TypeError, ValueError) as error:
         raise SystemExit(f"validation evidence matrix input error: {error}") from error

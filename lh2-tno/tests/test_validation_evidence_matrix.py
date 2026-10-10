@@ -108,7 +108,21 @@ def _records(tmp_path: Path) -> dict[str, Path]:
         "frequency_inference_performed": False,
         "facility_qra_claim": False,
     })
-    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field}
+    comparison = _write(tmp_path / "comparison.json", {
+        "schema_version": "prism.external_field_model_comparison.v1",
+        "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
+        "event_id": "field-trial-01",
+        "matching": {"matched_row_count": 4, "matched_fraction": 1.0},
+        "metrics": {"sample_count": 4, "rmse_vol_pct": 0.02, "mae_vol_pct": 0.01},
+        "source_boundary_binding": {"mode": "measured_source_replay"},
+        "independent_physical_validation_review_eligible": False,
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "facility_qra_claim": False,
+        "frequency_inference_performed": False,
+    })
+    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison}
 
 
 def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
@@ -156,6 +170,21 @@ def test_matrix_records_external_field_observation_without_opening_validation_or
     assert claims["restricted_external_outdoor_field_observation_evidence"]["allowed"] is True
     assert matrix["physical_validation_claim"] is False
     assert matrix["facility_qra_claim"] is False
+
+
+def test_matrix_records_field_model_comparison_without_opening_validation(tmp_path):
+    paths = _records(tmp_path)
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        external_field_comparison_path=paths["comparison"],
+    )
+    domain = next(row for row in matrix["evidence_domains"] if row["id"] == "external_field_model_comparison")
+    assert domain["status"] == "RESTRICTED_COMPARISON_EVIDENCE"
+    assert domain["matched_row_count"] == 4
+    assert domain["source_boundary_mode"] == "measured_source_replay"
+    claims = {row["claim"]: row for row in matrix["claims"]}
+    assert claims["restricted_external_field_model_comparison_evidence"]["allowed"] is True
+    assert matrix["physical_validation_claim"] is False
 
 
 def test_matrix_rejects_slabx_promotion_claim(tmp_path):

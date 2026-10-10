@@ -220,6 +220,9 @@ def build_external_field_evidence_record(
     hash_drift_channels = [
         row["channel"] for row in verified_channels if not row["hash_verified"]
     ]
+    observed_hashes = {
+        row["channel"]: row["observed_sha256"] for row in verified_channels
+    }
     return {
         "schema_version": SCHEMA_VERSION,
         "status": (
@@ -236,6 +239,7 @@ def build_external_field_evidence_record(
         "receptor_observations": receptors,
         "obstacle_geometry": {
             "obstacles_present": obstacle.get("obstacles_present"),
+            "coordinate_reference": obstacle.get("coordinate_reference"),
             "promotion_status": obstacle.get("promotion_status"),
         },
         "common_clock": {
@@ -248,6 +252,9 @@ def build_external_field_evidence_record(
         "model_comparison_ready": False,
         "hash_verification_enforced": verify_hashes,
         "hash_drift_channels": hash_drift_channels,
+        "source_boundary_sha256": observed_hashes["source_boundary"],
+        "weather_sha256": observed_hashes["weather"],
+        "receptor_observation_sha256": observed_hashes["receptor_observations"],
         "physical_validation_claim": False,
         "full_chain_validation_claim": False,
         "accident_release_validation_claim": False,

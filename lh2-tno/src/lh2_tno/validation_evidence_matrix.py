@@ -309,8 +309,72 @@ def _external_field_domain(
         "source_row_count": source.get("row_count"),
         "weather_row_count": weather.get("row_count"),
         "receptor_row_count": receptors.get("row_count"),
+        "coordinate_reference": (
+            payload.get("obstacle_geometry", {}).get("coordinate_reference")
+            if isinstance(payload.get("obstacle_geometry"), Mapping)
+            else None
+        ),
         "model_comparison_ready": payload.get("model_comparison_ready"),
         "source": _source(path, "external outdoor field observation evidence", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
+def _external_field_comparison_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Record a matched field/model comparison without opening validation."""
+
+    status = payload.get("status")
+    if status not in {
+        "RESTRICTED_FIELD_MODEL_COMPARISON",
+        "RESTRICTED_FIELD_MODEL_COMPARISON_HASH_DRIFT",
+    }:
+        blockers.append("external field model comparison is blocked or malformed")
+    for field in (
+        "physical_validation_claim",
+        "full_chain_validation_claim",
+        "accident_release_validation_claim",
+        "facility_qra_claim",
+        "frequency_inference_performed",
+    ):
+        _require_false(payload, field, "external field model comparison", blockers)
+    metrics = payload.get("metrics") if isinstance(payload.get("metrics"), Mapping) else {}
+    matching = payload.get("matching") if isinstance(payload.get("matching"), Mapping) else {}
+    binding = payload.get("source_boundary_binding") if isinstance(payload.get("source_boundary_binding"), Mapping) else {}
+    return {
+        "id": "external_field_model_comparison",
+        "status": (
+            "RESTRICTED_COMPARISON_EVIDENCE"
+            if status == "RESTRICTED_FIELD_MODEL_COMPARISON"
+            else "RESTRICTED_COMPARISON_HASH_DRIFT"
+            if status == "RESTRICTED_FIELD_MODEL_COMPARISON_HASH_DRIFT"
+            else "BLOCKED_COMPARISON"
+        ),
+        "supports": [
+            "declared-clock, geometry-matched field/model concentration error metrics",
+            "explicit measured-source replay versus independent-model provenance",
+        ],
+        "does_not_support": [
+            "automatic independent physical-validation promotion",
+            "accident-release or initiating-frequency validation",
+            "ignition, IR/F-N, or facility-QRA validation",
+        ],
+        "event_id": payload.get("event_id"),
+        "sample_count": metrics.get("sample_count"),
+        "matched_row_count": matching.get("matched_row_count"),
+        "matched_fraction": matching.get("matched_fraction"),
+        "rmse_vol_pct": metrics.get("rmse_vol_pct"),
+        "mae_vol_pct": metrics.get("mae_vol_pct"),
+        "source_boundary_mode": binding.get("mode"),
+        "independent_physical_validation_review_eligible": payload.get(
+            "independent_physical_validation_review_eligible"
+        ),
+        "source": _source(path, "external field/model comparison", payload),
         "physical_validation_claim": False,
         "full_chain_validation_claim": False,
         "facility_qra_claim": False,
@@ -345,6 +409,7 @@ def build_validation_evidence_matrix(
     ijhe_audit_path: str | Path | None = None,
     external_sweep_path: str | Path | None = None,
     external_field_path: str | Path | None = None,
+    external_field_comparison_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -371,6 +436,11 @@ def build_validation_evidence_matrix(
     if external_field_path is not None:
         field_path, field = _read_object(external_field_path, "external field evidence")
         domains.append(_external_field_domain(field_path, field, blockers))
+    if external_field_comparison_path is not None:
+        comparison_path, comparison = _read_object(
+            external_field_comparison_path, "external field model comparison"
+        )
+        domains.append(_external_field_comparison_domain(comparison_path, comparison, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
@@ -403,6 +473,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("external field evidence" in item for item in unique_blockers),
             "basis": "external_outdoor_field_observation",
+        },
+        {
+            "claim": "restricted_external_field_model_comparison_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("external field model comparison" in item for item in unique_blockers),
+            "basis": "external_field_model_comparison",
         },
         {
             "claim": "independent_full_chain_physical_validation",

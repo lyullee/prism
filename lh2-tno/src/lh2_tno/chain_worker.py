@@ -156,6 +156,10 @@ def run_chain(p,roots,module):
     start=time.perf_counter()
     cp=__import__('CoolProp.CoolProp',fromlist=['PropsSI'])
     source=p['source_input']; requested_duration=source['duration_s']
+    # Requests may carry an explicit JSON null while an upstream diagnostic
+    # is still assembling termination context.  Treat it as absent here;
+    # never dereference None and never infer a termination basis.
+    release_termination = p.get('release_termination') or {}
     duration=requested_duration
     duration_mode=p.get('source_duration_mode','declared')
     source_operator=p.get('source_operator','integrated_transient')
@@ -173,7 +177,7 @@ def run_chain(p,roots,module):
         source_history.update(source_operator=source_operator,
             requested_duration_s=duration,effective_duration_s=duration,
             source_duration_mode='declared',
-            termination_basis=p.get('release_termination',{}).get('basis'),
+            termination_basis=release_termination.get('basis'),
             operator_limited=True)
     elif source_operator == 'inventory_liquid_jet':
         jetmod=module('slabx_lh2.lh2_jet_source',roots['slabx_lh2'])
@@ -201,7 +205,7 @@ def run_chain(p,roots,module):
         source_history.update(source_operator=source_operator,
             requested_duration_s=requested_duration,
             effective_duration_s=requested_duration,
-            termination_basis=p.get('release_termination',{}).get('basis'),
+            termination_basis=release_termination.get('basis'),
             operator_limited=True,
             limitations=['constant upstream liquid-jet state; tank pressure/inventory feedback is not solved',
                          'declared d2 droplet evaporation and spray geometry; source energy closure remains open'])
@@ -222,7 +226,7 @@ def run_chain(p,roots,module):
         source_history.update(requested_duration_s=requested_duration,
             effective_duration_s=duration,source_duration_mode=duration_mode,
             natural_termination_detected=duration < requested_duration - 1e-12,
-            termination_basis=p.get('release_termination',{}).get('basis'))
+            termination_basis=release_termination.get('basis'))
         clock_duration=next((t for t in p['evaluation_times_s']
             if math.isclose(t,duration,rel_tol=0,abs_tol=1e-10)),None)
         if clock_duration is None:
