@@ -4,13 +4,21 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
-**방출부터 최종 피해까지의 현재 연결:** `results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json`은
+**현재 권위 기준점 (state-bound union):** `results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json`은
+34개 사건·44개 case·176개 risk atom의 옥외 진단 범위를 보존하고, 상태→방출 연결은
+44/44 case에서 확인합니다. 조건부 수치 실행과 시설 전체 QRA 자격은 별도로 판정하며,
+현재 IJHE 감사는 42개 검사 중 37개 PASS·5개 BLOCKED입니다. `qualified_provider_case_count=0`이므로
+시설 IR/F-N은 계속 fail-closed입니다. 최신 상태는
+[`CURRENT_STATUS.json`](CURRENT_STATUS.json), [`DEVELOPMENT_GOAL.json`](DEVELOPMENT_GOAL.json),
+[`ijhe_objective_coverage_audit.json`](results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_objective_coverage_audit.json)에서 확인합니다.
+
+**방출부터 최종 피해까지의 현재 연결:** `results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json`은
 44개 case와 176개 risk atom을 방출 종료·질량 장부·pool/확산·cloud·점화/피해 단계와
 네 가지 점화 branch까지 대조합니다. 현재 44/44 case가 구조적으로 닫혔고, 그중
 29개는 `EXECUTED_OPERATOR_LIMITED`라서 진단 연결로만 사용합니다. 이 감사는 provider
 자격, 독립 물리검증 또는 시설 전체 QRA를 승격하지 않습니다.
 
-설비 결합도 `equipment_state_release_audit.json`에서 44개 case·9개 component를
+설비 결합도 `results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json`에서 44개 case·9개 component를
 `asset_id → component_id → state snapshot digest → 방출 packet → 종료근거` 순서로
 대조합니다. 수직 handoff의 10개 synthetic horizon도 provider 종료근거를
 packet에 명시적으로 echo하지만, synthetic/operator-limited라는 제한은 그대로
@@ -31,7 +39,7 @@ result의 96개 risk atom에도 snapshot을 보존하며, 상태가 없는 campa
 중단합니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
-최신 fail-closed IJHE 감사는 39개 검사 중 34개 PASS·5개 BLOCKED입니다. native
+최신 fail-closed IJHE 감사는 42개 검사 중 37개 PASS·5개 BLOCKED입니다. native
 catalog의 24/24 exact packet과 구조적 worklist coverage는 diagnostic-only로
 통과시켰고, 44개 시설 case를 case별로 대조하는 `facility_case_packet_coverage.json`도
 생성했습니다. 현재 qualified provider case는 0/44건이므로 모든 case가 명시적으로
