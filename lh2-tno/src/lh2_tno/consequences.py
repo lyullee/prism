@@ -386,6 +386,19 @@ class ConsequenceRequest(Contract):
                 or (event.exposure_multiplier != 1 and event.location_weight is None)
             ):
                 raise ValueError('frequency event requires a matching single-item release')
+            if event.port_ids is not None:
+                if release_set is not None:
+                    request_port_ids = tuple(release.port_id for release in release_set.releases)
+                elif release is not None:
+                    request_port_ids = (release.port_id,)
+                elif liquid_release is not None:
+                    request_port_ids = (liquid_release.port_id,)
+                else:
+                    request_port_ids = ()
+                if request_port_ids != event.port_ids:
+                    raise ValueError(
+                        'frequency event port_ids must exactly match the provider-resolved accident exit(s)'
+                    )
             if event.release.mode == 'instantaneous_inventory':
                 if self.source_operator not in {'inventory_liquid_jet', 'equipment_inventory_depletion', 'equipment_liquid_release'} or self.release_termination.basis != 'inventory_depletion':
                     raise ValueError('instantaneous inventory event requires an inventory-depletion operator')

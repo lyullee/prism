@@ -341,6 +341,18 @@ def test_port_scoped_frequency_requires_exact_provider_exit_identity():
         bind_event(wrong_request, event)
 
 
+def test_consequence_request_cannot_bypass_port_scoped_frequency_binding():
+    data = template().model_dump(mode='json')
+    event = events(asset(port_ids=('storage.out',)))[2]
+    data.update(
+        annual_frequency_per_year=event.annual_frequency_per_year,
+        annual_frequency_provenance='explicit port-scoped test event',
+        frequency_event=event.model_dump(mode='json'),
+    )
+    with pytest.raises(ValueError, match='port_ids'):
+        ConsequenceRequest.model_validate_json(json.dumps(data))
+
+
 def test_provider_600s_inventory_history_binds_with_explicit_long_horizon():
     data = template().model_dump(mode='json')
     release = equipment_inventory_release(duration_s=600.0, mass_flow_kg_s=0.001)
