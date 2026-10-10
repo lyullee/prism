@@ -1,0 +1,69 @@
+{
+  "schema_version": "prism.external_provider_roots_match_review.v1",
+  "status": "NO_EXACT_QUALIFIED_MATCH_ACROSS_EXTERNAL_ROOTS",
+  "source_root_count": 3,
+  "candidate_count": 9,
+  "exact_match_count": 0,
+  "qualification_artifact_count": 0,
+  "physical_validation_artifact_count": 0,
+  "complete_facility_qra_artifact_count": 0,
+  "frequency_inference_allowed": false,
+  "facility_qra_allowed": false,
+  "provider_packet_promotion_allowed": false,
+  "diagnostic_only": true,
+  "roots": [
+    {
+      "record": "results/20261106/external_match_center_native_contract.json",
+      "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract",
+      "status": "NO_EXACT_QUALIFIED_MATCH",
+      "candidate_count": 7,
+      "exact_match_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "blocking_reasons": [
+        "external artifacts are diagnostic unless a separate exact-digest qualification sidecar is present",
+        "no external provider artifact exactly matches a current generic event/component/port/source/result identity",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    },
+    {
+      "record": "results/20261106/external_match_prism_ijhe_step1.json",
+      "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\TNO_위험분석모듈\\TNO_SYSTEM\\코드\\개발기록_20261009\\PRISM_IJHE_step1",
+      "status": "NO_EXACT_QUALIFIED_MATCH",
+      "candidate_count": 2,
+      "exact_match_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "blocking_reasons": [
+        "external artifacts are diagnostic unless a separate exact-digest qualification sidecar is present",
+        "no external provider artifact exactly matches a current generic event/component/port/source/result identity",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    },
+    {
+      "record": "results/20261106/external_match_inspection_center_data.json",
+      "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+      "status": "NO_EXACT_QUALIFIED_MATCH",
+      "candidate_count": 0,
+      "exact_match_count": 0,
+      "qualification_artifact_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "blocking_reasons": [
+        "external artifacts are diagnostic unless a separate exact-digest qualification sidecar is present",
+        "no provider_response.json artifact was found",
+        "no external provider artifact exactly matches a current generic event/component/port/source/result identity",
+        "no prism.provider_qualification_evidence.v1 record was found",
+        "no artifact claims independent physical validation",
+        "no artifact claims a complete facility QRA"
+      ]
+    }
+  ],
+  "interpretation": "Three external roots were rechecked against the current generic event/component/port/source/result identities. Candidate artifacts are diagnostic unless an exact digest-bound qualification sidecar is present; none was found. No frequency or facility QRA is promoted."
+}

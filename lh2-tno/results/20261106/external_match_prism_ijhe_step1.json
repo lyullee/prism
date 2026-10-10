@@ -1,0 +1,64 @@
+{
+  "schema": "prism.external_provider_artifact_match_review.v1",
+  "status": "NO_EXACT_QUALIFIED_MATCH",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\TNO_위험분석모듈\\TNO_SYSTEM\\코드\\개발기록_20261009\\PRISM_IJHE_step1",
+  "closure_audit": "results\\20261106\\generic_lh2_provider_release_closure_current.json",
+  "candidate_count": 2,
+  "exact_match_count": 0,
+  "qualification_artifact_count": 0,
+  "physical_validation_artifact_count": 0,
+  "complete_facility_qra_artifact_count": 0,
+  "candidates": [
+    {
+      "directory": "C:/Users/lyul/Desktop/DocuData/TNO_위험분석모듈/TNO_SYSTEM/코드/개발기록_20261009/PRISM_IJHE_step1/equipment_inventory_campaign",
+      "provider_model": null,
+      "provider_export_schema": null,
+      "event_id": "equipment-inventory-campaign/terminal_pipe/AREA_100%",
+      "component_id": "terminal_pipe",
+      "port_id": "terminal_pipe.out",
+      "provider_source_digest": "458a7db0dc40085757ac5c44ce085b2e6117cc968997634e20582abf16c8ee38",
+      "provider_result_digest": "e65e7e9be025b6868f76a0d4221b28571c64c8b37650697875c097557258b8ff",
+      "input_origin": "synthetic",
+      "upstream_service_provenance": "provider-owned homogeneous finite-storage tank and inventory valve",
+      "termination_basis": null,
+      "duration_s": 0.0625,
+      "verification_status": null,
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "exact_match_to_generic_packet": false
+    },
+    {
+      "directory": "C:/Users/lyul/Desktop/DocuData/TNO_위험분석모듈/TNO_SYSTEM/코드/개발기록_20261009/PRISM_IJHE_step1/equipment_isolation_campaign",
+      "provider_model": null,
+      "provider_export_schema": null,
+      "event_id": null,
+      "component_id": null,
+      "port_id": null,
+      "provider_source_digest": null,
+      "provider_result_digest": null,
+      "input_origin": null,
+      "upstream_service_provenance": null,
+      "termination_basis": null,
+      "duration_s": null,
+      "verification_status": null,
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "exact_match_to_generic_packet": false
+    }
+  ],
+  "errors": [],
+  "blocking_reasons": [
+    "external artifacts are diagnostic unless a separate exact-digest qualification sidecar is present",
+    "no external provider artifact exactly matches a current generic event/component/port/source/result identity",
+    "no prism.provider_qualification_evidence.v1 record was found",
+    "no artifact claims independent physical validation",
+    "no artifact claims a complete facility QRA"
+  ],
+  "promotion": {
+    "provider_packet": false,
+    "frequency": false,
+    "facility_qra": false
+  }
+}

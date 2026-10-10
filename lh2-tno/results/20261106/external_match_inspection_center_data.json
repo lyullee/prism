@@ -1,0 +1,26 @@
+{
+  "schema": "prism.external_provider_artifact_match_review.v1",
+  "status": "NO_EXACT_QUALIFIED_MATCH",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+  "closure_audit": "results\\20261106\\generic_lh2_provider_release_closure_current.json",
+  "candidate_count": 0,
+  "exact_match_count": 0,
+  "qualification_artifact_count": 0,
+  "physical_validation_artifact_count": 0,
+  "complete_facility_qra_artifact_count": 0,
+  "candidates": [],
+  "errors": [],
+  "blocking_reasons": [
+    "external artifacts are diagnostic unless a separate exact-digest qualification sidecar is present",
+    "no provider_response.json artifact was found",
+    "no external provider artifact exactly matches a current generic event/component/port/source/result identity",
+    "no prism.provider_qualification_evidence.v1 record was found",
+    "no artifact claims independent physical validation",
+    "no artifact claims a complete facility QRA"
+  ],
+  "promotion": {
+    "provider_packet": false,
+    "frequency": false,
+    "facility_qra": false
+  }
+}
