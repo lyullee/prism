@@ -62,6 +62,11 @@ def test_release_event_family_mapping_keeps_cross_cutting_liquid_cases_explicit(
     assert scenario_families_for_release("pipe", "two_sided_rupture") == (
         "two_sided_rupture",
     )
+
+
+def test_two_sided_rupture_catalog_covers_reliquefier_events():
+    definition = scenario_definition("two_sided_rupture")
+    assert "reliquefier" in definition["equipment_kinds"]
     assert scenario_families_for_release("vent_stack", "maximum_relief_discharge") == (
         "vent_hole",
     )

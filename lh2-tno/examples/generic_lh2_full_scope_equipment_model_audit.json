@@ -1,0 +1,29 @@
+{
+  "schema_version": "prism.external_equipment_model_audit.v1",
+  "status": "SYNTHETIC_GENERIC_MANIFEST_DECLARED",
+  "scope": "facility-neutral generic outdoor LH2 equipment scenario binding diagnostic",
+  "configuration_origin": "synthetic",
+  "source_manifest": "examples/generic_lh2_full_scope_manifest.json",
+  "assets": [
+    {"asset_id": "storage-shell", "component_model": "storage_tank", "ready_for_state_model_input": true, "source_status": "declared"},
+    {"asset_id": "transfer-line", "component_model": "pipe", "ready_for_state_model_input": true, "source_status": "declared"},
+    {"asset_id": "transfer-valve", "component_model": "valve", "ready_for_state_model_input": true, "source_status": "declared"},
+    {"asset_id": "pressure-relief-vent", "component_model": "vent_stack", "ready_for_state_model_input": true, "source_status": "declared"},
+    {"asset_id": "transfer-pump", "component_model": "pump", "ready_for_state_model_input": true, "source_status": "declared"},
+    {"asset_id": "ambient-vaporizer", "component_model": "vaporizer", "ready_for_state_model_input": true, "source_status": "declared"},
+    {"asset_id": "reliquefier", "component_model": "reliquefier", "ready_for_state_model_input": true, "source_status": "declared"}
+  ],
+  "promotion_gates": {
+    "accident_release_packet_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false
+  },
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "limitations": [
+    "synthetic manifest and declared port schedule only",
+    "generic mapping does not qualify a site-specific P&ID or provider release packet",
+    "literature frequency is retained separately and is not field-frequency learning"
+  ]
+}

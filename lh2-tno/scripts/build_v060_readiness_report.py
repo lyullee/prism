@@ -94,6 +94,16 @@ def main() -> int:
         type=Path,
         help="Optional literature-frequency-to-equipment binding audit.",
     )
+    parser.add_argument(
+        "--generic-equipment-scenario-coverage-audit",
+        type=Path,
+        help="Optional facility-neutral generic-manifest scenario coverage audit.",
+    )
+    parser.add_argument(
+        "--generic-equipment-frequency-binding-audit",
+        type=Path,
+        help="Optional facility-neutral generic-manifest frequency binding audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -155,6 +165,16 @@ def main() -> int:
                 if args.equipment_frequency_binding_audit is not None
                 else None
             ),
+            generic_equipment_scenario_coverage_audit=(
+                _load(args.generic_equipment_scenario_coverage_audit)
+                if args.generic_equipment_scenario_coverage_audit is not None
+                else None
+            ),
+            generic_equipment_frequency_binding_audit=(
+                _load(args.generic_equipment_frequency_binding_audit)
+                if args.generic_equipment_frequency_binding_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -206,6 +226,14 @@ def main() -> int:
     if args.equipment_frequency_binding_audit is not None:
         report["source_artifacts"]["equipment_frequency_binding_audit"] = _source_artifact(
             args.equipment_frequency_binding_audit
+        )
+    if args.generic_equipment_scenario_coverage_audit is not None:
+        report["source_artifacts"]["generic_equipment_scenario_coverage_audit"] = _source_artifact(
+            args.generic_equipment_scenario_coverage_audit
+        )
+    if args.generic_equipment_frequency_binding_audit is not None:
+        report["source_artifacts"]["generic_equipment_frequency_binding_audit"] = _source_artifact(
+            args.generic_equipment_frequency_binding_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

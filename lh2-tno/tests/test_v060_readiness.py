@@ -380,3 +380,36 @@ def test_report_rejects_external_equipment_promotion_flag():
     )
     with pytest.raises(V060ReadinessError, match="cannot open accident release"):
         validate_v060_readiness_report(report)
+
+
+def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_equipment_scenario_coverage_audit={
+            "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+            "asset_count": 7,
+            "mapped_asset_count": 7,
+            "resolved_asset_count": 7,
+            "scenario_family_count": 12,
+            "promotion_gates": {
+                "accident_release_packet_allowed": False,
+                "frequency_inference_allowed": False,
+                "facility_qra_allowed": False,
+            },
+        },
+        generic_equipment_frequency_binding_audit={
+            "status": "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+            "resolved_asset_count": 7,
+            "frequency_event_count": 24,
+            "valid_frequency_event_count": 24,
+            "uncomputed_family_count": 1,
+            "promotion_gates": {
+                "provider_release_required": True,
+                "frequency_inference_allowed": False,
+                "facility_qra_allowed": False,
+            },
+        },
+    )
+    assert report["chain"]["generic_equipment_scenario_coverage"]["resolved_asset_count"] == 7
+    assert report["chain"]["generic_equipment_frequency_binding"]["valid_frequency_event_count"] == 24
+    assert validate_v060_readiness_report(report)["status"] == "VALID"

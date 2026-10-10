@@ -62,3 +62,22 @@ python scripts/run_native_full_scope_frequency_assessment.py `
 - `ijhe_completion_audit.json`: 15개 검사와 현재 4개 차단 사유
 
 이 기록은 IJHE 방법론의 “설비 상태 → 방출·종료 → 확산·피해 → 시설 IR/F-N” 연결을 보여주는 진단 근거다. 실제 일반 시설 결과로 사용하려면 설비별 검토 형상·운전 재고·차단 신뢰도, qualified provider packet, 독립 물리검증, vertical handoff 사건을 추가해야 한다. 현재 감사는 16개 검사 중 12개 통과, 4개 차단이며, worklist 정합성은 통과했지만 packet 자격·사고군 완전성·시설 전체 위험도는 계속 fail-closed다.
+
+## 2026-11-05 일반 설비 crosswalk·빈도 연결 재검증
+
+일반 시설용 합성 manifest에 설비 종류와 사고 포트를 명시한 facility-neutral crosswalk를 적용해 별도 연결 감사를 실행했다. 이 결과는 액화수소검사지원센터의 P&ID를 일반 시설에 복사한 것이 아니라, PRISM의 일반 설비 계약이 어떤 입력을 요구하는지 검증하는 기준 사례다.
+
+| 단계 | 결과 |
+|---|---:|
+| crosswalk 대상 설비 | 7개 |
+| resolved 설비 identity | 7개 |
+| 선언된 사고 family | 12개 |
+| 문헌 빈도 사건 | 24개 |
+| 유효하게 결합된 빈도 사건 | 24개 |
+| 빈도 사건이 없는 family | `vertical_handoff` 1개 |
+| 사고 방출 packet 승격 | false |
+| 시설 QRA 승격 | false |
+
+이번 재검증에서 기존 catalog의 `two_sided_rupture` 적용 설비가 배관·밸브로만 기록되어 있던 오류를 수정했다. 일반 빈도 원장의 재액화기 G4/G5는 약한 shell 열교환기의 양단 파열 사건이므로 `reliquefier`도 같은 family에 포함해야 24개 문헌 사건이 모두 일관되게 바인딩된다. 이 수정은 빈도와 사고 family의 구조적 정합성만 고친 것이며, provider 방출 packet이나 시설 QRA를 만들지 않는다.
+
+재현 입력은 [`generic_lh2_full_scope_equipment_model_audit.json`](../examples/generic_lh2_full_scope_equipment_model_audit.json)과 [`generic_lh2_full_scope_equipment_kind_crosswalk.json`](../examples/generic_lh2_full_scope_equipment_kind_crosswalk.json)이다. 결과는 [`generic_lh2_full_scope_equipment_scenario_coverage.json`](../results/20261105/generic_lh2_full_scope_equipment_scenario_coverage.json) 및 [`generic_lh2_full_scope_equipment_frequency_binding.json`](../results/20261105/generic_lh2_full_scope_equipment_frequency_binding.json)에 저장했다. 실제 시설에서는 이 crosswalk를 P&ID·포트 일정·설비 자료로 대체하고, `vertical_handoff` provider packet과 모든 사고 family의 방출 장부를 추가해야 한다.

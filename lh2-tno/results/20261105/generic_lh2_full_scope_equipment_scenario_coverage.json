@@ -1,0 +1,474 @@
+{
+  "schema_version": "prism.equipment_scenario_coverage_audit.v1",
+  "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+  "scope": "generic outdoor LH2 equipment-to-accident-scenario coverage",
+  "scenario_catalog_schema": "prism.accident_scenario_catalog.v1",
+  "asset_count": 7,
+  "mapped_asset_count": 7,
+  "resolved_asset_count": 7,
+  "state_model_ready_mapped_asset_count": 7,
+  "scenario_family_count": 12,
+  "assets": [
+    {
+      "asset_id": "storage-shell",
+      "external_component_model": "storage_tank",
+      "component_kind": "storage_tank",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ]
+    },
+    {
+      "asset_id": "transfer-line",
+      "external_component_model": "pipe",
+      "component_kind": "pipe",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "vertical_handoff"
+      ]
+    },
+    {
+      "asset_id": "transfer-valve",
+      "external_component_model": "valve",
+      "component_kind": "valve",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "two_sided_rupture",
+        "vertical_handoff"
+      ]
+    },
+    {
+      "asset_id": "pressure-relief-vent",
+      "external_component_model": "vent_stack",
+      "component_kind": "vent_stack",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "vent_hole",
+        "vertical_handoff"
+      ]
+    },
+    {
+      "asset_id": "transfer-pump",
+      "external_component_model": "pump",
+      "component_kind": "pump",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ]
+    },
+    {
+      "asset_id": "ambient-vaporizer",
+      "external_component_model": "vaporizer",
+      "component_kind": "vaporizer",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "vaporizer_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ]
+    },
+    {
+      "asset_id": "reliquefier",
+      "external_component_model": "reliquefier",
+      "component_kind": "reliquefier",
+      "identity_status": "resolved",
+      "ready_for_state_model_input": true,
+      "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
+      "blocking_reasons": [
+        "provider accident release packet is not supplied"
+      ],
+      "scenario_families": [
+        "reliquefier_hole",
+        "liquid_two_phase",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "two_sided_rupture"
+      ]
+    }
+  ],
+  "scenario_families": [
+    {
+      "family": "vessel_hole",
+      "equipment_kinds": [
+        "storage_tank"
+      ],
+      "applicable_asset_ids": [
+        "storage-shell"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "resolved gas or liquid release -> SLABx-LH2/TNO dispersion -> ignition/IR/F-N",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "pipe_hole",
+      "equipment_kinds": [
+        "pipe"
+      ],
+      "applicable_asset_ids": [
+        "transfer-line"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "pipe outlet state -> two-phase/gas release -> SLABx-LH2/TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "valve_hole",
+      "equipment_kinds": [
+        "valve"
+      ],
+      "applicable_asset_ids": [
+        "transfer-valve"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "valve state and upstream inventory -> resolved release -> TNO consequence chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "vent_hole",
+      "equipment_kinds": [
+        "vent_stack"
+      ],
+      "applicable_asset_ids": [
+        "pressure-relief-vent"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "equipment_emergency_relief",
+        "integrated_transient"
+      ],
+      "termination_bases": [
+        "emergency_relief_discharge",
+        "explicit_provider_termination"
+      ],
+      "consequence_path": "relief/vent outlet -> gas plume -> ignition/thermal radiation/overpressure",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "pump_hole",
+      "equipment_kinds": [
+        "pump"
+      ],
+      "applicable_asset_ids": [
+        "transfer-pump"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "pump state and seal/casing opening -> liquid/gas release -> TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "vaporizer_hole",
+      "equipment_kinds": [
+        "vaporizer"
+      ],
+      "applicable_asset_ids": [
+        "ambient-vaporizer"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "vaporizer state -> phase-resolved release -> SLABx-LH2/TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "reliquefier_hole",
+      "equipment_kinds": [
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [
+        "reliquefier"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "reliquefier state -> resolved gas/liquid release -> TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "liquid_two_phase",
+      "equipment_kinds": [
+        "storage_tank",
+        "pipe",
+        "valve",
+        "pump",
+        "vaporizer",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-valve",
+        "transfer-pump",
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ],
+      "consequence_path": "liquid thermodynamic state -> flash/two-phase source -> SLABx-LH2 -> TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "inventory_depletion",
+      "equipment_kinds": [
+        "storage_tank",
+        "pipe",
+        "valve",
+        "pump",
+        "vaporizer",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-valve",
+        "transfer-pump",
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "consequence_path": "inventory ledger reaches zero -> finite release -> TNO consequence chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "inventory_over_600s",
+      "equipment_kinds": [
+        "storage_tank",
+        "pipe",
+        "valve",
+        "pump",
+        "vaporizer",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [
+        "storage-shell",
+        "transfer-line",
+        "transfer-valve",
+        "transfer-pump",
+        "ambient-vaporizer",
+        "reliquefier"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "termination_bases": [
+        "inventory_over_600s"
+      ],
+      "consequence_path": "600 s provider history -> bounded release -> SLABx-LH2/TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "two_sided_rupture",
+      "equipment_kinds": [
+        "pipe",
+        "valve",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [
+        "transfer-line",
+        "transfer-valve",
+        "reliquefier"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "termination_bases": [
+        "two_sided_rupture"
+      ],
+      "consequence_path": "upstream and downstream endpoint releases -> union harm -> TNO IR/F-N",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    },
+    {
+      "family": "vertical_handoff",
+      "equipment_kinds": [
+        "vent_stack",
+        "pipe",
+        "valve"
+      ],
+      "applicable_asset_ids": [
+        "transfer-line",
+        "transfer-valve",
+        "pressure-relief-vent"
+      ],
+      "status": "STATE_MODEL_READY_RELEASE_BOUNDARY_UNVERIFIED",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_emergency_relief"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "emergency_relief_discharge"
+      ],
+      "consequence_path": "vertical jet state -> horizontal SLABx handoff -> TNO damage chain",
+      "blocking_reasons": [
+        "provider packet with duration, isolation, inventory, and mass balance is required"
+      ]
+    }
+  ],
+  "extra_crosswalk_asset_ids": [],
+  "promotion_gates": {
+    "scenario_mapping_allowed": true,
+    "accident_release_packet_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "physical_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "blocking_reasons": [
+    "storage-shell: provider accident release packet is not supplied",
+    "transfer-line: provider accident release packet is not supplied",
+    "transfer-valve: provider accident release packet is not supplied",
+    "pressure-relief-vent: provider accident release packet is not supplied",
+    "transfer-pump: provider accident release packet is not supplied",
+    "ambient-vaporizer: provider accident release packet is not supplied",
+    "reliquefier: provider accident release packet is not supplied"
+  ],
+  "required_next_evidence": [
+    "facility-neutral asset ID, P&ID port, and component-kind crosswalk",
+    "provider accident release packet for every declared family",
+    "duration, isolation, inventory-depletion, and mass-balance echo",
+    "independent holdout consequence comparison"
+  ],
+  "policy": {
+    "component_kind_is_never_inferred_from_tag": true,
+    "candidate_identity_is_not_resolved_identity": true,
+    "scenario_catalog_does_not_create_release": true,
+    "scenario_mapping_is_not_frequency": true,
+    "no_automatic_facility_qra_promotion": true
+  },
+  "source_equipment_audit_status": "SYNTHETIC_GENERIC_MANIFEST_DECLARED",
+  "_record_path": "examples\\generic_lh2_full_scope_equipment_model_audit.json"
+}

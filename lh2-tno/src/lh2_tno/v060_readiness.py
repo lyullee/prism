@@ -306,6 +306,8 @@ def build_v060_readiness_report(
     external_equipment_model_audit: Mapping[str, Any] | None = None,
     equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
+    generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
+    generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -367,6 +369,18 @@ def build_v060_readiness_report(
         equipment_frequency_chain = _mapping(
             equipment_frequency_binding_audit,
             "equipment_frequency_binding_audit",
+        )
+    generic_scenario_chain = None
+    if generic_equipment_scenario_coverage_audit is not None:
+        generic_scenario_chain = _mapping(
+            generic_equipment_scenario_coverage_audit,
+            "generic_equipment_scenario_coverage_audit",
+        )
+    generic_frequency_chain = None
+    if generic_equipment_frequency_binding_audit is not None:
+        generic_frequency_chain = _mapping(
+            generic_equipment_frequency_binding_audit,
+            "generic_equipment_frequency_binding_audit",
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -677,6 +691,64 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if equipment_frequency_chain is not None
+                else None
+            ),
+            "generic_equipment_scenario_coverage": (
+                {
+                    "status": generic_scenario_chain.get("status"),
+                    "asset_count": generic_scenario_chain.get("asset_count"),
+                    "mapped_asset_count": generic_scenario_chain.get("mapped_asset_count"),
+                    "resolved_asset_count": generic_scenario_chain.get("resolved_asset_count"),
+                    "scenario_family_count": generic_scenario_chain.get("scenario_family_count"),
+                    "accident_release_packet_allowed": generic_scenario_chain.get(
+                        "promotion_gates", {}
+                    ).get("accident_release_packet_allowed")
+                    if isinstance(generic_scenario_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "frequency_inference_allowed": generic_scenario_chain.get(
+                        "promotion_gates", {}
+                    ).get("frequency_inference_allowed")
+                    if isinstance(generic_scenario_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "facility_qra_allowed": generic_scenario_chain.get(
+                        "promotion_gates", {}
+                    ).get("facility_qra_allowed")
+                    if isinstance(generic_scenario_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "diagnostic_only": True,
+                }
+                if generic_scenario_chain is not None
+                else None
+            ),
+            "generic_equipment_frequency_binding": (
+                {
+                    "status": generic_frequency_chain.get("status"),
+                    "resolved_asset_count": generic_frequency_chain.get("resolved_asset_count"),
+                    "frequency_event_count": generic_frequency_chain.get("frequency_event_count"),
+                    "valid_frequency_event_count": generic_frequency_chain.get(
+                        "valid_frequency_event_count"
+                    ),
+                    "uncomputed_family_count": generic_frequency_chain.get(
+                        "uncomputed_family_count"
+                    ),
+                    "provider_release_required": generic_frequency_chain.get(
+                        "promotion_gates", {}
+                    ).get("provider_release_required")
+                    if isinstance(generic_frequency_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "frequency_inference_allowed": generic_frequency_chain.get(
+                        "promotion_gates", {}
+                    ).get("frequency_inference_allowed")
+                    if isinstance(generic_frequency_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "facility_qra_allowed": generic_frequency_chain.get(
+                        "promotion_gates", {}
+                    ).get("facility_qra_allowed")
+                    if isinstance(generic_frequency_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "diagnostic_only": True,
+                }
+                if generic_frequency_chain is not None
                 else None
             ),
         },
@@ -1237,6 +1309,72 @@ def validate_v060_readiness_report(
                 if frequency_binding.get(field) is True:
                     errors.append(
                         f"chain.equipment_frequency_binding.{field} cannot be true"
+                    )
+
+    generic_scenario_coverage = chain.get("generic_equipment_scenario_coverage")
+    if generic_scenario_coverage is not None:
+        if not isinstance(generic_scenario_coverage, Mapping):
+            errors.append(
+                "chain.generic_equipment_scenario_coverage must be an object"
+            )
+        else:
+            for field in (
+                "asset_count",
+                "mapped_asset_count",
+                "resolved_asset_count",
+                "scenario_family_count",
+            ):
+                if generic_scenario_coverage.get(field) is not None:
+                    _nonnegative_int(
+                        generic_scenario_coverage.get(field),
+                        f"chain.generic_equipment_scenario_coverage.{field}",
+                        errors,
+                    )
+            if generic_scenario_coverage.get("diagnostic_only") is not True:
+                errors.append(
+                    "generic equipment scenario coverage must remain diagnostic_only"
+                )
+            for field in (
+                "accident_release_packet_allowed",
+                "frequency_inference_allowed",
+                "facility_qra_allowed",
+            ):
+                if generic_scenario_coverage.get(field) is True:
+                    errors.append(
+                        f"chain.generic_equipment_scenario_coverage.{field} cannot be true"
+                    )
+
+    generic_frequency_binding = chain.get("generic_equipment_frequency_binding")
+    if generic_frequency_binding is not None:
+        if not isinstance(generic_frequency_binding, Mapping):
+            errors.append(
+                "chain.generic_equipment_frequency_binding must be an object"
+            )
+        else:
+            for field in (
+                "resolved_asset_count",
+                "frequency_event_count",
+                "valid_frequency_event_count",
+                "uncomputed_family_count",
+            ):
+                if generic_frequency_binding.get(field) is not None:
+                    _nonnegative_int(
+                        generic_frequency_binding.get(field),
+                        f"chain.generic_equipment_frequency_binding.{field}",
+                        errors,
+                    )
+            if generic_frequency_binding.get("diagnostic_only") is not True:
+                errors.append(
+                    "generic equipment frequency binding must remain diagnostic_only"
+                )
+            if generic_frequency_binding.get("provider_release_required") is not True:
+                errors.append(
+                    "generic equipment frequency binding must require provider release"
+                )
+            for field in ("frequency_inference_allowed", "facility_qra_allowed"):
+                if generic_frequency_binding.get(field) is True:
+                    errors.append(
+                        f"chain.generic_equipment_frequency_binding.{field} cannot be true"
                     )
 
     equipment = value.get("equipment")

@@ -131,8 +131,8 @@ _SCENARIOS: tuple[dict[str, Any], ...] = (
     },
     {
         "family": "two_sided_rupture",
-        "name": "pipe two-sided rupture",
-        "equipment_kinds": ("pipe", "valve"),
+        "name": "pipe, valve, or reliquefier two-sided rupture",
+        "equipment_kinds": ("pipe", "valve", "reliquefier"),
         "release_modes": ("two_sided_rupture",),
         "provider_schemas": ("prism.resolved_release_set.v1",),
         "termination_bases": ("two_sided_rupture",),

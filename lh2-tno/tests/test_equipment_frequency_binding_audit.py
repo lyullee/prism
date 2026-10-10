@@ -72,6 +72,40 @@ def test_literature_event_binds_to_resolved_family_but_release_stays_open():
     assert report["promotion_gates"]["consequence_binding_allowed"] is False
 
 
+def test_reliquefier_two_sided_event_matches_catalog_family():
+    equipment = {
+        "schema_version": "prism.external_equipment_model_audit.v1",
+        "status": "SYNTHETIC_GENERIC_MANIFEST_DECLARED",
+        "assets": [{
+            "asset_id": "RELIQ-1",
+            "component_model": "reliquefier",
+            "ready_for_state_model_input": True,
+        }],
+    }
+    coverage = audit_equipment_scenario_coverage(
+        equipment,
+        kind_crosswalk={
+            "schema_version": "prism.equipment_kind_crosswalk.v1",
+            "facility_neutral": True,
+            "rows": [{
+                "asset_id": "RELIQ-1",
+                "component_kind": "reliquefier",
+                "identity_status": "resolved",
+                "identity_basis": "generic manifest reliquefier ports",
+            }],
+        },
+    )
+    event = _event("freq/RELIQ-1/G4")
+    event.update({
+        "asset_id": "RELIQ-1",
+        "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+        "release": {"mode": "two_sided_rupture", "hole_diameter_m": 0.025},
+    })
+    report = audit_equipment_frequency_binding(coverage, frequency_events=[event])
+    assert report["valid_frequency_event_count"] == 1
+    assert "two_sided_rupture" not in report["uncomputed_families"]
+
+
 def test_event_for_unknown_asset_is_blocked():
     event = _event()
     event["asset_id"] = "TK-404"

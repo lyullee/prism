@@ -194,6 +194,8 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 즉 외부 설비 자료가 readiness 원장에 연결됐다는 것과 시설 QRA가 완료됐다는 것은
 서로 다른 상태다.
 
+일반 시설 모듈 자체의 계약도 같은 readiness 원장에 별도로 연결했다. [`v060_readiness_report_with_generic_equipment_model.json`](../results/20261105/v060_readiness_report_with_generic_equipment_model.json)은 합성 facility-neutral manifest의 7개 설비와 12개 사고 family를 기록하고, 문헌 빈도 24개 중 24개를 유효하게 설비에 바인딩한다. `vertical_handoff`는 provider handoff 자료가 없어 미계산이며, 사고 방출·빈도 추론·시설 QRA 승격은 계속 false다. 이 항목은 액화수소검사지원센터 자료의 identity 공백과 분리된 일반 모듈 검증이다.
+
 최신 외부 설비 결합 원장은 다음 명령으로 재현할 수 있다.
 
 ```powershell
@@ -215,7 +217,9 @@ python scripts/build_v060_readiness_report.py `
   --external-equipment-model-audit results/20261104/external_equipment_model_audit_current.json `
   --equipment-scenario-coverage-audit results/20261104/equipment_scenario_coverage_audit_current.json `
   --equipment-frequency-binding-audit results/20261104/equipment_frequency_binding_audit_current.json `
-  --output results/20261104/v060_readiness_report_with_external_equipment_model.json
+  --generic-equipment-scenario-coverage-audit results/20261105/generic_lh2_full_scope_equipment_scenario_coverage.json `
+  --generic-equipment-frequency-binding-audit results/20261105/generic_lh2_full_scope_equipment_frequency_binding.json `
+  --output results/20261105/v060_readiness_report_with_generic_equipment_model.json
 ```
 
 
