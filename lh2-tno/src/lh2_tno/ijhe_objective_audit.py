@@ -1930,7 +1930,11 @@ def build_ijhe_objective_coverage_audit(
         and _int(provider_audit.get("request_count")) is not None
         and _int(provider_audit.get("packet_count")) is not None
         and _int(provider_audit.get("exact_match_count")) is not None
-        and _int(provider_audit.get("qualified_provider_packet_count")) == 0
+        and _int(provider_audit.get("qualified_provider_packet_count")) is not None
+        and _int(provider_audit.get("qualified_provider_packet_count"))
+        <= _int(provider_audit.get("exact_match_count"))
+        and _int(provider_audit.get("qualified_provider_packet_count"))
+        <= _int(provider_audit.get("request_count"))
     )
     provider_audit_matches_catalog = (
         provider_audit_input_ok

@@ -827,6 +827,39 @@ def test_objective_audit_records_provider_sidecar_audit_without_promotion():
     assert report["strict_facility_qra_claim"] is False
 
 
+def test_objective_audit_accepts_sidecar_match_count_as_diagnostic_progress():
+    inputs = _inputs()
+    inputs["generic_provider_evidence_requests"] = {
+        "schema_version": "prism.generic_provider_evidence_requests.v1",
+        "packet_count": 2,
+        "request_count": 2,
+        "closure_open_request_count": 1,
+        "qualification_open_request_count": 1,
+        "qualified_provider_packet_count": 0,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "diagnostic_only": True,
+    }
+    inputs["generic_provider_evidence_audit"] = {
+        "schema_version": "prism.generic_provider_evidence_audit.v1",
+        "status": "QUALIFIED_SIDECAR_EVIDENCE_FOUND",
+        "packet_count": 2,
+        "request_count": 2,
+        "qualification_sidecar_present_count": 1,
+        "exact_match_count": 1,
+        "qualified_provider_packet_count": 1,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "diagnostic_only": True,
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_provider_evidence_audit"
+    )
+    assert check["status"] == "PASS"
+
+
 def test_objective_audit_records_observed_state_model_binding_without_release_promotion():
     inputs = _inputs()
     inputs["observed_state_model_binding_audit"] = {

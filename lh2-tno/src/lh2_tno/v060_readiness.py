@@ -2289,9 +2289,26 @@ def validate_v060_readiness_report(
                 errors.append(
                     "generic provider evidence audit packet count disagrees with evidence catalog"
                 )
-            if generic_provider_evidence_audit.get("qualified_provider_packet_count") not in (0, None):
+            audit_qualified = generic_provider_evidence_audit.get(
+                "qualified_provider_packet_count"
+            )
+            audit_exact = generic_provider_evidence_audit.get("exact_match_count")
+            audit_requests = generic_provider_evidence_audit.get("request_count")
+            if (
+                isinstance(audit_qualified, int)
+                and isinstance(audit_exact, int)
+                and audit_qualified > audit_exact
+            ):
                 errors.append(
-                    "generic provider evidence audit cannot promote qualified provider coverage"
+                    "generic provider evidence audit qualified count cannot exceed exact sidecar matches"
+                )
+            if (
+                isinstance(audit_qualified, int)
+                and isinstance(audit_requests, int)
+                and audit_qualified > audit_requests
+            ):
+                errors.append(
+                    "generic provider evidence audit qualified count cannot exceed request count"
                 )
 
     isolation_extension = chain.get("isolation_union_extension")
