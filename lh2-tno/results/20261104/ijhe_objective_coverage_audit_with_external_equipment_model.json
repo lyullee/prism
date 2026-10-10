@@ -648,6 +648,25 @@
       },
       "blocking_reason": null,
       "interpretation": "일반 액화수소 시설에서 설비별 주요 사고 목록과 필요한 provider 연산자를 보여준다. P&ID crosswalk와 provider 방출 packet이 없으면 해당 family는 계산하지 않는다."
+    },
+    {
+      "id": "diagnostic_equipment_frequency_binding",
+      "requirement": "문헌 빈도를 확정 설비·사고 family에만 연결하고 미계산 family와 provider 방출 요구를 보존해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "lh2-tno\\results\\20261104\\equipment_frequency_binding_audit_current.json"
+      ],
+      "observed": {
+        "status": "FREQUENCY_BINDING_WITHHELD",
+        "resolved_asset_count": 0,
+        "frequency_event_count": 0,
+        "valid_frequency_event_count": 0,
+        "uncomputed_family_count": 12,
+        "provider_release_required": true,
+        "facility_qra_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "문헌 빈도는 설비 사고 시작의 연간 빈도로만 사용한다. 실제 피해 계산은 provider가 지속시간·차단·재고·질량수지를 가진 방출 packet을 제출한 뒤에만 수행한다."
     }
   ],
   "core_chain_check_ids": [

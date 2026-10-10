@@ -466,3 +466,53 @@ def test_objective_audit_records_equipment_scenario_coverage_without_inference()
         "diagnostic_observed_state_source_replay",
         "diagnostic_observed_state_runtime_frames",
     ]
+
+
+def test_objective_audit_records_equipment_frequency_binding_without_qra_promotion():
+    inputs = _inputs()
+    inputs["equipment_frequency_binding_audit"] = {
+        "schema_version": "prism.equipment_frequency_binding_audit.v1",
+        "status": "FREQUENCY_BINDING_WITHHELD",
+        "resolved_asset_count": 0,
+        "frequency_event_count": 0,
+        "valid_frequency_event_count": 0,
+        "uncomputed_family_count": 12,
+        "promotion_gates": {
+            "provider_release_required": True,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "promotion_allowed": False,
+        },
+        "physical_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "provider_packet_promoted": False,
+        "policy": {
+            "literature_frequency_is_not_field_validated": True,
+            "sensor_frequency_learning_used": False,
+            "normal_state_observations_do_not_create_frequency": True,
+            "unresolved_assets_do_not_receive_zero_frequency": True,
+            "unmapped_families_remain_uncomputed": True,
+            "frequency_does_not_create_provider_release": True,
+            "provider_release_required_before_consequence": True,
+            "facility_qra_requires_complete_family_and_packet_coverage": True,
+        },
+        "_record_path": "equipment-frequency-binding.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_equipment_frequency_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["uncomputed_family_count"] == 12
+    assert report["strict_blocking_check_ids"] == [
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+        "strict_facility_state_snapshot_coverage",
+        "diagnostic_observed_state_source_replay",
+        "diagnostic_observed_state_runtime_frames",
+    ]

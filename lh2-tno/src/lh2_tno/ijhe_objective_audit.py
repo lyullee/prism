@@ -65,6 +65,7 @@ def build_ijhe_objective_coverage_audit(
     validation_intake_audit: Mapping[str, Any] | None = None,
     external_equipment_model_audit: Mapping[str, Any] | None = None,
     equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
+    equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -93,6 +94,7 @@ def build_ijhe_objective_coverage_audit(
     validation_intake_path = _record_path(validation_intake_audit, None)
     external_equipment_model_path = _record_path(external_equipment_model_audit, None)
     equipment_scenario_coverage_path = _record_path(equipment_scenario_coverage_audit, None)
+    equipment_frequency_binding_path = _record_path(equipment_frequency_binding_audit, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -1186,6 +1188,93 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "일반 액화수소 시설에서 설비별 주요 사고 목록과 필요한 provider 연산자를 보여준다. "
                 "P&ID crosswalk와 provider 방출 packet이 없으면 해당 family는 계산하지 않는다."
+            ),
+        ))
+
+    frequency_binding_gates = (
+        equipment_frequency_binding_audit.get("promotion_gates", {})
+        if isinstance(equipment_frequency_binding_audit, Mapping)
+        else {}
+    )
+    if not isinstance(frequency_binding_gates, Mapping):
+        frequency_binding_gates = {}
+    frequency_binding_policy = (
+        equipment_frequency_binding_audit.get("policy", {})
+        if isinstance(equipment_frequency_binding_audit, Mapping)
+        else {}
+    )
+    if not isinstance(frequency_binding_policy, Mapping):
+        frequency_binding_policy = {}
+    frequency_binding_ok = (
+        isinstance(equipment_frequency_binding_audit, Mapping)
+        and equipment_frequency_binding_audit.get("schema_version")
+        == "prism.equipment_frequency_binding_audit.v1"
+        and equipment_frequency_binding_audit.get("status") in {
+            "FREQUENCY_BINDING_WITHHELD",
+            "PARTIAL_FREQUENCY_BINDING",
+            "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+        }
+        and frequency_binding_gates.get("provider_release_required") is True
+        and frequency_binding_gates.get("frequency_inference_allowed") is False
+        and frequency_binding_gates.get("facility_qra_allowed") is False
+        and frequency_binding_gates.get("promotion_allowed") is False
+        and equipment_frequency_binding_audit.get("physical_validation_claim") is False
+        and equipment_frequency_binding_audit.get("accident_release_validation_claim") is False
+        and equipment_frequency_binding_audit.get("frequency_inference_performed") is False
+        and equipment_frequency_binding_audit.get("facility_qra_claim") is False
+        and equipment_frequency_binding_audit.get("provider_packet_promoted") is False
+        and frequency_binding_policy.get("literature_frequency_is_not_field_validated") is True
+        and frequency_binding_policy.get("sensor_frequency_learning_used") is False
+        and frequency_binding_policy.get("normal_state_observations_do_not_create_frequency") is True
+        and frequency_binding_policy.get("unresolved_assets_do_not_receive_zero_frequency") is True
+        and frequency_binding_policy.get("unmapped_families_remain_uncomputed") is True
+        and frequency_binding_policy.get("frequency_does_not_create_provider_release") is True
+        and frequency_binding_policy.get("provider_release_required_before_consequence") is True
+        and frequency_binding_policy.get("facility_qra_requires_complete_family_and_packet_coverage") is True
+    )
+    if equipment_frequency_binding_audit is not None:
+        rows.append(_row(
+            "diagnostic_equipment_frequency_binding",
+            "문헌 빈도를 확정 설비·사고 family에만 연결하고 미계산 family와 provider 방출 요구를 보존해야 한다",
+            "PASS" if frequency_binding_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(equipment_frequency_binding_path,),
+            observed={
+                "status": (
+                    equipment_frequency_binding_audit.get("status")
+                    if isinstance(equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "resolved_asset_count": (
+                    equipment_frequency_binding_audit.get("resolved_asset_count")
+                    if isinstance(equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "frequency_event_count": (
+                    equipment_frequency_binding_audit.get("frequency_event_count")
+                    if isinstance(equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "valid_frequency_event_count": (
+                    equipment_frequency_binding_audit.get("valid_frequency_event_count")
+                    if isinstance(equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "uncomputed_family_count": (
+                    equipment_frequency_binding_audit.get("uncomputed_family_count")
+                    if isinstance(equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "provider_release_required": frequency_binding_gates.get(
+                    "provider_release_required"
+                ),
+                "facility_qra_allowed": frequency_binding_gates.get("facility_qra_allowed"),
+            },
+            blocking_reason=None if frequency_binding_ok else (
+                "설비-빈도 연결의 문헌 provenance·미계산 family·방출 요구 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "문헌 빈도는 설비 사고 시작의 연간 빈도로만 사용한다. 실제 피해 계산은 provider가 "
+                "지속시간·차단·재고·질량수지를 가진 방출 packet을 제출한 뒤에만 수행한다."
             ),
         ))
 

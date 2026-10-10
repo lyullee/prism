@@ -1,0 +1,196 @@
+{
+  "schema_version": "prism.equipment_frequency_binding_audit.v1",
+  "status": "FREQUENCY_BINDING_WITHHELD",
+  "scope": "generic outdoor LH2 literature frequency binding; no field frequency learning",
+  "coverage_record": "lh2-tno\\results\\20261104\\equipment_scenario_coverage_audit_current.json",
+  "frequency_provenance_record": null,
+  "asset_count": 12,
+  "resolved_asset_count": 0,
+  "frequency_event_count": 0,
+  "valid_frequency_event_count": 0,
+  "bound_family_count": 0,
+  "uncomputed_family_count": 12,
+  "uncomputed_families": [
+    "vessel_hole",
+    "pipe_hole",
+    "valve_hole",
+    "vent_hole",
+    "pump_hole",
+    "vaporizer_hole",
+    "reliquefier_hole",
+    "liquid_two_phase",
+    "inventory_depletion",
+    "inventory_over_600s",
+    "two_sided_rupture",
+    "vertical_handoff"
+  ],
+  "events": [],
+  "scenario_families": [
+    {
+      "family": "vessel_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "pipe_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "valve_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "vent_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "pump_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "vaporizer_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "reliquefier_hole",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "liquid_two_phase",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "inventory_depletion",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "inventory_over_600s",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "two_sided_rupture",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    },
+    {
+      "family": "vertical_handoff",
+      "applicable_asset_ids": [],
+      "frequency_event_ids": [],
+      "status": "UNCOMPUTED_NO_RESOLVED_ASSET",
+      "frequency_bound": false,
+      "provider_release_required": true,
+      "blocking_reasons": [
+        "provider release packet remains uncomputed"
+      ]
+    }
+  ],
+  "frequency_uncertainty": {
+    "literature_baseline_used": false,
+    "event_limitations_retained": true,
+    "marginal_p05_p95_are_not_facility_credible_interval": true,
+    "facility_credible_interval": false,
+    "statistical_confidence_interval": false
+  },
+  "promotion_gates": {
+    "literature_frequency_binding_allowed": false,
+    "provider_release_required": true,
+    "consequence_binding_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "physical_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "provider_packet_promoted": false,
+  "blocking_reasons": [
+    "no resolved asset identity is available for literature frequency binding",
+    "no literature frequency events were supplied"
+  ],
+  "policy": {
+    "literature_frequency_is_not_field_validated": true,
+    "sensor_frequency_learning_used": false,
+    "normal_state_observations_do_not_create_frequency": true,
+    "unresolved_assets_do_not_receive_zero_frequency": true,
+    "unmapped_families_remain_uncomputed": true,
+    "frequency_does_not_create_provider_release": true,
+    "provider_release_required_before_consequence": true,
+    "facility_qra_requires_complete_family_and_packet_coverage": true
+  }
+}

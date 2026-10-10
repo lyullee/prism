@@ -46,6 +46,7 @@ def main() -> int:
     parser.add_argument("--validation-intake-audit", type=Path)
     parser.add_argument("--external-equipment-model-audit", type=Path)
     parser.add_argument("--equipment-scenario-coverage-audit", type=Path)
+    parser.add_argument("--equipment-frequency-binding-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -116,6 +117,11 @@ def main() -> int:
             equipment_scenario_coverage_audit=(
                 _object(args.equipment_scenario_coverage_audit)
                 if args.equipment_scenario_coverage_audit
+                else None
+            ),
+            equipment_frequency_binding_audit=(
+                _object(args.equipment_frequency_binding_audit)
+                if args.equipment_frequency_binding_audit
                 else None
             ),
         )
