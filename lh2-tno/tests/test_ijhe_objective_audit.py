@@ -614,3 +614,40 @@ def test_objective_audit_marks_closed_release_closure_worklist_as_diagnostic_pas
     )
     assert check["status"] == "PASS"
     assert check["observed"]["closure_closed"] is True
+
+
+def test_objective_audit_records_observed_state_model_binding_without_release_promotion():
+    inputs = _inputs()
+    inputs["observed_state_model_binding_audit"] = {
+        "schema": "prism.observed_state_model_binding_audit.v1",
+        "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+        "observed_component_count": 3,
+        "state_model_bound_component_count": 3,
+        "diagnostic_release_adapter_component_count": 3,
+        "facility_component_identity_resolved_count": 0,
+        "qualified_provider_packet_count": 0,
+        "rows": [
+            {"status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"},
+            {"status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"},
+            {"status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"},
+        ],
+        "policy": {
+            "normal_state_model_is_not_accident_release": True,
+            "diagnostic_adapter_is_not_qualified_provider": True,
+            "facility_component_identity_is_not_resolved": True,
+            "facility_identity_required_for_accident_binding": True,
+            "release_event_binding_is_not_created": True,
+            "frequency_is_not_assigned": True,
+            "facility_ir_fn_promotion": False,
+            "diagnostic_only": True,
+        },
+        "_record_path": "observed-state-model-binding.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_observed_state_model_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["state_model_bound_component_count"] == 3
+    assert report["strict_facility_qra_claim"] is False

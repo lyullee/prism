@@ -928,7 +928,7 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-      "sha256": "c41a1ba8954c523b4ab99528166211368bd94546964852a76cf667262abd7b52"
+      "sha256": "57f6afeb6724e1a2b4bdfa80f968bb6f8fa717ed7a50c88c6ca49d9850bed8fd"
     },
     "union_verification": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",

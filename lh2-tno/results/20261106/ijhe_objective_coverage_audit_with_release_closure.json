@@ -545,6 +545,36 @@
       "interpretation": "상태 frame은 정상상태 모델과 provider resolver에 넘길 수 있는 실행 입력이다. provider가 방출 경계와 종료 조건을 반환하기 전에는 피해·빈도·시설 QRA를 계산하지 않는다."
     },
     {
+      "id": "diagnostic_observed_state_model_binding",
+      "requirement": "관측 정상상태 신호를 일반 액화수소 설비 모델에 연결하되 시설 identity·사고 방출·빈도와 분리해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261026\\native_full_scope_union_assessment\\observed_state_model_binding_audit.json"
+      ],
+      "observed": {
+        "schema": "prism.observed_state_model_binding_audit.v1",
+        "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+        "observed_component_count": 3,
+        "state_model_bound_component_count": 3,
+        "diagnostic_release_adapter_component_count": 3,
+        "facility_component_identity_resolved_count": 0,
+        "qualified_provider_packet_count": 0,
+        "row_count": 3,
+        "policy": {
+          "normal_state_model_is_not_accident_release": true,
+          "diagnostic_adapter_is_not_qualified_provider": true,
+          "facility_component_identity_is_not_resolved": true,
+          "facility_identity_required_for_accident_binding": true,
+          "release_event_binding_is_not_created": true,
+          "frequency_is_not_assigned": true,
+          "facility_ir_fn_promotion": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "센터 정상 운전 신호는 storage tank·vent·vaporizer 모델 입력 후보로만 연결한다. 시설 P&ID identity와 provider accident history가 확인되기 전에는 방출·빈도·IR/F-N을 만들지 않는다."
+    },
+    {
       "id": "diagnostic_external_outdoor_field_evidence",
       "requirement": "외부 옥외 LH2 관측자료를 해시·사건시계·범위 정책과 함께 감사 장부에 기록해야 한다",
       "status": "PASS",

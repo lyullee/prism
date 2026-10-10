@@ -224,7 +224,9 @@ python scripts/build_ijhe_objective_coverage_audit.py `
 
 출력의 `diagnostic_release_closure_worklist` 행은 종료·격리·재고·질량잔차 closure가 열려 있으면 `BLOCKED_EVIDENCE`로 표시하고, 모든 case가 닫힌 경우에만 `PASS`가 된다. 이 행은 기존 core/strict blocker 목록과 분리된 진단 행이다. 따라서 worklist가 닫혀도 qualified provider evidence, 독립 물리검증, 시설 QRA 승격은 별도 gate를 통과해야 한다.
 
-이 연결을 적용한 현재 원장은 [`ijhe_objective_coverage_audit_with_release_closure.json`](../results/20261106/ijhe_objective_coverage_audit_with_release_closure.json)과 [`v060_readiness_report_with_release_closure_objective.json`](../results/20261106/v060_readiness_report_with_release_closure_objective.json)이다. 전자는 22개 objective 행 중 종료 closure 행을 `BLOCKED_EVIDENCE`로 기록하고, 후자는 기존 readiness invariant 13개와 strict blocker 4개를 그대로 통과시킨다.
+이 연결을 적용한 현재 원장은 [`ijhe_objective_coverage_audit_with_release_closure.json`](../results/20261106/ijhe_objective_coverage_audit_with_release_closure.json)과 [`v060_readiness_report_with_release_closure_objective.json`](../results/20261106/v060_readiness_report_with_release_closure_objective.json)이다. 전자는 23개 objective 행 중 종료 closure 행을 `BLOCKED_EVIDENCE`로 기록하고, 관측 정상상태 모델 binding 행은 3/3 component·3개 진단 adapter를 `PASS`로 기록한다. 후자는 기존 readiness invariant 13개와 strict blocker 4개를 그대로 통과시킨다.
+
+`diagnostic_observed_state_model_binding`은 `results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json`을 읽는다. 현재 intake tank·storage vent·supply vaporizer의 3개 관측 component는 facility-neutral normal-state model 입력에 연결되고, 각 진단 adapter도 별도로 확인된다. 그러나 시설 component identity는 0/3, qualified provider packet은 0건이며 사고 방출·빈도·IR/F-N 승격은 계속 차단된다. 정상 운전 신호가 사고 release나 빈도를 자동으로 만든다고 해석하지 않기 위한 진단 행이다.
 
 readiness validator는 이제 `open_case_count = case_count - READY_FOR_STRICT_REVIEW`, 각 closure gap 집계와 요약 필드의 일치까지 검사한다. 따라서 원장의 case 수와 개별 gap 수가 서로 다른 상태로 저장되면 `VALID`가 되지 않는다.
 

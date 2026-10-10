@@ -60,6 +60,7 @@ def build_ijhe_objective_coverage_audit(
     extension_state_snapshot_coverage: Mapping[str, Any] | None = None,
     observed_state_replay_audit: Mapping[str, Any] | None = None,
     observed_state_runtime_frames: Mapping[str, Any] | None = None,
+    observed_state_model_binding_audit: Mapping[str, Any] | None = None,
     external_field_evidence: Mapping[str, Any] | None = None,
     external_field_model_comparison: Mapping[str, Any] | None = None,
     validation_intake_audit: Mapping[str, Any] | None = None,
@@ -90,6 +91,7 @@ def build_ijhe_objective_coverage_audit(
     extension_state_path = _record_path(extension_state_snapshot_coverage, None)
     observed_replay_path = _record_path(observed_state_replay_audit, None)
     observed_runtime_path = _record_path(observed_state_runtime_frames, None)
+    observed_model_binding_path = _record_path(observed_state_model_binding_audit, None)
     external_field_path = _record_path(external_field_evidence, None)
     external_field_comparison_path = _record_path(external_field_model_comparison, None)
     validation_intake_path = _record_path(validation_intake_audit, None)
@@ -724,6 +726,106 @@ def build_ijhe_objective_coverage_audit(
             "provider가 방출 경계와 종료 조건을 반환하기 전에는 피해·빈도·시설 QRA를 계산하지 않는다."
         ),
     ))
+
+    observed_model_binding_policy = (
+        observed_state_model_binding_audit.get("policy", {})
+        if isinstance(observed_state_model_binding_audit, Mapping)
+        else {}
+    )
+    if not isinstance(observed_model_binding_policy, Mapping):
+        observed_model_binding_policy = {}
+    observed_model_binding_rows = (
+        observed_state_model_binding_audit.get("rows", [])
+        if isinstance(observed_state_model_binding_audit, Mapping)
+        else []
+    )
+    if not isinstance(observed_model_binding_rows, list):
+        observed_model_binding_rows = []
+    observed_model_binding_ok = (
+        isinstance(observed_state_model_binding_audit, Mapping)
+        and observed_state_model_binding_audit.get("schema")
+        == "prism.observed_state_model_binding_audit.v1"
+        and observed_state_model_binding_audit.get("status")
+        == "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY"
+        and isinstance(observed_state_model_binding_audit.get("observed_component_count"), int)
+        and observed_state_model_binding_audit.get("observed_component_count", 0) > 0
+        and observed_state_model_binding_audit.get("state_model_bound_component_count")
+        == observed_state_model_binding_audit.get("observed_component_count")
+        and observed_state_model_binding_audit.get("diagnostic_release_adapter_component_count", 0)
+        <= observed_state_model_binding_audit.get("state_model_bound_component_count", 0)
+        and observed_state_model_binding_audit.get("facility_component_identity_resolved_count")
+        == 0
+        and observed_state_model_binding_audit.get("qualified_provider_packet_count") == 0
+        and observed_model_binding_policy.get("normal_state_model_is_not_accident_release") is True
+        and observed_model_binding_policy.get("diagnostic_adapter_is_not_qualified_provider") is True
+        and observed_model_binding_policy.get("facility_component_identity_is_not_resolved") is True
+        and observed_model_binding_policy.get("facility_identity_required_for_accident_binding") is True
+        and observed_model_binding_policy.get("release_event_binding_is_not_created") is True
+        and observed_model_binding_policy.get("frequency_is_not_assigned") is True
+        and observed_model_binding_policy.get("facility_ir_fn_promotion") is False
+        and observed_model_binding_policy.get("diagnostic_only") is True
+        and len(observed_model_binding_rows)
+        == observed_state_model_binding_audit.get("observed_component_count", 0)
+        and all(
+            isinstance(row, Mapping)
+            and row.get("status") == "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"
+            for row in observed_model_binding_rows
+        )
+    )
+    if observed_state_model_binding_audit is not None:
+        rows.append(_row(
+            "diagnostic_observed_state_model_binding",
+            "관측 정상상태 신호를 일반 액화수소 설비 모델에 연결하되 시설 identity·사고 방출·빈도와 분리해야 한다",
+            "PASS" if observed_model_binding_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(observed_model_binding_path,),
+            observed={
+                "schema": (
+                    observed_state_model_binding_audit.get("schema")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "status": (
+                    observed_state_model_binding_audit.get("status")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "observed_component_count": (
+                    observed_state_model_binding_audit.get("observed_component_count")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "state_model_bound_component_count": (
+                    observed_state_model_binding_audit.get("state_model_bound_component_count")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "diagnostic_release_adapter_component_count": (
+                    observed_state_model_binding_audit.get("diagnostic_release_adapter_component_count")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "facility_component_identity_resolved_count": (
+                    observed_state_model_binding_audit.get("facility_component_identity_resolved_count")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "qualified_provider_packet_count": (
+                    observed_state_model_binding_audit.get("qualified_provider_packet_count")
+                    if isinstance(observed_state_model_binding_audit, Mapping)
+                    else None
+                ),
+                "row_count": len(observed_model_binding_rows),
+                "policy": dict(observed_model_binding_policy),
+            },
+            blocking_reason=None if observed_model_binding_ok else (
+                "정상상태 모델 binding이 전체 관측 component에 닫히지 않았거나 "
+                "사고 방출·빈도 승격 차단 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "센터 정상 운전 신호는 storage tank·vent·vaporizer 모델 입력 후보로만 연결한다. "
+                "시설 P&ID identity와 provider accident history가 확인되기 전에는 방출·빈도·IR/F-N을 만들지 않는다."
+            ),
+        ))
 
     # Keep this observation row outside the core and strict qualification
     # gates.  A field bundle is useful input for a later matched
