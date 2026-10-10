@@ -701,3 +701,84 @@ def test_report_records_generic_provider_release_closure_without_promotion():
     assert closure["closure_open_event_count"] == 21
     assert closure["qualified_provider_packet_count"] == 0
     assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_binds_every_provider_packet_to_evidence_request_catalog():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_provider_closure_audit={
+            "schema_version": "prism.generic_provider_release_closure_audit.v1",
+            "status": "CLOSURE_EVIDENCE_OPEN",
+            "event_count": 2,
+            "closure_ready_event_count": 1,
+            "closure_open_event_count": 1,
+            "packet_path_count": 2,
+            "provider_packet_count": 3,
+            "closure_ready_packet_path_count": 1,
+            "closure_ready_provider_packet_count": 2,
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+        generic_provider_evidence_requests={
+            "schema_version": "prism.generic_provider_evidence_requests.v1",
+            "status": "OPEN_PROVIDER_EVIDENCE_REQUESTS",
+            "source_status": "CLOSURE_EVIDENCE_OPEN",
+            "event_count": 2,
+            "packet_path_count": 2,
+            "packet_count": 3,
+            "request_count": 3,
+            "closure_open_request_count": 1,
+            "qualification_open_request_count": 2,
+            "qualified_provider_packet_count": 0,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "diagnostic_only": True,
+        },
+    )
+    catalog = report["chain"]["generic_provider_evidence_requests"]
+    assert catalog["packet_count"] == 3
+    assert catalog["request_count"] == 3
+    assert catalog["closure_open_request_count"] == 1
+    assert catalog["qualification_open_request_count"] == 2
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_rejects_provider_evidence_request_packet_drift():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_provider_closure_audit={
+            "schema_version": "prism.generic_provider_release_closure_audit.v1",
+            "status": "CLOSURE_EVIDENCE_OPEN",
+            "event_count": 1,
+            "closure_ready_event_count": 0,
+            "closure_open_event_count": 1,
+            "packet_path_count": 1,
+            "provider_packet_count": 2,
+            "closure_ready_packet_path_count": 0,
+            "closure_ready_provider_packet_count": 0,
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+        generic_provider_evidence_requests={
+            "schema_version": "prism.generic_provider_evidence_requests.v1",
+            "status": "OPEN_PROVIDER_EVIDENCE_REQUESTS",
+            "event_count": 1,
+            "packet_path_count": 1,
+            "packet_count": 1,
+            "request_count": 1,
+            "closure_open_request_count": 1,
+            "qualification_open_request_count": 0,
+            "qualified_provider_packet_count": 0,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "diagnostic_only": True,
+        },
+    )
+    with pytest.raises(V060ReadinessError, match="disagrees with closure audit"):
+        validate_v060_readiness_report(report)

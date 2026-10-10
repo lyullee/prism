@@ -488,6 +488,7 @@ def build_v060_readiness_report(
     generic_diagnostic_campaign_binding: Mapping[str, Any] | None = None,
     generic_chain_closure_audit: Mapping[str, Any] | None = None,
     generic_provider_closure_audit: Mapping[str, Any] | None = None,
+    generic_provider_evidence_requests: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -581,6 +582,12 @@ def build_v060_readiness_report(
         generic_provider_closure = _mapping(
             generic_provider_closure_audit,
             "generic_provider_closure_audit",
+        )
+    generic_provider_evidence = None
+    if generic_provider_evidence_requests is not None:
+        generic_provider_evidence = _mapping(
+            generic_provider_evidence_requests,
+            "generic_provider_evidence_requests",
         )
     generic_frequency_port_binding = (
         generic_frequency_chain.get("frequency_port_binding")
@@ -1085,6 +1092,35 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if generic_provider_closure is not None
+                else None
+            ),
+            "generic_provider_evidence_requests": (
+                {
+                    "schema_version": generic_provider_evidence.get("schema_version"),
+                    "status": generic_provider_evidence.get("status"),
+                    "source_status": generic_provider_evidence.get("source_status"),
+                    "event_count": generic_provider_evidence.get("event_count"),
+                    "packet_path_count": generic_provider_evidence.get("packet_path_count"),
+                    "packet_count": generic_provider_evidence.get("packet_count"),
+                    "request_count": generic_provider_evidence.get("request_count"),
+                    "closure_open_request_count": generic_provider_evidence.get(
+                        "closure_open_request_count"
+                    ),
+                    "qualification_open_request_count": generic_provider_evidence.get(
+                        "qualification_open_request_count"
+                    ),
+                    "qualified_provider_packet_count": generic_provider_evidence.get(
+                        "qualified_provider_packet_count"
+                    ),
+                    "frequency_inference_allowed": generic_provider_evidence.get(
+                        "frequency_inference_allowed"
+                    ),
+                    "facility_qra_allowed": generic_provider_evidence.get(
+                        "facility_qra_allowed"
+                    ),
+                    "diagnostic_only": generic_provider_evidence.get("diagnostic_only"),
+                }
+                if generic_provider_evidence is not None
                 else None
             ),
             "isolation_union_extension": (
@@ -2101,6 +2137,79 @@ def validate_v060_readiness_report(
                 errors.append(
                     "generic provider release closure event counts must close over event_count"
                 )
+
+    generic_provider_evidence = chain.get("generic_provider_evidence_requests")
+    if generic_provider_evidence is not None:
+        if not isinstance(generic_provider_evidence, Mapping):
+            errors.append(
+                "chain.generic_provider_evidence_requests must be an object"
+            )
+        else:
+            if generic_provider_evidence.get("schema_version") != (
+                "prism.generic_provider_evidence_requests.v1"
+            ):
+                errors.append(
+                    "chain.generic_provider_evidence_requests.schema_version is unsupported"
+                )
+            for field in (
+                "event_count",
+                "packet_path_count",
+                "packet_count",
+                "request_count",
+                "closure_open_request_count",
+                "qualification_open_request_count",
+                "qualified_provider_packet_count",
+            ):
+                if generic_provider_evidence.get(field) is not None:
+                    _nonnegative_int(
+                        generic_provider_evidence.get(field),
+                        f"chain.generic_provider_evidence_requests.{field}",
+                        errors,
+                    )
+            for field in (
+                "frequency_inference_allowed",
+                "facility_qra_allowed",
+            ):
+                if generic_provider_evidence.get(field) is True:
+                    errors.append(
+                        f"chain.generic_provider_evidence_requests.{field} cannot be true"
+                    )
+            if generic_provider_evidence.get("diagnostic_only") is not True:
+                errors.append(
+                    "generic provider evidence requests must remain diagnostic_only"
+                )
+            packet_count = generic_provider_evidence.get("packet_count")
+            request_count = generic_provider_evidence.get("request_count")
+            closure_open = generic_provider_evidence.get("closure_open_request_count")
+            qualification_open = generic_provider_evidence.get(
+                "qualification_open_request_count"
+            )
+            if all(
+                isinstance(item, int) and not isinstance(item, bool)
+                for item in (packet_count, request_count, closure_open, qualification_open)
+            ):
+                if request_count != packet_count:
+                    errors.append(
+                        "generic provider evidence request count must equal provider packet count"
+                    )
+                if closure_open + qualification_open != request_count:
+                    errors.append(
+                        "generic provider evidence request kinds must close over request_count"
+                    )
+            if generic_provider_evidence.get("qualified_provider_packet_count") not in (0, None):
+                errors.append(
+                    "generic provider evidence requests cannot report a qualified provider packet"
+                )
+            if isinstance(generic_provider_closure, Mapping):
+                closure_packets = generic_provider_closure.get("provider_packet_count")
+                if (
+                    isinstance(closure_packets, int)
+                    and isinstance(packet_count, int)
+                    and closure_packets != packet_count
+                ):
+                    errors.append(
+                        "generic provider evidence request packet count disagrees with closure audit"
+                    )
 
     isolation_extension = chain.get("isolation_union_extension")
     if isolation_extension is not None:
