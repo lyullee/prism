@@ -85,6 +85,7 @@ def build_ijhe_completion_audit(
     native_scope_packet_catalog_verification: Mapping[str, Any] | None = None,
     observed_state_evidence: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
+    facility_component_contribution_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1777,6 +1778,55 @@ def build_ijhe_completion_audit(
             and aggregate.get("qualified_provider_packet") is False
             and aggregate.get("physical_validation_claim") is False
             and aggregate.get("facility_qra_claim") is False
+        )
+    if facility_component_contribution_audit is not None:
+        component_audit = facility_component_contribution_audit
+        component_audit_valid = (
+            component_audit.get("schema_version")
+            == "prism.facility_component_contribution_audit.v1"
+            and component_audit.get("status")
+            == "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+            and isinstance(component_audit.get("risk_atom_count"), int)
+            and component_audit.get("risk_atom_count", 0) > 0
+            and isinstance(component_audit.get("component_count"), int)
+            and component_audit.get("component_count", 0) > 0
+            and component_audit.get("mismatch_count") == 0
+            and component_audit.get("blocking_reasons") == []
+            and component_audit.get("diagnostic_only") is True
+            and component_audit.get("frequency_reallocation_performed") is False
+            and component_audit.get("facility_ir_fn_promotion") is False
+            and component_audit.get("qualified_provider_packet") is False
+            and component_audit.get("physical_validation_claim") is False
+            and component_audit.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_facility_component_contribution_closure",
+                "status": "PASS" if component_audit_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if component_audit_valid
+                    else "stored equipment contributions or ranking do not match independent risk-atom recomputation"
+                ),
+                "evidence": {
+                    "record": component_audit.get("_record_path"),
+                    "schema_version": component_audit.get("schema_version"),
+                    "status": component_audit.get("status"),
+                    "risk_atom_count": component_audit.get("risk_atom_count"),
+                    "component_count": component_audit.get("component_count"),
+                    "mismatch_count": component_audit.get("mismatch_count"),
+                    "blocking_reason_count": len(component_audit.get("blocking_reasons", []))
+                    if isinstance(component_audit.get("blocking_reasons"), list)
+                    else None,
+                    "facility_ir_fn_promotion": component_audit.get("facility_ir_fn_promotion"),
+                    "facility_qra_claim": component_audit.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "Equipment-level IR/F-N contributions and the diagnostic ranking are independently "
+                    "reproduced from risk atoms; missing equipment cases and provider evidence remain gates."
+                ),
+            }
         )
         checks.append(
             {

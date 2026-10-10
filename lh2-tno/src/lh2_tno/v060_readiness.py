@@ -301,6 +301,7 @@ def build_v060_readiness_report(
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
     equipment_state_release_audit: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
+    facility_component_contribution_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -332,6 +333,12 @@ def build_v060_readiness_report(
     if facility_aggregate_closure_audit is not None:
         aggregate_chain = _mapping(
             facility_aggregate_closure_audit, "facility_aggregate_closure_audit"
+        )
+    component_contribution_chain = None
+    if facility_component_contribution_audit is not None:
+        component_contribution_chain = _mapping(
+            facility_component_contribution_audit,
+            "facility_component_contribution_audit",
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -451,6 +458,21 @@ def build_v060_readiness_report(
                     "facility_qra_claim": aggregate_chain.get("facility_qra_claim"),
                 }
                 if aggregate_chain is not None
+                else None
+            ),
+            "facility_component_contribution_closure": (
+                {
+                    "status": component_contribution_chain.get("status"),
+                    "risk_atom_count": component_contribution_chain.get("risk_atom_count"),
+                    "component_count": component_contribution_chain.get("component_count"),
+                    "mismatch_count": component_contribution_chain.get("mismatch_count"),
+                    "blocking_reason_count": len(component_contribution_chain.get("blocking_reasons", ()))
+                    if isinstance(component_contribution_chain.get("blocking_reasons"), Sequence)
+                    else None,
+                    "diagnostic_only": component_contribution_chain.get("diagnostic_only"),
+                    "facility_qra_claim": component_contribution_chain.get("facility_qra_claim"),
+                }
+                if component_contribution_chain is not None
                 else None
             ),
         },
@@ -733,6 +755,53 @@ def validate_v060_readiness_report(
                 errors.append("facility IR/F-N aggregate closure must remain diagnostic_only")
             if aggregate_chain.get("facility_qra_claim") is True:
                 errors.append("facility IR/F-N aggregate closure cannot claim facility QRA")
+
+    component_contribution_chain = chain.get("facility_component_contribution_closure")
+    if component_contribution_chain is not None:
+        if not isinstance(component_contribution_chain, Mapping):
+            errors.append(
+                "chain.facility_component_contribution_closure must be an object"
+            )
+        else:
+            for field in (
+                "risk_atom_count",
+                "component_count",
+                "mismatch_count",
+                "blocking_reason_count",
+            ):
+                if component_contribution_chain.get(field) is not None:
+                    _nonnegative_int(
+                        component_contribution_chain.get(field),
+                        f"chain.facility_component_contribution_closure.{field}",
+                        errors,
+                    )
+            if component_contribution_chain.get("status") == (
+                "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+            ):
+                if component_contribution_chain.get("risk_atom_count", 0) <= 0:
+                    errors.append(
+                        "facility component contribution closure has no risk atoms"
+                    )
+                if component_contribution_chain.get("component_count", 0) <= 0:
+                    errors.append(
+                        "facility component contribution closure has no components"
+                    )
+                if component_contribution_chain.get("mismatch_count") != 0:
+                    errors.append(
+                        "facility component contribution closure has mismatches"
+                    )
+                if component_contribution_chain.get("blocking_reason_count") != 0:
+                    errors.append(
+                        "facility component contribution closure has blocking reasons"
+                    )
+            if component_contribution_chain.get("diagnostic_only") is not True:
+                errors.append(
+                    "facility component contribution closure must remain diagnostic_only"
+                )
+            if component_contribution_chain.get("facility_qra_claim") is True:
+                errors.append(
+                    "facility component contribution closure cannot claim facility QRA"
+                )
 
     release_boundary = chain.get("release_boundary")
     if release_boundary is not None:

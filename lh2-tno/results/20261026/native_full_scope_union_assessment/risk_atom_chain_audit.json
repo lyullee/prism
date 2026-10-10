@@ -80,5 +80,5 @@
   "facility_ir_fn_promotion": false,
   "facility_qra_claim": false,
   "interpretation": "Every numerical case must retain its release termination, mass closure, consequence-stage timing, domain record and four ignition-specific risk atoms. Operator-limited cases can close this structural chain, but remain non-qualified evidence.",
-  "_record_path": "results\\20261026\\native_full_scope_union_assessment_next\\risk_atom_chain_audit.json"
+  "_record_path": "results\\20261026\\native_full_scope_union_assessment_next2\\risk_atom_chain_audit.json"
 }

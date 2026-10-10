@@ -142,8 +142,8 @@
     "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
   },
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_audit_check_count": 36,
-  "ijhe_audit_pass_count": 31,
+  "ijhe_audit_check_count": 37,
+  "ijhe_audit_pass_count": 32,
   "ijhe_audit_blocked_count": 5,
   "ijhe_audit_blocked_check_ids": [
     "facility_release_boundary",
@@ -161,5 +161,10 @@
   "native_scope_packet_catalog_exact_packet_count": 24,
   "slabx_validation_evidence_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
   "slabx_validation_evidence_check_count": 5,
-  "slabx_validation_evidence_physical_validation_claim": false
+  "slabx_validation_evidence_physical_validation_claim": false,
+  "facility_component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+  "facility_component_contribution_audit_component_count": 9,
+  "facility_component_contribution_audit_risk_atom_count": 176,
+  "facility_component_contribution_audit_mismatch_count": 0,
+  "facility_component_contribution_audit_blocking_reason_count": 0
 }

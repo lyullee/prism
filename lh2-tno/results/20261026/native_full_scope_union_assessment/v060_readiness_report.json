@@ -162,6 +162,15 @@
       "blocking_reason_count": 0,
       "diagnostic_only": true,
       "facility_qra_claim": false
+    },
+    "facility_component_contribution_closure": {
+      "status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+      "risk_atom_count": 176,
+      "component_count": 9,
+      "mismatch_count": 0,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
     }
   },
   "equipment": {
@@ -640,51 +649,7 @@
     ],
     "facility_promotion_allowed_now": false
   },
-  "scenario_evidence": {
-    "schema": "prism.inspection_center_screening_summary.v1",
-    "status": "SCREENING_EVIDENCE_IMPORTED",
-    "scenario_row_count": 52,
-    "candidate_accident_family_counts": {
-      "inventory_over_600s": 2,
-      "pipe_hole": 17,
-      "valve_hole": 30,
-      "vaporizer_hole": 4,
-      "vent_hole": 4,
-      "vertical_handoff": 2,
-      "vessel_hole": 2
-    },
-    "candidate_monitoring_signal_counts": {
-      "hydrogen_detection": 32,
-      "leak_test": 25,
-      "mass_flow": 41,
-      "pressure": 52,
-      "relief_state": 17,
-      "temperature": 10,
-      "vacuum_level": 3,
-      "valve_state": 43,
-      "vent_state": 2,
-      "ventilation_state": 7
-    },
-    "scope_status_counts": {
-      "CANDIDATE_OUTDOOR_SCREENING": 41,
-      "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
-    },
-    "csv_count": 3,
-    "workbook_count": null,
-    "telemetry_candidate_sheet_count": null,
-    "telemetry_metadata_incomplete_sheet_count": null,
-    "qualified_provider_packet_count": 0,
-    "frequency_assigned": false,
-    "sensor_frequency_learning_used": false,
-    "facility_qra_claim": false,
-    "candidate_only": true,
-    "blocking_reasons": [
-      "Procedure and failure text identifies candidate scenarios only; it does not provide an initiating frequency.",
-      "Monitoring signal names are candidate tags and are not inverse leak-size or frequency estimators.",
-      "Each candidate still requires an equipment-owned accident history, termination ledger and provider packet.",
-      "Indoor, semi-enclosed and test-building rows are retained as evidence but marked outside the declared outdoor scope."
-    ]
-  },
+  "scenario_evidence": null,
   "completion_criteria": [
     {
       "id": "A_equipment_state_and_release",
@@ -742,52 +707,52 @@
   "interpretation": "The v0.6.0 declared outdoor chain is numerically connected for conditional diagnostics. Operator-limited cases, missing qualified provider packets, restricted component validation, and strict facility-QRA gates remain visible and are not replaced by another scenario.",
   "source_artifacts": {
     "objective_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/ijhe_objective_coverage_audit.json",
+      "path": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
       "sha256": "3be686791a4eb643be6cb48dc4269c1a2b9581dc359eb3046c17d1927bd9aa43"
     },
     "union_verification": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/verification.json",
-      "sha256": "30f513ab885f1a2593826961c8d33c5e08db419c63504c0ce5d72e5021ec027d"
+      "path": "results/20261026/native_full_scope_union_assessment/verification.json",
+      "sha256": "30fc7a74dac02336da095283b7e2bf607f8d5f0797262091238ab6b49613fe05"
     },
     "scope_matrix": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/scope_matrix.json",
+      "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
       "sha256": "894e49804f591f99b82d6f0482c4ad2d3140e08da86aada64df37db32c6bb2a6"
     },
     "facility_assessment": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/facility_assessment.json",
+      "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
       "sha256": "fb80e34d0ed28d38483ec157095131d27b2bc2d8a6b92805653ec1421489e68e"
     },
     "completion_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/ijhe_completion_audit.json",
-      "sha256": "12cfbbff7038e2e051874573b6418eae247c73d28576067f26cfb033848ef959"
+      "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
+      "sha256": "c9455659b1296cb8259b791126f1acf4ee19809ce5453b6a6f56a0f7c6b29adf"
     },
     "validation_matrix": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/validation_evidence_matrix.json",
+      "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
       "sha256": "80c250fe07cd55e509137152e17d4b417876a376a53a2d501f19140ccd00dd56"
     },
     "realtime_benchmark": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/realtime_cache_benchmark.json",
+      "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
       "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
     },
     "facility_evidence_request": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/facility_evidence_request.json",
+      "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
       "sha256": "583732525ea0b046635cb02be2d23eee1575ea7d086600f4d8e24302f570f5ec"
     },
-    "scenario_evidence_audit": {
-      "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
-      "sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3"
-    },
     "risk_atom_chain_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/risk_atom_chain_audit.json",
-      "sha256": "9dfb1c13ccff35f929a7b9531cc62dabd05f23437d2559154940826110eade08"
+      "path": "results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json",
+      "sha256": "307a554b5797f5d1c9bdc67b451dd8b072776a00149b5ba16e7d552ec0503671"
     },
     "equipment_state_release_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/equipment_state_release_audit.json",
-      "sha256": "c877100709c938e2ed1a6ac04e74d4674646047cce449fa069fa3c925deda184"
+      "path": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
+      "sha256": "9b1ce0074109a90978e1cfeb6b1a104bcc1f440455805db511cebdbfc7f628f2"
     },
     "facility_aggregate_closure_audit": {
-      "path": "results/20261026/native_full_scope_union_assessment_next/facility_aggregate_closure_audit.json",
-      "sha256": "2c512fd77e749169c79e8eea099950069dc19daada0fe0292d52cda4008088db"
+      "path": "results/20261026/native_full_scope_union_assessment/facility_aggregate_closure_audit.json",
+      "sha256": "3657adea7d94492dcd4c78daa5341fa52f39e4991e2cdfb105acab816f4059bd"
+    },
+    "facility_component_contribution_audit": {
+      "path": "results/20261026/native_full_scope_union_assessment/facility_component_contribution_audit.json",
+      "sha256": "ccd53298258e4adb9c0a12374a9fe07762eb76a092bef146d89cea52bf39cbd0"
     }
   },
   "invariant_validation": {

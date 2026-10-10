@@ -103,6 +103,21 @@ def main() -> int:
         type=Path,
         help="optional independent facility IR/F-N aggregate closure audit",
     )
+    parser.add_argument(
+        "--risk-atom-chain-audit",
+        type=Path,
+        help="optional case/atom-level release-to-final-damage chain audit",
+    )
+    parser.add_argument(
+        "--equipment-state-release-audit",
+        type=Path,
+        help="optional equipment-state to release-packet identity audit",
+    )
+    parser.add_argument(
+        "--facility-component-contribution-audit",
+        type=Path,
+        help="optional independent equipment contribution and ranking audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -295,6 +310,29 @@ def main() -> int:
             facility_aggregate_closure_audit["_record_path"] = str(
                 args.facility_aggregate_closure_audit
             )
+        facility_component_contribution_audit = (
+            _object(args.facility_component_contribution_audit)
+            if args.facility_component_contribution_audit
+            else None
+        )
+        if facility_component_contribution_audit is not None:
+            facility_component_contribution_audit["_record_path"] = str(
+                args.facility_component_contribution_audit
+            )
+        risk_atom_chain_audit = (
+            _object(args.risk_atom_chain_audit) if args.risk_atom_chain_audit else None
+        )
+        if risk_atom_chain_audit is not None:
+            risk_atom_chain_audit["_record_path"] = str(args.risk_atom_chain_audit)
+        equipment_state_release_audit = (
+            _object(args.equipment_state_release_audit)
+            if args.equipment_state_release_audit
+            else None
+        )
+        if equipment_state_release_audit is not None:
+            equipment_state_release_audit["_record_path"] = str(
+                args.equipment_state_release_audit
+            )
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -320,6 +358,8 @@ def main() -> int:
             native_binding_reconciliation,
             facility_case_packet_coverage,
             combined_chain_closure,
+            risk_atom_chain_audit,
+            equipment_state_release_audit,
             slabx_validation_evidence,
             realtime_cache_benchmark,
             domain_recovery_audit,
@@ -327,6 +367,7 @@ def main() -> int:
             native_scope_packet_catalog_verification,
             observed_state_evidence,
             facility_aggregate_closure_audit,
+            facility_component_contribution_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
