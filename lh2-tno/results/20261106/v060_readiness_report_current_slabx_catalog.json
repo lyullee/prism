@@ -477,6 +477,31 @@
       "barrier_probability_promoted": false,
       "facility_qra_claim": false,
       "diagnostic_only": true
+    },
+    "monitoring_state_evidence": {
+      "schema_version": "prism.validation_intake_audit.v1",
+      "status": "SCREENED_NO_PROMOTION",
+      "source_file_count": 17,
+      "workbook_count": 17,
+      "sheet_count": 78,
+      "workbook_or_sheet_error_count": 0,
+      "reviewed_unit_map_supplied": false,
+      "numeric_signal_unit_status_count": {
+        "MISSING_OR_UNCONFIRMED": 522
+      },
+      "released_accident_scenario_count": 0,
+      "state_snapshot_binding_allowed": false,
+      "accidental_release_packet_allowed": false,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "blocking_reasons": [
+        "inspection_unit_basis_unconfirmed",
+        "normal_operation_rows_have_no_accidental_release_boundary",
+        "exact_asset_port_tag_crosswalk_not_released",
+        "independent_accident_release_scenarios_not_released",
+        "sensor_frequency_learning_is_prohibited"
+      ],
+      "diagnostic_only": true
     }
   },
   "equipment": {
@@ -1032,6 +1057,31 @@
       "Indoor, semi-enclosed and test-building rows are retained as evidence but marked outside the declared outdoor scope."
     ]
   },
+  "validation_intake": {
+    "schema_version": "prism.validation_intake_audit.v1",
+    "status": "SCREENED_NO_PROMOTION",
+    "source_file_count": 17,
+    "workbook_count": 17,
+    "sheet_count": 78,
+    "workbook_or_sheet_error_count": 0,
+    "reviewed_unit_map_supplied": false,
+    "numeric_signal_unit_status_count": {
+      "MISSING_OR_UNCONFIRMED": 522
+    },
+    "released_accident_scenario_count": 0,
+    "state_snapshot_binding_allowed": false,
+    "accidental_release_packet_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "blocking_reasons": [
+      "inspection_unit_basis_unconfirmed",
+      "normal_operation_rows_have_no_accidental_release_boundary",
+      "exact_asset_port_tag_crosswalk_not_released",
+      "independent_accident_release_scenarios_not_released",
+      "sensor_frequency_learning_is_prohibited"
+    ],
+    "diagnostic_only": true
+  },
   "completion_criteria": [
     {
       "id": "A_equipment_state_and_release",
@@ -1123,6 +1173,10 @@
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
       "sha256": "fb41d68c22ca9d2445faf1699a3e420936ea62ed3a4a6aedd4c248250d9e2ea3"
+    },
+    "validation_intake_audit": {
+      "path": "results/20261106/validation_intake_audit_current.json",
+      "sha256": "9fcd6d22040d9936add4b9e4031a2e2575e026639d7a384ef29e74d85ce4ea49"
     },
     "risk_atom_chain_audit": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json",

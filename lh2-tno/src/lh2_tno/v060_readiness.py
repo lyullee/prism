@@ -163,6 +163,49 @@ def _scenario_evidence_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _validation_intake_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
+    """Expose monitoring-state evidence without treating it as an accident packet.
+
+    The intake audit is deliberately summarized at the readiness boundary so
+    the available workbook/sheet counts and the closed promotion gates remain
+    visible.  It cannot create a release duration, initiating frequency, or
+    facility-QRA claim from normal-operation time series.
+    """
+    inputs = audit.get("inputs") if isinstance(audit.get("inputs"), Mapping) else {}
+    inspection = (
+        inputs.get("inspection_timeseries")
+        if isinstance(inputs.get("inspection_timeseries"), Mapping)
+        else {}
+    )
+    aggregate = inspection.get("aggregate") if isinstance(inspection.get("aggregate"), Mapping) else {}
+    equipment = (
+        inputs.get("equipment_validation")
+        if isinstance(inputs.get("equipment_validation"), Mapping)
+        else {}
+    )
+    promotion = audit.get("promotion_gates") if isinstance(audit.get("promotion_gates"), Mapping) else {}
+    return {
+        "schema_version": audit.get("schema_version"),
+        "status": audit.get("status"),
+        "source_file_count": inspection.get("source_file_count"),
+        "workbook_count": aggregate.get("workbook_count"),
+        "sheet_count": aggregate.get("sheet_count"),
+        "workbook_or_sheet_error_count": aggregate.get("workbook_or_sheet_error_count"),
+        "reviewed_unit_map_supplied": aggregate.get("reviewed_unit_map_supplied"),
+        "numeric_signal_unit_status_count": aggregate.get("numeric_signal_unit_status_count", {}),
+        "released_accident_scenario_count": equipment.get("released_scenario_count"),
+        "state_snapshot_binding_allowed": promotion.get("state_snapshot_binding_allowed"),
+        "accidental_release_packet_allowed": promotion.get("accidental_release_packet_allowed"),
+        "frequency_inference_allowed": promotion.get("frequency_inference_allowed"),
+        "facility_qra_allowed": promotion.get("facility_qra_allowed"),
+        "blocking_reasons": list(audit.get("blocking_reasons", ()))
+        if isinstance(audit.get("blocking_reasons"), Sequence)
+        and not isinstance(audit.get("blocking_reasons"), (str, bytes))
+        else [],
+        "diagnostic_only": True,
+    }
+
+
 def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
     """Summarize duration, isolation, inventory, and domain closure evidence.
 
@@ -475,6 +518,7 @@ def build_v060_readiness_report(
     realtime_benchmark: Mapping[str, Any],
     facility_evidence_request: Mapping[str, Any] | None = None,
     scenario_evidence_audit: Mapping[str, Any] | None = None,
+    validation_intake_audit: Mapping[str, Any] | None = None,
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
     equipment_state_release_audit: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
@@ -512,6 +556,11 @@ def build_v060_readiness_report(
     if scenario_evidence_audit is not None:
         scenario_evidence = _scenario_evidence_summary(
             _mapping(scenario_evidence_audit, "scenario_evidence_audit")
+        )
+    validation_intake = None
+    if validation_intake_audit is not None:
+        validation_intake = _validation_intake_summary(
+            _mapping(validation_intake_audit, "validation_intake_audit")
         )
     atom_chain = None
     if risk_atom_chain_audit is not None:
@@ -1294,6 +1343,7 @@ def build_v060_readiness_report(
                 if isolation_closure is not None
                 else None
             ),
+            "monitoring_state_evidence": validation_intake,
         },
         "equipment": {
             "component_rows": component_rows,
@@ -1370,6 +1420,7 @@ def build_v060_readiness_report(
             else None
         ),
         "scenario_evidence": scenario_evidence,
+        "validation_intake": validation_intake,
         "completion_criteria": [
             {
                 "id": "A_equipment_state_and_release",
@@ -2751,6 +2802,39 @@ def validate_v060_readiness_report(
                 errors.append("scenario_evidence.blocking_reasons must be an array")
             if scenario_evidence.get("qualified_provider_packet_count") not in (0, None):
                 errors.append("scenario evidence cannot report a qualified provider packet")
+
+    validation_intake = value.get("validation_intake")
+    if validation_intake is not None:
+        if not isinstance(validation_intake, Mapping):
+            errors.append("validation_intake must be an object when present")
+        else:
+            if validation_intake.get("schema_version") != "prism.validation_intake_audit.v1":
+                errors.append("validation_intake.schema_version is not supported")
+            for field in (
+                "source_file_count",
+                "workbook_count",
+                "sheet_count",
+                "workbook_or_sheet_error_count",
+                "released_accident_scenario_count",
+            ):
+                if validation_intake.get(field) is not None:
+                    _nonnegative_int(
+                        validation_intake.get(field),
+                        f"validation_intake.{field}",
+                        errors,
+                    )
+            for field in (
+                "state_snapshot_binding_allowed",
+                "accidental_release_packet_allowed",
+                "frequency_inference_allowed",
+                "facility_qra_allowed",
+            ):
+                if validation_intake.get(field) is not False:
+                    errors.append(f"validation_intake.{field} must remain false")
+            if validation_intake.get("diagnostic_only") is not True:
+                errors.append("validation_intake.diagnostic_only must remain true")
+            if not isinstance(validation_intake.get("blocking_reasons"), list):
+                errors.append("validation_intake.blocking_reasons must be an array")
 
     if errors:
         raise V060ReadinessError("; ".join(errors))

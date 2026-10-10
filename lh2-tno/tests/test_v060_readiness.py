@@ -155,6 +155,43 @@ def test_v060_readiness_records_isolation_release_closure():
     assert closure["barrier_probability_promoted"] is False
 
 
+def test_v060_readiness_records_fail_closed_monitoring_state_intake():
+    inputs = _inputs()
+    inputs["validation_intake_audit"] = {
+        "schema_version": "prism.validation_intake_audit.v1",
+        "status": "SCREENED_NO_PROMOTION",
+        "inputs": {
+            "inspection_timeseries": {
+                "source_file_count": 17,
+                "aggregate": {
+                    "workbook_count": 17,
+                    "sheet_count": 78,
+                    "workbook_or_sheet_error_count": 0,
+                    "reviewed_unit_map_supplied": False,
+                    "numeric_signal_unit_status_count": {
+                        "MISSING_OR_UNCONFIRMED": 522,
+                    },
+                },
+            },
+            "equipment_validation": {"released_scenario_count": 0},
+        },
+        "promotion_gates": {
+            "state_snapshot_binding_allowed": False,
+            "accidental_release_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        },
+        "blocking_reasons": ["inspection_unit_basis_unconfirmed"],
+    }
+    report = build_v060_readiness_report(**inputs)
+    monitoring = report["chain"]["monitoring_state_evidence"]
+    assert monitoring["workbook_count"] == 17
+    assert monitoring["sheet_count"] == 78
+    assert monitoring["released_accident_scenario_count"] == 0
+    assert monitoring["facility_qra_allowed"] is False
+    assert report["validation_intake"]["diagnostic_only"] is True
+
+
 def _scenario_evidence():
     return {
         "schema_version": "prism.inspection_center_screening_summary.v1",

@@ -55,6 +55,11 @@ def main() -> int:
         help="Optional read-only scenario register/screening evidence summary.",
     )
     parser.add_argument(
+        "--validation-intake-audit",
+        type=Path,
+        help="Optional fail-closed monitoring/state validation-input inventory.",
+    )
+    parser.add_argument(
         "--risk-atom-chain-audit",
         type=Path,
         help="Optional case/atom-level release-to-final-damage chain audit.",
@@ -168,6 +173,11 @@ def main() -> int:
             scenario_evidence_audit=(
                 _load(args.scenario_evidence_audit)
                 if args.scenario_evidence_audit is not None
+                else None
+            ),
+            validation_intake_audit=(
+                _load(args.validation_intake_audit)
+                if args.validation_intake_audit is not None
                 else None
             ),
             risk_atom_chain_audit=(
@@ -284,6 +294,10 @@ def main() -> int:
     if args.scenario_evidence_audit is not None:
         report["source_artifacts"]["scenario_evidence_audit"] = _source_artifact(
             args.scenario_evidence_audit
+        )
+    if args.validation_intake_audit is not None:
+        report["source_artifacts"]["validation_intake_audit"] = _source_artifact(
+            args.validation_intake_audit
         )
     if args.risk_atom_chain_audit is not None:
         report["source_artifacts"]["risk_atom_chain_audit"] = _source_artifact(
