@@ -89,6 +89,10 @@ class ResolvedGasStep(Contract):
     # cannot mistake packet continuity velocity for a compressible near-field
     # solution.
     provider_source_state: 'ProviderSourceState | None' = None
+    # Optional common digital-twin port state.  This preserves upstream P/h
+    # and phase information without making the atmospheric boundary solver
+    # infer anything from it.
+    provider_port_state: 'ProviderPortState | None' = None
 
     @model_validator(mode='after')
     def continuity(self):
@@ -120,6 +124,46 @@ class ProviderSourceState(Contract):
     throat_mass_flux_kg_m2_s: Nonnegative
     choked: bool
     provider_source_state_provenance: Name
+
+
+class ProviderPortState(Contract):
+    """Provider-owned thermodynamic state at an equipment port.
+
+    This is the common handoff for a liquid-hydrogen digital twin.  It keeps
+    the upstream ``P``/``h``/phase state and the port identity together so an
+    external model cannot be connected by copying only pressure and
+    temperature.  It is evidence attached to a resolved release interval;
+    it does not calculate a leak, an opening, a duration, or a frequency.
+    """
+
+    schema_version: Literal['prism.provider_port_state.v1'] = 'prism.provider_port_state.v1'
+    component_id: Name
+    port_id: Name
+    time_s: Nonnegative
+    fluid: Literal['Hydrogen', 'ParaHydrogen']
+    phase: Literal['liquid', 'vapour', 'two_phase']
+    pressure_pa_abs: Positive
+    temperature_k: Positive
+    density_kg_m3: Positive
+    specific_enthalpy_j_kg: float
+    specific_entropy_j_kgk: float | None = None
+    vapour_quality: Fraction | None = None
+    mass_flow_kg_s: Nonnegative
+    position_enu_m: Vector
+    direction_enu: Vector
+    provenance: Name
+    source_digest: str = Field(pattern=r'^[0-9a-f]{64}$')
+    state_owner: Literal['equipment_twin'] = 'equipment_twin'
+
+    @model_validator(mode='after')
+    def valid(self):
+        if not math.isclose(sum(x*x for x in self.direction_enu), 1., abs_tol=1e-10, rel_tol=0):
+            raise ValueError('provider port state requires a unit flow direction')
+        if self.phase == 'liquid' and self.vapour_quality is not None and self.vapour_quality > 1e-12:
+            raise ValueError('liquid provider port state cannot declare positive vapour quality')
+        if self.phase == 'vapour' and self.vapour_quality is not None and self.vapour_quality < 1. - 1e-12:
+            raise ValueError('vapour provider port state cannot declare sub-unity vapour quality')
+        return self
 
 
 ResolvedGasStep.model_rebuild()
@@ -335,6 +379,20 @@ class ResolvedGasRelease(Contract):
             raise ValueError('provider cumulative static enthalpy and history do not close')
         if mass>self.available_mass_kg+1e-9:
             raise ValueError('resolved release exceeds the available inventory')
+        for step in self.steps:
+            state = step.provider_port_state
+            if state is None:
+                continue
+            if state.component_id != self.component_id or state.port_id != self.port_id:
+                raise ValueError('provider port state identity does not match resolved gas boundary')
+            if not math.isclose(state.time_s, step.time_s, rel_tol=0, abs_tol=1e-12):
+                raise ValueError('provider port state clock does not match resolved gas clock')
+            if state.fluid != self.property_basis.fluid:
+                raise ValueError('provider port state fluid disagrees with resolved gas property basis')
+            if state.phase not in {'vapour', 'two_phase'}:
+                raise ValueError('resolved gas boundary requires a vapour or two-phase provider port state')
+            if not math.isclose(state.mass_flow_kg_s, step.mass_flow_kg_s, rel_tol=1e-8, abs_tol=1e-12):
+                raise ValueError('provider port state mass flow does not match resolved gas step')
         if self.event_kind!='accidental_leak' and self.failure_opening_diameter_m is not None:
             raise ValueError('normal vent/relief is not a declared random-leak opening')
         return self
@@ -464,6 +522,8 @@ class ResolvedLiquidStep(Contract):
     gas_effective_area_m2: Positive | None = None
     gas_velocity_m_s: Nonnegative | None = None
     gas_velocity_origin: Literal['provider_resolved', 'mass_continuity_from_declared_area'] | None = None
+    # Optional upstream liquid/two-phase port state from the equipment twin.
+    provider_port_state: 'ProviderPortState | None' = None
     droplet_class_outcomes: tuple[LiquidDropletOutcome, ...] = ()
 
     @model_validator(mode='after')
@@ -579,6 +639,20 @@ class ResolvedLiquidRelease(Contract):
             ]
             if any(math.dist(position, self.pool_footprint.impact_position_enu_m) > 1e-6 for position in impact_positions):
                 raise ValueError('pool footprint position disagrees with provider ground impact position')
+        for step in self.steps:
+            state = step.provider_port_state
+            if state is None:
+                continue
+            if state.component_id != self.component_id or state.port_id != self.port_id:
+                raise ValueError('provider port state identity does not match resolved liquid boundary')
+            if not math.isclose(state.time_s, step.time_s, rel_tol=0, abs_tol=1e-12):
+                raise ValueError('provider port state clock does not match resolved liquid clock')
+            if state.fluid != self.property_basis.fluid:
+                raise ValueError('provider port state fluid disagrees with resolved liquid property basis')
+            if state.phase not in {'liquid', 'two_phase'}:
+                raise ValueError('resolved liquid boundary requires a liquid or two-phase provider port state')
+            if not math.isclose(state.mass_flow_kg_s, step.total_mass_flow_kg_s, rel_tol=1e-8, abs_tol=1e-12):
+                raise ValueError('provider port state mass flow does not match resolved liquid step')
         if self.event_kind != 'accidental_leak' and self.failure_opening_diameter_m is not None:
             raise ValueError('normal vent/relief is not a declared random-leak opening')
         return self

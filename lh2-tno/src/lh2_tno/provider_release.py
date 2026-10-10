@@ -12,6 +12,7 @@ import json
 import math
 from pathlib import Path
 from typing import Any, Mapping, Sequence, TypeAlias
+from collections.abc import Callable
 
 from .consequences import ConsequenceRequest
 from .contracts import Contract, Fraction, Name
@@ -26,6 +27,20 @@ ProviderReleaseSet: TypeAlias = ResolvedGasReleaseSet
 
 class ProviderReleaseContractError(ValueError):
     """Raised when provider output cannot be promoted to a release boundary."""
+
+
+def _coerce_provider_release(packet: ProviderRelease | Mapping[str, Any] | str | Path) -> ProviderRelease:
+    """Return one strict provider release for the reusable runtime adapter."""
+    if isinstance(packet, (ResolvedGasRelease, ResolvedLiquidRelease)):
+        return packet
+    return load_provider_release(packet)
+
+
+def _coerce_provider_release_set(packet: ProviderReleaseSet | Mapping[str, Any] | str | Path) -> ProviderReleaseSet:
+    """Return one strict two-sided provider release set for the runtime adapter."""
+    if isinstance(packet, ResolvedGasReleaseSet):
+        return packet
+    return load_provider_release_set(packet)
 
 
 class ProviderReleaseBranch(Contract):
@@ -451,6 +466,46 @@ def build_consequence_request_from_provider_release(
         ) from error
 
 
+def provider_release_resolver_from_packet(
+    packet: ProviderRelease | Mapping[str, Any] | str | Path,
+    request_defaults: Mapping[str, Any],
+    *,
+    component_id: str | None = None,
+    port_id: str | None = None,
+) -> Callable[[Any, Mapping[str, Any]], ConsequenceRequest]:
+    """Build the explicit equipment-twin seam from one resolved packet.
+
+    The returned callable is suitable for
+    :func:`lh2_tno.service.request_from_equipment_resolver` or
+    ``ConsequenceService.update_from_equipment_state``.  The packet is
+    validated once and then rebound to the live request context on every
+    frame.  It carries no initiating frequency and never infers a release
+    from the normalized state; a provider must supply a new packet when its
+    release boundary changes.
+    """
+    release = _coerce_provider_release(packet)
+    if component_id is not None and release.component_id != component_id:
+        raise ProviderReleaseContractError(
+            'provider release component_id does not match the requested adapter component'
+        )
+    if port_id is not None and release.port_id != port_id:
+        raise ProviderReleaseContractError(
+            'provider release port_id does not match the requested adapter port'
+        )
+    defaults = copy.deepcopy(dict(request_defaults))
+
+    def resolve(template: Any, normalized: Mapping[str, Any]) -> ConsequenceRequest:
+        if template.component_id != release.component_id:
+            raise ProviderReleaseContractError(
+                'provider release component_id does not match the telemetry template'
+            )
+        # ``normalized`` is intentionally not used to overwrite P/h/phase or
+        # flow.  Those values belong to the provider-resolved packet.
+        return build_consequence_request_from_provider_release(release, defaults)
+
+    return resolve
+
+
 def build_consequence_request_from_provider_release_set(
     release_set: ResolvedGasReleaseSet,
     request_defaults: Mapping[str, Any],
@@ -526,3 +581,27 @@ def build_consequence_request_from_provider_release_set(
         raise ProviderReleaseContractError(
             f"two-sided provider release set plus consequence context failed validation: {error}"
         ) from error
+
+
+def provider_release_set_resolver_from_packet(
+    packet: ProviderReleaseSet | Mapping[str, Any] | str | Path,
+    request_defaults: Mapping[str, Any],
+    *,
+    component_id: str | None = None,
+) -> Callable[[Any, Mapping[str, Any]], ConsequenceRequest]:
+    """Build the explicit runtime seam for a provider two-sided rupture set."""
+    release_set = _coerce_provider_release_set(packet)
+    if component_id is not None and release_set.component_id != component_id:
+        raise ProviderReleaseContractError(
+            'provider release-set component_id does not match the requested adapter component'
+        )
+    defaults = copy.deepcopy(dict(request_defaults))
+
+    def resolve(template: Any, normalized: Mapping[str, Any]) -> ConsequenceRequest:
+        if template.component_id != release_set.component_id:
+            raise ProviderReleaseContractError(
+                'provider release-set component_id does not match the telemetry template'
+            )
+        return build_consequence_request_from_provider_release_set(release_set, defaults)
+
+    return resolve

@@ -5,6 +5,7 @@ import pytest
 
 from lh2_tno.equipment_boundary import (
     NoRainoutEvidence,
+    ProviderPortState,
     ResolvedGasRelease,
     ResolvedGasReleaseSet,
     ResolvedGasStep,
@@ -24,6 +25,8 @@ from lh2_tno.provider_release import (
     load_provider_release_set,
     load_provider_release_set_catalog,
     load_provider_release_set_branch_catalog,
+    provider_release_resolver_from_packet,
+    provider_release_set_resolver_from_packet,
 )
 
 
@@ -535,3 +538,85 @@ def test_provider_request_adapter_rejects_missing_termination_time():
     defaults["release_termination"].pop("time_s")
     with pytest.raises(ProviderReleaseContractError, match="finite provider duration"):
         build_consequence_request_from_provider_release(_release(), defaults)
+
+
+def test_provider_port_state_preserves_lh2_ph_and_port_identity():
+    data = _release().model_dump(mode="json")
+    data["steps"][0]["provider_port_state"] = {
+        "component_id": "storage-tank-01",
+        "port_id": "tank-out",
+        "time_s": 0.0,
+        "fluid": "Hydrogen",
+        "phase": "vapour",
+        "pressure_pa_abs": 101325.0,
+        "temperature_k": 288.15,
+        "density_kg_m3": 1.0,
+        "specific_enthalpy_j_kg": 1000.0,
+        "specific_entropy_j_kgk": 10.0,
+        "vapour_quality": 1.0,
+        "mass_flow_kg_s": 1.0,
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "provenance": "external LH2 digital twin port state",
+        "source_digest": "a" * 64,
+    }
+    release = load_provider_release(data)
+    state = release.steps[0].provider_port_state
+    assert isinstance(state, ProviderPortState)
+    assert state.phase == "vapour"
+    assert state.specific_enthalpy_j_kg == 1000.0
+    assert state.port_id == release.port_id
+
+    data["steps"][0]["provider_port_state"]["mass_flow_kg_s"] = 2.0
+    with pytest.raises(ProviderReleaseContractError, match="failed strict PRISM validation"):
+        load_provider_release(data)
+
+
+def test_provider_packet_resolver_is_reusable_without_frequency_or_state_inference():
+    resolver = provider_release_resolver_from_packet(
+        _release().model_dump(mode="json"),
+        _defaults(),
+        component_id="storage-tank-01",
+        port_id="tank-out",
+    )
+
+    class Template:
+        component_id = "storage-tank-01"
+
+    request = resolver(Template(), {"values": {"pressure": {"value_si": 1.0}}})
+    assert request.resolved_release is not None
+    assert request.resolved_release.port_id == "tank-out"
+    assert request.annual_frequency_per_year is None
+    assert request.source_input is None
+
+
+def test_provider_packet_resolver_rejects_template_component_mismatch():
+    resolver = provider_release_resolver_from_packet(_release(), _defaults())
+
+    class Template:
+        component_id = "other-component"
+
+    with pytest.raises(ProviderReleaseContractError, match="telemetry template"):
+        resolver(Template(), {"values": {}})
+
+
+def test_provider_set_resolver_rebinds_explicit_two_sided_boundary():
+    defaults = _defaults()
+    defaults.update(
+        source_operator="equipment_two_sided_rupture",
+        release_termination={
+            "basis": "two_sided_rupture",
+            "time_s": 0.2,
+            "provenance": "provider shared rupture clock",
+        },
+    )
+    packet = {"provider_export_schema": PROVIDER_RELEASE_SET_SCHEMA, **_release_set().model_dump(mode="json")}
+    resolver = provider_release_set_resolver_from_packet(packet, defaults, component_id="storage-tank-01")
+
+    class Template:
+        component_id = "storage-tank-01"
+
+    request = resolver(Template(), {"values": {}})
+    assert request.resolved_release_set is not None
+    assert request.source_operator == "equipment_two_sided_rupture"
+    assert request.annual_frequency_per_year is None
