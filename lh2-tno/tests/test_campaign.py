@@ -14,7 +14,7 @@ from lh2_tno.campaign import (
     _provider_packet_identity,
 )
 from lh2_tno.contracts import Facility
-from lh2_tno.equipment_boundary import ProviderMassBalance
+from lh2_tno.equipment_boundary import ProviderMassBalance, ResolvedGasRelease, ResolvedGasStep
 from lh2_tno.frequency import FrequencyPlan, generate_events
 from lh2_tno.pipeline import ResearchPipeline
 
@@ -278,6 +278,30 @@ def inputs():
     return f,campaign
 
 
+def _scoped_provider_release():
+    return ResolvedGasRelease(
+        component_id='storage', port_id='storage.out', event_id='test/shell/G3',
+        event_kind='accidental_leak', upstream_service='LH2',
+        upstream_service_provenance='synthetic provider inventory history',
+        enthalpy_convention='static_exit_enthalpy',
+        property_basis={'fluid': 'Hydrogen', 'energy_reference': 'CoolProp-HEOS:Hydrogen:native'},
+        provider_source_digest='a' * 64, provider_result_digest='b' * 64,
+        provider_boundary_reference='synthetic provider inventory boundary', input_origin='synthetic',
+        position_enu_m=(0.0, 0.0, 1.0), direction_enu=(1.0, 0.0, 0.0),
+        ambient_pressure_pa_abs=101325.0, ambient_temperature_k=288.15,
+        duration_s=0.2, available_mass_kg=1.0, cumulative_mass_out_kg=0.2,
+        cumulative_static_enthalpy_out_j=200.0,
+        steps=(ResolvedGasStep(
+            time_s=0.0, mass_flow_kg_s=1.0, pressure_pa_abs=101325.0,
+            specific_enthalpy_j_kg=1000.0, temperature_k=288.15, density_kg_m3=1.0,
+            effective_area_m2=1.0, velocity_m_s=1.0,
+            area_provenance='synthetic provider inventory area', velocity_origin='provider_resolved',
+        ),),
+        termination_provenance='synthetic provider inventory depletion',
+        failure_opening_diameter_m=0.01,
+    )
+
+
 class Backend:
     def __init__(self,facility):
         self.facility=facility;self.requests=[];self.fault=None
@@ -345,6 +369,30 @@ def test_frequency_weather_barrier_ignition_each_weighted_once():
     assert by_component['isolation']['excluded_reason']
     assert all('scenario_families' in atom for atom in r['risk_atoms'])
     assert r['coverage']['scenario_family_event_counts']['vessel_hole'] == 1
+
+
+def test_port_scoped_frequency_identity_survives_cases_and_risk_atoms():
+    _, data = inputs()
+    data['frequency_plan']['assets'][0]['port_ids'] = ['storage.out']
+    release = _scoped_provider_release().model_dump(mode='json')
+    for branch in data['event_routes'][-1]['branches']:
+        request = branch['request']
+        request.update(
+            source_input=None, resolved_release=release, resolved_release_set=None,
+            resolved_liquid_release=None, source_operator='equipment_inventory_depletion',
+            available_mass_kg=1.0, source_position_enu_m=[0.0, 0.0, 1.0],
+            release_termination={
+                'basis': 'inventory_depletion', 'time_s': 0.2,
+                'provenance': 'synthetic provider inventory depletion',
+            },
+        )
+    result, _ = run(data)
+    scoped_cases = [row for row in result['cases'] if row['event_id'] == 'test/shell/G3']
+    scoped_atoms = [row for row in result['risk_atoms'] if row['event_id'] == 'test/shell/G3']
+    assert scoped_cases
+    assert scoped_atoms
+    assert all(row['frequency_port_ids'] == ['storage.out'] for row in scoped_cases)
+    assert all(row['frequency_port_ids'] == ['storage.out'] for row in scoped_atoms)
 
 
 def test_societal_outcomes_remain_separate_before_fn_accumulation():

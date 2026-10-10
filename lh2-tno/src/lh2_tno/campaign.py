@@ -493,6 +493,7 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
         for b in routes[e.id].branches:
             for c in campaign.annual_conditions:
                 row = {'event_id': e.id, 'asset_id': e.asset_id, 'release_branch_id': b.id,
+                    'frequency_port_ids': None if e.port_ids is None else list(e.port_ids),
                     'annual_condition_id': c.id, 'initiating_frequency_per_year': e.annual_frequency_per_year,
                     'release_branch_probability': b.probability_given_event,
                     'annual_condition_probability': c.annual_probability,
@@ -579,6 +580,7 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     if weight == 0:
                         continue
                     atoms.append({'event_id': e.id, 'asset_id': e.asset_id,
+                        'frequency_port_ids': None if e.port_ids is None else list(e.port_ids),
                         'annual_condition_id': c.id, 'release_branch_id': b.id, 'ignition_branch': key,
                         'initiating_frequency_per_year': e.annual_frequency_per_year,
                         'conditional_weight': weight,
