@@ -149,7 +149,7 @@
   "equipment_scenario_coverage_accident_port_crosswalk": true,
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
-  "frequency_port_binding_latest_remote_commit": "9d8733ec58a4f5689c5da884273c429bcab521d3",
+  "frequency_port_binding_latest_remote_commit": "3f8e762465131c8b48ba43283421f226f489ff3a",
   "latest_local_full_test_run": "874 passed, 1 skipped",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
@@ -2734,8 +2734,8 @@
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
   "latest_local_targeted_test_run": "88 passed",
-  "latest_remote_verified_commit": "6eb8901b7c00c5ea41ea15c316c37cc0f23d2f2e",
-  "latest_remote_ci_run": "run 639 completed successfully",
+  "latest_remote_verified_commit": "3f8e762465131c8b48ba43283421f226f489ff3a",
+  "latest_remote_ci_run": "run 640 completed successfully",
   "facility_assessment_qra_port_gate_exposed": true,
   "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons"
 }
