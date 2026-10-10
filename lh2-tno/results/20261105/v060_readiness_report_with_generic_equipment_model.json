@@ -174,6 +174,27 @@
       "physical_validation_claim": false,
       "diagnostic_only": true
     },
+    "frequency_port_binding": {
+      "schema": "prism.frequency_port_binding.v1",
+      "status": "PORT_BINDING_WITHHELD",
+      "port_scoped_event_count": null,
+      "port_unbound_event_count": null,
+      "all_events_port_scoped": null,
+      "case_port_binding_mismatch_count": null,
+      "risk_atom_port_binding_mismatch_count": null,
+      "mismatch_count": null,
+      "assessment_nested_mirror_match": null,
+      "source": "facility_evidence_request",
+      "diagnostic_only": true,
+      "frequency_inference_allowed": false,
+      "facility_qra_allowed": false,
+      "port_binding_facility_qra_allowed": false,
+      "reviewed_frequency_port_case_count": 0,
+      "provider_packet_only_case_count": 44,
+      "port_binding_mismatch_case_count": 0,
+      "port_binding_withheld_case_count": 0,
+      "reviewed_frequency_ports_complete": false
+    },
     "risk_atom_chain_closure": {
       "status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
       "case_count": 44,
@@ -291,6 +312,14 @@
       "frequency_event_count": 24,
       "valid_frequency_event_count": 24,
       "uncomputed_family_count": 1,
+      "frequency_port_binding": {
+        "schema": "prism.frequency_port_binding.v1",
+        "reviewed_port_bound_event_count": 24,
+        "port_unbound_event_count": 0,
+        "port_binding_withheld_event_count": 0,
+        "all_supplied_port_scopes_valid": true,
+        "strict_facility_qra_gate": false
+      },
       "provider_release_required": true,
       "frequency_inference_allowed": false,
       "facility_qra_allowed": false,
@@ -650,9 +679,9 @@
     "sensor_frequency_learning": false
   },
   "timing": {
-    "cache_p95_ms": 61.27649999689311,
+    "cache_p95_ms": 24.54430004581809,
     "cache_meets_one_hz_all_samples": true,
-    "fresh_physics_elapsed_ms": 2711.2096999771893,
+    "fresh_physics_elapsed_ms": 2614.507299964316,
     "fresh_physics_meets_one_hz": false,
     "campaign_case_p95_ms": 39591.673405066846,
     "campaign_case_p99_ms": 79233.10563297477,
@@ -725,12 +754,12 @@
     "runtime_profile": {
       "recommended_mode": "cached_diagnostic_1hz",
       "cache_mode": {
-        "p95_ms": 61.27649999689311,
+        "p95_ms": 24.54430004581809,
         "one_hz_ready": true,
         "purpose": "reuse a validated consequence result for diagnostic monitoring"
       },
       "fresh_physics_mode": {
-        "elapsed_ms": 2711.2096999771893,
+        "elapsed_ms": 2614.507299964316,
         "one_hz_ready": false,
         "purpose": "recalculate SLABx-LH2 consequence from a new equipment state"
       },
@@ -952,11 +981,11 @@
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
-      "sha256": "00fa3d3623088545c414850c373939bb6d686bbc7c88ea5c06f48a786fa3a8fc"
+      "sha256": "cca60462e02e555e461a564941b13976ca636729cee27f7df50fdfae415b7b2a"
     },
     "facility_evidence_request": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",
-      "sha256": "370ec81d70b3419a9da2a2173fc899fd164d4b3b52ebfe420f4a447f9683d684"
+      "sha256": "e05ef4df546f64c89ba1146e57229c6a7a489061ddd336ca09b9e11c946fc992"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
@@ -996,11 +1025,11 @@
     },
     "generic_equipment_scenario_coverage_audit": {
       "path": "results/20261105/generic_lh2_full_scope_equipment_scenario_coverage.json",
-      "sha256": "1d6de329bb0560560169e1366f1e6ff3ed428891440b51e1fa6d01050d4f747e"
+      "sha256": "7e69f1a5630a1ca0ce4ce2253dd024af4122dd7ccdd096d9b9bf7e09daf259a5"
     },
     "generic_equipment_frequency_binding_audit": {
       "path": "results/20261105/generic_lh2_full_scope_equipment_frequency_binding.json",
-      "sha256": "ce7e748ed9a2aacaf0f4d51b90620226ca15d96480603f3cfb2b41ebb91e01d6"
+      "sha256": "87d4a85cd4c303bc0bf98df36c9f28100397952055fd7b774e011288c616e478"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",

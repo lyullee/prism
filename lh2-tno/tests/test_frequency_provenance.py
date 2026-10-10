@@ -29,6 +29,17 @@ def test_report_traces_catalogue_hashes_and_generated_events():
     assert all(event["catalogue_digest"] == report["catalogue"]["digest"] for event in report["generated_events"])
     assert report["policy"]["field_frequency_collection_used"] is False
     assert report["policy"]["sensor_frequency_learning_used"] is False
+    assert all(event["port_ids"] for event in report["generated_events"])
+    assert all(
+        event["port_ids"] == ["reliquefier-accident-out-1", "reliquefier-accident-out-2"]
+        for event in report["generated_events"]
+        if event["asset_id"] == "reliquefier" and event["loc"] in {"G4", "G5"}
+    )
+    assert all(
+        event["port_ids"] == ["reliquefier-accident-out-1"]
+        for event in report["generated_events"]
+        if event["asset_id"] == "reliquefier" and event["loc"] == "G6"
+    )
 
 
 def test_report_fails_when_profile_source_hash_is_not_registered():
@@ -38,4 +49,3 @@ def test_report_fails_when_profile_source_hash_is_not_registered():
     report = build_frequency_provenance_report(manifest, plan, catalogue_data=tampered)
     assert report["status"] == "FAILED_PROVENANCE_INTEGRITY"
     assert any("source_sha256" in reason for reason in report["blocking_reasons"])
-

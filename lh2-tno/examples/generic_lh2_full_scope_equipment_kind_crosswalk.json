@@ -9,12 +9,12 @@
     "synthetic_diagnostic_only": true
   },
   "rows": [
-    {"asset_id": "storage-shell", "component_kind": "storage_tank", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:storage-tank-01:tank-accident-out"},
-    {"asset_id": "transfer-line", "component_kind": "pipe", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:liquid-transfer-line-01:line-accident-out"},
-    {"asset_id": "transfer-valve", "component_kind": "valve", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:transfer-valve-01:valve-accident-out"},
-    {"asset_id": "pressure-relief-vent", "component_kind": "vent_stack", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:pressure-relief-vent-01:vent-accident-out"},
-    {"asset_id": "transfer-pump", "component_kind": "pump", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:liquid-transfer-pump-01:pump-accident-out"},
-    {"asset_id": "ambient-vaporizer", "component_kind": "vaporizer", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:ambient-vaporizer-01:vaporizer-accident-out"},
-    {"asset_id": "reliquefier", "component_kind": "reliquefier", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:reliquefier-01:reliquefier-accident-out-1;reliquefier-accident-out-2"}
+    {"asset_id": "storage-shell", "component_kind": "storage_tank", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:storage-tank-01:tank-accident-out", "accident_port_ids": ["tank-accident-out"]},
+    {"asset_id": "transfer-line", "component_kind": "pipe", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:liquid-transfer-line-01:line-accident-out", "accident_port_ids": ["line-accident-out"]},
+    {"asset_id": "transfer-valve", "component_kind": "valve", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:transfer-valve-01:valve-accident-out", "accident_port_ids": ["valve-accident-out"]},
+    {"asset_id": "pressure-relief-vent", "component_kind": "vent_stack", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:pressure-relief-vent-01:vent-accident-out", "accident_port_ids": ["vent-accident-out"]},
+    {"asset_id": "transfer-pump", "component_kind": "pump", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:liquid-transfer-pump-01:pump-accident-out", "accident_port_ids": ["pump-accident-out"]},
+    {"asset_id": "ambient-vaporizer", "component_kind": "vaporizer", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:ambient-vaporizer-01:vaporizer-accident-out", "accident_port_ids": ["vaporizer-accident-out"]},
+    {"asset_id": "reliquefier", "component_kind": "reliquefier", "identity_status": "resolved", "identity_basis": "generic_lh2_full_scope_manifest.json:reliquefier-01:reliquefier-accident-out-1;reliquefier-accident-out-2", "accident_port_ids": ["reliquefier-accident-out-1", "reliquefier-accident-out-2"]}
   ]
 }

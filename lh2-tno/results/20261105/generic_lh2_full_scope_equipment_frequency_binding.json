@@ -13,6 +13,14 @@
   "uncomputed_families": [
     "vertical_handoff"
   ],
+  "frequency_port_binding": {
+    "schema_version": "prism.frequency_port_binding.v1",
+    "reviewed_port_bound_event_count": 24,
+    "port_unbound_event_count": 0,
+    "port_binding_withheld_event_count": 0,
+    "all_supplied_port_scopes_valid": true,
+    "strict_facility_qra_gate": false
+  },
   "events": [
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -22,6 +30,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.00065,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -47,6 +59,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.00014,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -72,6 +88,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 2.8e-05,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -97,6 +117,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 5.7e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -122,6 +146,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 1.2e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -147,6 +175,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 3.4e-05,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -161,6 +193,7 @@
         "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
         "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ]
     },
@@ -172,6 +205,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 1.6e-05,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -186,6 +223,7 @@
         "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
         "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ]
     },
@@ -197,6 +235,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 8e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -211,6 +253,7 @@
         "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
         "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ]
     },
@@ -222,6 +265,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 3.9e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -236,6 +283,7 @@
         "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
         "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ]
     },
@@ -247,6 +295,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 1.9e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -261,6 +313,7 @@
         "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
         "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
         "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+        "This event is allocated to one reviewed physical location with an explicit location_weight; the remaining exposure needs separate physical scope rows.",
         "Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals."
       ]
     },
@@ -272,6 +325,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.00012,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -297,6 +354,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 5.2e-05,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -322,6 +383,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 2.2e-05,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -347,6 +412,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 9.3e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -372,6 +441,10 @@
       "basis": "LH2_LITERATURE",
       "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
       "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 3.9e-06,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -397,6 +470,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.12/3.13, printed pp.3.10-3.11; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "vent-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 2e-05,
       "release_mode": "maximum_relief_discharge",
       "expected_scenario_families": [
@@ -419,6 +496,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.0001,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -441,6 +522,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.0005,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -463,6 +548,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 5e-05,
       "release_mode": "instantaneous_inventory",
       "expected_scenario_families": [
@@ -485,6 +574,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 5e-05,
       "release_mode": "inventory_over_600s",
       "expected_scenario_families": [
@@ -507,6 +600,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.001,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -529,6 +626,11 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 1e-05,
       "release_mode": "two_sided_rupture",
       "expected_scenario_families": [
@@ -550,6 +652,11 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.001,
       "release_mode": "two_sided_rupture",
       "expected_scenario_families": [
@@ -571,6 +678,10 @@
       "basis": "TNO_PURPLE_LOC",
       "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
       "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "port_binding_status": "BOUND_REVIEWED_PORT",
       "annual_frequency_per_year": 0.01,
       "release_mode": "hole",
       "expected_scenario_families": [
@@ -825,6 +936,7 @@
     "unresolved_assets_do_not_receive_zero_frequency": true,
     "unmapped_families_remain_uncomputed": true,
     "frequency_does_not_create_provider_release": true,
+    "reviewed_port_ids_are_never_inferred": true,
     "provider_release_required_before_consequence": true,
     "facility_qra_requires_complete_family_and_packet_coverage": true
   }

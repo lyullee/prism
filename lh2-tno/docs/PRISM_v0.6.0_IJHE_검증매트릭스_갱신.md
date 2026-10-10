@@ -194,7 +194,7 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 즉 외부 설비 자료가 readiness 원장에 연결됐다는 것과 시설 QRA가 완료됐다는 것은
 서로 다른 상태다.
 
-일반 시설 모듈 자체의 계약도 같은 readiness 원장에 별도로 연결했다. [`v060_readiness_report_with_generic_equipment_model.json`](../results/20261105/v060_readiness_report_with_generic_equipment_model.json)은 합성 facility-neutral manifest의 7개 설비와 12개 사고 family를 기록하고, 문헌 빈도 24개 중 24개를 유효하게 설비에 바인딩한다. `vertical_handoff`는 provider handoff 자료가 없어 미계산이며, 사고 방출·빈도 추론·시설 QRA 승격은 계속 false다. 이 항목은 액화수소검사지원센터 자료의 identity 공백과 분리된 일반 모듈 검증이다.
+일반 시설 모듈 자체의 계약도 같은 readiness 원장에 별도로 연결했다. [`v060_readiness_report_with_generic_equipment_model.json`](../results/20261105/v060_readiness_report_with_generic_equipment_model.json)은 합성 facility-neutral manifest의 7개 설비와 12개 사고 family를 기록하고, 문헌 빈도 24개 중 24개를 유효하게 설비에 바인딩한다. 이 24개 사건은 검토된 사고 포트에도 24/24로 연결되고 포트 미지정·불일치는 0건이다. `vertical_handoff`는 provider handoff 자료가 없어 미계산이며, 사고 방출·빈도 추론·시설 QRA 승격은 계속 false다. 이 항목은 액화수소검사지원센터 자료의 identity 공백과 분리된 일반 모듈 검증이다.
 
 같은 원장의 `timing.runtime_profile`은 디지털 트윈에서 사용할 계산 경로를 세 가지로 구분한다. 최신 benchmark에서 저장된 피해 결과를 재사용하는 `cached_diagnostic_1hz`는 p95 24.54 ms로 1 Hz 진단 모니터링에 사용할 수 있다. 새 설비 상태로 SLABx-LH2를 다시 계산하는 fresh physics는 2614.51 ms로 1 Hz 조건을 만족하지 않는다. persistent worker의 변경입력 fresh physics도 steady p50/p95/p99가 1869/2104/2104 ms로 1 Hz를 만족하지 않는다. 전체 44-case campaign은 온라인 루프가 아니라 오프라인 평가와 빈도 민감도 분석에 사용한다. 이 프로파일은 처리시간을 기록할 뿐이며 시설 QRA의 실시간 승격을 주장하지 않는다.
 

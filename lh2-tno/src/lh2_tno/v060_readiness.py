@@ -561,6 +561,11 @@ def build_v060_readiness_report(
             generic_equipment_frequency_binding_audit,
             "generic_equipment_frequency_binding_audit",
         )
+    generic_frequency_port_binding = (
+        generic_frequency_chain.get("frequency_port_binding")
+        if isinstance(generic_frequency_chain, Mapping)
+        else None
+    )
     isolation_extension = None
     if isolation_union_extension_verification is not None:
         isolation_extension = _mapping(
@@ -926,6 +931,28 @@ def build_v060_readiness_report(
                     ),
                     "uncomputed_family_count": generic_frequency_chain.get(
                         "uncomputed_family_count"
+                    ),
+                    "frequency_port_binding": (
+                        {
+                            "schema": generic_frequency_port_binding.get("schema_version"),
+                            "reviewed_port_bound_event_count": generic_frequency_port_binding.get(
+                                "reviewed_port_bound_event_count"
+                            ),
+                            "port_unbound_event_count": generic_frequency_port_binding.get(
+                                "port_unbound_event_count"
+                            ),
+                            "port_binding_withheld_event_count": generic_frequency_port_binding.get(
+                                "port_binding_withheld_event_count"
+                            ),
+                            "all_supplied_port_scopes_valid": generic_frequency_port_binding.get(
+                                "all_supplied_port_scopes_valid"
+                            ),
+                            "strict_facility_qra_gate": generic_frequency_port_binding.get(
+                                "strict_facility_qra_gate"
+                            ),
+                        }
+                        if isinstance(generic_frequency_port_binding, Mapping)
+                        else None
                     ),
                     "provider_release_required": generic_frequency_chain.get(
                         "promotion_gates", {}
@@ -1774,6 +1801,32 @@ def validate_v060_readiness_report(
                         f"chain.generic_equipment_frequency_binding.{field}",
                         errors,
                     )
+            port_binding = generic_frequency_binding.get("frequency_port_binding")
+            if port_binding is not None:
+                if not isinstance(port_binding, Mapping):
+                    errors.append(
+                        "chain.generic_equipment_frequency_binding.frequency_port_binding must be an object"
+                    )
+                else:
+                    if port_binding.get("schema") != "prism.frequency_port_binding.v1":
+                        errors.append(
+                            "chain.generic_equipment_frequency_binding.frequency_port_binding.schema is unsupported"
+                        )
+                    for field in (
+                        "reviewed_port_bound_event_count",
+                        "port_unbound_event_count",
+                        "port_binding_withheld_event_count",
+                    ):
+                        if port_binding.get(field) is not None:
+                            _nonnegative_int(
+                                port_binding.get(field),
+                                f"chain.generic_equipment_frequency_binding.frequency_port_binding.{field}",
+                                errors,
+                            )
+                    if port_binding.get("strict_facility_qra_gate") is True:
+                        errors.append(
+                            "chain.generic_equipment_frequency_binding.frequency_port_binding.strict_facility_qra_gate cannot be true"
+                        )
             if generic_frequency_binding.get("diagnostic_only") is not True:
                 errors.append(
                     "generic equipment frequency binding must remain diagnostic_only"

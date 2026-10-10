@@ -15,6 +15,9 @@
       "component_kind": "storage_tank",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "tank-accident-out"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -32,6 +35,9 @@
       "component_kind": "pipe",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "line-accident-out"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -51,6 +57,9 @@
       "component_kind": "valve",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "valve-accident-out"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -70,6 +79,9 @@
       "component_kind": "vent_stack",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "vent-accident-out"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -85,6 +97,9 @@
       "component_kind": "pump",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "pump-accident-out"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -102,6 +117,9 @@
       "component_kind": "vaporizer",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "vaporizer-accident-out"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -119,6 +137,10 @@
       "component_kind": "reliquefier",
       "identity_status": "resolved",
       "ready_for_state_model_input": true,
+      "reviewed_accident_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
       "status": "SCENARIO_COVERAGE_DECLARED_RELEASE_UNVERIFIED",
       "blocking_reasons": [
         "provider accident release packet is not supplied"
@@ -467,6 +489,7 @@
     "candidate_identity_is_not_resolved_identity": true,
     "scenario_catalog_does_not_create_release": true,
     "scenario_mapping_is_not_frequency": true,
+    "accident_port_ids_are_never_inferred": true,
     "no_automatic_facility_qra_promotion": true
   },
   "source_equipment_audit_status": "SYNTHETIC_GENERIC_MANIFEST_DECLARED",

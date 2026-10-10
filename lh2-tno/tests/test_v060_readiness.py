@@ -602,6 +602,14 @@ def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
             "frequency_event_count": 24,
             "valid_frequency_event_count": 24,
             "uncomputed_family_count": 1,
+            "frequency_port_binding": {
+                "schema_version": "prism.frequency_port_binding.v1",
+                "reviewed_port_bound_event_count": 24,
+                "port_unbound_event_count": 0,
+                "port_binding_withheld_event_count": 0,
+                "all_supplied_port_scopes_valid": True,
+                "strict_facility_qra_gate": False,
+            },
             "promotion_gates": {
                 "provider_release_required": True,
                 "frequency_inference_allowed": False,
@@ -611,4 +619,6 @@ def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
     )
     assert report["chain"]["generic_equipment_scenario_coverage"]["resolved_asset_count"] == 7
     assert report["chain"]["generic_equipment_frequency_binding"]["valid_frequency_event_count"] == 24
+    assert report["chain"]["generic_equipment_frequency_binding"]["frequency_port_binding"]["reviewed_port_bound_event_count"] == 24
+    assert report["chain"]["generic_equipment_frequency_binding"]["frequency_port_binding"]["port_unbound_event_count"] == 0
     assert validate_v060_readiness_report(report)["status"] == "VALID"
