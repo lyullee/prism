@@ -1,0 +1,19 @@
+{
+  "schema_version": "prism.ci_local_reproduction.v1",
+  "status": "PASS_LOCAL_REPRODUCTION",
+  "commit": "333515027d00d4f5f19abc43a707b05b6d44c16f",
+  "workflow": "/.github/workflows/tests.yml",
+  "python_requirement": ">=3.12",
+  "portable_test_status": "891 passed, 1 skipped",
+  "wheel_filename": "prism_risk-0.6.2-py3-none-any.whl",
+  "wheel_sha256": "8b3edd3bb82f22c85dfbfc3a4c73c88cffd3f30a89d01a61f755cd2f7b1c6621",
+  "wheel_contract_checks": {
+    "frequency_catalogue_shipped": true,
+    "tno_host_shipped": true,
+    "prism_entrypoint": "prism = tno_host:main",
+    "lh2_entrypoint": "lh2-tno = lh2_tno.cli:main"
+  },
+  "github_actions_claim": false,
+  "facility_qra_claim": false,
+  "note": "Local reproduction of the repository workflow; it does not assert that a private GitHub Actions run completed."
+}
