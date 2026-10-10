@@ -986,9 +986,20 @@ def merge_facility_campaign_results(
         "mismatch_count": len(port_binding_mismatches),
         "mismatch_examples": port_binding_mismatches[:10],
         "status": "ALIGNED" if not port_binding_mismatches else "PORT_BINDING_MISMATCH",
+        # ``ALIGNED`` means only that the rows which declared a port agree
+        # with the event row.  It must not be interpreted as proof that every
+        # event has a reviewed accident port.  Keep an explicit promotion
+        # flag so a provider outlet or an unscoped legacy event cannot open
+        # the facility-QRA gate by omission.
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": (
+            not port_binding_mismatches
+            and all(value is not None for value in event_port_ids.values())
+        ),
         "policy": (
             "Facility merge preserves reviewed event port_ids in cases and risk_atoms; "
-            "missing or mismatched rows are withheld and no accident port is inferred."
+            "missing or mismatched rows are withheld and no accident port is inferred; "
+            "facility QRA also requires every event to have an explicit reviewed port."
         ),
     }
     if port_binding_mismatches:
@@ -1328,8 +1339,19 @@ def merge_facility_campaign_results(
         and provider_packet_case_count > 0
         and provider_packet_case_count == qualified_provider_packet_case_count
     )
+    frequency_port_qra_allowed = bool(
+        frequency_port_binding.get("facility_qra_allowed") is True
+    )
+    qualified_facility_qra_blocking_reasons: list[str] = []
+    if not frequency_port_qra_allowed:
+        qualified_facility_qra_blocking_reasons.append(
+            "facility frequency port binding is incomplete; reviewed accident ports are required for every event"
+        )
     qualified_facility_qra_available = (
-        total_available and provider_packet_promoted and source_physical_validation
+        total_available
+        and provider_packet_promoted
+        and source_physical_validation
+        and frequency_port_qra_allowed
     )
     unique_blocking = list(dict.fromkeys(blocking_reasons))
     timing = {
@@ -1461,6 +1483,7 @@ def merge_facility_campaign_results(
         "provider_packet_promoted": provider_packet_promoted,
         "qualified_facility_qra_available": qualified_facility_qra_available,
         "complete_facility_qra_claim": qualified_facility_qra_available,
+        "qualified_facility_qra_blocking_reasons": qualified_facility_qra_blocking_reasons,
         "provider_qualification_blocking_reasons": list(dict.fromkeys(provider_qualification_blocking_reasons)),
         "synthetic_release_horizon_present": source_synthetic,
         "facility_total_risk_available": total_available,

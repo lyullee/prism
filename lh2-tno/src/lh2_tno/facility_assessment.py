@@ -280,6 +280,9 @@ def build_facility_assessment(
         "provider_packet_promoted": ledger["provider_packet_promoted"],
         "qualified_facility_qra_available": qualified_facility_qra_available,
         "complete_facility_qra_claim": qualified_facility_qra_available,
+        "qualified_facility_qra_blocking_reasons": ledger.get(
+            "qualified_facility_qra_blocking_reasons", []
+        ),
         "provider_qualification_blocking_reasons": ledger[
             "provider_qualification_blocking_reasons"
         ],

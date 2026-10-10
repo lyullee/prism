@@ -605,6 +605,7 @@ def test_completion_audit_exposes_facility_frequency_port_binding_diagnostic():
         "port_scoped_event_count": 1,
         "port_unbound_event_count": 0,
         "mismatch_count": 0,
+        "frequency_inference_allowed": False,
     }
     assessment = _facility_assessment(
         frequency_port_binding=port_binding,
@@ -621,6 +622,31 @@ def test_completion_audit_exposes_facility_frequency_port_binding_diagnostic():
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
     assert check["blocking_reason"] is None
+
+
+def test_completion_audit_blocks_unbound_facility_frequency_ports():
+    port_binding = {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "status": "ALIGNED",
+        "port_scoped_event_count": 0,
+        "port_unbound_event_count": 1,
+        "mismatch_count": 0,
+        "frequency_inference_allowed": False,
+    }
+    assessment = _facility_assessment(
+        frequency_port_binding=port_binding,
+        facility_risk_ledger={"frequency_port_binding": port_binding},
+    )
+    report = build_ijhe_completion_audit(
+        _status(False), _matrix(False), _campaign_result(False),
+        facility_assessment=assessment,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_facility_frequency_port_binding"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
 
 
 def test_completion_audit_accepts_restricted_component_evidence_without_promoting_full_chain():

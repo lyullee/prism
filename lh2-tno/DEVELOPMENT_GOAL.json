@@ -150,7 +150,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "9d8733ec58a4f5689c5da884273c429bcab521d3",
-  "latest_local_full_test_run": "873 passed, 1 skipped",
+  "latest_local_full_test_run": "874 passed, 1 skipped",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
   "equipment_campaign_compiler_record": "docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md",
@@ -2723,5 +2723,19 @@
   "facility_evidence_request_frequency_port_summary_implemented": true,
   "facility_evidence_request_frequency_port_summary_field": "frequency_port_binding",
   "facility_evidence_request_frequency_port_summary_observed_current": "Current 44-case saved assessment: reviewed_frequency_port_case_count=0; provider_packet_only_case_count=44; status=PORT_BINDING_WITHHELD; no frequency inference or port substitution.",
-  "facility_evidence_request_frequency_port_summary_policy": "Provider outlet identity is reported separately from reviewed literature-frequency ports; provider-only coverage never opens frequency binding or facility QRA."
+  "facility_evidence_request_frequency_port_summary_policy": "Provider outlet identity is reported separately from reviewed literature-frequency ports; provider-only coverage never opens frequency binding or facility QRA.",
+  "facility_ledger_frequency_port_promotion_gate_implemented": true,
+  "facility_ledger_frequency_port_promotion_gate_fields": [
+    "frequency_port_binding.frequency_inference_allowed",
+    "frequency_port_binding.facility_qra_allowed",
+    "qualified_facility_qra_blocking_reasons"
+  ],
+  "facility_ledger_frequency_port_promotion_gate_policy": "ALIGNED means declared rows agree; qualified facility QRA also requires every event to have an explicit reviewed accident port. Provider outlets never create a reviewed frequency port.",
+  "ijhe_completion_audit_requires_explicit_frequency_ports": true,
+  "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
+  "latest_local_targeted_test_run": "88 passed",
+  "latest_remote_verified_commit": "6eb8901b7c00c5ea41ea15c316c37cc0f23d2f2e",
+  "latest_remote_ci_run": "run 639 completed successfully",
+  "facility_assessment_qra_port_gate_exposed": true,
+  "facility_assessment_qra_port_gate_field": "qualified_facility_qra_blocking_reasons"
 }

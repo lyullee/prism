@@ -51,6 +51,8 @@ PRISM은 이벤트를 만들 때 다음을 확인한다.
 
 여러 설비 캠페인을 합치는 `merge_facility_campaign_results()`도 같은 비교를 다시 한다. 최종 ledger의 `frequency_port_binding`에 포트 지정 사건 수, 미지정 사건 수, case/risk atom 불일치 수와 상태가 기록된다. 사건의 포트와 최종 행의 포트가 다르면 시설 범위는 `PORT_BINDING_MISMATCH`로 보류된다.
 
+`status=ALIGNED`는 포트를 선언한 행끼리 서로 같은지를 뜻할 뿐이다. 포트가 하나도 없는 하위 호환 사건이 섞이면 `port_unbound_event_count`가 남고 `facility_qra_allowed=false`가 된다. 즉 provider 출구가 나중에 도착해도 검토된 문헌 빈도 포트가 없으면 시설 QRA 승격은 열리지 않는다. `frequency_inference_allowed`는 항상 `false`다.
+
 `build_facility_assessment()`도 이 요약을 최상위 `frequency_port_binding`으로 복사한다. 따라서 보고서 소비자는 중첩 ledger를 열지 않고도 포트 결합 상태를 확인할 수 있다.
 
 IJHE 완료 감사에 `diagnostic_facility_frequency_port_binding` 검사도 기록된다. 이 검사는 포트 추적성만 확인하는 진단 검사이며, 통과해도 qualified provider·독립 물리검증·시설 전체 QRA 게이트를 열지 않는다.
@@ -80,12 +82,16 @@ provider 방출 작업목록을 만들 때 매니페스트에서 지정 포트�
 - `frequency_port_binding.port_scoped_event_count`: reviewed accident port가 지정된 이벤트 수
 - `frequency_port_binding.port_unbound_event_count`: component-level로만 남은 이벤트 수
 - `frequency_port_binding.all_events_port_scoped`: 모든 생성 이벤트에 포트가 있는지
+- `frequency_port_binding.facility_qra_allowed`: 모든 이벤트가 검토된 포트로 결합되고 행 간 불일치가 없을 때만 `true`
+- `frequency_port_binding.frequency_inference_allowed`: 빈도 추론 금지 플래그이며 항상 `false`
 - `coverage.by_component[*].reviewed_accident_port_ids`: 설비별 검토된 사고 포트 목록
 - `coverage.by_component[*].generated_port_unbound_event_count`: 설비별 포트 미지정 이벤트 수
 
 외부 설비 모델 감사에서도 crosswalk 행에 `accident_port_ids`를 기록할 수 있다. 이 값이 있는 문헌 이벤트는 해당 목록에 포함되는지 다시 확인하고, 목록이 없거나 포트가 다르면 `PORT_BINDING_WITHHELD`로 남는다. 외부 모델의 정상 상태나 후보 포트 목록만으로 사고 포트를 추정하지 않는다.
 
 `strict_facility_qra_gate`는 현재 `false`로 유지한다. 즉, 이 기능은 잘못된 포트 결합을 막고 심사 가능한 누락을 드러내는 연결부이며, 독립 물리 검증·provider 자격 증명·시설 전체 범위 충족을 대신하지 않는다.
+
+시설 ledger와 assessment에는 `qualified_facility_qra_blocking_reasons`도 남긴다. 문헌 빈도 포트가 하나라도 빠지면 조건부 진단 IR/F-N은 보존하지만 qualified facility QRA는 `false`로 유지한다.
 
 배포된 `examples/generic_lh2_full_scope_frequency_plan.json`은 이 계약을 사용해 24개 문헌 이벤트를 모두 포트 지정 상태로 생성한다. 열교환기 양단 파열 LOC는 `port_ids_by_loc`에 두 출구를, 단일 구멍 LOC는 한 출구를 지정한다. 이 예제의 `frequency_port_binding`은 `port_scoped_event_count=24`, `port_unbound_event_count=0`이어야 한다.
 

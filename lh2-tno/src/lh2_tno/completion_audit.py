@@ -1462,6 +1462,8 @@ def build_ijhe_completion_audit(
             and port_binding.get("schema_version") == "prism.frequency_port_binding.v1"
             and port_binding.get("status") == "ALIGNED"
             and port_binding.get("mismatch_count") == 0
+            and port_binding.get("port_unbound_event_count") == 0
+            and port_binding.get("frequency_inference_allowed") is False
             and (
                 nested_port_binding is None
                 or nested_port_binding == port_binding

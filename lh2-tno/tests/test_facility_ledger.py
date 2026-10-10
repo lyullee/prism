@@ -137,6 +137,8 @@ def test_facility_ledger_sums_disjoint_equipment_atoms_once():
     assert result["release_termination_inventory_ledger"]["summary"]["case_count"] == 2
     assert result["frequency_port_binding"]["status"] == "ALIGNED"
     assert result["frequency_port_binding"]["mismatch_count"] == 0
+    assert result["frequency_port_binding"]["frequency_inference_allowed"] is False
+    assert result["frequency_port_binding"]["facility_qra_allowed"] is False
     assert result["scenario_branch_accounting"]["status"] == "EXPLICIT_BRANCH_ACCOUNTING"
     assert result["scenario_branch_accounting"]["cross_product_count"] == 1
     assert result["scenario_branch_accounting"]["release_branches"]["release-1"][
@@ -172,6 +174,7 @@ def test_facility_ledger_keeps_port_trace_and_withholds_mismatch():
     )
     assert aligned["frequency_port_binding"]["status"] == "ALIGNED"
     assert aligned["frequency_port_binding"]["port_scoped_event_count"] == 1
+    assert aligned["frequency_port_binding"]["facility_qra_allowed"] is True
     assert aligned["cases"][0]["frequency_port_ids"] == ["port-01-out"]
     assert aligned["risk_atoms"][0]["frequency_port_ids"] == ["port-01-out"]
 
@@ -360,6 +363,7 @@ def test_facility_ledger_promotes_qualified_qra_only_after_packet_and_validation
     result = _result(
         event_id="event-qualified", asset_id="asset-qualified",
         component_id="tank-qualified", frequency=1e-3,
+        port_ids=["tank-qualified-accident-out"],
     )
     result.update(
         physical_validation_claim=True,
@@ -762,6 +766,7 @@ def test_facility_assessment_reconciles_provider_qualification_coverage():
         asset_id="asset-qualified-coverage",
         component_id="tank-qualified-coverage",
         frequency=1e-3,
+        port_ids=["tank-qualified-coverage-accident-out"],
     )
     result.update(
         physical_validation_claim=True,
@@ -908,6 +913,7 @@ def test_facility_assessment_accepts_exact_full_case_packet_coverage():
         asset_id="asset-case-coverage-full",
         component_id="tank-case-coverage-full",
         frequency=1e-3,
+        port_ids=["tank-case-coverage-full-accident-out"],
     )
     result.update(
         physical_validation_claim=True,
