@@ -95,6 +95,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     native_binding_reconciliation = _with_record(args.native_binding_reconciliation)
     domain_recovery_audit = _with_record(args.domain_recovery_audit)
     observed_state_evidence = _with_record(args.observed_state_evidence)
+    scope_ledger_consistency = _with_record(args.scope_ledger_consistency)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -119,6 +120,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         native_scope_packet_catalog_verification=native_scope_packet_catalog,
         slabx_validation_evidence=slabx_validation,
         observed_state_evidence=observed_state_evidence,
+        scope_ledger_consistency=scope_ledger_consistency,
     )
 
     verification_path = output_dir / "verification.json"
@@ -222,6 +224,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 facility_case_packet_coverage.get("qualified_provider_case_count")
                 if facility_case_packet_coverage
                 else None
+            ),
+            "scope_ledger_consistency_status": (
+                scope_ledger_consistency.get("status")
+                if scope_ledger_consistency
+                else verification.get("scope_ledger_consistency_status")
+            ),
+            "scope_ledger_consistency_blocking_reason_count": (
+                len(scope_ledger_consistency.get("blocking_reasons", []))
+                if scope_ledger_consistency
+                else verification.get("scope_ledger_consistency_blocking_reason_count")
             ),
         }
     )
@@ -327,6 +339,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional restricted SLABx-LH2 consequence-component validation record.",
+    )
+    parser.add_argument(
+        "--scope-ledger-consistency",
+        type=Path,
+        default=None,
+        help="Optional current comparison of the merged scope matrix and facility ledger.",
     )
     args = parser.parse_args()
     try:

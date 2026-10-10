@@ -61,8 +61,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_cache_p95_ms"] < 1000.0
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
-    assert verification["ijhe_audit_check_count"] == 32
-    assert verification["ijhe_audit_pass_count"] == 27
+    assert verification["ijhe_audit_check_count"] == 33
+    assert verification["ijhe_audit_pass_count"] == 28
     assert verification["ijhe_audit_blocked_count"] == 5
     assert verification["ijhe_audit_blocked_check_ids"] == [
         "facility_release_boundary",
@@ -169,8 +169,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 32
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 27
+    assert len(audit["checks"]) == 33
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 28
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 5
     release_boundary_check = next(
         check for check in audit["checks"]
@@ -183,6 +183,13 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     )
     assert coverage_check["status"] == "BLOCKED"
     assert coverage_check["evidence"]["case_request_count"] == 44
+    consistency_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "scope_ledger_consistency"
+    )
+    assert consistency_check["status"] == "PASS"
+    assert consistency_check["evidence"]["scope_event_count"] == 34
+    assert consistency_check["evidence"]["ledger_event_count"] == 34
     assert release_boundary_check["evidence"]["schema"] == (
         "prism.facility_release_boundary_gate.v1"
     )

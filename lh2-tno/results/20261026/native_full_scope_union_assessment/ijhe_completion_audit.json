@@ -4044,6 +4044,22 @@
       "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
     },
     {
+      "name": "scope_ledger_consistency",
+      "status": "PASS",
+      "evidence": {
+        "status": "CONSISTENT_SCOPE_LEDGER",
+        "scope_event_count": 34,
+        "ledger_event_count": 34,
+        "scope_conditional_uncomputed_case_count": 0,
+        "ledger_conditional_uncomputed_case_count": 0,
+        "blocking_reason_count": 0,
+        "record": "results\\20261026\\native_full_scope_union_assessment\\scope_ledger_consistency_current.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": false,
+      "interpretation": "A merged facility result cannot be promoted while its declared scope matrix and facility ledger use different event or case accounting."
+    },
+    {
       "name": "facility_case_provider_packet_coverage",
       "status": "BLOCKED",
       "diagnostic_only": false,

@@ -127,8 +127,8 @@
     "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
   },
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_audit_check_count": 32,
-  "ijhe_audit_pass_count": 27,
+  "ijhe_audit_check_count": 33,
+  "ijhe_audit_pass_count": 28,
   "ijhe_audit_blocked_count": 5,
   "ijhe_audit_blocked_check_ids": [
     "facility_release_boundary",
