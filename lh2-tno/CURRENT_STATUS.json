@@ -3710,5 +3710,15 @@
   "external_provider_artifact_match_review_facility_qra_count": 0,
   "external_provider_artifact_match_review_promotion": false,
   "external_provider_artifact_match_review_policy": "External provider-like outputs are retained as diagnostic evidence only. Exact event/component/port plus source/result digest identity and a separate prism.provider_qualification_evidence.v1 sidecar are required before packet qualification; no frequency or facility QRA is inferred.",
-  "external_provider_artifact_match_review_test_status": "1 exact-identity/non-promotion test; full portable suite 886 passed, 1 skipped"
+  "external_provider_artifact_match_review_test_status": "1 exact-identity/non-promotion test; full portable suite 886 passed, 1 skipped",
+  "slabx_lh2_validation_evidence_current_record": "results/20261106/slabx_lh2_validation_audit_recomputed.json",
+  "slabx_lh2_validation_evidence_current_sha256": "01D9A0E7D823F51340C9784616947FC3190905E269DA06138F5C2192F028D58A",
+  "slabx_lh2_validation_evidence_current_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE; 5/5 checks pass from current external results/audit; component scope only",
+  "slabx_lh2_validation_evidence_source_recomputed": true,
+  "slabx_lh2_validation_evidence_source_hash_mismatch_count": 0,
+  "validation_evidence_matrix_current_slabx_record": "results/20261106/validation_evidence_matrix_current_slabx.json",
+  "validation_evidence_matrix_current_slabx_sha256": "E5606619E7324E2F00A35CFBD7F49C7ADC592E165DD55F8DB1554BDEECD9DD81",
+  "validation_evidence_matrix_current_slabx_status": "RESTRICTED_EVIDENCE_MATRIX; 9 domains; current SLABx audit re-bound; component evidence supported; full-chain physical validation and facility QRA withheld",
+  "validation_evidence_matrix_current_slabx_physical_validation_claim": false,
+  "validation_evidence_matrix_current_slabx_facility_qra_claim": false
 }
