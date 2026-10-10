@@ -1,0 +1,22 @@
+{
+  "schema_version": "prism.equipment_kind_crosswalk.v1",
+  "facility_neutral": true,
+  "description": "Copy this template for a specific outdoor LH2 facility. Replace the example row with evidence-backed P&ID identities.",
+  "identity_policy": {
+    "resolved_requires": [
+      "asset register identifier",
+      "P&ID tag and port schedule",
+      "identity_basis reference"
+    ],
+    "candidate_is_not_resolved": true,
+    "component_kind_is_not_inferred_from_tag": true
+  },
+  "rows": [
+    {
+      "asset_id": "REPLACE_WITH_ASSET_ID",
+      "component_kind": "storage_tank",
+      "identity_status": "candidate",
+      "identity_basis": "REPLACE_WITH_P_AND_ID_OR_ASSET_REGISTER_REFERENCE"
+    }
+  ]
+}
