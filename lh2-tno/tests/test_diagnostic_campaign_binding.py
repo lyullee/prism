@@ -173,6 +173,7 @@ def test_packet_release_aggregates_are_checked_against_facility_case_ledger(tmp_
         tmp_path,
     )
     assert report["packet_subset_value_consumed"] is True
+    assert report["diagnostic_only"] is True
     assert report["packet_value_checked_event_count"] == 1
     assert report["packet_value_consumed_event_count"] == 1
     assert report["packet_value_mismatch_event_ids"] == []

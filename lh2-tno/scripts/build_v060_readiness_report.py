@@ -105,6 +105,11 @@ def main() -> int:
         help="Optional facility-neutral generic-manifest frequency binding audit.",
     )
     parser.add_argument(
+        "--generic-diagnostic-campaign-binding",
+        type=Path,
+        help="Optional facility-neutral diagnostic packet-to-campaign binding audit.",
+    )
+    parser.add_argument(
         "--isolation-union-extension-verification",
         type=Path,
         help="Optional namespaced isolation success/failure facility-extension verification.",
@@ -185,6 +190,11 @@ def main() -> int:
                 if args.generic_equipment_frequency_binding_audit is not None
                 else None
             ),
+            generic_diagnostic_campaign_binding=(
+                _load(args.generic_diagnostic_campaign_binding)
+                if args.generic_diagnostic_campaign_binding is not None
+                else None
+            ),
             isolation_union_extension_verification=(
                 _load(args.isolation_union_extension_verification)
                 if args.isolation_union_extension_verification is not None
@@ -254,6 +264,10 @@ def main() -> int:
     if args.generic_equipment_frequency_binding_audit is not None:
         report["source_artifacts"]["generic_equipment_frequency_binding_audit"] = _source_artifact(
             args.generic_equipment_frequency_binding_audit
+        )
+    if args.generic_diagnostic_campaign_binding is not None:
+        report["source_artifacts"]["generic_diagnostic_campaign_binding"] = _source_artifact(
+            args.generic_diagnostic_campaign_binding
         )
     if args.isolation_union_extension_verification is not None:
         report["source_artifacts"]["isolation_union_extension_verification"] = _source_artifact(

@@ -616,9 +616,35 @@ def test_report_records_generic_equipment_crosswalk_and_frequency_readiness():
                 "facility_qra_allowed": False,
             },
         },
+        generic_diagnostic_campaign_binding={
+            "schema_version": "prism.diagnostic_campaign_binding.v1",
+            "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING",
+            "diagnostic_only": True,
+            "packet_event_count": 24,
+            "campaign_event_count": 24,
+            "campaign_case_count": 24,
+            "campaign_risk_atom_count": 96,
+            "structural_binding_complete": True,
+            "packet_identity_consumed": True,
+            "packet_digest_checked_event_count": 24,
+            "packet_digest_match_event_count": 24,
+            "packet_value_checked_event_count": 24,
+            "packet_value_consumed_event_count": 24,
+            "packet_subset_value_consumed": True,
+            "qualified_provider_packet_count": 0,
+            "facility_qra_claim": False,
+            "physical_validation_claim": False,
+            "frequency_from_provider_packet": False,
+            "packet_claims_preserved": True,
+        },
     )
     assert report["chain"]["generic_equipment_scenario_coverage"]["resolved_asset_count"] == 7
     assert report["chain"]["generic_equipment_frequency_binding"]["valid_frequency_event_count"] == 24
     assert report["chain"]["generic_equipment_frequency_binding"]["frequency_port_binding"]["reviewed_port_bound_event_count"] == 24
     assert report["chain"]["generic_equipment_frequency_binding"]["frequency_port_binding"]["port_unbound_event_count"] == 0
+    assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_event_count"] == 24
+    assert report["chain"]["generic_diagnostic_campaign_binding"]["campaign_risk_atom_count"] == 96
+    assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_identity_consumed"] is True
+    assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_digest_match_event_count"] == 24
+    assert report["chain"]["generic_diagnostic_campaign_binding"]["packet_value_consumed_event_count"] == 24
     assert validate_v060_readiness_report(report)["status"] == "VALID"

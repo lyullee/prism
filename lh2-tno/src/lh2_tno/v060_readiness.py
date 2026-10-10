@@ -485,6 +485,7 @@ def build_v060_readiness_report(
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
+    generic_diagnostic_campaign_binding: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -560,6 +561,12 @@ def build_v060_readiness_report(
         generic_frequency_chain = _mapping(
             generic_equipment_frequency_binding_audit,
             "generic_equipment_frequency_binding_audit",
+        )
+    generic_diagnostic_chain = None
+    if generic_diagnostic_campaign_binding is not None:
+        generic_diagnostic_chain = _mapping(
+            generic_diagnostic_campaign_binding,
+            "generic_diagnostic_campaign_binding",
         )
     generic_frequency_port_binding = (
         generic_frequency_chain.get("frequency_port_binding")
@@ -972,6 +979,31 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if generic_frequency_chain is not None
+                else None
+            ),
+            "generic_diagnostic_campaign_binding": (
+                {
+                    "schema_version": generic_diagnostic_chain.get("schema_version"),
+                    "status": generic_diagnostic_chain.get("status"),
+                    "packet_event_count": generic_diagnostic_chain.get("packet_event_count"),
+                    "campaign_event_count": generic_diagnostic_chain.get("campaign_event_count"),
+                    "campaign_case_count": generic_diagnostic_chain.get("campaign_case_count"),
+                    "campaign_risk_atom_count": generic_diagnostic_chain.get("campaign_risk_atom_count"),
+                    "structural_binding_complete": generic_diagnostic_chain.get("structural_binding_complete"),
+                    "packet_identity_consumed": generic_diagnostic_chain.get("packet_identity_consumed"),
+                    "packet_digest_checked_event_count": generic_diagnostic_chain.get("packet_digest_checked_event_count"),
+                    "packet_digest_match_event_count": generic_diagnostic_chain.get("packet_digest_match_event_count"),
+                    "packet_value_checked_event_count": generic_diagnostic_chain.get("packet_value_checked_event_count"),
+                    "packet_value_consumed_event_count": generic_diagnostic_chain.get("packet_value_consumed_event_count"),
+                    "packet_subset_value_consumed": generic_diagnostic_chain.get("packet_subset_value_consumed"),
+                    "qualified_provider_packet_count": generic_diagnostic_chain.get("qualified_provider_packet_count"),
+                    "facility_qra_claim": generic_diagnostic_chain.get("facility_qra_claim"),
+                    "physical_validation_claim": generic_diagnostic_chain.get("physical_validation_claim"),
+                    "frequency_from_provider_packet": generic_diagnostic_chain.get("frequency_from_provider_packet"),
+                    "packet_claims_preserved": generic_diagnostic_chain.get("packet_claims_preserved"),
+                    "diagnostic_only": True,
+                }
+                if generic_diagnostic_chain is not None
                 else None
             ),
             "isolation_union_extension": (
@@ -1840,6 +1872,52 @@ def validate_v060_readiness_report(
                     errors.append(
                         f"chain.generic_equipment_frequency_binding.{field} cannot be true"
                     )
+
+    generic_diagnostic_binding = chain.get("generic_diagnostic_campaign_binding")
+    if generic_diagnostic_binding is not None:
+        if not isinstance(generic_diagnostic_binding, Mapping):
+            errors.append(
+                "chain.generic_diagnostic_campaign_binding must be an object"
+            )
+        else:
+            if generic_diagnostic_binding.get("schema_version") != "prism.diagnostic_campaign_binding.v1":
+                errors.append(
+                    "chain.generic_diagnostic_campaign_binding.schema_version is unsupported"
+                )
+            for field in (
+                "packet_event_count",
+                "campaign_event_count",
+                "campaign_case_count",
+                "campaign_risk_atom_count",
+                "packet_digest_checked_event_count",
+                "packet_digest_match_event_count",
+                "packet_value_checked_event_count",
+                "packet_value_consumed_event_count",
+                "qualified_provider_packet_count",
+            ):
+                if generic_diagnostic_binding.get(field) is not None:
+                    _nonnegative_int(
+                        generic_diagnostic_binding.get(field),
+                        f"chain.generic_diagnostic_campaign_binding.{field}",
+                        errors,
+                    )
+            if generic_diagnostic_binding.get("diagnostic_only") is not True:
+                errors.append(
+                    "generic diagnostic campaign binding must remain diagnostic_only"
+                )
+            for field in (
+                "frequency_from_provider_packet",
+                "facility_qra_claim",
+                "physical_validation_claim",
+            ):
+                if generic_diagnostic_binding.get(field) is True:
+                    errors.append(
+                        f"chain.generic_diagnostic_campaign_binding.{field} cannot be true"
+                    )
+            if generic_diagnostic_binding.get("packet_claims_preserved") is not True:
+                errors.append(
+                    "generic diagnostic campaign binding must preserve packet claims"
+                )
 
     isolation_extension = chain.get("isolation_union_extension")
     if isolation_extension is not None:

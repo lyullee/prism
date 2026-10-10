@@ -416,6 +416,7 @@ def build_diagnostic_campaign_binding(
     )
     return {
         "schema_version": "prism.diagnostic_campaign_binding.v1",
+        "diagnostic_only": True,
         "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING" if packet_scope_subset_complete and packet_claims_preserved else "BLOCKED_DIAGNOSTIC_CAMPAIGN_BINDING",
         "packet_event_count": len(packet_ids),
         "campaign_event_count": len(event_ids),

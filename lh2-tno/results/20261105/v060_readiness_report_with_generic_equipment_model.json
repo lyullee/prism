@@ -325,6 +325,27 @@
       "facility_qra_allowed": false,
       "diagnostic_only": true
     },
+    "generic_diagnostic_campaign_binding": {
+      "schema_version": "prism.diagnostic_campaign_binding.v1",
+      "status": "PARTIAL_DIAGNOSTIC_CAMPAIGN_BINDING",
+      "packet_event_count": 24,
+      "campaign_event_count": 24,
+      "campaign_case_count": 24,
+      "campaign_risk_atom_count": 96,
+      "structural_binding_complete": true,
+      "packet_identity_consumed": true,
+      "packet_digest_checked_event_count": 24,
+      "packet_digest_match_event_count": 24,
+      "packet_value_checked_event_count": 24,
+      "packet_value_consumed_event_count": 24,
+      "packet_subset_value_consumed": true,
+      "qualified_provider_packet_count": 0,
+      "facility_qra_claim": false,
+      "physical_validation_claim": false,
+      "frequency_from_provider_packet": false,
+      "packet_claims_preserved": true,
+      "diagnostic_only": true
+    },
     "isolation_union_extension": {
       "schema": "prism.isolation_union_extension_verification.v1",
       "status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
@@ -1030,6 +1051,10 @@
     "generic_equipment_frequency_binding_audit": {
       "path": "results/20261105/generic_lh2_full_scope_equipment_frequency_binding.json",
       "sha256": "87d4a85cd4c303bc0bf98df36c9f28100397952055fd7b774e011288c616e478"
+    },
+    "generic_diagnostic_campaign_binding": {
+      "path": "results/20261106/generic_lh2_diagnostic_campaign_binding_current.json",
+      "sha256": "f09a83f2aa361c8511df50925ba3ddbe77ce2004d41995590406cce03118968e"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",
