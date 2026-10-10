@@ -492,6 +492,7 @@ def build_v060_readiness_report(
     generic_provider_evidence_requests: Mapping[str, Any] | None = None,
     generic_provider_evidence_audit: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
+    isolation_release_closure_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
@@ -613,6 +614,12 @@ def build_v060_readiness_report(
         isolation_extension = _mapping(
             isolation_union_extension_verification,
             "isolation_union_extension_verification",
+        )
+    isolation_closure = None
+    if isolation_release_closure_audit is not None:
+        isolation_closure = _mapping(
+            isolation_release_closure_audit,
+            "isolation_release_closure_audit",
         )
     release_closure = None
     if release_closure_worklist is not None:
@@ -1254,6 +1261,37 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if isolation_extension is not None
+                else None
+            ),
+            "isolation_release_closure": (
+                {
+                    "schema_version": isolation_closure.get("schema_version"),
+                    "status": isolation_closure.get("status"),
+                    "case_count": isolation_closure.get("case_count"),
+                    "success_case_count": isolation_closure.get("success_case_count"),
+                    "failure_case_count": isolation_closure.get("failure_case_count"),
+                    "termination_basis_counts": isolation_closure.get(
+                        "termination_basis_counts"
+                    ),
+                    "state_snapshot_bound_case_count": isolation_closure.get(
+                        "state_snapshot_bound_case_count"
+                    ),
+                    "mass_closed_case_count": isolation_closure.get(
+                        "mass_closed_case_count"
+                    ),
+                    "maximum_mass_residual_kg": isolation_closure.get(
+                        "maximum_mass_residual_kg"
+                    ),
+                    "qualified_provider_packet_case_count": isolation_closure.get(
+                        "qualified_provider_packet_case_count"
+                    ),
+                    "barrier_probability_promoted": isolation_closure.get(
+                        "barrier_probability_promoted"
+                    ),
+                    "facility_qra_claim": isolation_closure.get("facility_qra_claim"),
+                    "diagnostic_only": isolation_closure.get("diagnostic_only"),
+                }
+                if isolation_closure is not None
                 else None
             ),
         },

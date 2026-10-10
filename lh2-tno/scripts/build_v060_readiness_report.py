@@ -140,6 +140,11 @@ def main() -> int:
         help="Optional namespaced isolation success/failure facility-extension verification.",
     )
     parser.add_argument(
+        "--isolation-release-closure-audit",
+        type=Path,
+        help="Optional case-level isolation release termination/mass audit.",
+    )
+    parser.add_argument(
         "--release-closure-worklist",
         type=Path,
         help="Optional case-level release termination/isolation/inventory closure worklist.",
@@ -250,6 +255,11 @@ def main() -> int:
                 if args.isolation_union_extension_verification is not None
                 else None
             ),
+            isolation_release_closure_audit=(
+                _load(args.isolation_release_closure_audit)
+                if args.isolation_release_closure_audit is not None
+                else None
+            ),
             release_closure_worklist=(
                 _load(args.release_closure_worklist)
                 if args.release_closure_worklist is not None
@@ -342,6 +352,10 @@ def main() -> int:
     if args.isolation_union_extension_verification is not None:
         report["source_artifacts"]["isolation_union_extension_verification"] = _source_artifact(
             args.isolation_union_extension_verification
+        )
+    if args.isolation_release_closure_audit is not None:
+        report["source_artifacts"]["isolation_release_closure_audit"] = _source_artifact(
+            args.isolation_release_closure_audit
         )
     if args.release_closure_worklist is not None:
         report["source_artifacts"]["release_closure_worklist"] = _source_artifact(

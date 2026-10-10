@@ -459,6 +459,24 @@
       "qualified_provider_packet_case_count": 0,
       "facility_qra_claim": false,
       "diagnostic_only": true
+    },
+    "isolation_release_closure": {
+      "schema_version": "prism.isolation_release_closure_audit.v1",
+      "status": "ISOLATION_RELEASE_CLOSURE_DIAGNOSTIC",
+      "case_count": 20,
+      "success_case_count": 10,
+      "failure_case_count": 10,
+      "termination_basis_counts": {
+        "reviewed_isolation_success": 10,
+        "synthetic_diagnostic_horizon": 10
+      },
+      "state_snapshot_bound_case_count": 20,
+      "mass_closed_case_count": 20,
+      "maximum_mass_residual_kg": 0.0,
+      "qualified_provider_packet_case_count": 0,
+      "barrier_probability_promoted": false,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
     }
   },
   "equipment": {
@@ -1173,6 +1191,10 @@
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",
       "sha256": "a49e4169ee779cf1823b03461bdf6539c5f02ebfd240da65631fa57d4cad7079"
+    },
+    "isolation_release_closure_audit": {
+      "path": "results/20261106/isolation_release_closure_audit.json",
+      "sha256": "c52557f54059793d85c93be48404ba1552ed948b1f12643bfc9d54681f8a8468"
     },
     "release_closure_worklist": {
       "path": "results/20261106/release_closure_worklist.json",

@@ -126,6 +126,35 @@ def test_v060_readiness_records_external_lh2_model_root_review():
     assert review["diagnostic_only"] is True
 
 
+def test_v060_readiness_records_isolation_release_closure():
+    inputs = _inputs()
+    inputs["isolation_release_closure_audit"] = {
+        "schema_version": "prism.isolation_release_closure_audit.v1",
+        "status": "ISOLATION_RELEASE_CLOSURE_DIAGNOSTIC",
+        "case_count": 20,
+        "success_case_count": 10,
+        "failure_case_count": 10,
+        "termination_basis_counts": {
+            "reviewed_isolation_success": 10,
+            "synthetic_diagnostic_horizon": 10,
+        },
+        "state_snapshot_bound_case_count": 20,
+        "mass_closed_case_count": 20,
+        "maximum_mass_residual_kg": 0.0,
+        "qualified_provider_packet_case_count": 0,
+        "barrier_probability_promoted": False,
+        "facility_qra_claim": False,
+        "diagnostic_only": True,
+    }
+    report = build_v060_readiness_report(**inputs)
+    closure = report["chain"]["isolation_release_closure"]
+    assert closure["case_count"] == 20
+    assert closure["success_case_count"] == 10
+    assert closure["failure_case_count"] == 10
+    assert closure["mass_closed_case_count"] == 20
+    assert closure["barrier_probability_promoted"] is False
+
+
 def _scenario_evidence():
     return {
         "schema_version": "prism.inspection_center_screening_summary.v1",
