@@ -1,0 +1,177 @@
+{
+  "schema_version": "prism.external_field_orientation_sweep.v1",
+  "status": "RESTRICTED_EXTERNAL_FIELD_ORIENTATION_DIAGNOSTIC",
+  "event_id": "preslhy-e35-trial-10-2019-09-13",
+  "field_evidence_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE",
+  "coordinate_reference": "source-relative metres; z above concrete pad",
+  "bearing_sweep_deg": [
+    286.0,
+    106.0,
+    135.0,
+    45.0
+  ],
+  "reports": [
+    {
+      "bearing_deg": 286.0,
+      "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
+      "backend_elapsed_ms": 12540.640500024892,
+      "matched_row_count": 4960,
+      "matched_fraction": 0.9815950920245399,
+      "metrics": {
+        "sample_count": 4960,
+        "sensor_count": 31,
+        "mean_error_vol_pct": -18.190083868803708,
+        "mae_vol_pct": 18.190083868803708,
+        "rmse_vol_pct": 31.102896957193188,
+        "max_abs_error_vol_pct": 87.7818,
+        "observed_peak_vol_pct": 87.7818,
+        "predicted_peak_vol_pct": 0.0,
+        "peak_bias_vol_pct": -87.7818
+      },
+      "diagnostics": {
+        "coordinate_orientation_review_required": true,
+        "prediction_peak_zero_with_observed_signal": true,
+        "interpretation": "The prediction has no positive receptor concentration while the field has a positive signal. Review source direction, wind-from convention, axis definitions, and transport delay before any physical-validation decision."
+      },
+      "source_boundary_binding": {
+        "mode": "measured_source_replay",
+        "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "field_source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "source_boundary_hash_matches": true,
+        "receptor_observation_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "receptor_source_channel_sha256_declared": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "provider_release_contract_verified": false
+      },
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "frequency_inference_performed": false
+    },
+    {
+      "bearing_deg": 106.0,
+      "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
+      "backend_elapsed_ms": 14546.863200026564,
+      "matched_row_count": 4960,
+      "matched_fraction": 0.9815950920245399,
+      "metrics": {
+        "sample_count": 4960,
+        "sensor_count": 31,
+        "mean_error_vol_pct": -13.423561979779782,
+        "mae_vol_pct": 19.246558242038628,
+        "rmse_vol_pct": 30.835408659207207,
+        "max_abs_error_vol_pct": 87.7818,
+        "observed_peak_vol_pct": 87.7818,
+        "predicted_peak_vol_pct": 33.0489219963026,
+        "peak_bias_vol_pct": -54.7328780036974
+      },
+      "diagnostics": {
+        "coordinate_orientation_review_required": false,
+        "prediction_peak_zero_with_observed_signal": false,
+        "interpretation": null
+      },
+      "source_boundary_binding": {
+        "mode": "measured_source_replay",
+        "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "field_source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "source_boundary_hash_matches": true,
+        "receptor_observation_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "receptor_source_channel_sha256_declared": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "provider_release_contract_verified": false
+      },
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "frequency_inference_performed": false
+    },
+    {
+      "bearing_deg": 135.0,
+      "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
+      "backend_elapsed_ms": 18470.198100083508,
+      "matched_row_count": 4960,
+      "matched_fraction": 0.9815950920245399,
+      "metrics": {
+        "sample_count": 4960,
+        "sensor_count": 31,
+        "mean_error_vol_pct": -10.622447731672782,
+        "mae_vol_pct": 20.706542627262987,
+        "rmse_vol_pct": 28.466630732354,
+        "max_abs_error_vol_pct": 85.1913333,
+        "observed_peak_vol_pct": 87.7818,
+        "predicted_peak_vol_pct": 28.27148928249323,
+        "peak_bias_vol_pct": -59.51031071750677
+      },
+      "diagnostics": {
+        "coordinate_orientation_review_required": false,
+        "prediction_peak_zero_with_observed_signal": false,
+        "interpretation": null
+      },
+      "source_boundary_binding": {
+        "mode": "measured_source_replay",
+        "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "field_source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "source_boundary_hash_matches": true,
+        "receptor_observation_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "receptor_source_channel_sha256_declared": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "provider_release_contract_verified": false
+      },
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "frequency_inference_performed": false
+    },
+    {
+      "bearing_deg": 45.0,
+      "status": "RESTRICTED_FIELD_MODEL_COMPARISON",
+      "backend_elapsed_ms": 13102.48500003945,
+      "matched_row_count": 4960,
+      "matched_fraction": 0.9815950920245399,
+      "metrics": {
+        "sample_count": 4960,
+        "sensor_count": 31,
+        "mean_error_vol_pct": -15.454484468993122,
+        "mae_vol_pct": 17.787934675706587,
+        "rmse_vol_pct": 30.75443312693009,
+        "max_abs_error_vol_pct": 87.7818,
+        "observed_peak_vol_pct": 87.7818,
+        "predicted_peak_vol_pct": 33.63564156218492,
+        "peak_bias_vol_pct": -54.14615843781508
+      },
+      "diagnostics": {
+        "coordinate_orientation_review_required": false,
+        "prediction_peak_zero_with_observed_signal": false,
+        "interpretation": null
+      },
+      "source_boundary_binding": {
+        "mode": "measured_source_replay",
+        "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "field_source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "source_boundary_hash_matches": true,
+        "receptor_observation_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "receptor_source_channel_sha256_declared": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "provider_release_contract_verified": false
+      },
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "frequency_inference_performed": false
+    }
+  ],
+  "promotion_policy": {
+    "bearing_is_not_fitted": true,
+    "measured_source_replay_is_not_independent_validation": true,
+    "field_axis_definition_required_before_promotion": true,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "frequency_inference_performed": false
+  },
+  "rebaseline": {
+    "schema_version": "prism.external_field_orientation_sweep_rebaseline.v1",
+    "status": "REBOUND_TO_REVERIFIED_FIELD_EVIDENCE",
+    "previous_sweep_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261103\\external_field_model_comparison\\preslhy_trial10_orientation_sweep_unverified.json",
+    "previous_sweep_sha256": "30d6c4f846be53695400bd852fc1c06ce97b93eaf07cf44f967cb8fd72e57d27",
+    "field_evidence_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261104\\external_field_evidence\\preslhy_trial10_reverified.json",
+    "field_evidence_sha256": "f5a2e5c58479b9ab60edce14ba5e0f610e074ceb9afaae054405e535eea7f249",
+    "hash_drift_reports_cleared": 4,
+    "bearing_is_not_fitted": true,
+    "independent_reverification": false,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "promotion_allowed": false
+  }
+}

@@ -2589,8 +2589,8 @@
   "external_field_model_comparison_coordinate_orientation_interpretation": "Prediction peak is zero while observed peak is positive; review source direction, wind-from convention, axis definitions, and transport delay before physical-validation decision.",
   "external_field_model_comparison_field_axis_definition_status": "not_supplied_in_public_workbook",
   "external_field_model_comparison_model_axis_assumption": "x=east, y=north, z=up; source-relative metres",
-  "external_field_orientation_sweep_record": "results/20261103/external_field_model_comparison/preslhy_trial10_orientation_sweep_unverified.json",
-  "external_field_orientation_sweep_status": "RESTRICTED_EXTERNAL_FIELD_ORIENTATION_DIAGNOSTIC; bearings 286/106/135/45 degrees; bearing not fitted; field axis definition missing; physical_validation_claim false",
+  "external_field_orientation_sweep_record": "results/20261104/external_field_model_comparison/preslhy_trial10_orientation_sweep_reverified.json",
+  "external_field_orientation_sweep_status": "RESTRICTED_EXTERNAL_FIELD_ORIENTATION_DIAGNOSTIC; four bearing reports rebound to reverified field evidence; 135 deg has lowest diagnostic RMSE 28.4666 vol%; bearing not fitted; field axis definition missing; physical_validation_claim=false; promotion_allowed=false",
   "external_field_orientation_sweep_summary": [
     {
       "bearing_deg": 286.0,
@@ -2632,5 +2632,6 @@
   "validation_evidence_matrix_latest_status": "RESTRICTED_EVIDENCE_MATRIX; 9 domains; field hash drift cleared with explicit rebaseline; physical-validation and facility-QRA claims withheld",
   "ijhe_objective_coverage_audit_latest_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 18 checks; core blockers 0; strict blockers 4",
   "external_field_rebaseline_document": "docs/PRISM_외부LH2_현장증거_해시재기준화_20261104.md",
-  "external_field_rebaseline_policy": "Current-file hash rebaseline is provenance repair only; explicit acknowledgement required; no frequency or physical-validation promotion."
+  "external_field_rebaseline_policy": "Current-file hash rebaseline is provenance repair only; explicit acknowledgement required; no frequency or physical-validation promotion.",
+  "external_field_orientation_rebaseline_policy": "Orientation metrics are rebound only after event/source/receptor digest matching; no bearing fitting, independent validation, frequency inference or facility-QRA promotion."
 }
