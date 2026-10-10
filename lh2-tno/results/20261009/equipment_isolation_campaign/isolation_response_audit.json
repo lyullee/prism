@@ -1,0 +1,276 @@
+{
+  "schema": "prism.isolation_response_audit.v1",
+  "status": "ISOLATION_RESPONSE_CHAIN_DIAGNOSTIC",
+  "branch_count": 10,
+  "success_branch_count": 5,
+  "failure_branch_count": 5,
+  "campaign_case_count": 20,
+  "risk_atom_count": 80,
+  "rows": [
+    {
+      "location": "AREA_0.01%",
+      "outcome": "success",
+      "provider_outcome": "success",
+      "close_time_s": 0.25,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.719782727660239e-09,
+      "post_close_max_flow_kg_s": 0.0,
+      "post_close_observation_available": true,
+      "isolation_flow_zero_confirmed": true,
+      "max_total_mass_residual_kg": 2.8833662985717066e-14,
+      "max_total_energy_residual_j": 2.6325590024968773e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "expected_campaign_termination_basis": "reviewed_isolation_success"
+    },
+    {
+      "location": "AREA_0.01%",
+      "outcome": "failure",
+      "provider_outcome": "failure",
+      "close_time_s": 0.5,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.719782727660239e-09,
+      "post_close_max_flow_kg_s": null,
+      "post_close_observation_available": false,
+      "isolation_flow_zero_confirmed": false,
+      "max_total_mass_residual_kg": 2.8049369958703842e-14,
+      "max_total_energy_residual_j": 2.6325590024968773e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "synthetic_diagnostic_horizon"
+      ],
+      "expected_campaign_termination_basis": "synthetic_diagnostic_horizon"
+    },
+    {
+      "location": "AREA_0.1%",
+      "outcome": "success",
+      "provider_outcome": "success",
+      "close_time_s": 0.25,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.71978272766024e-08,
+      "post_close_max_flow_kg_s": 0.0,
+      "post_close_observation_available": true,
+      "isolation_flow_zero_confirmed": true,
+      "max_total_mass_residual_kg": 4.356146242023958e-14,
+      "max_total_energy_residual_j": 2.1961929818140047e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "expected_campaign_termination_basis": "reviewed_isolation_success"
+    },
+    {
+      "location": "AREA_0.1%",
+      "outcome": "failure",
+      "provider_outcome": "failure",
+      "close_time_s": 0.5,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.71978272766024e-08,
+      "post_close_max_flow_kg_s": null,
+      "post_close_observation_available": false,
+      "isolation_flow_zero_confirmed": false,
+      "max_total_mass_residual_kg": 2.2625459101137563e-14,
+      "max_total_energy_residual_j": 2.1961929818140047e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "synthetic_diagnostic_horizon"
+      ],
+      "expected_campaign_termination_basis": "synthetic_diagnostic_horizon"
+    },
+    {
+      "location": "AREA_1%",
+      "outcome": "success",
+      "provider_outcome": "success",
+      "close_time_s": 0.25,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.71978272766024e-07,
+      "post_close_max_flow_kg_s": 0.0,
+      "post_close_observation_available": true,
+      "isolation_flow_zero_confirmed": true,
+      "max_total_mass_residual_kg": 3.128575636514788e-14,
+      "max_total_energy_residual_j": 2.539982765781268e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "expected_campaign_termination_basis": "reviewed_isolation_success"
+    },
+    {
+      "location": "AREA_1%",
+      "outcome": "failure",
+      "provider_outcome": "failure",
+      "close_time_s": 0.5,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.71978272766024e-07,
+      "post_close_max_flow_kg_s": null,
+      "post_close_observation_available": false,
+      "isolation_flow_zero_confirmed": false,
+      "max_total_mass_residual_kg": 2.0539526760968125e-14,
+      "max_total_energy_residual_j": 2.539982765781268e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "synthetic_diagnostic_horizon"
+      ],
+      "expected_campaign_termination_basis": "synthetic_diagnostic_horizon"
+    },
+    {
+      "location": "AREA_10%",
+      "outcome": "success",
+      "provider_outcome": "success",
+      "close_time_s": 0.25,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.719782727660239e-06,
+      "post_close_max_flow_kg_s": 0.0,
+      "post_close_observation_available": true,
+      "isolation_flow_zero_confirmed": true,
+      "max_total_mass_residual_kg": 1.7003222916152578e-14,
+      "max_total_energy_residual_j": 2.392632592052024e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "expected_campaign_termination_basis": "reviewed_isolation_success"
+    },
+    {
+      "location": "AREA_10%",
+      "outcome": "failure",
+      "provider_outcome": "failure",
+      "close_time_s": 0.5,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.719782727660239e-06,
+      "post_close_max_flow_kg_s": null,
+      "post_close_observation_available": false,
+      "isolation_flow_zero_confirmed": false,
+      "max_total_mass_residual_kg": 1.6822829885859356e-14,
+      "max_total_energy_residual_j": 2.5447661755606532e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "synthetic_diagnostic_horizon"
+      ],
+      "expected_campaign_termination_basis": "synthetic_diagnostic_horizon"
+    },
+    {
+      "location": "AREA_100%",
+      "outcome": "success",
+      "provider_outcome": "success",
+      "close_time_s": 0.25,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.719782727660238e-05,
+      "post_close_max_flow_kg_s": 0.0,
+      "post_close_observation_available": true,
+      "isolation_flow_zero_confirmed": true,
+      "max_total_mass_residual_kg": 3.44249809051695e-14,
+      "max_total_energy_residual_j": 5.367581934478949e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "expected_campaign_termination_basis": "reviewed_isolation_success"
+    },
+    {
+      "location": "AREA_100%",
+      "outcome": "failure",
+      "provider_outcome": "failure",
+      "close_time_s": 0.5,
+      "duration_s": 0.5,
+      "pre_close_max_flow_kg_s": 9.719782727660238e-05,
+      "post_close_max_flow_kg_s": null,
+      "post_close_observation_available": false,
+      "isolation_flow_zero_confirmed": false,
+      "max_total_mass_residual_kg": 2.0134979007859584e-14,
+      "max_total_energy_residual_j": 4.821441024205342e-09,
+      "campaign_case_count": 2,
+      "campaign_case_statuses": [
+        "EXECUTED"
+      ],
+      "campaign_termination_bases": [
+        "synthetic_diagnostic_horizon"
+      ],
+      "expected_campaign_termination_basis": "synthetic_diagnostic_horizon"
+    }
+  ],
+  "checks": [
+    {
+      "name": "provider_branch_identity",
+      "status": "PASS",
+      "evidence": {
+        "branch_count": 10,
+        "observed_outcomes": [
+          "failure",
+          "success"
+        ]
+      }
+    },
+    {
+      "name": "isolation_success_flow_zero",
+      "status": "PASS",
+      "evidence": {
+        "success_branch_count": 5
+      }
+    },
+    {
+      "name": "isolation_failure_remains_horizon_bounded",
+      "status": "PASS",
+      "evidence": {
+        "failure_branch_count": 5
+      }
+    },
+    {
+      "name": "campaign_chain_consumed",
+      "status": "PASS",
+      "evidence": {
+        "campaign_status": "DECLARED_SCOPE_EXECUTED",
+        "campaign_case_count": 20,
+        "risk_atom_count": 80
+      }
+    },
+    {
+      "name": "no_facility_qra_promotion",
+      "status": "PASS",
+      "evidence": {
+        "facility_total_risk_available": null,
+        "complete_facility_qra_claim": false,
+        "physical_validation_claim": false
+      }
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "diagnostic_only": true,
+    "synthetic_barrier_probability_is_not_inferred": true,
+    "provider_packet_promotion": false,
+    "facility_ir_fn_promotion": false,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false
+  },
+  "interpretation": "Provider isolation success/failure and its consumed consequence chain are audited. The failure branch remains a diagnostic horizon and no plant barrier reliability is inferred."
+}

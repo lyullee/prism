@@ -65,6 +65,15 @@ ID를 추정하지 않는다. 연결 manifest 형식과 실행 방법은
 SLABx-LH2 구성요소의 제한된 검증 범위를 넘어 시설 QRA나 물리검증을 승격하지 않는다.
 계약과 실행 명령은 [LH2 consequence backend chain 감사](docs/PRISM_LH2_consequence_backend_chain_개발기록_20261010.md)에 기록했다.
 
+**차단 응답과 방출 chain 연결 보완:** 별도 합성 차단 campaign에 대해 `isolation_response_audit.json`이
+차단 성공 5개와 실패 5개 branch를 20개 campaign case·80개 risk atom에 다시 묶습니다. 성공 branch는
+차단 후 최대 유량 0 kg/s와 `reviewed_isolation_success` 종료 근거를, 실패 branch는
+`synthetic_diagnostic_horizon` 종료를 확인하며 질량·에너지 잔차도 검사합니다. 이 결과는 차단 응답이
+방출→SLABx-LH2/피해 chain에 소비되었음을 보여주는 **합성 진단**이며, 현장 차단 신뢰도·빈도·시설
+IR/F-N·전체 QRA 또는 독립 물리검증을 승격하지 않습니다. 재현 명령과 실제 설비 provider가 내보내야 할
+자료는 [차단 응답 방출 chain 개발 기록](docs/PRISM_isolation_response_chain_개발기록_20261010.md)에
+정리했습니다.
+
 **SLABx-LH2 검증 매트릭스 연결 보완:** 통합 `validation_evidence_matrix.json`에도
 `slabx_lh2_consequence_component` domain을 별도로 기록합니다. SLABx-LH2의 외부
 분산·LFL 비교 6건, pool 반경 비교 6건, 질량 폐합과 반복 실행 결과를 논문용 구성요소
