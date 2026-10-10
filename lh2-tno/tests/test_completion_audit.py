@@ -1635,6 +1635,30 @@ def test_completion_audit_records_exact_native_scope_catalog_separately_from_pro
 
 
 def test_completion_audit_records_observed_state_evidence_without_accident_promotion():
+    model_binding = {
+        "schema": "prism.observed_state_model_binding_audit.v1",
+        "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+        "observed_component_count": 3,
+        "state_model_bound_component_count": 3,
+        "diagnostic_release_adapter_component_count": 3,
+        "qualified_provider_packet_count": 0,
+        "rows": [
+            {
+                "status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE",
+                "state_export_status": "supported",
+                "diagnostic_release_adapter_status": "available",
+                "accident_release_export_status": "missing",
+            }
+        ] * 3,
+        "blocking_reasons": [],
+        "policy": {
+            "normal_state_model_is_not_accident_release": True,
+            "diagnostic_adapter_is_not_qualified_provider": True,
+            "release_event_binding_is_not_created": True,
+            "frequency_is_not_assigned": True,
+            "facility_ir_fn_promotion": False,
+        },
+    }
     report = build_ijhe_completion_audit(
         _status(False),
         _matrix(False),
@@ -1667,6 +1691,7 @@ def test_completion_audit_records_observed_state_evidence_without_accident_promo
                 "diagnostic_only": True,
             },
         },
+        observed_state_model_binding_audit=model_binding,
     )
     check = next(
         item for item in report["checks"]
@@ -1674,4 +1699,50 @@ def test_completion_audit_records_observed_state_evidence_without_accident_promo
     )
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
+    assert check["evidence"]["model_binding"]["valid"] is True
     assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_malformed_observed_state_model_binding():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        observed_state_evidence={
+            "schema_version": "prism.observed_equipment_state_evidence.v1",
+            "status": "OBSERVATION_STATE_EVIDENCE_ONLY",
+            "source_count": 1,
+            "sample_count": 1,
+            "component_count": 1,
+            "source_rows": [{"source_id": "source-1"}],
+            "component_rows": [{"component_id": "component-1"}],
+            "policy": {
+                "canonical_snapshot_schema": "prism.equipment_state_snapshot.v1",
+                "state_only": True,
+                "release_scenario_generated": False,
+                "frequency_inference_performed": False,
+                "sensor_frequency_learning_used": False,
+                "provider_packet_promoted": False,
+                "physical_validation_claim": False,
+                "facility_qra_claim": False,
+                "diagnostic_only": True,
+            },
+        },
+        observed_state_model_binding_audit={
+            "schema": "prism.observed_state_model_binding_audit.v1",
+            "status": "PARTIAL_STATE_MODEL_BINDINGS",
+            "observed_component_count": 1,
+            "state_model_bound_component_count": 0,
+            "diagnostic_release_adapter_component_count": 0,
+            "qualified_provider_packet_count": 0,
+            "rows": [],
+            "blocking_reasons": ["component-1: missing state quantities"],
+            "policy": {"facility_ir_fn_promotion": False},
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_equipment_state_evidence"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["model_binding"]["valid"] is False

@@ -88,6 +88,7 @@ def build_ijhe_completion_audit(
     facility_component_contribution_audit: Mapping[str, Any] | None = None,
     facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
+    observed_state_model_binding_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -294,6 +295,56 @@ def build_ijhe_completion_audit(
         observed = observed_state_evidence
         policy = observed.get("policy")
         policy = policy if isinstance(policy, Mapping) else {}
+        model_binding = observed_state_model_binding_audit
+        model_binding_policy = (
+            model_binding.get("policy")
+            if isinstance(model_binding, Mapping)
+            and isinstance(model_binding.get("policy"), Mapping)
+            else {}
+        )
+        model_binding_rows = (
+            model_binding.get("rows")
+            if isinstance(model_binding, Mapping)
+            else None
+        )
+        model_binding_valid = True
+        if model_binding is not None:
+            model_binding_valid = (
+                model_binding.get("schema")
+                == "prism.observed_state_model_binding_audit.v1"
+                and model_binding.get("status")
+                == "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY"
+                and isinstance(model_binding.get("observed_component_count"), int)
+                and model_binding.get("observed_component_count") > 0
+                and model_binding.get("state_model_bound_component_count")
+                == model_binding.get("observed_component_count")
+                and model_binding.get("diagnostic_release_adapter_component_count")
+                == model_binding.get("observed_component_count")
+                and model_binding.get("qualified_provider_packet_count") == 0
+                and isinstance(model_binding_rows, list)
+                and len(model_binding_rows)
+                == model_binding.get("observed_component_count")
+                and all(
+                    isinstance(row, Mapping)
+                    and row.get("status")
+                    == "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"
+                    and row.get("state_export_status") == "supported"
+                    and row.get("diagnostic_release_adapter_status") == "available"
+                    and row.get("accident_release_export_status") == "missing"
+                    for row in model_binding_rows
+                )
+                and model_binding.get("blocking_reasons") == []
+                and model_binding_policy.get(
+                    "normal_state_model_is_not_accident_release"
+                ) is True
+                and model_binding_policy.get(
+                    "diagnostic_adapter_is_not_qualified_provider"
+                ) is True
+                and model_binding_policy.get("release_event_binding_is_not_created")
+                is True
+                and model_binding_policy.get("frequency_is_not_assigned") is True
+                and model_binding_policy.get("facility_ir_fn_promotion") is False
+            )
         observed_valid = (
             observed.get("schema_version") == "prism.observed_equipment_state_evidence.v1"
             and observed.get("status") == "OBSERVATION_STATE_EVIDENCE_ONLY"
@@ -316,6 +367,7 @@ def build_ijhe_completion_audit(
             and policy.get("physical_validation_claim") is False
             and policy.get("facility_qra_claim") is False
             and policy.get("diagnostic_only") is True
+            and model_binding_valid
         )
         checks.append(
             {
@@ -331,11 +383,53 @@ def build_ijhe_completion_audit(
                     "sample_count": observed.get("sample_count"),
                     "component_count": observed.get("component_count"),
                     "policy": policy,
+                    "model_binding": {
+                        "record": (
+                            model_binding.get("_record_path")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "schema": (
+                            model_binding.get("schema")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "status": (
+                            model_binding.get("status")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "observed_component_count": (
+                            model_binding.get("observed_component_count")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "state_model_bound_component_count": (
+                            model_binding.get("state_model_bound_component_count")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "diagnostic_release_adapter_component_count": (
+                            model_binding.get(
+                                "diagnostic_release_adapter_component_count"
+                            )
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "qualified_provider_packet_count": (
+                            model_binding.get("qualified_provider_packet_count")
+                            if isinstance(model_binding, Mapping)
+                            else None
+                        ),
+                        "valid": model_binding_valid,
+                    },
                 },
                 "interpretation": (
                     "Observed telemetry supports equipment-state calibration and snapshot review. "
-                    "It does not generate an accident, infer frequency, qualify a provider packet, "
-                    "or promote facility IR/F-N."
+                    "The optional model-binding ledger confirms the facility-neutral normal-state "
+                    "model and keeps its diagnostic adapter separate from accident release. "
+                    "The evidence does not generate an accident, infer frequency, qualify a provider "
+                    "packet, or promote facility IR/F-N."
                 ),
             }
         )

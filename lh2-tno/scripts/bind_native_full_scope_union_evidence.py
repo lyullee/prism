@@ -95,6 +95,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     native_binding_reconciliation = _with_record(args.native_binding_reconciliation)
     domain_recovery_audit = _with_record(args.domain_recovery_audit)
     observed_state_evidence = _with_record(args.observed_state_evidence)
+    observed_state_model_binding_audit = _with_record(
+        args.observed_state_model_binding_audit
+    )
     scope_ledger_consistency = _with_record(args.scope_ledger_consistency)
     risk_atom_chain_audit = _with_record(args.risk_atom_chain_audit)
     equipment_state_release_audit = _with_record(args.equipment_state_release_audit)
@@ -141,6 +144,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         facility_component_contribution_audit=facility_component_contribution_audit,
         facility_frequency_uncertainty_audit=facility_frequency_uncertainty_audit,
         isolation_union_extension_verification=isolation_union_extension_verification,
+        observed_state_model_binding_audit=observed_state_model_binding_audit,
     )
 
     verification_path = output_dir / "verification.json"
@@ -526,6 +530,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional normalized observed equipment-state evidence ledger.",
+    )
+    parser.add_argument(
+        "--observed-state-model-binding-audit",
+        type=Path,
+        default=None,
+        help="Optional observed-state to facility-neutral normal-model binding audit.",
     )
     parser.add_argument(
         "--slabx-validation-evidence",

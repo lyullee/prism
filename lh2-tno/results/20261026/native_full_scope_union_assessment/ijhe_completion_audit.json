@@ -34,9 +34,19 @@
           "physical_validation_claim": false,
           "facility_qra_claim": false,
           "diagnostic_only": true
+        },
+        "model_binding": {
+          "record": "results\\20261026\\native_full_scope_union_assessment\\observed_state_model_binding_audit.json",
+          "schema": "prism.observed_state_model_binding_audit.v1",
+          "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+          "observed_component_count": 3,
+          "state_model_bound_component_count": 3,
+          "diagnostic_release_adapter_component_count": 3,
+          "qualified_provider_packet_count": 0,
+          "valid": true
         }
       },
-      "interpretation": "Observed telemetry supports equipment-state calibration and snapshot review. It does not generate an accident, infer frequency, qualify a provider packet, or promote facility IR/F-N."
+      "interpretation": "Observed telemetry supports equipment-state calibration and snapshot review. The optional model-binding ledger confirms the facility-neutral normal-state model and keeps its diagnostic adapter separate from accident release. The evidence does not generate an accident, infer frequency, qualify a provider packet, or promote facility IR/F-N."
     },
     {
       "name": "external_native_model_contract_audit",

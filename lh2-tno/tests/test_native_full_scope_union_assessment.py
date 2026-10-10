@@ -232,6 +232,15 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
         row for row in status_consistency["checks"]
         if row["name"] == "observed_state_model_binding_audit"
     )["status"] == "PASS"
+    observed_state_check = next(
+        row for row in audit["checks"]
+        if row["name"] == "diagnostic_observed_equipment_state_evidence"
+    )
+    assert observed_state_check["status"] == "PASS"
+    assert observed_state_check["evidence"]["model_binding"]["status"] == (
+        "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY"
+    )
+    assert observed_state_check["evidence"]["model_binding"]["valid"] is True
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "consequence_backend_chain_audit"
