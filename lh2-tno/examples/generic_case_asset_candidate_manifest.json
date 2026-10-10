@@ -1,0 +1,47 @@
+{
+  "schema_version": "prism.facility_case_asset_candidate_manifest.v1",
+  "status": "CANDIDATE_IDENTITY_ONLY",
+  "scope": "generic diagnostic case-asset identity candidates",
+  "facility_neutral": false,
+  "source_worklist": "results/20261106/release_closure_worklist.json",
+  "identity_policy": {
+    "candidate_is_not_resolved": true,
+    "component_kind_is_not_inferred": true,
+    "accident_port_is_not_inferred": true,
+    "provider_packet_is_not_qualified": true
+  },
+  "rows": [
+    {
+      "asset_id": "inventory-depletion-pipe",
+      "identity_status": "candidate",
+      "provider_component_ids": ["inventory-depletion-pipe-01"],
+      "candidate_family_scope": ["inventory_depletion", "pipe_hole"],
+      "provider_boundary_references": [
+        "DynamicNetworkSimulator homogeneous tank to ambient inventory valve"
+      ],
+      "provider_source_digests": [
+        "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c"
+      ],
+      "provider_result_digests": [
+        "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292"
+      ],
+      "identity_basis": "facility release worklist provider component_id and declared scenario families; P&ID identity and accident port are unreviewed"
+    },
+    {
+      "asset_id": "vertical-handoff-vent",
+      "identity_status": "candidate",
+      "provider_component_ids": ["vertical-handoff-terminal-pipe-01"],
+      "candidate_family_scope": ["vertical_handoff", "pipe_hole"],
+      "provider_boundary_references": [
+        "SteadyNetwork terminal link to atmosphere; native terminal bore"
+      ],
+      "provider_source_digests": [
+        "9c8b3820f79921d92eb9e356d0c781ee8a9af3eac3da7639ab55b63a942e3187"
+      ],
+      "provider_result_digests": [
+        "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb"
+      ],
+      "identity_basis": "facility release worklist provider component_id and declared scenario families; P&ID identity and accident port are unreviewed"
+    }
+  ]
+}

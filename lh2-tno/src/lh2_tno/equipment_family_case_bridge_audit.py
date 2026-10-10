@@ -54,13 +54,43 @@ def _strings(value: Any, label: str) -> list[str]:
     return list(dict.fromkeys(result))
 
 
+def _candidate_rows(candidate_manifest: Mapping[str, Any] | None) -> dict[str, Mapping[str, Any]]:
+    if candidate_manifest is None:
+        return {}
+    if candidate_manifest.get("schema_version") != "prism.facility_case_asset_candidate_manifest.v1":
+        raise EquipmentFamilyCaseBridgeAuditError(
+            "candidate manifest must be prism.facility_case_asset_candidate_manifest.v1"
+        )
+    rows = _rows(candidate_manifest.get("rows"), "candidate_manifest.rows")
+    result: dict[str, Mapping[str, Any]] = {}
+    for index, row in enumerate(rows):
+        asset_id = _text(row.get("asset_id"), f"candidate_manifest.rows[{index}].asset_id")
+        if asset_id in result:
+            raise EquipmentFamilyCaseBridgeAuditError(
+                f"duplicate candidate asset_id: {asset_id}"
+            )
+        if row.get("identity_status") != "candidate":
+            raise EquipmentFamilyCaseBridgeAuditError(
+                f"candidate_manifest.rows[{index}].identity_status must be candidate"
+            )
+        candidate_families = _strings(
+            row.get("candidate_family_scope", []),
+            f"candidate_manifest.rows[{index}].candidate_family_scope",
+        )
+        result[asset_id] = {**row, "candidate_family_scope": candidate_families}
+    return result
+
+
 def audit_equipment_family_case_bridge(
     equipment_scenario_coverage: Mapping[str, Any],
     release_closure_worklist: Mapping[str, Any],
+    *,
+    candidate_manifest: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Join declared generic assets/families to case-level release worklist rows."""
     coverage = _object(equipment_scenario_coverage, "equipment_scenario_coverage")
     worklist = _object(release_closure_worklist, "release_closure_worklist")
+    candidates = _candidate_rows(candidate_manifest)
     if coverage.get("schema_version") != COVERAGE_SCHEMA:
         raise EquipmentFamilyCaseBridgeAuditError(
             f"equipment_scenario_coverage must be {COVERAGE_SCHEMA}"
@@ -99,6 +129,7 @@ def audit_equipment_family_case_bridge(
 
     case_rows: list[dict[str, Any]] = []
     case_asset_ids: set[str] = set()
+    candidate_case_asset_ids: set[str] = set()
     family_cases: dict[str, list[dict[str, Any]]] = {family: [] for family in family_by_name}
     asset_cases: dict[str, list[dict[str, Any]]] = {asset_id: [] for asset_id in asset_by_id}
     blockers: list[str] = []
@@ -115,16 +146,30 @@ def audit_equipment_family_case_bridge(
         seen_case_ids.add(case_id)
         case_asset_ids.add(asset_id)
         family_mismatches: list[str] = []
-        if asset_id not in asset_by_id:
+        candidate = candidates.get(asset_id)
+        if asset_id not in asset_by_id and candidate is None:
             family_mismatches.append("case asset is absent from equipment scenario coverage")
+        elif asset_id not in asset_by_id and candidate is not None:
+            candidate_case_asset_ids.add(asset_id)
+            blockers.append(
+                f"{case_id}: candidate asset identity is not resolved: {asset_id}"
+            )
         for family in raw_families:
             family_row = family_by_name.get(family)
             if family_row is None:
                 family_mismatches.append(f"case family is absent from scenario coverage: {family}")
-            elif asset_id not in family_row["applicable_asset_ids"]:
+            elif asset_id not in family_row["applicable_asset_ids"] and not (
+                candidate is not None
+                and family in candidate.get("candidate_family_scope", ())
+            ):
                 family_mismatches.append(
                     f"case asset {asset_id} is not declared applicable to family {family}"
                 )
+        case_scope_status = (
+            "SCOPE_MISMATCH" if family_mismatches
+            else "CANDIDATE_IDENTITY_ONLY" if candidate is not None and asset_id not in asset_by_id
+            else "BOUND_TO_DECLARED_SCOPE"
+        )
         if family_mismatches:
             blockers.extend(f"{case_id}: {reason}" for reason in family_mismatches)
         normalized = {
@@ -134,7 +179,7 @@ def audit_equipment_family_case_bridge(
             "scenario_families": raw_families,
             "closure_status": raw.get("closure_status"),
             "closure_gaps": gaps,
-            "scope_status": "BOUND_TO_DECLARED_SCOPE" if not family_mismatches else "SCOPE_MISMATCH",
+            "scope_status": case_scope_status,
             "scope_blocking_reasons": family_mismatches,
         }
         case_rows.append(normalized)
@@ -147,7 +192,8 @@ def audit_equipment_family_case_bridge(
     if duplicate_case_ids:
         blockers.append("duplicate case identifiers: " + ", ".join(sorted(duplicate_case_ids)))
 
-    case_asset_ids_outside_scope = sorted(case_asset_ids - set(asset_by_id))
+    case_asset_ids_outside_scope = sorted(case_asset_ids - set(asset_by_id) - set(candidates))
+    case_assets_candidate_only = sorted(candidate_case_asset_ids - set(asset_by_id))
     coverage_assets_without_cases: list[str] = []
     asset_rows: list[dict[str, Any]] = []
     for asset_id in asset_ids:
@@ -182,13 +228,22 @@ def audit_equipment_family_case_bridge(
         applicable = list(family_row["applicable_asset_ids"])
         case_assets = sorted({row["asset_id"] for row in rows})
         assets_without_case = sorted(set(applicable) - set(case_assets))
-        case_assets_outside = sorted(set(case_assets) - set(applicable))
         gap_counts = Counter(gap for row in rows for gap in row["closure_gaps"])
+        candidate_case_assets = sorted(
+            set(row["asset_id"] for row in rows)
+            & set(candidates)
+            - set(applicable)
+        )
+        case_assets_outside = sorted(
+            set(case_assets) - set(applicable) - set(candidate_case_assets)
+        )
         family_scope_mismatch = bool(case_assets_outside or any(
             row["scope_status"] == "SCOPE_MISMATCH" for row in rows
         ))
         if family_scope_mismatch:
             family_status = "CASE_SCOPE_MISMATCH"
+        elif candidate_case_assets:
+            family_status = "CANDIDATE_IDENTITY_ONLY"
         elif not rows:
             family_status = "NO_CASES_FOR_DECLARED_FAMILY"
         elif assets_without_case:
@@ -202,6 +257,7 @@ def audit_equipment_family_case_bridge(
             "case_asset_ids": case_assets,
             "applicable_assets_without_case": assets_without_case,
             "case_assets_outside_family_scope": case_assets_outside,
+            "candidate_case_assets": candidate_case_assets,
             "closure_gap_counts": dict(sorted(gap_counts.items())),
             "status": family_status,
         })
@@ -224,9 +280,15 @@ def audit_equipment_family_case_bridge(
 
     blockers = list(dict.fromkeys(blockers))
     scope_mismatch_case_count = sum(row["scope_status"] == "SCOPE_MISMATCH" for row in case_rows)
+    candidate_identity_case_count = sum(
+        row["scope_status"] == "CANDIDATE_IDENTITY_ONLY" for row in case_rows
+    )
+    has_scope_mismatch = scope_mismatch_case_count > 0 or bool(case_asset_ids_outside_scope)
     status = (
         "CASE_SCOPE_MISMATCH_RELEASE_CLOSURE_OPEN"
-        if blockers
+        if has_scope_mismatch
+        else "CANDIDATE_IDENTITY_RELEASE_CLOSURE_OPEN"
+        if candidate_identity_case_count
         else "CASE_BOUND_RELEASE_CLOSURE_OPEN"
     )
     return {
@@ -239,7 +301,12 @@ def audit_equipment_family_case_bridge(
         "case_count": len(case_rows),
         "case_asset_count": len(case_asset_ids),
         "case_assets_outside_scope": case_asset_ids_outside_scope,
+        "case_assets_candidate_only": case_assets_candidate_only,
         "scope_mismatch_case_count": scope_mismatch_case_count,
+        "candidate_identity_case_count": candidate_identity_case_count,
+        "candidate_manifest_record": candidate_manifest.get("_record_path")
+        if candidate_manifest is not None
+        else None,
         "coverage_assets_without_cases": coverage_assets_without_cases,
         "scenario_family_count": len(family_by_name),
         "families_with_cases": sum(bool(rows) for rows in family_cases.values()),
@@ -252,7 +319,7 @@ def audit_equipment_family_case_bridge(
         ).items())),
         "blocking_reasons": blockers,
         "promotion_gates": {
-            "equipment_case_bridge_allowed": not blockers,
+            "equipment_case_bridge_allowed": not blockers and not candidates,
             "release_boundary_promotion_allowed": False,
             "frequency_inference_allowed": False,
             "facility_qra_allowed": False,

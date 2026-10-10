@@ -71,6 +71,27 @@ def test_bridge_reports_family_asset_mismatch_and_open_closure_gaps():
     assert report["release_closure_gap_counts"]["ISOLATION_OPEN"] == 1
 
 
+def test_candidate_manifest_keeps_identity_open_without_scope_inference():
+    candidate_manifest = {
+        "schema_version": "prism.facility_case_asset_candidate_manifest.v1",
+        "rows": [{
+            "asset_id": "inventory-depletion-pipe",
+            "identity_status": "candidate",
+            "candidate_family_scope": ["pipe_hole"],
+        }],
+    }
+    report = audit_equipment_family_case_bridge(
+        _coverage(),
+        _worklist(_case("inventory-depletion-pipe", "pipe_hole")),
+        candidate_manifest=candidate_manifest,
+    )
+    assert report["status"] == "CANDIDATE_IDENTITY_RELEASE_CLOSURE_OPEN"
+    assert report["case_assets_outside_scope"] == []
+    assert report["case_assets_candidate_only"] == ["inventory-depletion-pipe"]
+    assert report["candidate_identity_case_count"] == 1
+    assert report["promotion_gates"]["equipment_case_bridge_allowed"] is False
+
+
 def test_bridge_keeps_a_valid_case_bound_but_release_open():
     report = audit_equipment_family_case_bridge(
         _coverage(),

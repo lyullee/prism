@@ -28,12 +28,20 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--equipment-scenario-coverage", type=Path, required=True)
     parser.add_argument("--release-closure-worklist", type=Path, required=True)
+    parser.add_argument(
+        "--candidate-manifest",
+        type=Path,
+        help="Optional candidate-only case asset identity manifest.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
         report = audit_equipment_family_case_bridge(
             _object(args.equipment_scenario_coverage),
             _object(args.release_closure_worklist),
+            candidate_manifest=_object(args.candidate_manifest)
+            if args.candidate_manifest
+            else None,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError,
             EquipmentFamilyCaseBridgeAuditError) as error:
@@ -48,6 +56,7 @@ def main() -> int:
         "asset_count": report["asset_count"],
         "case_count": report["case_count"],
         "case_assets_outside_scope": report["case_assets_outside_scope"],
+        "case_assets_candidate_only": report["case_assets_candidate_only"],
         "scope_mismatch_case_count": report["scope_mismatch_case_count"],
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))

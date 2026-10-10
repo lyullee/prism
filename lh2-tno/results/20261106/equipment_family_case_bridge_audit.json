@@ -1,17 +1,20 @@
 {
   "schema_version": "prism.equipment_family_case_bridge_audit.v1",
-  "status": "CASE_SCOPE_MISMATCH_RELEASE_CLOSURE_OPEN",
+  "status": "CANDIDATE_IDENTITY_RELEASE_CLOSURE_OPEN",
   "scope": "generic LH2 equipment-to-facility-case bridge; diagnostic only",
   "coverage_record": "results\\20261105\\generic_lh2_full_scope_equipment_scenario_coverage.json",
   "worklist_record": "results\\20261106\\release_closure_worklist.json",
   "asset_count": 7,
   "case_count": 44,
   "case_asset_count": 9,
-  "case_assets_outside_scope": [
+  "case_assets_outside_scope": [],
+  "case_assets_candidate_only": [
     "inventory-depletion-pipe",
     "vertical-handoff-vent"
   ],
-  "scope_mismatch_case_count": 20,
+  "scope_mismatch_case_count": 0,
+  "candidate_identity_case_count": 20,
+  "candidate_manifest_record": "examples\\generic_case_asset_candidate_manifest.json",
   "coverage_assets_without_cases": [],
   "scenario_family_count": 12,
   "families_with_cases": 12,
@@ -210,6 +213,7 @@
       ],
       "applicable_assets_without_case": [],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "INVENTORY_CLOSURE_OPEN": 5,
         "ISOLATION_OPEN": 5,
@@ -229,7 +233,8 @@
         "vertical-handoff-vent"
       ],
       "applicable_assets_without_case": [],
-      "case_assets_outside_family_scope": [
+      "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [
         "inventory-depletion-pipe",
         "vertical-handoff-vent"
       ],
@@ -239,7 +244,7 @@
         "PROVIDER_QUALIFICATION_OPEN": 25,
         "TERMINATION_OPEN": 15
       },
-      "status": "CASE_SCOPE_MISMATCH"
+      "status": "CANDIDATE_IDENTITY_ONLY"
     },
     {
       "family": "valve_hole",
@@ -252,6 +257,7 @@
       ],
       "applicable_assets_without_case": [],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 5,
         "PROVIDER_QUALIFICATION_OPEN": 5,
@@ -270,6 +276,7 @@
       ],
       "applicable_assets_without_case": [],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 1,
         "PROVIDER_QUALIFICATION_OPEN": 1
@@ -287,6 +294,7 @@
       ],
       "applicable_assets_without_case": [],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 2,
         "PROVIDER_QUALIFICATION_OPEN": 2,
@@ -305,6 +313,7 @@
       ],
       "applicable_assets_without_case": [],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 1,
         "PROVIDER_QUALIFICATION_OPEN": 1,
@@ -323,6 +332,7 @@
       ],
       "applicable_assets_without_case": [],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 1,
         "PROVIDER_QUALIFICATION_OPEN": 1,
@@ -352,6 +362,7 @@
         "reliquefier"
       ],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "INVENTORY_CLOSURE_OPEN": 5,
         "ISOLATION_OPEN": 17,
@@ -382,7 +393,8 @@
       "applicable_assets_without_case": [
         "reliquefier"
       ],
-      "case_assets_outside_family_scope": [
+      "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [
         "inventory-depletion-pipe"
       ],
       "closure_gap_counts": {
@@ -391,7 +403,7 @@
         "PROVIDER_QUALIFICATION_OPEN": 28,
         "TERMINATION_OPEN": 12
       },
-      "status": "CASE_SCOPE_MISMATCH"
+      "status": "CANDIDATE_IDENTITY_ONLY"
     },
     {
       "family": "inventory_over_600s",
@@ -415,6 +427,7 @@
         "transfer-valve"
       ],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 1,
         "PROVIDER_QUALIFICATION_OPEN": 1
@@ -437,6 +450,7 @@
         "transfer-valve"
       ],
       "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [],
       "closure_gap_counts": {
         "ISOLATION_OPEN": 2,
         "PROVIDER_QUALIFICATION_OPEN": 2
@@ -459,7 +473,8 @@
         "transfer-line",
         "transfer-valve"
       ],
-      "case_assets_outside_family_scope": [
+      "case_assets_outside_family_scope": [],
+      "candidate_case_assets": [
         "vertical-handoff-vent"
       ],
       "closure_gap_counts": {
@@ -467,7 +482,7 @@
         "PROVIDER_QUALIFICATION_OPEN": 10,
         "TERMINATION_OPEN": 10
       },
-      "status": "CASE_SCOPE_MISMATCH"
+      "status": "CANDIDATE_IDENTITY_ONLY"
     }
   ],
   "cases": [
@@ -898,12 +913,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -919,12 +930,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -940,12 +947,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -961,12 +964,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -982,12 +981,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -1003,12 +998,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -1024,12 +1015,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -1045,12 +1032,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
@@ -1066,12 +1049,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
@@ -1087,12 +1066,8 @@
         "INVENTORY_CLOSURE_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-        "case asset inventory-depletion-pipe is not declared applicable to family pipe_hole"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1108,12 +1083,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1129,12 +1100,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1150,12 +1117,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1171,12 +1134,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1192,12 +1151,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1213,12 +1168,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1234,12 +1185,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1255,12 +1202,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
@@ -1276,12 +1219,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     },
     {
       "case_id": "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
@@ -1297,12 +1236,8 @@
         "ISOLATION_OPEN",
         "PROVIDER_QUALIFICATION_OPEN"
       ],
-      "scope_status": "SCOPE_MISMATCH",
-      "scope_blocking_reasons": [
-        "case asset is absent from equipment scenario coverage",
-        "case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-        "case asset vertical-handoff-vent is not declared applicable to family vertical_handoff"
-      ]
+      "scope_status": "CANDIDATE_IDENTITY_ONLY",
+      "scope_blocking_reasons": []
     }
   ],
   "release_closure_gap_counts": {
@@ -1312,75 +1247,31 @@
     "TERMINATION_OPEN": 24
   },
   "blocking_reasons": [
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family inventory_depletion",
-    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: case asset inventory-depletion-pipe is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset is absent from equipment scenario coverage",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family pipe_hole",
-    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: case asset vertical-handoff-vent is not declared applicable to family vertical_handoff",
-    "family pipe_hole has cases on undeclared assets: inventory-depletion-pipe, vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion: candidate asset identity is not resolved: inventory-depletion-pipe",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
+    "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff: candidate asset identity is not resolved: vertical-handoff-vent",
     "family liquid_two_phase has declared assets without a worklist case: ambient-vaporizer, reliquefier",
     "family inventory_depletion has declared assets without a worklist case: reliquefier",
-    "family inventory_depletion has cases on undeclared assets: inventory-depletion-pipe",
     "family inventory_over_600s has declared assets without a worklist case: reliquefier, storage-shell, transfer-line, transfer-pump, transfer-valve",
     "family two_sided_rupture has declared assets without a worklist case: transfer-line, transfer-valve",
-    "family vertical_handoff has declared assets without a worklist case: pressure-relief-vent, transfer-line, transfer-valve",
-    "family vertical_handoff has cases on undeclared assets: vertical-handoff-vent",
-    "case assets absent from equipment scenario coverage: inventory-depletion-pipe, vertical-handoff-vent"
+    "family vertical_handoff has declared assets without a worklist case: pressure-relief-vent, transfer-line, transfer-valve"
   ],
   "promotion_gates": {
     "equipment_case_bridge_allowed": false,

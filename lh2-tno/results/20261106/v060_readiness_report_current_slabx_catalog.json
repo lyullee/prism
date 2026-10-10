@@ -176,15 +176,12 @@
     },
     "equipment_family_case_bridge": {
       "schema_version": "prism.equipment_family_case_bridge_audit.v1",
-      "status": "CASE_SCOPE_MISMATCH_RELEASE_CLOSURE_OPEN",
+      "status": "CANDIDATE_IDENTITY_RELEASE_CLOSURE_OPEN",
       "asset_count": 7,
       "case_count": 44,
       "case_asset_count": 9,
-      "case_assets_outside_scope": [
-        "inventory-depletion-pipe",
-        "vertical-handoff-vent"
-      ],
-      "scope_mismatch_case_count": 20,
+      "case_assets_outside_scope": [],
+      "scope_mismatch_case_count": 0,
       "scenario_family_count": 12,
       "families_with_cases": 12,
       "families_without_cases": 0,
@@ -1423,7 +1420,7 @@
     },
     "equipment_family_case_bridge_audit": {
       "path": "results/20261106/equipment_family_case_bridge_audit.json",
-      "sha256": "3f6a5d9518f48a963dc282baa959d954edb1fc369d33e71e2283d2e489a9d7f1"
+      "sha256": "a1c2594289ebba72c4b05880021dc8aa108fe3ae364ddf27c32d8ba119ed18f8"
     }
   },
   "invariant_validation": {
