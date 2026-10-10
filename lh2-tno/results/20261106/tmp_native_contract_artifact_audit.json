@@ -1,0 +1,203 @@
+{
+  "schema_version": "prism.provider_artifact_audit.v1",
+  "status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",
+  "source_root_provided": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract",
+  "artifact_count": 22,
+  "provider_response_count": 7,
+  "verification_artifact_count": 7,
+  "qualification_artifact_count": 0,
+  "physical_validation_artifact_count": 0,
+  "complete_facility_qra_artifact_count": 0,
+  "diagnostic_artifact_count": 22,
+  "artifacts": [
+    {
+      "file": "layered/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "layered/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "layered/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "pipe/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "pipe/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "pipe/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "pump/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "pump/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "pump/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "reliquefier/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "reliquefier/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "reliquefier/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "valve/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "valve/provider_response_strict.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "valve/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "valve/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "vaporizer/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "vaporizer/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "vaporizer/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "vent/provider_response.json",
+      "kind": "provider_response",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "vent/resolved_release.json",
+      "kind": "other_json",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    },
+    {
+      "file": "vent/verification.json",
+      "kind": "verification",
+      "qualification_evidence_present": false,
+      "physical_validation_claim": false,
+      "complete_facility_qra_claim": false,
+      "diagnostic_only": true
+    }
+  ],
+  "errors": [],
+  "promotion_policy": {
+    "frequency_assigned": false,
+    "provider_release_packet_promoted": false,
+    "physical_validation_promoted": false,
+    "facility_qra_promoted": false,
+    "qualification_requires_separate_exact_digest_bound_evidence": true
+  },
+  "blocking_reasons": [
+    "no prism.provider_qualification_evidence.v1 record was found",
+    "no artifact claims independent physical validation",
+    "no artifact claims a complete facility QRA"
+  ]
+}
