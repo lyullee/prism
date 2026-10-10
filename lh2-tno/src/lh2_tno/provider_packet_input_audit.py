@@ -18,6 +18,10 @@ from .provider_packet_promotion import (
     ProviderPacketPromotionError,
     build_provider_packet_evidence_from_records,
 )
+from .provider_release_closure import (
+    ProviderReleaseClosureError,
+    audit_provider_release_closure,
+)
 
 
 SCHEMA = "prism.provider_packet_input_audit.v1"
@@ -47,6 +51,8 @@ def _record_value(record: Mapping[str, Any], key: str, *, base_dir: Path | None)
 
 def audit_provider_packet_inputs(
     manifest: Mapping[str, Any] | Sequence[Mapping[str, Any]] | str | Path,
+    *,
+    require_release_closure: bool = False,
 ) -> dict[str, Any]:
     """Audit a provider packet manifest without changing its records.
 
@@ -98,6 +104,24 @@ def audit_provider_packet_inputs(
             if qualification is None:
                 raise ProviderPacketPromotionError(
                     "qualification or qualification_path is required"
+                )
+            try:
+                closure_audit = audit_provider_release_closure(release)
+            except ProviderReleaseClosureError as error:
+                closure_audit = {
+                    "schema_version": "prism.provider_release_closure_audit.v1",
+                    "status": "CLOSURE_AUDIT_ERROR",
+                    "blocking_reasons": [str(error)],
+                }
+            entry["release_closure_audit"] = closure_audit
+            if require_release_closure and closure_audit.get("status") != (
+                "CLOSURE_READY_FOR_QUALIFICATION"
+            ):
+                reasons = closure_audit.get("blocking_reasons", ())
+                detail = "; ".join(str(reason) for reason in reasons)
+                raise ProviderPacketPromotionError(
+                    "provider release closure audit is open"
+                    + (f": {detail}" if detail else "")
                 )
             evidence = build_provider_packet_evidence_from_records(
                 release, qualification
@@ -167,6 +191,8 @@ def audit_provider_packet_inputs(
             "synthetic_input_is_not_promoted": True,
             "qualification_sidecar_is_required": True,
             "strict_release_contract_is_required": True,
+            "release_closure_audit_required": require_release_closure,
+            "release_closure_audit_schema": "prism.provider_release_closure_audit.v1",
             "distinct_packets_per_event_allowed": True,
             "facility_ir_fn_promotion": "requires exact facility case coverage and independent validation gates",
         },

@@ -15,9 +15,17 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--require-release-closure",
+        action="store_true",
+        help="Reject records whose provider termination/isolation/inventory closure is open.",
+    )
     args = parser.parse_args()
     try:
-        report = audit_provider_packet_inputs(args.manifest)
+        report = audit_provider_packet_inputs(
+            args.manifest,
+            require_release_closure=args.require_release_closure,
+        )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"provider packet manifest input error: {error}") from error
     args.output.parent.mkdir(parents=True, exist_ok=True)

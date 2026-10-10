@@ -50,6 +50,26 @@ def test_valid_pair_is_promoted_only_after_strict_sidecar_match():
     assert report["accepted_provider_packet_count"] == 1
     assert report["rejected_record_count"] == 0
     assert report["provider_packet_evidence"][0]["event_id"] == "provider-accident-01"
+    assert report["records"][0]["release_closure_audit"]["status"] == (
+        "CLOSURE_EVIDENCE_OPEN"
+    )
+
+
+def test_strict_manifest_mode_rejects_open_release_closure():
+    report = audit_provider_packet_inputs(
+        {
+            "records": [{
+                "record_id": "actual-001",
+                "release": _release(),
+                "qualification": _qualification(),
+            }]
+        },
+        require_release_closure=True,
+    )
+    assert report["status"] == "NO_PROVIDER_PACKET_INPUT"
+    assert report["rejected_record_count"] == 1
+    assert "release closure audit is open" in report["records"][0]["blocking_reasons"][0]
+    assert report["promotion_policy"]["release_closure_audit_required"] is True
 
 
 def test_rejected_synthetic_and_bad_digest_records_remain_visible():
