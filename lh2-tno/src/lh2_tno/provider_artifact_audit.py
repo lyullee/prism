@@ -50,6 +50,23 @@ def _artifact_kind(path: Path) -> str:
     return "other_json"
 
 
+def _is_runtime_path(path: Path) -> bool:
+    """Return whether a path belongs to a local runtime/cache tree.
+
+    External digital-twin workspaces commonly use names such as
+    ``.venv-local`` instead of the conventional ``.venv``.  Package metadata
+    inside those trees is not provider evidence and must not change the audit
+    counts or qualification status.
+    """
+
+    return any(
+        part in {".git", "__pycache__"}
+        or part.casefold().startswith(".venv")
+        or part.casefold() in {"venv", "virtualenv"}
+        for part in path.parts
+    )
+
+
 def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
     """Inventory JSON artifacts below ``root`` using relative paths only."""
     source_root = Path(root).resolve()
@@ -65,7 +82,7 @@ def audit_provider_artifact_root(root: str | Path) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
     for path in sorted(source_root.rglob("*.json")):
-        if any(part in {".git", "__pycache__", ".venv"} for part in path.parts):
+        if _is_runtime_path(path):
             continue
         relative = path.relative_to(source_root).as_posix()
         try:

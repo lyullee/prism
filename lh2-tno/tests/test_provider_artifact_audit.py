@@ -41,3 +41,23 @@ def test_provider_artifact_audit_detects_qualification_record(tmp_path):
     assert report["physical_validation_artifact_count"] == 1
     assert report["complete_facility_qra_artifact_count"] == 1
     assert report["status"] == "ARTIFACTS_REQUIRE_PRISM_RECONCILIATION"
+
+
+def test_provider_artifact_audit_excludes_named_virtual_environment_trees(tmp_path):
+    (tmp_path / ".venv-local" / "Lib").mkdir(parents=True)
+    (tmp_path / "venv" / "Lib").mkdir(parents=True)
+    (tmp_path / ".venv-local" / "Lib" / "package.json").write_text(
+        json.dumps({"physical_validation_claim": True}), encoding="utf-8"
+    )
+    (tmp_path / "venv" / "Lib" / "package.json").write_text(
+        json.dumps({"complete_facility_qra_claim": True}), encoding="utf-8"
+    )
+    (tmp_path / "equipment.json").write_text(
+        json.dumps({"physical_validation_claim": False}), encoding="utf-8"
+    )
+
+    report = audit_provider_artifact_root(tmp_path)
+
+    assert report["artifact_count"] == 1
+    assert report["physical_validation_artifact_count"] == 0
+    assert report["complete_facility_qra_artifact_count"] == 0
