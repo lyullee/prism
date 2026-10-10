@@ -69,6 +69,8 @@ def build_ijhe_objective_coverage_audit(
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
+    generic_provider_closure_audit: Mapping[str, Any] | None = None,
+    generic_provider_evidence_requests: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
@@ -105,6 +107,9 @@ def build_ijhe_objective_coverage_audit(
     )
     generic_equipment_frequency_binding_path = _record_path(
         generic_equipment_frequency_binding_audit, None
+    )
+    generic_provider_evidence_requests_path = _record_path(
+        generic_provider_evidence_requests, None
     )
     release_closure_worklist_path = _record_path(release_closure_worklist, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
@@ -1802,6 +1807,109 @@ def build_ijhe_objective_coverage_audit(
                 "이 행은 provider 자료 수집과 종료 경계 확인을 위한 진단 원장이다. "
                 "worklist가 닫혀도 qualified provider evidence·독립 물리검증·시설 QRA를 "
                 "자동으로 열지 않는다."
+            ),
+        ))
+
+    # Keep the one-request-per-provider-packet catalog visible in the IJHE
+    # ledger. It is an intake check only: it never promotes a packet,
+    # assigns frequency, or opens facility QRA.
+    provider_catalog = generic_provider_evidence_requests
+    provider_catalog_packet_count = (
+        _int(provider_catalog.get("packet_count"))
+        if isinstance(provider_catalog, Mapping)
+        else None
+    )
+    provider_catalog_request_count = (
+        _int(provider_catalog.get("request_count"))
+        if isinstance(provider_catalog, Mapping)
+        else None
+    )
+    provider_catalog_closure_open_count = (
+        _int(provider_catalog.get("closure_open_request_count"))
+        if isinstance(provider_catalog, Mapping)
+        else None
+    )
+    provider_catalog_qualification_open_count = (
+        _int(provider_catalog.get("qualification_open_request_count"))
+        if isinstance(provider_catalog, Mapping)
+        else None
+    )
+    provider_catalog_input_ok = (
+        isinstance(provider_catalog, Mapping)
+        and provider_catalog.get("schema_version")
+        == "prism.generic_provider_evidence_requests.v1"
+        and provider_catalog.get("diagnostic_only") is True
+        and provider_catalog.get("frequency_inference_allowed") is False
+        and provider_catalog.get("facility_qra_allowed") is False
+        and provider_catalog.get("qualified_provider_packet_count") == 0
+        and provider_catalog_packet_count is not None
+        and provider_catalog_request_count == provider_catalog_packet_count
+        and provider_catalog_closure_open_count is not None
+        and provider_catalog_qualification_open_count is not None
+        and provider_catalog_closure_open_count
+        + provider_catalog_qualification_open_count
+        == provider_catalog_request_count
+    )
+    provider_catalog_matches_closure = (
+        provider_catalog_input_ok
+        and (
+            not isinstance(generic_provider_closure_audit, Mapping)
+            or _int(generic_provider_closure_audit.get("provider_packet_count"))
+            == provider_catalog_packet_count
+        )
+    )
+    if generic_provider_evidence_requests is not None:
+        rows.append(_row(
+            "diagnostic_generic_provider_evidence_requests",
+            "모든 generic LH2 provider packet에 종료근거 또는 qualification 증거 요청이 정확히 하나씩 있어야 한다",
+            "PASS" if provider_catalog_matches_closure else "BLOCKED_EVIDENCE",
+            evidence_paths=(generic_provider_evidence_requests_path,),
+            observed={
+                "schema_version": (
+                    provider_catalog.get("schema_version")
+                    if isinstance(provider_catalog, Mapping)
+                    else None
+                ),
+                "event_count": (
+                    provider_catalog.get("event_count")
+                    if isinstance(provider_catalog, Mapping)
+                    else None
+                ),
+                "packet_path_count": (
+                    provider_catalog.get("packet_path_count")
+                    if isinstance(provider_catalog, Mapping)
+                    else None
+                ),
+                "packet_count": provider_catalog_packet_count,
+                "request_count": provider_catalog_request_count,
+                "closure_open_request_count": provider_catalog_closure_open_count,
+                "qualification_open_request_count": provider_catalog_qualification_open_count,
+                "qualified_provider_packet_count": (
+                    provider_catalog.get("qualified_provider_packet_count")
+                    if isinstance(provider_catalog, Mapping)
+                    else None
+                ),
+                "catalog_input_valid": provider_catalog_input_ok,
+                "catalog_matches_closure": provider_catalog_matches_closure,
+                "frequency_inference_allowed": (
+                    provider_catalog.get("frequency_inference_allowed")
+                    if isinstance(provider_catalog, Mapping)
+                    else None
+                ),
+                "facility_qra_allowed": (
+                    provider_catalog.get("facility_qra_allowed")
+                    if isinstance(provider_catalog, Mapping)
+                    else None
+                ),
+            },
+            blocking_reason=(
+                None
+                if provider_catalog_matches_closure
+                else "provider 증거 요청 catalog가 malformed이거나 closure audit의 packet 수와 일치하지 않는다"
+            ),
+            interpretation=(
+                "catalog는 자료 수집의 누락을 방지하는 진단 장부다. 종료시간, 재고, 빈도, "
+                "물리검증 또는 시설 QRA를 추정하거나 자동 승격하지 않는다."
             ),
         ))
 

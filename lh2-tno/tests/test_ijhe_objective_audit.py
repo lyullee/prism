@@ -729,6 +729,68 @@ def test_objective_audit_marks_closed_release_closure_worklist_as_diagnostic_pas
     assert check["observed"]["closure_closed"] is True
 
 
+def test_objective_audit_records_provider_evidence_catalog_without_promotion():
+    inputs = _inputs()
+    inputs["generic_provider_evidence_requests"] = {
+        "schema_version": "prism.generic_provider_evidence_requests.v1",
+        "status": "OPEN_PROVIDER_EVIDENCE_REQUESTS",
+        "event_count": 2,
+        "packet_path_count": 2,
+        "packet_count": 3,
+        "request_count": 3,
+        "closure_open_request_count": 1,
+        "qualification_open_request_count": 2,
+        "qualified_provider_packet_count": 0,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "diagnostic_only": True,
+        "_record_path": "provider-evidence-requests.json",
+    }
+    inputs["generic_provider_closure_audit"] = {
+        "schema_version": "prism.generic_provider_release_closure_audit.v1",
+        "provider_packet_count": 3,
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_provider_evidence_requests"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["request_count"] == 3
+    assert check["observed"]["catalog_matches_closure"] is True
+    assert report["strict_facility_qra_claim"] is False
+
+
+def test_objective_audit_blocks_provider_evidence_catalog_packet_drift():
+    inputs = _inputs()
+    inputs["generic_provider_evidence_requests"] = {
+        "schema_version": "prism.generic_provider_evidence_requests.v1",
+        "status": "OPEN_PROVIDER_EVIDENCE_REQUESTS",
+        "event_count": 1,
+        "packet_path_count": 1,
+        "packet_count": 1,
+        "request_count": 1,
+        "closure_open_request_count": 1,
+        "qualification_open_request_count": 0,
+        "qualified_provider_packet_count": 0,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "diagnostic_only": True,
+        "_record_path": "provider-evidence-requests.json",
+    }
+    inputs["generic_provider_closure_audit"] = {
+        "schema_version": "prism.generic_provider_release_closure_audit.v1",
+        "provider_packet_count": 2,
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_provider_evidence_requests"
+    )
+    assert check["status"] == "BLOCKED_EVIDENCE"
+    assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
+
+
 def test_objective_audit_records_observed_state_model_binding_without_release_promotion():
     inputs = _inputs()
     inputs["observed_state_model_binding_audit"] = {

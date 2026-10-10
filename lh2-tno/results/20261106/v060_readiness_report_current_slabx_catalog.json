@@ -1043,8 +1043,8 @@
   "interpretation": "The v0.6.0 declared outdoor chain is numerically connected for conditional diagnostics. Operator-limited cases, missing qualified provider packets, restricted component validation, and strict facility-QRA gates remain visible and are not replaced by another scenario.",
   "source_artifacts": {
     "objective_audit": {
-      "path": "results/20261106/ijhe_objective_coverage_audit_with_release_closure.json",
-      "sha256": "876e5b4036bdff43e4f46030e58d957da747d084b3bb39a64a20a278a0e49a53"
+      "path": "results/20261106/ijhe_objective_coverage_audit_with_provider_evidence_requests.json",
+      "sha256": "101680a0a28281cbeb0511a7cbcf03d08dddf8816ef95e0c61b634949df9dfaf"
     },
     "union_verification": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
