@@ -1252,7 +1252,7 @@
   "current_union_facility_assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261026/native_full_scope_union_assessment/campaign_result.json",
-  "current_union_full_test_count": 745,
+  "current_union_full_test_count": 747,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
   "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 13 objective checks; 9 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 38-check completion audit",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261026/native_full_scope_union_assessment/facility_frequency_uncertainty_audit.json",
@@ -2479,5 +2479,8 @@
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
   "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
-  "current_union_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION; 44 case-level requests are ready; 0 qualified provider packets received; release and qualification paths remain empty"
+  "current_union_provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION; 44 case-level requests are ready; 0 qualified provider packets received; release and qualification paths remain empty",
+  "supplemental_isolation_response_audit_record": "results/20261009/equipment_isolation_campaign/isolation_response_audit.json",
+  "supplemental_isolation_response_audit_status": "ISOLATION_RESPONSE_CHAIN_DIAGNOSTIC; 10 provider branches (5 success, 5 failure) consumed by 20 campaign cases and 80 risk atoms; synthetic diagnostic only",
+  "supplemental_isolation_response_audit_facility_qra_promotion": false
 }
