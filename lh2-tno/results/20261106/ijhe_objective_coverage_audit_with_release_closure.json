@@ -709,6 +709,47 @@
       "interpretation": "문헌 빈도는 설비 사고 시작의 연간 빈도로만 사용한다. 실제 피해 계산은 provider가 지속시간·차단·재고·질량수지를 가진 방출 packet을 제출한 뒤에만 수행한다."
     },
     {
+      "id": "diagnostic_generic_equipment_scenario_coverage",
+      "requirement": "일반 옥외 액화수소시설의 설비·사고군 crosswalk를 objective 원장에 연결하되 방출·빈도·QRA 승격은 차단해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261105\\generic_lh2_full_scope_equipment_scenario_coverage.json"
+      ],
+      "observed": {
+        "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+        "asset_count": 7,
+        "mapped_asset_count": 7,
+        "resolved_asset_count": 7,
+        "state_model_ready_mapped_asset_count": 7,
+        "scenario_family_count": 12,
+        "accident_release_packet_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "일반 시설 manifest는 7개 설비와 12개 사고군의 적용 후보를 명시한다. 이 목록은 provider의 방출 지속시간·차단·재고·질량수지를 대신하지 않는다."
+    },
+    {
+      "id": "diagnostic_generic_equipment_frequency_binding",
+      "requirement": "일반 시설 설비 사고군에 문헌 빈도를 연결하되 현장 학습·provider 방출·피해 결합과 미계산 사고를 보존해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261105\\generic_lh2_full_scope_equipment_frequency_binding.json"
+      ],
+      "observed": {
+        "status": "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+        "asset_count": 7,
+        "resolved_asset_count": 7,
+        "frequency_event_count": 24,
+        "valid_frequency_event_count": 24,
+        "uncomputed_family_count": 1,
+        "provider_release_required": true,
+        "consequence_binding_allowed": false,
+        "facility_qra_allowed": false
+      },
+      "blocking_reason": null,
+      "interpretation": "문헌 빈도는 일반 시설의 사고 시작 빈도 후보로만 연결한다. 센서 정상상태에서 빈도를 학습하지 않으며, provider 방출 packet 없이는 피해와 IR/F-N을 계산하지 않는다."
+    },
+    {
       "id": "diagnostic_release_closure_worklist",
       "requirement": "방출 종료·격리·재고 소진·질량잔차의 provider closure를 사건별로 추적하고 미해결 항목을 표시해야 한다",
       "status": "BLOCKED_EVIDENCE",

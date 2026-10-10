@@ -48,6 +48,8 @@ def main() -> int:
     parser.add_argument("--external-equipment-model-audit", type=Path)
     parser.add_argument("--equipment-scenario-coverage-audit", type=Path)
     parser.add_argument("--equipment-frequency-binding-audit", type=Path)
+    parser.add_argument("--generic-equipment-scenario-coverage-audit", type=Path)
+    parser.add_argument("--generic-equipment-frequency-binding-audit", type=Path)
     parser.add_argument("--release-closure-worklist", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -129,6 +131,16 @@ def main() -> int:
             equipment_frequency_binding_audit=(
                 _object(args.equipment_frequency_binding_audit)
                 if args.equipment_frequency_binding_audit
+                else None
+            ),
+            generic_equipment_scenario_coverage_audit=(
+                _object(args.generic_equipment_scenario_coverage_audit)
+                if args.generic_equipment_scenario_coverage_audit
+                else None
+            ),
+            generic_equipment_frequency_binding_audit=(
+                _object(args.generic_equipment_frequency_binding_audit)
+                if args.generic_equipment_frequency_binding_audit
                 else None
             ),
             release_closure_worklist=(

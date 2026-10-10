@@ -541,6 +541,86 @@ def test_objective_audit_records_equipment_frequency_binding_without_qra_promoti
     ]
 
 
+def test_objective_audit_records_generic_equipment_scope_and_literature_frequency():
+    inputs = _inputs()
+    inputs["generic_equipment_scenario_coverage_audit"] = {
+        "schema_version": "prism.equipment_scenario_coverage_audit.v1",
+        "status": "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+        "scenario_catalog_schema": "prism.accident_scenario_catalog.v1",
+        "asset_count": 7,
+        "mapped_asset_count": 7,
+        "resolved_asset_count": 7,
+        "state_model_ready_mapped_asset_count": 7,
+        "scenario_family_count": 12,
+        "promotion_gates": {
+            "scenario_mapping_allowed": True,
+            "accident_release_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "promotion_allowed": False,
+        },
+        "policy": {
+            "component_kind_is_never_inferred_from_tag": True,
+            "candidate_identity_is_not_resolved_identity": True,
+            "scenario_catalog_does_not_create_release": True,
+            "scenario_mapping_is_not_frequency": True,
+            "no_automatic_facility_qra_promotion": True,
+        },
+        "physical_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "_record_path": "generic-scenario-coverage.json",
+    }
+    inputs["generic_equipment_frequency_binding_audit"] = {
+        "schema_version": "prism.equipment_frequency_binding_audit.v1",
+        "status": "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+        "asset_count": 7,
+        "resolved_asset_count": 7,
+        "frequency_event_count": 24,
+        "valid_frequency_event_count": 24,
+        "uncomputed_family_count": 1,
+        "promotion_gates": {
+            "literature_frequency_binding_allowed": True,
+            "provider_release_required": True,
+            "consequence_binding_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "promotion_allowed": False,
+        },
+        "policy": {
+            "literature_frequency_is_not_field_validated": True,
+            "sensor_frequency_learning_used": False,
+            "normal_state_observations_do_not_create_frequency": True,
+            "unresolved_assets_do_not_receive_zero_frequency": True,
+            "unmapped_families_remain_uncomputed": True,
+            "frequency_does_not_create_provider_release": True,
+            "provider_release_required_before_consequence": True,
+            "facility_qra_requires_complete_family_and_packet_coverage": True,
+        },
+        "physical_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "provider_packet_promoted": False,
+        "_record_path": "generic-frequency-binding.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    scenario_check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_equipment_scenario_coverage"
+    )
+    frequency_check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_generic_equipment_frequency_binding"
+    )
+    assert scenario_check["status"] == "PASS"
+    assert scenario_check["observed"]["resolved_asset_count"] == 7
+    assert frequency_check["status"] == "PASS"
+    assert frequency_check["observed"]["valid_frequency_event_count"] == 24
+    assert report["strict_facility_qra_claim"] is False
+
+
 def test_objective_audit_records_open_release_closure_worklist_without_promotion():
     inputs = _inputs()
     inputs["release_closure_worklist"] = {

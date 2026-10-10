@@ -67,6 +67,8 @@ def build_ijhe_objective_coverage_audit(
     external_equipment_model_audit: Mapping[str, Any] | None = None,
     equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
+    generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
+    generic_equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
@@ -98,6 +100,12 @@ def build_ijhe_objective_coverage_audit(
     external_equipment_model_path = _record_path(external_equipment_model_audit, None)
     equipment_scenario_coverage_path = _record_path(equipment_scenario_coverage_audit, None)
     equipment_frequency_binding_path = _record_path(equipment_frequency_binding_audit, None)
+    generic_equipment_scenario_coverage_path = _record_path(
+        generic_equipment_scenario_coverage_audit, None
+    )
+    generic_equipment_frequency_binding_path = _record_path(
+        generic_equipment_frequency_binding_audit, None
+    )
     release_closure_worklist_path = _record_path(release_closure_worklist, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
@@ -1442,6 +1450,216 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "문헌 빈도는 설비 사고 시작의 연간 빈도로만 사용한다. 실제 피해 계산은 provider가 "
                 "지속시간·차단·재고·질량수지를 가진 방출 packet을 제출한 뒤에만 수행한다."
+            ),
+        ))
+
+    generic_scenario_gates = (
+        generic_equipment_scenario_coverage_audit.get("promotion_gates", {})
+        if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+        else {}
+    )
+    if not isinstance(generic_scenario_gates, Mapping):
+        generic_scenario_gates = {}
+    generic_scenario_policy = (
+        generic_equipment_scenario_coverage_audit.get("policy", {})
+        if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+        else {}
+    )
+    if not isinstance(generic_scenario_policy, Mapping):
+        generic_scenario_policy = {}
+    generic_scenario_ok = (
+        isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+        and generic_equipment_scenario_coverage_audit.get("schema_version")
+        == "prism.equipment_scenario_coverage_audit.v1"
+        and generic_equipment_scenario_coverage_audit.get("scenario_catalog_schema")
+        == "prism.accident_scenario_catalog.v1"
+        and generic_equipment_scenario_coverage_audit.get("status")
+        in {
+            "CROSSWALK_REQUIRED",
+            "PARTIAL_CROSSWALK_RELEASE_BOUNDARY_UNVERIFIED",
+            "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+        }
+        and isinstance(generic_equipment_scenario_coverage_audit.get("asset_count"), int)
+        and generic_equipment_scenario_coverage_audit.get("asset_count", 0) > 0
+        and generic_equipment_scenario_coverage_audit.get("mapped_asset_count")
+        == generic_equipment_scenario_coverage_audit.get("asset_count")
+        and generic_equipment_scenario_coverage_audit.get("resolved_asset_count")
+        == generic_equipment_scenario_coverage_audit.get("mapped_asset_count")
+        and isinstance(
+            generic_equipment_scenario_coverage_audit.get("scenario_family_count"), int
+        )
+        and generic_equipment_scenario_coverage_audit.get("scenario_family_count", 0) > 0
+        and generic_scenario_gates.get("scenario_mapping_allowed") is True
+        and generic_scenario_gates.get("accident_release_packet_allowed") is False
+        and generic_scenario_gates.get("frequency_inference_allowed") is False
+        and generic_scenario_gates.get("facility_qra_allowed") is False
+        and generic_scenario_gates.get("promotion_allowed") is False
+        and generic_equipment_scenario_coverage_audit.get("physical_validation_claim") is False
+        and generic_equipment_scenario_coverage_audit.get("accident_release_validation_claim") is False
+        and generic_equipment_scenario_coverage_audit.get("frequency_inference_performed") is False
+        and generic_equipment_scenario_coverage_audit.get("facility_qra_claim") is False
+        and generic_scenario_policy.get("component_kind_is_never_inferred_from_tag") is True
+        and generic_scenario_policy.get("candidate_identity_is_not_resolved_identity") is True
+        and generic_scenario_policy.get("scenario_catalog_does_not_create_release") is True
+        and generic_scenario_policy.get("scenario_mapping_is_not_frequency") is True
+        and generic_scenario_policy.get("no_automatic_facility_qra_promotion") is True
+    )
+    if generic_equipment_scenario_coverage_audit is not None:
+        rows.append(_row(
+            "diagnostic_generic_equipment_scenario_coverage",
+            "일반 옥외 액화수소시설의 설비·사고군 crosswalk를 objective 원장에 연결하되 방출·빈도·QRA 승격은 차단해야 한다",
+            "PASS" if generic_scenario_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(generic_equipment_scenario_coverage_path,),
+            observed={
+                "status": (
+                    generic_equipment_scenario_coverage_audit.get("status")
+                    if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "asset_count": (
+                    generic_equipment_scenario_coverage_audit.get("asset_count")
+                    if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "mapped_asset_count": (
+                    generic_equipment_scenario_coverage_audit.get("mapped_asset_count")
+                    if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "resolved_asset_count": (
+                    generic_equipment_scenario_coverage_audit.get("resolved_asset_count")
+                    if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "state_model_ready_mapped_asset_count": (
+                    generic_equipment_scenario_coverage_audit.get(
+                        "state_model_ready_mapped_asset_count"
+                    )
+                    if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "scenario_family_count": (
+                    generic_equipment_scenario_coverage_audit.get("scenario_family_count")
+                    if isinstance(generic_equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "accident_release_packet_allowed": generic_scenario_gates.get(
+                    "accident_release_packet_allowed"
+                ),
+                "facility_qra_allowed": generic_scenario_gates.get("facility_qra_allowed"),
+            },
+            blocking_reason=None if generic_scenario_ok else (
+                "일반 시설 설비-사고군 감사의 schema·crosswalk·승격 차단 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "일반 시설 manifest는 7개 설비와 12개 사고군의 적용 후보를 명시한다. "
+                "이 목록은 provider의 방출 지속시간·차단·재고·질량수지를 대신하지 않는다."
+            ),
+        ))
+
+    generic_frequency_gates = (
+        generic_equipment_frequency_binding_audit.get("promotion_gates", {})
+        if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+        else {}
+    )
+    if not isinstance(generic_frequency_gates, Mapping):
+        generic_frequency_gates = {}
+    generic_frequency_policy = (
+        generic_equipment_frequency_binding_audit.get("policy", {})
+        if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+        else {}
+    )
+    if not isinstance(generic_frequency_policy, Mapping):
+        generic_frequency_policy = {}
+    generic_frequency_ok = (
+        isinstance(generic_equipment_frequency_binding_audit, Mapping)
+        and generic_equipment_frequency_binding_audit.get("schema_version")
+        == "prism.equipment_frequency_binding_audit.v1"
+        and generic_equipment_frequency_binding_audit.get("status")
+        in {
+            "FREQUENCY_BINDING_WITHHELD",
+            "PARTIAL_FREQUENCY_BINDING",
+            "LITERATURE_FREQUENCY_BOUND_RELEASE_UNVERIFIED",
+        }
+        and isinstance(generic_equipment_frequency_binding_audit.get("resolved_asset_count"), int)
+        and generic_equipment_frequency_binding_audit.get("resolved_asset_count", 0) > 0
+        and isinstance(generic_equipment_frequency_binding_audit.get("frequency_event_count"), int)
+        and generic_equipment_frequency_binding_audit.get("frequency_event_count", 0) > 0
+        and generic_equipment_frequency_binding_audit.get("valid_frequency_event_count")
+        == generic_equipment_frequency_binding_audit.get("frequency_event_count")
+        and isinstance(generic_equipment_frequency_binding_audit.get("uncomputed_family_count"), int)
+        and generic_equipment_frequency_binding_audit.get("uncomputed_family_count", 0) >= 0
+        and generic_frequency_gates.get("literature_frequency_binding_allowed") is True
+        and generic_frequency_gates.get("provider_release_required") is True
+        and generic_frequency_gates.get("consequence_binding_allowed") is False
+        and generic_frequency_gates.get("frequency_inference_allowed") is False
+        and generic_frequency_gates.get("facility_qra_allowed") is False
+        and generic_frequency_gates.get("promotion_allowed") is False
+        and generic_equipment_frequency_binding_audit.get("physical_validation_claim") is False
+        and generic_equipment_frequency_binding_audit.get("accident_release_validation_claim") is False
+        and generic_equipment_frequency_binding_audit.get("frequency_inference_performed") is False
+        and generic_equipment_frequency_binding_audit.get("facility_qra_claim") is False
+        and generic_equipment_frequency_binding_audit.get("provider_packet_promoted") is False
+        and generic_frequency_policy.get("literature_frequency_is_not_field_validated") is True
+        and generic_frequency_policy.get("sensor_frequency_learning_used") is False
+        and generic_frequency_policy.get("normal_state_observations_do_not_create_frequency") is True
+        and generic_frequency_policy.get("unresolved_assets_do_not_receive_zero_frequency") is True
+        and generic_frequency_policy.get("unmapped_families_remain_uncomputed") is True
+        and generic_frequency_policy.get("frequency_does_not_create_provider_release") is True
+        and generic_frequency_policy.get("provider_release_required_before_consequence") is True
+        and generic_frequency_policy.get("facility_qra_requires_complete_family_and_packet_coverage") is True
+    )
+    if generic_equipment_frequency_binding_audit is not None:
+        rows.append(_row(
+            "diagnostic_generic_equipment_frequency_binding",
+            "일반 시설 설비 사고군에 문헌 빈도를 연결하되 현장 학습·provider 방출·피해 결합과 미계산 사고를 보존해야 한다",
+            "PASS" if generic_frequency_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(generic_equipment_frequency_binding_path,),
+            observed={
+                "status": (
+                    generic_equipment_frequency_binding_audit.get("status")
+                    if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "asset_count": (
+                    generic_equipment_frequency_binding_audit.get("asset_count")
+                    if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "resolved_asset_count": (
+                    generic_equipment_frequency_binding_audit.get("resolved_asset_count")
+                    if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "frequency_event_count": (
+                    generic_equipment_frequency_binding_audit.get("frequency_event_count")
+                    if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "valid_frequency_event_count": (
+                    generic_equipment_frequency_binding_audit.get("valid_frequency_event_count")
+                    if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "uncomputed_family_count": (
+                    generic_equipment_frequency_binding_audit.get("uncomputed_family_count")
+                    if isinstance(generic_equipment_frequency_binding_audit, Mapping)
+                    else None
+                ),
+                "provider_release_required": generic_frequency_gates.get(
+                    "provider_release_required"
+                ),
+                "consequence_binding_allowed": generic_frequency_gates.get(
+                    "consequence_binding_allowed"
+                ),
+                "facility_qra_allowed": generic_frequency_gates.get("facility_qra_allowed"),
+            },
+            blocking_reason=None if generic_frequency_ok else (
+                "일반 시설 문헌빈도 연결의 provenance·미계산 사고·provider 요구 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "문헌 빈도는 일반 시설의 사고 시작 빈도 후보로만 연결한다. "
+                "센서 정상상태에서 빈도를 학습하지 않으며, provider 방출 packet 없이는 피해와 IR/F-N을 계산하지 않는다."
             ),
         ))
 
