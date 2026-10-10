@@ -1,0 +1,124 @@
+{
+  "schema_version": "prism.validation_intake_audit.v1",
+  "status": "SCREENED_NO_PROMOTION",
+  "physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference_performed": false,
+  "inputs": {
+    "inspection_timeseries": {
+      "schema_version": "prism.inspection_center_timeseries_audit.v1",
+      "status": "SCREENING_ONLY_UNIT_BASIS_UNCONFIRMED",
+      "source_file_count": 17,
+      "aggregate": {
+        "workbook_count": 17,
+        "sheet_count": 78,
+        "workbook_or_sheet_error_count": 0,
+        "signal_category_count": {
+          "differential_pressure": 126,
+          "pressure": 246,
+          "sequence_metadata": 105,
+          "temperature": 93,
+          "time": 10,
+          "unknown": 493
+        },
+        "numeric_signal_unit_status_count": {
+          "MISSING_OR_UNCONFIRMED": 522
+        },
+        "reviewed_unit_map_supplied": false
+      }
+    },
+    "equipment_validation": {
+      "available": true,
+      "schema_version": "prism.equipment_validation_audit.v1",
+      "status": "RESTRICTED_EQUIPMENT_OBSERVATION_EVIDENCE",
+      "released_scenario_count": 0,
+      "simulator_invocation_count": 0,
+      "official_score": null,
+      "official_score_status": "blocked_until_explicit_raw_historian_dcs_plc_export",
+      "center_binding_ready": false,
+      "forward_comparison_allowed": false,
+      "physical_validation_claim": false,
+      "accident_release_validation_claim": false
+    }
+  },
+  "scenario_groups": {
+    "receipt": {
+      "workbook_count": 7,
+      "sheet_count": 29,
+      "row_count": 21688,
+      "nonempty_row_count": 21556,
+      "numeric_candidate_column_count": 218,
+      "unit_unconfirmed_numeric_column_count": 218,
+      "files": [
+        "1. 액화수소 인수 시나리오 데이터/액화수소_인수_예측데이터_10회차.xlsx",
+        "원본 학습데이터/1. 저장탱크 인수 시나리오/1월21일.xlsx",
+        "원본 학습데이터/1. 저장탱크 인수 시나리오/1월23일.xlsx",
+        "원본 학습데이터/1. 저장탱크 인수 시나리오/3월24일.xlsx",
+        "원본 학습데이터/1. 저장탱크 인수 시나리오/4월16일.xlsx",
+        "원본 학습데이터/1. 저장탱크 인수 시나리오/5월29일.xlsx",
+        "원본 학습데이터/1. 저장탱크 인수 시나리오/7월23일.xlsx"
+      ]
+    },
+    "supply": {
+      "workbook_count": 8,
+      "sheet_count": 31,
+      "row_count": 24724,
+      "nonempty_row_count": 24591,
+      "numeric_candidate_column_count": 200,
+      "unit_unconfirmed_numeric_column_count": 200,
+      "files": [
+        "3. 액화수소 공급 시나리오 데이터/액화수소_공급_예측데이터_10회차.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/4월15일.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/4월21일.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/4월22일.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/6월17일.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/6월22일.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/6월29일.xlsx",
+        "원본 학습데이터/3. 저장탱크 공급 시나리오/6월4일.xlsx"
+      ]
+    },
+    "vent": {
+      "workbook_count": 2,
+      "sheet_count": 18,
+      "row_count": 101117,
+      "nonempty_row_count": 101111,
+      "numeric_candidate_column_count": 104,
+      "unit_unconfirmed_numeric_column_count": 104,
+      "files": [
+        "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소_저장벤트_예측데이터_10회차.xlsx",
+        "원본 학습데이터/2. 저장탱크 벤트 시나리오/저장탱크 데이터.xlsx"
+      ]
+    }
+  },
+  "promotion_gates": {
+    "inspection_audit_read_complete": true,
+    "reviewed_unit_map_supplied": false,
+    "state_snapshot_binding_allowed": false,
+    "accidental_release_packet_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "blocking_reasons": [
+    "inspection_unit_basis_unconfirmed",
+    "normal_operation_rows_have_no_accidental_release_boundary",
+    "exact_asset_port_tag_crosswalk_not_released",
+    "independent_accident_release_scenarios_not_released",
+    "sensor_frequency_learning_is_prohibited"
+  ],
+  "required_next_evidence": [
+    "reviewed exact tag-to-unit and pressure-basis map",
+    "calibration, quality, missing-data, and timestamp-latency record",
+    "asset and P&ID port crosswalk for the target general LH2 facility",
+    "provider release packet with opening, termination, isolation, and mass-balance evidence",
+    "independent holdout comparison that explicitly releases raw historian/DCS/PLC evidence"
+  ],
+  "policy": {
+    "normal_process_time_series_is_state_evidence_only": true,
+    "normal_process_time_series_is_not_accident_frequency": true,
+    "normal_process_time_series_is_not_a_release_packet": true,
+    "no_sensor_inverse_leak_inference": true
+  }
+}
