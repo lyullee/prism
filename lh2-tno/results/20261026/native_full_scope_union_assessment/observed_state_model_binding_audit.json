@@ -1,0 +1,99 @@
+{
+  "schema": "prism.observed_state_model_binding_audit.v1",
+  "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+  "mapping_audit_status": "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY",
+  "observed_component_count": 3,
+  "state_model_bound_component_count": 3,
+  "diagnostic_release_adapter_component_count": 3,
+  "qualified_provider_packet_count": 0,
+  "rows": [
+    {
+      "mapping_id": "center-intake-tank-class",
+      "observed_component_id": "lh2-intake-tank",
+      "source_ids": [
+        "inspection-center-intake-10-runs"
+      ],
+      "model_component_kind": "storage_tank",
+      "required_state_quantities": [
+        "pressure",
+        "temperature",
+        "differential_pressure"
+      ],
+      "observed_state_quantities": [
+        "differential_pressure",
+        "pressure",
+        "temperature"
+      ],
+      "model_package": "lh2dt.layered_tank",
+      "model_class": "LayeredTank",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "diagnostic_release_adapter_status": "available",
+      "accident_release_export_status": "missing",
+      "termination_ledger_status": "normal_flow_only",
+      "status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE",
+      "blocking_reasons": []
+    },
+    {
+      "mapping_id": "center-storage-vent-class",
+      "observed_component_id": "lh2-storage-vent",
+      "source_ids": [
+        "inspection-center-storage-vent-10-runs"
+      ],
+      "model_component_kind": "vent_stack",
+      "required_state_quantities": [
+        "pressure",
+        "differential_pressure"
+      ],
+      "observed_state_quantities": [
+        "differential_pressure",
+        "pressure"
+      ],
+      "model_package": "lh2dt.vent_stack",
+      "model_class": "VentStack",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "diagnostic_release_adapter_status": "available",
+      "accident_release_export_status": "missing",
+      "termination_ledger_status": "normal_flow_only",
+      "status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE",
+      "blocking_reasons": []
+    },
+    {
+      "mapping_id": "center-supply-vaporizer-class",
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "source_ids": [
+        "inspection-center-supply-10-runs"
+      ],
+      "model_component_kind": "vaporizer",
+      "required_state_quantities": [
+        "pressure",
+        "temperature",
+        "differential_pressure"
+      ],
+      "observed_state_quantities": [
+        "differential_pressure",
+        "pressure",
+        "temperature"
+      ],
+      "model_package": "lh2dt.dynamic_vaporizer",
+      "model_class": "DynamicVaporizer",
+      "model_revision": "external-library-0.1.1",
+      "state_export_status": "supported",
+      "diagnostic_release_adapter_status": "available",
+      "accident_release_export_status": "missing",
+      "termination_ledger_status": "normal_flow_only",
+      "status": "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE",
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "normal_state_model_is_not_accident_release": true,
+    "diagnostic_adapter_is_not_qualified_provider": true,
+    "release_event_binding_is_not_created": true,
+    "frequency_is_not_assigned": true,
+    "facility_ir_fn_promotion": false,
+    "diagnostic_only": true
+  }
+}

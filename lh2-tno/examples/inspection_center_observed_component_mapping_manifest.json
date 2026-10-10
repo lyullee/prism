@@ -7,6 +7,8 @@
       "observed_component_id": "lh2-intake-tank",
       "source_ids": ["inspection-center-intake-10-runs"],
       "candidate_component_class": "storage_tank",
+      "model_component_kind": "storage_tank",
+      "required_state_quantities": ["pressure", "temperature", "differential_pressure"],
       "candidate_facility_asset_aliases": ["TK-1101", "TK-1102", "TANK1", "TANK2"],
       "review_status": "candidate",
       "evidence_refs": [
@@ -20,6 +22,8 @@
       "observed_component_id": "lh2-storage-vent",
       "source_ids": ["inspection-center-storage-vent-10-runs"],
       "candidate_component_class": "storage_tank_operating_vent_path",
+      "model_component_kind": "vent_stack",
+      "required_state_quantities": ["pressure", "differential_pressure"],
       "candidate_facility_asset_aliases": ["XV10", "XV11"],
       "review_status": "unresolved",
       "evidence_refs": [
@@ -33,6 +37,8 @@
       "observed_component_id": "lh2-supply-vaporizer-boundary",
       "source_ids": ["inspection-center-supply-10-runs"],
       "candidate_component_class": "vaporizer_supply_boundary",
+      "model_component_kind": "vaporizer",
+      "required_state_quantities": ["pressure", "temperature", "differential_pressure"],
       "candidate_facility_asset_aliases": ["VP-1101"],
       "review_status": "candidate",
       "evidence_refs": [

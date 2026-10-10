@@ -37,6 +37,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     provider_packet_input_audit = _load("provider_packet_input_audit.json")
     observed_state_release_binding_audit = _load("observed_state_release_binding_audit.json")
     observed_component_mapping_audit = _load("observed_component_mapping_audit.json")
+    observed_state_model_binding_audit = _load("observed_state_model_binding_audit.json")
     consequence_backend_chain_audit = _load("consequence_backend_chain_audit.json")
     provider_packet_collection_manifest = _load("provider_packet_collection_manifest.json")
 
@@ -203,7 +204,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
         for row in provider_packet_collection_manifest["rows"]
     )
     assert status_consistency["status"] == "CONSISTENT"
-    assert len(status_consistency["checks"]) == 24
+    assert len(status_consistency["checks"]) == 25
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "provider_packet_input_audit"
@@ -215,6 +216,21 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "observed_component_mapping_audit"
+    )["status"] == "PASS"
+    assert observed_state_model_binding_audit["schema"] == (
+        "prism.observed_state_model_binding_audit.v1"
+    )
+    assert observed_state_model_binding_audit["status"] == (
+        "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY"
+    )
+    assert observed_state_model_binding_audit["observed_component_count"] == 3
+    assert observed_state_model_binding_audit["state_model_bound_component_count"] == 3
+    assert observed_state_model_binding_audit["diagnostic_release_adapter_component_count"] == 3
+    assert observed_state_model_binding_audit["qualified_provider_packet_count"] == 0
+    assert observed_state_model_binding_audit["policy"]["facility_ir_fn_promotion"] is False
+    assert next(
+        row for row in status_consistency["checks"]
+        if row["name"] == "observed_state_model_binding_audit"
     )["status"] == "PASS"
     assert next(
         row for row in status_consistency["checks"]

@@ -101,6 +101,8 @@ def build_status_consistency_report(
     observed_state_release_binding_audit_filename: str | None = None,
     observed_component_mapping_audit: Mapping[str, Any] | None = None,
     observed_component_mapping_audit_filename: str | None = None,
+    observed_state_model_binding_audit: Mapping[str, Any] | None = None,
+    observed_state_model_binding_audit_filename: str | None = None,
     consequence_backend_chain_audit: Mapping[str, Any] | None = None,
     consequence_backend_chain_audit_filename: str | None = None,
     provider_packet_collection_manifest: Mapping[str, Any] | None = None,
@@ -378,6 +380,96 @@ def build_status_consistency_report(
                 "rows_valid": rows_valid,
                 "record": current_status.get(
                     "current_union_observed_component_mapping_audit_record"
+                ),
+            },
+        )
+    if observed_state_model_binding_audit is not None:
+        model_binding_filename = (
+            observed_state_model_binding_audit_filename
+            or "observed_state_model_binding_audit.json"
+        )
+        model_binding_status = observed_state_model_binding_audit.get("status")
+        observed_count = observed_state_model_binding_audit.get("observed_component_count")
+        state_bound_count = observed_state_model_binding_audit.get(
+            "state_model_bound_component_count"
+        )
+        adapter_count = observed_state_model_binding_audit.get(
+            "diagnostic_release_adapter_component_count"
+        )
+        qualified_count = observed_state_model_binding_audit.get(
+            "qualified_provider_packet_count"
+        )
+        model_rows = observed_state_model_binding_audit.get("rows")
+        rows_valid = (
+            isinstance(model_rows, Sequence)
+            and not isinstance(model_rows, (str, bytes))
+            and isinstance(observed_count, int)
+            and len(model_rows) == observed_count
+            and all(
+                isinstance(row, Mapping)
+                and row.get("status") == "STATE_MODEL_BOUND_DIAGNOSTIC_ADAPTER_SEPARATE"
+                and row.get("state_export_status") == "supported"
+                and row.get("accident_release_export_status") == "missing"
+                and row.get("diagnostic_release_adapter_status") == "available"
+                and isinstance(row.get("required_state_quantities"), Sequence)
+                and not isinstance(row.get("required_state_quantities"), (str, bytes))
+                for row in model_rows
+            )
+        )
+        _check(
+            checks,
+            "observed_state_model_binding_audit",
+            observed_state_model_binding_audit.get("schema")
+            == "prism.observed_state_model_binding_audit.v1"
+            and model_binding_status == "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY"
+            and isinstance(observed_count, int)
+            and observed_count > 0
+            and state_bound_count == observed_count
+            and adapter_count == observed_count
+            and qualified_count == 0
+            and rows_valid
+            and observed_state_model_binding_audit.get("blocking_reasons") == []
+            and observed_state_model_binding_audit.get("policy", {}).get(
+                "normal_state_model_is_not_accident_release"
+            ) is True
+            and observed_state_model_binding_audit.get("policy", {}).get(
+                "diagnostic_adapter_is_not_qualified_provider"
+            ) is True
+            and observed_state_model_binding_audit.get("policy", {}).get(
+                "release_event_binding_is_not_created"
+            ) is True
+            and observed_state_model_binding_audit.get("policy", {}).get(
+                "frequency_is_not_assigned"
+            ) is True
+            and observed_state_model_binding_audit.get("policy", {}).get(
+                "facility_ir_fn_promotion"
+            ) is False
+            and all(
+                _endswith(
+                    status.get("current_union_observed_state_model_binding_audit_record"),
+                    model_binding_filename,
+                )
+                for status in (current_status, development_goal)
+            )
+            and all(
+                isinstance(
+                    status.get("current_union_observed_state_model_binding_audit_status"),
+                    str,
+                )
+                and str(model_binding_status)
+                in status["current_union_observed_state_model_binding_audit_status"]
+                for status in (current_status, development_goal)
+            ),
+            {
+                "schema": observed_state_model_binding_audit.get("schema"),
+                "status": model_binding_status,
+                "observed_component_count": observed_count,
+                "state_model_bound_component_count": state_bound_count,
+                "diagnostic_release_adapter_component_count": adapter_count,
+                "qualified_provider_packet_count": qualified_count,
+                "rows_valid": rows_valid,
+                "record": current_status.get(
+                    "current_union_observed_state_model_binding_audit_record"
                 ),
             },
         )

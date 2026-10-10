@@ -40,6 +40,11 @@ def main() -> int:
         help="optional observed-state to generic component-class mapping audit",
     )
     parser.add_argument(
+        "--observed-state-model-binding-audit",
+        type=Path,
+        help="optional observed-state to facility-neutral normal-model binding audit",
+    )
+    parser.add_argument(
         "--consequence-backend-chain-audit",
         type=Path,
         help="optional LH2 release-to-consequence backend chain audit",
@@ -93,6 +98,16 @@ def main() -> int:
             observed_component_mapping_audit_filename=(
                 args.observed_component_mapping_audit.name
                 if args.observed_component_mapping_audit is not None
+                else None
+            ),
+            observed_state_model_binding_audit=(
+                load_json_object(args.observed_state_model_binding_audit)
+                if args.observed_state_model_binding_audit is not None
+                else None
+            ),
+            observed_state_model_binding_audit_filename=(
+                args.observed_state_model_binding_audit.name
+                if args.observed_state_model_binding_audit is not None
                 else None
             ),
             consequence_backend_chain_audit=(

@@ -17,6 +17,7 @@ COVERAGE = ROOT / "results/20261024/native_generic_scope_vertical_case_packet_co
 CURRENT_PROVIDER_INPUT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json"
 CURRENT_STATE_RELEASE_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json"
 CURRENT_COMPONENT_MAPPING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json"
+CURRENT_STATE_MODEL_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json"
 CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json"
 CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json"
 CURRENT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json"
@@ -171,6 +172,51 @@ def test_observed_component_mapping_pointer_drift_is_blocked() -> None:
     check = next(
         row for row in report["checks"]
         if row["name"] == "observed_component_mapping_audit"
+    )
+    assert check["status"] == "FAIL"
+    assert report["status"] == "INCONSISTENT"
+
+
+def test_observed_state_model_binding_audit_is_bound_to_status_ledgers() -> None:
+    report = _report(
+        provider_packet_input_audit=load_json_object(CURRENT_PROVIDER_INPUT_AUDIT),
+        provider_packet_input_audit_filename=CURRENT_PROVIDER_INPUT_AUDIT.name,
+        observed_state_release_binding_audit=load_json_object(
+            CURRENT_STATE_RELEASE_BINDING_AUDIT
+        ),
+        observed_state_release_binding_audit_filename=CURRENT_STATE_RELEASE_BINDING_AUDIT.name,
+        observed_component_mapping_audit=load_json_object(CURRENT_COMPONENT_MAPPING_AUDIT),
+        observed_component_mapping_audit_filename=CURRENT_COMPONENT_MAPPING_AUDIT.name,
+        observed_state_model_binding_audit=load_json_object(CURRENT_STATE_MODEL_BINDING_AUDIT),
+        observed_state_model_binding_audit_filename=CURRENT_STATE_MODEL_BINDING_AUDIT.name,
+    )
+    check = next(
+        row for row in report["checks"]
+        if row["name"] == "observed_state_model_binding_audit"
+    )
+    assert check["status"] == "PASS"
+    assert report["status"] == "CONSISTENT"
+
+
+def test_observed_state_model_binding_pointer_drift_is_blocked() -> None:
+    current_status = load_json_object(ROOT / "CURRENT_STATUS.json")
+    current_status["current_union_observed_state_model_binding_audit_record"] = "stale.json"
+    report = _report(
+        current_status=current_status,
+        provider_packet_input_audit=load_json_object(CURRENT_PROVIDER_INPUT_AUDIT),
+        provider_packet_input_audit_filename=CURRENT_PROVIDER_INPUT_AUDIT.name,
+        observed_state_release_binding_audit=load_json_object(
+            CURRENT_STATE_RELEASE_BINDING_AUDIT
+        ),
+        observed_state_release_binding_audit_filename=CURRENT_STATE_RELEASE_BINDING_AUDIT.name,
+        observed_component_mapping_audit=load_json_object(CURRENT_COMPONENT_MAPPING_AUDIT),
+        observed_component_mapping_audit_filename=CURRENT_COMPONENT_MAPPING_AUDIT.name,
+        observed_state_model_binding_audit=load_json_object(CURRENT_STATE_MODEL_BINDING_AUDIT),
+        observed_state_model_binding_audit_filename=CURRENT_STATE_MODEL_BINDING_AUDIT.name,
+    )
+    check = next(
+        row for row in report["checks"]
+        if row["name"] == "observed_state_model_binding_audit"
     )
     assert check["status"] == "FAIL"
     assert report["status"] == "INCONSISTENT"

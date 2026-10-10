@@ -58,6 +58,20 @@
       }
     },
     {
+      "name": "observed_state_model_binding_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.observed_state_model_binding_audit.v1",
+        "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
+        "observed_component_count": 3,
+        "state_model_bound_component_count": 3,
+        "diagnostic_release_adapter_component_count": 3,
+        "qualified_provider_packet_count": 0,
+        "rows_valid": true,
+        "record": "results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json"
+      }
+    },
+    {
       "name": "consequence_backend_chain_audit",
       "status": "PASS",
       "evidence": {
