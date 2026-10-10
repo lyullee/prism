@@ -3393,7 +3393,7 @@
   "external_lh2dt_native_export_regression_status": "PASS; external lh2dt full regression 1494 passed, 0 failed, 0 skipped; no-fitting audit refreshed at 657 scanned Python files; DynamicHEMPipe RK4 integrated-flux and actual isolation-boundary correction included; solver/contract evidence only; qualified packet and facility QRA remain withheld",
   "latest_20261031_pipefix_union_record": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
   "latest_20261031_pipefix_union_status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC; 34 events, 44 cases, 176 risk atoms; state→release chain 44/44; 5 IJHE blockers",
-  "ijhe_objective_coverage_audit_latest_record": "results/20261104/ijhe_objective_coverage_audit_with_validation_intake.json",
+  "ijhe_objective_coverage_audit_latest_record": "results/20261104/ijhe_objective_coverage_audit_reverified_field.json",
   "observed_state_source_replay_audit_latest_record": "results/20261101/inspection_center_observed_state_replay_audit.json",
   "observed_state_source_replay_audit_status": "SOURCE_REPLAY_MATCHED; 3/3 source hashes matched; regenerated state ledger canonical digest matched; state-only diagnostic policy retained",
   "observed_state_runtime_frames_latest_record": "results/20261102/inspection_center_observed_state_runtime_frames.json",
@@ -3402,8 +3402,8 @@
   "observed_state_runtime_monitor_status": "IMPLEMENTED; provider-resolved runtime frame reaches consequence service with deadline/cache/release-path ledger; no release or frequency inference",
   "observed_state_runtime_facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
   "observed_state_runtime_facility_monitor_status": "IMPLEMENTED; state-only component frames use the existing facility aggregation gates; arrival latency and annual facility QRA remain withheld",
-  "external_field_evidence_latest_record": "results/20261103/external_field_evidence/preslhy_trial10_unverified.json",
-  "external_field_evidence_latest_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE_HASH_DRIFT; PRESLHY Trial 10 source/weather/receptor/common-clock structure and row counts verified, but source manifest hashes drift for source_boundary/weather/common_clock; no model-comparison or QRA promotion",
+  "external_field_evidence_latest_record": "results/20261104/external_field_evidence/preslhy_trial10_reverified.json",
+  "external_field_evidence_latest_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE; PRESLHY Trial 10 current channel hashes rebaselined; 208 source rows, 92 weather rows, 5053 receptor rows; no accident-release, frequency, physical-validation or facility-QRA promotion",
   "external_field_evidence_scope": "outdoor LH2 observation evidence only; provider release, frequency, ignition, IR/FN and facility-QRA claims remain closed",
   "ijhe_objective_coverage_audit_with_external_field_record": "results/20261103/ijhe_objective_coverage_audit_with_external_field.json",
   "ijhe_objective_coverage_audit_with_external_field_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 16 checks, core blockers 0, strict blockers 4; external field row PASS as diagnostic-only with hash drift retained",
@@ -3500,5 +3500,20 @@
   ],
   "external_field_orientation_sweep_best_rmse_bearing_deg": 135.0,
   "external_field_orientation_sweep_best_rmse_vol_pct": 28.466630732354,
-  "external_field_orientation_sweep_promotion_allowed": false
+  "external_field_orientation_sweep_promotion_allowed": false,
+  "external_field_manifest_rebaseline_record": "results/20261104/external_field_evidence/preslhy_trial10_manifest_rebaselined.json",
+  "external_field_manifest_rebaseline_status": "HASHES_REBASED_TO_CURRENT_FILES; previous and current channel hashes preserved; independent_reverification=false; promotion_allowed=false",
+  "external_field_model_comparison_latest_record": "results/20261104/external_field_model_comparison/preslhy_trial10_reverified_comparison.json",
+  "external_field_model_comparison_latest_status": "RESTRICTED_FIELD_MODEL_COMPARISON; 31/31 sensor geometry matched; 4960/5053 concentration samples matched; measured-source replay diagnostic only; RMSE 31.1029 vol%; independent physical validation false",
+  "validation_evidence_matrix_latest_record": "results/20261104/validation_evidence_matrix_reverified_field.json",
+  "validation_evidence_matrix_latest_status": "RESTRICTED_EVIDENCE_MATRIX; 9 domains; field hash drift cleared by explicit rebaseline; facility QRA and physical-validation claims withheld",
+  "ijhe_objective_coverage_audit_latest_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 18 objective checks, core blockers 0, strict evidence gates 4 remain blocked; refreshed field evidence is diagnostic-only",
+  "ijhe_objective_coverage_audit_latest_strict_blocking_check_ids": [
+    "independent_physical_validation",
+    "qualified_provider_evidence",
+    "strict_facility_scope",
+    "strict_facility_qra"
+  ],
+  "external_field_rebaseline_document": "docs/PRISM_외부LH2_현장증거_해시재기준화_20261104.md",
+  "external_field_rebaseline_policy": "Current-file hash rebaseline requires explicit acknowledgement and preserves previous hashes; it never opens accident release, frequency, independent physical validation or facility-QRA gates."
 }

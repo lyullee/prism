@@ -1,0 +1,123 @@
+{
+  "schema": "degali.field-evidence-manifest-execution.v1",
+  "input": {
+    "audit_root": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09",
+    "source_manifest_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\field-evidence-manifest.json"
+  },
+  "field_evidence_manifest": {
+    "schema": "degali.field-evidence-manifest.v1",
+    "manifest_id": "preslhy-e35-trial10-manifest-rebaselined-20261104",
+    "event_id": "preslhy-e35-trial-10-2019-09-13",
+    "audit_root": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09",
+    "channel_artifacts": [
+      {
+        "channel": "source_boundary",
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\source_boundary.csv",
+        "sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a"
+      },
+      {
+        "channel": "weather",
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\weather.csv",
+        "sha256": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed"
+      },
+      {
+        "channel": "obstacle_geometry",
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\obstacle_geometry.json",
+        "sha256": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db"
+      },
+      {
+        "channel": "receptor_observations",
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\receptor_observations.csv",
+        "sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af"
+      },
+      {
+        "channel": "common_clock",
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\common_clock.json",
+        "sha256": "58ceab659640fa9d27287a22fd5e0c093ab4f61376245aa36fd9f15aff0e4cfb"
+      }
+    ],
+    "dataset_id": "preslhy-e35-trial10-xensor-window",
+    "observed_dataset_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\receptor_observations.csv",
+    "observed_dataset_sha256": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+    "observed_row_count": 5053,
+    "source_boundary_id": "preslhy-e35-trial-10-2019-09-13-source",
+    "weather_id": "preslhy-e35-trial-10-2019-09-13-weather",
+    "obstacle_geometry_id": "preslhy-e35-trial-10-2019-09-13-open-pad-geometry",
+    "receptor_geometry_id": "preslhy-e35-trial-10-2019-09-13-receptors",
+    "temporal_operator_id": "xensor-release-window-plus-18s-0.3s",
+    "common_clock_id": "preslhy-e35-trial-10-2019-09-13-shared-wall-clock",
+    "scope": "lh2_free_field",
+    "sensor_set_id": "preslhy-e35-xensor-trial10-a1",
+    "operator_id": "degali-reproducible-bundle-builder-v1",
+    "sensor_registry_artifact": {
+      "channel": "sensor_registry",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\sensor_registry.csv",
+      "sha256": "ab84a8c96fbdbbd3a6ce890db294067809ebc1836f81ef6d534463360c5f4320"
+    },
+    "evidence_readiness": {
+      "status": "accepted",
+      "missing_requirements": [],
+      "promotion_allowed": false,
+      "gate_codes": [
+        "manifest_hashes_rebaselined_current_files",
+        "manifest_metadata_complete",
+        "manifest_not_promoted"
+      ]
+    },
+    "promotion_allowed": false,
+    "gate_codes": [
+      "manifest_files_verified",
+      "manifest_not_promoted"
+    ],
+    "rebaseline": {
+      "schema_version": "prism.external_field_manifest_rebaseline.v1",
+      "status": "HASHES_REBASED_TO_CURRENT_FILES",
+      "source_manifest_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\field-evidence-manifest.json",
+      "source_manifest_sha256": "04d543aab47262e4b75faf6ddc8408c7552a2ae1b2a885dba7dc51509b94f6ea",
+      "previous_channel_sha256": {
+        "source_boundary": "533acd336779e2769d93564c9229ec78b9fd81df0c4a412f23d43d760504a5dc",
+        "weather": "e660c45afdb2d1c676eec1b75db509f585df573e187cadd63c9390925dffb575",
+        "obstacle_geometry": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db",
+        "receptor_observations": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "common_clock": "fb60b6328b1c3534a51385ba0229d694335da6eb8c930bfe1389ee5b85fe07c6"
+      },
+      "current_channel_sha256": {
+        "source_boundary": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+        "weather": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed",
+        "obstacle_geometry": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db",
+        "receptor_observations": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+        "common_clock": "58ceab659640fa9d27287a22fd5e0c093ab4f61376245aa36fd9f15aff0e4cfb"
+      },
+      "independent_reverification": false,
+      "physical_validation_claim": false,
+      "frequency_inference_performed": false,
+      "promotion_allowed": false,
+      "reason": "the external source files were retained and only their current bytes were rehashed"
+    }
+  },
+  "rebaseline": {
+    "schema_version": "prism.external_field_manifest_rebaseline.v1",
+    "status": "HASHES_REBASED_TO_CURRENT_FILES",
+    "source_manifest_path": "C:\\Users\\lyul\\Desktop\\DocuData\\DEGALI_TRANSFER_2026-09-21\\repository\\outputs\\preslhy-e35-trial10-evidence-2026-10-09\\field-evidence-manifest.json",
+    "source_manifest_sha256": "04d543aab47262e4b75faf6ddc8408c7552a2ae1b2a885dba7dc51509b94f6ea",
+    "previous_channel_sha256": {
+      "source_boundary": "533acd336779e2769d93564c9229ec78b9fd81df0c4a412f23d43d760504a5dc",
+      "weather": "e660c45afdb2d1c676eec1b75db509f585df573e187cadd63c9390925dffb575",
+      "obstacle_geometry": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db",
+      "receptor_observations": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+      "common_clock": "fb60b6328b1c3534a51385ba0229d694335da6eb8c930bfe1389ee5b85fe07c6"
+    },
+    "current_channel_sha256": {
+      "source_boundary": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
+      "weather": "7612839f3a3e3f9c51063953a9032b54e6089ea1b994561a6ead344646f6a8ed",
+      "obstacle_geometry": "c1147917c612bcf14df8d01a2464491dd9a25d14ad1b7bebd6682891401ec7db",
+      "receptor_observations": "c4133b49700b5e5e5564dcbbd8d9b889456580af1844322a30fb4f6e88e489af",
+      "common_clock": "58ceab659640fa9d27287a22fd5e0c093ab4f61376245aa36fd9f15aff0e4cfb"
+    },
+    "independent_reverification": false,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "promotion_allowed": false,
+    "reason": "the external source files were retained and only their current bytes were rehashed"
+  }
+}
