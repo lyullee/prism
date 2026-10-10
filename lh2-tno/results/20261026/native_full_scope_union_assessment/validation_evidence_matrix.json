@@ -97,7 +97,7 @@
       "strict_uncomputed_case_count": 29,
       "source": {
         "label": "facility assessment",
-        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
         "sha256": "fb80e34d0ed28d38483ec157095131d27b2bc2d8a6b92805653ec1421489e68e",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
@@ -263,5 +263,5 @@
     "diagnostic_chain_does_not_become_qualified_facility_qra": true,
     "frequency_is_not_inferred_from_sensor_or_observation_data": true
   },
-  "_record_path": "results\\20261026\\native_full_scope_union_assessment_next\\validation_evidence_matrix.json"
+  "_record_path": "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
 }

@@ -676,8 +676,8 @@
       "id": "B_release_to_final_damage",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "strict_gate_open": false
     },
@@ -694,8 +694,8 @@
       "id": "D_literature_frequency_uncertainty",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "strict_gate_open": false
     },
@@ -703,8 +703,8 @@
       "id": "E_validation_and_processing_time",
       "status": "CONDITIONAL_PASS",
       "evidence": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\realtime_cache_benchmark.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
       ],
       "strict_gate_open": false
     }
