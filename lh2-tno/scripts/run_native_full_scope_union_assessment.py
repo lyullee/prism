@@ -337,6 +337,28 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         }
         for matrix in (base_scope, vertical_scope, inventory_scope)
     ]
+    source_alignment = next(
+        (
+            matrix.get("provider_worklist_alignment")
+            for matrix in (base_scope, vertical_scope, inventory_scope)
+            if isinstance(matrix.get("provider_worklist_alignment"), dict)
+        ),
+        None,
+    )
+    if source_alignment is not None:
+        merged_scope["provider_worklist_alignment"] = dict(source_alignment)
+        merged_scope["provider_worklist_alignment"].update(
+            {
+                "scope": "base source worklist only",
+                "facility_merge_additional_campaigns": 2,
+                "facility_merge_alignment_claim": False,
+                "interpretation": (
+                    "The ALIGNED record applies to the 24-event base worklist. "
+                    "Namespaced vertical-handoff and inventory-depletion extensions "
+                    "remain separate diagnostic campaigns."
+                ),
+            }
+        )
     merged_scope["interpretation"] = (
         "The final scope matrix is regenerated from the merged facility ledger. "
         "Source campaign matrices remain provenance views; overlapping family "

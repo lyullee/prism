@@ -94,6 +94,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert rows["pipe_hole"]["case_count"] == 25
     assert rows["liquid_two_phase"]["generated_event_count"] == 17
     assert rows["liquid_two_phase"]["case_count"] == 17
+    assert scope["provider_worklist_alignment"]["status"] == "ALIGNED"
+    assert scope["provider_worklist_alignment"]["facility_merge_alignment_claim"] is False
     assert rows["vertical_handoff"]["status"] == "PARTIAL"
     assert rows["vertical_handoff"]["conditional_status"] == "EXECUTED"
     assert rows["vertical_handoff"]["generated_event_count"] == 5

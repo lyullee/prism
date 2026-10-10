@@ -425,5 +425,37 @@
       "source": "prism.major_accident_scope.v1",
       "digest": "79f03d6bd5d1746a633b5de60edfed832b63f545bde266aa7726866588b3fae0"
     }
-  ]
+  ],
+  "provider_worklist_alignment": {
+    "schema": "prism.accident_scenario_worklist_alignment.v1",
+    "status": "ALIGNED",
+    "worklist_event_count": 24,
+    "campaign_event_count": 24,
+    "aligned_event_count": 24,
+    "missing_event_ids": [],
+    "duplicate_event_ids": [],
+    "empty_family_item_ids": [],
+    "unknown_family_item_ids": [],
+    "primary_family_mismatches": [],
+    "extra_campaign_event_ids": [],
+    "primary_family_counts": {
+      "inventory_depletion": 1,
+      "inventory_over_600s": 1,
+      "pipe_hole": 5,
+      "pump_hole": 2,
+      "reliquefier_hole": 1,
+      "two_sided_rupture": 2,
+      "valve_hole": 5,
+      "vaporizer_hole": 1,
+      "vent_hole": 1,
+      "vessel_hole": 5
+    },
+    "blocking_reasons": [],
+    "frequency_inference_performed": false,
+    "provider_packet_created": false,
+    "scope": "base source worklist only",
+    "facility_merge_additional_campaigns": 2,
+    "facility_merge_alignment_claim": false,
+    "interpretation": "The ALIGNED record applies to the 24-event base worklist. Namespaced vertical-handoff and inventory-depletion extensions remain separate diagnostic campaigns."
+  }
 }

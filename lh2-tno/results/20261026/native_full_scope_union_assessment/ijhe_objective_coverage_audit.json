@@ -134,8 +134,8 @@
         "conditional_chain_complete": true,
         "strict_partial_or_blocked_family_count": 8,
         "scope_not_numerically_executed_case_count": 0,
-        "scope_qualified_evidence_withheld_case_count": 63,
-        "scope_numerically_executed_case_count": 92,
+        "scope_qualified_evidence_withheld_case_count": 73,
+        "scope_numerically_executed_case_count": 98,
         "facility_not_numerically_executed_case_count": 0,
         "facility_qualified_evidence_withheld_case_count": 29,
         "facility_numerically_executed_case_count": 44

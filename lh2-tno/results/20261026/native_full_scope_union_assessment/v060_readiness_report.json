@@ -191,11 +191,11 @@
         "family": "pipe_hole",
         "status": "PARTIAL",
         "conditional_status": "EXECUTED",
-        "generated_event_count": 10,
-        "case_count": 15,
-        "conditional_executed_case_count": 15,
+        "generated_event_count": 15,
+        "case_count": 25,
+        "conditional_executed_case_count": 25,
         "not_numerically_executed_case_count": 0,
-        "qualified_evidence_withheld_case_count": 5,
+        "qualified_evidence_withheld_case_count": 15,
         "uncomputed_reasons": []
       },
       {
@@ -257,9 +257,9 @@
         "family": "liquid_two_phase",
         "status": "PARTIAL",
         "conditional_status": "EXECUTED",
-        "generated_event_count": 21,
-        "case_count": 21,
-        "conditional_executed_case_count": 21,
+        "generated_event_count": 17,
+        "case_count": 17,
+        "conditional_executed_case_count": 17,
         "not_numerically_executed_case_count": 0,
         "qualified_evidence_withheld_case_count": 17,
         "uncomputed_reasons": []
@@ -608,15 +608,15 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
-      "sha256": "dae3a8459952618a9aae7c7f0afce8eda49bba271335962536a77611bac7b09d"
+      "sha256": "e9da2822fbaf862b6242983fcad17abacae45162847a7c9f02879257c27cbeec"
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "dc7c89fe40d768a47b98c3aa910f3b584737df922a2ade55c9c644809c5106e3"
+      "sha256": "a8544f333e22a33532ceeed9a6ba37a195f5f19b37bd954327a57eb93b526f82"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "1ba692e18cb2efd2a21228e892a9563be75700c5459c59d184f093472ef9f856"
+      "sha256": "1a84c3509888648a7218a575aba5ad4618c212aa5139ef09e9b0c87ce8f12750"
     },
     "facility_assessment": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
@@ -628,7 +628,7 @@
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "2d378a235c9735e07ba5c9b4a40f3d0982a4cac462ba27ad73d594137bdfab86"
+      "sha256": "c09c4385c4252f0bbeb2f5bdd541afa5187e390cb3b9f0866edc74e44457c902"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
@@ -636,7 +636,7 @@
     },
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
-      "sha256": "43c03fc0edd6c57d9048cf8bc19c6074e34a30e78f2a76356426ebb69e63209f"
+      "sha256": "2367ee8834349197b42eb8b86c4b55fc074edf514e9b62fd920881aecd53df28"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
