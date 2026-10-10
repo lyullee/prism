@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import json
 import math
 from pathlib import Path
 from typing import Any
@@ -308,11 +309,38 @@ def audit_slabx_lh2_direct_comparison(
         if not provenance_file.is_file():
             blockers.append(f"comparison provenance is missing: {provenance_file}")
         else:
+            try:
+                provenance = json.loads(provenance_file.read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+                raise SlabxDirectComparisonAuditError(
+                    f"comparison provenance is not valid JSON: {provenance_file}"
+                ) from error
+            declared_files = provenance.get("files") if isinstance(provenance, dict) else None
+            if not isinstance(declared_files, dict):
+                declared_files = {}
+            declared_by_name = {
+                Path(str(key)).name: str(value)
+                for key, value in declared_files.items()
+            }
+            expected_hashes = {
+                prediction_file.name: _sha256(prediction_file),
+                refinement_file.name: _sha256(refinement_file),
+            }
+            hash_matches = {
+                name: declared_by_name.get(name) == digest
+                for name, digest in expected_hashes.items()
+            }
             check(
                 "provenance_json_readable",
                 provenance_file.stat().st_size > 0,
                 {"size_bytes": provenance_file.stat().st_size},
                 "comparison provenance file is empty",
+            )
+            check(
+                "provenance_hashes_bind_current_ledgers",
+                all(hash_matches.values()),
+                {"hash_matches": hash_matches},
+                "comparison provenance does not bind both current prediction and refinement ledgers",
             )
 
     blockers = list(dict.fromkeys(blockers))

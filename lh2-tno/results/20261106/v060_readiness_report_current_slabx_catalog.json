@@ -1334,7 +1334,7 @@
     },
     "validation_matrix": {
       "path": "results/20261106/validation_evidence_matrix_current_slabx.json",
-      "sha256": "a793128abfebbe0c21d8bb8d29c67f8b1a3347e7737cab142e0752251e52aeb3"
+      "sha256": "830969b37b095fa90581415a29f91813b11d160e81cb9d492197e5623c55d435"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",

@@ -375,7 +375,7 @@
       "source": {
         "label": "SLABx-LH2 direct component comparison audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\slabx_lh2_direct_comparison_audit.json",
-        "sha256": "984044ee9550e954cf0bc8fb03a5adb05e8c55516da9e539b05155107d5e7cdc",
+        "sha256": "abb0f2493e2ac1d521bda0606c3e36a8fda7b786ed5eadfce4fe3b529930d590",
         "status": "DIRECT_COMPONENT_COMPARISON_REVIEW_READY"
       },
       "physical_validation_claim": false,

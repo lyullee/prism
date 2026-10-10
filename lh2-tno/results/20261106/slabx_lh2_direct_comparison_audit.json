@@ -73,15 +73,15 @@
         "accepted_refinement": {
           "n_field_steps": 640,
           "substeps": 64,
-          "TP": 3,
-          "RMSE_vol_pct": 1.2106452167244133,
-          "predicted_LFL_pairs": 3,
-          "n_sensor_height_pairs": 30,
           "bias_vol_pct": -0.45313011850064,
+          "TP": 3,
+          "predicted_LFL_pairs": 3,
           "observed_LFL_pairs": 3,
-          "MAE_vol_pct": 0.6480842583399519,
+          "RMSE_vol_pct": 1.2106452167244133,
+          "FP": 0,
           "FN": 0,
-          "FP": 0
+          "MAE_vol_pct": 0.6480842583399519,
+          "n_sensor_height_pairs": 30
         },
         "recomputed": {
           "row_count": 30,
@@ -127,6 +127,16 @@
       "evidence": {
         "size_bytes": 2618
       }
+    },
+    {
+      "name": "provenance_hashes_bind_current_ledgers",
+      "status": "PASS",
+      "evidence": {
+        "hash_matches": {
+          "sensor_predictions_n640.csv": true,
+          "refinement_summary.csv": true
+        }
+      }
     }
   ],
   "metrics": {
@@ -152,28 +162,28 @@
     {
       "n_field_steps": 320,
       "substeps": 32,
-      "TP": 3,
-      "RMSE_vol_pct": 1.2106040372118745,
-      "predicted_LFL_pairs": 3,
-      "n_sensor_height_pairs": 30,
       "bias_vol_pct": -0.453016276293373,
+      "TP": 3,
+      "predicted_LFL_pairs": 3,
       "observed_LFL_pairs": 3,
-      "MAE_vol_pct": 0.647964408661679,
+      "RMSE_vol_pct": 1.2106040372118745,
+      "FP": 0,
       "FN": 0,
-      "FP": 0
+      "MAE_vol_pct": 0.647964408661679,
+      "n_sensor_height_pairs": 30
     },
     {
       "n_field_steps": 640,
       "substeps": 64,
-      "TP": 3,
-      "RMSE_vol_pct": 1.2106452167244133,
-      "predicted_LFL_pairs": 3,
-      "n_sensor_height_pairs": 30,
       "bias_vol_pct": -0.45313011850064,
+      "TP": 3,
+      "predicted_LFL_pairs": 3,
       "observed_LFL_pairs": 3,
-      "MAE_vol_pct": 0.6480842583399519,
+      "RMSE_vol_pct": 1.2106452167244133,
+      "FP": 0,
       "FN": 0,
-      "FP": 0
+      "MAE_vol_pct": 0.6480842583399519,
+      "n_sensor_height_pairs": 30
     }
   ],
   "blocking_reasons": [],

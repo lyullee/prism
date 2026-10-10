@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 from pathlib import Path
 
@@ -72,7 +73,14 @@ def _write_fixture(tmp_path: Path, *, bad_lfl: bool = False) -> tuple[Path, Path
         encoding="utf-8",
     )
     provenance = tmp_path / "provenance.json"
-    provenance.write_text(json.dumps({"test": 4}), encoding="utf-8")
+    digest = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+    provenance.write_text(json.dumps({
+        "test": 4,
+        "files": {
+            str(predictions): digest(predictions),
+            str(refinement): digest(refinement),
+        },
+    }), encoding="utf-8")
     return predictions, refinement, readme, provenance
 
 
