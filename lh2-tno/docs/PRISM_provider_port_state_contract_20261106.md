@@ -44,6 +44,11 @@ resolver = provider_release_resolver_from_packet(
 )
 ```
 
+실시간 결과의 `equipment_release_path.boundaries[*].provider_port_state`에는
+구간 수, 결합된 구간 수, 상별 개수, 원자료 해시, 누락 시각이 요약된다. 따라서
+시설 모니터 화면에서 “방출 패킷은 있으나 upstream 포트 상태 증거가 없는
+경우”를 별도로 표시할 수 있다.
+
 `resolver`는 실시간 상태 프레임을 받아도 압력이나 온도로 방출을 재추정하지
 않는다. 설비 모델에서 새 방출 패킷을 생성한 뒤 새 리졸버를 만들거나,
 애플리케이션이 프레임별로 검증된 패킷을 공급해야 한다. 주파수도 이 경계에서

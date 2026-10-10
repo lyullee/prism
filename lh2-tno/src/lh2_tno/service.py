@@ -145,6 +145,41 @@ def request_from_equipment_resolver(template, normalized, resolver: Callable):
     return request
 
 
+def _provider_port_state_ledger(boundary) -> dict[str, object]:
+    """Expose port-state coverage without copying every thermodynamic value."""
+    steps = tuple(getattr(boundary, "steps", ()))
+    states = tuple(
+        state for state in (getattr(step, "provider_port_state", None) for step in steps)
+        if state is not None
+    )
+    missing_times = [
+        float(step.time_s)
+        for step in steps
+        if getattr(step, "provider_port_state", None) is None
+    ]
+    phase_counts: dict[str, int] = {}
+    for state in states:
+        phase = str(state.phase)
+        phase_counts[phase] = phase_counts.get(phase, 0) + 1
+    return {
+        "schema": "prism.provider_port_state.v1" if states else None,
+        "interval_count": len(steps),
+        "bound_interval_count": len(states),
+        "coverage_fraction": (len(states) / len(steps)) if steps else 0.0,
+        "all_intervals_bound": bool(steps) and len(states) == len(steps),
+        "component_ids": sorted({str(state.component_id) for state in states}),
+        "port_ids": sorted({str(state.port_id) for state in states}),
+        "phase_counts": phase_counts,
+        "state_digests": sorted({str(state.source_digest) for state in states}),
+        "missing_time_s": missing_times,
+        "interpretation": (
+            "provider P/h/phase port state covers every resolved interval"
+            if steps and len(states) == len(steps)
+            else "port-state evidence is partial or absent; release boundary remains the only accepted consequence input"
+        ),
+    }
+
+
 def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, object]:
     """Summarize the provider-owned release path attached to one live request.
 
@@ -236,6 +271,7 @@ def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, obje
                 if boundary.failure_opening_diameter_m is not None
                 else None
             ),
+            "provider_port_state": _provider_port_state_ledger(boundary),
         }
         if resolved_liquid is not None and boundary is resolved_liquid:
             row["phase_basis"] = str(boundary.phase_basis)

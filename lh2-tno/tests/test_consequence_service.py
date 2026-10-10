@@ -548,6 +548,8 @@ def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
     path = result['components']['storage-tank-01']['equipment_release_path']
     assert path['status'] == 'AVAILABLE_PROVIDER_RELEASE_PATH'
     assert path['boundary_count'] == 1
+    assert path['boundaries'][0]['provider_port_state']['all_intervals_bound'] is False
+    assert path['boundaries'][0]['provider_port_state']['bound_interval_count'] == 0
     assert path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
     assert result['aggregate']['equipment_release_path_component_count'] == 1
     assert result['aggregate']['equipment_release_path_withheld_component_count'] == 0
