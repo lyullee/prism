@@ -34,6 +34,37 @@ _QUANTITIES = {
     "differential_pressure",
 }
 
+_RUNTIME_FRAME_FORBIDDEN_KEYS = frozenset({
+    "annual_frequency_per_year",
+    "frequency_event",
+    "initiation_intensity_per_s",
+    "failure_opening_diameter_m",
+    "failure_area_m2",
+    "hole_diameter_m",
+    "leak_diameter_m",
+    "resolved_release",
+    "resolved_release_set",
+    "resolved_liquid_release",
+    "provider_release",
+    "provider_release_packet",
+    "release_termination",
+    "termination_provenance",
+    "event_id",
+    "event_kind",
+    "duration_s",
+    "steps",
+    "cumulative_mass_out_kg",
+})
+
+_ORIGINS = {
+    "historian_measured",
+    "figure_digitized",
+    "video_recovered",
+    "reconstructed",
+    "model_prediction",
+    "synthetic",
+}
+
 
 def _finite(value: Any, field: str) -> float:
     try:
@@ -153,6 +184,116 @@ def _frame_from_source(source: Mapping[str, Any]) -> dict[str, Any]:
     return frame
 
 
+def service_state_from_runtime_frame(
+    frame: Mapping[str, Any],
+    *,
+    now_s: float,
+    mapping_digest: str | None = None,
+) -> dict[str, Any]:
+    """Convert one state-only frame to the service resolver input contract.
+
+    ``now_s`` is supplied by the realtime application. It is never inferred
+    from the historical sample clock. The returned mapping is deliberately
+    the same shape consumed by ``validate_equipment_process_state`` and
+    ``request_from_equipment_resolver``; it contains no accident-owned fields.
+    """
+
+    if not isinstance(frame, Mapping):
+        raise TypeError("runtime frame must be a mapping")
+    for key in frame:
+        if str(key).lower() in _RUNTIME_FRAME_FORBIDDEN_KEYS:
+            raise ValueError(f"runtime frame contains accident-owned field: {key}")
+    component_id = str(frame.get("component_id") or "").strip()
+    if not component_id:
+        raise ValueError("runtime frame requires component_id")
+    captured_at_s = _finite(frame.get("captured_at_s"), "captured_at_s")
+    now_s = _finite(now_s, "now_s")
+    if now_s < captured_at_s:
+        raise ValueError("now_s cannot precede runtime frame captured_at_s")
+    origin = frame.get("origin")
+    if origin not in _ORIGINS:
+        raise ValueError(f"unsupported runtime frame origin: {origin}")
+    values = frame.get("values")
+    if not isinstance(values, Mapping) or not values:
+        raise ValueError("runtime frame requires non-empty values")
+    frame_digest = frame.get("frame_digest")
+    if not isinstance(frame_digest, str) or not frame_digest:
+        raise ValueError("runtime frame requires frame_digest")
+    expected_frame_digest = canonical_digest({
+        str(key): value for key, value in frame.items() if key != "frame_digest"
+    })
+    if frame_digest != expected_frame_digest:
+        raise ValueError("runtime frame_digest does not match frame contents")
+    snapshot = frame.get("state_snapshot")
+    snapshot_digest = frame.get("state_snapshot_digest")
+    if not isinstance(snapshot, Mapping) or not isinstance(snapshot_digest, str):
+        raise ValueError("runtime frame requires state_snapshot and state_snapshot_digest")
+    if snapshot_digest != canonical_digest(snapshot):
+        raise ValueError("runtime state_snapshot_digest does not match snapshot")
+    normalized_values: dict[str, dict[str, Any]] = {}
+    for tag, row in values.items():
+        if not isinstance(tag, str) or not tag:
+            raise ValueError("runtime frame value tags must be nonempty strings")
+        if not isinstance(row, Mapping):
+            raise ValueError(f"runtime frame value is not a mapping: {tag}")
+        if str(row.get("component_id")) != component_id:
+            raise ValueError(f"runtime frame value component mismatch: {tag}")
+        quantity = row.get("quantity")
+        if quantity not in _QUANTITIES:
+            raise ValueError(f"unsupported runtime-state quantity: {quantity}")
+        value_si = _finite(row.get("value_si"), f"{tag}.value_si")
+        quality = row.get("quality", "valid")
+        if quality != "valid":
+            raise ValueError(f"runtime resolver input requires valid quality: {tag}")
+        normalized_values[tag] = {
+            "component_id": component_id,
+            "quantity": quantity,
+            "value_si": value_si,
+            "sensor_location": row.get("sensor_location"),
+            "quality": quality,
+        }
+    normalized = {
+        "values": normalized_values,
+        "origin": origin,
+        "independent_measurement_claim": origin == "historian_measured",
+        "data_age_s": now_s - captured_at_s,
+        "frame_digest": frame_digest,
+        "mapping_digest": mapping_digest or canonical_digest({
+            "component_id": component_id,
+            "tags": normalized_values,
+            "provenance": "runtime-frame-si-values; mapping review remains separate",
+        }),
+    }
+    from .service import validate_equipment_process_state
+
+    return validate_equipment_process_state(normalized)
+
+
+def request_from_observed_state_runtime_frame(
+    template: Any,
+    frame: Mapping[str, Any],
+    *,
+    now_s: float,
+    release_resolver: Any,
+    mapping_digest: str | None = None,
+) -> Any:
+    """Pass one runtime state frame through the explicit provider resolver seam.
+
+    The resolver owns the accident release, duration, isolation and inventory
+    boundary. This helper only performs frame integrity/state validation and
+    delegates to the existing fail-closed service contract.
+    """
+
+    normalized = service_state_from_runtime_frame(
+        frame,
+        now_s=now_s,
+        mapping_digest=mapping_digest,
+    )
+    from .service import request_from_equipment_resolver
+
+    return request_from_equipment_resolver(template, normalized, release_resolver)
+
+
 def build_observed_state_runtime_frames(
     sources: Iterable[Mapping[str, Any]],
 ) -> dict[str, Any]:
@@ -178,6 +319,15 @@ def build_observed_state_runtime_frames(
             "method": "latest_sample_by_captured_at_s_then_source_order",
             "one_frame_per_source": True,
         },
+        "runtime_handoff_contract": {
+            "schema": "prism.equipment_process_state.v1",
+            "state_adapter": "service_state_from_runtime_frame",
+            "resolver_adapter": "request_from_observed_state_runtime_frame",
+            "runtime_clock": "caller_supplied_now_s",
+            "provider_release_required_for_consequence": True,
+            "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+            "termination_and_inventory_owner": "equipment_provider",
+        },
         "policy": {
             "state_only": True,
             "release_scenario_generated": False,
@@ -196,4 +346,9 @@ def build_observed_state_runtime_frames(
     }
 
 
-__all__ = ["SCHEMA", "build_observed_state_runtime_frames"]
+__all__ = [
+    "SCHEMA",
+    "build_observed_state_runtime_frames",
+    "service_state_from_runtime_frame",
+    "request_from_observed_state_runtime_frame",
+]

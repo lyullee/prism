@@ -626,6 +626,11 @@ def build_ijhe_objective_coverage_audit(
         if isinstance(observed_state_runtime_frames, Mapping)
         else []
     )
+    runtime_handoff_contract = (
+        observed_state_runtime_frames.get("runtime_handoff_contract", {})
+        if isinstance(observed_state_runtime_frames, Mapping)
+        else {}
+    )
     runtime_frames_ok = (
         isinstance(observed_state_runtime_frames, Mapping)
         and observed_state_runtime_frames.get("schema_version")
@@ -648,6 +653,17 @@ def build_ijhe_objective_coverage_audit(
             and isinstance(frame.get("state_snapshot"), Mapping)
             for frame in runtime_frames
         )
+        and runtime_handoff_contract.get("schema")
+        == "prism.equipment_process_state.v1"
+        and runtime_handoff_contract.get("state_adapter")
+        == "service_state_from_runtime_frame"
+        and runtime_handoff_contract.get("resolver_adapter")
+        == "request_from_observed_state_runtime_frame"
+        and runtime_handoff_contract.get("runtime_clock")
+        == "caller_supplied_now_s"
+        and runtime_handoff_contract.get("provider_release_required_for_consequence") is True
+        and runtime_handoff_contract.get("frequency_assignment")
+        == "rejected_by_request_from_equipment_resolver"
         and runtime_policy.get("state_only") is True
         and runtime_policy.get("release_scenario_generated") is False
         and runtime_policy.get("frequency_inference_performed") is False
@@ -679,6 +695,7 @@ def build_ijhe_objective_coverage_audit(
                 else None
             ),
             "policy": runtime_policy,
+            "runtime_handoff_contract": runtime_handoff_contract,
         },
         blocking_reason=None if runtime_frames_ok else (
             "실시간 상태 frame artifact가 없거나 source/frame 수·digest·state-only 정책이 "

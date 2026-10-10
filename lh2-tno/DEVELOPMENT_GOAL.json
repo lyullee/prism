@@ -1254,7 +1254,7 @@
   "current_union_facility_assessment_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261031/native_full_scope_union_pipefix_state_bound/campaign_result.json",
-  "current_union_full_test_count": 777,
+  "current_union_full_test_count": 780,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_objective_coverage_audit.json",
   "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 15 objective checks; 11 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 39-check completion audit with the external model contract gate",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_frequency_uncertainty_audit.json",
@@ -2171,7 +2171,7 @@
     "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
     "NO_RISK_ATOMS"
   ],
-  "full_portable_test_count_latest": 777,
+  "full_portable_test_count_latest": 780,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": [
@@ -2479,7 +2479,7 @@
   "current_union_provider_packet_input_audit_status": "NO_PROVIDER_PACKET_INPUT; 0 release/qualification pairs accepted; actual qualified provider packet coverage remains 0/44 cases",
   "current_union_observed_state_release_binding_audit_record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json",
   "current_union_observed_state_release_binding_audit_status": "NO_STATE_TO_RELEASE_BINDING; 3 observed components have state evidence but no reviewed facility/provider-event binding",
-  "current_union_full_test_status": "777 passed, 1 skipped; external lh2dt regression 1494 passed, 0 failed, 0 skipped; latest union 34 events/44 cases/176 risk atoms; native state→release identity complete for 44/44 cases after packet rebind state snapshot propagation; observed-state source replay 3/3 matched; strict IJHE gates remain open",
+  "current_union_full_test_status": "780 passed, 1 skipped; external lh2dt regression 1494 passed, 0 failed, 0 skipped; latest union 34 events/44 cases/176 risk atoms; native state→release identity complete for 44/44 cases after packet rebind state snapshot propagation; observed-state source replay 3/3 matched; runtime frames 3/3 ready; state-only provider-resolver handoff; strict IJHE gates remain open",
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
   "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
@@ -2534,5 +2534,5 @@
   "observed_state_source_replay_audit_status": "SOURCE_REPLAY_MATCHED; 3/3 source hashes matched; regenerated state ledger canonical digest matched; state-only diagnostic policy retained",
   "observed_state_runtime_frames_latest_record": "results/20261102/inspection_center_observed_state_runtime_frames.json",
   "observed_state_runtime_frames_status": "STATE_RUNTIME_FRAMES_READY; 3/3 latest state frames; 8955 source samples; service-compatible normal-model/provider-resolver input; no release/frequency/QRA promotion",
-  "full_portable_test_status_latest": "777 passed, 1 skipped"
+  "full_portable_test_status_latest": "780 passed, 1 skipped"
 }

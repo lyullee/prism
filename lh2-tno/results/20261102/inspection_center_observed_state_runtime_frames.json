@@ -198,6 +198,15 @@
     "method": "latest_sample_by_captured_at_s_then_source_order",
     "one_frame_per_source": true
   },
+  "runtime_handoff_contract": {
+    "schema": "prism.equipment_process_state.v1",
+    "state_adapter": "service_state_from_runtime_frame",
+    "resolver_adapter": "request_from_observed_state_runtime_frame",
+    "runtime_clock": "caller_supplied_now_s",
+    "provider_release_required_for_consequence": true,
+    "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+    "termination_and_inventory_owner": "equipment_provider"
+  },
   "policy": {
     "state_only": true,
     "release_scenario_generated": false,

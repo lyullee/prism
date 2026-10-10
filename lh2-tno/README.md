@@ -71,6 +71,10 @@ canonical state snapshot으로 묶었습니다. provider가 방출량·종료·�
 반환하기 전에는 누출·빈도·피해·시설 QRA로 승격하지 않으며, 자세한 흐름은
 [실증데이터 실시간 상태 frame 연결 기록](docs/PRISM_실증데이터_실시간상태프레임_연결_20261102.md)에
 기록했습니다.
+실행 시각은 호출자가 `now_s`로 제공하고, `service_state_from_runtime_frame`이
+상태 입력을 검증한 뒤 `request_from_observed_state_runtime_frame`이 기존
+provider resolver 계약으로 넘깁니다. resolver가 사고빈도를 지정하거나 방출
+종료근거를 생략하면 요청은 fail-closed로 거부됩니다.
 
 관측 상태를 사고 방출로 잘못 승격하지 않도록 `observed_state_release_binding_audit.json`에서
 상태→시설 component→검토된 provider event 연결을 별도로 감사한다. 현재 센터 자료는
