@@ -31,7 +31,7 @@ result의 96개 risk atom에도 snapshot을 보존하며, 상태가 없는 campa
 중단합니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
-최신 fail-closed IJHE 감사는 36개 검사 중 31개 PASS·5개 BLOCKED입니다. native
+최신 fail-closed IJHE 감사는 38개 검사 중 33개 PASS·5개 BLOCKED입니다. native
 catalog의 24/24 exact packet과 구조적 worklist coverage는 diagnostic-only로
 통과시켰고, 44개 시설 case를 case별로 대조하는 `facility_case_packet_coverage.json`도
 생성했습니다. 현재 qualified provider case는 0/44건이므로 모든 case가 명시적으로
@@ -1575,3 +1575,5 @@ python scripts/validate_equipment_campaign.py `
 **상태 스냅샷 결과 재결합 (2026-10-30):** 전체 union 재실행 전에 base campaign 요청·provider-result digest·`EquipmentStateSnapshot`을 다시 대조합니다. 공식 결과는 34개 event·44개 case·176개 risk atom이며 176개 atom 모두 상태 스냅샷을 보존합니다. 이 검사는 상태 연결의 재현성을 보장하지만 provider 자격, 독립 물리검증, 시설 전체 IR/F-N을 승인하지 않습니다. 자세한 규칙과 재현 명령은 [상태 스냅샷 결과 재결합 개발 기록](docs/PRISM_상태스냅샷_결과재결합_개발기록_20261030.md)을 참고합니다.
 
 union 실행기는 이제 `scope_ledger_consistency_current.json`도 같은 실행에서 생성합니다. 현재 범위표와 merged facility ledger는 34개 event에 대해 family별로 `CONSISTENT_SCOPE_LEDGER`이며, `pipe_hole`·`liquid_two_phase`처럼 한 case가 여러 사고군에 속하는 행은 중복 합산하지 않는 비가산 회계로 유지합니다.
+
+\n

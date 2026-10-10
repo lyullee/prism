@@ -24,6 +24,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     rebound = _load("vertical_handoff_rebound_result.json")
     inventory_rebound = _load("inventory_depletion_rebound_result.json")
     audit = _load("ijhe_completion_audit.json")
+    objective_audit = _load("ijhe_objective_coverage_audit.json")
     case_packet_coverage = _load("facility_case_packet_coverage.json")
     base_state_binding = _load("base_result_state_snapshot_binding.json")
     scope_ledger_consistency = _load("scope_ledger_consistency_current.json")
@@ -222,6 +223,14 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert len(audit["checks"]) == 38
     assert sum(check["status"] == "PASS" for check in audit["checks"]) == 33
     assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 5
+    assert objective_audit["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
+    assert len(objective_audit["checks"]) == 13
+    assert objective_audit["strict_blocking_check_ids"] == [
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+    ]
     release_boundary_check = next(
         check for check in audit["checks"]
         if check["name"] == "facility_release_boundary"

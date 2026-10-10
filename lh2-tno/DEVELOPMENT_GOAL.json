@@ -1247,6 +1247,8 @@
   "risk_atom_chain_audit_promotion": false,
   "current_union_ijhe_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
   "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 38 checks, 33 PASS, 5 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage, equipment-state-to-release, facility IR/F-N aggregate closure, equipment-level contribution/ranking closure, and literature-frequency uncertainty closure are PASS; facility QRA remains withheld",
+  "current_union_ijhe_objective_coverage_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
+  "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 13 objective checks; 9 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 38-check completion audit",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261026/native_full_scope_union_assessment/facility_frequency_uncertainty_audit.json",
   "current_union_facility_frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC; 5 literature scenarios independently reproduce conditional IR/F-N and ranking outputs for 176 risk atoms with 0 mismatches; no frequency inference, credible interval, or fresh physics",
   "current_union_facility_component_contribution_audit_record": "results/20261026/native_full_scope_union_assessment/facility_component_contribution_audit.json",

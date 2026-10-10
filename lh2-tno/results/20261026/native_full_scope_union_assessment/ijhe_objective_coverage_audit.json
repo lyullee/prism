@@ -31,7 +31,7 @@
       "evidence_paths": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\packet_evidence.json",
         "results\\20261027\\native_generic_scope_packets_state_bound\\native_packet_campaign_ledger.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "packet_event_count": 24,
@@ -51,8 +51,8 @@
       "requirement": "방출에서 확산·점화·화재/폭발·수용점 피해와 IR/F-N 진단까지 이어져야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "conditional_facility_risk_available": true,
@@ -88,8 +88,8 @@
       "requirement": "문헌 빈도를 그대로 입력하되 여러 빈도 시나리오의 불확실성을 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "frequency_scenario_count": 5,
@@ -107,8 +107,8 @@
       "requirement": "기상·점화·인구 분기를 명시적으로 곱해 최종 피해를 계산해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "population_accounting_status": "RECEPTOR_POPULATION_REBOUND_DIAGNOSTIC",
@@ -126,8 +126,8 @@
       "requirement": "탱크·배관·밸브·펌프·벤트·기화기·재액화기 등 일반 LH2 설비 사고 범위를 명시해야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\scope_matrix.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "required_family_count": 12,
@@ -327,8 +327,8 @@
       "requirement": "디지털 트윈 모니터링 입력에서 빠른 결과를 내고 신규 물리 계산의 시간을 별도로 보여줘야 한다",
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\realtime_cache_benchmark.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json"
+        "results\\20261026\\native_full_scope_union_assessment\\realtime_cache_benchmark.json",
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json"
       ],
       "observed": {
         "cache_p95_ms": 61.27649999689311,
@@ -393,7 +393,7 @@
       "requirement": "실증 또는 독립 실험으로 방출·확산·피해 계산을 검증해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\validation_evidence_matrix.json"
+        "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
       ],
       "observed": {
         "validation_matrix_status": "RESTRICTED_EVIDENCE_MATRIX",
@@ -410,7 +410,7 @@
       "evidence_paths": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\native_packet_campaign_ledger.json",
         "results\\20261027\\native_generic_scope_packets_state_bound\\packet_evidence.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\ijhe_completion_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
       ],
       "observed": {
         "provider_packet_case_count": 24,
@@ -425,8 +425,8 @@
       "requirement": "선언한 주요사고 범위가 모든 설비·사고 family에 대해 엄격히 complete여야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\scope_matrix.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\ijhe_completion_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\scope_matrix.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
       ],
       "observed": {
         "scope_matrix_complete": false,
@@ -450,8 +450,8 @@
       "requirement": "시설 전체 IR/F-N을 qualified QRA 결과로 승격해야 한다",
       "status": "BLOCKED_EVIDENCE",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\facility_assessment.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\ijhe_completion_audit.json"
+        "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
+        "results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json"
       ],
       "observed": {
         "facility_total_risk_available": false,
@@ -466,9 +466,9 @@
       "requirement": "시설 전체 사건이 설비 상태 snapshot과 native 방출 결과 digest까지 일대일로 이어져야 한다",
       "status": "PASS",
       "evidence_paths": [
-        "results\\20261026\\native_full_scope_union_assessment_next\\native_state_snapshot_campaign_ledger.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\extension_state_snapshot_coverage.json",
-        "results\\20261026\\native_full_scope_union_assessment_next\\verification.json"
+        "results\\20261026\\native_full_scope_union_assessment\\native_state_snapshot_campaign_ledger.json",
+        "results\\20261026\\native_full_scope_union_assessment\\extension_state_snapshot_coverage.json",
+        "results\\20261026\\native_full_scope_union_assessment\\verification.json"
       ],
       "observed": {
         "union_event_count": 34,
