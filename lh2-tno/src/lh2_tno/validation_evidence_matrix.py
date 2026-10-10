@@ -381,6 +381,59 @@ def _external_field_comparison_domain(
     }
 
 
+def _preslhy_slabx_window_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Record the native PRESLHY/SLABx window comparison as component evidence."""
+
+    if payload.get("status") != "RESTRICTED_PRESLHY_SLABX_WINDOW_COMPARISON":
+        blockers.append("PRESLHY-SLABx window evidence is not in restricted comparison status")
+    for field in (
+        "physical_validation_claim",
+        "full_chain_validation_claim",
+        "facility_qra_claim",
+        "frequency_inference_performed",
+    ):
+        _require_false(payload, field, "PRESLHY-SLABx window evidence", blockers)
+    metrics = payload.get("metrics") if isinstance(payload.get("metrics"), Mapping) else {}
+    provenance = payload.get("provenance") if isinstance(payload.get("provenance"), Mapping) else {}
+    policy = payload.get("promotion_policy") if isinstance(payload.get("promotion_policy"), Mapping) else {}
+    if policy.get("component_evidence_only") is not True:
+        blockers.append("PRESLHY-SLABx window evidence must remain component evidence only")
+    return {
+        "id": "preslhy_slabx_window_comparison",
+        "status": "RESTRICTED_COMPONENT_EVIDENCE",
+        "supports": [
+            "native SLABx sensor-window comparison against public PRESLHY trials",
+            "trial-level numerical refinement and LFL-state traceability",
+        ],
+        "does_not_support": [
+            "full time-history or independent end-to-end physical validation",
+            "equipment release qualification or initiating-event frequency",
+            "ignition, fire, explosion, IR/F-N, or facility-QRA validation",
+        ],
+        "sensor_row_count": metrics.get("sensor_row_count"),
+        "evaluable_sensor_row_count": metrics.get("evaluable_sensor_row_count"),
+        "predicted_sensor_row_count": metrics.get("predicted_sensor_row_count"),
+        "nonzero_prediction_row_count": metrics.get("nonzero_prediction_row_count"),
+        "evaluated_trial_count": metrics.get("evaluated_trial_count"),
+        "refinement_row_count": metrics.get("refinement_row_count"),
+        "numerical_gate_trial_count": metrics.get("numerical_gate_trial_count"),
+        "accepted_numerical_gate_count": metrics.get("accepted_numerical_gate_count"),
+        "mean_absolute_error_of_evaluable_windows_vol_pct": metrics.get(
+            "mean_absolute_error_of_evaluable_windows_vol_pct"
+        ),
+        "trials": provenance.get("trials"),
+        "final_level": provenance.get("final_level"),
+        "source": _source(path, "PRESLHY-SLABx restricted window comparison", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _audit_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     if payload.get("status") == "COMPLETE_EVIDENCE":
         blockers.append("IJHE audit reports complete evidence; promotion must be reviewed instead of inferred")
@@ -410,6 +463,7 @@ def build_validation_evidence_matrix(
     external_sweep_path: str | Path | None = None,
     external_field_path: str | Path | None = None,
     external_field_comparison_path: str | Path | None = None,
+    preslhy_slabx_window_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -441,6 +495,11 @@ def build_validation_evidence_matrix(
             external_field_comparison_path, "external field model comparison"
         )
         domains.append(_external_field_comparison_domain(comparison_path, comparison, blockers))
+    if preslhy_slabx_window_path is not None:
+        window_path, window = _read_object(
+            preslhy_slabx_window_path, "PRESLHY-SLABx window comparison"
+        )
+        domains.append(_preslhy_slabx_window_domain(window_path, window, blockers))
 
     unique_blockers = list(dict.fromkeys(blockers))
     claims = [
@@ -479,6 +538,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("external field model comparison" in item for item in unique_blockers),
             "basis": "external_field_model_comparison",
+        },
+        {
+            "claim": "restricted_preslhy_slabx_window_comparison_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("PRESLHY-SLABx window evidence" in item for item in unique_blockers),
+            "basis": "preslhy_slabx_window_comparison",
         },
         {
             "claim": "independent_full_chain_physical_validation",

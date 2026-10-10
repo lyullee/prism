@@ -486,6 +486,15 @@
       "sheet_count": 78,
       "workbook_or_sheet_error_count": 0,
       "reviewed_unit_map_supplied": false,
+      "declared_unit_map_supplied": true,
+      "declared_unit_map_status": "DECLARED_UNIT_MAP_NOT_INDEPENDENTLY_REVIEWED",
+      "declared_unit_map_source_count": 3,
+      "declared_unit_map_signal_count": 8,
+      "declared_unit_counts": {
+        "C": 2,
+        "MPa": 3,
+        "kPa": 3
+      },
       "numeric_signal_unit_status_count": {
         "MISSING_OR_UNCONFIRMED": 522
       },
@@ -496,6 +505,7 @@
       "facility_qra_allowed": false,
       "blocking_reasons": [
         "inspection_unit_basis_unconfirmed",
+        "inspection_unit_map_declared_not_independently_reviewed",
         "normal_operation_rows_have_no_accidental_release_boundary",
         "exact_asset_port_tag_crosswalk_not_released",
         "independent_accident_release_scenarios_not_released",
@@ -1028,6 +1038,12 @@
       "status": "RESTRICTED_COMPARISON_EVIDENCE",
       "physical_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "preslhy_slabx_window_comparison",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "physical_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "evidence_request": {
@@ -1120,6 +1136,15 @@
     "sheet_count": 78,
     "workbook_or_sheet_error_count": 0,
     "reviewed_unit_map_supplied": false,
+    "declared_unit_map_supplied": true,
+    "declared_unit_map_status": "DECLARED_UNIT_MAP_NOT_INDEPENDENTLY_REVIEWED",
+    "declared_unit_map_source_count": 3,
+    "declared_unit_map_signal_count": 8,
+    "declared_unit_counts": {
+      "C": 2,
+      "MPa": 3,
+      "kPa": 3
+    },
     "numeric_signal_unit_status_count": {
       "MISSING_OR_UNCONFIRMED": 522
     },
@@ -1130,6 +1155,7 @@
     "facility_qra_allowed": false,
     "blocking_reasons": [
       "inspection_unit_basis_unconfirmed",
+      "inspection_unit_map_declared_not_independently_reviewed",
       "normal_operation_rows_have_no_accidental_release_boundary",
       "exact_asset_port_tag_crosswalk_not_released",
       "independent_accident_release_scenarios_not_released",
@@ -1270,7 +1296,7 @@
     },
     "validation_matrix": {
       "path": "results/20261106/validation_evidence_matrix_current_slabx.json",
-      "sha256": "e5606619e7324e2f00a35cfbd7f49c7adc592e165dd55f8db1554bdeecd9dd81"
+      "sha256": "5ab6ca0657f6ed71ff4a9e3e32c39763766bc447cbb669667862e68cfefe0a62"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
@@ -1286,7 +1312,7 @@
     },
     "validation_intake_audit": {
       "path": "results/20261106/validation_intake_audit_current.json",
-      "sha256": "9fcd6d22040d9936add4b9e4031a2e2575e026639d7a384ef29e74d85ce4ea49"
+      "sha256": "44fafa5db3f7dffcba5b588b2a0985a065f47ab0a3215ec71204309cbda004cf"
     },
     "observed_state_runtime_frames": {
       "path": "results/20261102/inspection_center_observed_state_runtime_frames.json",

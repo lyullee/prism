@@ -41,6 +41,22 @@
       "forward_comparison_allowed": false,
       "physical_validation_claim": false,
       "accident_release_validation_claim": false
+    },
+    "unit_map_manifest": {
+      "supplied": true,
+      "schema_version": "prism.observed_state_input_manifest.v1",
+      "status": "DECLARED_UNIT_MAP_NOT_INDEPENDENTLY_REVIEWED",
+      "source_count": 3,
+      "complete_source_count": 3,
+      "declared_signal_count": 8,
+      "unit_counts": {
+        "C": 2,
+        "MPa": 3,
+        "kPa": 3
+      },
+      "independent_review_required": true,
+      "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\inspection_center_observed_state_manifest.json",
+      "sha256": "71409a7240f84ebf7b5a45b93d27d26e752cf736e57f0f99db463f7170983791"
     }
   },
   "scenario_groups": {
@@ -103,6 +119,7 @@
   },
   "blocking_reasons": [
     "inspection_unit_basis_unconfirmed",
+    "inspection_unit_map_declared_not_independently_reviewed",
     "normal_operation_rows_have_no_accidental_release_boundary",
     "exact_asset_port_tag_crosswalk_not_released",
     "independent_accident_release_scenarios_not_released",

@@ -122,7 +122,28 @@ def _records(tmp_path: Path) -> dict[str, Path]:
         "facility_qra_claim": False,
         "frequency_inference_performed": False,
     })
-    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison}
+    preslhy_window = _write(tmp_path / "preslhy_window.json", {
+        "schema_version": "prism.preslhy_slabx_window_comparison_audit.v1",
+        "status": "RESTRICTED_PRESLHY_SLABX_WINDOW_COMPARISON",
+        "metrics": {
+            "sensor_row_count": 217,
+            "evaluable_sensor_row_count": 155,
+            "predicted_sensor_row_count": 155,
+            "nonzero_prediction_row_count": 105,
+            "evaluated_trial_count": 7,
+            "refinement_row_count": 21,
+            "numerical_gate_trial_count": 7,
+            "accepted_numerical_gate_count": 1,
+            "mean_absolute_error_of_evaluable_windows_vol_pct": 11.4,
+        },
+        "provenance": {"trials": [10, 11, 12, 22, 23, 24, 25], "final_level": 640},
+        "promotion_policy": {"component_evidence_only": True},
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+        "frequency_inference_performed": False,
+    })
+    return {"pool": pool, "equipment": equipment, "facility": facility, "native": native, "ijhe": ijhe, "sweep": sweep, "slabx": slabx, "field": field, "comparison": comparison, "preslhy_window": preslhy_window}
 
 
 def test_matrix_keeps_component_and_diagnostic_evidence_separate(tmp_path):
@@ -184,6 +205,24 @@ def test_matrix_records_field_model_comparison_without_opening_validation(tmp_pa
     assert domain["source_boundary_mode"] == "measured_source_replay"
     claims = {row["claim"]: row for row in matrix["claims"]}
     assert claims["restricted_external_field_model_comparison_evidence"]["allowed"] is True
+    assert matrix["physical_validation_claim"] is False
+
+
+def test_matrix_records_preslhy_slabx_window_comparison_without_opening_validation(tmp_path):
+    paths = _records(tmp_path)
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        preslhy_slabx_window_path=paths["preslhy_window"],
+    )
+    domain = next(
+        row for row in matrix["evidence_domains"]
+        if row["id"] == "preslhy_slabx_window_comparison"
+    )
+    assert domain["status"] == "RESTRICTED_COMPONENT_EVIDENCE"
+    assert domain["accepted_numerical_gate_count"] == 1
+    assert domain["nonzero_prediction_row_count"] == 105
+    claims = {row["claim"]: row for row in matrix["claims"]}
+    assert claims["restricted_preslhy_slabx_window_comparison_evidence"]["allowed"] is True
     assert matrix["physical_validation_claim"] is False
 
 

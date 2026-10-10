@@ -271,6 +271,47 @@
       "physical_validation_claim": false,
       "full_chain_validation_claim": false,
       "facility_qra_claim": false
+    },
+    {
+      "id": "preslhy_slabx_window_comparison",
+      "status": "RESTRICTED_COMPONENT_EVIDENCE",
+      "supports": [
+        "native SLABx sensor-window comparison against public PRESLHY trials",
+        "trial-level numerical refinement and LFL-state traceability"
+      ],
+      "does_not_support": [
+        "full time-history or independent end-to-end physical validation",
+        "equipment release qualification or initiating-event frequency",
+        "ignition, fire, explosion, IR/F-N, or facility-QRA validation"
+      ],
+      "sensor_row_count": 217,
+      "evaluable_sensor_row_count": 155,
+      "predicted_sensor_row_count": 155,
+      "nonzero_prediction_row_count": 105,
+      "evaluated_trial_count": 7,
+      "refinement_row_count": 21,
+      "numerical_gate_trial_count": 7,
+      "accepted_numerical_gate_count": 1,
+      "mean_absolute_error_of_evaluable_windows_vol_pct": 11.428032301320203,
+      "trials": [
+        10,
+        11,
+        12,
+        22,
+        23,
+        24,
+        25
+      ],
+      "final_level": 640,
+      "source": {
+        "label": "PRESLHY-SLABx restricted window comparison",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261106\\preslhy_slabx_window_comparison_audit.json",
+        "sha256": "43b6877a81356740cad8af56f81a093cd6a1e6a17088e5be651a656cdc77d33c",
+        "status": "RESTRICTED_PRESLHY_SLABX_WINDOW_COMPARISON"
+      },
+      "physical_validation_claim": false,
+      "full_chain_validation_claim": false,
+      "facility_qra_claim": false
     }
   ],
   "claims": [
@@ -309,6 +350,12 @@
       "status": "SUPPORTED_WITH_RESTRICTIONS",
       "allowed": true,
       "basis": "external_field_model_comparison"
+    },
+    {
+      "claim": "restricted_preslhy_slabx_window_comparison_evidence",
+      "status": "SUPPORTED_WITH_RESTRICTIONS",
+      "allowed": true,
+      "basis": "preslhy_slabx_window_comparison"
     },
     {
       "claim": "independent_full_chain_physical_validation",

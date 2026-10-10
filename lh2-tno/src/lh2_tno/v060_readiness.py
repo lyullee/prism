@@ -183,6 +183,11 @@ def _validation_intake_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
         if isinstance(inputs.get("equipment_validation"), Mapping)
         else {}
     )
+    unit_map = (
+        inputs.get("unit_map_manifest")
+        if isinstance(inputs.get("unit_map_manifest"), Mapping)
+        else {}
+    )
     promotion = audit.get("promotion_gates") if isinstance(audit.get("promotion_gates"), Mapping) else {}
     return {
         "schema_version": audit.get("schema_version"),
@@ -192,6 +197,11 @@ def _validation_intake_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
         "sheet_count": aggregate.get("sheet_count"),
         "workbook_or_sheet_error_count": aggregate.get("workbook_or_sheet_error_count"),
         "reviewed_unit_map_supplied": aggregate.get("reviewed_unit_map_supplied"),
+        "declared_unit_map_supplied": unit_map.get("supplied"),
+        "declared_unit_map_status": unit_map.get("status"),
+        "declared_unit_map_source_count": unit_map.get("source_count"),
+        "declared_unit_map_signal_count": unit_map.get("declared_signal_count"),
+        "declared_unit_counts": unit_map.get("unit_counts", {}),
         "numeric_signal_unit_status_count": aggregate.get("numeric_signal_unit_status_count", {}),
         "released_accident_scenario_count": equipment.get("released_scenario_count"),
         "state_snapshot_binding_allowed": promotion.get("state_snapshot_binding_allowed"),

@@ -10,6 +10,7 @@ initiating frequency, or a facility-QRA result.
 from __future__ import annotations
 
 import json
+import hashlib
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Mapping
@@ -18,6 +19,7 @@ from typing import Any, Mapping
 AUDIT_SCHEMA = "prism.validation_intake_audit.v1"
 INSPECTION_SCHEMA = "prism.inspection_center_timeseries_audit.v1"
 EQUIPMENT_SCHEMA = "prism.equipment_validation_audit.v1"
+UNIT_MAP_SCHEMA = "prism.observed_state_input_manifest.v1"
 
 
 class ValidationIntakeAuditError(ValueError):
@@ -39,6 +41,67 @@ def _load(path: str | Path) -> dict[str, Any]:
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
         raise ValidationIntakeAuditError(f"invalid evidence JSON: {resolved}") from error
     return dict(_mapping(value, str(resolved)))
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _unit_map_summary(manifest: Mapping[str, Any] | None) -> dict[str, Any]:
+    """Summarize an explicit state-unit manifest without treating it as reviewed."""
+    if manifest is None:
+        return {
+            "supplied": False,
+            "schema_version": None,
+            "status": "NOT_SUPPLIED",
+            "source_count": 0,
+            "complete_source_count": 0,
+            "declared_signal_count": 0,
+            "unit_counts": {},
+            "independent_review_required": True,
+        }
+    if manifest.get("schema_version") != UNIT_MAP_SCHEMA:
+        raise ValidationIntakeAuditError(
+            f"unsupported unit-map manifest schema: {manifest.get('schema_version')!r}"
+        )
+    sources = manifest.get("sources")
+    if not isinstance(sources, list):
+        raise ValidationIntakeAuditError("unit-map manifest sources must be a list")
+    unit_counts: dict[str, int] = defaultdict(int)
+    complete_source_count = 0
+    declared_signal_count = 0
+    for index, source in enumerate(sources):
+        source_map = _mapping(source, f"unit-map manifest sources[{index}]")
+        signals = source_map.get("signals")
+        if not isinstance(signals, Mapping):
+            raise ValidationIntakeAuditError(
+                f"unit-map manifest sources[{index}].signals must be an object"
+            )
+        complete = True
+        for signal_name, raw in signals.items():
+            signal = _mapping(raw, f"unit-map manifest signal {signal_name}")
+            unit = signal.get("unit")
+            if not isinstance(unit, str) or not unit.strip():
+                complete = False
+                continue
+            declared_signal_count += 1
+            unit_counts[unit.strip()] += 1
+        if complete and signals:
+            complete_source_count += 1
+    return {
+        "supplied": True,
+        "schema_version": manifest.get("schema_version"),
+        "status": "DECLARED_UNIT_MAP_NOT_INDEPENDENTLY_REVIEWED",
+        "source_count": len(sources),
+        "complete_source_count": complete_source_count,
+        "declared_signal_count": declared_signal_count,
+        "unit_counts": dict(sorted(unit_counts.items())),
+        "independent_review_required": True,
+    }
 
 
 def _group_summary(files: list[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
@@ -114,6 +177,7 @@ def _equipment_summary(equipment: Mapping[str, Any] | None) -> dict[str, Any]:
 def audit_validation_intake(
     inspection_timeseries_audit: Mapping[str, Any],
     equipment_validation_audit: Mapping[str, Any] | None = None,
+    unit_map_manifest: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Create a fail-closed inventory of available validation inputs."""
 
@@ -129,6 +193,7 @@ def audit_validation_intake(
     groups = _group_summary(file_maps)
     aggregate = _mapping(inspection.get("aggregate", {}), "inspection aggregate")
     equipment = _equipment_summary(equipment_validation_audit)
+    unit_map = _unit_map_summary(unit_map_manifest)
 
     inspection_errors = int(aggregate.get("workbook_or_sheet_error_count") or 0)
     unit_map_confirmed = aggregate.get("reviewed_unit_map_supplied") is True
@@ -136,6 +201,9 @@ def audit_validation_intake(
     release_gate_closed = equipment.get("available") is True and released == 0
     blockers = [
         "inspection_unit_basis_unconfirmed" if not unit_map_confirmed else None,
+        "inspection_unit_map_declared_not_independently_reviewed"
+        if unit_map.get("supplied")
+        else None,
         "inspection_workbook_or_sheet_errors" if inspection_errors else None,
         "normal_operation_rows_have_no_accidental_release_boundary",
         "exact_asset_port_tag_crosswalk_not_released",
@@ -159,6 +227,7 @@ def audit_validation_intake(
                 "aggregate": dict(aggregate),
             },
             "equipment_validation": equipment,
+            "unit_map_manifest": unit_map,
         },
         "scenario_groups": groups,
         "promotion_gates": {
@@ -190,14 +259,22 @@ def audit_validation_intake(
 def audit_validation_intake_files(
     inspection_timeseries_audit_path: str | Path,
     equipment_validation_audit_path: str | Path | None = None,
+    unit_map_manifest_path: str | Path | None = None,
 ) -> dict[str, Any]:
     inspection = _load(inspection_timeseries_audit_path)
     equipment = _load(equipment_validation_audit_path) if equipment_validation_audit_path else None
-    return audit_validation_intake(inspection, equipment)
+    unit_map = _load(unit_map_manifest_path) if unit_map_manifest_path else None
+    report = audit_validation_intake(inspection, equipment, unit_map)
+    if unit_map_manifest_path is not None:
+        path = Path(unit_map_manifest_path).resolve()
+        report["inputs"]["unit_map_manifest"]["path"] = str(path)
+        report["inputs"]["unit_map_manifest"]["sha256"] = _sha256(path)
+    return report
 
 
 __all__ = [
     "AUDIT_SCHEMA",
+    "UNIT_MAP_SCHEMA",
     "ValidationIntakeAuditError",
     "audit_validation_intake",
     "audit_validation_intake_files",

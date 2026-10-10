@@ -73,6 +73,25 @@ def _equipment(*, released=0):
     }
 
 
+def _unit_map():
+    return {
+        "schema_version": "prism.observed_state_input_manifest.v1",
+        "sources": [
+            {
+                "source_id": "tank",
+                "signals": {
+                    "pressure": {"unit": "MPa"},
+                    "temperature": {"unit": "C"},
+                },
+            },
+            {
+                "source_id": "vent",
+                "signals": {"pressure": {"unit": "MPa"}},
+            },
+        ],
+    }
+
+
 def test_validation_intake_aggregates_groups_without_promotion():
     report = audit_validation_intake(_inspection(), _equipment())
     assert report["status"] == "SCREENED_NO_PROMOTION"
@@ -100,6 +119,17 @@ def test_validation_intake_records_audit_read_errors():
     assert report["promotion_gates"]["inspection_audit_read_complete"] is False
     assert "inspection_workbook_or_sheet_errors" in report["blocking_reasons"]
     assert report["inputs"]["equipment_validation"]["status"] == "NOT_SUPPLIED"
+
+
+def test_validation_intake_records_declared_unit_map_without_opening_review_gate():
+    report = audit_validation_intake(_inspection(), _equipment(), _unit_map())
+    unit_map = report["inputs"]["unit_map_manifest"]
+    assert unit_map["status"] == "DECLARED_UNIT_MAP_NOT_INDEPENDENTLY_REVIEWED"
+    assert unit_map["source_count"] == 2
+    assert unit_map["declared_signal_count"] == 3
+    assert unit_map["unit_counts"] == {"C": 1, "MPa": 2}
+    assert report["promotion_gates"]["reviewed_unit_map_supplied"] is False
+    assert "inspection_unit_map_declared_not_independently_reviewed" in report["blocking_reasons"]
 
 
 def test_validation_intake_rejects_wrong_schema():
