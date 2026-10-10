@@ -383,6 +383,59 @@ def _build_case_requests(
     return requests
 
 
+def _frequency_port_binding_summary(
+    case_requests: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Summarize reviewed-frequency versus provider-only port identity.
+
+    A provider packet's outlet is evidence about that packet; it does not
+    create the reviewed accident port to which a literature frequency may be
+    attached.  Keep those populations separate in the request envelope so a
+    partial or legacy ledger cannot look fully port-scoped.
+    """
+    reviewed = sum(row.get("frequency_port_ids") is not None for row in case_requests)
+    provider_only = sum(
+        row.get("frequency_port_ids") is None
+        and row.get("provider_packet_port_ids") is not None
+        for row in case_requests
+    )
+    mismatched = sum(
+        row.get("port_binding", {}).get("status") == "PORT_BINDING_MISMATCH"
+        for row in case_requests
+        if isinstance(row.get("port_binding"), Mapping)
+    )
+    withheld = sum(
+        row.get("frequency_port_ids") is None
+        and row.get("provider_packet_port_ids") is None
+        for row in case_requests
+    )
+    case_count = len(case_requests)
+    if mismatched:
+        status = "PORT_BINDING_MISMATCH"
+    elif case_count and reviewed == case_count:
+        status = "PORT_BINDING_COMPLETE"
+    elif reviewed:
+        status = "PORT_BINDING_PARTIAL"
+    else:
+        status = "PORT_BINDING_WITHHELD"
+    return {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "status": status,
+        "case_count": case_count,
+        "reviewed_frequency_port_case_count": reviewed,
+        "provider_packet_only_case_count": provider_only,
+        "port_binding_mismatch_case_count": mismatched,
+        "port_binding_withheld_case_count": withheld,
+        "reviewed_frequency_ports_complete": bool(case_count and reviewed == case_count and not mismatched),
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+        "policy": (
+            "Provider packet outlet ports remain separate from reviewed frequency ports; "
+            "missing reviewed ports and mismatches remain qualification blockers."
+        ),
+    }
+
+
 def build_facility_evidence_request(
     assessment: Mapping[str, Any],
     scope_matrix: Mapping[str, Any],
@@ -634,6 +687,7 @@ def build_facility_evidence_request(
         "family_requests": family_rows,
         "case_request_count": len(case_requests),
         "case_requests": case_requests,
+        "frequency_port_binding": _frequency_port_binding_summary(case_requests),
         "component_requests": components,
         "excluded_components": excluded_components,
         "frequency_policy": {

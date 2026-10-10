@@ -61,6 +61,8 @@ v0.6.0 준비도 보고서의 `chain.frequency_port_binding`에도 같은 추적
 
 시설 증거요청서도 provider packet이 아직 없는 미계산 사건의 `frequency_port_ids`를 `exact_match_required.port_ids`에 그대로 넣는다. provider가 나중에 다른 포트를 반환하면 `PORT_BINDING_MISMATCH`로 표시하고, 해당 packet은 자격심사에 사용할 수 없다.
 
+요청서 최상위 `frequency_port_binding`은 검토된 빈도 포트, provider packet에만 있는 포트, 포트 불일치, 포트 미확정 사건을 따로 센다. 따라서 provider 출구가 존재해도 문헌 빈도 포트가 없으면 `PORT_BINDING_WITHHELD`로 남는다.
+
 이 검사는 `bind_event()`에만 있지 않다. 이미 빈도가 들어 있는 `ConsequenceRequest`를 JSON으로 직접 만들더라도 요청 검증기가 provider 방출 포트와 `frequency_event.port_ids`를 다시 비교한다.
 
 provider 방출 작업목록을 만들 때 매니페스트에서 지정 포트가 빠져 있으면 작업목록은 해당 이벤트를 `UNCOMPUTED_NO_ACCIDENT_PORT`로 남긴다. 정상 운전 포트를 사고 포트로 대체하지 않으며, 누락된 포트를 복구할 때까지 packet 수는 증가하지 않는다.
