@@ -2,6 +2,8 @@
   "schema_version": "prism.generic_provider_evidence_audit.v1",
   "status": "NO_QUALIFIED_PROVIDER_EVIDENCE",
   "source_schema_version": "prism.generic_provider_evidence_requests.v1",
+  "sidecar_manifest_schema": null,
+  "sidecar_manifest_entry_count": 0,
   "request_count": 26,
   "packet_count": 26,
   "qualification_sidecar_present_count": 0,

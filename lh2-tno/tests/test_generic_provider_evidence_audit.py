@@ -168,3 +168,25 @@ def test_explicit_sidecar_path_is_supported(tmp_path):
     report = audit_generic_provider_evidence(catalogue)
     assert report["exact_match_count"] == 1
     assert report["rows"][0]["qualification_sidecar_path"] == str(sidecar_path)
+
+
+def test_sidecar_manifest_binds_external_review_without_editing_catalogue(tmp_path):
+    catalogue = _write_catalogue(tmp_path)
+    sidecar_path = tmp_path / "review" / "qualification.json"
+    sidecar_path.parent.mkdir()
+    sidecar_path.write_text(json.dumps(_sidecar()), encoding="utf-8")
+    manifest_path = tmp_path / "review" / "qualification_manifest.json"
+    manifest_path.write_text(
+        json.dumps({
+            "schema_version": "prism.provider_qualification_sidecar_manifest.v1",
+            "entries": [{
+                "request_id": "event-1",
+                "qualification_sidecar_path": "qualification.json",
+            }],
+        }),
+        encoding="utf-8",
+    )
+    report = audit_generic_provider_evidence(catalogue, sidecar_manifest=manifest_path)
+    assert report["sidecar_manifest_entry_count"] == 1
+    assert report["exact_match_count"] == 1
+    assert report["rows"][0]["qualification_sidecar_path"] == str(sidecar_path)

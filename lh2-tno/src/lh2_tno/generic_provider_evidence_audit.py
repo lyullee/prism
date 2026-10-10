@@ -136,6 +136,7 @@ def audit_generic_provider_evidence(
     catalogue: Mapping[str, Any] | str | Path,
     *,
     packet_root: str | Path | None = None,
+    sidecar_manifest: Mapping[str, Any] | str | Path | None = None,
 ) -> dict[str, Any]:
     """Audit every request in a generic provider evidence catalogue."""
 
@@ -146,6 +147,36 @@ def audit_generic_provider_evidence(
     else:
         value = catalogue
         base = Path(packet_root).resolve() if packet_root is not None else Path.cwd()
+    manifest_value: Mapping[str, Any] | None = None
+    manifest_base = base
+    if sidecar_manifest is not None:
+        if isinstance(sidecar_manifest, (str, Path)):
+            manifest_path = Path(sidecar_manifest).resolve()
+            manifest_value = _load(manifest_path)
+            manifest_base = manifest_path.parent
+        else:
+            manifest_value = sidecar_manifest
+        if not isinstance(manifest_value, Mapping):
+            raise ValueError("qualification sidecar manifest must be an object")
+        if manifest_value.get("schema_version") != (
+            "prism.provider_qualification_sidecar_manifest.v1"
+        ):
+            raise ValueError("unsupported qualification sidecar manifest schema")
+    manifest_paths: dict[str, str] = {}
+    if manifest_value is not None:
+        entries = manifest_value.get("entries")
+        if not isinstance(entries, list):
+            raise ValueError("qualification sidecar manifest entries must be an array")
+        for entry in entries:
+            if not isinstance(entry, Mapping):
+                raise ValueError("qualification sidecar manifest entry must be an object")
+            request_id = entry.get("request_id")
+            path_value = entry.get("qualification_sidecar_path")
+            if not isinstance(request_id, str) or not request_id.strip():
+                raise ValueError("qualification sidecar manifest request_id must be nonempty")
+            if not isinstance(path_value, str) or not path_value.strip():
+                raise ValueError("qualification sidecar manifest path must be nonempty")
+            manifest_paths[request_id] = path_value
     if not isinstance(value, Mapping):
         raise ValueError("generic provider evidence catalogue must be an object")
     if value.get("schema_version") != "prism.generic_provider_evidence_requests.v1":
@@ -189,11 +220,13 @@ def audit_generic_provider_evidence(
         if packet is None:
             loaded.append({"request_index": request_index, "raw": raw, "packet_path": packet_path, "packet": None, "sidecar": None, "sidecar_path": None, "load_error": "packet_index_missing"})
             continue
-        explicit_sidecar = raw.get("qualification_sidecar_path")
+        explicit_sidecar = raw.get("qualification_sidecar_path") or manifest_paths.get(
+            str(raw.get("request_id"))
+        )
         if explicit_sidecar:
             explicit_path = Path(str(explicit_sidecar))
             if not explicit_path.is_absolute():
-                explicit_path = base / explicit_path
+                explicit_path = manifest_base / explicit_path
             sidecar, sidecar_path = _sidecar_path(explicit_path)
         else:
             sidecar, sidecar_path = _sidecar(packet_path.parent)
@@ -284,6 +317,10 @@ def audit_generic_provider_evidence(
         "schema_version": SCHEMA,
         "status": status,
         "source_schema_version": value.get("schema_version"),
+        "sidecar_manifest_schema": (
+            manifest_value.get("schema_version") if manifest_value is not None else None
+        ),
+        "sidecar_manifest_entry_count": len(manifest_paths),
         "request_count": len(requests),
         "packet_count": value.get("packet_count"),
         "qualification_sidecar_present_count": counts["sidecar_present"],
