@@ -1177,6 +1177,58 @@ def test_completion_audit_rejects_release_boundary_with_missing_gate_check():
     )
 
 
+def test_completion_audit_blocks_stale_release_boundary_summary_against_raw_ledger():
+    raw_ledger = {
+        "schema_version": "prism.release_termination_inventory_ledger.v1",
+        "rows": [{
+            "event_id": "tank/hole",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "reviewed_isolation_success",
+                "time_s": 0.25,
+            },
+            "isolation_status": "provider_declared_isolation_success",
+            "mass_ledger": {
+                "end_to_end_residual_kg": 0.0,
+            },
+        }],
+        "summary": {
+            "withheld_case_count": 0,
+            "termination_basis_counts": {"reviewed_isolation_success": 1},
+        },
+    }
+    assessment = _facility_assessment(
+        release_termination_inventory_ledger=raw_ledger,
+        strict_release_boundary={
+            "schema_version": "prism.facility_release_boundary_gate.v1",
+            "strict_release_boundary_ready": True,
+            "case_count": 99,
+            "withheld_case_count": 0,
+            "checks": {
+                "all_rows_complete": True,
+                "all_termination_bases_allowed": True,
+                "all_isolation_or_inventory_statuses_closed": True,
+                "all_mass_residuals_closed": True,
+                "no_withheld_cases": True,
+            },
+            "blocking_reasons": [],
+            "residual_tolerance_kg": 1.0e-8,
+            "policy": {},
+        },
+    )
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        facility_assessment=assessment,
+    )
+    check = next(item for item in report["checks"] if item["name"] == "facility_release_boundary")
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["raw_ledger_reconciliation"]["status"] == "MISMATCHED"
+    assert "case_count" in check["evidence"]["raw_ledger_reconciliation"]["mismatched_fields"]
+
+
 def test_completion_audit_records_diagnostic_frequency_uncertainty():
     uncertainty = {
         "scenarios": [

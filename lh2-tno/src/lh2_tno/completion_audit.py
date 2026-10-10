@@ -7,8 +7,10 @@ blocking evidence rather than a zero-valued result.
 """
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from typing import Any
+
+from .release_ledger import evaluate_facility_release_boundary
 
 
 def _finite(value: Any) -> bool:
@@ -1362,12 +1364,74 @@ def build_ijhe_completion_audit(
                 "all_mass_residuals_closed",
                 "no_withheld_cases",
             }
+            # When the assessment carries the raw release ledger, recompute
+            # the gate from those rows and compare the published summary.  A
+            # stale or hand-edited assessment must not silently become the
+            # authoritative strict result.  Older diagnostic fixtures may
+            # contain only the summarized gate; those remain auditable with an
+            # explicit NOT_PROVIDED reconciliation state.
+            raw_release_ledger = assessment.get("release_termination_inventory_ledger")
+            reconciliation: dict[str, Any] = {"status": "NOT_PROVIDED"}
+            reconciliation_blocked = False
+            raw_rows = raw_release_ledger.get("rows") if isinstance(raw_release_ledger, Mapping) else None
+            if (
+                isinstance(raw_release_ledger, Mapping)
+                and isinstance(raw_rows, Sequence)
+                and not isinstance(raw_rows, (str, bytes))
+            ):
+                try:
+                    recomputed_gate = evaluate_facility_release_boundary(raw_release_ledger)
+                except (TypeError, ValueError) as error:
+                    reconciliation = {
+                        "status": "INVALID_RAW_LEDGER",
+                        "error": str(error),
+                    }
+                    reconciliation_blocked = True
+                else:
+                    declared_projection = {
+                        "schema_version": gate_schema,
+                        "strict_release_boundary_ready": gate_ready,
+                        "case_count": release_boundary.get("case_count"),
+                        "withheld_case_count": release_boundary.get("withheld_case_count"),
+                        "checks": dict(gate_checks),
+                        "blocking_reasons": list(
+                            release_boundary.get("blocking_reasons", [])
+                        ),
+                        "residual_tolerance_kg": release_boundary.get(
+                            "residual_tolerance_kg"
+                        ),
+                    }
+                    recomputed_projection = {
+                        key: recomputed_gate.get(key)
+                        for key in declared_projection
+                    }
+                    mismatches = [
+                        key
+                        for key in declared_projection
+                        if declared_projection[key] != recomputed_projection[key]
+                    ]
+                    reconciliation = {
+                        "status": "MATCHED" if not mismatches else "MISMATCHED",
+                        "compared_fields": list(declared_projection),
+                        "mismatched_fields": mismatches,
+                        "recomputed_schema_version": recomputed_gate.get("schema_version"),
+                        "recomputed_case_count": recomputed_gate.get("case_count"),
+                        "recomputed_withheld_case_count": recomputed_gate.get(
+                            "withheld_case_count"
+                        ),
+                        "recomputed_checks": recomputed_gate.get("checks"),
+                        "recomputed_blocking_reasons": recomputed_gate.get(
+                            "blocking_reasons", []
+                        ),
+                    }
+                    reconciliation_blocked = bool(mismatches)
             gate_valid = (
                 gate_schema == "prism.facility_release_boundary_gate.v1"
                 and gate_ready
                 and not release_boundary.get("blocking_reasons")
                 and required_gate_checks.issubset(gate_checks)
                 and all(value is True for value in gate_checks.values())
+                and not reconciliation_blocked
             )
             checks.append(
                 {
@@ -1390,6 +1454,7 @@ def build_ijhe_completion_audit(
                         "facility_gate_checks": dict(gate_checks),
                         "blocking_reasons": release_boundary.get("blocking_reasons", []),
                         "promotion_policy": promotion_policy,
+                        "raw_ledger_reconciliation": reconciliation,
                     },
                     "interpretation": (
                         "Every declared case must have an allowed provider-owned termination "

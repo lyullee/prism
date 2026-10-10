@@ -2390,7 +2390,7 @@
   "facility_release_boundary_gate_promotion": false,
   "facility_release_boundary_gate_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "facility_release_boundary_gate_completion_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 3 completion-audit tests plus union evidence-shape assertions and missing-check fail-closed test; full suite 704 passed, 1 skipped",
+  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 4 completion-audit tests plus union evidence-shape and raw-ledger reconciliation assertions; full suite 705 passed, 1 skipped",
   "v060_ijhe_completion_audit_latest_check_count": 32,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 28,
@@ -2410,5 +2410,16 @@
     "all_isolation_or_inventory_statuses_closed",
     "all_mass_residuals_closed",
     "no_withheld_cases"
+  ],
+  "facility_release_boundary_gate_completion_audit_raw_ledger_reconciliation": true,
+  "facility_release_boundary_gate_completion_audit_reconciliation_status": "MATCHED",
+  "facility_release_boundary_gate_completion_audit_reconciled_fields": [
+    "schema_version",
+    "strict_release_boundary_ready",
+    "case_count",
+    "withheld_case_count",
+    "checks",
+    "blocking_reasons",
+    "residual_tolerance_kg"
   ]
 }

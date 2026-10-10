@@ -161,6 +161,9 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
         "all_mass_residuals_closed": False,
         "no_withheld_cases": False,
     }
+    assert release_boundary_check["evidence"]["raw_ledger_reconciliation"]["status"] == (
+        "MATCHED"
+    )
     state_snapshot_check = next(
         check for check in audit["checks"]
         if check["name"] == "diagnostic_equipment_state_snapshot_binding"
