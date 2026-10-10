@@ -1,0 +1,1464 @@
+{
+  "schema": "prism.external_operational_evidence_review.v1",
+  "status": "RESTRICTED_OPERATIONAL_EVIDENCE_REVIEW",
+  "scope": "facility-neutral intake; source files are external and center-specific",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+  "promotion_allowed": false,
+  "frequency_inference_performed": false,
+  "provider_release_created": false,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "files": [
+    {
+      "kind": "operation_sequence_csv",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\1. 액화수소 인수 시나리오 데이터\\액화수소인수_운전시퀀스.csv",
+      "sha256": "24d0c165dbb3b5c1af1b2645b3e25b6ab2f8e5e337d0d7e8ded3ae901a465232",
+      "metadata": {
+        "encoding": "utf-8-sig",
+        "rows": 19,
+        "columns": [
+          "시나리오",
+          "탱크",
+          "절차번호",
+          "동작내용",
+          "비고",
+          "위험성분류",
+          "누출_예상고장",
+          "누출_위험",
+          "누출_조치방법",
+          "누출_근거기준",
+          "화재_예상고장",
+          "화재_위험",
+          "화재_조치방법",
+          "화재_근거기준",
+          "폭발_예상고장",
+          "폭발_위험",
+          "폭발_조치방법",
+          "폭발_근거기준"
+        ],
+        "nonempty_columns": {
+          "시나리오": 19,
+          "탱크": 19,
+          "절차번호": 19,
+          "동작내용": 19,
+          "비고": 15,
+          "위험성분류": 19,
+          "누출_예상고장": 19,
+          "누출_위험": 19,
+          "누출_조치방법": 19,
+          "누출_근거기준": 19,
+          "화재_예상고장": 19,
+          "화재_위험": 19,
+          "화재_조치방법": 19,
+          "화재_근거기준": 19,
+          "폭발_예상고장": 19,
+          "폭발_위험": 19,
+          "폭발_조치방법": 19,
+          "폭발_근거기준": 19
+        },
+        "sample_keys": [
+          "시나리오",
+          "탱크",
+          "절차번호",
+          "동작내용",
+          "비고"
+        ]
+      }
+    },
+    {
+      "kind": "operation_sequence_csv",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\2. 액화수소 저장(벤트) 시나리오 데이터\\액화수소저장벤트_운전시퀀스.csv",
+      "sha256": "58bd97776b98dd8c2c29222452eb8661b4a6ce6dccc1f6dc1f73c0409b7981b4",
+      "metadata": {
+        "encoding": "utf-8-sig",
+        "rows": 3,
+        "columns": [
+          "시나리오",
+          "탱크",
+          "절차번호",
+          "동작내용",
+          "비고",
+          "위험성분류",
+          "누출_예상고장",
+          "누출_위험",
+          "누출_조치방법",
+          "누출_근거기준",
+          "화재_예상고장",
+          "화재_위험",
+          "화재_조치방법",
+          "화재_근거기준",
+          "폭발_예상고장",
+          "폭발_위험",
+          "폭발_조치방법",
+          "폭발_근거기준"
+        ],
+        "nonempty_columns": {
+          "시나리오": 3,
+          "탱크": 3,
+          "절차번호": 3,
+          "동작내용": 3,
+          "비고": 3,
+          "위험성분류": 3,
+          "누출_예상고장": 3,
+          "누출_위험": 3,
+          "누출_조치방법": 3,
+          "누출_근거기준": 3,
+          "화재_예상고장": 3,
+          "화재_위험": 3,
+          "화재_조치방법": 3,
+          "화재_근거기준": 3,
+          "폭발_예상고장": 3,
+          "폭발_위험": 3,
+          "폭발_조치방법": 3,
+          "폭발_근거기준": 3
+        },
+        "sample_keys": [
+          "시나리오",
+          "탱크",
+          "절차번호",
+          "동작내용",
+          "비고"
+        ]
+      }
+    },
+    {
+      "kind": "operation_sequence_csv",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\3. 액화수소 공급 시나리오 데이터\\수소공급_운전시퀀스.csv",
+      "sha256": "1e0c48044349a6d753ab9ba18ae95a6b3a5e93b1928dd40bdf562bec944582e1",
+      "metadata": {
+        "encoding": "utf-8-sig",
+        "rows": 30,
+        "columns": [
+          "시나리오",
+          "공급모드",
+          "탱크",
+          "절차번호",
+          "동작내용",
+          "위험성분류",
+          "누출_예상고장",
+          "누출_위험",
+          "누출_조치방법",
+          "누출_근거기준",
+          "화재_예상고장",
+          "화재_위험",
+          "화재_조치방법",
+          "화재_근거기준",
+          "폭발_예상고장",
+          "폭발_위험",
+          "폭발_조치방법",
+          "폭발_근거기준"
+        ],
+        "nonempty_columns": {
+          "시나리오": 30,
+          "공급모드": 30,
+          "탱크": 30,
+          "절차번호": 30,
+          "동작내용": 30,
+          "위험성분류": 30,
+          "누출_예상고장": 30,
+          "누출_위험": 30,
+          "누출_조치방법": 30,
+          "누출_근거기준": 30,
+          "화재_예상고장": 30,
+          "화재_위험": 30,
+          "화재_조치방법": 30,
+          "화재_근거기준": 30,
+          "폭발_예상고장": 30,
+          "폭발_위험": 30,
+          "폭발_조치방법": 30,
+          "폭발_근거기준": 30
+        },
+        "sample_keys": [
+          "시나리오",
+          "공급모드",
+          "탱크",
+          "절차번호",
+          "동작내용"
+        ]
+      }
+    },
+    {
+      "kind": "scenario_prediction_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\1. 액화수소 인수 시나리오 데이터\\액화수소_인수_예측데이터_10회차.xlsx",
+      "sha256": "f6ac682536f0eff79441179442202edb8c72aea123a935bbd31f298909a323f5",
+      "sheets": [
+        {
+          "sheet": "전체(10회차 통합)",
+          "rows": 6841,
+          "action_count": 190,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 6836,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 6839,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 6841,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차1",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차2",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차3",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차4",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차5",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차6",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차7",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차8",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차9",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차10",
+          "rows": 685,
+          "action_count": 19,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+              "step": 1
+            },
+            {
+              "row": 3,
+              "action": "XV10 밸브 Open",
+              "step": 2
+            },
+            {
+              "row": 63,
+              "action": "XV10 밸브 Close",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 680,
+              "action": "액화수소 인입",
+              "step": 17
+            },
+            {
+              "row": 683,
+              "action": "XV5 밸브 Close",
+              "step": 18
+            },
+            {
+              "row": 685,
+              "action": "XV1 밸브 Close",
+              "step": 19
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 100.0,
+          "has_time_column": false
+        }
+      ]
+    },
+    {
+      "kind": "scenario_prediction_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\2. 액화수소 저장(벤트) 시나리오 데이터\\액화수소_저장벤트_예측데이터_10회차.xlsx",
+      "sha256": "94d0e8b5f6a84d0ff9ad7d3264ada1a2718484522f46cf3e5d431f415e71d7ba",
+      "sheets": [
+        {
+          "sheet": "회차1",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차2",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차3",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차4",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차5",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차6",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차7",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차8",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차9",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        },
+        {
+          "sheet": "회차10",
+          "rows": 674,
+          "action_count": 0,
+          "first_actions": [],
+          "last_actions": [],
+          "progress_min": null,
+          "progress_max": null,
+          "has_time_column": true
+        }
+      ]
+    },
+    {
+      "kind": "scenario_prediction_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\3. 액화수소 공급 시나리오 데이터\\액화수소_공급_예측데이터_10회차.xlsx",
+      "sha256": "8bbae944fd00d81078c5a8ed1994b2152ee0e037b62b095078043525c38902a3",
+      "sheets": [
+        {
+          "sheet": "회차1",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차2",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차3",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차4",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차5",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차6",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차7",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차8",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차9",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        },
+        {
+          "sheet": "회차10",
+          "rows": 1443,
+          "action_count": 12,
+          "first_actions": [
+            {
+              "row": 2,
+              "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+              "step": 1
+            },
+            {
+              "row": 146,
+              "action": "XV13, 14 OPEN",
+              "step": 2
+            },
+            {
+              "row": 290,
+              "action": "XV20, 21 OPEN",
+              "step": 3
+            }
+          ],
+          "last_actions": [
+            {
+              "row": 1155,
+              "action": "용기시험동, 제품시험동 액화수소 공급",
+              "step": 10
+            },
+            {
+              "row": 1299,
+              "action": "XV20, 21 CLOSE",
+              "step": 11
+            },
+            {
+              "row": 1443,
+              "action": "XV15, 16 CLOSE",
+              "step": 12
+            }
+          ],
+          "progress_min": 0.0,
+          "progress_max": 99.0,
+          "has_time_column": false
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\1월21일.xlsx",
+      "sha256": "9a967fa057f0a202acc47dc65bf2e014bd4f345ddb9b43ba180609076b86a7d5",
+      "sheets": [
+        {
+          "sheet": "1월 21일",
+          "timestamp_rows": 301,
+          "start": "2026-01-21 13:00:00",
+          "end": "2026-01-21 18:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 11
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\1월23일.xlsx",
+      "sha256": "3f5b8e40f039b330bdf31526777d46990947604b121c13a23fee681882382c24",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-01-23 07:00:00",
+          "end": "2026-01-23 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 11
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\3월24일.xlsx",
+      "sha256": "84f7f6a50f7cb36122d2ce06fac009630dee9ad33cb82fc878cd10dc842504a7",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-03-24 07:00:00",
+          "end": "2026-03-24 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 11
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\4월16일.xlsx",
+      "sha256": "d1a15eb2445a0343d15dbe73e784cac3bb5e58b0dd6160228a5c40b32a2aa751",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-04-16 07:00:00",
+          "end": "2026-04-16 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 11
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\5월29일.xlsx",
+      "sha256": "a7b23ce19e4516c192b689676d2c40d745cb3b3ded4cf2f8322692780cd3ee4f",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-05-29 07:00:00",
+          "end": "2026-05-29 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 11
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\1. 저장탱크 인수 시나리오\\7월23일.xlsx",
+      "sha256": "65bfe7e6199b7c99c1d4099ea8741c2e60bf27528e06f62556c03f3b54a64090",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-07-23 07:00:00",
+          "end": "2026-07-23 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 11
+        }
+      ]
+    },
+    {
+      "kind": "recovered_vent_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\2. 저장탱크 벤트 시나리오\\저장탱크 데이터.xlsx",
+      "sha256": "57fa14039ca34ed5fb5673c5cb06ed0d619f164c469029c03c343cc568321e2d",
+      "sheets": [
+        {
+          "sheet": "20260124",
+          "rows": 7240,
+          "timestamp_rows": 7239,
+          "start": "2026-01-24 00:00:00",
+          "end": "2026-01-24 02:00:41",
+          "header_count": 51
+        },
+        {
+          "sheet": "20260222",
+          "rows": 7434,
+          "timestamp_rows": 7433,
+          "start": "2026-02-22 00:00:00",
+          "end": "2026-02-22 02:04:01",
+          "header_count": 51
+        },
+        {
+          "sheet": "20260718",
+          "rows": 7260,
+          "timestamp_rows": 7259,
+          "start": "2026-07-18 00:00:00",
+          "end": "2026-07-18 02:01:02",
+          "header_count": 51
+        },
+        {
+          "sheet": "20260606",
+          "rows": 30431,
+          "timestamp_rows": 30430,
+          "start": "2026-06-06 11:00:03",
+          "end": "2026-06-06 19:27:17",
+          "header_count": 51
+        },
+        {
+          "sheet": "20260523",
+          "rows": 18984,
+          "timestamp_rows": 18983,
+          "start": "2026-05-23 13:50:07",
+          "end": "2026-05-23 19:06:35",
+          "header_count": 51
+        },
+        {
+          "sheet": "20260404",
+          "rows": 8327,
+          "timestamp_rows": 8326,
+          "start": "2026-04-04 00:00:00",
+          "end": "2026-04-04 02:18:49",
+          "header_count": 51
+        },
+        {
+          "sheet": "20260307",
+          "rows": 14693,
+          "timestamp_rows": 14692,
+          "start": "2026-03-07 00:00:00",
+          "end": "2026-03-07 04:04:55",
+          "header_count": 51
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\4월15일.xlsx",
+      "sha256": "488dd95d96f263f66c6d634adf4fb3d92752dee435607be1b9e5a596b070129f",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-04-15 07:00:00",
+          "end": "2026-04-15 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\4월21일.xlsx",
+      "sha256": "5b83135f71609f7233773d764a2dddd1bfa3de0ec294c9bba7064f57e466da4f",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-04-21 07:00:00",
+          "end": "2026-04-21 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\4월22일.xlsx",
+      "sha256": "884d7885eaabec486316b2541a96ef6a6476c30f016329c908d7ddb06107a278",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-04-22 07:00:00",
+          "end": "2026-04-22 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\6월17일.xlsx",
+      "sha256": "365a37bc2cac22a89eeefb4f3faf0a7c7df881471291b3f559c95633395bc04b",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-06-17 07:00:00",
+          "end": "2026-06-17 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\6월22일.xlsx",
+      "sha256": "2a0a060d639c69512f9601905cab87336597bd6a1c0ed19fb145afa310bfab87",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-06-22 07:00:00",
+          "end": "2026-06-22 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\6월29일.xlsx",
+      "sha256": "643a7ff57611c5b89491fa0b605a2d667fbc944bab5bd5dfee2327c865d388c0",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-06-29 07:00:00",
+          "end": "2026-06-29 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    },
+    {
+      "kind": "source_timeseries_workbook",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\원본 학습데이터\\3. 저장탱크 공급 시나리오\\6월4일.xlsx",
+      "sha256": "a28c806412ef74499fe35be634e1b11f1dbf1b55a2d3393e217c1d7564b6a348",
+      "sheets": [
+        {
+          "sheet": "1분 복원 데이터",
+          "timestamp_rows": 721,
+          "start": "2026-06-04 07:00:00",
+          "end": "2026-06-04 19:00:00",
+          "median_interval_s": 60.0,
+          "header_count": 10
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "operation_sequence_is_not_frequency",
+      "result": "CSV rows describe procedure steps and qualitative leak/fire/explosion hazards; no exposure denominator or event count field is present, so they cannot create initiating frequency."
+    },
+    {
+      "id": "prediction_clock_missing",
+      "result": "10-round prediction workbooks contain action/step/progress_pct and sensor columns but no event timestamp column; progress rows are not an accident release duration or isolation-time measurement."
+    },
+    {
+      "id": "source_time_series_origin",
+      "result": "Original workbook notes identify graph-capture/inserted or corrected values rather than a historian database; timestamped rows are usable as state/replay evidence only after unit, tag, clock and provenance review."
+    },
+    {
+      "id": "termination_evidence_missing",
+      "result": "The reviewed files do not provide a provider-owned accident opening, inlet isolation command time, positive inventory threshold, releasable inventory definition, mass residual, or post-close leak-flow acceptance criterion."
+    },
+    {
+      "id": "generic_use",
+      "result": "The schema and review outcome are facility-neutral. Center-specific tag names and XV10/XV13 etc. remain an adapter input and are not copied into the generic LH2 catalog."
+    }
+  ]
+}

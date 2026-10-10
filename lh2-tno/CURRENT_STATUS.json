@@ -3662,5 +3662,21 @@
   "dynamic_pipe_provider_history_coarsening_implemented": true,
   "dynamic_pipe_provider_history_coarsening_policy": "Internal DynamicHEMPipe intervals may be compressed to at most 100 retained PRISM steps while preserving integrated mass and static enthalpy; no duration or threshold is inferred.",
   "dynamic_pipe_provider_natural_termination_applied_to_generic_catalog": false,
-  "dynamic_pipe_provider_natural_termination_status": "CAPABILITY_IMPLEMENTED_REVIEWED_ISOLATION_REQUIRED; generic 5 transfer-line packets remain synthetic fixed-horizon until reviewed inlet isolation time and positive threshold are supplied"
+  "dynamic_pipe_provider_natural_termination_status": "CAPABILITY_IMPLEMENTED_REVIEWED_ISOLATION_REQUIRED; generic 5 transfer-line packets remain synthetic fixed-horizon until reviewed inlet isolation time and positive threshold are supplied",
+  "external_operational_evidence_review_implemented": true,
+  "external_operational_evidence_review_schema": "prism.external_operational_evidence_review.v1",
+  "external_operational_evidence_review_record": "results/20261010/external_support_center_data_review/review.json",
+  "external_operational_evidence_review_sha256": "A7EDBB6822B8618597F62F0581E3B7DCB0BAEF794DCBCAC1A50EA8734906661C",
+  "external_operational_evidence_review_status": "RESTRICTED_OPERATIONAL_EVIDENCE_REVIEW",
+  "external_operational_evidence_review_scope": "facility-neutral intake; source files are external and center-specific",
+  "external_operational_evidence_review_promotion_allowed": false,
+  "external_operational_evidence_review_frequency_inference": false,
+  "external_operational_evidence_review_provider_release_created": false,
+  "external_operational_evidence_review_physical_validation_claim": false,
+  "external_operational_evidence_review_operation_sequence_csv_count": 3,
+  "external_operational_evidence_review_prediction_workbook_count": 3,
+  "external_operational_evidence_review_source_timeseries_workbook_count": 13,
+  "external_operational_evidence_review_recovered_vent_workbook_count": 1,
+  "external_operational_evidence_review_termination_evidence_available": false,
+  "external_operational_evidence_review_policy": "Center-specific procedure and timestamped signal files are retained as restricted state/sequence evidence; no generic frequency, provider release, isolation time or inventory threshold is inferred. Promotion requires reviewed unit/tag/port mapping, provider-owned release closure and separate literature FrequencyEvent."
 }
