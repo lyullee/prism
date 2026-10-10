@@ -1246,7 +1246,11 @@
   "risk_atom_chain_audit_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC; 44/44 cases and 176/176 risk atoms retain release termination, mass ledger, consequence stages and four ignition branches; 29 operator-limited cases remain diagnostic",
   "risk_atom_chain_audit_promotion": false,
   "current_union_ijhe_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 34 checks, 29 PASS, 5 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage closure is PASS for 44/44 cases; facility QRA remains withheld",
+  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 35 checks, 30 PASS, 5 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage and equipment-state-to-release closure are PASS for 44/44 cases; facility QRA remains withheld",
+  "equipment_state_release_audit_implemented": true,
+  "equipment_state_release_audit_module": "src/lh2_tno/equipment_state_release_audit.py",
+  "equipment_state_release_audit_record": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
+  "equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC; 44/44 cases, 9 components; 10 synthetic-horizon provider termination echoes explicitly limited",
   "ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 29,
     "BLOCKED": 5

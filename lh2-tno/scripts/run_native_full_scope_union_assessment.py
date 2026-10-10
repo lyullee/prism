@@ -53,6 +53,9 @@ from lh2_tno.scope_ledger_consistency import (  # noqa: E402
 from lh2_tno.risk_atom_chain_audit import (  # noqa: E402
     build_risk_atom_chain_audit,
 )
+from lh2_tno.equipment_state_release_audit import (  # noqa: E402
+    build_equipment_state_release_audit,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -495,6 +498,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     risk_atom_chain_audit["_record_path"] = str(
         args.output_dir / "risk_atom_chain_audit.json"
     )
+    equipment_state_release_audit = build_equipment_state_release_audit(assessment_ledger)
+    equipment_state_release_audit["_record_path"] = str(
+        args.output_dir / "equipment_state_release_audit.json"
+    )
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -634,6 +641,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "risk_atom_chain_audit_blocking_reason_count": len(
             risk_atom_chain_audit["blocking_reasons"]
         ),
+        "equipment_state_release_audit_status": equipment_state_release_audit["status"],
+        "equipment_state_release_audit_case_count": equipment_state_release_audit[
+            "case_count"
+        ],
+        "equipment_state_release_audit_complete_case_count": equipment_state_release_audit[
+            "complete_case_count"
+        ],
+        "equipment_state_release_audit_component_count": equipment_state_release_audit[
+            "component_count"
+        ],
+        "equipment_state_release_audit_blocking_reason_count": len(
+            equipment_state_release_audit["blocking_reasons"]
+        ),
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -658,6 +678,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "scope_matrix.json", merged_scope)
     _save(output / "scope_ledger_consistency_current.json", scope_ledger_consistency)
     _save(output / "risk_atom_chain_audit.json", risk_atom_chain_audit)
+    _save(output / "equipment_state_release_audit.json", equipment_state_release_audit)
     _save(
         output / "frequency_scenarios.json",
         {

@@ -97,6 +97,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     observed_state_evidence = _with_record(args.observed_state_evidence)
     scope_ledger_consistency = _with_record(args.scope_ledger_consistency)
     risk_atom_chain_audit = _with_record(args.risk_atom_chain_audit)
+    equipment_state_release_audit = _with_record(args.equipment_state_release_audit)
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -123,6 +124,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         observed_state_evidence=observed_state_evidence,
         scope_ledger_consistency=scope_ledger_consistency,
         risk_atom_chain_audit=risk_atom_chain_audit,
+        equipment_state_release_audit=equipment_state_release_audit,
     )
 
     verification_path = output_dir / "verification.json"
@@ -262,6 +264,31 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 if risk_atom_chain_audit
                 else verification.get("risk_atom_chain_audit_blocking_reason_count")
             ),
+            "equipment_state_release_audit_status": (
+                equipment_state_release_audit.get("status")
+                if equipment_state_release_audit
+                else verification.get("equipment_state_release_audit_status")
+            ),
+            "equipment_state_release_audit_case_count": (
+                equipment_state_release_audit.get("case_count")
+                if equipment_state_release_audit
+                else verification.get("equipment_state_release_audit_case_count")
+            ),
+            "equipment_state_release_audit_complete_case_count": (
+                equipment_state_release_audit.get("complete_case_count")
+                if equipment_state_release_audit
+                else verification.get("equipment_state_release_audit_complete_case_count")
+            ),
+            "equipment_state_release_audit_component_count": (
+                equipment_state_release_audit.get("component_count")
+                if equipment_state_release_audit
+                else verification.get("equipment_state_release_audit_component_count")
+            ),
+            "equipment_state_release_audit_blocking_reason_count": (
+                len(equipment_state_release_audit.get("blocking_reasons", []))
+                if equipment_state_release_audit
+                else verification.get("equipment_state_release_audit_blocking_reason_count")
+            ),
         }
     )
     _save(output_dir / "validation_evidence_matrix.json", matrix)
@@ -378,6 +405,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional case/atom-level release-to-final-damage chain audit.",
+    )
+    parser.add_argument(
+        "--equipment-state-release-audit",
+        type=Path,
+        default=None,
+        help="Optional case-level equipment-state to release-packet identity audit.",
     )
     args = parser.parse_args()
     try:

@@ -12,6 +12,8 @@ import copy
 from collections.abc import Mapping
 from typing import Any
 
+from .state_snapshot import EquipmentStateSnapshot
+
 
 def _mapped_event_id(event_id: str, *, source_facility_id: str, namespace: str) -> str:
     prefix = f"{source_facility_id}/"
@@ -99,6 +101,17 @@ def rebind_campaign_result(
                 identity["event_id"] = map_event(identity.get("event_id"))
                 if identity.get("component_id") == source_component_id:
                     identity["component_id"] = component_id
+                snapshot = identity.get("state_snapshot")
+                if isinstance(snapshot, dict) and snapshot.get("component_id") == source_component_id:
+                    snapshot["component_id"] = component_id
+                    canonical_snapshot = EquipmentStateSnapshot.from_mapping(snapshot)
+                    snapshot.clear()
+                    snapshot.update(canonical_snapshot.to_mapping())
+                    snapshot_digest = canonical_snapshot.digest()
+                    identity["state_snapshot_digest"] = snapshot_digest
+                    identity["provider_state_snapshot_digest"] = snapshot_digest
+                    if isinstance(identity.get("provider_state_snapshot_digests"), list):
+                        identity["provider_state_snapshot_digests"] = [snapshot_digest]
             if receptor_mapping and "receptor_harm_low_high" in row:
                 harm = row.get("receptor_harm_low_high")
                 if not isinstance(harm, Mapping):

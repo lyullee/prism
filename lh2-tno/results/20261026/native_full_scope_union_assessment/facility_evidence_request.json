@@ -3799,7 +3799,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -3816,8 +3816,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3909,7 +3909,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -3926,8 +3926,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4019,7 +4019,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4036,8 +4036,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4129,7 +4129,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4146,8 +4146,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4239,7 +4239,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4256,8 +4256,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4349,7 +4349,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4366,8 +4366,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4459,7 +4459,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4476,8 +4476,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4569,7 +4569,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4586,8 +4586,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4679,7 +4679,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4696,8 +4696,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4789,7 +4789,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "inventory-depletion-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101000.0,
@@ -4806,8 +4806,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
-        "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+        "state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839",
+        "provider_state_snapshot_digest": "fe3e25a206085a8a69c5555e76dd760d996f4f5fd03615234d1569b71cef7839"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -4902,7 +4902,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -4926,8 +4926,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5024,7 +5024,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5048,8 +5048,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5146,7 +5146,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5170,8 +5170,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5268,7 +5268,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5292,8 +5292,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5390,7 +5390,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5414,8 +5414,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5512,7 +5512,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5536,8 +5536,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5634,7 +5634,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5658,8 +5658,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5756,7 +5756,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5780,8 +5780,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -5878,7 +5878,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -5902,8 +5902,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -6000,7 +6000,7 @@
         ],
         "state_snapshot": {
           "schema_version": "prism.equipment_state_snapshot.v1",
-          "component_id": "terminal_pipe",
+          "component_id": "vertical-handoff-terminal-pipe-01",
           "captured_at_s": 0.0,
           "origin": "model_prediction",
           "pressure_pa_abs": 101525.0,
@@ -6024,8 +6024,8 @@
           "source_digest": null,
           "quality": "valid"
         },
-        "state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654",
-        "provider_state_snapshot_digest": "8403e40b7adf0f637026648a08efce67d690654642d908817857e8ce5faff654"
+        "state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad",
+        "provider_state_snapshot_digest": "6e58c4b711e5b133e419f674cb77f81f2f3b770c2cda6799cc18b6e00ed6c9ad"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",

@@ -59,6 +59,11 @@ def main() -> int:
         type=Path,
         help="Optional case/atom-level release-to-final-damage chain audit.",
     )
+    parser.add_argument(
+        "--equipment-state-release-audit",
+        type=Path,
+        help="Optional case-level equipment-state to release-packet identity audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -85,6 +90,11 @@ def main() -> int:
                 if args.risk_atom_chain_audit is not None
                 else None
             ),
+            equipment_state_release_audit=(
+                _load(args.equipment_state_release_audit)
+                if args.equipment_state_release_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -108,6 +118,10 @@ def main() -> int:
     if args.risk_atom_chain_audit is not None:
         report["source_artifacts"]["risk_atom_chain_audit"] = _source_artifact(
             args.risk_atom_chain_audit
+        )
+    if args.equipment_state_release_audit is not None:
+        report["source_artifacts"]["equipment_state_release_audit"] = _source_artifact(
+            args.equipment_state_release_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

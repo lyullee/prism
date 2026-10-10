@@ -98,7 +98,7 @@
       "source": {
         "label": "facility assessment",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "sha256": "df62a19cd788328ba4ccdaf8c60ba5fd4b458d536dad5a96d6821ef60556d2e7",
+        "sha256": "ffa360dd4d45f92685257f66ddf4090df1dfd6aa47e78a5d917bab8921189eaa",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,
@@ -166,11 +166,11 @@
       "does_not_support": [
         "automatic promotion of facility QRA"
       ],
-      "check_count": 33,
+      "check_count": 34,
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "eed575b8bb26509113902e541c115f90f89e514d2f13b501ee91f93835981fbb",
+        "sha256": "255b06aab11224425530c6f2ec46ce95f8ea7a7a145a3ff84a3513b21aa12556",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,

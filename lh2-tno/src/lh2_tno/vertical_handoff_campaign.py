@@ -12,6 +12,8 @@ import copy
 from collections.abc import Mapping
 from typing import Any
 
+from .state_snapshot import EquipmentStateSnapshot
+
 
 def _event_mapping(event_id: str, *, namespace: str) -> str:
     prefix, separator, suffix = event_id.partition("/")
@@ -74,6 +76,17 @@ def rebind_vertical_handoff_campaign_result(
             identity["event_id"] = map_event(identity.get("event_id"))
             if identity.get("component_id") == "terminal_pipe":
                 identity["component_id"] = component_id
+            snapshot = identity.get("state_snapshot")
+            if isinstance(snapshot, dict) and snapshot.get("component_id") == "terminal_pipe":
+                snapshot["component_id"] = component_id
+                canonical_snapshot = EquipmentStateSnapshot.from_mapping(snapshot)
+                snapshot.clear()
+                snapshot.update(canonical_snapshot.to_mapping())
+                snapshot_digest = canonical_snapshot.digest()
+                identity["state_snapshot_digest"] = snapshot_digest
+                identity["provider_state_snapshot_digest"] = snapshot_digest
+                if isinstance(identity.get("provider_state_snapshot_digests"), list):
+                    identity["provider_state_snapshot_digests"] = [snapshot_digest]
 
     receptor_mapping = dict(receptor_map or {})
     if receptor_mapping:

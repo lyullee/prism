@@ -142,6 +142,17 @@
       "blocking_reason_count": 0,
       "diagnostic_only": true,
       "facility_qra_claim": false
+    },
+    "equipment_state_release_chain": {
+      "status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+      "case_count": 44,
+      "complete_case_count": 44,
+      "incomplete_case_count": 0,
+      "component_count": 9,
+      "operator_limited_case_count": 29,
+      "blocking_reason_count": 0,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
     }
   },
   "equipment": {
@@ -726,23 +737,23 @@
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "e2e44505ba12b26f0a10ad1d953bb88df79dac0401c51fe632fe3bd4931cb154"
+      "sha256": "5e0381fa4613a445d80901b8de33e3e9f543af6bd8529e87f13ca428b228828f"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
-      "sha256": "d6ad25e763e037d42c43369a4aae52d4b12200138bedf3484d01572347053b64"
+      "sha256": "103c5304123b2e060707667bb882ed48987f490af68a87e4f9352cddc9353abe"
     },
     "facility_assessment": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-      "sha256": "df62a19cd788328ba4ccdaf8c60ba5fd4b458d536dad5a96d6821ef60556d2e7"
+      "sha256": "ffa360dd4d45f92685257f66ddf4090df1dfd6aa47e78a5d917bab8921189eaa"
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "255b06aab11224425530c6f2ec46ce95f8ea7a7a145a3ff84a3513b21aa12556"
+      "sha256": "5da9af2616e0a94d396d59f9deb9bac612bcccafd9d5ee1d069a27966c3106fb"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
-      "sha256": "6e9b327eb42855555d5d904708a93fb500252219453df7457224e2f0d44ed543"
+      "sha256": "2756acfa714b19d7769df90e376fd2f3add75ccb29174b8168a8a7688ac18cb6"
     },
     "realtime_benchmark": {
       "path": "results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json",
@@ -750,7 +761,7 @@
     },
     "facility_evidence_request": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
-      "sha256": "b35928c0991de5fdfc9f3d19ee886b03cde5a96e8d599093f6afe7300d6e5654"
+      "sha256": "f06139d6e40f2556e2324c3d4efed015f0326d43c855b278440c1ab0b4b07ee2"
     },
     "scenario_evidence_audit": {
       "path": "examples/inspection_center_scenario_evidence_reaudit_summary.json",
@@ -759,6 +770,10 @@
     "risk_atom_chain_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json",
       "sha256": "79a559637a71af5cc3692d4a16468d9ad4bb031a5b5ed2a9fa5a2b662007bd94"
+    },
+    "equipment_state_release_audit": {
+      "path": "results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json",
+      "sha256": "ca42afedf32ac4240417ff10ddb15c6819939073e4627ee82b826d4b6a87f709"
     }
   },
   "invariant_validation": {

@@ -3718,6 +3718,36 @@
       "interpretation": "Every numerical case reaches a recorded release boundary, mass ledger, dispersion/pool, cloud, ignition-damage stage and four branch-specific risk atoms. Operator-limited cases remain diagnostic and do not qualify the provider or facility QRA."
     },
     {
+      "name": "diagnostic_equipment_state_release_chain",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment\\equipment_state_release_audit.json",
+        "schema_version": "prism.equipment_state_release_audit.v1",
+        "status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+        "case_count": 44,
+        "complete_case_count": 44,
+        "component_count": 9,
+        "component_ids": [
+          "ambient-vaporizer-01",
+          "inventory-depletion-pipe-01",
+          "liquid-transfer-line-01",
+          "liquid-transfer-pump-01",
+          "pressure-relief-vent-01",
+          "reliquefier-01",
+          "storage-tank-01",
+          "transfer-valve-01",
+          "vertical-handoff-terminal-pipe-01"
+        ],
+        "incomplete_case_count": 0,
+        "operator_limited_case_count": 29,
+        "blocking_reason_count": 0,
+        "facility_qra_claim": false
+      },
+      "interpretation": "Each numerical facility case retains the equipment state, provider packet, release termination and digest identity. Operator-limited cases remain diagnostic and do not qualify provider evidence or facility QRA."
+    },
+    {
       "name": "diagnostic_slabx_lh2_validation_evidence",
       "status": "PASS",
       "diagnostic_only": true,

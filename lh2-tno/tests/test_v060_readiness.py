@@ -133,6 +133,21 @@ def _atom_chain_audit():
     }
 
 
+def _equipment_chain_audit():
+    return {
+        "schema_version": "prism.equipment_state_release_audit.v1",
+        "status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+        "case_count": 3,
+        "complete_case_count": 3,
+        "incomplete_case_count": 0,
+        "component_count": 1,
+        "operator_limited_case_count": 1,
+        "blocking_reasons": [],
+        "diagnostic_only": True,
+        "facility_qra_claim": False,
+    }
+
+
 def test_report_keeps_conditional_chain_and_strict_gate_separate():
     report = build_v060_readiness_report(**_inputs())
     assert report["schema_version"] == "prism.v060_ijhe_readiness_report.v1"
@@ -238,6 +253,18 @@ def test_report_validator_rejects_atom_chain_qra_promotion():
     report["chain"]["risk_atom_chain_closure"]["facility_qra_claim"] = True
     with pytest.raises(V060ReadinessError, match="risk atom chain closure cannot claim facility QRA"):
         validate_v060_readiness_report(report)
+
+
+def test_report_records_equipment_state_release_chain():
+    report = build_v060_readiness_report(
+        **_inputs(), equipment_state_release_audit=_equipment_chain_audit()
+    )
+    chain = report["chain"]["equipment_state_release_chain"]
+    assert chain["status"] == "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
+    assert chain["case_count"] == 3
+    assert chain["complete_case_count"] == 3
+    assert chain["component_count"] == 1
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
 
 
 def test_report_uses_facility_release_boundary_gate_when_present():

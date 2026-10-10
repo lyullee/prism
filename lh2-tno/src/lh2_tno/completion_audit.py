@@ -77,6 +77,7 @@ def build_ijhe_completion_audit(
     facility_case_packet_coverage: Mapping[str, Any] | None = None,
     combined_chain_closure: Mapping[str, Any] | None = None,
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
+    equipment_state_release_audit: Mapping[str, Any] | None = None,
     slabx_validation_evidence: Mapping[str, Any] | None = None,
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
     domain_recovery_audit: Mapping[str, Any] | None = None,
@@ -1699,6 +1700,63 @@ def build_ijhe_completion_audit(
                     "dispersion/pool, cloud, ignition-damage stage and four branch-specific "
                     "risk atoms. Operator-limited cases remain diagnostic and do not qualify "
                     "the provider or facility QRA."
+                ),
+            }
+        )
+    if equipment_state_release_audit is not None:
+        equipment_chain = equipment_state_release_audit
+        equipment_chain_valid = (
+            equipment_chain.get("schema_version")
+            == "prism.equipment_state_release_audit.v1"
+            and equipment_chain.get("status")
+            == "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
+            and isinstance(equipment_chain.get("case_count"), int)
+            and equipment_chain.get("case_count", 0) > 0
+            and equipment_chain.get("complete_case_count")
+            == equipment_chain.get("case_count")
+            and equipment_chain.get("incomplete_case_count") == 0
+            and equipment_chain.get("blocking_reasons") == []
+            and isinstance(equipment_chain.get("component_count"), int)
+            and equipment_chain.get("component_count", 0) > 0
+            and isinstance(equipment_chain.get("component_ids"), list)
+            and len(equipment_chain.get("component_ids", []))
+            == equipment_chain.get("component_count")
+            and equipment_chain.get("diagnostic_only") is True
+            and equipment_chain.get("provider_packet_promoted") is False
+            and equipment_chain.get("physical_validation_claim") is False
+            and equipment_chain.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_equipment_state_release_chain",
+                "status": "PASS" if equipment_chain_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if equipment_chain_valid
+                    else "one or more facility cases do not retain an exact equipment-state to release-packet identity chain"
+                ),
+                "evidence": {
+                    "record": equipment_chain.get("_record_path"),
+                    "schema_version": equipment_chain.get("schema_version"),
+                    "status": equipment_chain.get("status"),
+                    "case_count": equipment_chain.get("case_count"),
+                    "complete_case_count": equipment_chain.get("complete_case_count"),
+                    "component_count": equipment_chain.get("component_count"),
+                    "component_ids": equipment_chain.get("component_ids"),
+                    "incomplete_case_count": equipment_chain.get("incomplete_case_count"),
+                    "operator_limited_case_count": equipment_chain.get(
+                        "operator_limited_case_count"
+                    ),
+                    "blocking_reason_count": len(equipment_chain.get("blocking_reasons", []))
+                    if isinstance(equipment_chain.get("blocking_reasons"), list)
+                    else None,
+                    "facility_qra_claim": equipment_chain.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "Each numerical facility case retains the equipment state, provider packet, "
+                    "release termination and digest identity. Operator-limited cases remain "
+                    "diagnostic and do not qualify provider evidence or facility QRA."
                 ),
             }
         )

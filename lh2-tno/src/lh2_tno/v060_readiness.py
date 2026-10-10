@@ -299,6 +299,7 @@ def build_v060_readiness_report(
     facility_evidence_request: Mapping[str, Any] | None = None,
     scenario_evidence_audit: Mapping[str, Any] | None = None,
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
+    equipment_state_release_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -321,6 +322,11 @@ def build_v060_readiness_report(
     atom_chain = None
     if risk_atom_chain_audit is not None:
         atom_chain = _mapping(risk_atom_chain_audit, "risk_atom_chain_audit")
+    equipment_chain = None
+    if equipment_state_release_audit is not None:
+        equipment_chain = _mapping(
+            equipment_state_release_audit, "equipment_state_release_audit"
+        )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
         if isinstance(evidence_request, Mapping)
@@ -405,6 +411,25 @@ def build_v060_readiness_report(
                     "facility_qra_claim": atom_chain.get("facility_qra_claim"),
                 }
                 if atom_chain is not None
+                else None
+            ),
+            "equipment_state_release_chain": (
+                {
+                    "status": equipment_chain.get("status"),
+                    "case_count": equipment_chain.get("case_count"),
+                    "complete_case_count": equipment_chain.get("complete_case_count"),
+                    "incomplete_case_count": equipment_chain.get("incomplete_case_count"),
+                    "component_count": equipment_chain.get("component_count"),
+                    "operator_limited_case_count": equipment_chain.get(
+                        "operator_limited_case_count"
+                    ),
+                    "blocking_reason_count": len(equipment_chain.get("blocking_reasons", ()))
+                    if isinstance(equipment_chain.get("blocking_reasons"), Sequence)
+                    else None,
+                    "diagnostic_only": equipment_chain.get("diagnostic_only"),
+                    "facility_qra_claim": equipment_chain.get("facility_qra_claim"),
+                }
+                if equipment_chain is not None
                 else None
             ),
         },
@@ -619,6 +644,43 @@ def validate_v060_readiness_report(
                 errors.append("risk atom chain closure must remain diagnostic_only")
             if atom_chain.get("facility_qra_claim") is True:
                 errors.append("risk atom chain closure cannot claim facility QRA")
+
+    equipment_chain = chain.get("equipment_state_release_chain")
+    if equipment_chain is not None:
+        if not isinstance(equipment_chain, Mapping):
+            errors.append("chain.equipment_state_release_chain must be an object")
+        else:
+            for field in (
+                "case_count",
+                "complete_case_count",
+                "incomplete_case_count",
+                "component_count",
+                "operator_limited_case_count",
+                "blocking_reason_count",
+            ):
+                if equipment_chain.get(field) is not None:
+                    _nonnegative_int(
+                        equipment_chain.get(field),
+                        f"chain.equipment_state_release_chain.{field}",
+                        errors,
+                    )
+            if equipment_chain.get("status") == "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC":
+                if equipment_chain.get("case_count") != equipment_chain.get("complete_case_count"):
+                    errors.append(
+                        "equipment state release chain is full but complete case count differs"
+                    )
+                if equipment_chain.get("incomplete_case_count") != 0:
+                    errors.append(
+                        "equipment state release chain is full but incomplete cases remain"
+                    )
+                if equipment_chain.get("blocking_reason_count") != 0:
+                    errors.append(
+                        "equipment state release chain is full but blocking reasons remain"
+                    )
+            if equipment_chain.get("diagnostic_only") is not True:
+                errors.append("equipment state release chain must remain diagnostic_only")
+            if equipment_chain.get("facility_qra_claim") is True:
+                errors.append("equipment state release chain cannot claim facility QRA")
 
     release_boundary = chain.get("release_boundary")
     if release_boundary is not None:

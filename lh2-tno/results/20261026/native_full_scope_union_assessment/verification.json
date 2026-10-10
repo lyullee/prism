@@ -62,6 +62,11 @@
   "risk_atom_chain_audit_complete_case_count": 44,
   "risk_atom_chain_audit_risk_atom_count": 176,
   "risk_atom_chain_audit_blocking_reason_count": 0,
+  "equipment_state_release_audit_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+  "equipment_state_release_audit_case_count": 44,
+  "equipment_state_release_audit_complete_case_count": 44,
+  "equipment_state_release_audit_component_count": 9,
+  "equipment_state_release_audit_blocking_reason_count": 0,
   "limitations": [
     "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
     "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -132,8 +137,8 @@
     "interpretation": "A pinned worker session removes repeated interpreter startup and preserves fresh physics on changed weather inputs. This diagnostic does not qualify fresh-physics 1 Hz service unless every measured sample is within 1 s."
   },
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
-  "ijhe_audit_check_count": 34,
-  "ijhe_audit_pass_count": 29,
+  "ijhe_audit_check_count": 35,
+  "ijhe_audit_pass_count": 30,
   "ijhe_audit_blocked_count": 5,
   "ijhe_audit_blocked_check_ids": [
     "facility_release_boundary",
