@@ -171,6 +171,18 @@
       "blocking_reason_count": 0,
       "diagnostic_only": true,
       "facility_qra_claim": false
+    },
+    "facility_frequency_uncertainty_closure": {
+      "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+      "scenario_count": 5,
+      "risk_atom_count": 176,
+      "mismatch_count": 0,
+      "blocking_reason_count": 0,
+      "frequency_inference_performed": false,
+      "facility_credible_interval": false,
+      "fresh_physics_executed": false,
+      "diagnostic_only": true,
+      "facility_qra_claim": false
     }
   },
   "equipment": {
@@ -712,7 +724,7 @@
     },
     "union_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/verification.json",
-      "sha256": "30fc7a74dac02336da095283b7e2bf607f8d5f0797262091238ab6b49613fe05"
+      "sha256": "584081ec872c9cf86445af170eba3291fa024bfa96a936ccdab01525d7aafc04"
     },
     "scope_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/scope_matrix.json",
@@ -724,7 +736,7 @@
     },
     "completion_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-      "sha256": "c9455659b1296cb8259b791126f1acf4ee19809ce5453b6a6f56a0f7c6b29adf"
+      "sha256": "228f7bb2812985065e666525b2117ba0775b1ad83ada10158c99352f0ed93662"
     },
     "validation_matrix": {
       "path": "results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json",
@@ -753,6 +765,10 @@
     "facility_component_contribution_audit": {
       "path": "results/20261026/native_full_scope_union_assessment/facility_component_contribution_audit.json",
       "sha256": "ccd53298258e4adb9c0a12374a9fe07762eb76a092bef146d89cea52bf39cbd0"
+    },
+    "facility_frequency_uncertainty_audit": {
+      "path": "results/20261026/native_full_scope_union_assessment/facility_frequency_uncertainty_audit.json",
+      "sha256": "688a52239f8dc2fc8b2fe99fa77f68a1fe7ae49170a5c0371acd081f30504017"
     }
   },
   "invariant_validation": {

@@ -302,6 +302,7 @@ def build_v060_readiness_report(
     equipment_state_release_audit: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
     facility_component_contribution_audit: Mapping[str, Any] | None = None,
+    facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -339,6 +340,12 @@ def build_v060_readiness_report(
         component_contribution_chain = _mapping(
             facility_component_contribution_audit,
             "facility_component_contribution_audit",
+        )
+    frequency_uncertainty_chain = None
+    if facility_frequency_uncertainty_audit is not None:
+        frequency_uncertainty_chain = _mapping(
+            facility_frequency_uncertainty_audit,
+            "facility_frequency_uncertainty_audit",
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -473,6 +480,30 @@ def build_v060_readiness_report(
                     "facility_qra_claim": component_contribution_chain.get("facility_qra_claim"),
                 }
                 if component_contribution_chain is not None
+                else None
+            ),
+            "facility_frequency_uncertainty_closure": (
+                {
+                    "status": frequency_uncertainty_chain.get("status"),
+                    "scenario_count": frequency_uncertainty_chain.get("scenario_count"),
+                    "risk_atom_count": frequency_uncertainty_chain.get("risk_atom_count"),
+                    "mismatch_count": frequency_uncertainty_chain.get("mismatch_count"),
+                    "blocking_reason_count": len(frequency_uncertainty_chain.get("blocking_reasons", ()))
+                    if isinstance(frequency_uncertainty_chain.get("blocking_reasons"), Sequence)
+                    else None,
+                    "frequency_inference_performed": frequency_uncertainty_chain.get(
+                        "frequency_inference_performed"
+                    ),
+                    "facility_credible_interval": frequency_uncertainty_chain.get(
+                        "facility_credible_interval"
+                    ),
+                    "fresh_physics_executed": frequency_uncertainty_chain.get(
+                        "fresh_physics_executed"
+                    ),
+                    "diagnostic_only": frequency_uncertainty_chain.get("diagnostic_only"),
+                    "facility_qra_claim": frequency_uncertainty_chain.get("facility_qra_claim"),
+                }
+                if frequency_uncertainty_chain is not None
                 else None
             ),
         },
@@ -801,6 +832,65 @@ def validate_v060_readiness_report(
             if component_contribution_chain.get("facility_qra_claim") is True:
                 errors.append(
                     "facility component contribution closure cannot claim facility QRA"
+                )
+
+    frequency_uncertainty_chain = chain.get("facility_frequency_uncertainty_closure")
+    if frequency_uncertainty_chain is not None:
+        if not isinstance(frequency_uncertainty_chain, Mapping):
+            errors.append(
+                "chain.facility_frequency_uncertainty_closure must be an object"
+            )
+        else:
+            for field in (
+                "scenario_count",
+                "risk_atom_count",
+                "mismatch_count",
+                "blocking_reason_count",
+            ):
+                if frequency_uncertainty_chain.get(field) is not None:
+                    _nonnegative_int(
+                        frequency_uncertainty_chain.get(field),
+                        f"chain.facility_frequency_uncertainty_closure.{field}",
+                        errors,
+                    )
+            if frequency_uncertainty_chain.get("status") == (
+                "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC"
+            ):
+                if frequency_uncertainty_chain.get("scenario_count", 0) <= 0:
+                    errors.append(
+                        "facility frequency uncertainty closure has no scenarios"
+                    )
+                if frequency_uncertainty_chain.get("risk_atom_count", 0) <= 0:
+                    errors.append(
+                        "facility frequency uncertainty closure has no risk atoms"
+                    )
+                if frequency_uncertainty_chain.get("mismatch_count") != 0:
+                    errors.append(
+                        "facility frequency uncertainty closure has mismatches"
+                    )
+                if frequency_uncertainty_chain.get("blocking_reason_count") != 0:
+                    errors.append(
+                        "facility frequency uncertainty closure has blocking reasons"
+                    )
+            if frequency_uncertainty_chain.get("frequency_inference_performed") is not False:
+                errors.append(
+                    "facility frequency uncertainty closure cannot infer frequency"
+                )
+            if frequency_uncertainty_chain.get("facility_credible_interval") is not False:
+                errors.append(
+                    "facility frequency uncertainty closure cannot claim a credible interval"
+                )
+            if frequency_uncertainty_chain.get("fresh_physics_executed") is not False:
+                errors.append(
+                    "facility frequency uncertainty closure cannot run fresh physics"
+                )
+            if frequency_uncertainty_chain.get("diagnostic_only") is not True:
+                errors.append(
+                    "facility frequency uncertainty closure must remain diagnostic_only"
+                )
+            if frequency_uncertainty_chain.get("facility_qra_claim") is True:
+                errors.append(
+                    "facility frequency uncertainty closure cannot claim facility QRA"
                 )
 
     release_boundary = chain.get("release_boundary")

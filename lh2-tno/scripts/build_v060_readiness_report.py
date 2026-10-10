@@ -74,6 +74,11 @@ def main() -> int:
         type=Path,
         help="Optional independent equipment contribution and ranking audit.",
     )
+    parser.add_argument(
+        "--facility-frequency-uncertainty-audit",
+        type=Path,
+        help="Optional independent literature-frequency sensitivity audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -115,6 +120,11 @@ def main() -> int:
                 if args.facility_component_contribution_audit is not None
                 else None
             ),
+            facility_frequency_uncertainty_audit=(
+                _load(args.facility_frequency_uncertainty_audit)
+                if args.facility_frequency_uncertainty_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -150,6 +160,10 @@ def main() -> int:
     if args.facility_component_contribution_audit is not None:
         report["source_artifacts"]["facility_component_contribution_audit"] = _source_artifact(
             args.facility_component_contribution_audit
+        )
+    if args.facility_frequency_uncertainty_audit is not None:
+        report["source_artifacts"]["facility_frequency_uncertainty_audit"] = _source_artifact(
+            args.facility_frequency_uncertainty_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

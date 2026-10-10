@@ -86,6 +86,7 @@ def build_ijhe_completion_audit(
     observed_state_evidence: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
     facility_component_contribution_audit: Mapping[str, Any] | None = None,
+    facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -1798,6 +1799,65 @@ def build_ijhe_completion_audit(
             and component_audit.get("qualified_provider_packet") is False
             and component_audit.get("physical_validation_claim") is False
             and component_audit.get("facility_qra_claim") is False
+        )
+    if facility_frequency_uncertainty_audit is not None:
+        frequency_audit = facility_frequency_uncertainty_audit
+        frequency_audit_valid = (
+            frequency_audit.get("schema_version")
+            == "prism.facility_frequency_uncertainty_audit.v1"
+            and frequency_audit.get("status")
+            == "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC"
+            and isinstance(frequency_audit.get("scenario_count"), int)
+            and frequency_audit.get("scenario_count", 0) > 0
+            and isinstance(frequency_audit.get("risk_atom_count"), int)
+            and frequency_audit.get("risk_atom_count", 0) > 0
+            and frequency_audit.get("mismatch_count") == 0
+            and frequency_audit.get("blocking_reasons") == []
+            and frequency_audit.get("frequency_inference_performed") is False
+            and frequency_audit.get("facility_credible_interval") is False
+            and frequency_audit.get("statistical_confidence_interval") is False
+            and frequency_audit.get("fresh_physics_executed") is False
+            and frequency_audit.get("provider_packet_promoted") is False
+            and frequency_audit.get("physical_validation_claim") is False
+            and frequency_audit.get("facility_qra_claim") is False
+            and frequency_audit.get("diagnostic_only") is True
+        )
+        checks.append(
+            {
+                "name": "diagnostic_facility_frequency_uncertainty_closure",
+                "status": "PASS" if frequency_audit_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if frequency_audit_valid
+                    else "stored literature-frequency sensitivity does not match independent risk-atom reweighting"
+                ),
+                "evidence": {
+                    "record": frequency_audit.get("_record_path"),
+                    "schema_version": frequency_audit.get("schema_version"),
+                    "status": frequency_audit.get("status"),
+                    "scenario_count": frequency_audit.get("scenario_count"),
+                    "risk_atom_count": frequency_audit.get("risk_atom_count"),
+                    "mismatch_count": frequency_audit.get("mismatch_count"),
+                    "blocking_reason_count": len(frequency_audit.get("blocking_reasons", []))
+                    if isinstance(frequency_audit.get("blocking_reasons"), list)
+                    else None,
+                    "frequency_inference_performed": frequency_audit.get(
+                        "frequency_inference_performed"
+                    ),
+                    "facility_credible_interval": frequency_audit.get(
+                        "facility_credible_interval"
+                    ),
+                    "fresh_physics_executed": frequency_audit.get(
+                        "fresh_physics_executed"
+                    ),
+                    "facility_qra_claim": frequency_audit.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "Literature p05/p95 and fixed-rate scenarios reproduce the saved conditional "
+                    "IR/F-N sensitivity. No missing frequency is inferred and no fresh physics is run."
+                ),
+            }
         )
         checks.append(
             {

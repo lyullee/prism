@@ -118,6 +118,11 @@ def main() -> int:
         type=Path,
         help="optional independent equipment contribution and ranking audit",
     )
+    parser.add_argument(
+        "--facility-frequency-uncertainty-audit",
+        type=Path,
+        help="optional independent literature-frequency sensitivity audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -333,6 +338,15 @@ def main() -> int:
             equipment_state_release_audit["_record_path"] = str(
                 args.equipment_state_release_audit
             )
+        facility_frequency_uncertainty_audit = (
+            _object(args.facility_frequency_uncertainty_audit)
+            if args.facility_frequency_uncertainty_audit
+            else None
+        )
+        if facility_frequency_uncertainty_audit is not None:
+            facility_frequency_uncertainty_audit["_record_path"] = str(
+                args.facility_frequency_uncertainty_audit
+            )
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -368,6 +382,7 @@ def main() -> int:
             observed_state_evidence,
             facility_aggregate_closure_audit,
             facility_component_contribution_audit,
+            facility_frequency_uncertainty_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

@@ -62,6 +62,9 @@ from lh2_tno.facility_aggregate_closure_audit import (  # noqa: E402
 from lh2_tno.facility_component_contribution_audit import (  # noqa: E402
     build_facility_component_contribution_audit,
 )
+from lh2_tno.facility_frequency_uncertainty_audit import (  # noqa: E402
+    build_facility_frequency_uncertainty_audit,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -520,6 +523,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     facility_component_contribution_audit["_record_path"] = str(
         args.output_dir / "facility_component_contribution_audit.json"
     )
+    frequency_scenario_source = {
+        "scenarios": [scenario.model_dump(mode="json") for scenario in scenarios],
+        "frequency_inference_performed": False,
+        "facility_credible_interval": False,
+    }
+    facility_frequency_uncertainty_audit = build_facility_frequency_uncertainty_audit(
+        assessment_ledger,
+        frequency_scenario_source,
+        assessment["frequency_uncertainty"],
+    )
+    facility_frequency_uncertainty_audit["_record_path"] = str(
+        args.output_dir / "facility_frequency_uncertainty_audit.json"
+    )
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -702,6 +718,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "facility_component_contribution_audit_blocking_reason_count": len(
             facility_component_contribution_audit["blocking_reasons"]
         ),
+        "facility_frequency_uncertainty_audit_status": facility_frequency_uncertainty_audit[
+            "status"
+        ],
+        "facility_frequency_uncertainty_audit_scenario_count": facility_frequency_uncertainty_audit[
+            "scenario_count"
+        ],
+        "facility_frequency_uncertainty_audit_risk_atom_count": facility_frequency_uncertainty_audit[
+            "risk_atom_count"
+        ],
+        "facility_frequency_uncertainty_audit_mismatch_count": facility_frequency_uncertainty_audit[
+            "mismatch_count"
+        ],
+        "facility_frequency_uncertainty_audit_blocking_reason_count": len(
+            facility_frequency_uncertainty_audit["blocking_reasons"]
+        ),
         "limitations": [
             "vertical handoff is a namespaced diagnostic campaign, not a new qualified provider packet",
             "vertical provider history is synthetic/operator-limited and retains its termination horizon",
@@ -734,6 +765,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(
         output / "facility_component_contribution_audit.json",
         facility_component_contribution_audit,
+    )
+    _save(
+        output / "facility_frequency_uncertainty_audit.json",
+        facility_frequency_uncertainty_audit,
     )
     _save(
         output / "frequency_scenarios.json",

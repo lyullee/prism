@@ -104,6 +104,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     facility_component_contribution_audit = _with_record(
         args.facility_component_contribution_audit
     )
+    facility_frequency_uncertainty_audit = _with_record(
+        args.facility_frequency_uncertainty_audit
+    )
 
     audit = build_ijhe_completion_audit(
         current_status,
@@ -133,6 +136,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         equipment_state_release_audit=equipment_state_release_audit,
         facility_aggregate_closure_audit=facility_aggregate_closure_audit,
         facility_component_contribution_audit=facility_component_contribution_audit,
+        facility_frequency_uncertainty_audit=facility_frequency_uncertainty_audit,
     )
 
     verification_path = output_dir / "verification.json"
@@ -347,6 +351,31 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 if facility_component_contribution_audit
                 else verification.get("facility_component_contribution_audit_blocking_reason_count")
             ),
+            "facility_frequency_uncertainty_audit_status": (
+                facility_frequency_uncertainty_audit.get("status")
+                if facility_frequency_uncertainty_audit
+                else verification.get("facility_frequency_uncertainty_audit_status")
+            ),
+            "facility_frequency_uncertainty_audit_scenario_count": (
+                facility_frequency_uncertainty_audit.get("scenario_count")
+                if facility_frequency_uncertainty_audit
+                else verification.get("facility_frequency_uncertainty_audit_scenario_count")
+            ),
+            "facility_frequency_uncertainty_audit_risk_atom_count": (
+                facility_frequency_uncertainty_audit.get("risk_atom_count")
+                if facility_frequency_uncertainty_audit
+                else verification.get("facility_frequency_uncertainty_audit_risk_atom_count")
+            ),
+            "facility_frequency_uncertainty_audit_mismatch_count": (
+                facility_frequency_uncertainty_audit.get("mismatch_count")
+                if facility_frequency_uncertainty_audit
+                else verification.get("facility_frequency_uncertainty_audit_mismatch_count")
+            ),
+            "facility_frequency_uncertainty_audit_blocking_reason_count": (
+                len(facility_frequency_uncertainty_audit.get("blocking_reasons", []))
+                if facility_frequency_uncertainty_audit
+                else verification.get("facility_frequency_uncertainty_audit_blocking_reason_count")
+            ),
         }
     )
     _save(output_dir / "validation_evidence_matrix.json", matrix)
@@ -481,6 +510,12 @@ def main() -> int:
         type=Path,
         default=None,
         help="Optional independent equipment contribution and ranking audit.",
+    )
+    parser.add_argument(
+        "--facility-frequency-uncertainty-audit",
+        type=Path,
+        default=None,
+        help="Optional independent literature-frequency sensitivity audit.",
     )
     args = parser.parse_args()
     try:
