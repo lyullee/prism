@@ -3515,10 +3515,17 @@
       "blocking_reason": "facility release boundary is not closed across all declared cases",
       "evidence": {
         "record": "results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "schema": null,
+        "schema": "prism.facility_release_boundary_gate.v1",
+        "schema_version": "prism.facility_release_boundary_gate.v1",
         "strict_release_boundary_ready": false,
         "case_count": 44,
-        "facility_gate_checks": {},
+        "facility_gate_checks": {
+          "all_rows_complete": false,
+          "all_termination_bases_allowed": false,
+          "all_isolation_or_inventory_statuses_closed": true,
+          "all_mass_residuals_closed": false,
+          "no_withheld_cases": false
+        },
         "blocking_reasons": [
           "29 case(s) are withheld from the release ledger",
           "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
@@ -3579,7 +3586,7 @@
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
           "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
         ],
-        "promotion_policy": null
+        "promotion_policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates"
       },
       "interpretation": "Every declared case must have an allowed provider-owned termination basis and a closed mass/inventory ledger before the facility chain can be promoted. This gate does not assign frequency or validate physics."
     },

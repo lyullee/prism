@@ -148,6 +148,19 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
         if check["name"] == "facility_release_boundary"
     )
     assert release_boundary_check["status"] == "BLOCKED"
+    assert release_boundary_check["evidence"]["schema"] == (
+        "prism.facility_release_boundary_gate.v1"
+    )
+    assert release_boundary_check["evidence"]["schema_version"] == (
+        "prism.facility_release_boundary_gate.v1"
+    )
+    assert release_boundary_check["evidence"]["facility_gate_checks"] == {
+        "all_rows_complete": False,
+        "all_termination_bases_allowed": False,
+        "all_isolation_or_inventory_statuses_closed": True,
+        "all_mass_residuals_closed": False,
+        "no_withheld_cases": False,
+    }
     state_snapshot_check = next(
         check for check in audit["checks"]
         if check["name"] == "diagnostic_equipment_state_snapshot_binding"

@@ -1340,13 +1340,33 @@ def build_ijhe_completion_audit(
         # regenerate the assessment before relying on this check.
         release_boundary = assessment.get("strict_release_boundary")
         if isinstance(release_boundary, Mapping):
+            # ``evaluate_facility_release_boundary`` publishes the gate as
+            # ``schema_version``/``checks``/``policy``.  Accept the older
+            # aliases too because saved diagnostic assessments may still use
+            # them, but always expose the normalized values in the audit.
+            gate_schema = release_boundary.get("schema") or release_boundary.get(
+                "schema_version"
+            )
             gate_checks = release_boundary.get("facility_gate_checks")
+            if not isinstance(gate_checks, Mapping):
+                gate_checks = release_boundary.get("checks")
             gate_checks = gate_checks if isinstance(gate_checks, Mapping) else {}
+            promotion_policy = release_boundary.get("promotion_policy")
+            if not isinstance(promotion_policy, Mapping):
+                promotion_policy = release_boundary.get("policy")
             gate_ready = release_boundary.get("strict_release_boundary_ready") is True
+            required_gate_checks = {
+                "all_rows_complete",
+                "all_termination_bases_allowed",
+                "all_isolation_or_inventory_statuses_closed",
+                "all_mass_residuals_closed",
+                "no_withheld_cases",
+            }
             gate_valid = (
-                release_boundary.get("schema") == "prism.facility_release_boundary_gate.v1"
+                gate_schema == "prism.facility_release_boundary_gate.v1"
                 and gate_ready
                 and not release_boundary.get("blocking_reasons")
+                and required_gate_checks.issubset(gate_checks)
                 and all(value is True for value in gate_checks.values())
             )
             checks.append(
@@ -1361,14 +1381,15 @@ def build_ijhe_completion_audit(
                     ),
                     "evidence": {
                         "record": assessment.get("_record_path"),
-                        "schema": release_boundary.get("schema"),
+                        "schema": gate_schema,
+                        "schema_version": release_boundary.get("schema_version"),
                         "strict_release_boundary_ready": release_boundary.get(
                             "strict_release_boundary_ready"
                         ),
                         "case_count": release_boundary.get("case_count"),
                         "facility_gate_checks": dict(gate_checks),
                         "blocking_reasons": release_boundary.get("blocking_reasons", []),
-                        "promotion_policy": release_boundary.get("promotion_policy"),
+                        "promotion_policy": promotion_policy,
                     },
                     "interpretation": (
                         "Every declared case must have an allowed provider-owned termination "

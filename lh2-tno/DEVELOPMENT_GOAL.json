@@ -2390,7 +2390,7 @@
   "facility_release_boundary_gate_promotion": false,
   "facility_release_boundary_gate_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "facility_release_boundary_gate_completion_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 2 completion-audit tests; full suite pending",
+  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 3 completion-audit tests plus union evidence-shape assertions and missing-check fail-closed test; full suite 704 passed, 1 skipped",
   "v060_ijhe_completion_audit_latest_check_count": 32,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 28,
@@ -2401,5 +2401,14 @@
     "actual_provider_release_packet",
     "declared_major_accident_scope",
     "facility_ir_fn_available"
+  ],
+  "facility_release_boundary_gate_completion_audit_evidence_schema_normalized": true,
+  "facility_release_boundary_gate_completion_audit_evidence_schema": "prism.facility_release_boundary_gate.v1",
+  "facility_release_boundary_gate_completion_audit_required_checks": [
+    "all_rows_complete",
+    "all_termination_bases_allowed",
+    "all_isolation_or_inventory_statuses_closed",
+    "all_mass_residuals_closed",
+    "no_withheld_cases"
   ]
 }

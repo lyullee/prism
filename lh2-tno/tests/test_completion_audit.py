@@ -1079,10 +1079,10 @@ def test_completion_audit_records_conditional_facility_ir_fn_without_promoting_t
 def test_completion_audit_records_facility_release_boundary_gate():
     assessment = _facility_assessment(
         strict_release_boundary={
-            "schema": "prism.facility_release_boundary_gate.v1",
+            "schema_version": "prism.facility_release_boundary_gate.v1",
             "strict_release_boundary_ready": False,
             "case_count": 24,
-            "facility_gate_checks": {
+            "checks": {
                 "all_rows_complete": False,
                 "all_termination_bases_allowed": False,
                 "all_isolation_or_inventory_statuses_closed": True,
@@ -1090,7 +1090,7 @@ def test_completion_audit_records_facility_release_boundary_gate():
                 "no_withheld_cases": False,
             },
             "blocking_reasons": ["synthetic diagnostic horizon remains"],
-            "promotion_policy": {
+            "policy": {
                 "frequency_is_not_inferred": True,
                 "facility_ir_fn_promotion": "requires independent gates",
             },
@@ -1107,16 +1107,20 @@ def test_completion_audit_records_facility_release_boundary_gate():
     assert check["status"] == "BLOCKED"
     assert check["diagnostic_only"] is False
     assert check["evidence"]["case_count"] == 24
+    assert check["evidence"]["schema"] == "prism.facility_release_boundary_gate.v1"
+    assert check["evidence"]["schema_version"] == "prism.facility_release_boundary_gate.v1"
+    assert check["evidence"]["facility_gate_checks"]["all_rows_complete"] is False
+    assert check["evidence"]["promotion_policy"]["frequency_is_not_inferred"] is True
     assert "facility release boundary is not closed across all declared cases" in report["blocking_reasons"]
 
 
 def test_completion_audit_accepts_closed_facility_release_boundary_gate():
     assessment = _facility_assessment(
         strict_release_boundary={
-            "schema": "prism.facility_release_boundary_gate.v1",
+            "schema_version": "prism.facility_release_boundary_gate.v1",
             "strict_release_boundary_ready": True,
             "case_count": 1,
-            "facility_gate_checks": {
+            "checks": {
                 "all_rows_complete": True,
                 "all_termination_bases_allowed": True,
                 "all_isolation_or_inventory_statuses_closed": True,
@@ -1124,7 +1128,7 @@ def test_completion_audit_accepts_closed_facility_release_boundary_gate():
                 "no_withheld_cases": True,
             },
             "blocking_reasons": [],
-            "promotion_policy": {
+            "policy": {
                 "frequency_is_not_inferred": True,
                 "facility_ir_fn_promotion": "requires independent gates",
             },
@@ -1140,6 +1144,37 @@ def test_completion_audit_accepts_closed_facility_release_boundary_gate():
     check = next(item for item in report["checks"] if item["name"] == "facility_release_boundary")
     assert check["status"] == "PASS"
     assert check["blocking_reason"] is None
+
+
+def test_completion_audit_rejects_release_boundary_with_missing_gate_check():
+    assessment = _facility_assessment(
+        strict_release_boundary={
+            "schema_version": "prism.facility_release_boundary_gate.v1",
+            "strict_release_boundary_ready": True,
+            "case_count": 1,
+            "checks": {
+                "all_rows_complete": True,
+                "all_termination_bases_allowed": True,
+                "all_isolation_or_inventory_statuses_closed": True,
+                "all_mass_residuals_closed": True,
+                # no_withheld_cases is intentionally omitted
+            },
+            "blocking_reasons": [],
+            "policy": {},
+        }
+    )
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        facility_assessment=assessment,
+    )
+    check = next(item for item in report["checks"] if item["name"] == "facility_release_boundary")
+    assert check["status"] == "BLOCKED"
+    assert check["blocking_reason"] == (
+        "facility release boundary is not closed across all declared cases"
+    )
 
 
 def test_completion_audit_records_diagnostic_frequency_uncertainty():
