@@ -95,3 +95,76 @@ def test_closure_open_sidecar_is_not_a_qualified_provider_packet(tmp_path):
     )
     assert report["exact_match_count"] == 1
     assert report["qualified_provider_packet_count"] == 0
+
+
+def test_two_sided_release_set_uses_one_ordered_sidecar(tmp_path):
+    event_dir = tmp_path / "two_sided"
+    event_dir.mkdir(parents=True)
+    releases = [
+        {
+            "event_id": "event-2",
+            "component_id": "reliquefier-1",
+            "port_id": "out-1",
+            "provider_source_digest": SOURCE,
+            "provider_result_digest": RESULT,
+        },
+        {
+            "event_id": "event-2",
+            "component_id": "reliquefier-1",
+            "port_id": "out-2",
+            "provider_source_digest": SOURCE,
+            "provider_result_digest": "3" * 64,
+        },
+    ]
+    packet_path = event_dir / "resolved_release_set.json"
+    packet_path.write_text(json.dumps({"releases": releases}), encoding="utf-8")
+    (event_dir / "provider_qualification.json").write_text(
+        json.dumps({
+            "schema_version": "prism.provider_qualification_evidence.v1",
+            "status": "qualified_actual",
+            "provider_origin": ["native_provider", "reviewed_actual"],
+            "evidence_id": "review-two-sided",
+            "event_id": "event-2",
+            "component_id": "reliquefier-1",
+            "port_ids": ["out-1", "out-2"],
+            "provider_source_digests": [SOURCE, SOURCE],
+            "provider_result_digests": [RESULT, "3" * 64],
+            "exact_digest_binding": True,
+        }),
+        encoding="utf-8",
+    )
+    catalogue = {
+        "schema_version": "prism.generic_provider_evidence_requests.v1",
+        "packet_count": 2,
+        "requests": [
+            {
+                "request_id": "event-2::out-1",
+                "packet_path": str(packet_path),
+                "packet_index": 0,
+                "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+                "current_packet": releases[0],
+            },
+            {
+                "request_id": "event-2::out-2",
+                "packet_path": str(packet_path),
+                "packet_index": 1,
+                "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
+                "current_packet": releases[1],
+            },
+        ],
+    }
+    report = audit_generic_provider_evidence(catalogue)
+    assert report["exact_match_count"] == 2
+    assert report["qualified_provider_packet_count"] == 2
+    assert all(row["status"] == "QUALIFIED_SIDECAR_EXACT_MATCH" for row in report["rows"])
+
+
+def test_explicit_sidecar_path_is_supported(tmp_path):
+    catalogue = _write_catalogue(tmp_path)
+    sidecar_path = tmp_path / "review" / "qualification.json"
+    sidecar_path.parent.mkdir()
+    sidecar_path.write_text(json.dumps(_sidecar()), encoding="utf-8")
+    catalogue["requests"][0]["qualification_sidecar_path"] = str(sidecar_path)
+    report = audit_generic_provider_evidence(catalogue)
+    assert report["exact_match_count"] == 1
+    assert report["rows"][0]["qualification_sidecar_path"] == str(sidecar_path)

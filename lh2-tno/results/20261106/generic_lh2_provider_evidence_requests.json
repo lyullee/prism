@@ -1871,7 +1871,32 @@
       "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
       "packet_index": 0,
-      "packet_count": 2
+      "packet_count": 2,
+      "qualification_sidecar_group": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "b7ce747804495d5afd8a3dafecac4d6e6038621a61c1cb11386244a953c697dd",
+          "abdc4cc50163fdf7638124167f3398cdefeec51280b171c2ed211c8cb1783e04"
+        ],
+        "exact_digest_binding": true,
+        "sidecar_scope": "ordered_release_set"
+      }
     },
     {
       "request_schema": "prism.provider_qualification_request.v1",
@@ -1941,7 +1966,32 @@
       "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\021_reliquefier-01_G4\\resolved_release_set.json",
       "packet_index": 1,
-      "packet_count": 2
+      "packet_count": 2,
+      "qualification_sidecar_group": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "b7ce747804495d5afd8a3dafecac4d6e6038621a61c1cb11386244a953c697dd",
+          "abdc4cc50163fdf7638124167f3398cdefeec51280b171c2ed211c8cb1783e04"
+        ],
+        "exact_digest_binding": true,
+        "sidecar_scope": "ordered_release_set"
+      }
     },
     {
       "request_schema": "prism.provider_qualification_request.v1",
@@ -2011,7 +2061,32 @@
       "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
       "packet_index": 0,
-      "packet_count": 2
+      "packet_count": 2,
+      "qualification_sidecar_group": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "2169b734e2437b49041f88772bf44174cf97cd74e1024ac4c3b2481a03e9a8f9",
+          "d2839264515c5684780f8577ed60dc0f4488e8af5aeeeb5aa833890282a3a069"
+        ],
+        "exact_digest_binding": true,
+        "sidecar_scope": "ordered_release_set"
+      }
     },
     {
       "request_schema": "prism.provider_qualification_request.v1",
@@ -2081,7 +2156,32 @@
       "closure_status": "CLOSURE_READY_FOR_QUALIFICATION",
       "packet_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261031\\native_generic_scope_packets_pipefix\\events\\022_reliquefier-01_G5\\resolved_release_set.json",
       "packet_index": 1,
-      "packet_count": 2
+      "packet_count": 2,
+      "qualification_sidecar_group": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "port_ids": [
+          "reliquefier-accident-out-1",
+          "reliquefier-accident-out-2"
+        ],
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "2169b734e2437b49041f88772bf44174cf97cd74e1024ac4c3b2481a03e9a8f9",
+          "d2839264515c5684780f8577ed60dc0f4488e8af5aeeeb5aa833890282a3a069"
+        ],
+        "exact_digest_binding": true,
+        "sidecar_scope": "ordered_release_set"
+      }
     },
     {
       "request_schema": "prism.provider_release_closure_request.v1",

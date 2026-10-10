@@ -52,6 +52,21 @@ def _sidecar(parent: Path) -> tuple[Mapping[str, Any] | None, str | None]:
     return None, None
 
 
+def _sidecar_path(path: Path) -> tuple[Mapping[str, Any] | None, str | None]:
+    """Load an explicitly declared sidecar path without searching elsewhere."""
+
+    if not path.is_file():
+        return None, str(path)
+    try:
+        value = _load(path)
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None, str(path)
+    if not isinstance(value, Mapping):
+        return None, str(path)
+    nested = value.get("provider_qualification")
+    return (nested if isinstance(nested, Mapping) else value), str(path)
+
+
 def _declared_list(record: Mapping[str, Any], plural: str, singular: str) -> list[str] | None:
     value = record.get(plural)
     if value is None and singular in record:
@@ -71,9 +86,16 @@ def _digest_ok(value: Any) -> bool:
     return True
 
 
-def _match_sidecar(packet: Mapping[str, Any], sidecar: Mapping[str, Any] | None) -> tuple[bool, str | None]:
+def _match_sidecar(
+    packets: list[Mapping[str, Any]],
+    sidecar: Mapping[str, Any] | None,
+) -> tuple[bool, str | None]:
+    """Match one sidecar against a flat packet or every side of a release set."""
+
     if sidecar is None:
         return False, "qualification_sidecar_missing"
+    if not packets:
+        return False, "qualification_sidecar_invalid"
     if sidecar.get("schema_version") != QUALIFICATION_SCHEMA:
         return False, "qualification_sidecar_invalid"
     if sidecar.get("status") != "qualified_actual":
@@ -89,18 +111,23 @@ def _match_sidecar(packet: Mapping[str, Any], sidecar: Mapping[str, Any] | None)
         return False, "qualification_sidecar_invalid"
     if sidecar.get("exact_digest_binding") is not True:
         return False, "qualification_sidecar_digest_mismatch"
-    if sidecar.get("event_id") != packet.get("event_id") or sidecar.get("component_id") != packet.get("component_id"):
+    event_ids = [str(packet.get("event_id")) for packet in packets]
+    component_ids = [str(packet.get("component_id")) for packet in packets]
+    if len(set(event_ids)) != 1 or len(set(component_ids)) != 1:
+        return False, "qualification_sidecar_invalid"
+    if sidecar.get("event_id") != packets[0].get("event_id") or sidecar.get("component_id") != packets[0].get("component_id"):
         return False, "qualification_sidecar_identity_mismatch"
     declared_ports = _declared_list(sidecar, "port_ids", "port_id")
-    if declared_ports != [str(packet.get("port_id"))]:
+    packet_ports = [str(packet.get("port_id")) for packet in packets]
+    if declared_ports != packet_ports:
         return False, "qualification_sidecar_identity_mismatch"
-    source = packet.get("provider_source_digest")
-    result = packet.get("provider_result_digest")
-    if not _digest_ok(source) or not _digest_ok(result):
+    sources = [packet.get("provider_source_digest") for packet in packets]
+    results = [packet.get("provider_result_digest") for packet in packets]
+    if not all(_digest_ok(value) for value in (*sources, *results)):
         return False, "qualification_sidecar_digest_mismatch"
-    if _declared_list(sidecar, "provider_source_digests", "provider_source_digest") != [str(source)]:
+    if _declared_list(sidecar, "provider_source_digests", "provider_source_digest") != [str(value) for value in sources]:
         return False, "qualification_sidecar_digest_mismatch"
-    if _declared_list(sidecar, "provider_result_digests", "provider_result_digest") != [str(result)]:
+    if _declared_list(sidecar, "provider_result_digests", "provider_result_digest") != [str(value) for value in results]:
         return False, "qualification_sidecar_digest_mismatch"
     return True, None
 
@@ -137,15 +164,59 @@ def audit_generic_provider_evidence(
         "identity_mismatch": 0,
         "digest_mismatch": 0,
     }
+    loaded: list[dict[str, Any]] = []
     for request_index, raw in enumerate(requests):
         if not isinstance(raw, Mapping):
-            rows.append({"request_index": request_index, "status": "INVALID_REQUEST"})
-            counts["invalid"] += 1
+            loaded.append({"request_index": request_index, "raw": raw, "packet_path": None, "packet": None, "sidecar": None, "sidecar_path": None, "load_error": "invalid_request"})
             continue
         packet_path_value = raw.get("packet_path")
         packet_path = Path(str(packet_path_value)) if packet_path_value else None
         if packet_path is None or not packet_path.is_absolute():
             packet_path = (base / packet_path) if packet_path is not None else None
+        packet_index = int(raw.get("packet_index", 0)) if str(raw.get("packet_index", 0)).isdigit() else 0
+        if packet_path is None or not packet_path.is_file():
+            loaded.append({"request_index": request_index, "raw": raw, "packet_path": packet_path, "packet": None, "sidecar": None, "sidecar_path": None, "load_error": "missing_packet"})
+            continue
+        try:
+            packet_value = _load(packet_path)
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            loaded.append({"request_index": request_index, "raw": raw, "packet_path": packet_path, "packet": None, "sidecar": None, "sidecar_path": None, "load_error": "packet_json_invalid"})
+            continue
+        if not isinstance(packet_value, Mapping):
+            loaded.append({"request_index": request_index, "raw": raw, "packet_path": packet_path, "packet": None, "sidecar": None, "sidecar_path": None, "load_error": "packet_not_object"})
+            continue
+        packet = _packet_at(packet_value, packet_index)
+        if packet is None:
+            loaded.append({"request_index": request_index, "raw": raw, "packet_path": packet_path, "packet": None, "sidecar": None, "sidecar_path": None, "load_error": "packet_index_missing"})
+            continue
+        explicit_sidecar = raw.get("qualification_sidecar_path")
+        if explicit_sidecar:
+            explicit_path = Path(str(explicit_sidecar))
+            if not explicit_path.is_absolute():
+                explicit_path = base / explicit_path
+            sidecar, sidecar_path = _sidecar_path(explicit_path)
+        else:
+            sidecar, sidecar_path = _sidecar(packet_path.parent)
+        loaded.append({"request_index": request_index, "raw": raw, "packet_path": packet_path, "packet": packet, "sidecar": sidecar, "sidecar_path": sidecar_path, "load_error": None})
+
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for item in loaded:
+        if item["packet_path"] is not None and item["packet"] is not None:
+            groups.setdefault(str(item["packet_path"]), []).append(item)
+    group_packets: dict[str, list[Mapping[str, Any]]] = {}
+    group_sidecars: dict[str, tuple[Mapping[str, Any] | None, str | None]] = {}
+    for key, items in groups.items():
+        ordered = sorted(items, key=lambda item: int(item["raw"].get("packet_index", 0)))
+        group_packets[key] = [item["packet"] for item in ordered]
+        group_sidecars[key] = (ordered[0]["sidecar"], ordered[0]["sidecar_path"])
+
+    for item in loaded:
+        request_index = item["request_index"]
+        raw = item["raw"]
+        if not isinstance(raw, Mapping):
+            rows.append({"request_index": request_index, "status": "INVALID_REQUEST"})
+            counts["invalid"] += 1
+            continue
         packet_index = int(raw.get("packet_index", 0)) if str(raw.get("packet_index", 0)).isdigit() else 0
         row: dict[str, Any] = {
             "request_index": request_index,
@@ -153,7 +224,7 @@ def audit_generic_provider_evidence(
             "event_id": raw.get("current_packet", {}).get("event_id") if isinstance(raw.get("current_packet"), Mapping) else None,
             "component_id": raw.get("current_packet", {}).get("component_id") if isinstance(raw.get("current_packet"), Mapping) else None,
             "port_id": raw.get("current_packet", {}).get("port_id") if isinstance(raw.get("current_packet"), Mapping) else None,
-            "packet_path": str(packet_path) if packet_path is not None else None,
+            "packet_path": str(item["packet_path"]) if item["packet_path"] is not None else None,
             "packet_index": packet_index,
             "closure_status": raw.get("closure_status"),
             "request_kind": raw.get("request_kind"),
@@ -163,33 +234,32 @@ def audit_generic_provider_evidence(
             "exact_match": False,
             "qualified_provider_packet": False,
         }
-        if packet_path is None or not packet_path.is_file():
+        packet_path = item["packet_path"]
+        if item["load_error"] == "missing_packet":
             counts["missing_packet"] += 1
             rows.append(row)
             continue
-        try:
-            packet_value = _load(packet_path)
-        except (OSError, UnicodeError, json.JSONDecodeError):
+        if item["load_error"] == "packet_json_invalid":
             counts["invalid"] += 1
             row.update({"status": "INVALID_PACKET", "reason": "packet_json_invalid"})
             rows.append(row)
             continue
-        if not isinstance(packet_value, Mapping):
+        if item["load_error"] == "packet_not_object":
             counts["invalid"] += 1
             row.update({"status": "INVALID_PACKET", "reason": "packet_not_object"})
             rows.append(row)
             continue
-        packet = _packet_at(packet_value, packet_index)
-        if packet is None:
+        if item["load_error"] == "packet_index_missing":
             counts["invalid"] += 1
             row.update({"status": "INVALID_PACKET", "reason": "packet_index_missing"})
             rows.append(row)
             continue
-        sidecar, sidecar_path = _sidecar(packet_path.parent)
+        packet = item["packet"]
+        sidecar, sidecar_path = group_sidecars[str(packet_path)]
         row["qualification_sidecar_path"] = sidecar_path
-        if sidecar_path is not None:
+        if item["sidecar_path"] is not None:
             counts["sidecar_present"] += 1
-        matched, reason = _match_sidecar(packet, sidecar)
+        matched, reason = _match_sidecar(group_packets[str(packet_path)], sidecar)
         row["exact_match"] = matched
         row["qualified_provider_packet"] = bool(
             matched and raw.get("closure_status") == "CLOSURE_READY_FOR_QUALIFICATION"

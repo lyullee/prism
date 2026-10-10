@@ -37,6 +37,31 @@ def _provider_packets(packet: dict[str, Any]) -> list[dict[str, Any]]:
     return [packet]
 
 
+def _qualification_sidecar_group(provider_packets: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Describe one ordered qualification sidecar for a multi-sided release set."""
+
+    if len(provider_packets) <= 1:
+        return None
+    first = provider_packets[0]
+    return {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": ["native_provider", "reviewed_actual"],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "event_id": first.get("event_id"),
+        "component_id": first.get("component_id"),
+        "port_ids": [packet.get("port_id") for packet in provider_packets],
+        "provider_source_digests": [
+            packet.get("provider_source_digest") for packet in provider_packets
+        ],
+        "provider_result_digests": [
+            packet.get("provider_result_digest") for packet in provider_packets
+        ],
+        "exact_digest_binding": True,
+        "sidecar_scope": "ordered_release_set",
+    }
+
+
 def export_requests(
     packet_evidence: str | Path,
     *,
@@ -64,6 +89,7 @@ def export_requests(
             packet_path = str(packet_path_obj)
             packet = _load_packet(packet_path_obj)
             provider_packets = _provider_packets(packet)
+            sidecar_group = _qualification_sidecar_group(provider_packets)
             closure_request = packet_row.get("closure_request")
             for packet_index, provider_packet in enumerate(provider_packets):
                 if isinstance(closure_request, dict) and len(provider_packets) == 1:
@@ -95,6 +121,8 @@ def export_requests(
                 request["packet_path"] = packet_path
                 request["packet_index"] = packet_index
                 request["packet_count"] = len(provider_packets)
+                if sidecar_group is not None:
+                    request["qualification_sidecar_group"] = sidecar_group
                 if len(provider_packets) > 1:
                     request["request_id"] = (
                         f"{request['request_id']}::{provider_packet.get('port_id', packet_index)}"

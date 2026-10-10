@@ -4,9 +4,9 @@
   "commit": "333515027d00d4f5f19abc43a707b05b6d44c16f",
   "workflow": "/.github/workflows/tests.yml",
   "python_requirement": ">=3.12",
-  "portable_test_status": "897 passed, 1 skipped",
+  "portable_test_status": "900 passed, 1 skipped",
   "wheel_filename": "prism_risk-0.6.2-py3-none-any.whl",
-  "wheel_sha256": "bee0f2602633a384a703f4b90444b4e07f31d4077515a16657afb7a6322a9b70",
+  "wheel_sha256": "f943b9a18b4de5894f9ad04b8754647e39fdf54f4dd2dc2006e16ac59139278c",
   "wheel_contract_checks": {
     "frequency_catalogue_shipped": true,
     "tno_host_shipped": true,
@@ -15,5 +15,5 @@
   },
   "github_actions_claim": false,
   "facility_qra_claim": false,
-  "note": "Local reproduction of the repository workflow after the provider sidecar audit changes; it does not assert that a private GitHub Actions run completed."
+  "note": "Local reproduction of the repository workflow after the ordered two-sided provider sidecar contract changes; it does not assert that a private GitHub Actions run completed."
 }

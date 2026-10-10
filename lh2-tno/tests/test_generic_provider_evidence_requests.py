@@ -1,6 +1,9 @@
 import json
 
-from scripts.export_generic_provider_evidence_requests import export_requests
+from scripts.export_generic_provider_evidence_requests import (
+    _qualification_sidecar_group,
+    export_requests,
+)
 
 
 def _packet(*, event_id: str, termination_basis: str) -> dict:
@@ -97,6 +100,18 @@ def test_every_packet_gets_closure_or_qualification_request(tmp_path):
     assert ready["status"] == "OPEN_QUALIFICATION"
     assert ready["qualification_sidecar_required"]["exact_digest_binding"] is True
     assert ready["acceptance"]["facility_qra_allowed"] is False
+
+
+def test_two_sided_provider_packets_share_an_ordered_sidecar_contract():
+    packets = [
+        {"event_id": "event", "component_id": "reliquefier", "port_id": "out-1", "provider_source_digest": "a" * 64, "provider_result_digest": "b" * 64},
+        {"event_id": "event", "component_id": "reliquefier", "port_id": "out-2", "provider_source_digest": "a" * 64, "provider_result_digest": "c" * 64},
+    ]
+    group = _qualification_sidecar_group(packets)
+    assert group["sidecar_scope"] == "ordered_release_set"
+    assert group["port_ids"] == ["out-1", "out-2"]
+    assert group["provider_result_digests"] == ["b" * 64, "c" * 64]
+    assert group["exact_digest_binding"] is True
 
 
 def _write_verification(directory, packet, basis):
