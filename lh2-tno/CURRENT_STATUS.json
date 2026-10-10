@@ -155,7 +155,7 @@
   "equipment_scenario_coverage_accident_port_crosswalk": true,
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
-  "frequency_port_binding_latest_remote_commit": "ff83db5",
+  "frequency_port_binding_latest_remote_commit": "f9b8564",
   "latest_local_full_test_run": "867 passed, 1 skipped",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
@@ -3587,5 +3587,8 @@
   "facility_ledger_frequency_port_audit_implemented": true,
   "facility_ledger_frequency_port_audit_module": "src/lh2_tno/facility_ledger.py",
   "facility_ledger_frequency_port_audit_output": "frequency_port_binding",
-  "facility_ledger_frequency_port_audit_policy": "Merged facility events, cases and risk_atoms are checked against the same reviewed accident ports; PORT_BINDING_MISMATCH withholds facility scope and never infers or reallocates frequency."
+  "facility_ledger_frequency_port_audit_policy": "Merged facility events, cases and risk_atoms are checked against the same reviewed accident ports; PORT_BINDING_MISMATCH withholds facility scope and never infers or reallocates frequency.",
+  "facility_assessment_frequency_port_binding_exposed": true,
+  "facility_assessment_frequency_port_binding_field": "frequency_port_binding",
+  "facility_assessment_frequency_port_binding_policy": "Public facility assessment mirrors the merged ledger port audit; legacy ledgers remain explicitly unaudited and no accident port is inferred."
 }
