@@ -2761,9 +2761,9 @@
   "generic_provider_release_closure_audit_script": "scripts/audit_generic_provider_release_closure.py",
   "generic_provider_release_closure_audit_record": "results/20261106/generic_lh2_provider_release_closure_current.json",
   "generic_provider_release_closure_audit_status": "CLOSURE_EVIDENCE_OPEN; 24 events, 9 closure-ready and 15 open; 26 provider packets; every open packet now carries prism.provider_release_closure_request.v1; 15 fixed/synthetic horizons remain; qualified provider count 0; frequency/QRA promotion false",
-  "generic_provider_release_closure_audit_sha256": "94B3782D38FF729A5AE3433C6FA95DD1B384B79017D7EC7A1E2CAD4CF0638591",
+  "generic_provider_release_closure_audit_sha256": "AFB631D1C8A15C7FC27638AA03F25B4FB971F594022BC5A1DB00DE2587DE0513",
   "generic_provider_release_closure_audit_readiness_record": "results/20261106/v060_readiness_report_with_generic_provider_closure.json",
-  "generic_provider_release_closure_audit_readiness_sha256": "1E716F8073F13A3ED23C8C25ABB93F6023E84C78B2AF6DE967C1206C711A80C4",
+  "generic_provider_release_closure_audit_readiness_sha256": "272E46C57A01DCE245482F9CB5EEFF47C7BD2E83E697B611A841993CC8B97A56",
   "generic_provider_release_closure_audit_ready_event_count": 9,
   "generic_provider_release_closure_audit_open_event_count": 15,
   "generic_provider_release_closure_audit_open_horizon_event_count": 15,
@@ -2800,7 +2800,7 @@
   "generic_provider_release_closure_request_policy": "Each open generic provider packet receives an exact event/component/port request with termination, provider clock, mass ledger and equipment-specific evidence fields; the request never infers duration, inventory, frequency or qualification.",
   "generic_provider_release_closure_request_export_script": "scripts/export_generic_provider_closure_requests.py",
   "generic_provider_release_closure_request_export_record": "results/20261106/generic_lh2_provider_closure_requests.json",
-  "generic_provider_release_closure_request_export_sha256": "012365AD044E3A4849C09AA86310F39E2351A6A127C42E30B3E8294BCF6BC767",
+  "generic_provider_release_closure_request_export_sha256": "4144E997504E5F3EB1723C7D9BA5A0B4B17939218F6F31449A2362C2E6340D51",
   "generic_provider_release_closure_request_export_status": "OPEN_PROVIDER_CLOSURE_REQUESTS; 15 open packet requests; diagnostic-only; frequency/QRA promotion false",
   "generic_provider_release_closure_request_export_count": 15
 }

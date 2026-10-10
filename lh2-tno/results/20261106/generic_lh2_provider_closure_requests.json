@@ -70,9 +70,26 @@
           "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a2aa33b77959219d602e861bb5d28b689acb8275fb2f446eb8e5d0e87edd57c6"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -141,9 +158,26 @@
           "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "8a74e121e603c03d01c96f36013dab1dc6500caaffa206ef1776ebc16778791d"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -212,9 +246,26 @@
           "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "6321526f1b73b4f042177e8b3473b89c892e855787a6f8ebcfd4cbafbad11b85"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -283,9 +334,26 @@
           "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "0dd657e8ab8e76ee09f96e4dffceab8a54187f16d91e748fd946735e22053ccf"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -354,9 +422,26 @@
           "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a3624efecb19ba260cf56543a0720c4e545b4e8240cb4231a55f1c404c5d529b"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -425,9 +510,26 @@
           "reason": "a valve packet cannot borrow a pipe termination basis"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "bdf1c97f79537b66efac7cca03fe61d11a3546345fb35d7cb7bce5bb3177d0e8"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -496,9 +598,26 @@
           "reason": "a valve packet cannot borrow a pipe termination basis"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "8529911e9fa63a213bb1eb524291b3537f363e52702f0b2ecae40b5b16d43ce2"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -567,9 +686,26 @@
           "reason": "a valve packet cannot borrow a pipe termination basis"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "6e60617fc68dc1f7409a36914b57f50f4fe0f6323cf1d4181d266ccd122c815a"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -638,9 +774,26 @@
           "reason": "a valve packet cannot borrow a pipe termination basis"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "b592913739901e48ce53301c7b8b04c9c66016cd4baa05d5d62c99d065782b35"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -709,9 +862,26 @@
           "reason": "a valve packet cannot borrow a pipe termination basis"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "c17dab8de03b0859969a58ea7d8b84b66967176ee2fe967bc66a6e91854dce5e"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -780,9 +950,26 @@
           "reason": "upstream service must be closed at the pump boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "5690e9cc0fbba465f3de79078e47e7738a0b319cdd0fbddc8e008018c9435c72"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -851,9 +1038,26 @@
           "reason": "upstream service must be closed at the pump boundary"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "ca3620c3c8484efb6fb486f62785ab9946e4839f86b1da2febcf7ac06f838225"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -922,9 +1126,26 @@
           "reason": "the downstream gas boundary cannot define the upstream liquid release"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "a2f2b5c8a1afd4dab33c9fca88dfa33324de6c1f5ea1072fd6787bdbc25d3243"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -993,9 +1214,26 @@
           "reason": "the downstream gas boundary cannot define the upstream liquid release"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "aadf02bc05ace43145e907f15bd16f74a29875714d0ee7c47b1dae3a29e44526"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false
@@ -1064,9 +1302,26 @@
           "reason": "the endpoint history must close against the affected inventory"
         }
       ],
+      "qualification_sidecar_required": {
+        "schema_version": "prism.provider_qualification_evidence.v1",
+        "status": "qualified_actual",
+        "provider_origin": [
+          "native_provider",
+          "reviewed_actual"
+        ],
+        "evidence_id": "nonempty reviewed evidence identifier",
+        "provider_source_digests": [
+          "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f"
+        ],
+        "provider_result_digests": [
+          "eb1350b9f6adb50ed9a3cb696876b0bace488662cf6ac5c6d79de80c0b78c1e7"
+        ],
+        "exact_digest_binding": true
+      },
       "acceptance": {
         "exact_event_component_port_match": true,
         "termination_evidence_digest_bound": true,
+        "qualification_sidecar_digest_bound": true,
         "provider_owned_clock_and_mass_ledger": true,
         "frequency_inference_allowed": false,
         "facility_qra_allowed": false

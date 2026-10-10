@@ -1062,7 +1062,7 @@
     },
     "generic_provider_closure_audit": {
       "path": "results/20261106/generic_lh2_provider_release_closure_current.json",
-      "sha256": "94b3782d38ff729a5ae3433c6fa95dd1b384b79017d7ec7a1e2cad4cf0638591"
+      "sha256": "afb631d1c8a15c7fc27638aa03f25b4fb971f594022bc5a1db00de2587de0513"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",

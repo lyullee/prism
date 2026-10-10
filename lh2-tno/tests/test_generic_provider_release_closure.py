@@ -64,6 +64,11 @@ def test_campaign_audit_counts_ready_and_open_events(tmp_path):
     assert request["request_schema"] == "prism.provider_release_closure_request.v1"
     assert request["status"] == "OPEN"
     assert request["acceptance"]["frequency_inference_allowed"] is False
+    assert request["acceptance"]["qualification_sidecar_digest_bound"] is True
+    assert request["qualification_sidecar_required"]["status"] == "qualified_actual"
+    assert request["qualification_sidecar_required"]["schema_version"] == (
+        "prism.provider_qualification_evidence.v1"
+    )
     assert any(
         row["field"] == "termination_basis"
         for row in request["required_evidence"]
