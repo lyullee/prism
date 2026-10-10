@@ -34,6 +34,7 @@ def test_generic_manifest_frequency_scope_generates_events():
     result = audit_frequency_scope(manifest, plan)
     assert result["status"] == "EXECUTABLE"
     assert result["generated_event_count"] > 0
+    assert result["frequency_port_binding"]["port_unbound_event_count"] == result["generated_event_count"]
     assert {row["status"] for row in result["component_coverage"]} == {"SELECTED", "EXCLUDED"}
     assert result["physical_validation_claim"] is False
 

@@ -27,6 +27,10 @@ class FrequencyEvent(Contract):
     id: Name
     asset_id: Name
     model_component_id: Name
+    # Optional reviewed accident outlet identity.  A component-level rate is
+    # still allowed for legacy catalogues, but a port-scoped event is required
+    # when the rate is intended to represent one of several physical exits.
+    port_ids: tuple[Name, ...] | None = None
     profile: Name
     loc: Name
     basis: Literal['TNO_PURPLE_LOC', 'LH2_LITERATURE']
@@ -63,12 +67,24 @@ class FrequencyEvent(Contract):
                 raise ValueError('published lognormal distribution requires finite mu and positive sigma')
         elif self.log_rate_mu is not None or self.log_rate_sigma is not None:
             raise ValueError('distribution parameters require published_lognormal provenance')
+        if self.port_ids is not None:
+            if not self.port_ids or len(set(self.port_ids)) != len(self.port_ids):
+                raise ValueError('frequency event port_ids must be nonempty and unique')
+            expected = 2 if self.release.mode == 'two_sided_rupture' else 1
+            if len(self.port_ids) != expected:
+                raise ValueError(
+                    f'frequency event {self.release.mode} requires {expected} reviewed port id(s)'
+                )
         return self
 
 
 class FrequencyAsset(Contract):
     id: Name
     model_component_id: Name
+    # Optional accident outlet allocation.  This is deliberately separate
+    # from physical_scope_ids: one equipment item can have multiple reviewed
+    # exits, while the literature rate still belongs to the item/segment.
+    port_ids: tuple[Name, ...] | None = None
     profile: Name
     # Explicit engineering classification, especially pressure vs atmospheric
     # cryogenic storage and tube/shell pressure hierarchy. Never infer from P alone.
@@ -127,6 +143,10 @@ class FrequencyAsset(Contract):
             raise ValueError('location weight and its provenance must be supplied together')
         if self.location_weight is not None and self.location_weight <= 0:
             raise ValueError('location weight must be positive')
+        if self.port_ids is not None and (
+            not self.port_ids or len(set(self.port_ids)) != len(self.port_ids)
+        ):
+            raise ValueError('frequency asset port_ids must be nonempty and unique')
         return self
 
 
@@ -160,6 +180,20 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
         raise ValueError('frequency plan references unknown or both selected/excluded components')
     if known - selected - excluded:
         raise ValueError('every model component must have a frequency scope or explicit exclusion reason')
+    facility_ports = {port.id: port for port in facility.ports}
+    for asset in plan.assets:
+        if asset.port_ids is None:
+            continue
+        for port_id in asset.port_ids:
+            port = facility_ports.get(port_id)
+            if port is None:
+                raise ValueError(f'frequency asset {asset.id} references unknown port {port_id}')
+            if port.component_id != asset.model_component_id:
+                raise ValueError(
+                    f'frequency asset {asset.id} port {port_id} belongs to a different component'
+                )
+            if port.direction == 'in':
+                raise ValueError(f'frequency asset {asset.id} port {port_id} is not an outward exit')
     data = catalogue()
     out = []
     for asset in plan.assets:
@@ -197,7 +231,8 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
                 p95 = multiplier * math.exp(row['mu'] + NormalDist().inv_cdf(.95)*row['sigma'])
                 limitations.append('Marginal lognormal bounds; cross-bin correlation is unavailable, so summed bounds are not facility credible intervals.')
             out.append(FrequencyEvent(id=f'{plan.id}/{asset.id}/{row["loc"]}', asset_id=asset.id,
-                model_component_id=asset.model_component_id, profile=asset.profile, loc=row['loc'],
+                model_component_id=asset.model_component_id, port_ids=asset.port_ids,
+                profile=asset.profile, loc=row['loc'],
                 basis=profile['basis'], base_rate=rate, rate_unit=profile['unit'],
                 exposure_multiplier=multiplier, annual_frequency_per_year=rate*multiplier,
                 statistic=profile['statistic'], marginal_p05_per_year=p05, marginal_p95_per_year=p95,
@@ -223,6 +258,19 @@ def bind_event(request, event: FrequencyEvent):
     from .consequences import ConsequenceRequest
     if request.component_id != event.model_component_id:
         raise ValueError('failure component and current source component must match; an upstream-port adapter is required otherwise')
+    if event.port_ids is not None:
+        if request.resolved_release_set is not None:
+            request_port_ids = tuple(release.port_id for release in request.resolved_release_set.releases)
+        elif request.resolved_release is not None:
+            request_port_ids = (request.resolved_release.port_id,)
+        elif request.resolved_liquid_release is not None:
+            request_port_ids = (request.resolved_liquid_release.port_id,)
+        else:
+            request_port_ids = ()
+        if request_port_ids != event.port_ids:
+            raise ValueError(
+                'frequency event port_ids must exactly match the provider-resolved accident exit(s)'
+            )
     if event.release.mode == 'two_sided_rupture':
         if request.source_operator != 'equipment_two_sided_rupture' or request.resolved_release_set is None:
             raise ValueError('two-sided rupture requires a provider-resolved two-endpoint release set; a single nozzle is not accepted')

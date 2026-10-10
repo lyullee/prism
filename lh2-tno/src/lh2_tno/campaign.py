@@ -604,6 +604,8 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     times = [r['elapsed_ms'] for r in cases if r['status'].startswith('EXECUTED') or r['status']=='FAILED']
     generated_frequency=sum(e.annual_frequency_per_year for e in events.values())
     evaluated_frequency=sum(r['initiating_frequency_per_year']*r['release_branch_probability']*r['annual_condition_probability'] for r in cases if r['status']=='EXECUTED')
+    frequency_port_scoped_event_count = sum(event.port_ids is not None for event in events.values())
+    frequency_port_unbound_event_count = len(events) - frequency_port_scoped_event_count
     # Keep a component-level accounting alongside the event-level ledger.  A
     # facility review should be able to answer which physical equipment is
     # covered without inferring it from event IDs or from a single aggregate
@@ -614,6 +616,11 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     for component in f.components:
         component_events=[event for event in events.values() if event.model_component_id==component.id]
         component_cases=[case for case in cases if event_component.get(case['event_id'])==component.id]
+        component_port_ids = sorted({
+            port_id
+            for event in component_events
+            for port_id in (event.port_ids or ())
+        })
         excluded_reason=excluded.get(component.id)
         if excluded_reason is not None:
             scope_status='EXCLUDED'
@@ -629,6 +636,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'scope_status': scope_status,
             'excluded_reason': excluded_reason,
             'generated_event_count': len(component_events),
+            'generated_port_scoped_event_count': sum(event.port_ids is not None for event in component_events),
+            'generated_port_unbound_event_count': sum(event.port_ids is None for event in component_events),
+            'reviewed_accident_port_ids': component_port_ids,
             'generated_initiation_frequency_per_year': sum(event.annual_frequency_per_year for event in component_events),
             'campaign_case_count': len(component_cases),
             'executed_case_count': sum(case['status'].startswith('EXECUTED') for case in component_cases),
@@ -666,6 +676,14 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'meaning':'frequency coverage only; not fraction of risk captured, not physical validation',
             'by_component':component_coverage,
             'scenario_family_event_counts': dict(sorted(scenario_family_event_counts.items()))},
+        'frequency_port_binding': {
+            'schema_version': 'prism.frequency_port_binding.v1',
+            'port_scoped_event_count': frequency_port_scoped_event_count,
+            'port_unbound_event_count': frequency_port_unbound_event_count,
+            'all_events_port_scoped': frequency_port_unbound_event_count == 0,
+            'meaning': 'port-scoped events are checked against provider-resolved accident exits; unbound legacy events remain component-level and are not upgraded by this ledger',
+            'strict_facility_qra_gate': False,
+        },
         'declared_scope_numerically_complete': scope_complete, 'synthetic_release_horizon_present': synthetic,
         'declared_scope_annual_ir_low_high': known['ir_low_high'] if scope_complete else None,
         'known_contribution_annual_ir_low_high': known['ir_low_high'],

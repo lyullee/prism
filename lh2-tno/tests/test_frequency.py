@@ -212,6 +212,21 @@ def test_component_coverage_cannot_silently_omit_equipment_or_reference_unknown(
     with pytest.raises(ValueError):generate_events(facility(),plan(asset(model_component_id='does-not-exist')))
 
 
+def test_reviewed_frequency_port_allocation_is_checked_against_facility_topology():
+    rows = events(asset(port_ids=('storage.out',)))
+    assert all(row.port_ids == ('storage.out',) for row in rows)
+    with pytest.raises(ValueError, match='unknown port'):
+        generate_events(facility(), plan(asset(port_ids=('storage.unknown',))))
+    inward_asset = asset(
+        id='isolation-pump', model_component_id='isolation',
+        profile='TNO_PUMP_STANDARD', physical_scope_ids=('isolation-pump-scope',),
+        vessel_external_impact_or_operating_error=None, nominal_diameter_m=.01,
+        port_ids=('isolation.in',),
+    )
+    with pytest.raises(ValueError, match='not an outward exit'):
+        generate_events(facility(), plan(inward_asset))
+
+
 def test_loc_bind_calls_existing_consequence_pipeline_and_carries_provenance():
     class Backend:
         def run(self,operation,payload):
@@ -271,6 +286,31 @@ def test_provider_inventory_depletion_binds_without_replacing_it_with_a_hole():
     assert bound.source_operator == 'equipment_inventory_depletion'
     assert bound.frequency_event.release.mode == 'instantaneous_inventory'
     assert bound.resolved_release.failure_opening_diameter_m == 0.01
+
+
+def test_port_scoped_frequency_requires_exact_provider_exit_identity():
+    data = template().model_dump(mode='json')
+    release = equipment_inventory_release()
+    data.update(
+        source_input=None, resolved_release=release.model_dump(mode='json'),
+        resolved_release_set=None, resolved_liquid_release=None,
+        source_operator='equipment_inventory_depletion', available_mass_kg=1.0,
+        source_position_enu_m=[0.0, 0.0, 1.0],
+        release_termination={'basis':'inventory_depletion','time_s':0.2,
+                             'provenance':'synthetic provider inventory depletion'},
+        annual_frequency_per_year=None, annual_frequency_provenance=None,
+        frequency_event=None, initiation_intensity_per_s=None,
+    )
+    request = ConsequenceRequest.model_validate_json(json.dumps(data))
+    event = events(asset(port_ids=('storage.out',)))[0]
+    assert bind_event(request, event).frequency_event.port_ids == ('storage.out',)
+    wrong = data.copy()
+    wrong_release = release.model_dump(mode='json')
+    wrong_release['port_id'] = 'storage.other'
+    wrong['resolved_release'] = wrong_release
+    wrong_request = ConsequenceRequest.model_validate_json(json.dumps(wrong))
+    with pytest.raises(ValueError, match='port_ids'):
+        bind_event(wrong_request, event)
 
 
 def test_provider_600s_inventory_history_binds_with_explicit_long_horizon():

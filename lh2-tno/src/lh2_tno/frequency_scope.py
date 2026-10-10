@@ -19,6 +19,11 @@ def _component_rows(manifest: EquipmentManifest, plan: FrequencyPlan) -> list[di
                 "status": "SELECTED",
                 "frequency_asset_ids": [asset.id for asset in assets],
                 "profiles": [asset.profile for asset in assets],
+                "reviewed_accident_port_ids": sorted({
+                    port_id for asset in assets for port_id in (asset.port_ids or ())
+                }),
+                "port_scoped_asset_count": sum(asset.port_ids is not None for asset in assets),
+                "port_unbound_asset_count": sum(asset.port_ids is None for asset in assets),
                 "physical_scope_ids": [scope for asset in assets for scope in asset.physical_scope_ids],
                 "count": sum(asset.count for asset in assets),
                 "provenance": [asset.classification_basis for asset in assets],
@@ -52,6 +57,14 @@ def audit_frequency_scope(manifest: EquipmentManifest, plan: FrequencyPlan) -> d
         "component_coverage": _component_rows(manifest, plan),
         "generated_event_count": 0,
         "events": [],
+        "frequency_port_binding": {
+            "schema_version": "prism.frequency_port_binding.v1",
+            "port_scoped_event_count": 0,
+            "port_unbound_event_count": 0,
+            "all_events_port_scoped": False,
+            "meaning": "port-scoped literature events are checked against provider-resolved accident exits; absent port scope stays component-level",
+            "strict_facility_qra_gate": False,
+        },
         "blocking_reasons": [],
         "physical_validation_claim": False,
         "promotion_policy": {
@@ -86,6 +99,15 @@ def audit_frequency_scope(manifest: EquipmentManifest, plan: FrequencyPlan) -> d
         return result
     result["events"] = [event.model_dump(mode="json") for event in events]
     result["generated_event_count"] = len(events)
+    port_scoped = sum(event.port_ids is not None for event in events)
+    result["frequency_port_binding"] = {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "port_scoped_event_count": port_scoped,
+        "port_unbound_event_count": len(events) - port_scoped,
+        "all_events_port_scoped": bool(events) and port_scoped == len(events),
+        "meaning": "port-scoped literature events are checked against provider-resolved accident exits; absent port scope stays component-level",
+        "strict_facility_qra_gate": False,
+    }
     selected_or_excluded = {
         row["component_id"] for row in result["component_coverage"]
         if row["status"] in {"SELECTED", "EXCLUDED"}
