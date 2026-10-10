@@ -52,13 +52,18 @@
       "status": "CONDITIONALLY_COMPLETE",
       "evidence_paths": [
         "results\\20261031\\native_full_scope_union_pipefix_state_bound\\facility_assessment.json",
-        "results\\20261031\\native_full_scope_union_pipefix_state_bound\\verification.json"
+        "results\\20261031\\native_full_scope_union_pipefix_state_bound\\verification.json",
+        "results\\20261104\\conditional_facility_risk_view_current.json"
       ],
       "observed": {
         "conditional_facility_risk_available": true,
         "conditional_fn_curve_available": true,
         "conditional_risk_atom_count": 176,
-        "facility_total_risk_available": false
+        "facility_total_risk_available": false,
+        "conditional_facility_risk_view_status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK",
+        "conditional_facility_risk_view_event_count": 34,
+        "conditional_facility_risk_view_case_count": 44,
+        "conditional_facility_risk_view_promotion_allowed": false
       },
       "blocking_reason": null,
       "interpretation": "worker-01 수용점의 조건부 IR/F-N은 계산되지만 시설 전체 QRA 승격은 별도 gate다."
