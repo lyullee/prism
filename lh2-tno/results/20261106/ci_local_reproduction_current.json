@@ -1,7 +1,7 @@
 {
   "schema_version": "prism.ci_local_reproduction.v2",
   "status": "LOCAL_WORKFLOW_EQUIVALENT_PASS",
-  "commit": "6d92de9 + independent-comparison working tree",
+  "commit": "805c35b",
   "workflow": ".github/workflows/tests.yml",
   "python_requirement": ">=3.12",
   "portable_test_status": "931 passed, 1 skipped",

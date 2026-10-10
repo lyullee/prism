@@ -2962,7 +2962,7 @@
   "v060_readiness_current_slabx_direct_component_comparison_mae_vol_pct": 0.6480842583399518,
   "v060_readiness_current_slabx_direct_component_comparison_rmse_vol_pct": 1.2106452167244133,
   "v060_readiness_current_slabx_direct_component_comparison_independent_holdout_claim": false,
-  "ci_local_reproduction_record_sha256": "33d9bea0f4ae68649d1a15942dae5115f6c97d5aa7e840dcb89e3c086c83709e",
+  "ci_local_reproduction_record_sha256": "e24e56993cf4dfa0d24b0f572746889dd002c273b9f33c9c13331fe034149d7e",
   "v060_readiness_current_slabx_independent_comparison_record": "results/20261106/slabx_lh2_independent_comparison_audit.json",
   "v060_readiness_current_slabx_independent_comparison_sha256": "DA83E398618179B101D405A9426B5ED059FF341A2E08983FF5DCFC91523B7C39",
   "v060_readiness_current_slabx_independent_comparison_status": "RESTRICTED_INDEPENDENT_COMPARISON_SOURCE_GATE_OPEN",
