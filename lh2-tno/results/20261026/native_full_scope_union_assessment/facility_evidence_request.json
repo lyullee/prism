@@ -55,6 +55,32 @@
     "accident family two_sided_rupture: PARTIAL",
     "accident family vertical_handoff: PARTIAL"
   ],
+  "scope_gap_summary": {
+    "schema_version": "prism.scope_gap_summary.v1",
+    "families_with_numerical_case_gap": [],
+    "families_with_qualification_gap": [
+      "vessel_hole",
+      "pipe_hole",
+      "valve_hole",
+      "pump_hole",
+      "liquid_two_phase",
+      "inventory_depletion",
+      "two_sided_rupture",
+      "vertical_handoff"
+    ],
+    "families_complete": [
+      "vent_hole",
+      "vaporizer_hole",
+      "reliquefier_hole",
+      "inventory_over_600s"
+    ],
+    "family_count": 12,
+    "numerical_case_gap_family_count": 0,
+    "qualification_gap_family_count": 8,
+    "complete_family_count": 4,
+    "family_rows_are_not_additive": true,
+    "interpretation": "A qualification gap means a numerical diagnostic exists but cannot be promoted to qualified facility QRA. A numerical case gap means no consequence result exists and must remain outside the facility total."
+  },
   "family_requests": [
     {
       "family": "vessel_hole",
@@ -76,6 +102,17 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "5 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 5
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -124,6 +161,18 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "15 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED": 10,
+        "EXECUTED_OPERATOR_LIMITED": 15
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -182,6 +231,17 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "5 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 5
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -227,6 +287,12 @@
       "conditional_uncomputed_case_count": 0,
       "operator_limited_case_count": 0,
       "strict_gate_categories": [],
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "strict_gate_requirements": [],
       "event_ids": [
         "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
@@ -267,6 +333,17 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "2 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 2
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -309,6 +386,12 @@
       "conditional_uncomputed_case_count": 0,
       "operator_limited_case_count": 0,
       "strict_gate_categories": [],
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "strict_gate_requirements": [],
       "event_ids": [
         "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
@@ -346,6 +429,12 @@
       "conditional_uncomputed_case_count": 0,
       "operator_limited_case_count": 0,
       "strict_gate_categories": [],
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "strict_gate_requirements": [],
       "event_ids": [
         "generic-lh2-full-scope-frequency-example/reliquefier/G6"
@@ -386,6 +475,17 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "17 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 17
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -446,6 +546,18 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "17 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED": 11,
+        "EXECUTED_OPERATOR_LIMITED": 17
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -509,6 +621,12 @@
       "conditional_uncomputed_case_count": 0,
       "operator_limited_case_count": 0,
       "strict_gate_categories": [],
+      "gap_class": "COMPLETE",
+      "gap_reasons": [],
+      "closure_requirements": [],
+      "case_status_counts": {
+        "EXECUTED": 1
+      },
       "strict_gate_requirements": [],
       "event_ids": [
         "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
@@ -549,6 +667,17 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "2 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 2
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
@@ -595,6 +724,17 @@
         "MISSING_PROVIDER_CASES",
         "OPERATOR_LIMITED_INPUT"
       ],
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "gap_reasons": [
+        "10 computed case(s) are operator/domain-limited and not qualified evidence"
+      ],
+      "closure_requirements": [
+        "replace diagnostic/operator-limited output with a qualified provider packet",
+        "attach independent physical validation for the applicable release and consequence domain"
+      ],
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 10
+      },
       "strict_gate_requirements": [
         "one exact qualified provider packet for every strict uncomputed case",
         "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"

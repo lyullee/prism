@@ -47,6 +47,10 @@ def test_builds_family_and_component_requests_without_frequency_inference():
                     "executed_case_count": 3,
                     "uncomputed_case_count": 1,
                     "operator_limited_case_count": 2,
+                    "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+                    "gap_reasons": ["diagnostic evidence"],
+                    "closure_requirements": ["qualified provider packet"],
+                    "case_status_counts": {"EXECUTED_OPERATOR_LIMITED": 2},
                     "event_ids": ["e1", "e2"],
                 }
             ],
@@ -64,6 +68,9 @@ def test_builds_family_and_component_requests_without_frequency_inference():
     assert report["family_requests"][0]["strict_gate_categories"] == [
         "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"
     ]
+    assert report["family_requests"][0]["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
+    assert report["family_requests"][0]["gap_reasons"] == ["diagnostic evidence"]
+    assert report["scope_gap_summary"] == {}
     assert len(report["family_requests"][0]["strict_gate_requirements"]) == 2
     assert report["current_assessment"]["strict_gate_categories"] == [
         "MISSING_PROVIDER_CASES", "OPERATOR_LIMITED_INPUT"

@@ -333,6 +333,18 @@ def build_facility_evidence_request(
                 ),
                 "operator_limited_case_count": row.get("operator_limited_case_count", 0),
                 "strict_gate_categories": gate_categories,
+                "gap_class": row.get("gap_class"),
+                "gap_reasons": list(row.get("gap_reasons", ()))
+                if isinstance(row.get("gap_reasons", ()), Sequence)
+                and not isinstance(row.get("gap_reasons", ()), (str, bytes))
+                else [],
+                "closure_requirements": list(row.get("closure_requirements", ()))
+                if isinstance(row.get("closure_requirements", ()), Sequence)
+                and not isinstance(row.get("closure_requirements", ()), (str, bytes))
+                else [],
+                "case_status_counts": dict(row.get("case_status_counts", {}))
+                if isinstance(row.get("case_status_counts", {}), Mapping)
+                else {},
                 "strict_gate_requirements": [
                     _GATE_REQUIREMENTS[category] for category in gate_categories
                 ],
@@ -491,6 +503,9 @@ def build_facility_evidence_request(
             "strict_gate_categories": gate_categories,
         },
         "blocking_reasons": list(dict.fromkeys(str(item) for item in blockers)),
+        "scope_gap_summary": dict(scope_matrix.get("gap_summary", {}))
+        if isinstance(scope_matrix.get("gap_summary", {}), Mapping)
+        else {},
         "family_requests": family_rows,
         "case_request_count": len(case_requests),
         "case_requests": case_requests,
