@@ -206,6 +206,48 @@ def _validation_intake_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _observed_runtime_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
+    """Summarize runtime state frames while keeping release ownership external."""
+    frames = audit.get("frames")
+    frames = frames if isinstance(frames, Sequence) and not isinstance(frames, (str, bytes)) else []
+    contract = audit.get("runtime_handoff_contract")
+    contract = contract if isinstance(contract, Mapping) else {}
+    policy = audit.get("policy")
+    policy = policy if isinstance(policy, Mapping) else {}
+    components = sorted(
+        {
+            str(frame.get("component_id"))
+            for frame in frames
+            if isinstance(frame, Mapping) and frame.get("component_id")
+        }
+    )
+    return {
+        "schema_version": audit.get("schema_version"),
+        "status": audit.get("status"),
+        "source_count": audit.get("source_count"),
+        "frame_count": audit.get("frame_count"),
+        "evidence_sample_count": audit.get("evidence_sample_count"),
+        "component_count": len(components),
+        "component_ids": components,
+        "state_adapter": contract.get("state_adapter"),
+        "resolver_adapter": contract.get("resolver_adapter"),
+        "monitor_method": contract.get("monitor_method"),
+        "facility_monitor_method": contract.get("facility_monitor_method"),
+        "provider_release_required_for_consequence": contract.get(
+            "provider_release_required_for_consequence"
+        ),
+        "frequency_assignment": contract.get("frequency_assignment"),
+        "termination_and_inventory_owner": contract.get(
+            "termination_and_inventory_owner"
+        ),
+        "release_scenario_generated": policy.get("release_scenario_generated"),
+        "frequency_inference_performed": policy.get("frequency_inference_performed"),
+        "sensor_frequency_learning_used": policy.get("sensor_frequency_learning_used"),
+        "facility_qra_claim": policy.get("facility_qra_claim"),
+        "diagnostic_only": True,
+    }
+
+
 def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
     """Summarize duration, isolation, inventory, and domain closure evidence.
 
@@ -519,6 +561,7 @@ def build_v060_readiness_report(
     facility_evidence_request: Mapping[str, Any] | None = None,
     scenario_evidence_audit: Mapping[str, Any] | None = None,
     validation_intake_audit: Mapping[str, Any] | None = None,
+    observed_state_runtime_frames: Mapping[str, Any] | None = None,
     risk_atom_chain_audit: Mapping[str, Any] | None = None,
     equipment_state_release_audit: Mapping[str, Any] | None = None,
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
@@ -561,6 +604,11 @@ def build_v060_readiness_report(
     if validation_intake_audit is not None:
         validation_intake = _validation_intake_summary(
             _mapping(validation_intake_audit, "validation_intake_audit")
+        )
+    observed_runtime = None
+    if observed_state_runtime_frames is not None:
+        observed_runtime = _observed_runtime_summary(
+            _mapping(observed_state_runtime_frames, "observed_state_runtime_frames")
         )
     atom_chain = None
     if risk_atom_chain_audit is not None:
@@ -1344,6 +1392,7 @@ def build_v060_readiness_report(
                 else None
             ),
             "monitoring_state_evidence": validation_intake,
+            "observed_state_runtime": observed_runtime,
         },
         "equipment": {
             "component_rows": component_rows,
@@ -1421,6 +1470,7 @@ def build_v060_readiness_report(
         ),
         "scenario_evidence": scenario_evidence,
         "validation_intake": validation_intake,
+        "observed_state_runtime": observed_runtime,
         "completion_criteria": [
             {
                 "id": "A_equipment_state_and_release",
@@ -2835,6 +2885,40 @@ def validate_v060_readiness_report(
                 errors.append("validation_intake.diagnostic_only must remain true")
             if not isinstance(validation_intake.get("blocking_reasons"), list):
                 errors.append("validation_intake.blocking_reasons must be an array")
+
+    observed_runtime = value.get("observed_state_runtime")
+    if observed_runtime is not None:
+        if not isinstance(observed_runtime, Mapping):
+            errors.append("observed_state_runtime must be an object when present")
+        else:
+            if observed_runtime.get("schema_version") != "prism.observed_state_runtime_frames.v1":
+                errors.append("observed_state_runtime.schema_version is not supported")
+            for field in (
+                "source_count",
+                "frame_count",
+                "evidence_sample_count",
+                "component_count",
+            ):
+                if observed_runtime.get(field) is not None:
+                    _nonnegative_int(
+                        observed_runtime.get(field),
+                        f"observed_state_runtime.{field}",
+                        errors,
+                    )
+            if observed_runtime.get("provider_release_required_for_consequence") is not True:
+                errors.append(
+                    "observed_state_runtime.provider_release_required_for_consequence must remain true"
+                )
+            for field in (
+                "release_scenario_generated",
+                "frequency_inference_performed",
+                "sensor_frequency_learning_used",
+                "facility_qra_claim",
+            ):
+                if observed_runtime.get(field) is not False:
+                    errors.append(f"observed_state_runtime.{field} must remain false")
+            if observed_runtime.get("diagnostic_only") is not True:
+                errors.append("observed_state_runtime.diagnostic_only must remain true")
 
     if errors:
         raise V060ReadinessError("; ".join(errors))

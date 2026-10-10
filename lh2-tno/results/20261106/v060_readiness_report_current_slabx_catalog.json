@@ -502,6 +502,31 @@
         "sensor_frequency_learning_is_prohibited"
       ],
       "diagnostic_only": true
+    },
+    "observed_state_runtime": {
+      "schema_version": "prism.observed_state_runtime_frames.v1",
+      "status": "STATE_RUNTIME_FRAMES_READY",
+      "source_count": 3,
+      "frame_count": 3,
+      "evidence_sample_count": 8955,
+      "component_count": 3,
+      "component_ids": [
+        "lh2-intake-tank",
+        "lh2-storage-vent",
+        "lh2-supply-vaporizer-boundary"
+      ],
+      "state_adapter": "service_state_from_runtime_frame",
+      "resolver_adapter": "request_from_observed_state_runtime_frame",
+      "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
+      "facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
+      "provider_release_required_for_consequence": true,
+      "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+      "termination_and_inventory_owner": "equipment_provider",
+      "release_scenario_generated": false,
+      "frequency_inference_performed": false,
+      "sensor_frequency_learning_used": false,
+      "facility_qra_claim": false,
+      "diagnostic_only": true
     }
   },
   "equipment": {
@@ -1082,6 +1107,31 @@
     ],
     "diagnostic_only": true
   },
+  "observed_state_runtime": {
+    "schema_version": "prism.observed_state_runtime_frames.v1",
+    "status": "STATE_RUNTIME_FRAMES_READY",
+    "source_count": 3,
+    "frame_count": 3,
+    "evidence_sample_count": 8955,
+    "component_count": 3,
+    "component_ids": [
+      "lh2-intake-tank",
+      "lh2-storage-vent",
+      "lh2-supply-vaporizer-boundary"
+    ],
+    "state_adapter": "service_state_from_runtime_frame",
+    "resolver_adapter": "request_from_observed_state_runtime_frame",
+    "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
+    "facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
+    "provider_release_required_for_consequence": true,
+    "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+    "termination_and_inventory_owner": "equipment_provider",
+    "release_scenario_generated": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
   "completion_criteria": [
     {
       "id": "A_equipment_state_and_release",
@@ -1177,6 +1227,10 @@
     "validation_intake_audit": {
       "path": "results/20261106/validation_intake_audit_current.json",
       "sha256": "9fcd6d22040d9936add4b9e4031a2e2575e026639d7a384ef29e74d85ce4ea49"
+    },
+    "observed_state_runtime_frames": {
+      "path": "results/20261102/inspection_center_observed_state_runtime_frames.json",
+      "sha256": "368aaeaeb8ed77f208a545308f12633d501ab6f1df05dbc2082b3fea8323ca01"
     },
     "risk_atom_chain_audit": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json",

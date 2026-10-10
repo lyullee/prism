@@ -192,6 +192,43 @@ def test_v060_readiness_records_fail_closed_monitoring_state_intake():
     assert report["validation_intake"]["diagnostic_only"] is True
 
 
+def test_v060_readiness_records_provider_gated_runtime_frames():
+    inputs = _inputs()
+    inputs["observed_state_runtime_frames"] = {
+        "schema_version": "prism.observed_state_runtime_frames.v1",
+        "status": "STATE_RUNTIME_FRAMES_READY",
+        "source_count": 3,
+        "frame_count": 3,
+        "evidence_sample_count": 8955,
+        "frames": [
+            {"component_id": "lh2-intake-tank"},
+            {"component_id": "lh2-storage-vent"},
+            {"component_id": "lh2-supply-vaporizer-boundary"},
+        ],
+        "runtime_handoff_contract": {
+            "state_adapter": "service_state_from_runtime_frame",
+            "resolver_adapter": "request_from_observed_state_runtime_frame",
+            "monitor_method": "RealtimeConsequenceMonitor.update_from_runtime_frame",
+            "facility_monitor_method": "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames",
+            "provider_release_required_for_consequence": True,
+            "frequency_assignment": "rejected_by_request_from_equipment_resolver",
+            "termination_and_inventory_owner": "equipment_provider",
+        },
+        "policy": {
+            "release_scenario_generated": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_claim": False,
+        },
+    }
+    report = build_v060_readiness_report(**inputs)
+    runtime = report["chain"]["observed_state_runtime"]
+    assert runtime["source_count"] == 3
+    assert runtime["component_count"] == 3
+    assert runtime["provider_release_required_for_consequence"] is True
+    assert runtime["facility_qra_claim"] is False
+
+
 def _scenario_evidence():
     return {
         "schema_version": "prism.inspection_center_screening_summary.v1",

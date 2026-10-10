@@ -60,6 +60,11 @@ def main() -> int:
         help="Optional fail-closed monitoring/state validation-input inventory.",
     )
     parser.add_argument(
+        "--observed-state-runtime-frames",
+        type=Path,
+        help="Optional observed-state runtime frames and service handoff contract.",
+    )
+    parser.add_argument(
         "--risk-atom-chain-audit",
         type=Path,
         help="Optional case/atom-level release-to-final-damage chain audit.",
@@ -180,6 +185,11 @@ def main() -> int:
                 if args.validation_intake_audit is not None
                 else None
             ),
+            observed_state_runtime_frames=(
+                _load(args.observed_state_runtime_frames)
+                if args.observed_state_runtime_frames is not None
+                else None
+            ),
             risk_atom_chain_audit=(
                 _load(args.risk_atom_chain_audit)
                 if args.risk_atom_chain_audit is not None
@@ -298,6 +308,10 @@ def main() -> int:
     if args.validation_intake_audit is not None:
         report["source_artifacts"]["validation_intake_audit"] = _source_artifact(
             args.validation_intake_audit
+        )
+    if args.observed_state_runtime_frames is not None:
+        report["source_artifacts"]["observed_state_runtime_frames"] = _source_artifact(
+            args.observed_state_runtime_frames
         )
     if args.risk_atom_chain_audit is not None:
         report["source_artifacts"]["risk_atom_chain_audit"] = _source_artifact(
