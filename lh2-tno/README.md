@@ -507,7 +507,7 @@ python -m venv .venv
 
 실제 provider가 저장한 방출 packet과 적격성 기록을 파일로 전달할 때는 `scripts/build_provider_packet_evidence.py`를 사용합니다. `--release`에는 `prism.resolved_release.v1` 또는 `prism.resolved_release_set.v1`, `--qualification`에는 별도 `prism.provider_qualification_evidence.v1` JSON을 넣습니다. 두 파일의 event/component/port 및 source/result SHA-256이 정확히 맞아야 `prism.provider_packet_evidence.v1`가 생성되며, `input_origin=synthetic`은 거부됩니다. 이 단계는 빈도를 추정하지 않고 기존 문헌 `FrequencyPlan`을 그대로 둡니다.
 
-여러 설비의 실제 파일을 한 번에 접수할 때는 `scripts/audit_provider_packet_inputs.py`를 사용합니다. manifest의 각 행에 `release`와 `qualification` 객체를 직접 넣거나 `release_path`·`qualification_path`를 지정할 수 있습니다. 각 행은 strict release contract와 qualification sidecar를 모두 통과해야만 catalog에 들어가며, 합성 입력·digest 불일치·누락 파일·중복 `event_id`는 행별 사유와 함께 거절됩니다. 출력은 `prism.provider_packet_input_audit.v1`이고, 자료가 없으면 `NO_PROVIDER_PACKET_INPUT`으로 남습니다. 이 감사기는 빈도나 피해를 계산하지 않고, 기존 `facility_case_packet_coverage.json`에 넘길 수 있는 자격 증거만 만듭니다.
+여러 설비의 실제 파일을 한 번에 접수할 때는 `scripts/audit_provider_packet_inputs.py`를 사용합니다. manifest의 각 행에 `release`와 `qualification` 객체를 직접 넣거나 `release_path`·`qualification_path`를 지정할 수 있습니다. 각 행은 strict release contract와 qualification sidecar를 모두 통과해야만 catalog에 들어가며, 합성 입력·digest 불일치·누락 파일·완전 동일 packet identity 중복은 행별 사유와 함께 거절됩니다. 같은 initiating event의 차단 성공·실패처럼 exact port/source/result identity가 다른 packet은 보존됩니다. 출력은 `prism.provider_packet_input_audit.v1`이고, 자료가 없으면 `NO_PROVIDER_PACKET_INPUT`으로 남습니다. 이 감사기는 빈도나 피해를 계산하지 않고, 기존 `facility_case_packet_coverage.json`에 넘길 수 있는 자격 증거만 만듭니다.
 
 예시 manifest와 실행:
 

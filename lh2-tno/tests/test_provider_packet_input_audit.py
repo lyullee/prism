@@ -83,3 +83,22 @@ def test_duplicate_event_ids_are_fail_closed():
     assert report["accepted_provider_packet_count"] == 1
     assert report["rejected_record_count"] == 1
     assert report["duplicate_event_ids"] == ["provider-accident-01"]
+
+
+def test_distinct_packets_for_one_event_are_kept_for_release_branches():
+    second_release = _release()
+    second_release["provider_result_digest"] = "2" * 64
+    second_qualification = _qualification()
+    second_qualification["evidence_id"] = "actual-002"
+    second_qualification["provider_result_digest"] = "2" * 64
+    report = audit_provider_packet_inputs({
+        "records": [
+            {"record_id": "branch-a", "release": _release(), "qualification": _qualification()},
+            {"record_id": "branch-b", "release": second_release, "qualification": second_qualification},
+        ]
+    })
+
+    assert report["status"] == "QUALIFIED_PROVIDER_PACKET_CATALOG"
+    assert report["accepted_provider_packet_count"] == 2
+    assert report["accepted_provider_event_count"] == 1
+    assert report["duplicate_event_ids"] == []

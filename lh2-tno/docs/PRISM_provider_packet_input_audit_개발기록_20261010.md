@@ -28,7 +28,7 @@
 - release와 sidecar의 event/component/port 및 source/result SHA-256 exact match
 - `input_origin=synthetic` 차단
 
-실패한 행도 결과에서 제거하지 않고 `blocking_reasons`와 함께 남긴다. 동일 `event_id`가 두 번 들어오면 첫 행만 accepted catalog에 남기고 두 번째 행을 중복으로 거절한다.
+실패한 행도 결과에서 제거하지 않고 `blocking_reasons`와 함께 남긴다. 같은 initiating `event_id`에 차단 성공·실패처럼 서로 다른 port/source/result identity가 들어오는 것은 허용한다. 완전히 같은 packet identity가 두 번 들어오는 경우에만 두 번째 행을 중복으로 거절한다.
 
 ## 현재 결과
 

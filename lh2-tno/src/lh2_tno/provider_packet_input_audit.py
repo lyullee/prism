@@ -69,6 +69,7 @@ def audit_provider_packet_inputs(
 
     rows: list[dict[str, Any]] = []
     evidence_rows: list[dict[str, Any]] = []
+    accepted_identities: set[tuple[Any, ...]] = set()
     accepted_event_ids: set[str] = set()
     duplicate_event_ids: set[str] = set()
     rejected_count = 0
@@ -113,14 +114,22 @@ def audit_provider_packet_inputs(
                 "provider_export_schema": evidence.provider_export_schema,
                 "qualification_status": evidence.status,
             })
-            if evidence.event_id in accepted_event_ids:
+            identity = (
+                evidence.event_id,
+                evidence.component_id,
+                tuple(evidence.port_ids),
+                tuple(evidence.provider_source_digests),
+                tuple(evidence.provider_result_digests),
+            )
+            if identity in accepted_identities:
                 duplicate_event_ids.add(evidence.event_id)
                 entry["status"] = "REJECTED_DUPLICATE_EVENT"
                 entry["blocking_reasons"] = [
-                    "more than one accepted record has this event_id"
+                    "an identical provider packet identity was accepted already"
                 ]
                 rejected_count += 1
             else:
+                accepted_identities.add(identity)
                 accepted_event_ids.add(evidence.event_id)
                 evidence_rows.append(evidence.model_dump(mode="json"))
         except (ProviderPacketPromotionError, TypeError, ValueError) as error:
@@ -147,6 +156,7 @@ def audit_provider_packet_inputs(
         "status": status,
         "input_record_count": len(raw),
         "accepted_provider_packet_count": accepted_count,
+        "accepted_provider_event_count": len(accepted_event_ids),
         "rejected_record_count": rejected_count,
         "duplicate_event_ids": sorted(duplicate_event_ids),
         "blocking_reasons": blockers,
@@ -157,6 +167,7 @@ def audit_provider_packet_inputs(
             "synthetic_input_is_not_promoted": True,
             "qualification_sidecar_is_required": True,
             "strict_release_contract_is_required": True,
+            "distinct_packets_per_event_allowed": True,
             "facility_ir_fn_promotion": "requires exact facility case coverage and independent validation gates",
         },
     }
