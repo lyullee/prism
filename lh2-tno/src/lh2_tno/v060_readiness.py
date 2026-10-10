@@ -481,6 +481,7 @@ def build_v060_readiness_report(
     facility_component_contribution_audit: Mapping[str, Any] | None = None,
     facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
     external_equipment_model_audit: Mapping[str, Any] | None = None,
+    external_lh2_model_root_review: Mapping[str, Any] | None = None,
     equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
     equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
     generic_equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
@@ -541,6 +542,12 @@ def build_v060_readiness_report(
         external_equipment_chain = _mapping(
             external_equipment_model_audit,
             "external_equipment_model_audit",
+        )
+    external_lh2_model_chain = None
+    if external_lh2_model_root_review is not None:
+        external_lh2_model_chain = _mapping(
+            external_lh2_model_root_review,
+            "external_lh2_model_root_review",
         )
     equipment_scenario_chain = None
     if equipment_scenario_coverage_audit is not None:
@@ -869,6 +876,57 @@ def build_v060_readiness_report(
                     "diagnostic_only": True,
                 }
                 if external_equipment_chain is not None
+                else None
+            ),
+            "external_lh2_model_root_review": (
+                {
+                    "conclusion": external_lh2_model_chain.get("conclusion"),
+                    "provider_response_count": external_lh2_model_chain.get(
+                        "provider_like_artifacts", {}
+                    ).get("provider_response_count")
+                    if isinstance(
+                        external_lh2_model_chain.get("provider_like_artifacts"), Mapping
+                    )
+                    else None,
+                    "resolved_release_count": external_lh2_model_chain.get(
+                        "provider_like_artifacts", {}
+                    ).get("resolved_release_count")
+                    if isinstance(
+                        external_lh2_model_chain.get("provider_like_artifacts"), Mapping
+                    )
+                    else None,
+                    "exact_generic_identity_match_count": external_lh2_model_chain.get(
+                        "provider_like_artifacts", {}
+                    ).get("exact_generic_identity_match_count")
+                    if isinstance(
+                        external_lh2_model_chain.get("provider_like_artifacts"), Mapping
+                    )
+                    else None,
+                    "qualification_sidecar_count": external_lh2_model_chain.get(
+                        "provider_like_artifacts", {}
+                    ).get("qualification_sidecar_count")
+                    if isinstance(
+                        external_lh2_model_chain.get("provider_like_artifacts"), Mapping
+                    )
+                    else None,
+                    "physical_validation_artifact_count": external_lh2_model_chain.get(
+                        "provider_like_artifacts", {}
+                    ).get("physical_validation_artifact_count")
+                    if isinstance(
+                        external_lh2_model_chain.get("provider_like_artifacts"), Mapping
+                    )
+                    else None,
+                    "complete_facility_qra_artifact_count": external_lh2_model_chain.get(
+                        "provider_like_artifacts", {}
+                    ).get("complete_facility_qra_artifact_count")
+                    if isinstance(
+                        external_lh2_model_chain.get("provider_like_artifacts"), Mapping
+                    )
+                    else None,
+                    "promotion": external_lh2_model_chain.get("promotion"),
+                    "diagnostic_only": True,
+                }
+                if external_lh2_model_chain is not None
                 else None
             ),
             "equipment_scenario_coverage": (

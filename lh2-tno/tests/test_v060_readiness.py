@@ -99,6 +99,33 @@ def _evidence_request():
     }
 
 
+def test_v060_readiness_records_external_lh2_model_root_review():
+    inputs = _inputs()
+    inputs["external_lh2_model_root_review"] = {
+        "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+        "provider_like_artifacts": {
+            "provider_response_count": 7,
+            "resolved_release_count": 7,
+            "exact_generic_identity_match_count": 0,
+            "qualification_sidecar_count": 0,
+            "physical_validation_artifact_count": 0,
+            "complete_facility_qra_artifact_count": 0,
+        },
+        "promotion": {
+            "provider_packet": False,
+            "frequency": False,
+            "facility_qra": False,
+            "physical_validation": False,
+        },
+    }
+    report = build_v060_readiness_report(**inputs)
+    review = report["chain"]["external_lh2_model_root_review"]
+    assert review["conclusion"] == "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION"
+    assert review["provider_response_count"] == 7
+    assert review["exact_generic_identity_match_count"] == 0
+    assert review["diagnostic_only"] is True
+
+
 def _scenario_evidence():
     return {
         "schema_version": "prism.inspection_center_screening_summary.v1",

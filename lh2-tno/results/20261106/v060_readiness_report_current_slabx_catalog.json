@@ -273,6 +273,22 @@
       "facility_qra_claim": false,
       "diagnostic_only": true
     },
+    "external_lh2_model_root_review": {
+      "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+      "provider_response_count": 7,
+      "resolved_release_count": 7,
+      "exact_generic_identity_match_count": 0,
+      "qualification_sidecar_count": 0,
+      "physical_validation_artifact_count": 0,
+      "complete_facility_qra_artifact_count": 0,
+      "promotion": {
+        "provider_packet": false,
+        "frequency": false,
+        "facility_qra": false,
+        "physical_validation": false
+      },
+      "diagnostic_only": true
+    },
     "equipment_scenario_coverage": {
       "status": "CROSSWALK_REQUIRED",
       "asset_count": 12,
@@ -1113,6 +1129,10 @@
     "external_equipment_model_audit": {
       "path": "results/20261104/external_equipment_model_audit_current.json",
       "sha256": "91aa517bfd944b15ec61ac447fc715d4a98730d2f9b6c6f5e8d812e3f8f9b5b2"
+    },
+    "external_lh2_model_root_review": {
+      "path": "results/20261106/external_lh2_model_root_review.json",
+      "sha256": "030b1923a06ea40282b03c021619422413e9a00798ecb22c4b6e1fb7ffb5b0f5"
     },
     "equipment_scenario_coverage_audit": {
       "path": "results/20261104/equipment_scenario_coverage_audit_current.json",

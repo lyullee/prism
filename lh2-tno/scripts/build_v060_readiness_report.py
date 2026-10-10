@@ -85,6 +85,11 @@ def main() -> int:
         help="Optional external equipment/P&ID readiness audit.",
     )
     parser.add_argument(
+        "--external-lh2-model-root-review",
+        type=Path,
+        help="Optional read-only review of an external LH2 digital-twin model root.",
+    )
+    parser.add_argument(
         "--equipment-scenario-coverage-audit",
         type=Path,
         help="Optional equipment-to-accident-family coverage audit.",
@@ -190,6 +195,11 @@ def main() -> int:
                 if args.external_equipment_model_audit is not None
                 else None
             ),
+            external_lh2_model_root_review=(
+                _load(args.external_lh2_model_root_review)
+                if args.external_lh2_model_root_review is not None
+                else None
+            ),
             equipment_scenario_coverage_audit=(
                 _load(args.equipment_scenario_coverage_audit)
                 if args.equipment_scenario_coverage_audit is not None
@@ -288,6 +298,10 @@ def main() -> int:
     if args.external_equipment_model_audit is not None:
         report["source_artifacts"]["external_equipment_model_audit"] = _source_artifact(
             args.external_equipment_model_audit
+        )
+    if args.external_lh2_model_root_review is not None:
+        report["source_artifacts"]["external_lh2_model_root_review"] = _source_artifact(
+            args.external_lh2_model_root_review
         )
     if args.equipment_scenario_coverage_audit is not None:
         report["source_artifacts"]["equipment_scenario_coverage_audit"] = _source_artifact(
