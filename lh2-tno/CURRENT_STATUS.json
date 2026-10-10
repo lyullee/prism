@@ -151,7 +151,7 @@
   "frequency_port_binding_record": "docs/PRISM_frequency_port_binding_20261010.md",
   "frequency_port_binding_policy": "Optional reviewed port_ids are topology-checked when events are generated and must exactly match provider-resolved accident exits when supplied; legacy component-level events remain explicitly port-unbound and never receive inferred frequency.",
   "frequency_port_binding_strict_facility_qra_gate": false,
-  "frequency_port_binding_latest_remote_commit": "b6374577976d99616031a9b1afc41b07727c77fb",
+  "frequency_port_binding_latest_remote_commit": "d66dc8e5bdd753b573bb989041e823a39e5031fb",
   "latest_local_full_test_run": "860 passed, 1 skipped",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
