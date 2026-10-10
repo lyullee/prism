@@ -3430,5 +3430,40 @@
   "external_field_model_comparison_coordinate_orientation_review_required": true,
   "external_field_model_comparison_coordinate_orientation_interpretation": "Prediction peak is zero while observed peak is positive; review source direction, wind-from convention, axis definitions, and transport delay before physical-validation decision.",
   "external_field_model_comparison_field_axis_definition_status": "not_supplied_in_public_workbook",
-  "external_field_model_comparison_model_axis_assumption": "x=east, y=north, z=up; source-relative metres"
+  "external_field_model_comparison_model_axis_assumption": "x=east, y=north, z=up; source-relative metres",
+  "external_field_orientation_sweep_record": "results/20261103/external_field_model_comparison/preslhy_trial10_orientation_sweep_unverified.json",
+  "external_field_orientation_sweep_status": "RESTRICTED_EXTERNAL_FIELD_ORIENTATION_DIAGNOSTIC; bearings 286/106/135/45 degrees; bearing not fitted; field axis definition missing; physical_validation_claim false",
+  "external_field_orientation_sweep_summary": [
+    {
+      "bearing_deg": 286.0,
+      "rmse_vol_pct": 31.102896957193188,
+      "predicted_peak_vol_pct": 0.0,
+      "observed_peak_vol_pct": 87.7818,
+      "coordinate_orientation_review_required": true
+    },
+    {
+      "bearing_deg": 106.0,
+      "rmse_vol_pct": 30.835408659207207,
+      "predicted_peak_vol_pct": 33.0489219963026,
+      "observed_peak_vol_pct": 87.7818,
+      "coordinate_orientation_review_required": false
+    },
+    {
+      "bearing_deg": 135.0,
+      "rmse_vol_pct": 28.466630732354,
+      "predicted_peak_vol_pct": 28.27148928249323,
+      "observed_peak_vol_pct": 87.7818,
+      "coordinate_orientation_review_required": false
+    },
+    {
+      "bearing_deg": 45.0,
+      "rmse_vol_pct": 30.75443312693009,
+      "predicted_peak_vol_pct": 33.63564156218492,
+      "observed_peak_vol_pct": 87.7818,
+      "coordinate_orientation_review_required": false
+    }
+  ],
+  "external_field_orientation_sweep_best_rmse_bearing_deg": 135.0,
+  "external_field_orientation_sweep_best_rmse_vol_pct": 28.466630732354,
+  "external_field_orientation_sweep_promotion_allowed": false
 }
