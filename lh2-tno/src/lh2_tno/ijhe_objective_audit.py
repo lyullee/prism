@@ -60,6 +60,7 @@ def build_ijhe_objective_coverage_audit(
     extension_state_snapshot_coverage: Mapping[str, Any] | None = None,
     observed_state_replay_audit: Mapping[str, Any] | None = None,
     observed_state_runtime_frames: Mapping[str, Any] | None = None,
+    external_field_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -83,6 +84,7 @@ def build_ijhe_objective_coverage_audit(
     extension_state_path = _record_path(extension_state_snapshot_coverage, None)
     observed_replay_path = _record_path(observed_state_replay_audit, None)
     observed_runtime_path = _record_path(observed_state_runtime_frames, None)
+    external_field_path = _record_path(external_field_evidence, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -711,8 +713,127 @@ def build_ijhe_objective_coverage_audit(
         ),
     ))
 
+    # Keep this observation row outside the core and strict qualification
+    # gates.  A field bundle is useful input for a later matched
+    # model-to-measurement comparison, but it is not a provider release,
+    # accident frequency, or facility-QRA qualification packet.
+    external_status = (
+        external_field_evidence.get("status")
+        if isinstance(external_field_evidence, Mapping)
+        else None
+    )
+    external_promotion_policy = (
+        external_field_evidence.get("promotion_policy", {})
+        if isinstance(external_field_evidence, Mapping)
+        else {}
+    )
+    if not isinstance(external_promotion_policy, Mapping):
+        external_promotion_policy = {}
+    external_field_ok = (
+        isinstance(external_field_evidence, Mapping)
+        and external_field_evidence.get("schema_version") == "prism.external_field_evidence.v1"
+        and external_status in {
+            "RESTRICTED_EXTERNAL_FIELD_EVIDENCE",
+            "RESTRICTED_EXTERNAL_FIELD_EVIDENCE_HASH_DRIFT",
+        }
+        and external_field_evidence.get("scope") == "lh2_free_field"
+        and external_field_evidence.get("model_comparison_ready") is False
+        and external_field_evidence.get("physical_validation_claim") is False
+        and external_field_evidence.get("full_chain_validation_claim") is False
+        and external_field_evidence.get("accident_release_validation_claim") is False
+        and external_field_evidence.get("frequency_inference_performed") is False
+        and external_field_evidence.get("facility_qra_claim") is False
+        and external_promotion_policy.get("observed_source_is_not_provider_release") is True
+        and external_promotion_policy.get("observed_data_is_not_frequency") is True
+        and external_promotion_policy.get("matched_model_prediction_required_for_validation") is True
+        and external_promotion_policy.get("component_evidence_does_not_validate_facility_qra") is True
+    )
+    source_summary = (
+        external_field_evidence.get("source_boundary", {})
+        if isinstance(external_field_evidence, Mapping)
+        else {}
+    )
+    weather_summary = (
+        external_field_evidence.get("weather", {})
+        if isinstance(external_field_evidence, Mapping)
+        else {}
+    )
+    receptor_summary = (
+        external_field_evidence.get("receptor_observations", {})
+        if isinstance(external_field_evidence, Mapping)
+        else {}
+    )
+    hash_drift_channels = (
+        external_field_evidence.get("hash_drift_channels", [])
+        if isinstance(external_field_evidence, Mapping)
+        else []
+    )
+    rows.append(_row(
+        "diagnostic_external_outdoor_field_evidence",
+        "외부 옥외 LH2 관측자료를 해시·사건시계·범위 정책과 함께 감사 장부에 기록해야 한다",
+        "PASS" if external_field_ok else "BLOCKED_EVIDENCE",
+        evidence_paths=(external_field_path,),
+        observed={
+            "status": external_status,
+            "event_id": (
+                external_field_evidence.get("event_id")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "dataset_id": (
+                external_field_evidence.get("dataset_id")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "scope": (
+                external_field_evidence.get("scope")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "source_row_count": source_summary.get("row_count") if isinstance(source_summary, Mapping) else None,
+            "weather_row_count": weather_summary.get("row_count") if isinstance(weather_summary, Mapping) else None,
+            "receptor_row_count": receptor_summary.get("row_count") if isinstance(receptor_summary, Mapping) else None,
+            "hash_verification_enforced": (
+                external_field_evidence.get("hash_verification_enforced")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "hash_drift_channels": list(hash_drift_channels) if isinstance(hash_drift_channels, list) else hash_drift_channels,
+            "model_comparison_ready": (
+                external_field_evidence.get("model_comparison_ready")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "physical_validation_claim": (
+                external_field_evidence.get("physical_validation_claim")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "facility_qra_claim": (
+                external_field_evidence.get("facility_qra_claim")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+            "frequency_inference_performed": (
+                external_field_evidence.get("frequency_inference_performed")
+                if isinstance(external_field_evidence, Mapping)
+                else None
+            ),
+        },
+        blocking_reason=None if external_field_ok else (
+            "외부 관측자료의 schema·범위·해시 정책 또는 승격 금지 조건이 확인되지 않았다"
+        ),
+        interpretation=(
+            "관측자료 입력 무결성과 제한 정책만 확인한다. 해시 drift는 진단에 표시하지만 "
+            "물리검증·방출 packet·빈도·시설 QRA를 열지 않는다."
+        ),
+    ))
+
     core_rows = rows[:8]
-    strict_rows = rows[8:]
+    # The first 15 rows are the established core/strict gates.  The external
+    # observation row above is diagnostic-only and must not change either
+    # blocker list or the overall qualification status.
+    strict_rows = rows[8:15]
     core_blocked = [row["id"] for row in core_rows if row["status"] == "BLOCKED_EVIDENCE"]
     strict_blocked = [row["id"] for row in strict_rows if row["status"] == "BLOCKED_EVIDENCE"]
     if not core_blocked and strict_blocked:

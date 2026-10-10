@@ -257,3 +257,49 @@ def test_objective_audit_records_observed_state_runtime_frames_without_promotion
     )
     assert check["status"] == "PASS"
     assert report["frequency_inference_performed"] is False
+
+
+def test_objective_audit_records_external_field_evidence_without_promotion():
+    inputs = _inputs()
+    inputs["external_field_evidence"] = {
+        "schema_version": "prism.external_field_evidence.v1",
+        "status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE_HASH_DRIFT",
+        "event_id": "field-event-1",
+        "dataset_id": "field-dataset-1",
+        "scope": "lh2_free_field",
+        "source_boundary": {"row_count": 10},
+        "weather": {"row_count": 3},
+        "receptor_observations": {"row_count": 40},
+        "hash_verification_enforced": False,
+        "hash_drift_channels": ["weather"],
+        "model_comparison_ready": False,
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "promotion_policy": {
+            "observed_source_is_not_provider_release": True,
+            "observed_data_is_not_frequency": True,
+            "matched_model_prediction_required_for_validation": True,
+            "component_evidence_does_not_validate_facility_qra": True,
+        },
+        "_record_path": "external-field.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_external_outdoor_field_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["hash_drift_channels"] == ["weather"]
+    assert len(report["checks"]) == 16
+    assert report["strict_blocking_check_ids"] == [
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+        "strict_facility_state_snapshot_coverage",
+        "diagnostic_observed_state_source_replay",
+        "diagnostic_observed_state_runtime_frames",
+    ]
