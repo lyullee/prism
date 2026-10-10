@@ -58,6 +58,7 @@ def build_ijhe_objective_coverage_audit(
     realtime_cache_benchmark: Mapping[str, Any] | None = None,
     native_state_snapshot_campaign_ledger: Mapping[str, Any] | None = None,
     extension_state_snapshot_coverage: Mapping[str, Any] | None = None,
+    observed_state_replay_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -79,6 +80,7 @@ def build_ijhe_objective_coverage_audit(
     validation_path = _record_path(validation_evidence_matrix, None)
     benchmark_path = _record_path(realtime_cache_benchmark, None)
     extension_state_path = _record_path(extension_state_snapshot_coverage, None)
+    observed_replay_path = _record_path(observed_state_replay_audit, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -555,6 +557,60 @@ def build_ijhe_objective_coverage_audit(
         interpretation=(
             "시설 전체 gate는 확장 사건별 상태 snapshot와 provider result digest까지 확인될 때만 통과한다. "
             "부분 연결을 전체 연결로 승격하지 않는다."
+        ),
+    ))
+
+    observed_replay_ok = (
+        isinstance(observed_state_replay_audit, Mapping)
+        and observed_state_replay_audit.get("schema_version")
+        == "prism.observed_state_source_replay_audit.v1"
+        and observed_state_replay_audit.get("status") == "SOURCE_REPLAY_MATCHED"
+        and isinstance(observed_state_replay_audit.get("source_count"), int)
+        and observed_state_replay_audit.get("source_count", 0) > 0
+        and observed_state_replay_audit.get("matched_source_count")
+        == observed_state_replay_audit.get("source_count")
+        and observed_state_replay_audit.get("evidence_policy_valid") is True
+        and (
+            observed_state_replay_audit.get("regeneration", {}).get(
+                "canonical_digest_match"
+            )
+            in {True, None}
+        )
+    )
+    rows.append(_row(
+        "diagnostic_observed_state_source_replay",
+        "실증 상태자료의 원문 해시와 상태 장부 재생성이 일치해야 한다",
+        "PASS" if observed_replay_ok else "BLOCKED_EVIDENCE",
+        evidence_paths=(observed_replay_path,),
+        observed={
+            "source_count": (
+                observed_state_replay_audit.get("source_count")
+                if isinstance(observed_state_replay_audit, Mapping)
+                else None
+            ),
+            "matched_source_count": (
+                observed_state_replay_audit.get("matched_source_count")
+                if isinstance(observed_state_replay_audit, Mapping)
+                else None
+            ),
+            "evidence_policy_valid": (
+                observed_state_replay_audit.get("evidence_policy_valid")
+                if isinstance(observed_state_replay_audit, Mapping)
+                else None
+            ),
+            "regeneration": (
+                observed_state_replay_audit.get("regeneration")
+                if isinstance(observed_state_replay_audit, Mapping)
+                else None
+            ),
+        },
+        blocking_reason=None if observed_replay_ok else (
+            "관측 상태 원문 해시 또는 상태 장부 재생성이 일치하지 않거나 "
+            "state-only 정책이 확인되지 않았다"
+        ),
+        interpretation=(
+            "원문 재생성 일치는 입력 무결성 근거다. 사고 방출·빈도·독립 물리검증·"
+            "시설 IR/F-N으로 승격하지 않는다."
         ),
     ))
 

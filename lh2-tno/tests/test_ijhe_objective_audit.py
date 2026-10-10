@@ -191,3 +191,23 @@ def test_objective_audit_requires_extension_state_coverage_for_full_union():
         if row["id"] == "strict_facility_state_snapshot_coverage"
     )
     assert check["status"] == "PASS"
+
+
+def test_objective_audit_records_observed_state_source_replay():
+    inputs = _inputs()
+    inputs["observed_state_replay_audit"] = {
+        "schema_version": "prism.observed_state_source_replay_audit.v1",
+        "status": "SOURCE_REPLAY_MATCHED",
+        "source_count": 3,
+        "matched_source_count": 3,
+        "evidence_policy_valid": True,
+        "regeneration": {"canonical_digest_match": True},
+        "_record_path": "observed-state-replay.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_observed_state_source_replay"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["matched_source_count"] == 3

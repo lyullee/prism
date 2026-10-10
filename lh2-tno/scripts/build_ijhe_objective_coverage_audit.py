@@ -39,6 +39,7 @@ def main() -> int:
     parser.add_argument("--realtime-cache-benchmark", type=Path)
     parser.add_argument("--native-state-snapshot-campaign-ledger", type=Path)
     parser.add_argument("--extension-state-snapshot-coverage", type=Path)
+    parser.add_argument("--observed-state-replay-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -74,6 +75,11 @@ def main() -> int:
             extension_state_snapshot_coverage=(
                 _object(args.extension_state_snapshot_coverage)
                 if args.extension_state_snapshot_coverage
+                else None
+            ),
+            observed_state_replay_audit=(
+                _object(args.observed_state_replay_audit)
+                if args.observed_state_replay_audit
                 else None
             ),
         )

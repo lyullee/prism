@@ -49,6 +49,12 @@ storage vent, supply/vaporizer boundary에 연결되며 원자료 상대경로·
 상세 원장은 [`inspection_center_observed_state_evidence.json`](examples/inspection_center_observed_state_evidence.json)과
 [실증데이터 상태증거 연결 기록](docs/PRISM_실증데이터_상태증거_연결_20261030.md)에서 확인할 수 있습니다.
 
+**2026-11-01 실증 상태자료 원문 재생성 감사:** bundled Python으로 같은 3개 Excel 원본을
+다시 읽어 상태 장부를 재생성하고, 원본 SHA-256 3/3과 canonical 상태 장부 digest를
+대조했습니다. 감사 결과는 [`inspection_center_observed_state_replay_audit.json`](results/20261101/inspection_center_observed_state_replay_audit.json)의
+`SOURCE_REPLAY_MATCHED`입니다. 이 결과는 입력 무결성과 재현성을 보강하지만 사고 방출,
+빈도 추정, provider 자격, 독립 물리검증 또는 시설 IR/F-N을 승격하지 않습니다.
+
 관측 상태를 사고 방출로 잘못 승격하지 않도록 `observed_state_release_binding_audit.json`에서
 상태→시설 component→검토된 provider event 연결을 별도로 감사한다. 현재 센터 자료는
 3개 component와 8,955개 표본을 가지지만 검토된 provider packet이 없어 결과는

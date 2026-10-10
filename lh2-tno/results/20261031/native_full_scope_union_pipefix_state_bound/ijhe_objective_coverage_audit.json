@@ -10,7 +10,7 @@
       "status": "PASS",
       "evidence_paths": [
         "results\\20261031\\native_generic_scope_packets_pipefix\\verification.json",
-        "results\\20261031\\native_full_scope_union_pipefix_state_bound\\state_snapshot_binding_audit.json"
+        "results\\20261031\\native_generic_scope_packets_pipefix\\state_snapshot_binding_audit.json"
       ],
       "observed": {
         "catalog_event_count": 24,
@@ -484,6 +484,27 @@
       },
       "blocking_reason": null,
       "interpretation": "시설 전체 gate는 확장 사건별 상태 snapshot와 provider result digest까지 확인될 때만 통과한다. 부분 연결을 전체 연결로 승격하지 않는다."
+    },
+    {
+      "id": "diagnostic_observed_state_source_replay",
+      "requirement": "실증 상태자료의 원문 해시와 상태 장부 재생성이 일치해야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261101\\inspection_center_observed_state_replay_audit.json"
+      ],
+      "observed": {
+        "source_count": 3,
+        "matched_source_count": 3,
+        "evidence_policy_valid": true,
+        "regeneration": {
+          "performed": true,
+          "canonical_digest_match": true,
+          "reviewed_canonical_digest": "1f0d2dc8fe2b4c3c4f21658639a42f3501cb446bd18ce50d0cdb360dd17e21f8",
+          "regenerated_canonical_digest": "1f0d2dc8fe2b4c3c4f21658639a42f3501cb446bd18ce50d0cdb360dd17e21f8"
+        }
+      },
+      "blocking_reason": null,
+      "interpretation": "원문 재생성 일치는 입력 무결성 근거다. 사고 방출·빈도·독립 물리검증·시설 IR/F-N으로 승격하지 않는다."
     }
   ],
   "core_chain_check_ids": [
@@ -501,7 +522,8 @@
     "qualified_provider_evidence",
     "strict_facility_scope",
     "strict_facility_qra",
-    "strict_facility_state_snapshot_coverage"
+    "strict_facility_state_snapshot_coverage",
+    "diagnostic_observed_state_source_replay"
   ],
   "core_blocking_check_ids": [],
   "strict_blocking_check_ids": [

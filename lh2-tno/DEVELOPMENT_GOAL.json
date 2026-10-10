@@ -2477,7 +2477,7 @@
   "current_union_provider_packet_input_audit_status": "NO_PROVIDER_PACKET_INPUT; 0 release/qualification pairs accepted; actual qualified provider packet coverage remains 0/44 cases",
   "current_union_observed_state_release_binding_audit_record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json",
   "current_union_observed_state_release_binding_audit_status": "NO_STATE_TO_RELEASE_BINDING; 3 observed components have state evidence but no reviewed facility/provider-event binding",
-  "current_union_full_test_status": "770 passed, 1 skipped; external lh2dt regression 1494 passed, 0 failed, 0 skipped; latest union 34 events/44 cases/176 risk atoms; native state→release identity complete for 44/44 cases after packet rebind state snapshot propagation; strict IJHE gates remain open",
+  "current_union_full_test_status": "773 passed, 1 skipped; external lh2dt regression 1494 passed, 0 failed, 0 skipped; latest union 34 events/44 cases/176 risk atoms; native state→release identity complete for 44/44 cases after packet rebind state snapshot propagation; observed-state source replay 3/3 matched; strict IJHE gates remain open",
   "current_union_consequence_backend_chain_audit_record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json",
   "current_union_consequence_backend_chain_audit_status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC; 44/44 cases close the declared LH2 release-to-consequence model paths, including the two-sided rupture endpoint path",
   "current_union_provider_packet_collection_manifest_record": "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json",
@@ -2526,5 +2526,8 @@
   "external_lh2dt_native_export_regression_summary_record": "results/20261026/native_full_scope_union_assessment/external_native_export_smoke/external_regression_summary.json",
   "external_lh2dt_native_export_regression_status": "PASS; external lh2dt full regression 1494 passed, 0 failed, 0 skipped; no-fitting audit refreshed at 657 scanned Python files; DynamicHEMPipe RK4 integrated-flux and actual isolation-boundary correction included; solver/contract evidence only; qualified packet and facility QRA remain withheld",
   "latest_20261031_pipefix_union_record": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
-  "latest_20261031_pipefix_union_status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC; 34 events, 44 cases, 176 risk atoms; state→release chain 44/44; 5 IJHE blockers"
+  "latest_20261031_pipefix_union_status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC; 34 events, 44 cases, 176 risk atoms; state→release chain 44/44; 5 IJHE blockers",
+  "ijhe_objective_coverage_audit_latest_record": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_objective_coverage_audit.json",
+  "observed_state_source_replay_audit_latest_record": "results/20261101/inspection_center_observed_state_replay_audit.json",
+  "observed_state_source_replay_audit_status": "SOURCE_REPLAY_MATCHED; 3/3 source hashes matched; regenerated state ledger canonical digest matched; state-only diagnostic policy retained"
 }
