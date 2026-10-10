@@ -1,20 +1,12 @@
 {
   "schema_version": "prism.external_model_contract_audit.v1",
-  "status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+  "status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND",
   "external_model_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델",
-  "external_model_source_digest": "23ed0bdaef616b3107adcc881a2583c7b4300cfbb7fedec4d31e51a8bc6bf4da",
+  "external_model_source_digest": "421eaae732f67af8b4d578db2dcf0b36f256b81f12d2f235ecc1119b16ffa199",
   "binding_catalog_sha256": "a697d0b63853aef660ad4b27bb8fe1bc2a63e0b8bec4d2dd99a43f433f3c3461",
   "binding_count": 8,
-  "native_accident_export_component_count": 0,
-  "native_accident_export_missing_components": [
-    "storage_tank",
-    "pipe",
-    "valve",
-    "vent_stack",
-    "pump",
-    "vaporizer",
-    "reliquefier"
-  ],
+  "native_accident_export_component_count": 7,
+  "native_accident_export_missing_components": [],
   "unresolved_components": [],
   "diagnostic_adapter_contract_verified_count": 7,
   "rows": [
@@ -24,13 +16,15 @@
       "model_class": "LayeredTank",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\layered_tank.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [
         "simulate"
       ],
       "native_class_bases": [],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_layered_tank_prism_packet.py",
@@ -38,9 +32,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "pipe",
@@ -48,13 +40,15 @@
       "model_class": "DynamicHEMPipe",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\dynamic_pipe.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [
         "step"
       ],
       "native_class_bases": [],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_dynamic_pipe_prism_packet.py",
@@ -62,9 +56,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "valve",
@@ -72,13 +64,15 @@
       "model_class": "StrokeLimitedCommandedValve",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\valve.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [
         "evaluate"
       ],
       "native_class_bases": [],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_valve_prism_packet.py",
@@ -86,9 +80,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "vent_stack",
@@ -96,13 +88,15 @@
       "model_class": "VentStack",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\vent_stack.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [
         "evaluate"
       ],
       "native_class_bases": [],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_vent_stack_prism_packet.py",
@@ -110,9 +104,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "pump",
@@ -120,13 +112,15 @@
       "model_class": "MappedPump",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\pump.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [
         "evaluate"
       ],
       "native_class_bases": [],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_mapped_pump_prism_packet.py",
@@ -134,9 +128,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "vaporizer",
@@ -144,13 +136,15 @@
       "model_class": "DynamicVaporizer",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\dynamic_vaporizer.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [
         "step"
       ],
       "native_class_bases": [],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_dynamic_vaporizer_prism_packet.py",
@@ -158,9 +152,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "reliquefier",
@@ -168,13 +160,15 @@
       "model_class": "DynamicReliquefier",
       "source_path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\src\\lh2dt\\dynamic_reliquefier.py",
       "source_exists": true,
-      "native_accident_export_method": false,
-      "native_termination_ledger_methods": [],
+      "native_accident_export_method": true,
+      "native_termination_ledger_methods": [
+        "export_accident_history"
+      ],
       "native_normal_state_methods": [],
       "native_class_bases": [
         "DynamicVaporizer"
       ],
-      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING",
+      "native_audit_status": "NATIVE_ACCIDENT_EXPORT_METHOD_FOUND",
       "diagnostic_adapter": {
         "status": "available",
         "module": "scripts/export_lh2dt_reliquefier_two_sided_prism_packet.py",
@@ -182,9 +176,7 @@
         "evidence_status": "synthetic_diagnostic"
       },
       "diagnostic_adapter_contract_verified": true,
-      "blocking_reasons": [
-        "external model class has no export_accident_history(request) method"
-      ]
+      "blocking_reasons": []
     },
     {
       "component_kind": "boundary",
@@ -204,9 +196,7 @@
       "blocking_reasons": []
     }
   ],
-  "blocking_reasons": [
-    "one or more external model classes lacks export_accident_history(request)"
-  ],
+  "blocking_reasons": [],
   "provider_packet_promoted": false,
   "frequency_inference_performed": false,
   "physical_validation_claim": false,

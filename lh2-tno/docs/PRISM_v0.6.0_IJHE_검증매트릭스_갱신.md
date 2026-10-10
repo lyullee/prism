@@ -171,7 +171,7 @@ python scripts/build_v060_readiness_report.py `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```
 
-현재 completion audit는 38개 검사 중 33개 PASS·5개 BLOCKED다. `risk_atom_chain_audit.json`은
+현재 completion audit는 39개 검사 중 34개 PASS·5개 BLOCKED다. `risk_atom_chain_audit.json`은
 44개 case·176개 risk atom의 구조적 방출→최종피해 연결을, `equipment_state_release_audit.json`은
 44개 case·9개 component의 설비 상태→방출 packet identity를 readiness report에 함께
 기록한다. 네이티브
@@ -183,4 +183,4 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 
 ### 시설 IR/F/N 독립 집계 감사 (2026-10-30 갱신)
 
-`facility_aggregate_closure_audit.json`은 저장된 176개 risk atom의 `개시빈도 × 조건부 가중치 × 수용점 피해`를 다시 합산하고, N≥1 기준 F/N 곡선을 다시 만든다. 공식 조건부 시설 값과 비교한 결과는 `FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC`, IR 불일치 0건, F/N 불일치 0건이다. `facility_component_contribution_audit.json`은 같은 원자를 9개 설비별로 재결합하고 진단 순위를 다시 계산해 불일치 0건을 확인한다. `facility_frequency_uncertainty_audit.json`은 5개 문헌 빈도 시나리오의 IR/F-N 재가중을 독립 재현해 불일치 0건을 확인한다. 이 검사는 계산 집계의 재현성만 닫으며, qualified provider·독립 전체 물리검증·완전 사고범위·시설 QRA 승격을 열지 않는다.
+`facility_aggregate_closure_audit.json`은 저장된 176개 risk atom의 `개시빈도 × 조건부 가중치 × 수용점 피해`를 다시 합산하고, N≥1 기준 F/N 곡선을 다시 만든다. 공식 조건부 시설 값과 비교한 결과는 `FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC`, IR 불일치 0건, F/N 불일치 0건이다. `facility_component_contribution_audit.json`은 같은 원자를 9개 설비별로 재결합하고 진단 순위를 다시 계산해 불일치 0건을 확인한다. `facility_frequency_uncertainty_audit.json`은 5개 문헌 빈도 시나리오의 IR/F-N 재가중을 독립 재현해 불일치 0건을 확인한다. 이 검사는 계산 집계의 재현성만 닫으며, qualified provider·독립 전체 물리검증·완전 사고범위·시설 QRA 승격을 열지 않는다.\n

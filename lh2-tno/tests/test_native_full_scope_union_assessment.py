@@ -75,11 +75,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
     assert verification["ijhe_audit_check_count"] == 39
-    assert verification["ijhe_audit_pass_count"] == 33
-    assert verification["ijhe_audit_blocked_count"] == 6
+    assert verification["ijhe_audit_pass_count"] == 34
+    assert verification["ijhe_audit_blocked_count"] == 5
     assert verification["ijhe_audit_blocked_check_ids"] == [
         "facility_release_boundary",
-        "equipment_model_binding_to_accident_release",
         "actual_provider_release_packet",
         "declared_major_accident_scope",
         "facility_ir_fn_available",
@@ -329,8 +328,8 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
     assert len(audit["checks"]) == 39
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 33
-    assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 6
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 34
+    assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 5
     assert objective_audit["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
     assert len(objective_audit["checks"]) == 13
     assert objective_audit["strict_blocking_check_ids"] == [

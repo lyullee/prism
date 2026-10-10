@@ -1235,7 +1235,7 @@
   "major_accident_scope_matrix_catalog_family_count": 12,
   "major_accident_scope_matrix_catalog_status": "DECLARED_SCENARIO_CATALOG_ATTACHED; current campaign remains incomplete and facility total risk withheld",
   "ijhe_completion_audit_latest_record": "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json",
-  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 34 checks, 5 blockers; diagnostic union closure now covers 34 events and 44 cases (176 risk atoms); atom-level release-to-final-damage closure is PASS for 44/44 cases; scope-ledger consistency is PASS; qualification readiness remains limited to exact/strict diagnostic packets and facility case packet coverage is 0/44",
+  "ijhe_completion_audit_latest_status": "INCOMPLETE_EVIDENCE; 39 checks, 5 blockers; diagnostic union closure covers 34 events, 44 cases, and 176 risk atoms; external lh2dt native accident export is 7/7; qualified packet coverage remains 0/44 and facility IR/F-N remains withheld",
   "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v11.json",
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "current_union_status_consistency_record": "results/20261026/native_full_scope_union_assessment/status_consistency_current.json",
@@ -1249,8 +1249,8 @@
   "risk_atom_chain_audit_promotion": false,
   "current_union_ijhe_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
   "current_union_external_equipment_model_contract_audit_record": "results/20261026/native_full_scope_union_assessment/external_lh2dt_model_contract_audit.json",
-  "current_union_external_equipment_model_contract_audit_status": "NATIVE_ACCIDENT_EXPORT_MISSING; 0/7 external lh2dt component classes expose export_accident_history(request); 7 PRISM diagnostic adapters verified; no qualified packet promotion",
-  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 39 checks, 33 PASS, 6 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage, equipment-state-to-release, independent facility IR/F-N aggregate closure, equipment-level contribution/ranking closure, and literature-frequency uncertainty closure are PASS; diagnostic isolation union extension covers 39 events, 64 cases, and 256 risk atoms with provider-response state snapshots bound for 20/20 isolation cases; qualified packet and facility QRA remain withheld",
+  "current_union_external_equipment_model_contract_audit_status": "NATIVE_ACCIDENT_EXPORT_METHODS_FOUND; 7/7 external lh2dt component classes expose export_accident_history(request); native methods use component thermodynamic/hydraulic state and explicit mass/energy/termination ledgers; 7 PRISM diagnostic adapters verified; no qualified packet promotion",
+  "current_union_ijhe_audit_status": "INCOMPLETE_EVIDENCE; 39 checks, 34 PASS, 5 BLOCKED; 34 events, 44 cases, 176 risk atoms; atom-level release-to-final-damage, equipment-state-to-release, independent facility IR/F-N aggregate closure, equipment-level contribution/ranking closure, and literature-frequency uncertainty closure are PASS; diagnostic isolation union extension covers 39 events, 64 cases, and 256 risk atoms with provider-response state snapshots bound for 20/20 isolation cases; qualified packet and facility QRA remain withheld",
   "current_union_facility_assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261026/native_full_scope_union_assessment/campaign_result.json",
@@ -2520,8 +2520,7 @@
   "current_union_observed_state_model_binding_diagnostic_adapter_component_count": 3,
   "current_union_observed_state_model_binding_facility_component_identity_resolved_count": 0,
   "current_union_observed_state_model_binding_facility_component_identity_unresolved_count": 3,
-  "current_union_observed_state_model_binding_qualified_provider_packet_count": 0
+  "current_union_observed_state_model_binding_qualified_provider_packet_count": 0,
+  "external_lh2dt_native_export_smoke_manifest_record": "results/20261026/native_full_scope_union_assessment/external_native_export_smoke/manifest.json",
+  "external_lh2dt_native_export_smoke_status": "ALL_7_NATIVE_EXPORTS_EXECUTED_DIAGNOSTIC; 7/7 strict packet smoke conversions; qualified provider packets 0; physical validation false; facility QRA false"
 }
-
-
-
