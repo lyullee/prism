@@ -28,7 +28,44 @@
     "qualified_evidence_withheld_case_count": 29,
     "annual_condition_count": 5,
     "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
-    "conditional_ir_fn_available": true
+    "conditional_ir_fn_available": true,
+    "release_boundary": {
+      "schema": "prism.release_termination_inventory_ledger.v1",
+      "status": "PARTIAL_RELEASE_BOUNDARY_COVERAGE",
+      "case_count": 44,
+      "provider_packet_consumed_case_count": 44,
+      "complete_row_count": 15,
+      "withheld_case_count": 29,
+      "uncomputed_case_count": 0,
+      "termination_basis_counts": {
+        "emergency_relief_discharge": 1,
+        "inventory_depletion": 16,
+        "inventory_over_600s": 1,
+        "synthetic_diagnostic_horizon": 24,
+        "two_sided_rupture": 2
+      },
+      "isolation_status_counts": {
+        "not_declared": 44
+      },
+      "inventory_status_counts": {
+        "not_inventory_termination": 27,
+        "provider_declared_inventory_depletion": 16,
+        "provider_declared_inventory_over_600s": 1
+      },
+      "synthetic_horizon_case_count": 24,
+      "strict_release_boundary_ready": false,
+      "blocking_reasons": [
+        "29 release case(s) are operator/domain limited",
+        "24 release case(s) end at a synthetic diagnostic horizon",
+        "44 release case(s) have no reviewed isolation status"
+      ],
+      "promotion_policy": {
+        "duration_is_not_inferred": true,
+        "isolation_is_not_inferred": true,
+        "inventory_depletion_is_not_inferred": true,
+        "facility_ir_fn_promotion": "independent qualification and physical-validation gates remain required"
+      }
+    }
   },
   "equipment": {
     "component_rows": [

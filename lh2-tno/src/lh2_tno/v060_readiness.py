@@ -8,6 +8,7 @@ versioned record.
 """
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -162,6 +163,108 @@ def _scenario_evidence_summary(audit: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
+    """Summarize duration, isolation, inventory, and domain closure evidence.
+
+    This is an accounting view of the already-built facility ledger.  It does
+    not infer a termination time or convert a synthetic horizon into a valid
+    isolation event.  The explicit status is carried into the readiness report
+    so a reviewer can see the release boundary before considering facility
+    IR/F-N promotion.
+    """
+    ledger = facility.get("release_termination_inventory_ledger")
+    if not isinstance(ledger, Mapping):
+        return {
+            "schema": None,
+            "status": "NOT_REPORTED",
+            "case_count": 0,
+            "termination_basis_counts": {},
+            "isolation_status_counts": {},
+            "inventory_status_counts": {},
+            "strict_release_boundary_ready": False,
+            "blocking_reasons": [
+                "release termination/inventory ledger is not present"
+            ],
+        }
+    rows = ledger.get("rows", ())
+    rows = rows if isinstance(rows, Sequence) and not isinstance(rows, (str, bytes)) else ()
+    summary = ledger.get("summary")
+    summary = summary if isinstance(summary, Mapping) else {}
+
+    def _count(field: str) -> dict[str, int]:
+        def _value(row: Mapping[str, Any]) -> str:
+            if field == "termination_basis":
+                termination = row.get("termination")
+                if isinstance(termination, Mapping):
+                    return str(termination.get("basis", "not_declared"))
+            return str(row.get(field, "not_declared"))
+
+        return dict(sorted(Counter(
+            _value(row)
+            for row in rows
+            if isinstance(row, Mapping)
+        ).items()))
+
+    termination_counts = _count("termination_basis")
+    if not termination_counts:
+        termination_counts = dict(summary.get("termination_basis_counts", {}))
+    isolation_counts = _count("isolation_status")
+    inventory_counts = _count("inventory_status")
+    case_count = summary.get("case_count", len(rows))
+    try:
+        case_count = max(0, int(case_count or 0))
+    except (TypeError, ValueError):
+        case_count = len(rows)
+    withheld = summary.get(
+        "withheld_case_count",
+        summary.get("operator_limited_or_domain_incomplete_row_count", 0),
+    )
+    uncomputed = summary.get("uncomputed_row_count", 0)
+    synthetic_horizon_count = termination_counts.get("synthetic_diagnostic_horizon", 0)
+    not_declared_isolation_count = isolation_counts.get("not_declared", 0)
+    blocking: list[str] = []
+    if uncomputed:
+        blocking.append(f"{uncomputed} release case(s) have no numerical result")
+    if withheld:
+        blocking.append(f"{withheld} release case(s) are operator/domain limited")
+    if synthetic_horizon_count:
+        blocking.append(
+            f"{synthetic_horizon_count} release case(s) end at a synthetic diagnostic horizon"
+        )
+    if not_declared_isolation_count:
+        blocking.append(
+            f"{not_declared_isolation_count} release case(s) have no reviewed isolation status"
+        )
+    strict_ready = bool(case_count) and not blocking
+    return {
+        "schema": ledger.get("schema_version"),
+        "status": (
+            "COMPLETE_RELEASE_BOUNDARY_COVERAGE"
+            if strict_ready
+            else "PARTIAL_RELEASE_BOUNDARY_COVERAGE"
+        ),
+        "case_count": case_count,
+        "provider_packet_consumed_case_count": summary.get(
+            "provider_packet_consumed_row_count", 0
+        ),
+        "complete_row_count": summary.get("complete_row_count", 0),
+        "withheld_case_count": withheld,
+        "uncomputed_case_count": uncomputed,
+        "termination_basis_counts": termination_counts,
+        "isolation_status_counts": isolation_counts,
+        "inventory_status_counts": inventory_counts,
+        "synthetic_horizon_case_count": synthetic_horizon_count,
+        "strict_release_boundary_ready": strict_ready,
+        "blocking_reasons": blocking,
+        "promotion_policy": {
+            "duration_is_not_inferred": True,
+            "isolation_is_not_inferred": True,
+            "inventory_depletion_is_not_inferred": True,
+            "facility_ir_fn_promotion": "independent qualification and physical-validation gates remain required",
+        },
+    }
+
+
 def build_v060_readiness_report(
     *,
     objective_audit: Mapping[str, Any],
@@ -217,6 +320,7 @@ def build_v060_readiness_report(
     timing = timing if isinstance(timing, Mapping) else {}
     uncertainty = facility.get("frequency_uncertainty")
     uncertainty = uncertainty if isinstance(uncertainty, Mapping) else {}
+    release_boundary = _release_boundary_summary(facility)
     domains = [
         {
             "id": row.get("id"),
@@ -257,6 +361,7 @@ def build_v060_readiness_report(
             "annual_condition_count": coverage.get("annual_condition_count"),
             "scenario_branch_status": coverage.get("scenario_branch_status"),
             "conditional_ir_fn_available": facility.get("conditional_diagnostic_facility_risk_available"),
+            "release_boundary": release_boundary,
         },
         "equipment": {
             "component_rows": component_rows,
@@ -432,6 +537,38 @@ def validate_v060_readiness_report(
             errors.append(
                 "conditional IR/F-N availability cannot promote facility_total_risk_available"
             )
+
+    release_boundary = chain.get("release_boundary")
+    if release_boundary is not None:
+        if not isinstance(release_boundary, Mapping):
+            errors.append("chain.release_boundary must be an object")
+        else:
+            _nonnegative_int(
+                release_boundary.get("case_count", 0),
+                "chain.release_boundary.case_count",
+                errors,
+            )
+            for field in (
+                "termination_basis_counts",
+                "isolation_status_counts",
+                "inventory_status_counts",
+            ):
+                counts = release_boundary.get(field)
+                if not isinstance(counts, Mapping):
+                    errors.append(f"chain.release_boundary.{field} must be an object")
+                    continue
+                for key, count in counts.items():
+                    _nonnegative_int(
+                        count,
+                        f"chain.release_boundary.{field}.{key}",
+                        errors,
+                    )
+            if release_boundary.get("strict_release_boundary_ready") is True and release_boundary.get(
+                "blocking_reasons"
+            ):
+                errors.append(
+                    "strict release boundary cannot be ready while blocking reasons remain"
+                )
 
     equipment = value.get("equipment")
     equipment = equipment if isinstance(equipment, Mapping) else {}

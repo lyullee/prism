@@ -47,6 +47,33 @@ def _inputs():
             },
             "timing": {"case_p95_ms": 2000.0, "case_p99_ms": 3000.0, "stage_elapsed_ms": {}},
             "frequency_uncertainty": {"scenario_count": 3, "correlation_comparison_present": True},
+            "release_termination_inventory_ledger": {
+                "schema_version": "prism.release_termination_inventory_ledger.v1",
+                "summary": {
+                    "case_count": 3,
+                    "complete_row_count": 2,
+                    "withheld_case_count": 1,
+                    "uncomputed_row_count": 0,
+                    "provider_packet_consumed_row_count": 3,
+                },
+                "rows": [
+                    {
+                        "termination": {"basis": "inventory_depletion"},
+                        "isolation_status": "not_declared",
+                        "inventory_status": "provider_declared_inventory_depletion",
+                    },
+                    {
+                        "termination": {"basis": "synthetic_diagnostic_horizon"},
+                        "isolation_status": "not_declared",
+                        "inventory_status": "not_inventory_termination",
+                    },
+                    {
+                        "termination": {"basis": "inventory_over_600s"},
+                        "isolation_status": "reviewed_isolation_success",
+                        "inventory_status": "provider_declared_inventory_over_600s",
+                    },
+                ],
+            },
         },
         "completion_audit": {"status": "INCOMPLETE_EVIDENCE"},
         "validation_matrix": {
@@ -100,6 +127,11 @@ def test_report_keeps_conditional_chain_and_strict_gate_separate():
     assert report["accident_families"]["rows"][0]["conditional_status"] == "EXECUTED"
     assert report["timing"]["cache_meets_one_hz_all_samples"] is True
     assert report["timing"]["fresh_physics_meets_one_hz"] is False
+    release = report["chain"]["release_boundary"]
+    assert release["status"] == "PARTIAL_RELEASE_BOUNDARY_COVERAGE"
+    assert release["termination_basis_counts"]["synthetic_diagnostic_horizon"] == 1
+    assert release["isolation_status_counts"]["not_declared"] == 2
+    assert release["strict_release_boundary_ready"] is False
 
 
 def test_report_marks_explicit_exclusions_and_withheld_cases():
