@@ -1,0 +1,44 @@
+{
+  "status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.DynamicReliquefier",
+  "mode": "reliquefier",
+  "provider_result_digest": "eb1350b9f6adb50ed9a3cb696876b0bace488662cf6ac5c6d79de80c0b78c1e7",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "reliquefier-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 102000.0,
+    "temperature_k": 300.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "vapour",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "measurements": {},
+    "source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "d7162c84a88a2136c6340efa4427c3d7b3f39ae559749fccbdcadb27a0b6e576",
+    "provider_echo_digest": "d7162c84a88a2136c6340efa4427c3d7b3f39ae559749fccbdcadb27a0b6e576",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.5,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": 1.6940658945086007e-21,
+  "strict_packet_energy_residual_j": 7.105427357601002e-15,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
+    "short fixed diagnostic horizon retains residual inventory",
+    "no site calibration, failure frequency, isolation logic or independent physical validation"
+  ]
+}

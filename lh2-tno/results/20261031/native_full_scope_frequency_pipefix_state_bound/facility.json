@@ -1,0 +1,304 @@
+{
+  "id": "generic-lh2-near-receptor-diagnostic",
+  "configuration_origin": "synthetic",
+  "environment": "outdoor",
+  "components": [
+    {
+      "id": "storage-tank-01",
+      "kind": "storage_tank",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "volume_m3": 10.0
+      }
+    },
+    {
+      "id": "liquid-transfer-line-01",
+      "kind": "pipe",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 10.0,
+        "diameter_m": 0.025
+      }
+    },
+    {
+      "id": "transfer-valve-01",
+      "kind": "valve",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "diameter_m": 0.025
+      }
+    },
+    {
+      "id": "pressure-relief-vent-01",
+      "kind": "vent_stack",
+      "position_enu_m": [
+        0.0,
+        3.0,
+        5.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 6.0,
+        "diameter_m": 0.025
+      }
+    },
+    {
+      "id": "liquid-transfer-pump-01",
+      "kind": "pump",
+      "position_enu_m": [
+        6.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "diameter_m": 0.025
+      }
+    },
+    {
+      "id": "ambient-vaporizer-01",
+      "kind": "vaporizer",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "diameter_m": 0.025
+      }
+    },
+    {
+      "id": "reliquefier-01",
+      "kind": "reliquefier",
+      "position_enu_m": [
+        13.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {
+        "diameter_m": 0.025
+      }
+    },
+    {
+      "id": "receiving-boundary-01",
+      "kind": "boundary",
+      "position_enu_m": [
+        16.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "Hydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+      },
+      "parameters_si": {}
+    }
+  ],
+  "ports": [
+    {
+      "id": "tank-out",
+      "component_id": "storage-tank-01",
+      "phase": "liquid",
+      "direction": "out",
+      "position_enu_m": null
+    },
+    {
+      "id": "tank-accident-out",
+      "component_id": "storage-tank-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "line-out",
+      "component_id": "liquid-transfer-line-01",
+      "phase": "liquid",
+      "direction": "out",
+      "position_enu_m": null
+    },
+    {
+      "id": "line-accident-out",
+      "component_id": "liquid-transfer-line-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        5.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "valve-out",
+      "component_id": "transfer-valve-01",
+      "phase": "liquid",
+      "direction": "out",
+      "position_enu_m": null
+    },
+    {
+      "id": "valve-accident-out",
+      "component_id": "transfer-valve-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        7.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "vent-out",
+      "component_id": "pressure-relief-vent-01",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": [
+        0.0,
+        3.0,
+        5.0
+      ]
+    },
+    {
+      "id": "vent-accident-out",
+      "component_id": "pressure-relief-vent-01",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": [
+        0.0,
+        3.0,
+        5.0
+      ]
+    },
+    {
+      "id": "pump-out",
+      "component_id": "liquid-transfer-pump-01",
+      "phase": "liquid",
+      "direction": "out",
+      "position_enu_m": null
+    },
+    {
+      "id": "pump-accident-out",
+      "component_id": "liquid-transfer-pump-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        6.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "vaporizer-out",
+      "component_id": "ambient-vaporizer-01",
+      "phase": "two_phase",
+      "direction": "out",
+      "position_enu_m": null
+    },
+    {
+      "id": "vaporizer-accident-out",
+      "component_id": "ambient-vaporizer-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "reliquefier-out",
+      "component_id": "reliquefier-01",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": null
+    },
+    {
+      "id": "reliquefier-accident-out-1",
+      "component_id": "reliquefier-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        13.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "reliquefier-accident-out-2",
+      "component_id": "reliquefier-01",
+      "phase": "any",
+      "direction": "out",
+      "position_enu_m": [
+        13.5,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "boundary-in",
+      "component_id": "receiving-boundary-01",
+      "phase": "liquid",
+      "direction": "in",
+      "position_enu_m": null
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {
+      "id": "worker-01",
+      "position_enu_m": [
+        0.5,
+        0.0,
+        1.0
+      ]
+    }
+  ]
+}

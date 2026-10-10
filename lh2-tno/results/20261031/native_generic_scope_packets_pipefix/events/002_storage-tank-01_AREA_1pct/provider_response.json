@@ -1,0 +1,156 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+  "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+  "provider_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+    "component_id": "storage-tank-01",
+    "port_id": "tank-accident-out",
+    "duration_s": 5.999999999999999e-06,
+    "available_mass_kg": 0.028492061899609754,
+    "cumulative_mass_out_kg": 0.00010057968692257683,
+    "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+    "termination_basis": "inventory_depletion",
+    "upstream_service": "LH2",
+    "fluid": "Hydrogen",
+    "phase_basis": "liquid",
+    "reference_area_m2": 0.012667686977437444,
+    "reference_area_provenance": "external LayeredTank commanded-valve full-opening area",
+    "cumulative_specific_enthalpy_out_j": 2.853445213178332,
+    "droplet_partition_provenance": "provider liquid-port ground interception; no airborne-liquid promotion",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "total_mass_flow_kg_s": 16.775101386761072,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 16.775101386761072,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28371.660189794453,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.775101386761072,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 1e-06,
+        "total_mass_flow_kg_s": 16.770347964797185,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 16.770347964797185,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28370.970232059633,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.770347964797185,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 2e-06,
+        "total_mass_flow_kg_s": 16.765627490520128,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 16.765627490520128,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28370.31532938174,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.765627490520128,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 3e-06,
+        "total_mass_flow_kg_s": 16.760912065638898,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 16.760912065638898,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28369.660858318653,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.760912065638898,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 4e-06,
+        "total_mass_flow_kg_s": 16.756201682280405,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 16.756201682280405,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28369.006818332935,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.756201682280405,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      },
+      {
+        "time_s": 4.9999999999999996e-06,
+        "total_mass_flow_kg_s": 16.751496332579155,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 16.751496332579155,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28368.35320888791,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 16.751496332579155,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      }
+    ],
+    "provider_meta": {
+      "status": "PRECOMPUTED_EXTERNAL_LAYERED_TANK_EXPORT",
+      "source_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43"
+    }
+  }
+}

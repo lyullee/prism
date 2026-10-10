@@ -1,0 +1,154 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_state_snapshot_digest": "f6c63898e4e4f9c7c26285f2b17d85ef7bfcb26afb1c81b833609ce62ed9f06b",
+  "provider_model": "lh2dt.VentStack",
+  "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+  "data": {
+    "event_kind": "emergency_relief",
+    "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+    "component_id": "pressure-relief-vent-01",
+    "port_id": "vent-accident-out",
+    "duration_s": 0.5,
+    "available_mass_kg": 0.0008087150217064195,
+    "cumulative_mass_out_kg": 0.0006739291847553497,
+    "cumulative_static_enthalpy_out_j": 447.1260099855737,
+    "termination_provenance": "external VentStack bounded diagnostic horizon; steady two-port inventory is not depleted",
+    "termination_basis": "emergency_relief_discharge",
+    "fluid": "Hydrogen",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.05,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.1,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.15000000000000002,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.2,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.25,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.30000000000000004,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.35000000000000003,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.4,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      },
+      {
+        "time_s": 0.45,
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "pressure_pa_abs": 101325.0,
+        "specific_enthalpy_j_kg": 663461.4141957508,
+        "temperature_k": 39.99550120724947,
+        "density_kg_m3": 0.6238550038899486,
+        "effective_area_m2": 7.853981633974483e-05,
+        "velocity_m_s": 27.508741070641776,
+        "area_provenance": "external VentStack inner bore",
+        "velocity_origin": "mass_continuity_from_declared_area"
+      }
+    ],
+    "provider_meta": {
+      "hydraulic": {
+        "mass_flow_kg_s": 0.0013478583695106993,
+        "reynolds_number": 86295.21630744069,
+        "pressure_drop_pa": 675.0
+      },
+      "upstream": {
+        "pressure_pa": 102000.0,
+        "temperature_k": 40.0
+      },
+      "downstream_pressure_pa": 101325.0,
+      "model_class": "lh2dt.VentStack"
+    }
+  }
+}

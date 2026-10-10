@@ -26,6 +26,7 @@ from .provider_release import (
     load_provider_release,
     load_provider_release_set,
 )
+from .state_snapshot import EquipmentStateSnapshot
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -69,6 +70,49 @@ def _load_selected_release(
             f"selected packet event_id disagrees with worklist: {event_id} != {release.event_id}"
         )
     return release
+
+
+def _load_selected_state_snapshot(
+    packet_path: Path,
+    *,
+    event_id: str,
+    component_id: str,
+) -> tuple[dict[str, Any], str] | None:
+    """Load the canonical state echoed beside a native provider packet.
+
+    Native exporters keep accident-owned release fields in the resolved packet
+    and the state-only handoff in ``verification.json``.  Rebinding a packet
+    must carry both contracts into the campaign request; otherwise the packet
+    can be exact while the facility ledger loses the equipment-state identity.
+    Older diagnostic fixtures may not have a verification sidecar, so the
+    helper remains optional for those fixtures.
+    """
+    verification_path = packet_path.with_name("verification.json")
+    if not verification_path.exists():
+        return None
+    verification = _load_json(verification_path)
+    raw_snapshot = verification.get("state_snapshot")
+    if raw_snapshot is None:
+        return None
+    snapshot = EquipmentStateSnapshot.from_mapping(raw_snapshot)
+    if snapshot.component_id != component_id:
+        raise ProviderReleaseContractError(
+            f"selected state snapshot component disagrees with worklist: {event_id}"
+        )
+    handoff = verification.get("state_snapshot_handoff")
+    digest = snapshot.digest()
+    if isinstance(handoff, dict):
+        if handoff.get("digest") not in (None, digest):
+            raise ProviderReleaseContractError(
+                f"selected state snapshot digest disagrees with verification: {event_id}"
+            )
+        echoed = handoff.get("provider_echo_digest")
+        echoed_values = echoed if isinstance(echoed, list) else [echoed]
+        if any(value not in (None, digest) for value in echoed_values):
+            raise ProviderReleaseContractError(
+                f"provider state snapshot echo disagrees with canonical snapshot: {event_id}"
+            )
+    return snapshot.to_mapping(), digest
 
 
 def _defaults_from_request(request: dict[str, Any]) -> dict[str, Any]:
@@ -190,6 +234,24 @@ def rebind_campaign_to_worklist_packets(
         current_request = branch["request"]
         if not isinstance(current_request, dict):
             raise ValueError(f"campaign request must be an object: {event_id}")
+        selected_paths = evidence_row.get("evidence", {}).get("resolved_packet_paths")
+        if not isinstance(selected_paths, list) or len(selected_paths) != 1:
+            raise ProviderReleaseContractError(
+                f"worklist event requires exactly one selected resolved packet: {event_id}"
+            )
+        packet_path = _resolve_packet_path(selected_paths[0], packet_root_path)
+        selected_snapshot = _load_selected_state_snapshot(
+            packet_path,
+            event_id=event_id,
+            component_id=str(evidence_row.get("component_id") or current_request.get("component_id") or ""),
+        )
+        if selected_snapshot is not None:
+            snapshot_payload, snapshot_digest = selected_snapshot
+            current_request = copy.deepcopy(current_request)
+            current_request["state_snapshot"] = snapshot_payload
+            current_request["state_snapshot_digest"] = snapshot_digest
+            current_request["provider_state_snapshot_digest"] = snapshot_digest
+            current_request["provider_state_snapshot_digests"] = [snapshot_digest]
         branch["request"] = _request_from_selected_packet(current_request, release)
         rebound.append(event_id)
     validated = RiskCampaign.model_validate_json(json.dumps(output, ensure_ascii=False, allow_nan=False))

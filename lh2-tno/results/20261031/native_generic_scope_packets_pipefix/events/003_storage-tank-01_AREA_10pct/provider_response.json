@@ -1,0 +1,51 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.LayeredTankNetworkSimulator+CommandedValve",
+  "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+  "provider_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+    "component_id": "storage-tank-01",
+    "port_id": "tank-accident-out",
+    "duration_s": 1e-06,
+    "available_mass_kg": 0.028492061899609754,
+    "cumulative_mass_out_kg": 0.0001675637589142158,
+    "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+    "termination_basis": "inventory_depletion",
+    "upstream_service": "LH2",
+    "fluid": "Hydrogen",
+    "phase_basis": "liquid",
+    "reference_area_m2": 0.12667686977437445,
+    "reference_area_provenance": "external LayeredTank commanded-valve full-opening area",
+    "cumulative_specific_enthalpy_out_j": 4.753464706792074,
+    "droplet_partition_provenance": "provider liquid-port ground interception; no airborne-liquid promotion",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "total_mass_flow_kg_s": 167.5637589142158,
+        "gas_mass_flow_kg_s": 0.0,
+        "ground_liquid_mass_flow_kg_s": 167.5637589142158,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 28368.095449718385,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 167.5637589142158,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ]
+      }
+    ],
+    "provider_meta": {
+      "status": "PRECOMPUTED_EXTERNAL_LAYERED_TANK_EXPORT",
+      "source_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43"
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "schema_version": "prism.native_full_scope_frequency_assessment.v1",
+  "status": "NATIVE_FULL_SCOPE_FREQUENCY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "configuration_origin": "synthetic",
+  "equipment_component_count": 8,
+  "frequency_asset_count": 7,
+  "frequency_event_count": 24,
+  "campaign_case_count": 24,
+  "executed_case_count": 24,
+  "fully_validated_case_count": 5,
+  "operator_limited_case_count": 19,
+  "strict_uncomputed_case_count": 19,
+  "risk_atom_count": 96,
+  "frequency_checks": {
+    "event_count": 24,
+    "risk_atom_count": 96,
+    "risk_atom_frequency_match_count": 96,
+    "risk_atom_frequency_mismatch_count": 0,
+    "risk_atom_frequency_mismatch_event_ids": [],
+    "frequency_is_taken_from_catalogue_event": true
+  },
+  "frequency_scenario_count": 3,
+  "provider_worklist_event_count": 24,
+  "provider_worklist_packet_count": 0,
+  "provider_worklist_status": "READY_FOR_PROVIDER_PACKETS",
+  "provider_worklist_alignment_status": "ALIGNED",
+  "conditional_diagnostic_facility_risk_available": true,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      4.6800000000000006e-05,
+      4.6800000000000006e-05
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.6800000000000006e-05
+      ]
+    },
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.6800000000000006e-05
+      ]
+    }
+  ],
+  "facility_total_risk_available": false,
+  "scope_matrix_status": "PARTIAL_DECLARED_SCOPE",
+  "scope_matrix_complete": false,
+  "scope_matrix_blocking_reasons": [
+    "vessel_hole: PARTIAL",
+    "pipe_hole: PARTIAL",
+    "valve_hole: PARTIAL",
+    "pump_hole: PARTIAL",
+    "liquid_two_phase: PARTIAL",
+    "inventory_depletion: PARTIAL",
+    "two_sided_rupture: PARTIAL",
+    "vertical_handoff: NO_EVENT_GENERATED",
+    "campaign does not provide total facility annual IR"
+  ],
+  "timing": {
+    "runner_elapsed_ms": 335109.89670001436,
+    "campaign": {
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1525.0441000098363,
+      "case_median_ms": 4561.958150006831,
+      "case_max_ms": 80328.79159995355,
+      "case_p95_ms": 72321.08100001344,
+      "case_p99_ms": 79742.7270129649,
+      "campaign_elapsed_ms": 335109.50859996956,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    },
+    "assessment": {
+      "campaign_count": 1,
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1525.0441000098363,
+      "case_median_ms": 4561.958150006831,
+      "case_max_ms": 80328.79159995355,
+      "case_p95_ms": 72321.08100001344,
+      "case_p99_ms": 79742.7270129649,
+      "campaign_elapsed_ms": 335109.50859996956,
+      "campaign_elapsed_ms_sum": 335109.50859996956,
+      "campaign_elapsed_ms_min": 335109.50859996956,
+      "campaign_elapsed_ms_median": 335109.50859996956,
+      "campaign_elapsed_ms_max": 335109.50859996956,
+      "campaign_elapsed_ms_p95": 335109.50859996956,
+      "campaign_elapsed_ms_p99": 335109.50859996956,
+      "stage_elapsed_ms": {
+        "cloud_observation": {
+          "sample_count": 22,
+          "sum_ms": 50391.57040056307,
+          "median_ms": 283.9883000124246,
+          "max_ms": 33419.912299956195,
+          "p95_ms": 6095.413720008218,
+          "p99_ms": 27688.597402967254
+        },
+        "endpoint_a": {
+          "sample_count": 2,
+          "sum_ms": 6729.137400048785,
+          "median_ms": 3364.5687000243925,
+          "max_ms": 3403.35999999661,
+          "p95_ms": 3399.4808699993882,
+          "p99_ms": 3402.5841739971656
+        },
+        "endpoint_aggregation": {
+          "sample_count": 2,
+          "sum_ms": 13396.818499895744,
+          "median_ms": 6698.409249947872,
+          "max_ms": 6769.395099952817,
+          "p95_ms": 6762.2965149523225,
+          "p99_ms": 6767.975382952718
+        },
+        "endpoint_b": {
+          "sample_count": 2,
+          "sum_ms": 6664.751500007696,
+          "median_ms": 3332.375750003848,
+          "max_ms": 3364.3298000097275,
+          "p95_ms": 3361.1343950091396,
+          "p99_ms": 3363.69071900961
+        },
+        "fire_explosion_damage_risk": {
+          "sample_count": 22,
+          "sum_ms": 2954.086799873039,
+          "median_ms": 98.81304996088147,
+          "max_ms": 470.4016000032425,
+          "p95_ms": 227.2897700080648,
+          "p99_ms": 419.4074050034394
+        },
+        "near_field_and_dispersion": {
+          "sample_count": 22,
+          "sum_ms": 241736.6480003111,
+          "median_ms": 2670.813700009603,
+          "max_ms": 72922.5574999582,
+          "p95_ms": 42242.97944495337,
+          "p99_ms": 66575.04970395585
+        },
+        "pool": {
+          "sample_count": 22,
+          "sum_ms": 3764.7463999455795,
+          "median_ms": 128.84174997452646,
+          "max_ms": 372.5228999974206,
+          "p95_ms": 364.4793099840171,
+          "p99_ms": 370.94283899408765
+        },
+        "source": {
+          "sample_count": 22,
+          "sum_ms": 16240.081200376153,
+          "median_ms": 725.7563500315882,
+          "max_ms": 817.320599919185,
+          "p95_ms": 795.8373400033452,
+          "p99_ms": 812.9082689364441
+        }
+      },
+      "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+    }
+  },
+  "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "manifest and annual conditions are synthetic generic outdoor inputs",
+    "literature rates are applied to generated events; no field-frequency or sensor-frequency learning is used",
+    "19 cases have numerical outputs but remain EXECUTED_OPERATOR_LIMITED because the provider boundary is constant-state or otherwise open",
+    "vertical handoff is retained as an explicit accident-family scope row and remains uncomputed in this campaign",
+    "conditional IR/F-N is the sum of evaluated atoms and is not a qualified facility total or credible interval",
+    "provider qualification and independent physical validation remain closed"
+  ]
+}

@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from lh2_tno.campaign_packet_rebind import (
+    _load_selected_state_snapshot,
     _request_from_selected_packet,
     packet_rebind_provenance,
     rebind_request_to_compressible_handoff,
@@ -90,6 +91,47 @@ def test_rebind_preserves_campaign_facility_placement_and_provider_clock():
     assert rebound["resolved_release"]["duration_s"] == 0.2
     assert rebound["release_termination"]["basis"] == "reviewed_isolation_success"
     assert rebound["evaluation_times_s"] == [0.0, 0.2, 1.0, 2.0, 3.0, 5.0]
+
+
+def test_selected_packet_state_snapshot_is_loaded_from_verification_sidecar(tmp_path):
+    packet_path = tmp_path / "resolved_release.json"
+    packet_path.write_text("{}\n", encoding="utf-8")
+    snapshot = {
+        "schema_version": "prism.equipment_state_snapshot.v1",
+        "component_id": "storage-tank-01",
+        "captured_at_s": 0.0,
+        "origin": "model_prediction",
+        "pressure_pa_abs": 600000.0,
+        "temperature_k": 20.9,
+        "mass_kg": 1.0,
+        "phase": "liquid",
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "measurements": {},
+        "source_digest": None,
+        "quality": "valid",
+    }
+    from lh2_tno.state_snapshot import EquipmentStateSnapshot
+
+    digest = EquipmentStateSnapshot.from_mapping(snapshot).digest()
+    (tmp_path / "verification.json").write_text(
+        json.dumps({
+            "state_snapshot": snapshot,
+            "state_snapshot_handoff": {
+                "digest": digest,
+                "provider_echo_digest": digest,
+            },
+        }),
+        encoding="utf-8",
+    )
+
+    payload, actual_digest = _load_selected_state_snapshot(
+        packet_path,
+        event_id="event-01",
+        component_id="storage-tank-01",
+    )
+
+    assert payload["component_id"] == "storage-tank-01"
+    assert actual_digest == digest
 
 
 def test_rebind_provenance_is_separate_from_strict_campaign_schema():

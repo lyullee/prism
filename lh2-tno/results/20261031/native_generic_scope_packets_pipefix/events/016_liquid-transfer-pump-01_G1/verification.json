@@ -1,0 +1,44 @@
+{
+  "status": "EXTERNAL_LH2DT_MAPPED_PUMP_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+  "provider_model": "lh2dt.MappedPump",
+  "provider_result_digest": "5690e9cc0fbba465f3de79078e47e7738a0b319cdd0fbddc8e008018c9435c72",
+  "state_snapshot": {
+    "schema_version": "prism.equipment_state_snapshot.v1",
+    "component_id": "liquid-transfer-pump-01",
+    "captured_at_s": 0.0,
+    "origin": "synthetic",
+    "pressure_pa_abs": 120000.0,
+    "temperature_k": 20.0,
+    "mass_kg": null,
+    "liquid_fraction": null,
+    "phase": "liquid",
+    "position_enu_m": [
+      0.0,
+      0.0,
+      0.5
+    ],
+    "measurements": {},
+    "source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+    "quality": "valid"
+  },
+  "state_snapshot_handoff": {
+    "present": true,
+    "digest": "099d32d3dca5671005671414cf87eced203caacf0bb87969a030ef0a95dfbbf0",
+    "provider_echo_digest": "099d32d3dca5671005671414cf87eced203caacf0bb87969a030ef0a95dfbbf0",
+    "digest_match": true
+  },
+  "strict_packet_duration_s": 0.2,
+  "strict_packet_interval_count": 10,
+  "strict_packet_mass_residual_kg": -5.421010862427522e-20,
+  "strict_packet_energy_residual_j": -2.220446049250313e-16,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "frequency_inference": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "MappedPump owns no tank inventory; available mass is an explicit feed-through diagnostic reserve",
+    "synthetic H-Q-N map, liquid states, downstream pressure and atmospheric valve geometry",
+    "coupled pump/valve pressure boundary is a numerical diagnostic closure when enabled",
+    "no pump seal failure mode, isolation logic, field frequency or independent physical validation"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "storage-tank-01",
+  "port_id": "tank-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "explicit external LayeredTank inventory-threshold diagnostic; not site-calibrated",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_liquid_exit",
+  "phase_basis": "liquid",
+  "enthalpy_convention": "provider_total_outlet_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+  "provider_result_digest": "92423ee6d4064e5afa18974df1db115f8c5e2edef953c8f2de4bf3d3bba3387c",
+  "provider_boundary_reference": "lh2dt LayeredTank explicit liquid accidental outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    0.7071067811865475,
+    0.0,
+    -0.7071067811865475
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 1e-06,
+  "available_mass_kg": 0.028492061899609754,
+  "cumulative_mass_out_kg": 0.0001675637589142158,
+  "cumulative_specific_enthalpy_out_j": 4.753464706792074,
+  "reference_area_m2": 0.12667686977437445,
+  "reference_area_provenance": "external LayeredTank commanded-valve full-opening area",
+  "steps": [
+    {
+      "time_s": 0.0,
+      "total_mass_flow_kg_s": 167.5637589142158,
+      "gas_mass_flow_kg_s": 0.0,
+      "ground_liquid_mass_flow_kg_s": 167.5637589142158,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 28368.095449718385,
+      "gas_pressure_pa_abs": null,
+      "gas_temperature_k": null,
+      "gas_density_kg_m3": null,
+      "gas_effective_area_m2": null,
+      "gas_velocity_m_s": null,
+      "gas_velocity_origin": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 167.5637589142158,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": 0.0,
+          "impact_position_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "droplet_diameter_m": 0.001
+        }
+      ]
+    }
+  ],
+  "termination_provenance": "external LayeredTank positive inventory threshold; no zero-mass extrapolation",
+  "droplet_partition_provenance": "provider liquid-port ground interception; no airborne-liquid promotion",
+  "pool_footprint": null,
+  "no_rainout_evidence": null,
+  "termination_basis": "inventory_depletion",
+  "failure_opening_diameter_m": 0.4016092628413842
+}
