@@ -33,6 +33,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     aggregate_chain = _load("facility_aggregate_closure_audit.json")
     component_contribution_chain = _load("facility_component_contribution_audit.json")
     frequency_uncertainty_chain = _load("facility_frequency_uncertainty_audit.json")
+    status_consistency = _load("status_consistency_current.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -144,6 +145,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     )
     assert frequency_uncertainty_chain["scenario_count"] == 5
     assert frequency_uncertainty_chain["mismatch_count"] == 0
+    assert status_consistency["status"] == "CONSISTENT"
+    assert len(status_consistency["checks"]) == 19
+    assert status_consistency["blocking_reasons"] == []
+    assert status_consistency["facility_ir_fn_promotion"] is False
 
     assert result["event_count"] == 34
     assert result["case_count"] == 44
