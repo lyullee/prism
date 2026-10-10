@@ -149,8 +149,8 @@
   "equipment_scenario_coverage_accident_port_crosswalk": true,
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
-  "frequency_port_binding_latest_remote_commit": "d0eac32922af0619b6eeba9e27c71639c8bcf49c",
-  "latest_local_full_test_run": "870 passed, 1 skipped",
+  "frequency_port_binding_latest_remote_commit": "40880cd863ed0fa2b0116342f8247b868ff7a0c5",
+  "latest_local_full_test_run": "872 passed, 1 skipped",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
   "equipment_campaign_compiler_record": "docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md",
@@ -2711,5 +2711,13 @@
   "ijhe_completion_audit_frequency_port_binding_policy": "Diagnostic-only port-trace audit from public facility assessment to merged ledger; a blocked/missing trace never infers a port and never opens strict facility QRA.",
   "v060_readiness_frequency_port_binding_trace_implemented": true,
   "v060_readiness_frequency_port_binding_trace_field": "chain.frequency_port_binding",
-  "v060_readiness_frequency_port_binding_trace_policy": "Readiness summarizes the public assessment and nested ledger port trace, rejects mirror drift, and remains diagnostic-only; it never infers a port, reallocates frequency, or opens facility QRA."
+  "v060_readiness_frequency_port_binding_trace_policy": "Readiness summarizes the public assessment and nested ledger port trace, rejects mirror drift, and remains diagnostic-only; it never infers a port, reallocates frequency, or opens facility QRA.",
+  "facility_evidence_request_frequency_port_trace_implemented": true,
+  "facility_evidence_request_frequency_port_trace_fields": [
+    "case_requests[*].frequency_port_ids",
+    "case_requests[*].provider_packet_port_ids",
+    "case_requests[*].exact_match_required.reviewed_frequency_port_ids",
+    "case_requests[*].port_binding"
+  ],
+  "facility_evidence_request_frequency_port_trace_policy": "When provider evidence is missing, reviewed frequency_port_ids remain the exact requested accident ports; provider port disagreement is PORT_BINDING_MISMATCH and cannot be promoted. No frequency inference or port substitution is performed."
 }
