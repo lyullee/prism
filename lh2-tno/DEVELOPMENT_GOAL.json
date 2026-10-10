@@ -2522,5 +2522,7 @@
   "current_union_observed_state_model_binding_facility_component_identity_unresolved_count": 3,
   "current_union_observed_state_model_binding_qualified_provider_packet_count": 0,
   "external_lh2dt_native_export_smoke_manifest_record": "results/20261026/native_full_scope_union_assessment/external_native_export_smoke/manifest.json",
-  "external_lh2dt_native_export_smoke_status": "ALL_7_NATIVE_EXPORTS_EXECUTED_DIAGNOSTIC; 7/7 strict packet smoke conversions; qualified provider packets 0; physical validation false; facility QRA false"
+  "external_lh2dt_native_export_smoke_status": "ALL_7_NATIVE_EXPORTS_EXECUTED_DIAGNOSTIC; 7/7 strict packet smoke conversions; qualified provider packets 0; physical validation false; facility QRA false",
+  "external_lh2dt_native_export_regression_summary_record": "results/20261026/native_full_scope_union_assessment/external_native_export_smoke/external_regression_summary.json",
+  "external_lh2dt_native_export_regression_status": "PASS; external lh2dt full regression 1493 passed, 0 failed, 0 skipped; no-fitting audit refreshed at 657 scanned Python files; solver/contract evidence only; qualified packet and facility QRA remain withheld"
 }

@@ -118,5 +118,9 @@
     "synthetic geometry and initial states",
     "native export contract smoke only",
     "no field qualification, independent validation, frequency inference, or facility IR/F-N promotion"
-  ]
+  ],
+  "external_regression_summary_record": "results/20261026/native_full_scope_union_assessment/external_native_export_smoke/external_regression_summary.json",
+  "external_regression_status": "PASS; 1493 passed, 0 failed, 0 skipped; no-fitting static audit refreshed at 657 scanned Python files",
+  "external_regression_test_count": 1493,
+  "external_regression_duration_s": 1099.78
 }
