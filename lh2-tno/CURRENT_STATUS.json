@@ -155,8 +155,8 @@
   "equipment_scenario_coverage_accident_port_crosswalk": true,
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
-  "frequency_port_binding_latest_remote_commit": "40880cd863ed0fa2b0116342f8247b868ff7a0c5",
-  "latest_local_full_test_run": "872 passed, 1 skipped",
+  "frequency_port_binding_latest_remote_commit": "9d8733ec58a4f5689c5da884273c429bcab521d3",
+  "latest_local_full_test_run": "873 passed, 1 skipped",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -3604,5 +3604,9 @@
     "case_requests[*].exact_match_required.reviewed_frequency_port_ids",
     "case_requests[*].port_binding"
   ],
-  "facility_evidence_request_frequency_port_trace_policy": "When provider evidence is missing, reviewed frequency_port_ids remain the exact requested accident ports; provider port disagreement is PORT_BINDING_MISMATCH and cannot be promoted. No frequency inference or port substitution is performed."
+  "facility_evidence_request_frequency_port_trace_policy": "When provider evidence is missing, reviewed frequency_port_ids remain the exact requested accident ports; provider port disagreement is PORT_BINDING_MISMATCH and cannot be promoted. No frequency inference or port substitution is performed.",
+  "facility_evidence_request_frequency_port_summary_implemented": true,
+  "facility_evidence_request_frequency_port_summary_field": "frequency_port_binding",
+  "facility_evidence_request_frequency_port_summary_observed_current": "Current 44-case saved assessment: reviewed_frequency_port_case_count=0; provider_packet_only_case_count=44; status=PORT_BINDING_WITHHELD; no frequency inference or port substitution.",
+  "facility_evidence_request_frequency_port_summary_policy": "Provider outlet identity is reported separately from reviewed literature-frequency ports; provider-only coverage never opens frequency binding or facility QRA."
 }
