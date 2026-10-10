@@ -2802,5 +2802,14 @@
   "generic_provider_release_closure_request_export_record": "results/20261106/generic_lh2_provider_closure_requests.json",
   "generic_provider_release_closure_request_export_sha256": "4144E997504E5F3EB1723C7D9BA5A0B4B17939218F6F31449A2362C2E6340D51",
   "generic_provider_release_closure_request_export_status": "OPEN_PROVIDER_CLOSURE_REQUESTS; 15 open packet requests; diagnostic-only; frequency/QRA promotion false",
-  "generic_provider_release_closure_request_export_count": 15
+  "generic_provider_release_closure_request_export_count": 15,
+  "external_operational_timeseries_audit_implemented": true,
+  "external_operational_timeseries_audit_script": "scripts/audit_inspection_center_timeseries.py",
+  "external_operational_timeseries_audit_summary_record": "results/20261106/external_support_center_timeseries_summary.json",
+  "external_operational_timeseries_audit_summary_sha256": "6CFDB014005C2C38F23261A5ECCA128E319BA5DF578610AE0936DC7C304BDD54",
+  "external_operational_timeseries_audit_status": "SCREENING_ONLY_UNIT_BASIS_UNCONFIRMED; 17 workbooks, 78 sheets, 0 read errors, 522 numeric signal columns unconfirmed; state/provider/frequency/QRA promotion false",
+  "external_operational_timeseries_audit_workbook_count": 17,
+  "external_operational_timeseries_audit_sheet_count": 78,
+  "external_operational_timeseries_audit_numeric_signal_unit_unconfirmed_count": 522,
+  "external_operational_timeseries_audit_state_snapshot_binding_allowed": false
 }
