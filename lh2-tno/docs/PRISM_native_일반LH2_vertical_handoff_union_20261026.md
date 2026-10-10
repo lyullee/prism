@@ -105,6 +105,8 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
 - `scope_matrix.json`: 12개 주요 사고군의 병합 상태
 - `facility_assessment.json`: 조건부 IR/F-N과 시설 QRA gate
 - `facility_evidence_request.json`: 각 사고군·case의 provider packet·물리검증·종료/재고 증거 요구
+- `facility_case_packet_coverage.json`: 44개 facility case별 qualified provider packet 대조
+  결과. 현재 `NO_CASE_MATCH`이며 0/44 case가 qualified 상태다.
 - `verification.json`: 병합 수·상태·제한 자동 검사
 - `native_state_snapshot_campaign_ledger.json`: 새로 실행한 기본 24개 native 사건의
   상태 snapshot, component ID, provider result digest 대조. 24/24가 일치한다.
@@ -116,7 +118,7 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
   대조한다. union 전체의 상태 연결은 기본 24개 ledger와
   `extension_state_snapshot_coverage.json`의 확장 10개 event를 함께 확인하며,
   현재 34/34 event가 `BOUND_AND_ECHOED`이다.
-- `ijhe_completion_audit.json`: 최신 재생은 30개 검사 중 27개 PASS·3개 BLOCKED다. `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, 구조적 `provider_worklist_coverage`도 PASS로 기록하지만 둘 다 diagnostic-only다. `diagnostic_observed_equipment_state_evidence`는 검사센터 Excel 3개에서 읽은 8,955개 상태 sample과 3개 component를 보존하지만 상태 증거만 기록한다. `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 qualified provider·시설 IR/F-N을 열지 않는다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 같은 승격 제한을 유지한다.
+- `ijhe_completion_audit.json`: 최신 재생은 32개 검사 중 27개 PASS·5개 BLOCKED다. `diagnostic_native_scope_packet_catalog_coverage`는 24/24 exact native packet과 상태 snapshot 결합을 확인하고, 구조적 `provider_worklist_coverage`도 PASS로 기록하지만 둘 다 diagnostic-only다. `facility_case_provider_packet_coverage`는 44개 case를 모두 qualified provider 증거 없음으로 차단한다. `diagnostic_observed_equipment_state_evidence`는 검사센터 Excel 3개에서 읽은 8,955개 상태 sample과 3개 component를 보존하지만 상태 증거만 기록한다. `diagnostic_slabx_lh2_validation_evidence`는 6개 FFI·6개 FLACS 비교와 질량/반복성 장부를 확인하지만 qualified provider·시설 IR/F-N을 열지 않는다. `diagnostic_native_full_bore_chain`과 `diagnostic_equipment_state_snapshot_binding`도 같은 승격 제한을 유지한다.
 
 이번 benchmark에서는 fresh physics가 약 2.73초로 1 Hz를 충족하지 않았고, 동일 요청
 cache는 10/10 hit·p95 약 23.3 ms였다. 따라서 cache 조회만 1 Hz 진단 경로로 기록되며,

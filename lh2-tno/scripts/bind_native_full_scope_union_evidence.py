@@ -53,6 +53,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     scope = _load(output_dir / "scope_matrix.json")
     campaign = _load(output_dir / "campaign_result.json")
     facility = _load(output_dir / "facility_assessment.json")
+    facility_case_packet_coverage_path = output_dir / "facility_case_packet_coverage.json"
+    facility_case_packet_coverage = (
+        _load(facility_case_packet_coverage_path)
+        if facility_case_packet_coverage_path.is_file()
+        else None
+    )
+    if facility_case_packet_coverage is not None:
+        facility_case_packet_coverage["_record_path"] = str(
+            facility_case_packet_coverage_path
+        )
     current_status = _load(args.current_status)
 
     source_audit = _load(args.ijhe_audit_source)
@@ -94,6 +104,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         provider_worklist,
         registry,
         facility_assessment=facility_record,
+        facility_case_packet_coverage=facility_case_packet_coverage,
         vertical_handoff_result=vertical,
         native_model_contract_audit=native_model_contract_audit,
         frequency_provenance_report=frequency_provenance_report,
@@ -138,6 +149,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "ijhe_audit_blocked_count": sum(
                 row["status"] == "BLOCKED" for row in audit["checks"]
             ),
+            "ijhe_audit_blocked_check_ids": [
+                row["name"] for row in audit["checks"] if row["status"] == "BLOCKED"
+            ],
             "state_snapshot_binding_status": (
                 state_snapshot_binding.get("status") if state_snapshot_binding else None
             ),
@@ -193,6 +207,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             ),
             "slabx_validation_evidence_physical_validation_claim": (
                 slabx_validation.get("physical_validation_claim") if slabx_validation else None
+            ),
+            "facility_case_packet_coverage_status": (
+                facility_case_packet_coverage.get("status")
+                if facility_case_packet_coverage
+                else None
+            ),
+            "facility_case_packet_coverage_case_count": (
+                facility_case_packet_coverage.get("case_request_count")
+                if facility_case_packet_coverage
+                else None
+            ),
+            "facility_case_packet_coverage_qualified_case_count": (
+                facility_case_packet_coverage.get("qualified_provider_case_count")
+                if facility_case_packet_coverage
+                else None
             ),
         }
     )

@@ -24,6 +24,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     rebound = _load("vertical_handoff_rebound_result.json")
     inventory_rebound = _load("inventory_depletion_rebound_result.json")
     audit = _load("ijhe_completion_audit.json")
+    case_packet_coverage = _load("facility_case_packet_coverage.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -59,14 +60,18 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["realtime_cache_benchmark_fresh_physics_meets_one_hz"] is False
     assert verification["ijhe_audit_status"] == "INCOMPLETE_EVIDENCE"
     assert verification["ijhe_audit_check_count"] == 32
-    assert verification["ijhe_audit_pass_count"] == 28
-    assert verification["ijhe_audit_blocked_count"] == 4
+    assert verification["ijhe_audit_pass_count"] == 27
+    assert verification["ijhe_audit_blocked_count"] == 5
     assert verification["ijhe_audit_blocked_check_ids"] == [
         "facility_release_boundary",
         "actual_provider_release_packet",
         "declared_major_accident_scope",
         "facility_ir_fn_available",
+        "facility_case_provider_packet_coverage",
     ]
+    assert verification["facility_case_packet_coverage_status"] == "NO_CASE_MATCH"
+    assert verification["facility_case_packet_coverage_case_count"] == 44
+    assert verification["facility_case_packet_coverage_qualified_case_count"] == 0
     assert verification["native_scope_packet_catalog_status"] == (
         "NATIVE_GENERIC_SCOPE_PACKET_CATALOG_EXECUTED"
     )
@@ -76,7 +81,6 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["state_snapshot_binding_record_count"] == 24
     assert verification["state_snapshot_binding_bound_count"] == 24
     assert verification["state_snapshot_binding_unbound_count"] == 0
-    assert verification["ijhe_audit_blocked_count"] == 4
 
     assert result["event_count"] == 34
     assert result["case_count"] == 44
@@ -135,19 +139,32 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert assessment["population_accounting"]["mismatched_receptor_ids"] == {}
     assert assessment["facility_total_risk_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
+    assert assessment["strict_release_boundary"]["strict_release_boundary_ready"] is False
+    assert case_packet_coverage["status"] == "NO_CASE_MATCH"
+    assert case_packet_coverage["case_request_count"] == 44
+    assert case_packet_coverage["qualified_provider_case_count"] == 0
+    assert case_packet_coverage["status_counts"] == {
+        "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 44
+    }
     assert evidence_request["status"] == "OPEN_EVIDENCE_REQUEST"
     assert evidence_request["case_request_count"] == 44
     assert len(evidence_request["family_requests"]) == 12
     assert evidence_request["promotion_gate"]["facility_ir_fn_remains_withheld_until_all_true"] is True
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
     assert len(audit["checks"]) == 32
-    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 28
-    assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 4
+    assert sum(check["status"] == "PASS" for check in audit["checks"]) == 27
+    assert sum(check["status"] == "BLOCKED" for check in audit["checks"]) == 5
     release_boundary_check = next(
         check for check in audit["checks"]
         if check["name"] == "facility_release_boundary"
     )
     assert release_boundary_check["status"] == "BLOCKED"
+    coverage_check = next(
+        check for check in audit["checks"]
+        if check["name"] == "facility_case_provider_packet_coverage"
+    )
+    assert coverage_check["status"] == "BLOCKED"
+    assert coverage_check["evidence"]["case_request_count"] == 44
     assert release_boundary_check["evidence"]["schema"] == (
         "prism.facility_release_boundary_gate.v1"
     )

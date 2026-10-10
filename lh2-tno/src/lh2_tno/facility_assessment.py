@@ -305,6 +305,11 @@ def build_facility_assessment(
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
         "release_termination_inventory_ledger": release_termination_inventory_ledger,
+        # Promote the facility release-boundary gate to the public assessment
+        # envelope.  Completion audits consume the envelope rather than
+        # reaching into the nested ledger, so omitting this field would make a
+        # real gate disappear from the final IJHE audit.
+        "strict_release_boundary": ledger.get("strict_release_boundary"),
         "conditional_diagnostic_facility_coverage": ledger[
             "conditional_diagnostic_facility_coverage"
         ],

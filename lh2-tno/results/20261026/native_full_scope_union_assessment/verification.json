@@ -117,13 +117,14 @@
   },
   "ijhe_audit_status": "INCOMPLETE_EVIDENCE",
   "ijhe_audit_check_count": 32,
-  "ijhe_audit_pass_count": 28,
-  "ijhe_audit_blocked_count": 4,
+  "ijhe_audit_pass_count": 27,
+  "ijhe_audit_blocked_count": 5,
   "ijhe_audit_blocked_check_ids": [
     "facility_release_boundary",
     "actual_provider_release_packet",
     "declared_major_accident_scope",
-    "facility_ir_fn_available"
+    "facility_ir_fn_available",
+    "facility_case_provider_packet_coverage"
   ],
   "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
   "state_snapshot_binding_record_count": 24,
@@ -134,5 +135,8 @@
   "native_scope_packet_catalog_exact_packet_count": 24,
   "slabx_validation_evidence_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
   "slabx_validation_evidence_check_count": 5,
-  "slabx_validation_evidence_physical_validation_claim": false
+  "slabx_validation_evidence_physical_validation_claim": false,
+  "facility_case_packet_coverage_status": "NO_CASE_MATCH",
+  "facility_case_packet_coverage_case_count": 44,
+  "facility_case_packet_coverage_qualified_case_count": 0
 }

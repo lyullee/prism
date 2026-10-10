@@ -21,6 +21,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.contracts import canonical_digest  # noqa: E402
+from lh2_tno.facility_case_packet_coverage import (  # noqa: E402
+    audit_facility_case_packet_coverage,
+)
 from lh2_tno.facility_evidence_request import build_facility_evidence_request  # noqa: E402
 from lh2_tno.facility_ledger import merge_facility_campaign_results  # noqa: E402
 from lh2_tno.campaign_namespace import rebind_campaign_result  # noqa: E402
@@ -437,6 +440,27 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         frequency_scenarios=scenarios,
     )
     evidence_request = build_facility_evidence_request(assessment, merged_scope)
+    # Every declared facility case must have an explicit provider-evidence
+    # disposition.  The union runner has no qualified provider catalog to
+    # consume today, so this deliberately produces a fail-closed report with
+    # one missing-evidence row per case.  Passing the report back through the
+    # assessment builder makes the absence actionable without treating a
+    # diagnostic packet as qualified evidence.
+    facility_case_packet_coverage = audit_facility_case_packet_coverage(
+        evidence_request,
+        (),
+    )
+    facility_case_packet_coverage["_record_path"] = str(
+        args.output_dir / "facility_case_packet_coverage.json"
+    )
+    assessment = build_facility_assessment(
+        [base_result, vertical_result, inventory_result],
+        expected_component_ids=expected_components,
+        scope_matrices=[base_scope, vertical_scope, inventory_scope],
+        required_accident_families=MAJOR_ACCIDENT_FAMILIES,
+        frequency_scenarios=scenarios,
+        facility_case_packet_coverage=facility_case_packet_coverage,
+    )
 
     vertical_row = next(
         row for row in merged_scope["rows"] if row["family"] == "vertical_handoff"
@@ -501,6 +525,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "facility_evidence_request_promotion_allowed": (
             assessment["complete_facility_qra_claim"] is True
         ),
+        "facility_case_packet_coverage_status": facility_case_packet_coverage[
+            "status"
+        ],
+        "facility_case_packet_coverage_case_count": facility_case_packet_coverage[
+            "case_request_count"
+        ],
+        "facility_case_packet_coverage_qualified_case_count": facility_case_packet_coverage[
+            "qualified_provider_case_count"
+        ],
         "native_state_snapshot_campaign_status": native_state_snapshot_ledger["status"],
         "native_state_snapshot_campaign_event_count": native_state_snapshot_ledger.get("event_count"),
         "native_state_snapshot_campaign_case_count": native_state_snapshot_ledger.get("case_count"),
@@ -567,6 +600,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     _save(output / "facility_assessment.json", assessment)
     _save(output / "facility_evidence_request.json", evidence_request)
+    _save(output / "facility_case_packet_coverage.json", facility_case_packet_coverage)
     _save(output / "native_state_snapshot_campaign_ledger.json", native_state_snapshot_ledger)
     _save(
         output / "extension_state_snapshot_coverage.json",

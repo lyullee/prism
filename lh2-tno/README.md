@@ -16,10 +16,12 @@ union에 추가한 vertical handoff 5개와 inventory depletion 5개도 원래 p
 나머지 qualified provider·독립 물리검증·엄격한 전체범위·시설 전체 QRA gate는 여전히 보류됩니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
-최신 fail-closed IJHE 감사는 30개 검사 중 27개 PASS·3개 BLOCKED이며, native
+최신 fail-closed IJHE 감사는 32개 검사 중 27개 PASS·5개 BLOCKED입니다. native
 catalog의 24/24 exact packet과 구조적 worklist coverage는 diagnostic-only로
-통과시켰습니다. qualified provider packet은 0건이고, objective
-coverage에는 시설 전체 상태 snapshot coverage를 통과한 뒤에도 4개 strict gate가 남습니다.
+통과시켰고, 44개 시설 case를 case별로 대조하는 `facility_case_packet_coverage.json`도
+생성했습니다. 현재 qualified provider case는 0/44건이므로 모든 case가 명시적으로
+증거 요청 상태이며, 시설 전체 상태 snapshot coverage를 통과한 뒤에도 방출경계·provider
+packet·주요사고 범위·시설 IR/F-N·case packet coverage gate가 남습니다.
 native catalog와 SLABx-LH2 구성요소 PASS는 qualified provider 또는 전체 물리검증 승인을
 의미하지 않습니다.
 

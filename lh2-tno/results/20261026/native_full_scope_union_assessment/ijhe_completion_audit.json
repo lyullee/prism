@@ -191,27 +191,6 @@
       "interpretation": "The selected literature frequency profiles and generated event rows have source and catalogue digest provenance. This does not make the rates field-validated or create a facility credible interval."
     },
     {
-      "name": "external_scenario_evidence_import",
-      "status": "PASS",
-      "diagnostic_only": true,
-      "blocking_reason": null,
-      "evidence": {
-        "record": "results\\20261020\\inspection_center_scenario_evidence_reaudit.json",
-        "status": "SCREENING_EVIDENCE_IMPORTED",
-        "source_file_count": 3,
-        "record_count": 52,
-        "scope_status_counts": {
-          "CANDIDATE_OUTDOOR_SCREENING": 41,
-          "OUTSIDE_DECLARED_OUTDOOR_SCOPE": 11
-        },
-        "frequency_applied": false,
-        "sensor_frequency_learning_used": false,
-        "provider_packet_created": false,
-        "facility_qra_claim": false
-      },
-      "interpretation": "External procedure and failure tables are retained as facility-neutral screening evidence. Candidate families and monitoring tags do not create a frequency, provider release packet or facility IR/F-N result."
-    },
-    {
       "name": "provider_worklist_scope_alignment",
       "status": "PASS",
       "diagnostic_only": true,
@@ -4063,13 +4042,43 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
+    },
+    {
+      "name": "facility_case_provider_packet_coverage",
+      "status": "BLOCKED",
+      "diagnostic_only": false,
+      "blocking_reason": "facility cases do not all have exact qualified provider packet evidence",
+      "evidence": {
+        "record": "results\\20261026\\native_full_scope_union_assessment\\facility_case_packet_coverage.json",
+        "schema": "prism.facility_case_provider_coverage.v1",
+        "status": "NO_CASE_MATCH",
+        "case_request_count": 44,
+        "qualified_provider_event_count": 0,
+        "qualified_provider_case_count": 0,
+        "provider_evidence_row_count": 0,
+        "status_counts": {
+          "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 44
+        },
+        "blocking_reasons": [
+          "one or more facility cases have no qualified provider evidence"
+        ],
+        "promotion_policy": {
+          "frequency_is_not_assigned": true,
+          "sensor_frequency_learning": false,
+          "exact_case_identity_required": true,
+          "physical_validation_claim": false,
+          "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates"
+        }
+      },
+      "interpretation": "Every merged facility weather/release case must resolve to an exact qualified provider packet before the facility chain can be presented as complete. A packet may be reused across weather cases, but missing case identity remains a blocker; this check never infers frequency or physical validation."
     }
   ],
   "blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
     "one or more declared accident families are missing, partial, or uncomputed",
-    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+    "facility cases do not all have exact qualified provider packet evidence"
   ],
   "physical_validation_claim": false,
   "complete_facility_qra_claim": false,

@@ -859,6 +859,9 @@ def test_facility_assessment_reconciles_case_packet_coverage_and_withholds_qra()
     assert assessment["facility_case_packet_coverage_complete"] is False
     assert assessment["qualified_facility_qra_available"] is False
     assert assessment["complete_facility_qra_claim"] is False
+    assert assessment["strict_release_boundary"] == assessment["facility_risk_ledger"][
+        "strict_release_boundary"
+    ]
 
 
 def test_facility_assessment_accepts_exact_full_case_packet_coverage():
