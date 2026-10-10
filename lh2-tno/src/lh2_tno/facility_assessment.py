@@ -305,6 +305,21 @@ def build_facility_assessment(
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
         "release_termination_inventory_ledger": release_termination_inventory_ledger,
+        # Keep the reviewed accident-exit trace at the public assessment
+        # boundary.  Consumers should not have to reach into the nested
+        # facility ledger to determine whether an IR/F-N row still points to
+        # the same equipment port that received the literature frequency.
+        "frequency_port_binding": ledger.get(
+            "frequency_port_binding",
+            {
+                "schema_version": "prism.frequency_port_binding.v1",
+                "status": "LEGACY_UNAUDITED",
+                "port_scoped_event_count": None,
+                "port_unbound_event_count": None,
+                "mismatch_count": None,
+                "policy": "Legacy facility ledger has no port-binding audit; no port is inferred.",
+            },
+        ),
         # Promote the facility release-boundary gate to the public assessment
         # envelope.  Completion audits consume the envelope rather than
         # reaching into the nested ledger, so omitting this field would make a
@@ -337,6 +352,11 @@ def build_facility_assessment(
             "partial_scope": "missing equipment, accident families, or event case accounting remains explicit and withholds facility totals",
             "conditional_diagnostic_facility": "the atom-level facility IR/F-N sum is exposed for diagnostics and frequency sensitivity, while qualification blockers continue to withhold the facility total",
             "frequency": "optional literature scenarios reweight saved risk atoms and do not infer missing frequency",
+            "frequency_port_binding": (
+                "the reviewed accident port is exposed at the assessment boundary and is "
+                "checked through events, cases, risk atoms and the merged facility ledger; "
+                "legacy rows remain unaudited rather than receiving an inferred port"
+            ),
             "provider_packet": ledger["semantics"]["provider_packet"],
             "facility_case_packet_coverage": (
                 "exact facility case identity must be qualified before the facility QRA gate can open; "

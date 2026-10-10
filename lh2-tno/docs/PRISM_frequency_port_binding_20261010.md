@@ -51,6 +51,8 @@ PRISM은 이벤트를 만들 때 다음을 확인한다.
 
 여러 설비 캠페인을 합치는 `merge_facility_campaign_results()`도 같은 비교를 다시 한다. 최종 ledger의 `frequency_port_binding`에 포트 지정 사건 수, 미지정 사건 수, case/risk atom 불일치 수와 상태가 기록된다. 사건의 포트와 최종 행의 포트가 다르면 시설 범위는 `PORT_BINDING_MISMATCH`로 보류된다.
 
+`build_facility_assessment()`도 이 요약을 최상위 `frequency_port_binding`으로 복사한다. 따라서 보고서 소비자는 중첩 ledger를 열지 않고도 포트 결합 상태를 확인할 수 있다.
+
 포트가 다르면 빈도를 억지로 붙이지 않고 오류를 낸다. 이 오류는 해당 사고 케이스가 **미계산**이라는 뜻이며, 빈도를 0으로 바꾸거나 다른 포트로 옮기지 않는다.
 
 이 검사는 `bind_event()`에만 있지 않다. 이미 빈도가 들어 있는 `ConsequenceRequest`를 JSON으로 직접 만들더라도 요청 검증기가 provider 방출 포트와 `frequency_event.port_ids`를 다시 비교한다.

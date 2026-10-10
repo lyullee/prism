@@ -715,6 +715,8 @@ def test_facility_assessment_combines_ledger_and_frequency_scenarios():
     ]["known_contribution_annual_ir_low_high"]
     assert assessment["fresh_physics_executed"] is False
     assert assessment["frequency_uncertainty"]["fresh_physics_executed"] is False
+    assert assessment["frequency_port_binding"]["status"] == "ALIGNED"
+    assert assessment["frequency_port_binding"] == assessment["facility_risk_ledger"]["frequency_port_binding"]
     assert assessment["facility_risk_ledger"]["component_contributions"]["tank-01"]
     assert assessment["assessment_digest"]
 
