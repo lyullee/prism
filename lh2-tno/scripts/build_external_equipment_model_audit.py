@@ -22,6 +22,10 @@ def main() -> int:
     parser.add_argument("--private-inputs-audit", type=Path, required=True)
     parser.add_argument("--connection-event-register", type=Path, required=True)
     parser.add_argument("--observation-judgements", type=Path, required=True)
+    parser.add_argument("--pid-evidence", type=Path)
+    parser.add_argument("--port-mappings", type=Path)
+    parser.add_argument("--component-bindings", type=Path)
+    parser.add_argument("--flow-crosswalk", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -30,6 +34,10 @@ def main() -> int:
             args.private_inputs_audit,
             args.connection_event_register,
             args.observation_judgements,
+            pid_evidence_path=args.pid_evidence,
+            port_mappings_path=args.port_mappings,
+            component_bindings_path=args.component_bindings,
+            flow_crosswalk_path=args.flow_crosswalk,
         )
     except (ExternalEquipmentModelAuditError, OSError, TypeError, ValueError) as error:
         raise SystemExit(f"external equipment model audit input error: {error}") from error

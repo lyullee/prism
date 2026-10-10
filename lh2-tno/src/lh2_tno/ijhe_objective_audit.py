@@ -1047,6 +1047,34 @@ def build_ijhe_objective_coverage_audit(
             if isinstance(external_equipment_model_audit, Mapping)
             else {}
         )
+        equipment_pid_identity = (
+            external_equipment_model_audit.get("pid_identity_evidence", {})
+            if isinstance(external_equipment_model_audit, Mapping)
+            else {}
+        )
+        if not isinstance(equipment_pid_identity, Mapping):
+            equipment_pid_identity = {}
+        equipment_pid_ports = (
+            external_equipment_model_audit.get("pid_port_evidence", {})
+            if isinstance(external_equipment_model_audit, Mapping)
+            else {}
+        )
+        if not isinstance(equipment_pid_ports, Mapping):
+            equipment_pid_ports = {}
+        equipment_component_bindings = (
+            external_equipment_model_audit.get("component_binding_evidence", {})
+            if isinstance(external_equipment_model_audit, Mapping)
+            else {}
+        )
+        if not isinstance(equipment_component_bindings, Mapping):
+            equipment_component_bindings = {}
+        equipment_flow_crosswalk = (
+            external_equipment_model_audit.get("flow_crosswalk_evidence", {})
+            if isinstance(external_equipment_model_audit, Mapping)
+            else {}
+        )
+        if not isinstance(equipment_flow_crosswalk, Mapping):
+            equipment_flow_crosswalk = {}
         rows.append(_row(
             "diagnostic_external_equipment_model_readiness",
             "외부 액화수소 설비 모델의 상태 입력 준비도와 사고 방출 경계를 분리하여 기록해야 한다",
@@ -1087,6 +1115,41 @@ def build_ijhe_objective_coverage_audit(
                     equipment_observation.get("verified_raw_historian_session_count")
                     if isinstance(equipment_observation, Mapping)
                     else None
+                ),
+                "pid_exact_asset_id_overlap_count": equipment_pid_identity.get(
+                    "exact_asset_id_overlap_count"
+                ),
+                "pid_source_backed_overlap_count": equipment_pid_identity.get(
+                    "source_backed_overlap_count"
+                ),
+                "pid_unmatched_external_asset_count": len(
+                    equipment_pid_identity.get("unmatched_external_asset_ids", [])
+                    if isinstance(
+                        equipment_pid_identity.get("unmatched_external_asset_ids", []),
+                        list,
+                    )
+                    else []
+                ),
+                "pid_confirmed_port_mapping_count": equipment_pid_ports.get(
+                    "confirmed_port_mapping_count"
+                ),
+                "pid_candidate_port_mapping_count": equipment_pid_ports.get(
+                    "candidate_port_mapping_count"
+                ),
+                "component_binding_enabled_edge_count": equipment_component_bindings.get(
+                    "enabled_edge_count"
+                ),
+                "component_binding_unresolved_edge_count": equipment_component_bindings.get(
+                    "unresolved_edge_count"
+                ),
+                "flow_candidate_pairing_count": equipment_flow_crosswalk.get(
+                    "candidate_pairing_count"
+                ),
+                "flow_unresolved_tag_count": equipment_flow_crosswalk.get(
+                    "unresolved_flow_tag_count"
+                ),
+                "general_facility_identity_resolved": equipment_pid_identity.get(
+                    "identity_is_general_facility_resolved"
                 ),
                 "accident_release_packet_allowed": equipment_model_gates.get(
                     "accident_release_packet_allowed"

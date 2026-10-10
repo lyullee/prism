@@ -387,6 +387,24 @@ def test_objective_audit_records_external_equipment_readiness_without_release_pr
         "observation_provenance": {
             "verified_raw_historian_session_count": 0,
         },
+        "pid_identity_evidence": {
+            "exact_asset_id_overlap_count": 9,
+            "source_backed_overlap_count": 9,
+            "unmatched_external_asset_ids": ["PIPE-CATALOG", "VALVE-CATALOG"],
+            "identity_is_general_facility_resolved": False,
+        },
+        "pid_port_evidence": {
+            "confirmed_port_mapping_count": 14,
+            "candidate_port_mapping_count": 13,
+        },
+        "component_binding_evidence": {
+            "enabled_edge_count": 0,
+            "unresolved_edge_count": 27,
+        },
+        "flow_crosswalk_evidence": {
+            "candidate_pairing_count": 10,
+            "unresolved_flow_tag_count": 11,
+        },
         "promotion_gates": {
             "state_model_input_allowed": True,
             "accident_release_packet_allowed": False,
@@ -410,6 +428,11 @@ def test_objective_audit_records_external_equipment_readiness_without_release_pr
     assert check["status"] == "PASS"
     assert check["observed"]["state_model_ready_asset_count"] == 2
     assert check["observed"]["physical_time_assigned_event_count"] == 0
+    assert check["observed"]["pid_exact_asset_id_overlap_count"] == 9
+    assert check["observed"]["pid_confirmed_port_mapping_count"] == 14
+    assert check["observed"]["component_binding_enabled_edge_count"] == 0
+    assert check["observed"]["flow_unresolved_tag_count"] == 11
+    assert check["observed"]["general_facility_identity_resolved"] is False
     assert report["strict_blocking_check_ids"] == [
         "independent_physical_validation",
         "qualified_provider_evidence",

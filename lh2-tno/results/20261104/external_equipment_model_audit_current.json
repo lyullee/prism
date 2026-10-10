@@ -112,6 +112,55 @@
     "fitting": false,
     "source_policy": "P&ID geometry and procedure intent are retained as evidence. Physical event times, installed route length, and feedback states require explicit institution historian/DCS/PLC fields."
   },
+  "pid_identity_evidence": {
+    "supplied": true,
+    "external_asset_count": 12,
+    "equipment_evidence_row_count": 9,
+    "exact_asset_id_overlap_count": 9,
+    "exact_asset_id_overlap": [
+      "L-1101A/B/C/D",
+      "TK-1101",
+      "TK-1102",
+      "V-1101",
+      "VP-1101",
+      "VP-1102",
+      "VP-1103",
+      "VP-1301",
+      "VP-1302"
+    ],
+    "source_backed_overlap_count": 9,
+    "unmatched_external_asset_ids": [
+      "PIPE-CATALOG",
+      "VALVE-CATALOG",
+      "VIRTUAL-LH2-PUMP-01"
+    ],
+    "identity_is_general_facility_resolved": false
+  },
+  "pid_port_evidence": {
+    "supplied": true,
+    "asset_scoped_mapping_count": 27,
+    "status_counts": {
+      "confirmed": 14,
+      "candidate_mapping": 13
+    },
+    "confirmed_port_mapping_count": 14,
+    "candidate_port_mapping_count": 13,
+    "port_crosswalk_promotion_allowed": false
+  },
+  "component_binding_evidence": {
+    "supplied": true,
+    "node_binding_count": 10,
+    "edge_binding_count": 27,
+    "enabled_edge_count": 0,
+    "unresolved_edge_count": 27,
+    "numerical_topology_promotion_allowed": false
+  },
+  "flow_crosswalk_evidence": {
+    "supplied": true,
+    "candidate_pairing_count": 10,
+    "unresolved_flow_tag_count": 11,
+    "promotion_allowed": false
+  },
   "observation_provenance": {
     "verified_raw_historian_session_count": 0,
     "explicit_reconstructed_session_count": 20,
@@ -178,6 +227,30 @@
       "label": "external observation judgements",
       "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_observation_evidence_judgements.json",
       "sha256": "e92341928e60725d15fc14af41faf8733323724821d9d52fb653dedce834047f",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external P&ID equipment evidence",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_pid_evidence.json",
+      "sha256": "f76143d3034f99f6020f501d0fcc1de753edc4e429a68b009e6f769746698019",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external P&ID port mappings",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_port_mappings.json",
+      "sha256": "3fc766ab39e44d9dc5973e7511f54cb9da15d967dfe4a7ef4807fa9572eb8e1c",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external component bindings",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_component_bindings.json",
+      "sha256": "2d308d55172e04e240dcb54c3c32fbd91a244450e14cf70855a36777d63bb37d",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external flow P&ID candidate crosswalk",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_flow_pid_candidate_crosswalk.json",
+      "sha256": "ab7cad2bbdcd04fb0422e062356186eadd1ab7a8a5816d8f86bd070f3dba133a",
       "schema_version": "0.1"
     }
   ]
