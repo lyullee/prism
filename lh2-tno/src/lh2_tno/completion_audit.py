@@ -1445,6 +1445,46 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+        # The final assessment must retain the same reviewed accident-port
+        # identity that entered the frequency and provider ledgers.  This is
+        # diagnostic evidence only: the strict facility-QRA gates remain
+        # independent, but a stale/missing port trace must be visible in the
+        # completion report rather than silently disappearing in nesting.
+        port_binding = assessment.get("frequency_port_binding")
+        nested_ledger = assessment.get("facility_risk_ledger")
+        nested_port_binding = (
+            nested_ledger.get("frequency_port_binding")
+            if isinstance(nested_ledger, Mapping)
+            else None
+        )
+        port_binding_valid = (
+            isinstance(port_binding, Mapping)
+            and port_binding.get("schema_version") == "prism.frequency_port_binding.v1"
+            and port_binding.get("status") == "ALIGNED"
+            and port_binding.get("mismatch_count") == 0
+            and (
+                nested_port_binding is None
+                or nested_port_binding == port_binding
+            )
+        )
+        checks.append(
+            {
+                "name": "diagnostic_facility_frequency_port_binding",
+                "status": "PASS" if port_binding_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": None,
+                "evidence": {
+                    "record": assessment.get("_record_path"),
+                    "frequency_port_binding": port_binding,
+                    "nested_ledger_frequency_port_binding": nested_port_binding,
+                },
+                "interpretation": (
+                    "The reviewed accident-port list remains aligned from the public facility "
+                    "assessment to the merged ledger. A blocked diagnostic row withholds the "
+                    "traceability claim but never infers a port or opens facility QRA."
+                ),
+            }
+        )
         # The facility assessment owns the authoritative release-boundary
         # gate.  Keep this as a separate strict check so a conditional
         # consequence chain cannot be mistaken for a closed facility release
