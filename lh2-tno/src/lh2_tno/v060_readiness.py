@@ -235,9 +235,28 @@ def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
         blocking.append(
             f"{not_declared_isolation_count} release case(s) have no reviewed isolation status"
         )
-    strict_ready = bool(case_count) and not blocking
+    # New facility ledgers expose the gate at the assessment root.  Accept a
+    # nested copy as well so older saved ledgers can still be audited without
+    # silently rebuilding a different release-boundary policy.
+    declared_gate = facility.get("strict_release_boundary")
+    if not isinstance(declared_gate, Mapping):
+        declared_gate = ledger.get("strict_release_boundary")
+    declared_gate = declared_gate if isinstance(declared_gate, Mapping) else None
+    if declared_gate is not None:
+        gate_blocking = declared_gate.get("blocking_reasons", ())
+        if isinstance(gate_blocking, Sequence) and not isinstance(gate_blocking, (str, bytes)):
+            blocking.extend(str(reason) for reason in gate_blocking if reason)
+    blocking = list(dict.fromkeys(blocking))
+    strict_ready = (
+        bool(case_count)
+        and not blocking
+        and (declared_gate is None or declared_gate.get("strict_release_boundary_ready") is True)
+    )
     return {
         "schema": ledger.get("schema_version"),
+        "facility_gate_schema": (
+            declared_gate.get("schema_version") if declared_gate is not None else None
+        ),
         "status": (
             "COMPLETE_RELEASE_BOUNDARY_COVERAGE"
             if strict_ready
@@ -256,6 +275,9 @@ def _release_boundary_summary(facility: Mapping[str, Any]) -> dict[str, Any]:
         "synthetic_horizon_case_count": synthetic_horizon_count,
         "strict_release_boundary_ready": strict_ready,
         "blocking_reasons": blocking,
+        "facility_gate_checks": (
+            declared_gate.get("checks") if declared_gate is not None else None
+        ),
         "promotion_policy": {
             "duration_is_not_inferred": True,
             "isolation_is_not_inferred": True,
@@ -569,6 +591,25 @@ def validate_v060_readiness_report(
                 errors.append(
                     "strict release boundary cannot be ready while blocking reasons remain"
                 )
+            facility_gate_schema = release_boundary.get("facility_gate_schema")
+            if facility_gate_schema is not None:
+                if facility_gate_schema != "prism.facility_release_boundary_gate.v1":
+                    errors.append(
+                        "chain.release_boundary.facility_gate_schema is unsupported"
+                    )
+                gate_checks = release_boundary.get("facility_gate_checks")
+                if not isinstance(gate_checks, Mapping):
+                    errors.append(
+                        "chain.release_boundary.facility_gate_checks must be an object"
+                    )
+                if release_boundary.get("strict_release_boundary_ready") is True and release_boundary.get(
+                    "facility_gate_checks"
+                ) is not None and isinstance(gate_checks, Mapping) and gate_checks.get(
+                    "all_mass_residuals_closed"
+                ) is False:
+                    errors.append(
+                        "facility release boundary cannot be ready with open mass residuals"
+                    )
 
     equipment = value.get("equipment")
     equipment = equipment if isinstance(equipment, Mapping) else {}

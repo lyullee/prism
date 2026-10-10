@@ -1,4 +1,7 @@
-from lh2_tno.release_ledger import build_release_termination_inventory_ledger
+from lh2_tno.release_ledger import (
+    build_release_termination_inventory_ledger,
+    evaluate_facility_release_boundary,
+)
 
 
 def test_release_ledger_preserves_provider_duration_isolation_and_inventory():
@@ -113,3 +116,82 @@ def test_release_ledger_summarizes_withheld_domain_case_without_duplicate_row():
     assert len(report["rows"]) == 1
     assert report["summary"]["withheld_case_count"] == 1
     assert report["summary"]["withheld_domain_incomplete_case_count"] == 1
+
+
+def test_facility_release_boundary_gate_accepts_reviewed_isolation_with_closed_mass():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "tank/hole",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "reviewed_isolation_success",
+                "time_s": 0.25,
+                "provenance": "reviewed actuator closure record",
+            },
+            "mass_ledger": {
+                "released_kg": 0.2,
+                "end_to_end_residual_kg": 2.0e-10,
+            },
+        }]
+    )
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["schema_version"] == "prism.facility_release_boundary_gate.v1"
+    assert gate["strict_release_boundary_ready"] is True
+    assert gate["blocking_reasons"] == []
+    assert gate["facility_ir_fn_promotion"] is False
+    assert gate["provider_qualification_evaluated"] is False
+
+
+def test_facility_release_boundary_gate_rejects_synthetic_and_withheld_rows():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "tank/diagnostic",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 600.0,
+                "provenance": "diagnostic horizon",
+            },
+            "mass_ledger": {
+                "released_kg": 1.0,
+                "end_to_end_residual_kg": 0.0,
+            },
+        }],
+        withheld_cases=[{
+            "event_id": "tank/missing",
+            "status": "UNCOMPUTED",
+        }],
+    )
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is False
+    assert gate["checks"]["no_withheld_cases"] is False
+    assert any("synthetic_diagnostic_horizon" in reason for reason in gate["blocking_reasons"])
+    assert any("withheld" in reason for reason in gate["blocking_reasons"])
+
+
+def test_facility_release_boundary_gate_requires_inventory_residual_to_close():
+    ledger = build_release_termination_inventory_ledger(
+        [{
+            "event_id": "tank/inventory",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 0.5,
+                "provenance": "provider depletion callback",
+            },
+            "provider_packet_identity": {
+                "event_id": "tank/inventory",
+                "component_id": "tank-01",
+                "provider_result_digests": ["b" * 64],
+                "available_mass_kg": [10.0],
+                "cumulative_mass_out_kg": [9.9],
+            },
+            "mass_ledger": {
+                "released_kg": 9.9,
+                "end_to_end_residual_kg": 0.1,
+            },
+        }]
+    )
+    gate = evaluate_facility_release_boundary(ledger)
+    assert gate["strict_release_boundary_ready"] is False
+    assert gate["checks"]["all_mass_residuals_closed"] is False

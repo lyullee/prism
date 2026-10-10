@@ -16,7 +16,10 @@ from statistics import median
 from typing import Any
 
 from .contracts import canonical_digest
-from .release_ledger import build_release_termination_inventory_ledger
+from .release_ledger import (
+    build_release_termination_inventory_ledger,
+    evaluate_facility_release_boundary,
+)
 
 
 class FacilityLedgerError(ValueError):
@@ -945,6 +948,9 @@ def merge_facility_campaign_results(
         merged_cases,
         withheld_cases=merged_missing,
     )
+    strict_release_boundary = evaluate_facility_release_boundary(
+        release_termination_inventory_ledger
+    )
     expected_components = {str(component_id) for component_id in expected_component_ids}
     observed_components = set(seen_components)
     if not expected_components:
@@ -1342,6 +1348,7 @@ def merge_facility_campaign_results(
         "population_accounting": population_accounting,
         "scenario_branch_accounting": scenario_branch_accounting,
         "release_termination_inventory_ledger": release_termination_inventory_ledger,
+        "strict_release_boundary": strict_release_boundary,
         "cases": merged_cases,
         "uncomputed_cases": merged_missing,
         "risk_atoms": merged_atoms,

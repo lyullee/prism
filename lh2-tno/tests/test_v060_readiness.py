@@ -203,6 +203,27 @@ def test_report_records_scenario_evidence_without_frequency_or_qra_promotion():
     assert validate_v060_readiness_report(report)["status"] == "VALID"
 
 
+def test_report_uses_facility_release_boundary_gate_when_present():
+    inputs = _inputs()
+    inputs["facility_assessment"]["release_termination_inventory_ledger"][
+        "strict_release_boundary"
+    ] = {
+        "schema_version": "prism.facility_release_boundary_gate.v1",
+        "strict_release_boundary_ready": False,
+        "checks": {"all_mass_residuals_closed": False},
+        "blocking_reasons": ["tank-01: end-to-end mass residual is not closed"],
+    }
+    report = build_v060_readiness_report(**inputs)
+    boundary = report["chain"]["release_boundary"]
+    assert boundary["facility_gate_schema"] == "prism.facility_release_boundary_gate.v1"
+    assert boundary["strict_release_boundary_ready"] is False
+    assert any(
+        "mass residual is not closed" in reason
+        for reason in boundary["blocking_reasons"]
+    )
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
 def test_report_rejects_scenario_evidence_promotion_flags():
     report = build_v060_readiness_report(
         **_inputs(), scenario_evidence_audit=_scenario_evidence()

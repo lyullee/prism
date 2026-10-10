@@ -11,10 +11,16 @@ from __future__ import annotations
 
 from collections import Counter
 import math
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 
 RELEASE_LEDGER_SCHEMA = "prism.release_termination_inventory_ledger.v1"
+RELEASE_BOUNDARY_GATE_SCHEMA = "prism.facility_release_boundary_gate.v1"
+_ALLOWED_STRICT_TERMINATION_BASES = {
+    "reviewed_isolation_success",
+    "inventory_depletion",
+}
+_STRICT_RESIDUAL_TOLERANCE_KG = 1e-8
 
 
 def _finite(value: Any) -> float | None:
@@ -194,7 +200,137 @@ def build_release_termination_inventory_ledger(
     }
 
 
+def evaluate_facility_release_boundary(
+    ledger: Mapping[str, Any],
+    *,
+    residual_tolerance_kg: float = _STRICT_RESIDUAL_TOLERANCE_KG,
+) -> dict[str, Any]:
+    """Evaluate whether a facility release ledger is closed enough to promote.
+
+    This is deliberately a *release-boundary* gate only.  It does not qualify
+    an external provider, validate SLABx-LH2 or a physical experiment, assign
+    a frequency, or promote facility IR/F-N.  A row must have a complete
+    numerical ledger, an explicit reviewed isolation or inventory-depletion
+    termination, and a finite mass residual.  Operator-limited, synthetic
+    horizon, 600-second horizon, emergency-relief, and two-sided rows remain
+    visible but cannot silently close this gate.
+    """
+    if not isinstance(ledger, Mapping):
+        raise TypeError("release ledger must be a mapping")
+    if (
+        isinstance(residual_tolerance_kg, bool)
+        or not isinstance(residual_tolerance_kg, (int, float))
+        or not math.isfinite(float(residual_tolerance_kg))
+        or float(residual_tolerance_kg) < 0.0
+    ):
+        raise ValueError("residual_tolerance_kg must be finite and nonnegative")
+    tolerance = float(residual_tolerance_kg)
+    raw_rows = ledger.get("rows", ())
+    rows: Sequence[Mapping[str, Any]] = (
+        tuple(row for row in raw_rows if isinstance(row, Mapping))
+        if isinstance(raw_rows, Sequence) and not isinstance(raw_rows, (str, bytes))
+        else ()
+    )
+    summary = ledger.get("summary")
+    summary = summary if isinstance(summary, Mapping) else {}
+    blocking: list[str] = []
+    checks = {
+        "all_rows_complete": bool(rows),
+        "all_termination_bases_allowed": True,
+        "all_isolation_or_inventory_statuses_closed": True,
+        "all_mass_residuals_closed": True,
+        "no_withheld_cases": True,
+    }
+    withheld_count = summary.get("withheld_case_count", 0)
+    try:
+        withheld_count = max(0, int(withheld_count or 0))
+    except (TypeError, ValueError):
+        withheld_count = 0
+    if withheld_count:
+        checks["no_withheld_cases"] = False
+        blocking.append(f"{withheld_count} case(s) are withheld from the release ledger")
+    if not rows:
+        blocking.append("release ledger contains no case rows")
+
+    for index, row in enumerate(rows):
+        label = str(
+            row.get("event_id")
+            or row.get("release_branch_id")
+            or f"row-{index + 1}"
+        )
+        status = str(row.get("status", "UNKNOWN"))
+        if status != "EXECUTED":
+            checks["all_rows_complete"] = False
+            blocking.append(f"{label}: status {status} is not a complete numerical case")
+
+        termination = row.get("termination")
+        termination = termination if isinstance(termination, Mapping) else {}
+        basis = termination.get("basis")
+        if basis not in _ALLOWED_STRICT_TERMINATION_BASES:
+            checks["all_termination_bases_allowed"] = False
+            blocking.append(
+                f"{label}: termination basis {basis or 'not_declared'} is not a reviewed release boundary"
+            )
+        if basis == "reviewed_isolation_success":
+            if row.get("isolation_status") != "provider_declared_isolation_success":
+                checks["all_isolation_or_inventory_statuses_closed"] = False
+                blocking.append(f"{label}: reviewed isolation status is not declared")
+        elif basis == "inventory_depletion":
+            if row.get("inventory_status") != "provider_declared_inventory_depletion":
+                checks["all_isolation_or_inventory_statuses_closed"] = False
+                blocking.append(f"{label}: inventory depletion status is not declared")
+
+        mass = row.get("mass_ledger")
+        mass = mass if isinstance(mass, Mapping) else {}
+        residual = _finite(mass.get("end_to_end_residual_kg"))
+        if residual is None or abs(residual) > tolerance:
+            checks["all_mass_residuals_closed"] = False
+            blocking.append(
+                f"{label}: end-to-end mass residual is not within {tolerance:g} kg"
+            )
+
+        provider = row.get("provider")
+        provider = provider if isinstance(provider, Mapping) else {}
+        residuals = provider.get("residual_mass_kg")
+        if basis == "inventory_depletion" and residuals is not None:
+            if (
+                not isinstance(residuals, Sequence)
+                or isinstance(residuals, (str, bytes))
+                or not residuals
+                or any(
+                    _finite(value) is None or abs(float(_finite(value))) > tolerance
+                    for value in residuals
+                )
+            ):
+                checks["all_mass_residuals_closed"] = False
+                blocking.append(
+                    f"{label}: provider inventory residual is not depleted within {tolerance:g} kg"
+                )
+
+    unique_blocking = list(dict.fromkeys(blocking))
+    return {
+        "schema_version": RELEASE_BOUNDARY_GATE_SCHEMA,
+        "strict_release_boundary_ready": bool(rows) and not unique_blocking,
+        "case_count": len(rows),
+        "withheld_case_count": withheld_count,
+        "termination_basis_counts": dict(summary.get("termination_basis_counts", {})),
+        "checks": checks,
+        "blocking_reasons": unique_blocking,
+        "residual_tolerance_kg": tolerance,
+        "provider_qualification_evaluated": False,
+        "independent_physical_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_ir_fn_promotion": False,
+        "policy": (
+            "release-boundary closure only; provider qualification, physical validation, "
+            "frequency, weather/population integration, and facility IR/F-N remain separate gates"
+        ),
+    }
+
+
 __all__ = [
     "RELEASE_LEDGER_SCHEMA",
+    "RELEASE_BOUNDARY_GATE_SCHEMA",
     "build_release_termination_inventory_ledger",
+    "evaluate_facility_release_boundary",
 ]
