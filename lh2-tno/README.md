@@ -74,6 +74,15 @@ IR/F-N·전체 QRA 또는 독립 물리검증을 승격하지 않습니다. 재�
 자료는 [차단 응답 방출 chain 개발 기록](docs/PRISM_isolation_response_chain_개발기록_20261010.md)에
 정리했습니다.
 
+**격리 응답의 시설 원장 결합 확장:** `scripts/build_isolation_extension_assessment.py`는 기존
+34 event·44 case·176 atom 원장에 격리 성공·실패 5 event·20 case·80 atom을 충돌 없는
+`isolation-response` 이름공간으로 결합합니다. 결합 결과는 39 event·64 case·256 atom이며,
+방출→피해 risk atom chain, 시설 IR/F-N 재집계, 설비별 기여도 감사가 닫힙니다. 새 격리 20 case에는
+canonical equipment state snapshot과 provider echo가 없어 상태→방출 감사는 44 complete·20
+incomplete로 남습니다. 확장은 성공확률·빈도·시설 QRA를 승격하지 않는 진단 원장입니다. 결과와
+재현 명령은 [격리 응답 시설 원장 확장 기록](docs/PRISM_isolation_union_extension_개발기록_20261010.md)에
+기록했습니다.
+
 **SLABx-LH2 검증 매트릭스 연결 보완:** 통합 `validation_evidence_matrix.json`에도
 `slabx_lh2_consequence_component` domain을 별도로 기록합니다. SLABx-LH2의 외부
 분산·LFL 비교 6건, pool 반경 비교 6건, 질량 폐합과 반복 실행 결과를 논문용 구성요소
