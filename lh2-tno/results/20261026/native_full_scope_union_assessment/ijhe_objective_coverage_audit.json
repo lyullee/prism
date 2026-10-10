@@ -10,7 +10,7 @@
       "status": "PASS",
       "evidence_paths": [
         "results\\20261027\\native_generic_scope_packets_state_bound\\verification.json",
-        "results\\20261026\\native_full_scope_union_assessment\\state_snapshot_binding_audit.json"
+        "results\\20261027\\native_generic_scope_packets_state_bound\\state_snapshot_binding_audit.json"
       ],
       "observed": {
         "catalog_event_count": 24,
@@ -115,7 +115,8 @@
         "population_mismatch_count": 0,
         "annual_condition_count": 5,
         "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
-        "scenario_cross_product_count": null
+        "scenario_cross_product_count": 20,
+        "scenario_missing_dimension_atom_count": 0
       },
       "blocking_reason": null,
       "interpretation": "현재 조건과 인구는 synthetic diagnostic이며 site weather/population qualification은 남아 있다."

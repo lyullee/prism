@@ -37,6 +37,7 @@ def _inputs():
             "scenario_branch_accounting": {
                 "status": "EXPLICIT_BRANCH_ACCOUNTING",
                 "scenario_cross_product_count": 4,
+                "missing_dimension_atom_count": 0,
             },
             "frequency_uncertainty": {"scenarios": [{"id": "central"}]},
             "_record_path": "facility.json",
@@ -116,6 +117,12 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     scope_check = next(row for row in report["checks"] if row["id"] == "generic_lh2_scope")
     assert scope_check["observed"]["scope_gap_summary"]["qualification_gap_family_count"] == 1
     assert scope_check["observed"]["scope_gap_rows"][0]["gap_class"] == "QUALIFICATION_EVIDENCE_WITHHELD"
+    weather_check = next(
+        row for row in report["checks"] if row["id"] == "weather_ignition_population"
+    )
+    assert weather_check["status"] == "CONDITIONALLY_COMPLETE"
+    assert weather_check["observed"]["scenario_cross_product_count"] == 4
+    assert weather_check["observed"]["scenario_missing_dimension_atom_count"] == 0
 
 
 def test_objective_audit_blocks_missing_native_event():

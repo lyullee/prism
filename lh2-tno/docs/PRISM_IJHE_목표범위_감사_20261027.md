@@ -16,7 +16,7 @@
 원장: [`ijhe_objective_coverage_audit.json`](../results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)
 
 현재 최종 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 최신
-fail-closed IJHE 감사는 30개 검사 중 27개 PASS·3개 BLOCKED로 재생성되었다.
+fail-closed IJHE 감사는 35개 검사 중 30개 PASS·5개 BLOCKED로 재생성되었다.
 24/24 native packet과 상태 snapshot 결합은 구조적 diagnostic coverage로 PASS가
 되었지만, qualified provider packet은 0건이고 native catalog·SLABx-LH2 구성요소
 검사는 계속 diagnostic-only다.
@@ -27,7 +27,7 @@ fail-closed IJHE 감사는 30개 검사 중 27개 PASS·3개 BLOCKED로 재생�
 | 방출 → 최종 피해 | CONDITIONALLY_COMPLETE | native campaign 24/24 case 실행, union risk atom 176개 |
 | SLABx-LH2 피해영향 구성요소 | CONDITIONALLY_COMPLETE | 6개 FFI·6개 FLACS 비교, 질량잔차 1.77×10⁻¹² kg, 반복 재고차 0 kg |
 | 문헌 빈도 불확실성 | CONDITIONALLY_COMPLETE | 5개 문헌 시나리오(설비별 공유 3개 + 사건별 독립 p05/p95 2개), 9개 분위수 미제공 진단 사건은 fixed, 설비·사고군 상위순위 안정성 기록 |
-| 기상·점화·인구 결합 | CONDITIONALLY_COMPLETE | 5개 연간조건, 명시적 ignition branch, receptor mismatch 0 |
+| 기상·점화·인구 결합 | CONDITIONALLY_COMPLETE | 5개 연간조건, 20개 조건×방출×점화 cross-product, missing-dimension atom 0, receptor mismatch 0 |
 | 일반 LH2 설비 범위 | CONDITIONALLY_COMPLETE | 탱크·배관·밸브·펌프·벤트·기화기·재액화기 범위 원장 |
 | 실시간 처리 | CONDITIONALLY_COMPLETE | cache p95는 1 Hz 기준 이내, 새 물리 계산은 1 Hz 미충족으로 별도 표시 |
 | 독립 물리검증 | BLOCKED_EVIDENCE | 제한 evidence matrix이며 physical validation claim=false |
@@ -36,7 +36,7 @@ fail-closed IJHE 감사는 30개 검사 중 27개 PASS·3개 BLOCKED로 재생�
 | 시설 전체 상태 snapshot coverage | PASS | 기본 native 24/24와 union 확장 10/10을 합쳐 34/34 사건이 canonical state snapshot·provider echo·provider result digest까지 연결됨 |
 | 시설 전체 IR/F-N 승격 | BLOCKED_EVIDENCE | 위 게이트가 닫히지 않아 `facility_total_risk_available=false` |
 
-따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다.
+따라서 현재 결과에서 사용할 수 있는 표현은 “일반 옥외 LH2 시설의 조건부 진단 chain이 실행되었다”이다. “시설 전체 QRA가 완료되었다”, “현장 사고빈도를 학습했다”, “독립 물리검증을 마쳤다”라고 표현하지 않는다. 기상·점화·인구 연결은 `scenario_branch_accounting.cross_product_count=20`과 `missing_dimension_atom_count=0`을 함께 확인해야 한다.
 
 ### 미계산과 증거 제한의 분리
 

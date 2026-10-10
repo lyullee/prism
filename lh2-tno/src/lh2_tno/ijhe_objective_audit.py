@@ -137,6 +137,22 @@ def build_ijhe_objective_coverage_audit(
         if isinstance(uncertainty, Mapping) and isinstance(uncertainty.get("scenarios"), list)
         else 0
     )
+    # The facility ledger calls this ``cross_product_count``.  Accept the
+    # explanatory alias used by older hand-authored evidence fixtures, but
+    # require a positive count and zero missing-dimension atoms before the
+    # weather/ignition/population requirement can be marked complete.
+    scenario_cross_product_count = (
+        _int(scenario.get("scenario_cross_product_count"))
+        if isinstance(scenario, Mapping)
+        else None
+    )
+    if scenario_cross_product_count is None and isinstance(scenario, Mapping):
+        scenario_cross_product_count = _int(scenario.get("cross_product_count"))
+    scenario_missing_dimension_atom_count = (
+        _int(scenario.get("missing_dimension_atom_count"))
+        if isinstance(scenario, Mapping)
+        else None
+    )
     scope_rows = scope_matrix.get("rows", [])
     if not isinstance(scope_rows, list):
         scope_rows = []
@@ -305,6 +321,9 @@ def build_ijhe_objective_coverage_audit(
         and population.get("mismatched_receptor_ids") == {}
         and isinstance(scenario, Mapping)
         and scenario.get("status") == "EXPLICIT_BRANCH_ACCOUNTING"
+        and scenario_cross_product_count is not None
+        and scenario_cross_product_count > 0
+        and scenario_missing_dimension_atom_count == 0
     )
     rows.append(_row(
         "weather_ignition_population",
@@ -316,7 +335,8 @@ def build_ijhe_objective_coverage_audit(
             "population_mismatch_count": len(population.get("mismatched_receptor_ids", {})) if isinstance(population, Mapping) else None,
             "annual_condition_count": population.get("annual_condition_count") if isinstance(population, Mapping) else None,
             "scenario_branch_status": scenario.get("status") if isinstance(scenario, Mapping) else None,
-            "scenario_cross_product_count": scenario.get("scenario_cross_product_count") if isinstance(scenario, Mapping) else None,
+            "scenario_cross_product_count": scenario_cross_product_count,
+            "scenario_missing_dimension_atom_count": scenario_missing_dimension_atom_count,
         },
         blocking_reason=None if population_ok else "연간조건·수용점·점화 branch accounting에 누락 또는 불일치가 있다",
         interpretation="현재 조건과 인구는 synthetic diagnostic이며 site weather/population qualification은 남아 있다.",
