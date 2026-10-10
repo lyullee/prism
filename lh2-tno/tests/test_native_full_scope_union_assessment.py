@@ -75,6 +75,16 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert result["event_count"] == 34
     assert result["case_count"] == 44
     assert len(result["risk_atoms"]) == 176
+    assert all(
+        atom["provider_packet_identity"].get("state_snapshot") is not None
+        and atom["provider_packet_identity"].get("state_snapshot_digest")
+        and atom["provider_packet_identity"].get("provider_state_snapshot_digest")
+        for atom in result["risk_atoms"]
+    )
+    assert sum(
+        atom["provider_packet_identity"].get("provider_state_snapshot_digests") is not None
+        for atom in result["risk_atoms"]
+    ) == 8
     assert result["facility_id"] == "generic-lh2-near-receptor-diagnostic"
     assert result["facility_id"] == facility["id"]
     assert any(

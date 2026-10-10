@@ -66,6 +66,35 @@ def _load(path: Path) -> dict[str, Any]:
     return value
 
 
+def _is_prebound_extension(
+    result: dict[str, Any],
+    *,
+    facility_id: str,
+    namespace: str,
+    event_marker: str,
+) -> bool:
+    """Recognize a result already rebound into the selected facility namespace.
+
+    Rebinding an already rebound result would duplicate the namespace and
+    silently break the extension state-snapshot ledger.  Treat a matching
+    facility/event namespace as an immutable diagnostic result and only rebind
+    stand-alone source campaigns.
+    """
+    if str(result.get("facility_id", "")).strip() != facility_id:
+        return False
+    events = result.get("events")
+    if not isinstance(events, list) or not events:
+        return False
+    prefix = f"{namespace.rstrip('/')}/"
+    return all(
+        isinstance(event, dict)
+        and isinstance(event.get("id"), str)
+        and event["id"].startswith(prefix)
+        and event_marker in event["id"]
+        for event in events
+    )
+
+
 def _save(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -258,19 +287,28 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if not facility_id:
         raise ValueError("base campaign result has no facility_id")
     namespace = f"{facility_id}/vertical-handoff"
-    vertical_result = rebind_vertical_handoff_campaign_result(
-        vertical_source,
-        facility_id=facility_id,
-        namespace=namespace,
-        asset_id="vertical-handoff-vent",
-        component_id="vertical-handoff-terminal-pipe-01",
-        receptor_map={
-            "worker-01": "worker-01",
-            "near_worker": "worker-01",
-            "downwind_worker": "worker-01",
-            "side_worker": "worker-01",
-            "distant_worker": "worker-01",
-        },
+    vertical_result = (
+        deepcopy(vertical_source)
+        if _is_prebound_extension(
+            vertical_source,
+            facility_id=facility_id,
+            namespace=namespace,
+            event_marker="/terminal-valve/",
+        )
+        else rebind_vertical_handoff_campaign_result(
+            vertical_source,
+            facility_id=facility_id,
+            namespace=namespace,
+            asset_id="vertical-handoff-vent",
+            component_id="vertical-handoff-terminal-pipe-01",
+            receptor_map={
+                "worker-01": "worker-01",
+                "near_worker": "worker-01",
+                "downwind_worker": "worker-01",
+                "side_worker": "worker-01",
+                "distant_worker": "worker-01",
+            },
+        )
     )
     vertical_scope = _rebind_vertical_scope_matrix(
         vertical_scope_source,
@@ -278,26 +316,37 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         namespace=namespace,
     )
     inventory_namespace = f"{facility_id}/inventory-depletion"
-    inventory_result = rebind_campaign_result(
+    inventory_prebound = _is_prebound_extension(
         inventory_source,
-        source_facility_id=str(inventory_source.get("facility_id", "")).strip(),
         facility_id=facility_id,
         namespace=inventory_namespace,
-        source_asset_id=args.inventory_source_asset_id,
-        asset_id="inventory-depletion-pipe",
-        source_component_id=args.inventory_source_component_id,
-        component_id="inventory-depletion-pipe-01",
-        receptor_map={
-            "near_worker": "worker-01",
-            "downwind_worker": "worker-01",
-            "side_worker": "worker-01",
-            "distant_worker": "worker-01",
-        },
+        event_marker="/terminal_pipe_asset/",
     )
-    inventory_result = _rebind_inventory_conditions(
-        inventory_result,
-        namespace=inventory_namespace,
+    inventory_result = (
+        deepcopy(inventory_source)
+        if inventory_prebound
+        else rebind_campaign_result(
+            inventory_source,
+            source_facility_id=str(inventory_source.get("facility_id", "")).strip(),
+            facility_id=facility_id,
+            namespace=inventory_namespace,
+            source_asset_id=args.inventory_source_asset_id,
+            asset_id="inventory-depletion-pipe",
+            source_component_id=args.inventory_source_component_id,
+            component_id="inventory-depletion-pipe-01",
+            receptor_map={
+                "near_worker": "worker-01",
+                "downwind_worker": "worker-01",
+                "side_worker": "worker-01",
+                "distant_worker": "worker-01",
+            },
+        )
     )
+    if not inventory_prebound:
+        inventory_result = _rebind_inventory_conditions(
+            inventory_result,
+            namespace=inventory_namespace,
+        )
     inventory_scope = _rebind_inventory_scope_matrix(
         inventory_scope_source,
         facility_id=facility_id,

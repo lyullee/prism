@@ -147,6 +147,7 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
             "state_snapshot": state_snapshot.to_mapping(),
             "state_snapshot_digest": getattr(request, "state_snapshot_digest", None),
             "provider_state_snapshot_digest": getattr(request, "provider_state_snapshot_digest", None),
+            "provider_state_snapshot_digests": getattr(request, "provider_state_snapshot_digests", None),
         })
     return identity
 

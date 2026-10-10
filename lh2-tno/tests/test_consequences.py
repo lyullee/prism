@@ -146,6 +146,28 @@ def test_state_snapshot_requires_payload_digest_and_provider_echo():
         ConsequenceRequest.model_validate_json(json.dumps(d))
 
 
+def test_state_snapshot_accepts_multiple_provider_endpoint_echoes():
+    d=json.loads(EXAMPLE.read_text(encoding='utf-8'))
+    snapshot=EquipmentStateSnapshot(
+        schema_version=EQUIPMENT_STATE_SNAPSHOT_SCHEMA,
+        component_id=d['component_id'],
+        captured_at_s=0.0,
+        origin='model_prediction',
+        pressure_pa_abs=101000.0,
+        temperature_k=20.5,
+    )
+    digest=snapshot.digest()
+    d['state_snapshot']=snapshot.to_mapping()
+    d['state_snapshot_digest']=digest
+    d['provider_state_snapshot_digest']=digest
+    d['provider_state_snapshot_digests']=[digest, digest]
+    request=ConsequenceRequest.model_validate_json(json.dumps(d))
+    assert request.provider_state_snapshot_digests==(digest, digest)
+    d['provider_state_snapshot_digests']=['0'*64, digest]
+    with pytest.raises(ValueError,match='provider_state_snapshot_digests'):
+        ConsequenceRequest.model_validate_json(json.dumps(d))
+
+
 def test_model_natural_duration_requires_explicit_pressure_equalization_basis():
     d=json.loads(EXAMPLE.read_text(encoding='utf-8'))
     d['source_duration_mode']='model_natural'

@@ -31,10 +31,10 @@
     ]
   },
   "blocking_reasons": [
-    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: declared scope is incomplete",
-    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
-    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
-    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
+    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: declared scope is incomplete",
+    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: uncomputed cases remain",
+    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: excluded components remain",
+    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: synthetic release horizon",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
@@ -688,7 +688,29 @@
         ],
         "cumulative_mass_out_kg": [
           4.956379784841932e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "ambient-vaporizer-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 300.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -764,7 +786,29 @@
         ],
         "cumulative_mass_out_kg": [
           4.956379784841932e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "ambient-vaporizer-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 300.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -840,7 +884,29 @@
         ],
         "cumulative_mass_out_kg": [
           7.221896865709533e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "ambient-vaporizer-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 300.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -916,7 +982,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.0006739291847553497
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "pressure-relief-vent-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 40.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            2.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1006,6 +1094,31 @@
         "cumulative_mass_out_kg": [
           3.595846016954127e-08,
           3.595846016954127e-08
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "reliquefier-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 300.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "provider_state_snapshot_digests": [
+          "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+          "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
         ]
       },
       "required_provider_evidence": [
@@ -1099,6 +1212,31 @@
         "cumulative_mass_out_kg": [
           3.595846016954127e-08,
           3.595846016954127e-08
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "reliquefier-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 300.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "provider_state_snapshot_digests": [
+          "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+          "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
         ]
       },
       "required_provider_evidence": [
@@ -1178,7 +1316,29 @@
         ],
         "cumulative_mass_out_kg": [
           5.226060443124568e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "reliquefier-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 102000.0,
+          "temperature_k": 300.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1256,7 +1416,48 @@
         ],
         "cumulative_mass_out_kg": [
           0.008166514093845672
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "storage-tank-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 204952.5178434031,
+          "temperature_k": 22.96893651066565,
+          "mass_kg": 0.028492061899609754,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "initial_pressure": {
+              "quantity": "pressure",
+              "value_si": 204952.5178434031,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_temperature": {
+              "quantity": "temperature",
+              "value_si": 22.96893651066565,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_mass": {
+              "quantity": "mass",
+              "value_si": 0.028492061899609754,
+              "sensor_location": "storage-tank-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1338,7 +1539,48 @@
         ],
         "cumulative_mass_out_kg": [
           0.00010057792972414069
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "storage-tank-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 204952.5178434031,
+          "temperature_k": 22.96893651066565,
+          "mass_kg": 0.028492061899609754,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "initial_pressure": {
+              "quantity": "pressure",
+              "value_si": 204952.5178434031,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_temperature": {
+              "quantity": "temperature",
+              "value_si": 22.96893651066565,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_mass": {
+              "quantity": "mass",
+              "value_si": 0.028492061899609754,
+              "sensor_location": "storage-tank-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1420,7 +1662,48 @@
         ],
         "cumulative_mass_out_kg": [
           0.00010057966768755135
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "storage-tank-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 204952.5178434031,
+          "temperature_k": 22.96893651066565,
+          "mass_kg": 0.028492061899609754,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "initial_pressure": {
+              "quantity": "pressure",
+              "value_si": 204952.5178434031,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_temperature": {
+              "quantity": "temperature",
+              "value_si": 22.96893651066565,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_mass": {
+              "quantity": "mass",
+              "value_si": 0.028492061899609754,
+              "sensor_location": "storage-tank-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1502,7 +1785,48 @@
         ],
         "cumulative_mass_out_kg": [
           0.00016756351240572947
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "storage-tank-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 204952.5178434031,
+          "temperature_k": 22.96893651066565,
+          "mass_kg": 0.028492061899609754,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "initial_pressure": {
+              "quantity": "pressure",
+              "value_si": 204952.5178434031,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_temperature": {
+              "quantity": "temperature",
+              "value_si": 22.96893651066565,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_mass": {
+              "quantity": "mass",
+              "value_si": 0.028492061899609754,
+              "sensor_location": "storage-tank-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1584,7 +1908,48 @@
         ],
         "cumulative_mass_out_kg": [
           0.0016625666208320196
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "storage-tank-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 204952.5178434031,
+          "temperature_k": 22.96893651066565,
+          "mass_kg": 0.028492061899609754,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "initial_pressure": {
+              "quantity": "pressure",
+              "value_si": 204952.5178434031,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_temperature": {
+              "quantity": "temperature",
+              "value_si": 22.96893651066565,
+              "sensor_location": "storage-tank-01.liquid_cell_0",
+              "quality": "valid"
+            },
+            "initial_mass": {
+              "quantity": "mass",
+              "value_si": 0.028492061899609754,
+              "sensor_location": "storage-tank-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1666,7 +2031,42 @@
         ],
         "cumulative_mass_out_kg": [
           2.014140456353654e-08
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-line-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "inlet_pressure": {
+              "quantity": "pressure",
+              "value_si": 250000.0,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            },
+            "inlet_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.5,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1748,7 +2148,42 @@
         ],
         "cumulative_mass_out_kg": [
           4.4338658741797916e-07
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-line-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "inlet_pressure": {
+              "quantity": "pressure",
+              "value_si": 250000.0,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            },
+            "inlet_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.5,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1830,7 +2265,42 @@
         ],
         "cumulative_mass_out_kg": [
           1.1651055997280421e-06
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-line-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "inlet_pressure": {
+              "quantity": "pressure",
+              "value_si": 250000.0,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            },
+            "inlet_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.5,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1912,7 +2382,42 @@
         ],
         "cumulative_mass_out_kg": [
           2.1053319426559835e-05
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-line-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "inlet_pressure": {
+              "quantity": "pressure",
+              "value_si": 250000.0,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            },
+            "inlet_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.5,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1994,7 +2499,42 @@
         ],
         "cumulative_mass_out_kg": [
           0.00040250847725729254
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-line-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.5,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": null,
+          "position_enu_m": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "measurements": {
+            "inlet_pressure": {
+              "quantity": "pressure",
+              "value_si": 250000.0,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            },
+            "inlet_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.5,
+              "sensor_location": "liquid-transfer-line-01.fluid_volume",
+              "quality": "valid"
+            }
+          },
+          "source_digest": null,
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2076,7 +2616,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.0004
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-pump-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 120000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2158,7 +2720,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.0004
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "liquid-transfer-pump-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 120000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2240,7 +2824,29 @@
         ],
         "cumulative_mass_out_kg": [
           3.164317187981656e-05
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "transfer-valve-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2322,7 +2928,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.0003164317187981657
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "transfer-valve-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2404,7 +3032,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.003164317187981658
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "transfer-valve-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2486,7 +3136,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.03164317187981657
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "transfer-valve-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2568,7 +3240,29 @@
         ],
         "cumulative_mass_out_kg": [
           0.31643171879816573
-        ]
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "transfer-valve-01",
+          "captured_at_s": 0.0,
+          "origin": "synthetic",
+          "pressure_pa_abs": 250000.0,
+          "temperature_k": 20.0,
+          "mass_kg": null,
+          "liquid_fraction": null,
+          "phase": "liquid",
+          "position_enu_m": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "measurements": {},
+          "source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+        "provider_state_snapshot_digests": null
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",

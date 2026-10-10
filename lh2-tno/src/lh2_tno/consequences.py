@@ -117,6 +117,10 @@ class ConsequenceRequest(Contract):
     state_snapshot: EquipmentStateSnapshot | None = None
     state_snapshot_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
     provider_state_snapshot_digest: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
+    # A two-sided rupture may be answered by more than one provider endpoint.
+    # Keep the historical single echo for compatibility, while retaining the
+    # complete per-endpoint echo list when it is available.
+    provider_state_snapshot_digests: tuple[str, ...] | None = None
     source_input: dict | None = None
     resolved_release: ResolvedGasRelease | None = None
     resolved_release_set: ResolvedGasReleaseSet | None = None
@@ -152,7 +156,11 @@ class ConsequenceRequest(Contract):
     @model_validator(mode='after')
     def valid(self):
         if self.state_snapshot is None:
-            if self.state_snapshot_digest is not None or self.provider_state_snapshot_digest is not None:
+            if (
+                self.state_snapshot_digest is not None
+                or self.provider_state_snapshot_digest is not None
+                or self.provider_state_snapshot_digests is not None
+            ):
                 raise ValueError('state snapshot digests require a canonical state_snapshot payload')
         else:
             if self.state_snapshot.component_id != self.component_id:
@@ -162,6 +170,11 @@ class ConsequenceRequest(Contract):
                 raise ValueError('state_snapshot_digest does not match canonical state_snapshot')
             if self.provider_state_snapshot_digest != computed_state_digest:
                 raise ValueError('provider_state_snapshot_digest must equal canonical state_snapshot digest')
+            if self.provider_state_snapshot_digests is not None:
+                if not self.provider_state_snapshot_digests:
+                    raise ValueError('provider_state_snapshot_digests must not be empty')
+                if any(value != computed_state_digest for value in self.provider_state_snapshot_digests):
+                    raise ValueError('provider_state_snapshot_digests must equal canonical state_snapshot digest')
         times=self.evaluation_times_s
         if len(times)<2 or times[0]!=0 or any(b<=a for a,b in zip(times,times[1:])):
             raise ValueError('evaluation clock must start at zero and increase')

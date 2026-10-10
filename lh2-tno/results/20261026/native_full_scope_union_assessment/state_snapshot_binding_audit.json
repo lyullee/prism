@@ -19,349 +19,528 @@
   "status_counts": {
     "BOUND_AND_ECHOED": 24
   },
+  "event_count": 24,
   "rows": [
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
       "component_id": "storage-tank-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "d7b66877f8666077820d57ce6e661e31b2295a6d6dae4f1d33bffae3bbb5150c",
+      "provider_result_digests": [
+        "d7b66877f8666077820d57ce6e661e31b2295a6d6dae4f1d33bffae3bbb5150c"
+      ],
+      "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_state_snapshot_digests": [
+        "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "computed_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_source_digest": null,
-      "provider_result_digest": "d7b66877f8666077820d57ce6e661e31b2295a6d6dae4f1d33bffae3bbb5150c",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
       "component_id": "storage-tank-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "4e8fc785f5f3b0a0bee101a4874161310fda09c918bca751af7a07b1b16dbf62",
+      "provider_result_digests": [
+        "4e8fc785f5f3b0a0bee101a4874161310fda09c918bca751af7a07b1b16dbf62"
+      ],
+      "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_state_snapshot_digests": [
+        "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "computed_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_source_digest": null,
-      "provider_result_digest": "4e8fc785f5f3b0a0bee101a4874161310fda09c918bca751af7a07b1b16dbf62",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
       "component_id": "storage-tank-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "a0c427aa506c12df4901f9f5034e397852b39453621bd42d6bdc7f33192a43b9",
+      "provider_result_digests": [
+        "a0c427aa506c12df4901f9f5034e397852b39453621bd42d6bdc7f33192a43b9"
+      ],
+      "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_state_snapshot_digests": [
+        "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "computed_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_source_digest": null,
-      "provider_result_digest": "a0c427aa506c12df4901f9f5034e397852b39453621bd42d6bdc7f33192a43b9",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
       "component_id": "storage-tank-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "1527c28c3824d165b7e6e1d95ed414260c9813cae088b06c4f85a6e31f86f73e",
+      "provider_result_digests": [
+        "1527c28c3824d165b7e6e1d95ed414260c9813cae088b06c4f85a6e31f86f73e"
+      ],
+      "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_state_snapshot_digests": [
+        "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "computed_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_source_digest": null,
-      "provider_result_digest": "1527c28c3824d165b7e6e1d95ed414260c9813cae088b06c4f85a6e31f86f73e",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
       "component_id": "storage-tank-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "e1d65d528e0f6760d8cdfd8f09d13377349e7285dda01396982427b9d4f2a699",
+      "provider_result_digests": [
+        "e1d65d528e0f6760d8cdfd8f09d13377349e7285dda01396982427b9d4f2a699"
+      ],
+      "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
+      "provider_state_snapshot_digests": [
+        "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "computed_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_echo_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
       "provider_source_digest": null,
-      "provider_result_digest": "e1d65d528e0f6760d8cdfd8f09d13377349e7285dda01396982427b9d4f2a699",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
       "component_id": "liquid-transfer-line-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "96a89fcce9d5e9c4efd115f21eb190deeff01127393c311a963b6b7c8b187046",
+      "provider_result_digests": [
+        "96a89fcce9d5e9c4efd115f21eb190deeff01127393c311a963b6b7c8b187046"
+      ],
+      "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+      "provider_state_snapshot_digests": [
+        "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "computed_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_echo_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_source_digest": null,
-      "provider_result_digest": "96a89fcce9d5e9c4efd115f21eb190deeff01127393c311a963b6b7c8b187046",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
       "component_id": "liquid-transfer-line-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "b4347f0a52d70fdd09bd37b3dbc5d2dcbfcfd6e1728e1f258a022e36316da194",
+      "provider_result_digests": [
+        "b4347f0a52d70fdd09bd37b3dbc5d2dcbfcfd6e1728e1f258a022e36316da194"
+      ],
+      "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+      "provider_state_snapshot_digests": [
+        "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "computed_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_echo_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_source_digest": null,
-      "provider_result_digest": "b4347f0a52d70fdd09bd37b3dbc5d2dcbfcfd6e1728e1f258a022e36316da194",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
       "component_id": "liquid-transfer-line-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "c3d6bb5660fe5b45370789cc2c81be4554a1aa2e50a72590b998d68094a75f82",
+      "provider_result_digests": [
+        "c3d6bb5660fe5b45370789cc2c81be4554a1aa2e50a72590b998d68094a75f82"
+      ],
+      "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+      "provider_state_snapshot_digests": [
+        "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "computed_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_echo_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_source_digest": null,
-      "provider_result_digest": "c3d6bb5660fe5b45370789cc2c81be4554a1aa2e50a72590b998d68094a75f82",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
       "component_id": "liquid-transfer-line-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "425a5c5d692500a7f6cebce400966509ec96287c7635a44310b9a4924c5ba36b",
+      "provider_result_digests": [
+        "425a5c5d692500a7f6cebce400966509ec96287c7635a44310b9a4924c5ba36b"
+      ],
+      "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+      "provider_state_snapshot_digests": [
+        "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "computed_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_echo_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_source_digest": null,
-      "provider_result_digest": "425a5c5d692500a7f6cebce400966509ec96287c7635a44310b9a4924c5ba36b",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
       "component_id": "liquid-transfer-line-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "c03ed395f7a1c2b3b88b35bdf11e881050a061e6ba83436e7d93ed1949794574",
+      "provider_result_digests": [
+        "c03ed395f7a1c2b3b88b35bdf11e881050a061e6ba83436e7d93ed1949794574"
+      ],
+      "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
+      "provider_state_snapshot_digests": [
+        "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "computed_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_echo_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
       "provider_source_digest": null,
-      "provider_result_digest": "c03ed395f7a1c2b3b88b35bdf11e881050a061e6ba83436e7d93ed1949794574",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
       "component_id": "transfer-valve-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "559093a9e236297c6757ab87883878cb65d8c7380633338131f31e146c932cfe",
+      "provider_result_digests": [
+        "559093a9e236297c6757ab87883878cb65d8c7380633338131f31e146c932cfe"
+      ],
+      "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+      "provider_state_snapshot_digests": [
+        "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "computed_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_echo_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_source_digest": null,
-      "provider_result_digest": "559093a9e236297c6757ab87883878cb65d8c7380633338131f31e146c932cfe",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
       "component_id": "transfer-valve-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "46efa6afde378f078ef9863e5ab42344030e1750d72299d4046ffb8279da09b1",
+      "provider_result_digests": [
+        "46efa6afde378f078ef9863e5ab42344030e1750d72299d4046ffb8279da09b1"
+      ],
+      "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+      "provider_state_snapshot_digests": [
+        "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "computed_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_echo_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_source_digest": null,
-      "provider_result_digest": "46efa6afde378f078ef9863e5ab42344030e1750d72299d4046ffb8279da09b1",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
       "component_id": "transfer-valve-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "e3a13612bafc4abe0a92aad31f1201513d61cffe3298754274917d6ebeab9b55",
+      "provider_result_digests": [
+        "e3a13612bafc4abe0a92aad31f1201513d61cffe3298754274917d6ebeab9b55"
+      ],
+      "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+      "provider_state_snapshot_digests": [
+        "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "computed_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_echo_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_source_digest": null,
-      "provider_result_digest": "e3a13612bafc4abe0a92aad31f1201513d61cffe3298754274917d6ebeab9b55",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
       "component_id": "transfer-valve-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "6a098e7e02c047a9a44ef1747513afd7e366294d80cc470ba62a27e66d0bb898",
+      "provider_result_digests": [
+        "6a098e7e02c047a9a44ef1747513afd7e366294d80cc470ba62a27e66d0bb898"
+      ],
+      "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+      "provider_state_snapshot_digests": [
+        "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "computed_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_echo_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_source_digest": null,
-      "provider_result_digest": "6a098e7e02c047a9a44ef1747513afd7e366294d80cc470ba62a27e66d0bb898",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
       "component_id": "transfer-valve-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "f171f3efde21d51bc533579e5321b2438937329cd2dc7dcf7c9b80847dd8a2fb",
+      "provider_result_digests": [
+        "f171f3efde21d51bc533579e5321b2438937329cd2dc7dcf7c9b80847dd8a2fb"
+      ],
+      "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
+      "provider_state_snapshot_digests": [
+        "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "computed_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_echo_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
       "provider_source_digest": null,
-      "provider_result_digest": "f171f3efde21d51bc533579e5321b2438937329cd2dc7dcf7c9b80847dd8a2fb",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\015_pressure-relief-vent-01_G1\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\015_pressure-relief-vent-01_G1\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
       "component_id": "pressure-relief-vent-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "bde228e395dfdf4e6b5a5c3aa7f08c7b53b69d3a5b3f973c00116ae390d1e1ae",
+      "provider_result_digests": [
+        "bde228e395dfdf4e6b5a5c3aa7f08c7b53b69d3a5b3f973c00116ae390d1e1ae"
+      ],
+      "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
+      "provider_state_snapshot_digests": [
+        "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\015_pressure-relief-vent-01_G1\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
       "computed_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
       "provider_echo_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
       "provider_source_digest": null,
-      "provider_result_digest": "bde228e395dfdf4e6b5a5c3aa7f08c7b53b69d3a5b3f973c00116ae390d1e1ae",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
       "component_id": "liquid-transfer-pump-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "fa8fc5988a671e1736ba04c62f2f143dd2a5f2ced59969d2a6ee935c9a36388f",
+      "provider_result_digests": [
+        "fa8fc5988a671e1736ba04c62f2f143dd2a5f2ced59969d2a6ee935c9a36388f"
+      ],
+      "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
+      "provider_state_snapshot_digests": [
+        "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
       "computed_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
       "provider_echo_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
       "provider_source_digest": null,
-      "provider_result_digest": "fa8fc5988a671e1736ba04c62f2f143dd2a5f2ced59969d2a6ee935c9a36388f",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
       "component_id": "liquid-transfer-pump-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "f01c9e07cd9b2d2b2edc9d3b57d4a43478173ff780d3408d7bb565a5a44c38cb",
+      "provider_result_digests": [
+        "f01c9e07cd9b2d2b2edc9d3b57d4a43478173ff780d3408d7bb565a5a44c38cb"
+      ],
+      "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
+      "provider_state_snapshot_digests": [
+        "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
       "computed_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
       "provider_echo_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
       "provider_source_digest": null,
-      "provider_result_digest": "f01c9e07cd9b2d2b2edc9d3b57d4a43478173ff780d3408d7bb565a5a44c38cb",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\018_ambient-vaporizer-01_G1\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\018_ambient-vaporizer-01_G1\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
       "component_id": "ambient-vaporizer-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "e9b75d7be4d233a57bf0a8399faad25fdc17661795e92c83c578e245a27aff56",
+      "provider_result_digests": [
+        "e9b75d7be4d233a57bf0a8399faad25fdc17661795e92c83c578e245a27aff56"
+      ],
+      "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+      "provider_state_snapshot_digests": [
+        "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\018_ambient-vaporizer-01_G1\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "computed_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "provider_echo_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "provider_source_digest": null,
-      "provider_result_digest": "e9b75d7be4d233a57bf0a8399faad25fdc17661795e92c83c578e245a27aff56",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\019_ambient-vaporizer-01_G2\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\019_ambient-vaporizer-01_G2\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
       "component_id": "ambient-vaporizer-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "696d2fba0f412a3aac8fc3d7bb86ab335ef640a7a3752a8717110bb759179810",
+      "provider_result_digests": [
+        "696d2fba0f412a3aac8fc3d7bb86ab335ef640a7a3752a8717110bb759179810"
+      ],
+      "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+      "provider_state_snapshot_digests": [
+        "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\019_ambient-vaporizer-01_G2\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "computed_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "provider_echo_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "provider_source_digest": null,
-      "provider_result_digest": "696d2fba0f412a3aac8fc3d7bb86ab335ef640a7a3752a8717110bb759179810",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\020_ambient-vaporizer-01_G3\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\020_ambient-vaporizer-01_G3\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
       "component_id": "ambient-vaporizer-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "e2df3c43ac8dade683be78d8b332b1184c49606f772837354d4770eaf2c88549",
+      "provider_result_digests": [
+        "e2df3c43ac8dade683be78d8b332b1184c49606f772837354d4770eaf2c88549"
+      ],
+      "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
+      "provider_state_snapshot_digests": [
+        "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\020_ambient-vaporizer-01_G3\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "computed_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "provider_echo_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
       "provider_source_digest": null,
-      "provider_result_digest": "e2df3c43ac8dade683be78d8b332b1184c49606f772837354d4770eaf2c88549",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\021_reliquefier-01_G4\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\021_reliquefier-01_G4\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
       "component_id": "reliquefier-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": null,
+      "provider_result_digests": [
+        "e32cfeeb6b11d8f95206b57d75c6446f5cd13c3d6bdbebfcc9bed23eaf4ba850",
+        "4e66fa133716935b03bf613c8a8335b115fbae133d48ec7cb8fb27df203e7830"
+      ],
+      "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+      "provider_state_snapshot_digests": [
+        "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\021_reliquefier-01_G4\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
@@ -371,16 +550,26 @@
         "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       ],
       "provider_source_digest": null,
-      "provider_result_digest": null,
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\022_reliquefier-01_G5\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\022_reliquefier-01_G5\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
       "component_id": "reliquefier-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": null,
+      "provider_result_digests": [
+        "484b84bddd715a90cf23108614dd2db2542ed1ded566c393263bba6f3d1c17b5",
+        "bfff92da93e818837bccf21b9c521c5777929f413d86cb9838227817c9715356"
+      ],
+      "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+      "provider_state_snapshot_digests": [
+        "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+        "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\022_reliquefier-01_G5\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
@@ -390,57 +579,38 @@
         "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       ],
       "provider_source_digest": null,
-      "provider_result_digest": null,
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     },
     {
       "source": "diagnostic_record",
-      "record": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\023_reliquefier-01_G6\\verification.json",
+      "record": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\023_reliquefier-01_G6\\verification.json",
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
       "component_id": "reliquefier-01",
-      "status": "BOUND_AND_ECHOED",
+      "provider_result_digest": "0e65801fa8af589c7125dd122f1832040a773f72eb8a74382dca192b1015dfb2",
+      "provider_result_digests": [
+        "0e65801fa8af589c7125dd122f1832040a773f72eb8a74382dca192b1015dfb2"
+      ],
+      "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
+      "provider_state_snapshot_digests": [
+        "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
+      ],
+      "verification_path": "results\\20261027\\native_generic_scope_packets_state_bound\\events\\023_reliquefier-01_G6\\verification.json",
       "snapshot_present": true,
       "snapshot_schema_version": "prism.equipment_state_snapshot.v1",
       "declared_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
       "computed_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
       "provider_echo_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
       "provider_source_digest": null,
-      "provider_result_digest": "0e65801fa8af589c7125dd122f1832040a773f72eb8a74382dca192b1015dfb2",
       "digest_match": true,
+      "status": "BOUND_AND_ECHOED",
       "reason": "canonical snapshot was validated at the request boundary and echoed by the provider"
     }
   ],
+  "diagnostic_only": true,
   "physical_validation_claim": false,
+  "provider_packet_promoted": false,
   "facility_qra_claim": false,
-  "interpretation": "Only a validated canonical equipment state payload with a matching provider echo counts as bound. This ledger does not qualify the model, assign frequency, or promote facility risk.",
-  "inputs": {
-    "verification_records": [
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\000_storage-tank-01_AREA_0.01pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\001_storage-tank-01_AREA_0.1pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\002_storage-tank-01_AREA_1pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\003_storage-tank-01_AREA_10pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\004_storage-tank-01_AREA_100pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\005_liquid-transfer-line-01_AREA_0.01pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\006_liquid-transfer-line-01_AREA_0.1pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\007_liquid-transfer-line-01_AREA_1pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\008_liquid-transfer-line-01_AREA_10pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\009_liquid-transfer-line-01_AREA_100pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\010_transfer-valve-01_AREA_0.01pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\011_transfer-valve-01_AREA_0.1pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\012_transfer-valve-01_AREA_1pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\013_transfer-valve-01_AREA_10pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\014_transfer-valve-01_AREA_100pct\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\015_pressure-relief-vent-01_G1\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\016_liquid-transfer-pump-01_G1\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\017_liquid-transfer-pump-01_G2\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\018_ambient-vaporizer-01_G1\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\019_ambient-vaporizer-01_G2\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\020_ambient-vaporizer-01_G3\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\021_reliquefier-01_G4\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\022_reliquefier-01_G5\\verification.json",
-      "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound\\events\\023_reliquefier-01_G6\\verification.json"
-    ],
-    "catalog_output": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261027\\native_generic_scope_packets_state_bound"
-  }
+  "interpretation": "Canonical equipment state snapshots and provider echoes are carried into the native consequence requests. This proves request-level state identity; it does not qualify the provider packet or create an independent physical validation."
 }

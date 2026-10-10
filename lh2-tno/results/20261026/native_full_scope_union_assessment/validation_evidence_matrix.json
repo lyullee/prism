@@ -97,8 +97,8 @@
       "strict_uncomputed_case_count": 29,
       "source": {
         "label": "facility assessment",
-        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\facility_assessment.json",
-        "sha256": "679edbd5e54aac26876fc043ed00cca55ffdf5ccca69fff777f535f0124e876d",
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261030\\native_full_scope_union_assessment_state_atoms\\facility_assessment.json",
+        "sha256": "ac4e6768f818422e720e1b31331029e8b9b2aaed1e68fff8124a115082a12968",
         "status": "PARTIAL_FACILITY_SCOPE"
       },
       "physical_validation_claim": false,
@@ -170,7 +170,7 @@
       "source": {
         "label": "IJHE completion audit",
         "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261026\\native_full_scope_union_assessment\\ijhe_completion_audit.json",
-        "sha256": "858404a0b994e893c2aad6bce54325e11276f003ae447371c5574f6a7953d8ed",
+        "sha256": "ece5d9b3d2cdf8ba21b67e745470532ff97e0566e1948bc453a99a76e48fbaa6",
         "status": "INCOMPLETE_EVIDENCE"
       },
       "physical_validation_claim": false,
@@ -263,5 +263,5 @@
     "diagnostic_chain_does_not_become_qualified_facility_qra": true,
     "frequency_is_not_inferred_from_sensor_or_observation_data": true
   },
-  "_record_path": "results\\20261026\\native_full_scope_union_assessment\\validation_evidence_matrix.json"
+  "_record_path": "results\\20261030\\native_full_scope_union_assessment_state_atoms\\validation_evidence_matrix.json"
 }
