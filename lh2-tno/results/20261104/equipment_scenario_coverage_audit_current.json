@@ -1,0 +1,458 @@
+{
+  "schema_version": "prism.equipment_scenario_coverage_audit.v1",
+  "status": "CROSSWALK_REQUIRED",
+  "scope": "generic outdoor LH2 equipment-to-accident-scenario coverage",
+  "scenario_catalog_schema": "prism.accident_scenario_catalog.v1",
+  "asset_count": 12,
+  "mapped_asset_count": 0,
+  "resolved_asset_count": 0,
+  "state_model_ready_mapped_asset_count": 0,
+  "scenario_family_count": 12,
+  "assets": [
+    {
+      "asset_id": "TK-1101",
+      "external_component_model": "homogeneous_tank",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": true,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "TK-1102",
+      "external_component_model": "homogeneous_tank",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": true,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VP-1101",
+      "external_component_model": "vaporizer",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VP-1102",
+      "external_component_model": "vaporizer",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VP-1103",
+      "external_component_model": "vaporizer",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VP-1301",
+      "external_component_model": "vaporizer",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VP-1302",
+      "external_component_model": "vaporizer",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "V-1101",
+      "external_component_model": "homogeneous_tank",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "L-1101A/B/C/D",
+      "external_component_model": "reliquefier",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VIRTUAL-LH2-PUMP-01",
+      "external_component_model": "virtual_pump",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "VALVE-CATALOG",
+      "external_component_model": "valve",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    },
+    {
+      "asset_id": "PIPE-CATALOG",
+      "external_component_model": "pipe",
+      "component_kind": null,
+      "identity_status": "unmapped",
+      "ready_for_state_model_input": false,
+      "status": "UNMAPPED_IDENTITY",
+      "blocking_reasons": [
+        "explicit asset-to-P&ID component crosswalk is required"
+      ],
+      "scenario_families": []
+    }
+  ],
+  "scenario_families": [
+    {
+      "family": "vessel_hole",
+      "equipment_kinds": [
+        "storage_tank"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "resolved gas or liquid release -> SLABx-LH2/TNO dispersion -> ignition/IR/F-N",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "pipe_hole",
+      "equipment_kinds": [
+        "pipe"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "pipe outlet state -> two-phase/gas release -> SLABx-LH2/TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "valve_hole",
+      "equipment_kinds": [
+        "valve"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "valve state and upstream inventory -> resolved release -> TNO consequence chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "vent_hole",
+      "equipment_kinds": [
+        "vent_stack"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "equipment_emergency_relief",
+        "integrated_transient"
+      ],
+      "termination_bases": [
+        "emergency_relief_discharge",
+        "explicit_provider_termination"
+      ],
+      "consequence_path": "relief/vent outlet -> gas plume -> ignition/thermal radiation/overpressure",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "pump_hole",
+      "equipment_kinds": [
+        "pump"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "pump state and seal/casing opening -> liquid/gas release -> TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "vaporizer_hole",
+      "equipment_kinds": [
+        "vaporizer"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "vaporizer state -> phase-resolved release -> SLABx-LH2/TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "reliquefier_hole",
+      "equipment_kinds": [
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "consequence_path": "reliquefier state -> resolved gas/liquid release -> TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "liquid_two_phase",
+      "equipment_kinds": [
+        "storage_tank",
+        "pipe",
+        "valve",
+        "pump",
+        "vaporizer",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s"
+      ],
+      "consequence_path": "liquid thermodynamic state -> flash/two-phase source -> SLABx-LH2 -> TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "inventory_depletion",
+      "equipment_kinds": [
+        "storage_tank",
+        "pipe",
+        "valve",
+        "pump",
+        "vaporizer",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "termination_bases": [
+        "inventory_depletion"
+      ],
+      "consequence_path": "inventory ledger reaches zero -> finite release -> TNO consequence chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "inventory_over_600s",
+      "equipment_kinds": [
+        "storage_tank",
+        "pipe",
+        "valve",
+        "pump",
+        "vaporizer",
+        "reliquefier"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "termination_bases": [
+        "inventory_over_600s"
+      ],
+      "consequence_path": "600 s provider history -> bounded release -> SLABx-LH2/TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "two_sided_rupture",
+      "equipment_kinds": [
+        "pipe",
+        "valve"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "termination_bases": [
+        "two_sided_rupture"
+      ],
+      "consequence_path": "upstream and downstream endpoint releases -> union harm -> TNO IR/F-N",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    },
+    {
+      "family": "vertical_handoff",
+      "equipment_kinds": [
+        "vent_stack",
+        "pipe",
+        "valve"
+      ],
+      "applicable_asset_ids": [],
+      "status": "UNMAPPED_IDENTITY",
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_emergency_relief"
+      ],
+      "termination_bases": [
+        "explicit_provider_termination",
+        "emergency_relief_discharge"
+      ],
+      "consequence_path": "vertical jet state -> horizontal SLABx handoff -> TNO damage chain",
+      "blocking_reasons": [
+        "no resolved asset identity is available for this accident family"
+      ]
+    }
+  ],
+  "extra_crosswalk_asset_ids": [],
+  "promotion_gates": {
+    "scenario_mapping_allowed": false,
+    "accident_release_packet_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "physical_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "blocking_reasons": [
+    "no facility-neutral asset-to-component crosswalk was supplied",
+    "TK-1101: explicit asset-to-P&ID component crosswalk is required",
+    "TK-1102: explicit asset-to-P&ID component crosswalk is required",
+    "VP-1101: explicit asset-to-P&ID component crosswalk is required",
+    "VP-1102: explicit asset-to-P&ID component crosswalk is required",
+    "VP-1103: explicit asset-to-P&ID component crosswalk is required",
+    "VP-1301: explicit asset-to-P&ID component crosswalk is required",
+    "VP-1302: explicit asset-to-P&ID component crosswalk is required",
+    "V-1101: explicit asset-to-P&ID component crosswalk is required",
+    "L-1101A/B/C/D: explicit asset-to-P&ID component crosswalk is required",
+    "VIRTUAL-LH2-PUMP-01: explicit asset-to-P&ID component crosswalk is required",
+    "VALVE-CATALOG: explicit asset-to-P&ID component crosswalk is required",
+    "PIPE-CATALOG: explicit asset-to-P&ID component crosswalk is required"
+  ],
+  "required_next_evidence": [
+    "facility-neutral asset ID, P&ID port, and component-kind crosswalk",
+    "provider accident release packet for every declared family",
+    "duration, isolation, inventory-depletion, and mass-balance echo",
+    "independent holdout consequence comparison"
+  ],
+  "policy": {
+    "component_kind_is_never_inferred_from_tag": true,
+    "candidate_identity_is_not_resolved_identity": true,
+    "scenario_catalog_does_not_create_release": true,
+    "scenario_mapping_is_not_frequency": true,
+    "no_automatic_facility_qra_promotion": true
+  },
+  "source_equipment_audit_status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+  "_record_path": "lh2-tno\\results\\20261104\\external_equipment_model_audit_current.json"
+}

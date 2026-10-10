@@ -64,6 +64,7 @@ def build_ijhe_objective_coverage_audit(
     external_field_model_comparison: Mapping[str, Any] | None = None,
     validation_intake_audit: Mapping[str, Any] | None = None,
     external_equipment_model_audit: Mapping[str, Any] | None = None,
+    equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -91,6 +92,7 @@ def build_ijhe_objective_coverage_audit(
     external_field_comparison_path = _record_path(external_field_model_comparison, None)
     validation_intake_path = _record_path(validation_intake_audit, None)
     external_equipment_model_path = _record_path(external_equipment_model_audit, None)
+    equipment_scenario_coverage_path = _record_path(equipment_scenario_coverage_audit, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -1097,6 +1099,93 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "TK-1101/TK-1102 같은 상태 모델 입력 준비 자산은 기록하되, 절차 의도·재구성 자료만으로 "
                 "사고 방출 시각·차단·재고 소진·빈도·시설 QRA를 열지 않는다."
+            ),
+        ))
+
+    scenario_coverage_gates = (
+        equipment_scenario_coverage_audit.get("promotion_gates", {})
+        if isinstance(equipment_scenario_coverage_audit, Mapping)
+        else {}
+    )
+    if not isinstance(scenario_coverage_gates, Mapping):
+        scenario_coverage_gates = {}
+    scenario_coverage_policy = (
+        equipment_scenario_coverage_audit.get("policy", {})
+        if isinstance(equipment_scenario_coverage_audit, Mapping)
+        else {}
+    )
+    if not isinstance(scenario_coverage_policy, Mapping):
+        scenario_coverage_policy = {}
+    scenario_coverage_ok = (
+        isinstance(equipment_scenario_coverage_audit, Mapping)
+        and equipment_scenario_coverage_audit.get("schema_version")
+        == "prism.equipment_scenario_coverage_audit.v1"
+        and equipment_scenario_coverage_audit.get("scenario_catalog_schema")
+        == "prism.accident_scenario_catalog.v1"
+        and equipment_scenario_coverage_audit.get("status") in {
+            "CROSSWALK_REQUIRED",
+            "PARTIAL_CROSSWALK_RELEASE_BOUNDARY_UNVERIFIED",
+            "SCENARIO_CATALOG_BOUND_RELEASE_BOUNDARY_UNVERIFIED",
+        }
+        and scenario_coverage_gates.get("accident_release_packet_allowed") is False
+        and scenario_coverage_gates.get("frequency_inference_allowed") is False
+        and scenario_coverage_gates.get("facility_qra_allowed") is False
+        and scenario_coverage_gates.get("promotion_allowed") is False
+        and equipment_scenario_coverage_audit.get("physical_validation_claim") is False
+        and equipment_scenario_coverage_audit.get("accident_release_validation_claim") is False
+        and equipment_scenario_coverage_audit.get("frequency_inference_performed") is False
+        and equipment_scenario_coverage_audit.get("facility_qra_claim") is False
+        and scenario_coverage_policy.get("component_kind_is_never_inferred_from_tag") is True
+        and scenario_coverage_policy.get("candidate_identity_is_not_resolved_identity") is True
+        and scenario_coverage_policy.get("scenario_catalog_does_not_create_release") is True
+        and scenario_coverage_policy.get("scenario_mapping_is_not_frequency") is True
+        and scenario_coverage_policy.get("no_automatic_facility_qra_promotion") is True
+    )
+    if equipment_scenario_coverage_audit is not None:
+        rows.append(_row(
+            "diagnostic_equipment_scenario_coverage",
+            "설비 ID·P&ID component kind·사고 family를 명시적으로 연결하되 시나리오 목록이 방출·빈도·시설 QRA를 만들지 않아야 한다",
+            "PASS" if scenario_coverage_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(equipment_scenario_coverage_path,),
+            observed={
+                "status": (
+                    equipment_scenario_coverage_audit.get("status")
+                    if isinstance(equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "asset_count": (
+                    equipment_scenario_coverage_audit.get("asset_count")
+                    if isinstance(equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "mapped_asset_count": (
+                    equipment_scenario_coverage_audit.get("mapped_asset_count")
+                    if isinstance(equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "resolved_asset_count": (
+                    equipment_scenario_coverage_audit.get("resolved_asset_count")
+                    if isinstance(equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "scenario_family_count": (
+                    equipment_scenario_coverage_audit.get("scenario_family_count")
+                    if isinstance(equipment_scenario_coverage_audit, Mapping)
+                    else None
+                ),
+                "accident_release_packet_allowed": scenario_coverage_gates.get(
+                    "accident_release_packet_allowed"
+                ),
+                "frequency_inference_allowed": scenario_coverage_gates.get(
+                    "frequency_inference_allowed"
+                ),
+            },
+            blocking_reason=None if scenario_coverage_ok else (
+                "설비-사고 family 감사의 schema·crosswalk 정책 또는 승격 차단 조건이 확인되지 않았다"
+            ),
+            interpretation=(
+                "일반 액화수소 시설에서 설비별 주요 사고 목록과 필요한 provider 연산자를 보여준다. "
+                "P&ID crosswalk와 provider 방출 packet이 없으면 해당 family는 계산하지 않는다."
             ),
         ))
 

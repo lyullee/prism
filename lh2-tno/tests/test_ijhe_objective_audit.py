@@ -419,3 +419,50 @@ def test_objective_audit_records_external_equipment_readiness_without_release_pr
         "diagnostic_observed_state_source_replay",
         "diagnostic_observed_state_runtime_frames",
     ]
+
+
+def test_objective_audit_records_equipment_scenario_coverage_without_inference():
+    inputs = _inputs()
+    inputs["equipment_scenario_coverage_audit"] = {
+        "schema_version": "prism.equipment_scenario_coverage_audit.v1",
+        "status": "CROSSWALK_REQUIRED",
+        "scenario_catalog_schema": "prism.accident_scenario_catalog.v1",
+        "asset_count": 12,
+        "mapped_asset_count": 0,
+        "resolved_asset_count": 0,
+        "scenario_family_count": 12,
+        "promotion_gates": {
+            "accident_release_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "promotion_allowed": False,
+        },
+        "physical_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "policy": {
+            "component_kind_is_never_inferred_from_tag": True,
+            "candidate_identity_is_not_resolved_identity": True,
+            "scenario_catalog_does_not_create_release": True,
+            "scenario_mapping_is_not_frequency": True,
+            "no_automatic_facility_qra_promotion": True,
+        },
+        "_record_path": "equipment-scenario-coverage.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_equipment_scenario_coverage"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["scenario_family_count"] == 12
+    assert report["strict_blocking_check_ids"] == [
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+        "strict_facility_state_snapshot_coverage",
+        "diagnostic_observed_state_source_replay",
+        "diagnostic_observed_state_runtime_frames",
+    ]
