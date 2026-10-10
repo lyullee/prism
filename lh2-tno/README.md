@@ -77,9 +77,10 @@ IR/F-N·전체 QRA 또는 독립 물리검증을 승격하지 않습니다. 재�
 **격리 응답의 시설 원장 결합 확장:** `scripts/build_isolation_extension_assessment.py`는 기존
 34 event·44 case·176 atom 원장에 격리 성공·실패 5 event·20 case·80 atom을 충돌 없는
 `isolation-response` 이름공간으로 결합합니다. 결합 결과는 39 event·64 case·256 atom이며,
-방출→피해 risk atom chain, 시설 IR/F-N 재집계, 설비별 기여도 감사가 닫힙니다. 새 격리 20 case에는
-canonical equipment state snapshot과 provider echo가 없어 상태→방출 감사는 44 complete·20
-incomplete로 남습니다. 확장은 성공확률·빈도·시설 QRA를 승격하지 않는 진단 원장입니다. 결과와
+방출→피해 risk atom chain, 시설 IR/F-N 재집계, 설비별 기여도 감사가 닫힙니다. 격리 provider 응답의
+첫 상류 상태 행에서 canonical equipment state snapshot을 만들고 adapter/worker digest와 snapshot
+echo를 보존하므로 상태→방출 구조 감사는 64/64로 닫힙니다. 이 snapshot은 `model_prediction`
+진단값이며 적격 provider packet·현장 검증을 대신하지 않습니다. 확장은 성공확률·빈도·시설 QRA를 승격하지 않는 진단 원장입니다. 결과와
 재현 명령은 [격리 응답 시설 원장 확장 기록](docs/PRISM_isolation_union_extension_개발기록_20261010.md)에
 기록했습니다.
 

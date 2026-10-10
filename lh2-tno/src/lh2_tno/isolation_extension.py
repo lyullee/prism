@@ -25,6 +25,7 @@ from .facility_scope_matrix import (
     repair_facility_ledger_scenario_families,
 )
 from .risk_atom_chain_audit import build_risk_atom_chain_audit
+from .state_snapshot import EquipmentStateSnapshot
 
 
 ISOLATION_EXTENSION_SCHEMA = "prism.isolation_union_extension.v1"
@@ -109,6 +110,7 @@ def _prepare_isolation_campaign(
     isolation_result: Mapping[str, Any],
     *,
     facility_id: str,
+    provider_response: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_facility_id = str(isolation_result.get("facility_id", "")).strip()
     if not source_facility_id:
@@ -141,8 +143,8 @@ def _prepare_isolation_campaign(
     # The legacy isolation campaign predates the facility case contract.  Keep
     # a case-level diagnostic identity and a domain-assessment marker so the
     # release-to-risk chain can be audited without pretending that a qualified
-    # equipment state snapshot was supplied.  The state-release audit remains
-    # partial because the snapshot and provider echo are intentionally absent.
+    # provider packet was supplied.  A provider response can optionally add a
+    # state-only snapshot below; that binding remains diagnostic.
     for case in rebound.get("cases", []):
         if not isinstance(case, dict):
             continue
@@ -170,6 +172,99 @@ def _prepare_isolation_campaign(
             "diagnostic_only": True,
             "physical_validation_claim": False,
         }
+        if provider_response is None:
+            continue
+        area_id = next(
+            (part for part in str(case.get("event_id", "")).split("/") if part.startswith("AREA_")),
+            None,
+        )
+        branch_id = str(case.get("release_branch_id", ""))
+        branch_name = {
+            "provider-isolation-success": "success",
+            "provider-isolation-failure": "failure",
+        }.get(branch_id)
+        if not area_id or branch_name is None:
+            raise ValueError(
+                f"isolation case cannot map provider response: {case.get('event_id')} / {branch_id}"
+            )
+        area_row = provider_response.get(area_id)
+        if not isinstance(area_row, Mapping) or not isinstance(area_row.get(branch_name), Mapping):
+            raise ValueError(f"provider response branch is missing: {area_id}/{branch_name}")
+        provider_row = area_row[branch_name]
+        data = provider_row.get("data")
+        if not isinstance(data, Mapping):
+            raise ValueError(f"provider response data is missing: {area_id}/{branch_name}")
+        steps = data.get("steps")
+        if not isinstance(steps, list) or not steps or not isinstance(steps[0], Mapping):
+            raise ValueError(f"provider response initial state is missing: {area_id}/{branch_name}")
+        initial = steps[0]
+        try:
+            source_digest = str(provider_row["adapter_source_digest"])
+            worker_digest = str(provider_row["worker_sha256"])
+            pressure = float(initial["upstream_pressure_pa_abs"])
+            temperature = float(initial["upstream_temperature_k"])
+            available_mass = float(data["available_mass_kg"])
+            captured_at = float(initial.get("time_s", 0.0))
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError(f"provider response initial state is invalid: {area_id}/{branch_name}") from error
+        snapshot = EquipmentStateSnapshot.model_validate(
+            {
+                "schema_version": "prism.equipment_state_snapshot.v1",
+                "component_id": ISOLATION_EXTENSION_COMPONENT_ID,
+                "captured_at_s": captured_at,
+                "origin": "model_prediction",
+                "pressure_pa_abs": pressure,
+                "temperature_k": temperature,
+                "mass_kg": available_mass,
+                "phase": "vapour",
+                "measurements": {
+                    "provider_upstream_pressure": {
+                        "quantity": "pressure",
+                        "value_si": pressure,
+                        "sensor_location": "isolation-response-pipe-01.upstream",
+                        "quality": "valid",
+                    },
+                    "provider_upstream_temperature": {
+                        "quantity": "temperature",
+                        "value_si": temperature,
+                        "sensor_location": "isolation-response-pipe-01.upstream",
+                        "quality": "valid",
+                    },
+                    "provider_available_mass": {
+                        "quantity": "mass",
+                        "value_si": available_mass,
+                        "sensor_location": "isolation-response-pipe-01.inventory",
+                        "quality": "valid",
+                    },
+                },
+                "source_digest": source_digest,
+                "quality": "valid",
+            }
+        )
+        snapshot_mapping = snapshot.to_mapping()
+        snapshot_digest = snapshot.digest()
+        identity = case["provider_packet_identity"]
+        identity.update(
+            {
+                "provider_source_digests": [source_digest, worker_digest],
+                "provider_result_digests": [case["result_digest"]],
+                "provider_boundary_references": [str(data.get("provider_link_id", "isolation_valve"))],
+                "state_snapshot": snapshot_mapping,
+                "state_snapshot_digest": snapshot_digest,
+                "provider_state_snapshot_digest": snapshot_digest,
+                "provider_state_snapshot_digests": [snapshot_digest],
+                "termination_bases": [basis] if basis else [],
+                "termination_provenances": [
+                    termination.get("provenance")
+                ]
+                if isinstance(termination, Mapping) and termination.get("provenance")
+                else [],
+                "diagnostic_state_snapshot_derivation": (
+                    "copied from provider_response.data.steps[0] upstream state; "
+                    "model-prediction diagnostic only"
+                ),
+            }
+        )
     # The stand-alone campaign predates the facility contribution contract and
     # therefore did not repeat component identity inside every risk atom.  Add
     # a transparent diagnostic identity shim from the already stored case
@@ -233,6 +328,7 @@ def build_isolation_union_extension(
     base_result: Mapping[str, Any],
     base_scope_matrix: Mapping[str, Any],
     isolation_result: Mapping[str, Any],
+    isolation_provider_response: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Merge the current facility ledger with explicit isolation branches."""
     if not isinstance(base_result, Mapping):
@@ -245,7 +341,11 @@ def build_isolation_union_extension(
     if not facility_id:
         raise ValueError("base facility result has no facility_id")
     base_input = _as_campaign_input(base_result)
-    isolation = _prepare_isolation_campaign(isolation_result, facility_id=facility_id)
+    isolation = _prepare_isolation_campaign(
+        isolation_result,
+        facility_id=facility_id,
+        provider_response=isolation_provider_response,
+    )
     expected_components = sorted(
         {
             str(component_id)
@@ -291,6 +391,13 @@ def build_isolation_union_extension(
         "isolation_case_count": len(isolation.get("cases", [])),
         "isolation_risk_atom_count": len(isolation.get("risk_atoms", [])),
         "isolation_branch_case_counts": isolation_branch_counts,
+        "isolation_provider_response_consumed": isolation_provider_response is not None,
+        "isolation_state_snapshot_bound_case_count": sum(
+            isinstance(row, Mapping)
+            and isinstance(row.get("provider_packet_identity"), Mapping)
+            and isinstance(row["provider_packet_identity"].get("state_snapshot"), Mapping)
+            for row in isolation.get("cases", [])
+        ),
         "merged_event_count": merged["event_count"],
         "merged_case_count": merged["case_count"],
         "merged_risk_atom_count": len(merged.get("risk_atoms", [])),
@@ -318,6 +425,7 @@ def build_isolation_union_extension(
         },
         "limitations": [
             "The isolation campaign is a namespaced synthetic diagnostic extension.",
+            "The optional isolation state snapshot is copied from the provider response's first upstream state row and remains model-prediction diagnostic evidence.",
             "Success/failure branch probability is not promoted to plant reliability.",
             "Existing 34-event/44-case union remains the primary current-status ledger.",
             "Merged conditional IR/F-N is diagnostic and facility QRA remains withheld.",

@@ -53,14 +53,16 @@ shim을 명시한다. 이것은 risk atom chain의 case 연결을 검사하기 �
 | 방출→피해 risk atom chain | `FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC` (64/64) |
 | 시설 IR/F-N 재집계 | `FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC` |
 | 설비별 기여도 재집계 | `FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC` |
-| 설비 상태→방출 증거 | `PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN` (44 complete, 20 incomplete) |
+| 설비 상태→방출 증거 | `FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC` (64/64) |
 | 적격 provider packet | 0/64 case |
 | 시설 전체 위험/QRA 승격 | 하지 않음 |
 
 44개 기존 case는 canonical equipment state snapshot과 provider echo가 있어 상태 release 감사가
-닫힌다. 새 isolation 20개 case는 구형 campaign 자료에 상태 snapshot, 원자료 source digest,
-provider termination echo가 없으므로 20개를 명시적 incomplete로 남긴다. 이 누락을 0 위험이나
-성공 branch로 대체하지 않는다.
+닫힌다. 새 isolation 20개 case는 provider 응답의 첫 상류 상태 행에서 압력·온도·재고를 복사해
+`prism.equipment_state_snapshot.v1`로 만들고, adapter/worker digest와 snapshot digest echo를
+결합했다. 이 변환은 방출량에서 상태를 역산하지 않으며 `model_prediction` 진단 origin과
+`diagnostic_state_snapshot_derivation`을 보존한다. 따라서 구조적 상태→방출 identity 감사는
+64/64로 닫히지만, 적격 provider packet이나 현장 물리검증으로 승격되지는 않는다.
 
 ## 4. 재현 명령
 
@@ -69,6 +71,7 @@ python scripts/build_isolation_extension_assessment.py `
   --base-result results/20261026/native_full_scope_union_assessment/campaign_result.json `
   --base-scope-matrix results/20261026/native_full_scope_union_assessment/scope_matrix.json `
   --isolation-result results/20261009/equipment_isolation_campaign/campaign_result.json `
+  --isolation-provider-response results/20261009/equipment_isolation_campaign/provider_response.json `
   --output-dir results/20261026/native_full_scope_union_assessment/isolation_extension
 ```
 
@@ -82,9 +85,9 @@ python scripts/build_isolation_extension_assessment.py `
 재현된다. 그러나 실제 시설의 차단 신뢰도나 사고 빈도를 산출한 것은 아니다. 다음 provider
 export는 각 isolation case에 아래 계약을 추가해야 상태 release gate가 닫힌다.
 
-- `prism.equipment_state_snapshot.v1`와 `state_snapshot_digest`
-- 상태 snapshot digest의 provider echo
-- provider source/result digest와 포트 ID
+- 실제 설비 provider가 확인한 `prism.equipment_state_snapshot.v1`와 `state_snapshot_digest`
+- 상태 snapshot digest의 provider echo와 포트 ID
+- provider source/result digest의 원자료 추적성
 - 차단 전·후 유량, 실제 종료 시각, 잔류 재고
 - 종료 basis를 provider packet에 다시 기록한 termination echo
 - 방출 이력의 질량·에너지 폐합과 독립 검증 자료

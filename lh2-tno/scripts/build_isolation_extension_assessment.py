@@ -32,6 +32,11 @@ def main() -> int:
     parser.add_argument("--base-result", type=Path, required=True)
     parser.add_argument("--base-scope-matrix", type=Path, required=True)
     parser.add_argument("--isolation-result", type=Path, required=True)
+    parser.add_argument(
+        "--isolation-provider-response",
+        type=Path,
+        help="provider response used to bind a diagnostic equipment state snapshot",
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -39,6 +44,9 @@ def main() -> int:
             _object(args.base_result),
             _object(args.base_scope_matrix),
             _object(args.isolation_result),
+            _object(args.isolation_provider_response)
+            if args.isolation_provider_response
+            else None,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"isolation extension input error: {error}") from error
@@ -76,6 +84,10 @@ def main() -> int:
             "risk_atoms": report["isolation_risk_atom_count"],
             "success_cases": report["isolation_branch_case_counts"]["success"],
             "failure_cases": report["isolation_branch_case_counts"]["failure"],
+            "provider_response_consumed": report["isolation_provider_response_consumed"],
+            "state_snapshot_bound_cases": report[
+                "isolation_state_snapshot_bound_case_count"
+            ],
         },
         "merged_counts": {
             "events": report["merged_event_count"],
@@ -117,6 +129,12 @@ def main() -> int:
                 "merged_event_count": report["merged_event_count"],
                 "merged_case_count": report["merged_case_count"],
                 "merged_risk_atom_count": report["merged_risk_atom_count"],
+                "isolation_provider_response_consumed": report[
+                    "isolation_provider_response_consumed"
+                ],
+                "isolation_state_snapshot_bound_case_count": report[
+                    "isolation_state_snapshot_bound_case_count"
+                ],
                 "risk_atom_chain_status": report["risk_atom_chain_audit"]["status"],
                 "equipment_state_release_status": report[
                     "equipment_state_release_audit"

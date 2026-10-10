@@ -556,7 +556,7 @@
     "two_sided_rupture: PARTIAL",
     "vertical_handoff: PARTIAL"
   ],
-  "source_facility_ledger_digest": "ec94774bcb691bdce3095202e37c78ba79e386aacf3ffc24939043ac749287cd",
+  "source_facility_ledger_digest": "404d0cfe038df4fa69802b7f1c25bc29eaad957ac66951b173e493efd8980084",
   "source": "facility_ledger_event_and_case_metadata",
   "physical_validation_claim": false,
   "interpretation": "This matrix is regenerated from the exact merged facility ledger. Overlapping family rows are views of the same cases and must not be summed."

@@ -12,7 +12,9 @@
     "cases": 20,
     "risk_atoms": 80,
     "success_cases": 10,
-    "failure_cases": 10
+    "failure_cases": 10,
+    "provider_response_consumed": true,
+    "state_snapshot_bound_cases": 20
   },
   "merged_counts": {
     "events": 39,
@@ -20,9 +22,9 @@
     "risk_atoms": 256
   },
   "risk_atom_chain_status": "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC",
-  "equipment_state_release_status": "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN",
-  "equipment_state_release_complete_cases": 44,
-  "equipment_state_release_incomplete_cases": 20,
+  "equipment_state_release_status": "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC",
+  "equipment_state_release_complete_cases": 64,
+  "equipment_state_release_incomplete_cases": 0,
   "facility_aggregate_closure_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
   "facility_component_contribution_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
   "qualified_provider_packet_case_count": 0,

@@ -288,7 +288,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "fe43cd710db7cd4eb03c4f2d86515f92f53c18fbb7c5c108f130c765cda21fdf"
         ],
@@ -299,7 +302,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42026889903,
+          "temperature_k": 20.791568249117272,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42026889903,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568249117272,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digests": [
+          "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -348,7 +394,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "455ee023fe8db9675be44747418cb3a7bbbaed71fec7a8f3c4392e254376b705"
         ],
@@ -359,7 +408,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42026889903,
+          "temperature_k": 20.791568249117272,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42026889903,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568249117272,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digests": [
+          "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -408,7 +500,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "e6a6ff0b8a0f28f22508e620bfc04431b3bb715aedb5a2e7586789e5e6ec720e"
         ],
@@ -419,7 +514,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42026889903,
+          "temperature_k": 20.791568249117272,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42026889903,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568249117272,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digests": [
+          "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -468,7 +606,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "5f00f7b2a5fd5928ce5adf12919bed0e2c053673c69cb2a68eda280666cf2095"
         ],
@@ -479,7 +620,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42026889903,
+          "temperature_k": 20.791568249117272,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42026889903,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568249117272,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digest": "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b",
+        "provider_state_snapshot_digests": [
+          "c45ac5099a5ef81c8eb8db4c59f26c07e75fb7f8e2bc0f81b84d9c3bb41c368b"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -528,7 +712,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "d32c03e7545462aa4119797199943f6df0367e2b70cd86de6e49ce59cda5809f"
         ],
@@ -539,7 +726,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42014523612,
+          "temperature_k": 20.791568239346507,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42014523612,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568239346507,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digests": [
+          "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -588,7 +818,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "5f5540184b0af73a16c33bbbe2331e670777c41bcde7c58ecb32a9362f74feee"
         ],
@@ -599,7 +832,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42014523612,
+          "temperature_k": 20.791568239346507,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42014523612,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568239346507,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digests": [
+          "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -648,7 +924,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "077ca6a968003a95d55260bb4ab6c36bb4ddc8855d81052fb214a729b4ea0bfe"
         ],
@@ -659,7 +938,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42014523612,
+          "temperature_k": 20.791568239346507,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42014523612,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568239346507,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digests": [
+          "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -708,7 +1030,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "b244298a6a33a9413d266d4c3f3b460658b07a8a557c9b9e4d497f5c05b27ab6"
         ],
@@ -719,7 +1044,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.42014523612,
+          "temperature_k": 20.791568239346507,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.42014523612,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568239346507,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digest": "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c",
+        "provider_state_snapshot_digests": [
+          "2e3e92a3d0e5a5ac7be8942989bb3a899c98daa17accbecfc36a686c759f087c"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -768,7 +1136,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "63a0c4d1111ccb406a74b5d6e5ce6e08ecd90838b97600788d94c46933b550a8"
         ],
@@ -779,7 +1150,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.41890860701,
+          "temperature_k": 20.791568141638923,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.41890860701,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568141638923,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digests": [
+          "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -828,7 +1242,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "bd254c16711ca5e97850097f5ecb11d7a481ed20d8a26853ba72affb5e73f4e1"
         ],
@@ -839,7 +1256,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.41890860701,
+          "temperature_k": 20.791568141638923,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.41890860701,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568141638923,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digests": [
+          "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -888,7 +1348,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "df85b106c2d83d39738f6ac3841d2c14ec2bc124514b752f3f2087df222ba501"
         ],
@@ -899,7 +1362,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.41890860701,
+          "temperature_k": 20.791568141638923,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.41890860701,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568141638923,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digests": [
+          "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -948,7 +1454,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "fc9d0c88d260947ea3dbddb648371baf8e6d9d0b8e740789d92900675a849cb2"
         ],
@@ -959,7 +1468,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.41890860701,
+          "temperature_k": 20.791568141638923,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.41890860701,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.791568141638923,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digest": "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062",
+        "provider_state_snapshot_digests": [
+          "fc4e643f70a2288d5eb68639c038e7ef135cf1f444d0a1451952354efdee1062"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1008,7 +1560,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "97f2588d758ff75a7342776e94662f54e6490cd6f45a8626ad8ce9ee864b891d"
         ],
@@ -1019,7 +1574,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.40654232341,
+          "temperature_k": 20.79156716456378,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.40654232341,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79156716456378,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digests": [
+          "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1068,7 +1666,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "c665b470c560f66ef55d51ce0756e495fcaade44c176fb33573d10706d89368f"
         ],
@@ -1079,7 +1680,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.40654232341,
+          "temperature_k": 20.79156716456378,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.40654232341,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79156716456378,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digests": [
+          "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1128,7 +1772,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "cf4567587dcc31c7c0ced5f5ebc4bf69e05f4501e908a7c625021b358ca916da"
         ],
@@ -1139,7 +1786,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.40654232341,
+          "temperature_k": 20.79156716456378,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.40654232341,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79156716456378,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digests": [
+          "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1188,7 +1878,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "d704b9accd4944654a44fc1ba6f603800f8797d1087f8bb71827a7baa2254ea2"
         ],
@@ -1199,7 +1892,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.40654232341,
+          "temperature_k": 20.79156716456378,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.40654232341,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79156716456378,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digest": "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834",
+        "provider_state_snapshot_digests": [
+          "a94a0ea04f737b832de5620c2e072225ca6e68b654b2392d96d728417dac7834"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1248,7 +1984,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "a06dfe094d6df29125aca5f440d56c7d1c5bc6a5bd764544459f71fcb71234ed"
         ],
@@ -1259,7 +1998,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.28288024524,
+          "temperature_k": 20.79155739386856,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.28288024524,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79155739386856,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digests": [
+          "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1308,7 +2090,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "9f27e64ef0d976f886b3d171cceb86946e8d7e051c03cc751a18a5cf7029bd32"
         ],
@@ -1319,7 +2104,50 @@
           "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.28288024524,
+          "temperature_k": 20.79155739386856,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.28288024524,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79155739386856,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digests": [
+          "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1368,7 +2196,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "02e542e6a95624a9cdaf5eb5a42ad646c04fc695634fc3c2650c38ba3c9da9fd"
         ],
@@ -1379,7 +2210,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.28288024524,
+          "temperature_k": 20.79155739386856,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.28288024524,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79155739386856,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digests": [
+          "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",
@@ -1428,7 +2302,10 @@
         "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
         "component_id": "isolation-response-pipe-01",
         "provider_export_schema": "diagnostic-isolation-response",
-        "provider_source_digests": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
         "provider_result_digests": [
           "878be6f277691d9c226cb89e7cb47fbfd1b068257b397b7b4e3e9be0ff55475c"
         ],
@@ -1439,7 +2316,50 @@
           "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
         ],
         "diagnostic_identity_only": true,
-        "qualified_provider_packet": false
+        "qualified_provider_packet": false,
+        "provider_boundary_references": [
+          "isolation_valve"
+        ],
+        "state_snapshot": {
+          "schema_version": "prism.equipment_state_snapshot.v1",
+          "component_id": "isolation-response-pipe-01",
+          "captured_at_s": 0.0,
+          "origin": "model_prediction",
+          "pressure_pa_abs": 105712.28288024524,
+          "temperature_k": 20.79155739386856,
+          "mass_kg": 66.08635632043666,
+          "liquid_fraction": null,
+          "phase": "vapour",
+          "position_enu_m": null,
+          "measurements": {
+            "provider_upstream_pressure": {
+              "quantity": "pressure",
+              "value_si": 105712.28288024524,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_upstream_temperature": {
+              "quantity": "temperature",
+              "value_si": 20.79155739386856,
+              "sensor_location": "isolation-response-pipe-01.upstream",
+              "quality": "valid"
+            },
+            "provider_available_mass": {
+              "quantity": "mass",
+              "value_si": 66.08635632043666,
+              "sensor_location": "isolation-response-pipe-01.inventory",
+              "quality": "valid"
+            }
+          },
+          "source_digest": "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "quality": "valid"
+        },
+        "state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digest": "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44",
+        "provider_state_snapshot_digests": [
+          "ecb7235a73d8878eafbc18c823649743edbdbef98983619f98803cd9fb736e44"
+        ],
+        "diagnostic_state_snapshot_derivation": "copied from provider_response.data.steps[0] upstream state; model-prediction diagnostic only"
       },
       "domain_assessment": {
         "assessment_status": "not_exported_by_legacy_isolation_campaign",

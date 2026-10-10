@@ -11,18 +11,19 @@ BASE_ROOT = ROOT / "results/20261026/native_full_scope_union_assessment"
 ISOLATION_ROOT = ROOT / "results/20261009/equipment_isolation_campaign"
 
 
-def _inputs() -> tuple[dict, dict, dict]:
+def _inputs() -> tuple[dict, dict, dict, dict]:
     return (
         json.loads((BASE_ROOT / "campaign_result.json").read_text(encoding="utf-8")),
         json.loads((BASE_ROOT / "scope_matrix.json").read_text(encoding="utf-8")),
         json.loads((ISOLATION_ROOT / "campaign_result.json").read_text(encoding="utf-8")),
+        json.loads((ISOLATION_ROOT / "provider_response.json").read_text(encoding="utf-8")),
     )
 
 
 def test_isolation_extension_merges_namespaced_branches_into_facility_chain() -> None:
-    base, scope, isolation = _inputs()
+    base, scope, isolation, provider_response = _inputs()
 
-    report = build_isolation_union_extension(base, scope, isolation)
+    report = build_isolation_union_extension(base, scope, isolation, provider_response)
     merged = report["merged_campaign_result"]
 
     assert report["schema"] == "prism.isolation_union_extension.v1"
@@ -34,9 +35,9 @@ def test_isolation_extension_merges_namespaced_branches_into_facility_chain() ->
     assert len({row["id"] for row in merged["events"]}) == 39
     assert report["risk_atom_chain_audit"]["status"] == "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC"
     assert report["risk_atom_chain_audit"]["complete_case_count"] == 64
-    assert report["equipment_state_release_audit"]["status"] == "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN"
-    assert report["equipment_state_release_audit"]["complete_case_count"] == 44
-    assert report["equipment_state_release_audit"]["incomplete_case_count"] == 20
+    assert report["equipment_state_release_audit"]["status"] == "FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC"
+    assert report["equipment_state_release_audit"]["complete_case_count"] == 64
+    assert report["equipment_state_release_audit"]["incomplete_case_count"] == 0
     assert report["facility_aggregate_closure_audit"]["status"] == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
     assert report["facility_component_contribution_audit"]["status"] == "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
     assert report["merged_provider_packet_case_count"] == 44
@@ -46,9 +47,9 @@ def test_isolation_extension_merges_namespaced_branches_into_facility_chain() ->
 
 
 def test_isolation_extension_keeps_legacy_cases_and_marks_isolation_identity_diagnostic() -> None:
-    base, scope, isolation = _inputs()
+    base, scope, isolation, provider_response = _inputs()
 
-    report = build_isolation_union_extension(base, scope, isolation)
+    report = build_isolation_union_extension(base, scope, isolation, provider_response)
     rebound = report["isolation_rebound_result"]
 
     assert all(
@@ -58,7 +59,27 @@ def test_isolation_extension_keeps_legacy_cases_and_marks_isolation_identity_dia
         for row in rebound["cases"]
     )
     assert all(row["provider_packet_identity"]["diagnostic_identity_only"] for row in rebound["cases"])
+    assert all(
+        row["provider_packet_identity"]["state_snapshot"]["schema_version"]
+        == "prism.equipment_state_snapshot.v1"
+        for row in rebound["cases"]
+    )
     assert all(row["domain_assessment"]["diagnostic_only"] for row in rebound["cases"])
     assert rebound["provider_packet_case_count"] == 0
     assert rebound["qualified_provider_packet_case_count"] == 0
     assert rebound["provider_packet_promoted"] is False
+    assert report["isolation_provider_response_consumed"] is True
+    assert report["isolation_state_snapshot_bound_case_count"] == 20
+
+
+def test_isolation_extension_without_provider_response_stays_fail_closed() -> None:
+    base, scope, isolation, _provider_response = _inputs()
+
+    report = build_isolation_union_extension(base, scope, isolation)
+
+    assert report["isolation_provider_response_consumed"] is False
+    assert report["isolation_state_snapshot_bound_case_count"] == 0
+    assert report["equipment_state_release_audit"]["status"] == "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN"
+    assert report["equipment_state_release_audit"]["complete_case_count"] == 44
+    assert report["equipment_state_release_audit"]["incomplete_case_count"] == 20
+    assert report["merged_complete_facility_qra_claim"] is False
