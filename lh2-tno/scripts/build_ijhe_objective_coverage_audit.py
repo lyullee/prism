@@ -44,6 +44,7 @@ def main() -> int:
     parser.add_argument("--external-field-evidence", type=Path)
     parser.add_argument("--external-field-model-comparison", type=Path)
     parser.add_argument("--validation-intake-audit", type=Path)
+    parser.add_argument("--external-equipment-model-audit", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -104,6 +105,11 @@ def main() -> int:
             validation_intake_audit=(
                 _object(args.validation_intake_audit)
                 if args.validation_intake_audit
+                else None
+            ),
+            external_equipment_model_audit=(
+                _object(args.external_equipment_model_audit)
+                if args.external_equipment_model_audit
                 else None
             ),
         )

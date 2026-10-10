@@ -63,6 +63,7 @@ def build_ijhe_objective_coverage_audit(
     external_field_evidence: Mapping[str, Any] | None = None,
     external_field_model_comparison: Mapping[str, Any] | None = None,
     validation_intake_audit: Mapping[str, Any] | None = None,
+    external_equipment_model_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -89,6 +90,7 @@ def build_ijhe_objective_coverage_audit(
     external_field_path = _record_path(external_field_evidence, None)
     external_field_comparison_path = _record_path(external_field_model_comparison, None)
     validation_intake_path = _record_path(validation_intake_audit, None)
+    external_equipment_model_path = _record_path(external_equipment_model_audit, None)
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -1000,6 +1002,101 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "검사센터 시계열은 공정 상태 후보 증거로만 보존한다. 단위·자산 crosswalk·"
                 "provider 방출 packet·독립 holdout 근거가 없으면 물리검증, 빈도, 시설 QRA를 열지 않는다."
+            ),
+        ))
+
+    equipment_model_gates = (
+        external_equipment_model_audit.get("promotion_gates", {})
+        if isinstance(external_equipment_model_audit, Mapping)
+        else {}
+    )
+    if not isinstance(equipment_model_gates, Mapping):
+        equipment_model_gates = {}
+    external_equipment_model_ok = (
+        isinstance(external_equipment_model_audit, Mapping)
+        and external_equipment_model_audit.get("schema_version")
+        == "prism.external_equipment_model_audit.v1"
+        and external_equipment_model_audit.get("status")
+        == "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED"
+        and isinstance(external_equipment_model_audit.get("state_model_ready_asset_count"), int)
+        and external_equipment_model_audit.get("state_model_ready_asset_count", 0) > 0
+        and equipment_model_gates.get("state_model_input_allowed") is True
+        and equipment_model_gates.get("accident_release_packet_allowed") is False
+        and equipment_model_gates.get("provider_qualification_allowed") is False
+        and equipment_model_gates.get("frequency_inference_allowed") is False
+        and equipment_model_gates.get("facility_qra_allowed") is False
+        and equipment_model_gates.get("promotion_allowed") is False
+        and external_equipment_model_audit.get("physical_validation_claim") is False
+        and external_equipment_model_audit.get("full_chain_validation_claim") is False
+        and external_equipment_model_audit.get("accident_release_validation_claim") is False
+        and external_equipment_model_audit.get("frequency_inference_performed") is False
+        and external_equipment_model_audit.get("facility_qra_claim") is False
+    )
+    if external_equipment_model_audit is not None:
+        equipment_event_register = (
+            external_equipment_model_audit.get("event_register", {})
+            if isinstance(external_equipment_model_audit, Mapping)
+            else {}
+        )
+        equipment_observation = (
+            external_equipment_model_audit.get("observation_provenance", {})
+            if isinstance(external_equipment_model_audit, Mapping)
+            else {}
+        )
+        rows.append(_row(
+            "diagnostic_external_equipment_model_readiness",
+            "외부 액화수소 설비 모델의 상태 입력 준비도와 사고 방출 경계를 분리하여 기록해야 한다",
+            "PASS" if external_equipment_model_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(external_equipment_model_path,),
+            observed={
+                "status": (
+                    external_equipment_model_audit.get("status")
+                    if isinstance(external_equipment_model_audit, Mapping)
+                    else None
+                ),
+                "asset_count": (
+                    external_equipment_model_audit.get("asset_count")
+                    if isinstance(external_equipment_model_audit, Mapping)
+                    else None
+                ),
+                "state_model_ready_asset_count": (
+                    external_equipment_model_audit.get("state_model_ready_asset_count")
+                    if isinstance(external_equipment_model_audit, Mapping)
+                    else None
+                ),
+                "physical_time_status": (
+                    equipment_event_register.get("physical_time_status")
+                    if isinstance(equipment_event_register, Mapping)
+                    else None
+                ),
+                "valve_event_count": (
+                    equipment_event_register.get("valve_event_count")
+                    if isinstance(equipment_event_register, Mapping)
+                    else None
+                ),
+                "physical_time_assigned_event_count": (
+                    equipment_event_register.get("physical_time_assigned_event_count")
+                    if isinstance(equipment_event_register, Mapping)
+                    else None
+                ),
+                "verified_raw_historian_session_count": (
+                    equipment_observation.get("verified_raw_historian_session_count")
+                    if isinstance(equipment_observation, Mapping)
+                    else None
+                ),
+                "accident_release_packet_allowed": equipment_model_gates.get(
+                    "accident_release_packet_allowed"
+                ),
+                "frequency_inference_allowed": equipment_model_gates.get(
+                    "frequency_inference_allowed"
+                ),
+            },
+            blocking_reason=None if external_equipment_model_ok else (
+                "외부 설비 모델의 상태 입력 준비도 또는 사고 방출 승격 차단 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "TK-1101/TK-1102 같은 상태 모델 입력 준비 자산은 기록하되, 절차 의도·재구성 자료만으로 "
+                "사고 방출 시각·차단·재고 소진·빈도·시설 QRA를 열지 않는다."
             ),
         ))
 

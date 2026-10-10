@@ -1,0 +1,184 @@
+{
+  "schema_version": "prism.external_equipment_model_audit.v1",
+  "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+  "scope": "external_center_model_input_audit_for_general_lh2_adapter",
+  "state_model_ready_asset_count": 2,
+  "asset_count": 12,
+  "assets": [
+    {
+      "asset_id": "TK-1101",
+      "component_model": "homogeneous_tank",
+      "target_component_model": "stratified_tank",
+      "ready_for_state_model_input": true,
+      "private_audit_status": [],
+      "asset_status": "manufacturer gross inner volume confirmed; remaining geometry and thermal parameters incomplete"
+    },
+    {
+      "asset_id": "TK-1102",
+      "component_model": "homogeneous_tank",
+      "target_component_model": "stratified_tank",
+      "ready_for_state_model_input": true,
+      "private_audit_status": [],
+      "asset_status": "common TK-1101 geometry promoted; thermal parameters incomplete"
+    },
+    {
+      "asset_id": "VP-1101",
+      "component_model": "vaporizer",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "heat-transfer performance missing"
+    },
+    {
+      "asset_id": "VP-1102",
+      "component_model": "vaporizer",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "vent-heater performance missing"
+    },
+    {
+      "asset_id": "VP-1103",
+      "component_model": "vaporizer",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "vent-heater performance missing"
+    },
+    {
+      "asset_id": "VP-1301",
+      "component_model": "vaporizer",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "air-side performance and regulator data missing"
+    },
+    {
+      "asset_id": "VP-1302",
+      "component_model": "vaporizer",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "air-side performance and regulator data missing"
+    },
+    {
+      "asset_id": "V-1101",
+      "component_model": "homogeneous_tank",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "orientation and internal volume unresolved"
+    },
+    {
+      "asset_id": "L-1101A/B/C/D",
+      "component_model": "reliquefier",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "200 kg/day total-versus-per-unit and inlet basis unresolved"
+    },
+    {
+      "asset_id": "VIRTUAL-LH2-PUMP-01",
+      "component_model": "virtual_pump",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "design target and manufacturer map required"
+    },
+    {
+      "asset_id": "VALVE-CATALOG",
+      "component_model": "valve",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "P&ID tags must be mapped to valve datasheets"
+    },
+    {
+      "asset_id": "PIPE-CATALOG",
+      "component_model": "pipe",
+      "target_component_model": null,
+      "ready_for_state_model_input": false,
+      "private_audit_status": [],
+      "asset_status": "P&ID line length is not physical pipe length"
+    }
+  ],
+  "event_register": {
+    "physical_time_status": "unassigned",
+    "valve_event_count": 36,
+    "physical_time_assigned_event_count": 0,
+    "event_feedback_channel_count": 0,
+    "installed_route_length_m": null,
+    "official_promotion_allowed": false,
+    "fitting": false,
+    "source_policy": "P&ID geometry and procedure intent are retained as evidence. Physical event times, installed route length, and feedback states require explicit institution historian/DCS/PLC fields."
+  },
+  "observation_provenance": {
+    "verified_raw_historian_session_count": 0,
+    "explicit_reconstructed_session_count": 20,
+    "command_timestamp_available": false,
+    "final_accuracy_use_allowed": false,
+    "official_94_percent_accuracy_decision_allowed": false
+  },
+  "promotion_gates": {
+    "state_model_input_allowed": true,
+    "accident_release_packet_allowed": false,
+    "provider_qualification_allowed": false,
+    "frequency_inference_allowed": false,
+    "facility_qra_allowed": false,
+    "promotion_allowed": false
+  },
+  "physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "accident_release_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "blocking_reasons": [
+    "external_state_model_is_center_referenced_not_general_facility_identity",
+    "procedure_events_are_not_accident_release_packets",
+    "physical_event_time_unassigned",
+    "command_timestamps_absent",
+    "event_feedback_channels_absent",
+    "installed_route_length_unresolved",
+    "accident_release_boundary_not_released",
+    "frequency_inference_is_prohibited"
+  ],
+  "required_next_evidence": [
+    "general-facility asset and P&ID port identity crosswalk",
+    "raw historian/DCS/PLC export with calibration and timestamp provenance",
+    "provider accident release packet with start, termination, isolation, inventory, and mass balance",
+    "independent holdout comparison of the equipment release boundary"
+  ],
+  "policy": {
+    "center_model_state_inputs_are_not_general_facility_identity": true,
+    "procedure_intent_is_not_accidental_release": true,
+    "reconstructed_time_series_is_not_raw_historian": true,
+    "no_sensor_inverse_leak_or_frequency_inference": true,
+    "no_automatic_provider_or_facility_qra_promotion": true
+  },
+  "sources": [
+    {
+      "label": "external center assets",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_assets.json",
+      "sha256": "ab24095f14561cf7176e3cce92220bc5e89c4ccdef4e4ff04fb3395bcfbefb1d",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external private inputs audit",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_tank_private_evidenced_inputs_audit.json",
+      "sha256": "171c207d86e9f914b3f26e470cf46a9ace13ef23ea66412159a688a718fd192f",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external connection event register",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_connection_event_register_20261007.json",
+      "sha256": "ae3dd0b27acb3a8679b8028117dadb018a1f5e0ffd930a567cb1c87329b384bf",
+      "schema_version": "0.1"
+    },
+    {
+      "label": "external observation judgements",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\configs\\center_observation_evidence_judgements.json",
+      "sha256": "e92341928e60725d15fc14af41faf8733323724821d9d52fb653dedce834047f",
+      "schema_version": "0.1"
+    }
+  ]
+}

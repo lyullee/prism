@@ -370,3 +370,52 @@ def test_objective_audit_records_validation_intake_without_opening_qra():
     assert check["observed"]["workbook_count"] == 17
     assert check["observed"]["promotion_allowed"] is False
     assert report["strict_facility_qra_claim"] is False
+
+
+def test_objective_audit_records_external_equipment_readiness_without_release_promotion():
+    inputs = _inputs()
+    inputs["external_equipment_model_audit"] = {
+        "schema_version": "prism.external_equipment_model_audit.v1",
+        "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+        "asset_count": 12,
+        "state_model_ready_asset_count": 2,
+        "event_register": {
+            "physical_time_status": "unassigned",
+            "valve_event_count": 36,
+            "physical_time_assigned_event_count": 0,
+        },
+        "observation_provenance": {
+            "verified_raw_historian_session_count": 0,
+        },
+        "promotion_gates": {
+            "state_model_input_allowed": True,
+            "accident_release_packet_allowed": False,
+            "provider_qualification_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+            "promotion_allowed": False,
+        },
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "accident_release_validation_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "_record_path": "external-equipment-model.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_external_equipment_model_readiness"
+    )
+    assert check["status"] == "PASS"
+    assert check["observed"]["state_model_ready_asset_count"] == 2
+    assert check["observed"]["physical_time_assigned_event_count"] == 0
+    assert report["strict_blocking_check_ids"] == [
+        "independent_physical_validation",
+        "qualified_provider_evidence",
+        "strict_facility_scope",
+        "strict_facility_qra",
+        "strict_facility_state_snapshot_coverage",
+        "diagnostic_observed_state_source_replay",
+        "diagnostic_observed_state_runtime_frames",
+    ]
