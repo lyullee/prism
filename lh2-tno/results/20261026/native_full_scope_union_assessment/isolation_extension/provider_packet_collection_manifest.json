@@ -1,0 +1,1495 @@
+{
+  "schema": "prism.provider_packet_collection_manifest.v1",
+  "status": "OPEN_PROVIDER_PACKET_COLLECTION",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "source_campaign_schema": "prism.facility_risk_ledger.v1",
+  "source_campaign_status": "DECLARED_SCOPE_EXECUTED",
+  "source_extension_schema": "prism.isolation_union_extension_verification.v1",
+  "source_extension_status": "ISOLATION_UNION_EXTENSION_DIAGNOSTIC",
+  "promotion_gate": {
+    "qualified_provider_packet_required": true,
+    "exact_event_component_port_and_digest_match_required": true,
+    "independent_physical_validation_required": true,
+    "complete_declared_scope_required": true,
+    "facility_ir_fn_remains_withheld_until_all_true": true
+  },
+  "strict_gate_catalog": {
+    "ISOLATION_PROVIDER_EVIDENCE": "replace diagnostic isolation response with a qualified provider packet and qualification sidecar",
+    "ISOLATION_TERMINATION": "provide provider-owned isolation success/failure timing and mass closure",
+    "ISOLATION_STATE_SNAPSHOT": "provide canonical state snapshot and provider echo for every isolation case"
+  },
+  "request_count": 20,
+  "open_request_count": 20,
+  "qualified_packet_count": 0,
+  "rows": [
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "fe43cd710db7cd4eb03c4f2d86515f92f53c18fbb7c5c108f130c765cda21fdf"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.4299422405137615e-09,
+          "direct_gas_kg": 2.4299422405137615e-09,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "455ee023fe8db9675be44747418cb3a7bbbaed71fec7a8f3c4392e254376b705"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.4299422405137615e-09,
+          "direct_gas_kg": 2.4299422405137615e-09,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "e6a6ff0b8a0f28f22508e620bfc04431b3bb715aedb5a2e7586789e5e6ec720e"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859877311503615e-09,
+          "direct_gas_kg": 4.859877311503615e-09,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "5f00f7b2a5fd5928ce5adf12919bed0e2c053673c69cb2a68eda280666cf2095"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859877311503615e-09,
+          "direct_gas_kg": 4.859877311503615e-09,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "d32c03e7545462aa4119797199943f6df0367e2b70cd86de6e49ce59cda5809f"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.429941930073357e-08,
+          "direct_gas_kg": 2.429941930073357e-08,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "5f5540184b0af73a16c33bbbe2331e670777c41bcde7c58ecb32a9362f74feee"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.429941930073357e-08,
+          "direct_gas_kg": 2.429941930073357e-08,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "077ca6a968003a95d55260bb4ab6c36bb4ddc8855d81052fb214a729b4ea0bfe"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859876043874114e-08,
+          "direct_gas_kg": 4.859876043874114e-08,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "b244298a6a33a9413d266d4c3f3b460658b07a8a557c9b9e4d497f5c05b27ab6"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859876043874114e-08,
+          "direct_gas_kg": 4.859876043874114e-08,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "63a0c4d1111ccb406a74b5d6e5ce6e08ecd90838b97600788d94c46933b550a8"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.429938825669345e-07,
+          "direct_gas_kg": 2.429938825669345e-07,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "bd254c16711ca5e97850097f5ecb11d7a481ed20d8a26853ba72affb5e73f4e1"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.429938825669345e-07,
+          "direct_gas_kg": 2.429938825669345e-07,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "df85b106c2d83d39738f6ac3841d2c14ec2bc124514b752f3f2087df222ba501"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859863367578811e-07,
+          "direct_gas_kg": 4.859863367578811e-07,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_1%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "fc9d0c88d260947ea3dbddb648371baf8e6d9d0b8e740789d92900675a849cb2"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859863367578811e-07,
+          "direct_gas_kg": 4.859863367578811e-07,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "97f2588d758ff75a7342776e94662f54e6490cd6f45a8626ad8ce9ee864b891d"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.429907781623369e-06,
+          "direct_gas_kg": 2.429907781623369e-06,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "c665b470c560f66ef55d51ce0756e495fcaade44c176fb33573d10706d89368f"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.429907781623369e-06,
+          "direct_gas_kg": 2.429907781623369e-06,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "cf4567587dcc31c7c0ced5f5ebc4bf69e05f4501e908a7c625021b358ca916da"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859736604577814e-06,
+          "direct_gas_kg": 4.859736604577814e-06,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_10%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "d704b9accd4944654a44fc1ba6f603800f8797d1087f8bb71827a7baa2254ea2"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.859736604577814e-06,
+          "direct_gas_kg": 4.859736604577814e-06,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "a06dfe094d6df29125aca5f440d56c7d1c5bc6a5bd764544459f71fcb71234ed"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.4295973405856194e-05,
+          "direct_gas_kg": 2.4295973405856194e-05,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%/provider-isolation-success/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-success",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "9f27e64ef0d976f886b3d171cceb86946e8d7e051c03cc751a18a5cf7029bd32"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "reviewed_isolation_success",
+          "time_s": 0.5,
+          "provenance": "provider commanded isolation at 0.25 s; zero closed-seat leakage and zero post-close flow confirmed"
+        },
+        "mass_ledger": {
+          "released_kg": 2.4295973405856194e-05,
+          "direct_gas_kg": 2.4295973405856194e-05,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-3ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "02e542e6a95624a9cdaf5eb5a42ad646c04fc695634fc3c2650c38ba3c9da9fd"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.858468969799684e-05,
+          "direct_gas_kg": 4.858468969799684e-05,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    },
+    {
+      "collection_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%/provider-isolation-failure/generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west/isolation-provider-packet-request",
+      "status": "OPEN",
+      "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+      "asset_id": "isolation-response-pipe",
+      "component_id": "isolation-response-pipe-01",
+      "release_branch_id": "provider-isolation-failure",
+      "annual_condition_id": "generic-lh2-near-receptor-diagnostic/isolation-response/D-4ms-west",
+      "scenario_families": [],
+      "request_kind": "QUALIFIED_PROVIDER_PACKET",
+      "qualification_required": true,
+      "current_case_status": "EXECUTED",
+      "gap_class": "QUALIFICATION_EVIDENCE_WITHHELD",
+      "exact_match_required": {
+        "event_id": "generic-lh2-near-receptor-diagnostic/isolation-response/terminal_pipe_asset/AREA_100%",
+        "component_id": "isolation-response-pipe-01",
+        "port_ids": [],
+        "provider_source_digests": [
+          "ecbf59c78c9c9d8b00daede2317ce6cf614a846f6aca94007bdf88a0f0cd2473",
+          "b13e05a2d38a8e5b804398d7ceca1961917d3364cf49873217a0f72da6bb244c"
+        ],
+        "provider_result_digests": [
+          "878be6f277691d9c226cb89e7cb47fbfd1b068257b397b7b4e3e9be0ff55475c"
+        ]
+      },
+      "required_provider_evidence": [
+        "qualified actual provider status with source/result SHA-256 digests and evidence identifier",
+        "exact event, component, isolation branch, accident port, opening geometry, position and direction",
+        "provider-owned time history with command, valve response and explicit termination basis",
+        "provider mass and energy closure with initial/final inventory and residuals",
+        "independent physical validation or a declared validation gap for the isolation boundary",
+        "success trace with closed-seat leakage and post-close flow, or failure trace with declared horizon",
+        "canonical equipment state snapshot and provider echo for the release boundary"
+      ],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
+      "current_release_boundary": {
+        "termination": {
+          "basis": "synthetic_diagnostic_horizon",
+          "time_s": 0.5,
+          "provenance": "provider isolation command failed; valve remained open through the 0.5 s diagnostic horizon"
+        },
+        "mass_ledger": {
+          "released_kg": 4.858468969799684e-05,
+          "direct_gas_kg": 4.858468969799684e-05,
+          "ground_inflow_kg": 0.0,
+          "pool_evaporated_kg": 0.0,
+          "pool_remaining_kg": 0.0,
+          "pool_domain_escape_kg": 0.0,
+          "ground_liquid_in_flight_kg": 0.0,
+          "pool_numerical_adjustment_kg": 0.0,
+          "end_to_end_residual_kg": 0.0
+        },
+        "domain_assessment": {
+          "assessment_status": "not_exported_by_legacy_isolation_campaign",
+          "diagnostic_only": true,
+          "physical_validation_claim": false
+        },
+        "diagnostic_identity_only": true
+      },
+      "current_boundary_gaps": [
+        "diagnostic isolation response is model-prediction evidence only",
+        "qualified provider packet and qualification sidecar are absent"
+      ],
+      "release_path": null,
+      "qualification_path": null,
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "promotion_policy": {
+    "frequency_is_not_assigned": true,
+    "release_packet_is_not_created": true,
+    "qualification_is_not_inferred": true,
+    "diagnostic_provider_response_is_not_promoted": true,
+    "facility_ir_fn_promotion": false,
+    "closed_only_by": "audit_provider_packet_inputs plus exact case coverage and independent validation"
+  }
+}

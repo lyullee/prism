@@ -79,8 +79,10 @@ IR/F-N·전체 QRA 또는 독립 물리검증을 승격하지 않습니다. 재�
 `isolation-response` 이름공간으로 결합합니다. 결합 결과는 39 event·64 case·256 atom이며,
 방출→피해 risk atom chain, 시설 IR/F-N 재집계, 설비별 기여도 감사가 닫힙니다. 격리 provider 응답의
 첫 상류 상태 행에서 canonical equipment state snapshot을 만들고 adapter/worker digest와 snapshot
-echo를 보존하므로 상태→방출 구조 감사는 64/64로 닫힙니다. 이 snapshot은 `model_prediction`
-진단값이며 적격 provider packet·현장 검증을 대신하지 않습니다. 확장은 성공확률·빈도·시설 QRA를 승격하지 않는 진단 원장입니다. 결과와
+echo를 보존하므로 상태→방출 구조 감사는 64/64로 닫힙니다. 격리 20개 case에는
+`provider_packet_collection_manifest.json`도 생성해 exact identity·종료·질량폐합·차단 trace를
+한 행씩 수집할 수 있게 했습니다. 모든 행은 `OPEN`이고 qualified packet은 0건입니다. 이 snapshot은
+`model_prediction` 진단값이며 적격 provider packet·현장 검증을 대신하지 않습니다. 확장은 성공확률·빈도·시설 QRA를 승격하지 않는 진단 원장입니다. 결과와
 재현 명령은 [격리 응답 시설 원장 확장 기록](docs/PRISM_isolation_union_extension_개발기록_20261010.md)에
 기록했습니다.
 

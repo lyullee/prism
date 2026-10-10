@@ -40,8 +40,14 @@
   },
   "limitations": [
     "The isolation campaign is a namespaced synthetic diagnostic extension.",
+    "The optional isolation state snapshot is copied from the provider response's first upstream state row and remains model-prediction diagnostic evidence.",
     "Success/failure branch probability is not promoted to plant reliability.",
     "Existing 34-event/44-case union remains the primary current-status ledger.",
     "Merged conditional IR/F-N is diagnostic and facility QRA remains withheld."
-  ]
+  ],
+  "provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
+  "provider_packet_collection_request_count": 20,
+  "provider_packet_collection_open_request_count": 20,
+  "provider_packet_collection_qualified_packet_count": 0,
+  "provider_packet_collection_manifest_record": "provider_packet_collection_manifest.json"
 }

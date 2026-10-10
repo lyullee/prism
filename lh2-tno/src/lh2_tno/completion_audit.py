@@ -1948,6 +1948,13 @@ def build_ijhe_completion_audit(
             and extension.get("qualified_provider_packet_case_count") == 0
             and extension.get("facility_total_risk_available") is False
             and extension.get("complete_facility_qra_claim") is False
+            and extension.get("provider_packet_collection_manifest_status")
+            == "OPEN_PROVIDER_PACKET_COLLECTION"
+            and extension.get("provider_packet_collection_request_count")
+            == isolation_counts.get("cases")
+            and extension.get("provider_packet_collection_open_request_count")
+            == isolation_counts.get("cases")
+            and extension.get("provider_packet_collection_qualified_packet_count") == 0
             and isinstance(extension_policy, Mapping)
             and extension_policy.get("diagnostic_only") is True
             and extension_policy.get("frequency_inference_performed") is False
@@ -1995,6 +2002,18 @@ def build_ijhe_completion_audit(
                     ),
                     "complete_facility_qra_claim": extension.get(
                         "complete_facility_qra_claim"
+                    ),
+                    "provider_packet_collection_manifest_status": extension.get(
+                        "provider_packet_collection_manifest_status"
+                    ),
+                    "provider_packet_collection_request_count": extension.get(
+                        "provider_packet_collection_request_count"
+                    ),
+                    "provider_packet_collection_open_request_count": extension.get(
+                        "provider_packet_collection_open_request_count"
+                    ),
+                    "provider_packet_collection_qualified_packet_count": extension.get(
+                        "provider_packet_collection_qualified_packet_count"
                     ),
                     "policy": extension_policy,
                 },

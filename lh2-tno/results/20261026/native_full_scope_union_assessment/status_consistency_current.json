@@ -211,7 +211,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 752
+        "full_portable_test_count": 755
       }
     },
     {
@@ -242,7 +242,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 752
+        "full_portable_test_count": 755
       }
     },
     {

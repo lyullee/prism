@@ -54,6 +54,7 @@ shim을 명시한다. 이것은 risk atom chain의 case 연결을 검사하기 �
 | 시설 IR/F-N 재집계 | `FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC` |
 | 설비별 기여도 재집계 | `FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC` |
 | 설비 상태→방출 증거 | `FULL_EQUIPMENT_STATE_RELEASE_CHAIN_DIAGNOSTIC` (64/64) |
+| provider packet 수집 manifest | `OPEN_PROVIDER_PACKET_COLLECTION` (격리 20/20 요청, qualified 0) |
 | 적격 provider packet | 0/64 case |
 | 시설 전체 위험/QRA 승격 | 하지 않음 |
 
@@ -76,8 +77,11 @@ python scripts/build_isolation_extension_assessment.py `
 ```
 
 `verification.json`은 논문용 검토자가 먼저 확인할 요약이고, 나머지 파일은 결합 원장·범위표·
-상태 release 감사·IR/F-N 감사·설비 기여도 감사의 원자료다. 전체 테스트에서 이 확장 전용
-검사는 2건을 추가한다.
+상태 release 감사·IR/F-N 감사·설비 기여도 감사·provider packet 수집 manifest의 원자료다.
+`provider_packet_collection_manifest.json`에는 격리 성공·실패 20개 case의 exact identity와
+필요한 실제 provider 증거가 한 행씩 들어간다. 모든 행은 `OPEN`이고 release/qualification
+경로는 비어 있으며, 이 manifest 자체는 packet·빈도·시설 QRA를 만들지 않는다. 전체 테스트에서
+이 확장 전용 검사는 manifest builder와 완료 감사까지 포함한다.
 
 ## 5. 해석과 다음 개발 입력
 

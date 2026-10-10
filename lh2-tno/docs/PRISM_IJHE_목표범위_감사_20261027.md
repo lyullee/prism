@@ -21,7 +21,9 @@ fail-closed IJHE 감사는 39개 검사 중 34개 PASS·5개 BLOCKED로 재생�
 되었지만, qualified provider packet은 0건이고 native catalog·SLABx-LH2 구성요소
 검사는 계속 diagnostic-only다. 별도로 격리 성공·실패 5 event·20 case·80 risk atom을
 현재 시설에 namespaced 결합한 확장도 상태 snapshot·방출·피해·IR/F-N 구조 감사가 PASS로
-들어가지만, qualified packet과 시설 QRA를 열지 않는다.
+들어가지만, qualified packet과 시설 QRA를 열지 않는다. 격리 20개 case의 실제 자료 수집을
+위해 별도 `provider_packet_collection_manifest.json`을 생성하며, 20개 행 모두 `OPEN`이고
+qualified packet은 0건이다.
 
 | 목표 | 상태 | 현재 근거 |
 |---|---|---|

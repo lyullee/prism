@@ -3842,6 +3842,10 @@
         "qualified_provider_packet_case_count": 0,
         "facility_total_risk_available": false,
         "complete_facility_qra_claim": false,
+        "provider_packet_collection_manifest_status": "OPEN_PROVIDER_PACKET_COLLECTION",
+        "provider_packet_collection_request_count": 20,
+        "provider_packet_collection_open_request_count": 20,
+        "provider_packet_collection_qualified_packet_count": 0,
         "policy": {
           "diagnostic_only": true,
           "synthetic_isolation_barrier_probability_not_inferred": true,

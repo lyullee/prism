@@ -52,6 +52,12 @@ def test_completion_audit_consumes_isolation_union_extension_as_diagnostic_pass(
         "cases": 64,
         "risk_atoms": 256,
     }
+    assert check["evidence"]["provider_packet_collection_manifest_status"] == (
+        "OPEN_PROVIDER_PACKET_COLLECTION"
+    )
+    assert check["evidence"]["provider_packet_collection_request_count"] == 20
+    assert check["evidence"]["provider_packet_collection_open_request_count"] == 20
+    assert check["evidence"]["provider_packet_collection_qualified_packet_count"] == 0
 
 
 def test_completion_audit_blocks_unsafe_isolation_union_extension() -> None:

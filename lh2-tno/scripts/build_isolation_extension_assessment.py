@@ -11,6 +11,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from lh2_tno.isolation_extension import (  # noqa: E402
     build_isolation_union_extension,
 )
+from lh2_tno.isolation_packet_manifest import (  # noqa: E402
+    build_isolation_provider_packet_collection_manifest,
+)
 
 
 def _object(path: Path) -> dict:
@@ -69,6 +72,18 @@ def main() -> int:
     for name, value in artifacts.items():
         _write(output_dir / name, value)
 
+    provider_packet_manifest = build_isolation_provider_packet_collection_manifest(
+        report["isolation_rebound_result"],
+        {
+            "schema": "prism.isolation_union_extension_verification.v1",
+            "status": report["status"],
+            "isolation_counts": {
+                "cases": report["isolation_case_count"],
+            },
+        },
+    )
+    _write(output_dir / "provider_packet_collection_manifest.json", provider_packet_manifest)
+
     verification = {
         "schema": "prism.isolation_union_extension_verification.v1",
         "status": report["status"],
@@ -119,6 +134,15 @@ def main() -> int:
         "complete_facility_qra_claim": report["merged_complete_facility_qra_claim"],
         "policy": report["policy"],
         "limitations": report["limitations"],
+        "provider_packet_collection_manifest_status": provider_packet_manifest["status"],
+        "provider_packet_collection_request_count": provider_packet_manifest["request_count"],
+        "provider_packet_collection_open_request_count": provider_packet_manifest[
+            "open_request_count"
+        ],
+        "provider_packet_collection_qualified_packet_count": provider_packet_manifest[
+            "qualified_packet_count"
+        ],
+        "provider_packet_collection_manifest_record": "provider_packet_collection_manifest.json",
     }
     _write(output_dir / "verification.json", verification)
     print(
@@ -152,6 +176,9 @@ def main() -> int:
         == "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC"
         and report["facility_component_contribution_audit"]["status"]
         == "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC"
+        and provider_packet_manifest["status"] == "OPEN_PROVIDER_PACKET_COLLECTION"
+        and provider_packet_manifest["request_count"] == report["isolation_case_count"]
+        and provider_packet_manifest["qualified_packet_count"] == 0
         and report["merged_complete_facility_qra_claim"] is False
     )
     return 0 if expected_diagnostic else 2
