@@ -14,6 +14,9 @@ union에 추가한 vertical handoff 5개와 inventory depletion 5개도 원래 p
 만든 canonical 상태 snapshot을 요청에 전달하고 echo digest를 확인해 10/10
 `BOUND_AND_ECHOED`가 되었습니다. 따라서 34개 union 사건의 상태 연결 gate는 통과했지만,
 나머지 qualified provider·독립 물리검증·엄격한 전체범위·시설 전체 QRA gate는 여전히 보류됩니다.
+union 재실행 시에는 state-bound campaign request와 result digest를 다시 대조해 base
+result의 96개 risk atom에도 snapshot을 보존하며, 상태가 없는 campaign 입력은 fail-closed로
+중단합니다.
 자세한 기준과 재현 명령은 [IJHE 목표 범위 감사](docs/PRISM_IJHE_목표범위_감사_20261027.md)를
 참조합니다.
 최신 fail-closed IJHE 감사는 32개 검사 중 27개 PASS·5개 BLOCKED입니다. native
@@ -93,6 +96,9 @@ campaign 결과의 각 기상 case identity에도 payload·선언 digest·echo d
 `BOUND_AND_ECHOED`, union 상태 snapshot gate는 `PASS`입니다. 이 연결은 합성
 `model_prediction` 입력을 확인한 것이며, 현장 계측·독립 물리검증·qualified provider·시설
 전체 IR/F-N을 열지 않습니다. 상세 구현과 재현은 [확장 사건 상태 snapshot 기록](docs/PRISM_확장사건_상태snapshot_coverage_개발기록_20261027.md)을 참조합니다.
+재실행 시에는 `base_result_state_snapshot_binding.json`으로 기존 compact result의 43개
+base case와 96개 risk atom에 같은 snapshot digest를 다시 묶어, 상태가 빠진 결과를 조용히
+합치지 않습니다.
 
 같은 24개 catalog packet을 `rebind_campaign_to_worklist_packets.py`로 기존
 문헌 campaign에 다시 넣어 재실행한 결과도 보존합니다. `results/20261027/native_generic_scope_packets_state_bound/native_packet_campaign_ledger.json`은

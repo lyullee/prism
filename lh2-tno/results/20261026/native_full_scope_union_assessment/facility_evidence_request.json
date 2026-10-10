@@ -31,10 +31,10 @@
     ]
   },
   "blocking_reasons": [
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: declared scope is incomplete",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: uncomputed cases remain",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: excluded components remain",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: synthetic release horizon",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: declared scope is incomplete",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
@@ -860,8 +860,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -969,8 +968,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1080,8 +1078,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1189,8 +1186,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1562,8 +1558,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1694,8 +1689,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1831,8 +1825,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -1968,8 +1961,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2105,8 +2097,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2242,8 +2233,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2373,8 +2363,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2504,8 +2493,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2635,8 +2623,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2767,8 +2754,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -2899,8 +2885,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3017,8 +3002,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3135,8 +3119,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3253,8 +3236,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3371,8 +3353,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3489,8 +3470,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3607,8 +3587,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",
@@ -3725,8 +3704,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "required_provider_evidence": [
         "qualified_actual provider status with provider source/result SHA-256 digests and evidence identifier",

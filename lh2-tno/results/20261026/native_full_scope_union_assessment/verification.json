@@ -36,11 +36,18 @@
   "facility_evidence_request_family_count": 12,
   "facility_evidence_request_case_count": 44,
   "facility_evidence_request_promotion_allowed": false,
+  "facility_case_packet_coverage_status": "NO_CASE_MATCH",
+  "facility_case_packet_coverage_case_count": 44,
+  "facility_case_packet_coverage_qualified_case_count": 0,
   "native_state_snapshot_campaign_status": "PARTIAL_NATIVE_PACKET_CAMPAIGN_EXECUTED",
   "native_state_snapshot_campaign_event_count": 24,
   "native_state_snapshot_campaign_case_count": 24,
   "native_state_snapshot_campaign_bound_event_count": 24,
   "native_state_snapshot_campaign_provider_result_digest_mismatch_count": 0,
+  "base_result_state_snapshot_binding_status": "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED",
+  "base_result_state_snapshot_binding_event_count": 24,
+  "base_result_state_snapshot_binding_case_count": 43,
+  "base_result_state_snapshot_binding_risk_atom_count": 96,
   "extension_state_snapshot_coverage_status": "EXTENSION_STATE_SNAPSHOT_COVERAGE_COMPLETE",
   "extension_state_snapshot_coverage_event_count": 10,
   "extension_state_snapshot_coverage_bound_event_count": 10,
@@ -135,8 +142,5 @@
   "native_scope_packet_catalog_exact_packet_count": 24,
   "slabx_validation_evidence_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
   "slabx_validation_evidence_check_count": 5,
-  "slabx_validation_evidence_physical_validation_claim": false,
-  "facility_case_packet_coverage_status": "NO_CASE_MATCH",
-  "facility_case_packet_coverage_case_count": 44,
-  "facility_case_packet_coverage_qualified_case_count": 0
+  "slabx_validation_evidence_physical_validation_claim": false
 }

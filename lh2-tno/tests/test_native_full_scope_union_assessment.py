@@ -25,6 +25,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     inventory_rebound = _load("inventory_depletion_rebound_result.json")
     audit = _load("ijhe_completion_audit.json")
     case_packet_coverage = _load("facility_case_packet_coverage.json")
+    base_state_binding = _load("base_result_state_snapshot_binding.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -81,6 +82,12 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert verification["state_snapshot_binding_record_count"] == 24
     assert verification["state_snapshot_binding_bound_count"] == 24
     assert verification["state_snapshot_binding_unbound_count"] == 0
+    assert verification["base_result_state_snapshot_binding_status"] == (
+        "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED"
+    )
+    assert verification["base_result_state_snapshot_binding_event_count"] == 24
+    assert verification["base_result_state_snapshot_binding_case_count"] == 43
+    assert verification["base_result_state_snapshot_binding_risk_atom_count"] == 96
 
     assert result["event_count"] == 34
     assert result["case_count"] == 44
@@ -97,6 +104,10 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     ) == 8
     assert result["facility_id"] == "generic-lh2-near-receptor-diagnostic"
     assert result["facility_id"] == facility["id"]
+    assert base_state_binding["status"] == "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED"
+    assert base_state_binding["event_count"] == 24
+    assert base_state_binding["bound_case_count"] == 43
+    assert base_state_binding["bound_risk_atom_count"] == 96
     assert any(
         harm > 0.0
         for atom in result["risk_atoms"]

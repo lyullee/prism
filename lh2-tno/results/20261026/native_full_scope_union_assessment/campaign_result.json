@@ -3,18 +3,18 @@
   "status": "PARTIAL_FACILITY_SCOPE",
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "campaign_ids": [
-    "744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce",
+    "23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90",
     "de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2",
     "0c8a2a44910ec534262637f956cbf9da00bcabf931863cb39fd00635ee2b6df1"
   ],
   "campaign_digests": [
-    "744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce",
+    "23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90",
     "de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2",
     "0c8a2a44910ec534262637f956cbf9da00bcabf931863cb39fd00635ee2b6df1"
   ],
-  "campaign_digest": "863594cdfc1f91fa280fe3e48461cf683933ee0610a3817d90c592c670e5bee4",
+  "campaign_digest": "1da541ae880699b6d2cf748657f4b2a73f0334830b7a00b039186800ba812aba",
   "event_accounting": {
-    "744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce": {
+    "23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90": {
       "generated_event_count": 24,
       "case_event_count": 24,
       "uncomputed_event_count": 19,
@@ -4182,6 +4182,92 @@
       "withheld_cases": "campaign-level copies of partial, failed, domain-incomplete, or uncomputed cases; they are summarized separately and never duplicated as ledger rows"
     }
   },
+  "strict_release_boundary": {
+    "schema_version": "prism.facility_release_boundary_gate.v1",
+    "strict_release_boundary_ready": false,
+    "case_count": 44,
+    "withheld_case_count": 29,
+    "termination_basis_counts": {
+      "emergency_relief_discharge": 1,
+      "inventory_depletion": 16,
+      "inventory_over_600s": 1,
+      "synthetic_diagnostic_horizon": 24,
+      "two_sided_rupture": 2
+    },
+    "checks": {
+      "all_rows_complete": false,
+      "all_termination_bases_allowed": false,
+      "all_isolation_or_inventory_statuses_closed": true,
+      "all_mass_residuals_closed": false,
+      "no_withheld_cases": false
+    },
+    "blocking_reasons": [
+      "29 case(s) are withheld from the release ledger",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G1: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/transfer-pump/G2: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary",
+      "generic-lh2-full-scope-frequency-example/reliquefier/G6: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.01%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_0.1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_1%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_10%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+      "generic-lh2-near-receptor-diagnostic/vertical-handoff/terminal-valve/AREA_100%: termination basis synthetic_diagnostic_horizon is not a reviewed release boundary",
+      "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+      "generic-lh2-near-receptor-diagnostic/inventory-depletion/terminal_pipe_asset/AREA_100%: provider inventory residual is not depleted within 1e-08 kg"
+    ],
+    "residual_tolerance_kg": 1e-08,
+    "provider_qualification_evaluated": false,
+    "independent_physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_ir_fn_promotion": false,
+    "policy": "release-boundary closure only; provider qualification, physical validation, frequency, weather/population integration, and facility IR/F-N remain separate gates"
+  },
   "cases": [
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
@@ -4272,21 +4358,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2925.193000002764,
-      "request_digest": "0092bf4d5e054a3d121a62165e1549c4a4d9dbc86d867316f4c2804f2260acf7",
-      "result_digest": "082e6fbb6ff6b8f19c10abbeb08704215359d9785012bb04537ea12ecfc9df7e",
+      "elapsed_ms": 2664.613000000827,
+      "request_digest": "ffa5d4c6a4e78cc968c70dde8c10311685f965b2bdf32907f4cd28977e1c5697",
+      "result_digest": "991720894cb50ebe1ba7488b7c5e2015016ee07a2a6f0b1b84d8a6fce23a6c10",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 794.1579000325873,
-        "pool": 164.65779999271035,
-        "near_field_and_dispersion": 1548.4512000111863,
-        "cloud_observation": 107.01999999582767,
-        "fire_explosion_damage_risk": 74.50920005794615
+        "source": 725.3497999627143,
+        "pool": 124.67910000123084,
+        "near_field_and_dispersion": 1408.3013000199571,
+        "cloud_observation": 102.11350000463426,
+        "fire_explosion_damage_risk": 70.36519993562251
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -4403,21 +4488,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 73114.11959992256,
-      "request_digest": "392a9a617a510b3e269184703426aa68dbb90adf2fe632a2bddf78c03210c14c",
-      "result_digest": "4b4a2460d34756b2ef50cd1129f469ca16e1acaf43def96a23a124c8eb53f8a5",
+      "elapsed_ms": 64022.139200009406,
+      "request_digest": "af0f7d4986cac6101fef2706811dcb1cfeccc6d4f698a5888cb78eea9dfc1b50",
+      "result_digest": "1138a8cacacec81fee2c7942a7788ee422251f66d19010bce5a67bcb30501707",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 783.4368000039831,
-        "pool": 397.8687999770045,
-        "near_field_and_dispersion": 39820.826299954206,
-        "cloud_observation": 31495.02640007995,
-        "fire_explosion_damage_risk": 236.22999992221594
+        "source": 710.3977000806481,
+        "pool": 331.27159997820854,
+        "near_field_and_dispersion": 36315.072900033556,
+        "cloud_observation": 26208.26930005569,
+        "fire_explosion_damage_risk": 136.94579992443323
       },
       "mass_ledger": {
         "released_kg": 0.00010057792972414058,
@@ -4536,21 +4620,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4316.947199986316,
-      "request_digest": "32e1dc0ed5dc3117d8a7b1567435ef2fa04f83eaf7c1a754594db64722cfd62b",
-      "result_digest": "d2608b5297a2d9c3ba5e8f7284551c8ec852666c7aaf9bae0a7cb0270a04b785",
+      "elapsed_ms": 3777.1796999732032,
+      "request_digest": "413272b109f5a8764d2091d9e0ccb71ee0256fd603f01d98c5e6aa5254293d91",
+      "result_digest": "d547f5ef5ec9567fcddabbe0ceab1531b8d19636a7c826ba69688857e6d856f2",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 729.6325999777764,
-        "pool": 131.79180002771318,
-        "near_field_and_dispersion": 2831.49900007993,
-        "cloud_observation": 246.68250000104308,
-        "fire_explosion_damage_risk": 106.57870001159608
+        "source": 711.5812000120059,
+        "pool": 125.89799996931106,
+        "near_field_and_dispersion": 2464.8826000047848,
+        "cloud_observation": 181.01499998010695,
+        "fire_explosion_damage_risk": 66.34000001940876
       },
       "mass_ledger": {
         "released_kg": 0.00010057966768755134,
@@ -4669,21 +4752,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2342.428799951449,
-      "request_digest": "fbdfb555e30f9f18f37c2918c1b0f25b2b0fe7741b05cedd9b8ad537ee956851",
-      "result_digest": "535956440cdf2ef5e2cdc2cb88c36e87b3c8add1558c854da6ff6610f6755b9f",
+      "elapsed_ms": 2285.0161999231204,
+      "request_digest": "a8f62c92428e2a6beb5302d5a0866b2f0423514a3701dbc87a9c97e18e498a8e",
+      "result_digest": "c915969300bf6435ddc7658037884f9cb2be20a942ed77b33ed66dc43f3f7ceb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 729.6690000221133,
-        "pool": 130.23650005925447,
-        "near_field_and_dispersion": 1067.1271999599412,
-        "cloud_observation": 92.46419998817146,
-        "fire_explosion_damage_risk": 69.42020007409155
+        "source": 721.4352000737563,
+        "pool": 127.41099996492267,
+        "near_field_and_dispersion": 1048.68190002162,
+        "cloud_observation": 85.5718000093475,
+        "fire_explosion_damage_risk": 72.93760008178651
       },
       "mass_ledger": {
         "released_kg": 0.00016756351240572947,
@@ -4802,21 +4884,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2622.759599937126,
-      "request_digest": "18dcd51756091d33b6804841bfd99477ba643b92d5fe767505c19242ec9433de",
-      "result_digest": "4097590cc51f65326502a304601b6ec6d4a4686e3459f6b6c6a9da92dce11071",
+      "elapsed_ms": 2617.0874000526965,
+      "request_digest": "5153091aefd6959b8b74295360325bde608fa3cb2ec6ac9e49917f9f6ddc01c6",
+      "result_digest": "b842ba1afb4b4ad618ad6380352bbc842184a7045f3a860bbdc9083a7df8c2a6",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 724.299699999392,
-        "pool": 128.03929997608066,
-        "near_field_and_dispersion": 1368.6807999620214,
-        "cloud_observation": 91.70440002344549,
-        "fire_explosion_damage_risk": 68.59770009759814
+        "source": 717.0592000475153,
+        "pool": 125.71010005194694,
+        "near_field_and_dispersion": 1374.6421000687405,
+        "cloud_observation": 93.54270005133003,
+        "fire_explosion_damage_risk": 70.01460005994886
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -4929,21 +5010,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5760.573500068858,
-      "request_digest": "28b8d864a9fb128c31438cf47caca67993e6b0a54426ba268bee87404b60165e",
-      "result_digest": "4fcb56206a27faf474fd6836c142260505c0bd2f0a7ce61d01b795d6737c945b",
+      "elapsed_ms": 4593.6814999440685,
+      "request_digest": "dbace2c4ae5d03131457a3bc42a76df41a14d3c6d7744b78f50c43b710efbd9d",
+      "result_digest": "c9a5185c373a948c65abe5f2aed4597bc2f4b8148c50371d68f66d6ffdff909b",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 737.8728999756277,
-        "pool": 136.75309997051954,
-        "near_field_and_dispersion": 4178.413199959323,
-        "cloud_observation": 343.4592999983579,
-        "fire_explosion_damage_risk": 104.10220001358539
+        "source": 721.1989999050274,
+        "pool": 130.4164999164641,
+        "near_field_and_dispersion": 3133.3713000640273,
+        "cloud_observation": 292.6125999074429,
+        "fire_explosion_damage_risk": 76.58860005903989
       },
       "mass_ledger": {
         "released_kg": 2.0141404563536543e-08,
@@ -5054,21 +5134,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 11983.961199992336,
-      "request_digest": "2a72f82122d91530283f665316323b72f3aca79533dcdcebdcacae46bdac1659",
-      "result_digest": "ae39ad096ef6ac0425fedd680e5e1f923695b893fab619361829b6f606b8a947",
+      "elapsed_ms": 9883.821700001135,
+      "request_digest": "bc73a857e9bf8271bbc376ba2e62dd46a974bf08b8cf87d0d27be0bdb42bae39",
+      "result_digest": "242f7066b3921468b86b935349355ea1b448873ae0f4b388fb03ae2b79219c3e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 713.6795999249443,
-        "pool": 129.43149998318404,
-        "near_field_and_dispersion": 10300.268499995582,
-        "cloud_observation": 485.49350001849234,
-        "fire_explosion_damage_risk": 100.6628000177443
+        "source": 713.7572000501677,
+        "pool": 126.54710002243519,
+        "near_field_and_dispersion": 8301.721299998462,
+        "cloud_observation": 417.1178999822587,
+        "fire_explosion_damage_risk": 75.23779990151525
       },
       "mass_ledger": {
         "released_kg": 4.4338658741797906e-07,
@@ -5179,21 +5258,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 14350.376000045799,
-      "request_digest": "094027c8b9cee7f4634ac81e17d7565c826a44f960f3561cdfae658b695172e6",
-      "result_digest": "a15a9c34d6a8c1ac88bc9b6197c98ac447815a79212d9da95814796d7371fad3",
+      "elapsed_ms": 10457.528300001286,
+      "request_digest": "696b4c4c51d7cb498d32cc46a8755406602ea01a8046d93d16ce6e9ad3d86de1",
+      "result_digest": "cd8b07bd5655c2586bd872eef0996fcc722a33139f8fe0240b72561146c65315",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 706.6088999854401,
-        "pool": 127.37800006289035,
-        "near_field_and_dispersion": 12708.09929992538,
-        "cloud_observation": 456.28709997981787,
-        "fire_explosion_damage_risk": 115.86639995221049
+        "source": 745.3222000040114,
+        "pool": 136.54129998758435,
+        "near_field_and_dispersion": 8877.84269999247,
+        "cloud_observation": 375.8205999620259,
+        "fire_explosion_damage_risk": 78.05780007038265
       },
       "mass_ledger": {
         "released_kg": 1.1651055997280421e-06,
@@ -5304,21 +5382,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 81542.2410001047,
-      "request_digest": "c5c731c002467c102760766dd816e414bacd2f2b2bd9f2f6cab09c857d74ae8f",
-      "result_digest": "0d6b272aba9deeea8fbacdfec16374b3d04cd124cf5a00380f332ac10ed24294",
+      "elapsed_ms": 55525.85360000376,
+      "request_digest": "d5801c8c210a4101557211adb949f6b0bf566bc74a96c795f012a8de876b9e64",
+      "result_digest": "911208dce4332838d3a7fde6787a0ba4a8b2b0e246ace0cc6f640db422b53db1",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 726.4185000676662,
-        "pool": 335.30639996752143,
-        "near_field_and_dispersion": 74260.8180999523,
-        "cloud_observation": 5472.997699980624,
-        "fire_explosion_damage_risk": 386.94360002409667
+        "source": 780.9249999700114,
+        "pool": 335.63690003938973,
+        "near_field_and_dispersion": 49182.34269996174,
+        "cloud_observation": 4577.107000048272,
+        "fire_explosion_damage_risk": 289.6432999987155
       },
       "mass_ledger": {
         "released_kg": 2.1053319426559835e-05,
@@ -5431,21 +5508,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 26304.281000047922,
-      "request_digest": "44f4c671b3fd4756807c5677ac1a884f3cb5acc41bb2419a4ef8d6d100c52ade",
-      "result_digest": "f45be3acb8a9fd0eda8aaeab3ba5db5dd00f86d3d51c2a6b63079590def6660c",
+      "elapsed_ms": 20700.269900029525,
+      "request_digest": "ac2535e3659d5f7f62d491c5d2a30a3385562e5f3850ce8da21b14ea236cb544",
+      "result_digest": "292dddd7e8067bb34087e8bdc70c1c6eaab9a79ba3e397dd94658bc83dd5c10b",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 716.07419999782,
-        "pool": 130.22159994579852,
-        "near_field_and_dispersion": 24594.974000006914,
-        "cloud_observation": 469.33430002536625,
-        "fire_explosion_damage_risk": 122.64299998059869
+        "source": 736.172299948521,
+        "pool": 129.10949997603893,
+        "near_field_and_dispersion": 19117.28490004316,
+        "cloud_observation": 382.0465001044795,
+        "fire_explosion_damage_risk": 69.54689999110997
       },
       "mass_ledger": {
         "released_kg": 0.00040250847725729254,
@@ -5545,21 +5621,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 42405.74189997278,
-      "request_digest": "7806f93db841c3da3bc08e24216d9a273bac148330aced11e2a0b1601b9d3279",
-      "result_digest": "3d16a0800d78f9eb1d124abe8517deb44aeb06a11c0cac5b7b092afbeee569ab",
+      "elapsed_ms": 28802.725000074133,
+      "request_digest": "2abe866723f08cd5eb2458b1e0e46139fc86c82fb40e78d091c95996f3fe9c92",
+      "result_digest": "7c76723275dbe549d554c87d32e0d5eb6291b6684fbebe6feef5951f41587816",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 711.56870003324,
-        "pool": 314.41430002450943,
-        "near_field_and_dispersion": 34708.38540000841,
-        "cloud_observation": 6178.922999999486,
-        "fire_explosion_damage_risk": 182.6900999294594
+        "source": 693.6208000406623,
+        "pool": 310.9882000135258,
+        "near_field_and_dispersion": 21940.381899941713,
+        "cloud_observation": 5462.323899962939,
+        "fire_explosion_damage_risk": 132.54679995588958
       },
       "mass_ledger": {
         "released_kg": 3.164317187981656e-05,
@@ -5657,21 +5732,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3300.919200060889,
-      "request_digest": "c073c5118371dc785de6bc8af0909ccc9571cbdf5b738d4849d4fce8402ccc3f",
-      "result_digest": "b890f4c364716ee4420bb6904425f8e8bf155cd179ec971067577fc24a5d69bc",
+      "elapsed_ms": 3274.3553000036627,
+      "request_digest": "de2d76b8213f91a03e2f723f51bb408d7812bcab433bf8cc08b7a20a843d0d7e",
+      "result_digest": "be44a84f705117283204498bcc671db12163b6ba6d59bacbfcc507f948c48371",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 708.8064999552444,
-        "pool": 366.10699992161244,
-        "near_field_and_dispersion": 1524.0685000317171,
-        "cloud_observation": 222.20299998298287,
-        "fire_explosion_damage_risk": 177.21899994648993
+        "source": 727.8393000597134,
+        "pool": 364.4901999505237,
+        "near_field_and_dispersion": 1543.2009000796825,
+        "cloud_observation": 233.62130008172244,
+        "fire_explosion_damage_risk": 135.54609997663647
       },
       "mass_ledger": {
         "released_kg": 0.0003164317187981657,
@@ -5769,21 +5843,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3700.3106999909505,
-      "request_digest": "85ba57a4185df3ac799a351365de950d4e7a0aeee2f720affd8178e97680ba89",
-      "result_digest": "9df9eac46c6aae782e883cf7dea0e8d40420da367be1954f98e4320872132494",
+      "elapsed_ms": 3617.4177000066265,
+      "request_digest": "0f1134ecf82f934017823d66a034bd923bae08ce5ff7486b25d9e108ccdc1219",
+      "result_digest": "a71e460eafabb85653ca8da902d725acd7ddc46c1f8c361c5cff5e110feb7db3",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 706.7751999711618,
-        "pool": 354.2770000640303,
-        "near_field_and_dispersion": 1830.2368998993188,
-        "cloud_observation": 267.7574000554159,
-        "fire_explosion_damage_risk": 235.58749991934747
+        "source": 712.608200032264,
+        "pool": 352.3620000341907,
+        "near_field_and_dispersion": 1889.8963000392541,
+        "cloud_observation": 263.31730000674725,
+        "fire_explosion_damage_risk": 140.62530000228435
       },
       "mass_ledger": {
         "released_kg": 0.003164317187981658,
@@ -5881,21 +5954,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 8677.240999997593,
-      "request_digest": "7e664540f4bb3f3a8373c307f5883f562ead666d91661cbde8535f5c7331279c",
-      "result_digest": "54141c43609a234234a29bf583d3a980376b65c6dfc9d69e3bfbd634e08cc8bd",
+      "elapsed_ms": 6948.806899948977,
+      "request_digest": "85692e1006ca28f669c35371818c4bf512cd0524ac2e8e52fb67f4a8bc06ab45",
+      "result_digest": "f5193df23b6f1645fa15c94113ad28ecfa8f791cc72d954871d91888ba8c4c99",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 709.05770000536,
-        "pool": 124.58079995121807,
-        "near_field_and_dispersion": 7190.110999974422,
-        "cloud_observation": 280.18610004801303,
-        "fire_explosion_damage_risk": 120.64219999592751
+        "source": 715.2206000173464,
+        "pool": 126.90090003889054,
+        "near_field_and_dispersion": 5570.268699899316,
+        "cloud_observation": 228.80699997767806,
+        "fire_explosion_damage_risk": 71.47929992061108
       },
       "mass_ledger": {
         "released_kg": 0.03164317187981657,
@@ -5993,21 +6065,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10223.70079997927,
-      "request_digest": "21d5957b74123371b6a22129104eec0d8500e51fd327be0f71a16789c4486c2f",
-      "result_digest": "574037a8d32b15ae7c939024b9ce3d3c1f93147d1f8c8cdc4fac3b4dcfc5bcb4",
+      "elapsed_ms": 7832.982699968852,
+      "request_digest": "9d12b8ea66423783dee9158a2b3c4c9fddd920e939813ae4fbb4f10fb6de3d2f",
+      "result_digest": "77eee5b95fd691467aef65b01f01db91ba51a651f49f80ae943d0104446492bb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 718.9140000846237,
-        "pool": 132.5108000310138,
-        "near_field_and_dispersion": 8675.525299971923,
-        "cloud_observation": 297.3427000688389,
-        "fire_explosion_damage_risk": 113.3533000247553
+        "source": 700.7274000206962,
+        "pool": 132.68779998179525,
+        "near_field_and_dispersion": 6458.474899991415,
+        "cloud_observation": 243.61380003392696,
+        "fire_explosion_damage_risk": 65.88399992324412
       },
       "mass_ledger": {
         "released_kg": 0.3164317187981657,
@@ -6103,21 +6174,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
       },
       "status": "EXECUTED",
-      "elapsed_ms": 4124.2434999439865,
-      "request_digest": "ed705fd77e0e5696032cfe1af8b48e949461648d5f4eb082dfc0cae056c80187",
-      "result_digest": "497d7b4c89c3a4d8b3d980163c49b8e0814b34df18ed93abcd8698c8e9c3aabf",
+      "elapsed_ms": 3721.3825000217184,
+      "request_digest": "f5af175b7a635d7c552df8b7db8fc893efe7931182fd450481563c8bb2bd0355",
+      "result_digest": "1f3b1fba1150263df7cdb73dc4dd1d58e1b645b1126a2712001cf9b8af97e81a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 717.9063999792561,
-        "pool": 0.005499925464391708,
-        "near_field_and_dispersion": 2754.732900066301,
-        "cloud_observation": 275.61490004882216,
-        "fire_explosion_damage_risk": 107.23509988747537
+        "source": 698.1980999698862,
+        "pool": 0.005500041879713535,
+        "near_field_and_dispersion": 2512.472699978389,
+        "cloud_observation": 219.51010008342564,
+        "fire_explosion_damage_risk": 66.37929996941239
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -6214,21 +6284,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3348.531600087881,
-      "request_digest": "e550b3932ec8bbed38acc6984ddd8a5ffcf8713f00bdf0430eb8faf4d7f64cb8",
-      "result_digest": "dc4b4e9856fa926616caf22e4c4b5371c00a1c97d8564fcdceaad150844e61d4",
+      "elapsed_ms": 3223.2301000040025,
+      "request_digest": "1924fe9a4f1ae7b7567d13f246652a2bd09916dc42b005f0506a61e4d021839e",
+      "result_digest": "7ef65ddb28e110f35e38e1ff4ab6b534c645aa31550795cb6556313faa8c98ca",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 708.9007999747992,
-        "pool": 353.99709991179407,
-        "near_field_and_dispersion": 1547.32240003068,
-        "cloud_observation": 227.80039999634027,
-        "fire_explosion_damage_risk": 207.222199998796
+        "source": 712.4272999353707,
+        "pool": 346.0852999705821,
+        "near_field_and_dispersion": 1547.909599961713,
+        "cloud_observation": 224.328099982813,
+        "fire_explosion_damage_risk": 138.55510007124394
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -6326,21 +6395,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3379.1593000059947,
-      "request_digest": "5f4d9268447c949956a9ab2db6e078dcb998d604a5c151d4ac97044c3433eaa0",
-      "result_digest": "c655558fc50e914929efe9f0ff8a759cdd2a571a2e26f45a623754a02c176a66",
+      "elapsed_ms": 3255.728099960834,
+      "request_digest": "1a356b4f5ad9061cf21dc9a6dafa4f23daf3d8067226ebce6e1f860a0ad66bd2",
+      "result_digest": "f4b41fdc5a17c1dd73c0619dde4e10201665b5d1031756612659b0399fd2f63e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 731.544499984011,
-        "pool": 359.16659992653877,
-        "near_field_and_dispersion": 1524.6143999975175,
-        "cloud_observation": 213.44810002483428,
-        "fire_explosion_damage_risk": 211.95739996619523
+        "source": 688.8030000263825,
+        "pool": 352.20049996860325,
+        "near_field_and_dispersion": 1578.7473999662325,
+        "cloud_observation": 227.3463000310585,
+        "fire_explosion_damage_risk": 140.82269999198616
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -6436,21 +6504,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "status": "EXECUTED",
-      "elapsed_ms": 4884.3277000123635,
-      "request_digest": "164a1b109d90cc10f74887a7e24f05d0d1973008b6be886cd4607f0641cf8c5d",
-      "result_digest": "7aa4c58bc33591bce174175103f88e7bd7d64524e7ee1b5e744e2a5cdd19f9cf",
+      "elapsed_ms": 4477.022300008684,
+      "request_digest": "950432979f522d34d0eee86e6a2be7c57ceebae68c315944c9312d4bc1cac03f",
+      "result_digest": "58549517aeb4cda3da66e21ff6199697ea7a7ba3eaab134de6ff033379b4f7c4",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 727.9797999653965,
-        "pool": 0.0065999338403344154,
-        "near_field_and_dispersion": 3361.9677000679076,
-        "cloud_observation": 443.9180000917986,
-        "fire_explosion_damage_risk": 104.16880005504936
+        "source": 723.183499998413,
+        "pool": 0.006500049494206905,
+        "near_field_and_dispersion": 3062.790900003165,
+        "cloud_observation": 385.584200033918,
+        "fire_explosion_damage_risk": 70.74969995301217
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -6545,21 +6612,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1928.3313000341877,
-      "request_digest": "1aff46e98f78559cb64937818b098f89189022c4a23069f1eb6b0ba5d298277b",
-      "result_digest": "e4286097dc2378aba08b56c692b9495dd85885a4307cce5b0a75942f4f36ec48",
+      "elapsed_ms": 1985.0877000717446,
+      "request_digest": "64f6111f895d5aa4b843d801c4ee7a9f03d2294414beb9fbf0500fcb4fa44832",
+      "result_digest": "6a10e1b5e22c0582a059cfcbf66f577a7837029e6e729c828de2caa0f65f04bb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 741.2916000466794,
-        "pool": 0.02329994458705187,
-        "near_field_and_dispersion": 259.50749998446554,
-        "cloud_observation": 608.1106000347063,
-        "fire_explosion_damage_risk": 67.75270006619394
+        "source": 769.8889999883249,
+        "pool": 0.02350006252527237,
+        "near_field_and_dispersion": 262.4563999706879,
+        "cloud_observation": 635.6172000523657,
+        "fire_explosion_damage_risk": 71.80870010051876
       },
       "mass_ledger": {
         "released_kg": 4.956379784841932e-06,
@@ -6654,21 +6720,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1482.891199993901,
-      "request_digest": "286d6b2f3bbd65f18dbee1cfb4ca8210684c0243bdddba51c147d9507f861702",
-      "result_digest": "35bb7121420a8ffffc282b57f14f29449a7611970bab81983adbdc8134398c0f",
+      "elapsed_ms": 1623.7299999920651,
+      "request_digest": "cf0771af9ee0c94c60b09ee1f8882617560edfdd572bef307c35308da62d8a56",
+      "result_digest": "c757de7aefae31e1f8d4fe9225cbf043d052c4692c70f7ab0b856b645271861a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 706.1408000299707,
-        "pool": 0.005500041879713535,
-        "near_field_and_dispersion": 393.6511999927461,
-        "cloud_observation": 97.70679997745901,
-        "fire_explosion_damage_risk": 65.32799999695271
+        "source": 812.5166000099853,
+        "pool": 0.00600004568696022,
+        "near_field_and_dispersion": 400.48439998645335,
+        "cloud_observation": 101.19750001467764,
+        "fire_explosion_damage_risk": 71.33029995020479
       },
       "mass_ledger": {
         "released_kg": 7.221896865709533e-06,
@@ -6781,15 +6846,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6541.466600028798,
-      "request_digest": "7dd82c3b5262268b2964165ddeb64ef93d64950caa615971b163c9c05982262f",
-      "result_digest": "88d72c5579b4b7817cae9c250fd2421ebc7c1a1a7cf6f94b53658eb8072b2947",
+      "elapsed_ms": 6494.205900002271,
+      "request_digest": "c452cee511e6cd87ee9cb3675183a46650c3f88447751ab545aba78b865f86c4",
+      "result_digest": "4b53a23af3f8e44215293b6991b8c5049a98db8728485470412a4477a9befc71",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "endpoint_a": 3224.112599971704,
-        "endpoint_b": 3314.5625999895856,
-        "endpoint_aggregation": 6540.731900022365
+        "endpoint_a": 3229.428800055757,
+        "endpoint_b": 3263.484499999322,
+        "endpoint_aggregation": 6493.827100028284
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -6903,15 +6968,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6459.451199974865,
-      "request_digest": "4a6821db0eff68bd64fb064791086a099eee23d6a469559a24900d0b93e03847",
-      "result_digest": "9f39ce46d43a643350f2b51153ac29041a8f5c5a1a75a8301d383272432880c9",
+      "elapsed_ms": 6443.121399963275,
+      "request_digest": "774d9f17ced186f73b9232dd82dcf723087a21afc0888b4999b33b96c68f2122",
+      "result_digest": "4ee11f91ce5b9e0ac6025b6f51ecdc1fbdf1847a90a52b5e4deb831ed5c43650",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "endpoint_a": 3177.112599951215,
-        "endpoint_b": 3280.2278000162914,
-        "endpoint_aggregation": 6458.705900004134
+        "endpoint_a": 3183.680500020273,
+        "endpoint_b": 3258.211400010623,
+        "endpoint_aggregation": 6442.706900066696
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -7007,21 +7072,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       },
       "status": "EXECUTED",
-      "elapsed_ms": 3137.27549999021,
-      "request_digest": "7eaed20f79413a184c8c246a59afce7bdcb0683c1f21c9c0c243d09fe3230a9e",
-      "result_digest": "7613b2e1fa02f50822f83fed59c7e46b26f82904a24d6776c2d53c243fc81b10",
+      "elapsed_ms": 3085.851600044407,
+      "request_digest": "9106b5ef33158a39add671c781a17041a9d5c2a4e96ce16b0cec1b33df0a299a",
+      "result_digest": "6709833523db9718eb50eb6e129ef83bd05023d208f223f519268eabd8f4fdb2",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 753.7546999519691,
-        "pool": 0.005500041879713535,
-        "near_field_and_dispersion": 1887.0895999716595,
-        "cloud_observation": 195.60470001306385,
-        "fire_explosion_damage_risk": 66.45649997517467
+        "source": 709.6132999286056,
+        "pool": 0.005299923941493034,
+        "near_field_and_dispersion": 1889.6080000558868,
+        "cloud_observation": 192.98189994879067,
+        "fire_explosion_damage_risk": 68.3815999655053
       },
       "mass_ledger": {
         "released_kg": 5.226060443124566e-06,
@@ -9399,21 +9463,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2925.193000002764,
-      "request_digest": "0092bf4d5e054a3d121a62165e1549c4a4d9dbc86d867316f4c2804f2260acf7",
-      "result_digest": "082e6fbb6ff6b8f19c10abbeb08704215359d9785012bb04537ea12ecfc9df7e",
+      "elapsed_ms": 2664.613000000827,
+      "request_digest": "ffa5d4c6a4e78cc968c70dde8c10311685f965b2bdf32907f4cd28977e1c5697",
+      "result_digest": "991720894cb50ebe1ba7488b7c5e2015016ee07a2a6f0b1b84d8a6fce23a6c10",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 794.1579000325873,
-        "pool": 164.65779999271035,
-        "near_field_and_dispersion": 1548.4512000111863,
-        "cloud_observation": 107.01999999582767,
-        "fire_explosion_damage_risk": 74.50920005794615
+        "source": 725.3497999627143,
+        "pool": 124.67910000123084,
+        "near_field_and_dispersion": 1408.3013000199571,
+        "cloud_observation": 102.11350000463426,
+        "fire_explosion_damage_risk": 70.36519993562251
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -9530,21 +9593,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 73114.11959992256,
-      "request_digest": "392a9a617a510b3e269184703426aa68dbb90adf2fe632a2bddf78c03210c14c",
-      "result_digest": "4b4a2460d34756b2ef50cd1129f469ca16e1acaf43def96a23a124c8eb53f8a5",
+      "elapsed_ms": 64022.139200009406,
+      "request_digest": "af0f7d4986cac6101fef2706811dcb1cfeccc6d4f698a5888cb78eea9dfc1b50",
+      "result_digest": "1138a8cacacec81fee2c7942a7788ee422251f66d19010bce5a67bcb30501707",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 783.4368000039831,
-        "pool": 397.8687999770045,
-        "near_field_and_dispersion": 39820.826299954206,
-        "cloud_observation": 31495.02640007995,
-        "fire_explosion_damage_risk": 236.22999992221594
+        "source": 710.3977000806481,
+        "pool": 331.27159997820854,
+        "near_field_and_dispersion": 36315.072900033556,
+        "cloud_observation": 26208.26930005569,
+        "fire_explosion_damage_risk": 136.94579992443323
       },
       "mass_ledger": {
         "released_kg": 0.00010057792972414058,
@@ -9663,21 +9725,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4316.947199986316,
-      "request_digest": "32e1dc0ed5dc3117d8a7b1567435ef2fa04f83eaf7c1a754594db64722cfd62b",
-      "result_digest": "d2608b5297a2d9c3ba5e8f7284551c8ec852666c7aaf9bae0a7cb0270a04b785",
+      "elapsed_ms": 3777.1796999732032,
+      "request_digest": "413272b109f5a8764d2091d9e0ccb71ee0256fd603f01d98c5e6aa5254293d91",
+      "result_digest": "d547f5ef5ec9567fcddabbe0ceab1531b8d19636a7c826ba69688857e6d856f2",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 729.6325999777764,
-        "pool": 131.79180002771318,
-        "near_field_and_dispersion": 2831.49900007993,
-        "cloud_observation": 246.68250000104308,
-        "fire_explosion_damage_risk": 106.57870001159608
+        "source": 711.5812000120059,
+        "pool": 125.89799996931106,
+        "near_field_and_dispersion": 2464.8826000047848,
+        "cloud_observation": 181.01499998010695,
+        "fire_explosion_damage_risk": 66.34000001940876
       },
       "mass_ledger": {
         "released_kg": 0.00010057966768755134,
@@ -9796,21 +9857,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2342.428799951449,
-      "request_digest": "fbdfb555e30f9f18f37c2918c1b0f25b2b0fe7741b05cedd9b8ad537ee956851",
-      "result_digest": "535956440cdf2ef5e2cdc2cb88c36e87b3c8add1558c854da6ff6610f6755b9f",
+      "elapsed_ms": 2285.0161999231204,
+      "request_digest": "a8f62c92428e2a6beb5302d5a0866b2f0423514a3701dbc87a9c97e18e498a8e",
+      "result_digest": "c915969300bf6435ddc7658037884f9cb2be20a942ed77b33ed66dc43f3f7ceb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 729.6690000221133,
-        "pool": 130.23650005925447,
-        "near_field_and_dispersion": 1067.1271999599412,
-        "cloud_observation": 92.46419998817146,
-        "fire_explosion_damage_risk": 69.42020007409155
+        "source": 721.4352000737563,
+        "pool": 127.41099996492267,
+        "near_field_and_dispersion": 1048.68190002162,
+        "cloud_observation": 85.5718000093475,
+        "fire_explosion_damage_risk": 72.93760008178651
       },
       "mass_ledger": {
         "released_kg": 0.00016756351240572947,
@@ -9929,21 +9989,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 2622.759599937126,
-      "request_digest": "18dcd51756091d33b6804841bfd99477ba643b92d5fe767505c19242ec9433de",
-      "result_digest": "4097590cc51f65326502a304601b6ec6d4a4686e3459f6b6c6a9da92dce11071",
+      "elapsed_ms": 2617.0874000526965,
+      "request_digest": "5153091aefd6959b8b74295360325bde608fa3cb2ec6ac9e49917f9f6ddc01c6",
+      "result_digest": "b842ba1afb4b4ad618ad6380352bbc842184a7045f3a860bbdc9083a7df8c2a6",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 724.299699999392,
-        "pool": 128.03929997608066,
-        "near_field_and_dispersion": 1368.6807999620214,
-        "cloud_observation": 91.70440002344549,
-        "fire_explosion_damage_risk": 68.59770009759814
+        "source": 717.0592000475153,
+        "pool": 125.71010005194694,
+        "near_field_and_dispersion": 1374.6421000687405,
+        "cloud_observation": 93.54270005133003,
+        "fire_explosion_damage_risk": 70.01460005994886
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -10056,21 +10115,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5760.573500068858,
-      "request_digest": "28b8d864a9fb128c31438cf47caca67993e6b0a54426ba268bee87404b60165e",
-      "result_digest": "4fcb56206a27faf474fd6836c142260505c0bd2f0a7ce61d01b795d6737c945b",
+      "elapsed_ms": 4593.6814999440685,
+      "request_digest": "dbace2c4ae5d03131457a3bc42a76df41a14d3c6d7744b78f50c43b710efbd9d",
+      "result_digest": "c9a5185c373a948c65abe5f2aed4597bc2f4b8148c50371d68f66d6ffdff909b",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 737.8728999756277,
-        "pool": 136.75309997051954,
-        "near_field_and_dispersion": 4178.413199959323,
-        "cloud_observation": 343.4592999983579,
-        "fire_explosion_damage_risk": 104.10220001358539
+        "source": 721.1989999050274,
+        "pool": 130.4164999164641,
+        "near_field_and_dispersion": 3133.3713000640273,
+        "cloud_observation": 292.6125999074429,
+        "fire_explosion_damage_risk": 76.58860005903989
       },
       "mass_ledger": {
         "released_kg": 2.0141404563536543e-08,
@@ -10181,21 +10239,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 11983.961199992336,
-      "request_digest": "2a72f82122d91530283f665316323b72f3aca79533dcdcebdcacae46bdac1659",
-      "result_digest": "ae39ad096ef6ac0425fedd680e5e1f923695b893fab619361829b6f606b8a947",
+      "elapsed_ms": 9883.821700001135,
+      "request_digest": "bc73a857e9bf8271bbc376ba2e62dd46a974bf08b8cf87d0d27be0bdb42bae39",
+      "result_digest": "242f7066b3921468b86b935349355ea1b448873ae0f4b388fb03ae2b79219c3e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 713.6795999249443,
-        "pool": 129.43149998318404,
-        "near_field_and_dispersion": 10300.268499995582,
-        "cloud_observation": 485.49350001849234,
-        "fire_explosion_damage_risk": 100.6628000177443
+        "source": 713.7572000501677,
+        "pool": 126.54710002243519,
+        "near_field_and_dispersion": 8301.721299998462,
+        "cloud_observation": 417.1178999822587,
+        "fire_explosion_damage_risk": 75.23779990151525
       },
       "mass_ledger": {
         "released_kg": 4.4338658741797906e-07,
@@ -10306,21 +10363,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 14350.376000045799,
-      "request_digest": "094027c8b9cee7f4634ac81e17d7565c826a44f960f3561cdfae658b695172e6",
-      "result_digest": "a15a9c34d6a8c1ac88bc9b6197c98ac447815a79212d9da95814796d7371fad3",
+      "elapsed_ms": 10457.528300001286,
+      "request_digest": "696b4c4c51d7cb498d32cc46a8755406602ea01a8046d93d16ce6e9ad3d86de1",
+      "result_digest": "cd8b07bd5655c2586bd872eef0996fcc722a33139f8fe0240b72561146c65315",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 706.6088999854401,
-        "pool": 127.37800006289035,
-        "near_field_and_dispersion": 12708.09929992538,
-        "cloud_observation": 456.28709997981787,
-        "fire_explosion_damage_risk": 115.86639995221049
+        "source": 745.3222000040114,
+        "pool": 136.54129998758435,
+        "near_field_and_dispersion": 8877.84269999247,
+        "cloud_observation": 375.8205999620259,
+        "fire_explosion_damage_risk": 78.05780007038265
       },
       "mass_ledger": {
         "released_kg": 1.1651055997280421e-06,
@@ -10431,21 +10487,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 81542.2410001047,
-      "request_digest": "c5c731c002467c102760766dd816e414bacd2f2b2bd9f2f6cab09c857d74ae8f",
-      "result_digest": "0d6b272aba9deeea8fbacdfec16374b3d04cd124cf5a00380f332ac10ed24294",
+      "elapsed_ms": 55525.85360000376,
+      "request_digest": "d5801c8c210a4101557211adb949f6b0bf566bc74a96c795f012a8de876b9e64",
+      "result_digest": "911208dce4332838d3a7fde6787a0ba4a8b2b0e246ace0cc6f640db422b53db1",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 726.4185000676662,
-        "pool": 335.30639996752143,
-        "near_field_and_dispersion": 74260.8180999523,
-        "cloud_observation": 5472.997699980624,
-        "fire_explosion_damage_risk": 386.94360002409667
+        "source": 780.9249999700114,
+        "pool": 335.63690003938973,
+        "near_field_and_dispersion": 49182.34269996174,
+        "cloud_observation": 4577.107000048272,
+        "fire_explosion_damage_risk": 289.6432999987155
       },
       "mass_ledger": {
         "released_kg": 2.1053319426559835e-05,
@@ -10558,21 +10613,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 26304.281000047922,
-      "request_digest": "44f4c671b3fd4756807c5677ac1a884f3cb5acc41bb2419a4ef8d6d100c52ade",
-      "result_digest": "f45be3acb8a9fd0eda8aaeab3ba5db5dd00f86d3d51c2a6b63079590def6660c",
+      "elapsed_ms": 20700.269900029525,
+      "request_digest": "ac2535e3659d5f7f62d491c5d2a30a3385562e5f3850ce8da21b14ea236cb544",
+      "result_digest": "292dddd7e8067bb34087e8bdc70c1c6eaab9a79ba3e397dd94658bc83dd5c10b",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 716.07419999782,
-        "pool": 130.22159994579852,
-        "near_field_and_dispersion": 24594.974000006914,
-        "cloud_observation": 469.33430002536625,
-        "fire_explosion_damage_risk": 122.64299998059869
+        "source": 736.172299948521,
+        "pool": 129.10949997603893,
+        "near_field_and_dispersion": 19117.28490004316,
+        "cloud_observation": 382.0465001044795,
+        "fire_explosion_damage_risk": 69.54689999110997
       },
       "mass_ledger": {
         "released_kg": 0.00040250847725729254,
@@ -10672,21 +10726,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 42405.74189997278,
-      "request_digest": "7806f93db841c3da3bc08e24216d9a273bac148330aced11e2a0b1601b9d3279",
-      "result_digest": "3d16a0800d78f9eb1d124abe8517deb44aeb06a11c0cac5b7b092afbeee569ab",
+      "elapsed_ms": 28802.725000074133,
+      "request_digest": "2abe866723f08cd5eb2458b1e0e46139fc86c82fb40e78d091c95996f3fe9c92",
+      "result_digest": "7c76723275dbe549d554c87d32e0d5eb6291b6684fbebe6feef5951f41587816",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 711.56870003324,
-        "pool": 314.41430002450943,
-        "near_field_and_dispersion": 34708.38540000841,
-        "cloud_observation": 6178.922999999486,
-        "fire_explosion_damage_risk": 182.6900999294594
+        "source": 693.6208000406623,
+        "pool": 310.9882000135258,
+        "near_field_and_dispersion": 21940.381899941713,
+        "cloud_observation": 5462.323899962939,
+        "fire_explosion_damage_risk": 132.54679995588958
       },
       "mass_ledger": {
         "released_kg": 3.164317187981656e-05,
@@ -10784,21 +10837,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3300.919200060889,
-      "request_digest": "c073c5118371dc785de6bc8af0909ccc9571cbdf5b738d4849d4fce8402ccc3f",
-      "result_digest": "b890f4c364716ee4420bb6904425f8e8bf155cd179ec971067577fc24a5d69bc",
+      "elapsed_ms": 3274.3553000036627,
+      "request_digest": "de2d76b8213f91a03e2f723f51bb408d7812bcab433bf8cc08b7a20a843d0d7e",
+      "result_digest": "be44a84f705117283204498bcc671db12163b6ba6d59bacbfcc507f948c48371",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 708.8064999552444,
-        "pool": 366.10699992161244,
-        "near_field_and_dispersion": 1524.0685000317171,
-        "cloud_observation": 222.20299998298287,
-        "fire_explosion_damage_risk": 177.21899994648993
+        "source": 727.8393000597134,
+        "pool": 364.4901999505237,
+        "near_field_and_dispersion": 1543.2009000796825,
+        "cloud_observation": 233.62130008172244,
+        "fire_explosion_damage_risk": 135.54609997663647
       },
       "mass_ledger": {
         "released_kg": 0.0003164317187981657,
@@ -10896,21 +10948,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3700.3106999909505,
-      "request_digest": "85ba57a4185df3ac799a351365de950d4e7a0aeee2f720affd8178e97680ba89",
-      "result_digest": "9df9eac46c6aae782e883cf7dea0e8d40420da367be1954f98e4320872132494",
+      "elapsed_ms": 3617.4177000066265,
+      "request_digest": "0f1134ecf82f934017823d66a034bd923bae08ce5ff7486b25d9e108ccdc1219",
+      "result_digest": "a71e460eafabb85653ca8da902d725acd7ddc46c1f8c361c5cff5e110feb7db3",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 706.7751999711618,
-        "pool": 354.2770000640303,
-        "near_field_and_dispersion": 1830.2368998993188,
-        "cloud_observation": 267.7574000554159,
-        "fire_explosion_damage_risk": 235.58749991934747
+        "source": 712.608200032264,
+        "pool": 352.3620000341907,
+        "near_field_and_dispersion": 1889.8963000392541,
+        "cloud_observation": 263.31730000674725,
+        "fire_explosion_damage_risk": 140.62530000228435
       },
       "mass_ledger": {
         "released_kg": 0.003164317187981658,
@@ -11008,21 +11059,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 8677.240999997593,
-      "request_digest": "7e664540f4bb3f3a8373c307f5883f562ead666d91661cbde8535f5c7331279c",
-      "result_digest": "54141c43609a234234a29bf583d3a980376b65c6dfc9d69e3bfbd634e08cc8bd",
+      "elapsed_ms": 6948.806899948977,
+      "request_digest": "85692e1006ca28f669c35371818c4bf512cd0524ac2e8e52fb67f4a8bc06ab45",
+      "result_digest": "f5193df23b6f1645fa15c94113ad28ecfa8f791cc72d954871d91888ba8c4c99",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 709.05770000536,
-        "pool": 124.58079995121807,
-        "near_field_and_dispersion": 7190.110999974422,
-        "cloud_observation": 280.18610004801303,
-        "fire_explosion_damage_risk": 120.64219999592751
+        "source": 715.2206000173464,
+        "pool": 126.90090003889054,
+        "near_field_and_dispersion": 5570.268699899316,
+        "cloud_observation": 228.80699997767806,
+        "fire_explosion_damage_risk": 71.47929992061108
       },
       "mass_ledger": {
         "released_kg": 0.03164317187981657,
@@ -11120,21 +11170,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 10223.70079997927,
-      "request_digest": "21d5957b74123371b6a22129104eec0d8500e51fd327be0f71a16789c4486c2f",
-      "result_digest": "574037a8d32b15ae7c939024b9ce3d3c1f93147d1f8c8cdc4fac3b4dcfc5bcb4",
+      "elapsed_ms": 7832.982699968852,
+      "request_digest": "9d12b8ea66423783dee9158a2b3c4c9fddd920e939813ae4fbb4f10fb6de3d2f",
+      "result_digest": "77eee5b95fd691467aef65b01f01db91ba51a651f49f80ae943d0104446492bb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 718.9140000846237,
-        "pool": 132.5108000310138,
-        "near_field_and_dispersion": 8675.525299971923,
-        "cloud_observation": 297.3427000688389,
-        "fire_explosion_damage_risk": 113.3533000247553
+        "source": 700.7274000206962,
+        "pool": 132.68779998179525,
+        "near_field_and_dispersion": 6458.474899991415,
+        "cloud_observation": 243.61380003392696,
+        "fire_explosion_damage_risk": 65.88399992324412
       },
       "mass_ledger": {
         "released_kg": 0.3164317187981657,
@@ -11232,21 +11281,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3348.531600087881,
-      "request_digest": "e550b3932ec8bbed38acc6984ddd8a5ffcf8713f00bdf0430eb8faf4d7f64cb8",
-      "result_digest": "dc4b4e9856fa926616caf22e4c4b5371c00a1c97d8564fcdceaad150844e61d4",
+      "elapsed_ms": 3223.2301000040025,
+      "request_digest": "1924fe9a4f1ae7b7567d13f246652a2bd09916dc42b005f0506a61e4d021839e",
+      "result_digest": "7ef65ddb28e110f35e38e1ff4ab6b534c645aa31550795cb6556313faa8c98ca",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 708.9007999747992,
-        "pool": 353.99709991179407,
-        "near_field_and_dispersion": 1547.32240003068,
-        "cloud_observation": 227.80039999634027,
-        "fire_explosion_damage_risk": 207.222199998796
+        "source": 712.4272999353707,
+        "pool": 346.0852999705821,
+        "near_field_and_dispersion": 1547.909599961713,
+        "cloud_observation": 224.328099982813,
+        "fire_explosion_damage_risk": 138.55510007124394
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -11344,21 +11392,20 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3379.1593000059947,
-      "request_digest": "5f4d9268447c949956a9ab2db6e078dcb998d604a5c151d4ac97044c3433eaa0",
-      "result_digest": "c655558fc50e914929efe9f0ff8a759cdd2a571a2e26f45a623754a02c176a66",
+      "elapsed_ms": 3255.728099960834,
+      "request_digest": "1a356b4f5ad9061cf21dc9a6dafa4f23daf3d8067226ebce6e1f860a0ad66bd2",
+      "result_digest": "f4b41fdc5a17c1dd73c0619dde4e10201665b5d1031756612659b0399fd2f63e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "source": 731.544499984011,
-        "pool": 359.16659992653877,
-        "near_field_and_dispersion": 1524.6143999975175,
-        "cloud_observation": 213.44810002483428,
-        "fire_explosion_damage_risk": 211.95739996619523
+        "source": 688.8030000263825,
+        "pool": 352.20049996860325,
+        "near_field_and_dispersion": 1578.7473999662325,
+        "cloud_observation": 227.3463000310585,
+        "fire_explosion_damage_risk": 140.82269999198616
       },
       "mass_ledger": {
         "released_kg": 0.0004000000000000001,
@@ -11472,15 +11519,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6541.466600028798,
-      "request_digest": "7dd82c3b5262268b2964165ddeb64ef93d64950caa615971b163c9c05982262f",
-      "result_digest": "88d72c5579b4b7817cae9c250fd2421ebc7c1a1a7cf6f94b53658eb8072b2947",
+      "elapsed_ms": 6494.205900002271,
+      "request_digest": "c452cee511e6cd87ee9cb3675183a46650c3f88447751ab545aba78b865f86c4",
+      "result_digest": "4b53a23af3f8e44215293b6991b8c5049a98db8728485470412a4477a9befc71",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "endpoint_a": 3224.112599971704,
-        "endpoint_b": 3314.5625999895856,
-        "endpoint_aggregation": 6540.731900022365
+        "endpoint_a": 3229.428800055757,
+        "endpoint_b": 3263.484499999322,
+        "endpoint_aggregation": 6493.827100028284
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -11594,15 +11641,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6459.451199974865,
-      "request_digest": "4a6821db0eff68bd64fb064791086a099eee23d6a469559a24900d0b93e03847",
-      "result_digest": "9f39ce46d43a643350f2b51153ac29041a8f5c5a1a75a8301d383272432880c9",
+      "elapsed_ms": 6443.121399963275,
+      "request_digest": "774d9f17ced186f73b9232dd82dcf723087a21afc0888b4999b33b96c68f2122",
+      "result_digest": "4ee11f91ce5b9e0ac6025b6f51ecdc1fbdf1847a90a52b5e4deb831ed5c43650",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "be9f1772834ccf6fd4f035c5551c4c60ebaa9ad7cf7a08c6a641b55faa209102",
+      "adapter_source_digest": "1c70c279ad76fff39d34c0b05662a8e067e6beb42f423b2392ee38e7ebb77ebe",
       "stage_elapsed_ms": {
-        "endpoint_a": 3177.112599951215,
-        "endpoint_b": 3280.2278000162914,
-        "endpoint_aggregation": 6458.705900004134
+        "endpoint_a": 3183.680500020273,
+        "endpoint_b": 3258.211400010623,
+        "endpoint_aggregation": 6442.706900066696
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -12891,8 +12938,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -12994,8 +13040,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13097,8 +13142,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13200,8 +13244,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13303,8 +13346,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13406,8 +13448,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13509,8 +13550,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13612,8 +13652,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13715,8 +13754,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13818,8 +13856,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -13921,8 +13958,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14024,8 +14060,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14127,8 +14162,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14230,8 +14264,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14333,8 +14366,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14436,8 +14468,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14539,8 +14570,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14642,8 +14672,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14745,8 +14774,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14848,8 +14876,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "8ebc051af2e080472903878b93bc7316e3e1e65fd78a798670142d8aef82b8ce"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -14945,8 +14972,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15042,8 +15068,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15139,8 +15164,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15236,8 +15260,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15333,8 +15356,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15430,8 +15452,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15527,8 +15548,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15624,8 +15644,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15721,8 +15740,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15818,8 +15836,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -15915,8 +15932,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16012,8 +16028,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16109,8 +16124,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16206,8 +16220,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16303,8 +16316,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16400,8 +16412,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16497,8 +16508,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16594,8 +16604,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16691,8 +16700,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16788,8 +16796,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "f997b0bc04cc0e6ea3559bfc665d31104a4f8a84f1af2594c60d730e54c2d945"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16872,8 +16879,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -16956,8 +16962,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17040,8 +17045,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17124,8 +17128,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17208,8 +17211,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17292,8 +17294,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17376,8 +17377,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17460,8 +17460,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17544,8 +17543,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17628,8 +17626,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17712,8 +17709,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17796,8 +17792,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17880,8 +17875,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -17964,8 +17958,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18048,8 +18041,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18132,8 +18124,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18216,8 +18207,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18300,8 +18290,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18384,8 +18373,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18468,8 +18456,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "42e815d72d0f26c318393ac1ea16d6d7ce5a8521f48fce8433f3d69bde664198"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18550,8 +18537,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18632,8 +18618,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18714,8 +18699,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18796,8 +18780,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "71e68b52bf2ff1e9ce88a1f5eb00b84b3286f1a14ee661a7bb4a51aec09a9616"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18880,8 +18863,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -18964,8 +18946,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19048,8 +19029,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19132,8 +19112,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19216,8 +19195,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19300,8 +19278,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19384,8 +19361,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19468,8 +19444,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "b8e240d0d1534e7186a15177334b965b5285e355aaba796fcd464afc4f855337"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19550,8 +19525,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19632,8 +19606,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19714,8 +19687,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19796,8 +19768,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19878,8 +19849,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -19960,8 +19930,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -20042,8 +20011,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -20124,8 +20092,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -20206,8 +20173,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -20288,8 +20254,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -20370,8 +20335,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -20452,8 +20416,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "ed047b414cd30ea9491f10d77b273964536d1433f6c0ce8907169b6203ea7a23"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -21302,8 +21265,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -21384,8 +21346,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -21466,8 +21427,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -21548,8 +21508,7 @@
           "quality": "valid"
         },
         "state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b",
-        "provider_state_snapshot_digests": null
+        "provider_state_snapshot_digest": "a589026e85950722e9d2b40ca6620a26725455a48ad929dcc653928eeb84be1b"
       },
       "receptor_harm_low_high": {
         "worker-01": [
@@ -28403,7 +28362,7 @@
       ]
     }
   ],
-  "risk_atoms_digest": "6b32cc3a2aaee4133de142cbeebf07c8a3336fc8e053b78714a61d8fe1a3cf16",
+  "risk_atoms_digest": "611598c6ecad32688701358e4c35e7c47a0ab962a57d40f0dd41df2d979650ad",
   "component_contributions": {
     "ambient-vaporizer-01": {
       "event_count": 3,
@@ -29704,8 +29663,8 @@
     "vertical_handoff"
   ],
   "scope_matrix_digests": [
-    "fbc61233dfd1e7eb50c6e6f380300a18bf8a50d9ef7efe7e169caec11f7f5214",
-    "0e0cda9970c32f3983282a1851391b6faea4c92eae62573b499ea46e3f80236d",
+    "16874619e5550ed388183b5fc33d94b344cdafd036e24a058e946ceb1ddc5f71",
+    "602aa4251f65d22e7ce74f01809341dc4244fad4e03b201a4a89dfa7aef4a323",
     "79f03d6bd5d1746a633b5de60edfed832b63f545bde266aa7726866588b3fae0"
   ],
   "accident_family_statuses": {
@@ -29830,67 +29789,67 @@
     "stage_timing": {
       "cloud_observation": {
         "sample_count": 42,
-        "sum_ms": 49972.5804006448,
-        "median_ms": 92.08430000580847,
-        "max_ms": 31495.02640007995,
-        "p95_ms": 5229.753344983307,
-        "p99_ms": 21115.424006046866
+        "sum_ms": 42536.960800527595,
+        "median_ms": 89.55725003033876,
+        "max_ms": 26208.26930005569,
+        "p95_ms": 4380.032510048461,
+        "p99_ms": 17702.431686017586
       },
       "endpoint_a": {
         "sample_count": 2,
-        "sum_ms": 6401.225199922919,
-        "median_ms": 3200.6125999614596,
-        "max_ms": 3224.112599971704,
-        "p95_ms": 3221.7625999706797,
-        "p99_ms": 3223.6425999714993
+        "sum_ms": 6413.10930007603,
+        "median_ms": 3206.554650038015,
+        "max_ms": 3229.428800055757,
+        "p95_ms": 3227.141385053983,
+        "p99_ms": 3228.9713170554023
       },
       "endpoint_aggregation": {
         "sample_count": 2,
-        "sum_ms": 12999.437800026499,
-        "median_ms": 6499.718900013249,
-        "max_ms": 6540.731900022365,
-        "p95_ms": 6536.630600021454,
-        "p99_ms": 6539.911640022183
+        "sum_ms": 12936.53400009498,
+        "median_ms": 6468.26700004749,
+        "max_ms": 6493.827100028284,
+        "p95_ms": 6491.2710900302045,
+        "p99_ms": 6493.315898028668
       },
       "endpoint_b": {
         "sample_count": 2,
-        "sum_ms": 6594.790400005877,
-        "median_ms": 3297.3952000029385,
-        "max_ms": 3314.5625999895856,
-        "p95_ms": 3312.845859990921,
-        "p99_ms": 3314.2192519898526
+        "sum_ms": 6521.695900009945,
+        "median_ms": 3260.8479500049725,
+        "max_ms": 3263.484499999322,
+        "p95_ms": 3263.220844999887,
+        "p99_ms": 3263.431768999435
       },
       "fire_explosion_damage_risk": {
         "sample_count": 42,
-        "sum_ms": 4428.231300087646,
-        "median_ms": 70.73249999666587,
-        "max_ms": 386.94360002409667,
-        "p95_ms": 234.40599492168977,
-        "p99_ms": 325.151023982325
+        "sum_ms": 3562.8511999966577,
+        "median_ms": 70.37739997031167,
+        "max_ms": 289.6432999987155,
+        "p95_ms": 140.52179000573233,
+        "p99_ms": 228.6268539959559
       },
       "near_field_and_dispersion": {
         "sample_count": 42,
-        "sum_ms": 256519.0260997042,
-        "median_ms": 1457.3634500266053,
-        "max_ms": 74260.8180999523,
-        "p95_ms": 34202.71483000829,
-        "p99_ms": 60140.42146195295
+        "sum_ms": 198063.49149998277,
+        "median_ms": 1428.2409500447102,
+        "max_ms": 49182.34269996174,
+        "p95_ms": 21799.22704994677,
+        "p99_ms": 43906.76208199114
       },
       "pool": {
         "sample_count": 42,
-        "sum_ms": 3816.866099834442,
-        "median_ms": 0.005499983672052622,
-        "max_ms": 397.8687999770045,
-        "p95_ms": 358.92211993341334,
-        "p99_ms": 384.84646195429366
+        "sum_ms": 3679.0641001425683,
+        "median_ms": 0.005399982910603285,
+        "max_ms": 364.4901999505237,
+        "p95_ms": 351.8947399687022,
+        "p99_ms": 359.51763798482716
       },
       "source": {
         "sample_count": 42,
-        "sum_ms": 30398.89720012434,
-        "median_ms": 719.7199500515126,
-        "max_ms": 794.1579000325873,
-        "p95_ms": 753.1315449567046,
-        "p99_ms": 789.7622490208596
+        "sum_ms": 30342.252300237305,
+        "median_ms": 717.1405500266701,
+        "max_ms": 812.5166000099853,
+        "p95_ms": 768.6606599891091,
+        "p99_ms": 799.5640439935959
       }
     },
     "case_status_counts": {
@@ -30234,8 +30193,8 @@
   "qualified_facility_qra_available": false,
   "complete_facility_qra_claim": false,
   "provider_qualification_blocking_reasons": [
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: qualified provider packet promotion is unavailable",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: provider packet evidence does not match all consumed packets",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: qualified provider packet promotion is unavailable",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: provider packet evidence does not match all consumed packets",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: qualified provider packet promotion is unavailable",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: provider packet evidence does not match all consumed packets",
     "campaign 0c8a2a44910ec534262637f956cbf9da00bcabf931863cb39fd00635ee2b6df1: qualified provider packet promotion is unavailable",
@@ -30244,10 +30203,10 @@
   "synthetic_release_horizon_present": true,
   "facility_total_risk_available": false,
   "blocking_reasons": [
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: declared scope is incomplete",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: uncomputed cases remain",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: excluded components remain",
-    "campaign 744bd97e0dcc2d19ee7d0db4142ee13c18c5ac9dc5d78aeec5c6ad296a2e2bce: synthetic release horizon",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: declared scope is incomplete",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: uncomputed cases remain",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: excluded components remain",
+    "campaign 23f2a13f0c7a98406b9a93d2f63e4ed5218c95a534471066ef89be1236cf5c90: synthetic release horizon",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: declared scope is incomplete",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: uncomputed cases remain",
     "campaign de697d6e7d87e5fc56e0774406bb4bb0ed346bffc87e23980fe9aa599adcf2b2: synthetic release horizon",
@@ -30272,81 +30231,81 @@
     "campaign_count": 3,
     "fresh_physics_cases": 44,
     "case_min_ms": 1322.6463000755757,
-    "case_median_ms": 2773.976299969945,
-    "case_max_ms": 81542.2410001047,
-    "case_p95_ms": 39990.522764984074,
-    "case_p99_ms": 77918.14879802638,
-    "campaign_elapsed_ms": 369386.88370015007,
-    "campaign_elapsed_ms_sum": 369386.88370015007,
+    "case_median_ms": 2640.8502000267617,
+    "case_max_ms": 64022.139200009406,
+    "case_p95_ms": 27587.356735067453,
+    "case_p99_ms": 60368.736392006984,
+    "campaign_elapsed_ms": 301737.2363001341,
+    "campaign_elapsed_ms_sum": 301737.2363001341,
     "campaign_elapsed_ms_min": 19298.20160008967,
     "campaign_elapsed_ms_median": 20759.865000029095,
-    "campaign_elapsed_ms_max": 329328.8171000313,
-    "campaign_elapsed_ms_p95": 298471.921890031,
-    "campaign_elapsed_ms_p99": 323157.43805803126,
+    "campaign_elapsed_ms_max": 261679.16970001534,
+    "campaign_elapsed_ms_p95": 237587.23923001668,
+    "campaign_elapsed_ms_p99": 256860.7836060156,
     "stage_elapsed_ms": {
       "cloud_observation": {
         "sample_count": 42,
-        "sum_ms": 49972.5804006448,
-        "median_ms": 92.08430000580847,
-        "max_ms": 31495.02640007995,
-        "p95_ms": 5229.753344983307,
-        "p99_ms": 21115.424006046866
+        "sum_ms": 42536.960800527595,
+        "median_ms": 89.55725003033876,
+        "max_ms": 26208.26930005569,
+        "p95_ms": 4380.032510048461,
+        "p99_ms": 17702.431686017586
       },
       "endpoint_a": {
         "sample_count": 2,
-        "sum_ms": 6401.225199922919,
-        "median_ms": 3200.6125999614596,
-        "max_ms": 3224.112599971704,
-        "p95_ms": 3221.7625999706797,
-        "p99_ms": 3223.6425999714993
+        "sum_ms": 6413.10930007603,
+        "median_ms": 3206.554650038015,
+        "max_ms": 3229.428800055757,
+        "p95_ms": 3227.141385053983,
+        "p99_ms": 3228.9713170554023
       },
       "endpoint_aggregation": {
         "sample_count": 2,
-        "sum_ms": 12999.437800026499,
-        "median_ms": 6499.718900013249,
-        "max_ms": 6540.731900022365,
-        "p95_ms": 6536.630600021454,
-        "p99_ms": 6539.911640022183
+        "sum_ms": 12936.53400009498,
+        "median_ms": 6468.26700004749,
+        "max_ms": 6493.827100028284,
+        "p95_ms": 6491.2710900302045,
+        "p99_ms": 6493.315898028668
       },
       "endpoint_b": {
         "sample_count": 2,
-        "sum_ms": 6594.790400005877,
-        "median_ms": 3297.3952000029385,
-        "max_ms": 3314.5625999895856,
-        "p95_ms": 3312.845859990921,
-        "p99_ms": 3314.2192519898526
+        "sum_ms": 6521.695900009945,
+        "median_ms": 3260.8479500049725,
+        "max_ms": 3263.484499999322,
+        "p95_ms": 3263.220844999887,
+        "p99_ms": 3263.431768999435
       },
       "fire_explosion_damage_risk": {
         "sample_count": 42,
-        "sum_ms": 4428.231300087646,
-        "median_ms": 70.73249999666587,
-        "max_ms": 386.94360002409667,
-        "p95_ms": 234.40599492168977,
-        "p99_ms": 325.151023982325
+        "sum_ms": 3562.8511999966577,
+        "median_ms": 70.37739997031167,
+        "max_ms": 289.6432999987155,
+        "p95_ms": 140.52179000573233,
+        "p99_ms": 228.6268539959559
       },
       "near_field_and_dispersion": {
         "sample_count": 42,
-        "sum_ms": 256519.0260997042,
-        "median_ms": 1457.3634500266053,
-        "max_ms": 74260.8180999523,
-        "p95_ms": 34202.71483000829,
-        "p99_ms": 60140.42146195295
+        "sum_ms": 198063.49149998277,
+        "median_ms": 1428.2409500447102,
+        "max_ms": 49182.34269996174,
+        "p95_ms": 21799.22704994677,
+        "p99_ms": 43906.76208199114
       },
       "pool": {
         "sample_count": 42,
-        "sum_ms": 3816.866099834442,
-        "median_ms": 0.005499983672052622,
-        "max_ms": 397.8687999770045,
-        "p95_ms": 358.92211993341334,
-        "p99_ms": 384.84646195429366
+        "sum_ms": 3679.0641001425683,
+        "median_ms": 0.005399982910603285,
+        "max_ms": 364.4901999505237,
+        "p95_ms": 351.8947399687022,
+        "p99_ms": 359.51763798482716
       },
       "source": {
         "sample_count": 42,
-        "sum_ms": 30398.89720012434,
-        "median_ms": 719.7199500515126,
-        "max_ms": 794.1579000325873,
-        "p95_ms": 753.1315449567046,
-        "p99_ms": 789.7622490208596
+        "sum_ms": 30342.252300237305,
+        "median_ms": 717.1405500266701,
+        "max_ms": 812.5166000099853,
+        "p95_ms": 768.6606599891091,
+        "p99_ms": 799.5640439935959
       }
     },
     "distribution": "across separately executed equipment campaigns; not repeated-run latency"

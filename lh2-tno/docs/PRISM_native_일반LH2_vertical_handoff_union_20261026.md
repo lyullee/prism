@@ -7,7 +7,7 @@
 ```powershell
 python scripts/run_native_full_scope_union_assessment.py `
   --base-dir results/20261026/native_full_scope_frequency_assessment `
-  --base-campaign results/20261030/native_near_receptor_scope_packets_state_bound/campaign.json `
+  --base-campaign results/20261030/native_near_receptor_scope_packets_state_bound/campaign_state_bound.json `
   --base-campaign-result results/20261030/native_near_receptor_scope_packets_state_bound/campaign_result.json `
   --vertical-result results/20261020/vertical_vent_all_bins/campaign_result.json `
   --vertical-scope-matrix results/20261020/vertical_handoff_scope_matrix_all_bins.json `
@@ -25,6 +25,11 @@ namespace로 사후 이름변경할 수 있었고, 그 경우 IR이 0으로 남�
 현재 union 실행기는 시설 ID가 다르면 즉시 실패하며, 2026-10-30 재계산은 동일한 native 상태 패킷
 digest를 유지한 채 0.5 m 수용점에서 다시 피해를 계산했다. 이 검사는 수용점 기하를 사후 대체하지
 않도록 하는 fail-closed 계약이다.
+
+`--state-snapshot-binding-audit`를 지정하면 `campaign_state_bound.json`의 상태 원문과
+result 원장의 provider-result digest를 다시 대조해 base case·risk atom에 snapshot을 복사한다.
+상태 snapshot이 없는 일반 `campaign.json`을 넣으면 실행을 중단한다. 방출 유량·질량·종료값으로
+상태를 재구성하지 않기 위한 재현성 보호장치다.
 
 union 결과에 검증근거와 실시간 처리 증거를 묶으려면 다음 단계를 실행한다. 이
 명령은 새 provider 물리 계산을 만들지 않고, 기존 원장과 명시된 증거의 승격 게이트를
@@ -112,6 +117,9 @@ coverage·IJHE 감사가 같은 세 필드를 전달하므로 “미계산 29건
   상태 snapshot, component ID, provider result digest 대조. 24/24가 일치한다.
   `extension_state_snapshot_coverage.json`도 수직 handoff·inventory depletion 확장
   10개 사건의 입력 snapshot·provider echo를 10/10으로 확인한다.
+- `base_result_state_snapshot_binding.json`: 상태가 포함된 campaign request와 기존
+  compact result를 exact provider-result digest로 재결합한 장부. 기본 24개 event,
+  43개 case, 96개 risk atom이 `STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED`가 된다.
 - `validation_evidence_matrix.json`: 6개 근거 영역을 제한 상태로 묶은 통합 장부 (`FACILITY_QRA_WITHHELD`)
 - `realtime_cache_benchmark.json`: fresh physics와 동일 요청 cache 처리시간을 분리한 실행 기록
 - `state_snapshot_binding_audit.json`: native 24개 packet exporter의 원문·digest·provider echo를

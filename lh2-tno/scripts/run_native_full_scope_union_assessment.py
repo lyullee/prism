@@ -30,6 +30,9 @@ from lh2_tno.campaign_namespace import rebind_campaign_result  # noqa: E402
 from lh2_tno.native_packet_campaign import (  # noqa: E402
     build_native_packet_campaign_execution_ledger,
 )
+from lh2_tno.state_snapshot_result_binding import (  # noqa: E402
+    bind_campaign_result_state_snapshots,
+)
 from lh2_tno.facility_scope_matrix import (  # noqa: E402
     build_scope_matrix_from_facility_ledger,
     repair_facility_ledger_scenario_families,
@@ -253,6 +256,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         if args.extension_state_snapshot_audit is not None
         else None
     )
+    base_result_state_binding = None
+    if state_snapshot_audit is not None:
+        # The result ledger and the state-bound request are separate persisted
+        # artifacts.  Join them before the facility merge so a rerun cannot
+        # silently drop the canonical state identity from base risk atoms.
+        base_result, base_result_state_binding = bind_campaign_result_state_snapshots(
+            base_result,
+            base_campaign,
+            state_snapshot_audit,
+        )
     if state_snapshot_audit is not None:
         native_state_snapshot_ledger = build_native_packet_campaign_execution_ledger(
             base_campaign,
@@ -544,6 +557,26 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             native_state_snapshot_ledger.get("state_snapshot_campaign_reconciliation", {})
             .get("provider_result_digest_mismatch_event_ids", [])
         ),
+        "base_result_state_snapshot_binding_status": (
+            base_result_state_binding.get("status")
+            if base_result_state_binding is not None
+            else "NOT_PROVIDED"
+        ),
+        "base_result_state_snapshot_binding_event_count": (
+            base_result_state_binding.get("event_count")
+            if base_result_state_binding is not None
+            else 0
+        ),
+        "base_result_state_snapshot_binding_case_count": (
+            base_result_state_binding.get("bound_case_count")
+            if base_result_state_binding is not None
+            else 0
+        ),
+        "base_result_state_snapshot_binding_risk_atom_count": (
+            base_result_state_binding.get("bound_risk_atom_count")
+            if base_result_state_binding is not None
+            else 0
+        ),
         "extension_state_snapshot_coverage_status": extension_state_snapshot_coverage[
             "status"
         ],
@@ -602,6 +635,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "facility_evidence_request.json", evidence_request)
     _save(output / "facility_case_packet_coverage.json", facility_case_packet_coverage)
     _save(output / "native_state_snapshot_campaign_ledger.json", native_state_snapshot_ledger)
+    if base_result_state_binding is not None:
+        _save(output / "base_result_state_snapshot_binding.json", base_result_state_binding)
     _save(
         output / "extension_state_snapshot_coverage.json",
         extension_state_snapshot_coverage,

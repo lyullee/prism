@@ -1659,7 +1659,7 @@
   "native_lh2dt_packet_campaign_vertical_handoff_facility_assessment_vertical_family_status": "PARTIAL",
   "native_lh2dt_packet_campaign_facility_assessment_latest_variant": "vertical_handoff_merged",
   "native_lh2dt_packet_coverage_ledger_test_status": "native packet ledger + IJHE audit targeted tests passed; full portable suite 459 passed",
-  "ijhe_completion_audit_latest_test_status": "IJHE audit consumes the explicit 44-case facility packet coverage ledger and public release-boundary gate; full portable suite 705 passed, 1 skipped; facility QRA remains fail-closed",
+  "ijhe_completion_audit_latest_test_status": "IJHE audit consumes the explicit 44-case facility packet coverage ledger and public release-boundary gate; state-bound result rebinding is fail-closed; full portable suite 707 passed, 1 skipped; facility QRA remains fail-closed",
   "ijhe_completion_audit_partial_provider_precedence_implemented": true,
   "ijhe_completion_audit_partial_provider_precedence_policy": "Partial qualification coverage cannot override an explicit current-status false or open the actual provider packet gate; only complete worklist qualification can fill an absent status value.",
   "campaign_namespace_rebind_implemented": true,
@@ -2391,7 +2391,7 @@
   "facility_release_boundary_gate_promotion": false,
   "facility_release_boundary_gate_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "facility_release_boundary_gate_completion_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json",
-  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 4 completion-audit tests, public assessment propagation assertion, union case-coverage and raw-ledger reconciliation assertions; full portable suite 705 passed, 1 skipped",
+  "facility_release_boundary_gate_test_status": "3 release-ledger tests plus 4 completion-audit tests, public assessment propagation assertion, union case-coverage/raw-ledger reconciliation assertions, and state-snapshot result-binding tests; full portable suite 707 passed, 1 skipped",
   "v060_ijhe_completion_audit_latest_check_count": 32,
   "v060_ijhe_completion_audit_latest_check_status_counts": {
     "PASS": 27,
@@ -2430,5 +2430,13 @@
   "facility_case_packet_coverage_union_report_qualified_case_count": 0,
   "facility_case_packet_coverage_union_report_record": "results/20261026/native_full_scope_union_assessment/facility_case_packet_coverage.json",
   "facility_release_boundary_gate_public_assessment_propagation": true,
-  "v060_ijhe_completion_audit_case_packet_coverage_check": "facility_case_provider_packet_coverage"
+  "v060_ijhe_completion_audit_case_packet_coverage_check": "facility_case_provider_packet_coverage",
+  "state_snapshot_result_binding_implemented": true,
+  "state_snapshot_result_binding_module": "src/lh2_tno/state_snapshot_result_binding.py",
+  "state_snapshot_result_binding_status": "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED; 24 base events, 43 base cases, 96 base risk atoms",
+  "state_snapshot_result_binding_record": "results/20261026/native_full_scope_union_assessment/base_result_state_snapshot_binding.json",
+  "state_snapshot_result_binding_policy": "Exact component and provider-result digest match; canonical state snapshot and provider echo digest required; no release-value reconstruction; unbound campaign input fails closed",
+  "native_full_scope_union_reproduction_campaign": "results/20261030/native_near_receptor_scope_packets_state_bound/campaign_state_bound.json",
+  "native_full_scope_union_reproduction_state_result_binding": true,
+  "native_full_scope_union_result_state_atom_count": 176
 }
