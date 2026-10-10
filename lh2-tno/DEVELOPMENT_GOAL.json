@@ -2544,7 +2544,7 @@
   "ijhe_objective_coverage_audit_with_external_field_record": "results/20261103/ijhe_objective_coverage_audit_with_external_field.json",
   "ijhe_objective_coverage_audit_with_external_field_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 16 checks, core blockers 0, strict blockers 4; external field row PASS as diagnostic-only with hash drift retained",
   "ijhe_objective_coverage_audit_external_field_diagnostic_policy": "External outdoor observations are audited separately and cannot promote provider release, accident frequency, physical validation or facility QRA; current bundle has source_boundary/weather/common_clock hash drift",
-  "full_portable_test_status_latest": "796 passed, 1 skipped",
+  "full_portable_test_status_latest": "797 passed, 1 skipped",
   "external_field_model_comparison_contract_implemented": true,
   "external_field_model_comparison_module": "src/lh2_tno/field_model_comparison.py",
   "external_field_model_comparison_schema": "prism.external_field_model_comparison.v1",
@@ -2563,5 +2563,9 @@
   "validation_evidence_matrix_with_external_field_model_comparison_status": "EVIDENCE_MATRIX_REVIEW_REQUIRED; comparison domain recorded; field hash drift remains a blocking reason; facility QRA withheld",
   "field_model_comparison_promotion_policy": "Matched concentration metrics do not promote measured-source replay to independent physical validation; hash drift, frequency, accident release, ignition, IR/FN and facility QRA remain closed",
   "chain_worker_null_release_termination_guard_implemented": true,
-  "chain_worker_null_release_termination_guard_module": "src/lh2_tno/chain_worker.py"
+  "chain_worker_null_release_termination_guard_module": "src/lh2_tno/chain_worker.py",
+  "external_field_model_comparison_coordinate_orientation_review_required": true,
+  "external_field_model_comparison_coordinate_orientation_interpretation": "Prediction peak is zero while observed peak is positive; review source direction, wind-from convention, axis definitions, and transport delay before physical-validation decision.",
+  "external_field_model_comparison_field_axis_definition_status": "not_supplied_in_public_workbook",
+  "external_field_model_comparison_model_axis_assumption": "x=east, y=north, z=up; source-relative metres"
 }

@@ -6,11 +6,26 @@
   "common_clock_id": "preslhy-e35-trial-10-2019-09-13-shared-wall-clock",
   "receptor_geometry_id": "preslhy-e35-trial-10-2019-09-13-receptors",
   "coordinate_reference": "source-relative metres; z above concrete pad",
+  "coordinate_metadata": {
+    "field_axis_definition_status": "not_supplied_in_public_workbook",
+    "model_axis_assumption": "x=east, y=north, z=up; source-relative metres",
+    "wind_direction_convention": "meteorological wind-from bearing, clockwise from north",
+    "wind_from_bearing_deg": 315.0,
+    "wind_to_bearing_deg": 135.0,
+    "source_release_bearing_deg": 286.0,
+    "source_direction_enu": [
+      -0.9612616959383188,
+      0.2756373558169994,
+      0.0
+    ],
+    "downwind_bearing_used_by_prism_deg": 135.0,
+    "review_note": "Field cardinal axis mapping is not declared by the public workbook; model axis assumption must be confirmed before independent comparison."
+  },
   "field_evidence_status": "RESTRICTED_EXTERNAL_FIELD_EVIDENCE_HASH_DRIFT",
   "field_evidence_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261103\\external_field_evidence\\preslhy_trial10_unverified.json",
   "field_evidence_sha256": "a7c5274ef507d37eda10b74cf2f839cbccf354e54fcadb2158c95d2dbe8bb044",
   "model_prediction_path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261103\\external_field_model_comparison\\preslhy_trial10_replay_prediction.json",
-  "model_prediction_sha256": "eb6dd003ab176e61e34a3e8cf60e7d6c3f68248c6afc0a16df658f4147b0cc2b",
+  "model_prediction_sha256": "c5ae71801d831a6c08d08a5b1dfa7fdecc497dc496360e57378e2c9a5d908f84",
   "source_boundary_binding": {
     "mode": "measured_source_replay",
     "source_boundary_sha256": "46a0df940a9a719f3b020570795e45d6504f6a6fe443d07c32a0eff3f73d499a",
@@ -423,6 +438,11 @@
       "predicted_peak_vol_pct": 0.0,
       "peak_bias_vol_pct": -84.224
     }
+  },
+  "diagnostics": {
+    "coordinate_orientation_review_required": true,
+    "prediction_peak_zero_with_observed_signal": true,
+    "interpretation": "The prediction has no positive receptor concentration while the field has a positive signal. Review source direction, wind-from convention, axis definitions, and transport delay before any physical-validation decision."
   },
   "matched_samples": [
     {

@@ -399,6 +399,14 @@ def build_field_model_comparison_record(
         sensor_id: _metrics([row for row in matched if row["sensor_id"] == sensor_id])
         for sensor_id in sorted(sensor_positions)
     }
+    coordinate_metadata = prediction.get("coordinate_metadata")
+    if coordinate_metadata is not None and not isinstance(coordinate_metadata, Mapping):
+        raise FieldModelComparisonError("model prediction coordinate_metadata must be an object")
+    orientation_review_required = bool(
+        matched
+        and (metrics["predicted_peak_vol_pct"] or 0.0) <= 0.0
+        and (metrics["observed_peak_vol_pct"] or 0.0) > 0.0
+    )
     status = (
         "BLOCKED_NO_MATCHED_SAMPLES"
         if not matched
@@ -421,6 +429,7 @@ def build_field_model_comparison_record(
         "common_clock_id": clock_id,
         "receptor_geometry_id": geometry_id,
         "coordinate_reference": field_coordinate_reference,
+        "coordinate_metadata": dict(coordinate_metadata) if isinstance(coordinate_metadata, Mapping) else None,
         "field_evidence_status": field.get("status"),
         "field_evidence_path": str(field_path) if field_path else None,
         "field_evidence_sha256": field_evidence_sha256,
@@ -455,6 +464,17 @@ def build_field_model_comparison_record(
         },
         "metrics": metrics,
         "per_sensor_metrics": per_sensor,
+        "diagnostics": {
+            "coordinate_orientation_review_required": orientation_review_required,
+            "prediction_peak_zero_with_observed_signal": orientation_review_required,
+            "interpretation": (
+                "The prediction has no positive receptor concentration while the field has a positive signal. "
+                "Review source direction, wind-from convention, axis definitions, and transport delay before any "
+                "physical-validation decision."
+                if orientation_review_required
+                else None
+            ),
+        },
         "matched_samples": matched,
         "independent_physical_validation_review_eligible": review_eligible,
         "physical_validation_claim": False,

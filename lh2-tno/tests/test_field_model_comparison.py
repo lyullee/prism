@@ -172,3 +172,17 @@ def test_no_matching_prediction_times_is_blocked(tmp_path):
     assert report["status"] == "BLOCKED_NO_MATCHED_SAMPLES"
     assert report["matching"]["matched_row_count"] == 0
     assert report["physical_validation_claim"] is False
+
+
+def test_zero_prediction_with_observed_signal_requires_orientation_review(tmp_path):
+    field, _ = _field_bundle(tmp_path)
+    prediction = _prediction(field)
+    for receptor in prediction["receptors"]:
+        receptor["concentration_history"] = [
+            {"time_s": 10.0, "h2_volume_percent": 0.0},
+            {"time_s": 11.0, "h2_volume_percent": 0.0},
+        ]
+    report = build_field_model_comparison_record(field, prediction)
+    assert report["diagnostics"]["coordinate_orientation_review_required"] is True
+    assert report["diagnostics"]["prediction_peak_zero_with_observed_signal"] is True
+    assert report["physical_validation_claim"] is False

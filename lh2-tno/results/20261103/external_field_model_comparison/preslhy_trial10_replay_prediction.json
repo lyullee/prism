@@ -7937,5 +7937,20 @@
     "backend_elapsed_ms": 16213.402100023814,
     "raw_result_sha256": "f77004e3928cb0126fb1757ddbd7fd5a733abe081ad5e7b1837b483855e35a8a"
   },
-  "coordinate_reference": "source-relative metres; z above concrete pad"
+  "coordinate_reference": "source-relative metres; z above concrete pad",
+  "coordinate_metadata": {
+    "field_axis_definition_status": "not_supplied_in_public_workbook",
+    "model_axis_assumption": "x=east, y=north, z=up; source-relative metres",
+    "wind_direction_convention": "meteorological wind-from bearing, clockwise from north",
+    "wind_from_bearing_deg": 315.0,
+    "wind_to_bearing_deg": 135.0,
+    "source_release_bearing_deg": 286.0,
+    "source_direction_enu": [
+      -0.9612616959383188,
+      0.2756373558169994,
+      0.0
+    ],
+    "downwind_bearing_used_by_prism_deg": 135.0,
+    "review_note": "Field cardinal axis mapping is not declared by the public workbook; model axis assumption must be confirmed before independent comparison."
+  }
 }
