@@ -40,6 +40,11 @@ def build_provider_packet_collection_manifest(
     if evidence_request.get("schema_version") != REQUEST_SCHEMA:
         raise ValueError(f"evidence_request schema_version must be {REQUEST_SCHEMA}")
     case_requests = _rows(evidence_request.get("case_requests", []), "evidence_request.case_requests")
+    promotion_gate = evidence_request.get("promotion_gate")
+    promotion_gate = dict(promotion_gate) if isinstance(promotion_gate, Mapping) else {}
+    default_strict_gate_requirements = [
+        key for key, value in promotion_gate.items() if value is True
+    ]
     rows: list[dict[str, Any]] = []
     seen: set[tuple[str, str, str, str]] = set()
     blocking_reasons: list[str] = []
@@ -79,7 +84,10 @@ def build_provider_packet_collection_manifest(
             "gap_class": request.get("gap_class"),
             "exact_match_required": dict(identity),
             "required_provider_evidence": _list(request.get("required_provider_evidence", [])),
-            "strict_gate_requirements": _list(request.get("strict_gate_requirements", [])),
+            "strict_gate_requirements": (
+                _list(request.get("strict_gate_requirements", []))
+                or list(default_strict_gate_requirements)
+            ),
             "current_release_boundary": request.get("current_release_boundary"),
             "current_boundary_gaps": _list(request.get("current_boundary_gaps", [])),
             "release_path": None,
@@ -95,6 +103,10 @@ def build_provider_packet_collection_manifest(
         "facility_id": evidence_request.get("facility_id"),
         "source_evidence_request_schema": evidence_request.get("schema_version"),
         "source_evidence_request_status": evidence_request.get("status"),
+        "promotion_gate": promotion_gate,
+        "strict_gate_catalog": dict(evidence_request.get("strict_gate_catalog", {}))
+        if isinstance(evidence_request.get("strict_gate_catalog"), Mapping)
+        else {},
         "request_count": len(rows),
         "open_request_count": sum(row["status"] == "OPEN" for row in rows),
         "qualified_packet_count": 0,

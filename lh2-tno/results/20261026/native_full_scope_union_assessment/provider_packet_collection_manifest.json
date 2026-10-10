@@ -4,6 +4,22 @@
   "facility_id": "generic-lh2-near-receptor-diagnostic",
   "source_evidence_request_schema": "prism.facility_evidence_request.v1",
   "source_evidence_request_status": "OPEN_EVIDENCE_REQUEST",
+  "promotion_gate": {
+    "qualified_provider_packet_required": true,
+    "provider_packet_evidence_schema": "prism.provider_packet_evidence.v1",
+    "provider_qualification_schema": "prism.provider_qualification_evidence.v1",
+    "exact_event_component_port_and_digest_match_required": true,
+    "independent_physical_validation_required": true,
+    "complete_declared_scope_required": true,
+    "facility_ir_fn_remains_withheld_until_all_true": true
+  },
+  "strict_gate_catalog": {
+    "DOMAIN_INCOMPLETE": "close the declared model-domain boundary and provide the missing consequence handoff evidence",
+    "FAILED_PROVIDER_CASE": "repeat the failed provider case with a reproducible error-free release ledger",
+    "FAMILY_SCOPE_PARTIAL": "complete the family-specific accident branch and termination coverage",
+    "MISSING_PROVIDER_CASES": "one exact qualified provider packet for every strict uncomputed case",
+    "OPERATOR_LIMITED_INPUT": "replace synthetic, screening or operator-limited boundary inputs with provider-owned facility evidence"
+  },
   "request_count": 44,
   "open_request_count": 44,
   "qualified_packet_count": 0,
@@ -44,7 +60,13 @@
         "independent physical validation or a declared validation gap for the release boundary",
         "positive inventory threshold, depletion clock and final residual mass"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 1.6000000000000003,
@@ -95,7 +117,13 @@
         "independent physical validation or a declared validation gap for the release boundary",
         "complete 600 s provider history and end-of-horizon inventory"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_over_600s",
         "termination_time_s": 600.0,
@@ -146,7 +174,13 @@
         "independent physical validation or a declared validation gap for the release boundary",
         "vaporizer process-side state, failure mode and boundary history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.5,
@@ -199,7 +233,13 @@
         "independent physical validation or a declared validation gap for the release boundary",
         "relief/vent set point, capacity and discharge termination history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "emergency_relief_discharge",
         "termination_time_s": 0.5,
@@ -254,7 +294,13 @@
         "both provider outlets, endpoint geometry and same-event coupling",
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "two_sided_rupture",
         "termination_time_s": 1e-05,
@@ -311,7 +357,13 @@
         "both provider outlets, endpoint geometry and same-event coupling",
         "paired plume/pressure/inventory interaction output or an explicit provider unresolved-interaction declaration"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "two_sided_rupture",
         "termination_time_s": 1e-05,
@@ -364,7 +416,13 @@
         "independent physical validation or a declared validation gap for the release boundary",
         "reliquefier failure mode, connected inventory and outlet history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.5,
@@ -421,7 +479,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.05,
@@ -478,7 +542,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 5.999999999999993e-05,
@@ -536,7 +606,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 5.999999999999999e-06,
@@ -594,7 +670,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 1e-06,
@@ -652,7 +734,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "tank pressure, phase inventory and vessel opening history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 1e-06,
@@ -710,7 +798,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.001,
@@ -768,7 +862,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.001,
@@ -826,7 +926,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.001,
@@ -884,7 +990,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.001,
@@ -943,7 +1055,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.0001,
@@ -1002,7 +1120,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pump trip/seal failure state and connected inventory history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1060,7 +1184,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "pump trip/seal failure state and connected inventory history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1118,7 +1248,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1176,7 +1312,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1234,7 +1376,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1292,7 +1440,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1350,7 +1504,13 @@
         "flash quality, gas/liquid/ground partition and droplet treatment",
         "valve opening command, travel/closure history and upstream state"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.2,
@@ -1406,7 +1566,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 1.5,
@@ -1459,7 +1625,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 1.5,
@@ -1512,7 +1684,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.5,
@@ -1565,7 +1743,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.5,
@@ -1618,7 +1802,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.5,
@@ -1671,7 +1861,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.5,
@@ -1724,7 +1920,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.5,
@@ -1777,7 +1979,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.5,
@@ -1830,7 +2038,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.0625,
@@ -1883,7 +2097,13 @@
         "positive inventory threshold, depletion clock and final residual mass",
         "pipe upstream/downstream state and isolation response history"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "inventory_depletion",
         "termination_time_s": 0.0625,
@@ -1936,7 +2156,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -1992,7 +2218,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2048,7 +2280,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2104,7 +2342,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2160,7 +2404,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2216,7 +2466,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2272,7 +2528,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2328,7 +2590,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2384,7 +2652,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
@@ -2440,7 +2714,13 @@
         "pipe upstream/downstream state and isolation response history",
         "provider-owned vertical-to-horizontal handoff state and boundary"
       ],
-      "strict_gate_requirements": [],
+      "strict_gate_requirements": [
+        "qualified_provider_packet_required",
+        "exact_event_component_port_and_digest_match_required",
+        "independent_physical_validation_required",
+        "complete_declared_scope_required",
+        "facility_ir_fn_remains_withheld_until_all_true"
+      ],
       "current_release_boundary": {
         "termination_basis": "synthetic_diagnostic_horizon",
         "termination_time_s": 0.37,
