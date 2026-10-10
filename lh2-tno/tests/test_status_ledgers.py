@@ -7,8 +7,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT_PATH = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json"
-ASSESSMENT_PATH = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
+AUDIT_PATH = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json"
+ASSESSMENT_PATH = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json"
 
 
 def _json(path: Path) -> dict:
@@ -32,19 +32,19 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
     assessment = _json(ASSESSMENT_PATH)
 
     assert audit["status"] == "INCOMPLETE_EVIDENCE"
-    assert len(audit["checks"]) == 34
-    assert len(audit["blocking_reasons"]) == 4
+    assert len(audit["checks"]) == 42
+    assert len(audit["blocking_reasons"]) == 5
     case_check = next(
         check for check in audit["checks"]
         if check["name"] == "facility_case_provider_packet_coverage"
     )
     assert case_check["status"] == "BLOCKED"
-    assert case_check["evidence"]["case_request_count"] == 34
+    assert case_check["evidence"]["case_request_count"] == 44
     assert case_check["evidence"]["qualified_provider_case_count"] == 0
 
     coverage = assessment["facility_case_packet_coverage"]
     assert coverage["coverage_status"] == "NO_CASE_MATCH"
-    assert coverage["case_request_count"] == 34
+    assert coverage["case_request_count"] == 44
     assert coverage["qualified_provider_case_count"] == 0
     assert assessment["facility_case_packet_coverage_complete"] is False
     assert assessment["qualified_facility_qra_available"] is False
@@ -60,14 +60,14 @@ def test_status_ledgers_match_latest_audit_and_facility_gate() -> None:
         assert status["ijhe_completion_audit_latest_facility_assessment_record"].endswith(
             ASSESSMENT_PATH.name
         )
-        assert status["full_portable_test_count"] == 617
-        assert status["full_portable_test_status"] == "617 passed"
+        assert status["full_portable_test_count"] == 773
+        assert status["full_portable_test_status"] == "773 passed, 1 skipped"
         assert status["facility_evidence_request_latest_record"].endswith(
-            "native_generic_scope_vertical_facility_evidence_request_v2.json"
+            "native_full_scope_union_pipefix_state_bound/facility_evidence_request.json"
         )
         if "facility_ledger_latest_record" in status:
             assert status["facility_ledger_latest_record"].endswith(
-                "native_generic_scope_vertical_merged_facility_ledger_population_v3.json"
+                "native_full_scope_union_pipefix_state_bound/campaign_result.json"
             )
         if "ijhe_audit_latest_record" in status:
             assert status["ijhe_audit_latest_record"].endswith(AUDIT_PATH.name)

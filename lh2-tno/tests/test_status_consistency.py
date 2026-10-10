@@ -9,22 +9,22 @@ from lh2_tno.status_consistency import build_status_consistency_report, load_jso
 
 
 ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "results/20261024/ijhe_completion_audit_native_generic_scope_vertical_v20.json"
-ASSESSMENT = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_assessment_population_v6.json"
-EVIDENCE_REQUEST = ROOT / "results/20261024/native_generic_scope_vertical_facility_evidence_request_v2.json"
-LEDGER = ROOT / "results/20261024/native_generic_scope_vertical_merged_facility_ledger_population_v3.json"
-COVERAGE = ROOT / "results/20261024/native_generic_scope_vertical_case_packet_coverage_v1.json"
+AUDIT = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json"
+ASSESSMENT = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json"
+EVIDENCE_REQUEST = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json"
+LEDGER = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/campaign_result.json"
+COVERAGE = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_case_packet_coverage.json"
 CURRENT_PROVIDER_INPUT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json"
 CURRENT_STATE_RELEASE_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json"
 CURRENT_COMPONENT_MAPPING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json"
 CURRENT_STATE_MODEL_BINDING_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/observed_state_model_binding_audit.json"
 CURRENT_CONSEQUENCE_BACKEND_CHAIN_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json"
 CURRENT_PROVIDER_PACKET_COLLECTION_MANIFEST = ROOT / "results/20261026/native_full_scope_union_assessment/provider_packet_collection_manifest.json"
-CURRENT_AUDIT = ROOT / "results/20261026/native_full_scope_union_assessment/ijhe_completion_audit.json"
-CURRENT_ASSESSMENT = ROOT / "results/20261026/native_full_scope_union_assessment/facility_assessment.json"
-CURRENT_EVIDENCE_REQUEST = ROOT / "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json"
-CURRENT_LEDGER = ROOT / "results/20261026/native_full_scope_union_assessment/campaign_result.json"
-CURRENT_COVERAGE = ROOT / "results/20261026/native_full_scope_union_assessment/facility_case_packet_coverage.json"
+CURRENT_AUDIT = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json"
+CURRENT_ASSESSMENT = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json"
+CURRENT_EVIDENCE_REQUEST = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json"
+CURRENT_LEDGER = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/campaign_result.json"
+CURRENT_COVERAGE = ROOT / "results/20261031/native_full_scope_union_pipefix_state_bound/facility_case_packet_coverage.json"
 
 
 def _report(**overrides):
@@ -72,7 +72,7 @@ def test_current_union_pointer_evidence_reports_current_audit_counts() -> None:
     assert report["status"] == "CONSISTENT"
     for name in ("current_status_audit_pointer", "development_goal_audit_pointer"):
         evidence = next(row for row in report["checks"] if row["name"] == name)["evidence"]
-        assert evidence["check_count"] == 39
+        assert evidence["check_count"] == 42
         assert evidence["blocking_reason_count"] == 5
 
 
