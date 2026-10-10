@@ -1,0 +1,40 @@
+{
+  "schema_version": "prism.external_field_coordinate_evidence.v1",
+  "status": "DOCUMENTARY_RELEASE_ORIENTATION_ONLY",
+  "event_id": "preslhy-e35-trial-10-2019-09-13",
+  "dataset_id": "preslhy-e35-trial10-xensor-window",
+  "trial": 10,
+  "test_id": "3.5.10",
+  "declared_release_bearing_deg_from_north": 75.0,
+  "direction_convention": "clockwise from north",
+  "scope": "PRESLHY E3.5 release apparatus / trial-10 source direction",
+  "primary_reference": {
+    "title": "PRESLHY D3.6 Summary of experiment series E3.5 (Rainout) results",
+    "version": "V1.20 web copy",
+    "url": "https://hysafe.info/wp-content/uploads/sites/3/2020/08/PRESLHY_D3.6_Summary_of_Rainout_Experiments_V1.20.pdf",
+    "evidence_locations": [
+      "Table A10: test 3.5.10 is horizontal, 0.5 m release height, 25.4 mm orifice, 5 bar",
+      "Table A11: trial 10 uses test 3.5.10 on 13/09/2019 at 13:25:06",
+      "Table A5 note: the release pointed at approximately 75 degrees from North"
+    ]
+  },
+  "local_bundle_reference": {
+    "public_dataset_doi": "10.35097/1481",
+    "local_pdf_path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2\\액화수소 검증\\10.35097-1481\\data\\dataset\\PRESLHY_D3.6_Summary_of_Rainout_Experiments_V1.22.pdf",
+    "local_pdf_sha256": "865b2b9f966e05023fbb581a4ed68f95f2353d6d6db2ad137aae7a9cf17c4f67"
+  },
+  "comparison_consistency": {
+    "current_replay_bearing_deg": 286.0,
+    "current_replay_uses_declared_bearing": false,
+    "current_replay_coordinate_axis_status": "source-relative axes are not mapped to ENU",
+    "required_follow_up": "rerun the replay with the documentary direction and an independently established source-relative axis transform"
+  },
+  "qualification": {
+    "field_axis_mapping_status": "UNRESOLVED",
+    "release_direction_is_not_a_receptor_axis_transform": true,
+    "used_as_parameter_fit": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "promotion_allowed": false
+  }
+}

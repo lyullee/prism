@@ -184,6 +184,39 @@ def _prediction(base: dict[str, Any], data: dict[str, Any], release: ResolvedLiq
     return value
 
 
+def _declared_coordinate_evidence(
+    bearing: float | None,
+    reference: str | None,
+) -> dict[str, Any] | None:
+    """Return documentary direction evidence without treating it as a fit.
+
+    The release direction and the x/y axes used by a derived field bundle are
+    separate facts.  Keeping this distinction in the sweep output prevents a
+    documented apparatus direction from being silently substituted for an
+    unresolved source-relative coordinate transform.
+    """
+    if bearing is None:
+        if reference:
+            raise ValueError("--declared-release-bearing-reference requires --declared-release-bearing")
+        return None
+    if not math.isfinite(bearing):
+        raise ValueError("--declared-release-bearing must be finite")
+    if not reference:
+        raise ValueError("--declared-release-bearing requires --declared-release-bearing-reference")
+    return {
+        "status": "DOCUMENTARY_RELEASE_ORIENTATION_ONLY",
+        "release_bearing_deg_from_north": bearing % 360.0,
+        "reference": reference,
+        "field_axis_mapping_status": "UNRESOLVED",
+        "used_as_fit": False,
+        "promotion_allowed": False,
+        "interpretation": (
+            "The reference declares the apparatus/release direction. It does not "
+            "define how source-relative receptor x/y axes map to ENU."
+        ),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--field-evidence", type=Path, required=True)
@@ -191,13 +224,32 @@ def main() -> int:
     parser.add_argument("--raw-chain-result", type=Path, required=True)
     parser.add_argument("--backend-config", type=Path, required=True)
     parser.add_argument("--facility-template", type=Path, default=ROOT / "examples" / "consequence_facility.json")
-    parser.add_argument("--bearings", default="286,106,135,45")
+    parser.add_argument(
+        "--bearings",
+        default="75,286,106,135,45",
+        help="declared ENU release bearings to run as diagnostics (not fitted)",
+    )
+    parser.add_argument(
+        "--declared-release-bearing",
+        type=float,
+        default=None,
+        help="documented apparatus direction from north, retained as evidence only",
+    )
+    parser.add_argument(
+        "--declared-release-bearing-reference",
+        default=None,
+        help="URL or citable document identifier for --declared-release-bearing",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
     field = _read_json(args.field_evidence)
     base_prediction = _read_json(args.base_model_prediction)
     raw = _read_json(args.raw_chain_result)
+    coordinate_evidence = _declared_coordinate_evidence(
+        args.declared_release_bearing,
+        args.declared_release_bearing_reference,
+    )
     receptor_path, _ = _field_paths(field)
     receptor_positions = _receptors(receptor_path)
     facility = _facility(args.facility_template, receptor_positions)
@@ -244,6 +296,7 @@ def main() -> int:
         "event_id": field.get("event_id"),
         "field_evidence_status": field.get("status"),
         "coordinate_reference": base_prediction.get("coordinate_reference"),
+        "documentary_coordinate_evidence": coordinate_evidence,
         "bearing_sweep_deg": [row["bearing_deg"] for row in reports],
         "reports": reports,
         "promotion_policy": {
