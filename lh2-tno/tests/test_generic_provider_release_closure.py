@@ -60,6 +60,14 @@ def test_campaign_audit_counts_ready_and_open_events(tmp_path):
     assert report["qualified_provider_packet_count"] == 0
     assert report["diagnostic_only"] is True
     assert report["promotion_gates"]["facility_qra_allowed"] is False
+    request = report["event_rows"][1]["packet_rows"][0]["closure_request"]
+    assert request["request_schema"] == "prism.provider_release_closure_request.v1"
+    assert request["status"] == "OPEN"
+    assert request["acceptance"]["frequency_inference_allowed"] is False
+    assert any(
+        row["field"] == "termination_basis"
+        for row in request["required_evidence"]
+    )
 
 
 def test_campaign_audit_keeps_packet_audit_errors_open(tmp_path):

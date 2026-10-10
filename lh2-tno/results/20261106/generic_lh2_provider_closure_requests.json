@@ -1,0 +1,1080 @@
+{
+  "schema_version": "prism.generic_provider_release_closure_requests.v1",
+  "status": "OPEN_PROVIDER_CLOSURE_REQUESTS",
+  "source_schema_version": "prism.generic_provider_release_closure_audit.v1",
+  "source_status": "CLOSURE_EVIDENCE_OPEN",
+  "event_count": 24,
+  "open_request_count": 15,
+  "qualified_provider_packet_count": 0,
+  "requests": [
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 3.4802029894759985e-06,
+        "cumulative_mass_out_kg": 2.014140456353654e-08,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a2aa33b77959219d602e861bb5d28b689acb8275fb2f446eb8e5d0e87edd57c6"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 3.480202989475999e-05,
+        "cumulative_mass_out_kg": 4.4338658741797916e-07,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "8a74e121e603c03d01c96f36013dab1dc6500caaffa206ef1776ebc16778791d"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 0.00034802029894760006,
+        "cumulative_mass_out_kg": 1.1651055997280421e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "6321526f1b73b4f042177e8b3473b89c892e855787a6f8ebcfd4cbafbad11b85"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.001,
+        "available_mass_kg": 0.0034802029894759993,
+        "cumulative_mass_out_kg": 2.1053319426559835e-05,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "0dd657e8ab8e76ee09f96e4dffceab8a54187f16d91e748fd946735e22053ccf"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "port_id": "line-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external DynamicHEMPipe fixed diagnostic horizon; residual pipe inventory retained",
+        "duration_s": 0.0001,
+        "available_mass_kg": 0.034802029894759993,
+        "cumulative_mass_out_kg": 0.00040250847725729254,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a3624efecb19ba260cf56543a0720c4e545b4e8240cb4231a55f1c404c5d529b"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "inlet_isolation_time_s",
+          "accepted": "reviewed provider clock with isolation success/failure state",
+          "reason": "pipe release duration depends on upstream inflow after the opening"
+        },
+        {
+          "field": "upstream_downstream_state_history",
+          "accepted": "provider history for both sides of the line",
+          "reason": "a line opening cannot use a tank or valve surrogate for its boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 3.797180625577987e-05,
+        "cumulative_mass_out_kg": 3.164317187981656e-05,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "bdf1c97f79537b66efac7cca03fe61d11a3546345fb35d7cb7bce5bb3177d0e8"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.0003797180625577988,
+        "cumulative_mass_out_kg": 0.0003164317187981657,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "8529911e9fa63a213bb1eb524291b3537f363e52702f0b2ecae40b5b16d43ce2"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.0037971806255779894,
+        "cumulative_mass_out_kg": 0.003164317187981658,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "6e60617fc68dc1f7409a36914b57f50f4fe0f6323cf1d4181d266ccd122c815a"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.03797180625577989,
+        "cumulative_mass_out_kg": 0.03164317187981657,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "b592913739901e48ce53301c7b8b04c9c66016cd4baa05d5d62c99d065782b35"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "port_id": "valve-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external Valve bounded full-open diagnostic horizon; reserve is explicit feed-through bookkeeping",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.3797180625577989,
+        "cumulative_mass_out_kg": 0.31643171879816573,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "c17dab8de03b0859969a58ea7d8b84b66967176ee2fe967bc66a6e91854dce5e"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "valve_opening_and_travel_history",
+          "accepted": "reviewed failed-opening or failed-closure history",
+          "reason": "valve event duration must belong to the valve boundary"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "a valve packet cannot borrow a pipe termination basis"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "port_id": "pump-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external MappedPump H-Q-N point and matched atmospheric valve over bounded feed-through horizon",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.00048,
+        "cumulative_mass_out_kg": 0.0004,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "5690e9cc0fbba465f3de79078e47e7738a0b319cdd0fbddc8e008018c9435c72"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "pump_trip_or_seal_failure_history",
+          "accepted": "reviewed pump failure state and clock",
+          "reason": "pump release duration depends on the pump failure mode"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "upstream service must be closed at the pump boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "port_id": "pump-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external MappedPump H-Q-N point and matched atmospheric valve over bounded feed-through horizon",
+        "duration_s": 0.2,
+        "available_mass_kg": 0.00048,
+        "cumulative_mass_out_kg": 0.0004,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "ca3620c3c8484efb6fb486f62785ab9946e4839f86b1da2febcf7ac06f838225"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "pump_trip_or_seal_failure_history",
+          "accepted": "reviewed pump failure state and clock",
+          "reason": "pump release duration depends on the pump failure mode"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "upstream service must be closed at the pump boundary"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_over_600s",
+        "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume inventory ledger over declared 600 s horizon",
+        "duration_s": 600.0,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 4.956379784841932e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "a2f2b5c8a1afd4dab33c9fca88dfa33324de6c1f5ea1072fd6787bdbc25d3243"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "process_side_state_history",
+          "accepted": "reviewed vaporizer process-side state and boundary history",
+          "reason": "vaporizer failure must retain its own phase and inventory basis"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "the downstream gas boundary cannot define the upstream liquid release"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume state with explicit valve; residual inventory retained at synthetic horizon",
+        "duration_s": 0.5,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 7.221896865709533e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "aadf02bc05ace43145e907f15bd16f74a29875714d0ee7c47b1dae3a29e44526"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "process_side_state_history",
+          "accepted": "reviewed vaporizer process-side state and boundary history",
+          "reason": "vaporizer failure must retain its own phase and inventory basis"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "the downstream gas boundary cannot define the upstream liquid release"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    },
+    {
+      "request_schema": "prism.provider_release_closure_request.v1",
+      "request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "status": "OPEN",
+      "current_packet": {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "port_id": "reliquefier-accident-out-1",
+        "event_kind": "accidental_leak",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "termination_provenance": "external lh2dt.DynamicReliquefier finite-volume state with explicit valve; residual inventory retained at synthetic horizon",
+        "duration_s": 0.5,
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 5.226060443124568e-06,
+        "provider_source_digest": "66a0e1aea9e136bc6814006781bf75d9cee5af05d4438c891858e7362c7e8a9f",
+        "provider_result_digest": "eb1350b9f6adb50ed9a3cb696876b0bace488662cf6ac5c6d79de80c0b78c1e7"
+      },
+      "blocking_reasons": [
+        "packet[0]: termination basis is absent, synthetic, pressure-equalization, or fixed horizon"
+      ],
+      "required_evidence": [
+        {
+          "field": "input_origin",
+          "accepted": "reviewed_measurement or reviewed_model",
+          "reason": "synthetic input cannot qualify a provider boundary"
+        },
+        {
+          "field": "termination_basis",
+          "accepted": "reviewed_isolation_success or inventory_depletion",
+          "reason": "a fixed horizon or pressure-equalization stop is not a physical release end"
+        },
+        {
+          "field": "termination_provenance",
+          "accepted": "provider-owned method, version and evidence identifier",
+          "reason": "the end of the release must be reproducible and attributable"
+        },
+        {
+          "field": "provider_result_digest",
+          "accepted": "SHA-256 bound to the termination evidence",
+          "reason": "a sidecar must refer to this exact provider result"
+        },
+        {
+          "field": "provider_mass_balance",
+          "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+          "reason": "the release cannot be promoted without inventory closure"
+        },
+        {
+          "field": "independent_validation_reference",
+          "accepted": "reviewed validation record or an explicit validation gap",
+          "reason": "closure readiness does not by itself establish physical validation"
+        },
+        {
+          "field": "reliquefier_failure_mode_and_endpoint_history",
+          "accepted": "reviewed failure mode with every affected endpoint",
+          "reason": "reliquefier cases may have more than one provider outlet"
+        },
+        {
+          "field": "connected_inventory_and_isolation_state",
+          "accepted": "provider-owned connected inventory and isolation response",
+          "reason": "the endpoint history must close against the affected inventory"
+        }
+      ],
+      "acceptance": {
+        "exact_event_component_port_match": true,
+        "termination_evidence_digest_bound": true,
+        "provider_owned_clock_and_mass_ledger": true,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false
+      }
+    }
+  ],
+  "frequency_inference_allowed": false,
+  "facility_qra_allowed": false,
+  "diagnostic_only": true,
+  "policy": "Requests state the exact provider evidence still required. They do not infer termination, inventory, frequency or qualification."
+}

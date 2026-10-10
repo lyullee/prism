@@ -217,36 +217,9 @@
       "diagnostic_only": true,
       "facility_qra_claim": false
     },
-    "facility_ir_fn_aggregate_closure": {
-      "status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
-      "risk_atom_count": 176,
-      "ir_mismatch_count": 0,
-      "fn_mismatch_count": 0,
-      "blocking_reason_count": 0,
-      "diagnostic_only": true,
-      "facility_qra_claim": false
-    },
-    "facility_component_contribution_closure": {
-      "status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
-      "risk_atom_count": 176,
-      "component_count": 9,
-      "mismatch_count": 0,
-      "blocking_reason_count": 0,
-      "diagnostic_only": true,
-      "facility_qra_claim": false
-    },
-    "facility_frequency_uncertainty_closure": {
-      "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
-      "scenario_count": 5,
-      "risk_atom_count": 176,
-      "mismatch_count": 0,
-      "blocking_reason_count": 0,
-      "frequency_inference_performed": false,
-      "facility_credible_interval": false,
-      "fresh_physics_executed": false,
-      "diagnostic_only": true,
-      "facility_qra_claim": false
-    },
+    "facility_ir_fn_aggregate_closure": null,
+    "facility_component_contribution_closure": null,
+    "facility_frequency_uncertainty_closure": null,
     "external_equipment_model_readiness": {
       "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
       "asset_count": 12,
@@ -1059,18 +1032,6 @@
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json",
       "sha256": "72a5cd80dcf0db7a44639af09b318b0308b9bdac1b8b0d7fe5a989c4da8717c3"
     },
-    "facility_aggregate_closure_audit": {
-      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_aggregate_closure_audit.json",
-      "sha256": "ff9ba4ab81e18dda4ce1a85457138663aeb1c79c718ad649ff2e7b83b7cbb136"
-    },
-    "facility_component_contribution_audit": {
-      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_component_contribution_audit.json",
-      "sha256": "06d1c4769923194a75c0d2cfc7deb25ef34c88e3eb7d6096694f9d28d1aa7a2c"
-    },
-    "facility_frequency_uncertainty_audit": {
-      "path": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_frequency_uncertainty_audit.json",
-      "sha256": "91d81d6a03f17433fa0d3a7dd616de912d9b1755ea489726dc1c22b66b7750de"
-    },
     "external_equipment_model_audit": {
       "path": "results/20261104/external_equipment_model_audit_current.json",
       "sha256": "91aa517bfd944b15ec61ac447fc715d4a98730d2f9b6c6f5e8d812e3f8f9b5b2"
@@ -1101,7 +1062,7 @@
     },
     "generic_provider_closure_audit": {
       "path": "results/20261106/generic_lh2_provider_release_closure_current.json",
-      "sha256": "620af4eca22e35943d6541fb9a4dba495b7f17e60f09bd6af647c608d3dd6a65"
+      "sha256": "94b3782d38ff729a5ae3433c6fa95dd1b384b79017d7ec7a1e2cad4cf0638591"
     },
     "isolation_union_extension_verification": {
       "path": "results/20261026/native_full_scope_union_assessment/isolation_extension/verification.json",

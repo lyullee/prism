@@ -23,6 +23,166 @@ from .provider_release_closure import (
 SCHEMA = "prism.generic_provider_release_closure_audit.v1"
 
 
+_COMMON_CLOSURE_REQUEST_FIELDS = (
+    {
+        "field": "input_origin",
+        "accepted": "reviewed_measurement or reviewed_model",
+        "reason": "synthetic input cannot qualify a provider boundary",
+    },
+    {
+        "field": "termination_basis",
+        "accepted": "reviewed_isolation_success or inventory_depletion",
+        "reason": "a fixed horizon or pressure-equalization stop is not a physical release end",
+    },
+    {
+        "field": "termination_provenance",
+        "accepted": "provider-owned method, version and evidence identifier",
+        "reason": "the end of the release must be reproducible and attributable",
+    },
+    {
+        "field": "provider_result_digest",
+        "accepted": "SHA-256 bound to the termination evidence",
+        "reason": "a sidecar must refer to this exact provider result",
+    },
+    {
+        "field": "provider_mass_balance",
+        "accepted": "initial mass, released mass, final/residual mass and residual tolerance",
+        "reason": "the release cannot be promoted without inventory closure",
+    },
+    {
+        "field": "independent_validation_reference",
+        "accepted": "reviewed validation record or an explicit validation gap",
+        "reason": "closure readiness does not by itself establish physical validation",
+    },
+)
+
+
+def _family_closure_request_fields(event_id: Any, event_kind: Any) -> list[dict[str, str]]:
+    """Return evidence fields tailored to the equipment boundary.
+
+    This is a request template only.  It never infers an isolation time,
+    inventory threshold or failure probability from the event name.
+    """
+
+    token = f"{event_id or ''} {event_kind or ''}".lower()
+    if "transfer-line" in token or "pipe" in token:
+        return [
+            {
+                "field": "inlet_isolation_time_s",
+                "accepted": "reviewed provider clock with isolation success/failure state",
+                "reason": "pipe release duration depends on upstream inflow after the opening",
+            },
+            {
+                "field": "upstream_downstream_state_history",
+                "accepted": "provider history for both sides of the line",
+                "reason": "a line opening cannot use a tank or valve surrogate for its boundary",
+            },
+        ]
+    if "transfer-valve" in token or "valve" in token:
+        return [
+            {
+                "field": "valve_opening_and_travel_history",
+                "accepted": "reviewed failed-opening or failed-closure history",
+                "reason": "valve event duration must belong to the valve boundary",
+            },
+            {
+                "field": "connected_inventory_and_isolation_state",
+                "accepted": "provider-owned connected inventory and isolation response",
+                "reason": "a valve packet cannot borrow a pipe termination basis",
+            },
+        ]
+    if "pump" in token:
+        return [
+            {
+                "field": "pump_trip_or_seal_failure_history",
+                "accepted": "reviewed pump failure state and clock",
+                "reason": "pump release duration depends on the pump failure mode",
+            },
+            {
+                "field": "connected_inventory_and_isolation_state",
+                "accepted": "provider-owned connected inventory and isolation response",
+                "reason": "upstream service must be closed at the pump boundary",
+            },
+        ]
+    if "vaporizer" in token:
+        return [
+            {
+                "field": "process_side_state_history",
+                "accepted": "reviewed vaporizer process-side state and boundary history",
+                "reason": "vaporizer failure must retain its own phase and inventory basis",
+            },
+            {
+                "field": "connected_inventory_and_isolation_state",
+                "accepted": "provider-owned connected inventory and isolation response",
+                "reason": "the downstream gas boundary cannot define the upstream liquid release",
+            },
+        ]
+    if "reliquefier" in token:
+        return [
+            {
+                "field": "reliquefier_failure_mode_and_endpoint_history",
+                "accepted": "reviewed failure mode with every affected endpoint",
+                "reason": "reliquefier cases may have more than one provider outlet",
+            },
+            {
+                "field": "connected_inventory_and_isolation_state",
+                "accepted": "provider-owned connected inventory and isolation response",
+                "reason": "the endpoint history must close against the affected inventory",
+            },
+        ]
+    return [
+        {
+            "field": "equipment_specific_failure_and_boundary_history",
+            "accepted": "reviewed provider history for the declared equipment boundary",
+            "reason": "the event family is not allowed to inherit a different equipment model",
+        }
+    ]
+
+
+def _closure_request(
+    packet: Mapping[str, Any],
+    *,
+    event_id: Any,
+    event_kind: Any,
+    blocking_reasons: Sequence[str],
+) -> dict[str, Any]:
+    """Build an actionable evidence request for one open provider packet."""
+
+    fields = [
+        *(_COMMON_CLOSURE_REQUEST_FIELDS),
+        *_family_closure_request_fields(event_id, event_kind),
+    ]
+    current = {
+        "event_id": packet.get("event_id", event_id),
+        "component_id": packet.get("component_id"),
+        "port_id": packet.get("port_id"),
+        "event_kind": packet.get("event_kind", event_kind),
+        "input_origin": packet.get("input_origin"),
+        "termination_basis": packet.get("termination_basis"),
+        "termination_provenance": packet.get("termination_provenance"),
+        "duration_s": packet.get("duration_s"),
+        "available_mass_kg": packet.get("available_mass_kg"),
+        "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
+        "provider_source_digest": packet.get("provider_source_digest"),
+        "provider_result_digest": packet.get("provider_result_digest"),
+    }
+    return {
+        "request_schema": "prism.provider_release_closure_request.v1",
+        "request_id": str(packet.get("event_id", event_id)),
+        "status": "OPEN",
+        "current_packet": current,
+        "blocking_reasons": list(dict.fromkeys(str(item) for item in blocking_reasons)),
+        "required_evidence": fields,
+        "acceptance": {
+            "exact_event_component_port_match": True,
+            "termination_evidence_digest_bound": True,
+            "provider_owned_clock_and_mass_ledger": True,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        },
+    }
+
+
 class GenericProviderReleaseClosureError(ValueError):
     """Raised when campaign packet evidence is malformed."""
 
@@ -212,7 +372,7 @@ def _event_row(
             )
             packet_status = audit["status"]
             reasons = list(audit.get("blocking_reasons", ()))
-            packet_rows.append({
+            packet_row = {
                 "packet_index": packet_index,
                 "path": str(packet_path),
                 "status": packet_status,
@@ -223,7 +383,15 @@ def _event_row(
                     str(sidecar[0]) if sidecar is not None else None
                 ),
                 "termination_evidence_used": bool(sidecar is not None),
-            })
+            }
+            if reasons and isinstance(packet_value, Mapping):
+                packet_row["closure_request"] = _closure_request(
+                    packet_value,
+                    event_id=event_id,
+                    event_kind=packet_value.get("event_kind"),
+                    blocking_reasons=reasons,
+                )
+            packet_rows.append(packet_row)
             event_reasons.extend(f"packet[{packet_index}]: {reason}" for reason in reasons)
         except (GenericProviderReleaseClosureError, ProviderReleaseClosureError, OSError, ValueError) as error:
             reason = f"packet[{packet_index}] audit failed: {error}"
