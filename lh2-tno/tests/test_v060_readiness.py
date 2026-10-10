@@ -295,3 +295,88 @@ def test_report_rejects_scenario_evidence_promotion_flags():
     report["scenario_evidence"]["frequency_assigned"] = True
     with pytest.raises(V060ReadinessError, match="scenario_evidence.frequency_assigned"):
         validate_v060_readiness_report(report)
+
+
+def test_report_records_external_equipment_pid_and_frequency_readiness():
+    external = {
+        "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+        "asset_count": 12,
+        "state_model_ready_asset_count": 2,
+        "event_register": {"physical_time_assigned_event_count": 0},
+        "pid_identity_evidence": {
+            "exact_asset_id_overlap_count": 9,
+            "source_backed_overlap_count": 9,
+            "unmatched_external_asset_ids": ["PIPE-CATALOG", "VALVE-CATALOG"],
+            "identity_is_general_facility_resolved": False,
+        },
+        "pid_port_evidence": {
+            "confirmed_port_mapping_count": 14,
+            "candidate_port_mapping_count": 13,
+            "port_crosswalk_promotion_allowed": False,
+        },
+        "component_binding_evidence": {
+            "enabled_edge_count": 0,
+            "unresolved_edge_count": 27,
+            "numerical_topology_promotion_allowed": False,
+        },
+        "promotion_gates": {
+            "accident_release_packet_allowed": False,
+            "frequency_inference_allowed": False,
+        },
+        "facility_qra_claim": False,
+    }
+    scenario = {
+        "status": "CROSSWALK_REQUIRED",
+        "asset_count": 12,
+        "mapped_asset_count": 0,
+        "resolved_asset_count": 0,
+        "scenario_family_count": 12,
+        "promotion_gates": {
+            "accident_release_packet_allowed": False,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        },
+    }
+    frequency = {
+        "status": "FREQUENCY_BINDING_WITHHELD",
+        "resolved_asset_count": 0,
+        "frequency_event_count": 0,
+        "valid_frequency_event_count": 0,
+        "uncomputed_family_count": 12,
+        "promotion_gates": {
+            "provider_release_required": True,
+            "frequency_inference_allowed": False,
+            "facility_qra_allowed": False,
+        },
+    }
+    report = build_v060_readiness_report(
+        **_inputs(),
+        external_equipment_model_audit=external,
+        equipment_scenario_coverage_audit=scenario,
+        equipment_frequency_binding_audit=frequency,
+    )
+    chain = report["chain"]
+    assert chain["external_equipment_model_readiness"]["pid_identity_evidence"][
+        "exact_asset_id_overlap_count"
+    ] == 9
+    assert chain["external_equipment_model_readiness"]["pid_port_evidence"][
+        "confirmed_port_mapping_count"
+    ] == 14
+    assert chain["equipment_scenario_coverage"]["resolved_asset_count"] == 0
+    assert chain["equipment_frequency_binding"]["uncomputed_family_count"] == 12
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_report_rejects_external_equipment_promotion_flag():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        external_equipment_model_audit={
+            "status": "STATE_MODEL_INPUTS_READY_RELEASE_BOUNDARY_UNVERIFIED",
+            "asset_count": 1,
+            "state_model_ready_asset_count": 1,
+            "promotion_gates": {"accident_release_packet_allowed": True},
+            "facility_qra_claim": False,
+        },
+    )
+    with pytest.raises(V060ReadinessError, match="cannot open accident release"):
+        validate_v060_readiness_report(report)

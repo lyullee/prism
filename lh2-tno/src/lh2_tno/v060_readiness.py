@@ -303,6 +303,9 @@ def build_v060_readiness_report(
     facility_aggregate_closure_audit: Mapping[str, Any] | None = None,
     facility_component_contribution_audit: Mapping[str, Any] | None = None,
     facility_frequency_uncertainty_audit: Mapping[str, Any] | None = None,
+    external_equipment_model_audit: Mapping[str, Any] | None = None,
+    equipment_scenario_coverage_audit: Mapping[str, Any] | None = None,
+    equipment_frequency_binding_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Aggregate current v0.6.0 status without changing any promotion gate."""
     objective = _mapping(objective_audit, "objective_audit")
@@ -346,6 +349,24 @@ def build_v060_readiness_report(
         frequency_uncertainty_chain = _mapping(
             facility_frequency_uncertainty_audit,
             "facility_frequency_uncertainty_audit",
+        )
+    external_equipment_chain = None
+    if external_equipment_model_audit is not None:
+        external_equipment_chain = _mapping(
+            external_equipment_model_audit,
+            "external_equipment_model_audit",
+        )
+    equipment_scenario_chain = None
+    if equipment_scenario_coverage_audit is not None:
+        equipment_scenario_chain = _mapping(
+            equipment_scenario_coverage_audit,
+            "equipment_scenario_coverage_audit",
+        )
+    equipment_frequency_chain = None
+    if equipment_frequency_binding_audit is not None:
+        equipment_frequency_chain = _mapping(
+            equipment_frequency_binding_audit,
+            "equipment_frequency_binding_audit",
         )
     evidence_promotion_gate = (
         evidence_request.get("promotion_gate")
@@ -504,6 +525,158 @@ def build_v060_readiness_report(
                     "facility_qra_claim": frequency_uncertainty_chain.get("facility_qra_claim"),
                 }
                 if frequency_uncertainty_chain is not None
+                else None
+            ),
+            "external_equipment_model_readiness": (
+                {
+                    "status": external_equipment_chain.get("status"),
+                    "asset_count": external_equipment_chain.get("asset_count"),
+                    "state_model_ready_asset_count": external_equipment_chain.get(
+                        "state_model_ready_asset_count"
+                    ),
+                    "physical_time_assigned_event_count": (
+                        external_equipment_chain.get("event_register", {}).get(
+                            "physical_time_assigned_event_count"
+                        )
+                        if isinstance(external_equipment_chain.get("event_register"), Mapping)
+                        else None
+                    ),
+                    "pid_identity_evidence": (
+                        {
+                            "exact_asset_id_overlap_count": external_equipment_chain.get(
+                                "pid_identity_evidence", {}
+                            ).get("exact_asset_id_overlap_count"),
+                            "source_backed_overlap_count": external_equipment_chain.get(
+                                "pid_identity_evidence", {}
+                            ).get("source_backed_overlap_count"),
+                            "unmatched_external_asset_count": len(
+                                external_equipment_chain.get("pid_identity_evidence", {}).get(
+                                    "unmatched_external_asset_ids", []
+                                )
+                                if isinstance(
+                                    external_equipment_chain.get("pid_identity_evidence", {}).get(
+                                        "unmatched_external_asset_ids", []
+                                    ),
+                                    list,
+                                )
+                                else []
+                            ),
+                            "general_facility_identity_resolved": external_equipment_chain.get(
+                                "pid_identity_evidence", {}
+                            ).get("identity_is_general_facility_resolved"),
+                        }
+                        if isinstance(external_equipment_chain.get("pid_identity_evidence"), Mapping)
+                        else None
+                    ),
+                    "pid_port_evidence": (
+                        {
+                            "confirmed_port_mapping_count": external_equipment_chain.get(
+                                "pid_port_evidence", {}
+                            ).get("confirmed_port_mapping_count"),
+                            "candidate_port_mapping_count": external_equipment_chain.get(
+                                "pid_port_evidence", {}
+                            ).get("candidate_port_mapping_count"),
+                            "promotion_allowed": external_equipment_chain.get(
+                                "pid_port_evidence", {}
+                            ).get("port_crosswalk_promotion_allowed"),
+                        }
+                        if isinstance(external_equipment_chain.get("pid_port_evidence"), Mapping)
+                        else None
+                    ),
+                    "component_binding_evidence": (
+                        {
+                            "enabled_edge_count": external_equipment_chain.get(
+                                "component_binding_evidence", {}
+                            ).get("enabled_edge_count"),
+                            "unresolved_edge_count": external_equipment_chain.get(
+                                "component_binding_evidence", {}
+                            ).get("unresolved_edge_count"),
+                            "promotion_allowed": external_equipment_chain.get(
+                                "component_binding_evidence", {}
+                            ).get("numerical_topology_promotion_allowed"),
+                        }
+                        if isinstance(
+                            external_equipment_chain.get("component_binding_evidence"),
+                            Mapping,
+                        )
+                        else None
+                    ),
+                    "accident_release_packet_allowed": (
+                        external_equipment_chain.get("promotion_gates", {}).get(
+                            "accident_release_packet_allowed"
+                        )
+                        if isinstance(external_equipment_chain.get("promotion_gates"), Mapping)
+                        else None
+                    ),
+                    "frequency_inference_allowed": (
+                        external_equipment_chain.get("promotion_gates", {}).get(
+                            "frequency_inference_allowed"
+                        )
+                        if isinstance(external_equipment_chain.get("promotion_gates"), Mapping)
+                        else None
+                    ),
+                    "facility_qra_claim": external_equipment_chain.get("facility_qra_claim"),
+                    "diagnostic_only": True,
+                }
+                if external_equipment_chain is not None
+                else None
+            ),
+            "equipment_scenario_coverage": (
+                {
+                    "status": equipment_scenario_chain.get("status"),
+                    "asset_count": equipment_scenario_chain.get("asset_count"),
+                    "mapped_asset_count": equipment_scenario_chain.get("mapped_asset_count"),
+                    "resolved_asset_count": equipment_scenario_chain.get("resolved_asset_count"),
+                    "scenario_family_count": equipment_scenario_chain.get("scenario_family_count"),
+                    "accident_release_packet_allowed": equipment_scenario_chain.get(
+                        "promotion_gates", {}
+                    ).get("accident_release_packet_allowed")
+                    if isinstance(equipment_scenario_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "frequency_inference_allowed": equipment_scenario_chain.get(
+                        "promotion_gates", {}
+                    ).get("frequency_inference_allowed")
+                    if isinstance(equipment_scenario_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "facility_qra_allowed": equipment_scenario_chain.get(
+                        "promotion_gates", {}
+                    ).get("facility_qra_allowed")
+                    if isinstance(equipment_scenario_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "diagnostic_only": True,
+                }
+                if equipment_scenario_chain is not None
+                else None
+            ),
+            "equipment_frequency_binding": (
+                {
+                    "status": equipment_frequency_chain.get("status"),
+                    "resolved_asset_count": equipment_frequency_chain.get("resolved_asset_count"),
+                    "frequency_event_count": equipment_frequency_chain.get("frequency_event_count"),
+                    "valid_frequency_event_count": equipment_frequency_chain.get(
+                        "valid_frequency_event_count"
+                    ),
+                    "uncomputed_family_count": equipment_frequency_chain.get(
+                        "uncomputed_family_count"
+                    ),
+                    "provider_release_required": equipment_frequency_chain.get(
+                        "promotion_gates", {}
+                    ).get("provider_release_required")
+                    if isinstance(equipment_frequency_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "frequency_inference_allowed": equipment_frequency_chain.get(
+                        "promotion_gates", {}
+                    ).get("frequency_inference_allowed")
+                    if isinstance(equipment_frequency_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "facility_qra_allowed": equipment_frequency_chain.get(
+                        "promotion_gates", {}
+                    ).get("facility_qra_allowed")
+                    if isinstance(equipment_frequency_chain.get("promotion_gates"), Mapping)
+                    else None,
+                    "diagnostic_only": True,
+                }
+                if equipment_frequency_chain is not None
                 else None
             ),
         },
@@ -942,6 +1115,128 @@ def validate_v060_readiness_report(
                 ) is False:
                     errors.append(
                         "facility release boundary cannot be ready with open mass residuals"
+                    )
+
+    # External equipment/P&ID and frequency ledgers are readiness evidence.
+    # They are intentionally copied into the v0.6.0 report without opening a
+    # release, frequency-inference, or facility-QRA gate.
+    external_equipment = chain.get("external_equipment_model_readiness")
+    if external_equipment is not None:
+        if not isinstance(external_equipment, Mapping):
+            errors.append("chain.external_equipment_model_readiness must be an object")
+        else:
+            for field in (
+                "asset_count",
+                "state_model_ready_asset_count",
+                "physical_time_assigned_event_count",
+            ):
+                if external_equipment.get(field) is not None:
+                    _nonnegative_int(
+                        external_equipment.get(field),
+                        f"chain.external_equipment_model_readiness.{field}",
+                        errors,
+                    )
+            if external_equipment.get("diagnostic_only") is not True:
+                errors.append(
+                    "external equipment readiness must remain diagnostic_only"
+                )
+            if external_equipment.get("facility_qra_claim") is True:
+                errors.append(
+                    "external equipment readiness cannot claim facility QRA"
+                )
+            if external_equipment.get("accident_release_packet_allowed") is True:
+                errors.append(
+                    "external equipment readiness cannot open accident release"
+                )
+            if external_equipment.get("frequency_inference_allowed") is True:
+                errors.append(
+                    "external equipment readiness cannot allow frequency inference"
+                )
+            for evidence_name in (
+                "pid_identity_evidence",
+                "pid_port_evidence",
+                "component_binding_evidence",
+            ):
+                evidence = external_equipment.get(evidence_name)
+                if evidence is None:
+                    continue
+                if not isinstance(evidence, Mapping):
+                    errors.append(
+                        f"chain.external_equipment_model_readiness.{evidence_name} must be an object"
+                    )
+                    continue
+                for field, count in evidence.items():
+                    if field.endswith("_count") and count is not None:
+                        _nonnegative_int(
+                            count,
+                            f"chain.external_equipment_model_readiness.{evidence_name}.{field}",
+                            errors,
+                        )
+                if evidence.get("promotion_allowed") is True:
+                    errors.append(
+                        f"external equipment {evidence_name} cannot allow promotion"
+                    )
+                if evidence.get("general_facility_identity_resolved") is True:
+                    errors.append(
+                        "external equipment P&ID identity cannot claim general-facility resolution"
+                    )
+
+    scenario_coverage = chain.get("equipment_scenario_coverage")
+    if scenario_coverage is not None:
+        if not isinstance(scenario_coverage, Mapping):
+            errors.append("chain.equipment_scenario_coverage must be an object")
+        else:
+            for field in (
+                "asset_count",
+                "mapped_asset_count",
+                "resolved_asset_count",
+                "scenario_family_count",
+            ):
+                if scenario_coverage.get(field) is not None:
+                    _nonnegative_int(
+                        scenario_coverage.get(field),
+                        f"chain.equipment_scenario_coverage.{field}",
+                        errors,
+                    )
+            if scenario_coverage.get("diagnostic_only") is not True:
+                errors.append("equipment scenario coverage must remain diagnostic_only")
+            for field in (
+                "accident_release_packet_allowed",
+                "frequency_inference_allowed",
+                "facility_qra_allowed",
+            ):
+                if scenario_coverage.get(field) is True:
+                    errors.append(
+                        f"chain.equipment_scenario_coverage.{field} cannot be true"
+                    )
+
+    frequency_binding = chain.get("equipment_frequency_binding")
+    if frequency_binding is not None:
+        if not isinstance(frequency_binding, Mapping):
+            errors.append("chain.equipment_frequency_binding must be an object")
+        else:
+            for field in (
+                "resolved_asset_count",
+                "frequency_event_count",
+                "valid_frequency_event_count",
+                "uncomputed_family_count",
+            ):
+                if frequency_binding.get(field) is not None:
+                    _nonnegative_int(
+                        frequency_binding.get(field),
+                        f"chain.equipment_frequency_binding.{field}",
+                        errors,
+                    )
+            if frequency_binding.get("diagnostic_only") is not True:
+                errors.append("equipment frequency binding must remain diagnostic_only")
+            if frequency_binding.get("provider_release_required") is not True:
+                errors.append(
+                    "equipment frequency binding must require provider release"
+                )
+            for field in ("frequency_inference_allowed", "facility_qra_allowed"):
+                if frequency_binding.get(field) is True:
+                    errors.append(
+                        f"chain.equipment_frequency_binding.{field} cannot be true"
                     )
 
     equipment = value.get("equipment")

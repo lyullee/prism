@@ -79,6 +79,21 @@ def main() -> int:
         type=Path,
         help="Optional independent literature-frequency sensitivity audit.",
     )
+    parser.add_argument(
+        "--external-equipment-model-audit",
+        type=Path,
+        help="Optional external equipment/P&ID readiness audit.",
+    )
+    parser.add_argument(
+        "--equipment-scenario-coverage-audit",
+        type=Path,
+        help="Optional equipment-to-accident-family coverage audit.",
+    )
+    parser.add_argument(
+        "--equipment-frequency-binding-audit",
+        type=Path,
+        help="Optional literature-frequency-to-equipment binding audit.",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -125,6 +140,21 @@ def main() -> int:
                 if args.facility_frequency_uncertainty_audit is not None
                 else None
             ),
+            external_equipment_model_audit=(
+                _load(args.external_equipment_model_audit)
+                if args.external_equipment_model_audit is not None
+                else None
+            ),
+            equipment_scenario_coverage_audit=(
+                _load(args.equipment_scenario_coverage_audit)
+                if args.equipment_scenario_coverage_audit is not None
+                else None
+            ),
+            equipment_frequency_binding_audit=(
+                _load(args.equipment_frequency_binding_audit)
+                if args.equipment_frequency_binding_audit is not None
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as error:
         raise SystemExit(f"v0.6.0 readiness input error: {error}") from error
@@ -164,6 +194,18 @@ def main() -> int:
     if args.facility_frequency_uncertainty_audit is not None:
         report["source_artifacts"]["facility_frequency_uncertainty_audit"] = _source_artifact(
             args.facility_frequency_uncertainty_audit
+        )
+    if args.external_equipment_model_audit is not None:
+        report["source_artifacts"]["external_equipment_model_audit"] = _source_artifact(
+            args.external_equipment_model_audit
+        )
+    if args.equipment_scenario_coverage_audit is not None:
+        report["source_artifacts"]["equipment_scenario_coverage_audit"] = _source_artifact(
+            args.equipment_scenario_coverage_audit
+        )
+    if args.equipment_frequency_binding_audit is not None:
+        report["source_artifacts"]["equipment_frequency_binding_audit"] = _source_artifact(
+            args.equipment_frequency_binding_audit
         )
     try:
         validation = validate_v060_readiness_report(report)

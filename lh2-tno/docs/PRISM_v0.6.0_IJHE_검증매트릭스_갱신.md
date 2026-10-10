@@ -168,6 +168,9 @@ python scripts/build_v060_readiness_report.py `
   --scenario-evidence-audit examples/inspection_center_scenario_evidence_reaudit_summary.json `
   --risk-atom-chain-audit results/20261026/native_full_scope_union_assessment/risk_atom_chain_audit.json `
   --equipment-state-release-audit results/20261026/native_full_scope_union_assessment/equipment_state_release_audit.json `
+  --external-equipment-model-audit results/20261104/external_equipment_model_audit_current.json `
+  --equipment-scenario-coverage-audit results/20261104/equipment_scenario_coverage_audit_current.json `
+  --equipment-frequency-binding-audit results/20261104/equipment_frequency_binding_audit_current.json `
   --output results/20261026/native_full_scope_union_assessment/v060_readiness_report.json
 ```
 
@@ -179,6 +182,41 @@ catalog가 확인한 24/24 exact packet은 구조적 worklist coverage를 PASS�
 이는 합성 진단 packet의 exact-match일 뿐 qualified provider evidence가 아니다.
 따라서 실제 provider packet 0건, 엄격한 사고범위 차단, 시설 전체 IR/F-N 보류는
 그대로 readiness report에 남는다.
+
+2026-11-04부터 최신 readiness 원장에는 외부 설비 모델과 P&ID 보조 원장도 선택
+입력으로 보존한다. 최신 결과는
+[`v060_readiness_report_with_external_equipment_model.json`](../results/20261104/v060_readiness_report_with_external_equipment_model.json)이다.
+이 원장은 34개 event·44개 case·176개 risk atom의 기존 조건부 연결을 유지하면서,
+외부 설비 12개 중 상태모델 입력 준비 2개, P&ID ID 겹침 9개, confirmed/candidate
+포트 매핑 14/13개, 활성 component edge 0/27개를 별도 `chain` 항목으로 기록한다.
+일반 시설용 asset identity가 해소된 설비는 0개이고 12개 사고 family가 아직
+`UNCOMPUTED`이므로 문헌 빈도·provider 방출·시설 IR/F-N gate는 그대로 닫혀 있다.
+즉 외부 설비 자료가 readiness 원장에 연결됐다는 것과 시설 QRA가 완료됐다는 것은
+서로 다른 상태다.
+
+최신 외부 설비 결합 원장은 다음 명령으로 재현할 수 있다.
+
+```powershell
+python scripts/build_v060_readiness_report.py `
+  --objective-audit results/20261104/ijhe_objective_coverage_audit_with_external_equipment_model.json `
+  --union-verification results/20261031/native_full_scope_union_pipefix_state_bound/verification.json `
+  --scope-matrix results/20261031/native_full_scope_union_pipefix_state_bound/scope_matrix.json `
+  --facility-assessment results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json `
+  --completion-audit results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json `
+  --validation-matrix results/20261026/native_full_scope_union_assessment/validation_evidence_matrix.json `
+  --realtime-benchmark results/20261026/native_full_scope_union_assessment/realtime_cache_benchmark.json `
+  --facility-evidence-request results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json `
+  --scenario-evidence-audit examples/inspection_center_scenario_evidence_reaudit_summary.json `
+  --risk-atom-chain-audit results/20261031/native_full_scope_union_pipefix_state_bound/risk_atom_chain_audit.json `
+  --equipment-state-release-audit results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json `
+  --facility-aggregate-closure-audit results/20261031/native_full_scope_union_pipefix_state_bound/facility_aggregate_closure_audit.json `
+  --facility-component-contribution-audit results/20261031/native_full_scope_union_pipefix_state_bound/facility_component_contribution_audit.json `
+  --facility-frequency-uncertainty-audit results/20261031/native_full_scope_union_pipefix_state_bound/facility_frequency_uncertainty_audit.json `
+  --external-equipment-model-audit results/20261104/external_equipment_model_audit_current.json `
+  --equipment-scenario-coverage-audit results/20261104/equipment_scenario_coverage_audit_current.json `
+  --equipment-frequency-binding-audit results/20261104/equipment_frequency_binding_audit_current.json `
+  --output results/20261104/v060_readiness_report_with_external_equipment_model.json
+```
 
 
 ### 시설 IR/F/N 독립 집계 감사 (2026-10-30 갱신)
