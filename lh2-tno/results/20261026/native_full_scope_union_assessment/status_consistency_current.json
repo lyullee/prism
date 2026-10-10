@@ -33,6 +33,18 @@
       }
     },
     {
+      "name": "observed_state_release_binding_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.observed_state_release_binding_audit.v1",
+        "status": "NO_STATE_TO_RELEASE_BINDING",
+        "observed_component_count": 3,
+        "mapped_component_count": 0,
+        "unmapped_component_count": 3,
+        "record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json"
+      }
+    },
+    {
       "name": "audit_case_gate",
       "status": "PASS",
       "evidence": {
@@ -174,7 +186,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 730
+        "full_portable_test_count": 736
       }
     },
     {
@@ -205,7 +217,7 @@
       "status": "PASS",
       "evidence": {
         "assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
-        "full_portable_test_count": 730
+        "full_portable_test_count": 736
       }
     },
     {

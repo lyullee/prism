@@ -97,6 +97,8 @@ def build_status_consistency_report(
     coverage_filename: str,
     provider_packet_input_audit: Mapping[str, Any] | None = None,
     provider_packet_input_audit_filename: str | None = None,
+    observed_state_release_binding_audit: Mapping[str, Any] | None = None,
+    observed_state_release_binding_audit_filename: str | None = None,
 ) -> dict[str, Any]:
     """Return a fail-closed cross-artifact consistency report."""
     checks: list[dict[str, Any]] = []
@@ -233,6 +235,54 @@ def build_status_consistency_report(
                 "status": input_status,
                 "accepted_provider_packet_count": input_count,
                 "record": current_status.get("current_union_provider_packet_input_audit_record"),
+            },
+        )
+    if observed_state_release_binding_audit is not None:
+        binding_filename = (
+            observed_state_release_binding_audit_filename
+            or "observed_state_release_binding_audit.json"
+        )
+        binding_status = observed_state_release_binding_audit.get("status")
+        observed_count = observed_state_release_binding_audit.get("observed_component_count")
+        mapped_count = observed_state_release_binding_audit.get("mapped_component_count")
+        unmapped_count = observed_state_release_binding_audit.get("unmapped_component_count")
+        _check(
+            checks,
+            "observed_state_release_binding_audit",
+            observed_state_release_binding_audit.get("schema")
+            == "prism.observed_state_release_binding_audit.v1"
+            and isinstance(observed_count, int)
+            and observed_count >= 0
+            and isinstance(mapped_count, int)
+            and isinstance(unmapped_count, int)
+            and mapped_count >= 0
+            and unmapped_count >= 0
+            and mapped_count + unmapped_count == observed_count
+            and all(
+                _endswith(
+                    status.get("current_union_observed_state_release_binding_audit_record"),
+                    binding_filename,
+                )
+                for status in (current_status, development_goal)
+            )
+            and all(
+                isinstance(
+                    status.get("current_union_observed_state_release_binding_audit_status"),
+                    str,
+                )
+                and str(binding_status)
+                in status["current_union_observed_state_release_binding_audit_status"]
+                for status in (current_status, development_goal)
+            ),
+            {
+                "schema": observed_state_release_binding_audit.get("schema"),
+                "status": binding_status,
+                "observed_component_count": observed_count,
+                "mapped_component_count": mapped_count,
+                "unmapped_component_count": unmapped_count,
+                "record": current_status.get(
+                    "current_union_observed_state_release_binding_audit_record"
+                ),
             },
         )
     _check(

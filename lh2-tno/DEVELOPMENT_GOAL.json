@@ -1239,7 +1239,7 @@
   "published_status_consistency_report": "results/20261024/ijhe_status_consistency_v11.json",
   "published_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; v20 audit, SLABx-LH2 validation gate, exact-cache realtime gate and domain-recovery gate are reconciled; facility IR/F-N remains withheld",
   "current_union_status_consistency_record": "results/20261026/native_full_scope_union_assessment/status_consistency_current.json",
-  "current_union_status_consistency_status": "CONSISTENT; 20 checks, 0 blockers; current 38-check audit, 34-event/44-case/176-atom union, provider coverage, facility assessment, provider packet input audit and status pointers are reconciled; facility IR/F-N remains withheld",
+  "current_union_status_consistency_status": "CONSISTENT; 21 checks, 0 blockers; current 38-check audit, 34-event/44-case/176-atom union, provider coverage, facility assessment, provider packet input audit, observed-state release binding audit and status pointers are reconciled; facility IR/F-N remains withheld",
   "diagnostic_union_chain_closure_audit_implemented": true,
   "diagnostic_union_chain_closure_audit_policy": "The completion audit may close the declared diagnostic chain from the exact packet subset plus a separately identified vertical-handoff subset when the combined closure proves exact union identity, event-count equality, no mismatches, and packet-subset identity consumption. This is diagnostic-only and cannot qualify providers, infer frequency, or promote facility IR/F-N.",
   "risk_atom_chain_audit_implemented": true,
@@ -1252,7 +1252,7 @@
   "current_union_facility_assessment_record": "results/20261026/native_full_scope_union_assessment/facility_assessment.json",
   "current_union_facility_evidence_request_record": "results/20261026/native_full_scope_union_assessment/facility_evidence_request.json",
   "current_union_campaign_ledger_record": "results/20261026/native_full_scope_union_assessment/campaign_result.json",
-  "current_union_full_test_count": 731,
+  "current_union_full_test_count": 736,
   "current_union_ijhe_objective_coverage_audit_record": "results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json",
   "current_union_ijhe_objective_coverage_audit_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 13 objective checks; 9 conditional/PASS rows and 4 strict evidence gates remain blocked; synchronized to the 38-check completion audit",
   "current_union_facility_frequency_uncertainty_audit_record": "results/20261026/native_full_scope_union_assessment/facility_frequency_uncertainty_audit.json",
@@ -2472,5 +2472,8 @@
   "scope_ledger_consistency_non_additive_family_accounting": true,
   "scope_ledger_consistency_test_status": "native union regression plus standalone mismatch/match tests; targeted 5 passed",
   "current_union_provider_packet_input_audit_record": "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json",
-  "current_union_provider_packet_input_audit_status": "NO_PROVIDER_PACKET_INPUT; 0 release/qualification pairs accepted; actual qualified provider packet coverage remains 0/44 cases"
+  "current_union_provider_packet_input_audit_status": "NO_PROVIDER_PACKET_INPUT; 0 release/qualification pairs accepted; actual qualified provider packet coverage remains 0/44 cases",
+  "current_union_observed_state_release_binding_audit_record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json",
+  "current_union_observed_state_release_binding_audit_status": "NO_STATE_TO_RELEASE_BINDING; 3 observed components have state evidence but no reviewed facility/provider-event binding",
+  "current_union_full_test_status": "736 passed, 1 skipped; includes provider packet input audit, observed-state release binding audit and independent facility closure audits"
 }

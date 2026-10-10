@@ -1,0 +1,5 @@
+{
+  "schema_version": "prism.observed_state_release_binding_manifest.v1",
+  "description": "Reviewed component and provider-event aliases must be added before observed state can be bound to an accident release.",
+  "bindings": []
+}

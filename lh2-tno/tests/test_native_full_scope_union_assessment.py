@@ -35,6 +35,7 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     frequency_uncertainty_chain = _load("facility_frequency_uncertainty_audit.json")
     status_consistency = _load("status_consistency_current.json")
     provider_packet_input_audit = _load("provider_packet_input_audit.json")
+    observed_state_release_binding_audit = _load("observed_state_release_binding_audit.json")
 
     assert verification["base_event_count"] == 24
     assert verification["vertical_event_count"] == 5
@@ -149,11 +150,22 @@ def test_native_full_scope_union_adds_vertical_handoff_without_qra_promotion():
     assert provider_packet_input_audit["schema"] == "prism.provider_packet_input_audit.v1"
     assert provider_packet_input_audit["status"] == "NO_PROVIDER_PACKET_INPUT"
     assert provider_packet_input_audit["accepted_provider_packet_count"] == 0
+    assert observed_state_release_binding_audit["schema"] == (
+        "prism.observed_state_release_binding_audit.v1"
+    )
+    assert observed_state_release_binding_audit["status"] == "NO_STATE_TO_RELEASE_BINDING"
+    assert observed_state_release_binding_audit["observed_component_count"] == 3
+    assert observed_state_release_binding_audit["mapped_component_count"] == 0
+    assert observed_state_release_binding_audit["unmapped_component_count"] == 3
     assert status_consistency["status"] == "CONSISTENT"
-    assert len(status_consistency["checks"]) == 20
+    assert len(status_consistency["checks"]) == 21
     assert next(
         row for row in status_consistency["checks"]
         if row["name"] == "provider_packet_input_audit"
+    )["status"] == "PASS"
+    assert next(
+        row for row in status_consistency["checks"]
+        if row["name"] == "observed_state_release_binding_audit"
     )["status"] == "PASS"
     assert status_consistency["blocking_reasons"] == []
     assert status_consistency["facility_ir_fn_promotion"] is False

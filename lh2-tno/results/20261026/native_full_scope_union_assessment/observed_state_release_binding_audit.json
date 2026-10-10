@@ -1,0 +1,66 @@
+{
+  "schema": "prism.observed_state_release_binding_audit.v1",
+  "status": "NO_STATE_TO_RELEASE_BINDING",
+  "observed_state_status": "OBSERVATION_STATE_EVIDENCE_ONLY",
+  "observed_component_count": 3,
+  "mapped_component_count": 0,
+  "unmapped_component_count": 3,
+  "provider_packet_evidence_count": 0,
+  "bound_provider_event_count": 0,
+  "rows": [
+    {
+      "binding_id": null,
+      "observed_component_id": "lh2-intake-tank",
+      "facility_component_id": null,
+      "source_ids": [
+        "inspection-center-intake-10-runs"
+      ],
+      "provider_event_ids": [],
+      "provider_event_count_found": 0,
+      "status": "UNMAPPED_OBSERVED_COMPONENT",
+      "blocking_reasons": [
+        "no reviewed state-to-facility-component/provider-event binding exists"
+      ]
+    },
+    {
+      "binding_id": null,
+      "observed_component_id": "lh2-storage-vent",
+      "facility_component_id": null,
+      "source_ids": [
+        "inspection-center-storage-vent-10-runs"
+      ],
+      "provider_event_ids": [],
+      "provider_event_count_found": 0,
+      "status": "UNMAPPED_OBSERVED_COMPONENT",
+      "blocking_reasons": [
+        "no reviewed state-to-facility-component/provider-event binding exists"
+      ]
+    },
+    {
+      "binding_id": null,
+      "observed_component_id": "lh2-supply-vaporizer-boundary",
+      "facility_component_id": null,
+      "source_ids": [
+        "inspection-center-supply-10-runs"
+      ],
+      "provider_event_ids": [],
+      "provider_event_count_found": 0,
+      "status": "UNMAPPED_OBSERVED_COMPONENT",
+      "blocking_reasons": [
+        "no reviewed state-to-facility-component/provider-event binding exists"
+      ]
+    }
+  ],
+  "blocking_reasons": [
+    "3 observed component(s) are not bound to a provider release",
+    "provider packet input audit contains no accepted provider evidence",
+    "binding manifest contains no reviewed bindings"
+  ],
+  "policy": {
+    "state_data_are_not_accident_sources": true,
+    "frequency_is_not_assigned": true,
+    "provider_packet_promotion_is_not_created": true,
+    "facility_ir_fn_promotion": "requires qualified case coverage and independent validation gates",
+    "diagnostic_only": true
+  }
+}

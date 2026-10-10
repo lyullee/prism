@@ -29,6 +29,11 @@ def main() -> int:
         type=Path,
         help="optional current provider release/qualification input audit",
     )
+    parser.add_argument(
+        "--observed-state-release-binding-audit",
+        type=Path,
+        help="optional observed-state to provider-release binding audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -53,6 +58,16 @@ def main() -> int:
             provider_packet_input_audit_filename=(
                 args.provider_packet_input_audit.name
                 if args.provider_packet_input_audit is not None
+                else None
+            ),
+            observed_state_release_binding_audit=(
+                load_json_object(args.observed_state_release_binding_audit)
+                if args.observed_state_release_binding_audit is not None
+                else None
+            ),
+            observed_state_release_binding_audit_filename=(
+                args.observed_state_release_binding_audit.name
+                if args.observed_state_release_binding_audit is not None
                 else None
             ),
         )
