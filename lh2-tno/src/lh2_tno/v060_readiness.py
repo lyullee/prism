@@ -1375,6 +1375,27 @@ def validate_v060_readiness_report(
                         f"chain.release_closure_worklist.{field}.{key}",
                         errors,
                     )
+            status_counts = release_closure.get("closure_status_counts")
+            if isinstance(status_counts, Mapping):
+                status_total = sum(
+                    int(count) for count in status_counts.values()
+                    if isinstance(count, int) and not isinstance(count, bool)
+                )
+                if (
+                    release_closure.get("case_count") is not None
+                    and status_total != release_closure.get("case_count")
+                ):
+                    errors.append(
+                        "release closure worklist status counts must equal case count"
+                    )
+            if (
+                release_closure.get("case_count") is not None
+                and chain.get("case_count") is not None
+                and release_closure.get("case_count") != chain.get("case_count")
+            ):
+                errors.append(
+                    "release closure worklist case count must equal primary chain case count"
+                )
             for field in (
                 "provider_packet_required_case_count",
                 "mass_closure_open_case_count",

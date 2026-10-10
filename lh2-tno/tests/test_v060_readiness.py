@@ -290,6 +290,15 @@ def test_report_validator_rejects_release_closure_promotion():
         validate_v060_readiness_report(report)
 
 
+def test_report_validator_rejects_release_closure_case_count_drift():
+    report = build_v060_readiness_report(
+        **_inputs(), release_closure_worklist=_release_closure_worklist()
+    )
+    report["chain"]["release_closure_worklist"]["case_count"] = 2
+    with pytest.raises(V060ReadinessError, match="status counts must equal case count"):
+        validate_v060_readiness_report(report)
+
+
 def test_report_records_actionable_evidence_request_without_opening_promotion():
     report = build_v060_readiness_report(
         **_inputs(), facility_evidence_request=_evidence_request()
