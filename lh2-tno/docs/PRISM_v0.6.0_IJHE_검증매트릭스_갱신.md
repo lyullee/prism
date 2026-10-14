@@ -8,6 +8,23 @@ SLABx-LH2/SLABx 피해영향, 점화·기상·인구, 조건부 IR/F-N까지 이
 찾을 수 있게 하는 것이다. 구성요소 검증을 시설 전체 검증으로 넓혀 쓰지 않도록
 promotion gate는 계속 닫아 둔다.
 
+## 현재 권위 기준 (2026-11-14)
+
+이 문서의 아래쪽 실행 이력은 이전 개발 단계의 재현 기록이다. 현재 상태를
+인용할 때는 [`PRISM_IJHE_latest_audit_20261114.md`](PRISM_IJHE_latest_audit_20261114.md)와
+[`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)을
+사용한다. 최신 union은 일반 옥외 LH2 시설의 34개 event, 44개 case, 176개 risk atom과
+HAZOP event binding 34/34를 포함한다. 완료 감사는 `INCOMPLETE_EVIDENCE`이며
+42개 검사 중 38개 `PASS`, 4개 `BLOCKED`이다.
+
+현재 네 strict blocker는 (1) 모든 선언 case의 provider 방출 종료·차단·재고 경계,
+(2) 실제 시설용 qualified provider packet, (3) 사고범위 전체의 독립 물리검증,
+(4) 시설 전체 IR/F-N 승격이다. JUEL hold-out과 HSE Test 6의
+DynamicLH2PoolX 근거는 `results/20261014/dynamiclh2poolx_evidence_audit.json`에
+연결되어 있지만, 소스 해시 변화가 있는 제한 pool/spreading 구성요소 evidence로만
+사용한다. 문헌 빈도 불확실성·미계산 case·처리시간은 최신 감사에 기록되며,
+현장 센서에서 빈도를 학습하지 않는다.
+
 ## 새로 기록한 domain
 
 `validation_evidence_matrix.json`에 다음 domain을 추가했다.
