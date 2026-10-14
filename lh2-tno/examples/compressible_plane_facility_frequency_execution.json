@@ -1,0 +1,44 @@
+{
+  "schema_version": "prism.compressible_plane_facility_frequency_execution.v1",
+  "status": "EXECUTED_DIAGNOSTIC_WITH_FREQUENCY_REWEIGHTING",
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_id": "equipment-manifest-event-provider-campaign",
+  "handoff_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "event_count": 24,
+  "case_count": 24,
+  "chain_executed_case_count": 24,
+  "uncomputed_case_count": 23,
+  "case_statuses": {
+    "EXECUTED": 4,
+    "EXECUTED_OPERATOR_LIMITED": 20
+  },
+  "handoff_consumed": true,
+  "frequency_uncertainty": {
+    "scenario_count": 5,
+    "fresh_physics_executed": false,
+    "facility_credible_interval": false,
+    "correlation_comparison_present": true,
+    "frequency_inference_performed": false
+  },
+  "timing": {
+    "fresh_physics_cases": 24,
+    "case_min_ms": 1499.103500005731,
+    "case_median_ms": 7071.706250000716,
+    "case_max_ms": 15562.539300000935,
+    "case_p95_ms": 13911.849780000191,
+    "case_p99_ms": 15200.07250200084,
+    "campaign_elapsed_ms": 176925.9263999993,
+    "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+  },
+  "claims": {
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "artifact_digests": {
+    "facility_result_sha256": "e550a6c20d5f75976045362545322ea1856dcc4977695ce711c9ad90bb422978",
+    "ledger_sha256": "5b094f03578cc367a752cdb36993ae31f12bb913207c5507ce16a220d86b2ecd",
+    "frequency_uncertainty_sha256": "eedb530cb1db668753df0bf22de6fd3737cd9659370c302d974d82d395f5368f"
+  },
+  "interpretation": "The facility campaign executed all 24 diagnostic chains and applied five explicit literature-frequency scenarios to the saved risk atoms. No fresh physics was run for the uncertainty step; qualification, independent validation, and complete facility QRA remain withheld."
+}

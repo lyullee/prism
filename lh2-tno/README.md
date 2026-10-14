@@ -20,6 +20,8 @@
 
 같은 시설 campaign의 빈도 민감도는 `--frequency-scenarios examples/compressible_plane_facility_frequency_scenarios.json` 옵션으로 연결할 수 있습니다. 현재 catalog는 해당 24개 사건에 맞춘 5개 문헌 시나리오(자산별 shared central/low/high, event별 independent low/high)를 사용하며, 저장된 risk atom만 재가중합니다. 방출·확산 물리를 다시 실행하지 않으므로 `fresh_physics_executed=false`, 통계적 시설 credible interval과 빈도 추론은 `false`로 유지됩니다. 자세한 명령과 해석은 [압축성 provider chain 연결 기록](docs/PRISM_compressible_plane_provider_chain_20261014.md)에 있습니다.
 
+이 옵션을 실제 24개 campaign에 적용한 실행 요약은 [`compressible_plane_facility_frequency_execution.json`](examples/compressible_plane_facility_frequency_execution.json)입니다. 24개 chain 실행, 5개 빈도 시나리오 재가중, correlation comparison, case별 처리시간을 함께 기록하며, provider 자격·독립 물리검증·시설 전체 QRA 승격은 계속 차단합니다.
+
 검사지원센터 폴더에서 확인된 NASA 극저온 피스톤 펌프·액화수소 원심 펌프 시험문헌은 `scripts/audit_external_document_evidence.py`로 provenance를 기록할 수 있습니다. [`외부 펌프 문헌 근거 검토`](docs/PRISM_외부펌프문헌_근거_검토_20261107.md)와 [`external_pump_document_intake.json`](results/20261107/external_pump_document_intake.json)은 두 PDF를 펌프 모델 비교 후보로만 분류합니다. `build_ijhe_completion_audit.py --external-document-evidence`로 IJHE 완료 감사에 diagnostic check를 연결할 수 있습니다. 문헌은 사고 방출 packet·빈도·SLABx-LH2 검증·시설 QRA를 자동으로 만들지 않으며, 정확한 설비/포트 연결과 독립 holdout 비교가 끝날 때까지 물리검증 승격을 차단합니다.
 
 외부 `lh2dt_models` 정본도 [`외부 lh2dt 모델 정본 재검토`](docs/PRISM_external_lh2dt_model_root_review_20261014.md)와 `scripts/review_external_lh2_model_root.py`로 점검할 수 있습니다. 현재 모델 root에서는 provider response/resolved release 0건, exact generic identity 0건, qualification sidecar 0건으로 확인되어 `MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION`을 유지합니다. `build_ijhe_completion_audit.py --external-model-root-review`는 이 provenance와 승격 차단 플래그를 진단 검사로 기록하며, 정상상태 모델이나 예제 출력만으로 사고 방출·빈도·시설 QRA를 만들지 않습니다.

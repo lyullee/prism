@@ -2141,6 +2141,10 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    aggregate: Mapping[str, Any] = {}
+    aggregate_valid = False
+    component_audit: Mapping[str, Any] = {}
+    component_audit_valid = False
     if facility_aggregate_closure_audit is not None:
         aggregate = facility_aggregate_closure_audit
         aggregate_valid = (
@@ -2237,6 +2241,7 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    if facility_component_contribution_audit is not None:
         checks.append(
             {
                 "name": "diagnostic_facility_component_contribution_closure",
@@ -2266,6 +2271,7 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    if facility_aggregate_closure_audit is not None:
         checks.append(
             {
                 "name": "diagnostic_facility_ir_fn_aggregate_closure",

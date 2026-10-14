@@ -72,6 +72,35 @@ def test_completion_audit_distinguishes_numerical_scope_from_qualification_gap()
     assert check["evidence"]["families_with_numerical_case_gap"] == []
 
 
+def test_completion_audit_handles_frequency_audit_without_optional_closure_inputs():
+    frequency_audit = {
+        "schema_version": "prism.facility_frequency_uncertainty_audit.v1",
+        "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+        "scenario_count": 5,
+        "risk_atom_count": 4,
+        "mismatch_count": 0,
+        "blocking_reasons": [],
+        "frequency_inference_performed": False,
+        "facility_credible_interval": False,
+        "statistical_confidence_interval": False,
+        "fresh_physics_executed": False,
+        "provider_packet_promoted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+        "diagnostic_only": True,
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_frequency_uncertainty_audit=frequency_audit,
+    )
+    names = {item["name"] for item in report["checks"]}
+    assert "diagnostic_facility_frequency_uncertainty_closure" in names
+    assert "diagnostic_facility_component_contribution_closure" not in names
+    assert "diagnostic_facility_ir_fn_aggregate_closure" not in names
+
+
 def _scenario_trace(status="HAZOP_SCENARIO_TRACE_COMPLETE"):
     return {
         "schema_version": "prism.hazop_scenario_trace_audit.v1",

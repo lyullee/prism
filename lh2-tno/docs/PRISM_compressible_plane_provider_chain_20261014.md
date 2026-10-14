@@ -96,3 +96,5 @@ python scripts/run_compressible_plane_facility_campaign.py `
 ```
 
 이 catalog는 현재 24개 사건 campaign에 정확히 맞춘 5개 시나리오(자산별 shared central/low/high와 event별 independent low/high)를 사용한다. 계산은 저장된 risk atom의 빈도 가중치만 바꾸고 방출·확산 물리를 다시 실행하지 않는다. 따라서 `fresh_physics_executed=false`, `facility_credible_interval=false`, `frequency_inference_performed=false`가 정상이며, 이는 시설 전체의 통계적 신뢰구간이나 센서 기반 빈도 추정을 뜻하지 않는다. qualified provider·독립 물리검증·엄격한 시설범위 gate가 닫히기 전까지 결과는 조건부 진단으로만 사용한다.
+
+실제 24개 campaign에 이 옵션까지 붙인 실행 요약은 [`examples/compressible_plane_facility_frequency_execution.json`](../examples/compressible_plane_facility_frequency_execution.json)이다. 24/24 chain이 실행되었고, 5개 빈도 시나리오가 저장된 risk atom에 적용되었으며, 물리 재실행 없이 correlation comparison이 기록되었다. 실행시간은 새 물리 계산 24건, 중앙값 약 7.07초/case, p95 약 13.91초/case, 전체 약 176.9초였고, 이는 단일 campaign 관측값이지 1 Hz 서비스 보장이 아니다.
