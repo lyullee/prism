@@ -96,6 +96,7 @@ def build_ijhe_completion_audit(
     external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_evidence_request: Mapping[str, Any] | None = None,
     hazop_integrated_risk: Mapping[str, Any] | None = None,
+    hazop_scenario_trace_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3592,6 +3593,52 @@ def build_ijhe_completion_audit(
             "frequency or facility IR/F-N."
         )
         checks.append(request_check)
+    if hazop_scenario_trace_audit is not None:
+        trace = hazop_scenario_trace_audit
+        policy = trace.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        trace_valid = (
+            trace.get("schema_version") == "prism.hazop_scenario_trace_audit.v1"
+            and trace.get("status") == "HAZOP_SCENARIO_TRACE_COMPLETE"
+            and isinstance(trace.get("event_count"), int)
+            and trace.get("event_count", 0) > 0
+            and isinstance(trace.get("traceable_event_count"), int)
+            and trace.get("traceable_event_count") == trace.get("event_count")
+            and isinstance(trace.get("traceable_case_count"), int)
+            and isinstance(trace.get("traceable_risk_atom_count"), int)
+            and isinstance(trace.get("provider_request_count"), int)
+            and trace.get("traceable_provider_request_count") == trace.get("provider_request_count")
+            and isinstance(trace.get("errors"), list)
+            and not trace.get("errors")
+            and policy.get("hazop_scenario_id_inferred") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("facility_qra_promotion") is False
+            and policy.get("physical_validation_claim") is False
+        )
+        trace_check = _check(
+            "diagnostic_hazop_scenario_trace",
+            trace_valid,
+            {
+                "record": trace.get("_record_path"),
+                "schema_version": trace.get("schema_version"),
+                "status": trace.get("status"),
+                "event_count": trace.get("event_count"),
+                "traceable_event_count": trace.get("traceable_event_count"),
+                "traceable_case_count": trace.get("traceable_case_count"),
+                "traceable_risk_atom_count": trace.get("traceable_risk_atom_count"),
+                "provider_request_count": trace.get("provider_request_count"),
+                "traceable_provider_request_count": trace.get("traceable_provider_request_count"),
+                "errors": trace.get("errors"),
+                "policy": dict(policy),
+            },
+            "HAZOP scenario identity is missing, inconsistent, or carries an unsafe promotion claim",
+        )
+        trace_check["diagnostic_only"] = True
+        trace_check["interpretation"] = (
+            "The campaign-to-provider scenario identity is checked without inferring a missing ID, "
+            "frequency, release boundary, or facility QRA result."
+        )
+        checks.append(trace_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

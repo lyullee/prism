@@ -168,6 +168,11 @@ def main() -> int:
         type=Path,
         help="optional exact facility-case evidence-request coverage audit",
     )
+    parser.add_argument(
+        "--hazop-scenario-trace-audit",
+        type=Path,
+        help="optional fail-closed HAZOP scenario identity trace audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -463,6 +468,13 @@ def main() -> int:
         )
         if facility_evidence_request is not None:
             facility_evidence_request["_record_path"] = str(args.facility_evidence_request)
+        hazop_scenario_trace_audit = (
+            _object(args.hazop_scenario_trace_audit)
+            if args.hazop_scenario_trace_audit
+            else None
+        )
+        if hazop_scenario_trace_audit is not None:
+            hazop_scenario_trace_audit["_record_path"] = str(args.hazop_scenario_trace_audit)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -508,6 +520,7 @@ def main() -> int:
             external_document_evidence=external_document_evidence,
             external_release_artifact_intake=external_release_artifact_intake,
             facility_evidence_request=facility_evidence_request,
+            hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

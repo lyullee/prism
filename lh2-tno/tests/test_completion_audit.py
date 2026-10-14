@@ -72,6 +72,49 @@ def test_completion_audit_distinguishes_numerical_scope_from_qualification_gap()
     assert check["evidence"]["families_with_numerical_case_gap"] == []
 
 
+def _scenario_trace(status="HAZOP_SCENARIO_TRACE_COMPLETE"):
+    return {
+        "schema_version": "prism.hazop_scenario_trace_audit.v1",
+        "status": status,
+        "event_count": 1,
+        "traceable_event_count": 1,
+        "traceable_case_count": 1,
+        "traceable_risk_atom_count": 4,
+        "provider_request_count": 1,
+        "traceable_provider_request_count": 1,
+        "errors": [] if status == "HAZOP_SCENARIO_TRACE_COMPLETE" else ["identity drift"],
+        "policy": {
+            "hazop_scenario_id_inferred": False,
+            "frequency_inference_performed": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+        },
+    }
+
+
+def test_completion_audit_accepts_complete_hazop_scenario_trace():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_scenario_trace_audit=_scenario_trace(),
+    )
+    check = next(item for item in report["checks"] if item["name"] == "diagnostic_hazop_scenario_trace")
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_hazop_scenario_trace_drift():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_scenario_trace_audit=_scenario_trace("HAZOP_SCENARIO_TRACE_BLOCKED"),
+    )
+    check = next(item for item in report["checks"] if item["name"] == "diagnostic_hazop_scenario_trace")
+    assert check["status"] == "BLOCKED"
+
+
 def test_completion_audit_records_forecast_hazop_trigger_without_qra_promotion():
     report = build_ijhe_completion_audit(
         _status(validated=False),
