@@ -1,0 +1,380 @@
+"""Strict HAZOP-table and operating-mode scenario selection.
+
+This module is the qualitative gate before a PRISM consequence calculation.
+It consumes a state frame that contains an explicit operating mode together
+with SI process values.  A matching deviation selects a declared accident
+family, but it never creates a release, assigns a frequency, or promotes a
+normal-state measurement to an accident packet.
+"""
+from __future__ import annotations
+
+import math
+import json
+from collections.abc import Mapping
+from typing import Any, Literal
+
+from pydantic import Field, model_validator
+
+from .accident_scenario_catalog import scenario_definition, scenario_families_for_release
+from .contracts import Contract, Name, Nonnegative
+from .state_snapshot import StateMeasurement
+
+
+HAZOP_SCHEMA = "prism.hazop_operating_mode_selection.v1"
+HAZOP_STATE_SCHEMA = "prism.hazop_state_frame.v1"
+
+_QUANTITIES = {
+    "pressure", "temperature", "mass", "mass_flow", "level_fraction",
+    "hydrogen_fraction", "differential_pressure",
+}
+_RELEASE_MODES = {
+    "instantaneous_inventory", "inventory_over_600s", "hole",
+    "two_sided_rupture", "maximum_relief_discharge",
+}
+_COMPONENT_KINDS = {
+    "storage_tank", "pipe", "valve", "vent_stack", "vaporizer",
+    "pump", "reliquefier",
+}
+_TRIGGERS = {"above", "at_or_above", "below", "at_or_below", "outside_range"}
+
+
+class HazopSelectionError(ValueError):
+    """Raised when a HAZOP table or state frame is structurally unsafe."""
+
+
+class HazopRow(Contract):
+    """One numeric HAZOP deviation row for one component and mode set."""
+
+    id: Name
+    component_id: Name
+    component_kind: Literal[
+        "storage_tank", "pipe", "valve", "vent_stack", "vaporizer",
+        "pump", "reliquefier",
+    ]
+    operating_modes: tuple[Name, ...]
+    variable_tag: Name
+    quantity: Literal[
+        "pressure", "temperature", "mass", "mass_flow", "level_fraction",
+        "hydrogen_fraction", "differential_pressure",
+    ]
+    trigger: Literal["above", "at_or_above", "below", "at_or_below", "outside_range"]
+    threshold_low_si: float | None = None
+    threshold_high_si: float | None = None
+    scenario_family: Name
+    release_mode: Literal[
+        "instantaneous_inventory", "inventory_over_600s", "hole",
+        "two_sided_rupture", "maximum_relief_discharge",
+    ]
+    priority: Literal["low", "medium", "high", "critical"] = "medium"
+    deviation_label: Name
+    cause_summary: Name
+    consequence_summary: Name
+    safeguards: tuple[Name, ...] = ()
+    provenance: Name
+
+    @model_validator(mode="after")
+    def validate_row(self) -> "HazopRow":
+        if not self.operating_modes or len(set(self.operating_modes)) != len(self.operating_modes):
+            raise ValueError("HAZOP row requires unique operating_modes")
+        if self.trigger not in _TRIGGERS or self.release_mode not in _RELEASE_MODES:
+            raise ValueError("unsupported HAZOP trigger or release mode")
+        for name, value in (("threshold_low_si", self.threshold_low_si), ("threshold_high_si", self.threshold_high_si)):
+            if value is not None and (isinstance(value, bool) or not math.isfinite(float(value))):
+                raise ValueError(f"{name} must be finite when supplied")
+        if self.trigger in {"below", "at_or_below"} and self.threshold_low_si is None:
+            raise ValueError("low trigger requires threshold_low_si")
+        if self.trigger in {"above", "at_or_above"} and self.threshold_high_si is None:
+            raise ValueError("high trigger requires threshold_high_si")
+        if self.trigger == "outside_range":
+            if self.threshold_low_si is None or self.threshold_high_si is None:
+                raise ValueError("outside_range requires both thresholds")
+            if not self.threshold_low_si < self.threshold_high_si:
+                raise ValueError("outside_range requires threshold_low_si < threshold_high_si")
+        try:
+            definition = scenario_definition(self.scenario_family)
+        except ValueError as error:
+            raise ValueError(f"unknown HAZOP scenario family: {self.scenario_family}") from error
+        if self.component_kind not in definition["equipment_kinds"]:
+            raise ValueError(
+                f"scenario family {self.scenario_family} does not apply to {self.component_kind}"
+            )
+        if self.release_mode not in definition["release_modes"]:
+            raise ValueError(
+                f"scenario family {self.scenario_family} does not support {self.release_mode}"
+            )
+        return self
+
+
+class HazopTable(Contract):
+    """A facility-neutral HAZOP table with explicit mode coverage."""
+
+    schema_version: Literal[HAZOP_SCHEMA]
+    id: Name
+    facility_id: Name
+    operating_modes: tuple[Name, ...]
+    rows: tuple[HazopRow, ...]
+    source_provenance: Name
+    configuration_origin: Literal["synthetic", "reviewed_design", "field_confirmed"]
+    notes: tuple[str, ...] = ()
+
+    @model_validator(mode="after")
+    def validate_table(self) -> "HazopTable":
+        if not self.operating_modes or len(set(self.operating_modes)) != len(self.operating_modes):
+            raise ValueError("HAZOP table requires unique operating_modes")
+        if not self.rows:
+            raise ValueError("HAZOP table requires at least one row")
+        if len({row.id for row in self.rows}) != len(self.rows):
+            raise ValueError("HAZOP row IDs must be unique")
+        allowed = set(self.operating_modes)
+        for row in self.rows:
+            if not set(row.operating_modes).issubset(allowed):
+                raise ValueError(f"HAZOP row {row.id} uses a mode absent from table")
+        return self
+
+
+class HazopStateFrame(Contract):
+    """Process measurements plus the operating mode used for HAZOP selection."""
+
+    schema_version: Literal[HAZOP_STATE_SCHEMA]
+    facility_id: Name
+    component_id: Name
+    operating_mode: Name
+    captured_at_s: Nonnegative
+    values: dict[Name, StateMeasurement]
+    state_snapshot_digest: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    source_digest: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+    source_provenance: Name
+
+    @model_validator(mode="after")
+    def validate_frame(self) -> "HazopStateFrame":
+        if not self.values:
+            raise ValueError("HAZOP state frame requires at least one measurement")
+        if len(set(self.values)) != len(self.values):
+            raise ValueError("HAZOP state value tags must be unique")
+        for tag, value in self.values.items():
+            if value.quantity not in _QUANTITIES:
+                raise ValueError(f"unsupported HAZOP state quantity: {tag}")
+        return self
+
+
+def _state_frame(value: HazopStateFrame | Mapping[str, Any]) -> HazopStateFrame:
+    if isinstance(value, HazopStateFrame):
+        return value
+    if not isinstance(value, Mapping):
+        raise HazopSelectionError("HAZOP state must be a mapping or HazopStateFrame")
+    try:
+        return HazopStateFrame.model_validate_json(json.dumps(value, allow_nan=False))
+    except Exception as error:
+        raise HazopSelectionError(f"invalid HAZOP state frame: {error}") from error
+
+
+def _active(row: HazopRow, value: float) -> bool:
+    if row.trigger == "above":
+        return value > float(row.threshold_high_si)
+    if row.trigger == "at_or_above":
+        return value >= float(row.threshold_high_si)
+    if row.trigger == "below":
+        return value < float(row.threshold_low_si)
+    if row.trigger == "at_or_below":
+        return value <= float(row.threshold_low_si)
+    return value < float(row.threshold_low_si) or value > float(row.threshold_high_si)
+
+
+def evaluate_hazop(
+    table: HazopTable | Mapping[str, Any],
+    state: HazopStateFrame | Mapping[str, Any],
+) -> dict[str, Any]:
+    """Evaluate mode-specific deviations and emit downstream scenario work items.
+
+    A row with an absent signal remains ``MISSING_SIGNAL``.  An active row with
+    a declared family is selected even when the provider release is unavailable;
+    the selection then carries ``provider_release_required`` and is not a QRA
+    result.
+    """
+    if not isinstance(table, HazopTable):
+        try:
+            # The wire contract is JSON, where arrays become the tuple fields
+            # used by strict Pydantic contracts.
+            table = HazopTable.model_validate_json(json.dumps(table, allow_nan=False))
+        except Exception as error:
+            raise HazopSelectionError(f"invalid HAZOP table: {error}") from error
+    frame = _state_frame(state)
+    if frame.facility_id != table.facility_id:
+        raise HazopSelectionError("HAZOP table and state facility_id do not match")
+    table_digest = table.digest()
+    state_digest = frame.digest()
+    applicable = [row for row in table.rows
+                  if row.component_id == frame.component_id
+                  and frame.operating_mode in row.operating_modes]
+    checks: list[dict[str, Any]] = []
+    selected: list[dict[str, Any]] = []
+    blocking: list[str] = []
+    for row in applicable:
+        measured = frame.values.get(row.variable_tag)
+        base = {
+            "row_id": row.id,
+            "component_id": row.component_id,
+            "operating_mode": frame.operating_mode,
+            "variable_tag": row.variable_tag,
+            "deviation": row.deviation_label,
+            "trigger": row.trigger,
+            "scenario_family": row.scenario_family,
+            "release_mode": row.release_mode,
+        }
+        if measured is None:
+            checks.append({**base, "status": "MISSING_SIGNAL", "reason": "required HAZOP signal is absent"})
+            blocking.append(f"{row.id}: missing signal {row.variable_tag}")
+            continue
+        if measured.quantity != row.quantity:
+            checks.append({**base, "status": "QUANTITY_MISMATCH", "reason": f"expected {row.quantity}, got {measured.quantity}"})
+            blocking.append(f"{row.id}: quantity mismatch")
+            continue
+        value = float(measured.value_si)
+        active = _active(row, value)
+        check = {**base, "status": "DEVIATION" if active else "NORMAL", "value_si": value,
+                 "quantity": measured.quantity, "threshold_low_si": row.threshold_low_si,
+                 "threshold_high_si": row.threshold_high_si}
+        checks.append(check)
+        if not active:
+            continue
+        supported = row.scenario_family in scenario_families_for_release(
+            row.component_kind, row.release_mode
+        )
+        if not supported:
+            check["status"] = "SCENARIO_MAPPING_BLOCKED"
+            check["reason"] = "scenario family is not a valid release mapping for this component/mode"
+            blocking.append(f"{row.id}: scenario mapping blocked")
+            continue
+        selected.append({
+            "scenario_id": f"{row.id}:{frame.operating_mode}:{row.scenario_family}",
+            "hazop_row_id": row.id,
+            "component_id": row.component_id,
+            "component_kind": row.component_kind,
+            "operating_mode": frame.operating_mode,
+            "scenario_family": row.scenario_family,
+            "release_mode": row.release_mode,
+            "priority": row.priority,
+            "measured_value_si": value,
+            "trigger": row.trigger,
+            "threshold_low_si": row.threshold_low_si,
+            "threshold_high_si": row.threshold_high_si,
+            "provider_release_status": "REQUIRED_NOT_CREATED",
+            "provider_release_required": True,
+            "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+            "source": row.provenance,
+        })
+    if selected:
+        status = "SCENARIOS_SELECTED" if not blocking else "SCENARIOS_SELECTED_WITH_OPEN_INPUTS"
+    elif blocking:
+        status = "BLOCKED_OPEN_INPUTS"
+    elif not applicable:
+        status = "NO_APPLICABLE_MODE_ROW"
+    else:
+        status = "NO_DEVIATION"
+    return {
+        "schema_version": HAZOP_SCHEMA,
+        "status": status,
+        "facility_id": frame.facility_id,
+        "table_id": table.id,
+        "table_digest": table_digest,
+        "state_digest": state_digest,
+        "component_id": frame.component_id,
+        "operating_mode": frame.operating_mode,
+        "captured_at_s": frame.captured_at_s,
+        "applicable_row_count": len(applicable),
+        "active_deviation_count": sum(row["status"] == "DEVIATION" for row in checks),
+        "selected_scenario_count": len(selected),
+        "checks": checks,
+        "selected_scenarios": selected,
+        "blocking_reasons": blocking,
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "release_packet_created": False,
+            "consequence_calculated": False,
+            "facility_qra_claim": False,
+        },
+        "interpretation": (
+            "HAZOP and operating-mode selection only; selected scenarios require an explicit "
+            "equipment provider release packet before consequence analysis."
+        ),
+    }
+
+
+def hazop_state_from_runtime_frame(
+    frame: Mapping[str, Any],
+    *,
+    facility_id: str,
+    now_s: float,
+    mapping_digest: str | None = None,
+) -> HazopStateFrame:
+    """Convert a verified observed-state runtime frame into a HAZOP frame.
+
+    The runtime adapter verifies frame/state digests and rejects accident-owned
+    fields first.  A frame without an explicit operating mode is rejected;
+    HAZOP never guesses a mode from pressure, flow, or a tag name.
+    """
+    from .observed_state_runtime import service_state_from_runtime_frame
+
+    normalized = service_state_from_runtime_frame(
+        frame, now_s=now_s, mapping_digest=mapping_digest
+    )
+    mode = normalized.get("operating_mode")
+    if not isinstance(mode, str) or not mode.strip():
+        raise HazopSelectionError(
+            "runtime frame has no operating_mode; HAZOP scenario selection is withheld"
+        )
+    values: dict[str, StateMeasurement] = {}
+    for tag, raw in normalized["values"].items():
+        try:
+            values[tag] = StateMeasurement.model_validate_json(
+                json.dumps({
+                    "quantity": raw["quantity"],
+                    "value_si": raw["value_si"],
+                    "sensor_location": raw.get("sensor_location"),
+                    "quality": raw.get("quality", "valid"),
+                }, allow_nan=False)
+            )
+        except Exception as error:
+            raise HazopSelectionError(
+                f"runtime HAZOP value {tag} is invalid: {error}"
+            ) from error
+    return HazopStateFrame(
+        schema_version=HAZOP_STATE_SCHEMA,
+        facility_id=facility_id,
+        component_id=str(frame["component_id"]),
+        operating_mode=mode,
+        captured_at_s=float(frame["captured_at_s"]),
+        values=values,
+        state_snapshot_digest=frame.get("state_snapshot_digest"),
+        source_digest=frame.get("source_sha256"),
+        source_provenance=str(frame.get("source_id") or "runtime-frame"),
+    )
+
+
+def evaluate_hazop_runtime_frame(
+    table: HazopTable | Mapping[str, Any],
+    frame: Mapping[str, Any],
+    *,
+    now_s: float,
+    mapping_digest: str | None = None,
+) -> dict[str, Any]:
+    """Run HAZOP selection directly on one verified runtime frame."""
+    if isinstance(table, HazopTable):
+        facility_id = table.facility_id
+    elif isinstance(table, Mapping):
+        facility_id = str(table.get("facility_id") or "")
+    else:
+        raise HazopSelectionError("HAZOP table must provide facility_id")
+    state = hazop_state_from_runtime_frame(
+        frame, facility_id=facility_id, now_s=now_s, mapping_digest=mapping_digest
+    )
+    return evaluate_hazop(table, state)
+
+
+__all__ = [
+    "HAZOP_SCHEMA", "HAZOP_STATE_SCHEMA", "HazopSelectionError",
+    "HazopRow", "HazopTable", "HazopStateFrame", "evaluate_hazop",
+    "hazop_state_from_runtime_frame", "evaluate_hazop_runtime_frame",
+]

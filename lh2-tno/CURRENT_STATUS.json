@@ -3878,6 +3878,36 @@
   "slabx_lh2_independent_comparison_source_gate_accepted": false,
   "slabx_lh2_independent_comparison_independent_physical_validation_claim": false,
   "slabx_lh2_independent_comparison_facility_qra_claim": false,
+  "hazop_operating_mode_selection": {
+    "status": "IMPLEMENTED_DIAGNOSTIC_ONLY",
+    "module": "src/lh2_tno/hazop.py",
+    "schema": "prism.hazop_operating_mode_selection.v1",
+    "state_schema": "prism.hazop_state_frame.v1",
+    "documentation": "docs/PRISM_HAZOP_운전모드_시나리오_연결.md",
+    "example_table": "examples/generic_hazop_operating_modes.json",
+    "example_state": "examples/generic_hazop_state_frame.json",
+    "example_record": "results/hazop_current/selection.json",
+    "example_status": "SCENARIOS_SELECTED; receiving mode and high-pressure deviation selected vessel_hole",
+    "targeted_test_count": 21,
+    "operating_mode_taken_from_input": true,
+    "selected_scenario_count": 1,
+    "release_packet_created": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false,
+    "real_facility_hazop_claim": false,
+    "remaining": [
+      "reviewed facility HAZOP/P&ID table and mode-tag evidence",
+      "provider release packet for each selected scenario",
+      "frequency binding and independent physical validation before facility QRA"
+    ]
+  },
+  "latest_full_test_run": {
+    "status": "PASS",
+    "tests": 955,
+    "failures": 0,
+    "skipped": 0,
+    "scope": "current lh2-tno package after HAZOP/mode adapter changes"
+  },
   "runtime_async_development": {
     "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED_GOAL_REMAINS_ACTIVE",
     "record": "results/runtime_async_current/verification.json",

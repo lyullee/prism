@@ -76,6 +76,12 @@ def _finite(value: Any, field: str) -> float:
     return number
 
 
+def _mode(value: Any, field: str = "operating_mode") -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{field} must be a non-empty string when supplied")
+    return value.strip()
+
+
 def _sources(sources: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for index, source in enumerate(sources):
@@ -180,6 +186,9 @@ def _frame_from_source(source: Mapping[str, Any]) -> dict[str, Any]:
         "state_snapshot_digest": snapshot.digest(),
         "source_sha256": source.get("source_sha256"),
     }
+    operating_mode = sample.get("operating_mode", source.get("operating_mode"))
+    if operating_mode is not None:
+        frame["operating_mode"] = _mode(operating_mode)
     frame["frame_digest"] = canonical_digest(frame)
     return frame
 
@@ -267,6 +276,8 @@ def service_state_from_runtime_frame(
             "provenance": "runtime-frame-si-values; mapping review remains separate",
         }),
     }
+    if frame.get("operating_mode") is not None:
+        normalized["operating_mode"] = _mode(frame["operating_mode"])
     from .service import validate_equipment_process_state
 
     return validate_equipment_process_state(normalized)
@@ -332,6 +343,7 @@ def build_observed_state_runtime_frames(
             "provider_release_required_for_consequence": True,
             "frequency_assignment": "rejected_by_request_from_equipment_resolver",
             "termination_and_inventory_owner": "equipment_provider",
+            "operating_mode_transport": "optional source/sample operating_mode; required by HAZOP selector",
         },
         "policy": {
             "state_only": True,

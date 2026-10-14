@@ -1,0 +1,61 @@
+{
+  "schema_version": "prism.hazop_operating_mode_selection.v1",
+  "status": "SCENARIOS_SELECTED",
+  "facility_id": "generic-outdoor-lh2",
+  "table_id": "generic-outdoor-lh2-hazop-v1",
+  "table_digest": "7020eda950ba2f3c82cdaa3a196c1f8ea0ac103657a9f9f13035faa7d076596b",
+  "state_digest": "898b5fb94f7cd9feef20ec5d4982e77cbcaa5280bbfe6807baae3d1552125828",
+  "component_id": "storage-tank-01",
+  "operating_mode": "receiving",
+  "captured_at_s": 12.0,
+  "applicable_row_count": 1,
+  "active_deviation_count": 1,
+  "selected_scenario_count": 1,
+  "checks": [
+    {
+      "row_id": "TK01-receiving-high-pressure",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "variable_tag": "tank_pressure",
+      "deviation": "high pressure",
+      "trigger": "at_or_above",
+      "scenario_family": "vessel_hole",
+      "release_mode": "hole",
+      "status": "DEVIATION",
+      "value_si": 650000.0,
+      "quantity": "pressure",
+      "threshold_low_si": null,
+      "threshold_high_si": 600000.0
+    }
+  ],
+  "selected_scenarios": [
+    {
+      "scenario_id": "TK01-receiving-high-pressure:receiving:vessel_hole",
+      "hazop_row_id": "TK01-receiving-high-pressure",
+      "component_id": "storage-tank-01",
+      "component_kind": "storage_tank",
+      "operating_mode": "receiving",
+      "scenario_family": "vessel_hole",
+      "release_mode": "hole",
+      "priority": "high",
+      "measured_value_si": 650000.0,
+      "trigger": "at_or_above",
+      "threshold_low_si": null,
+      "threshold_high_si": 600000.0,
+      "provider_release_status": "REQUIRED_NOT_CREATED",
+      "provider_release_required": true,
+      "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+      "source": "synthetic diagnostic HAZOP row"
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "release_packet_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false
+  },
+  "interpretation": "HAZOP and operating-mode selection only; selected scenarios require an explicit equipment provider release packet before consequence analysis."
+}

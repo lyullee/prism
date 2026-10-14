@@ -1,0 +1,16 @@
+{
+  "schema_version": "prism.hazop_state_frame.v1",
+  "facility_id": "generic-outdoor-lh2",
+  "component_id": "storage-tank-01",
+  "operating_mode": "receiving",
+  "captured_at_s": 12.0,
+  "source_provenance": "synthetic diagnostic state; replace with a verified runtime frame",
+  "values": {
+    "tank_pressure": {
+      "quantity": "pressure",
+      "value_si": 650000.0,
+      "sensor_location": "storage-tank-01.vapour",
+      "quality": "valid"
+    }
+  }
+}

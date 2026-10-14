@@ -1,0 +1,68 @@
+{
+  "schema_version": "prism.hazop_operating_mode_selection.v1",
+  "id": "generic-outdoor-lh2-hazop-v1",
+  "facility_id": "generic-outdoor-lh2",
+  "operating_modes": ["receiving", "supply", "standby"],
+  "configuration_origin": "synthetic",
+  "source_provenance": "generic diagnostic table; replace with reviewed facility HAZOP and P&ID references",
+  "notes": [
+    "This example selects scenarios only.",
+    "It does not assign frequency or create a provider release packet."
+  ],
+  "rows": [
+    {
+      "id": "TK01-receiving-high-pressure",
+      "component_id": "storage-tank-01",
+      "component_kind": "storage_tank",
+      "operating_modes": ["receiving"],
+      "variable_tag": "tank_pressure",
+      "quantity": "pressure",
+      "trigger": "at_or_above",
+      "threshold_high_si": 600000.0,
+      "scenario_family": "vessel_hole",
+      "release_mode": "hole",
+      "priority": "high",
+      "deviation_label": "high pressure",
+      "cause_summary": "receiving pressure exceeds the declared criterion",
+      "consequence_summary": "tank wall release requires an equipment provider packet",
+      "safeguards": ["PSV", "ESD"],
+      "provenance": "synthetic diagnostic HAZOP row"
+    },
+    {
+      "id": "LINE01-supply-low-flow",
+      "component_id": "liquid-transfer-line-01",
+      "component_kind": "pipe",
+      "operating_modes": ["supply"],
+      "variable_tag": "transfer_flow",
+      "quantity": "mass_flow",
+      "trigger": "below",
+      "threshold_low_si": 0.05,
+      "scenario_family": "pipe_hole",
+      "release_mode": "hole",
+      "priority": "high",
+      "deviation_label": "low flow",
+      "cause_summary": "supply flow falls below the declared criterion",
+      "consequence_summary": "pipe release candidate requires provider history and isolation evidence",
+      "safeguards": ["flow-trip", "ESD"],
+      "provenance": "synthetic diagnostic HAZOP row"
+    },
+    {
+      "id": "VENT01-standby-high-pressure",
+      "component_id": "pressure-relief-vent-01",
+      "component_kind": "vent_stack",
+      "operating_modes": ["standby"],
+      "variable_tag": "vent_pressure",
+      "quantity": "pressure",
+      "trigger": "at_or_above",
+      "threshold_high_si": 700000.0,
+      "scenario_family": "vent_hole",
+      "release_mode": "maximum_relief_discharge",
+      "priority": "critical",
+      "deviation_label": "high relief pressure",
+      "cause_summary": "standby pressure reaches relief criterion",
+      "consequence_summary": "relief discharge requires qualified set-point and outlet history",
+      "safeguards": ["relief-setpoint", "gas-detection"],
+      "provenance": "synthetic diagnostic HAZOP row"
+    }
+  ]
+}

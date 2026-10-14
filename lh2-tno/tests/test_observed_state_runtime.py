@@ -51,6 +51,7 @@ def test_runtime_frame_selects_latest_state_and_matches_service_shape():
     assert validate_equipment_process_state(normalized)["component_id"] == "tank-01"
     assert report["policy"]["release_scenario_generated"] is False
     assert report["policy"]["provider_release_required_for_consequence"] is True
+    assert "operating_mode" not in frame
     assert (
         report["runtime_handoff_contract"]["facility_monitor_method"]
         == "FacilityRealtimeConsequenceMonitor.update_from_runtime_frames"
@@ -70,6 +71,23 @@ def test_runtime_frame_rejects_duplicate_component_sources():
     other["source_id"] = "historian-tank-02"
     with pytest.raises(ValueError, match="one source per component_id"):
         build_observed_state_runtime_frames([source, other])
+
+
+def test_runtime_frame_carries_operating_mode_with_state_values():
+    source = _source()
+    source["samples"][1]["operating_mode"] = "receiving"
+    report = build_observed_state_runtime_frames([source])
+    frame = report["frames"][0]
+    assert frame["operating_mode"] == "receiving"
+    normalized = service_state_from_runtime_frame(frame, now_s=2.0)
+    assert normalized["operating_mode"] == "receiving"
+
+
+def test_runtime_frame_rejects_blank_operating_mode():
+    source = _source()
+    source["operating_mode"] = "   "
+    with pytest.raises(ValueError, match="operating_mode"):
+        build_observed_state_runtime_frames([source])
 
 
 def test_runtime_frame_converts_to_service_state_input_without_accident_fields():

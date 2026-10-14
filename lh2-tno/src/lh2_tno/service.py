@@ -71,6 +71,10 @@ def validate_equipment_process_state(normalized: Mapping) -> dict:
     if not isinstance(normalized, Mapping):
         raise TypeError("equipment process state must be a mapping")
     _scan_forbidden_process_state_keys(normalized)
+    if "operating_mode" in normalized:
+        mode = normalized["operating_mode"]
+        if not isinstance(mode, str) or not mode.strip():
+            raise ValueError("operating_mode must be a non-empty string when supplied")
     values = normalized.get("values")
     if not isinstance(values, Mapping):
         raise ValueError("equipment process state requires a values mapping")
