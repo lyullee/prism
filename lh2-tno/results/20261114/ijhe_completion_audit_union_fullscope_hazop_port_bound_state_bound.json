@@ -5121,6 +5121,268 @@
       "interpretation": "The request ledger makes every HAZOP-unbound extension event explicit and lists the runtime mode, reviewed scenario identity, equipment boundary, timestamp digest, and provenance needed before that event can enter automatic scenario selection. It never supplies those values itself."
     },
     {
+      "name": "diagnostic_hazop_operating_mode_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261014\\support_center_hazop_operating_mode_evidence_audit.json",
+        "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",
+        "status": "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD",
+        "sequence_source_count": 3,
+        "sequence_row_count": 52,
+        "operating_mode_counts": {
+          "receiving": 19,
+          "storage_vent": 3,
+          "supply_gas": 18,
+          "supply_liquid": 12
+        },
+        "timeseries_audit": {
+          "source_path": "results\\20261014\\external_support_center_timeseries_reviewed_unit_audit.json",
+          "status": "WITHHELD_UNITS_UNCONFIRMED",
+          "numeric_state_binding_allowed": false
+        },
+        "policy": {
+          "operating_mode_from_explicit_labels_only": true,
+          "mode_inference_from_numeric_values_performed": false,
+          "mode_inference_from_equipment_or_release_bin_performed": false,
+          "frequency_inference_performed": false,
+          "release_packet_generation_performed": false,
+          "normal_timeseries_promoted_to_accident_evidence": false,
+          "state_snapshot_binding_performed": false,
+          "state_snapshot_binding_allowed": false,
+          "unit_and_tag_review_required_before_numeric_binding": true,
+          "source_rows_are_qualitative_hazop_evidence_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The inspection-center sequence tables provide explicit receiving, storage/vent, and supply mode evidence for qualitative HAZOP selection. Numeric state binding remains withheld until the PT/TT/DPT tag and unit map is reviewed; this check does not create frequencies, release packets, or facility QRA."
+    },
+    {
+      "name": "diagnostic_reviewed_signal_unit_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261014\\support_center_reviewed_signal_unit_evidence.json",
+        "schema_version": "prism.reviewed_signal_unit_evidence.v1",
+        "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
+        "source_document_sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
+        "signal_count": 6,
+        "reviewed_signal_count": 6,
+        "observed_unmapped_tags": [
+          "DPT1101",
+          "DPT11012",
+          "DPT1102",
+          "PT1101",
+          "PT1101MPA",
+          "PT1105AMPA",
+          "PT1105BMPA",
+          "PT1106",
+          "PT1106MPA",
+          "PT1107",
+          "PT1107MPA",
+          "PT1111",
+          "PT1111MPA",
+          "PT1206MPA",
+          "TT1116"
+        ],
+        "complete_signal_coverage": false,
+        "promotion_gates": {
+          "unit_evidence_accepted_for_mapped_tags": true,
+          "state_snapshot_binding_allowed": false,
+          "numeric_state_binding_allowed": false,
+          "pressure_basis_resolved_for_all_pressure_tags": false,
+          "calibration_quality_evidence_supplied": false,
+          "sensor_frequency_learning_used": false,
+          "frequency_applied": false,
+          "provider_packet_created": false,
+          "facility_qra_claim": false
+        },
+        "policy": {
+          "unit_from_declared_document_anchor_only": true,
+          "unit_inference_from_numeric_range_performed": false,
+          "pressure_basis_inference_performed": false,
+          "raw_dpt_value_reinterpreted_as_level_percent": false,
+          "normal_timeseries_promoted_to_accident_evidence": false,
+          "state_snapshot_adapter_executed": false,
+          "frequency_inference_performed": false,
+          "provider_release_created": false
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "Document-anchored units are accepted only for the explicitly mapped tags. Unmapped tags, pressure basis, calibration and adapter gates remain visible; the audit does not create a state snapshot, accident frequency, release packet or QRA."
+    },
+    {
+      "name": "diagnostic_observed_hazop_runtime_mode_selection",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261110\\inspection_center_observed_hazop_runtime_audit.json",
+        "schema_version": "prism.observed_hazop_runtime_audit.v1",
+        "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+        "runtime_frame_count": 3,
+        "evaluated_frame_count": 3,
+        "selected_scenario_count": 3,
+        "operating_mode_counts": {
+          "receiving": 1,
+          "standby": 1,
+          "supply": 1
+        },
+        "policy": {
+          "operating_mode_taken_from_explicit_runtime_input": true,
+          "operating_mode_inferred": false,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_release_created": false,
+          "consequence_calculated": false,
+          "facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "Measured state frames and an explicit operating mode reached the HAZOP scenario selector. This validates the qualitative routing boundary only; provider release, literature frequency, SLABx-LH2 consequence, and facility IR/F-N remain separate gates."
+    },
+    {
+      "name": "diagnostic_observed_hazop_provider_event_binding",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261110\\inspection_center_observed_hazop_provider_event_binding.json",
+        "schema_version": "prism.observed_hazop_provider_event_binding.v1",
+        "status": "OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC",
+        "selected_scenario_count": 3,
+        "bound_scenario_count": 3,
+        "provider_worklist_event_count": 24,
+        "policy": {
+          "operating_mode_taken_from_explicit_runtime_input": true,
+          "operating_mode_inferred": false,
+          "literature_event_identity_bound": true,
+          "frequency_assignment_performed": false,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_release_created": false,
+          "consequence_calculated": false,
+          "facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The selected HAZOP scenarios have explicit provider-event, component, and accident-port identities. The literature frequency remains a ledger reference only; provider release, SLABx-LH2 consequence and facility QRA remain separate qualification gates."
+    },
+    {
+      "name": "diagnostic_observed_hazop_provider_consequence_chain",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261110\\inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json",
+        "schema_version": "prism.observed_hazop_provider_consequence_chain.v1",
+        "status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
+        "selected_scenario_count": 3,
+        "executed_scenario_count": 3,
+        "withheld_scenario_count": 0,
+        "risk_atom_count": 3,
+        "processing_time": {
+          "total_elapsed_ms": 11290.23280000547,
+          "executed_case_elapsed_ms": [
+            6024.6649000037,
+            3737.316300001112,
+            1497.5201000052039
+          ],
+          "measurement_policy": "diagnostic wall-clock timing; no 1 Hz or site real-time guarantee"
+        },
+        "policy": {
+          "operating_mode_taken_from_explicit_runtime_input": true,
+          "frequency_assignment_performed": true,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_release_created_by_prism": false,
+          "provider_packets_are_qualified": false,
+          "physical_validation_claim": false,
+          "facility_qra_claim": false,
+          "facility_scope_complete": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "This check records the observed-mode provider/SLABx-LH2 execution boundary and its explicit withheld rows. It does not convert an unqualified packet, a synthetic termination horizon, or a partial scenario set into facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_observed_hazop_storage_isolation_branch_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261110\\observed_hazop_storage_isolation_branch_evidence.json",
+        "schema_version": "prism.observed_hazop_storage_isolation_branch_evidence.v1",
+        "status": "SYNTHETIC_ISOLATION_BRANCH_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "success_branch": {
+          "branch_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%::success",
+          "probability_given_event": 0.99,
+          "termination_basis": "reviewed_isolation_success",
+          "duration_s": 0.15000000000000002,
+          "available_mass_kg": 0.01677670997923311,
+          "cumulative_mass_out_kg": 0.01677670997923311,
+          "max_post_close_flow_kg_s": 0.0,
+          "provider_result_digest": "8de51f3aa9d19db50c6a2110d85005733bfb1c50a560947620256000df89bd5c",
+          "packet_path": "results\\20261110\\observed_hazop_isolation_success_overlay\\resolved_release.json"
+        },
+        "failure_branch": {
+          "branch_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%::failure",
+          "probability_given_event": 0.01,
+          "termination_basis": "synthetic_diagnostic_horizon",
+          "status": "WITHHELD_FROM_HOLE_CONSEQUENCE_CHAIN",
+          "reason": "diagnostic horizon is not a supported vessel_hole termination basis"
+        },
+        "branch_probability_sum": 1.0,
+        "policy": {
+          "branch_probabilities_explicit": true,
+          "failure_branch_withheld": true,
+          "frequency_inference_performed": false,
+          "provider_packet_promoted": false,
+          "physical_validation_claim": false,
+          "facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The external tank model's success/failure isolation branches are kept as separate conditional routes. A zero-flow success branch may enter the diagnostic consequence chain, while the synthetic-horizon failure branch remains withheld from the vessel-hole calculation."
+    },
+    {
+      "name": "diagnostic_observed_hazop_vaporizer_isolation_branch_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261110\\observed_hazop_vaporizer_isolation_branch_evidence.json",
+        "schema_version": "prism.observed_hazop_vaporizer_isolation_branch_evidence.v1",
+        "status": "SYNTHETIC_VAPORIZER_ISOLATION_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "success_branch": {
+          "outcome": "isolation_success",
+          "stroke_time_s": 0.2,
+          "cumulative_mass_out_kg": 7.22189686570953e-06,
+          "provider_isolation_success": true,
+          "post_isolation_zero_flow": true,
+          "probability_given_event": 1.0,
+          "max_post_isolation_flow_kg_s": 0.0,
+          "duration_s": 0.5,
+          "isolation_time_s": 0.1,
+          "termination_basis": "reviewed_isolation_success",
+          "post_isolation_observation_s": 0.2
+        },
+        "branch_probability_sum": 1.0,
+        "policy": {
+          "frequency_inference_performed": false,
+          "physical_validation_claim": false,
+          "diagnostic_only": true,
+          "facility_qra_claim": false,
+          "zero_flow_observation_required": true,
+          "isolation_controls_explicit": true,
+          "provider_packet_promoted": false
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The external DynamicVaporizer branch carries an explicit isolation command and post-close zero-flow observation. It may enter the diagnostic vaporizer-hole chain, but synthetic geometry and absent qualification keep facility promotion closed."
+    },
+    {
       "name": "diagnostic_facility_evidence_request_coverage",
       "status": "PASS",
       "evidence": {

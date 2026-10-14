@@ -26,6 +26,12 @@
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
 | `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 3개 국소 경계 통과, 41개 보류; 시설 QRA 승격 0 |
 | `hazop_provider_bound_integrated_risk.json` | 현재 모니터링·예측 상태의 HAZOP→provider·SLABx-LH2→시설 handoff | current 1건·forecast 1건 정량평가와 campaign handoff 연결 PASS; synthetic/provider-bound 진단 전용 |
+| `support_center_hazop_operating_mode_evidence_audit.json` | 검사센터 운전순서에서 일반 모드·HAZOP 정성 근거 추출 | 52개 모드 행; 빈도·방출 생성 없음 |
+| `support_center_reviewed_signal_unit_evidence.json` | 문서 anchor 기반 일부 PT/TT 단위 확인 | 부분 근거; 미검토 tag·calibration은 보류 |
+| `inspection_center_observed_hazop_runtime_audit.json` | 실측 상태 + 명시적 운전 모드의 HAZOP 선택 | 3개 관측 설비 모드 선택; state-only |
+| `inspection_center_observed_hazop_provider_event_binding.json` | 관측 HAZOP scenario와 문헌 event identity 연결 | 3/3 명시적 binding; 빈도 할당은 별도 |
+| `inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json` | 관측 HAZOP→provider→SLABx-LH2 진단 chain | 3개 시나리오 실행; synthetic/provider-bound 진단 전용 |
+| `observed_hazop_storage_isolation_branch_evidence.json` / `observed_hazop_vaporizer_isolation_branch_evidence.json` | 저장탱크·기화기 차단 성공 branch와 zero-flow evidence | explicit controls·branch probability·diagnostic gate 확인 |
 | `facility_evidence_request.json` | case/family별 누락 증거 요청 | 44 case와 12 family를 추적 |
 | `native_generic_scope_packet_evidence_qualification_readiness_v14.json` | provider qualification readiness | 24/24 `BLOCKED_REVIEW` |
 
@@ -49,6 +55,13 @@ python scripts/build_ijhe_completion_audit.py `
   --facility-evidence-request results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_evidence_request.json `
   --diagnostic-worklist-evidence results/20261024/native_generic_scope_packet_evidence_qualification_readiness_v14.json `
   --hazop-integrated-risk results/20261014/hazop_provider_bound_integrated_risk.json `
+  --hazop-operating-mode-evidence results/20261014/support_center_hazop_operating_mode_evidence_audit.json `
+  --reviewed-signal-unit-evidence results/20261014/support_center_reviewed_signal_unit_evidence.json `
+  --observed-hazop-runtime-audit results/20261110/inspection_center_observed_hazop_runtime_audit.json `
+  --observed-hazop-provider-binding results/20261110/inspection_center_observed_hazop_provider_event_binding.json `
+  --observed-hazop-provider-consequence-chain results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json `
+  --observed-hazop-storage-isolation-branch-evidence results/20261110/observed_hazop_storage_isolation_branch_evidence.json `
+  --observed-hazop-vaporizer-isolation-branch-evidence results/20261110/observed_hazop_vaporizer_isolation_branch_evidence.json `
   --hazop-selection-event-binding results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/hazop_selection_event_binding.json `
   --hazop-extension-mode-evidence-request results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/hazop_extension_mode_evidence_request.json `
   --output results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json
@@ -56,7 +69,7 @@ python scripts/build_ijhe_completion_audit.py `
 
 ## 판정
 
-현재 결과는 32개 검사 중 28개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+현재 결과는 39개 검사 중 35개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
 
 통과한 진단 연결은 다음을 뜻한다.
 
@@ -65,6 +78,7 @@ python scripts/build_ijhe_completion_audit.py `
 - SLABx-LH2 확산·pool 결과가 점화·피해 risk atom으로 전달된다.
 - 문헌 빈도 불확실성과 처리시간이 별도 장부로 기록된다.
 - HAZOP 운전 모드는 명시적 입력으로만 선택된다.
+- 검사센터 실측 상태와 운전 모드가 HAZOP 선택·provider binding·격리 branch 진단에 연결된다.
 
 차단된 strict gate는 다음과 같다.
 
