@@ -82,4 +82,4 @@ python scripts/bind_frequency_port_result.py `
 
 포트 결합 후 시설 평가의 `frequency_port_binding`은 34/34 port-scoped event, 0 unbound, 0 case mismatch, 0 risk-atom mismatch, `ALIGNED`다. 이 검사는 빈도와 사고 포트의 장부 정합성만 확인하며 빈도를 새로 추정하거나 provider packet을 적격으로 승격하지 않는다.
 
-최신 결합 감사 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_completion_audit_latest4_port_bound.json`은 34개 검사 중 29개를 통과하고 5개를 차단한다. 포트 결합과 설비 모델→사고 방출 인터페이스 검사는 통과했지만, 실제 provider packet·모든 방출 종료경계·독립 검증이 없으므로 시설 전체 QRA는 계속 보류한다.
+최신 결합 감사 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_completion_audit_latest5_restricted_component.json`은 34개 검사 중 30개를 통과하고 4개를 차단한다. 포트 결합, 설비 모델→사고 방출 인터페이스, SLABx-LH2 제한 구성요소 물리근거 검사는 통과했다. 제한 근거는 pool·실외 확산 구성요소에만 적용되며, 실제 provider packet·모든 방출 종료경계·완전한 사고범위·시설 전체 IR/F-N을 대신하지 않는다.
