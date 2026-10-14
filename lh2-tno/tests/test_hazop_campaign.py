@@ -127,7 +127,11 @@ def _runtime_result(*, branch_count=1):
             "TK-01": {
                 "status": "CONSEQUENCE_BRANCHES_EVALUATED",
                 "component_id": "TK-01",
-                "selection": {"status": "SCENARIOS_SELECTED", "state_digest": "d" * 64},
+                "selection": {
+                    "status": "SCENARIOS_SELECTED",
+                    "state_digest": "d" * 64,
+                    "operating_mode": "receiving",
+                },
                 "branches": branches,
             }
         },
@@ -142,6 +146,7 @@ def _runtime_result(*, branch_count=1):
 def _binding():
     return {
         "component_id": "TK-01",
+        "operating_mode": "receiving",
         "hazop_scenario_id": "TK01-high-pressure-receiving",
         "event_id": "evt-tk01-hole",
         "asset_id": "TK-01",
@@ -180,6 +185,9 @@ def test_hazop_runtime_can_enter_existing_facility_campaign_contract():
     assert len(result["campaign"]["risk_atoms"]) == 4
     assert result["campaign"]["complete_facility_qra_claim"] is False
     assert result["campaign"]["provider_packet_promoted"] is False
+    assert result["snapshot"]["components"]["TK-01"]["selected_operating_mode"] == "receiving"
+    assert result["campaign"]["cases"][0]["operating_mode"] == "receiving"
+    assert all(atom["operating_mode"] == "receiving" for atom in result["campaign"]["risk_atoms"])
     assert result["facility_ledger"]["conditional_diagnostic_facility_risk_available"] is True
     assert result["facility_ledger"]["facility_total_risk_available"] is False
     assert result["facility_ledger"]["qualified_facility_qra_available"] is False
@@ -189,6 +197,18 @@ def test_hazop_bridge_rejects_unmatched_mode_specific_scenario_id():
     binding = _binding()
     binding["hazop_scenario_id"] = "wrong-mode-scenario"
     with pytest.raises(HazopFacilityCampaignError, match="does not match selected branch"):
+        build_hazop_facility_campaign_result(
+            _runtime_result(),
+            annual_conditions=_annual_conditions(),
+            scenario_bindings=[binding],
+            expected_component_ids=("TK-01",),
+        )
+
+
+def test_hazop_bridge_rejects_operating_mode_drift():
+    binding = _binding()
+    binding["operating_mode"] = "supply"
+    with pytest.raises(HazopFacilityCampaignError, match="operating_mode does not match"):
         build_hazop_facility_campaign_result(
             _runtime_result(),
             annual_conditions=_annual_conditions(),

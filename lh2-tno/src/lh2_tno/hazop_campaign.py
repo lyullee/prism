@@ -190,6 +190,7 @@ def _snapshot_from_hazop_runtime(
             "selection": copy.deepcopy(dict(selection)),
             "selected_hazop_scenario_id": branch.get("scenario_id"),
             "selected_hazop_scenario_family": branch.get("scenario_family"),
+            "selected_operating_mode": selection.get("operating_mode"),
             "equipment_release_path": copy.deepcopy(dict(release_path)),
             "ignition": _validate_ignition(consequence, component_id),
             "risk": copy.deepcopy(dict(risk)),
@@ -271,6 +272,17 @@ def build_hazop_facility_campaign_result(
                 f"scenario binding HAZOP id does not match selected branch for {component_id}: "
                 f"{scenario_id!r} != {selected_id!r}"
             )
+        selected_mode = components[component_id].get("selected_operating_mode")
+        if selected_mode is not None:
+            binding_mode = _name(
+                raw.get("operating_mode"),
+                f"scenario_bindings[{index}].operating_mode",
+            )
+            if binding_mode != selected_mode:
+                raise HazopFacilityCampaignError(
+                    f"scenario binding operating_mode does not match selected HAZOP mode for "
+                    f"{component_id}: {binding_mode!r} != {selected_mode!r}"
+                )
         selected_risk = components[component_id].get("risk")
         selected_atom = selected_risk.get("risk_atom") if isinstance(selected_risk, Mapping) else None
         event_id = _name(raw.get("event_id"), f"scenario_bindings[{index}].event_id")

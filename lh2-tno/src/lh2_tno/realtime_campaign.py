@@ -577,6 +577,12 @@ def build_realtime_facility_campaign_result(
                 _name(value, f"scenario binding {component_id}[{binding_index}].scenario_families[]")
                 for value in families_raw
             ]
+            operating_mode = binding.get("operating_mode")
+            if operating_mode is not None:
+                operating_mode = _name(
+                    operating_mode,
+                    f"scenario binding {component_id}[{binding_index}].operating_mode",
+                )
 
             event = events_by_id.get(event_id)
             if event is None:
@@ -602,6 +608,7 @@ def build_realtime_facility_campaign_result(
                     "release": {"mode": "provider_resolved"},
                     "classification_basis": "explicit realtime scenario binding",
                     "scenario_families": [],
+                    "operating_mode": operating_mode,
                     "realtime_snapshot_digest": handoff["source_snapshot_digest"],
                     "physical_validation_claim": False,
                 }
@@ -621,6 +628,7 @@ def build_realtime_facility_campaign_result(
                 != (atom.get("frequency_p95_per_year") if atom is not None else None)
                 or event.get("source_sha256")
                 != (atom.get("frequency_source_digest") if atom is not None else None)
+                or event.get("operating_mode") != operating_mode
             ):
                 raise RealtimeCampaignBindingError(
                     f"realtime event metadata conflicts across annual scenario bindings: {event_id}"
@@ -645,6 +653,7 @@ def build_realtime_facility_campaign_result(
                     else "accepted realtime snapshot consequence"
                 ),
                 "scenario_families": families,
+                "operating_mode": operating_mode,
                 "realtime_snapshot_digest": handoff["source_snapshot_digest"],
             }
             path_available = (
@@ -734,6 +743,7 @@ def build_realtime_facility_campaign_result(
                         "initiating_frequency_per_year": frequency,
                         "conditional_weight": weight,
                         "scenario_families": families,
+                        "operating_mode": operating_mode,
                         "provider_packet_identity": copy.deepcopy(provider_identity),
                         "receptor_harm_low_high": harm,
                         "expected_deaths_basis": "population_weighted",

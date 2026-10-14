@@ -716,6 +716,10 @@ def run_hazop_facility_runtime(
             branch_rows: list[dict[str, Any]] = []
             for branch in branch_result["branches"]:
                 branch_copy = dict(branch)
+                # Preserve the live frame's mode alongside the selected branch
+                # so the downstream facility handoff cannot lose the HAZOP
+                # context.
+                branch_copy["operating_mode"] = selection.get("operating_mode")
                 branch_result_row = branch_copy.get("result")
                 consequence = (
                     branch_result_row.get("consequence")

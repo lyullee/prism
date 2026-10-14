@@ -156,7 +156,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "985 passed",
+  "latest_local_full_test_run": "992 passed",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -2941,8 +2941,8 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 990,
-  "full_portable_test_status_latest": "990 passed",
+  "full_portable_test_count_latest": 992,
+  "full_portable_test_status_latest": "992 passed",
   "full_portable_test_record_latest": "pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -3914,7 +3914,7 @@
     "example_state": "examples/generic_hazop_state_frame.json",
     "example_record": "results/hazop_current/selection.json",
     "example_status": "SCENARIOS_SELECTED; receiving mode and high-pressure deviation selected vessel_hole",
-    "targeted_test_count": 32,
+    "targeted_test_count": 34,
     "runtime_gate": {
       "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
       "schema_version": "prism.hazop_runtime_consequence_gate.v1",
@@ -3965,6 +3965,20 @@
       "forecast_completion_audit_timing_required": true
     },
     "operating_mode_taken_from_input": true,
+    "hazop_operating_mode_campaign_trace_implemented": true,
+    "hazop_operating_mode_campaign_trace_modules": [
+      "src/lh2_tno/hazop.py",
+      "src/lh2_tno/hazop_campaign.py",
+      "src/lh2_tno/realtime_campaign.py",
+      "src/lh2_tno/facility_evidence_request.py"
+    ],
+    "hazop_operating_mode_campaign_trace_policy": "live frame mode must match the HAZOP campaign binding and is preserved on campaign event/case/risk atom and provider evidence requests; no frequency inference or QRA promotion",
+    "hazop_operating_mode_campaign_trace_status": "IMPLEMENTED_DIAGNOSTIC_ONLY; qualified provider, independent physical validation and facility QRA remain withheld",
+    "hazop_operating_mode_campaign_trace_tests": [
+      "test_hazop_facility_campaign_preserves_selected_operating_mode",
+      "test_hazop_bridge_rejects_operating_mode_drift",
+      "test_case_request_preserves_operating_mode_and_flags_duplicate_mode_conflict"
+    ],
     "selected_scenario_count": 1,
     "release_packet_created": false,
     "frequency_inference_performed": false,
@@ -3978,7 +3992,7 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 990,
+    "tests": 992,
     "failures": 0,
     "skipped": 0,
     "scope": "current lh2-tno package after external legacy event catalogue campaign integration"

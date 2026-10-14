@@ -257,6 +257,19 @@ def _build_case_requests(
             for field in ("asset_id", "component_id"):
                 if not current.get(field) and raw.get(field):
                     current[field] = raw[field]
+            current_mode = current.get("operating_mode")
+            candidate_mode = raw.get("operating_mode")
+            if candidate_mode not in (None, ""):
+                if current_mode in (None, ""):
+                    current["operating_mode"] = candidate_mode
+                elif current_mode != candidate_mode:
+                    # A mode is part of the live HAZOP scenario identity.
+                    # Do not silently choose one when duplicate ledger rows
+                    # disagree; keep the first value for traceability and
+                    # leave an explicit qualification blocker.
+                    current["_reasons"].append(
+                        "duplicate ledger rows carry conflicting operating modes"
+                    )
             current_frequency_ports = _port_ids(current.get("frequency_port_ids"))
             candidate_frequency_ports = _port_ids(raw.get("frequency_port_ids"))
             if candidate_frequency_ports is not None:
@@ -345,6 +358,7 @@ def _build_case_requests(
             "event_id": row.get("event_id"),
             "asset_id": row.get("asset_id"),
             "component_id": identity.get("component_id", row.get("component_id")),
+            "operating_mode": row.get("operating_mode"),
             "release_branch_id": row.get("release_branch_id"),
             "annual_condition_id": row.get("annual_condition_id"),
             "scenario_families": families,
@@ -369,6 +383,7 @@ def _build_case_requests(
             "exact_match_required": {
                 "event_id": row.get("event_id"),
                 "component_id": identity.get("component_id", row.get("component_id")),
+                "operating_mode": row.get("operating_mode"),
                 "port_ids": requested_port_ids or [],
                 "reviewed_frequency_port_ids": reviewed_frequency_port_ids,
                 "provider_source_digests": list(source_digests) if isinstance(source_digests, Sequence) and not isinstance(source_digests, (str, bytes)) else [],

@@ -288,6 +288,45 @@ def test_case_request_merge_keeps_identity_present_only_on_duplicate_row():
     assert request["scenario_families"] == ["pipe_hole", "vertical_handoff"]
 
 
+def test_case_request_preserves_operating_mode_and_flags_duplicate_mode_conflict():
+    assessment = _assessment()
+    ledger = assessment["facility_risk_ledger"]
+    ledger.update({
+        "case_count": 1,
+        "qualified_provider_packet_case_count": 0,
+        "cases": [{
+            "event_id": "event-mode-duplicate",
+            "asset_id": "asset-mode-duplicate",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "operating_mode": "receiving",
+            "scenario_families": ["pipe_hole"],
+            "status": "EXECUTED",
+        }],
+        "uncomputed_cases": [{
+            "event_id": "event-mode-duplicate",
+            "asset_id": "asset-mode-duplicate",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "D-3ms-west",
+            "operating_mode": "supply",
+            "scenario_families": ["pipe_hole"],
+            "status": "EXECUTED_OPERATOR_LIMITED",
+        }],
+    })
+    report = build_facility_evidence_request(
+        assessment,
+        {"facility_id": "facility", "rows": [{
+            "family": "pipe_hole",
+            "status": "PARTIAL",
+            "strict_uncomputed_case_count": 1,
+        }]},
+    )
+    request = report["case_requests"][0]
+    assert request["operating_mode"] == "receiving"
+    assert request["exact_match_required"]["operating_mode"] == "receiving"
+    assert any("conflicting operating modes" in reason for reason in request["blocking_reasons"])
+
+
 def test_case_request_marks_missing_numerical_case_separately():
     assessment = _assessment()
     ledger = assessment["facility_risk_ledger"]

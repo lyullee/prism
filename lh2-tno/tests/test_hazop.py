@@ -500,6 +500,7 @@ def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_ro
         }],
         scenario_bindings=[{
             "component_id": "TK-01",
+            "operating_mode": "receiving",
             "hazop_scenario_id": scenario_id,
             "event_id": frequency.event_id,
             "asset_id": frequency.asset_id,
