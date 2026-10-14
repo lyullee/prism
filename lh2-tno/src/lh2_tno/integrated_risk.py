@@ -392,6 +392,8 @@ def run_hazop_integrated_risk(
     forecast_facility_campaign_status = str(forecast_facility_campaign.get("status", ""))
     forecast_facility_campaign_ok = forecast_facility_campaign_status in {
         "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
+        "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
         "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
     }
     current_modes = _current_modes(current)

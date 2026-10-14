@@ -3222,6 +3222,14 @@ def build_ijhe_completion_audit(
             facility_campaign_status = "INVALID"
             facility_campaign_policy = {}
             facility_campaign_valid = False
+        integrated_timing = integrated.get("timing")
+        integrated_timing_valid = (
+            isinstance(integrated_timing, Mapping)
+            and _finite(integrated_timing.get("wall_elapsed_ms"))
+            and float(integrated_timing.get("wall_elapsed_ms")) >= 0.0
+            and isinstance(integrated_timing.get("interpretation"), str)
+            and "1 Hz" in integrated_timing.get("interpretation", "")
+        )
         forecast_facility_campaign = integrated.get("forecast_facility_campaign")
         if forecast_facility_campaign is None:
             forecast_facility_campaign_valid = True
@@ -3264,6 +3272,7 @@ def build_ijhe_completion_audit(
             and forecast_valid
             and facility_campaign_valid
             and forecast_facility_campaign_valid
+            and integrated_timing_valid
             and linkage.get("mode_and_scenario_identity_preserved") is True
             and scoped_keys_valid
             and policy.get("operating_mode_taken_from_input") is True
@@ -3284,6 +3293,8 @@ def build_ijhe_completion_audit(
                 "forecast_status": forecast.get("status"),
                 "facility_campaign_status": facility_campaign_status,
                 "forecast_facility_campaign_status": forecast_facility_campaign_status,
+                "timing": dict(integrated_timing) if isinstance(integrated_timing, Mapping) else None,
+                "integrated_timing_valid": integrated_timing_valid,
                 "current_component_count": len(current_component_ids)
                 if isinstance(current_component_ids, list)
                 else None,

@@ -144,6 +144,10 @@ def _integrated_hazop_ledger():
             "shared_component_scenario_keys": [],
             "mode_and_scenario_identity_preserved": True,
         },
+        "timing": {
+            "wall_elapsed_ms": 1.25,
+            "interpretation": "Measured for this invocation; not an operating 1 Hz guarantee.",
+        },
         "policy": {
             "operating_mode_taken_from_input": True,
             "frequency_inference_performed": False,
@@ -168,6 +172,22 @@ def test_completion_audit_records_integrated_current_forecast_hazop_ledger():
     )
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_integrated_hazop_without_timing():
+    ledger = _integrated_hazop_ledger()
+    ledger.pop("timing")
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=ledger,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "BLOCKED"
 
 
 def test_completion_audit_blocks_integrated_hazop_qra_promotion_claim():
