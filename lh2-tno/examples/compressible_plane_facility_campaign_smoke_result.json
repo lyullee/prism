@@ -23,12 +23,27 @@
     "physical_validation_claim": false
   },
   "known_contribution_annual_ir_low_high": {
-    "worker-01": [0.0, 0.0]
+    "worker-01": [
+      0.0,
+      0.0
+    ]
   },
   "total_facility_annual_ir_low_high": null,
   "total_facility_expected_death_fn_low_high": null,
   "campaign_elapsed_ms": 206357.38539999875,
   "provider_packet_promoted": false,
   "facility_qra_claim": false,
-  "interpretation": "The explicit G1 compressible handoff was consumed by a 24-event facility campaign. The campaign frequencies remain external inputs and the complete facility totals stay withheld by the open qualification and scope gates."
+  "interpretation": "The explicit G1 compressible handoff was consumed by a 24-event facility campaign. The campaign frequencies remain external inputs and the complete facility totals stay withheld by the open qualification and scope gates.",
+  "completion_audit_recheck": {
+    "status": "INCOMPLETE_EVIDENCE",
+    "diagnostic_native_packet_campaign_execution": "PASS",
+    "diagnostic_native_packet_compressible_handoff_rebind": "PASS",
+    "blocking_reasons": [
+      "provider qualification remains open",
+      "declared facility scope remains incomplete or synthetic",
+      "independent physical validation remains open",
+      "complete facility and auditable conditional frequency uncertainty evidence remain open"
+    ],
+    "interpretation": "The recheck confirms the campaign and handoff ledger are auditable; it does not close the IJHE strict gates."
+  }
 }
