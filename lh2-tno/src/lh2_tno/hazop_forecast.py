@@ -22,10 +22,12 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping, Sequence
 import copy
 import math
+import time
 from typing import Any
 
 from .contracts import canonical_digest
 from .hazop import evaluate_hazop, run_hazop_runtime_consequence
+from .state_snapshot import EquipmentStateSnapshot
 
 
 SCHEMA = "prism.hazop_forecast_risk_scan.v1"
@@ -184,14 +186,24 @@ def _runtime_frame_from_forecast(frame: Mapping[str, Any]) -> dict[str, Any]:
         }
     snapshot = frame.get("state_snapshot")
     if not isinstance(snapshot, Mapping):
-        snapshot = {
-            "component_id": component_id,
-            "forecast_time_s": float(frame["forecast_time_s"]),
-            "origin": _ORIGIN,
-            "operating_mode": frame.get("operating_mode"),
-            "values": copy.deepcopy(normalized_values),
+        snapshot_measurements = {
+            tag: {
+                "quantity": raw["quantity"],
+                "value_si": raw["value_si"],
+                "sensor_location": raw.get("sensor_location"),
+                "quality": raw["quality"],
+            }
+            for tag, raw in normalized_values.items()
         }
-    snapshot = copy.deepcopy(dict(snapshot))
+        snapshot = {
+            "schema_version": "prism.equipment_state_snapshot.v1",
+            "component_id": component_id,
+            "captured_at_s": float(frame.get("captured_at_s", frame["forecast_time_s"])),
+            "origin": _ORIGIN,
+            "measurements": snapshot_measurements,
+        }
+    snapshot_model = EquipmentStateSnapshot.from_mapping(copy.deepcopy(dict(snapshot)))
+    snapshot = snapshot_model.to_mapping()
     body = {
         key: copy.deepcopy(value)
         for key, value in frame.items()
@@ -202,7 +214,7 @@ def _runtime_frame_from_forecast(frame: Mapping[str, Any]) -> dict[str, Any]:
     body["source_id"] = str(frame.get("source_id") or f"forecast://{component_id}/{frame['forecast_time_s']}")
     body["values"] = normalized_values
     body["state_snapshot"] = snapshot
-    body["state_snapshot_digest"] = canonical_digest(snapshot)
+    body["state_snapshot_digest"] = snapshot_model.digest()
     body["frame_digest"] = canonical_digest(body)
     return body
 
@@ -313,6 +325,8 @@ def run_hazop_forecast_risk_scan(
     evaluated_count = 0
     withheld_count = 0
     scenario_entries: list[dict[str, Any]] = []
+    scan_started = time.perf_counter()
+    quantitative_elapsed_ms = 0.0
 
     for step_index, (forecast_time_s, rows) in enumerate(grouped):
         step_rows: list[dict[str, Any]] = []
@@ -372,9 +386,11 @@ def run_hazop_forecast_risk_scan(
                             "reason": "an explicit provider/SLABx-LH2/facility evaluator is required",
                             "facility_qra_claim": False,
                             "frequency_inference_performed": False,
+                            "elapsed_ms": 0.0,
                         }
                         withheld_count += 1
                     else:
+                        evaluator_started = time.perf_counter()
                         try:
                             raw_result = quantitative_evaluator(
                                 component_id,
@@ -394,7 +410,9 @@ def run_hazop_forecast_risk_scan(
                                 "reason": reason,
                                 "facility_qra_claim": False,
                                 "frequency_inference_performed": False,
+                                "elapsed_ms": (time.perf_counter() - evaluator_started) * 1000.0,
                             }
+                            quantitative_elapsed_ms += evaluation["elapsed_ms"]
                             if status == "EVALUATED_OPERATOR_LIMITED":
                                 evaluated_count += 1
                             else:
@@ -406,7 +424,9 @@ def run_hazop_forecast_risk_scan(
                                 "error_type": type(error).__name__,
                                 "facility_qra_claim": False,
                                 "frequency_inference_performed": False,
+                                "elapsed_ms": (time.perf_counter() - evaluator_started) * 1000.0,
                             }
+                            quantitative_elapsed_ms += evaluation["elapsed_ms"]
                             withheld_count += 1
                     trigger["evaluation"] = evaluation
                     scenario_entries.append(trigger)
@@ -467,6 +487,15 @@ def run_hazop_forecast_risk_scan(
         "trigger_count": trigger_count,
         "evaluated_count": evaluated_count,
         "withheld_count": withheld_count,
+        "timing": {
+            "wall_elapsed_ms": (time.perf_counter() - scan_started) * 1000.0,
+            "quantitative_evaluation_elapsed_ms": quantitative_elapsed_ms,
+            "trigger_count": trigger_count,
+            "evaluated_count": evaluated_count,
+            "withheld_count": withheld_count,
+            "fresh_physics_claim": False,
+            "interpretation": "Measured for this scan invocation; not an operating 1 Hz guarantee.",
+        },
         "policy": {
             "operating_mode_taken_from_forecast_input": True,
             "frequency_inference_performed": False,

@@ -96,6 +96,9 @@ def test_forecast_scan_triggers_quantitative_evaluation_on_first_risk_entry():
     assert calls == [("TK-01", "TK01-pressure-receiving:receiving:vessel_hole", 10.0, "RISK_CONDITION_REACHED")]
     assert any(row["trigger_type"] == "RISK_CONDITION_CLEARED" for row in result["scenario_entries"])
     assert result["policy"]["frequency_inference_performed"] is False
+    assert result["timing"]["wall_elapsed_ms"] >= 0.0
+    assert result["timing"]["quantitative_evaluation_elapsed_ms"] >= 0.0
+    assert result["timing"]["fresh_physics_claim"] is False
 
 
 def test_forecast_scan_withholds_trigger_when_evaluator_is_missing():
@@ -179,3 +182,50 @@ def test_forecast_runtime_evaluator_reuses_existing_provider_gate():
     evaluation = result["steps"][0]["components"][0]["scenarios"][0]["quantitative_evaluation"]
     assert evaluation["status"] == "EVALUATED_OPERATOR_LIMITED"
     assert evaluation["result"]["status"] == "CONSEQUENCE_EVALUATED"
+
+
+def test_forecast_runtime_evaluator_reaches_real_slabx_monitor(tmp_path):
+    from lh2_tno.provider_release import build_consequence_request_from_provider_release
+    from lh2_tno.service import ConsequenceService, RealtimeConsequenceMonitor
+    from test_consequence_service import Pipeline, request
+    from test_provider_release import _defaults, _liquid_release
+
+    release = _liquid_release().model_copy(update={"component_id": "TK-01"})
+    defaults = _defaults()
+    defaults.update(
+        {
+            "component_id": "TK-01",
+            "source_operator": "equipment_liquid_release",
+            "release_termination": {
+                "basis": "model_pressure_equalization",
+                "time_s": 0.2,
+                "provenance": "forecast runtime integration test",
+            },
+            "source_duration_mode": "model_natural",
+        }
+    )
+    provider_request = build_consequence_request_from_provider_release(release, defaults)
+    evaluator = build_hazop_forecast_runtime_evaluator(
+        tables_by_component={"TK-01": _table()},
+        component_bindings={
+            "TK-01": {
+                "template": request().model_copy(update={"component_id": "TK-01"}),
+                "monitor": RealtimeConsequenceMonitor(ConsequenceService(Pipeline(tmp_path))),
+            }
+        },
+        release_resolvers={
+            "TK01-pressure-receiving:receiving:vessel_hole": lambda template, normalized: provider_request
+        },
+    )
+    result = run_hazop_forecast_risk_scan(
+        facility_id="forecast-facility",
+        tables_by_component={"TK-01": _table()},
+        forecast_frames=[_frame(10.0, 650000.0)],
+        expected_component_ids=("TK-01",),
+        quantitative_evaluator=evaluator,
+    )
+    evaluation = result["steps"][0]["components"][0]["scenarios"][0]["quantitative_evaluation"]
+    assert evaluation["status"] == "EVALUATED_OPERATOR_LIMITED"
+    assert evaluation["result"]["status"] == "CONSEQUENCE_EVALUATED"
+    assert evaluation["result"]["consequence"]["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
+    assert result["timing"]["quantitative_evaluation_elapsed_ms"] >= 0.0

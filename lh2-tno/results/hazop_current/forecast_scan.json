@@ -158,7 +158,8 @@
                 "status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
                 "reason": "an explicit provider/SLABx-LH2/facility evaluator is required",
                 "facility_qra_claim": false,
-                "frequency_inference_performed": false
+                "frequency_inference_performed": false,
+                "elapsed_ms": 0.0
               }
             }
           ]
@@ -338,7 +339,8 @@
         "status": "WITHHELD_NO_QUANTITATIVE_EVALUATOR",
         "reason": "an explicit provider/SLABx-LH2/facility evaluator is required",
         "facility_qra_claim": false,
-        "frequency_inference_performed": false
+        "frequency_inference_performed": false,
+        "elapsed_ms": 0.0
       }
     },
     {
@@ -352,6 +354,15 @@
   "trigger_count": 1,
   "evaluated_count": 0,
   "withheld_count": 1,
+  "timing": {
+    "wall_elapsed_ms": 0.6592999998247251,
+    "quantitative_evaluation_elapsed_ms": 0.0,
+    "trigger_count": 1,
+    "evaluated_count": 0,
+    "withheld_count": 1,
+    "fresh_physics_claim": false,
+    "interpretation": "Measured for this scan invocation; not an operating 1 Hz guarantee."
+  },
   "policy": {
     "operating_mode_taken_from_forecast_input": true,
     "frequency_inference_performed": false,

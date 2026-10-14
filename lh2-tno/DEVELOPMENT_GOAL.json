@@ -24,7 +24,10 @@
       "facility_runtime_function": "lh2_tno.hazop.run_hazop_facility_runtime",
       "facility_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_result",
       "facility_campaign_handoff_schema": "prism.hazop_facility_campaign_handoff.v1",
-      "facility_campaign_handoff_outputs": ["campaign", "facility_ledger"],
+      "facility_campaign_handoff_outputs": [
+        "campaign",
+        "facility_ledger"
+      ],
       "facility_campaign_handoff_requires_single_branch": true,
       "facility_branch_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_branches",
       "facility_branch_campaign_handoff_schema": "prism.hazop_facility_campaign_branches.v1",
@@ -40,7 +43,12 @@
       "forecast_completion_audit_check": "diagnostic_hazop_forecast_risk_scan",
       "forecast_completion_audit_cli_option": "--hazop-forecast-scan",
       "facility_annual_qra_promotion": false,
-      "consequence_called_without_provider": false
+      "consequence_called_without_provider": false,
+      "forecast_processing_time_recorded": true,
+      "forecast_timing_fields": [
+        "wall_elapsed_ms",
+        "quantitative_evaluation_elapsed_ms"
+      ]
     },
     "frequency_inference": false,
     "release_packet_creation": false,

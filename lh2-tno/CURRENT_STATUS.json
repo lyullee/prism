@@ -3900,7 +3900,10 @@
       "facility_runtime_function": "lh2_tno.hazop.run_hazop_facility_runtime",
       "facility_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_result",
       "facility_campaign_handoff_schema": "prism.hazop_facility_campaign_handoff.v1",
-      "facility_campaign_handoff_outputs": ["campaign", "facility_ledger"],
+      "facility_campaign_handoff_outputs": [
+        "campaign",
+        "facility_ledger"
+      ],
       "facility_campaign_handoff_requires_single_branch": true,
       "facility_branch_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_branches",
       "facility_branch_campaign_handoff_schema": "prism.hazop_facility_campaign_branches.v1",
@@ -3917,7 +3920,12 @@
       "forecast_completion_audit_cli_option": "--hazop-forecast-scan",
       "facility_annual_qra_promotion": false,
       "consequence_called_without_provider": false,
-      "targeted_status": "PASS"
+      "targeted_status": "PASS",
+      "forecast_processing_time_recorded": true,
+      "forecast_timing_fields": [
+        "wall_elapsed_ms",
+        "quantitative_evaluation_elapsed_ms"
+      ]
     },
     "operating_mode_taken_from_input": true,
     "selected_scenario_count": 1,
@@ -3933,10 +3941,10 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 975,
+    "tests": 976,
     "failures": 0,
     "skipped": 0,
-    "scope": "current lh2-tno package after HAZOP/mode, facility campaign, forecast trigger/adapter and completion-audit changes"
+    "scope": "current lh2-tno package after HAZOP/mode, facility campaign, forecast trigger/adapter, timing and completion-audit changes"
   },
   "runtime_async_development": {
     "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED_GOAL_REMAINS_ACTIVE",
