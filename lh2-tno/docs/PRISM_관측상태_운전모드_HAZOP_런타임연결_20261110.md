@@ -125,7 +125,7 @@ python scripts/run_observed_hazop_provider_consequence_chain.py `
   --output results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json
 ```
 
-완료 감사에는 `--observed-hazop-provider-consequence-chain`, `--observed-hazop-storage-isolation-branch-evidence`, `--observed-hazop-vaporizer-isolation-branch-evidence`를 추가한다. 최신 결과 `results/20261110/ijhe_completion_audit_with_observed_hazop_runtime_frequency_provider_binding_storage_vaporizer_isolation_branch_checks.json`은 31개 검사 중 이 세 진단 경계를 PASS로 기록하고, 6개 strict blocker는 그대로 유지한다. 이 검사는 실행·차단 근거가 보존되었는지만 확인하며, 진단 실행을 시설 위험평가 완료로 해석하지 않는다.
+완료 감사에는 `--observed-hazop-provider-consequence-chain`, `--observed-hazop-storage-isolation-branch-evidence`, `--observed-hazop-vaporizer-isolation-branch-evidence`, `--native-scope-packet-catalog-verification`을 추가한다. 최신 결과 `results/20261110/ijhe_completion_audit_with_observed_hazop_runtime_frequency_provider_binding_storage_vaporizer_isolation_catalog_checks.json`은 32개 검사 중 27개 PASS·5개 BLOCKED로 기록한다. 24개 native catalog event의 exact packet·상태 snapshot 결합은 구조 진단으로 PASS지만, qualified provider·독립 물리검증·실제 시설 방출경계·시설 전체 IR/F-N·시설 case 자격은 계속 차단된다. 이 검사는 실행·차단 근거가 보존되었는지만 확인하며, 진단 실행을 시설 위험평가 완료로 해석하지 않는다.
 
 저장탱크 성공 branch 근거와 질량·차단 요약은 `results/20261110/observed_hazop_storage_isolation_branch_evidence.json`에서 확인한다. 기화기 격리 packet은 `results/20261110/observed_hazop_vaporizer_isolation_overlay/verification.json`과 `resolved_release.json`에 보존했다. 기화기 branch도 synthetic geometry와 초기 상태를 사용하므로 진단용이며, 현장 차단 신뢰도나 시설 전체 QRA를 의미하지 않는다. 실패·미확인 branch는 `synthetic_diagnostic_horizon`으로 남을 때 계속 보류된다.
 
