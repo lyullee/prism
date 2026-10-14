@@ -808,6 +808,8 @@ python scripts/audit_provider_packet_inputs.py `
 
 현재 provider와 legacy 폴더를 함께 확인할 때는 `scripts/audit_provider_artifact_roots.py`를 사용합니다. 두 결과를 합쳐 시설 위험으로 승격하지 않고, 현재 적격 packet 수와 legacy schema 누락 수를 분리해 보여 줍니다.
 
+2026-10-14 재감사에서는 외부 디지털트윈 루트에서 `prism.resolved_release.v1` 계약을 만족하는 native 방출 파일 7개를 확인했습니다. 그러나 provider 루트 상태가 `PARTIAL_PROVIDER_EVIDENCE`, `screening_only`, `center_binding_ready=false`, `forward_comparison_allowed=false`이므로 실제 qualified provider packet 수는 0건입니다. 검색 결과의 `contract_valid_diagnostic_packet_count=7`과 `current_qualified_packet_count=0`을 분리해 기록하며, 이 distinction을 [계약 packet 재감사](examples/provider_artifact_contract_reaudit_20261014.json)로 고정했습니다. 계약 형식이 맞는 것만으로 시설 IR/F-N을 열지 않습니다.
+
 전체 액화수소 디지털트윈 모델 루트의 관측 release, raw historian, parameter,
 topology linkage, provider 응답을 한 번에 검토할 때는 다음 명령을 사용합니다.
 이 명령은 모델 산출물을 읽기만 하며, exact digest·qualification sidecar·독립

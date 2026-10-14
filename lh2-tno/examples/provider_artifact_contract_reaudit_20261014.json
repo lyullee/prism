@@ -1,0 +1,104 @@
+{
+  "schema": "prism.provider_artifact_contract_reaudit.v1",
+  "snapshot_date": "2026-10-14",
+  "purpose": "Separate contract-valid native release exports from qualified provider evidence before facility-QRA promotion.",
+  "current_provider": {
+    "status": "PARTIAL_PROVIDER_EVIDENCE",
+    "source_digest": "bbed067152af55d5525892ea08ea1ffa0e875b1c3b06d5df64cdd6036610b1c7",
+    "provider_validation": {
+      "file": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\검증결과.md",
+      "test_count": 822,
+      "all_passed": true
+    },
+    "readiness": {
+      "center_binding_ready": false,
+      "forward_comparison_allowed": false,
+      "screening_status": "screening_only",
+      "plant_data_optimization": false,
+      "accident_release_export": "QUALIFIED_ACCIDENT_RELEASE_EXPORT"
+    },
+    "contract_valid_diagnostic_packet_count": 7,
+    "qualified_provider_packet_count": 0,
+    "candidate_files": [
+      {
+        "file": "tmp_native_contract\\layered\\resolved_release.json",
+        "event_id": "native-layered-tank/accidental-leak-001",
+        "component_id": "native-layered-tank-diagnostic",
+        "port_id": "native-layered-tank-liquid-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      },
+      {
+        "file": "tmp_native_contract\\pipe\\resolved_release.json",
+        "event_id": "native-dynamic-pipe/accidental-leak-001",
+        "component_id": "native-dynamic-pipe-diagnostic",
+        "port_id": "native-dynamic-pipe-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      },
+      {
+        "file": "tmp_native_contract\\pump\\resolved_release.json",
+        "event_id": "native-mapped-pump/accidental-leak-001",
+        "component_id": "native-mapped-pump-diagnostic",
+        "port_id": "native-mapped-pump-liquid-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      },
+      {
+        "file": "tmp_native_contract\\reliquefier\\resolved_release.json",
+        "event_id": "native-reliquefier/accidental-leak-001",
+        "component_id": "native-reliquefier-diagnostic",
+        "port_id": "native-reliquefier-gas-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      },
+      {
+        "file": "tmp_native_contract\\valve\\resolved_release.json",
+        "event_id": "native-stroke-valve/accidental-leak-001",
+        "component_id": "native-stroke-valve-diagnostic",
+        "port_id": "native-stroke-valve-gas-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      },
+      {
+        "file": "tmp_native_contract\\vaporizer\\resolved_release.json",
+        "event_id": "native-vaporizer/accidental-leak-001",
+        "component_id": "native-vaporizer-diagnostic",
+        "port_id": "native-vaporizer-gas-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      },
+      {
+        "file": "tmp_native_contract\\vent\\resolved_release.json",
+        "event_id": "native-vent-stack/accidental-leak-001",
+        "component_id": "native-vent-stack-diagnostic",
+        "port_id": "native-vent-stack-gas-out",
+        "event_kind": "accidental_leak",
+        "schema": "prism.resolved_release.v1"
+      }
+    ],
+    "strict_validation_failures": [],
+    "blocking_reasons": [
+      "provider does not declare center asset binding ready",
+      "provider does not allow forward comparison",
+      "parameter values remain unconfirmed or missing",
+      "parameter review status remains unconfirmed",
+      "no reviewed confirmed operation command tag map",
+      "no procedure-to-P&ID/PLC command map",
+      "physical command times are missing from operation sequences",
+      "normal or screening flow JSON was found without an accident-release contract"
+    ]
+  },
+  "legacy_outputs": {
+    "contract_valid_packet_count": 0,
+    "legacy_missing_schema_count": 42
+  },
+  "promotion_policy": {
+    "current_and_legacy_results_remain_separate": true,
+    "legacy_schema_is_never_added": true,
+    "contract_valid_packet_is_not_provider_qualification": true,
+    "screening_only_provider_is_not_qualified": true,
+    "facility_ir_fn_requires_exact_provider_and_frequency_evidence": true
+  },
+  "interpretation": "Seven native release files satisfy the serialized prism.resolved_release.v1 boundary contract, but the provider root remains PARTIAL_PROVIDER_EVIDENCE with screening_only readiness. They are diagnostic packets only; no provider qualification or facility IR/F-N promotion is allowed."
+}
