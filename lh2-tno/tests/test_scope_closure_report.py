@@ -44,6 +44,20 @@ def _inputs():
         "facility_id": "facility-01",
         "complete_facility_qra_claim": False,
         "physical_validation_claim": False,
+        "provider_packet_promoted": False,
+        "qualified_provider_packet_case_count": 0,
+        "provider_qualification_blocking_reasons": ["provider missing"],
+        "timing": {
+            "fresh_physics_cases": 2,
+            "case_median_ms": 100.0,
+            "case_p95_ms": 150.0,
+            "campaign_elapsed_ms": 250.0,
+        },
+        "frequency_uncertainty": {
+            "scenarios": [{"id": "published"}, {"id": "p95"}],
+            "frequency_inference_performed": False,
+            "facility_credible_interval": False,
+        },
         "strict_release_boundary": {
             "strict_release_boundary_ready": False,
             "case_count": 2,
@@ -90,3 +104,30 @@ def test_scope_closure_report_never_promotes_qra():
     assert report["policy"]["missing_accidents_are_not_inferred"] is True
     assert report["policy"]["provider_packet_promoted"] is False
     assert report["policy"]["facility_qra_claim"] is False
+
+
+def test_scope_closure_report_records_uncertainty_timing_and_validation_gates():
+    report = build_scope_closure_report(*_inputs())
+    assert report["evidence_gates"]["frequency_uncertainty"]["status"] == "REPORTED"
+    assert report["evidence_gates"]["processing_time"]["status"] == "REPORTED"
+    assert report["evidence_gates"]["physical_validation"]["status"] == "WITHHELD"
+    assert report["evidence_gates"]["provider_qualification"]["status"] == "WITHHELD"
+    assert report["timing"]["case_p95_ms"] == 150.0
+
+
+def test_scope_closure_report_prefers_explicit_frequency_scenario_record():
+    scope, assessment = _inputs()
+    assessment["frequency_uncertainty"] = {}
+    report = build_scope_closure_report(
+        scope,
+        assessment,
+        {
+            "scenarios": [{"id": "published"}, {"id": "p05"}, {"id": "p95"}],
+            "frequency_inference_performed": False,
+            "facility_credible_interval": False,
+        },
+    )
+    assert report["frequency_uncertainty"]["scenario_count"] == 3
+    assert report["evidence_gates"]["frequency_uncertainty"][
+        "frequency_inference_performed"
+    ] is False

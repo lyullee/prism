@@ -53,6 +53,7 @@ def _component_closure(row: Mapping[str, Any]) -> str:
 def build_scope_closure_report(
     scope_matrix: Mapping[str, Any],
     facility_assessment: Mapping[str, Any],
+    frequency_scenarios_record: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return a compact, fail-closed scope/family/component ledger."""
     matrix_rows = scope_matrix.get("rows")
@@ -148,6 +149,79 @@ def build_scope_closure_report(
 
     strict_boundary = facility_assessment.get("strict_release_boundary")
     strict_boundary = strict_boundary if isinstance(strict_boundary, Mapping) else {}
+    frequency_uncertainty = facility_assessment.get("frequency_uncertainty")
+    frequency_uncertainty = (
+        frequency_uncertainty if isinstance(frequency_uncertainty, Mapping) else {}
+    )
+    if isinstance(frequency_scenarios_record, Mapping):
+        frequency_scenarios = frequency_scenarios_record.get("scenarios")
+        frequency_inference_performed = frequency_scenarios_record.get(
+            "frequency_inference_performed"
+        )
+        facility_credible_interval = frequency_scenarios_record.get(
+            "facility_credible_interval"
+        )
+    else:
+        frequency_scenarios = frequency_uncertainty.get("scenarios")
+        frequency_inference_performed = frequency_uncertainty.get(
+            "frequency_inference_performed"
+        )
+        facility_credible_interval = frequency_uncertainty.get(
+            "facility_credible_interval"
+        )
+    frequency_scenarios = frequency_scenarios if isinstance(frequency_scenarios, list) else []
+    timing = facility_assessment.get("timing")
+    timing = timing if isinstance(timing, Mapping) else {}
+    fresh_physics_cases = timing.get("fresh_physics_cases")
+    timing_ready = (
+        isinstance(fresh_physics_cases, int)
+        and fresh_physics_cases >= 0
+        and isinstance(timing.get("campaign_elapsed_ms"), (int, float))
+        and timing.get("campaign_elapsed_ms") >= 0
+    )
+    physical_validation_claim = facility_assessment.get("physical_validation_claim") is True
+    provider_blockers = facility_assessment.get("provider_qualification_blocking_reasons")
+    provider_blockers = provider_blockers if isinstance(provider_blockers, list) else []
+    frequency_uncertainty_ready = bool(frequency_scenarios) and (
+        frequency_inference_performed is not True
+    )
+    evidence_gates = {
+        "frequency_uncertainty": {
+            "status": "REPORTED" if frequency_uncertainty_ready else "MISSING",
+            "scenario_count": len(frequency_scenarios),
+            "frequency_inference_performed": frequency_inference_performed,
+            "facility_credible_interval": facility_credible_interval,
+        },
+        "processing_time": {
+            "status": "REPORTED" if timing_ready else "MISSING",
+            "fresh_physics_cases": fresh_physics_cases,
+            "case_median_ms": timing.get("case_median_ms"),
+            "case_p95_ms": timing.get("case_p95_ms"),
+            "campaign_elapsed_ms": timing.get("campaign_elapsed_ms"),
+            "one_hz_claim": False,
+        },
+        "physical_validation": {
+            "status": "CLAIMED" if physical_validation_claim else "WITHHELD",
+            "physical_validation_claim": physical_validation_claim,
+            "reason": (
+                "independent physical-validation evidence is not present"
+                if not physical_validation_claim
+                else None
+            ),
+        },
+        "release_boundary": {
+            "status": "CLOSED" if strict_boundary.get("strict_release_boundary_ready") else "WITHHELD",
+            "withheld_case_count": strict_boundary.get("withheld_case_count"),
+            "blocking_reasons": list(strict_boundary.get("blocking_reasons", [])),
+        },
+        "provider_qualification": {
+            "status": "QUALIFIED" if facility_assessment.get("provider_packet_promoted") else "WITHHELD",
+            "qualified_provider_packet_case_count": facility_assessment.get(
+                "qualified_provider_packet_case_count"
+            ),
+            "blocking_reasons": provider_blockers,
+        },
+    }
     return {
         "schema_version": "prism.outdoor_scope_closure_report.v1",
         "facility_id": facility_assessment.get("facility_id"),
@@ -179,14 +253,24 @@ def build_scope_closure_report(
             "withheld_case_count": strict_boundary.get("withheld_case_count"),
             "blocking_reasons": list(strict_boundary.get("blocking_reasons", [])),
         },
+        "evidence_gates": evidence_gates,
+        "timing": dict(timing),
+        "frequency_uncertainty": {
+            "scenario_count": len(frequency_scenarios),
+            "scenarios": frequency_scenarios,
+            "frequency_inference_performed": frequency_inference_performed,
+            "facility_credible_interval": facility_credible_interval,
+        },
+        "physical_validation": {
+            "claim": physical_validation_claim,
+            "evidence": facility_assessment.get("physical_validation_evidence"),
+        },
         "policy": {
             "missing_accidents_are_not_inferred": True,
             "operator_limited_cases_are_not_qualified": True,
             "frequency_inference_performed": False,
             "provider_packet_promoted": False,
-            "physical_validation_claim": bool(
-                facility_assessment.get("physical_validation_claim", False)
-            ),
+            "physical_validation_claim": physical_validation_claim,
             "facility_qra_claim": bool(facility_assessment.get("complete_facility_qra_claim", False)),
         },
         "interpretation": (

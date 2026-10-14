@@ -59,10 +59,11 @@ python scripts/run_native_isolation_catalog_facility_chain.py `
 python scripts/build_scope_closure_report.py `
   --scope-matrix results/20261111/native_isolation_catalog_facility_chain_full/scope_matrix.json `
   --facility-assessment results/20261111/native_isolation_catalog_facility_chain_full/facility_assessment.json `
+  --frequency-scenarios results/20261111/native_isolation_catalog_facility_chain_full/frequency_scenarios.json `
   --output results/20261111/native_isolation_catalog_facility_chain_full/scope_closure_report.json
 ```
 
-출력 [`scope_closure_report.json`](../results/20261111/native_isolation_catalog_facility_chain_full/scope_closure_report.json)은 12개 선언 사고군, 24개 event, 20개 strict 보류 case, 7개 partial 사고군과 5개 진단 폐합 사고군을 분리한다. `NO_GENERATED_CASES`와 `EXCLUDED_OR_NOT_APPLICABLE`는 지원되지 않은 사고를 다른 사고 packet으로 대체하지 않았다는 뜻이다.
+출력 [`scope_closure_report.json`](../results/20261111/native_isolation_catalog_facility_chain_full/scope_closure_report.json)은 12개 선언 사고군, 24개 event, 20개 strict 보류 case, 7개 partial 사고군과 5개 진단 폐합 사고군을 분리한다. `NO_GENERATED_CASES`와 `EXCLUDED_OR_NOT_APPLICABLE`는 지원되지 않은 사고를 다른 사고 packet으로 대체하지 않았다는 뜻이다. 같은 파일의 `evidence_gates`에는 빈도 시나리오 원장, 처리시간, 물리검증, 공급자 자격, 방출경계가 각각 보고되었는지와 보류 사유가 함께 기록된다.
 
 최신 실행은 5개 `EXECUTED`, 19개 `EXECUTED_OPERATOR_LIMITED`로 남았다. 따라서 모든 사건이 숫자로 실행되었다는 사실과 엄격한 시설 QRA 증거를 분리한다. `facility_assessment.json`의 `conditional_diagnostic_facility_risk_available=true`는 현재 합성 조건에서 risk atom을 집계할 수 있다는 뜻이고, `facility_total_risk_available=false`는 현장 적용 가능한 완결 QRA가 아직 아니라는 뜻이다.
 

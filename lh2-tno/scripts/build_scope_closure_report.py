@@ -22,10 +22,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scope-matrix", type=Path, required=True)
     parser.add_argument("--facility-assessment", type=Path, required=True)
+    parser.add_argument(
+        "--frequency-scenarios",
+        type=Path,
+        help="Optional frequency scenario ledger produced by the facility-chain runner",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    frequency_scenarios = (
+        _object(args.frequency_scenarios) if args.frequency_scenarios else None
+    )
     report = build_scope_closure_report(
-        _object(args.scope_matrix), _object(args.facility_assessment)
+        _object(args.scope_matrix), _object(args.facility_assessment), frequency_scenarios
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

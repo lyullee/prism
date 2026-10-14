@@ -557,6 +557,209 @@
       "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary"
     ]
   },
+  "evidence_gates": {
+    "frequency_uncertainty": {
+      "status": "REPORTED",
+      "scenario_count": 3,
+      "frequency_inference_performed": false,
+      "facility_credible_interval": false
+    },
+    "processing_time": {
+      "status": "REPORTED",
+      "fresh_physics_cases": 24,
+      "case_median_ms": 5865.646749996813,
+      "case_p95_ms": 10345.091790004513,
+      "campaign_elapsed_ms": 135268.37499999965,
+      "one_hz_claim": false
+    },
+    "physical_validation": {
+      "status": "WITHHELD",
+      "physical_validation_claim": false,
+      "reason": "independent physical-validation evidence is not present"
+    },
+    "release_boundary": {
+      "status": "WITHHELD",
+      "withheld_case_count": 20,
+      "blocking_reasons": [
+        "20 case(s) are withheld from the release ledger",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%: provider inventory residual is not depleted within 1e-08 kg",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1: termination basis emergency_relief_discharge is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2: termination basis inventory_over_600s is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4: termination basis two_sided_rupture is not a reviewed release boundary",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5: status EXECUTED_OPERATOR_LIMITED is not a complete numerical case",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5: termination basis two_sided_rupture is not a reviewed release boundary"
+      ]
+    },
+    "provider_qualification": {
+      "status": "WITHHELD",
+      "qualified_provider_packet_case_count": 0,
+      "blocking_reasons": [
+        "campaign 9e9648979b38eef242923020b9112b7e78f4ae465acf3ae8b2f5c55d04978947: qualified provider packet promotion is unavailable",
+        "campaign 9e9648979b38eef242923020b9112b7e78f4ae465acf3ae8b2f5c55d04978947: provider packet evidence does not match all consumed packets"
+      ]
+    }
+  },
+  "timing": {
+    "campaign_count": 1,
+    "fresh_physics_cases": 24,
+    "case_min_ms": 1429.8194000002695,
+    "case_median_ms": 5865.646749996813,
+    "case_max_ms": 12724.591999998665,
+    "case_p95_ms": 10345.091790004513,
+    "case_p99_ms": 12241.977801999747,
+    "campaign_elapsed_ms": 135268.37499999965,
+    "campaign_elapsed_ms_sum": 135268.37499999965,
+    "campaign_elapsed_ms_min": 135268.37499999965,
+    "campaign_elapsed_ms_median": 135268.37499999965,
+    "campaign_elapsed_ms_max": 135268.37499999965,
+    "campaign_elapsed_ms_p95": 135268.37499999965,
+    "campaign_elapsed_ms_p99": 135268.37499999965,
+    "stage_elapsed_ms": {
+      "cloud_observation": {
+        "sample_count": 22,
+        "sum_ms": 5877.653300005477,
+        "median_ms": 241.0856499991496,
+        "max_ms": 864.0484999923501,
+        "p95_ms": 723.3964900005955,
+        "p99_ms": 838.245799994038
+      },
+      "endpoint_a": {
+        "sample_count": 2,
+        "sum_ms": 6045.181799985585,
+        "median_ms": 3022.5908999927924,
+        "max_ms": 3026.0469999921042,
+        "p95_ms": 3025.701389992173,
+        "p99_ms": 3025.977877992118
+      },
+      "endpoint_aggregation": {
+        "sample_count": 2,
+        "sum_ms": 12215.287200000603,
+        "median_ms": 6107.643600000301,
+        "max_ms": 6117.565699998522,
+        "p95_ms": 6116.5734899987,
+        "p99_ms": 6117.367257998558
+      },
+      "endpoint_b": {
+        "sample_count": 2,
+        "sum_ms": 6168.026100000134,
+        "median_ms": 3084.013050000067,
+        "max_ms": 3097.385300003225,
+        "p95_ms": 3096.048075002909,
+        "p99_ms": 3097.117855003162
+      },
+      "fire_explosion_damage_risk": {
+        "sample_count": 22,
+        "sum_ms": 1760.496199989575,
+        "median_ms": 73.88210000499384,
+        "max_ms": 140.96910000080243,
+        "p95_ms": 115.14033500861841,
+        "p99_ms": 135.64814100260264
+      },
+      "near_field_and_dispersion": {
+        "sample_count": 22,
+        "sum_ms": 91685.93409999448,
+        "median_ms": 4232.686300005298,
+        "max_ms": 11235.250799989444,
+        "p95_ms": 9001.619470007425,
+        "p99_ms": 10784.967161993261
+      },
+      "pool": {
+        "sample_count": 22,
+        "sum_ms": 3444.179499972961,
+        "median_ms": 159.3861500005005,
+        "max_ms": 317.83440000435803,
+        "p95_ms": 279.532314989774,
+        "p99_ms": 309.8536020012397
+      },
+      "source": {
+        "sample_count": 22,
+        "sum_ms": 14924.114100082079,
+        "median_ms": 676.7373999973643,
+        "max_ms": 704.9520000000484,
+        "p95_ms": 688.8015250107856,
+        "p99_ms": 701.5831590023299
+      }
+    },
+    "distribution": "across separately executed equipment campaigns; not repeated-run latency"
+  },
+  "frequency_uncertainty": {
+    "scenario_count": 3,
+    "scenarios": [
+      {
+        "id": "native-isolation-catalog-literature-published",
+        "asset_quantiles": {
+          "storage-shell": "published",
+          "transfer-line": "published",
+          "transfer-valve": "published",
+          "pressure-relief-vent": "published",
+          "transfer-pump": "published",
+          "ambient-vaporizer": "published",
+          "reliquefier": "published"
+        },
+        "event_quantiles": {},
+        "provenance": "PRISM literature catalogue rates; native isolation catalog facility-chain diagnostic only",
+        "correlation_assumption": "within_asset_shared_quantile"
+      },
+      {
+        "id": "native-isolation-catalog-literature-p05",
+        "asset_quantiles": {
+          "storage-shell": "p05",
+          "transfer-line": "p05",
+          "transfer-valve": "p05",
+          "pressure-relief-vent": "fixed",
+          "transfer-pump": "fixed",
+          "ambient-vaporizer": "fixed",
+          "reliquefier": "fixed"
+        },
+        "event_quantiles": {},
+        "provenance": "PRISM literature catalogue rates; native isolation catalog facility-chain diagnostic only",
+        "correlation_assumption": "within_asset_shared_quantile"
+      },
+      {
+        "id": "native-isolation-catalog-literature-p95",
+        "asset_quantiles": {
+          "storage-shell": "p95",
+          "transfer-line": "p95",
+          "transfer-valve": "p95",
+          "pressure-relief-vent": "fixed",
+          "transfer-pump": "fixed",
+          "ambient-vaporizer": "fixed",
+          "reliquefier": "fixed"
+        },
+        "event_quantiles": {},
+        "provenance": "PRISM literature catalogue rates; native isolation catalog facility-chain diagnostic only",
+        "correlation_assumption": "within_asset_shared_quantile"
+      }
+    ],
+    "frequency_inference_performed": false,
+    "facility_credible_interval": false
+  },
+  "physical_validation": {
+    "claim": false,
+    "evidence": null
+  },
   "policy": {
     "missing_accidents_are_not_inferred": true,
     "operator_limited_cases_are_not_qualified": true,
