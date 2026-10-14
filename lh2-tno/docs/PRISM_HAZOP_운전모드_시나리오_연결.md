@@ -61,6 +61,30 @@ python scripts/audit_realtime_hazop_mode_trace.py `
 
 다설비에서 같은 HAZOP 행 ID가 반복될 수 있으므로 현재 branch dispatch도 `(component_id, scenario_id)` resolver 키를 먼저 찾고, 없을 때만 기존 `scenario_id` 키를 사용한다. 실행 원장에는 선택된 키 범위를 남겨 설비 간 provider 방출이 섞이지 않았는지 확인할 수 있다.
 
+## 현재·예측 경로를 한 번에 연결하기
+
+디지털트윈 호스트가 현재 측정값과 미래 시뮬레이션값을 한 요청에서 관리해야 할 때는 `run_hazop_integrated_risk(...)`를 사용한다.
+
+```python
+from lh2_tno.integrated_risk import run_hazop_integrated_risk
+
+ledger = run_hazop_integrated_risk(
+    hazop_table,
+    current_frames,
+    now_s=now_s,
+    component_bindings=component_bindings,
+    release_resolvers=release_resolvers,
+    forecast_frames=predicted_frames,
+    forecast_tables_by_component=tables_by_component,
+    forecast_component_ids=tuple(tables_by_component),
+    forecast_quantitative_evaluator=forecast_evaluator,
+)
+```
+
+이 호출은 먼저 `run_hazop_facility_runtime(...)`으로 현재 상태를 평가하고, 예측 frame이 제공된 경우 `run_hazop_forecast_risk_scan(...)`을 이어서 실행한다. `ledger.current`와 `ledger.forecast`는 원래 각 함수의 원장을 그대로 포함하고, `ledger.linkage`에는 현재·예측 설비 ID, 각 경로에서 확인된 운전 모드, 공통 `scenario_id`가 남는다. 따라서 화면이나 알람 시스템은 “지금 인수 모드에서 선택된 시나리오”와 “예측 시점에 같은 시나리오가 다시 도달했는지”를 한 원장에서 추적할 수 있다.
+
+예측 frame을 넘길 때는 설비별 HAZOP 표를 반드시 함께 넘겨야 하며, 예측 정량평가기를 생략하면 위험조건 도달은 기록하되 `WITHHELD_NO_QUANTITATIVE_EVALUATOR`로 남는다. 통합 함수의 결과는 `diagnostic_only=true`, `frequency_inference_performed=false`, `facility_qra_promotion=false`를 유지한다. 즉 이 함수는 두 계산 경로를 연결하는 실행 계층이며, 누출 packet·문헌 빈도·SLABx-LH2 계산·시설 IR/F-N의 자격을 대신 만들어 주지 않는다. `timing.wall_elapsed_ms`도 한 번의 호출을 측정한 값이므로 1 Hz 운영 보장을 뜻하지 않는다.
+
 HAZOP 결과를 이 기존 시설 원장으로 넘겨야 할 때는 `build_hazop_facility_campaign_result(...)`를 사용한다. 이 handoff는 설비마다 정확히 하나의 `CONSEQUENCE_EVALUATED` branch, provider 방출 종료·재고 경계, 현재 기상 IR, 점화 branch를 요구한다. `scenario_bindings`에는 반드시 `hazop_scenario_id`를 넣어야 하며, 선택된 운전 모드 시나리오 ID와 다르면 캠페인을 만들지 않는다. 연간 기상·인구·차단 branch별 피해는 호출자가 명시적으로 공급하고, 누락된 branch나 빈도는 0으로 채우지 않는다. 여러 HAZOP branch가 동시에 활성화된 경우에는 이 handoff가 보류되며, 먼저 branch별 사건 빈도와 release/isolation partition을 별도로 닫아야 한다. 성공하면 `campaign`와 함께 기존 `merge_facility_campaign_results(...)`가 계산한 `facility_ledger`도 반환한다. 이 ledger는 설비별 risk atom을 시설 조건부 IR/F-N으로 합산하되, 결과 상태는 `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED`이고 qualified provider, 독립 물리 검증, 전체 사고범위가 닫히기 전에는 시설 QRA 승격이 계속 `false`다.
 
 실시간 운전 모드의 연결은 이 handoff에서 끝나지 않는다. `run_hazop_facility_runtime(...)`이 선택한 mode는 campaign binding의 `operating_mode`와 정확히 일치해야 하며, 일치한 값은 campaign event·case·risk atom 및 `facility_evidence_request`의 provider 요청과 `exact_match_required.operating_mode`에 그대로 보존된다. 같은 event/condition/branch가 여러 원장 행에 나타날 때 mode가 다르면 첫 값을 임의로 덮어쓰지 않고 `duplicate ledger rows carry conflicting operating modes` 차단 사유를 남긴다. 이 추적은 scenario identity를 보존하기 위한 것으로, 빈도 추정이나 누출·피해 계산을 새로 만들지 않는다.
@@ -128,6 +152,6 @@ python scripts/evaluate_hazop_operating_mode.py `
 
 이 모듈은 설비-neutral HAZOP 판단과 scenario dispatch boundary를 닫는다. 사고 family catalog와 provider packet catalog에 없는 사건은 선택하지 않으며, HAZOP 이탈이 있어도 빈도와 피해 결과를 자동으로 만들지 않는다.
 
-현재 HAZOP·runtime mode·forecast 연결 집중 검사는 45개이며, 완료 감사까지 포함한 관련 검사는 88개, 전체 패키지 검사는 **1014 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 예측 공정상태가 위험조건에 처음 도달한 시점의 정량평가 trigger와 기존 runtime consequence gate 재사용 경로, 조건 해제 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff, 운전 모드가 campaign·provider evidence request·시설 branch accounting·consequence request까지 보존되는 경로와 중복 mode 충돌 차단을 실행했다. 추가로 사고 export 요청의 명시적 `isolation_time_s`·`post_isolation_observation_s`가 provider로 전달되고 결과 `provider_meta`에서 echo되는지 검사한다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
+현재 HAZOP·runtime mode·forecast 연결 집중 검사와 현재·예측 통합 오케스트레이터를 포함한 전체 패키지 검사는 **1035 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 예측 공정상태가 위험조건에 처음 도달한 시점의 정량평가 trigger와 기존 runtime consequence gate 재사용 경로, 조건 해제 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff, 운전 모드가 campaign·provider evidence request·시설 branch accounting·consequence request까지 보존되는 경로와 중복 mode 충돌 차단을 실행했다. `run_hazop_integrated_risk()` 회귀검사는 현재·예측 결과의 공통 설비·운전 모드·scenario identity를 묶고, 예측 정량평가가 보류되면 통합 상태도 `INTEGRATED_DIAGNOSTIC_PARTIAL`로 남기는지 확인한다. 추가로 사고 export 요청의 명시적 `isolation_time_s`·`post_isolation_observation_s`가 provider로 전달되고 결과 `provider_meta`에서 echo되는지 검사한다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
 
 남은 엄격 문턱은 실제 설비별 HAZOP·P&ID identity, provider의 차단·재고·종료 이력, 문헌 빈도 event binding, SLABx-LH2 독립 비교, 시설 전체 사고 family coverage와 IR/F-N 승격이다. 현재 검사센터 자료는 정상 상태 신호의 후보 입력으로만 취급한다.
