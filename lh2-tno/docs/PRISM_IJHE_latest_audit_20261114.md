@@ -22,6 +22,7 @@
 | `verification.json` (native packet catalog) | exact native packet 구조 | 24/24 exact, qualification 승격 아님 |
 | `isolation_branch_audit.json` | 설비별 차단·zero-flow branch | 14개 `reviewed_isolation_success` |
 | `slabx_lh2_validation_audit_recomputed.json` | SLABx-LH2 pool/dispersion 근거 | 제한 component evidence |
+| `dynamiclh2poolx_evidence_audit.json` | JUEL hold-out·HSE Test 6 반경/질량수지 근거 | 소스 해시 변화가 기록된 제한 pool/spreading component evidence; 방출·대기확산·시설 QRA 검증 아님 |
 | `validation_evidence_matrix_with_provider_intake.json` | 물리·관측·provider 검증근거 경계 | 시설 QRA 보류를 명시 |
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
 | `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 3개 국소 경계 통과, 41개 보류; 시설 QRA 승격 0 |
@@ -72,6 +73,8 @@ python scripts/build_ijhe_completion_audit.py `
 ## 판정
 
 현재 결과는 42개 검사 중 38개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+
+`dynamiclh2poolx_evidence_audit.json`은 JUEL water Trial 4와 aluminium Trial 6의 hold-out 반경 비교(각 100% video-band coverage), HSE Test 6의 종료 반경·건조 시점·질량수지 잔차를 보존한다. 현재 소스와 외부 evidence snapshot의 해시가 달라 `CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT`로 기록되며, 이 근거는 pool/spreading 구성요소의 제한 검증만 지지한다. 설비 사고 방출, 차단·재고 소진, 대기 농도/LFL, 점화·IR/F-N의 독립 검증으로 확장하지 않는다.
 
 통과한 진단 연결은 다음을 뜻한다.
 
