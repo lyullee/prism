@@ -8,7 +8,9 @@
 
 저장된 실시간 결과의 모드 보존은 `scripts/audit_realtime_hazop_mode_trace.py`로 별도 감사할 수 있습니다. `telemetry_boundary`, `equipment_release_path`, 시설 batch의 설비 행과 `operating_mode_counts`가 일치하지 않으면 진단 결과를 차단하며, 이 감사도 빈도·방출·물리검증·시설 QRA를 추정하거나 승격하지 않습니다.
 
-**비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **1010 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
+검사지원센터 폴더에서 확인된 NASA 극저온 피스톤 펌프·액화수소 원심 펌프 시험문헌은 `scripts/audit_external_document_evidence.py`로 provenance를 기록할 수 있습니다. [`외부 펌프 문헌 근거 검토`](docs/PRISM_외부펌프문헌_근거_검토_20261107.md)와 [`external_pump_document_intake.json`](results/20261107/external_pump_document_intake.json)은 두 PDF를 펌프 모델 비교 후보로만 분류합니다. 문헌은 사고 방출 packet·빈도·SLABx-LH2 검증·시설 QRA를 자동으로 만들지 않으며, 정확한 설비/포트 연결과 독립 holdout 비교가 끝날 때까지 물리검증 승격을 차단합니다.
+
+**비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **1012 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
 
 **현재 권위 기준점 (state-bound union):** `results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json`은
 34개 사건·44개 case·176개 risk atom의 옥외 진단 범위를 보존하고, 상태→방출 연결은

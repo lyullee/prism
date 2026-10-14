@@ -1,0 +1,67 @@
+{
+  "schema_version": "prism.external_document_evidence_audit.v1",
+  "status": "CANDIDATE_EQUIPMENT_PHYSICAL_EVIDENCE_NO_PROMOTION",
+  "document_count": 2,
+  "documents": [
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\NASA 극저온 수소 피스톤펌프 시험자료.pdf",
+      "sha256": "8e834bded9e255db743783ec581bde223ce7398ea175c096d66e627be2358e12",
+      "size_bytes": 1603845,
+      "equipment_family": "cryogenic_piston_pump",
+      "document_title": "NASA preliminary piston pump study for cryogenic fluids",
+      "evidence_class": "candidate_independent_equipment_model_source",
+      "observed_scope": [
+        "pump performance and/or cavitation test observations",
+        "equipment-model comparison input after unit and configuration review"
+      ],
+      "not_observed_or_not_promoted": [
+        "facility-specific accidental release packet",
+        "release duration, isolation state and inventory depletion ledger",
+        "SLABx-LH2 atmospheric consequence comparison",
+        "initiating-event frequency or sensor-derived failure rate",
+        "facility IR/F-N result"
+      ]
+    },
+    {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터\\NASA 액화수소 원심펌프 시험자료.pdf",
+      "sha256": "4f8b36a307ae386446c405843b95dde94eb4c25c194389e97a6119aa6ea57f29",
+      "size_bytes": 2533906,
+      "equipment_family": "lh2_centrifugal_pump",
+      "document_title": "NASA hydrogen test of a small low-specific-speed centrifugal pump stage",
+      "evidence_class": "candidate_independent_equipment_model_source",
+      "observed_scope": [
+        "pump performance and/or cavitation test observations",
+        "equipment-model comparison input after unit and configuration review"
+      ],
+      "not_observed_or_not_promoted": [
+        "facility-specific accidental release packet",
+        "release duration, isolation state and inventory depletion ledger",
+        "SLABx-LH2 atmospheric consequence comparison",
+        "initiating-event frequency or sensor-derived failure rate",
+        "facility IR/F-N result"
+      ]
+    }
+  ],
+  "physical_validation_claim": false,
+  "provider_release_packet_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "promotion_policy": {
+    "document_is_not_provider_release_packet": true,
+    "document_is_not_frequency_evidence": true,
+    "comparison_required_before_physical_validation": true,
+    "comparison_must_be_independent_and_holdout_scored": true,
+    "facility_qra_requires_complete_case_coverage": true
+  },
+  "required_follow_up": [
+    "extract test-point tables with source page/figure references and engineering units",
+    "bind each test point to an exact pump configuration and PRISM equipment port",
+    "run a no-fit model replay plus independent holdout comparison with uncertainty",
+    "keep accident release, frequency and facility IR/F-N gates closed until separate evidence exists"
+  ],
+  "blocking_reasons": [
+    "document content has not been bound to a PRISM provider event/component/port",
+    "independent model comparison and holdout result are not present in this audit",
+    "document evidence does not establish a release duration, isolation or inventory ledger"
+  ]
+}
