@@ -1,0 +1,30 @@
+{
+  "schema_version": "prism.native_lh2dt_frequency_case.v1",
+  "status": "PARTIAL_DECLARED_SCOPE",
+  "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+  "component_id": "storage-tank-01",
+  "catalogue_opening_diameter_m": 0.0127,
+  "provider_opening_diameter_m": 0.0127,
+  "exact_opening_match": true,
+  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "provider_result_digest": "d40a94be2340bf9de8ac9c4ae0d9bdb3a3eb192caebde3bec131ff1dc985a76f",
+  "provider_duration_s": 0.0001,
+  "provider_mass_residual_kg": 0.0,
+  "literature_frequency_bound": true,
+  "frequency_source": "compiled campaign LH2_VESSEL AREA_0.01% literature row",
+  "frequency_from_provider_packet": false,
+  "provider_packet_promoted": false,
+  "qualified_provider_packet_count": 0,
+  "native_export_elapsed_ms": 276.5173999941908,
+  "consequence_chain_elapsed_ms": 146884.41189999867,
+  "consequence_chain_executed": true,
+  "facility_qra_claim": false,
+  "physical_validation_claim": false,
+  "facility_total_risk_available": false,
+  "limitations": [
+    "synthetic LayeredTank geometry, initial state, opening and atmospheric boundary",
+    "native packet uses a bounded horizon and retains residual inventory",
+    "literature frequency is diagnostic input and is not site-calibrated",
+    "facility scope remains incomplete; this one-case result is not total facility IR/F-N"
+  ]
+}

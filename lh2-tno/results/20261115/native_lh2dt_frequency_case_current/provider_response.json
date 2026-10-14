@@ -1,0 +1,72 @@
+{
+  "provider_export_schema": "prism.external_accident_history.v1",
+  "provider_model": "lh2dt.layered_tank.LayeredTank",
+  "provider_source_digest": "13a65aa75b54aee7677a1286fec1b52a149b7d0805e7908be6a0fa0ef11c1e22",
+  "provider_state_snapshot_digest": "ca7576435f821269da7246eef1497fa9cce7fd659a84aafd8fdb3a12ee791f83",
+  "data": {
+    "event_kind": "accidental_leak",
+    "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+    "component_id": "storage-tank-01",
+    "port_id": "tank-accident-out",
+    "duration_s": 0.0001,
+    "available_mass_kg": 71.7644005715206,
+    "cumulative_mass_out_kg": 8.042453153201009e-06,
+    "cumulative_specific_enthalpy_out_j": 0.022780848468215414,
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "termination_provenance": "LayeredTank finite-volume state stopped at the caller-declared bounded horizon; residual inventory retained",
+    "upstream_service": "LH2",
+    "fluid": "Hydrogen",
+    "phase_basis": "two_phase",
+    "reference_area_m2": 0.00012667686977437442,
+    "reference_area_provenance": "explicit failed atmospheric opening area",
+    "droplet_partition_provenance": "native LayeredTank outlet flash at ambient pressure; ground liquid retained; airborne liquid set to zero",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "total_mass_flow_kg_s": 0.08042453153201008,
+        "gas_mass_flow_kg_s": 0.0005107056976259838,
+        "ground_liquid_mass_flow_kg_s": 0.0799138258343841,
+        "airborne_liquid_mass_flow_kg_s": 0.0,
+        "specific_enthalpy_j_kg": 2832.5745931324846,
+        "droplet_class_outcomes": [
+          {
+            "ground_liquid_mass_flow_kg_s": 0.0799138258343841,
+            "airborne_liquid_mass_flow_kg_s": 0.0,
+            "flight_time_s": 0.0,
+            "impact_position_m": [
+              0.0,
+              0.0,
+              0.5
+            ],
+            "droplet_diameter_m": 0.001
+          }
+        ],
+        "gas_pressure_pa_abs": 101325.0,
+        "gas_temperature_k": 20.27125066090695,
+        "gas_density_kg_m3": 53.2683322004087,
+        "gas_effective_area_m2": 0.00012667686977437442,
+        "gas_velocity_m_s": 0.07568403541485966,
+        "gas_velocity_origin": "mass_continuity_from_declared_area"
+      }
+    ],
+    "provider_meta": {
+      "native_inventory_owner": "LayeredTank",
+      "initial_mass_kg": 71.7644005715206,
+      "final_mass_kg": 71.76439252906744,
+      "residual_mass_kg": 1.4210854715202004e-14,
+      "maximum_mass_balance_residual_kg": 1.4210854715202004e-14,
+      "initial_pressure_pa_abs": 110000.0,
+      "initial_liquid_volume_fraction": 0.05,
+      "liquid_cell_index": 2,
+      "isolation_time_s": null,
+      "post_isolation_observation_s": 0.0,
+      "isolation_success": false,
+      "time_step_s": 0.0001,
+      "valve": {
+        "area_m2": 0.00012667686977437442,
+        "discharge_coefficient": 0.7,
+        "choked_intervals": 0
+      }
+    }
+  }
+}

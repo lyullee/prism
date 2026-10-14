@@ -65,6 +65,20 @@ SLABx-LH2/피해 chain까지 전달하는 smoke를 다시 실행했습니다. na
 qualified provider·독립 검증·시설 IR/F-N 승격은 계속 차단합니다. 저장탱크와
 DynamicHEMPipe 현재 소스 재실행 기록은 [native chain 기록](docs/PRISM_native_lh2dt_current_chain_20261115.md)에서 확인할 수 있습니다.
 
+**최신 native LayeredTank–문헌 빈도–시설 chain 재실행 (2026-11-15):**
+`scripts/run_lh2dt_native_frequency_case.py`를 현재 외부 source digest에 대해 다시
+실행했습니다. 문헌 `LH2_VESSEL AREA_0.01%`의 개구 `0.0127 m`와 native provider
+개구가 exact-match되고, 문헌 빈도는 provider에서 추정하지 않고 compiled campaign
+행에서 그대로 읽었습니다. native export는 약 `276.5 ms`, 전체 campaign chain은 약
+`146.9 s`, provider 질량 잔차는 `0 kg`이며 선택된 사건은
+`EXECUTED_OPERATOR_LIMITED`로 SLABx-LH2/풀·확산·점화·피해 risk atom까지 도달했습니다.
+결과는 [`native_lh2dt_frequency_case_current`](results/20261115/native_lh2dt_frequency_case_current/)
+와 [상세 실행 기록](docs/PRISM_native_lh2dt_frequency_case_current_20261115.md)에
+보존했습니다. 이 결과는 최신 source에서 **문헌 빈도 → 설비 방출 → 피해 → 조건부
+시설 ledger** 연결을 재현한 것이며, 합성 초기상태·형상·대기경계·짧은 종료시계와
+부분 사고범위 때문에 `facility_total_risk_available=false`,
+`provider_packet_promoted=false`, `physical_validation_claim=false`를 유지합니다.
+
 **케이스별 방출 경계 승격 표 (2026-11-14):** 최신 전체 union 44개 시설 case를 설비·포트·운전
 모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 13개와 보류된 31개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 13개 행도 provider 원점이 `model_prediction` 또는 synthetic이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
 이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 32개는
