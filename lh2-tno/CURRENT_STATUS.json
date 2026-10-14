@@ -4794,6 +4794,8 @@
     "native_scope_packet_catalog_verification": "results/20261111/native_generic_scope_packets_isolation/verification.json",
     "native_scope_isolation_branch_catalog_audit": "results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json",
     "native_isolation_catalog_facility_chain_verification": "results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/verification.json",
+    "validation_evidence_matrix": "results/20261014/validation_evidence_matrix_with_dynamiclh2poolx.json",
+    "slabx_validation_evidence": "results/20261106/slabx_lh2_validation_audit_recomputed.json",
     "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
     "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,
@@ -4820,6 +4822,6 @@
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 4,
     "facility_qra_promotion": false,
-    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots; qualified provider promotion, strict release closure, physical validation and facility IR/F-N remain withheld."
+    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation and the restricted evidence matrix are recorded; qualified provider promotion, strict release closure, independent full-scope physical validation and facility IR/F-N remain withheld."
   }
 }

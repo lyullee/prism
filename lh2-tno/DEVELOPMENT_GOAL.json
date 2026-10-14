@@ -3855,6 +3855,8 @@
     "native_scope_packet_catalog_verification": "results/20261111/native_generic_scope_packets_isolation/verification.json",
     "native_scope_isolation_branch_catalog_audit": "results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json",
     "native_isolation_catalog_facility_chain_verification": "results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/verification.json",
+    "validation_evidence_matrix": "results/20261014/validation_evidence_matrix_with_dynamiclh2poolx.json",
+    "slabx_validation_evidence": "results/20261106/slabx_lh2_validation_audit_recomputed.json",
     "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
     "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,

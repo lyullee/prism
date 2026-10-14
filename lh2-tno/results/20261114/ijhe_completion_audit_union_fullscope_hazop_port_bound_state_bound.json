@@ -4704,6 +4704,34 @@
       "interpretation": "Published frequency scenarios are re-applied to saved diagnostic risk atoms and asset rankings; this does not create a complete-facility confidence interval or claim fresh-physics validation."
     },
     {
+      "name": "diagnostic_slabx_lh2_validation_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261106\\slabx_lh2_validation_audit_recomputed.json",
+        "schema_version": "prism.slabx_lh2_validation_audit.v1",
+        "status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+        "model": {
+          "name": "SLABx-LH2",
+          "slabx_lh2_version": "0.1.2",
+          "slabx_version": "1.0.6"
+        },
+        "check_count": 5,
+        "metrics": {
+          "ffi_case_count": 6,
+          "flacs_comparison_row_count": 6,
+          "pool_radius_median_ratio": 1.0305005693059233,
+          "lfl_in_bracket": 5,
+          "max_scenario_mass_residual_kg": 1.7674750552032492e-12,
+          "runtime_repeat_inventory_difference_kg": 0.0
+        },
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "SLABx-LH2 cryogenic-dispersion and pool evidence is consumed as a restricted consequence-component record. It does not qualify the equipment release, initiating frequency, ignition model, or facility QRA."
+    },
+    {
       "name": "equipment_model_binding_to_accident_release",
       "status": "PASS",
       "evidence": {
@@ -4938,6 +4966,21 @@
         "facility_qra_claim": false
       },
       "interpretation": "Every declared accident family has a numerical diagnostic case in the scope matrix; any remaining family gap is an evidence/qualification gap. This does not make operator-limited or synthetic cases qualified and does not promote facility IR/F-N."
+    },
+    {
+      "name": "validation_evidence_matrix",
+      "status": "PASS",
+      "evidence": {
+        "status": "RESTRICTED_EVIDENCE_MATRIX",
+        "decision": "FACILITY_QRA_WITHHELD",
+        "domain_count": 4,
+        "blocking_reason_count": 0,
+        "claims_closed": true,
+        "record": "results\\20261014\\validation_evidence_matrix_with_dynamiclh2poolx.json"
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
     },
     {
       "name": "diagnostic_hazop_selection_event_binding",
