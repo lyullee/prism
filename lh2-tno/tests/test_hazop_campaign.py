@@ -190,6 +190,18 @@ def test_hazop_bridge_rejects_unmatched_mode_specific_scenario_id():
         )
 
 
+def test_hazop_bridge_rejects_event_identity_drift():
+    binding = _binding()
+    binding["event_id"] = "different-provider-event"
+    with pytest.raises(HazopFacilityCampaignError, match="event_id does not match"):
+        build_hazop_facility_campaign_result(
+            _runtime_result(),
+            annual_conditions=_annual_conditions(),
+            scenario_bindings=[binding],
+            expected_component_ids=("TK-01",),
+        )
+
+
 def test_hazop_bridge_rejects_multiple_active_branches_without_partition():
     with pytest.raises(HazopFacilityCampaignError, match="explicit branch probabilities"):
         build_hazop_facility_campaign_result(

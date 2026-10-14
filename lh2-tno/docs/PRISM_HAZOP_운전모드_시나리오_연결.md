@@ -74,6 +74,6 @@ python scripts/evaluate_hazop_operating_mode.py `
 
 이 모듈은 설비-neutral HAZOP 판단과 scenario dispatch boundary를 닫는다. 사고 family catalog와 provider packet catalog에 없는 사건은 선택하지 않으며, HAZOP 이탈이 있어도 빈도와 피해 결과를 자동으로 만들지 않는다.
 
-현재 HAZOP·runtime mode 회귀검사는 32개, 전체 패키지 검사는 **966 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff를 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
+현재 HAZOP·runtime mode 회귀검사는 33개, 전체 패키지 검사는 **967 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff를 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
 
 남은 엄격 문턱은 실제 설비별 HAZOP·P&ID identity, provider의 차단·재고·종료 이력, 문헌 빈도 event binding, SLABx-LH2 독립 비교, 시설 전체 사고 family coverage와 IR/F-N 승격이다. 현재 검사센터 자료는 정상 상태 신호의 후보 입력으로만 취급한다.

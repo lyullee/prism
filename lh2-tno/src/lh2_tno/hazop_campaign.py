@@ -148,6 +148,15 @@ def _snapshot_from_hazop_runtime(
     components_raw = runtime_result.get("components")
     if not isinstance(components_raw, Mapping) or not components_raw:
         raise HazopFacilityCampaignError("runtime result components must be nonempty")
+    component_count = runtime_result.get("component_count")
+    if (
+        isinstance(component_count, bool)
+        or not isinstance(component_count, int)
+        or component_count != len(components_raw)
+    ):
+        raise HazopFacilityCampaignError(
+            "runtime result component_count does not match components"
+        )
     component_ids = tuple(sorted(str(component_id) for component_id in components_raw))
     expected = tuple(sorted(_name(value, "expected_component_ids[]") for value in expected_component_ids))
     if expected and set(expected) != set(component_ids):
@@ -162,6 +171,19 @@ def _snapshot_from_hazop_runtime(
             raise HazopFacilityCampaignError(
                 f"component {component_id} has no accepted provider release path"
             )
+        boundaries = release_path.get("boundaries")
+        if not isinstance(boundaries, Sequence) or isinstance(boundaries, (str, bytes)) or not boundaries:
+            raise HazopFacilityCampaignError(
+                f"component {component_id} provider release path has no explicit boundaries"
+            )
+        for boundary in boundaries:
+            if isinstance(boundary, Mapping) and boundary.get("component_id") not in {
+                None,
+                component_id,
+            }:
+                raise HazopFacilityCampaignError(
+                    f"component {component_id} provider boundary belongs to another component"
+                )
         components[component_id] = {
             "status": "ACCEPTED",
             "component_id": component_id,
@@ -248,6 +270,26 @@ def build_hazop_facility_campaign_result(
             raise HazopFacilityCampaignError(
                 f"scenario binding HAZOP id does not match selected branch for {component_id}: "
                 f"{scenario_id!r} != {selected_id!r}"
+            )
+        selected_risk = components[component_id].get("risk")
+        selected_atom = selected_risk.get("risk_atom") if isinstance(selected_risk, Mapping) else None
+        event_id = _name(raw.get("event_id"), f"scenario_bindings[{index}].event_id")
+        asset_id = _name(raw.get("asset_id"), f"scenario_bindings[{index}].asset_id")
+        if not isinstance(selected_atom, Mapping):
+            raise HazopFacilityCampaignError(
+                f"component {component_id} has no risk atom for scenario identity binding"
+            )
+        if event_id != selected_atom.get("event_id"):
+            raise HazopFacilityCampaignError(
+                f"scenario binding event_id does not match provider risk atom for {component_id}"
+            )
+        if asset_id != selected_atom.get("asset_id"):
+            raise HazopFacilityCampaignError(
+                f"scenario binding asset_id does not match provider risk atom for {component_id}"
+            )
+        if selected_atom.get("frequency_is_not_inferred") is not True:
+            raise HazopFacilityCampaignError(
+                f"component {component_id} risk atom does not prove an explicit literature frequency"
             )
         selected_family = components[component_id].get("selected_hazop_scenario_family")
         families = raw.get("scenario_families")
