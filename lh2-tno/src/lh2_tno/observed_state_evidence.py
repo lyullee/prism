@@ -115,9 +115,18 @@ def _snapshot_from_sample(
         raise ValueError("observed state sample requires a non-empty values mapping")
     measurements: dict[str, dict[str, Any]] = {}
     state_fields: dict[str, Any] = {}
-    for quantity, raw in raw_values.items():
+    for tag_or_quantity, raw in raw_values.items():
+        tag = str(tag_or_quantity)
+        quantity = (
+            str(raw.get("quantity") or tag)
+            if isinstance(raw, Mapping)
+            else tag
+        )
         if quantity not in _QUANTITIES:
-            raise ValueError(f"unsupported observed-state quantity: {quantity}")
+            raise ValueError(
+                f"unsupported observed-state quantity: {quantity}; "
+                "custom state tags must include raw.values[tag].quantity"
+            )
         if isinstance(raw, Mapping):
             value = raw.get("value_si")
             sensor_location = raw.get("sensor_location")
@@ -130,10 +139,10 @@ def _snapshot_from_sample(
             raise ValueError(f"unsupported observed-state quality: {quality}")
         if quality == "missing":
             continue
-        value_si = _finite_number(value, f"{quantity}.value_si")
+        value_si = _finite_number(value, f"{tag}.value_si")
         if quantity in {"pressure", "temperature"} and value_si <= 0:
             raise ValueError(f"{quantity} must be positive in SI units")
-        measurements[str(quantity)] = {
+        measurements[tag] = {
             "quantity": quantity,
             "value_si": value_si,
             "sensor_location": sensor_location,

@@ -121,10 +121,21 @@ def _frame_from_source(source: Mapping[str, Any]) -> dict[str, Any]:
     values: dict[str, dict[str, Any]] = {}
     measurements: dict[str, StateMeasurement] = {}
     state_fields: dict[str, Any] = {}
-    for quantity, raw in raw_values.items():
-        quantity = str(quantity)
+    for tag_or_quantity, raw in raw_values.items():
+        tag = str(tag_or_quantity)
+        if isinstance(raw, Mapping):
+            # Field/Historian tags may be arbitrary names such as
+            # ``tank_pressure`` or ``transfer_flow``.  Their physical
+            # quantity must be declared explicitly when the tag is not one
+            # of the legacy quantity keys.
+            quantity = str(raw.get("quantity") or tag)
+        else:
+            quantity = tag
         if quantity not in _QUANTITIES:
-            raise ValueError(f"unsupported observed-state quantity: {quantity}")
+            raise ValueError(
+                f"unsupported observed-state quantity: {quantity}; "
+                "custom state tags must include raw.values[tag].quantity"
+            )
         if isinstance(raw, Mapping):
             value_si = raw.get("value_si")
             sensor_location = raw.get("sensor_location")
@@ -137,17 +148,17 @@ def _frame_from_source(source: Mapping[str, Any]) -> dict[str, Any]:
             raise ValueError(f"unsupported state quality: {quality}")
         if quality == "missing":
             continue
-        number = _finite(value_si, f"{quantity}.value_si")
+        number = _finite(value_si, f"{tag}.value_si")
         if quantity in {"pressure", "temperature"} and number <= 0:
             raise ValueError(f"{quantity} must be positive")
-        values[quantity] = {
+        values[tag] = {
             "component_id": component_id,
             "quantity": quantity,
             "value_si": number,
             "sensor_location": sensor_location,
             "quality": quality,
         }
-        measurements[quantity] = StateMeasurement(
+        measurements[tag] = StateMeasurement(
             quantity=quantity,
             value_si=number,
             sensor_location=sensor_location,

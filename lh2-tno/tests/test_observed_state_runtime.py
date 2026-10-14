@@ -83,6 +83,24 @@ def test_runtime_frame_carries_operating_mode_with_state_values():
     assert normalized["operating_mode"] == "receiving"
 
 
+def test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity():
+    source = _source()
+    source["samples"][1]["operating_mode"] = "receiving"
+    source["samples"][1]["values"] = {
+        "tank_pressure": {
+            "quantity": "pressure",
+            "value_si": 251000.0,
+            "sensor_location": "PT-01",
+        }
+    }
+    report = build_observed_state_runtime_frames([source])
+    frame = report["frames"][0]
+    assert "tank_pressure" in frame["values"]
+    assert frame["values"]["tank_pressure"]["quantity"] == "pressure"
+    normalized = service_state_from_runtime_frame(frame, now_s=2.0)
+    assert normalized["values"]["tank_pressure"]["value_si"] == 251000.0
+
+
 def test_runtime_frame_rejects_blank_operating_mode():
     source = _source()
     source["operating_mode"] = "   "
