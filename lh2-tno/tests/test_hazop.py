@@ -12,6 +12,7 @@ from lh2_tno.hazop import (
     evaluate_hazop_runtime_frame,
     hazop_state_from_runtime_frame,
     run_hazop_runtime_consequence,
+    run_hazop_runtime_consequence_branches,
 )
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames
 
@@ -336,3 +337,44 @@ def test_runtime_gate_executes_existing_consequence_monitor_after_provider_match
     assert result["status"] == "CONSEQUENCE_EVALUATED"
     assert result["consequence"]["telemetry_boundary"]["equipment_release_resolved"] is True
     assert result["consequence"]["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
+
+
+def test_runtime_gate_dispatches_multiple_active_rows_as_separate_branches():
+    table = _gate_table()
+    extra = dict(table["rows"][0])
+    extra["id"] = "TK01-liquid-branch-receiving"
+    extra["scenario_family"] = "liquid_two_phase"
+    table["rows"].append(extra)
+    selection = evaluate_hazop_runtime_frame(
+        table, _runtime_frame_for_gate(), now_s=3.2
+    )
+    resolvers = {}
+    for row in selection["selected_scenarios"]:
+        if row["scenario_family"] == "liquid_two_phase":
+            resolvers[row["scenario_id"]] = (
+                lambda template, normalized: _provider_request(
+                    source_operator="equipment_inventory_depletion",
+                    basis="inventory_depletion",
+                )
+            )
+        else:
+            resolvers[row["scenario_id"]] = (
+                lambda template, normalized: _provider_request()
+            )
+    monitor = _FakeMonitor(_provider_request())
+    result = run_hazop_runtime_consequence_branches(
+        table,
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=monitor,
+        release_resolvers=resolvers,
+    )
+    assert result["status"] == "CONSEQUENCE_BRANCHES_EVALUATED"
+    assert len(result["branches"]) == 2
+    assert all(
+        branch["result"]["status"] == "CONSEQUENCE_EVALUATED"
+        for branch in result["branches"]
+    )
+    assert result["policy"]["branches_auto_merged"] is False
+    assert monitor.called is True

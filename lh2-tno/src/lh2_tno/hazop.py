@@ -524,9 +524,101 @@ def run_hazop_runtime_consequence(
     return base
 
 
+def run_hazop_runtime_consequence_branches(
+    table: HazopTable | Mapping[str, Any],
+    frame: Mapping[str, Any],
+    *,
+    now_s: float,
+    template: Any,
+    monitor: Any,
+    release_resolvers: Mapping[str, Any],
+    mapping_digest: str | None = None,
+) -> dict[str, Any]:
+    """Dispatch several active HAZOP rows as separate consequence branches.
+
+    The resolver map is keyed by each selected ``scenario_id``.  Each branch
+    is evaluated through :func:`run_hazop_runtime_consequence` with a one-row
+    HAZOP table, so no provider history, termination basis, or frequency is
+    silently shared between simultaneous accident hypotheses.  Missing branch
+    resolvers remain explicitly withheld while other valid branches may run.
+    """
+    if not isinstance(release_resolvers, Mapping):
+        raise HazopSelectionError("release_resolvers must map scenario_id to a provider resolver")
+    selection = evaluate_hazop_runtime_frame(
+        table,
+        frame,
+        now_s=now_s,
+        mapping_digest=mapping_digest,
+    )
+    result: dict[str, Any] = {
+        "schema_version": "prism.hazop_runtime_consequence_branches.v1",
+        "status": None,
+        "selection": selection,
+        "branches": [],
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "provider_release_created_by_prism": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_claim": False,
+            "branches_auto_merged": False,
+        },
+    }
+    if selection["status"] != "SCENARIOS_SELECTED":
+        result["status"] = f"WITHHELD_HAZOP_{selection['status']}"
+        result["reason"] = (
+            "HAZOP did not produce clean active scenarios; no provider branch was called"
+        )
+        return result
+    if isinstance(table, HazopTable):
+        table_model = table
+    else:
+        try:
+            table_model = HazopTable.model_validate_json(json.dumps(table, allow_nan=False))
+        except Exception as error:
+            raise HazopSelectionError(f"invalid HAZOP table: {error}") from error
+    for scenario in selection["selected_scenarios"]:
+        row = next(
+            (candidate for candidate in table_model.rows if candidate.id == scenario["hazop_row_id"]),
+            None,
+        )
+        if row is None:
+            raise HazopSelectionError("selected HAZOP row disappeared during branch dispatch")
+        branch_table = table_model.model_copy(update={"rows": (row,)})
+        resolver = release_resolvers.get(scenario["scenario_id"])
+        branch = run_hazop_runtime_consequence(
+            branch_table,
+            frame,
+            now_s=now_s,
+            template=template,
+            monitor=monitor,
+            release_resolver=resolver,
+            mapping_digest=mapping_digest,
+        )
+        result["branches"].append({
+            "scenario_id": scenario["scenario_id"],
+            "scenario_family": scenario["scenario_family"],
+            "release_mode": scenario["release_mode"],
+            "result": branch,
+        })
+    branch_statuses = [row["result"]["status"] for row in result["branches"]]
+    result["status"] = (
+        "CONSEQUENCE_BRANCHES_EVALUATED"
+        if branch_statuses and all(status == "CONSEQUENCE_EVALUATED" for status in branch_statuses)
+        else "CONSEQUENCE_BRANCHES_PARTIAL"
+    )
+    result["policy"]["consequence_calculated"] = any(
+        status == "CONSEQUENCE_EVALUATED" for status in branch_statuses
+    )
+    result["policy"]["provider_release_validated_by_scenario"] = all(
+        status == "CONSEQUENCE_EVALUATED" for status in branch_statuses
+    )
+    return result
+
+
 __all__ = [
     "HAZOP_SCHEMA", "HAZOP_STATE_SCHEMA", "HazopSelectionError",
     "HazopRow", "HazopTable", "HazopStateFrame", "evaluate_hazop",
     "hazop_state_from_runtime_frame", "evaluate_hazop_runtime_frame",
-    "run_hazop_runtime_consequence",
+    "run_hazop_runtime_consequence", "run_hazop_runtime_consequence_branches",
 ]

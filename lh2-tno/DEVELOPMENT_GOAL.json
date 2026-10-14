@@ -19,6 +19,8 @@
       "single_clean_scenario_required": true,
       "provider_packet_scenario_contract_checked": true,
       "multiple_active_rows_auto_merged": false,
+      "explicit_branch_dispatch_function": "lh2_tno.hazop.run_hazop_runtime_consequence_branches",
+      "branch_resolver_key": "scenario_id",
       "consequence_called_without_provider": false
     },
     "frequency_inference": false,

@@ -41,6 +41,8 @@ SLABx-LH2/피해영향/점화/시설 IR·F-N 경로
 
 실제 정량평가로 넘길 때는 `run_hazop_runtime_consequence(...)`를 사용한다. 이 함수는 먼저 HAZOP 결과가 하나의 활성 시나리오인지 확인하고, 그 다음에만 기존 runtime monitor의 `release_resolver`를 호출한다. resolver가 반환한 provider packet은 선택된 설비 종류·방출 형태·사고 family·종료 근거·source operator와 다시 대조된다. 불일치하거나 provider가 없으면 SLABx-LH2와 피해 계산을 호출하지 않는다. 여러 HAZOP 행이 동시에 활성화되면 각 사고 branch를 별도 provider 요청으로 분기해야 하므로 자동으로 하나로 합치지 않는다.
 
+여러 행을 실제로 병렬 분기할 때는 `run_hazop_runtime_consequence_branches(...)`에 `scenario_id`별 resolver를 넘긴다. 각 행은 한 행짜리 HAZOP 계약으로 다시 평가되고, 각각의 provider 종료 근거와 source operator를 독립적으로 확인한 뒤 기존 consequence monitor를 호출한다. resolver가 없는 branch는 `CONSEQUENCE_BRANCHES_PARTIAL` 아래에서 별도로 보류되며 다른 branch의 결과를 0 위험으로 채우지 않는다.
+
 ## 결과 읽기
 
 | 결과 | 뜻 |
@@ -68,6 +70,6 @@ python scripts/evaluate_hazop_operating_mode.py `
 
 이 모듈은 설비-neutral HAZOP 판단과 scenario dispatch boundary를 닫는다. 사고 family catalog와 provider packet catalog에 없는 사건은 선택하지 않으며, HAZOP 이탈이 있어도 빈도와 피해 결과를 자동으로 만들지 않는다.
 
-현재 HAZOP·runtime mode 회귀검사는 26개, 전체 패키지 검사는 **960 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로를 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
+현재 HAZOP·runtime mode 회귀검사는 27개, 전체 패키지 검사는 **961 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로와 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로를 실행했다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
 
 남은 엄격 문턱은 실제 설비별 HAZOP·P&ID identity, provider의 차단·재고·종료 이력, 문헌 빈도 event binding, SLABx-LH2 독립 비교, 시설 전체 사고 family coverage와 IR/F-N 승격이다. 현재 검사센터 자료는 정상 상태 신호의 후보 입력으로만 취급한다.

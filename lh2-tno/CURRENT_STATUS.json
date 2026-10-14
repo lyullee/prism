@@ -3888,13 +3888,15 @@
     "example_state": "examples/generic_hazop_state_frame.json",
     "example_record": "results/hazop_current/selection.json",
     "example_status": "SCENARIOS_SELECTED; receiving mode and high-pressure deviation selected vessel_hole",
-    "targeted_test_count": 26,
+    "targeted_test_count": 27,
     "runtime_gate": {
       "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
       "schema_version": "prism.hazop_runtime_consequence_gate.v1",
       "single_clean_scenario_required": true,
       "provider_packet_scenario_contract_checked": true,
       "multiple_active_rows_auto_merged": false,
+      "explicit_branch_dispatch_function": "lh2_tno.hazop.run_hazop_runtime_consequence_branches",
+      "branch_resolver_key": "scenario_id",
       "consequence_called_without_provider": false,
       "targeted_status": "PASS"
     },
@@ -3912,7 +3914,7 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 960,
+    "tests": 961,
     "failures": 0,
     "skipped": 0,
     "scope": "current lh2-tno package after HAZOP/mode adapter changes"
