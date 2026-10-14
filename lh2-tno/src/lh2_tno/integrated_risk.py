@@ -70,11 +70,15 @@ def _forecast_modes(result: Mapping[str, Any]) -> dict[str, list[str]]:
     return {component_id: sorted(values) for component_id, values in sorted(modes.items())}
 
 
-def _forecast_scenarios(result: Mapping[str, Any]) -> set[str]:
-    scenario_ids: set[str] = set()
+def _forecast_scenarios(result: Mapping[str, Any]) -> set[tuple[str, str]]:
+    scenario_ids: set[tuple[str, str]] = set()
     for entry in result.get("scenario_entries", ()):
-        if isinstance(entry, Mapping) and isinstance(entry.get("scenario_id"), str):
-            scenario_ids.add(entry["scenario_id"])
+        if (
+            isinstance(entry, Mapping)
+            and isinstance(entry.get("component_id"), str)
+            and isinstance(entry.get("scenario_id"), str)
+        ):
+            scenario_ids.add((entry["component_id"], entry["scenario_id"]))
     return scenario_ids
 
 
@@ -165,8 +169,8 @@ def run_hazop_integrated_risk(
     current_modes = _current_modes(current)
     forecast_modes = _forecast_modes(forecast)
     current_scenarios = {
-        str(branch.get("scenario_id"))
-        for component in current.get("components", {}).values()
+        (str(component_id), str(branch.get("scenario_id")))
+        for component_id, component in current.get("components", {}).items()
         if isinstance(component, Mapping)
         for branch in component.get("branches", ())
         if isinstance(branch, Mapping) and isinstance(branch.get("scenario_id"), str)
@@ -183,7 +187,11 @@ def run_hazop_integrated_risk(
             "forecast_component_ids": sorted(forecast_tables_by_component or {}),
             "current_operating_modes": current_modes,
             "forecast_operating_modes": forecast_modes,
-            "shared_scenario_ids": sorted(current_scenarios & forecast_scenarios),
+            "shared_scenario_ids": sorted({scenario_id for _, scenario_id in current_scenarios & forecast_scenarios}),
+            "shared_component_scenario_keys": [
+                {"component_id": component_id, "scenario_id": scenario_id}
+                for component_id, scenario_id in sorted(current_scenarios & forecast_scenarios)
+            ],
             "mode_and_scenario_identity_preserved": True,
         },
         "timing": {

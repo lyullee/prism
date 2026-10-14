@@ -81,7 +81,7 @@ ledger = run_hazop_integrated_risk(
 )
 ```
 
-이 호출은 먼저 `run_hazop_facility_runtime(...)`으로 현재 상태를 평가하고, 예측 frame이 제공된 경우 `run_hazop_forecast_risk_scan(...)`을 이어서 실행한다. `ledger.current`와 `ledger.forecast`는 원래 각 함수의 원장을 그대로 포함하고, `ledger.linkage`에는 현재·예측 설비 ID, 각 경로에서 확인된 운전 모드, 공통 `scenario_id`가 남는다. 따라서 화면이나 알람 시스템은 “지금 인수 모드에서 선택된 시나리오”와 “예측 시점에 같은 시나리오가 다시 도달했는지”를 한 원장에서 추적할 수 있다.
+이 호출은 먼저 `run_hazop_facility_runtime(...)`으로 현재 상태를 평가하고, 예측 frame이 제공된 경우 `run_hazop_forecast_risk_scan(...)`을 이어서 실행한다. `ledger.current`와 `ledger.forecast`는 원래 각 함수의 원장을 그대로 포함하고, `ledger.linkage`에는 현재·예측 설비 ID, 각 경로에서 확인된 운전 모드, 공통 `scenario_id`, 그리고 설비 범위가 포함된 `shared_component_scenario_keys`가 남는다. 따라서 같은 HAZOP 행 ID를 여러 설비가 재사용해도 화면이나 알람 시스템은 “지금 인수 모드에서 선택된 TK-01 시나리오”와 “예측 시점에 TK-02에서 도달한 같은 행 ID”를 서로 다른 사건으로 추적할 수 있다.
 
 예측 frame을 넘길 때는 설비별 HAZOP 표를 반드시 함께 넘겨야 하며, 예측 정량평가기를 생략하면 위험조건 도달은 기록하되 `WITHHELD_NO_QUANTITATIVE_EVALUATOR`로 남는다. 통합 함수의 결과는 `diagnostic_only=true`, `frequency_inference_performed=false`, `facility_qra_promotion=false`를 유지한다. 즉 이 함수는 두 계산 경로를 연결하는 실행 계층이며, 누출 packet·문헌 빈도·SLABx-LH2 계산·시설 IR/F-N의 자격을 대신 만들어 주지 않는다. `timing.wall_elapsed_ms`도 한 번의 호출을 측정한 값이므로 1 Hz 운영 보장을 뜻하지 않는다.
 

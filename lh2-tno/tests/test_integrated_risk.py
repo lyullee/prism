@@ -66,6 +66,9 @@ def test_integrated_risk_joins_current_and_forecast_identity(monkeypatch):
     assert result["linkage"]["current_operating_modes"] == {"TK-01": "receiving"}
     assert result["linkage"]["forecast_operating_modes"] == {"TK-01": ["receiving"]}
     assert result["linkage"]["shared_scenario_ids"] == ["TK-01-pressure"]
+    assert result["linkage"]["shared_component_scenario_keys"] == [
+        {"component_id": "TK-01", "scenario_id": "TK-01-pressure"}
+    ]
     assert result["policy"]["facility_qra_promotion"] is False
     assert result["policy"]["frequency_inference_performed"] is False
     assert calls["current"][2]["now_s"] == 10.0
