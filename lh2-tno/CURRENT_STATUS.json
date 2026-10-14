@@ -3888,7 +3888,7 @@
     "example_state": "examples/generic_hazop_state_frame.json",
     "example_record": "results/hazop_current/selection.json",
     "example_status": "SCENARIOS_SELECTED; receiving mode and high-pressure deviation selected vessel_hole",
-    "targeted_test_count": 30,
+    "targeted_test_count": 31,
     "runtime_gate": {
       "function": "lh2_tno.hazop.run_hazop_runtime_consequence",
       "schema_version": "prism.hazop_runtime_consequence_gate.v1",
