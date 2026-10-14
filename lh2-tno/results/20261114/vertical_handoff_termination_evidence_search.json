@@ -1,0 +1,141 @@
+{
+  "schema_version": "prism.vertical_termination_evidence_search.v1",
+  "status": "SEARCH_COMPLETE_EVIDENCE_OPEN",
+  "source_root": "lh2-tno\\results\\20261020\\vertical_vent_all_bins",
+  "source_catalog_event_count": 5,
+  "source_catalog_case_count": 10,
+  "valid_termination_event_count": 0,
+  "not_supplied_event_count": 5,
+  "not_supplied_case_count": 10,
+  "errors": [],
+  "promotion": {
+    "release_boundary_catalog_updated": false,
+    "facility_qra_promoted": false,
+    "frequency_inferred": false,
+    "physical_validation_claim": false
+  },
+  "interpretation": "Vertical packets were found and their provider termination basis was read. A synthetic diagnostic horizon is retained as NOT_SUPPLIED; duration and mass integration are not converted into isolation success or inventory depletion.",
+  "rows": [
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+      "source_event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "094fc8acffdabb14207904d10bb5dc8f029a7032a190a2df5c3553aa675cb7cb",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.37,
+      "available_mass_kg": 0.01,
+      "cumulative_mass_out_kg": 1.6583741752980332e-09,
+      "mass_residual_kg": 0.0,
+      "status": "NOT_SUPPLIED",
+      "blocking_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon",
+        "provider_history_ended_at_diagnostic_horizon",
+        "vertical_handoff_not_independently_validated"
+      ],
+      "source": {
+        "packet": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\resolved_release_catalog.json",
+        "verification": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\verification.json"
+      },
+      "facility_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "facility_case_count": 2,
+      "facility_chain_status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+      "source_event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "14eabbbe2107e1e20ade9e995cb396dd07ecd16be98f177c2b91acaf41413bd3",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.37,
+      "available_mass_kg": 0.01,
+      "cumulative_mass_out_kg": 1.653545292876029e-07,
+      "mass_residual_kg": 0.0,
+      "status": "NOT_SUPPLIED",
+      "blocking_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon",
+        "provider_history_ended_at_diagnostic_horizon",
+        "vertical_handoff_not_independently_validated"
+      ],
+      "source": {
+        "packet": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\resolved_release_catalog.json",
+        "verification": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\verification.json"
+      },
+      "facility_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "facility_case_count": 2,
+      "facility_chain_status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+      "source_event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "d8fd818e0728e62ab7989d6ce4891747f74031d4f05280de7873ec3aff63a1eb",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.37,
+      "available_mass_kg": 0.01,
+      "cumulative_mass_out_kg": 4.629740437409607e-06,
+      "mass_residual_kg": 0.0,
+      "status": "NOT_SUPPLIED",
+      "blocking_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon",
+        "provider_history_ended_at_diagnostic_horizon",
+        "vertical_handoff_not_independently_validated"
+      ],
+      "source": {
+        "packet": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\resolved_release_catalog.json",
+        "verification": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\verification.json"
+      },
+      "facility_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "facility_case_count": 2,
+      "facility_chain_status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+      "source_event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "e47a8b8a9429f0e13e4b07ccdb1c3638490ef134dff7c59452df04883048a067",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.37,
+      "available_mass_kg": 0.01,
+      "cumulative_mass_out_kg": 0.00010052648374898754,
+      "mass_residual_kg": 0.0,
+      "status": "NOT_SUPPLIED",
+      "blocking_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon",
+        "provider_history_ended_at_diagnostic_horizon",
+        "vertical_handoff_not_independently_validated"
+      ],
+      "source": {
+        "packet": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\resolved_release_catalog.json",
+        "verification": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\verification.json"
+      },
+      "facility_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "facility_case_count": 2,
+      "facility_chain_status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC"
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+      "source_event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+      "component_id": "terminal_pipe",
+      "provider_result_digest": "f9fcf7cb7a676f67b5cf224c8b93d166c602bd55e18411e1d20db0e7e7c2ab2b",
+      "termination_basis": "synthetic_diagnostic_horizon",
+      "duration_s": 0.37,
+      "available_mass_kg": 0.01,
+      "cumulative_mass_out_kg": 0.0018175777704088902,
+      "mass_residual_kg": 0.0,
+      "status": "NOT_SUPPLIED",
+      "blocking_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon",
+        "provider_history_ended_at_diagnostic_horizon",
+        "vertical_handoff_not_independently_validated"
+      ],
+      "source": {
+        "packet": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\resolved_release_catalog.json",
+        "verification": "lh2-tno\\results\\20261020\\vertical_vent_all_bins\\verification.json"
+      },
+      "facility_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "facility_case_count": 2,
+      "facility_chain_status": "CLOSED_OPERATOR_LIMITED_DIAGNOSTIC"
+    }
+  ],
+  "vertical_chain_audit": "lh2-tno\\results\\20261024\\native_generic_scope_vertical_handoff_chain_v1.json"
+}
