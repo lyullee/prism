@@ -649,6 +649,43 @@
       "blocking_reason": null
     },
     {
+      "name": "diagnostic_worklist_packet_coverage_evidence",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261024\\native_generic_scope_packet_evidence_qualification_readiness_v14.json",
+        "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
+        "worklist_event_count": 24,
+        "candidate_event_count": 24,
+        "exact_match_event_count": 24,
+        "strict_packet_valid_event_count": 24,
+        "consequence_chain_event_count": 24,
+        "qualified_provider_packet_count": 0,
+        "frequency_bound": false,
+        "facility_qra_claim": false,
+        "physical_validation_claim": false,
+        "qualification_readiness": {
+          "status_counts": {
+            "BLOCKED_REVIEW": 24
+          },
+          "blocker_counts": {
+            "operator_limited_input": 24,
+            "physical_validation_evidence_missing": 24,
+            "qualification_sidecar_missing": 24,
+            "synthetic_or_screening_boundary_declared": 24,
+            "termination_leaves_declared_inventory_residual": 2
+          },
+          "input_origin_counts": {
+            "model_prediction": 24
+          },
+          "qualification_sidecar_present_count": 0,
+          "physical_validation_evidence_present_count": 0
+        }
+      },
+      "interpretation": "Saved external-model packets cover only the exact-matched worklist subset; this diagnostic evidence does not close the missing events or qualify the provider packets. Qualification-readiness blockers are copied separately so exact packet identity is not mistaken for actual facility evidence."
+    },
+    {
       "name": "diagnostic_release_trace_coverage",
       "status": "PASS",
       "diagnostic_only": true,
@@ -4786,8 +4823,24 @@
           "physical_validation_claim": false,
           "facility_qra_claim": false
         },
-        "qualified_provider_packet_count": null,
-        "qualification_readiness": null
+        "qualified_provider_packet_count": 0,
+        "qualification_readiness": {
+          "status_counts": {
+            "BLOCKED_REVIEW": 24
+          },
+          "blocker_counts": {
+            "operator_limited_input": 24,
+            "physical_validation_evidence_missing": 24,
+            "qualification_sidecar_missing": 24,
+            "synthetic_or_screening_boundary_declared": 24,
+            "termination_leaves_declared_inventory_residual": 2
+          },
+          "input_origin_counts": {
+            "model_prediction": 24
+          },
+          "qualification_sidecar_present_count": 0,
+          "physical_validation_evidence_present_count": 0
+        }
       },
       "blocking_reason": null
     },

@@ -4797,6 +4797,7 @@
     "validation_evidence_matrix": "results/20261014/validation_evidence_matrix_with_dynamiclh2poolx.json",
     "slabx_validation_evidence": "results/20261106/slabx_lh2_validation_audit_recomputed.json",
     "facility_evidence_request": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_evidence_request.json",
+    "diagnostic_worklist_evidence": "results/20261024/native_generic_scope_packet_evidence_qualification_readiness_v14.json",
     "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
     "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,
@@ -4823,6 +4824,6 @@
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 4,
     "facility_qra_promotion": false,
-    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix and a 44-case facility evidence-request catalog are recorded; qualified provider promotion, strict release closure, independent full-scope physical validation and facility IR/F-N remain withheld."
+    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix, a 44-case facility evidence-request catalog and the 24-event qualification-readiness audit are recorded; all 24 base packets remain BLOCKED_REVIEW until provider sidecars and independent physical evidence are supplied. Qualified provider promotion, strict release closure and facility IR/F-N remain withheld."
   }
 }

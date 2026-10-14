@@ -3858,6 +3858,7 @@
     "validation_evidence_matrix": "results/20261014/validation_evidence_matrix_with_dynamiclh2poolx.json",
     "slabx_validation_evidence": "results/20261106/slabx_lh2_validation_audit_recomputed.json",
     "facility_evidence_request": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_evidence_request.json",
+    "diagnostic_worklist_evidence": "results/20261024/native_generic_scope_packet_evidence_qualification_readiness_v14.json",
     "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
     "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,
