@@ -3438,5 +3438,12 @@
     "remaining_failed_reason": "provider source/throat state absent; compressible/underexpanded handoff cannot be constructed",
     "facility_qra_promotion": false
   },
-  "campaign_transfer_valve_clock_normalization_status": "EXECUTED_OPERATOR_LIMITED; 5/5 transfer-valve cases pass provider-to-pool mass ledger after adapter-only clock normalization"
+  "campaign_transfer_valve_clock_normalization_status": "EXECUTED_OPERATOR_LIMITED; 5/5 transfer-valve cases pass provider-to-pool mass ledger after adapter-only clock normalization",
+  "g1_source_state_recheck_latest_record": "results/20261014/vaporizer_g1_source_state_recheck.json",
+  "g1_source_state_recheck_chain_record": "results/20261014/vaporizer_g1_source_state_rebased_chain_recheck/verification.json",
+  "g1_source_state_recheck_status": "END_TO_END_DIAGNOSTIC_EXECUTED; source/throat-bound compressible handoff consumed at facility position; promotion gates remain closed",
+  "g1_source_state_recheck_chain_elapsed_ms": 8143.077300002915,
+  "g1_source_state_recheck_handoff_max_mach": 3.998200025329564,
+  "g1_source_state_recheck_next_gate": "bind a qualified provider release and independent near-field validation before strict facility-QRA promotion",
+  "remaining_failed_reason": "baseline 24-case campaign retains the original G1 packet failure for audit; a separate source-state-bound G1 recheck now executes end-to-end diagnostically, while qualified provider evidence and independent near-field validation remain absent"
 }

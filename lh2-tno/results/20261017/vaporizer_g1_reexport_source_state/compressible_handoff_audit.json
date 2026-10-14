@@ -1,0 +1,20 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_GENERATED_SOURCE_STATE_BOUND",
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "algorithm": "birch_momentum_energy",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "upstream_provider_source_digest": "beabc2ede82b1f5aed1bcc6f251cdd6bd07936dd84d96e40c603cd7680314f2a",
+  "upstream_provider_result_digest": "227caf76e92d93ed99e3653a2c20ccdbe81bc30c16328594c33d4c7e406ee885",
+  "handoff_provider_source_digest": "21012f6a14b1fea24c68764a27a91ac4e41fe3d068d7c8cf7da4b07448780783",
+  "handoff_provider_result_digest": "a0e33f937a9a24f83577a192173dd648b1c9d7a3a06b1af663e291be26ca209f",
+  "interval_count": 11,
+  "max_energy_residual_j_per_kg": 0.0,
+  "max_entropy_residual_j_per_kgk": 347.2522508821712,
+  "evidence_status": "synthetic_diagnostic",
+  "provider_source_state_required": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false
+}

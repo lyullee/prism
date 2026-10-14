@@ -1,0 +1,13 @@
+{
+  "status": "COMPRESSIBLE_PLANE_HANDOFF_VALIDATED",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "component_id": "ambient-vaporizer-01",
+  "provider_result_digest": "227caf76e92d93ed99e3653a2c20ccdbe81bc30c16328594c33d4c7e406ee885",
+  "max_mach_number": 3.998200025329564,
+  "handoff_state_count": 11,
+  "handoff_consumed": true,
+  "provider_packet_qualified": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The provider-owned gas boundary is conservation-checked. This command does not assign frequency, qualify the provider, or promote facility IR/F-N."
+}

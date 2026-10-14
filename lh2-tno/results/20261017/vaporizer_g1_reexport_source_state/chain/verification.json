@@ -1,0 +1,20 @@
+{
+  "status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "source_operator": "integrated_transient",
+  "provider_packet_schema": "prism.resolved_release.v1",
+  "provider_model_provenance": "re-exported lh2dt DynamicVaporizer source-state diagnostic for ambient-vaporizer/G1",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "provider_duration_s": 1.0999999999999999,
+  "provider_mass_residual_kg": 0.0,
+  "compressible_plane_handoff_consumed": true,
+  "consequence_chain_executed": true,
+  "facility_ir_fn_claim": false,
+  "frequency_inference": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "limitations": [
+    "synthetic facility/receptors/weather/ignition",
+    "source state and notional plane adapter are diagnostic and not independently validated",
+    "no initiating frequency applied"
+  ]
+}
