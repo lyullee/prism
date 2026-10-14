@@ -156,6 +156,7 @@ def _provider_mass_balance(
         "final_mass_kg",
         "residual_mass_kg",
         "isolation_time_s",
+        "post_isolation_observation_s",
         "isolation_success",
     )
     if not any(key in metadata for key in recognized):
@@ -170,6 +171,7 @@ def _provider_mass_balance(
         "cumulative_mass_in_kg",
         "final_mass_kg",
         "isolation_time_s",
+        "post_isolation_observation_s",
     ):
         if key in metadata:
             value = _finite(metadata[key], f"provider data.provider_meta.{key}")

@@ -48,6 +48,8 @@ provider가 차단을 실제로 계산했다는 증거를 보이려면 응답의
 
 요청에 차단시계가 있는데 provider가 시각·관찰시간·`isolation_success`를 반환하지 않거나 값이 다르면 strict export가 차단된다. `isolation_success=false`는 오류로 바꾸지 않고 provider의 실패 결과로 보존하므로, 이후 release/isolation partition에서 실패 branch를 잃지 않는다. 이 계약은 방출 종료를 PRISM이 추정하는 기능이 아니라, 외부 설비 모델의 차단·재고·종료 장부를 피해 계산으로 넘기는 연결 경계다.
 
+strict `ResolvedGasRelease`·`ResolvedLiquidRelease`의 `provider_mass_balance`에도 `isolation_time_s`, `post_isolation_observation_s`, `isolation_success`를 보존한다. 따라서 시설 campaign이 packet identity를 재구성할 때 차단 후 관찰구간을 버리지 않는다.
+
 ## 정상 상태 snapshot 전달 경계 (2026-10-17)
 
 디지털트윈이 사고 시나리오를 계산하기 직전의 설비 상태를 provider에 전달해야 할 때는 `prism.equipment_state_snapshot.v1` 객체를 요청의 `state_snapshot`에 넣는다. 구현은 `src/lh2_tno/state_snapshot.py`의 `EquipmentStateSnapshot`과 `build_state_snapshot_from_normalized()`에 있다.

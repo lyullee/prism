@@ -52,10 +52,15 @@ class ProviderMassBalance(Contract):
     reported_residual_mass_kg: float | None = None
     derived_accounting_residual_kg: float | None = None
     isolation_time_s: Nonnegative | None = None
+    post_isolation_observation_s: Nonnegative | None = None
     isolation_success: bool | None = None
 
     @model_validator(mode='after')
     def has_evidence(self):
+        if self.post_isolation_observation_s is not None and self.isolation_time_s is None:
+            raise ValueError(
+                'post_isolation_observation_s requires isolation_time_s'
+            )
         if not any(
             value is not None
             for value in (
@@ -66,6 +71,7 @@ class ProviderMassBalance(Contract):
                 self.reported_residual_mass_kg,
                 self.derived_accounting_residual_kg,
                 self.isolation_time_s,
+                self.post_isolation_observation_s,
                 self.isolation_success,
             )
         ):

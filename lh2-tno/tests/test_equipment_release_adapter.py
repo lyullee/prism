@@ -81,6 +81,7 @@ def test_adapter_preserves_provider_mass_balance_without_calling_residual_deplet
         "final_mass_kg": 0.8,
         "residual_mass_kg": 0.8,
         "isolation_time_s": 0.1,
+        "post_isolation_observation_s": 0.02,
         "isolation_success": True,
     }
     release = _build(response)
@@ -91,6 +92,7 @@ def test_adapter_preserves_provider_mass_balance_without_calling_residual_deplet
     assert balance.cumulative_mass_out_kg == pytest.approx(0.015)
     assert balance.reported_residual_mass_kg == pytest.approx(0.8)
     assert balance.derived_accounting_residual_kg == pytest.approx(-0.185)
+    assert balance.post_isolation_observation_s == pytest.approx(0.02)
     assert balance.isolation_success is True
 
 
