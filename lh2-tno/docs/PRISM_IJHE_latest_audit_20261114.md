@@ -31,6 +31,8 @@
 | `support_center_hazop_operating_mode_evidence_audit.json` | 검사센터 운전순서에서 일반 모드·HAZOP 정성 근거 추출 | 52개 모드 행; 빈도·방출 생성 없음 |
 | `support_center_reviewed_signal_unit_evidence.json` | 문서 anchor 기반 일부 PT/TT 단위 확인 | 부분 근거; 미검토 tag·calibration은 보류 |
 | `inspection_center_observed_hazop_runtime_audit.json` | 실측 상태 + 명시적 운전 모드의 HAZOP 선택 | 3개 관측 설비 모드 선택; state-only |
+| `inspection_center_observed_state_replay_audit.json` | 검사센터 정상운전 원자료 재생성·해시 일치 | 3개 원자료, 3/3 replay matched; 입력 무결성만 확인 |
+| `inspection_center_observed_state_runtime_frames.json` | 원자료에서 만든 설비 상태 frame | 3개 frame, 8,955개 관측 샘플; `historian_measured` 상태 입력 |
 | `inspection_center_observed_hazop_provider_event_binding.json` | 관측 HAZOP scenario와 문헌 event identity 연결 | 3/3 명시적 binding; 빈도 할당은 별도 |
 | `inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json` | 관측 HAZOP→provider→SLABx-LH2 진단 chain | 3개 시나리오 실행; synthetic/provider-bound 진단 전용 |
 | `observed_hazop_storage_isolation_branch_evidence.json` / `observed_hazop_vaporizer_isolation_branch_evidence.json` | 저장탱크·기화기 차단 성공 branch와 zero-flow evidence | explicit controls·branch probability·diagnostic gate 확인 |
@@ -88,7 +90,10 @@ python scripts/build_ijhe_completion_audit.py `
   상태별로 보존한다. `EXECUTED_OPERATOR_LIMITED`와
   `EXECUTED_DOMAIN_INCOMPLETE`를 `UNCOMPUTED`로 뭉뚱그리지 않는다.
 - HAZOP 운전 모드는 명시적 입력으로만 선택된다.
-- 검사센터 실측 상태와 운전 모드가 HAZOP 선택·provider binding·격리 branch 진단에 연결된다.
+- 검사센터 정상운전 원자료는 3/3 replay matched이고, 8,955개 관측 샘플에서
+  `historian_measured` 상태 frame 3개가 재생성된다. 이 frame의 상태값과 운전 모드는
+  HAZOP 선택·provider binding·격리 branch 진단에 연결된다.
+- 이 정상운전 자료는 사고 방출량·사고 빈도·provider qualification을 만들지 않는다.
 - 조건부 시설 view에서 44개 case의 방출 지속시간·재고·종료 상태와 176개 risk atom의
   연결을 같은 case key로 추적한다.
 
