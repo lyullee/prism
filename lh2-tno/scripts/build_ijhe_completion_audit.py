@@ -138,6 +138,11 @@ def main() -> int:
         type=Path,
         help="optional namespaced isolation success/failure facility-extension verification",
     )
+    parser.add_argument(
+        "--hazop-forecast-scan",
+        type=Path,
+        help="optional predicted-state HAZOP trigger scan",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -389,6 +394,13 @@ def main() -> int:
             isolation_union_extension_verification["_record_path"] = str(
                 args.isolation_union_extension_verification
             )
+        hazop_forecast_scan = (
+            _object(args.hazop_forecast_scan)
+            if args.hazop_forecast_scan
+            else None
+        )
+        if hazop_forecast_scan is not None:
+            hazop_forecast_scan["_record_path"] = str(args.hazop_forecast_scan)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -428,6 +440,7 @@ def main() -> int:
             isolation_union_extension_verification,
             observed_state_model_binding_audit,
             external_equipment_model_contract_audit,
+            hazop_forecast_scan=hazop_forecast_scan,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

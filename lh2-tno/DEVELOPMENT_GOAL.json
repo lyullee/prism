@@ -37,6 +37,8 @@
       "forecast_quantitative_evaluator_required": true,
       "forecast_frequency_inference": false,
       "forecast_qra_promotion": false,
+      "forecast_completion_audit_check": "diagnostic_hazop_forecast_risk_scan",
+      "forecast_completion_audit_cli_option": "--hazop-forecast-scan",
       "facility_annual_qra_promotion": false,
       "consequence_called_without_provider": false
     },

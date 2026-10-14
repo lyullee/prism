@@ -3913,6 +3913,8 @@
       "forecast_quantitative_evaluator_required": true,
       "forecast_frequency_inference": false,
       "forecast_qra_promotion": false,
+      "forecast_completion_audit_check": "diagnostic_hazop_forecast_risk_scan",
+      "forecast_completion_audit_cli_option": "--hazop-forecast-scan",
       "facility_annual_qra_promotion": false,
       "consequence_called_without_provider": false,
       "targeted_status": "PASS"
@@ -3931,10 +3933,10 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 974,
+    "tests": 975,
     "failures": 0,
     "skipped": 0,
-    "scope": "current lh2-tno package after HAZOP/mode adapter and facility campaign handoff changes"
+    "scope": "current lh2-tno package after HAZOP/mode, facility campaign, forecast trigger/adapter and completion-audit changes"
   },
   "runtime_async_development": {
     "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED_GOAL_REMAINS_ACTIVE",

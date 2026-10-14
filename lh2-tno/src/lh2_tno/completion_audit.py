@@ -90,6 +90,7 @@ def build_ijhe_completion_audit(
     isolation_union_extension_verification: Mapping[str, Any] | None = None,
     observed_state_model_binding_audit: Mapping[str, Any] | None = None,
     external_equipment_model_contract_audit: Mapping[str, Any] | None = None,
+    hazop_forecast_scan: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2781,6 +2782,59 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    if hazop_forecast_scan is not None:
+        forecast_policy = hazop_forecast_scan.get("policy")
+        if not isinstance(forecast_policy, Mapping):
+            forecast_policy = {}
+        steps = hazop_forecast_scan.get("steps")
+        scenario_entries = hazop_forecast_scan.get("scenario_entries")
+        trigger_count = hazop_forecast_scan.get("trigger_count")
+        evaluated_count = hazop_forecast_scan.get("evaluated_count")
+        withheld_count = hazop_forecast_scan.get("withheld_count")
+        forecast_valid = (
+            hazop_forecast_scan.get("schema_version") == "prism.hazop_forecast_risk_scan.v1"
+            and hazop_forecast_scan.get("status") == "FORECAST_RISK_SCAN_COMPLETE"
+            and hazop_forecast_scan.get("forecast_origin") == "model_prediction"
+            and isinstance(steps, list)
+            and bool(steps)
+            and isinstance(scenario_entries, list)
+            and isinstance(trigger_count, int)
+            and trigger_count >= 0
+            and isinstance(evaluated_count, int)
+            and evaluated_count >= 0
+            and isinstance(withheld_count, int)
+            and withheld_count >= 0
+            and trigger_count == evaluated_count + withheld_count
+            and forecast_policy.get("operating_mode_taken_from_forecast_input") is True
+            and forecast_policy.get("frequency_inference_performed") is False
+            and forecast_policy.get("sensor_frequency_learning_used") is False
+            and forecast_policy.get("facility_qra_promotion") is False
+            and forecast_policy.get("diagnostic_only") is True
+        )
+        forecast_check = _check(
+            "diagnostic_hazop_forecast_risk_scan",
+            forecast_valid,
+            {
+                "record": hazop_forecast_scan.get("_record_path"),
+                "status": hazop_forecast_scan.get("status"),
+                "schema_version": hazop_forecast_scan.get("schema_version"),
+                "forecast_origin": hazop_forecast_scan.get("forecast_origin"),
+                "step_count": len(steps) if isinstance(steps, list) else None,
+                "scenario_entry_count": len(scenario_entries) if isinstance(scenario_entries, list) else None,
+                "trigger_count": trigger_count,
+                "evaluated_count": evaluated_count,
+                "withheld_count": withheld_count,
+                "policy": dict(forecast_policy),
+            },
+            "forecast HAZOP scan is missing a valid state-origin, trigger accounting, or fail-closed policy",
+        )
+        forecast_check["diagnostic_only"] = True
+        forecast_check["interpretation"] = (
+            "Predicted operating-mode frames are checked as a diagnostic trigger path. "
+            "A withheld quantitative evaluator is preserved as withheld evidence; this check "
+            "never infers frequency or promotes facility QRA."
+        )
+        checks.append(forecast_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {
