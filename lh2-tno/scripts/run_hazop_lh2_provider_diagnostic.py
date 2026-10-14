@@ -27,6 +27,7 @@ from lh2_tno.integrated_risk import run_hazop_integrated_risk  # noqa: E402
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
 from lh2_tno.provider_release import provider_release_resolver_from_packet  # noqa: E402
+from lh2_tno.uncertainty import LiteratureFrequencyScenario, literature_frequency_uncertainty  # noqa: E402
 from lh2_tno.service import (  # noqa: E402
     ConsequenceService,
     RealtimeConsequenceMonitor,
@@ -236,6 +237,46 @@ def run(args: argparse.Namespace) -> dict:
             annual_conditions=annual_conditions,
         ),
     )
+    # Reweight the saved HAZOP risk atoms with the published literature bounds.
+    # This changes no provider or consequence physics and does not create a
+    # facility credible interval; it only closes the conditional known-atom
+    # uncertainty record required by the completion audit.
+    campaign = result["facility_campaign"]["campaign"]
+    facility_ledger = result["facility_campaign"]["facility_ledger"]
+    uncertainty_input = copy.deepcopy(campaign)
+    uncertainty_input["known_contribution_annual_ir_low_high"] = copy.deepcopy(
+        facility_ledger.get("known_contribution_annual_ir_low_high")
+    )
+    uncertainty_input["known_contribution_expected_death_fn_low_high"] = copy.deepcopy(
+        facility_ledger.get("known_contribution_expected_death_fn_low_high")
+    )
+    # The realtime campaign event is intentionally a compact provider-boundary
+    # record, whereas the uncertainty calculator validates the full catalogue
+    # FrequencyEvent contract.  Reattach the original generated event fields
+    # and retain the HAZOP annotations as accounting metadata.
+    uncertainty_event = event.model_dump(mode="json")
+    campaign_event = campaign["events"][0]
+    for key in ("scenario_families", "operating_mode", "hazop_scenario_id"):
+        if key in campaign_event:
+            uncertainty_event[key] = copy.deepcopy(campaign_event[key])
+    uncertainty_input["events"] = [uncertainty_event]
+    asset_id = str(event.asset_id)
+    uncertainty_scenarios = tuple(
+        LiteratureFrequencyScenario(
+            id=identifier,
+            asset_quantiles={asset_id: quantile},
+            provenance="published frequency bounds from the explicit catalogue event; conditional diagnostic only",
+        )
+        for identifier, quantile in (
+            ("hazop-provider-frequency-p05", "p05"),
+            ("hazop-provider-frequency-published", "published"),
+            ("hazop-provider-frequency-p95", "p95"),
+        )
+    )
+    result["frequency_uncertainty"] = literature_frequency_uncertainty(
+        uncertainty_input,
+        uncertainty_scenarios,
+    )
     result["diagnostic_context"] = {
         "scope": "synthetic_provider_bound_hazop_lh2_diagnostic",
         "pool_boundary": {
@@ -246,6 +287,12 @@ def run(args: argparse.Namespace) -> dict:
         "forecast_facility_id_normalized_to": table["facility_id"],
         "frequency_binding": "explicit generated literature event; no sensor or simulation frequency inference",
         "facility_qra_claim": False,
+        "frequency_uncertainty": {
+            "scenario_count": len(result["frequency_uncertainty"]["scenarios"]),
+            "conditional_diagnostic_facility_risk": True,
+            "facility_credible_interval": False,
+            "fresh_physics_executed": False,
+        },
         "facility_campaign": {
             "status": result["facility_campaign"].get("status"),
             "conditional_diagnostic_facility_ir_available": result["facility_campaign"].get("facility_ledger", {}).get("conditional_diagnostic_facility_risk_available") is True,
