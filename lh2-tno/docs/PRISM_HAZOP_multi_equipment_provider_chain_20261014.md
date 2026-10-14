@@ -28,6 +28,26 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
   --output results/20261014/hazop_multiequipment_provider_diagnostic.json
 ```
 
+현장별 옥외 기상·인구 조건을 연결할 때는 `--annual-conditions`로 JSON 파일을
+추가한다.
+
+```powershell
+python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
+  --backend-config results/20261009/backend_config_current.json `
+  --annual-conditions examples/generic_lh2_near_receptor_annual_conditions.json `
+  --output results/20261014/hazop_multiequipment_provider_site_condition_diagnostic.json
+```
+
+파일은 `id`, `annual_probability`, `weather`, `population`, `provenance`를 가진
+조건 목록이며, 확률 합은 1이어야 하고 모든 조건의 수용점 집합은 같아야 한다.
+첫 번째 조건만 현재 HAZOP runtime의 관측 피해 결과를 사용할 수 있다. 두 번째
+조건부터는 현재 날씨 결과를 재사용하지 않도록 각 조건에
+`reviewed_consequence`를 넣어 `observed_harm_low_high`,
+`branch_harm_low_high`, `provenance`를 별도로 제공해야 한다. 이 자료가 없으면
+다중 기상 조건은 즉시 보류된다. 입력 파일을 받았다는 사실만으로 현장 기상·인구
+검증이나 시설 QRA 승격을 하지 않으며, 결과의 `policy.annual_condition_source`에
+입력 출처와 조건 수를 남긴다.
+
 스크립트는 외부 provider 출력의 좌표 원점과 예시 시설 manifest의 좌표가 다를 때, 명시된 provider 출구 위치에 맞춘 **진단용 geometry rebase**를 결과에 남긴다. 이 재배치는 실제 플랜트 배치 검증이나 물리 검증을 뜻하지 않는다.
 
 ## 현재 실행 결과

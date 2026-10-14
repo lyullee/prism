@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -425,6 +426,94 @@ def _annual_conditions(defaults: Mapping[str, Any], manifest: EquipmentManifest)
     }]
 
 
+def _load_annual_conditions(
+    path: Path | None,
+    *,
+    defaults: Mapping[str, Any],
+    manifest: EquipmentManifest,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Load an explicit facility weather/population partition when supplied.
+
+    The diagnostic used to hard-code one synthetic weather and receptor row.
+    That made the HAZOP-to-facility handoff useful for a smoke test but awkward
+    to reuse with a real outdoor site.  This boundary accepts a reviewed
+    annual-condition file without changing the qualification policy: the
+    caller's provenance is retained and synthetic/default conditions remain
+    explicitly diagnostic.
+    """
+    if path is None:
+        conditions = _annual_conditions(defaults, manifest)
+        return conditions, {
+            "source": "script_default",
+            "path": None,
+            "condition_count": len(conditions),
+            "provenance_policy": "synthetic diagnostic condition; replace with reviewed site weather/population",
+        }
+    raw = _load(path)
+    if isinstance(raw, Mapping):
+        raw = raw.get("annual_conditions")
+    if not isinstance(raw, list) or not raw:
+        raise ValueError("annual-conditions file must contain a nonempty list or an annual_conditions list")
+    conditions: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for index, item in enumerate(raw):
+        if not isinstance(item, Mapping):
+            raise ValueError(f"annual_conditions[{index}] must be an object")
+        condition = copy.deepcopy(dict(item))
+        condition_id = condition.get("id")
+        if not isinstance(condition_id, str) or not condition_id.strip():
+            raise ValueError(f"annual_conditions[{index}].id must be a nonempty string")
+        if condition_id in seen:
+            raise ValueError(f"annual_conditions contains duplicate id: {condition_id}")
+        seen.add(condition_id)
+        probability = condition.get("annual_probability")
+        if isinstance(probability, bool) or not isinstance(probability, (int, float)):
+            raise ValueError(f"annual_conditions[{index}].annual_probability must be numeric")
+        if not math.isfinite(float(probability)) or not 0.0 <= float(probability) <= 1.0:
+            raise ValueError(f"annual_conditions[{index}].annual_probability must be finite in [0, 1]")
+        weather = condition.get("weather")
+        if not isinstance(weather, Mapping):
+            raise ValueError(f"annual_conditions[{index}].weather must be an object")
+        population = condition.get("population")
+        if not isinstance(population, list) or not population:
+            raise ValueError(f"annual_conditions[{index}].population must be a nonempty list")
+        population_ids: set[str] = set()
+        for person_index, receptor in enumerate(population):
+            if not isinstance(receptor, Mapping) or not receptor.get("receptor_id"):
+                raise ValueError(
+                    f"annual_conditions[{index}].population[{person_index}] must contain receptor_id"
+                )
+            receptor_id = str(receptor["receptor_id"])
+            if receptor_id in population_ids:
+                raise ValueError(
+                    f"annual_conditions[{index}].population duplicates receptor: {receptor_id}"
+                )
+            population_ids.add(receptor_id)
+        condition.setdefault(
+            "provenance",
+            "caller-supplied annual weather/population condition; qualification remains caller responsibility",
+        )
+        conditions.append(condition)
+    probability_sum = sum(float(row["annual_probability"]) for row in conditions)
+    if not math.isclose(probability_sum, 1.0, rel_tol=0.0, abs_tol=1.0e-10):
+        raise ValueError(
+            "annual_conditions probabilities must close to one; "
+            f"received {probability_sum:g}"
+        )
+    receptor_sets = [
+        {str(row["receptor_id"]) for row in condition["population"]}
+        for condition in conditions
+    ]
+    if any(receptors != receptor_sets[0] for receptors in receptor_sets[1:]):
+        raise ValueError("all annual_conditions must use the same receptor population set")
+    return conditions, {
+        "source": "caller_file",
+        "path": str(path),
+        "condition_count": len(conditions),
+        "provenance_policy": "caller-supplied weather/population is passed through; no site qualification is inferred",
+    }
+
+
 def _filtered_runtime_result(runtime: Mapping[str, Any], accepted_ids: Sequence[str]) -> dict[str, Any]:
     accepted = set(accepted_ids)
     result = copy.deepcopy(dict(runtime))
@@ -457,6 +546,7 @@ def _build_facility_handoff(
     events: Mapping[str, Any],
     manifest: EquipmentManifest,
     defaults: Mapping[str, Any],
+    annual_conditions: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any] | None:
     accepted = [
         str(component_id)
@@ -466,7 +556,7 @@ def _build_facility_handoff(
     if not accepted:
         return None
     filtered = _filtered_runtime_result(runtime, accepted)
-    conditions = _annual_conditions(defaults, manifest)
+    conditions = list(annual_conditions) if annual_conditions is not None else _annual_conditions(defaults, manifest)
     bindings: list[dict[str, Any]] = []
     spec_by_id = {str(spec["component_id"]): spec for spec in specs}
     for component_id in sorted(accepted):
@@ -480,19 +570,52 @@ def _build_facility_handoff(
             raise ValueError(f"accepted component lacks current-weather risk binding: {component_id}")
         data = consequence.get("data", {})
         event = events[str(spec["event_id"])]
-        bindings.append({
-            "component_id": component_id,
-            "operating_mode": spec["operating_mode"],
-            "hazop_scenario_id": branch["scenario_id"],
-            "event_id": str(event.id),
-            "asset_id": str(event.asset_id),
-            "annual_condition_id": conditions[0]["id"],
-            "release_branch_id": "provider-resolved-boundary",
-            "release_branch_probability": 1.0,
-            "ignition_branch_probabilities": data["ignition_branch_probabilities"],
-            "branch_harm_low_high": _branch_harm(consequence),
-            "scenario_families": [str(branch["scenario_family"])],
-        })
+        current_branch_harm = _branch_harm(consequence)
+        for condition_index, condition in enumerate(conditions):
+            binding = {
+                "component_id": component_id,
+                "operating_mode": spec["operating_mode"],
+                "hazop_scenario_id": branch["scenario_id"],
+                "event_id": str(event.id),
+                "asset_id": str(event.asset_id),
+                "annual_condition_id": condition["id"],
+                "release_branch_id": "provider-resolved-boundary",
+                "release_branch_probability": 1.0,
+                "ignition_branch_probabilities": data["ignition_branch_probabilities"],
+                "scenario_families": [str(branch["scenario_family"])],
+            }
+            if condition_index == 0:
+                # The HAZOP runtime produced one current-weather consequence.
+                # It is the only condition that may use that observation
+                # directly.  Other annual conditions need explicit reviewed
+                # consequence evidence below.
+                binding["branch_harm_low_high"] = current_branch_harm
+            else:
+                reviewed = condition.get("reviewed_consequence")
+                if not isinstance(reviewed, Mapping):
+                    raise ValueError(
+                        f"annual condition {condition['id']} needs reviewed_consequence evidence "
+                        "when more than one weather/population condition is supplied"
+                    )
+                observed = reviewed.get("observed_harm_low_high")
+                reviewed_branch_harm = reviewed.get("branch_harm_low_high")
+                provenance = reviewed.get("provenance")
+                if not isinstance(observed, Mapping) or not isinstance(reviewed_branch_harm, Mapping):
+                    raise ValueError(
+                        f"annual condition {condition['id']} reviewed_consequence must contain "
+                        "observed_harm_low_high and branch_harm_low_high"
+                    )
+                if not isinstance(provenance, str) or not provenance.strip():
+                    raise ValueError(
+                        f"annual condition {condition['id']} reviewed_consequence.provenance is required"
+                    )
+                binding.update({
+                    "consequence_basis": "reviewed_annual_condition",
+                    "consequence_provenance": provenance,
+                    "observed_harm_low_high": copy.deepcopy(dict(observed)),
+                    "branch_harm_low_high": copy.deepcopy(dict(reviewed_branch_harm)),
+                })
+            bindings.append(binding)
     handoff = build_hazop_facility_campaign_result(
         filtered,
         annual_conditions=conditions,
@@ -621,12 +744,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         for component_id, row in runtime.get("components", {}).items()
         if isinstance(row, dict) and row.get("status") == "CONSEQUENCE_BRANCHES_EVALUATED"
     ]
+    annual_conditions, annual_condition_source = _load_annual_conditions(
+        args.annual_conditions,
+        defaults=liquid_defaults,
+        manifest=manifest,
+    )
     handoff = _build_facility_handoff(
         runtime,
         specs=COMPONENT_SPECS,
         events=events,
         manifest=manifest,
         defaults=liquid_defaults,
+        annual_conditions=annual_conditions,
     )
     withheld_ids = sorted(set(str(spec["component_id"]) for spec in COMPONENT_SPECS) - set(accepted_ids))
     result = {
@@ -673,6 +802,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "physical_validation_claim": False,
             "facility_scope_complete": False,
             "synthetic_diagnostic_inputs_present": True,
+            "annual_condition_source": annual_condition_source,
         },
         "interpretation": (
             "This record proves multi-equipment HAZOP dispatch and records the branches that cross "
@@ -699,6 +829,12 @@ def main() -> int:
         help="optional root containing <component-id>/resolved_release.json packets with explicit isolation observations",
     )
     parser.add_argument("--now-s", type=float, default=12.0)
+    parser.add_argument(
+        "--annual-conditions",
+        type=Path,
+        default=None,
+        help="optional JSON list of annual weather/population conditions for the facility handoff",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:

@@ -1,0 +1,80 @@
+{
+  "schema_version": "prism.hazop_multiequipment_annual_condition_execution.v1",
+  "status": "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "component_count": 7,
+  "accepted_component_count": 5,
+  "accepted_component_ids": [
+    "ambient-vaporizer-01",
+    "liquid-transfer-line-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01"
+  ],
+  "withheld_component_count": 2,
+  "withheld_component_ids": [
+    "liquid-transfer-pump-01",
+    "transfer-valve-01"
+  ],
+  "runtime_status": "FACILITY_HAZOP_RUNTIME_PARTIAL",
+  "risk_atom_count": 5,
+  "facility_handoff_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+  "annual_condition_source": {
+    "source": "caller_file",
+    "path": "examples\\generic_lh2_near_receptor_annual_conditions.json",
+    "condition_count": 1,
+    "provenance_policy": "caller-supplied weather/population is passed through; no site qualification is inferred"
+  },
+  "annual_condition_ids": [
+    "synthetic-generic-worker-west-3ms"
+  ],
+  "annual_condition_count": 1,
+  "conditional_diagnostic_facility_annual_ir_low_high": {
+    "worker-01": [
+      4.78e-05,
+      4.78e-05
+    ]
+  },
+  "conditional_diagnostic_facility_expected_death_fn_low_high": [
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.78e-05
+      ]
+    },
+    {
+      "expected_deaths": [
+        1.0
+      ],
+      "cumulative_frequency_per_year": [
+        4.78e-05
+      ]
+    }
+  ],
+  "facility_total_risk_available": false,
+  "qualified_facility_qra_available": false,
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created_by_prism": false,
+    "facility_qra_promotion": false,
+    "physical_validation_claim": false,
+    "facility_scope_complete": false,
+    "synthetic_diagnostic_inputs_present": true,
+    "annual_condition_source": {
+      "source": "caller_file",
+      "path": "examples\\generic_lh2_near_receptor_annual_conditions.json",
+      "condition_count": 1,
+      "provenance_policy": "caller-supplied weather/population is passed through; no site qualification is inferred"
+    }
+  },
+  "limitations": [
+    "The supplied condition file is a synthetic generic example and is not site weather or occupancy validation.",
+    "Two components remain withheld by the provider termination boundary.",
+    "The diagnostic handoff does not promote qualified provider evidence, independent physical validation, or facility QRA."
+  ],
+  "execution_command": "python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py --backend-config results/20261009/backend_config_current.json --annual-conditions examples/generic_lh2_near_receptor_annual_conditions.json --output <diagnostic-output>.json"
+}
