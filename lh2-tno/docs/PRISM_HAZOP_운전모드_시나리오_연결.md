@@ -1,5 +1,7 @@
 # PRISM HAZOP·운전 모드 시나리오 연결
 
+통합 흐름도는 [`docs/figures/lh2_integrated_risk_flow.svg`](figures/lh2_integrated_risk_flow.svg)에서 확인할 수 있다. 현장 상태와 운전 모드가 HAZOP 판단으로 함께 들어가며, 이후 설비 공정 모델·방출/빈도 모델·SLABx-LH2·점화/노출 모델·통합 QRA가 같은 계산 계층에서 결합된다.
+
 ## 역할
 
 현장 입력에는 압력·온도·유량 같은 값과 `operating_mode`가 함께 들어온다. `HazopTable`은 이 조합을 기준으로 HAZOP 이탈을 판정한다. 예를 들어 같은 높은 압력이라도 인수·공급·대기 모드에서 적용할 이탈 기준과 사고 시나리오가 다를 수 있다.
