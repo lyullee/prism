@@ -64,6 +64,14 @@ def audit_frequency_scope(manifest: EquipmentManifest, plan: FrequencyPlan) -> d
         "manifest_digest": manifest.digest(),
         "frequency_plan_id": plan.id,
         "frequency_plan_digest": plan.digest(),
+        "event_generation_mode": (
+            "external_precomputed" if plan.precomputed_events is not None else "packaged_catalogue"
+        ),
+        "external_event_provenance": plan.precomputed_events_provenance,
+        "frequency_arithmetic_owner": (
+            "external_precomputed_event_generator"
+            if plan.precomputed_events is not None else "prism_packaged_catalogue"
+        ),
         "component_coverage": _component_rows(manifest, plan),
         "generated_event_count": 0,
         "events": [],
@@ -82,6 +90,8 @@ def audit_frequency_scope(manifest: EquipmentManifest, plan: FrequencyPlan) -> d
             "missing_components_are_not_given_zero_frequency": True,
             "excluded_components_require_a_reason": True,
             "consequence_requests_are_not_created_by_this_audit": True,
+            "external_event_rows_are_replayed_without_rate_inference": True,
+            "external_frequency_override_used": plan.precomputed_events is not None,
             "facility_risk_requires": "EXECUTABLE manifest, complete frequency scope, and executable consequence routes",
         },
     }
@@ -109,6 +119,18 @@ def audit_frequency_scope(manifest: EquipmentManifest, plan: FrequencyPlan) -> d
         return result
     result["events"] = [event.model_dump(mode="json") for event in events]
     result["generated_event_count"] = len(events)
+    result["external_event_catalogue"] = {
+        "attached": plan.precomputed_events is not None,
+        "event_count": len(events) if plan.precomputed_events is not None else 0,
+        "catalogue_digests": sorted({event.catalogue_digest for event in events})
+        if plan.precomputed_events is not None else [],
+        "source_digests": sorted({event.source_sha256 for event in events})
+        if plan.precomputed_events is not None else [],
+        "exact_replay_checked": (
+            plan.precomputed_events is not None
+            and tuple(events) == tuple(plan.precomputed_events)
+        ),
+    }
     port_scoped = sum(event.port_ids is not None for event in events)
     result["frequency_port_binding"] = {
         "schema_version": "prism.frequency_port_binding.v1",

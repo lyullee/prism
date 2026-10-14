@@ -138,3 +138,42 @@ def test_full_scope_example_has_explicit_accident_ports_for_selected_equipment()
     }
     assert accident_ports == selected_components
     assert "receiving-boundary-01" not in accident_ports
+
+
+def test_external_precomputed_frequency_scope_preserves_rate_owner_and_replay():
+    from lh2_tno.frequency_scope import audit_frequency_scope
+    from lh2_tno.legacy_frequency_bridge import attach_precomputed_events, bridge_legacy_scenarios
+
+    root = Path(__file__).parents[1]
+    manifest = EquipmentManifest.from_json(
+        root / "examples" / "generic_lh2_full_scope_manifest.json"
+    )
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples" / "generic_lh2_full_scope_frequency_plan.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    events, _ = bridge_legacy_scenarios(
+        [{
+            "scenario_id": "external-storage-hole",
+            "tag": "storage-tank-01",
+            "primitive": "VESSEL",
+            "service": "LH2",
+            "release_kind": "CONTINUOUS",
+            "hole_diameter_m": 0.01,
+            "frequency_per_year": 2.5e-4,
+        }],
+        {"external-storage-hole": "storage-tank-01"},
+        source_sha256="a" * 64,
+    )
+    attached = attach_precomputed_events(
+        plan, events, provenance="external test catalogue; source digest pinned"
+    )
+
+    result = audit_frequency_scope(manifest, attached)
+
+    assert result["status"] == "EXECUTABLE"
+    assert result["event_generation_mode"] == "external_precomputed"
+    assert result["frequency_arithmetic_owner"] == "external_precomputed_event_generator"
+    assert result["external_event_catalogue"]["exact_replay_checked"] is True
+    assert result["promotion_policy"]["external_frequency_override_used"] is True

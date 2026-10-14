@@ -1,0 +1,246 @@
+{
+  "status": "EXECUTABLE",
+  "manifest_status": "EXECUTABLE",
+  "facility_id": "generic-lh2-full-scope-example",
+  "manifest_digest": "ca0add67a1148e4a184b132e97864b14e70146c4415b2cac2aebaacb105f694c",
+  "frequency_plan_id": "generic-lh2-full-scope-frequency-example",
+  "frequency_plan_digest": "39968706d980ec3aa50912c73878d83a437a4fa7052b77709df7324473b3c684",
+  "event_generation_mode": "external_precomputed",
+  "external_event_provenance": "external bridge; source digest pinned",
+  "frequency_arithmetic_owner": "external_precomputed_event_generator",
+  "component_coverage": [
+    {
+      "component_id": "storage-tank-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "storage-shell"
+      ],
+      "profiles": [
+        "LH2_VESSEL"
+      ],
+      "reviewed_accident_port_ids": [
+        "tank-accident-out"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "storage-tank-01-shell"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic example only; real tank classification and applicability review required"
+      ]
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "transfer-line"
+      ],
+      "profiles": [
+        "LH2_PIPE"
+      ],
+      "reviewed_accident_port_ids": [
+        "line-accident-out"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "liquid-transfer-line-01-segment"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic example only; real pipe length, segmentation and failure exposure review required"
+      ]
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "transfer-valve"
+      ],
+      "profiles": [
+        "LH2_VALVE"
+      ],
+      "reviewed_accident_port_ids": [
+        "valve-accident-out"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "transfer-valve-01-body"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic example only; real valve construction and exposure review required"
+      ]
+    },
+    {
+      "component_id": "pressure-relief-vent-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "pressure-relief-vent"
+      ],
+      "profiles": [
+        "TNO_RELIEF_DEVICE"
+      ],
+      "reviewed_accident_port_ids": [
+        "vent-accident-out"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "pressure-relief-vent-01-device"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic example only; direct substance contact and atmospheric discharge must be confirmed"
+      ]
+    },
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "transfer-pump"
+      ],
+      "profiles": [
+        "TNO_PUMP_STANDARD"
+      ],
+      "reviewed_accident_port_ids": [
+        "pump-accident-out"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "liquid-transfer-pump-01-connection"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic example only; largest connecting pipe and pump construction require review"
+      ]
+    },
+    {
+      "component_id": "ambient-vaporizer-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "ambient-vaporizer"
+      ],
+      "profiles": [
+        "TNO_HX_OUTSIDE_TUBES"
+      ],
+      "reviewed_accident_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "ambient-vaporizer-01-exchanger"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic design classification only: hydrogen is outside tubes; real exchanger layout and dangerous-fluid side require review"
+      ]
+    },
+    {
+      "component_id": "reliquefier-01",
+      "status": "SELECTED",
+      "frequency_asset_ids": [
+        "reliquefier"
+      ],
+      "profiles": [
+        "TNO_HX_INSIDE_WEAK_SHELL"
+      ],
+      "reviewed_accident_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "port_scoped_asset_count": 1,
+      "port_unbound_asset_count": 0,
+      "physical_scope_ids": [
+        "reliquefier-01-exchanger"
+      ],
+      "count": 1,
+      "provenance": [
+        "synthetic design classification only: hydrogen is inside weak-shell tubes; real exchanger layout and tube count require review"
+      ]
+    },
+    {
+      "component_id": "receiving-boundary-01",
+      "status": "EXCLUDED",
+      "reason": "boundary is an interface, not an accidental-release equipment item in this generic example"
+    }
+  ],
+  "generated_event_count": 1,
+  "events": [
+    {
+      "id": "external-demo/storage-tank-01/external-storage-hole",
+      "asset_id": "legacy:storage-tank-01",
+      "model_component_id": "storage-tank-01",
+      "port_ids": null,
+      "profile": "TNO_PRESSURE_VESSEL",
+      "loc": "1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 0.00025,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "annual_frequency_per_year": 0.00025,
+      "statistic": "published_default",
+      "marginal_p05_per_year": null,
+      "marginal_p95_per_year": null,
+      "frequency_distribution": "none",
+      "log_rate_mu": null,
+      "log_rate_sigma": null,
+      "source": "synthetic external bridge example",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "catalogue_digest": "6f03cc0406837a91b1463e78d0005bcd7ac59f25f05fb137a19980e0bd0e5fc9",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.01,
+        "area_fraction": null,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "legacy_tno:VESSEL:LH2",
+      "limitations": [
+        "frequency was generated by the external legacy TNO taxonomy; PRISM did not infer or update it",
+        "legacy count/secondary-breach arithmetic is already included; no additional exposure multiplier is applied",
+        "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
+        "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
+        "legacy physics_route=SLABX_LH2 and grade=UNSPECIFIED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding"
+      ],
+      "physical_validation_claim": false
+    }
+  ],
+  "frequency_port_binding": {
+    "schema_version": "prism.frequency_port_binding.v1",
+    "port_scoped_event_count": 0,
+    "port_unbound_event_count": 1,
+    "all_events_port_scoped": false,
+    "meaning": "port-scoped literature events are checked against provider-resolved accident exits; absent port scope stays component-level",
+    "strict_facility_qra_gate": false
+  },
+  "blocking_reasons": [],
+  "physical_validation_claim": false,
+  "promotion_policy": {
+    "profiles_are_not_inferred_from_component_kind": true,
+    "missing_components_are_not_given_zero_frequency": true,
+    "excluded_components_require_a_reason": true,
+    "consequence_requests_are_not_created_by_this_audit": true,
+    "external_event_rows_are_replayed_without_rate_inference": true,
+    "external_frequency_override_used": true,
+    "facility_risk_requires": "EXECUTABLE manifest, complete frequency scope, and executable consequence routes"
+  },
+  "external_event_catalogue": {
+    "attached": true,
+    "event_count": 1,
+    "catalogue_digests": [
+      "6f03cc0406837a91b1463e78d0005bcd7ac59f25f05fb137a19980e0bd0e5fc9"
+    ],
+    "source_digests": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "exact_replay_checked": true
+  }
+}

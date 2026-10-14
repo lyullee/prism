@@ -163,6 +163,11 @@
   "equipment_frequency_scope_full_facility_diagnostic_status": "EXECUTABLE; 24 synthetic initiating events across LH2 vessel/pipe/valve, TNO relief device/pump and explicitly classified TNO heat-exchanger profiles; all 24 events are port-scoped in the shipped generic example, the boundary is explicitly excluded, and real exchanger-side classification still requires engineering review",
   "equipment_frequency_scope_full_facility_diagnostic_record": "docs/PRISM_일반LH2_설비범위_진단_20261009.md",
   "equipment_frequency_scope_consequence_binding": "NOT_CREATED_BY_SCOPE_AUDIT",
+  "equipment_frequency_scope_external_precomputed_trace": true,
+  "equipment_frequency_scope_external_precomputed_policy": "External event rows are exact-replayed with explicit rate-arithmetic owner and provenance; no rate inference or facility-QRA promotion",
+  "equipment_frequency_scope_external_precomputed_test": "test_external_precomputed_frequency_scope_preserves_rate_owner_and_replay",
+  "equipment_frequency_scope_external_precomputed_record": "results/20261107/external_frequency_scope_audit.json",
+  "equipment_frequency_scope_external_precomputed_status": "EXECUTABLE diagnostic scope audit; 1 external event exact-replayed; provider/consequence/QRA gates remain separate",
   "equipment_provider_release_worklist_implemented": true,
   "equipment_provider_release_worklist_module": "src/lh2_tno/provider_worklist.py",
   "equipment_provider_release_worklist_cli": "scripts/build_provider_release_worklist.py",
@@ -2936,8 +2941,8 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 989,
-  "full_portable_test_status_latest": "989 passed",
+  "full_portable_test_count_latest": 990,
+  "full_portable_test_status_latest": "990 passed",
   "full_portable_test_record_latest": "pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -3973,7 +3978,7 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 989,
+    "tests": 990,
     "failures": 0,
     "skipped": 0,
     "scope": "current lh2-tno package after external legacy event catalogue campaign integration"
