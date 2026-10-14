@@ -8,6 +8,8 @@
 
 **검사지원센터 운전모드·HAZOP 근거 감사 (2026-10-14):** 센터의 인수 19행, 저장·벤트 3행, 공급 30행(기체수소 18행·액화수소 12행)을 명시적 운전모드와 정성 HAZOP 근거로 보존했습니다. `scripts/audit_hazop_operating_mode_evidence.py`는 CSV·설명 PDF/PPTX의 해시와 절차별 고장·위험·조치를 기록하고, 수치 시계열은 PT/TT/DPT 단위·태그 매핑이 검토될 때까지 `WITHHELD`로 둡니다. 이 자료는 일반 LH2 시설의 HAZOP 입력과 운전모드 사전으로 재사용할 수 있지만 정상 시계열에서 빈도·방출 packet을 만들지 않습니다. 최신 결과는 [`support_center_hazop_operating_mode_evidence_audit.json`](results/20261014/support_center_hazop_operating_mode_evidence_audit.json)이며 설명은 [`검사지원센터 HAZOP 운전모드 근거 감사`](docs/PRISM_검사지원센터_HAZOP_운전모드_근거감사_20261014.md)입니다.
 
+이 근거를 IJHE 완료 감사에 표시하려면 `scripts/build_ijhe_completion_audit.py --hazop-operating-mode-evidence results/20261014/support_center_hazop_operating_mode_evidence_audit.json`을 추가합니다. 완료 감사의 `diagnostic_hazop_operating_mode_evidence=PASS`는 52개 정성 행과 명시적 모드 회계가 닫혔다는 뜻이고, 전체 시설 QRA나 수치 상태 바인딩을 열지는 않습니다.
+
 저장된 실시간 결과의 모드 보존은 `scripts/audit_realtime_hazop_mode_trace.py`로 별도 감사할 수 있습니다. `telemetry_boundary`, `equipment_release_path`, 시설 batch의 설비 행과 `operating_mode_counts`가 일치하지 않으면 진단 결과를 차단하며, 이 감사도 빈도·방출·물리검증·시설 QRA를 추정하거나 승격하지 않습니다.
 
 현재·예측 통합 실행의 synthetic diagnostic 원장은 [`hazop_integrated_risk_diagnostic.json`](results/20261108/hazop_integrated_risk_diagnostic.json)이며, 현재 HAZOP 경로는 평가되고 예측 위험조건 1건은 정량평가기가 없어 보류된 `INTEGRATED_DIAGNOSTIC_PARTIAL` 상태입니다. 이를 완료 감사에 연결한 결과는 [`ijhe_completion_audit_with_integrated_hazop_diagnostic.json`](results/20261108/ijhe_completion_audit_with_integrated_hazop_diagnostic.json)의 `diagnostic_hazop_integrated_risk` PASS입니다. 이 PASS는 설비 범위·운전 모드·scenario identity와 승격 차단 정책을 확인하는 진단 결과이며, qualified provider·빈도·물리검증·시설 IR/F-N을 승인하지 않습니다.
