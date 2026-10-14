@@ -22,6 +22,7 @@ from lh2_tno.consequences import ConsequenceRequest  # noqa: E402
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.frequency import FrequencyPlan, generate_events  # noqa: E402
 from lh2_tno.hazop_forecast import build_hazop_forecast_runtime_evaluator  # noqa: E402
+from lh2_tno.hazop_campaign import build_hazop_facility_campaign_result  # noqa: E402
 from lh2_tno.integrated_risk import run_hazop_integrated_risk  # noqa: E402
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames  # noqa: E402
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
@@ -79,6 +80,52 @@ def _runtime_source() -> dict:
             }
         ],
     }
+
+
+def _facility_campaign_evaluator(*, event: object, scenario_id: str, annual_conditions: list[dict]) -> object:
+    """Build the explicit HAZOP-to-facility handoff for this diagnostic.
+
+    The current consequence result owns branch-specific harm.  The callback
+    only packages that already-computed harm with one explicitly declared
+    synthetic weather/population condition; it does not create frequency or
+    extrapolate a facility total.
+    """
+    def evaluate(current: dict) -> dict:
+        component = current["components"]["storage-tank-01"]
+        branch = component["branches"][0]
+        consequence_data = branch["result"]["consequence"]["data"]
+        receptor_rows = consequence_data.get("receptors", [])
+        branch_harm: dict[str, dict[str, list[float]]] = {}
+        for receptor in receptor_rows:
+            values = receptor.get("branch_harm_low_high")
+            if not isinstance(values, list) or len(values) != 2:
+                raise ValueError("provider consequence receptor lacks two branch harm endpoints")
+            branch_harm[str(receptor["id"])] = {
+                name: [float(values[0][name]), float(values[1][name])]
+                for name in ("direct_fire", "delayed_flash_fire", "delayed_explosion", "no_ignition")
+            }
+        scenario_family = str(branch["scenario_family"])
+        binding = {
+            "component_id": "storage-tank-01",
+            "operating_mode": "receiving",
+            "hazop_scenario_id": scenario_id,
+            "event_id": str(event.id),
+            "asset_id": str(event.asset_id),
+            "annual_condition_id": annual_conditions[0]["id"],
+            "release_branch_id": "provider-inventory-depletion",
+            "release_branch_probability": 1.0,
+            "ignition_branch_probabilities": consequence_data["ignition_branch_probabilities"],
+            "branch_harm_low_high": branch_harm,
+            "scenario_families": [scenario_family],
+        }
+        return build_hazop_facility_campaign_result(
+            current,
+            annual_conditions=annual_conditions,
+            scenario_bindings=[binding],
+            expected_component_ids=("storage-tank-01",),
+        )
+
+    return evaluate
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -145,6 +192,18 @@ def run(args: argparse.Namespace) -> dict:
         frequency_binding=frequency_binding,
     )
     scenario_id = "TK01-receiving-liquid-hole:receiving:liquid_two_phase"
+    annual_conditions = [{
+        "id": "synthetic-current-weather-D-3ms",
+        "annual_probability": 1.0,
+        "weather": copy.deepcopy(defaults["weather"]),
+        "population": [{
+            "receptor_id": "worker-01",
+            "persons": 1.0,
+            "presence_probability": 1.0,
+            "provenance": "synthetic diagnostic receptor population; replace with reviewed facility occupancy",
+        }],
+        "provenance": "synthetic diagnostic current-weather condition; not a site weather distribution",
+    }]
     source_frame = build_observed_state_runtime_frames([_runtime_source()])["frames"][0]
     forecast_frames = json.loads(args.forecast_frames.read_text(encoding="utf-8"))
     if not isinstance(forecast_frames, list):
@@ -171,6 +230,11 @@ def run(args: argparse.Namespace) -> dict:
             component_bindings={"storage-tank-01": binding},
             release_resolvers={("storage-tank-01", scenario_id): resolver},
         ),
+        facility_campaign_evaluator=_facility_campaign_evaluator(
+            event=event,
+            scenario_id=scenario_id,
+            annual_conditions=annual_conditions,
+        ),
     )
     result["diagnostic_context"] = {
         "scope": "synthetic_provider_bound_hazop_lh2_diagnostic",
@@ -182,6 +246,13 @@ def run(args: argparse.Namespace) -> dict:
         "forecast_facility_id_normalized_to": table["facility_id"],
         "frequency_binding": "explicit generated literature event; no sensor or simulation frequency inference",
         "facility_qra_claim": False,
+        "facility_campaign": {
+            "status": result["facility_campaign"].get("status"),
+            "conditional_diagnostic_facility_ir_available": result["facility_campaign"].get("facility_ledger", {}).get("conditional_diagnostic_facility_risk_available") is True,
+            "conditional_diagnostic_facility_fn_available": result["facility_campaign"].get("facility_ledger", {}).get("conditional_diagnostic_facility_expected_death_fn_low_high") is not None,
+            "facility_total_risk_available": result["facility_campaign"].get("facility_ledger", {}).get("facility_total_risk_available") is True,
+            "qualified_facility_ir_fn_available": result["facility_campaign"].get("facility_ledger", {}).get("qualified_facility_qra_available") is True,
+        },
     }
     _save(args.output, result)
     return result

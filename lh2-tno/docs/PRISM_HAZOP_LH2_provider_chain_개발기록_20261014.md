@@ -12,6 +12,7 @@
   → 명시적 문헌 빈도 event binding
   → SLABx-LH2·DynamicLH2PoolX·점화·수용점 피해
   → 현재 기상 조건 IR 원자
+  → 명시적 연간 조건·인구·점화 branch를 가진 조건부 시설 IR/F-N handoff
 ```
 
 예측 경로도 같은 시나리오 ID와 설비 ID를 사용한다.
@@ -49,6 +50,8 @@ provider packet에 지면 액체가 있지만 풀 경계가 없으므로, 실행
 
 출력 파일: `results/20261014/hazop_provider_bound_integrated_risk.json`
 
+`build_ijhe_completion_audit.py --hazop-integrated-risk` 재검사에서 `diagnostic_hazop_integrated_risk`는 PASS가 되었다. 전체 감사는 qualified provider, 사고범위, 물리검증과 시설 전체 IR/F-N 때문에 계속 `INCOMPLETE_EVIDENCE`이며, 이 진단 PASS가 전체 완료를 의미하지는 않는다.
+
 | 항목 | 결과 |
 |---|---|
 | 통합 상태 | `INTEGRATED_DIAGNOSTIC_COMPLETE` |
@@ -58,9 +61,12 @@ provider packet에 지면 액체가 있지만 풀 경계가 없으므로, 실행
 | 예측 정량평가 | 1건 실행, 0건 보류 |
 | 문헌 빈도 | 명시적 event binding, 센서/시뮬레이션 추정 없음 |
 | provider 자격 | 합성·operator-limited, 물리검증 주장 없음 |
-| 시설 연간 IR/F-N | 보류 (`facility_annual_ir_available=false`, `facility_fn_available=false`) |
+| 시설 campaign handoff | `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED` |
+| 조건부 시설 IR | 계산됨 (`conditional_diagnostic_facility_risk_available=true`) |
+| 조건부 시설 F/N | 계산됨 (`conditional_diagnostic_facility_expected_death_fn_low_high`) |
+| 시설 연간 IR/F-N 승격 | 보류 (`facility_total_risk_available=false`) |
 
-현재 위험 원자는 `storage-tank-01`, `receiving`, `liquid_two_phase`로 기록된다. 문헌 사건의 published frequency와 p05/p95 민감도 구간은 원자 안에 provenance와 source digest와 함께 남는다. 현재 기상 조건에 대한 수용점 IR은 계산되지만, 이것은 전체 시설 연간 IR/F-N이 아니다.
+현재 위험 원자는 `storage-tank-01`, `receiving`, `liquid_two_phase`로 기록된다. 문헌 사건의 published frequency와 p05/p95 민감도 구간은 원자 안에 provenance와 source digest와 함께 남는다. 이어서 동일한 원자의 branch별 피해와 명시적 합성 인구 조건을 기존 시설 campaign에 넘겨 조건부 IR과 F/N 곡선을 만들었다. 이 곡선은 선언한 한 조건과 한 수용점의 진단 결과이며, 전체 시설 연간 IR/F-N이 아니다.
 
 ## 이 결과가 의미하는 것
 
