@@ -106,6 +106,11 @@ def build_risk_atom_chain_audit(result: Mapping[str, Any]) -> dict[str, Any]:
     complete_case_ids: list[str] = []
     stage_counts: Counter[str] = Counter()
     operator_limited_case_count = 0
+    zero_harm_atom_count = 0
+    positive_harm_atom_count = 0
+    empty_harm_atom_count = 0
+    zero_expected_death_atom_count = 0
+    positive_expected_death_atom_count = 0
 
     for key, case in case_keys.items():
         label = _row_identity(case)
@@ -172,12 +177,35 @@ def build_risk_atom_chain_audit(result: Mapping[str, Any]) -> dict[str, Any]:
         for atom in case_atoms:
             harm = atom.get("receptor_harm_low_high")
             deaths = atom.get("expected_deaths_low_high")
-            if not isinstance(harm, Mapping) or not isinstance(deaths, Sequence) or isinstance(deaths, (str, bytes)) or len(deaths) != 2:
+            if not isinstance(harm, Mapping) or not harm:
+                empty_harm_atom_count += 1
+                case_errors.append("risk atom receptor harm mapping is empty")
+            else:
+                atom_positive = False
+                for receptor_id, endpoints in harm.items():
+                    if (
+                        not isinstance(endpoints, Sequence)
+                        or isinstance(endpoints, (str, bytes))
+                        or len(endpoints) != 2
+                        or any(not _finite_nonnegative(value) for value in endpoints)
+                    ):
+                        case_errors.append(f"risk atom receptor harm endpoints are invalid for {receptor_id}")
+                        break
+                    atom_positive = atom_positive or any(float(value) > 0.0 for value in endpoints)
+                if atom_positive:
+                    positive_harm_atom_count += 1
+                else:
+                    zero_harm_atom_count += 1
+            if not isinstance(deaths, Sequence) or isinstance(deaths, (str, bytes)) or len(deaths) != 2:
                 case_errors.append("risk atom lacks receptor harm and two expected-death endpoints")
                 break
             if any(not _finite_nonnegative(value) for value in deaths):
                 case_errors.append("risk atom expected-death endpoint is invalid")
                 break
+            if any(float(value) > 0.0 for value in deaths):
+                positive_expected_death_atom_count += 1
+            else:
+                zero_expected_death_atom_count += 1
 
         if case_errors:
             incomplete_case_ids.append(label)
@@ -215,6 +243,11 @@ def build_risk_atom_chain_audit(result: Mapping[str, Any]) -> dict[str, Any]:
             stage: stage_counts.get(stage, 0) for stage in REQUIRED_STAGE_NAMES
         },
         "operator_limited_case_count": operator_limited_case_count,
+        "zero_harm_atom_count": zero_harm_atom_count,
+        "positive_harm_atom_count": positive_harm_atom_count,
+        "empty_harm_atom_count": empty_harm_atom_count,
+        "zero_expected_death_atom_count": zero_expected_death_atom_count,
+        "positive_expected_death_atom_count": positive_expected_death_atom_count,
         "blocking_reasons": blockers,
         "diagnostic_only": True,
         "provider_packet_promoted": False,
@@ -224,8 +257,9 @@ def build_risk_atom_chain_audit(result: Mapping[str, Any]) -> dict[str, Any]:
         "facility_qra_claim": False,
         "interpretation": (
             "Every numerical case must retain its release termination, mass closure, consequence-stage timing, "
-            "domain record and four ignition-specific risk atoms. Operator-limited cases can close this structural "
-            "chain, but remain non-qualified evidence."
+            "domain record and four ignition-specific risk atoms. Harm and expected-death endpoints are counted "
+            "separately so a computed zero is distinguishable from an empty or invalid consequence. Operator-limited "
+            "cases can close this structural chain, but remain non-qualified evidence."
         ),
     }
 

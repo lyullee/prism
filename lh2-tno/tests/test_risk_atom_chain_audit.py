@@ -76,3 +76,16 @@ def test_risk_atom_chain_audit_accepts_signed_roundoff_residual_and_paired_endpo
         report["stage_complete_case_counts"][stage] == 1
         for stage in report["required_stage_names"]
     )
+
+
+def test_risk_atom_chain_audit_distinguishes_computed_zero_harm_from_empty_harm():
+    result = _result()
+    for atom in result["risk_atoms"]:
+        atom["receptor_harm_low_high"] = {"worker-1": [0.0, 0.0]}
+        atom["expected_deaths_low_high"] = [0.0, 0.0]
+    report = build_risk_atom_chain_audit(result)
+    assert report["status"] == "FULL_RISK_ATOM_CHAIN_CLOSED_DIAGNOSTIC"
+    assert report["zero_harm_atom_count"] == 4
+    assert report["positive_harm_atom_count"] == 0
+    assert report["empty_harm_atom_count"] == 0
+    assert report["zero_expected_death_atom_count"] == 4
