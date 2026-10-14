@@ -55,8 +55,10 @@ def normalise_unit_map(value: Mapping[str, Any] | None) -> dict[str, str]:
     source = nested if isinstance(nested, Mapping) else value
     result: dict[str, str] = {}
     for key, unit in source.items():
-        if str(key).strip() and str(unit).strip():
-            result[_normalise_header(key)] = str(unit).strip()
+        if isinstance(unit, Mapping):
+            unit = unit.get("unit")
+        if isinstance(unit, str) and str(key).strip() and unit.strip():
+            result[_normalise_header(key)] = unit.strip()
     return result
 
 

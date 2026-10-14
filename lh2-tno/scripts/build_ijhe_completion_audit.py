@@ -169,6 +169,11 @@ def main() -> int:
         help="optional inspection-center qualitative HAZOP operating-mode evidence audit",
     )
     parser.add_argument(
+        "--reviewed-signal-unit-evidence",
+        type=Path,
+        help="optional document-anchored reviewed signal-unit evidence audit",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -493,6 +498,13 @@ def main() -> int:
         )
         if hazop_operating_mode_evidence is not None:
             hazop_operating_mode_evidence["_record_path"] = str(args.hazop_operating_mode_evidence)
+        reviewed_signal_unit_evidence = (
+            _object(args.reviewed_signal_unit_evidence)
+            if args.reviewed_signal_unit_evidence
+            else None
+        )
+        if reviewed_signal_unit_evidence is not None:
+            reviewed_signal_unit_evidence["_record_path"] = str(args.reviewed_signal_unit_evidence)
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -586,6 +598,7 @@ def main() -> int:
             hazop_scope_worklist=hazop_scope_worklist,
             hazop_event_mode_binding=hazop_event_mode_binding,
             hazop_operating_mode_evidence=hazop_operating_mode_evidence,
+            reviewed_signal_unit_evidence=reviewed_signal_unit_evidence,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

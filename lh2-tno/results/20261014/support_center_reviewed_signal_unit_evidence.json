@@ -1,0 +1,150 @@
+{
+  "schema_version": "prism.reviewed_signal_unit_evidence.v1",
+  "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
+  "source_document": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소센터 관련 자료\\액화수소검사지원센터 액화수소 하역 운전절차서.pdf",
+  "source_document_sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
+  "declared_source_document_sha256": null,
+  "source_document_digest_match": true,
+  "signal_count": 6,
+  "reviewed_signal_count": 6,
+  "observed_header_count": 21,
+  "observed_mapped_signal_count": 6,
+  "mapped_but_not_observed_tags": [],
+  "observed_unmapped_tags": [
+    "DPT1101",
+    "DPT11012",
+    "DPT1102",
+    "PT1101",
+    "PT1101MPA",
+    "PT1105AMPA",
+    "PT1105BMPA",
+    "PT1106",
+    "PT1106MPA",
+    "PT1107",
+    "PT1107MPA",
+    "PT1111",
+    "PT1111MPA",
+    "PT1206MPA",
+    "TT1116"
+  ],
+  "complete_signal_coverage": false,
+  "signals": [
+    {
+      "tag": "PT1206",
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {
+          "page": 9,
+          "anchor": "PT-1206",
+          "anchor_found": true,
+          "context": "압력해소 확인 1 bar 이하"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    },
+    {
+      "tag": "PT1105A",
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {
+          "page": 24,
+          "anchor": "PT-1105A",
+          "anchor_found": true,
+          "context": "탱크 6.5 bar 도달 시 6.0 bar까지 BOG 개방"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    },
+    {
+      "tag": "PT1105B",
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {
+          "page": 24,
+          "anchor": "PT-1105B",
+          "anchor_found": true,
+          "context": "TK-1102 내부 압력 확인"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    },
+    {
+      "tag": "TT1106",
+      "unit": "degC",
+      "quantity": "temperature",
+      "pressure_basis": null,
+      "evidence": [
+        {
+          "page": 11,
+          "anchor": "TT-1106",
+          "anchor_found": true,
+          "context": "공급배관 쿨다운 -50°C 이하 확인"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    },
+    {
+      "tag": "TT1111",
+      "unit": "degC",
+      "quantity": "temperature",
+      "pressure_basis": null,
+      "evidence": [
+        {
+          "page": 8,
+          "anchor": "TT-1111",
+          "anchor_found": true,
+          "context": "저장탱크 내조 온도 -156°C 이하 확인"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    },
+    {
+      "tag": "TT1112",
+      "unit": "degC",
+      "quantity": "temperature",
+      "pressure_basis": null,
+      "evidence": [
+        {
+          "page": 8,
+          "anchor": "TT-1112",
+          "anchor_found": true,
+          "context": "저장탱크 내조 온도 -156°C 이하 확인"
+        }
+      ],
+      "status": "REVIEWED_ANCHOR_FOUND"
+    }
+  ],
+  "errors": [],
+  "promotion_gates": {
+    "unit_evidence_accepted_for_mapped_tags": true,
+    "state_snapshot_binding_allowed": false,
+    "numeric_state_binding_allowed": false,
+    "pressure_basis_resolved_for_all_pressure_tags": false,
+    "calibration_quality_evidence_supplied": false,
+    "sensor_frequency_learning_used": false,
+    "frequency_applied": false,
+    "provider_packet_created": false,
+    "facility_qra_claim": false
+  },
+  "policy": {
+    "unit_from_declared_document_anchor_only": true,
+    "unit_inference_from_numeric_range_performed": false,
+    "pressure_basis_inference_performed": false,
+    "raw_dpt_value_reinterpreted_as_level_percent": false,
+    "normal_timeseries_promoted_to_accident_evidence": false,
+    "state_snapshot_adapter_executed": false,
+    "frequency_inference_performed": false,
+    "provider_release_created": false
+  },
+  "source_records": {
+    "unit_map": "examples\\inspection_center_reviewed_signal_unit_map.json",
+    "source_document": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소센터 관련 자료\\액화수소검사지원센터 액화수소 하역 운전절차서.pdf",
+    "timeseries_audit": "results\\20261106\\external_support_center_timeseries_audit.json"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "prism.reviewed_signal_unit_map.v1",
+  "source_evidence": {
+    "source_root": "C:/Users/lyul/Desktop/DocuData/액화수소센터 관련 자료",
+    "relative_path": "액화수소검사지원센터 액화수소 하역 운전절차서.pdf",
+    "sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
+    "document_revision_date": "2026-08-05",
+    "review_basis": "explicit instrument references and setpoint units in the operating procedure; no numeric-range inference"
+  },
+  "signal_units": {
+    "PT1206": {
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {"page": 9, "anchor": "PT-1206", "context": "압력해소 확인 1 bar 이하"}
+      ]
+    },
+    "PT1105A": {
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {"page": 24, "anchor": "PT-1105A", "context": "탱크 6.5 bar 도달 시 6.0 bar까지 BOG 개방"}
+      ]
+    },
+    "PT1105B": {
+      "unit": "bar",
+      "quantity": "pressure",
+      "pressure_basis": "unresolved",
+      "evidence": [
+        {"page": 24, "anchor": "PT-1105B", "context": "TK-1102 내부 압력 확인"}
+      ]
+    },
+    "TT1106": {
+      "unit": "degC",
+      "quantity": "temperature",
+      "evidence": [
+        {"page": 11, "anchor": "TT-1106", "context": "공급배관 쿨다운 -50°C 이하 확인"}
+      ]
+    },
+    "TT1111": {
+      "unit": "degC",
+      "quantity": "temperature",
+      "evidence": [
+        {"page": 8, "anchor": "TT-1111", "context": "저장탱크 내조 온도 -156°C 이하 확인"}
+      ]
+    },
+    "TT1112": {
+      "unit": "degC",
+      "quantity": "temperature",
+      "evidence": [
+        {"page": 8, "anchor": "TT-1112", "context": "저장탱크 내조 온도 -156°C 이하 확인"}
+      ]
+    }
+  },
+  "explicitly_unresolved": {
+    "PT1111": "procedure mentions no confirmed engineering unit for the time-series column",
+    "DPT1101": "procedure uses the instrument for level checks but does not establish the raw time-series unit",
+    "DPT1102": "procedure uses the instrument for level checks but does not establish the raw time-series unit"
+  },
+  "policy": {
+    "pressure_basis_inference_performed": false,
+    "raw_dpt_value_reinterpreted_as_level_percent": false,
+    "state_snapshot_binding_allowed": false,
+    "frequency_inference_performed": false,
+    "provider_packet_created": false
+  }
+}

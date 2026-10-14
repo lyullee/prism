@@ -46,13 +46,30 @@ HAZOP 표: 값/이탈 기준 + 모드별 절차
 
 따라서 최신 산출물의 상태는 `HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD`다. 이는 운전모드·HAZOP 정성 근거가 없다는 뜻이 아니라, 수치 상태를 정량평가에 연결하는 마지막 계측 게이트가 열리지 않았다는 뜻이다.
 
+운전절차서에서 일부 계측 단위도 확인해 별도 근거 장부를 추가했다. `PT1206`, `PT1105A/B`는 문서의 bar 기준, `TT1106`, `TT1111/1112`는 문서의 °C 기준에 연결된다. 결과는 [`support_center_reviewed_signal_unit_evidence.json`](../results/20261014/support_center_reviewed_signal_unit_evidence.json)에 문서 해시와 페이지 anchor로 기록했다. `DPT1101/1102`, `PT1111`과 일부 변형 태그는 원시 시계열 단위 또는 압력 기준이 확인되지 않아 계속 미검토로 남는다. 따라서 일부 단위 근거가 있어도 전체 상태 snapshot 연결은 열리지 않는다.
+
 ## 재현 명령
 
 ```powershell
 python scripts/audit_hazop_operating_mode_evidence.py `
   --source-root "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터" `
-  --timeseries-audit results/20261106/external_support_center_timeseries_audit.json `
+  --timeseries-audit results/20261014/external_support_center_timeseries_reviewed_unit_audit.json `
   --output results/20261014/support_center_hazop_operating_mode_evidence_audit.json
+```
+
+부분 단위 근거와 원시 시계열 재감사는 다음 순서로 재현한다.
+
+```powershell
+python scripts/audit_reviewed_signal_unit_evidence.py `
+  --unit-map examples/inspection_center_reviewed_signal_unit_map.json `
+  --source-document "C:\Users\lyul\Desktop\DocuData\액화수소센터 관련 자료\액화수소검사지원센터 액화수소 하역 운전절차서.pdf" `
+  --timeseries-audit results/20261106/external_support_center_timeseries_audit.json `
+  --output results/20261014/support_center_reviewed_signal_unit_evidence.json
+
+python scripts/audit_inspection_center_timeseries.py `
+  --source-root "C:\Users\lyul\Desktop\DocuData\액화수소검사지원센터 데이터" `
+  --unit-map examples/inspection_center_reviewed_signal_unit_map.json `
+  --output results/20261014/external_support_center_timeseries_reviewed_unit_audit.json
 ```
 
 코드 감사기는 각 CSV와 설명자료의 SHA-256, 인코딩, 행 수, 모드별 행 수, 위험 범주, 문서 anchor를 함께 남긴다. `frequency_binding`과 `release_packet_binding`은 각 원본 행에서 명시적으로 보류된다. 수치 단위 검토가 끝나면 별도의 reviewed tag/unit map을 입력으로 추가하고, 그때만 상태 snapshot binding gate를 다시 평가해야 한다.
@@ -61,4 +78,4 @@ python scripts/audit_hazop_operating_mode_evidence.py `
 
 이 결과는 일반 액화수소 시설용 모드 사전과 HAZOP 시나리오 입력으로 재사용할 수 있다. 탱크·배관·밸브·펌프·벤트·기화기 모델과 결합할 때는 각 설비가 같은 `operating_mode`, `hazop_scenario_id`, 명시적 사고 event ID를 공유하는지 확인해야 한다.
 
-아직 닫히지 않은 항목은 계측 단위·태그 매핑, 설비별 사고 방출 packet, 문헌 빈도 exact binding, 차단·재고소진 근거, 독립 물리검증, 시설 전체 IR/F-N이다. 이 감사가 해당 항목을 대신 충족한다고 해석하지 않는다.
+아직 닫히지 않은 항목은 전체 계측 단위·태그 매핑, 압력 basis와 calibration/quality, 설비별 사고 방출 packet, 문헌 빈도 exact binding, 차단·재고소진 근거, 독립 물리검증, 시설 전체 IR/F-N이다. 이 감사가 해당 항목을 대신 충족한다고 해석하지 않는다.

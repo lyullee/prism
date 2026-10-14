@@ -3118,3 +3118,66 @@ def test_completion_audit_blocks_support_center_hazop_mode_inference():
         if item["name"] == "diagnostic_hazop_operating_mode_evidence"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _reviewed_signal_unit_evidence(**overrides):
+    record = {
+        "schema_version": "prism.reviewed_signal_unit_evidence.v1",
+        "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
+        "source_document_sha256": "a" * 64,
+        "source_document_digest_match": True,
+        "signal_count": 6,
+        "reviewed_signal_count": 6,
+        "observed_unmapped_tags": ["DPT1101"],
+        "complete_signal_coverage": False,
+        "errors": [],
+        "promotion_gates": {
+            "state_snapshot_binding_allowed": False,
+            "numeric_state_binding_allowed": False,
+            "frequency_applied": False,
+            "provider_packet_created": False,
+            "facility_qra_claim": False,
+        },
+        "policy": {
+            "unit_inference_from_numeric_range_performed": False,
+            "pressure_basis_inference_performed": False,
+            "raw_dpt_value_reinterpreted_as_level_percent": False,
+            "normal_timeseries_promoted_to_accident_evidence": False,
+            "state_snapshot_adapter_executed": False,
+            "frequency_inference_performed": False,
+            "provider_release_created": False,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_partial_reviewed_signal_units():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        reviewed_signal_unit_evidence=_reviewed_signal_unit_evidence(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_reviewed_signal_unit_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_unit_evidence_that_opens_state_binding():
+    unsafe = _reviewed_signal_unit_evidence()
+    unsafe["promotion_gates"]["state_snapshot_binding_allowed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        reviewed_signal_unit_evidence=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_reviewed_signal_unit_evidence"
+    )
+    assert check["status"] == "BLOCKED"

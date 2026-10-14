@@ -102,6 +102,7 @@ def build_ijhe_completion_audit(
     hazop_scope_worklist: Mapping[str, Any] | None = None,
     hazop_event_mode_binding: Mapping[str, Any] | None = None,
     hazop_operating_mode_evidence: Mapping[str, Any] | None = None,
+    reviewed_signal_unit_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3791,6 +3792,62 @@ def build_ijhe_completion_audit(
             "packets, or facility QRA."
         )
         checks.append(mode_evidence_check)
+    if reviewed_signal_unit_evidence is not None:
+        unit_evidence = reviewed_signal_unit_evidence
+        gates = unit_evidence.get("promotion_gates")
+        gates = gates if isinstance(gates, Mapping) else {}
+        policy = unit_evidence.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        unit_evidence_valid = (
+            unit_evidence.get("schema_version") == "prism.reviewed_signal_unit_evidence.v1"
+            and unit_evidence.get("status") in {
+                "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
+                "REVIEWED_SIGNAL_UNIT_EVIDENCE_COMPLETE",
+            }
+            and unit_evidence.get("source_document_digest_match") is True
+            and isinstance(unit_evidence.get("signal_count"), int)
+            and unit_evidence.get("signal_count") > 0
+            and isinstance(unit_evidence.get("reviewed_signal_count"), int)
+            and 0 < unit_evidence.get("reviewed_signal_count") <= unit_evidence.get("signal_count")
+            and isinstance(unit_evidence.get("errors"), list)
+            and not unit_evidence.get("errors")
+            and gates.get("state_snapshot_binding_allowed") is False
+            and gates.get("numeric_state_binding_allowed") is False
+            and gates.get("frequency_applied") is False
+            and gates.get("provider_packet_created") is False
+            and gates.get("facility_qra_claim") is False
+            and policy.get("unit_inference_from_numeric_range_performed") is False
+            and policy.get("pressure_basis_inference_performed") is False
+            and policy.get("raw_dpt_value_reinterpreted_as_level_percent") is False
+            and policy.get("normal_timeseries_promoted_to_accident_evidence") is False
+            and policy.get("state_snapshot_adapter_executed") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("provider_release_created") is False
+        )
+        unit_evidence_check = _check(
+            "diagnostic_reviewed_signal_unit_evidence",
+            unit_evidence_valid,
+            {
+                "record": unit_evidence.get("_record_path"),
+                "schema_version": unit_evidence.get("schema_version"),
+                "status": unit_evidence.get("status"),
+                "source_document_sha256": unit_evidence.get("source_document_sha256"),
+                "signal_count": unit_evidence.get("signal_count"),
+                "reviewed_signal_count": unit_evidence.get("reviewed_signal_count"),
+                "observed_unmapped_tags": unit_evidence.get("observed_unmapped_tags"),
+                "complete_signal_coverage": unit_evidence.get("complete_signal_coverage"),
+                "promotion_gates": dict(gates),
+                "policy": dict(policy),
+            },
+            "reviewed signal-unit evidence is missing provenance or permits numeric/state/frequency promotion",
+        )
+        unit_evidence_check["diagnostic_only"] = True
+        unit_evidence_check["interpretation"] = (
+            "Document-anchored units are accepted only for the explicitly mapped tags. "
+            "Unmapped tags, pressure basis, calibration and adapter gates remain visible; "
+            "the audit does not create a state snapshot, accident frequency, release packet or QRA."
+        )
+        checks.append(unit_evidence_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

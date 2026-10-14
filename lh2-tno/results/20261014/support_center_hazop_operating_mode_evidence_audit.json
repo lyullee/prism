@@ -2258,11 +2258,12 @@
     }
   ],
   "timeseries_audit": {
-    "source_path": "results\\20261106\\external_support_center_timeseries_audit.json",
+    "source_path": "results\\20261014\\external_support_center_timeseries_reviewed_unit_audit.json",
     "source_schema": "prism.inspection_center_timeseries_audit.v1",
-    "reviewed_unit_map_supplied": false,
+    "reviewed_unit_map_supplied": true,
     "numeric_signal_unit_status_count": {
-      "MISSING_OR_UNCONFIRMED": 522
+      "CONFIRMED_BY_REVIEWED_MAP": 156,
+      "MISSING_OR_UNCONFIRMED": 366
     },
     "numeric_state_binding_allowed": false,
     "status": "WITHHELD_UNITS_UNCONFIRMED"
@@ -2289,6 +2290,6 @@
   },
   "source_records": {
     "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
-    "timeseries_audit": "results\\20261106\\external_support_center_timeseries_audit.json"
+    "timeseries_audit": "results\\20261014\\external_support_center_timeseries_reviewed_unit_audit.json"
   }
 }
