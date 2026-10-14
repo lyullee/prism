@@ -56,5 +56,7 @@ python lh2-tno/scripts/export_generic_provider_closure_requests.py `
 
 G2에 provider-owned 종료 근거가 추가되면 24건 모두 `CLOSURE_READY_FOR_QUALIFICATION`으로 바꾼다. 이것만으로 실제 시설 위험도가 완성되는 것은 아니다. 이후에는 provider qualification, SLABx-LH2 독립 비교, 문헌 빈도 연결, 기상·점화·인구·IR/F-N 시설 원장의 별도 문턱을 통과해야 한다.
 
-새 packet을 포함한 24건 재실행 결과는 [`generic_lh2_campaign_rebound_inventory_closure_v4_result.json`](../results/20261014/generic_lh2_campaign_rebound_inventory_closure_v4_result.json)에서 확인할 수 있다. G3·G6은 `EXECUTED`로 SLABx-LH2 경로까지 도달했고, 전체 캠페인은 다른 설비의 실패·운영제한·영역 미완료 상태를 그대로 보존한다.
+새 packet을 포함한 24건 재실행 결과는 [`generic_lh2_campaign_rebound_inventory_closure_v4_clockfix2_result.json`](../results/20261014/generic_lh2_campaign_rebound_inventory_closure_v4_clockfix2_result.json)에서 확인할 수 있다. G3·G6은 `EXECUTED`로 SLABx-LH2 경로까지 도달했고, 전이밸브 5건도 provider 종료·재고 장부·pool 질량수지 보정 후 `EXECUTED_OPERATOR_LIMITED`로 계산됐다. 전체 결과는 `EXECUTED` 4건, `EXECUTED_OPERATOR_LIMITED` 19건, `FAILED` 1건(G1 고속 기체 출구)이며, 실패·운영제한·영역 미완료 상태를 그대로 보존한다.
+
+전이밸브의 pool 입력에는 provider 시계의 이진 부동소수점 경계가 그대로 전달되지 않도록 12자리 반올림과 1 ns 이른 adapter clock을 적용했다. 이 보정은 provider 방출률·방출 지속시간·종료근거를 바꾸지 않고 SLABx-LH2의 zero-order-hold 경계만 안정화한다. G1은 provider source/throat 상태가 없어 압축성 handoff를 만들 수 없으므로 low-Mach 조건을 우회하지 않는다.
 

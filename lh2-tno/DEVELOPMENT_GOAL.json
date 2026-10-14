@@ -163,7 +163,7 @@
     "field accident-frequency collection and sensor-frequency learning",
     "indoor dispersion, DDT/detonation and full domino interaction"
   ],
-  "next_priority": "Close the remaining provider qualification, independent physical-validation, facility release-boundary, frequency-port and accident-family scope gates. G3/G6 inventory-depletion packets now execute through SLABx-LH2; G2 remains a fixed-horizon open closure request.",
+  "next_priority": "Close the remaining high-Mach vaporizer G1 provider compressible-plane evidence and provider qualification/physical-validation/facility release-boundary/frequency-port gates. Transfer-valve pool clock normalization now recovers five numerical cases without changing provider duration or mass.",
   "layered_tank_worklist_packet_campaign_implemented": true,
   "layered_tank_worklist_packet_campaign_status": "SYNTHETIC_STRUCTURAL_ONLY; storage-tank-01 five area-bin packets exact-match 5/24 worklist events",
   "layered_tank_worklist_packet_campaign_record": "results/20261010/layered_tank_worklist_packets/campaign_verification.json",
@@ -3368,7 +3368,7 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261014/ijhe_completion_audit_with_inventory_closure_v5.json",
+    "record": "results/20261014/ijhe_completion_audit_with_inventory_closure_v7.json",
     "status": "INCOMPLETE_EVIDENCE",
     "check_count": 25,
     "blocking_reason_count": 4,
@@ -3384,16 +3384,16 @@
   },
   "latest_provider_worklist_evidence": "results/20261014/generic_lh2_provider_worklist_packet_evidence_isolation_contract_v4.json",
   "latest_provider_closure_requests": "results/20261014/generic_lh2_provider_closure_requests_isolation_contract_v4.json",
-  "latest_generic_lh2_campaign_result": "results/20261014/generic_lh2_campaign_rebound_inventory_closure_v4_result.json",
-  "latest_generic_lh2_campaign_status": "PARTIAL_DECLARED_SCOPE; 24 fresh physics cases; 4 executed, 14 operator-limited, 6 failed; G3/G6 inventory-depletion packets executed through SLABx-LH2; facility QRA withheld",
+  "latest_generic_lh2_campaign_result": "results/20261014/generic_lh2_campaign_rebound_inventory_closure_v4_clockfix2_result.json",
+  "latest_generic_lh2_campaign_status": "PARTIAL_DECLARED_SCOPE; 24 fresh physics cases; 4 executed, 19 operator-limited, 1 failed (ambient-vaporizer/G1 high-Mach exit); transfer-valve five cases now execute through SLABx-LH2 with pool clock normalization; facility QRA withheld",
   "latest_generic_lh2_campaign_timing": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 857.7649,
-    "case_median_ms": 4056.714,
-    "case_max_ms": 67307.4377,
-    "case_p95_ms": 16321.6325,
-    "case_p99_ms": 55778.1961,
-    "campaign_elapsed_ms": 182719.8047,
+    "case_min_ms": 877.385,
+    "case_median_ms": 4502.8905,
+    "case_max_ms": 89114.5595,
+    "case_p95_ms": 21452.5689,
+    "case_p99_ms": 73726.9776,
+    "campaign_elapsed_ms": 235556.5492,
     "fresh_physics_claim": true,
     "realtime_guarantee": false
   },
@@ -3425,5 +3425,18 @@
     "closure_open_event_count": 1,
     "facility_qra_promotion": false
   },
-  "ijhe_completion_goal_status": "active"
+  "ijhe_completion_goal_status": "active",
+  "pool_clock_normalization_adapter": {
+    "module": "src/lh2_tno/chain_worker.py",
+    "function": "_normalise_pool_clock_interval",
+    "round_digits": 12,
+    "early_shift_s": 1e-09,
+    "purpose": "stabilize DynamicLH2PoolX zero-order-hold change points with provider binary-float timestamps",
+    "provider_duration_or_mass_changed": false,
+    "transfer_valve_cases_recovered": 5,
+    "remaining_failed_case": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+    "remaining_failed_reason": "provider source/throat state absent; compressible/underexpanded handoff cannot be constructed",
+    "facility_qra_promotion": false
+  },
+  "campaign_transfer_valve_clock_normalization_status": "EXECUTED_OPERATOR_LIMITED; 5/5 transfer-valve cases pass provider-to-pool mass ledger after adapter-only clock normalization"
 }

@@ -22,6 +22,32 @@ except ImportError:  # isolated worker imports this module as a top-level file
 MW_H2=.002016
 MW_AIR=.028965
 R=8.314462618
+POOL_CLOCK_ROUND_DIGITS=12
+POOL_CLOCK_EARLY_SHIFT_S=1.0e-9
+
+
+def _normalise_pool_clock_interval(start: float, end: float) -> tuple[float, float]:
+    """Return a stable zero-order-hold interval for the external pool solver.
+
+    Provider timestamps can carry binary-float artefacts at a change point.
+    DynamicLH2PoolX deliberately uses a strict change-point guard, so a value
+    such as ``0.060000000000000005`` can repeat the previous rate once.  The
+    tiny early shift belongs only to this adapter clock; provider rates,
+    duration, and termination evidence remain unchanged.
+    """
+    start_clock=max(
+        0.0,
+        round(float(start),POOL_CLOCK_ROUND_DIGITS)-POOL_CLOCK_EARLY_SHIFT_S,
+    )
+    end_clock=max(
+        0.0,
+        round(float(end),POOL_CLOCK_ROUND_DIGITS)-POOL_CLOCK_EARLY_SHIFT_S,
+    )
+    if not math.isfinite(start_clock) or not math.isfinite(end_clock):
+        raise ValueError('pool clock interval must be finite')
+    if end_clock<=start_clock:
+        raise ValueError('pool clock rounding collapsed a positive interval')
+    return start_clock,end_clock
 
 
 def intervals(rows, end):
@@ -304,7 +330,17 @@ def run_chain(p,roots,module):
                 delay=o['flight_time_s']
                 if delay is None or delay<0 or o['impact_position_m'] is None:
                     raise ValueError('rainout lacks resolved flight time/impact position')
-                ground_pulses.append({'start':row['time_s']+delay,'end':end+delay,
+                # Provider clocks often contain binary-float artefacts such
+                # as 0.060000000000000005.  DynamicLH2PoolX uses a strict
+                # zero-order hold and a 1e-12 change-point guard; passing the
+                # artefact through can repeat the previous rate for one extra
+                # interval and make the pool evaporate more mass than PRISM
+                # received.  Round only the adapter clock, retaining the
+                # provider's mass rates and termination evidence unchanged.
+                pulse_start,pulse_end=_normalise_pool_clock_interval(
+                    float(row['time_s'])+float(delay),float(end)+float(delay)
+                )
+                ground_pulses.append({'start':pulse_start,'end':pulse_end,
                                       'rate':o['ground_liquid_mass_flow_kg_s'],'flight_time_s':delay})
                 positions.append(o['impact_position_m'])
         if not positions:raise ValueError('rainout lacks resolved arrival boundary')
@@ -438,6 +474,12 @@ def run_chain(p,roots,module):
                 'coarsening_target_packet_count':coarsening_target_packet_count,
                 'zero_area_packet_fallback_count':zero_area_packet_fallback_count,
                 'zero_area_packet_fallback_method':'first downstream resolved wet area, otherwise declared source area',
+                'clock_normalization':{
+                    'round_digits':POOL_CLOCK_ROUND_DIGITS,
+                    'early_shift_s':POOL_CLOCK_EARLY_SHIFT_S,
+                    'reason':'avoid zero-order-hold change-point loss from provider binary-float timestamps',
+                    'mass_effect_scope':'bounded clock sampling adjustment; provider rates, duration, and termination evidence unchanged',
+                },
             }
     mark('pool',start)
     # Resolve vector bending and carrier entrainment before SLAB handoff.
