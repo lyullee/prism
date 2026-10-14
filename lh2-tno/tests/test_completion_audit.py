@@ -277,6 +277,29 @@ def test_completion_audit_blocks_unsafe_forecast_facility_campaign_claim():
     assert check["status"] == "BLOCKED"
 
 
+def test_completion_audit_accepts_existing_hazop_forecast_campaign_status():
+    ledger = _integrated_hazop_ledger()
+    ledger["forecast_facility_campaign"] = {
+        "status": "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=ledger,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "PASS"
+
+
 def test_completion_audit_blocks_forecast_mode_trace_mismatch():
     forecast = {
         "schema_version": "prism.hazop_forecast_risk_scan.v1",

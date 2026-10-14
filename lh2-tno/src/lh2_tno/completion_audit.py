@@ -3271,6 +3271,8 @@ def build_ijhe_completion_audit(
             forecast_facility_campaign_valid = (
                 forecast_facility_campaign_status in {
                     "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
+                    "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+                    "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
                     "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
                 }
                 or forecast_facility_campaign_status.startswith("WITHHELD_")
