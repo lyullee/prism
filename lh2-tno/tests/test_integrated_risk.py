@@ -237,6 +237,117 @@ def test_integrated_risk_withholds_unsafe_facility_campaign_claim(monkeypatch):
     assert result["facility_campaign"]["policy"]["facility_qra_promotion"] is False
 
 
+def test_integrated_risk_attaches_forecast_facility_campaign(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_forecast_risk_scan",
+        lambda **kwargs: {
+            **_forecast_result(),
+            "withheld_count": 0,
+            "evaluated_count": 1,
+        },
+    )
+    seen = {}
+
+    def evaluate(forecast):
+        seen["status"] = forecast["status"]
+        seen["entry_count"] = len(forecast["scenario_entries"])
+        return {
+            "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+            "facility_ledger": {"status": "CONDITIONAL_DIAGNOSTIC"},
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        forecast_frames=[{"component_id": "TK-01", "origin": "model_prediction"}],
+        forecast_tables_by_component={"TK-01": {"rows": []}},
+        forecast_facility_campaign_evaluator=evaluate,
+    )
+
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
+    assert seen == {"status": "FORECAST_RISK_SCAN_COMPLETE", "entry_count": 1}
+    assert result["forecast_facility_campaign"]["status"] == (
+        "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED"
+    )
+    assert result["forecast_facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
+def test_integrated_risk_withholds_forecast_facility_campaign_when_scan_is_partial(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_forecast_risk_scan",
+        lambda **kwargs: _forecast_result(),
+    )
+    called = []
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        forecast_frames=[{"component_id": "TK-01", "origin": "model_prediction"}],
+        forecast_tables_by_component={"TK-01": {"rows": []}},
+        forecast_facility_campaign_evaluator=lambda *_: called.append(True),
+    )
+    assert called == []
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
+    assert result["forecast_facility_campaign"]["status"] == (
+        "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_WITHHELD"
+    )
+    assert result["forecast_facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
+def test_integrated_risk_withholds_unsafe_forecast_facility_campaign(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_forecast_risk_scan",
+        lambda **kwargs: {**_forecast_result(), "withheld_count": 0},
+    )
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        forecast_frames=[{"component_id": "TK-01", "origin": "model_prediction"}],
+        forecast_tables_by_component={"TK-01": {"rows": []}},
+        forecast_facility_campaign_evaluator=lambda *_: {
+            "status": "READY_FOR_IJHE_SCOPE",
+            "complete_facility_qra_claim": True,
+            "policy": {"facility_qra_promotion": True},
+        },
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
+    assert result["forecast_facility_campaign"]["status"] == (
+        "WITHHELD_UNSAFE_FORECAST_FACILITY_CAMPAIGN_RESULT"
+    )
+    assert result["forecast_facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
 def test_campaign_evaluator_factory_binds_existing_hazop_campaign(monkeypatch):
     captured = {}
 

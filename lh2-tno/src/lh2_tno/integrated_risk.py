@@ -125,6 +125,7 @@ def run_hazop_integrated_risk(
     forecast_quantitative_evaluator: Any = None,
     forecast_evaluate_on: str = "entry",
     facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
+    forecast_facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     mapping_digest: str | None = None,
 ) -> dict[str, Any]:
     """Run current and optional forecast HAZOP risk paths as one ledger.
@@ -135,9 +136,12 @@ def run_hazop_integrated_risk(
     :func:`run_hazop_forecast_risk_scan`.  No forecast result is silently
     substituted for a missing quantitative evaluator.  An optional
     ``facility_campaign_evaluator`` may receive the current runtime ledger and
-    attach the existing annual-condition/facility-ledger handoff.  Its result
-    is copied only after unsafe frequency, physical-validation, or facility-QRA
-    claims are rejected.
+    attach the existing annual-condition/facility-ledger handoff.  A separate
+    ``forecast_facility_campaign_evaluator`` receives the completed forecast
+    scan, including trigger evaluations, so future-state facility aggregation
+    is explicit rather than being confused with the current snapshot.  Both
+    results are copied only after unsafe frequency, physical-validation, or
+    facility-QRA claims are rejected.
     """
     facility_id = _facility_id(table)
     if not isinstance(current_frames, Mapping) or not current_frames:
@@ -193,6 +197,105 @@ def run_hazop_integrated_risk(
             )
         except (HazopForecastError, ValueError, TypeError) as error:
             raise IntegratedRiskError(f"forecast-state HAZOP execution failed: {error}") from error
+
+    forecast_facility_campaign: dict[str, Any]
+    if forecast_facility_campaign_evaluator is None:
+        forecast_facility_campaign = {
+            "status": "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+    elif not callable(forecast_facility_campaign_evaluator):
+        raise IntegratedRiskError(
+            "forecast_facility_campaign_evaluator must be callable when supplied"
+        )
+    elif forecast.get("status") != "FORECAST_RISK_SCAN_COMPLETE":
+        forecast_facility_campaign = {
+            "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_PARTIAL",
+            "reason": "forecast facility campaign requires a completed forecast HAZOP scan",
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+    elif int(forecast.get("withheld_count", 0) or 0) > 0:
+        forecast_facility_campaign = {
+            "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_SCAN_WITHHELD",
+            "reason": "forecast HAZOP scan contains withheld quantitative evaluations",
+            "withheld_count": int(forecast.get("withheld_count", 0) or 0),
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+    else:
+        try:
+            raw_forecast_campaign = forecast_facility_campaign_evaluator(
+                copy.deepcopy(forecast)
+            )
+        except Exception as error:
+            forecast_facility_campaign = {
+                "status": "WITHHELD_FORECAST_FACILITY_CAMPAIGN_EVALUATOR_ERROR",
+                "error_type": type(error).__name__,
+                "reason": str(error),
+                "policy": {
+                    "facility_qra_promotion": False,
+                    "frequency_inference_performed": False,
+                    "physical_validation_claim": False,
+                },
+            }
+        else:
+            if not isinstance(raw_forecast_campaign, Mapping):
+                forecast_facility_campaign = {
+                    "status": "WITHHELD_INVALID_FORECAST_FACILITY_CAMPAIGN_RESULT",
+                    "reason": "forecast facility campaign evaluator must return a mapping",
+                    "policy": {
+                        "facility_qra_promotion": False,
+                        "frequency_inference_performed": False,
+                        "physical_validation_claim": False,
+                    },
+                }
+            else:
+                forecast_campaign = copy.deepcopy(dict(raw_forecast_campaign))
+                forecast_campaign_policy = forecast_campaign.get("policy")
+                forecast_campaign_policy = (
+                    forecast_campaign_policy
+                    if isinstance(forecast_campaign_policy, Mapping)
+                    else {}
+                )
+                unsafe = (
+                    forecast_campaign_policy.get("facility_qra_promotion") is True
+                    or forecast_campaign_policy.get("frequency_inference_performed") is True
+                    or forecast_campaign_policy.get("physical_validation_claim") is True
+                    or forecast_campaign.get("complete_facility_qra_claim") is True
+                )
+                if unsafe:
+                    forecast_facility_campaign = {
+                        "status": "WITHHELD_UNSAFE_FORECAST_FACILITY_CAMPAIGN_RESULT",
+                        "reason": "forecast facility campaign evaluator returned an unsafe promotion or inference claim",
+                        "policy": {
+                            "facility_qra_promotion": False,
+                            "frequency_inference_performed": False,
+                            "physical_validation_claim": False,
+                        },
+                    }
+                else:
+                    forecast_campaign["status"] = str(
+                        forecast_campaign.get("status")
+                        or "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED"
+                    )
+                    forecast_campaign["policy"] = {
+                        **dict(forecast_campaign_policy),
+                        "facility_qra_promotion": False,
+                        "frequency_inference_performed": False,
+                        "physical_validation_claim": False,
+                    }
+                    forecast_facility_campaign = forecast_campaign
 
     facility_campaign: dict[str, Any]
     if facility_campaign_evaluator is None:
@@ -286,6 +389,11 @@ def run_hazop_integrated_risk(
         "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
         "FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
     }
+    forecast_facility_campaign_status = str(forecast_facility_campaign.get("status", ""))
+    forecast_facility_campaign_ok = forecast_facility_campaign_status in {
+        "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
+        "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+    }
     current_modes = _current_modes(current)
     forecast_modes = _forecast_modes(forecast)
     current_scenarios = {
@@ -300,11 +408,12 @@ def run_hazop_integrated_risk(
         "schema_version": SCHEMA,
         "facility_id": facility_id,
         "status": "INTEGRATED_DIAGNOSTIC_COMPLETE"
-        if current_ok and forecast_ok and facility_campaign_ok
+        if current_ok and forecast_ok and facility_campaign_ok and forecast_facility_campaign_ok
         else "INTEGRATED_DIAGNOSTIC_PARTIAL",
         "current": current,
         "forecast": forecast,
         "facility_campaign": facility_campaign,
+        "forecast_facility_campaign": forecast_facility_campaign,
         "linkage": {
             "current_component_ids": sorted(current_frames),
             "forecast_component_ids": sorted(forecast_tables_by_component or {}),
