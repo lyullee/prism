@@ -2258,6 +2258,73 @@ def build_ijhe_objective_coverage_audit(
             ),
         ))
 
+    # When the current full completion audit is supplied, reconcile its
+    # facility-wide case ledger with this objective ledger.  Older callers
+    # provide only ``status`` and remain valid; the alignment row is added only
+    # when the richer 44-check audit is present.
+    completion_checks = completion_audit.get("checks", [])
+    if isinstance(completion_checks, list) and completion_checks:
+        completion_by_name = {
+            row.get("name"): row
+            for row in completion_checks
+            if isinstance(row, Mapping) and isinstance(row.get("name"), str)
+        }
+        required_diagnostic_statuses = {
+            "diagnostic_worklist_packet_coverage_evidence": {"PASS"},
+            "diagnostic_release_trace_coverage": {"PASS"},
+            "diagnostic_numerical_scope_coverage": {"PASS"},
+            "diagnostic_facility_frequency_port_binding": {
+                "PASS_DIAGNOSTIC_ONLY",
+                "PASS_DIAGNOSTIC_ONLY_WITHHELD",
+                "PASS",
+            },
+            "diagnostic_external_release_artifact_intake": {
+                "PASS_DIAGNOSTIC_ONLY",
+                "PASS",
+            },
+            "diagnostic_facility_evidence_request_coverage": {"PASS"},
+        }
+        diagnostic_status_observed = {
+            name: completion_by_name.get(name, {}).get("status")
+            for name in required_diagnostic_statuses
+        }
+        diagnostic_alignment_ok = (
+            completion_audit.get("schema_version")
+            == "prism.ijhe_completion_audit.v1"
+            and completion_audit.get("status") == "INCOMPLETE_EVIDENCE"
+            and len(completion_checks) >= 44
+            and all(
+                diagnostic_status_observed[name] in allowed
+                for name, allowed in required_diagnostic_statuses.items()
+            )
+            and len(completion_audit.get("blocking_reasons", [])) == 5
+            and completion_audit.get("physical_validation_claim") is False
+            and completion_audit.get("complete_facility_qra_claim") is False
+        )
+        rows.append(_row(
+            "diagnostic_full_completion_audit_alignment",
+            "최신 시설 전체 완료감사의 case·구조적 작업목록·진단 검사·차단 이유를 IJHE 목표 원장과 일치시켜야 한다",
+            "PASS" if diagnostic_alignment_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(completion_path,),
+            observed={
+                "schema_version": completion_audit.get("schema_version"),
+                "status": completion_audit.get("status"),
+                "check_count": len(completion_checks),
+                "required_diagnostic_statuses": diagnostic_status_observed,
+                "blocking_reason_count": len(completion_audit.get("blocking_reasons", [])),
+                "physical_validation_claim": completion_audit.get("physical_validation_claim"),
+                "complete_facility_qra_claim": completion_audit.get("complete_facility_qra_claim"),
+                "alignment_valid": diagnostic_alignment_ok,
+            },
+            blocking_reason=None if diagnostic_alignment_ok else (
+                "최신 44개 case 완료감사의 schema·진단 검사·차단 이유 또는 승격 차단 플래그가 목표 원장과 일치하지 않는다"
+            ),
+            interpretation=(
+                "이 행은 최신 전체 감사가 구조적 연결을 확인했는지 검증한다. "
+                "PASS는 시설 QRA 완료를 뜻하지 않으며, 실제 provider·물리검증·범위 gate는 별도로 열린다."
+            ),
+        ))
+
     core_rows = rows[:8]
     # The first 15 rows are the established core/strict gates.  The external
     # observation row above is diagnostic-only and must not change either

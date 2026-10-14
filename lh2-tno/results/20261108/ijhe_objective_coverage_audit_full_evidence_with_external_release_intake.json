@@ -912,6 +912,33 @@
       },
       "blocking_reason": null,
       "interpretation": "검색된 파일은 설비·사고 후보를 찾는 보조 장부다. synthetic/model-prediction 자료와 sidecar 없는 방출은 실제 사고 근거·빈도·물리검증·시설 QRA로 승격하지 않는다."
+    },
+    {
+      "id": "diagnostic_full_completion_audit_alignment",
+      "requirement": "최신 시설 전체 완료감사의 case·구조적 작업목록·진단 검사·차단 이유를 IJHE 목표 원장과 일치시켜야 한다",
+      "status": "PASS",
+      "evidence_paths": [
+        "results\\20261108\\ijhe_completion_audit_full_evidence_with_structural_worklist_and_requests.json"
+      ],
+      "observed": {
+        "schema_version": "prism.ijhe_completion_audit.v1",
+        "status": "INCOMPLETE_EVIDENCE",
+        "check_count": 44,
+        "required_diagnostic_statuses": {
+          "diagnostic_worklist_packet_coverage_evidence": "PASS",
+          "diagnostic_release_trace_coverage": "PASS",
+          "diagnostic_numerical_scope_coverage": "PASS",
+          "diagnostic_facility_frequency_port_binding": "PASS",
+          "diagnostic_external_release_artifact_intake": "PASS",
+          "diagnostic_facility_evidence_request_coverage": "PASS"
+        },
+        "blocking_reason_count": 5,
+        "physical_validation_claim": false,
+        "complete_facility_qra_claim": false,
+        "alignment_valid": true
+      },
+      "blocking_reason": null,
+      "interpretation": "이 행은 최신 전체 감사가 구조적 연결을 확인했는지 검증한다. PASS는 시설 QRA 완료를 뜻하지 않으며, 실제 provider·물리검증·범위 gate는 별도로 열린다."
     }
   ],
   "core_chain_check_ids": [

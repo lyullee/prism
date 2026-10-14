@@ -198,6 +198,62 @@ def test_objective_audit_blocks_malformed_external_release_intake():
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
 
 
+def test_objective_audit_aligns_latest_full_completion_audit():
+    inputs = _inputs()
+    names = [
+        "diagnostic_worklist_packet_coverage_evidence",
+        "diagnostic_release_trace_coverage",
+        "diagnostic_numerical_scope_coverage",
+        "diagnostic_facility_frequency_port_binding",
+        "diagnostic_external_release_artifact_intake",
+        "diagnostic_facility_evidence_request_coverage",
+    ]
+    inputs["completion_audit"] = {
+        "schema_version": "prism.ijhe_completion_audit.v1",
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [
+            {"name": name, "status": (
+                "PASS_DIAGNOSTIC_ONLY_WITHHELD"
+                if name == "diagnostic_facility_frequency_port_binding"
+                else "PASS_DIAGNOSTIC_ONLY"
+                if name == "diagnostic_external_release_artifact_intake"
+                else "PASS"
+            )}
+            for name in names
+        ] + [{"name": f"other-{i}", "status": "PASS"} for i in range(38)],
+        "blocking_reasons": ["a", "b", "c", "d", "e"],
+        "physical_validation_claim": False,
+        "complete_facility_qra_claim": False,
+        "_record_path": "full-completion.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_full_completion_audit_alignment"
+    )
+    assert row["status"] == "PASS"
+    assert row["observed"]["check_count"] == 44
+
+
+def test_objective_audit_blocks_misaligned_full_completion_audit():
+    inputs = _inputs()
+    inputs["completion_audit"] = {
+        "schema_version": "prism.ijhe_completion_audit.v1",
+        "status": "INCOMPLETE_EVIDENCE",
+        "checks": [{"name": f"other-{i}", "status": "PASS"} for i in range(44)],
+        "blocking_reasons": ["a", "b", "c", "d", "e"],
+        "physical_validation_claim": False,
+        "complete_facility_qra_claim": False,
+        "_record_path": "full-completion.json",
+    }
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    row = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_full_completion_audit_alignment"
+    )
+    assert row["status"] == "BLOCKED_EVIDENCE"
+
+
 def test_objective_audit_blocks_realtime_timing_without_mode_contract():
     inputs = _inputs()
     inputs["realtime_cache_benchmark"]["mode_contract"]["stale_fallback_used"] = True
