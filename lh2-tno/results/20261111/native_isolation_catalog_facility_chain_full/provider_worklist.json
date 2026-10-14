@@ -1,0 +1,1545 @@
+{
+  "schema": "prism.provider_release_worklist.v1",
+  "status": "READY_FOR_PROVIDER_PACKETS",
+  "manifest_status": "EXECUTABLE",
+  "frequency_plan_id": "generic-lh2-full-scope-frequency-example",
+  "model_binding_status": null,
+  "model_binding_accident_release_supported_component_count": null,
+  "model_binding_diagnostic_release_adapter_component_count": null,
+  "model_binding_blocking_reasons": [],
+  "generated_event_count": 24,
+  "frequency_port_binding_warning": null,
+  "provider_packet_count": 0,
+  "status_counts": {
+    "UNCOMPUTED_PROVIDER_PACKET": 24
+  },
+  "scenario_family_counts": {
+    "inventory_depletion": 1,
+    "inventory_over_600s": 1,
+    "liquid_two_phase": 21,
+    "pipe_hole": 5,
+    "pump_hole": 2,
+    "reliquefier_hole": 1,
+    "two_sided_rupture": 2,
+    "valve_hole": 5,
+    "vaporizer_hole": 1,
+    "vent_hole": 1,
+    "vessel_hole": 5
+  },
+  "promotion_policy": "The worklist requests provider-owned release histories. It does not infer mass flow, duration, isolation, inventory, frequency, or a consequence request from normal-flow telemetry.",
+  "work_items": [
+    {
+      "id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "asset_id": "storage-shell",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_0.01%",
+      "annual_frequency_per_year": 0.00065,
+      "release_mode": "hole",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "tank-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.012700000000000001,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "asset_id": "storage-shell",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_0.1%",
+      "annual_frequency_per_year": 0.00014,
+      "release_mode": "hole",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "tank-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.040160926284138414,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "asset_id": "storage-shell",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_1%",
+      "annual_frequency_per_year": 2.8e-05,
+      "release_mode": "hole",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "tank-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.127,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "asset_id": "storage-shell",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_10%",
+      "annual_frequency_per_year": 5.7e-06,
+      "release_mode": "hole",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "tank-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.4016092628413842,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "asset_id": "storage-shell",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_100%",
+      "annual_frequency_per_year": 1.2e-06,
+      "release_mode": "hole",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "tank-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 1.27,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "asset_id": "transfer-line",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.01%",
+      "annual_frequency_per_year": 3.4e-06,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "line-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.00025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "asset_id": "transfer-line",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.1%",
+      "annual_frequency_per_year": 1.6e-06,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "line-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.0007905694150420948,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "asset_id": "transfer-line",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_1%",
+      "annual_frequency_per_year": 8e-07,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "line-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.0025000000000000005,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "asset_id": "transfer-line",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_10%",
+      "annual_frequency_per_year": 3.9e-07,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "line-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.00790569415042095,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "asset_id": "transfer-line",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_100%",
+      "annual_frequency_per_year": 1.9e-07,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "line-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "asset_id": "transfer-valve",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_0.01%",
+      "annual_frequency_per_year": 0.00012,
+      "release_mode": "hole",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "valve-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.00025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "asset_id": "transfer-valve",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_0.1%",
+      "annual_frequency_per_year": 5.2e-05,
+      "release_mode": "hole",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "valve-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.0007905694150420948,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "asset_id": "transfer-valve",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_1%",
+      "annual_frequency_per_year": 2.2e-05,
+      "release_mode": "hole",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "valve-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.0025000000000000005,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "asset_id": "transfer-valve",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_10%",
+      "annual_frequency_per_year": 9.3e-06,
+      "release_mode": "hole",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "valve-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.00790569415042095,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "asset_id": "transfer-valve",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_100%",
+      "annual_frequency_per_year": 3.9e-06,
+      "release_mode": "hole",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "valve-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "asset_id": "pressure-relief-vent",
+      "component_id": "pressure-relief-vent-01",
+      "profile": "TNO_RELIEF_DEVICE",
+      "loc": "G1",
+      "annual_frequency_per_year": 2e-05,
+      "release_mode": "maximum_relief_discharge",
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "provider_event_kind": "emergency_relief",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "vent-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "equipment_emergency_relief"
+      ],
+      "required_termination_basis": "emergency_relief_discharge",
+      "required_duration_s": null,
+      "required_opening_diameter_m": null,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit"
+      ],
+      "liquid_packet_fields": [],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "asset_id": "transfer-pump",
+      "component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "loc": "G1",
+      "annual_frequency_per_year": 0.0001,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "pump-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "asset_id": "transfer-pump",
+      "component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "loc": "G2",
+      "annual_frequency_per_year": 0.0005,
+      "release_mode": "hole",
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "pump-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.0025000000000000005,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "asset_id": "ambient-vaporizer",
+      "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "loc": "G1",
+      "annual_frequency_per_year": 5e-05,
+      "release_mode": "instantaneous_inventory",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "inventory_depletion",
+      "required_duration_s": null,
+      "required_opening_diameter_m": null,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "asset_id": "ambient-vaporizer",
+      "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "loc": "G2",
+      "annual_frequency_per_year": 5e-05,
+      "release_mode": "inventory_over_600s",
+      "scenario_families": [
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "required_termination_basis": "inventory_over_600s",
+      "required_duration_s": 600.0,
+      "required_opening_diameter_m": null,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "asset_id": "ambient-vaporizer",
+      "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "loc": "G3",
+      "annual_frequency_per_year": 0.001,
+      "release_mode": "hole",
+      "scenario_families": [
+        "vaporizer_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.01,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "asset_id": "reliquefier",
+      "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "loc": "G4",
+      "annual_frequency_per_year": 1e-05,
+      "release_mode": "two_sided_rupture",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release_set.v1",
+      "provider_endpoint_count": 2,
+      "accident_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "acceptable_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "required_termination_basis": "two_sided_rupture",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "releases[0]",
+        "releases[1]",
+        "component_id",
+        "available_mass_kg",
+        "duration_s",
+        "termination_provenance",
+        "provider_source_digest",
+        "provider_result_digest"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit"
+      ],
+      "liquid_packet_fields": [],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "asset_id": "reliquefier",
+      "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "loc": "G5",
+      "annual_frequency_per_year": 0.001,
+      "release_mode": "two_sided_rupture",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release_set.v1",
+      "provider_endpoint_count": 2,
+      "accident_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "acceptable_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "required_termination_basis": "two_sided_rupture",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.025,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "releases[0]",
+        "releases[1]",
+        "component_id",
+        "available_mass_kg",
+        "duration_s",
+        "termination_provenance",
+        "provider_source_digest",
+        "provider_result_digest"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit"
+      ],
+      "liquid_packet_fields": [],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    },
+    {
+      "id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/provider-release",
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "asset_id": "reliquefier",
+      "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "loc": "G6",
+      "annual_frequency_per_year": 0.01,
+      "release_mode": "hole",
+      "scenario_families": [
+        "reliquefier_hole",
+        "liquid_two_phase"
+      ],
+      "provider_event_kind": "accidental_leak",
+      "provider_release_schema": "prism.resolved_release.v1",
+      "provider_endpoint_count": 1,
+      "accident_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "acceptable_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "required_termination_basis": "explicit_provider_termination",
+      "required_duration_s": null,
+      "required_opening_diameter_m": 0.0025000000000000005,
+      "required_packet_fields": [
+        "provider_export_schema",
+        "boundary_kind",
+        "event_kind",
+        "event_id",
+        "component_id",
+        "port_id",
+        "position_enu_m",
+        "direction_enu",
+        "steps",
+        "duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "termination_provenance",
+        "property_basis",
+        "provider_source_digest",
+        "provider_result_digest",
+        "failure_opening_diameter_m"
+      ],
+      "provider_boundary_variants": [
+        "resolved_atmospheric_gas_exit",
+        "resolved_atmospheric_liquid_exit"
+      ],
+      "liquid_packet_fields": [
+        "boundary_kind",
+        "cumulative_specific_enthalpy_out_j",
+        "droplet_partition_provenance",
+        "enthalpy_convention",
+        "phase_basis",
+        "reference_area_m2",
+        "reference_area_provenance"
+      ],
+      "status": "UNCOMPUTED_PROVIDER_PACKET",
+      "model_binding_status": null,
+      "model_accident_release_export_status": null,
+      "model_diagnostic_release_adapter_status": null,
+      "model_diagnostic_release_adapter_module": null,
+      "blocking_reasons": []
+    }
+  ]
+}
