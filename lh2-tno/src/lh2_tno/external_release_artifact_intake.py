@@ -62,7 +62,9 @@ def _contains_qualification(value: Any) -> bool:
 def _release_like(value: Any) -> bool:
     if not isinstance(value, Mapping):
         return False
-    if value.get("provider_export_schema") in {RELEASE_SCHEMA, RELEASE_SET_SCHEMA}:
+    # A release-set is a container and must be traversed so each contained
+    # release receives its own identity, digest and qualification decision.
+    if value.get("provider_export_schema") == RELEASE_SCHEMA:
         return True
     required = {"event_id", "component_id", "port_id", "duration_s", "steps"}
     return required.issubset(value) and isinstance(value.get("steps"), list)

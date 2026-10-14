@@ -121,3 +121,19 @@ def test_external_release_intake_accepts_exact_sidecar_from_separate_root(tmp_pa
     assert report["qualification_file_count"] == 1
     assert report["qualified_sidecar_row_count"] == 1
     assert report["artifacts"][0]["qualification_bound"] is True
+
+
+def test_external_release_intake_expands_release_set_container(tmp_path: Path) -> None:
+    path = tmp_path / "resolved_release_set.json"
+    path.write_text(
+        json.dumps({
+            "provider_export_schema": "prism.resolved_release_set.v1",
+            "releases": [_release()],
+        }),
+        encoding="utf-8",
+    )
+
+    report = audit_external_release_artifacts(paths=[path])
+
+    assert report["release_row_count"] == 1
+    assert report["artifacts"][0]["item_pointer"] == "$.releases[0]"
