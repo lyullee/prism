@@ -10,6 +10,11 @@
   "missing_case_ids": [],
   "orphan_ledger_ids": [],
   "duplicate_ledger_ids": [],
+  "facility_evidence_request_alignment_status": "NOT_SUPPLIED",
+  "facility_evidence_request_case_count": null,
+  "facility_evidence_request_missing_case_keys": [],
+  "facility_evidence_request_orphan_case_keys": [],
+  "facility_evidence_request_duplicate_case_keys": [],
   "strict_release_boundary_eligible_case_count": 3,
   "strict_release_boundary_blocked_case_count": 21,
   "provider_qualification_status_counts": {
@@ -70,6 +75,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -128,6 +137,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -186,6 +199,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -244,6 +261,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -302,6 +323,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -358,6 +383,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -414,6 +443,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -470,6 +503,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -526,6 +563,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -582,6 +623,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -638,6 +683,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -694,6 +743,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -750,6 +803,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -806,6 +863,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -862,6 +923,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -915,6 +980,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -971,6 +1040,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1027,6 +1100,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1077,6 +1154,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1130,6 +1211,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1180,6 +1265,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1237,6 +1326,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1294,6 +1387,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1344,6 +1441,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": false,
+      "facility_evidence_request_id": null,
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 0,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",

@@ -4943,6 +4943,13 @@ def build_ijhe_completion_audit(
             if request_keys is None
             else bool(request_keys) and request_keys == boundary_keys and len(request_keys) == case_count
         )
+        audit_request_alignment = boundary.get(
+            "facility_evidence_request_alignment_status"
+        )
+        audit_request_rows_match = all(
+            row.get("facility_evidence_request_match") is True
+            for row in rows
+        ) if request_rows is not None else None
         boundary_valid = (
             boundary.get("schema_version") == "prism.release_boundary_case_audit.v1"
             and boundary.get("status") in {"CASE_BOUNDARY_PARTIAL", "CASE_BOUNDARY_CLOSED"}
@@ -4957,6 +4964,13 @@ def build_ijhe_completion_audit(
             and eligible_count + blocked_count == case_count
             and rows_safe
             and (request_alignment is None or request_alignment)
+            and (
+                request_rows is None
+                or (
+                    audit_request_alignment == "ALIGNED"
+                    and audit_request_rows_match is True
+                )
+            )
             and boundary.get("provider_qualification_claim") is False
             and boundary.get("independent_physical_validation_claim") is False
             and boundary.get("frequency_inference_performed") is False
@@ -4976,6 +4990,8 @@ def build_ijhe_completion_audit(
                 ),
                 "source_alignment_status": boundary.get("source_alignment_status"),
                 "facility_evidence_request_alignment": request_alignment,
+                "release_audit_evidence_request_alignment": audit_request_alignment,
+                "release_audit_evidence_request_rows_match": audit_request_rows_match,
                 "facility_evidence_request_case_count": (
                     len(request_rows) if request_rows is not None else None
                 ),

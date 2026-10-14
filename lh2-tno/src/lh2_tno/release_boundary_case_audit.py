@@ -197,6 +197,7 @@ def build_release_boundary_case_audit(
     facility_assessment: Mapping[str, Any],
     *,
     residual_tolerance_kg: float = _TOLERANCE_KG,
+    facility_evidence_request: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a case-level release-boundary promotion table.
 
@@ -223,6 +224,16 @@ def build_release_boundary_case_audit(
     cases = _as_rows(risk_ledger.get("cases"))
     release_ledger = _as_mapping(risk_ledger.get("release_termination_inventory_ledger"))
     ledger_rows = _as_rows(release_ledger.get("rows"))
+    request_rows = (
+        _as_rows(_as_mapping(facility_evidence_request).get("case_requests"))
+        if facility_evidence_request is not None
+        else []
+    )
+    request_by_key = {
+        _case_key(request): request
+        for request in request_rows
+        if request.get("event_id") is not None
+    }
     cases_by_key = {
         _case_key(case): case for case in cases if case.get("event_id") is not None
     }
@@ -238,6 +249,38 @@ def build_release_boundary_case_audit(
         alignment_blockers.append("release_ledger_rows_missing_case_metadata")
     if duplicate_ledger_ids:
         alignment_blockers.append("duplicate_release_ledger_case_keys")
+    request_missing_case_keys: list[str] = []
+    request_orphan_case_keys: list[str] = []
+    request_duplicate_case_keys = sorted({
+        key for key in (
+            _case_key(request)
+            for request in request_rows
+            if request.get("event_id") is not None
+        )
+        if sum(
+            1
+            for request in request_rows
+            if request.get("event_id") is not None and _case_key(request) == key
+        ) > 1
+    })
+    request_alignment_status = "NOT_SUPPLIED"
+    if facility_evidence_request is not None:
+        request_missing_case_keys = sorted(set(ledger_ids) - set(request_by_key))
+        request_orphan_case_keys = sorted(set(request_by_key) - set(ledger_ids))
+        if request_missing_case_keys:
+            alignment_blockers.append("release_ledger_cases_missing_from_evidence_request")
+        if request_orphan_case_keys:
+            alignment_blockers.append("evidence_request_contains_unknown_case_keys")
+        if request_duplicate_case_keys:
+            alignment_blockers.append("duplicate_evidence_request_case_keys")
+        request_alignment_status = "ALIGNED" if not any(
+            reason in alignment_blockers
+            for reason in (
+                "release_ledger_cases_missing_from_evidence_request",
+                "evidence_request_contains_unknown_case_keys",
+                "duplicate_evidence_request_case_keys",
+            )
+        ) else "BLOCKED"
     rows: list[dict[str, Any]] = []
     for ledger_row in ledger_rows:
         event_id = str(ledger_row.get("event_id"))
@@ -245,6 +288,14 @@ def build_release_boundary_case_audit(
         reasons = _case_reasons(case, ledger_row, residual_tolerance_kg=tolerance)
         provider_blockers = _provider_blockers(case, ledger_row)
         required_evidence = _required_evidence(reasons, provider_blockers)
+        request = request_by_key.get(_case_key(ledger_row))
+        request_evidence = request.get("required_provider_evidence", []) if request else []
+        request_evidence = (
+            list(request_evidence)
+            if isinstance(request_evidence, Sequence)
+            and not isinstance(request_evidence, (str, bytes))
+            else []
+        )
         termination = _as_mapping(ledger_row.get("termination"))
         identity = _as_mapping(case.get("provider_packet_identity"))
         boundary_ok = not reasons
@@ -275,6 +326,10 @@ def build_release_boundary_case_audit(
             "release_boundary_blocking_reasons": reasons,
             "required_evidence": required_evidence,
             "evidence_request_status": "OPEN" if required_evidence else "NONE",
+            "facility_evidence_request_match": request is not None,
+            "facility_evidence_request_id": request.get("request_id") if request else None,
+            "facility_evidence_request_status": request.get("status") if request else None,
+            "facility_evidence_required_provider_evidence_count": len(request_evidence),
             "provider_qualification_status": "BLOCKED" if provider_blockers else "REVIEW_REQUIRED",
             "provider_qualification_blocking_reasons": provider_blockers,
             "facility_qra_promotion_eligible": False,
@@ -303,6 +358,11 @@ def build_release_boundary_case_audit(
         "missing_case_ids": missing_case_ids,
         "orphan_ledger_ids": orphan_ledger_ids,
         "duplicate_ledger_ids": duplicate_ledger_ids,
+        "facility_evidence_request_alignment_status": request_alignment_status,
+        "facility_evidence_request_case_count": len(request_rows) if facility_evidence_request is not None else None,
+        "facility_evidence_request_missing_case_keys": request_missing_case_keys,
+        "facility_evidence_request_orphan_case_keys": request_orphan_case_keys,
+        "facility_evidence_request_duplicate_case_keys": request_duplicate_case_keys,
         "strict_release_boundary_eligible_case_count": status_counts.get("ELIGIBLE", 0),
         "strict_release_boundary_blocked_case_count": status_counts.get("PROMOTION_BLOCKED", 0),
         "provider_qualification_status_counts": dict(sorted(provider_status_counts.items())),

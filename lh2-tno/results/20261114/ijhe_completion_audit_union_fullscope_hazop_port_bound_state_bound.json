@@ -5130,6 +5130,8 @@
         "source_release_ledger_row_count": 44,
         "source_alignment_status": "ALIGNED",
         "facility_evidence_request_alignment": true,
+        "release_audit_evidence_request_alignment": "ALIGNED",
+        "release_audit_evidence_request_rows_match": true,
         "facility_evidence_request_case_count": 44,
         "strict_release_boundary_eligible_case_count": 3,
         "strict_release_boundary_blocked_case_count": 41,

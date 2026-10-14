@@ -10,6 +10,11 @@
   "missing_case_ids": [],
   "orphan_ledger_ids": [],
   "duplicate_ledger_ids": [],
+  "facility_evidence_request_alignment_status": "ALIGNED",
+  "facility_evidence_request_case_count": 44,
+  "facility_evidence_request_missing_case_keys": [],
+  "facility_evidence_request_orphan_case_keys": [],
+  "facility_evidence_request_duplicate_case_keys": [],
   "strict_release_boundary_eligible_case_count": 3,
   "strict_release_boundary_blocked_case_count": 41,
   "provider_qualification_status_counts": {
@@ -71,6 +76,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -129,6 +138,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -187,6 +200,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -245,6 +262,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -303,6 +324,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -359,6 +384,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -415,6 +444,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -471,6 +504,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -527,6 +564,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -583,6 +624,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -639,6 +684,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -695,6 +744,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -751,6 +804,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -807,6 +864,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -863,6 +924,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -916,6 +981,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 7,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -972,6 +1041,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1028,6 +1101,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 9,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1078,6 +1155,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 7,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1131,6 +1212,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 7,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1181,6 +1266,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 7,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1238,6 +1327,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1295,6 +1388,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1345,6 +1442,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/synthetic-generic-worker-west-3ms/matched-event-provider-request",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 7,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1402,6 +1503,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1459,6 +1564,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1516,6 +1625,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1573,6 +1686,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1630,6 +1747,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1687,6 +1808,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1744,6 +1869,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1801,6 +1930,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1858,6 +1991,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1915,6 +2052,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%/generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west/provider-vertical-handoff",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -1969,6 +2110,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2023,6 +2168,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2077,6 +2226,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2131,6 +2284,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2185,6 +2342,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2239,6 +2400,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2293,6 +2458,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2347,6 +2516,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2401,6 +2574,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-3ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",
@@ -2455,6 +2632,10 @@
         "independent physical-validation record or an explicitly reviewed validation gap"
       ],
       "evidence_request_status": "OPEN",
+      "facility_evidence_request_match": true,
+      "facility_evidence_request_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%/generic-lh2-full-scope-example/inventory-depletion/generic-lh2-near-receptor-diagnostic/inventory-depletion/D-4ms-west/provider-inventory-depletion",
+      "facility_evidence_request_status": null,
+      "facility_evidence_required_provider_evidence_count": 8,
       "provider_qualification_status": "BLOCKED",
       "provider_qualification_blocking_reasons": [
         "provider_input_is_not_actual_field_data",

@@ -21,6 +21,11 @@ def _object(path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--facility-assessment", type=Path, required=True)
+    parser.add_argument(
+        "--facility-evidence-request",
+        type=Path,
+        help="optional exact facility case evidence-request catalog",
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--residual-tolerance-kg", type=float, default=1e-8)
     args = parser.parse_args()
@@ -28,6 +33,11 @@ def main() -> int:
         report = build_release_boundary_case_audit(
             _object(args.facility_assessment),
             residual_tolerance_kg=args.residual_tolerance_kg,
+            facility_evidence_request=(
+                _object(args.facility_evidence_request)
+                if args.facility_evidence_request
+                else None
+            ),
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"release boundary case audit input error: {error}") from error

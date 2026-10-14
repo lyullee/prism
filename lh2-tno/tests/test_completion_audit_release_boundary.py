@@ -83,6 +83,7 @@ def test_completion_audit_cross_checks_boundary_rows_against_case_requests():
             "strict_release_boundary_eligible": True,
             "facility_qra_promotion_eligible": False,
             "facility_qra_blocking_reasons": ["model_prediction"],
+            "facility_evidence_request_match": True,
         },
         {
             "event_id": "e2",
@@ -91,8 +92,10 @@ def test_completion_audit_cross_checks_boundary_rows_against_case_requests():
             "strict_release_boundary_eligible": False,
             "facility_qra_promotion_eligible": False,
             "facility_qra_blocking_reasons": ["operator_limited"],
+            "facility_evidence_request_match": True,
         },
     ]
+    audit["facility_evidence_request_alignment_status"] = "ALIGNED"
     report = build_ijhe_completion_audit(
         _status(),
         {"matrix_complete": False, "blocking_reasons": ["scope open"]},

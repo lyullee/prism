@@ -124,3 +124,33 @@ def test_case_audit_uses_event_branch_and_annual_condition_as_case_key():
     )
     assert report["source_alignment_status"] == "ALIGNED"
     assert len({row["case_key"] for row in report["rows"]}) == 2
+
+
+def test_case_audit_cross_checks_facility_evidence_request_catalog():
+    report = build_release_boundary_case_audit(
+        _assessment([_case("good")], [_ledger_row("good")]),
+        facility_evidence_request={
+            "case_requests": [{
+                "event_id": "good",
+                "annual_condition_id": None,
+                "release_branch_id": None,
+                "request_id": "request-good",
+                "required_provider_evidence": ["provider history"],
+            }]
+        },
+    )
+    assert report["facility_evidence_request_alignment_status"] == "ALIGNED"
+    row = report["rows"][0]
+    assert row["facility_evidence_request_match"] is True
+    assert row["facility_evidence_request_id"] == "request-good"
+    assert row["facility_evidence_required_provider_evidence_count"] == 1
+
+
+def test_case_audit_blocks_missing_facility_evidence_request_case():
+    report = build_release_boundary_case_audit(
+        _assessment([_case("good")], [_ledger_row("good")]),
+        facility_evidence_request={"case_requests": []},
+    )
+    assert report["status"] == "CASE_BOUNDARY_BLOCKED"
+    assert report["facility_evidence_request_alignment_status"] == "BLOCKED"
+    assert report["rows"][0]["facility_evidence_request_match"] is False
