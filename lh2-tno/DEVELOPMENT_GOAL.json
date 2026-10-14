@@ -2112,6 +2112,18 @@
   "inspection_center_scenario_reaudit_frequency_applied": false,
   "inspection_center_scenario_reaudit_sensor_frequency_learning_used": false,
   "inspection_center_scenario_reaudit_facility_qra_claim": false,
+  "inspection_center_operating_mode_candidate_evidence_record": "results/20261107/external_support_center_operating_mode_evidence.json",
+  "inspection_center_operating_mode_candidate_evidence_status": "SCREENING_EVIDENCE_ONLY; source procedure labels mapped to HAZOP organization candidates",
+  "inspection_center_operating_mode_candidate_row_count": 52,
+  "inspection_center_operating_mode_candidate_counts": {
+    "receiving": 19,
+    "storage_vent": 3,
+    "supply": 30
+  },
+  "inspection_center_operating_mode_candidate_outdoor_count": 41,
+  "inspection_center_operating_mode_candidate_out_of_scope_count": 11,
+  "inspection_center_operating_mode_runtime_input_promoted": false,
+  "inspection_center_operating_mode_frequency_or_qra_promoted": false,
   "external_provider_artifact_audit_record": "results/20261020/provider_artifact_audit_external.json",
   "external_provider_artifact_audit_summary": "examples/provider_artifact_audit_external_summary.json",
   "external_provider_artifact_audit_status": "EXTERNAL_ARTIFACTS_DIAGNOSTIC_ONLY",

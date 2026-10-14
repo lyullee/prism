@@ -46,6 +46,7 @@ PROVIDER_RELEASE_REQUIRED_FIELDS = (
 
 _FIELD_ALIASES = {
     "scenario": ("시나리오", "scenario", "scenario_id"),
+    "operating_mode": ("운전모드", "운전 모드", "operating_mode", "operation_mode", "mode"),
     "asset": ("탱크", "tank", "asset_id", "component_id", "equipment"),
     "step": ("절차번호", "step", "sequence", "step_id"),
     "operation": ("동작내용", "action", "operation", "command"),
@@ -55,6 +56,59 @@ _FIELD_ALIASES = {
     "fire_hazard": ("화재_위험", "fire_hazard"),
     "explosion_hazard": ("폭발_위험", "explosion_hazard"),
 }
+
+_OPERATING_MODE_LABELS: tuple[tuple[str, str], ...] = (
+    ("인수", "receiving"),
+    ("receiving", "receiving"),
+    ("저장(벤트)", "storage_vent"),
+    ("저장", "storage_vent"),
+    ("벤트", "storage_vent"),
+    ("vent", "storage_vent"),
+    ("공급", "supply"),
+    ("supply", "supply"),
+    ("대기", "standby"),
+    ("스텐바이", "standby"),
+    ("standby", "standby"),
+)
+
+
+def _operating_mode_candidate(
+    explicit_mode: Any,
+    scenario: Any,
+    relative_path: str,
+) -> tuple[str | None, str]:
+    """Map source labels to a HAZOP organization hint, never to live state.
+
+    The live ``HazopStateFrame.operating_mode`` remains the authoritative
+    input for scenario selection.  This helper only preserves a traceable
+    candidate from a procedure register or folder name for provider requests.
+    """
+    explicit_texts = [str(explicit_mode).strip()] if explicit_mode else []
+    explicit_matches = [
+        (mode, token)
+        for text in explicit_texts
+        for token, mode in _OPERATING_MODE_LABELS
+        if token.casefold() in text.casefold()
+    ]
+    if explicit_matches:
+        explicit_modes = {mode for mode, _ in explicit_matches}
+        if len(explicit_modes) != 1:
+            return None, "ambiguous_source_label"
+        return explicit_matches[0][0], f"procedure_field:{explicit_matches[0][1]}"
+
+    texts = [str(value).strip() for value in (scenario, relative_path) if value]
+    matches = [
+        (mode, token)
+        for text in texts
+        for token, mode in _OPERATING_MODE_LABELS
+        if token.casefold() in text.casefold()
+    ]
+    if not matches:
+        return None, "unresolved_source_label"
+    modes = {mode for mode, _ in matches}
+    if len(modes) != 1:
+        return None, "ambiguous_source_label"
+    return matches[0][0], f"procedure_label:{matches[0][1]}"
 
 _FAMILY_BY_HAZARD_CLASS = {
     "flange_connect": ("pipe_hole", "vessel_hole"),
@@ -108,10 +162,19 @@ def _value(row: dict[str, Any], aliases: tuple[str, ...]) -> Any:
 def _scenario_record(path: Path, root: Path, row_number: int, row: dict[str, Any]) -> dict[str, Any]:
     hazard_class = _value(row, _FIELD_ALIASES["hazard_class"])
     family = _FAMILY_BY_HAZARD_CLASS.get(str(hazard_class), ())
+    scenario = _value(row, _FIELD_ALIASES["scenario"])
+    operating_mode_candidate, operating_mode_source = _operating_mode_candidate(
+        _value(row, _FIELD_ALIASES["operating_mode"]),
+        scenario,
+        str(path.relative_to(root)),
+    )
     return {
         "file": str(path.relative_to(root)),
         "row_number": row_number,
-        "scenario": _value(row, _FIELD_ALIASES["scenario"]),
+        "scenario": scenario,
+        "operating_mode_candidate": operating_mode_candidate,
+        "operating_mode_source": operating_mode_source,
+        "operating_mode_is_runtime_input": False,
         "asset": _value(row, _FIELD_ALIASES["asset"]),
         "step": _value(row, _FIELD_ALIASES["step"]),
         "operation": _value(row, _FIELD_ALIASES["operation"]),
@@ -465,6 +528,8 @@ def build_provider_packet_request_catalog(audit: Mapping[str, Any]) -> dict[str,
             "file": record.get("file"),
             "row_number": record.get("row_number"),
             "scenario": record.get("scenario"),
+            "operating_mode_candidate": record.get("operating_mode_candidate"),
+            "operating_mode_source": record.get("operating_mode_source"),
             "asset": record.get("asset"),
             "step": record.get("step"),
             "operation": record.get("operation"),
@@ -482,6 +547,7 @@ def build_provider_packet_request_catalog(audit: Mapping[str, Any]) -> dict[str,
         requests.append({
             "request_id": request_id,
             "source": identity,
+            "runtime_operating_mode_required": True,
             "candidate_accident_families": list(families),
             "hazard_class": record.get("hazard_class"),
             "provider_export_schema": "prism.resolved_release.v1",
@@ -552,6 +618,7 @@ _EXTERNAL_CATEGORY_SIGNAL_MAP: dict[str, tuple[str, ...]] = {
 
 _EXTERNAL_FIELD_ALIASES: dict[str, tuple[str, ...]] = {
     "scenario": ("시나리오", "scenario"),
+    "operating_mode": ("운전모드", "운전 모드", "operating_mode", "operation_mode", "mode"),
     "equipment": ("탱크", "tank", "공급모드", "supply_mode"),
     "step": ("절차번호", "step", "step_no"),
     "action": ("동작내용", "action", "operation"),
@@ -563,7 +630,6 @@ _EXTERNAL_FIELD_ALIASES: dict[str, tuple[str, ...]] = {
     "fire_risk": ("화재_위험", "fire_risk"),
     "explosion_risk": ("폭발_위험", "explosion_risk"),
 }
-
 
 def _external_value(row: Mapping[str, Any], aliases: tuple[str, ...]) -> str | None:
     for alias in aliases:
@@ -613,13 +679,22 @@ def _external_record(
 ) -> dict[str, Any]:
     category = _external_value(row, _EXTERNAL_FIELD_ALIASES["category"])
     text = " ".join(str(value) for value in row.values() if value is not None)
+    scenario = _external_value(row, _EXTERNAL_FIELD_ALIASES["scenario"])
+    operating_mode_candidate, operating_mode_source = _operating_mode_candidate(
+        _external_value(row, _EXTERNAL_FIELD_ALIASES.get("operating_mode", ())),
+        scenario,
+        relative_path,
+    )
     return {
         "id": f"{relative_path}:{row_number}",
         "source_file": relative_path,
         "source_path": str(source_path),
         "source_sha256": source_sha256,
         "row_number": row_number,
-        "scenario": _external_value(row, _EXTERNAL_FIELD_ALIASES["scenario"]),
+        "scenario": scenario,
+        "operating_mode_candidate": operating_mode_candidate,
+        "operating_mode_source": operating_mode_source,
+        "operating_mode_is_runtime_input": False,
         "equipment_tag": _external_value(row, _EXTERNAL_FIELD_ALIASES["equipment"]),
         "procedure_step": _external_value(row, _EXTERNAL_FIELD_ALIASES["step"]),
         "action": _external_value(row, _EXTERNAL_FIELD_ALIASES["action"]),
@@ -685,6 +760,11 @@ def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
         signal for record in records for signal in record["candidate_monitoring_signals"]
     )
     scope_counts = Counter(record["scope_status"] for record in records)
+    operating_mode_counts = Counter(
+        record["operating_mode_candidate"]
+        for record in records
+        if record.get("operating_mode_candidate") is not None
+    )
     status = "SCREENING_EVIDENCE_IMPORTED" if records and not errors else (
         "PARTIAL_SCREENING_EVIDENCE" if records else "FAILED_SCREENING_EVIDENCE"
     )
@@ -700,6 +780,7 @@ def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
             "family_candidate_counts": dict(sorted(family_counts.items())),
             "monitoring_signal_candidate_counts": dict(sorted(signal_counts.items())),
             "scope_status_counts": dict(sorted(scope_counts.items())),
+            "operating_mode_candidate_counts": dict(sorted(operating_mode_counts.items())),
         },
         "errors": errors,
         "policy": {
@@ -710,6 +791,7 @@ def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
             "facility_qra_claim": False,
             "indoor_and_enclosed_rows_excluded_from_outdoor_scope": True,
             "candidate_family_map_is_not_a_frequency_map": True,
+            "procedure_label_is_not_a_runtime_operating_mode": True,
         },
         "limitations": [
             "Procedure and failure text identifies candidate scenarios only; it does not provide an initiating frequency.",

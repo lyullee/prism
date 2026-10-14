@@ -12,13 +12,14 @@ def test_scenario_register_is_preserved_without_provider_promotion(tmp_path):
         writer = csv.DictWriter(
             handle,
             fieldnames=[
-                "시나리오", "탱크", "절차번호", "동작내용", "위험성분류",
+                "시나리오", "운전모드", "탱크", "절차번호", "동작내용", "위험성분류",
                 "누출_예상고장", "누출_위험", "화재_위험", "폭발_위험",
             ],
         )
         writer.writeheader()
         writer.writerow({
             "시나리오": "액화수소 저장(벤트)",
+            "운전모드": "공급",
             "탱크": "TANK1",
             "절차번호": "2",
             "동작내용": "XV10 OPEN",
@@ -37,6 +38,9 @@ def test_scenario_register_is_preserved_without_provider_promotion(tmp_path):
     record = report["scenario_records"][0]
     assert record["promotion_status"] == "SCENARIO_ONLY_PROVIDER_PACKET_MISSING"
     assert record["frequency_assigned"] is False
+    assert record["operating_mode_candidate"] == "supply"
+    assert record["operating_mode_source"] == "procedure_field:공급"
+    assert record["operating_mode_is_runtime_input"] is False
     assert report["provider_promotion"]["qualified_packet_count"] == 0
 
 
@@ -66,6 +70,8 @@ def test_provider_packet_request_catalog_keeps_scenario_rows_unpromoted(tmp_path
     assert request["frequency_assigned"] is False
     assert request["release_values_present"] is False
     assert request["provider_export_schema"] == "prism.resolved_release.v1"
+    assert request["runtime_operating_mode_required"] is True
+    assert request["source"]["operating_mode_candidate"] is None
     assert "boundary_kind" in request["required_provider_fields"]
     assert "failure_opening_diameter_m" in request["required_provider_fields"]
     assert catalog["provider_promotion"]["qualified_packet_count"] == 0
@@ -113,3 +119,7 @@ def test_external_csv_import_maps_candidates_without_frequency(tmp_path):
     assert report["policy"]["facility_qra_claim"] is False
     assert report["records"][1]["scope_status"] == "OUTSIDE_DECLARED_OUTDOOR_SCOPE"
     assert "hydrogen_detection" in report["records"][0]["candidate_monitoring_signals"]
+    assert report["records"][0]["operating_mode_candidate"] == "storage_vent"
+    assert report["records"][1]["operating_mode_candidate"] == "supply"
+    assert report["records"][0]["operating_mode_is_runtime_input"] is False
+    assert report["policy"]["procedure_label_is_not_a_runtime_operating_mode"] is True
