@@ -461,6 +461,7 @@ def _scenario_branch_accounting(
                 "risk_atom_count": 0,
                 "conditional_weight_sum": 0.0,
                 "weighted_frequency_per_year": 0.0,
+                "operating_modes": set(),
                 "annual_condition_ids": set(),
                 "release_branch_ids": set(),
                 "ignition_branches": set(),
@@ -473,6 +474,10 @@ def _scenario_branch_accounting(
         if not isinstance(values, Sequence) or isinstance(values, (str, bytes)):
             return set()
         return {str(value) for value in values if isinstance(value, str) and value.strip()}
+
+    def _operating_modes(atom: Mapping[str, Any]) -> set[str]:
+        value = atom.get("operating_mode")
+        return {value.strip()} if isinstance(value, str) and value.strip() else set()
 
     for atom in atoms:
         event_id = str(atom.get("event_id", ""))
@@ -491,10 +496,12 @@ def _scenario_branch_accounting(
         )
 
         condition_row = _group(condition_groups, condition_id)
+        modes = _operating_modes(atom)
         condition_row["event_ids"].add(event_id)
         condition_row["risk_atom_count"] += 1
         condition_row["conditional_weight_sum"] += conditional_weight
         condition_row["weighted_frequency_per_year"] += initiating_frequency * conditional_weight
+        condition_row["operating_modes"].update(modes)
         condition_row["release_branch_ids"].add(release_id)
         condition_row["ignition_branches"].add(ignition_id)
         condition_row["scenario_families"].update(families)
@@ -504,6 +511,7 @@ def _scenario_branch_accounting(
         release_row["risk_atom_count"] += 1
         release_row["conditional_weight_sum"] += conditional_weight
         release_row["weighted_frequency_per_year"] += initiating_frequency * conditional_weight
+        release_row["operating_modes"].update(modes)
         release_row["annual_condition_ids"].add(condition_id)
         release_row["ignition_branches"].add(ignition_id)
         release_row["scenario_families"].update(families)
@@ -520,6 +528,7 @@ def _scenario_branch_accounting(
         ignition_row["risk_atom_count"] += 1
         ignition_row["conditional_weight_sum"] += conditional_weight
         ignition_row["weighted_frequency_per_year"] += initiating_frequency * conditional_weight
+        ignition_row["operating_modes"].update(modes)
         ignition_row["annual_condition_ids"].add(condition_id)
         ignition_row["release_branch_ids"].add(release_id)
         ignition_row["scenario_families"].update(families)
@@ -539,6 +548,7 @@ def _scenario_branch_accounting(
                 "risk_atom_count": int(row["risk_atom_count"]),
                 "conditional_weight_sum": float(row["conditional_weight_sum"]),
                 "weighted_frequency_per_year": float(row["weighted_frequency_per_year"]),
+                "operating_modes": sorted(row.get("operating_modes", ())),
                 "annual_condition_ids": sorted(row.get("annual_condition_ids", ())),
                 "release_branch_ids": sorted(row.get("release_branch_ids", ())),
                 "ignition_branches": sorted(row.get("ignition_branches", ())),

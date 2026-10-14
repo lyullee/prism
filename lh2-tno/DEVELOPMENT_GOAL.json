@@ -18,9 +18,10 @@
       "src/lh2_tno/realtime_campaign.py",
       "src/lh2_tno/facility_evidence_request.py",
       "src/lh2_tno/hazop_forecast.py",
-      "src/lh2_tno/completion_audit.py"
+      "src/lh2_tno/completion_audit.py",
+      "src/lh2_tno/facility_ledger.py"
     ],
-    "hazop_operating_mode_campaign_trace_policy": "live frame mode must match the HAZOP campaign binding and is preserved on campaign event/case/risk atom and provider evidence requests; no frequency inference or QRA promotion",
+    "hazop_operating_mode_campaign_trace_policy": "live frame mode must match the HAZOP campaign binding and is preserved on campaign event/case/risk atom, provider evidence requests and facility scenario_branch_accounting; no frequency inference or QRA promotion",
     "hazop_operating_mode_campaign_trace_status": "IMPLEMENTED_DIAGNOSTIC_ONLY; qualified provider, independent physical validation and facility QRA remain withheld",
     "hazop_operating_mode_campaign_trace_tests": [
       "test_hazop_facility_campaign_preserves_selected_operating_mode",
@@ -265,7 +266,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "993 passed",
+  "latest_local_full_test_run": "994 passed",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
   "equipment_campaign_compiler_record": "docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md",
@@ -2341,7 +2342,7 @@
     "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
     "NO_RISK_ATOMS"
   ],
-  "full_portable_test_count_latest": 993,
+  "full_portable_test_count_latest": 994,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": [
@@ -2350,6 +2351,9 @@
     "ignition_branch"
   ],
   "facility_scenario_branch_accounting_status": "EXPLICIT_BRANCH_ACCOUNTING; diagnostic only; no frequency inference or branch reallocation",
+  "facility_scenario_branch_operating_mode_trace_implemented": true,
+  "facility_scenario_branch_operating_mode_trace_output": "operating_modes on annual_conditions, release_branches and ignition_branches; legacy atoms without a mode remain []",
+  "facility_scenario_branch_operating_mode_trace_policy": "Mode is diagnostic identity metadata only; it is sorted and preserved through facility aggregation without frequency inference or branch reallocation.",
   "facility_scenario_branch_accounting_cross_product": "Each validated risk atom retains one annual condition, release/termination branch, and ignition branch; overlapping scenario-family views are not re-summed.",
   "facility_scenario_branch_accounting_latest_summary": "Latest 29-event/136-atom merged diagnostic: 3 annual conditions, 2 release branches, 4 ignition branches, 12 observed condition×release×ignition combinations; facility total remains withheld.",
   "facility_release_termination_inventory_ledger_implemented": true,
@@ -2747,7 +2751,7 @@
   "ijhe_objective_coverage_audit_with_external_field_record": "results/20261103/ijhe_objective_coverage_audit_with_external_field.json",
   "ijhe_objective_coverage_audit_with_external_field_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 16 checks, core blockers 0, strict blockers 4; external field row PASS as diagnostic-only with hash drift retained",
   "ijhe_objective_coverage_audit_external_field_diagnostic_policy": "External outdoor observations are audited separately and cannot promote provider release, accident frequency, physical validation or facility QRA; current bundle has source_boundary/weather/common_clock hash drift",
-  "full_portable_test_status_latest": "993 passed",
+  "full_portable_test_status_latest": "994 passed",
   "external_field_model_comparison_contract_implemented": true,
   "external_field_model_comparison_module": "src/lh2_tno/field_model_comparison.py",
   "external_field_model_comparison_schema": "prism.external_field_model_comparison.v1",

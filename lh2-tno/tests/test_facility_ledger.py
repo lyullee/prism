@@ -17,6 +17,7 @@ def _result(
     conditional_weight: float = 1.0,
     incomplete: bool = False,
     port_ids=None,
+    operating_mode: str | None = None,
 ):
     atom = {
         "event_id": event_id,
@@ -33,6 +34,8 @@ def _result(
         },
         "expected_deaths_low_high": [1.2, 1.4],
     }
+    if operating_mode is not None:
+        atom["operating_mode"] = operating_mode
     return {
         "facility_id": "facility-1",
         "campaign_digest": f"digest-{event_id}",
@@ -509,6 +512,51 @@ def test_facility_ledger_preserves_weather_and_termination_branch_metadata():
     }
     assert branches["release_branches"]["release-1"]["weighted_frequency_per_year"] == pytest.approx(1e-3)
     assert branches["ignition_branches"]["direct_fire"]["positive_harm_atom_count"] == 1
+
+
+def test_facility_ledger_preserves_operating_modes_in_each_branch_view():
+    merged = merge_facility_campaign_results(
+        [
+            {
+                "campaign_id": "receiving-campaign",
+                "result": _result(
+                    event_id="event-receiving",
+                    asset_id="asset-receiving",
+                    component_id="tank-mode",
+                    frequency=1e-3,
+                    operating_mode="receiving",
+                ),
+            },
+            {
+                "campaign_id": "supply-campaign",
+                "result": _result(
+                    event_id="event-supply",
+                    asset_id="asset-supply",
+                    component_id="tank-mode",
+                    frequency=2e-3,
+                    operating_mode="supply",
+                ),
+            },
+        ],
+        expected_component_ids=("tank-mode",),
+    )
+
+    branches = merged["scenario_branch_accounting"]
+    assert branches["annual_conditions"]["weather-1"]["operating_modes"] == [
+        "receiving",
+        "supply",
+    ]
+    assert branches["release_branches"]["release-1"]["operating_modes"] == [
+        "receiving",
+        "supply",
+    ]
+    assert branches["ignition_branches"]["direct_fire"]["operating_modes"] == [
+        "receiving",
+        "supply",
+    ]
+    assert branches["release_branches"]["release-1"][
+        "weighted_frequency_per_year"
+    ] == pytest.approx(3e-3)
 
 
 def test_facility_ledger_carries_release_duration_isolation_and_inventory_rows():
