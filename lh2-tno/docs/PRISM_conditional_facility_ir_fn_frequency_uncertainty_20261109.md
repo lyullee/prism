@@ -112,3 +112,26 @@
 - 예측 위험조건 trigger: 1개
 
 이 결과는 운전 모드가 HAZOP 판단에 실제 입력되고 scenario identity가 정량평가 경계까지 전달되는 것을 증명한다. 일반 24개 사건 원장 전체에 모든 현장 mode를 덧씌우지는 않으며, mode가 없는 사건을 임의로 보간하지 않는다.
+
+
+## 7개 설비 HAZOP·운전 모드 진단
+
+다설비 runtime 원장은 7개 설비를 모두 수락하고, 각 설비의 현장 입력값과 운전 모드를 HAZOP 표에 넣은 뒤 선택된 사고 branch를 provider와 피해 체인으로 보냈다.
+
+| 설비 | 입력 운전 모드 | 선택 사고 family |
+|---|---|---|
+| `storage-tank-01` | `receiving` | `liquid_two_phase` |
+| `liquid-transfer-line-01` | `supply` | `pipe_hole` |
+| `transfer-valve-01` | `supply` | `liquid_two_phase` |
+| `liquid-transfer-pump-01` | `supply` | `liquid_two_phase` |
+| `ambient-vaporizer-01` | `supply` | `inventory_depletion` |
+| `pressure-relief-vent-01` | `standby` | `vent_hole` |
+| `reliquefier-01` | `standby` | `two_sided_rupture` |
+
+모든 설비의 현재 결과가 `CONSEQUENCE_BRANCHES_EVALUATED`로 기록됐고, 시설 handoff·scenario trace·설비 상태 release audit·risk atom chain audit가 함께 저장됐다. 설비별 서비스 시간은 1초 주기 진단 입력에서 관찰했지만, fresh physics 1 Hz 보장으로 해석하지 않는다.
+
+- 다설비 HAZOP 원장: `results/20261014/hazop_multiequipment_provider_isolation_diagnostic_v3.json`
+- 최신 감사의 다설비 검사: `diagnostic_hazop_multiequipment_provider_chain = PASS`
+- 최신 감사: `results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop_multiequipment.json`
+
+이 결과는 **현장값과 운전 모드가 함께 들어가 HAZOP가 사고 family를 고르는 연결**을 닫는다. 각 branch의 실제 설비 packet 적격성, 차단 신뢰도, 독립 물리검증과 시설 QRA 승격은 여전히 별도 조건이다.

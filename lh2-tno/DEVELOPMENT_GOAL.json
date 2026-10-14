@@ -3368,12 +3368,12 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop.json",
+    "record": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop_multiequipment.json",
     "status": "INCOMPLETE_EVIDENCE",
-    "check_count": 24,
+    "check_count": 25,
     "blocking_reason_count": 5,
     "facility_qra_promotion": false,
-    "interpretation": "conditional facility IR/F-N, HAZOP current/forecast mode trace, chain closure and uncertainty diagnostics are recorded; strict provider, scope, port and facility-QRA gates remain closed"
+    "interpretation": "conditional facility IR/F-N, 7-equipment HAZOP mode/scenario trace, chain closure and uncertainty diagnostics are recorded; strict provider, scope, port and facility-QRA gates remain closed"
   },
   "latest_provider_closure_audit": {
     "record": "results/20261014/generic_lh2_provider_release_closure_isolation_contract_v4.json",
@@ -3568,5 +3568,26 @@
     "frequency_inference_performed": false,
     "facility_qra_promotion": false,
     "interpretation": "single-equipment provider-bound HAZOP diagnostic; not a replacement for the 24-event facility scope"
+  },
+  "latest_hazop_multiequipment_record": {
+    "record": "results/20261014/hazop_multiequipment_provider_isolation_diagnostic_v3.json",
+    "audit": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop_multiequipment.json",
+    "status": "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
+    "component_count": 7,
+    "accepted_component_count": 7,
+    "operating_modes": {
+      "storage-tank-01": "receiving",
+      "liquid-transfer-line-01": "supply",
+      "transfer-valve-01": "supply",
+      "liquid-transfer-pump-01": "supply",
+      "ambient-vaporizer-01": "supply",
+      "pressure-relief-vent-01": "standby",
+      "reliquefier-01": "standby"
+    },
+    "hazop_provider_consequence_chain": true,
+    "facility_campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+    "frequency_inference_performed": false,
+    "facility_qra_promotion": false,
+    "interpretation": "synthetic multi-equipment mode trace; not a replacement for qualified facility evidence"
   }
 }
