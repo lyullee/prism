@@ -4304,11 +4304,12 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261014/ijhe_completion_audit_with_inventory_closure_v7.json",
+    "record": "results/20261109/ijhe_completion_audit_conditional_facility_rebound.json",
     "status": "INCOMPLETE_EVIDENCE",
-    "check_count": 25,
-    "blocking_reason_count": 4,
-    "facility_qra_promotion": false
+    "check_count": 23,
+    "blocking_reason_count": 5,
+    "facility_qra_promotion": false,
+    "interpretation": "conditional facility IR/F-N, chain closure and uncertainty diagnostics pass; strict provider, scope, port and facility-QRA gates remain closed"
   },
   "provider_inventory_closure_extension": {
     "g3": {
@@ -4426,5 +4427,53 @@
     "case_p99_ms": 23980.77391999752,
     "campaign_elapsed_ms": 171188.607899996,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
-  }
+  },
+  "latest_conditional_facility_ir_fn_assessment": {
+    "assessment": "results/20261109/generic_scope_closure_rebound_facility_assessment.json",
+    "conditional_view": "results/20261109/generic_scope_closure_rebound_conditional_risk_view.json",
+    "documentation": "docs/PRISM_conditional_facility_ir_fn_frequency_uncertainty_20261109.md",
+    "status": "PARTIAL_FACILITY_SCOPE",
+    "event_count": 24,
+    "case_count": 24,
+    "risk_atom_count": 96,
+    "conditional_facility_risk_available": true,
+    "strict_facility_total_risk_available": false,
+    "conditional_annual_ir_low_high": {
+      "worker-01": [
+        6.080000000000001e-05,
+        6.080000000000001e-05
+      ]
+    },
+    "conditional_expected_death_fn_low_high": [
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          6.080000000000001e-05
+        ]
+      },
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          6.080000000000001e-05
+        ]
+      }
+    ],
+    "strict_uncomputed_case_count": 20,
+    "operator_limited_case_count": 20,
+    "qualified_provider_packet_case_count": 0,
+    "frequency_scenario_count": 5,
+    "frequency_credible_interval": false,
+    "chain_closure_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+    "facility_aggregate_audit_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+    "component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+    "frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+    "promotion_policy": "diagnostic-only; no frequency inference, no provider promotion, no independent physical validation and no facility QRA promotion",
+    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_rebound.json"
+  },
+  "latest_conditional_facility_ir_fn_status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK; 24 events, 96 risk atoms and 5 no-inference literature scenarios independently audited; strict facility IR/F-N promotion remains withheld for 20 operator-limited cases and zero qualified provider packets",
+  "previous_full_evidence_audit_record": "results/20261108/ijhe_completion_audit_full_evidence_with_structural_worklist_and_requests.json"
 }
