@@ -3349,5 +3349,29 @@
   "hazop_multiequipment_isolation_contract_diagnostic_total_elapsed_ms": 99798.65340000106,
   "hazop_multiequipment_isolation_contract_diagnostic_input_origin": "synthetic/model_prediction; explicit actuator zero-flow diagnostic; no field isolation reliability promotion",
   "ijhe_completion_audit_hazop_multiequipment_isolation_contract_status": "PASS_DIAGNOSTIC_ONLY; 7/7 branches crossed HAZOP/provider/SLABx-LH2/current-weather IR path with explicit valve/pump isolation metadata; facility QRA promotion false",
-  "ijhe_completion_audit_hazop_multiequipment_isolation_contract_promotion": false
+  "ijhe_completion_audit_hazop_multiequipment_isolation_contract_promotion": false,
+  "latest_transfer_line_isolation_extension": {
+    "record": "results/20261014/hazop_isolation_packets",
+    "event_count": 5,
+    "termination_basis": "reviewed_isolation_success",
+    "mass_balance_max_abs_residual_kg": 0.0,
+    "status": "DIAGNOSTIC_ONLY",
+    "frequency_inference": false,
+    "facility_qra_promotion": false
+  },
+  "latest_multiequipment_isolation_diagnostic": {
+    "record": "results/20261014/hazop_multiequipment_provider_isolation_diagnostic_v3.json",
+    "component_count": 7,
+    "accepted_component_count": 7,
+    "withheld_component_count": 0,
+    "facility_qra_promotion": false,
+    "realtime_guarantee": false
+  },
+  "latest_completion_audit": {
+    "record": "results/20261014/ijhe_completion_audit_with_transfer_line_isolation_v3.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "check_count": 25,
+    "blocking_reason_count": 6,
+    "facility_qra_promotion": false
+  }
 }

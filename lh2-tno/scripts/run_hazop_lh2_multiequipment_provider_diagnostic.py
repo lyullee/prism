@@ -10,8 +10,9 @@ synthetic or screening outputs, so a successful branch is not a qualified
 facility-QRA result.  A packet with a synthetic termination horizon is kept as
 an explicit withheld branch instead of being relabelled as isolation closure.
 An optional packet-root override supplies a separate diagnostic run with
-explicit actuator/zero-flow isolation observations for valve and pump branches;
-that run does not promote field isolation reliability.
+explicit actuator/zero-flow isolation observations for valve, pump and the
+selected transfer-line branch; that run does not promote field isolation
+reliability.
 The facility handoff is built only for branches that actually pass the strict
 provider/termination/SLABx-LH2 contracts, and its scope is marked incomplete
 when any configured component is withheld.
@@ -261,7 +262,13 @@ def _request_defaults(
             "time_s": "provider_duration",
             "provenance": "provider emergency-relief packet termination_basis and duration",
         }
-    if spec["equipment_group"] == "liquid_provider_natural_termination":
+    # A reviewed isolation packet has a caller-declared isolation clock.  It
+    # must be handed to the consequence contract as a declared duration even
+    # when the baseline component is normally routed through the
+    # provider-natural pressure-equalization path.
+    if packet.get("termination_basis") == "reviewed_isolation_success":
+        defaults["source_duration_mode"] = "declared"
+    elif spec["equipment_group"] == "liquid_provider_natural_termination":
         defaults["source_duration_mode"] = "model_natural"
     if spec["equipment_group"] in {"liquid_provider", "liquid_provider_natural_termination"}:
         boundary = str(packet.get("boundary_kind", ""))
@@ -347,20 +354,34 @@ def _resolve_packet_paths(packet_root: Path | None) -> tuple[dict[str, Path], di
     }
     if packet_root is None:
         return packet_paths, override
-    for component_id in ("transfer-valve-01", "liquid-transfer-pump-01"):
-        candidate = packet_root / component_id / "resolved_release.json"
+    candidates_by_component = {
+        "liquid-transfer-line-01": (
+            packet_root / "liquid-transfer-line-01" / "resolved_release.json",
+            packet_root / "transfer-line-01-AREA_100pct" / "resolved_release.json",
+        ),
+        "transfer-valve-01": (
+            packet_root / "transfer-valve-01" / "resolved_release.json",
+        ),
+        "liquid-transfer-pump-01": (
+            packet_root / "liquid-transfer-pump-01" / "resolved_release.json",
+        ),
+    }
+    for component_id, candidates in candidates_by_component.items():
+        candidate = next((path for path in candidates if path.exists()), candidates[0])
         if candidate.exists():
             packet_paths[component_id] = candidate
             override["components"][component_id] = {
                 "path": str(candidate),
                 "exists": True,
                 "selection": "explicit_isolation_contract_packet",
+                "candidate_paths": [str(path) for path in candidates],
             }
         else:
             override["components"][component_id] = {
                 "path": str(candidate),
                 "exists": False,
                 "selection": "baseline_packet_retained",
+                "candidate_paths": [str(path) for path in candidates],
             }
     return packet_paths, override
 
