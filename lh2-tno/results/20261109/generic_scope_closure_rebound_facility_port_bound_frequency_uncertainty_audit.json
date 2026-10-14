@@ -1,0 +1,30 @@
+{
+  "schema_version": "prism.facility_frequency_uncertainty_audit.v1",
+  "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "scenario_count": 5,
+  "scenario_ids": [
+    "generic-lh2-published-central",
+    "generic-lh2-literature-low",
+    "generic-lh2-literature-high",
+    "generic-lh2-independent-low",
+    "generic-lh2-independent-high"
+  ],
+  "risk_atom_count": 96,
+  "recomputed_campaign_digest": "32aa14c9034cc990a5a50af474e75a664817b92c72e546afaf327aa3c045a747",
+  "stored_campaign_digest": "32aa14c9034cc990a5a50af474e75a664817b92c72e546afaf327aa3c045a747",
+  "recomputed_physical_risk_atoms_digest": "eed0fee7b9f471ac9899cff1cd9d2dce8a79e617d46f1351f389040ffabfe047",
+  "stored_physical_risk_atoms_digest": "eed0fee7b9f471ac9899cff1cd9d2dce8a79e617d46f1351f389040ffabfe047",
+  "correlation_comparison_present": true,
+  "facility_credible_interval": false,
+  "statistical_confidence_interval": false,
+  "fresh_physics_executed": false,
+  "mismatch_count": 0,
+  "blocking_reasons": [],
+  "frequency_inference_performed": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "interpretation": "Published and fixed literature-frequency scenarios reproduce the saved conditional IR/F-N sensitivity without rerunning physics or inferring missing frequency. Scope, provider, validation and facility-QRA gates remain independent."
+}

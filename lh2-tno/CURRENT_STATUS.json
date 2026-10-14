@@ -4304,12 +4304,12 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop_multiequipment.json",
+    "record": "results/20261109/ijhe_completion_audit_conditional_facility_port_bound_with_hazop_multiequipment.json",
     "status": "INCOMPLETE_EVIDENCE",
-    "check_count": 25,
+    "check_count": 24,
     "blocking_reason_count": 5,
     "facility_qra_promotion": false,
-    "interpretation": "conditional facility IR/F-N, 7-equipment HAZOP mode/scenario trace, chain closure and uncertainty diagnostics are recorded; strict provider, scope, port and facility-QRA gates remain closed"
+    "interpretation": "explicit event-to-accident-port binding is now aligned for 24/24 events; conditional facility IR/F-N and HAZOP diagnostics remain available, while qualified provider, release-boundary, accident-scope, physical-validation and strict facility-QRA gates remain closed"
   },
   "provider_inventory_closure_extension": {
     "g3": {
@@ -4429,13 +4429,15 @@
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "latest_conditional_facility_ir_fn_assessment": {
-    "assessment": "results/20261109/generic_scope_closure_rebound_facility_assessment.json",
-    "conditional_view": "results/20261109/generic_scope_closure_rebound_conditional_risk_view.json",
-    "documentation": "docs/PRISM_conditional_facility_ir_fn_frequency_uncertainty_20261109.md",
+    "assessment": "results/20261109/generic_scope_closure_rebound_facility_port_bound_assessment.json",
+    "conditional_view": "results/20261109/generic_scope_closure_rebound_facility_port_bound_conditional_risk_view.json",
+    "documentation": "docs/PRISM_port_bound_facility_reassessment_20261109.md",
+    "campaign_result": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_result.json",
+    "frequency_port_audit": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_audit.json",
     "status": "PARTIAL_FACILITY_SCOPE",
     "event_count": 24,
     "case_count": 24,
-    "risk_atom_count": 96,
+    "risk_atom_count": null,
     "conditional_facility_risk_available": true,
     "strict_facility_total_risk_available": false,
     "conditional_annual_ir_low_high": {
@@ -4467,12 +4469,29 @@
     "qualified_provider_packet_case_count": 0,
     "frequency_scenario_count": 5,
     "frequency_credible_interval": false,
+    "frequency_port_binding_status": "ALIGNED",
+    "frequency_port_scoped_event_count": 24,
+    "frequency_port_unbound_event_count": 0,
     "chain_closure_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
     "facility_aggregate_audit_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
     "component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
     "frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
-    "promotion_policy": "diagnostic-only; no frequency inference, no provider promotion, no independent physical validation and no facility QRA promotion",
-    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_rebound.json"
+    "promotion_policy": "diagnostic-only; explicit reviewed port crosswalk is aligned, but no frequency inference, no provider promotion, no independent physical validation and no facility QRA promotion",
+    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_port_bound_with_hazop_multiequipment_minimal.json",
+    "completion_audit_status": "INCOMPLETE_EVIDENCE",
+    "completion_audit_check_count": 24,
+    "completion_audit_blocking_reason_count": 5,
+    "facility_qra_promotion": false,
+    "timing": {
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1472.1090000020922,
+      "case_median_ms": 4744.939699998213,
+      "case_max_ms": 22903.581400001713,
+      "case_p95_ms": 18988.046864998247,
+      "case_p99_ms": 22080.22528400077,
+      "campaign_elapsed_ms": 164593.08249999594,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    }
   },
   "latest_conditional_facility_ir_fn_status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK; 24 events, 96 risk atoms and 5 no-inference literature scenarios independently audited; strict facility IR/F-N promotion remains withheld for 20 operator-limited cases and zero qualified provider packets",
   "previous_full_evidence_audit_record": "results/20261108/ijhe_completion_audit_full_evidence_with_structural_worklist_and_requests.json",
@@ -4509,5 +4528,87 @@
     "frequency_inference_performed": false,
     "facility_qra_promotion": false,
     "interpretation": "synthetic multi-equipment mode trace; not a replacement for qualified facility evidence"
-  }
+  },
+  "latest_port_bound_facility_reassessment": {
+    "assessment": "results/20261109/generic_scope_closure_rebound_facility_port_bound_assessment.json",
+    "conditional_view": "results/20261109/generic_scope_closure_rebound_facility_port_bound_conditional_risk_view.json",
+    "documentation": "docs/PRISM_port_bound_facility_reassessment_20261109.md",
+    "campaign_result": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_result.json",
+    "frequency_port_audit": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_audit.json",
+    "status": "PARTIAL_FACILITY_SCOPE",
+    "event_count": 24,
+    "case_count": 24,
+    "risk_atom_count": null,
+    "conditional_facility_risk_available": true,
+    "strict_facility_total_risk_available": false,
+    "conditional_annual_ir_low_high": {
+      "worker-01": [
+        6.080000000000001e-05,
+        6.080000000000001e-05
+      ]
+    },
+    "conditional_expected_death_fn_low_high": [
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          6.080000000000001e-05
+        ]
+      },
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          6.080000000000001e-05
+        ]
+      }
+    ],
+    "strict_uncomputed_case_count": 20,
+    "operator_limited_case_count": 20,
+    "qualified_provider_packet_case_count": 0,
+    "frequency_scenario_count": 5,
+    "frequency_credible_interval": false,
+    "frequency_port_binding_status": "ALIGNED",
+    "frequency_port_scoped_event_count": 24,
+    "frequency_port_unbound_event_count": 0,
+    "chain_closure_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+    "facility_aggregate_audit_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+    "component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+    "frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+    "promotion_policy": "diagnostic-only; explicit reviewed port crosswalk is aligned, but no frequency inference, no provider promotion, no independent physical validation and no facility QRA promotion",
+    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_port_bound_with_hazop_multiequipment.json",
+    "completion_audit_status": "INCOMPLETE_EVIDENCE",
+    "completion_audit_check_count": 24,
+    "completion_audit_blocking_reason_count": 5,
+    "facility_qra_promotion": false,
+    "timing": {
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1472.1090000020922,
+      "case_median_ms": 4744.939699998213,
+      "case_max_ms": 22903.581400001713,
+      "case_p95_ms": 18988.046864998247,
+      "case_p99_ms": 22080.22528400077,
+      "campaign_elapsed_ms": 164593.08249999594,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    }
+  },
+  "frequency_port_binding_latest_rebound_record": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_audit.json",
+  "frequency_port_binding_latest_rebound_status": "ALIGNED; 24/24 events port-scoped, 0 unbound, 0 provider request mismatches; lower port gate allows facility merge but overall facility QRA remains withheld",
+  "frequency_port_binding_latest_rebound_event_count": 24,
+  "frequency_port_binding_latest_rebound_port_scoped_event_count": 24,
+  "frequency_port_binding_latest_rebound_port_unbound_event_count": 0,
+  "frequency_port_binding_latest_rebound_facility_qra_allowed_at_port_gate": true,
+  "ijhe_completion_audit_latest_port_bound_record": "results/20261109/ijhe_completion_audit_conditional_facility_port_bound_with_hazop_multiequipment.json",
+  "ijhe_completion_audit_latest_port_bound_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_latest_port_bound_check_count": 24,
+  "ijhe_completion_audit_latest_port_bound_blocking_reason_count": 5,
+  "ijhe_completion_audit_latest_port_bound_blocking_reasons": [
+    "facility release boundary is not closed across all declared cases",
+    "only synthetic or screening provider releases are available for this campaign",
+    "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ]
 }
