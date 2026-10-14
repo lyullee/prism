@@ -1464,6 +1464,105 @@ def test_completion_audit_records_facility_release_boundary_gate():
     assert "facility release boundary is not closed across all declared cases" in report["blocking_reasons"]
 
 
+def test_completion_audit_records_diagnostic_release_trace_coverage_without_promotion():
+    rows = [
+        {
+            "event_id": "tank/hole",
+            "asset_id": "tank-01",
+            "release_branch_id": "release-01",
+            "annual_condition_id": "weather-1",
+            "status": "EXECUTED_OPERATOR_LIMITED",
+            "termination": {
+                "basis": "synthetic_diagnostic_horizon",
+                "time_s": 2.0,
+                "provenance": "diagnostic provider horizon",
+            },
+            "mass_ledger": {
+                "released_kg": 1.2,
+                "end_to_end_residual_kg": 0.1,
+            },
+        },
+        {
+            "event_id": "tank/inventory",
+            "asset_id": "tank-01",
+            "release_branch_id": "release-02",
+            "annual_condition_id": "weather-1",
+            "status": "EXECUTED",
+            "termination": {
+                "basis": "inventory_depletion",
+                "time_s": 3.0,
+                "provenance": "diagnostic inventory ledger",
+            },
+            "mass_ledger": {
+                "released_kg": 2.0,
+                "end_to_end_residual_kg": 0.0,
+            },
+        },
+    ]
+    assessment = _facility_assessment(
+        release_termination_inventory_ledger={
+            "schema_version": "prism.release_termination_inventory_ledger.v1",
+            "rows": rows,
+            "summary": {"case_count": 2},
+        }
+    )
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        facility_assessment=assessment,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_release_trace_coverage"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["trace_row_count"] == 2
+    assert check["evidence"]["termination_basis_counts"] == {
+        "synthetic_diagnostic_horizon": 1,
+        "inventory_depletion": 1,
+    }
+    assert check["evidence"]["provider_qualification_claim"] is False
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_incomplete_diagnostic_release_trace():
+    assessment = _facility_assessment(
+        release_termination_inventory_ledger={
+            "schema_version": "prism.release_termination_inventory_ledger.v1",
+            "rows": [{
+                "event_id": "tank/hole",
+                "asset_id": "tank-01",
+                "release_branch_id": "release-01",
+                "annual_condition_id": "weather-1",
+                "status": "EXECUTED_OPERATOR_LIMITED",
+                "termination": {
+                    "basis": "synthetic_diagnostic_horizon",
+                    "provenance": "diagnostic provider horizon",
+                },
+                "mass_ledger": {"released_kg": 1.2},
+            }],
+            "summary": {"case_count": 1},
+        }
+    )
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        facility_assessment=assessment,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_release_trace_coverage"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["trace_failure_count"] >= 2
+
+
 def test_completion_audit_accepts_closed_facility_release_boundary_gate():
     assessment = _facility_assessment(
         strict_release_boundary={

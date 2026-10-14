@@ -1390,6 +1390,134 @@ def build_ijhe_completion_audit(
         )
     if facility_assessment is not None:
         assessment = facility_assessment
+        # Keep a separate diagnostic-only trace check for the numerical
+        # release-to-consequence handoff. The strict gate below intentionally
+        # rejects operator-limited/synthetic cases, but that must not hide
+        # whether every declared case carried a release branch, duration,
+        # termination provenance, and mass ledger into the facility assessment.
+        # This check proves structural connection only; it never qualifies a
+        # provider packet or opens facility IR/F-N.
+        raw_release_trace = assessment.get("release_termination_inventory_ledger")
+        trace_rows = (
+            raw_release_trace.get("rows")
+            if isinstance(raw_release_trace, Mapping)
+            else None
+        )
+        trace_rows = (
+            trace_rows
+            if isinstance(trace_rows, Sequence)
+            and not isinstance(trace_rows, (str, bytes))
+            else []
+        )
+        diagnostic_termination_bases = {
+            "reviewed_isolation_success",
+            "inventory_depletion",
+            "inventory_over_600s",
+            "synthetic_diagnostic_horizon",
+            "emergency_relief_discharge",
+            "two_sided_rupture",
+        }
+        trace_failures: list[str] = []
+        trace_status_counts: dict[str, int] = {}
+        trace_basis_counts: dict[str, int] = {}
+        for index, row in enumerate(trace_rows):
+            label = (
+                str(
+                    row.get("event_id")
+                    or row.get("release_branch_id")
+                    or f"row-{index + 1}"
+                )
+                if isinstance(row, Mapping)
+                else f"row-{index + 1}"
+            )
+            if not isinstance(row, Mapping):
+                trace_failures.append(f"{label}: row is not an object")
+                continue
+            status = row.get("status")
+            trace_status_counts[str(status)] = trace_status_counts.get(str(status), 0) + 1
+            termination = row.get("termination")
+            termination = termination if isinstance(termination, Mapping) else {}
+            basis = termination.get("basis")
+            if isinstance(basis, str):
+                trace_basis_counts[basis] = trace_basis_counts.get(basis, 0) + 1
+            required_fields = (
+                ("event_id", row.get("event_id")),
+                ("asset_id", row.get("asset_id")),
+                ("release_branch_id", row.get("release_branch_id")),
+                ("annual_condition_id", row.get("annual_condition_id")),
+                ("termination.basis", basis),
+                ("termination.provenance", termination.get("provenance")),
+            )
+            for field, value in required_fields:
+                if not isinstance(value, str) or not value.strip():
+                    trace_failures.append(f"{label}: missing {field}")
+            if basis not in diagnostic_termination_bases:
+                trace_failures.append(f"{label}: unsupported diagnostic termination basis")
+            duration = termination.get("time_s")
+            if not _finite(duration) or float(duration) < 0.0:
+                trace_failures.append(f"{label}: missing finite nonnegative duration")
+            mass = row.get("mass_ledger")
+            mass = mass if isinstance(mass, Mapping) else {}
+            if not _finite(mass.get("released_kg")) or not _finite(
+                mass.get("end_to_end_residual_kg")
+            ):
+                trace_failures.append(f"{label}: incomplete mass ledger")
+        trace_summary = (
+            raw_release_trace.get("summary")
+            if isinstance(raw_release_trace, Mapping)
+            else {}
+        )
+        trace_summary = trace_summary if isinstance(trace_summary, Mapping) else {}
+        trace_expected_case_count = trace_summary.get("case_count")
+        trace_count_matches = (
+            isinstance(trace_expected_case_count, int)
+            and trace_expected_case_count > 0
+            and len(trace_rows) == trace_expected_case_count
+        )
+        diagnostic_trace_valid = bool(trace_rows) and trace_count_matches and not trace_failures
+        if isinstance(raw_release_trace, Mapping) and "rows" in raw_release_trace:
+            checks.append(
+                {
+                "name": "diagnostic_release_trace_coverage",
+                "status": "PASS" if diagnostic_trace_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if diagnostic_trace_valid
+                    else "one or more declared cases lacks a complete diagnostic release trace"
+                ),
+                "evidence": {
+                    "record": assessment.get("_record_path"),
+                    "release_ledger_schema": (
+                        raw_release_trace.get("schema_version")
+                        if isinstance(raw_release_trace, Mapping)
+                        else None
+                    ),
+                    "trace_row_count": len(trace_rows),
+                    "expected_case_count": trace_expected_case_count,
+                    "trace_count_matches": trace_count_matches,
+                    "status_counts": trace_status_counts,
+                    "termination_basis_counts": trace_basis_counts,
+                    "trace_failure_count": len(trace_failures),
+                    "trace_failures": trace_failures[:20],
+                    "strict_release_boundary_ready": (
+                        assessment.get("strict_release_boundary", {}).get(
+                            "strict_release_boundary_ready"
+                        )
+                        if isinstance(assessment.get("strict_release_boundary"), Mapping)
+                        else None
+                    ),
+                    "provider_qualification_claim": False,
+                    "facility_ir_fn_promotion": False,
+                },
+                "interpretation": (
+                    "Every declared numerical case has an explicit release branch, duration, "
+                    "termination basis/provenance and mass ledger in the diagnostic chain. "
+                    "Synthetic, operator-limited and horizon rows remain non-qualified and "
+                    "do not promote facility IR/F-N."
+                ),
+                }
+            )
         coverage = assessment.get("conditional_diagnostic_facility_coverage")
         conditional_ir = assessment.get("conditional_diagnostic_facility_annual_ir_low_high")
         conditional_fn = assessment.get(

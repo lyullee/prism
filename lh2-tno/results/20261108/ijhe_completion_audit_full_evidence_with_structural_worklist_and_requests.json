@@ -36,15 +36,15 @@
           "diagnostic_only": true
         },
         "model_binding": {
-          "record": "results\\20261026\\native_full_scope_union_assessment\\observed_state_model_binding_audit.json",
-          "schema": "prism.observed_state_model_binding_audit.v1",
-          "status": "STATE_MODEL_BINDINGS_DIAGNOSTIC_ONLY",
-          "observed_component_count": 3,
-          "state_model_bound_component_count": 3,
-          "diagnostic_release_adapter_component_count": 3,
-          "facility_component_identity_resolved_count": 0,
-          "facility_component_identity_unresolved_count": 3,
-          "qualified_provider_packet_count": 0,
+          "record": null,
+          "schema": null,
+          "status": null,
+          "observed_component_count": null,
+          "state_model_bound_component_count": null,
+          "diagnostic_release_adapter_component_count": null,
+          "facility_component_identity_resolved_count": null,
+          "facility_component_identity_unresolved_count": null,
+          "qualified_provider_packet_count": null,
           "valid": true
         }
       },
@@ -181,6 +181,36 @@
         "qualification_readiness": null
       },
       "interpretation": "Saved external-model packets cover only the exact-matched worklist subset; this diagnostic evidence does not close the missing events or qualify the provider packets. Qualification-readiness blockers are copied separately so exact packet identity is not mistaken for actual facility evidence."
+    },
+    {
+      "name": "diagnostic_release_trace_coverage",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261031\\native_full_scope_union_pipefix_state_bound\\facility_assessment.json",
+        "release_ledger_schema": "prism.release_termination_inventory_ledger.v1",
+        "trace_row_count": 44,
+        "expected_case_count": 44,
+        "trace_count_matches": true,
+        "status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 29,
+          "EXECUTED": 15
+        },
+        "termination_basis_counts": {
+          "inventory_depletion": 16,
+          "synthetic_diagnostic_horizon": 24,
+          "emergency_relief_discharge": 1,
+          "inventory_over_600s": 1,
+          "two_sided_rupture": 2
+        },
+        "trace_failure_count": 0,
+        "trace_failures": [],
+        "strict_release_boundary_ready": false,
+        "provider_qualification_claim": false,
+        "facility_ir_fn_promotion": false
+      },
+      "interpretation": "Every declared numerical case has an explicit release branch, duration, termination basis/provenance and mass ledger in the diagnostic chain. Synthetic, operator-limited and horizon rows remain non-qualified and do not promote facility IR/F-N."
     },
     {
       "name": "diagnostic_conditional_facility_risk_evidence",
@@ -4014,7 +4044,9 @@
       "evidence": {
         "actual_facility_packet_available": false,
         "release_inventory_status": "NO_ACCIDENT_RELEASE_EXPORT",
-        "qualified_packet_count": 0
+        "qualified_packet_count": 0,
+        "qualification_coverage_status": null,
+        "qualification_coverage_qualified_packet_count": null
       },
       "blocking_reason": "only synthetic or screening provider releases are available for this campaign"
     },
@@ -4023,16 +4055,19 @@
       "status": "PASS",
       "evidence": {
         "source": "provider_worklist",
-        "status": "READY_FOR_PROVIDER_PACKETS",
-        "frequency_event_count": 24,
-        "provider_packet_count": 0,
-        "uncomputed_provider_packet_count": 24,
-        "diagnostic_release_adapter_component_count": 7,
+        "status": "PARTIAL_DIAGNOSTIC_EVIDENCE",
+        "frequency_event_count": null,
+        "provider_packet_count": null,
+        "uncomputed_provider_packet_count": 0,
+        "diagnostic_release_adapter_component_count": null,
         "structural_diagnostic_coverage": true,
         "native_scope_catalog_structural_coverage": false,
         "native_scope_catalog_evidence": {},
         "qualified_provider_packet_count": 0,
-        "qualification_readiness": null
+        "qualification_readiness": null,
+        "qualification_coverage_status": null,
+        "qualification_coverage_qualified_packet_count": null,
+        "qualification_coverage_complete": false
       },
       "blocking_reason": null
     },
