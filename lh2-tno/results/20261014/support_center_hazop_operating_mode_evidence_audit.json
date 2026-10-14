@@ -1,0 +1,2294 @@
+{
+  "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",
+  "status": "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+  "sequence_source_count": 3,
+  "sequence_row_count": 52,
+  "scenario_counts": {
+    "수소 공급": 30,
+    "액화수소 인수": 19,
+    "액화수소 저장(벤트)": 3
+  },
+  "operating_mode_counts": {
+    "receiving": 19,
+    "storage_vent": 3,
+    "supply_gas": 18,
+    "supply_liquid": 12
+  },
+  "hazard_class_counts": {
+    "filling_monitor": 2,
+    "flange_connect": 1,
+    "gas_phase_fill": 2,
+    "liquid_phase_fill": 2,
+    "main_line_open": 6,
+    "pressure_rise_monitor": 1,
+    "purge_vent": 2,
+    "relief_vent": 1,
+    "supply_start": 4,
+    "test_building_supply_gas": 4,
+    "test_building_supply_liquid": 4,
+    "valve_close": 19,
+    "vaporizer_pass": 4
+  },
+  "sequence_sources": [
+    {
+      "relative_path": "1. 액화수소 인수 시나리오 데이터/액화수소인수_운전시퀀스.csv",
+      "expected_group": "receiving",
+      "encoding": "utf-8-sig",
+      "field_names": [
+        "시나리오",
+        "탱크",
+        "절차번호",
+        "동작내용",
+        "비고",
+        "위험성분류",
+        "누출_예상고장",
+        "누출_위험",
+        "누출_조치방법",
+        "누출_근거기준",
+        "화재_예상고장",
+        "화재_위험",
+        "화재_조치방법",
+        "화재_근거기준",
+        "폭발_예상고장",
+        "폭발_위험",
+        "폭발_조치방법",
+        "폭발_근거기준"
+      ],
+      "missing_required_fields": [],
+      "row_count": 19,
+      "scenario_counts": {
+        "액화수소 인수": 19
+      },
+      "operating_mode_counts": {
+        "receiving": 19
+      },
+      "tank_counts": {
+        "TANK1": 10,
+        "TANK2": 9
+      },
+      "hazard_class_counts": {
+        "filling_monitor": 2,
+        "flange_connect": 1,
+        "gas_phase_fill": 2,
+        "liquid_phase_fill": 2,
+        "main_line_open": 2,
+        "purge_vent": 2,
+        "valve_close": 8
+      },
+      "hazard_category_presence_counts": {
+        "explosion": 19,
+        "fire": 19,
+        "leak": 19
+      },
+      "rows": [
+        {
+          "source_row": 2,
+          "source_row_id": "support-center:602a442b95f166ff",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "1",
+          "action": "액화수소 탱크로리 및 인입배관 플랜지 결합",
+          "hazard_class": "flange_connect",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "플랜지 개스킷 손상·이물 개재; 볼트 불균등 체결에 의한 편심 하중; 배관 정렬 불량(미스얼라인먼트)",
+              "risk": "극저온 액체 미세누출 → 동상; 누출부 공기 중 수분 결빙에 의한 2차 누출 확대",
+              "safeguard_or_action": "체결 전 개스킷·플랜지면 육안점검 및 이물 제거; 대각선 순서로 규정 토크 균등 체결(토크렌치 사용); 체결 후 질소 퍼지 및 기밀(누설)시험 실시",
+              "reference": "KGS FP216(수소 특정설비 제조·충전기준) 배관 접속부 기밀시험; KOSHA GUIDE D-33(수소취급시설 안전기술지침); ASME B31.3 압력배관 압력시험 규정"
+            },
+            "fire": {
+              "failure": "누출가스가 정전기·고온표면 등 착화원과 접촉",
+              "risk": "누출부 제트화재(jet fire); 화염이 인접 배관·구조물로 전파",
+              "safeguard_or_action": "플랜지 인근 방폭구역 설정 및 착화원 통제; 가스검지기 연동 자동차단(ESD) 구성; 접지·본딩으로 정전기 축적 방지",
+              "reference": "KGS FP216; NFPA 2(Hydrogen Technologies Code) Ch.7; KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "밀폐·반밀폐 공간 내 누출가스 체류·축적",
+              "risk": "증기운폭발(VCE); 지연착화에 의한 폭발",
+              "safeguard_or_action": "환기설비 상시 가동 및 가스검지 연동; 폭발위험장소 구분에 따른 방폭 전기설비 적용; 정기 기밀시험으로 누출 자체를 예방",
+              "reference": "IEC 60079(폭발위험장소); KOSHA GUIDE D-33; NFPA 2 Ch.7"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 3,
+          "source_row_id": "support-center:f1cd231bf8c85e88",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "2",
+          "action": "XV10 밸브 Open",
+          "hazard_class": "purge_vent",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "벤트밸브 미개방·부분개방; 벤트스택 결빙에 의한 폐색",
+              "risk": "라인 내 잔류 공기·수분이 빠지지 않아 후속 공정에 잔류; 결빙 폐색부 국부 누출",
+              "safeguard_or_action": "퍼지 전 불활성가스(질소)로 라인 치환 후 산소농도 확인; 벤트스택 결빙 방지 가열추적(heat tracing)",
+              "reference": "KGS FP216 퍼지·치환 기준; NFPA 2 Ch.7 Venting"
+            },
+            "fire": {
+              "failure": "퍼지가스 중 잔류 가연성분과 착화원의 접촉",
+              "risk": "벤트구 주변 화재",
+              "safeguard_or_action": "벤트스택 방폭구역 설정 및 반경 내 착화원 통제; 벤트 중 가스검지기 상시 감시",
+              "reference": "NFPA 2 Ch.7; CGA G-5.5(Hydrogen Vent Systems)"
+            },
+            "explosion": {
+              "failure": "결빙 폐색으로 인한 후속 냉각공정 중 내압 상승",
+              "risk": "국부 압력집중에 의한 배관·밸브 파손; 폐색 해소 시 폭발성 혼합기 급격 방출",
+              "safeguard_or_action": "방출관 배압 설계 확인 및 PSV 이중화; 벤트라인 정기 결빙점검",
+              "reference": "KGS AC111(초저온저장탱크 제조기준); API RP 521(압력방출시스템)"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 4,
+          "source_row_id": "support-center:7a6385c9962018e3",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "3",
+          "action": "XV10 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 5,
+          "source_row_id": "support-center:a5fb9b9fff850275",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "4",
+          "action": "XV1 밸브 Open",
+          "hazard_class": "main_line_open",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 스템 패킹 노후에 의한 외부 누설; 액추에이터(공압/전동) 구동 실패; 개도 지시계와 실제 개도 불일치",
+              "risk": "스템부 누출에 의한 저온 화상; 오조작으로 인한 역류·과압 누출",
+              "safeguard_or_action": "개방 전후 개도지시·유량계 이중 확인; 밸브 정기 예방정비(PM) 및 패킹 교체 이력 관리",
+              "reference": "KGS FP216 밸브·배관 유지관리 기준; ASME B31.3; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "스템부 누출가스와 정전기·고온표면 등 착화원의 접촉",
+              "risk": "국소 제트화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 누출부 가스검지-ESD 신속 차단 연동",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "오조작에 의한 라인 과압; 밸브 완전개방 실패로 인한 압력 집중",
+              "risk": "배관 파열; 누출가스 확산에 의한 증기운폭발",
+              "safeguard_or_action": "과압방지 인터록 및 PSV 설치; 압력 이상 시 자동차단(ESD) 연동",
+              "reference": "ASME B31.3; API RP 521; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 6,
+          "source_row_id": "support-center:dd217e3ce3dd2a08",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "5",
+          "action": "XV2 밸브 Open",
+          "hazard_class": "gas_phase_fill",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "극저온 취성파괴에 의한 밸브체·배관 크랙; 급속 냉각(cold shock)에 의한 열응력 균열",
+              "risk": "저온취성 균열부 누출; 저온 접촉에 의한 동상",
+              "safeguard_or_action": "극저온 정격(−253℃급) 인증 밸브·배관재 사용 및 저온충격시험 이력관리; 서냉(slow cooldown) 절차 준수, 냉각률 상한 설정",
+              "reference": "KGS FP216; ISO 21010(극저온용기 재료 적합성); NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "취성파괴 누출부와 착화원의 접촉; 냉각 중 정전기 발생",
+              "risk": "제트화재; 저온화상을 동반한 화재",
+              "safeguard_or_action": "가스검지기-ESD(비상차단) 연동; 접지·본딩으로 정전기 축적 방지",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "급속냉각에 의한 배관 진동·피로 누적",
+              "risk": "배관 피로파손에 따른 대량누출 후 폭발; 압력 급강하에 따른 배관 손상 연쇄",
+              "safeguard_or_action": "냉각률 상시 모니터링; 배관 지지·제진 설계 적용 및 정기 비파괴검사",
+              "reference": "ASME B31.3; ISO 21010"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 7,
+          "source_row_id": "support-center:877579597b169266",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "6",
+          "action": "XV2 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 8,
+          "source_row_id": "support-center:f574801c11047f8d",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "7",
+          "action": "XV3 밸브 Open",
+          "hazard_class": "liquid_phase_fill",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "액체 유입 열충격(thermal shock)에 의한 배관 크랙; 씰(seal) 재질 저온경화 균열; 액체 슬러그 유동에 의한 배관 진동",
+              "risk": "액체수소 누출 시 기화팽창(약 1:848)으로 급격한 압력상승; 저온 접촉 화상·동상",
+              "safeguard_or_action": "배관 예냉(precooling) 절차 준수 후 본격 송액; 저온용 벨로우즈·신축이음 적용, 진공재킷부 정기 진공도 점검",
+              "reference": "KGS FP216; CGA H-3(Standard for Cryogenic Hydrogen Storage); NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "누출 액체의 순간기화 가스와 착화원의 접촉",
+              "risk": "풀파이어(pool fire)·제트화재; 화염 급속 전파",
+              "safeguard_or_action": "방류둑·집액설비 설치; 가스검지기 연동 자동차단 및 소화설비 배치",
+              "reference": "NFPA 2 Ch.8; 고압가스 안전관리법 시행규칙"
+            },
+            "explosion": {
+              "failure": "누출가스의 확산·체류 후 지연착화",
+              "risk": "증기운폭발(VCE); 저온액체 급속기화에 의한 압력파",
+              "safeguard_or_action": "방호시설 이격거리 확보; 폭발위험장소 구분에 따른 방폭설비 적용, 환기 강화",
+              "reference": "고압가스 안전관리법 시행규칙 이격거리 기준; IEC 60079; NFPA 2 Ch.8"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 9,
+          "source_row_id": "support-center:32995d32e906201e",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "8",
+          "action": "액화수소 인입",
+          "hazard_class": "filling_monitor",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "액위계(DPT) 드리프트·고장; 이중 계측 간 불일치 미인지",
+              "risk": "과충전에 의한 오버플로우 누출",
+              "safeguard_or_action": "충전율 상한(최대충전량 90% 이하) 준수 및 독립 이중 계측 상호비교; 고레벨 트립 별도 회로 구성",
+              "reference": "KGS AC111 충전율 규정; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "오버플로우 누출가스와 착화원의 접촉",
+              "risk": "충전구역 화재 확산",
+              "safeguard_or_action": "충전 중 상시 감시자 배치; 가스검지 연동 경보 및 착화원 통제",
+              "reference": "KGS AC111; KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "고레벨 자동차단(트립) 실패",
+              "risk": "탱크 초과압력에 의한 파열; 인근 폭발",
+              "safeguard_or_action": "독립 이중 고레벨 트립 구성, PSV 별도 보호; 계측기 정기 검교정",
+              "reference": "KGS AC111; ASME BPVC Section VIII"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 10,
+          "source_row_id": "support-center:32c12d986405cc7b",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "9",
+          "action": "XV3 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 11,
+          "source_row_id": "support-center:f18b70c349d1d354",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK1",
+          "procedure_number": "10",
+          "action": "XV1 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 12,
+          "source_row_id": "support-center:da2a420d8a001139",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "11",
+          "action": "XV11 밸브 Open",
+          "hazard_class": "purge_vent",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "벤트밸브 미개방·부분개방; 벤트스택 결빙에 의한 폐색",
+              "risk": "라인 내 잔류 공기·수분이 빠지지 않아 후속 공정에 잔류; 결빙 폐색부 국부 누출",
+              "safeguard_or_action": "퍼지 전 불활성가스(질소)로 라인 치환 후 산소농도 확인; 벤트스택 결빙 방지 가열추적(heat tracing)",
+              "reference": "KGS FP216 퍼지·치환 기준; NFPA 2 Ch.7 Venting"
+            },
+            "fire": {
+              "failure": "퍼지가스 중 잔류 가연성분과 착화원의 접촉",
+              "risk": "벤트구 주변 화재",
+              "safeguard_or_action": "벤트스택 방폭구역 설정 및 반경 내 착화원 통제; 벤트 중 가스검지기 상시 감시",
+              "reference": "NFPA 2 Ch.7; CGA G-5.5(Hydrogen Vent Systems)"
+            },
+            "explosion": {
+              "failure": "결빙 폐색으로 인한 후속 냉각공정 중 내압 상승",
+              "risk": "국부 압력집중에 의한 배관·밸브 파손; 폐색 해소 시 폭발성 혼합기 급격 방출",
+              "safeguard_or_action": "방출관 배압 설계 확인 및 PSV 이중화; 벤트라인 정기 결빙점검",
+              "reference": "KGS AC111(초저온저장탱크 제조기준); API RP 521(압력방출시스템)"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 13,
+          "source_row_id": "support-center:77c97322f019b979",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "12",
+          "action": "XV11 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 14,
+          "source_row_id": "support-center:fa4c42c159e5f6ca",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "13",
+          "action": "XV1 밸브 Open",
+          "hazard_class": "main_line_open",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 스템 패킹 노후에 의한 외부 누설; 액추에이터(공압/전동) 구동 실패; 개도 지시계와 실제 개도 불일치",
+              "risk": "스템부 누출에 의한 저온 화상; 오조작으로 인한 역류·과압 누출",
+              "safeguard_or_action": "개방 전후 개도지시·유량계 이중 확인; 밸브 정기 예방정비(PM) 및 패킹 교체 이력 관리",
+              "reference": "KGS FP216 밸브·배관 유지관리 기준; ASME B31.3; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "스템부 누출가스와 정전기·고온표면 등 착화원의 접촉",
+              "risk": "국소 제트화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 누출부 가스검지-ESD 신속 차단 연동",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "오조작에 의한 라인 과압; 밸브 완전개방 실패로 인한 압력 집중",
+              "risk": "배관 파열; 누출가스 확산에 의한 증기운폭발",
+              "safeguard_or_action": "과압방지 인터록 및 PSV 설치; 압력 이상 시 자동차단(ESD) 연동",
+              "reference": "ASME B31.3; API RP 521; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 15,
+          "source_row_id": "support-center:ae274902bf50ad7f",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "14",
+          "action": "XV4 밸브 Open",
+          "hazard_class": "gas_phase_fill",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "극저온 취성파괴에 의한 밸브체·배관 크랙; 급속 냉각(cold shock)에 의한 열응력 균열",
+              "risk": "저온취성 균열부 누출; 저온 접촉에 의한 동상",
+              "safeguard_or_action": "극저온 정격(−253℃급) 인증 밸브·배관재 사용 및 저온충격시험 이력관리; 서냉(slow cooldown) 절차 준수, 냉각률 상한 설정",
+              "reference": "KGS FP216; ISO 21010(극저온용기 재료 적합성); NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "취성파괴 누출부와 착화원의 접촉; 냉각 중 정전기 발생",
+              "risk": "제트화재; 저온화상을 동반한 화재",
+              "safeguard_or_action": "가스검지기-ESD(비상차단) 연동; 접지·본딩으로 정전기 축적 방지",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "급속냉각에 의한 배관 진동·피로 누적",
+              "risk": "배관 피로파손에 따른 대량누출 후 폭발; 압력 급강하에 따른 배관 손상 연쇄",
+              "safeguard_or_action": "냉각률 상시 모니터링; 배관 지지·제진 설계 적용 및 정기 비파괴검사",
+              "reference": "ASME B31.3; ISO 21010"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 16,
+          "source_row_id": "support-center:49fa10ffde3fee8a",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "15",
+          "action": "XV4 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 17,
+          "source_row_id": "support-center:ce6dd973aee25f82",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "16",
+          "action": "XV5 밸브 Open",
+          "hazard_class": "liquid_phase_fill",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "액체 유입 열충격(thermal shock)에 의한 배관 크랙; 씰(seal) 재질 저온경화 균열; 액체 슬러그 유동에 의한 배관 진동",
+              "risk": "액체수소 누출 시 기화팽창(약 1:848)으로 급격한 압력상승; 저온 접촉 화상·동상",
+              "safeguard_or_action": "배관 예냉(precooling) 절차 준수 후 본격 송액; 저온용 벨로우즈·신축이음 적용, 진공재킷부 정기 진공도 점검",
+              "reference": "KGS FP216; CGA H-3(Standard for Cryogenic Hydrogen Storage); NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "누출 액체의 순간기화 가스와 착화원의 접촉",
+              "risk": "풀파이어(pool fire)·제트화재; 화염 급속 전파",
+              "safeguard_or_action": "방류둑·집액설비 설치; 가스검지기 연동 자동차단 및 소화설비 배치",
+              "reference": "NFPA 2 Ch.8; 고압가스 안전관리법 시행규칙"
+            },
+            "explosion": {
+              "failure": "누출가스의 확산·체류 후 지연착화",
+              "risk": "증기운폭발(VCE); 저온액체 급속기화에 의한 압력파",
+              "safeguard_or_action": "방호시설 이격거리 확보; 폭발위험장소 구분에 따른 방폭설비 적용, 환기 강화",
+              "reference": "고압가스 안전관리법 시행규칙 이격거리 기준; IEC 60079; NFPA 2 Ch.8"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 18,
+          "source_row_id": "support-center:4e89da8d0a587fce",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "17",
+          "action": "액화수소 인입",
+          "hazard_class": "filling_monitor",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "액위계(DPT) 드리프트·고장; 이중 계측 간 불일치 미인지",
+              "risk": "과충전에 의한 오버플로우 누출",
+              "safeguard_or_action": "충전율 상한(최대충전량 90% 이하) 준수 및 독립 이중 계측 상호비교; 고레벨 트립 별도 회로 구성",
+              "reference": "KGS AC111 충전율 규정; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "오버플로우 누출가스와 착화원의 접촉",
+              "risk": "충전구역 화재 확산",
+              "safeguard_or_action": "충전 중 상시 감시자 배치; 가스검지 연동 경보 및 착화원 통제",
+              "reference": "KGS AC111; KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "고레벨 자동차단(트립) 실패",
+              "risk": "탱크 초과압력에 의한 파열; 인근 폭발",
+              "safeguard_or_action": "독립 이중 고레벨 트립 구성, PSV 별도 보호; 계측기 정기 검교정",
+              "reference": "KGS AC111; ASME BPVC Section VIII"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 19,
+          "source_row_id": "support-center:e56e7012b83d5ef0",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "18",
+          "action": "XV5 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 20,
+          "source_row_id": "support-center:43249297d4b8ecca",
+          "scenario_label": "액화수소 인수",
+          "supply_mode_label": null,
+          "operating_mode_key": "receiving",
+          "operating_mode_basis": "explicit scenario label: 액화수소 인수",
+          "tank_label": "TANK2",
+          "procedure_number": "19",
+          "action": "XV1 밸브 Close",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        }
+      ],
+      "errors": [],
+      "sha256": "24d0c165dbb3b5c1af1b2645b3e25b6ab2f8e5e337d0d7e8ded3ae901a465232",
+      "size_bytes": 18283
+    },
+    {
+      "relative_path": "2. 액화수소 저장(벤트) 시나리오 데이터/액화수소저장벤트_운전시퀀스.csv",
+      "expected_group": "storage_vent",
+      "encoding": "utf-8-sig",
+      "field_names": [
+        "시나리오",
+        "탱크",
+        "절차번호",
+        "동작내용",
+        "비고",
+        "위험성분류",
+        "누출_예상고장",
+        "누출_위험",
+        "누출_조치방법",
+        "누출_근거기준",
+        "화재_예상고장",
+        "화재_위험",
+        "화재_조치방법",
+        "화재_근거기준",
+        "폭발_예상고장",
+        "폭발_위험",
+        "폭발_조치방법",
+        "폭발_근거기준"
+      ],
+      "missing_required_fields": [],
+      "row_count": 3,
+      "scenario_counts": {
+        "액화수소 저장(벤트)": 3
+      },
+      "operating_mode_counts": {
+        "storage_vent": 3
+      },
+      "tank_counts": {
+        "TANK1·TANK2 공통": 3
+      },
+      "hazard_class_counts": {
+        "pressure_rise_monitor": 1,
+        "relief_vent": 1,
+        "valve_close": 1
+      },
+      "hazard_category_presence_counts": {
+        "explosion": 3,
+        "fire": 3,
+        "leak": 3
+      },
+      "rows": [
+        {
+          "source_row": 2,
+          "source_row_id": "support-center:6b4b5212368a516c",
+          "scenario_label": "액화수소 저장(벤트)",
+          "supply_mode_label": null,
+          "operating_mode_key": "storage_vent",
+          "operating_mode_basis": "explicit scenario label: 액화수소 저장(벤트)",
+          "tank_label": "TANK1·TANK2 공통",
+          "procedure_number": "1",
+          "action": "LH2 TANK 저장 중 급격한 압력상승에 의한 압력증가",
+          "hazard_class": "pressure_rise_monitor",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "압력계(PT) 드리프트·고장; 진공단열 파괴에 의한 열유입 급증",
+              "risk": "압력 오지시로 관리가 지연되는 사이 이음부 누출 진행",
+              "safeguard_or_action": "압력계 이중화 및 정기 검교정; 진공단열층 진공도 정기 점검",
+              "reference": "KGS AC111; ASME BPVC Section VIII"
+            },
+            "fire": {
+              "failure": "압력상승 방치 상태에서 안전밸브 작동 시 벤트가스 착화",
+              "risk": "벤트구 화재",
+              "safeguard_or_action": "벤트스택 착화원 통제; PSV 정기 작동시험",
+              "reference": "KGS AC111; CGA G-5.5"
+            },
+            "explosion": {
+              "failure": "안전밸브(PSV) 작동압 이탈·고착; BOG 발생량 급증(단열 성능 저하)",
+              "risk": "PSV 미작동 시 탱크 파열(BLEVE 가능성); 진공단열 파괴 시 열유입 급증에 의한 연쇄 압력상승",
+              "safeguard_or_action": "PSV 정기 작동시험 및 예비 PSV 확보; 초과압력 경보 이중화",
+              "reference": "API RP 521; ASME BPVC Section VIII; KGS AC111"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 3,
+          "source_row_id": "support-center:da939c7350918cad",
+          "scenario_label": "액화수소 저장(벤트)",
+          "supply_mode_label": null,
+          "operating_mode_key": "storage_vent",
+          "operating_mode_basis": "explicit scenario label: 액화수소 저장(벤트)",
+          "tank_label": "TANK1·TANK2 공통",
+          "procedure_number": "2",
+          "action": "XV10(TANK1) / XV11(TANK2) OPEN — 벤트",
+          "hazard_class": "relief_vent",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "벤트밸브 개방 지연·고착; 벤트 후 폐밸브 불완전 폐쇄",
+              "risk": "벤트 종료 후에도 지속되는 잔류 누출",
+              "safeguard_or_action": "벤트밸브 이중화 및 결빙 방지(가열추적) 조치; 벤트 종료 후 압력 안정화 확인 및 기밀 재점검",
+              "reference": "KGS AC111 방출관 기준; CGA G-5.5"
+            },
+            "fire": {
+              "failure": "벤트가스가 미확산 상태로 체류하다 착화",
+              "risk": "벤트스택 화재; 화염역화(flashback) 가능성",
+              "safeguard_or_action": "벤트스택 고지대 방출 및 방폭구역 설정; 반경 내 착화원 통제",
+              "reference": "NFPA 2 Ch.7; CGA G-5.5"
+            },
+            "explosion": {
+              "failure": "벤트 지연에 의한 설계압 초과",
+              "risk": "PSV 작동 지연 시 탱크 손상; 벤트가스 지연착화에 의한 폭발",
+              "safeguard_or_action": "벤트밸브 응답시간 관리 및 정기 작동시험; 방폭구역 반경 주기적 재검토",
+              "reference": "KGS AC111; NFPA 2 Ch.7"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 4,
+          "source_row_id": "support-center:3cdf1fa383cc0b4f",
+          "scenario_label": "액화수소 저장(벤트)",
+          "supply_mode_label": null,
+          "operating_mode_key": "storage_vent",
+          "operating_mode_basis": "explicit scenario label: 액화수소 저장(벤트)",
+          "tank_label": "TANK1·TANK2 공통",
+          "procedure_number": "3",
+          "action": "XV10(TANK1) / XV11(TANK2) CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        }
+      ],
+      "errors": [],
+      "sha256": "58bd97776b98dd8c2c29222452eb8661b4a6ce6dccc1f6dc1f73c0409b7981b4",
+      "size_bytes": 3249
+    },
+    {
+      "relative_path": "3. 액화수소 공급 시나리오 데이터/수소공급_운전시퀀스.csv",
+      "expected_group": "supply",
+      "encoding": "utf-8-sig",
+      "field_names": [
+        "시나리오",
+        "공급모드",
+        "탱크",
+        "절차번호",
+        "동작내용",
+        "위험성분류",
+        "누출_예상고장",
+        "누출_위험",
+        "누출_조치방법",
+        "누출_근거기준",
+        "화재_예상고장",
+        "화재_위험",
+        "화재_조치방법",
+        "화재_근거기준",
+        "폭발_예상고장",
+        "폭발_위험",
+        "폭발_조치방법",
+        "폭발_근거기준"
+      ],
+      "missing_required_fields": [],
+      "row_count": 30,
+      "scenario_counts": {
+        "수소 공급": 30
+      },
+      "operating_mode_counts": {
+        "supply_gas": 18,
+        "supply_liquid": 12
+      },
+      "tank_counts": {
+        "TANK1": 15,
+        "TANK2": 15
+      },
+      "hazard_class_counts": {
+        "main_line_open": 4,
+        "supply_start": 4,
+        "test_building_supply_gas": 4,
+        "test_building_supply_liquid": 4,
+        "valve_close": 10,
+        "vaporizer_pass": 4
+      },
+      "hazard_category_presence_counts": {
+        "explosion": 30,
+        "fire": 30,
+        "leak": 30
+      },
+      "rows": [
+        {
+          "source_row": 2,
+          "source_row_id": "support-center:2ade8f4174c13cbf",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "1",
+          "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+          "hazard_class": "supply_start",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "공급 개시 시 압력서지(surge); 수전측 밸브 상태 미확인 상태에서 개시",
+              "risk": "서지에 의한 이음부 손상 누출",
+              "safeguard_or_action": "서서히 개방하여 서지 억제(스로틀 개방); 공급 개시 전 수전측 준비상태(밸브 위치, 압력) 상호 확인",
+              "reference": "KGS FU551(수소 사용시설 기준); KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "서지로 손상된 부위의 누출가스와 착화원의 접촉",
+              "risk": "공급라인 화재",
+              "safeguard_or_action": "초기 유량·압력 안정화 확인 후 정상운전 전환; 가스검지기 상시 감시",
+              "reference": "KGS FU551"
+            },
+            "explosion": {
+              "failure": "유량계 초기 오지시에 의한 과공급",
+              "risk": "수전측 과압 전달에 의한 폭발위험",
+              "safeguard_or_action": "과공급 방지 유량제한밸브 적용; 수전측 압력 실시간 모니터링",
+              "reference": "KGS FU551; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 3,
+          "source_row_id": "support-center:7dafb4a03b986543",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "2",
+          "action": "XV13, 14 OPEN",
+          "hazard_class": "main_line_open",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 스템 패킹 노후에 의한 외부 누설; 액추에이터(공압/전동) 구동 실패; 개도 지시계와 실제 개도 불일치",
+              "risk": "스템부 누출에 의한 저온 화상; 오조작으로 인한 역류·과압 누출",
+              "safeguard_or_action": "개방 전후 개도지시·유량계 이중 확인; 밸브 정기 예방정비(PM) 및 패킹 교체 이력 관리",
+              "reference": "KGS FP216 밸브·배관 유지관리 기준; ASME B31.3; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "스템부 누출가스와 정전기·고온표면 등 착화원의 접촉",
+              "risk": "국소 제트화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 누출부 가스검지-ESD 신속 차단 연동",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "오조작에 의한 라인 과압; 밸브 완전개방 실패로 인한 압력 집중",
+              "risk": "배관 파열; 누출가스 확산에 의한 증기운폭발",
+              "safeguard_or_action": "과압방지 인터록 및 PSV 설치; 압력 이상 시 자동차단(ESD) 연동",
+              "reference": "ASME B31.3; API RP 521; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 4,
+          "source_row_id": "support-center:a2691a7f43a73f88",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "3",
+          "action": "XV17 OPEN",
+          "hazard_class": "vaporizer_pass",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "열매체(대기식/온수식) 공급 중단·부족; 기화기 튜브 결빙·부식",
+              "risk": "국부 동결에 의한 배관 폐색·파손 누출; 미기화 액체가 하류 배관 유입 시 취성파괴",
+              "safeguard_or_action": "출구온도 저온트립 연동 자동차단; 하류 배관 저온보호(극저온 대응 강재) 적용",
+              "reference": "KGS FP216; NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "기화기 주변 누출가스와 가열원(스팀/전열)의 접촉",
+              "risk": "기화기 화재",
+              "safeguard_or_action": "이중 기화기(예비계열) 구성으로 단일고장 대비; 가스검지-ESD 연동",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "출구 미기화(액체 캐리오버)에 의한 하류 배관 취성파괴",
+              "risk": "하류배관 파열에 의한 폭발",
+              "safeguard_or_action": "출구온도 상시감시 및 캐리오버 감지 센서 설치; 하류 배관 저온보호재 적용",
+              "reference": "KGS FP216; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 5,
+          "source_row_id": "support-center:e914c907e09e6245",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "4",
+          "action": "Vaporizer(기화기) 통과",
+          "hazard_class": "vaporizer_pass",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "열매체(대기식/온수식) 공급 중단·부족; 기화기 튜브 결빙·부식",
+              "risk": "국부 동결에 의한 배관 폐색·파손 누출; 미기화 액체가 하류 배관 유입 시 취성파괴",
+              "safeguard_or_action": "출구온도 저온트립 연동 자동차단; 하류 배관 저온보호(극저온 대응 강재) 적용",
+              "reference": "KGS FP216; NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "기화기 주변 누출가스와 가열원(스팀/전열)의 접촉",
+              "risk": "기화기 화재",
+              "safeguard_or_action": "이중 기화기(예비계열) 구성으로 단일고장 대비; 가스검지-ESD 연동",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "출구 미기화(액체 캐리오버)에 의한 하류 배관 취성파괴",
+              "risk": "하류배관 파열에 의한 폭발",
+              "safeguard_or_action": "출구온도 상시감시 및 캐리오버 감지 센서 설치; 하류 배관 저온보호재 적용",
+              "reference": "KGS FP216; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 6,
+          "source_row_id": "support-center:f3c331c03322c9b4",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "5",
+          "action": "XV18 OPEN",
+          "hazard_class": "test_building_supply_gas",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "수전측 과압·이물 유입; 공급호스·커플러 결합불량",
+              "risk": "공급라인 누출",
+              "safeguard_or_action": "공급 전 누설시험 및 커플러 이탈방지 인터록 적용",
+              "reference": "KGS FU551; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "누출가스와 정전기 등 착화원의 접촉",
+              "risk": "밀폐공간(시험동) 내 화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 시험동 내 가스검지기-환기설비 연동",
+              "reference": "KGS FU551; IEC 60079(폭발위험장소)"
+            },
+            "explosion": {
+              "failure": "환기설비 미작동에 의한 밀폐공간 내 가스 체류",
+              "risk": "시험동 내 폭발분위기 형성 및 폭발",
+              "safeguard_or_action": "가스검지 연동 강제환기 구성; 폭발위험장소 구분에 따른 방폭설비 적용",
+              "reference": "IEC 60079; KOSHA GUIDE D-33"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 7,
+          "source_row_id": "support-center:1d1cac98540757b2",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "6",
+          "action": "용기시험동, 제품시험동 기체수소 공급",
+          "hazard_class": "test_building_supply_gas",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "수전측 과압·이물 유입; 공급호스·커플러 결합불량",
+              "risk": "공급라인 누출",
+              "safeguard_or_action": "공급 전 누설시험 및 커플러 이탈방지 인터록 적용",
+              "reference": "KGS FU551; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "누출가스와 정전기 등 착화원의 접촉",
+              "risk": "밀폐공간(시험동) 내 화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 시험동 내 가스검지기-환기설비 연동",
+              "reference": "KGS FU551; IEC 60079(폭발위험장소)"
+            },
+            "explosion": {
+              "failure": "환기설비 미작동에 의한 밀폐공간 내 가스 체류",
+              "risk": "시험동 내 폭발분위기 형성 및 폭발",
+              "safeguard_or_action": "가스검지 연동 강제환기 구성; 폭발위험장소 구분에 따른 방폭설비 적용",
+              "reference": "IEC 60079; KOSHA GUIDE D-33"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 8,
+          "source_row_id": "support-center:5fa5bc906e3c901a",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "7",
+          "action": "XV18 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 9,
+          "source_row_id": "support-center:0125ecf2b5c93a26",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "8",
+          "action": "XV17 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 10,
+          "source_row_id": "support-center:86263081a763c35a",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK1",
+          "procedure_number": "9",
+          "action": "XV13, 14 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 11,
+          "source_row_id": "support-center:195d83d33688e2ec",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "10",
+          "action": "LH2 TANK(2) 액화수소 공급 (용기시험동, 제품시험동)",
+          "hazard_class": "supply_start",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "공급 개시 시 압력서지(surge); 수전측 밸브 상태 미확인 상태에서 개시",
+              "risk": "서지에 의한 이음부 손상 누출",
+              "safeguard_or_action": "서서히 개방하여 서지 억제(스로틀 개방); 공급 개시 전 수전측 준비상태(밸브 위치, 압력) 상호 확인",
+              "reference": "KGS FU551(수소 사용시설 기준); KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "서지로 손상된 부위의 누출가스와 착화원의 접촉",
+              "risk": "공급라인 화재",
+              "safeguard_or_action": "초기 유량·압력 안정화 확인 후 정상운전 전환; 가스검지기 상시 감시",
+              "reference": "KGS FU551"
+            },
+            "explosion": {
+              "failure": "유량계 초기 오지시에 의한 과공급",
+              "risk": "수전측 과압 전달에 의한 폭발위험",
+              "safeguard_or_action": "과공급 방지 유량제한밸브 적용; 수전측 압력 실시간 모니터링",
+              "reference": "KGS FU551; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 12,
+          "source_row_id": "support-center:91f4583baae1173a",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "11",
+          "action": "XV15, 16 OPEN",
+          "hazard_class": "main_line_open",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 스템 패킹 노후에 의한 외부 누설; 액추에이터(공압/전동) 구동 실패; 개도 지시계와 실제 개도 불일치",
+              "risk": "스템부 누출에 의한 저온 화상; 오조작으로 인한 역류·과압 누출",
+              "safeguard_or_action": "개방 전후 개도지시·유량계 이중 확인; 밸브 정기 예방정비(PM) 및 패킹 교체 이력 관리",
+              "reference": "KGS FP216 밸브·배관 유지관리 기준; ASME B31.3; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "스템부 누출가스와 정전기·고온표면 등 착화원의 접촉",
+              "risk": "국소 제트화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 누출부 가스검지-ESD 신속 차단 연동",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "오조작에 의한 라인 과압; 밸브 완전개방 실패로 인한 압력 집중",
+              "risk": "배관 파열; 누출가스 확산에 의한 증기운폭발",
+              "safeguard_or_action": "과압방지 인터록 및 PSV 설치; 압력 이상 시 자동차단(ESD) 연동",
+              "reference": "ASME B31.3; API RP 521; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 13,
+          "source_row_id": "support-center:9af5d0f9ff0de75d",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "12",
+          "action": "XV17 OPEN",
+          "hazard_class": "vaporizer_pass",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "열매체(대기식/온수식) 공급 중단·부족; 기화기 튜브 결빙·부식",
+              "risk": "국부 동결에 의한 배관 폐색·파손 누출; 미기화 액체가 하류 배관 유입 시 취성파괴",
+              "safeguard_or_action": "출구온도 저온트립 연동 자동차단; 하류 배관 저온보호(극저온 대응 강재) 적용",
+              "reference": "KGS FP216; NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "기화기 주변 누출가스와 가열원(스팀/전열)의 접촉",
+              "risk": "기화기 화재",
+              "safeguard_or_action": "이중 기화기(예비계열) 구성으로 단일고장 대비; 가스검지-ESD 연동",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "출구 미기화(액체 캐리오버)에 의한 하류 배관 취성파괴",
+              "risk": "하류배관 파열에 의한 폭발",
+              "safeguard_or_action": "출구온도 상시감시 및 캐리오버 감지 센서 설치; 하류 배관 저온보호재 적용",
+              "reference": "KGS FP216; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 14,
+          "source_row_id": "support-center:28c4f0c78b762b09",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "13",
+          "action": "Vaporizer(기화기) 통과",
+          "hazard_class": "vaporizer_pass",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "열매체(대기식/온수식) 공급 중단·부족; 기화기 튜브 결빙·부식",
+              "risk": "국부 동결에 의한 배관 폐색·파손 누출; 미기화 액체가 하류 배관 유입 시 취성파괴",
+              "safeguard_or_action": "출구온도 저온트립 연동 자동차단; 하류 배관 저온보호(극저온 대응 강재) 적용",
+              "reference": "KGS FP216; NFPA 2 Ch.8"
+            },
+            "fire": {
+              "failure": "기화기 주변 누출가스와 가열원(스팀/전열)의 접촉",
+              "risk": "기화기 화재",
+              "safeguard_or_action": "이중 기화기(예비계열) 구성으로 단일고장 대비; 가스검지-ESD 연동",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "출구 미기화(액체 캐리오버)에 의한 하류 배관 취성파괴",
+              "risk": "하류배관 파열에 의한 폭발",
+              "safeguard_or_action": "출구온도 상시감시 및 캐리오버 감지 센서 설치; 하류 배관 저온보호재 적용",
+              "reference": "KGS FP216; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 15,
+          "source_row_id": "support-center:371f3d933dca51c1",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "14",
+          "action": "XV18 OPEN",
+          "hazard_class": "test_building_supply_gas",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "수전측 과압·이물 유입; 공급호스·커플러 결합불량",
+              "risk": "공급라인 누출",
+              "safeguard_or_action": "공급 전 누설시험 및 커플러 이탈방지 인터록 적용",
+              "reference": "KGS FU551; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "누출가스와 정전기 등 착화원의 접촉",
+              "risk": "밀폐공간(시험동) 내 화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 시험동 내 가스검지기-환기설비 연동",
+              "reference": "KGS FU551; IEC 60079(폭발위험장소)"
+            },
+            "explosion": {
+              "failure": "환기설비 미작동에 의한 밀폐공간 내 가스 체류",
+              "risk": "시험동 내 폭발분위기 형성 및 폭발",
+              "safeguard_or_action": "가스검지 연동 강제환기 구성; 폭발위험장소 구분에 따른 방폭설비 적용",
+              "reference": "IEC 60079; KOSHA GUIDE D-33"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 16,
+          "source_row_id": "support-center:3de21f670d8cb8d8",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "15",
+          "action": "용기시험동, 제품시험동 기체수소 공급",
+          "hazard_class": "test_building_supply_gas",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "수전측 과압·이물 유입; 공급호스·커플러 결합불량",
+              "risk": "공급라인 누출",
+              "safeguard_or_action": "공급 전 누설시험 및 커플러 이탈방지 인터록 적용",
+              "reference": "KGS FU551; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "누출가스와 정전기 등 착화원의 접촉",
+              "risk": "밀폐공간(시험동) 내 화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 시험동 내 가스검지기-환기설비 연동",
+              "reference": "KGS FU551; IEC 60079(폭발위험장소)"
+            },
+            "explosion": {
+              "failure": "환기설비 미작동에 의한 밀폐공간 내 가스 체류",
+              "risk": "시험동 내 폭발분위기 형성 및 폭발",
+              "safeguard_or_action": "가스검지 연동 강제환기 구성; 폭발위험장소 구분에 따른 방폭설비 적용",
+              "reference": "IEC 60079; KOSHA GUIDE D-33"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 17,
+          "source_row_id": "support-center:e2c414102170cddf",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "16",
+          "action": "XV18 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 18,
+          "source_row_id": "support-center:eff5aa4534c6d441",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "17",
+          "action": "XV17 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 19,
+          "source_row_id": "support-center:0b355d5cbb620e09",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "기체수소",
+          "operating_mode_key": "supply_gas",
+          "operating_mode_basis": "explicit 공급모드 label: 기체수소",
+          "tank_label": "TANK2",
+          "procedure_number": "18",
+          "action": "XV15, 16 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 20,
+          "source_row_id": "support-center:fc7ca5b203d849f6",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK1",
+          "procedure_number": "1",
+          "action": "LH2 TANK(1) 액화수소 공급 (용기시험동, 제품시험동)",
+          "hazard_class": "supply_start",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "공급 개시 시 압력서지(surge); 수전측 밸브 상태 미확인 상태에서 개시",
+              "risk": "서지에 의한 이음부 손상 누출",
+              "safeguard_or_action": "서서히 개방하여 서지 억제(스로틀 개방); 공급 개시 전 수전측 준비상태(밸브 위치, 압력) 상호 확인",
+              "reference": "KGS FU551(수소 사용시설 기준); KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "서지로 손상된 부위의 누출가스와 착화원의 접촉",
+              "risk": "공급라인 화재",
+              "safeguard_or_action": "초기 유량·압력 안정화 확인 후 정상운전 전환; 가스검지기 상시 감시",
+              "reference": "KGS FU551"
+            },
+            "explosion": {
+              "failure": "유량계 초기 오지시에 의한 과공급",
+              "risk": "수전측 과압 전달에 의한 폭발위험",
+              "safeguard_or_action": "과공급 방지 유량제한밸브 적용; 수전측 압력 실시간 모니터링",
+              "reference": "KGS FU551; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 21,
+          "source_row_id": "support-center:94c6fd860a18e518",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK1",
+          "procedure_number": "2",
+          "action": "XV13, 14 OPEN",
+          "hazard_class": "main_line_open",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 스템 패킹 노후에 의한 외부 누설; 액추에이터(공압/전동) 구동 실패; 개도 지시계와 실제 개도 불일치",
+              "risk": "스템부 누출에 의한 저온 화상; 오조작으로 인한 역류·과압 누출",
+              "safeguard_or_action": "개방 전후 개도지시·유량계 이중 확인; 밸브 정기 예방정비(PM) 및 패킹 교체 이력 관리",
+              "reference": "KGS FP216 밸브·배관 유지관리 기준; ASME B31.3; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "스템부 누출가스와 정전기·고온표면 등 착화원의 접촉",
+              "risk": "국소 제트화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 누출부 가스검지-ESD 신속 차단 연동",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "오조작에 의한 라인 과압; 밸브 완전개방 실패로 인한 압력 집중",
+              "risk": "배관 파열; 누출가스 확산에 의한 증기운폭발",
+              "safeguard_or_action": "과압방지 인터록 및 PSV 설치; 압력 이상 시 자동차단(ESD) 연동",
+              "reference": "ASME B31.3; API RP 521; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 22,
+          "source_row_id": "support-center:982bf5f135f633d1",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK1",
+          "procedure_number": "3",
+          "action": "XV20, 21 OPEN",
+          "hazard_class": "test_building_supply_liquid",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "극저온 액체 이송 중 배관 크랙; 이송호스 저온취성 파손",
+              "risk": "누출 시 급속 기화에 의한 압력상승·산소결핍; 저온 화상·동상",
+              "safeguard_or_action": "극저온 전용 이송호스·커플러 사용 및 정기 교체",
+              "reference": "KGS FP216; CGA H-3"
+            },
+            "fire": {
+              "failure": "누출 액체의 기화가스와 착화원의 접촉",
+              "risk": "저온화상을 동반한 화재",
+              "safeguard_or_action": "방류둑·배수 설비 확보; 가스검지 연동 비상차단",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "수전 용기 과충전",
+              "risk": "과충전 용기 파손에 의한 폭발",
+              "safeguard_or_action": "수전 용기 액위 상한 자동차단 연동",
+              "reference": "KGS FP216; CGA H-3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 23,
+          "source_row_id": "support-center:18f089142d789899",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK1",
+          "procedure_number": "4",
+          "action": "용기시험동, 제품시험동 액화수소 공급",
+          "hazard_class": "test_building_supply_liquid",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "극저온 액체 이송 중 배관 크랙; 이송호스 저온취성 파손",
+              "risk": "누출 시 급속 기화에 의한 압력상승·산소결핍; 저온 화상·동상",
+              "safeguard_or_action": "극저온 전용 이송호스·커플러 사용 및 정기 교체",
+              "reference": "KGS FP216; CGA H-3"
+            },
+            "fire": {
+              "failure": "누출 액체의 기화가스와 착화원의 접촉",
+              "risk": "저온화상을 동반한 화재",
+              "safeguard_or_action": "방류둑·배수 설비 확보; 가스검지 연동 비상차단",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "수전 용기 과충전",
+              "risk": "과충전 용기 파손에 의한 폭발",
+              "safeguard_or_action": "수전 용기 액위 상한 자동차단 연동",
+              "reference": "KGS FP216; CGA H-3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 24,
+          "source_row_id": "support-center:5df5ea2abf1f663f",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK1",
+          "procedure_number": "5",
+          "action": "XV20, 21 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 25,
+          "source_row_id": "support-center:63aee8768c8a2095",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK1",
+          "procedure_number": "6",
+          "action": "XV13, 14 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 26,
+          "source_row_id": "support-center:e5ce56dd5ac044eb",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK2",
+          "procedure_number": "7",
+          "action": "LH2 TANK(2) 액화수소 공급 (용기시험동, 제품시험동)",
+          "hazard_class": "supply_start",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "공급 개시 시 압력서지(surge); 수전측 밸브 상태 미확인 상태에서 개시",
+              "risk": "서지에 의한 이음부 손상 누출",
+              "safeguard_or_action": "서서히 개방하여 서지 억제(스로틀 개방); 공급 개시 전 수전측 준비상태(밸브 위치, 압력) 상호 확인",
+              "reference": "KGS FU551(수소 사용시설 기준); KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "서지로 손상된 부위의 누출가스와 착화원의 접촉",
+              "risk": "공급라인 화재",
+              "safeguard_or_action": "초기 유량·압력 안정화 확인 후 정상운전 전환; 가스검지기 상시 감시",
+              "reference": "KGS FU551"
+            },
+            "explosion": {
+              "failure": "유량계 초기 오지시에 의한 과공급",
+              "risk": "수전측 과압 전달에 의한 폭발위험",
+              "safeguard_or_action": "과공급 방지 유량제한밸브 적용; 수전측 압력 실시간 모니터링",
+              "reference": "KGS FU551; ASME B31.3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 27,
+          "source_row_id": "support-center:5d877ed9cd104372",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK2",
+          "procedure_number": "8",
+          "action": "XV15, 16 OPEN",
+          "hazard_class": "main_line_open",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 스템 패킹 노후에 의한 외부 누설; 액추에이터(공압/전동) 구동 실패; 개도 지시계와 실제 개도 불일치",
+              "risk": "스템부 누출에 의한 저온 화상; 오조작으로 인한 역류·과압 누출",
+              "safeguard_or_action": "개방 전후 개도지시·유량계 이중 확인; 밸브 정기 예방정비(PM) 및 패킹 교체 이력 관리",
+              "reference": "KGS FP216 밸브·배관 유지관리 기준; ASME B31.3; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "스템부 누출가스와 정전기·고온표면 등 착화원의 접촉",
+              "risk": "국소 제트화재",
+              "safeguard_or_action": "접지·본딩으로 정전기 축적 방지; 누출부 가스검지-ESD 신속 차단 연동",
+              "reference": "NFPA 2 Ch.8; IEC 60079"
+            },
+            "explosion": {
+              "failure": "오조작에 의한 라인 과압; 밸브 완전개방 실패로 인한 압력 집중",
+              "risk": "배관 파열; 누출가스 확산에 의한 증기운폭발",
+              "safeguard_or_action": "과압방지 인터록 및 PSV 설치; 압력 이상 시 자동차단(ESD) 연동",
+              "reference": "ASME B31.3; API RP 521; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 28,
+          "source_row_id": "support-center:fc5e07a5c6235bac",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK2",
+          "procedure_number": "9",
+          "action": "XV20, 21 OPEN",
+          "hazard_class": "test_building_supply_liquid",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "극저온 액체 이송 중 배관 크랙; 이송호스 저온취성 파손",
+              "risk": "누출 시 급속 기화에 의한 압력상승·산소결핍; 저온 화상·동상",
+              "safeguard_or_action": "극저온 전용 이송호스·커플러 사용 및 정기 교체",
+              "reference": "KGS FP216; CGA H-3"
+            },
+            "fire": {
+              "failure": "누출 액체의 기화가스와 착화원의 접촉",
+              "risk": "저온화상을 동반한 화재",
+              "safeguard_or_action": "방류둑·배수 설비 확보; 가스검지 연동 비상차단",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "수전 용기 과충전",
+              "risk": "과충전 용기 파손에 의한 폭발",
+              "safeguard_or_action": "수전 용기 액위 상한 자동차단 연동",
+              "reference": "KGS FP216; CGA H-3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 29,
+          "source_row_id": "support-center:50fb0ae50f397eab",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK2",
+          "procedure_number": "10",
+          "action": "용기시험동, 제품시험동 액화수소 공급",
+          "hazard_class": "test_building_supply_liquid",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "극저온 액체 이송 중 배관 크랙; 이송호스 저온취성 파손",
+              "risk": "누출 시 급속 기화에 의한 압력상승·산소결핍; 저온 화상·동상",
+              "safeguard_or_action": "극저온 전용 이송호스·커플러 사용 및 정기 교체",
+              "reference": "KGS FP216; CGA H-3"
+            },
+            "fire": {
+              "failure": "누출 액체의 기화가스와 착화원의 접촉",
+              "risk": "저온화상을 동반한 화재",
+              "safeguard_or_action": "방류둑·배수 설비 확보; 가스검지 연동 비상차단",
+              "reference": "NFPA 2 Ch.8"
+            },
+            "explosion": {
+              "failure": "수전 용기 과충전",
+              "risk": "과충전 용기 파손에 의한 폭발",
+              "safeguard_or_action": "수전 용기 액위 상한 자동차단 연동",
+              "reference": "KGS FP216; CGA H-3"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 30,
+          "source_row_id": "support-center:950087377e4a2c08",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK2",
+          "procedure_number": "11",
+          "action": "XV20, 21 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        },
+        {
+          "source_row": 31,
+          "source_row_id": "support-center:8fec7c00bb3807bb",
+          "scenario_label": "수소 공급",
+          "supply_mode_label": "액화수소",
+          "operating_mode_key": "supply_liquid",
+          "operating_mode_basis": "explicit 공급모드 label: 액화수소",
+          "tank_label": "TANK2",
+          "procedure_number": "12",
+          "action": "XV15, 16 CLOSE",
+          "hazard_class": "valve_close",
+          "hazard_categories_present": [
+            "leak",
+            "fire",
+            "explosion"
+          ],
+          "qualitative_hazop_evidence": {
+            "leak": {
+              "failure": "밸브 불완전 폐쇄(시트 마모·이물 개재); 폐쇄 지시와 실제 상태 불일치",
+              "risk": "폐쇄 후에도 지속되는 미세누출",
+              "safeguard_or_action": "폐쇄 후 하류 압력·유량 확인으로 기밀 검증; 밸브상태 표시(태그아웃 등)로 오조작 방지",
+              "reference": "KGS FP216 밸브 기밀성능 기준; KOSHA GUIDE D-33"
+            },
+            "fire": {
+              "failure": "잔압 상태에서 후속 정비·분해 작업 중 분출된 가스와 착화원의 접촉",
+              "risk": "정비작업 중 화재",
+              "safeguard_or_action": "잔압 배출(블리드) 절차 수행 후 후속 작업 진행; 작업허가제(PTW) 운영",
+              "reference": "KOSHA GUIDE D-33"
+            },
+            "explosion": {
+              "failure": "차기 절차 오조작(밸브상태 오인)",
+              "risk": "오조작에 의한 과압·폭발",
+              "safeguard_or_action": "밸브상태 태그아웃/락아웃(LOTO) 적용; 절차서 기반 이중확인 운영",
+              "reference": "KOSHA GUIDE D-33; KGS FP216"
+            }
+          },
+          "frequency_binding": "WITHHELD_NO_EVENT_FREQUENCY_IN_SOURCE",
+          "release_packet_binding": "WITHHELD_NO_RELEASE_PACKET_IN_SOURCE"
+        }
+      ],
+      "errors": [],
+      "sha256": "1e0c48044349a6d753ab9ba18ae95a6b3a5e93b1928dd40bdf562bec944582e1",
+      "size_bytes": 24269
+    }
+  ],
+  "description_sources": [
+    {
+      "relative_path": "액화수소 인수·저장(벤트)·공급 시나리오 설명자료.pdf",
+      "suffix": ".pdf",
+      "sha256": "6837a4c4c8a7a7852f668f444530efa36db1c8d65431877fe22e1eb76c124e7b",
+      "size_bytes": 678003,
+      "read_status": "READ",
+      "read_error": null,
+      "page_or_slide_text_length": 2452,
+      "anchors": {
+        "receiving_scenario": true,
+        "storage_vent_scenario": true,
+        "supply_scenario": true,
+        "pressure_vent_setpoints": true,
+        "sensor_or_prediction_description": true
+      }
+    },
+    {
+      "relative_path": "액화수소 인수·저장(벤트)·공급 시나리오 설명자료.pptx",
+      "suffix": ".pptx",
+      "sha256": "f7a84ba0510081d895515dd093a840622c231362e30097b6f0fa6506f6db9bd4",
+      "size_bytes": 1249201,
+      "read_status": "READ",
+      "read_error": null,
+      "page_or_slide_text_length": 2710,
+      "anchors": {
+        "receiving_scenario": true,
+        "storage_vent_scenario": true,
+        "supply_scenario": true,
+        "pressure_vent_setpoints": true,
+        "sensor_or_prediction_description": true
+      }
+    }
+  ],
+  "timeseries_audit": {
+    "source_path": "results\\20261106\\external_support_center_timeseries_audit.json",
+    "source_schema": "prism.inspection_center_timeseries_audit.v1",
+    "reviewed_unit_map_supplied": false,
+    "numeric_signal_unit_status_count": {
+      "MISSING_OR_UNCONFIRMED": 522
+    },
+    "numeric_state_binding_allowed": false,
+    "status": "WITHHELD_UNITS_UNCONFIRMED"
+  },
+  "errors": [],
+  "policy": {
+    "operating_mode_from_explicit_labels_only": true,
+    "mode_inference_from_numeric_values_performed": false,
+    "mode_inference_from_equipment_or_release_bin_performed": false,
+    "frequency_inference_performed": false,
+    "release_packet_generation_performed": false,
+    "normal_timeseries_promoted_to_accident_evidence": false,
+    "state_snapshot_binding_performed": false,
+    "state_snapshot_binding_allowed": false,
+    "unit_and_tag_review_required_before_numeric_binding": true,
+    "source_rows_are_qualitative_hazop_evidence_only": true
+  },
+  "coverage": {
+    "qualitative_hazop_rows_closed": true,
+    "explicit_operating_mode_rows_closed": true,
+    "frequency_event_binding_closed": false,
+    "release_consequence_binding_closed": false,
+    "numeric_monitoring_state_binding_closed": false
+  },
+  "source_records": {
+    "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소검사지원센터 데이터",
+    "timeseries_audit": "results\\20261106\\external_support_center_timeseries_audit.json"
+  }
+}
