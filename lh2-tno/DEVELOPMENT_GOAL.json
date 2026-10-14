@@ -2,6 +2,8 @@
   "date_kst": "2026-11-15",
   "status": "ACTIVE; IJHE completion chain remains incomplete evidence; 2026-11-15 vertical inventory handoff numerical ledger connected",
   "public_baseline": "PRISM 0.6.0",
+  "latest_equipment_state_handoff_record": "docs/PRISM_equipment_provider_state_handoff_20261115.md",
+  "latest_equipment_state_handoff_status": "IMPLEMENTED_STRICT_DIAGNOSTIC_BOUNDARY; qualified provider and facility QRA gates remain open",
   "objective": "선언한 옥외 LH2 적용범위의 주요 사고를 설비 상태부터 시설 IR/F-N까지 계산하고, 미계산 사고·문헌 빈도 불확실성·물리 검증 근거·신규 처리시간을 명확히 보고하여 IJHE 연구를 준비한다.",
   "completion_record": "docs/PRISM_IJHE_완성목표_20261009.md",
   "hazop_operating_mode_selection": {
