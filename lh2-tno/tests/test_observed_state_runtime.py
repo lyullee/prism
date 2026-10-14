@@ -83,6 +83,40 @@ def test_runtime_frame_carries_operating_mode_with_state_values():
     assert normalized["operating_mode"] == "receiving"
 
 
+def test_runtime_frame_binds_explicit_source_mode_map_without_inference():
+    report = build_observed_state_runtime_frames(
+        [_source()],
+        operating_mode_map={
+            "schema_version": "prism.explicit_operating_mode_input.v1",
+            "source_to_mode": {"historian-tank-01": "receiving"},
+        },
+    )
+    frame = report["frames"][0]
+    assert frame["operating_mode"] == "receiving"
+    assert report["operating_mode_binding"]["status"] == "EXPLICIT_MODE_INPUT_BOUND"
+    assert report["operating_mode_binding"]["inference_performed"] is False
+    assert report["policy"]["operating_mode_input_bound"] is True
+    assert report["policy"]["operating_mode_inferred"] is False
+
+
+def test_runtime_frame_rejects_incomplete_explicit_source_mode_map():
+    with pytest.raises(ValueError, match="non-empty source_to_mode"):
+        build_observed_state_runtime_frames(
+            [_source()],
+            operating_mode_map={"source_to_mode": {}},
+        )
+
+
+def test_runtime_frame_rejects_mode_map_conflict_with_source_mode():
+    source = _source()
+    source["operating_mode"] = "standby"
+    with pytest.raises(ValueError, match="conflicts"):
+        build_observed_state_runtime_frames(
+            [source],
+            operating_mode_map={"historian-tank-01": "receiving"},
+        )
+
+
 def test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity():
     source = _source()
     source["samples"][1]["operating_mode"] = "receiving"

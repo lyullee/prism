@@ -1,0 +1,380 @@
+{
+  "schema_version": "prism.ijhe_completion_audit.v1",
+  "status": "INCOMPLETE_EVIDENCE",
+  "checks": [
+    {
+      "name": "equipment_state_to_release_to_consequence",
+      "status": "PASS",
+      "evidence": {
+        "generated_event_count": 34,
+        "case_count": 44,
+        "executed_case_count": 44
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "provider_worklist_scope_alignment",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "status": "ALIGNED",
+        "worklist_event_count": 24,
+        "campaign_event_count": 24,
+        "aligned_event_count": 24,
+        "missing_event_ids": [],
+        "primary_family_mismatches": [],
+        "provider_packet_created": false,
+        "frequency_inference_performed": false
+      },
+      "interpretation": "The provider worklist and campaign share event IDs and primary accident families. This is a structural diagnostic check; it does not create a provider packet or qualify facility risk."
+    },
+    {
+      "name": "equipment_model_binding_to_accident_release",
+      "status": "PASS",
+      "evidence": {
+        "model_binding_status": "STATE_ONLY_BOUND",
+        "component_count": 8,
+        "state_supported_component_count": 8,
+        "accident_release_supported_component_count": 7,
+        "diagnostic_release_adapter_component_count": 7,
+        "record": "results/20261024/native_equipment_model_binding_audit_v1.json"
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "actual_provider_release_packet",
+      "status": "BLOCKED",
+      "evidence": {
+        "actual_facility_packet_available": false,
+        "release_inventory_status": null,
+        "qualified_packet_count": 0
+      },
+      "blocking_reason": "only synthetic or screening provider releases are available for this campaign"
+    },
+    {
+      "name": "provider_worklist_coverage",
+      "status": "BLOCKED",
+      "evidence": {
+        "source": "current_status",
+        "status": null,
+        "frequency_event_count": null,
+        "provider_packet_count": null,
+        "uncomputed_provider_packet_count": null,
+        "diagnostic_release_adapter_component_count": 7,
+        "structural_diagnostic_coverage": false,
+        "native_scope_catalog_structural_coverage": false,
+        "native_scope_catalog_evidence": {},
+        "qualified_provider_packet_count": null,
+        "qualification_readiness": null
+      },
+      "blocking_reason": "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog"
+    },
+    {
+      "name": "release_duration_isolation_inventory_ledger",
+      "status": "PASS",
+      "evidence": {
+        "executed_case_count": 44,
+        "cases_with_termination_and_mass_ledger": 44,
+        "release_ledger_schema": "prism.release_termination_inventory_ledger.v1",
+        "release_ledger_row_count": 44,
+        "release_ledger_summary": {
+          "case_count": 44,
+          "ledger_status_counts": {
+            "COMPLETE": 15,
+            "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 29
+          },
+          "termination_basis_counts": {
+            "emergency_relief_discharge": 1,
+            "inventory_depletion": 16,
+            "inventory_over_600s": 1,
+            "synthetic_diagnostic_horizon": 24,
+            "two_sided_rupture": 2
+          },
+          "complete_row_count": 15,
+          "operator_limited_or_domain_incomplete_row_count": 29,
+          "domain_incomplete_row_count": 0,
+          "uncomputed_row_count": 0,
+          "incomplete_row_count": 0,
+          "provider_packet_consumed_row_count": 44,
+          "withheld_case_count": 30,
+          "withheld_case_status_counts": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "withheld_operator_limited_case_count": 29,
+          "withheld_domain_incomplete_case_count": 1
+        },
+        "max_end_to_end_residual_kg": 3.9669067548981046e-17
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "declared_major_accident_scope",
+      "status": "BLOCKED",
+      "evidence": {
+        "matrix_status": false,
+        "blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ],
+        "required_family_count": 12,
+        "families_with_numerical_case_gap": [],
+        "families_with_qualification_gap": [
+          "vessel_hole",
+          "pipe_hole",
+          "valve_hole",
+          "pump_hole",
+          "liquid_two_phase",
+          "inventory_depletion",
+          "two_sided_rupture",
+          "vertical_handoff"
+        ]
+      },
+      "blocking_reason": "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open"
+    },
+    {
+      "name": "conditional_accident_scope_accounting",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "evidence": {
+        "conditional_chain_complete": true,
+        "conditional_chain_blocking_reasons": [],
+        "strict_matrix_complete": false,
+        "strict_blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ]
+      },
+      "blocking_reason": null,
+      "interpretation": "Conditional execution status counts numerical consequence-chain outputs, including operator-limited cases, while strict matrix_complete remains the facility qualification gate."
+    },
+    {
+      "name": "facility_ir_fn_available",
+      "status": "BLOCKED",
+      "evidence": {
+        "total_facility_annual_ir_low_high": null,
+        "total_facility_expected_death_fn_low_high": null
+      },
+      "blocking_reason": "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    },
+    {
+      "name": "physical_validation_evidence",
+      "status": "PASS",
+      "evidence": {
+        "physical_validation_claim": false,
+        "evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_AVAILABLE",
+        "evidence_record": "results/20261024/slabx_lh2_validation_audit_v1.json",
+        "evidence_component": "SLABx-LH2 pool and outdoor dispersion consequence component",
+        "restricted_component_evidence": true
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "frequency_uncertainty_reported",
+      "status": "BLOCKED",
+      "evidence": {
+        "uncertainty_result_present": false,
+        "scenario_count": 0,
+        "facility_credible_interval": null,
+        "conditional_frequency_uncertainty": false
+      },
+      "blocking_reason": "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view"
+    },
+    {
+      "name": "processing_time_evidence",
+      "status": "PASS",
+      "evidence": {
+        "fresh_physics_cases": 44,
+        "campaign_elapsed_ms": 190036.8790000648,
+        "case_p95_ms": 13589.624980000375,
+        "case_p99_ms": 19653.544570997983,
+        "timing_distribution": "across separately executed equipment campaigns; not repeated-run latency",
+        "one_hz_fresh_physics_demonstrated": null
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "realtime_monitor_contract",
+      "status": "PASS",
+      "evidence": {
+        "implemented": true,
+        "module": "src/lh2_tno/service.py",
+        "test_status": "contract",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "diagnostic_numerical_scope_coverage",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": null,
+        "required_family_count": 12,
+        "scope_row_count": 12,
+        "numerically_executed_case_count": 44,
+        "conditional_uncomputed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "families_with_numerical_case_gap": [],
+        "families_with_qualification_gap": [
+          "vessel_hole",
+          "pipe_hole",
+          "valve_hole",
+          "pump_hole",
+          "liquid_two_phase",
+          "inventory_depletion",
+          "two_sided_rupture",
+          "vertical_handoff"
+        ],
+        "matrix_complete": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "Every declared accident family has a numerical diagnostic case in the scope matrix; any remaining family gap is an evidence/qualification gap. This does not make operator-limited or synthetic cases qualified and does not promote facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_hazop_operating_mode_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261014\\support_center_hazop_operating_mode_evidence_audit.json",
+        "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",
+        "status": "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD",
+        "sequence_source_count": 3,
+        "sequence_row_count": 52,
+        "operating_mode_counts": {
+          "receiving": 19,
+          "storage_vent": 3,
+          "supply_gas": 18,
+          "supply_liquid": 12
+        },
+        "timeseries_audit": {
+          "source_path": "results\\20261014\\external_support_center_timeseries_reviewed_unit_audit.json",
+          "status": "WITHHELD_UNITS_UNCONFIRMED",
+          "numeric_state_binding_allowed": false
+        },
+        "policy": {
+          "operating_mode_from_explicit_labels_only": true,
+          "mode_inference_from_numeric_values_performed": false,
+          "mode_inference_from_equipment_or_release_bin_performed": false,
+          "frequency_inference_performed": false,
+          "release_packet_generation_performed": false,
+          "normal_timeseries_promoted_to_accident_evidence": false,
+          "state_snapshot_binding_performed": false,
+          "state_snapshot_binding_allowed": false,
+          "unit_and_tag_review_required_before_numeric_binding": true,
+          "source_rows_are_qualitative_hazop_evidence_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The inspection-center sequence tables provide explicit receiving, storage/vent, and supply mode evidence for qualitative HAZOP selection. Numeric state binding remains withheld until the PT/TT/DPT tag and unit map is reviewed; this check does not create frequencies, release packets, or facility QRA."
+    },
+    {
+      "name": "diagnostic_reviewed_signal_unit_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261014\\support_center_reviewed_signal_unit_evidence.json",
+        "schema_version": "prism.reviewed_signal_unit_evidence.v1",
+        "status": "REVIEWED_SIGNAL_UNIT_EVIDENCE_PARTIAL",
+        "source_document_sha256": "6d863e161f3c1e7bdc6de57fb82f1967a518a19a0737ec6868ceff3fc07ddb97",
+        "signal_count": 6,
+        "reviewed_signal_count": 6,
+        "observed_unmapped_tags": [
+          "DPT1101",
+          "DPT11012",
+          "DPT1102",
+          "PT1101",
+          "PT1101MPA",
+          "PT1105AMPA",
+          "PT1105BMPA",
+          "PT1106",
+          "PT1106MPA",
+          "PT1107",
+          "PT1107MPA",
+          "PT1111",
+          "PT1111MPA",
+          "PT1206MPA",
+          "TT1116"
+        ],
+        "complete_signal_coverage": false,
+        "promotion_gates": {
+          "unit_evidence_accepted_for_mapped_tags": true,
+          "state_snapshot_binding_allowed": false,
+          "numeric_state_binding_allowed": false,
+          "pressure_basis_resolved_for_all_pressure_tags": false,
+          "calibration_quality_evidence_supplied": false,
+          "sensor_frequency_learning_used": false,
+          "frequency_applied": false,
+          "provider_packet_created": false,
+          "facility_qra_claim": false
+        },
+        "policy": {
+          "unit_from_declared_document_anchor_only": true,
+          "unit_inference_from_numeric_range_performed": false,
+          "pressure_basis_inference_performed": false,
+          "raw_dpt_value_reinterpreted_as_level_percent": false,
+          "normal_timeseries_promoted_to_accident_evidence": false,
+          "state_snapshot_adapter_executed": false,
+          "frequency_inference_performed": false,
+          "provider_release_created": false
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "Document-anchored units are accepted only for the explicitly mapped tags. Unmapped tags, pressure basis, calibration and adapter gates remain visible; the audit does not create a state snapshot, accident frequency, release packet or QRA."
+    },
+    {
+      "name": "diagnostic_observed_hazop_runtime_mode_selection",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261110\\inspection_center_observed_hazop_runtime_audit.json",
+        "schema_version": "prism.observed_hazop_runtime_audit.v1",
+        "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+        "runtime_frame_count": 3,
+        "evaluated_frame_count": 3,
+        "selected_scenario_count": 3,
+        "operating_mode_counts": {
+          "receiving": 1,
+          "standby": 1,
+          "supply": 1
+        },
+        "policy": {
+          "operating_mode_taken_from_explicit_runtime_input": true,
+          "operating_mode_inferred": false,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_release_created": false,
+          "consequence_calculated": false,
+          "facility_qra_claim": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "Measured state frames and an explicit operating mode reached the HAZOP scenario selector. This validates the qualitative routing boundary only; provider release, literature frequency, SLABx-LH2 consequence, and facility IR/F-N remain separate gates."
+    }
+  ],
+  "blocking_reasons": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+    "declared accident families have numerical diagnostic outputs, but provider qualification or independent physical-validation evidence remains open",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+    "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view"
+  ],
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "interpretation": "Readiness evidence gate; a blocked check is not treated as zero risk or as an implicit accident substitution."
+}

@@ -3181,3 +3181,69 @@ def test_completion_audit_blocks_unit_evidence_that_opens_state_binding():
         if item["name"] == "diagnostic_reviewed_signal_unit_evidence"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _observed_hazop_runtime_audit(**overrides):
+    record = {
+        "schema_version": "prism.observed_hazop_runtime_audit.v1",
+        "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+        "runtime_frame_count": 3,
+        "evaluated_frame_count": 3,
+        "selected_scenario_count": 3,
+        "operating_mode_counts": {"receiving": 1, "standby": 1, "supply": 1},
+        "blocking_reasons": [],
+        "rows": [
+            {
+                "component_id": "tank-01",
+                "operating_mode": "receiving",
+                "status": "SCENARIOS_SELECTED",
+                "selected_scenarios": [{
+                    "provider_release_required": True,
+                    "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+                }],
+            }
+        ],
+        "policy": {
+            "operating_mode_taken_from_explicit_runtime_input": True,
+            "operating_mode_inferred": False,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created": False,
+            "consequence_calculated": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_observed_hazop_runtime_mode_selection():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_runtime_audit=_observed_hazop_runtime_audit(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_runtime_mode_selection"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_observed_hazop_runtime_promotion_claim():
+    unsafe = _observed_hazop_runtime_audit()
+    unsafe["policy"]["provider_release_created"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_runtime_audit=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_runtime_mode_selection"
+    )
+    assert check["status"] == "BLOCKED"

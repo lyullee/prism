@@ -174,6 +174,18 @@ provider resolver 계약으로 넘깁니다. resolver가 사고빈도를 지정�
 실시간 consequence service로 보내 처리시간·cache 상태·provider 방출경로를 함께
 기록합니다.
 
+**2026-11-10 운전 모드→HAZOP 런타임 연결:** `build_observed_state_runtime_frames.py`에
+`--operating-mode-map`을 추가해 현장/SCADA 상위 입력의 `source_id → receiving|supply|standby`
+맵을 상태 프레임에 명시적으로 결합합니다. 모드는 압력·온도에서 추정하지 않으며, 누락·중복·충돌이면
+fail-closed로 중단됩니다. `audit_observed_hazop_runtime.py`는 이 프레임과 설비별 HAZOP 표를
+비교해 모드별 이탈과 사고 family 후보만 선택하고, 각 결과에 `provider_release_required=true`와
+문헌 빈도 미적용을 남깁니다. 검사센터 진단에서 3개 프레임은 `receiving`·`standby`·`supply`를
+각각 보존하고 `vessel_hole`·`vent_hole`·`vaporizer_hole` 3개 후보를 선택했습니다. 이는 정성
+라우팅 증거이며 방출 packet·빈도·SLABx-LH2·시설 IR/F-N을 만들지 않습니다. [관측 상태·운전 모드·HAZOP
+런타임 연결 기록](docs/PRISM_관측상태_운전모드_HAZOP_런타임연결_20261110.md),
+[`inspection_center_observed_hazop_runtime_audit.json`](results/20261110/inspection_center_observed_hazop_runtime_audit.json)
+참조.
+
 관측 상태를 사고 방출로 잘못 승격하지 않도록 `observed_state_release_binding_audit.json`에서
 상태→시설 component→검토된 provider event 연결을 별도로 감사한다. 현재 센터 자료는
 3개 component와 8,955개 표본을 가지지만 검토된 provider packet이 없어 결과는

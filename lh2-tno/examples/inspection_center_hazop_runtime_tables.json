@@ -1,0 +1,99 @@
+{
+  "schema_version": "prism.hazop_runtime_table_set.v1",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "description": "Diagnostic HAZOP table set for the support-center runtime demonstration. Operating modes are explicit inputs; thresholds and component identities require facility P&ID/HAZOP review before QRA promotion.",
+  "tables": {
+    "lh2-intake-tank": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "inspection-center-intake-hazop-diagnostic-v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "operating_modes": ["receiving", "supply", "standby"],
+      "configuration_origin": "synthetic",
+      "source_provenance": "support-center receiving sequence label; diagnostic threshold pending reviewed HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "inspection-intake-receiving-high-pressure",
+          "component_id": "lh2-intake-tank",
+          "component_kind": "storage_tank",
+          "operating_modes": ["receiving"],
+          "variable_tag": "pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 500000.0,
+          "scenario_family": "vessel_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "receiving pressure deviation",
+          "cause_summary": "explicit receiving-mode pressure criterion is exceeded",
+          "consequence_summary": "storage-tank provider release is required before consequence analysis",
+          "safeguards": ["PSV", "ESD"],
+          "provenance": "diagnostic row; threshold is not a qualified facility design limit"
+        }
+      ]
+    },
+    "lh2-storage-vent": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "inspection-center-storage-vent-hazop-diagnostic-v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "operating_modes": ["receiving", "supply", "standby"],
+      "configuration_origin": "synthetic",
+      "source_provenance": "support-center storage-vent sequence label; diagnostic threshold pending reviewed HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "inspection-storage-standby-vent-pressure",
+          "component_id": "lh2-storage-vent",
+          "component_kind": "vent_stack",
+          "operating_modes": ["standby"],
+          "variable_tag": "pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 600000.0,
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "priority": "high",
+          "deviation_label": "standby vent pressure deviation",
+          "cause_summary": "explicit standby-mode pressure criterion is exceeded",
+          "consequence_summary": "vent/relief provider discharge history is required before consequence analysis",
+          "safeguards": ["PSV", "ESD"],
+          "provenance": "diagnostic row; threshold is not a qualified relief set point"
+        }
+      ]
+    },
+    "lh2-supply-vaporizer-boundary": {
+      "schema_version": "prism.hazop_operating_mode_selection.v1",
+      "id": "inspection-center-supply-hazop-diagnostic-v1",
+      "facility_id": "generic-outdoor-lh2-diagnostic",
+      "operating_modes": ["receiving", "supply", "standby"],
+      "configuration_origin": "synthetic",
+      "source_provenance": "support-center supply sequence label; diagnostic threshold pending reviewed HAZOP/P&ID",
+      "rows": [
+        {
+          "id": "inspection-supply-vaporizer-high-pressure",
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "component_kind": "vaporizer",
+          "operating_modes": ["supply"],
+          "variable_tag": "pressure",
+          "quantity": "pressure",
+          "trigger": "at_or_above",
+          "threshold_high_si": 300000.0,
+          "scenario_family": "vaporizer_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "deviation_label": "supply pressure deviation",
+          "cause_summary": "explicit supply-mode pressure criterion is exceeded",
+          "consequence_summary": "vaporizer provider release is required before consequence analysis",
+          "safeguards": ["ESD", "flow isolation"],
+          "provenance": "diagnostic row; threshold is not a qualified facility design limit"
+        }
+      ]
+    }
+  },
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "release_packet_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  }
+}

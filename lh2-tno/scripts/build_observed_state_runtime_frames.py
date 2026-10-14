@@ -18,6 +18,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--source-root", type=Path, default=None)
+    parser.add_argument(
+        "--operating-mode-map",
+        type=Path,
+        help="optional explicit source_id-to-operating_mode JSON input; modes are never inferred",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     manifest = _load(args.manifest)
@@ -32,7 +37,11 @@ def main() -> int:
         source_root = Path(manifest_source_root)
     try:
         sources = [_source_from_manifest(spec, source_root=source_root) for spec in specs]
-        report = build_observed_state_runtime_frames(sources)
+        mode_map = _load(args.operating_mode_map) if args.operating_mode_map else None
+        report = build_observed_state_runtime_frames(
+            sources,
+            operating_mode_map=mode_map,
+        )
     except (OSError, UnicodeDecodeError, KeyError, TypeError, ValueError, RuntimeError) as error:
         raise SystemExit(f"observed state runtime frame export failed: {error}") from error
     report["manifest"] = {
@@ -50,6 +59,7 @@ def main() -> int:
         "source_count": report["source_count"],
         "frame_count": report["frame_count"],
         "evidence_sample_count": report["evidence_sample_count"],
+        "operating_mode_binding": report["operating_mode_binding"]["status"],
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))
     return 0

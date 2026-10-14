@@ -98,6 +98,63 @@ def _sources(sources: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+def _normalise_operating_mode_map(
+    operating_mode_map: Mapping[str, Any] | None,
+) -> dict[str, str]:
+    """Validate an explicit source-id to operating-mode input map.
+
+    The map is deliberately separate from the measured values.  A mode is a
+    supervisory/sequence input used by HAZOP; it is never inferred from a
+    pressure, temperature, flow, or source name.
+    """
+    if operating_mode_map is None:
+        return {}
+    if not isinstance(operating_mode_map, Mapping):
+        raise ValueError("operating_mode_map must be an object")
+    candidate: Any = operating_mode_map.get("source_to_mode", operating_mode_map)
+    if not isinstance(candidate, Mapping) or not candidate:
+        raise ValueError("operating_mode_map requires a non-empty source_to_mode object")
+    result: dict[str, str] = {}
+    for source_id, raw_mode in candidate.items():
+        source_key = str(source_id).strip()
+        if not source_key:
+            raise ValueError("operating_mode_map source IDs must be non-empty")
+        mode = raw_mode.get("operating_mode") if isinstance(raw_mode, Mapping) else raw_mode
+        mode_text = _mode(mode, f"operating_mode_map[{source_key}]")
+        if source_key in result and result[source_key] != mode_text:
+            raise ValueError(f"operating_mode_map contains conflicting mode for {source_key}")
+        result[source_key] = mode_text
+    return result
+
+
+def _apply_operating_mode_map(
+    sources: list[dict[str, Any]],
+    operating_mode_map: Mapping[str, Any] | None,
+) -> tuple[list[dict[str, Any]], dict[str, str]]:
+    mode_map = _normalise_operating_mode_map(operating_mode_map)
+    if not mode_map:
+        return sources, {}
+    source_ids = {str(source["source_id"]) for source in sources}
+    missing = sorted(source_ids - set(mode_map))
+    extra = sorted(set(mode_map) - source_ids)
+    if missing:
+        raise ValueError(f"operating_mode_map is missing source IDs: {missing}")
+    if extra:
+        raise ValueError(f"operating_mode_map contains unknown source IDs: {extra}")
+    enriched: list[dict[str, Any]] = []
+    for source in sources:
+        source_id = str(source["source_id"])
+        explicit = source.get("operating_mode")
+        if explicit is not None and _mode(explicit) != mode_map[source_id]:
+            raise ValueError(
+                f"source {source_id} operating_mode conflicts with explicit mode map"
+            )
+        row = dict(source)
+        row["operating_mode"] = mode_map[source_id]
+        enriched.append(row)
+    return enriched, mode_map
+
+
 def _latest_sample(source: Mapping[str, Any]) -> Mapping[str, Any]:
     samples = source["samples"]
     candidates: list[tuple[float, int, Mapping[str, Any]]] = []
@@ -321,6 +378,8 @@ def request_from_observed_state_runtime_frame(
 
 def build_observed_state_runtime_frames(
     sources: Iterable[Mapping[str, Any]],
+    *,
+    operating_mode_map: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Select one latest state frame per source for an explicit runtime handoff."""
 
@@ -329,7 +388,8 @@ def build_observed_state_runtime_frames(
     # rejects accident-owned keys and malformed quantities consistently with
     # the evidence audit.
     evidence = build_observed_state_evidence(source_rows)
-    frames = [_frame_from_source(source) for source in source_rows]
+    frame_sources, mode_map = _apply_operating_mode_map(source_rows, operating_mode_map)
+    frames = [_frame_from_source(source) for source in frame_sources]
     component_ids = [frame["component_id"] for frame in frames]
     if len(set(component_ids)) != len(component_ids):
         raise ValueError("runtime frames require one source per component_id")
@@ -356,6 +416,15 @@ def build_observed_state_runtime_frames(
             "termination_and_inventory_owner": "equipment_provider",
             "operating_mode_transport": "optional source/sample operating_mode; required by HAZOP selector",
         },
+        "operating_mode_binding": {
+            "schema_version": "prism.explicit_operating_mode_input.v1",
+            "status": "EXPLICIT_MODE_INPUT_BOUND" if mode_map else "NO_MODE_INPUT",
+            "source_count": len(mode_map),
+            "source_to_mode": dict(mode_map),
+            "inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "diagnostic_only": True,
+        },
         "policy": {
             "state_only": True,
             "release_scenario_generated": False,
@@ -365,6 +434,8 @@ def build_observed_state_runtime_frames(
             "physical_validation_claim": False,
             "facility_qra_claim": False,
             "provider_release_required_for_consequence": True,
+            "operating_mode_input_bound": bool(mode_map),
+            "operating_mode_inferred": False,
             "diagnostic_only": True,
         },
         "interpretation": (

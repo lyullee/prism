@@ -103,6 +103,7 @@ def build_ijhe_completion_audit(
     hazop_event_mode_binding: Mapping[str, Any] | None = None,
     hazop_operating_mode_evidence: Mapping[str, Any] | None = None,
     reviewed_signal_unit_evidence: Mapping[str, Any] | None = None,
+    observed_hazop_runtime_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3848,6 +3849,66 @@ def build_ijhe_completion_audit(
             "the audit does not create a state snapshot, accident frequency, release packet or QRA."
         )
         checks.append(unit_evidence_check)
+    if observed_hazop_runtime_audit is not None:
+        runtime_audit = observed_hazop_runtime_audit
+        policy = runtime_audit.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        rows = runtime_audit.get("rows")
+        runtime_valid = (
+            runtime_audit.get("schema_version") == "prism.observed_hazop_runtime_audit.v1"
+            and runtime_audit.get("status") == "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED"
+            and isinstance(rows, list)
+            and bool(rows)
+            and all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("component_id"), str)
+                and isinstance(row.get("operating_mode"), str)
+                and bool(row.get("operating_mode"))
+                and row.get("status") == "SCENARIOS_SELECTED"
+                and isinstance(row.get("selected_scenarios"), list)
+                and all(
+                    isinstance(scenario, Mapping)
+                    and scenario.get("provider_release_required") is True
+                    and scenario.get("frequency_assignment")
+                    == "not_performed; bind an explicit literature event downstream"
+                    for scenario in row.get("selected_scenarios", [])
+                )
+                for row in rows
+            )
+            and isinstance(runtime_audit.get("selected_scenario_count"), int)
+            and runtime_audit.get("selected_scenario_count", 0) > 0
+            and not runtime_audit.get("blocking_reasons")
+            and policy.get("operating_mode_taken_from_explicit_runtime_input") is True
+            and policy.get("operating_mode_inferred") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("sensor_frequency_learning_used") is False
+            and policy.get("provider_release_created") is False
+            and policy.get("consequence_calculated") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("diagnostic_only") is True
+        )
+        runtime_check = _check(
+            "diagnostic_observed_hazop_runtime_mode_selection",
+            runtime_valid,
+            {
+                "record": runtime_audit.get("_record_path"),
+                "schema_version": runtime_audit.get("schema_version"),
+                "status": runtime_audit.get("status"),
+                "runtime_frame_count": runtime_audit.get("runtime_frame_count"),
+                "evaluated_frame_count": runtime_audit.get("evaluated_frame_count"),
+                "selected_scenario_count": runtime_audit.get("selected_scenario_count"),
+                "operating_mode_counts": runtime_audit.get("operating_mode_counts"),
+                "policy": dict(policy),
+            },
+            "observed runtime HAZOP mode selection is missing explicit-mode accounting or permits accident/frequency promotion",
+        )
+        runtime_check["diagnostic_only"] = True
+        runtime_check["interpretation"] = (
+            "Measured state frames and an explicit operating mode reached the HAZOP scenario selector. "
+            "This validates the qualitative routing boundary only; provider release, literature frequency, "
+            "SLABx-LH2 consequence, and facility IR/F-N remain separate gates."
+        )
+        checks.append(runtime_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

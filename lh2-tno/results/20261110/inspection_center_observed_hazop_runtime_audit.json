@@ -1,0 +1,185 @@
+{
+  "schema_version": "prism.observed_hazop_runtime_audit.v1",
+  "status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+  "runtime_frame_count": 3,
+  "evaluated_frame_count": 3,
+  "selected_scenario_count": 3,
+  "operating_mode_counts": {
+    "receiving": 1,
+    "standby": 1,
+    "supply": 1
+  },
+  "status_counts": {
+    "SCENARIOS_SELECTED": 3
+  },
+  "rows": [
+    {
+      "component_id": "lh2-intake-tank",
+      "source_id": "inspection-center-intake-10-runs",
+      "captured_at_s": 6838.0,
+      "operating_mode": "receiving",
+      "state_snapshot_digest": "b196c338403692f84264aa077b93f56c215671b19fc3366625d11535a3cc2fae",
+      "table_id": "inspection-center-intake-hazop-diagnostic-v1",
+      "table_digest": "04fc1a817b912fa2e4fd57d88466ddbec9f84d7b5eed45c82239997743c5e879",
+      "state_digest": "811f91a4df78660d8d86657c218f267ac2471a82d9330ef55b322edf33b2c220",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "inspection-intake-receiving-high-pressure:receiving:vessel_hole",
+          "hazop_row_id": "inspection-intake-receiving-high-pressure",
+          "component_id": "lh2-intake-tank",
+          "component_kind": "storage_tank",
+          "operating_mode": "receiving",
+          "scenario_family": "vessel_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 536000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 500000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "diagnostic row; threshold is not a qualified facility design limit"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "inspection-intake-receiving-high-pressure",
+          "component_id": "lh2-intake-tank",
+          "operating_mode": "receiving",
+          "variable_tag": "pressure",
+          "deviation": "receiving pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vessel_hole",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 536000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 500000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "lh2-storage-vent",
+      "source_id": "inspection-center-storage-vent-10-runs",
+      "captured_at_s": 10080.0,
+      "operating_mode": "standby",
+      "state_snapshot_digest": "71f8070794b7560b35be1d19ceec338786de5337b07c28155dcd0f9ef79c41f9",
+      "table_id": "inspection-center-storage-vent-hazop-diagnostic-v1",
+      "table_digest": "73905e822d7ad028316472be9118710cef78c2c909170a07e2a5b04a154dc9d5",
+      "state_digest": "f37ade6eb594a23c5e6c1369c8e848eef147fccad4e966c1d1e2f2742f0c3047",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "inspection-storage-standby-vent-pressure:standby:vent_hole",
+          "hazop_row_id": "inspection-storage-standby-vent-pressure",
+          "component_id": "lh2-storage-vent",
+          "component_kind": "vent_stack",
+          "operating_mode": "standby",
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "priority": "high",
+          "measured_value_si": 605000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "diagnostic row; threshold is not a qualified relief set point"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "inspection-storage-standby-vent-pressure",
+          "component_id": "lh2-storage-vent",
+          "operating_mode": "standby",
+          "variable_tag": "pressure",
+          "deviation": "standby vent pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vent_hole",
+          "release_mode": "maximum_relief_discharge",
+          "status": "DEVIATION",
+          "value_si": 605000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 600000.0
+        }
+      ],
+      "blocking_reasons": []
+    },
+    {
+      "component_id": "lh2-supply-vaporizer-boundary",
+      "source_id": "inspection-center-supply-10-runs",
+      "captured_at_s": 1440.0,
+      "operating_mode": "supply",
+      "state_snapshot_digest": "e2177dec10dab478d11a498b4f95e90af6cc8b28a6def7d565eb559e2d7e882b",
+      "table_id": "inspection-center-supply-hazop-diagnostic-v1",
+      "table_digest": "e49a920bd6b4d4d0133132cb83f60a00468b807625ce249bd71827be7405a198",
+      "state_digest": "f386dc54444fea003263d5c5d3c92ea00c5fbcefef241a4cb29a19a3a862fc2f",
+      "status": "SCENARIOS_SELECTED",
+      "active_deviation_count": 1,
+      "selected_scenario_count": 1,
+      "selected_scenarios": [
+        {
+          "scenario_id": "inspection-supply-vaporizer-high-pressure:supply:vaporizer_hole",
+          "hazop_row_id": "inspection-supply-vaporizer-high-pressure",
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "component_kind": "vaporizer",
+          "operating_mode": "supply",
+          "scenario_family": "vaporizer_hole",
+          "release_mode": "hole",
+          "priority": "high",
+          "measured_value_si": 325000.0,
+          "trigger": "at_or_above",
+          "threshold_low_si": null,
+          "threshold_high_si": 300000.0,
+          "provider_release_status": "REQUIRED_NOT_CREATED",
+          "provider_release_required": true,
+          "frequency_assignment": "not_performed; bind an explicit literature event downstream",
+          "source": "diagnostic row; threshold is not a qualified facility design limit"
+        }
+      ],
+      "checks": [
+        {
+          "row_id": "inspection-supply-vaporizer-high-pressure",
+          "component_id": "lh2-supply-vaporizer-boundary",
+          "operating_mode": "supply",
+          "variable_tag": "pressure",
+          "deviation": "supply pressure deviation",
+          "trigger": "at_or_above",
+          "scenario_family": "vaporizer_hole",
+          "release_mode": "hole",
+          "status": "DEVIATION",
+          "value_si": 325000.0,
+          "quantity": "pressure",
+          "threshold_low_si": null,
+          "threshold_high_si": 300000.0
+        }
+      ],
+      "blocking_reasons": []
+    }
+  ],
+  "blocking_reasons": [],
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "operating_mode_inferred": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "consequence_calculated": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Observed state and explicit operating mode selected HAZOP scenarios. Each selected scenario still requires a qualified provider release, literature frequency binding, and the downstream SLABx-LH2/TNO chain.",
+  "runtime_frames_record": "results\\20261110\\inspection_center_observed_state_runtime_frames_with_modes.json",
+  "hazop_table_set_record": "examples\\inspection_center_hazop_runtime_tables.json",
+  "now_s": 10081.0
+}

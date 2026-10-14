@@ -1,0 +1,22 @@
+{
+  "schema_version": "prism.explicit_operating_mode_input.v1",
+  "description": "Explicit operating-mode input for the inspection-center runtime demonstration. The mode is supplied by the operating sequence/SCADA layer and is never inferred from pressure or temperature.",
+  "facility_id": "generic-outdoor-lh2-diagnostic",
+  "source_to_mode": {
+    "inspection-center-intake-10-runs": "receiving",
+    "inspection-center-storage-vent-10-runs": "standby",
+    "inspection-center-supply-10-runs": "supply"
+  },
+  "evidence_refs": [
+    "results/20261014/support_center_hazop_operating_mode_evidence_audit.json",
+    "examples/inspection_center_observed_state_manifest.json"
+  ],
+  "policy": {
+    "mode_is_explicit_input": true,
+    "mode_inference_from_sensor_values": false,
+    "frequency_inference_performed": false,
+    "release_packet_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  }
+}
