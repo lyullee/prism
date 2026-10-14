@@ -4106,11 +4106,13 @@
   "ijhe_completion_audit_external_document_evidence_status": "PASS_DIAGNOSTIC_ONLY; external pump documents are provenance candidates; physical validation and QRA promotion false",
   "ijhe_completion_audit_external_document_evidence_check_name": "diagnostic_external_document_evidence",
   "ijhe_completion_audit_external_document_evidence_promotion": false,
-  "ijhe_completion_audit_latest_full_evidence_record": "results/20261107/ijhe_completion_audit_full_evidence_with_external_documents.json",
-  "ijhe_completion_audit_latest_full_evidence_status": "INCOMPLETE_EVIDENCE; 39 checks; 6 strict blocking reasons; external document check PASS diagnostic-only",
-  "ijhe_completion_audit_latest_full_evidence_check_count": 39,
-  "ijhe_completion_audit_latest_full_evidence_blocking_reason_count": 6,
+  "ijhe_completion_audit_latest_full_evidence_record": "results/20261108/ijhe_completion_audit_full_evidence_with_structural_worklist.json",
+  "ijhe_completion_audit_latest_full_evidence_status": "INCOMPLETE_EVIDENCE; 40 checks; 5 strict blocking reasons; structural worklist check PASS diagnostic-only",
+  "ijhe_completion_audit_latest_full_evidence_check_count": 40,
+  "ijhe_completion_audit_latest_full_evidence_blocking_reason_count": 5,
   "ijhe_completion_audit_latest_full_evidence_physical_validation_claim": false,
   "ijhe_completion_audit_latest_full_evidence_facility_qra_claim": false,
-  "ijhe_completion_audit_latest_full_evidence_doc": "docs/PRISM_최신전체증거_완료감사_20261107.md"
+  "ijhe_completion_audit_latest_full_evidence_doc": "docs/PRISM_구조적작업목록_반영_전체증거감사_20261108.md",
+  "provider_worklist_structural_diagnostic_evidence_latest_record": "results/20261023/native_generic_scope_worklist_packet_evidence_v7.json",
+  "provider_worklist_structural_diagnostic_evidence_latest_status": "PARTIAL_DIAGNOSTIC_EVIDENCE; 24/24 exact worklist and consequence-chain links; qualified provider packet count 0; no frequency or facility QRA promotion"
 }
