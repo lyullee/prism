@@ -64,8 +64,23 @@ class NativeLayeredTankProvider:
         return dict(self.model.export_accident_history(payload))
 
 
-def _native_request(source_digest: str, state_digest: str) -> AccidentReleaseExportRequest:
-    return AccidentReleaseExportRequest.from_mapping({
+def _native_request(
+    source_digest: str,
+    state_digest: str,
+    *,
+    isolation_time_s: float | None = None,
+    post_isolation_observation_s: float = 0.0,
+) -> AccidentReleaseExportRequest:
+    # The historical diagnostic used a very short bounded horizon.  An
+    # optional explicit isolation branch lets the provider own the release
+    # duration and zero-flow observation without inventing inventory
+    # depletion.  Both modes remain diagnostic until field evidence exists.
+    horizon_s = (
+        isolation_time_s + post_isolation_observation_s
+        if isolation_time_s is not None
+        else 0.0001
+    )
+    payload = {
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
         "component_id": "storage-tank-01",
@@ -74,7 +89,7 @@ def _native_request(source_digest: str, state_digest: str) -> AccidentReleaseExp
         "failure_mode": "explicit_failed_opening",
         # Exact match to the reviewed LH2_VESSEL AREA_0.01% catalogue bin.
         "failure_opening_diameter_m": 0.0127,
-        "horizon_s": 0.0001,
+        "horizon_s": horizon_s,
         "position_enu_m": [0.0, 0.0, 1.0],
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
@@ -89,7 +104,11 @@ def _native_request(source_digest: str, state_digest: str) -> AccidentReleaseExp
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "explicit native external LayeredTank diagnostic; not site-calibrated",
         "provider_termination_required": True,
-    })
+    }
+    if isolation_time_s is not None:
+        payload["isolation_time_s"] = isolation_time_s
+        payload["post_isolation_observation_s"] = post_isolation_observation_s
+    return AccidentReleaseExportRequest.from_mapping(payload)
 
 
 def _campaign_request_defaults(request: dict[str, Any]) -> dict[str, Any]:
@@ -155,6 +174,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         {
             "initial_pressure_pa_abs": 110000.0,
             "liquid_volume_fraction": 0.05,
+            # The small exact literature opening is integrated with the
+            # stable short step used by the historical diagnostic.  The
+            # native solver still owns the state and termination clock.
             "time_step_s": 0.0001,
             "minimum_step_s": 0.00001,
             "discharge_coefficient": 0.7,
@@ -165,7 +187,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     started = time.perf_counter()
     adapted = export_equipment_liquid_accident_history(
-        provider, _native_request(source_digest, state_digest)
+        provider,
+        _native_request(
+            source_digest,
+            state_digest,
+            isolation_time_s=args.isolation_time_s,
+            post_isolation_observation_s=args.post_isolation_observation_s,
+        ),
     )
     export_elapsed_ms = (time.perf_counter() - started) * 1000.0
     release = adapted.release
@@ -219,6 +247,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(args.output_dir / "resolved_release.json", release.model_dump(mode="json"))
     _save(args.output_dir / "campaign.json", campaign.model_dump(mode="json"))
     _save(args.output_dir / "campaign_result.json", result)
+    mass_balance = release.provider_mass_balance
+    limitations = [
+        "synthetic LayeredTank geometry, initial state, opening and atmospheric boundary",
+        "literature frequency is diagnostic input and is not site-calibrated",
+        "facility scope remains incomplete; this one-case result is not total facility IR/F-N",
+    ]
+    if release.termination_basis == "synthetic_diagnostic_horizon":
+        limitations.insert(
+            1,
+            "native packet uses a bounded horizon and retains residual inventory",
+        )
+    elif release.termination_basis == "reviewed_isolation_success":
+        limitations.insert(
+            1,
+            "native packet uses a declared diagnostic isolation branch and retains upstream inventory",
+        )
     verification = {
         "schema_version": "prism.native_lh2dt_frequency_case.v1",
         "status": result.get("status"),
@@ -230,6 +274,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "provider_source_digest": release.provider_source_digest,
         "provider_result_digest": adapted.provider_result_digest,
         "provider_duration_s": release.duration_s,
+        "provider_termination_basis": release.termination_basis,
+        "provider_isolation_success": mass_balance.isolation_success if mass_balance else None,
+        "provider_isolation_time_s": mass_balance.isolation_time_s if mass_balance else None,
+        "provider_post_isolation_observation_s": mass_balance.post_isolation_observation_s if mass_balance else None,
+        "provider_available_mass_kg": release.available_mass_kg,
+        "provider_final_mass_kg": mass_balance.final_mass_kg if mass_balance else None,
+        "provider_residual_inventory_kg": mass_balance.final_mass_kg if mass_balance else None,
         "provider_mass_residual_kg": release.cumulative_mass_out_kg - release.integrated_mass_kg,
         "literature_frequency_bound": True,
         "frequency_source": "compiled campaign LH2_VESSEL AREA_0.01% literature row",
@@ -245,12 +296,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "facility_qra_claim": False,
         "physical_validation_claim": False,
         "facility_total_risk_available": result.get("total_facility_annual_ir_low_high") is not None,
-        "limitations": [
-            "synthetic LayeredTank geometry, initial state, opening and atmospheric boundary",
-            "native packet uses a bounded horizon and retains residual inventory",
-            "literature frequency is diagnostic input and is not site-calibrated",
-            "facility scope remains incomplete; this one-case result is not total facility IR/F-N",
-        ],
+        "limitations": limitations,
     }
     _save(args.output_dir / "verification.json", verification)
     return verification
@@ -263,6 +309,18 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--backend-config", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--isolation-time-s",
+        type=float,
+        default=None,
+        help="optional explicit provider isolation command time; keeps the legacy bounded-horizon mode when omitted",
+    )
+    parser.add_argument(
+        "--post-isolation-observation-s",
+        type=float,
+        default=0.0,
+        help="provider zero-flow observation interval used with --isolation-time-s",
+    )
     args = parser.parse_args()
     try:
         verification = run(args)
