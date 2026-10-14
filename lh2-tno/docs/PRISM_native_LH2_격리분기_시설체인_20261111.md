@@ -66,3 +66,5 @@ python scripts/run_native_isolation_catalog_facility_chain.py `
 ## IJHE 완료 감사 연결
 
 최신 완료 감사([`ijhe_completion_audit_with_native_isolation_catalog_facility_chain_checks.json`](../results/20261111/ijhe_completion_audit_with_native_isolation_catalog_facility_chain_checks.json))는 34개 검사 중 29개를 통과시키고 5개 strict blocker를 남긴다. `diagnostic_native_isolation_catalog_facility_chain`은 24개 exact packet, 24개 case, 96개 risk atom, 조건부 시설 IR/F-N 경로와 처리시간을 확인한다. 감사는 시설 전체 IR/F-N을 보류 상태로 유지하며, 적격 provider·독립 물리검증·완전 사고범위가 준비되기 전에는 결과를 시설 QRA로 승격하지 않는다.
+
+일반 수신점에서 0값이 나와도 계산 경로가 끊긴 것으로 오해하지 않도록, 근접 수신점 campaign을 같은 catalog에 재결합한 별도 검증도 실행했다. [`near_receptor_v3 verification`](../results/20261111/native_isolation_catalog_facility_chain_near_receptor_v3/verification.json)은 24개 case·96개 atom 중 1개 비영 harm atom, 조건부 IR `4.68×10⁻⁵/year`, N=1 F/N endpoint와 `zero_is_not_zero_facility_risk=true`를 기록한다. 이 geometry는 합성 진단용이며 시설 전체 QRA 승격을 열지 않는다. 상세한 재현 절차는 [`근접 수신점 비영 피해 연결 검증`](PRISM_native_LH2_근접수신점_비영피해_검증_20261111.md)에서 확인한다.

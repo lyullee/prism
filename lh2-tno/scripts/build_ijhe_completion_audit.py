@@ -99,6 +99,11 @@ def main() -> int:
         help="optional diagnostic facility-chain verification consuming the native isolation catalog",
     )
     parser.add_argument(
+        "--native-isolation-catalog-near-receptor-verification",
+        type=Path,
+        help="optional nonzero-harm near-receptor replay verification consuming the native isolation catalog",
+    )
+    parser.add_argument(
         "--state-snapshot-binding-audit",
         type=Path,
         help="optional state-snapshot/provider-echo binding audit",
@@ -423,6 +428,15 @@ def main() -> int:
             native_isolation_catalog_facility_chain_verification["_record_path"] = str(
                 args.native_isolation_catalog_facility_chain_verification
             )
+        native_isolation_catalog_near_receptor_verification = (
+            _object(args.native_isolation_catalog_near_receptor_verification)
+            if args.native_isolation_catalog_near_receptor_verification
+            else None
+        )
+        if native_isolation_catalog_near_receptor_verification is not None:
+            native_isolation_catalog_near_receptor_verification["_record_path"] = str(
+                args.native_isolation_catalog_near_receptor_verification
+            )
         state_snapshot_binding_audit = (
             _object(args.state_snapshot_binding_audit)
             if args.state_snapshot_binding_audit
@@ -702,6 +716,7 @@ def main() -> int:
             observed_hazop_vaporizer_isolation_branch_evidence=observed_hazop_vaporizer_isolation_branch_evidence,
             native_scope_isolation_branch_catalog_audit=native_scope_isolation_branch_catalog_audit,
             native_isolation_catalog_facility_chain_verification=native_isolation_catalog_facility_chain_verification,
+            native_isolation_catalog_near_receptor_verification=native_isolation_catalog_near_receptor_verification,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

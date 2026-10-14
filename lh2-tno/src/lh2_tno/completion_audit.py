@@ -110,6 +110,7 @@ def build_ijhe_completion_audit(
     observed_hazop_vaporizer_isolation_branch_evidence: Mapping[str, Any] | None = None,
     native_scope_isolation_branch_catalog_audit: Mapping[str, Any] | None = None,
     native_isolation_catalog_facility_chain_verification: Mapping[str, Any] | None = None,
+    native_isolation_catalog_near_receptor_verification: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -621,6 +622,77 @@ def build_ijhe_completion_audit(
                     "The native isolation packets reached the diagnostic facility chain and produced "
                     "risk atoms plus conditional IR/F-N accounting. This check preserves the strict "
                     "provider-qualification, independent-validation, and facility-QRA gates."
+                ),
+            }
+        )
+    if native_isolation_catalog_near_receptor_verification is not None:
+        near_receptor = native_isolation_catalog_near_receptor_verification
+        harm_diagnostic = near_receptor.get("harm_diagnostic")
+        harm_diagnostic = harm_diagnostic if isinstance(harm_diagnostic, Mapping) else {}
+        near_ir = near_receptor.get("conditional_diagnostic_facility_annual_ir_low_high")
+        fn_diagnostic = near_receptor.get(
+            "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+        )
+        near_geometry = near_receptor.get("receptor_geometry")
+        near_receptor_valid = (
+            near_receptor.get("schema_version")
+            == "prism.native_isolation_catalog_facility_chain.v1"
+            and near_receptor.get("status")
+            == "NATIVE_ISOLATION_CATALOG_FACILITY_CHAIN_EXECUTED_DIAGNOSTIC"
+            and near_receptor.get("facility_id") == "generic-lh2-near-receptor-diagnostic"
+            and near_receptor.get("facility_assessment_status") == "PARTIAL_FACILITY_SCOPE"
+            and near_receptor.get("conditional_diagnostic_facility_risk_available") is True
+            and near_receptor.get("facility_qra_claim") is False
+            and near_receptor.get("provider_packet_promoted") is False
+            and near_receptor.get("physical_validation_claim") is False
+            and isinstance(harm_diagnostic, Mapping)
+            and harm_diagnostic.get("status") == "NONZERO_RECEPTOR_HARM_REACHED"
+            and isinstance(harm_diagnostic.get("positive_receptor_harm_atom_count"), int)
+            and harm_diagnostic.get("positive_receptor_harm_atom_count") > 0
+            and harm_diagnostic.get("zero_is_not_zero_facility_risk") is True
+            and isinstance(near_ir, Mapping)
+            and any(
+                isinstance(pair, list)
+                and len(pair) == 2
+                and all(_finite(value) and value > 0.0 for value in pair)
+                for pair in near_ir.values()
+                if isinstance(near_ir, Mapping)
+            )
+            and isinstance(fn_diagnostic, Mapping)
+            and fn_diagnostic.get("status") == "CURVE_AVAILABLE"
+            and isinstance(near_geometry, Mapping)
+            and bool(near_geometry.get("receptor_ids"))
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_isolation_catalog_near_receptor_harm",
+                "status": "PASS" if near_receptor_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if near_receptor_valid
+                    else "near-receptor diagnostic does not prove a nonzero harm-to-IR/F-N path with explicit zero-value controls"
+                ),
+                "evidence": {
+                    "record": near_receptor.get("_record_path"),
+                    "facility_id": near_receptor.get("facility_id"),
+                    "facility_assessment_status": near_receptor.get("facility_assessment_status"),
+                    "conditional_diagnostic_facility_risk_available": near_receptor.get(
+                        "conditional_diagnostic_facility_risk_available"
+                    ),
+                    "conditional_diagnostic_facility_annual_ir_low_high": near_ir,
+                    "conditional_diagnostic_facility_expected_death_fn_diagnostics": fn_diagnostic,
+                    "harm_diagnostic": harm_diagnostic,
+                    "receptor_geometry": near_geometry,
+                    "provider_packet_promoted": near_receptor.get("provider_packet_promoted"),
+                    "physical_validation_claim": near_receptor.get("physical_validation_claim"),
+                    "facility_qra_claim": near_receptor.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "A current native-packet near-receptor replay reached a nonzero conditional harm and IR/F-N curve. "
+                    "The explicit receptor geometry and zero-value interpretation prevent a zero at a distant receptor "
+                    "from being mistaken for zero facility risk; provider qualification, physical validation, and full "
+                    "facility QRA promotion remain closed."
                 ),
             }
         )

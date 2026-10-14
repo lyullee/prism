@@ -1,0 +1,53 @@
+{
+  "schema_version": "prism.native_isolation_catalog_frequency_scenarios.v1",
+  "scenarios": [
+    {
+      "id": "native-isolation-catalog-literature-published",
+      "asset_quantiles": {
+        "storage-shell": "published",
+        "transfer-line": "published",
+        "transfer-valve": "published",
+        "pressure-relief-vent": "published",
+        "transfer-pump": "published",
+        "ambient-vaporizer": "published",
+        "reliquefier": "published"
+      },
+      "event_quantiles": {},
+      "provenance": "PRISM literature catalogue rates; native isolation catalog facility-chain diagnostic only",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "native-isolation-catalog-literature-p05",
+      "asset_quantiles": {
+        "storage-shell": "p05",
+        "transfer-line": "p05",
+        "transfer-valve": "p05",
+        "pressure-relief-vent": "fixed",
+        "transfer-pump": "fixed",
+        "ambient-vaporizer": "fixed",
+        "reliquefier": "fixed"
+      },
+      "event_quantiles": {},
+      "provenance": "PRISM literature catalogue rates; native isolation catalog facility-chain diagnostic only",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "native-isolation-catalog-literature-p95",
+      "asset_quantiles": {
+        "storage-shell": "p95",
+        "transfer-line": "p95",
+        "transfer-valve": "p95",
+        "pressure-relief-vent": "fixed",
+        "transfer-pump": "fixed",
+        "ambient-vaporizer": "fixed",
+        "reliquefier": "fixed"
+      },
+      "event_quantiles": {},
+      "provenance": "PRISM literature catalogue rates; native isolation catalog facility-chain diagnostic only",
+      "correlation_assumption": "within_asset_shared_quantile"
+    }
+  ],
+  "event_catalogue_digest": "8755ffa3437194658097bc76cadd999b82d6b179be555893acbeac9b146ea20c",
+  "frequency_inference_performed": false,
+  "facility_credible_interval": false
+}

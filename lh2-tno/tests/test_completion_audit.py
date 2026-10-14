@@ -2747,6 +2747,72 @@ def test_completion_audit_blocks_native_isolation_facility_chain_without_conditi
     assert report["complete_facility_qra_claim"] is False
 
 
+def _native_isolation_near_receptor(**overrides):
+    record = {
+        "schema_version": "prism.native_isolation_catalog_facility_chain.v1",
+        "status": "NATIVE_ISOLATION_CATALOG_FACILITY_CHAIN_EXECUTED_DIAGNOSTIC",
+        "facility_id": "generic-lh2-near-receptor-diagnostic",
+        "facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
+        "conditional_diagnostic_facility_risk_available": True,
+        "conditional_diagnostic_facility_annual_ir_low_high": {
+            "worker-01": [4.68e-05, 4.68e-05]
+        },
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": {
+            "status": "CURVE_AVAILABLE"
+        },
+        "harm_diagnostic": {
+            "status": "NONZERO_RECEPTOR_HARM_REACHED",
+            "positive_receptor_harm_atom_count": 1,
+            "zero_is_not_zero_facility_risk": True,
+        },
+        "receptor_geometry": {"receptor_ids": ["worker-01"]},
+        "provider_packet_promoted": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_nonzero_near_receptor_harm_diagnostic():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_isolation_catalog_near_receptor_verification=_native_isolation_near_receptor(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_isolation_catalog_near_receptor_harm"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["harm_diagnostic"]["positive_receptor_harm_atom_count"] == 1
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_near_receptor_harm_without_zero_value_control():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_isolation_catalog_near_receptor_verification=_native_isolation_near_receptor(
+            harm_diagnostic={
+                "status": "NONZERO_RECEPTOR_HARM_REACHED",
+                "positive_receptor_harm_atom_count": 1,
+                "zero_is_not_zero_facility_risk": False,
+            }
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_isolation_catalog_near_receptor_harm"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_records_observed_state_evidence_without_accident_promotion():
     model_binding = {
         "schema": "prism.observed_state_model_binding_audit.v1",

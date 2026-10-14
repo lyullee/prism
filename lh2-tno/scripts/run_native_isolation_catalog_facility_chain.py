@@ -51,6 +51,67 @@ def _write(path: Path, value: Any) -> None:
     )
 
 
+def _harm_diagnostic(result: dict[str, Any]) -> dict[str, Any]:
+    """Summarise receptor harm without treating a zero result as no risk."""
+    atoms = result.get("risk_atoms", [])
+    positive = 0
+    zero = 0
+    for atom in atoms if isinstance(atoms, list) else []:
+        receptor_harm = atom.get("receptor_harm_low_high") if isinstance(atom, dict) else None
+        values: list[float] = []
+        if isinstance(receptor_harm, dict):
+            for pair in receptor_harm.values():
+                if isinstance(pair, list):
+                    values.extend(
+                        float(value)
+                        for value in pair
+                        if isinstance(value, (int, float))
+                    )
+        if any(value > 0.0 for value in values):
+            positive += 1
+        elif values:
+            zero += 1
+    cases = result.get("cases", [])
+    domain_truncated = 0
+    flammability_proven = 0
+    for case in cases if isinstance(cases, list) else []:
+        domain = case.get("domain_assessment") if isinstance(case, dict) else None
+        if not isinstance(domain, dict):
+            continue
+        if domain.get("domain_truncated") is True:
+            domain_truncated += 1
+        if domain.get("outside_domain_flammability_proven_at_ignition") is True:
+            flammability_proven += 1
+    if positive:
+        status = "NONZERO_RECEPTOR_HARM_REACHED"
+        interpretation = (
+            "At least one executed risk atom reached a declared receptor harm endpoint. "
+            "This is a conditional diagnostic contribution; it is not a qualified facility total."
+        )
+    elif domain_truncated:
+        status = "ZERO_RECEPTOR_HARM_WITH_DOMAIN_LIMITS"
+        interpretation = (
+            "All saved receptor harm values are zero, but one or more consequence domains were "
+            "truncated. The zero values must not be interpreted as zero facility risk."
+        )
+    else:
+        status = "ZERO_RECEPTOR_HARM_AT_DECLARED_RECEPTORS"
+        interpretation = (
+            "All saved receptor harm values are zero at the declared receptors for the executed "
+            "conditions. This is a conditional model result, not a claim of zero facility risk."
+        )
+    return {
+        "status": status,
+        "risk_atom_count": len(atoms) if isinstance(atoms, list) else 0,
+        "positive_receptor_harm_atom_count": positive,
+        "zero_receptor_harm_atom_count": zero,
+        "domain_truncated_case_count": domain_truncated,
+        "outside_domain_flammability_proven_case_count": flammability_proven,
+        "zero_is_not_zero_facility_risk": True,
+        "interpretation": interpretation,
+    }
+
+
 def _backend(path: Path) -> BackendConfig:
     raw = _object(path)
     for package in raw.get("packages", []):
@@ -115,6 +176,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     events = generate_events(facility, campaign.frequency_plan)
     provider_worklist = build_provider_release_worklist(manifest, campaign.frequency_plan)
     result = ResearchPipeline(facility, IsolatedBackend(backend_config)).facility_risk(campaign)
+    harm_diagnostic = _harm_diagnostic(result)
     scope_matrix = build_accident_scope_matrix(
         campaign,
         result,
@@ -189,6 +251,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "conditional_diagnostic_facility_expected_death_fn_low_high": assessment.get(
                 "conditional_diagnostic_facility_expected_death_fn_low_high"
             ),
+            "conditional_diagnostic_facility_expected_death_fn_diagnostics": assessment.get(
+                "conditional_diagnostic_facility_expected_death_fn_diagnostics"
+            ),
+            "facility_assessment_status": assessment.get("status"),
+            "harm_diagnostic": harm_diagnostic,
+            "receptor_geometry": {
+                "receptor_ids": [receptor.id for receptor in facility.receptors],
+                "receptor_positions_enu_m": [
+                    list(receptor.position_enu_m) for receptor in facility.receptors
+                ],
+                "interpretation": "declared diagnostic geometry; not a site survey",
+            },
             "conditional_diagnostic_facility_coverage": assessment.get(
                 "conditional_diagnostic_facility_coverage"
             ),
@@ -216,6 +290,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "conditional_diagnostic_facility_risk_available": assessment.get(
             "conditional_diagnostic_facility_risk_available"
         ),
+        "harm_diagnostic": harm_diagnostic,
         "facility_total_risk_available": assessment.get("facility_total_risk_available"),
         "provider_packet_promoted": False,
     }
