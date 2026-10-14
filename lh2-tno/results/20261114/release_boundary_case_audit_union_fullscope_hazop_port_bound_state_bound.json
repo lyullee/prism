@@ -17,6 +17,19 @@
   "facility_evidence_request_duplicate_case_keys": [],
   "strict_release_boundary_eligible_case_count": 3,
   "strict_release_boundary_blocked_case_count": 41,
+  "numerically_closed_case_count": 15,
+  "numerically_open_case_count": 29,
+  "numerical_closure_status_counts": {
+    "NUMERICALLY_CLOSED": 3,
+    "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 12,
+    "NUMERICALLY_OPEN": 29
+  },
+  "consequence_domain_status_counts": {
+    "CLOSED": 43,
+    "TRUNCATED": 1
+  },
+  "operator_review_required_case_count": 12,
+  "consequence_domain_truncated_case_count": 1,
   "provider_qualification_status_counts": {
     "BLOCKED": 44
   },
@@ -53,9 +66,36 @@
         "time_s": 0.05,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.05
+      ],
+      "available_mass_kg": [
+        0.028492061899609754
+      ],
+      "cumulative_mass_out_kg": [
+        0.008166514093845672
+      ],
+      "residual_mass_kg": [
+        0.02032554780576408
+      ],
+      "residual_fraction": [
+        0.7133758124413759
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -7.806255641895632e-18,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [
+        "consequence_domain_truncated"
+      ],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "TRUNCATED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -117,9 +157,34 @@
         "time_s": 5.999999999999993e-05,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        5.999999999999993e-05
+      ],
+      "available_mass_kg": [
+        0.028492061899609754
+      ],
+      "cumulative_mass_out_kg": [
+        0.00010057792972414069
+      ],
+      "residual_mass_kg": [
+        0.02839148396988561
+      ],
+      "residual_fraction": [
+        0.9964699666146127
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -2.14806397370833e-20,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -179,9 +244,34 @@
         "time_s": 5.999999999999999e-06,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        5.999999999999999e-06
+      ],
+      "available_mass_kg": [
+        0.028492061899609754
+      ],
+      "cumulative_mass_out_kg": [
+        0.00010057966768755135
+      ],
+      "residual_mass_kg": [
+        0.028391482231922203
+      ],
+      "residual_fraction": [
+        0.9964699056164507
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -5.902760851178405e-20,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -241,9 +331,34 @@
         "time_s": 1e-06,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        1e-06
+      ],
+      "available_mass_kg": [
+        0.028492061899609754
+      ],
+      "cumulative_mass_out_kg": [
+        0.00016756351240572947
+      ],
+      "residual_mass_kg": [
+        0.028324498387204026
+      ],
+      "residual_fraction": [
+        0.9941189404615177
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -1.0577323928838075e-19,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -303,9 +418,34 @@
         "time_s": 1e-06,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        1e-06
+      ],
+      "available_mass_kg": [
+        0.028492061899609754
+      ],
+      "cumulative_mass_out_kg": [
+        0.0016625666208320196
+      ],
+      "residual_mass_kg": [
+        0.026829495278777735
+      ],
+      "residual_fraction": [
+        0.9416480763417551
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": -8.673617379884035e-19,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -365,9 +505,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.10622803086219497
+      ],
+      "cumulative_mass_out_kg": [
+        4.7591905520014575e-06
+      ],
+      "residual_mass_kg": [
+        0.10622327167164297
+      ],
+      "residual_fraction": [
+        0.9999551983547716
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -1.4427299128566867e-22,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -425,9 +588,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.10622803086219497
+      ],
+      "cumulative_mass_out_kg": [
+        4.758412078620518e-05
+      ],
+      "residual_mass_kg": [
+        0.10618044674140877
+      ],
+      "residual_fraction": [
+        0.9995520568309514
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -8.525477135461645e-21,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -485,9 +671,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.10622803086219497
+      ],
+      "cumulative_mass_out_kg": [
+        0.0004750626227775085
+      ],
+      "residual_mass_kg": [
+        0.10575296823941746
+      ],
+      "residual_fraction": [
+        0.9955278976846159
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 6.542689745034449e-20,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -545,9 +754,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.10622803086219497
+      ],
+      "cumulative_mass_out_kg": [
+        0.004673369291283811
+      ],
+      "residual_mass_kg": [
+        0.10155466157091116
+      ],
+      "residual_fraction": [
+        0.9560062513316624
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -8.673617379884035e-18,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -605,9 +837,32 @@
         "time_s": 0.30000000000000004,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.30000000000000004
+      ],
+      "available_mass_kg": [
+        0.10622803086219497
+      ],
+      "cumulative_mass_out_kg": [
+        0.04473063270730533
+      ],
+      "residual_mass_kg": [
+        0.06149739815488964
+      ],
+      "residual_fraction": [
+        0.5789187435345342
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -6.245004513516506e-17,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -665,9 +920,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        1.8985903127889936e-05
+      ],
+      "cumulative_mass_out_kg": [
+        1.582158593990828e-05
+      ],
+      "residual_mass_kg": [
+        3.1643171879816554e-06
+      ],
+      "residual_fraction": [
+        0.16666666666666663
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.7617023488948199e-22,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -725,9 +1003,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.0001898590312788994
+      ],
+      "cumulative_mass_out_kg": [
+        0.00015821585939908284
+      ],
+      "residual_mass_kg": [
+        3.164317187981657e-05
+      ],
+      "residual_fraction": [
+        0.16666666666666666
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -2.1647729574584157e-19,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -785,9 +1086,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.0018985903127889947
+      ],
+      "cumulative_mass_out_kg": [
+        0.001582158593990829
+      ],
+      "residual_mass_kg": [
+        0.0003164317187981658
+      ],
+      "residual_fraction": [
+        0.16666666666666666
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -3.888421754884625e-18,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -845,9 +1169,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.018985903127889944
+      ],
+      "cumulative_mass_out_kg": [
+        0.015821585939908286
+      ],
+      "residual_mass_kg": [
+        0.003164317187981658
+      ],
+      "residual_fraction": [
+        0.16666666666666669
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": -3.122502256758253e-17,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -905,9 +1252,32 @@
         "time_s": 0.3,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.3
+      ],
+      "available_mass_kg": [
+        0.1898590312788994
+      ],
+      "cumulative_mass_out_kg": [
+        0.15821585939908284
+      ],
+      "residual_mass_kg": [
+        0.03164317187981655
+      ],
+      "residual_fraction": [
+        0.1666666666666666
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 2.7755575615628914e-16,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -963,9 +1333,32 @@
         "time_s": 0.5,
         "provenance": "selected exact strict emergency-relief worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.0008087150217064195
+      ],
+      "cumulative_mass_out_kg": [
+        0.0006739291847553497
+      ],
+      "residual_mass_kg": [
+        0.00013478583695106987
+      ],
+      "residual_fraction": [
+        0.1666666666666666
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_emergency_relief_discharge_is_not_allowed"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1022,9 +1415,32 @@
         "time_s": 0.30000000000000004,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.30000000000000004
+      ],
+      "available_mass_kg": [
+        1.0
+      ],
+      "cumulative_mass_out_kg": [
+        0.0560663237977497
+      ],
+      "residual_mass_kg": [
+        0.9439336762022503
+      ],
+      "residual_fraction": [
+        0.9439336762022503
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.5959455978986625e-16,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1082,9 +1498,32 @@
         "time_s": 0.30000000000000004,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.30000000000000004
+      ],
+      "available_mass_kg": [
+        1.0
+      ],
+      "cumulative_mass_out_kg": [
+        0.0005606632379774973
+      ],
+      "residual_mass_kg": [
+        0.9994393367620225
+      ],
+      "residual_fraction": [
+        0.9994393367620225
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 1.8202184342472387e-18,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1140,9 +1579,30 @@
         "time_s": 1.6000000000000003,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        1.6000000000000003
+      ],
+      "available_mass_kg": [
+        4.956379784841933e-06
+      ],
+      "cumulative_mass_out_kg": [
+        4.956379784841932e-06
+      ],
+      "residual_mass_kg": [
+        8.470329472543003e-22
+      ],
+      "residual_fraction": [
+        1.7089750665289536e-16
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1194,9 +1654,32 @@
         "time_s": 600.0,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        600.0
+      ],
+      "available_mass_kg": [
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        4.956379784841932e-06
+      ],
+      "residual_mass_kg": [
+        0.0008188972428790857
+      ],
+      "residual_fraction": [
+        0.9939839072761306
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_over_600s",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_inventory_over_600s_is_not_allowed"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1251,9 +1734,30 @@
         "time_s": 0.5,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        7.221896865709533e-06
+      ],
+      "residual_mass_kg": [
+        0.0008166317257982181
+      ],
+      "residual_fraction": [
+        0.9912340048437761
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1306,9 +1810,39 @@
         "time_s": 1e-05,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        1e-05,
+        1e-05
+      ],
+      "available_mass_kg": [
+        0.0008238536226639276,
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        3.595846016954127e-08,
+        3.595846016954127e-08
+      ],
+      "residual_mass_kg": [
+        0.0008238176642037581,
+        0.0008238176642037581
+      ],
+      "residual_fraction": [
+        0.9999563533385296,
+        0.9999563533385296
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_two_sided_rupture_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1367,9 +1901,39 @@
         "time_s": 1e-05,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        1e-05,
+        1e-05
+      ],
+      "available_mass_kg": [
+        0.0008238536226639276,
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        3.595846016954127e-08,
+        3.595846016954127e-08
+      ],
+      "residual_mass_kg": [
+        0.0008238176642037581,
+        0.0008238176642037581
+      ],
+      "residual_fraction": [
+        0.9999563533385296,
+        0.9999563533385296
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_two_sided_rupture_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1427,9 +1991,30 @@
         "time_s": 0.5,
         "provenance": "selected exact strict worklist packet; provider clock retained"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.0008238536226639276
+      ],
+      "cumulative_mass_out_kg": [
+        1.6805075003306098e-06
+      ],
+      "residual_mass_kg": [
+        0.000822173115163597
+      ],
+      "residual_fraction": [
+        0.9979601867927743
+      ],
       "isolation_status": "provider_declared_isolation_success",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": true,
+      "numerical_closure_status": "NUMERICALLY_CLOSED",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "model_prediction"
       ],
@@ -1482,9 +2067,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        1.6583741752980332e-09
+      ],
+      "residual_mass_kg": [
+        0.009999998341625824
+      ],
+      "residual_fraction": [
+        0.9999998341625824
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1543,9 +2153,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        1.6583741752980332e-09
+      ],
+      "residual_mass_kg": [
+        0.009999998341625824
+      ],
+      "residual_fraction": [
+        0.9999998341625824
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1604,9 +2239,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        1.653545292876029e-07
+      ],
+      "residual_mass_kg": [
+        0.009999834645470712
+      ],
+      "residual_fraction": [
+        0.9999834645470712
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1665,9 +2325,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        1.653545292876029e-07
+      ],
+      "residual_mass_kg": [
+        0.009999834645470712
+      ],
+      "residual_fraction": [
+        0.9999834645470712
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1726,9 +2411,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        4.629740437409607e-06
+      ],
+      "residual_mass_kg": [
+        0.00999537025956259
+      ],
+      "residual_fraction": [
+        0.999537025956259
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1787,9 +2497,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        4.629740437409607e-06
+      ],
+      "residual_mass_kg": [
+        0.00999537025956259
+      ],
+      "residual_fraction": [
+        0.999537025956259
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1848,9 +2583,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        0.00010052648374898754
+      ],
+      "residual_mass_kg": [
+        0.009899473516251013
+      ],
+      "residual_fraction": [
+        0.9899473516251013
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1909,9 +2669,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        0.00010052648374898754
+      ],
+      "residual_mass_kg": [
+        0.009899473516251013
+      ],
+      "residual_fraction": [
+        0.9899473516251013
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -1970,9 +2755,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        0.0018175777704088902
+      ],
+      "residual_mass_kg": [
+        0.00818242222959111
+      ],
+      "residual_fraction": [
+        0.818242222959111
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2031,9 +2841,34 @@
         "time_s": 0.37,
         "provenance": "synthetic vertical provider history; no flow extrapolation"
       },
+      "release_duration_s": [
+        0.37
+      ],
+      "available_mass_kg": [
+        0.01
+      ],
+      "cumulative_mass_out_kg": [
+        0.0018175777704088902
+      ],
+      "residual_mass_kg": [
+        0.00818242222959111
+      ],
+      "residual_fraction": [
+        0.818242222959111
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "not_inventory_termination",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "termination_basis_synthetic_diagnostic_horizon_is_not_allowed"
+      ],
+      "operational_execution_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2092,9 +2927,32 @@
         "time_s": 1.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
       },
+      "release_duration_s": [
+        1.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        1.2125616572864818e-07
+      ],
+      "residual_mass_kg": [
+        0.00013404630215277215
+      ],
+      "residual_fraction": [
+        0.9990962333424837
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2150,9 +3008,32 @@
         "time_s": 1.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
       },
+      "release_duration_s": [
+        1.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        1.2125616572864818e-07
+      ],
+      "residual_mass_kg": [
+        0.00013404630215277215
+      ],
+      "residual_fraction": [
+        0.9990962333424837
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2208,9 +3089,32 @@
         "time_s": 0.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        4.022010171050504e-07
+      ],
+      "residual_mass_kg": [
+        0.00013376535730139574
+      ],
+      "residual_fraction": [
+        0.9970022483665517
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2266,9 +3170,32 @@
         "time_s": 0.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013376535730139574 kg"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        4.022010171050504e-07
+      ],
+      "residual_mass_kg": [
+        0.00013376535730139574
+      ],
+      "residual_fraction": [
+        0.9970022483665517
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2324,9 +3251,32 @@
         "time_s": 0.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6216519132821583e-06
+      ],
+      "residual_mass_kg": [
+        0.00013154590640521862
+      ],
+      "residual_fraction": [
+        0.9804598671531414
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2382,9 +3332,32 @@
         "time_s": 0.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013154590640521862 kg"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6216519132821583e-06
+      ],
+      "residual_mass_kg": [
+        0.00013154590640521862
+      ],
+      "residual_fraction": [
+        0.9804598671531414
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2440,9 +3413,32 @@
         "time_s": 0.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.1140345784364108e-05
+      ],
+      "residual_mass_kg": [
+        0.00011302721253413668
+      ],
+      "residual_fraction": [
+        0.8424332524992445
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2498,9 +3494,32 @@
         "time_s": 0.5,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00011302721253413668 kg"
       },
+      "release_duration_s": [
+        0.5
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.1140345784364108e-05
+      ],
+      "residual_mass_kg": [
+        0.00011302721253413668
+      ],
+      "residual_fraction": [
+        0.8424332524992445
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2556,9 +3575,32 @@
         "time_s": 0.0625,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
       },
+      "release_duration_s": [
+        0.0625
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6236186797952155e-05
+      ],
+      "residual_mass_kg": [
+        0.00010793137152054863
+      ],
+      "residual_fraction": [
+        0.8044520812127326
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],
@@ -2614,9 +3656,32 @@
         "time_s": 0.0625,
         "provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00010793137152054863 kg"
       },
+      "release_duration_s": [
+        0.0625
+      ],
+      "available_mass_kg": [
+        0.00013416755831850078
+      ],
+      "cumulative_mass_out_kg": [
+        2.6236186797952155e-05
+      ],
+      "residual_mass_kg": [
+        0.00010793137152054863
+      ],
+      "residual_fraction": [
+        0.8044520812127326
+      ],
       "isolation_status": "not_declared",
       "inventory_status": "provider_declared_inventory_depletion",
       "end_to_end_residual_kg": 0.0,
+      "release_termination_reasons": [
+        "provider_inventory_residual_not_depleted"
+      ],
+      "operational_execution_reasons": [],
+      "consequence_domain_reasons": [],
+      "numerical_release_closed": false,
+      "numerical_closure_status": "NUMERICALLY_OPEN",
+      "consequence_domain_status": "CLOSED",
       "provider_input_origins": [
         "synthetic"
       ],

@@ -27,6 +27,11 @@
 
 **케이스별 방출 경계 승격 표 (2026-11-14):** 최신 전체 union 44개 시설 case를 설비·포트·운전
 모드·HAZOP 시나리오·종료 기준·차단·재고·질량 잔차 단위로 다시 펼쳤다. [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)은 개별 방출 경계 조건을 만족한 3개와 보류된 41개를 구분하고, `synthetic_diagnostic_horizon`, `inventory_over_600s`, 비상 방출, 양단 파열, 운영자 제한, 재고 잔차 등의 이유를 행별로 남긴다. 3개 행도 provider 원점이 `model_prediction`이고 독립 물리검증이 없으므로 시설 QRA 승격은 0건이다. 복합키는 `event × release branch × annual condition`이며 재현 규칙은 [`케이스별 방출 경계 승격 표`](docs/PRISM_release_boundary_case_audit_20261114.md)에서 확인할 수 있다.
+이 표에는 strict 승격 여부와 별도로 수치 종료 상태도 들어 있다. 현재 44개 중 15개는
+종료 시간·재고·질량 잔차가 수치상 닫혔고, 그중 12개는 `EXECUTED_OPERATOR_LIMITED`라서
+운영자 독립 종료 근거를 기다린다. 나머지 29개는 종료 기준 또는 잔여 재고가 아직
+열려 있다. 수치상 닫혔다는 사실은 provider qualification이나 시설 IR/F-N 승격을
+의미하지 않는다.
 
 **관측 HAZOP→문헌 provider event 연결 (2026-11-10):** `scripts/audit_observed_hazop_provider_binding.py`는 현장 관측값과 명시적 `operating_mode`로 선택된 HAZOP 시나리오를 문헌 `provider_event_id`·설비·사고 port에 exact-match로 묶습니다. [`inspection_center_hazop_provider_event_bindings.json`](examples/inspection_center_hazop_provider_event_bindings.json)은 인수 `vessel_hole`, 대기 벤트 `vent_hole`, 공급 기화기 `vaporizer_hole`의 진단 매핑입니다. 이 단계는 event family/release mode/port/빈도 필드의 일관성만 검사하고, 센서 빈도 학습·방출 packet 생성·SLABx-LH2·시설 QRA를 수행하지 않습니다. 최신 원장은 [`inspection_center_observed_hazop_provider_event_binding.json`](results/20261110/inspection_center_observed_hazop_provider_event_binding.json)이며, qualified provider packet이 없으므로 결과는 diagnostic-only입니다. 자세한 흐름은 [`관측 상태·운전 모드·HAZOP 런타임 연결`](docs/PRISM_관측상태_운전모드_HAZOP_런타임연결_20261110.md)을 참고하세요.
 

@@ -131,6 +131,82 @@ def _case_reasons(
     return list(dict.fromkeys(reasons))
 
 
+def _termination_reasons(
+    row: Mapping[str, Any],
+    *,
+    residual_tolerance_kg: float,
+) -> list[str]:
+    """Return only release-termination and mass-closure reasons.
+
+    ``status`` and consequence-domain limitations are deliberately excluded.
+    This second view lets a reviewer distinguish a numerically closed release
+    ledger from a row that is still blocked because the provider was marked
+    operator-limited or the consequence domain was truncated.  It does not
+    relax the strict gate used by :func:`_case_reasons`.
+    """
+
+    reasons: list[str] = []
+    termination = _as_mapping(row.get("termination"))
+    basis = termination.get("basis")
+    if basis not in _ALLOWED_BASES:
+        reasons.append(f"termination_basis_{basis or 'not_declared'}_is_not_allowed")
+    if basis == "reviewed_isolation_success" and row.get("isolation_status") != "provider_declared_isolation_success":
+        reasons.append("isolation_success_not_declared")
+    if basis == "inventory_depletion":
+        if row.get("inventory_status") != "provider_declared_inventory_depletion":
+            reasons.append("inventory_depletion_not_declared")
+        residuals = _as_mapping(row.get("provider")).get("residual_mass_kg")
+        values = (
+            [_finite(value) for value in residuals]
+            if isinstance(residuals, Sequence) and not isinstance(residuals, (str, bytes))
+            else []
+        )
+        if not values or any(value is None or abs(value) > residual_tolerance_kg for value in values):
+            reasons.append("provider_inventory_residual_not_depleted")
+    mass = _as_mapping(row.get("mass_ledger"))
+    residual = _finite(mass.get("end_to_end_residual_kg"))
+    if residual is None or abs(residual) > residual_tolerance_kg:
+        reasons.append("end_to_end_mass_residual_not_closed")
+    balances = _as_mapping(row.get("provider")).get("provider_mass_balance_statuses")
+    if balances and (
+        not isinstance(balances, Sequence)
+        or isinstance(balances, (str, bytes))
+        or not balances
+        or any(status != "CLOSED" for status in balances)
+    ):
+        reasons.append("provider_mass_balance_not_closed")
+    return list(dict.fromkeys(reasons))
+
+
+def _finite_values(value: Any) -> list[float]:
+    """Normalize scalar/list numeric release metrics without inventing values."""
+
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        return [number for item in value if (number := _finite(item)) is not None]
+    number = _finite(value)
+    return [] if number is None else [number]
+
+
+def _release_metrics(row: Mapping[str, Any]) -> dict[str, Any]:
+    """Expose provider duration and inventory values at the case-audit grain."""
+
+    provider = _as_mapping(row.get("provider"))
+    available = _finite_values(provider.get("available_mass_kg"))
+    released = _finite_values(provider.get("cumulative_mass_out_kg"))
+    residual = _finite_values(provider.get("residual_mass_kg"))
+    durations = _finite_values(provider.get("duration_s"))
+    residual_fraction: list[float | None] = []
+    for initial, remaining in zip(available, residual):
+        residual_fraction.append(None if initial == 0.0 else remaining / initial)
+    return {
+        "release_duration_s": durations,
+        "available_mass_kg": available,
+        "cumulative_mass_out_kg": released,
+        "residual_mass_kg": residual,
+        "residual_fraction": residual_fraction,
+    }
+
+
 def _required_evidence(
     boundary_reasons: Sequence[str],
     provider_reasons: Sequence[str],
@@ -286,6 +362,18 @@ def build_release_boundary_case_audit(
         event_id = str(ledger_row.get("event_id"))
         case = cases_by_key.get(_case_key(ledger_row), {})
         reasons = _case_reasons(case, ledger_row, residual_tolerance_kg=tolerance)
+        termination_reasons = _termination_reasons(
+            ledger_row,
+            residual_tolerance_kg=tolerance,
+        )
+        operational_reasons = [
+            f"status_{str(ledger_row.get('status', 'UNKNOWN')).lower()}"
+        ] if ledger_row.get("status", "UNKNOWN") != "EXECUTED" else []
+        domain_reasons = (
+            ["consequence_domain_truncated"]
+            if _as_mapping(case.get("domain_assessment")).get("domain_truncated") is True
+            else []
+        )
         provider_blockers = _provider_blockers(case, ledger_row)
         required_evidence = _required_evidence(reasons, provider_blockers)
         request = request_by_key.get(_case_key(ledger_row))
@@ -299,6 +387,15 @@ def build_release_boundary_case_audit(
         termination = _as_mapping(ledger_row.get("termination"))
         identity = _as_mapping(case.get("provider_packet_identity"))
         boundary_ok = not reasons
+        metrics = _release_metrics(ledger_row)
+        numerical_release_closed = not termination_reasons
+        if numerical_release_closed and operational_reasons:
+            numerical_closure_status = "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED"
+        elif numerical_release_closed:
+            numerical_closure_status = "NUMERICALLY_CLOSED"
+        else:
+            numerical_closure_status = "NUMERICALLY_OPEN"
+        domain_status = "TRUNCATED" if domain_reasons else "CLOSED"
         rows.append({
             "event_id": ledger_row.get("event_id"),
             "case_key": _case_key(ledger_row),
@@ -317,9 +414,16 @@ def build_release_boundary_case_audit(
                 "time_s": termination.get("time_s"),
                 "provenance": termination.get("provenance"),
             },
+            **metrics,
             "isolation_status": ledger_row.get("isolation_status"),
             "inventory_status": ledger_row.get("inventory_status"),
             "end_to_end_residual_kg": _as_mapping(ledger_row.get("mass_ledger")).get("end_to_end_residual_kg"),
+            "release_termination_reasons": termination_reasons,
+            "operational_execution_reasons": operational_reasons,
+            "consequence_domain_reasons": domain_reasons,
+            "numerical_release_closed": numerical_release_closed,
+            "numerical_closure_status": numerical_closure_status,
+            "consequence_domain_status": domain_status,
             "provider_input_origins": _provider_origins(case, ledger_row),
             "strict_release_boundary_eligible": boundary_ok,
             "strict_release_boundary_status": "ELIGIBLE" if boundary_ok else "PROMOTION_BLOCKED",
@@ -339,6 +443,8 @@ def build_release_boundary_case_audit(
             )),
         })
     status_counts = Counter(row["strict_release_boundary_status"] for row in rows)
+    numerical_closure_counts = Counter(row["numerical_closure_status"] for row in rows)
+    domain_status_counts = Counter(row["consequence_domain_status"] for row in rows)
     provider_status_counts = Counter(row["provider_qualification_status"] for row in rows)
     reasons = [reason for row in rows for reason in row["release_boundary_blocking_reasons"]]
     return {
@@ -365,6 +471,18 @@ def build_release_boundary_case_audit(
         "facility_evidence_request_duplicate_case_keys": request_duplicate_case_keys,
         "strict_release_boundary_eligible_case_count": status_counts.get("ELIGIBLE", 0),
         "strict_release_boundary_blocked_case_count": status_counts.get("PROMOTION_BLOCKED", 0),
+        "numerically_closed_case_count": sum(
+            row["numerical_release_closed"] is True for row in rows
+        ),
+        "numerically_open_case_count": sum(
+            row["numerical_release_closed"] is not True for row in rows
+        ),
+        "numerical_closure_status_counts": dict(sorted(numerical_closure_counts.items())),
+        "consequence_domain_status_counts": dict(sorted(domain_status_counts.items())),
+        "operator_review_required_case_count": numerical_closure_counts.get(
+            "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED", 0
+        ),
+        "consequence_domain_truncated_case_count": domain_status_counts.get("TRUNCATED", 0),
         "provider_qualification_status_counts": dict(sorted(provider_status_counts.items())),
         "termination_basis_counts": dict(sorted(Counter(
             row["termination"]["basis"] for row in rows

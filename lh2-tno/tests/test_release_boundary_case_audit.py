@@ -34,6 +34,9 @@ def _ledger_row(event_id, *, status="EXECUTED", basis="reviewed_isolation_succes
         "inventory_status": "provider_declared_inventory_depletion" if basis == "inventory_depletion" else "not_inventory_termination",
         "provider": {
             "provider_mass_balance_statuses": ["CLOSED"],
+            "duration_s": [0.5],
+            "available_mass_kg": [10.0],
+            "cumulative_mass_out_kg": [3.0],
             "residual_mass_kg": provider_residual,
         },
         "mass_ledger": {"end_to_end_residual_kg": residual},
@@ -60,6 +63,11 @@ def test_case_audit_keeps_release_boundary_and_provider_qualification_separate()
     assert "provider_input_is_not_actual_field_data" in row["provider_qualification_blocking_reasons"]
     assert row["evidence_request_status"] == "OPEN"
     assert any("qualification sidecar" in item for item in row["required_evidence"])
+    assert row["release_duration_s"] == [0.5]
+    assert row["available_mass_kg"] == [10.0]
+    assert row["residual_fraction"] == []
+    assert row["numerical_closure_status"] == "NUMERICALLY_CLOSED"
+    assert row["consequence_domain_status"] == "CLOSED"
 
 
 def test_case_audit_blocks_horizon_and_operator_limited_rows():
@@ -85,6 +93,9 @@ def test_case_audit_blocks_horizon_and_operator_limited_rows():
     assert "termination_basis_inventory_over_600s_is_not_allowed" in reasons
     assert "provider_inventory_residual_not_depleted" in reasons
     assert all(row["required_evidence"] for row in report["rows"])
+    assert report["numerical_closure_status_counts"]["NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED"] == 1
+    assert report["numerical_closure_status_counts"]["NUMERICALLY_OPEN"] == 2
+    assert report["operator_review_required_case_count"] == 1
 
 
 def test_case_audit_records_domain_truncation_and_does_not_promote_facility_qra():
@@ -95,6 +106,9 @@ def test_case_audit_records_domain_truncation_and_does_not_promote_facility_qra(
     row = report["rows"][0]
     assert row["strict_release_boundary_status"] == "PROMOTION_BLOCKED"
     assert "consequence_domain_truncated" in row["release_boundary_blocking_reasons"]
+    assert row["numerical_closure_status"] == "NUMERICALLY_CLOSED"
+    assert row["consequence_domain_status"] == "TRUNCATED"
+    assert report["consequence_domain_truncated_case_count"] == 1
     assert report["provider_qualification_claim"] is False
     assert report["facility_ir_fn_promotion"] is False
 

@@ -11,6 +11,14 @@
 요구합니다. 모든 행은 실제 source/result digest, qualification sidecar, 독립 검증이
 들어오기 전까지 `evidence_request_status=OPEN`으로 남습니다.
 
+이번 버전부터 `strict_release_boundary_eligible`과 별도로
+`numerical_closure_status`를 기록합니다. 이 값은 방출 종료 기준·격리/재고 상태·질량
+잔차가 수치상 닫혔는지만 보여주며, provider 자격이나 시설 QRA 승격을 의미하지
+않습니다. 따라서 `NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`는 계산상 종료
+시간과 질량 장부는 있으나 provider가 운영자 제한으로 표시된 사례를 뜻합니다.
+`release_duration_s`, 초기·누적 방출·잔여 질량과 잔여율도 같은 case 행에 복사해
+방출부터 피해계산으로 전달되는 입력을 재현할 수 있게 했습니다.
+
 ## 현재 권위 실행
 
 IJHE용 권위 입력은 전체 union 시설 평가입니다.
@@ -31,13 +39,17 @@ python scripts/audit_release_boundary_cases.py `
 - 전체 union 총 44개 case
 - 개별 방출 경계 조건을 만족한 case 3개
 - 방출 경계에서 보류된 case 41개
+- 수치상 종료가 닫힌 case 15개(그중 운영자 검토 필요 12개)
+- 수치상 종료가 열린 case 29개
 - provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격은 0건
 - 전체 상태: `CASE_BOUNDARY_PARTIAL`
 
-여기서 3개는 `reviewed_isolation_success` 또는 `inventory_depletion`이라는 종료 기준,
-질량 잔차, 계산 상태를 개별적으로 통과했다는 뜻입니다. 실제 현장 자료라는 뜻은
-아닙니다. 현재 세 행도 provider 원점이 `model_prediction`이고 독립 물리검증 주장이
-없으므로 시설 QRA에 자동으로 들어가지 않습니다.
+여기서 strict 경계를 통과한 3개는 `reviewed_isolation_success` 또는
+`inventory_depletion`이라는 종료 기준, 질량 잔차, 계산 상태를 개별적으로 통과했다는
+뜻입니다. 추가로 12개는 같은 수치 조건은 닫혔지만 `EXECUTED_OPERATOR_LIMITED`라서
+운영자 독립 종료 증거가 필요합니다. 어느 쪽도 실제 현장 자료라는 뜻은 아닙니다.
+현재 15개 모두 provider 원점이 `model_prediction`이고 독립 물리검증 주장이 없으므로
+시설 QRA에 자동으로 들어가지 않습니다.
 
 ## 보류 사유를 읽는 법
 

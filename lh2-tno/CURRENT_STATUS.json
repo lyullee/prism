@@ -4842,6 +4842,16 @@
     "release_boundary_evidence_request_open_count": 44,
     "release_boundary_evidence_request_alignment": "ALIGNED",
     "facility_qra_promotion": false,
-    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix, a 44-case facility evidence-request catalog and a 44-case release-boundary audit are recorded; 3 individual release boundaries pass and 41 remain withheld. The provider-bound HAZOP integrated-risk diagnostic links one current and one forecast consequence evaluation through the existing facility handoff, while retaining synthetic-provider, declared-sensitivity, timing and fail-closed promotion limits. Inspection-center data are linked only as state/mode/HAZOP and diagnostic isolation evidence; they are not converted into frequency or qualified accident releases. The latest IJHE audit has 39 checks (35 PASS, 4 BLOCKED). Qualified provider promotion, independent physical validation and facility IR/F-N remain withheld."
+    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP operating mode and scenario identity are explicitly bound for 34/34 events. Native packet catalog evidence covers the 24 base events exactly and echoes 24/24 state snapshots. SLABx-LH2 pool/dispersion validation, the restricted evidence matrix, a 44-case facility evidence-request catalog and a 44-case release-boundary audit are recorded; 3 individual release boundaries pass and 41 remain withheld. The provider-bound HAZOP integrated-risk diagnostic links one current and one forecast consequence evaluation through the existing facility handoff, while retaining synthetic-provider, declared-sensitivity, timing and fail-closed promotion limits. Inspection-center data are linked only as state/mode/HAZOP and diagnostic isolation evidence; they are not converted into frequency or qualified accident releases. The release-boundary ledger additionally reports 15 numerically closed cases (12 operator-review-required) and 29 numerically open cases without changing the strict gate. The latest IJHE audit has 39 checks (35 PASS, 4 BLOCKED). Qualified provider promotion, independent physical validation and facility IR/F-N remain withheld.",
+    "release_boundary_numerically_closed_case_count": 15,
+    "release_boundary_numerically_open_case_count": 29,
+    "release_boundary_operator_review_required_case_count": 12,
+    "release_boundary_numerical_closure_status_counts": {
+      "NUMERICALLY_CLOSED": 3,
+      "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 12,
+      "NUMERICALLY_OPEN": 29
+    },
+    "release_boundary_consequence_domain_truncated_case_count": 1,
+    "release_boundary_metric_policy": "numerical closure is a diagnostic release-ledger view; it does not qualify provider packets or promote facility IR/F-N"
   }
 }

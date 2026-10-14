@@ -97,3 +97,10 @@ python scripts/build_ijhe_completion_audit.py `
 해석은 [`케이스별 방출 경계 승격 표`](PRISM_release_boundary_case_audit_20261114.md)에
 기록되어 있다.
 
+방출 경계 표는 이제 strict 결과와 수치 종료를 분리한다. 44개 case 중 15개가
+`numerical_release_closed=true`이고, 그중 12개는 운영자 제한으로 인해
+`NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED`이다. 이 보조 분류는 방출 시간·초기
+재고·누적 방출·잔여 재고·잔여율을 함께 보존해 방출 장부가 피해영향 모델로 전달된
+경로를 확인하게 하지만, provider 자격·독립 물리검증·시설 QRA 승격 조건을 낮추지
+않는다.
+
