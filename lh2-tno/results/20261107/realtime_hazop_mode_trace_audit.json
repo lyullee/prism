@@ -1,0 +1,38 @@
+{
+  "schema_version": "prism.realtime_hazop_mode_trace_audit.v1",
+  "status": "REALTIME_HAZOP_MODE_TRACE_VERIFIED",
+  "diagnostic_only": true,
+  "rows": [
+    {
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "telemetry_operating_mode": "receiving",
+      "release_path_operating_mode": "receiving",
+      "mode_match": true
+    },
+    {
+      "component_id": "supply-vaporizer-01",
+      "operating_mode": "supply",
+      "telemetry_operating_mode": "supply",
+      "release_path_operating_mode": "supply",
+      "mode_match": true
+    }
+  ],
+  "row_count": 2,
+  "facility_batch_accounting_present": true,
+  "operating_mode_counts": {
+    "receiving": 1,
+    "supply": 1
+  },
+  "blocking_reasons": [],
+  "policy": {
+    "mode_is_identity_metadata": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "release_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "input_record": "examples\\realtime_hazop_mode_trace_example.json"
+}
