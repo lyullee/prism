@@ -111,6 +111,11 @@ class ReleaseTermination(Contract):
 
 class ConsequenceRequest(Contract):
     component_id: Name
+    # HAZOP-selected operating mode is identity metadata carried with the
+    # consequence request. It does not provide a frequency or alter release
+    # physics, but prevents the downstream chain from losing the mode that
+    # selected the accident family.
+    operating_mode: Name | None = None
     # Equipment state is an input-side handoff from the digital twin. It is
     # deliberately separate from the resolved accident packet: a release
     # history must never be promoted to a normal operating state.

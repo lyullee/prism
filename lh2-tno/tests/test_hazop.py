@@ -238,6 +238,27 @@ def _provider_request(*, source_operator="equipment_liquid_release", basis="mode
     )
 
 
+class _ModeAwareProviderRequest(SimpleNamespace):
+    def model_copy(self, *, update):
+        values = dict(self.__dict__)
+        values.update(update)
+        return type(self)(**values)
+
+
+def _mode_aware_provider_request(*, operating_mode=None):
+    request = _ModeAwareProviderRequest(
+        component_id="TK-01",
+        resolved_release=None,
+        resolved_release_set=None,
+        resolved_liquid_release=SimpleNamespace(event_kind="accidental_leak"),
+        source_operator="equipment_liquid_release",
+        release_termination=SimpleNamespace(basis="model_pressure_equalization"),
+    )
+    if operating_mode is not None:
+        request.operating_mode = operating_mode
+    return request
+
+
 def _gate_table():
     table = table_payload()
     table["rows"][0]["variable_tag"] = "pressure"
@@ -257,6 +278,44 @@ def test_runtime_gate_withholds_before_provider_when_hazop_is_normal():
     assert result["status"] == "CONSEQUENCE_EVALUATED"
     assert monitor.called is True
     assert result["policy"]["consequence_calculated"] is True
+
+
+def test_runtime_gate_binds_selected_mode_to_provider_consequence_identity():
+    class ModeMonitor:
+        def __init__(self):
+            self.request = None
+
+        def update_from_runtime_frame(self, template, frame, *, now_s, release_resolver, mapping_digest=None):
+            self.request = release_resolver(template, {"operating_mode": "receiving"})
+            return {"request": self.request}
+
+    monitor = ModeMonitor()
+    result = run_hazop_runtime_consequence(
+        _gate_table(),
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=monitor,
+        release_resolver=lambda template, normalized: _mode_aware_provider_request(),
+    )
+    assert result["status"] == "CONSEQUENCE_EVALUATED"
+    assert monitor.request.operating_mode == "receiving"
+
+
+def test_runtime_gate_rejects_conflicting_provider_consequence_mode():
+    monitor = _FakeMonitor(_mode_aware_provider_request(operating_mode="supply"))
+    result = run_hazop_runtime_consequence(
+        _gate_table(),
+        _runtime_frame_for_gate(),
+        now_s=3.2,
+        template=object(),
+        monitor=monitor,
+        release_resolver=lambda template, normalized: _mode_aware_provider_request(
+            operating_mode="supply"
+        ),
+    )
+    assert result["status"] == "CONSEQUENCE_REJECTED"
+    assert result["error_type"] == "HazopSelectionError"
 
 
 def test_runtime_gate_requires_explicit_provider_release():

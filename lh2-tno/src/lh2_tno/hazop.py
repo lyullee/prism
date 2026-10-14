@@ -46,6 +46,32 @@ class HazopSelectionError(ValueError):
     """Raised when a HAZOP table or state frame is structurally unsafe."""
 
 
+def _bind_selected_operating_mode(request: Any, operating_mode: str) -> Any:
+    """Carry the selected HAZOP mode into downstream consequence identity.
+
+    The resolver still owns the accident packet. This helper only binds the
+    already-selected mode and rejects an explicitly conflicting value.
+    """
+    if isinstance(request, Mapping):
+        bound = dict(request)
+        existing = bound.get("operating_mode")
+        if existing is not None and existing != operating_mode:
+            raise HazopSelectionError(
+                "provider consequence operating_mode does not match selected HAZOP mode"
+            )
+        bound["operating_mode"] = operating_mode
+        return bound
+    existing = getattr(request, "operating_mode", None)
+    if existing is not None and existing != operating_mode:
+        raise HazopSelectionError(
+            "provider consequence operating_mode does not match selected HAZOP mode"
+        )
+    model_copy = getattr(request, "model_copy", None)
+    if callable(model_copy):
+        return model_copy(update={"operating_mode": operating_mode})
+    return request
+
+
 class HazopRow(Contract):
     """One numeric HAZOP deviation row for one component and mode set."""
 
@@ -494,7 +520,7 @@ def run_hazop_runtime_consequence(
             raise HazopSelectionError(
                 "provider event kind does not satisfy the selected HAZOP release mode"
             )
-        return request
+        return _bind_selected_operating_mode(request, scenario["operating_mode"])
 
     try:
         consequence = update(
