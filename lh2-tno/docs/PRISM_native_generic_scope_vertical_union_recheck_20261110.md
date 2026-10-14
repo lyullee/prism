@@ -1,0 +1,63 @@
+# PRISM 일반 LH2 범위와 수직 벤트 확장 결합 재검증 (2026-11-10)
+
+최신 native 일반 LH2 24개 사건 원장에 기존 `vertical_handoff`와 `inventory_depletion` 진단 캠페인을 별도 이름공간으로 결합했다. 이 작업은 수직 벤트 결과를 새로 계산했다고 주장하지 않고, 기존 provider 결과를 현재 시설 ID·수용점·설비 ID에 맞춰 재결합한 것이다.
+
+## 실행
+
+```powershell
+python scripts/bind_native_campaign_state_snapshots.py `
+  --campaign results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/campaign.json `
+  --packet-root results/20261110/native_generic_scope_packets_latest2 `
+  --output results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/campaign_state_bound.json `
+  --audit-output results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/state_snapshot_binding_audit.json
+
+python scripts/run_native_full_scope_union_assessment.py `
+  --base-dir results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor `
+  --base-campaign results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/campaign_state_bound.json `
+  --base-campaign-result results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/campaign_result.json `
+  --vertical-result results/20261020/vertical_vent_all_bins/campaign_result.json `
+  --vertical-scope-matrix results/20261020/vertical_handoff_scope_matrix_all_bins.json `
+  --inventory-result results/20261009/equipment_inventory_campaign/campaign_result.json `
+  --inventory-scope-matrix results/20261019/inventory_depletion_scope_matrix_rebound.json `
+  --inventory-source-asset-id terminal_pipe_asset `
+  --inventory-source-component-id terminal_pipe `
+  --state-snapshot-binding-audit results/20261110/native_full_scope_frequency_assessment_latest2_near_receptor/state_snapshot_binding_audit.json `
+  --extension-state-snapshot-audit results/20261031/native_full_scope_union_pipefix_state_bound/extension_state_snapshot_coverage.json `
+  --output-dir results/20261110/native_full_scope_union_assessment_latest2_near_vertical
+```
+
+## 결합 결과
+
+| 항목 | 결과 |
+|---|---:|
+| 기본 native 사건 | 24개 |
+| 수직 handoff 확장 사건 | 5개 |
+| 재고 소진 확장 사건 | 5개 |
+| 결합 사건 | 34개 |
+| 결합 case | 44개 |
+| 결합 risk atom | 176개 |
+| 수직 handoff 상태 | `PARTIAL` |
+| 재고 소진 상태 | `PARTIAL` |
+| 기본 packet 상태 결합 | 24/24 |
+| 확장 상태 snapshot/provider echo | 10/10 |
+| 적격 provider packet | 0개 |
+| 시설 전체 IR/F-N 승격 | 보류 |
+
+수직 사건은 `generic-lh2-near-receptor-diagnostic/vertical-handoff/...`로, 재고 소진 사건은 `generic-lh2-near-receptor-diagnostic/inventory-depletion/...`로 분리했다. 따라서 기존 배관 hole 사건과 수직 handoff를 같은 사건으로 합치거나 빈도를 중복 적용하지 않는다. 사고군 표에서 `vertical_handoff`는 이제 `NO_EVENT_GENERATED`가 아니라 `PARTIAL`로 보인다.
+
+## 방출부터 피해까지의 연결
+
+결합 원장의 각 case는 설비 상태·provider 방출 경계·종료/재고 장부·SLABx-LH2 또는 확산 계산·cloud 관측·점화·화재/폭발 피해·수용점 집계 순서를 유지한다. 기본 24개 사건은 최신 native packet catalog와 연결되고, 수직·재고 확장은 기존 진단 결과의 provider identity와 종료 원장을 보존한다. `facility_chain_closure_audit.json`은 기본 packet 부분에 대해 24/24 event를 닫고 IR/F-N aggregate 불일치 0건을 확인한다. 확장 10개는 별도 `extension_state_snapshot_coverage`에서 10/10 `BOUND_AND_ECHOED`로 확인한다.
+
+이 결과는 계산 경로가 연결됐다는 뜻이다. 수직·재고 확장 원본이 synthetic/operator-limited이고 qualified provider packet이 없으므로 현장 전체 위험도나 인증용 QRA로 해석하지 않는다.
+
+## 최신 IJHE 감사 해석
+
+`results/20261110/native_full_scope_union_assessment_latest2_near_vertical/ijhe_completion_audit_latest2_union.json`은 32개 검사를 수행했다. 수직 handoff 진단은 병합된 범위 행과 5개 사건·10개 case를 확인하지만, 다음 gate는 계속 차단된다.
+
+- 모든 설비의 실제 provider 방출 packet과 독립 물리검증이 아직 없다.
+- 일부 사고군은 수치 결과가 있어도 provider qualification 또는 종료 경계 증거가 부족하다.
+- 시설 전체 IR/F-N은 부분·합성 범위이므로 보류된다.
+- fresh physics 처리시간은 1 Hz를 보장하지 않으며, exact cache 경로만 진단적으로 1 Hz 조건을 만족한다.
+
+따라서 최신 상태는 `INCOMPLETE_EVIDENCE`이며, 이 결합은 `vertical_handoff` 누락을 줄인 개발 단계의 증거다. 최종 승격에는 실제 설비별 packet, 독립 SLABx-LH2/실증 비교, 실제 수용점·기상·인구자료, 그리고 모든 선언 사고군의 release-boundary 폐합이 추가로 필요하다.
