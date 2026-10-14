@@ -110,7 +110,11 @@ def test_forecast_scan_triggers_quantitative_evaluation_on_first_risk_entry():
     assert result["evaluated_count"] == 1
     assert result["withheld_count"] == 0
     assert calls == [("TK-01", "TK01-pressure-receiving:receiving:vessel_hole", 10.0, "RISK_CONDITION_REACHED")]
-    assert any(row["trigger_type"] == "RISK_CONDITION_CLEARED" for row in result["scenario_entries"])
+    trigger = next(row for row in result["scenario_entries"] if row["trigger_type"] == "RISK_CONDITION_REACHED")
+    assert trigger["operating_mode"] == "receiving"
+    cleared = next(row for row in result["scenario_entries"] if row["trigger_type"] == "RISK_CONDITION_CLEARED")
+    assert cleared["operating_mode"] == "receiving"
+    assert result["steps"][1]["components"][0]["scenarios"][0]["operating_mode"] == "receiving"
     assert result["policy"]["frequency_inference_performed"] is False
     assert result["timing"]["wall_elapsed_ms"] >= 0.0
     assert result["timing"]["quantitative_evaluation_elapsed_ms"] >= 0.0

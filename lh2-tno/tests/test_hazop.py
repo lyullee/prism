@@ -461,6 +461,7 @@ def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_ro
     assert runtime["facility_id"] == "generic-outdoor-lh2"
     branch = runtime["components"]["TK-01"]["branches"][0]
     assert branch["risk"]["status"] == "AVAILABLE_CURRENT_WEATHER_IR"
+    assert runtime["risk_atoms"][0]["operating_mode"] == "receiving"
     consequence = branch["result"]["consequence"]
     probabilities = consequence["data"]["ignition_branch_probabilities"]
     observed = branch["risk"]["risk_atom"]["receptor_harm_low_high"]

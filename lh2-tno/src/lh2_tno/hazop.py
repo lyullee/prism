@@ -740,6 +740,7 @@ def run_hazop_facility_runtime(
                             "component_id": component_id,
                             "scenario_id": branch_copy["scenario_id"],
                             "scenario_family": branch_copy["scenario_family"],
+                            "operating_mode": selection.get("operating_mode"),
                             "risk": risk,
                         })
                 branch_copy["risk"] = risk

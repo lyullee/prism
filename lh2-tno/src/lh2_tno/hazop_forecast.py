@@ -339,6 +339,7 @@ def run_hazop_forecast_risk_scan(
     frames = _frames(forecast_frames, expected_component_ids=component_ids)
     grouped = _step_groups(frames)
     active_keys: set[tuple[str, str]] = set()
+    active_modes: dict[tuple[str, str], str | None] = {}
     steps: list[dict[str, Any]] = []
     trigger_count = 0
     evaluated_count = 0
@@ -396,6 +397,7 @@ def run_hazop_forecast_risk_scan(
                     trigger = {
                         "component_id": component_id,
                         "scenario_id": scenario_id,
+                        "operating_mode": scenario.get("operating_mode"),
                         "forecast_time_s": forecast_time_s,
                         "trigger_type": "RISK_CONDITION_REACHED" if key not in active_keys else "ACTIVE_CONDITION_RECHECK",
                     }
@@ -457,6 +459,7 @@ def run_hazop_forecast_risk_scan(
                 component_rows.append(
                     {
                         "scenario_id": scenario_id,
+                        "operating_mode": scenario.get("operating_mode"),
                         "status": "QUANTITATIVE_EVALUATION_REQUESTED" if should_evaluate else "ACTIVE_CONDITION",
                         "scenario": scenario,
                         "quantitative_evaluation": evaluation,
@@ -479,12 +482,24 @@ def run_hazop_forecast_risk_scan(
                     {
                         "component_id": component_id,
                         "scenario_id": scenario_id,
+                        "operating_mode": active_modes.get((component_id, scenario_id)),
                         "forecast_time_s": forecast_time_s,
                         "trigger_type": "RISK_CONDITION_CLEARED",
                         "evaluation": None,
                     }
                 )
         active_keys = current_keys
+        active_modes = {}
+        for component_id, scenario_id in current_keys:
+            for component_row in step_rows:
+                if component_row.get("component_id") != component_id:
+                    continue
+                for scenario_row in component_row.get("scenarios", ()):
+                    if scenario_row.get("scenario_id") == scenario_id:
+                        active_modes[(component_id, scenario_id)] = scenario_row.get(
+                            "operating_mode"
+                        )
+                        break
         steps.append(
             {
                 "step_index": step_index,
