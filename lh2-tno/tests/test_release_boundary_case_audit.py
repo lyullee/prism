@@ -1,0 +1,107 @@
+from lh2_tno.release_boundary_case_audit import build_release_boundary_case_audit
+
+
+def _case(event_id, *, status="EXECUTED", basis="reviewed_isolation_success", origins=None, domain_truncated=False):
+    origins = ["model_prediction"] if origins is None else origins
+    identity = {
+        "component_id": "component-1",
+        "input_origins": origins,
+        "physical_validation_claim": False,
+        "provider_source_digests": ["source"],
+        "provider_result_digests": ["result"],
+    }
+    return {
+        "event_id": event_id,
+        "asset_id": "asset-1",
+        "frequency_port_ids": ["port-1"],
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "hazop-1",
+        "scenario_families": ["vessel_hole"],
+        "status": status,
+        "provider_packet_identity": identity,
+        "domain_assessment": {"domain_truncated": domain_truncated},
+    }
+
+
+def _ledger_row(event_id, *, status="EXECUTED", basis="reviewed_isolation_success", residual=0.0, provider_residual=None):
+    return {
+        "event_id": event_id,
+        "asset_id": "asset-1",
+        "status": status,
+        "ledger_status": "COMPLETE" if status == "EXECUTED" else "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+        "termination": {"basis": basis, "time_s": 0.5, "provenance": "test"},
+        "isolation_status": "provider_declared_isolation_success" if basis == "reviewed_isolation_success" else "not_declared",
+        "inventory_status": "provider_declared_inventory_depletion" if basis == "inventory_depletion" else "not_inventory_termination",
+        "provider": {
+            "provider_mass_balance_statuses": ["CLOSED"],
+            "residual_mass_kg": provider_residual,
+        },
+        "mass_ledger": {"end_to_end_residual_kg": residual},
+    }
+
+
+def _assessment(cases, rows):
+    return {"facility_risk_ledger": {
+        "cases": cases,
+        "release_termination_inventory_ledger": {"rows": rows},
+    }}
+
+
+def test_case_audit_keeps_release_boundary_and_provider_qualification_separate():
+    report = build_release_boundary_case_audit(_assessment(
+        [_case("good")],
+        [_ledger_row("good")],
+    ))
+    assert report["status"] == "CASE_BOUNDARY_CLOSED"
+    assert report["strict_release_boundary_eligible_case_count"] == 1
+    row = report["rows"][0]
+    assert row["strict_release_boundary_status"] == "ELIGIBLE"
+    assert row["facility_qra_promotion_eligible"] is False
+    assert "provider_input_is_not_actual_field_data" in row["provider_qualification_blocking_reasons"]
+
+
+def test_case_audit_blocks_horizon_and_operator_limited_rows():
+    cases = [
+        _case("limited", status="EXECUTED_OPERATOR_LIMITED"),
+        _case("horizon"),
+        _case("inventory"),
+    ]
+    rows = [
+        _ledger_row("limited", status="EXECUTED_OPERATOR_LIMITED"),
+        _ledger_row("horizon", basis="inventory_over_600s"),
+        _ledger_row("inventory", basis="inventory_depletion", provider_residual=[0.2]),
+    ]
+    report = build_release_boundary_case_audit(_assessment(cases, rows))
+    assert report["status"] == "CASE_BOUNDARY_BLOCKED"
+    assert report["strict_release_boundary_eligible_case_count"] == 0
+    reasons = {
+        reason
+        for row in report["rows"]
+        for reason in row["release_boundary_blocking_reasons"]
+    }
+    assert "status_executed_operator_limited" in reasons
+    assert "termination_basis_inventory_over_600s_is_not_allowed" in reasons
+    assert "provider_inventory_residual_not_depleted" in reasons
+
+
+def test_case_audit_records_domain_truncation_and_does_not_promote_facility_qra():
+    report = build_release_boundary_case_audit(_assessment(
+        [_case("truncated", domain_truncated=True)],
+        [_ledger_row("truncated")],
+    ))
+    row = report["rows"][0]
+    assert row["strict_release_boundary_status"] == "PROMOTION_BLOCKED"
+    assert "consequence_domain_truncated" in row["release_boundary_blocking_reasons"]
+    assert report["provider_qualification_claim"] is False
+    assert report["facility_ir_fn_promotion"] is False
+
+
+def test_case_audit_fails_closed_when_case_and_release_ledgers_do_not_align():
+    report = build_release_boundary_case_audit(_assessment(
+        [_case("case-only")],
+        [_ledger_row("ledger-only")],
+    ))
+    assert report["status"] == "CASE_BOUNDARY_BLOCKED"
+    assert report["source_alignment_status"] == "BLOCKED"
+    assert "case_rows_missing_from_release_ledger" in report["source_alignment_blocking_reasons"]
+    assert "release_ledger_rows_missing_case_metadata" in report["source_alignment_blocking_reasons"]

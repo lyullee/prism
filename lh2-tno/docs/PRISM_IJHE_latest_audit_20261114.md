@@ -24,6 +24,7 @@
 | `slabx_lh2_validation_audit_recomputed.json` | SLABx-LH2 pool/dispersion 근거 | 제한 component evidence |
 | `validation_evidence_matrix_with_provider_intake.json` | 물리·관측·provider 검증근거 경계 | 시설 QRA 보류를 명시 |
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
+| `release_boundary_case_audit_fullscope_hazop_port_bound.json` | case별 방출 종료·차단·재고 승격 표 | 24 case 중 3개 국소 경계 통과, 21개 보류; 시설 QRA 승격 0 |
 | `facility_evidence_request.json` | case/family별 누락 증거 요청 | 44 case와 12 family를 추적 |
 | `native_generic_scope_packet_evidence_qualification_readiness_v14.json` | provider qualification readiness | 24/24 `BLOCKED_REVIEW` |
 
@@ -70,4 +71,11 @@ python scripts/build_ijhe_completion_audit.py `
 4. 위 증거를 사용한 시설 전체 IR/F-N 승격
 
 진단 계산 결과를 시설 QRA로 승격하기 위해 빈도·방출·차단·물리검증을 임의로 보충하지 않는다. 지원되지 않은 사고 family는 다른 family로 대체하지 않고 `PARTIAL`, `BLOCKED_REVIEW`, `UNCOMPUTED` 또는 명시적 evidence request로 남긴다.
+
+케이스별 방출 경계 표는 위 원칙을 방출 종료 시점에서 다시 확인한다. `ELIGIBLE`은
+개별 행의 종료 기준과 질량 장부가 닫혔다는 뜻만 가지며, 실제 provider packet,
+독립 물리검증, 문헌 빈도 적용, 시설 IR/F-N을 승인하지 않는다. 현재 3개 행도
+`model_prediction` 원점이어서 `facility_qra_promotion_eligible=false`이다. 상세
+해석은 [`케이스별 방출 경계 승격 표`](PRISM_release_boundary_case_audit_20261114.md)에
+기록되어 있다.
 

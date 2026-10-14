@@ -1,0 +1,1102 @@
+{
+  "schema_version": "prism.release_boundary_case_audit.v1",
+  "status": "CASE_BOUNDARY_PARTIAL",
+  "case_count": 24,
+  "source_case_count": 24,
+  "source_release_ledger_row_count": 24,
+  "source_alignment_status": "ALIGNED",
+  "source_alignment_blocking_reasons": [],
+  "missing_case_ids": [],
+  "orphan_ledger_ids": [],
+  "duplicate_ledger_ids": [],
+  "strict_release_boundary_eligible_case_count": 3,
+  "strict_release_boundary_blocked_case_count": 21,
+  "provider_qualification_status_counts": {
+    "BLOCKED": 24
+  },
+  "termination_basis_counts": {
+    "emergency_relief_discharge": 1,
+    "inventory_depletion": 6,
+    "inventory_over_600s": 1,
+    "reviewed_isolation_success": 14,
+    "two_sided_rupture": 2
+  },
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "asset_id": "storage-shell",
+      "model_component_id": "storage-tank-01",
+      "frequency_port_ids": [
+        "tank-accident-out"
+      ],
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.05,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_depletion",
+      "end_to_end_residual_kg": -7.806255641895632e-18,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "provider_inventory_residual_not_depleted",
+        "consequence_domain_truncated"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "asset_id": "storage-shell",
+      "model_component_id": "storage-tank-01",
+      "frequency_port_ids": [
+        "tank-accident-out"
+      ],
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 5.999999999999993e-05,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_depletion",
+      "end_to_end_residual_kg": -2.14806397370833e-20,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "provider_inventory_residual_not_depleted"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "asset_id": "storage-shell",
+      "model_component_id": "storage-tank-01",
+      "frequency_port_ids": [
+        "tank-accident-out"
+      ],
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 5.999999999999999e-06,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_depletion",
+      "end_to_end_residual_kg": -5.902760851178405e-20,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "provider_inventory_residual_not_depleted"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "asset_id": "storage-shell",
+      "model_component_id": "storage-tank-01",
+      "frequency_port_ids": [
+        "tank-accident-out"
+      ],
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 1e-06,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_depletion",
+      "end_to_end_residual_kg": -1.0577323928838075e-19,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "provider_inventory_residual_not_depleted"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "asset_id": "storage-shell",
+      "model_component_id": "storage-tank-01",
+      "frequency_port_ids": [
+        "tank-accident-out"
+      ],
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 1e-06,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_depletion",
+      "end_to_end_residual_kg": -8.673617379884035e-19,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "provider_inventory_residual_not_depleted"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "asset_id": "transfer-line",
+      "model_component_id": "liquid-transfer-line-01",
+      "frequency_port_ids": [
+        "line-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -1.4427299128566867e-22,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "asset_id": "transfer-line",
+      "model_component_id": "liquid-transfer-line-01",
+      "frequency_port_ids": [
+        "line-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -8.525477135461645e-21,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "asset_id": "transfer-line",
+      "model_component_id": "liquid-transfer-line-01",
+      "frequency_port_ids": [
+        "line-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 6.542689745034449e-20,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "asset_id": "transfer-line",
+      "model_component_id": "liquid-transfer-line-01",
+      "frequency_port_ids": [
+        "line-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -8.673617379884035e-18,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "asset_id": "transfer-line",
+      "model_component_id": "liquid-transfer-line-01",
+      "frequency_port_ids": [
+        "line-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.30000000000000004,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -6.245004513516506e-17,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "asset_id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "frequency_port_ids": [
+        "valve-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 1.7617023488948199e-22,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "asset_id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "frequency_port_ids": [
+        "valve-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -2.1647729574584157e-19,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "asset_id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "frequency_port_ids": [
+        "valve-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -3.888421754884625e-18,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "asset_id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "frequency_port_ids": [
+        "valve-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": -3.122502256758253e-17,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "asset_id": "transfer-valve",
+      "model_component_id": "transfer-valve-01",
+      "frequency_port_ids": [
+        "valve-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.3,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 2.7755575615628914e-16,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "asset_id": "pressure-relief-vent",
+      "model_component_id": "pressure-relief-vent-01",
+      "frequency_port_ids": [
+        "vent-accident-out"
+      ],
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "status": "EXECUTED",
+      "ledger_status": "COMPLETE",
+      "termination": {
+        "basis": "emergency_relief_discharge",
+        "time_s": 0.5,
+        "provenance": "selected exact strict emergency-relief worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "termination_basis_emergency_relief_discharge_is_not_allowed"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "asset_id": "transfer-pump",
+      "model_component_id": "liquid-transfer-pump-01",
+      "frequency_port_ids": [
+        "pump-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.30000000000000004,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 1.5959455978986625e-16,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "asset_id": "transfer-pump",
+      "model_component_id": "liquid-transfer-pump-01",
+      "frequency_port_ids": [
+        "pump-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase",
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.30000000000000004,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 1.8202184342472387e-18,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "asset_id": "ambient-vaporizer",
+      "model_component_id": "ambient-vaporizer-01",
+      "frequency_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "EXECUTED",
+      "ledger_status": "COMPLETE",
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 1.6000000000000003,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_depletion",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "asset_id": "ambient-vaporizer",
+      "model_component_id": "ambient-vaporizer-01",
+      "frequency_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
+      "scenario_families": [
+        "inventory_over_600s"
+      ],
+      "status": "EXECUTED",
+      "ledger_status": "COMPLETE",
+      "termination": {
+        "basis": "inventory_over_600s",
+        "time_s": 600.0,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "provider_declared_inventory_over_600s",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "termination_basis_inventory_over_600s_is_not_allowed"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "asset_id": "ambient-vaporizer",
+      "model_component_id": "ambient-vaporizer-01",
+      "frequency_port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
+      "scenario_families": [
+        "vaporizer_hole"
+      ],
+      "status": "EXECUTED",
+      "ledger_status": "COMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "asset_id": "reliquefier",
+      "model_component_id": "reliquefier-01",
+      "frequency_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "two_sided_rupture",
+        "time_s": 1e-05,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "termination_basis_two_sided_rupture_is_not_allowed"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "asset_id": "reliquefier",
+      "model_component_id": "reliquefier-01",
+      "frequency_port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "ledger_status": "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE",
+      "termination": {
+        "basis": "two_sided_rupture",
+        "time_s": 1e-05,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "not_declared",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": false,
+      "strict_release_boundary_status": "PROMOTION_BLOCKED",
+      "release_boundary_blocking_reasons": [
+        "status_executed_operator_limited",
+        "termination_basis_two_sided_rupture_is_not_allowed"
+      ],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "asset_id": "reliquefier",
+      "model_component_id": "reliquefier-01",
+      "frequency_port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
+      "scenario_families": [
+        "reliquefier_hole"
+      ],
+      "status": "EXECUTED",
+      "ledger_status": "COMPLETE",
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.5,
+        "provenance": "selected exact strict worklist packet; provider clock retained"
+      },
+      "isolation_status": "provider_declared_isolation_success",
+      "inventory_status": "not_inventory_termination",
+      "end_to_end_residual_kg": 0.0,
+      "provider_input_origins": [
+        "model_prediction"
+      ],
+      "strict_release_boundary_eligible": true,
+      "strict_release_boundary_status": "ELIGIBLE",
+      "release_boundary_blocking_reasons": [],
+      "provider_qualification_status": "BLOCKED",
+      "provider_qualification_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed"
+      ],
+      "facility_qra_promotion_eligible": false,
+      "facility_qra_promotion_status": "PROMOTION_BLOCKED",
+      "facility_qra_blocking_reasons": [
+        "provider_input_is_not_actual_field_data",
+        "independent_physical_validation_not_claimed",
+        "case_level_audit_does_not_promote_facility_ir_fn"
+      ]
+    }
+  ],
+  "residual_tolerance_kg": 1e-08,
+  "provider_qualification_claim": false,
+  "independent_physical_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_ir_fn_promotion": false,
+  "policy": "case-level release boundary triage only; an eligible row is not an actual qualified provider packet and cannot promote facility frequency, weather/population integration, IR, or F-N"
+}
