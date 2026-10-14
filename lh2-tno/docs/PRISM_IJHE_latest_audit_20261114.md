@@ -134,3 +134,10 @@ accounting을 갖는지 확인한다. 이 검사는 디지털트윈 전달 경�
 `PASS_DIAGNOSTIC_ONLY`로 표시한다. 네 단계가 모두 닫혀도 현재 view의
 `promotion_allowed`는 별도 승인을 거치기 전까지 `false`로 유지된다.
 
+## 현재 신규 계산 처리시간
+
+처리시간은 권위 시설평가 파일
+[`facility_assessment.json`](../results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json)의 동일 캠페인 기록을 사용한다. 44개 fresh physics case를 별도 설비 캠페인으로 계산한 결과, case별 소요시간은 중앙값 **3,033.9 ms**, p95 **10,739.6 ms**, p99 **17,026.0 ms**, 최대 **18,322.3 ms**였다. 캠페인 전체 경과시간은 **203,388.1 ms(약 203.4초)**였다.
+
+가장 큰 구간은 `near_field_and_dispersion`으로 p95 **9,353.1 ms**였고, source p95는 **722.5 ms**, pool p95는 **280.3 ms**, fire/explosion/damage risk p95는 **107.2 ms**였다. 이 수치는 한 번의 44-case 캠페인 분포이며 반복 실행 지연시간이나 1 Hz 신규 물리계산 성능을 의미하지 않는다. 따라서 현재 목표는 모니터링 경로에서 검증된 결과를 신속히 조회하고, fresh physics·예측 계산은 백그라운드/위험조건 도달 시 수행하는 구조로 기록한다. 상태 파일에도 `facility_fresh_physics_1hz_claim=false`를 명시했다.
+
