@@ -28,6 +28,10 @@ from lh2_tno.native_packet_campaign import (  # noqa: E402
     build_native_packet_campaign_execution_ledger,
 )
 from lh2_tno.pipeline import ResearchPipeline  # noqa: E402
+from lh2_tno.uncertainty import (  # noqa: E402
+    LiteratureFrequencyScenario,
+    literature_frequency_uncertainty,
+)
 
 
 class CompressiblePlaneFacilityCampaignError(ValueError):
@@ -47,6 +51,21 @@ def _save(path: Path, value: Any) -> None:
         json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
         encoding="utf-8",
     )
+
+
+def _load_frequency_scenarios(path: Path) -> tuple[LiteratureFrequencyScenario, ...]:
+    raw = _load(path)
+    rows = raw.get("scenarios") if isinstance(raw, dict) else raw
+    if not isinstance(rows, list) or not rows:
+        raise CompressiblePlaneFacilityCampaignError(
+            "frequency scenario input must contain a non-empty scenarios array"
+        )
+    try:
+        return tuple(LiteratureFrequencyScenario.model_validate(row) for row in rows)
+    except (TypeError, ValueError) as error:
+        raise CompressiblePlaneFacilityCampaignError(
+            f"frequency scenario input failed strict validation: {error}"
+        ) from error
 
 
 def load_backend(path: Path, *, refresh_pins: bool) -> tuple[BackendConfig, list[dict[str, str]]]:
@@ -84,6 +103,8 @@ def run(
     ledger_path: Path,
     *,
     refresh_pins: bool = False,
+    frequency_scenarios_path: Path | None = None,
+    frequency_output_path: Path | None = None,
 ) -> dict[str, Any]:
     try:
         manifest = EquipmentManifest.from_json(manifest_path)
@@ -115,6 +136,20 @@ def run(
         raise CompressiblePlaneFacilityCampaignError(
             "facility campaign result did not preserve the compressible handoff ledger"
         )
+    frequency_report = None
+    if frequency_scenarios_path is not None:
+        scenarios = _load_frequency_scenarios(frequency_scenarios_path)
+        try:
+            frequency_report = literature_frequency_uncertainty(result, scenarios)
+        except (TypeError, ValueError, KeyError) as error:
+            raise CompressiblePlaneFacilityCampaignError(
+                f"frequency uncertainty could not be bound to this campaign: {error}"
+            ) from error
+        if frequency_output_path is None:
+            frequency_output_path = output_path.with_name(
+                f"{output_path.stem}.frequency_uncertainty.json"
+            )
+        _save(frequency_output_path, frequency_report)
     output_summary = {
         "status": "COMPRESSIBLE_PLANE_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
         "facility_result_status": result.get("status"),
@@ -141,6 +176,18 @@ def run(
         "facility_qra_claim": result.get("complete_facility_qra_claim") is True,
         "complete_facility_qra_claim": result.get("complete_facility_qra_claim") is True,
         "operator_limited": ledger.get("operator_limited_case_count", 0) > 0,
+        "frequency_uncertainty": (
+            {
+                "scenario_count": len(frequency_report.get("scenarios", [])),
+                "output": str(frequency_output_path),
+                "fresh_physics_executed": frequency_report.get("fresh_physics_executed"),
+                "facility_credible_interval": frequency_report.get("facility_credible_interval"),
+                "correlation_comparison_present": frequency_report.get("correlation_comparison_present"),
+                "frequency_inference_performed": frequency_report.get("frequency_inference_performed", False),
+            }
+            if frequency_report is not None
+            else None
+        ),
         "limitations": [
             "campaign frequencies remain explicit literature/synthetic inputs; the provider packet supplies no rate",
             "the handoff is diagnostic and not independently physically validated",
@@ -163,6 +210,16 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--provenance-output", type=Path, required=True)
     parser.add_argument("--ledger-output", type=Path, required=True)
+    parser.add_argument(
+        "--frequency-scenarios",
+        type=Path,
+        help="optional exact campaign-scoped literature-frequency scenario catalog",
+    )
+    parser.add_argument(
+        "--frequency-uncertainty-output",
+        type=Path,
+        help="optional output path for the no-fresh-physics frequency reweighting report",
+    )
     parser.add_argument("--refresh-pins", action="store_true")
     args = parser.parse_args()
     try:
@@ -176,6 +233,8 @@ def main() -> int:
             args.provenance_output,
             args.ledger_output,
             refresh_pins=args.refresh_pins,
+            frequency_scenarios_path=args.frequency_scenarios,
+            frequency_output_path=args.frequency_uncertainty_output,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, CompressiblePlaneFacilityCampaignError) as error:
         print(json.dumps({"status": "COMPRESSIBLE_PLANE_FACILITY_CAMPAIGN_BLOCKED", "error": str(error)}, ensure_ascii=False))

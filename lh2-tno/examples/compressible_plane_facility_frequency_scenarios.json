@@ -1,0 +1,118 @@
+{
+  "schema_version": "prism.compressible_plane_facility_frequency_scenarios.v1",
+  "scenarios": [
+    {
+      "id": "compressible-campaign-central",
+      "asset_quantiles": {
+        "ambient-vaporizer": "published",
+        "pressure-relief-vent": "published",
+        "reliquefier": "published",
+        "storage-shell": "published",
+        "transfer-line": "published",
+        "transfer-pump": "published",
+        "transfer-valve": "published"
+      },
+      "event_quantiles": {},
+      "provenance": "restricted to this 24-event campaign; published p05/p95 where available and fixed rates otherwise; no frequency inference",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "compressible-campaign-low",
+      "asset_quantiles": {
+        "ambient-vaporizer": "fixed",
+        "pressure-relief-vent": "fixed",
+        "reliquefier": "fixed",
+        "storage-shell": "p05",
+        "transfer-line": "p05",
+        "transfer-pump": "fixed",
+        "transfer-valve": "p05"
+      },
+      "event_quantiles": {},
+      "provenance": "restricted to this 24-event campaign; published p05/p95 where available and fixed rates otherwise; no frequency inference",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "compressible-campaign-high",
+      "asset_quantiles": {
+        "ambient-vaporizer": "fixed",
+        "pressure-relief-vent": "fixed",
+        "reliquefier": "fixed",
+        "storage-shell": "p95",
+        "transfer-line": "p95",
+        "transfer-pump": "fixed",
+        "transfer-valve": "p95"
+      },
+      "event_quantiles": {},
+      "provenance": "restricted to this 24-event campaign; published p05/p95 where available and fixed rates otherwise; no frequency inference",
+      "correlation_assumption": "within_asset_shared_quantile"
+    },
+    {
+      "id": "compressible-campaign-independent-event-low",
+      "asset_quantiles": {},
+      "event_quantiles": {
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": "fixed",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": "fixed",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": "fixed",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": "fixed",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4": "fixed",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5": "fixed",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6": "fixed",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": "p05",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1": "fixed",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2": "fixed",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": "p05",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": "p05"
+      },
+      "provenance": "restricted to this 24-event campaign; published marginal p05/p95 where available and fixed rates otherwise; no frequency inference",
+      "correlation_assumption": "independent_event_bounds"
+    },
+    {
+      "id": "compressible-campaign-independent-event-high",
+      "asset_quantiles": {},
+      "event_quantiles": {
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1": "fixed",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2": "fixed",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3": "fixed",
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1": "fixed",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4": "fixed",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5": "fixed",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6": "fixed",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%": "p95",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1": "fixed",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2": "fixed",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%": "p95",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%": "p95"
+      },
+      "provenance": "restricted to this 24-event campaign; published marginal p05/p95 where available and fixed rates otherwise; no frequency inference",
+      "correlation_assumption": "independent_event_bounds"
+    }
+  ],
+  "source_campaign_event_count": 24,
+  "source_campaign_asset_count": 7,
+  "source_scenario_catalog": "results/20261110/.../frequency_scenarios.json",
+  "frequency_inference_performed": false
+}

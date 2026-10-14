@@ -77,3 +77,22 @@ python scripts/run_compressible_plane_facility_campaign.py `
 ```
 
 실행 스냅샷은 [`examples/compressible_plane_facility_campaign_smoke_result.json`](../examples/compressible_plane_facility_campaign_smoke_result.json)이다. 24개 event와 24개 case가 원장에 기록되고, 24개 chain이 실행되며, G1 handoff의 원본·재결합 provider digest가 서로 다른 값으로 보존된다. 결과는 `PARTIAL_DECLARED_SCOPE`이고 20개 case는 `EXECUTED_OPERATOR_LIMITED`, 4개는 `EXECUTED`로 기록되었다. `total_facility_annual_ir_low_high`와 F/N은 `null`로 남으며, 이는 provider qualification·독립 물리검증·엄격한 시설범위 gate가 열려 있기 때문이다. `uncomputed_case_count=23`은 해당 case의 진단 chain 실행 여부와 별개로 qualified evidence가 없어 승격할 수 없는 case 수를 뜻한다.
+
+같은 campaign의 위험 원자에 문헌 빈도 불확실성을 재현 가능하게 적용하려면 campaign 범위에 맞춘 시나리오 catalog를 함께 전달한다.
+
+```powershell
+python scripts/run_compressible_plane_facility_campaign.py `
+  --manifest examples/generic_lh2_full_scope_manifest.json `
+  --campaign <compiled_campaign.json> `
+  --handoff-packet <resolved_release_with_handoff.json> `
+  --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 `
+  --backend-config results/20261008/full_chain/backend_config.json `
+  --output results/diagnostic/compressible_facility_result.json `
+  --provenance-output results/diagnostic/compressible_facility_provenance.json `
+  --ledger-output results/diagnostic/compressible_facility_ledger.json `
+  --frequency-scenarios examples/compressible_plane_facility_frequency_scenarios.json `
+  --frequency-uncertainty-output results/diagnostic/compressible_facility_frequency_uncertainty.json `
+  --refresh-pins
+```
+
+이 catalog는 현재 24개 사건 campaign에 정확히 맞춘 5개 시나리오(자산별 shared central/low/high와 event별 independent low/high)를 사용한다. 계산은 저장된 risk atom의 빈도 가중치만 바꾸고 방출·확산 물리를 다시 실행하지 않는다. 따라서 `fresh_physics_executed=false`, `facility_credible_interval=false`, `frequency_inference_performed=false`가 정상이며, 이는 시설 전체의 통계적 신뢰구간이나 센서 기반 빈도 추정을 뜻하지 않는다. qualified provider·독립 물리검증·엄격한 시설범위 gate가 닫히기 전까지 결과는 조건부 진단으로만 사용한다.

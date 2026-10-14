@@ -45,5 +45,13 @@
       "complete facility and auditable conditional frequency uncertainty evidence remain open"
     ],
     "interpretation": "The recheck confirms the campaign and handoff ledger are auditable; it does not close the IJHE strict gates."
+  },
+  "frequency_uncertainty": {
+    "scenario_count": 5,
+    "catalog": "examples/compressible_plane_facility_frequency_scenarios.json",
+    "fresh_physics_executed": false,
+    "facility_credible_interval": false,
+    "correlation_comparison_present": true,
+    "frequency_inference_performed": false
   }
 }
