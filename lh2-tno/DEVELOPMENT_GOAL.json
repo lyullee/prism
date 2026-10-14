@@ -31,6 +31,8 @@
       "facility_branch_partition_required": true,
       "forecast_risk_scan_function": "lh2_tno.hazop_forecast.run_hazop_forecast_risk_scan",
       "forecast_risk_scan_schema": "prism.hazop_forecast_risk_scan.v1",
+      "forecast_runtime_evaluator_factory": "lh2_tno.hazop_forecast.build_hazop_forecast_runtime_evaluator",
+      "forecast_runtime_evaluator_uses_existing_gate": true,
       "forecast_trigger_policy": "entry_or_each_step_explicit",
       "forecast_quantitative_evaluator_required": true,
       "forecast_frequency_inference": false,

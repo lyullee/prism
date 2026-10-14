@@ -1,7 +1,13 @@
+from types import SimpleNamespace
+
 import pytest
 
 from lh2_tno.hazop import HAZOP_SCHEMA, HAZOP_STATE_SCHEMA
-from lh2_tno.hazop_forecast import HazopForecastError, run_hazop_forecast_risk_scan
+from lh2_tno.hazop_forecast import (
+    HazopForecastError,
+    build_hazop_forecast_runtime_evaluator,
+    run_hazop_forecast_risk_scan,
+)
 
 
 def _table():
@@ -140,3 +146,36 @@ def test_forecast_scan_rejects_unsafe_evaluator_claim():
     evaluation = result["steps"][0]["components"][0]["scenarios"][0]["quantitative_evaluation"]
     assert evaluation["status"] == "WITHHELD_UNSAFE_EVALUATOR_RESULT"
     assert result["evaluated_count"] == 0
+
+
+def test_forecast_runtime_evaluator_reuses_existing_provider_gate():
+    class Monitor:
+        def update_from_runtime_frame(self, template, frame, *, now_s, release_resolver, mapping_digest=None):
+            request = release_resolver(template, {"operating_mode": frame["operating_mode"]})
+            return {"request": request, "now_s": now_s, "mapping_digest": mapping_digest}
+
+    provider_request = SimpleNamespace(
+        component_id="TK-01",
+        resolved_release=None,
+        resolved_release_set=None,
+        resolved_liquid_release=SimpleNamespace(event_kind="accidental_leak"),
+        source_operator="equipment_liquid_release",
+        release_termination=SimpleNamespace(basis="model_pressure_equalization"),
+    )
+    evaluator = build_hazop_forecast_runtime_evaluator(
+        tables_by_component={"TK-01": _table()},
+        component_bindings={"TK-01": {"template": object(), "monitor": Monitor()}},
+        release_resolvers={
+            "TK01-pressure-receiving:receiving:vessel_hole": lambda template, normalized: provider_request
+        },
+    )
+    result = run_hazop_forecast_risk_scan(
+        facility_id="forecast-facility",
+        tables_by_component={"TK-01": _table()},
+        forecast_frames=[_frame(0.0, 650000.0)],
+        expected_component_ids=("TK-01",),
+        quantitative_evaluator=evaluator,
+    )
+    evaluation = result["steps"][0]["components"][0]["scenarios"][0]["quantitative_evaluation"]
+    assert evaluation["status"] == "EVALUATED_OPERATOR_LIMITED"
+    assert evaluation["result"]["status"] == "CONSEQUENCE_EVALUATED"

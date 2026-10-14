@@ -2,7 +2,7 @@
   "schema_version": "prism.hazop_operating_mode_verification.v1",
   "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED",
   "tests": {
-    "targeted_test_count": 29,
+    "targeted_test_count": 30,
     "targeted_status": "PASS"
   },
   "runtime_gate": {
@@ -25,6 +25,8 @@
     "facility_branch_partition_required": true,
     "forecast_risk_scan_function": "lh2_tno.hazop_forecast.run_hazop_forecast_risk_scan",
     "forecast_risk_scan_schema": "prism.hazop_forecast_risk_scan.v1",
+    "forecast_runtime_evaluator_factory": "lh2_tno.hazop_forecast.build_hazop_forecast_runtime_evaluator",
+    "forecast_runtime_evaluator_uses_existing_gate": true,
     "forecast_trigger_policy": "entry_or_each_step_explicit",
     "forecast_quantitative_evaluator_required": true,
     "forecast_frequency_inference": false,
@@ -54,13 +56,13 @@
   },
   "source_sha256": {
     "src/lh2_tno/hazop.py": "A12ED5DAFDFEA9081A56B9F651D9BE88F864464BF5F54B2F4CAFF4B7534E2EBD",
-    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "D5DE6EE8386CEB0B36AF39E185A154B6BB62D0546C2FCB080245002E11F85146",
+    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "C1DB7CF8BB46489A1E47A480D72B3EC184D4E5FCE831D4BCAE284AE08F19DE95",
     "examples/generic_hazop_operating_modes.json": "F8ECDF09FF931EEFC97223BE7687A70CEDB9146C3EEA3532DC0DD9791DE65B23",
     "examples/generic_hazop_state_frame.json": "AB0FBA86F6884B696B1EA59A840A0928A8B71C3495BEC0DFB6903B7EE4FD52DB",
     "results/hazop_current/selection.json": "4EF5B229796C4B8BEF2BCC2A7C57B99B107EBFFB62FE849D39C7A11439C42D85",
     "results/hazop_current/forecast_scan.json": "E1C9224D50019E0FBB04E86AF3F5BE36109A15A130C75F366D421078B9162D0B",
     "src/lh2_tno/hazop_campaign.py": "CEF0B218CD9F5C1F56DD8B36DE2BA1213230838AD127F2D1ACF164FF6CDCB195",
-    "src/lh2_tno/hazop_forecast.py": "A2FDA4B1C7E75AAB8D4AAFF69F02A1B1C454AD289AC480EA0A0F50F47CDD1E62",
+    "src/lh2_tno/hazop_forecast.py": "108332A14AC80FE5EA2FDB91266F6F2A255FAC295AA79E297E3F84C2958B4122",
     "scripts/scan_hazop_forecast.py": "0FA8B4EAB0EA35A223BE8CA604AB230827607DA3E9316BB505AD14124C517FC7",
     "examples/generic_hazop_tables_by_component.json": "5276C521F439CE7B4CE073BCC0AE1ED0218399595668A49056ADAB5F8B9DBD31",
     "examples/generic_hazop_forecast_frames.json": "97B8C0CB9F9C31B39B4932F830EA7B6EFB29F2B29FCDE07AD77EDD4661A26AC2"

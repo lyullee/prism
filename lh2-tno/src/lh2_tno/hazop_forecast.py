@@ -24,7 +24,8 @@ import copy
 import math
 from typing import Any
 
-from .hazop import evaluate_hazop
+from .contracts import canonical_digest
+from .hazop import evaluate_hazop, run_hazop_runtime_consequence
 
 
 SCHEMA = "prism.hazop_forecast_risk_scan.v1"
@@ -159,6 +160,121 @@ def _safe_result(result: Any) -> tuple[str, Any, str | None]:
 
 
 QuantitativeEvaluator = Callable[[str, Mapping[str, Any], Mapping[str, Any], Mapping[str, Any]], Mapping[str, Any]]
+
+
+def _runtime_frame_from_forecast(frame: Mapping[str, Any]) -> dict[str, Any]:
+    """Create the existing state-runtime envelope for a predicted frame."""
+    component_id = _name(frame.get("component_id"), "forecast frame component_id")
+    values = frame.get("values")
+    if not isinstance(values, Mapping) or not values:
+        raise HazopForecastError("forecast frame values must be a non-empty mapping")
+    normalized_values: dict[str, dict[str, Any]] = {}
+    for tag, raw in values.items():
+        if not isinstance(raw, Mapping):
+            raise HazopForecastError(f"forecast frame value {tag} must be a mapping")
+        quality = raw.get("quality", "valid")
+        if quality != "valid":
+            raise HazopForecastError(f"forecast frame value {tag} must have valid quality")
+        normalized_values[str(tag)] = {
+            "component_id": component_id,
+            "quantity": raw.get("quantity"),
+            "value_si": raw.get("value_si"),
+            "sensor_location": raw.get("sensor_location"),
+            "quality": quality,
+        }
+    snapshot = frame.get("state_snapshot")
+    if not isinstance(snapshot, Mapping):
+        snapshot = {
+            "component_id": component_id,
+            "forecast_time_s": float(frame["forecast_time_s"]),
+            "origin": _ORIGIN,
+            "operating_mode": frame.get("operating_mode"),
+            "values": copy.deepcopy(normalized_values),
+        }
+    snapshot = copy.deepcopy(dict(snapshot))
+    body = {
+        key: copy.deepcopy(value)
+        for key, value in frame.items()
+        if key not in {"forecast_time_s", "frame_digest", "state_snapshot_digest", "state_snapshot"}
+    }
+    body["component_id"] = component_id
+    body["origin"] = _ORIGIN
+    body["source_id"] = str(frame.get("source_id") or f"forecast://{component_id}/{frame['forecast_time_s']}")
+    body["values"] = normalized_values
+    body["state_snapshot"] = snapshot
+    body["state_snapshot_digest"] = canonical_digest(snapshot)
+    body["frame_digest"] = canonical_digest(body)
+    return body
+
+
+def _binding_value(binding: Any, field: str) -> Any:
+    if isinstance(binding, Mapping):
+        return binding.get(field)
+    return getattr(binding, field, None)
+
+
+def build_hazop_forecast_runtime_evaluator(
+    *,
+    tables_by_component: Mapping[str, Mapping[str, Any]],
+    component_bindings: Mapping[str, Any],
+    release_resolvers: Mapping[str, Any],
+    mapping_digest: str | None = None,
+) -> QuantitativeEvaluator:
+    """Build a forecast callback backed by the existing runtime consequence gate.
+
+    The returned callback turns one predicted frame into a strict runtime frame,
+    narrows the HAZOP table to the selected row, and calls
+    :func:`run_hazop_runtime_consequence`.  Provider release, termination,
+    isolation, inventory and SLABx-LH2 remain owned by the existing monitor and
+    resolver; this helper does not create any of them.
+    """
+    if not isinstance(tables_by_component, Mapping) or not tables_by_component:
+        raise HazopForecastError("tables_by_component must be non-empty")
+    if not isinstance(component_bindings, Mapping):
+        raise HazopForecastError("component_bindings must be a mapping")
+    if not isinstance(release_resolvers, Mapping):
+        raise HazopForecastError("release_resolvers must be a mapping")
+
+    def evaluate(
+        component_id: str,
+        scenario: Mapping[str, Any],
+        frame: Mapping[str, Any],
+        context: Mapping[str, Any],
+    ) -> Mapping[str, Any]:
+        table = tables_by_component.get(component_id)
+        binding = component_bindings.get(component_id)
+        if not isinstance(table, Mapping) or binding is None:
+            raise HazopForecastError(f"forecast runtime binding is missing for component {component_id}")
+        row_id = _name(scenario.get("hazop_row_id"), "forecast scenario hazop_row_id")
+        rows = [row for row in table.get("rows", ()) if isinstance(row, Mapping) and row.get("id") == row_id]
+        if len(rows) != 1:
+            raise HazopForecastError(
+                f"forecast HAZOP table must contain exactly one selected row: {component_id}/{row_id}"
+            )
+        scenario_id = _name(scenario.get("scenario_id"), "forecast scenario_id")
+        resolver = release_resolvers.get(scenario_id)
+        if resolver is None:
+            raise HazopForecastError(f"no release resolver is bound for forecast scenario {scenario_id}")
+        template = _binding_value(binding, "template")
+        monitor = _binding_value(binding, "monitor")
+        if template is None or monitor is None:
+            raise HazopForecastError(f"component binding lacks template or monitor: {component_id}")
+        narrowed_table = dict(table)
+        narrowed_table["rows"] = [copy.deepcopy(dict(rows[0]))]
+        runtime_frame = _runtime_frame_from_forecast(frame)
+        forecast_time_s = _time(context.get("forecast_time_s"), "forecast context forecast_time_s")
+        now_s = max(float(runtime_frame["captured_at_s"]), forecast_time_s)
+        return run_hazop_runtime_consequence(
+            narrowed_table,
+            runtime_frame,
+            now_s=now_s,
+            template=template,
+            monitor=monitor,
+            release_resolver=resolver,
+            mapping_digest=mapping_digest,
+        )
+
+    return evaluate
 
 
 def run_hazop_forecast_risk_scan(
@@ -368,4 +484,10 @@ def run_hazop_forecast_risk_scan(
     }
 
 
-__all__ = ["SCHEMA", "HazopForecastError", "QuantitativeEvaluator", "run_hazop_forecast_risk_scan"]
+__all__ = [
+    "SCHEMA",
+    "HazopForecastError",
+    "QuantitativeEvaluator",
+    "build_hazop_forecast_runtime_evaluator",
+    "run_hazop_forecast_risk_scan",
+]
