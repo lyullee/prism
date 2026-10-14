@@ -52,15 +52,15 @@
     <rect x="1150" y="200" width="580" height="150" rx="18" fill="#e7f7f9" stroke="#49bfd0" stroke-width="3"/>
   </g>
   <rect x="94" y="222" width="120" height="29" rx="15" fill="#d7f4f7"/>
-  <text x="108" y="243" class="kr label" fill="#207f95">현장 입력</text>
-  <text x="94" y="280" class="kr box-title">실시간 모니터링 값</text>
+  <text x="108" y="243" class="kr label" fill="#207f95">현장 입력 프레임</text>
+  <text x="94" y="280" class="kr box-title">공정상태 신호 + 운전 모드</text>
   <text x="94" y="310" class="kr box-text">압력 · 온도 · 유량 · 밸브 · 재고</text>
-  <text x="94" y="334" class="kr box-text">운전 모드: 인수 · 공급 · 대기</text>
+  <text x="94" y="334" class="kr box-text">운전 모드 태그: 인수 · 공급 · 대기</text>
 
   <rect x="454" y="222" width="145" height="29" rx="15" fill="#e6f0f7"/>
   <text x="468" y="243" class="kr label" fill="#2b6384">HAZOP 테이블</text>
   <text x="454" y="280" class="kr box-title">이탈 기준 비교</text>
-  <text x="454" y="310" class="kr box-text">측정값 × 운전 모드 × 설비</text>
+  <text x="454" y="310" class="kr box-text">상태값 + 운전 모드 + 설비</text>
   <text x="454" y="334" class="kr box-text">정성적 이탈·원인·결과 판정</text>
 
   <rect x="814" y="222" width="130" height="29" rx="15" fill="#e6f0f7"/>
@@ -70,7 +70,7 @@
   <text x="814" y="334" class="kr box-text">선택된 사고만 정량평가로 전달</text>
 
   <text x="1178" y="242" class="kr label" fill="#247a8a">공통 시나리오 계약</text>
-  <text x="1178" y="281" class="kr box-title">공정 상태와 사고 경로를 하나의 입력으로 연결</text>
+  <text x="1178" y="281" class="kr box-title">공정 상태와 운전 모드를 포함한 시나리오 패킷</text>
   <text x="1178" y="312" class="kr box-text">운전 모드 정보가 빠지거나 신호가 열려 있으면 분석을 안전하게 보류</text>
   <text x="1178" y="337" class="kr box-text">선정 결과만 방출원·빈도·피해영향 모델로 전달</text>
 
@@ -107,11 +107,11 @@
   <line x1="920" y1="542" x2="951" y2="542" stroke="#2b8db0" stroke-width="3" marker-end="url(#arrow)"/>
 
   <rect x="1260" y="478" width="430" height="132" rx="14" fill="#f5fbfd" stroke="#a8cbd6" stroke-width="2"/>
-  <text x="1284" y="510" class="kr box-title">통합 정량 위험평가 계층</text>
-  <text x="1284" y="537" class="kr small">점화 · 복사열 · 과압 · 노출</text>
-  <text x="1284" y="562" class="kr small">기상 · 인구 · IR/F-N · 불확실성</text>
-  <rect x="1284" y="576" width="185" height="23" rx="12" fill="#e6edf2"/>
-  <text x="1298" y="593" class="kr tiny" fill="#49677e">계산 커널 / 모델 어댑터</text>
+  <text x="1284" y="510" class="kr box-title">공통 정량 위험평가 계층</text>
+  <text x="1284" y="537" class="kr small">설비상태 · 방출·빈도 · SLABx-LH2</text>
+  <text x="1284" y="562" class="kr small">점화 · 피해영향 · 기상 · 인구 · IR/F-N</text>
+  <rect x="1284" y="576" width="300" height="23" rx="12" fill="#e6edf2"/>
+  <text x="1298" y="593" class="kr tiny" fill="#49677e">계산 커널 · 모델 어댑터 · 실행기록 (PRISM)</text>
   <line x1="1226" y1="542" x2="1255" y2="542" stroke="#2b8db0" stroke-width="3" marker-end="url(#arrow)"/>
 
   <rect x="108" y="713" width="220" height="32" rx="16" fill="#ffecd9"/>
@@ -156,3 +156,4 @@
   <path d="M 945 875 C 820 900, 820 920, 545 920 C 340 920, 330 860, 330 850" fill="none" stroke="#d88438" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow-orange)"/>
   <text x="560" y="914" class="kr small" fill="#a56127">다음 예측 시점으로 반복 · 위험조건 재도달 시 재평가</text>
 </svg>
+
