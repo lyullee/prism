@@ -194,6 +194,11 @@ def main() -> int:
         help="optional explicit storage isolation success/failure branch evidence",
     )
     parser.add_argument(
+        "--observed-hazop-vaporizer-isolation-branch-evidence",
+        type=Path,
+        help="optional explicit vaporizer isolation and zero-flow branch evidence",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -559,6 +564,15 @@ def main() -> int:
             observed_hazop_storage_isolation_branch_evidence["_record_path"] = str(
                 args.observed_hazop_storage_isolation_branch_evidence
             )
+        observed_hazop_vaporizer_isolation_branch_evidence = (
+            _object(args.observed_hazop_vaporizer_isolation_branch_evidence)
+            if args.observed_hazop_vaporizer_isolation_branch_evidence
+            else None
+        )
+        if observed_hazop_vaporizer_isolation_branch_evidence is not None:
+            observed_hazop_vaporizer_isolation_branch_evidence["_record_path"] = str(
+                args.observed_hazop_vaporizer_isolation_branch_evidence
+            )
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -657,6 +671,7 @@ def main() -> int:
             observed_hazop_provider_binding=observed_hazop_provider_binding,
             observed_hazop_provider_consequence_chain=observed_hazop_provider_consequence_chain,
             observed_hazop_storage_isolation_branch_evidence=observed_hazop_storage_isolation_branch_evidence,
+            observed_hazop_vaporizer_isolation_branch_evidence=observed_hazop_vaporizer_isolation_branch_evidence,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

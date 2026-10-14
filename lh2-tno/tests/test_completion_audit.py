@@ -3447,3 +3447,68 @@ def test_completion_audit_blocks_storage_isolation_without_zero_flow():
         if item["name"] == "diagnostic_observed_hazop_storage_isolation_branch_evidence"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _observed_hazop_vaporizer_isolation_branch_evidence(**overrides):
+    record = {
+        "schema_version": "prism.observed_hazop_vaporizer_isolation_branch_evidence.v1",
+        "status": "SYNTHETIC_VAPORIZER_ISOLATION_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
+        "event_id": "event-vaporizer",
+        "component_id": "ambient-vaporizer-01",
+        "port_id": "vaporizer-accident-out",
+        "success_branch": {
+            "termination_basis": "reviewed_isolation_success",
+            "probability_given_event": 1.0,
+            "duration_s": 0.5,
+            "isolation_time_s": 0.1,
+            "post_isolation_observation_s": 0.2,
+            "provider_isolation_success": True,
+            "post_isolation_zero_flow": True,
+            "max_post_isolation_flow_kg_s": 0.0,
+        },
+        "branch_probability_sum": 1.0,
+        "policy": {
+            "isolation_controls_explicit": True,
+            "zero_flow_observation_required": True,
+            "frequency_inference_performed": False,
+            "provider_packet_promoted": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_vaporizer_isolation_branch_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_vaporizer_isolation_branch_evidence=(
+            _observed_hazop_vaporizer_isolation_branch_evidence()
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_vaporizer_isolation_branch_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_vaporizer_isolation_without_zero_flow():
+    unsafe = _observed_hazop_vaporizer_isolation_branch_evidence()
+    unsafe["success_branch"]["provider_isolation_success"] = False
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_vaporizer_isolation_branch_evidence=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_vaporizer_isolation_branch_evidence"
+    )
+    assert check["status"] == "BLOCKED"

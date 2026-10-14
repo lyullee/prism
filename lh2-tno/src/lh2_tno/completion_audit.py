@@ -107,6 +107,7 @@ def build_ijhe_completion_audit(
     observed_hazop_provider_binding: Mapping[str, Any] | None = None,
     observed_hazop_provider_consequence_chain: Mapping[str, Any] | None = None,
     observed_hazop_storage_isolation_branch_evidence: Mapping[str, Any] | None = None,
+    observed_hazop_vaporizer_isolation_branch_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -4103,6 +4104,63 @@ def build_ijhe_completion_audit(
             "separate conditional routes. A zero-flow success branch may enter the "
             "diagnostic consequence chain, while the synthetic-horizon failure branch "
             "remains withheld from the vessel-hole calculation."
+        )
+        checks.append(isolation_check)
+    if observed_hazop_vaporizer_isolation_branch_evidence is not None:
+        isolation = observed_hazop_vaporizer_isolation_branch_evidence
+        success = isolation.get("success_branch")
+        success = success if isinstance(success, Mapping) else {}
+        policy = isolation.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        isolation_valid = (
+            isolation.get("schema_version")
+            == "prism.observed_hazop_vaporizer_isolation_branch_evidence.v1"
+            and isolation.get("status")
+            == "SYNTHETIC_VAPORIZER_ISOLATION_PACKET_READY_FOR_DIAGNOSTIC_CHAIN"
+            and isinstance(isolation.get("event_id"), str)
+            and isinstance(isolation.get("component_id"), str)
+            and isinstance(isolation.get("port_id"), str)
+            and success.get("termination_basis") == "reviewed_isolation_success"
+            and isinstance(success.get("probability_given_event"), (int, float))
+            and 0.0 <= float(success.get("probability_given_event")) <= 1.0
+            and _finite(success.get("duration_s"))
+            and success.get("duration_s") > 0.0
+            and _finite(success.get("isolation_time_s"))
+            and _finite(success.get("post_isolation_observation_s"))
+            and success.get("post_isolation_observation_s") > 0.0
+            and success.get("provider_isolation_success") is True
+            and success.get("post_isolation_zero_flow") is True
+            and _finite(success.get("max_post_isolation_flow_kg_s"))
+            and success.get("max_post_isolation_flow_kg_s") == 0.0
+            and _finite(isolation.get("branch_probability_sum"))
+            and abs(float(isolation.get("branch_probability_sum")) - 1.0) <= 1.0e-12
+            and policy.get("isolation_controls_explicit") is True
+            and policy.get("zero_flow_observation_required") is True
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("provider_packet_promoted") is False
+            and policy.get("physical_validation_claim") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("diagnostic_only") is True
+        )
+        isolation_check = _check(
+            "diagnostic_observed_hazop_vaporizer_isolation_branch_evidence",
+            isolation_valid,
+            {
+                "record": isolation.get("_record_path"),
+                "schema_version": isolation.get("schema_version"),
+                "status": isolation.get("status"),
+                "event_id": isolation.get("event_id"),
+                "success_branch": dict(success),
+                "branch_probability_sum": isolation.get("branch_probability_sum"),
+                "policy": dict(policy),
+            },
+            "vaporizer isolation evidence lacks explicit controls, zero-flow closure, or diagnostic-only promotion gates",
+        )
+        isolation_check["diagnostic_only"] = True
+        isolation_check["interpretation"] = (
+            "The external DynamicVaporizer branch carries an explicit isolation command "
+            "and post-close zero-flow observation. It may enter the diagnostic vaporizer-hole "
+            "chain, but synthetic geometry and absent qualification keep facility promotion closed."
         )
         checks.append(isolation_check)
     if realtime_hazop_mode_trace is not None:
