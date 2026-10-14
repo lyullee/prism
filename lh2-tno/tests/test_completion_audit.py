@@ -280,6 +280,74 @@ def test_completion_audit_blocks_external_document_promotion_claim():
     assert check["status"] == "BLOCKED"
 
 
+def _facility_evidence_request():
+    return {
+        "schema_version": "prism.facility_evidence_request.v1",
+        "status": "OPEN_EVIDENCE_REQUEST",
+        "scope": "outdoor_major_accidents",
+        "provider_export_schema_required": "prism.external_accident_history.v1",
+        "current_assessment": {
+            "case_count": 1,
+            "facility_total_risk_available": False,
+            "complete_facility_qra_claim": False,
+        },
+        "blocking_reasons": ["missing qualified provider case"],
+        "case_request_count": 1,
+        "case_requests": [{
+            "request_id": "event-1/case-1",
+            "event_id": "event-1",
+            "component_id": "component-1",
+            "current_status": "EXECUTED_OPERATOR_LIMITED",
+            "promotion_allowed_now": False,
+        }],
+        "family_requests": [{"family": "pipe_hole"}],
+        "component_requests": [{"component_id": "component-1"}],
+        "promotion_gate": {
+            "qualified_provider_packet_required": True,
+            "exact_event_component_port_and_digest_match_required": True,
+            "independent_physical_validation_required": True,
+            "complete_declared_scope_required": True,
+            "facility_ir_fn_remains_withheld_until_all_true": True,
+        },
+        "frequency_policy": {
+            "infer_frequency_from_provider_or_sensor": False,
+            "reallocate_frequency_between_families": False,
+        },
+    }
+
+
+def test_completion_audit_records_exact_facility_evidence_request_coverage():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_evidence_request=_facility_evidence_request(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_facility_evidence_request_coverage"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_facility_evidence_request_promotion_policy():
+    request = _facility_evidence_request()
+    request["frequency_policy"]["infer_frequency_from_provider_or_sensor"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_evidence_request=request,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_facility_evidence_request_coverage"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def test_completion_audit_records_domain_recovery_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(validated=False),

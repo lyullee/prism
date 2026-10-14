@@ -153,6 +153,11 @@ def main() -> int:
         type=Path,
         help="optional provenance-only audit of external equipment documents",
     )
+    parser.add_argument(
+        "--facility-evidence-request",
+        type=Path,
+        help="optional exact facility-case evidence-request coverage audit",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -425,6 +430,13 @@ def main() -> int:
         )
         if external_document_evidence is not None:
             external_document_evidence["_record_path"] = str(args.external_document_evidence)
+        facility_evidence_request = (
+            _object(args.facility_evidence_request)
+            if args.facility_evidence_request
+            else None
+        )
+        if facility_evidence_request is not None:
+            facility_evidence_request["_record_path"] = str(args.facility_evidence_request)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -467,6 +479,7 @@ def main() -> int:
             hazop_forecast_scan=hazop_forecast_scan,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,
+            facility_evidence_request=facility_evidence_request,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

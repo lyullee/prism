@@ -93,6 +93,7 @@ def build_ijhe_completion_audit(
     hazop_forecast_scan: Mapping[str, Any] | None = None,
     realtime_hazop_mode_trace: Mapping[str, Any] | None = None,
     external_document_evidence: Mapping[str, Any] | None = None,
+    facility_evidence_request: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2981,6 +2982,94 @@ def build_ijhe_completion_audit(
             "claim, or facility QRA result."
         )
         checks.append(document_check)
+    if facility_evidence_request is not None:
+        request = facility_evidence_request
+        current = request.get("current_assessment")
+        current = current if isinstance(current, Mapping) else {}
+        promotion_gate = request.get("promotion_gate")
+        promotion_gate = promotion_gate if isinstance(promotion_gate, Mapping) else {}
+        frequency_policy = request.get("frequency_policy")
+        frequency_policy = frequency_policy if isinstance(frequency_policy, Mapping) else {}
+        case_requests = request.get("case_requests")
+        family_requests = request.get("family_requests")
+        component_requests = request.get("component_requests")
+        required_case_count = request.get("case_request_count")
+        assessment_case_count = current.get("case_count")
+        case_identity_complete = (
+            isinstance(case_requests, list)
+            and all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("request_id"), str)
+                and isinstance(row.get("event_id"), str)
+                and isinstance(row.get("component_id"), str)
+                and isinstance(row.get("current_status"), str)
+                and (
+                    (
+                        isinstance(row.get("promotion_allowed_now"), bool)
+                        and row.get("promotion_allowed_now") is False
+                    )
+                    or row.get("qualification_required") is True
+                )
+                for row in case_requests
+            )
+        )
+        evidence_request_valid = (
+            request.get("schema_version") == "prism.facility_evidence_request.v1"
+            and request.get("status") == "OPEN_EVIDENCE_REQUEST"
+            and request.get("scope") == "outdoor_major_accidents"
+            and request.get("provider_export_schema_required") == "prism.external_accident_history.v1"
+            and isinstance(required_case_count, int)
+            and required_case_count > 0
+            and isinstance(case_requests, list)
+            and len(case_requests) == required_case_count
+            and case_identity_complete
+            and isinstance(family_requests, list)
+            and bool(family_requests)
+            and isinstance(component_requests, list)
+            and bool(component_requests)
+            and isinstance(request.get("blocking_reasons"), list)
+            and bool(request.get("blocking_reasons"))
+            and isinstance(assessment_case_count, int)
+            and assessment_case_count == required_case_count
+            and current.get("facility_total_risk_available") is False
+            and current.get("complete_facility_qra_claim") is False
+            and promotion_gate.get("qualified_provider_packet_required") is True
+            and promotion_gate.get("exact_event_component_port_and_digest_match_required") is True
+            and promotion_gate.get("independent_physical_validation_required") is True
+            and promotion_gate.get("complete_declared_scope_required") is True
+            and promotion_gate.get("facility_ir_fn_remains_withheld_until_all_true") is True
+            and frequency_policy.get("infer_frequency_from_provider_or_sensor") is False
+            and frequency_policy.get("reallocate_frequency_between_families") is False
+        )
+        request_check = _check(
+            "diagnostic_facility_evidence_request_coverage",
+            evidence_request_valid,
+            {
+                "record": request.get("_record_path"),
+                "schema_version": request.get("schema_version"),
+                "status": request.get("status"),
+                "case_request_count": required_case_count,
+                "assessment_case_count": assessment_case_count,
+                "family_request_count": len(family_requests) if isinstance(family_requests, list) else None,
+                "component_request_count": len(component_requests) if isinstance(component_requests, list) else None,
+                "blocking_reason_count": len(request.get("blocking_reasons", []))
+                if isinstance(request.get("blocking_reasons"), list)
+                else None,
+                "case_identity_complete": case_identity_complete,
+                "facility_total_risk_available": current.get("facility_total_risk_available"),
+                "complete_facility_qra_claim": current.get("complete_facility_qra_claim"),
+                "promotion_gate": dict(promotion_gate),
+                "frequency_policy": dict(frequency_policy),
+            },
+            "facility evidence request catalog is missing exact case coverage or carries an unsafe promotion policy",
+        )
+        request_check["diagnostic_only"] = True
+        request_check["interpretation"] = (
+            "The evidence-request catalog makes each missing facility case actionable and preserves its "
+            "promotion gate. It requests provider evidence but never invents termination, inventory, "
+            "frequency or facility IR/F-N."
+        )
+        checks.append(request_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {
