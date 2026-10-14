@@ -1,6 +1,7 @@
 {
   "date_kst": "2026-11-15",
   "package_version": "0.6.2",
+  "latest_ijhe_requirement_traceability": "docs/PRISM_IJHE_requirement_traceability_20261115.md",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
   "legacy_tno_lh2_frequency_entries": 6,

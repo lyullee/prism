@@ -1,0 +1,55 @@
+# PRISM v0.6.2 IJHE 요구사항 추적표 (2026-11-15)
+
+이 문서는 PRISM의 선언된 일반 옥외 액화수소시설 범위를 요구사항 단위로 다시 확인한 최신 추적표다. 계산 결과가 존재하는 것과 실제 시설 QRA로 승격할 수 있는 것은 분리한다. 현재 권위 원장은 **34개 event, 44개 case, 176개 risk atom**이며 최신 IJHE 감사는 **53개 검사 중 48 PASS, 5 BLOCKED**인 `INCOMPLETE_EVIDENCE`다.
+
+## 요구사항별 판정
+
+| 요구사항 | 현재 증거 | 판정 |
+|---|---|---|
+| 설비 상태와 운전 모드를 HAZOP 입력으로 사용 | HAZOP selection/event binding, operating-mode evidence, observed runtime audit | **진단 완료** (`PASS`) |
+| 문헌 빈도를 사고 event에 명시적으로 연결 | frequency port binding 34/34, 5개 문헌 시나리오 | **진단 완료** (`PASS`) |
+| 설비 방출 포트·지속시간·차단·재고를 피해계산에 전달 | `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json` 및 risk-atom chain audit | **진단 완료**, 일부 provider 경계 제한 |
+| 방출부터 SLABx-LH2·점화·최종 피해까지 연결 | facility aggregate closure와 risk atom chain audit | **진단 완료** (`PASS`) |
+| 기상·인구·IR/F-N 조건부 계산 | facility assessment의 conditional diagnostic view | **조건부 진단만 허용** (`PASS`) |
+| 빈도 불확실성·상관 가정·순위 안정성 | 5개 문헌 frequency scenario 및 uncertainty audit | **진단 완료** (`PASS`) |
+| 실시간 처리시간과 캐시/신규 계산 구분 | realtime benchmark 및 case timing fields | **처리시간 근거 확보**, 1 Hz fresh-physics 주장은 보류 (`PASS`) |
+| 미계산·운영자 제한·영역 제한을 숨기지 않음 | facility evidence request, release-boundary audit, scope ledger | **진단 완료**, 미계산/제한 상태 보존 |
+| 실제 시설 QRA 승격 | qualified packet, independent validation, complete release boundary | **차단** (`BLOCKED`) |
+
+## 전체 연결에서 확인된 것
+
+1. 공정 상태와 `operating_mode`가 HAZOP 선택에 함께 들어간다.
+2. HAZOP event identity가 문헌 frequency event와 연결된다.
+3. provider packet의 포트, 개구, 상태 snapshot, 방출 시간, 질량 장부가 case에 보존된다.
+4. 방출 packet은 SLABx-LH2/풀·확산·점화·피해 계산으로 전달된다.
+5. 결과는 사건·설비·수용점·문헌 빈도 시나리오별로 facility ledger에 집계된다.
+6. 조건부 IR/F-N은 계산되지만, 시설 전체 공식 위험값은 자격화 조건이 충족될 때까지 보류된다.
+
+## 현재 다섯 차단 검사
+
+| 차단 검사 | 의미 | 필요한 다음 증거 |
+|---|---|---|
+| `facility_release_boundary` | 44개 case 모두의 종료·차단·재고 경계가 닫히지 않음 | 실제 설비 provider의 종료 시계, isolation feedback, 재고·질량 잔차 packet |
+| `actual_provider_release_packet` | 합성/model-prediction packet만 있음 | 실제 시설 geometry·운전조건을 계산한 qualified accident export와 qualification sidecar |
+| `declared_major_accident_scope` | 수치 계산은 있으나 사고군 전체의 적격 증거가 없음 | 사고군별 독립 검증자료와 provider packet |
+| `facility_ir_fn_available` | 시설 전체 IR/F-N을 공식값으로 표시할 수 없음 | 위 세 증거와 완전한 시설 목록·위치·인구·방호정책 |
+| `facility_case_provider_packet_coverage` | 44개 case 모두 qualified packet과 exact-match되지 않음 | case ID·component·port·opening·provider digest가 일치하는 packet catalog |
+
+## 해석 규칙
+
+- `EXECUTED`는 계산 경로가 실행되었다는 뜻이고, 실제 시설에 검증된 모델이라는 뜻이 아니다.
+- `EXECUTED_OPERATOR_LIMITED`와 `EXECUTED_DOMAIN_INCOMPLETE`는 `UNCOMPUTED`로 합치지 않는다.
+- 문헌 빈도는 provider나 센서에서 추정하지 않는다.
+- 지원되지 않은 사고를 다른 사고로 대체하지 않는다.
+- 조건부 IR/F-N을 시설 전체 QRA로 표현하지 않는다.
+- 현장 사고빈도 학습, 실내, 폭굉, 전체 도미노는 이번 필수 범위에 포함하지 않는다.
+
+## 권위 산출물
+
+- 최신 facility union: `results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/campaign_result.json`
+- 최신 IJHE audit: `results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`
+- 최신 release-boundary audit: `results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json`
+- 최신 provider termination catalog: `results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json`
+- 현재 상태 원장: `CURRENT_STATUS.json`
+
+이 표는 완료를 선언하는 문서가 아니라, 계산 연결과 승격 증거를 한눈에 구분하는 IJHE 제출용 추적성 문서다.
