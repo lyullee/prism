@@ -30,6 +30,11 @@ def main() -> int:
     parser.add_argument("--diagnostic-worklist-evidence", type=Path)
     parser.add_argument("--diagnostic-campaign-binding", type=Path)
     parser.add_argument("--facility-assessment", type=Path)
+    parser.add_argument(
+        "--release-boundary-case-audit",
+        type=Path,
+        help="optional case-level release termination/isolation/inventory boundary audit",
+    )
     parser.add_argument("--vertical-handoff-result", type=Path)
     parser.add_argument("--native-model-contract-audit", type=Path)
     parser.add_argument("--frequency-provenance-report", type=Path)
@@ -290,6 +295,15 @@ def main() -> int:
         )
         if facility_assessment is not None:
             facility_assessment["_record_path"] = str(args.facility_assessment)
+        release_boundary_case_audit = (
+            _object(args.release_boundary_case_audit)
+            if args.release_boundary_case_audit
+            else None
+        )
+        if release_boundary_case_audit is not None:
+            release_boundary_case_audit["_record_path"] = str(
+                args.release_boundary_case_audit
+            )
         vertical_handoff_result = (
             _object(args.vertical_handoff_result)
             if args.vertical_handoff_result
@@ -745,6 +759,7 @@ def main() -> int:
             native_scope_isolation_branch_catalog_audit=native_scope_isolation_branch_catalog_audit,
             native_isolation_catalog_facility_chain_verification=native_isolation_catalog_facility_chain_verification,
             native_isolation_catalog_near_receptor_verification=native_isolation_catalog_near_receptor_verification,
+            release_boundary_case_audit=release_boundary_case_audit,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

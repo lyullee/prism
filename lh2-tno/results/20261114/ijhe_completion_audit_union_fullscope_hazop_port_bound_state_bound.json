@@ -5117,6 +5117,38 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The evidence-request catalog makes each missing facility case actionable and preserves its promotion gate. It requests provider evidence but never invents termination, inventory, frequency or facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_release_boundary_case_audit",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261114\\release_boundary_case_audit_fullscope_hazop_port_bound.json",
+        "schema_version": "prism.release_boundary_case_audit.v1",
+        "status": "CASE_BOUNDARY_PARTIAL",
+        "case_count": 24,
+        "source_case_count": 24,
+        "source_release_ledger_row_count": 24,
+        "source_alignment_status": "ALIGNED",
+        "strict_release_boundary_eligible_case_count": 3,
+        "strict_release_boundary_blocked_case_count": 21,
+        "termination_basis_counts": {
+          "emergency_relief_discharge": 1,
+          "inventory_depletion": 6,
+          "inventory_over_600s": 1,
+          "reviewed_isolation_success": 14,
+          "two_sided_rupture": 2
+        },
+        "provider_qualification_status_counts": {
+          "BLOCKED": 24
+        },
+        "provider_qualification_claim": false,
+        "independent_physical_validation_claim": false,
+        "frequency_inference_performed": false,
+        "facility_ir_fn_promotion": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The case-level table separates a numerically closed release boundary from a qualified facility-QRA case. It records termination, isolation, inventory and residual evidence without inferring field frequency or promoting provider, physical-validation, IR or F/N claims."
     }
   ],
   "blocking_reasons": [

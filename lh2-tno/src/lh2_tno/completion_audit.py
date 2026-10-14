@@ -113,6 +113,7 @@ def build_ijhe_completion_audit(
     native_scope_isolation_branch_catalog_audit: Mapping[str, Any] | None = None,
     native_isolation_catalog_facility_chain_verification: Mapping[str, Any] | None = None,
     native_isolation_catalog_near_receptor_verification: Mapping[str, Any] | None = None,
+    release_boundary_case_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -4896,6 +4897,73 @@ def build_ijhe_completion_audit(
             "frequency, release boundary, or facility QRA result."
         )
         checks.append(trace_check)
+    if release_boundary_case_audit is not None:
+        boundary = release_boundary_case_audit
+        rows = boundary.get("rows")
+        rows = rows if isinstance(rows, list) else []
+        eligible_count = boundary.get("strict_release_boundary_eligible_case_count")
+        blocked_count = boundary.get("strict_release_boundary_blocked_case_count")
+        case_count = boundary.get("case_count")
+        rows_safe = all(
+            isinstance(row, Mapping)
+            and isinstance(row.get("strict_release_boundary_eligible"), bool)
+            and row.get("facility_qra_promotion_eligible") is False
+            and isinstance(row.get("facility_qra_blocking_reasons"), list)
+            for row in rows
+        )
+        boundary_valid = (
+            boundary.get("schema_version") == "prism.release_boundary_case_audit.v1"
+            and boundary.get("status") in {"CASE_BOUNDARY_PARTIAL", "CASE_BOUNDARY_CLOSED"}
+            and boundary.get("source_alignment_status") == "ALIGNED"
+            and isinstance(case_count, int)
+            and case_count > 0
+            and len(rows) == case_count
+            and isinstance(eligible_count, int)
+            and isinstance(blocked_count, int)
+            and eligible_count >= 0
+            and blocked_count >= 0
+            and eligible_count + blocked_count == case_count
+            and rows_safe
+            and boundary.get("provider_qualification_claim") is False
+            and boundary.get("independent_physical_validation_claim") is False
+            and boundary.get("frequency_inference_performed") is False
+            and boundary.get("facility_ir_fn_promotion") is False
+        )
+        boundary_check = _check(
+            "diagnostic_release_boundary_case_audit",
+            boundary_valid,
+            {
+                "record": boundary.get("_record_path"),
+                "schema_version": boundary.get("schema_version"),
+                "status": boundary.get("status"),
+                "case_count": case_count,
+                "source_case_count": boundary.get("source_case_count"),
+                "source_release_ledger_row_count": boundary.get(
+                    "source_release_ledger_row_count"
+                ),
+                "source_alignment_status": boundary.get("source_alignment_status"),
+                "strict_release_boundary_eligible_case_count": eligible_count,
+                "strict_release_boundary_blocked_case_count": blocked_count,
+                "termination_basis_counts": boundary.get("termination_basis_counts"),
+                "provider_qualification_status_counts": boundary.get(
+                    "provider_qualification_status_counts"
+                ),
+                "provider_qualification_claim": boundary.get("provider_qualification_claim"),
+                "independent_physical_validation_claim": boundary.get(
+                    "independent_physical_validation_claim"
+                ),
+                "frequency_inference_performed": boundary.get("frequency_inference_performed"),
+                "facility_ir_fn_promotion": boundary.get("facility_ir_fn_promotion"),
+            },
+            "release-boundary case audit is missing aligned rows or carries an unsafe promotion flag",
+        )
+        boundary_check["diagnostic_only"] = True
+        boundary_check["interpretation"] = (
+            "The case-level table separates a numerically closed release boundary from a qualified "
+            "facility-QRA case. It records termination, isolation, inventory and residual evidence "
+            "without inferring field frequency or promoting provider, physical-validation, IR or F/N claims."
+        )
+        checks.append(boundary_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

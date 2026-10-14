@@ -38,6 +38,7 @@ python scripts/build_ijhe_completion_audit.py `
   --uncertainty-result results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json `
   --provider-worklist results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/provider_worklist.json `
   --facility-assessment results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json `
+  --release-boundary-case-audit results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json `
   --state-snapshot-binding-audit results/20261114/base_state_snapshot_binding_audit_port_bound.json `
   --native-scope-packet-catalog-verification results/20261111/native_generic_scope_packets_isolation/verification.json `
   --native-scope-isolation-branch-catalog-audit results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json `
@@ -53,7 +54,7 @@ python scripts/build_ijhe_completion_audit.py `
 
 ## 판정
 
-현재 결과는 30개 검사 중 26개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+현재 결과는 31개 검사 중 27개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
 
 통과한 진단 연결은 다음을 뜻한다.
 
@@ -72,7 +73,8 @@ python scripts/build_ijhe_completion_audit.py `
 
 진단 계산 결과를 시설 QRA로 승격하기 위해 빈도·방출·차단·물리검증을 임의로 보충하지 않는다. 지원되지 않은 사고 family는 다른 family로 대체하지 않고 `PARTIAL`, `BLOCKED_REVIEW`, `UNCOMPUTED` 또는 명시적 evidence request로 남긴다.
 
-케이스별 방출 경계 표는 위 원칙을 방출 종료 시점에서 다시 확인한다. `ELIGIBLE`은
+케이스별 방출 경계 표는 위 원칙을 방출 종료 시점에서 다시 확인하며, 완료 감사의
+`diagnostic_release_boundary_case_audit` 항목으로 재검증한다. `ELIGIBLE`은
 개별 행의 종료 기준과 질량 장부가 닫혔다는 뜻만 가지며, 실제 provider packet,
 독립 물리검증, 문헌 빈도 적용, 시설 IR/F-N을 승인하지 않는다. 현재 3개 행도
 `model_prediction` 원점이어서 `facility_qra_promotion_eligible=false`이다. 상세
