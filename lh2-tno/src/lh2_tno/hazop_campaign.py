@@ -19,8 +19,10 @@ import math
 from typing import Any
 
 from .contracts import canonical_digest
+from .equipment_state_release_audit import build_equipment_state_release_audit
 from .facility_ledger import merge_facility_campaign_results
 from .hazop_scenario_trace_audit import audit_hazop_scenario_trace
+from .risk_atom_chain_audit import build_risk_atom_chain_audit
 from .realtime_campaign import (
     IGNITION_BRANCHES,
     build_realtime_facility_campaign_result,
@@ -345,6 +347,8 @@ def build_hazop_facility_campaign_result(
             "HAZOP campaign scenario identity trace failed: "
             + "; ".join(scenario_trace_audit.get("errors", []))
         )
+    equipment_state_release_audit = build_equipment_state_release_audit(campaign)
+    risk_atom_chain_audit = build_risk_atom_chain_audit(campaign)
     return {
         "schema_version": "prism.hazop_facility_campaign_handoff.v1",
         "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
@@ -354,6 +358,8 @@ def build_hazop_facility_campaign_result(
         "campaign": campaign,
         "facility_ledger": facility_ledger,
         "hazop_scenario_trace_audit": scenario_trace_audit,
+        "equipment_state_release_audit": equipment_state_release_audit,
+        "risk_atom_chain_audit": risk_atom_chain_audit,
         "policy": {
             "hazop_scenario_id_bound": True,
             "one_active_hazop_branch_per_component": True,
@@ -643,6 +649,8 @@ def build_hazop_facility_campaign_branches(
             "HAZOP branch campaign scenario identity trace failed: "
             + "; ".join(scenario_trace_audit.get("errors", []))
         )
+    equipment_state_release_audit = build_equipment_state_release_audit(combined)
+    risk_atom_chain_audit = build_risk_atom_chain_audit(combined)
     return {
         "schema_version": "prism.hazop_facility_campaign_branches.v1",
         "status": "HAZOP_BRANCH_CAMPAIGNS_BUILT_OPERATOR_LIMITED",
@@ -653,6 +661,8 @@ def build_hazop_facility_campaign_branches(
         "campaign": combined,
         "facility_ledger": facility_ledger,
         "hazop_scenario_trace_audit": scenario_trace_audit,
+        "equipment_state_release_audit": equipment_state_release_audit,
+        "risk_atom_chain_audit": risk_atom_chain_audit,
         "policy": {
             "branch_partition_explicit": True,
             "frequency_inference_performed": False,

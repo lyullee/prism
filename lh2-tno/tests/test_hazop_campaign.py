@@ -198,6 +198,8 @@ def test_hazop_runtime_can_enter_existing_facility_campaign_contract():
     assert result["facility_ledger"]["facility_total_risk_available"] is False
     assert result["facility_ledger"]["qualified_facility_qra_available"] is False
     assert result["hazop_scenario_trace_audit"]["status"] == "HAZOP_SCENARIO_TRACE_COMPLETE"
+    assert result["equipment_state_release_audit"]["status"] == "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN"
+    assert result["risk_atom_chain_audit"]["status"] == "PARTIAL_RISK_ATOM_CHAIN"
 
 
 def test_hazop_bridge_rejects_unmatched_mode_specific_scenario_id():
@@ -272,6 +274,8 @@ def test_hazop_branch_bridge_uses_explicit_partition_for_facility_ledger():
     assert result["facility_ledger"]["conditional_diagnostic_facility_risk_available"] is True
     assert result["facility_ledger"]["facility_total_risk_available"] is False
     assert result["hazop_scenario_trace_audit"]["status"] == "HAZOP_SCENARIO_TRACE_COMPLETE"
+    assert result["equipment_state_release_audit"]["status"] == "PARTIAL_EQUIPMENT_STATE_RELEASE_CHAIN"
+    assert result["risk_atom_chain_audit"]["status"] == "PARTIAL_RISK_ATOM_CHAIN"
 
 
 def test_hazop_branch_bridge_rejects_open_partition():
