@@ -83,3 +83,21 @@ python scripts/bind_frequency_port_result.py `
 포트 결합 후 시설 평가의 `frequency_port_binding`은 34/34 port-scoped event, 0 unbound, 0 case mismatch, 0 risk-atom mismatch, `ALIGNED`다. 이 검사는 빈도와 사고 포트의 장부 정합성만 확인하며 빈도를 새로 추정하거나 provider packet을 적격으로 승격하지 않는다.
 
 최신 결합 감사 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_completion_audit_latest5_restricted_component.json`은 34개 검사 중 30개를 통과하고 4개를 차단한다. 포트 결합, 설비 모델→사고 방출 인터페이스, SLABx-LH2 제한 구성요소 물리근거 검사는 통과했다. 제한 근거는 pool·실외 확산 구성요소에만 적용되며, 실제 provider packet·모든 방출 종료경계·완전한 사고범위·시설 전체 IR/F-N을 대신하지 않는다.
+
+## 실시간 처리 계약 재검증
+
+최신 service 코드로 cache·fresh physics·persistent worker를 다시 측정했다. 결과는 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/realtime_cache_benchmark_latest.json`에 저장했다.
+
+| 측정 | 결과 |
+|---|---:|
+| exact cache hit | 20/20 |
+| cache p95 | 약 38.9 ms |
+| fresh physics | 약 3.0 s |
+| persistent fresh steady p50 | 약 1.89 s |
+| persistent fresh steady p95/p99 | 약 1.97 s / 1.97 s |
+| fresh physics 1 Hz | 불충족 |
+| cache 1 Hz 진단 | 충족 |
+
+mode contract는 `fresh_physics_background`와 `cached_diagnostic_1hz`를 구분하고, stale fallback·빈도 학습·방출 추론을 모두 `false`로 기록한다. 작은 표본에서 p95가 p50보다 작게 기록되던 분위수 계산 오류도 수정해 `scripts/benchmark_realtime_cache.py`와 회귀 테스트에 반영했다.
+
+이 자료를 반영한 목표 감사 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_objective_coverage_audit_latest_realtime.json`의 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 즉 설비 상태→방출→피해→조건부 IR/F-N, 문헌 빈도, 포트, mode contract, 제한 SLABx 근거의 핵심 연결은 확인됐고, 적격 provider·엄격 범위·시설 QRA 승격 gate만 남아 있다.

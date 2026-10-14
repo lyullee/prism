@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import statistics
 import sys
 from pathlib import Path
@@ -35,6 +36,23 @@ def _backend_config(path: Path) -> BackendConfig:
     for package in raw.get("packages", []):
         package["sha256"] = tree_digest(Path(package["root"]))
     return BackendConfig.model_validate_json(json.dumps(raw, ensure_ascii=False))
+
+
+def _percentile(values: list[float], quantile: float) -> float:
+    """Return a conservative nearest-rank percentile for timing evidence.
+
+    The previous floor-based index reported the minimum as p95 for a two-sample
+    persistent-worker run, which could make p95 smaller than p50 and fail the
+    audit's monotonicity check.  Rounding the rank upward keeps the reported
+    tail latency conservative for small samples and preserves p50 <= p95 <= p99.
+    """
+    if not values:
+        raise ValueError("values must be non-empty")
+    if not 0.0 <= quantile <= 1.0:
+        raise ValueError("quantile must be between 0 and 1")
+    ordered = sorted(float(value) for value in values)
+    index = min(len(ordered) - 1, max(0, math.ceil(quantile * (len(ordered) - 1))))
+    return ordered[index]
 
 
 def benchmark(
@@ -67,7 +85,7 @@ def benchmark(
     fresh = service.evaluate(request)
     cached = [service.evaluate(request) for _ in range(repetitions)]
     cache_ms = [float(row["service"]["service_elapsed_ms"]) for row in cached]
-    cache_p95 = sorted(cache_ms)[int(0.95 * (len(cache_ms) - 1))]
+    cache_p95 = _percentile(cache_ms, 0.95)
     first_release = request.resolved_liquid_release or request.resolved_release
     result = {
         "schema_version": "prism.realtime_cache_benchmark.v1",
@@ -126,7 +144,7 @@ def benchmark(
             float(row["service"]["physics_run_elapsed_ms"]) for row in warm_rows
         ]
         steady_ms = warm_ms[1:] or warm_ms
-        warm_p95 = sorted(steady_ms)[int(0.95 * (len(steady_ms) - 1))]
+        warm_p95 = _percentile(steady_ms, 0.95)
         result["persistent_fresh_physics"] = {
             "persistent_worker": True,
             "request_count": len(warm_rows),
@@ -138,7 +156,7 @@ def benchmark(
             "steady_p50_ms": statistics.median(steady_ms),
             "steady_median_ms": statistics.median(steady_ms),
             "steady_p95_ms": warm_p95,
-            "steady_p99_ms": sorted(steady_ms)[int(0.99 * (len(steady_ms) - 1))],
+            "steady_p99_ms": _percentile(steady_ms, 0.99),
             "fresh_physics_meets_one_hz": all(value <= 1000.0 for value in warm_ms),
             "steady_fresh_physics_meets_one_hz": all(
                 value <= 1000.0 for value in (warm_ms[1:] or warm_ms)
