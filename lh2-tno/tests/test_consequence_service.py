@@ -64,6 +64,7 @@ def test_realtime_frequency_binding_uses_packaged_catalogue_event():
         profile='TNO_PRESSURE_VESSEL',
         classification_basis='packaged catalogue binding diagnostic',
         physical_scope_ids=('tank-1',),
+        port_ids=('storage.out',),
         vessel_external_impact_or_operating_error=False,
     )
     plan = FrequencyPlan(
@@ -88,6 +89,7 @@ def test_realtime_frequency_binding_uses_packaged_catalogue_event():
     assert binding.asset_id == event.asset_id
     assert binding.initiating_frequency_per_year == event.annual_frequency_per_year
     assert binding.source_digest == event.source_sha256
+    assert binding.port_ids == event.port_ids == ('storage.out',)
     assert binding.conditional_weight == pytest.approx(0.1)
     assert binding.weighted_frequency() == pytest.approx(
         event.annual_frequency_per_year * 0.1

@@ -34,6 +34,7 @@ def _monitor(tmp_path: Path, *, with_provider_path: bool = True):
         occupancy_probability=1.0,
         provenance="reviewed synthetic literature binding for adapter test",
         source_digest="a" * 64,
+        port_ids=("tank-out",),
     )
     binding = FacilityRealtimeBinding(
         component_id=base.component_id,
@@ -121,6 +122,9 @@ def test_realtime_snapshot_becomes_conditional_facility_ledger_input(tmp_path):
     assert len(result["risk_atoms"]) == 4
     assert result["cases"][0]["status"] == "EXECUTED_OPERATOR_LIMITED"
     assert result["provider_packet_case_count"] == 1
+    assert result["events"][0]["port_ids"] == ["tank-out"]
+    assert result["cases"][0]["frequency_port_ids"] == ["tank-out"]
+    assert result["risk_atoms"][0]["frequency_port_ids"] == ["tank-out"]
     assert result["qualified_provider_packet_case_count"] == 0
     assert result["physical_validation_claim"] is False
     assert result["complete_facility_qra_claim"] is False
@@ -133,6 +137,8 @@ def test_realtime_snapshot_becomes_conditional_facility_ledger_input(tmp_path):
         [result], expected_component_ids=("storage-tank-01",)
     )
     assert ledger["conditional_diagnostic_facility_risk_available"] is True
+    assert ledger["frequency_port_binding"]["status"] == "ALIGNED"
+    assert ledger["frequency_port_binding"]["facility_qra_allowed"] is True
     assert ledger["facility_total_risk_available"] is False
     assert ledger["qualified_facility_qra_available"] is False
     assert ledger["conditional_diagnostic_facility_annual_ir_low_high"]["worker-01"] == pytest.approx(

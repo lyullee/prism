@@ -64,8 +64,9 @@ provider packet에 지면 액체가 있지만 풀 경계가 없으므로, 실행
 | 시설 campaign handoff | `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED` |
 | 조건부 시설 IR | 계산됨 (`conditional_diagnostic_facility_risk_available=true`) |
 | 조건부 시설 F/N | 계산됨 (`conditional_diagnostic_facility_expected_death_fn_low_high`) |
+| 빈도 사건 포트 추적 | `tank-accident-out` event/case/risk atom 일치, `facility_qra_allowed=true` 하위 gate |
 | 시설 연간 IR/F-N 승격 | 보류 (`facility_total_risk_available=false`) |
-| 처리시간 | 통합 호출 약 26.29 s, 현재 provider consequence 약 12.75 s; 1 Hz 보장 아님 |
+| 처리시간 | 통합 호출 약 25.96 s, 현재 provider consequence 약 13.19 s; 1 Hz 보장 아님 |
 
 현재 위험 원자는 `storage-tank-01`, `receiving`, `liquid_two_phase`로 기록된다. 문헌 사건의 published frequency와 p05/p95 민감도 구간은 원자 안에 provenance와 source digest와 함께 남는다. 이어서 동일한 원자의 branch별 피해와 명시적 합성 인구 조건을 기존 시설 campaign에 넘겨 조건부 IR과 F/N 곡선을 만들었다. 이 곡선은 선언한 한 조건과 한 수용점의 진단 결과이며, 전체 시설 연간 IR/F-N이 아니다.
 

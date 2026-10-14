@@ -869,6 +869,7 @@ class RealtimeFrequencyBinding:
     occupancy_probability: float
     provenance: str
     source_digest: str
+    port_ids: tuple[str, ...] | None = None
     frequency_p05_per_year: float | None = None
     frequency_p95_per_year: float | None = None
 
@@ -910,6 +911,7 @@ class RealtimeFrequencyBinding:
             occupancy_probability=occupancy_probability,
             provenance=provenance,
             source_digest=event.source_sha256,
+            port_ids=tuple(event.port_ids) if event.port_ids is not None else None,
             frequency_p05_per_year=event.marginal_p05_per_year,
             frequency_p95_per_year=event.marginal_p95_per_year,
         )
@@ -938,6 +940,15 @@ class RealtimeFrequencyBinding:
             r"[0-9a-fA-F]{64}", self.source_digest
         ):
             raise ValueError("source_digest must be a 64-character SHA-256 digest")
+        if self.port_ids is not None:
+            if (
+                not isinstance(self.port_ids, tuple)
+                or not self.port_ids
+                or len(set(self.port_ids)) != len(self.port_ids)
+            ):
+                raise ValueError("port_ids must be a nonempty tuple of unique strings")
+            if any(not isinstance(value, str) or not value.strip() for value in self.port_ids):
+                raise ValueError("port_ids must contain nonempty strings")
         bounds = (self.frequency_p05_per_year, self.frequency_p95_per_year)
         if (bounds[0] is None) != (bounds[1] is None):
             raise ValueError(
@@ -1157,6 +1168,7 @@ def _realtime_current_weather_risk(
         "risk_atom": {
             "event_id": frequency.event_id,
             "asset_id": frequency.asset_id,
+            "port_ids": list(frequency.port_ids) if frequency.port_ids is not None else None,
             "initiating_frequency_per_year": frequency.initiating_frequency_per_year,
             "conditional_weight": frequency.conditional_weight,
             "annual_condition_probability": frequency.annual_condition_probability,

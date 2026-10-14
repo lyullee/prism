@@ -611,6 +611,11 @@ def build_realtime_facility_campaign_result(
                     "source_sha256": (
                         atom.get("frequency_source_digest") if atom is not None else None
                     ),
+                    "port_ids": (
+                        copy.deepcopy(atom.get("port_ids"))
+                        if atom is not None and atom.get("port_ids") is not None
+                        else None
+                    ),
                     "release": {"mode": "provider_resolved"},
                     "classification_basis": "explicit realtime scenario binding",
                     "scenario_families": [],
@@ -636,6 +641,8 @@ def build_realtime_facility_campaign_result(
                 != (atom.get("frequency_p95_per_year") if atom is not None else None)
                 or event.get("source_sha256")
                 != (atom.get("frequency_source_digest") if atom is not None else None)
+                or event.get("port_ids")
+                != (atom.get("port_ids") if atom is not None else None)
                 or event.get("operating_mode") != operating_mode
                 or (
                     (hazop_scenario_id is not None or event.get("hazop_scenario_id") is not None)
@@ -659,6 +666,11 @@ def build_realtime_facility_campaign_result(
                 "release_branch_probability": release_probability,
                 "annual_condition_probability": condition["annual_probability"],
                 "consequence_basis": consequence_basis,
+                "frequency_port_ids": (
+                    copy.deepcopy(atom.get("port_ids"))
+                    if atom is not None and atom.get("port_ids") is not None
+                    else None
+                ),
                 "consequence_provenance": (
                     binding.get("consequence_provenance")
                     if consequence_basis == "reviewed_annual_condition"
@@ -764,6 +776,16 @@ def build_realtime_facility_campaign_result(
                             else {}
                         ),
                         "provider_packet_identity": copy.deepcopy(provider_identity),
+                        "frequency_port_ids": (
+                            copy.deepcopy(atom.get("port_ids"))
+                            if atom is not None and atom.get("port_ids") is not None
+                            else None
+                        ),
+                        "port_ids": (
+                            copy.deepcopy(atom.get("port_ids"))
+                            if atom is not None and atom.get("port_ids") is not None
+                            else None
+                        ),
                         "receptor_harm_low_high": harm,
                         "expected_deaths_basis": "population_weighted",
                         "expected_deaths_low_high": [
