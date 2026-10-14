@@ -179,6 +179,11 @@ def main() -> int:
         help="optional explicit HAZOP operating-mode/scenario binding audit",
     )
     parser.add_argument(
+        "--hazop-selection-event-binding",
+        type=Path,
+        help="optional HAZOP selection-to-frequency-event identity audit",
+    )
+    parser.add_argument(
         "--hazop-operating-mode-evidence",
         type=Path,
         help="optional inspection-center qualitative HAZOP operating-mode evidence audit",
@@ -558,6 +563,13 @@ def main() -> int:
         )
         if hazop_event_mode_binding is not None:
             hazop_event_mode_binding["_record_path"] = str(args.hazop_event_mode_binding)
+        hazop_selection_event_binding = (
+            _object(args.hazop_selection_event_binding)
+            if args.hazop_selection_event_binding
+            else None
+        )
+        if hazop_selection_event_binding is not None:
+            hazop_selection_event_binding["_record_path"] = str(args.hazop_selection_event_binding)
         hazop_operating_mode_evidence = (
             _object(args.hazop_operating_mode_evidence)
             if args.hazop_operating_mode_evidence
@@ -707,6 +719,7 @@ def main() -> int:
             hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,
             hazop_scope_worklist=hazop_scope_worklist,
             hazop_event_mode_binding=hazop_event_mode_binding,
+            hazop_selection_event_binding=hazop_selection_event_binding,
             hazop_operating_mode_evidence=hazop_operating_mode_evidence,
             reviewed_signal_unit_evidence=reviewed_signal_unit_evidence,
             observed_hazop_runtime_audit=observed_hazop_runtime_audit,

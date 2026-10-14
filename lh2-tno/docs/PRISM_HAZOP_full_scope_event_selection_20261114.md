@@ -77,3 +77,6 @@ python scripts/build_scope_closure_report.py `
 - `results/20261114/full_scope_hazop_runtime_audit_event_binding.json`
 - `results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop/hazop_selection_event_binding.json`
 - `results/20261114/scope_closure_report_fullscope_hazop.json`
+- `results/20261114/ijhe_completion_audit_fullscope_hazop.json`
+
+IJHE 완료 감사에도 `diagnostic_hazop_selection_event_binding = PASS`로 연결했다. 전체 감사 상태는 방출 경계·provider 자격·물리검증·시설 IR/F-N·빈도 불확실성 장부가 아직 닫히지 않아 `INCOMPLETE_EVIDENCE`로 남는다.

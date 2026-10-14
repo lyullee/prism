@@ -101,6 +101,7 @@ def build_ijhe_completion_audit(
     hazop_multiequipment_diagnostic: Mapping[str, Any] | None = None,
     hazop_scope_worklist: Mapping[str, Any] | None = None,
     hazop_event_mode_binding: Mapping[str, Any] | None = None,
+    hazop_selection_event_binding: Mapping[str, Any] | None = None,
     hazop_operating_mode_evidence: Mapping[str, Any] | None = None,
     reviewed_signal_unit_evidence: Mapping[str, Any] | None = None,
     observed_hazop_runtime_audit: Mapping[str, Any] | None = None,
@@ -3963,6 +3964,64 @@ def build_ijhe_completion_audit(
             "claim that the missing bindings have been supplied."
         )
         checks.append(mode_check)
+    if hazop_selection_event_binding is not None:
+        selection_audit = hazop_selection_event_binding
+        policy = selection_audit.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        selected_count = selection_audit.get("selected_scenario_count")
+        event_count = selection_audit.get("frequency_event_count")
+        bound_count = selection_audit.get("bound_event_count")
+        unbound_count = selection_audit.get("unbound_event_count")
+        event_rows = selection_audit.get("event_rows")
+        selected_rows = selection_audit.get("selected_scenarios")
+        errors = selection_audit.get("errors")
+        counts_valid = all(
+            isinstance(value, int) and value >= 0
+            for value in (selected_count, event_count, bound_count, unbound_count)
+        )
+        selection_audit_valid = (
+            selection_audit.get("schema_version") == "prism.hazop_event_selection_binding_audit.v1"
+            and selection_audit.get("status") in {
+                "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+                "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",
+            }
+            and counts_valid
+            and bound_count + unbound_count == event_count
+            and isinstance(event_rows, list)
+            and len(event_rows) == event_count
+            and isinstance(selected_rows, list)
+            and isinstance(errors, list)
+            and not errors
+            and policy.get("operating_mode_taken_from_explicit_runtime_input") is True
+            and policy.get("scenario_family_inference_performed") is False
+            and policy.get("frequency_assignment_performed") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("provider_release_created") is False
+            and policy.get("facility_qra_claim") is False
+        )
+        selection_check = _check(
+            "diagnostic_hazop_selection_event_binding",
+            selection_audit_valid,
+            {
+                "record": selection_audit.get("_record_path"),
+                "schema_version": selection_audit.get("schema_version"),
+                "status": selection_audit.get("status"),
+                "selected_scenario_count": selected_count,
+                "frequency_event_count": event_count,
+                "bound_event_count": bound_count,
+                "unbound_event_count": unbound_count,
+                "error_count": len(errors) if isinstance(errors, list) else None,
+                "policy": dict(policy),
+            },
+            "HAZOP selection-to-frequency-event audit is missing identity accounting or permits family/frequency inference",
+        )
+        selection_check["diagnostic_only"] = True
+        selection_check["interpretation"] = (
+            "The audit confirms that every declared frequency event is matched to an explicit "
+            "HAZOP component, operating mode, scenario family and release mode. A PASS does not "
+            "qualify the provider release or promote facility IR/F-N."
+        )
+        checks.append(selection_check)
     if hazop_operating_mode_evidence is not None:
         mode_evidence = hazop_operating_mode_evidence
         policy = mode_evidence.get("policy")

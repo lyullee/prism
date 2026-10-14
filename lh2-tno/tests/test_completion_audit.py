@@ -3241,6 +3241,61 @@ def test_completion_audit_blocks_event_mode_inference_policy():
     assert check["status"] == "BLOCKED"
 
 
+def _selection_event_binding_audit(**overrides):
+    record = {
+        "schema_version": "prism.hazop_event_selection_binding_audit.v1",
+        "status": "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+        "selected_scenario_count": 1,
+        "frequency_event_count": 1,
+        "bound_event_count": 1,
+        "unbound_event_count": 0,
+        "selected_scenarios": [{"scenario_id": "scenario-01", "status": "BOUND"}],
+        "event_rows": [{"event_id": "event-01", "status": "BOUND"}],
+        "errors": [],
+        "policy": {
+            "operating_mode_taken_from_explicit_runtime_input": True,
+            "scenario_family_inference_performed": False,
+            "frequency_assignment_performed": False,
+            "frequency_inference_performed": False,
+            "provider_release_created": False,
+            "facility_qra_claim": False,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_full_scope_hazop_event_identity_binding():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_selection_event_binding=_selection_event_binding_audit(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_selection_event_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_hazop_event_identity_inference():
+    unsafe = _selection_event_binding_audit()
+    unsafe["policy"]["scenario_family_inference_performed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_selection_event_binding=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_selection_event_binding"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _operating_mode_evidence_audit(**overrides):
     record = {
         "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",

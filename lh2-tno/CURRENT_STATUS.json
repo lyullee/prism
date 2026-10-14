@@ -4731,5 +4731,23 @@
     "provider_release_created": false,
     "facility_qra_promotion": false,
     "interpretation": "HAZOP family and frequency-event identity is closed for the declared 24-event campaign; provider qualification, independent physical validation, strict release closure and facility IR/F-N remain withheld."
+  },
+  "latest_ijhe_completion_audit_fullscope_hazop": {
+    "record": "results/20261114/ijhe_completion_audit_fullscope_hazop.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "diagnostic_hazop_selection_event_binding": "PASS",
+    "diagnostic_hazop_selection_event_binding_selected_scenario_count": 10,
+    "diagnostic_hazop_selection_event_binding_event_count": 24,
+    "diagnostic_hazop_selection_event_binding_bound_event_count": 24,
+    "diagnostic_hazop_selection_event_binding_unbound_event_count": 0,
+    "blocking_reason_count": 6,
+    "blocking_reasons": [
+      "facility release boundary is not closed across all declared cases",
+      "only synthetic or screening provider releases are available for this campaign",
+      "provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+      "one or more declared accident families are missing, partial, or uncomputed",
+      "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+      "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view"
+    ]
   }
 }

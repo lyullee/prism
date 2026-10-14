@@ -3811,5 +3811,12 @@
     "frequency_assignment_performed": false,
     "provider_release_created": false,
     "facility_qra_promotion": false
+  },
+  "latest_ijhe_completion_audit_fullscope_hazop": {
+    "record": "results/20261114/ijhe_completion_audit_fullscope_hazop.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "diagnostic_hazop_selection_event_binding": "PASS",
+    "blocking_reason_count": 6,
+    "facility_qra_promotion": false
   }
 }
