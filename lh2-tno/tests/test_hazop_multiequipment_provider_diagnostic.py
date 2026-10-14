@@ -92,3 +92,19 @@ def test_loader_rejects_receptor_population_set_drift(
             defaults={"weather": {}},
             manifest=manifest,
         )
+
+
+def test_loader_rejects_first_condition_weather_drift(
+    tmp_path: Path, manifest: EquipmentManifest
+) -> None:
+    condition = _condition()
+    condition["weather"]["wind_speed_m_s"] = 7.0
+    path = tmp_path / "annual_conditions.json"
+    path.write_text(json.dumps([condition]), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="first annual condition weather differs"):
+        MODULE._load_annual_conditions(
+            path,
+            defaults={"weather": {"wind_speed_m_s": 3.0}},
+            manifest=manifest,
+        )

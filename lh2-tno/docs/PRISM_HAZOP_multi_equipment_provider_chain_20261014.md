@@ -40,7 +40,8 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
 
 파일은 `id`, `annual_probability`, `weather`, `population`, `provenance`를 가진
 조건 목록이며, 확률 합은 1이어야 하고 모든 조건의 수용점 집합은 같아야 한다.
-첫 번째 조건만 현재 HAZOP runtime의 관측 피해 결과를 사용할 수 있다. 두 번째
+첫 번째 조건의 기상은 현재 provider consequence를 실행한 기상과 일치해야 하며,
+다르면 입력 경계에서 보류한다. 첫 번째 조건만 현재 HAZOP runtime의 관측 피해 결과를 사용할 수 있다. 두 번째
 조건부터는 현재 날씨 결과를 재사용하지 않도록 각 조건에
 `reviewed_consequence`를 넣어 `observed_harm_low_high`,
 `branch_harm_low_high`, `provenance`를 별도로 제공해야 한다. 이 자료가 없으면

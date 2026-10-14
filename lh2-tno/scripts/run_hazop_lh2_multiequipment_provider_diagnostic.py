@@ -506,6 +506,35 @@ def _load_annual_conditions(
     ]
     if any(receptors != receptor_sets[0] for receptors in receptor_sets[1:]):
         raise ValueError("all annual_conditions must use the same receptor population set")
+    # The runtime consequence was calculated with the provider-default
+    # current weather.  Reusing that harm for the first condition is valid
+    # only when the condition describes the same weather; a different first
+    # condition must supply a separately rerun consequence instead of being
+    # silently treated as the observed snapshot.
+    baseline_weather = defaults.get("weather")
+    first_weather = conditions[0].get("weather")
+    if isinstance(baseline_weather, Mapping) and isinstance(first_weather, Mapping):
+        comparable_keys = (
+            "wind_speed_m_s",
+            "wind_from_bearing_deg",
+            "measurement_height_m",
+            "roughness_m",
+            "stability",
+            "stability_class",
+            "relative_humidity",
+        )
+        mismatches = [
+            key
+            for key in comparable_keys
+            if key in baseline_weather
+            and key in first_weather
+            and baseline_weather[key] != first_weather[key]
+        ]
+        if mismatches:
+            raise ValueError(
+                "the first annual condition weather differs from the runtime provider weather "
+                f"({', '.join(mismatches)}); rerun consequence or supply reviewed_consequence evidence"
+            )
     return conditions, {
         "source": "caller_file",
         "path": str(path),
