@@ -35,8 +35,8 @@
 <rect x="565" y="675" width="375" height="128" rx="20" fill="#EFFAFB" stroke="#8BD7DF" stroke-width="2"/>
 <text x="595" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="595" dy="0">즉시 분석 요청</tspan><tspan x="595" dy="37.0">확정 시나리오 + 현재 상태</tspan></text>
 <rect x="1005" y="638" width="620" height="202" rx="22" fill="#EDF5F9" stroke="#8EB8D0" stroke-width="3"/>
-<text x="1038" y="689" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="35" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량 위험분석</tspan></text>
-<text x="1038" y="741" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="1038" dy="0">설비·공정 모델: 방출 상태·유량</tspan><tspan x="1038" dy="31.0">PRISM: 사고 빈도 + 피해 → 위험도</tspan><tspan x="1038" dy="31.0">SLABx-LH2: 누출·확산</tspan></text>
+<text x="1038" y="689" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="35" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량 위험분석 계층</tspan></text>
+<text x="1038" y="741" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="1038" dy="0">설비·공정 모델: 방출 상태·재고·유량</tspan><tspan x="1038" dy="31.0">빈도 근거: 문헌·설비별 사건자료</tspan><tspan x="1038" dy="31.0">SLABx-LH2: 누출·확산·피해</tspan><tspan x="1038" dy="31.0">PRISM: 위험도 계산·통합</tspan></text>
 <rect x="1690" y="675" width="580" height="128" rx="20" fill="#E1F3EC" stroke="#48A483" stroke-width="2"/>
 <text x="1722" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#174F43" text-anchor="start"><tspan x="1722" dy="0">현재 위험도 → 비상대응·안전관리</tspan><tspan x="1722" dy="37.0">관리자 화면에 대응안 표시</tspan></text>
 <path d="M 501 739 H 550" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
@@ -51,8 +51,8 @@
 <rect x="565" y="979" width="375" height="129" rx="20" fill="#FFF7EE" stroke="#F3C38E" stroke-width="2"/>
 <text x="595" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="595" dy="0">위험조건 도달 판단</tspan><tspan x="595" dy="37.0">도달 시 추가 분석 요청</tspan></text>
 <rect x="1005" y="952" width="620" height="203" rx="22" fill="#EDF5F9" stroke="#8EB8D0" stroke-width="3"/>
-<text x="1038" y="1003" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="35" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량 위험분석</tspan></text>
-<text x="1038" y="1055" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="1038" dy="0">설비·공정 모델: 예측 방출 상태</tspan><tspan x="1038" dy="31.0">PRISM: 사고 빈도 + 피해 → 위험도</tspan><tspan x="1038" dy="31.0">SLABx-LH2: 누출·확산</tspan></text>
+<text x="1038" y="1003" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="35" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량 위험분석 계층</tspan></text>
+<text x="1038" y="1055" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="1038" dy="0">설비·공정 모델: 예측 방출 상태·재고</tspan><tspan x="1038" dy="31.0">빈도 근거: 문헌·설비별 사건자료</tspan><tspan x="1038" dy="31.0">SLABx-LH2: 누출·확산·피해</tspan><tspan x="1038" dy="31.0">PRISM: 위험도 계산·통합</tspan></text>
 <rect x="1690" y="979" width="580" height="129" rx="20" fill="#FFF0DF" stroke="#E4A05C" stroke-width="2"/>
 <text x="1722" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#7D4B23" text-anchor="start"><tspan x="1722" dy="0">미래 위험도 → 선제 안전조치</tspan><tspan x="1722" dy="37.0">관리자 화면에 예상 위험 표시</tspan></text>
 <path d="M 501 1043 H 550" fill="none" stroke="#E28B43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-E28B43)"/>
