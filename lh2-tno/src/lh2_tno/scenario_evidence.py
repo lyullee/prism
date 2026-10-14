@@ -533,6 +533,9 @@ def build_provider_packet_request_catalog(audit: Mapping[str, Any]) -> dict[str,
             "asset": record.get("asset"),
             "step": record.get("step"),
             "operation": record.get("operation"),
+            "candidate_component_kinds": record.get("candidate_component_kinds", ()),
+            "candidate_release_modes": record.get("candidate_release_modes", ()),
+            "hazop_row_status": record.get("hazop_row_status"),
         }
         request_id = "scenario-" + hashlib.sha256(
             json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -550,6 +553,9 @@ def build_provider_packet_request_catalog(audit: Mapping[str, Any]) -> dict[str,
             "runtime_operating_mode_required": True,
             "candidate_accident_families": list(families),
             "hazard_class": record.get("hazard_class"),
+            "candidate_component_kinds": list(record.get("candidate_component_kinds", ())),
+            "candidate_release_modes": list(record.get("candidate_release_modes", ())),
+            "hazop_row_status": record.get("hazop_row_status"),
             "provider_export_schema": "prism.resolved_release.v1",
             "required_provider_fields": list(
                 record.get("missing_provider_fields") or PROVIDER_RELEASE_REQUIRED_FIELDS
@@ -601,6 +607,41 @@ _EXTERNAL_CATEGORY_FAMILY_MAP: dict[str, tuple[str, ...]] = {
     "supply_start": ("pipe_hole", "valve_hole"),
     "vaporizer_pass": ("vaporizer_hole",),
     "test_building_supply_gas": ("pipe_hole",),
+}
+
+# Candidate mappings only.  A procedure label does not identify an exact
+# accident port or provider boundary, so the final equipment/port binding
+# remains a reviewed manifest decision.
+_EXTERNAL_CATEGORY_COMPONENT_KIND_MAP: dict[str, tuple[str, ...]] = {
+    "flange_connect": ("pipe", "valve"),
+    "purge_vent": ("vent_stack", "valve"),
+    "valve_close": ("valve",),
+    "main_line_open": ("pipe", "valve"),
+    "gas_phase_fill": ("storage_tank", "pipe"),
+    "liquid_phase_fill": ("storage_tank", "pipe"),
+    "filling_monitor": ("storage_tank",),
+    "pressure_rise_monitor": ("storage_tank", "vent_stack"),
+    "relief_vent": ("vent_stack",),
+    "supply_start": ("pipe", "valve"),
+    "vaporizer_pass": ("vaporizer",),
+    "test_building_supply_gas": ("pipe",),
+    "test_building_supply_liquid": ("pipe", "vaporizer"),
+}
+
+_EXTERNAL_CATEGORY_RELEASE_MODE_MAP: dict[str, tuple[str, ...]] = {
+    "flange_connect": ("hole",),
+    "purge_vent": ("hole", "maximum_relief_discharge"),
+    "valve_close": ("hole",),
+    "main_line_open": ("hole",),
+    "gas_phase_fill": ("hole",),
+    "liquid_phase_fill": ("hole",),
+    "filling_monitor": ("hole",),
+    "pressure_rise_monitor": ("inventory_over_600s", "maximum_relief_discharge"),
+    "relief_vent": ("maximum_relief_discharge", "hole"),
+    "supply_start": ("hole",),
+    "vaporizer_pass": ("hole",),
+    "test_building_supply_gas": ("hole",),
+    "test_building_supply_liquid": ("hole",),
 }
 
 _EXTERNAL_CATEGORY_SIGNAL_MAP: dict[str, tuple[str, ...]] = {
@@ -700,6 +741,14 @@ def _external_record(
         "action": _external_value(row, _EXTERNAL_FIELD_ALIASES["action"]),
         "risk_classification": category,
         "candidate_accident_families": list(_EXTERNAL_CATEGORY_FAMILY_MAP.get(category or "", ())),
+        "candidate_component_kinds": list(_EXTERNAL_CATEGORY_COMPONENT_KIND_MAP.get(category or "", ())),
+        "candidate_release_modes": list(_EXTERNAL_CATEGORY_RELEASE_MODE_MAP.get(category or "", ())),
+        "hazop_row_status": (
+            "CANDIDATE_REQUIRES_NUMERIC_TRIGGER_AND_REVIEWED_TAG"
+            if category in _EXTERNAL_CATEGORY_COMPONENT_KIND_MAP
+            else "NO_CANDIDATE_MAPPING"
+        ),
+        "numeric_trigger_status": "MISSING_FROM_PROCEDURE_REGISTER",
         "candidate_monitoring_signals": list(_external_signals(category, text)),
         "scope_status": _external_scope_status(text),
         "leak_failure": _external_value(row, _EXTERNAL_FIELD_ALIASES["leak_failure"]),
@@ -765,6 +814,15 @@ def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
         for record in records
         if record.get("operating_mode_candidate") is not None
     )
+    component_kind_counts = Counter(
+        kind for record in records for kind in record.get("candidate_component_kinds", ())
+    )
+    release_mode_counts = Counter(
+        mode for record in records for mode in record.get("candidate_release_modes", ())
+    )
+    hazop_row_status_counts = Counter(
+        record.get("hazop_row_status") for record in records
+    )
     status = "SCREENING_EVIDENCE_IMPORTED" if records and not errors else (
         "PARTIAL_SCREENING_EVIDENCE" if records else "FAILED_SCREENING_EVIDENCE"
     )
@@ -781,6 +839,9 @@ def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
             "monitoring_signal_candidate_counts": dict(sorted(signal_counts.items())),
             "scope_status_counts": dict(sorted(scope_counts.items())),
             "operating_mode_candidate_counts": dict(sorted(operating_mode_counts.items())),
+            "component_kind_candidate_counts": dict(sorted(component_kind_counts.items())),
+            "release_mode_candidate_counts": dict(sorted(release_mode_counts.items())),
+            "hazop_row_status_counts": dict(sorted(hazop_row_status_counts.items())),
         },
         "errors": errors,
         "policy": {
@@ -792,6 +853,8 @@ def import_scenario_evidence(root: str | Path) -> dict[str, Any]:
             "indoor_and_enclosed_rows_excluded_from_outdoor_scope": True,
             "candidate_family_map_is_not_a_frequency_map": True,
             "procedure_label_is_not_a_runtime_operating_mode": True,
+            "candidate_component_and_release_maps_are_not_provider_bindings": True,
+            "numeric_trigger_and_unit_review_required_before_hazop_table_promotion": True,
         },
         "limitations": [
             "Procedure and failure text identifies candidate scenarios only; it does not provide an initiating frequency.",

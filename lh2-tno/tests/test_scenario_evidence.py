@@ -121,5 +121,15 @@ def test_external_csv_import_maps_candidates_without_frequency(tmp_path):
     assert "hydrogen_detection" in report["records"][0]["candidate_monitoring_signals"]
     assert report["records"][0]["operating_mode_candidate"] == "storage_vent"
     assert report["records"][1]["operating_mode_candidate"] == "supply"
+    assert report["records"][0]["candidate_component_kinds"] == ["vent_stack"]
+    assert report["records"][0]["candidate_release_modes"] == [
+        "maximum_relief_discharge", "hole"
+    ]
+    assert report["records"][0]["hazop_row_status"] == (
+        "CANDIDATE_REQUIRES_NUMERIC_TRIGGER_AND_REVIEWED_TAG"
+    )
+    assert report["records"][0]["numeric_trigger_status"] == "MISSING_FROM_PROCEDURE_REGISTER"
+    assert report["policy"]["candidate_component_and_release_maps_are_not_provider_bindings"] is True
+    assert report["policy"]["numeric_trigger_and_unit_review_required_before_hazop_table_promotion"] is True
     assert report["records"][0]["operating_mode_is_runtime_input"] is False
     assert report["policy"]["procedure_label_is_not_a_runtime_operating_mode"] is True
