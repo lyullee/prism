@@ -1561,7 +1561,7 @@ F-N에는 인구 분포와 같은 사건의 피해자수 정의도 필요합니�
 
 ### 물리 검증 근거의 범위
 
-외부 DynamicLH2PoolX Stage-C 자료는 지면에 도달한 유입의 축대칭 풀 증발·확산 구성요소를 hold-out 자료로 제한 검증합니다. 물 Trial 4 반경 RMSE는 `0.1374 m`, 알루미늄 Trial 6은 `0.1016 m`, 두 영상 구간 포함률은 `1.0`, HSE Test 6 질량 잔차는 `8.24e-13 kg`입니다. PRISM은 이 자료의 원자료 목록과 모델·manifest 해시를 [물리 검증 근거 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md)으로 보관합니다.
+외부 DynamicLH2PoolX Stage-C 자료는 지면에 도달한 유입의 축대칭 풀 증발·확산 구성요소를 hold-out 자료로 제한 검증합니다. 물 Trial 4 반경 RMSE는 `0.1374 m`, 알루미늄 Trial 6은 `0.1016 m`, 두 영상 구간 포함률은 `1.0`, HSE Test 6 질량 잔차는 `8.24e-13 kg`입니다. PRISM은 이 자료의 원자료 목록과 모델·manifest 해시를 [물리 검증 근거 기록](https://github.com/lyullee/prism/blob/main/lh2-tno/docs/PRISM_물리검증_근거_20261009.md)과 [DynamicLH2PoolX 증거 감사 기록](docs/PRISM_DynamicLH2PoolX_physical_validation_20261014.md)으로 보관합니다. 새 감사 산출물은 현재 소스와 외부 evidence 해시가 다른 상태를 별도로 표시하며, 이 구성요소 증거를 설비 사고 방출이나 시설 QRA 검증으로 승격하지 않습니다.
 
 현재 외부 snapshot의 `dynamic_validation_protocol.json` 선언 해시가 evidence JSON과 달라 상태를 `DECLARED_EVIDENCE_WITH_SOURCE_HASH_DRIFT`로 기록했습니다. 엄격 검증은 중단하고, 감사 모드만 지표와 불일치 파일을 보존합니다. 이 구성요소 증거는 설비 방출·대기 확산·점화·IR/F-N 전체 체인의 물리 검증이나 현장 절대위험 검증을 의미하지 않습니다.
 
