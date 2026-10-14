@@ -164,6 +164,11 @@ def main() -> int:
         help="optional provenance-only inventory of external release-shaped JSON artifacts",
     )
     parser.add_argument(
+        "--external-model-root-review",
+        type=Path,
+        help="optional provenance-only review of the external LH2 digital-twin model root",
+    )
+    parser.add_argument(
         "--facility-evidence-request",
         type=Path,
         help="optional exact facility-case evidence-request coverage audit",
@@ -461,6 +466,13 @@ def main() -> int:
             external_release_artifact_intake["_record_path"] = str(
                 args.external_release_artifact_intake
             )
+        external_model_root_review = (
+            _object(args.external_model_root_review)
+            if args.external_model_root_review
+            else None
+        )
+        if external_model_root_review is not None:
+            external_model_root_review["_record_path"] = str(args.external_model_root_review)
         facility_evidence_request = (
             _object(args.facility_evidence_request)
             if args.facility_evidence_request
@@ -519,6 +531,7 @@ def main() -> int:
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,
             external_release_artifact_intake=external_release_artifact_intake,
+            external_model_root_review=external_model_root_review,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

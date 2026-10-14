@@ -2691,3 +2691,79 @@ def test_completion_audit_blocks_external_normal_model_without_native_release_ex
         "NATIVE_ACCIDENT_EXPORT_MISSING"
     )
     assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_records_external_lh2_model_root_without_promotion():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        external_model_root_review={
+            "schema_version": "prism.external_lh2_model_root_review.v1",
+            "source_root": "external/lh2dt_models",
+            "provider_like_artifacts": {
+                "provider_response_count": 0,
+                "resolved_release_count": 0,
+                "exact_generic_identity_match_count": 0,
+                "qualification_sidecar_count": 0,
+            },
+            "external_match_review": {
+                "status": "NO_EXACT_QUALIFIED_MATCH",
+                "candidate_count": 0,
+                "exact_match_count": 0,
+                "qualification_artifact_count": 0,
+            },
+            "promotion": {
+                "provider_packet": False,
+                "frequency": False,
+                "facility_qra": False,
+                "physical_validation": False,
+            },
+            "blocking_reasons": ["qualification sidecar is absent"],
+            "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+            "_record_path": "model-root-review.json",
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_lh2_model_root_review"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["promotion"]["facility_qra"] is False
+
+
+def test_completion_audit_blocks_external_lh2_model_root_promotion_claim():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        external_model_root_review={
+            "schema_version": "prism.external_lh2_model_root_review.v1",
+            "source_root": "external/lh2dt_models",
+            "provider_like_artifacts": {
+                "provider_response_count": 1,
+                "resolved_release_count": 1,
+                "exact_generic_identity_match_count": 1,
+                "qualification_sidecar_count": 0,
+            },
+            "external_match_review": {
+                "status": "MATCHED",
+                "candidate_count": 1,
+                "exact_match_count": 1,
+            },
+            "promotion": {
+                "provider_packet": True,
+                "frequency": False,
+                "facility_qra": False,
+                "physical_validation": False,
+            },
+            "blocking_reasons": [],
+            "conclusion": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION",
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_lh2_model_root_review"
+    )
+    assert check["status"] == "BLOCKED"

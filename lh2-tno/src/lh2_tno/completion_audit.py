@@ -97,6 +97,7 @@ def build_ijhe_completion_audit(
     facility_evidence_request: Mapping[str, Any] | None = None,
     hazop_integrated_risk: Mapping[str, Any] | None = None,
     hazop_scenario_trace_audit: Mapping[str, Any] | None = None,
+    external_model_root_review: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3503,6 +3504,68 @@ def build_ijhe_completion_audit(
             "claim, or facility QRA result."
         )
         checks.append(document_check)
+    if external_model_root_review is not None:
+        model_review = external_model_root_review
+        provider_artifacts = model_review.get("provider_like_artifacts")
+        provider_artifacts = (
+            provider_artifacts if isinstance(provider_artifacts, Mapping) else {}
+        )
+        external_match = model_review.get("external_match_review")
+        external_match = external_match if isinstance(external_match, Mapping) else {}
+        promotion = model_review.get("promotion")
+        promotion = promotion if isinstance(promotion, Mapping) else {}
+        model_review_valid = (
+            model_review.get("schema_version") == "prism.external_lh2_model_root_review.v1"
+            and isinstance(model_review.get("source_root"), str)
+            and bool(model_review.get("source_root"))
+            and model_review.get("conclusion") == "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION"
+            and isinstance(model_review.get("blocking_reasons"), list)
+            and isinstance(provider_artifacts.get("provider_response_count"), int)
+            and provider_artifacts.get("provider_response_count") >= 0
+            and isinstance(provider_artifacts.get("resolved_release_count"), int)
+            and provider_artifacts.get("resolved_release_count") >= 0
+            and isinstance(provider_artifacts.get("exact_generic_identity_match_count"), int)
+            and provider_artifacts.get("exact_generic_identity_match_count") >= 0
+            and isinstance(provider_artifacts.get("qualification_sidecar_count"), int)
+            and provider_artifacts.get("qualification_sidecar_count") >= 0
+            and isinstance(external_match.get("status"), str)
+            and isinstance(external_match.get("candidate_count"), int)
+            and external_match.get("candidate_count") >= 0
+            and isinstance(external_match.get("exact_match_count"), int)
+            and external_match.get("exact_match_count") >= 0
+            and promotion.get("provider_packet") is False
+            and promotion.get("frequency") is False
+            and promotion.get("facility_qra") is False
+            and promotion.get("physical_validation") is False
+        )
+        model_review_check = _check(
+            "diagnostic_external_lh2_model_root_review",
+            model_review_valid,
+            {
+                "record": model_review.get("_record_path"),
+                "source_root": model_review.get("source_root"),
+                "conclusion": model_review.get("conclusion"),
+                "provider_like_artifacts": dict(provider_artifacts),
+                "external_match_review": {
+                    "status": external_match.get("status"),
+                    "candidate_count": external_match.get("candidate_count"),
+                    "exact_match_count": external_match.get("exact_match_count"),
+                    "qualification_artifact_count": external_match.get(
+                        "qualification_artifact_count"
+                    ),
+                },
+                "promotion": dict(promotion),
+            },
+            "external LH2 model-root review is missing a valid provenance record or contains an unsafe promotion claim",
+        )
+        model_review_check["diagnostic_only"] = True
+        model_review_check["interpretation"] = (
+            "The external lh2dt model root is checked as topology and model-contract evidence. "
+            "Its normal-state models, examples, or provider-like artifacts never become an accident "
+            "release, literature frequency, physical-validation claim, or facility QRA without an "
+            "exact digest-bound qualification sidecar."
+        )
+        checks.append(model_review_check)
     if external_release_artifact_intake is not None:
         intake = external_release_artifact_intake
         policy = intake.get("promotion_policy")

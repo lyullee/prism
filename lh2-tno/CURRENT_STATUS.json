@@ -162,7 +162,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1065 passed",
+  "latest_local_full_test_run": "1067 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -179,7 +179,10 @@
   "hazop_campaign_embedded_scenario_trace_audit": true,
   "hazop_campaign_embedded_scenario_trace_audit_policy": "HAZOP facility handoffs run the identity audit before returning a facility ledger; incomplete event/case/risk-atom identity fails closed without creating frequency or QRA claims",
   "hazop_campaign_embedded_chain_audits": true,
-  "hazop_campaign_embedded_chain_audit_fields": ["equipment_state_release_audit", "risk_atom_chain_audit"],
+  "hazop_campaign_embedded_chain_audit_fields": [
+    "equipment_state_release_audit",
+    "risk_atom_chain_audit"
+  ],
   "hazop_campaign_embedded_chain_audit_policy": "Handoff records state-to-release and release-to-damage structural audit status; partial provider/domain evidence remains PARTIAL and is never promoted",
   "hazop_campaign_handoff_audit_implemented": true,
   "hazop_campaign_handoff_audit_module": "src/lh2_tno/hazop_campaign_handoff_audit.py",
@@ -3718,7 +3721,7 @@
   "facility_ledger_frequency_port_promotion_gate_policy": "ALIGNED means declared rows agree; qualified facility QRA also requires every event to have an explicit reviewed accident port. Provider outlets never create a reviewed frequency port.",
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
-  "latest_local_targeted_test_run": "23 equipment accident export tests passed; 48 IJHE objective/readiness tests passed; provider evidence catalog tests passed",
+  "latest_local_targeted_test_run": "89 completion-audit tests passed; HAZOP/provider integration and full suite verified separately",
   "latest_remote_verified_commit": "9158704",
   "latest_remote_ci_run": "run 38051025932 completed successfully",
   "facility_assessment_qra_port_gate_exposed": true,
@@ -4197,5 +4200,16 @@
   "ijhe_completion_audit_latest_full_evidence_facility_qra_claim": false,
   "ijhe_completion_audit_latest_full_evidence_doc": "docs/PRISM_구조적작업목록_반영_전체증거감사_20261108.md",
   "provider_worklist_structural_diagnostic_evidence_latest_record": "results/20261023/native_generic_scope_worklist_packet_evidence_v7.json",
-  "provider_worklist_structural_diagnostic_evidence_latest_status": "PARTIAL_DIAGNOSTIC_EVIDENCE; 24/24 exact worklist and consequence-chain links; qualified provider packet count 0; no frequency or facility QRA promotion"
+  "provider_worklist_structural_diagnostic_evidence_latest_status": "PARTIAL_DIAGNOSTIC_EVIDENCE; 24/24 exact worklist and consequence-chain links; qualified provider packet count 0; no frequency or facility QRA promotion",
+  "external_lh2_model_root_review_current_record": "results/20261014/external_lh2dt_models_root_review_current.json",
+  "external_lh2_model_root_review_current_status": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION; provider responses 0; resolved releases 0; exact generic identity matches 0; qualification sidecars 0",
+  "external_lh2_model_root_review_current_provider_response_count": 0,
+  "external_lh2_model_root_review_current_resolved_release_count": 0,
+  "external_lh2_model_root_review_current_exact_generic_identity_match_count": 0,
+  "external_lh2_model_root_review_current_qualification_sidecar_count": 0,
+  "external_lh2_model_root_review_current_promotion": false,
+  "ijhe_completion_audit_external_model_root_review_implemented": true,
+  "ijhe_completion_audit_external_model_root_review_check_name": "diagnostic_external_lh2_model_root_review",
+  "ijhe_completion_audit_external_model_root_review_status": "PASS_DIAGNOSTIC_ONLY; external lh2dt model root is provenance-only and all promotion flags remain false",
+  "ijhe_completion_audit_external_model_root_review_record": "results/20261014/ijhe_completion_audit_with_external_model_root_review.json"
 }
