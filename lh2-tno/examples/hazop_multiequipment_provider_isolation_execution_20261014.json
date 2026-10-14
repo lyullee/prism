@@ -1,0 +1,609 @@
+{
+  "schema_version": "prism.hazop_multiequipment_provider_isolation_execution.v1",
+  "status": "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "component_count": 7,
+  "accepted_component_count": 7,
+  "withheld_component_count": 0,
+  "accepted_component_ids": [
+    "ambient-vaporizer-01",
+    "liquid-transfer-line-01",
+    "liquid-transfer-pump-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01",
+    "transfer-valve-01"
+  ],
+  "withheld_component_ids": [],
+  "operating_modes": [
+    "receiving",
+    "standby",
+    "supply"
+  ],
+  "component_traces": [
+    {
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "scenario_id": "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion",
+      "scenario_family": "inventory_depletion",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 1.6000000000000003,
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 1.6000000000000003
+      },
+      "isolation": {
+        "status": "INVENTORY_TERMINATION",
+        "basis": "inventory_depletion"
+      },
+      "inventory": {
+        "status": "INVENTORY_DEPLETED",
+        "available_mass_kg": 4.956379784841933e-06,
+        "cumulative_mass_out_kg": 4.956379784841932e-06,
+        "remaining_mass_kg": 8.470329472543003e-22,
+        "mass_residual_kg": 8.470329472543003e-22
+      },
+      "timing": {
+        "service_elapsed_s": 5.42391480000515,
+        "deadline_status": "MET",
+        "fresh_physics_this_update": true
+      }
+    },
+    {
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "scenario_id": "liquid-transfer-line-01-mode-deviation:supply:pipe_hole",
+      "scenario_family": "pipe_hole",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 0.0314138009816233,
+      "termination": {
+        "basis": "model_pressure_equalization",
+        "time_s": 0.0314138009816233
+      },
+      "isolation": {
+        "status": "MODEL_NATURAL_TERMINATION",
+        "basis": "model_pressure_equalization"
+      },
+      "inventory": {
+        "status": "MASS_BALANCE_CLOSED",
+        "available_mass_kg": 0.015722666567477814,
+        "cumulative_mass_out_kg": 0.01290085955808893,
+        "remaining_mass_kg": 0.0028218070093888846,
+        "mass_residual_kg": 0.0028218070093888846
+      },
+      "timing": {
+        "service_elapsed_s": 47.057367400004296,
+        "deadline_status": "MISSED",
+        "fresh_physics_this_update": true
+      }
+    },
+    {
+      "component_id": "liquid-transfer-pump-01",
+      "operating_mode": "supply",
+      "scenario_id": "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase",
+      "scenario_family": "liquid_two_phase",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 0.2,
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.2
+      },
+      "isolation": {
+        "status": "ISOLATION_SUCCESS_DECLARED",
+        "basis": "reviewed_isolation_success"
+      },
+      "inventory": {
+        "status": "MASS_BALANCE_CLOSED",
+        "available_mass_kg": 1.0,
+        "cumulative_mass_out_kg": 1.298244882025269e-05,
+        "remaining_mass_kg": 0.9999870175511798,
+        "mass_residual_kg": 0.9999870175511798
+      },
+      "timing": {
+        "service_elapsed_s": 9.133498700000928,
+        "deadline_status": "MET",
+        "fresh_physics_this_update": true
+      }
+    },
+    {
+      "component_id": "pressure-relief-vent-01",
+      "operating_mode": "standby",
+      "scenario_id": "pressure-relief-vent-01-mode-deviation:standby:vent_hole",
+      "scenario_family": "vent_hole",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 0.5,
+      "termination": {
+        "basis": "emergency_relief_discharge",
+        "time_s": 0.5
+      },
+      "isolation": {
+        "status": "EMERGENCY_RELIEF_TERMINATION",
+        "basis": "emergency_relief_discharge"
+      },
+      "inventory": {
+        "status": "MASS_BALANCE_CLOSED",
+        "available_mass_kg": 0.0008087150217064195,
+        "cumulative_mass_out_kg": 0.0006739291847553497,
+        "remaining_mass_kg": 0.00013478583695106987,
+        "mass_residual_kg": 0.00013478583695106987
+      },
+      "timing": {
+        "service_elapsed_s": 4.187559999998484,
+        "deadline_status": "MET",
+        "fresh_physics_this_update": true
+      }
+    },
+    {
+      "component_id": "reliquefier-01",
+      "operating_mode": "standby",
+      "scenario_id": "reliquefier-01-mode-deviation:standby:two_sided_rupture",
+      "scenario_family": "two_sided_rupture",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 1e-05,
+      "termination": {
+        "basis": "two_sided_rupture",
+        "time_s": 1e-05
+      },
+      "isolation": {
+        "status": "SHARED_TWO_SIDED_TERMINATION",
+        "basis": "two_sided_rupture"
+      },
+      "inventory": {
+        "status": "MASS_BALANCE_CLOSED",
+        "available_mass_kg": 0.0008238536226639276,
+        "cumulative_mass_out_kg": 7.191692033908254e-08,
+        "remaining_mass_kg": 0.0008237817057435886,
+        "mass_residual_kg": 0.0008237817057435886
+      },
+      "timing": {
+        "service_elapsed_s": 6.490825199995015,
+        "deadline_status": "MET",
+        "fresh_physics_this_update": true
+      }
+    },
+    {
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "scenario_id": "storage-tank-01-mode-deviation:receiving:liquid_two_phase",
+      "scenario_family": "liquid_two_phase",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 0.05,
+      "termination": {
+        "basis": "inventory_depletion",
+        "time_s": 0.05
+      },
+      "isolation": {
+        "status": "INVENTORY_TERMINATION",
+        "basis": "inventory_depletion"
+      },
+      "inventory": {
+        "status": "INVENTORY_NOT_CLOSED",
+        "available_mass_kg": 0.028492061899609754,
+        "cumulative_mass_out_kg": 0.008231481218448094,
+        "remaining_mass_kg": 0.020260580681161662,
+        "mass_residual_kg": 0.020260580681161662
+      },
+      "timing": {
+        "service_elapsed_s": 14.641854200002854,
+        "deadline_status": "MET",
+        "fresh_physics_this_update": true
+      }
+    },
+    {
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "scenario_id": "transfer-valve-01-mode-deviation:supply:liquid_two_phase",
+      "scenario_family": "liquid_two_phase",
+      "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
+      "consequence_full_chain_executed": true,
+      "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+      "release_duration_s": 0.20000000000000004,
+      "termination": {
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.20000000000000004
+      },
+      "isolation": {
+        "status": "ISOLATION_SUCCESS_DECLARED",
+        "basis": "reviewed_isolation_success"
+      },
+      "inventory": {
+        "status": "MASS_BALANCE_CLOSED",
+        "available_mass_kg": 1.0,
+        "cumulative_mass_out_kg": 0.00110751101579358,
+        "remaining_mass_kg": 0.9988924889842065,
+        "mass_residual_kg": 0.9988924889842065
+      },
+      "timing": {
+        "service_elapsed_s": 12.775680699996883,
+        "deadline_status": "MET",
+        "fresh_physics_this_update": true
+      }
+    }
+  ],
+  "facility_handoff_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+  "facility_ledger": {
+    "event_count": 7,
+    "case_count": 7,
+    "uncomputed_case_count": 7,
+    "conditional_executed_case_count": 7,
+    "risk_atom_count": 28,
+    "conditional_diagnostic_facility_annual_ir_low_high": {
+      "worker-01": [
+        4.78e-05,
+        4.78e-05
+      ]
+    },
+    "conditional_diagnostic_facility_expected_death_fn_low_high": [
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          4.78e-05
+        ]
+      },
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          4.78e-05
+        ]
+      }
+    ],
+    "facility_total_risk_available": false,
+    "qualified_facility_qra_available": false,
+    "coverage": {
+      "event_count": 7,
+      "case_count": 7,
+      "uncomputed_case_count": 7,
+      "strict_uncomputed_case_count": 7,
+      "conditional_case_count": 7,
+      "conditional_executed_case_count": 7,
+      "conditional_uncomputed_case_count": 0,
+      "overlapping_case_uncomputed_count": 7,
+      "risk_atom_count": 28,
+      "annual_condition_count": 1,
+      "population_status": "EXPLICIT_CONDITION_POPULATION",
+      "population_row_count": 1,
+      "scenario_branch_status": "EXPLICIT_BRANCH_ACCOUNTING",
+      "scenario_branch_cross_product_count": 4,
+      "release_termination_inventory_summary": {
+        "case_count": 7,
+        "ledger_status_counts": {
+          "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 7
+        },
+        "termination_basis_counts": {
+          "emergency_relief_discharge": 1,
+          "inventory_depletion": 2,
+          "model_pressure_equalization": 1,
+          "reviewed_isolation_success": 2,
+          "two_sided_rupture": 1
+        },
+        "complete_row_count": 0,
+        "operator_limited_or_domain_incomplete_row_count": 7,
+        "domain_incomplete_row_count": 0,
+        "uncomputed_row_count": 0,
+        "incomplete_row_count": 0,
+        "provider_packet_consumed_row_count": 7,
+        "withheld_case_count": 7,
+        "withheld_case_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 7
+        },
+        "withheld_operator_limited_case_count": 7,
+        "withheld_domain_incomplete_case_count": 0
+      },
+      "stage_timing": {},
+      "case_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 7
+      },
+      "uncomputed_status_counts": {
+        "EXECUTED_OPERATOR_LIMITED": 7
+      },
+      "operator_limited_case_count": 7,
+      "domain_incomplete_case_count": 0,
+      "explicit_uncomputed_status_count": 0,
+      "failed_case_count": 0,
+      "not_numerically_executed_case_count": 0,
+      "qualified_evidence_withheld_case_count": 7,
+      "numerically_executed_case_count": 7,
+      "observed_component_count": 7,
+      "expected_component_count": 7,
+      "component_status_counts": {
+        "PARTIAL": 7
+      },
+      "component_case_accounting": {
+        "ambient-vaporizer-01": {
+          "component_id": "ambient-vaporizer-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "supply"
+          ],
+          "hazop_scenario_ids": [
+            "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        },
+        "liquid-transfer-line-01": {
+          "component_id": "liquid-transfer-line-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "supply"
+          ],
+          "hazop_scenario_ids": [
+            "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        },
+        "liquid-transfer-pump-01": {
+          "component_id": "liquid-transfer-pump-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "supply"
+          ],
+          "hazop_scenario_ids": [
+            "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/transfer-pump/G1"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        },
+        "pressure-relief-vent-01": {
+          "component_id": "pressure-relief-vent-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "standby"
+          ],
+          "hazop_scenario_ids": [
+            "pressure-relief-vent-01-mode-deviation:standby:vent_hole"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        },
+        "reliquefier-01": {
+          "component_id": "reliquefier-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "standby"
+          ],
+          "hazop_scenario_ids": [
+            "reliquefier-01-mode-deviation:standby:two_sided_rupture"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/reliquefier/G4"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        },
+        "storage-tank-01": {
+          "component_id": "storage-tank-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "receiving"
+          ],
+          "hazop_scenario_ids": [
+            "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        },
+        "transfer-valve-01": {
+          "component_id": "transfer-valve-01",
+          "status": "PARTIAL",
+          "operating_modes": [
+            "supply"
+          ],
+          "hazop_scenario_ids": [
+            "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+          ],
+          "event_count": 1,
+          "event_ids": [
+            "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%"
+          ],
+          "conditional_case_count": 1,
+          "conditional_executed_case_count": 1,
+          "conditional_uncomputed_case_count": 0,
+          "strict_uncomputed_case_count": 1,
+          "operator_limited_case_count": 1,
+          "domain_incomplete_case_count": 0,
+          "failed_case_count": 0,
+          "not_numerically_executed_case_count": 0,
+          "qualified_evidence_withheld_case_count": 1,
+          "numerically_executed_case_count": 1,
+          "risk_atom_count": 4,
+          "case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_uncomputed_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 1
+          },
+          "strict_gate_categories": [
+            "MISSING_PROVIDER_CASES",
+            "OPERATOR_LIMITED_INPUT"
+          ],
+          "frequency_is_not_reallocated": true
+        }
+      },
+      "required_accident_family_count": 0,
+      "scope_blocker_count": 9
+    }
+  },
+  "processing_time": {
+    "runtime_elapsed_ms": 99721.08970000409,
+    "total_elapsed_ms": 99798.65340000106,
+    "deadline_missed_component_ids": [
+      "liquid-transfer-line-01"
+    ]
+  },
+  "policy": {
+    "operating_mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created_by_prism": false,
+    "facility_qra_promotion": false,
+    "physical_validation_claim": false,
+    "facility_scope_complete": false,
+    "synthetic_diagnostic_inputs_present": true
+  },
+  "limitations": [
+    "All seven branches are numerically executed but remain EXECUTED_OPERATOR_LIMITED and are not qualified provider evidence.",
+    "The facility geometry, receptor occupancy, weather condition and isolation observations are diagnostic inputs, not a qualified plant dataset.",
+    "The pipe branch misses the 30 s monitor deadline; no stale result is substituted.",
+    "Conditional IR/F-N is exposed for the seven accepted atoms, while qualified facility total risk remains withheld."
+  ],
+  "execution_source": "results/20261014/hazop_multiequipment_provider_isolation_diagnostic.json"
+}

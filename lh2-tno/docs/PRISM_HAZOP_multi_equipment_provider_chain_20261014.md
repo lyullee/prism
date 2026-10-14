@@ -126,4 +126,6 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
 
 이 실행은 7개 설비 모두 HAZOP → provider → SLABx-LH2 → 현재 기상 IR 경로를 통과했다. 밸브와 펌프의 `provider_termination_basis`는 `reviewed_isolation_success`로 기록되며, 나머지 다섯 설비는 기존 inventory depletion, pressure equalization, emergency relief, two-sided rupture 근거를 유지한다. 총 처리시간은 약 100초였고, `facility_qra_promotion=false`, `physical_validation_claim=false`, `frequency_inference_performed=false`가 계속 유지된다.
 
+설비별 지속시간·종료근거·차단상태·재고장부·SLABx-LH2 실행상태·처리시간과 7개 위험원자를 축약한 기계판독 결과는 [`hazop_multiequipment_provider_isolation_execution_20261014.json`](../examples/hazop_multiequipment_provider_isolation_execution_20261014.json)에서 확인할 수 있다. 이 스냅샷은 배관 branch의 30초 deadline 초과와 탱크·밸브·펌프의 잔여 재고도 그대로 남긴다.
+
 따라서 이 결과의 의미는 “모든 구성요소를 같은 코드 경로로 계산할 수 있다”는 진단 증거다. 이것은 현장 ESD/밸브 고장확률, 차단 성공확률, 실제 plant geometry·인구·기상, 또는 IJHE용 qualified facility IR/F-N을 확정하지 않는다. 다음 승격 조건은 각 설비의 reviewed actuator/isolation 시험자료, 현장 포트·좌표 확인, 사고빈도 근거와 독립 SLABx-LH2 holdout 검증이다.
