@@ -1,0 +1,22 @@
+{
+  "schema_version": "prism.compressible_plane_chain_smoke.v1",
+  "status": "SYNTHETIC_COMPRESSIBLE_PLANE_CHAIN_EXECUTED",
+  "chain_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
+  "full_chain_executed": true,
+  "provider_handoff_consumed": true,
+  "handoff_state_count": 19,
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "provider_duration_s": 1.9000000000000006,
+  "provider_mass_residual_kg": -8.673617379884035e-19,
+  "chain_max_mass_residual_relative": 2.475844401722614e-16,
+  "max_mach_number": 1.9998193819456764,
+  "source_operator": "equipment_inventory_depletion",
+  "operator_limited": true,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "interpretation": "Local smoke result showing source-state-bound compressible handoff consumption through the diagnostic consequence chain; it is not qualified provider or facility evidence."
+}
