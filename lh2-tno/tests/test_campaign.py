@@ -16,6 +16,7 @@ from lh2_tno.campaign import (
 from lh2_tno.contracts import Facility
 from lh2_tno.equipment_boundary import ProviderMassBalance, ResolvedGasRelease, ResolvedGasStep
 from lh2_tno.frequency import FrequencyPlan, generate_events
+from lh2_tno.legacy_frequency_bridge import attach_precomputed_events, bridge_legacy_scenarios
 from lh2_tno.pipeline import ResearchPipeline
 
 ROOT=Path(__file__).parents[1]
@@ -479,3 +480,37 @@ def test_inventory_loc_cannot_be_promoted_to_hole_by_campaign():
     with pytest.raises(ValueError,match='different release operator'):
         ResearchPipeline(f,b).facility_risk(RiskCampaign.model_validate_json(json.dumps(d)))
     assert b.requests==[]
+
+
+def test_campaign_executes_attached_external_event_catalogue_through_common_ir_fn_chain():
+    f, d = inputs()
+    events, _ = bridge_legacy_scenarios(
+        [{
+            'scenario_id': 'legacy-shell-G3', 'tag': 'TK-101',
+            'primitive': 'VESSEL', 'service': 'LH2', 'bin_label': '1%',
+            'hole_diameter_m': 0.01, 'frequency_per_year': 2.5e-4,
+            'release_kind': 'CONTINUOUS', 'release_path': 'DIRECT',
+            'physics_route': 'SLABX_LH2', 'grade': 'PUBLISHED_UNVALIDATED',
+        }],
+        {'legacy-shell-G3': 'storage'},
+        source_sha256='a' * 64,
+    )
+    plan = FrequencyPlan.model_validate_json(json.dumps(d['frequency_plan']))
+    d['frequency_plan'] = attach_precomputed_events(
+        plan, events, provenance='legacy bridge campaign test'
+    ).model_dump(mode='json')
+    template = copy.deepcopy(d['event_routes'][-1]['branches'][0]['request'])
+    d['event_routes'] = [{
+        'event_id': events[0].id,
+        'branches': [{
+            'id': 'release', 'probability_given_event': 1.0,
+            'provenance': 'external bridge campaign test', 'request': template,
+        }],
+    }]
+    result, backend = run(d)
+    assert result['event_catalog']['mode'] == 'precomputed_external_catalogue'
+    assert result['event_catalog']['rate_arithmetic_owner'] == 'external_legacy_generator'
+    assert result['event_catalog']['consequence_and_risk_owner'] == 'prism_campaign_evaluator'
+    assert result['event_catalog']['scope_gap_component_ids'] == []
+    assert len(backend.requests) == 2
+    assert result['known_contribution_annual_ir_low_high']

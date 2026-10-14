@@ -237,7 +237,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "985 passed",
+  "latest_local_full_test_run": "988 passed",
   "equipment_frequency_scope_does_not_create_consequence_requests": true,
   "equipment_campaign_compiler_implemented": true,
   "equipment_campaign_compiler_record": "docs/PRISM_일반설비_방출경로_캠페인컴파일_개발기록_20261009.md",
@@ -2292,7 +2292,7 @@
     "ZERO_EXPECTED_DEATH_AT_DECLARED_RECEPTORS",
     "NO_RISK_ATOMS"
   ],
-  "full_portable_test_count_latest": 985,
+  "full_portable_test_count_latest": 988,
   "facility_scenario_branch_accounting_implemented": true,
   "facility_scenario_branch_accounting_output": "scenario_branch_accounting on facility ledger and assessment; completion audit evidence",
   "facility_scenario_branch_accounting_dimensions": [
@@ -2698,7 +2698,7 @@
   "ijhe_objective_coverage_audit_with_external_field_record": "results/20261103/ijhe_objective_coverage_audit_with_external_field.json",
   "ijhe_objective_coverage_audit_with_external_field_status": "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN; 16 checks, core blockers 0, strict blockers 4; external field row PASS as diagnostic-only with hash drift retained",
   "ijhe_objective_coverage_audit_external_field_diagnostic_policy": "External outdoor observations are audited separately and cannot promote provider release, accident frequency, physical validation or facility QRA; current bundle has source_boundary/weather/common_clock hash drift",
-  "full_portable_test_status_latest": "985 passed",
+  "full_portable_test_status_latest": "988 passed",
   "external_field_model_comparison_contract_implemented": true,
   "external_field_model_comparison_module": "src/lh2_tno/field_model_comparison.py",
   "external_field_model_comparison_schema": "prism.external_field_model_comparison.v1",
@@ -3090,5 +3090,14 @@
   "legacy_tno_frequency_bridge_provider_packet_created": false,
   "legacy_tno_frequency_bridge_facility_qra_promotion": false,
   "legacy_tno_frequency_bridge_source_sha256": "2b05b28f946797f8f7856ad2a592a39d5a86a3d040dafcfd6874bd09f8ed291a",
-  "legacy_tno_frequency_bridge_implementation_sha256": "4654d02b3964e8bb504713a28141819ae9faea300f0ad1146589e6acbafdd9f6"
+  "legacy_tno_frequency_bridge_implementation_sha256": "6b27fb3ccaaae6e138de1c1e6a96e85834aaca2e2338f6904035af1c962fbe8f",
+  "legacy_tno_frequency_bridge_campaign_integration": true,
+  "legacy_tno_frequency_bridge_campaign_module": "src/lh2_tno/campaign.py",
+  "legacy_tno_frequency_bridge_plan_field": "FrequencyPlan.precomputed_events",
+  "legacy_tno_frequency_bridge_plan_helper": "src/lh2_tno/legacy_frequency_bridge.py:attach_precomputed_events",
+  "legacy_tno_frequency_bridge_rate_arithmetic_owner": "external_legacy_generator",
+  "legacy_tno_frequency_bridge_consequence_ir_fn_owner": "prism_campaign_evaluator",
+  "legacy_tno_frequency_bridge_scope_gap_fail_closed": true,
+  "legacy_tno_frequency_bridge_campaign_test_status": "1 external catalogue campaign passed through common bind/consequence/IR-FN evaluator; selected-component gaps remain incomplete",
+  "legacy_tno_frequency_bridge_campaign_record": "results/20261027/legacy_frequency_bridge/campaign_integration_verification.json"
 }

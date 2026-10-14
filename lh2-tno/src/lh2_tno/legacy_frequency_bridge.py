@@ -18,10 +18,11 @@ from __future__ import annotations
 
 import math
 import re
+import json
 from typing import Any, Iterable, Mapping
 
 from .contracts import Facility, canonical_digest
-from .frequency import FrequencyEvent, ReleaseDefinition
+from .frequency import FrequencyEvent, FrequencyPlan, ReleaseDefinition
 
 
 _HEX64 = re.compile(r"^[0-9a-fA-F]{64}$")
@@ -57,6 +58,21 @@ def _slug(value: str) -> str:
     if not value:
         raise ValueError("legacy scenario id becomes empty after normalization")
     return value
+
+
+def _binding_profile(primitive: str, service: str) -> tuple[str, str | None]:
+    """Choose only a reviewed source-input profile when it is unambiguous.
+
+    The consequence contract accepts a raw source-input hole only for a
+    reviewed vessel profile.  Other legacy primitives retain a diagnostic
+    profile name and therefore stay fail-closed until a provider-resolved
+    release packet is supplied.  The original primitive/service always remain
+    in the bridge sidecar.
+    """
+    normalized = primitive.strip().upper()
+    if normalized in {"VESSEL", "PRESSURE_VESSEL"}:
+        return "TNO_PRESSURE_VESSEL", "legacy vessel mapped to reviewed source-input vessel binding"
+    return f"LEGACY_TNO_{_slug(primitive)}_{_slug(service)}", None
 
 
 def _source_digest(source_sha256: str) -> str:
@@ -143,7 +159,7 @@ def bridge_legacy_scenarios(
         annual_frequency = _finite_nonnegative(row.get("frequency_per_year"), field="frequency_per_year")
         primitive = str(_required(row, "primitive"))
         service = str(_required(row, "service"))
-        profile = f"LEGACY_TNO_{_slug(primitive)}_{_slug(service)}"
+        profile, binding_note = _binding_profile(primitive, service)
         event_id = f"{_slug(plan_id)}/{_slug(component_id)}/{_slug(scenario_id)}"
         if event_id in seen_event_ids:
             raise ValueError(f"duplicate bridged event id {event_id}")
@@ -162,6 +178,12 @@ def bridge_legacy_scenarios(
             f"legacy release_path={release_path} is preserved in the bridge audit sidecar",
             f"legacy physics_route={physics_route} and grade={grade} are preserved in the bridge audit sidecar",
         ])
+        if binding_note is not None:
+            limitations.append(binding_note)
+        else:
+            limitations.append(
+                "legacy primitive has no raw source-input binding profile; a provider-resolved release is required"
+            )
         if frequency_proxy and frequency_proxy.lower() not in {"none", "null"}:
             limitations.append(
                 f"legacy frequency_fuel_proxy={frequency_proxy}; this is not a measured facility rate"
@@ -233,3 +255,28 @@ def bridge_legacy_scenarios(
 def bridge_digest(audit: Mapping[str, Any]) -> str:
     """Return a stable digest for a bridge audit sidecar."""
     return canonical_digest(audit)
+
+
+def attach_precomputed_events(
+    plan: FrequencyPlan,
+    events: Iterable[FrequencyEvent],
+    *,
+    provenance: str,
+) -> FrequencyPlan:
+    """Attach bridged events to an existing facility frequency scope.
+
+    The frequency plan continues to own component scope and exclusions.  The
+    attached rows replace only event generation, so the normal campaign still
+    performs exact event binding, release/consequence execution, and
+    facility-level aggregation.  Re-validating the complete model prevents a
+    caller from bypassing the frozen contract with an unchecked ``model_copy``.
+    """
+    rows = tuple(events)
+    if not rows:
+        raise ValueError("at least one precomputed event is required")
+    if not isinstance(provenance, str) or not provenance.strip():
+        raise ValueError("precomputed event provenance must be nonempty")
+    payload = plan.model_dump(mode="json")
+    payload["precomputed_events"] = [row.model_dump(mode="json") for row in rows]
+    payload["precomputed_events_provenance"] = provenance
+    return FrequencyPlan.model_validate_json(json.dumps(payload, allow_nan=False))

@@ -1466,23 +1466,16 @@
     },
     "legacy_generator": "taxonomy.enumerate_scenarios",
     "legacy_resolver": "taxonomy.resolve_frequency (called by enumerate_scenarios)",
-    "legacy_source_sha256": "2b05b28f946797f8f7856ad2a592a39d5a86a3d040dafcfd6874bd09f8ed291a",
-    "implementation_sha256": {
-      "src/lh2_tno/legacy_frequency_bridge.py": "4654d02b3964e8bb504713a28141819ae9faea300f0ad1146589e6acbafdd9f6",
-      "src/lh2_tno/pipeline.py": "fb2086e4a256d459797e274b681b28087cbfe3e17c11b93ba1568960d16aefc6",
-      "scripts/bridge_legacy_tno_frequency.py": "808c19ae29f06f6ad7af203312f9599075c100dc401722f056815909552658ce",
-      "scripts/audit_legacy_tno_frequency_bridge.py": "b78e13d48e8901823778889e0c9e89adae328db651fd5583d9c52e07fb6c0758",
-      "tests/test_legacy_frequency_bridge.py": "8d4e4034687ef328ceaff72691b7cdaabc9c5f77a6334e65638a0ef17c4de272"
-    }
+    "legacy_source_sha256": "2b05b28f946797f8f7856ad2a592a39d5a86a3d040dafcfd6874bd09f8ed291a"
   },
-  "bridge_audit_digest": "314eed0dcac4616b1c8ee91bb4f52f0d949cbe874914a1396c4e53c33635eb0b",
+  "bridge_audit_digest": "aca745b0c378f1de961afdf1db4e17c6168ee2a67c84f39f50acdf46bd12e691",
   "events": [
     {
       "id": "legacy-tno-demo3/tank/S000-0.01",
       "asset_id": "legacy:TK-101",
       "model_component_id": "tank",
       "port_ids": null,
-      "profile": "LEGACY_TNO_VESSEL_LH2",
+      "profile": "TNO_PRESSURE_VESSEL",
       "loc": "0.01%",
       "basis": "LH2_LITERATURE",
       "base_rate": 0.00065,
@@ -1513,6 +1506,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1522,7 +1516,7 @@
       "asset_id": "legacy:TK-101",
       "model_component_id": "tank",
       "port_ids": null,
-      "profile": "LEGACY_TNO_VESSEL_LH2",
+      "profile": "TNO_PRESSURE_VESSEL",
       "loc": "0.1%",
       "basis": "LH2_LITERATURE",
       "base_rate": 0.00014,
@@ -1553,6 +1547,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1562,7 +1557,7 @@
       "asset_id": "legacy:TK-101",
       "model_component_id": "tank",
       "port_ids": null,
-      "profile": "LEGACY_TNO_VESSEL_LH2",
+      "profile": "TNO_PRESSURE_VESSEL",
       "loc": "1%",
       "basis": "LH2_LITERATURE",
       "base_rate": 2.8e-05,
@@ -1593,6 +1588,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1602,7 +1598,7 @@
       "asset_id": "legacy:TK-101",
       "model_component_id": "tank",
       "port_ids": null,
-      "profile": "LEGACY_TNO_VESSEL_LH2",
+      "profile": "TNO_PRESSURE_VESSEL",
       "loc": "10%",
       "basis": "LH2_LITERATURE",
       "base_rate": 5.7e-06,
@@ -1633,6 +1629,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1642,7 +1639,7 @@
       "asset_id": "legacy:TK-101",
       "model_component_id": "tank",
       "port_ids": null,
-      "profile": "LEGACY_TNO_VESSEL_LH2",
+      "profile": "TNO_PRESSURE_VESSEL",
       "loc": "100%",
       "basis": "LH2_LITERATURE",
       "base_rate": 1.2e-06,
@@ -1673,6 +1670,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1713,6 +1711,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=PUBLISHED_VALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1753,6 +1752,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=PUBLISHED_VALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1793,6 +1793,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=PUBLISHED_VALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1833,6 +1834,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=PUBLISHED_VALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1873,6 +1875,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=PUBLISHED_VALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1913,6 +1916,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1953,6 +1957,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -1993,6 +1998,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2033,6 +2039,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2073,6 +2080,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2113,6 +2121,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2153,6 +2162,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2193,6 +2203,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2233,6 +2244,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2273,6 +2285,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=VIA_RELIEF is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2313,6 +2326,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2353,6 +2367,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2393,6 +2408,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2433,6 +2449,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2473,6 +2490,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2513,6 +2531,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=OANDG; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2553,6 +2572,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=OANDG; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2593,6 +2613,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=OANDG; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2633,6 +2654,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=OANDG; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2673,6 +2695,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=OANDG; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2713,6 +2736,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2753,6 +2777,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2793,6 +2818,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2833,6 +2859,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2873,6 +2900,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2913,6 +2941,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2953,6 +2982,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -2993,6 +3023,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3033,6 +3064,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3073,6 +3105,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=PUBLISHED_UNVALIDATED are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=LH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3113,6 +3146,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3153,6 +3187,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3193,6 +3228,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3233,6 +3269,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3273,6 +3310,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=SLABX_LH2 and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3313,6 +3351,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3353,6 +3392,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3393,6 +3433,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3433,6 +3474,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3473,6 +3515,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3513,6 +3556,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3553,6 +3597,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3593,6 +3638,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3633,6 +3679,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3673,6 +3720,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3713,6 +3761,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3753,6 +3802,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3793,6 +3843,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3833,6 +3884,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3873,6 +3925,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3913,6 +3966,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3953,6 +4007,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -3993,6 +4048,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -4033,6 +4089,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -4073,6 +4130,7 @@
         "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
         "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
         "legacy physics_route=GH2_JET and grade=ENGINEERING_JUDGEMENT are preserved in the bridge audit sidecar",
+        "legacy primitive has no raw source-input binding profile; a provider-resolved release is required",
         "legacy frequency_fuel_proxy=GH2; this is not a measured facility rate"
       ],
       "physical_validation_claim": false
@@ -4080,12 +4138,5 @@
   ],
   "frequency_inference_performed": false,
   "provider_packet_created": false,
-  "facility_qra_promotion": false,
-  "implementation_sha256": {
-    "src/lh2_tno/legacy_frequency_bridge.py": "4654d02b3964e8bb504713a28141819ae9faea300f0ad1146589e6acbafdd9f6",
-    "src/lh2_tno/pipeline.py": "fb2086e4a256d459797e274b681b28087cbfe3e17c11b93ba1568960d16aefc6",
-    "scripts/bridge_legacy_tno_frequency.py": "808c19ae29f06f6ad7af203312f9599075c100dc401722f056815909552658ce",
-    "scripts/audit_legacy_tno_frequency_bridge.py": "b78e13d48e8901823778889e0c9e89adae328db651fd5583d9c52e07fb6c0758",
-    "tests/test_legacy_frequency_bridge.py": "8d4e4034687ef328ceaff72691b7cdaabc9c5f77a6334e65638a0ef17c4de272"
-  }
+  "facility_qra_promotion": false
 }

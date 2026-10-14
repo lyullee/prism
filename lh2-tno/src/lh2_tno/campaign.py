@@ -423,11 +423,24 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     f = pipeline.facility
     if f.environment != 'outdoor' or not f.receptors:
         raise ValueError('outdoor facility and explicit receptors required')
+    precomputed_events = campaign.frequency_plan.precomputed_events
+    event_catalog_mode = (
+        'precomputed_external_catalogue'
+        if precomputed_events is not None
+        else 'frequency_plan_catalogue'
+    )
     events = {x.id: x for x in generate_events(f, campaign.frequency_plan)}
     component_kinds = {component.id: component.kind for component in f.components}
     routes = {x.event_id: x for x in campaign.event_routes}
     if set(events) != set(routes):
         raise ValueError('every generated LOC needs exactly one route or explicit uncomputed branch')
+    selected_scope_components = {
+        asset.model_component_id for asset in campaign.frequency_plan.assets
+    }
+    external_catalog_scope_gaps = sorted(
+        selected_scope_components
+        - {event.model_component_id for event in events.values()}
+    ) if precomputed_events is not None else []
     # Event metadata is conservative until a provider request is consumed.
     # Union request-derived families into the event row so a real vertical
     # handoff, inventory termination, emergency relief, or two-sided packet is
@@ -592,7 +605,11 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
         raise ValueError('campaign radiation endpoints must represent the same declared sensitivity across cases')
     aggregated = pipeline.backend.run('facility_risk_aggregate', {'receptor_ids': receptor_ids, 'atoms': atoms})
     known = aggregated['data']
-    scope_complete = not missing
+    # An imported event catalogue is allowed to cover only a declared subset,
+    # but that subset must remain visibly partial.  A missing event row cannot
+    # be treated as zero risk or as a complete facility just because all rows
+    # that did arrive executed successfully.
+    scope_complete = not missing and not external_catalog_scope_gaps
     excluded = campaign.frequency_plan.excluded_model_components
     full_facility_complete = scope_complete and not excluded and not synthetic
     provider_packet_promoted = (
@@ -666,6 +683,23 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     return {'status':'DECLARED_SCOPE_EXECUTED' if scope_complete else 'PARTIAL_DECLARED_SCOPE',
         'facility_id': f.id, 'facility_digest': f.digest(), 'campaign_digest': campaign.digest(),
         'scope_provenance': campaign.scope_provenance, 'events':event_rows,
+        'event_catalog': {
+            'mode': event_catalog_mode,
+            'precomputed_event_count': (
+                len(precomputed_events) if precomputed_events is not None else 0
+            ),
+            'provenance': campaign.frequency_plan.precomputed_events_provenance,
+            'digest': (
+                canonical_digest([event.model_dump(mode='json') for event in precomputed_events])
+                if precomputed_events is not None else None
+            ),
+            'rate_arithmetic_owner': (
+                'external_legacy_generator'
+                if precomputed_events is not None else 'prism_frequency_catalogue'
+            ),
+            'consequence_and_risk_owner': 'prism_campaign_evaluator',
+            'scope_gap_component_ids': external_catalog_scope_gaps,
+        },
         'annual_conditions':[c.model_dump(mode='json') for c in campaign.annual_conditions],
         'cases': cases, 'uncomputed_cases': missing, 'excluded_model_components': excluded,
         'release_termination_inventory_ledger': release_termination_inventory_ledger,
@@ -675,6 +709,7 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             'not_numerically_executed_case_count':sum(case['status'] in {'UNCOMPUTED','FAILED'} for case in cases),
             'qualified_evidence_withheld_case_count':sum(case['status'] in {'EXECUTED_OPERATOR_LIMITED','EXECUTED_DOMAIN_INCOMPLETE'} for case in cases),
             'numerically_executed_case_count':sum(case['status'].startswith('EXECUTED') for case in cases),
+            'external_catalogue_scope_gap_component_count': len(external_catalog_scope_gaps),
             'meaning':'frequency coverage only; not fraction of risk captured, not physical validation',
             'by_component':component_coverage,
             'scenario_family_event_counts': dict(sorted(scenario_family_event_counts.items()))},

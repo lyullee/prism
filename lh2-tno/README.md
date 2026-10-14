@@ -6,7 +6,7 @@
 
 **HAZOP·운전 모드 선택 (개발 소스):** `HazopTable`과 `HazopStateFrame`은 현장 상태값과 `operating_mode`를 함께 비교해 모드별 이탈과 사고 family를 선택합니다. `run_hazop_runtime_consequence()`는 하나의 깨끗한 선택이 있을 때만 기존 provider·SLABx-LH2 runtime monitor를 호출하고, 여러 활성 행은 `run_hazop_runtime_consequence_branches()`로 `scenario_id`별 독립 provider 요청으로 분기합니다. `run_hazop_facility_runtime()`은 여러 설비의 선택·branch·현재 기상 IR 기여를 원장으로 묶습니다. `build_hazop_facility_campaign_result()`는 각 설비의 단일 HAZOP branch를 명시된 연간 기상·인구·점화·차단 binding과 기존 시설 IR/F-N 원장으로 넘기며, `hazop_scenario_id`가 일치하지 않거나 branch가 여러 개면 보류합니다. 여러 branch는 `build_hazop_facility_campaign_branches()`로 명시적 branch 확률과 분할 그룹 합계가 있을 때만 결합합니다. 예측 공정상태는 `run_hazop_forecast_risk_scan()`이 `origin=model_prediction`과 `forecast_time_s`를 검증한 뒤 위험조건 진입 시 정량평가 callback을 호출하며, `build_hazop_forecast_runtime_evaluator()`는 이 callback을 기존 runtime consequence gate에 연결합니다. 두 handoff와 forecast scan 모두 qualified provider·독립 물리검증·전체 시설범위가 닫히기 전에는 시설 연간 QRA를 승격하지 않습니다. [계약과 실행 방법](docs/PRISM_HAZOP_운전모드_시나리오_연결.md).
 
-**비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **985 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
+**비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **988 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
 
 **현재 권위 기준점 (state-bound union):** `results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json`은
 34개 사건·44개 case·176개 risk atom의 옥외 진단 범위를 보존하고, 상태→방출 연결은
@@ -40,6 +40,16 @@ TNO `resolve_frequency()`·`enumerate_scenarios()`의 JSON export를 기존 PRIS
 scenario를 65개 event로 변환한 결과는 [`legacy TNO 빈도 연결 감사`](docs/PRISM_legacy_TNO_빈도_사건생성기_연결_20261027.md)와
 [`verification.json`](results/20261027/legacy_frequency_bridge/verification.json)에 있습니다.
 이는 provider 방출·물리검증·시설 QRA를 자동 승격하지 않는 진단용 event handoff입니다.
+변환한 사건은 `attach_precomputed_events()`로 기존 `FrequencyPlan`에 부착할 수
+있고, 이후 PRISM의 동일한 `bind_event`→방출/SLABx-LH2→점화·기상·인구→IR/F-N
+campaign으로 흐릅니다. 외부 generator가 빈도 산술을 담당하고 PRISM campaign이
+피해와 위험 집계를 담당한다는 역할이 결과 원장에 기록됩니다. 선택된 설비 중
+외부 사건이 빠지면 `scope_gap_component_ids`로 남아 시설 완전성을 자동으로
+막습니다. 원시 입력만 있는 비탱크 설비는 provider 방출 packet이 없을 때
+`UNCOMPUTED`로 유지됩니다.
+
+현장값·운전 모드·HAZOP·현재/예측 상태·공통 모델 묶음의 전체 흐름은
+[`통합 위험평가 흐름도`](docs/PRISM_LH2_통합위험평가_흐름도.png)로 볼 수 있습니다.
 
 설비 결합도 `results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json`에서 44개 case·9개 component를
 `asset_id → component_id → state snapshot digest → 방출 packet → 종료근거` 순서로

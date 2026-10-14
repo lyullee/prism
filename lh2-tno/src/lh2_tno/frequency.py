@@ -167,6 +167,14 @@ class FrequencyPlan(Contract):
     id: Name
     assets: tuple[FrequencyAsset, ...]
     excluded_model_components: dict[str, str] = Field(default_factory=dict)
+    # A reviewed external event catalogue may be attached after the normal
+    # plan is built.  This is the narrow hand-off used by the legacy TNO
+    # bridge: the external generator owns the rate arithmetic, while PRISM
+    # still owns binding, consequence execution, weather/ignition weighting
+    # and IR/F-N aggregation.  Keeping the rows on the plan makes the
+    # campaign digest and audit record include the exact imported catalogue.
+    precomputed_events: tuple[FrequencyEvent, ...] | None = None
+    precomputed_events_provenance: Name | None = None
 
     @model_validator(mode='after')
     def ownership(self):
@@ -177,6 +185,21 @@ class FrequencyPlan(Contract):
             raise ValueError('physical scope counted twice; alternative frequency partitions cannot be added')
         if any(not v.strip() for v in self.excluded_model_components.values()):
             raise ValueError('exclusion reason required')
+        if self.precomputed_events is None:
+            if self.precomputed_events_provenance is not None:
+                raise ValueError(
+                    'precomputed event provenance requires precomputed event rows'
+                )
+        else:
+            if not self.precomputed_events:
+                raise ValueError('precomputed event catalogue cannot be empty')
+            if self.precomputed_events_provenance is None:
+                raise ValueError(
+                    'precomputed event catalogue requires explicit provenance'
+                )
+            ids = [event.id for event in self.precomputed_events]
+            if len(set(ids)) != len(ids):
+                raise ValueError('precomputed event catalogue requires unique event ids')
         return self
 
 
@@ -194,6 +217,42 @@ def generate_events(facility: Facility, plan: FrequencyPlan) -> tuple[FrequencyE
     if known - selected - excluded:
         raise ValueError('every model component must have a frequency scope or explicit exclusion reason')
     facility_ports = {port.id: port for port in facility.ports}
+    if plan.precomputed_events is not None:
+        # Validate the imported rows against the live facility topology before
+        # allowing them into the common campaign evaluator.  No component or
+        # port is inferred from an event name, and an excluded component cannot
+        # be silently reintroduced by an external catalogue.
+        events = plan.precomputed_events
+        for event in events:
+            if event.model_component_id not in known:
+                raise ValueError(
+                    f'precomputed event {event.id} references unknown component '
+                    f'{event.model_component_id}'
+                )
+            if event.model_component_id not in selected:
+                if event.model_component_id in excluded:
+                    raise ValueError(
+                        f'precomputed event {event.id} references an excluded component '
+                        f'{event.model_component_id}'
+                    )
+                raise ValueError(
+                    f'precomputed event {event.id} component is absent from selected frequency scope'
+                )
+            for port_id in event.port_ids or ():
+                port = facility_ports.get(port_id)
+                if port is None:
+                    raise ValueError(
+                        f'precomputed event {event.id} references unknown port {port_id}'
+                    )
+                if port.component_id != event.model_component_id:
+                    raise ValueError(
+                        f'precomputed event {event.id} port {port_id} belongs to a different component'
+                    )
+                if port.direction == 'in':
+                    raise ValueError(
+                        f'precomputed event {event.id} port {port_id} is not an outward exit'
+                    )
+        return events
     for asset in plan.assets:
         candidate_groups = list(asset.port_ids_by_loc.values())
         if asset.port_ids is not None:

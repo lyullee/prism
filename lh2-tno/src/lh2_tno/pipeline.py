@@ -51,6 +51,33 @@ class ResearchPipeline:
             basis=basis,
         )
 
+    def legacy_frequency_plan(self, plan, scenarios, component_map, *, plan_id='legacy-tno',
+                              source='external legacy TNO taxonomy.enumerate_scenarios',
+                              source_sha256, basis='TNO_PURPLE_LOC'):
+        """Build a campaign-ready plan from an explicit legacy event bridge.
+
+        The returned plan retains the caller's frequency scope/exclusion
+        declarations and carries the bridged rows as an auditable event
+        catalogue.  Rates are never recalculated here.
+        """
+        from .legacy_frequency_bridge import attach_precomputed_events
+        events, audit = self.legacy_frequency_events(
+            scenarios,
+            component_map,
+            plan_id=plan_id,
+            source=source,
+            source_sha256=source_sha256,
+            basis=basis,
+        )
+        return attach_precomputed_events(
+            plan,
+            events,
+            provenance=(
+                f"{audit['schema_version']}; source_sha256={audit['source_sha256']}; "
+                f"bridge_digest={canonical_digest(audit)}"
+            ),
+        ), audit
+
     def facility_risk(self, campaign):
         from .campaign import evaluate_campaign
         return evaluate_campaign(self, campaign)

@@ -1,6 +1,12 @@
 import pytest
+import json
 
-from lh2_tno.legacy_frequency_bridge import bridge_digest, bridge_legacy_scenarios
+from lh2_tno.legacy_frequency_bridge import (
+    attach_precomputed_events,
+    bridge_digest,
+    bridge_legacy_scenarios,
+)
+from lh2_tno.frequency import FrequencyPlan, generate_events
 
 
 SOURCE_SHA = "a" * 64
@@ -105,3 +111,49 @@ def test_research_pipeline_exposes_legacy_event_handoff():
     )
     assert len(events) == 1
     assert audit["mapped_component_ids"] == ["tank"]
+
+
+def test_attached_catalogue_uses_external_rows_in_common_frequency_boundary():
+    from pathlib import Path
+    from lh2_tno.contracts import Facility
+
+    root = Path(__file__).parents[1]
+    facility = Facility.model_validate_json(
+        (root / "examples/lh2_frequency_facility.json").read_text(encoding="utf-8")
+    )
+    plan = FrequencyPlan.model_validate_json(
+        (root / "examples/lh2_frequency_plan.json").read_text(encoding="utf-8")
+    )
+    events, _ = bridge_legacy_scenarios(
+        [_row()], {"S-001": "tank"}, source_sha256=SOURCE_SHA,
+    )
+    attached = attach_precomputed_events(
+        plan, events, provenance="legacy bridge test; source digest pinned"
+    )
+    generated = generate_events(facility, attached)
+    assert generated == events
+    assert attached.precomputed_events_provenance.startswith("legacy bridge test")
+
+
+def test_attached_external_catalogue_cannot_hide_unselected_or_excluded_component():
+    from pathlib import Path
+    from lh2_tno.contracts import Facility
+
+    root = Path(__file__).parents[1]
+    facility = Facility.model_validate_json(
+        (root / "examples/lh2_frequency_facility.json").read_text(encoding="utf-8")
+    )
+    raw = __import__("json").loads(
+        (root / "examples/lh2_frequency_plan.json").read_text(encoding="utf-8")
+    )
+    raw["excluded_model_components"] = {"tank": "outside test scope"}
+    raw["assets"] = [asset for asset in raw["assets"] if asset["model_component_id"] != "tank"]
+    # The event is explicitly mapped to tank; the attached plan must reject
+    # the attempt to reintroduce an excluded component.
+    plan = FrequencyPlan.model_validate_json(json.dumps(raw))
+    events, _ = bridge_legacy_scenarios(
+        [_row()], {"S-001": "tank"}, source_sha256=SOURCE_SHA,
+    )
+    attached = attach_precomputed_events(plan, events, provenance="scope test")
+    with pytest.raises(ValueError, match="excluded component"):
+        generate_events(facility, attached)
