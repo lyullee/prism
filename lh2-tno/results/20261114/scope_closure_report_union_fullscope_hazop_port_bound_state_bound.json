@@ -632,9 +632,9 @@
     "processing_time": {
       "status": "REPORTED",
       "fresh_physics_cases": 44,
-      "case_median_ms": 3013.4931500215316,
-      "case_p95_ms": 8609.57190999907,
-      "campaign_elapsed_ms": 176546.29260006186,
+      "case_median_ms": 3033.8640500194742,
+      "case_p95_ms": 10739.593875002178,
+      "campaign_elapsed_ms": 203388.11250006256,
       "one_hz_claim": false
     },
     "physical_validation": {
@@ -741,78 +741,78 @@
     "campaign_count": 3,
     "fresh_physics_cases": 44,
     "case_min_ms": 1335.1443000137806,
-    "case_median_ms": 3013.4931500215316,
-    "case_max_ms": 12555.031099996995,
-    "case_p95_ms": 8609.57190999907,
-    "case_p99_ms": 11945.573180002684,
-    "campaign_elapsed_ms": 176546.29260006186,
-    "campaign_elapsed_ms_sum": 176546.29260006186,
+    "case_median_ms": 3033.8640500194742,
+    "case_max_ms": 18322.318000005907,
+    "case_p95_ms": 10739.593875002178,
+    "case_p99_ms": 17025.963029997656,
+    "campaign_elapsed_ms": 203388.11250006256,
+    "campaign_elapsed_ms_sum": 203388.11250006256,
     "campaign_elapsed_ms_min": 19298.20160008967,
     "campaign_elapsed_ms_median": 20644.581399974413,
-    "campaign_elapsed_ms_max": 136603.50959999778,
-    "campaign_elapsed_ms_p95": 125007.61677999543,
-    "campaign_elapsed_ms_p99": 134284.3310359973,
+    "campaign_elapsed_ms_max": 163445.32949999848,
+    "campaign_elapsed_ms_p95": 149165.25468999607,
+    "campaign_elapsed_ms_p99": 160589.314537998,
     "stage_elapsed_ms": {
       "cloud_observation": {
         "sample_count": 42,
-        "sum_ms": 7554.553200054215,
-        "median_ms": 91.69750000000931,
-        "max_ms": 935.822300001746,
-        "p95_ms": 409.1916400051555,
-        "p99_ms": 843.0557000034597
+        "sum_ms": 8249.378199980129,
+        "median_ms": 91.6115500003798,
+        "max_ms": 930.441400007112,
+        "p95_ms": 404.9582699924938,
+        "p99_ms": 899.5726230047874
       },
       "endpoint_a": {
         "sample_count": 2,
-        "sum_ms": 6151.2378999905195,
-        "median_ms": 3075.6189499952598,
-        "max_ms": 3084.027499993681,
-        "p95_ms": 3083.186644993839,
-        "p99_ms": 3083.8593289937126
+        "sum_ms": 6119.259699989925,
+        "median_ms": 3059.6298499949626,
+        "max_ms": 3077.1174999972573,
+        "p95_ms": 3075.368734997028,
+        "p99_ms": 3076.7677469972114
       },
       "endpoint_aggregation": {
         "sample_count": 2,
-        "sum_ms": 12422.532800002955,
-        "median_ms": 6211.266400001477,
-        "max_ms": 6216.473200009204,
-        "p95_ms": 6215.952520008432,
-        "p99_ms": 6216.36906400905
+        "sum_ms": 12389.510499997414,
+        "median_ms": 6194.755249998707,
+        "max_ms": 6194.9718999967445,
+        "p95_ms": 6194.950234996941,
+        "p99_ms": 6194.967566996784
       },
       "endpoint_b": {
         "sample_count": 2,
-        "sum_ms": 6268.33410000836,
-        "median_ms": 3134.16705000418,
-        "max_ms": 3137.3874000128126,
-        "p95_ms": 3137.0653650119493,
-        "p99_ms": 3137.32299301264
+        "sum_ms": 6268.0120000150055,
+        "median_ms": 3134.0060000075027,
+        "max_ms": 3151.227000009385,
+        "p95_ms": 3149.5049000091967,
+        "p99_ms": 3150.8825800093473
       },
       "fire_explosion_damage_risk": {
         "sample_count": 42,
-        "sum_ms": 3024.083899828838,
-        "median_ms": 68.54430001840228,
-        "max_ms": 112.8399999870453,
-        "p95_ms": 83.86175499108502,
-        "p99_ms": 105.26012499394704
+        "sum_ms": 3353.847599864821,
+        "median_ms": 70.25104999775067,
+        "max_ms": 115.69360000430606,
+        "p95_ms": 107.18760500385542,
+        "p99_ms": 114.22264300243113
       },
       "near_field_and_dispersion": {
         "sample_count": 42,
-        "sum_ms": 110419.07729984086,
-        "median_ms": 1602.5860000081593,
-        "max_ms": 11035.740999999689,
-        "p95_ms": 7269.164610005095,
-        "p99_ms": 10424.527186000481
+        "sum_ms": 135513.79359985003,
+        "median_ms": 1609.4670500096981,
+        "max_ms": 16626.192299998365,
+        "p95_ms": 9353.113489990928,
+        "p99_ms": 15380.463305997244
       },
       "pool": {
         "sample_count": 42,
-        "sum_ms": 3460.873000032734,
-        "median_ms": 0.005099995178170502,
-        "max_ms": 324.9363000068115,
-        "p95_ms": 272.8823949997603,
-        "p99_ms": 305.02198500849755
+        "sum_ms": 3510.402600033558,
+        "median_ms": 0.005249996320344508,
+        "max_ms": 323.6151000019163,
+        "p95_ms": 280.3059850026329,
+        "p99_ms": 309.388059000048
       },
       "source": {
         "sample_count": 42,
-        "sum_ms": 29271.642700012308,
-        "median_ms": 699.6057500364259,
+        "sum_ms": 29441.982199947233,
+        "median_ms": 700.4151500295848,
         "max_ms": 730.1701999967918,
         "p95_ms": 722.5236099911854,
         "p99_ms": 727.7452960039955
@@ -966,7 +966,219 @@
     "claim": false,
     "evidence": null
   },
-  "hazop_mode_binding": null,
+  "hazop_mode_binding": {
+    "schema_version": "prism.hazop_event_mode_binding.v1",
+    "facility_id": "generic-lh2-full-scope-frequency-example",
+    "status": "EXPLICIT_DIAGNOSTIC_BINDING",
+    "source_provenance": "synthetic generic outdoor LH2 HAZOP mode table; no mode inferred from pressure, equipment kind, release size, or frequency",
+    "operating_modes": [
+      "receiving",
+      "supply",
+      "standby"
+    ],
+    "bindings": [
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+        "component_id": "storage-tank-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+        "component_id": "liquid-transfer-line-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "component_id": "transfer-valve-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "component_id": "transfer-valve-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "component_id": "transfer-valve-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "component_id": "transfer-valve-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+        "component_id": "transfer-valve-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+        "component_id": "pressure-relief-vent-01",
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
+        "release_mode": "maximum_relief_discharge",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "component_id": "liquid-transfer-pump-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+        "component_id": "liquid-transfer-pump-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "component_id": "ambient-vaporizer-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
+        "release_mode": "instantaneous_inventory",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "component_id": "ambient-vaporizer-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
+        "release_mode": "inventory_over_600s",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+        "component_id": "ambient-vaporizer-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "component_id": "reliquefier-01",
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
+        "release_mode": "two_sided_rupture",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+        "component_id": "reliquefier-01",
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
+        "release_mode": "two_sided_rupture",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+        "component_id": "reliquefier-01",
+        "operating_mode": "standby",
+        "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
+        "release_mode": "hole",
+        "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      }
+    ],
+    "policy": {
+      "operating_mode_taken_from_explicit_input": true,
+      "mode_inference_performed": false,
+      "scenario_inference_performed": false,
+      "frequency_inference_performed": false,
+      "provider_packet_promoted": false,
+      "facility_qra_claim": false
+    }
+  },
   "hazop_selection_event_binding": {
     "schema_version": "prism.hazop_event_selection_binding_audit.v1",
     "status": "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",

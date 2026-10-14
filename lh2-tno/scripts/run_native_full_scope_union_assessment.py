@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
+from lh2_tno.component_scope import expected_component_ids_for_release  # noqa: E402
 from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.facility_case_packet_coverage import (  # noqa: E402
     audit_facility_case_packet_coverage,
@@ -411,9 +412,19 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         state_snapshot_audit=extension_state_snapshot_audit,
     )
 
-    expected_components = tuple(
-        str(component["id"]) for component in base_facility.get("components", [])
-    ) + ("vertical-handoff-terminal-pipe-01", "inventory-depletion-pipe-01")
+    base_frequency_plan = base_campaign.get("frequency_plan", {})
+    if not isinstance(base_frequency_plan, dict):
+        raise ValueError("base campaign frequency_plan must be an object")
+    expected_components = expected_component_ids_for_release(
+        (component["id"] for component in base_facility.get("components", [])),
+        excluded_model_components=base_frequency_plan.get(
+            "excluded_model_components", {}
+        ),
+        additional_component_ids=(
+            "vertical-handoff-terminal-pipe-01",
+            "inventory-depletion-pipe-01",
+        ),
+    )
     merged = merge_facility_campaign_results(
         [base_result, vertical_result, inventory_result],
         expected_component_ids=expected_components,

@@ -25,6 +25,7 @@ from lh2_tno.campaign_packet_rebind import (  # noqa: E402
     rebind_campaign_to_worklist_packets,
 )
 from lh2_tno.contracts import canonical_digest  # noqa: E402
+from lh2_tno.component_scope import expected_component_ids_for_release  # noqa: E402
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.frequency import FrequencyEvent, generate_events  # noqa: E402
@@ -234,9 +235,13 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             frequency_event_rows,
         )
     scenarios = _frequency_scenarios(events)
+    expected_components = expected_component_ids_for_release(
+        (component.id for component in facility.components),
+        excluded_model_components=campaign.frequency_plan.excluded_model_components,
+    )
     assessment = build_facility_assessment(
         [result],
-        expected_component_ids=tuple(component.id for component in facility.components),
+        expected_component_ids=expected_components,
         scope_matrices=(scope_matrix,),
         required_accident_families=MAJOR_ACCIDENT_FAMILIES,
         frequency_scenarios=scenarios,

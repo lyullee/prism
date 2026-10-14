@@ -1178,17 +1178,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4154.626399991685,
+      "elapsed_ms": 4882.495300000301,
       "request_digest": "d3ce3e1e1151c30454012a2565c363ebc9e02aa309e8319fb228ab54359142e8",
-      "result_digest": "2bd9154b4a140010b343f161c3b052ae46da26604bef3327500ad50148c050c0",
+      "result_digest": "aab663c9347aa9cdc3213ac267424bc03ea7cebfc1cd54a3c4b176165289e96a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.5416000048863,
-        "pool": 219.09039998718072,
-        "near_field_and_dispersion": 2838.202099999762,
-        "cloud_observation": 114.7668000048725,
-        "fire_explosion_damage_risk": 67.88489999598823
+        "source": 695.3724000049988,
+        "pool": 220.30420000373852,
+        "near_field_and_dispersion": 3472.5981000083266,
+        "cloud_observation": 140.30679999268614,
+        "fire_explosion_damage_risk": 98.86460000416264
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -1321,17 +1321,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5932.963699990069,
+      "elapsed_ms": 7294.059299994842,
       "request_digest": "c47f27f544e580dcf3217c1e2a7d773bf60553710a87e23b6deb8bb17a81bf0d",
-      "result_digest": "e4e8f9e900357ffd9ddfbe31d999f941f53b1d157dd59fce7974b0e7579ce625",
+      "result_digest": "2a8c4e08337a969c3c7eac23d335ad8a3118431bdf38f70209f4a63fa4b68ad2",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 689.2185999895446,
-        "pool": 161.01110000454355,
-        "near_field_and_dispersion": 4064.251299991156,
-        "cloud_observation": 709.5623000059277,
-        "fire_explosion_damage_risk": 78.9354999869829
+        "source": 688.2177000079537,
+        "pool": 158.35140000854153,
+        "near_field_and_dispersion": 5224.031499994453,
+        "cloud_observation": 855.1517000014428,
+        "fire_explosion_damage_risk": 115.69360000430606
       },
       "mass_ledger": {
         "released_kg": 0.00010057792972414058,
@@ -1461,17 +1461,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4791.729999997187,
+      "elapsed_ms": 5776.773299992783,
       "request_digest": "08391a59408aa46050a3e8e169e64a8f89e3e1bf152446d453552f06f26ee25d",
-      "result_digest": "9b99ffd7fa1d9c05feb9c5922bcc77dae341ba44c032c36bb0f448c49dd85e82",
+      "result_digest": "54b901660b06e0e825bb6b81e7deac0227c10ff9521e9f035dad2f83273a9d98",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 675.2884000015911,
-        "pool": 140.8145000023069,
-        "near_field_and_dispersion": 3501.8923999887193,
-        "cloud_observation": 177.74709999503102,
-        "fire_explosion_damage_risk": 66.17810000898317
+        "source": 686.8837999936659,
+        "pool": 143.51339999120682,
+        "near_field_and_dispersion": 4405.494599996018,
+        "cloud_observation": 214.4034999946598,
+        "fire_explosion_damage_risk": 99.09189998870715
       },
       "mass_ledger": {
         "released_kg": 0.00010057966768755134,
@@ -1603,17 +1603,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3000.5619000003207,
+      "elapsed_ms": 3041.303699996206,
       "request_digest": "2ede986e44c8f15b6948721a75270a5c20cb6a496df74b5150dc230e73e538f0",
-      "result_digest": "6128c334b7bdf0df67d1eb5dba5b5d0788383a03cedfc653946d88e395705250",
+      "result_digest": "2b139a201e53e02a61e1a80bd7e45d5df1b6a5bd7b7f6a055d81c86be02e4473",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.5981000130996,
-        "pool": 151.8474999902537,
-        "near_field_and_dispersion": 1803.0319999961648,
-        "cloud_observation": 89.22330000496004,
-        "fire_explosion_damage_risk": 67.92429999040905
+        "source": 689.3476999975974,
+        "pool": 156.0472999990452,
+        "near_field_and_dispersion": 1816.7940999992425,
+        "cloud_observation": 89.89969998947345,
+        "fire_explosion_damage_risk": 68.15639999695122
       },
       "mass_ledger": {
         "released_kg": 0.00016756351240572947,
@@ -1745,17 +1745,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3125.078199998825,
+      "elapsed_ms": 3210.4554000106873,
       "request_digest": "ed55d158a6a79998772e43c7256f9d949e508fb8e546e2cc4f50f5db30fb0faf",
-      "result_digest": "4f741b95e10a9d9c9ef76d91eee61942561b6268610f480e5e425d7cf5001ddb",
+      "result_digest": "22ddaad0e9c3271a0b5a9c2d722e5cd37c95eaa0b7040789ea5c9a9073a5d317",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 676.7758000059985,
-        "pool": 195.58509999478702,
-        "near_field_and_dispersion": 1860.5017999943811,
-        "cloud_observation": 98.24279999884311,
-        "fire_explosion_damage_risk": 67.07789999200031
+        "source": 688.5293000086676,
+        "pool": 201.351199997589,
+        "near_field_and_dispersion": 1895.4221999883885,
+        "cloud_observation": 99.51279999222606,
+        "fire_explosion_damage_risk": 86.25819999724627
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -1895,17 +1895,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4794.464099992183,
+      "elapsed_ms": 5643.934499996249,
       "request_digest": "a639e27d102af9aedc267ba083c719ddce37746653577088c1044b94e2680d48",
-      "result_digest": "5574e565aca2b4e72def248d8d48b28a5fb1da2caa87905f2a70059eb8cb8c13",
+      "result_digest": "21c2ac9e8923488c3f2ebca4a8e86908124cab8a6e5b87ac4e9dfb59f3442620",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.9816000083229,
-        "pool": 124.35040000127628,
-        "near_field_and_dispersion": 3430.6477999925846,
-        "cloud_observation": 259.14019999618176,
-        "fire_explosion_damage_risk": 80.4294999979902
+        "source": 686.7400999908568,
+        "pool": 124.737100006314,
+        "near_field_and_dispersion": 4160.427700000582,
+        "cloud_observation": 315.2212999993935,
+        "fire_explosion_damage_risk": 100.98119999747723
       },
       "mass_ledger": {
         "released_kg": 4.7591905520014575e-06,
@@ -2043,17 +2043,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6134.960399998818,
+      "elapsed_ms": 7687.101400006213,
       "request_digest": "9a4d23ec25c6dd64280df66831bc1df9ee2cbc110f592800bd5b001179032636",
-      "result_digest": "5caca9bcd720b664d9befcad272fd493eeaaefb1c1df031e3bae8666606d1fc9",
+      "result_digest": "7383535fafbab6b6e9dd266e835dd3d25776562fbe38cb59984bcc31bd0c1b1f",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 675.2165999932913,
-        "pool": 131.72340000164695,
-        "near_field_and_dispersion": 4754.0776999958325,
-        "cloud_observation": 267.859600004158,
-        "fire_explosion_damage_risk": 74.07179998699576
+        "source": 693.7251000053948,
+        "pool": 134.87499998882413,
+        "near_field_and_dispersion": 6157.7026000013575,
+        "cloud_observation": 327.20070000505075,
+        "fire_explosion_damage_risk": 112.10589999973308
       },
       "mass_ledger": {
         "released_kg": 4.758412078620518e-05,
@@ -2191,17 +2191,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 8790.680799997062,
+      "elapsed_ms": 11060.398200002965,
       "request_digest": "02ffd89d91ab2ad656a71d5987ef655af3b14ce4d92cde033db9ab0ff2f05355",
-      "result_digest": "01bdcd132348f5c9b1d0dd30c87fe99a11b23ec33fb52c3da1ccd065e4ce81d3",
+      "result_digest": "c75ea247f7104b7bb328f3cd377b77a9d6747c844a5dfc424834bbcc0e9deae9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.6777000080328,
-        "pool": 199.99259999895003,
-        "near_field_and_dispersion": 7340.610800005379,
-        "cloud_observation": 280.9426999883726,
-        "fire_explosion_damage_risk": 68.58989999454934
+        "source": 693.721599993296,
+        "pool": 206.71290000609588,
+        "near_field_and_dispersion": 9462.757499990403,
+        "cloud_observation": 332.2270000062417,
+        "fire_explosion_damage_risk": 102.8980999981286
       },
       "mass_ledger": {
         "released_kg": 0.0004750626227775085,
@@ -2339,17 +2339,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 11137.687100010226,
+      "elapsed_ms": 15307.538999986718,
       "request_digest": "f50b571a652b91b65f9e11d83360284a61ff917ce5987a0c79abfe857bbb9571",
-      "result_digest": "e40adce4a2bbf34c0fea945dac436dedd6917fa848878537fa3a56887bfda6bf",
+      "result_digest": "cc0b1034960f7f6468fb2f7ff2c3e1109da1d42f7f47fd26f60bd3060ceb811c",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 682.1160000108648,
-        "pool": 276.3648000109242,
-        "near_field_and_dispersion": 9544.975600001635,
-        "cloud_observation": 305.1140000025043,
-        "fire_explosion_damage_risk": 70.80810000479687
+        "source": 685.8571000047959,
+        "pool": 288.9149999973597,
+        "near_field_and_dispersion": 13587.828899995657,
+        "cloud_observation": 366.42000000574626,
+        "fire_explosion_damage_risk": 103.25679999368731
       },
       "mass_ledger": {
         "released_kg": 0.004673369291283811,
@@ -2487,17 +2487,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 12555.031099996995,
+      "elapsed_ms": 18322.318000005907,
       "request_digest": "3e4f3e05f58de72fec6f9f7c2d5da44785b3d2c8097819b11748e67c6ec78cea",
-      "result_digest": "b1df5a80c5b0d1a66d881ded4c69c3b45bb9d91064951ed59dc33c10224d4302",
+      "result_digest": "9fc922d24e7ddf01e487f0eed34c4d51515bb1f6f1294f28faaa455c25e4df7d",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 679.2082999891136,
-        "pool": 258.5601000027964,
-        "near_field_and_dispersion": 11035.740999999689,
-        "cloud_observation": 276.5967000013916,
-        "fire_explosion_damage_risk": 67.44980000075884
+        "source": 689.9802999978419,
+        "pool": 265.30329999513924,
+        "near_field_and_dispersion": 16626.192299998365,
+        "cloud_observation": 351.6376999905333,
+        "fire_explosion_damage_risk": 107.21220000414178
       },
       "mass_ledger": {
         "released_kg": 0.044730632707305325,
@@ -2622,17 +2622,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5717.3017999884905,
+      "elapsed_ms": 7558.70639999921,
       "request_digest": "365c6126e63b1d3203385c013e8a80c460b20006860686a1d952903790fc78d9",
-      "result_digest": "47eb037c81a0b0080bc26b57b8f8e9f0583c10fe0372d6a9ae665e499b23df5a",
+      "result_digest": "d127d74e7b1f2ad41ac6c968a7bc6396e271aa3ee4792c39ce530497d904f7d8",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 680.2859000017634,
-        "pool": 131.99449999956414,
-        "near_field_and_dispersion": 4366.604099996039,
-        "cloud_observation": 242.81640000117477,
-        "fire_explosion_damage_risk": 74.60170000558719
+        "source": 688.7615999876289,
+        "pool": 126.32749999465887,
+        "near_field_and_dispersion": 6087.490099991555,
+        "cloud_observation": 303.80239999794867,
+        "fire_explosion_damage_risk": 80.5259000044316
       },
       "mass_ledger": {
         "released_kg": 1.582158593990828e-05,
@@ -2757,17 +2757,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5642.6898000063375,
+      "elapsed_ms": 7010.933300000033,
       "request_digest": "b8f4d2f6d8f8f551d48eb354d960992183709b9dc6a71f154400383d2850ff01",
-      "result_digest": "b6b17816a9c1422eb1adbc042c65e59406f733f897a1a1c70ddb7339b8f89be4",
+      "result_digest": "53b068e073c98c71b03a7ff4d0c8fb596b4037d1360c5352591af27374b9fb7e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 677.0131999946898,
-        "pool": 161.49119999317918,
-        "near_field_and_dispersion": 4307.983599996078,
-        "cloud_observation": 201.20870000391733,
-        "fire_explosion_damage_risk": 77.11750001180917
+        "source": 686.2180000025546,
+        "pool": 163.60670000722166,
+        "near_field_and_dispersion": 5524.649300001329,
+        "cloud_observation": 254.5313000009628,
+        "fire_explosion_damage_risk": 102.37920000508893
       },
       "mass_ledger": {
         "released_kg": 0.00015821585939908284,
@@ -2892,17 +2892,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 7583.288200010429,
+      "elapsed_ms": 8921.702699997695,
       "request_digest": "df97b54f008c4d837b67eaf81b94f5f765aaf8589987d739eb615b9cc5d6e280",
-      "result_digest": "921bfb8c021c3925021e6a8d8c9f18b732660fe0e9dbe8fc6760ed297250b794",
+      "result_digest": "79aa4d1925a1a89be169008248f0e697574f8ba0cd213d275498761506fc79c1",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 686.328499999945,
-        "pool": 324.9363000068115,
-        "near_field_and_dispersion": 5911.686999999802,
-        "cloud_observation": 312.8928000078304,
-        "fire_explosion_damage_risk": 112.8399999870453
+        "source": 689.430700003868,
+        "pool": 323.6151000019163,
+        "near_field_and_dispersion": 7269.877300001099,
+        "cloud_observation": 288.6368999897968,
+        "fire_explosion_damage_risk": 92.84409999963827
       },
       "mass_ledger": {
         "released_kg": 0.001582158593990829,
@@ -3027,17 +3027,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6804.361400005291,
+      "elapsed_ms": 8828.022400004556,
       "request_digest": "b7a43e2dd350898844e048d6e2064ee88e48161ba0930af3eb846ebdf125f2f0",
-      "result_digest": "a5a993be54d1448187f501806aa902245f012da872fb16baa66aa87f248f18ab",
+      "result_digest": "d0bd4ae669c7a031fdba2953bf945793938a050a279dc17b5d6e544c8e9a44fb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 681.9391000026371,
-        "pool": 236.90459999488667,
-        "near_field_and_dispersion": 5318.958999996539,
-        "cloud_observation": 258.82620000629686,
-        "fire_explosion_damage_risk": 84.0423999907216
+        "source": 694.0291999926558,
+        "pool": 243.01269999705255,
+        "near_field_and_dispersion": 7207.938200008357,
+        "cloud_observation": 314.7125999967102,
+        "fire_explosion_damage_risk": 106.7202999984147
       },
       "mass_ledger": {
         "released_kg": 0.015821585939908286,
@@ -3162,17 +3162,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6791.991699996288,
+      "elapsed_ms": 8314.229600000544,
       "request_digest": "8805039c27d014a0b4dc8b6cc87731472c9363dc6d69641791de09087b661e23",
-      "result_digest": "88b4b60f3ce3cfc9f3e83a27959b033cd751e757a77cd8c74ae1f464520fc3c7",
+      "result_digest": "2c5fe1f91ad135f7936987dc17bcddaba314565e4aa958cdf667cad9b05bde72",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 685.2407999977004,
-        "pool": 273.63619999960065,
-        "near_field_and_dispersion": 5254.398100005346,
-        "cloud_observation": 257.5301000033505,
-        "fire_explosion_damage_risk": 75.14780000201426
+        "source": 690.4956999933347,
+        "pool": 281.09560000302736,
+        "near_field_and_dispersion": 6769.4053999875905,
+        "cloud_observation": 255.30010000511538,
+        "fire_explosion_damage_risk": 72.42540000879671
       },
       "mass_ledger": {
         "released_kg": 0.15821585939908284,
@@ -3281,17 +3281,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 3651.2541999982204,
+      "elapsed_ms": 3988.3201000047848,
       "request_digest": "25091f4936b1875ef1882c8c1482b658cf875561dd20b971b4e117374a914fe3",
-      "result_digest": "cba3c35a8498495d268eeb747f25e269bb7a437942a95374fc2d66c6cc5cca25",
+      "result_digest": "c4e21dcbd0647ff029a0f3045d8aec737d4cc96dc84f90d0f57e63bddc493770",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 693.6905000038678,
-        "pool": 0.005099995178170502,
-        "near_field_and_dispersion": 2423.627399999532,
-        "cloud_observation": 216.19629999622703,
-        "fire_explosion_damage_risk": 78.70810000167694
+        "source": 707.1078000008129,
+        "pool": 0.005400012014433742,
+        "near_field_and_dispersion": 2660.138899998856,
+        "cloud_observation": 277.8317999909632,
+        "fire_explosion_damage_risk": 101.19300000951625
       },
       "mass_ledger": {
         "released_kg": 0.0006739291847553497,
@@ -3428,17 +3428,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6906.233300003805,
+      "elapsed_ms": 7594.875399998273,
       "request_digest": "e043cbc4134d60695f601f0cfcba7bd54de7005a220e057c0004b07b1ec3bb15",
-      "result_digest": "66fee1bb5543b1279e1648a8b16b6d35a81f12fd88d0da08826e95bb3601c641",
+      "result_digest": "75d6f0ca9bf2a119a3ad095aa5f4c27dc502661e6dd41b8787c294d532f08e70",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 689.7026999940863,
-        "pool": 252.1682999940822,
-        "near_field_and_dispersion": 5350.841199993738,
-        "cloud_observation": 282.2526000090875,
-        "fire_explosion_damage_risk": 94.35250000387896
+        "source": 701.2032999919029,
+        "pool": 251.25080000725575,
+        "near_field_and_dispersion": 6046.411600007559,
+        "cloud_observation": 271.41950000077486,
+        "fire_explosion_damage_risk": 76.77139999577776
       },
       "mass_ledger": {
         "released_kg": 0.0560663237977497,
@@ -3576,17 +3576,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6588.291699998081,
+      "elapsed_ms": 6459.232000008342,
       "request_digest": "c3f20af150b138be1ff27afa78b8b8037cf7dfc3ef35529e6a02f7a06a53a0eb",
-      "result_digest": "fe2222200312650fb9a8ce95f3c74cdab3c877923103dea38f54c57bfd54c86b",
+      "result_digest": "5e1aadcc569a92c1f43e56b3b1b60d67e1df7a3057eeb9f78d0d9f682a0ed604",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 689.2387999978382,
-        "pool": 220.27730000263546,
-        "near_field_and_dispersion": 5159.241200002725,
-        "cloud_observation": 223.01250000600703,
-        "fire_explosion_damage_risk": 73.52229999378324
+        "source": 679.171799987671,
+        "pool": 221.2565999943763,
+        "near_field_and_dispersion": 5028.53419999883,
+        "cloud_observation": 222.21589999389835,
+        "fire_explosion_damage_risk": 82.88259999244474
       },
       "mass_ledger": {
         "released_kg": 0.0005606632379774973,
@@ -3709,17 +3709,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 4292.034099999,
+      "elapsed_ms": 4234.4939000031445,
       "request_digest": "27b356edcdb39b2aecbc98f3707666047d52dca3566fb449b4461b6ce7c79ca9",
-      "result_digest": "84cd5d53b5cca2996862c24c48291838d77622e0b7e8885994cd4c5397e94dcf",
+      "result_digest": "a99a2e20a62f6ffa39b21b2bf33f0fb5e758fc4f5e2685603c1bc63a419d6cd9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 684.1298000072129,
-        "pool": 0.006700007361359894,
-        "near_field_and_dispersion": 2908.219699995243,
-        "cloud_observation": 414.2600000050152,
-        "fire_explosion_damage_risk": 68.70319999870844
+        "source": 689.2430000007153,
+        "pool": 0.006999995093792677,
+        "near_field_and_dispersion": 2846.2503000046127,
+        "cloud_observation": 406.98659999179654,
+        "fire_explosion_damage_risk": 67.77539999166038
       },
       "mass_ledger": {
         "released_kg": 4.956379784841933e-06,
@@ -3841,17 +3841,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 2182.9358999966644,
+      "elapsed_ms": 2183.4341999929165,
       "request_digest": "fc072cdeddf3dc45e0503d64ed184c874bfd01739c11b273543f31af2c517a1b",
-      "result_digest": "5979cb3dae324e1141dcdf9a2b7c669e82b55edbfbbd444514fdb750fff6efe0",
+      "result_digest": "09a675f2e19c75249860ffcd1dd0c6b7d44a134184b89f3380ee0164d7cb22f2",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 707.885100011481,
-        "pool": 0.021800005924887955,
-        "near_field_and_dispersion": 248.5807999910321,
-        "cloud_observation": 935.822300001746,
-        "fire_explosion_damage_risk": 68.74249999236781
+        "source": 712.8183000022545,
+        "pool": 0.023100001271814108,
+        "near_field_and_dispersion": 245.9332999860635,
+        "cloud_observation": 930.441400007112,
+        "fire_explosion_damage_risk": 67.833300010534
       },
       "mass_ledger": {
         "released_kg": 4.956379784841932e-06,
@@ -3973,17 +3973,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1427.0155999984127,
+      "elapsed_ms": 1453.2122999953572,
       "request_digest": "8f0f80ebc3dd6b38e18eb91f7200bdae0ebcc9f6046e111ca4f59a60773b3f78",
-      "result_digest": "a1e8c53579de6a547e02f9d89839b56edaa73dfee569447619b2036e7d55a90a",
+      "result_digest": "ea68508fed4546376caeb926561158f293989b0c9becc3c9fedb1572bd2802ef",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 683.7454000051366,
-        "pool": 0.0052000104915350676,
-        "near_field_and_dispersion": 371.2136000103783,
-        "cloud_observation": 94.17169999505859,
-        "fire_explosion_damage_risk": 66.2066000077175
+        "source": 688.8108999992255,
+        "pool": 0.005099995178170502,
+        "near_field_and_dispersion": 374.09820000175387,
+        "cloud_observation": 93.32340001128614,
+        "fire_explosion_damage_risk": 66.33760000113398
       },
       "mass_ledger": {
         "released_kg": 7.221896865709533e-06,
@@ -4103,15 +4103,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6206.508900009794,
+      "elapsed_ms": 6195.382500009146,
       "request_digest": "12de79c5e288ee1ecf5f031faacbaa4a257e4fabcdccc697e14eb3539a182b4c",
-      "result_digest": "a7a2eb5ae87a5bd4264c5af89d49ca2d8526fcd63168b5d5ef4757c6b2dba6ac",
+      "result_digest": "392aab5cd36c528cf20b0c6d71339941d0ba0d718db13e579fe043b02ff3a430",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "endpoint_a": 3067.2103999968385,
-        "endpoint_b": 3137.3874000128126,
-        "endpoint_aggregation": 6206.05959999375
+        "endpoint_a": 3077.1174999972573,
+        "endpoint_b": 3116.7850000056205,
+        "endpoint_aggregation": 6194.9718999967445
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -4232,15 +4232,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6216.930399998091,
+      "elapsed_ms": 6195.25099999737,
       "request_digest": "fee81f95f9e978e5f4ddc7a542267da4ed01dc094a288e241fd0379da0d7b2e8",
-      "result_digest": "322b65f20a1d6fb39a5413ee9f5c1461cee2906095237a6ed691db16fe51f1c7",
+      "result_digest": "fb11df8a71d843d748ba3a99ccea79c3e0beb02daf36a9221fd08895467d2e0c",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "endpoint_a": 3084.027499993681,
-        "endpoint_b": 3130.9466999955475,
-        "endpoint_aggregation": 6216.473200009204
+        "endpoint_a": 3042.142199992668,
+        "endpoint_b": 3151.227000009385,
+        "endpoint_aggregation": 6194.538600000669
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -4363,17 +4363,17 @@
         ]
       },
       "status": "EXECUTED",
-      "elapsed_ms": 1920.5178000120213,
+      "elapsed_ms": 1988.577299998724,
       "request_digest": "89a4163afbcc58716afeec377583eac3198d2c89e759b697e672dd51593ca9a6",
-      "result_digest": "2b8c619f11733013a89ac22caec2e5a5a7098586f41ec1bf429c18907c240b95",
+      "result_digest": "7580cfd63a9e26f31ce171a56be62ff17de74101e091ddb96138136c5ae9091b",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 701.0357999970438,
-        "pool": 0.005099995178170502,
-        "near_field_and_dispersion": 804.791300004581,
-        "cloud_observation": 127.54689999565016,
-        "fire_explosion_damage_risk": 66.68340000032913
+        "source": 681.5324000053806,
+        "pool": 0.005399997462518513,
+        "near_field_and_dispersion": 824.8195000051055,
+        "cloud_observation": 129.3738999956986,
+        "fire_explosion_damage_risk": 67.57439998909831
       },
       "mass_ledger": {
         "released_kg": 1.68050750033061e-06,
@@ -4504,17 +4504,17 @@
         ]
       },
       "status": "EXECUTED_DOMAIN_INCOMPLETE",
-      "elapsed_ms": 4154.626399991685,
+      "elapsed_ms": 4882.495300000301,
       "request_digest": "d3ce3e1e1151c30454012a2565c363ebc9e02aa309e8319fb228ab54359142e8",
-      "result_digest": "2bd9154b4a140010b343f161c3b052ae46da26604bef3327500ad50148c050c0",
+      "result_digest": "aab663c9347aa9cdc3213ac267424bc03ea7cebfc1cd54a3c4b176165289e96a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.5416000048863,
-        "pool": 219.09039998718072,
-        "near_field_and_dispersion": 2838.202099999762,
-        "cloud_observation": 114.7668000048725,
-        "fire_explosion_damage_risk": 67.88489999598823
+        "source": 695.3724000049988,
+        "pool": 220.30420000373852,
+        "near_field_and_dispersion": 3472.5981000083266,
+        "cloud_observation": 140.30679999268614,
+        "fire_explosion_damage_risk": 98.86460000416264
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -4647,17 +4647,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4154.626399991685,
+      "elapsed_ms": 4882.495300000301,
       "request_digest": "d3ce3e1e1151c30454012a2565c363ebc9e02aa309e8319fb228ab54359142e8",
-      "result_digest": "2bd9154b4a140010b343f161c3b052ae46da26604bef3327500ad50148c050c0",
+      "result_digest": "aab663c9347aa9cdc3213ac267424bc03ea7cebfc1cd54a3c4b176165289e96a",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.5416000048863,
-        "pool": 219.09039998718072,
-        "near_field_and_dispersion": 2838.202099999762,
-        "cloud_observation": 114.7668000048725,
-        "fire_explosion_damage_risk": 67.88489999598823
+        "source": 695.3724000049988,
+        "pool": 220.30420000373852,
+        "near_field_and_dispersion": 3472.5981000083266,
+        "cloud_observation": 140.30679999268614,
+        "fire_explosion_damage_risk": 98.86460000416264
       },
       "mass_ledger": {
         "released_kg": 0.008166514093845672,
@@ -4790,17 +4790,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5932.963699990069,
+      "elapsed_ms": 7294.059299994842,
       "request_digest": "c47f27f544e580dcf3217c1e2a7d773bf60553710a87e23b6deb8bb17a81bf0d",
-      "result_digest": "e4e8f9e900357ffd9ddfbe31d999f941f53b1d157dd59fce7974b0e7579ce625",
+      "result_digest": "2a8c4e08337a969c3c7eac23d335ad8a3118431bdf38f70209f4a63fa4b68ad2",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 689.2185999895446,
-        "pool": 161.01110000454355,
-        "near_field_and_dispersion": 4064.251299991156,
-        "cloud_observation": 709.5623000059277,
-        "fire_explosion_damage_risk": 78.9354999869829
+        "source": 688.2177000079537,
+        "pool": 158.35140000854153,
+        "near_field_and_dispersion": 5224.031499994453,
+        "cloud_observation": 855.1517000014428,
+        "fire_explosion_damage_risk": 115.69360000430606
       },
       "mass_ledger": {
         "released_kg": 0.00010057792972414058,
@@ -4930,17 +4930,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4791.729999997187,
+      "elapsed_ms": 5776.773299992783,
       "request_digest": "08391a59408aa46050a3e8e169e64a8f89e3e1bf152446d453552f06f26ee25d",
-      "result_digest": "9b99ffd7fa1d9c05feb9c5922bcc77dae341ba44c032c36bb0f448c49dd85e82",
+      "result_digest": "54b901660b06e0e825bb6b81e7deac0227c10ff9521e9f035dad2f83273a9d98",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 675.2884000015911,
-        "pool": 140.8145000023069,
-        "near_field_and_dispersion": 3501.8923999887193,
-        "cloud_observation": 177.74709999503102,
-        "fire_explosion_damage_risk": 66.17810000898317
+        "source": 686.8837999936659,
+        "pool": 143.51339999120682,
+        "near_field_and_dispersion": 4405.494599996018,
+        "cloud_observation": 214.4034999946598,
+        "fire_explosion_damage_risk": 99.09189998870715
       },
       "mass_ledger": {
         "released_kg": 0.00010057966768755134,
@@ -5072,17 +5072,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3000.5619000003207,
+      "elapsed_ms": 3041.303699996206,
       "request_digest": "2ede986e44c8f15b6948721a75270a5c20cb6a496df74b5150dc230e73e538f0",
-      "result_digest": "6128c334b7bdf0df67d1eb5dba5b5d0788383a03cedfc653946d88e395705250",
+      "result_digest": "2b139a201e53e02a61e1a80bd7e45d5df1b6a5bd7b7f6a055d81c86be02e4473",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.5981000130996,
-        "pool": 151.8474999902537,
-        "near_field_and_dispersion": 1803.0319999961648,
-        "cloud_observation": 89.22330000496004,
-        "fire_explosion_damage_risk": 67.92429999040905
+        "source": 689.3476999975974,
+        "pool": 156.0472999990452,
+        "near_field_and_dispersion": 1816.7940999992425,
+        "cloud_observation": 89.89969998947345,
+        "fire_explosion_damage_risk": 68.15639999695122
       },
       "mass_ledger": {
         "released_kg": 0.00016756351240572947,
@@ -5214,17 +5214,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 3125.078199998825,
+      "elapsed_ms": 3210.4554000106873,
       "request_digest": "ed55d158a6a79998772e43c7256f9d949e508fb8e546e2cc4f50f5db30fb0faf",
-      "result_digest": "4f741b95e10a9d9c9ef76d91eee61942561b6268610f480e5e425d7cf5001ddb",
+      "result_digest": "22ddaad0e9c3271a0b5a9c2d722e5cd37c95eaa0b7040789ea5c9a9073a5d317",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 676.7758000059985,
-        "pool": 195.58509999478702,
-        "near_field_and_dispersion": 1860.5017999943811,
-        "cloud_observation": 98.24279999884311,
-        "fire_explosion_damage_risk": 67.07789999200031
+        "source": 688.5293000086676,
+        "pool": 201.351199997589,
+        "near_field_and_dispersion": 1895.4221999883885,
+        "cloud_observation": 99.51279999222606,
+        "fire_explosion_damage_risk": 86.25819999724627
       },
       "mass_ledger": {
         "released_kg": 0.0016625666208320196,
@@ -5364,17 +5364,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 4794.464099992183,
+      "elapsed_ms": 5643.934499996249,
       "request_digest": "a639e27d102af9aedc267ba083c719ddce37746653577088c1044b94e2680d48",
-      "result_digest": "5574e565aca2b4e72def248d8d48b28a5fb1da2caa87905f2a70059eb8cb8c13",
+      "result_digest": "21c2ac9e8923488c3f2ebca4a8e86908124cab8a6e5b87ac4e9dfb59f3442620",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.9816000083229,
-        "pool": 124.35040000127628,
-        "near_field_and_dispersion": 3430.6477999925846,
-        "cloud_observation": 259.14019999618176,
-        "fire_explosion_damage_risk": 80.4294999979902
+        "source": 686.7400999908568,
+        "pool": 124.737100006314,
+        "near_field_and_dispersion": 4160.427700000582,
+        "cloud_observation": 315.2212999993935,
+        "fire_explosion_damage_risk": 100.98119999747723
       },
       "mass_ledger": {
         "released_kg": 4.7591905520014575e-06,
@@ -5512,17 +5512,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6134.960399998818,
+      "elapsed_ms": 7687.101400006213,
       "request_digest": "9a4d23ec25c6dd64280df66831bc1df9ee2cbc110f592800bd5b001179032636",
-      "result_digest": "5caca9bcd720b664d9befcad272fd493eeaaefb1c1df031e3bae8666606d1fc9",
+      "result_digest": "7383535fafbab6b6e9dd266e835dd3d25776562fbe38cb59984bcc31bd0c1b1f",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 675.2165999932913,
-        "pool": 131.72340000164695,
-        "near_field_and_dispersion": 4754.0776999958325,
-        "cloud_observation": 267.859600004158,
-        "fire_explosion_damage_risk": 74.07179998699576
+        "source": 693.7251000053948,
+        "pool": 134.87499998882413,
+        "near_field_and_dispersion": 6157.7026000013575,
+        "cloud_observation": 327.20070000505075,
+        "fire_explosion_damage_risk": 112.10589999973308
       },
       "mass_ledger": {
         "released_kg": 4.758412078620518e-05,
@@ -5660,17 +5660,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 8790.680799997062,
+      "elapsed_ms": 11060.398200002965,
       "request_digest": "02ffd89d91ab2ad656a71d5987ef655af3b14ce4d92cde033db9ab0ff2f05355",
-      "result_digest": "01bdcd132348f5c9b1d0dd30c87fe99a11b23ec33fb52c3da1ccd065e4ce81d3",
+      "result_digest": "c75ea247f7104b7bb328f3cd377b77a9d6747c844a5dfc424834bbcc0e9deae9",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 674.6777000080328,
-        "pool": 199.99259999895003,
-        "near_field_and_dispersion": 7340.610800005379,
-        "cloud_observation": 280.9426999883726,
-        "fire_explosion_damage_risk": 68.58989999454934
+        "source": 693.721599993296,
+        "pool": 206.71290000609588,
+        "near_field_and_dispersion": 9462.757499990403,
+        "cloud_observation": 332.2270000062417,
+        "fire_explosion_damage_risk": 102.8980999981286
       },
       "mass_ledger": {
         "released_kg": 0.0004750626227775085,
@@ -5808,17 +5808,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 11137.687100010226,
+      "elapsed_ms": 15307.538999986718,
       "request_digest": "f50b571a652b91b65f9e11d83360284a61ff917ce5987a0c79abfe857bbb9571",
-      "result_digest": "e40adce4a2bbf34c0fea945dac436dedd6917fa848878537fa3a56887bfda6bf",
+      "result_digest": "cc0b1034960f7f6468fb2f7ff2c3e1109da1d42f7f47fd26f60bd3060ceb811c",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 682.1160000108648,
-        "pool": 276.3648000109242,
-        "near_field_and_dispersion": 9544.975600001635,
-        "cloud_observation": 305.1140000025043,
-        "fire_explosion_damage_risk": 70.80810000479687
+        "source": 685.8571000047959,
+        "pool": 288.9149999973597,
+        "near_field_and_dispersion": 13587.828899995657,
+        "cloud_observation": 366.42000000574626,
+        "fire_explosion_damage_risk": 103.25679999368731
       },
       "mass_ledger": {
         "released_kg": 0.004673369291283811,
@@ -5956,17 +5956,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 12555.031099996995,
+      "elapsed_ms": 18322.318000005907,
       "request_digest": "3e4f3e05f58de72fec6f9f7c2d5da44785b3d2c8097819b11748e67c6ec78cea",
-      "result_digest": "b1df5a80c5b0d1a66d881ded4c69c3b45bb9d91064951ed59dc33c10224d4302",
+      "result_digest": "9fc922d24e7ddf01e487f0eed34c4d51515bb1f6f1294f28faaa455c25e4df7d",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 679.2082999891136,
-        "pool": 258.5601000027964,
-        "near_field_and_dispersion": 11035.740999999689,
-        "cloud_observation": 276.5967000013916,
-        "fire_explosion_damage_risk": 67.44980000075884
+        "source": 689.9802999978419,
+        "pool": 265.30329999513924,
+        "near_field_and_dispersion": 16626.192299998365,
+        "cloud_observation": 351.6376999905333,
+        "fire_explosion_damage_risk": 107.21220000414178
       },
       "mass_ledger": {
         "released_kg": 0.044730632707305325,
@@ -6091,17 +6091,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5717.3017999884905,
+      "elapsed_ms": 7558.70639999921,
       "request_digest": "365c6126e63b1d3203385c013e8a80c460b20006860686a1d952903790fc78d9",
-      "result_digest": "47eb037c81a0b0080bc26b57b8f8e9f0583c10fe0372d6a9ae665e499b23df5a",
+      "result_digest": "d127d74e7b1f2ad41ac6c968a7bc6396e271aa3ee4792c39ce530497d904f7d8",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 680.2859000017634,
-        "pool": 131.99449999956414,
-        "near_field_and_dispersion": 4366.604099996039,
-        "cloud_observation": 242.81640000117477,
-        "fire_explosion_damage_risk": 74.60170000558719
+        "source": 688.7615999876289,
+        "pool": 126.32749999465887,
+        "near_field_and_dispersion": 6087.490099991555,
+        "cloud_observation": 303.80239999794867,
+        "fire_explosion_damage_risk": 80.5259000044316
       },
       "mass_ledger": {
         "released_kg": 1.582158593990828e-05,
@@ -6226,17 +6226,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 5642.6898000063375,
+      "elapsed_ms": 7010.933300000033,
       "request_digest": "b8f4d2f6d8f8f551d48eb354d960992183709b9dc6a71f154400383d2850ff01",
-      "result_digest": "b6b17816a9c1422eb1adbc042c65e59406f733f897a1a1c70ddb7339b8f89be4",
+      "result_digest": "53b068e073c98c71b03a7ff4d0c8fb596b4037d1360c5352591af27374b9fb7e",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 677.0131999946898,
-        "pool": 161.49119999317918,
-        "near_field_and_dispersion": 4307.983599996078,
-        "cloud_observation": 201.20870000391733,
-        "fire_explosion_damage_risk": 77.11750001180917
+        "source": 686.2180000025546,
+        "pool": 163.60670000722166,
+        "near_field_and_dispersion": 5524.649300001329,
+        "cloud_observation": 254.5313000009628,
+        "fire_explosion_damage_risk": 102.37920000508893
       },
       "mass_ledger": {
         "released_kg": 0.00015821585939908284,
@@ -6361,17 +6361,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 7583.288200010429,
+      "elapsed_ms": 8921.702699997695,
       "request_digest": "df97b54f008c4d837b67eaf81b94f5f765aaf8589987d739eb615b9cc5d6e280",
-      "result_digest": "921bfb8c021c3925021e6a8d8c9f18b732660fe0e9dbe8fc6760ed297250b794",
+      "result_digest": "79aa4d1925a1a89be169008248f0e697574f8ba0cd213d275498761506fc79c1",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 686.328499999945,
-        "pool": 324.9363000068115,
-        "near_field_and_dispersion": 5911.686999999802,
-        "cloud_observation": 312.8928000078304,
-        "fire_explosion_damage_risk": 112.8399999870453
+        "source": 689.430700003868,
+        "pool": 323.6151000019163,
+        "near_field_and_dispersion": 7269.877300001099,
+        "cloud_observation": 288.6368999897968,
+        "fire_explosion_damage_risk": 92.84409999963827
       },
       "mass_ledger": {
         "released_kg": 0.001582158593990829,
@@ -6496,17 +6496,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6804.361400005291,
+      "elapsed_ms": 8828.022400004556,
       "request_digest": "b7a43e2dd350898844e048d6e2064ee88e48161ba0930af3eb846ebdf125f2f0",
-      "result_digest": "a5a993be54d1448187f501806aa902245f012da872fb16baa66aa87f248f18ab",
+      "result_digest": "d0bd4ae669c7a031fdba2953bf945793938a050a279dc17b5d6e544c8e9a44fb",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 681.9391000026371,
-        "pool": 236.90459999488667,
-        "near_field_and_dispersion": 5318.958999996539,
-        "cloud_observation": 258.82620000629686,
-        "fire_explosion_damage_risk": 84.0423999907216
+        "source": 694.0291999926558,
+        "pool": 243.01269999705255,
+        "near_field_and_dispersion": 7207.938200008357,
+        "cloud_observation": 314.7125999967102,
+        "fire_explosion_damage_risk": 106.7202999984147
       },
       "mass_ledger": {
         "released_kg": 0.015821585939908286,
@@ -6631,17 +6631,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6791.991699996288,
+      "elapsed_ms": 8314.229600000544,
       "request_digest": "8805039c27d014a0b4dc8b6cc87731472c9363dc6d69641791de09087b661e23",
-      "result_digest": "88b4b60f3ce3cfc9f3e83a27959b033cd751e757a77cd8c74ae1f464520fc3c7",
+      "result_digest": "2c5fe1f91ad135f7936987dc17bcddaba314565e4aa958cdf667cad9b05bde72",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 685.2407999977004,
-        "pool": 273.63619999960065,
-        "near_field_and_dispersion": 5254.398100005346,
-        "cloud_observation": 257.5301000033505,
-        "fire_explosion_damage_risk": 75.14780000201426
+        "source": 690.4956999933347,
+        "pool": 281.09560000302736,
+        "near_field_and_dispersion": 6769.4053999875905,
+        "cloud_observation": 255.30010000511538,
+        "fire_explosion_damage_risk": 72.42540000879671
       },
       "mass_ledger": {
         "released_kg": 0.15821585939908284,
@@ -6779,17 +6779,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6906.233300003805,
+      "elapsed_ms": 7594.875399998273,
       "request_digest": "e043cbc4134d60695f601f0cfcba7bd54de7005a220e057c0004b07b1ec3bb15",
-      "result_digest": "66fee1bb5543b1279e1648a8b16b6d35a81f12fd88d0da08826e95bb3601c641",
+      "result_digest": "75d6f0ca9bf2a119a3ad095aa5f4c27dc502661e6dd41b8787c294d532f08e70",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 689.7026999940863,
-        "pool": 252.1682999940822,
-        "near_field_and_dispersion": 5350.841199993738,
-        "cloud_observation": 282.2526000090875,
-        "fire_explosion_damage_risk": 94.35250000387896
+        "source": 701.2032999919029,
+        "pool": 251.25080000725575,
+        "near_field_and_dispersion": 6046.411600007559,
+        "cloud_observation": 271.41950000077486,
+        "fire_explosion_damage_risk": 76.77139999577776
       },
       "mass_ledger": {
         "released_kg": 0.0560663237977497,
@@ -6927,17 +6927,17 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6588.291699998081,
+      "elapsed_ms": 6459.232000008342,
       "request_digest": "c3f20af150b138be1ff27afa78b8b8037cf7dfc3ef35529e6a02f7a06a53a0eb",
-      "result_digest": "fe2222200312650fb9a8ce95f3c74cdab3c877923103dea38f54c57bfd54c86b",
+      "result_digest": "5e1aadcc569a92c1f43e56b3b1b60d67e1df7a3057eeb9f78d0d9f682a0ed604",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "source": 689.2387999978382,
-        "pool": 220.27730000263546,
-        "near_field_and_dispersion": 5159.241200002725,
-        "cloud_observation": 223.01250000600703,
-        "fire_explosion_damage_risk": 73.52229999378324
+        "source": 679.171799987671,
+        "pool": 221.2565999943763,
+        "near_field_and_dispersion": 5028.53419999883,
+        "cloud_observation": 222.21589999389835,
+        "fire_explosion_damage_risk": 82.88259999244474
       },
       "mass_ledger": {
         "released_kg": 0.0005606632379774973,
@@ -7058,15 +7058,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6206.508900009794,
+      "elapsed_ms": 6195.382500009146,
       "request_digest": "12de79c5e288ee1ecf5f031faacbaa4a257e4fabcdccc697e14eb3539a182b4c",
-      "result_digest": "a7a2eb5ae87a5bd4264c5af89d49ca2d8526fcd63168b5d5ef4757c6b2dba6ac",
+      "result_digest": "392aab5cd36c528cf20b0c6d71339941d0ba0d718db13e579fe043b02ff3a430",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "endpoint_a": 3067.2103999968385,
-        "endpoint_b": 3137.3874000128126,
-        "endpoint_aggregation": 6206.05959999375
+        "endpoint_a": 3077.1174999972573,
+        "endpoint_b": 3116.7850000056205,
+        "endpoint_aggregation": 6194.9718999967445
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -7187,15 +7187,15 @@
         ]
       },
       "status": "EXECUTED_OPERATOR_LIMITED",
-      "elapsed_ms": 6216.930399998091,
+      "elapsed_ms": 6195.25099999737,
       "request_digest": "fee81f95f9e978e5f4ddc7a542267da4ed01dc094a288e241fd0379da0d7b2e8",
-      "result_digest": "322b65f20a1d6fb39a5413ee9f5c1461cee2906095237a6ed691db16fe51f1c7",
+      "result_digest": "fb11df8a71d843d748ba3a99ccea79c3e0beb02daf36a9221fd08895467d2e0c",
       "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
-      "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
+      "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
       "stage_elapsed_ms": {
-        "endpoint_a": 3084.027499993681,
-        "endpoint_b": 3130.9466999955475,
-        "endpoint_aggregation": 6216.473200009204
+        "endpoint_a": 3042.142199992668,
+        "endpoint_b": 3151.227000009385,
+        "endpoint_aggregation": 6194.538600000669
       },
       "mass_ledger": {
         "direct_gas_kg": 7.191692033908256e-08,
@@ -19641,18 +19641,18 @@
     "request_digest": "016c3ecaf698854f6728fed4ee80bc1d87f51036ce5174a68268ec935e075404",
     "backend_config_digest": "145310fe01d77a94a4fbdb324d7a78d2e27af90b94a5243144678e801882446e",
     "worker_sha256": "9f9fff07f0f42edc115fce849108c94586ac017ea1aab10bafb902d80729e983",
-    "adapter_source_digest": "de491b62a3d2c12b4f23c201fb942ead5c3c7c6c2a531a87e445a5a911608803",
-    "elapsed_ms": 197.1660000126576,
+    "adapter_source_digest": "9a4226ea73d710700af4f4abfa11c5afcf3e32dbc8616cb6f95779a09dccb722",
+    "elapsed_ms": 223.59500000311527,
     "physical_validation_claim": false
   },
   "timing": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 1427.0155999984127,
-    "case_median_ms": 5825.13274998928,
-    "case_max_ms": 12555.031099996995,
-    "case_p95_ms": 10785.636155008246,
-    "case_p99_ms": 12229.041980000038,
-    "campaign_elapsed_ms": 136603.50959999778,
+    "case_min_ms": 1453.2122999953572,
+    "case_median_ms": 6327.307250008744,
+    "case_max_ms": 18322.318000005907,
+    "case_p95_ms": 14670.467879989146,
+    "case_p99_ms": 17628.918830001494,
+    "campaign_elapsed_ms": 163445.32949999848,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "semantics": {

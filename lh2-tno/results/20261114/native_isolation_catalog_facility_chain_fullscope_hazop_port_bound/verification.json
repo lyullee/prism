@@ -121,67 +121,67 @@
     "stage_timing": {
       "cloud_observation": {
         "sample_count": 22,
-        "sum_ms": 6145.732000033604,
-        "median_ms": 258.1781500048237,
-        "max_ms": 935.822300001746,
-        "p95_ms": 694.7971850058819,
-        "p99_ms": 888.307700002624
+        "sum_ms": 6840.556999959517,
+        "median_ms": 283.23434999038,
+        "max_ms": 930.441400007112,
+        "p95_ms": 832.7434450009603,
+        "p99_ms": 914.6305630059214
       },
       "endpoint_a": {
         "sample_count": 2,
-        "sum_ms": 6151.2378999905195,
-        "median_ms": 3075.6189499952598,
-        "max_ms": 3084.027499993681,
-        "p95_ms": 3083.186644993839,
-        "p99_ms": 3083.8593289937126
+        "sum_ms": 6119.259699989925,
+        "median_ms": 3059.6298499949626,
+        "max_ms": 3077.1174999972573,
+        "p95_ms": 3075.368734997028,
+        "p99_ms": 3076.7677469972114
       },
       "endpoint_aggregation": {
         "sample_count": 2,
-        "sum_ms": 12422.532800002955,
-        "median_ms": 6211.266400001477,
-        "max_ms": 6216.473200009204,
-        "p95_ms": 6215.952520008432,
-        "p99_ms": 6216.36906400905
+        "sum_ms": 12389.510499997414,
+        "median_ms": 6194.755249998707,
+        "max_ms": 6194.9718999967445,
+        "p95_ms": 6194.950234996941,
+        "p99_ms": 6194.967566996784
       },
       "endpoint_b": {
         "sample_count": 2,
-        "sum_ms": 6268.33410000836,
-        "median_ms": 3134.16705000418,
-        "max_ms": 3137.3874000128126,
-        "p95_ms": 3137.0653650119493,
-        "p99_ms": 3137.32299301264
+        "sum_ms": 6268.0120000150055,
+        "median_ms": 3134.0060000075027,
+        "max_ms": 3151.227000009385,
+        "p95_ms": 3149.5049000091967,
+        "p99_ms": 3150.8825800093473
       },
       "fire_explosion_damage_risk": {
         "sample_count": 22,
-        "sum_ms": 1650.0177999550942,
-        "median_ms": 72.16519999929005,
-        "max_ms": 112.8399999870453,
-        "p95_ms": 93.83699500322108,
-        "p99_ms": 108.95762499058036
+        "sum_ms": 1979.781499991077,
+        "median_ms": 95.85435000190046,
+        "max_ms": 115.69360000430606,
+        "p95_ms": 111.8612149999535,
+        "p99_ms": 114.94018300334574
       },
       "near_field_and_dispersion": {
         "sample_count": 22,
-        "sum_ms": 92600.07949995634,
-        "median_ms": 4186.117449993617,
-        "max_ms": 11035.740999999689,
-        "p95_ms": 9434.75736000182,
-        "p99_ms": 10722.680266000098
+        "sum_ms": 117694.7957999655,
+        "median_ms": 5126.282849996642,
+        "max_ms": 16626.192299998365,
+        "p95_ms": 13381.575329995392,
+        "p99_ms": 15988.135985997793
       },
       "pool": {
         "sample_count": 22,
-        "sum_ms": 3460.7921999995597,
-        "median_ms": 161.25114999886137,
-        "max_ms": 324.9363000068115,
-        "p95_ms": 276.22837001035805,
-        "p99_ms": 314.7362850076751
+        "sum_ms": 3510.3218000003835,
+        "median_ms": 160.9790500078816,
+        "max_ms": 323.6151000019163,
+        "p95_ms": 288.5240299976431,
+        "p99_ms": 316.32807900095935
       },
       "source": {
         "sample_count": 22,
-        "sum_ms": 15036.858300038148,
-        "median_ms": 682.027550006751,
-        "max_ms": 707.885100011481,
-        "p95_ms": 700.668534997385,
-        "p99_ms": 706.4467470084492
+        "sum_ms": 15207.197799973073,
+        "median_ms": 689.2953499991563,
+        "max_ms": 712.8183000022545,
+        "p95_ms": 706.8125750003674,
+        "p99_ms": 711.6190950019518
       }
     },
     "case_status_counts": {
@@ -200,7 +200,7 @@
     "qualified_evidence_withheld_case_count": 19,
     "numerically_executed_case_count": 24,
     "observed_component_count": 7,
-    "expected_component_count": 8,
+    "expected_component_count": 7,
     "component_status_counts": {
       "EXCLUDED": 1,
       "EXECUTED": 2,
@@ -512,16 +512,16 @@
       }
     },
     "required_accident_family_count": 12,
-    "scope_blocker_count": 18
+    "scope_blocker_count": 17
   },
   "timing": {
     "fresh_physics_cases": 24,
-    "case_min_ms": 1427.0155999984127,
-    "case_median_ms": 5825.13274998928,
-    "case_max_ms": 12555.031099996995,
-    "case_p95_ms": 10785.636155008246,
-    "case_p99_ms": 12229.041980000038,
-    "campaign_elapsed_ms": 136603.50959999778,
+    "case_min_ms": 1453.2122999953572,
+    "case_median_ms": 6327.307250008744,
+    "case_max_ms": 18322.318000005907,
+    "case_p95_ms": 14670.467879989146,
+    "case_p99_ms": 17628.918830001494,
+    "campaign_elapsed_ms": 163445.32949999848,
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "provider_packet_promoted": false,

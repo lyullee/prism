@@ -545,7 +545,7 @@
     "two_sided_rupture: PARTIAL",
     "vertical_handoff: PARTIAL"
   ],
-  "source_facility_ledger_digest": "518c7f0827a1c38ef3f39e5a6ce7a9f04a705983324deb554126805c45b821c9",
+  "source_facility_ledger_digest": "f53152621e55dde66437b2f239f89c91d10d01718a047a6049006a650dff705e",
   "source": "facility_ledger_event_and_case_metadata",
   "physical_validation_claim": false,
   "interpretation": "The final scope matrix is regenerated from the merged facility ledger. Source campaign matrices remain provenance views; overlapping family rows are not additive and the ledger's exact event/case identities are authoritative.",
@@ -557,8 +557,8 @@
     },
     {
       "facility_id": "generic-lh2-full-scope-example",
-      "source": "prism.accident_scope_matrix.v1",
-      "digest": "1dbce897d4a71508f8e239bba8a713fe5635620af4cf0b112734dd47d25dc670"
+      "source": "prism.major_accident_scope.v1",
+      "digest": "015f82a4d4cb8357ac66e9400ba1cf864fe8d2f0f608a9fcb1fd84082a1e28f5"
     },
     {
       "facility_id": "generic-lh2-full-scope-example",

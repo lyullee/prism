@@ -18,7 +18,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\base_state_snapshot_binding_audit_port_bound.json",
+        "record": "results\\20261114\\base_state_snapshot_binding_audit_port_bound.json",
         "schema_version": "prism.state_snapshot_binding_audit.v1",
         "status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
         "record_count": 24,
@@ -74,7 +74,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "release_ledger_schema": "prism.release_termination_inventory_ledger.v1",
         "trace_row_count": 44,
         "expected_case_count": 44,
@@ -105,7 +105,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "status": "PARTIAL_FACILITY_SCOPE",
         "conditional_diagnostic_facility_risk_available": true,
         "conditional_diagnostic_facility_annual_ir_low_high": {
@@ -3339,78 +3339,78 @@
           "campaign_count": 3,
           "fresh_physics_cases": 44,
           "case_min_ms": 1335.1443000137806,
-          "case_median_ms": 3013.4931500215316,
-          "case_max_ms": 12555.031099996995,
-          "case_p95_ms": 8609.57190999907,
-          "case_p99_ms": 11945.573180002684,
-          "campaign_elapsed_ms": 176546.29260006186,
-          "campaign_elapsed_ms_sum": 176546.29260006186,
+          "case_median_ms": 3033.8640500194742,
+          "case_max_ms": 18322.318000005907,
+          "case_p95_ms": 10739.593875002178,
+          "case_p99_ms": 17025.963029997656,
+          "campaign_elapsed_ms": 203388.11250006256,
+          "campaign_elapsed_ms_sum": 203388.11250006256,
           "campaign_elapsed_ms_min": 19298.20160008967,
           "campaign_elapsed_ms_median": 20644.581399974413,
-          "campaign_elapsed_ms_max": 136603.50959999778,
-          "campaign_elapsed_ms_p95": 125007.61677999543,
-          "campaign_elapsed_ms_p99": 134284.3310359973,
+          "campaign_elapsed_ms_max": 163445.32949999848,
+          "campaign_elapsed_ms_p95": 149165.25468999607,
+          "campaign_elapsed_ms_p99": 160589.314537998,
           "stage_elapsed_ms": {
             "cloud_observation": {
               "sample_count": 42,
-              "sum_ms": 7554.553200054215,
-              "median_ms": 91.69750000000931,
-              "max_ms": 935.822300001746,
-              "p95_ms": 409.1916400051555,
-              "p99_ms": 843.0557000034597
+              "sum_ms": 8249.378199980129,
+              "median_ms": 91.6115500003798,
+              "max_ms": 930.441400007112,
+              "p95_ms": 404.9582699924938,
+              "p99_ms": 899.5726230047874
             },
             "endpoint_a": {
               "sample_count": 2,
-              "sum_ms": 6151.2378999905195,
-              "median_ms": 3075.6189499952598,
-              "max_ms": 3084.027499993681,
-              "p95_ms": 3083.186644993839,
-              "p99_ms": 3083.8593289937126
+              "sum_ms": 6119.259699989925,
+              "median_ms": 3059.6298499949626,
+              "max_ms": 3077.1174999972573,
+              "p95_ms": 3075.368734997028,
+              "p99_ms": 3076.7677469972114
             },
             "endpoint_aggregation": {
               "sample_count": 2,
-              "sum_ms": 12422.532800002955,
-              "median_ms": 6211.266400001477,
-              "max_ms": 6216.473200009204,
-              "p95_ms": 6215.952520008432,
-              "p99_ms": 6216.36906400905
+              "sum_ms": 12389.510499997414,
+              "median_ms": 6194.755249998707,
+              "max_ms": 6194.9718999967445,
+              "p95_ms": 6194.950234996941,
+              "p99_ms": 6194.967566996784
             },
             "endpoint_b": {
               "sample_count": 2,
-              "sum_ms": 6268.33410000836,
-              "median_ms": 3134.16705000418,
-              "max_ms": 3137.3874000128126,
-              "p95_ms": 3137.0653650119493,
-              "p99_ms": 3137.32299301264
+              "sum_ms": 6268.0120000150055,
+              "median_ms": 3134.0060000075027,
+              "max_ms": 3151.227000009385,
+              "p95_ms": 3149.5049000091967,
+              "p99_ms": 3150.8825800093473
             },
             "fire_explosion_damage_risk": {
               "sample_count": 42,
-              "sum_ms": 3024.083899828838,
-              "median_ms": 68.54430001840228,
-              "max_ms": 112.8399999870453,
-              "p95_ms": 83.86175499108502,
-              "p99_ms": 105.26012499394704
+              "sum_ms": 3353.847599864821,
+              "median_ms": 70.25104999775067,
+              "max_ms": 115.69360000430606,
+              "p95_ms": 107.18760500385542,
+              "p99_ms": 114.22264300243113
             },
             "near_field_and_dispersion": {
               "sample_count": 42,
-              "sum_ms": 110419.07729984086,
-              "median_ms": 1602.5860000081593,
-              "max_ms": 11035.740999999689,
-              "p95_ms": 7269.164610005095,
-              "p99_ms": 10424.527186000481
+              "sum_ms": 135513.79359985003,
+              "median_ms": 1609.4670500096981,
+              "max_ms": 16626.192299998365,
+              "p95_ms": 9353.113489990928,
+              "p99_ms": 15380.463305997244
             },
             "pool": {
               "sample_count": 42,
-              "sum_ms": 3460.873000032734,
-              "median_ms": 0.005099995178170502,
-              "max_ms": 324.9363000068115,
-              "p95_ms": 272.8823949997603,
-              "p99_ms": 305.02198500849755
+              "sum_ms": 3510.402600033558,
+              "median_ms": 0.005249996320344508,
+              "max_ms": 323.6151000019163,
+              "p95_ms": 280.3059850026329,
+              "p99_ms": 309.388059000048
             },
             "source": {
               "sample_count": 42,
-              "sum_ms": 29271.642700012308,
-              "median_ms": 699.6057500364259,
+              "sum_ms": 29441.982199947233,
+              "median_ms": 700.4151500295848,
               "max_ms": 730.1701999967918,
               "p95_ms": 722.5236099911854,
               "p99_ms": 727.7452960039955
@@ -3464,64 +3464,64 @@
           "stage_timing": {
             "cloud_observation": {
               "sample_count": 42,
-              "sum_ms": 7554.553200054215,
-              "median_ms": 91.69750000000931,
-              "max_ms": 935.822300001746,
-              "p95_ms": 409.1916400051555,
-              "p99_ms": 843.0557000034597
+              "sum_ms": 8249.378199980129,
+              "median_ms": 91.6115500003798,
+              "max_ms": 930.441400007112,
+              "p95_ms": 404.9582699924938,
+              "p99_ms": 899.5726230047874
             },
             "endpoint_a": {
               "sample_count": 2,
-              "sum_ms": 6151.2378999905195,
-              "median_ms": 3075.6189499952598,
-              "max_ms": 3084.027499993681,
-              "p95_ms": 3083.186644993839,
-              "p99_ms": 3083.8593289937126
+              "sum_ms": 6119.259699989925,
+              "median_ms": 3059.6298499949626,
+              "max_ms": 3077.1174999972573,
+              "p95_ms": 3075.368734997028,
+              "p99_ms": 3076.7677469972114
             },
             "endpoint_aggregation": {
               "sample_count": 2,
-              "sum_ms": 12422.532800002955,
-              "median_ms": 6211.266400001477,
-              "max_ms": 6216.473200009204,
-              "p95_ms": 6215.952520008432,
-              "p99_ms": 6216.36906400905
+              "sum_ms": 12389.510499997414,
+              "median_ms": 6194.755249998707,
+              "max_ms": 6194.9718999967445,
+              "p95_ms": 6194.950234996941,
+              "p99_ms": 6194.967566996784
             },
             "endpoint_b": {
               "sample_count": 2,
-              "sum_ms": 6268.33410000836,
-              "median_ms": 3134.16705000418,
-              "max_ms": 3137.3874000128126,
-              "p95_ms": 3137.0653650119493,
-              "p99_ms": 3137.32299301264
+              "sum_ms": 6268.0120000150055,
+              "median_ms": 3134.0060000075027,
+              "max_ms": 3151.227000009385,
+              "p95_ms": 3149.5049000091967,
+              "p99_ms": 3150.8825800093473
             },
             "fire_explosion_damage_risk": {
               "sample_count": 42,
-              "sum_ms": 3024.083899828838,
-              "median_ms": 68.54430001840228,
-              "max_ms": 112.8399999870453,
-              "p95_ms": 83.86175499108502,
-              "p99_ms": 105.26012499394704
+              "sum_ms": 3353.847599864821,
+              "median_ms": 70.25104999775067,
+              "max_ms": 115.69360000430606,
+              "p95_ms": 107.18760500385542,
+              "p99_ms": 114.22264300243113
             },
             "near_field_and_dispersion": {
               "sample_count": 42,
-              "sum_ms": 110419.07729984086,
-              "median_ms": 1602.5860000081593,
-              "max_ms": 11035.740999999689,
-              "p95_ms": 7269.164610005095,
-              "p99_ms": 10424.527186000481
+              "sum_ms": 135513.79359985003,
+              "median_ms": 1609.4670500096981,
+              "max_ms": 16626.192299998365,
+              "p95_ms": 9353.113489990928,
+              "p99_ms": 15380.463305997244
             },
             "pool": {
               "sample_count": 42,
-              "sum_ms": 3460.873000032734,
-              "median_ms": 0.005099995178170502,
-              "max_ms": 324.9363000068115,
-              "p95_ms": 272.8823949997603,
-              "p99_ms": 305.02198500849755
+              "sum_ms": 3510.402600033558,
+              "median_ms": 0.005249996320344508,
+              "max_ms": 323.6151000019163,
+              "p95_ms": 280.3059850026329,
+              "p99_ms": 309.388059000048
             },
             "source": {
               "sample_count": 42,
-              "sum_ms": 29271.642700012308,
-              "median_ms": 699.6057500364259,
+              "sum_ms": 29441.982199947233,
+              "median_ms": 700.4151500295848,
               "max_ms": 730.1701999967918,
               "p95_ms": 722.5236099911854,
               "p99_ms": 727.7452960039955
@@ -3543,7 +3543,7 @@
           "qualified_evidence_withheld_case_count": 29,
           "numerically_executed_case_count": 44,
           "observed_component_count": 9,
-          "expected_component_count": 10,
+          "expected_component_count": 9,
           "component_status_counts": {
             "EXCLUDED": 1,
             "EXECUTED": 3,
@@ -3922,7 +3922,7 @@
             }
           },
           "required_accident_family_count": 12,
-          "scope_blocker_count": 22
+          "scope_blocker_count": 21
         },
         "facility_total_risk_available": false,
         "complete_facility_qra_claim": false
@@ -3935,7 +3935,7 @@
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "source": "facility_assessment",
         "trace_status": "ALIGNED",
         "frequency_port_binding": {
@@ -3975,7 +3975,7 @@
       "diagnostic_only": false,
       "blocking_reason": "facility release boundary is not closed across all declared cases",
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\facility_assessment.json",
         "schema": "prism.facility_release_boundary_gate.v1",
         "schema_version": "prism.facility_release_boundary_gate.v1",
         "strict_release_boundary_ready": false,
@@ -4150,12 +4150,12 @@
       "name": "provider_worklist_coverage",
       "status": "BLOCKED",
       "evidence": {
-        "source": "current_status",
-        "status": "STRUCTURAL_CATALOGS_AVAILABLE; 24 synthetic provider packets exact-matched; actual qualified packet count remains 0; mixed campaign execution is partial and fail-closed",
+        "source": "provider_worklist",
+        "status": "READY_FOR_PROVIDER_PACKETS",
         "frequency_event_count": 24,
-        "provider_packet_count": 24,
-        "uncomputed_provider_packet_count": 0,
-        "diagnostic_release_adapter_component_count": 7,
+        "provider_packet_count": 0,
+        "uncomputed_provider_packet_count": 24,
+        "diagnostic_release_adapter_component_count": null,
         "structural_diagnostic_coverage": false,
         "native_scope_catalog_structural_coverage": false,
         "native_scope_catalog_evidence": {},
@@ -4293,9 +4293,9 @@
       "status": "PASS",
       "evidence": {
         "fresh_physics_cases": 44,
-        "campaign_elapsed_ms": 176546.29260006186,
-        "case_p95_ms": 8609.57190999907,
-        "case_p99_ms": 11945.573180002684,
+        "campaign_elapsed_ms": 203388.11250006256,
+        "case_p95_ms": 10739.593875002178,
+        "case_p99_ms": 17025.963029997656,
         "timing_distribution": "across separately executed equipment campaigns; not repeated-run latency",
         "one_hz_fresh_physics_demonstrated": false
       },
@@ -4344,7 +4344,7 @@
       "name": "diagnostic_hazop_selection_event_binding",
       "status": "BLOCKED",
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_selection_event_binding.json",
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_selection_event_binding.json",
         "schema_version": "prism.hazop_event_selection_binding_audit.v1",
         "status": "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",
         "selected_scenario_count": 10,
@@ -4371,7 +4371,7 @@
       "name": "diagnostic_hazop_extension_mode_evidence_request",
       "status": "PASS",
       "evidence": {
-        "record": "lh2-tno\\results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_extension_mode_evidence_request.json",
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound\\hazop_extension_mode_evidence_request.json",
         "schema_version": "prism.hazop_extension_mode_binding_evidence_request.v1",
         "status": "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
         "source_unbound_event_count": 10,
