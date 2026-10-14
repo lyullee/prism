@@ -4277,5 +4277,7 @@
   "generic_provider_release_closure_isolation_contract_v3_ready_event_count": 21,
   "generic_provider_release_closure_isolation_contract_v3_open_event_count": 3,
   "generic_provider_release_closure_threshold_alias_fix_implemented": true,
-  "generic_provider_release_closure_threshold_alias_fix_policy": "accept provider-owned threshold_mass_kg or depletion_threshold_kg spelling without inferring inventory or termination"
+  "generic_provider_release_closure_threshold_alias_fix_policy": "accept provider-owned threshold_mass_kg or depletion_threshold_kg spelling without inferring inventory or termination",
+  "ijhe_completion_audit_transfer_line_isolation_latest_record": "results/20261014/ijhe_completion_audit_with_transfer_line_isolation_v4.json",
+  "ijhe_completion_audit_transfer_line_isolation_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 6 blockers; 21/24 generic release events closure-ready, 7/7 HAZOP multi-equipment branches diagnostic, facility QRA promotion false"
 }

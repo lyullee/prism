@@ -3368,7 +3368,7 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261014/ijhe_completion_audit_with_transfer_line_isolation_v3.json",
+    "record": "results/20261014/ijhe_completion_audit_with_transfer_line_isolation_v4.json",
     "status": "INCOMPLETE_EVIDENCE",
     "check_count": 25,
     "blocking_reason_count": 6,
