@@ -100,4 +100,12 @@ python scripts/bind_frequency_port_result.py `
 
 mode contract는 `fresh_physics_background`와 `cached_diagnostic_1hz`를 구분하고, stale fallback·빈도 학습·방출 추론을 모두 `false`로 기록한다. 작은 표본에서 p95가 p50보다 작게 기록되던 분위수 계산 오류도 수정해 `scripts/benchmark_realtime_cache.py`와 회귀 테스트에 반영했다.
 
-이 자료를 반영한 목표 감사 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_objective_coverage_audit_latest_realtime.json`의 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`이다. 즉 설비 상태→방출→피해→조건부 IR/F-N, 문헌 빈도, 포트, mode contract, 제한 SLABx 근거의 핵심 연결은 확인됐고, 적격 provider·엄격 범위·시설 QRA 승격 gate만 남아 있다.
+## 검사센터 관측 상태의 원문 replay와 runtime frame
+
+검사센터 자료는 사고빈도나 사고 방출량으로 바꾸지 않고, 정상 운전 상태 입력의 무결성만 확인했다. `results/20261101/inspection_center_observed_state_replay_audit.json`에서 인수·저장벤트·공급 원문 3개 파일의 SHA-256과 상태 장부 재생성이 모두 일치했다.
+
+같은 원자료에서 최신 샘플을 설비별 한 개씩 선택해 `results/20261102/inspection_center_observed_state_runtime_frames.json`으로 내보냈다. 총 8,955개 관측 샘플에서 `lh2-intake-tank`, `lh2-storage-vent`, `lh2-supply-vaporizer-boundary` 3개 runtime frame을 만들었고, 각 frame은 원문 digest·state snapshot digest·센서 물리량·품질 정보를 가진다. `service_state_from_runtime_frame`과 `request_from_observed_state_runtime_frame`으로 정상상태 모델/provider resolver 입력에 전달할 수 있지만, provider가 방출 지속시간·차단·재고 소진을 반환하기 전에는 피해 계산으로 넘어가지 않는다.
+
+이 단계의 정책은 `state_only=true`, `release_scenario_generated=false`, `frequency_inference_performed=false`, `sensor_frequency_learning_used=false`, `provider_packet_promoted=false`, `facility_qra_claim=false`다. 일반 설비 모델 후보 바인딩도 3/3 component에서 확인했지만 시설 P&ID identity는 0/3으로 해소되지 않았으므로 사고 방출·빈도 연결을 만들지 않았다.
+
+관측 상태까지 포함해 다시 만든 목표 감사는 `results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/ijhe_objective_coverage_audit_latest_observed_state.json`이다. `diagnostic_observed_state_source_replay`, `diagnostic_observed_state_runtime_frames`, `diagnostic_observed_state_model_binding`은 모두 `PASS`이고, 핵심 연결의 `core_blocked_count`는 0이다. 다만 엄격한 시설 승격은 아직 열리지 않았다. 남은 strict gate는 **독립 물리검증, qualified provider packet, 엄격한 전체 사고범위, 시설 전체 QRA** 네 가지이며, 감사 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`으로 유지한다.
