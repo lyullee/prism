@@ -9,6 +9,9 @@ This is a diagnostic integration campaign.  The default packet set contains
 synthetic or screening outputs, so a successful branch is not a qualified
 facility-QRA result.  A packet with a synthetic termination horizon is kept as
 an explicit withheld branch instead of being relabelled as isolation closure.
+An optional packet-root override supplies a separate diagnostic run with
+explicit actuator/zero-flow isolation observations for valve and pump branches;
+that run does not promote field isolation reliability.
 The facility handoff is built only for branches that actually pass the strict
 provider/termination/SLABx-LH2 contracts, and its scope is marked incomplete
 when any configured component is withheld.
@@ -331,6 +334,37 @@ def _scenario_id(spec: Mapping[str, Any]) -> str:
     return f"{spec['component_id']}-mode-deviation:{spec['operating_mode']}:{spec['scenario_family']}"
 
 
+def _resolve_packet_paths(packet_root: Path | None) -> tuple[dict[str, Path], dict[str, Any]]:
+    """Resolve baseline packets and optional explicit-isolation overrides."""
+    packet_paths = {
+        str(spec["component_id"]): ROOT / str(spec["packet_relpath"])
+        for spec in COMPONENT_SPECS
+    }
+    override: dict[str, Any] = {
+        "requested": packet_root is not None,
+        "root": str(packet_root) if packet_root is not None else None,
+        "components": {},
+    }
+    if packet_root is None:
+        return packet_paths, override
+    for component_id in ("transfer-valve-01", "liquid-transfer-pump-01"):
+        candidate = packet_root / component_id / "resolved_release.json"
+        if candidate.exists():
+            packet_paths[component_id] = candidate
+            override["components"][component_id] = {
+                "path": str(candidate),
+                "exists": True,
+                "selection": "explicit_isolation_contract_packet",
+            }
+        else:
+            override["components"][component_id] = {
+                "path": str(candidate),
+                "exists": False,
+                "selection": "baseline_packet_retained",
+            }
+    return packet_paths, override
+
+
 def _branch_harm(consequence: Mapping[str, Any]) -> dict[str, dict[str, list[float]]]:
     data = consequence.get("data")
     receptors = data.get("receptors", []) if isinstance(data, Mapping) else []
@@ -451,10 +485,7 @@ def _build_facility_handoff(
 def run(args: argparse.Namespace) -> dict[str, Any]:
     started = time.perf_counter()
     manifest_path = args.manifest
-    packet_paths = {
-        str(spec["component_id"]): ROOT / str(spec["packet_relpath"])
-        for spec in COMPONENT_SPECS
-    }
+    packet_paths, packet_override = _resolve_packet_paths(args.isolation_packet_root)
     manifest, geometry_rebase = _rebase_manifest_to_packets(manifest_path, packet_paths)
     facility = manifest.to_facility()
     plan = FrequencyPlan.model_validate_json(args.frequency_plan.read_text(encoding="utf-8"))
@@ -589,6 +620,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "table": table,
         "frames": frames_output,
         "component_input": component_input,
+        "packet_override": packet_override,
         "geometry_rebase": geometry_rebase,
         "current": runtime,
         "facility_handoff": handoff,
@@ -639,6 +671,12 @@ def main() -> int:
     parser.add_argument("--provider-defaults-relief", type=Path, default=ROOT / "examples/provider_emergency_relief_defaults.json")
     parser.add_argument("--template", type=Path, default=ROOT / "examples/equipment_consequence_template.json")
     parser.add_argument("--backend-config", type=Path, required=True)
+    parser.add_argument(
+        "--isolation-packet-root",
+        type=Path,
+        default=None,
+        help="optional root containing <component-id>/resolved_release.json packets with explicit isolation observations",
+    )
     parser.add_argument("--now-s", type=float, default=12.0)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()

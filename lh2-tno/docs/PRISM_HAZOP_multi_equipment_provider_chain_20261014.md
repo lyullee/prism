@@ -6,6 +6,8 @@
 
 운전 모드는 압력값으로 추정하지 않는다. 상태 프레임에 `receiving`, `supply`, `standby`를 명시하고, HAZOP 행의 운전 모드와 일치할 때만 시나리오를 선택한다.
 
+전체 데이터 흐름을 한 장으로 보려면 [통합 흐름도 PNG](figures/lh2_hazop_multiequipment_integrated_flow_20261014.png) 또는 [편집 가능한 SVG](figures/lh2_hazop_multiequipment_integrated_flow_20261014.svg)를 사용한다. 현장 입력값에는 설비 상태와 운전 모드가 함께 들어가며, HAZOP 판단 이후 정량분석 계층은 설비·공정 모델, 사고빈도, SLABx-LH2, 점화·기상·인구, PRISM 계산 커널을 동등한 구성요소로 결합한다.
+
 ## 실행 경로
 
 ```text
@@ -69,3 +71,38 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
 - `src/lh2_tno/hazop.py`의 `run_hazop_facility_runtime`
 - `src/lh2_tno/hazop_campaign.py`의 `build_hazop_facility_campaign_result`
 - `src/lh2_tno/completion_audit.py`의 `diagnostic_hazop_multiequipment_provider_chain`
+
+
+## 격리계약 진단 결과 (추가 실행)
+
+밸브와 펌프의 종료근거를 임의로 `explicit_provider_termination`으로 바꾸지 않기 위해, 외부 `lh2dt_models`의 actuator 경로를 별도 진단 어댑터로 연결했다. 밸브는 `StrokeLimitedCommandedValve`를 0 개방으로 명령하고 stroke 이후의 zero-flow 관찰구간을 확인했다. 펌프는 native `MappedPump` 방출구간 뒤에 별도 대기측 isolation valve의 zero-flow 확인구간을 붙였다. 두 경로 모두 upstream 재고와 현장 차단 신뢰도를 추정하지 않는다.
+
+```powershell
+python scripts/export_lh2dt_valve_prism_packet.py `
+  --lh2dt-root "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\lh2dt_models" `
+  --output-dir results/20261014/hazop_isolation_packets/transfer-valve-01 `
+  --duration-s 0.2 --time-step-s 0.01 `
+  --isolation-time-s 0.05 --post-isolation-observation-s 0.15 `
+  --stroke-time-s 0.05 --available-mass-kg 1.0 `
+  --component-id transfer-valve-01 `
+  --port-id valve-accident-out `
+  --event-id "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%"
+
+python scripts/export_lh2dt_native_mapped_pump_prism_packet.py `
+  --lh2dt-root "C:\Users\lyul\Desktop\DocuData\액화수소 저장탱크_밴트 시스템\lh2dt_models" `
+  --output-dir results/20261014/hazop_isolation_packets/liquid-transfer-pump-01 `
+  --horizon-s 0.2 --time-step-s 0.01 `
+  --isolation-time-s 0.05 --post-isolation-observation-s 0.15 `
+  --component-id liquid-transfer-pump-01 `
+  --port-id pump-accident-out `
+  --event-id "generic-lh2-full-scope-frequency-example/transfer-pump/G1"
+
+python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
+  --backend-config results/20261020/equipment_campaign_all_bins_generic_facility/backend_config.json `
+  --isolation-packet-root results/20261014/hazop_isolation_packets `
+  --output results/20261014/hazop_multiequipment_provider_isolation_diagnostic.json
+```
+
+이 실행은 7개 설비 모두 HAZOP → provider → SLABx-LH2 → 현재 기상 IR 경로를 통과했다. 밸브와 펌프의 `provider_termination_basis`는 `reviewed_isolation_success`로 기록되며, 나머지 다섯 설비는 기존 inventory depletion, pressure equalization, emergency relief, two-sided rupture 근거를 유지한다. 총 처리시간은 약 100초였고, `facility_qra_promotion=false`, `physical_validation_claim=false`, `frequency_inference_performed=false`가 계속 유지된다.
+
+따라서 이 결과의 의미는 “모든 구성요소를 같은 코드 경로로 계산할 수 있다”는 진단 증거다. 이것은 현장 ESD/밸브 고장확률, 차단 성공확률, 실제 plant geometry·인구·기상, 또는 IJHE용 qualified facility IR/F-N을 확정하지 않는다. 다음 승격 조건은 각 설비의 reviewed actuator/isolation 시험자료, 현장 포트·좌표 확인, 사고빈도 근거와 독립 SLABx-LH2 holdout 검증이다.

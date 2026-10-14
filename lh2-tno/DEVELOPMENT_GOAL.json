@@ -3334,8 +3334,20 @@
   ],
   "hazop_multiequipment_provider_diagnostic_realtime_guarantee": false,
   "hazop_multiequipment_provider_diagnostic_timing_status": "DIAGNOSTIC_ONLY; 4/5 accepted branches met 30 s deadline; liquid-transfer-line-01 took 46.3 s and reported deadline_missed; no 1 Hz fresh-physics guarantee",
-  "ijhe_completion_audit_hazop_multiequipment_latest_record": "results/20261014/ijhe_completion_audit_with_multiequipment_hazop.json",
-  "ijhe_completion_audit_hazop_multiequipment_latest_status": "INCOMPLETE_EVIDENCE; 24 checks, 7 blocking reasons in mixed evidence invocation; multi-equipment diagnostic check PASS only",
+  "ijhe_completion_audit_hazop_multiequipment_latest_record": "results/20261014/ijhe_completion_audit_with_isolation_multiequipment_hazop.json",
+  "ijhe_completion_audit_hazop_multiequipment_latest_status": "INCOMPLETE_EVIDENCE; 24 checks, 7 blocking reasons; isolation-contract multi-equipment diagnostic check PASS with 7/7 branches; facility QRA promotion false",
   "ijhe_completion_audit_hazop_multiequipment_latest_check_count": 24,
-  "ijhe_completion_audit_hazop_multiequipment_latest_blocking_reason_count": 7
+  "ijhe_completion_audit_hazop_multiequipment_latest_blocking_reason_count": 7,
+  "hazop_multiequipment_isolation_contract_diagnostic_implemented": true,
+  "hazop_multiequipment_isolation_contract_diagnostic_record": "results/20261014/hazop_multiequipment_provider_isolation_diagnostic.json",
+  "hazop_multiequipment_isolation_contract_diagnostic_status": "7_OF_7_COMPONENTS_REACHED_CONSEQUENCE_AND_CONDITIONAL_IR; valve/pump used explicit isolation-contract packets; facility QRA promotion false",
+  "hazop_multiequipment_isolation_contract_diagnostic_component_count": 7,
+  "hazop_multiequipment_isolation_contract_diagnostic_accepted_component_count": 7,
+  "hazop_multiequipment_isolation_contract_diagnostic_withheld_component_count": 0,
+  "hazop_multiequipment_isolation_contract_diagnostic_facility_qra_promotion": false,
+  "hazop_multiequipment_isolation_contract_diagnostic_runtime_elapsed_ms": 99721.08970000409,
+  "hazop_multiequipment_isolation_contract_diagnostic_total_elapsed_ms": 99798.65340000106,
+  "hazop_multiequipment_isolation_contract_diagnostic_input_origin": "synthetic/model_prediction; explicit actuator zero-flow diagnostic; no field isolation reliability promotion",
+  "ijhe_completion_audit_hazop_multiequipment_isolation_contract_status": "PASS_DIAGNOSTIC_ONLY; 7/7 branches crossed HAZOP/provider/SLABx-LH2/current-weather IR path with explicit valve/pump isolation metadata; facility QRA promotion false",
+  "ijhe_completion_audit_hazop_multiequipment_isolation_contract_promotion": false
 }

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1350" viewBox="0 0 2400 1350" role="img" aria-label="액화수소 인수기지의 HAZOP 연계 실시간 및 예측 위험분석 흐름도"><defs><marker id="arrow-1C92A8" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 11 6 L 1 11 z" fill="#1C92A8"/></marker><marker id="arrow-3A70A9" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 11 6 L 1 11 z" fill="#3A70A9"/></marker><marker id="arrow-E28B43" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 11 6 L 1 11 z" fill="#E28B43"/></marker><marker id="arrow-AA5A4B" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 11 6 L 1 11 z" fill="#AA5A4B"/></marker><marker id="arrow-768EA3" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 11 6 L 1 11 z" fill="#768EA3"/></marker></defs>
+<rect width="2400" height="1350" fill="#F5F9FC"/>
+<rect width="2400" height="183" fill="#081D31"/>
+<rect x="80" y="62" width="10" height="73" rx="5" fill="#35C6D6"/>
+<text x="122" y="105" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="49" font-weight="800" fill="#FFFFFF" text-anchor="start"><tspan x="122" dy="0">액화수소 인수기지 통합 위험분석 흐름</tspan></text>
+<text x="122" y="151" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="27" font-weight="400" fill="#BAD4E5" text-anchor="start"><tspan x="122" dy="0">현장 입력·운전 모드 → HAZOP 기반 판단 → 현재·예측 상태의 정량 평가 → 관리자 대응</tspan></text>
+<text x="90" y="221" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#216A91" text-anchor="start"><tspan x="90" dy="0">01  감시와 위험 시나리오 결정</tspan></text>
+<rect x="90" y="246" width="630" height="90" rx="20" fill="#FFFFFF" stroke="#6FCAD3" stroke-width="3"/>
+<text x="118" y="284" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#167785" text-anchor="start"><tspan x="118" dy="0">현장 입력값</tspan></text>
+<text x="118" y="318" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">센서·설비 상태 + 운전 모드(인수·공급·대기)</tspan></text>
+<rect x="90" y="348" width="630" height="88" rx="20" fill="#FFFFFF" stroke="#B7CADB" stroke-width="3"/>
+<text x="118" y="385" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#285A80" text-anchor="start"><tspan x="118" dy="0">HAZOP 테이블</tspan></text>
+<text x="118" y="419" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">모드별 이탈 기준·원인·결과·기존 방호</tspan></text>
+<rect x="820" y="246" width="650" height="190" rx="24" fill="#FFFFFF" stroke="#B7CADB" stroke-width="3"/>
+<rect x="848" y="269" width="215" height="40" rx="20" fill="#E7F0F7" stroke="#E7F0F7" stroke-width="0"/>
+<text x="955.5" y="298" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#285A80" text-anchor="middle"><tspan x="955.5" dy="0">HAZOP 자동 판단</tspan></text>
+<text x="848" y="337" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="29" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="848" dy="0">현장값 × 운전 모드 × 이탈 기준</tspan><tspan x="848" dy="38.3">정성적 위험 평가와 이탈 도출</tspan></text>
+<rect x="1550" y="246" width="760" height="190" rx="24" fill="#E3F6F8" stroke="#42BAC9" stroke-width="3"/>
+<rect x="1578" y="269" width="209" height="40" rx="20" fill="#BFECEF" stroke="#BFECEF" stroke-width="0"/>
+<text x="1682.5" y="298" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#126D7D" text-anchor="middle"><tspan x="1682.5" dy="0">위험 시나리오 결정</tspan></text>
+<text x="1578" y="337" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="29" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="1578" dy="0">도출된 이탈과 공정상태를 결합</tspan><tspan x="1578" dy="38.3">대상 설비·사고 경로 확정</tspan></text>
+<path d="M 721 291 H 805" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<path d="M 721 391 H 805" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<path d="M 1471 341 H 1535" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<path d="M 1930 437 V 470" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<rect x="90" y="482" width="2220" height="57" rx="15" fill="#EAF2F7"/>
+<text x="120" y="520" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="27" font-weight="700" fill="#315B77" text-anchor="start"><tspan x="120" dy="0">선택된 위험 시나리오를 공통 적용</tspan></text>
+<text x="2268" y="520" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="500" fill="#5F7B90" text-anchor="end"><tspan x="2268" dy="0">현재 상태 평가  +  미래 상태 반복 평가</tspan></text>
+<rect x="90" y="582" width="2220" height="270" rx="25" fill="#FFFFFF" stroke="#C7D9E5" stroke-width="2"/>
+<rect x="90" y="582" width="12" height="270" rx="6" fill="#35C6D6"/>
+<rect x="125" y="605" width="330" height="45" rx="22.5" fill="#DDF7F9" stroke="#DDF7F9" stroke-width="0"/>
+<text x="290" y="636.5" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#167785" text-anchor="middle"><tspan x="290" dy="0">A  현재 상태 · 준실시간 목표</tspan></text>
+<rect x="125" y="675" width="375" height="128" rx="20" fill="#EFFAFB" stroke="#8BD7DF" stroke-width="2"/>
+<text x="155" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="155" dy="0">모니터링 상태값</tspan><tspan x="155" dy="37.0">압력·재고·운전 모드</tspan></text>
+<rect x="565" y="675" width="375" height="128" rx="20" fill="#EFFAFB" stroke="#8BD7DF" stroke-width="2"/>
+<text x="595" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="595" dy="0">즉시 분석 요청</tspan><tspan x="595" dy="37.0">확정 시나리오 + 현재 상태</tspan></text>
+<rect x="1005" y="638" width="620" height="202" rx="22" fill="#EDF5F9" stroke="#8EB8D0" stroke-width="3"/>
+<text x="1038" y="676" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="29" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량 위험분석 계층</tspan></text>
+<rect x="1038" y="696" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1125" y="718" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1125" dy="0">설비·공정 모델</tspan><tspan x="1125" dy="21.2">방출 상태·유량</tspan></text>
+<rect x="1235" y="696" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1322" y="718" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1322" dy="0">사고 빈도 모델</tspan><tspan x="1322" dy="21.2">문헌·설비 근거</tspan></text>
+<rect x="1432" y="696" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1519" y="718" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1519" dy="0">SLABx-LH2</tspan><tspan x="1519" dy="21.2">누출·확산</tspan></text>
+<rect x="1038" y="762" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1125" y="784" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1125" dy="0">점화·기상·인구</tspan><tspan x="1125" dy="21.2">노출 조건</tspan></text>
+<rect x="1235" y="762" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1322" y="784" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1322" dy="0">PRISM 계산 커널</tspan><tspan x="1322" dy="21.2">위험도 통합</tspan></text>
+<rect x="1690" y="675" width="580" height="128" rx="20" fill="#E1F3EC" stroke="#48A483" stroke-width="2"/>
+<text x="1722" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#174F43" text-anchor="start"><tspan x="1722" dy="0">현재 위험도 → 비상대응·안전관리</tspan><tspan x="1722" dy="37.0">관리자 화면에 대응안 표시</tspan></text>
+<path d="M 501 739 H 550" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<path d="M 941 739 H 990" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<path d="M 1626 739 H 1675" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
+<rect x="90" y="889" width="2220" height="313" rx="25" fill="#FFFFFF" stroke="#C7D9E5" stroke-width="2"/>
+<rect x="90" y="889" width="12" height="313" rx="6" fill="#F2A45B"/>
+<rect x="125" y="912" width="366" height="45" rx="22.5" fill="#FFF0DF" stroke="#FFF0DF" stroke-width="0"/>
+<text x="308" y="943.5" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#9F5D21" text-anchor="middle"><tspan x="308" dy="0">B  예측 상태 · 시뮬레이션 경로</tspan></text>
+<rect x="125" y="979" width="375" height="129" rx="20" fill="#FFF7EE" stroke="#F3C38E" stroke-width="2"/>
+<text x="155" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="155" dy="0">공정 시뮬레이션</tspan><tspan x="155" dy="37.0">시간에 따른 상태 변화 예측</tspan></text>
+<rect x="565" y="979" width="375" height="129" rx="20" fill="#FFF7EE" stroke="#F3C38E" stroke-width="2"/>
+<text x="595" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="595" dy="0">위험조건 도달 판단</tspan><tspan x="595" dy="37.0">도달 시 추가 분석 요청</tspan></text>
+<rect x="1005" y="952" width="620" height="203" rx="22" fill="#EDF5F9" stroke="#8EB8D0" stroke-width="3"/>
+<text x="1038" y="990" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="29" font-weight="800" fill="#153D5B" text-anchor="start"><tspan x="1038" dy="0">통합 정량 위험분석 계층</tspan></text>
+<rect x="1038" y="1010" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1125" y="1032" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1125" dy="0">설비·공정 모델</tspan><tspan x="1125" dy="21.2">예측 방출 상태</tspan></text>
+<rect x="1235" y="1010" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1322" y="1032" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1322" dy="0">사고 빈도 모델</tspan><tspan x="1322" dy="21.2">예측 시나리오</tspan></text>
+<rect x="1432" y="1010" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1519" y="1032" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1519" dy="0">SLABx-LH2</tspan><tspan x="1519" dy="21.2">누출·확산</tspan></text>
+<rect x="1038" y="1076" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1125" y="1098" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1125" dy="0">점화·기상·인구</tspan><tspan x="1125" dy="21.2">예측 노출</tspan></text>
+<rect x="1235" y="1076" width="175" height="52" rx="12" fill="#FFFFFF" stroke="#A8C5D8" stroke-width="2"/>
+<text x="1322" y="1098" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="18" font-weight="700" fill="#315B77" text-anchor="middle"><tspan x="1322" dy="0">PRISM 계산 커널</tspan><tspan x="1322" dy="21.2">위험도 통합</tspan></text>
+<rect x="1690" y="979" width="580" height="129" rx="20" fill="#FFF0DF" stroke="#E4A05C" stroke-width="2"/>
+<text x="1722" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#7D4B23" text-anchor="start"><tspan x="1722" dy="0">미래 위험도 → 선제 안전조치</tspan><tspan x="1722" dy="37.0">관리자 화면에 예상 위험 표시</tspan></text>
+<path d="M 501 1043 H 550" fill="none" stroke="#E28B43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-E28B43)"/>
+<path d="M 941 1043 H 990" fill="none" stroke="#E28B43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-E28B43)"/>
+<path d="M 1626 1043 H 1675" fill="none" stroke="#E28B43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-E28B43)"/>
+<path d="M 828 1116 V 1140 H 231 V 1118" fill="none" stroke="#E28B43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 9" marker-end="url(#arrow-E28B43)"/>
+<text x="530" y="1192" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="500" fill="#9F5D21" text-anchor="middle"><tspan x="530" dy="0">다음 예측 시점으로 진행 · 위험조건에 다시 도달하면 재평가</tspan></text>
+<rect x="90" y="1234" width="2220" height="78" rx="18" fill="#E9F0F5"/>
+<text x="120" y="1266" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="800" fill="#315B77" text-anchor="start"><tspan x="120" dy="0">해석 기준</tspan></text>
+<text x="265" y="1266" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="265" dy="0">빈도는 문헌·설비 사건 근거에 연결하고, 센서값은 상태와 방출 조건에 반영</tspan></text>
+<text x="265" y="1297" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="23" font-weight="500" fill="#315B77" text-anchor="start"><tspan x="265" dy="0">실시간 갱신은 목표 성능이며, 예측 경로는 시뮬레이션 시간과 위험조건 도달 시점에 따라 반복 실행</tspan></text>
+</svg>

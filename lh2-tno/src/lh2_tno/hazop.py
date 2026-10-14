@@ -499,7 +499,9 @@ def run_hazop_runtime_consequence(
         termination = getattr(request, "release_termination", None)
         if termination is None or termination.basis not in definition["termination_bases"]:
             raise HazopSelectionError(
-                "provider termination basis does not satisfy the selected HAZOP scenario family"
+                "provider termination basis does not satisfy the selected HAZOP scenario family: "
+                f"family={scenario['scenario_family']!r}, basis={getattr(termination, 'basis', None)!r}, "
+                f"allowed={tuple(definition['termination_bases'])!r}"
             )
         owners = []
         for attribute in ("resolved_release", "resolved_liquid_release"):
