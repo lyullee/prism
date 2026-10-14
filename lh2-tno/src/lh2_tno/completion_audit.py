@@ -114,6 +114,7 @@ def build_ijhe_completion_audit(
     native_isolation_catalog_facility_chain_verification: Mapping[str, Any] | None = None,
     native_isolation_catalog_near_receptor_verification: Mapping[str, Any] | None = None,
     release_boundary_case_audit: Mapping[str, Any] | None = None,
+    conditional_facility_release_trace: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -5017,6 +5018,77 @@ def build_ijhe_completion_audit(
             "without inferring field frequency or promoting provider, physical-validation, IR or F/N claims."
         )
         checks.append(boundary_check)
+    if conditional_facility_release_trace is not None:
+        trace = conditional_facility_release_trace
+        # The CLI receives the complete conditional view.  Accept its nested
+        # ``release_trace`` envelope as well as a bare trace object so the
+        # completion audit validates exactly what the digital-twin consumer
+        # receives on disk.
+        nested_trace = trace.get("release_trace")
+        if isinstance(nested_trace, Mapping):
+            trace = dict(nested_trace)
+            if "_record_path" in conditional_facility_release_trace:
+                trace["_record_path"] = conditional_facility_release_trace["_record_path"]
+        summary = trace.get("summary")
+        summary = summary if isinstance(summary, Mapping) else {}
+        rows = trace.get("rows")
+        rows = rows if isinstance(rows, list) else []
+        assessment_case_count = None
+        assessment_atom_count = None
+        if isinstance(facility_assessment, Mapping):
+            coverage = facility_assessment.get("conditional_diagnostic_facility_coverage")
+            coverage = coverage if isinstance(coverage, Mapping) else {}
+            assessment_case_count = coverage.get("case_count")
+            assessment_atom_count = coverage.get("risk_atom_count")
+        trace_rows_safe = all(
+            isinstance(row, Mapping)
+            and isinstance(row.get("case_key"), str)
+            and isinstance(row.get("numerical_release_closed"), bool)
+            and isinstance(row.get("risk_atom_accounting"), Mapping)
+            and isinstance(row.get("facility_qra_promotion_eligible"), bool)
+            and row.get("facility_qra_promotion_eligible") is False
+            for row in rows
+        )
+        trace_case_count = summary.get("case_count")
+        trace_atom_count = summary.get("risk_atom_count")
+        trace_valid = (
+            trace.get("schema_version") == "prism.conditional_facility_release_trace.v1"
+            and trace.get("source_status") in {"CASE_BOUNDARY_PARTIAL", "CASE_BOUNDARY_CLOSED"}
+            and trace.get("case_key_definition") == "event_id|release_branch_id|annual_condition_id"
+            and isinstance(trace_case_count, int)
+            and trace_case_count > 0
+            and len(rows) == trace_case_count
+            and isinstance(trace_atom_count, int)
+            and trace_atom_count >= 0
+            and (assessment_case_count is None or trace_case_count == assessment_case_count)
+            and (assessment_atom_count is None or trace_atom_count == assessment_atom_count)
+            and trace_rows_safe
+            and summary.get("facility_ir_fn_promotion") is False
+            and isinstance(trace.get("semantics"), Mapping)
+        )
+        trace_check = _check(
+            "diagnostic_conditional_facility_release_trace",
+            trace_valid,
+            {
+                "record": trace.get("_record_path"),
+                "schema_version": trace.get("schema_version"),
+                "source_status": trace.get("source_status"),
+                "case_count": trace_case_count,
+                "risk_atom_count": trace_atom_count,
+                "assessment_case_count": assessment_case_count,
+                "assessment_risk_atom_count": assessment_atom_count,
+                "rows": len(rows),
+                "summary": dict(summary),
+                "promotion": summary.get("facility_ir_fn_promotion"),
+            },
+            "conditional facility release trace is missing case-keyed release metrics or carries an unsafe promotion claim",
+        )
+        trace_check["diagnostic_only"] = True
+        trace_check["interpretation"] = (
+            "The digital-twin view connects provider release duration, isolation/inventory closure and "
+            "risk-atom accounting at the same case key. It remains diagnostic and does not promote facility IR/F-N."
+        )
+        checks.append(trace_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

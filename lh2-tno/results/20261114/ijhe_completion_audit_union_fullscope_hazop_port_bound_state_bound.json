@@ -5452,6 +5452,44 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The case-level table separates a numerically closed release boundary from a qualified facility-QRA case. It records termination, isolation, inventory and residual evidence without inferring field frequency or promoting provider, physical-validation, IR or F/N claims."
+    },
+    {
+      "name": "diagnostic_conditional_facility_release_trace",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261114\\conditional_facility_risk_view_with_release_trace.json",
+        "schema_version": "prism.conditional_facility_release_trace.v1",
+        "source_status": "CASE_BOUNDARY_PARTIAL",
+        "case_count": 44,
+        "risk_atom_count": 176,
+        "assessment_case_count": 44,
+        "assessment_risk_atom_count": 176,
+        "rows": 44,
+        "summary": {
+          "case_count": 44,
+          "strict_release_boundary_eligible_case_count": 3,
+          "strict_release_boundary_blocked_case_count": 41,
+          "numerically_closed_case_count": 15,
+          "numerically_open_case_count": 29,
+          "operator_review_required_case_count": 12,
+          "consequence_domain_truncated_case_count": 1,
+          "numerical_closure_status_counts": {
+            "NUMERICALLY_CLOSED": 3,
+            "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 12,
+            "NUMERICALLY_OPEN": 29
+          },
+          "consequence_domain_status_counts": {
+            "CLOSED": 43,
+            "TRUNCATED": 1
+          },
+          "facility_ir_fn_promotion": false,
+          "risk_atom_count": 176
+        },
+        "promotion": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The digital-twin view connects provider release duration, isolation/inventory closure and risk-atom accounting at the same case key. It remains diagnostic and does not promote facility IR/F-N."
     }
   ],
   "blocking_reasons": [

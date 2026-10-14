@@ -25,6 +25,7 @@
 | `validation_evidence_matrix_with_provider_intake.json` | 물리·관측·provider 검증근거 경계 | 시설 QRA 보류를 명시 |
 | `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
 | `release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json` | 전체 union case별 방출 종료·차단·재고 승격 표 | 44 case 중 3개 국소 경계 통과, 41개 보류; 시설 QRA 승격 0 |
+| `conditional_facility_risk_view_with_release_trace.json` | 조건부 시설 IR/F-N과 case-keyed 방출→risk trace | 44 case·176 atom 연결; diagnostic-only, promotion false |
 | `hazop_provider_bound_integrated_risk.json` | 현재 모니터링·예측 상태의 HAZOP→provider·SLABx-LH2→시설 handoff | current 1건·forecast 1건 정량평가와 campaign handoff 연결 PASS; synthetic/provider-bound 진단 전용 |
 | `support_center_hazop_operating_mode_evidence_audit.json` | 검사센터 운전순서에서 일반 모드·HAZOP 정성 근거 추출 | 52개 모드 행; 빈도·방출 생성 없음 |
 | `support_center_reviewed_signal_unit_evidence.json` | 문서 anchor 기반 일부 PT/TT 단위 확인 | 부분 근거; 미검토 tag·calibration은 보류 |
@@ -46,6 +47,7 @@ python scripts/build_ijhe_completion_audit.py `
   --provider-worklist results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/provider_worklist.json `
   --facility-assessment results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json `
   --release-boundary-case-audit results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json `
+  --conditional-facility-release-trace results/20261114/conditional_facility_risk_view_with_release_trace.json `
   --state-snapshot-binding-audit results/20261114/base_state_snapshot_binding_audit_port_bound.json `
   --native-scope-packet-catalog-verification results/20261111/native_generic_scope_packets_isolation/verification.json `
   --native-scope-isolation-branch-catalog-audit results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json `
@@ -69,7 +71,7 @@ python scripts/build_ijhe_completion_audit.py `
 
 ## 판정
 
-현재 결과는 39개 검사 중 35개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+현재 결과는 40개 검사 중 36개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
 
 통과한 진단 연결은 다음을 뜻한다.
 
@@ -79,6 +81,8 @@ python scripts/build_ijhe_completion_audit.py `
 - 문헌 빈도 불확실성과 처리시간이 별도 장부로 기록된다.
 - HAZOP 운전 모드는 명시적 입력으로만 선택된다.
 - 검사센터 실측 상태와 운전 모드가 HAZOP 선택·provider binding·격리 branch 진단에 연결된다.
+- 조건부 시설 view에서 44개 case의 방출 지속시간·재고·종료 상태와 176개 risk atom의
+  연결을 같은 case key로 추적한다.
 
 차단된 strict gate는 다음과 같다.
 
@@ -103,4 +107,9 @@ python scripts/build_ijhe_completion_audit.py `
 재고·누적 방출·잔여 재고·잔여율을 함께 보존해 방출 장부가 피해영향 모델로 전달된
 경로를 확인하게 하지만, provider 자격·독립 물리검증·시설 QRA 승격 조건을 낮추지
 않는다.
+
+`diagnostic_conditional_facility_release_trace` 검사는 이 view가 시설 평가의 44개
+case·176개 risk atom과 일치하고 각 행에 case key, 방출 종료 메타데이터, risk atom
+accounting을 갖는지 확인한다. 이 검사는 디지털트윈 전달 경로의 구조를 검증하는
+진단 검사이며, qualified provider 또는 시설 IR/F-N 승격 검사는 아니다.
 

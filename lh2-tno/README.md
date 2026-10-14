@@ -10,7 +10,7 @@
 
 현장 상태값과 `operating_mode`는 HAZOP 표에서 함께 비교한다. 최신 HAZOP selection audit는 **34/34 event bound, 0 unbound**이며 운전 모드나 사고 family를 센서값·설비 이름·누출면적으로 추정하지 않는다. 문헌 빈도는 별도 frequency plan에서만 들어오고, 센서 기반 빈도 학습과 빈도 재분배는 금지되어 있다.
 
-완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **39개 검사 중 35개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, provider-bound current/forecast HAZOP 통합 경로, 검사센터 실측 상태·운전모드·HAZOP·격리 branch 진단, case별 방출 경계 표, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 통합 경로는 현재 1건과 예측 1건의 정량평가·시설 handoff를 실행하지만 synthetic/provider-bound와 declared-sensitivity 조건이며, 검사센터 정상 운전자료는 사고빈도나 qualified release로 변환하지 않고, qualified facility IR/F-N으로 승격하지 않는다.
+완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **40개 검사 중 36개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, provider-bound current/forecast HAZOP 통합 경로, 검사센터 실측 상태·운전모드·HAZOP·격리 branch 진단, case별 방출 경계 표, case-keyed 조건부 방출→위험 trace, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 통합 경로는 현재 1건과 예측 1건의 정량평가·시설 handoff를 실행하지만 synthetic/provider-bound와 declared-sensitivity 조건이며, 검사센터 정상 운전자료는 사고빈도나 qualified release로 변환하지 않고, qualified facility IR/F-N으로 승격하지 않는다.
 
 남은 strict gate는 다음 네 가지다.
 
@@ -32,6 +32,8 @@
 운영자 독립 종료 근거를 기다린다. 나머지 29개는 종료 기준 또는 잔여 재고가 아직
 열려 있다. 수치상 닫혔다는 사실은 provider qualification이나 시설 IR/F-N 승격을
 의미하지 않는다.
+
+조건부 시설 위험 view [`conditional_facility_risk_view_with_release_trace.json`](results/20261114/conditional_facility_risk_view_with_release_trace.json)은 이 44개 case의 방출 지속시간·초기/누적/잔여 재고·잔여율과 risk atom 연결 수를 한 출력으로 제공한다. 디지털트윈 소비자는 같은 `event × release branch × annual condition` 키로 방출과 피해영향을 추적할 수 있지만, 이 view도 `promotion_allowed=false`인 진단 출력이며 시설 전체 QRA로 승격하지 않는다. 구현과 재현 명령은 [`조건부 시설 위험도와 방출 추적 view`](docs/PRISM_conditional_facility_release_trace_20261114.md)에 기록되어 있다.
 
 **관측 HAZOP→문헌 provider event 연결 (2026-11-10):** `scripts/audit_observed_hazop_provider_binding.py`는 현장 관측값과 명시적 `operating_mode`로 선택된 HAZOP 시나리오를 문헌 `provider_event_id`·설비·사고 port에 exact-match로 묶습니다. [`inspection_center_hazop_provider_event_bindings.json`](examples/inspection_center_hazop_provider_event_bindings.json)은 인수 `vessel_hole`, 대기 벤트 `vent_hole`, 공급 기화기 `vaporizer_hole`의 진단 매핑입니다. 이 단계는 event family/release mode/port/빈도 필드의 일관성만 검사하고, 센서 빈도 학습·방출 packet 생성·SLABx-LH2·시설 QRA를 수행하지 않습니다. 최신 원장은 [`inspection_center_observed_hazop_provider_event_binding.json`](results/20261110/inspection_center_observed_hazop_provider_event_binding.json)이며, qualified provider packet이 없으므로 결과는 diagnostic-only입니다. 자세한 흐름은 [`관측 상태·운전 모드·HAZOP 런타임 연결`](docs/PRISM_관측상태_운전모드_HAZOP_런타임연결_20261110.md)을 참고하세요.
 

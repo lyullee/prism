@@ -84,3 +84,52 @@ def test_view_carries_mass_balance_qualification_boundary() -> None:
     )
     assert view["provider_mass_balance_audit"]["status_counts"]["UNBALANCED"] == 1
     assert view["qualification"]["provider_mass_balance_promotion_allowed"] is False
+
+
+def test_view_exposes_case_release_trace_without_opening_facility_promotion() -> None:
+    assessment = _assessment()
+    assessment["facility_risk_ledger"]["risk_atoms"] = [
+        {
+            "event_id": "event-1",
+            "receptor_harm_low_high": {"worker-01": [0.1, 0.2]},
+        }
+    ]
+    audit = {
+        "schema_version": "prism.release_boundary_case_audit.v1",
+        "status": "CASE_BOUNDARY_PARTIAL",
+        "case_key_definition": "event_id|release_branch_id|annual_condition_id",
+        "case_count": 1,
+        "strict_release_boundary_eligible_case_count": 0,
+        "strict_release_boundary_blocked_case_count": 1,
+        "numerically_closed_case_count": 1,
+        "numerically_open_case_count": 0,
+        "operator_review_required_case_count": 1,
+        "consequence_domain_truncated_case_count": 0,
+        "facility_ir_fn_promotion": False,
+        "rows": [
+            {
+                "event_id": "event-1",
+                "release_branch_id": None,
+                "annual_condition_id": None,
+                "release_duration_s": [0.3],
+                "available_mass_kg": [2.0],
+                "cumulative_mass_out_kg": [1.0],
+                "residual_mass_kg": [1.0],
+                "numerical_closure_status": "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED",
+                "strict_release_boundary_eligible": False,
+            }
+        ],
+    }
+    view = build_conditional_facility_risk_view(
+        assessment,
+        release_boundary_case_audit=audit,
+    )
+    trace = view["release_trace"]
+    assert trace["schema_version"] == "prism.conditional_facility_release_trace.v1"
+    assert trace["summary"]["operator_review_required_case_count"] == 1
+    assert trace["rows"][0]["release_duration_s"] == [0.3]
+    assert trace["rows"][0]["risk_atom_accounting"] == {
+        "risk_atom_count": 1,
+        "nonzero_receptor_harm_atom_count": 1,
+    }
+    assert view["qualification"]["promotion_allowed"] is False

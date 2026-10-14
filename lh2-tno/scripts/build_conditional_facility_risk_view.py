@@ -20,6 +20,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--facility-assessment", type=Path, required=True)
     parser.add_argument("--provider-mass-balance-audit", type=Path)
+    parser.add_argument(
+        "--release-boundary-case-audit",
+        type=Path,
+        help="optional case-level release duration/isolation/inventory trace",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     raw = args.facility_assessment.read_bytes()
@@ -33,15 +38,28 @@ def main() -> int:
         mass_balance_audit = json.loads(audit_raw.decode("utf-8-sig"))
         if not isinstance(mass_balance_audit, dict):
             raise SystemExit("provider mass-balance audit must contain one JSON object")
+    release_boundary_audit = None
+    release_boundary_raw = None
+    if args.release_boundary_case_audit is not None:
+        release_boundary_raw = args.release_boundary_case_audit.read_bytes()
+        release_boundary_audit = json.loads(release_boundary_raw.decode("utf-8-sig"))
+        if not isinstance(release_boundary_audit, dict):
+            raise SystemExit("release-boundary case audit must contain one JSON object")
     view = build_conditional_facility_risk_view(
         assessment,
         provider_mass_balance_audit=mass_balance_audit,
+        release_boundary_case_audit=release_boundary_audit,
     )
     view["source_assessment_path"] = args.facility_assessment.as_posix()
     view["source_assessment_sha256"] = hashlib.sha256(raw).hexdigest()
     if args.provider_mass_balance_audit is not None and audit_raw is not None:
         view["provider_mass_balance_audit_path"] = args.provider_mass_balance_audit.as_posix()
         view["provider_mass_balance_audit_sha256"] = hashlib.sha256(audit_raw).hexdigest()
+    if args.release_boundary_case_audit is not None and release_boundary_raw is not None:
+        view["release_boundary_case_audit_path"] = args.release_boundary_case_audit.as_posix()
+        view["release_boundary_case_audit_sha256"] = hashlib.sha256(
+            release_boundary_raw
+        ).hexdigest()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(view, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

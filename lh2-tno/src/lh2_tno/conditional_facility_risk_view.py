@@ -24,9 +24,149 @@ def _nonnegative_int(value: object, name: str) -> int:
     return value
 
 
+def _case_key(row: Mapping[str, Any]) -> str:
+    """Use the same event × branch × annual-condition grain as the ledger."""
+
+    return "|".join(
+        "" if row.get(field) is None else str(row.get(field))
+        for field in ("event_id", "release_branch_id", "annual_condition_id")
+    )
+
+
+def _build_release_trace(
+    audit: Mapping[str, Any],
+    ledger: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Attach case-level release closure to the conditional risk envelope.
+
+    This is a trace export only.  It carries the exact case rows produced by
+    ``release_boundary_case_audit`` and adds the number of risk atoms that use
+    each case.  It never turns an open or operator-limited row into zero risk
+    and never changes the facility-QRA promotion gate.
+    """
+
+    rows = audit.get("rows")
+    if not isinstance(rows, list):
+        raise ValueError("release_boundary_case_audit.rows must be a list")
+    atoms = ledger.get("risk_atoms", [])
+    if not isinstance(atoms, list):
+        atoms = []
+    atom_counts: dict[str, dict[str, int]] = {}
+    for atom in atoms:
+        if not isinstance(atom, Mapping):
+            continue
+        key = _case_key(atom)
+        counts = atom_counts.setdefault(
+            key,
+            {"risk_atom_count": 0, "nonzero_receptor_harm_atom_count": 0},
+        )
+        counts["risk_atom_count"] += 1
+        harm = atom.get("receptor_harm_low_high")
+        if isinstance(harm, Mapping) and any(
+            isinstance(bounds, list)
+            and any(isinstance(value, (int, float)) and value > 0 for value in bounds)
+            for bounds in harm.values()
+        ):
+            counts["nonzero_receptor_harm_atom_count"] += 1
+
+    selected_summary_fields = (
+        "case_count",
+        "strict_release_boundary_eligible_case_count",
+        "strict_release_boundary_blocked_case_count",
+        "numerically_closed_case_count",
+        "numerically_open_case_count",
+        "operator_review_required_case_count",
+        "consequence_domain_truncated_case_count",
+        "numerical_closure_status_counts",
+        "consequence_domain_status_counts",
+        "facility_ir_fn_promotion",
+    )
+    summary = {
+        field: audit.get(field)
+        for field in selected_summary_fields
+        if field in audit
+    }
+    summary["risk_atom_count"] = len(atoms)
+    trace_rows: list[dict[str, Any]] = []
+    trace_fields = (
+        "event_id",
+        "case_key",
+        "release_branch_id",
+        "annual_condition_id",
+        "asset_id",
+        "model_component_id",
+        "frequency_port_ids",
+        "operating_mode",
+        "hazop_scenario_id",
+        "scenario_families",
+        "status",
+        "termination",
+        "release_duration_s",
+        "available_mass_kg",
+        "cumulative_mass_out_kg",
+        "residual_mass_kg",
+        "residual_fraction",
+        "isolation_status",
+        "inventory_status",
+        "end_to_end_residual_kg",
+        "release_termination_reasons",
+        "operational_execution_reasons",
+        "consequence_domain_reasons",
+        "numerical_release_closed",
+        "numerical_closure_status",
+        "consequence_domain_status",
+        "provider_input_origins",
+        "strict_release_boundary_eligible",
+        "strict_release_boundary_status",
+        "release_boundary_blocking_reasons",
+        "provider_qualification_status",
+        "provider_qualification_blocking_reasons",
+        "facility_qra_promotion_eligible",
+        "facility_qra_promotion_status",
+    )
+    for raw_row in rows:
+        if not isinstance(raw_row, Mapping):
+            raise ValueError("release_boundary_case_audit.rows must contain objects")
+        row = {field: raw_row[field] for field in trace_fields if field in raw_row}
+        key = str(raw_row.get("case_key") or _case_key(raw_row))
+        row["case_key"] = key
+        row["risk_atom_accounting"] = atom_counts.get(
+            key,
+            {"risk_atom_count": 0, "nonzero_receptor_harm_atom_count": 0},
+        )
+        trace_rows.append(row)
+    return {
+        "schema_version": "prism.conditional_facility_release_trace.v1",
+        "source_schema": audit.get("schema_version"),
+        "source_status": audit.get("status"),
+        "case_key_definition": audit.get(
+            "case_key_definition",
+            "event_id|release_branch_id|annual_condition_id",
+        ),
+        "summary": summary,
+        "rows": trace_rows,
+        "semantics": {
+            "role": "case-level release-to-risk trace for digital-twin consumers",
+            "duration_and_inventory": (
+                "rows preserve provider release duration, initial mass, cumulative outflow, "
+                "residual mass and residual fraction"
+            ),
+            "risk_atom_accounting": (
+                "risk_atom_count counts consequence atoms using the same case key; zero "
+                "means no atom was linked, not zero physical risk"
+            ),
+            "promotion": (
+                "diagnostic trace only; strict release closure, provider qualification, "
+                "physical validation and facility IR/F-N promotion remain separate gates"
+            ),
+        },
+    }
+
+
 def build_conditional_facility_risk_view(
     assessment: Mapping[str, Any],
     provider_mass_balance_audit: Mapping[str, Any] | None = None,
+    release_boundary_case_audit: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return the conditional facility IR/F-N envelope from an assessment.
 
@@ -83,6 +223,15 @@ def build_conditional_facility_risk_view(
     strict_release_boundary = source.get("strict_release_boundary")
     if strict_release_boundary is None:
         strict_release_boundary = ledger.get("strict_release_boundary")
+    release_audit = release_boundary_case_audit
+    if release_audit is None:
+        embedded = source.get("release_boundary_case_audit")
+        release_audit = embedded if isinstance(embedded, Mapping) else None
+    release_trace = (
+        _build_release_trace(release_audit, ledger)
+        if release_audit is not None
+        else None
+    )
 
     return {
         "schema_version": "prism.conditional_facility_risk_view.v1",
@@ -109,6 +258,7 @@ def build_conditional_facility_risk_view(
         "scenario_family_contributions": dict(family_contributions),
         "scenario_branch_accounting": dict(branch_accounting),
         "release_termination_inventory_ledger": dict(release_ledger),
+        "release_trace": release_trace,
         "provider_mass_balance_audit": (
             {
                 "schema_version": mass_balance_audit.get("schema_version"),

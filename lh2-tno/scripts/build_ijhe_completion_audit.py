@@ -35,6 +35,11 @@ def main() -> int:
         type=Path,
         help="optional case-level release termination/isolation/inventory boundary audit",
     )
+    parser.add_argument(
+        "--conditional-facility-release-trace",
+        type=Path,
+        help="optional conditional facility risk view with case-level release trace",
+    )
     parser.add_argument("--vertical-handoff-result", type=Path)
     parser.add_argument("--native-model-contract-audit", type=Path)
     parser.add_argument("--frequency-provenance-report", type=Path)
@@ -303,6 +308,15 @@ def main() -> int:
         if release_boundary_case_audit is not None:
             release_boundary_case_audit["_record_path"] = str(
                 args.release_boundary_case_audit
+            )
+        conditional_facility_release_trace = (
+            _object(args.conditional_facility_release_trace)
+            if args.conditional_facility_release_trace
+            else None
+        )
+        if conditional_facility_release_trace is not None:
+            conditional_facility_release_trace["_record_path"] = str(
+                args.conditional_facility_release_trace
             )
         vertical_handoff_result = (
             _object(args.vertical_handoff_result)
@@ -760,6 +774,7 @@ def main() -> int:
             native_isolation_catalog_facility_chain_verification=native_isolation_catalog_facility_chain_verification,
             native_isolation_catalog_near_receptor_verification=native_isolation_catalog_near_receptor_verification,
             release_boundary_case_audit=release_boundary_case_audit,
+            conditional_facility_release_trace=conditional_facility_release_trace,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

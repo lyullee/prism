@@ -279,7 +279,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1191 passed, 1 warning",
+  "latest_local_full_test_run": "1194 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -3891,8 +3891,8 @@
     "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 4,
-    "completion_audit_check_count": 39,
-    "completion_audit_pass_count": 35,
+    "completion_audit_check_count": 40,
+    "completion_audit_pass_count": 36,
     "completion_audit_blocked_count": 4,
     "release_boundary_case_count": 44,
     "release_boundary_case_source_alignment": "ALIGNED",
@@ -3911,6 +3911,12 @@
       "NUMERICALLY_OPEN": 29
     },
     "release_boundary_consequence_domain_truncated_case_count": 1,
-    "release_boundary_metric_policy": "numerical closure is a diagnostic release-ledger view; it does not qualify provider packets or promote facility IR/F-N"
+    "release_boundary_metric_policy": "numerical closure is a diagnostic release-ledger view; it does not qualify provider packets or promote facility IR/F-N",
+    "conditional_facility_release_trace_view": "results/20261114/conditional_facility_risk_view_with_release_trace.json",
+    "conditional_facility_release_trace_status": "CONDITIONAL_DIAGNOSTIC_RELEASE_TO_RISK_TRACE",
+    "conditional_facility_release_trace_case_count": 44,
+    "conditional_facility_release_trace_risk_atom_count": 176,
+    "conditional_facility_release_trace_promotion_allowed": false,
+    "conditional_facility_release_trace_policy": "same case key preserves duration/inventory/closure and risk-atom accounting; missing or open cases are not assigned zero risk"
   }
 }
