@@ -196,6 +196,63 @@ def _slabx_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -
     }
 
 
+def _dynamiclh2poolx_domain(
+    path: Path, payload: Mapping[str, Any], blockers: list[str]
+) -> dict[str, Any]:
+    """Record the separately audited DynamicLH2PoolX source evidence.
+
+    This domain is intentionally separate from the generic pool record.  It
+    captures the current external source replay, hold-out observations, and
+    hash drift without opening any PRISM facility-QRA promotion gate.
+    """
+    status = str(payload.get("status", ""))
+    if not status.startswith("RESTRICTED_COMPONENT_EVIDENCE"):
+        blockers.append("DynamicLH2PoolX source evidence is not a restricted component status")
+    claims = payload.get("claims") if isinstance(payload.get("claims"), Mapping) else {}
+    for field in (
+        "independent_physical_validation_claim",
+        "full_chain_validation_claim",
+        "accident_release_validation_claim",
+        "frequency_inference_performed",
+        "facility_qra_claim",
+    ):
+        if claims.get(field) is True:
+            blockers.append(f"DynamicLH2PoolX source evidence asserts prohibited {field}=true")
+    observations = payload.get("observations") if isinstance(payload.get("observations"), Mapping) else {}
+    metrics = payload.get("metrics") if isinstance(payload.get("metrics"), Mapping) else {}
+    protocol = payload.get("protocol") if isinstance(payload.get("protocol"), Mapping) else {}
+    return {
+        "id": "dynamiclh2poolx_source_evidence_audit",
+        "status": "RESTRICTED_COMPONENT_EVIDENCE",
+        "supports": [
+            "JUEL hold-out pool-radius comparisons",
+            "HSE Test 6 limited radius and mass-ledger assessment",
+            "current-source hash and provenance-drift bookkeeping",
+        ],
+        "does_not_support": [
+            "equipment accident release, isolation, or inventory depletion",
+            "atmospheric concentration or LFL-distance validation",
+            "ignition, fire, explosion, IR/F-N, or facility-QRA validation",
+            "frequency inference or sensor-frequency learning",
+        ],
+        "audit_status": status,
+        "hash_mismatch_count": payload.get("hash_mismatch_count"),
+        "protocol_identifiers_match": protocol.get("identifiers_match"),
+        "juel_holdout_row_count": observations.get("holdout_row_count"),
+        "holdout_trials": observations.get("holdout_trials"),
+        "holdout_is_disjoint": observations.get("holdout_is_disjoint"),
+        "water_trial_4_radius_rmse_m": metrics.get("water_trial_4_radius_rmse_m"),
+        "aluminium_trial_6_radius_rmse_m": metrics.get("aluminium_trial_6_radius_rmse_m"),
+        "hse_test6_max_absolute_unledgered_residual_kg": metrics.get(
+            "hse_test6_max_absolute_unledgered_residual_kg"
+        ),
+        "source": _source(path, "DynamicLH2PoolX current-source evidence audit", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _facility_domain(path: Path, payload: Mapping[str, Any], blockers: list[str]) -> dict[str, Any]:
     for field in ("facility_total_risk_available", "qualified_facility_qra_available", "complete_facility_qra_claim"):
         _require_false(payload, field, "facility assessment", blockers)
@@ -628,6 +685,7 @@ def build_validation_evidence_matrix(
     slabx_source_validation_gate_path: str | Path | None = None,
     slabx_direct_comparison_path: str | Path | None = None,
     slabx_independent_comparison_path: str | Path | None = None,
+    dynamiclh2poolx_evidence_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -645,6 +703,11 @@ def build_validation_evidence_matrix(
     if slabx_validation_path is not None:
         slabx_path, slabx = _read_object(slabx_validation_path, "SLABx-LH2 validation evidence")
         domains.append(_slabx_domain(slabx_path, slabx, blockers))
+    if dynamiclh2poolx_evidence_path is not None:
+        dynamic_path, dynamic = _read_object(
+            dynamiclh2poolx_evidence_path, "DynamicLH2PoolX evidence audit"
+        )
+        domains.append(_dynamiclh2poolx_domain(dynamic_path, dynamic, blockers))
     if ijhe_audit_path is not None:
         audit_path, audit = _read_object(ijhe_audit_path, "IJHE audit")
         domains.append(_audit_domain(audit_path, audit, blockers))
@@ -707,6 +770,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("SLABx-LH2 evidence" in item for item in unique_blockers),
             "basis": "slabx_lh2_consequence_component",
+        },
+        {
+            "claim": "restricted_dynamiclh2poolx_source_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("DynamicLH2PoolX source evidence" in item for item in unique_blockers),
+            "basis": "dynamiclh2poolx_source_evidence_audit",
         },
         {
             "claim": "restricted_external_outdoor_field_observation_evidence",

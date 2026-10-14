@@ -30,6 +30,7 @@ def main() -> int:
     parser.add_argument("--slabx-source-validation-gates", type=Path)
     parser.add_argument("--slabx-direct-comparison", type=Path)
     parser.add_argument("--slabx-independent-comparison", type=Path)
+    parser.add_argument("--dynamiclh2poolx-evidence", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -47,6 +48,7 @@ def main() -> int:
             slabx_source_validation_gate_path=args.slabx_source_validation_gates,
             slabx_direct_comparison_path=args.slabx_direct_comparison,
             slabx_independent_comparison_path=args.slabx_independent_comparison,
+            dynamiclh2poolx_evidence_path=args.dynamiclh2poolx_evidence,
         )
     except (ValidationEvidenceMatrixError, OSError, TypeError, ValueError) as error:
         raise SystemExit(f"validation evidence matrix input error: {error}") from error

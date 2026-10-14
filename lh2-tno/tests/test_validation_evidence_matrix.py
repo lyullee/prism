@@ -252,6 +252,48 @@ def test_matrix_records_slabx_component_evidence_without_opening_qra(tmp_path):
     assert matrix["facility_qra_claim"] is False
 
 
+def test_matrix_records_dynamiclh2poolx_source_audit_without_opening_qra(tmp_path):
+    paths = _records(tmp_path)
+    dynamic = _write(tmp_path / "dynamiclh2poolx.json", {
+        "schema_version": "prism.dynamiclh2poolx_evidence_audit.v1",
+        "status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
+        "hash_mismatch_count": 4,
+        "protocol": {"identifiers_match": True},
+        "observations": {
+            "holdout_row_count": 19,
+            "holdout_trials": [4, 6],
+            "holdout_is_disjoint": True,
+        },
+        "metrics": {
+            "water_trial_4_radius_rmse_m": 0.1374,
+            "aluminium_trial_6_radius_rmse_m": 0.1016,
+            "hse_test6_max_absolute_unledgered_residual_kg": 8.24e-13,
+        },
+        "claims": {
+            "independent_physical_validation_claim": False,
+            "full_chain_validation_claim": False,
+            "accident_release_validation_claim": False,
+            "frequency_inference_performed": False,
+            "facility_qra_claim": False,
+        },
+    })
+    matrix = build_validation_evidence_matrix(
+        paths["pool"], paths["equipment"], paths["facility"],
+        dynamiclh2poolx_evidence_path=dynamic,
+    )
+    domain = next(
+        row for row in matrix["evidence_domains"]
+        if row["id"] == "dynamiclh2poolx_source_evidence_audit"
+    )
+    assert domain["status"] == "RESTRICTED_COMPONENT_EVIDENCE"
+    assert domain["juel_holdout_row_count"] == 19
+    assert domain["hash_mismatch_count"] == 4
+    claims = {row["claim"]: row for row in matrix["claims"]}
+    assert claims["restricted_dynamiclh2poolx_source_evidence"]["allowed"] is True
+    assert matrix["physical_validation_claim"] is False
+    assert matrix["facility_qra_claim"] is False
+
+
 def test_matrix_records_external_field_observation_without_opening_validation_or_qra(tmp_path):
     paths = _records(tmp_path)
     matrix = build_validation_evidence_matrix(

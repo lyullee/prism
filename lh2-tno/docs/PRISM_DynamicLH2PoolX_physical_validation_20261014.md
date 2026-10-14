@@ -61,3 +61,8 @@ python scripts/audit_dynamiclh2poolx_evidence.py `
   --source-root "C:/Users/lyul/Desktop/DocuData/SLABx_LH2/.release-work/DynamicLH2PoolX-review" `
   --output results/20261014/dynamiclh2poolx_evidence_audit.json
 ```
+
+검증근거 통합장부를 다시 만들 때는 `scripts/build_validation_evidence_matrix.py`에
+`--dynamiclh2poolx-evidence results/20261014/dynamiclh2poolx_evidence_audit.json`을
+추가한다. 통합장부에는 `dynamiclh2poolx_source_evidence_audit` 도메인이 생기지만,
+`physical_validation_claim=false`와 `facility_qra_claim=false`는 그대로 유지된다.
