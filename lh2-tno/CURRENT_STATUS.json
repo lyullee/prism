@@ -1,5 +1,5 @@
 {
-  "date_kst": "2026-10-27",
+  "date_kst": "2026-11-13",
   "package_version": "0.6.2",
   "end_to_end_diagnostic_chain_implemented": true,
   "legacy_tno_frequency_library_entries": 16,
@@ -55,7 +55,7 @@
   "campaign_case_timing_percentiles_implemented": true,
   "campaign_case_timing_percentile_policy": "Each campaign records linear-interpolated p95/p99 across its fresh cases; this is not repeated-run latency or a 1 Hz service-level claim.",
   "realtime_monitor_deadline_test_scope": "Synthetic Pipeline contract tests cover MET/MISSED deadline ledgers; no 1 Hz fresh-physics claim is made.",
-  "current_scope": "v0.6.0 latest readiness catalog: 34 events, 44 conditional cases and 176 risk atoms; 13 evidence domains and same-operator SLABx-LH2 direct component comparison are preserved; facility IR/F-N, qualified provider status and independent full-chain physical validation remain withheld.",
+  "current_scope": "v0.6.0 latest readiness catalog: 34 events, 44 conditional cases and 176 risk atoms; the 2026-11-13 multi-equipment HAZOP diagnostic independently reselected 7/7 explicit mode/scenario rows and reached 7/7 current-weather IR atoms; facility IR/F-N, qualified provider status and independent full-chain physical validation remain withheld.",
   "unsupported": [
     "DDT_detonation",
     "PH_upstream_nozzle_discharge_for_saturated_liquid",
@@ -162,7 +162,7 @@
   "frequency_port_binding_latest_union_inference_performed": false,
   "frequency_port_binding_latest_union_facility_qra_allowed": true,
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1072 passed, 1 warning",
+  "latest_local_full_test_run": "1159 passed, 1 warning",
   "observed_state_custom_hazop_tag_support": true,
   "observed_state_custom_hazop_tag_contract": "values[tag] may carry an explicit quantity; tag is preserved in runtime frame and state snapshot; missing quantity fails closed",
   "observed_state_custom_hazop_tag_test": "test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity",
@@ -4515,11 +4515,16 @@
     "interpretation": "single-equipment provider-bound HAZOP diagnostic; not a replacement for the 24-event facility scope"
   },
   "latest_hazop_multiequipment_record": {
-    "record": "results/20261014/hazop_multiequipment_provider_isolation_diagnostic_v3.json",
-    "audit": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop_multiequipment.json",
+    "record": "results/20261113/hazop_multiequipment_provider_isolation_diagnostic_v5.json",
+    "audit": "results/20261113/hazop_multiequipment_provider_isolation_handoff_audit_v5.json",
     "status": "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
     "component_count": 7,
     "accepted_component_count": 7,
+    "observed_hazop_runtime_audit": "results/20261113/hazop_multiequipment_observed_runtime_audit_v5.json",
+    "observed_hazop_runtime_audit_status": "OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED",
+    "observed_hazop_selected_scenario_count": 7,
+    "operating_mode_inference_performed": false,
+    "fresh_physics_1hz_claim": false,
     "operating_modes": {
       "storage-tank-01": "receiving",
       "liquid-transfer-line-01": "supply",
