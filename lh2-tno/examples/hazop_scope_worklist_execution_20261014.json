@@ -1,0 +1,2162 @@
+{
+  "schema": "prism.hazop_scope_worklist.v1",
+  "status": "SCOPE_GAPS_EXPLICIT",
+  "manifest_environment": "outdoor",
+  "manifest_component_count": 8,
+  "required_family_count": 12,
+  "family_summary": [
+    {
+      "family": "vessel_hole",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 1,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 5
+    },
+    {
+      "family": "pipe_hole",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 1,
+      "applicable_not_dispatched_component_count": 0,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 5
+    },
+    {
+      "family": "valve_hole",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 1,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 5
+    },
+    {
+      "family": "vent_hole",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 1,
+      "applicable_not_dispatched_component_count": 0,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 1
+    },
+    {
+      "family": "pump_hole",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 1,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 2
+    },
+    {
+      "family": "vaporizer_hole",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 1,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 1
+    },
+    {
+      "family": "reliquefier_hole",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 1,
+      "family_component_row_count": 1,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 1,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 1
+    },
+    {
+      "family": "liquid_two_phase",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "applicable_component_count": 6,
+      "family_component_row_count": 6,
+      "dispatched_diagnostic_component_count": 3,
+      "applicable_not_dispatched_component_count": 3,
+      "no_frequency_binding_component_count": 0,
+      "provider_event_count": 21
+    },
+    {
+      "family": "inventory_depletion",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "applicable_component_count": 6,
+      "family_component_row_count": 6,
+      "dispatched_diagnostic_component_count": 1,
+      "applicable_not_dispatched_component_count": 0,
+      "no_frequency_binding_component_count": 5,
+      "provider_event_count": 1
+    },
+    {
+      "family": "inventory_over_600s",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 6,
+      "family_component_row_count": 6,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 1,
+      "no_frequency_binding_component_count": 5,
+      "provider_event_count": 1
+    },
+    {
+      "family": "two_sided_rupture",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "applicable_component_count": 3,
+      "family_component_row_count": 3,
+      "dispatched_diagnostic_component_count": 1,
+      "applicable_not_dispatched_component_count": 0,
+      "no_frequency_binding_component_count": 2,
+      "provider_event_count": 2
+    },
+    {
+      "family": "vertical_handoff",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "applicable_component_count": 3,
+      "family_component_row_count": 3,
+      "dispatched_diagnostic_component_count": 0,
+      "applicable_not_dispatched_component_count": 0,
+      "no_frequency_binding_component_count": 3,
+      "provider_event_count": 0
+    }
+  ],
+  "family_component_rows": [
+    {
+      "family": "vessel_hole",
+      "component_id": "storage-tank-01",
+      "equipment_kind": "storage_tank",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "provider_event_count": 5,
+      "provider_uncomputed_event_count": 5,
+      "required_release_modes": [
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider-resolved vessel accident history is required",
+      "blocking_reasons": [
+        "provider-resolved vessel accident history is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "pipe_hole",
+      "component_id": "liquid-transfer-line-01",
+      "equipment_kind": "pipe",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "provider_event_count": 5,
+      "provider_uncomputed_event_count": 5,
+      "required_release_modes": [
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider-resolved pipe accident history is required",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "valve_hole",
+      "component_id": "transfer-valve-01",
+      "equipment_kind": "valve",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "provider_event_count": 5,
+      "provider_uncomputed_event_count": 5,
+      "required_release_modes": [
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider-resolved valve accident history is required",
+      "blocking_reasons": [
+        "provider-resolved valve accident history is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "vent_hole",
+      "component_id": "pressure-relief-vent-01",
+      "equipment_kind": "vent_stack",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "pressure-relief-vent-01-mode-deviation:standby:vent_hole"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+      ],
+      "provider_event_count": 1,
+      "provider_uncomputed_event_count": 1,
+      "required_release_modes": [
+        "maximum_relief_discharge",
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "emergency_relief_discharge",
+        "explicit_provider_termination"
+      ],
+      "required_source_operators": [
+        "equipment_emergency_relief",
+        "integrated_transient"
+      ],
+      "uncomputed_default_reason": "qualified relief set-point and discharge history are required",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "pump_hole",
+      "component_id": "liquid-transfer-pump-01",
+      "equipment_kind": "pump",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "provider_event_count": 2,
+      "provider_uncomputed_event_count": 2,
+      "required_release_modes": [
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider-resolved pump accident history is required",
+      "blocking_reasons": [
+        "provider-resolved pump accident history is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "vaporizer_hole",
+      "component_id": "ambient-vaporizer-01",
+      "equipment_kind": "vaporizer",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "provider_event_count": 1,
+      "provider_uncomputed_event_count": 1,
+      "required_release_modes": [
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider-resolved vaporizer accident history is required",
+      "blocking_reasons": [
+        "provider-resolved vaporizer accident history is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "reliquefier_hole",
+      "component_id": "reliquefier-01",
+      "equipment_kind": "reliquefier",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "provider_event_count": 1,
+      "provider_uncomputed_event_count": 1,
+      "required_release_modes": [
+        "hole"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "model_pressure_equalization"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider-resolved reliquefier accident history is required",
+      "blocking_reasons": [
+        "provider-resolved reliquefier accident history is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "liquid_two_phase",
+      "component_id": "ambient-vaporizer-01",
+      "equipment_kind": "vaporizer",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+      ],
+      "provider_event_count": 3,
+      "provider_uncomputed_event_count": 3,
+      "required_release_modes": [
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required",
+      "blocking_reasons": [
+        "liquid outlet packet with phase and enthalpy ledger is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "liquid_two_phase",
+      "component_id": "liquid-transfer-line-01",
+      "equipment_kind": "pipe",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+      ],
+      "provider_event_count": 5,
+      "provider_uncomputed_event_count": 5,
+      "required_release_modes": [
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required",
+      "blocking_reasons": [
+        "liquid outlet packet with phase and enthalpy ledger is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "liquid_two_phase",
+      "component_id": "liquid-transfer-pump-01",
+      "equipment_kind": "pump",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+        "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+      ],
+      "provider_event_count": 2,
+      "provider_uncomputed_event_count": 2,
+      "required_release_modes": [
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "liquid_two_phase",
+      "component_id": "reliquefier-01",
+      "equipment_kind": "reliquefier",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+      ],
+      "provider_event_count": 1,
+      "provider_uncomputed_event_count": 1,
+      "required_release_modes": [
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required",
+      "blocking_reasons": [
+        "liquid outlet packet with phase and enthalpy ledger is required"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "liquid_two_phase",
+      "component_id": "storage-tank-01",
+      "equipment_kind": "storage_tank",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+      ],
+      "provider_event_count": 5,
+      "provider_uncomputed_event_count": 5,
+      "required_release_modes": [
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "liquid_two_phase",
+      "component_id": "transfer-valve-01",
+      "equipment_kind": "valve",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+        "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+      ],
+      "provider_event_count": 5,
+      "provider_uncomputed_event_count": 5,
+      "required_release_modes": [
+        "hole",
+        "instantaneous_inventory",
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "inventory_depletion",
+        "inventory_over_600s",
+        "reviewed_isolation_success"
+      ],
+      "required_source_operators": [
+        "equipment_liquid_release",
+        "equipment_inventory_depletion",
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_depletion",
+      "component_id": "ambient-vaporizer-01",
+      "equipment_kind": "vaporizer",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1"
+      ],
+      "provider_event_count": 1,
+      "provider_uncomputed_event_count": 1,
+      "required_release_modes": [
+        "instantaneous_inventory"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_depletion"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider packet must close the mass inventory at depletion",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_depletion",
+      "component_id": "liquid-transfer-line-01",
+      "equipment_kind": "pipe",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "instantaneous_inventory"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_depletion"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider packet must close the mass inventory at depletion",
+      "blocking_reasons": [
+        "provider packet must close the mass inventory at depletion",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_depletion",
+      "component_id": "liquid-transfer-pump-01",
+      "equipment_kind": "pump",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "instantaneous_inventory"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_depletion"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider packet must close the mass inventory at depletion",
+      "blocking_reasons": [
+        "provider packet must close the mass inventory at depletion",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_depletion",
+      "component_id": "reliquefier-01",
+      "equipment_kind": "reliquefier",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "instantaneous_inventory"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_depletion"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider packet must close the mass inventory at depletion",
+      "blocking_reasons": [
+        "provider packet must close the mass inventory at depletion",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_depletion",
+      "component_id": "storage-tank-01",
+      "equipment_kind": "storage_tank",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "instantaneous_inventory"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_depletion"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider packet must close the mass inventory at depletion",
+      "blocking_reasons": [
+        "provider packet must close the mass inventory at depletion",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_depletion",
+      "component_id": "transfer-valve-01",
+      "equipment_kind": "valve",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "instantaneous_inventory"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_depletion"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_depletion",
+        "equipment_liquid_release"
+      ],
+      "uncomputed_default_reason": "provider packet must close the mass inventory at depletion",
+      "blocking_reasons": [
+        "provider packet must close the mass inventory at depletion",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "component_id": "ambient-vaporizer-01",
+      "equipment_kind": "vaporizer",
+      "scope_status": "APPLICABLE_NOT_DISPATCHED",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2"
+      ],
+      "provider_event_count": 1,
+      "provider_uncomputed_event_count": 1,
+      "required_release_modes": [
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+      "blocking_reasons": [
+        "provider must supply exactly 600 s and a closed mass ledger"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "component_id": "liquid-transfer-line-01",
+      "equipment_kind": "pipe",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+      "blocking_reasons": [
+        "provider must supply exactly 600 s and a closed mass ledger",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "component_id": "liquid-transfer-pump-01",
+      "equipment_kind": "pump",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+      "blocking_reasons": [
+        "provider must supply exactly 600 s and a closed mass ledger",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "component_id": "reliquefier-01",
+      "equipment_kind": "reliquefier",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+      "blocking_reasons": [
+        "provider must supply exactly 600 s and a closed mass ledger",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "component_id": "storage-tank-01",
+      "equipment_kind": "storage_tank",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+      "blocking_reasons": [
+        "provider must supply exactly 600 s and a closed mass ledger",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "inventory_over_600s",
+      "component_id": "transfer-valve-01",
+      "equipment_kind": "valve",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "inventory_over_600s"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "required_source_operators": [
+        "equipment_inventory_over_600s",
+        "equipment_liquid_over_600s"
+      ],
+      "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger",
+      "blocking_reasons": [
+        "provider must supply exactly 600 s and a closed mass ledger",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "two_sided_rupture",
+      "component_id": "liquid-transfer-line-01",
+      "equipment_kind": "pipe",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "two_sided_rupture"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release_set.v1"
+      ],
+      "required_termination_bases": [
+        "two_sided_rupture"
+      ],
+      "required_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "uncomputed_default_reason": "two endpoint packets and shared inventory closure are required",
+      "blocking_reasons": [
+        "two endpoint packets and shared inventory closure are required",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "two_sided_rupture",
+      "component_id": "reliquefier-01",
+      "equipment_kind": "reliquefier",
+      "scope_status": "DISPATCHED_DIAGNOSTIC",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [
+        "reliquefier-01-mode-deviation:standby:two_sided_rupture"
+      ],
+      "provider_event_ids": [
+        "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+        "generic-lh2-full-scope-frequency-example/reliquefier/G5"
+      ],
+      "provider_event_count": 2,
+      "provider_uncomputed_event_count": 2,
+      "required_release_modes": [
+        "two_sided_rupture"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release_set.v1"
+      ],
+      "required_termination_bases": [
+        "two_sided_rupture"
+      ],
+      "required_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "uncomputed_default_reason": "two endpoint packets and shared inventory closure are required",
+      "blocking_reasons": [],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "two_sided_rupture",
+      "component_id": "transfer-valve-01",
+      "equipment_kind": "valve",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "DISPATCHED_DIAGNOSTIC",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "two_sided_rupture"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release_set.v1"
+      ],
+      "required_termination_bases": [
+        "two_sided_rupture"
+      ],
+      "required_source_operators": [
+        "equipment_two_sided_rupture"
+      ],
+      "uncomputed_default_reason": "two endpoint packets and shared inventory closure are required",
+      "blocking_reasons": [
+        "two endpoint packets and shared inventory closure are required",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "vertical_handoff",
+      "component_id": "liquid-transfer-line-01",
+      "equipment_kind": "pipe",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "hole",
+        "maximum_relief_discharge"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "emergency_relief_discharge"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_emergency_relief"
+      ],
+      "uncomputed_default_reason": "validated vertical free-jet and handoff state are required",
+      "blocking_reasons": [
+        "validated vertical free-jet and handoff state are required",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "vertical_handoff",
+      "component_id": "pressure-relief-vent-01",
+      "equipment_kind": "vent_stack",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "hole",
+        "maximum_relief_discharge"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "emergency_relief_discharge"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_emergency_relief"
+      ],
+      "uncomputed_default_reason": "validated vertical free-jet and handoff state are required",
+      "blocking_reasons": [
+        "validated vertical free-jet and handoff state are required",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    },
+    {
+      "family": "vertical_handoff",
+      "component_id": "transfer-valve-01",
+      "equipment_kind": "valve",
+      "scope_status": "NO_FREQUENCY_EVENT_BINDING",
+      "scope_catalog_status": "APPLICABLE_NOT_DISPATCHED",
+      "diagnostic_scenario_ids": [],
+      "provider_event_ids": [],
+      "provider_event_count": 0,
+      "provider_uncomputed_event_count": 0,
+      "required_release_modes": [
+        "hole",
+        "maximum_relief_discharge"
+      ],
+      "required_provider_schemas": [
+        "prism.resolved_release.v1"
+      ],
+      "required_termination_bases": [
+        "explicit_provider_termination",
+        "emergency_relief_discharge"
+      ],
+      "required_source_operators": [
+        "integrated_transient",
+        "equipment_emergency_relief"
+      ],
+      "uncomputed_default_reason": "validated vertical free-jet and handoff state are required",
+      "blocking_reasons": [
+        "validated vertical free-jet and handoff state are required",
+        "no exact initiating-frequency event is bound to this family/component pair"
+      ],
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false
+    }
+  ],
+  "provider_event_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%/provider-release",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_0.01%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00065,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vessel_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vessel_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%/provider-release",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_0.1%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00014,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vessel_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vessel_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%/provider-release",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_1%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 2.8e-05,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vessel_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vessel_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%/provider-release",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_10%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 5.7e-06,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vessel_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vessel_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%/provider-release",
+      "component_id": "storage-tank-01",
+      "profile": "LH2_VESSEL",
+      "loc": "AREA_100%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.2e-06,
+      "scenario_families": [
+        "vessel_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vessel_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vessel_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%/provider-release",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.01%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.4e-05,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pipe_hole": "DISPATCHED_DIAGNOSTIC",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pipe_hole",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+          ]
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%/provider-release",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_0.1%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.6e-05,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pipe_hole": "DISPATCHED_DIAGNOSTIC",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pipe_hole",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+          ]
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%/provider-release",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_1%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 8e-06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pipe_hole": "DISPATCHED_DIAGNOSTIC",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pipe_hole",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+          ]
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%/provider-release",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_10%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.9e-06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pipe_hole": "DISPATCHED_DIAGNOSTIC",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pipe_hole",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+          ]
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%/provider-release",
+      "component_id": "liquid-transfer-line-01",
+      "profile": "LH2_PIPE",
+      "loc": "AREA_100%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 1.9e-06,
+      "scenario_families": [
+        "pipe_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pipe_hole": "DISPATCHED_DIAGNOSTIC",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pipe_hole",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+          ]
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%/provider-release",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_0.01%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.00012,
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "valve_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "valve_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%/provider-release",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_0.1%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 5.2e-05,
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "valve_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "valve_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%/provider-release",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_1%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 2.2e-05,
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "valve_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "valve_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%/provider-release",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_10%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 9.3e-06,
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "valve_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "valve_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%/provider-release",
+      "component_id": "transfer-valve-01",
+      "profile": "LH2_VALVE",
+      "loc": "AREA_100%",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 3.9e-06,
+      "scenario_families": [
+        "valve_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "valve_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "valve_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1/provider-release",
+      "component_id": "pressure-relief-vent-01",
+      "profile": "TNO_RELIEF_DEVICE",
+      "loc": "G1",
+      "release_mode": "maximum_relief_discharge",
+      "annual_frequency_per_year": 2e-05,
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vent_hole": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vent_hole",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "pressure-relief-vent-01-mode-deviation:standby:vent_hole"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1/provider-release",
+      "component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "loc": "G1",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.0001,
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pump_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pump_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2/provider-release",
+      "component_id": "liquid-transfer-pump-01",
+      "profile": "TNO_PUMP_STANDARD",
+      "loc": "G2",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.0005,
+      "scenario_families": [
+        "pump_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "pump_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "pump_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1/provider-release",
+      "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "loc": "G1",
+      "release_mode": "instantaneous_inventory",
+      "annual_frequency_per_year": 5e-05,
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "inventory_depletion": "DISPATCHED_DIAGNOSTIC",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "inventory_depletion",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion"
+          ]
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2/provider-release",
+      "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "loc": "G2",
+      "release_mode": "inventory_over_600s",
+      "annual_frequency_per_year": 5e-05,
+      "scenario_families": [
+        "inventory_over_600s",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "inventory_over_600s": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "inventory_over_600s",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3/provider-release",
+      "component_id": "ambient-vaporizer-01",
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "loc": "G3",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.001,
+      "scenario_families": [
+        "vaporizer_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "vaporizer_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "vaporizer_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4/provider-release",
+      "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "loc": "G4",
+      "release_mode": "two_sided_rupture",
+      "annual_frequency_per_year": 1e-05,
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "two_sided_rupture": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "two_sided_rupture",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "reliquefier-01-mode-deviation:standby:two_sided_rupture"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5/provider-release",
+      "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "loc": "G5",
+      "release_mode": "two_sided_rupture",
+      "annual_frequency_per_year": 0.001,
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "two_sided_rupture": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "two_sided_rupture",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": [
+            "reliquefier-01-mode-deviation:standby:two_sided_rupture"
+          ]
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "provider_work_item_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6/provider-release",
+      "component_id": "reliquefier-01",
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "loc": "G6",
+      "release_mode": "hole",
+      "annual_frequency_per_year": 0.01,
+      "scenario_families": [
+        "reliquefier_hole",
+        "liquid_two_phase"
+      ],
+      "provider_status": "UNCOMPUTED_PROVIDER_PACKET",
+      "provider_packet_required": true,
+      "scope_status_by_family": {
+        "reliquefier_hole": "APPLICABLE_NOT_DISPATCHED",
+        "liquid_two_phase": "DISPATCHED_DIAGNOSTIC"
+      },
+      "scope_links": [
+        {
+          "family": "reliquefier_hole",
+          "scope_status": "APPLICABLE_NOT_DISPATCHED",
+          "diagnostic_scenario_ids": []
+        },
+        {
+          "family": "liquid_two_phase",
+          "scope_status": "DISPATCHED_DIAGNOSTIC",
+          "diagnostic_scenario_ids": []
+        }
+      ],
+      "frequency_preserved": true,
+      "frequency_inference_performed": false,
+      "packet_substitution_performed": false,
+      "blocking_reasons": [
+        "bound equipment model has no accident-release provider export",
+        "diagnostic adapter is synthetic/screening evidence; qualified provider export remains required"
+      ]
+    }
+  ],
+  "summary": {
+    "family_component_row_count": 31,
+    "dispatched_diagnostic_component_count": 7,
+    "applicable_not_dispatched_component_count": 9,
+    "no_frequency_binding_component_count": 15,
+    "provider_event_count": 24,
+    "provider_uncomputed_event_count": 24,
+    "frequency_inference_performed": false,
+    "packet_substitution_performed": false
+  },
+  "blocking_reasons": [
+    "9 applicable family/component pair(s) were not dispatched by HAZOP",
+    "15 applicable family/component pair(s) have no exact frequency-event binding",
+    "24 exact frequency event(s) still require provider release packets"
+  ],
+  "policy": {
+    "diagnostic_dispatch_does_not_promote_provider_packet": true,
+    "missing_family_is_not_substituted": true,
+    "frequency_inference_performed": false,
+    "provider_packet_created": false,
+    "frequency_preserved_per_event": true
+  },
+  "source_records": {
+    "manifest": "examples\\generic_lh2_full_scope_manifest.json",
+    "diagnostic_result": "examples\\hazop_multiequipment_provider_isolation_execution_20261014.json",
+    "provider_worklist": null,
+    "frequency_plan": "examples\\generic_lh2_full_scope_frequency_plan.json",
+    "model_binding": "examples\\generic_lh2_model_binding.json"
+  },
+  "diagnostic_status": "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
+  "diagnostic_facility_handoff_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+  "diagnostic_facility_qra_promotion": false
+}

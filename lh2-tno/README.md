@@ -22,6 +22,8 @@
 
 이 결과에는 12개 옥외 사고군의 범위 카탈로그도 포함됩니다. 대표 행으로 dispatch된 사고군과 설비에는 적용되지만 아직 계산하지 않은 사고군을 별도 상태로 남겨, 한 대표 누출을 전체 사고범위 완료로 해석하지 않습니다.
 
+**HAZOP 범위·provider worklist 결합 (2026-10-14):** `scripts/build_hazop_scope_worklist.py`는 위 진단의 `scope_catalog`와 전체 문헌 frequency plan의 provider worklist를 설비·사고군·정확한 event ID 단위로 결합합니다. `examples/hazop_scope_worklist_execution_20261014.json`은 31개 가족·설비 조합 중 7개 diagnostic dispatch, 9개 적용 가능하지만 미 dispatch, 15개 빈도 event 미결합을 구분하고, 24개 provider event를 모두 `UNCOMPUTED_PROVIDER_PACKET`으로 보존합니다. 진단 dispatch는 provider packet을 승격하지 않으며, 빈도 추론·packet 대체는 수행하지 않습니다. [상세 장부 설명](docs/PRISM_HAZOP_scope_worklist_20261014.md).
+
 **압축성 source-state→SLABx-LH2 재현 경로 (2026-10-14):** `scripts/run_compressible_plane_chain.py`는 provider `prism.resolved_release.v1`와 별도 `prism.compressible_plane_handoff.v1`를 같은 digest·시간축으로 다시 결합하고, 옥외 시설 manifest의 설비·포트·좌표·물성 기준을 확인한 뒤 압축성 근접장→SLABx-LH2→점화·노출→인체피해 경로를 실행합니다. `examples/compressible_plane_chain_context.json`은 provider 지속시간을 그대로 사용하고 빈도 필드를 거부하며, `examples/compressible_plane_chain_smoke_result.json`은 19개 handoff 구간 소비와 질량잔차를 기록한 진단 스냅샷입니다. 이 경로는 provider 자격화·독립 물리검증·사고빈도·시설 IR/F-N을 승격하지 않습니다. [재현 설명](docs/PRISM_compressible_plane_provider_chain_20261014.md)
 
 **압축성 handoff의 시설 campaign 연결 (2026-10-14):** `scripts/run_compressible_plane_facility_campaign.py`는 한 사건의 source-state handoff를 기존 24개 사건 campaign에 재결합하고, 문헌/조건부 빈도·연간 기상·점화 분기·시설 risk atom 계산을 다시 실행합니다. 실제 smoke에서는 24/24 chain 실행, packet identity 보존, G1 원본/재결합 digest 분리, `facility_total_risk_available=false`를 확인했습니다. 결과 스냅샷은 [`compressible_plane_facility_campaign_smoke_result.json`](examples/compressible_plane_facility_campaign_smoke_result.json)이며, qualified provider·독립 물리검증·시설 전체 IR/F-N은 승격하지 않습니다.
