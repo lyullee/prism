@@ -45,6 +45,16 @@ resolver가 반환한 `ConsequenceRequest` 또는 mapping에는 선택된 `opera
 
 실시간 결과에서도 이 식별자를 확인할 수 있다. `RealtimeConsequenceMonitor`의 `telemetry_boundary.operating_mode`와 `equipment_release_path.operating_mode`가 같은 선택 모드를 보존하며, `FacilityRealtimeConsequenceMonitor`의 `equipment_release_path_accounting.component_rows`와 `operating_mode_counts`에도 설비별로 남는다. 이 값은 화면·알람의 운전 맥락을 표시하기 위한 메타데이터이며, 누출 크기·방출 지속시간·빈도를 자동으로 만들지 않는다.
 
+저장된 실시간 결과는 다음 감사기로 확인할 수 있다.
+
+```powershell
+python scripts/audit_realtime_hazop_mode_trace.py `
+  --input results/realtime/current_facility_result.json `
+  --output results/realtime/current_hazop_mode_trace_audit.json
+```
+
+이 감사기는 단일 모니터 결과와 시설 batch 결과를 모두 지원한다. 각 설비의 `telemetry_boundary`와 `equipment_release_path`가 같은 운전 모드를 가져야 하며, 시설 batch에서는 `operating_mode_counts`와 설비별 원장도 다시 일치해야 한다. 입력 결과가 없거나 모드가 빠지면 `REALTIME_HAZOP_MODE_TRACE_BLOCKED`로 남고, 정상 운전 자료에서 모드를 추정하지 않는다. 완료 감사에 연결할 때는 `scripts/build_ijhe_completion_audit.py --realtime-hazop-mode-trace ...`를 사용한다.
+
 여러 행을 실제로 병렬 분기할 때는 `run_hazop_runtime_consequence_branches(...)`에 `scenario_id`별 resolver를 넘긴다. 각 행은 한 행짜리 HAZOP 계약으로 다시 평가되고, 각각의 provider 종료 근거와 source operator를 독립적으로 확인한 뒤 기존 consequence monitor를 호출한다. resolver가 없는 branch는 `CONSEQUENCE_BRANCHES_PARTIAL` 아래에서 별도로 보류되며 다른 branch의 결과를 0 위험으로 채우지 않는다.
 
 여러 설비의 현재 상태를 함께 처리할 때는 `run_hazop_facility_runtime(...)`을 사용한다. 이 조정기는 설비별 HAZOP 선택, branch 결과, provider identity와 현재 기상 IR 기여를 하나의 원장으로 묶는다. 단일 branch와 검토된 빈도 바인딩이 있는 경우에만 현재 조건의 receptor별 IR 기여를 표시하며, HAZOP가 활성화한 branch를 시설 연간 IR/F-N으로 자동 승격하지 않는다. 시설 연간 결과는 전체 문헌 사건 목록·기상·인구·방호·미계산 사고 원장을 별도로 닫아야 한다.
@@ -118,6 +128,6 @@ python scripts/evaluate_hazop_operating_mode.py `
 
 이 모듈은 설비-neutral HAZOP 판단과 scenario dispatch boundary를 닫는다. 사고 family catalog와 provider packet catalog에 없는 사건은 선택하지 않으며, HAZOP 이탈이 있어도 빈도와 피해 결과를 자동으로 만들지 않는다.
 
-현재 HAZOP·runtime mode·forecast 연결 집중 검사는 45개이며, 완료 감사까지 포함한 관련 검사는 88개, 전체 패키지 검사는 **1005 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 예측 공정상태가 위험조건에 처음 도달한 시점의 정량평가 trigger와 기존 runtime consequence gate 재사용 경로, 조건 해제 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff, 운전 모드가 campaign·provider evidence request·시설 branch accounting·consequence request까지 보존되는 경로와 중복 mode 충돌 차단을 실행했다. 추가로 사고 export 요청의 명시적 `isolation_time_s`·`post_isolation_observation_s`가 provider로 전달되고 결과 `provider_meta`에서 echo되는지 검사한다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
+현재 HAZOP·runtime mode·forecast 연결 집중 검사는 45개이며, 완료 감사까지 포함한 관련 검사는 88개, 전체 패키지 검사는 **1010 passed**이다. 예제 실행은 `receiving` 모드의 고압 이탈 1건을 선택했으며, 방출 packet 0건·빈도추정 false·시설 QRA false를 기록했다. 별도 통합검사는 provider liquid packet이 기존 SLABx-LH2 consequence monitor까지 전달되는 경로, 두 개의 활성 HAZOP branch를 독립적으로 dispatch하는 경로, 명시적 branch 확률·분할 합계로 여러 branch를 시설 원장에 연결하는 경로, 예측 공정상태가 위험조건에 처음 도달한 시점의 정량평가 trigger와 기존 runtime consequence gate 재사용 경로, 조건 해제 경로, 여러 설비 원장 조정 경로, HAZOP branch에서 연간 조건·점화·인구·IR/F-N 원장으로 넘어가는 명시적 handoff, 운전 모드가 campaign·provider evidence request·시설 branch accounting·consequence request까지 보존되는 경로와 중복 mode 충돌 차단을 실행했다. 추가로 사고 export 요청의 명시적 `isolation_time_s`·`post_isolation_observation_s`가 provider로 전달되고 결과 `provider_meta`에서 echo되는지 검사한다. 실제 provider가 연결된 경우에도 HAZOP family와 packet의 source operator·종료 근거가 맞을 때만 기존 SLABx-LH2 consequence monitor로 전달된다.
 
 남은 엄격 문턱은 실제 설비별 HAZOP·P&ID identity, provider의 차단·재고·종료 이력, 문헌 빈도 event binding, SLABx-LH2 독립 비교, 시설 전체 사고 family coverage와 IR/F-N 승격이다. 현재 검사센터 자료는 정상 상태 신호의 후보 입력으로만 취급한다.

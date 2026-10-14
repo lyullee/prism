@@ -143,6 +143,11 @@ def main() -> int:
         type=Path,
         help="optional predicted-state HAZOP trigger scan",
     )
+    parser.add_argument(
+        "--realtime-hazop-mode-trace",
+        type=Path,
+        help="optional audit of HAZOP operating_mode at the realtime result boundary",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -401,6 +406,13 @@ def main() -> int:
         )
         if hazop_forecast_scan is not None:
             hazop_forecast_scan["_record_path"] = str(args.hazop_forecast_scan)
+        realtime_hazop_mode_trace = (
+            _object(args.realtime_hazop_mode_trace)
+            if args.realtime_hazop_mode_trace
+            else None
+        )
+        if realtime_hazop_mode_trace is not None:
+            realtime_hazop_mode_trace["_record_path"] = str(args.realtime_hazop_mode_trace)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -441,6 +453,7 @@ def main() -> int:
             observed_state_model_binding_audit,
             external_equipment_model_contract_audit,
             hazop_forecast_scan=hazop_forecast_scan,
+            realtime_hazop_mode_trace=realtime_hazop_mode_trace,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

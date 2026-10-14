@@ -173,6 +173,61 @@ def test_completion_audit_blocks_forecast_mode_trace_mismatch():
     assert check["evidence"]["operating_mode_trace_valid"] is False
 
 
+def _realtime_mode_trace(status="REALTIME_HAZOP_MODE_TRACE_VERIFIED"):
+    return {
+        "schema_version": "prism.realtime_hazop_mode_trace_audit.v1",
+        "status": status,
+        "diagnostic_only": True,
+        "rows": [{
+            "component_id": "TK-01",
+            "operating_mode": "receiving",
+            "mode_match": True,
+        }],
+        "operating_mode_counts": {"receiving": 1},
+        "blocking_reasons": [] if status.endswith("VERIFIED") else ["mode mismatch"],
+        "policy": {
+            "mode_is_identity_metadata": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "release_inference_performed": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    }
+
+
+def test_completion_audit_records_realtime_hazop_mode_trace():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        realtime_hazop_mode_trace=_realtime_mode_trace(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_realtime_hazop_mode_trace"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_realtime_hazop_mode_trace_claim_without_policy():
+    trace = _realtime_mode_trace()
+    trace["policy"]["facility_qra_claim"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        realtime_hazop_mode_trace=trace,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_realtime_hazop_mode_trace"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def test_completion_audit_records_domain_recovery_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(validated=False),

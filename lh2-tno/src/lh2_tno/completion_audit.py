@@ -91,6 +91,7 @@ def build_ijhe_completion_audit(
     observed_state_model_binding_audit: Mapping[str, Any] | None = None,
     external_equipment_model_contract_audit: Mapping[str, Any] | None = None,
     hazop_forecast_scan: Mapping[str, Any] | None = None,
+    realtime_hazop_mode_trace: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2886,6 +2887,55 @@ def build_ijhe_completion_audit(
             "never infers frequency or promotes facility QRA."
         )
         checks.append(forecast_check)
+    if realtime_hazop_mode_trace is not None:
+        trace = realtime_hazop_mode_trace
+        policy = trace.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        rows = trace.get("rows")
+        trace_valid = (
+            trace.get("schema_version") == "prism.realtime_hazop_mode_trace_audit.v1"
+            and trace.get("status") == "REALTIME_HAZOP_MODE_TRACE_VERIFIED"
+            and trace.get("diagnostic_only") is True
+            and isinstance(rows, list)
+            and bool(rows)
+            and all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("component_id"), str)
+                and isinstance(row.get("operating_mode"), str)
+                and bool(row.get("operating_mode"))
+                and row.get("mode_match") is True
+                for row in rows
+            )
+            and policy.get("mode_is_identity_metadata") is True
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("sensor_frequency_learning_used") is False
+            and policy.get("release_inference_performed") is False
+            and policy.get("physical_validation_claim") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("diagnostic_only") is True
+            and not trace.get("blocking_reasons")
+        )
+        trace_check = _check(
+            "diagnostic_realtime_hazop_mode_trace",
+            trace_valid,
+            {
+                "record": realtime_hazop_mode_trace.get("_record_path"),
+                "schema_version": realtime_hazop_mode_trace.get("schema_version"),
+                "status": realtime_hazop_mode_trace.get("status"),
+                "row_count": len(rows) if isinstance(rows, list) else None,
+                "operating_mode_counts": realtime_hazop_mode_trace.get("operating_mode_counts"),
+                "blocking_reasons": realtime_hazop_mode_trace.get("blocking_reasons"),
+                "policy": dict(policy),
+            },
+            "realtime HAZOP operating-mode trace is missing, inconsistent, or carries an unsafe promotion claim",
+        )
+        trace_check["diagnostic_only"] = True
+        trace_check["interpretation"] = (
+            "The selected HAZOP mode is checked at the realtime result boundary and in the "
+            "facility batch ledger. This diagnostic check never infers a release or frequency "
+            "and never promotes facility QRA."
+        )
+        checks.append(trace_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

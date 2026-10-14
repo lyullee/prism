@@ -1,0 +1,41 @@
+{
+  "schema_version": "prism.realtime_facility_result.example.v1",
+  "status": "ACCEPTED",
+  "input_origin": "synthetic_diagnostic",
+  "components": {
+    "storage-tank-01": {
+      "status": "ACCEPTED",
+      "result": {
+        "telemetry_boundary": {
+          "operating_mode": "receiving"
+        }
+      },
+      "equipment_release_path": {
+        "operating_mode": "receiving"
+      }
+    },
+    "supply-vaporizer-01": {
+      "status": "ACCEPTED",
+      "result": {
+        "telemetry_boundary": {
+          "operating_mode": "supply"
+        }
+      },
+      "equipment_release_path": {
+        "operating_mode": "supply"
+      }
+    }
+  },
+  "aggregate": {
+    "equipment_release_path_accounting": {
+      "component_rows": {
+        "storage-tank-01": {"operating_mode": "receiving"},
+        "supply-vaporizer-01": {"operating_mode": "supply"}
+      },
+      "operating_mode_counts": {
+        "receiving": 1,
+        "supply": 1
+      }
+    }
+  }
+}
