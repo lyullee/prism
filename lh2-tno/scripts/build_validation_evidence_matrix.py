@@ -24,6 +24,7 @@ def main() -> int:
     parser.add_argument("--slabx-validation", type=Path)
     parser.add_argument("--ijhe-audit", type=Path)
     parser.add_argument("--external-sweep", type=Path)
+    parser.add_argument("--external-provider-validation", type=Path)
     parser.add_argument("--external-field-evidence", type=Path)
     parser.add_argument("--external-field-comparison", type=Path)
     parser.add_argument("--preslhy-slabx-window-comparison", type=Path)
@@ -42,6 +43,7 @@ def main() -> int:
             slabx_validation_path=args.slabx_validation,
             ijhe_audit_path=args.ijhe_audit,
             external_sweep_path=args.external_sweep,
+            external_provider_validation_path=args.external_provider_validation,
             external_field_path=args.external_field_evidence,
             external_field_comparison_path=args.external_field_comparison,
             preslhy_slabx_window_path=args.preslhy_slabx_window_comparison,

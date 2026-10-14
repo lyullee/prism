@@ -5026,10 +5026,10 @@
       "evidence": {
         "status": "RESTRICTED_EVIDENCE_MATRIX",
         "decision": "FACILITY_QRA_WITHHELD",
-        "domain_count": 4,
+        "domain_count": 8,
         "blocking_reason_count": 0,
         "claims_closed": true,
-        "record": "results\\20261014\\validation_evidence_matrix_with_dynamiclh2poolx.json"
+        "record": "results\\20261114\\validation_evidence_matrix_with_provider_intake.json"
       },
       "blocking_reason": null,
       "diagnostic_only": true,

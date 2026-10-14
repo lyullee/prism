@@ -327,6 +327,80 @@ def _external_sweep_domain(path: Path, payload: Mapping[str, Any], blockers: lis
     }
 
 
+def _external_provider_validation_domain(
+    path: Path,
+    payload: Mapping[str, Any],
+    blockers: list[str],
+) -> dict[str, Any]:
+    """Record external provider-validation evidence without qualifying a provider.
+
+    Public LH2 outflow reports, gas-nozzle comparisons and facility screening
+    gates are useful for an IJHE traceability table.  They remain separate from
+    the exact PRISM accident-release packet and its qualification sidecar.
+    """
+    if payload.get("schema_version") != "prism.external_provider_validation_intake.v1":
+        blockers.append("external provider validation intake has an unexpected schema")
+    if payload.get("status") != "RESTRICTED_PROVIDER_COMPONENT_EVIDENCE":
+        blockers.append("external provider validation intake is not restricted component status")
+    for field in (
+        "provider_qualification_claim",
+        "accident_release_validation_claim",
+        "independent_physical_validation_claim",
+        "full_chain_validation_claim",
+        "frequency_inference_performed",
+        "facility_qra_claim",
+    ):
+        _require_false(payload, field, "external provider validation intake", blockers)
+    evidence = payload.get("evidence") if isinstance(payload.get("evidence"), list) else []
+    if not evidence:
+        blockers.append("external provider validation intake contains no evidence rows")
+    invalid_rows = []
+    for index, row in enumerate(evidence):
+        if not isinstance(row, Mapping):
+            invalid_rows.append(index)
+            continue
+        promotion = row.get("promotion") if isinstance(row.get("promotion"), Mapping) else {}
+        if promotion.get("provider_packet_match") is True:
+            invalid_rows.append(index)
+        if promotion.get("promotion_status") != "PROMOTION_BLOCKED":
+            invalid_rows.append(index)
+    if invalid_rows:
+        blockers.append(
+            "external provider validation intake has rows without explicit promotion blockers: "
+            + ",".join(str(item) for item in sorted(set(invalid_rows)))
+        )
+    provider_artifacts = payload.get("provider_artifacts") if isinstance(payload.get("provider_artifacts"), Mapping) else {}
+    summary = payload.get("summary") if isinstance(payload.get("summary"), Mapping) else {}
+    return {
+        "id": "external_provider_validation_component_evidence",
+        "status": "RESTRICTED_COMPONENT_EVIDENCE",
+        "supports": [
+            "traceable review of public LH2 boundary and component evidence",
+            "explicit separation of gaseous-nozzle, LH2 thermodynamic and facility-screening scopes",
+            "provider-artifact origin and exact-match readiness accounting",
+        ],
+        "does_not_support": [
+            "qualified provider accident release",
+            "release duration, isolation or inventory-depletion qualification",
+            "initiating frequency or sensor-frequency learning",
+            "independent full-chain physical validation or facility IR/F-N",
+        ],
+        "evidence_count": summary.get("evidence_count", len(evidence)),
+        "promotion_blocked_count": summary.get("promotion_blocked_count"),
+        "provider_packet_match_count": summary.get("provider_packet_match_count"),
+        "actual_origin_provider_artifact_count": summary.get("actual_origin_provider_artifact_count"),
+        "synthetic_or_model_prediction_provider_artifact_count": summary.get(
+            "synthetic_or_model_prediction_provider_artifact_count"
+        ),
+        "provider_artifact_count": provider_artifacts.get("artifact_file_count"),
+        "provider_qualification_sidecar_count": summary.get("provider_qualification_sidecar_count"),
+        "source": _source(path, "external provider validation intake", payload),
+        "physical_validation_claim": False,
+        "full_chain_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+
+
 def _external_field_domain(
     path: Path,
     payload: Mapping[str, Any],
@@ -686,6 +760,7 @@ def build_validation_evidence_matrix(
     slabx_direct_comparison_path: str | Path | None = None,
     slabx_independent_comparison_path: str | Path | None = None,
     dynamiclh2poolx_evidence_path: str | Path | None = None,
+    external_provider_validation_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Combine evidence ledgers while keeping every promotion gate closed."""
     blockers: list[str] = []
@@ -714,6 +789,11 @@ def build_validation_evidence_matrix(
     if external_sweep_path is not None:
         sweep_path, sweep = _read_object(external_sweep_path, "external LH2 sweep audit")
         domains.append(_external_sweep_domain(sweep_path, sweep, blockers))
+    if external_provider_validation_path is not None:
+        provider_path, provider = _read_object(
+            external_provider_validation_path, "external provider validation intake"
+        )
+        domains.append(_external_provider_validation_domain(provider_path, provider, blockers))
     if external_field_path is not None:
         field_path, field = _read_object(external_field_path, "external field evidence")
         domains.append(_external_field_domain(field_path, field, blockers))
@@ -788,6 +868,12 @@ def build_validation_evidence_matrix(
             "status": "SUPPORTED_WITH_RESTRICTIONS",
             "allowed": not any("external field model comparison" in item for item in unique_blockers),
             "basis": "external_field_model_comparison",
+        },
+        {
+            "claim": "restricted_external_provider_component_evidence",
+            "status": "SUPPORTED_WITH_RESTRICTIONS",
+            "allowed": not any("external provider validation intake" in item for item in unique_blockers),
+            "basis": "external_provider_validation_component_evidence",
         },
         {
             "claim": "restricted_preslhy_slabx_window_comparison_evidence",

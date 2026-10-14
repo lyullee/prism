@@ -22,7 +22,8 @@
 | `verification.json` (native packet catalog) | exact native packet 구조 | 24/24 exact, qualification 승격 아님 |
 | `isolation_branch_audit.json` | 설비별 차단·zero-flow branch | 14개 `reviewed_isolation_success` |
 | `slabx_lh2_validation_audit_recomputed.json` | SLABx-LH2 pool/dispersion 근거 | 제한 component evidence |
-| `validation_evidence_matrix_with_dynamiclh2poolx.json` | 물리·관측·interface 증거 경계 | 시설 QRA 보류를 명시 |
+| `validation_evidence_matrix_with_provider_intake.json` | 물리·관측·provider 검증근거 경계 | 시설 QRA 보류를 명시 |
+| `external_provider_validation_intake.json` | 외부 방출·열역학 검증 자료 분류 | 8건 모두 provider 승격 차단 |
 | `facility_evidence_request.json` | case/family별 누락 증거 요청 | 44 case와 12 family를 추적 |
 | `native_generic_scope_packet_evidence_qualification_readiness_v14.json` | provider qualification readiness | 24/24 `BLOCKED_REVIEW` |
 
@@ -40,7 +41,7 @@ python scripts/build_ijhe_completion_audit.py `
   --native-scope-packet-catalog-verification results/20261111/native_generic_scope_packets_isolation/verification.json `
   --native-scope-isolation-branch-catalog-audit results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json `
   --native-isolation-catalog-facility-chain-verification results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/verification.json `
-  --validation-evidence-matrix results/20261014/validation_evidence_matrix_with_dynamiclh2poolx.json `
+  --validation-evidence-matrix results/20261114/validation_evidence_matrix_with_provider_intake.json `
   --slabx-validation-evidence results/20261106/slabx_lh2_validation_audit_recomputed.json `
   --facility-evidence-request results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_evidence_request.json `
   --diagnostic-worklist-evidence results/20261024/native_generic_scope_packet_evidence_qualification_readiness_v14.json `

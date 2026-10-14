@@ -1,0 +1,437 @@
+{
+  "schema_version": "prism.external_provider_validation_intake.v1",
+  "status": "RESTRICTED_PROVIDER_COMPONENT_EVIDENCE",
+  "manifest": {
+    "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\examples\\external_provider_validation_manifest.json",
+    "sha256": "9efbaa25a412f4d50e735199d107a9af769af763f97972e7440047baddbeef52",
+    "reviewed_evidence_count": 8
+  },
+  "provider_artifacts": {
+    "root": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract",
+    "artifact_file_count": 7,
+    "parsed_artifact_count": 7,
+    "actual_origin_count": 0,
+    "synthetic_or_model_prediction_count": 7,
+    "qualification_sidecar_count": 0,
+    "exact_validation_match_count": 0,
+    "artifacts": [
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\layered\\resolved_release.json",
+        "sha256": "4cc42a2fc9fe9d15deda116215e39de1785a7b1c200c2ef62ed81f7f0686638c",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-layered-tank-diagnostic",
+        "event_id": "native-layered-tank/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "inventory_depletion",
+        "qualification_sidecar_embedded": false
+      },
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pipe\\resolved_release.json",
+        "sha256": "4224f8a27b35aa7778c63eab04d3da6ce6709fd8fe5286d30bb6cb4b9165933e",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-dynamic-pipe-diagnostic",
+        "event_id": "native-dynamic-pipe/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "reviewed_isolation_success",
+        "qualification_sidecar_embedded": false
+      },
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\pump\\resolved_release.json",
+        "sha256": "9ec47ffc5d7c60a93aef47625ccd7ad398bdaae87b30023676ae19f594750f7f",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-mapped-pump-diagnostic",
+        "event_id": "native-mapped-pump/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "qualification_sidecar_embedded": false
+      },
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\reliquefier\\resolved_release.json",
+        "sha256": "62918f2642e9cac63cbdacd1f3b361710b4312bb61398eac2c33e16cde037906",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-reliquefier-diagnostic",
+        "event_id": "native-reliquefier/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "qualification_sidecar_embedded": false
+      },
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\valve\\resolved_release.json",
+        "sha256": "b5268d51b502e8b7e86c4d79083e043eee88e4ecf18c26ffecc65bbe5ff940d3",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-stroke-valve-diagnostic",
+        "event_id": "native-stroke-valve/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "qualification_sidecar_embedded": false
+      },
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vaporizer\\resolved_release.json",
+        "sha256": "ab6867205c893105a423f388cbdba771a8f1576178246c50bb159c47e74c5e12",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-vaporizer-diagnostic",
+        "event_id": "native-vaporizer/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "qualification_sidecar_embedded": false
+      },
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\tmp_native_contract\\vent\\resolved_release.json",
+        "sha256": "787b4af38644ab0fcf6cbdb37625e5f9da4309557e0e347e1ab5e81ec0a13c52",
+        "schema": "prism.resolved_release.v1",
+        "component_id": "native-vent-stack-diagnostic",
+        "event_id": "native-vent-stack/accidental-leak-001",
+        "input_origin": "model_prediction",
+        "termination_basis": "synthetic_diagnostic_horizon",
+        "qualification_sidecar_embedded": false
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "preslhy-e31a-fixed-nozzle-transfer",
+      "kind": "gaseous_hydrogen_fixed_nozzle",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\preslhy_e31a_transfer_validation.json",
+        "sha256": "545b3988738ef1c586caf1e508ce0a27196163115eba050aef6de5150d870e59",
+        "status": null,
+        "dataset_doi": "10.35097/1187"
+      },
+      "source_origin": "public_external_dataset",
+      "declared_scope": {
+        "supports": [
+          "fixed-nozzle gaseous-hydrogen outlet transfer closure",
+          "casewise discharge-coefficient and pressure-transfer comparison"
+        ],
+        "does_not_support": [
+          "liquid-hydrogen accident release",
+          "PSV lift or certified capacity",
+          "isolation, inventory depletion or facility QRA"
+        ]
+      },
+      "metrics": {
+        "archive_case_count": 44,
+        "cold_case_count": 22,
+        "warm_case_count": 22,
+        "warm_casewise_cd_median": 0.7741626355,
+        "cold_transfer_nrmse_median": 0.0162695373
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "source scope explicitly excludes LH2 and PSV",
+          "no exact facility provider event/component/port identity",
+          "no provider qualification sidecar or independent full-chain validation"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "preslhy-e31b-ambient-nozzle",
+      "kind": "ambient_gaseous_hydrogen_nozzle",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\preslhy_e31b_ambient_nozzle_validation.json",
+        "sha256": "309d9a52474db23b201e6b38cecaf6c053d50fbf36c121b63ccb57bb0afa2b4b",
+        "status": null,
+        "dataset_doi": "10.35097/1317"
+      },
+      "source_origin": "public_external_dataset",
+      "declared_scope": {
+        "supports": [
+          "290 K gaseous-hydrogen fixed-nozzle pressure-history closure"
+        ],
+        "does_not_support": [
+          "liquid-hydrogen accident release",
+          "PSV lift, certified capacity or two-phase choking",
+          "isolation, inventory depletion or facility QRA"
+        ]
+      },
+      "metrics": {
+        "case_count": 5,
+        "cd_mean": 0.7656136799,
+        "cd_sample_sd": 0.0262276108
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "source scope explicitly identifies a gaseous reference and not LH2 or PSV",
+          "no exact facility provider event/component/port identity",
+          "no provider qualification sidecar or independent full-chain validation"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "nasa-tn-d3256-lh2-outflow",
+      "kind": "lh2_tank_outflow_thermodynamic_boundary",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\nasa_tnd3256_boundary_audit.json",
+        "sha256": "355b244b4cd6e053b0484c8156f7dcbb38be547c2c836b5a8440e7d3cc11b26c",
+        "status": null,
+        "dataset_doi": null
+      },
+      "source_origin": "public_external_dataset",
+      "declared_scope": {
+        "supports": [
+          "liquid-hydrogen tank heat-input and constant-pressure outflow comparison",
+          "thermodynamic boundary and mass-flow plausibility checks"
+        ],
+        "does_not_support": [
+          "facility-specific accident-release provider qualification",
+          "isolation reliability, release duration or inventory-depletion closure",
+          "ignition, dispersion or facility IR/F-N"
+        ]
+      },
+      "metrics": {
+        "constant_pressure_outflow_test_count": 8,
+        "no_flow_heat_input_test_count": 6,
+        "mean_flow_rate_lb_s": 0.0413125,
+        "tank_pressure_psia_min": 33.39,
+        "tank_pressure_psia_max": 34.4
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "public tank apparatus is not the facility provider model",
+          "event/component/port and source/result digest are not matched to a PRISM packet",
+          "no provider qualification sidecar or independent full-chain validation"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "nasa-tn-d5263-lh2-venting",
+      "kind": "lh2_vent_enthalpy_challenge",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\nasa_tnd5263_venting_audit.json",
+        "sha256": "765e29265aef2a6ef561684949fc0e939e8fd52ccb719d510236fd834601ffe6",
+        "status": "independent LH2 vented-tank mass/energy challenge; not reclosable-PSV validation",
+        "dataset_doi": null
+      },
+      "source_origin": "public_external_dataset",
+      "declared_scope": {
+        "supports": [
+          "liquid-hydrogen vent enthalpy and heating-location challenge",
+          "screening of saturated-vapor simplification limits"
+        ],
+        "does_not_support": [
+          "PSV lift or certified capacity",
+          "facility provider release duration or isolation branch",
+          "dispersion, ignition or facility IR/F-N"
+        ]
+      },
+      "metrics": {
+        "vent_test_count": 3,
+        "reported_uniform_actual_over_saturated_model": 0.5,
+        "reported_top_actual_over_saturated_model": 0.1666666667
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "source reports manually cycled vent tests without lift history",
+          "electronic pressure and temperature records are unavailable",
+          "no exact facility provider packet or qualification sidecar"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "petitpas-ortho-para-multicase",
+      "kind": "orthoparahydrogen_thermal_kinetics",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\petitpas_multicase_report.json",
+        "sha256": "5b1c3b1e747bedfec7d26398f847934b29c62b23da48f3d123707ead78bd03d2",
+        "status": null,
+        "dataset_doi": null
+      },
+      "source_origin": "public_external_dataset",
+      "declared_scope": {
+        "supports": [
+          "restricted ortho-para thermal-kinetics component comparison"
+        ],
+        "does_not_support": [
+          "equipment accident release",
+          "release rate, isolation or inventory depletion",
+          "facility QRA or frequency"
+        ]
+      },
+      "metrics": {
+        "case_count": 4,
+        "withheld_case_count": 4,
+        "experiment_7_withheld_r2": 0.9866857873,
+        "experiment_11_withheld_r2": -1.938057977
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "component evidence is not a release provider",
+          "no event/component/port identity match",
+          "no provider qualification sidecar or release validation"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "ksite-cross-condition-pressure-slope",
+      "kind": "lh2_self_pressurization_cross_condition",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\ksite_cross_condition_validation.json",
+        "sha256": "93805236111e7a8c4281f66a270aecccfb6d0233a8db8ae648d454766e92e92e",
+        "status": "independent-condition quasi-steady slope transfer; incomplete initial fields",
+        "dataset_doi": null
+      },
+      "source_origin": "public_external_dataset",
+      "declared_scope": {
+        "supports": [
+          "cross-condition LH2 pressurization slope comparison"
+        ],
+        "does_not_support": [
+          "accident release provider qualification",
+          "valve or nozzle discharge closure",
+          "facility IR/F-N or frequency"
+        ]
+      },
+      "metrics": {
+        "evaluated_case_count": 7,
+        "unfitted_median_absolute_relative_error_percent": 37.0740884,
+        "unfitted_max_absolute_relative_error_percent": 62.9863847
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "source is a tank pressurization transfer audit rather than an accident-release packet",
+          "unfitted median absolute relative error remains material",
+          "no exact facility provider identity or qualification sidecar"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "center-official-independent-validation-gate",
+      "kind": "facility_center_validation_gate",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_official_independent_validation_20261007.json",
+        "sha256": "f64783e8694b7daa8526691e59d338cb2d9a9e6fbb4cb5730298d5d2b4e1ff76",
+        "status": null,
+        "dataset_doi": null
+      },
+      "source_origin": "facility_screening_record",
+      "declared_scope": {
+        "supports": [
+          "explicit raw-historian and approved-field-record promotion gate accounting"
+        ],
+        "does_not_support": [
+          "actual facility provider release qualification",
+          "production-parameter promotion",
+          "facility-wide IR/F-N validation"
+        ]
+      },
+      "metrics": {
+        "scenario_count": 5,
+        "promotion_allowed_session_count": 0,
+        "ready_unit_count": 0
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "raw historian export and approved field-record counts are zero",
+          "center asset and port bindings remain unresolved",
+          "forward comparison and score promotion are explicitly blocked"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    },
+    {
+      "evidence_id": "center-full-connected-empirical-gate",
+      "kind": "facility_center_empirical_validation_gate",
+      "source": {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_full_connected_empirical_validation.json",
+        "sha256": "ad7ed767c70f274bc8611e87231a3cdebd7a55a3135ee96d0a0a9c4e98d31cd4",
+        "status": {
+          "goal_achieved": false,
+          "current_result": "No-fit field/model score is not yet available for 0/12 declared assets; installed physical coverage is 0/9; the all-unit result is not yet computable.",
+          "blocker": "12 of 12 declared assets lack an independent numerical field-comparison score. Physics and connection tests cannot be substituted for field accuracy."
+        },
+        "dataset_doi": null
+      },
+      "source_origin": "facility_screening_record",
+      "declared_scope": {
+        "supports": [
+          "screening-data coverage and raw-historian promotion accounting"
+        ],
+        "does_not_support": [
+          "actual facility provider release qualification",
+          "fitted production parameters",
+          "facility-wide IR/F-N validation"
+        ]
+      },
+      "metrics": {
+        "inventory_file_count": 45,
+        "curated_validation_row_count": 21,
+        "raw_historian_export_present": false,
+        "promotion_allowed_session_count": 0
+      },
+      "promotion": {
+        "provider_packet_match": false,
+        "qualification_status": "NOT_QUALIFIED",
+        "promotion_status": "PROMOTION_BLOCKED",
+        "blocking_reasons": [
+          "raw historian export is absent",
+          "approved field-record/model-run pairs admitted count is zero",
+          "reconstructed channels remain screening-only"
+        ],
+        "provider_artifact_count_seen": 7,
+        "exact_provider_validation_match_count": 0
+      }
+    }
+  ],
+  "summary": {
+    "evidence_count": 8,
+    "promotion_blocked_count": 8,
+    "provider_packet_match_count": 0,
+    "independent_full_chain_validation_count": 0,
+    "provider_qualification_sidecar_count": 0,
+    "actual_origin_provider_artifact_count": 0,
+    "synthetic_or_model_prediction_provider_artifact_count": 7
+  },
+  "provider_qualification_claim": false,
+  "accident_release_validation_claim": false,
+  "independent_physical_validation_claim": false,
+  "full_chain_validation_claim": false,
+  "frequency_inference_performed": false,
+  "facility_qra_claim": false,
+  "promotion_policy": {
+    "boundary_or_component_evidence_does_not_qualify_provider": true,
+    "provider_artifact_origin_is_not_inferred": true,
+    "sensor_or_validation_data_does_not_create_frequency": true,
+    "facility_qra_requires_exact_provider_and_independent_full_chain_validation": true
+  },
+  "required_for_provider_promotion": [
+    "actual reviewed provider release packet with exact event, component, port and source/result digests",
+    "explicit release duration, isolation branch and inventory-depletion closure",
+    "provider qualification sidecar bound to the exact packet",
+    "independent physical validation of the same release model and operating regime",
+    "facility scope closure before IR/F-N promotion"
+  ]
+}

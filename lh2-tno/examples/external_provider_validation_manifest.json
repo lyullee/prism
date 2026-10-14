@@ -1,0 +1,215 @@
+{
+  "schema_version": "prism.external_provider_validation_manifest.v1",
+  "purpose": "Classify external physics and facility evidence before provider-packet promotion",
+  "evidence": [
+    {
+      "evidence_id": "preslhy-e31a-fixed-nozzle-transfer",
+      "kind": "gaseous_hydrogen_fixed_nozzle",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\preslhy_e31a_transfer_validation.json",
+      "source_origin": "public_external_dataset",
+      "supports": [
+        "fixed-nozzle gaseous-hydrogen outlet transfer closure",
+        "casewise discharge-coefficient and pressure-transfer comparison"
+      ],
+      "does_not_support": [
+        "liquid-hydrogen accident release",
+        "PSV lift or certified capacity",
+        "isolation, inventory depletion or facility QRA"
+      ],
+      "blocking_reasons": [
+        "source scope explicitly excludes LH2 and PSV",
+        "no exact facility provider event/component/port identity",
+        "no provider qualification sidecar or independent full-chain validation"
+      ],
+      "metrics": {
+        "archive_case_count": 44,
+        "cold_case_count": 22,
+        "warm_case_count": 22,
+        "warm_casewise_cd_median": 0.7741626355,
+        "cold_transfer_nrmse_median": 0.0162695373
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "preslhy-e31b-ambient-nozzle",
+      "kind": "ambient_gaseous_hydrogen_nozzle",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\preslhy_e31b_ambient_nozzle_validation.json",
+      "source_origin": "public_external_dataset",
+      "supports": [
+        "290 K gaseous-hydrogen fixed-nozzle pressure-history closure"
+      ],
+      "does_not_support": [
+        "liquid-hydrogen accident release",
+        "PSV lift, certified capacity or two-phase choking",
+        "isolation, inventory depletion or facility QRA"
+      ],
+      "blocking_reasons": [
+        "source scope explicitly identifies a gaseous reference and not LH2 or PSV",
+        "no exact facility provider event/component/port identity",
+        "no provider qualification sidecar or independent full-chain validation"
+      ],
+      "metrics": {
+        "case_count": 5,
+        "cd_mean": 0.7656136799,
+        "cd_sample_sd": 0.0262276108
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "nasa-tn-d3256-lh2-outflow",
+      "kind": "lh2_tank_outflow_thermodynamic_boundary",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\nasa_tnd3256_boundary_audit.json",
+      "source_origin": "public_external_dataset",
+      "supports": [
+        "liquid-hydrogen tank heat-input and constant-pressure outflow comparison",
+        "thermodynamic boundary and mass-flow plausibility checks"
+      ],
+      "does_not_support": [
+        "facility-specific accident-release provider qualification",
+        "isolation reliability, release duration or inventory-depletion closure",
+        "ignition, dispersion or facility IR/F-N"
+      ],
+      "blocking_reasons": [
+        "public tank apparatus is not the facility provider model",
+        "event/component/port and source/result digest are not matched to a PRISM packet",
+        "no provider qualification sidecar or independent full-chain validation"
+      ],
+      "metrics": {
+        "constant_pressure_outflow_test_count": 8,
+        "no_flow_heat_input_test_count": 6,
+        "mean_flow_rate_lb_s": 0.0413125,
+        "tank_pressure_psia_min": 33.39,
+        "tank_pressure_psia_max": 34.4
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "nasa-tn-d5263-lh2-venting",
+      "kind": "lh2_vent_enthalpy_challenge",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\nasa_tnd5263_venting_audit.json",
+      "source_origin": "public_external_dataset",
+      "supports": [
+        "liquid-hydrogen vent enthalpy and heating-location challenge",
+        "screening of saturated-vapor simplification limits"
+      ],
+      "does_not_support": [
+        "PSV lift or certified capacity",
+        "facility provider release duration or isolation branch",
+        "dispersion, ignition or facility IR/F-N"
+      ],
+      "blocking_reasons": [
+        "source reports manually cycled vent tests without lift history",
+        "electronic pressure and temperature records are unavailable",
+        "no exact facility provider packet or qualification sidecar"
+      ],
+      "metrics": {
+        "vent_test_count": 3,
+        "reported_uniform_actual_over_saturated_model": 0.5,
+        "reported_top_actual_over_saturated_model": 0.1666666667
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "petitpas-ortho-para-multicase",
+      "kind": "orthoparahydrogen_thermal_kinetics",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\petitpas_multicase_report.json",
+      "source_origin": "public_external_dataset",
+      "supports": [
+        "restricted ortho-para thermal-kinetics component comparison"
+      ],
+      "does_not_support": [
+        "equipment accident release",
+        "release rate, isolation or inventory depletion",
+        "facility QRA or frequency"
+      ],
+      "blocking_reasons": [
+        "component evidence is not a release provider",
+        "no event/component/port identity match",
+        "no provider qualification sidecar or release validation"
+      ],
+      "metrics": {
+        "case_count": 4,
+        "withheld_case_count": 4,
+        "experiment_7_withheld_r2": 0.9866857873,
+        "experiment_11_withheld_r2": -1.938057977
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "ksite-cross-condition-pressure-slope",
+      "kind": "lh2_self_pressurization_cross_condition",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\02_분석_재현\\outputs_op_relief_v2_source_audit\\ksite_cross_condition_validation.json",
+      "source_origin": "public_external_dataset",
+      "supports": [
+        "cross-condition LH2 pressurization slope comparison"
+      ],
+      "does_not_support": [
+        "accident release provider qualification",
+        "valve or nozzle discharge closure",
+        "facility IR/F-N or frequency"
+      ],
+      "blocking_reasons": [
+        "source is a tank pressurization transfer audit rather than an accident-release packet",
+        "unfitted median absolute relative error remains material",
+        "no exact facility provider identity or qualification sidecar"
+      ],
+      "metrics": {
+        "evaluated_case_count": 7,
+        "unfitted_median_absolute_relative_error_percent": 37.0740884,
+        "unfitted_max_absolute_relative_error_percent": 62.9863847
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "center-official-independent-validation-gate",
+      "kind": "facility_center_validation_gate",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_official_independent_validation_20261007.json",
+      "source_origin": "facility_screening_record",
+      "supports": [
+        "explicit raw-historian and approved-field-record promotion gate accounting"
+      ],
+      "does_not_support": [
+        "actual facility provider release qualification",
+        "production-parameter promotion",
+        "facility-wide IR/F-N validation"
+      ],
+      "blocking_reasons": [
+        "raw historian export and approved field-record counts are zero",
+        "center asset and port bindings remain unresolved",
+        "forward comparison and score promotion are explicitly blocked"
+      ],
+      "metrics": {
+        "scenario_count": 5,
+        "promotion_allowed_session_count": 0,
+        "ready_unit_count": 0
+      },
+      "provider_packet_match": false
+    },
+    {
+      "evidence_id": "center-full-connected-empirical-gate",
+      "kind": "facility_center_empirical_validation_gate",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\액화수소 저장탱크_밴트 시스템\\06_액화수소_디지털트윈_물리모델\\docs\\benchmarks\\center_full_connected_empirical_validation.json",
+      "source_origin": "facility_screening_record",
+      "supports": [
+        "screening-data coverage and raw-historian promotion accounting"
+      ],
+      "does_not_support": [
+        "actual facility provider release qualification",
+        "fitted production parameters",
+        "facility-wide IR/F-N validation"
+      ],
+      "blocking_reasons": [
+        "raw historian export is absent",
+        "approved field-record/model-run pairs admitted count is zero",
+        "reconstructed channels remain screening-only"
+      ],
+      "metrics": {
+        "inventory_file_count": 45,
+        "curated_validation_row_count": 21,
+        "raw_historian_export_present": false,
+        "promotion_allowed_session_count": 0
+      },
+      "provider_packet_match": false
+    }
+  ]
+}
