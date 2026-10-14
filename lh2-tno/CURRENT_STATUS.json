@@ -4304,12 +4304,12 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261109/ijhe_completion_audit_conditional_facility_port_bound_with_hazop_multiequipment.json",
+    "record": "results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_with_hazop_multiequipment.json",
     "status": "INCOMPLETE_EVIDENCE",
     "check_count": 24,
     "blocking_reason_count": 5,
     "facility_qra_promotion": false,
-    "interpretation": "explicit event-to-accident-port binding is now aligned for 24/24 events; conditional facility IR/F-N and HAZOP diagnostics remain available, while qualified provider, release-boundary, accident-scope, physical-validation and strict facility-QRA gates remain closed"
+    "interpretation": "12 exact reviewed-isolation provider packets now reach the port-bound facility ledger with explicit isolation termination and mass accounting; source provenance remains synthetic, so qualified provider, release-boundary, physical-validation, scope and strict facility-QRA gates remain closed"
   },
   "provider_inventory_closure_extension": {
     "g3": {
@@ -4429,11 +4429,11 @@
     "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
   },
   "latest_conditional_facility_ir_fn_assessment": {
-    "assessment": "results/20261109/generic_scope_closure_rebound_facility_port_bound_assessment.json",
-    "conditional_view": "results/20261109/generic_scope_closure_rebound_facility_port_bound_conditional_risk_view.json",
-    "documentation": "docs/PRISM_port_bound_facility_reassessment_20261109.md",
-    "campaign_result": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_result.json",
-    "frequency_port_audit": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_audit.json",
+    "assessment": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_assessment.json",
+    "conditional_view": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_conditional_risk_view.json",
+    "documentation": "docs/PRISM_isolation_packet_rebound_20261109.md",
+    "campaign_result": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_isolation_rebound_result.json",
+    "isolation_packet_overlay": "results/20261109/generic_scope_packet_evidence_source_state_closure_rebound_isolation_overlay.json",
     "status": "PARTIAL_FACILITY_SCOPE",
     "event_count": 24,
     "case_count": 24,
@@ -4467,8 +4467,13 @@
     "strict_uncomputed_case_count": 20,
     "operator_limited_case_count": 20,
     "qualified_provider_packet_case_count": 0,
-    "frequency_scenario_count": 5,
-    "frequency_credible_interval": false,
+    "termination_basis_counts": {
+      "emergency_relief_discharge": 1,
+      "inventory_depletion": 8,
+      "inventory_over_600s": 1,
+      "reviewed_isolation_success": 12,
+      "two_sided_rupture": 2
+    },
     "frequency_port_binding_status": "ALIGNED",
     "frequency_port_scoped_event_count": 24,
     "frequency_port_unbound_event_count": 0,
@@ -4476,20 +4481,20 @@
     "facility_aggregate_audit_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
     "component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
     "frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
-    "promotion_policy": "diagnostic-only; explicit reviewed port crosswalk is aligned, but no frequency inference, no provider promotion, no independent physical validation and no facility QRA promotion",
-    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_port_bound_with_hazop_multiequipment_minimal.json",
+    "promotion_policy": "diagnostic-only; 12 exact reviewed-isolation packet overlays are connected, but no field isolation reliability, provider promotion, independent physical validation or facility QRA promotion",
+    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_with_hazop_multiequipment.json",
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_check_count": 24,
     "completion_audit_blocking_reason_count": 5,
     "facility_qra_promotion": false,
     "timing": {
       "fresh_physics_cases": 24,
-      "case_min_ms": 1472.1090000020922,
-      "case_median_ms": 4744.939699998213,
-      "case_max_ms": 22903.581400001713,
-      "case_p95_ms": 18988.046864998247,
-      "case_p99_ms": 22080.22528400077,
-      "campaign_elapsed_ms": 164593.08249999594,
+      "case_min_ms": 1485.1218000039808,
+      "case_median_ms": 5492.67174999477,
+      "case_max_ms": 95445.28790000186,
+      "case_p95_ms": 18651.53409000049,
+      "case_p99_ms": 77886.09374800177,
+      "campaign_elapsed_ms": 240916.15869999805,
       "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
     }
   },
@@ -4605,6 +4610,91 @@
   "ijhe_completion_audit_latest_port_bound_check_count": 24,
   "ijhe_completion_audit_latest_port_bound_blocking_reason_count": 5,
   "ijhe_completion_audit_latest_port_bound_blocking_reasons": [
+    "facility release boundary is not closed across all declared cases",
+    "only synthetic or screening provider releases are available for this campaign",
+    "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+  ],
+  "latest_isolation_packet_rebound": {
+    "assessment": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_assessment.json",
+    "conditional_view": "results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_conditional_risk_view.json",
+    "documentation": "docs/PRISM_isolation_packet_rebound_20261109.md",
+    "campaign_result": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_port_bound_isolation_rebound_result.json",
+    "isolation_packet_overlay": "results/20261109/generic_scope_packet_evidence_source_state_closure_rebound_isolation_overlay.json",
+    "status": "PARTIAL_FACILITY_SCOPE",
+    "event_count": 24,
+    "case_count": 24,
+    "risk_atom_count": null,
+    "conditional_facility_risk_available": true,
+    "strict_facility_total_risk_available": false,
+    "conditional_annual_ir_low_high": {
+      "worker-01": [
+        6.080000000000001e-05,
+        6.080000000000001e-05
+      ]
+    },
+    "conditional_expected_death_fn_low_high": [
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          6.080000000000001e-05
+        ]
+      },
+      {
+        "expected_deaths": [
+          1.0
+        ],
+        "cumulative_frequency_per_year": [
+          6.080000000000001e-05
+        ]
+      }
+    ],
+    "strict_uncomputed_case_count": 20,
+    "operator_limited_case_count": 20,
+    "qualified_provider_packet_case_count": 0,
+    "termination_basis_counts": {
+      "emergency_relief_discharge": 1,
+      "inventory_depletion": 8,
+      "inventory_over_600s": 1,
+      "reviewed_isolation_success": 12,
+      "two_sided_rupture": 2
+    },
+    "frequency_port_binding_status": "ALIGNED",
+    "frequency_port_scoped_event_count": 24,
+    "frequency_port_unbound_event_count": 0,
+    "chain_closure_audit_status": "PARTIAL_DIAGNOSTIC_CHAIN_CLOSED",
+    "facility_aggregate_audit_status": "FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC",
+    "component_contribution_audit_status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+    "frequency_uncertainty_audit_status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+    "promotion_policy": "diagnostic-only; 12 exact reviewed-isolation packet overlays are connected, but no field isolation reliability, provider promotion, independent physical validation or facility QRA promotion",
+    "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_with_hazop_multiequipment.json",
+    "completion_audit_status": "INCOMPLETE_EVIDENCE",
+    "completion_audit_check_count": 24,
+    "completion_audit_blocking_reason_count": 5,
+    "facility_qra_promotion": false,
+    "timing": {
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1485.1218000039808,
+      "case_median_ms": 5492.67174999477,
+      "case_max_ms": 95445.28790000186,
+      "case_p95_ms": 18651.53409000049,
+      "case_p99_ms": 77886.09374800177,
+      "campaign_elapsed_ms": 240916.15869999805,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    }
+  },
+  "isolation_packet_overlay_latest_record": "results/20261109/generic_scope_packet_evidence_source_state_closure_rebound_isolation_overlay.json",
+  "isolation_packet_overlay_latest_status": "12 exact event/component/port-matched reviewed-isolation packets connected diagnostically; provider promotion and facility QRA remain false",
+  "isolation_packet_overlay_latest_selected_count": 12,
+  "isolation_packet_overlay_latest_termination_basis": "reviewed_isolation_success",
+  "ijhe_completion_audit_latest_isolation_rebound_record": "results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_with_hazop_multiequipment.json",
+  "ijhe_completion_audit_latest_isolation_rebound_status": "INCOMPLETE_EVIDENCE",
+  "ijhe_completion_audit_latest_isolation_rebound_check_count": 24,
+  "ijhe_completion_audit_latest_isolation_rebound_blocking_reason_count": 5,
+  "ijhe_completion_audit_latest_isolation_rebound_blocking_reasons": [
     "facility release boundary is not closed across all declared cases",
     "only synthetic or screening provider releases are available for this campaign",
     "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",

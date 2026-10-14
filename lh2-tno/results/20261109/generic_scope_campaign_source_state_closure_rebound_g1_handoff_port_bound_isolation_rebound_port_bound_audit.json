@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.frequency_port_binding_audit.v1",
+  "status": "FREQUENCY_PORT_CROSSWALK_BOUND",
+  "campaign_id": "equipment-manifest-event-provider-campaign",
+  "frequency_plan_id": "generic-lh2-full-scope-frequency-example",
+  "asset_count": 7,
+  "crosswalk_asset_count": 7,
+  "generated_event_count": 24,
+  "generated_port_scoped_event_count": 24,
+  "generated_unbound_event_count": 0,
+  "provider_request_port_mismatch_count": 0,
+  "provider_request_port_mismatches": [],
+  "crosswalk_provenance": {
+    "basis": "reviewed generic outdoor LH2 example topology",
+    "manifest": "examples/generic_lh2_full_scope_manifest.json",
+    "frequency_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
+    "review_status": "synthetic_demonstration_only",
+    "port_selection_rule": "accident outlet explicitly declared in the equipment manifest"
+  },
+  "manifest_facility_id": "generic-lh2-near-receptor-diagnostic",
+  "frequency_inference_performed": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "policy": {
+    "port_ids_are_explicit_crosswalk_input": true,
+    "provider_ports_are_never_used_to_create_frequency_ports": true,
+    "sensor_frequency_learning": false,
+    "partial_or_synthetic_provider_chain_remains_partial": true
+  }
+}

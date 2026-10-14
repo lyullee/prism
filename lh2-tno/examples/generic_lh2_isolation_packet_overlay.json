@@ -1,0 +1,22 @@
+{
+  "schema_version": "prism.isolation_packet_evidence_overlay_input.v1",
+  "provenance": {
+    "basis": "existing reviewed-isolation-success diagnostic packets",
+    "qualification": "synthetic diagnostic only",
+    "frequency_inference_performed": false
+  },
+  "mappings": [
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-line-01-AREA_0.01pct/resolved_release.json", "expected_port_id": "line-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-line-01-AREA_0.1pct/resolved_release.json", "expected_port_id": "line-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-line-01-AREA_1pct/resolved_release.json", "expected_port_id": "line-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-line-01-AREA_10pct/resolved_release.json", "expected_port_id": "line-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-line-01-AREA_100pct/resolved_release.json", "expected_port_id": "line-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-valve-01-AREA_0.01pct/resolved_release.json", "expected_port_id": "valve-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-valve-01-AREA_0.1pct/resolved_release.json", "expected_port_id": "valve-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-valve-01-AREA_1pct/resolved_release.json", "expected_port_id": "valve-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-valve-01-AREA_10pct/resolved_release.json", "expected_port_id": "valve-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%", "resolved_packet_path": "results/20261014/hazop_isolation_packets/transfer-valve-01-AREA_100pct/resolved_release.json", "expected_port_id": "valve-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1", "resolved_packet_path": "results/20261014/hazop_isolation_packets/liquid-transfer-pump-01-G1/resolved_release.json", "expected_port_id": "pump-accident-out"},
+    {"event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2", "resolved_packet_path": "results/20261014/hazop_isolation_packets/liquid-transfer-pump-01-G2/resolved_release.json", "expected_port_id": "pump-accident-out"}
+  ]
+}
