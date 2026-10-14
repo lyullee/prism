@@ -87,3 +87,37 @@ def test_external_release_intake_discovers_resolved_release_files_under_root(tmp
     assert report["artifact_file_count"] == 1
     assert report["release_row_count"] == 1
     assert report["artifacts"][0]["item_pointer"] == "$.case-1"
+
+
+def test_external_release_intake_accepts_exact_sidecar_from_separate_root(tmp_path: Path) -> None:
+    release_dir = tmp_path / "exports"
+    sidecar_dir = tmp_path / "qualification"
+    release_dir.mkdir()
+    sidecar_dir.mkdir()
+    release_path = release_dir / "resolved_release.json"
+    release_path.write_text(json.dumps(_release("provider_actual")), encoding="utf-8")
+    sidecar_path = sidecar_dir / "reviewed_packet.json"
+    sidecar_path.write_text(
+        json.dumps({
+            "schema_version": "prism.provider_qualification_evidence.v1",
+            "status": "qualified_actual",
+            "provider_origin": "reviewed_actual",
+            "evidence_id": "separate-evidence-1",
+            "exact_digest_binding": True,
+            "event_id": "tank/leak-1",
+            "component_id": "tank-1",
+            "port_ids": ["tank-1.out"],
+            "provider_source_digests": ["a" * 64],
+            "provider_result_digests": ["b" * 64],
+        }),
+        encoding="utf-8",
+    )
+
+    report = audit_external_release_artifacts(
+        paths=[release_path],
+        qualification_paths=[sidecar_path],
+    )
+
+    assert report["qualification_file_count"] == 1
+    assert report["qualified_sidecar_row_count"] == 1
+    assert report["artifacts"][0]["qualification_bound"] is True

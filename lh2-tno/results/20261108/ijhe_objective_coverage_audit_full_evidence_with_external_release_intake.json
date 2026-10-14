@@ -890,6 +890,7 @@
         "schema_version": "prism.external_release_artifact_intake.v1",
         "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
         "artifact_file_count": 14,
+        "qualification_file_count": 0,
         "release_row_count": 28,
         "qualified_sidecar_row_count": 0,
         "closure_ready_row_count": 0,

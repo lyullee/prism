@@ -18,10 +18,17 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", action="append", default=[], type=Path)
     parser.add_argument("--root", action="append", default=[], type=Path)
+    parser.add_argument("--qualification-path", action="append", default=[], type=Path)
+    parser.add_argument("--qualification-root", action="append", default=[], type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     try:
-        report = audit_external_release_artifacts(args.path, args.root)
+        report = audit_external_release_artifacts(
+            args.path,
+            args.root,
+            args.qualification_path,
+            args.qualification_root,
+        )
     except (OSError, UnicodeDecodeError, ValueError) as error:
         raise SystemExit(f"external release artifact intake error: {error}") from error
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -30,6 +37,7 @@ def main() -> int:
         "status": report["status"],
         "output": str(args.output),
         "artifact_file_count": report["artifact_file_count"],
+        "qualification_file_count": report["qualification_file_count"],
         "release_row_count": report["release_row_count"],
         "qualified_sidecar_row_count": report["qualified_sidecar_row_count"],
         "actual_origin_row_count": report["actual_origin_row_count"],

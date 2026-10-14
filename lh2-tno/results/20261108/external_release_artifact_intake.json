@@ -3,6 +3,8 @@
   "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
   "diagnostic_only": true,
   "artifact_file_count": 14,
+  "qualification_file_count": 0,
+  "qualification_search_paths": [],
   "release_row_count": 28,
   "qualified_sidecar_row_count": 0,
   "closure_ready_row_count": 0,

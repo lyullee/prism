@@ -101,6 +101,26 @@ def _candidate_files(paths: Iterable[str | Path], roots: Iterable[str | Path]) -
     return sorted(found.values(), key=lambda item: str(item).casefold())
 
 
+def _qualification_files(
+    paths: Iterable[str | Path], roots: Iterable[str | Path]
+) -> list[Path]:
+    """Collect explicitly supplied qualification JSON without guessing identity."""
+
+    found: dict[str, Path] = {}
+    for value in paths:
+        path = Path(value).resolve()
+        if path.is_file():
+            found[str(path).casefold()] = path
+    for value in roots:
+        root = Path(value).resolve()
+        if root.is_file():
+            found[str(root).casefold()] = root
+        elif root.is_dir():
+            for path in root.rglob("*.json"):
+                found[str(path).casefold()] = path
+    return sorted(found.values(), key=lambda item: str(item).casefold())
+
+
 def _digest_ok(value: Any) -> bool:
     if not isinstance(value, str) or len(value) != 64:
         return False
@@ -114,6 +134,7 @@ def _digest_ok(value: Any) -> bool:
 def _nearby_qualification(
     path: Path,
     release: Mapping[str, Any],
+    additional_candidates: Iterable[Path] = (),
 ) -> tuple[bool, list[str], bool, list[str]]:
     matches: list[str] = []
     exact_matches: list[str] = []
@@ -123,6 +144,7 @@ def _nearby_qualification(
     # and digest-bound by the provider packet audit instead of being guessed.
     candidates = set(path.parent.glob("*.json"))
     candidates.update(path.parent.parent.glob("*.json"))
+    candidates.update(Path(candidate) for candidate in additional_candidates)
     for candidate in sorted(candidates):
         if candidate == path:
             continue
@@ -219,14 +241,22 @@ def _closure_summary(release: Mapping[str, Any]) -> dict[str, Any]:
 def audit_external_release_artifacts(
     paths: Iterable[str | Path] = (),
     roots: Iterable[str | Path] = (),
+    qualification_paths: Iterable[str | Path] = (),
+    qualification_roots: Iterable[str | Path] = (),
 ) -> dict[str, Any]:
-    """Return a digest-bound inventory of release-shaped external JSON files."""
+    """Return a digest-bound inventory of release-shaped external JSON files.
+
+    Qualification files may be supplied from a separate directory, but every
+    candidate is still checked against the exact release identity and both
+    provider digests. A sidecar filename or location never opens promotion.
+    """
 
     files = _candidate_files(paths, roots)
     if not files:
         raise ExternalReleaseArtifactIntakeError(
             "at least one release artifact file or directory is required"
         )
+    qualification_files = _qualification_files(qualification_paths, qualification_roots)
 
     artifacts: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
@@ -270,7 +300,7 @@ def audit_external_release_artifacts(
                 qualification_paths,
                 qualification_bound,
                 qualification_mismatch_reasons,
-            ) = _nearby_qualification(path, release)
+            ) = _nearby_qualification(path, release, qualification_files)
             qualification_bound = qualification_bound and schema == RELEASE_SCHEMA
             reasons: list[str] = []
             if not shape_valid:
@@ -335,6 +365,8 @@ def audit_external_release_artifacts(
         ),
         "diagnostic_only": True,
         "artifact_file_count": len(files),
+        "qualification_file_count": len(qualification_files),
+        "qualification_search_paths": [str(path) for path in qualification_files],
         "release_row_count": len(release_rows),
         "qualified_sidecar_row_count": len(qualified_rows),
         "closure_ready_row_count": len(closure_ready_rows),

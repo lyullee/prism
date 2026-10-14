@@ -2228,6 +2228,11 @@ def build_ijhe_objective_coverage_audit(
                 ),
                 "status": external_intake_status,
                 "artifact_file_count": external_intake_files,
+                "qualification_file_count": (
+                    external_intake.get("qualification_file_count")
+                    if isinstance(external_intake, Mapping)
+                    else None
+                ),
                 "release_row_count": external_intake_rows,
                 "qualified_sidecar_row_count": external_intake_sidecars,
                 "closure_ready_row_count": external_intake_closure_ready,
