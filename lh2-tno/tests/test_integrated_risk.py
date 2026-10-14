@@ -3,7 +3,11 @@ from __future__ import annotations
 import pytest
 
 import lh2_tno.integrated_risk as integrated_risk
-from lh2_tno.integrated_risk import IntegratedRiskError, run_hazop_integrated_risk
+from lh2_tno.integrated_risk import (
+    IntegratedRiskError,
+    build_hazop_facility_campaign_evaluator,
+    run_hazop_integrated_risk,
+)
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames
 
 
@@ -231,3 +235,24 @@ def test_integrated_risk_withholds_unsafe_facility_campaign_claim(monkeypatch):
     assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
     assert result["facility_campaign"]["status"] == "WITHHELD_UNSAFE_FACILITY_CAMPAIGN_RESULT"
     assert result["facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
+def test_campaign_evaluator_factory_binds_existing_hazop_campaign(monkeypatch):
+    captured = {}
+
+    def campaign(current, **kwargs):
+        captured["current"] = current
+        captured.update(kwargs)
+        return {"status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED"}
+
+    monkeypatch.setattr(integrated_risk, "build_hazop_facility_campaign_result", campaign)
+    evaluator = build_hazop_facility_campaign_evaluator(
+        annual_conditions=[{"id": "weather-d", "annual_probability": 1.0}],
+        scenario_bindings=[{"component_id": "TK-01", "hazop_scenario_id": "s-01"}],
+        expected_component_ids=("TK-01",),
+    )
+    result = evaluator({"facility_id": "facility-01"})
+    assert result["status"] == "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+    assert captured["annual_conditions"][0]["id"] == "weather-d"
+    assert captured["scenario_bindings"][0]["hazop_scenario_id"] == "s-01"
+    assert captured["expected_component_ids"] == ("TK-01",)

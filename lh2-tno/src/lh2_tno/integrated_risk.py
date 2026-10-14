@@ -16,6 +16,7 @@ import time
 from typing import Any
 
 from .hazop import HazopTable, run_hazop_facility_runtime
+from .hazop_campaign import build_hazop_facility_campaign_result
 from .hazop_forecast import HazopForecastError, run_hazop_forecast_risk_scan
 
 
@@ -24,6 +25,34 @@ SCHEMA = "prism.hazop_integrated_risk.v1"
 
 class IntegratedRiskError(ValueError):
     """Raised when the current/forecast integration contract is incomplete."""
+
+
+def build_hazop_facility_campaign_evaluator(
+    *,
+    annual_conditions: Sequence[Mapping[str, Any]],
+    scenario_bindings: Sequence[Mapping[str, Any]],
+    expected_component_ids: Sequence[str] = (),
+) -> Callable[[Mapping[str, Any]], Mapping[str, Any]]:
+    """Bind the existing annual facility handoff as an integration callback.
+
+    The returned evaluator only supplies the reviewed annual-condition and
+    scenario-binding inputs to :func:`build_hazop_facility_campaign_result`.
+    It does not create missing provider releases, frequencies, weather,
+    population, ignition, or validation evidence.
+    """
+    conditions = tuple(copy.deepcopy(dict(row)) for row in annual_conditions)
+    bindings = tuple(copy.deepcopy(dict(row)) for row in scenario_bindings)
+    components = tuple(str(value) for value in expected_component_ids)
+
+    def evaluate(current_result: Mapping[str, Any]) -> Mapping[str, Any]:
+        return build_hazop_facility_campaign_result(
+            current_result,
+            annual_conditions=copy.deepcopy(conditions),
+            scenario_bindings=copy.deepcopy(bindings),
+            expected_component_ids=components,
+        )
+
+    return evaluate
 
 
 def _facility_id(table: HazopTable | Mapping[str, Any]) -> str:
@@ -303,4 +332,9 @@ def run_hazop_integrated_risk(
     }
 
 
-__all__ = ["SCHEMA", "IntegratedRiskError", "run_hazop_integrated_risk"]
+__all__ = [
+    "SCHEMA",
+    "IntegratedRiskError",
+    "build_hazop_facility_campaign_evaluator",
+    "run_hazop_integrated_risk",
+]
