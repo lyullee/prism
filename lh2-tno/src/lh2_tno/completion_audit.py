@@ -95,6 +95,7 @@ def build_ijhe_completion_audit(
     external_document_evidence: Mapping[str, Any] | None = None,
     external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_evidence_request: Mapping[str, Any] | None = None,
+    hazop_integrated_risk: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3147,6 +3148,99 @@ def build_ijhe_completion_audit(
             "never infers frequency or promotes facility QRA."
         )
         checks.append(forecast_check)
+    if hazop_integrated_risk is not None:
+        integrated = hazop_integrated_risk
+        policy = integrated.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        current = integrated.get("current")
+        current = current if isinstance(current, Mapping) else {}
+        forecast = integrated.get("forecast")
+        forecast = forecast if isinstance(forecast, Mapping) else {}
+        linkage = integrated.get("linkage")
+        linkage = linkage if isinstance(linkage, Mapping) else {}
+        current_component_ids = linkage.get("current_component_ids")
+        forecast_component_ids = linkage.get("forecast_component_ids")
+        scoped_keys = linkage.get("shared_component_scenario_keys")
+        scoped_keys_valid = (
+            isinstance(scoped_keys, list)
+            and all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("component_id"), str)
+                and bool(row.get("component_id"))
+                and isinstance(row.get("scenario_id"), str)
+                and bool(row.get("scenario_id"))
+                for row in scoped_keys
+            )
+        )
+        current_valid = (
+            current.get("schema_version") == "prism.hazop_facility_runtime.v1"
+            and current.get("status") in {
+                "FACILITY_HAZOP_RUNTIME_EVALUATED",
+                "FACILITY_HAZOP_RUNTIME_PARTIAL",
+            }
+            and isinstance(current.get("components"), Mapping)
+            and isinstance(current.get("policy"), Mapping)
+            and current["policy"].get("facility_annual_qra_promotion") is False
+            and current["policy"].get("frequency_inference_performed") is False
+        )
+        forecast_not_requested = forecast.get("status") == "FORECAST_NOT_REQUESTED"
+        forecast_valid = forecast_not_requested or (
+            forecast.get("schema_version") == "prism.hazop_forecast_risk_scan.v1"
+            and forecast.get("status") == "FORECAST_RISK_SCAN_COMPLETE"
+            and forecast.get("forecast_origin") == "model_prediction"
+            and isinstance(forecast.get("policy"), Mapping)
+            and forecast["policy"].get("facility_qra_promotion") is False
+            and forecast["policy"].get("frequency_inference_performed") is False
+        )
+        integrated_valid = (
+            integrated.get("schema_version") == "prism.hazop_integrated_risk.v1"
+            and integrated.get("status") in {
+                "INTEGRATED_DIAGNOSTIC_COMPLETE",
+                "INTEGRATED_DIAGNOSTIC_PARTIAL",
+            }
+            and isinstance(current_component_ids, list)
+            and bool(current_component_ids)
+            and isinstance(forecast_component_ids, list)
+            and current_valid
+            and forecast_valid
+            and linkage.get("mode_and_scenario_identity_preserved") is True
+            and scoped_keys_valid
+            and policy.get("operating_mode_taken_from_input") is True
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("sensor_frequency_learning_used") is False
+            and policy.get("provider_release_created_by_integration") is False
+            and policy.get("facility_qra_promotion") is False
+            and policy.get("diagnostic_only") is True
+        )
+        integrated_check = _check(
+            "diagnostic_hazop_integrated_risk",
+            integrated_valid,
+            {
+                "record": integrated.get("_record_path"),
+                "schema_version": integrated.get("schema_version"),
+                "status": integrated.get("status"),
+                "current_status": current.get("status"),
+                "forecast_status": forecast.get("status"),
+                "current_component_count": len(current_component_ids)
+                if isinstance(current_component_ids, list)
+                else None,
+                "forecast_component_count": len(forecast_component_ids)
+                if isinstance(forecast_component_ids, list)
+                else None,
+                "shared_component_scenario_key_count": len(scoped_keys)
+                if isinstance(scoped_keys, list)
+                else None,
+                "policy": dict(policy),
+            },
+            "integrated current/forecast HAZOP ledger is missing scoped identity, timing-path policy, or fail-closed promotion controls",
+        )
+        integrated_check["diagnostic_only"] = True
+        integrated_check["interpretation"] = (
+            "The integrated ledger proves that measured and predicted HAZOP paths can be joined by "
+            "equipment-scoped identity. It does not qualify provider releases, infer frequency, "
+            "validate physics, or promote facility IR/F-N."
+        )
+        checks.append(integrated_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

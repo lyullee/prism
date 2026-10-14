@@ -122,6 +122,70 @@ def test_completion_audit_blocks_forecast_scan_without_processing_timing():
     assert "processing" in check["blocking_reason"]
 
 
+def _integrated_hazop_ledger():
+    return {
+        "schema_version": "prism.hazop_integrated_risk.v1",
+        "status": "INTEGRATED_DIAGNOSTIC_PARTIAL",
+        "current": {
+            "schema_version": "prism.hazop_facility_runtime.v1",
+            "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+            "components": {"TK-01": {}},
+            "policy": {
+                "facility_annual_qra_promotion": False,
+                "frequency_inference_performed": False,
+            },
+        },
+        "forecast": {
+            "status": "FORECAST_NOT_REQUESTED",
+        },
+        "linkage": {
+            "current_component_ids": ["TK-01"],
+            "forecast_component_ids": [],
+            "shared_component_scenario_keys": [],
+            "mode_and_scenario_identity_preserved": True,
+        },
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created_by_integration": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+    }
+
+
+def test_completion_audit_records_integrated_current_forecast_hazop_ledger():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=_integrated_hazop_ledger(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_integrated_hazop_qra_promotion_claim():
+    ledger = _integrated_hazop_ledger()
+    ledger["policy"]["facility_qra_promotion"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=ledger,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def test_completion_audit_blocks_forecast_mode_trace_mismatch():
     forecast = {
         "schema_version": "prism.hazop_forecast_risk_scan.v1",

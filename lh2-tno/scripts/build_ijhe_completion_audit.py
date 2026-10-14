@@ -144,6 +144,11 @@ def main() -> int:
         help="optional predicted-state HAZOP trigger scan",
     )
     parser.add_argument(
+        "--hazop-integrated-risk",
+        type=Path,
+        help="optional current/forecast integrated HAZOP risk ledger",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -421,6 +426,13 @@ def main() -> int:
         )
         if hazop_forecast_scan is not None:
             hazop_forecast_scan["_record_path"] = str(args.hazop_forecast_scan)
+        hazop_integrated_risk = (
+            _object(args.hazop_integrated_risk)
+            if args.hazop_integrated_risk
+            else None
+        )
+        if hazop_integrated_risk is not None:
+            hazop_integrated_risk["_record_path"] = str(args.hazop_integrated_risk)
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -491,6 +503,7 @@ def main() -> int:
             observed_state_model_binding_audit,
             external_equipment_model_contract_audit,
             hazop_forecast_scan=hazop_forecast_scan,
+            hazop_integrated_risk=hazop_integrated_risk,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,
             external_release_artifact_intake=external_release_artifact_intake,
