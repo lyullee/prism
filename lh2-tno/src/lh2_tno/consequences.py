@@ -116,6 +116,10 @@ class ConsequenceRequest(Contract):
     # physics, but prevents the downstream chain from losing the mode that
     # selected the accident family.
     operating_mode: Name | None = None
+    # Exact HAZOP row/scenario identity selected from the supplied operating
+    # mode and state frame.  It is metadata only and never assigns frequency
+    # or changes the provider release physics.
+    hazop_scenario_id: Name | None = None
     # Equipment state is an input-side handoff from the digital twin. It is
     # deliberately separate from the resolved accident packet: a release
     # history must never be promoted to a normal operating state.

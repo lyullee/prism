@@ -27,13 +27,24 @@ def main() -> int:
         type=Path,
         help="Optional frequency scenario ledger produced by the facility-chain runner",
     )
+    parser.add_argument(
+        "--hazop-mode-binding",
+        type=Path,
+        help="Optional HAZOP event/mode/scenario binding audit produced by the facility-chain runner",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     frequency_scenarios = (
         _object(args.frequency_scenarios) if args.frequency_scenarios else None
     )
+    hazop_mode_binding = (
+        _object(args.hazop_mode_binding) if args.hazop_mode_binding else None
+    )
     report = build_scope_closure_report(
-        _object(args.scope_matrix), _object(args.facility_assessment), frequency_scenarios
+        _object(args.scope_matrix),
+        _object(args.facility_assessment),
+        frequency_scenarios,
+        hazop_mode_binding,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

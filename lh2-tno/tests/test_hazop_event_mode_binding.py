@@ -1,6 +1,7 @@
 import pytest
 
 from lh2_tno.hazop_event_mode_binding import (
+    apply_hazop_event_mode_bindings,
     audit_hazop_event_mode_binding,
     mode_bindings_from_diagnostic,
 )
@@ -120,4 +121,51 @@ def test_diagnostic_ledger_refuses_ambiguous_multiple_rows():
     }
     with pytest.raises(ValueError, match="different lengths"):
         mode_bindings_from_diagnostic(diagnostic)
+
+
+def test_apply_hazop_event_mode_bindings_updates_route_and_request_without_inference():
+    campaign = {
+        "event_routes": [{
+            "event_id": "facility/pipe/G1",
+            "branches": [{
+                "id": "open",
+                "probability_given_event": 1.0,
+                "provenance": "synthetic",
+                "request": {"component_id": "pipe-01"},
+            }],
+        }]
+    }
+    updated = apply_hazop_event_mode_bindings(
+        campaign,
+        [{
+            "event_id": "facility/pipe/G1",
+            "component_id": "pipe-01",
+            "operating_mode": "supply",
+            "hazop_scenario_id": "pipe-01-supply-hole",
+        }],
+    )
+    route = updated["event_routes"][0]
+    request = route["branches"][0]["request"]
+    assert route["operating_mode"] == "supply"
+    assert route["hazop_scenario_id"] == "pipe-01-supply-hole"
+    assert request["operating_mode"] == "supply"
+    assert request["hazop_scenario_id"] == "pipe-01-supply-hole"
+
+
+def test_apply_hazop_event_mode_bindings_refuses_missing_event_when_required():
+    campaign = {
+        "event_routes": [
+            {"event_id": "facility/pipe/G1", "branches": []},
+            {"event_id": "facility/pipe/G2", "branches": []},
+        ]
+    }
+    with pytest.raises(ValueError, match="missing campaign event"):
+        apply_hazop_event_mode_bindings(
+            campaign,
+            [{
+                "event_id": "facility/pipe/G1",
+                "operating_mode": "supply",
+                "hazop_scenario_id": "s1",
+            }],
+        )
 

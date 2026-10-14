@@ -28,6 +28,10 @@ from lh2_tno.contracts import canonical_digest  # noqa: E402
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.facility_assessment import build_facility_assessment  # noqa: E402
 from lh2_tno.frequency import FrequencyEvent, generate_events  # noqa: E402
+from lh2_tno.hazop_event_mode_binding import (  # noqa: E402
+    apply_hazop_event_mode_bindings,
+    audit_hazop_event_mode_binding,
+)
 from lh2_tno.native_packet_campaign import (  # noqa: E402
     build_native_packet_campaign_execution_ledger,
 )
@@ -161,6 +165,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     manifest = EquipmentManifest.from_json(args.manifest)
     facility = manifest.to_facility()
     source_campaign = _object(args.campaign)
+    mode_binding = (
+        _object(args.hazop_mode_binding) if args.hazop_mode_binding is not None else None
+    )
+    if mode_binding is not None:
+        source_campaign = apply_hazop_event_mode_bindings(
+            source_campaign,
+            mode_binding,
+            require_all=True,
+        )
     packet_evidence = _object(args.catalog_dir / "native_scope_packet_evidence.json")
     isolation_audit = _object(args.catalog_dir / "isolation_branch_audit.json")
     state_snapshot_audit = _object(args.catalog_dir / "state_snapshot_binding_audit.json")
@@ -182,6 +195,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         result,
         manifest,
         required_families=MAJOR_ACCIDENT_FAMILIES,
+        provider_worklist=provider_worklist,
+    )
+    hazop_mode_audit = audit_hazop_event_mode_binding(
+        result,
         provider_worklist=provider_worklist,
     )
     scenarios = _frequency_scenarios(events)
@@ -222,6 +239,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         },
     )
     _write(output / "facility_assessment.json", assessment)
+    _write(output / "hazop_event_mode_binding.json", hazop_mode_audit)
     _write(output / "packet_rebind_provenance.json", provenance)
     _write(output / "native_packet_campaign_execution_ledger.json", execution_ledger)
     _write(
@@ -271,6 +289,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "frequency_inference_performed": False,
             "physical_validation_claim": False,
             "facility_qra_claim": False,
+            "hazop_event_mode_binding_status": hazop_mode_audit.get("status"),
+            "hazop_mode_bound_event_count": hazop_mode_audit.get("mode_bound_event_count"),
+            "hazop_mode_required_event_count": hazop_mode_audit.get("mode_required_event_count"),
+            "hazop_scenario_id_required_event_count": hazop_mode_audit.get(
+                "scenario_id_required_event_count"
+            ),
+            "hazop_mode_binding_source": (
+                str(args.hazop_mode_binding) if args.hazop_mode_binding is not None else None
+            ),
             "limitations": [
                 "catalog packets and facility geometry are synthetic diagnostic inputs",
                 "operator-limited or domain-incomplete release boundaries remain withheld from strict QRA",
@@ -302,6 +329,11 @@ def main() -> int:
     parser.add_argument("--campaign", type=Path, required=True)
     parser.add_argument("--catalog-dir", type=Path, required=True)
     parser.add_argument("--backend-config", type=Path, required=True)
+    parser.add_argument(
+        "--hazop-mode-binding",
+        type=Path,
+        help="Optional exact event-level operating-mode/scenario binding record",
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     try:

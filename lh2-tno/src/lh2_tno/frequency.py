@@ -52,10 +52,17 @@ class FrequencyEvent(Contract):
     release: ReleaseDefinition
     classification_basis: Name
     limitations: tuple[str, ...]
+    # Optional HAZOP context carried with a generated event.  These fields
+    # identify the reviewed operating-mode/scenario binding only; they do not
+    # alter the initiating frequency or any consequence physics.
+    operating_mode: Name | None = None
+    hazop_scenario_id: Name | None = None
     physical_validation_claim: Literal[False] = False
 
     @model_validator(mode='after')
     def arithmetic(self):
+        if (self.operating_mode is None) != (self.hazop_scenario_id is None):
+            raise ValueError('operating_mode and hazop_scenario_id must be supplied together')
         if not math.isclose(self.annual_frequency_per_year, self.base_rate*self.exposure_multiplier, rel_tol=1e-12, abs_tol=0):
             raise ValueError('initiating frequency does not match rate times exposure')
         if self.release.mode in ('hole', 'two_sided_rupture') and self.release.hole_diameter_m is None:

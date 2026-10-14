@@ -131,3 +131,23 @@ def test_scope_closure_report_prefers_explicit_frequency_scenario_record():
     assert report["evidence_gates"]["frequency_uncertainty"][
         "frequency_inference_performed"
     ] is False
+
+
+def test_scope_closure_report_records_complete_hazop_mode_binding():
+    scope, assessment = _inputs()
+    report = build_scope_closure_report(
+        scope,
+        assessment,
+        None,
+        {
+            "status": "HAZOP_EVENT_MODE_BINDING_COMPLETE",
+            "event_count": 2,
+            "mode_bound_event_count": 2,
+            "mode_required_event_count": 0,
+            "scenario_id_required_event_count": 0,
+            "mode_conflict_event_count": 0,
+            "errors": [],
+        },
+    )
+    assert report["evidence_gates"]["hazop_mode_binding"]["status"] == "REPORTED"
+    assert report["policy"]["hazop_mode_inference_performed"] is False

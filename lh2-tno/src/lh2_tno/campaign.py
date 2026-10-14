@@ -137,6 +137,12 @@ def _provider_packet_identity(request: ConsequenceRequest) -> dict | None:
             getattr(packet, "cumulative_mass_out_kg", None) for packet in packets
         ],
     }
+    operating_mode = getattr(request, "operating_mode", None)
+    hazop_scenario_id = getattr(request, "hazop_scenario_id", None)
+    if operating_mode is not None:
+        identity["operating_mode"] = operating_mode
+    if hazop_scenario_id is not None:
+        identity["hazop_scenario_id"] = hazop_scenario_id
     provider_mass_balances = [
         getattr(packet, "provider_mass_balance", None) for packet in packets
     ]
@@ -180,7 +186,18 @@ def _provider_packet_evidence_matches(
 
 class EventRoute(Contract):
     event_id: Name
+    # Optional explicit HAZOP identity.  When supplied, the route carries the
+    # operating mode and selected scenario through the consequence chain; no
+    # mode or scenario is inferred from equipment kind, pressure, or LOC.
+    operating_mode: Name | None = None
+    hazop_scenario_id: Name | None = None
     branches: tuple[ReleaseBranch, ...]
+
+    @model_validator(mode='after')
+    def hazop_identity(self):
+        if (self.operating_mode is None) != (self.hazop_scenario_id is None):
+            raise ValueError('operating_mode and hazop_scenario_id must be supplied together')
+        return self
 
     @model_validator(mode='after')
     def partition(self):
@@ -364,10 +381,14 @@ class RiskCampaign(Contract):
         return self
 
 
-def prepared_request(template, event, condition):
+def prepared_request(template, event, condition, *, operating_mode=None, hazop_scenario_id=None):
     """Synchronize source wind and dispersion without changing outlet geometry."""
     d = template.model_dump(mode='json')
     d['weather'] = condition.weather.model_dump(mode='json')
+    if operating_mode is not None:
+        d['operating_mode'] = operating_mode
+    if hazop_scenario_id is not None:
+        d['hazop_scenario_id'] = hazop_scenario_id
     if d['source_input'] is not None:
         d['source_input']['ambient'].update(wind_speed_m_s=condition.weather.wind_speed_m_s,
             wind_from_bearing_deg=condition.weather.wind_from_bearing_deg)
@@ -491,7 +512,14 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
             if b.request is None:
                 continue
             for c in campaign.annual_conditions:
-                prepared[(e.id, b.id, c.id)] = prepared_request(b.request, e, c)
+                route = routes[e.id]
+                prepared[(e.id, b.id, c.id)] = prepared_request(
+                    b.request,
+                    e,
+                    c,
+                    operating_mode=route.operating_mode,
+                    hazop_scenario_id=route.hazop_scenario_id,
+                )
     if len(prepared) > campaign.maximum_physics_cases:
         raise ValueError('campaign physics-case budget exceeded before execution')
     if len({q.radiative_fraction_range for q in prepared.values()}) > 1:
@@ -510,7 +538,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                     'annual_condition_id': c.id, 'initiating_frequency_per_year': e.annual_frequency_per_year,
                     'release_branch_probability': b.probability_given_event,
                     'annual_condition_probability': c.annual_probability,
-                    'scenario_families': list(event_scenario_families[e.id])}
+                    'scenario_families': list(event_scenario_families[e.id]),
+                    'operating_mode': routes[e.id].operating_mode,
+                    'hazop_scenario_id': routes[e.id].hazop_scenario_id}
                 if e.annual_frequency_per_year*b.probability_given_event*c.annual_probability == 0:
                     row.update(status='ZERO_WEIGHT', elapsed_ms=0.0)
                     cases.append(row)
@@ -598,6 +628,8 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
                         'initiating_frequency_per_year': e.annual_frequency_per_year,
                         'conditional_weight': weight,
                         'scenario_families': list(event_scenario_families[e.id]),
+                        'operating_mode': q.operating_mode,
+                        'hazop_scenario_id': q.hazop_scenario_id,
                         'provider_packet_identity': packet_identity,
                         'receptor_harm_low_high': {rid: [harms[rid][i][key] for i in range(2)] for rid in receptor_ids},
                         'expected_deaths_low_high': [sum(population[rid]*harms[rid][i][key] for rid in receptor_ids) for i in range(2)]})
@@ -676,6 +708,9 @@ def evaluate_campaign(pipeline, campaign: RiskCampaign) -> dict:
     event_rows = []
     for event in events.values():
         row = event.model_dump(mode='json')
+        route = routes[event.id]
+        row['operating_mode'] = route.operating_mode
+        row['hazop_scenario_id'] = route.hazop_scenario_id
         event_rows.append(row)
     release_termination_inventory_ledger = build_release_termination_inventory_ledger(
         cases, withheld_cases=missing

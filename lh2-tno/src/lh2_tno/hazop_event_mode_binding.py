@@ -8,6 +8,7 @@ profile, or frequency bin.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+import copy
 from typing import Any
 
 
@@ -69,6 +70,71 @@ def _normalise_bindings(value: Mapping[str, Any] | Sequence[Mapping[str, Any]] |
             "hazop_scenario_id": scenario_id.strip(),
         }
     return result
+
+
+def apply_hazop_event_mode_bindings(
+    campaign: Mapping[str, Any],
+    mode_bindings: Mapping[str, Any] | Sequence[Mapping[str, Any]],
+    *,
+    require_all: bool = True,
+) -> dict[str, Any]:
+    """Attach an explicit HAZOP mode/scenario pair to campaign routes.
+
+    This is a metadata handoff only.  The caller must provide an exact
+    event-level binding; the helper never derives a mode from equipment or
+    release values.  Requests already carrying a mode/scenario pair must
+    agree with the supplied binding.
+    """
+    if not isinstance(campaign, Mapping):
+        raise TypeError("campaign must be an object")
+    bindings = _normalise_bindings(mode_bindings)
+    output = copy.deepcopy(dict(campaign))
+    routes = output.get("event_routes")
+    if not isinstance(routes, list):
+        raise ValueError("campaign event_routes must be an array")
+    route_ids = {
+        route.get("event_id")
+        for route in routes
+        if isinstance(route, Mapping) and isinstance(route.get("event_id"), str)
+    }
+    unknown = sorted(set(bindings) - route_ids)
+    if unknown:
+        raise ValueError("mode binding references unknown campaign event(s): " + ", ".join(unknown))
+    missing = sorted(route_ids - set(bindings))
+    if require_all and missing:
+        raise ValueError("mode binding is missing campaign event(s): " + ", ".join(missing))
+    for route in routes:
+        if not isinstance(route, dict):
+            raise ValueError("campaign event route must be an object")
+        event_id = route.get("event_id")
+        binding = bindings.get(event_id)
+        if binding is None:
+            continue
+        component_id = binding.get("component_id")
+        if component_id is not None:
+            branches = route.get("branches", [])
+            request_components = {
+                branch.get("request", {}).get("component_id")
+                for branch in branches
+                if isinstance(branch, Mapping) and isinstance(branch.get("request"), Mapping)
+            }
+            if request_components and request_components != {component_id}:
+                raise ValueError(f"mode binding component_id disagrees with route {event_id}")
+        for key in ("operating_mode", "hazop_scenario_id"):
+            existing = route.get(key)
+            if existing is not None and existing != binding[key]:
+                raise ValueError(f"route {event_id} has conflicting {key}")
+            route[key] = binding[key]
+        for branch in route.get("branches", []):
+            if not isinstance(branch, dict) or not isinstance(branch.get("request"), dict):
+                continue
+            request = branch["request"]
+            for key in ("operating_mode", "hazop_scenario_id"):
+                existing = request.get(key)
+                if existing is not None and existing != binding[key]:
+                    raise ValueError(f"request {event_id} has conflicting {key}")
+                request[key] = binding[key]
+    return output
 
 
 def mode_bindings_from_diagnostic(diagnostic_result: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -307,5 +373,10 @@ def audit_hazop_event_mode_binding(
     }
 
 
-__all__ = ["SCHEMA", "audit_hazop_event_mode_binding", "mode_bindings_from_diagnostic"]
+__all__ = [
+    "SCHEMA",
+    "apply_hazop_event_mode_bindings",
+    "audit_hazop_event_mode_binding",
+    "mode_bindings_from_diagnostic",
+]
 
