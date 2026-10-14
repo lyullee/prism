@@ -26,8 +26,27 @@ src/lh2_tno/equipment_accident_export.py
 - provider 원본 digest, 상태 snapshot digest, 모델 package/class/revision
 - 종료를 provider가 소유한다는 `provider_termination_required=true`
 - 자료 자격: `qualified_actual`, `synthetic_diagnostic`, `screening_only`
+- 선택적 provider 차단 제어: `isolation_time_s`와 `post_isolation_observation_s`
 
 PRISM은 누락된 값을 압력·센서·설비 종류에서 추정하지 않는다. `horizon_s`는 관찰 요청값일 뿐이며 provider가 반환한 실제 `duration_s`를 대신하지 않는다.
+
+## 명시적 차단 시계 전달 (2026-11-07)
+
+사고 요청에 `isolation_time_s`가 들어오면 값은 방출 시작부터 경과한 초 단위의 **provider 입력**으로 그대로 전달된다. 선택한 `post_isolation_observation_s`도 함께 전달한다. 두 값은 모두 명시적으로 입력해야 하며, 차단시계를 관찰시계에서 자동으로 만들거나 누락된 값을 기본값으로 채우지 않는다. 차단시계가 `horizon_s`를 넘거나 관찰시간만 단독으로 들어오면 요청을 거절한다.
+
+provider가 차단을 실제로 계산했다는 증거를 보이려면 응답의 `data.provider_meta`에 다음을 echo해야 한다.
+
+```json
+{
+  "provider_meta": {
+    "isolation_time_s": 0.05,
+    "post_isolation_observation_s": 0.01,
+    "isolation_success": true
+  }
+}
+```
+
+요청에 차단시계가 있는데 provider가 시각·관찰시간·`isolation_success`를 반환하지 않거나 값이 다르면 strict export가 차단된다. `isolation_success=false`는 오류로 바꾸지 않고 provider의 실패 결과로 보존하므로, 이후 release/isolation partition에서 실패 branch를 잃지 않는다. 이 계약은 방출 종료를 PRISM이 추정하는 기능이 아니라, 외부 설비 모델의 차단·재고·종료 장부를 피해 계산으로 넘기는 연결 경계다.
 
 ## 정상 상태 snapshot 전달 경계 (2026-10-17)
 
@@ -79,6 +98,7 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 7. 위 자격 기록까지 있고 `qualified_actual`인 경우에만 함수 결과가 `QUALIFIED_PROVIDER_PACKET`가 된다. 이것은 물리 검증·빈도 결합·시설 QRA 완료를 뜻하지 않으며, 이후 coverage, frequency, validation, facility IR/F-N gate를 모두 통과해야 한다.
 8. `state_snapshot`이 있으면 schema·설비 ID·canonical digest를 확인하고, 사고 전용 키가 포함된 snapshot은 거절한다. PRISM은 snapshot에서 누출구경·빈도·지속시간·종료를 역산하지 않는다.
 9. `state_snapshot`이 있는 요청의 provider 응답은 `provider_state_snapshot_digest`를 echo해야 한다. digest가 없거나 요청과 다르면 provider가 동일 상태를 사용했다는 증거가 없으므로 strict packet을 거절한다.
+10. 요청에 `isolation_time_s`가 있으면 provider 응답의 `provider_meta.isolation_time_s`, `post_isolation_observation_s`, `isolation_success`를 확인한다. 차단시계가 선언되었다는 이유만으로 방출이 성공적으로 닫혔다고 간주하지 않는다.
 
 ## 현재 외부 `lh2dt` 상태
 
@@ -144,6 +164,8 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 이 packet은 `synthetic_diagnostic_horizon`으로 끝나며 pipe 재고를 전량 소진했다고 주장하지 않는다. `validate_lh2dt_prism_packet_chain.py`는 declared sensitivity pool radius `0.0001 m`를 사용해 같은 packet을 DynamicLH2PoolX, SLABx-LH2/SLABx, cloud, 점화, 화재·폭발, TNO 피해까지 실행했다. 작은 packet에서 이 footprint는 wet-cell 수치 조건을 위한 명시값이며 실제 배수면적·누출면적 추정이 아니다. 결과는 여전히 `provider_packet_promoted=false`, 빈도·시설 IR/F-N·독립 물리검증 보류다.
 
+2026-11-07에는 동일 native `DynamicHEMPipe.export_accident_history` 경로에 `isolation_time_s=0.05 s`, `post_isolation_observation_s=0.01 s`를 명시해 재실행했다. provider가 두 값을 echo하고 `isolation_success=true`를 반환했으며, 종료근거는 `reviewed_isolation_success`, 실제 방출시간은 `0.060000000000000005 s`, 질량잔차는 `-4.44×10⁻¹⁶ kg`이었다. 결과는 [`native_isolation_contract_verification.json`](../results/20261107/native_isolation_contract_verification.json)에 보관한다. 이 기록은 차단시계가 외부 모델→PRISM strict release까지 전달됐다는 증거이며, 합성 형상·초기 2상·대기경계와 airborne liquid 제한 때문에 provider 자격·독립 물리검증·시설 QRA는 여전히 열리지 않는다.
+
 ## PRISM 측 VentStack 진단 adapter (2026-10-12)
 
 `scripts/export_lh2dt_vent_stack_prism_packet.py`는 외부 `VentStack.evaluate()`의 정상 two-port 함수를 사고 packet으로 재사용하지 않고, 명시적인 사고 포트·개구·0.5 s diagnostic horizon에서 별도 provider adapter로 호출한다. 저 Mach atmospheric gas plane을 만들기 위해 기본 upstream은 `102000 Pa`, `40 K`, stack bore는 `0.01 m`이며 provider의 유량·출구 상태를 10개 왼쪽 유지 구간과 `ResolvedGasRelease` 장부로 보존한다. 기본 packet 질량 잔차는 `0 kg`, 정적 엔탈피 잔차는 `0 J`다.
@@ -194,7 +216,7 @@ provider는 실제 차단 명령, 검출 지연, 재고/에너지 장부, 종료
   --output results/20261011/equipment_accident_export_interface_audit.json
 ```
 
-현재 portable test suite는 새 계약·물성 기준 테스트를 포함해 371개가 통과한다. 실제 `lh2dt` 사고 export가 추가되기 전까지 IJHE 완료 감사의 설비 모델 결합, 실제 provider packet, 사고 범위, 시설 IR/F-N gate는 계속 차단된다.
+현재 portable test suite는 차단시계 전달·echo 검사를 포함해 **1003 passed**이다. native 사고 export와 차단시계가 존재해도 합성 입력·독립 물리검증·문헌 빈도 binding·전체 사고범위·시설 IR/F-N gate는 별도로 닫아야 한다.
 ## 2026-10-24 native export 재감사
 
 초기 문서의 “전용 메서드가 없다”는 문장은 2026-10-11 시점의 기록이다. 최신 외부 소스 감사에서는 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기 7개가 `export_accident_history(request)`를 구현한 것을 확인했다. [`native_equipment_model_binding_audit_v1.json`](../results/20261024/native_equipment_model_binding_audit_v1.json)은 native 사고 인터페이스 7개와 진단 adapter 7개를 별도로 세며, qualified provider packet은 0개로 유지한다. 따라서 native export 존재는 계약 연결을 완료한 것이고, 현장 provider 자격·독립 물리검증·시설 IR/F-N 완료를 의미하지 않는다.

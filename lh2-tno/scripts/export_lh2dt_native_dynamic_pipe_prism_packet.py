@@ -135,7 +135,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             ),
         },
     })
-    request = AccidentReleaseExportRequest.from_mapping({
+    request_payload: dict[str, Any] = {
         "schema_version": "prism.equipment_accident_export_request.v1",
         "event_kind": "accidental_leak",
         "component_id": args.component_id,
@@ -159,7 +159,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "evidence_status": "synthetic_diagnostic",
         "scenario_provenance": "native external DynamicHEMPipe accident export; synthetic geometry and state",
         "provider_termination_required": True,
-    })
+    }
+    if args.isolation_time_s is not None:
+        request_payload["isolation_time_s"] = args.isolation_time_s
+        request_payload["post_isolation_observation_s"] = args.post_isolation_observation_s
+    request = AccidentReleaseExportRequest.from_mapping(request_payload)
     native_request: dict[str, Any] = {
         "event_id": args.event_id,
         "component_id": args.component_id,
@@ -181,9 +185,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     }
     if args.initial_quality is not None:
         native_request["initial_quality"] = args.initial_quality
-    if args.isolation_time_s is not None:
-        native_request["isolation_time_s"] = args.isolation_time_s
-        native_request["post_isolation_observation_s"] = args.post_isolation_observation_s
+    if request.isolation_time_s is not None:
+        # Use the validated request values so the provider receives exactly
+        # the controls that PRISM will later require it to echo.
+        native_request["isolation_time_s"] = request.isolation_time_s
+        native_request["post_isolation_observation_s"] = request.post_isolation_observation_s
     native_response = pipe.export_accident_history(native_request)
     result = (
         export_equipment_gas_accident_history(

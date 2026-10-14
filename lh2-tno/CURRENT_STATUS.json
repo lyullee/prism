@@ -156,7 +156,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "998 passed",
+  "latest_local_full_test_run": "1003 passed",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -2941,9 +2941,9 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 998,
-  "full_portable_test_status_latest": "998 passed",
-  "full_portable_test_record_latest": "pytest -q",
+  "full_portable_test_count_latest": 1003,
+  "full_portable_test_status_latest": "1003 passed",
+  "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
   "equipment_model_binding_native_interface_record": "results/20261024/native_equipment_model_binding_audit_v1.json",
@@ -3653,7 +3653,7 @@
   "facility_ledger_frequency_port_promotion_gate_policy": "ALIGNED means declared rows agree; qualified facility QRA also requires every event to have an explicit reviewed accident port. Provider outlets never create a reviewed frequency port.",
   "ijhe_completion_audit_requires_explicit_frequency_ports": true,
   "ijhe_completion_audit_requires_explicit_frequency_ports_policy": "diagnostic_facility_frequency_port_binding is BLOCKED when port_unbound_event_count is nonzero, even when declared rows have no mismatch; frequency inference remains false.",
-  "latest_local_targeted_test_run": "48 IJHE objective/readiness tests passed; provider evidence catalog tests passed",
+  "latest_local_targeted_test_run": "23 equipment accident export tests passed; 48 IJHE objective/readiness tests passed; provider evidence catalog tests passed",
   "latest_remote_verified_commit": "9158704",
   "latest_remote_ci_run": "run 38051025932 completed successfully",
   "facility_assessment_qra_port_gate_exposed": true,
@@ -4063,5 +4063,8 @@
   "legacy_tno_frequency_bridge_consequence_ir_fn_owner": "prism_campaign_evaluator",
   "legacy_tno_frequency_bridge_scope_gap_fail_closed": true,
   "legacy_tno_frequency_bridge_campaign_test_status": "1 external catalogue campaign passed through common bind/consequence/IR-FN evaluator; selected-component gaps remain incomplete",
-  "legacy_tno_frequency_bridge_campaign_record": "results/20261027/legacy_frequency_bridge/campaign_integration_verification.json"
+  "legacy_tno_frequency_bridge_campaign_record": "results/20261027/legacy_frequency_bridge/campaign_integration_verification.json",
+  "native_isolation_contract_verification_record": "results/20261107/native_isolation_contract_verification.json",
+  "native_isolation_contract_verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC; explicit 0.05 s isolation + 0.01 s observation; reviewed_isolation_success; provider promotion and facility QRA withheld",
+  "native_isolation_contract_verification_sha256": "77A077D1E312083E345E0E9C2F1874CB94F7B37AE69286256087D7F2589C13D0"
 }

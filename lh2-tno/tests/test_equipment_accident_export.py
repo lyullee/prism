@@ -100,6 +100,12 @@ def _response(request):
         }
     if request.get("state_snapshot") is not None:
         response["provider_state_snapshot_digest"] = request["state_snapshot_digest"]
+    if request.get("isolation_time_s") is not None:
+        response["data"]["provider_meta"] = {
+            "isolation_time_s": request["isolation_time_s"],
+            "post_isolation_observation_s": request.get("post_isolation_observation_s"),
+            "isolation_success": True,
+        }
     return response
 
 
@@ -178,6 +184,59 @@ def test_request_requires_provider_owned_termination():
     with pytest.raises(EquipmentAccidentExportError, match="provider_termination_required"):
         AccidentReleaseExportRequest.from_mapping(
             _request(provider_termination_required=False)
+        )
+
+
+def test_explicit_isolation_controls_are_forwarded_and_echo_checked():
+    provider = _Provider()
+    result = export_equipment_gas_accident_history(
+        provider,
+        _request(isolation_time_s=0.1, post_isolation_observation_s=0.02),
+    )
+    assert provider.requests[0]["isolation_time_s"] == pytest.approx(0.1)
+    assert provider.requests[0]["post_isolation_observation_s"] == pytest.approx(0.02)
+    assert result.request.isolation_time_s == pytest.approx(0.1)
+
+
+def test_isolation_observation_requires_an_isolation_clock():
+    with pytest.raises(EquipmentAccidentExportError, match="requires an explicit isolation_time_s"):
+        AccidentReleaseExportRequest.from_mapping(
+            _request(post_isolation_observation_s=0.02)
+        )
+
+
+def test_isolation_clock_cannot_exceed_requested_horizon():
+    with pytest.raises(EquipmentAccidentExportError, match="must not exceed horizon_s"):
+        AccidentReleaseExportRequest.from_mapping(
+            _request(isolation_time_s=0.3)
+        )
+
+
+def test_declared_isolation_cannot_be_silently_dropped_by_provider():
+    class DroppingProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response({**request, "isolation_time_s": None})
+            response["data"].pop("provider_meta", None)
+            return response
+
+    with pytest.raises(EquipmentAccidentExportError, match="must echo declared isolation_time_s"):
+        export_equipment_gas_accident_history(
+            DroppingProvider(),
+            _request(isolation_time_s=0.1),
+        )
+
+
+def test_provider_isolation_echo_must_match_request():
+    class MismatchedProvider(_Provider):
+        def export_accident_history(self, request):
+            response = _response(request)
+            response["data"]["provider_meta"]["isolation_time_s"] = 0.09
+            return response
+
+    with pytest.raises(EquipmentAccidentExportError, match="isolation_time_s disagrees"):
+        export_equipment_gas_accident_history(
+            MismatchedProvider(),
+            _request(isolation_time_s=0.1),
         )
 
 

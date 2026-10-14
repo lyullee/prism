@@ -1,0 +1,34 @@
+{
+  "schema_version": "prism.native_isolation_contract_verification.v1",
+  "status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+  "input": {
+    "horizon_s": 0.1,
+    "time_step_s": 0.01,
+    "isolation_time_s": 0.05,
+    "post_isolation_observation_s": 0.01,
+    "provider": "lh2dt.DynamicHEMPipe.export_accident_history"
+  },
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_result_digest": "80fce508813c65813fe0e77722e67035f323b3be880bb56d539ff30e159ec231",
+  "release": {
+    "termination_basis": "reviewed_isolation_success",
+    "duration_s": 0.060000000000000005,
+    "isolation_time_s": 0.05,
+    "post_isolation_observation_s": 0.01,
+    "isolation_success": true,
+    "available_mass_kg": 2.5156266507964498,
+    "cumulative_mass_out_kg": 0.006907047982228205,
+    "mass_residual_kg": -4.440892098500626E-16
+  },
+  "promotion_gates": {
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false
+  },
+  "limitations": [
+    "synthetic pipe geometry, initial two-phase state and atmospheric boundary",
+    "native provider history remains diagnostic until independent qualification is supplied",
+    "airborne liquid remains zero under the native provider contract"
+  ]
+}

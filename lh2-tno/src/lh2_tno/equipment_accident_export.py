@@ -70,6 +70,59 @@ def _positive(value: Any, field: str) -> float:
     return number
 
 
+def _optional_nonnegative(value: Any, field: str) -> float | None:
+    """Validate an explicitly supplied elapsed control without inventing one."""
+    if value is None:
+        return None
+    number = _finite(value, field)
+    if number < 0.0:
+        raise EquipmentAccidentExportError(f"{field} must be non-negative")
+    return number
+
+
+def _validate_isolation_controls(
+    *,
+    isolation_time_s: Any,
+    post_isolation_observation_s: Any,
+    horizon_s: Any,
+) -> tuple[float | None, float | None]:
+    """Validate provider-owned isolation controls carried by an export request.
+
+    The values are elapsed seconds from the provider release start.  They are
+    optional because many legacy providers do not expose an isolation model;
+    when present, the provider must echo both values in its result metadata.
+    No default isolation time is inferred from the horizon.
+    """
+    isolation = _optional_nonnegative(isolation_time_s, "isolation_time_s")
+    observation = _optional_nonnegative(
+        post_isolation_observation_s, "post_isolation_observation_s"
+    )
+    horizon = _positive(horizon_s, "horizon_s")
+    if isolation is None:
+        if observation not in (None, 0.0):
+            raise EquipmentAccidentExportError(
+                "post_isolation_observation_s requires an explicit isolation_time_s"
+            )
+    elif isolation > horizon:
+        raise EquipmentAccidentExportError(
+            "isolation_time_s must not exceed horizon_s"
+        )
+    return isolation, observation
+
+
+def _isolation_control_payload(
+    isolation_time_s: float | None,
+    post_isolation_observation_s: float | None,
+) -> dict[str, float]:
+    """Serialize only controls explicitly supplied by the caller."""
+    if isolation_time_s is None:
+        return {}
+    payload = {"isolation_time_s": isolation_time_s}
+    if post_isolation_observation_s is not None:
+        payload["post_isolation_observation_s"] = post_isolation_observation_s
+    return payload
+
+
 def _digest(value: Any, field: str) -> str:
     text = _text(value, field)
     if len(text) != 64:
@@ -168,6 +221,78 @@ def _require_provider_qualification_if_claimed(
         )
 
 
+def _require_provider_isolation_echo(
+    response: Mapping[str, Any],
+    request: Any,
+) -> None:
+    """Reject a provider result that silently drops declared isolation controls."""
+    requested_isolation = getattr(request, "isolation_time_s", None)
+    if requested_isolation is None:
+        return
+    data = response.get("data")
+    if not isinstance(data, Mapping):
+        raise EquipmentAccidentExportError(
+            "declared isolation controls require provider data metadata"
+        )
+    meta = data.get("provider_meta")
+    candidates = [
+        meta.get("isolation_time_s") if isinstance(meta, Mapping) else None,
+        data.get("isolation_time_s"),
+        response.get("isolation_time_s"),
+    ]
+    echoed_isolation = next((value for value in candidates if value is not None), None)
+    if echoed_isolation is None:
+        raise EquipmentAccidentExportError(
+            "provider result must echo declared isolation_time_s"
+        )
+    if not isinstance(meta, Mapping) or not isinstance(meta.get("isolation_success"), bool):
+        raise EquipmentAccidentExportError(
+            "provider result must declare boolean isolation_success"
+        )
+    try:
+        echoed_isolation_number = float(echoed_isolation)
+    except (TypeError, ValueError) as error:
+        raise EquipmentAccidentExportError(
+            "provider result isolation_time_s must be numeric"
+        ) from error
+    if not math.isclose(
+        echoed_isolation_number, float(requested_isolation), rel_tol=0.0, abs_tol=1.0e-9
+    ):
+        raise EquipmentAccidentExportError(
+            "provider result isolation_time_s disagrees with request"
+        )
+    requested_observation = getattr(request, "post_isolation_observation_s", None)
+    if requested_observation is None:
+        return
+    observation_candidates = [
+        meta.get("post_isolation_observation_s") if isinstance(meta, Mapping) else None,
+        data.get("post_isolation_observation_s"),
+        response.get("post_isolation_observation_s"),
+    ]
+    echoed_observation = next(
+        (value for value in observation_candidates if value is not None), None
+    )
+    if echoed_observation is None:
+        raise EquipmentAccidentExportError(
+            "provider result must echo declared post_isolation_observation_s"
+        )
+    try:
+        echoed_observation_number = float(echoed_observation)
+    except (TypeError, ValueError) as error:
+        raise EquipmentAccidentExportError(
+            "provider result post_isolation_observation_s must be numeric"
+        ) from error
+    if not math.isclose(
+        echoed_observation_number,
+        float(requested_observation),
+        rel_tol=0.0,
+        abs_tol=1.0e-9,
+    ):
+        raise EquipmentAccidentExportError(
+            "provider result post_isolation_observation_s disagrees with request"
+        )
+
+
 def _reject_synthetic_qualified_request(input_origin: str, evidence_status: str) -> None:
     """Keep synthetic scenarios outside the qualified-provider path.
 
@@ -210,6 +335,8 @@ class AccidentReleaseExportRequest:
     scenario_provenance: str
     start_time_s: float = 0.0
     provider_termination_required: bool = True
+    isolation_time_s: float | None = None
+    post_isolation_observation_s: float | None = None
     state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
 
     def __post_init__(self) -> None:
@@ -233,6 +360,13 @@ class AccidentReleaseExportRequest:
         _vector(self.direction_enu, "direction_enu", nonzero=True)
         _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
         _positive(self.ambient_temperature_k, "ambient_temperature_k")
+        isolation, observation = _validate_isolation_controls(
+            isolation_time_s=self.isolation_time_s,
+            post_isolation_observation_s=self.post_isolation_observation_s,
+            horizon_s=self.horizon_s,
+        )
+        object.__setattr__(self, "isolation_time_s", isolation)
+        object.__setattr__(self, "post_isolation_observation_s", observation)
         if self.evidence_status not in _EVIDENCE_STATUSES:
             raise EquipmentAccidentExportError(
                 f"evidence_status must be one of {sorted(_EVIDENCE_STATUSES)}"
@@ -300,6 +434,9 @@ class AccidentReleaseExportRequest:
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
             "provider_termination_required": self.provider_termination_required,
+            **_isolation_control_payload(
+                self.isolation_time_s, self.post_isolation_observation_s
+            ),
             **_state_snapshot_payload(self.state_snapshot),
         }
         return payload
@@ -332,6 +469,8 @@ class EmergencyReliefExportRequest:
     scenario_provenance: str
     start_time_s: float = 0.0
     provider_termination_required: bool = True
+    isolation_time_s: float | None = None
+    post_isolation_observation_s: float | None = None
     state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
 
     def __post_init__(self) -> None:
@@ -346,6 +485,13 @@ class EmergencyReliefExportRequest:
         _positive(self.horizon_s, "horizon_s")
         _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
         _positive(self.ambient_temperature_k, "ambient_temperature_k")
+        isolation, observation = _validate_isolation_controls(
+            isolation_time_s=self.isolation_time_s,
+            post_isolation_observation_s=self.post_isolation_observation_s,
+            horizon_s=self.horizon_s,
+        )
+        object.__setattr__(self, "isolation_time_s", isolation)
+        object.__setattr__(self, "post_isolation_observation_s", observation)
         if self.start_time_s < 0.0 or self.horizon_s <= self.start_time_s:
             raise EquipmentAccidentExportError("emergency-relief request has invalid start/horizon clock")
         _vector(self.position_enu_m, "position_enu_m")
@@ -437,6 +583,9 @@ class EmergencyReliefExportRequest:
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
             "provider_termination_required": self.provider_termination_required,
+            **_isolation_control_payload(
+                self.isolation_time_s, self.post_isolation_observation_s
+            ),
             **_state_snapshot_payload(self.state_snapshot),
         }
 
@@ -470,6 +619,8 @@ class InventoryReleaseExportRequest:
     scenario_provenance: str
     start_time_s: float = 0.0
     provider_termination_required: bool = True
+    isolation_time_s: float | None = None
+    post_isolation_observation_s: float | None = None
     state_snapshot: EquipmentStateSnapshot | Mapping[str, Any] | None = None
 
     def __post_init__(self) -> None:
@@ -484,6 +635,13 @@ class InventoryReleaseExportRequest:
         _positive(self.horizon_s, "horizon_s")
         _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
         _positive(self.ambient_temperature_k, "ambient_temperature_k")
+        isolation, observation = _validate_isolation_controls(
+            isolation_time_s=self.isolation_time_s,
+            post_isolation_observation_s=self.post_isolation_observation_s,
+            horizon_s=self.horizon_s,
+        )
+        object.__setattr__(self, "isolation_time_s", isolation)
+        object.__setattr__(self, "post_isolation_observation_s", observation)
         if self.start_time_s < 0.0 or self.horizon_s <= self.start_time_s:
             raise EquipmentAccidentExportError("inventory release request has invalid start/horizon clock")
         _vector(self.position_enu_m, "position_enu_m")
@@ -566,6 +724,9 @@ class InventoryReleaseExportRequest:
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
             "provider_termination_required": self.provider_termination_required,
+            **_isolation_control_payload(
+                self.isolation_time_s, self.post_isolation_observation_s
+            ),
             **_state_snapshot_payload(self.state_snapshot),
         }
 
@@ -705,6 +866,7 @@ def _call_provider(
             raise EquipmentAccidentExportError(
                 "provider state snapshot digest must echo the request snapshot digest"
             )
+    _require_provider_isolation_echo(response, request)
     _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 
@@ -760,6 +922,7 @@ def _call_emergency_relief_provider(
             raise EquipmentAccidentExportError(
                 "provider state snapshot digest must echo the request snapshot digest"
             )
+    _require_provider_isolation_echo(response, request)
     _require_provider_qualification_if_claimed(response, request)
     return response, type(provider).__module__ + "." + type(provider).__qualname__
 
