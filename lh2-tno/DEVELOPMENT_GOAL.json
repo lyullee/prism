@@ -3827,5 +3827,23 @@
     "diagnostic_hazop_selection_event_binding": "PASS",
     "blocking_reason_count": 5,
     "facility_qra_promotion": false
+  },
+  "latest_full_scope_hazop_port_bound_chain": {
+    "campaign": "results/20261114/generic_native_packet_rebound_campaign_port_bound.json",
+    "port_crosswalk_audit": "results/20261114/generic_native_packet_rebound_campaign_port_bound_audit.json",
+    "facility_chain": "results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound",
+    "scope_closure_report": "results/20261114/scope_closure_report_fullscope_hazop_port_bound.json",
+    "completion_audit": "results/20261114/ijhe_completion_audit_fullscope_hazop_port_bound.json",
+    "frequency_event_count": 24,
+    "campaign_case_count": 24,
+    "risk_atom_count": 96,
+    "frequency_port_scoped_event_count": 24,
+    "frequency_port_unbound_event_count": 0,
+    "case_port_binding_mismatch_count": 0,
+    "risk_atom_port_binding_mismatch_count": 0,
+    "status": "PARTIAL_FACILITY_SCOPE",
+    "completion_audit_status": "INCOMPLETE_EVIDENCE",
+    "completion_audit_blocking_reason_count": 5,
+    "facility_qra_promotion": false
   }
 }

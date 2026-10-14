@@ -66,6 +66,8 @@ python scripts/build_scope_closure_report.py `
 
 따라서 “어떤 HAZOP 사고군이 어떤 빈도 event bin을 대상으로 하는가”라는 정성적 연결은 24개 event 전체에 대해 닫혔다. 이것은 24개 방출을 모두 자격 있는 provider로 계산했다는 뜻이 아니다.
 
+추가로 기존 검토 crosswalk를 현재 campaign에 적용해 사고 포트 결합도 닫았다. `results/20261114/generic_native_packet_rebound_campaign_port_bound_audit.json`은 24개 event 모두에 명시적 사고 포트가 있고 provider 요청 포트 불일치가 0건임을 기록한다. 이 campaign을 다시 실행한 `native_isolation_catalog_facility_chain_fullscope_hazop_port_bound`에서도 24개 case·96개 risk atom에 포트가 보존되었고, 시설 평가의 `frequency_port_binding`은 `ALIGNED`(24 scoped, 0 unbound, case/risk-atom mismatch 0)이다. 이 조치는 빈도→사고 포트 identity를 닫은 것이며, 합성 provider의 qualified 자격이나 strict 방출 경계, 시설 전체 QRA를 승격하지 않는다.
+
 ## 남아 있는 제한
 
 재실행된 시설 chain은 `PARTIAL_FACILITY_SCOPE`이다. 24개 case와 96개 risk atom이 생성되었지만 20개 case는 `EXECUTED_OPERATOR_LIMITED` 또는 검토되지 않은 종료·차단·재고 경계 때문에 strict 방출 원장에서 보류된다. provider packet 자격, 독립적인 전체 near-field 물리검증, 실제 설비 geometry·차단 신뢰도, 시설 전체 연간 IR/F-N 승격은 여전히 닫혀 있다. 이 결과는 HAZOP 선택과 문헌 event identity가 완성되었음을 보여주는 진단 장부이며, 시설 QRA 완료 선언이 아니다.
@@ -78,6 +80,8 @@ python scripts/build_scope_closure_report.py `
 - `results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop/hazop_selection_event_binding.json`
 - `results/20261114/scope_closure_report_fullscope_hazop.json`
 - `results/20261114/ijhe_completion_audit_fullscope_hazop.json`
+- `results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/facility_assessment.json`
+- `results/20261114/ijhe_completion_audit_fullscope_hazop_port_bound.json`
 
 IJHE 완료 감사에도 `diagnostic_hazop_selection_event_binding = PASS`로 연결했다. 전체 감사 상태는 방출 경계·provider 자격·물리검증·시설 IR/F-N·빈도 불확실성 장부가 아직 닫히지 않아 `INCOMPLETE_EVIDENCE`로 남는다.
 
