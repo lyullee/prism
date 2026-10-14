@@ -4,7 +4,28 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
-## 최신 v0.6.0 IJHE 기준점 (2026-11-14)
+## 최신 v0.6.0 IJHE 기준점 (2026-11-15)
+
+수직 handoff의 종료 경계를 실제로 연장 추정하지 않고, provider가 이미 계산한
+유한 재고·양의 임계값 이력을 다섯 수직 event에 재결합했다. 최신 권위 결과는
+[`native_full_scope_union_assessment_vertical_inventory_handoff_port_bound`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/),
+[`조건부 risk view`](results/20261115/conditional_facility_risk_view_with_release_trace.json),
+[`최신 IJHE 감사`](results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_port_bound.json)이다.
+34개 event·44개 case·176개 risk atom이 유지되고, 34/34 event가 명시적 사고
+포트에 결합되며 case/risk-atom port mismatch는 0건이다. 수직 handoff는 5개
+event·10개 weather case 모두 `inventory_depletion` 종료 기준을 사용하지만,
+`EXECUTED_OPERATOR_LIMITED`·synthetic handoff·독립 물리검증 부재는 그대로
+기록된다. 종료 evidence catalog는 34 event row와 32 case 사용, 2 unsupported
+basis를 보존한다. 최신 감사는 50개 검사 중 46개 PASS·4개 BLOCKED인
+`INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 상세 재현 명령과 해석은
+[`수직 handoff 재고소진 연결 기록`](docs/PRISM_vertical_inventory_handoff_20261115.md)과
+[`PRISM IJHE 최신 감사`](docs/PRISM_IJHE_latest_audit_20261115.md)에 있다.
+
+현장 빈도 학습, 센서 역추론, 실내, 폭굉, 전체 도미노는 여전히 필수 범위에서
+제외하고 문헌 빈도만 사용한다. 지원되지 않은 사고는 다른 사고로 대체하지 않고
+`PARTIAL`, `BLOCKED_REVIEW`, `UNCOMPUTED` 또는 증거요청으로 남긴다.
+
+## 이전 v0.6.0 IJHE 기준점 (2026-11-14)
 
 현재 권위 실행은 `results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/`이다. 일반 옥외 LH2 시설을 대상으로 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기와 수직 handoff·inventory depletion extension을 하나의 union ledger로 묶어 **34개 event, 44개 case, 176개 risk atom**을 방출→지속시간·차단·재고→SLABx-LH2/확산→점화→피해→조건부 IR/F-N까지 전달한다.
 
@@ -119,8 +140,8 @@ IJHE 완료 감사에도 이 연결을 `diagnostic_hazop_selection_event_binding
 
 **비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **1062 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
 
-**현재 권위 기준점 (state-bound union):** `results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`과
-`results/20261114/conditional_facility_risk_view_with_release_trace.json`이 최신 원장입니다.
+**이전 권위 기준점 (2026-11-14 state-bound union):** `results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`과
+`results/20261114/conditional_facility_risk_view_with_release_trace.json`은 이전 원장입니다.
 34개 사건·44개 case·176개 risk atom의 옥외 진단 범위를 보존하고, 상태→방출 연결은
 44/44 case에서 확인합니다. 조건부 수치 실행과 시설 전체 QRA 자격은 별도로 판정하며,
 현재 IJHE 감사는 44개 검사 중 40개 PASS·4개 BLOCKED입니다. native isolation catalog의 24개 event row와 개별 resolved release/verification 파일은 `native_isolation_event_reconciliation.json`에서 24/24 일치로 재검증됩니다. 별도 근접 수신점 replay는 1개 비영 harm atom과 조건부 IR/F-N 곡선을 확인하지만 합성 진단 geometry입니다. `qualified_provider_case_count=0`이고
@@ -128,6 +149,9 @@ IJHE 완료 감사에도 이 연결을 `diagnostic_hazop_selection_event_binding
 시설 IR/F-N은 계속 fail-closed입니다. 최신 상태는
 [`CURRENT_STATUS.json`](CURRENT_STATUS.json), [`DEVELOPMENT_GOAL.json`](DEVELOPMENT_GOAL.json),
 [`PRISM_IJHE_latest_audit_20261114.md`](docs/PRISM_IJHE_latest_audit_20261114.md)에서 확인합니다.
+
+현재 기준점은 위의 2026-11-15 섹션과 [`PRISM_IJHE_latest_audit_20261115.md`](docs/PRISM_IJHE_latest_audit_20261115.md)로
+갱신되었다. 2026-11-14 파일은 이전 state-bound union의 재현 기록으로 보존한다.
 
 **최신 isolation-rebound 기준점 (2026-11-09):** 현재 개발 상태의 권위 산출물은
 [`ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json`](results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json)이다.

@@ -1,0 +1,121 @@
+{
+  "schema_version": "prism.vertical_termination_evidence_search.v1",
+  "status": "SEARCH_COMPLETE_PARTIAL",
+  "source_root": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence",
+  "source_catalog_event_count": 5,
+  "source_catalog_case_count": 0,
+  "valid_termination_event_count": 5,
+  "not_supplied_event_count": 0,
+  "not_supplied_case_count": 0,
+  "errors": [],
+  "promotion": {
+    "release_boundary_catalog_updated": false,
+    "facility_qra_promoted": false,
+    "frequency_inferred": false,
+    "physical_validation_claim": false
+  },
+  "interpretation": "Vertical packets were found and their provider termination basis was read. A synthetic diagnostic horizon is retained as NOT_SUPPLIED; duration and mass integration are not converted into isolation success or inventory depletion.",
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "source_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "duration_s": 1.5,
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 1.2125616572864818e-07,
+      "mass_residual_kg": 1.3413560813159897e-20,
+      "status": "VALID",
+      "blocking_reasons": [],
+      "source": {
+        "packet": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.01\\resolved_release.json",
+        "verification": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.01\\verification.json"
+      },
+      "facility_event_id": null,
+      "facility_case_count": null,
+      "facility_chain_status": "UNBOUND"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "source_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "duration_s": 0.5,
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 4.022010171050504e-07,
+      "mass_residual_kg": 2.276401045745932e-21,
+      "status": "VALID",
+      "blocking_reasons": [],
+      "source": {
+        "packet": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.1\\resolved_release.json",
+        "verification": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_0.1\\verification.json"
+      },
+      "facility_event_id": null,
+      "facility_case_count": null,
+      "facility_chain_status": "UNBOUND"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "source_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "duration_s": 0.5,
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 2.6216519132821583e-06,
+      "mass_residual_kg": 2.117582368135751e-21,
+      "status": "VALID",
+      "blocking_reasons": [],
+      "source": {
+        "packet": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_1\\resolved_release.json",
+        "verification": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_1\\verification.json"
+      },
+      "facility_event_id": null,
+      "facility_case_count": null,
+      "facility_chain_status": "UNBOUND"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "source_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "provider_result_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "duration_s": 0.5,
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 2.1140345784364108e-05,
+      "mass_residual_kg": 3.3881317890172014e-21,
+      "status": "VALID",
+      "blocking_reasons": [],
+      "source": {
+        "packet": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_10\\resolved_release.json",
+        "verification": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_10\\verification.json"
+      },
+      "facility_event_id": null,
+      "facility_case_count": null,
+      "facility_chain_status": "UNBOUND"
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "source_event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "provider_result_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006",
+      "termination_basis": "inventory_depletion_positive_threshold",
+      "duration_s": 0.0625,
+      "available_mass_kg": 0.00013416755831850078,
+      "cumulative_mass_out_kg": 2.6236186797952155e-05,
+      "mass_residual_kg": 3.3881317890172014e-21,
+      "status": "VALID",
+      "blocking_reasons": [],
+      "source": {
+        "packet": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_100\\resolved_release.json",
+        "verification": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence\\events\\generic-lh2-full-scope-example_vertical-handoff_terminal-valve_AREA_100\\verification.json"
+      },
+      "facility_event_id": null,
+      "facility_case_count": null,
+      "facility_chain_status": "UNBOUND"
+    }
+  ],
+  "vertical_chain_audit": "results\\20261115\\vertical_inventory_handoff_rebound_facility_prebound.provenance.json"
+}

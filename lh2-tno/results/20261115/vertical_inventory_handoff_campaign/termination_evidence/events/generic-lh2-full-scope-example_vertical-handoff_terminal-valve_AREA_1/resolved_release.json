@@ -1,0 +1,21 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+  "component_id": "vertical-handoff-terminal-pipe-01",
+  "port_id": "terminal_pipe.out",
+  "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+  "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+  "termination_basis": "inventory_depletion_positive_threshold",
+  "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+  "available_mass_kg": 0.00013416755831850078,
+  "cumulative_mass_out_kg": 2.6216519132821583e-06,
+  "duration_s": 0.5,
+  "provider_mass_balance": {
+    "initial_mass_kg": 0.00013416755831850078,
+    "cumulative_mass_out_kg": 2.6216519132821583e-06,
+    "final_mass_kg": 0.00013154590640521862,
+    "max_abs_mass_residual_kg": 2.117582368135751e-21
+  },
+  "input_origin": "synthetic",
+  "vertical_handoff_provenance": "provider inventory-depletion packet rebound to a vertical outlet; handoff is synthetic and not independently validated"
+}

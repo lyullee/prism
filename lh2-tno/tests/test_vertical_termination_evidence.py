@@ -80,3 +80,40 @@ def test_reviewed_boundary_can_be_classified_valid(tmp_path):
     assert result["valid_termination_event_count"] == 1
     assert result["not_supplied_event_count"] == 0
     assert result["rows"][0]["status"] == "VALID"
+
+
+def test_provider_run_meta_supplies_inventory_termination_fields(tmp_path):
+    catalog = tmp_path / "events"
+    event = catalog / "event-02"
+    event.mkdir(parents=True)
+    (event / "resolved_release.json").write_text(
+        json.dumps(
+            {
+                "event_id": "vertical/AREA_10%",
+                "component_id": "pipe-02",
+                "provider_result_digest": "digest-3",
+                "termination_basis": "inventory_depletion_positive_threshold",
+                "termination_provenance": "provider positive threshold",
+                "duration_s": 0.5,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (event / "verification.json").write_text(
+        json.dumps(
+            {
+                "provider_run_meta": {
+                    "available_mass_kg": 1.0,
+                    "cumulative_mass_out_kg": 0.2,
+                    "max_abs_mass_residual_kg": 0.0,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    result = build_vertical_termination_evidence_search(catalog)
+    row = result["rows"][0]
+    assert row["status"] == "VALID"
+    assert row["available_mass_kg"] == 1.0
+    assert row["cumulative_mass_out_kg"] == 0.2
+    assert row["mass_residual_kg"] == 0.0

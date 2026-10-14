@@ -1,0 +1,26 @@
+{
+  "schema_version": "prism.vertical_inventory_termination_evidence.v1",
+  "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+  "provider_run_meta": {
+    "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+    "termination_basis": "inventory_depletion_positive_threshold",
+    "available_mass_kg": 0.00013416755831850078,
+    "cumulative_mass_out_kg": 1.2125616572864818e-07,
+    "threshold_mass_kg": 0.00013405,
+    "remaining_mass_kg": 0.00013404630215277215,
+    "max_abs_mass_residual_kg": 1.3413560813159897e-20,
+    "mass_residual_max_kg": 1.3413560813159897e-20,
+    "duration_s": 1.5,
+    "operator_limited": true,
+    "physical_validation_claim": false,
+    "status": "EXECUTED_OPERATOR_LIMITED",
+    "source_provider_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%",
+    "source_provider_termination_basis": "inventory_depletion",
+    "vertical_handoff_validation": "NOT_SUPPLIED"
+  },
+  "physical_validation_claim": false,
+  "provider_qualification_claim": false,
+  "facility_qra_claim": false,
+  "source_provider_response": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+  "source_provider_event_id": "equipment-inventory-campaign/terminal_pipe_asset/AREA_0.01%"
+}

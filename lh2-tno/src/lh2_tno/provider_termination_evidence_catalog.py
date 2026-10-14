@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 
 SCHEMA = "prism.provider_termination_evidence_catalog.v1"
@@ -273,6 +273,7 @@ def _inventory_rows(
 def build_provider_termination_evidence_catalog(
     *,
     storage_catalog_dir: str | Path | None = None,
+    additional_storage_catalog_dirs: Sequence[str | Path] | None = None,
     inventory_provider_responses: Mapping[str, Any] | None = None,
     inventory_resolved_releases: Mapping[str, Any] | None = None,
     inventory_source_paths: Mapping[str, str] | None = None,
@@ -284,8 +285,15 @@ def build_provider_termination_evidence_catalog(
     rows: list[dict[str, Any]] = []
     errors: list[str] = []
     source_records: list[str] = []
+    storage_dirs: list[Path] = []
     if storage_catalog_dir is not None:
-        storage_dir = Path(storage_catalog_dir)
+        storage_dirs.append(Path(storage_catalog_dir))
+    storage_dirs.extend(Path(value) for value in (additional_storage_catalog_dirs or ()))
+    seen_storage_dirs: set[Path] = set()
+    for storage_dir in storage_dirs:
+        if storage_dir in seen_storage_dirs:
+            continue
+        seen_storage_dirs.add(storage_dir)
         storage_rows, storage_errors = _storage_rows(storage_dir)
         rows.extend(storage_rows)
         errors.extend(storage_errors)

@@ -1,0 +1,19 @@
+{
+  "schema_version": "prism.vertical_inventory_handoff_campaign_verification.v1",
+  "status": "PARTIAL_DECLARED_SCOPE",
+  "event_count": 5,
+  "case_count": 10,
+  "executed_case_count": 10,
+  "termination_basis_counts": {
+    "inventory_depletion": 5
+  },
+  "provider_qualification_claim": false,
+  "frequency_inference": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "limitations": [
+    "provider finite inventory and positive threshold are synthetic diagnostic inputs",
+    "vertical free-jet and horizontal handoff are not independently validated",
+    "no field frequency or sensor inverse inference is performed"
+  ]
+}

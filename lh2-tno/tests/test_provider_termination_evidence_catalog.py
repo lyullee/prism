@@ -119,3 +119,33 @@ def test_catalog_reads_native_isolation_and_two_sided_set_artifacts(tmp_path):
     rows = {row["event_id"]: row for row in report["rows"]}
     assert rows["native/line"]["termination_basis"] == "reviewed_isolation_success"
     assert rows["native/set"]["provider_result_digests"] == ["left", "right"]
+
+
+def test_catalog_accepts_multiple_storage_directories(tmp_path):
+    first = tmp_path / "first" / "events" / "one"
+    second = tmp_path / "second" / "events" / "two"
+    first.mkdir(parents=True)
+    second.mkdir(parents=True)
+    for event_dir, event_id in ((first, "first/event"), (second, "second/event")):
+        (event_dir / "resolved_release.json").write_text(json.dumps({
+            "event_id": event_id,
+            "component_id": "pipe-1",
+            "provider_result_digest": f"{event_id}-digest",
+        }), encoding="utf-8")
+        (event_dir / "verification.json").write_text(json.dumps({
+            "provider_result_digest": f"{event_id}-digest",
+            "provider_run_meta": {
+                "termination_basis": "inventory_depletion_positive_threshold",
+                "available_mass_kg": 1.0,
+                "cumulative_mass_out_kg": 0.5,
+                "threshold_mass_kg": 0.1,
+                "remaining_mass_kg": 0.5,
+                "max_abs_mass_residual_kg": 0.0,
+            },
+        }), encoding="utf-8")
+    report = build_provider_termination_evidence_catalog(
+        storage_catalog_dir=first.parent.parent,
+        additional_storage_catalog_dirs=[second.parent.parent],
+    )
+    assert report["status"] == "EVIDENCE_CATALOG_READY"
+    assert report["event_count"] == 2

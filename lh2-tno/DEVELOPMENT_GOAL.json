@@ -1,6 +1,6 @@
 {
-  "date_kst": "2026-11-13",
-  "status": "ACTIVE; IJHE completion chain remains incomplete evidence",
+  "date_kst": "2026-11-15",
+  "status": "ACTIVE; IJHE completion chain remains incomplete evidence; 2026-11-15 vertical inventory handoff numerical ledger connected",
   "public_baseline": "PRISM 0.6.0",
   "objective": "선언한 옥외 LH2 적용범위의 주요 사고를 설비 상태부터 시설 IR/F-N까지 계산하고, 미계산 사고·문헌 빈도 불확실성·물리 검증 근거·신규 처리시간을 명확히 보고하여 IJHE 연구를 준비한다.",
   "completion_record": "docs/PRISM_IJHE_완성목표_20261009.md",
@@ -163,7 +163,7 @@
     "field accident-frequency collection and sensor-frequency learning",
     "indoor dispersion, DDT/detonation and full domino interaction"
   ],
-  "next_priority": "Close the remaining high-Mach vaporizer G1 provider compressible-plane evidence and provider qualification/physical-validation/facility release-boundary/frequency-port gates. Transfer-valve pool clock normalization now recovers five numerical cases without changing provider duration or mass.",
+  "next_priority": "Close provider-owned termination/isolation evidence and independent physical-validation gates for the remaining 30 cases, then reassess strict facility IR/F-N promotion; keep unsupported emergency relief, inventory-over-600s and two-sided rupture boundaries explicit.",
   "layered_tank_worklist_packet_campaign_implemented": true,
   "layered_tank_worklist_packet_campaign_status": "SYNTHETIC_STRUCTURAL_ONLY; storage-tank-01 five area-bin packets exact-match 5/24 worklist events",
   "layered_tank_worklist_packet_campaign_record": "results/20261010/layered_tank_worklist_packets/campaign_verification.json",
@@ -3926,22 +3926,22 @@
     "completion_audit_blocked_count": 4,
     "release_boundary_case_count": 44,
     "release_boundary_case_source_alignment": "ALIGNED",
-  "strict_release_boundary_eligible_case_count": 13,
-  "strict_release_boundary_blocked_case_count": 31,
+    "strict_release_boundary_eligible_case_count": 13,
+    "strict_release_boundary_blocked_case_count": 31,
     "release_boundary_evidence_request_open_count": 44,
     "release_boundary_evidence_request_alignment": "ALIGNED",
     "facility_qra_promotion": false,
     "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP event binding is complete for 34/34 events, and the provider-bound current/forecast HAZOP integrated-risk diagnostic is connected to the completion audit with one current and one forecast consequence evaluation. The diagnostic retains synthetic-provider, declared-sensitivity, explicit timing and fail-closed promotion limits. Inspection-center measured state and explicit operating-mode data are linked as state/mode/HAZOP and diagnostic isolation evidence only; no accident frequency is learned from them. Native packet, state snapshot, SLABx-LH2, provider-intake, 44-case release-boundary and evidence-request records remain linked. A provider termination evidence catalog binds 29 event rows to 32 case rows using exact digest, mass, isolation or endpoint closure, positive-threshold and residual checks, without qualification or facility-QRA promotion. A separate near-receptor diagnostic confirms one nonzero harm atom and a conditional IR/F-N curve while retaining synthetic geometry and promotion false. The latest IJHE audit has 44 checks (40 PASS, 4 BLOCKED), including the five-scenario literature-frequency trace and near-receptor harm-path control; qualified provider promotion, independent physical validation and facility IR/F-N remain withheld. Per-event native isolation artifact reconciliation confirms 24/24 event rows match their resolved release and verification files, with promotion flags withheld.",
-  "release_boundary_numerically_closed_case_count": 32,
-  "release_boundary_numerically_open_case_count": 12,
-  "release_boundary_operator_review_required_case_count": 19,
+    "release_boundary_numerically_closed_case_count": 32,
+    "release_boundary_numerically_open_case_count": 12,
+    "release_boundary_operator_review_required_case_count": 19,
     "release_boundary_numerical_closure_status_counts": {
-    "NUMERICALLY_CLOSED": 13,
-    "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 19,
-    "NUMERICALLY_OPEN": 12
+      "NUMERICALLY_CLOSED": 13,
+      "NUMERICALLY_CLOSED_OPERATOR_REVIEW_REQUIRED": 19,
+      "NUMERICALLY_OPEN": 12
     },
-  "provider_termination_evidence_catalog": "results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json",
-  "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY; 29 event rows, 32 case uses, 27 valid and 2 unsupported-basis rows; separate synthetic-horizon events remain not supplied",
+    "provider_termination_evidence_catalog": "results/20261114/provider_termination_evidence_catalog_union_fullscope_hazop_port_bound_state_bound.json",
+    "provider_termination_evidence_catalog_status": "EVIDENCE_CATALOG_READY; 29 event rows, 32 case uses, 27 valid and 2 unsupported-basis rows; separate synthetic-horizon events remain not supplied",
     "release_boundary_consequence_domain_truncated_case_count": 1,
     "release_boundary_metric_policy": "numerical closure is a diagnostic release-ledger view; it does not qualify provider packets or promote facility IR/F-N",
     "conditional_facility_release_trace_view": "results/20261114/conditional_facility_risk_view_with_release_trace.json",
@@ -3990,5 +3990,29 @@
     "vertical_handoff_termination_evidence_search": "results/20261114/vertical_handoff_termination_evidence_search.json",
     "vertical_handoff_termination_evidence_search_status": "SEARCH_COMPLETE_EVIDENCE_OPEN; 5 event rows and 10 case rows explicitly remain NOT_SUPPLIED because provider termination_basis is synthetic_diagnostic_horizon",
     "vertical_handoff_termination_evidence_promotion": false
+  },
+  "latest_authoritative_evidence": {
+    "union_result": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/campaign_result.json",
+    "facility_assessment": "results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/facility_assessment.json",
+    "conditional_risk_view": "results/20261115/conditional_facility_risk_view_with_release_trace.json",
+    "provider_termination_catalog": "results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff.json",
+    "release_boundary_audit": "results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff.json",
+    "ijhe_audit": "results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_port_bound.json",
+    "development_record": "docs/PRISM_vertical_inventory_handoff_20261115.md"
+  },
+  "latest_verified_counts": {
+    "events": 34,
+    "cases": 44,
+    "risk_atoms": 176,
+    "frequency_port_scoped_events": 34,
+    "frequency_port_unbound_events": 0,
+    "vertical_events": 5,
+    "vertical_weather_cases": 10,
+    "termination_evidence_event_rows": 34,
+    "termination_evidence_used_cases": 32,
+    "termination_evidence_invalid_cases": 2,
+    "ijhe_checks": 50,
+    "ijhe_pass": 46,
+    "ijhe_blocked": 4
   }
 }

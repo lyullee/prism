@@ -1,0 +1,41 @@
+{
+  "schema_version": "prism.vertical_handoff_campaign_rebind.v1",
+  "source_facility_id": "vertical-vent-campaign",
+  "target_facility_id": "generic-lh2-full-scope-example",
+  "source_campaign_digest": "fc94d2f8b556119555fbd70502b8d651867cb673904965ae23fb7cfdb05e5156",
+  "namespace": "generic-lh2-full-scope-example/vertical-handoff-inventory",
+  "event_count": 5,
+  "event_id_map": {
+    "vertical-vent-campaign/terminal-valve/AREA_0.01%": "generic-lh2-full-scope-example/vertical-handoff-inventory/terminal-valve/AREA_0.01%",
+    "vertical-vent-campaign/terminal-valve/AREA_0.1%": "generic-lh2-full-scope-example/vertical-handoff-inventory/terminal-valve/AREA_0.1%",
+    "vertical-vent-campaign/terminal-valve/AREA_1%": "generic-lh2-full-scope-example/vertical-handoff-inventory/terminal-valve/AREA_1%",
+    "vertical-vent-campaign/terminal-valve/AREA_10%": "generic-lh2-full-scope-example/vertical-handoff-inventory/terminal-valve/AREA_10%",
+    "vertical-vent-campaign/terminal-valve/AREA_100%": "generic-lh2-full-scope-example/vertical-handoff-inventory/terminal-valve/AREA_100%"
+  },
+  "provider_event_id_map": {
+    "vertical-vent-campaign/terminal_pipe/AREA_0.01%": "generic-lh2-full-scope-example/vertical-handoff-inventory/provider/terminal_pipe/AREA_0.01%",
+    "vertical-vent-campaign/terminal_pipe/AREA_0.1%": "generic-lh2-full-scope-example/vertical-handoff-inventory/provider/terminal_pipe/AREA_0.1%",
+    "vertical-vent-campaign/terminal_pipe/AREA_1%": "generic-lh2-full-scope-example/vertical-handoff-inventory/provider/terminal_pipe/AREA_1%",
+    "vertical-vent-campaign/terminal_pipe/AREA_10%": "generic-lh2-full-scope-example/vertical-handoff-inventory/provider/terminal_pipe/AREA_10%",
+    "vertical-vent-campaign/terminal_pipe/AREA_100%": "generic-lh2-full-scope-example/vertical-handoff-inventory/provider/terminal_pipe/AREA_100%"
+  },
+  "asset_id": "vertical-handoff-vent",
+  "source_component_id": "terminal_pipe",
+  "component_id": "vertical-handoff-terminal-pipe-01",
+  "receptor_map": {
+    "near_worker": "worker-01",
+    "downwind_worker": "worker-01",
+    "side_worker": "worker-01",
+    "distant_worker": "worker-01"
+  },
+  "receptor_collapse_policy": "many_to_one_endpoint_maximum",
+  "annual_condition_id_map": {
+    "D-3ms-west": "generic-lh2-full-scope-example/vertical-handoff-inventory/D-3ms-west",
+    "D-4ms-west": "generic-lh2-full-scope-example/vertical-handoff-inventory/D-4ms-west"
+  },
+  "condition_rebind_policy": "namespaced_condition_ids_preserve_source_weather",
+  "diagnostic_only": true,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "The separate vertical-handoff diagnostic is namespaced as a disjoint facility component. Only its existing executed cases are merged; pending area bins and synthetic handoff limits remain explicit."
+}

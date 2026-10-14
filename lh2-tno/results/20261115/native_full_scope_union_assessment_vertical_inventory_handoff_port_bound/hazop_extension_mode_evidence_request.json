@@ -1,0 +1,368 @@
+{
+  "schema_version": "prism.hazop_extension_mode_binding_evidence_request.v1",
+  "status": "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
+  "source_selection_audit_schema": "prism.hazop_event_selection_binding_audit.v1",
+  "source_selection_audit_status": "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",
+  "source_frequency_event_count": 34,
+  "source_bound_event_count": 24,
+  "source_unbound_event_count": 15,
+  "request_count": 15,
+  "requests": [
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "vertical_handoff"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "vertical_handoff"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "vertical_handoff"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "vertical_handoff"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "vertical_handoff"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": null,
+      "release_mode": null,
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": null,
+      "release_mode": null,
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": null,
+      "release_mode": null,
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": null,
+      "release_mode": null,
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": null,
+      "release_mode": null,
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": "inventory-depletion-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": "inventory-depletion-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": "inventory-depletion-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": "inventory-depletion-pipe-01",
+      "release_mode": "hole",
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "status": "OPEN",
+      "required_evidence": [
+        "operating_mode from the runtime input frame",
+        "reviewed HAZOP scenario ID and deviation/guideword",
+        "P&ID or equipment tag identifying the affected boundary",
+        "source frame digest and effective timestamp",
+        "reviewer/source provenance for the mode-to-scenario decision"
+      ],
+      "policy": {
+        "operating_mode_inferred": false,
+        "scenario_inferred": false,
+        "frequency_assignment_performed": false,
+        "provider_release_created": false,
+        "facility_qra_claim": false
+      }
+    }
+  ],
+  "mode_inference_performed": false,
+  "scenario_inference_performed": false,
+  "frequency_assignment_performed": false,
+  "provider_release_created": false,
+  "facility_qra_claim": false,
+  "interpretation": "Every HAZOP-unbound extension event remains excluded from automatic scenario selection until an explicit operating mode and reviewed HAZOP identity are supplied."
+}

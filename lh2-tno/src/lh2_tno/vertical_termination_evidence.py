@@ -189,6 +189,14 @@ def _classify_row(
     available = _finite(packet.get("available_mass_kg"))
     released = _finite(packet.get("cumulative_mass_out_kg"))
     residual = _finite(verification.get("mass_residual_max_kg"))
+    provider_run_meta = verification.get("provider_run_meta")
+    if isinstance(provider_run_meta, Mapping):
+        if available is None:
+            available = _finite(provider_run_meta.get("available_mass_kg"))
+        if released is None:
+            released = _finite(provider_run_meta.get("cumulative_mass_out_kg"))
+        if residual is None:
+            residual = _finite(provider_run_meta.get("max_abs_mass_residual_kg"))
     if residual is None:
         provider_mass = packet.get("provider_mass_balance")
         if isinstance(provider_mass, Mapping):

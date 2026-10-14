@@ -1,0 +1,1298 @@
+{
+  "id": "vertical-vent-campaign",
+  "frequency_plan": {
+    "id": "vertical-vent-campaign",
+    "assets": [
+      {
+        "id": "terminal-valve",
+        "model_component_id": "terminal_pipe",
+        "profile": "LH2_VALVE",
+        "classification_basis": "synthetic LH2-service vent boundary; not a site frequency claim",
+        "physical_scope_ids": [
+          "terminal-vent-1"
+        ],
+        "count": 1,
+        "nominal_diameter_m": 0.0254,
+        "length_per_item_m": null,
+        "vessel_external_impact_or_operating_error": null,
+        "pipe_conditions": null,
+        "pipe_correction_factor": null,
+        "correction_provenance": null,
+        "location_weight": null,
+        "location_weight_provenance": null,
+        "relief_direct_substance_contact_and_atmospheric_discharge": null
+      }
+    ],
+    "excluded_model_components": {}
+  },
+  "annual_conditions": [
+    {
+      "id": "D-3ms-west",
+      "annual_probability": 0.4,
+      "weather": {
+        "wind_speed_m_s": 3.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    },
+    {
+      "id": "D-4ms-west",
+      "annual_probability": 0.6,
+      "weather": {
+        "wind_speed_m_s": 4.0,
+        "wind_from_bearing_deg": 270.0,
+        "measurement_height_m": 10.0,
+        "roughness_m": 0.03,
+        "stability": "D",
+        "relative_humidity": 0.5
+      },
+      "population": [
+        {
+          "receptor_id": "near_worker",
+          "persons": 20.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "downwind_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "side_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        },
+        {
+          "receptor_id": "distant_worker",
+          "persons": 10.0,
+          "presence_probability": 0.5,
+          "provenance": "synthetic disjoint outdoor groups; not field population"
+        }
+      ],
+      "provenance": "synthetic annual condition partition; no site weather qualification"
+    }
+  ],
+  "event_routes": [
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+      "branches": [
+        {
+          "id": "provider-vertical-handoff",
+          "probability_given_event": 1.0,
+          "provenance": "provider vertical exit plus declared horizontal handoff",
+          "request": {
+            "component_id": "terminal_pipe",
+            "state_snapshot": {
+              "schema_version": "prism.equipment_state_snapshot.v1",
+              "component_id": "terminal_pipe",
+              "captured_at_s": 0.0,
+              "origin": "model_prediction",
+              "pressure_pa_abs": 101000.0,
+              "temperature_k": null,
+              "mass_kg": null,
+              "liquid_fraction": 0.0001,
+              "phase": null,
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "measurements": {},
+              "source_digest": null,
+              "quality": "valid"
+            },
+            "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digests": [
+              "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+            ],
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "terminal_pipe",
+              "port_id": "terminal_pipe.out",
+              "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.01%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "provider-owned homogeneous finite-storage inventory valve; native atmospheric gas boundary",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "ParaHydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+              },
+              "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+              "provider_result_digest": "96b832745017e8be4e7473de20ff12ebcfa7e3322e82e04669825139de996292",
+              "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to atmospheric inventory valve",
+              "input_origin": "synthetic",
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ambient_pressure_pa_abs": 100000.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 1.5,
+              "available_mass_kg": 0.00013416755831850078,
+              "cumulative_mass_out_kg": 1.2125616572864818e-07,
+              "cumulative_static_enthalpy_out_j": 0.05463792450151787,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 8.28183191105064e-08,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 450907.05085843545,
+                  "temperature_k": 20.653245953270563,
+                  "density_kg_m3": 1.28801930727492,
+                  "effective_area_m2": 1e-09,
+                  "velocity_m_s": 64.2989733482538,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                },
+                {
+                  "time_s": 0.5,
+                  "mass_flow_kg_s": 8.08180186165339e-08,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 450587.6732768463,
+                  "temperature_k": 20.62630883083045,
+                  "density_kg_m3": 1.2901510247262165,
+                  "effective_area_m2": 1e-09,
+                  "velocity_m_s": 62.64229308633408,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                },
+                {
+                  "time_s": 1.0,
+                  "mass_flow_kg_s": 7.887599373025605e-08,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 450287.6011940715,
+                  "temperature_k": 20.601019152910823,
+                  "density_kg_m3": 1.2921600837697826,
+                  "effective_area_m2": 1e-09,
+                  "velocity_m_s": 61.0419674164064,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+              "termination_basis": "inventory_depletion",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.00013416755831850078,
+                "cumulative_mass_in_kg": 0.0,
+                "cumulative_mass_out_kg": 1.2125616572864818e-07,
+                "final_mass_kg": 0.00013404630215277215,
+                "reported_residual_mass_kg": 1.3413560813159897e-20,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": null,
+                "post_isolation_observation_s": null,
+                "isolation_success": null
+              },
+              "vertical_handoff": {
+                "position_enu_m": [
+                  0.0,
+                  0.0,
+                  2.0
+                ],
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "velocity_m_s": 5.0,
+                "density_kg_m3": 1.28801930727492,
+                "temperature_k": 20.653245953270563,
+                "h2_mass_fraction": 0.9,
+                "half_width_m": 0.02,
+                "depth_m": 3.5721651860141e-07,
+                "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated",
+                "states": [
+                  {
+                    "time_s": 0.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.28801930727492,
+                    "temperature_k": 20.653245953270563,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 3.5721651860141e-07,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  },
+                  {
+                    "time_s": 0.5,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.2901510247262165,
+                    "temperature_k": 20.62630883083045,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 3.4801273936852263e-07,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  },
+                  {
+                    "time_s": 1.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.2921600837697826,
+                    "temperature_k": 20.601019152910823,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 3.3912204120225784e-07,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  }
+                ]
+              },
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.000254
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.00013416755831850078,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.37,
+              0.5,
+              1.0,
+              1.5,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "inventory_depletion",
+              "time_s": 1.5,
+              "provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic"
+            },
+            "source_operator": "equipment_inventory_depletion",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+      "branches": [
+        {
+          "id": "provider-vertical-handoff",
+          "probability_given_event": 1.0,
+          "provenance": "provider vertical exit plus declared horizontal handoff",
+          "request": {
+            "component_id": "terminal_pipe",
+            "state_snapshot": {
+              "schema_version": "prism.equipment_state_snapshot.v1",
+              "component_id": "terminal_pipe",
+              "captured_at_s": 0.0,
+              "origin": "model_prediction",
+              "pressure_pa_abs": 101000.0,
+              "temperature_k": null,
+              "mass_kg": null,
+              "liquid_fraction": 0.0001,
+              "phase": null,
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "measurements": {},
+              "source_digest": null,
+              "quality": "valid"
+            },
+            "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digests": [
+              "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+            ],
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "terminal_pipe",
+              "port_id": "terminal_pipe.out",
+              "event_id": "vertical-vent-campaign/terminal-valve/AREA_0.1%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "provider-owned homogeneous finite-storage inventory valve; native atmospheric gas boundary",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "ParaHydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+              },
+              "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+              "provider_result_digest": "8ee04e8b1f2ee8557e5a91b31feaa4532e2e2e38bfd2f32ab9712661c3e6e49c",
+              "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to atmospheric inventory valve",
+              "input_origin": "synthetic",
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ambient_pressure_pa_abs": 100000.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.5,
+              "available_mass_kg": 0.00013416755831850078,
+              "cumulative_mass_out_kg": 4.022010171050504e-07,
+              "cumulative_static_enthalpy_out_j": 0.18128728205924324,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 8.044020342101007e-07,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 450738.0000282125,
+                  "temperature_k": 20.63898516268862,
+                  "density_kg_m3": 1.289146808172709,
+                  "effective_area_m2": 1e-08,
+                  "velocity_m_s": 62.39801620036542,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+              "termination_basis": "inventory_depletion",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.00013416755831850078,
+                "cumulative_mass_in_kg": 0.0,
+                "cumulative_mass_out_kg": 4.022010171050504e-07,
+                "final_mass_kg": 0.00013376535730139574,
+                "reported_residual_mass_kg": 2.276401045745932e-21,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": null,
+                "post_isolation_observation_s": null,
+                "isolation_success": null
+              },
+              "vertical_handoff": {
+                "position_enu_m": [
+                  0.0,
+                  0.0,
+                  2.0
+                ],
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "velocity_m_s": 5.0,
+                "density_kg_m3": 1.289146808172709,
+                "temperature_k": 20.63898516268862,
+                "h2_mass_fraction": 0.9,
+                "half_width_m": 0.02,
+                "depth_m": 3.466556455575857e-06,
+                "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated",
+                "states": [
+                  {
+                    "time_s": 0.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.289146808172709,
+                    "temperature_k": 20.63898516268862,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 3.466556455575857e-06,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  }
+                ]
+              },
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.0008032185256827682
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.00013416755831850078,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.37,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "inventory_depletion",
+              "time_s": 0.5,
+              "provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic"
+            },
+            "source_operator": "equipment_inventory_depletion",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+      "branches": [
+        {
+          "id": "provider-vertical-handoff",
+          "probability_given_event": 1.0,
+          "provenance": "provider vertical exit plus declared horizontal handoff",
+          "request": {
+            "component_id": "terminal_pipe",
+            "state_snapshot": {
+              "schema_version": "prism.equipment_state_snapshot.v1",
+              "component_id": "terminal_pipe",
+              "captured_at_s": 0.0,
+              "origin": "model_prediction",
+              "pressure_pa_abs": 101000.0,
+              "temperature_k": null,
+              "mass_kg": null,
+              "liquid_fraction": 0.0001,
+              "phase": null,
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "measurements": {},
+              "source_digest": null,
+              "quality": "valid"
+            },
+            "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digests": [
+              "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+            ],
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "terminal_pipe",
+              "port_id": "terminal_pipe.out",
+              "event_id": "vertical-vent-campaign/terminal-valve/AREA_1%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "provider-owned homogeneous finite-storage inventory valve; native atmospheric gas boundary",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "ParaHydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+              },
+              "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+              "provider_result_digest": "cad0695bfe00f9059ca47d11af076604321578d1580bac0797c224580a80336a",
+              "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to atmospheric inventory valve",
+              "input_origin": "synthetic",
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ambient_pressure_pa_abs": 100000.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.5,
+              "available_mass_kg": 0.00013416755831850078,
+              "cumulative_mass_out_kg": 2.6216519132821583e-06,
+              "cumulative_static_enthalpy_out_j": 1.1793731635839697,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 5.243303826564317e-06,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 449858.79231673514,
+                  "temperature_k": 20.56491222224236,
+                  "density_kg_m3": 1.2950415387775165,
+                  "effective_area_m2": 1.0000000000000001e-07,
+                  "velocity_m_s": 40.48753394824579,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+              "termination_basis": "inventory_depletion",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.00013416755831850078,
+                "cumulative_mass_in_kg": 0.0,
+                "cumulative_mass_out_kg": 2.6216519132821583e-06,
+                "final_mass_kg": 0.00013154590640521862,
+                "reported_residual_mass_kg": 2.117582368135751e-21,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": null,
+                "post_isolation_observation_s": null,
+                "isolation_success": null
+              },
+              "vertical_handoff": {
+                "position_enu_m": [
+                  0.0,
+                  0.0,
+                  2.0
+                ],
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "velocity_m_s": 5.0,
+                "density_kg_m3": 1.2950415387775165,
+                "temperature_k": 20.56491222224236,
+                "h2_mass_fraction": 0.9,
+                "half_width_m": 0.02,
+                "depth_m": 2.2493074415692107e-05,
+                "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated",
+                "states": [
+                  {
+                    "time_s": 0.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.2950415387775165,
+                    "temperature_k": 20.56491222224236,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 2.2493074415692107e-05,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  }
+                ]
+              },
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.00254
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.00013416755831850078,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.37,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "inventory_depletion",
+              "time_s": 0.5,
+              "provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic"
+            },
+            "source_operator": "equipment_inventory_depletion",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+      "branches": [
+        {
+          "id": "provider-vertical-handoff",
+          "probability_given_event": 1.0,
+          "provenance": "provider vertical exit plus declared horizontal handoff",
+          "request": {
+            "component_id": "terminal_pipe",
+            "state_snapshot": {
+              "schema_version": "prism.equipment_state_snapshot.v1",
+              "component_id": "terminal_pipe",
+              "captured_at_s": 0.0,
+              "origin": "model_prediction",
+              "pressure_pa_abs": 101000.0,
+              "temperature_k": null,
+              "mass_kg": null,
+              "liquid_fraction": 0.0001,
+              "phase": null,
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "measurements": {},
+              "source_digest": null,
+              "quality": "valid"
+            },
+            "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digests": [
+              "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+            ],
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "terminal_pipe",
+              "port_id": "terminal_pipe.out",
+              "event_id": "vertical-vent-campaign/terminal-valve/AREA_10%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "provider-owned homogeneous finite-storage inventory valve; native atmospheric gas boundary",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "ParaHydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+              },
+              "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+              "provider_result_digest": "9898b6b6ac570db100023b4884e31366a5905e27efb5f2a20dcf9bada687321f",
+              "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to atmospheric inventory valve",
+              "input_origin": "synthetic",
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ambient_pressure_pa_abs": 100000.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.5,
+              "available_mass_kg": 0.00013416755831850078,
+              "cumulative_mass_out_kg": 2.1140345784364108e-05,
+              "cumulative_static_enthalpy_out_j": 9.538858404575114,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 4.2280691568728216e-05,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 451215.8174645504,
+                  "temperature_k": 20.679307967278454,
+                  "density_kg_m3": 1.285964854497972,
+                  "effective_area_m2": 1.0000000000000002e-06,
+                  "velocity_m_s": 32.87857472997128,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+              "termination_basis": "inventory_depletion",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.00013416755831850078,
+                "cumulative_mass_in_kg": 0.0,
+                "cumulative_mass_out_kg": 2.1140345784364108e-05,
+                "final_mass_kg": 0.00011302721253413668,
+                "reported_residual_mass_kg": 3.3881317890172014e-21,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": null,
+                "post_isolation_observation_s": null,
+                "isolation_success": null
+              },
+              "vertical_handoff": {
+                "position_enu_m": [
+                  0.0,
+                  0.0,
+                  2.0
+                ],
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "velocity_m_s": 5.0,
+                "density_kg_m3": 1.285964854497972,
+                "temperature_k": 20.679307967278454,
+                "h2_mass_fraction": 0.9,
+                "half_width_m": 0.02,
+                "depth_m": 0.0001826587484998404,
+                "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated",
+                "states": [
+                  {
+                    "time_s": 0.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.285964854497972,
+                    "temperature_k": 20.679307967278454,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 0.0001826587484998404,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  }
+                ]
+              },
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.008032185256827683
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.00013416755831850078,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.1,
+              0.2,
+              0.37,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "inventory_depletion",
+              "time_s": 0.5,
+              "provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic"
+            },
+            "source_operator": "equipment_inventory_depletion",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    },
+    {
+      "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+      "branches": [
+        {
+          "id": "provider-vertical-handoff",
+          "probability_given_event": 1.0,
+          "provenance": "provider vertical exit plus declared horizontal handoff",
+          "request": {
+            "component_id": "terminal_pipe",
+            "state_snapshot": {
+              "schema_version": "prism.equipment_state_snapshot.v1",
+              "component_id": "terminal_pipe",
+              "captured_at_s": 0.0,
+              "origin": "model_prediction",
+              "pressure_pa_abs": 101000.0,
+              "temperature_k": null,
+              "mass_kg": null,
+              "liquid_fraction": 0.0001,
+              "phase": null,
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "measurements": {},
+              "source_digest": null,
+              "quality": "valid"
+            },
+            "state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+            "provider_state_snapshot_digests": [
+              "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551"
+            ],
+            "source_input": null,
+            "resolved_release": {
+              "provider_export_schema": "prism.resolved_release.v1",
+              "component_id": "terminal_pipe",
+              "port_id": "terminal_pipe.out",
+              "event_id": "vertical-vent-campaign/terminal-valve/AREA_100%",
+              "event_kind": "accidental_leak",
+              "upstream_service": "LH2",
+              "upstream_service_provenance": "provider-owned homogeneous finite-storage inventory valve; native atmospheric gas boundary",
+              "state_owner": "equipment_twin",
+              "discharge_owner": "equipment_twin",
+              "boundary_kind": "resolved_atmospheric_gas_exit",
+              "enthalpy_convention": "static_exit_enthalpy",
+              "property_basis": {
+                "fluid": "ParaHydrogen",
+                "backend": "CoolProp-HEOS",
+                "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+              },
+              "provider_source_digest": "af9032a366a7435291a1c1c8d56544c85ff96aa5ecb4de8b5c2232e70c345d2c",
+              "provider_result_digest": "4f7a700d2f290868ab3ca7fc07317ecf76dd3596453fc513c66c105d00d7a006",
+              "provider_boundary_reference": "DynamicNetworkSimulator homogeneous tank to atmospheric inventory valve",
+              "input_origin": "synthetic",
+              "position_enu_m": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "direction_enu": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ambient_pressure_pa_abs": 100000.0,
+              "ambient_temperature_k": 288.15,
+              "duration_s": 0.0625,
+              "available_mass_kg": 0.00013416755831850078,
+              "cumulative_mass_out_kg": 2.6236186797952155e-05,
+              "cumulative_static_enthalpy_out_j": 11.835033746878842,
+              "steps": [
+                {
+                  "time_s": 0.0,
+                  "mass_flow_kg_s": 0.0004197789887672345,
+                  "pressure_pa_abs": 100000.0,
+                  "specific_enthalpy_j_kg": 451095.80283224,
+                  "temperature_k": 20.669175602715665,
+                  "density_kg_m3": 1.286762650112841,
+                  "effective_area_m2": 1e-05,
+                  "velocity_m_s": 32.62287638908562,
+                  "area_provenance": "provider-owned inventory valve area",
+                  "velocity_origin": "mass_continuity_from_declared_area",
+                  "provider_source_state": null,
+                  "provider_port_state": null
+                }
+              ],
+              "termination_provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic",
+              "termination_basis": "inventory_depletion",
+              "provider_mass_balance": {
+                "schema_version": "prism.provider_mass_balance.v1",
+                "initial_mass_kg": 0.00013416755831850078,
+                "cumulative_mass_in_kg": 0.0,
+                "cumulative_mass_out_kg": 2.6236186797952155e-05,
+                "final_mass_kg": 0.00010793137152054863,
+                "reported_residual_mass_kg": 3.3881317890172014e-21,
+                "derived_accounting_residual_kg": 0.0,
+                "isolation_time_s": null,
+                "post_isolation_observation_s": null,
+                "isolation_success": null
+              },
+              "vertical_handoff": {
+                "position_enu_m": [
+                  0.0,
+                  0.0,
+                  2.0
+                ],
+                "direction_enu": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "velocity_m_s": 5.0,
+                "density_kg_m3": 1.286762650112841,
+                "temperature_k": 20.669175602715665,
+                "h2_mass_fraction": 0.9,
+                "half_width_m": 0.02,
+                "depth_m": 0.001812382021615868,
+                "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated",
+                "states": [
+                  {
+                    "time_s": 0.0,
+                    "direction_enu": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "velocity_m_s": 5.0,
+                    "density_kg_m3": 1.286762650112841,
+                    "temperature_k": 20.669175602715665,
+                    "h2_mass_fraction": 0.9,
+                    "half_width_m": 0.02,
+                    "depth_m": 0.001812382021615868,
+                    "provenance": "synthetic provider vertical-to-horizontal handoff; not independently validated"
+                  }
+                ]
+              },
+              "compressible_plane_handoff": null,
+              "failure_opening_diameter_m": 0.0254
+            },
+            "resolved_release_set": null,
+            "resolved_liquid_release": null,
+            "available_mass_kg": 0.00013416755831850078,
+            "source_position_enu_m": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "source_positions_enu_m": null,
+            "weather": {
+              "wind_speed_m_s": 3.0,
+              "wind_from_bearing_deg": 270.0,
+              "measurement_height_m": 10.0,
+              "roughness_m": 0.03,
+              "stability": "D",
+              "relative_humidity": 0.5
+            },
+            "pool": null,
+            "ignition": {
+              "direct_probability": 0.1,
+              "delayed_probability_given_no_direct": 0.2,
+              "explosion_probability_given_delayed": 0.4,
+              "delayed_time_s": 1.0,
+              "burn_back_duration_s": 2.0,
+              "obstructed_energy_fraction": 0.08,
+              "provenance": "synthetic declared sensitivity; not center-derived ignition frequency",
+              "deflagration_only": true
+            },
+            "domain": {
+              "downwind_bounds_m": [
+                -2.0,
+                80.0
+              ],
+              "crosswind_bounds_m": [
+                -10.0,
+                10.0
+              ],
+              "height_bounds_m": [
+                0.0,
+                12.0
+              ],
+              "cell_size_m": 0.5
+            },
+            "evaluation_times_s": [
+              0.0,
+              0.0625,
+              0.1,
+              0.2,
+              0.37,
+              0.5,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              10.0,
+              20.0
+            ],
+            "radiative_fraction_range": [
+              0.06,
+              0.12
+            ],
+            "radiation_provenance": "LH2 spill radiation sensitivity consistent with existing TNO spill_fire range; not a universal jet calibration",
+            "annual_frequency_per_year": null,
+            "annual_frequency_provenance": null,
+            "frequency_event": null,
+            "release_termination": {
+              "basis": "inventory_depletion",
+              "time_s": 0.0625,
+              "provenance": "provider-owned homogeneous finite-storage inventory threshold; vertical handoff adapter remains synthetic"
+            },
+            "source_operator": "equipment_inventory_depletion",
+            "source_duration_mode": "declared",
+            "occupancy_probability": 1.0,
+            "initiation_intensity_per_s": null,
+            "frequency_scope": "single_initiating_event_current_weather",
+            "dispersion_x_max_m": 100.0,
+            "transition_dx_m": 0.05,
+            "transition_x_max_m": 50.0,
+            "n_puff_steps": 80
+          },
+          "uncomputed_reason": null
+        }
+      ]
+    }
+  ],
+  "scope_provenance": "synthetic vertical provider handoff through SLABx-LH2/SLABx and native TNO IR/F-N; handoff physics remains operator-limited",
+  "maximum_physics_cases": 200,
+  "provider_packet_evidence": [],
+  "physical_validation_evidence": {
+    "status": "not_validated",
+    "evidence_id": null,
+    "evidence_digest": null
+  }
+}

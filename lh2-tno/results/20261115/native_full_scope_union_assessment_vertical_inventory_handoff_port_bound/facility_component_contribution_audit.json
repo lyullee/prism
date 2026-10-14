@@ -1,0 +1,849 @@
+{
+  "schema_version": "prism.facility_component_contribution_audit.v1",
+  "status": "FACILITY_COMPONENT_CONTRIBUTIONS_CLOSED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-full-scope-example",
+  "risk_atom_count": 176,
+  "component_count": 9,
+  "component_ids": [
+    "ambient-vaporizer-01",
+    "inventory-depletion-pipe-01",
+    "liquid-transfer-line-01",
+    "liquid-transfer-pump-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01",
+    "transfer-valve-01",
+    "vertical-handoff-terminal-pipe-01"
+  ],
+  "recomputed_component_contributions": {
+    "storage-tank-01": {
+      "component_id": "storage-tank-01",
+      "event_count": 5,
+      "risk_atom_count": 20,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "liquid-transfer-line-01": {
+      "component_id": "liquid-transfer-line-01",
+      "event_count": 5,
+      "risk_atom_count": 20,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "transfer-valve-01": {
+      "component_id": "transfer-valve-01",
+      "event_count": 5,
+      "risk_atom_count": 20,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "pressure-relief-vent-01": {
+      "component_id": "pressure-relief-vent-01",
+      "event_count": 1,
+      "risk_atom_count": 4,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "liquid-transfer-pump-01": {
+      "component_id": "liquid-transfer-pump-01",
+      "event_count": 2,
+      "risk_atom_count": 8,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "ambient-vaporizer-01": {
+      "component_id": "ambient-vaporizer-01",
+      "event_count": 3,
+      "risk_atom_count": 12,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "reliquefier-01": {
+      "component_id": "reliquefier-01",
+      "event_count": 3,
+      "risk_atom_count": 12,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "vertical-handoff-terminal-pipe-01": {
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "event_count": 5,
+      "risk_atom_count": 40,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    },
+    "inventory-depletion-pipe-01": {
+      "component_id": "inventory-depletion-pipe-01",
+      "event_count": 5,
+      "risk_atom_count": 40,
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true
+    }
+  },
+  "stored_component_contributions": {
+    "ambient-vaporizer-01": {
+      "event_count": 3,
+      "risk_atom_count": 12,
+      "operating_modes": [
+        "supply"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
+        "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "ambient-vaporizer-01",
+        "status": "EXECUTED",
+        "operating_modes": [
+          "supply"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
+          "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
+          "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3"
+        ],
+        "event_count": 3,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+          "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3"
+        ],
+        "conditional_case_count": 3,
+        "conditional_executed_case_count": 3,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 0,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 3,
+        "risk_atom_count": 12,
+        "case_status_counts": {
+          "EXECUTED": 3
+        },
+        "strict_uncomputed_status_counts": {},
+        "strict_gate_categories": [],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "inventory-depletion-pipe-01": {
+      "event_count": 5,
+      "risk_atom_count": 40,
+      "operating_modes": [],
+      "hazop_scenario_ids": [],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "inventory-depletion-pipe-01",
+        "status": "EXECUTED",
+        "operating_modes": [],
+        "hazop_scenario_ids": [],
+        "event_count": 5,
+        "event_ids": [
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_1%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_10%",
+          "generic-lh2-full-scope-example/inventory-depletion/terminal_pipe_asset/AREA_100%"
+        ],
+        "conditional_case_count": 10,
+        "conditional_executed_case_count": 10,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 0,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 10,
+        "risk_atom_count": 40,
+        "case_status_counts": {
+          "EXECUTED": 10
+        },
+        "strict_uncomputed_status_counts": {},
+        "strict_gate_categories": [],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "liquid-transfer-line-01": {
+      "event_count": 5,
+      "risk_atom_count": 20,
+      "operating_modes": [
+        "supply"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
+        "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "liquid-transfer-line-01",
+        "status": "PARTIAL",
+        "operating_modes": [
+          "supply"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
+          "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
+          "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
+          "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
+          "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%"
+        ],
+        "event_count": 5,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%"
+        ],
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 5,
+        "operator_limited_case_count": 5,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "numerically_executed_case_count": 5,
+        "risk_atom_count": 20,
+        "case_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 5
+        },
+        "strict_uncomputed_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 5
+        },
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "liquid-transfer-pump-01": {
+      "event_count": 2,
+      "risk_atom_count": 8,
+      "operating_modes": [
+        "supply"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
+        "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "liquid-transfer-pump-01",
+        "status": "PARTIAL",
+        "operating_modes": [
+          "supply"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
+          "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2"
+        ],
+        "event_count": 2,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2"
+        ],
+        "conditional_case_count": 2,
+        "conditional_executed_case_count": 2,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 2,
+        "operator_limited_case_count": 2,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "numerically_executed_case_count": 2,
+        "risk_atom_count": 8,
+        "case_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 2
+        },
+        "strict_uncomputed_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 2
+        },
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "pressure-relief-vent-01": {
+      "event_count": 1,
+      "risk_atom_count": 4,
+      "operating_modes": [
+        "standby"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "pressure-relief-vent-01",
+        "status": "EXECUTED",
+        "operating_modes": [
+          "standby"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1"
+        ],
+        "event_count": 1,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1"
+        ],
+        "conditional_case_count": 1,
+        "conditional_executed_case_count": 1,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 0,
+        "operator_limited_case_count": 0,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 0,
+        "numerically_executed_case_count": 1,
+        "risk_atom_count": 4,
+        "case_status_counts": {
+          "EXECUTED": 1
+        },
+        "strict_uncomputed_status_counts": {},
+        "strict_gate_categories": [],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "reliquefier-01": {
+      "event_count": 3,
+      "risk_atom_count": 12,
+      "operating_modes": [
+        "standby"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
+        "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "reliquefier-01",
+        "status": "PARTIAL",
+        "operating_modes": [
+          "standby"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
+          "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
+          "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6"
+        ],
+        "event_count": 3,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G6"
+        ],
+        "conditional_case_count": 3,
+        "conditional_executed_case_count": 3,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 2,
+        "operator_limited_case_count": 2,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 2,
+        "numerically_executed_case_count": 3,
+        "risk_atom_count": 12,
+        "case_status_counts": {
+          "EXECUTED": 1,
+          "EXECUTED_OPERATOR_LIMITED": 2
+        },
+        "strict_uncomputed_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 2
+        },
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "storage-tank-01": {
+      "event_count": 5,
+      "risk_atom_count": 20,
+      "operating_modes": [
+        "receiving"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
+        "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "storage-tank-01",
+        "status": "PARTIAL",
+        "operating_modes": [
+          "receiving"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
+          "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
+          "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
+          "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
+          "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%"
+        ],
+        "event_count": 5,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%"
+        ],
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 6,
+        "operator_limited_case_count": 5,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "numerically_executed_case_count": 5,
+        "risk_atom_count": 20,
+        "case_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 5
+        },
+        "strict_uncomputed_status_counts": {
+          "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "EXECUTED_OPERATOR_LIMITED": 5
+        },
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "transfer-valve-01": {
+      "event_count": 5,
+      "risk_atom_count": 20,
+      "operating_modes": [
+        "supply"
+      ],
+      "hazop_scenario_ids": [
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
+        "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%"
+      ],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "transfer-valve-01",
+        "status": "PARTIAL",
+        "operating_modes": [
+          "supply"
+        ],
+        "hazop_scenario_ids": [
+          "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
+          "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
+          "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
+          "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
+          "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%"
+        ],
+        "event_count": 5,
+        "event_ids": [
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%"
+        ],
+        "conditional_case_count": 5,
+        "conditional_executed_case_count": 5,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 5,
+        "operator_limited_case_count": 5,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 5,
+        "numerically_executed_case_count": 5,
+        "risk_atom_count": 20,
+        "case_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 5
+        },
+        "strict_uncomputed_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 5
+        },
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ],
+        "frequency_is_not_reallocated": true
+      }
+    },
+    "vertical-handoff-terminal-pipe-01": {
+      "event_count": 5,
+      "risk_atom_count": 40,
+      "operating_modes": [],
+      "hazop_scenario_ids": [],
+      "annual_ir_low_high": {
+        "worker-01": [
+          0.0,
+          0.0
+        ]
+      },
+      "expected_death_fn_low_high": [
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        },
+        {
+          "expected_deaths": [],
+          "cumulative_frequency_per_year": []
+        }
+      ],
+      "frequency_is_not_reallocated": true,
+      "coverage": {
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "status": "PARTIAL",
+        "operating_modes": [],
+        "hazop_scenario_ids": [],
+        "event_count": 5,
+        "event_ids": [
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+        ],
+        "conditional_case_count": 10,
+        "conditional_executed_case_count": 10,
+        "conditional_uncomputed_case_count": 0,
+        "strict_uncomputed_case_count": 10,
+        "operator_limited_case_count": 10,
+        "domain_incomplete_case_count": 0,
+        "failed_case_count": 0,
+        "not_numerically_executed_case_count": 0,
+        "qualified_evidence_withheld_case_count": 10,
+        "numerically_executed_case_count": 10,
+        "risk_atom_count": 40,
+        "case_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 10
+        },
+        "strict_uncomputed_status_counts": {
+          "EXECUTED_OPERATOR_LIMITED": 10
+        },
+        "strict_gate_categories": [
+          "MISSING_PROVIDER_CASES",
+          "OPERATOR_LIMITED_INPUT"
+        ],
+        "frequency_is_not_reallocated": true
+      }
+    }
+  },
+  "recomputed_ranking_order": [
+    "ambient-vaporizer-01",
+    "inventory-depletion-pipe-01",
+    "liquid-transfer-line-01",
+    "liquid-transfer-pump-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01",
+    "transfer-valve-01",
+    "vertical-handoff-terminal-pipe-01"
+  ],
+  "stored_ranking_order": [
+    "ambient-vaporizer-01",
+    "inventory-depletion-pipe-01",
+    "liquid-transfer-line-01",
+    "liquid-transfer-pump-01",
+    "pressure-relief-vent-01",
+    "reliquefier-01",
+    "storage-tank-01",
+    "transfer-valve-01",
+    "vertical-handoff-terminal-pipe-01"
+  ],
+  "mismatch_count": 0,
+  "blocking_reasons": [],
+  "diagnostic_only": true,
+  "frequency_reallocation_performed": false,
+  "facility_ir_fn_promotion": false,
+  "qualified_provider_packet": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "interpretation": "Equipment-level IR/F-N contributions and the diagnostic risk ranking are independently reproduced from risk atoms. Missing equipment cases and provider evidence remain gates.",
+  "_record_path": "results\\20261115\\native_full_scope_union_assessment_vertical_inventory_handoff_port_bound\\facility_component_contribution_audit.json"
+}

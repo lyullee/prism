@@ -1,0 +1,17 @@
+{
+  "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%": [
+    "terminal_pipe.out"
+  ],
+  "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%": [
+    "terminal_pipe.out"
+  ],
+  "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%": [
+    "terminal_pipe.out"
+  ],
+  "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%": [
+    "terminal_pipe.out"
+  ],
+  "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%": [
+    "terminal_pipe.out"
+  ]
+}

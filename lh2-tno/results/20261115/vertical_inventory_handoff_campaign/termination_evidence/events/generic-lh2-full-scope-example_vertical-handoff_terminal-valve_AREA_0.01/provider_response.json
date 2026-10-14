@@ -1,0 +1,92 @@
+{
+  "ok": true,
+  "data": {
+    "event_kind": "accidental_leak",
+    "fluid": "ParaHydrogen",
+    "steps": [
+      {
+        "time_s": 0.0,
+        "mass_flow_kg_s": 8.28183191105064e-08,
+        "pressure_pa_abs": 100000.0,
+        "specific_enthalpy_j_kg": 450907.05085843545,
+        "temperature_k": 20.653245953270563,
+        "density_kg_m3": 1.28801930727492,
+        "effective_area_m2": 1e-09,
+        "velocity_m_s": 64.2989733482538,
+        "area_provenance": "provider-owned inventory valve area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "upstream_pressure_pa_abs": 104249.29753622827,
+        "upstream_temperature_k": 20.741254163564868,
+        "interval_value_origin": "provider_interval_average_from_dynamic_network",
+        "valve_opening": 1.0
+      },
+      {
+        "time_s": 0.5,
+        "mass_flow_kg_s": 8.08180186165339e-08,
+        "pressure_pa_abs": 100000.0,
+        "specific_enthalpy_j_kg": 450587.6732768463,
+        "temperature_k": 20.62630883083045,
+        "density_kg_m3": 1.2901510247262165,
+        "effective_area_m2": 1e-09,
+        "velocity_m_s": 62.64229308633408,
+        "area_provenance": "provider-owned inventory valve area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "upstream_pressure_pa_abs": 104039.9408639254,
+        "upstream_temperature_k": 20.709987125171704,
+        "interval_value_origin": "provider_interval_average_from_dynamic_network",
+        "valve_opening": 1.0
+      },
+      {
+        "time_s": 1.0,
+        "mass_flow_kg_s": 7.887599373025605e-08,
+        "pressure_pa_abs": 100000.0,
+        "specific_enthalpy_j_kg": 450287.6011940715,
+        "temperature_k": 20.601019152910823,
+        "density_kg_m3": 1.2921600837697826,
+        "effective_area_m2": 1e-09,
+        "velocity_m_s": 61.0419674164064,
+        "area_provenance": "provider-owned inventory valve area",
+        "velocity_origin": "mass_continuity_from_declared_area",
+        "upstream_pressure_pa_abs": 103842.1886657195,
+        "upstream_temperature_k": 20.680595089712064,
+        "interval_value_origin": "provider_interval_average_from_dynamic_network",
+        "valve_opening": 1.0
+      }
+    ],
+    "duration_s": 1.5,
+    "requested_duration_s": 40.0,
+    "time_step_s": 0.5,
+    "available_mass_kg": 0.00013416755831850078,
+    "remaining_inventory_kg": 0.00013404630215277215,
+    "depletion_threshold_kg": 0.00013405,
+    "inventory_depletion_detected": true,
+    "cumulative_mass_out_kg": 1.2125616572864818e-07,
+    "cumulative_static_enthalpy_out_j": 0.05463792450151787,
+    "max_total_mass_residual_kg": 1.3413560813159897e-20,
+    "max_total_energy_residual_j": 1.6893084153757343e-13,
+    "provider_intervals": 3,
+    "provider_terminal_area_m2": 1e-09,
+    "provider_valve_area_m2": 1e-09,
+    "provider_link_id": "inventory_valve",
+    "state_owner": "equipment_twin",
+    "discharge_owner": "equipment_twin",
+    "provider_state_snapshot_digest": "52389b2186bf26ca16b1850cfa69240285ffec418ddaa53a7799c16fe0eb6551",
+    "termination_basis": "inventory_depletion",
+    "termination_provenance": "provider positive-mass depletion threshold reached; remaining inventory 0.00013404630215277215 kg"
+  },
+  "limitation": "Provider-owned homogeneous finite-storage tank and commanded full-open valve. Depletion is an explicit positive-mass numerical threshold, not a claim that the external EOS admits a zero-mass state; no liquid two-phase tank feedback or plant calibration is inferred.",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "dependencies": {
+      "CoolProp": "8.0.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1"
+    }
+  },
+  "request_digest": "0b8185a7283d5d0ab25726c8a34823d8139a15bc5c546273dc3283889e0d701e",
+  "backend_config_digest": "fb56057f96476fef943195072540c22485e9f8b1f145f1121543c980134e7e39",
+  "worker_sha256": "b2bfe2d57e393ad4641cb687d977c489162b270f70897a88ec4769c449a4b264",
+  "adapter_source_digest": "fb2d5aa9ec253da1dcdfba82a179a1b8add834192d8118f3e55cc5a5f75b3246",
+  "elapsed_ms": 1945.925600011833,
+  "physical_validation_claim": false
+}

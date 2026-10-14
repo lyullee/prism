@@ -23,6 +23,13 @@ def _object(path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--storage-catalog-dir", type=Path)
+    parser.add_argument(
+        "--additional-storage-catalog-dir",
+        action="append",
+        type=Path,
+        default=[],
+        help="Additional storage-style catalog directory; may be repeated.",
+    )
     parser.add_argument("--inventory-provider-responses", type=Path)
     parser.add_argument("--inventory-resolved-releases", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -48,6 +55,7 @@ def main() -> int:
         )
         report = build_provider_termination_evidence_catalog(
             storage_catalog_dir=args.storage_catalog_dir,
+            additional_storage_catalog_dirs=args.additional_storage_catalog_dir,
             inventory_provider_responses=provider_responses,
             inventory_resolved_releases=resolved_releases,
             inventory_source_paths={

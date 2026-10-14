@@ -1,0 +1,73 @@
+{
+  "id": "vertical-vent-campaign",
+  "configuration_origin": "synthetic",
+  "environment": "outdoor",
+  "components": [
+    {
+      "id": "terminal_pipe",
+      "kind": "pipe",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "property_basis": {
+        "fluid": "ParaHydrogen",
+        "backend": "CoolProp-HEOS",
+        "energy_reference": "CoolProp-HEOS:ParaHydrogen:native"
+      },
+      "parameters_si": {
+        "length_m": 1.0,
+        "diameter_m": 0.0254
+      }
+    }
+  ],
+  "ports": [
+    {
+      "id": "terminal_pipe.out",
+      "component_id": "terminal_pipe",
+      "phase": "vapour",
+      "direction": "out",
+      "position_enu_m": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "edges": [],
+  "receptors": [
+    {
+      "id": "near_worker",
+      "position_enu_m": [
+        2.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "downwind_worker",
+      "position_enu_m": [
+        10.0,
+        0.0,
+        0.1
+      ]
+    },
+    {
+      "id": "side_worker",
+      "position_enu_m": [
+        25.0,
+        4.0,
+        1.8
+      ]
+    },
+    {
+      "id": "distant_worker",
+      "position_enu_m": [
+        60.0,
+        0.0,
+        1.8
+      ]
+    }
+  ]
+}

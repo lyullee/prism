@@ -1,0 +1,20 @@
+{
+  "schema_version": "prism.vertical_inventory_termination_evidence_materialization.v1",
+  "status": "MATERIALIZED",
+  "event_count": 5,
+  "event_ids": [
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+    "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%"
+  ],
+  "errors": [],
+  "source_rebound_result": "results\\20261115\\vertical_inventory_handoff_rebound_facility_result_port_bound.json",
+  "source_provider_responses": "results\\20261009\\equipment_inventory_campaign\\provider_responses.json",
+  "output_dir": "results\\20261115\\vertical_inventory_handoff_campaign\\termination_evidence",
+  "provider_qualification_claim": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "policy": "termination evidence is provider-owned finite inventory accounting; positive threshold is not interpreted as zero inventory and the vertical handoff remains unvalidated"
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "prism.frequency_port_binding_audit.v1",
+  "status": "FREQUENCY_PORT_RESULT_BOUND",
+  "event_count": 5,
+  "port_scoped_event_count": 5,
+  "row_mismatch_count": 0,
+  "frequency_inference_performed": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "policy": {
+    "port_ids_are_explicit_crosswalk_input": true,
+    "provider_ports_are_never_used_to_create_frequency_ports": true,
+    "sensor_frequency_learning": false
+  }
+}
