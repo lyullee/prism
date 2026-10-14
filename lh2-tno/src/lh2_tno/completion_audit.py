@@ -3256,6 +3256,10 @@ def build_ijhe_completion_audit(
             and "1 Hz" in integrated_timing.get("interpretation", "")
         )
         forecast_facility_campaign = integrated.get("forecast_facility_campaign")
+        forecast_facility_campaign_structure_valid = True
+        forecast_facility_campaign_count = None
+        forecast_facility_campaign_row_count = None
+        forecast_facility_campaign_evaluated_count = None
         if forecast_facility_campaign is None:
             forecast_facility_campaign_valid = True
             forecast_facility_campaign_status = "LEGACY_NOT_REPORTED"
@@ -3269,6 +3273,65 @@ def build_ijhe_completion_audit(
                 if isinstance(forecast_facility_campaign_policy, Mapping)
                 else {}
             )
+            if forecast_facility_campaign_status == (
+                "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED"
+            ):
+                # Every evaluated forecast trigger must retain its equipment
+                # and HAZOP identity plus a conditional facility ledger. This
+                # is diagnostic evidence only; it never qualifies a provider
+                # packet or promotes a facility QRA.
+                forecast_facility_campaign_count = forecast_facility_campaign.get(
+                    "campaign_count"
+                )
+                forecast_facility_campaign_evaluated_count = forecast_facility_campaign.get(
+                    "forecast_evaluated_count"
+                )
+                forecast_campaign_rows = forecast_facility_campaign.get("campaigns")
+                forecast_facility_campaign_row_count = (
+                    len(forecast_campaign_rows)
+                    if isinstance(forecast_campaign_rows, list)
+                    else None
+                )
+                forecast_facility_campaign_structure_valid = (
+                    isinstance(forecast_facility_campaign_count, int)
+                    and not isinstance(forecast_facility_campaign_count, bool)
+                    and forecast_facility_campaign_count >= 1
+                    and isinstance(forecast_facility_campaign_evaluated_count, int)
+                    and not isinstance(forecast_facility_campaign_evaluated_count, bool)
+                    and forecast_facility_campaign_evaluated_count
+                    == forecast_facility_campaign_count
+                    and isinstance(forecast_campaign_rows, list)
+                    and len(forecast_campaign_rows) == forecast_facility_campaign_count
+                    and all(
+                        isinstance(row, Mapping)
+                        and _finite(row.get("forecast_time_s"))
+                        and float(row.get("forecast_time_s")) >= 0.0
+                        and isinstance(row.get("component_id"), str)
+                        and bool(row.get("component_id"))
+                        and isinstance(row.get("scenario_id"), str)
+                        and bool(row.get("scenario_id"))
+                        and isinstance(row.get("facility_ledger"), Mapping)
+                        and row["facility_ledger"].get(
+                            "conditional_diagnostic_facility_risk_available"
+                        ) is True
+                        and isinstance(
+                            row["facility_ledger"].get(
+                                "conditional_diagnostic_facility_annual_ir_low_high"
+                            ),
+                            Mapping,
+                        )
+                        and bool(
+                            row["facility_ledger"].get(
+                                "conditional_diagnostic_facility_annual_ir_low_high"
+                            )
+                        )
+                        and row["facility_ledger"].get("complete_facility_qra_claim")
+                        is not True
+                        and row["facility_ledger"].get("qualified_facility_qra_available")
+                        is not True
+                        for row in forecast_campaign_rows
+                    )
+                )
             forecast_facility_campaign_valid = (
                 forecast_facility_campaign_status in {
                     "FORECAST_FACILITY_CAMPAIGN_NOT_REQUESTED",
@@ -3282,6 +3345,7 @@ def build_ijhe_completion_audit(
                 and forecast_facility_campaign_policy.get("frequency_inference_performed") is False
                 and forecast_facility_campaign_policy.get("physical_validation_claim") is False
                 and forecast_facility_campaign.get("complete_facility_qra_claim") is not True
+                and forecast_facility_campaign_structure_valid
             )
         else:
             forecast_facility_campaign_status = "INVALID"
@@ -3320,6 +3384,10 @@ def build_ijhe_completion_audit(
                 "forecast_status": forecast.get("status"),
                 "facility_campaign_status": facility_campaign_status,
                 "forecast_facility_campaign_status": forecast_facility_campaign_status,
+                "forecast_facility_campaign_count": forecast_facility_campaign_count,
+                "forecast_facility_campaign_row_count": forecast_facility_campaign_row_count,
+                "forecast_facility_campaign_evaluated_count": forecast_facility_campaign_evaluated_count,
+                "forecast_facility_campaign_structure_valid": forecast_facility_campaign_structure_valid,
                 "timing": dict(integrated_timing) if isinstance(integrated_timing, Mapping) else None,
                 "integrated_timing_valid": integrated_timing_valid,
                 "current_component_count": len(current_component_ids)
@@ -3333,7 +3401,7 @@ def build_ijhe_completion_audit(
                 else None,
                 "policy": dict(policy),
             },
-            "integrated current/forecast HAZOP ledger is missing scoped identity, timing-path policy, or fail-closed promotion controls",
+            "integrated current/forecast HAZOP ledger is missing scoped identity, timing-path policy, evaluated forecast facility handoff, or fail-closed promotion controls",
         )
         integrated_check["diagnostic_only"] = True
         integrated_check["interpretation"] = (

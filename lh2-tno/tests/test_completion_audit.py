@@ -343,6 +343,72 @@ def test_completion_audit_accepts_existing_hazop_forecast_campaign_status():
     assert check["status"] == "PASS"
 
 
+def test_completion_audit_requires_evaluated_forecast_facility_handoff_rows():
+    ledger = _integrated_hazop_ledger()
+    ledger["forecast_facility_campaign"] = {
+        "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+        "campaign_count": 1,
+        "forecast_evaluated_count": 1,
+        "campaigns": [],
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=ledger,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["evidence"]["forecast_facility_campaign_structure_valid"] is False
+
+
+def test_completion_audit_accepts_structured_evaluated_forecast_facility_handoff():
+    ledger = _integrated_hazop_ledger()
+    ledger["forecast_facility_campaign"] = {
+        "status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+        "campaign_count": 1,
+        "forecast_evaluated_count": 1,
+        "campaigns": [{
+            "forecast_time_s": 10.0,
+            "component_id": "TK-01",
+            "scenario_id": "scenario-01",
+            "facility_ledger": {
+                "conditional_diagnostic_facility_risk_available": True,
+                "conditional_diagnostic_facility_annual_ir_low_high": {
+                    "worker-01": [1e-6, 2e-6],
+                },
+                "complete_facility_qra_claim": False,
+                "qualified_facility_qra_available": False,
+            },
+        }],
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_integrated_risk=ledger,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_integrated_risk"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["forecast_facility_campaign_structure_valid"] is True
+
+
 def test_completion_audit_blocks_forecast_mode_trace_mismatch():
     forecast = {
         "schema_version": "prism.hazop_forecast_risk_scan.v1",

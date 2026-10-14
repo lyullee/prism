@@ -66,13 +66,16 @@ provider packet에 지면 액체가 있지만 풀 경계가 없으므로, 실행
 | 조건부 시설 IR | 계산됨 (`conditional_diagnostic_facility_risk_available=true`) |
 | 조건부 시설 F/N | 계산됨 (`conditional_diagnostic_facility_expected_death_fn_low_high`) |
 | 예측 시설 campaign handoff | `FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED` 1건; 예측시각별 조건부 IR/F-N 원장 연결 |
+| 예측 handoff 구조 감사 | 1건의 예측 campaign row가 설비 ID·HAZOP 시나리오 ID·조건부 시설 IR ledger를 모두 보유; `diagnostic_hazop_integrated_risk=PASS` |
 | 빈도 사건 포트 추적 | `tank-accident-out` event/case/risk atom 일치, `facility_qra_allowed=true` 하위 gate |
 | 시설 연간 IR/F-N 승격 | 보류 (`facility_total_risk_available=false`) |
-| 처리시간 | 이번 실행 통합 호출 약 28.88 s, provider consequence 약 14.51 s; 1 Hz 보장 아님 |
+| 처리시간 | 이번 실행 통합 호출 약 28.17 s, provider consequence 약 14.20 s; 1 Hz 보장 아님 |
 
 현재 위험 원자는 `storage-tank-01`, `receiving`, `liquid_two_phase`로 기록된다. 문헌 사건의 published frequency와 p05/p95 민감도 구간은 원자 안에 provenance와 source digest와 함께 남는다. 별도 uncertainty ledger가 저장된 risk atom을 p05/published/p95로 재가중하며, 새 물리 계산은 하지 않는다. 이어서 동일한 원자의 branch별 피해와 명시적 합성 인구 조건을 기존 시설 campaign에 넘겨 조건부 IR과 F/N 곡선을 만들었다. 이 곡선은 선언한 한 조건과 한 수용점의 진단 결과이며, 전체 시설 연간 IR/F-N이 아니다.
 
 예측 경로도 현재 경로와 같은 시설 campaign 계약으로 넘긴다. `scenario_entries[].evaluation.result`를 현재 runtime으로 가장하지 않고, 각 정량평가 trigger에서 provider consequence·명시적 문헌 빈도·합성 기상/인구 조건을 하나의 `FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED` handoff로 만든다. 이 원장은 예측시각별 조건부 IR/F-N만 보여 주며 예측시각을 연간확률로 해석하거나 서로 다른 시각을 합산하지 않는다. provider qualification·독립 물리검증·시설 전체 IR/F-N은 계속 보류된다.
+
+완료 감사는 이 handoff의 상태 문자열만 확인하지 않는다. 평가된 상태이면 `campaign_count`와 `campaigns`의 개수가 맞아야 하고, 각 행에 `forecast_time_s`, `component_id`, `scenario_id`, `facility_ledger.conditional_diagnostic_facility_risk_available`, 조건부 IR 원장, 그리고 QRA 승격 차단 플래그가 있어야 한다. 구조가 빠진 예측 결과는 진단 통합 검사에서 즉시 보류된다.
 
 ## 이 결과가 의미하는 것
 
