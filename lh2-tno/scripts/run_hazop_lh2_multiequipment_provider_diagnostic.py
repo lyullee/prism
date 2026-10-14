@@ -33,6 +33,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.backend import BackendConfig, IsolatedBackend, tree_digest  # noqa: E402
+from lh2_tno.accident_scenario_catalog import (  # noqa: E402
+    audit_catalog_manifest,
+    scenario_definition,
+)
 from lh2_tno.consequences import ConsequenceRequest  # noqa: E402
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.frequency import FrequencyPlan, generate_events  # noqa: E402
@@ -340,6 +344,69 @@ def _runtime_sources(specs: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]
 
 def _scenario_id(spec: Mapping[str, Any]) -> str:
     return f"{spec['component_id']}-mode-deviation:{spec['operating_mode']}:{spec['scenario_family']}"
+
+
+def _build_scope_catalog(
+    manifest: EquipmentManifest,
+    runtime: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Expose every declared outdoor family and its current dispatch status.
+
+    A HAZOP smoke run intentionally dispatches one representative row per
+    equipment kind.  This catalog prevents that sample from being mistaken for
+    complete family coverage: applicable families with no current row remain
+    explicitly ``APPLICABLE_NOT_DISPATCHED`` with the catalog's required
+    provider evidence.
+    """
+    catalog = audit_catalog_manifest(
+        [{"id": component.id, "kind": component.kind} for component in manifest.components]
+    )
+    observed_by_family: dict[str, set[str]] = {}
+    for atom in runtime.get("risk_atoms", ()):
+        if not isinstance(atom, Mapping):
+            continue
+        component_id = str(atom.get("component_id", ""))
+        families = atom.get("scenario_families")
+        if not isinstance(families, Sequence) or isinstance(families, (str, bytes)):
+            family = atom.get("scenario_family")
+            families = [family] if isinstance(family, str) and family else []
+        for family in families:
+            observed_by_family.setdefault(str(family), set()).add(component_id)
+    rows: list[dict[str, Any]] = []
+    for row in catalog["rows"]:
+        family = str(row["family"])
+        definition = scenario_definition(family)
+        applicable_ids = list(row["applicable_component_ids"])
+        observed_ids = sorted(observed_by_family.get(family, set()))
+        enriched = dict(row)
+        enriched.update({
+            "status": (
+                "NOT_APPLICABLE"
+                if not applicable_ids
+                else "DISPATCHED_DIAGNOSTIC"
+                if observed_ids
+                else "APPLICABLE_NOT_DISPATCHED"
+            ),
+            "observed_component_ids": observed_ids,
+            "uncomputed_default_reason": definition["uncomputed_default_reason"],
+            "consequence_path": definition["consequence_path"],
+        })
+        rows.append(enriched)
+    return {
+        "schema": catalog["schema"],
+        "scenario_count": len(rows),
+        "rows": rows,
+        "dispatched_family_count": sum(row["status"] == "DISPATCHED_DIAGNOSTIC" for row in rows),
+        "applicable_not_dispatched_family_count": sum(
+            row["status"] == "APPLICABLE_NOT_DISPATCHED" for row in rows
+        ),
+        "not_applicable_family_count": sum(row["status"] == "NOT_APPLICABLE" for row in rows),
+        "policy": {
+            "representative_hazop_rows_are_not_full_family_coverage": True,
+            "missing_family_is_not_substituted": True,
+            "frequency_inference_performed": False,
+        },
+    }
 
 
 def _resolve_packet_paths(packet_root: Path | None) -> tuple[dict[str, Path], dict[str, Any]]:
@@ -768,6 +835,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         release_resolvers=resolvers,
     )
     runtime_elapsed_ms = (time.perf_counter() - runtime_started) * 1000.0
+    scope_catalog = _build_scope_catalog(manifest, runtime)
     accepted_ids = [
         str(component_id)
         for component_id, row in runtime.get("components", {}).items()
@@ -799,6 +867,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "table": table,
         "frames": frames_output,
         "component_input": component_input,
+        "scope_catalog": scope_catalog,
         "packet_override": packet_override,
         "geometry_rebase": geometry_rebase,
         "current": runtime,

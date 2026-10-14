@@ -128,4 +128,6 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
 
 설비별 지속시간·종료근거·차단상태·재고장부·SLABx-LH2 실행상태·처리시간과 7개 위험원자를 축약한 기계판독 결과는 [`hazop_multiequipment_provider_isolation_execution_20261014.json`](../examples/hazop_multiequipment_provider_isolation_execution_20261014.json)에서 확인할 수 있다. 이 스냅샷은 배관 branch의 30초 deadline 초과와 탱크·밸브·펌프의 잔여 재고도 그대로 남긴다.
 
+같은 스냅샷의 범위 카탈로그에는 12개 선언 사고군 중 현재 대표 행으로 실제 dispatch된 5개와 적용 가능하지만 아직 dispatch하지 않은 7개가 분리되어 있다. 예를 들어 저장탱크의 이번 대표 행은 `liquid_two_phase`이므로 `vessel_hole`은 자동으로 완료 처리되지 않는다.
+
 따라서 이 결과의 의미는 “모든 구성요소를 같은 코드 경로로 계산할 수 있다”는 진단 증거다. 이것은 현장 ESD/밸브 고장확률, 차단 성공확률, 실제 plant geometry·인구·기상, 또는 IJHE용 qualified facility IR/F-N을 확정하지 않는다. 다음 승격 조건은 각 설비의 reviewed actuator/isolation 시험자료, 현장 포트·좌표 확인, 사고빈도 근거와 독립 SLABx-LH2 holdout 검증이다.

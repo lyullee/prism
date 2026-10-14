@@ -20,6 +20,115 @@
     "standby",
     "supply"
   ],
+  "scope_catalog": {
+    "scenario_count": 12,
+    "dispatched_family_count": 5,
+    "applicable_not_dispatched_family_count": 7,
+    "not_applicable_family_count": 0,
+    "rows": [
+      {
+        "family": "vessel_hole",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 1,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "provider-resolved vessel accident history is required"
+      },
+      {
+        "family": "pipe_hole",
+        "status": "DISPATCHED_DIAGNOSTIC",
+        "applicable_component_count": 1,
+        "observed_component_ids": [
+          "liquid-transfer-line-01"
+        ],
+        "uncomputed_default_reason": "provider-resolved pipe accident history is required"
+      },
+      {
+        "family": "valve_hole",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 1,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "provider-resolved valve accident history is required"
+      },
+      {
+        "family": "vent_hole",
+        "status": "DISPATCHED_DIAGNOSTIC",
+        "applicable_component_count": 1,
+        "observed_component_ids": [
+          "pressure-relief-vent-01"
+        ],
+        "uncomputed_default_reason": "qualified relief set-point and discharge history are required"
+      },
+      {
+        "family": "pump_hole",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 1,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "provider-resolved pump accident history is required"
+      },
+      {
+        "family": "vaporizer_hole",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 1,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "provider-resolved vaporizer accident history is required"
+      },
+      {
+        "family": "reliquefier_hole",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 1,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "provider-resolved reliquefier accident history is required"
+      },
+      {
+        "family": "liquid_two_phase",
+        "status": "DISPATCHED_DIAGNOSTIC",
+        "applicable_component_count": 6,
+        "observed_component_ids": [
+          "liquid-transfer-pump-01",
+          "storage-tank-01",
+          "transfer-valve-01"
+        ],
+        "uncomputed_default_reason": "liquid outlet packet with phase and enthalpy ledger is required"
+      },
+      {
+        "family": "inventory_depletion",
+        "status": "DISPATCHED_DIAGNOSTIC",
+        "applicable_component_count": 6,
+        "observed_component_ids": [
+          "ambient-vaporizer-01"
+        ],
+        "uncomputed_default_reason": "provider packet must close the mass inventory at depletion"
+      },
+      {
+        "family": "inventory_over_600s",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 6,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "provider must supply exactly 600 s and a closed mass ledger"
+      },
+      {
+        "family": "two_sided_rupture",
+        "status": "DISPATCHED_DIAGNOSTIC",
+        "applicable_component_count": 3,
+        "observed_component_ids": [
+          "reliquefier-01"
+        ],
+        "uncomputed_default_reason": "two endpoint packets and shared inventory closure are required"
+      },
+      {
+        "family": "vertical_handoff",
+        "status": "APPLICABLE_NOT_DISPATCHED",
+        "applicable_component_count": 3,
+        "observed_component_ids": [],
+        "uncomputed_default_reason": "validated vertical free-jet and handoff state are required"
+      }
+    ],
+    "policy": {
+      "representative_hazop_rows_are_not_full_family_coverage": true,
+      "missing_family_is_not_substituted": true,
+      "frequency_inference_performed": false
+    }
+  },
   "component_traces": [
     {
       "component_id": "ambient-vaporizer-01",
@@ -46,7 +155,7 @@
         "mass_residual_kg": 8.470329472543003e-22
       },
       "timing": {
-        "service_elapsed_s": 5.42391480000515,
+        "service_elapsed_s": 4.707239299998037,
         "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
@@ -59,25 +168,25 @@
       "runtime_status": "CONSEQUENCE_BRANCHES_EVALUATED",
       "consequence_full_chain_executed": true,
       "slabx_lh2_status": "END_TO_END_DIAGNOSTIC_EXECUTED",
-      "release_duration_s": 0.0314138009816233,
+      "release_duration_s": 0.00051,
       "termination": {
-        "basis": "model_pressure_equalization",
-        "time_s": 0.0314138009816233
+        "basis": "reviewed_isolation_success",
+        "time_s": 0.00051
       },
       "isolation": {
-        "status": "MODEL_NATURAL_TERMINATION",
-        "basis": "model_pressure_equalization"
+        "status": "ISOLATION_SUCCESS_DECLARED",
+        "basis": "reviewed_isolation_success"
       },
       "inventory": {
         "status": "MASS_BALANCE_CLOSED",
-        "available_mass_kg": 0.015722666567477814,
-        "cumulative_mass_out_kg": 0.01290085955808893,
-        "remaining_mass_kg": 0.0028218070093888846,
-        "mass_residual_kg": 0.0028218070093888846
+        "available_mass_kg": 0.010622803086219499,
+        "cumulative_mass_out_kg": 4.325923524346351e-06,
+        "remaining_mass_kg": 0.010618477162695152,
+        "mass_residual_kg": 0.010618477162695152
       },
       "timing": {
-        "service_elapsed_s": 47.057367400004296,
-        "deadline_status": "MISSED",
+        "service_elapsed_s": 8.444191599999613,
+        "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
     },
@@ -106,7 +215,7 @@
         "mass_residual_kg": 0.9999870175511798
       },
       "timing": {
-        "service_elapsed_s": 9.133498700000928,
+        "service_elapsed_s": 6.342110199999297,
         "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
@@ -136,7 +245,7 @@
         "mass_residual_kg": 0.00013478583695106987
       },
       "timing": {
-        "service_elapsed_s": 4.187559999998484,
+        "service_elapsed_s": 3.69883779999509,
         "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
@@ -166,7 +275,7 @@
         "mass_residual_kg": 0.0008237817057435886
       },
       "timing": {
-        "service_elapsed_s": 6.490825199995015,
+        "service_elapsed_s": 6.213235499999428,
         "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
@@ -196,7 +305,7 @@
         "mass_residual_kg": 0.020260580681161662
       },
       "timing": {
-        "service_elapsed_s": 14.641854200002854,
+        "service_elapsed_s": 12.654561600000306,
         "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
@@ -226,7 +335,7 @@
         "mass_residual_kg": 0.9988924889842065
       },
       "timing": {
-        "service_elapsed_s": 12.775680699996883,
+        "service_elapsed_s": 10.893797800003085,
         "deadline_status": "MET",
         "fresh_physics_this_update": true
       }
@@ -241,8 +350,8 @@
     "risk_atom_count": 28,
     "conditional_diagnostic_facility_annual_ir_low_high": {
       "worker-01": [
-        4.78e-05,
-        4.78e-05
+        4.7990000000000006e-05,
+        4.7990000000000006e-05
       ]
     },
     "conditional_diagnostic_facility_expected_death_fn_low_high": [
@@ -251,7 +360,7 @@
           1.0
         ],
         "cumulative_frequency_per_year": [
-          4.78e-05
+          4.7990000000000006e-05
         ]
       },
       {
@@ -259,7 +368,7 @@
           1.0
         ],
         "cumulative_frequency_per_year": [
-          4.78e-05
+          4.7990000000000006e-05
         ]
       }
     ],
@@ -288,8 +397,7 @@
         "termination_basis_counts": {
           "emergency_relief_discharge": 1,
           "inventory_depletion": 2,
-          "model_pressure_equalization": 1,
-          "reviewed_isolation_success": 2,
+          "reviewed_isolation_success": 3,
           "two_sided_rupture": 1
         },
         "complete_row_count": 0,
@@ -583,11 +691,9 @@
     }
   },
   "processing_time": {
-    "runtime_elapsed_ms": 99721.08970000409,
-    "total_elapsed_ms": 99798.65340000106,
-    "deadline_missed_component_ids": [
-      "liquid-transfer-line-01"
-    ]
+    "runtime_elapsed_ms": 52960.95400000195,
+    "total_elapsed_ms": 53049.49060000217,
+    "deadline_missed_component_ids": []
   },
   "policy": {
     "operating_mode_taken_from_input": true,
@@ -597,12 +703,19 @@
     "facility_qra_promotion": false,
     "physical_validation_claim": false,
     "facility_scope_complete": false,
-    "synthetic_diagnostic_inputs_present": true
+    "synthetic_diagnostic_inputs_present": true,
+    "annual_condition_source": {
+      "source": "caller_file",
+      "path": "examples\\generic_lh2_near_receptor_annual_conditions.json",
+      "condition_count": 1,
+      "provenance_policy": "caller-supplied weather/population is passed through; no site qualification is inferred"
+    }
   },
   "limitations": [
     "All seven branches are numerically executed but remain EXECUTED_OPERATOR_LIMITED and are not qualified provider evidence.",
     "The facility geometry, receptor occupancy, weather condition and isolation observations are diagnostic inputs, not a qualified plant dataset.",
     "The pipe branch misses the 30 s monitor deadline; no stale result is substituted.",
+    "Only representative HAZOP rows were dispatched: applicable families marked APPLICABLE_NOT_DISPATCHED remain uncomputed and are never substituted.",
     "Conditional IR/F-N is exposed for the seven accepted atoms, while qualified facility total risk remains withheld."
   ],
   "execution_source": "results/20261014/hazop_multiequipment_provider_isolation_diagnostic.json"

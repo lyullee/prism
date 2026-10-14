@@ -108,3 +108,26 @@ def test_loader_rejects_first_condition_weather_drift(
             defaults={"weather": {"wind_speed_m_s": 3.0}},
             manifest=manifest,
         )
+
+
+def test_scope_catalog_keeps_applicable_undispatched_families_explicit(
+    manifest: EquipmentManifest,
+) -> None:
+    catalog = MODULE._build_scope_catalog(
+        manifest,
+        {
+            "risk_atoms": [
+                {
+                    "component_id": "storage-tank-01",
+                    "scenario_family": "vessel_hole",
+                }
+            ]
+        },
+    )
+
+    assert catalog["scenario_count"] == 12
+    assert catalog["policy"]["missing_family_is_not_substituted"] is True
+    rows = {row["family"]: row for row in catalog["rows"]}
+    assert rows["vessel_hole"]["status"] == "DISPATCHED_DIAGNOSTIC"
+    assert rows["pipe_hole"]["status"] == "APPLICABLE_NOT_DISPATCHED"
+    assert rows["vertical_handoff"]["status"] == "APPLICABLE_NOT_DISPATCHED"
