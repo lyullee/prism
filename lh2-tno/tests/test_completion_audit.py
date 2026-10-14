@@ -2681,6 +2681,72 @@ def test_completion_audit_blocks_malformed_native_isolation_branch_catalog_diagn
     assert report["complete_facility_qra_claim"] is False
 
 
+def _native_isolation_facility_chain(**overrides):
+    record = {
+        "schema_version": "prism.native_isolation_catalog_facility_chain.v1",
+        "status": "NATIVE_ISOLATION_CATALOG_FACILITY_CHAIN_EXECUTED_DIAGNOSTIC",
+        "frequency_event_count": 2,
+        "exact_native_packet_count": 2,
+        "uncomputed_packet_event_count": 0,
+        "isolation_success_count": 1,
+        "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+        "campaign_case_count": 2,
+        "risk_atom_count": 8,
+        "conditional_diagnostic_facility_risk_available": True,
+        "conditional_diagnostic_facility_annual_ir_low_high": {"worker-01": [0.0, 0.0]},
+        "conditional_diagnostic_facility_expected_death_fn_low_high": [
+            {"expected_deaths": [], "cumulative_frequency_per_year": []},
+            {"expected_deaths": [], "cumulative_frequency_per_year": []},
+        ],
+        "conditional_diagnostic_facility_coverage": {
+            "conditional_case_count": 2,
+            "conditional_uncomputed_case_count": 0,
+        },
+        "timing": {"fresh_physics_cases": 2, "campaign_elapsed_ms": 120.0},
+        "provider_packet_promoted": False,
+        "frequency_inference_performed": False,
+        "physical_validation_claim": False,
+        "facility_qra_claim": False,
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_native_isolation_facility_chain_diagnostic():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_isolation_catalog_facility_chain_verification=_native_isolation_facility_chain(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_isolation_catalog_facility_chain"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["risk_atom_count"] == 8
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_native_isolation_facility_chain_without_conditional_coverage():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        native_isolation_catalog_facility_chain_verification=_native_isolation_facility_chain(
+            conditional_diagnostic_facility_risk_available=False
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_native_isolation_catalog_facility_chain"
+    )
+    assert check["status"] == "BLOCKED"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_records_observed_state_evidence_without_accident_promotion():
     model_binding = {
         "schema": "prism.observed_state_model_binding_audit.v1",

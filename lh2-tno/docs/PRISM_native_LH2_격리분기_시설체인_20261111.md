@@ -62,3 +62,7 @@ python scripts/run_native_isolation_catalog_facility_chain.py `
 - 19개 operator-limited case와 1개 domain-incomplete case는 숫자 결과가 있어도 strict 시설 경계에서 보류한다.
 - 문헌 빈도 불확실성은 p05/published/p95를 조건부로 계산하지만, 현장 사고빈도나 센서 신호에서 빈도를 학습하지 않는다.
 - 실제 시설 IR/F-N 승격에는 설비별 적격 provider packet, 현장 형상·수신점·인구 검토, 독립 물리검증, 전체 사고범위 폐합이 추가로 필요하다.
+
+## IJHE 완료 감사 연결
+
+최신 완료 감사([`ijhe_completion_audit_with_native_isolation_catalog_facility_chain_checks.json`](../results/20261111/ijhe_completion_audit_with_native_isolation_catalog_facility_chain_checks.json))는 34개 검사 중 29개를 통과시키고 5개 strict blocker를 남긴다. `diagnostic_native_isolation_catalog_facility_chain`은 24개 exact packet, 24개 case, 96개 risk atom, 조건부 시설 IR/F-N 경로와 처리시간을 확인한다. 감사는 시설 전체 IR/F-N을 보류 상태로 유지하며, 적격 provider·독립 물리검증·완전 사고범위가 준비되기 전에는 결과를 시설 QRA로 승격하지 않는다.

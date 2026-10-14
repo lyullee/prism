@@ -109,6 +109,7 @@ def build_ijhe_completion_audit(
     observed_hazop_storage_isolation_branch_evidence: Mapping[str, Any] | None = None,
     observed_hazop_vaporizer_isolation_branch_evidence: Mapping[str, Any] | None = None,
     native_scope_isolation_branch_catalog_audit: Mapping[str, Any] | None = None,
+    native_isolation_catalog_facility_chain_verification: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -539,6 +540,87 @@ def build_ijhe_completion_audit(
                     "The optional native LH2 isolation branch catalog records diagnostic isolation outcomes, "
                     "termination bases, and wall-clock timing while keeping frequency, field reliability, "
                     "physical validation, and facility IR/F-N promotion withheld."
+                ),
+            }
+        )
+    if native_isolation_catalog_facility_chain_verification is not None:
+        facility_chain = native_isolation_catalog_facility_chain_verification
+        chain_timing = facility_chain.get("timing")
+        chain_coverage = facility_chain.get("conditional_diagnostic_facility_coverage")
+        chain_valid = (
+            facility_chain.get("schema_version")
+            == "prism.native_isolation_catalog_facility_chain.v1"
+            and facility_chain.get("status")
+            == "NATIVE_ISOLATION_CATALOG_FACILITY_CHAIN_EXECUTED_DIAGNOSTIC"
+            and isinstance(facility_chain.get("frequency_event_count"), int)
+            and facility_chain.get("frequency_event_count") > 0
+            and facility_chain.get("exact_native_packet_count")
+            == facility_chain.get("frequency_event_count")
+            and facility_chain.get("uncomputed_packet_event_count") == 0
+            and isinstance(facility_chain.get("isolation_success_count"), int)
+            and facility_chain.get("isolation_success_count") >= 0
+            and facility_chain.get("state_snapshot_binding_status")
+            == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+            and facility_chain.get("campaign_case_count")
+            == facility_chain.get("frequency_event_count")
+            and isinstance(facility_chain.get("risk_atom_count"), int)
+            and facility_chain.get("risk_atom_count") > 0
+            and facility_chain.get("conditional_diagnostic_facility_risk_available") is True
+            and isinstance(chain_coverage, Mapping)
+            and chain_coverage.get("conditional_case_count")
+            == facility_chain.get("campaign_case_count")
+            and chain_coverage.get("conditional_uncomputed_case_count") == 0
+            and isinstance(chain_timing, Mapping)
+            and isinstance(chain_timing.get("fresh_physics_cases"), int)
+            and chain_timing.get("fresh_physics_cases") > 0
+            and _finite(chain_timing.get("campaign_elapsed_ms"))
+            and chain_timing.get("campaign_elapsed_ms") >= 0
+            and facility_chain.get("provider_packet_promoted") is False
+            and facility_chain.get("frequency_inference_performed") is False
+            and facility_chain.get("physical_validation_claim") is False
+            and facility_chain.get("facility_qra_claim") is False
+        )
+        checks.append(
+            {
+                "name": "diagnostic_native_isolation_catalog_facility_chain",
+                "status": "PASS" if chain_valid else "BLOCKED",
+                "diagnostic_only": True,
+                "blocking_reason": (
+                    None
+                    if chain_valid
+                    else "native isolation catalog was not consumed by a complete diagnostic facility consequence chain"
+                ),
+                "evidence": {
+                    "record": facility_chain.get("_record_path"),
+                    "schema_version": facility_chain.get("schema_version"),
+                    "status": facility_chain.get("status"),
+                    "frequency_event_count": facility_chain.get("frequency_event_count"),
+                    "exact_native_packet_count": facility_chain.get("exact_native_packet_count"),
+                    "uncomputed_packet_event_count": facility_chain.get("uncomputed_packet_event_count"),
+                    "isolation_success_count": facility_chain.get("isolation_success_count"),
+                    "state_snapshot_binding_status": facility_chain.get("state_snapshot_binding_status"),
+                    "campaign_case_count": facility_chain.get("campaign_case_count"),
+                    "risk_atom_count": facility_chain.get("risk_atom_count"),
+                    "conditional_diagnostic_facility_risk_available": facility_chain.get(
+                        "conditional_diagnostic_facility_risk_available"
+                    ),
+                    "conditional_diagnostic_facility_annual_ir_low_high": facility_chain.get(
+                        "conditional_diagnostic_facility_annual_ir_low_high"
+                    ),
+                    "conditional_diagnostic_facility_expected_death_fn_low_high": facility_chain.get(
+                        "conditional_diagnostic_facility_expected_death_fn_low_high"
+                    ),
+                    "conditional_diagnostic_facility_coverage": chain_coverage,
+                    "timing": chain_timing,
+                    "provider_packet_promoted": facility_chain.get("provider_packet_promoted"),
+                    "frequency_inference_performed": facility_chain.get("frequency_inference_performed"),
+                    "physical_validation_claim": facility_chain.get("physical_validation_claim"),
+                    "facility_qra_claim": facility_chain.get("facility_qra_claim"),
+                },
+                "interpretation": (
+                    "The native isolation packets reached the diagnostic facility chain and produced "
+                    "risk atoms plus conditional IR/F-N accounting. This check preserves the strict "
+                    "provider-qualification, independent-validation, and facility-QRA gates."
                 ),
             }
         )
