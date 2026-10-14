@@ -4,6 +4,23 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
+## 최신 v0.6.0 IJHE 기준점 (2026-11-14)
+
+현재 권위 실행은 `results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/`이다. 일반 옥외 LH2 시설을 대상으로 저장탱크·배관·밸브·벤트·펌프·기화기·재액화기와 수직 handoff·inventory depletion extension을 하나의 union ledger로 묶어 **34개 event, 44개 case, 176개 risk atom**을 방출→지속시간·차단·재고→SLABx-LH2/확산→점화→피해→조건부 IR/F-N까지 전달한다.
+
+현장 상태값과 `operating_mode`는 HAZOP 표에서 함께 비교한다. 최신 HAZOP selection audit는 **34/34 event bound, 0 unbound**이며 운전 모드나 사고 family를 센서값·설비 이름·누출면적으로 추정하지 않는다. 문헌 빈도는 별도 frequency plan에서만 들어오고, 센서 기반 빈도 학습과 빈도 재분배는 금지되어 있다.
+
+완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **30개 검사 중 26개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 조건부 수치 결과는 저장하지만 qualified facility IR/F-N으로 승격하지 않는다.
+
+남은 strict gate는 다음 네 가지다.
+
+1. 모든 사례에 대해 provider 소유의 완전한 방출 종료·차단·재고 경계
+2. 실제 시설용 qualified provider packet과 qualification sidecar
+3. 선언한 사고범위 전체의 독립 물리검증
+4. 위 증거가 닫힌 뒤의 시설 전체 IR/F-N 승격
+
+따라서 현재 결과는 `INCOMPLETE_EVIDENCE`이며, 지원되지 않는 사고를 다른 사고로 대체하거나 시설 위험을 0으로 해석하지 않는다. 상세 상태는 [`CURRENT_STATUS.json`](CURRENT_STATUS.json), 개발 기준은 [`DEVELOPMENT_GOAL.json`](DEVELOPMENT_GOAL.json), HAZOP 결합 규칙은 [`PRISM_HAZOP_extension_mode_binding_20261114.md`](docs/PRISM_HAZOP_extension_mode_binding_20261114.md)에 기록되어 있다.
+
 **관측 HAZOP→문헌 provider event 연결 (2026-11-10):** `scripts/audit_observed_hazop_provider_binding.py`는 현장 관측값과 명시적 `operating_mode`로 선택된 HAZOP 시나리오를 문헌 `provider_event_id`·설비·사고 port에 exact-match로 묶습니다. [`inspection_center_hazop_provider_event_bindings.json`](examples/inspection_center_hazop_provider_event_bindings.json)은 인수 `vessel_hole`, 대기 벤트 `vent_hole`, 공급 기화기 `vaporizer_hole`의 진단 매핑입니다. 이 단계는 event family/release mode/port/빈도 필드의 일관성만 검사하고, 센서 빈도 학습·방출 packet 생성·SLABx-LH2·시설 QRA를 수행하지 않습니다. 최신 원장은 [`inspection_center_observed_hazop_provider_event_binding.json`](results/20261110/inspection_center_observed_hazop_provider_event_binding.json)이며, qualified provider packet이 없으므로 결과는 diagnostic-only입니다. 자세한 흐름은 [`관측 상태·운전 모드·HAZOP 런타임 연결`](docs/PRISM_관측상태_운전모드_HAZOP_런타임연결_20261110.md)을 참고하세요.
 
 **관측 HAZOP→실제 provider packet→SLABx-LH2 실행 (2026-11-10):** `scripts/run_observed_hazop_provider_consequence_chain.py`는 매핑된 provider packet의 종료 basis·지속시간·질량 장부까지 재검사한 뒤 사고군 계약에 맞는 행만 실행합니다. 저장탱크는 외부 LayeredTank 격리 성공 branch, 저장 벤트는 `emergency_relief_discharge`, 공급 기화기는 외부 `DynamicVaporizer` 격리 후 zero-flow branch를 사용합니다. 결과는 [`inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json`](results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json)의 3개 시나리오·3개 risk atom 실행 `EXECUTED`이며, 문헌 빈도는 명시적으로 결합했지만 provider 자격·독립검증·시설 IR/F-N은 승격하지 않습니다. 세 branch 처리시간은 약 6.02초·3.74초·1.50초, 전체 약 11.29초였고 1 Hz 현장 실시간 보장은 하지 않습니다.
