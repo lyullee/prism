@@ -3192,6 +3192,36 @@ def build_ijhe_completion_audit(
             and forecast["policy"].get("facility_qra_promotion") is False
             and forecast["policy"].get("frequency_inference_performed") is False
         )
+        facility_campaign = integrated.get("facility_campaign")
+        if facility_campaign is None:
+            facility_campaign_valid = True
+            facility_campaign_status = "LEGACY_NOT_REPORTED"
+            facility_campaign_policy: Mapping[str, Any] = {}
+        elif isinstance(facility_campaign, Mapping):
+            facility_campaign_status = str(facility_campaign.get("status", ""))
+            facility_campaign_policy = facility_campaign.get("policy")
+            facility_campaign_policy = (
+                facility_campaign_policy
+                if isinstance(facility_campaign_policy, Mapping)
+                else {}
+            )
+            facility_campaign_valid = (
+                facility_campaign_status in {
+                    "FACILITY_CAMPAIGN_NOT_REQUESTED",
+                    "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+                    "FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+                }
+                or facility_campaign_status.startswith("WITHHELD_")
+            ) and (
+                facility_campaign_policy.get("facility_qra_promotion") is False
+                and facility_campaign_policy.get("frequency_inference_performed") is False
+                and facility_campaign_policy.get("physical_validation_claim") is False
+                and facility_campaign.get("complete_facility_qra_claim") is not True
+            )
+        else:
+            facility_campaign_status = "INVALID"
+            facility_campaign_policy = {}
+            facility_campaign_valid = False
         integrated_valid = (
             integrated.get("schema_version") == "prism.hazop_integrated_risk.v1"
             and integrated.get("status") in {
@@ -3203,6 +3233,7 @@ def build_ijhe_completion_audit(
             and isinstance(forecast_component_ids, list)
             and current_valid
             and forecast_valid
+            and facility_campaign_valid
             and linkage.get("mode_and_scenario_identity_preserved") is True
             and scoped_keys_valid
             and policy.get("operating_mode_taken_from_input") is True
@@ -3221,6 +3252,7 @@ def build_ijhe_completion_audit(
                 "status": integrated.get("status"),
                 "current_status": current.get("status"),
                 "forecast_status": forecast.get("status"),
+                "facility_campaign_status": facility_campaign_status,
                 "current_component_count": len(current_component_ids)
                 if isinstance(current_component_ids, list)
                 else None,

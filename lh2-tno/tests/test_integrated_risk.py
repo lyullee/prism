@@ -179,3 +179,55 @@ def test_integrated_risk_runs_from_observed_custom_tag_to_forecast_path():
     assert result["forecast"]["trigger_count"] == 0
     assert result["forecast"]["withheld_count"] == 0
     assert result["policy"]["facility_qra_promotion"] is False
+
+
+def test_integrated_risk_can_attach_operator_limited_facility_campaign(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    campaign = {
+        "schema_version": "prism.hazop_facility_campaign_handoff.v1",
+        "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "facility_ledger": {"status": "CONDITIONAL_DIAGNOSTIC"},
+        "policy": {
+            "facility_qra_promotion": False,
+            "frequency_inference_performed": False,
+            "physical_validation_claim": False,
+        },
+    }
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        facility_campaign_evaluator=lambda current: campaign,
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_COMPLETE"
+    assert result["facility_campaign"]["status"] == "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+    assert result["facility_campaign"]["policy"]["facility_qra_promotion"] is False
+
+
+def test_integrated_risk_withholds_unsafe_facility_campaign_claim(monkeypatch):
+    monkeypatch.setattr(
+        integrated_risk,
+        "run_hazop_facility_runtime",
+        lambda *args, **kwargs: _current_result(),
+    )
+    result = run_hazop_integrated_risk(
+        _table(),
+        {"TK-01": {"operating_mode": "receiving"}},
+        now_s=10.0,
+        component_bindings={"TK-01": object()},
+        release_resolvers={},
+        facility_campaign_evaluator=lambda current: {
+            "status": "READY_FOR_IJHE_SCOPE",
+            "complete_facility_qra_claim": True,
+            "policy": {"facility_qra_promotion": True},
+        },
+    )
+    assert result["status"] == "INTEGRATED_DIAGNOSTIC_PARTIAL"
+    assert result["facility_campaign"]["status"] == "WITHHELD_UNSAFE_FACILITY_CAMPAIGN_RESULT"
+    assert result["facility_campaign"]["policy"]["facility_qra_promotion"] is False

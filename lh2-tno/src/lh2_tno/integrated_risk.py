@@ -10,7 +10,8 @@ quantitative evaluator, and facility campaign layers.
 """
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
+import copy
 import time
 from typing import Any
 
@@ -94,6 +95,7 @@ def run_hazop_integrated_risk(
     forecast_component_ids: Sequence[str] | None = None,
     forecast_quantitative_evaluator: Any = None,
     forecast_evaluate_on: str = "entry",
+    facility_campaign_evaluator: Callable[[Mapping[str, Any]], Mapping[str, Any]] | None = None,
     mapping_digest: str | None = None,
 ) -> dict[str, Any]:
     """Run current and optional forecast HAZOP risk paths as one ledger.
@@ -102,7 +104,11 @@ def run_hazop_integrated_risk(
     ``forecast_frames`` is supplied, the caller must also supply a table per
     forecast component; every forecast frame is then checked by
     :func:`run_hazop_forecast_risk_scan`.  No forecast result is silently
-    substituted for a missing quantitative evaluator.
+    substituted for a missing quantitative evaluator.  An optional
+    ``facility_campaign_evaluator`` may receive the current runtime ledger and
+    attach the existing annual-condition/facility-ledger handoff.  Its result
+    is copied only after unsafe frequency, physical-validation, or facility-QRA
+    claims are rejected.
     """
     facility_id = _facility_id(table)
     if not isinstance(current_frames, Mapping) or not current_frames:
@@ -159,6 +165,85 @@ def run_hazop_integrated_risk(
         except (HazopForecastError, ValueError, TypeError) as error:
             raise IntegratedRiskError(f"forecast-state HAZOP execution failed: {error}") from error
 
+    facility_campaign: dict[str, Any]
+    if facility_campaign_evaluator is None:
+        facility_campaign = {
+            "status": "FACILITY_CAMPAIGN_NOT_REQUESTED",
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+    elif not callable(facility_campaign_evaluator):
+        raise IntegratedRiskError("facility_campaign_evaluator must be callable when supplied")
+    elif current.get("status") != "FACILITY_HAZOP_RUNTIME_EVALUATED":
+        facility_campaign = {
+            "status": "WITHHELD_FACILITY_CAMPAIGN_CURRENT_RUNTIME_PARTIAL",
+            "reason": "facility campaign requires a fully evaluated current HAZOP runtime result",
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        }
+    else:
+        try:
+            raw_campaign = facility_campaign_evaluator(copy.deepcopy(current))
+        except Exception as error:
+            facility_campaign = {
+                "status": "WITHHELD_FACILITY_CAMPAIGN_EVALUATOR_ERROR",
+                "error_type": type(error).__name__,
+                "reason": str(error),
+                "policy": {
+                    "facility_qra_promotion": False,
+                    "frequency_inference_performed": False,
+                    "physical_validation_claim": False,
+                },
+            }
+        else:
+            if not isinstance(raw_campaign, Mapping):
+                facility_campaign = {
+                    "status": "WITHHELD_INVALID_FACILITY_CAMPAIGN_RESULT",
+                    "reason": "facility campaign evaluator must return a mapping",
+                    "policy": {
+                        "facility_qra_promotion": False,
+                        "frequency_inference_performed": False,
+                        "physical_validation_claim": False,
+                    },
+                }
+            else:
+                campaign = copy.deepcopy(dict(raw_campaign))
+                campaign_policy = campaign.get("policy")
+                campaign_policy = campaign_policy if isinstance(campaign_policy, Mapping) else {}
+                unsafe = (
+                    campaign_policy.get("facility_qra_promotion") is True
+                    or campaign_policy.get("frequency_inference_performed") is True
+                    or campaign_policy.get("physical_validation_claim") is True
+                    or campaign.get("complete_facility_qra_claim") is True
+                )
+                if unsafe:
+                    facility_campaign = {
+                        "status": "WITHHELD_UNSAFE_FACILITY_CAMPAIGN_RESULT",
+                        "reason": "facility campaign evaluator returned an unsafe promotion or inference claim",
+                        "policy": {
+                            "facility_qra_promotion": False,
+                            "frequency_inference_performed": False,
+                            "physical_validation_claim": False,
+                        },
+                    }
+                else:
+                    campaign["status"] = str(
+                        campaign.get("status") or "FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED"
+                    )
+                    campaign["policy"] = {
+                        **dict(campaign_policy),
+                        "facility_qra_promotion": False,
+                        "frequency_inference_performed": False,
+                        "physical_validation_claim": False,
+                    }
+                    facility_campaign = campaign
+
     current_status = str(current.get("status", ""))
     current_ok = current_status == "FACILITY_HAZOP_RUNTIME_EVALUATED"
     forecast_status = str(forecast.get("status", ""))
@@ -166,6 +251,12 @@ def run_hazop_integrated_risk(
         forecast_status == "FORECAST_RISK_SCAN_COMPLETE"
         and int(forecast.get("withheld_count", 0) or 0) == 0
     )
+    facility_campaign_status = str(facility_campaign.get("status", ""))
+    facility_campaign_ok = facility_campaign_status in {
+        "FACILITY_CAMPAIGN_NOT_REQUESTED",
+        "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+    }
     current_modes = _current_modes(current)
     forecast_modes = _forecast_modes(forecast)
     current_scenarios = {
@@ -179,9 +270,12 @@ def run_hazop_integrated_risk(
     return {
         "schema_version": SCHEMA,
         "facility_id": facility_id,
-        "status": "INTEGRATED_DIAGNOSTIC_COMPLETE" if current_ok and forecast_ok else "INTEGRATED_DIAGNOSTIC_PARTIAL",
+        "status": "INTEGRATED_DIAGNOSTIC_COMPLETE"
+        if current_ok and forecast_ok and facility_campaign_ok
+        else "INTEGRATED_DIAGNOSTIC_PARTIAL",
         "current": current,
         "forecast": forecast,
+        "facility_campaign": facility_campaign,
         "linkage": {
             "current_component_ids": sorted(current_frames),
             "forecast_component_ids": sorted(forecast_tables_by_component or {}),
