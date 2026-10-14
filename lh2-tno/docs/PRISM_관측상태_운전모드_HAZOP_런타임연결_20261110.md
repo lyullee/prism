@@ -19,7 +19,7 @@
   → 문헌 빈도 결합 후 시설 IR/F-N
 ```
 
-마지막 네 단계는 이번 진단 원장에 자동으로 만들어지지 않는다. HAZOP 선택 결과의 `provider_release_required=true`와 `frequency_assignment=not_performed`로 다음 경계를 명시한다.
+마지막 네 단계는 provider 방출 packet이 실제 사고군 계약을 만족할 때만 실행된다. HAZOP 선택 결과의 `provider_release_required=true`와 `frequency_assignment=not_performed`는 provider 방출과 빈도 결합을 PRISM이 임의로 추정하지 않는다는 경계를 명시한다.
 
 ## 검사지원센터 진단 입력
 
@@ -38,8 +38,9 @@
 - runtime frame 3개가 모두 `EXPLICIT_MODE_INPUT_BOUND`
 - 인수·대기·공급 모드가 각각 1개씩 보존
 - HAZOP 시나리오 3개 선택: `vessel_hole`, `vent_hole`, `vaporizer_hole`
-- 방출 packet 0개, 빈도 결합 0건, 피해계산 0건
-- 결과 상태: `OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED`
+- HAZOP 선택 직후에는 방출 packet을 자동 생성하지 않음
+- 이후 명시적 provider packet을 연결한 진단 체인에서 3개 시나리오 모두 피해계산까지 실행
+- 결과 상태: `OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED`
 
 권위 결과는 `results/20261110/inspection_center_observed_state_runtime_frames_with_modes.json`와 `results/20261110/inspection_center_observed_hazop_runtime_audit.json`이다.
 
@@ -95,15 +96,15 @@ python scripts/audit_observed_hazop_provider_binding.py `
 
 identity 매핑만으로는 packet을 실행하지 않는다. `scripts/run_observed_hazop_provider_consequence_chain.py`는 실제 native packet의 event·component·port·event kind·종료 basis·지속시간·질량 장부를 다시 확인한 뒤, 사고군 계약을 만족하는 행만 기존 HAZOP runtime gate와 SLABx-LH2 consequence service에 넘긴다.
 
-2026-11-10 실행 결과는 다음과 같다.
+2026-11-10 실행 결과는 다음과 같다. 첫 실행에서는 저장탱크와 기화기 packet의 종료 근거가 사고군과 맞지 않아 보류되었다. 이후 저장탱크에는 외부 LayeredTank 격리 branch를, 기화기에는 외부 `DynamicVaporizer` 격리 명령과 zero-flow 관찰을 연결했다.
 
 | 시나리오 | 결과 | 이유 |
 | --- | --- | --- |
-| 인수 탱크 `vessel_hole` | 보류 | packet 종료 basis가 `inventory_depletion`이라 vessel-hole 계약과 불일치 |
+| 인수 탱크 `vessel_hole` | 실행 | LayeredTank 성공 branch의 `reviewed_isolation_success`, zero-flow 확인 |
 | 저장 벤트 `vent_hole` | 실행 | `emergency_relief_discharge`와 event/port가 일치하고 SLABx-LH2까지 실행 |
-| 공급 기화기 `vaporizer_hole` | 보류 | packet 종료 basis가 `synthetic_diagnostic_horizon`이라 허용된 사고군 종료 basis가 아님 |
+| 공급 기화기 `vaporizer_hole` | 실행 | DynamicVaporizer 격리 명령 후 `reviewed_isolation_success`, 격리 후 zero-flow 확인 |
 
-권위 결과는 `results/20261110/inspection_center_observed_hazop_provider_consequence_chain.json`이다. 3개 중 1개가 실행되고 2개가 보류된 `OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED_PARTIAL` 상태이며, 실행된 진단 risk atom의 문헌 빈도는 별도로 적용했지만 provider 자격·독립 물리검증·시설 전체 IR/F-N은 열지 않았다. 이 결과는 지원되지 않는 사고를 다른 사고군으로 바꾸지 않는다는 점과 신규 계산 처리시간(실행 branch 약 3.66초, 전체 약 3.69초)을 함께 기록한다.
+권위 결과는 `results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json`이다. 3개 시나리오가 모두 실행되고 3개 risk atom이 생성된 `OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED` 상태이며, 문헌 빈도는 별도로 적용했지만 provider 자격·독립 물리검증·시설 전체 IR/F-N은 열지 않았다. 이번 진단 실행의 세 branch 처리시간은 약 6.02초, 3.74초, 1.50초이며 전체 약 11.29초였다. 측정은 단일 실행의 wall-clock 진단값으로, 1 Hz 현장 실시간 성능을 보장하지 않는다.
 
 재현 명령은 다음과 같다.
 
@@ -113,20 +114,20 @@ python scripts/run_observed_hazop_provider_consequence_chain.py `
   --observed-hazop-provider-binding results/20261110/inspection_center_observed_hazop_provider_event_binding.json `
   --runtime-frames results/20261110/inspection_center_observed_state_runtime_frames_with_modes.json `
   --provider-worklist results/20261110/native_full_scope_frequency_assessment_latest2/provider_worklist.json `
-  --packet-evidence results/20261110/native_generic_scope_packets_latest2/native_scope_packet_evidence.json `
+  --packet-evidence results/20261110/observed_hazop_storage_vaporizer_isolation_overlay/packet_evidence.json `
   --packet-root results/20261110/native_generic_scope_packets_latest2 `
-  --manifest examples/generic_lh2_near_receptor_manifest.json `
-  --frequency-plan examples/generic_lh2_full_scope_frequency_plan.json `
-  --provider-defaults-liquid examples/provider_request_defaults_liquid_provider_duration.json `
+  --manifest examples/generic_lh2_full_scope_manifest.json `
+  --frequency-plan results/20261110/native_full_scope_frequency_assessment_latest2/frequency_plan.json `
+  --provider-defaults-liquid examples/provider_request_defaults_liquid.json `
   --provider-defaults-relief examples/provider_emergency_relief_defaults.json `
   --template examples/equipment_consequence_template.json `
   --backend-config results/20261008/full_chain/backend_config.json `
-  --output results/20261110/inspection_center_observed_hazop_provider_consequence_chain.json
+  --output results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_vaporizer_isolation_success.json
 ```
 
 완료 감사에는 `--observed-hazop-provider-consequence-chain`을 추가한다. 이 검사는 부분 실행과 보류 사유가 보존되었는지만 확인하며, 부분 실행을 시설 위험평가 완료로 해석하지 않는다.
 
-저장탱크에 대해서는 외부 `LayeredTankNetworkSimulator`가 명령 밸브를 닫고 zero-flow를 확인한 성공 branch도 별도로 연결했다. 성공 branch는 `reviewed_isolation_success`, 0.15 s, branch probability 0.99로 기록되고 저장탱크 HAZOP→provider→SLABx-LH2가 실행된다. 실패 branch는 0.01의 명시적 probability와 `synthetic_diagnostic_horizon`을 보존하지만 vessel-hole chain에는 포함하지 않는다. 성공 branch와 저장 벤트를 함께 실행한 결과는 `results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_isolation_success.json`이며, 3개 시나리오 중 2개 실행·1개 보류 상태이다. branch 근거와 질량·차단 요약은 `results/20261110/observed_hazop_storage_isolation_branch_evidence.json`에서 확인한다. 이는 isolation 계약을 실행 가능한 진단 경로로 만든 것이며 현장 차단 신뢰도나 시설 전체 QRA를 의미하지 않는다.
+저장탱크 성공 branch 근거와 질량·차단 요약은 `results/20261110/observed_hazop_storage_isolation_branch_evidence.json`에서 확인한다. 기화기 격리 packet은 `results/20261110/observed_hazop_vaporizer_isolation_overlay/verification.json`과 `resolved_release.json`에 보존했다. 기화기 branch도 synthetic geometry와 초기 상태를 사용하므로 진단용이며, 현장 차단 신뢰도나 시설 전체 QRA를 의미하지 않는다. 실패·미확인 branch는 `synthetic_diagnostic_horizon`으로 남을 때 계속 보류된다.
 
 ## 다음 승격 조건
 

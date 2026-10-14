@@ -54,7 +54,9 @@ def _save(path: Path, value: object) -> None:
 def _request(*, source_digest: str, component_id: str, opening_diameter_m: float,
              state_snapshot: EquipmentStateSnapshot, height_m: float, model_class: str,
              event_id: str | None, port_id: str | None,
-             model_revision: str, mode: str) -> AccidentReleaseExportRequest:
+             model_revision: str, mode: str, horizon_s: float = 600.0,
+             isolation_time_s: float | None = None,
+             post_isolation_observation_s: float | None = None) -> AccidentReleaseExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return AccidentReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_accident_export_request.v1",
@@ -64,7 +66,7 @@ def _request(*, source_digest: str, component_id: str, opening_diameter_m: float
         "event_id": event_id or f"{component_id}/{port_id}/{opening_diameter_m:.12g}m",
         "failure_mode": "explicit_atmospheric_outlet_valve",
         "failure_opening_diameter_m": opening_diameter_m,
-        "horizon_s": 600.0,
+        "horizon_s": horizon_s,
         "position_enu_m": [0.0, 0.0, height_m],
         "direction_enu": [1.0, 0.0, 0.0],
         "ambient_pressure_pa_abs": 101325.0,
@@ -84,6 +86,11 @@ def _request(*, source_digest: str, component_id: str, opening_diameter_m: float
             f"explicit external {model_class} bounded valve diagnostic ({mode}); not site-calibrated"
         ),
         "provider_termination_required": True,
+        **({"isolation_time_s": isolation_time_s} if isolation_time_s is not None else {}),
+        **(
+            {"post_isolation_observation_s": post_isolation_observation_s}
+            if post_isolation_observation_s is not None else {}
+        ),
     })
 
 
@@ -96,7 +103,9 @@ class DynamicVaporizerAccidentProvider:
                  boundary_ua_w_k: float, boundary_temperature_k: float,
                  maximum_heat_w: float, inlet_pressure_pa: float,
                  inlet_temperature_k: float, opening_diameter_m: float,
-                 discharge_coefficient: float, stroke_time_s: float) -> None:
+                 discharge_coefficient: float, stroke_time_s: float,
+                 isolation_time_s: float | None = None,
+                 post_isolation_observation_s: float | None = None) -> None:
         self.root = root.resolve()
         self.mode = mode
         self.duration_s = float(duration_s)
@@ -112,6 +121,14 @@ class DynamicVaporizerAccidentProvider:
         self.opening_diameter_m = float(opening_diameter_m)
         self.discharge_coefficient = float(discharge_coefficient)
         self.stroke_time_s = float(stroke_time_s)
+        self.isolation_time_s = (
+            None if isolation_time_s is None else float(isolation_time_s)
+        )
+        self.post_isolation_observation_s = (
+            None
+            if post_isolation_observation_s is None
+            else float(post_isolation_observation_s)
+        )
 
     def export_accident_history(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         values = {
@@ -135,8 +152,39 @@ class DynamicVaporizerAccidentProvider:
             raise ValueError("mode must be vaporizer or reliquefier")
         if self.duration_s <= 0.0 or self.time_step_s <= 0.0:
             raise ValueError("diagnostic duration and time step must be positive")
-        if not math.isclose(self.duration_s / self.time_step_s,
-                            round(self.duration_s / self.time_step_s),
+        if self.isolation_time_s is None:
+            total_duration = self.duration_s
+        else:
+            if self.isolation_time_s < 0.0 or self.isolation_time_s >= self.duration_s:
+                raise ValueError("isolation_time_s must be in [0, duration_s)")
+            if self.post_isolation_observation_s is None:
+                raise ValueError(
+                    "post_isolation_observation_s is required with isolation_time_s"
+                )
+            if self.post_isolation_observation_s < 0.0:
+                raise ValueError("post_isolation_observation_s must be non-negative")
+            if self.stroke_time_s <= 0.0:
+                raise ValueError("stroke_time_s must be positive")
+            total_duration = (
+                self.isolation_time_s
+                + self.stroke_time_s
+                + self.post_isolation_observation_s
+            )
+            if total_duration > self.duration_s + 1.0e-12:
+                raise ValueError(
+                    "isolation plus stroke plus observation must fit duration_s"
+                )
+            for name, value in {
+                "isolation_time_s": self.isolation_time_s,
+                "stroke_time_s": self.stroke_time_s,
+                "post_isolation_observation_s": self.post_isolation_observation_s,
+            }.items():
+                if not math.isclose(value / self.time_step_s,
+                                    round(value / self.time_step_s),
+                                    rel_tol=0.0, abs_tol=1.0e-10):
+                    raise ValueError(f"{name} must be an integer number of time steps")
+        if not math.isclose(total_duration / self.time_step_s,
+                            round(total_duration / self.time_step_s),
                             rel_tol=0.0, abs_tol=1.0e-10):
             raise ValueError("duration must be an integer number of time steps")
         if self.opening_diameter_m <= 0.0 or self.fluid_volume_m3 <= 0.0:
@@ -180,14 +228,20 @@ class DynamicVaporizerAccidentProvider:
             initial_opening=0.0,
         )
         valve.set_target_opening(1.0)
-        intervals = int(round(self.duration_s / self.time_step_s))
+        intervals = int(round(total_duration / self.time_step_s))
         steps: list[dict[str, Any]] = []
         cumulative_mass = 0.0
         cumulative_enthalpy = 0.0
         choked_count = 0
         time_s = 0.0
+        zero_flow_after_isolation = True
         for index in range(intervals):
             fluid = model.thermo(state)
+            if (
+                self.isolation_time_s is not None
+                and time_s >= self.isolation_time_s - 1.0e-12
+            ):
+                valve.set_target_opening(0.0)
             opening = valve.advance(self.time_step_s)
             hydraulic = valve.evaluate(fluid, outlet_boundary)
             mass_flow = float(hydraulic.mass_flow_kg_s)
@@ -212,7 +266,11 @@ class DynamicVaporizerAccidentProvider:
             result = model.step(state, fluid, 0.0, mass_flow, self.time_step_s)
             enthalpy = float(hydraulic.outlet_specific_enthalpy_J_kg)
             density = float(exit_state.density_kg_m3)
-            effective_area = area * opening
+            # The strict packet schema requires a positive representative
+            # area even during a fully closed, zero-flow observation row.
+            # Keep a numerical lower bound that cannot create mass flow; the
+            # provider's valve state and zero-flow flag carry the closure.
+            effective_area = area * max(opening, 1.0e-12)
             cumulative_mass += mass_flow * self.time_step_s
             cumulative_enthalpy += mass_flow * self.time_step_s * enthalpy
             steps.append({
@@ -224,7 +282,10 @@ class DynamicVaporizerAccidentProvider:
                 "density_kg_m3": density,
                 "effective_area_m2": effective_area,
                 "velocity_m_s": mass_flow / (density * effective_area) if mass_flow > 0.0 and effective_area > 0.0 else 0.0,
-                "area_provenance": "explicit atmospheric valve full-bore area scaled by stroke state",
+                "area_provenance": (
+                    "explicit atmospheric valve full-bore area scaled by stroke state; "
+                    "closed rows retain a positive numerical area floor"
+                ),
                 "velocity_origin": "mass_continuity_from_declared_area",
                 "provider_source_state": {
                     "source_pressure_pa_abs": float(fluid.pressure_Pa),
@@ -244,12 +305,47 @@ class DynamicVaporizerAccidentProvider:
                     ),
                 },
             })
+            closed_observation_start = (
+                None
+                if self.isolation_time_s is None
+                else self.isolation_time_s + self.stroke_time_s
+            )
+            if (
+                closed_observation_start is not None
+                and time_s >= closed_observation_start - 1.0e-12
+                and mass_flow > 1.0e-12
+            ):
+                zero_flow_after_isolation = False
             state = result.state
             time_s += self.time_step_s
             if state.mass_kg <= 0.0:
                 raise ValueError("dynamic gas unit inventory depleted before diagnostic horizon")
-        if not math.isclose(time_s, self.duration_s, rel_tol=0.0, abs_tol=1.0e-10):
+        if not math.isclose(time_s, total_duration, rel_tol=0.0, abs_tol=1.0e-10):
             raise ValueError("provider clock disagrees with duration")
+        isolation_success = (
+            self.isolation_time_s is not None
+            and self.post_isolation_observation_s is not None
+            and total_duration
+            > self.isolation_time_s + self.stroke_time_s + 1.0e-12
+            and valve.opening <= 1.0e-12
+            and zero_flow_after_isolation
+        )
+        if self.isolation_time_s is not None and not isolation_success:
+            raise ValueError("declared isolation observation did not confirm zero flow")
+        termination_basis = (
+            "reviewed_isolation_success"
+            if isolation_success
+            else "synthetic_diagnostic_horizon"
+        )
+        termination_provenance = (
+            "external StrokeLimitedCommandedValve reached zero opening at the declared "
+            "isolation command and remained at zero flow through the observation interval"
+            if isolation_success
+            else (
+                f"external {model_class} finite-volume state with explicit valve; "
+                "residual inventory retained at synthetic horizon"
+            )
+        )
         return {
             "provider_export_schema": EXTERNAL_ACCIDENT_EXPORT_SCHEMA,
             "provider_state_snapshot_digest": request["state_snapshot_digest"],
@@ -260,15 +356,12 @@ class DynamicVaporizerAccidentProvider:
                 "event_id": request["event_id"],
                 "component_id": request["component_id"],
                 "port_id": request["port_id"],
-                "duration_s": self.duration_s,
+                "duration_s": total_duration,
                 "available_mass_kg": initial_mass,
                 "cumulative_mass_out_kg": cumulative_mass,
                 "cumulative_static_enthalpy_out_j": cumulative_enthalpy,
-                "termination_provenance": (
-                    f"external {model_class} finite-volume state with explicit valve; "
-                    "residual inventory retained at synthetic horizon"
-                ),
-                "termination_basis": "synthetic_diagnostic_horizon",
+                "termination_provenance": termination_provenance,
+                "termination_basis": termination_basis,
                 "fluid": "Hydrogen",
                 "steps": steps,
                 "provider_meta": {
@@ -285,6 +378,10 @@ class DynamicVaporizerAccidentProvider:
                         "final_opening": valve.opening,
                         "choked_intervals": choked_count,
                     },
+                    "isolation_time_s": self.isolation_time_s,
+                    "post_isolation_observation_s": self.post_isolation_observation_s,
+                    "isolation_success": isolation_success,
+                    "post_isolation_zero_flow": zero_flow_after_isolation,
                 },
             },
         }
@@ -317,6 +414,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         height_m=args.nozzle_height_m, model_class=model_class,
         model_revision=args.model_revision, mode=args.mode, event_id=args.event_id,
         port_id=args.port_id,
+        horizon_s=args.duration_s if args.isolation_time_s is not None else 600.0,
+        isolation_time_s=args.isolation_time_s,
+        post_isolation_observation_s=args.post_isolation_observation_s,
     )
     provider = DynamicVaporizerAccidentProvider(
         root, mode=args.mode, duration_s=args.duration_s,
@@ -331,6 +431,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         opening_diameter_m=args.opening_diameter_m,
         discharge_coefficient=args.discharge_coefficient,
         stroke_time_s=args.stroke_time_s,
+        isolation_time_s=args.isolation_time_s,
+        post_isolation_observation_s=args.post_isolation_observation_s,
     )
     result = export_equipment_gas_accident_history(provider, request)
     release = result.release.model_dump(mode="json")
@@ -354,10 +456,21 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "physical_validation_claim": False,
         "frequency_inference": False,
         "facility_qra_claim": False,
+        "termination_basis": result.release.termination_basis,
+        "isolation": {
+            "requested": args.isolation_time_s is not None,
+            "isolation_time_s": args.isolation_time_s,
+            "post_isolation_observation_s": args.post_isolation_observation_s,
+            "provider_isolation_success": (
+                result.provider_response.get("data", {})
+                .get("provider_meta", {})
+                .get("isolation_success")
+            ),
+        },
         "limitations": [
             "synthetic dynamic gas-unit geometry, initial state, valve opening and atmospheric boundary",
-            "short fixed diagnostic horizon retains residual inventory",
-            "no site calibration, failure frequency, isolation logic or independent physical validation",
+            "isolation command is a diagnostic provider contract, not field isolation reliability",
+            "no site calibration, failure frequency or independent physical validation",
         ],
     }
     _save(args.output_dir / "provider_response.json", result.provider_response)
@@ -384,6 +497,14 @@ def main() -> int:
     parser.add_argument("--opening-diameter-m", type=float, default=0.001)
     parser.add_argument("--discharge-coefficient", type=float, default=0.7)
     parser.add_argument("--stroke-time-s", type=float, default=0.2)
+    parser.add_argument(
+        "--isolation-time-s", type=float, default=None,
+        help="optional explicit isolation command time; requires post-isolation observation",
+    )
+    parser.add_argument(
+        "--post-isolation-observation-s", type=float, default=None,
+        help="optional zero-flow observation after valve stroke completion",
+    )
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
     parser.add_argument("--component-id", default="dynamic-vaporizer-diagnostic")
     parser.add_argument("--event-id", default=None, help="optional exact worklist event id for a structural diagnostic")

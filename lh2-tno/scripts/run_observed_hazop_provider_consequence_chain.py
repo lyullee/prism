@@ -155,11 +155,17 @@ def _request_defaults(
     defaults = copy.deepcopy(
         dict(relief_defaults if release_mode == "maximum_relief_discharge" else liquid_defaults)
     )
-    defaults["source_operator"] = (
-        "equipment_emergency_relief"
-        if release_mode == "maximum_relief_discharge"
-        else "equipment_liquid_release"
-    )
+    if release_mode == "maximum_relief_discharge":
+        source_operator = "equipment_emergency_relief"
+    elif packet.get("boundary_kind") == "resolved_atmospheric_liquid_exit":
+        source_operator = "equipment_liquid_release"
+    else:
+        # Gas-unit and vaporizer-hole packets are explicit transient gas
+        # histories.  They must not be routed through the liquid/two-phase
+        # consequence contract merely because the observed HAZOP row also
+        # carries a generic LH2 service label.
+        source_operator = "integrated_transient"
+    defaults["source_operator"] = source_operator
     defaults["release_termination"] = {
         "basis": "emergency_relief_discharge"
         if release_mode == "maximum_relief_discharge"

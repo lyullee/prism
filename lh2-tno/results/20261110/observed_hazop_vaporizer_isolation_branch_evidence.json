@@ -1,0 +1,33 @@
+{
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+  "provider_packet": "results/20261110/observed_hazop_vaporizer_isolation_overlay/resolved_release.json",
+  "port_id": "vaporizer-accident-out",
+  "status": "SYNTHETIC_VAPORIZER_ISOLATION_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
+  "success_branch": {
+    "outcome": "isolation_success",
+    "stroke_time_s": 0.2,
+    "cumulative_mass_out_kg": 7.22189686570953E-06,
+    "provider_isolation_success": true,
+    "post_isolation_zero_flow": true,
+    "probability_given_event": 1.0,
+    "max_post_isolation_flow_kg_s": 0.0,
+    "duration_s": 0.5,
+    "isolation_time_s": 0.1,
+    "termination_basis": "reviewed_isolation_success",
+    "post_isolation_observation_s": 0.2
+  },
+  "schema_version": "prism.observed_hazop_vaporizer_isolation_branch_evidence.v1",
+  "provenance": "External lh2dt.DynamicVaporizer with explicit atmospheric valve, commanded isolation and post-close zero-flow observation; synthetic diagnostic geometry and initial state.",
+  "branch_probability_sum": 1.0,
+  "verification": "results/20261110/observed_hazop_vaporizer_isolation_overlay/verification.json",
+  "component_id": "ambient-vaporizer-01",
+  "policy": {
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "diagnostic_only": true,
+    "facility_qra_claim": false,
+    "zero_flow_observation_required": true,
+    "isolation_controls_explicit": true,
+    "provider_packet_promoted": false
+  }
+}
