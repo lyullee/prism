@@ -21,6 +21,8 @@
       "multiple_active_rows_auto_merged": false,
       "explicit_branch_dispatch_function": "lh2_tno.hazop.run_hazop_runtime_consequence_branches",
       "branch_resolver_key": "scenario_id",
+      "facility_runtime_function": "lh2_tno.hazop.run_hazop_facility_runtime",
+      "facility_annual_qra_promotion": false,
       "consequence_called_without_provider": false
     },
     "frequency_inference": false,

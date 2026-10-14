@@ -13,6 +13,7 @@ from lh2_tno.hazop import (
     hazop_state_from_runtime_frame,
     run_hazop_runtime_consequence,
     run_hazop_runtime_consequence_branches,
+    run_hazop_facility_runtime,
 )
 from lh2_tno.observed_state_runtime import build_observed_state_runtime_frames
 
@@ -378,3 +379,25 @@ def test_runtime_gate_dispatches_multiple_active_rows_as_separate_branches():
     )
     assert result["policy"]["branches_auto_merged"] is False
     assert monitor.called is True
+
+
+def test_facility_runtime_collects_component_branch_and_withholds_annual_qra():
+    table = _gate_table()
+    frame = _runtime_frame_for_gate()
+    selection = evaluate_hazop_runtime_frame(table, frame, now_s=3.2)
+    scenario_id = selection["selected_scenarios"][0]["scenario_id"]
+    monitor = _FakeMonitor(_provider_request())
+    binding = SimpleNamespace(template=object(), monitor=monitor, frequency_binding=None)
+    result = run_hazop_facility_runtime(
+        table,
+        {"TK-01": frame},
+        now_s=3.2,
+        component_bindings={"TK-01": binding},
+        release_resolvers={scenario_id: lambda template, normalized: _provider_request()},
+    )
+    assert result["status"] == "FACILITY_HAZOP_RUNTIME_EVALUATED"
+    assert result["components"]["TK-01"]["status"] == "CONSEQUENCE_BRANCHES_EVALUATED"
+    assert result["conditional_current_weather_risk"]["status"] == "WITHHELD_NO_ACCEPTED_HAZOP_RISK_ATOM"
+    assert result["facility_annual_ir_available"] is False
+    assert result["facility_fn_available"] is False
+    assert result["policy"]["facility_annual_qra_promotion"] is False

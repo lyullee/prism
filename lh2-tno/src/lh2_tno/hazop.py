@@ -616,9 +616,199 @@ def run_hazop_runtime_consequence_branches(
     return result
 
 
+def run_hazop_facility_runtime(
+    table: HazopTable | Mapping[str, Any],
+    frames: Mapping[str, Mapping[str, Any]],
+    *,
+    now_s: float,
+    component_bindings: Mapping[str, Any],
+    release_resolvers: Mapping[str, Any],
+    mapping_digest: str | None = None,
+) -> dict[str, Any]:
+    """Coordinate HAZOP-gated consequence branches for several components.
+
+    ``component_bindings`` contains the existing runtime monitor and template
+    for each component.  ``release_resolvers`` is keyed by HAZOP
+    ``scenario_id`` so one provider history cannot be reused for another
+    accident branch.  The returned facility ledger exposes conditional
+    current-weather IR contributions when a single branch per component has a
+    reviewed frequency binding.  It deliberately withholds annual facility
+    IR/F-N: HAZOP deviations are an operator-triggered view, not a replacement
+    for the full literature event catalogue and all-weather facility campaign.
+    """
+    if not isinstance(frames, Mapping) or not isinstance(component_bindings, Mapping):
+        raise HazopSelectionError("frames and component_bindings must be mappings")
+    if not isinstance(release_resolvers, Mapping):
+        raise HazopSelectionError("release_resolvers must map scenario_id to a resolver")
+    if not component_bindings:
+        raise HazopSelectionError("component_bindings must not be empty")
+    components: dict[str, Any] = {}
+    risk_atoms: list[dict[str, Any]] = []
+    for component_id in sorted(component_bindings):
+        binding = component_bindings[component_id]
+        frame = frames.get(component_id)
+        if frame is None:
+            components[component_id] = {
+                "status": "WITHHELD_MISSING_RUNTIME_FRAME",
+                "component_id": component_id,
+                "selection": None,
+                "branches": [],
+                "reason": "facility runtime snapshot has no frame for this component",
+            }
+            continue
+        try:
+            selection = evaluate_hazop_runtime_frame(
+                table,
+                frame,
+                now_s=now_s,
+                mapping_digest=mapping_digest,
+            )
+            if selection["status"] != "SCENARIOS_SELECTED":
+                components[component_id] = {
+                    "status": f"WITHHELD_HAZOP_{selection['status']}",
+                    "component_id": component_id,
+                    "selection": selection,
+                    "branches": [],
+                    "reason": "no clean active HAZOP branch was available for consequence evaluation",
+                }
+                continue
+            template = getattr(binding, "template", None)
+            monitor = getattr(binding, "monitor", None)
+            if template is None or monitor is None:
+                raise HazopSelectionError(
+                    "component binding must expose template and monitor"
+                )
+            branch_resolvers = {
+                row["scenario_id"]: release_resolvers.get(row["scenario_id"])
+                for row in selection["selected_scenarios"]
+            }
+            branch_result = run_hazop_runtime_consequence_branches(
+                table,
+                frame,
+                now_s=now_s,
+                template=template,
+                monitor=monitor,
+                release_resolvers=branch_resolvers,
+                mapping_digest=mapping_digest,
+            )
+            frequency = getattr(binding, "frequency_binding", None)
+            branch_rows: list[dict[str, Any]] = []
+            for branch in branch_result["branches"]:
+                branch_copy = dict(branch)
+                branch_result_row = branch_copy.get("result")
+                consequence = (
+                    branch_result_row.get("consequence")
+                    if isinstance(branch_result_row, Mapping)
+                    else None
+                )
+                risk = None
+                if (
+                    isinstance(branch_result_row, Mapping)
+                    and branch_result_row.get("status") == "CONSEQUENCE_EVALUATED"
+                    and isinstance(consequence, Mapping)
+                ):
+                    from .service import _realtime_current_weather_risk
+
+                    risk = _realtime_current_weather_risk(consequence, frequency)
+                    if risk.get("status") == "AVAILABLE_CURRENT_WEATHER_IR":
+                        risk_atoms.append({
+                            "component_id": component_id,
+                            "scenario_id": branch_copy["scenario_id"],
+                            "scenario_family": branch_copy["scenario_family"],
+                            "risk": risk,
+                        })
+                branch_copy["risk"] = risk
+                branch_rows.append(branch_copy)
+            components[component_id] = {
+                "status": branch_result["status"],
+                "component_id": component_id,
+                "selection": selection,
+                "branches": branch_rows,
+                "policy": branch_result["policy"],
+            }
+        except Exception as error:
+            components[component_id] = {
+                "status": "REJECTED",
+                "component_id": component_id,
+                "selection": None,
+                "branches": [],
+                "error_type": type(error).__name__,
+                "reason": str(error),
+            }
+
+    branch_counts = [
+        len(row.get("branches", ()))
+        for row in components.values()
+        if isinstance(row, Mapping) and row.get("branches")
+    ]
+    multiple_branch = any(count > 1 for count in branch_counts)
+    if risk_atoms and not multiple_branch:
+        receptor_totals: dict[str, list[float]] = {}
+        for atom in risk_atoms:
+            risk = atom["risk"]
+            annual_ir = risk.get("annual_ir_low_high")
+            if not isinstance(annual_ir, Mapping):
+                continue
+            for receptor_id, values in annual_ir.items():
+                if not isinstance(values, (list, tuple)) or len(values) != 2:
+                    continue
+                total = receptor_totals.setdefault(str(receptor_id), [0.0, 0.0])
+                total[0] += float(values[0])
+                total[1] += float(values[1])
+        conditional_risk = {
+            "status": "AVAILABLE_CONDITIONAL_CURRENT_WEATHER_IR",
+            "annual_ir_low_high_by_receptor": receptor_totals,
+            "risk_atom_count": len(risk_atoms),
+            "frequency_learning": False,
+            "interpretation": (
+                "sum of explicitly bound HAZOP-selected component contributions for the "
+                "current weather only; this is not a full facility annual IR/F-N result"
+            ),
+        }
+    elif multiple_branch:
+        conditional_risk = {
+            "status": "WITHHELD_BRANCH_WEIGHT_REQUIRED",
+            "annual_ir_low_high_by_receptor": None,
+            "risk_atom_count": len(risk_atoms),
+            "reason": "multiple active branches require explicit branch probabilities before aggregation",
+        }
+    else:
+        conditional_risk = {
+            "status": "WITHHELD_NO_ACCEPTED_HAZOP_RISK_ATOM",
+            "annual_ir_low_high_by_receptor": None,
+            "risk_atom_count": 0,
+            "reason": "no selected branch produced a current-weather IR contribution",
+        }
+    rejected = [
+        component_id
+        for component_id, row in components.items()
+        if row.get("status") not in {"WITHHELD_HAZOP_NO_DEVIATION", "WITHHELD_HAZOP_NO_APPLICABLE_MODE_ROW"}
+        and not str(row.get("status", "")).startswith("CONSEQUENCE_BRANCHES_EVALUATED")
+    ]
+    status = "FACILITY_HAZOP_RUNTIME_EVALUATED" if not rejected else "FACILITY_HAZOP_RUNTIME_PARTIAL"
+    return {
+        "schema_version": "prism.hazop_facility_runtime.v1",
+        "status": status,
+        "component_count": len(component_bindings),
+        "components": components,
+        "risk_atoms": risk_atoms,
+        "conditional_current_weather_risk": conditional_risk,
+        "facility_annual_ir_available": False,
+        "facility_fn_available": False,
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_annual_qra_promotion": False,
+            "branch_results_auto_merged": False,
+        },
+    }
+
+
 __all__ = [
     "HAZOP_SCHEMA", "HAZOP_STATE_SCHEMA", "HazopSelectionError",
     "HazopRow", "HazopTable", "HazopStateFrame", "evaluate_hazop",
     "hazop_state_from_runtime_frame", "evaluate_hazop_runtime_frame",
     "run_hazop_runtime_consequence", "run_hazop_runtime_consequence_branches",
+    "run_hazop_facility_runtime",
 ]
