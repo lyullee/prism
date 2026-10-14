@@ -4304,12 +4304,12 @@
     "realtime_guarantee": false
   },
   "latest_completion_audit": {
-    "record": "results/20261109/ijhe_completion_audit_conditional_facility_rebound.json",
+    "record": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop.json",
     "status": "INCOMPLETE_EVIDENCE",
-    "check_count": 23,
+    "check_count": 24,
     "blocking_reason_count": 5,
     "facility_qra_promotion": false,
-    "interpretation": "conditional facility IR/F-N, chain closure and uncertainty diagnostics pass; strict provider, scope, port and facility-QRA gates remain closed"
+    "interpretation": "conditional facility IR/F-N, HAZOP current/forecast mode trace, chain closure and uncertainty diagnostics are recorded; strict provider, scope, port and facility-QRA gates remain closed"
   },
   "provider_inventory_closure_extension": {
     "g3": {
@@ -4475,5 +4475,18 @@
     "completion_audit": "results/20261109/ijhe_completion_audit_conditional_facility_rebound.json"
   },
   "latest_conditional_facility_ir_fn_status": "CONDITIONAL_DIAGNOSTIC_FACILITY_RISK; 24 events, 96 risk atoms and 5 no-inference literature scenarios independently audited; strict facility IR/F-N promotion remains withheld for 20 operator-limited cases and zero qualified provider packets",
-  "previous_full_evidence_audit_record": "results/20261108/ijhe_completion_audit_full_evidence_with_structural_worklist_and_requests.json"
+  "previous_full_evidence_audit_record": "results/20261108/ijhe_completion_audit_full_evidence_with_structural_worklist_and_requests.json",
+  "latest_hazop_integrated_risk_record": {
+    "record": "results/20261014/hazop_provider_bound_integrated_risk.json",
+    "audit": "results/20261109/ijhe_completion_audit_conditional_facility_rebound_with_hazop.json",
+    "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
+    "current_operating_mode": "receiving",
+    "shared_scenario_key_count": 1,
+    "forecast_trigger_count": 1,
+    "facility_campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+    "mode_taken_from_input": true,
+    "frequency_inference_performed": false,
+    "facility_qra_promotion": false,
+    "interpretation": "single-equipment provider-bound HAZOP diagnostic; not a replacement for the 24-event facility scope"
+  }
 }

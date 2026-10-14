@@ -99,3 +99,16 @@
 - 완료 감사: `results/20261109/ijhe_completion_audit_conditional_facility_rebound.json`
 - 감사 상태: `INCOMPLETE_EVIDENCE`
 - 차단 검사는 자동으로 0위험으로 바꾸지 않고, 증거 요청과 함께 보존한다.
+
+
+## HAZOP 운전 모드 연결 상태
+
+별도 HAZOP provider-bound 진단도 최신 감사에 연결했다. 현장 상태와 운전 모드 `receiving`을 입력으로 사용해 `TK01-receiving-liquid-hole:receiving:liquid_two_phase` 시나리오를 선택하고, 현재 평가와 예측 trigger를 같은 시나리오 키로 보존했다. 이 통합 진단은 `INTEGRATED_DIAGNOSTIC_COMPLETE`이지만 시설 campaign 상태는 `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED`이며, 센서에서 빈도를 학습하지 않고 시설 QRA를 승격하지 않는다.
+
+- HAZOP 통합 원장: `results/20261014/hazop_provider_bound_integrated_risk.json`
+- 최신 감사의 HAZOP 검사: `diagnostic_hazop_integrated_risk = PASS`
+- 현재 mode: `receiving`
+- 공유 component/scenario key: 1개
+- 예측 위험조건 trigger: 1개
+
+이 결과는 운전 모드가 HAZOP 판단에 실제 입력되고 scenario identity가 정량평가 경계까지 전달되는 것을 증명한다. 일반 24개 사건 원장 전체에 모든 현장 mode를 덧씌우지는 않으며, mode가 없는 사건을 임의로 보간하지 않는다.
