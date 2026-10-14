@@ -3321,3 +3321,65 @@ def test_completion_audit_blocks_observed_hazop_provider_frequency_promotion():
         if item["name"] == "diagnostic_observed_hazop_provider_event_binding"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _observed_hazop_provider_consequence_chain(**overrides):
+    record = {
+        "schema_version": "prism.observed_hazop_provider_consequence_chain.v1",
+        "status": "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED_PARTIAL",
+        "selected_scenario_count": 2,
+        "executed_scenario_count": 1,
+        "withheld_scenario_count": 1,
+        "risk_atom_count": 1,
+        "preflight": {"status": "OBSERVED_HAZOP_PROVIDER_CHAIN_PREFLIGHT_PARTIAL"},
+        "rows": [
+            {"scenario_id": "scenario-1", "status": "EXECUTED"},
+            {"scenario_id": "scenario-2", "status": "WITHHELD_PROVIDER_CHAIN"},
+        ],
+        "processing_time": {"total_elapsed_ms": 100.0},
+        "policy": {
+            "operating_mode_taken_from_explicit_runtime_input": True,
+            "frequency_assignment_performed": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created_by_prism": False,
+            "provider_packets_are_qualified": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "facility_scope_complete": False,
+            "diagnostic_only": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_observed_hazop_provider_consequence_chain():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_provider_consequence_chain=_observed_hazop_provider_consequence_chain(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_provider_consequence_chain"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_observed_hazop_chain_facility_claim():
+    unsafe = _observed_hazop_provider_consequence_chain()
+    unsafe["policy"]["facility_qra_claim"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_provider_consequence_chain=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_provider_consequence_chain"
+    )
+    assert check["status"] == "BLOCKED"

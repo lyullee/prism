@@ -91,6 +91,41 @@ python scripts/audit_observed_hazop_provider_binding.py `
 
 현재 결과는 3/3 시나리오가 명시적 event identity에 연결된 `OBSERVED_HAZOP_PROVIDER_EVENT_BINDINGS_DIAGNOSTIC`이다. 이는 빈도 값을 센서에 할당하거나 누출 packet을 만드는 단계가 아니다. provider packet·방출 종료·차단·재고 폐합·SLABx-LH2 검증이 없는 동안에는 시설 IR/F-N에 자동 포함되지 않는다. 이를 최신 IJHE 감사에 넣으면 `diagnostic_observed_hazop_provider_event_binding=PASS`가 추가되지만 전체 상태는 `INCOMPLETE_EVIDENCE`로 남는다.
 
+## 실제 packet 계약을 적용한 결과
+
+identity 매핑만으로는 packet을 실행하지 않는다. `scripts/run_observed_hazop_provider_consequence_chain.py`는 실제 native packet의 event·component·port·event kind·종료 basis·지속시간·질량 장부를 다시 확인한 뒤, 사고군 계약을 만족하는 행만 기존 HAZOP runtime gate와 SLABx-LH2 consequence service에 넘긴다.
+
+2026-11-10 실행 결과는 다음과 같다.
+
+| 시나리오 | 결과 | 이유 |
+| --- | --- | --- |
+| 인수 탱크 `vessel_hole` | 보류 | packet 종료 basis가 `inventory_depletion`이라 vessel-hole 계약과 불일치 |
+| 저장 벤트 `vent_hole` | 실행 | `emergency_relief_discharge`와 event/port가 일치하고 SLABx-LH2까지 실행 |
+| 공급 기화기 `vaporizer_hole` | 보류 | packet 종료 basis가 `synthetic_diagnostic_horizon`이라 허용된 사고군 종료 basis가 아님 |
+
+권위 결과는 `results/20261110/inspection_center_observed_hazop_provider_consequence_chain.json`이다. 3개 중 1개가 실행되고 2개가 보류된 `OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED_PARTIAL` 상태이며, 실행된 진단 risk atom의 문헌 빈도는 별도로 적용했지만 provider 자격·독립 물리검증·시설 전체 IR/F-N은 열지 않았다. 이 결과는 지원되지 않는 사고를 다른 사고군으로 바꾸지 않는다는 점과 신규 계산 처리시간(실행 branch 약 3.66초, 전체 약 3.69초)을 함께 기록한다.
+
+재현 명령은 다음과 같다.
+
+```powershell
+python scripts/run_observed_hazop_provider_consequence_chain.py `
+  --observed-hazop-runtime-audit results/20261110/inspection_center_observed_hazop_runtime_audit.json `
+  --observed-hazop-provider-binding results/20261110/inspection_center_observed_hazop_provider_event_binding.json `
+  --runtime-frames results/20261110/inspection_center_observed_state_runtime_frames_with_modes.json `
+  --provider-worklist results/20261110/native_full_scope_frequency_assessment_latest2/provider_worklist.json `
+  --packet-evidence results/20261110/native_generic_scope_packets_latest2/native_scope_packet_evidence.json `
+  --packet-root results/20261110/native_generic_scope_packets_latest2 `
+  --manifest examples/generic_lh2_near_receptor_manifest.json `
+  --frequency-plan examples/generic_lh2_full_scope_frequency_plan.json `
+  --provider-defaults-liquid examples/provider_request_defaults_liquid_provider_duration.json `
+  --provider-defaults-relief examples/provider_emergency_relief_defaults.json `
+  --template examples/equipment_consequence_template.json `
+  --backend-config results/20261008/full_chain/backend_config.json `
+  --output results/20261110/inspection_center_observed_hazop_provider_consequence_chain.json
+```
+
+완료 감사에는 `--observed-hazop-provider-consequence-chain`을 추가한다. 이 검사는 부분 실행과 보류 사유가 보존되었는지만 확인하며, 부분 실행을 시설 위험평가 완료로 해석하지 않는다.
+
 ## 다음 승격 조건
 
 이 진단 결과를 실제 시설 위험평가 입력으로 승격하려면 설비별 검토된 P&ID/HAZOP asset identity, 단위·교정 확인, provider가 계산한 사고 방출 이력과 종료·차단·재고 폐합, 해당 사고의 문헌 빈도, SLABx-LH2 독립 검증이 필요하다. 하나라도 없으면 해당 사고는 조건부 결과로만 남기고 시설 전체 IR/F-N에 포함하지 않는다.

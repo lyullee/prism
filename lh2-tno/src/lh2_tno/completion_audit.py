@@ -105,6 +105,7 @@ def build_ijhe_completion_audit(
     reviewed_signal_unit_evidence: Mapping[str, Any] | None = None,
     observed_hazop_runtime_audit: Mapping[str, Any] | None = None,
     observed_hazop_provider_binding: Mapping[str, Any] | None = None,
+    observed_hazop_provider_consequence_chain: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3981,6 +3982,69 @@ def build_ijhe_completion_audit(
             "remain separate qualification gates."
         )
         checks.append(provider_binding_check)
+    if observed_hazop_provider_consequence_chain is not None:
+        chain = observed_hazop_provider_consequence_chain
+        policy = chain.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        rows = chain.get("rows")
+        chain_valid = (
+            chain.get("schema_version")
+            == "prism.observed_hazop_provider_consequence_chain.v1"
+            and chain.get("status") in {
+                "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED",
+                "OBSERVED_HAZOP_PROVIDER_CHAIN_EXECUTED_PARTIAL",
+                "OBSERVED_HAZOP_PROVIDER_CHAIN_WITHHELD",
+            }
+            and isinstance(rows, list)
+            and bool(rows)
+            and all(
+                isinstance(row, Mapping)
+                and isinstance(row.get("scenario_id"), str)
+                and row.get("status") in {"EXECUTED", "WITHHELD_PROVIDER_CHAIN", "CONSEQUENCE_WITHHELD", "CONSEQUENCE_REJECTED"}
+                for row in rows
+            )
+            and isinstance(chain.get("selected_scenario_count"), int)
+            and chain.get("selected_scenario_count") == len(rows)
+            and isinstance(chain.get("executed_scenario_count"), int)
+            and isinstance(chain.get("withheld_scenario_count"), int)
+            and chain.get("executed_scenario_count") + chain.get("withheld_scenario_count") == len(rows)
+            and isinstance(chain.get("risk_atom_count"), int)
+            and chain.get("risk_atom_count") >= 0
+            and isinstance(chain.get("preflight"), Mapping)
+            and policy.get("operating_mode_taken_from_explicit_runtime_input") is True
+            and policy.get("frequency_assignment_performed") in {False, True}
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("sensor_frequency_learning_used") is False
+            and policy.get("provider_release_created_by_prism") is False
+            and policy.get("provider_packets_are_qualified") is False
+            and policy.get("physical_validation_claim") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("facility_scope_complete") is False
+            and policy.get("diagnostic_only") is True
+        )
+        chain_check = _check(
+            "diagnostic_observed_hazop_provider_consequence_chain",
+            chain_valid,
+            {
+                "record": chain.get("_record_path"),
+                "schema_version": chain.get("schema_version"),
+                "status": chain.get("status"),
+                "selected_scenario_count": chain.get("selected_scenario_count"),
+                "executed_scenario_count": chain.get("executed_scenario_count"),
+                "withheld_scenario_count": chain.get("withheld_scenario_count"),
+                "risk_atom_count": chain.get("risk_atom_count"),
+                "processing_time": chain.get("processing_time"),
+                "policy": dict(policy),
+            },
+            "observed HAZOP provider consequence chain is missing explicit withholding/timing evidence or permits a facility-QRA promotion claim",
+        )
+        chain_check["diagnostic_only"] = True
+        chain_check["interpretation"] = (
+            "This check records the observed-mode provider/SLABx-LH2 execution boundary "
+            "and its explicit withheld rows. It does not convert an unqualified packet, "
+            "a synthetic termination horizon, or a partial scenario set into facility IR/F-N."
+        )
+        checks.append(chain_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")
