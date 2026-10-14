@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+from copy import deepcopy
 
 import pytest
 
@@ -60,6 +61,21 @@ def _frame(time_s, pressure, *, mode="receiving"):
             }
         },
     }
+
+
+def _component_table(component_id):
+    table = deepcopy(_table())
+    table["rows"][0]["component_id"] = component_id
+    return table
+
+
+def _component_frame(component_id, time_s, pressure, *, mode="receiving"):
+    frame = deepcopy(_frame(time_s, pressure, mode=mode))
+    frame["component_id"] = component_id
+    frame["source_provenance"] = f"simulation://forecast/{component_id}"
+    for value in frame["values"].values():
+        value["component_id"] = component_id
+    return frame
 
 
 def test_forecast_scan_triggers_quantitative_evaluation_on_first_risk_entry():
@@ -230,3 +246,63 @@ def test_forecast_runtime_evaluator_reaches_real_slabx_monitor(tmp_path):
     assert evaluation["result"]["status"] == "CONSEQUENCE_EVALUATED"
     assert evaluation["result"]["consequence"]["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
     assert result["timing"]["quantitative_evaluation_elapsed_ms"] >= 0.0
+
+
+def test_forecast_runtime_evaluator_keeps_duplicate_hazop_ids_per_component():
+    class Monitor:
+        def update_from_runtime_frame(self, template, frame, *, now_s, release_resolver, mapping_digest=None):
+            request = release_resolver(template, {"operating_mode": frame["operating_mode"]})
+            return {
+                "status": "CONSEQUENCE_EVALUATED",
+                "component_id": request.component_id,
+                "now_s": now_s,
+                "mapping_digest": mapping_digest,
+            }
+
+    scenario_id = "TK01-pressure-receiving:receiving:vessel_hole"
+    requests = {
+        component_id: SimpleNamespace(
+            component_id=component_id,
+            resolved_release=None,
+            resolved_release_set=None,
+            resolved_liquid_release=SimpleNamespace(event_kind="accidental_leak"),
+            source_operator="equipment_liquid_release",
+            release_termination=SimpleNamespace(basis="model_pressure_equalization"),
+        )
+        for component_id in ("TK-01", "TK-02")
+    }
+    evaluator = build_hazop_forecast_runtime_evaluator(
+        tables_by_component={
+            "TK-01": _component_table("TK-01"),
+            "TK-02": _component_table("TK-02"),
+        },
+        component_bindings={
+            "TK-01": {"template": object(), "monitor": Monitor()},
+            "TK-02": {"template": object(), "monitor": Monitor()},
+        },
+        release_resolvers={
+            ("TK-01", scenario_id): lambda template, normalized: requests["TK-01"],
+            ("TK-02", scenario_id): lambda template, normalized: requests["TK-02"],
+        },
+    )
+    result = run_hazop_forecast_risk_scan(
+        facility_id="forecast-facility",
+        tables_by_component={
+            "TK-01": _component_table("TK-01"),
+            "TK-02": _component_table("TK-02"),
+        },
+        forecast_frames=[
+            _component_frame("TK-01", 0.0, 650000.0),
+            _component_frame("TK-02", 0.0, 650000.0),
+        ],
+        expected_component_ids=("TK-01", "TK-02"),
+        quantitative_evaluator=evaluator,
+    )
+    rows = result["steps"][0]["components"]
+    evaluations = [row["scenarios"][0]["quantitative_evaluation"] for row in rows]
+    assert evaluations[0]["result"]["consequence"]["component_id"] == "TK-01"
+    assert evaluations[1]["result"]["consequence"]["component_id"] == "TK-02"
+    assert {evaluation["result"]["forecast_resolver_binding"]["component_id"] for evaluation in evaluations} == {
+        "TK-01",
+        "TK-02",
+    }

@@ -2,7 +2,7 @@
   "schema_version": "prism.hazop_operating_mode_verification.v1",
   "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED",
   "tests": {
-    "targeted_test_count": 31,
+    "targeted_test_count": 32,
     "targeted_status": "PASS"
   },
   "runtime_gate": {
