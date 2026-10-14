@@ -155,7 +155,7 @@ campaign으로 흐릅니다. 외부 generator가 빈도 산술을 담당하고 P
 `UNCOMPUTED`로 유지됩니다.
 
 현장값·운전 모드·HAZOP·현재/예측 상태·공통 모델 묶음의 전체 흐름은
-[`통합 위험평가 흐름도`](docs/PRISM_LH2_통합위험평가_흐름도.png)로 볼 수 있습니다.
+[`통합 위험평가 흐름도`](docs/figures/lh2_hazop_multiequipment_integrated_flow_v11.png)로 볼 수 있습니다.
 
 설비 결합도 `results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json`에서 44개 case·9개 component를
 `asset_id → component_id → state snapshot digest → 방출 packet → 종료근거` 순서로

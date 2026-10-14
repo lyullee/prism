@@ -1,6 +1,6 @@
 # PRISM HAZOP·운전 모드 시나리오 연결
 
-최신 통합 흐름도는 [`docs/figures/lh2_hazop_multiequipment_integrated_flow_v10.svg`](figures/lh2_hazop_multiequipment_integrated_flow_v10.svg)에서 확인할 수 있다. 현장 상태와 운전 모드가 하나의 입력으로 HAZOP 판단에 함께 들어가며, 이후 설비·공정 모델·방출/빈도 모델·SLABx-LH2·점화/노출 모델·통합 QRA가 같은 공통 계산 계층에서 결합된다. PRISM은 특정 단일 모델을 앞세우는 구성요소가 아니라, 이 모델들을 동일한 시나리오 ID·설비 ID·운전 모드·시간축으로 연결하고 실행 순서를 조정하는 통합 실행 계층이다.
+최신 통합 흐름도는 [`docs/figures/lh2_hazop_multiequipment_integrated_flow_v11.svg`](figures/lh2_hazop_multiequipment_integrated_flow_v11.svg)에서 확인할 수 있다. 현장 상태와 운전 모드가 하나의 입력으로 HAZOP 판단에 함께 들어가며, 이후 설비·공정 모델·방출/빈도 모델·SLABx-LH2·점화/노출 모델·통합 QRA가 같은 공통 계산 계층에서 결합된다. PRISM은 특정 단일 모델을 앞세우는 구성요소가 아니라, 이 모델들을 동일한 시나리오 ID·설비 ID·운전 모드·시간축으로 연결하고 실행 순서를 조정하는 통합 실행 계층이다.
 
 ## 역할
 
