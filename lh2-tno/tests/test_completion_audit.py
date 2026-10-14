@@ -2991,3 +2991,60 @@ def test_completion_audit_blocks_hazop_scope_worklist_packet_promotion():
         if item["name"] == "diagnostic_hazop_scope_worklist"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _event_mode_binding_audit(**overrides):
+    record = {
+        "schema_version": "prism.hazop_event_mode_binding_audit.v1",
+        "status": "HAZOP_EVENT_MODE_BINDING_REQUIRED",
+        "event_count": 1,
+        "mode_bound_event_count": 0,
+        "mode_required_event_count": 1,
+        "scenario_id_required_event_count": 0,
+        "mode_conflict_event_count": 0,
+        "provider_event_count": 1,
+        "event_rows": [{"event_id": "event-01", "status": "MODE_REQUIRED"}],
+        "errors": [],
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "mode_inference_performed": False,
+            "scenario_inference_performed": False,
+            "missing_mode_withheld": True,
+            "frequency_inference_performed": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_missing_event_modes_without_inference():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_event_mode_binding=_event_mode_binding_audit(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_event_mode_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["mode_required_event_count"] == 1
+
+
+def test_completion_audit_blocks_event_mode_inference_policy():
+    unsafe = _event_mode_binding_audit()
+    unsafe["policy"]["mode_inference_performed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_event_mode_binding=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_event_mode_binding"
+    )
+    assert check["status"] == "BLOCKED"

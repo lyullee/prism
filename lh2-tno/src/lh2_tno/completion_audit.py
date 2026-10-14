@@ -100,6 +100,7 @@ def build_ijhe_completion_audit(
     external_model_root_review: Mapping[str, Any] | None = None,
     hazop_multiequipment_diagnostic: Mapping[str, Any] | None = None,
     hazop_scope_worklist: Mapping[str, Any] | None = None,
+    hazop_event_mode_binding: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3663,6 +3664,64 @@ def build_ijhe_completion_audit(
             "A PASS records accounting integrity; it does not claim full facility QRA coverage."
         )
         checks.append(scope_worklist_check)
+    if hazop_event_mode_binding is not None:
+        mode_audit = hazop_event_mode_binding
+        policy = mode_audit.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        event_rows = mode_audit.get("event_rows")
+        event_count = mode_audit.get("event_count")
+        mode_bound = mode_audit.get("mode_bound_event_count")
+        mode_required = mode_audit.get("mode_required_event_count")
+        scenario_required = mode_audit.get("scenario_id_required_event_count")
+        conflicts = mode_audit.get("mode_conflict_event_count")
+        counts_valid = all(
+            isinstance(value, int) and value >= 0
+            for value in (event_count, mode_bound, mode_required, scenario_required, conflicts)
+        )
+        mode_audit_valid = (
+            mode_audit.get("schema_version") == "prism.hazop_event_mode_binding_audit.v1"
+            and mode_audit.get("status") in {
+                "HAZOP_EVENT_MODE_BINDING_COMPLETE",
+                "HAZOP_EVENT_MODE_BINDING_REQUIRED",
+            }
+            and counts_valid
+            and isinstance(event_rows, list)
+            and len(event_rows) == event_count
+            and mode_bound + mode_required + scenario_required + conflicts == event_count
+            and isinstance(mode_audit.get("errors"), list)
+            and policy.get("operating_mode_taken_from_input") is True
+            and policy.get("mode_inference_performed") is False
+            and policy.get("scenario_inference_performed") is False
+            and policy.get("missing_mode_withheld") is True
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("facility_qra_promotion") is False
+            and policy.get("physical_validation_claim") is False
+        )
+        mode_check = _check(
+            "diagnostic_hazop_event_mode_binding",
+            mode_audit_valid,
+            {
+                "record": mode_audit.get("_record_path"),
+                "schema_version": mode_audit.get("schema_version"),
+                "status": mode_audit.get("status"),
+                "event_count": event_count,
+                "mode_bound_event_count": mode_bound,
+                "mode_required_event_count": mode_required,
+                "scenario_id_required_event_count": scenario_required,
+                "mode_conflict_event_count": conflicts,
+                "provider_event_count": mode_audit.get("provider_event_count"),
+                "error_count": len(mode_audit.get("errors", [])) if isinstance(mode_audit.get("errors"), list) else None,
+                "policy": dict(policy),
+            },
+            "HAZOP event mode binding audit is missing event accounting or permits mode/scenario inference",
+        )
+        mode_check["diagnostic_only"] = True
+        mode_check["interpretation"] = (
+            "The audit separates explicitly bound events from events awaiting an operating-mode and "
+            "scenario binding. A PASS validates the accounting and withholding policy; it does not "
+            "claim that the missing bindings have been supplied."
+        )
+        checks.append(mode_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")
