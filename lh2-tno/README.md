@@ -20,7 +20,7 @@
 
 이 외부 artifact intake는 IJHE 목표 원장에도 [`ijhe_objective_coverage_audit_full_evidence_with_external_release_intake.json`](results/20261108/ijhe_objective_coverage_audit_full_evidence_with_external_release_intake.json)로 연결했습니다. 원장은 30개 요구사항을 조건부 chain·엄격한 승격 gate·진단 inventory로 나누고 최신 44개 case 완료감사의 구조적 작업목록·방출 trace·빈도 포트·차단 이유까지 대조합니다. 외부 파일 집계가 맞아도 핵심 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`으로 유지합니다. 따라서 검색 범위가 넓어져도 실제 provider packet, 독립 물리검증, 완전 사고범위, 시설 전체 IR/F-N이 자동으로 완료되지 않습니다.
 
-**비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **1053 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
+**비동기 상태 평가 (개발 소스):** `AsyncRuntimeConsequenceMonitor`로 선택된 설비·시나리오의 상태를 접수하고, 기존 provider 및 피해 계산을 background worker에서 실행할 수 있습니다. 대기 상태는 최신 한 건으로 제한하고, 교체·만료·실패를 명시하며 이전 결과를 최신 결과로 대체하지 않습니다. 단일 모니터의 deadline에는 이제 정규화와 설비 방출 계산 시간도 포함합니다. 전체 검사 **1056 passed**, 실제 새 피해 계산 3회와 비동기 접수·조회 진단을 확인했습니다. 원래 provider packet을 재생한 성능 측정이므로 새 설비 solver를 포함한 1 Hz 보장은 아닙니다. [사용방법·처리시간·적용 경계](docs/PRISM_비동기_상태평가.md).
 
 **현재 권위 기준점 (state-bound union):** `results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json`은
 34개 사건·44개 case·176개 risk atom의 옥외 진단 범위를 보존하고, 상태→방출 연결은
