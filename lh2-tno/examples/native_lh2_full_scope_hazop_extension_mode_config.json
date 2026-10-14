@@ -1,0 +1,45 @@
+{
+  "schema_version": "prism.hazop_extension_mode_config.v1",
+  "facility_id": "generic-lh2-full-scope-example",
+  "configuration_origin": "synthetic",
+  "source_provenance": "Explicit generic outdoor LH2 extension HAZOP table; replace with reviewed facility P&ID/runtime evidence before facility QRA promotion.",
+  "extensions": [
+    {
+      "component_id": "vertical-handoff-terminal-pipe-01",
+      "component_kind": "pipe",
+      "event_prefix": "generic-lh2-full-scope-example/vertical-handoff/",
+      "operating_mode": "receiving",
+      "scenario_family": "vertical_handoff",
+      "release_mode": "hole",
+      "hazop_row_id": "VERTICAL-HANDOFF-receiving-boundary-release",
+      "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+      "table_id": "generic-outdoor-lh2-extension-hazop-v1",
+      "source_id": "synthetic-extension-hazop-vertical-handoff",
+      "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind.",
+      "priority": "high",
+      "captured_at_s": 0.0
+    },
+    {
+      "component_id": "inventory-depletion-pipe-01",
+      "component_kind": "pipe",
+      "event_prefix": "generic-lh2-full-scope-example/inventory-depletion/",
+      "operating_mode": "supply",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "hole",
+      "hazop_row_id": "INVENTORY-DEPLETION-supply-line-release",
+      "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+      "table_id": "generic-outdoor-lh2-extension-hazop-v1",
+      "source_id": "synthetic-extension-hazop-inventory-depletion",
+      "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind.",
+      "priority": "high",
+      "captured_at_s": 0.0
+    }
+  ],
+  "policy": {
+    "operating_mode_inferred": false,
+    "scenario_inferred": false,
+    "frequency_assignment_performed": false,
+    "provider_release_created": false,
+    "facility_qra_claim": false
+  }
+}

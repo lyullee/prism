@@ -1,0 +1,11 @@
+{
+  "schema_version": "prism.hazop_extension_mode_binding_diagnostic.v1",
+  "status": "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+  "extension_component_count": 2,
+  "extension_event_count": 10,
+  "bound_event_count": 34,
+  "unbound_event_count": 0,
+  "frequency_assignment_performed": false,
+  "provider_release_created": false,
+  "facility_qra_claim": false
+}

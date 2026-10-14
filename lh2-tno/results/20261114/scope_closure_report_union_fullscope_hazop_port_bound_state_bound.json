@@ -716,23 +716,12 @@
       "scenario_inference_performed": false
     },
     "hazop_selection_event_binding": {
-      "status": "MISSING",
-      "selected_scenario_count": 10,
+      "status": "REPORTED",
+      "selected_scenario_count": 12,
       "frequency_event_count": 34,
-      "bound_event_count": 24,
-      "unbound_event_count": 10,
-      "errors": [
-        "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%: no explicit HAZOP mode binding",
-        "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%: no explicit HAZOP mode binding"
-      ],
+      "bound_event_count": 34,
+      "unbound_event_count": 0,
+      "errors": [],
       "scenario_family_inference_performed": false,
       "frequency_assignment_performed": false
     }
@@ -970,7 +959,7 @@
     "schema_version": "prism.hazop_event_mode_binding.v1",
     "facility_id": "generic-lh2-full-scope-frequency-example",
     "status": "EXPLICIT_DIAGNOSTIC_BINDING",
-    "source_provenance": "synthetic generic outdoor LH2 HAZOP mode table; no mode inferred from pressure, equipment kind, release size, or frequency",
+    "source_provenance": "synthetic generic outdoor LH2 HAZOP mode table; no mode inferred from pressure, equipment kind, release size, or frequency; explicit extension HAZOP mode configuration",
     "operating_modes": [
       "receiving",
       "supply",
@@ -1168,6 +1157,96 @@
         "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
         "release_mode": "hole",
         "source_provenance": "explicit synthetic generic LH2 HAZOP mode table; replace with reviewed facility HAZOP/P&ID/runtime frame"
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+        "scenario_family": "vertical_handoff",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+        "scenario_family": "vertical_handoff",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+        "scenario_family": "vertical_handoff",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+        "scenario_family": "vertical_handoff",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+        "scenario_family": "vertical_handoff",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic receiving-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+        "scenario_family": "inventory_depletion",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+        "scenario_family": "inventory_depletion",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+        "scenario_family": "inventory_depletion",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+        "scenario_family": "inventory_depletion",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
+      },
+      {
+        "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+        "scenario_family": "inventory_depletion",
+        "release_mode": "hole",
+        "source_provenance": "Explicit synthetic supply-mode extension row; no mode inferred from event size, frequency, or component kind."
       }
     ],
     "policy": {
@@ -1181,12 +1260,12 @@
   },
   "hazop_selection_event_binding": {
     "schema_version": "prism.hazop_event_selection_binding_audit.v1",
-    "status": "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",
-    "selected_scenario_count": 10,
+    "status": "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+    "selected_scenario_count": 12,
     "frequency_event_count": 34,
-    "mode_binding_count": 24,
-    "bound_event_count": 24,
-    "unbound_event_count": 10,
+    "mode_binding_count": 34,
+    "bound_event_count": 34,
+    "unbound_event_count": 0,
     "selected_scenarios": [
       {
         "scenario_id": "storage-tank-01-mode-deviation:receiving:liquid_two_phase",
@@ -1276,6 +1355,24 @@
         "scenario_family": "reliquefier_hole",
         "release_mode": "hole",
         "matched_event_count": 1,
+        "status": "BOUND"
+      },
+      {
+        "scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "scenario_family": "vertical_handoff",
+        "release_mode": "hole",
+        "matched_event_count": 5,
+        "status": "BOUND"
+      },
+      {
+        "scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "scenario_family": "inventory_depletion",
+        "release_mode": "hole",
+        "matched_event_count": 5,
         "status": "BOUND"
       }
     ],
@@ -1868,247 +1965,236 @@
       },
       {
         "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
         "scenario_families": [
-          "pipe_hole",
           "vertical_handoff"
         ],
         "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
         "scenario_families": [
-          "pipe_hole",
           "vertical_handoff"
         ],
         "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
         "scenario_families": [
-          "pipe_hole",
           "vertical_handoff"
         ],
         "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
         "scenario_families": [
-          "pipe_hole",
           "vertical_handoff"
         ],
         "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "vertical-handoff-terminal-pipe-01",
+        "operating_mode": "receiving",
+        "hazop_scenario_id": "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff",
         "scenario_families": [
-          "pipe_hole",
           "vertical_handoff"
         ],
         "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "vertical-handoff-terminal-pipe-01|receiving|vertical_handoff"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
         "scenario_families": [
-          "inventory_depletion",
-          "pipe_hole"
+          "inventory_depletion"
         ],
         "frequency_event_component_id": "inventory-depletion-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "inventory-depletion-pipe-01|supply|inventory_depletion"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
         "scenario_families": [
-          "inventory_depletion",
-          "pipe_hole"
+          "inventory_depletion"
         ],
         "frequency_event_component_id": "inventory-depletion-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "inventory-depletion-pipe-01|supply|inventory_depletion"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
         "scenario_families": [
-          "inventory_depletion",
-          "pipe_hole"
+          "inventory_depletion"
         ],
         "frequency_event_component_id": "inventory-depletion-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "inventory-depletion-pipe-01|supply|inventory_depletion"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
         "scenario_families": [
-          "inventory_depletion",
-          "pipe_hole"
+          "inventory_depletion"
         ],
         "frequency_event_component_id": "inventory-depletion-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "inventory-depletion-pipe-01|supply|inventory_depletion"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       },
       {
         "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
-        "component_id": null,
-        "operating_mode": null,
-        "hazop_scenario_id": null,
+        "component_id": "inventory-depletion-pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "inventory-depletion-pipe-01|supply|inventory_depletion",
         "scenario_families": [
-          "inventory_depletion",
-          "pipe_hole"
+          "inventory_depletion"
         ],
         "frequency_event_component_id": "inventory-depletion-pipe-01",
         "frequency_event_release_mode": "hole",
-        "selected_hazop_scenario_ids": [],
+        "selected_hazop_scenario_ids": [
+          "inventory-depletion-pipe-01|supply|inventory_depletion"
+        ],
         "checks": {
           "event_present": true,
-          "component_matches_event": false,
-          "release_mode_matches_event": false,
+          "component_matches_event": true,
+          "release_mode_matches_event": true,
           "scenario_family_present": true,
-          "selected_hazop_scenario_match": false,
-          "explicit_mode_binding_present": false
+          "selected_hazop_scenario_match": true
         },
-        "status": "BINDING_REQUIRED",
+        "status": "BOUND",
         "frequency_assignment_performed": false
       }
     ],
-    "errors": [
-      "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%: no explicit HAZOP mode binding",
-      "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%: no explicit HAZOP mode binding"
-    ],
+    "errors": [],
     "policy": {
       "operating_mode_taken_from_explicit_runtime_input": true,
       "scenario_family_inference_performed": false,

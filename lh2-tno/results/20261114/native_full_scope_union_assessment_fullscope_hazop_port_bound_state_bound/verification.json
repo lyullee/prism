@@ -98,11 +98,11 @@
     "the native state snapshot reconciliation covers the base 24-event packet campaign; vertical-handoff and inventory-depletion extension events have separate state snapshot records and are state-bound for diagnostic accounting, but their synthetic model-prediction origin does not qualify field evidence",
     "extension state coverage is audited per event; release values and result digests are never used to reconstruct a missing canonical equipment state snapshot"
   ],
-  "hazop_selection_event_binding_status": "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",
-  "hazop_selection_event_binding_selected_scenario_count": 10,
+  "hazop_selection_event_binding_status": "HAZOP_SELECTION_EVENT_BINDING_COMPLETE",
+  "hazop_selection_event_binding_selected_scenario_count": 12,
   "hazop_selection_event_binding_event_count": 34,
-  "hazop_selection_event_binding_bound_event_count": 24,
-  "hazop_selection_event_binding_unbound_event_count": 10,
-  "hazop_extension_mode_evidence_request_status": "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
-  "hazop_extension_mode_evidence_request_count": 10
+  "hazop_selection_event_binding_bound_event_count": 34,
+  "hazop_selection_event_binding_unbound_event_count": 0,
+  "hazop_extension_mode_evidence_request_status": "NO_HAZOP_EXTENSION_MODE_GAP",
+  "hazop_extension_mode_evidence_request_count": 0
 }
