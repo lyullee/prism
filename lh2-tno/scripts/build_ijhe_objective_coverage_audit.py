@@ -54,6 +54,7 @@ def main() -> int:
     parser.add_argument("--generic-provider-evidence-requests", type=Path)
     parser.add_argument("--generic-provider-evidence-audit", type=Path)
     parser.add_argument("--release-closure-worklist", type=Path)
+    parser.add_argument("--external-release-artifact-intake", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -164,6 +165,11 @@ def main() -> int:
             release_closure_worklist=(
                 _object(args.release_closure_worklist)
                 if args.release_closure_worklist
+                else None
+            ),
+            external_release_artifact_intake=(
+                _object(args.external_release_artifact_intake)
+                if args.external_release_artifact_intake
                 else None
             ),
         )

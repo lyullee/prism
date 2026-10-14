@@ -117,8 +117,36 @@ def _inputs():
     }
 
 
+def _external_intake():
+    return {
+        "schema_version": "prism.external_release_artifact_intake.v1",
+        "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
+        "diagnostic_only": True,
+        "artifact_file_count": 2,
+        "release_row_count": 3,
+        "qualified_sidecar_row_count": 0,
+        "closure_ready_row_count": 0,
+        "actual_origin_row_count": 0,
+        "synthetic_or_model_prediction_row_count": 3,
+        "error_count": 0,
+        "errors": [],
+        "closure_status_counts": {"SCHEMA_UNQUALIFIED": 3},
+        "promotion_policy": {
+            "frequency_assigned": False,
+            "provider_release_packet_promoted": False,
+            "physical_validation_promoted": False,
+            "facility_qra_promoted": False,
+            "qualification_requires_exact_digest_bound_sidecar": True,
+            "provider_ports_never_substituted_for_frequency_ports": True,
+        },
+        "_record_path": "external-intake.json",
+    }
+
+
 def test_objective_audit_separates_conditional_chain_from_strict_gates():
-    report = build_ijhe_objective_coverage_audit(**_inputs())
+    inputs = _inputs()
+    inputs["external_release_artifact_intake"] = _external_intake()
+    report = build_ijhe_objective_coverage_audit(**inputs)
     assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
     assert report["conditional_chain_complete"] is True
     assert report["strict_facility_qra_claim"] is False
@@ -147,6 +175,27 @@ def test_objective_audit_separates_conditional_chain_from_strict_gates():
     assert weather_check["status"] == "CONDITIONALLY_COMPLETE"
     assert weather_check["observed"]["scenario_cross_product_count"] == 4
     assert weather_check["observed"]["scenario_missing_dimension_atom_count"] == 0
+    intake_check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_external_release_artifact_intake"
+    )
+    assert intake_check["status"] == "PASS"
+    assert intake_check["observed"]["release_row_count"] == 3
+
+
+def test_objective_audit_blocks_malformed_external_release_intake():
+    inputs = _inputs()
+    inputs["external_release_artifact_intake"] = _external_intake()
+    inputs["external_release_artifact_intake"]["promotion_policy"][
+        "facility_qra_promoted"
+    ] = True
+    report = build_ijhe_objective_coverage_audit(**inputs)
+    check = next(
+        row for row in report["checks"]
+        if row["id"] == "diagnostic_external_release_artifact_intake"
+    )
+    assert check["status"] == "BLOCKED_EVIDENCE"
+    assert report["status"] == "CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN"
 
 
 def test_objective_audit_blocks_realtime_timing_without_mode_contract():

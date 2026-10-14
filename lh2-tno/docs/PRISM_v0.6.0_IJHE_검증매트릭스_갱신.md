@@ -247,6 +247,8 @@ readiness validator는 이제 `open_case_count = case_count - READY_FOR_STRICT_R
 
 실제 provider packet을 받을 때는 [`audit_provider_release_closure.py`](../scripts/audit_provider_release_closure.py)를 먼저 실행한다. `prism.provider_release_closure_audit.v1`은 `reviewed_isolation_success`의 격리 성공·작동시각, `inventory_depletion`의 최종 재고와 provider 수지, 종료 provenance를 각각 검사한다. 이 감사가 `CLOSURE_READY_FOR_QUALIFICATION`을 반환해도 qualified provider 증거와 독립 물리검증이 자동으로 충족되는 것은 아니다.
 
+2026-11-08에는 저장소 밖 `DocuData` 전체를 다시 훑어 `resolved_release*.json` 14개 파일·28개 방출 행을 [`external_release_artifact_intake.json`](../results/20261108/external_release_artifact_intake.json)에 기록했다. 이 자료는 설비·포트·방출 shape·종료 필드·source/result digest를 찾는 inventory이며, qualified actual 행이나 exact qualification sidecar를 의미하지 않는다. 현재 21개는 schema-unqualified, 7개는 closure evidence open, closure-ready는 0개다. 이 intake는 [`ijhe_objective_coverage_audit_full_evidence_with_external_release_intake.json`](../results/20261108/ijhe_objective_coverage_audit_full_evidence_with_external_release_intake.json)의 `diagnostic_external_release_artifact_intake` 행으로 연결되지만, 핵심/엄격 gate의 위치를 바꾸지 않는다. 이 분리를 통해 검색된 파일이 있다는 사실과 실제 사고 방출 근거가 확보됐다는 사실을 혼동하지 않는다.
+
 배치 manifest를 사용하는 경우에는 `scripts/audit_provider_packet_inputs.py --require-release-closure`를 사용한다. 이 옵션은 qualification sidecar가 맞더라도 종료·격리·재고 closure가 열린 packet을 `NO_PROVIDER_PACKET_INPUT`으로 남긴다. 기본 모드는 기존 packet identity 감사와의 호환성을 위해 closure 결과를 함께 기록하되 packet을 자동 승격하지 않는다.
 
 최신 외부 설비 결합 원장은 다음 명령으로 재현할 수 있다.

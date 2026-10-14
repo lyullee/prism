@@ -73,6 +73,7 @@ def build_ijhe_objective_coverage_audit(
     generic_provider_evidence_requests: Mapping[str, Any] | None = None,
     generic_provider_evidence_audit: Mapping[str, Any] | None = None,
     release_closure_worklist: Mapping[str, Any] | None = None,
+    external_release_artifact_intake: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an objective-by-objective, fail-closed evidence ledger.
 
@@ -119,6 +120,9 @@ def build_ijhe_objective_coverage_audit(
         generic_provider_evidence_audit, None
     )
     release_closure_worklist_path = _record_path(release_closure_worklist, None)
+    external_release_artifact_intake_path = _record_path(
+        external_release_artifact_intake, None
+    )
     union_event_count = _int(union_verification.get("merged_event_count"))
     union_state_campaign_reconciliation = (
         native_state_snapshot_campaign_ledger.get("state_snapshot_campaign_reconciliation", {})
@@ -2122,6 +2126,135 @@ def build_ijhe_objective_coverage_audit(
             interpretation=(
                 "sidecar exact-match 감사는 자료가 실제 packet에 귀속되는지 확인하는 진단 단계다. "
                 "독립 물리검증, 빈도 결합 또는 시설 QRA 승격을 수행하지 않는다."
+            ),
+        ))
+
+    # External release files are useful for discovery, but they must remain an
+    # inventory-only diagnostic until the exact provider qualification sidecar
+    # and release-boundary closure are supplied.  Keep this row outside the
+    # established core/strict slices above so an expanded search cannot change
+    # the qualification status by itself.
+    external_intake = external_release_artifact_intake
+    external_intake_policy = (
+        external_intake.get("promotion_policy", {})
+        if isinstance(external_intake, Mapping)
+        else {}
+    )
+    if not isinstance(external_intake_policy, Mapping):
+        external_intake_policy = {}
+    external_intake_status = (
+        external_intake.get("status")
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_rows = (
+        _int(external_intake.get("release_row_count"))
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_files = (
+        _int(external_intake.get("artifact_file_count"))
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_sidecars = (
+        _int(external_intake.get("qualified_sidecar_row_count"))
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_closure_ready = (
+        _int(external_intake.get("closure_ready_row_count"))
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_actual = (
+        _int(external_intake.get("actual_origin_row_count"))
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_synthetic = (
+        _int(external_intake.get("synthetic_or_model_prediction_row_count"))
+        if isinstance(external_intake, Mapping)
+        else None
+    )
+    external_intake_errors = (
+        external_intake.get("errors", [])
+        if isinstance(external_intake, Mapping)
+        else []
+    )
+    if not isinstance(external_intake_errors, list):
+        external_intake_errors = []
+    external_intake_counts_ok = (
+        external_intake_rows is not None
+        and external_intake_rows >= 0
+        and external_intake_files is not None
+        and external_intake_files >= 0
+        and external_intake_sidecars is not None
+        and 0 <= external_intake_sidecars <= external_intake_rows
+        and external_intake_closure_ready is not None
+        and 0 <= external_intake_closure_ready <= external_intake_rows
+        and external_intake_actual is not None
+        and 0 <= external_intake_actual <= external_intake_rows
+        and external_intake_synthetic is not None
+        and 0 <= external_intake_synthetic <= external_intake_rows
+        and len(external_intake_errors)
+        == (external_intake.get("error_count") if isinstance(external_intake, Mapping) else None)
+    )
+    external_intake_ok = (
+        isinstance(external_intake, Mapping)
+        and external_intake.get("schema_version")
+        == "prism.external_release_artifact_intake.v1"
+        and external_intake_status == "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION"
+        and external_intake.get("diagnostic_only") is True
+        and external_intake_counts_ok
+        and external_intake_policy.get("frequency_assigned") is False
+        and external_intake_policy.get("provider_release_packet_promoted") is False
+        and external_intake_policy.get("physical_validation_promoted") is False
+        and external_intake_policy.get("facility_qra_promoted") is False
+        and external_intake_policy.get("qualification_requires_exact_digest_bound_sidecar") is True
+        and external_intake_policy.get("provider_ports_never_substituted_for_frequency_ports") is True
+    )
+    if external_release_artifact_intake is not None:
+        rows.append(_row(
+            "diagnostic_external_release_artifact_intake",
+            "외부 LH2 방출 파일을 전체 검색하되 정확한 qualification sidecar와 종료근거가 없으면 진단 inventory로만 유지해야 한다",
+            "PASS" if external_intake_ok else "BLOCKED_EVIDENCE",
+            evidence_paths=(external_release_artifact_intake_path,),
+            observed={
+                "schema_version": (
+                    external_intake.get("schema_version")
+                    if isinstance(external_intake, Mapping)
+                    else None
+                ),
+                "status": external_intake_status,
+                "artifact_file_count": external_intake_files,
+                "release_row_count": external_intake_rows,
+                "qualified_sidecar_row_count": external_intake_sidecars,
+                "closure_ready_row_count": external_intake_closure_ready,
+                "actual_origin_row_count": external_intake_actual,
+                "synthetic_or_model_prediction_row_count": external_intake_synthetic,
+                "closure_status_counts": (
+                    dict(external_intake.get("closure_status_counts", {}))
+                    if isinstance(external_intake, Mapping)
+                    and isinstance(external_intake.get("closure_status_counts"), Mapping)
+                    else external_intake.get("closure_status_counts")
+                    if isinstance(external_intake, Mapping)
+                    else None
+                ),
+                "error_count": (
+                    external_intake.get("error_count")
+                    if isinstance(external_intake, Mapping)
+                    else None
+                ),
+                "counts_valid": external_intake_counts_ok,
+                "promotion_policy": dict(external_intake_policy),
+            },
+            blocking_reason=None if external_intake_ok else (
+                "외부 방출 inventory의 schema·집계·정확한 qualification 요구·승격 차단 정책이 확인되지 않았다"
+            ),
+            interpretation=(
+                "검색된 파일은 설비·사고 후보를 찾는 보조 장부다. synthetic/model-prediction 자료와 "
+                "sidecar 없는 방출은 실제 사고 근거·빈도·물리검증·시설 QRA로 승격하지 않는다."
             ),
         ))
 
