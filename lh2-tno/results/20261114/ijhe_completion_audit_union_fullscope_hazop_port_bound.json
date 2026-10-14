@@ -4341,6 +4341,28 @@
       "blocking_reason": "HAZOP selection-to-frequency-event audit is missing identity accounting or permits family/frequency inference",
       "diagnostic_only": true,
       "interpretation": "The audit confirms that every declared frequency event is matched to an explicit HAZOP component, operating mode, scenario family and release mode. A PASS does not qualify the provider release or promote facility IR/F-N."
+    },
+    {
+      "name": "diagnostic_hazop_extension_mode_evidence_request",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound\\hazop_extension_mode_evidence_request.json",
+        "schema_version": "prism.hazop_extension_mode_binding_evidence_request.v1",
+        "status": "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
+        "source_unbound_event_count": 10,
+        "request_count": 10,
+        "open_request_count": 10,
+        "policy": {
+          "mode_inference_performed": false,
+          "scenario_inference_performed": false,
+          "frequency_assignment_performed": false,
+          "provider_release_created": false,
+          "facility_qra_claim": false
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The request ledger makes every HAZOP-unbound extension event explicit and lists the runtime mode, reviewed scenario identity, equipment boundary, timestamp digest, and provenance needed before that event can enter automatic scenario selection. It never supplies those values itself."
     }
   ],
   "blocking_reasons": [

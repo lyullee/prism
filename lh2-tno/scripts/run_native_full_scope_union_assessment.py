@@ -68,6 +68,9 @@ from lh2_tno.facility_frequency_uncertainty_audit import (  # noqa: E402
 from lh2_tno.hazop_event_selection_audit import (  # noqa: E402
     audit_hazop_selection_event_bindings,
 )
+from lh2_tno.hazop_extension_evidence_request import (  # noqa: E402
+    build_hazop_extension_mode_binding_request,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -466,6 +469,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "rows are not additive and the ledger's exact event/case identities are authoritative."
     )
     hazop_selection_event_audit = None
+    hazop_extension_mode_evidence_request = None
     if hazop_runtime_audit is not None and hazop_mode_binding is not None:
         families_by_event: dict[str, set[str]] = {}
         for case in repaired_merged.get("cases", []):
@@ -497,6 +501,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             hazop_runtime_audit,
             hazop_mode_binding,
             frequency_event_rows,
+        )
+        hazop_extension_mode_evidence_request = (
+            build_hazop_extension_mode_binding_request(hazop_selection_event_audit)
         )
     scenarios = _extend_frequency_scenarios(base_frequency_scenarios)
     independent_extension = extend_frequency_scenarios_for_independent_event_bounds(
@@ -811,6 +818,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         verification["hazop_selection_event_binding_unbound_event_count"] = (
             hazop_selection_event_audit["unbound_event_count"]
         )
+        verification["hazop_extension_mode_evidence_request_status"] = (
+            hazop_extension_mode_evidence_request["status"]
+        )
+        verification["hazop_extension_mode_evidence_request_count"] = (
+            hazop_extension_mode_evidence_request["request_count"]
+        )
     output = args.output_dir
     output.mkdir(parents=True, exist_ok=True)
     _save(output / "campaign_result.json", merged)
@@ -852,6 +865,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     _save(output / "facility_assessment.json", assessment)
     if hazop_selection_event_audit is not None:
         _save(output / "hazop_selection_event_binding.json", hazop_selection_event_audit)
+    if hazop_extension_mode_evidence_request is not None:
+        _save(
+            output / "hazop_extension_mode_evidence_request.json",
+            hazop_extension_mode_evidence_request,
+        )
     _save(output / "facility_evidence_request.json", evidence_request)
     _save(output / "facility_case_packet_coverage.json", facility_case_packet_coverage)
     _save(output / "native_state_snapshot_campaign_ledger.json", native_state_snapshot_ledger)

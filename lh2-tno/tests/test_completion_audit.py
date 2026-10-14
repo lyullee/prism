@@ -3296,6 +3296,58 @@ def test_completion_audit_blocks_hazop_event_identity_inference():
     assert check["status"] == "BLOCKED"
 
 
+def _hazop_extension_mode_evidence_request(**overrides):
+    record = {
+        "schema_version": "prism.hazop_extension_mode_binding_evidence_request.v1",
+        "status": "NO_HAZOP_EXTENSION_MODE_GAP",
+        "source_selection_audit_schema": "prism.hazop_event_selection_binding_audit.v1",
+        "source_unbound_event_count": 0,
+        "request_count": 0,
+        "requests": [],
+        "mode_inference_performed": False,
+        "scenario_inference_performed": False,
+        "frequency_assignment_performed": False,
+        "provider_release_created": False,
+        "facility_qra_claim": False,
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_hazop_extension_mode_evidence_request():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_extension_mode_evidence_request=_hazop_extension_mode_evidence_request(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_extension_mode_evidence_request"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_inconsistent_hazop_extension_mode_evidence_request():
+    unsafe = _hazop_extension_mode_evidence_request(
+        status="OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
+        source_unbound_event_count=1,
+        request_count=0,
+    )
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_extension_mode_evidence_request=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_extension_mode_evidence_request"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _operating_mode_evidence_audit(**overrides):
     record = {
         "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",

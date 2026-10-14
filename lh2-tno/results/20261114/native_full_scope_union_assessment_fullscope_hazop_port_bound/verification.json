@@ -97,5 +97,7 @@
   "hazop_selection_event_binding_selected_scenario_count": 10,
   "hazop_selection_event_binding_event_count": 34,
   "hazop_selection_event_binding_bound_event_count": 24,
-  "hazop_selection_event_binding_unbound_event_count": 10
+  "hazop_selection_event_binding_unbound_event_count": 10,
+  "hazop_extension_mode_evidence_request_status": "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
+  "hazop_extension_mode_evidence_request_count": 10
 }

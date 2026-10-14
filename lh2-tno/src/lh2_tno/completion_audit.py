@@ -102,6 +102,7 @@ def build_ijhe_completion_audit(
     hazop_scope_worklist: Mapping[str, Any] | None = None,
     hazop_event_mode_binding: Mapping[str, Any] | None = None,
     hazop_selection_event_binding: Mapping[str, Any] | None = None,
+    hazop_extension_mode_evidence_request: Mapping[str, Any] | None = None,
     hazop_operating_mode_evidence: Mapping[str, Any] | None = None,
     reviewed_signal_unit_evidence: Mapping[str, Any] | None = None,
     observed_hazop_runtime_audit: Mapping[str, Any] | None = None,
@@ -4022,6 +4023,86 @@ def build_ijhe_completion_audit(
             "qualify the provider release or promote facility IR/F-N."
         )
         checks.append(selection_check)
+    if hazop_extension_mode_evidence_request is not None:
+        evidence_request = hazop_extension_mode_evidence_request
+        requests = evidence_request.get("requests")
+        requests = requests if isinstance(requests, list) else None
+        source_unbound = evidence_request.get("source_unbound_event_count")
+        request_count = evidence_request.get("request_count")
+        selection_source = evidence_request.get("source_selection_audit_schema")
+        policy_flags = (
+            evidence_request.get("mode_inference_performed"),
+            evidence_request.get("scenario_inference_performed"),
+            evidence_request.get("frequency_assignment_performed"),
+            evidence_request.get("provider_release_created"),
+            evidence_request.get("facility_qra_claim"),
+        )
+        request_rows_valid = bool(requests is not None) and all(
+            isinstance(row, Mapping)
+            and row.get("status") == "OPEN"
+            and isinstance(row.get("event_id"), str)
+            and bool(row.get("event_id"))
+            and isinstance(row.get("required_evidence"), list)
+            and bool(row.get("required_evidence"))
+            and isinstance(row.get("policy"), Mapping)
+            and all(value is False for value in (
+                row["policy"].get("operating_mode_inferred"),
+                row["policy"].get("scenario_inferred"),
+                row["policy"].get("frequency_assignment_performed"),
+                row["policy"].get("provider_release_created"),
+                row["policy"].get("facility_qra_claim"),
+            ))
+            for row in (requests or [])
+        )
+        counts_valid = (
+            isinstance(source_unbound, int)
+            and source_unbound >= 0
+            and isinstance(request_count, int)
+            and request_count >= 0
+            and request_count == len(requests or [])
+            and request_count == source_unbound
+        )
+        if source_unbound == 0:
+            request_status_valid = evidence_request.get("status") == "NO_HAZOP_EXTENSION_MODE_GAP"
+        else:
+            request_status_valid = evidence_request.get("status") == "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE"
+        extension_request_valid = (
+            evidence_request.get("schema_version") == "prism.hazop_extension_mode_binding_evidence_request.v1"
+            and selection_source == "prism.hazop_event_selection_binding_audit.v1"
+            and counts_valid
+            and request_status_valid
+            and request_rows_valid
+            and all(value is False for value in policy_flags)
+        )
+        extension_request_check = _check(
+            "diagnostic_hazop_extension_mode_evidence_request",
+            extension_request_valid,
+            {
+                "record": evidence_request.get("_record_path"),
+                "schema_version": evidence_request.get("schema_version"),
+                "status": evidence_request.get("status"),
+                "source_unbound_event_count": source_unbound,
+                "request_count": request_count,
+                "open_request_count": sum(
+                    1 for row in (requests or []) if isinstance(row, Mapping) and row.get("status") == "OPEN"
+                ),
+                "policy": {
+                    "mode_inference_performed": evidence_request.get("mode_inference_performed"),
+                    "scenario_inference_performed": evidence_request.get("scenario_inference_performed"),
+                    "frequency_assignment_performed": evidence_request.get("frequency_assignment_performed"),
+                    "provider_release_created": evidence_request.get("provider_release_created"),
+                    "facility_qra_claim": evidence_request.get("facility_qra_claim"),
+                },
+            },
+            "HAZOP extension mode evidence request is missing, inconsistent, or permits inference",
+        )
+        extension_request_check["diagnostic_only"] = True
+        extension_request_check["interpretation"] = (
+            "The request ledger makes every HAZOP-unbound extension event explicit and lists the runtime "
+            "mode, reviewed scenario identity, equipment boundary, timestamp digest, and provenance needed "
+            "before that event can enter automatic scenario selection. It never supplies those values itself."
+        )
+        checks.append(extension_request_check)
     if hazop_operating_mode_evidence is not None:
         mode_evidence = hazop_operating_mode_evidence
         policy = mode_evidence.get("policy")
