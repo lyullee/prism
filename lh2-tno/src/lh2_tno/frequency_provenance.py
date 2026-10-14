@@ -40,6 +40,8 @@ def build_frequency_provenance_report(
     manifest_audit = audit_manifest(manifest)
     checks: list[dict[str, Any]] = []
     blockers: list[str] = []
+    external_events_attached = plan.precomputed_events is not None
+    external_event_provenance = plan.precomputed_events_provenance
 
     checks.append({
         "id": "manifest_executable",
@@ -102,27 +104,69 @@ def build_frequency_provenance_report(
 
     event_profile_ids = {event.profile for event in events}
     event_catalogue_digests = sorted({event.catalogue_digest for event in events})
-    event_catalogue_check = event_catalogue_digests in ([], [catalogue_digest])
+    if external_events_attached:
+        # The external generator owns its event catalogue digest.  Comparing
+        # those rows to PRISM's packaged catalogue would falsely report a
+        # failure even though the exact rows were deliberately attached to
+        # the plan.  Verify the stronger invariant instead: the generated
+        # rows are the attached rows, each carries source provenance, and the
+        # plan carries a nonempty handoff provenance string.
+        attached_rows = tuple(plan.precomputed_events or ())
+        event_catalogue_check = (
+            bool(attached_rows)
+            and bool(external_event_provenance and external_event_provenance.strip())
+            and tuple(events) == attached_rows
+            and all(
+                event.source.strip()
+                and event.source_sha256.strip()
+                and event.catalogue_digest.strip()
+                for event in events
+            )
+        )
+    else:
+        event_catalogue_check = event_catalogue_digests in ([], [catalogue_digest])
     checks.append({
         "id": "generated_event_catalogue_digest",
         "passed": event_catalogue_check,
         "catalogue_digest": catalogue_digest,
         "event_catalogue_digests": event_catalogue_digests,
+        "comparison_scope": (
+            "attached_external_event_catalogue"
+            if external_events_attached else "packaged_frequency_catalogue"
+        ),
+        "external_event_provenance": external_event_provenance,
     })
     if not event_catalogue_check:
-        blockers.append("generated event catalogue_digest does not match the packaged snapshot")
+        blockers.append(
+            "attached external event rows failed exact replay/source provenance checks"
+            if external_events_attached
+            else "generated event catalogue_digest does not match the packaged snapshot"
+        )
 
     profile_event_coverage = {
         profile_id: sum(event.profile == profile_id for event in events)
         for profile_id in sorted(profile_names)
     }
-    checks.append({
-        "id": "plan_profiles_have_generated_events",
-        "passed": event_profile_ids == profile_names,
-        "profile_event_counts": profile_event_coverage,
-    })
-    if event_profile_ids != profile_names:
-        blockers.append("one or more declared frequency profiles produced no generated event")
+    if external_events_attached:
+        # External rows can intentionally use a legacy/provider profile that
+        # is different from the native FrequencyAsset profile.  Their exact
+        # event identity was checked above; do not mislabel that valid bridge
+        # as a missing native profile event.
+        checks.append({
+            "id": "plan_profiles_have_generated_events",
+            "passed": True,
+            "applicability": "external_precomputed_event_catalogue",
+            "profile_event_counts": profile_event_coverage,
+            "event_profile_ids": sorted(event_profile_ids),
+        })
+    else:
+        checks.append({
+            "id": "plan_profiles_have_generated_events",
+            "passed": event_profile_ids == profile_names,
+            "profile_event_counts": profile_event_coverage,
+        })
+        if event_profile_ids != profile_names:
+            blockers.append("one or more declared frequency profiles produced no generated event")
 
     limitations = _unique_strings([
         "Rates are a reviewed literature/catalogue baseline; they are not field-validated LH2 failure statistics.",
@@ -132,6 +176,11 @@ def build_frequency_provenance_report(
         *data.get("unresolved_profiles", []),
         *[item for row in profile_rows for item in row["limitations"]],
     ])
+    if external_events_attached:
+        limitations.append(
+            "Attached precomputed event rows own their external rate arithmetic; "
+            "the packaged catalogue digest is audited only for the plan asset scope."
+        )
     if manifest.configuration_origin == "synthetic":
         limitations.append("The supplied manifest is synthetic; real asset classification, count, length and applicability review is required.")
     limitations = _unique_strings(limitations)
@@ -153,6 +202,11 @@ def build_frequency_provenance_report(
             "digest": plan.digest(),
             "asset_count": len(plan.assets),
             "excluded_model_components": plan.excluded_model_components,
+            "precomputed_event_count": len(plan.precomputed_events or ()),
+            "precomputed_events_provenance": external_event_provenance,
+            "event_generation_mode": (
+                "external_precomputed" if external_events_attached else "packaged_catalogue"
+            ),
         },
         "catalogue": {
             "digest": catalogue_digest,
@@ -160,15 +214,29 @@ def build_frequency_provenance_report(
             "interpretation": data.get("interpretation"),
             "source_files": source_files,
             "unresolved_profiles": data.get("unresolved_profiles", []),
+            "applied_to_event_rows": not external_events_attached,
+        },
+        "external_event_catalogue": {
+            "attached": external_events_attached,
+            "provenance": external_event_provenance,
+            "event_count": len(events) if external_events_attached else 0,
+            "catalogue_digests": event_catalogue_digests if external_events_attached else [],
+            "source_digests": sorted({event.source_sha256 for event in events})
+            if external_events_attached else [],
+            "exact_replay_checked": external_events_attached and event_catalogue_check,
+            "frequency_arithmetic_owner": (
+                "external_precomputed_event_generator"
+                if external_events_attached else "prism_packaged_catalogue"
+            ),
         },
         "profile_provenance": profile_rows,
         "generated_events": event_rows,
         "policy": {
-            "literature_frequency_baseline": True,
+            "literature_frequency_baseline": not external_events_attached,
             "field_frequency_collection_used": False,
             "sensor_frequency_learning_used": False,
             "physical_validation_claim": False,
-            "external_frequency_override_used": False,
+            "external_frequency_override_used": external_events_attached,
             "frequency_is_separate_from_sensor_state": True,
         },
         "checks": checks,

@@ -1,0 +1,296 @@
+{
+  "schema_version": "prism.frequency_provenance.v1",
+  "generated_utc": "2026-10-14T01:12:08.597910+00:00",
+  "status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "facility": {
+    "id": "generic-lh2-full-scope-example",
+    "environment": "outdoor",
+    "configuration_origin": "synthetic",
+    "manifest_digest": "ca0add67a1148e4a184b132e97864b14e70146c4415b2cac2aebaacb105f694c",
+    "manifest_audit_status": "EXECUTABLE"
+  },
+  "frequency_plan": {
+    "id": "generic-lh2-full-scope-frequency-example",
+    "digest": "d8ad316ff90451b60e2a2c01a3b98f4e9ca1aaa49d87389c1bc8a7a8ddd401cc",
+    "asset_count": 7,
+    "excluded_model_components": {
+      "receiving-boundary-01": "boundary is an interface, not an accidental-release equipment item in this generic example"
+    },
+    "precomputed_event_count": 1,
+    "precomputed_events_provenance": "synthetic external bridge example; source digest pinned",
+    "event_generation_mode": "external_precomputed"
+  },
+  "catalogue": {
+    "digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+    "reviewed_date_kst": "2026-10-08",
+    "interpretation": "Source table snapshot, not universal facility certification or complete Purple Chapter 3.",
+    "source_files": [
+      {
+        "path": "C:\\Users\\lyul\\Desktop\\DocuData\\TNO_위험분석모듈\\TNO_SYSTEM\\eBook___The_coloured_books\\TheColouredBooks\\PurpleBook.pdf",
+        "sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796"
+      },
+      {
+        "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\lh2-tno\\results\\20261008\\tno_function_inventory\\frequency_library.json",
+        "sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b"
+      }
+    ],
+    "unresolved_profiles": [
+      "atmospheric/membrane/multiple-containment storage",
+      "vacuum-loss initiation",
+      "reliquefier special failure modes",
+      "normal control vent demands",
+      "transfer/loading operational failures",
+      "cold-service sensor leaks"
+    ],
+    "applied_to_event_rows": false
+  },
+  "external_event_catalogue": {
+    "attached": true,
+    "provenance": "synthetic external bridge example; source digest pinned",
+    "event_count": 1,
+    "catalogue_digests": [
+      "6f03cc0406837a91b1463e78d0005bcd7ac59f25f05fb137a19980e0bd0e5fc9"
+    ],
+    "source_digests": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "exact_replay_checked": true,
+    "frequency_arithmetic_owner": "external_precomputed_event_generator"
+  },
+  "profile_provenance": [
+    {
+      "profile": "LH2_PIPE",
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "m^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 5,
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ]
+    },
+    {
+      "profile": "LH2_VALVE",
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 5,
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ]
+    },
+    {
+      "profile": "LH2_VESSEL",
+      "basis": "LH2_LITERATURE",
+      "statistic": "published_median",
+      "unit": "item^-1 year^-1",
+      "source": "Brooks, Ehrhart & LaFleur (2021), Table 2; DOI/report SAND2021-11595C; https://hysafe.info/uploads/papers/2021/44.pdf",
+      "source_sha256": "6e47e27acc3778d4ed229a9e589239657e24626ef96fff28b2fa258d7479738b",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 5,
+      "limitations": [
+        "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+        "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+        "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+        "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+        "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter."
+      ]
+    },
+    {
+      "profile": "TNO_HX_INSIDE_WEAK_SHELL",
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 3,
+      "limitations": [
+        "Shell design pressure below maximum hazardous-fluid pressure; nominal diameter is tube diameter.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ]
+    },
+    {
+      "profile": "TNO_HX_OUTSIDE_TUBES",
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.10/3.11, printed pp.3.9-3.10; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 3,
+      "limitations": [
+        "Dangerous fluid outside tubes; connecting pipeline outflow also requires modelling.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ]
+    },
+    {
+      "profile": "TNO_PUMP_STANDARD",
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.8/3.9, printed pp.3.8-3.9; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 2,
+      "limitations": [
+        "Reference diameter is the largest connecting pipeline, not the pump body.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ]
+    },
+    {
+      "profile": "TNO_RELIEF_DEVICE",
+      "basis": "TNO_PURPLE_LOC",
+      "statistic": "published_default",
+      "unit": "item^-1 year^-1",
+      "source": "Purple Book Chapter 3 Tables 3.12/3.13, printed pp.3.10-3.11; local original visually reviewed 2026-10-08",
+      "source_sha256": "d0456dea97ebc6a6f30843c5fbb152b63b65572e5da37e7c5d70b141c5d61796",
+      "source_file_hash_registered": true,
+      "event_count_in_catalogue": 1,
+      "limitations": [
+        "Maximum atmospheric discharge LOC; not failure-to-open probability or a normal operating vent frequency.",
+        "Shared initiating causes/normal vent/control demand must be de-duplicated before facility aggregation.",
+        "Generic industrial default, not an empirically validated LH2 failure rate.",
+        "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit."
+      ]
+    }
+  ],
+  "generated_events": [
+    {
+      "id": "external-demo/storage-tank-01/external-storage-hole",
+      "asset_id": "legacy:storage-tank-01",
+      "model_component_id": "storage-tank-01",
+      "port_ids": null,
+      "profile": "TNO_PRESSURE_VESSEL",
+      "loc": "1%",
+      "basis": "LH2_LITERATURE",
+      "base_rate": 0.00025,
+      "rate_unit": "item^-1 year^-1",
+      "exposure_multiplier": 1.0,
+      "location_weight": null,
+      "location_weight_provenance": null,
+      "annual_frequency_per_year": 0.00025,
+      "statistic": "published_default",
+      "marginal_p05_per_year": null,
+      "marginal_p95_per_year": null,
+      "frequency_distribution": "none",
+      "log_rate_mu": null,
+      "log_rate_sigma": null,
+      "source": "synthetic external bridge example",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "catalogue_digest": "6f03cc0406837a91b1463e78d0005bcd7ac59f25f05fb137a19980e0bd0e5fc9",
+      "release": {
+        "mode": "hole",
+        "hole_diameter_m": 0.01,
+        "area_fraction": null,
+        "ruptured_tubes": 1
+      },
+      "classification_basis": "legacy_tno:VESSEL:LH2",
+      "limitations": [
+        "frequency was generated by the external legacy TNO taxonomy; PRISM did not infer or update it",
+        "legacy count/secondary-breach arithmetic is already included; no additional exposure multiplier is applied",
+        "legacy scenario output is diagnostic until provider release, isolation and physical evidence are qualified",
+        "legacy release_path=DIRECT is preserved in the bridge audit sidecar",
+        "legacy physics_route=SLABX_LH2 and grade=UNSPECIFIED are preserved in the bridge audit sidecar",
+        "legacy vessel mapped to reviewed source-input vessel binding"
+      ],
+      "physical_validation_claim": false
+    }
+  ],
+  "policy": {
+    "literature_frequency_baseline": false,
+    "field_frequency_collection_used": false,
+    "sensor_frequency_learning_used": false,
+    "physical_validation_claim": false,
+    "external_frequency_override_used": true,
+    "frequency_is_separate_from_sensor_state": true
+  },
+  "checks": [
+    {
+      "id": "manifest_executable",
+      "passed": true,
+      "status": "EXECUTABLE",
+      "blocking_reasons": []
+    },
+    {
+      "id": "frequency_profiles_reviewed",
+      "passed": true,
+      "unknown_profiles": []
+    },
+    {
+      "id": "profile_source_hashes_registered",
+      "passed": true,
+      "profile_count": 7
+    },
+    {
+      "id": "generated_event_catalogue_digest",
+      "passed": true,
+      "catalogue_digest": "cbb331bd8b744591fdef2bde517f21bc7a67a203e7047e87061c6ace9dfcd74a",
+      "event_catalogue_digests": [
+        "6f03cc0406837a91b1463e78d0005bcd7ac59f25f05fb137a19980e0bd0e5fc9"
+      ],
+      "comparison_scope": "attached_external_event_catalogue",
+      "external_event_provenance": "synthetic external bridge example; source digest pinned"
+    },
+    {
+      "id": "plan_profiles_have_generated_events",
+      "passed": true,
+      "applicability": "external_precomputed_event_catalogue",
+      "profile_event_counts": {
+        "LH2_PIPE": 0,
+        "LH2_VALVE": 0,
+        "LH2_VESSEL": 0,
+        "TNO_HX_INSIDE_WEAK_SHELL": 0,
+        "TNO_HX_OUTSIDE_TUBES": 0,
+        "TNO_PUMP_STANDARD": 0,
+        "TNO_RELIEF_DEVICE": 0
+      },
+      "event_profile_ids": [
+        "TNO_PRESSURE_VESSEL"
+      ]
+    }
+  ],
+  "blocking_reasons": [],
+  "limitations": [
+    "Rates are a reviewed literature/catalogue baseline; they are not field-validated LH2 failure statistics.",
+    "Field accident-frequency collection is intentionally inactive because no confirmed exposure/event register was supplied.",
+    "Sensor alarms and process telemetry are not used to learn or multiply initiating-event frequency.",
+    "Published marginal p05/p95 bounds are not a facility-level credible interval when event correlation is unavailable.",
+    "atmospheric/membrane/multiple-containment storage",
+    "vacuum-loss initiation",
+    "reliquefier special failure modes",
+    "normal control vent demands",
+    "transfer/loading operational failures",
+    "cold-service sensor leaks",
+    "GH2/LNG-informed Bayesian LH2 estimates, not independently validated against LH2 field leak experience.",
+    "Discrete fractional flow-area bins; do not interpolate, smooth, or add Purple LOCs for the same physical scope.",
+    "Five published medians retained; distribution bounds use published ln-rate mu/sigma.",
+    "Pipe exposure is metre-years (HyRAM+ manual), not the number of arbitrary pipe objects.",
+    "Vessel bins need an explicitly reviewed reference flow diameter; do not use vessel diameter.",
+    "Shell design pressure below maximum hazardous-fluid pressure; nominal diameter is tube diameter.",
+    "Generic industrial default, not an empirically validated LH2 failure rate.",
+    "Equipment classification/applicability requires engineering review; no automatic cryogenic jacket credit.",
+    "Dangerous fluid outside tubes; connecting pipeline outflow also requires modelling.",
+    "Reference diameter is the largest connecting pipeline, not the pump body.",
+    "Maximum atmospheric discharge LOC; not failure-to-open probability or a normal operating vent frequency.",
+    "Shared initiating causes/normal vent/control demand must be de-duplicated before facility aggregation.",
+    "Attached precomputed event rows own their external rate arithmetic; the packaged catalogue digest is audited only for the plan asset scope.",
+    "The supplied manifest is synthetic; real asset classification, count, length and applicability review is required."
+  ]
+}

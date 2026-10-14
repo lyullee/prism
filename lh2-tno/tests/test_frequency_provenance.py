@@ -49,3 +49,51 @@ def test_report_fails_when_profile_source_hash_is_not_registered():
     report = build_frequency_provenance_report(manifest, plan, catalogue_data=tampered)
     assert report["status"] == "FAILED_PROVENANCE_INTEGRITY"
     assert any("source_sha256" in reason for reason in report["blocking_reasons"])
+
+
+def test_report_traces_attached_external_catalogue_without_packaged_digest_mismatch():
+    from lh2_tno.legacy_frequency_bridge import attach_precomputed_events, bridge_legacy_scenarios
+
+    root = Path(__file__).parents[1]
+    manifest = EquipmentManifest.from_json(root / "examples/generic_lh2_full_scope_manifest.json")
+    facility_plan = FrequencyPlan.model_validate_json(
+        (root / "examples/generic_lh2_full_scope_frequency_plan.json").read_text(encoding="utf-8")
+    )
+    source_sha = "a" * 64
+    events, _ = bridge_legacy_scenarios(
+        [{
+            "scenario_id": "external-storage-hole",
+            "tag": "storage-tank-01",
+            "primitive": "VESSEL",
+            "service": "LH2",
+            "bin_label": "1%",
+            "hole_diameter_m": 0.01,
+            "frequency_per_year": 2.5e-4,
+            "release_kind": "CONTINUOUS",
+            "release_path": "DIRECT",
+            "physics_route": "SLABX_LH2",
+        }],
+        {"external-storage-hole": "storage-tank-01"},
+        source_sha256=source_sha,
+    )
+    attached = attach_precomputed_events(
+        facility_plan,
+        events,
+        provenance="external legacy event catalogue; source digest pinned",
+    )
+
+    report = build_frequency_provenance_report(manifest, attached)
+
+    assert report["status"] == "PASS_WITH_SCOPE_LIMITATIONS"
+    assert report["frequency_plan"]["event_generation_mode"] == "external_precomputed"
+    assert report["catalogue"]["applied_to_event_rows"] is False
+    assert report["external_event_catalogue"]["exact_replay_checked"] is True
+    assert report["external_event_catalogue"]["frequency_arithmetic_owner"] == (
+        "external_precomputed_event_generator"
+    )
+    assert report["policy"]["external_frequency_override_used"] is True
+    assert report["policy"]["field_frequency_collection_used"] is False
+    generated_check = next(
+        check for check in report["checks"] if check["id"] == "generated_event_catalogue_digest"
+    )
+    assert generated_check["comparison_scope"] == "attached_external_event_catalogue"
