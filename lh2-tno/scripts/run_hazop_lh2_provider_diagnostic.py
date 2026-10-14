@@ -395,42 +395,67 @@ def run(args: argparse.Namespace) -> dict:
     # This changes no provider or consequence physics and does not create a
     # facility credible interval; it only closes the conditional known-atom
     # uncertainty record required by the completion audit.
-    campaign = result["facility_campaign"]["campaign"]
-    facility_ledger = result["facility_campaign"]["facility_ledger"]
-    uncertainty_input = copy.deepcopy(campaign)
-    uncertainty_input["known_contribution_annual_ir_low_high"] = copy.deepcopy(
-        facility_ledger.get("known_contribution_annual_ir_low_high")
+    facility_campaign_result = result.get("facility_campaign")
+    campaign = (
+        facility_campaign_result.get("campaign")
+        if isinstance(facility_campaign_result, dict)
+        else None
     )
-    uncertainty_input["known_contribution_expected_death_fn_low_high"] = copy.deepcopy(
-        facility_ledger.get("known_contribution_expected_death_fn_low_high")
+    facility_ledger = (
+        facility_campaign_result.get("facility_ledger")
+        if isinstance(facility_campaign_result, dict)
+        else None
     )
-    # The realtime campaign event is intentionally a compact provider-boundary
-    # record, whereas the uncertainty calculator validates the full catalogue
-    # FrequencyEvent contract.  Reattach the original generated event fields
-    # and retain the HAZOP annotations as accounting metadata.
-    uncertainty_event = event.model_dump(mode="json")
-    campaign_event = campaign["events"][0]
-    for key in ("scenario_families", "operating_mode", "hazop_scenario_id"):
-        if key in campaign_event:
-            uncertainty_event[key] = copy.deepcopy(campaign_event[key])
-    uncertainty_input["events"] = [uncertainty_event]
-    asset_id = str(event.asset_id)
-    uncertainty_scenarios = tuple(
-        LiteratureFrequencyScenario(
-            id=identifier,
-            asset_quantiles={asset_id: quantile},
-            provenance="published frequency bounds from the explicit catalogue event; conditional diagnostic only",
+    if isinstance(campaign, dict) and isinstance(facility_ledger, dict):
+        uncertainty_input = copy.deepcopy(campaign)
+        uncertainty_input["known_contribution_annual_ir_low_high"] = copy.deepcopy(
+            facility_ledger.get("known_contribution_annual_ir_low_high")
         )
-        for identifier, quantile in (
-            ("hazop-provider-frequency-p05", "p05"),
-            ("hazop-provider-frequency-published", "published"),
-            ("hazop-provider-frequency-p95", "p95"),
+        uncertainty_input["known_contribution_expected_death_fn_low_high"] = copy.deepcopy(
+            facility_ledger.get("known_contribution_expected_death_fn_low_high")
         )
-    )
-    result["frequency_uncertainty"] = literature_frequency_uncertainty(
-        uncertainty_input,
-        uncertainty_scenarios,
-    )
+        # The realtime campaign event is intentionally a compact
+        # provider-boundary record, whereas the uncertainty calculator
+        # validates the full catalogue FrequencyEvent contract. Reattach the
+        # original generated event fields and retain the HAZOP annotations.
+        uncertainty_event = event.model_dump(mode="json")
+        campaign_event = campaign["events"][0]
+        for key in ("scenario_families", "operating_mode", "hazop_scenario_id"):
+            if key in campaign_event:
+                uncertainty_event[key] = copy.deepcopy(campaign_event[key])
+        uncertainty_input["events"] = [uncertainty_event]
+        asset_id = str(event.asset_id)
+        uncertainty_scenarios = tuple(
+            LiteratureFrequencyScenario(
+                id=identifier,
+                asset_quantiles={asset_id: quantile},
+                provenance="published frequency bounds from the explicit catalogue event; conditional diagnostic only",
+            )
+            for identifier, quantile in (
+                ("hazop-provider-frequency-p05", "p05"),
+                ("hazop-provider-frequency-published", "published"),
+                ("hazop-provider-frequency-p95", "p95"),
+            )
+        )
+        result["frequency_uncertainty"] = literature_frequency_uncertainty(
+            uncertainty_input,
+            uncertainty_scenarios,
+        )
+    else:
+        # A partial current runtime must remain a valid diagnostic output. Do
+        # not fabricate a campaign or reweight a missing risk atom; preserve a
+        # machine-readable withheld state instead of raising KeyError.
+        result["frequency_uncertainty"] = {
+            "status": "WITHHELD_NO_CURRENT_FACILITY_CAMPAIGN",
+            "scenarios": [],
+            "fresh_physics_executed": False,
+            "facility_credible_interval": False,
+            "frequency_inference_performed": False,
+            "blocking_reasons": [
+                "current HAZOP runtime did not produce a facility campaign",
+                "no current campaign risk atoms were available for literature reweighting",
+            ],
+        }
     result["diagnostic_context"] = {
         "scope": "synthetic_provider_bound_hazop_lh2_diagnostic",
         "pool_boundary": {
@@ -443,9 +468,12 @@ def run(args: argparse.Namespace) -> dict:
         "facility_qra_claim": False,
         "frequency_uncertainty": {
             "scenario_count": len(result["frequency_uncertainty"]["scenarios"]),
-            "conditional_diagnostic_facility_risk": True,
+            "conditional_diagnostic_facility_risk": bool(
+                result["frequency_uncertainty"]["scenarios"]
+            ),
             "facility_credible_interval": False,
             "fresh_physics_executed": False,
+            "status": result["frequency_uncertainty"].get("status"),
         },
         "facility_campaign": {
             "status": result["facility_campaign"].get("status"),

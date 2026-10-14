@@ -1,0 +1,39 @@
+{
+  "schema_version": "prism.hazop_provider_diagnostic_execution.v1",
+  "snapshot_date": "2026-10-14",
+  "complete_run": {
+    "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
+    "current_status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+    "current_risk_atom_count": 1,
+    "forecast_status": "FORECAST_RISK_SCAN_COMPLETE",
+    "forecast_trigger_count": 1,
+    "forecast_evaluated_count": 1,
+    "forecast_withheld_count": 0,
+    "frequency_scenario_count": 3,
+    "facility_campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+    "facility_total_risk_available": false,
+    "facility_qra_promotion": false,
+    "frequency_inference_performed": false,
+    "output_sha256": "9bcc6808c8af4f427744a196649c827cf510cd0a50faeb867148c6727719563c"
+  },
+  "partial_packet_run": {
+    "status": "INTEGRATED_DIAGNOSTIC_PARTIAL",
+    "current_status": "FACILITY_HAZOP_RUNTIME_PARTIAL",
+    "facility_campaign_status": "WITHHELD_FACILITY_CAMPAIGN_CURRENT_RUNTIME_PARTIAL",
+    "frequency_uncertainty_status": "WITHHELD_NO_CURRENT_FACILITY_CAMPAIGN",
+    "withheld_reasons": [
+      "current HAZOP runtime did not produce a facility campaign",
+      "no current campaign risk atoms were available for literature reweighting"
+    ],
+    "output_sha256": "b4d87019aa18262f6ce4235da91081565c0ee782259e4d6dca69b0ee857b88c3"
+  },
+  "policy": {
+    "operating_mode_passed_with_telemetry": true,
+    "forecast_origin_required": "model_prediction",
+    "frequency_inference_performed": false,
+    "physical_validation_claim": false,
+    "facility_qra_promotion": false,
+    "unsupported_partial_runtime_is_withheld": true
+  },
+  "interpretation": "The complete provider-bound diagnostic preserves receiving mode, executes one current and one forecast quantitative evaluation, and reweights three explicit literature scenarios. A packet that cannot produce a current facility campaign is retained as INTEGRATED_DIAGNOSTIC_PARTIAL with frequency uncertainty withheld rather than raising or fabricating a campaign."
+}
