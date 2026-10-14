@@ -106,6 +106,7 @@ def build_ijhe_completion_audit(
     observed_hazop_runtime_audit: Mapping[str, Any] | None = None,
     observed_hazop_provider_binding: Mapping[str, Any] | None = None,
     observed_hazop_provider_consequence_chain: Mapping[str, Any] | None = None,
+    observed_hazop_storage_isolation_branch_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -4045,6 +4046,65 @@ def build_ijhe_completion_audit(
             "a synthetic termination horizon, or a partial scenario set into facility IR/F-N."
         )
         checks.append(chain_check)
+    if observed_hazop_storage_isolation_branch_evidence is not None:
+        isolation = observed_hazop_storage_isolation_branch_evidence
+        success = isolation.get("success_branch")
+        success = success if isinstance(success, Mapping) else {}
+        failure = isolation.get("failure_branch")
+        failure = failure if isinstance(failure, Mapping) else {}
+        policy = isolation.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        isolation_valid = (
+            isolation.get("schema_version")
+            == "prism.observed_hazop_storage_isolation_branch_evidence.v1"
+            and isolation.get("status") == "SYNTHETIC_ISOLATION_BRANCH_PACKET_READY_FOR_DIAGNOSTIC_CHAIN"
+            and isinstance(isolation.get("event_id"), str)
+            and isinstance(isolation.get("component_id"), str)
+            and isinstance(isolation.get("port_id"), str)
+            and success.get("termination_basis") == "reviewed_isolation_success"
+            and isinstance(success.get("probability_given_event"), (int, float))
+            and 0.0 <= float(success.get("probability_given_event")) <= 1.0
+            and _finite(success.get("duration_s"))
+            and success.get("duration_s") > 0.0
+            and _finite(success.get("max_post_close_flow_kg_s"))
+            and success.get("max_post_close_flow_kg_s") == 0.0
+            and failure.get("termination_basis") == "synthetic_diagnostic_horizon"
+            and failure.get("status") == "WITHHELD_FROM_HOLE_CONSEQUENCE_CHAIN"
+            and isinstance(failure.get("probability_given_event"), (int, float))
+            and 0.0 <= float(failure.get("probability_given_event")) <= 1.0
+            and _finite(isolation.get("branch_probability_sum"))
+            and abs(float(isolation.get("branch_probability_sum")) - 1.0) <= 1.0e-12
+            and policy.get("branch_probabilities_explicit") is True
+            and policy.get("failure_branch_withheld") is True
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("provider_packet_promoted") is False
+            and policy.get("physical_validation_claim") is False
+            and policy.get("facility_qra_claim") is False
+            and policy.get("diagnostic_only") is True
+        )
+        isolation_check = _check(
+            "diagnostic_observed_hazop_storage_isolation_branch_evidence",
+            isolation_valid,
+            {
+                "record": isolation.get("_record_path"),
+                "schema_version": isolation.get("schema_version"),
+                "status": isolation.get("status"),
+                "event_id": isolation.get("event_id"),
+                "success_branch": dict(success),
+                "failure_branch": dict(failure),
+                "branch_probability_sum": isolation.get("branch_probability_sum"),
+                "policy": dict(policy),
+            },
+            "storage isolation branch evidence lacks an explicit probability, zero-flow closure, or withheld failure branch",
+        )
+        isolation_check["diagnostic_only"] = True
+        isolation_check["interpretation"] = (
+            "The external tank model's success/failure isolation branches are kept as "
+            "separate conditional routes. A zero-flow success branch may enter the "
+            "diagnostic consequence chain, while the synthetic-horizon failure branch "
+            "remains withheld from the vessel-hole calculation."
+        )
+        checks.append(isolation_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

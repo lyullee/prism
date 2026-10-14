@@ -3383,3 +3383,67 @@ def test_completion_audit_blocks_observed_hazop_chain_facility_claim():
         if item["name"] == "diagnostic_observed_hazop_provider_consequence_chain"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _observed_hazop_storage_isolation_branch_evidence(**overrides):
+    record = {
+        "schema_version": "prism.observed_hazop_storage_isolation_branch_evidence.v1",
+        "status": "SYNTHETIC_ISOLATION_BRANCH_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
+        "event_id": "event-1",
+        "component_id": "storage-tank-01",
+        "port_id": "tank-accident-out",
+        "success_branch": {
+            "termination_basis": "reviewed_isolation_success",
+            "probability_given_event": 0.99,
+            "duration_s": 0.15,
+            "max_post_close_flow_kg_s": 0.0,
+        },
+        "failure_branch": {
+            "termination_basis": "synthetic_diagnostic_horizon",
+            "status": "WITHHELD_FROM_HOLE_CONSEQUENCE_CHAIN",
+            "probability_given_event": 0.01,
+        },
+        "branch_probability_sum": 1.0,
+        "policy": {
+            "branch_probabilities_explicit": True,
+            "failure_branch_withheld": True,
+            "frequency_inference_performed": False,
+            "provider_packet_promoted": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "diagnostic_only": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_storage_isolation_branch_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_storage_isolation_branch_evidence=_observed_hazop_storage_isolation_branch_evidence(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_storage_isolation_branch_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_storage_isolation_without_zero_flow():
+    unsafe = _observed_hazop_storage_isolation_branch_evidence()
+    unsafe["success_branch"]["max_post_close_flow_kg_s"] = 0.01
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        observed_hazop_storage_isolation_branch_evidence=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_observed_hazop_storage_isolation_branch_evidence"
+    )
+    assert check["status"] == "BLOCKED"

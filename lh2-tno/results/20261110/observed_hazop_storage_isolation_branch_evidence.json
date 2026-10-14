@@ -1,0 +1,37 @@
+{
+  "schema_version": "prism.observed_hazop_storage_isolation_branch_evidence.v1",
+  "status": "SYNTHETIC_ISOLATION_BRANCH_PACKET_READY_FOR_DIAGNOSTIC_CHAIN",
+  "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+  "component_id": "storage-tank-01",
+  "port_id": "tank-accident-out",
+  "success_branch": {
+    "branch_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%::success",
+    "probability_given_event": 0.99,
+    "termination_basis": "reviewed_isolation_success",
+    "duration_s": 0.15000000000000002,
+    "available_mass_kg": 0.01677670997923311,
+    "cumulative_mass_out_kg": 0.01677670997923311,
+    "max_post_close_flow_kg_s": 0.0,
+    "provider_result_digest": "8de51f3aa9d19db50c6a2110d85005733bfb1c50a560947620256000df89bd5c",
+    "packet_path": "results\\20261110\\observed_hazop_isolation_success_overlay\\resolved_release.json"
+  },
+  "failure_branch": {
+    "branch_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%::failure",
+    "probability_given_event": 0.01,
+    "termination_basis": "synthetic_diagnostic_horizon",
+    "status": "WITHHELD_FROM_HOLE_CONSEQUENCE_CHAIN",
+    "reason": "diagnostic horizon is not a supported vessel_hole termination basis"
+  },
+  "branch_probability_sum": 1.0,
+  "policy": {
+    "branch_probabilities_explicit": true,
+    "failure_branch_withheld": true,
+    "frequency_inference_performed": false,
+    "provider_packet_promoted": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "source_generator": "scripts/build_layered_tank_isolation_branches.py",
+  "source_campaign_verification": ".tmp_observed_storage_isolation_20261110_v2/campaign_verification.json"
+}

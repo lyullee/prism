@@ -126,6 +126,8 @@ python scripts/run_observed_hazop_provider_consequence_chain.py `
 
 완료 감사에는 `--observed-hazop-provider-consequence-chain`을 추가한다. 이 검사는 부분 실행과 보류 사유가 보존되었는지만 확인하며, 부분 실행을 시설 위험평가 완료로 해석하지 않는다.
 
+저장탱크에 대해서는 외부 `LayeredTankNetworkSimulator`가 명령 밸브를 닫고 zero-flow를 확인한 성공 branch도 별도로 연결했다. 성공 branch는 `reviewed_isolation_success`, 0.15 s, branch probability 0.99로 기록되고 저장탱크 HAZOP→provider→SLABx-LH2가 실행된다. 실패 branch는 0.01의 명시적 probability와 `synthetic_diagnostic_horizon`을 보존하지만 vessel-hole chain에는 포함하지 않는다. 성공 branch와 저장 벤트를 함께 실행한 결과는 `results/20261110/inspection_center_observed_hazop_provider_consequence_chain_with_storage_isolation_success.json`이며, 3개 시나리오 중 2개 실행·1개 보류 상태이다. branch 근거와 질량·차단 요약은 `results/20261110/observed_hazop_storage_isolation_branch_evidence.json`에서 확인한다. 이는 isolation 계약을 실행 가능한 진단 경로로 만든 것이며 현장 차단 신뢰도나 시설 전체 QRA를 의미하지 않는다.
+
 ## 다음 승격 조건
 
 이 진단 결과를 실제 시설 위험평가 입력으로 승격하려면 설비별 검토된 P&ID/HAZOP asset identity, 단위·교정 확인, provider가 계산한 사고 방출 이력과 종료·차단·재고 폐합, 해당 사고의 문헌 빈도, SLABx-LH2 독립 검증이 필요하다. 하나라도 없으면 해당 사고는 조건부 결과로만 남기고 시설 전체 IR/F-N에 포함하지 않는다.

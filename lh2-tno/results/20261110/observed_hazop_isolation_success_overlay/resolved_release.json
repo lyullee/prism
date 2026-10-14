@@ -1,0 +1,114 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "storage-tank-01",
+  "port_id": "tank-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "LayeredTank provider state plus SLABx-LH2 partition",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_liquid_exit",
+  "phase_basis": "two_phase",
+  "enthalpy_convention": "provider_total_outlet_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "741284039f67cccd41d2964ff002a05b624b1e2ccc4591799ee65e42b42402ca",
+  "provider_result_digest": "8de51f3aa9d19db50c6a2110d85005733bfb1c50a560947620256000df89bd5c",
+  "provider_boundary_reference": "LayeredTank liquid endpoint with explicit end-state interval semantics",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.15000000000000002,
+  "available_mass_kg": 0.01677670997923311,
+  "cumulative_mass_out_kg": 0.01677670997923311,
+  "cumulative_specific_enthalpy_out_j": 475.9882224825109,
+  "reference_area_m2": 0.000213392558851689,
+  "reference_area_provenance": "SLABx-LH2 scaled atmospheric gas area",
+  "steps": [
+    {
+      "time_s": 0.0,
+      "total_mass_flow_kg_s": 0.1677701417003473,
+      "gas_mass_flow_kg_s": 0.1677701417003473,
+      "ground_liquid_mass_flow_kg_s": 0.0,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 28372.00999035376,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 16.47826913082544,
+      "gas_effective_area_m2": 0.000213392558851689,
+      "gas_velocity_m_s": 47.71158106770616,
+      "gas_velocity_origin": "provider_resolved",
+      "provider_port_state": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": null,
+          "impact_position_m": null,
+          "droplet_diameter_m": 3.415846512410462e-06
+        }
+      ]
+    },
+    {
+      "time_s": 0.05,
+      "total_mass_flow_kg_s": 0.16776405788431484,
+      "gas_mass_flow_kg_s": 0.16776405788431484,
+      "ground_liquid_mass_flow_kg_s": 0.0,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 28371.919309004235,
+      "gas_pressure_pa_abs": 101325.0,
+      "gas_temperature_k": 20.36890353912107,
+      "gas_density_kg_m3": 16.47830617001222,
+      "gas_effective_area_m2": 0.00021337839397223408,
+      "gas_velocity_m_s": 47.712910828387955,
+      "gas_velocity_origin": "provider_resolved",
+      "provider_port_state": null,
+      "droplet_class_outcomes": [
+        {
+          "ground_liquid_mass_flow_kg_s": 0.0,
+          "airborne_liquid_mass_flow_kg_s": 0.0,
+          "flight_time_s": null,
+          "impact_position_m": null,
+          "droplet_diameter_m": 3.4159358858215913e-06
+        }
+      ]
+    },
+    {
+      "time_s": 0.10000000000000002,
+      "total_mass_flow_kg_s": 0.0,
+      "gas_mass_flow_kg_s": 0.0,
+      "ground_liquid_mass_flow_kg_s": 0.0,
+      "airborne_liquid_mass_flow_kg_s": 0.0,
+      "specific_enthalpy_j_kg": 28371.879630986317,
+      "gas_pressure_pa_abs": null,
+      "gas_temperature_k": null,
+      "gas_density_kg_m3": null,
+      "gas_effective_area_m2": null,
+      "gas_velocity_m_s": null,
+      "gas_velocity_origin": null,
+      "provider_port_state": null,
+      "droplet_class_outcomes": []
+    }
+  ],
+  "termination_provenance": "external commanded valve reached zero flow after the declared close command",
+  "droplet_partition_provenance": "SLABx-LH2 integrated flash/droplet partition",
+  "pool_footprint": null,
+  "no_rainout_evidence": null,
+  "termination_basis": "reviewed_isolation_success",
+  "provider_mass_balance": null,
+  "failure_opening_diameter_m": 0.012700000000000001
+}
