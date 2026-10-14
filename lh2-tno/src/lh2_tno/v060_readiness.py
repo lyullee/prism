@@ -1335,6 +1335,9 @@ def build_v060_readiness_report(
                     "closure_ready_provider_packet_count": generic_provider_closure.get(
                         "closure_ready_provider_packet_count"
                     ),
+                    "event_closure_status_counts": generic_provider_closure.get(
+                        "event_closure_status_counts"
+                    ),
                     "closure_gap_counts": generic_provider_closure.get(
                         "closure_gap_counts", {}
                     ),
@@ -1349,6 +1352,9 @@ def build_v060_readiness_report(
                     ),
                     "facility_qra_claim": generic_provider_closure.get(
                         "facility_qra_claim"
+                    ),
+                    "promotion_gates": generic_provider_closure.get(
+                        "promotion_gates"
                     ),
                     "diagnostic_only": True,
                 }
@@ -2459,6 +2465,60 @@ def validate_v060_readiness_report(
                 errors.append(
                     "generic provider release closure event counts must close over event_count"
                 )
+            event_status_counts = generic_provider_closure.get(
+                "event_closure_status_counts"
+            )
+            if event_status_counts is not None:
+                if not isinstance(event_status_counts, Mapping):
+                    errors.append(
+                        "generic provider release closure event status counts must be an object"
+                    )
+                else:
+                    status_values = list(event_status_counts.values())
+                    if not all(
+                        isinstance(value, int) and not isinstance(value, bool) and value >= 0
+                        for value in status_values
+                    ):
+                        errors.append(
+                            "generic provider release closure event status counts must be nonnegative integers"
+                        )
+                    elif all(
+                        isinstance(value, int) and not isinstance(value, bool)
+                        for value in (ready, opened, total)
+                    ):
+                        if (
+                            event_status_counts.get(
+                                "CLOSURE_READY_FOR_QUALIFICATION", 0
+                            )
+                            != ready
+                            or event_status_counts.get("CLOSURE_EVIDENCE_OPEN", 0)
+                            != opened
+                            or sum(status_values) != total
+                        ):
+                            errors.append(
+                                "generic provider release closure event status counts disagree with event counts"
+                            )
+            promotion_gates = generic_provider_closure.get("promotion_gates")
+            if promotion_gates is not None:
+                if not isinstance(promotion_gates, Mapping):
+                    errors.append(
+                        "generic provider release closure promotion gates must be an object"
+                    )
+                else:
+                    for field in (
+                        "closure_ready",
+                        "qualified_provider_packet_allowed",
+                        "frequency_inference_allowed",
+                        "facility_qra_allowed",
+                    ):
+                        if promotion_gates.get(field) is True:
+                            errors.append(
+                                f"chain.generic_provider_release_closure.promotion_gates.{field} cannot be true"
+                            )
+                    if promotion_gates.get("diagnostic_only") is not True:
+                        errors.append(
+                            "generic provider release closure promotion gates must remain diagnostic_only"
+                        )
 
     generic_provider_evidence = chain.get("generic_provider_evidence_requests")
     if generic_provider_evidence is not None:

@@ -866,6 +866,80 @@ def test_report_records_generic_provider_release_closure_without_promotion():
     assert validate_v060_readiness_report(report)["status"] == "VALID"
 
 
+def test_readiness_validates_provider_release_closure_status_counts_and_promotion_gates():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_provider_closure_audit={
+            "schema_version": "prism.generic_provider_release_closure_audit.v1",
+            "status": "CLOSURE_EVIDENCE_OPEN",
+            "event_count": 2,
+            "closure_ready_event_count": 1,
+            "closure_open_event_count": 1,
+            "event_closure_status_counts": {
+                "CLOSURE_READY_FOR_QUALIFICATION": 1,
+                "CLOSURE_EVIDENCE_OPEN": 1,
+            },
+            "packet_path_count": 2,
+            "provider_packet_count": 2,
+            "closure_ready_packet_path_count": 1,
+            "closure_ready_provider_packet_count": 1,
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "promotion_gates": {
+                "closure_ready": False,
+                "qualified_provider_packet_allowed": False,
+                "frequency_inference_allowed": False,
+                "facility_qra_allowed": False,
+                "diagnostic_only": True,
+            },
+            "diagnostic_only": True,
+        },
+    )
+    closure = report["chain"]["generic_provider_release_closure"]
+    assert closure["event_closure_status_counts"]["CLOSURE_EVIDENCE_OPEN"] == 1
+    assert closure["promotion_gates"]["facility_qra_allowed"] is False
+    assert validate_v060_readiness_report(report)["status"] == "VALID"
+
+
+def test_readiness_rejects_provider_release_closure_status_count_drift():
+    report = build_v060_readiness_report(
+        **_inputs(),
+        generic_provider_closure_audit={
+            "schema_version": "prism.generic_provider_release_closure_audit.v1",
+            "status": "CLOSURE_EVIDENCE_OPEN",
+            "event_count": 2,
+            "closure_ready_event_count": 1,
+            "closure_open_event_count": 1,
+            "event_closure_status_counts": {
+                "CLOSURE_READY_FOR_QUALIFICATION": 2,
+                "CLOSURE_EVIDENCE_OPEN": 0,
+            },
+            "packet_path_count": 2,
+            "provider_packet_count": 2,
+            "closure_ready_packet_path_count": 1,
+            "closure_ready_provider_packet_count": 1,
+            "qualified_provider_packet_count": 0,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+            "promotion_gates": {
+                "closure_ready": False,
+                "qualified_provider_packet_allowed": False,
+                "frequency_inference_allowed": False,
+                "facility_qra_allowed": False,
+                "diagnostic_only": True,
+            },
+            "diagnostic_only": True,
+        },
+    )
+    with pytest.raises(
+        V060ReadinessError, match="event status counts disagree"
+    ):
+        validate_v060_readiness_report(report)
+
+
 def test_report_binds_every_provider_packet_to_evidence_request_catalog():
     report = build_v060_readiness_report(
         **_inputs(),

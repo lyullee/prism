@@ -418,6 +418,10 @@
       "provider_packet_count": 26,
       "closure_ready_packet_path_count": 9,
       "closure_ready_provider_packet_count": 11,
+      "event_closure_status_counts": {
+        "CLOSURE_EVIDENCE_OPEN": 15,
+        "CLOSURE_READY_FOR_QUALIFICATION": 9
+      },
       "closure_gap_counts": {
         "termination basis is absent, synthetic, pressure-equalization, or fixed horizon": 15
       },
@@ -425,6 +429,13 @@
       "frequency_from_provider_packet": false,
       "physical_validation_claim": false,
       "facility_qra_claim": false,
+      "promotion_gates": {
+        "closure_ready": false,
+        "qualified_provider_packet_allowed": false,
+        "frequency_inference_allowed": false,
+        "facility_qra_allowed": false,
+        "diagnostic_only": true
+      },
       "diagnostic_only": true
     },
     "generic_provider_evidence_requests": {
@@ -1320,7 +1331,7 @@
   "source_artifacts": {
     "objective_audit": {
       "path": "results/20261106/ijhe_objective_coverage_audit_with_provider_evidence_requests.json",
-      "sha256": "2f6020a0cbdbe74e008c111719c7d5c5a0a45e73ede3ae07f49b01ef090cd07f"
+      "sha256": "03fdcc40ce29ad3daddbd1b6da2d608ddba9c0556f21e128a01e8e41ad092e57"
     },
     "union_verification": {
       "path": "results/20261031/native_full_scope_union_pipefix_state_bound/verification.json",
