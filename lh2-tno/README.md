@@ -10,7 +10,7 @@
 
 현장 상태값과 `operating_mode`는 HAZOP 표에서 함께 비교한다. 최신 HAZOP selection audit는 **34/34 event bound, 0 unbound**이며 운전 모드나 사고 family를 센서값·설비 이름·누출면적으로 추정하지 않는다. 문헌 빈도는 별도 frequency plan에서만 들어오고, 센서 기반 빈도 학습과 빈도 재분배는 금지되어 있다.
 
-완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **31개 검사 중 27개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, case별 방출 경계 표, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 조건부 수치 결과는 저장하지만 qualified facility IR/F-N으로 승격하지 않는다.
+완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **32개 검사 중 28개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, provider-bound current/forecast HAZOP 통합 경로, case별 방출 경계 표, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 통합 경로는 현재 1건과 예측 1건의 정량평가·시설 handoff를 실행하지만 synthetic/provider-bound와 declared-sensitivity 조건이며, qualified facility IR/F-N으로 승격하지 않는다.
 
 남은 strict gate는 다음 네 가지다.
 

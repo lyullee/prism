@@ -3861,6 +3861,7 @@
     "diagnostic_worklist_evidence": "results/20261024/native_generic_scope_packet_evidence_qualification_readiness_v14.json",
     "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
     "release_boundary_case_audit": "results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
+    "hazop_integrated_risk": "results/20261014/hazop_provider_bound_integrated_risk.json",
     "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,
     "merged_case_count": 44,
@@ -3883,8 +3884,8 @@
     "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 4,
-    "completion_audit_check_count": 31,
-    "completion_audit_pass_count": 27,
+    "completion_audit_check_count": 32,
+    "completion_audit_pass_count": 28,
     "completion_audit_blocked_count": 4,
     "release_boundary_case_count": 44,
     "release_boundary_case_source_alignment": "ALIGNED",
@@ -3892,6 +3893,7 @@
     "strict_release_boundary_blocked_case_count": 41,
     "release_boundary_evidence_request_open_count": 44,
     "release_boundary_evidence_request_alignment": "ALIGNED",
-    "facility_qra_promotion": false
+    "facility_qra_promotion": false,
+    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. HAZOP event binding is complete for 34/34 events, and the provider-bound current/forecast HAZOP integrated-risk diagnostic is connected to the completion audit with one current and one forecast consequence evaluation. The diagnostic retains synthetic-provider, declared-sensitivity, explicit timing and fail-closed promotion limits. Native packet, state snapshot, SLABx-LH2, provider-intake, 44-case release-boundary and evidence-request records remain linked. The latest IJHE audit has 32 checks (28 PASS, 4 BLOCKED); qualified provider promotion, independent physical validation and facility IR/F-N remain withheld."
   }
 }

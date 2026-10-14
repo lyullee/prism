@@ -5036,6 +5036,42 @@
       "interpretation": "The matrix keeps component, observation, interface and conditional evidence separate; it documents the facility-QRA gate and does not open it."
     },
     {
+      "name": "diagnostic_hazop_integrated_risk",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261014\\hazop_provider_bound_integrated_risk.json",
+        "schema_version": "prism.hazop_integrated_risk.v1",
+        "status": "INTEGRATED_DIAGNOSTIC_COMPLETE",
+        "current_status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+        "forecast_status": "FORECAST_RISK_SCAN_COMPLETE",
+        "facility_campaign_status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+        "forecast_facility_campaign_status": "FORECAST_FACILITY_CAMPAIGN_EVALUATED_OPERATOR_LIMITED",
+        "forecast_facility_campaign_count": 1,
+        "forecast_facility_campaign_row_count": 1,
+        "forecast_facility_campaign_evaluated_count": 1,
+        "forecast_facility_campaign_structure_valid": true,
+        "timing": {
+          "wall_elapsed_ms": 28174.45129999396,
+          "interpretation": "Measured for this invocation; not an operating 1 Hz guarantee."
+        },
+        "integrated_timing_valid": true,
+        "current_component_count": 1,
+        "forecast_component_count": 1,
+        "shared_component_scenario_key_count": 1,
+        "policy": {
+          "operating_mode_taken_from_input": true,
+          "frequency_inference_performed": false,
+          "sensor_frequency_learning_used": false,
+          "provider_release_created_by_integration": false,
+          "facility_qra_promotion": false,
+          "diagnostic_only": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The integrated ledger proves that measured and predicted HAZOP paths can be joined by equipment-scoped identity. It does not qualify provider releases, infer frequency, validate physics, or promote facility IR/F-N."
+    },
+    {
       "name": "diagnostic_hazop_selection_event_binding",
       "status": "PASS",
       "evidence": {
