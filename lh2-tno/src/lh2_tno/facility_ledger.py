@@ -466,6 +466,7 @@ def _scenario_branch_accounting(
                 "release_branch_ids": set(),
                 "ignition_branches": set(),
                 "scenario_families": set(),
+                "hazop_scenario_ids": set(),
             },
         )
 
@@ -479,6 +480,10 @@ def _scenario_branch_accounting(
         value = atom.get("operating_mode")
         return {value.strip()} if isinstance(value, str) and value.strip() else set()
 
+    def _hazop_scenario_ids(atom: Mapping[str, Any]) -> set[str]:
+        value = atom.get("hazop_scenario_id")
+        return {value.strip()} if isinstance(value, str) and value.strip() else set()
+
     for atom in atoms:
         event_id = str(atom.get("event_id", ""))
         condition_id = str(atom.get("annual_condition_id", ""))
@@ -487,6 +492,7 @@ def _scenario_branch_accounting(
         if not condition_id or not release_id or not ignition_id:
             missing_dimension_atom_count += 1
         families = _families(atom)
+        hazop_scenario_ids = _hazop_scenario_ids(atom)
         cross_product.add((condition_id, release_id, ignition_id))
         conditional_weight = float(atom.get("conditional_weight", 0.0))
         initiating_frequency = (
@@ -505,6 +511,7 @@ def _scenario_branch_accounting(
         condition_row["release_branch_ids"].add(release_id)
         condition_row["ignition_branches"].add(ignition_id)
         condition_row["scenario_families"].update(families)
+        condition_row["hazop_scenario_ids"].update(hazop_scenario_ids)
 
         release_row = _group(release_groups, release_id)
         release_row["event_ids"].add(event_id)
@@ -515,6 +522,7 @@ def _scenario_branch_accounting(
         release_row["annual_condition_ids"].add(condition_id)
         release_row["ignition_branches"].add(ignition_id)
         release_row["scenario_families"].update(families)
+        release_row["hazop_scenario_ids"].update(hazop_scenario_ids)
         identity = atom.get("provider_packet_identity")
         termination_bases = identity.get("termination_bases", ()) if isinstance(identity, Mapping) else ()
         if isinstance(termination_bases, Sequence) and not isinstance(termination_bases, (str, bytes)):
@@ -532,6 +540,7 @@ def _scenario_branch_accounting(
         ignition_row["annual_condition_ids"].add(condition_id)
         ignition_row["release_branch_ids"].add(release_id)
         ignition_row["scenario_families"].update(families)
+        ignition_row["hazop_scenario_ids"].update(hazop_scenario_ids)
         deaths = atom.get("expected_deaths_low_high", ())
         if isinstance(deaths, Sequence) and not isinstance(deaths, (str, bytes)) and any(
             isinstance(value, (int, float)) and not isinstance(value, bool) and float(value) > 0.0
@@ -553,6 +562,7 @@ def _scenario_branch_accounting(
                 "release_branch_ids": sorted(row.get("release_branch_ids", ())),
                 "ignition_branches": sorted(row.get("ignition_branches", ())),
                 "scenario_families": sorted(row.get("scenario_families", ())),
+                "hazop_scenario_ids": sorted(row.get("hazop_scenario_ids", ())),
             }
             if "termination_basis_counts" in row:
                 value["termination_basis_counts"] = dict(sorted(row["termination_basis_counts"].items()))
@@ -1277,10 +1287,19 @@ def merge_facility_campaign_results(
                 and atom["operating_mode"].strip()
             }
         )
+        component_hazop_scenario_ids = sorted(
+            {
+                atom["hazop_scenario_id"].strip()
+                for atom in component_atoms.get(component_id, [])
+                if isinstance(atom.get("hazop_scenario_id"), str)
+                and atom["hazop_scenario_id"].strip()
+            }
+        )
         component_coverage[component_id] = {
             "component_id": component_id,
             "status": component_status,
             "operating_modes": component_operating_modes,
+            "hazop_scenario_ids": component_hazop_scenario_ids,
             "event_count": len(component_event_ids.get(component_id, set())),
             "event_ids": sorted(component_event_ids.get(component_id, set())),
             "conditional_case_count": component_conditional_case_count,
@@ -1331,6 +1350,14 @@ def merge_facility_campaign_results(
                     and atom["operating_mode"].strip()
                 }
             ),
+            "hazop_scenario_ids": sorted(
+                {
+                    atom["hazop_scenario_id"].strip()
+                    for atom in atoms
+                    if isinstance(atom.get("hazop_scenario_id"), str)
+                    and atom["hazop_scenario_id"].strip()
+                }
+            ),
             "annual_ir_low_high": component_ir,
             "expected_death_fn_low_high": [
                 _fn_curve(atoms, endpoint) for endpoint in range(2)
@@ -1361,6 +1388,14 @@ def merge_facility_campaign_results(
                     for atom in atoms
                     if isinstance(atom.get("operating_mode"), str)
                     and atom["operating_mode"].strip()
+                }
+            ),
+            "hazop_scenario_ids": sorted(
+                {
+                    atom["hazop_scenario_id"].strip()
+                    for atom in atoms
+                    if isinstance(atom.get("hazop_scenario_id"), str)
+                    and atom["hazop_scenario_id"].strip()
                 }
             ),
             "annual_ir_low_high": family_ir,

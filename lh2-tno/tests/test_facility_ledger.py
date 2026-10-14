@@ -18,6 +18,7 @@ def _result(
     incomplete: bool = False,
     port_ids=None,
     operating_mode: str | None = None,
+    hazop_scenario_id: str | None = None,
 ):
     atom = {
         "event_id": event_id,
@@ -36,6 +37,8 @@ def _result(
     }
     if operating_mode is not None:
         atom["operating_mode"] = operating_mode
+    if hazop_scenario_id is not None:
+        atom["hazop_scenario_id"] = hazop_scenario_id
     return {
         "facility_id": "facility-1",
         "campaign_digest": f"digest-{event_id}",
@@ -525,6 +528,7 @@ def test_facility_ledger_preserves_operating_modes_in_each_branch_view():
                     component_id="tank-mode",
                     frequency=1e-3,
                     operating_mode="receiving",
+                    hazop_scenario_id="TK01-receiving-hole",
                 ),
             },
             {
@@ -535,6 +539,7 @@ def test_facility_ledger_preserves_operating_modes_in_each_branch_view():
                     component_id="tank-mode",
                     frequency=2e-3,
                     operating_mode="supply",
+                    hazop_scenario_id="TK01-supply-hole",
                 ),
             },
         ],
@@ -546,21 +551,41 @@ def test_facility_ledger_preserves_operating_modes_in_each_branch_view():
         "receiving",
         "supply",
     ]
+    assert branches["annual_conditions"]["weather-1"]["hazop_scenario_ids"] == [
+        "TK01-receiving-hole",
+        "TK01-supply-hole",
+    ]
     assert branches["release_branches"]["release-1"]["operating_modes"] == [
         "receiving",
         "supply",
+    ]
+    assert branches["release_branches"]["release-1"]["hazop_scenario_ids"] == [
+        "TK01-receiving-hole",
+        "TK01-supply-hole",
     ]
     assert branches["ignition_branches"]["direct_fire"]["operating_modes"] == [
         "receiving",
         "supply",
     ]
+    assert branches["ignition_branches"]["direct_fire"]["hazop_scenario_ids"] == [
+        "TK01-receiving-hole",
+        "TK01-supply-hole",
+    ]
     assert merged["component_contributions"]["tank-mode"]["operating_modes"] == [
         "receiving",
         "supply",
     ]
+    assert merged["component_contributions"]["tank-mode"]["hazop_scenario_ids"] == [
+        "TK01-receiving-hole",
+        "TK01-supply-hole",
+    ]
     assert merged["component_coverage"]["tank-mode"]["operating_modes"] == [
         "receiving",
         "supply",
+    ]
+    assert merged["component_coverage"]["tank-mode"]["hazop_scenario_ids"] == [
+        "TK01-receiving-hole",
+        "TK01-supply-hole",
     ]
     assert merged["component_risk_ranking"]["rows"][0]["operating_modes"] == [
         "receiving",
