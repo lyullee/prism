@@ -92,6 +92,7 @@ def build_ijhe_completion_audit(
     external_equipment_model_contract_audit: Mapping[str, Any] | None = None,
     hazop_forecast_scan: Mapping[str, Any] | None = None,
     realtime_hazop_mode_trace: Mapping[str, Any] | None = None,
+    external_document_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -2936,6 +2937,50 @@ def build_ijhe_completion_audit(
             "and never promotes facility QRA."
         )
         checks.append(trace_check)
+    if external_document_evidence is not None:
+        document_evidence = external_document_evidence
+        policy = document_evidence.get("promotion_policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        document_count = document_evidence.get("document_count")
+        document_check_valid = (
+            document_evidence.get("schema_version") == "prism.external_document_evidence_audit.v1"
+            and document_evidence.get("status") == "CANDIDATE_EQUIPMENT_PHYSICAL_EVIDENCE_NO_PROMOTION"
+            and document_evidence.get("diagnostic_only") is True
+            and isinstance(document_count, int)
+            and document_count > 0
+            and document_evidence.get("physical_validation_claim") is False
+            and document_evidence.get("provider_release_packet_claim") is False
+            and document_evidence.get("frequency_inference_performed") is False
+            and document_evidence.get("facility_qra_claim") is False
+            and policy.get("document_is_not_provider_release_packet") is True
+            and policy.get("document_is_not_frequency_evidence") is True
+            and policy.get("comparison_required_before_physical_validation") is True
+            and policy.get("comparison_must_be_independent_and_holdout_scored") is True
+            and policy.get("facility_qra_requires_complete_case_coverage") is True
+        )
+        document_check = _check(
+            "diagnostic_external_document_evidence",
+            document_check_valid,
+            {
+                "record": document_evidence.get("_record_path"),
+                "schema_version": document_evidence.get("schema_version"),
+                "status": document_evidence.get("status"),
+                "document_count": document_count,
+                "physical_validation_claim": document_evidence.get("physical_validation_claim"),
+                "provider_release_packet_claim": document_evidence.get("provider_release_packet_claim"),
+                "frequency_inference_performed": document_evidence.get("frequency_inference_performed"),
+                "facility_qra_claim": document_evidence.get("facility_qra_claim"),
+                "policy": dict(policy),
+            },
+            "external document evidence is missing or carries an unsafe promotion claim",
+        )
+        document_check["diagnostic_only"] = True
+        document_check["interpretation"] = (
+            "External pump documents are tracked as candidate model-comparison sources. "
+            "The audit does not create a release packet, frequency, physical-validation "
+            "claim, or facility QRA result."
+        )
+        checks.append(document_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

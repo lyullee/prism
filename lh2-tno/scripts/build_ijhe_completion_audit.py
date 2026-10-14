@@ -148,6 +148,11 @@ def main() -> int:
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
     )
+    parser.add_argument(
+        "--external-document-evidence",
+        type=Path,
+        help="optional provenance-only audit of external equipment documents",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -413,6 +418,13 @@ def main() -> int:
         )
         if realtime_hazop_mode_trace is not None:
             realtime_hazop_mode_trace["_record_path"] = str(args.realtime_hazop_mode_trace)
+        external_document_evidence = (
+            _object(args.external_document_evidence)
+            if args.external_document_evidence
+            else None
+        )
+        if external_document_evidence is not None:
+            external_document_evidence["_record_path"] = str(args.external_document_evidence)
         report = build_ijhe_completion_audit(
             status,
             matrix,
@@ -454,6 +466,7 @@ def main() -> int:
             external_equipment_model_contract_audit,
             hazop_forecast_scan=hazop_forecast_scan,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
+            external_document_evidence=external_document_evidence,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error

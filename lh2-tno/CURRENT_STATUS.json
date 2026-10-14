@@ -156,7 +156,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "1012 passed",
+  "latest_local_full_test_run": "1014 passed",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -2941,8 +2941,8 @@
     "declared_major_accident_scope",
     "facility_ir_fn_available"
   ],
-  "full_portable_test_count_latest": 1012,
-  "full_portable_test_status_latest": "1012 passed",
+  "full_portable_test_count_latest": 1014,
+  "full_portable_test_status_latest": "1014 passed",
   "full_portable_test_record_latest": "python -m pytest -q",
   "equipment_model_binding_catalog_previous_state_only": "examples/generic_lh2_model_binding.json",
   "equipment_model_binding_native_interface_component_count": 7,
@@ -4099,5 +4099,11 @@
   "external_lh2_model_root_review_refresh_status": "MODEL_ROOT_REVIEWED_NO_PRISM_PROMOTION; 7 provider-like responses; exact generic identity 0; qualification sidecar 0",
   "external_provider_artifact_match_refresh_record": "results/20261107/external_provider_artifact_match_refresh.json",
   "external_provider_artifact_match_refresh_status": "NO_EXACT_QUALIFIED_MATCH; candidates 7; exact match 0; qualification 0; physical validation 0; facility QRA 0",
-  "external_provider_artifact_refresh_promotion": false
+  "external_provider_artifact_refresh_promotion": false,
+  "ijhe_completion_audit_external_document_evidence_implemented": true,
+  "ijhe_completion_audit_external_document_evidence_input": "results/20261107/external_pump_document_intake.json",
+  "ijhe_completion_audit_external_document_evidence_record": "results/20261107/ijhe_completion_audit_with_external_document_evidence.json",
+  "ijhe_completion_audit_external_document_evidence_status": "PASS_DIAGNOSTIC_ONLY; external pump documents are provenance candidates; physical validation and QRA promotion false",
+  "ijhe_completion_audit_external_document_evidence_check_name": "diagnostic_external_document_evidence",
+  "ijhe_completion_audit_external_document_evidence_promotion": false
 }

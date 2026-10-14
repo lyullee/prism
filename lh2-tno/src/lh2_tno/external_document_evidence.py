@@ -105,6 +105,7 @@ def audit_external_document_evidence(paths: Iterable[str | Path]) -> dict[str, A
     return {
         "schema_version": AUDIT_SCHEMA,
         "status": "CANDIDATE_EQUIPMENT_PHYSICAL_EVIDENCE_NO_PROMOTION",
+        "diagnostic_only": True,
         "document_count": len(documents),
         "documents": documents,
         "physical_validation_claim": False,

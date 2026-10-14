@@ -1,0 +1,257 @@
+{
+  "schema_version": "prism.ijhe_completion_audit.v1",
+  "status": "INCOMPLETE_EVIDENCE",
+  "checks": [
+    {
+      "name": "equipment_state_to_release_to_consequence",
+      "status": "PASS",
+      "evidence": {
+        "generated_event_count": 34,
+        "case_count": 44,
+        "executed_case_count": 44
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "provider_worklist_scope_alignment",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "status": "ALIGNED",
+        "worklist_event_count": 24,
+        "campaign_event_count": 24,
+        "aligned_event_count": 24,
+        "missing_event_ids": [],
+        "primary_family_mismatches": [],
+        "provider_packet_created": false,
+        "frequency_inference_performed": false
+      },
+      "interpretation": "The provider worklist and campaign share event IDs and primary accident families. This is a structural diagnostic check; it does not create a provider packet or qualify facility risk."
+    },
+    {
+      "name": "diagnostic_adapter_execution_contract",
+      "status": "PASS",
+      "evidence": {
+        "source": "current_status",
+        "status": "DECLARED_ADAPTERS_RESOLVED_PROVIDER_INSTANCES_REQUIRED; 7/7 PRISM-side adapter classes resolved, 0 provider instances and 0 qualified packets",
+        "adapter_count": 7,
+        "resolved_adapter_count": 7,
+        "provider_instance_count": 0,
+        "qualified_provider_packet_count": 0,
+        "record": "results/20261014/diagnostic_adapter_registry_audit_live.json"
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "equipment_model_binding_to_accident_release",
+      "status": "PASS",
+      "evidence": {
+        "model_binding_status": "STATE_ONLY_BOUND",
+        "component_count": 8,
+        "state_supported_component_count": 8,
+        "accident_release_supported_component_count": 7,
+        "diagnostic_release_adapter_component_count": 7,
+        "record": "results/20261024/native_equipment_model_binding_audit_v1.json"
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "actual_provider_release_packet",
+      "status": "BLOCKED",
+      "evidence": {
+        "actual_facility_packet_available": false,
+        "release_inventory_status": "NO_ACCIDENT_RELEASE_EXPORT",
+        "qualified_packet_count": 0
+      },
+      "blocking_reason": "only synthetic or screening provider releases are available for this campaign"
+    },
+    {
+      "name": "provider_worklist_coverage",
+      "status": "BLOCKED",
+      "evidence": {
+        "source": "current_status",
+        "status": "STRUCTURAL_CATALOGS_AVAILABLE; 24 synthetic provider packets exact-matched; actual qualified packet count remains 0; mixed campaign execution is partial and fail-closed",
+        "frequency_event_count": 24,
+        "provider_packet_count": 24,
+        "uncomputed_provider_packet_count": 0,
+        "diagnostic_release_adapter_component_count": 7,
+        "structural_diagnostic_coverage": false,
+        "native_scope_catalog_structural_coverage": false,
+        "native_scope_catalog_evidence": {},
+        "qualified_provider_packet_count": null,
+        "qualification_readiness": null
+      },
+      "blocking_reason": "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog"
+    },
+    {
+      "name": "release_duration_isolation_inventory_ledger",
+      "status": "PASS",
+      "evidence": {
+        "executed_case_count": 44,
+        "cases_with_termination_and_mass_ledger": 44,
+        "release_ledger_schema": "prism.release_termination_inventory_ledger.v1",
+        "release_ledger_row_count": 44,
+        "release_ledger_summary": {
+          "case_count": 44,
+          "ledger_status_counts": {
+            "COMPLETE": 15,
+            "OPERATOR_LIMITED_OR_DOMAIN_INCOMPLETE": 29
+          },
+          "termination_basis_counts": {
+            "emergency_relief_discharge": 1,
+            "inventory_depletion": 16,
+            "inventory_over_600s": 1,
+            "synthetic_diagnostic_horizon": 24,
+            "two_sided_rupture": 2
+          },
+          "complete_row_count": 15,
+          "operator_limited_or_domain_incomplete_row_count": 29,
+          "domain_incomplete_row_count": 0,
+          "uncomputed_row_count": 0,
+          "incomplete_row_count": 0,
+          "provider_packet_consumed_row_count": 44,
+          "withheld_case_count": 29,
+          "withheld_case_status_counts": {
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "withheld_operator_limited_case_count": 29,
+          "withheld_domain_incomplete_case_count": 0
+        },
+        "max_end_to_end_residual_kg": 1.6820983299904304e-09
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "declared_major_accident_scope",
+      "status": "BLOCKED",
+      "evidence": {
+        "matrix_status": false,
+        "blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ],
+        "required_family_count": 12
+      },
+      "blocking_reason": "one or more declared accident families are missing, partial, or uncomputed"
+    },
+    {
+      "name": "conditional_accident_scope_accounting",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "evidence": {
+        "conditional_chain_complete": true,
+        "conditional_chain_blocking_reasons": [],
+        "strict_matrix_complete": false,
+        "strict_blocking_reasons": [
+          "vessel_hole: PARTIAL",
+          "pipe_hole: PARTIAL",
+          "valve_hole: PARTIAL",
+          "pump_hole: PARTIAL",
+          "liquid_two_phase: PARTIAL",
+          "inventory_depletion: PARTIAL",
+          "two_sided_rupture: PARTIAL",
+          "vertical_handoff: PARTIAL"
+        ]
+      },
+      "blocking_reason": null,
+      "interpretation": "Conditional execution status counts numerical consequence-chain outputs, including operator-limited cases, while strict matrix_complete remains the facility qualification gate."
+    },
+    {
+      "name": "facility_ir_fn_available",
+      "status": "BLOCKED",
+      "evidence": {
+        "total_facility_annual_ir_low_high": null,
+        "total_facility_expected_death_fn_low_high": null
+      },
+      "blocking_reason": "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    },
+    {
+      "name": "physical_validation_evidence",
+      "status": "PASS",
+      "evidence": {
+        "physical_validation_claim": false,
+        "evidence_status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
+        "evidence_record": "docs/PRISM_물리검증_근거_20261009.md",
+        "evidence_component": "DynamicLH2PoolX pool/spreading only",
+        "restricted_component_evidence": true
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "frequency_uncertainty_reported",
+      "status": "BLOCKED",
+      "evidence": {
+        "uncertainty_result_present": false,
+        "scenario_count": 0,
+        "facility_credible_interval": null,
+        "conditional_frequency_uncertainty": false
+      },
+      "blocking_reason": "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view"
+    },
+    {
+      "name": "processing_time_evidence",
+      "status": "PASS",
+      "evidence": {
+        "fresh_physics_cases": 44,
+        "campaign_elapsed_ms": 375052.29160003364,
+        "case_p95_ms": 39591.673405066846,
+        "case_p99_ms": 79233.10563297477,
+        "timing_distribution": "across separately executed equipment campaigns; not repeated-run latency",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "realtime_monitor_contract",
+      "status": "PASS",
+      "evidence": {
+        "implemented": true,
+        "module": "src/lh2_tno/service.py",
+        "test_status": "single-component and facility monitor tests with component-risk ranking, time-window rejection, row-to-provider chain, conditional IR/F-N, release-path ledger and promotion-block assertions; local full suite 693 passed; CI Run #492 completed successfully.",
+        "one_hz_fresh_physics_demonstrated": false
+      },
+      "blocking_reason": null
+    },
+    {
+      "name": "diagnostic_external_document_evidence",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261107\\external_pump_document_intake.json",
+        "schema_version": "prism.external_document_evidence_audit.v1",
+        "status": "CANDIDATE_EQUIPMENT_PHYSICAL_EVIDENCE_NO_PROMOTION",
+        "document_count": 2,
+        "physical_validation_claim": false,
+        "provider_release_packet_claim": false,
+        "frequency_inference_performed": false,
+        "facility_qra_claim": false,
+        "policy": {
+          "document_is_not_provider_release_packet": true,
+          "document_is_not_frequency_evidence": true,
+          "comparison_required_before_physical_validation": true,
+          "comparison_must_be_independent_and_holdout_scored": true,
+          "facility_qra_requires_complete_case_coverage": true
+        }
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "External pump documents are tracked as candidate model-comparison sources. The audit does not create a release packet, frequency, physical-validation claim, or facility QRA result."
+    }
+  ],
+  "blocking_reasons": [
+    "only synthetic or screening provider releases are available for this campaign",
+    "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+    "one or more declared accident families are missing, partial, or uncomputed",
+    "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
+    "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view"
+  ],
+  "physical_validation_claim": false,
+  "complete_facility_qra_claim": false,
+  "interpretation": "Readiness evidence gate; a blocked check is not treated as zero risk or as an implicit accident substitution."
+}

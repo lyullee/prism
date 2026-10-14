@@ -1,6 +1,7 @@
 {
   "schema_version": "prism.external_document_evidence_audit.v1",
   "status": "CANDIDATE_EQUIPMENT_PHYSICAL_EVIDENCE_NO_PROMOTION",
+  "diagnostic_only": true,
   "document_count": 2,
   "documents": [
     {

@@ -228,6 +228,58 @@ def test_completion_audit_blocks_realtime_hazop_mode_trace_claim_without_policy(
     assert check["status"] == "BLOCKED"
 
 
+def _external_document_evidence():
+    return {
+        "schema_version": "prism.external_document_evidence_audit.v1",
+        "status": "CANDIDATE_EQUIPMENT_PHYSICAL_EVIDENCE_NO_PROMOTION",
+        "diagnostic_only": True,
+        "document_count": 2,
+        "physical_validation_claim": False,
+        "provider_release_packet_claim": False,
+        "frequency_inference_performed": False,
+        "facility_qra_claim": False,
+        "promotion_policy": {
+            "document_is_not_provider_release_packet": True,
+            "document_is_not_frequency_evidence": True,
+            "comparison_required_before_physical_validation": True,
+            "comparison_must_be_independent_and_holdout_scored": True,
+            "facility_qra_requires_complete_case_coverage": True,
+        },
+    }
+
+
+def test_completion_audit_records_external_document_evidence_without_promotion():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_document_evidence=_external_document_evidence(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_document_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_external_document_promotion_claim():
+    evidence = _external_document_evidence()
+    evidence["frequency_inference_performed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_document_evidence=evidence,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_document_evidence"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def test_completion_audit_records_domain_recovery_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(validated=False),
