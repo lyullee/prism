@@ -3373,5 +3373,13 @@
     "check_count": 25,
     "blocking_reason_count": 6,
     "facility_qra_promotion": false
+  },
+  "latest_provider_closure_audit": {
+    "record": "results/20261014/generic_lh2_provider_release_closure_isolation_contract_v3.json",
+    "status": "CLOSURE_EVIDENCE_OPEN",
+    "event_count": 24,
+    "closure_ready_event_count": 21,
+    "closure_open_event_count": 3,
+    "facility_qra_promotion": false
   }
 }

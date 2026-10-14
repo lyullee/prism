@@ -386,7 +386,15 @@ def _provider_termination_evidence(
                 "termination_basis": "inventory_depletion_positive_threshold",
                 "available_mass_kg": packet.get("available_mass_kg"),
                 "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
-                "threshold_mass_kg": provider_meta.get("depletion_threshold_kg"),
+                # LayeredTankNetworkSimulator reports this field as
+                # ``threshold_mass_kg`` while the dynamic worker adapter
+                # historically used ``depletion_threshold_kg``.  Preserve
+                # both provider spellings at the closure boundary instead of
+                # treating a valid positive threshold as missing.
+                "threshold_mass_kg": provider_meta.get(
+                    "depletion_threshold_kg",
+                    provider_meta.get("threshold_mass_kg"),
+                ),
                 "remaining_mass_kg": provider_meta.get("remaining_mass_kg"),
                 "max_abs_mass_residual_kg": provider_meta.get(
                     "max_abs_mass_residual_kg"
@@ -436,7 +444,10 @@ def _provider_termination_evidence(
                 "termination_basis": "inventory_depletion_positive_threshold",
                 "available_mass_kg": packet.get("available_mass_kg"),
                 "cumulative_mass_out_kg": packet.get("cumulative_mass_out_kg"),
-                "threshold_mass_kg": response_meta.get("depletion_threshold_kg"),
+                "threshold_mass_kg": response_meta.get(
+                    "depletion_threshold_kg",
+                    response_meta.get("threshold_mass_kg"),
+                ),
                 "remaining_mass_kg": response_meta.get("remaining_mass_kg"),
                 "max_abs_mass_residual_kg": response_meta.get(
                     "max_abs_mass_residual_kg"

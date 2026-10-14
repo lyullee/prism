@@ -4271,5 +4271,11 @@
   "ijhe_completion_audit_transfer_line_isolation_v3_facility_qra_promotion": false,
   "generic_provider_release_closure_isolation_contract_v2_ready_event_count": 16,
   "generic_provider_release_closure_isolation_contract_v2_open_event_count": 8,
-  "generic_provider_release_closure_isolation_contract_v2_facility_qra_promotion": false
+  "generic_provider_release_closure_isolation_contract_v2_facility_qra_promotion": false,
+  "generic_provider_release_closure_isolation_contract_v3_record": "results/20261014/generic_lh2_provider_release_closure_isolation_contract_v3.json",
+  "generic_provider_release_closure_isolation_contract_v3_status": "CLOSURE_EVIDENCE_OPEN; 21/24 events closure-ready, 3 remain open (vaporizer G2/G3 and reliquefier G6); qualification/frequency/facility QRA remain closed",
+  "generic_provider_release_closure_isolation_contract_v3_ready_event_count": 21,
+  "generic_provider_release_closure_isolation_contract_v3_open_event_count": 3,
+  "generic_provider_release_closure_threshold_alias_fix_implemented": true,
+  "generic_provider_release_closure_threshold_alias_fix_policy": "accept provider-owned threshold_mass_kg or depletion_threshold_kg spelling without inferring inventory or termination"
 }
