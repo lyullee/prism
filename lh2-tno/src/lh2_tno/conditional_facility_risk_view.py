@@ -100,7 +100,6 @@ def _build_release_trace(
         if field in audit
     }
 
-
     summary["risk_atom_count"] = len(atoms)
     trace_rows: list[dict[str, Any]] = []
     trace_fields = (
@@ -349,6 +348,8 @@ def _build_frequency_trace(
         "scenarios": scenarios,
         "semantics": frequency_uncertainty.get("semantics"),
     }
+
+
 def build_conditional_facility_risk_view(
     assessment: Mapping[str, Any],
     provider_mass_balance_audit: Mapping[str, Any] | None = None,

@@ -49,6 +49,7 @@ def test_completion_audit_checks_case_keyed_conditional_release_trace() -> None:
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
 
+
 def test_completion_audit_rejects_release_trace_promotion_claim() -> None:
     trace = {
         "schema_version": "prism.conditional_facility_release_trace.v1",
