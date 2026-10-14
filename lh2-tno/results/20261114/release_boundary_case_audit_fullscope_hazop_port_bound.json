@@ -2,6 +2,7 @@
   "schema_version": "prism.release_boundary_case_audit.v1",
   "status": "CASE_BOUNDARY_PARTIAL",
   "case_count": 24,
+  "case_key_definition": "event_id|release_branch_id|annual_condition_id",
   "source_case_count": 24,
   "source_release_ledger_row_count": 24,
   "source_alignment_status": "ALIGNED",
@@ -24,6 +25,7 @@
   "rows": [
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "case_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "frequency_port_ids": [
@@ -71,6 +73,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "case_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "frequency_port_ids": [
@@ -117,6 +120,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "case_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "frequency_port_ids": [
@@ -163,6 +167,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "case_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "frequency_port_ids": [
@@ -209,6 +214,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "case_key": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "storage-shell",
       "model_component_id": "storage-tank-01",
       "frequency_port_ids": [
@@ -255,6 +261,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "frequency_port_ids": [
@@ -300,6 +307,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "frequency_port_ids": [
@@ -345,6 +353,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "frequency_port_ids": [
@@ -390,6 +399,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "frequency_port_ids": [
@@ -435,6 +445,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-line",
       "model_component_id": "liquid-transfer-line-01",
       "frequency_port_ids": [
@@ -480,6 +491,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-valve",
       "model_component_id": "transfer-valve-01",
       "frequency_port_ids": [
@@ -525,6 +537,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-valve",
       "model_component_id": "transfer-valve-01",
       "frequency_port_ids": [
@@ -570,6 +583,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-valve",
       "model_component_id": "transfer-valve-01",
       "frequency_port_ids": [
@@ -615,6 +629,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-valve",
       "model_component_id": "transfer-valve-01",
       "frequency_port_ids": [
@@ -660,6 +675,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-valve",
       "model_component_id": "transfer-valve-01",
       "frequency_port_ids": [
@@ -705,6 +721,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "case_key": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "pressure-relief-vent",
       "model_component_id": "pressure-relief-vent-01",
       "frequency_port_ids": [
@@ -748,6 +765,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-pump/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-pump",
       "model_component_id": "liquid-transfer-pump-01",
       "frequency_port_ids": [
@@ -793,6 +811,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "case_key": "generic-lh2-full-scope-frequency-example/transfer-pump/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "transfer-pump",
       "model_component_id": "liquid-transfer-pump-01",
       "frequency_port_ids": [
@@ -838,6 +857,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "case_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "ambient-vaporizer",
       "model_component_id": "ambient-vaporizer-01",
       "frequency_port_ids": [
@@ -879,6 +899,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "case_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "ambient-vaporizer",
       "model_component_id": "ambient-vaporizer-01",
       "frequency_port_ids": [
@@ -922,6 +943,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "case_key": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "ambient-vaporizer",
       "model_component_id": "ambient-vaporizer-01",
       "frequency_port_ids": [
@@ -963,6 +985,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "case_key": "generic-lh2-full-scope-frequency-example/reliquefier/G4|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "reliquefier",
       "model_component_id": "reliquefier-01",
       "frequency_port_ids": [
@@ -1008,6 +1031,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "case_key": "generic-lh2-full-scope-frequency-example/reliquefier/G5|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "reliquefier",
       "model_component_id": "reliquefier-01",
       "frequency_port_ids": [
@@ -1053,6 +1077,7 @@
     },
     {
       "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "case_key": "generic-lh2-full-scope-frequency-example/reliquefier/G6|matched-event-provider-request|synthetic-generic-worker-west-3ms",
       "asset_id": "reliquefier",
       "model_component_id": "reliquefier-01",
       "frequency_port_ids": [

@@ -105,3 +105,19 @@ def test_case_audit_fails_closed_when_case_and_release_ledgers_do_not_align():
     assert report["source_alignment_status"] == "BLOCKED"
     assert "case_rows_missing_from_release_ledger" in report["source_alignment_blocking_reasons"]
     assert "release_ledger_rows_missing_case_metadata" in report["source_alignment_blocking_reasons"]
+
+
+def test_case_audit_uses_event_branch_and_annual_condition_as_case_key():
+    first_case = _case("same-event")
+    second_case = _case("same-event")
+    first_case.update({"release_branch_id": "branch-a", "annual_condition_id": "weather-a"})
+    second_case.update({"release_branch_id": "branch-b", "annual_condition_id": "weather-b"})
+    first_row = _ledger_row("same-event")
+    second_row = _ledger_row("same-event")
+    first_row.update({"release_branch_id": "branch-a", "annual_condition_id": "weather-a"})
+    second_row.update({"release_branch_id": "branch-b", "annual_condition_id": "weather-b"})
+    report = build_release_boundary_case_audit(
+        _assessment([first_case, second_case], [first_row, second_row])
+    )
+    assert report["source_alignment_status"] == "ALIGNED"
+    assert len({row["case_key"] for row in report["rows"]}) == 2

@@ -36,6 +36,17 @@ def _as_rows(value: Any) -> list[Mapping[str, Any]]:
     return [row for row in value if isinstance(row, Mapping)]
 
 
+def _case_key(row: Mapping[str, Any]) -> str:
+    """Use the release ledger grain: event × branch × annual condition."""
+
+    values = (
+        row.get("event_id"),
+        row.get("release_branch_id"),
+        row.get("annual_condition_id"),
+    )
+    return "|".join("" if value is None else str(value) for value in values)
+
+
 def _provider_origins(case: Mapping[str, Any], ledger_row: Mapping[str, Any]) -> list[str]:
     identity = _as_mapping(case.get("provider_packet_identity"))
     origins = identity.get("input_origins")
@@ -150,9 +161,11 @@ def build_release_boundary_case_audit(
     cases = _as_rows(risk_ledger.get("cases"))
     release_ledger = _as_mapping(risk_ledger.get("release_termination_inventory_ledger"))
     ledger_rows = _as_rows(release_ledger.get("rows"))
-    cases_by_event = {str(case.get("event_id")): case for case in cases if case.get("event_id") is not None}
-    case_ids = [str(case.get("event_id")) for case in cases if case.get("event_id") is not None]
-    ledger_ids = [str(row.get("event_id")) for row in ledger_rows if row.get("event_id") is not None]
+    cases_by_key = {
+        _case_key(case): case for case in cases if case.get("event_id") is not None
+    }
+    case_ids = [_case_key(case) for case in cases if case.get("event_id") is not None]
+    ledger_ids = [_case_key(row) for row in ledger_rows if row.get("event_id") is not None]
     missing_case_ids = sorted(set(case_ids) - set(ledger_ids))
     orphan_ledger_ids = sorted(set(ledger_ids) - set(case_ids))
     duplicate_ledger_ids = sorted({event_id for event_id in ledger_ids if ledger_ids.count(event_id) > 1})
@@ -162,11 +175,11 @@ def build_release_boundary_case_audit(
     if orphan_ledger_ids:
         alignment_blockers.append("release_ledger_rows_missing_case_metadata")
     if duplicate_ledger_ids:
-        alignment_blockers.append("duplicate_release_ledger_event_ids")
+        alignment_blockers.append("duplicate_release_ledger_case_keys")
     rows: list[dict[str, Any]] = []
     for ledger_row in ledger_rows:
         event_id = str(ledger_row.get("event_id"))
-        case = cases_by_event.get(event_id, {})
+        case = cases_by_key.get(_case_key(ledger_row), {})
         reasons = _case_reasons(case, ledger_row, residual_tolerance_kg=tolerance)
         provider_blockers = _provider_blockers(case, ledger_row)
         termination = _as_mapping(ledger_row.get("termination"))
@@ -174,6 +187,7 @@ def build_release_boundary_case_audit(
         boundary_ok = not reasons
         rows.append({
             "event_id": ledger_row.get("event_id"),
+            "case_key": _case_key(ledger_row),
             "asset_id": ledger_row.get("asset_id"),
             "model_component_id": identity.get("component_id"),
             "frequency_port_ids": list(case.get("frequency_port_ids", [])) if isinstance(case.get("frequency_port_ids"), list) else [],
@@ -214,6 +228,7 @@ def build_release_boundary_case_audit(
             else "CASE_BOUNDARY_BLOCKED"
         ),
         "case_count": len(rows),
+        "case_key_definition": "event_id|release_branch_id|annual_condition_id",
         "source_case_count": len(cases),
         "source_release_ledger_row_count": len(ledger_rows),
         "source_alignment_status": "ALIGNED" if not alignment_blockers else "BLOCKED",

@@ -19,11 +19,11 @@ python scripts/audit_release_boundary_cases.py `
   --output results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json
 ```
 
-결과는 [`release_boundary_case_audit_fullscope_hazop_port_bound.json`](../results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json)입니다.
+전체 union 결과는 [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)이며, 24개 native isolation subset 결과도 [`release_boundary_case_audit_fullscope_hazop_port_bound.json`](../results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json)으로 보존합니다.
 
-- 총 24개 case
+- 전체 union 총 44개 case
 - 개별 방출 경계 조건을 만족한 case 3개
-- 방출 경계에서 보류된 case 21개
+- 방출 경계에서 보류된 case 41개
 - provider qualification, 독립 물리검증, 빈도 추론, 시설 IR/F-N 승격은 0건
 - 전체 상태: `CASE_BOUNDARY_PARTIAL`
 
@@ -46,6 +46,10 @@ python scripts/audit_release_boundary_cases.py `
   질량이 허용 잔차 안으로 닫히지 않았습니다.
 - `consequence_domain_truncated`: 피해 계산 영역 밖의 가연성 여부가 완전히 입증되지
   않았습니다.
+
+case 식별자는 `event_id` 하나가 아니라 `event_id × release_branch_id × annual_condition_id`
+복합키입니다. 서로 다른 기상 조건이나 handoff branch가 같은 event ID를 공유할 수
+있기 때문입니다.
 
 `strict_release_boundary_eligible`은 방출 종료 경계의 국소 검사 결과일 뿐입니다.
 이 값은 사고 빈도를 학습하거나 시설 전체 IR/F-N을 계산해도 된다는 뜻이 아닙니다.

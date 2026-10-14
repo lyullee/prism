@@ -5122,24 +5122,25 @@
       "name": "diagnostic_release_boundary_case_audit",
       "status": "PASS",
       "evidence": {
-        "record": "results\\20261114\\release_boundary_case_audit_fullscope_hazop_port_bound.json",
+        "record": "results\\20261114\\release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json",
         "schema_version": "prism.release_boundary_case_audit.v1",
         "status": "CASE_BOUNDARY_PARTIAL",
-        "case_count": 24,
-        "source_case_count": 24,
-        "source_release_ledger_row_count": 24,
+        "case_count": 44,
+        "source_case_count": 44,
+        "source_release_ledger_row_count": 44,
         "source_alignment_status": "ALIGNED",
         "strict_release_boundary_eligible_case_count": 3,
-        "strict_release_boundary_blocked_case_count": 21,
+        "strict_release_boundary_blocked_case_count": 41,
         "termination_basis_counts": {
           "emergency_relief_discharge": 1,
-          "inventory_depletion": 6,
+          "inventory_depletion": 16,
           "inventory_over_600s": 1,
           "reviewed_isolation_success": 14,
+          "synthetic_diagnostic_horizon": 10,
           "two_sided_rupture": 2
         },
         "provider_qualification_status_counts": {
-          "BLOCKED": 24
+          "BLOCKED": 44
         },
         "provider_qualification_claim": false,
         "independent_physical_validation_claim": false,
