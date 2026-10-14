@@ -51,7 +51,8 @@
       "component_id",
       "scenario_id"
     ],
-    "runtime_resolver_scope_precedence": "component_scenario_then_scenario"
+    "runtime_resolver_scope_precedence": "component_scenario_then_scenario",
+    "forecast_completion_audit_timing_required": true
   },
   "example": {
     "record": "results/hazop_current/selection.json",
@@ -87,9 +88,9 @@
     "scripts/scan_hazop_forecast.py": "0FA8B4EAB0EA35A223BE8CA604AB230827607DA3E9316BB505AD14124C517FC7",
     "examples/generic_hazop_tables_by_component.json": "5276C521F439CE7B4CE073BCC0AE1ED0218399595668A49056ADAB5F8B9DBD31",
     "examples/generic_hazop_forecast_frames.json": "97B8C0CB9F9C31B39B4932F830EA7B6EFB29F2B29FCDE07AD77EDD4661A26AC2",
-    "src/lh2_tno/completion_audit.py": "D0B145A4A4A7453C3A95D2634D75DD6D98872B5CB72C63A31BC9F245860FA2F1",
+    "src/lh2_tno/completion_audit.py": "D7FD29C675094CBEBD2D4A9400E7B0AA8D97832E9C363D8EECB0A2B795027B53",
     "scripts/build_ijhe_completion_audit.py": "18B3B32B8D7562171FE85159339053005CC534BC4E482CFE0E1A1749E2623419",
-    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "9EBCCC17CAF513C4ED4EBB577E88F003030B20B15C836C7625DC9B05DFE2B294"
+    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "5612EEB95AA96306FC65C6CB88F6E77C99219F39C8293C8D05618239D5957972"
   },
   "policy": {
     "operating_mode_taken_from_input": true,

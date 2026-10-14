@@ -66,6 +66,11 @@ def test_completion_audit_records_forecast_hazop_trigger_without_qra_promotion()
             "trigger_count": 1,
             "evaluated_count": 0,
             "withheld_count": 1,
+            "timing": {
+                "wall_elapsed_ms": 0.8,
+                "quantitative_evaluation_elapsed_ms": 0.0,
+                "fresh_physics_claim": False,
+            },
             "policy": {
                 "operating_mode_taken_from_forecast_input": True,
                 "frequency_inference_performed": False,

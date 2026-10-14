@@ -58,7 +58,8 @@
         "component_id",
         "scenario_id"
       ],
-      "runtime_resolver_scope_precedence": "component_scenario_then_scenario"
+      "runtime_resolver_scope_precedence": "component_scenario_then_scenario",
+      "forecast_completion_audit_timing_required": true
     },
     "frequency_inference": false,
     "release_packet_creation": false,

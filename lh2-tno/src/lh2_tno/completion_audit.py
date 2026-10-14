@@ -2791,6 +2791,15 @@ def build_ijhe_completion_audit(
         trigger_count = hazop_forecast_scan.get("trigger_count")
         evaluated_count = hazop_forecast_scan.get("evaluated_count")
         withheld_count = hazop_forecast_scan.get("withheld_count")
+        forecast_timing = hazop_forecast_scan.get("timing")
+        timing_valid = (
+            isinstance(forecast_timing, Mapping)
+            and _finite(forecast_timing.get("wall_elapsed_ms"))
+            and float(forecast_timing.get("wall_elapsed_ms")) >= 0.0
+            and _finite(forecast_timing.get("quantitative_evaluation_elapsed_ms"))
+            and float(forecast_timing.get("quantitative_evaluation_elapsed_ms")) >= 0.0
+            and forecast_timing.get("fresh_physics_claim") is False
+        )
         forecast_valid = (
             hazop_forecast_scan.get("schema_version") == "prism.hazop_forecast_risk_scan.v1"
             and hazop_forecast_scan.get("status") == "FORECAST_RISK_SCAN_COMPLETE"
@@ -2810,6 +2819,7 @@ def build_ijhe_completion_audit(
             and forecast_policy.get("sensor_frequency_learning_used") is False
             and forecast_policy.get("facility_qra_promotion") is False
             and forecast_policy.get("diagnostic_only") is True
+            and timing_valid
         )
         forecast_check = _check(
             "diagnostic_hazop_forecast_risk_scan",
@@ -2824,6 +2834,7 @@ def build_ijhe_completion_audit(
                 "trigger_count": trigger_count,
                 "evaluated_count": evaluated_count,
                 "withheld_count": withheld_count,
+                "timing": dict(forecast_timing) if isinstance(forecast_timing, Mapping) else None,
                 "policy": dict(forecast_policy),
             },
             "forecast HAZOP scan is missing a valid state-origin, trigger accounting, or fail-closed policy",
