@@ -3246,6 +3246,12 @@ def build_ijhe_completion_audit(
         policy = policy if isinstance(policy, Mapping) else {}
         artifact_file_count = intake.get("artifact_file_count")
         release_row_count = intake.get("release_row_count")
+        qualified_sidecar_row_count = intake.get("qualified_sidecar_row_count")
+        closure_ready_row_count = intake.get("closure_ready_row_count")
+        actual_origin_row_count = intake.get("actual_origin_row_count")
+        synthetic_or_model_prediction_row_count = intake.get(
+            "synthetic_or_model_prediction_row_count"
+        )
         intake_check_valid = (
             intake.get("schema_version") == "prism.external_release_artifact_intake.v1"
             and intake.get("status") == "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION"
@@ -3254,15 +3260,19 @@ def build_ijhe_completion_audit(
             and artifact_file_count > 0
             and isinstance(release_row_count, int)
             and release_row_count > 0
-            and intake.get("qualified_sidecar_row_count") == 0
-            and intake.get("closure_ready_row_count") == 0
-            and intake.get("actual_origin_row_count") == 0
+            and isinstance(qualified_sidecar_row_count, int)
+            and 0 <= qualified_sidecar_row_count <= release_row_count
+            and isinstance(closure_ready_row_count, int)
+            and 0 <= closure_ready_row_count <= release_row_count
+            and isinstance(actual_origin_row_count, int)
+            and 0 <= actual_origin_row_count <= release_row_count
+            and isinstance(synthetic_or_model_prediction_row_count, int)
+            and 0 <= synthetic_or_model_prediction_row_count <= release_row_count
             and intake.get("error_count") == 0
             and isinstance(intake.get("artifacts"), list)
             and all(
                 isinstance(row, Mapping)
                 and row.get("diagnostic_only") is True
-                and row.get("qualification_bound") is False
                 for row in intake.get("artifacts", [])
                 if row.get("release_count", 1) > 0
             )
@@ -3282,13 +3292,12 @@ def build_ijhe_completion_audit(
                 "status": intake.get("status"),
                 "artifact_file_count": artifact_file_count,
                 "release_row_count": release_row_count,
-                "qualified_sidecar_row_count": intake.get("qualified_sidecar_row_count"),
-                "closure_ready_row_count": intake.get("closure_ready_row_count"),
+                "qualification_file_count": intake.get("qualification_file_count"),
+                "qualified_sidecar_row_count": qualified_sidecar_row_count,
+                "closure_ready_row_count": closure_ready_row_count,
                 "closure_status_counts": intake.get("closure_status_counts"),
-                "actual_origin_row_count": intake.get("actual_origin_row_count"),
-                "synthetic_or_model_prediction_row_count": intake.get(
-                    "synthetic_or_model_prediction_row_count"
-                ),
+                "actual_origin_row_count": actual_origin_row_count,
+                "synthetic_or_model_prediction_row_count": synthetic_or_model_prediction_row_count,
                 "error_count": intake.get("error_count"),
                 "policy": dict(policy),
             },

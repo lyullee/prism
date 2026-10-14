@@ -340,6 +340,29 @@ def test_completion_audit_blocks_external_release_artifact_promotion_claim():
     assert check["status"] == "BLOCKED"
 
 
+def test_completion_audit_keeps_exact_sidecar_inventory_diagnostic_only():
+    intake = _external_release_artifact_intake()
+    intake["qualification_file_count"] = 1
+    intake["qualified_sidecar_row_count"] = 1
+    intake["actual_origin_row_count"] = 1
+    intake["synthetic_or_model_prediction_row_count"] = 1
+    intake["artifacts"][0]["qualification_bound"] = True
+    intake["artifacts"][0]["input_origin"] = "provider_actual"
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_release_artifact_intake=intake,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_release_artifact_intake"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def _facility_evidence_request():
     return {
         "schema_version": "prism.facility_evidence_request.v1",
