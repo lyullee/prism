@@ -1,0 +1,113 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "reliquefier-01",
+  "port_id": "reliquefier-accident-out-1",
+  "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "explicit external lh2dt.DynamicReliquefier inventory-defined diagnostic (instantaneous_inventory); not site-calibrated",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_result_digest": "1d1dd6cb2b830672f100ea0b721ac5d457c010a477e6274e487a84aec1f1162f",
+  "provider_boundary_reference": "lh2dt.DynamicReliquefier explicit inventory outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.4,
+  "available_mass_kg": 5.423525477694575e-06,
+  "cumulative_mass_out_kg": 5.4235254776945745e-06,
+  "cumulative_static_enthalpy_out_j": 21.45901939920114,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 1.805474216427383e-05,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3958283.5276541375,
+      "temperature_k": 300.0002044224795,
+      "density_kg_m3": 0.08184043204976539,
+      "effective_area_m2": 2.454369260617026e-06,
+      "velocity_m_s": 89.88422418717339,
+      "area_provenance": "explicit atmospheric valve area; inventory event does not promote this as failure opening",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    },
+    {
+      "time_s": 0.1,
+      "mass_flow_kg_s": 2.773680597734835e-05,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3956032.142954333,
+      "temperature_k": 299.84290299099484,
+      "density_kg_m3": 0.08188335135858593,
+      "effective_area_m2": 4.908738521234052e-06,
+      "velocity_m_s": 69.00664934506936,
+      "area_provenance": "explicit atmospheric valve area; inventory event does not promote this as failure opening",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    },
+    {
+      "time_s": 0.2,
+      "mass_flow_kg_s": 3.635289063687808e-06,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3954010.738894301,
+      "temperature_k": 299.7016649080833,
+      "density_kg_m3": 0.08192192620864942,
+      "effective_area_m2": 4.908738521234052e-06,
+      "velocity_m_s": 9.040009690478959,
+      "area_provenance": "explicit atmospheric valve area; inventory event does not promote this as failure opening",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    },
+    {
+      "time_s": 0.30000000000000004,
+      "mass_flow_kg_s": 4.808417571635757e-06,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3956132.598227701,
+      "temperature_k": 299.8499218029854,
+      "density_kg_m3": 0.08188143533319031,
+      "effective_area_m2": 4.908738521234052e-06,
+      "velocity_m_s": 11.963185305471912,
+      "area_provenance": "explicit atmospheric valve area; inventory event does not promote this as failure opening",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    }
+  ],
+  "termination_provenance": "external lh2dt.DynamicReliquefier finite-volume releasable-inventory ledger; atmospheric-pressure equilibrium residual is retained",
+  "termination_basis": "inventory_depletion",
+  "provider_mass_balance": {
+    "schema_version": "prism.provider_mass_balance.v1",
+    "initial_mass_kg": 0.0008238536226639276,
+    "cumulative_mass_in_kg": null,
+    "cumulative_mass_out_kg": 5.4235254776945745e-06,
+    "final_mass_kg": 0.000818430097186233,
+    "reported_residual_mass_kg": 4.489274620447792e-20,
+    "derived_accounting_residual_kg": 0.0,
+    "isolation_time_s": null,
+    "post_isolation_observation_s": null,
+    "isolation_success": null
+  },
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.0025
+}

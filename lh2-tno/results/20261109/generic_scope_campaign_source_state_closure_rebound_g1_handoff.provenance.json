@@ -1,0 +1,24 @@
+{
+  "schema_version": "prism.campaign_compressible_handoff_rebind.v1",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "original_provider_result_digest": "83ffcc0aa63a9ed3fe2bdd44124cba70493664ab422706be9d3d8293b78c5b28",
+  "handoff_provider_result_digest": "83ffcc0aa63a9ed3fe2bdd44124cba70493664ab422706be9d3d8293b78c5b28",
+  "identity_checks": {
+    "event_id_match": true,
+    "component_id_match": true,
+    "port_id_match": true,
+    "source_digest_match": true,
+    "handoff_present": true,
+    "requested_event_id_match": true
+  },
+  "compressible_plane_handoff_consumed": true,
+  "handoff_provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+  "facility_qra_claim": false,
+  "frequency_inference": false,
+  "physical_validation_claim": false,
+  "provider_packet_promoted": false,
+  "diagnostic_only": true,
+  "interpretation": "The request was explicitly rebound to a provider-supplied compressible plane for the same event, component, port, and source state. The adapter remains diagnostic; its near-field result is not independently validated and it does not create frequency or QRA claims."
+}

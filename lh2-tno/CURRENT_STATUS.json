@@ -4365,5 +4365,66 @@
     1.0
   ],
   "g1_source_state_recheck_promotion_policy": "diagnostic-only; no initiating frequency applied; no provider qualification, independent physical validation or facility IR/F-N promotion",
-  "remaining_failed_reason": "baseline 24-case campaign retains the original G1 packet failure for audit; a separate source-state-bound G1 recheck now executes end-to-end diagnostically, while qualified provider evidence and independent near-field validation remain absent"
+  "remaining_failed_reason": "baseline 24-case campaign retains the original G1 packet failure for audit; a separate source-state-bound G1 recheck now executes end-to-end diagnostically, while qualified provider evidence and independent near-field validation remain absent",
+  "latest_generic_source_state_closure_rebound_record": {
+    "record": "results/20261109/generic_scope_campaign_source_state_closure_rebound_g1_handoff_result.json",
+    "documentation": "docs/PRISM_generic_campaign_source_state_closure_rebound_20261109.md",
+    "status": "PARTIAL_DECLARED_SCOPE",
+    "fresh_physics_cases": 24,
+    "case_statuses": {
+      "EXECUTED_OPERATOR_LIMITED": 20,
+      "EXECUTED": 4
+    },
+    "failed_case_count": 0,
+    "numerically_executed_case_count": 24,
+    "qualified_provider_packet_case_count": 0,
+    "g1": {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "status": "EXECUTED_OPERATOR_LIMITED",
+      "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+      "provider_result_digest": "83ffcc0aa63a9ed3fe2bdd44124cba70493664ab422706be9d3d8293b78c5b28",
+      "termination_basis": "inventory_depletion",
+      "duration_s": 1.0999999999999999,
+      "released_mass_kg": 0.003586947090723784,
+      "end_to_end_residual_kg": 0.0,
+      "reason": "source operator has declared constant-state or open physical closure limitations"
+    },
+    "g2": {
+      "status": "EXECUTED",
+      "termination_basis": "inventory_over_600s",
+      "closure_note": "600 s inventory_over_600s horizon; isolation success and post-isolation observation are not declared"
+    },
+    "g3": {
+      "status": "EXECUTED",
+      "termination_basis": "inventory_depletion"
+    },
+    "g6": {
+      "status": "EXECUTED",
+      "termination_basis": "inventory_depletion"
+    },
+    "timing": {
+      "fresh_physics_cases": 24,
+      "case_min_ms": 1510.923299996648,
+      "case_median_ms": 4481.290100000479,
+      "case_max_ms": 24649.332399996638,
+      "case_p95_ms": 20698.0906800003,
+      "case_p99_ms": 23980.77391999752,
+      "campaign_elapsed_ms": 171188.607899996,
+      "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+    },
+    "facility_qra_claim": false,
+    "physical_validation_claim": false,
+    "promotion_policy": "diagnostic-only; no qualified provider promotion, no independent physical validation and no facility IR/F-N promotion"
+  },
+  "latest_generic_source_state_closure_rebound_status": "DIAGNOSTIC_CHAIN_EXECUTED; 24 fresh physics cases, 4 EXECUTED and 20 EXECUTED_OPERATOR_LIMITED; G1 source-state handoff rebound, G3/G6 inventory depletion rebound, G2 remains 600 s horizon; provider qualification, independent physical validation and facility QRA withheld",
+  "latest_generic_source_state_closure_rebound_timing": {
+    "fresh_physics_cases": 24,
+    "case_min_ms": 1510.923299996648,
+    "case_median_ms": 4481.290100000479,
+    "case_max_ms": 24649.332399996638,
+    "case_p95_ms": 20698.0906800003,
+    "case_p99_ms": 23980.77391999752,
+    "campaign_elapsed_ms": 171188.607899996,
+    "distribution": "across cases in one campaign execution; p95/p99 are not repeated-run latency or service-level qualification"
+  }
 }

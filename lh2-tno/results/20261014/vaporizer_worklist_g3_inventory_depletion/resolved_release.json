@@ -1,0 +1,71 @@
+{
+  "provider_export_schema": "prism.resolved_release.v1",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+  "event_kind": "accidental_leak",
+  "upstream_service": "LH2",
+  "upstream_service_provenance": "explicit external lh2dt.DynamicVaporizer inventory-defined diagnostic (instantaneous_inventory); not site-calibrated",
+  "state_owner": "equipment_twin",
+  "discharge_owner": "equipment_twin",
+  "boundary_kind": "resolved_atmospheric_gas_exit",
+  "enthalpy_convention": "static_exit_enthalpy",
+  "property_basis": {
+    "fluid": "Hydrogen",
+    "backend": "CoolProp-HEOS",
+    "energy_reference": "CoolProp-HEOS:Hydrogen:native"
+  },
+  "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "provider_result_digest": "fa5fabfb188ce05ee906adfbd3f53ce7ffadd71acdfddd7f1e17a575c14d8d51",
+  "provider_boundary_reference": "lh2dt.DynamicVaporizer explicit inventory outlet",
+  "input_origin": "model_prediction",
+  "position_enu_m": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "direction_enu": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "ambient_pressure_pa_abs": 101325.0,
+  "ambient_temperature_k": 288.15,
+  "duration_s": 0.1,
+  "available_mass_kg": 2.888758746283813e-05,
+  "cumulative_mass_out_kg": 2.888758746283813e-05,
+  "cumulative_static_enthalpy_out_j": 114.34526160782035,
+  "steps": [
+    {
+      "time_s": 0.0,
+      "mass_flow_kg_s": 0.0002888758746283813,
+      "pressure_pa_abs": 101325.0,
+      "specific_enthalpy_j_kg": 3958283.5276541375,
+      "temperature_k": 300.0002044224795,
+      "density_kg_m3": 0.08184043204976539,
+      "effective_area_m2": 3.9269908169872414e-05,
+      "velocity_m_s": 89.88422418717339,
+      "area_provenance": "explicit atmospheric valve area; inventory event does not promote this as failure opening",
+      "velocity_origin": "mass_continuity_from_declared_area",
+      "provider_source_state": null,
+      "provider_port_state": null
+    }
+  ],
+  "termination_provenance": "external lh2dt.DynamicVaporizer finite-volume releasable-inventory ledger; atmospheric-pressure equilibrium residual is retained",
+  "termination_basis": "inventory_depletion",
+  "provider_mass_balance": {
+    "schema_version": "prism.provider_mass_balance.v1",
+    "initial_mass_kg": 0.0008238536226639276,
+    "cumulative_mass_in_kg": null,
+    "cumulative_mass_out_kg": 2.888758746283813e-05,
+    "final_mass_kg": 0.0007949660352010895,
+    "reported_residual_mass_kg": 2.0328790734103208e-20,
+    "derived_accounting_residual_kg": 0.0,
+    "isolation_time_s": null,
+    "post_isolation_observation_s": null,
+    "isolation_success": null
+  },
+  "vertical_handoff": null,
+  "compressible_plane_handoff": null,
+  "failure_opening_diameter_m": 0.01
+}

@@ -1,0 +1,305 @@
+{
+  "schema_version": "prism.native_scope_packet_evidence.v1",
+  "status": "CUSTOM_SOURCE_STATE_AND_INVENTORY_CLOSURE_DIAGNOSTIC",
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/000_storage-tank-01_AREA_0.01pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/001_storage-tank-01_AREA_0.1pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/002_storage-tank-01_AREA_1pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/003_storage-tank-01_AREA_10pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/004_storage-tank-01_AREA_100pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/005_liquid-transfer-line-01_AREA_0.01pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/006_liquid-transfer-line-01_AREA_0.1pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/007_liquid-transfer-line-01_AREA_1pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/008_liquid-transfer-line-01_AREA_10pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/009_liquid-transfer-line-01_AREA_100pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/010_transfer-valve-01_AREA_0.01pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/011_transfer-valve-01_AREA_0.1pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/012_transfer-valve-01_AREA_1pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/013_transfer-valve-01_AREA_10pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/014_transfer-valve-01_AREA_100pct/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/015_pressure-relief-vent-01_G1/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/016_liquid-transfer-pump-01_G1/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/017_liquid-transfer-pump-01_G2/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "../../20261109/g1_source_state_native_export/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/019_ambient-vaporizer-01_G2/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "../../20261014/vaporizer_worklist_g3_inventory_depletion/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/021_reliquefier-01_G4/resolved_release_set.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "events/022_reliquefier-01_G5/resolved_release_set.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "evidence": {
+        "exact_opening_match": true,
+        "strict_packet_valid": true,
+        "resolved_packet_paths": [
+          "../../20261014/reliquefier_worklist_g6_inventory_depletion/resolved_release.json"
+        ],
+        "state_snapshot_binding_status": "BOUND_AND_ECHOED"
+      }
+    }
+  ],
+  "event_count": 24,
+  "exact_event_count": 24,
+  "blocking_event_ids": [],
+  "frequency_bound": false,
+  "qualified_provider_packet_count": 0,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "catalog_record": "results\\20261031\\native_generic_scope_packets_pipefix\\verification.json",
+  "state_snapshot_audit_record": "results\\20261031\\native_generic_scope_packets_pipefix\\state_snapshot_binding_audit.json",
+  "custom_rebind_note": "G1 uses a new provider export with source digest b566... and explicit source/throat states; G3/G6 use provider-owned inventory-depletion packets. This is an exact event/component/port rebind, not a frequency or qualification promotion."
+}

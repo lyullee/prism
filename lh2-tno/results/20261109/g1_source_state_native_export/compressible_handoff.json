@@ -1,0 +1,200 @@
+{
+  "schema_version": "prism.compressible_plane_handoff.v1",
+  "component_id": "ambient-vaporizer-01",
+  "port_id": "vaporizer-accident-out",
+  "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "upstream_provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+  "upstream_provider_result_digest": "83ffcc0aa63a9ed3fe2bdd44124cba70493664ab422706be9d3d8293b78c5b28",
+  "handoff_provider_source_digest": "1edab466cbe43b7036e4cdaf65285a56615b1749cd594cb2e462bb9806e6cd05",
+  "handoff_provider_result_digest": "a0e33f937a9a24f83577a192173dd648b1c9d7a3a06b1af663e291be26ca209f",
+  "handoff_model": "prism-notional-plane-adapter",
+  "handoff_revision": "0.1.0",
+  "evidence_status": "synthetic_diagnostic",
+  "scenario_provenance": "Optional source-state notional-plane diagnostic; provider source/throat states were captured, but provider qualification and independent near-field validation are pending",
+  "handoff": {
+    "position_enu_m": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "direction_enu": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "velocity_m_s": 1818.576158123728,
+    "density_kg_m3": 0.16142039613138137,
+    "temperature_k": 152.10017551812115,
+    "h2_mass_fraction": 1.0,
+    "half_width_m": 0.0018994025003739887,
+    "depth_m": 0.0037988050007479774,
+    "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result",
+    "states": [
+      {
+        "time_s": 0.0,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1818.576158123728,
+        "density_kg_m3": 0.16142039613138137,
+        "temperature_k": 152.10017551812115,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0018994025003739887,
+        "depth_m": 0.0037988050007479774,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.1,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1748.0565231106884,
+        "density_kg_m3": 0.16349583349425742,
+        "temperature_k": 150.17082695715422,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0025494116801623033,
+        "depth_m": 0.005098823360324607,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.2,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1593.7135730287082,
+        "density_kg_m3": 0.16324011454171963,
+        "temperature_k": 150.40589191493572,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.002338856726357246,
+        "depth_m": 0.004677713452714492,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.30000000000000004,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1467.542451800473,
+        "density_kg_m3": 0.15750981499406277,
+        "temperature_k": 155.8738643594897,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0021988050645125657,
+        "depth_m": 0.0043976101290251314,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.4,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1333.5887486217853,
+        "density_kg_m3": 0.14700354508346236,
+        "temperature_k": 167.0081280275656,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0021349830683167247,
+        "depth_m": 0.004269966136633449,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.5,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1212.9226024753143,
+        "density_kg_m3": 0.13562023401449336,
+        "temperature_k": 181.02158784809978,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0020951283434741835,
+        "depth_m": 0.004190256686948367,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.6,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 1072.6532125808865,
+        "density_kg_m3": 0.12420494203689232,
+        "temperature_k": 197.65682852798412,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.002096720096667464,
+        "depth_m": 0.004193440193334928,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.7,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 895.4231578631936,
+        "density_kg_m3": 0.11382768918114745,
+        "temperature_k": 215.6773252411414,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0021582144698827775,
+        "depth_m": 0.004316428939765555,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.7999999999999999,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 737.6208107826732,
+        "density_kg_m3": 0.10500091253770094,
+        "temperature_k": 233.81094204398815,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0022155673136315442,
+        "depth_m": 0.0044311346272630885,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.8999999999999999,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 589.5826337139567,
+        "density_kg_m3": 0.0972679651346004,
+        "temperature_k": 252.40380049037745,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.0022155673136316917,
+        "depth_m": 0.004431134627263383,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      },
+      {
+        "time_s": 0.9999999999999999,
+        "direction_enu": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "velocity_m_s": 386.3564756725075,
+        "density_kg_m3": 0.09082171507855202,
+        "temperature_k": 270.3240210534659,
+        "h2_mass_fraction": 1.0,
+        "half_width_m": 0.002215567313631771,
+        "depth_m": 0.004431134627263542,
+        "provenance": "prism-notional-plane-adapter:0.1.0; birch_momentum_energy; provider source/throat state; not an independently validated near-field result"
+      }
+    ]
+  }
+}
