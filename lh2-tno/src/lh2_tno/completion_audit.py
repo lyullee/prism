@@ -4911,6 +4911,38 @@ def build_ijhe_completion_audit(
             and isinstance(row.get("facility_qra_blocking_reasons"), list)
             for row in rows
         )
+        request_rows = None
+        if isinstance(facility_evidence_request, Mapping):
+            candidate_requests = facility_evidence_request.get("case_requests")
+            if isinstance(candidate_requests, list):
+                request_rows = candidate_requests
+        boundary_keys = {
+            (
+                row.get("event_id"),
+                row.get("annual_condition_id"),
+                row.get("release_branch_id"),
+            )
+            for row in rows
+            if isinstance(row, Mapping)
+        }
+        request_keys = (
+            {
+                (
+                    row.get("event_id"),
+                    row.get("annual_condition_id"),
+                    row.get("release_branch_id"),
+                )
+                for row in request_rows
+                if isinstance(row, Mapping)
+            }
+            if request_rows is not None
+            else None
+        )
+        request_alignment = (
+            None
+            if request_keys is None
+            else bool(request_keys) and request_keys == boundary_keys and len(request_keys) == case_count
+        )
         boundary_valid = (
             boundary.get("schema_version") == "prism.release_boundary_case_audit.v1"
             and boundary.get("status") in {"CASE_BOUNDARY_PARTIAL", "CASE_BOUNDARY_CLOSED"}
@@ -4924,6 +4956,7 @@ def build_ijhe_completion_audit(
             and blocked_count >= 0
             and eligible_count + blocked_count == case_count
             and rows_safe
+            and (request_alignment is None or request_alignment)
             and boundary.get("provider_qualification_claim") is False
             and boundary.get("independent_physical_validation_claim") is False
             and boundary.get("frequency_inference_performed") is False
@@ -4942,6 +4975,10 @@ def build_ijhe_completion_audit(
                     "source_release_ledger_row_count"
                 ),
                 "source_alignment_status": boundary.get("source_alignment_status"),
+                "facility_evidence_request_alignment": request_alignment,
+                "facility_evidence_request_case_count": (
+                    len(request_rows) if request_rows is not None else None
+                ),
                 "strict_release_boundary_eligible_case_count": eligible_count,
                 "strict_release_boundary_blocked_case_count": blocked_count,
                 "termination_basis_counts": boundary.get("termination_basis_counts"),

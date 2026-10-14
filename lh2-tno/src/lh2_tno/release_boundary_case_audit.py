@@ -188,6 +188,8 @@ def build_release_boundary_case_audit(
         rows.append({
             "event_id": ledger_row.get("event_id"),
             "case_key": _case_key(ledger_row),
+            "release_branch_id": ledger_row.get("release_branch_id"),
+            "annual_condition_id": ledger_row.get("annual_condition_id"),
             "asset_id": ledger_row.get("asset_id"),
             "model_component_id": identity.get("component_id"),
             "frequency_port_ids": list(case.get("frequency_port_ids", [])) if isinstance(case.get("frequency_port_ids"), list) else [],

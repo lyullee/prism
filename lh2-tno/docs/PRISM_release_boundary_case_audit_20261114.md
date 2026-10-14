@@ -7,19 +7,19 @@
 
 ## 현재 권위 실행
 
-입력은 다음 시설 평가입니다.
+IJHE용 권위 입력은 전체 union 시설 평가입니다.
 
-`results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/facility_assessment.json`
+`results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json`
 
 재현 명령:
 
 ```powershell
 python scripts/audit_release_boundary_cases.py `
-  --facility-assessment results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/facility_assessment.json `
-  --output results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json
+  --facility-assessment results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/facility_assessment.json `
+  --output results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json
 ```
 
-전체 union 결과는 [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)이며, 24개 native isolation subset 결과도 [`release_boundary_case_audit_fullscope_hazop_port_bound.json`](../results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json)으로 보존합니다.
+전체 union 결과는 [`release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/release_boundary_case_audit_union_fullscope_hazop_port_bound_state_bound.json)이며, 24개 native isolation subset 결과도 [`release_boundary_case_audit_fullscope_hazop_port_bound.json`](../results/20261114/release_boundary_case_audit_fullscope_hazop_port_bound.json)으로 보존합니다. IJHE 완료 감사는 전체 union 결과를 사용하고, 44개 case 요청과 복합키 정렬도 함께 확인합니다.
 
 - 전체 union 총 44개 case
 - 개별 방출 경계 조건을 만족한 case 3개

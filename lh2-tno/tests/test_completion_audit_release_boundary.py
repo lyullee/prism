@@ -71,3 +71,42 @@ def test_completion_audit_rejects_boundary_audit_with_unsafe_promotion_flag():
     )
     assert check["status"] == "BLOCKED"
     assert "unsafe promotion" in check["blocking_reason"]
+
+
+def test_completion_audit_cross_checks_boundary_rows_against_case_requests():
+    audit = _audit()
+    audit["rows"] = [
+        {
+            "event_id": "e1",
+            "annual_condition_id": "weather-1",
+            "release_branch_id": "branch-1",
+            "strict_release_boundary_eligible": True,
+            "facility_qra_promotion_eligible": False,
+            "facility_qra_blocking_reasons": ["model_prediction"],
+        },
+        {
+            "event_id": "e2",
+            "annual_condition_id": "weather-1",
+            "release_branch_id": "branch-1",
+            "strict_release_boundary_eligible": False,
+            "facility_qra_promotion_eligible": False,
+            "facility_qra_blocking_reasons": ["operator_limited"],
+        },
+    ]
+    report = build_ijhe_completion_audit(
+        _status(),
+        {"matrix_complete": False, "blocking_reasons": ["scope open"]},
+        {"events": [], "cases": [], "timing": {}},
+        facility_evidence_request={
+            "case_requests": [
+                {"event_id": "e1", "annual_condition_id": "weather-1", "release_branch_id": "branch-1"},
+                {"event_id": "e2", "annual_condition_id": "weather-1", "release_branch_id": "branch-1"},
+            ]
+        },
+        release_boundary_case_audit=audit,
+    )
+    check = next(
+        row for row in report["checks"] if row["name"] == "diagnostic_release_boundary_case_audit"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["facility_evidence_request_alignment"] is True
