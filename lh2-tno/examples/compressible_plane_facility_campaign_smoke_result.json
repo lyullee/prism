@@ -1,0 +1,34 @@
+{
+  "schema_version": "prism.compressible_plane_facility_campaign_smoke.v1",
+  "status": "COMPRESSIBLE_PLANE_FACILITY_CAMPAIGN_EXECUTED_DIAGNOSTIC",
+  "facility_result_status": "PARTIAL_DECLARED_SCOPE",
+  "facility_id": "generic-lh2-full-scope-example",
+  "campaign_id": "equipment-manifest-event-provider-campaign",
+  "handoff_event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+  "handoff_consumed": true,
+  "event_count": 24,
+  "case_count": 24,
+  "chain_executed_case_count": 24,
+  "uncomputed_case_count": 23,
+  "case_statuses": {
+    "EXECUTED_OPERATOR_LIMITED": 20,
+    "EXECUTED": 4
+  },
+  "packet_identity_consumed": true,
+  "compressible_handoff_rebind": {
+    "consumed": true,
+    "original_provider_result_digest": "7554c951adb33574fd3c0631bc61c3383fb6292cdd49abdfa85d535e60e02d0d",
+    "handoff_provider_result_digest": "227caf76e92d93ed99e3653a2c20ccdbe81bc30c16328594c33d4c7e406ee885",
+    "frequency_inference": false,
+    "physical_validation_claim": false
+  },
+  "known_contribution_annual_ir_low_high": {
+    "worker-01": [0.0, 0.0]
+  },
+  "total_facility_annual_ir_low_high": null,
+  "total_facility_expected_death_fn_low_high": null,
+  "campaign_elapsed_ms": 206357.38539999875,
+  "provider_packet_promoted": false,
+  "facility_qra_claim": false,
+  "interpretation": "The explicit G1 compressible handoff was consumed by a 24-event facility campaign. The campaign frequencies remain external inputs and the complete facility totals stay withheld by the open qualification and scope gates."
+}

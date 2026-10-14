@@ -58,3 +58,22 @@ python scripts/build_compressible_plane_handoff.py `
 - 1 Hz 신규 물리 계산 성능
 
 따라서 이 경로의 결과는 IJHE 원고에서 “provider-resolved source history를 피해영향 체인으로 전달하는 diagnostic integration”을 보여주는 데 사용할 수 있지만, qualified facility QRA나 독립 물리검증 결과로 인용하면 안 된다.
+
+## 시설 campaign까지 연결한 확인
+
+단일 사건 chain을 시설 campaign에 넣을 때는 `scripts/run_compressible_plane_facility_campaign.py`를 사용한다. 이 명령은 한 event만 handoff packet으로 재결합하고, campaign이 소유한 문헌/조건부 빈도를 그대로 둔 채 24개 사건을 시설 위험엔진에 전달한다.
+
+```powershell
+python scripts/run_compressible_plane_facility_campaign.py `
+  --manifest examples/generic_lh2_full_scope_manifest.json `
+  --campaign <compiled_campaign.json> `
+  --handoff-packet <resolved_release_with_handoff.json> `
+  --event-id generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1 `
+  --backend-config results/20261008/full_chain/backend_config.json `
+  --output results/diagnostic/compressible_facility_result.json `
+  --provenance-output results/diagnostic/compressible_facility_provenance.json `
+  --ledger-output results/diagnostic/compressible_facility_ledger.json `
+  --refresh-pins
+```
+
+실행 스냅샷은 [`examples/compressible_plane_facility_campaign_smoke_result.json`](../examples/compressible_plane_facility_campaign_smoke_result.json)이다. 24개 event와 24개 case가 원장에 기록되고, 24개 chain이 실행되며, G1 handoff의 원본·재결합 provider digest가 서로 다른 값으로 보존된다. 결과는 `PARTIAL_DECLARED_SCOPE`이고 20개 case는 `EXECUTED_OPERATOR_LIMITED`, 4개는 `EXECUTED`로 기록되었다. `total_facility_annual_ir_low_high`와 F/N은 `null`로 남으며, 이는 provider qualification·독립 물리검증·엄격한 시설범위 gate가 열려 있기 때문이다. `uncomputed_case_count=23`은 해당 case의 진단 chain 실행 여부와 별개로 qualified evidence가 없어 승격할 수 없는 case 수를 뜻한다.
