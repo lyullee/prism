@@ -280,6 +280,64 @@ def test_completion_audit_blocks_external_document_promotion_claim():
     assert check["status"] == "BLOCKED"
 
 
+def _external_release_artifact_intake():
+    return {
+        "schema_version": "prism.external_release_artifact_intake.v1",
+        "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
+        "diagnostic_only": True,
+        "artifact_file_count": 2,
+        "release_row_count": 2,
+        "qualified_sidecar_row_count": 0,
+        "actual_origin_row_count": 0,
+        "synthetic_or_model_prediction_row_count": 2,
+        "error_count": 0,
+        "artifacts": [
+            {"diagnostic_only": True, "qualification_bound": False},
+            {"diagnostic_only": True, "qualification_bound": False},
+        ],
+        "promotion_policy": {
+            "frequency_assigned": False,
+            "provider_release_packet_promoted": False,
+            "physical_validation_promoted": False,
+            "facility_qra_promoted": False,
+            "qualification_requires_exact_digest_bound_sidecar": True,
+            "provider_ports_never_substituted_for_frequency_ports": True,
+        },
+    }
+
+
+def test_completion_audit_records_external_release_artifact_inventory_without_promotion():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_release_artifact_intake=_external_release_artifact_intake(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_release_artifact_intake"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
+def test_completion_audit_blocks_external_release_artifact_promotion_claim():
+    intake = _external_release_artifact_intake()
+    intake["promotion_policy"]["facility_qra_promoted"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        external_release_artifact_intake=intake,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_external_release_artifact_intake"
+    )
+    assert check["status"] == "BLOCKED"
+
+
 def _facility_evidence_request():
     return {
         "schema_version": "prism.facility_evidence_request.v1",

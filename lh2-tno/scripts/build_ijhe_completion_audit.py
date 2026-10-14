@@ -154,6 +154,11 @@ def main() -> int:
         help="optional provenance-only audit of external equipment documents",
     )
     parser.add_argument(
+        "--external-release-artifact-intake",
+        type=Path,
+        help="optional provenance-only inventory of external release-shaped JSON artifacts",
+    )
+    parser.add_argument(
         "--facility-evidence-request",
         type=Path,
         help="optional exact facility-case evidence-request coverage audit",
@@ -430,6 +435,15 @@ def main() -> int:
         )
         if external_document_evidence is not None:
             external_document_evidence["_record_path"] = str(args.external_document_evidence)
+        external_release_artifact_intake = (
+            _object(args.external_release_artifact_intake)
+            if args.external_release_artifact_intake
+            else None
+        )
+        if external_release_artifact_intake is not None:
+            external_release_artifact_intake["_record_path"] = str(
+                args.external_release_artifact_intake
+            )
         facility_evidence_request = (
             _object(args.facility_evidence_request)
             if args.facility_evidence_request
@@ -479,6 +493,7 @@ def main() -> int:
             hazop_forecast_scan=hazop_forecast_scan,
             realtime_hazop_mode_trace=realtime_hazop_mode_trace,
             external_document_evidence=external_document_evidence,
+            external_release_artifact_intake=external_release_artifact_intake,
             facility_evidence_request=facility_evidence_request,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:

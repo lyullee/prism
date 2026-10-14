@@ -1,0 +1,239 @@
+"""Inventory external LH2 release artifacts without promoting QRA evidence.
+
+External digital-twin workspaces contain useful release-shaped JSON files, but
+those files are not automatically qualified provider packets.  This module
+records the exact file digest, release identity and termination metadata while
+requiring a separate ``prism.provider_qualification_evidence.v1`` sidecar
+before any packet can be considered for PRISM promotion.  It never assigns a
+frequency, infers an accident, or marks facility QRA as available.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+from typing import Any, Iterable, Mapping
+
+
+SCHEMA = "prism.external_release_artifact_intake.v1"
+RELEASE_SCHEMA = "prism.resolved_release.v1"
+RELEASE_SET_SCHEMA = "prism.resolved_release_set.v1"
+QUALIFICATION_SCHEMA = "prism.provider_qualification_evidence.v1"
+
+
+class ExternalReleaseArtifactIntakeError(ValueError):
+    """Raised when an intake request cannot be evaluated safely."""
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    try:
+        with path.open("rb") as handle:
+            for block in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(block)
+    except OSError as error:
+        raise ExternalReleaseArtifactIntakeError(f"cannot read artifact: {path}") from error
+    return digest.hexdigest()
+
+
+def _read_json(path: Path) -> Any:
+    raw = path.read_bytes()
+    last_error: Exception | None = None
+    for encoding in ("utf-8-sig", "cp949"):
+        try:
+            return json.loads(raw.decode(encoding))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            last_error = error
+    raise ExternalReleaseArtifactIntakeError(f"invalid JSON artifact: {path}") from last_error
+
+
+def _contains_qualification(value: Any) -> bool:
+    if isinstance(value, Mapping):
+        if value.get("schema_version") == QUALIFICATION_SCHEMA:
+            return True
+        return any(_contains_qualification(item) for item in value.values())
+    if isinstance(value, list):
+        return any(_contains_qualification(item) for item in value)
+    return False
+
+
+def _release_like(value: Any) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    if value.get("provider_export_schema") in {RELEASE_SCHEMA, RELEASE_SET_SCHEMA}:
+        return True
+    required = {"event_id", "component_id", "port_id", "duration_s", "steps"}
+    return required.issubset(value) and isinstance(value.get("steps"), list)
+
+
+def _walk_releases(value: Any, pointer: str = "") -> list[tuple[str, Mapping[str, Any]]]:
+    rows: list[tuple[str, Mapping[str, Any]]] = []
+    if isinstance(value, Mapping):
+        if _release_like(value):
+            rows.append((pointer or "$", value))
+            # A resolved-release row is a leaf for intake purposes.
+            return rows
+        for key, child in value.items():
+            child_pointer = f"{pointer}.{key}" if pointer else f"$.{key}"
+            rows.extend(_walk_releases(child, child_pointer))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            rows.extend(_walk_releases(child, f"{pointer}[{index}]"))
+    return rows
+
+
+def _candidate_files(paths: Iterable[str | Path], roots: Iterable[str | Path]) -> list[Path]:
+    found: dict[str, Path] = {}
+    for value in paths:
+        path = Path(value).resolve()
+        if path.is_file():
+            found[str(path).casefold()] = path
+    for value in roots:
+        root = Path(value).resolve()
+        if root.is_file():
+            found[str(root).casefold()] = root
+        elif root.is_dir():
+            for path in root.rglob("*.json"):
+                if "resolved_release" in path.name.casefold():
+                    found[str(path).casefold()] = path
+    return sorted(found.values(), key=lambda item: str(item).casefold())
+
+
+def _nearby_qualification(path: Path) -> tuple[bool, list[str]]:
+    matches: list[str] = []
+    # Sidecars are deliberately searched only in the artifact directory and
+    # one explicit parent.  A qualification record elsewhere must be supplied
+    # and digest-bound by the provider packet audit instead of being guessed.
+    candidates = set(path.parent.glob("*.json"))
+    candidates.update(path.parent.parent.glob("*.json"))
+    for candidate in sorted(candidates):
+        if candidate == path:
+            continue
+        try:
+            if _contains_qualification(_read_json(candidate)):
+                matches.append(str(candidate))
+        except ExternalReleaseArtifactIntakeError:
+            continue
+    return bool(matches), matches
+
+
+def audit_external_release_artifacts(
+    paths: Iterable[str | Path] = (),
+    roots: Iterable[str | Path] = (),
+) -> dict[str, Any]:
+    """Return a digest-bound inventory of release-shaped external JSON files."""
+
+    files = _candidate_files(paths, roots)
+    if not files:
+        raise ExternalReleaseArtifactIntakeError(
+            "at least one release artifact file or directory is required"
+        )
+
+    artifacts: list[dict[str, Any]] = []
+    errors: list[dict[str, str]] = []
+    for path in files:
+        try:
+            payload = _read_json(path)
+            digest = _sha256(path)
+        except ExternalReleaseArtifactIntakeError as error:
+            errors.append({"path": str(path), "error": str(error)})
+            continue
+        releases = _walk_releases(payload)
+        qualification_present, qualification_paths = _nearby_qualification(path)
+        if not releases:
+            artifacts.append({
+                "path": str(path),
+                "sha256": digest,
+                "release_count": 0,
+                "qualification_sidecar_present": qualification_present,
+                "qualification_sidecar_paths": qualification_paths,
+                "diagnostic_only": True,
+                "blocking_reasons": ["no release-shaped record found"],
+            })
+            continue
+        for pointer, release in releases:
+            schema = release.get("provider_export_schema")
+            shape_valid = all(
+                isinstance(release.get(key), expected)
+                for key, expected in (
+                    ("event_id", str),
+                    ("component_id", str),
+                    ("port_id", str),
+                    ("duration_s", (int, float)),
+                    ("steps", list),
+                )
+            )
+            origin = release.get("input_origin")
+            qualification_bound = qualification_present and schema == RELEASE_SCHEMA
+            reasons: list[str] = []
+            if not shape_valid:
+                reasons.append("release identity or time-series fields are incomplete")
+            if schema != RELEASE_SCHEMA:
+                reasons.append("provider export schema is missing or not prism.resolved_release.v1")
+            if origin in {"synthetic", "model_prediction", None}:
+                reasons.append("input_origin is not a qualified observed/provider export")
+            if not qualification_present:
+                reasons.append("no nearby prism.provider_qualification_evidence.v1 sidecar")
+            artifacts.append({
+                "path": str(path),
+                "sha256": digest,
+                "item_pointer": pointer,
+                "provider_export_schema": schema,
+                "event_id": release.get("event_id"),
+                "component_id": release.get("component_id"),
+                "port_id": release.get("port_id"),
+                "input_origin": origin,
+                "termination_basis": release.get("termination_basis"),
+                "duration_s": release.get("duration_s"),
+                "available_mass_kg": release.get("available_mass_kg"),
+                "provider_source_digest": release.get("provider_source_digest"),
+                "provider_result_digest": release.get("provider_result_digest"),
+                "release_shape_valid": shape_valid,
+                "qualification_sidecar_present": qualification_present,
+                "qualification_sidecar_paths": qualification_paths,
+                "qualification_bound": qualification_bound,
+                "diagnostic_only": True,
+                "blocking_reasons": reasons,
+            })
+
+    release_rows = [row for row in artifacts if row.get("release_count", 1) > 0]
+    qualified_rows = [row for row in release_rows if row.get("qualification_bound") is True]
+    actual_origin_rows = [
+        row for row in release_rows
+        if row.get("input_origin") in {"observed", "measured", "qualified_actual", "provider_actual"}
+    ]
+    return {
+        "schema_version": SCHEMA,
+        "status": (
+            "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION"
+            if release_rows
+            else "NO_RELEASE_SHAPED_EXTERNAL_ARTIFACTS"
+        ),
+        "diagnostic_only": True,
+        "artifact_file_count": len(files),
+        "release_row_count": len(release_rows),
+        "qualified_sidecar_row_count": len(qualified_rows),
+        "actual_origin_row_count": len(actual_origin_rows),
+        "synthetic_or_model_prediction_row_count": sum(
+            1 for row in release_rows if row.get("input_origin") in {"synthetic", "model_prediction"}
+        ),
+        "error_count": len(errors),
+        "artifacts": artifacts,
+        "errors": errors,
+        "promotion_policy": {
+            "frequency_assigned": False,
+            "provider_release_packet_promoted": False,
+            "physical_validation_promoted": False,
+            "facility_qra_promoted": False,
+            "qualification_requires_exact_digest_bound_sidecar": True,
+            "provider_ports_never_substituted_for_frequency_ports": True,
+        },
+        "blocking_reasons": [
+            "external release artifacts are inventory evidence only until exact provider qualification is bound",
+            "synthetic or model-prediction releases cannot establish field/actual accident coverage",
+            "facility IR/F-N remains withheld while qualified provider packet coverage is incomplete",
+        ] if release_rows else ["no release-shaped external artifact was found"],
+    }
+
+
+__all__ = ["SCHEMA", "ExternalReleaseArtifactIntakeError", "audit_external_release_artifacts"]

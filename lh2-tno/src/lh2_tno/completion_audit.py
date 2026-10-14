@@ -93,6 +93,7 @@ def build_ijhe_completion_audit(
     hazop_forecast_scan: Mapping[str, Any] | None = None,
     realtime_hazop_mode_trace: Mapping[str, Any] | None = None,
     external_document_evidence: Mapping[str, Any] | None = None,
+    external_release_artifact_intake: Mapping[str, Any] | None = None,
     facility_evidence_request: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
@@ -3239,6 +3240,64 @@ def build_ijhe_completion_audit(
             "claim, or facility QRA result."
         )
         checks.append(document_check)
+    if external_release_artifact_intake is not None:
+        intake = external_release_artifact_intake
+        policy = intake.get("promotion_policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        artifact_file_count = intake.get("artifact_file_count")
+        release_row_count = intake.get("release_row_count")
+        intake_check_valid = (
+            intake.get("schema_version") == "prism.external_release_artifact_intake.v1"
+            and intake.get("status") == "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION"
+            and intake.get("diagnostic_only") is True
+            and isinstance(artifact_file_count, int)
+            and artifact_file_count > 0
+            and isinstance(release_row_count, int)
+            and release_row_count > 0
+            and intake.get("qualified_sidecar_row_count") == 0
+            and intake.get("actual_origin_row_count") == 0
+            and intake.get("error_count") == 0
+            and isinstance(intake.get("artifacts"), list)
+            and all(
+                isinstance(row, Mapping)
+                and row.get("diagnostic_only") is True
+                and row.get("qualification_bound") is False
+                for row in intake.get("artifacts", [])
+                if row.get("release_count", 1) > 0
+            )
+            and policy.get("frequency_assigned") is False
+            and policy.get("provider_release_packet_promoted") is False
+            and policy.get("physical_validation_promoted") is False
+            and policy.get("facility_qra_promoted") is False
+            and policy.get("qualification_requires_exact_digest_bound_sidecar") is True
+            and policy.get("provider_ports_never_substituted_for_frequency_ports") is True
+        )
+        intake_check = _check(
+            "diagnostic_external_release_artifact_intake",
+            intake_check_valid,
+            {
+                "record": intake.get("_record_path"),
+                "schema_version": intake.get("schema_version"),
+                "status": intake.get("status"),
+                "artifact_file_count": artifact_file_count,
+                "release_row_count": release_row_count,
+                "qualified_sidecar_row_count": intake.get("qualified_sidecar_row_count"),
+                "actual_origin_row_count": intake.get("actual_origin_row_count"),
+                "synthetic_or_model_prediction_row_count": intake.get(
+                    "synthetic_or_model_prediction_row_count"
+                ),
+                "error_count": intake.get("error_count"),
+                "policy": dict(policy),
+            },
+            "external release artifact intake is missing, malformed, or carries an unsafe promotion claim",
+        )
+        intake_check["diagnostic_only"] = True
+        intake_check["interpretation"] = (
+            "External release-shaped JSON is inventoried with exact file digests and equipment/port "
+            "identity. Synthetic or model-prediction rows remain diagnostic until a separate exact "
+            "provider qualification sidecar is present; no frequency or facility QRA is inferred."
+        )
+        checks.append(intake_check)
     if facility_evidence_request is not None:
         request = facility_evidence_request
         current = request.get("current_assessment")
