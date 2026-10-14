@@ -169,7 +169,7 @@ def test_forecast_runtime_evaluator_reuses_existing_provider_gate():
         tables_by_component={"TK-01": _table()},
         component_bindings={"TK-01": {"template": object(), "monitor": Monitor()}},
         release_resolvers={
-            "TK01-pressure-receiving:receiving:vessel_hole": lambda template, normalized: provider_request
+            ("TK-01", "TK01-pressure-receiving:receiving:vessel_hole"): lambda template, normalized: provider_request
         },
     )
     result = run_hazop_forecast_risk_scan(
@@ -182,6 +182,7 @@ def test_forecast_runtime_evaluator_reuses_existing_provider_gate():
     evaluation = result["steps"][0]["components"][0]["scenarios"][0]["quantitative_evaluation"]
     assert evaluation["status"] == "EVALUATED_OPERATOR_LIMITED"
     assert evaluation["result"]["status"] == "CONSEQUENCE_EVALUATED"
+    assert evaluation["result"]["forecast_resolver_binding"]["key_type"] == "component_scenario"
 
 
 def test_forecast_runtime_evaluator_reaches_real_slabx_monitor(tmp_path):

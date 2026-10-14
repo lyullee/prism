@@ -41,7 +41,12 @@
     "forecast_timing_fields": [
       "wall_elapsed_ms",
       "quantitative_evaluation_elapsed_ms"
-    ]
+    ],
+    "forecast_resolver_scope_support": [
+      "component_id",
+      "scenario_id"
+    ],
+    "forecast_resolver_scope_precedence": "component_scenario_then_scenario"
   },
   "example": {
     "record": "results/hazop_current/selection.json",
@@ -73,13 +78,13 @@
     "results/hazop_current/selection.json": "4EF5B229796C4B8BEF2BCC2A7C57B99B107EBFFB62FE849D39C7A11439C42D85",
     "results/hazop_current/forecast_scan.json": "B532C75F836D9A376938D6411E4161D6B42A95DFE925820709233174D939E1EC",
     "src/lh2_tno/hazop_campaign.py": "CEF0B218CD9F5C1F56DD8B36DE2BA1213230838AD127F2D1ACF164FF6CDCB195",
-    "src/lh2_tno/hazop_forecast.py": "EB3E4FFE0B7B7F1DB1A69A68404EA02E643CD25ACEDBE4D35521B0A49C432B2E",
+    "src/lh2_tno/hazop_forecast.py": "60591802954EF51AB89C04AEE72A7C8F17DBB92DB17FFC368A1D07D15AB87959",
     "scripts/scan_hazop_forecast.py": "0FA8B4EAB0EA35A223BE8CA604AB230827607DA3E9316BB505AD14124C517FC7",
     "examples/generic_hazop_tables_by_component.json": "5276C521F439CE7B4CE073BCC0AE1ED0218399595668A49056ADAB5F8B9DBD31",
     "examples/generic_hazop_forecast_frames.json": "97B8C0CB9F9C31B39B4932F830EA7B6EFB29F2B29FCDE07AD77EDD4661A26AC2",
     "src/lh2_tno/completion_audit.py": "D0B145A4A4A7453C3A95D2634D75DD6D98872B5CB72C63A31BC9F245860FA2F1",
     "scripts/build_ijhe_completion_audit.py": "18B3B32B8D7562171FE85159339053005CC534BC4E482CFE0E1A1749E2623419",
-    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "207BB435CB4E276DDCC5202516AFF37AB2D7A68CA7EF8A8AFEADC8564D72D462"
+    "docs/PRISM_HAZOP_운전모드_시나리오_연결.md": "F9F641AF6E36991A875694B1F1F5E06AB60A0FD4AF283E5322FCCD425B418F8B"
   },
   "policy": {
     "operating_mode_taken_from_input": true,

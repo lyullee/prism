@@ -3925,7 +3925,12 @@
       "forecast_timing_fields": [
         "wall_elapsed_ms",
         "quantitative_evaluation_elapsed_ms"
-      ]
+      ],
+      "forecast_resolver_scope_support": [
+        "component_id",
+        "scenario_id"
+      ],
+      "forecast_resolver_scope_precedence": "component_scenario_then_scenario"
     },
     "operating_mode_taken_from_input": true,
     "selected_scenario_count": 1,

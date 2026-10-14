@@ -77,6 +77,8 @@ python scripts/scan_hazop_forecast.py `
 
 생성된 scan은 `scripts/build_ijhe_completion_audit.py --hazop-forecast-scan`으로 IJHE 감사 원장에 넣을 수 있다. 감사 결과는 예측 trigger의 입력 모드·시간축·보류 회계를 확인하지만, 이 진단 check 자체로 시설 QRA를 승격하지 않는다.
 
+다설비 예측을 연결할 때 release resolver는 `(component_id, scenario_id)` 튜플을 키로 사용할 수 있다. 이 키가 있으면 같은 HAZOP 행 ID가 여러 설비에 재사용되어도 설비별 provider 방출이 섞이지 않는다. 단일 설비 예제에서는 기존 `scenario_id` 키도 호환되며, 실행 결과에는 실제로 선택된 resolver 키 범위가 기록된다.
+
 ## 결과 읽기
 
 | 결과 | 뜻 |

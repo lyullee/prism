@@ -229,7 +229,7 @@ def build_hazop_forecast_runtime_evaluator(
     *,
     tables_by_component: Mapping[str, Mapping[str, Any]],
     component_bindings: Mapping[str, Any],
-    release_resolvers: Mapping[str, Any],
+    release_resolvers: Mapping[Any, Any],
     mapping_digest: str | None = None,
 ) -> QuantitativeEvaluator:
     """Build a forecast callback backed by the existing runtime consequence gate.
@@ -238,7 +238,11 @@ def build_hazop_forecast_runtime_evaluator(
     narrows the HAZOP table to the selected row, and calls
     :func:`run_hazop_runtime_consequence`.  Provider release, termination,
     isolation, inventory and SLABx-LH2 remain owned by the existing monitor and
-    resolver; this helper does not create any of them.
+    resolver; this helper does not create any of them.  A resolver may be keyed
+    by ``(component_id, scenario_id)`` for facility-wide uniqueness, or by the
+    legacy ``scenario_id`` key for single-component integrations.  The scoped
+    key is checked first so a duplicated row ID cannot silently cross equipment
+    boundaries.
     """
     if not isinstance(tables_by_component, Mapping) or not tables_by_component:
         raise HazopForecastError("tables_by_component must be non-empty")
@@ -264,9 +268,16 @@ def build_hazop_forecast_runtime_evaluator(
                 f"forecast HAZOP table must contain exactly one selected row: {component_id}/{row_id}"
             )
         scenario_id = _name(scenario.get("scenario_id"), "forecast scenario_id")
-        resolver = release_resolvers.get(scenario_id)
+        resolver = release_resolvers.get((component_id, scenario_id))
+        resolver_key = "component_scenario"
         if resolver is None:
-            raise HazopForecastError(f"no release resolver is bound for forecast scenario {scenario_id}")
+            resolver = release_resolvers.get(scenario_id)
+            resolver_key = "scenario"
+        if resolver is None:
+            raise HazopForecastError(
+                "no release resolver is bound for forecast scenario "
+                f"{component_id}/{scenario_id}"
+            )
         template = _binding_value(binding, "template")
         monitor = _binding_value(binding, "monitor")
         if template is None or monitor is None:
@@ -276,7 +287,7 @@ def build_hazop_forecast_runtime_evaluator(
         runtime_frame = _runtime_frame_from_forecast(frame)
         forecast_time_s = _time(context.get("forecast_time_s"), "forecast context forecast_time_s")
         now_s = max(float(runtime_frame["captured_at_s"]), forecast_time_s)
-        return run_hazop_runtime_consequence(
+        result = run_hazop_runtime_consequence(
             narrowed_table,
             runtime_frame,
             now_s=now_s,
@@ -285,6 +296,14 @@ def build_hazop_forecast_runtime_evaluator(
             release_resolver=resolver,
             mapping_digest=mapping_digest,
         )
+        if isinstance(result, Mapping):
+            result = copy.deepcopy(dict(result))
+            result["forecast_resolver_binding"] = {
+                "key_type": resolver_key,
+                "component_id": component_id,
+                "scenario_id": scenario_id,
+            }
+        return result
 
     return evaluate
 
