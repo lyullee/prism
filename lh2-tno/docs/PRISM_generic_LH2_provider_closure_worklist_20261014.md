@@ -19,6 +19,8 @@ G3과 G6은 새 외부 `lh2dt` packet으로 재실행하여 다음처럼 종료 
 
 G2 packet의 `provider_result_digest`와 전체 질량수지는 기록되어 있지만, 잔류 재고가 있는 고정 관찰창을 실제 방출 종료로 바꾸지는 않는다. 따라서 G2의 빈도, 시설 연간 IR/F-N, 물리검증 자격은 자동으로 열리지 않는다.
 
+G2를 같은 동적 증발기에서 `inventory_depletion`으로 다시 계산하는 것은 별도 후보 packet을 만들 수 있지만, 현재 문헌 빈도 행은 `inventory_over_600s` 사건으로 정의되어 있다. 새 종료근거를 기존 빈도 유형에 임의로 끼워 넣지 않도록 이 후보는 캠페인에 결합하지 않는다. G2를 닫으려면 provider 종료근거와 함께 해당 사고 유형에 맞는 검토 빈도 포트가 필요하다.
+
 ## 다음에 받아야 할 provider 자료
 
 각 사건은 아래 조건을 모두 만족하는 새 `prism.resolved_release.v1` packet과 같은 결과를 가리키는 `verification.json`을 요구한다.
