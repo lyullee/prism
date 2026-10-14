@@ -238,3 +238,33 @@ def test_realtime_campaign_supports_multiple_annual_conditions_with_explicit_rev
     )
     assert ledger["population_accounting"]["referenced_condition_count"] == 2
     assert ledger["facility_total_risk_available"] is False
+
+
+def test_realtime_campaign_rejects_hazop_scenario_identity_drift(tmp_path):
+    snapshot = _snapshot(tmp_path)
+    conditions = _annual_conditions()
+    second = copy.deepcopy(conditions[0])
+    second.update(id="weather-2", annual_probability=0.4)
+    conditions[0]["annual_probability"] = 0.6
+    conditions.append(second)
+
+    current = _scenario_binding()
+    current.update(
+        consequence_basis="realtime_snapshot",
+        hazop_scenario_id="TK01-receiving",
+    )
+    reviewed = _scenario_binding(low=0.1)
+    reviewed.update(
+        annual_condition_id="weather-2",
+        consequence_basis="reviewed_annual_condition",
+        consequence_provenance="reviewed consequence fixture",
+        observed_harm_low_high={"worker-01": [0.07, 0.14]},
+        hazop_scenario_id="TK01-supply",
+    )
+    with pytest.raises(RealtimeCampaignBindingError, match="metadata conflicts"):
+        build_realtime_facility_campaign_result(
+            snapshot,
+            annual_conditions=conditions,
+            scenario_bindings=[current, reviewed],
+            expected_component_ids=("storage-tank-01",),
+        )

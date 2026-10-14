@@ -187,6 +187,12 @@ def test_hazop_runtime_can_enter_existing_facility_campaign_contract():
     assert result["campaign"]["provider_packet_promoted"] is False
     assert result["snapshot"]["components"]["TK-01"]["selected_operating_mode"] == "receiving"
     assert result["campaign"]["cases"][0]["operating_mode"] == "receiving"
+    assert result["campaign"]["cases"][0]["hazop_scenario_id"] == "TK01-high-pressure-receiving"
+    assert result["campaign"]["events"][0]["hazop_scenario_id"] == "TK01-high-pressure-receiving"
+    assert all(
+        atom["hazop_scenario_id"] == "TK01-high-pressure-receiving"
+        for atom in result["campaign"]["risk_atoms"]
+    )
     assert all(atom["operating_mode"] == "receiving" for atom in result["campaign"]["risk_atoms"])
     assert result["facility_ledger"]["conditional_diagnostic_facility_risk_available"] is True
     assert result["facility_ledger"]["facility_total_risk_available"] is False

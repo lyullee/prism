@@ -270,6 +270,15 @@ def _build_case_requests(
                     current["_reasons"].append(
                         "duplicate ledger rows carry conflicting operating modes"
                     )
+            current_hazop_id = current.get("hazop_scenario_id")
+            candidate_hazop_id = raw.get("hazop_scenario_id")
+            if candidate_hazop_id not in (None, ""):
+                if current_hazop_id in (None, ""):
+                    current["hazop_scenario_id"] = candidate_hazop_id
+                elif current_hazop_id != candidate_hazop_id:
+                    current["_reasons"].append(
+                        "duplicate ledger rows carry conflicting HAZOP scenario IDs"
+                    )
             current_frequency_ports = _port_ids(current.get("frequency_port_ids"))
             candidate_frequency_ports = _port_ids(raw.get("frequency_port_ids"))
             if candidate_frequency_ports is not None:
@@ -358,6 +367,7 @@ def _build_case_requests(
             "event_id": row.get("event_id"),
             "asset_id": row.get("asset_id"),
             "component_id": identity.get("component_id", row.get("component_id")),
+            "hazop_scenario_id": row.get("hazop_scenario_id"),
             "operating_mode": row.get("operating_mode"),
             "release_branch_id": row.get("release_branch_id"),
             "annual_condition_id": row.get("annual_condition_id"),
@@ -383,6 +393,7 @@ def _build_case_requests(
             "exact_match_required": {
                 "event_id": row.get("event_id"),
                 "component_id": identity.get("component_id", row.get("component_id")),
+                "hazop_scenario_id": row.get("hazop_scenario_id"),
                 "operating_mode": row.get("operating_mode"),
                 "port_ids": requested_port_ids or [],
                 "reviewed_frequency_port_ids": reviewed_frequency_port_ids,

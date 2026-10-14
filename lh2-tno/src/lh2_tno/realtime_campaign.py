@@ -583,6 +583,12 @@ def build_realtime_facility_campaign_result(
                     operating_mode,
                     f"scenario binding {component_id}[{binding_index}].operating_mode",
                 )
+            hazop_scenario_id = binding.get("hazop_scenario_id")
+            if hazop_scenario_id is not None:
+                hazop_scenario_id = _name(
+                    hazop_scenario_id,
+                    f"scenario binding {component_id}[{binding_index}].hazop_scenario_id",
+                )
 
             event = events_by_id.get(event_id)
             if event is None:
@@ -612,6 +618,8 @@ def build_realtime_facility_campaign_result(
                     "realtime_snapshot_digest": handoff["source_snapshot_digest"],
                     "physical_validation_claim": False,
                 }
+                if hazop_scenario_id is not None:
+                    event["hazop_scenario_id"] = hazop_scenario_id
                 events_by_id[event_id] = event
             elif (
                 event["asset_id"] != asset_id
@@ -629,6 +637,10 @@ def build_realtime_facility_campaign_result(
                 or event.get("source_sha256")
                 != (atom.get("frequency_source_digest") if atom is not None else None)
                 or event.get("operating_mode") != operating_mode
+                or (
+                    (hazop_scenario_id is not None or event.get("hazop_scenario_id") is not None)
+                    and event.get("hazop_scenario_id") != hazop_scenario_id
+                )
             ):
                 raise RealtimeCampaignBindingError(
                     f"realtime event metadata conflicts across annual scenario bindings: {event_id}"
@@ -656,6 +668,8 @@ def build_realtime_facility_campaign_result(
                 "operating_mode": operating_mode,
                 "realtime_snapshot_digest": handoff["source_snapshot_digest"],
             }
+            if hazop_scenario_id is not None:
+                case["hazop_scenario_id"] = hazop_scenario_id
             path_available = (
                 path is not None and path.get("status") == "AVAILABLE_PROVIDER_RELEASE_PATH"
             )
@@ -744,6 +758,11 @@ def build_realtime_facility_campaign_result(
                         "conditional_weight": weight,
                         "scenario_families": families,
                         "operating_mode": operating_mode,
+                        **(
+                            {"hazop_scenario_id": hazop_scenario_id}
+                            if hazop_scenario_id is not None
+                            else {}
+                        ),
                         "provider_packet_identity": copy.deepcopy(provider_identity),
                         "receptor_harm_low_high": harm,
                         "expected_deaths_basis": "population_weighted",

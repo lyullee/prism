@@ -299,6 +299,7 @@ def test_case_request_preserves_operating_mode_and_flags_duplicate_mode_conflict
             "asset_id": "asset-mode-duplicate",
             "release_branch_id": "release-01",
             "annual_condition_id": "D-3ms-west",
+            "hazop_scenario_id": "TK01-receiving-hole",
             "operating_mode": "receiving",
             "scenario_families": ["pipe_hole"],
             "status": "EXECUTED",
@@ -308,6 +309,7 @@ def test_case_request_preserves_operating_mode_and_flags_duplicate_mode_conflict
             "asset_id": "asset-mode-duplicate",
             "release_branch_id": "release-01",
             "annual_condition_id": "D-3ms-west",
+            "hazop_scenario_id": "TK01-supply-hole",
             "operating_mode": "supply",
             "scenario_families": ["pipe_hole"],
             "status": "EXECUTED_OPERATOR_LIMITED",
@@ -322,9 +324,12 @@ def test_case_request_preserves_operating_mode_and_flags_duplicate_mode_conflict
         }]},
     )
     request = report["case_requests"][0]
+    assert request["hazop_scenario_id"] == "TK01-receiving-hole"
+    assert request["exact_match_required"]["hazop_scenario_id"] == "TK01-receiving-hole"
     assert request["operating_mode"] == "receiving"
     assert request["exact_match_required"]["operating_mode"] == "receiving"
     assert any("conflicting operating modes" in reason for reason in request["blocking_reasons"])
+    assert any("conflicting HAZOP scenario IDs" in reason for reason in request["blocking_reasons"])
 
 
 def test_case_request_marks_missing_numerical_case_separately():
