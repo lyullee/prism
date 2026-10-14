@@ -101,6 +101,15 @@ def test_runtime_frame_preserves_custom_hazop_tag_with_declared_quantity():
     assert normalized["values"]["tank_pressure"]["value_si"] == 251000.0
 
 
+def test_runtime_frame_rejects_custom_hazop_tag_without_declared_quantity():
+    source = _source()
+    source["samples"][1]["values"] = {
+        "tank_pressure": {"value_si": 251000.0, "sensor_location": "PT-01"}
+    }
+    with pytest.raises(ValueError, match="custom state tags must include"):
+        build_observed_state_runtime_frames([source])
+
+
 def test_runtime_frame_rejects_blank_operating_mode():
     source = _source()
     source["operating_mode"] = "   "
