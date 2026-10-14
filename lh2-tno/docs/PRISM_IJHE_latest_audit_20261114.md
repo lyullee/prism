@@ -43,6 +43,16 @@
 
 ## 재현 명령
 
+먼저 native isolation catalog의 원본 event row와 개별 packet 파일을 재검증한다.
+
+```powershell
+python scripts/build_native_isolation_event_reconciliation.py `
+  --catalog-dir results/20261111/native_generic_scope_packets_isolation `
+  --output results/20261114/native_isolation_event_reconciliation.json
+```
+
+그 다음 아래 감사 명령에 이 장부를 입력한다.
+
 ```powershell
 python scripts/build_ijhe_completion_audit.py `
   --current-status CURRENT_STATUS.json `
