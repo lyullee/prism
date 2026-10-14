@@ -6,7 +6,7 @@
 
 운전 모드는 압력값으로 추정하지 않는다. 상태 프레임에 `receiving`, `supply`, `standby`를 명시하고, HAZOP 행의 운전 모드와 일치할 때만 시나리오를 선택한다.
 
-전체 데이터 흐름을 한 장으로 보려면 최신 [통합 흐름도 PNG](figures/lh2_hazop_multiequipment_integrated_flow_v12.png) 또는 [편집 가능한 SVG](figures/lh2_hazop_multiequipment_integrated_flow_v12.svg)를 사용한다. 현장 입력값에는 설비 상태와 운전 모드가 함께 들어가며, HAZOP 판단 이후 정량분석 계층은 설비·공정 모델, 사고빈도, SLABx-LH2, 점화·기상·인구, 통합 실행 계층을 동등한 구성요소로 결합한다. PRISM은 이 계층을 구현하는 실행·연계 요소로 표시되며, 단일 모델이 전체 분석을 대표하지 않는다.
+전체 데이터 흐름을 한 장으로 보려면 최신 [통합 흐름도 PNG](figures/lh2_hazop_multiequipment_integrated_flow_v13.png) 또는 [편집 가능한 SVG](figures/lh2_hazop_multiequipment_integrated_flow_v13.svg)를 사용한다. 현장 입력값에는 설비 상태와 운전 모드가 함께 들어가며, HAZOP 판단 이후 정량분석 계층은 설비·공정 모델, 사고빈도, SLABx-LH2, 점화·기상·인구, 통합 실행 계층을 동등한 구성요소로 결합한다. PRISM은 이 계층을 구현하는 실행·연계 요소로 표시되며, 단일 모델이 전체 분석을 대표하지 않는다.
 
 ## 실행 경로
 
@@ -149,3 +149,4 @@ python scripts/run_hazop_lh2_multiequipment_provider_diagnostic.py `
 실행기 내부에는 `audit_observed_hazop_runtime()`을 이용한 독립 선택 감사도 저장한다. [`hazop_multiequipment_observed_runtime_audit_v5.json`](../results/20261113/hazop_multiequipment_observed_runtime_audit_v5.json)은 7개 frame을 다시 평가해 7개 HAZOP 시나리오를 선택했고, 상태는 `OBSERVED_HAZOP_MODE_SCENARIOS_SELECTED`, 운전 모드 추론은 `false`다. provider handoff를 재계산한 [`hazop_multiequipment_provider_isolation_handoff_audit_v5.json`](../results/20261113/hazop_multiequipment_provider_isolation_handoff_audit_v5.json)은 HAZOP scenario trace를 `COMPLETE`로 확인했지만, 상태→방출과 방출→risk atom은 provider·물리 검증 제한 때문에 `PARTIAL`로 남겼다.
 
 대표 경로가 7개 모두 실행됐다는 사실은 전체 12개 사고군이나 24개 문헌 event가 현장용으로 닫혔다는 뜻이 아니다. 최신 결과의 `scope_catalog`는 5개 사고군을 이번 대표 HAZOP 행으로 dispatch하고 7개 적용 가능 사고군을 `APPLICABLE_NOT_DISPATCHED`로 남긴다. 합성 provider, 진단 geometry·인구·기상, 독립 물리검증 부재와 미계산 사고는 계속 별도 보류한다.
+

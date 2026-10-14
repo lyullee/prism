@@ -173,7 +173,7 @@ campaign으로 흐릅니다. 외부 generator가 빈도 산술을 담당하고 P
 `UNCOMPUTED`로 유지됩니다.
 
 현장값·운전 모드·HAZOP·현재/예측 상태·공통 모델 묶음의 전체 흐름은
-[`통합 위험평가 흐름도`](docs/figures/lh2_hazop_multiequipment_integrated_flow_v11.png)로 볼 수 있습니다.
+[`통합 위험평가 흐름도`](docs/figures/lh2_hazop_multiequipment_integrated_flow_v13.png)로 볼 수 있습니다.
 
 설비 결합도 `results/20261031/native_full_scope_union_pipefix_state_bound/equipment_state_release_audit.json`에서 44개 case·9개 component를
 `asset_id → component_id → state snapshot digest → 방출 packet → 종료근거` 순서로
@@ -1904,3 +1904,4 @@ python scripts/validate_equipment_campaign.py `
 **상태 스냅샷 결과 재결합 (2026-10-30):** 전체 union 재실행 전에 base campaign 요청·provider-result digest·`EquipmentStateSnapshot`을 다시 대조합니다. 공식 결과는 34개 event·44개 case·176개 risk atom이며 176개 atom 모두 상태 스냅샷을 보존합니다. 이 검사는 상태 연결의 재현성을 보장하지만 provider 자격, 독립 물리검증, 시설 전체 IR/F-N을 승인하지 않습니다. 자세한 규칙과 재현 명령은 [상태 스냅샷 결과 재결합 개발 기록](docs/PRISM_상태스냅샷_결과재결합_개발기록_20261030.md)을 참고합니다.
 
 union 실행기는 이제 `scope_ledger_consistency_current.json`도 같은 실행에서 생성합니다. 현재 범위표와 merged facility ledger는 34개 event에 대해 family별로 `CONSISTENT_SCOPE_LEDGER`이며, `pipe_hole`·`liquid_two_phase`처럼 한 case가 여러 사고군에 속하는 행은 중복 합산하지 않는 비가산 회계로 유지합니다.
+

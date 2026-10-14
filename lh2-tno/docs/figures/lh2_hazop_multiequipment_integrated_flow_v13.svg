@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1350" viewBox="0 0 2400 1350" role="img" aria-label="액화수소 인수기지의 현장 입력값과 운전 모드를 HAZOP 및 통합 위험평가 모델에 연결한 흐름도">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#12324a" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L14,7 L0,14 Z" fill="#269bb5"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L14,7 L0,14 Z" fill="#df8a3a"/>
+    </marker>
+    <marker id="arrowSlate" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L14,7 L0,14 Z" fill="#6c91a8"/>
+    </marker>
+    <style>
+      .font { font-family:'Malgun Gothic','Noto Sans KR','Arial',sans-serif; fill:#14344a; }
+      .title { font-size:48px; font-weight:700; fill:#fff; }
+      .subtitle { font-size:24px; font-weight:400; fill:#b9d2e1; }
+      .section { font-size:30px; font-weight:700; fill:#247699; }
+      .boxTitle { font-size:24px; font-weight:700; fill:#17506d; }
+      .boxText { font-size:26px; font-weight:650; fill:#12324a; }
+      .small { font-size:20px; font-weight:500; fill:#4d7085; }
+      .tiny { font-size:18px; font-weight:500; fill:#668396; }
+      .pill { font-size:19px; font-weight:700; }
+      .moduleTitle { font-size:21px; font-weight:700; fill:#17506d; }
+      .moduleText { font-size:18px; font-weight:500; fill:#4d7085; }
+      .rowTitle { font-size:23px; font-weight:700; }
+    </style>
+  </defs>
+
+  <!-- Header -->
+  <rect width="2400" height="180" fill="#08253a"/>
+  <rect x="78" y="50" width="10" height="74" rx="5" fill="#39c4d6"/>
+  <text x="120" y="92" class="font title">액화수소 인수기지 통합 위험분석 흐름</text>
+  <text x="120" y="137" class="font subtitle">현장 입력값과 운전 모드 → HAZOP 판단 → 여러 모델의 통합 계산 → 현재·예측 대응</text>
+  <text x="2240" y="90" class="font subtitle" text-anchor="end">실시간 + 예측</text>
+  <text x="2240" y="128" class="font subtitle" text-anchor="end">공통 시나리오 흐름</text>
+
+  <rect y="180" width="2400" height="1170" fill="#f5f9fc"/>
+
+  <!-- Section 1 -->
+  <text x="90" y="225" class="font section">01  현장 입력과 위험 시나리오 결정</text>
+
+  <!-- Top boxes -->
+  <g filter="url(#shadow)">
+    <rect x="90" y="255" width="470" height="190" rx="24" fill="#fff" stroke="#39bccc" stroke-width="3"/>
+    <rect x="615" y="255" width="470" height="190" rx="24" fill="#fff" stroke="#a9c6d9" stroke-width="3"/>
+    <rect x="1140" y="255" width="470" height="190" rx="24" fill="#fff" stroke="#a9c6d9" stroke-width="3"/>
+    <rect x="1665" y="255" width="645" height="190" rx="24" fill="#e4f6f8" stroke="#39bccc" stroke-width="3"/>
+  </g>
+
+  <rect x="120" y="280" width="190" height="37" rx="18" fill="#d8f5f6"/>
+  <text x="215" y="306" class="font pill" text-anchor="middle" fill="#14778c">현장 입력 패킷</text>
+  <text x="120" y="350" class="font boxText">인수기지 실시간 모니터링</text>
+  <text x="120" y="382" class="font small">압력 · 온도 · 유량 · 밸브 · 재고</text>
+  <rect x="120" y="399" width="375" height="30" rx="15" fill="#e8f8f8"/>
+  <text x="138" y="420" class="font small" fill="#14778c">운전 모드도 함께 전달: 인수 · 공급 · 대기 · 정비</text>
+
+  <rect x="645" y="280" width="180" height="37" rx="18" fill="#e5eef5"/>
+  <text x="735" y="306" class="font pill" text-anchor="middle" fill="#2c6687">HAZOP 테이블</text>
+  <text x="645" y="350" class="font boxText">관측값 + 운전 모드</text>
+  <text x="645" y="382" class="font boxText">이탈 기준 비교</text>
+  <text x="645" y="420" class="font small">운전 모드별 원인 · 결과 · 방호 판단</text>
+
+  <rect x="1170" y="280" width="190" height="37" rx="18" fill="#e5eef5"/>
+  <text x="1265" y="306" class="font pill" text-anchor="middle" fill="#2c6687">정성적 해석</text>
+  <text x="1170" y="350" class="font boxText">이탈 유형과 운전 모드</text>
+  <text x="1170" y="382" class="font boxText">대상 설비를 함께 해석</text>
+  <text x="1170" y="420" class="font small">인수 · 공급 · 대기 · 정비 상태별 분기</text>
+
+  <rect x="1695" y="280" width="205" height="37" rx="18" fill="#c9f0f2"/>
+  <text x="1797" y="306" class="font pill" text-anchor="middle" fill="#14778c">위험 시나리오 확정</text>
+  <text x="1695" y="350" class="font boxText">이탈 종류 × 운전 모드</text>
+  <text x="1695" y="382" class="font boxText">설비 · 방출 경로 · 사고 조건 결정</text>
+  <text x="1695" y="420" class="font small">확정된 시나리오가 아래의 공통 모델 묶음으로 전달</text>
+
+  <!-- Top arrows -->
+  <path d="M560 350 H605" fill="none" stroke="#269bb5" stroke-width="5" marker-end="url(#arrowBlue)"/>
+  <path d="M1085 350 H1130" fill="none" stroke="#269bb5" stroke-width="5" marker-end="url(#arrowBlue)"/>
+  <path d="M1610 350 H1655" fill="none" stroke="#269bb5" stroke-width="5" marker-end="url(#arrowBlue)"/>
+
+  <!-- Integration band -->
+  <rect x="90" y="480" width="2220" height="55" rx="18" fill="#e8f2f7"/>
+  <text x="120" y="516" class="font boxTitle">02  선택된 시나리오를 같은 통합 정량평가 계층으로 전달</text>
+  <text x="2270" y="516" class="font small" text-anchor="end">현재 상태와 예측 상태가 동일한 모델 묶음을 사용</text>
+
+  <!-- Current state input -->
+  <rect x="90" y="570" width="700" height="250" rx="24" fill="#fff" stroke="#40bdca" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="118" y="594" width="255" height="37" rx="18" fill="#d8f5f6"/>
+  <text x="245" y="620" class="font rowTitle" text-anchor="middle" fill="#14778c">A  현재 상태 · 준실시간</text>
+  <text x="130" y="675" class="font boxText">모니터링 상태값 + 운전 모드</text>
+  <text x="130" y="710" class="font small">현재 압력 · 온도 · 유량 · 재고 · 밸브 상태</text>
+  <text x="130" y="742" class="font small">확정 시나리오를 즉시 정량평가 계층에 전달</text>
+  <path d="M130 768 H750" fill="none" stroke="#40bdca" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="130" y="800" class="font tiny" fill="#14778c">센서 갱신 주기에 맞춘 반복 평가 → 관리자 경보·대응안</text>
+
+  <!-- Forecast state input -->
+  <rect x="90" y="855" width="700" height="285" rx="24" fill="#fff" stroke="#e7a154" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="118" y="879" width="270" height="37" rx="18" fill="#fff0de"/>
+  <text x="253" y="905" class="font rowTitle" text-anchor="middle" fill="#a9652a">B  예측 상태 · 시뮬레이션</text>
+  <text x="130" y="960" class="font boxText">공정 시뮬레이션으로 상태 변화 예측</text>
+  <text x="130" y="995" class="font small">시간에 따른 압력 · 온도 · 재고 · 운전 모드 변화</text>
+  <text x="130" y="1027" class="font small">위험조건 도달 시 같은 정량평가 계층을 다시 호출</text>
+  <path d="M130 1053 H750" fill="none" stroke="#e7a154" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="130" y="1085" class="font tiny" fill="#a9652a">위험조건 미도달 시 시뮬레이션 계속 · 도달 시 추가 평가</text>
+  <text x="130" y="1115" class="font tiny" fill="#a9652a">예측 시점별 결과도 현재 결과와 같은 형식으로 제공</text>
+
+  <!-- Shared model layer -->
+  <g filter="url(#shadow)">
+    <rect x="840" y="570" width="820" height="570" rx="28" fill="#fff" stroke="#6c9db7" stroke-width="3"/>
+  </g>
+  <rect x="840" y="570" width="820" height="80" rx="28" fill="#ddecf3"/>
+  <text x="890" y="615" class="font" font-size="29" font-weight="700" fill="#174f6b">통합 정량 위험평가 계층</text>
+  <text x="890" y="640" class="font tiny">각 모델이 같은 시나리오 ID · 설비 상태 · 운전 모드 · 시간축을 공유</text>
+
+  <!-- Equal-weight model modules -->
+  <g>
+    <rect x="890" y="680" width="238" height="112" rx="16" fill="#f2f7fb" stroke="#a9c6d9" stroke-width="2"/>
+    <text x="914" y="714" class="font moduleTitle">사고 빈도·근거</text>
+    <text x="914" y="746" class="font moduleText">문헌·설비별 근거</text>
+    <text x="914" y="773" class="font moduleText">운전상태별 조건부 빈도</text>
+
+    <rect x="1168" y="680" width="238" height="112" rx="16" fill="#f2f7fb" stroke="#a9c6d9" stroke-width="2"/>
+    <text x="1192" y="714" class="font moduleTitle">방출·차단·재고</text>
+    <text x="1192" y="746" class="font moduleText">누출량 · 지속시간</text>
+    <text x="1192" y="773" class="font moduleText">격리 지연 · 재고 소진</text>
+
+    <rect x="1446" y="680" width="238" height="112" rx="16" fill="#f2f7fb" stroke="#a9c6d9" stroke-width="2"/>
+    <text x="1470" y="714" class="font moduleTitle">설비 공정 모델</text>
+    <text x="1470" y="746" class="font moduleText">탱크 · 배관 · 밸브 · 펌프</text>
+    <text x="1470" y="773" class="font moduleText">상태·재고·운전조건 전달</text>
+
+    <rect x="890" y="820" width="238" height="112" rx="16" fill="#edf9fa" stroke="#65c8d2" stroke-width="2"/>
+    <text x="914" y="854" class="font moduleTitle">SLABx-LH2</text>
+    <text x="914" y="886" class="font moduleText">액화수소 누출·확산</text>
+    <text x="914" y="913" class="font moduleText">농도·가연범위·시간 변화</text>
+
+    <rect x="1168" y="820" width="238" height="112" rx="16" fill="#f2f7fb" stroke="#a9c6d9" stroke-width="2"/>
+    <text x="1192" y="854" class="font moduleTitle">점화·피해 영향</text>
+    <text x="1192" y="886" class="font moduleText">화재·폭발·열·과압</text>
+    <text x="1192" y="913" class="font moduleText">사람·설비 영향 계산</text>
+
+    <rect x="1446" y="820" width="238" height="112" rx="16" fill="#f2f7fb" stroke="#a9c6d9" stroke-width="2"/>
+    <text x="1470" y="854" class="font moduleTitle">기상·시설·인구</text>
+    <text x="1470" y="886" class="font moduleText">바람·차단·인구 조건</text>
+    <text x="1470" y="913" class="font moduleText">IR/F-N · 시설 영향</text>
+  </g>
+
+  <!-- Integration/orchestration is a peer component, not a hero -->
+  <rect x="890" y="972" width="794" height="115" rx="18" fill="#edf3f7" stroke="#8aaec1" stroke-width="2"/>
+  <text x="914" y="1005" class="font boxTitle">계산 조정·결과 추적</text>
+  <text x="914" y="1037" class="font small">모델 입력·출력 연결 · 조건부 위험도 계산 · 현재/예측 비교</text>
+  <text x="914" y="1067" class="font small">근거·불확실성·처리시간 기록 · PRISM은 이 실행 계층에 포함</text>
+
+  <!-- Scenario connector -->
+  <path d="M1987 445 V548" fill="none" stroke="#6c91a8" stroke-width="5" marker-end="url(#arrowSlate)"/>
+  <text x="2025" y="500" class="font tiny">확정 시나리오</text>
+
+  <!-- Inputs to common layer -->
+  <path d="M790 695 H830" fill="none" stroke="#40bdca" stroke-width="5" marker-end="url(#arrowBlue)"/>
+  <text x="810" y="676" class="font tiny" text-anchor="middle" fill="#14778c">현재</text>
+  <path d="M790 995 H830" fill="none" stroke="#e78b3c" stroke-width="5" marker-end="url(#arrowOrange)"/>
+  <text x="810" y="976" class="font tiny" text-anchor="middle" fill="#a9652a">예측</text>
+
+  <!-- Outputs -->
+  <g filter="url(#shadow)">
+    <rect x="1730" y="570" width="580" height="250" rx="24" fill="#e4f4ec" stroke="#66b994" stroke-width="3"/>
+    <rect x="1730" y="855" width="580" height="285" rx="24" fill="#fff1e3" stroke="#e7a154" stroke-width="3"/>
+  </g>
+  <rect x="1760" y="594" width="165" height="37" rx="18" fill="#d5f0e3"/>
+  <text x="1842" y="620" class="font rowTitle" text-anchor="middle" fill="#2d7959">현재 위험 결과</text>
+  <text x="1760" y="674" class="font boxText">조건부 위험도 · 영향범위</text>
+  <text x="1760" y="710" class="font small">비상대응·안전관리 시나리오 생성</text>
+  <text x="1760" y="742" class="font small">관리자 화면에 경보·대응안 표시</text>
+  <text x="1760" y="790" class="font tiny" fill="#2d7959">센서 갱신 주기에 맞춘 준실시간 평가</text>
+
+  <rect x="1760" y="879" width="165" height="37" rx="18" fill="#ffe2be"/>
+  <text x="1842" y="905" class="font rowTitle" text-anchor="middle" fill="#a9652a">예측 위험 결과</text>
+  <text x="1760" y="959" class="font boxText">미래 시점 위험도·영향 예측</text>
+  <text x="1760" y="995" class="font small">선제 안전조치·운전계획 지원</text>
+  <text x="1760" y="1027" class="font small">위험조건 도달 시 재평가</text>
+  <text x="1760" y="1080" class="font tiny" fill="#a9652a">시뮬레이션 시간축을 따라 반복 실행</text>
+  <text x="1760" y="1110" class="font tiny" fill="#a9652a">현재 결과와 같은 형식으로 관리자에게 제공</text>
+
+  <!-- Common layer to outputs -->
+  <path d="M1660 695 H1720" fill="none" stroke="#40bdca" stroke-width="5" marker-end="url(#arrowBlue)"/>
+  <path d="M1660 995 H1720" fill="none" stroke="#e78b3c" stroke-width="5" marker-end="url(#arrowOrange)"/>
+
+  <!-- Footer -->
+  <rect x="90" y="1185" width="2220" height="100" rx="18" fill="#e8f2f7"/>
+  <text x="120" y="1220" class="font boxTitle">해석 기준</text>
+  <text x="315" y="1220" class="font small">운전 모드가 포함된 현장 입력값을 HAZOP 기준과 비교해 시나리오를 선택합니다.</text>
+  <text x="315" y="1253" class="font small">현재 경로는 즉시 평가하고, 예측 경로는 위험조건에 도달할 때 같은 모델 묶음을 반복 실행합니다.</text>
+</svg>
+
+
