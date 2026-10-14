@@ -1,0 +1,32 @@
+{
+  "schema_version": "prism.hazop_operating_mode_selection.v1",
+  "id": "generic-outdoor-lh2-hazop-provider-bound-v1",
+  "facility_id": "generic-lh2-near-receptor-diagnostic",
+  "operating_modes": ["receiving", "supply", "standby"],
+  "configuration_origin": "synthetic",
+  "source_provenance": "synthetic HAZOP demonstration with an explicit provider packet and literature event",
+  "rows": [
+    {
+      "id": "TK01-receiving-liquid-hole",
+      "component_id": "storage-tank-01",
+      "component_kind": "storage_tank",
+      "operating_modes": ["receiving"],
+      "variable_tag": "tank_pressure",
+      "quantity": "pressure",
+      "trigger": "at_or_above",
+      "threshold_high_si": 600000.0,
+      "scenario_family": "liquid_two_phase",
+      "release_mode": "hole",
+      "priority": "high",
+      "deviation_label": "high pressure with liquid release path",
+      "cause_summary": "receiving pressure reaches the declared HAZOP criterion",
+      "consequence_summary": "bind the reviewed LH2 liquid provider packet and literature event before consequence evaluation",
+      "safeguards": ["PSV", "ESD"],
+      "provenance": "synthetic diagnostic HAZOP row; replace with reviewed facility HAZOP/P&ID reference"
+    }
+  ],
+  "notes": [
+    "This table deliberately selects the liquid_two_phase family so the explicit inventory-depletion provider packet satisfies the HAZOP family and termination gate.",
+    "The example is diagnostic and synthetic; it does not qualify a facility QRA."
+  ]
+}
