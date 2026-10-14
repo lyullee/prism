@@ -30,6 +30,27 @@ class ResearchPipeline:
         from .frequency import generate_events
         return generate_events(self.facility, plan)
 
+    def legacy_frequency_events(self, scenarios, component_map, *, plan_id='legacy-tno',
+                                source='external legacy TNO taxonomy.enumerate_scenarios',
+                                source_sha256, basis='TNO_PURPLE_LOC'):
+        """Consume a pinned legacy-TNO scenario export through the same event boundary.
+
+        The external taxonomy remains the owner of its frequency arithmetic.
+        This method only performs the explicit scenario-to-facility mapping and
+        returns the bridge audit sidecar; it never fabricates a provider
+        release or promotes a facility QRA.
+        """
+        from .legacy_frequency_bridge import bridge_legacy_scenarios
+        return bridge_legacy_scenarios(
+            scenarios,
+            component_map,
+            plan_id=plan_id,
+            source=source,
+            source_sha256=source_sha256,
+            facility=self.facility,
+            basis=basis,
+        )
+
     def facility_risk(self, campaign):
         from .campaign import evaluate_campaign
         return evaluate_campaign(self, campaign)

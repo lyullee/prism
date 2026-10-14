@@ -6,7 +6,7 @@
   "legacy_tno_lh2_frequency_entries": 6,
   "legacy_tno_automatic_frequency_lookup_and_scenario_enumeration": true,
   "legacy_tno_weather_integrated_ir_and_fn_implemented": true,
-  "new_lh2_path_legacy_frequency_and_event_generator_connected": false,
+  "new_lh2_path_legacy_frequency_and_event_generator_connected": true,
   "complete_tno_purple_chapter3_loc_baseline_implemented": false,
   "tno_function_inventory": "docs/TNO_위험성평가_구축기능_상세목록_20261008.md",
   "actual_gas_case_executed": true,
@@ -156,7 +156,7 @@
   "equipment_frequency_binding_external_port_audit": true,
   "equipment_frequency_binding_external_port_policy": "A literature event with port_ids requires reviewed_accident_port_ids in the facility-neutral crosswalk; missing or mismatched ports remain PORT_BINDING_WITHHELD.",
   "frequency_port_binding_latest_remote_commit": "5936c70e90bf3d5582ad3961ecd93c93002f61c2",
-  "latest_local_full_test_run": "931 passed, 1 skipped",
+  "latest_local_full_test_run": "985 passed",
   "equipment_frequency_scope_example_status": "EXECUTABLE",
   "equipment_frequency_scope_full_facility_diagnostic_manifest": "examples/generic_lh2_full_scope_manifest.json",
   "equipment_frequency_scope_full_facility_diagnostic_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
@@ -3952,10 +3952,10 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 978,
+    "tests": 985,
     "failures": 0,
     "skipped": 0,
-    "scope": "current lh2-tno package after HAZOP/mode, facility campaign, scoped resolvers, forecast timing audit and completion-audit changes"
+    "scope": "current lh2-tno package after legacy TNO frequency/event bridge"
   },
   "runtime_async_development": {
     "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED_GOAL_REMAINS_ACTIVE",
@@ -3981,5 +3981,19 @@
       "independent physical validation",
       "strict facility accident coverage and IR/F-N gates"
     ]
-  }
+  },
+  "legacy_tno_frequency_bridge_implemented": true,
+  "legacy_tno_frequency_bridge_module": "src/lh2_tno/legacy_frequency_bridge.py",
+  "legacy_tno_frequency_bridge_cli": "scripts/bridge_legacy_tno_frequency.py",
+  "legacy_tno_frequency_bridge_audit_cli": "scripts/audit_legacy_tno_frequency_bridge.py",
+  "legacy_tno_frequency_bridge_record": "results/20261027/legacy_frequency_bridge/verification.json",
+  "legacy_tno_frequency_bridge_status": "BRIDGED_DIAGNOSTIC_ONLY; external taxonomy resolver/generator output consumed with explicit scenario-to-component mapping",
+  "legacy_tno_frequency_bridge_scenario_count": 65,
+  "legacy_tno_frequency_bridge_event_count": 65,
+  "legacy_tno_frequency_bridge_component_count": 5,
+  "legacy_tno_frequency_bridge_frequency_inference": false,
+  "legacy_tno_frequency_bridge_provider_packet_created": false,
+  "legacy_tno_frequency_bridge_facility_qra_promotion": false,
+  "legacy_tno_frequency_bridge_source_sha256": "2b05b28f946797f8f7856ad2a592a39d5a86a3d040dafcfd6874bd09f8ed291a",
+  "legacy_tno_frequency_bridge_implementation_sha256": "4654d02b3964e8bb504713a28141819ae9faea300f0ad1146589e6acbafdd9f6"
 }
