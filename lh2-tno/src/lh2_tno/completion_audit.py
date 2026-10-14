@@ -1583,13 +1583,19 @@ def build_ijhe_completion_audit(
         # independent, but a stale/missing port trace must be visible in the
         # completion report rather than silently disappearing in nesting.
         port_binding = assessment.get("frequency_port_binding")
+        port_binding_source = "facility_assessment"
+        if not isinstance(port_binding, Mapping) and isinstance(facility_evidence_request, Mapping):
+            request_port_binding = facility_evidence_request.get("frequency_port_binding")
+            if isinstance(request_port_binding, Mapping):
+                port_binding = request_port_binding
+                port_binding_source = "facility_evidence_request"
         nested_ledger = assessment.get("facility_risk_ledger")
         nested_port_binding = (
             nested_ledger.get("frequency_port_binding")
             if isinstance(nested_ledger, Mapping)
             else None
         )
-        port_binding_valid = (
+        port_binding_aligned = (
             isinstance(port_binding, Mapping)
             and port_binding.get("schema_version") == "prism.frequency_port_binding.v1"
             and port_binding.get("status") == "ALIGNED"
@@ -1601,6 +1607,18 @@ def build_ijhe_completion_audit(
                 or nested_port_binding == port_binding
             )
         )
+        port_binding_withheld = (
+            isinstance(port_binding, Mapping)
+            and port_binding.get("schema_version") == "prism.frequency_port_binding.v1"
+            and port_binding.get("status") == "PORT_BINDING_WITHHELD"
+            and isinstance(port_binding.get("case_count"), int)
+            and port_binding.get("case_count", 0) > 0
+            and isinstance(port_binding.get("reviewed_frequency_port_case_count"), int)
+            and port_binding.get("reviewed_frequency_ports_complete") is False
+            and port_binding.get("frequency_inference_allowed") is False
+            and port_binding.get("facility_qra_allowed") is False
+        )
+        port_binding_valid = port_binding_aligned or port_binding_withheld
         checks.append(
             {
                 "name": "diagnostic_facility_frequency_port_binding",
@@ -1609,13 +1627,25 @@ def build_ijhe_completion_audit(
                 "blocking_reason": None,
                 "evidence": {
                     "record": assessment.get("_record_path"),
+                    "source": port_binding_source,
+                    "trace_status": (
+                        "ALIGNED"
+                        if port_binding_aligned
+                        else "WITHHELD_REVIEW_REQUIRED"
+                        if port_binding_withheld
+                        else None
+                    ),
                     "frequency_port_binding": port_binding,
                     "nested_ledger_frequency_port_binding": nested_port_binding,
                 },
                 "interpretation": (
                     "The reviewed accident-port list remains aligned from the public facility "
-                    "assessment to the merged ledger. A blocked diagnostic row withholds the "
-                    "traceability claim but never infers a port or opens facility QRA."
+                    "assessment to the merged ledger."
+                    if port_binding_aligned
+                    else
+                    "The evidence-request catalog explicitly records that reviewed frequency "
+                    "ports are still withheld; provider outlet ports are not substituted for "
+                    "frequency ports, and no facility QRA is opened."
                 ),
             }
         )

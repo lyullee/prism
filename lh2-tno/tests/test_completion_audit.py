@@ -348,6 +348,37 @@ def test_completion_audit_blocks_facility_evidence_request_promotion_policy():
     assert check["status"] == "BLOCKED"
 
 
+def test_completion_audit_records_withheld_frequency_ports_without_substitution():
+    request = _facility_evidence_request()
+    request["frequency_port_binding"] = {
+        "schema_version": "prism.frequency_port_binding.v1",
+        "status": "PORT_BINDING_WITHHELD",
+        "case_count": 1,
+        "reviewed_frequency_port_case_count": 0,
+        "provider_packet_only_case_count": 1,
+        "port_binding_mismatch_case_count": 0,
+        "port_binding_withheld_case_count": 0,
+        "reviewed_frequency_ports_complete": False,
+        "frequency_inference_allowed": False,
+        "facility_qra_allowed": False,
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        facility_assessment=_facility_assessment(),
+        facility_evidence_request=request,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_facility_frequency_port_binding"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["source"] == "facility_evidence_request"
+    assert check["evidence"]["trace_status"] == "WITHHELD_REVIEW_REQUIRED"
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_records_domain_recovery_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(validated=False),

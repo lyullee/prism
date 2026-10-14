@@ -3461,15 +3461,29 @@
     },
     {
       "name": "diagnostic_facility_frequency_port_binding",
-      "status": "BLOCKED",
+      "status": "PASS",
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
         "record": "results\\20261031\\native_full_scope_union_pipefix_state_bound\\facility_assessment.json",
-        "frequency_port_binding": null,
+        "source": "facility_evidence_request",
+        "trace_status": "WITHHELD_REVIEW_REQUIRED",
+        "frequency_port_binding": {
+          "schema_version": "prism.frequency_port_binding.v1",
+          "status": "PORT_BINDING_WITHHELD",
+          "case_count": 44,
+          "reviewed_frequency_port_case_count": 0,
+          "provider_packet_only_case_count": 44,
+          "port_binding_mismatch_case_count": 0,
+          "port_binding_withheld_case_count": 0,
+          "reviewed_frequency_ports_complete": false,
+          "frequency_inference_allowed": false,
+          "facility_qra_allowed": false,
+          "policy": "Provider packet outlet ports remain separate from reviewed frequency ports; missing reviewed ports and mismatches remain qualification blockers."
+        },
         "nested_ledger_frequency_port_binding": null
       },
-      "interpretation": "The reviewed accident-port list remains aligned from the public facility assessment to the merged ledger. A blocked diagnostic row withholds the traceability claim but never infers a port or opens facility QRA."
+      "interpretation": "The evidence-request catalog explicitly records that reviewed frequency ports are still withheld; provider outlet ports are not substituted for frequency ports, and no facility QRA is opened."
     },
     {
       "name": "facility_release_boundary",
