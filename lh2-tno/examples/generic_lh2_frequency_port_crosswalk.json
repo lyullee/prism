@@ -1,0 +1,27 @@
+{
+  "schema_version": "prism.frequency_port_crosswalk.v1",
+  "provenance": {
+    "basis": "reviewed generic outdoor LH2 example topology",
+    "manifest": "examples/generic_lh2_full_scope_manifest.json",
+    "frequency_plan": "examples/generic_lh2_full_scope_frequency_plan.json",
+    "review_status": "synthetic_demonstration_only",
+    "port_selection_rule": "accident outlet explicitly declared in the equipment manifest"
+  },
+  "assets": [
+    {"asset_id": "storage-shell", "model_component_id": "storage-tank-01", "port_ids": ["tank-accident-out"]},
+    {"asset_id": "transfer-line", "model_component_id": "liquid-transfer-line-01", "port_ids": ["line-accident-out"]},
+    {"asset_id": "transfer-valve", "model_component_id": "transfer-valve-01", "port_ids": ["valve-accident-out"]},
+    {"asset_id": "pressure-relief-vent", "model_component_id": "pressure-relief-vent-01", "port_ids": ["vent-accident-out"]},
+    {"asset_id": "transfer-pump", "model_component_id": "liquid-transfer-pump-01", "port_ids": ["pump-accident-out"]},
+    {"asset_id": "ambient-vaporizer", "model_component_id": "ambient-vaporizer-01", "port_ids": ["vaporizer-accident-out"]},
+    {
+      "asset_id": "reliquefier",
+      "model_component_id": "reliquefier-01",
+      "port_ids_by_loc": {
+        "G4": ["reliquefier-accident-out-1", "reliquefier-accident-out-2"],
+        "G5": ["reliquefier-accident-out-1", "reliquefier-accident-out-2"],
+        "G6": ["reliquefier-accident-out-1"]
+      }
+    }
+  ]
+}
