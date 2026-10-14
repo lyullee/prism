@@ -115,6 +115,7 @@ def build_ijhe_completion_audit(
     native_isolation_catalog_near_receptor_verification: Mapping[str, Any] | None = None,
     release_boundary_case_audit: Mapping[str, Any] | None = None,
     conditional_facility_release_trace: Mapping[str, Any] | None = None,
+    native_isolation_event_reconciliation: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -548,6 +549,54 @@ def build_ijhe_completion_audit(
                 ),
             }
         )
+    if native_isolation_event_reconciliation is not None:
+        reconciliation = native_isolation_event_reconciliation
+        row_checks = reconciliation.get("checks")
+        row_checks = row_checks if isinstance(row_checks, Mapping) else {}
+        reconciliation_valid = (
+            reconciliation.get("schema_version")
+            == "prism.native_isolation_event_reconciliation.v1"
+            and reconciliation.get("status")
+            == "NATIVE_ISOLATION_EVENT_ROWS_RECONCILED_DIAGNOSTIC"
+            and isinstance(reconciliation.get("event_count"), int)
+            and reconciliation.get("event_count") > 0
+            and reconciliation.get("exact_native_packet_count")
+            == reconciliation.get("event_count")
+            and reconciliation.get("mismatch_count") == 0
+            and all(value is True for value in row_checks.values())
+            and reconciliation.get("provider_packet_promoted") is False
+            and reconciliation.get("physical_validation_claim") is False
+            and reconciliation.get("facility_qra_claim") is False
+            and reconciliation.get("frequency_inference_performed") is False
+        )
+        reconciliation_check = _check(
+            "diagnostic_native_isolation_event_reconciliation",
+            reconciliation_valid,
+            {
+                "record": reconciliation.get("_record_path"),
+                "schema_version": reconciliation.get("schema_version"),
+                "status": reconciliation.get("status"),
+                "event_count": reconciliation.get("event_count"),
+                "exact_native_packet_count": reconciliation.get("exact_native_packet_count"),
+                "uncomputed_event_count": reconciliation.get("uncomputed_event_count"),
+                "isolation_success_count": reconciliation.get("isolation_success_count"),
+                "termination_basis_counts": reconciliation.get("termination_basis_counts"),
+                "mismatch_count": reconciliation.get("mismatch_count"),
+                "checks": dict(row_checks),
+                "provider_packet_promoted": reconciliation.get("provider_packet_promoted"),
+                "physical_validation_claim": reconciliation.get("physical_validation_claim"),
+                "facility_qra_claim": reconciliation.get("facility_qra_claim"),
+                "frequency_inference_performed": reconciliation.get("frequency_inference_performed"),
+            },
+            "native isolation event rows do not reconcile to their packet artifacts or carry an unsafe promotion flag",
+        )
+        reconciliation_check["diagnostic_only"] = True
+        reconciliation_check["interpretation"] = (
+            "The exact event rows, per-event verification files and resolved release artifacts are "
+            "cross-checked at the native isolation catalog grain. This strengthens traceability of "
+            "the diagnostic chain without qualifying a provider packet or opening facility IR/F-N."
+        )
+        checks.append(reconciliation_check)
     if native_isolation_catalog_facility_chain_verification is not None:
         facility_chain = native_isolation_catalog_facility_chain_verification
         chain_timing = facility_chain.get("timing")

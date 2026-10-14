@@ -1,0 +1,718 @@
+{
+  "schema_version": "prism.native_isolation_event_reconciliation.v1",
+  "status": "NATIVE_ISOLATION_EVENT_ROWS_RECONCILED_DIAGNOSTIC",
+  "catalog_dir": "results\\20261111\\native_generic_scope_packets_isolation",
+  "source_verification": "results\\20261111\\native_generic_scope_packets_isolation\\verification.json",
+  "source_isolation_audit": "results\\20261111\\native_generic_scope_packets_isolation\\isolation_branch_audit.json",
+  "event_count": 24,
+  "exact_native_packet_count": 24,
+  "uncomputed_event_count": 0,
+  "isolation_success_count": 14,
+  "termination_basis_counts": {
+    "None": 2,
+    "emergency_relief_discharge": 1,
+    "inventory_depletion": 6,
+    "inventory_over_600s": 1,
+    "reviewed_isolation_success": 14
+  },
+  "checks": {
+    "event_rows_present": true,
+    "event_count_matches_root": true,
+    "exact_packet_count_matches_root": true,
+    "uncomputed_event_count_zero": true,
+    "event_ids_unique": true,
+    "all_event_artifacts_reconciled": true,
+    "isolation_success_count_matches_root": true,
+    "state_snapshot_binding_preserved": true,
+    "promotion_flags_withheld": true,
+    "frequency_inference_withheld": true
+  },
+  "mismatch_count": 0,
+  "mismatches": [],
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "frequency_inference_performed": false,
+  "rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_depletion",
+      "resolved_termination_bases": [
+        "inventory_depletion"
+      ],
+      "diagnostic_duration_s": 0.05,
+      "resolved_duration_s": [
+        0.05
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.008166514093845672,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_depletion",
+      "resolved_termination_bases": [
+        "inventory_depletion"
+      ],
+      "diagnostic_duration_s": 5.999999999999993e-05,
+      "resolved_duration_s": [
+        5.999999999999993e-05
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.00010057792972414069,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_depletion",
+      "resolved_termination_bases": [
+        "inventory_depletion"
+      ],
+      "diagnostic_duration_s": 5.999999999999999e-06,
+      "resolved_duration_s": [
+        5.999999999999999e-06
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.00010057966768755135,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_depletion",
+      "resolved_termination_bases": [
+        "inventory_depletion"
+      ],
+      "diagnostic_duration_s": 1e-06,
+      "resolved_duration_s": [
+        1e-06
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.00016756351240572947,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "port_ids": [
+        "tank-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_depletion",
+      "resolved_termination_bases": [
+        "inventory_depletion"
+      ],
+      "diagnostic_duration_s": 1e-06,
+      "resolved_duration_s": [
+        1e-06
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_LAYERED_TANK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.028492061899609754,
+      "cumulative_mass_out_kg": 0.0016625666208320196,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 4.7591905520014575e-06,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 4.758412078620518e-05,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.0004750626227775085,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.004673369291283811,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "port_ids": [
+        "line-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.30000000000000004,
+      "resolved_duration_s": [
+        0.30000000000000004
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.10622803086219497,
+      "cumulative_mass_out_kg": 0.04473063270730533,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 1.8985903127889936e-05,
+      "cumulative_mass_out_kg": 1.582158593990828e-05,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.0001898590312788994,
+      "cumulative_mass_out_kg": 0.00015821585939908284,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.0018985903127889947,
+      "cumulative_mass_out_kg": 0.001582158593990829,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.018985903127889944,
+      "cumulative_mass_out_kg": 0.015821585939908286,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "port_ids": [
+        "valve-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.3,
+      "resolved_duration_s": [
+        0.3
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_VALVE_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.1898590312788994,
+      "cumulative_mass_out_kg": 0.15821585939908284,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "port_ids": [
+        "vent-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "emergency_relief_discharge",
+      "resolved_termination_bases": [
+        "emergency_relief_discharge"
+      ],
+      "diagnostic_duration_s": 0.5,
+      "resolved_duration_s": [
+        0.5
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_VENT_STACK_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.0008087150217064195,
+      "cumulative_mass_out_kg": 0.0006739291847553497,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.30000000000000004,
+      "resolved_duration_s": [
+        0.30000000000000004
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 0.0560663237977497,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "port_ids": [
+        "pump-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.30000000000000004,
+      "resolved_duration_s": [
+        0.30000000000000004
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "NATIVE_EXTERNAL_ACCIDENT_EXPORT_EXECUTED_DIAGNOSTIC",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 1.0,
+      "cumulative_mass_out_kg": 0.0005606632379774973,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_depletion",
+      "resolved_termination_bases": [
+        "inventory_depletion"
+      ],
+      "diagnostic_duration_s": 1.6000000000000003,
+      "resolved_duration_s": [
+        1.6000000000000003
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 4.956379784841933e-06,
+      "cumulative_mass_out_kg": 4.956379784841932e-06,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "inventory_over_600s",
+      "resolved_termination_bases": [
+        "inventory_over_600s"
+      ],
+      "diagnostic_duration_s": 600.0,
+      "resolved_duration_s": [
+        600.0
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_INVENTORY_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 4.956379784841932e-06,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "port_ids": [
+        "vaporizer-accident-out"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.5,
+      "resolved_duration_s": [
+        0.5
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.221896865709533e-06,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "packet_kind": "two_sided",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": null,
+      "resolved_termination_bases": [
+        "two_sided_rupture",
+        "two_sided_rupture"
+      ],
+      "diagnostic_duration_s": null,
+      "resolved_duration_s": [
+        1e-05,
+        1e-05
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release_set",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.191692033908254e-08,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "port_ids": [
+        "reliquefier-accident-out-1",
+        "reliquefier-accident-out-2"
+      ],
+      "packet_kind": "two_sided",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": null,
+      "resolved_termination_bases": [
+        "two_sided_rupture",
+        "two_sided_rupture"
+      ],
+      "diagnostic_duration_s": null,
+      "resolved_duration_s": [
+        1e-05,
+        1e-05
+      ],
+      "isolation_requested": false,
+      "isolation_success": false,
+      "verification_status": "EXTERNAL_LH2DT_RELIQUEFIER_TWO_SIDED_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release_set",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 7.191692033908254e-08,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "port_ids": [
+        "reliquefier-accident-out-1"
+      ],
+      "packet_kind": "release",
+      "event_status": "EXACT_NATIVE_PACKET",
+      "diagnostic_termination_basis": "reviewed_isolation_success",
+      "resolved_termination_bases": [
+        "reviewed_isolation_success"
+      ],
+      "diagnostic_duration_s": 0.5,
+      "resolved_duration_s": [
+        0.5
+      ],
+      "isolation_requested": true,
+      "isolation_success": true,
+      "verification_status": "EXTERNAL_LH2DT_DYNAMIC_GAS_UNIT_PRISM_PACKET_EXECUTED_OPERATOR_LIMITED",
+      "provider_packet_promoted": false,
+      "physical_validation_claim": false,
+      "facility_qra_claim": false,
+      "release_file_kind": "resolved_release",
+      "available_mass_kg": 0.0008238536226639276,
+      "cumulative_mass_out_kg": 1.6805075003306098e-06,
+      "reconciliation_status": "MATCHED",
+      "mismatch_reasons": []
+    }
+  ],
+  "interpretation": "Per-event native isolation artifacts reconcile to the catalog event rows and resolved release files. This is diagnostic chain evidence only; provider qualification, independent physical validation, frequency inference and facility IR/F-N promotion remain withheld.",
+  "_record_path": "results\\20261114\\native_isolation_event_reconciliation.json"
+}

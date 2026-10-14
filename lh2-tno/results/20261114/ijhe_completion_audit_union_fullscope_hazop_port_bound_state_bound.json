@@ -78,6 +78,46 @@
       "interpretation": "The optional native LH2 isolation branch catalog records diagnostic isolation outcomes, termination bases, and wall-clock timing while keeping frequency, field reliability, physical validation, and facility IR/F-N promotion withheld."
     },
     {
+      "name": "diagnostic_native_isolation_event_reconciliation",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261114\\native_isolation_event_reconciliation.json",
+        "schema_version": "prism.native_isolation_event_reconciliation.v1",
+        "status": "NATIVE_ISOLATION_EVENT_ROWS_RECONCILED_DIAGNOSTIC",
+        "event_count": 24,
+        "exact_native_packet_count": 24,
+        "uncomputed_event_count": 0,
+        "isolation_success_count": 14,
+        "termination_basis_counts": {
+          "None": 2,
+          "emergency_relief_discharge": 1,
+          "inventory_depletion": 6,
+          "inventory_over_600s": 1,
+          "reviewed_isolation_success": 14
+        },
+        "mismatch_count": 0,
+        "checks": {
+          "event_rows_present": true,
+          "event_count_matches_root": true,
+          "exact_packet_count_matches_root": true,
+          "uncomputed_event_count_zero": true,
+          "event_ids_unique": true,
+          "all_event_artifacts_reconciled": true,
+          "isolation_success_count_matches_root": true,
+          "state_snapshot_binding_preserved": true,
+          "promotion_flags_withheld": true,
+          "frequency_inference_withheld": true
+        },
+        "provider_packet_promoted": false,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false,
+        "frequency_inference_performed": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The exact event rows, per-event verification files and resolved release artifacts are cross-checked at the native isolation catalog grain. This strengthens traceability of the diagnostic chain without qualifying a provider packet or opening facility IR/F-N."
+    },
+    {
       "name": "diagnostic_native_isolation_catalog_facility_chain",
       "status": "PASS",
       "diagnostic_only": true,

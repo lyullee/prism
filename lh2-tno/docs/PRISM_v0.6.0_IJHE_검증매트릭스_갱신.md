@@ -15,7 +15,7 @@ promotion gate는 계속 닫아 둔다.
 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)을
 사용한다. 최신 union은 일반 옥외 LH2 시설의 34개 event, 44개 case, 176개 risk atom과
 HAZOP event binding 34/34를 포함한다. 완료 감사는 `INCOMPLETE_EVIDENCE`이며
-최신 권위 감사는 43개 검사 중 39개 `PASS`, 4개 `BLOCKED`이다. 이 중 근접 수신점 검증은 비영 harm→조건부 IR/F-N 경로를 확인하는 진단 전용 검사이며 시설 QRA 승격은 아니다.
+최신 권위 감사는 44개 검사 중 40개 `PASS`, 4개 `BLOCKED`이다. 이 중 근접 수신점 검증은 비영 harm→조건부 IR/F-N 경로를 확인하는 진단 전용 검사이며 시설 QRA 승격은 아니다.
 
 현재 네 strict blocker는 (1) 모든 선언 case의 provider 방출 종료·차단·재고 경계,
 (2) 실제 시설용 qualified provider packet, (3) 사고범위 전체의 독립 물리검증,
@@ -299,3 +299,6 @@ python scripts/build_v060_readiness_report.py `
 ### 시설 IR/F/N 독립 집계 감사 (2026-10-30 갱신)
 
 `facility_aggregate_closure_audit.json`은 저장된 176개 risk atom의 `개시빈도 × 조건부 가중치 × 수용점 피해`를 다시 합산하고, N≥1 기준 F/N 곡선을 다시 만든다. 공식 조건부 시설 값과 비교한 결과는 `FACILITY_IR_FN_AGGREGATE_CLOSED_DIAGNOSTIC`, IR 불일치 0건, F/N 불일치 0건이다. `facility_component_contribution_audit.json`은 같은 원자를 9개 설비별로 재결합하고 진단 순위를 다시 계산해 불일치 0건을 확인한다. `facility_frequency_uncertainty_audit.json`은 5개 문헌 빈도 시나리오의 IR/F-N 재가중을 독립 재현해 불일치 0건을 확인한다. 이 검사는 계산 집계의 재현성만 닫으며, qualified provider·독립 전체 물리검증·완전 사고범위·시설 QRA 승격을 열지 않는다.\n
+
+
+최신 감사에는 `results/20261114/native_isolation_event_reconciliation.json`이 추가되었다. native isolation catalog의 24개 event row와 개별 방출·검증 파일이 24/24 일치하며, provider qualification·물리검증·시설 IR/F-N 승격 플래그는 계속 false로 유지된다.

@@ -12,7 +12,7 @@
 
 조건부 디지털트윈 view에는 `published`, `p05`, `p95`, independent-event low/high의 **5개 문헌 빈도 시나리오**와 자산·사고군 순위 안정성, 포트 결합 상태가 함께 전달된다. 각 시나리오의 30개 미충족·불완전 행과 29개 고유 case key도 상태별로 보존한다. `frequency_inference_allowed=false`와 `facility_credible_interval=false`를 유지하므로 이 장부는 문헌 민감도 결과이며 현장 빈도 학습이나 시설 전체 QRA 승격이 아니다.
 
-완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **43개 검사 중 39개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, provider-bound current/forecast HAZOP 통합 경로, 검사센터 실측 상태·운전모드·HAZOP·격리 branch 진단, case별 방출 경계 표, case-keyed 조건부 방출→위험 trace, 5개 문헌 빈도 시나리오·순위 안정성 trace, 근접 수신점의 비영 harm→조건부 IR/F-N 경로, 네 단계 승격 gate 요약, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 통합 경로는 현재 1건과 예측 1건의 정량평가·시설 handoff를 실행하지만 synthetic/provider-bound와 declared-sensitivity 조건이며, 검사센터 정상 운전자료는 사고빈도나 qualified release로 변환하지 않고, qualified facility IR/F-N으로 승격하지 않는다.
+완료 감사 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)은 **44개 검사 중 40개 PASS·4개 BLOCKED**를 기록한다. native packet catalog 24/24 exact, 상태 snapshot echo 24/24, isolation branch 14건, SLABx-LH2 pool/dispersion 검증, validation matrix, provider-bound current/forecast HAZOP 통합 경로, 검사센터 실측 상태·운전모드·HAZOP·격리 branch 진단, case별 방출 경계 표, case-keyed 조건부 방출→위험 trace, 5개 문헌 빈도 시나리오·순위 안정성 trace, 근접 수신점의 비영 harm→조건부 IR/F-N 경로, 네 단계 승격 gate 요약, 44-case evidence-request catalog와 24-event qualification-readiness를 모두 감사에 연결했다. 통합 경로는 현재 1건과 예측 1건의 정량평가·시설 handoff를 실행하지만 synthetic/provider-bound와 declared-sensitivity 조건이며, 검사센터 정상 운전자료는 사고빈도나 qualified release로 변환하지 않고, qualified facility IR/F-N으로 승격하지 않는다.
 
 남은 strict gate는 다음 네 가지다.
 
@@ -121,7 +121,7 @@ IJHE 완료 감사에도 이 연결을 `diagnostic_hazop_selection_event_binding
 `results/20261114/conditional_facility_risk_view_with_release_trace.json`이 최신 원장입니다.
 34개 사건·44개 case·176개 risk atom의 옥외 진단 범위를 보존하고, 상태→방출 연결은
 44/44 case에서 확인합니다. 조건부 수치 실행과 시설 전체 QRA 자격은 별도로 판정하며,
-현재 IJHE 감사는 43개 검사 중 39개 PASS·4개 BLOCKED입니다. 별도 근접 수신점 replay는 1개 비영 harm atom과 조건부 IR/F-N 곡선을 확인하지만 합성 진단 geometry입니다. `qualified_provider_case_count=0`이고
+현재 IJHE 감사는 44개 검사 중 40개 PASS·4개 BLOCKED입니다. native isolation catalog의 24개 event row와 개별 resolved release/verification 파일은 `native_isolation_event_reconciliation.json`에서 24/24 일치로 재검증됩니다. 별도 근접 수신점 replay는 1개 비영 harm atom과 조건부 IR/F-N 곡선을 확인하지만 합성 진단 geometry입니다. `qualified_provider_case_count=0`이고
 방출경계·provider 자격·독립 물리검증·시설 IR/F-N 네 승격 gate가 모두 닫혀 있지 않으므로
 시설 IR/F-N은 계속 fail-closed입니다. 최신 상태는
 [`CURRENT_STATUS.json`](CURRENT_STATUS.json), [`DEVELOPMENT_GOAL.json`](DEVELOPMENT_GOAL.json),

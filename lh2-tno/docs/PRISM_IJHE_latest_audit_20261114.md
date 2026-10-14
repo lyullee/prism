@@ -21,6 +21,7 @@
 | `campaign_result.json` | 설비 event·case·risk atom | 34 event, 44 case, 176 atom의 진단 연결 |
 | `verification.json` (native packet catalog) | exact native packet 구조 | 24/24 exact, qualification 승격 아님 |
 | `isolation_branch_audit.json` | 설비별 차단·zero-flow branch | 14개 `reviewed_isolation_success` |
+| `native_isolation_event_reconciliation.json` | 24개 event row와 개별 resolved release/verification 파일의 일치성 | 24/24 일치, mismatch 0; 진단 전용 |
 | `native_isolation_catalog_facility_chain_near_receptor_v3/verification.json` | 근접 수신점에서 비영 harm→조건부 IR/F-N 도달 여부 | 1개 비영 harm atom, IR `4.68×10⁻⁵/year`, N=1 curve; 진단 전용 |
 | `slabx_lh2_validation_audit_recomputed.json` | SLABx-LH2 pool/dispersion 근거 | 제한 component evidence |
 | `dynamiclh2poolx_evidence_audit.json` | JUEL hold-out·HSE Test 6 반경/질량수지 근거 | 소스 해시 변화가 기록된 제한 pool/spreading component evidence; 방출·대기확산·시설 QRA 검증 아님 |
@@ -55,6 +56,7 @@ python scripts/build_ijhe_completion_audit.py `
   --state-snapshot-binding-audit results/20261114/base_state_snapshot_binding_audit_port_bound.json `
   --native-scope-packet-catalog-verification results/20261111/native_generic_scope_packets_isolation/verification.json `
   --native-scope-isolation-branch-catalog-audit results/20261111/native_generic_scope_packets_isolation/isolation_branch_audit.json `
+  --native-isolation-event-reconciliation results/20261114/native_isolation_event_reconciliation.json `
   --native-isolation-catalog-facility-chain-verification results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop_port_bound/verification.json `
   --native-isolation-catalog-near-receptor-verification results/20261111/native_isolation_catalog_facility_chain_near_receptor_v3/verification.json `
   --validation-evidence-matrix results/20261114/validation_evidence_matrix_with_provider_intake.json `
@@ -76,7 +78,7 @@ python scripts/build_ijhe_completion_audit.py `
 
 ## 판정
 
-현재 결과는 43개 검사 중 39개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+현재 결과는 44개 검사 중 40개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
 
 `dynamiclh2poolx_evidence_audit.json`은 JUEL water Trial 4와 aluminium Trial 6의 hold-out 반경 비교(각 100% video-band coverage), HSE Test 6의 종료 반경·건조 시점·질량수지 잔차를 보존한다. 현재 소스와 외부 evidence snapshot의 해시가 달라 `CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT`로 기록되며, 이 근거는 pool/spreading 구성요소의 제한 검증만 지지한다. 설비 사고 방출, 차단·재고 소진, 대기 농도/LFL, 점화·IR/F-N의 독립 검증으로 확장하지 않는다.
 

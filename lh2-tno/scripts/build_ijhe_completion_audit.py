@@ -114,6 +114,11 @@ def main() -> int:
         help="optional nonzero-harm near-receptor replay verification consuming the native isolation catalog",
     )
     parser.add_argument(
+        "--native-isolation-event-reconciliation",
+        type=Path,
+        help="optional per-event reconciliation of native isolation packets and resolved releases",
+    )
+    parser.add_argument(
         "--state-snapshot-binding-audit",
         type=Path,
         help="optional state-snapshot/provider-echo binding audit",
@@ -475,6 +480,15 @@ def main() -> int:
             native_isolation_catalog_near_receptor_verification["_record_path"] = str(
                 args.native_isolation_catalog_near_receptor_verification
             )
+        native_isolation_event_reconciliation = (
+            _object(args.native_isolation_event_reconciliation)
+            if args.native_isolation_event_reconciliation
+            else None
+        )
+        if native_isolation_event_reconciliation is not None:
+            native_isolation_event_reconciliation["_record_path"] = str(
+                args.native_isolation_event_reconciliation
+            )
         state_snapshot_binding_audit = (
             _object(args.state_snapshot_binding_audit)
             if args.state_snapshot_binding_audit
@@ -777,6 +791,7 @@ def main() -> int:
             conditional_facility_release_trace=conditional_facility_release_trace,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
+            native_isolation_event_reconciliation=native_isolation_event_reconciliation,
         )
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError, TypeError) as error:
         raise SystemExit(f"IJHE completion audit input error: {error}") from error
