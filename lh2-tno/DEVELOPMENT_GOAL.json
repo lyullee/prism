@@ -12,6 +12,8 @@
     "documentation": "docs/PRISM_HAZOP_운전모드_시나리오_연결.md",
     "operating_mode_and_state_are_joint_inputs": true,
     "hazop_operating_mode_campaign_trace_implemented": true,
+    "hazop_scenario_id_facility_trace_implemented": true,
+    "hazop_scenario_id_facility_trace_policy": "hazop_scenario_id is preserved on campaign event/case/risk atom, provider evidence exact_match_required and facility branch/component/family accounting; conflicting IDs fail closed",
     "hazop_operating_mode_campaign_trace_modules": [
       "src/lh2_tno/hazop.py",
       "src/lh2_tno/hazop_campaign.py",

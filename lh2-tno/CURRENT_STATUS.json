@@ -164,6 +164,8 @@
   "hazop_integrated_risk_orchestrator_module": "src/lh2_tno/integrated_risk.py",
   "hazop_integrated_risk_orchestrator_schema": "prism.hazop_integrated_risk.v1",
   "hazop_integrated_risk_orchestrator_function": "lh2_tno.integrated_risk.run_hazop_integrated_risk",
+  "hazop_scenario_id_facility_trace_implemented": true,
+  "hazop_scenario_id_facility_trace_policy": "hazop_scenario_id is preserved on campaign event/case/risk atom, provider evidence exact_match_required and facility branch/component/family accounting; conflicting IDs fail closed",
   "hazop_integrated_risk_facility_campaign_evaluator_supported": true,
   "hazop_integrated_risk_facility_campaign_evaluator_factory": "lh2_tno.integrated_risk.build_hazop_facility_campaign_evaluator",
   "hazop_integrated_risk_facility_campaign_policy": "optional existing facility-campaign callback; unsafe frequency, physical-validation, or facility-QRA claims are withheld",
