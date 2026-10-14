@@ -3656,17 +3656,17 @@
     },
     {
       "name": "diagnostic_vertical_handoff_evidence",
-      "status": "BLOCKED",
+      "status": "PASS",
       "diagnostic_only": true,
       "blocking_reason": null,
       "evidence": {
         "record": "results\\20261024\\native_generic_scope_vertical_handoff_chain_v1.json",
         "status": "VERTICAL_OPERATOR_LIMITED_CHAIN_CLOSED",
-        "generated_events": null,
-        "executed_cases": null,
-        "provider_vertical_handoff_consumed": null,
-        "operator_limited": null,
-        "facility_total_risk_withheld": null,
+        "generated_events": 5,
+        "executed_cases": 10,
+        "provider_vertical_handoff_consumed": true,
+        "operator_limited": true,
+        "facility_total_risk_withheld": true,
         "physical_validation_claim": false
       },
       "interpretation": "The vertical-to-horizontal provider handoff diagnostic consumed a declared handoff boundary and is represented in the merged facility scope matrix; it remains synthetic/operator-limited and is not promoted to a qualified vertical accident family."

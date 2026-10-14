@@ -1797,15 +1797,49 @@ def build_ijhe_completion_audit(
         )
     if vertical_handoff_result is not None:
         vertical = vertical_handoff_result
+        # ``vertical_handoff_chain_audit`` is the canonical current schema.
+        # Older diagnostic records used generated/executed/provider flags;
+        # normalize both shapes without inventing a provider packet.
+        vertical_event_count = vertical.get("generated_events")
+        if not isinstance(vertical_event_count, int):
+            vertical_event_count = vertical.get("vertical_event_count")
+        vertical_case_count = vertical.get("executed_cases")
+        if not isinstance(vertical_case_count, int):
+            vertical_case_count = vertical.get("vertical_case_count")
+        vertical_handoff_consumed = vertical.get("provider_vertical_handoff_consumed")
+        if not isinstance(vertical_handoff_consumed, bool):
+            vertical_handoff_consumed = (
+                isinstance(vertical.get("vertical_handoff_state_history_event_count"), int)
+                and vertical.get("vertical_event_count") == vertical.get(
+                    "vertical_handoff_state_history_event_count"
+                )
+                and vertical.get("vertical_event_count", 0) > 0
+            )
+        vertical_operator_limited = vertical.get("operator_limited")
+        if not isinstance(vertical_operator_limited, bool):
+            vertical_operator_limited = (
+                vertical.get("status") == "VERTICAL_OPERATOR_LIMITED_CHAIN_CLOSED"
+                and vertical.get("qualified_provider_packet_count") == 0
+                and vertical.get("provider_packet_qualification_claim") is False
+            )
+        vertical_facility_withheld = vertical.get("facility_total_risk_withheld")
+        if not isinstance(vertical_facility_withheld, bool):
+            vertical_facility_withheld = (
+                vertical.get("facility_qra_claim") is False
+                and vertical.get("facility_total_risk_available") is not True
+            )
         vertical_valid = (
             isinstance(vertical.get("status"), str)
-            and vertical.get("status", "").startswith("PARTIAL_DECLARED_SCOPE")
-            and vertical.get("generated_events") == 5
-            and isinstance(vertical.get("executed_cases"), int)
-            and vertical.get("executed_cases") > 0
-            and vertical.get("provider_vertical_handoff_consumed") is True
-            and vertical.get("operator_limited") is True
-            and vertical.get("facility_total_risk_withheld") is True
+            and (
+                vertical.get("status", "").startswith("PARTIAL_DECLARED_SCOPE")
+                or vertical.get("status") == "VERTICAL_OPERATOR_LIMITED_CHAIN_CLOSED"
+            )
+            and vertical_event_count == 5
+            and isinstance(vertical_case_count, int)
+            and vertical_case_count > 0
+            and vertical_handoff_consumed is True
+            and vertical_operator_limited is True
+            and vertical_facility_withheld is True
             and vertical.get("physical_validation_claim") is False
         )
         scope_rows = scope_matrix.get("rows", [])
@@ -1839,15 +1873,11 @@ def build_ijhe_completion_audit(
                 "evidence": {
                     "record": vertical.get("_record_path"),
                     "status": vertical.get("status"),
-                    "generated_events": vertical.get("generated_events"),
-                    "executed_cases": vertical.get("executed_cases"),
-                    "provider_vertical_handoff_consumed": vertical.get(
-                        "provider_vertical_handoff_consumed"
-                    ),
-                    "operator_limited": vertical.get("operator_limited"),
-                    "facility_total_risk_withheld": vertical.get(
-                        "facility_total_risk_withheld"
-                    ),
+                    "generated_events": vertical_event_count,
+                    "executed_cases": vertical_case_count,
+                    "provider_vertical_handoff_consumed": vertical_handoff_consumed,
+                    "operator_limited": vertical_operator_limited,
+                    "facility_total_risk_withheld": vertical_facility_withheld,
                     "physical_validation_claim": vertical.get("physical_validation_claim"),
                 },
                 "interpretation": vertical_interpretation,

@@ -1746,6 +1746,41 @@ def test_completion_audit_records_vertical_handoff_diagnostic_without_scope_prom
     assert len(report["blocking_reasons"]) == 6
 
 
+def test_completion_audit_accepts_canonical_vertical_handoff_chain_audit_shape():
+    report = build_ijhe_completion_audit(
+        _status(False),
+        _matrix(False),
+        _campaign_result(False),
+        None,
+        vertical_handoff_result={
+            "schema_version": "prism.vertical_handoff_chain_audit.v1",
+            "status": "VERTICAL_OPERATOR_LIMITED_CHAIN_CLOSED",
+            "vertical_event_count": 5,
+            "vertical_chain_closed_event_count": 5,
+            "vertical_chain_mismatch_event_ids": [],
+            "vertical_case_count": 10,
+            "vertical_handoff_state_history_event_count": 5,
+            "all_declared_events_diagnostic_chain_closed": True,
+            "qualified_provider_packet_count": 0,
+            "provider_packet_qualification_claim": False,
+            "frequency_from_provider_packet": False,
+            "physical_validation_claim": False,
+            "facility_qra_claim": False,
+        },
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_vertical_handoff_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["evidence"]["generated_events"] == 5
+    assert check["evidence"]["executed_cases"] == 10
+    assert check["evidence"]["provider_vertical_handoff_consumed"] is True
+    assert check["evidence"]["operator_limited"] is True
+    assert check["evidence"]["facility_total_risk_withheld"] is True
+    assert report["complete_facility_qra_claim"] is False
+
+
 def test_completion_audit_consumes_combined_chain_closure_without_qra_promotion():
     report = build_ijhe_completion_audit(
         _status(False),
