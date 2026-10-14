@@ -515,3 +515,5 @@ def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_ro
     assert campaign_handoff["status"] == "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED"
     assert campaign_handoff["campaign"]["status"] == "PARTIAL_DECLARED_SCOPE"
     assert campaign_handoff["campaign"]["complete_facility_qra_claim"] is False
+    assert campaign_handoff["facility_ledger"]["conditional_diagnostic_facility_risk_available"] is True
+    assert campaign_handoff["facility_ledger"]["facility_total_risk_available"] is False

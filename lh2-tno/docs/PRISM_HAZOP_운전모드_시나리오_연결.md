@@ -45,7 +45,7 @@ SLABx-LH2/피해영향/점화/시설 IR·F-N 경로
 
 여러 설비의 현재 상태를 함께 처리할 때는 `run_hazop_facility_runtime(...)`을 사용한다. 이 조정기는 설비별 HAZOP 선택, branch 결과, provider identity와 현재 기상 IR 기여를 하나의 원장으로 묶는다. 단일 branch와 검토된 빈도 바인딩이 있는 경우에만 현재 조건의 receptor별 IR 기여를 표시하며, HAZOP가 활성화한 branch를 시설 연간 IR/F-N으로 자동 승격하지 않는다. 시설 연간 결과는 전체 문헌 사건 목록·기상·인구·방호·미계산 사고 원장을 별도로 닫아야 한다.
 
-HAZOP 결과를 이 기존 시설 원장으로 넘겨야 할 때는 `build_hazop_facility_campaign_result(...)`를 사용한다. 이 handoff는 설비마다 정확히 하나의 `CONSEQUENCE_EVALUATED` branch, provider 방출 종료·재고 경계, 현재 기상 IR, 점화 branch를 요구한다. `scenario_bindings`에는 반드시 `hazop_scenario_id`를 넣어야 하며, 선택된 운전 모드 시나리오 ID와 다르면 캠페인을 만들지 않는다. 연간 기상·인구·차단 branch별 피해는 호출자가 명시적으로 공급하고, 누락된 branch나 빈도는 0으로 채우지 않는다. 여러 HAZOP branch가 동시에 활성화된 경우에는 이 handoff가 보류되며, 먼저 branch별 사건 빈도와 release/isolation partition을 별도로 닫아야 한다. 성공해도 결과 상태는 `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED`이고 기존 시설 원장의 조건부 IR/F-N만 계산한다. qualified provider, 독립 물리 검증, 전체 사고범위가 닫히기 전에는 시설 QRA 승격이 계속 `false`다.
+HAZOP 결과를 이 기존 시설 원장으로 넘겨야 할 때는 `build_hazop_facility_campaign_result(...)`를 사용한다. 이 handoff는 설비마다 정확히 하나의 `CONSEQUENCE_EVALUATED` branch, provider 방출 종료·재고 경계, 현재 기상 IR, 점화 branch를 요구한다. `scenario_bindings`에는 반드시 `hazop_scenario_id`를 넣어야 하며, 선택된 운전 모드 시나리오 ID와 다르면 캠페인을 만들지 않는다. 연간 기상·인구·차단 branch별 피해는 호출자가 명시적으로 공급하고, 누락된 branch나 빈도는 0으로 채우지 않는다. 여러 HAZOP branch가 동시에 활성화된 경우에는 이 handoff가 보류되며, 먼저 branch별 사건 빈도와 release/isolation partition을 별도로 닫아야 한다. 성공하면 `campaign`와 함께 기존 `merge_facility_campaign_results(...)`가 계산한 `facility_ledger`도 반환한다. 이 ledger는 설비별 risk atom을 시설 조건부 IR/F-N으로 합산하되, 결과 상태는 `HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED`이고 qualified provider, 독립 물리 검증, 전체 사고범위가 닫히기 전에는 시설 QRA 승격이 계속 `false`다.
 
 ## 결과 읽기
 

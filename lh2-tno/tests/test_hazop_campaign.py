@@ -173,6 +173,9 @@ def test_hazop_runtime_can_enter_existing_facility_campaign_contract():
     assert len(result["campaign"]["risk_atoms"]) == 4
     assert result["campaign"]["complete_facility_qra_claim"] is False
     assert result["campaign"]["provider_packet_promoted"] is False
+    assert result["facility_ledger"]["conditional_diagnostic_facility_risk_available"] is True
+    assert result["facility_ledger"]["facility_total_risk_available"] is False
+    assert result["facility_ledger"]["qualified_facility_qra_available"] is False
 
 
 def test_hazop_bridge_rejects_unmatched_mode_specific_scenario_id():

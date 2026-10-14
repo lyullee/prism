@@ -19,6 +19,7 @@ import math
 from typing import Any
 
 from .contracts import canonical_digest
+from .facility_ledger import merge_facility_campaign_results
 from .realtime_campaign import (
     IGNITION_BRANCHES,
     build_realtime_facility_campaign_result,
@@ -269,6 +270,14 @@ def build_hazop_facility_campaign_result(
         scenario_bindings=normalized_bindings,
         expected_component_ids=tuple(sorted(required_components)),
     )
+    # Build the existing facility ledger immediately so the HAZOP handoff
+    # exposes component-to-facility IR/F-N aggregation in one auditable result.
+    # The ledger itself retains operator-limited/provider/validation blockers;
+    # this call never turns a conditional diagnostic sum into qualified QRA.
+    facility_ledger = merge_facility_campaign_results(
+        [campaign],
+        expected_component_ids=tuple(sorted(required_components)),
+    )
     return {
         "schema_version": "prism.hazop_facility_campaign_handoff.v1",
         "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
@@ -276,6 +285,7 @@ def build_hazop_facility_campaign_result(
         "runtime_result_digest": snapshot["runtime_result_digest"],
         "snapshot": snapshot,
         "campaign": campaign,
+        "facility_ledger": facility_ledger,
         "policy": {
             "hazop_scenario_id_bound": True,
             "one_active_hazop_branch_per_component": True,
