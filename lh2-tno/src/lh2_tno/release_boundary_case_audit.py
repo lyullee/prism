@@ -101,6 +101,35 @@ def _termination_evidence_candidates(
     return candidates
 
 
+def _candidate_matches_case_packet(
+    candidate: Mapping[str, Any],
+    case: Mapping[str, Any],
+) -> bool:
+    """Return whether a catalog row matches the consuming packet digest.
+
+    Event identity alone is insufficient when a catalog intentionally keeps
+    multiple provider replays for the same opening.  Exact provider-result
+    digest matching makes the selected termination ledger deterministic while
+    preserving fail-closed ambiguity when no unique variant matches.
+    """
+
+    identity = _as_mapping(case.get("provider_packet_identity"))
+    raw_expected = identity.get("provider_result_digests")
+    if isinstance(raw_expected, Sequence) and not isinstance(raw_expected, (str, bytes)):
+        expected = {str(value) for value in raw_expected if value is not None}
+    elif isinstance(raw_expected, str) and raw_expected:
+        expected = {raw_expected}
+    else:
+        expected = set()
+    if not expected:
+        return False
+    raw_candidate = candidate.get("provider_result_digests")
+    if isinstance(raw_candidate, Sequence) and not isinstance(raw_candidate, (str, bytes)):
+        return {str(value) for value in raw_candidate if value is not None} == expected
+    digest = candidate.get("provider_result_digest")
+    return isinstance(digest, str) and digest in expected
+
+
 def _audit_termination_evidence(
     case: Mapping[str, Any],
     row: Mapping[str, Any],
@@ -668,13 +697,25 @@ def build_release_boundary_case_audit(
             case_key=_case_key(ledger_row),
             event_id=event_id,
         )
+        selected_evidence = evidence_candidates[0] if evidence_candidates else None
+        ambiguous_evidence = False
+        if len(evidence_candidates) > 1:
+            digest_matches = [
+                candidate
+                for candidate in evidence_candidates
+                if _candidate_matches_case_packet(candidate, case)
+            ]
+            if len(digest_matches) == 1:
+                selected_evidence = digest_matches[0]
+            else:
+                ambiguous_evidence = True
         evidence_audit = _audit_termination_evidence(
             case,
             ledger_row,
-            evidence_candidates[0] if evidence_candidates else None,
+            selected_evidence,
             residual_tolerance_kg=tolerance,
         )
-        if len(evidence_candidates) > 1:
+        if ambiguous_evidence:
             evidence_audit["status"] = "INVALID"
             evidence_audit["used"] = False
             evidence_audit.setdefault("blocking_reasons", []).append(

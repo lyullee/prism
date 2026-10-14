@@ -149,3 +149,72 @@ def test_catalog_accepts_multiple_storage_directories(tmp_path):
     )
     assert report["status"] == "EVIDENCE_CATALOG_READY"
     assert report["event_count"] == 2
+
+
+def test_catalog_preserves_distinct_provider_replays_for_one_event(tmp_path):
+    first = tmp_path / "first" / "events" / "one"
+    second = tmp_path / "second" / "events" / "two"
+    first.mkdir(parents=True)
+    second.mkdir(parents=True)
+    for event_dir, digest in ((first, "old-digest"), (second, "new-digest")):
+        (event_dir / "resolved_release.json").write_text(json.dumps({
+            "event_id": "same/event",
+            "component_id": "tank-1",
+            "provider_result_digest": digest,
+        }), encoding="utf-8")
+        (event_dir / "verification.json").write_text(json.dumps({
+            "provider_result_digest": digest,
+            "provider_run_meta": {
+                "termination_basis": "inventory_depletion_positive_threshold",
+                "available_mass_kg": 1.0,
+                "cumulative_mass_out_kg": 0.5,
+                "threshold_mass_kg": 0.1,
+                "remaining_mass_kg": 0.5,
+                "max_abs_mass_residual_kg": 0.0,
+            },
+        }), encoding="utf-8")
+    report = build_provider_termination_evidence_catalog(
+        storage_catalog_dir=first.parent.parent,
+        additional_storage_catalog_dirs=[second.parent.parent],
+    )
+    assert report["status"] == "EVIDENCE_CATALOG_READY"
+    assert report["row_count"] == 2
+    assert report["event_count"] == 1
+    assert report["duplicate_event_ids"] == []
+    assert report["variant_event_ids"] == ["same/event"]
+
+
+def test_catalog_accepts_single_direct_provider_bundle(tmp_path):
+    packet = {
+        "provider_export_schema": "prism.resolved_release.v1",
+        "event_id": "direct/event",
+        "component_id": "tank-1",
+        "provider_result_digest": "direct-digest",
+    }
+    verification = {
+        "provider_result_digest": "direct-digest",
+        "termination_basis": "reviewed_isolation_success",
+        "isolation_success": True,
+        "isolation_time_s": 0.1,
+        "post_isolation_observation_s": 0.2,
+        "mass_residual_kg": 0.0,
+    }
+    (tmp_path / "resolved_release.json").write_text(json.dumps(packet), encoding="utf-8")
+    (tmp_path / "verification.json").write_text(json.dumps(verification), encoding="utf-8")
+    (tmp_path / "provider_response.json").write_text(json.dumps({
+        "provider_export_schema": "prism.external_accident_history.v1",
+        "data": {
+            "event_id": "direct/event",
+            "component_id": "tank-1",
+            "termination_basis": "reviewed_isolation_success",
+            "termination_provenance": "direct replay",
+            "available_mass_kg": 1.0,
+            "cumulative_mass_out_kg": 0.1,
+            "duration_s": 0.3,
+            "provider_meta": {"isolation_success": True},
+        },
+    }), encoding="utf-8")
+    report = build_provider_termination_evidence_catalog(storage_catalog_dir=tmp_path)
+    assert report["status"] == "EVIDENCE_CATALOG_READY"
+    assert report["event_count"] == 1
+    assert report["rows"][0]["event_id"] == "direct/event"

@@ -34,11 +34,18 @@ def _number(value: Any) -> float | None:
 
 def _storage_rows(catalog_dir: Path) -> tuple[list[dict[str, Any]], list[str]]:
     events_dir = catalog_dir / "events"
-    if not events_dir.is_dir():
+    if events_dir.is_dir():
+        event_dirs = sorted(path for path in events_dir.iterdir() if path.is_dir())
+    elif (catalog_dir / "resolved_release.json").is_file() and (catalog_dir / "verification.json").is_file():
+        # A single persisted provider packet is a useful additional replay
+        # source.  Accept it directly so callers do not need to manufacture a
+        # one-event catalog wrapper around an already immutable result bundle.
+        event_dirs = [catalog_dir]
+    else:
         raise ValueError(f"storage catalog events directory is missing: {events_dir}")
     rows: list[dict[str, Any]] = []
     errors: list[str] = []
-    for event_dir in sorted(path for path in events_dir.iterdir() if path.is_dir()):
+    for event_dir in event_dirs:
         packet_path = event_dir / "resolved_release.json"
         if not packet_path.exists():
             packet_path = event_dir / "resolved_release_set.json"
@@ -318,9 +325,29 @@ def build_provider_termination_evidence_catalog(
             str(value) for value in (inventory_source_paths or {}).values() if value
         )
     event_ids = [row["event_id"] for row in rows]
-    duplicate_event_ids = sorted({event_id for event_id in event_ids if event_ids.count(event_id) > 1})
+    # One facility event can legitimately have several provider packets when
+    # the same opening is replayed with different provider clocks, isolation
+    # policies, or model revisions.  Keep those variants in the catalog and
+    # let the consuming case select by its exact provider-result digest.  A
+    # repeated event/digest pair is still an ambiguous duplicate and remains
+    # fail-closed.
+    rows_by_event: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        rows_by_event.setdefault(str(row["event_id"]), []).append(row)
+    duplicate_event_ids = sorted(
+        event_id
+        for event_id, event_rows in rows_by_event.items()
+        if len({str(row.get("provider_result_digest")) for row in event_rows})
+        < len(event_rows)
+    )
+    variant_event_ids = sorted(
+        event_id
+        for event_id, event_rows in rows_by_event.items()
+        if len(event_rows) > 1
+        and event_id not in duplicate_event_ids
+    )
     if duplicate_event_ids:
-        errors.extend(f"duplicate evidence event_id: {event_id}" for event_id in duplicate_event_ids)
+        errors.extend(f"duplicate evidence event_id/digest: {event_id}" for event_id in duplicate_event_ids)
     return {
         "schema_version": SCHEMA,
         "status": (
@@ -333,6 +360,7 @@ def build_provider_termination_evidence_catalog(
         "row_count": len(rows),
         "event_count": len(set(event_ids)),
         "duplicate_event_ids": duplicate_event_ids,
+        "variant_event_ids": variant_event_ids,
         "errors": list(dict.fromkeys(errors)),
         "source_records": list(dict.fromkeys(source_records)),
         "rows": rows,

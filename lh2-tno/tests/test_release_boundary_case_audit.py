@@ -299,3 +299,42 @@ def test_case_audit_accepts_paired_two_sided_provider_evidence():
     assert result["provider_termination_evidence_status"] == "VALID"
     assert result["provider_termination_evidence_used"] is True
     assert result["numerical_closure_status"] == "NUMERICALLY_CLOSED"
+
+
+def test_case_audit_selects_provider_replay_by_exact_digest():
+    case = _case("replayed-event")
+    row = _ledger_row("replayed-event")
+    evidence = {
+        "rows": [
+            {
+                "event_id": "replayed-event",
+                "provider_result_digest": "old-result",
+                "termination_basis": "reviewed_isolation_success",
+                "available_mass_kg": 10.0,
+                "cumulative_mass_out_kg": 3.0,
+                "isolation_success": True,
+                "isolation_time_s": 0.1,
+                "post_isolation_observation_s": 0.2,
+                "termination_provenance": "old replay",
+            },
+            {
+                "event_id": "replayed-event",
+                "provider_result_digest": "result",
+                "termination_basis": "reviewed_isolation_success",
+                "available_mass_kg": 10.0,
+                "cumulative_mass_out_kg": 3.0,
+                "isolation_success": True,
+                "isolation_time_s": 0.1,
+                "post_isolation_observation_s": 0.2,
+                "termination_provenance": "new replay",
+            },
+        ]
+    }
+    report = build_release_boundary_case_audit(
+        _assessment([case], [row]),
+        provider_termination_evidence=evidence,
+    )
+    result = report["rows"][0]
+    assert result["provider_termination_evidence_status"] == "VALID"
+    assert result["provider_termination_evidence_used"] is True
+    assert result["provider_termination_evidence_digest"] == "result"

@@ -1,4 +1,4 @@
-# PRISM v0.6.0 IJHE 최신 감사 기준 (2026-11-15)
+# PRISM v0.6.2 IJHE 최신 감사 기준 (2026-11-15)
 
 현재 권위 union은 일반 옥외 액화수소 시설의 **34개 event, 44개 case,
 176개 risk atom**이다. 설비 상태→HAZOP/운전 모드→문헌 빈도→provider 방출
@@ -9,11 +9,10 @@
 
 권위 감사 파일:
 
-[`ijhe_completion_audit_union_vertical_inventory_handoff_port_bound.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_port_bound.json)
+[`ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json`](../results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json)
 
-현재 결과는 **50개 검사 중 46개 PASS, 4개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
-차단 사유는 전체 방출 종료 경계, 실제 qualified provider packet, 독립 물리검증,
-시설 전체 IR/F-N 승격이다.
+현재 결과는 **53개 검사 중 48개 PASS, 5개 BLOCKED, `INCOMPLETE_EVIDENCE`**다.
+차단 검사에는 전체 방출 종료 경계, 실제 qualified provider packet, 선언 사고범위의 독립 물리검증, 시설 전체 IR/F-N, 44개 case의 exact qualified packet coverage가 포함된다.
 
 ## 최신 연결 결과
 
@@ -23,7 +22,7 @@
 | HAZOP event identity | 34/34 bound |
 | frequency port binding | 34/34 scoped, unbound 0, mismatch 0 |
 | 수직 handoff | 5 event, 10 case, `inventory_depletion` 종료 |
-| provider 종료 evidence | 34 event row, 32 case 사용, 2 unsupported basis |
+| provider 종료 evidence | 35 provider row, 34 event ID, 32 case 사용, 2 invalid case |
 | numerical closure | 32 closed, 29 operator-review, 12 open |
 | strict boundary eligible | 3; 41 blocked |
 | 시설 IR/F-N 승격 | `false` |
@@ -34,10 +33,11 @@
 
 ## 주요 산출물
 
-- [최신 union 시설평가](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/facility_assessment.json)
-- [케이스별 방출 경계 감사](../results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff.json)
+- [최신 union 시설평가](../results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/facility_assessment.json)
+- [케이스별 방출 경계 감사](../results/20261115/release_boundary_case_audit_union_vertical_inventory_handoff_isolation_current.json)
 - [조건부 시설 risk view](../results/20261115/conditional_facility_risk_view_with_release_trace.json)
-- [provider 종료 증거 catalog](../results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff.json)
+- [provider 종료 증거 catalog](../results/20261115/provider_termination_evidence_catalog_union_vertical_inventory_handoff_isolation_current.json)
+- [provider replay 추적성 기록](PRISM_provider_termination_variant_replay_20261115.md)
 - [수직 종료 증거 검색](../results/20261115/vertical_inventory_handoff_termination_evidence_search.json)
 - [수직 handoff 개발 기록](PRISM_vertical_inventory_handoff_20261115.md)
 

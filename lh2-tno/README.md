@@ -4,20 +4,18 @@
 
 공정·설비 상태, 사고 시나리오, 발생 빈도와 피해영향을 연결하는 위험 분석 시스템.
 
-## 최신 v0.6.0 IJHE 기준점 (2026-11-15)
+## 최신 v0.6.2 IJHE 기준점 (2026-11-15)
 
 수직 handoff의 종료 경계를 실제로 연장 추정하지 않고, provider가 이미 계산한
 유한 재고·양의 임계값 이력을 다섯 수직 event에 재결합했다. 최신 권위 결과는
 [`native_full_scope_union_assessment_vertical_inventory_handoff_port_bound`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound/),
 [`조건부 risk view`](results/20261115/conditional_facility_risk_view_with_release_trace.json),
-[`최신 IJHE 감사`](results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_port_bound.json)이다.
+[`최신 IJHE 감사`](results/20261115/ijhe_completion_audit_union_vertical_inventory_handoff_isolation_current.json)이다.
 34개 event·44개 case·176개 risk atom이 유지되고, 34/34 event가 명시적 사고
 포트에 결합되며 case/risk-atom port mismatch는 0건이다. 수직 handoff는 5개
 event·10개 weather case 모두 `inventory_depletion` 종료 기준을 사용하지만,
 `EXECUTED_OPERATOR_LIMITED`·synthetic handoff·독립 물리검증 부재는 그대로
-기록된다. 종료 evidence catalog는 34 event row와 32 case 사용, 2 unsupported
-basis를 보존한다. 최신 감사는 50개 검사 중 46개 PASS·4개 BLOCKED인
-`INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 상세 재현 명령과 해석은
+기록된다. 종료 evidence catalog는 35 provider row와 34 event ID를 보존하고, 현재 union의 44 case 중 32개가 provider 종료 근거와 정확히 일치한다. 동일 사건 ID의 서로 다른 provider replay는 digest로 구분한다. 최신 감사는 53개 검사 중 48개 PASS·5개 BLOCKED인 `INCOMPLETE_EVIDENCE`이며 시설 IR/F-N 승격은 `false`다. 상세 재현 명령과 해석은
 [`수직 handoff 재고소진 연결 기록`](docs/PRISM_vertical_inventory_handoff_20261115.md)과
 [`PRISM IJHE 최신 감사`](docs/PRISM_IJHE_latest_audit_20261115.md)에 있다.
 
@@ -31,7 +29,7 @@ risk atom**을 유지하고 `NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC`으로 기록된
 약 `155.7 ms`, 전체 chain은 약 `146.1 s`였다. 이는 빈도→설비 방출→격리→피해→시설
 ledger 연결을 닫은 진단 증거이며, 실제 현장 빈도·qualified provider·독립 물리검증·시설
 전체 IR/F-N을 의미하지 않는다. 상세 결과는 [`격리 branch union 재결합 기록`](docs/PRISM_native_frequency_isolation_union_20261115.md)과
-[`최신 isolation union`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/)에서 확인한다.
+[`최신 isolation union`](results/20261115/native_full_scope_union_assessment_vertical_inventory_handoff_port_bound_isolation_current/)에서 확인한다. 동일 사건 ID를 가진 provider replay를 digest로 선택하는 규칙과 새 방출경계 재감사는 [`provider replay 추적성 기록`](docs/PRISM_provider_termination_variant_replay_20261115.md)에 보존했다.
 현장 빈도 학습, 센서 역추론, 실내, 폭굉, 전체 도미노는 여전히 필수 범위에서
 제외하고 문헌 빈도만 사용한다. 지원되지 않은 사고는 다른 사고로 대체하지 않고
 `PARTIAL`, `BLOCKED_REVIEW`, `UNCOMPUTED` 또는 증거요청으로 남긴다.
