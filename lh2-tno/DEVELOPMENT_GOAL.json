@@ -3215,7 +3215,7 @@
   "ijhe_completion_audit_frequency_port_check_name": "diagnostic_facility_frequency_port_binding",
   "ijhe_completion_audit_frequency_port_status": "PASS_DIAGNOSTIC_ONLY_WITHHELD; 44 provider outlet-port identities recorded, 0 reviewed frequency-port identities; provider ports are not substituted and facility QRA promotion false",
   "ijhe_completion_audit_external_release_artifact_check_name": "diagnostic_external_release_artifact_intake",
-  "ijhe_completion_audit_external_release_artifact_status": "PASS_DIAGNOSTIC_ONLY; 13 external JSON files and 27 release rows inventoried; 0 qualification sidecars, 0 actual-origin rows and 0 closure-ready rows (20 schema-unqualified, 7 closure-evidence-open); promotion false",
+  "ijhe_completion_audit_external_release_artifact_status": "PASS_DIAGNOSTIC_ONLY; 14 external JSON files and 28 release rows inventoried; 0 qualification sidecars, 0 actual-origin rows and 0 closure-ready rows (21 schema-unqualified, 7 closure-evidence-open); promotion false",
   "ijhe_completion_audit_external_release_artifact_record": "results/20261108/external_release_artifact_intake.json",
   "ijhe_completion_audit_external_release_artifact_module": "src/lh2_tno/external_release_artifact_intake.py",
   "ijhe_completion_audit_external_release_artifact_script": "scripts/audit_external_release_artifacts.py",

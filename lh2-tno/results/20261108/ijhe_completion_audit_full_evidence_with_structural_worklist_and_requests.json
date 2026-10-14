@@ -4366,16 +4366,16 @@
         "record": "results\\20261108\\external_release_artifact_intake.json",
         "schema_version": "prism.external_release_artifact_intake.v1",
         "status": "EXTERNAL_RELEASE_ARTIFACTS_REQUIRE_QUALIFICATION",
-        "artifact_file_count": 13,
-        "release_row_count": 27,
+        "artifact_file_count": 14,
+        "release_row_count": 28,
         "qualified_sidecar_row_count": 0,
         "closure_ready_row_count": 0,
         "closure_status_counts": {
-          "SCHEMA_UNQUALIFIED": 20,
+          "SCHEMA_UNQUALIFIED": 21,
           "CLOSURE_EVIDENCE_OPEN": 7
         },
         "actual_origin_row_count": 0,
-        "synthetic_or_model_prediction_row_count": 27,
+        "synthetic_or_model_prediction_row_count": 28,
         "error_count": 0,
         "policy": {
           "frequency_assigned": false,
