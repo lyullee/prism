@@ -161,6 +161,20 @@ def test_view_preserves_literature_frequency_scenarios_and_rank_stability() -> N
                     "worker-01": [1.0e-6, 2.0e-6]
                 },
                 "conditional_diagnostic_facility_expected_death_fn_low_high": [[], []],
+                "uncomputed_cases": [
+                    {
+                        "event_id": "event-1",
+                        "release_branch_id": "branch-1",
+                        "annual_condition_id": "weather-1",
+                        "status": "EXECUTED_OPERATOR_LIMITED",
+                    },
+                    {
+                        "event_id": "event-1",
+                        "release_branch_id": "branch-1",
+                        "annual_condition_id": "weather-1",
+                        "status": "EXECUTED_OPERATOR_LIMITED",
+                    },
+                ],
                 "conditional_diagnostic_facility_risk_available": True,
                 "asset_rank_by_known_expected_fatalities_low_high": [{"tank-01": 1}, {"tank-01": 1}],
                 "scenario_family_rank_by_known_expected_fatalities_low_high": [{"vessel_hole": 1}, {"vessel_hole": 1}],
@@ -190,3 +204,10 @@ def test_view_preserves_literature_frequency_scenarios_and_rank_stability() -> N
     assert frequency["scenarios"][0]["id"] == "published"
     assert frequency["asset_rank_stability"]["top_id_consistent"] is True
     assert frequency["provider_packet_promoted"] is False
+    assert frequency["uncomputed_case_count_by_scenario"] == {"published": 2}
+    assert frequency["uncomputed_case_unique_key_count_by_scenario"] == {"published": 1}
+    assert frequency["uncomputed_case_duplicate_row_count_by_scenario"] == {"published": 1}
+    assert frequency["uncomputed_case_union_count"] == 1
+    assert frequency["scenarios"][0]["uncomputed_case_status_counts"] == {
+        "EXECUTED_OPERATOR_LIMITED": 2
+    }

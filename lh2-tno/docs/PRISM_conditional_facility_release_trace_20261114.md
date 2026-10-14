@@ -39,6 +39,11 @@ python scripts/build_conditional_facility_risk_view.py `
 `frequency_inference_allowed=false`를 함께 기록하므로, 문헌 값을 센서값에서
 추론하거나 시설 credible interval로 과장하지 않는다.
 
+각 시나리오에는 30개의 `uncomputed_cases` 행(29개 고유 case key)이 남아 있으며,
+상태별로 `EXECUTED_OPERATOR_LIMITED` 29개와 `EXECUTED_DOMAIN_INCOMPLETE` 1개를
+구분한다. 중복 행은 삭제하지 않고 그대로 보존하므로, “계산되지 않음”과 “계산은
+실행됐지만 자격 또는 계산영역이 닫히지 않음”을 소비자가 구별할 수 있다.
+
 이 view는 **조건부 진단 출력**이다. `qualification.promotion_allowed`는 항상
 `false`이며, qualified provider packet·독립 물리검증·전체 사고범위·시설 전체
 IR/F-N이 확보될 때까지 시설 QRA 결과로 승격하지 않는다. 누락·운영자 제한·피해

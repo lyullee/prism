@@ -126,6 +126,14 @@ def test_completion_audit_checks_literature_frequency_trace() -> None:
                 "top_id_consistent_by_endpoint": [True],
                 "top_id_consistent": True,
             },
+            "uncomputed_case_count_by_scenario": {"published": 1},
+            "uncomputed_case_unique_key_count_by_scenario": {"published": 1},
+            "uncomputed_case_duplicate_row_count_by_scenario": {"published": 0},
+            "uncomputed_case_union_count": 1,
+            "uncomputed_case_status_counts_by_scenario": {
+                "published": {"EXECUTED_OPERATOR_LIMITED": 1}
+            },
+            "uncomputed_case_policy": "explicit status; no substitution",
             "scenarios": [
                 {
                     "id": "published",
@@ -140,6 +148,11 @@ def test_completion_audit_checks_literature_frequency_trace() -> None:
                         {},
                         {},
                     ],
+                    "uncomputed_case_count": 1,
+                    "uncomputed_case_keys": ["event-1|branch-1|weather-1"],
+                    "uncomputed_case_status_counts": {
+                        "EXECUTED_OPERATOR_LIMITED": 1
+                    },
                 }
             ],
             "semantics": "explicit literature rates; no inference",

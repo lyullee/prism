@@ -5121,6 +5121,75 @@ def build_ijhe_completion_audit(
                 and len(row.get("conditional_diagnostic_facility_expected_death_fn_low_high")) == 2
                 for row in frequency_rows
             )
+            uncomputed_counts = frequency_trace.get(
+                "uncomputed_case_count_by_scenario"
+            )
+            uncomputed_unique_counts = frequency_trace.get(
+                "uncomputed_case_unique_key_count_by_scenario"
+            )
+            uncomputed_duplicate_counts = frequency_trace.get(
+                "uncomputed_case_duplicate_row_count_by_scenario"
+            )
+            uncomputed_status_counts = frequency_trace.get(
+                "uncomputed_case_status_counts_by_scenario"
+            )
+            uncomputed_summary_valid = (
+                isinstance(uncomputed_counts, Mapping)
+                and set(uncomputed_counts) == set(scenario_ids)
+                and all(
+                    isinstance(value, int) and value >= 0
+                    for value in uncomputed_counts.values()
+                )
+                and isinstance(uncomputed_unique_counts, Mapping)
+                and set(uncomputed_unique_counts) == set(scenario_ids)
+                and all(
+                    isinstance(value, int)
+                    and value >= 0
+                    and value <= uncomputed_counts.get(scenario_id)
+                    for scenario_id, value in uncomputed_unique_counts.items()
+                )
+                and isinstance(uncomputed_duplicate_counts, Mapping)
+                and set(uncomputed_duplicate_counts) == set(scenario_ids)
+                and all(
+                    isinstance(value, int)
+                    and value >= 0
+                    and value
+                    == uncomputed_counts.get(scenario_id)
+                    - uncomputed_unique_counts.get(scenario_id)
+                    for scenario_id, value in uncomputed_duplicate_counts.items()
+                )
+                and isinstance(uncomputed_status_counts, Mapping)
+                and set(uncomputed_status_counts) == set(scenario_ids)
+                and all(
+                    isinstance(value, Mapping)
+                    and all(
+                        isinstance(status_count, int) and status_count >= 0
+                        for status_count in value.values()
+                    )
+                    and sum(value.values()) == uncomputed_counts.get(scenario_id)
+                    for scenario_id, value in uncomputed_status_counts.items()
+                )
+                and all(
+                    isinstance(row.get("uncomputed_case_count"), int)
+                    and row.get("uncomputed_case_count") >= 0
+                    and row.get("uncomputed_case_count")
+                    == uncomputed_counts.get(row.get("id"))
+                    and isinstance(row.get("uncomputed_case_keys"), list)
+                    and len(row.get("uncomputed_case_keys"))
+                    == row.get("uncomputed_case_count")
+                    and all(
+                        isinstance(case_key, str)
+                        for case_key in row.get("uncomputed_case_keys")
+                    )
+                    and row.get("uncomputed_case_status_counts")
+                    == uncomputed_status_counts.get(row.get("id"))
+                    for row in frequency_rows
+                )
+                and isinstance(frequency_trace.get("uncomputed_case_union_count"), int)
+                and frequency_trace.get("uncomputed_case_union_count") >= 0
+                and isinstance(frequency_trace.get("uncomputed_case_policy"), str)
+                and bool(frequency_trace.get("uncomputed_case_policy"))
+            )
             asset_rank_stability = frequency_trace.get("asset_rank_stability")
             family_rank_stability = frequency_trace.get(
                 "scenario_family_rank_stability"
@@ -5145,6 +5214,7 @@ def build_ijhe_completion_audit(
                 and frequency_trace.get("scenario_count") == len(frequency_rows)
                 and scenario_ids_valid
                 and frequency_rows_valid
+                and uncomputed_summary_valid
                 and rank_stability_valid
                 and port_binding_valid
                 and frequency_trace.get("statistical_confidence_interval") is False
@@ -5164,6 +5234,16 @@ def build_ijhe_completion_audit(
                     "scenario_ids": scenario_ids,
                     "asset_rank_stability": asset_rank_stability,
                     "scenario_family_rank_stability": family_rank_stability,
+                    "uncomputed_case_count_by_scenario": uncomputed_counts,
+                    "uncomputed_case_unique_key_count_by_scenario": uncomputed_unique_counts,
+                    "uncomputed_case_duplicate_row_count_by_scenario": uncomputed_duplicate_counts,
+                    "uncomputed_case_union_count": frequency_trace.get(
+                        "uncomputed_case_union_count"
+                    ),
+                    "uncomputed_case_status_counts_by_scenario": uncomputed_status_counts,
+                    "uncomputed_case_policy": frequency_trace.get(
+                        "uncomputed_case_policy"
+                    ),
                     "frequency_port_binding": port_binding,
                     "statistical_confidence_interval": frequency_trace.get(
                         "statistical_confidence_interval"
@@ -5186,8 +5266,10 @@ def build_ijhe_completion_audit(
             frequency_check["diagnostic_only"] = True
             frequency_check["interpretation"] = (
                 "The digital-twin view carries explicit literature-frequency scenarios, quantile "
-                "provenance and rank-stability evidence. It records that no frequency inference, "
-                "facility credible interval, provider promotion or physical-validation claim was made."
+                "provenance and rank-stability evidence. It also preserves each scenario's "
+                "uncomputed or incomplete case rows with explicit status. It records that no "
+                "frequency inference, facility credible interval, provider promotion or "
+                "physical-validation claim was made."
             )
             checks.append(frequency_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]

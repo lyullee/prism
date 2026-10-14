@@ -3922,6 +3922,25 @@
     "conditional_facility_frequency_trace_scenario_count": 5,
     "conditional_facility_frequency_trace_status": "PASS_DIAGNOSTIC_ONLY",
     "conditional_facility_frequency_trace_inference_allowed": false,
-    "conditional_facility_frequency_trace_rank_stability": "asset and scenario-family top-rank consistency recorded"
+    "conditional_facility_frequency_trace_rank_stability": "asset and scenario-family top-rank consistency recorded",
+    "conditional_facility_frequency_trace_uncomputed_case_count_by_scenario": {
+      "native-isolation-catalog-literature-published": 30,
+      "native-isolation-catalog-literature-p05": 30,
+      "native-isolation-catalog-literature-p95": 30,
+      "native-full-scope-independent-event-low": 30,
+      "native-full-scope-independent-event-high": 30
+    },
+    "conditional_facility_frequency_trace_uncomputed_case_unique_key_count_by_scenario": {
+      "native-isolation-catalog-literature-published": 29,
+      "native-isolation-catalog-literature-p05": 29,
+      "native-isolation-catalog-literature-p95": 29,
+      "native-full-scope-independent-event-low": 29,
+      "native-full-scope-independent-event-high": 29
+    },
+    "conditional_facility_frequency_trace_uncomputed_case_union_count": 29,
+    "conditional_facility_frequency_trace_uncomputed_case_statuses": {
+      "EXECUTED_OPERATOR_LIMITED": 29,
+      "EXECUTED_DOMAIN_INCOMPLETE": 1
+    }
   }
 }

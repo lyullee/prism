@@ -81,6 +81,9 @@ python scripts/build_ijhe_completion_audit.py `
 - 문헌 빈도 불확실성과 처리시간이 별도 장부로 기록된다.
 - 조건부 view가 5개 문헌 빈도 시나리오, 분위수 출처, 상관 가정, 설비·사고군
   순위 안정성, 명시적 포트 결합과 빈도 추론 금지를 전달한다.
+- 각 빈도 시나리오에서 30개 미충족·불완전 case 행과 29개 고유 case key를
+  상태별로 보존한다. `EXECUTED_OPERATOR_LIMITED`와
+  `EXECUTED_DOMAIN_INCOMPLETE`를 `UNCOMPUTED`로 뭉뚱그리지 않는다.
 - HAZOP 운전 모드는 명시적 입력으로만 선택된다.
 - 검사센터 실측 상태와 운전 모드가 HAZOP 선택·provider binding·격리 branch 진단에 연결된다.
 - 조건부 시설 view에서 44개 case의 방출 지속시간·재고·종료 상태와 176개 risk atom의
@@ -120,4 +123,6 @@ accounting을 갖는지 확인한다. 이 검사는 디지털트윈 전달 경�
 결합 상태를 갖는지 확인한다. `frequency_inference_allowed=false`,
 `facility_credible_interval=false`, `complete_facility_qra_claim=false`를 함께
 검사하므로 이 결과는 빈도 민감도 장부이지 현장 빈도 학습이나 시설 전체 QRA가 아니다.
+미충족·불완전 case 요약도 시나리오별 count, 고유 key count, 중복 행 count와 상태별
+분포를 함께 검사해 누락 사고를 0위험으로 숨기지 않는다.
 

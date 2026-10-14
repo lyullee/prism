@@ -7989,6 +7989,51 @@
       "native-full-scope-independent-event-low",
       "native-full-scope-independent-event-high"
     ],
+    "uncomputed_case_count_by_scenario": {
+      "native-isolation-catalog-literature-published": 30,
+      "native-isolation-catalog-literature-p05": 30,
+      "native-isolation-catalog-literature-p95": 30,
+      "native-full-scope-independent-event-low": 30,
+      "native-full-scope-independent-event-high": 30
+    },
+    "uncomputed_case_unique_key_count_by_scenario": {
+      "native-isolation-catalog-literature-published": 29,
+      "native-isolation-catalog-literature-p05": 29,
+      "native-isolation-catalog-literature-p95": 29,
+      "native-full-scope-independent-event-low": 29,
+      "native-full-scope-independent-event-high": 29
+    },
+    "uncomputed_case_duplicate_row_count_by_scenario": {
+      "native-isolation-catalog-literature-published": 1,
+      "native-isolation-catalog-literature-p05": 1,
+      "native-isolation-catalog-literature-p95": 1,
+      "native-full-scope-independent-event-low": 1,
+      "native-full-scope-independent-event-high": 1
+    },
+    "uncomputed_case_union_count": 29,
+    "uncomputed_case_status_counts_by_scenario": {
+      "native-isolation-catalog-literature-published": {
+        "EXECUTED_DOMAIN_INCOMPLETE": 1,
+        "EXECUTED_OPERATOR_LIMITED": 29
+      },
+      "native-isolation-catalog-literature-p05": {
+        "EXECUTED_DOMAIN_INCOMPLETE": 1,
+        "EXECUTED_OPERATOR_LIMITED": 29
+      },
+      "native-isolation-catalog-literature-p95": {
+        "EXECUTED_DOMAIN_INCOMPLETE": 1,
+        "EXECUTED_OPERATOR_LIMITED": 29
+      },
+      "native-full-scope-independent-event-low": {
+        "EXECUTED_DOMAIN_INCOMPLETE": 1,
+        "EXECUTED_OPERATOR_LIMITED": 29
+      },
+      "native-full-scope-independent-event-high": {
+        "EXECUTED_DOMAIN_INCOMPLETE": 1,
+        "EXECUTED_OPERATOR_LIMITED": 29
+      }
+    },
+    "uncomputed_case_policy": "facility-assessment uncomputed_cases are copied with explicit status; duplicate rows are preserved, no unsupported accident family is substituted, and no missing case is assigned zero risk",
     "fresh_physics_executed": false,
     "statistical_confidence_interval": false,
     "facility_credible_interval": false,
@@ -12303,6 +12348,43 @@
             ]
           }
         ],
+        "uncomputed_case_count": 30,
+        "uncomputed_case_keys": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
+        ],
+        "uncomputed_case_status_counts": {
+          "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "EXECUTED_OPERATOR_LIMITED": 29
+        },
         "provider_packet_promoted": false,
         "qualified_provider_packet_case_count": 0,
         "complete_facility_qra_claim": false,
@@ -16564,6 +16646,43 @@
             ]
           }
         ],
+        "uncomputed_case_count": 30,
+        "uncomputed_case_keys": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
+        ],
+        "uncomputed_case_status_counts": {
+          "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "EXECUTED_OPERATOR_LIMITED": 29
+        },
         "provider_packet_promoted": false,
         "qualified_provider_packet_case_count": 0,
         "complete_facility_qra_claim": false,
@@ -20825,6 +20944,43 @@
             ]
           }
         ],
+        "uncomputed_case_count": 30,
+        "uncomputed_case_keys": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
+        ],
+        "uncomputed_case_status_counts": {
+          "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "EXECUTED_OPERATOR_LIMITED": 29
+        },
         "provider_packet_promoted": false,
         "qualified_provider_packet_case_count": 0,
         "complete_facility_qra_claim": false,
@@ -25111,6 +25267,43 @@
             ]
           }
         ],
+        "uncomputed_case_count": 30,
+        "uncomputed_case_keys": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
+        ],
+        "uncomputed_case_status_counts": {
+          "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "EXECUTED_OPERATOR_LIMITED": 29
+        },
         "provider_packet_promoted": false,
         "qualified_provider_packet_case_count": 0,
         "complete_facility_qra_claim": false,
@@ -29397,6 +29590,43 @@
             ]
           }
         ],
+        "uncomputed_case_count": 30,
+        "uncomputed_case_keys": [
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G1|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/transfer-pump/G2|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G4|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-frequency-example/reliquefier/G5|matched-event-provider-request|synthetic-generic-worker-west-3ms",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-3ms-west",
+          "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%|provider-vertical-handoff|generic-lh2-full-scope-example/vertical-handoff/generic-lh2-near-receptor-diagnostic/vertical-handoff/D-4ms-west"
+        ],
+        "uncomputed_case_status_counts": {
+          "EXECUTED_DOMAIN_INCOMPLETE": 1,
+          "EXECUTED_OPERATOR_LIMITED": 29
+        },
         "provider_packet_promoted": false,
         "qualified_provider_packet_case_count": 0,
         "complete_facility_qra_claim": false,

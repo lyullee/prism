@@ -195,14 +195,46 @@ def _build_frequency_trace(
     if not isinstance(raw_scenarios, list) or not raw_scenarios:
         raise ValueError("frequency_uncertainty.scenarios must be a non-empty list")
     scenarios: list[dict[str, Any]] = []
+    uncomputed_case_count_by_scenario: dict[str, int] = {}
+    uncomputed_case_keys_by_scenario: dict[str, list[str]] = {}
+    uncomputed_case_unique_key_count_by_scenario: dict[str, int] = {}
+    uncomputed_case_duplicate_row_count_by_scenario: dict[str, int] = {}
+    uncomputed_case_status_counts_by_scenario: dict[str, dict[str, int]] = {}
     for raw in raw_scenarios:
         if not isinstance(raw, Mapping):
             raise ValueError("frequency_uncertainty.scenarios must contain objects")
         definition = raw.get("scenario")
         if not isinstance(definition, Mapping):
             raise ValueError("frequency uncertainty scenario definition is missing")
+        scenario_id = definition.get("id")
+        raw_uncomputed_cases = raw.get("uncomputed_cases")
+        uncomputed_cases = (
+            raw_uncomputed_cases if isinstance(raw_uncomputed_cases, list) else []
+        )
+        uncomputed_case_keys: list[str] = []
+        status_counts: dict[str, int] = {}
+        for raw_case in uncomputed_cases:
+            if not isinstance(raw_case, Mapping):
+                continue
+            case_key = raw_case.get("case_key")
+            if not isinstance(case_key, str) or not case_key:
+                case_key = _case_key(raw_case)
+            uncomputed_case_keys.append(case_key)
+            status = raw_case.get("status")
+            status_name = str(status) if status is not None else "UNSPECIFIED"
+            status_counts[status_name] = status_counts.get(status_name, 0) + 1
+        uncomputed_case_count_by_scenario[str(scenario_id)] = len(uncomputed_cases)
+        uncomputed_case_keys_by_scenario[str(scenario_id)] = uncomputed_case_keys
+        unique_key_count = len(set(uncomputed_case_keys))
+        uncomputed_case_unique_key_count_by_scenario[str(scenario_id)] = (
+            unique_key_count
+        )
+        uncomputed_case_duplicate_row_count_by_scenario[str(scenario_id)] = (
+            len(uncomputed_case_keys) - unique_key_count
+        )
+        uncomputed_case_status_counts_by_scenario[str(scenario_id)] = status_counts
         scenario = {
-            "id": definition.get("id"),
+            "id": scenario_id,
             "asset_quantiles": dict(definition.get("asset_quantiles", {}))
             if isinstance(definition.get("asset_quantiles"), Mapping)
             else {},
@@ -236,7 +268,10 @@ def _build_frequency_trace(
                 "scenario_family_rank_by_known_expected_fatalities_low_high"
             ),
             "event_frequency_per_year": raw.get("event_frequency_per_year"),
-            "uncomputed_cases": raw.get("uncomputed_cases"),
+            "uncomputed_cases": raw_uncomputed_cases,
+            "uncomputed_case_count": len(uncomputed_cases),
+            "uncomputed_case_keys": uncomputed_case_keys,
+            "uncomputed_case_status_counts": status_counts,
             "provider_packet_promoted": raw.get("provider_packet_promoted"),
             "qualified_provider_packet_case_count": raw.get(
                 "qualified_provider_packet_case_count"
@@ -246,6 +281,11 @@ def _build_frequency_trace(
         }
         scenarios.append(scenario)
     frequency_port_binding = frequency_uncertainty.get("frequency_port_binding")
+    uncomputed_case_union = {
+        case_key
+        for case_keys in uncomputed_case_keys_by_scenario.values()
+        for case_key in case_keys
+    }
     return {
         "schema_version": "prism.conditional_facility_frequency_trace.v1",
         "campaign_digest": frequency_uncertainty.get("campaign_digest"),
@@ -254,6 +294,22 @@ def _build_frequency_trace(
         ),
         "scenario_count": len(scenarios),
         "scenario_ids": [scenario.get("id") for scenario in scenarios],
+        "uncomputed_case_count_by_scenario": uncomputed_case_count_by_scenario,
+        "uncomputed_case_unique_key_count_by_scenario": (
+            uncomputed_case_unique_key_count_by_scenario
+        ),
+        "uncomputed_case_duplicate_row_count_by_scenario": (
+            uncomputed_case_duplicate_row_count_by_scenario
+        ),
+        "uncomputed_case_union_count": len(uncomputed_case_union),
+        "uncomputed_case_status_counts_by_scenario": (
+            uncomputed_case_status_counts_by_scenario
+        ),
+        "uncomputed_case_policy": (
+            "facility-assessment uncomputed_cases are copied with explicit status; "
+            "duplicate rows are preserved, no unsupported accident family is substituted, "
+            "and no missing case is assigned zero risk"
+        ),
         "fresh_physics_executed": frequency_uncertainty.get("fresh_physics_executed"),
         "statistical_confidence_interval": frequency_uncertainty.get(
             "statistical_confidence_interval"

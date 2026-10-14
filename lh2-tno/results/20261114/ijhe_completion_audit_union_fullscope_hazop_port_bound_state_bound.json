@@ -5539,6 +5539,51 @@
           "top_id_consistent": true,
           "interpretation": "top-ranked item remains unchanged across supplied frequency scenarios"
         },
+        "uncomputed_case_count_by_scenario": {
+          "native-isolation-catalog-literature-published": 30,
+          "native-isolation-catalog-literature-p05": 30,
+          "native-isolation-catalog-literature-p95": 30,
+          "native-full-scope-independent-event-low": 30,
+          "native-full-scope-independent-event-high": 30
+        },
+        "uncomputed_case_unique_key_count_by_scenario": {
+          "native-isolation-catalog-literature-published": 29,
+          "native-isolation-catalog-literature-p05": 29,
+          "native-isolation-catalog-literature-p95": 29,
+          "native-full-scope-independent-event-low": 29,
+          "native-full-scope-independent-event-high": 29
+        },
+        "uncomputed_case_duplicate_row_count_by_scenario": {
+          "native-isolation-catalog-literature-published": 1,
+          "native-isolation-catalog-literature-p05": 1,
+          "native-isolation-catalog-literature-p95": 1,
+          "native-full-scope-independent-event-low": 1,
+          "native-full-scope-independent-event-high": 1
+        },
+        "uncomputed_case_union_count": 29,
+        "uncomputed_case_status_counts_by_scenario": {
+          "native-isolation-catalog-literature-published": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "native-isolation-catalog-literature-p05": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "native-isolation-catalog-literature-p95": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "native-full-scope-independent-event-low": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          },
+          "native-full-scope-independent-event-high": {
+            "EXECUTED_DOMAIN_INCOMPLETE": 1,
+            "EXECUTED_OPERATOR_LIMITED": 29
+          }
+        },
+        "uncomputed_case_policy": "facility-assessment uncomputed_cases are copied with explicit status; duplicate rows are preserved, no unsupported accident family is substituted, and no missing case is assigned zero risk",
         "frequency_port_binding": {
           "schema_version": "prism.frequency_port_binding.v1",
           "port_scoped_event_count": 34,
@@ -5561,7 +5606,7 @@
       },
       "blocking_reason": null,
       "diagnostic_only": true,
-      "interpretation": "The digital-twin view carries explicit literature-frequency scenarios, quantile provenance and rank-stability evidence. It records that no frequency inference, facility credible interval, provider promotion or physical-validation claim was made."
+      "interpretation": "The digital-twin view carries explicit literature-frequency scenarios, quantile provenance and rank-stability evidence. It also preserves each scenario's uncomputed or incomplete case rows with explicit status. It records that no frequency inference, facility credible interval, provider promotion or physical-validation claim was made."
     }
   ],
   "blocking_reasons": [
