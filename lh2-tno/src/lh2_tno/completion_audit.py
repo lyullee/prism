@@ -101,6 +101,7 @@ def build_ijhe_completion_audit(
     hazop_multiequipment_diagnostic: Mapping[str, Any] | None = None,
     hazop_scope_worklist: Mapping[str, Any] | None = None,
     hazop_event_mode_binding: Mapping[str, Any] | None = None,
+    hazop_operating_mode_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3722,6 +3723,74 @@ def build_ijhe_completion_audit(
             "claim that the missing bindings have been supplied."
         )
         checks.append(mode_check)
+    if hazop_operating_mode_evidence is not None:
+        mode_evidence = hazop_operating_mode_evidence
+        policy = mode_evidence.get("policy")
+        policy = policy if isinstance(policy, Mapping) else {}
+        coverage = mode_evidence.get("coverage")
+        coverage = coverage if isinstance(coverage, Mapping) else {}
+        sequence_sources = mode_evidence.get("sequence_sources")
+        mode_counts = mode_evidence.get("operating_mode_counts")
+        timeseries = mode_evidence.get("timeseries_audit")
+        timeseries = timeseries if isinstance(timeseries, Mapping) else {}
+        mode_evidence_valid = (
+            mode_evidence.get("schema_version") == "prism.hazop_operating_mode_evidence_audit.v1"
+            and mode_evidence.get("status") in {
+                "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD",
+                "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_ALLOWED",
+            }
+            and isinstance(mode_evidence.get("sequence_source_count"), int)
+            and mode_evidence.get("sequence_source_count") > 0
+            and isinstance(mode_evidence.get("sequence_row_count"), int)
+            and mode_evidence.get("sequence_row_count") > 0
+            and isinstance(sequence_sources, list)
+            and len(sequence_sources) == mode_evidence.get("sequence_source_count")
+            and isinstance(mode_counts, Mapping)
+            and bool(mode_counts)
+            and isinstance(mode_evidence.get("errors"), list)
+            and not mode_evidence.get("errors")
+            and coverage.get("qualitative_hazop_rows_closed") is True
+            and coverage.get("explicit_operating_mode_rows_closed") is True
+            and coverage.get("frequency_event_binding_closed") is False
+            and coverage.get("release_consequence_binding_closed") is False
+            and policy.get("operating_mode_from_explicit_labels_only") is True
+            and policy.get("mode_inference_from_numeric_values_performed") is False
+            and policy.get("mode_inference_from_equipment_or_release_bin_performed") is False
+            and policy.get("frequency_inference_performed") is False
+            and policy.get("release_packet_generation_performed") is False
+            and policy.get("normal_timeseries_promoted_to_accident_evidence") is False
+            and policy.get("unit_and_tag_review_required_before_numeric_binding") is True
+            and policy.get("source_rows_are_qualitative_hazop_evidence_only") is True
+            and timeseries.get("numeric_state_binding_allowed") is False
+            and timeseries.get("status") == "WITHHELD_UNITS_UNCONFIRMED"
+        )
+        mode_evidence_check = _check(
+            "diagnostic_hazop_operating_mode_evidence",
+            mode_evidence_valid,
+            {
+                "record": mode_evidence.get("_record_path"),
+                "schema_version": mode_evidence.get("schema_version"),
+                "status": mode_evidence.get("status"),
+                "sequence_source_count": mode_evidence.get("sequence_source_count"),
+                "sequence_row_count": mode_evidence.get("sequence_row_count"),
+                "operating_mode_counts": dict(mode_counts) if isinstance(mode_counts, Mapping) else None,
+                "timeseries_audit": {
+                    "source_path": timeseries.get("source_path"),
+                    "status": timeseries.get("status"),
+                    "numeric_state_binding_allowed": timeseries.get("numeric_state_binding_allowed"),
+                },
+                "policy": dict(policy),
+            },
+            "support-center HAZOP operating-mode evidence is missing exact qualitative accounting or permits numeric/frequency inference",
+        )
+        mode_evidence_check["diagnostic_only"] = True
+        mode_evidence_check["interpretation"] = (
+            "The inspection-center sequence tables provide explicit receiving, storage/vent, and supply "
+            "mode evidence for qualitative HAZOP selection. Numeric state binding remains withheld until "
+            "the PT/TT/DPT tag and unit map is reviewed; this check does not create frequencies, release "
+            "packets, or facility QRA."
+        )
+        checks.append(mode_evidence_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

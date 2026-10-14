@@ -3048,3 +3048,73 @@ def test_completion_audit_blocks_event_mode_inference_policy():
         if item["name"] == "diagnostic_hazop_event_mode_binding"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _operating_mode_evidence_audit(**overrides):
+    record = {
+        "schema_version": "prism.hazop_operating_mode_evidence_audit.v1",
+        "status": "HAZOP_OPERATING_MODE_EVIDENCE_AUDIT_WITH_STATE_BINDING_WITHHELD",
+        "sequence_source_count": 3,
+        "sequence_row_count": 52,
+        "operating_mode_counts": {
+            "receiving": 19,
+            "storage_vent": 3,
+            "supply_gas": 18,
+            "supply_liquid": 12,
+        },
+        "sequence_sources": [{}, {}, {}],
+        "errors": [],
+        "coverage": {
+            "qualitative_hazop_rows_closed": True,
+            "explicit_operating_mode_rows_closed": True,
+            "frequency_event_binding_closed": False,
+            "release_consequence_binding_closed": False,
+        },
+        "timeseries_audit": {
+            "numeric_state_binding_allowed": False,
+            "status": "WITHHELD_UNITS_UNCONFIRMED",
+        },
+        "policy": {
+            "operating_mode_from_explicit_labels_only": True,
+            "mode_inference_from_numeric_values_performed": False,
+            "mode_inference_from_equipment_or_release_bin_performed": False,
+            "frequency_inference_performed": False,
+            "release_packet_generation_performed": False,
+            "normal_timeseries_promoted_to_accident_evidence": False,
+            "unit_and_tag_review_required_before_numeric_binding": True,
+            "source_rows_are_qualitative_hazop_evidence_only": True,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_support_center_hazop_mode_evidence():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_operating_mode_evidence=_operating_mode_evidence_audit(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_operating_mode_evidence"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+
+
+def test_completion_audit_blocks_support_center_hazop_mode_inference():
+    unsafe = _operating_mode_evidence_audit()
+    unsafe["policy"]["mode_inference_from_numeric_values_performed"] = True
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_operating_mode_evidence=unsafe,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_operating_mode_evidence"
+    )
+    assert check["status"] == "BLOCKED"
