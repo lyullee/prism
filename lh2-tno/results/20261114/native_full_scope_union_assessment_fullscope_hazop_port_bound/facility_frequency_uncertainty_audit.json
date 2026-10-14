@@ -1,0 +1,31 @@
+{
+  "schema_version": "prism.facility_frequency_uncertainty_audit.v1",
+  "status": "FACILITY_FREQUENCY_UNCERTAINTY_CLOSED_DIAGNOSTIC",
+  "facility_id": "generic-lh2-full-scope-example",
+  "scenario_count": 5,
+  "scenario_ids": [
+    "native-isolation-catalog-literature-published",
+    "native-isolation-catalog-literature-p05",
+    "native-isolation-catalog-literature-p95",
+    "native-full-scope-independent-event-low",
+    "native-full-scope-independent-event-high"
+  ],
+  "risk_atom_count": 176,
+  "recomputed_campaign_digest": "057fddb70e4edc89b6faa536c506d04693e7d49d6d4749e968e2308a3684f9c8",
+  "stored_campaign_digest": "057fddb70e4edc89b6faa536c506d04693e7d49d6d4749e968e2308a3684f9c8",
+  "recomputed_physical_risk_atoms_digest": "ec786fdeeaecfe2db2a570f4e7ef6fc3cd0377dc9c0e530748819d6d2c002ece",
+  "stored_physical_risk_atoms_digest": "ec786fdeeaecfe2db2a570f4e7ef6fc3cd0377dc9c0e530748819d6d2c002ece",
+  "correlation_comparison_present": true,
+  "facility_credible_interval": false,
+  "statistical_confidence_interval": false,
+  "fresh_physics_executed": false,
+  "mismatch_count": 0,
+  "blocking_reasons": [],
+  "frequency_inference_performed": false,
+  "provider_packet_promoted": false,
+  "physical_validation_claim": false,
+  "facility_qra_claim": false,
+  "diagnostic_only": true,
+  "interpretation": "Published and fixed literature-frequency scenarios reproduce the saved conditional IR/F-N sensitivity without rerunning physics or inferring missing frequency. Scope, provider, validation and facility-QRA gates remain independent.",
+  "_record_path": "results\\20261114\\native_full_scope_union_assessment_fullscope_hazop_port_bound\\facility_frequency_uncertainty_audit.json"
+}

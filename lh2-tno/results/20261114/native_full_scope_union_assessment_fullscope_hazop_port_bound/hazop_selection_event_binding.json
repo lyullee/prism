@@ -1,0 +1,942 @@
+{
+  "schema_version": "prism.hazop_event_selection_binding_audit.v1",
+  "status": "HAZOP_SELECTION_EVENT_BINDING_REQUIRED",
+  "selected_scenario_count": 10,
+  "frequency_event_count": 34,
+  "mode_binding_count": 24,
+  "bound_event_count": 24,
+  "unbound_event_count": 10,
+  "selected_scenarios": [
+    {
+      "scenario_id": "storage-tank-01-mode-deviation:receiving:liquid_two_phase",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "scenario_family": "liquid_two_phase",
+      "release_mode": "hole",
+      "matched_event_count": 5,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "liquid-transfer-line-01-mode-deviation:supply:pipe_hole",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "scenario_family": "pipe_hole",
+      "release_mode": "hole",
+      "matched_event_count": 5,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "transfer-valve-01-mode-deviation:supply:liquid_two_phase",
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "scenario_family": "liquid_two_phase",
+      "release_mode": "hole",
+      "matched_event_count": 5,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "pressure-relief-vent-01-mode-deviation:standby:vent_hole",
+      "component_id": "pressure-relief-vent-01",
+      "operating_mode": "standby",
+      "scenario_family": "vent_hole",
+      "release_mode": "maximum_relief_discharge",
+      "matched_event_count": 1,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase",
+      "component_id": "liquid-transfer-pump-01",
+      "operating_mode": "supply",
+      "scenario_family": "liquid_two_phase",
+      "release_mode": "hole",
+      "matched_event_count": 2,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion",
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "scenario_family": "inventory_depletion",
+      "release_mode": "instantaneous_inventory",
+      "matched_event_count": 1,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "ambient-vaporizer-01-full-scope-inventory_over_600s:supply:inventory_over_600s",
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "scenario_family": "inventory_over_600s",
+      "release_mode": "inventory_over_600s",
+      "matched_event_count": 1,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "ambient-vaporizer-01-full-scope-vaporizer_hole:supply:vaporizer_hole",
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "scenario_family": "vaporizer_hole",
+      "release_mode": "hole",
+      "matched_event_count": 1,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "reliquefier-01-mode-deviation:standby:two_sided_rupture",
+      "component_id": "reliquefier-01",
+      "operating_mode": "standby",
+      "scenario_family": "two_sided_rupture",
+      "release_mode": "two_sided_rupture",
+      "matched_event_count": 2,
+      "status": "BOUND"
+    },
+    {
+      "scenario_id": "reliquefier-01-full-scope-reliquefier_hole:standby:reliquefier_hole",
+      "component_id": "reliquefier-01",
+      "operating_mode": "standby",
+      "scenario_family": "reliquefier_hole",
+      "release_mode": "hole",
+      "matched_event_count": 1,
+      "status": "BOUND"
+    }
+  ],
+  "event_rows": [
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.01%",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.01%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "frequency_event_component_id": "storage-tank-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_0.1%",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_0.1%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "frequency_event_component_id": "storage-tank-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_1%",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_1%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "frequency_event_component_id": "storage-tank-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_10%",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_10%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "frequency_event_component_id": "storage-tank-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/storage-shell/AREA_100%",
+      "component_id": "storage-tank-01",
+      "operating_mode": "receiving",
+      "hazop_scenario_id": "native-full-scope|storage-tank-01|receiving|generic-lh2-full-scope-frequency-example|storage-shell|AREA_100%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "vessel_hole"
+      ],
+      "frequency_event_component_id": "storage-tank-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "storage-tank-01-mode-deviation:receiving:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.01%",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.01%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-line-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_0.1%",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_0.1%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-line-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_1%",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_1%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-line-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_10%",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_10%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-line-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-line/AREA_100%",
+      "component_id": "liquid-transfer-line-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-line-01|supply|generic-lh2-full-scope-frequency-example|transfer-line|AREA_100%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-line-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-line-01-mode-deviation:supply:pipe_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.01%",
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.01%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "frequency_event_component_id": "transfer-valve-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_0.1%",
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_0.1%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "frequency_event_component_id": "transfer-valve-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_1%",
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_1%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "frequency_event_component_id": "transfer-valve-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_10%",
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_10%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "frequency_event_component_id": "transfer-valve-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-valve/AREA_100%",
+      "component_id": "transfer-valve-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|transfer-valve-01|supply|generic-lh2-full-scope-frequency-example|transfer-valve|AREA_100%",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "valve_hole"
+      ],
+      "frequency_event_component_id": "transfer-valve-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "transfer-valve-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/pressure-relief-vent/G1",
+      "component_id": "pressure-relief-vent-01",
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|pressure-relief-vent-01|standby|generic-lh2-full-scope-frequency-example|pressure-relief-vent|G1",
+      "scenario_families": [
+        "vent_hole"
+      ],
+      "frequency_event_component_id": "pressure-relief-vent-01",
+      "frequency_event_release_mode": "maximum_relief_discharge",
+      "selected_hazop_scenario_ids": [
+        "pressure-relief-vent-01-mode-deviation:standby:vent_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G1",
+      "component_id": "liquid-transfer-pump-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G1",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-pump-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/transfer-pump/G2",
+      "component_id": "liquid-transfer-pump-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|liquid-transfer-pump-01|supply|generic-lh2-full-scope-frequency-example|transfer-pump|G2",
+      "scenario_families": [
+        "inventory_depletion",
+        "liquid_two_phase",
+        "pump_hole"
+      ],
+      "frequency_event_component_id": "liquid-transfer-pump-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "liquid-transfer-pump-01-mode-deviation:supply:liquid_two_phase"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G1",
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G1",
+      "scenario_families": [
+        "inventory_depletion"
+      ],
+      "frequency_event_component_id": "ambient-vaporizer-01",
+      "frequency_event_release_mode": "instantaneous_inventory",
+      "selected_hazop_scenario_ids": [
+        "ambient-vaporizer-01-mode-deviation:supply:inventory_depletion"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G2",
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G2",
+      "scenario_families": [
+        "inventory_over_600s"
+      ],
+      "frequency_event_component_id": "ambient-vaporizer-01",
+      "frequency_event_release_mode": "inventory_over_600s",
+      "selected_hazop_scenario_ids": [
+        "ambient-vaporizer-01-full-scope-inventory_over_600s:supply:inventory_over_600s"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/ambient-vaporizer/G3",
+      "component_id": "ambient-vaporizer-01",
+      "operating_mode": "supply",
+      "hazop_scenario_id": "native-full-scope|ambient-vaporizer-01|supply|generic-lh2-full-scope-frequency-example|ambient-vaporizer|G3",
+      "scenario_families": [
+        "vaporizer_hole"
+      ],
+      "frequency_event_component_id": "ambient-vaporizer-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "ambient-vaporizer-01-full-scope-vaporizer_hole:supply:vaporizer_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G4",
+      "component_id": "reliquefier-01",
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G4",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "frequency_event_component_id": "reliquefier-01",
+      "frequency_event_release_mode": "two_sided_rupture",
+      "selected_hazop_scenario_ids": [
+        "reliquefier-01-mode-deviation:standby:two_sided_rupture"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G5",
+      "component_id": "reliquefier-01",
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G5",
+      "scenario_families": [
+        "two_sided_rupture"
+      ],
+      "frequency_event_component_id": "reliquefier-01",
+      "frequency_event_release_mode": "two_sided_rupture",
+      "selected_hazop_scenario_ids": [
+        "reliquefier-01-mode-deviation:standby:two_sided_rupture"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-frequency-example/reliquefier/G6",
+      "component_id": "reliquefier-01",
+      "operating_mode": "standby",
+      "hazop_scenario_id": "native-full-scope|reliquefier-01|standby|generic-lh2-full-scope-frequency-example|reliquefier|G6",
+      "scenario_families": [
+        "reliquefier_hole"
+      ],
+      "frequency_event_component_id": "reliquefier-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [
+        "reliquefier-01-full-scope-reliquefier_hole:standby:reliquefier_hole"
+      ],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": true,
+        "release_mode_matches_event": true,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": true
+      },
+      "status": "BOUND",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "pipe_hole",
+        "vertical_handoff"
+      ],
+      "frequency_event_component_id": "vertical-handoff-terminal-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "inventory-depletion-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "inventory-depletion-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "inventory-depletion-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "inventory-depletion-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    },
+    {
+      "event_id": "generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%",
+      "component_id": null,
+      "operating_mode": null,
+      "hazop_scenario_id": null,
+      "scenario_families": [
+        "inventory_depletion",
+        "pipe_hole"
+      ],
+      "frequency_event_component_id": "inventory-depletion-pipe-01",
+      "frequency_event_release_mode": "hole",
+      "selected_hazop_scenario_ids": [],
+      "checks": {
+        "event_present": true,
+        "component_matches_event": false,
+        "release_mode_matches_event": false,
+        "scenario_family_present": true,
+        "selected_hazop_scenario_match": false,
+        "explicit_mode_binding_present": false
+      },
+      "status": "BINDING_REQUIRED",
+      "frequency_assignment_performed": false
+    }
+  ],
+  "errors": [
+    "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.01%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_0.1%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_10%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_100%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.01%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_0.1%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_1%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_10%: no explicit HAZOP mode binding",
+    "event generic-lh2-full-scope-example/inventory-depletion/inventory-depletion/terminal_pipe_asset/AREA_100%: no explicit HAZOP mode binding"
+  ],
+  "policy": {
+    "operating_mode_taken_from_explicit_runtime_input": true,
+    "scenario_family_inference_performed": false,
+    "frequency_assignment_performed": false,
+    "frequency_inference_performed": false,
+    "sensor_frequency_learning_used": false,
+    "provider_release_created": false,
+    "facility_qra_claim": false,
+    "diagnostic_only": true
+  },
+  "interpretation": "Explicit HAZOP selections are expanded to matching literature event bins. The audit proves identity compatibility only; frequency remains an external literature input and no release or consequence is created here."
+}

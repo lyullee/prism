@@ -19,6 +19,15 @@ def _event_mapping(event_id: str, *, namespace: str) -> str:
     prefix, separator, suffix = event_id.partition("/")
     if not separator or not suffix:
         raise ValueError(f"vertical campaign event id must contain a suffix: {event_id}")
+    # A previously rebound vertical result may be reused with a different
+    # facility namespace.  Its suffix already starts with the extension name
+    # (for example ``vertical-handoff/terminal-valve/...``); retain one
+    # namespace level instead of producing
+    # ``.../vertical-handoff/vertical-handoff/...``.
+    extension_name = namespace.rstrip("/").rsplit("/", 1)[-1]
+    marker = f"{extension_name}/"
+    if suffix.startswith(marker):
+        suffix = suffix[len(marker) :]
     return f"{namespace.rstrip('/')}/{suffix}"
 
 

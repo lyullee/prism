@@ -65,6 +65,9 @@ from lh2_tno.facility_component_contribution_audit import (  # noqa: E402
 from lh2_tno.facility_frequency_uncertainty_audit import (  # noqa: E402
     build_facility_frequency_uncertainty_audit,
 )
+from lh2_tno.hazop_event_selection_audit import (  # noqa: E402
+    audit_hazop_selection_event_bindings,
+)
 
 
 MAJOR_ACCIDENT_FAMILIES = (
@@ -274,6 +277,16 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         if args.extension_state_snapshot_audit is not None
         else None
     )
+    hazop_runtime_audit = (
+        _load(args.hazop_runtime_audit)
+        if args.hazop_runtime_audit is not None
+        else None
+    )
+    hazop_mode_binding = (
+        _load(args.hazop_mode_binding)
+        if args.hazop_mode_binding is not None
+        else None
+    )
     base_result_state_binding = None
     if state_snapshot_audit is not None:
         # The result ledger and the state-bound request are separate persisted
@@ -452,6 +465,39 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "Source campaign matrices remain provenance views; overlapping family "
         "rows are not additive and the ledger's exact event/case identities are authoritative."
     )
+    hazop_selection_event_audit = None
+    if hazop_runtime_audit is not None and hazop_mode_binding is not None:
+        families_by_event: dict[str, set[str]] = {}
+        for case in repaired_merged.get("cases", []):
+            if not isinstance(case, dict):
+                continue
+            event_id = case.get("event_id")
+            families = case.get("scenario_families", [])
+            if not isinstance(event_id, str) or not isinstance(families, list):
+                continue
+            families_by_event.setdefault(event_id, set()).update(
+                str(family)
+                for family in families
+                if isinstance(family, str) and family
+            )
+        frequency_event_rows = [
+            {
+                **event,
+                "scenario_families": sorted(
+                    families_by_event.get(str(event.get("id")), set())
+                ),
+            }
+            for event in repaired_merged.get("events", [])
+            if isinstance(event, dict)
+        ]
+        # Audit the merged event set. Extension events without an explicit
+        # operating-mode binding remain unbound; they never inherit a base
+        # mode or scenario by inference.
+        hazop_selection_event_audit = audit_hazop_selection_event_bindings(
+            hazop_runtime_audit,
+            hazop_mode_binding,
+            frequency_event_rows,
+        )
     scenarios = _extend_frequency_scenarios(base_frequency_scenarios)
     independent_extension = extend_frequency_scenarios_for_independent_event_bounds(
         {
@@ -749,6 +795,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "used to reconstruct a missing canonical equipment state snapshot",
         ],
     }
+    if hazop_selection_event_audit is not None:
+        verification["hazop_selection_event_binding_status"] = hazop_selection_event_audit[
+            "status"
+        ]
+        verification["hazop_selection_event_binding_selected_scenario_count"] = (
+            hazop_selection_event_audit["selected_scenario_count"]
+        )
+        verification["hazop_selection_event_binding_event_count"] = (
+            hazop_selection_event_audit["frequency_event_count"]
+        )
+        verification["hazop_selection_event_binding_bound_event_count"] = (
+            hazop_selection_event_audit["bound_event_count"]
+        )
+        verification["hazop_selection_event_binding_unbound_event_count"] = (
+            hazop_selection_event_audit["unbound_event_count"]
+        )
     output = args.output_dir
     output.mkdir(parents=True, exist_ok=True)
     _save(output / "campaign_result.json", merged)
@@ -788,6 +850,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         },
     )
     _save(output / "facility_assessment.json", assessment)
+    if hazop_selection_event_audit is not None:
+        _save(output / "hazop_selection_event_binding.json", hazop_selection_event_audit)
     _save(output / "facility_evidence_request.json", evidence_request)
     _save(output / "facility_case_packet_coverage.json", facility_case_packet_coverage)
     _save(output / "native_state_snapshot_campaign_ledger.json", native_state_snapshot_ledger)
@@ -824,6 +888,18 @@ def main() -> int:
     )
     parser.add_argument("--state-snapshot-binding-audit", type=Path, default=None)
     parser.add_argument("--extension-state-snapshot-audit", type=Path, default=None)
+    parser.add_argument(
+        "--hazop-runtime-audit",
+        type=Path,
+        default=None,
+        help="optional observed HAZOP runtime audit used to audit the merged event set",
+    )
+    parser.add_argument(
+        "--hazop-mode-binding",
+        type=Path,
+        default=None,
+        help="optional explicit HAZOP operating-mode/event binding for the merged event set",
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     try:

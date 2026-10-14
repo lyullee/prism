@@ -75,3 +75,20 @@ def test_blocked_runtime_row_is_reported_as_missing_selection_instead_of_crashin
     assert report["status"] == "HAZOP_SELECTION_EVENT_BINDING_REQUIRED"
     assert report["bound_event_count"] == 0
     assert report["unbound_event_count"] == 1
+
+
+def test_extension_event_without_mode_binding_is_reported_as_unbound():
+    events = _event()
+    events.append({
+        "id": "facility/vertical-handoff/AREA_1%",
+        "model_component_id": "vertical-handoff-terminal-pipe-01",
+        "scenario_families": ["vertical_handoff"],
+        "release": {"mode": "hole"},
+    })
+    report = audit_hazop_selection_event_bindings(_runtime(), _binding(), events)
+    assert report["status"] == "HAZOP_SELECTION_EVENT_BINDING_REQUIRED"
+    assert report["frequency_event_count"] == 2
+    assert report["bound_event_count"] == 1
+    assert report["unbound_event_count"] == 1
+    assert report["event_rows"][-1]["status"] == "BINDING_REQUIRED"
+    assert "no explicit HAZOP mode binding" in report["errors"][-1]

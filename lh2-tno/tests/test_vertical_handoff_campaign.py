@@ -57,3 +57,25 @@ def test_vertical_handoff_campaign_rebind_namespaces_all_facility_references():
     assert rebound["vertical_handoff_rebind"]["diagnostic_only"] is True
     assert rebound["vertical_handoff_rebind"]["facility_qra_claim"] is False
     assert rebound["vertical_handoff_rebind"]["receptor_collapse_policy"] == "many_to_one_endpoint_maximum"
+
+
+def test_vertical_handoff_campaign_rebind_does_not_duplicate_existing_extension_namespace():
+    result = {
+        "facility_id": "near-receptor-facility",
+        "events": [{
+            "id": "near-receptor-facility/vertical-handoff/terminal-valve/AREA_1%",
+            "asset_id": "terminal-valve",
+        }],
+        "cases": [],
+        "risk_atoms": [],
+    }
+    rebound = rebind_vertical_handoff_campaign_result(
+        result,
+        facility_id="generic-lh2-full-scope-example",
+        namespace="generic-lh2-full-scope-example/vertical-handoff",
+        asset_id="vertical-handoff-vent",
+        component_id="vertical-handoff-terminal-pipe-01",
+    )
+    assert rebound["events"][0]["id"] == (
+        "generic-lh2-full-scope-example/vertical-handoff/terminal-valve/AREA_1%"
+    )

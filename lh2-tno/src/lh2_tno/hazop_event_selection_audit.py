@@ -171,6 +171,45 @@ def audit_hazop_selection_event_bindings(
             "frequency_assignment_performed": False,
         })
 
+    # The binding input may cover only a base campaign while the facility
+    # ledger contains namespaced extension events. Count those events as
+    # explicitly unbound so a larger event set cannot look complete merely
+    # because only the base rows were audited.
+    for event_id, event in events_by_id.items():
+        if event_id in binding_by_event:
+            continue
+        event_release = event.get("release")
+        event_release_mode = (
+            _text(event_release.get("mode"))
+            if isinstance(event_release, Mapping)
+            else ""
+        )
+        families = event.get("scenario_families", [])
+        if not isinstance(families, Sequence) or isinstance(families, (str, bytes)):
+            families = []
+        family_values = [_text(family) for family in families if _text(family)]
+        errors.append(f"event {event_id}: no explicit HAZOP mode binding")
+        event_rows.append({
+            "event_id": event_id,
+            "component_id": None,
+            "operating_mode": None,
+            "hazop_scenario_id": None,
+            "scenario_families": family_values,
+            "frequency_event_component_id": _text(event.get("model_component_id")) or None,
+            "frequency_event_release_mode": event_release_mode or None,
+            "selected_hazop_scenario_ids": [],
+            "checks": {
+                "event_present": True,
+                "component_matches_event": False,
+                "release_mode_matches_event": False,
+                "scenario_family_present": bool(family_values),
+                "selected_hazop_scenario_match": False,
+                "explicit_mode_binding_present": False,
+            },
+            "status": "BINDING_REQUIRED",
+            "frequency_assignment_performed": False,
+        })
+
     for index, scenario in enumerate(selected):
         scenario_id = _text(scenario.get("scenario_id"))
         if scenario_id not in matched_selected_ids:
