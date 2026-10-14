@@ -3255,6 +3255,7 @@ def build_ijhe_completion_audit(
             and isinstance(release_row_count, int)
             and release_row_count > 0
             and intake.get("qualified_sidecar_row_count") == 0
+            and intake.get("closure_ready_row_count") == 0
             and intake.get("actual_origin_row_count") == 0
             and intake.get("error_count") == 0
             and isinstance(intake.get("artifacts"), list)
@@ -3282,6 +3283,8 @@ def build_ijhe_completion_audit(
                 "artifact_file_count": artifact_file_count,
                 "release_row_count": release_row_count,
                 "qualified_sidecar_row_count": intake.get("qualified_sidecar_row_count"),
+                "closure_ready_row_count": intake.get("closure_ready_row_count"),
+                "closure_status_counts": intake.get("closure_status_counts"),
                 "actual_origin_row_count": intake.get("actual_origin_row_count"),
                 "synthetic_or_model_prediction_row_count": intake.get(
                     "synthetic_or_model_prediction_row_count"

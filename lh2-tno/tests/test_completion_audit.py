@@ -288,6 +288,8 @@ def _external_release_artifact_intake():
         "artifact_file_count": 2,
         "release_row_count": 2,
         "qualified_sidecar_row_count": 0,
+        "closure_ready_row_count": 0,
+        "closure_status_counts": {"CLOSURE_EVIDENCE_OPEN": 2},
         "actual_origin_row_count": 0,
         "synthetic_or_model_prediction_row_count": 2,
         "error_count": 0,

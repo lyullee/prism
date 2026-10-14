@@ -10,6 +10,8 @@ def _release(origin: str = "synthetic") -> dict:
     return {
         "provider_export_schema": "prism.resolved_release.v1",
         "event_id": "tank/leak-1",
+        "event_kind": "accidental_leak",
+        "boundary_kind": "resolved_atmospheric_gas_exit",
         "component_id": "tank-1",
         "port_id": "tank-1.out",
         "input_origin": origin,
@@ -38,6 +40,9 @@ def test_external_release_intake_is_diagnostic_and_preserves_synthetic_boundary(
     assert row["diagnostic_only"] is True
     assert row["qualification_bound"] is False
     assert row["qualification_sidecar_present"] is False
+    assert row["closure_audit"]["closure_ready"] is False
+    assert row["closure_audit"]["blocking_reasons"]
+    assert report["closure_ready_row_count"] == 0
     assert report["promotion_policy"]["provider_release_packet_promoted"] is False
 
 
@@ -58,6 +63,7 @@ def test_external_release_intake_walks_release_set_and_nearby_qualification(tmp_
     row = report["artifacts"][0]
     assert row["qualification_sidecar_present"] is True
     assert row["qualification_bound"] is True
+    assert row["closure_audit"]["closure_ready"] is False
 
 
 def test_external_release_intake_discovers_resolved_release_files_under_root(tmp_path: Path) -> None:

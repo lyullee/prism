@@ -14,6 +14,8 @@ import json
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
+from .provider_release_closure import audit_provider_release_closure
+
 
 SCHEMA = "prism.external_release_artifact_intake.v1"
 RELEASE_SCHEMA = "prism.resolved_release.v1"
@@ -117,6 +119,39 @@ def _nearby_qualification(path: Path) -> tuple[bool, list[str]]:
     return bool(matches), matches
 
 
+def _closure_summary(release: Mapping[str, Any]) -> dict[str, Any]:
+    """Run the strict closure audit without changing the provider payload."""
+
+    if release.get("provider_export_schema") != RELEASE_SCHEMA:
+        return {
+            "status": "SCHEMA_UNQUALIFIED",
+            "closure_ready": False,
+            "blocking_reasons": [
+                "provider_export_schema is not prism.resolved_release.v1"
+            ],
+            "facility_qra_allowed": False,
+        }
+    try:
+        report = audit_provider_release_closure(dict(release))
+    except (TypeError, ValueError) as error:
+        return {
+            "status": "CLOSURE_AUDIT_ERROR",
+            "closure_ready": False,
+            "blocking_reasons": [str(error)],
+            "facility_qra_allowed": False,
+        }
+    gates = report.get("promotion_gates")
+    gates = gates if isinstance(gates, Mapping) else {}
+    reasons = report.get("blocking_reasons")
+    return {
+        "status": report.get("status"),
+        "closure_ready": gates.get("closure_ready") is True,
+        "closure_status_counts": dict(report.get("closure_status_counts", {})),
+        "blocking_reasons": list(reasons) if isinstance(reasons, list) else [],
+        "facility_qra_allowed": gates.get("facility_qra_allowed") is True,
+    }
+
+
 def audit_external_release_artifacts(
     paths: Iterable[str | Path] = (),
     roots: Iterable[str | Path] = (),
@@ -174,6 +209,9 @@ def audit_external_release_artifacts(
                 reasons.append("input_origin is not a qualified observed/provider export")
             if not qualification_present:
                 reasons.append("no nearby prism.provider_qualification_evidence.v1 sidecar")
+            closure = _closure_summary(release)
+            if closure.get("closure_ready") is not True:
+                reasons.extend(str(item) for item in closure.get("blocking_reasons", []))
             artifacts.append({
                 "path": str(path),
                 "sha256": digest,
@@ -192,12 +230,23 @@ def audit_external_release_artifacts(
                 "qualification_sidecar_present": qualification_present,
                 "qualification_sidecar_paths": qualification_paths,
                 "qualification_bound": qualification_bound,
+                "closure_audit": closure,
                 "diagnostic_only": True,
                 "blocking_reasons": reasons,
             })
 
     release_rows = [row for row in artifacts if row.get("release_count", 1) > 0]
     qualified_rows = [row for row in release_rows if row.get("qualification_bound") is True]
+    closure_ready_rows = [
+        row for row in release_rows
+        if isinstance(row.get("closure_audit"), Mapping)
+        and row["closure_audit"].get("closure_ready") is True
+    ]
+    closure_status_counts: dict[str, int] = {}
+    for row in release_rows:
+        closure = row.get("closure_audit")
+        status = closure.get("status") if isinstance(closure, Mapping) else "UNKNOWN"
+        closure_status_counts[str(status)] = closure_status_counts.get(str(status), 0) + 1
     actual_origin_rows = [
         row for row in release_rows
         if row.get("input_origin") in {"observed", "measured", "qualified_actual", "provider_actual"}
@@ -213,6 +262,8 @@ def audit_external_release_artifacts(
         "artifact_file_count": len(files),
         "release_row_count": len(release_rows),
         "qualified_sidecar_row_count": len(qualified_rows),
+        "closure_ready_row_count": len(closure_ready_rows),
+        "closure_status_counts": closure_status_counts,
         "actual_origin_row_count": len(actual_origin_rows),
         "synthetic_or_model_prediction_row_count": sum(
             1 for row in release_rows if row.get("input_origin") in {"synthetic", "model_prediction"}
