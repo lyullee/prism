@@ -36,6 +36,17 @@
 [`CURRENT_STATUS.json`](CURRENT_STATUS.json), [`DEVELOPMENT_GOAL.json`](DEVELOPMENT_GOAL.json),
 [`ijhe_objective_coverage_audit.json`](results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_objective_coverage_audit.json)에서 확인합니다.
 
+**최신 isolation-rebound 기준점 (2026-11-09):** 현재 개발 상태의 권위 산출물은
+[`ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json`](results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json)이다.
+24개 facility case와 96개 risk atom을 다시 계산했고, 배관 5개·밸브 5개·펌프 2개에 대해 정확히 일치하는
+`reviewed_isolation_success` packet을 시설 ledger까지 전달했다. 포트 결합은 24/24이며 조건부 IR은
+`6.08e-05/yr`이다. 그러나 packet provenance가 합성/screening이고 qualified case는 0개이므로,
+29개 검사 중 23개 PASS·6개 BLOCKED인 `INCOMPLETE_EVIDENCE`를 유지한다. case 커버리지와 외부 자료 요청은
+[`case_packet_coverage`](results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_case_packet_coverage.json)와
+[`facility_evidence_request`](results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json)에 기록했다.
+최신 상태 포인터·평가·장부·커버리지의 상호 정합성은
+[`status_consistency_isolation_rebound_authoritative.json`](results/20261109/status_consistency_isolation_rebound_authoritative.json)에서 `CONSISTENT`로 확인된다.
+
 **최신 v0.6.0 readiness 기준 (2026-11-06):** [`v060_readiness_report_current_slabx_catalog.json`](results/20261106/v060_readiness_report_current_slabx_catalog.json)은 같은 34개 사건·44개 case·176개 risk atom을 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`으로 기록합니다. 검증 매트릭스는 12개 독립 evidence domain을 보존하고, FFI Test 4 native-SLABx 직접 비교 30개 센서의 MAE `0.648 vol%p`, RMSE `1.211 vol%p`, LFL TP 3/FN 0/FP 0을 [`slabx_lh2_direct_comparison_audit.json`](results/20261106/slabx_lh2_direct_comparison_audit.json)에서 재현합니다. 이 구성요소 근거는 독립 hold-out 물리검증이나 시설 QRA를 열지 않으며, strict blocker는 독립 물리검증·qualified provider·엄격한 시설범위·시설 QRA 네 가지로 유지됩니다.
 
 **CI 재현:** 저장소 루트의 Python 3.12 workflow와 같은 설치·`pip check`·pytest 절차를 로컬에서 **931 passed/1 skipped**로 재현했고, wheel의 frequency catalogue와 entry point 계약도 확인했습니다. 현재 기록은 [`ci_local_reproduction_current.json`](results/20261106/ci_local_reproduction_current.json)이며, 원격 Actions 로그는 현재 인증 상태에서 단정하지 않습니다. 저장소 루트 workflow는 [`tests.yml`](../.github/workflows/tests.yml), 패키지 재현용 workflow는 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)입니다.

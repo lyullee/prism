@@ -16,22 +16,26 @@
   "provider_qualification_coverage": null,
   "provider_qualification_coverage_complete": null,
   "facility_case_packet_coverage": {
-    "schema": null,
-    "coverage_status": "MISSING_REPORT",
-    "case_request_count": null,
+    "schema": "prism.facility_case_provider_coverage.v1",
+    "coverage_status": "NO_CASE_MATCH",
+    "case_request_count": 24,
     "ledger_provider_packet_case_count": 24,
     "qualified_provider_event_count": 0,
     "qualified_provider_case_count": 0,
     "provider_evidence_row_count": 0,
-    "status_counts": {},
+    "status_counts": {
+      "MISSING_QUALIFIED_PROVIDER_EVIDENCE": 24
+    },
     "complete": false,
     "blocking_reasons": [
-      "facility case packet coverage report is required when provider cases are present"
+      "facility case packet coverage is not full qualified coverage",
+      "facility case packet coverage has cases without qualified packets",
+      "facility case packet coverage has no qualified provider events"
     ],
     "frequency_inference_performed": false,
-    "frequency_is_not_assigned": null,
+    "frequency_is_not_assigned": true,
     "physical_validation_claim": false,
-    "facility_ir_fn_promotion": null
+    "facility_ir_fn_promotion": "requires this full case gate plus independent scope and validation gates"
   },
   "facility_case_packet_coverage_complete": false,
   "conditional_diagnostic_facility_risk_available": true,
@@ -38982,5 +38986,5 @@
     "release_termination_inventory": "case-level provider duration, termination, isolation, inventory and mass closure are carried through the merged facility ledger without filling missing branch values",
     "timing": "facility timing preserves observed whole-case and stage elapsed values; it does not claim repeated-run throughput or fresh-physics 1 Hz service"
   },
-  "assessment_digest": "75ae8f84af3ad7380962530ee9875b8c284f21e6d52d83846b216e3a9ca99187"
+  "assessment_digest": "8c39bb473e5924aa0e2c2fb56d5bfa19cb12fb39b0877102bdfbd3900448cc05"
 }

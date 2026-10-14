@@ -50,7 +50,7 @@
   → 시설 IR/F-N 원장
 ```
 
-IJHE 완료 감사는 24개 검사 중 19개 통과·5개 차단인 `INCOMPLETE_EVIDENCE`로 남았다. 남은 차단은 qualified provider packet, 전체 방출경계의 독립 증거, 주요 사고군 범위, 독립 물리검증, 엄격 시설 IR/F-N 승격이다.
+최신 권위 IJHE 완료 감사는 29개 검사 중 23개 통과·6개 차단인 `INCOMPLETE_EVIDENCE`로 남았다. 12개 isolation-success packet의 연결은 확인됐지만, qualified provider packet, 전체 방출경계의 독립 증거, provider worklist 완결, 주요 사고군 범위, 독립 물리검증, 엄격 시설 IR/F-N 승격은 여전히 차단된다. 과거 24개 검사 감사는 보존용 스냅샷이며 현재 상태 원장은 최신 권위 감사를 가리킨다.
 
 ## 산출물
 
@@ -66,7 +66,9 @@ IJHE 완료 감사는 24개 검사 중 19개 통과·5개 차단인 `INCOMPLETE_
 - IR/F-N 감사: `results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_aggregate_audit.json`
 - 설비 기여 감사: `results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_component_audit.json`
 - 빈도 불확실성 감사: `results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_frequency_uncertainty_audit.json`
-- IJHE 완료 감사: `results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_with_hazop_multiequipment.json`
+- IJHE 완료 감사(최신 권위): `results/20261109/ijhe_completion_audit_conditional_facility_isolation_rebound_authoritative.json`
+- 시설 case별 provider packet 커버리지: `results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_case_packet_coverage.json`
+- 상태 원장 일관성 감사: `results/20261109/status_consistency_isolation_rebound_authoritative.json`
 
 정확한 결론은 **“12개 isolation-success provider packet을 전체 시설 계산에 연결해 종료·차단·질량 장부의 전달을 확인했지만, packet의 합성 provenance 때문에 엄격 시설 QRA를 승격하지 않았다”**이다.
 
@@ -77,7 +79,10 @@ IJHE 완료 감사는 24개 검사 중 19개 통과·5개 차단인 `INCOMPLETE_
 - 증거 요청 장부: `results/20261109/generic_scope_closure_rebound_facility_isolation_rebound_evidence_request.json`
 - 상태: `OPEN_EVIDENCE_REQUEST`
 - strict case 요청: 24개
+- provider packet 커버리지: `NO_CASE_MATCH` (24개 요청, qualified case 0개)
 - 현 단계에서 자동 빈도 추론: 금지
 - 현장 차단확률·provider 적격성 자동 생성: 금지
 
 이 장부가 다음 외부 데이터 연결의 입력 목록이며, 현재 합성 packet을 실제 설비 자료로 대체하기 전에는 시설 QRA 승격을 허용하지 않는다.
+
+상태 일관성 감사는 최신 완료감사·평가·evidence request·facility ledger·case 커버리지·두 상태 원장의 포인터를 모두 대조해 `CONSISTENT`를 기록했다. 이 결과는 증거 부족을 해소했다는 뜻이 아니라, 현재 제한과 최신 산출물의 연결이 서로 모순되지 않는다는 뜻이다.
