@@ -1,0 +1,177 @@
+{
+  "schema_version": "prism.dynamiclh2poolx_evidence_audit.v1",
+  "status": "RESTRICTED_COMPONENT_EVIDENCE_CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
+  "source_root": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review",
+  "decision": "PASS_RESTRICTED_STAGE_C_COMPONENT_SCOPE",
+  "provenance_status": "CURRENT_SOURCE_REPLAY_WITH_EXTERNAL_EVIDENCE_DRIFT",
+  "sources": [
+    {
+      "role": "Stage-C evidence decision and metrics",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\stage_c_evidence.json",
+      "sha256": "3dd31892ee15a188bc00aab4a851e496a840c7fa0c66b29dc25c6ed7eecf8275"
+    },
+    {
+      "role": "Stage-C protocol",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\stage_c_protocol.json",
+      "sha256": "92749315664cb7af85b3e8f8aaac0e6e6a88021291023be325a648b294d0a849"
+    },
+    {
+      "role": "dynamic validation protocol",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\dynamic_validation_protocol.json",
+      "sha256": "0452bf5aba16211ee6ac160ad3bb2f01f9e9d70f5aa19eb40b27f4080fc98de2"
+    },
+    {
+      "role": "source manifest",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\source_manifest.json",
+      "sha256": "8fa0f1a0e7706d770b8738a93930f00314ccf413f74e30574ab097fdcf863532"
+    },
+    {
+      "role": "dynamic_pool_py",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\src\\dynamiclh2poolx\\dynamic_pool.py",
+      "sha256": "0d1b6c68d6641ec2956296862fc06c41156d3854350db7d6889fc8e08a683eb4"
+    },
+    {
+      "role": "spreading_py",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\src\\dynamiclh2poolx\\spreading.py",
+      "sha256": "9ce3fd4b4ee59022372945a839f2c3490afab8a22a2aaa9c2a56a93accc6cc32"
+    },
+    {
+      "role": "juel3155_radius_observations",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\juel3155_radius_observations.csv",
+      "sha256": "8d7f21ec41caa52203c71454f7ae7c3b5fd923319819fc5fc0731e3143c9cad0"
+    },
+    {
+      "role": "hse_rr985_test6_radius",
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\hse_rr985_test6_radius.csv",
+      "sha256": "504c27f62e18a12cbc5f843565b52a41691f4a4071fd18e65e2502e65a961acb"
+    }
+  ],
+  "hash_comparisons": {
+    "protocol_sha256": {
+      "declared": "160072c9125e9246734bc07e9d971c9f686267bf9238a445cd8be60d9d5d6365",
+      "current": "92749315664cb7af85b3e8f8aaac0e6e6a88021291023be325a648b294d0a849",
+      "matches": false
+    },
+    "source_manifest_sha256": {
+      "declared": "11ee4a695cb33f6e967cdeb4fb8e7fc1519cf541d468aa2923a3240cc38ffd1e",
+      "current": "8fa0f1a0e7706d770b8738a93930f00314ccf413f74e30574ab097fdcf863532",
+      "matches": false
+    },
+    "dynamic_pool_py_sha256": {
+      "declared": "4c2229f89bfc9d8ca25df7010905a6e2d42e893b8373f06c3cd5658be1b6b0bc",
+      "current": "0d1b6c68d6641ec2956296862fc06c41156d3854350db7d6889fc8e08a683eb4",
+      "matches": false
+    },
+    "spreading_py_sha256": {
+      "declared": "2a0ea331451589cde5136c6e478b6e6eecb3f3cc07d33314e03b2e5319f7613e",
+      "current": "9ce3fd4b4ee59022372945a839f2c3490afab8a22a2aaa9c2a56a93accc6cc32",
+      "matches": false
+    }
+  },
+  "hash_mismatch_count": 4,
+  "protocol": {
+    "stage_protocol_id": "dynamiclh2poolx_stage_c_restricted_20260911",
+    "stage_protocol_file_id": "dynamiclh2poolx_stage_c_restricted_20260911",
+    "dynamic_validation_protocol_id": "dynamiclh2poolx_v02_component_validation_20260911",
+    "identifiers_match": true
+  },
+  "component_checks": {
+    "c0_conservation_and_observation_operator": true,
+    "c1_solution_verification": true,
+    "c2_juel_holdout": true,
+    "c3_hse_endpoint_assessment": true
+  },
+  "observations": {
+    "juel3155_radius_observations": {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\juel3155_radius_observations.csv",
+      "sha256": "8d7f21ec41caa52203c71454f7ae7c3b5fd923319819fc5fc0731e3143c9cad0",
+      "row_count": 34,
+      "fields": [
+        "source_record_id",
+        "surface",
+        "trial",
+        "branch",
+        "time_s",
+        "observed_radius_m",
+        "time_bound_s",
+        "radius_lower_bound_m",
+        "radius_upper_bound_m",
+        "role"
+      ]
+    },
+    "hse_rr985_test6_radius": {
+      "path": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.release-work\\DynamicLH2PoolX-review\\data\\hse_rr985_test6_radius.csv",
+      "sha256": "504c27f62e18a12cbc5f843565b52a41691f4a4071fd18e65e2502e65a961acb",
+      "row_count": 18,
+      "fields": [
+        "source_record_id",
+        "phase",
+        "time_s",
+        "observed_radius_m",
+        "time_bound_s",
+        "radius_bound_m",
+        "use"
+      ]
+    },
+    "calibration_trials": [
+      3,
+      5
+    ],
+    "holdout_trials": [
+      4,
+      6
+    ],
+    "holdout_row_count": 19,
+    "holdout_is_disjoint": true
+  },
+  "metrics": {
+    "c0_relative_unledgered_residual": 7.94e-16,
+    "c1_spatial_liquid_mass_relative_change": 0.00293198647244604,
+    "c1_spatial_cumulative_evaporation_relative_change": 3.774138702421545e-05,
+    "water_trial_4_radius_rmse_m": 0.13743685418725532,
+    "aluminium_trial_6_radius_rmse_m": 0.10158740079360236,
+    "water_trial_4_video_band_coverage": 1.0,
+    "aluminium_trial_6_video_band_coverage": 1.0,
+    "hse_test6_end_of_release_radius_m": 0.92,
+    "hse_test6_trajectory_rmse_m_diagnostic_only": 0.4382482612190703,
+    "hse_test6_max_absolute_unledgered_residual_kg": 8.244516180866412e-13
+  },
+  "scope": {
+    "supports": [
+      "declared ground-reaching LH2 inflow",
+      "horizontal unconfined smooth-axisymmetric pool source terms",
+      "restricted spreading holdout radius and mass-ledger checks",
+      "numerical convergence and conservation checks"
+    ],
+    "excludes": [
+      "jet impact, breakup, and deposition fraction",
+      "asymmetric spreading and detached liquid pieces",
+      "sloped terrain, drainage, barriers, buildings, or complex geometry",
+      "atmospheric concentration or LFL-distance validation",
+      "equipment accident release, isolation, and inventory depletion",
+      "ignition, fire, explosion, IR/F-N, and facility-QRA validation"
+    ]
+  },
+  "blocking_reasons": [],
+  "claims": {
+    "restricted_component_evidence": true,
+    "independent_physical_validation_claim": false,
+    "full_chain_validation_claim": false,
+    "accident_release_validation_claim": false,
+    "frequency_inference_performed": false,
+    "facility_qra_claim": false
+  },
+  "promotion_policy": {
+    "hash_drift_is_retained_as_provenance_status": true,
+    "component_evidence_is_not_accident_release_validation": true,
+    "component_evidence_is_not_atmospheric_dispersion_validation": true,
+    "component_evidence_is_not_facility_qra_validation": true,
+    "frequency_is_not_inferred_from_physical_observations": true,
+    "no_implicit_accident_substitution": true
+  },
+  "required_next_evidence": [
+    "reviewed source-term observations matched to an explicit PRISM equipment release packet",
+    "independent downstream dispersion comparison with declared geometry and clock",
+    "facility-level ignition, population, IR/F-N, and accident-family validation"
+  ]
+}
