@@ -5272,6 +5272,57 @@ def build_ijhe_completion_audit(
                 "physical-validation claim was made."
             )
             checks.append(frequency_check)
+        promotion_gates = view_payload.get("promotion_gates")
+        if isinstance(promotion_gates, Mapping):
+            gate_names = (
+                "release_boundary",
+                "provider_qualification",
+                "independent_physical_validation",
+                "facility_ir_fn",
+            )
+            gate_rows_valid = all(
+                isinstance(promotion_gates.get(name), Mapping)
+                and promotion_gates[name].get("status")
+                in {"BLOCKED", "PASS_DIAGNOSTIC_ONLY"}
+                and promotion_gates[name].get("promotion_allowed") is False
+                for name in gate_names
+            )
+            gates_valid = (
+                gate_rows_valid
+                and isinstance(promotion_gates.get("all_gates_closed"), bool)
+                and promotion_gates.get("promotion_allowed") is False
+                and (
+                    promotion_gates.get("all_gates_closed") is False
+                    or all(
+                        promotion_gates[name].get("status")
+                        == "PASS_DIAGNOSTIC_ONLY"
+                        for name in gate_names
+                    )
+                )
+            )
+            gates_check = _check(
+                "diagnostic_conditional_facility_promotion_gates",
+                gates_valid,
+                {
+                    "record": view_payload.get("_record_path"),
+                    "gate_statuses": {
+                        name: promotion_gates.get(name, {}).get("status")
+                        if isinstance(promotion_gates.get(name), Mapping)
+                        else None
+                        for name in gate_names
+                    },
+                    "all_gates_closed": promotion_gates.get("all_gates_closed"),
+                    "promotion_allowed": promotion_gates.get("promotion_allowed"),
+                },
+                "conditional facility promotion-gate summary is missing or carries an unsafe promotion claim",
+            )
+            gates_check["diagnostic_only"] = True
+            gates_check["interpretation"] = (
+                "The digital-twin view exposes release-boundary, provider-qualification, "
+                "independent-validation and facility IR/F-N gates separately. A diagnostic "
+                "gate status never opens facility-QRA promotion."
+            )
+            checks.append(gates_check)
     blocking = [check["blocking_reason"] for check in checks if check["blocking_reason"]]
     complete = not blocking
     return {

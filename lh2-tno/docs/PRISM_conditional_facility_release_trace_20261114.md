@@ -44,6 +44,10 @@ python scripts/build_conditional_facility_risk_view.py `
 구분한다. 중복 행은 삭제하지 않고 그대로 보존하므로, “계산되지 않음”과 “계산은
 실행됐지만 자격 또는 계산영역이 닫히지 않음”을 소비자가 구별할 수 있다.
 
+view의 `promotion_gates`에는 방출경계·provider 자격·독립 물리검증·시설 IR/F-N의
+네 gate가 각각 기록된다. 현재 네 gate 모두 `BLOCKED`이고
+`all_gates_closed=false`, `promotion_allowed=false`이다.
+
 이 view는 **조건부 진단 출력**이다. `qualification.promotion_allowed`는 항상
 `false`이며, qualified provider packet·독립 물리검증·전체 사고범위·시설 전체
 IR/F-N이 확보될 때까지 시설 QRA 결과로 승격하지 않는다. 누락·운영자 제한·피해

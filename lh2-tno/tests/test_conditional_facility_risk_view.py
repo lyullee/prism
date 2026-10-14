@@ -65,6 +65,8 @@ def test_view_keeps_conditional_risk_and_qualification_separate() -> None:
     assert view["component_contributions"]["tank-01"]["risk_atom_count"] == 4
     assert view["qualification"]["facility_total_risk_available"] is False
     assert view["qualification"]["promotion_allowed"] is False
+    assert view["promotion_gates"]["all_gates_closed"] is False
+    assert view["promotion_gates"]["facility_ir_fn"]["status"] == "BLOCKED"
 
 
 def test_view_rejects_missing_conditional_fn() -> None:
@@ -140,6 +142,8 @@ def test_view_exposes_case_release_trace_without_opening_facility_promotion() ->
         "stage_elapsed_ms": {"source": 4.0},
     }
     assert view["qualification"]["promotion_allowed"] is False
+    assert view["promotion_gates"]["release_boundary"]["strict_blocked_case_count"] == 1
+    assert view["promotion_gates"]["release_boundary"]["status"] == "BLOCKED"
 
 
 def test_view_preserves_literature_frequency_scenarios_and_rank_stability() -> None:

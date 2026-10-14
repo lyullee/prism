@@ -102,6 +102,26 @@ def test_completion_audit_checks_literature_frequency_trace() -> None:
             ],
             "semantics": {"promotion": "diagnostic only"},
         },
+        "promotion_gates": {
+            "release_boundary": {
+                "status": "BLOCKED",
+                "promotion_allowed": False,
+            },
+            "provider_qualification": {
+                "status": "BLOCKED",
+                "promotion_allowed": False,
+            },
+            "independent_physical_validation": {
+                "status": "BLOCKED",
+                "promotion_allowed": False,
+            },
+            "facility_ir_fn": {
+                "status": "BLOCKED",
+                "promotion_allowed": False,
+            },
+            "all_gates_closed": False,
+            "promotion_allowed": False,
+        },
         "frequency_uncertainty": {
             "schema_version": "prism.conditional_facility_frequency_trace.v1",
             "scenario_count": 1,
@@ -172,6 +192,12 @@ def test_completion_audit_checks_literature_frequency_trace() -> None:
     )
     assert check["status"] == "PASS"
     assert check["diagnostic_only"] is True
+    gates_check = next(
+        row
+        for row in report["checks"]
+        if row["name"] == "diagnostic_conditional_facility_promotion_gates"
+    )
+    assert gates_check["status"] == "PASS"
 
     view["frequency_uncertainty"]["frequency_port_binding"][
         "frequency_inference_allowed"

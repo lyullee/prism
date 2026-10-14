@@ -29635,6 +29635,35 @@
     ],
     "semantics": "published marginal event-frequency quantiles plus explicit fixed catalogue rates, with within-asset shared or independent-event bound comparison; fixed physical harm/weather/barrier/population/ignition; incomplete scope remains incomplete"
   },
+  "promotion_gates": {
+    "release_boundary": {
+      "status": "BLOCKED",
+      "strict_eligible_case_count": 3,
+      "strict_blocked_case_count": 41,
+      "promotion_allowed": false
+    },
+    "provider_qualification": {
+      "status": "BLOCKED",
+      "provider_packet_case_count": 44,
+      "qualified_provider_packet_case_count": 0,
+      "provider_packet_promoted": false,
+      "promotion_allowed": false
+    },
+    "independent_physical_validation": {
+      "status": "BLOCKED",
+      "physical_validation_claim": false,
+      "promotion_allowed": false
+    },
+    "facility_ir_fn": {
+      "status": "BLOCKED",
+      "facility_total_risk_available": false,
+      "qualified_facility_qra_available": false,
+      "complete_facility_qra_claim": false,
+      "promotion_allowed": false
+    },
+    "all_gates_closed": false,
+    "promotion_allowed": false
+  },
   "provider_mass_balance_audit": null,
   "coverage": {
     "event_count": 34,

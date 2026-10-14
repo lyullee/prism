@@ -5607,6 +5607,24 @@
       "blocking_reason": null,
       "diagnostic_only": true,
       "interpretation": "The digital-twin view carries explicit literature-frequency scenarios, quantile provenance and rank-stability evidence. It also preserves each scenario's uncomputed or incomplete case rows with explicit status. It records that no frequency inference, facility credible interval, provider promotion or physical-validation claim was made."
+    },
+    {
+      "name": "diagnostic_conditional_facility_promotion_gates",
+      "status": "PASS",
+      "evidence": {
+        "record": "results\\20261114\\conditional_facility_risk_view_with_release_trace.json",
+        "gate_statuses": {
+          "release_boundary": "BLOCKED",
+          "provider_qualification": "BLOCKED",
+          "independent_physical_validation": "BLOCKED",
+          "facility_ir_fn": "BLOCKED"
+        },
+        "all_gates_closed": false,
+        "promotion_allowed": false
+      },
+      "blocking_reason": null,
+      "diagnostic_only": true,
+      "interpretation": "The digital-twin view exposes release-boundary, provider-qualification, independent-validation and facility IR/F-N gates separately. A diagnostic gate status never opens facility-QRA promotion."
     }
   ],
   "blocking_reasons": [

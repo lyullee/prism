@@ -430,6 +430,91 @@ def build_conditional_facility_risk_view(
         if isinstance(frequency_uncertainty, Mapping)
         else None
     )
+    release_summary = (
+        release_trace.get("summary")
+        if isinstance(release_trace, Mapping)
+        and isinstance(release_trace.get("summary"), Mapping)
+        else {}
+    )
+    strict_release_eligible = release_summary.get(
+        "strict_release_boundary_eligible_case_count"
+    )
+    strict_release_blocked = release_summary.get(
+        "strict_release_boundary_blocked_case_count"
+    )
+    release_gate_closed = (
+        isinstance(strict_release_blocked, int) and strict_release_blocked == 0
+    )
+    provider_case_count = source.get("provider_packet_case_count")
+    qualified_provider_case_count = source.get(
+        "qualified_provider_packet_case_count"
+    )
+    provider_gate_closed = (
+        source.get("provider_packet_promoted") is True
+        and isinstance(provider_case_count, int)
+        and provider_case_count > 0
+        and qualified_provider_case_count == provider_case_count
+    )
+    physical_validation_gate_closed = source.get("physical_validation_claim") is True
+    facility_ir_fn_gate_closed = (
+        source.get("facility_total_risk_available") is True
+        and source.get("qualified_facility_qra_available") is True
+        and source.get("complete_facility_qra_claim") is True
+    )
+    promotion_gates = {
+        "release_boundary": {
+            "status": "PASS_DIAGNOSTIC_ONLY"
+            if release_gate_closed
+            else "BLOCKED",
+            "strict_eligible_case_count": strict_release_eligible,
+            "strict_blocked_case_count": strict_release_blocked,
+            "promotion_allowed": False,
+        },
+        "provider_qualification": {
+            "status": "PASS_DIAGNOSTIC_ONLY"
+            if provider_gate_closed
+            else "BLOCKED",
+            "provider_packet_case_count": provider_case_count,
+            "qualified_provider_packet_case_count": qualified_provider_case_count,
+            "provider_packet_promoted": bool(
+                source.get("provider_packet_promoted")
+            ),
+            "promotion_allowed": False,
+        },
+        "independent_physical_validation": {
+            "status": "PASS_DIAGNOSTIC_ONLY"
+            if physical_validation_gate_closed
+            else "BLOCKED",
+            "physical_validation_claim": bool(
+                source.get("physical_validation_claim")
+            ),
+            "promotion_allowed": False,
+        },
+        "facility_ir_fn": {
+            "status": "PASS_DIAGNOSTIC_ONLY"
+            if facility_ir_fn_gate_closed
+            else "BLOCKED",
+            "facility_total_risk_available": bool(
+                source.get("facility_total_risk_available")
+            ),
+            "qualified_facility_qra_available": bool(
+                source.get("qualified_facility_qra_available")
+            ),
+            "complete_facility_qra_claim": bool(
+                source.get("complete_facility_qra_claim")
+            ),
+            "promotion_allowed": False,
+        },
+        "all_gates_closed": all(
+            (
+                release_gate_closed,
+                provider_gate_closed,
+                physical_validation_gate_closed,
+                facility_ir_fn_gate_closed,
+            )
+        ),
+        "promotion_allowed": False,
+    }
 
     return {
         "schema_version": "prism.conditional_facility_risk_view.v1",
@@ -459,6 +544,7 @@ def build_conditional_facility_risk_view(
         "release_termination_inventory_ledger": dict(release_ledger),
         "release_trace": release_trace,
         "frequency_uncertainty": frequency_trace,
+        "promotion_gates": promotion_gates,
         "provider_mass_balance_audit": (
             {
                 "schema_version": mass_balance_audit.get("schema_version"),

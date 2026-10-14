@@ -71,7 +71,7 @@ python scripts/build_ijhe_completion_audit.py `
 
 ## 판정
 
-현재 결과는 41개 검사 중 37개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
+현재 결과는 42개 검사 중 38개 `PASS`, 4개 `BLOCKED`, 전체 상태 `INCOMPLETE_EVIDENCE`이다.
 
 통과한 진단 연결은 다음을 뜻한다.
 
@@ -125,4 +125,9 @@ accounting을 갖는지 확인한다. 이 검사는 디지털트윈 전달 경�
 검사하므로 이 결과는 빈도 민감도 장부이지 현장 빈도 학습이나 시설 전체 QRA가 아니다.
 미충족·불완전 case 요약도 시나리오별 count, 고유 key count, 중복 행 count와 상태별
 분포를 함께 검사해 누락 사고를 0위험으로 숨기지 않는다.
+
+`diagnostic_conditional_facility_promotion_gates` 검사는 방출경계, provider 자격,
+독립 물리검증, 시설 IR/F-N의 네 단계를 각각 `BLOCKED` 또는
+`PASS_DIAGNOSTIC_ONLY`로 표시한다. 네 단계가 모두 닫혀도 현재 view의
+`promotion_allowed`는 별도 승인을 거치기 전까지 `false`로 유지된다.
 
