@@ -4099,7 +4099,7 @@
   "realtime_hazop_mode_trace_audit_policy": "The audit requires telemetry and release-path operating_mode equality and never infers release, frequency, physical validation or facility QRA.",
   "realtime_hazop_mode_trace_audit_record": "results/20261107/realtime_hazop_mode_trace_audit.json",
   "realtime_hazop_mode_trace_audit_input": "examples/realtime_hazop_mode_trace_example.json",
-  "realtime_hazop_mode_trace_audit_status": "REALTIME_HAZOP_MODE_TRACE_VERIFIED; synthetic diagnostic facility batch with 2 components and 0 mismatches; promotion false",
+  "realtime_hazop_mode_trace_audit_status": "REALTIME_HAZOP_MODE_TRACE_VERIFIED; synthetic diagnostic facility batch with 3 components (receiving/supply/standby) and 0 mismatches; promotion false",
   "external_pump_document_evidence_audit_implemented": true,
   "external_pump_document_evidence_audit_module": "src/lh2_tno/external_document_evidence.py",
   "external_pump_document_evidence_audit_script": "scripts/audit_external_document_evidence.py",

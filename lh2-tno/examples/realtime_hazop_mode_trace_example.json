@@ -24,17 +24,30 @@
       "equipment_release_path": {
         "operating_mode": "supply"
       }
+    },
+    "pressure-relief-vent-01": {
+      "status": "ACCEPTED",
+      "result": {
+        "telemetry_boundary": {
+          "operating_mode": "standby"
+        }
+      },
+      "equipment_release_path": {
+        "operating_mode": "standby"
+      }
     }
   },
   "aggregate": {
     "equipment_release_path_accounting": {
       "component_rows": {
         "storage-tank-01": {"operating_mode": "receiving"},
-        "supply-vaporizer-01": {"operating_mode": "supply"}
+        "supply-vaporizer-01": {"operating_mode": "supply"},
+        "pressure-relief-vent-01": {"operating_mode": "standby"}
       },
       "operating_mode_counts": {
         "receiving": 1,
-        "supply": 1
+        "supply": 1,
+        "standby": 1
       }
     }
   }

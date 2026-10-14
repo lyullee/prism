@@ -4,6 +4,13 @@
   "diagnostic_only": true,
   "rows": [
     {
+      "component_id": "pressure-relief-vent-01",
+      "operating_mode": "standby",
+      "telemetry_operating_mode": "standby",
+      "release_path_operating_mode": "standby",
+      "mode_match": true
+    },
+    {
       "component_id": "storage-tank-01",
       "operating_mode": "receiving",
       "telemetry_operating_mode": "receiving",
@@ -18,9 +25,10 @@
       "mode_match": true
     }
   ],
-  "row_count": 2,
+  "row_count": 3,
   "facility_batch_accounting_present": true,
   "operating_mode_counts": {
+    "standby": 1,
     "receiving": 1,
     "supply": 1
   },

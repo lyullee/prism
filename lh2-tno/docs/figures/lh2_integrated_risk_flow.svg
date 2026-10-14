@@ -2,23 +2,24 @@
 <rect width="2400" height="1350" fill="#F5F9FC"/>
 <rect width="2400" height="183" fill="#081D31"/>
 <rect x="80" y="62" width="10" height="73" rx="5" fill="#35C6D6"/>
-<text x="122" y="105" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="49" font-weight="800" fill="#FFFFFF" text-anchor="start"><tspan x="122" dy="0">액화수소 인수기지 통합 위험분석 흐름</tspan></text>
-<text x="122" y="151" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="27" font-weight="400" fill="#BAD4E5" text-anchor="start"><tspan x="122" dy="0">현장 입력·운전 모드 → HAZOP 기반 판단 → 현재·예측 상태의 정량 평가 → 관리자 대응</tspan></text>
+<text x="122" y="105" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="49" font-weight="800" fill="#FFFFFF" text-anchor="start"><tspan x="122" dy="0">액화수소 인수기지 통합 위험관리 흐름</tspan></text>
+<text x="122" y="151" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="27" font-weight="400" fill="#BAD4E5" text-anchor="start"><tspan x="122" dy="0">현장 입력 + 운전 모드 → HAZOP 시나리오 → 모델 협업 정량평가 → 현재 대응·미래 선제조치</tspan></text>
 <text x="90" y="221" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#216A91" text-anchor="start"><tspan x="90" dy="0">01  감시와 위험 시나리오 결정</tspan></text>
 <rect x="90" y="246" width="630" height="90" rx="20" fill="#FFFFFF" stroke="#6FCAD3" stroke-width="3"/>
-<text x="118" y="284" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#167785" text-anchor="start"><tspan x="118" dy="0">현장 입력값</tspan></text>
+<text x="118" y="284" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#167785" text-anchor="start"><tspan x="118" dy="0">현장 모니터링 입력</tspan></text>
 <text x="118" y="318" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">센서·설비 상태 + 운전 모드(인수·공급·대기)</tspan></text>
 <rect x="90" y="348" width="630" height="88" rx="20" fill="#FFFFFF" stroke="#B7CADB" stroke-width="3"/>
-<text x="118" y="385" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#285A80" text-anchor="start"><tspan x="118" dy="0">HAZOP 테이블</tspan></text>
+<text x="118" y="385" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="800" fill="#285A80" text-anchor="start"><tspan x="118" dy="0">HAZOP 테이블 연계</tspan></text>
 <text x="118" y="419" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="600" fill="#102A43" text-anchor="start"><tspan x="118" dy="0">모드별 이탈 기준·원인·결과·기존 방호</tspan></text>
 <rect x="820" y="246" width="650" height="190" rx="24" fill="#FFFFFF" stroke="#B7CADB" stroke-width="3"/>
 <rect x="848" y="269" width="215" height="40" rx="20" fill="#E7F0F7" stroke="#E7F0F7" stroke-width="0"/>
 <text x="955.5" y="298" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#285A80" text-anchor="middle"><tspan x="955.5" dy="0">HAZOP 자동 판단</tspan></text>
 <text x="848" y="337" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="29" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="848" dy="0">현장값 × 운전 모드 × 이탈 기준</tspan><tspan x="848" dy="38.3">정성적 위험 평가와 이탈 도출</tspan></text>
 <rect x="1550" y="246" width="760" height="190" rx="24" fill="#E3F6F8" stroke="#42BAC9" stroke-width="3"/>
-<rect x="1578" y="269" width="209" height="40" rx="20" fill="#BFECEF" stroke="#BFECEF" stroke-width="0"/>
-<text x="1682.5" y="298" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#126D7D" text-anchor="middle"><tspan x="1682.5" dy="0">위험 시나리오 결정</tspan></text>
+<rect x="1578" y="269" width="300" height="40" rx="20" fill="#BFECEF" stroke="#BFECEF" stroke-width="0"/>
+<text x="1728" y="298" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="25" font-weight="700" fill="#126D7D" text-anchor="middle"><tspan x="1728" dy="0">위험 시나리오 패키지</tspan></text>
 <text x="1578" y="337" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="29" font-weight="700" fill="#102A43" text-anchor="start"><tspan x="1578" dy="0">도출된 이탈과 공정상태를 결합</tspan><tspan x="1578" dy="38.3">대상 설비·사고 경로 확정</tspan></text>
+<text x="1578" y="412" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="22" font-weight="600" fill="#315B77" text-anchor="start"><tspan x="1578" dy="0">시나리오 ID · 설비 ID · 운전 모드 · 시간축</tspan></text>
 <path d="M 721 291 H 805" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
 <path d="M 721 391 H 805" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
 <path d="M 1471 341 H 1535" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
@@ -43,7 +44,7 @@
 <rect x="1035" y="770" width="280" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
 <text x="1052" y="793" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1052" dy="0">SLABx-LH2</tspan><tspan x="1052" dy="22" font-size="17" font-weight="500">누출·확산·피해</tspan></text>
 <rect x="1335" y="770" width="260" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
-<text x="1352" y="793" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">통합 위험도 계산</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">PRISM 엔진 · IR/F-N</tspan></text>
+<text x="1352" y="793" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">통합 위험도 계산</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">공통 계산 · IR/F-N</tspan></text>
 <rect x="1690" y="675" width="580" height="128" rx="20" fill="#E1F3EC" stroke="#48A483" stroke-width="2"/>
 <text x="1722" y="727" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#174F43" text-anchor="start"><tspan x="1722" dy="0">현재 위험도 → 비상대응·안전관리</tspan><tspan x="1722" dy="37.0">관리자 화면에 대응안 표시</tspan></text>
 <path d="M 501 739 H 550" fill="none" stroke="#1C92A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-1C92A8)"/>
@@ -66,7 +67,7 @@
 <rect x="1035" y="1084" width="280" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
 <text x="1052" y="1107" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1052" dy="0">SLABx-LH2</tspan><tspan x="1052" dy="22" font-size="17" font-weight="500">미래 누출·확산·피해</tspan></text>
 <rect x="1335" y="1084" width="260" height="54" rx="11" fill="#FFFFFF" stroke="#B9CEDC" stroke-width="2"/>
-<text x="1352" y="1107" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">통합 위험도 계산</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">PRISM 엔진 · 미래 IR/F-N</tspan></text>
+<text x="1352" y="1107" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="20" font-weight="700" fill="#214E6C" text-anchor="start"><tspan x="1352" dy="0">통합 위험도 계산</tspan><tspan x="1352" dy="22" font-size="17" font-weight="500">공통 계산 · 미래 IR/F-N</tspan></text>
 <rect x="1690" y="979" width="580" height="129" rx="20" fill="#FFF0DF" stroke="#E4A05C" stroke-width="2"/>
 <text x="1722" y="1030" font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" font-size="28" font-weight="700" fill="#7D4B23" text-anchor="start"><tspan x="1722" dy="0">미래 위험도 → 선제 안전조치</tspan><tspan x="1722" dy="37.0">관리자 화면에 예상 위험 표시</tspan></text>
 <path d="M 501 1043 H 550" fill="none" stroke="#E28B43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arrow-E28B43)"/>

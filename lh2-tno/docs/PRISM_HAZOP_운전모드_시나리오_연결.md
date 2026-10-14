@@ -1,6 +1,6 @@
 # PRISM HAZOP·운전 모드 시나리오 연결
 
-통합 흐름도는 [`docs/figures/lh2_integrated_risk_flow.svg`](figures/lh2_integrated_risk_flow.svg)에서 확인할 수 있다. 현장 상태와 운전 모드가 HAZOP 판단으로 함께 들어가며, 이후 설비 공정 모델·방출/빈도 모델·SLABx-LH2·점화/노출 모델·통합 QRA가 같은 계산 계층에서 결합된다.
+통합 흐름도는 [`docs/figures/lh2_integrated_risk_flow.svg`](figures/lh2_integrated_risk_flow.svg)에서 확인할 수 있다. 현장 상태와 운전 모드가 HAZOP 판단으로 함께 들어가며, 이후 설비 공정 모델·방출/빈도 모델·SLABx-LH2·점화/노출 모델·통합 QRA가 같은 계산 계층에서 결합된다. PRISM은 특정 단일 모델을 대신하는 주인공이 아니라, 이 모델들을 동일한 시나리오 ID·설비 ID·운전 모드·시간축으로 연결하고 실행 순서를 조정하는 통합 실행 계층이다.
 
 ## 역할
 
@@ -45,7 +45,7 @@ SLABx-LH2/피해영향/점화/시설 IR·F-N 경로
 
 resolver가 반환한 `ConsequenceRequest` 또는 mapping에는 선택된 `operating_mode`가 자동으로 바인딩된다. 이미 다른 모드가 들어 있으면 gate가 `CONSEQUENCE_REJECTED`로 종료한다. 이 바인딩은 사고 빈도·누출량·차단 결과를 만들지 않고, HAZOP 선택 모드가 provider 방출 이후 피해 계산과 시설 원장까지 따라가는 식별자만 보존한다.
 
-실시간 결과에서도 이 식별자를 확인할 수 있다. `RealtimeConsequenceMonitor`의 `telemetry_boundary.operating_mode`와 `equipment_release_path.operating_mode`가 같은 선택 모드를 보존하며, `FacilityRealtimeConsequenceMonitor`의 `equipment_release_path_accounting.component_rows`와 `operating_mode_counts`에도 설비별로 남는다. 이 값은 화면·알람의 운전 맥락을 표시하기 위한 메타데이터이며, 누출 크기·방출 지속시간·빈도를 자동으로 만들지 않는다.
+실시간 결과에서도 이 식별자를 확인할 수 있다. `RealtimeConsequenceMonitor`의 `telemetry_boundary.operating_mode`와 `equipment_release_path.operating_mode`가 같은 선택 모드를 보존하며, `FacilityRealtimeConsequenceMonitor`의 `equipment_release_path_accounting.component_rows`와 `operating_mode_counts`에도 설비별로 남는다. 저장된 synthetic mode trace 예제는 `receiving`·`supply`·`standby` 3개 설비를 모두 포함하고, 세 모드의 count가 각각 1인지 감사한다. 이 값은 화면·알람의 운전 맥락을 표시하기 위한 메타데이터이며, 누출 크기·방출 지속시간·빈도를 자동으로 만들지 않는다.
 
 저장된 실시간 결과는 다음 감사기로 확인할 수 있다.
 
