@@ -594,9 +594,11 @@ class EmergencyReliefExportRequest:
 class InventoryReleaseExportRequest:
     """Explicit provider request for an inventory-defined accidental release.
 
-    These events intentionally carry no random failure opening.  The provider
-    owns the finite inventory and must terminate it with either
+    The provider owns the finite inventory and must terminate it with either
     ``inventory_depletion`` or a complete ``inventory_over_600s`` horizon.
+    An optional, explicitly reviewed failure opening may be carried when the
+    frequency event is a hole family whose duration is still provider-owned;
+    the opening is never inferred from the inventory model's diagnostic valve.
     """
 
     component_id: str
@@ -617,6 +619,7 @@ class InventoryReleaseExportRequest:
     state_snapshot_digest: str
     evidence_status: str
     scenario_provenance: str
+    failure_opening_diameter_m: float | None = None
     start_time_s: float = 0.0
     provider_termination_required: bool = True
     isolation_time_s: float | None = None
@@ -632,6 +635,8 @@ class InventoryReleaseExportRequest:
             _text(getattr(self, field), field)
         _digest(self.provider_source_digest, "provider_source_digest")
         _digest(self.state_snapshot_digest, "state_snapshot_digest")
+        if self.failure_opening_diameter_m is not None:
+            _positive(self.failure_opening_diameter_m, "failure_opening_diameter_m")
         _positive(self.horizon_s, "horizon_s")
         _positive(self.ambient_pressure_pa_abs, "ambient_pressure_pa_abs")
         _positive(self.ambient_temperature_k, "ambient_temperature_k")
@@ -723,6 +728,7 @@ class InventoryReleaseExportRequest:
             "state_snapshot_digest": self.state_snapshot_digest,
             "evidence_status": self.evidence_status,
             "scenario_provenance": self.scenario_provenance,
+            "failure_opening_diameter_m": self.failure_opening_diameter_m,
             "provider_termination_required": self.provider_termination_required,
             **_isolation_control_payload(
                 self.isolation_time_s, self.post_isolation_observation_s
@@ -948,7 +954,7 @@ def _export(
         "direction_enu": scenario.direction_enu,
         "ambient_pressure_pa_abs": scenario.ambient_pressure_pa_abs,
         "ambient_temperature_k": scenario.ambient_temperature_k,
-        "failure_opening_diameter_m": scenario.failure_opening_diameter_m,
+        "failure_opening_diameter_m": None,
         "provider_result": response,
     }
     try:
@@ -1085,7 +1091,7 @@ def export_equipment_inventory_release_history(
         "direction_enu": scenario.direction_enu,
         "ambient_pressure_pa_abs": scenario.ambient_pressure_pa_abs,
         "ambient_temperature_k": scenario.ambient_temperature_k,
-        "failure_opening_diameter_m": None,
+        "failure_opening_diameter_m": scenario.failure_opening_diameter_m,
         "event_kind": "accidental_leak",
         "provider_result": response,
     }

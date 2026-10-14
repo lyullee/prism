@@ -182,6 +182,26 @@ def _request_from_selected_packet(
             )
             release = type(release).model_validate_json(json.dumps(payload, allow_nan=False))
     defaults = _defaults_from_request(current_request)
+    # The provider packet owns the termination basis.  When an older campaign
+    # template omitted the equipment-specific source operator, bind the
+    # corresponding explicit operator here instead of leaving the request in
+    # the generic integrated-transient path.  This mapping is identity
+    # metadata only; it does not infer a duration, mass, frequency, or QRA
+    # result.
+    source_operator_by_basis = {
+            "inventory_depletion": "equipment_inventory_depletion",
+            "inventory_over_600s": "equipment_inventory_over_600s",
+            "two_sided_rupture": "equipment_two_sided_rupture",
+            "emergency_relief_discharge": "equipment_emergency_relief",
+    }
+    source_operator = source_operator_by_basis.get(
+        getattr(release, "termination_basis", None)
+    )
+    if source_operator is not None and defaults.get("source_operator") in {
+        None,
+        "integrated_transient",
+    }:
+        defaults["source_operator"] = source_operator
     if getattr(release, "event_kind", None) == "emergency_relief":
         defaults["release_termination"] = {
             "basis": "provider_declared",

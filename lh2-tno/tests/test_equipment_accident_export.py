@@ -441,6 +441,38 @@ def test_inventory_export_requires_provider_owned_inventory_termination():
     assert result.release.event_kind == "accidental_leak"
 
 
+def test_inventory_export_preserves_explicit_hole_opening_with_provider_depletion():
+    payload = {
+        "schema_version": "prism.equipment_inventory_export_request.v1",
+        "event_kind": "accidental_leak",
+        "component_id": "vaporizer-1",
+        "port_id": "vaporizer-1.out",
+        "event_id": "vaporizer-1/hole",
+        "release_mode": "instantaneous_inventory",
+        "horizon_s": 600.0,
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [1.0, 0.0, 0.0],
+        "ambient_pressure_pa_abs": 100000.0,
+        "ambient_temperature_k": 288.15,
+        "provider_source_digest": "a" * 64,
+        "provider_boundary_reference": "inventory outlet",
+        "input_origin": "model_prediction",
+        "model_package": "lh2dt",
+        "model_class": "DynamicVaporizer",
+        "model_revision": "test-revision",
+        "state_snapshot_digest": "b" * 64,
+        "evidence_status": "synthetic_diagnostic",
+        "scenario_provenance": "explicit inventory diagnostic",
+        "failure_opening_diameter_m": 0.01,
+        "provider_termination_required": True,
+    }
+    request = InventoryReleaseExportRequest.from_mapping(payload)
+    result = export_equipment_inventory_release_history(_Provider(), request)
+
+    assert result.release.failure_opening_diameter_m == 0.01
+    assert result.release.termination_basis == "inventory_depletion"
+
+
 def test_inventory_export_rejects_hole_like_termination():
     class HoleTerminatingProvider(_Provider):
         def export_accident_history(self, request):

@@ -108,6 +108,36 @@ def test_inventory_depletion_accepts_exhausted_releasable_inventory_sidecar():
     assert row["checks"]["inventory_final_depleted"] is True
 
 
+def test_inventory_depletion_accepts_total_ledger_above_releasable_boundary():
+    value = _release()
+    value["termination_basis"] = "inventory_depletion"
+    value["available_mass_kg"] = 0.2
+    value["cumulative_mass_out_kg"] = 0.2
+    value["provider_mass_balance"] = {
+        "schema_version": "prism.provider_mass_balance.v1",
+        "initial_mass_kg": 10.0,
+        "cumulative_mass_out_kg": 0.2,
+        "final_mass_kg": 9.8,
+        "reported_residual_mass_kg": 0.0,
+        "derived_accounting_residual_kg": 0.0,
+    }
+    evidence = {
+        "termination_basis": "inventory_depletion_releasable_mass",
+        "provider_result_digest": value["provider_result_digest"],
+        "available_mass_kg": value["available_mass_kg"],
+        "cumulative_mass_out_kg": value["cumulative_mass_out_kg"],
+        "available_mass_definition": "cumulative releasable mass until atmospheric-pressure equilibrium",
+        "remaining_releasable_mass_kg": 0.0,
+        "provider_residual_mass_kg": 0.0,
+    }
+
+    report = audit_provider_release_closure(value, termination_evidence=evidence)
+
+    assert report["status"] == "CLOSURE_READY_FOR_QUALIFICATION"
+    row = report["packet_rows"][0]
+    assert row["checks"]["inventory_releasable_total_ledger_closed"] is True
+
+
 def test_invalid_packet_is_rejected():
     with pytest.raises(ProviderReleaseClosureError):
         audit_provider_release_closure({"provider_export_schema": "wrong"})

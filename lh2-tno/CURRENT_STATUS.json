@@ -4279,5 +4279,63 @@
   "generic_provider_release_closure_threshold_alias_fix_implemented": true,
   "generic_provider_release_closure_threshold_alias_fix_policy": "accept provider-owned threshold_mass_kg or depletion_threshold_kg spelling without inferring inventory or termination",
   "ijhe_completion_audit_transfer_line_isolation_latest_record": "results/20261014/ijhe_completion_audit_with_transfer_line_isolation_v4.json",
-  "ijhe_completion_audit_transfer_line_isolation_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 6 blockers; 21/24 generic release events closure-ready, 7/7 HAZOP multi-equipment branches diagnostic, facility QRA promotion false"
+  "ijhe_completion_audit_transfer_line_isolation_latest_status": "INCOMPLETE_EVIDENCE; 25 checks, 6 blockers; 21/24 generic release events closure-ready, 7/7 HAZOP multi-equipment branches diagnostic, facility QRA promotion false",
+  "latest_provider_closure_audit": {
+    "record": "results/20261014/generic_lh2_provider_release_closure_isolation_contract_v4.json",
+    "status": "CLOSURE_EVIDENCE_OPEN",
+    "event_count": 24,
+    "closure_ready_event_count": 23,
+    "closure_open_event_count": 1,
+    "facility_qra_promotion": false
+  },
+  "latest_provider_worklist_evidence": "results/20261014/generic_lh2_provider_worklist_packet_evidence_isolation_contract_v4.json",
+  "latest_provider_closure_requests": "results/20261014/generic_lh2_provider_closure_requests_isolation_contract_v4.json",
+  "latest_generic_lh2_campaign_result": "results/20261014/generic_lh2_campaign_rebound_inventory_closure_v4_result.json",
+  "latest_generic_lh2_campaign_status": "PARTIAL_DECLARED_SCOPE; 24 fresh physics cases; 4 executed, 14 operator-limited, 6 failed; G3/G6 inventory-depletion packets executed through SLABx-LH2; facility QRA withheld",
+  "latest_generic_lh2_campaign_timing": {
+    "fresh_physics_cases": 24,
+    "case_min_ms": 857.7649,
+    "case_median_ms": 4056.714,
+    "case_max_ms": 67307.4377,
+    "case_p95_ms": 16321.6325,
+    "case_p99_ms": 55778.1961,
+    "campaign_elapsed_ms": 182719.8047,
+    "fresh_physics_claim": true,
+    "realtime_guarantee": false
+  },
+  "latest_completion_audit": {
+    "record": "results/20261014/ijhe_completion_audit_with_inventory_closure_v5.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "check_count": 25,
+    "blocking_reason_count": 4,
+    "facility_qra_promotion": false
+  },
+  "provider_inventory_closure_extension": {
+    "g3": {
+      "record": "results/20261014/vaporizer_worklist_g3_inventory_depletion",
+      "termination_basis": "inventory_depletion",
+      "duration_s": 0.1,
+      "available_mass_kg": 2.888758746283813e-05,
+      "cumulative_mass_out_kg": 2.888758746283813e-05,
+      "failure_opening_diameter_m": 0.01,
+      "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+      "slabx_lh2_executed": true,
+      "qualification_status": "BLOCKED_REVIEW"
+    },
+    "g6": {
+      "record": "results/20261014/reliquefier_worklist_g6_inventory_depletion",
+      "termination_basis": "inventory_depletion",
+      "duration_s": 0.4,
+      "available_mass_kg": 5.423525477694575e-06,
+      "cumulative_mass_out_kg": 5.4235254776945745e-06,
+      "failure_opening_diameter_m": 0.0025,
+      "provider_source_digest": "b5663098ec6e2e7b4635dfcf44e1523a4114e84ce9b9258b862ec51c98c47f07",
+      "slabx_lh2_executed": true,
+      "qualification_status": "BLOCKED_REVIEW"
+    },
+    "g2_open": true,
+    "closure_ready_event_count": 23,
+    "closure_open_event_count": 1,
+    "facility_qra_promotion": false
+  }
 }

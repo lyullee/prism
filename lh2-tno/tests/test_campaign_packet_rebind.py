@@ -93,6 +93,15 @@ def test_rebind_preserves_campaign_facility_placement_and_provider_clock():
     assert rebound["evaluation_times_s"] == [0.0, 0.2, 1.0, 2.0, 3.0, 5.0]
 
 
+def test_rebind_binds_equipment_inventory_source_operator_from_provider_basis():
+    release = _release().model_copy(update={"termination_basis": "inventory_depletion"})
+
+    rebound = _request_from_selected_packet(_request(), release)
+
+    assert rebound["source_operator"] == "equipment_inventory_depletion"
+    assert rebound["release_termination"]["basis"] == "inventory_depletion"
+
+
 def test_selected_packet_state_snapshot_is_loaded_from_verification_sidecar(tmp_path):
     packet_path = tmp_path / "resolved_release.json"
     packet_path.write_text("{}\n", encoding="utf-8")

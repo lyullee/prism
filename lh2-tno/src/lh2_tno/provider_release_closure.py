@@ -280,6 +280,35 @@ def _audit_one(
                 mass.initial_mass_kg is None
                 or _same(mass.initial_mass_kg, packet.available_mass_kg)
             )
+            # Native gas-unit providers may define ``available_mass_kg`` as
+            # the releasable inventory at the atmospheric boundary while the
+            # provider mass ledger retains the larger finite-volume initial
+            # inventory and its non-releasable residual.  Accept that split
+            # only when the provider's total ledger closes exactly and the
+            # releasable-inventory sidecar proves that the releasable remainder
+            # is zero.  No duration-based depletion is inferred here.
+            if (
+                not checks["inventory_initial_matches_packet"]
+                and evidence_mode == "releasable_inventory"
+            ):
+                initial = mass.initial_mass_kg
+                final = mass.final_mass_kg
+                released = mass.cumulative_mass_out_kg
+                total_ledger_closed = (
+                    _finite(initial)
+                    and _finite(final)
+                    and _finite(released)
+                    and _same(float(initial), float(final) + float(released))
+                )
+                checks["inventory_releasable_total_ledger_closed"] = (
+                    total_ledger_closed
+                    and evidence_checks["termination_evidence_releasable_definition_present"]
+                    and evidence_checks["termination_evidence_releasable_remaining_closed"]
+                    and evidence_checks["termination_evidence_provider_residual_closed"]
+                )
+                checks["inventory_initial_matches_packet"] = checks[
+                    "inventory_releasable_total_ledger_closed"
+                ]
             checks["inventory_out_matches_packet"] = (
                 mass.cumulative_mass_out_kg is None
                 or _same(mass.cumulative_mass_out_kg, packet.cumulative_mass_out_kg)

@@ -103,7 +103,8 @@ def _coarsen_steps(steps: list[dict[str, Any]], *, duration_s: float, maximum_st
 
 def _request(*, source_digest: str, component_id: str, event_id: str | None,
              port_id: str | None, mode: str, state_snapshot: EquipmentStateSnapshot,
-             height_m: float, model_class: str, revision: str) -> InventoryReleaseExportRequest:
+             height_m: float, model_class: str, revision: str,
+             failure_opening_diameter_m: float | None = None) -> InventoryReleaseExportRequest:
     port_id = port_id or f"{component_id}.accident-out"
     return InventoryReleaseExportRequest.from_mapping({
         "schema_version": "prism.equipment_inventory_export_request.v1",
@@ -123,6 +124,7 @@ def _request(*, source_digest: str, component_id: str, event_id: str | None,
         "model_package": "lh2dt_models",
         "model_class": model_class,
         "model_revision": revision,
+        "failure_opening_diameter_m": failure_opening_diameter_m,
         "state_snapshot_digest": state_snapshot.digest(),
         "state_snapshot": state_snapshot.to_mapping(),
         "evidence_status": "synthetic_diagnostic",
@@ -352,7 +354,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     })
     request = _request(source_digest=source_digest, component_id=args.component_id, event_id=args.event_id,
                        port_id=args.port_id, mode=args.release_mode, state_snapshot=state_snapshot,
-                       height_m=args.nozzle_height_m, model_class=model_class, revision=args.model_revision)
+                       height_m=args.nozzle_height_m, model_class=model_class, revision=args.model_revision,
+                       failure_opening_diameter_m=args.failure_opening_diameter_m)
     provider = DynamicGasInventoryProvider(root, mode=args.mode, release_mode=args.release_mode,
         duration_s=args.duration_s, time_step_s=args.time_step_s, fluid_volume_m3=args.fluid_volume_m3,
         wall_heat_capacity_j_k=args.wall_heat_capacity_j_k, fluid_wall_ua_w_k=args.fluid_wall_ua_w_k,
@@ -382,7 +385,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "physical_validation_claim": False,
         "frequency_inference": False,
         "facility_qra_claim": False,
-        "limitations": ["synthetic dynamic gas-unit inventory and diagnostic valve area", "no failure opening is attached", "no site calibration, isolation reliability or independent validation"],
+        "limitations": [
+            "synthetic dynamic gas-unit inventory and diagnostic valve area",
+            (
+                "explicit frequency-event opening is attached; it is not inferred from the diagnostic valve area"
+                if args.failure_opening_diameter_m is not None
+                else "no failure opening is attached"
+            ),
+            "no site calibration, isolation reliability or independent validation",
+        ],
     }
     _save(args.output_dir / "provider_response.json", result.provider_response)
     _save(args.output_dir / "resolved_release.json", release)
@@ -407,6 +418,10 @@ def main() -> int:
     parser.add_argument("--inlet-pressure-pa", type=float, default=102000.0)
     parser.add_argument("--inlet-temperature-k", type=float, default=300.0)
     parser.add_argument("--opening-diameter-m", type=float, default=0.001)
+    parser.add_argument(
+        "--failure-opening-diameter-m", type=float, default=None,
+        help="optional explicit frequency-event opening; never inferred from the diagnostic valve area",
+    )
     parser.add_argument("--discharge-coefficient", type=float, default=0.7)
     parser.add_argument("--stroke-time-s", type=float, default=0.2)
     parser.add_argument("--nozzle-height-m", type=float, default=1.0)
