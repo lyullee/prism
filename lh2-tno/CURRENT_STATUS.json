@@ -4749,5 +4749,21 @@
       "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic",
       "literature frequency uncertainty is missing for both the complete facility and an auditable conditional known-atom view"
     ]
+  },
+  "latest_ijhe_completion_audit_fullscope_hazop_with_uncertainty": {
+    "record": "results/20261114/ijhe_completion_audit_fullscope_hazop_with_uncertainty.json",
+    "uncertainty_source": "results/20261114/native_isolation_catalog_facility_chain_fullscope_hazop/facility_assessment.json",
+    "status": "INCOMPLETE_EVIDENCE",
+    "diagnostic_frequency_uncertainty_evidence": "PASS",
+    "diagnostic_hazop_selection_event_binding": "PASS",
+    "blocking_reason_count": 5,
+    "blocking_reasons": [
+      "facility release boundary is not closed across all declared cases",
+      "only synthetic or screening provider releases are available for this campaign",
+      "the provider-release worklist still contains events without exact provider packets or a complete structural diagnostic catalog",
+      "one or more declared accident families are missing, partial, or uncomputed",
+      "facility IR/F-N is withheld because the declared facility scope is incomplete or synthetic"
+    ],
+    "facility_qra_promotion": false
   }
 }

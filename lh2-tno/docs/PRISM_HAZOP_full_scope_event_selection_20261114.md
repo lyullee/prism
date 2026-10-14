@@ -80,3 +80,5 @@ python scripts/build_scope_closure_report.py `
 - `results/20261114/ijhe_completion_audit_fullscope_hazop.json`
 
 IJHE 완료 감사에도 `diagnostic_hazop_selection_event_binding = PASS`로 연결했다. 전체 감사 상태는 방출 경계·provider 자격·물리검증·시설 IR/F-N·빈도 불확실성 장부가 아직 닫히지 않아 `INCOMPLETE_EVIDENCE`로 남는다.
+
+시설 chain이 생성한 `facility_assessment.json`의 문헌 빈도 불확실성 원장도 같은 campaign에 명시적으로 연결했다. `results/20261114/ijhe_completion_audit_fullscope_hazop_with_uncertainty.json`에서는 조건부 known-atom 빈도 민감도 검사와 HAZOP event identity 검사가 모두 `PASS`가 되었고, 전체 감사 차단 사유는 6개에서 5개로 줄었다. 이 결과는 문헌 p05/published/p95 재가중 증거를 연결한 것이며, 시설 credible interval이나 시설 전체 QRA 승격은 아니다.
