@@ -126,3 +126,33 @@ def test_campaign_without_payload_is_unbound_even_when_release_exists():
     })
     assert report["status"] == "NO_STATE_SNAPSHOT_BOUND"
     assert report["unbound_count"] == 1
+
+
+def test_campaign_two_sided_release_set_does_not_choose_one_endpoint_digest():
+    snapshot = _snapshot("reliquefier-1")
+    campaign = {
+        "event_routes": [{
+            "event_id": "two-sided-event",
+            "branches": [{
+                "request": {
+                    "component_id": "reliquefier-1",
+                    "state_snapshot": snapshot.to_mapping(),
+                    "state_snapshot_digest": snapshot.digest(),
+                    "provider_state_snapshot_digest": snapshot.digest(),
+                    "provider_state_snapshot_digests": [snapshot.digest(), snapshot.digest()],
+                    "resolved_liquid_release": {
+                        "provider_result_digest": "a" * 64,
+                    },
+                    "resolved_release_set": {
+                        "releases": [
+                            {"provider_result_digest": "b" * 64},
+                            {"provider_result_digest": "c" * 64},
+                        ],
+                    },
+                },
+            }],
+        }],
+    }
+    report = build_state_snapshot_binding_audit(campaign)
+    assert report["status"] == "STATE_SNAPSHOT_BOUND_AND_ECHOED"
+    assert report["rows"][0]["provider_result_digest"] is None

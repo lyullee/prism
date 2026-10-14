@@ -127,12 +127,29 @@ def _campaign_rows(campaign: Mapping[str, Any]) -> list[dict[str, Any]]:
             if not isinstance(branch, Mapping):
                 continue
             request = _as_mapping(branch.get("request")) or {}
+            # A two-sided rupture can carry a convenience liquid release
+            # alongside the authoritative ``resolved_release_set``.  Prefer
+            # the set here so the audit does not incorrectly expose one
+            # endpoint digest as the scalar identity for a multi-endpoint
+            # provider result.  ``state_snapshot_result_binding`` uses a
+            # ``None`` scalar to match that case against its full digest list.
             release = (
-                _as_mapping(request.get("resolved_liquid_release"))
+                _as_mapping(request.get("resolved_release_set"))
+                or _as_mapping(request.get("resolved_liquid_release"))
                 or _as_mapping(request.get("resolved_release"))
-                or _as_mapping(request.get("resolved_release_set"))
                 or {}
             )
+            # ``resolved_release_set.provider_result_digest`` is the digest
+            # of the set container, while the compact result identity carries
+            # one digest per endpoint.  Do not expose the container digest as
+            # a scalar audit key for a multi-endpoint event.
+            if request.get("resolved_release_set") is not None and isinstance(
+                release.get("releases"), Sequence
+            ) and not isinstance(release.get("releases"), (str, bytes)) and len(
+                release["releases"]
+            ) > 1:
+                release = dict(release)
+                release.pop("provider_result_digest", None)
             rows.append(_classify(
                 source="campaign",
                 event_id=event_id or request.get("event_id"),

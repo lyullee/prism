@@ -4786,11 +4786,12 @@
     "interpretation": "The reviewed synthetic crosswalk is now carried from 24 frequency events through 24 cases and 96 risk atoms; provider qualification, strict release closure, vertical handoff coverage, physical validation and facility IR/F-N remain withheld."
   },
   "latest_full_scope_union_hazop_port_bound": {
-    "facility_chain": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound",
-    "scope_closure_report": "results/20261114/scope_closure_report_union_fullscope_hazop_port_bound.json",
-    "hazop_selection_event_binding": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound/hazop_selection_event_binding.json",
-    "hazop_extension_mode_evidence_request": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound/hazop_extension_mode_evidence_request.json",
-    "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound.json",
+    "facility_chain": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound",
+    "scope_closure_report": "results/20261114/scope_closure_report_union_fullscope_hazop_port_bound_state_bound.json",
+    "hazop_selection_event_binding": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/hazop_selection_event_binding.json",
+    "hazop_extension_mode_evidence_request": "results/20261114/native_full_scope_union_assessment_fullscope_hazop_port_bound_state_bound/hazop_extension_mode_evidence_request.json",
+    "base_state_snapshot_binding_audit": "results/20261114/base_state_snapshot_binding_audit_port_bound.json",
+    "completion_audit": "results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json",
     "merged_event_count": 34,
     "merged_case_count": 44,
     "merged_risk_atom_count": 176,
@@ -4804,10 +4805,17 @@
     "hazop_extension_mode_evidence_request_status": "OPEN_HAZOP_EXTENSION_MODE_EVIDENCE",
     "hazop_extension_mode_evidence_request_count": 10,
     "diagnostic_hazop_extension_mode_evidence_request": "PASS",
+    "state_snapshot_binding_status": "STATE_SNAPSHOT_BOUND_AND_ECHOED",
+    "state_snapshot_binding_record_count": 24,
+    "state_snapshot_binding_bound_count": 24,
+    "state_snapshot_binding_unbound_count": 0,
+    "base_result_state_snapshot_binding_status": "STATE_SNAPSHOT_RESULT_BOUND_AND_ECHOED",
+    "base_result_state_snapshot_binding_case_count": 44,
+    "base_result_state_snapshot_binding_risk_atom_count": 96,
     "status": "NATIVE_FULL_SCOPE_UNION_DIAGNOSTIC",
     "completion_audit_status": "INCOMPLETE_EVIDENCE",
     "completion_audit_blocking_reason_count": 6,
     "facility_qra_promotion": false,
-    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. Their ten extension events remain HAZOP mode-unbound and are fail-closed; no operating mode or scenario is inferred from the base campaign."
+    "interpretation": "Vertical handoff and inventory-depletion extensions are explicitly merged into the 34-event facility ledger. Base equipment-state snapshots are bound and echoed for 24/24 events and copied into 44 cases/96 risk atoms. Their ten extension events remain HAZOP mode-unbound and are fail-closed; no operating mode or scenario is inferred from the base campaign."
   }
 }

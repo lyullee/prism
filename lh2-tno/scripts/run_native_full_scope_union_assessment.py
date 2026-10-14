@@ -692,6 +692,31 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             if base_result_state_binding is not None
             else 0
         ),
+        "state_snapshot_binding_status": (
+            state_snapshot_audit.get("status")
+            if state_snapshot_audit is not None
+            else "NOT_PROVIDED"
+        ),
+        "state_snapshot_binding_record_count": (
+            state_snapshot_audit.get("record_count")
+            if state_snapshot_audit is not None
+            else 0
+        ),
+        "state_snapshot_binding_bound_count": (
+            state_snapshot_audit.get("bound_count")
+            if state_snapshot_audit is not None
+            else 0
+        ),
+        "state_snapshot_binding_unbound_count": (
+            state_snapshot_audit.get("unbound_count")
+            if state_snapshot_audit is not None
+            else 0
+        ),
+        "state_snapshot_binding_digest_mismatch_count": (
+            state_snapshot_audit.get("digest_mismatch_count")
+            if state_snapshot_audit is not None
+            else 0
+        ),
         "extension_state_snapshot_coverage_status": extension_state_snapshot_coverage[
             "status"
         ],
