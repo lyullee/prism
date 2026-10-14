@@ -166,6 +166,16 @@ provider 응답의 최상위에는 다음 schema가 있어야 한다.
 
 2026-11-07에는 동일 native `DynamicHEMPipe.export_accident_history` 경로에 `isolation_time_s=0.05 s`, `post_isolation_observation_s=0.01 s`를 명시해 재실행했다. provider가 두 값을 echo하고 `isolation_success=true`를 반환했으며, 종료근거는 `reviewed_isolation_success`, 실제 방출시간은 `0.060000000000000005 s`, 질량잔차는 `-4.44×10⁻¹⁶ kg`이었다. 결과는 [`native_isolation_contract_verification.json`](../results/20261107/native_isolation_contract_verification.json)에 보관한다. 이 기록은 차단시계가 외부 모델→PRISM strict release까지 전달됐다는 증거이며, 합성 형상·초기 2상·대기경계와 airborne liquid 제한 때문에 provider 자격·독립 물리검증·시설 QRA는 여전히 열리지 않는다.
 
+재현 명령은 다음과 같다.
+
+```powershell
+python scripts/export_lh2dt_native_dynamic_pipe_prism_packet.py `
+  --lh2dt-root "C:\path\to\lh2dt_models" `
+  --output-dir results/20261107/native_isolation_contract_runtime `
+  --horizon-s 0.1 --time-step-s 0.01 `
+  --isolation-time-s 0.05 --post-isolation-observation-s 0.01
+```
+
 ## PRISM 측 VentStack 진단 adapter (2026-10-12)
 
 `scripts/export_lh2dt_vent_stack_prism_packet.py`는 외부 `VentStack.evaluate()`의 정상 two-port 함수를 사고 packet으로 재사용하지 않고, 명시적인 사고 포트·개구·0.5 s diagnostic horizon에서 별도 provider adapter로 호출한다. 저 Mach atmospheric gas plane을 만들기 위해 기본 upstream은 `102000 Pa`, `40 K`, stack bore는 `0.01 m`이며 provider의 유량·출구 상태를 10개 왼쪽 유지 구간과 `ResolvedGasRelease` 장부로 보존한다. 기본 packet 질량 잔차는 `0 kg`, 정적 엔탈피 잔차는 `0 J`다.
