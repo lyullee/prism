@@ -16,6 +16,8 @@ from .contracts import canonical_digest
 from .equipment_boundary import (
     ProviderTerminationBasis,
     ProviderMassBalance,
+    ProviderPortState,
+    ProviderSourceState,
     ResolvedGasRelease,
     ResolvedLiquidRelease,
 )
@@ -78,6 +80,35 @@ def _vector(value: Any, field: str) -> list[float]:
     if not isinstance(value, Sequence) or isinstance(value, (str, bytes)) or len(value) != 3:
         raise EquipmentReleaseExportError(f"{field} must contain three coordinates")
     return [_finite(item, f"{field}[{index}]") for index, item in enumerate(value)]
+
+
+def _optional_provider_state(
+    raw: Any,
+    *,
+    field: str,
+    model: type[ProviderPortState] | type[ProviderSourceState],
+) -> dict[str, Any] | None:
+    """Validate and retain provider-owned upstream state when supplied.
+
+    The atmospheric boundary remains the source of release physics.  These
+    optional records carry the equipment twin's P/h/phase provenance through
+    the adapter so a downstream audit can compare the release interval with
+    the exact upstream port state instead of losing it during field mapping.
+    """
+
+    if raw is None:
+        return None
+    if not isinstance(raw, Mapping):
+        raise EquipmentReleaseExportError(f"{field} must be an object when supplied")
+    try:
+        # Provider packets arrive as JSON arrays for vectors; validate through
+        # the JSON boundary so those arrays are converted to the tuple-shaped
+        # internal contract without weakening the contract itself.
+        return model.model_validate_json(
+            json.dumps(dict(raw), allow_nan=False)
+        ).model_dump(mode="json")
+    except (TypeError, ValueError) as error:
+        raise EquipmentReleaseExportError(f"{field} failed strict validation: {error}") from error
 
 
 def _termination_basis(value: Any, field: str) -> ProviderTerminationBasis | None:
@@ -290,9 +321,23 @@ def build_resolved_gas_release_from_provider_response(
             )
         # Provider histories may include diagnostic upstream/valve columns.
         # Promote only the declared atmospheric boundary fields into the
-        # strict PRISM packet; retain the complete provider response and its
-        # digest outside the packet for provenance.
+        # strict PRISM packet, while retaining optional provider-owned source
+        # and port state records for exact equipment-twin traceability.
         row = {field: raw[field] for field in _STEP_FIELDS}
+        provider_source_state = _optional_provider_state(
+            raw.get("provider_source_state"),
+            field=f"provider data.steps[{index}].provider_source_state",
+            model=ProviderSourceState,
+        )
+        provider_port_state = _optional_provider_state(
+            raw.get("provider_port_state"),
+            field=f"provider data.steps[{index}].provider_port_state",
+            model=ProviderPortState,
+        )
+        if provider_source_state is not None:
+            row["provider_source_state"] = provider_source_state
+        if provider_port_state is not None:
+            row["provider_port_state"] = provider_port_state
         for field in _STEP_FIELDS[:8]:
             row[field] = _finite(row[field], f"provider data.steps[{index}].{field}")
         if row["mass_flow_kg_s"] < 0.0:
@@ -436,6 +481,13 @@ def build_resolved_liquid_release_from_provider_response(
                 f"provider data.steps[{index}] missing required fields: {', '.join(missing)}"
             )
         row = dict(raw)
+        provider_port_state = _optional_provider_state(
+            raw.get("provider_port_state"),
+            field=f"provider data.steps[{index}].provider_port_state",
+            model=ProviderPortState,
+        )
+        if provider_port_state is not None:
+            row["provider_port_state"] = provider_port_state
         for field in _LIQUID_STEP_FIELDS[:6]:
             row[field] = _finite(row[field], f"provider data.steps[{index}].{field}")
             if row[field] < 0.0 and field != "specific_enthalpy_j_kg":

@@ -19,6 +19,7 @@ event·10개 weather case 모두 `inventory_depletion` 종료 기준을 사용�
 [`수직 handoff 재고소진 연결 기록`](docs/PRISM_vertical_inventory_handoff_20261115.md),
 [`PRISM IJHE 최신 감사`](docs/PRISM_IJHE_latest_audit_20261115.md),
 [`IJHE 요구사항 추적표`](docs/PRISM_IJHE_requirement_traceability_20261115.md)에 있다.
+설비 provider가 내보낸 구간별 P/h·상태를 방출 packet에 보존하는 경계 보완은 [`설비 provider 상태 handoff 기록`](docs/PRISM_equipment_provider_state_handoff_20261115.md)에 정리했다.
 
 
 **최신 격리 branch의 시설 union 재결합 (2026-11-15):** `LH2_VESSEL AREA_0.01%` 문헌

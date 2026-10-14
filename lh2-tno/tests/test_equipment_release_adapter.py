@@ -74,6 +74,69 @@ def test_adapter_promotes_history_without_extending_it():
     assert release.termination_provenance == "provider positive-mass threshold"
 
 
+def test_gas_adapter_preserves_provider_port_and_source_state_per_interval():
+    response = _response()
+    for step in response["data"]["steps"]:
+        step["provider_port_state"] = {
+            "component_id": "tank-1",
+            "port_id": "tank-1.leak",
+            "time_s": step["time_s"],
+            "fluid": "ParaHydrogen",
+            "phase": "two_phase",
+            "pressure_pa_abs": 250000.0,
+            "temperature_k": 20.5,
+            "density_kg_m3": 0.2,
+            "specific_enthalpy_j_kg": 1.0e6,
+            "mass_flow_kg_s": step["mass_flow_kg_s"],
+            "position_enu_m": [0.0, 0.0, 1.0],
+            "direction_enu": [1.0, 0.0, 0.0],
+            "provenance": "equipment twin port state",
+            "source_digest": "c" * 64,
+        }
+        step["provider_source_state"] = {
+            "source_pressure_pa_abs": 250000.0,
+            "source_temperature_k": 20.5,
+            "source_density_kg_m3": 0.2,
+            "source_specific_enthalpy_j_kg": 1.0e6,
+            "source_specific_entropy_j_kgk": 1000.0,
+            "throat_pressure_pa_abs": 100000.0,
+            "throat_temperature_k": 20.5,
+            "throat_density_kg_m3": 0.2,
+            "throat_specific_enthalpy_j_kg": 1.0e6,
+            "throat_mass_flux_kg_m2_s": 10.0,
+            "choked": True,
+            "provider_source_state_provenance": "equipment twin throat state",
+        }
+
+    release = _build(response)
+    assert all(step.provider_port_state is not None for step in release.steps)
+    assert all(step.provider_source_state is not None for step in release.steps)
+    assert release.steps[1].provider_port_state.time_s == pytest.approx(0.1)
+    assert release.steps[0].provider_port_state.source_digest == "c" * 64
+
+
+def test_gas_adapter_rejects_malformed_provider_port_state():
+    response = _response()
+    response["data"]["steps"][0]["provider_port_state"] = {
+        "component_id": "tank-1",
+        "port_id": "tank-1.leak",
+        "time_s": 0.0,
+        "fluid": "ParaHydrogen",
+        "phase": "two_phase",
+        "pressure_pa_abs": 250000.0,
+        "temperature_k": 20.5,
+        "density_kg_m3": 0.2,
+        "specific_enthalpy_j_kg": 1.0e6,
+        "mass_flow_kg_s": 0.1,
+        "position_enu_m": [0.0, 0.0, 1.0],
+        "direction_enu": [2.0, 0.0, 0.0],
+        "provenance": "equipment twin port state",
+        "source_digest": "c" * 64,
+    }
+    with pytest.raises(EquipmentReleaseExportError, match="provider_port_state failed strict validation"):
+        _build(response)
+
+
 def test_adapter_preserves_provider_mass_balance_without_calling_residual_depletion():
     response = _response()
     response["data"]["provider_meta"] = {
