@@ -2837,7 +2837,7 @@ def build_ijhe_completion_audit(
                 "timing": dict(forecast_timing) if isinstance(forecast_timing, Mapping) else None,
                 "policy": dict(forecast_policy),
             },
-            "forecast HAZOP scan is missing a valid state-origin, trigger accounting, or fail-closed policy",
+            "forecast HAZOP scan is missing a valid state-origin, trigger accounting, processing timing, or fail-closed policy",
         )
         forecast_check["diagnostic_only"] = True
         forecast_check["interpretation"] = (

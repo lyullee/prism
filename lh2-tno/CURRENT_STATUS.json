@@ -3952,10 +3952,10 @@
   },
   "latest_full_test_run": {
     "status": "PASS",
-    "tests": 977,
+    "tests": 978,
     "failures": 0,
     "skipped": 0,
-    "scope": "current lh2-tno package after HAZOP/mode, facility campaign, forecast trigger/adapter, scoped resolver, timing and completion-audit changes"
+    "scope": "current lh2-tno package after HAZOP/mode, facility campaign, scoped resolvers, forecast timing audit and completion-audit changes"
   },
   "runtime_async_development": {
     "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED_GOAL_REMAINS_ACTIVE",

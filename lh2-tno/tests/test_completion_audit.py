@@ -88,6 +88,38 @@ def test_completion_audit_records_forecast_hazop_trigger_without_qra_promotion()
     assert check["diagnostic_only"] is True
 
 
+def test_completion_audit_blocks_forecast_scan_without_processing_timing():
+    forecast = {
+        "schema_version": "prism.hazop_forecast_risk_scan.v1",
+        "status": "FORECAST_RISK_SCAN_COMPLETE",
+        "forecast_origin": "model_prediction",
+        "steps": [{"forecast_time_s": 10.0}],
+        "scenario_entries": [],
+        "trigger_count": 0,
+        "evaluated_count": 0,
+        "withheld_count": 0,
+        "policy": {
+            "operating_mode_taken_from_forecast_input": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "facility_qra_promotion": False,
+            "diagnostic_only": True,
+        },
+    }
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_forecast_scan=forecast,
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_forecast_risk_scan"
+    )
+    assert check["status"] == "BLOCKED"
+    assert "processing" in check["blocking_reason"]
+
+
 def test_completion_audit_records_domain_recovery_without_promoting_qra():
     report = build_ijhe_completion_audit(
         _status(validated=False),
