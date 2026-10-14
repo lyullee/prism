@@ -401,3 +401,117 @@ def test_facility_runtime_collects_component_branch_and_withholds_annual_qra():
     assert result["facility_annual_ir_available"] is False
     assert result["facility_fn_available"] is False
     assert result["policy"]["facility_annual_qra_promotion"] is False
+
+
+def test_hazop_facility_runtime_handoff_reaches_campaign_with_explicit_annual_rows(tmp_path):
+    from lh2_tno.hazop_campaign import build_hazop_facility_campaign_result
+    from lh2_tno.provider_release import build_consequence_request_from_provider_release
+    from lh2_tno.service import (
+        ConsequenceService,
+        RealtimeConsequenceMonitor,
+        RealtimeFrequencyBinding,
+    )
+    from test_consequence_service import RiskPipeline, request
+    from test_provider_release import _defaults, _liquid_release
+
+    release = _liquid_release().model_copy(update={"component_id": "TK-01"})
+    defaults = _defaults()
+    defaults.update({
+        "component_id": "TK-01",
+        "source_operator": "equipment_liquid_release",
+        "release_termination": {
+            "basis": "model_pressure_equalization",
+            "time_s": 0.2,
+            "provenance": "HAZOP facility campaign handoff test",
+        },
+        "source_duration_mode": "model_natural",
+    })
+    provider_request = build_consequence_request_from_provider_release(release, defaults)
+    monitor = RealtimeConsequenceMonitor(ConsequenceService(RiskPipeline(tmp_path)))
+    frequency = RealtimeFrequencyBinding(
+        event_id="hazop-tk01-hole",
+        asset_id="TK-01",
+        initiating_frequency_per_year=1.0e-3,
+        annual_condition_probability=1.0,
+        release_branch_probability=1.0,
+        occupancy_probability=1.0,
+        provenance="reviewed HAZOP handoff literature fixture",
+        source_digest="a" * 64,
+        frequency_p05_per_year=5.0e-4,
+        frequency_p95_per_year=2.0e-3,
+    )
+    selection = evaluate_hazop_runtime_frame(
+        _gate_table(), _runtime_frame_for_gate(), now_s=3.2
+    )
+    scenario_id = selection["selected_scenarios"][0]["scenario_id"]
+    runtime = run_hazop_facility_runtime(
+        _gate_table(),
+        {"TK-01": _runtime_frame_for_gate()},
+        now_s=3.2,
+        component_bindings={
+            "TK-01": SimpleNamespace(
+                template=request().model_copy(update={"component_id": "TK-01"}),
+                monitor=monitor,
+                frequency_binding=frequency,
+            )
+        },
+        release_resolvers={scenario_id: lambda template, normalized: provider_request},
+    )
+    assert runtime["status"] == "FACILITY_HAZOP_RUNTIME_EVALUATED"
+    assert runtime["facility_id"] == "generic-outdoor-lh2"
+    branch = runtime["components"]["TK-01"]["branches"][0]
+    assert branch["risk"]["status"] == "AVAILABLE_CURRENT_WEATHER_IR"
+    consequence = branch["result"]["consequence"]
+    probabilities = consequence["data"]["ignition_branch_probabilities"]
+    observed = branch["risk"]["risk_atom"]["receptor_harm_low_high"]
+    active_probability = sum(
+        float(value)
+        for name, value in probabilities.items()
+        if name != "no_ignition"
+    )
+    assert active_probability > 0.0
+    branch_harm = {
+        receptor_id: {
+            name: (
+                [0.0, 0.0]
+                if name == "no_ignition"
+                else [float(value) / active_probability for value in endpoints]
+            )
+            for name in probabilities
+        }
+        for receptor_id, endpoints in observed.items()
+    }
+    campaign_handoff = build_hazop_facility_campaign_result(
+        runtime,
+        annual_conditions=[{
+            "id": "weather-d-03",
+            "annual_probability": 1.0,
+            "weather": {"wind_speed_m_s": 3.0, "stability_class": "D"},
+            "population": [
+                {
+                    "receptor_id": receptor_id,
+                    "persons": 10.0,
+                    "presence_probability": 1.0,
+                    "provenance": "reviewed outdoor population fixture",
+                }
+                for receptor_id in observed
+            ],
+            "provenance": "reviewed annual weather fixture",
+        }],
+        scenario_bindings=[{
+            "component_id": "TK-01",
+            "hazop_scenario_id": scenario_id,
+            "event_id": frequency.event_id,
+            "asset_id": frequency.asset_id,
+            "annual_condition_id": "weather-d-03",
+            "release_branch_id": "reviewed-isolation",
+            "release_branch_probability": 1.0,
+            "ignition_branch_probabilities": probabilities,
+            "branch_harm_low_high": branch_harm,
+            "scenario_families": [branch["scenario_family"]],
+        }],
+        expected_component_ids=("TK-01",),
+    )
+    assert campaign_handoff["status"] == "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+    assert campaign_handoff["campaign"]["status"] == "PARTIAL_DECLARED_SCOPE"
+    assert campaign_handoff["campaign"]["complete_facility_qra_claim"] is False

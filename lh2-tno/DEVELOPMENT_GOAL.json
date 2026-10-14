@@ -22,6 +22,9 @@
       "explicit_branch_dispatch_function": "lh2_tno.hazop.run_hazop_runtime_consequence_branches",
       "branch_resolver_key": "scenario_id",
       "facility_runtime_function": "lh2_tno.hazop.run_hazop_facility_runtime",
+      "facility_campaign_handoff_function": "lh2_tno.hazop_campaign.build_hazop_facility_campaign_result",
+      "facility_campaign_handoff_schema": "prism.hazop_facility_campaign_handoff.v1",
+      "facility_campaign_handoff_requires_single_branch": true,
       "facility_annual_qra_promotion": false,
       "consequence_called_without_provider": false
     },

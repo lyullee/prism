@@ -642,6 +642,15 @@ def run_hazop_facility_runtime(
         raise HazopSelectionError("release_resolvers must map scenario_id to a resolver")
     if not component_bindings:
         raise HazopSelectionError("component_bindings must not be empty")
+    facility_id = (
+        table.facility_id
+        if isinstance(table, HazopTable)
+        else str(table.get("facility_id") or "")
+        if isinstance(table, Mapping)
+        else ""
+    )
+    if not facility_id:
+        raise HazopSelectionError("HAZOP table must provide a facility_id")
     components: dict[str, Any] = {}
     risk_atoms: list[dict[str, Any]] = []
     for component_id in sorted(component_bindings):
@@ -788,6 +797,7 @@ def run_hazop_facility_runtime(
     status = "FACILITY_HAZOP_RUNTIME_EVALUATED" if not rejected else "FACILITY_HAZOP_RUNTIME_PARTIAL"
     return {
         "schema_version": "prism.hazop_facility_runtime.v1",
+        "facility_id": facility_id,
         "status": status,
         "component_count": len(component_bindings),
         "components": components,
