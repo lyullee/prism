@@ -566,6 +566,63 @@
       "interpretation": "The native isolation packets reached the diagnostic facility chain and produced risk atoms plus conditional IR/F-N accounting. This check preserves the strict provider-qualification, independent-validation, and facility-QRA gates."
     },
     {
+      "name": "diagnostic_native_isolation_catalog_near_receptor_harm",
+      "status": "PASS",
+      "diagnostic_only": true,
+      "blocking_reason": null,
+      "evidence": {
+        "record": "results\\20261111\\native_isolation_catalog_facility_chain_near_receptor_v3\\verification.json",
+        "facility_id": "generic-lh2-near-receptor-diagnostic",
+        "facility_assessment_status": "PARTIAL_FACILITY_SCOPE",
+        "conditional_diagnostic_facility_risk_available": true,
+        "conditional_diagnostic_facility_annual_ir_low_high": {
+          "worker-01": [
+            4.6800000000000006e-05,
+            4.6800000000000006e-05
+          ]
+        },
+        "conditional_diagnostic_facility_expected_death_fn_diagnostics": {
+          "status": "CURVE_AVAILABLE",
+          "endpoint_level_count_low_high": [
+            1,
+            1
+          ],
+          "max_expected_deaths_low_high": [
+            1.0,
+            1.0
+          ],
+          "curve_uses_threshold": "N >= 1 expected deaths"
+        },
+        "harm_diagnostic": {
+          "status": "NONZERO_RECEPTOR_HARM_REACHED",
+          "risk_atom_count": 96,
+          "positive_receptor_harm_atom_count": 1,
+          "zero_receptor_harm_atom_count": 95,
+          "domain_truncated_case_count": 2,
+          "outside_domain_flammability_proven_case_count": 20,
+          "zero_is_not_zero_facility_risk": true,
+          "interpretation": "At least one executed risk atom reached a declared receptor harm endpoint. This is a conditional diagnostic contribution; it is not a qualified facility total."
+        },
+        "receptor_geometry": {
+          "receptor_ids": [
+            "worker-01"
+          ],
+          "receptor_positions_enu_m": [
+            [
+              0.5,
+              0.0,
+              1.0
+            ]
+          ],
+          "interpretation": "declared diagnostic geometry; not a site survey"
+        },
+        "provider_packet_promoted": false,
+        "physical_validation_claim": false,
+        "facility_qra_claim": false
+      },
+      "interpretation": "A current native-packet near-receptor replay reached a nonzero conditional harm and IR/F-N curve. The explicit receptor geometry and zero-value interpretation prevent a zero at a distant receptor from being mistaken for zero facility risk; provider qualification, physical validation, and full facility QRA promotion remain closed."
+    },
+    {
       "name": "diagnostic_equipment_state_snapshot_binding",
       "status": "PASS",
       "diagnostic_only": true,

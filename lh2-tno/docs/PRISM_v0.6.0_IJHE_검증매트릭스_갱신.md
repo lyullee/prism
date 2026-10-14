@@ -15,7 +15,7 @@ promotion gate는 계속 닫아 둔다.
 [`ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json`](../results/20261114/ijhe_completion_audit_union_fullscope_hazop_port_bound_state_bound.json)을
 사용한다. 최신 union은 일반 옥외 LH2 시설의 34개 event, 44개 case, 176개 risk atom과
 HAZOP event binding 34/34를 포함한다. 완료 감사는 `INCOMPLETE_EVIDENCE`이며
-42개 검사 중 38개 `PASS`, 4개 `BLOCKED`이다.
+최신 권위 감사는 43개 검사 중 39개 `PASS`, 4개 `BLOCKED`이다. 이 중 근접 수신점 검증은 비영 harm→조건부 IR/F-N 경로를 확인하는 진단 전용 검사이며 시설 QRA 승격은 아니다.
 
 현재 네 strict blocker는 (1) 모든 선언 case의 provider 방출 종료·차단·재고 경계,
 (2) 실제 시설용 qualified provider packet, (3) 사고범위 전체의 독립 물리검증,
