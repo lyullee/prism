@@ -98,6 +98,7 @@ def build_ijhe_completion_audit(
     hazop_integrated_risk: Mapping[str, Any] | None = None,
     hazop_scenario_trace_audit: Mapping[str, Any] | None = None,
     external_model_root_review: Mapping[str, Any] | None = None,
+    hazop_multiequipment_diagnostic: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return an evidence-based readiness report without promoting claims."""
     uncertainty = _normalise_uncertainty_result(uncertainty_result)
@@ -3411,6 +3412,151 @@ def build_ijhe_completion_audit(
             "validate physics, or promote facility IR/F-N."
         )
         checks.append(integrated_check)
+    if hazop_multiequipment_diagnostic is not None:
+        multi = hazop_multiequipment_diagnostic
+        multi_policy = multi.get("policy")
+        multi_policy = multi_policy if isinstance(multi_policy, Mapping) else {}
+        current = multi.get("current")
+        current = current if isinstance(current, Mapping) else {}
+        components = current.get("components")
+        components = components if isinstance(components, Mapping) else {}
+        component_count = multi.get("component_count")
+        accepted_count = multi.get("accepted_component_count")
+        withheld_count = multi.get("withheld_component_count")
+        accepted_ids = multi.get("accepted_component_ids")
+        withheld_ids = multi.get("withheld_component_ids")
+        accepted_ids_valid = (
+            isinstance(accepted_ids, list)
+            and len(accepted_ids) == (accepted_count if isinstance(accepted_count, int) else -1)
+            and len(set(str(value) for value in accepted_ids)) == len(accepted_ids)
+        )
+        withheld_ids_valid = (
+            isinstance(withheld_ids, list)
+            and len(withheld_ids) == (withheld_count if isinstance(withheld_count, int) else -1)
+            and len(set(str(value) for value in withheld_ids)) == len(withheld_ids)
+        )
+        accepted_rows_valid = (
+            accepted_ids_valid
+            and all(
+                isinstance(components.get(component_id), Mapping)
+                and components[component_id].get("status") == "CONSEQUENCE_BRANCHES_EVALUATED"
+                and isinstance(components[component_id].get("selection"), Mapping)
+                and isinstance(components[component_id].get("branches"), list)
+                and len(components[component_id]["branches"]) == 1
+                and isinstance(components[component_id]["branches"][0], Mapping)
+                and isinstance(components[component_id]["branches"][0].get("result"), Mapping)
+                and components[component_id]["branches"][0]["result"].get("status")
+                == "CONSEQUENCE_EVALUATED"
+                and isinstance(components[component_id]["branches"][0].get("risk"), Mapping)
+                and components[component_id]["branches"][0]["risk"].get("status")
+                == "AVAILABLE_CURRENT_WEATHER_IR"
+                and components[component_id]["branches"][0].get("operating_mode")
+                == components[component_id]["selection"].get("operating_mode")
+                for component_id in accepted_ids
+            )
+        )
+        withheld_rows_valid = (
+            withheld_ids_valid
+            and all(
+                isinstance(components.get(component_id), Mapping)
+                and components[component_id].get("status") != "CONSEQUENCE_BRANCHES_EVALUATED"
+                for component_id in withheld_ids
+            )
+        )
+        runtime_valid = (
+            current.get("schema_version") == "prism.hazop_facility_runtime.v1"
+            and current.get("status") in {
+                "FACILITY_HAZOP_RUNTIME_EVALUATED",
+                "FACILITY_HAZOP_RUNTIME_PARTIAL",
+            }
+            and isinstance(component_count, int)
+            and component_count > 0
+            and isinstance(accepted_count, int)
+            and 0 <= accepted_count <= component_count
+            and isinstance(withheld_count, int)
+            and withheld_count == component_count - accepted_count
+            and isinstance(components, Mapping)
+            and len(components) == component_count
+            and accepted_rows_valid
+            and withheld_rows_valid
+        )
+        handoff = multi.get("facility_handoff")
+        if handoff is None:
+            handoff_valid = accepted_count == 0
+        elif isinstance(handoff, Mapping):
+            handoff_policy = handoff.get("policy")
+            handoff_policy = handoff_policy if isinstance(handoff_policy, Mapping) else {}
+            scope_filter = handoff.get("diagnostic_scope_filter")
+            scope_filter = scope_filter if isinstance(scope_filter, Mapping) else {}
+            ledger = handoff.get("facility_ledger")
+            ledger = ledger if isinstance(ledger, Mapping) else {}
+            handoff_valid = (
+                isinstance(accepted_count, int)
+                and accepted_count > 0
+                and handoff.get("status") == "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED"
+                and scope_filter.get("facility_scope_complete") is False
+                and ledger.get("conditional_diagnostic_facility_risk_available") is True
+                and ledger.get("qualified_facility_qra_available") is not True
+                and handoff_policy.get("facility_qra_promotion") is False
+                and handoff_policy.get("frequency_inference_performed") is False
+                and handoff_policy.get("physical_validation_claim") is False
+            )
+        else:
+            handoff_valid = False
+        processing = multi.get("processing_time")
+        processing_valid = (
+            isinstance(processing, Mapping)
+            and _finite(processing.get("runtime_elapsed_ms"))
+            and float(processing.get("runtime_elapsed_ms")) >= 0.0
+            and _finite(processing.get("total_elapsed_ms"))
+            and float(processing.get("total_elapsed_ms")) >= 0.0
+        )
+        multi_valid = (
+            multi.get("schema_version") == "prism.hazop_lh2_multiequipment_provider_diagnostic.v1"
+            and multi.get("status") in {
+                "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
+                "MULTI_EQUIPMENT_HAZOP_RUNTIME_WITHHELD",
+            }
+            and runtime_valid
+            and handoff_valid
+            and processing_valid
+            and multi_policy.get("operating_mode_taken_from_input") is True
+            and multi_policy.get("frequency_inference_performed") is False
+            and multi_policy.get("sensor_frequency_learning_used") is False
+            and multi_policy.get("provider_release_created_by_prism") is False
+            and multi_policy.get("facility_qra_promotion") is False
+            and multi_policy.get("physical_validation_claim") is False
+            and multi_policy.get("facility_scope_complete") is False
+        )
+        multi_check = _check(
+            "diagnostic_hazop_multiequipment_provider_chain",
+            multi_valid,
+            {
+                "record": multi.get("_record_path"),
+                "schema_version": multi.get("schema_version"),
+                "status": multi.get("status"),
+                "runtime_status": current.get("status"),
+                "component_count": component_count,
+                "accepted_component_count": accepted_count,
+                "withheld_component_count": withheld_count,
+                "accepted_component_ids": accepted_ids,
+                "withheld_component_ids": withheld_ids,
+                "runtime_valid": runtime_valid,
+                "handoff_present": handoff is not None,
+                "handoff_valid": handoff_valid,
+                "processing_time": dict(processing) if isinstance(processing, Mapping) else None,
+                "policy": dict(multi_policy),
+            },
+            "multi-equipment HAZOP/provider/SLABx-LH2 diagnostic record is missing component trace, current-weather risk atoms, explicit withheld branches, timing, or fail-closed policy",
+        )
+        multi_check["diagnostic_only"] = True
+        multi_check["interpretation"] = (
+            "This check verifies that several equipment kinds can traverse the same HAZOP mode, "
+            "provider release, consequence, and conditional current-weather IR boundary. "
+            "Withheld equipment and synthetic provider evidence remain explicit gaps; the check "
+            "does not promote a complete facility annual IR/F-N result."
+        )
+        checks.append(multi_check)
     if realtime_hazop_mode_trace is not None:
         trace = realtime_hazop_mode_trace
         policy = trace.get("policy")

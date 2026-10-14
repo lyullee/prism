@@ -149,6 +149,11 @@ def main() -> int:
         help="optional current/forecast integrated HAZOP risk ledger",
     )
     parser.add_argument(
+        "--hazop-multiequipment-diagnostic",
+        type=Path,
+        help="optional multi-equipment HAZOP/provider/SLABx-LH2 diagnostic ledger",
+    )
+    parser.add_argument(
         "--realtime-hazop-mode-trace",
         type=Path,
         help="optional audit of HAZOP operating_mode at the realtime result boundary",
@@ -443,6 +448,15 @@ def main() -> int:
         )
         if hazop_integrated_risk is not None:
             hazop_integrated_risk["_record_path"] = str(args.hazop_integrated_risk)
+        hazop_multiequipment_diagnostic = (
+            _object(args.hazop_multiequipment_diagnostic)
+            if args.hazop_multiequipment_diagnostic
+            else None
+        )
+        if hazop_multiequipment_diagnostic is not None:
+            hazop_multiequipment_diagnostic["_record_path"] = str(
+                args.hazop_multiequipment_diagnostic
+            )
         realtime_hazop_mode_trace = (
             _object(args.realtime_hazop_mode_trace)
             if args.realtime_hazop_mode_trace
@@ -532,6 +546,7 @@ def main() -> int:
             external_document_evidence=external_document_evidence,
             external_release_artifact_intake=external_release_artifact_intake,
             external_model_root_review=external_model_root_review,
+            hazop_multiequipment_diagnostic=hazop_multiequipment_diagnostic,
             facility_evidence_request=facility_evidence_request,
             hazop_scenario_trace_audit=hazop_scenario_trace_audit,
         )

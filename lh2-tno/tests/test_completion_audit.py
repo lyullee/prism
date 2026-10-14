@@ -2767,3 +2767,99 @@ def test_completion_audit_blocks_external_lh2_model_root_promotion_claim():
         if item["name"] == "diagnostic_external_lh2_model_root_review"
     )
     assert check["status"] == "BLOCKED"
+
+
+def _multi_equipment_diagnostic(**overrides):
+    component_id = "storage-tank-01"
+    branch = {
+        "scenario_id": "storage-tank-01-mode-deviation:receiving:liquid_two_phase",
+        "scenario_family": "liquid_two_phase",
+        "operating_mode": "receiving",
+        "result": {"status": "CONSEQUENCE_EVALUATED"},
+        "risk": {"status": "AVAILABLE_CURRENT_WEATHER_IR"},
+    }
+    record = {
+        "schema_version": "prism.hazop_lh2_multiequipment_provider_diagnostic.v1",
+        "status": "MULTI_EQUIPMENT_HAZOP_RUNTIME_EVALUATED",
+        "component_count": 1,
+        "accepted_component_count": 1,
+        "withheld_component_count": 0,
+        "accepted_component_ids": [component_id],
+        "withheld_component_ids": [],
+        "current": {
+            "schema_version": "prism.hazop_facility_runtime.v1",
+            "status": "FACILITY_HAZOP_RUNTIME_EVALUATED",
+            "components": {
+                component_id: {
+                    "status": "CONSEQUENCE_BRANCHES_EVALUATED",
+                    "selection": {"operating_mode": "receiving"},
+                    "branches": [branch],
+                }
+            },
+        },
+        "facility_handoff": {
+            "status": "HAZOP_CAMPAIGN_BUILT_OPERATOR_LIMITED",
+            "diagnostic_scope_filter": {"facility_scope_complete": False},
+            "facility_ledger": {
+                "conditional_diagnostic_facility_risk_available": True,
+                "qualified_facility_qra_available": False,
+            },
+            "policy": {
+                "facility_qra_promotion": False,
+                "frequency_inference_performed": False,
+                "physical_validation_claim": False,
+            },
+        },
+        "processing_time": {"runtime_elapsed_ms": 1.0, "total_elapsed_ms": 2.0},
+        "policy": {
+            "operating_mode_taken_from_input": True,
+            "frequency_inference_performed": False,
+            "sensor_frequency_learning_used": False,
+            "provider_release_created_by_prism": False,
+            "facility_qra_promotion": False,
+            "physical_validation_claim": False,
+            "facility_scope_complete": False,
+        },
+    }
+    record.update(overrides)
+    return record
+
+
+def test_completion_audit_records_multi_equipment_hazop_provider_chain():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_multiequipment_diagnostic=_multi_equipment_diagnostic(),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_multiequipment_provider_chain"
+    )
+    assert check["status"] == "PASS"
+    assert check["diagnostic_only"] is True
+    assert check["evidence"]["accepted_component_count"] == 1
+
+
+def test_completion_audit_blocks_multi_equipment_hazop_chain_with_unsafe_policy():
+    report = build_ijhe_completion_audit(
+        _status(validated=False),
+        _matrix(complete=False),
+        _campaign_result(total=False),
+        hazop_multiequipment_diagnostic=_multi_equipment_diagnostic(
+            policy={
+                "operating_mode_taken_from_input": True,
+                "frequency_inference_performed": True,
+                "sensor_frequency_learning_used": False,
+                "provider_release_created_by_prism": False,
+                "facility_qra_promotion": False,
+                "physical_validation_claim": False,
+                "facility_scope_complete": False,
+            }
+        ),
+    )
+    check = next(
+        item for item in report["checks"]
+        if item["name"] == "diagnostic_hazop_multiequipment_provider_chain"
+    )
+    assert check["status"] == "BLOCKED"
