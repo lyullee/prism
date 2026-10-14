@@ -2,7 +2,7 @@
 
 ## 발견된 연결 공백
 
-전체 시설 campaign의 34개 사건을 확인한 결과, 방출 packet·지속시간·재고·피해 계산은 존재하지만 사건 행에 `operating_mode`와 `hazop_scenario_id`가 모두 비어 있었습니다. 이 값은 탱크인지 배관인지, 또는 방출 면적이 얼마인지로 안전하게 추정할 수 없습니다. `receiving`, `supply`, `standby` 중 하나를 정하려면 현장 관측 frame 또는 공정 시뮬레이션 frame이 명시적으로 제공되어야 합니다.
+전체 시설 campaign의 34개 사건을 확인한 결과, 방출 packet·지속시간·재고·피해 계산은 존재하지만 campaign 사건 행 자체에는 `operating_mode`와 `hazop_scenario_id`가 없었습니다. 기존 7개 대표 HAZOP facility ledger에는 정확한 event/mode/scenario 연결이 있어 7개를 명시적으로 재사용할 수 있고, 나머지 27개는 여전히 입력이 필요합니다. 이 값은 탱크인지 배관인지, 또는 방출 면적이 얼마인지로 안전하게 추정할 수 없습니다. `receiving`, `supply`, `standby` 중 하나를 정하려면 현장 관측 frame 또는 공정 시뮬레이션 frame이 명시적으로 제공되어야 합니다.
 
 `src/lh2_tno/hazop_event_mode_binding.py`의 `audit_hazop_event_mode_binding()`은 이 경계를 검사합니다.
 
@@ -20,16 +20,17 @@ python scripts/audit_hazop_event_mode_binding.py `
   --campaign-result results/20261110/native_full_scope_union_assessment_latest2_near_vertical_port_bound/campaign_result.json `
   --manifest examples/generic_lh2_full_scope_manifest.json `
   --frequency-plan examples/generic_lh2_full_scope_frequency_plan.json `
+  --diagnostic-hazop-result results/20261014/hazop_multiequipment_provider_isolation_diagnostic_v3.json `
   --output examples/hazop_event_mode_binding_audit_20261014.json
 ```
 
-현재 결과는 다음과 같다.
+기존 7개 설비 HAZOP facility ledger의 `component_coverage`를 exact event/mode/scenario 입력으로 사용한 결과는 다음과 같다.
 
 | 항목 | 값 |
 | --- | ---: |
 | campaign 사건 | 34 |
-| 명시적 모드 바인딩 | 0 |
-| 모드 입력 필요 | 34 |
+| 명시적 모드 바인딩 | 7 |
+| 모드 입력 필요 | 27 |
 | scenario ID 필요 | 0 |
 | mode 충돌 | 0 |
 | provider frequency event 대조 | 24 |

@@ -1,4 +1,9 @@
-from lh2_tno.hazop_event_mode_binding import audit_hazop_event_mode_binding
+import pytest
+
+from lh2_tno.hazop_event_mode_binding import (
+    audit_hazop_event_mode_binding,
+    mode_bindings_from_diagnostic,
+)
 
 
 def _campaign(*, event_mode=None, event_scenario=None, case_mode=None, case_scenario=None):
@@ -72,4 +77,47 @@ def test_provider_event_missing_from_campaign_remains_visible():
 
     assert report["provider_event_count"] == 2
     assert any("facility/valve/G1" in error for error in report["errors"])
+
+
+def test_diagnostic_ledger_is_an_explicit_source_for_single_event_bindings():
+    diagnostic = {
+        "facility_handoff": {
+            "facility_ledger": {
+                "component_coverage": {
+                    "pipe-01": {
+                        "event_ids": ["facility/pipe/G1"],
+                        "hazop_scenario_ids": ["pipe-01-supply-hole"],
+                        "operating_modes": ["supply"],
+                    }
+                }
+            }
+        }
+    }
+    bindings = mode_bindings_from_diagnostic(diagnostic)
+
+    assert bindings == [{
+        "event_id": "facility/pipe/G1",
+        "component_id": "pipe-01",
+        "operating_mode": "supply",
+        "hazop_scenario_id": "pipe-01-supply-hole",
+        "source_provenance": "explicit multi-equipment HAZOP facility ledger component_coverage",
+    }]
+
+
+def test_diagnostic_ledger_refuses_ambiguous_multiple_rows():
+    diagnostic = {
+        "facility_handoff": {
+            "facility_ledger": {
+                "component_coverage": {
+                    "pipe-01": {
+                        "event_ids": ["facility/pipe/G1", "facility/pipe/G2"],
+                        "hazop_scenario_ids": ["s1", "s2"],
+                        "operating_modes": ["supply"],
+                    }
+                }
+            }
+        }
+    }
+    with pytest.raises(ValueError, match="different lengths"):
+        mode_bindings_from_diagnostic(diagnostic)
 

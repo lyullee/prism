@@ -71,6 +71,55 @@ def _normalise_bindings(value: Mapping[str, Any] | Sequence[Mapping[str, Any]] |
     return result
 
 
+def mode_bindings_from_diagnostic(diagnostic_result: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Extract only explicitly echoed event/mode/scenario triples.
+
+    The multi-equipment HAZOP handoff stores these triples in
+    ``facility_ledger.component_coverage``.  The extractor refuses a row when
+    the three lists are not one-to-one; it never pairs a mode with an event by
+    equipment kind or list position unless the diagnostic ledger has already
+    declared a single exact row.
+    """
+    if not isinstance(diagnostic_result, Mapping):
+        raise TypeError("diagnostic_result must be a mapping")
+    handoff = diagnostic_result.get("facility_handoff")
+    handoff = handoff if isinstance(handoff, Mapping) else {}
+    ledger = handoff.get("facility_ledger")
+    ledger = ledger if isinstance(ledger, Mapping) else {}
+    coverage = ledger.get("component_coverage")
+    if not isinstance(coverage, Mapping):
+        raise ValueError("diagnostic result has no facility_ledger.component_coverage")
+    bindings: list[dict[str, Any]] = []
+    for component_id, raw in coverage.items():
+        if not isinstance(raw, Mapping):
+            raise ValueError(f"diagnostic component coverage {component_id} must be an object")
+        event_ids = raw.get("event_ids")
+        scenario_ids = raw.get("hazop_scenario_ids")
+        modes = raw.get("operating_modes")
+        if not all(isinstance(value, list) for value in (event_ids, scenario_ids, modes)):
+            raise ValueError(f"diagnostic component coverage {component_id} lacks explicit event/mode/scenario arrays")
+        if not (len(event_ids) == len(scenario_ids) == len(modes)):
+            raise ValueError(
+                f"diagnostic component coverage {component_id} cannot be paired: "
+                "event_ids, hazop_scenario_ids, and operating_modes have different lengths"
+            )
+        if len(event_ids) != 1:
+            raise ValueError(
+                f"diagnostic component coverage {component_id} contains multiple rows without exact event-level pairing"
+            )
+        event_id, scenario_id, mode = event_ids[0], scenario_ids[0], modes[0]
+        if not all(isinstance(value, str) and value.strip() for value in (event_id, scenario_id, mode)):
+            raise ValueError(f"diagnostic component coverage {component_id} has an empty event/mode/scenario value")
+        bindings.append({
+            "event_id": event_id.strip(),
+            "component_id": str(component_id),
+            "operating_mode": mode.strip(),
+            "hazop_scenario_id": scenario_id.strip(),
+            "source_provenance": "explicit multi-equipment HAZOP facility ledger component_coverage",
+        })
+    return bindings
+
+
 def _provider_event_ids(provider_worklist: Mapping[str, Any] | None) -> set[str]:
     if provider_worklist is None:
         return set()
@@ -258,5 +307,5 @@ def audit_hazop_event_mode_binding(
     }
 
 
-__all__ = ["SCHEMA", "audit_hazop_event_mode_binding"]
+__all__ = ["SCHEMA", "audit_hazop_event_mode_binding", "mode_bindings_from_diagnostic"]
 

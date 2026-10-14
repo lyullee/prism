@@ -10,7 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lh2_tno.frequency import FrequencyPlan  # noqa: E402
-from lh2_tno.hazop_event_mode_binding import audit_hazop_event_mode_binding  # noqa: E402
+from lh2_tno.hazop_event_mode_binding import (  # noqa: E402
+    audit_hazop_event_mode_binding,
+    mode_bindings_from_diagnostic,
+)
 from lh2_tno.equipment_manifest import EquipmentManifest  # noqa: E402
 from lh2_tno.provider_worklist import build_provider_release_worklist  # noqa: E402
 
@@ -29,6 +32,11 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--frequency-plan", type=Path)
     parser.add_argument("--mode-bindings", type=Path)
+    parser.add_argument(
+        "--diagnostic-hazop-result",
+        type=Path,
+        help="optional multi-equipment HAZOP result with explicit component_coverage bindings",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -39,6 +47,15 @@ def main() -> int:
             frequency_plan = FrequencyPlan.model_validate_json(args.frequency_plan.read_text(encoding="utf-8"))
             provider = build_provider_release_worklist(manifest, frequency_plan)
         mode_bindings = _object(args.mode_bindings) if args.mode_bindings else None
+        if args.diagnostic_hazop_result:
+            diagnostic = _object(args.diagnostic_hazop_result)
+            diagnostic_bindings = mode_bindings_from_diagnostic(diagnostic)
+            if mode_bindings is None:
+                mode_bindings = diagnostic_bindings
+            elif isinstance(mode_bindings.get("bindings"), list):
+                mode_bindings = {"bindings": list(mode_bindings["bindings"]) + diagnostic_bindings}
+            else:
+                raise ValueError("--mode-bindings object must use a bindings array when combined with --diagnostic-hazop-result")
         report = audit_hazop_event_mode_binding(
             campaign,
             provider_worklist=provider,
@@ -52,6 +69,7 @@ def main() -> int:
         "manifest": str(args.manifest) if args.manifest else None,
         "frequency_plan": str(args.frequency_plan) if args.frequency_plan else None,
         "mode_bindings": str(args.mode_bindings) if args.mode_bindings else None,
+        "diagnostic_hazop_result": str(args.diagnostic_hazop_result) if args.diagnostic_hazop_result else None,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
