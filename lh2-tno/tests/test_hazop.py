@@ -396,7 +396,9 @@ def test_runtime_gate_executes_existing_consequence_monitor_after_provider_match
     )
     assert result["status"] == "CONSEQUENCE_EVALUATED"
     assert result["consequence"]["telemetry_boundary"]["equipment_release_resolved"] is True
+    assert result["consequence"]["telemetry_boundary"]["operating_mode"] == "receiving"
     assert result["consequence"]["equipment_release_path"]["status"] == "AVAILABLE_PROVIDER_RELEASE_PATH"
+    assert result["consequence"]["equipment_release_path"]["operating_mode"] == "receiving"
 
 
 def test_runtime_gate_dispatches_multiple_active_rows_as_separate_branches():

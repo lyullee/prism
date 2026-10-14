@@ -43,6 +43,8 @@ SLABx-LH2/피해영향/점화/시설 IR·F-N 경로
 
 resolver가 반환한 `ConsequenceRequest` 또는 mapping에는 선택된 `operating_mode`가 자동으로 바인딩된다. 이미 다른 모드가 들어 있으면 gate가 `CONSEQUENCE_REJECTED`로 종료한다. 이 바인딩은 사고 빈도·누출량·차단 결과를 만들지 않고, HAZOP 선택 모드가 provider 방출 이후 피해 계산과 시설 원장까지 따라가는 식별자만 보존한다.
 
+실시간 결과에서도 이 식별자를 확인할 수 있다. `RealtimeConsequenceMonitor`의 `telemetry_boundary.operating_mode`와 `equipment_release_path.operating_mode`가 같은 선택 모드를 보존하며, `FacilityRealtimeConsequenceMonitor`의 `equipment_release_path_accounting.component_rows`와 `operating_mode_counts`에도 설비별로 남는다. 이 값은 화면·알람의 운전 맥락을 표시하기 위한 메타데이터이며, 누출 크기·방출 지속시간·빈도를 자동으로 만들지 않는다.
+
 여러 행을 실제로 병렬 분기할 때는 `run_hazop_runtime_consequence_branches(...)`에 `scenario_id`별 resolver를 넘긴다. 각 행은 한 행짜리 HAZOP 계약으로 다시 평가되고, 각각의 provider 종료 근거와 source operator를 독립적으로 확인한 뒤 기존 consequence monitor를 호출한다. resolver가 없는 branch는 `CONSEQUENCE_BRANCHES_PARTIAL` 아래에서 별도로 보류되며 다른 branch의 결과를 0 위험으로 채우지 않는다.
 
 여러 설비의 현재 상태를 함께 처리할 때는 `run_hazop_facility_runtime(...)`을 사용한다. 이 조정기는 설비별 HAZOP 선택, branch 결과, provider identity와 현재 기상 IR 기여를 하나의 원장으로 묶는다. 단일 branch와 검토된 빈도 바인딩이 있는 경우에만 현재 조건의 receptor별 IR 기여를 표시하며, HAZOP가 활성화한 branch를 시설 연간 IR/F-N으로 자동 승격하지 않는다. 시설 연간 결과는 전체 문헌 사건 목록·기상·인구·방호·미계산 사고 원장을 별도로 닫아야 한다.

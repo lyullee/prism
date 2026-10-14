@@ -345,6 +345,7 @@ def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, obje
         return {
             "status": "WITHHELD_PROVIDER_RELEASE_NOT_RESOLVED",
             "provider_release_resolved": False,
+            "operating_mode": request.operating_mode,
             "boundary_count": 0,
             "boundaries": [],
             "termination": None,
@@ -430,6 +431,10 @@ def _realtime_release_path_ledger(request: ConsequenceRequest) -> dict[str, obje
     return {
         "status": "AVAILABLE_PROVIDER_RELEASE_PATH",
         "provider_release_resolved": True,
+        # The mode is HAZOP-selected identity metadata.  It is exposed beside
+        # the release ledger so a realtime consumer can identify the operating
+        # context without treating it as a frequency or release input.
+        "operating_mode": request.operating_mode,
         "boundary_count": len(boundary_rows),
         "boundaries": boundary_rows,
         "duration_s": (
@@ -562,6 +567,7 @@ class ConsequenceService:
         )
         result['telemetry_boundary']['state_snapshot_digest'] = request.state_snapshot_digest
         result['telemetry_boundary']['provider_state_snapshot_digest'] = request.provider_state_snapshot_digest
+        result['telemetry_boundary']['operating_mode'] = request.operating_mode
         result['telemetry_boundary']['interpretation'] = (
             'equipment resolver supplied provider release; no inferred leak size or learned frequency'
             if equipment_release_resolved
@@ -2340,6 +2346,7 @@ class FacilityRealtimeConsequenceMonitor:
         isolation_status_counts: dict[str, int] = {}
         inventory_status_counts: dict[str, int] = {}
         termination_basis_counts: dict[str, int] = {}
+        operating_mode_counts: dict[str, int] = {}
         for component_id, entry in components.items():
             if entry.get("status") != "ACCEPTED":
                 continue
@@ -2366,6 +2373,7 @@ class FacilityRealtimeConsequenceMonitor:
             )
             row: dict[str, object] = {
                 "status": path.get("status"),
+                "operating_mode": path.get("operating_mode"),
                 "duration_s": path.get("duration_s"),
                 "termination_basis": termination_basis,
                 "isolation_status": isolation_status,
@@ -2396,6 +2404,11 @@ class FacilityRealtimeConsequenceMonitor:
             ):
                 if isinstance(value, str) and value:
                     counts[value] = counts.get(value, 0) + 1
+            operating_mode = path.get("operating_mode")
+            if isinstance(operating_mode, str) and operating_mode:
+                operating_mode_counts[operating_mode] = (
+                    operating_mode_counts.get(operating_mode, 0) + 1
+                )
         if not release_path_component_rows:
             release_path_accounting = {
                 "status": "WITHHELD_NO_ACCEPTED_RELEASE_PATH",
@@ -2403,6 +2416,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "isolation_status_counts": {},
                 "inventory_status_counts": {},
                 "termination_basis_counts": {},
+                "operating_mode_counts": {},
                 "mass_aggregation_performed": False,
                 "frequency_inference_performed": False,
                 "policy": (
@@ -2423,6 +2437,7 @@ class FacilityRealtimeConsequenceMonitor:
                 "isolation_status_counts": isolation_status_counts,
                 "inventory_status_counts": inventory_status_counts,
                 "termination_basis_counts": termination_basis_counts,
+                "operating_mode_counts": operating_mode_counts,
                 "mass_aggregation_performed": False,
                 "frequency_inference_performed": False,
                 "policy": (

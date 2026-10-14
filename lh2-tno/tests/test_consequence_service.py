@@ -530,7 +530,9 @@ def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
     base, frame = _facility_binding(tmp_path, 'storage-tank-01')
     provider_request = __import__(
         'lh2_tno.provider_release', fromlist=['build_consequence_request_from_provider_release']
-    ).build_consequence_request_from_provider_release(_release(), _defaults())
+    ).build_consequence_request_from_provider_release(
+        _release(), {**_defaults(), 'operating_mode': 'receiving'}
+    )
     binding = FacilityRealtimeBinding(
         component_id=base.component_id,
         template=base.template,
@@ -547,11 +549,15 @@ def test_facility_realtime_monitor_exposes_provider_release_path(tmp_path):
     assert result['status'] == 'ACCEPTED'
     path = result['components']['storage-tank-01']['equipment_release_path']
     assert path['status'] == 'AVAILABLE_PROVIDER_RELEASE_PATH'
+    assert path['operating_mode'] == 'receiving'
     assert path['boundary_count'] == 1
     assert path['boundaries'][0]['provider_port_state']['all_intervals_bound'] is False
     assert path['boundaries'][0]['provider_port_state']['bound_interval_count'] == 0
     assert path['inventory']['remaining_mass_kg'] == pytest.approx(0.8)
     assert result['aggregate']['equipment_release_path_component_count'] == 1
+    assert result['aggregate']['equipment_release_path_accounting']['operating_mode_counts'] == {
+        'receiving': 1
+    }
     assert result['aggregate']['equipment_release_path_withheld_component_count'] == 0
     assert result['aggregate']['provider_port_state_component_count'] == 1
     assert result['aggregate']['provider_port_state_all_interval_component_count'] == 0

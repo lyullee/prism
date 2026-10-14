@@ -3164,5 +3164,12 @@
   "full_portable_test_record_latest": "python -m pytest -q",
   "native_isolation_contract_verification_sha256": "77A077D1E312083E345E0E9C2F1874CB94F7B37AE69286256087D7F2589C13D0",
   "hazop_operating_mode_consequence_identity_status": "IMPLEMENTED; selected HAZOP operating_mode is bound to ConsequenceRequest identity and conflicting resolver mode is rejected",
-  "hazop_operating_mode_consequence_identity_module": "src/lh2_tno/hazop.py + src/lh2_tno/consequences.py"
+  "hazop_operating_mode_consequence_identity_module": "src/lh2_tno/hazop.py + src/lh2_tno/consequences.py",
+  "realtime_operating_mode_result_trace_status": "IMPLEMENTED; realtime telemetry boundary, release path, and facility batch accounting preserve the selected HAZOP operating_mode",
+  "realtime_operating_mode_result_trace_fields": [
+    "telemetry_boundary.operating_mode",
+    "equipment_release_path.operating_mode",
+    "equipment_release_path_accounting.component_rows[].operating_mode",
+    "equipment_release_path_accounting.operating_mode_counts"
+  ]
 }
