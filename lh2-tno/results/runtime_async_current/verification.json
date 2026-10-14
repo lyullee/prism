@@ -1,0 +1,56 @@
+{
+  "schema_version": "prism.runtime_async_development_verification.v1",
+  "status": "IMPLEMENTED_AND_DIAGNOSTICALLY_VERIFIED_GOAL_REMAINS_ACTIVE",
+  "scope": [
+    "complete single-monitor timing",
+    "bounded per-scenario asynchronous runtime evaluation"
+  ],
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "942",
+    "time": "8.169",
+    "timestamp": "2026-10-14T09:02:12.088290+09:00",
+    "hostname": "kgs"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "adapter_source_digest": "58c998dc5499c31ecb9acb4b4a311cd5c1e421c2f2d3ffec45c2bb62eb455a9c",
+  "benchmark_record": "results/runtime_async_current/benchmark.json",
+  "benchmark_sha256": "2801fc00106e4e14530511a6f274be8323477bc0b9cbfccd7a575829183042cf",
+  "benchmark_matches_current_adapter": true,
+  "source_sha256": {
+    "src/lh2_tno/service.py": "9758a537ec32b0f78336e8e21e6bcea5c26334e73286461262c85d6618477ce9",
+    "src/lh2_tno/async_monitor.py": "2bcc3ad4c7ef02e159d5718652e0f4aab13e3df578cee36c3fa67bb34cc94ce6",
+    "tests/test_async_monitor.py": "e6ab2d836233558ff4ad547eeedb13c1fcef6fa2b5badca8d0b7a17797f42211",
+    "scripts/benchmark_async_runtime.py": "c9d538f17db887275295e9ac73c7de97d1af8df2b9b5a21e4949270044b0cd71",
+    "docs/PRISM_비동기_상태평가.md": "6d14b9ea3793a4a1afa58b1ba7c251f6f239192da78fd36cf44bdc725a91a0f4"
+  },
+  "acceptance": {
+    "queue_bound_and_supersession": true,
+    "current_result_only": true,
+    "age_and_deadline_include_queue": true,
+    "single_monitor_deadline_includes_provider": true,
+    "failure_no_stale_fallback": true,
+    "fresh_consequence_backend_exercised": true
+  },
+  "limitations": {
+    "provider_solver_reexecuted_in_benchmark": false,
+    "fresh_physics_1hz_claim": false,
+    "physical_validation_claim": false,
+    "facility_qra_claim": false
+  },
+  "goal_turn_classification": "progress: runtime implementation, regression tests and fresh consequence evidence",
+  "wheel_verification": {
+    "path": "C:\\Users\\lyul\\Documents\\ChatGPT\\TNO 위험성 분석 프로젝트\\output\\prism-async-wheel-check\\prism_risk-0.6.2-py3-none-any.whl",
+    "sha256": "93d2a276a7bbe0da7dd5fcd1fafd472bf5143ae904041d717e8c544a6fc321f3",
+    "module_source_matches": true,
+    "isolated_import_passed": true,
+    "public_release_created": false,
+    "build_environment": "isolated PEP 517 build dependencies; external solver venv lacked setuptools for --no-build-isolation"
+  }
+}

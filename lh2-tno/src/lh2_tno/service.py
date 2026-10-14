@@ -581,6 +581,7 @@ class ConsequenceService:
         accident release geometry, duration, isolation, inventory depletion and
         termination; the service only evaluates the returned request.
         """
+        started = time.perf_counter()
         request = request_from_equipment_resolver(
             template,
             normalized,
@@ -589,11 +590,17 @@ class ConsequenceService:
             temperature_tag=temperature_tag,
             captured_at_s=captured_at_s,
         )
-        return self._update_from_request(
+        resolved = time.perf_counter()
+        result = self._update_from_request(
             request,
             normalized,
             equipment_release_resolved=True,
         )
+        elapsed_s = time.perf_counter() - started
+        result['service']['state_resolution_elapsed_ms'] = (resolved - started) * 1000
+        result['service']['state_update_elapsed_ms'] = elapsed_s * 1000
+        result['telemetry_boundary']['data_age_at_output_s'] = normalized['data_age_s'] + elapsed_s
+        return result
 
     def update_from_telemetry(self,template,normalized,*,pressure_tag,temperature_tag,release_resolver=None):
         if release_resolver is None:
@@ -644,6 +651,31 @@ class RealtimeConsequenceMonitor:
         self.deadline_s = float(deadline_s)
         self._last_source_time_by_stream: dict[str, float] = {}
 
+    def _record_update_timing(self, result, normalized, started, normalized_at):
+        """Include normalization and provider execution in the public deadline.
+
+        ``service.service_elapsed_ms`` remains the consequence/cache timer.
+        The monitor timer covers the entire state-to-result update instead.
+        """
+        elapsed_s = time.perf_counter() - started
+        timing = result['realtime']
+        timing.update(
+            service_elapsed_s=elapsed_s,
+            update_elapsed_s=elapsed_s,
+            normalization_elapsed_s=normalized_at - started,
+            state_resolution_elapsed_s=result['service'].get('state_resolution_elapsed_ms', 0.0) / 1000,
+            consequence_service_elapsed_s=result['service']['service_elapsed_ms'] / 1000,
+            timing_scope='normalization + equipment release resolution + consequence service + result assembly',
+            deadline_met=elapsed_s <= self.deadline_s,
+            deadline_status='MET' if elapsed_s <= self.deadline_s else 'MISSED',
+        )
+        result['telemetry_boundary']['data_age_at_output_s'] = normalized['data_age_s'] + elapsed_s
+        timing['mode_contract'] = _realtime_mode_contract(
+            result['service'], deadline_met=timing['deadline_met'],
+            runtime_frame=timing.get('runtime_frame', False),
+        )
+        return result
+
     def update_from_frame(self, template, normalizer, frame, *, now_s: float,
                           pressure_tag: str, temperature_tag: str,
                           release_resolver=None, ambient_pressure_pa: float | None = None):
@@ -654,9 +686,11 @@ class RealtimeConsequenceMonitor:
         identifies whether this update used fresh physics or an exact cache
         hit.  No frequency or release geometry is inferred in this method.
         """
+        started = time.perf_counter()
         normalized = normalizer.normalize(
             frame, now_s=now_s, ambient_pressure_pa=ambient_pressure_pa
         )
+        normalized_at = time.perf_counter()
         source_time = float(frame.source_time_s)
         normalized["captured_at_s"] = source_time
         result = self.service.update_from_telemetry(
@@ -689,7 +723,7 @@ class RealtimeConsequenceMonitor:
             result["service"],
             deadline_met=result["realtime"]["deadline_met"],
         )
-        return result
+        return self._record_update_timing(result, normalized, started, normalized_at)
 
     def update_from_runtime_frame(
         self,
@@ -709,11 +743,13 @@ class RealtimeConsequenceMonitor:
         """
         from .observed_state_runtime import service_state_from_runtime_frame
 
+        started = time.perf_counter()
         normalized = service_state_from_runtime_frame(
             runtime_frame,
             now_s=now_s,
             mapping_digest=mapping_digest,
         )
+        normalized_at = time.perf_counter()
         result = self.service.update_from_equipment_state(
             template,
             normalized,
@@ -752,7 +788,7 @@ class RealtimeConsequenceMonitor:
             deadline_met=result["realtime"]["deadline_met"],
             runtime_frame=True,
         )
-        return result
+        return self._record_update_timing(result, normalized, started, normalized_at)
 
     def update_from_row(
         self,

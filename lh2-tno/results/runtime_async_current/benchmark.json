@@ -1,0 +1,373 @@
+{
+  "schema_version": "prism.async_runtime_benchmark.v1",
+  "status": "FRESH_CONSEQUENCE_ASYNC_DIAGNOSTIC",
+  "provider_mode": "recorded_packet_replay_with_original_state_snapshot",
+  "provider_solver_reexecuted": false,
+  "state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+  "request_digest": "afe6d8f37fd1925931def54c7ce171f6b853e363a6c59bccc2e8d5dfafc3479e",
+  "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+  "rows": [
+    {
+      "index": 0,
+      "receipt": {
+        "job_id": 1,
+        "status": "QUEUED",
+        "scenario_id": "recorded-state-physics-benchmark",
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "superseded_job_id": null,
+        "submission_elapsed_ms": 0.34749999758787453,
+        "fresh_physics_executed": false
+      },
+      "status": "READY_LATE",
+      "completion": {
+        "job_id": 1,
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "status": "READY_LATE",
+        "execution_status": "READY_LATE",
+        "error": null,
+        "queue_elapsed_s": 0.0004031999997096136,
+        "end_to_end_elapsed_s": 2.7114428999993834,
+        "data_age_at_completion_s": 2.7114428999993834,
+        "deadline_met": false,
+        "deadline_s": 1.0
+      },
+      "poll_count_while_computing": 133,
+      "max_pending_poll_ms": 0.06120000034570694,
+      "service": {
+        "exact_cache_hit": false,
+        "fresh_physics_this_update": true,
+        "service_elapsed_ms": 2710.0964000055683,
+        "physics_run_elapsed_ms": 2669.187699997565,
+        "cache_key": "20f172e8dfbf4dc389ffd3f971db8c04e6357e1c62c9e68ff215bd4d2500639e",
+        "backend_mode": "persistent_worker",
+        "realtime_fresh_physics_claim": false,
+        "mode_contract": {
+          "schema": "prism.realtime_mode_contract.v1",
+          "evaluation_mode": "fresh_physics_background",
+          "reported_mode": "fresh_physics_background",
+          "runtime_frame": false,
+          "deadline_met": null,
+          "exact_cache_hit": false,
+          "fresh_physics_this_update": true,
+          "fresh_physics_1hz_claim": false,
+          "stale_fallback_used": false,
+          "frequency_learning": false,
+          "release_inference": false,
+          "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
+        },
+        "state_resolution_elapsed_ms": 0.7293999951798469,
+        "state_update_elapsed_ms": 2710.858599995845
+      },
+      "realtime": {
+        "period_s": 1.0,
+        "deadline_s": 1.0,
+        "deadline_status": "MISSED",
+        "deadline_met": false,
+        "service_elapsed_s": 2.7114428999993834,
+        "source_interval_s": null,
+        "fresh_physics_this_update": true,
+        "exact_cache_hit": false,
+        "frequency_learning": false,
+        "release_inference": false,
+        "runtime_frame": true,
+        "interpretation": "provider release resolved from a state-only runtime frame; a missed deadline is not replaced with a stale result",
+        "mode_contract": {
+          "schema": "prism.realtime_mode_contract.v1",
+          "evaluation_mode": "fresh_physics_background",
+          "reported_mode": "deadline_missed",
+          "runtime_frame": true,
+          "deadline_met": false,
+          "exact_cache_hit": false,
+          "fresh_physics_this_update": true,
+          "fresh_physics_1hz_claim": false,
+          "stale_fallback_used": false,
+          "frequency_learning": false,
+          "release_inference": false,
+          "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
+        },
+        "update_elapsed_s": 2.7114428999993834,
+        "normalization_elapsed_s": 0.00015240000357152894,
+        "state_resolution_elapsed_s": 0.0007293999951798469,
+        "consequence_service_elapsed_s": 2.7100964000055683,
+        "timing_scope": "submission + queue + normalization + provider + consequence + result assembly",
+        "worker_update_elapsed_s": 2.711025900003733,
+        "queue_elapsed_s": 0.0004031999997096136
+      },
+      "telemetry_boundary": {
+        "origin": "model_prediction",
+        "independent_measurement_claim": false,
+        "data_age_s": 0.0004031999997096136,
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "mapping_digest": "17d51b53662939e7f36b425136a0e018c0b0167956ceab1796e46b941eff54d2",
+        "data_age_at_output_s": 2.7114428999993834,
+        "equipment_release_resolved": true,
+        "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
+        "state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+        "provider_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+        "interpretation": "equipment resolver supplied provider release; no inferred leak size or learned frequency"
+      },
+      "consequence_result_digest": "ba85106a9fb00a65ec4a4f91e4924b0fb9dcd991b22d69dd9b84c9d865578fa4",
+      "adapter_source_digest": "58c998dc5499c31ecb9acb4b4a311cd5c1e421c2f2d3ffec45c2bb62eb455a9c",
+      "receptor_count": 1
+    },
+    {
+      "index": 1,
+      "receipt": {
+        "job_id": 1,
+        "status": "QUEUED",
+        "scenario_id": "recorded-state-physics-benchmark",
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "superseded_job_id": null,
+        "submission_elapsed_ms": 0.1788000008673407,
+        "fresh_physics_executed": false
+      },
+      "status": "READY",
+      "completion": {
+        "job_id": 1,
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "status": "READY",
+        "execution_status": "READY",
+        "error": null,
+        "queue_elapsed_s": 0.00023640000290470198,
+        "end_to_end_elapsed_s": 0.7396891000025789,
+        "data_age_at_completion_s": 0.7396891000025789,
+        "deadline_met": true,
+        "deadline_s": 1.0
+      },
+      "poll_count_while_computing": 37,
+      "max_pending_poll_ms": 0.13160000526113436,
+      "service": {
+        "exact_cache_hit": false,
+        "fresh_physics_this_update": true,
+        "service_elapsed_ms": 738.6812999975518,
+        "physics_run_elapsed_ms": 692.5881999995909,
+        "cache_key": "20f172e8dfbf4dc389ffd3f971db8c04e6357e1c62c9e68ff215bd4d2500639e",
+        "backend_mode": "persistent_worker",
+        "realtime_fresh_physics_claim": false,
+        "mode_contract": {
+          "schema": "prism.realtime_mode_contract.v1",
+          "evaluation_mode": "fresh_physics_background",
+          "reported_mode": "fresh_physics_background",
+          "runtime_frame": false,
+          "deadline_met": null,
+          "exact_cache_hit": false,
+          "fresh_physics_this_update": true,
+          "fresh_physics_1hz_claim": false,
+          "stale_fallback_used": false,
+          "frequency_learning": false,
+          "release_inference": false,
+          "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
+        },
+        "state_resolution_elapsed_ms": 0.5827999993925914,
+        "state_update_elapsed_ms": 739.2946999971173
+      },
+      "realtime": {
+        "period_s": 1.0,
+        "deadline_s": 1.0,
+        "deadline_status": "MET",
+        "deadline_met": true,
+        "service_elapsed_s": 0.7396891000025789,
+        "source_interval_s": null,
+        "fresh_physics_this_update": true,
+        "exact_cache_hit": false,
+        "frequency_learning": false,
+        "release_inference": false,
+        "runtime_frame": true,
+        "interpretation": "provider release resolved from a state-only runtime frame; a missed deadline is not replaced with a stale result",
+        "mode_contract": {
+          "schema": "prism.realtime_mode_contract.v1",
+          "evaluation_mode": "fresh_physics_background",
+          "reported_mode": "fresh_physics_background",
+          "runtime_frame": true,
+          "deadline_met": true,
+          "exact_cache_hit": false,
+          "fresh_physics_this_update": true,
+          "fresh_physics_1hz_claim": false,
+          "stale_fallback_used": false,
+          "frequency_learning": false,
+          "release_inference": false,
+          "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
+        },
+        "update_elapsed_s": 0.7396891000025789,
+        "normalization_elapsed_s": 0.00012749999586958438,
+        "state_resolution_elapsed_s": 0.0005827999993925914,
+        "consequence_service_elapsed_s": 0.7386812999975518,
+        "timing_scope": "submission + queue + normalization + provider + consequence + result assembly",
+        "worker_update_elapsed_s": 0.7394357000011951,
+        "queue_elapsed_s": 0.00023640000290470198
+      },
+      "telemetry_boundary": {
+        "origin": "model_prediction",
+        "independent_measurement_claim": false,
+        "data_age_s": 0.00023640000290470198,
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "mapping_digest": "17d51b53662939e7f36b425136a0e018c0b0167956ceab1796e46b941eff54d2",
+        "data_age_at_output_s": 0.7396891000025789,
+        "equipment_release_resolved": true,
+        "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
+        "state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+        "provider_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+        "interpretation": "equipment resolver supplied provider release; no inferred leak size or learned frequency"
+      },
+      "consequence_result_digest": "3ec48a7c062f9da6b2e14d173817dc53c1fe6218f89113ef2526b85b160815dd",
+      "adapter_source_digest": "58c998dc5499c31ecb9acb4b4a311cd5c1e421c2f2d3ffec45c2bb62eb455a9c",
+      "receptor_count": 1
+    },
+    {
+      "index": 2,
+      "receipt": {
+        "job_id": 1,
+        "status": "QUEUED",
+        "scenario_id": "recorded-state-physics-benchmark",
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "superseded_job_id": null,
+        "submission_elapsed_ms": 0.17929999739862978,
+        "fresh_physics_executed": false
+      },
+      "status": "READY",
+      "completion": {
+        "job_id": 1,
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "status": "READY",
+        "execution_status": "READY",
+        "error": null,
+        "queue_elapsed_s": 0.00021330000163288787,
+        "end_to_end_elapsed_s": 0.8023517999972682,
+        "data_age_at_completion_s": 0.8023517999972682,
+        "deadline_met": true,
+        "deadline_s": 1.0
+      },
+      "poll_count_while_computing": 40,
+      "max_pending_poll_ms": 0.07690000347793102,
+      "service": {
+        "exact_cache_hit": false,
+        "fresh_physics_this_update": true,
+        "service_elapsed_ms": 801.3617999968119,
+        "physics_run_elapsed_ms": 757.6891999997315,
+        "cache_key": "20f172e8dfbf4dc389ffd3f971db8c04e6357e1c62c9e68ff215bd4d2500639e",
+        "backend_mode": "persistent_worker",
+        "realtime_fresh_physics_claim": false,
+        "mode_contract": {
+          "schema": "prism.realtime_mode_contract.v1",
+          "evaluation_mode": "fresh_physics_background",
+          "reported_mode": "fresh_physics_background",
+          "runtime_frame": false,
+          "deadline_met": null,
+          "exact_cache_hit": false,
+          "fresh_physics_this_update": true,
+          "fresh_physics_1hz_claim": false,
+          "stale_fallback_used": false,
+          "frequency_learning": false,
+          "release_inference": false,
+          "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
+        },
+        "state_resolution_elapsed_ms": 0.5944000004092231,
+        "state_update_elapsed_ms": 801.996300004248
+      },
+      "realtime": {
+        "period_s": 1.0,
+        "deadline_s": 1.0,
+        "deadline_status": "MET",
+        "deadline_met": true,
+        "service_elapsed_s": 0.8023517999972682,
+        "source_interval_s": null,
+        "fresh_physics_this_update": true,
+        "exact_cache_hit": false,
+        "frequency_learning": false,
+        "release_inference": false,
+        "runtime_frame": true,
+        "interpretation": "provider release resolved from a state-only runtime frame; a missed deadline is not replaced with a stale result",
+        "mode_contract": {
+          "schema": "prism.realtime_mode_contract.v1",
+          "evaluation_mode": "fresh_physics_background",
+          "reported_mode": "fresh_physics_background",
+          "runtime_frame": true,
+          "deadline_met": true,
+          "exact_cache_hit": false,
+          "fresh_physics_this_update": true,
+          "fresh_physics_1hz_claim": false,
+          "stale_fallback_used": false,
+          "frequency_learning": false,
+          "release_inference": false,
+          "interpretation": "fresh SLABx-LH2 physics was executed for this changed input; do not interpret this result as a fresh-physics 1 Hz guarantee"
+        },
+        "update_elapsed_s": 0.8023517999972682,
+        "normalization_elapsed_s": 0.000112900001113303,
+        "state_resolution_elapsed_s": 0.0005944000004092231,
+        "consequence_service_elapsed_s": 0.8013617999968119,
+        "timing_scope": "submission + queue + normalization + provider + consequence + result assembly",
+        "worker_update_elapsed_s": 0.8021278000014718,
+        "queue_elapsed_s": 0.00021330000163288787
+      },
+      "telemetry_boundary": {
+        "origin": "model_prediction",
+        "independent_measurement_claim": false,
+        "data_age_s": 0.00021330000163288787,
+        "frame_digest": "dd775aa252e83207f469f6ace4bd42cc1d13275082e4ce6075accd201c769a5f",
+        "mapping_digest": "17d51b53662939e7f36b425136a0e018c0b0167956ceab1796e46b941eff54d2",
+        "data_age_at_output_s": 0.8023517999972682,
+        "equipment_release_resolved": true,
+        "state_snapshot_binding_status": "BOUND_CANONICAL_RUNTIME_STATE",
+        "state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+        "provider_state_snapshot_digest": "6ac6cc0f464a54299ee295a8c25a13238701ca48ff2330f26570aae27e0b4e43",
+        "interpretation": "equipment resolver supplied provider release; no inferred leak size or learned frequency"
+      },
+      "consequence_result_digest": "78316ea053c9d0f39bdb15a51a6fadb16de789c12bdc7609fd125da8c799bdf3",
+      "adapter_source_digest": "58c998dc5499c31ecb9acb4b4a311cd5c1e421c2f2d3ffec45c2bb62eb455a9c",
+      "receptor_count": 1
+    }
+  ],
+  "startup_included_in_first_physics_sample": true,
+  "backend_config_used": {
+    "interpreter": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.venv-transfer\\Scripts\\python.exe",
+    "packages": [
+      {
+        "name": "slabx_lh2",
+        "root": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\slabx-lh2\\source\\slabx-lh2\\slabx_lh2",
+        "sha256": "cd1b4af6f0bf7add7aa4058ea19ffea1e2d187139a89215bb46834137bff7a3c"
+      },
+      {
+        "name": "dynamiclh2poolx",
+        "root": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\논문화\\PSEP_rebuild_2026-10-01\\unified_runtime_2026-10-07\\dependencies\\DynamicLH2PoolX\\src\\dynamiclh2poolx",
+        "sha256": "945bf1c84f6f302663efb5e1212aed24b466c22dcea99a90b395adb3e233f064"
+      },
+      {
+        "name": "tno",
+        "root": "C:\\Users\\lyul\\Desktop\\DocuData\\TNO_위험분석모듈\\TNO_SYSTEM\\코드",
+        "sha256": "b0f95878e9eb5f410917ebbb24538f982a664d9806e1f24f96ed61d4ffe932cd"
+      },
+      {
+        "name": "slabx",
+        "root": "C:\\Users\\lyul\\Desktop\\DocuData\\SLABx_LH2\\.venv-transfer\\Lib\\site-packages\\slabx",
+        "sha256": "b7f5869d32b9dc742ad8e95d99b07a64692b0728af517d8fdd889db9b947dd58"
+      }
+    ],
+    "timeout_s": 180.0,
+    "required_versions": {
+      "CoolProp": "8.0.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1"
+    }
+  },
+  "inputs": [
+    {
+      "path": "examples\\generic_lh2_near_receptor_manifest.json",
+      "sha256": "2223f26eee5a2b4b9b44fb16d416a106bf539f624ac142dcb54a77ecac90ba60"
+    },
+    {
+      "path": "results\\20261031\\native_full_scope_frequency_pipefix_state_bound\\campaign.json",
+      "sha256": "3723a5aa2bf60be7dcd8295fd5ba95211d88999cf247ba78b66a4e3201ce20c8"
+    },
+    {
+      "path": "results\\20261009\\backend_config_current.json",
+      "sha256": "ccd06ef0ccb35e9b7ed9e976a23584eacc65bdebf3e7931227ef4f6b98fd9e6b"
+    }
+  ],
+  "claims": {
+    "fresh_equipment_to_damage_latency_measured": false,
+    "fresh_consequence_latency_measured": true,
+    "fresh_physics_1hz_claim": false,
+    "facility_qra_claim": false,
+    "independent_physical_validation_claim": false
+  }
+}
