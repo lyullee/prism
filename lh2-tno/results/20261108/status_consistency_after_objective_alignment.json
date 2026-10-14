@@ -1,0 +1,264 @@
+{
+  "schema_version": "prism.readiness_status_consistency.v1",
+  "status": "CONSISTENT",
+  "diagnostic_only": true,
+  "frequency_inference_performed": false,
+  "physical_validation_claim": false,
+  "facility_ir_fn_promotion": false,
+  "artifact_filenames": {
+    "audit": "ijhe_completion_audit.json",
+    "assessment": "facility_assessment.json",
+    "evidence_request": "facility_evidence_request.json",
+    "ledger": "campaign_result.json",
+    "coverage": "facility_case_packet_coverage.json"
+  },
+  "checks": [
+    {
+      "name": "audit_identity",
+      "status": "PASS",
+      "evidence": {
+        "status": "INCOMPLETE_EVIDENCE",
+        "check_count": 39,
+        "blocking_reason_count": 5
+      }
+    },
+    {
+      "name": "provider_packet_input_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.provider_packet_input_audit.v1",
+        "status": "NO_PROVIDER_PACKET_INPUT",
+        "accepted_provider_packet_count": 0,
+        "record": "results/20261026/native_full_scope_union_assessment/provider_packet_input_audit.json"
+      }
+    },
+    {
+      "name": "observed_state_release_binding_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.observed_state_release_binding_audit.v1",
+        "status": "NO_STATE_TO_RELEASE_BINDING",
+        "observed_component_count": 3,
+        "mapped_component_count": 0,
+        "unmapped_component_count": 3,
+        "record": "results/20261026/native_full_scope_union_assessment/observed_state_release_binding_audit.json"
+      }
+    },
+    {
+      "name": "observed_component_mapping_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.observed_component_mapping_audit.v1",
+        "status": "CANDIDATE_COMPONENT_CLASS_MAPPINGS_ONLY",
+        "observed_component_count": 3,
+        "candidate_mapping_count": 3,
+        "exact_facility_component_count": 0,
+        "rows_valid": true,
+        "record": "results/20261026/native_full_scope_union_assessment/observed_component_mapping_audit.json"
+      }
+    },
+    {
+      "name": "consequence_backend_chain_audit",
+      "status": "PASS",
+      "evidence": {
+        "schema": "prism.consequence_backend_chain_audit.v1",
+        "status": "FULL_CONSEQUENCE_BACKEND_CHAIN_DIAGNOSTIC",
+        "case_count": 44,
+        "closed_case_count": 44,
+        "stage_count": 8,
+        "record": "results/20261026/native_full_scope_union_assessment/consequence_backend_chain_audit.json"
+      }
+    },
+    {
+      "name": "audit_case_gate",
+      "status": "PASS",
+      "evidence": {
+        "case_request_count": 44,
+        "expected_case_count": 44,
+        "qualified_provider_case_count": 0
+      }
+    },
+    {
+      "name": "audit_combined_chain_gate",
+      "status": "PASS",
+      "evidence": {
+        "status": null,
+        "diagnostic_only": null,
+        "declared_event_count": null,
+        "packet_subset_closed_event_count": null,
+        "vertical_handoff_closed_event_count": null,
+        "combined_diagnostic_closed_event_count": null,
+        "mismatch_event_ids": null,
+        "qualified_provider_packet_count": null,
+        "facility_qra_claim": null
+      }
+    },
+    {
+      "name": "audit_slabx_validation_gate",
+      "status": "PASS",
+      "evidence": {
+        "status": "PASS",
+        "diagnostic_only": true,
+        "schema_version": "prism.slabx_lh2_validation_audit.v1",
+        "evidence_status": "RESTRICTED_SLABX_LH2_CONSEQUENCE_EVIDENCE",
+        "check_count": 5,
+        "ffi_case_count": 6,
+        "flacs_comparison_row_count": 6,
+        "facility_qra_claim": false
+      }
+    },
+    {
+      "name": "audit_realtime_cache_benchmark_gate",
+      "status": "PASS",
+      "evidence": {
+        "status": "PASS",
+        "diagnostic_only": true,
+        "schema_version": "prism.realtime_cache_benchmark.v1",
+        "cache_hits": 10,
+        "cache_sample_count": 10,
+        "cache_median_ms": 49.3142000050284,
+        "cache_p95_ms": 61.27649999689311,
+        "fresh_physics_meets_one_hz": false,
+        "cache_meets_one_hz_all_samples": true
+      }
+    },
+    {
+      "name": "audit_domain_recovery_gate",
+      "status": "PASS",
+      "evidence": {
+        "status": "PASS",
+        "diagnostic_only": true,
+        "schema": "prism.domain_recovery_audit.v1",
+        "event_count": 24,
+        "baseline_domain_incomplete_event_count": 6,
+        "recovery_domain_incomplete_event_count": 0,
+        "persistent_domain_incomplete_event_count": 0,
+        "recovered_event_count": 6,
+        "recovery_flammability_proven_event_count": 22,
+        "domain_recovery_gate_mode": "flammability_gate",
+        "facility_ir_fn_promotion": false
+      }
+    },
+    {
+      "name": "assessment_gate",
+      "status": "PASS",
+      "evidence": {
+        "status": "PARTIAL_FACILITY_SCOPE",
+        "provider_packet_case_count": 44,
+        "qualified_provider_packet_case_count": 0,
+        "facility_case_packet_coverage_complete": false,
+        "qualified_facility_qra_available": false,
+        "facility_total_risk_available": false
+      }
+    },
+    {
+      "name": "coverage_gate",
+      "status": "PASS",
+      "evidence": {
+        "coverage_status": "NO_CASE_MATCH",
+        "case_request_count": 44,
+        "qualified_provider_case_count": 0
+      }
+    },
+    {
+      "name": "ledger_accounting",
+      "status": "PASS",
+      "evidence": {
+        "status": "PARTIAL_FACILITY_SCOPE",
+        "event_count": 34,
+        "case_count": 44,
+        "strict_uncomputed_case_count": 29,
+        "conditional_case_count": 44,
+        "conditional_executed_case_count": 44,
+        "conditional_uncomputed_case_count": 0,
+        "risk_atom_count": 176,
+        "qualified_provider_packet_case_count": 0
+      }
+    },
+    {
+      "name": "component_risk_ranking",
+      "status": "PASS",
+      "evidence": {
+        "status": "AVAILABLE",
+        "ledger_component_count": 9,
+        "ranking_component_count": 9,
+        "assessment_component_count": 9,
+        "frequency_reallocation_performed": false,
+        "facility_ir_fn_promotion": false
+      }
+    },
+    {
+      "name": "evidence_request_identity",
+      "status": "PASS",
+      "evidence": {
+        "status": "OPEN_EVIDENCE_REQUEST",
+        "case_request_count": 44,
+        "family_request_count": 12,
+        "component_request_count": 9
+      }
+    },
+    {
+      "name": "current_status_audit_pointer",
+      "status": "PASS",
+      "evidence": {
+        "record": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json",
+        "check_count": 39,
+        "blocking_reason_count": 5
+      }
+    },
+    {
+      "name": "current_status_assessment_pointer",
+      "status": "PASS",
+      "evidence": {
+        "assessment_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
+        "full_portable_test_count": 851
+      }
+    },
+    {
+      "name": "current_status_evidence_request_pointer",
+      "status": "PASS",
+      "evidence": {
+        "record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json"
+      }
+    },
+    {
+      "name": "current_status_ledger_pointer",
+      "status": "PASS",
+      "evidence": {
+        "record": "results/20261031/native_full_scope_union_pipefix_state_bound/campaign_result.json"
+      }
+    },
+    {
+      "name": "development_goal_audit_pointer",
+      "status": "PASS",
+      "evidence": {
+        "record": "results/20261031/native_full_scope_union_pipefix_state_bound/ijhe_completion_audit.json",
+        "check_count": 39,
+        "blocking_reason_count": 5
+      }
+    },
+    {
+      "name": "development_goal_assessment_pointer",
+      "status": "PASS",
+      "evidence": {
+        "assessment_record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_assessment.json",
+        "full_portable_test_count": 851
+      }
+    },
+    {
+      "name": "development_goal_evidence_request_pointer",
+      "status": "PASS",
+      "evidence": {
+        "record": "results/20261031/native_full_scope_union_pipefix_state_bound/facility_evidence_request.json"
+      }
+    },
+    {
+      "name": "development_goal_ledger_pointer",
+      "status": "PASS",
+      "evidence": {
+        "record": "results/20261031/native_full_scope_union_pipefix_state_bound/campaign_result.json"
+      }
+    }
+  ],
+  "blocking_reasons": []
+}

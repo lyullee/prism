@@ -69,6 +69,8 @@ campaign으로 흐릅니다. 외부 generator가 빈도 산술을 담당하고 P
 packet에 명시적으로 echo하지만, synthetic/operator-limited라는 제한은 그대로
 별도 기록합니다.
 
+최신 상태 장부 재검사 [`status_consistency_after_objective_alignment.json`](results/20261108/status_consistency_after_objective_alignment.json)는 23개 교차검사를 모두 통과했고 `facility_ir_fn_promotion=false`를 확인했습니다. 이는 상태 파일·완료감사·시설평가·증거요청·case coverage가 같은 실행을 가리킨다는 뜻이며, 시설 QRA 승격을 의미하지 않습니다.
+
 **2026-10-27 IJHE 목표 범위 감사:** 방출→최종피해 chain과 시설 QRA 승격 게이트를
 분리한 [`ijhe_objective_coverage_audit.json`](results/20261026/native_full_scope_union_assessment/ijhe_objective_coverage_audit.json)을
 추가했습니다. 현재 상태는 `CONDITIONAL_DIAGNOSTIC_COMPLETE_STRICT_GATES_OPEN`으로,
